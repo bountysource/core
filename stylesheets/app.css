@@ -1,0 +1,34 @@
+html, body { width: 100%; padding: 0; margin: 0; }
+body { font-size: 100%; }
+body, input, textarea, select, td, th { font: 14px "Helvetica Neue", Arial, sans-serif; color: #333; line-height: 18px; }
+img { border-style: none; }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+input, textarea, select { vertical-align: middle; }
+form, fieldset { margin:0; padding:0; border-style:none; }
+
+/* html { background: url(../images/rocketspace2.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; } */
+html { background: #444 url(../images/linen.jpg) repeat top center; }
+
+section#wrapper { width: 901px; margin: 0 auto; padding: 0; }
+
+header { color: #eee; padding: 10px; margin-top: 20px }
+header h1 { 
+  margin: 0 0 10px 0; 
+  font-size: 40px; 
+  
+	color: #7F7F7F;
+	color: rgba(255, 255, 255, 0.25);
+	text-shadow: -1px -1px rgba(0, 0, 0, 0.9);
+	-webkit-text-rendering: optimizeLegibility;
+	-moz-text-rendering: optimizeLegibility;
+	-ms-text-rendering: optimizeLegibility;
+	-o-text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;
+} 
+
+section#content { background: #fafafa; padding: 10px; border-radius: 7px 7px; box-shadow: 0 0 7px rgba(0,0,0,0.5);  }
+
+footer { padding: 5px 10px; background: rgba(0,0,0,0.3); margin: 0 20px; border-bottom-left-radius: 7px 7px; border-bottom-right-radius: 7px 7px; }
+footer ul { margin: 0; padding: 0; list-style: none; height: 18px }
+footer ul li a { padding: 0 8px; color: #aaa; float: left; text-shadow: 1px 1px #333 }
