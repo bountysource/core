@@ -22,4 +22,9 @@ with (scope('BountySource')) {
   define('search', function(term, callback) {
     api('/search', 'GET', { term: term }, callback);
   });
+
+  define('logout', function() {
+    Storage.remove('access_token');
+    set_route('#', { reload_page: true });
+  });
 }
