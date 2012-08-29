@@ -34,6 +34,12 @@ with (scope('App')) {
     );
   });
 
+  // End point for Github login.
+  route ('#login/:access_token', function(access_token) {
+    Storage.set('access_token',access_token);
+    set_route('#');
+  });
+
   route('#about', function() {
     render(
       h2('About'),
