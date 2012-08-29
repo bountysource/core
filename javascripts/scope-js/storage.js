@@ -23,7 +23,7 @@ with (scope('Local')) {
     return window.localStorage.getItem(name);
   });
 
-  define('set', function(name, value, options) {
+  define('set', function(name, value) {
     window.localStorage.setItem(name, value);
   });
 }
