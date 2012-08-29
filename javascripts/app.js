@@ -2,7 +2,7 @@ with (scope('App')) {
   define('default_layout', function(yield) {
     return section({ id: 'wrapper' },
       header(
-        h1('BountySource')
+        h1(a({ href: '#' }, 'BountySource'))
       ),
       section({ id: 'content' },
         yield
@@ -33,4 +33,12 @@ with (scope('App')) {
       )
     );
   });
+
+  route('#about', function() {
+    render(
+      h2('About'),
+      p('this is awesome!')
+    );
+  });
+
 }

@@ -13,8 +13,10 @@ html { background: #444 url(../images/linen.jpg) repeat top center; }
 section#wrapper { width: 901px; margin: 0 auto; padding: 0; }
 
 header { color: #eee; padding: 10px; margin-top: 20px }
-header h1 { 
-  margin: 0 0 10px 0; 
+header h1 { margin: 0 0 10px 0; }
+header h1 a:hover { text-decoration: none; }
+header h1 a {
+
   font-size: 40px; 
   
 	color: #7F7F7F;
