@@ -21,7 +21,7 @@ with (scope('App')) {
     render(
       h2('Developers'),
       ul(
-        li(a({ href: BountySource.api_host + 'auth/github' }, 'Login via GitHub')),
+        li(Github.auth_button),
         li(a({ href: '#bounties' }, 'Find Bounties'))
       ),
       h2('Patrons'),
