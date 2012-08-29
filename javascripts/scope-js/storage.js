@@ -29,8 +29,8 @@ with (scope('Local')) {
 }
 
 
-scope('Storage', (document.location.protocol == 'file:' || /\.dev$/.test(document.domain)) ? 'Local' : 'Cookie');
 
+scope('Storage', (document.location.protocol == 'file:' || /\.dev$/.test(document.domain)) ? 'Local' : 'Cookies');
 
 // // Temporarily store data in session.
 // // Uses the Session object defined in session.js.
