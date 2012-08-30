@@ -9,7 +9,7 @@ form, fieldset { margin:0; padding:0; border-style:none; }
 
 html { background: #444 url(../images/linen.jpg) repeat top center; }
 
-section#wrapper { width: 901px; margin: 0 auto; padding: 0; }
+section#wrapper { width: 975px; margin: 0 auto; padding: 0; }
 
 header { color: #eee; padding: 10px; margin-top: 20px }
 header h1 { margin: 0 0 10px 0; }
@@ -33,3 +33,9 @@ section#content { background: #fafafa; padding: 10px; border-radius: 7px 7px; bo
 footer { padding: 5px 10px; background: rgba(0,0,0,0.3); margin: 0 20px; border-bottom-left-radius: 7px 7px; border-bottom-right-radius: 7px 7px; }
 footer ul { margin: 0; padding: 0; list-style: none; height: 18px }
 footer ul li a { padding: 0 8px; color: #aaa; float: left; text-shadow: 1px 1px #333 }
+
+
+
+table { width: 100%; border-collapse: collapse; }
+td { padding: 2px 5px; border-top: 1px solid #ddd; }
+th { padding: 2px 5px; font-weight: bold; text-align: left; }
