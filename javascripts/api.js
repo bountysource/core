@@ -18,9 +18,18 @@ with (scope('BountySource')) {
     
     JSONP.get(options);
   });
-  
-  define('search', function(term, callback) {
-    api('/search', 'GET', { term: term }, callback);
+
+  define('search_users', function(term, callback) {
+    api('/github/user/search/' + term, callback);
+  });
+
+  define('search_repositories', function(term, callback) {
+    api('/github/repos/search/' + term, callback);
+  });
+
+  define('search_issues', function(login, repository, term, callback) {
+    api('/github/issues/search/'+login+'/'+repository+'/'+term, callback);
+  });
   });
 
   define('logout', function() {
