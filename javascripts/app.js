@@ -91,6 +91,7 @@ with (scope('App')) {
           tr(
             th('ID'),
             th('Title'),
+            th('Bounties'),
             th('Code'),
             th('Comments'),
             th('State'),
@@ -101,6 +102,7 @@ with (scope('App')) {
             return tr(
               td(issue.number),
               td(a({ href: '#repos/'+login+'/'+repository+'/issues/'+issue.number }, issue.title)),
+              td('$0.00'),
               td(issue.pull_request.diff_url ? '✔' : ''),
               td(issue.comments),
               td(issue.state),
