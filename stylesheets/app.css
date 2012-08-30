@@ -7,7 +7,6 @@ a:hover { text-decoration: underline; }
 input, textarea, select { vertical-align: middle; }
 form, fieldset { margin:0; padding:0; border-style:none; }
 
-/* html { background: url(../images/rocketspace2.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; } */
 html { background: #444 url(../images/linen.jpg) repeat top center; }
 
 section#wrapper { width: 901px; margin: 0 auto; padding: 0; }
