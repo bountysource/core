@@ -30,6 +30,17 @@ with (scope('BountySource')) {
   define('search_issues', function(login, repository, term, callback) {
     api('/github/issues/search/'+login+'/'+repository+'/'+term, callback);
   });
+
+  define('get_repository', function(login, repository, callback) {
+    api('/github/repos/'+login+'/'+repository, callback);
+  });
+
+  define('get_issues', function(login, repository, callback) {
+    api('/github/repos/'+login+'/'+repository+'/issues', callback);
+  });
+
+  define('get_issue', function(login, repository, issue_number, callback) {
+    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number, callback);
   });
 
   define('logout', function() {
