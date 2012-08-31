@@ -45,7 +45,9 @@ with (scope('App')) {
       target_div
     );
 
-    BountySource.search_repositories(term, function(repositories) {
+    BountySource.search_repositories(term, function(response) {
+      var repositories = response.data||[];
+
       render({ into: target_div },
         table(
           tr(
@@ -85,7 +87,12 @@ with (scope('App')) {
       target_div
     );
 
-    BountySource.get_issues(login, repository, function(issues) {
+    BountySource.get_issues(login, repository, function(response) {
+
+      console.log(response);
+
+      var issues = response.data||[];
+
       render({ into: target_div },
         table(
           tr(
@@ -122,15 +129,21 @@ with (scope('App')) {
       target_div
     );
 
-    BountySource.get_issue(login, repository, issue_number, function(issue) {
+    BountySource.get_issue(login, repository, issue_number, function(response) {
+      var issue = response.data||{};
+
       render({ into: target_div },
         p({ style: 'white-space: pre' }, issue.body),
         issue.labels && issue.labels.length > 0 && div(
           h3('Lables:'),
-          ul(issue.labels.map(function(label) { return li(label.name) }))
+          ul(issue.labels)
         )
       )
     });
+  });
+
+  route('#bounties', function() {
+
   });
 
   route('#about', function() {
