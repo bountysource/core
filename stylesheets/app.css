@@ -39,3 +39,7 @@ footer ul li a { padding: 0 8px; color: #aaa; float: left; text-shadow: 1px 1px 
 table { width: 100%; border-collapse: collapse; }
 td { padding: 2px 5px; border-top: 1px solid #ddd; }
 th { padding: 2px 5px; font-weight: bold; text-align: left; }
+
+.split-main { float: left; width: 630px; border-right: 1px solid #ccc; margin-right: 10px; padding-right: 10px }
+.split-side { float: left; width: 300px }
+.split-end { clear: left }

@@ -47,4 +47,8 @@ with (scope('BountySource')) {
     Storage.remove('access_token');
     set_route('#', { reload_page: true });
   });
+  
+  define('create_bounty', function(login,repository,issue_number,amount,callback) {
+    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount }, callback);
+  });
 }
