@@ -28,7 +28,7 @@ with (scope('App')) {
       ul(
         li(
           "Search: ",
-          form({ action: process_search },
+          form({ action: function(form_data) { set_route('#repos/search/'+form_data.term) } },
             search({ name: 'term', placeholder: 'Project Name' }),
             submit()
           )
@@ -74,11 +74,6 @@ with (scope('App')) {
     });
   });
 
-  define('process_search', function(form_data) {
-    set_route('#repos/search/'+form_data.term)
-  });
-
-
   route('#repos/:login/:repository/issues', function(login, repository) {
     var target_div = div('Loading...');
 
@@ -88,9 +83,6 @@ with (scope('App')) {
     );
 
     BountySource.get_issues(login, repository, function(response) {
-
-      console.log(response);
-
       var issues = response.data||[];
 
       render({ into: target_div },
@@ -110,7 +102,7 @@ with (scope('App')) {
               td(issue.number),
               td(a({ href: '#repos/'+login+'/'+repository+'/issues/'+issue.number }, issue.title)),
               td('$0.00'),
-              td(issue.pull_request.diff_url ? '✔' : ''),
+              td(issue.code ? '✔' : ''),
               td(issue.comments),
               td(issue.state),
               td({ style: 'white-space:nowrap' }, (issue.updated_at||"").substr(0,10))
