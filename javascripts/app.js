@@ -149,7 +149,7 @@ with (scope('App')) {
   
   define('create_bounty', function(login, repository, issue, form_data) {
     BountySource.create_bounty(login, repository, issue, form_data.amount, function(response) {
-      console.log(response)
+      window.location.href = response.data.redirect_url;
     });
   });
 
