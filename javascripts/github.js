@@ -1,11 +1,14 @@
 with (scope('Github')) {
-  define('auth_button', function() {
-    var access_token = Storage.get('access_token');
-
-    if (access_token) {
-      return a({ href: BountySource.logout }, 'Logout of GitHub');
+  // funnel through Github, to require app link if needed
+  define('link_requiring_auth', function(options) {
+    options = options || {};
+    var url;
+    if (Storage.get('access_token')) {
+      url = options.route || get_route();
     } else {
-      return a({ href: BountySource.api_host + 'auth/github?redirect_url=' + document.location.href }, 'Login via GitHub');
+      url = BountySource.api_host + 'auth/github?redirect_url='+document.location.href;
+      Storage.set('__return_route__', options.route || get_route()); // redirect back to the page the link was clicked on
     }
+    return a({ href: url }, options.text);
   });
-}
+};

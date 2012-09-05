@@ -18,7 +18,11 @@ with (scope('Cookies')) {
   });
 
   define('remove', function(name) {
-    if (get(name)) document.cookie=name+"="+";path="+";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    var before_remove = get(name);
+    if (before_remove) {
+      document.cookie=name+"="+";path="+";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+      return before_remove;
+    }
   });
 }
 
@@ -32,7 +36,11 @@ with (scope('Local')) {
   });
 
   define('remove', function(name) {
-    window.localStorage.removeItem(name);
+    var before_remove = get(name);
+    if (before_remove) {
+      window.localStorage.removeItem(name);
+      return before_remove;
+    }
   });
 }
 

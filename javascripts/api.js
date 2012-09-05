@@ -19,6 +19,13 @@ with (scope('BountySource')) {
     JSONP.get(options);
   });
 
+  define('logout', function() {
+    Storage.remove('access_token');
+    set_route('#', { reload_page: true });
+  });
+
+
+
   define('search_users', function(term, callback) {
     api('/github/user/search/' + term, callback);
   });
@@ -43,12 +50,15 @@ with (scope('BountySource')) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number, callback);
   });
 
-  define('logout', function() {
-    Storage.remove('access_token');
-    set_route('#', { reload_page: true });
+  define('overview', function(callback) {
+    api('/overview', callback);
   });
-  
+
   define('create_bounty', function(login,repository,issue_number,amount,payment_method,callback) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount, payment_method: payment_method }, callback);
+  });
+
+  define('get_user_repositories', function(callback) {
+    api('/github/user/repos/', callback);
   });
 }
