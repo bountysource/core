@@ -55,8 +55,6 @@ with (scope('Repository', 'App')) {
 
         create_branch(repo.owner, repo.name, form_data.branch_name, function(response) {
           console.log(response);
-
-          set_route('#bounties/started');
         });
       } else {
         show_shy_form();
