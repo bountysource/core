@@ -54,7 +54,7 @@ with (scope('BountySource')) {
     api('/overview', callback);
   });
 
-  define('create_bounty', function(login,repository,issue_number,amount,payment_method,callback) {
+  define('create_bounty', function(login, repository, issue_number, amount, payment_method, callback) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount, payment_method: payment_method }, callback);
   });
 
