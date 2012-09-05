@@ -132,6 +132,8 @@ with (scope('App')) {
             h1('Create Bounty:'),
             form({ action: curry(create_bounty, login, repository, issue_number) },
               'Amount: $', text({ placeholder: "100.00", name: 'amount', style: "width: 50px" }),
+              div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked', id: 'payment_method_paypal' }), label({ 'for': 'payment_method_paypal' }, "PayPal")),
+              div(radio({ name: 'payment_method', value: 'google', id: 'payment_method_google' }), label({ 'for': 'payment_method_google' }, "Google Wallet")),
               submit()
             )
           ),
@@ -148,7 +150,7 @@ with (scope('App')) {
   });
   
   define('create_bounty', function(login, repository, issue, form_data) {
-    BountySource.create_bounty(login, repository, issue, form_data.amount, function(response) {
+    BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, function(response) {
       window.location.href = response.data.redirect_url;
     });
   });

@@ -48,7 +48,7 @@ with (scope('BountySource')) {
     set_route('#', { reload_page: true });
   });
   
-  define('create_bounty', function(login,repository,issue_number,amount,callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount }, callback);
+  define('create_bounty', function(login,repository,issue_number,amount,payment_method,callback) {
+    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount, payment_method: payment_method }, callback);
   });
 }
