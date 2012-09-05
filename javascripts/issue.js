@@ -70,7 +70,7 @@ with (scope('Issue', 'App')) {
             ul({ style: 'padding-bottom: 10px;' },
               li(Github.link_requiring_auth({
                 text: 'Start working on a solution',
-                route: '#repos/'+issue.repository_full_name+'/issues/'+issue_number+'/fork'
+                route: '#repos/'+issue.repository.full_name+'/issues/'+issue_number+'/fork'
               }))
             )
           ),
