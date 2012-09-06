@@ -24,7 +24,9 @@ with (scope('BountySource')) {
     set_route('#', { reload_page: true });
   });
 
-
+  define('user_info', function(callback) {
+    BountySource.api('/user', callback);
+  });
 
   define('search_users', function(term, callback) {
     api('/github/user/search/' + term, callback);
