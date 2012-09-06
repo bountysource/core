@@ -65,7 +65,7 @@ with (scope('Repository', 'App')) {
   // API helpers
 
   define('fork', function(login, repository, issue_number, callback) {
-    BountySource.api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/fork', 'POST', callback);
+    BountySource.api('/github/repos/'+login+'/'+repository+'/fork', 'POST', callback);
   });
 
   define('create_branch', function(login, repository, branch_name, callback) {
