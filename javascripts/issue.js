@@ -67,6 +67,11 @@ with (scope('Issue', 'App')) {
 
         div({ 'class': 'split-side' },
           div(
+            issue.account_balance > 0 && div(
+              h3('Total Bounty'),
+              span('$'+issue.account_balance+'.00')
+            ),
+
             h3('Create Bounty:'),
             form({ action: curry(create_bounty, login, repository, issue_number) },
               'Amount: $', text({ placeholder: "100.00", name: 'amount', style: "width: 50px" }),
