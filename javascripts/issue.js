@@ -31,7 +31,7 @@ with (scope('Issue', 'App')) {
               return tr(
                 td(issue.number),
                 td(a({ href: '#repos/'+login+'/'+repository+'/issues/'+issue.number }, issue.title)),
-                td('$0.00'),
+                td('$'+issue.account_balance),
                 td(issue.code ? '✔' : ''),
                 td(issue.comments),
                 td(issue.state),
@@ -55,7 +55,14 @@ with (scope('Issue', 'App')) {
       render({ into: target_div },
         div({ 'class': 'split-main' },
           h2('Repository - ' + login+'/'+repository + ' - Issues - #' + issue_number),
-          issue.body.split("\n").map(function(txt) { return div(txt); })
+          issue.body.split("\n").map(function(txt) { return div(txt); }),
+
+          issue.bounties.length > 0 && div(
+            h2('Bounties on This Issue'),
+            issue.bounties.map(function(bounty) {
+              return div(bounty.amount);
+            })
+          )
         ),
 
         div({ 'class': 'split-side' },
