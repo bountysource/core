@@ -89,7 +89,7 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_bounty', function(login, repository, issue, form_data) {
-    BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, function(response) {
+    BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, window.location.href, function(response) {
       window.location.href = response.data.redirect_url;
     });
   });
