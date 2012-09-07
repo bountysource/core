@@ -48,3 +48,10 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 .has-sidebar { margin-right: 260px; }
 
 .featured-project { width: 345px; display: inline-block; }
+
+
+
+
+
+#faq dt { font-weight: bold; }
+#faq dd { margin-bottom: 20px; }

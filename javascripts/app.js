@@ -10,6 +10,7 @@ with (scope('App')) {
       ),
       footer(
         ul(
+          li(a({ href: '#faq' }, 'FAQ')),
           li(a({ href: '#' }, 'About')),
           li(a({ href: '#' }, 'Contact Us')),
           li(a({ href: '#' }, 'Blog'))
