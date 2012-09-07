@@ -67,12 +67,4 @@ with (scope('BountySource')) {
   define('create_solution', function(login, repository, issue_number, branch_name, callback) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solutions', 'POST', { branch_name: branch_name }, callback);
   });
-
-  define('my_solutions', function(callback) {
-     api('/solutions', callback);
-  });
-
-//  define('fork_repo', function(login, repository, callback) {
-//    api('/github/repos/'+login+'/'+repository+'/fork', 'POST', callback);
-//  });
 }
