@@ -35,22 +35,4 @@ with (scope('Repository', 'App')) {
       );
     });
   });
-
-  route('#repos/:login/:repository/issues/:issue_number/fork', function(login, repository, issue_number) {
-    render(
-      h2('Start working on ', repository),
-      h3('Fork Repository / Create Solution Branch.'),
-      p('To collect this bounty, you must develop your solution on the branch that we create here. The repository will automatically be forked to your account.'),
-      shy_form({ action: curry(create_solution, login, repository, issue_number) },
-        search({ name: 'branch_name', placeholder: 'issue'+issue_number }),
-        submit('Create Branch')
-      )
-    );
-  });
-
-  define('create_solution', function(login, repository, issue_number, form_data) {
-    BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
-      console.log(response);
-    });
-  });
 };

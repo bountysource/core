@@ -1,13 +1,51 @@
 with (scope('Issue', 'App')) {
 
+  // determine if a developer has started working on a solution for the issue.
+  // callback param is a boolean. returns the solution if dev created one, false otherwise
+  define('get_solution', function(issue_number, callback) {
+    if (!Storage.get('access_token')) return callback(false);
+    BountySource.user_info(function(response) {
+      var user_info = response.data||{};
+      for (var i=0; user_info.solutions && i<user_info.solutions.length; i++) {
+        if (parseInt(user_info.solutions[i].issue.number) == parseInt(issue_number)) return callback(user_info.solutions[i]);
+      }
+      callback(false);
+    });
+  });
+
   route('#repos/:login/:repository/issues/:issue_number', function(login, repository, issue_number) {
-    var target_div = div('Loading...');
+    var target_div = div('Loading...'),
+        developer_div = div('awesome-spinner');
+
+    get_solution(issue_number, function(solution) {
+      if (solution) {
+        render({ into: developer_div },
+          h3('Your Solution:'),
+
+          div({ style: 'margin-bottom: 10px;' },
+            a({ href: '#' }, 'Submit for Approval')
+          ),
+
+          div('Your Fork: ', solution.branch.repository),
+          div('Base Repository: ', solution.issue.repository)
+        );
+      } else {
+        render({ into: developer_div },
+          h3('Developers:'),
+          ul({ style: 'padding-bottom: 10px;' },
+            li(Github.link_requiring_auth({
+              text: 'Start working on a solution',
+              route: '#repos/'+login+'/'+repository+'/issues/'+issue_number+'/fork'
+            }))
+          )
+        );
+      }
+    });
 
     render(target_div);
 
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
-      //console.log(issue);
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
@@ -68,13 +106,7 @@ with (scope('Issue', 'App')) {
             div("Owner: ", issue.owner),
             div("Has code: ", issue.code ? 'Yes' : 'No'),
 
-            h3('Developers:'),
-            ul({ style: 'padding-bottom: 10px;' },
-              li(Github.link_requiring_auth({
-                text: 'Start working on a solution',
-                route: '#repos/'+issue.repository.full_name+'/issues/'+issue_number+'/fork'
-              }))
-            )
+            developer_div
           ),
 
           issue.labels && issue.labels.length > 0 && div(
