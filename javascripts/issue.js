@@ -54,7 +54,7 @@ with (scope('Issue', 'App')) {
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
-          h2('Repository - ' + login+'/'+repository + ' - Issues - #' + issue_number),
+          h2(a({ href: '#repos/' + login + '/' + repository + '/issues' }, login+'/'+repository + ' - Issues'), ' - #' + issue_number),
           issue.body.split("\n").map(function(txt) { return div(txt); }),
 
           issue.bounties.length > 0 && div(
@@ -68,8 +68,8 @@ with (scope('Issue', 'App')) {
         div({ 'class': 'split-side' },
           div(
             issue.account_balance > 0 && div(
-              h3('Total Bounty'),
-              span('$'+issue.account_balance+'.00')
+              h3('Total Bounties'),
+              span({ style: 'font-size: 50px; font-weight: bold' }, '$'+issue.account_balance+'.00')
             ),
 
             h3('Create Bounty:'),
