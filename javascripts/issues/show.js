@@ -11,8 +11,8 @@ with (scope('Issue', 'App')) {
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
-          h2(a({ href: '#repos/' + login + '/' + repository + '/issues' }, login+'/'+repository + ' - Issues'), ' - #' + issue_number),
-          issue.body.split("\n").map(function(txt) { return div(txt); }),
+          h2('Repository - ' + login+'/'+repository + ' - Issues - #' + issue_number),
+          issue.body && issue.body.split("\n").map(function(txt) { return div(txt); }),
 
           issue.bounties.length > 0 && div(
             h2('Bounties on This Issue'),
