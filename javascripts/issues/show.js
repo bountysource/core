@@ -1,48 +1,4 @@
 with (scope('Issue', 'App')) {
-  route('#repos/:login/:repository/issues', function(login, repository) {
-    var target_div = div('Loading...');
-
-    render(
-      h2(login+'/'+repository + ': Issues'),
-      target_div
-    );
-
-    BountySource.get_issues(login, repository, function(response) {
-      if (response.data && response.data.error) {
-        render({ into: target_div },
-          div(response.data.error)
-        );
-      } else {
-        var issues = response.data||[];
-
-        render({ into: target_div },
-          table(
-            tr(
-              th('ID'),
-              th('Title'),
-              th('Bounties'),
-              th('Code'),
-              th('Comments'),
-              th('State'),
-              th('Updated')
-            ),
-
-            (issues||[]).map(function(issue) {
-              return tr(
-                td(issue.number),
-                td(a({ href: '#repos/'+login+'/'+repository+'/issues/'+issue.number }, issue.title)),
-                td('$'+issue.account_balance),
-                td(issue.code ? '✔' : ''),
-                td(issue.comments),
-                td(issue.state),
-                td({ style: 'white-space:nowrap' }, (issue.updated_at||"").substr(0,10))
-              )
-            })
-          )
-        );
-      }
-    });
-  });
 
   route('#repos/:login/:repository/issues/:issue_number', function(login, repository, issue_number) {
     var target_div = div('Loading...');
@@ -51,6 +7,7 @@ with (scope('Issue', 'App')) {
 
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
+      //console.log(issue);
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
@@ -62,7 +19,33 @@ with (scope('Issue', 'App')) {
             issue.bounties.map(function(bounty) {
               return div(bounty.amount);
             })
+          ),
+          
+          issue.comments.length > 0 && div(
+            h2('Comments'),
+            issue.comments.map(function(comment) {
+              return div({ style: 'border: 1px solid #888; padding: 5px; margin-bottom: 20px' }, 
+                img({ src: comment.user.avatar_url, style: 'float: left; width:80px; height:80px' }), 
+                b(comment.user.login), ' on ', comment.created_at,
+                div(comment.body),
+                div({ style: 'clear: left' })
+              );
+            })
+          ),
+          
+          issue.events.length > 0 && div(
+            h2('Events'),
+            issue.events.map(function(event) {
+              return div({ style: 'border: 1px solid #888; padding: 5px; margin-bottom: 20px' }, 
+                img({ src: event.actor.avatar_url, style: 'float: left; width:80px; height:80px' }), 
+                b(event.actor.login), ' on ', event.created_at,
+                div(event.event),
+                div(event.commit_id),
+                div({ style: 'clear: left' })
+              );
+            })
           )
+          
         ),
 
         div({ 'class': 'split-side' },
@@ -79,6 +62,11 @@ with (scope('Issue', 'App')) {
               div(radio({ name: 'payment_method', value: 'google', id: 'payment_method_google' }), label({ 'for': 'payment_method_google' }, "Google Wallet")),
               submit()
             ),
+
+            h3('Fields'),
+            div("State: ", issue.state),
+            div("Owner: ", issue.owner),
+            div("Has code: ", issue.code ? 'Yes' : 'No'),
 
             h3('Developers:'),
             ul({ style: 'padding-bottom: 10px;' },
