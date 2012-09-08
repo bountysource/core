@@ -51,7 +51,7 @@ with (scope('Issue', 'App')) {
         div({ 'class': 'split-main' },
           h2('Repository - ' + login+'/'+repository + ' - Issues - #' + issue_number),
           h1({ style: 'font-size: 26px; line-height: 30px' }, issue.title),
-          issue.body && issue.body.split("\n").map(function(txt) { return div(txt); }),
+          div({ html: issue.body }),
 
           issue.bounties.length > 0 && div(
             h2('Bounties on This Issue'),
