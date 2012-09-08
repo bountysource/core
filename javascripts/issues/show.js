@@ -49,7 +49,7 @@ with (scope('Issue', 'App')) {
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
-          h2('Repository - ' + login+'/'+repository + ' - Issues - #' + issue_number),
+          h2(a({ href: '#repos/' + login + '/' + repository + '/issues' }, login+'/'+repository), ': Issue #' + issue_number),
           h1({ style: 'font-size: 26px; line-height: 30px' }, issue.title),
           div({ html: issue.body }),
 
