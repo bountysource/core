@@ -26,8 +26,8 @@ with (scope('Issue', 'App')) {
             a({ href: '#' }, 'Submit for Approval')
           ),
 
-          div('Your Fork: ', solution.branch.repository),
-          div('Base Repository: ', solution.issue.repository)
+          div('Your Fork: ', solution.branch.repository.full_name),
+          div('Base Repository: ', solution.issue.repository.full_name)
         );
       } else {
         render({ into: developer_div },
