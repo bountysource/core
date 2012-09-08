@@ -66,7 +66,7 @@ with (scope('Issue', 'App')) {
               return div({ style: 'border: 1px solid #888; padding: 5px; margin-bottom: 20px' }, 
                 img({ src: comment.user.avatar_url, style: 'float: left; width:80px; height:80px' }), 
                 b(comment.user.login), ' on ', comment.created_at,
-                div(comment.body),
+                div({ html: comment.body_html }),
                 div({ style: 'clear: left' })
               );
             })
