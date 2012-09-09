@@ -65,6 +65,10 @@ with (scope('BountySource')) {
   });
 
   define('create_solution', function(login, repository, issue_number, branch_name, callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solutions', 'POST', { branch_name: branch_name }, callback);
+    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solution', 'POST', { branch_name: branch_name }, callback);
+  });
+
+  define('submit_solution', function(login, repository, issue_number, data, callback) {
+    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solution/submit', 'POST', data, callback);
   });
 }

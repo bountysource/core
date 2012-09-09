@@ -23,7 +23,7 @@ with (scope('Issue', 'App')) {
           h3('Your Solution:'),
 
           div({ style: 'margin-bottom: 10px;' },
-            a({ href: '#' }, 'Submit for Approval')
+            a({ href: '#solutions/'+login+'/'+repository+'/issues/'+issue_number+'/submit' }, 'Submit for Approval')
           ),
 
           div('Your Fork: ', solution.branch.repository.full_name),
