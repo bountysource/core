@@ -21,7 +21,7 @@ with (scope('BountySource')) {
     options.callback = function(response) {
       if (response && response.meta && parseInt(response.meta.status) == 401) {
         Storage.remove('access_token');
-        set_route('#');
+        set_route('#login');
       } else {
         callback.call(this, response);
       }
