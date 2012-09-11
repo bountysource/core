@@ -54,7 +54,7 @@ with (scope('PullRequest', 'App')) {
 
         div(
           span('Title:'),
-          input({ name: 'title', placeholder: 'Fixes issue#'+issue_number })
+          input({ name: 'title', value: 'Fixes issue#'+issue_number })
         ),
         div(
           span('Body:'),
