@@ -77,7 +77,7 @@ with (scope('PullRequest', 'App')) {
   define('submit_solution', function(login, repository, issue_number, form_data) {
     render({ into: 'errors' },'');
 
-    BountySource.submit_solution(login, repository, issue_number, { title: form_data.title, body: form_data.body }, function(response) {
+    BountySource.submit_solution(login, repository, issue_number, { title: form_data.title, body: form_data.body + ' (Fixes Issue #'+issue_number+')' }, function(response) {
       if (response.meta.success) {
         set_route('#solutions');
       } else {
