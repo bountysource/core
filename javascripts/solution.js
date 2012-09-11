@@ -13,24 +13,24 @@ with (scope('PullRequest', 'App')) {
       render({ into: target_div },
         table(
           tr(
-            th(),
+            th('Issue'),
             th('Base Repository'),
             th('Head Repository'),
             th('Head Branch'),
-            th('Issue Number'),
             th('Submitted'),
-            th('Merged')
+            th('Merged'),
+            th('Actions')
           ),
 
           info.solutions.map(function(s) {
             return tr(
-              td(!s.pull_request && a({ href: '#solutions/'+s.base.repository.full_name+'/issues/'+ s.issue.number+'/submit' }, 'Submit Solution')),
-              td(a({ href: '#repos/'+s.base.repository.full_name+'/issues/'+s.issue.number }, s.base.repository.full_name)),
+              td(a({ href: '#repos/'+s.base.repository.full_name+'/issues/'+s.issue.number }, "#" + s.issue.number + ": " + s.issue.title)),
+              td(s.base.repository.full_name),
               td(s.head.repository.full_name),
               td(s.head.name),
-              td(s.issue.number),
               td(!!s.pull_request+''),
-              td(!!(s.pull_request && s.pull_request.merged)+'')
+              td(!!(s.pull_request && s.pull_request.merged)+''),
+              td(!s.pull_request && a({ href: '#solutions/'+s.base.repository.full_name+'/issues/'+ s.issue.number+'/submit' }, 'Submit Solution'))
             );
           })
         )
