@@ -10,6 +10,15 @@ with (scope('PullRequest', 'App')) {
     BountySource.user_info(function(response) {
       var info = response.data;
 
+      // render either a submit pull request, or view pull request button
+      var submit_or_view_pull_request_button = function(solution) {
+        if (solution.pull_request) {
+          return a({ 'class': 'green', target: '_blank', href: solution.pull_request.issue.url }, 'View Pull Request');
+        } else {
+          return a({ 'class': 'green', href: '#solutions/'+solution.base.repository.full_name+'/issues/'+ solution.issue.number+'/submit' }, 'Submit Solution');
+        }
+      };
+
       render({ into: target_div },
         table(
           tr(
@@ -24,8 +33,8 @@ with (scope('PullRequest', 'App')) {
 
           info.solutions.map(function(s) {
             return tr(
-              td(a({ href: '#repos/'+s.base.repository.full_name+'/issues/'+s.issue.number }, "#" + s.issue.number + ": " + s.issue.title)),
-              td(s.base.repository.full_name),
+              td(div({ style: 'margin: 10px 0px;' }, submit_or_view_pull_request_button(s))),
+              td(a({ href: '#repos/'+s.base.repository.full_name+'/issues/'+s.issue.number }, s.base.repository.full_name)),
               td(s.head.repository.full_name),
               td(s.head.name),
               td(!!s.pull_request+''),

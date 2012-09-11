@@ -107,7 +107,7 @@ with (scope('Issue', 'App')) {
   });
   
   define('developer_box', function(issue) {
-    var developer_div = div('awesome-spinner');
+    var developer_div = div();
     
     get_solution(issue.number, function(solution) {
       if (solution) {
