@@ -9,21 +9,46 @@ form, fieldset { margin:0; padding:0; border-style:none; }
 
 html { background: #efe9db url(../images/background.png) repeat top center; }
 
-header { color: #eee; padding: 12px 0 10px; background: white; border-top: 4px solid #e0ab45; border-bottom: 1px solid #ccc6b7; margin-bottom: 20px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
-header section { width: 975px; margin: 0 auto; padding: 0; }
-header h1 { margin: 6px 0; }
+
+
+header { 
+  color: #eee; 
+  background: white; 
+  border-top: 4px solid #e0ab45; 
+  border-bottom: 1px solid #ccc6b7; 
+  margin-bottom: 20px; 
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+header section { width: 975px; margin: 0 auto; padding: 4px 0 0 0; line-height: 50px; position: relative; }
+header h1 { margin: 0; padding: 0 }
 header h1 a:hover { text-decoration: none; }
 header h1 a {
   font-size: 30px; 
 	color: #222;
-
-	-webkit-text-rendering: optimizeLegibility;
-	-moz-text-rendering: optimizeLegibility;
-	-ms-text-rendering: optimizeLegibility;
-	-o-text-rendering: optimizeLegibility;
-	text-rendering: optimizeLegibility;
 } 
 header h1 a .source { font-weight: normal; letter-spacing: 0px }
+
+header ul { 
+  margin: 0; 
+  padding: 0; 
+  position: absolute; 
+  right: 0; 
+  top: 5px;
+}
+header ul li {
+  margin: 0 0 0 20px;
+  padding: 0;
+  float: left;
+  list-style: none;
+}
+
+header ul li a {
+  color: #333;
+  font-size: 16px;
+}
+
+
+
 
 section#content { width: 935px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }
 

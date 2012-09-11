@@ -2,17 +2,21 @@ with (scope('App')) {
   define('default_layout', function(yield) {
     return section({ id: 'wrapper' },
       header(
-        h1(a({ href: '#' }, 'BountySource')),
+        section(
+          h1(a({ href: '#' }, span({ 'class': 'bounty' }, 'Bounty'), span({ 'class': 'source' }, 'Source'))),
 
-        // primarily for debugging
-        div({ style: 'text-align: right;' },
-          Storage.get('access_token') ? [
-            a({ href: '#solutions' }, 'My Solutions'),
-            ' | ',
-            a({ href: BountySource.logout }, 'Logout of GitHub')
-          ] : [
-            Github.link_requiring_auth({ href: get_route() }, 'Login to GitHub')
-          ]
+          ul(
+            li(a({ href: '#about' }, 'About')),
+            li(a({ href: '#about' }, 'Popular')),
+            li(a({ href: '#about' }, 'Help')),
+
+            Storage.get('access_token') ? [
+              li(a({ href: '#solutions' }, 'My Solutions')),
+              li(a({ href: BountySource.logout }, 'Logout of GitHub'))
+            ] : [
+              li(Github.link_requiring_auth({ href: get_route() }, 'Login via GitHub'))
+            ]
+          )
         )
       ),
 
