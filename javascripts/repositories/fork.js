@@ -9,7 +9,6 @@ with (scope('Repository', 'App')) {
         a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, 'Issue #' + issue_number),
         ('Start Solution')
       ),
-
       target_div
     );
 
@@ -38,7 +37,7 @@ with (scope('Repository', 'App')) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
       } else {
         show_shy_form();
-        render({ into: 'errors' }, response.error);
+        render({ into: 'errors' }, response.data.error);
       }
     });
   });

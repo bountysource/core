@@ -28,14 +28,13 @@ with (scope('Issue', 'App')) {
     get_solution(issue_number, function(solution) {
       if (solution) {
         render({ into: developer_div },
-          h3('Your Solution:'),
-
           div({ style: 'margin-bottom: 10px;' },
             a({ 'class': 'green', href: '#solutions/'+login+'/'+repository+'/issues/'+issue_number+'/submit' }, 'Submit for Approval')
           ),
 
-          div('Your Fork: ', solution.head.repository.full_name),
-          div('Base Repository: ', solution.base.repository.full_name)
+          div('Your Fork: ', a({ href: solution.head.repository.url+'/tree/'+solution.head.name }, solution.head.repository.full_name)),
+          br(),
+          div('Base Repository: ', a({ href: solution.base.repository.url }, solution.base.repository.full_name))
         );
       } else {
         render({ into: developer_div },
