@@ -33,13 +33,13 @@ with (scope('PullRequest', 'App')) {
 
           info.solutions.map(function(s) {
             return tr(
-              td(div({ style: 'margin: 10px 0px;' }, submit_or_view_pull_request_button(s))),
+              td(s.issue.number),
               td(a({ href: '#repos/'+s.base.repository.full_name+'/issues/'+s.issue.number }, s.base.repository.full_name)),
               td(s.head.repository.full_name),
               td(s.head.name),
               td(!!s.pull_request+''),
               td(!!(s.pull_request && s.pull_request.merged)+''),
-              td(!s.pull_request && a({ href: '#solutions/'+s.base.repository.full_name+'/issues/'+ s.issue.number+'/submit' }, 'Submit Solution'))
+              td(div({ style: 'margin: 10px 0px;' }, submit_or_view_pull_request_button(s)))
             );
           })
         )
