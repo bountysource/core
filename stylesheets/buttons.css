@@ -11,6 +11,10 @@
   text-align: center;
 }
 
+.blue:hover, .green:hover {
+  text-decoration: underline;
+}
+
 input.blue {
   border: 1px solid #4682b4;
   background: #6adfff; /* Old browsers */

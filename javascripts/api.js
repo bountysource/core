@@ -16,6 +16,17 @@ with (scope('BountySource')) {
     // add in our access token
     options.params.access_token = Storage.get('access_token');
     
+    // reload the page if they're not authorized
+    var callback = options.callback;
+    options.callback = function(response) {
+      if (Storage.get('access_token') && response && response.meta && response.meta.status == 401) {
+        Storage.remove('access_token')
+        window.location.reload();
+      } else {
+        callback.call(this, response);
+      }
+    };
+    
     JSONP.get(options);
   });
 
