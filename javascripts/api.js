@@ -19,9 +19,9 @@ with (scope('BountySource')) {
     // reload the page if they're not authorized
     var callback = options.callback;
     options.callback = function(response) {
-      if (Storage.get('access_token') && response && response.meta && response.meta.status == 401) {
-        Storage.remove('access_token')
-        window.location.reload();
+      if (response && response.meta && parseInt(response.meta.status) == 401) {
+        Storage.remove('access_token');
+        set_route('#');
       } else {
         callback.call(this, response);
       }
