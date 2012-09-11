@@ -1,8 +1,12 @@
 with (scope('Faq', 'App')) {
   route('#faq', function() {
     render(
-      h1("Frequently Asked Questions"),
-      
+
+      breadcrumbs(
+        a({ href: '#' }, "BountySource"),
+        "Frequently Asked Questions"
+      ),
+
       section({ id: 'faq' },
         dl(
           dt("Who can create a bounty?"),
