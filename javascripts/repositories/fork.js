@@ -14,6 +14,8 @@ with (scope('Repository', 'App')) {
           h3('Fork Repository / Create Solution Branch.'),
           p('To collect this bounty, you must develop your solution on the branch that we create here. The repository will automatically be forked to your account.'),
           shy_form({ action: curry(create_solution, login, repository, issue_number) },
+            div({ id: 'errors', style: 'margin: 10px;' }),
+
             search({ name: 'branch_name', placeholder: 'issue'+issue_number }),
             submit('Create Branch')
           )
@@ -24,7 +26,12 @@ with (scope('Repository', 'App')) {
 
   define('create_solution', function(login, repository, issue_number, form_data) {
     BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
-      set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
+      if (response.meta.success) {
+        set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
+      } else {
+        show_shy_form();
+        render({ into: 'errors' }, response.error);
+      }
     });
   });
 };

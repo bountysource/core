@@ -65,7 +65,28 @@ with (scope('BountySource')) {
   });
 
   define('create_solution', function(login, repository, issue_number, branch_name, callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solution', 'POST', { branch_name: branch_name }, callback);
+    // first, fork repo
+    api('/github/repos/'+login+'/'+repository+'/fork', 'POST', function(response) {
+      // if the repo fork fails, skip solution creation
+      if (!response.meta.success) {
+        return callback(response);
+      } else {
+        var forked_repository = response.data;
+
+        var check_repository = function() {
+          BountySource.get_repository(forked_repository.owner, forked_repository.name, function(response) {
+            if (response.meta.success) {
+              // now we can create the branch, and Solution model
+              api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solution', 'POST', { branch_name: branch_name }, callback);
+            } else {
+              setTimeout(check_repository, 3000);
+            }
+          });
+        };
+
+        setTimeout(check_repository, 3000);
+      }
+    });
   });
 
   define('submit_solution', function(login, repository, issue_number, data, callback) {

@@ -22,10 +22,10 @@ with (scope('PullRequest', 'App')) {
 
           info.solutions.map(function(s) {
             return tr(
-              td(!s.pull_request && a({ href: '#solutions/'+s.issue.repository.full_name+'/issues/'+ s.issue.number+'/submit' }, 'Submit Solution')),
-              td(s.issue.repository.full_name),
-              td(s.branch.repository.full_name),
-              td(s.branch.name),
+              td(!s.pull_request && a({ href: '#solutions/'+s.base.repository.full_name+'/issues/'+ s.issue.number+'/submit' }, 'Submit Solution')),
+              td(s.base.repository.full_name),
+              td(s.head.repository.full_name),
+              td(s.head.name),
               td(s.issue.number),
               td(!!s.pull_request+''),
               td(!!(s.pull_request && s.pull_request.merged)+'')
@@ -61,8 +61,6 @@ with (scope('PullRequest', 'App')) {
     render({ into: 'errors' },'');
 
     BountySource.submit_solution(login, repository, issue_number, { title: form_data.title, body: form_data.body }, function(response) {
-      console.log(response);
-
       if (response.meta.success) {
         set_route('#solutions');
       } else {

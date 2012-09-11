@@ -20,9 +20,6 @@ with (scope('Bounty', 'App')) {
 
         div({ 'class': 'has-sidebar' },
           h2('Available Bounties'),
-
-          a({ href: '#bounties/search' }, 'Search'),
-
           div({ style: 'display: block' },
             featured_project_ul('Featured', data.projects.featured),
             featured_project_ul('Popular', data.projects.popular),
