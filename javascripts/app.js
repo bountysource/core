@@ -11,7 +11,7 @@ with (scope('App')) {
             ' | ',
             a({ href: BountySource.logout }, 'Logout of GitHub')
           ] : [
-            Github.link_requiring_auth({ 'class': 'green', style: 'padding: 5px 15px;', href: '#' }, 'Login to GitHub')
+            Github.link_requiring_auth({ href: get_route() }, 'Login to GitHub')
           ]
         )
       ),

@@ -4,7 +4,11 @@ with (scope('Issue', 'App')) {
     var target_div = div('Loading...');
 
     render(
-      h2(login+'/'+repository + ': Issues'),
+      breadcrumbs(
+        a({ href: '#repos/search/'+repository }, 'Projects'),
+        (login + '/' + repository)
+      ),
+
       target_div
     );
 

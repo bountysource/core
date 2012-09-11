@@ -44,18 +44,22 @@ with (scope('Issue', 'App')) {
       }
     });
 
-    render(target_div);
+    render(
+      breadcrumbs(
+        a({ href: '#repos/search/' + repository }, 'Projects'),
+        a({ href: '#repos/' + login + '/' + repository + '/issues' }, login + '/' + repository),
+        ('Issue #' + issue_number)
+      ),
+
+      target_div
+    );
 
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
-          breadcrumbs(
-            a({ href: '#repos/' + login + '/' + repository + '/issues' }, login+'/'+repository), 
-            ('Issue #' + issue_number)
-          ),
-        
+
           h1({ style: 'font-size: 26px; line-height: 30px' }, issue.title),
           div({ html: issue.body }),
 

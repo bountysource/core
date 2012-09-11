@@ -3,7 +3,10 @@ with (scope('Repository', 'App')) {
     var target_div = div('Loading...');
 
     render(
-      h2('Repositories'),
+      breadcrumbs(
+        a('Projects')
+      ),
+
       target_div
     );
 
