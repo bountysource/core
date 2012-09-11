@@ -23,7 +23,7 @@ with (scope('Repository', 'App')) {
           shy_form({ action: curry(create_solution, login, repository, issue_number) },
             div({ id: 'errors', style: 'margin: 10px;' }),
 
-            search({ name: 'branch_name', placeholder: 'issue'+issue_number }),
+            search({ name: 'branch_name', value: 'issue'+issue_number }),
             submit('Create Branch')
           )
         );
