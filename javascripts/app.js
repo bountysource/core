@@ -2,8 +2,10 @@ with (scope('App')) {
   define('default_layout', function(yield) {
     return section({ id: 'wrapper' },
       header(
-        h1(a({ href: '#' }, 'BountySource')),
-        Storage.get('access_token') && a({ style: 'float: right; margin-top: -20px;', href: BountySource.logout }, 'Logout of GitHub')
+        section(
+          h1(a({ href: '#' }, span({ 'class': 'bounty' }, 'Bounty'), span({ 'class': 'source' }, 'Source'))),
+          Storage.get('access_token') && a({ style: 'float: right; margin-top: -20px;', href: BountySource.logout }, 'Logout of GitHub')
+        )
       ),
       section({ id: 'content' },
         yield
@@ -17,6 +19,25 @@ with (scope('App')) {
         )
       )
     );
+  });
+  
+  define('breadcrumbs', function() {
+    var elements = [];
+    for (var i=0; i < arguments.length; i++) {
+      elements.push(span({ 'class': 'crumb' }, arguments[i]));
+      elements.push(span({ 'class': 'arrow' }, "»"));
+    }
+    elements.pop(); // shave off extra arrow
+    
+    // add the up-arrow inside the last crumb
+    var last_elem = elements.pop();
+    elements.push(span({ 'class': 'crumb' }, 
+      last_elem.childNodes[0],
+      span({ 'class': 'uparrow-left' }),
+      span({ 'class': 'uparrow-right' })
+    ));
+    
+    return div({ id: 'breadcrumbs' }, elements);
   });
 
   route('#', function() {

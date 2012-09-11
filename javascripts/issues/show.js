@@ -13,6 +13,14 @@ with (scope('Issue', 'App')) {
     });
   });
 
+  define('ribbon_header', function(text) {
+    return div({ 'class': 'ribbon-wrapper' },
+      div({ 'class': 'ribbon-front' }, text),
+      div({ 'class': 'ribbon-edge-bottomleft' }),
+      div({ 'class': 'ribbon-edge-bottomright' })
+    );
+  });
+
   route('#repos/:login/:repository/issues/:issue_number', function(login, repository, issue_number) {
     var target_div = div('Loading...'),
         developer_div = div('awesome-spinner');
@@ -34,6 +42,7 @@ with (scope('Issue', 'App')) {
           h3('Developers:'),
           ul({ style: 'padding-bottom: 10px;' },
             li(Github.link_requiring_auth({
+              'class': 'green',
               text: 'Start working on a solution',
               route: '#repos/'+login+'/'+repository+'/issues/'+issue_number+'/fork'
             }))
@@ -49,7 +58,11 @@ with (scope('Issue', 'App')) {
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
-          h2(a({ href: '#repos/' + login + '/' + repository + '/issues' }, login+'/'+repository), ': Issue #' + issue_number),
+          breadcrumbs(
+            a({ href: '#repos/' + login + '/' + repository + '/issues' }, login+'/'+repository), 
+            'Issue #' + issue_number
+          ),
+        
           h1({ style: 'font-size: 26px; line-height: 30px' }, issue.title),
           div({ html: issue.body }),
 
@@ -88,26 +101,42 @@ with (scope('Issue', 'App')) {
         ),
 
         div({ 'class': 'split-side' },
-          div(
+          div({ id: 'bounty-box' },
+            ribbon_header("Backers"),
+            
             issue.account_balance > 0 && div(
-              h3('Total Bounties'),
               span({ style: 'font-size: 50px; font-weight: bold' }, '$'+issue.account_balance+'.00')
             ),
 
-            h3('Create Bounty:'),
             form({ action: curry(create_bounty, login, repository, issue_number) },
-              'Amount: $', text({ placeholder: "100.00", name: 'amount', style: "width: 50px" }),
-              div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked', id: 'payment_method_paypal' }), label({ 'for': 'payment_method_paypal' }, "PayPal")),
-              div(radio({ name: 'payment_method', value: 'google', id: 'payment_method_google' }), label({ 'for': 'payment_method_google' }, "Google Wallet")),
-              submit()
-            ),
+              div({ 'class': 'amount' },
+                label({ 'for': 'amount-input' }, '$'),
+                text({ placeholder: "100.00", name: 'amount', id: 'amount-input' })
+              ),
+              div({ 'class': 'payment-method' },
+                div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked', id: 'payment_method_paypal' }), label({ 'for': 'payment_method_paypal' }, img({ src: 'images/paypal.png'}), "PayPal")),
+                div(radio({ name: 'payment_method', value: 'google', id: 'payment_method_google' }), label({ 'for': 'payment_method_google' }, img({ src: 'images/google-wallet.png'}), "Google Wallet"))
+              ),
+              submit({ 'class': 'blue' }, 'Create Bounty')
+            )
+          ),
 
+          div({ style: 'background: #dff7cb; padding: 0 21px 21px 21px; margin: 20px 15px' },
+            //developer_div
+            ribbon_header("Developers"),
+            br(),
+            Github.link_requiring_auth({
+              'class': 'green',
+              text: 'Start Working',
+              route: '#repos/'+login+'/'+repository+'/issues/'+issue_number+'/fork'
+            })
+          ),
+
+          div({ style: 'background: #e8f6f5; margin: 20px 15px'}, 
             h3('Fields'),
             div("State: ", issue.state),
             div("Owner: ", issue.owner),
-            div("Has code: ", issue.code ? 'Yes' : 'No'),
-
-            developer_div
+            div("Has code: ", issue.code ? 'Yes' : 'No')
           ),
 
           issue.labels && issue.labels.length > 0 && div(
