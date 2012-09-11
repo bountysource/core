@@ -36,7 +36,7 @@ with (scope('Issue', 'App')) {
               return tr(
                 td(issue.number),
                 td(a({ href: '#repos/'+login+'/'+repository+'/issues/'+issue.number }, issue.title)),
-                td('$'+issue.account_balance),
+                td(money(issue.account_balance)),
                 td(issue.code ? '✔' : ''),
                 td(issue.comments),
                 td(issue.state),
