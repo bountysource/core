@@ -29,7 +29,7 @@ with (scope('Issue', 'App')) {
               th('Code'),
               th('Comments'),
               th('State'),
-              th('Updated'),
+              th('Updated')
 //              th('Developers Working on This'),
 
             ),
