@@ -31,7 +31,7 @@ with (scope('Issue', 'App')) {
           h3('Your Solution:'),
 
           div({ style: 'margin-bottom: 10px;' },
-            a({ href: '#solutions/'+login+'/'+repository+'/issues/'+issue_number+'/submit' }, 'Submit for Approval')
+            a({ 'class': 'green', href: '#solutions/'+login+'/'+repository+'/issues/'+issue_number+'/submit' }, 'Submit for Approval')
           ),
 
           div('Your Fork: ', solution.head.repository.full_name),
@@ -39,14 +39,7 @@ with (scope('Issue', 'App')) {
         );
       } else {
         render({ into: developer_div },
-          h3('Developers:'),
-          ul({ style: 'padding-bottom: 10px;' },
-            li(Github.link_requiring_auth({
-              'class': 'green',
-              text: 'Start working on a solution',
-              route: '#repos/'+login+'/'+repository+'/issues/'+issue_number+'/fork'
-            }))
-          )
+          Github.link_requiring_auth({ 'class': 'green', href: '#repos/'+login+'/'+repository+'/issues/'+issue_number+'/fork' }, 'Start Working')
         );
       }
     });
@@ -60,7 +53,7 @@ with (scope('Issue', 'App')) {
         div({ 'class': 'split-main' },
           breadcrumbs(
             a({ href: '#repos/' + login + '/' + repository + '/issues' }, login+'/'+repository), 
-            'Issue #' + issue_number
+            ('Issue #' + issue_number)
           ),
         
           h1({ style: 'font-size: 26px; line-height: 30px' }, issue.title),
@@ -122,14 +115,9 @@ with (scope('Issue', 'App')) {
           ),
 
           div({ style: 'background: #dff7cb; padding: 0 21px 21px 21px; margin: 20px 15px' },
-            //developer_div
             ribbon_header("Developers"),
             br(),
-            Github.link_requiring_auth({
-              'class': 'green',
-              text: 'Start Working',
-              route: '#repos/'+login+'/'+repository+'/issues/'+issue_number+'/fork'
-            })
+            developer_div
           ),
 
           div({ style: 'background: #e8f6f5; margin: 20px 15px'}, 
