@@ -11,6 +11,6 @@ with (scope('Github')) {
 
     var text = options.text;
     delete options.text;
-    return button(options, text);
+    return a(options, text);
   });
 };
