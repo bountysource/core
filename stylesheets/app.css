@@ -168,20 +168,15 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   font-weight: normal;
 }
 
-#breadcrumbs .uparrow-left, #breadcrumbs .uparrow-right {
+#breadcrumbs .uparrow {
   position: absolute;
   width: 0;
   height: 0;
-  left: 50%;
   top: 23px;
-  border-style: solid;
-  border-color: transparent transparent #e0ab45 transparent;
-  border-width: 0 0 5px 5px;
-  margin: 0 5px 0 0;
-}
 
-#breadcrumbs .uparrow-right {
-  border-color: transparent transparent transparent #e0ab45 ;
-  border-width: 5px 0 0 5px;
-  margin: 0 0 0 5px;
-}
+  left: 50%;
+
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #e0ab45;
+}   

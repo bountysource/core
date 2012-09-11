@@ -46,8 +46,7 @@ with (scope('App')) {
     var last_elem = elements.pop();
     elements.push(span({ 'class': 'crumb' }, 
       last_elem.childNodes[0],
-      span({ 'class': 'uparrow-left' }),
-      span({ 'class': 'uparrow-right' })
+      span({ 'class': 'uparrow' })
     ));
     
     return div({ id: 'breadcrumbs' }, elements);
