@@ -2,14 +2,15 @@ with (scope('PullRequest', 'App')) {
   route('#solutions', function() {
     var target_div = div('Loading...');
 
-    render(target_div);
+    render(
+      breadcrumbs('My Solutions'),
+      target_div
+    );
 
     BountySource.user_info(function(response) {
       var info = response.data;
 
       render({ into: target_div },
-        breadcrumbs('My Solutions'),
-
         table(
           tr(
             th(),
