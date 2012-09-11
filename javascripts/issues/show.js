@@ -91,7 +91,7 @@ with (scope('Issue', 'App')) {
       ),
 
       section({ style: 'padding: 21px' },
-        form({ action: curry(create_bounty, issue.repository.owner, issue.repository.repository, issue.number) },
+        form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
             text({ placeholder: "25.00", name: 'amount', id: 'amount-input' })
