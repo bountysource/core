@@ -7,14 +7,15 @@ with (scope('App')) {
 
           ul(
             li(a({ href: '#about' }, 'About')),
-            li(a({ href: '#about' }, 'Popular')),
-            li(a({ href: '#about' }, 'Help')),
+            li(a({ href: '#faq' }, 'FAQ')),
+            li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
+            li(a({ href: '#' }, 'Blog')),
 
             Storage.get('access_token') ? [
               li(a({ href: '#solutions' }, 'My Solutions')),
-              li(a({ href: BountySource.logout }, 'Logout of GitHub'))
+              li(a({ href: BountySource.logout }, 'Logout'))
             ] : [
-              li(Github.link_requiring_auth({ href: get_route() }, 'Login via GitHub'))
+              li(a({ href: '#login' }, 'Login'))
             ]
           )
         )
@@ -23,14 +24,7 @@ with (scope('App')) {
       section({ id: 'content' },
         yield
       ),
-      footer(
-        ul(
-          li(a({ href: '#faq' }, 'FAQ')),
-          li(a({ href: '#' }, 'About')),
-          li(a({ href: '#' }, 'Contact Us')),
-          li(a({ href: '#' }, 'Blog'))
-        )
-      )
+      footer("BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " All rights reserved. Copyright ©2012, Badger Inc." )
     );
   });
   

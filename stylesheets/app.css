@@ -53,9 +53,10 @@ header ul li a {
 section#content { width: 935px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }
 
 /*footer { padding: 5px 10px; background: rgba(0,0,0,0.3); margin: 0 20px; border-bottom-left-radius: 7px 7px; border-bottom-right-radius: 7px 7px; }*/
-footer { width: 995px; margin: 0 auto; padding: 25px 0; }
+footer { width: 995px; margin: 0 auto; padding: 25px 0; text-align: center; color: #7e8688; font-size: 12px }
 footer ul { margin: 0; padding: 0; list-style: none; height: 18px }
-footer ul li a { padding: 0 8px; color: #7e8688; float: left; }
+footer a { color: #7e8688; }
+footer li a { float: left; padding: 0 8px; } 
 
 
 
@@ -156,6 +157,8 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   font-weight: bold;
   height: 20px;
 }
+
+#breadcrumbs a { color: #333; }
 
 #breadcrumbs .arrow, #breadcrumbs .crumb {
   position: relative;

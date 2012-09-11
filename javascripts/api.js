@@ -39,6 +39,10 @@ with (scope('BountySource')) {
     BountySource.api('/user', callback);
   });
 
+  define('login', function(email, password, callback) {
+    BountySource.api('/user', 'GET', { email: email, password: password }, callback);
+  });
+
   define('search_users', function(term, callback) {
     api('/github/user/search/' + term, callback);
   });
