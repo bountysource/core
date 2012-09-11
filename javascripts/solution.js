@@ -8,7 +8,8 @@ with (scope('PullRequest', 'App')) {
       var info = response.data;
 
       render({ into: target_div },
-        h2('Solutions'),
+        breadcrumbs('My Solutions'),
+
         table(
           tr(
             th(),
@@ -23,7 +24,7 @@ with (scope('PullRequest', 'App')) {
           info.solutions.map(function(s) {
             return tr(
               td(!s.pull_request && a({ href: '#solutions/'+s.base.repository.full_name+'/issues/'+ s.issue.number+'/submit' }, 'Submit Solution')),
-              td(s.base.repository.full_name),
+              td(a({ href: '#repos/'+s.base.repository.full_name+'/issues/'+s.issue.number }, s.base.repository.full_name)),
               td(s.head.repository.full_name),
               td(s.head.name),
               td(s.issue.number),
@@ -38,7 +39,13 @@ with (scope('PullRequest', 'App')) {
 
   route('#solutions/:login/:repository/issues/:issue_number/submit', function(login, repository, issue_number) {
     render (
-      h2('Submit Solution'),
+      breadcrumbs(
+        a({ href: '#repos/search/' + repository }, 'Projects'),
+        a({ href: '#repos/' + login + '/' + repository + '/issues' }, login + '/' + repository),
+        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, 'Issue #' + issue_number),
+        ('Submit Solution for Approval')
+      ),
+
       p('This will submit your solution by creating a pull request on the base repository, '+login+'/'+repository),
 
       form({ action: curry(submit_solution, login, repository, issue_number) },
