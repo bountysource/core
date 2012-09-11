@@ -11,7 +11,7 @@ with (scope('Login', 'App')) {
       div({ style: 'width: 400px; background: #eee; border: 1px solid #ccc; float: left; margin-right: 20px; padding: 20px' },
         h2('Have a GitHub Account?'),
         div({ style: 'width: 200px; margin: 0 auto' },
-          img({ src: 'http://gems.github.com/octocat.png', style: 'width: 200px; height: 200px' }),
+          img({ src: 'images/github.png' }),
           br(),
           Github.link_requiring_auth({ href: '#', 'class': 'green' }, 'Login with GitHub')
         )
