@@ -116,9 +116,9 @@ with (scope('Issue', 'App')) {
             a({ 'class': 'green', href: '#solutions/'+issue.repository.full_name+'/issues/'+issue.number+'/submit' }, 'Submit for Approval')
           ),
 
-          div('Your Fork: ', a({ href: solution.head.repository.url+'/tree/'+solution.head.name }, solution.head.repository.full_name)),
+          div('Your Fork: ', a({ target: '_blank', href: solution.head.repository.url+'/tree/'+solution.head.name }, solution.head.repository.full_name)),
           br(),
-          div('Base Repository: ', a({ href: solution.base.repository.url }, solution.base.repository.full_name))
+          div('Base Repository: ', a({ target: '_blank', href: solution.base.repository.url }, solution.base.repository.full_name))
         );
       } else {
         render({ into: developer_div },
