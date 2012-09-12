@@ -15,7 +15,7 @@ with (scope('Home', 'App')) {
 
               div({ 'class': 'devbox' },
                 h2('Developers:'),
-                p('Earn money by contributing to open-source.')
+                p('Support the projects that have supported you.')
               ),
 
               div({ 'class': 'backerbox' },
