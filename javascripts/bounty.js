@@ -11,10 +11,11 @@ with (scope('Bounty', 'App')) {
         div({ 'class': 'sidebar' },
           h3('Global Stats'),
           ul(
-            li('$ paid to date'),
-            li('$ paid this month'),
-            li('$ waiting to be claimed'),
-            li('# of unique patrons')
+            li('$' + data.total_paid_to_date + ' paid to date'),
+            li('$' + data.total_paid_this_month + ' paid this month'),
+            li('$' + data.total_unclaimed + ' total unclaimed'),
+            li('$' + data.largest_unclaimed + ' largest unclaimed'),
+            li(data.distinct_backers_count + ' unique backers')
           )
         ),
 

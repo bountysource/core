@@ -8,7 +8,9 @@ with (scope('App')) {
   define('featured_project_ul', function(title, projects) {
     return div({ 'class': 'featured-project' },
       h3(title),
-      ul(projects.map(function(p) { return li(a({ href: '#repos/'+p.full_name+'/issues' }, p.name)) }))
+      ul(projects.map(function(p) {
+        return li(a({ href: '#repos/'+p.repository_full_name+'/issues/' + p.number }, p.title))
+      }))
     );
   });
 
