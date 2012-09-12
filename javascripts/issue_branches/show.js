@@ -26,35 +26,48 @@ with (scope('PullRequest', 'App')) {
 
         render({ into: target_div },
           div({ 'class': 'split-main' },
-            div('Your Fork: ', a({ target: '_blank', href: solution.head.repository.url }, solution.head.repository.full_name)),
-            div('Base Repository: ', a({ target: '_blank', href: solution.base.repository.url }, solution.base.repository.full_name))
+            h1('Getting Started'),
+            p('git instructions.')
           ),
 
           div({ 'class': 'split-side' },
             div({ style: 'background: #F1F1F1; padding: 0 21px 21px 21px; margin: 20px 15px; border-left: 1px solid #CCC; border-right: 1px solid #CCC; border-bottom: 1px solid #CCC;' },
+              ribbon_header('GitHub Links'),
+              br(),
+              a({ 'class': 'green', target: '_blank', href: solution.head.repository.url+'/tree/'+solution.head.name }, 'Your Branch'),
+              br(),
+              a({ 'class': 'green', target: '_blank', href: solution.base.repository.url }, 'Base Repository')
+            ),
+
+            div({ style: 'background: #F1F1F1; padding: 0 21px 21px 21px; margin: 20px 15px; border-left: 1px solid #CCC; border-right: 1px solid #CCC; border-bottom: 1px solid #CCC;' },
+              ribbon_header('Progress'),
+              br(),
+
               shy_form_during_submit('Submitting Solution...'),
+              br(),
+
               shy_form({ action: curry(submit_solution, login, repository, issue_number) },
                 div({ id: 'errors' }),
 
-                ribbon_header('Progress'),
-                br(),
-                solution.commits.length > 0 && div(
-                  h4('Commits'),
-                  solution.commits.map(function(commit) {
-                    return div(
-                      img({ src: commit.user.avatar_url, style: 'width: 35px;' }), commit.sha.substr(0,8)
-                    );
-                  }),
-                  br(),
-
-                  advanced_box,
-                  submit({ 'class': 'green' }, 'Submit Solution'),
-                  div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
-                )
+                solution.commits.length <= 0 ? [
+                  span("No commits have been made to your branch.")
+                ] : [
+                  div(
+                    h3('Commits'),
+                    solution.commits.map(function(commit) {
+                      return div(
+                        img({ src: commit.user.avatar_url, style: 'width: 35px;' }), commit.sha.substr(0,8)
+                      );
+                    }),
+                    br(),
+                    advanced_box,
+                    submit({ 'class': 'green' }, 'Submit Solution'),
+                    div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
+                  )
+                ]
               )
             )
           ),
-
           div({ 'class': 'split-end' })
         );
       }
