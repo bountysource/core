@@ -9,10 +9,10 @@ with (scope('Faq', 'App')) {
 
       section({ id: 'faq' },
         dl(
-          dt("What is a backer?"),
+          dt("Who is a backer?"),
           dd("A backer is anyone who creates a bounty on an issue."),
 
-          dt("What is a committer?"),
+          dt("Who is a committer?"),
           dd("A committer is any ", a({ href: 'https://help.github.com/articles/what-are-the-different-access-permissions', target: 'blank'}, "Github user"), " who can merge pull requests into a project."),
                     
           dt("Who can create a bounty?"),
