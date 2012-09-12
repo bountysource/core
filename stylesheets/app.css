@@ -83,7 +83,7 @@ section#homepage .green-line { border-bottom: 1px solid #85c135; }
 section#homepage .begin-box { border-top: 1px solid #fcfcfb; box-shadow: 0 -1px 1px #dfdfdd; margin-top: 15px; padding-top: 30px }
 section#homepage .begin-box input[type=text] { width: 120px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c; }
 
-section#homepage .leaderboard section { float: left; margin-right: 30px; background: white; border: 1px solid #ccc; border-radius: 3px; box-shadow: 0 0 5px #ccc; padding: 10px; }
+section#homepage .leaderboard section { float: left; margin-right: 30px; background: #fdfdfd; border: 1px solid #ccc; border-radius: 3px; box-shadow: 0 0 5px #ccc; padding: 10px; }
 section#homepage .leaderboard section h2 { margin: 0; font-weight: normal; color: #b1abab; text-transform: uppercase; font-size: 20px; text-align: center; padding-bottom: 20px; border-bottom: 1px solid #f5f4f1; }
 section#homepage .leaderboard ul { margin: 0; padding: 0; }
 section#homepage .leaderboard li { list-style: none; margin-top: 8px; width: 195px; float: left; }
