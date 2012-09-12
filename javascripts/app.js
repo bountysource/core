@@ -1,23 +1,4 @@
 with (scope('App')) {
-  route('#', function() {
-    render(
-      h2('Developers'),
-      ul(
-        li(a({ href: '#bounties' }, 'Find Bounties'))
-      ),
-      h2('Patrons'),
-      ul(
-        li(
-          "Search: ",
-          form({ action: function(form_data) { set_route('#repos/search?query='+escape(form_data.query)) } },
-            search({ name: 'query', placeholder: 'Project Name' }),
-            submit()
-          )
-        )
-      )
-    );
-  });
-
   // End point for Github login.
   route ('#login/:access_token', function(access_token) {
     Storage.set('access_token',access_token);

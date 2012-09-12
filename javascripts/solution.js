@@ -52,10 +52,11 @@ with (scope('PullRequest', 'App')) {
 
     render(
       breadcrumbs(
-        a({ href: '#repos/search/' + repository }, 'Projects'),
-        a({ href: '#repos/' + login + '/' + repository + '/issues' }, login + '/' + repository),
-        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, 'Issue #' + issue_number),
-        ('Solution')
+        a({ href: '#' }, 'Home'),
+        a({ href: '#repos/' + login + '/' + repository }, login + '/' + repository),
+        a({ href: '#repos/' + login + '/' + repository + '/issues' }, 'Issues'),
+        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, '#' + issue_number),
+        ('My Issue Branch')
       ),
       target_div
     );

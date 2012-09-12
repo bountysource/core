@@ -52,6 +52,28 @@ header ul li a {
 
 section#content { width: 935px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }
 
+section#homepage { width: 978px; margin: 0 auto; }
+section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; }
+section#homepage .box .inner { padding: 20px }
+
+section#homepage .bigbox { background: #f2f3f2; }
+section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 22px; color: #333; }
+section#homepage .bigbox .devbox, section#homepage .bigbox .backerbox { float: left; width: 320px; height: 100px; text-align: center; margin-top: 20px; }
+section#homepage .bigbox .devbox { border-right: 1px solid #dfdfdd; box-shadow: 1px 0px 1px #fcfcfb; margin-right: 10px; padding-right: 10px }
+
+
+section#homepage .stats { background: #f2f3f2; }
+section#homepage .stats h2 { margin: 0; text-align: right; font-size: 40px; line-height: 40px; font-weight: normal; color: #5b6163 }
+section#homepage .stats h3 { margin: 0; text-align: right; font-size: 13px; line-height: 13px; font-weight: normal; color: #54595c; margin-top: 5px; margin-bottom: 20px; padding-bottom: 10px; }
+section#homepage .blue-line { border-bottom: 1px solid #7dc7ea;  }
+section#homepage .orange-line { border-bottom: 1px solid #f87956; }
+section#homepage .green-line { border-bottom: 1px solid #85c135; }
+
+
+section#homepage .begin-box { border-top: 1px solid #fcfcfb; box-shadow: 0 -1px 1px #dfdfdd; margin-top: 15px; padding-top: 35px }
+section#homepage .begin-box input[type=text] { width: 120px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c; }
+
+
 /*footer { padding: 5px 10px; background: rgba(0,0,0,0.3); margin: 0 20px; border-bottom-left-radius: 7px 7px; border-bottom-right-radius: 7px 7px; }*/
 footer { width: 995px; margin: 0 auto; padding: 25px 0; text-align: center; color: #7e8688; font-size: 12px }
 footer ul { margin: 0; padding: 0; list-style: none; height: 18px }

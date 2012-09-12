@@ -21,11 +21,19 @@ with (scope('App')) {
         )
       ),
 
+      div({ id: 'before-content'}),
+
       section({ id: 'content' },
         yield
       ),
       footer("BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " All rights reserved. Copyright ©2012, Badger Inc." )
     );
+  });
+  
+  // empty before-content prior to every rendering
+  before_filter(function() {
+    inner_html('before-content', '');
+    show('before-content');
   });
 
   define('breadcrumbs', function() {

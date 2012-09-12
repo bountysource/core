@@ -1,6 +1,9 @@
+a.blue, a.green { 
+  display: block; 
+}
+
 .blue, .green {
   border-radius: 2px;
-  display: block; 
   width: 100%;
   line-height: 40px;
   color: white;
@@ -15,7 +18,7 @@
   text-decoration: underline;
 }
 
-input.blue {
+.blue {
   border: 1px solid #4682b4;
   background: #6adfff; /* Old browsers */
   background: -moz-linear-gradient(top,  #6adfff 0%, #29a8dd 4%, #2499c9 100%); /* FF3.6+ */
