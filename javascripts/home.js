@@ -9,7 +9,8 @@ with (scope('Home', 'App')) {
       section({ id: 'homepage' },
         div({ 'class': 'box', style: 'float: left; margin-right: 10px' },
           div({ 'class': 'inner bigbox', style: 'width: 694px; height: 250px' },
-            h1('BountySource is a funding platform for open-source bugs and features.'),
+            h1(span({ style: 'font-weight: bold' }, 'Bounty'), 'Source is a funding platform for open-source bugs and features.'),
+            div({ 'class': 'h1-line'}, div()),
             
             div({ 'class': 'devbox' },
               h2('Developers:'),
@@ -27,7 +28,7 @@ with (scope('Home', 'App')) {
               div({ style: 'margin-left: 70px; margin-right: 40px; float: left; text-align: center; '},
                 a({ 'class': 'blue', style: 'width: 200px; display: block', href: '#bounties' }, 'Browse All Projects')
               ),
-              div({ style: 'font-size: 30px; line-height: 40px; float: left; padding: 0 10px'}, 'or'),
+              div({ style: 'font-size: 30px; line-height: 40px; float: left; padding: 0 5px'}, 'or'),
 
               div({ style: 'width: 330px; float: left; text-align: center; text-align: center'},
                 form({ action: function(form_data) { set_route('#repos/search?query='+escape(form_data.query)) } },
@@ -35,11 +36,11 @@ with (scope('Home', 'App')) {
                   submit({ value: 'Search', 'class': 'green', style: 'width: 80px' })
                 )
               )
-            
             )
-
           )
         ),
+        
+        
         div({ 'class': 'box', style: 'float: left' },
           div({ 'class': 'inner stats', style: 'width: 150px; height: 250px' },
             h2('400'),
@@ -56,7 +57,38 @@ with (scope('Home', 'App')) {
         
         div({ 'class': 'box' },
           div({ 'class': 'inner leaderboard' },
-            h2('More content coming soon!')
+            section({ style: 'width: 390px'},
+              div({ style: 'text-align: center' }, img({ src: 'images/icon-info.png' })),
+              h2('Staff Picks'),
+              ul(
+                li(img({ src: 'https://c10078377.ssl.cf2.rackcdn.com/bc869afa522e2f02c5a3346a9cdfb1b1.png', style: 'width: 32px; height: 32px' }), 'Badger'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'BountySource'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'TextMate'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Rails'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Node.js'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'EventMachine')
+              )
+            ),
+            section({ style: 'width: 200px'},
+              div({ style: 'text-align: center' }, img({ src: 'images/icon-check.png' })),
+              h2('Top Backers'),
+              ul(
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Bob'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Pat'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Sue')
+              )
+            ),
+            section({ style: 'width: 200px; margin-right: 0'},
+              div({ style: 'text-align: center' }, img({ src: 'images/icon-info.png' })),
+              h2('Top Developers'),
+              ul(
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Bob'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Pat'),
+                li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Sue')
+              )
+            ),
+            div({ style: 'clear: both' })
+
           )
         )
         
