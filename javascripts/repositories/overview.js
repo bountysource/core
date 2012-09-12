@@ -65,7 +65,7 @@ with (scope('Repository', 'App')) {
           return tr(
             td({ style: 'text-align: right' }, a({ href: '#repos'+issue.repository_full_name+'/issues/'+issue.number, style: 'color: #93979a' }, '#' + issue.number)),
             td({ style: 'width: 100%' }, a({ href: '#repos'+issue.repository_full_name+'/issues/'+issue.number }, issue.title)),
-            td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developers.png' })]),
+            td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developer.png' })]),
             td({ style: 'text-align: right; color: #d8a135; white-space: nowrap' }, issue.comments > 0 && [issue.comments, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-comments.png' })]),
             td({ style: 'text-align: right; white-space' }, issue.bounties > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(issue.bounties)))
           );
