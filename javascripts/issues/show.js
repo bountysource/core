@@ -116,18 +116,19 @@ with (scope('Issue', 'App')) {
           a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/solution' }, 'View my Solution')
         );
       } else {
+        var advanced_box = div({ id: 'advanced-developer-box', style: "margin: 10px 0; display: none"}, 
+          b('Name: '), text({ name: 'branch_name', value: 'issue'+issue.number, style: 'width: 100px' })
+        );
+        
         render({ into: developer_div },
           shy_form_during_submit(p({ style: 'text-align: center;' }, 'Creating Branch...')),
 
-          shy_form({ style: 'text-align: center;', action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
+          shy_form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
             div({ id: 'errors', style: 'margin-bottom: 10px;' }),
-
-            b('Branch Name'),
-            search({ name: 'branch_name', value: 'issue'+issue.number }),
-
-            p('You must commit your solution to the branch created here to claim bounties.'),
-
-            submit({ 'class': 'green', style: 'margin-top: 10px;' }, 'Start Working')
+            div('This will create a branch in GitHub for you to solve this issue.'),
+            advanced_box,
+            submit({ 'class': 'green', style: 'margin-top: 10px;' }, 'Create Issue Branch'),
+            div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
           )
         );
       }

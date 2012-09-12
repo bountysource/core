@@ -3,7 +3,7 @@ with (scope('PullRequest', 'App')) {
     var target_div = div('Loading...');
 
     render(
-      breadcrumbs('My Solutions'),
+      breadcrumbs('Issue Branches'),
       target_div
     );
 
@@ -18,8 +18,6 @@ with (scope('PullRequest', 'App')) {
           return a({ 'class': 'green', href: '#solutions/'+solution.base.repository.full_name+'/issues/'+ solution.issue.number+'/submit' }, 'Submit Solution');
         }
       };
-
-      console.log(info);
 
       render({ into: target_div },
         table(
