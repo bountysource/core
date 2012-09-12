@@ -19,9 +19,10 @@ with (scope('Issue', 'App')) {
 
     render(
       breadcrumbs(
-        a({ href: '#repos/search/' + repository }, 'Projects'),
-        a({ href: '#repos/' + login + '/' + repository + '/issues' }, login + '/' + repository),
-        ('Issue #' + issue_number)
+        a({ href: '#' }, 'Home'),
+        a({ href: '#repos/' + login + '/' + repository }, login + '/' + repository),
+        a({ href: '#repos/' + login + '/' + repository + '/issues' }, 'Issues'),
+        '#' + issue_number
       ),
 
       target_div

@@ -1,11 +1,12 @@
 with (scope('Repository', 'App')) {
-  route('#repos/search', function(term) {
+  route('#repos/search', function() {
     var params = get_params();
     var target_div = div('Loading...');
 
     render(
       breadcrumbs(
-        a('Projects')
+        a({ href: '#' }, 'Home'),
+        'Search: ' + params.query
       ),
 
       target_div

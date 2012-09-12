@@ -5,7 +5,7 @@ with (scope('Repository', 'App')) {
 
     render(
       breadcrumbs(
-        a({ href: '#repos/search/'+repository }, 'Projects'),
+        a({ href: '#' }, 'Home'),
         (login + '/' + repository)
       ),
 
@@ -15,7 +15,7 @@ with (scope('Repository', 'App')) {
     BountySource.get_repository_overview(login, repository, function(response) {
       console.log(response);
       render({ into: target_div },
-        "got response"
+        h1('Project Page For: ', response.data.full_name, ' (COMING SOON)')
       );
     });
   });

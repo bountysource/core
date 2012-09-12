@@ -107,4 +107,8 @@ with (scope('BountySource')) {
   define('submit_solution', function(login, repository, issue_number, data, callback) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solution/submit', 'POST', data, callback);
   });
+  
+  define('get_repository_overview', function(login, repository, callback) {
+    api('/github/repos/'+login+'/'+repository+'/overview', callback);
+  });
 }
