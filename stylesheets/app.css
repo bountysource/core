@@ -1,6 +1,6 @@
 html, body { width: 100%; padding: 0; margin: 0; }
 body { font-size: 100%; }
-body, input, textarea, select, td, th { font: 14px "Helvetica Neue", Arial, sans-serif; color: #333; line-height: 18px; }
+body, input, textarea, select, td, th { font: 15px "StoneSans", "Helvetica Neue", Arial, sans-serif; color: #333; line-height: 18px; }
 img { border-style: none; }
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
