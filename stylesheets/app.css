@@ -57,7 +57,7 @@ section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #c
 section#homepage .box .inner { padding: 20px }
 
 section#homepage .bigbox { background: #f2f3f2; }
-section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 22px; color: #333; }
+section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 21px; color: #333; font-style: italic }
 section#homepage .bigbox .devbox, section#homepage .bigbox .backerbox { float: left; width: 320px; height: 100px; text-align: center; margin-top: 20px; }
 section#homepage .bigbox .devbox { border-right: 1px solid #dfdfdd; box-shadow: 1px 0px 1px #fcfcfb; margin-right: 10px; padding-right: 10px }
 
