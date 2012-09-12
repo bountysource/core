@@ -113,7 +113,7 @@ with (scope('Issue', 'App')) {
     get_solution(issue.number, function(solution) {
       if (solution) {
         render({ into: developer_div },
-          a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/solution' }, 'View my Solution')
+          a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/solution' }, 'View Issue Branch')
         );
       } else {
         var advanced_box = div({ id: 'advanced-developer-box', style: "margin: 10px 0; display: none"}, 
