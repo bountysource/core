@@ -31,8 +31,6 @@ with (scope('Issue', 'App')) {
               th('Comments'),
               th('State'),
               th('Updated')
-//              th('Developers Working on This'),
-
             ),
 
             (issues||[]).map(function(issue) {
