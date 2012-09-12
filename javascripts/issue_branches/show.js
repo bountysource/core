@@ -43,26 +43,28 @@ with (scope('PullRequest', 'App')) {
               ribbon_header('Progress'),
               br(),
 
-              shy_form_during_submit('Submitting Solution...'),
-              br(),
-
               shy_form({ action: curry(submit_solution, login, repository, issue_number) },
-                div({ id: 'errors' }),
-
                 solution.commits.length <= 0 ? [
                   span("No commits have been made to your branch.")
                 ] : [
-                  div(
-                    solution.commits.map(function(commit) {
-                      return div(
-                        img({ src: commit.user.avatar_url, style: 'width: 35px;' }), a({ target: '_blank', href: solution.head.repository.url+'/commit/'+commit.sha }, commit.sha.substr(0,7))
-                      );
-                    }),
-                    br(),
-                    advanced_box,
-                    submit({ 'class': 'green' }, 'Submit Solution'),
-                    div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
-                  )
+                  solution.pull_request ? [
+                    p('Your solution has been submitted.'),
+                    a({ 'class': 'blue', target: '_blank', href: solution.pull_request.issue.url }, 'View Submission')
+                  ] : [
+                    shy_form_during_submit('Submitting Solution...'),
+                    div(
+                      solution.commits.map(function(commit) {
+                        return div(
+                          img({ src: commit.user.avatar_url, style: 'width: 35px;' }), a({ target: '_blank', href: solution.head.repository.url+'/commit/'+commit.sha }, commit.sha.substr(0,7))
+                        );
+                      }),
+                      br(),
+                      div({ id: 'errors' }),
+                      advanced_box,
+                      submit({ 'class': 'green' }, 'Submit Solution'),
+                      div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
+                    )
+                  ]
                 ]
               )
             )

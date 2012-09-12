@@ -30,7 +30,14 @@ with (scope('IssueBranch', 'App')) {
               td(s.head.name),
               td(!!s.pull_request+''),
               td(!!(s.pull_request && s.pull_request.merged)+''),
-              td(div({ style: 'margin: 10px 0px;' }, a({ 'class': 'green', href: '#repos/'+s.base.repository.full_name+'/issues/'+ s.issue.number+'/issue_branch' }, 'View Issue Branch')))
+
+              td(
+                s.pull_request ? [
+                  div({ style: 'margin: 10px 0px;' }, a({ 'class': 'blue', target: '_blank', href: '#repos/'+s.base.repository.full_name+'/issues/'+ s.issue.number+'/issue_branch' }, 'View Submission'))
+                ] : [
+                  div({ style: 'margin: 10px 0px;' }, a({ 'class': 'green', href: '#repos/'+s.base.repository.full_name+'/issues/'+ s.issue.number+'/issue_branch' }, 'View Issue Branch'))
+                ]
+              )
             );
           })
         )
