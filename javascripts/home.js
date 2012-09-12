@@ -15,12 +15,12 @@ with (scope('Home', 'App')) {
 
               div({ 'class': 'devbox' },
                 h2('Developers:'),
-                p('Support the projects that have supported you.')
+                p('Earn money by contributing to open-source.')
               ),
 
               div({ 'class': 'backerbox' },
                 h2('Backers:'),
-                p('Improve the projects you already use for free.')
+                p('Support the projects that have supported you.')
               ),
 
               div({ style: 'clear: both '}),
