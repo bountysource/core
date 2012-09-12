@@ -80,7 +80,7 @@ with (scope('PullRequest', 'App')) {
 
     BountySource.submit_solution(login, repository, issue_number, { title: form_data.title, body: form_data.body + ' (Fixes Issue #'+issue_number+')' }, function(response) {
       if (response.meta.success) {
-        set_route('#issue_branches');
+        set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch');
       } else {
         show_shy_form();
         render({ into: 'errors' }, div({ style: 'padding: 20px;'}, response.data.error));
