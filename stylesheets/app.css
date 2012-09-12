@@ -165,11 +165,12 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   margin-bottom: 10px;
   border-bottom: 2px solid #e0ab45;
   font-size: 16px;
-  font-weight: bold;
   height: 20px;
+  color: #999;
+  text-transform: uppercase;
 }
 
-#breadcrumbs a { color: #333; }
+#breadcrumbs a { color: #999; }
 
 #breadcrumbs .arrow, #breadcrumbs .crumb {
   position: relative;
