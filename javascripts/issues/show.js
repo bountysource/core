@@ -1,5 +1,4 @@
 with (scope('Issue', 'App')) {
-
   // determine if a developer has started working on a solution for the issue.
   // callback param is a boolean. returns the solution if dev created one, false otherwise
   define('get_solution', function(issue_number, callback) {
@@ -152,9 +151,11 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_solution', function(login, repository, issue_number, form_data) {
+    if (!Login.required()) return;
+
     BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
       if (response.meta.success) {
-        set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
+        set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch');
       } else {
         show_shy_form();
         render({ into: 'errors' }, response.data.error);

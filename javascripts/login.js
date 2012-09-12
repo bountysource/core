@@ -1,4 +1,11 @@
 with (scope('Login', 'App')) {
+  define('required', function() {
+    if (Storage.get('access_token')) return true;
+    Storage.set('_redirect_to_after_login', get_route());
+    set_route('#login');
+    return false;
+  });
+
   route('#login', function() {
     if (Storage.get('access_token')) {
       set_route('#');
@@ -13,7 +20,7 @@ with (scope('Login', 'App')) {
         div({ style: 'width: 200px; margin: 0 auto' },
           img({ src: 'images/github.png' }),
           br(),
-          Github.link_requiring_auth({ href: '#', 'class': 'green' }, 'Login with GitHub')
+          Github.link_requiring_auth({ href: (Storage.get('_redirect_to_after_login') || '#'), 'class': 'green' }, 'Login with GitHub')
         )
       ),
       
@@ -36,7 +43,7 @@ with (scope('Login', 'App')) {
     BountySource.login(form_data.email, form_data.password, function(response) {
       if (response.meta.success) {
         Storage.set('access_token', response.data.access_token);
-        window.location.reload();
+        set_route(Storage.remove('_redirect_to_after_login') || '#', { reload_page: true });
       } else {
         alert('Login and password combination was not found.');
       }
