@@ -108,21 +108,26 @@ with (scope('Issue', 'App')) {
   
   define('developer_box', function(issue) {
     var developer_div = div();
-    
+
     get_solution(issue.number, function(solution) {
       if (solution) {
         render({ into: developer_div },
-          div({ style: 'margin-bottom: 10px;' },
-            a({ 'class': 'green', href: '#solutions/'+issue.repository.full_name+'/issues/'+issue.number+'/submit' }, 'Submit for Approval')
-          ),
-
-          div('Your Fork: ', a({ target: '_blank', href: solution.head.repository.url+'/tree/'+solution.head.name }, solution.head.repository.full_name)),
-          br(),
-          div('Base Repository: ', a({ target: '_blank', href: solution.base.repository.url }, solution.base.repository.full_name))
+          a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/solution' }, 'View my Solution')
         );
       } else {
         render({ into: developer_div },
-          Github.link_requiring_auth({ 'class': 'green', href: '#repos/'+issue.repository.full_name+'/issues/'+issue.number+'/fork' }, 'Start Working')
+          shy_form_during_submit(p({ style: 'text-align: center;' }, 'Creating Branch...')),
+
+          shy_form({ style: 'text-align: center;', action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
+            div({ id: 'errors', style: 'margin-bottom: 10px;' }),
+
+            b('Branch Name'),
+            search({ name: 'branch_name', value: 'issue'+issue.number }),
+
+            p('You must commit your solution to the branch created here to claim bounties.'),
+
+            submit({ 'class': 'green', style: 'margin-top: 10px;' }, 'Start Working')
+          )
         );
       }
     });
@@ -143,7 +148,17 @@ with (scope('Issue', 'App')) {
       issue.labels && issue.labels.length > 0 && div("Lables: ", ul(issue.labels))
     );
   });
-  
+
+  define('create_solution', function(login, repository, issue_number, form_data) {
+    BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
+      if (response.meta.success) {
+        set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
+      } else {
+        show_shy_form();
+        render({ into: 'errors' }, response.data.error);
+      }
+    });
+  });
 
   define('create_bounty', function(login, repository, issue, form_data) {
     BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, window.location.href, function(response) {

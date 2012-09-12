@@ -19,6 +19,8 @@ with (scope('PullRequest', 'App')) {
         }
       };
 
+      console.log(info);
+
       render({ into: target_div },
         table(
           tr(
@@ -47,31 +49,44 @@ with (scope('PullRequest', 'App')) {
     });
   });
 
-  route('#solutions/:login/:repository/issues/:issue_number/submit', function(login, repository, issue_number) {
-    render (
+  route('#repos/:login/:repository/issues/:issue_number/solution', function(login, repository, issue_number) {
+    var target_div = div('Loading...');
+
+    render(
       breadcrumbs(
         a({ href: '#repos/search/' + repository }, 'Projects'),
         a({ href: '#repos/' + login + '/' + repository + '/issues' }, login + '/' + repository),
         a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, 'Issue #' + issue_number),
-        ('Submit Solution for Approval')
+        ('Solution')
       ),
-
-      p('This will submit your solution by creating a pull request on the base repository, '+login+'/'+repository),
-
-      form({ action: curry(submit_solution, login, repository, issue_number) },
-        div({ id: 'errors'}),
-
-        div(
-          span('Title:'),
-          input({ name: 'title', value: 'Fixes Issue #'+issue_number })
-        ),
-        div(
-          span('Body:'),
-          textarea({ name: 'body', style: 'width: 400px; height: 150px;' })
-        ),
-        submit('Create Pull Request')
-      )
+      target_div
     );
+
+    Issue.get_solution(issue_number, function(solution) {
+      if (!solution) {
+        set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
+      } else {
+        render({ into: target_div },
+          div('Your Fork: ', a({ target: '_blank', href: solution.head.repository.url }, solution.head.repository.full_name)),
+          div('Base Repository: ', a({ target: '_blank', href: solution.base.repository.url }, solution.base.repository.full_name)),
+
+          p('Submit your solution as a pull request to the project committers on GitHub. You earn the bounty if your pull request is merged into the base repository, and the underlying issue is closed.'),
+
+          shy_form_during_submit('Submitting Solution...'),
+          shy_form({ action: curry(submit_solution, login, repository, issue_number) },
+            div({ id: 'errors' }),
+
+            b('Title'),
+            input({ name: 'title', value: 'Fixes Issue#'+issue_number }),
+            br(),
+            b('Body'),
+            textarea({ name: 'body' }),
+            br(),
+            submit('Submit Solution')
+          )
+        );
+      }
+    });
   });
 
   define('submit_solution', function(login, repository, issue_number, form_data) {
@@ -81,7 +96,8 @@ with (scope('PullRequest', 'App')) {
       if (response.meta.success) {
         set_route('#solutions');
       } else {
-        render({ into: 'errors' }, div({ style: 'padding: 20px;'}, response.data.error))
+        show_shy_form();
+        render({ into: 'errors' }, div({ style: 'padding: 20px;'}, response.data.error));
       }
     });
   });

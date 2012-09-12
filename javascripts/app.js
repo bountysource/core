@@ -1,5 +1,4 @@
 with (scope('App')) {
-
   route('#', function() {
     render(
       h2('Developers'),
@@ -35,11 +34,16 @@ with (scope('App')) {
   define('shy_form', function() {
     var the_form = form(arguments),
         wrapper = div({ id: 'shy-form-wrapper' }, the_form);
-    the_form.onsubmit = function(e) { wrapper.style.display = 'none' };
+    the_form.onsubmit = function(e) { wrapper.style.display = 'none'; document.getElementById('shy-form-waiting').style.display = ''; };
     return wrapper;
+  });
+
+  define('shy_form_during_submit', function() {
+    return div({ id: 'shy-form-waiting', style: 'display: none' }, div(arguments));
   });
 
   define('show_shy_form', function() {
     document.getElementById('shy-form-wrapper').style.display = '';
+    document.getElementById('shy-form-waiting').style.display = 'none';
   });
 };
