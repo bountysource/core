@@ -72,12 +72,9 @@ section#homepage .h1-line div { position: absolute;
   border-bottom: 5px solid #f87956;
 }
 
-section#homepage .stats { background: #f2f3f2; }
-section#homepage .stats h2 { margin: 0; text-align: right; font-size: 40px; line-height: 40px; font-weight: normal; color: #5b6163 }
-section#homepage .stats h3 { margin: 0; text-align: right; font-size: 13px; line-height: 13px; font-weight: normal; color: #54595c; margin-top: 5px; margin-bottom: 20px; padding-bottom: 10px; }
-section#homepage .blue-line { border-bottom: 1px solid #7dc7ea;  }
-section#homepage .orange-line { border-bottom: 1px solid #f87956; }
-section#homepage .green-line { border-bottom: 1px solid #85c135; }
+.stats { background: #f2f3f2; }
+.stats h2 { margin: 0; text-align: right; font-size: 40px; line-height: 40px; font-weight: normal; color: #5b6163 }
+.stats h3 { margin: 0; text-align: right; font-size: 13px; line-height: 13px; font-weight: normal; color: #54595c; margin-top: 5px; margin-bottom: 20px; padding-bottom: 10px; }
 
 
 section#homepage .begin-box { border-top: 1px solid #fcfcfb; box-shadow: 0 -1px 1px #dfdfdd; margin-top: 15px; padding-top: 30px }
@@ -234,3 +231,20 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 }   
 
 
+
+
+.issue-table h2 { font-weight: normal; margin-bottom: 0; padding-bottom: 7px; color: #5e5f5f; font-size: 22px; margin-top: 24px; }
+.issue-table tr { border-left: 1px solid #ccc; border-right: 1px solid #ccc; }
+.issue-table td { border-bottom: 1px solid #ccc; padding: 5px 2px }
+
+
+
+
+.blue-line { border-bottom: 1px solid #7dc7ea;  }
+.orange-line { border-bottom: 1px solid #f87956; }
+.green-line { border-bottom: 1px solid #85c135; }
+
+.thick-line-blue { border-bottom: 3px solid #32ace5; }
+.thick-line-red { border-bottom: 3px solid #f87956; }
+.thick-line-orange { border-bottom: 3px solid #f8b556; }
+.thick-line-green { border-bottom: 3px solid #83d11a; }
