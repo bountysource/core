@@ -1,5 +1,6 @@
 with (scope('Repository', 'App')) {
-  route('#repos/search/:term', function(term) {
+  route('#repos/search', function(term) {
+    var params = get_params();
     var target_div = div('Loading...');
 
     render(
@@ -10,7 +11,7 @@ with (scope('Repository', 'App')) {
       target_div
     );
 
-    BountySource.search_repositories(term, function(response) {
+    BountySource.search_repositories(params.query, function(response) {
       var repositories = response.data||[];
 
       render({ into: target_div },

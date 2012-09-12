@@ -48,7 +48,7 @@ with (scope('BountySource')) {
   });
 
   define('search_repositories', function(term, callback) {
-    api('/github/repos/search/' + term, callback);
+    api('/github/repos/search', 'GET', { query: term }, callback);
   });
 
   define('search_issues', function(login, repository, term, callback) {

@@ -9,8 +9,8 @@ with (scope('App')) {
       ul(
         li(
           "Search: ",
-          form({ action: function(form_data) { set_route('#repos/search/'+form_data.term) } },
-            search({ name: 'term', placeholder: 'Project Name' }),
+          form({ action: function(form_data) { set_route('#repos/search?query='+escape(form_data.query)) } },
+            search({ name: 'query', placeholder: 'Project Name' }),
             submit()
           )
         )
