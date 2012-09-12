@@ -53,10 +53,9 @@ with (scope('PullRequest', 'App')) {
                   span("No commits have been made to your branch.")
                 ] : [
                   div(
-                    h3('Commits'),
                     solution.commits.map(function(commit) {
                       return div(
-                        img({ src: commit.user.avatar_url, style: 'width: 35px;' }), commit.sha.substr(0,8)
+                        img({ src: commit.user.avatar_url, style: 'width: 35px;' }), a({ target: '_blank', href: solution.head.repository.url+'/commit/'+commit.sha }, commit.sha.substr(0,7))
                       );
                     }),
                     br(),
