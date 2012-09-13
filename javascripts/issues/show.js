@@ -29,49 +29,61 @@ with (scope('Issue', 'App')) {
 
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
+      console.log(response)
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
 
-          h1({ style: 'font-size: 26px; line-height: 30px' }, issue.title),
-          div({ html: issue.body }),
-
-          issue.comments.length > 0 && div(
-            h2('Comments'),
-            issue.comments.map(function(comment) {
-              return div({ style: 'border: 1px solid #888; padding: 5px; margin-bottom: 20px' }, 
-                img({ src: comment.user.avatar_url, style: 'float: left; width:80px; height:80px' }), 
-                b(comment.user.login), ' on ', comment.created_at,
-                div({ html: comment.body_html }),
-                div({ style: 'clear: left' })
-              );
-            })
+          h1({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 
+            '#' + issue.number + ': ' + issue.title,
+            span({ style: 'font-size: 16px; padding-left: 20px' },
+              issue.state == 'open' ? span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Open') : span({ style: 'background: #D11A1A; border-radius: 4px; padding: 4px; color: white' }, 'Closed')
+            )
           ),
           
-          issue.events.length > 0 && div(
-            h2('Events'),
-            issue.events.map(function(event) {
-              return div({ style: 'border: 1px solid #888; padding: 5px; margin-bottom: 20px' }, 
-                img({ src: event.actor.avatar_url, style: 'float: left; width:80px; height:80px' }), 
-                b(event.actor.login), ' on ', event.created_at,
-                div(event.event),
-                div(event.commit_id),
-                div({ style: 'clear: left' })
-              );
-            })
+          github_user_html_box({ user: { login: issue.owner }, body_html: issue.body, created_at: issue.remote_created_at }),
+
+          issue.comments.length > 0 && div(
+            h2({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 'Comments'),
+            issue.comments.map(github_user_html_box)
           )
+          
+          // issue.events.length > 0 && div(
+          //   h2('Events'),
+          //   issue.events.map(function(event) {
+          //     return div({ style: 'border: 1px solid #888; padding: 5px; margin-bottom: 20px' }, 
+          //       img({ src: event.actor.avatar_url, style: 'float: left; width:80px; height:80px' }), 
+          //       b(event.actor.login), ' on ', event.created_at,
+          //       div(event.event),
+          //       div(event.commit_id),
+          //       div({ style: 'clear: left' })
+          //     );
+          //   })
+          // )
           
         ),
 
         div({ 'class': 'split-side' },
           bounty_box(issue),
-          developer_box(issue),
-          misc_box(issue)
+          developer_box(issue)
+          //misc_box(issue)
         ),
 
         div({ 'class': 'split-end' })
       );
     });
+  });
+  
+  define('github_user_html_box', function(options) {
+    return div({ style: 'margin-bottom: -1px' },
+      img({ src: options.user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 50px; height: 50px; float: left' }),
+
+      div({ 'class': 'github_html', style: 'margin-left: 70px; background: #f7f7f7; border-top: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; overflow: auto; padding: 10px;' },
+        div({ style: 'color: #b4b4b4; margin-bottom: 6px' }, options.user.login, ' commented ', time_ago_in_words(options.created_at), ' ago:'),
+      
+        div({ html: options.body_html })
+      )
+    );
   });
   
   define('bounty_box', function(issue) {
@@ -133,7 +145,7 @@ with (scope('Issue', 'App')) {
       }
     });
     
-    return div({ style: 'background: #dff7cb; padding: 0 21px 21px 21px; margin: 20px 15px' },
+    return div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px' },
       ribbon_header("Developers"),
       br(),
       developer_div
@@ -143,7 +155,6 @@ with (scope('Issue', 'App')) {
   define('misc_box', function(issue) {
     return div({ style: 'background: #e8f6f5; margin: 20px 15px'}, 
       h3('Fields'),
-      div("State: ", issue.state),
       div("Owner: ", issue.owner),
       div("Has code: ", issue.code ? 'Yes' : 'No'),
       issue.labels && issue.labels.length > 0 && div("Lables: ", ul(issue.labels))

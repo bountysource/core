@@ -6,7 +6,7 @@
 }
 
 .ribbon-front {
-  background-color: #f87956;	height: 40px;
+  background-color: #f5896d;	height: 40px;
   position: relative;
   left: 0;
   z-index: 2;
@@ -14,7 +14,6 @@
   font-size: 22px;
   line-height: 40px;
   text-align: center;
-  font-weight: bold;
 }
 
 .ribbon-front

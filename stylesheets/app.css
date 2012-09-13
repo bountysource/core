@@ -111,8 +111,6 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 
 #bounty-box {
   background: #f1f1f1;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
   margin: 0 15px;
 }
 
@@ -247,3 +245,7 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 .thick-line-green { border-bottom: 3px solid #83d11a; }
 
 .code { background: #F0F0F0; border: 1px solid #CFCFCF; padding: 10px 20px; border-radius: 2px; font-size: 12px; }
+
+
+
+.github_html p { margin: 0 0 10px 0; }
