@@ -103,7 +103,10 @@ with (scope('Issue', 'App')) {
       ),
 
       section({ style: 'padding: 21px' },
-        form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
+        shy_form_during_submit('Please wait...'),
+        shy_form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
+          div({ id: 'errors' }),
+
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
             text({ placeholder: "25.00", name: 'amount', id: 'amount-input' })
@@ -175,8 +178,13 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_bounty', function(login, repository, issue, form_data) {
-    BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, window.location.href, function(response) {
-      window.location.href = response.data.redirect_url;
+    return BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, window.location.href, function(response) {
+      if (response.meta.success) {
+        window.location.href = response.data.redirect_url;
+      } else {
+        show_shy_form();
+        render({ target: 'errors' }, div(response.data.error.join(', '), br()));
+      }
     });
   });
 };
