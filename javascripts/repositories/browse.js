@@ -40,7 +40,9 @@ with (scope('Repository', 'App')) {
             issue_table({ header_class: 'thick-line-green' }, 'Bounties Expiring Soon', data.issues.expiring_soon),
             issue_table({ header_class: 'thick-line-blue' }, 'Largest Bounties', data.issues.largest_total_bounty)
           )
-        )
+        ),
+        
+        div({ style: 'clear: both' })
       );
     });
   });
