@@ -19,7 +19,7 @@ with (scope('Repository', 'App')) {
           section(
             img({ src: repo.owner.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, repo.owner.login),
-            repo.owner != repo.name && h2({ style: 'margin: 0 0 10px 0' }, repo.name),
+            repo.owner.login != repo.name && h2({ style: 'margin: 0 0 10px 0' }, repo.name),
             repo.description && span(repo.description),
             div({ style: 'clear: both' })
           ),
