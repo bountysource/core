@@ -5,7 +5,7 @@ with (scope('App')) {
     set_route(Storage.remove('_redirect_to_after_login') || '#');
   });
 
-  define('featured_project_ul', function(title, projects) {
+  define('featured_issues_ul', function(title, projects) {
     return div({ 'class': 'featured-project' },
       h3(title),
       ul(projects.map(function(p) {

@@ -22,12 +22,12 @@ with (scope('Bounty', 'App')) {
         div({ 'class': 'has-sidebar' },
           h2('Available Bounties'),
           div({ style: 'display: block' },
-            featured_project_ul('Featured', data.projects.featured),
-            featured_project_ul('Popular', data.projects.popular),
-            featured_project_ul('Most Worked On', data.projects.most_worked_on),
-            featured_project_ul('Newest', data.projects.newest),
-            featured_project_ul('Expiring Soon', data.projects.expiring_soon),
-            featured_project_ul('Largest Bounty', data.projects.largest_total_bounty)
+            featured_issues_ul('Featured', data.issues.featured),
+            featured_issues_ul('Popular', data.issues.popular),
+            featured_issues_ul('Most Worked On', data.issues.most_worked_on),
+            featured_issues_ul('Newest', data.issues.newest),
+            featured_issues_ul('Expiring Soon', data.issues.expiring_soon),
+            featured_issues_ul('Largest Bounty', data.issues.largest_total_bounty)
           )
         )
       );
