@@ -1,6 +1,6 @@
 with (scope('BountySource')) {
 
-  define('api_host', 'https://www.bountysource.com/');
+  define('api_host', 'https://api.bountysource.com/');
 
   // parse arguments: url, [http_method], [params], [callback]
   define('api', function() {
