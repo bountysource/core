@@ -17,7 +17,7 @@ with (scope('PullRequest', 'App')) {
       var commits_div = div('Loading...'),
           submit_div = div();
 
-      render({ into: target_div },
+      solution && render({ into: target_div },
         div({ 'class': 'split-main' },
           commits_div
         ),
