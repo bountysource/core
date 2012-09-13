@@ -46,7 +46,7 @@ with (scope('Faq', 'App')) {
           dt("What happens if an issue is never closed?"),
           dd("Every bounty has a 6 month time limit. If you created a bounty on an issue and that is not closed within 60 days, you will be refunded."),
         
-          dt("Can I dispute a bounty?"),
+          dt("Can I dispute a bounty that has been collected?"),
           dd("If you were either a backer for the issue or a developer working on the issue, yes."),
           dd("If you are unsatisfied with the solution to the issue you created a bounty on, you can file a dispute with us within 2 weeks of the code being merged. You can file a dispute by emailing us at ", a({ href: 'mailto:support@bountysource.com'}, "support@bountysource.com"), ".")
         )
