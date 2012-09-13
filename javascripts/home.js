@@ -4,6 +4,9 @@ with (scope('Home', 'App')) {
     // render nothing, then hide the content for now... we're using before-content!!
     render('');
     hide('content');
+
+    var default_avatar_url = 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png';
+
     BountySource.overview(function(response) {
       var data = (response.data||{});
       render({ into: 'before-content' },
@@ -62,37 +65,35 @@ with (scope('Home', 'App')) {
                 div({ style: 'text-align: center' }, img({ src: 'images/icon-info.png' })),
                 h2('Staff Picks'),
                 ul(
-                  li(img({ src: 'https://c10078377.ssl.cf2.rackcdn.com/bc869afa522e2f02c5a3346a9cdfb1b1.png', style: 'width: 32px; height: 32px' }), data.projects.featured[0].full_name),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[1].full_name),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[2].full_name),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[3].full_name),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[4].full_name),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[5].full_name)
+                  data.projects.featured.map(function(repo) {
+                    return li(img({ src: repo.user.avatar_url || default_avatar_url,
+                                    style: 'width: 32px; height: 32px' }), repo.full_name)
+                  })
                 )
               ),
               section({ style: 'width: 200px'},
                 div({ style: 'text-align: center' }, img({ src: 'images/icon-check.png' })),
                 h2('Top Backers'),
                 ul(
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Bob'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Pat'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Sue')
+                  data.backers.most_issues_backed.map(function(backer) {
+                    return li(img({ src: backer.avatar_url || default_avatar_url,
+                      style: 'width: 32px; height: 32px' }), backer.display_name)
+                  })
                 )
               ),
               section({ style: 'width: 200px; margin-right: 0'},
                 div({ style: 'text-align: center' }, img({ src: 'images/icon-info.png' })),
                 h2('Top Developers'),
                 ul(
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Bob'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Pat'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Sue')
+                  data.developers.most_submitted_solutions.map(function(developer) {
+                    return li(img({ src: developer.avatar_url || default_avatar_url,
+                      style: 'width: 32px; height: 32px' }), developer.github_login)
+                  })
                 )
               ),
               div({ style: 'clear: both' })
-
             )
           )
-
         )
       );
     })
