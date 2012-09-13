@@ -2,11 +2,16 @@ with (scope('Repository', 'App')) {
   route('#bounties', function() {
     var target_div = div('Loading...');
 
-    render(target_div);
+    render(
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        ('All Projects')
+      ),
+
+      target_div
+    );
 
     BountySource.overview(function(response) {
-      console.log(response)
-      
       var data = (response.data||{});
 
       render({ into: target_div },
