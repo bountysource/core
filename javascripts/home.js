@@ -67,7 +67,8 @@ with (scope('Home', 'App')) {
                 ul(
                   data.projects.featured.map(function(repo) {
                     return li(img({ src: (repo.user && repo.user.avatar_url) || default_avatar_url,
-                                    style: 'width: 32px; height: 32px' }), repo.display_name)
+                                    style: 'width: 32px; height: 32px' }),
+                      a({ href: '#repos/' + repo.full_name, style: 'color: #222' }, repo.display_name))
                   })
                 )
               ),
