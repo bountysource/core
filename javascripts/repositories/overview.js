@@ -26,7 +26,7 @@ with (scope('Repository', 'App')) {
         
           issue_table({ header_class: 'thick-line-green' }, "Featured", repo.issues_featured, repo),
           issue_table({ header_class: 'thick-line-blue' }, "Popular", repo.issues_popular, repo),
-          issue_table({ header_class: 'thick-line-orange' }, "Most Worked on", repo.issues_most_developers, repo),
+          issue_table({ header_class: 'thick-line-orange' }, "Most Recent", repo.issues_most_recent, repo),
           
           div({ style: 'margin-top: 20px; width: 150px' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/issues'}, 'View All Issues'))
         ),
@@ -42,21 +42,21 @@ with (scope('Repository', 'App')) {
             h3({ 'class': 'blue-line' }, 'Open Contests'),
 
             h2('$'+parseInt(repo.bounties_total)),
-            h3({ 'class': 'orange-line' }, 'Active Bounties'),
+            h3({ 'class': 'orange-line' }, 'Active Bounties')
 
-            h2('$999'),
-            h3({ 'class': 'green-line' }, 'Payout Last Month')
-          ),
-          
-          repo.committers && div({ style: 'background: #dff7cb; padding: 10px; margin-top: 20px' },
-            h2({ style: 'color: #93a385; text-align: center; font-size: 18px; font-weight: normal; margin: 0 0 10px 0' }, "Committers"),
-            ul({ style: 'margin: 0; padding: 0' }, repo.committers.map(function(commiter) { 
-              return li({ style: 'margin: 0 0 5px 0; padding: 0; list-style: none' },
-                img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px; vertical-align: middle; margin-right: 10px' }), 
-                commiter
-              );
-            }))
+//            h2('$999'),
+//            h3({ 'class': 'green-line' }, 'Payout Last Month')
           )
+          
+//          repo.committers && div({ style: 'background: #dff7cb; padding: 10px; margin-top: 20px' },
+//            h2({ style: 'color: #93a385; text-align: center; font-size: 18px; font-weight: normal; margin: 0 0 10px 0' }, "Committers"),
+//            ul({ style: 'margin: 0; padding: 0' }, repo.committers.map(function(commiter) {
+//              return li({ style: 'margin: 0 0 5px 0; padding: 0; list-style: none' },
+//                img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px; vertical-align: middle; margin-right: 10px' }),
+//                commiter
+//              );
+//            }))
+//          )
         ),
         div({ style: 'clear: both' })
       );
