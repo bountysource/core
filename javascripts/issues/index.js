@@ -22,29 +22,31 @@ with (scope('Issue', 'App')) {
         var issues = response.data||[];
 
         render({ into: target_div },
-          table(
-            tr(
-              th('ID'),
-              th('Title'),
-              th('Bounties'),
-              th('Code'),
-              th('Comments'),
-              th('State'),
-              th('Updated')
-            ),
-
-            (issues||[]).map(function(issue) {
-              return tr(
-                td(issue.number),
-                td(a({ href: '#repos/'+login+'/'+repository+'/issues/'+issue.number }, issue.title)),
-                td(money(issue.account_balance)),
-                td(issue.code ? '✔' : ''),
-                td(issue.comments),
-                td(issue.state),
-                td({ style: 'white-space:nowrap' }, (issue.updated_at||"").substr(0,10))
-              )
-            })
-          )
+          Repository.issue_table({ header_class: 'thick-line-green' }, 'All Issues', issues)
+          // 
+          // table(
+          //   tr(
+          //     th('ID'),
+          //     th('Title'),
+          //     th('Bounties'),
+          //     th('Code'),
+          //     th('Comments'),
+          //     th('State'),
+          //     th('Updated')
+          //   ),
+          // 
+          //   (issues||[]).map(function(issue) {
+          //     return tr(
+          //       td(issue.number),
+          //       td(a({ href: '#repos/'+login+'/'+repository+'/issues/'+issue.number }, issue.title)),
+          //       td(money(issue.account_balance)),
+          //       td(issue.code ? '✔' : ''),
+          //       td(issue.comments),
+          //       td(issue.state),
+          //       td({ style: 'white-space:nowrap' }, (issue.updated_at||"").substr(0,10))
+          //     )
+          //   })
+          // )
         );
       }
     });
