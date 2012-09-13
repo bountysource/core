@@ -113,7 +113,7 @@ with (scope('Issue', 'App')) {
           ),
           div({ 'class': 'payment-method' },
             div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked', id: 'payment_method_paypal' }), label({ 'for': 'payment_method_paypal' }, img({ src: 'images/paypal.png'}), "PayPal")),
-            div(radio({ name: 'payment_method', value: 'google', id: 'payment_method_google' }), label({ 'for': 'payment_method_google' }, img({ src: 'images/google-wallet.png'}), "Google Wallet"))
+            div(radio({ disabled: true, name: 'payment_method', value: 'google', id: 'payment_method_google' }), label({ style: 'color: #C2C2C2;', 'for': 'payment_method_google' }, img({ src: 'images/google-wallet.png'}), "Google Wallet"))
           ),
           submit({ 'class': 'blue' }, 'Create Bounty')
         )
