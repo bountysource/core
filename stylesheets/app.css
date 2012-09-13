@@ -102,9 +102,6 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 .split-side { float: left; width: 240px }
 .split-end { clear: left }
 
-.sidebar { float: right; width: 240px; }
-.has-sidebar { margin-right: 260px; }
-
 .featured-project { width: 345px; display: inline-block; }
 
 

@@ -5,15 +5,6 @@ with (scope('App')) {
     set_route(Storage.remove('_redirect_to_after_login') || '#');
   });
 
-  define('featured_issues_ul', function(title, projects) {
-    return div({ 'class': 'featured-project' },
-      h3(title),
-      ul(projects.map(function(p) {
-        return li(a({ href: '#repos/'+p.repository_full_name+'/issues/' + p.number }, p.title))
-      }))
-    );
-  });
-
   define('shy_form', function() {
     var the_form = form(arguments),
         wrapper = div({ id: 'shy-form-wrapper' }, the_form);
