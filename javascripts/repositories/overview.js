@@ -13,11 +13,13 @@ with (scope('Repository', 'App')) {
     );
 
     BountySource.get_repository_overview(login, repository, function(response) {
+      if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
+
       var repo = response.data;
       render({ into: target_div },
         div({ style: 'float: left; width: 735px; margin-right: 30px' },
           section(
-            img({ src: repo.owner.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
+            img({ src: repo.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, repo.owner.login),
             repo.owner.login != repo.name && h2({ style: 'margin: 0 0 10px 0' }, repo.name),
             repo.description && span(repo.description),
