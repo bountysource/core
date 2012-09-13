@@ -66,7 +66,7 @@ with (scope('Home', 'App')) {
                 h2('Staff Picks'),
                 ul(
                   data.projects.featured.map(function(repo) {
-                    return li(img({ src: repo.user.avatar_url || default_avatar_url,
+                    return li(img({ src: (repo.user && repo.user.avatar_url) || default_avatar_url,
                                     style: 'width: 32px; height: 32px' }), repo.full_name)
                   })
                 )
