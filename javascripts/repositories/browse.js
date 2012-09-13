@@ -33,12 +33,12 @@ with (scope('Repository', 'App')) {
         div({ style: 'margin-right: 190px;' },
           div(
             //featured_projects_table({ header_class: 'thick-line-red' }, 'Featured Projects', data.projects.featured),
+            issue_table({ header_class: 'thick-line-blue' }, 'Largest Bounties', data.issues.largest_total_bounty),
             issue_table({ header_class: 'thick-line-green' }, 'Featured Issues', data.issues.featured),
             issue_table({ header_class: 'thick-line-blue' }, 'Popular Issues', data.issues.popular),
-            issue_table({ header_class: 'thick-line-red' }, 'Most Worked On Issues', data.issues.most_worked_on),
+            //issue_table({ header_class: 'thick-line-red' }, 'Most Worked On Issues', data.issues.most_worked_on),
             issue_table({ header_class: 'thick-line-orange' }, 'Newest Issues', data.issues.newest),
-            issue_table({ header_class: 'thick-line-green' }, 'Bounties Expiring Soon', data.issues.expiring_soon),
-            issue_table({ header_class: 'thick-line-blue' }, 'Largest Bounties', data.issues.largest_total_bounty)
+            issue_table({ header_class: 'thick-line-green' }, 'Bounties Expiring Soon', data.issues.expiring_soon)
           )
         ),
         
