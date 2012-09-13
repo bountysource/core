@@ -14,20 +14,19 @@ with (scope('Repository', 'App')) {
 
     BountySource.get_repository_overview(login, repository, function(response) {
       var repo = response.data;
-      console.log(repo);
       render({ into: target_div },
         div({ style: 'float: left; width: 735px; margin-right: 30px' },
           section(
             img({ src: repo.owner.avatar_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, repo.owner.login),
             repo.owner != repo.name && h2({ style: 'margin: 0 0 10px 0' }, repo.name),
-            repo.description || "This is an awesome text editor",
+            repo.description && span(repo.description),
             div({ style: 'clear: both' })
           ),
         
-          issue_table({ header_class: 'thick-line-green' }, "Featured", repo.issues_featured),
-          issue_table({ header_class: 'thick-line-blue' }, "Popular", repo.issues_popular),
-          issue_table({ header_class: 'thick-line-orange' }, "Most Worked on", repo.issues_most_developers),
+          issue_table({ header_class: 'thick-line-green' }, "Featured", repo.issues_featured, repo),
+          issue_table({ header_class: 'thick-line-blue' }, "Popular", repo.issues_popular, repo),
+          issue_table({ header_class: 'thick-line-orange' }, "Most Worked on", repo.issues_most_developers, repo),
           
           div({ style: 'margin-top: 20px; width: 150px' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/issues'}, 'View All Issues'))
         ),
@@ -64,19 +63,18 @@ with (scope('Repository', 'App')) {
     });
   });
   
-  define('issue_table', function(options, title, issues) {
+  define('issue_table', function(options, title, issues, repo) {
     if (!issues || issues.length == 0) return;
-    
     return section({ 'class': 'issue-table' },
       h2({ 'class': options.header_class }, title),
       table(
         issues.map(function(issue) {
           return tr(
-            td({ style: 'padding-right: 10px' }, a({ href: '#repos/'+issue.repository_full_name+'/issues/'+issue.number, style: 'color: #93979a' }, '#' + issue.number)),
-            td({ style: 'width: 100%' }, a({ href: '#repos/'+issue.repository_full_name+'/issues/'+issue.number }, issue.title)),
+            td({ style: 'padding-right: 10px' }, a({ href: '#repos/'+repo.full_name+'/issues/'+issue.number, style: 'color: #93979a' }, '#' + issue.number)),
+            td({ style: 'width: 100%' }, a({ href: '#repos/'+repo.full_name+'/issues/'+issue.number }, issue.title)),
             td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developer.png' })]),
             td({ style: 'text-align: right; color: #d8a135; white-space: nowrap' }, issue.comments > 0 && [issue.comments, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-comments.png' })]),
-            td({ style: 'text-align: right; white-space' }, issue.bounties > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(issue.bounties)))
+            td({ style: 'text-align: right; white-space' }, repo.bounties_total > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(repo.bounties_total)))
           );
         })
       )
