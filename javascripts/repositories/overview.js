@@ -38,10 +38,10 @@ with (scope('Repository', 'App')) {
             h2(repo.forks),
             h3({ 'class': 'blue-line' }, 'Forks'),
 
-            h2(''+repo.bounties.length),
+            h2(repo.bounties.length),
             h3({ 'class': 'blue-line' }, 'Open Contests'),
 
-            h2('$'+parseInt(repo.bounties_total)),
+            h2(money(repo.bounties_total)),
             h3({ 'class': 'orange-line' }, 'Active Bounties')
 
 //            h2('$999'),

@@ -50,10 +50,10 @@ with (scope('Home', 'App')) {
               h2(data.total_active_issues),
               h3({ 'class': 'blue-line' }, 'Open Contest' + (data.total_active_issues == 1 ? '' : 's')),
 
-              h2('$' + data.total_unclaimed),
+              h2(money(data.total_unclaimed)),
               h3({ 'class': 'orange-line' }, 'Active Bounties'),
 
-              h2('$' + data.total_paid_last_month),
+              h2(money(data.total_paid_last_month)),
               h3({ 'class': 'green-line' }, 'Payout Last Month')
             )
           ),
