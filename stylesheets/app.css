@@ -245,3 +245,5 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 .thick-line-red { border-bottom: 3px solid #f87956; }
 .thick-line-orange { border-bottom: 3px solid #f8b556; }
 .thick-line-green { border-bottom: 3px solid #83d11a; }
+
+.code { background: #F0F0F0; border: 1px solid #CFCFCF; padding: 10px 20px; border-radius: 2px; font-size: 12px; }

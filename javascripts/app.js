@@ -5,6 +5,10 @@ with (scope('App')) {
     set_route(Storage.remove('_redirect_to_after_login') || '#');
   });
 
+  define('code', function() {
+    return pre({ 'class': 'code' }, arguments);
+  });
+
   define('shy_form', function() {
     var the_form = form(arguments),
         wrapper = div({ id: 'shy-form-wrapper' }, the_form);
