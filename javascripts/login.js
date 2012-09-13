@@ -15,8 +15,8 @@ with (scope('Login', 'App')) {
     render(
       breadcrumbs('Account', 'Login'),
       
-      div({ style: 'width: 400px; background: #eee; border: 1px solid #ccc; float: left; margin-right: 20px; padding: 20px' },
-        h2('Have a GitHub Account?'),
+      div({ style: 'width: 415px; height: 320px; background: #eee; border: 1px solid #ccc; float: left; margin-right: 20px; padding: 20px' },
+        h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Have a GitHub Account?'),
         div({ style: 'width: 200px; margin: 0 auto' },
           img({ src: 'images/github.png' }),
           br(),
@@ -24,14 +24,16 @@ with (scope('Login', 'App')) {
         )
       ),
       
-      div({ style: 'width: 400px; background: #eee; border: 1px solid #ccc; float: left; padding: 20px' },
-        h2('Have a BountySource password?'),
-        form({ action: login }, 
-          text({ name: 'email', placeholder: 'john.doe@gmail.com' }),
-          br(),
-          password({ name: 'password', placeholder: 'abc123'}),
-          br(),
-          div({ style: 'width: 200px; margin: 0 auto' }, submit({ 'class': 'green' }, 'Login'))
+      div({ style: 'width: 415px; height: 320px; background: #eee; border: 1px solid #ccc; float: left; padding: 20px' },
+        h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Have a BountySource Account?'),
+        form({ action: login, style: 'width: 200px; margin: 40px auto 0' }, 
+          
+          div({ style: 'color: #999' }, "EMAIL:"),
+          div({ style: 'margin-bottom: 15px' }, text({ style: 'width: 180px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px', name: 'email', placeholder: 'john.doe@gmail.com' })),
+
+          div({ style: 'color: #999' }, "PASSWORD:"),
+          div({ style: 'margin-bottom: 15px' }, password({ style: 'width: 180px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px', name: 'password', placeholder: 'abc123'})),
+          div({ style: 'margin-top: 39px' }, submit({ 'class': 'green' }, 'Login'))
         )
       ),
       
