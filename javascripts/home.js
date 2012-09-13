@@ -62,12 +62,12 @@ with (scope('Home', 'App')) {
                 div({ style: 'text-align: center' }, img({ src: 'images/icon-info.png' })),
                 h2('Staff Picks'),
                 ul(
-                  li(img({ src: 'https://c10078377.ssl.cf2.rackcdn.com/bc869afa522e2f02c5a3346a9cdfb1b1.png', style: 'width: 32px; height: 32px' }), 'Badger'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'BountySource'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'TextMate'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Rails'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'Node.js'),
-                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), 'EventMachine')
+                  li(img({ src: 'https://c10078377.ssl.cf2.rackcdn.com/bc869afa522e2f02c5a3346a9cdfb1b1.png', style: 'width: 32px; height: 32px' }), data.projects.featured[0].full_name),
+                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[1].full_name),
+                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[2].full_name),
+                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[3].full_name),
+                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[4].full_name),
+                  li(img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px' }), data.projects.featured[5].full_name)
                 )
               ),
               section({ style: 'width: 200px'},
