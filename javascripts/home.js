@@ -75,7 +75,7 @@ with (scope('Home', 'App')) {
                 div({ style: 'text-align: center' }, img({ src: 'images/icon-check.png' })),
                 h2('Top Backers'),
                 ul(
-                  data.backers.most_issues_backed.map(function(backer) {
+                  data.backers.most_total_bounties.map(function(backer) {
                     return li(img({ src: backer.avatar_url || default_avatar_url,
                       style: 'width: 32px; height: 32px' }), backer.display_name)
                   })
@@ -85,6 +85,7 @@ with (scope('Home', 'App')) {
                 div({ style: 'text-align: center' }, img({ src: 'images/icon-info.png' })),
                 h2('Top Developers'),
                 ul(
+                  // most_submitted_solutions is dummy data. most_pull_requests isn't but doesn't have data
                   data.developers.most_submitted_solutions.map(function(developer) {
                     return li(img({ src: developer.avatar_url || default_avatar_url,
                       style: 'width: 32px; height: 32px' }), developer.github_login)
