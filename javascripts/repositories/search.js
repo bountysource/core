@@ -33,7 +33,7 @@ with (scope('Repository', 'App')) {
               td(repo.followers),
               td(repo.forks),
               td({ style: 'white-space:nowrap' }, (repo.pushed_at||"").substr(0,10)),
-              td({ style: 'color: #888' }, repo.description)
+              td({ style: 'color: #888' }, p({ style: 'width: 250px;' }, repo.description))
             );
           })
         )
