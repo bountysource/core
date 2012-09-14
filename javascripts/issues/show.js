@@ -106,7 +106,7 @@ with (scope('Issue', 'App')) {
 
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
-            text({ placeholder: "25.00", name: 'amount', id: 'amount-input' })
+            text({ placeholder: "25", name: 'amount', id: 'amount-input' })
           ),
           div({ 'class': 'payment-method' },
             div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked', id: 'payment_method_paypal' }), label({ 'for': 'payment_method_paypal' }, img({ src: 'images/paypal.png'}), "PayPal")),
