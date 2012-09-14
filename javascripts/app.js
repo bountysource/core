@@ -9,20 +9,20 @@ with (scope('App')) {
     return pre({ 'class': 'code' }, arguments);
   });
 
-  define('shy_form', function() {
+  define('shy_form', function(id) {
     var the_form = form(arguments),
-        wrapper = div({ id: 'shy-form-wrapper' }, the_form);
-    the_form.onsubmit = function(e) { wrapper.style.display = 'none'; var wait = document.getElementById('shy-form-waiting'); if (wait) wait.style.display = ''; };
+        wrapper = div({ id: 'shy-form-wrapper-'+id }, the_form);
+    the_form.onsubmit = function(e) { wrapper.style.display = 'none'; var wait = document.getElementById('shy-form-waiting-'+id); if (wait) wait.style.display = ''; };
     return wrapper;
   });
 
-  define('shy_form_during_submit', function() {
-    return div({ id: 'shy-form-waiting', style: 'display: none' }, div(arguments));
+  define('shy_form_during_submit', function(id) {
+    return div({ id: 'shy-form-waiting-'+id, style: 'display: none' }, div(arguments));
   });
 
-  define('show_shy_form', function() {
-    document.getElementById('shy-form-wrapper').style.display = '';
-    var wait = document.getElementById('shy-form-waiting');
+  define('show_shy_form', function(id) {
+    document.getElementById('shy-form-wrapper-'+id).style.display = '';
+    var wait = document.getElementById('shy-form-waiting-'+id);
     if (wait) wait.style.display = 'none';
   });
 

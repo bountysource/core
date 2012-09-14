@@ -114,9 +114,8 @@ with (scope('PullRequest', 'App')) {
           // show submit button
           render({ into: submit_div },
             br(),
-            shy_form_during_submit('Submitting Solution...'),
-            shy_form({ action: curry(submit_solution, login, repository, issue_number) },
-              div({ id: 'errors' }),
+            form({ action: curry(submit_solution, login, repository, issue_number) },
+              div({ id: 'submit-solution-errors' }),
               advanced_box,
               submit({ 'class': 'blue' }, 'Submit Solution'),
               div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
@@ -154,8 +153,7 @@ with (scope('PullRequest', 'App')) {
       if (response.meta.success) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch', { reload_page: true });
       } else {
-        show_shy_form();
-        render({ into: 'errors' }, div({ style: 'padding: 20px;'}, response.data.error));
+        render({ into: 'submit-solution-errors' }, div({ style: 'padding: 20px;'}, response.data.error));
       }
     });
   });

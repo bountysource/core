@@ -29,8 +29,6 @@ with (scope('Issue', 'App')) {
 
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
-      console.log(response)
-
       render({ into: target_div },
         div({ 'class': 'split-main' },
 
@@ -103,9 +101,8 @@ with (scope('Issue', 'App')) {
       ),
 
       section({ style: 'padding: 21px' },
-        shy_form_during_submit('Please wait...'),
-        shy_form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
-          div({ id: 'errors' }),
+        form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
+          div({ id: 'create-bounty-errors' }),
 
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
@@ -135,10 +132,8 @@ with (scope('Issue', 'App')) {
         );
         
         render({ into: developer_div },
-          shy_form_during_submit(p({ style: 'text-align: center;' }, 'Creating Branch...')),
-
-          shy_form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
-            div({ id: 'errors', style: 'margin-bottom: 10px;' }),
+          form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
+            div({ id: 'create-solution-errors', style: 'margin-bottom: 10px;' }),
             div('This will create a branch in GitHub for you to solve this issue.'),
             advanced_box,
             submit({ 'class': 'green', style: 'margin-top: 10px;' }, 'Create Issue Branch'),
@@ -171,8 +166,7 @@ with (scope('Issue', 'App')) {
       if (response.meta.success) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch');
       } else {
-        show_shy_form();
-        render({ into: 'errors' }, response.data.error);
+        render({ into: 'create-solution-errors' }, div(response.data.error));
       }
     });
   });
@@ -182,8 +176,7 @@ with (scope('Issue', 'App')) {
       if (response.meta.success) {
         window.location.href = response.data.redirect_url;
       } else {
-        show_shy_form();
-        render({ target: 'errors' }, div(response.data.error.join(', '), br()));
+        render({ target: 'create-bounty-errors' }, div(response.data.error.join(', '), br()));
       }
     });
   });
