@@ -30,7 +30,7 @@ with (scope('Repository', 'App')) {
             h2(money(data.most_bounteous_issue_total)),
             h3({ 'class': 'blue-line' }, 'Largest Unclaimed'),
 
-            h2(data.distinct_backers_count),
+            h2(number(data.distinct_backers_count)),
             h3({ 'class': 'orange-line' }, 'Unique Backers')
           )
         ),

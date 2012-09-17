@@ -1,5 +1,4 @@
 with (scope('Repository', 'App')) {
-
   route('#repos/:login/:repository', function(login, repository) {
     var target_div = div('Loading...');
 
@@ -34,13 +33,13 @@ with (scope('Repository', 'App')) {
         ),
         div({ style: 'float: left; width: 170px' }, 
           div({ 'class': 'stats', style: 'width: 150px; padding: 10px' },
-            h2(repo.followers),
+            h2(number(repo.followers)),
             h3({ 'class': 'blue-line' }, 'Followers'),
 
-            h2(repo.forks),
+            h2(number(repo.forks)),
             h3({ 'class': 'blue-line' }, 'Forks'),
 
-            h2(repo.bounties.length),
+            h2(number(repo.bounties.length)),
             h3({ 'class': 'blue-line' }, 'Open Contests'),
 
             h2(money(repo.bounties_total)),

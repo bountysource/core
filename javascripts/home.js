@@ -59,7 +59,7 @@ with (scope('Home', 'App')) {
     BountySource.overview(function(response) {
       var data = (response.data||{});
       render({ into: stats_container }, 
-        h2(data.total_active_issues),
+        h2(number(data.total_active_issues)),
         h3({ 'class': 'blue-line' }, 'Open Contest' + (data.total_active_issues == 1 ? '' : 's')),
 
         h2(money(data.total_unclaimed)),

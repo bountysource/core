@@ -67,4 +67,8 @@ with (scope('App')) {
     return '$' + parts[0] + (show_pennies ? '.' + ((parts[1]||'') + '00').substr(0,2) : '');
   });
 
+  define('number', function(n) {
+    return (n||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  });
+
 }
