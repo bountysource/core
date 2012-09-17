@@ -27,7 +27,7 @@ with (scope('Repository', 'App')) {
             h2(money(data.total_unclaimed)),
             h3({ 'class': 'blue-line' }, 'Total Unclaimed'),
 
-            h2(money(data.largest_unclaimed)),
+            h2(money(data.most_bounteous_issue_total)),
             h3({ 'class': 'blue-line' }, 'Largest Unclaimed'),
 
             h2(data.distinct_backers_count),
@@ -38,7 +38,7 @@ with (scope('Repository', 'App')) {
         div({ style: 'margin-right: 190px;' },
           div(
             //featured_projects_table({ header_class: 'thick-line-red' }, 'Featured Projects', data.projects.featured),
-            issue_table({ header_class: 'thick-line-blue' }, 'Largest Bounties', data.issues.largest_total_bounty),
+            issue_table({ header_class: 'thick-line-blue' }, 'Largest Bounties', data.issues.largest_bounties),
             issue_table({ header_class: 'thick-line-green' }, 'Featured Issues', data.issues.featured),
             issue_table({ header_class: 'thick-line-blue' }, 'Popular Issues', data.issues.popular),
             //issue_table({ header_class: 'thick-line-red' }, 'Most Worked On Issues', data.issues.most_worked_on),
