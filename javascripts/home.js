@@ -37,7 +37,7 @@ with (scope('Home', 'App')) {
               div({ style: 'width: 330px; float: left; text-align: center'},
                 form({ action: function(form_data) { set_route('#repos/search?query='+escape(form_data.query)) } },
                   text({ name: 'query', placeholder: 'Project Name' }),
-                  submit({ value: 'Search', 'class': 'green', style: 'width: 80px' })
+                  submit({ value: 'Search', 'class': 'green', style: 'width: 80px; margin-left: 3px;' })
                 )
               )
             )
