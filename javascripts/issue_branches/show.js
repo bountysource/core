@@ -79,17 +79,16 @@ with (scope('PullRequest', 'App')) {
 
             h3("My Commits are not Shown!"),
             p("Chances are you did not commit your changes to the designated ", b("issue branch"), ". Run the following command inside of your repository directory:"),
-            code('git symbolic-ref HEAD'),
-            p("If the response does not match:"),
-            code('refs/heads/'+solution.head.name),
-            p("Then you need to switch back to the issue branch. Take note of the response to that previous command, and run the following:"),
-            code('git checkout '+solution.head.name+'\ngit merge refs/heads/master'),
-            p("For that second command, replace 'refs/heads/master' with whatever was returned before."),
-            p("If you run into any problems during the merge, you can consult the ", a({ href: 'http://git-scm.com/docs/git-merge' }, 'git documentation'), " for help"),
+            code('git branch -l'),
+            p("You will get a list of all the branches, with an asterisk next to the one you are currently committing changes to:"),
+            code('  '+solution.head.name+'\n  issue12\n* master'),
+            p("You need to switch back to the issue branch, then move the changes you made over to it. For the following rebase command, use the name of the branch that you are on:"),
+            code('git checkout '+solution.head.name+'\ngit rebase master'),
+            p("If you run into any problems during the rebase, consult the ", a({ href: 'http://git-scm.com/book/en/Git-Branching-Rebasing' }, 'git documentation'), " for assistance, however, it should work marvelously in this case."),
             br(),
 
             h3('Additional Help'),
-            p("If you need additional help with Git or GitHub, you may find the following links useful"),
+            p("If you need additional help with Git or GitHub, you may find the following links useful:"),
             ul(
               li(a({ target: '_blank', href: '#faq' }, 'BountySource FAQs')),
               li(a({ target: '_blank', href: 'https://help.github.com' }, 'GitHub help')),
@@ -100,16 +99,67 @@ with (scope('PullRequest', 'App')) {
           // where there is normally a submit solution button, render a view solution button that links to GitHub
           render({ into: submit_div },
             br(),
-            a({ 'class': 'blue', target: '_blank', href: '' }, 'Your Submission')
+            a({ 'class': 'blue', target: '_blank', href: solution.pull_request.url }, 'Your Submission')
           );
 
-          // pull request
-          render({ into: commits_div },
-            div({ style: 'padding: 5px 20px; margin-bottom: 15px; border-radius: 3px; background: #DFF7CB;'},
-              p("Your solution has been submitted, and is awaiting review by the project committers.")
-            ),
-            commits_table(solution)
-          );
+          // pull request has been merged, and the underlying issue closed
+          if (solution.pull_request.merged && solution.issue.closed) {
+            render({ into: commits_div },
+              div({ style: 'padding: 5px 20px; margin-bottom: 15px; border-radius: 3px; background: #DFF7CB;'},
+                p("Your solution has been merged, and accepted as satisfactory by the committers! Once the dispute period is over, you will be paid out.")
+              ),
+              commits_table(solution)
+            );
+          // pull request has been merged, but the underlying issue has not been closed
+          } else if (solution.pull_request.merged && !solution.issue.closed) {
+            render({ into: commits_div },
+              div({ style: 'padding: 5px 20px; margin-bottom: 15px; border-radius: 3px; background: #DFF7CB;'},
+                p("Your solution has been merged into the base repository. When the underlying issue is also closed, the dispute period will begin, after which you will be paid if your solution is deemed satisfactory.")
+              ),
+              commits_table(solution)
+            );
+            // the pull_request has not been merged, but it is automatically mergeable
+          } else if (solution.pull_request.mergeable) {
+            render({ into: commits_div },
+              div({ style: 'padding: 5px 20px; margin-bottom: 15px; border-radius: 3px; background: #DFF7CB;'},
+                p("Your solution has been submitted, and is awaiting review by the project committers.")
+              ),
+              commits_table(solution)
+            );
+          // the pull_request has not been merged, and it requires a rebase as it is unmergeable.
+          } else {
+            render({ into: commits_div },
+              div({ style: 'padding: 5px 20px; margin-bottom: 15px; border-radius: 3px; background: #FCD9D1;'},
+                p("Your solution has been submitted, but is not mergeable with the base repository. The project committers cannot automatically accept your solution until you perform a ", b('rebase'), "."),
+                p(a({ href: 'http://git-scm.com/book/en/Git-Branching-Rebasing' }, "Learn more about rebasing"), ", or just follow the instructions below to make your solution branch automatically mergeable.")
+              ),
+
+              h3('Rebasing your Issue Branch'),
+              p('From within your fork of the repository, ', (solution.head.repository.full_name), ', run the following:'),
+              code("git checkout "+solution.head.name+"\ngit rebase master"),
+
+              h3('Resolving Merge Conflicts'),
+              p("Depending on the changes that were made, there may be conflicts in certain files. A conflict means both you and the base branch made changes to the same part of a file, and git doesn't know how to automatically merge it. You will receive a response like this if there are conflicts:"),
+              code("First, rewinding head to replay your work on top of it...\nApplying: commit made to master branch of base repository\nUsing index info to reconstruct a base tree...\nFalling back to patching base and 3-way merge...\nAuto-merging conflicting_file.rb\nCONFLICT (content): Merge conflict in conflicting_file.rb\nFailed to merge in the changes.\nPatch failed at 0001 commit made to master branch of base repository\n\nWhen you have resolved this problem run 'git rebase --continue'.\nIf you would prefer to skip this patch, instead run 'git rebase --skip'.\nTo restore the original branch and stop rebasing run 'git rebase --abort'.')"),
+              p("Oh no, conflicts! The part you care about is 'CONFLICT (content): Merge conflict in conflicting_file.rb' This tells you which file you need to fix. Open conflicting_file.rb:"),
+              code("require 'awesome-gem'\n\n<<<<<<< HEAD\nAwesomeGem::Person.new 'leeroy jenkins', true\n=======\nAwesomeGem::Person.new base: 'leeroy jenkings', is_awesome: true\n>>>>>>> awesome commit is awesome"),
+              p("This is git's weird way of showing you conflicts within a file. Read it like this:"),
+              code("<<<<<<< HEAD\nthese are changes made to the base repository\n=======\nthese are changes made to your issue branch\n>>>>>>> title of your commit that is conflicting with base repository master branch"),
+
+              p("Now, you must decide what to do-- keep your changes, or those on the master branch. There is no right answer on what to do here, just make sure you know what you're changing, so as not to have your solution rejected by the project committers."),
+              p("Once you have decided which changes to keep, simple cut out all of the stuff that git added to show you the conflict (except for the actual content of what you are keeping). For example, I chose to keep my change to conflicting_file.rb, and after cleanup, the file now looks like this:"),
+              code("require 'awesome-gem'\n\nAwesomeGem::Person.new base: 'leeroy jenkings', is_awesome: true"),
+
+              h3("Marking conflicts as resolved"),
+              p("You have resolved all of the conflicting files, and saved your revisions. Now, you need to let git know, and tell the rebase to continue. For each conflicting file that you have fixed, run the command (replacing the file name with whatever files you fixed):"),
+              code('git add conflicting_file.rb'),
+              p("And, after adding all of the files, tell the rebase to continue:"),
+              code('git rebase --continue'),
+              p("Git rebases one commit at a time, so depending on how many commits you have made that conflict with the base repositories changes, you may go through this process multiple times."),
+
+              commits_table(solution)
+            );
+          }
         } else {
           // show submit button
           render({ into: submit_div },
