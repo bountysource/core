@@ -71,4 +71,37 @@ with (scope('App')) {
     return (n||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   });
 
+  define('code', function() {
+    var args = Array.prototype.slice.call(arguments);
+    return pre({ 'class': 'code' }, args.join("\n"));
+  });
+
+  define('error_message', function() {
+    return div({ 'class': 'error-message' }, arguments);
+  });
+
+  define('success_message', function() {
+    return div({ 'class': 'success-message' }, arguments);
+  });
+
+  define('info_message', function() {
+    return div({ 'class': 'info-message' }, arguments);
+  });
+
+  // include this element wherever you want to render messages on a page (errors, for instance)
+  define('messages', function(options) {
+    options = options || {};
+    options.id = '_page-messages';
+    return div(options);
+  });
+
+  // use this method to render into the messages div
+  define('render_message', function() {
+    render({ into: '_page-messages' }, arguments);
+  });
+
+  // use this method to clear the messages div
+  define('clear_message', function() {
+    render({ into: '_page-messages' }, '');
+  });
 }

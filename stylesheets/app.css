@@ -249,3 +249,22 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 
 
 .github_html p { margin: 0 0 10px 0; }
+
+.success-message {
+  padding: 20px 15px;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  background: #DFF7CB;
+}
+.error-message {
+  padding: 20px 15px;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  background: #FCD9D1;
+}
+.info-message {
+  padding: 20px 15px;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  background: #F7F7B3;
+}
