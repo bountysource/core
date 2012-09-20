@@ -70,7 +70,10 @@ with (scope('PullRequest', 'App')) {
               ),
               li(
                 p("Woohoo, you now have your own copy of ", solution.base.repository.name, "! Before you get started, you must tell git to use the ", b('issue branch'), " created by BountySource."),
-                code('cd '+solution.base.repository.name+'\ngit checkout '+solution.head.name)
+                code(
+                  'cd '+solution.base.repository.name,
+                  'git checkout '+solution.head.name
+                )
               )
             ),
 
@@ -81,9 +84,16 @@ with (scope('PullRequest', 'App')) {
             p("Chances are you did not commit your changes to the designated ", b("issue branch"), ". Run the following command inside of your repository directory:"),
             code('git branch -l'),
             p("You will get a list of all the branches, with an asterisk next to the one you are currently committing changes to:"),
-            code('  '+solution.head.name+'\n  issue12\n* master'),
+            code(
+              '  '+solution.head.name,
+              '  issue12',
+              '* master'
+            ),
             p("You need to switch back to the issue branch, then move the changes you made over to it. For the following rebase command, use the name of the branch that you are on:"),
-            code('git checkout '+solution.head.name+'\ngit rebase master'),
+            code(
+              'git checkout '+solution.head.name,
+              'git rebase master'
+            ),
             p("If you run into any problems during the rebase, consult the ", a({ href: 'http://git-scm.com/book/en/Git-Branching-Rebasing' }, 'git documentation'), " for assistance, however, it should work marvelously in this case."),
             br(),
 
@@ -136,26 +146,14 @@ with (scope('PullRequest', 'App')) {
 
               h3('Rebasing your Issue Branch'),
               p('From within your fork of the repository, ', (solution.head.repository.full_name), ', run the following:'),
-              code("git checkout "+solution.head.name+"\ngit rebase master"),
+              code(
+                "git checkout "+solution.head.name,
+                "git pull --rebase https://github.com/"+solution.base.repository.full_name+" master",
+                "git push"
+              ),
 
               h3('Resolving Merge Conflicts'),
-              p("Depending on the changes that were made, there may be conflicts in certain files. A conflict means both you and the base branch made changes to the same part of a file, and git doesn't know how to automatically merge it. You will receive a response like this if there are conflicts:"),
-              code("First, rewinding head to replay your work on top of it...\nApplying: commit made to master branch of base repository\nUsing index info to reconstruct a base tree...\nFalling back to patching base and 3-way merge...\nAuto-merging conflicting_file.rb\nCONFLICT (content): Merge conflict in conflicting_file.rb\nFailed to merge in the changes.\nPatch failed at 0001 commit made to master branch of base repository\n\nWhen you have resolved this problem run 'git rebase --continue'.\nIf you would prefer to skip this patch, instead run 'git rebase --skip'.\nTo restore the original branch and stop rebasing run 'git rebase --abort'.')"),
-              p("Oh no, conflicts! The part you care about is 'CONFLICT (content): Merge conflict in conflicting_file.rb' This tells you which file you need to fix. Open conflicting_file.rb:"),
-              code("require 'awesome-gem'\n\n<<<<<<< HEAD\nAwesomeGem::Person.new 'leeroy jenkins', true\n=======\nAwesomeGem::Person.new base: 'leeroy jenkings', is_awesome: true\n>>>>>>> awesome commit is awesome"),
-              p("This is git's weird way of showing you conflicts within a file. Read it like this:"),
-              code("<<<<<<< HEAD\nthese are changes made to the base repository\n=======\nthese are changes made to your issue branch\n>>>>>>> title of your commit that is conflicting with base repository master branch"),
-
-              p("Now, you must decide what to do-- keep your changes, or those on the master branch. There is no right answer on what to do here, just make sure you know what you're changing, so as not to have your solution rejected by the project committers."),
-              p("Once you have decided which changes to keep, simple cut out all of the stuff that git added to show you the conflict (except for the actual content of what you are keeping). For example, I chose to keep my change to conflicting_file.rb, and after cleanup, the file now looks like this:"),
-              code("require 'awesome-gem'\n\nAwesomeGem::Person.new base: 'leeroy jenkings', is_awesome: true"),
-
-              h3("Marking conflicts as resolved"),
-              p("You have resolved all of the conflicting files, and saved your revisions. Now, you need to let git know, and tell the rebase to continue. For each conflicting file that you have fixed, run the command (replacing the file name with whatever files you fixed):"),
-              code('git add conflicting_file.rb'),
-              p("And, after adding all of the files, tell the rebase to continue:"),
-              code('git rebase --continue'),
-              p("Git rebases one commit at a time, so depending on how many commits you have made that conflict with the base repositories changes, you may go through this process multiple times."),
+              p("Depending on the changes that were made, there may be conflicts in certain files. A conflict means both you and the base branch made changes to the same part of a file, and git doesn't know how to automatically merge it. If you run into conflicts, and need some help overcoming them, follow the ", a({ href: 'http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging#Basic-Merge-Conflicts' }, 'git documentation'), " on resolving merge conflicts."),
 
               commits_table(solution)
             );
