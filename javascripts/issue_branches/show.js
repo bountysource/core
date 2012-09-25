@@ -72,6 +72,7 @@ with (scope('PullRequest', 'App')) {
                 p("Woohoo, you now have your own copy of ", solution.base.repository.name, "! Before you get started, you must tell git to use the ", b('issue branch'), " created by BountySource."),
                 code(
                   'cd '+solution.base.repository.name,
+                  'git fetch origin',
                   'git checkout '+solution.head.name
                 )
               )
