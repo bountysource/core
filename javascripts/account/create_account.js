@@ -2,6 +2,7 @@ with (scope('CreateAccount','App')) {
   route('#create_account', function() {
     render(
       breadcrumbs(
+        a({ href: '#' }, 'Home'),
         'Account',
         'Create'
       ),

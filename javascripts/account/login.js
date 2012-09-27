@@ -13,7 +13,11 @@ with (scope('Login', 'App')) {
     }
     
     render(
-      breadcrumbs('Account', 'Login'),
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        'Account',
+        'Login'
+      ),
       
       div({ style: 'width: 415px; height: 320px; background: #eee; border: 1px solid #ccc; float: left; margin-right: 20px; padding: 20px' },
         h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Have a GitHub Account?'),

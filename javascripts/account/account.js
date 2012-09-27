@@ -4,8 +4,8 @@ with (scope('Account','App')) {
 
     render(
       breadcrumbs(
-        'Account',
-        'Settings'
+        a({ href: '#' }, 'Home'),
+        'Account'
       ),
       target_div
     );
