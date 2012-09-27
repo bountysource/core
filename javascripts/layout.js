@@ -13,9 +13,11 @@ with (scope('App')) {
 
             Storage.get('access_token') ? [
               li(a({ href: '#issue_branches' }, 'Issue Branches')),
+              li(a({ href: '#account' }, 'Settings')),
               li(a({ href: BountySource.logout }, 'Logout'))
             ] : [
-              li(a({ href: '#login' }, 'Login'))
+              li(a({ href: '#login' }, 'Login')),
+              li(a({ href: '#create_account' }, 'Create Account'))
             ]
           )
         )

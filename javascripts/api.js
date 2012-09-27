@@ -40,7 +40,11 @@ with (scope('BountySource')) {
   });
 
   define('login', function(email, password, callback) {
-    BountySource.api('/user', 'GET', { email: email, password: password }, callback);
+    BountySource.api('/user/login', 'POST', { email: email, password: password }, callback);
+  });
+
+  define('create_account', function(data, callback) {
+    BountySource.api('/user', 'POST', data, callback);
   });
 
   define('search_users', function(term, callback) {
