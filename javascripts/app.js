@@ -5,23 +5,6 @@ with (scope('App')) {
     set_route(Storage.remove('_redirect_to_after_login') || '#');
   });
 
-  define('shy_form', function(id) {
-    var the_form = form(arguments),
-        wrapper = div({ id: 'shy-form-wrapper-'+id }, the_form);
-    the_form.onsubmit = function(e) { wrapper.style.display = 'none'; var wait = document.getElementById('shy-form-waiting-'+id); if (wait) wait.style.display = ''; };
-    return wrapper;
-  });
-
-  define('shy_form_during_submit', function(id) {
-    return div({ id: 'shy-form-waiting-'+id, style: 'display: none' }, div(arguments));
-  });
-
-  define('show_shy_form', function(id) {
-    document.getElementById('shy-form-wrapper-'+id).style.display = '';
-    var wait = document.getElementById('shy-form-waiting-'+id);
-    if (wait) wait.style.display = 'none';
-  });
-
   define('time_ago_in_words', function(time) {
     var distance_in_milliseconds = (typeof(time) == "string" ? (new Date(time)) : time) - (new Date());
     var distance_in_minutes = parseInt(Math.abs(distance_in_milliseconds / 60000));
