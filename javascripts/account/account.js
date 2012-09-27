@@ -28,6 +28,10 @@ with (scope('Account','App')) {
             text({ name: 'last_name', placeholder: 'Doe', value: (info.last_name||'') })
           ),
           fieldset(
+            label('Display Name:'),
+            text({ name: 'display_name', placeholder: 'johndoe42', value: (info.display_name||'') })
+          ),
+          fieldset(
             label('Email:'),
             text({ 'class': 'long', name: 'email', placeholder: 'john.doe@gmail.com', value: (info.email||'') })
           ),
@@ -45,6 +49,13 @@ with (scope('Account','App')) {
   });
 
   define('update_account', function(form_data) {
-    console.log(form_data);
+    clear_message();
+    BountySource.update_account(form_data, function(response) {
+      if (response.meta.success) {
+        render_message(success_message('Account updated!'));
+      } else {
+        render_message(error_message(response.data.error));
+      }
+    });
   });
 };

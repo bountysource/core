@@ -47,6 +47,10 @@ with (scope('BountySource')) {
     BountySource.api('/user', 'POST', data, callback);
   });
 
+  define('update_account', function(data, callback) {
+    BountySource.api('/user', 'PUT', data, callback);
+  });
+
   define('search_users', function(term, callback) {
     api('/github/user/search/' + term, callback);
   });
