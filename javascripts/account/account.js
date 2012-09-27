@@ -10,7 +10,7 @@ with (scope('Account','App')) {
       target_div
     );
 
-    BountySource.user_info(function(response) {
+    BountySource.basic_user_info(function(response) {
       var info = response.data;
 
       console.log(info);

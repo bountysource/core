@@ -39,6 +39,10 @@ with (scope('BountySource')) {
     BountySource.api('/user', callback);
   });
 
+  define('basic_user_info', function(callback) {
+    BountySource.api('/user', 'GET', { basic: true }, callback);
+  });
+
   define('login', function(email, password, callback) {
     BountySource.api('/user/login', 'POST', { email: email, password: password }, callback);
   });
