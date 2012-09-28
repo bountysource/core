@@ -76,7 +76,7 @@ with (scope('Account','App')) {
           div({ style: 'background: #eee; border: 1px solid #ccc; margin-right: 20px; padding: 20px; text-align: center;' },
             response.data.github_user ? [
               h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin: 0 auto 15px auto; line-height: 25px;' }, 'GitHub Account Linked'),
-              img({ style: 'border: 1px solid #ccc;', src: response.data.github_user.avatar_url }),
+              img({ style: 'border: 1px solid #ccc; width: 80px;', src: response.data.github_user.avatar_url }),
               br(),
               span(response.data.github_user.login)
             ] : [
