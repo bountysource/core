@@ -13,32 +13,61 @@ with (scope('Account','App')) {
     BountySource.basic_user_info(function(response) {
       var info = response.data;
 
-      console.log(info);
+      // if filler data set to create account, delete out of info
+      // so that the 'complete your profile' message shows up
+      for (k in info) if (info[k] == '__undefined__') delete info[k];
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
-          form({ 'class': 'fancy', action: update_account },
-            messages(),
+          !info.account_completed && div({ id: 'account-incomplete-message' },
+            error_message("Your account is not complete! In order to fully use BountySource, fill in the required fields below.")
+          ),
 
-            fieldset(
-              label('First Name:'),
-              text({ name: 'first_name', placeholder: 'John', value: (info.first_name||'') })
+          messages(),
+
+          h2('Personal Information'),
+          form({ 'class': 'fancy', action: update_account },
+            required_inputs(
+              fieldset(
+                label('First Name:'),
+                text({ name: 'first_name', placeholder: 'John', value: (info.first_name||'') })
+              ),
+              fieldset(
+                label('Last Name:'),
+                text({ name: 'last_name', placeholder: 'Doe', value: (info.last_name||'') })
+              )
             ),
-            fieldset(
-              label('Last Name:'),
-              text({ name: 'last_name', placeholder: 'Doe', value: (info.last_name||'') })
-            ),
+
             fieldset(
               label('Display Name:'),
               text({ name: 'display_name', placeholder: 'johndoe42', value: (info.display_name||'') })
             ),
-            fieldset(
-              label('Email:'),
-              text({ 'class': 'long', name: 'email', placeholder: 'john.doe@gmail.com', value: (info.email||'') })
+
+            required_inputs(
+              fieldset(
+                label('Email:'),
+                text({ 'class': 'long', name: 'email', placeholder: 'john.doe@gmail.com', value: (info.email||'') })
+              )
             ),
 
             fieldset({ 'class': 'no-label' },
               submit({ 'class': 'green' }, 'Update Account')
+            )
+          ),
+
+          h2('Change Password'),
+          form({ 'class': 'fancy', action: change_password },
+            fieldset(
+              label('Password:'),
+              password({ name: 'password', placeholder: 'abc123' })
+            ),
+            fieldset(
+              label('Confirm Password:'),
+              password({ name: 'password_confirmation', placeholder: 'abc123' })
+            ),
+
+            fieldset({ 'class': 'no-label' },
+              submit({ 'class': 'green' }, 'Change Password')
             )
           )
         ),
@@ -59,10 +88,6 @@ with (scope('Account','App')) {
 
         div({ 'class': 'split-end' })
       );
-
-      if (!(info.first_name || info.last_name || info.email)) {
-        render_message(info_message("Your account is not complete! In order to fully use BountySource, you will need a completed account."));
-      }
     });
   });
 
@@ -70,10 +95,23 @@ with (scope('Account','App')) {
     clear_message();
     BountySource.update_account(form_data, function(response) {
       if (response.meta.success) {
+        if (document.getElementById('account-incomplete-message')) render({ into: 'account-incomplete-message' }, '');
         render_message(success_message('Account updated!'));
       } else {
         render_message(error_message(response.data.error));
       }
     });
+  });
+
+  define('change_password', function(form_data) {
+    clear_message();
+    BountySource.change_password(form_data, function(response) {
+      document.getElementsByTagName('input[type=password]')
+      if (response.meta.success) {
+        render_message(success_message('Password changed!'));
+      } else {
+        render_message(error_message(response.data.error));
+      }
+    })
   });
 };

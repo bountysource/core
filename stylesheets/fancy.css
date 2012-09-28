@@ -12,6 +12,7 @@ form.fancy input[type='password'].short { width: 100px; border: 1px solid #ccc; 
 
 form.fancy input[type='submit'] { width: 200px; }
 
+.required { border: 2px solid #F07E7E; border-radius: 3px; box-shadow: 0px 0px 3px #FD6262 }
 
 
 

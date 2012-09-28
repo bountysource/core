@@ -13,7 +13,9 @@ with (scope('App')) {
 
             Storage.get('access_token') ? [
               li(a({ href: '#issue_branches' }, 'Issue Branches')),
-              li(a({ href: '#account' }, 'Account')),
+              li(
+                a({ href: '#account' }, 'Account')
+              ),
               li(a({ href: BountySource.logout }, 'Logout'))
             ] : [
               li(a({ href: '#login' }, 'Login')),
@@ -105,5 +107,31 @@ with (scope('App')) {
   // use this method to clear the messages div
   define('clear_message', function() {
     render({ into: '_page-messages' }, '');
+  });
+
+  // render all of the child inputs with required markings
+  define('required_inputs', function() {
+    var arguments = flatten_to_array(arguments);
+    for (var i=0; i<arguments.length; i++) {
+      var child = arguments[i];
+      // if child has it's own children, recurse!
+      if (child.children.length > 0) {
+        // turn node list into array of elements
+        var elements = [];
+        for (var j=0; j<child.children.length; j++) elements.push(child.children[j]);
+        required_inputs(elements);
+      } else if ((/input/i).test(child.tagName) && !child.value) {
+        child.className.length > 0 ? child.className += ' required' : child.className = 'required';
+        // when child loses focus, check to see if it is filled in to remove required border
+        child.onblur = function(e) {
+          if (e.target.value.length > 0) {
+            e.target.className = e.target.className.replace(/required/,'');
+          } else {
+            child.className.length > 0 ? child.className += ' required' : child.className = 'required';
+          }
+        };
+      }
+    }
+    return arguments;
   });
 }
