@@ -62,7 +62,8 @@ with (scope('CreateAccount','App')) {
     form_data.agree_to_terms = form_data.agree_to_terms == 'on';
     BountySource.create_account(form_data, function(response) {
       if (response.meta.success) {
-        render_message(success_message('Account created!'));
+        Storage.set('access_token', response.data.access_token);
+        set_route('#');
       } else {
         render_message(error_message(response.data.error));
       }
