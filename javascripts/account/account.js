@@ -58,8 +58,12 @@ with (scope('Account','App')) {
           h2('Change Password'),
           form({ 'class': 'fancy', action: change_password },
             fieldset(
-              label('Password:'),
-              password({ name: 'password', placeholder: 'abc123' })
+              label('Current Password:'),
+              password({ name: 'current_password', placeholder: '123abc' })
+            ),
+            fieldset(
+              label('New Password:'),
+              password({ name: 'new_password', placeholder: 'abc123' })
             ),
             fieldset(
               label('Confirm Password:'),
