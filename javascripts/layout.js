@@ -13,9 +13,8 @@ with (scope('App')) {
 
             Storage.get('access_token') ? [
               li(a({ href: '#issue_branches' }, 'Issue Branches')),
-              li(
-                a({ href: '#account' }, 'Account')
-              ),
+              li(a({ href: '#contributions' }, 'Contributions')),
+              li(a({ href: '#account' }, 'Account')),
               li(a({ href: BountySource.logout }, 'Logout'))
             ] : [
               li(a({ href: '#login' }, 'Login')),
@@ -68,7 +67,7 @@ with (scope('App')) {
 
   define('money', function(value, show_pennies) {
     var parts = parseFloat(value.toString()).toString().split('.');
-    return '$' + parts[0] + (show_pennies ? '.' + ((parts[1]||'') + '00').substr(0,2) : '');
+    return '$' + number(parts[0]) + (show_pennies ? '.' + ((parts[1]||'') + '00').substr(0,2) : '');
   });
 
   define('number', function(n) {
