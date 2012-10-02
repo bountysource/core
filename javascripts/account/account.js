@@ -23,10 +23,9 @@ with (scope('Account','App')) {
             error_message("Your account is not complete! In order to fully use BountySource, fill in the required fields below.")
           ),
 
-          messages(),
+         form({ 'class': 'fancy', action: update_account },
+           messages(),
 
-          h2('Personal Information'),
-          form({ 'class': 'fancy', action: update_account },
             required_inputs(
               fieldset(
                 label('First Name:'),
@@ -53,31 +52,21 @@ with (scope('Account','App')) {
             fieldset({ 'class': 'no-label' },
               submit({ 'class': 'green' }, 'Update Account')
             )
-          ),
-
-          h2('Change Password'),
-          form({ 'class': 'fancy', action: change_password },
-            fieldset(
-              label('Current Password:'),
-              password({ name: 'current_password', placeholder: '123abc' })
-            ),
-            fieldset(
-              label('New Password:'),
-              password({ name: 'new_password', placeholder: 'abc123' })
-            ),
-            fieldset(
-              label('Confirm Password:'),
-              password({ name: 'password_confirmation', placeholder: 'abc123' })
-            ),
-
-            fieldset({ 'class': 'no-label' },
-              submit({ 'class': 'green' }, 'Change Password')
-            )
           )
         ),
 
         div({ 'class': 'split-side' },
-          div({ style: 'background: #eee; border: 1px solid #ccc; margin-right: 20px; padding: 20px; text-align: center;' },
+          div({ style: 'background: #eee; padding: 0 21px 21px 21px;' }, ribbon_header('Account Settings'),
+            br(),
+            a({ 'class': 'blue', href: '#account/address' }, 'Mailing Address'),
+            br(),
+            a({ 'class': 'blue', href: '#account/change_password' }, 'Change Password')
+          ),
+
+          br(),
+
+          // show GitHub account if logged in
+          div({ style: 'background: #eee; border: 1px solid #ccc; padding: 20px; text-align: center;' },
             response.data.github_user ? [
               h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin: 0 auto 15px auto; line-height: 25px;' }, 'GitHub Account Linked'),
               img({ style: 'border: 1px solid #ccc; width: 80px;', src: response.data.github_user.avatar_url }),
@@ -105,17 +94,5 @@ with (scope('Account','App')) {
         render_message(error_message(response.data.error));
       }
     });
-  });
-
-  define('change_password', function(form_data) {
-    clear_message();
-    BountySource.change_password(form_data, function(response) {
-      document.getElementsByTagName('input[type=password]')
-      if (response.meta.success) {
-        render_message(success_message('Password changed!'));
-      } else {
-        render_message(error_message(response.data.error));
-      }
-    })
   });
 };

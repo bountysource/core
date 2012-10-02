@@ -36,35 +36,35 @@ with (scope('BountySource')) {
   });
 
   define('user_info', function(callback) {
-    BountySource.api('/user', callback);
+    api('/user', callback);
   });
 
   define('basic_user_info', function(callback) {
-    BountySource.api('/user', 'GET', { basic: true }, callback);
+    api('/user', 'GET', { basic: true }, callback);
   });
 
   define('login', function(email, password, callback) {
-    BountySource.api('/user/login', 'POST', { email: email, password: password }, callback);
+    api('/user/login', 'POST', { email: email, password: password }, callback);
   });
 
   define('create_account', function(data, callback) {
-    BountySource.api('/user', 'POST', data, callback);
+    api('/user', 'POST', data, callback);
   });
 
   define('update_account', function(data, callback) {
-    BountySource.api('/user', 'PUT', data, callback);
+    api('/user', 'PUT', data, callback);
   });
 
   define('change_password', function(data, callback) {
-    BountySource.api('/user/change_password', 'POST', data, callback);
+    api('/user/change_password', 'POST', data, callback);
   });
 
   define('reset_password', function(data, callback) {
-    BountySource.api('/user/reset_password', 'POST', data, callback);
+    api('/user/reset_password', 'POST', data, callback);
   });
 
   define('request_password_reset', function(data, callback) {
-    BountySource.api('/user/request_password_reset', 'POST', data, callback);
+    api('/user/request_password_reset', 'POST', data, callback);
   });
 
   define('search_users', function(term, callback) {
@@ -134,5 +134,13 @@ with (scope('BountySource')) {
   
   define('get_repository_overview', function(login, repository, callback) {
     api('/github/repos/'+login+'/'+repository+'/overview', callback);
+  });
+
+  define('create_mailing_address', function(data, callback) {
+    api('/user/mailing_address', 'POST', data, callback);
+  });
+
+  define('update_mailing_address', function(data, callback) {
+    api('/user/mailing_address', 'PUT', data, callback);
   });
 }
