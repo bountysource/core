@@ -59,6 +59,10 @@ with (scope('BountySource')) {
     BountySource.api('/user/change_password', 'POST', data, callback);
   });
 
+  define('reset_password', function(data, callback) {
+    BountySource.api('/user/reset_password', 'POST', data, callback);
+  });
+
   define('search_users', function(term, callback) {
     api('/github/user/search/' + term, callback);
   });
