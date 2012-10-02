@@ -12,7 +12,7 @@ with (scope('Account','App')) {
     );
 
     BountySource.basic_user_info(function(response) {
-      var mailing_address = (response.data||{}).mailing_address;
+      var mailing_address = (response.data.mailing_address||{});
 
       render({ into: target_div },
         form({ 'class': 'fancy', action: mailing_address ? update_mailing_address : create_mailing_address },
