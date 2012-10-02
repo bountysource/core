@@ -46,15 +46,13 @@ with (scope('Login', 'App')) {
           div({ style: 'text-align: center; font-size: 12px;' }, a({ href: resize_for_password_reset_form }, 'Forgot your password?'))
         ),
 
-        div({ id: 'password-reset-form', style: 'display: none;' },
-          form({ action: reset_password, style: 'width: 200px; margin: 40px auto 0' },
-            p("Provide us with the information below, and we will send you an email with password reset instructions."),
+        form({ id: 'password-reset-form', action: request_password_reset, style: 'width: 200px; margin: 40px auto 0; display: none;' },
+          p("Provide us with the information below, and we will send you an email with password reset instructions."),
 
-            div({ style: 'color: #999' }, "ACCOUNT EMAIL:"),
-            div({ style: 'margin-bottom: 15px' }, text({ style: 'width: 180px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px', name: 'email', placeholder: 'john.doe@gmail.com' })),
+          div({ style: 'color: #999' }, "ACCOUNT EMAIL:"),
+          div({ style: 'margin-bottom: 15px' }, text({ style: 'width: 180px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px', name: 'email', placeholder: 'john.doe@gmail.com' })),
 
-            div({ style: 'margin-top: 39px' }, submit({ 'class': 'green' }, 'Send Email'))
-          )
+          div({ style: 'margin-top: 39px' }, submit({ 'class': 'green' }, 'Send Email'))
         )
       ),
       
@@ -74,7 +72,13 @@ with (scope('Login', 'App')) {
   });
 
   define('request_password_reset', function(form_data) {
-
+    BountySource.request_password_reset(form_data, function(response) {
+      if (response.meta.success) {
+        render_message(success_message('Password reset email sent.'));
+      } else {
+        render_message(error_message(response.data.error));
+      }
+    });
   });
 
   define('resize_for_password_reset_form', function() {
