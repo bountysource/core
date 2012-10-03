@@ -58,7 +58,7 @@ with (scope('Home', 'App')) {
 
     BountySource.overview(function(response) {
       var data = (response.data||{});
-      render({ into: stats_container }, 
+      render({ into: stats_container },
         h2(number(data.total_active_issues)),
         h3({ 'class': 'blue-line' }, 'Open Contest' + (data.total_active_issues == 1 ? '' : 's')),
 
@@ -76,7 +76,7 @@ with (scope('Home', 'App')) {
           ul(
             data.projects.featured.map(function(repo) {
               console.log(repo.avatar_url);
-              return li(img({ src: (repo.avatar_url || default_avatar_url),
+              return li(img({ src: (repo.user.avatar_url || default_avatar_url),
                               style: 'width: 32px; height: 32px' }),
                 a({ href: '#repos/' + repo.full_name, style: 'color: #222' }, repo.display_name))
             })
