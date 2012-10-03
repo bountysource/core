@@ -15,7 +15,7 @@ with (scope('Account','App')) {
       var address = (response.data.address||{});
 
       render({ into: target_div },
-        form({ 'class': 'fancy', action: address ? update_address : create_address },
+        form({ 'class': 'fancy', action: create_or_update_address },
           messages(),
 
           fieldset(
