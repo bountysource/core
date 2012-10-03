@@ -136,11 +136,11 @@ with (scope('BountySource')) {
     api('/github/repos/'+login+'/'+repository+'/overview', callback);
   });
 
-  define('create_mailing_address', function(data, callback) {
-    api('/user/mailing_address', 'POST', data, callback);
+  define('create_address', function(data, callback) {
+    api('/user/address', 'POST', data, callback);
   });
 
-  define('update_mailing_address', function(data, callback) {
-    api('/user/mailing_address', 'PUT', data, callback);
+  define('update_address', function(data, callback) {
+    api('/user/address', 'PUT', data, callback);
   });
 }
