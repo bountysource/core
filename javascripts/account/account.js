@@ -34,15 +34,11 @@ with (scope('Account','App')) {
               fieldset(
                 label('Last Name:'),
                 text({ name: 'last_name', placeholder: 'Doe', value: (info.last_name||'') })
-              )
-            ),
-
-            fieldset(
-              label('Display Name:'),
-              text({ name: 'display_name', placeholder: 'johndoe42', value: (info.display_name||'') })
-            ),
-
-            required_inputs(
+              ),
+              fieldset(
+                label('Display Name:'),
+                text({ name: 'display_name', placeholder: 'johndoe42', value: (info.display_name||'') })
+              ),
               fieldset(
                 label('Email:'),
                 text({ 'class': 'long', name: 'email', placeholder: 'john.doe@gmail.com', value: (info.email||'') })
