@@ -2,13 +2,13 @@ form.fancy label { text-align: right; font-size: 16px; width: 150px; padding-rig
 form.fancy fieldset { line-height: 25px; margin: 20px 0; }
 form.fancy input[type='text'] { width: 180px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
 form.fancy input[type='password'] { width: 180px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
-form.fancy fieldset.no-label { margin-left: 174px; }
+form.fancy fieldset.no-label, form.fancy p { margin-left: 174px; }
 
-form.fancy input[type='text'].long { width: 350px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
-form.fancy input[type='text'].short { width: 100px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
+form.fancy input[type='text'].long { width: 392px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
+form.fancy input[type='text'].short { width: 392px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
 
-form.fancy input[type='password'].long { width: 350px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
-form.fancy input[type='password'].short { width: 100px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
+form.fancy input[type='password'].long { width: 392px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
+form.fancy input[type='password'].short { width: 392px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
 
 form.fancy input[type='submit'] { width: 200px; }
 

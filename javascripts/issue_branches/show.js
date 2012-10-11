@@ -8,7 +8,7 @@ with (scope('PullRequest', 'App')) {
         a({ href: '#repos/' + login + '/' + repository }, login + '/' + repository),
         a({ href: '#repos/' + login + '/' + repository + '/issues' }, 'Issues'),
         a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, '#' + issue_number),
-        ('My Issue Branch')
+        ('Issue Branch')
       ),
       target_div
     );
