@@ -19,8 +19,9 @@ with (scope('PullRequest', 'App')) {
 
       solution && render({ into: target_div },
         div({ 'class': 'split-main' },
-          (solution.commits||[]).length > 0 && !solution.pull_request && div({ 'class': 'info-message', style: 'text-align: center' },
-            a({ 'class': 'blue', style: '', href: curry(submit_solution, login, repository, issue_number) }, 'Submit Solution')
+          (solution.commits||[]).length > 0 && !solution.pull_request && info_message(
+            span({ style: 'margin-right: 25px;' }, "Submit your solution for review by the project committers."),
+            a({ 'class': 'blue', style: 'width: 200px; display: inline-block;', href: curry(submit_solution, login, repository, issue_number) }, 'Submit Solution')
           ),
 
           commits_div
