@@ -1,5 +1,52 @@
 with (scope('Repository', 'App')) {
 
+  // Copied from issues/show.js
+  define('donation_box', function(repo) {
+    return div({ id: 'bounty-box' },
+      div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
+
+      repo.account_balance > 0 && section(
+        div({ 'class': 'total_bounties' }, money(repo.account_balance)),
+        div({ style: 'text-align: center' }, "From ", repo.bounties.length, " backer" + (repo.bounties.length == 1 ? '' : 's') + ".")
+
+
+        // repo.bounties && (repo.bounties.length > 0) && div(
+        //   repo.bounties.map(function(donation) {
+        //     return div(money(donation.amount));
+        //   })
+        // )
+      ),
+
+      section({ style: 'padding: 21px' },
+        form({ action: curry(create_bounty, repo.owner, repo.name, repo.number) },
+          div({ id: 'create-bounty-errors' }),
+
+          div({ 'class': 'amount' },
+            label({ 'for': 'amount-input' }, '$'),
+            text({ placeholder: "25", name: 'amount', id: 'amount-input' })
+          ),
+          div({ 'class': 'payment-method' },
+            div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked', id: 'payment_method_paypal' }), label({ 'for': 'payment_method_paypal' }, img({ src: 'images/paypal.png'}), "PayPal")),
+            div(radio({ name: 'payment_method', value: 'google', id: 'payment_method_google' }), label({ style: 'color: #C2C2C2;', 'for': 'payment_method_google' }, img({ src: 'images/google-wallet.png'}), "Google Wallet")),
+            div(radio({ disabled: true, name: 'payment_method', value: 'amazon', id: 'payment_method_amazon' }), label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' }, img({ src: 'images/amazon.png'}), "Amazon.com"))
+          ),
+          submit({ 'class': 'blue' }, 'Donate')
+        )
+      )
+    );
+  });
+
+  // Copied from issues/show.js
+  define('create_bounty', function(login, repository, issue, form_data) {
+    return BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, window.location.href, function(response) {
+      if (response.meta.success) {
+        window.location.href = response.data.redirect_url;
+      } else {
+        render({ target: 'create-bounty-errors' }, div(response.data.error.join(', '), br()));
+      }
+    });
+  });
+
   route('#repos/:login/:repository', function(login, repository) {
     var target_div = div('Loading...');
 
@@ -17,7 +64,7 @@ with (scope('Repository', 'App')) {
 
       var repo = response.data;
       render({ into: target_div },
-        div({ style: 'float: left; width: 735px; margin-right: 30px' },
+        div({ 'class': 'split-main' },
           section(
             img({ src: repo.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, repo.owner.login),
@@ -32,10 +79,12 @@ with (scope('Repository', 'App')) {
           
           div({ style: 'margin-top: 20px; width: 150px' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/issues'}, 'View All Issues'))
         ),
-        div({ style: 'float: left; width: 170px' }, 
-          div({ 'class': 'stats', style: 'width: 150px; padding: 10px' },
+        div({ 'class': 'split-side' },
+
+          donation_box(repo),
+          div({ 'class': 'stats', style: 'width: 150px; padding: 10px; margin: 20px auto auto auto;' },
             h2(repo.followers),
-            h3({ 'class': 'blue-line' }, 'Followers'),
+            h3({ 'class': 'blue-line' }, 'Followers!'),
 
             h2(repo.forks),
             h3({ 'class': 'blue-line' }, 'Forks'),
@@ -59,8 +108,9 @@ with (scope('Repository', 'App')) {
 //              );
 //            }))
 //          )
+
         ),
-        div({ style: 'clear: both' })
+        div({ 'class': 'split-end' })
       );
     });
   });
