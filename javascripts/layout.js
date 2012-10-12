@@ -91,6 +91,11 @@ with (scope('App')) {
     return div({ 'class': 'info-message' }, arguments);
   });
 
+  // it puts things inside of a grey box
+  define('grey_box', function() {
+    return div({ style: 'background: #eee; border: 1px solid #ccc; padding: 15px 0;' }, arguments);
+  });
+
   // include this element wherever you want to render messages on a page (errors, for instance)
   define('messages', function(options) {
     options = options || {};
@@ -241,8 +246,10 @@ with (scope('App')) {
       });
 
       // default value for sum element
-      difference_element.innerHTML = money(options.max - sum_slider_values(all_sliders))
+      if (difference_element) difference_element.innerHTML = money(options.max - sum_slider_values(all_sliders))
     }
+
+    return all_sliders;
   });
 
   // HTML5 slider helper

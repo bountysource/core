@@ -1,12 +1,12 @@
 with (scope('Issue', 'App')) {
   // determine if a developer has started working on a solution for the issue.
   // callback param is a boolean. returns the solution if dev created one, false otherwise
-  define('get_solution', function(issue_number, callback) {
+  define('get_solution', function(login, repository, issue_number, callback) {
     if (!Storage.get('access_token')) return callback(false);
     BountySource.user_info(function(response) {
       var user_info = response.data||{};
       for (var i=0; user_info.solutions && i<user_info.solutions.length; i++) {
-        if (parseInt(user_info.solutions[i].issue.number) == parseInt(issue_number)) return callback(user_info.solutions[i]);
+        if (parseInt(user_info.solutions[i].issue.number) == parseInt(issue_number) && user_info.solutions[i].base.repository.full_name == login+'/'+repository) return callback(user_info.solutions[i]);
       }
       callback(false);
     });
@@ -122,8 +122,7 @@ with (scope('Issue', 'App')) {
   
   define('developer_box', function(issue) {
     var developer_div = div();
-
-    get_solution(issue.number, function(solution) {
+    get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution) {
       if (solution) {
         render({ into: developer_div },
           a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')

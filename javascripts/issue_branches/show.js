@@ -13,7 +13,7 @@ with (scope('PullRequest', 'App')) {
       target_div
     );
 
-    Issue.get_solution(issue_number, function(solution) {
+    Issue.get_solution(login, repository, issue_number, function(solution) {
       var commits_div = div('Loading...'),
           submit_div = div();
 
