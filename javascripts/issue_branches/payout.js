@@ -114,8 +114,7 @@ with (scope('Payout','IssueBranch')) {
 
 
 
-//      if (!solution || !solution.accepted) {
-      if (false) {
+      if (!solution || !solution.accepted) {
         render({ into: target_div },
           error_message("You have not earned this bounty. Get back to work!")
         );
