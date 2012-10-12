@@ -31,7 +31,7 @@ with (scope('BountySource')) {
   });
 
   define('logout', function() {
-    Storage.remove('access_token');
+    Storage.clear();
     set_route('#', { reload_page: true });
   });
 
@@ -44,7 +44,11 @@ with (scope('BountySource')) {
   });
 
   define('login', function(email, password, callback) {
-    api('/user/login', 'POST', { email: email, password: password }, callback);
+    api('/user/login', 'POST', { email: email, password: password }, function(response) {
+      // store user_info at login
+      if (response.meta.success) Storage.set('user_info', JSON.stringify(response.data));
+      callback(response);
+    });
   });
 
   define('create_account', function(data, callback) {
