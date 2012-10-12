@@ -176,7 +176,7 @@ with (scope('PullRequest', 'App')) {
 
   define('submit_solution', function(login, repository, issue_number, form_data) {
     form_data = form_data || {};
-    BountySource.submit_solution(login, repository, issue_number, { title: (form_data.title || 'Fixes Issue#'+issue_number), body: form_data.body + ' (Fixes Issue #'+issue_number+')' }, function(response) {
+    BountySource.submit_solution(login, repository, issue_number, { title: (form_data.title || 'Fixes Issue#'+issue_number), body: form_data.body||'' + ' (Fixes Issue #'+issue_number+')' }, function(response) {
       if (response.meta.success) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch', { reload_page: true });
       } else {
