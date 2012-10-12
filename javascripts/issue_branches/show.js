@@ -8,17 +8,21 @@ with (scope('PullRequest', 'App')) {
         a({ href: '#repos/' + login + '/' + repository }, login + '/' + repository),
         a({ href: '#repos/' + login + '/' + repository + '/issues' }, 'Issues'),
         a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, '#' + issue_number),
-        ('My Issue Branch')
+        ('Issue Branch')
       ),
       target_div
     );
 
-    Issue.get_solution(issue_number, function(solution) {
+    Issue.get_solution(login, repository, issue_number, function(solution) {
       var commits_div = div('Loading...'),
           submit_div = div();
 
       solution && render({ into: target_div },
         div({ 'class': 'split-main' },
+          (solution.commits||[]).length > 0 && !solution.pull_request && div({ 'class': 'info-message', style: 'text-align: center' },
+            a({ 'class': 'blue', style: '', href: curry(submit_solution, login, repository, issue_number) }, 'Submit Solution')
+          ),
+
           commits_div
         ),
         div({ 'class': 'split-side' },
@@ -27,9 +31,7 @@ with (scope('PullRequest', 'App')) {
             br(),
             a({ 'class': 'green', target: '_blank', href: solution.head.repository.url+'/tree/'+solution.head.name }, 'Your Branch'),
             br(),
-            a({ 'class': 'green', target: '_blank', href: solution.base.repository.url }, 'Base Repository'),
-
-            submit_div
+            a({ 'class': 'green', target: '_blank', href: solution.base.repository.url }, 'Base Repository')
           )
         ),
         div({ 'class': 'split-end' })
@@ -38,13 +40,6 @@ with (scope('PullRequest', 'App')) {
       if (!solution) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
       } else {
-        var advanced_box = div({ id: 'advanced-issue-branch-box', style: "margin: 10px 0; display: none"},
-          b('Title: '), br(),
-          text({ name: 'title', value: 'Fixes issue#'+solution.issue.number, style: 'width: 100%' }), br(),
-          b('Body: '), br(),
-          textarea({ name: 'body', style: 'width: 100%; height: 150px' })
-        );
-
         if (solution.commits.length <= 0) {
           // show git instructions
           render({ into: commits_div },
@@ -70,7 +65,11 @@ with (scope('PullRequest', 'App')) {
               ),
               li(
                 p("Woohoo, you now have your own copy of ", solution.base.repository.name, "! Before you get started, you must tell git to use the ", b('issue branch'), " created by BountySource."),
-                code('cd '+solution.base.repository.name+'\ngit checkout '+solution.head.name)
+                code(
+                  'cd '+solution.base.repository.name,
+                  'git fetch origin',
+                  'git checkout '+solution.head.name
+                )
               )
             ),
 
@@ -79,17 +78,23 @@ with (scope('PullRequest', 'App')) {
 
             h3("My Commits are not Shown!"),
             p("Chances are you did not commit your changes to the designated ", b("issue branch"), ". Run the following command inside of your repository directory:"),
-            code('git symbolic-ref HEAD'),
-            p("If the response does not match:"),
-            code('refs/heads/'+solution.head.name),
-            p("Then you need to switch back to the issue branch. Take note of the response to that previous command, and run the following:"),
-            code('git checkout '+solution.head.name+'\ngit merge refs/heads/master'),
-            p("For that second command, replace 'refs/heads/master' with whatever was returned before."),
-            p("If you run into any problems during the merge, you can consult the ", a({ href: 'http://git-scm.com/docs/git-merge' }, 'git documentation'), " for help"),
+            code('git branch -l'),
+            p("You will get a list of all the branches, with an asterisk next to the one you are currently committing changes to:"),
+            code(
+              '  '+solution.head.name,
+              '  issue12',
+              '* master'
+            ),
+            p("You need to switch back to the issue branch, then move the changes you made over to it. For the following rebase command, use the name of the branch that you are on:"),
+            code(
+              'git checkout '+solution.head.name,
+              'git rebase master'
+            ),
+            p("If you run into any problems during the rebase, consult the ", a({ href: 'http://git-scm.com/book/en/Git-Branching-Rebasing' }, 'git documentation'), " for assistance, however, it should work marvelously in this case."),
             br(),
 
             h3('Additional Help'),
-            p("If you need additional help with Git or GitHub, you may find the following links useful"),
+            p("If you need additional help with Git or GitHub, you may find the following links useful:"),
             ul(
               li(a({ target: '_blank', href: '#faq' }, 'BountySource FAQs')),
               li(a({ target: '_blank', href: 'https://help.github.com' }, 'GitHub help')),
@@ -99,29 +104,51 @@ with (scope('PullRequest', 'App')) {
         } else if (solution.pull_request) {
           // where there is normally a submit solution button, render a view solution button that links to GitHub
           render({ into: submit_div },
-            br(),
-            a({ 'class': 'blue', target: '_blank', href: '' }, 'Your Submission')
+            a({ 'class': 'blue', target: '_blank', href: solution.pull_request.url }, 'Your Submission')
           );
 
-          // pull request
-          render({ into: commits_div },
-            div({ style: 'padding: 5px 20px; margin-bottom: 15px; border-radius: 3px; background: #DFF7CB;'},
-              p("Your solution has been submitted, and is awaiting review by the project committers.")
-            ),
-            commits_table(solution)
-          );
+          // pull request has been merged, and the underlying issue closed
+          if (solution.pull_request.merged && solution.issue.closed) {
+            render({ into: commits_div },
+              success_message("Your solution has been merged, and accepted as satisfactory by the committers! Once the dispute period is over, you will be paid out."),
+              commits_table(solution)
+            );
+          // pull request has been merged, but the underlying issue has not been closed
+          } else if (solution.pull_request.merged && !solution.issue.closed) {
+            render({ into: commits_div },
+              success_message("Your solution has been merged into the base repository. When the underlying issue is also closed, the dispute period will begin, after which you will be paid if your solution is deemed satisfactory."),
+              commits_table(solution)
+            );
+            // the pull_request has not been merged, but it is automatically mergeable
+          } else if (solution.pull_request.mergeable) {
+            render({ into: commits_div },
+              success_message("Your solution has been submitted, and is awaiting review by the project committers."),
+              commits_table(solution)
+            );
+          // the pull_request has not been merged, and it requires a rebase as it is unmergeable.
+          } else {
+            render({ into: commits_div },
+              success_message(
+                "Your solution has been submitted, but is not mergeable with the base repository. The project committers cannot automatically accept your solution until you perform a ", b('rebase'), ".",
+                br(),
+                a({ href: 'http://git-scm.com/book/en/Git-Branching-Rebasing' }, "Learn more about rebasing"), ", or just follow the instructions below to make your solution branch automatically mergeable."
+              ),
+
+              h3('Rebasing your Issue Branch'),
+              p('From within your fork of the repository, ', (solution.head.repository.full_name), ', run the following:'),
+              code(
+                "git checkout "+solution.head.name,
+                "git pull --rebase https://github.com/"+solution.base.repository.full_name+" master",
+                "git push"
+              ),
+
+              h3('Resolving Merge Conflicts'),
+              p("Depending on the changes that were made, there may be conflicts in certain files. A conflict means both you and the base branch made changes to the same part of a file, and git doesn't know how to automatically merge it. If you run into conflicts, and need some help overcoming them, follow the ", a({ href: 'http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging#Basic-Merge-Conflicts' }, 'git documentation'), " on resolving merge conflicts."),
+
+              commits_table(solution)
+            );
+          }
         } else {
-          // show submit button
-          render({ into: submit_div },
-            br(),
-            form({ action: curry(submit_solution, login, repository, issue_number) },
-              div({ id: 'submit-solution-errors' }),
-              advanced_box,
-              submit({ 'class': 'blue' }, 'Submit Solution'),
-              div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
-            )
-          );
-
           // show commits
           render({ into: commits_div }, commits_table(solution));
         }
@@ -147,13 +174,12 @@ with (scope('PullRequest', 'App')) {
   })
 
   define('submit_solution', function(login, repository, issue_number, form_data) {
-    render({ into: 'errors' },'');
-
-    BountySource.submit_solution(login, repository, issue_number, { title: form_data.title, body: form_data.body + ' (Fixes Issue #'+issue_number+')' }, function(response) {
+    form_data = form_data || {};
+    BountySource.submit_solution(login, repository, issue_number, { title: (form_data.title || 'Fixes Issue#'+issue_number), body: form_data.body + ' (Fixes Issue #'+issue_number+')' }, function(response) {
       if (response.meta.success) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch', { reload_page: true });
       } else {
-        render({ into: 'submit-solution-errors' }, div({ style: 'padding: 20px;'}, response.data.error));
+        render_error(error_message(response.data.error));
       }
     });
   });

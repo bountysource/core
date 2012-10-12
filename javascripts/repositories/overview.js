@@ -47,6 +47,7 @@ with (scope('Repository', 'App')) {
     });
   });
 
+
   route('#repos/:login/:repository', function(login, repository) {
     var target_div = div('Loading...');
 
@@ -66,7 +67,7 @@ with (scope('Repository', 'App')) {
       render({ into: target_div },
         div({ 'class': 'split-main' },
           section(
-            img({ src: repo.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
+            img({ src: repo.owner.avatar_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, repo.owner.login),
             repo.owner.login != repo.name && h2({ style: 'margin: 0 0 10px 0' }, repo.name),
             repo.description && span(repo.description),
@@ -83,13 +84,14 @@ with (scope('Repository', 'App')) {
 
           donation_box(repo),
           div({ 'class': 'stats', style: 'width: 150px; padding: 10px; margin: 20px auto auto auto;' },
-            h2(repo.followers),
-            h3({ 'class': 'blue-line' }, 'Followers!'),
+            h2(formatted_number(repo.followers)),
+            h3({ 'class': 'blue-line' }, 'Followers'),
 
-            h2(repo.forks),
+
+            h2(formatted_number(repo.forks)),
             h3({ 'class': 'blue-line' }, 'Forks'),
 
-            h2(repo.bounties.length),
+            h2(formatted_number(repo.bounties.length)),
             h3({ 'class': 'blue-line' }, 'Open Contests'),
 
             h2(money(repo.bounties_total)),

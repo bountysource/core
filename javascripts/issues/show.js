@@ -1,12 +1,12 @@
 with (scope('Issue', 'App')) {
   // determine if a developer has started working on a solution for the issue.
   // callback param is a boolean. returns the solution if dev created one, false otherwise
-  define('get_solution', function(issue_number, callback) {
+  define('get_solution', function(login, repository, issue_number, callback) {
     if (!Storage.get('access_token')) return callback(false);
     BountySource.user_info(function(response) {
       var user_info = response.data||{};
       for (var i=0; user_info.solutions && i<user_info.solutions.length; i++) {
-        if (parseInt(user_info.solutions[i].issue.number) == parseInt(issue_number)) return callback(user_info.solutions[i]);
+        if (parseInt(user_info.solutions[i].issue.number) == parseInt(issue_number) && user_info.solutions[i].base.repository.full_name == login+'/'+repository) return callback(user_info.solutions[i]);
       }
       callback(false);
     });
@@ -14,7 +14,6 @@ with (scope('Issue', 'App')) {
 
   route('#repos/:login/:repository/issues/:issue_number', function(login, repository, issue_number) {
     var target_div = div('Loading...');
-
 
     render(
       breadcrumbs(
@@ -32,6 +31,10 @@ with (scope('Issue', 'App')) {
       render({ into: target_div },
         div({ 'class': 'split-main' },
 
+          // used to render messages into
+          messages(),
+
+          // title of issue, with closed or open notification
           h1({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 
             '#' + issue.number + ': ' + issue.title,
             span({ style: 'font-size: 16px; padding-left: 20px' },
@@ -39,7 +42,7 @@ with (scope('Issue', 'App')) {
             )
           ),
           
-          github_user_html_box({ user: { login: issue.owner }, body_html: issue.body, created_at: issue.remote_created_at }),
+          github_user_html_box({ user: issue.user, body_html: issue.body, created_at: issue.remote_created_at }),
 
           issue.comments.length > 0 && div(
             h2({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 'Comments'),
@@ -102,8 +105,6 @@ with (scope('Issue', 'App')) {
 
       section({ style: 'padding: 21px' },
         form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
-          div({ id: 'create-bounty-errors' }),
-
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
             text({ placeholder: "25", name: 'amount', id: 'amount-input' })
@@ -121,8 +122,7 @@ with (scope('Issue', 'App')) {
   
   define('developer_box', function(issue) {
     var developer_div = div();
-
-    get_solution(issue.number, function(solution) {
+    get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution) {
       if (solution) {
         render({ into: developer_div },
           a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
@@ -134,7 +134,6 @@ with (scope('Issue', 'App')) {
         
         render({ into: developer_div },
           form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
-            div({ id: 'create-solution-errors', style: 'margin-bottom: 10px;' }),
             div('This will create a branch in GitHub for you to solve this issue.'),
             advanced_box,
             submit({ 'class': 'green', style: 'margin-top: 10px;' }, 'Create Issue Branch'),
@@ -164,20 +163,41 @@ with (scope('Issue', 'App')) {
     if (!Login.required()) return;
 
     BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
+
+      console.log(response);
+
       if (response.meta.success) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch');
       } else {
-        render({ into: 'create-solution-errors' }, div(response.data.error));
+        // precondition failed. need to rebase the forked master branch.
+        if (response.meta.status == 412) {
+          render_message(
+            error_message(response.data.error, ' Follow the instructions below to sync your master branch, after which you can begin working on a solution.'),
+
+            h3('Syncing Your Master Branch'),
+            p('To start working on this issue, you need to sync your repository with the original. This minimizes conflicts when you want to submit your solution, making your life much easier.'),
+            p('Navigate to your repository, and run the following commands:'),
+            code(
+              'git checkout master',
+              'git pull https://github.com/'+login+'/'+repository+'.git master',
+              'git push'
+            )
+          );
+        } else {
+          render_message(error_message(response.data.error));
+        }
       }
     });
   });
 
   define('create_bounty', function(login, repository, issue, form_data) {
-    return BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, window.location.href, function(response) {
+    BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, window.location.href, function(response) {
       if (response.meta.success) {
         window.location.href = response.data.redirect_url;
       } else {
-        render({ target: 'create-bounty-errors' }, div(response.data.error.join(', '), br()));
+        render_message(
+          error_message(response.data.error.join(', '), br())
+        );
       }
     });
   });
