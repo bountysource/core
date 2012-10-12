@@ -2,7 +2,14 @@ with (scope('App')) {
   // End point for Github login.
   route ('#login/:access_token', function(access_token) {
     Storage.set('access_token',access_token);
-    set_route(Storage.remove('_redirect_to_after_login') || '#');
+    BountySource.basic_user_info(function(response) {
+      if (response.meta.success) Storage.set('user_info', JSON.stringify(response.data));
+      set_route(Storage.remove('_redirect_to_after_login') || '#');
+    });
+  });
+
+  define('user_info', function() {
+    return Storage.get('user_info') ? JSON.parse(Storage.get('user_info')) : null;
   });
 
   define('time_ago_in_words', function(time) {

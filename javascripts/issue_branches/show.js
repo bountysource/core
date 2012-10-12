@@ -19,8 +19,9 @@ with (scope('PullRequest', 'App')) {
 
       solution && render({ into: target_div },
         div({ 'class': 'split-main' },
-          (solution.commits||[]).length > 0 && !solution.pull_request && div({ 'class': 'info-message', style: 'text-align: center' },
-            a({ 'class': 'blue', style: '', href: curry(submit_solution, login, repository, issue_number) }, 'Submit Solution')
+          (solution.commits||[]).length > 0 && !solution.pull_request && info_message(
+            span({ style: 'margin-right: 25px;' }, "Submit your solution for review by the project committers."),
+            a({ 'class': 'blue', style: 'width: 200px; display: inline-block;', href: curry(submit_solution, login, repository, issue_number) }, 'Submit Solution')
           ),
 
           commits_div
@@ -175,7 +176,7 @@ with (scope('PullRequest', 'App')) {
 
   define('submit_solution', function(login, repository, issue_number, form_data) {
     form_data = form_data || {};
-    BountySource.submit_solution(login, repository, issue_number, { title: (form_data.title || 'Fixes Issue#'+issue_number), body: form_data.body + ' (Fixes Issue #'+issue_number+')' }, function(response) {
+    BountySource.submit_solution(login, repository, issue_number, { title: (form_data.title || 'Fixes Issue#'+issue_number), body: form_data.body||'' + ' (Fixes Issue #'+issue_number+')' }, function(response) {
       if (response.meta.success) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch', { reload_page: true });
       } else {
