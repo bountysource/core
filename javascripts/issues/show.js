@@ -76,11 +76,12 @@ with (scope('Issue', 'App')) {
   });
   
   define('github_user_html_box', function(options) {
+    var user = user_info();
     return div({ style: 'margin-bottom: -1px' },
-      img({ src: options.user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 50px; height: 50px; float: left' }),
+      img({ src: user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 50px; height: 50px; float: left' }),
 
       div({ 'class': 'github_html', style: 'margin-left: 70px; background: #f7f7f7; border-top: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; overflow: auto; padding: 10px;' },
-        div({ style: 'color: #b4b4b4; margin-bottom: 6px' }, options.user.login, ' commented ', time_ago_in_words(options.created_at), ' ago:'),
+        div({ style: 'color: #b4b4b4; margin-bottom: 6px' }, user.login, ' commented ', time_ago_in_words(options.created_at), ' ago:'),
       
         div({ html: options.body_html })
       )
@@ -88,6 +89,8 @@ with (scope('Issue', 'App')) {
   });
   
   define('bounty_box', function(issue) {
+    var user = user_info();
+    console.log('user_info: ' + user.account.balance);
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
@@ -110,9 +113,25 @@ with (scope('Issue', 'App')) {
             text({ placeholder: "25", name: 'amount', id: 'amount-input' })
           ),
           div({ 'class': 'payment-method' },
-            div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked', id: 'payment_method_paypal' }), label({ 'for': 'payment_method_paypal' }, img({ src: 'images/paypal.png'}), "PayPal")),
-            div(radio({ disabled: true, name: 'payment_method', value: 'google', id: 'payment_method_google' }), label({ style: 'color: #C2C2C2;', 'for': 'payment_method_google' }, img({ src: 'images/google-wallet.png'}), "Google Wallet")),
-            div(radio({ disabled: true, name: 'payment_method', value: 'amazon', id: 'payment_method_amazon' }), label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' }, img({ src: 'images/amazon.png'}), "Amazon.com"))
+            div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked',
+                        id: 'payment_method_paypal' }),
+                label({ 'for': 'payment_method_paypal' },
+                      img({ src: 'images/paypal.png'}), "PayPal")),
+            div(radio({ disabled: true, name: 'payment_method', value: 'google',
+                        id: 'payment_method_google' }),
+                label({ style: 'color: #C2C2C2;', 'for': 'payment_method_google' },
+                      img({ src: 'images/google-wallet.png'}), "Google Wallet")),
+            div(radio({ disabled: true, name: 'payment_method', value: 'amazon',
+                        id: 'payment_method_amazon' }),
+                label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' },
+                      img({ src: 'images/amazon.png'}), "Amazon.com")),
+            user.account.balance > 0 ?
+              div(radio({ name: 'payment_method', value: 'personal',
+                id: 'payment_method_account' }),
+                label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
+                  img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
+                  "Your account (" + money(user.account.balance) + ")")) : ''
+            //  + BountySource.user_info.balance
           ),
           submit({ 'class': 'blue' }, 'Create Bounty')
         )
@@ -155,7 +174,7 @@ with (scope('Issue', 'App')) {
       h3('Fields'),
       div("Owner: ", issue.owner),
       div("Has code: ", issue.code ? 'Yes' : 'No'),
-      issue.labels && issue.labels.length > 0 && div("Lables: ", ul(issue.labels))
+      issue.labels && issue.labels.length > 0 && div("Labels: ", ul(issue.labels))
     );
   });
 
@@ -191,7 +210,15 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_bounty', function(login, repository, issue, form_data) {
-    BountySource.create_bounty(login, repository, issue, form_data.amount, form_data.payment_method, window.location.href, function(response) {
+    var payment_method = form_data.payment_method;
+    var amount = form_data.amount;
+    if (payment_method == 'personal') {
+      if (!confirm("Create a bounty of " + money(amount) + " from your account?")) {
+        return false;
+      }
+    }
+    BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href,
+                               function(response) {
       if (response.meta.success) {
         window.location.href = response.data.redirect_url;
       } else {
@@ -201,4 +228,4 @@ with (scope('Issue', 'App')) {
       }
     });
   });
-};
+}

@@ -50,7 +50,7 @@ header ul li a {
 
 
 
-section#content { width: 935px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }
+section#content { width: 955px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }
 
 section#homepage { width: 978px; margin: 0 auto; }
 section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; }
@@ -99,7 +99,7 @@ td { padding: 2px 5px; border-top: 1px solid #ddd; }
 th { padding: 2px 5px; font-weight: bold; text-align: left; }
 
 .split-main { float: left; width: 675px; margin-right: 20px; }
-.split-side { float: left; width: 240px }
+.split-side { float: left; width: 260px }
 .split-end { clear: left }
 
 .featured-project { width: 345px; display: inline-block; }
