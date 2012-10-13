@@ -96,7 +96,7 @@ with (scope('Issue', 'App')) {
       
       issue.account_balance > 0 && section(
         div({ 'class': 'total_bounties' }, money(issue.account_balance)),
-        div({ style: 'text-align: center' }, "From ", issue.bounties.length, " backer" + (issue.bounties.length == 1 ? '' : 's') + ".")
+        div({ style: 'text-align: center' }, "From ", issue.bounties.length, " bount" + (issue.bounties.length == 1 ? 'y' : 'ies') + ".")
         
         
         // issue.bounties && (issue.bounties.length > 0) && div(
