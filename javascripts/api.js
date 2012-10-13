@@ -31,7 +31,7 @@ with (scope('BountySource')) {
   });
 
   define('logout', function() {
-    Storage.clear();
+    Storage.clear({ except: ['environment'] });
     set_route('#', { reload_page: true });
   });
 
