@@ -9,7 +9,7 @@ with (scope('App')) {
   });
 
   define('user_info', function() {
-    return Storage.get('user_info') ? JSON.parse(Storage.get('user_info')) : null;
+    return Storage.get('user_info') ? JSON.parse(Storage.get('user_info')) : {};
   });
 
   define('time_ago_in_words', function(time) {

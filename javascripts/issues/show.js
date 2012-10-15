@@ -77,6 +77,7 @@ with (scope('Issue', 'App')) {
   
   define('github_user_html_box', function(options) {
     var user = user_info();
+
     return div({ style: 'margin-bottom: -1px' },
       img({ src: user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 50px; height: 50px; float: left' }),
 
@@ -90,7 +91,9 @@ with (scope('Issue', 'App')) {
   
   define('bounty_box', function(issue) {
     var user = user_info();
-    console.log('user_info: ' + user.account.balance);
+
+//    console.log('user_info: ' + user.account.balance);
+
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
@@ -125,7 +128,7 @@ with (scope('Issue', 'App')) {
                         id: 'payment_method_amazon' }),
                 label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' },
                       img({ src: 'images/amazon.png'}), "Amazon.com")),
-            user.account.balance > 0 ?
+            (user.account && user.account.balance > 0) ?
               div(radio({ name: 'payment_method', value: 'personal',
                 id: 'payment_method_account' }),
                 label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
