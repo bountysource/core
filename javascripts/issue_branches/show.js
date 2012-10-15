@@ -61,11 +61,11 @@ with (scope('PullRequest', 'App')) {
                 code("cd ~/my_projects")
               ),
               li(
-                p("Clone the repository from GitHub. This may take a while, depending on the size of the repository that you forked."),
+                p("Clone the repository from GitHub. This may take a while, depending on size."),
                 code('git clone git@github.com:'+solution.head.repository.full_name+'.git')
               ),
               li(
-                p("Woohoo, you now have your own copy of ", solution.base.repository.name, "! Before you get started, you must tell git to use the ", b('issue branch'), " created by BountySource."),
+                p("Tell git to use the ", b('issue branch'), " created by BountySource."),
                 code(
                   'cd '+solution.base.repository.name,
                   'git fetch origin',
@@ -74,24 +74,24 @@ with (scope('PullRequest', 'App')) {
               )
             ),
 
-            p("That's it! Now, when you commit code, you will be appending the changes to your ", b('issue branch'), ". Once you have made some changes to your branch, they will show up here."),
+            p("You're all set! Now, when you commit code, you will be appending the changes to your ", b('issue branch'), ". All changes will show up here."),
             br(),
 
-            h3("My Commits are not Shown!"),
-            p("Chances are you did not commit your changes to the designated ", b("issue branch"), ". Run the following command inside of your repository directory:"),
+            h3("I Don't See My Commits!"),
+            p("Chances are you didn't commit your changes to the designated ", b("issue branch"), ". Run the following command inside of your repository directory:"),
             code('git branch -l'),
-            p("You will get a list of all the branches, with an asterisk next to the one you are currently committing changes to:"),
+            p("This will give you a list of all branches, with an asterisk next to the one you are currently committing changes to:"),
             code(
               '  '+solution.head.name,
               '  issue12',
               '* master'
             ),
-            p("You need to switch back to the issue branch, then move the changes you made over to it. For the following rebase command, use the name of the branch that you are on:"),
+            p("If the asterisk is beside anything other than ", b(solution.head.name), ", you will need to switch back to the right issue branch, then move the changes you made over to it. Replace 'master' (below) with the name of the branch you are on:"),
             code(
               'git checkout '+solution.head.name,
               'git rebase master'
             ),
-            p("If you run into any problems during the rebase, consult the ", a({ href: 'http://git-scm.com/book/en/Git-Branching-Rebasing' }, 'git documentation'), " for assistance, however, it should work marvelously in this case."),
+            p("If you run into any problems during the rebase, consult the ", a({ href: 'http://git-scm.com/book/en/Git-Branching-Rebasing' }, 'git documentation'), " for assistance."),
             br(),
 
             h3('Additional Help'),
