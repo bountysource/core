@@ -76,7 +76,7 @@ with (scope('Issue', 'App')) {
   });
   
   define('github_user_html_box', function(options) {
-    var user = user_info();
+    var user = options.user;
 
     return div({ style: 'margin-bottom: -1px' },
       img({ src: user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 50px; height: 50px; float: left' }),
