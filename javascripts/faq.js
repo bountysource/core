@@ -22,7 +22,7 @@ with (scope('Faq', 'App')) {
           dd("Anybody who has a GitHub account."),
           
           dt("How does BountySource work?"),
-          dd("It begins with a backer (or group of backers) creating a bounty on an issue (typically a feature request or bug fix). Then, developers can come to BountySource, browse through bounties and begin working on an issue they know they can fix."),
+          dd("It begins with a backer (or group of backers) creating a bounty on a pre-existing issue (typically a feature request or bug fix). Then, developers can come to BountySource, browse through bounties and begin working on an issue they know they can fix."),
           dd("Once a developer finishes working on the fix, he or she will submit a pull request. When and if a committer for the open source project accepts the pull request, the developer is awarded the bounty."),
 
           dt("When several developers are working on an issue, how do you determine who earns the bounty?"),
@@ -32,7 +32,7 @@ with (scope('Faq', 'App')) {
           dd("Once an issue is closed, all bounties associated with it are held for two weeks. During these two weeks, all backers of the issue, along with other developers working on the issue, can verify that the merged code does what it should."),
             
           dt("How do I receive payment for a bounty?"),
-          dd("BountySource will be sending out physical checks to developers. If you are a developer collecting a bounty, you need to fill out the Payment Information portion of your profile so we have all appropriate information."),
+          dd("You can receive payment via Paypal or a physical check. Before collecting a bounty, you need to fill out the Payment Information portion of your profile."),
 
           dt("Do I have to pay taxes on the bounties I collect?"),
           dd("Only if you live inside the United States and earn more than $600 in a year (we'll send you a 1099)."),
@@ -44,7 +44,12 @@ with (scope('Faq', 'App')) {
           dd("No."),
 
           dt("What happens if an issue is never closed?"),
-          dd("Every bounty has a six month time limit. If you created a bounty on an issue and that is not closed within 60 days, you will be refunded."),
+          dd("Every bounty has a six month time limit. If you created a bounty on an issue and that is not closed within six months, you will be refunded."),
+          dd("You can shorten the time limit on your bounty for a fee."),
+          
+          dt("Does 100% of my bounty go to the developer?"),
+          dd("No. BountySource charges a 10% non-refundable fee during bounty payout. Our fee covers costs like credit card processing fees, servers, bandwidth, etc."),
+          dd("Also, developers who win bounties have the option of donating their earnings back into the project, or to a charity."),
         
           dt("Can I dispute a bounty that has been collected?"),
           dd("If you were either a backer for the issue or a developer working on the issue, yes."),
