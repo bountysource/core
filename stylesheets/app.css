@@ -72,7 +72,7 @@ section#homepage .h1-line div { position: absolute;
   border-bottom: 5px solid #f87956;
 }
 
-.stats { background: #f2f3f2; }
+.stats { background: #f2f3f2; border-bottom: 1px solid #CCC; }
 .stats h2 { margin: 0; text-align: right; font-size: 40px; line-height: 40px; font-weight: normal; color: #5b6163 }
 .stats h3 { margin: 0; text-align: right; font-size: 13px; line-height: 13px; font-weight: normal; color: #54595c; margin-top: 5px; margin-bottom: 20px; padding-bottom: 10px; }
 
