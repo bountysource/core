@@ -5,7 +5,7 @@ with (scope('Contributions', 'App')) {
     render(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
-        'Account',
+        a({ href: '#bounties' }, 'All Projects'),
         'Contributions'
       ),
       target_div

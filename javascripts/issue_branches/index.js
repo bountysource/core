@@ -3,7 +3,11 @@ with (scope('IssueBranch', 'App')) {
     var target_div = div('Loading...');
 
     render(
-      breadcrumbs('Issue Branches'),
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        a({ href: '#bounties' }, 'All Projects'),
+        'Issue Branches'
+      ),
       target_div
     );
 
