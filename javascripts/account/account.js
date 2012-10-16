@@ -52,10 +52,7 @@ with (scope('Account','App')) {
         ),
 
         div({ 'class': 'split-side' },
-          div({ style: 'background: #eee; padding: 0 21px 21px 21px;' }, ribbon_header('Account Settings'),
-            br(),
-            a({ 'class': 'blue', href: '#account/address' }, 'Mailing Address'),
-            br(),
+          div({ style: 'background: #eee; padding: 0 21px 21px 21px;' }, ribbon_header('Account Settings'), br(),
             a({ 'class': 'blue', href: '#account/change_password' }, 'Change Password')
           ),
 

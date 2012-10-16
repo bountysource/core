@@ -1,16 +1,4 @@
 with (scope('Account','App')) {
-  route('#account/address', function() {
-    render(
-      breadcrumbs(
-        a({ href: '#' }, 'Home'),
-        a({ href: '#account' }, 'Account'),
-        'Address'
-      ),
-      messages(),
-      Account.create_or_update_address_form()
-    );
-  });
-
   // generic form, to make create, update, and create/update forms
   define('base_address_form', function(options) {
     return form({ 'class': 'fancy', action: function(form_data) { options.action(form_data, options.callback) } },
