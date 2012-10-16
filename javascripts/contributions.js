@@ -24,6 +24,7 @@ with (scope('Contributions', 'App')) {
             tr(
               th(),
               th('Project'),
+              th('Issue'),
               th('Issue Status'),
               th('Bounty Amount'),
               th('Date')
@@ -35,6 +36,7 @@ with (scope('Contributions', 'App')) {
                   img({ src: bounty.repository.user.avatar_url, style: 'width: 50px;' })
                 ),
                 td(bounty.repository.full_name),
+                td(a({ href: Issue.get_href(bounty.issue) }, '#'+bounty.issue.number )),
                 td(bounty.issue.state),
                 td(money(bounty.amount)),
                 td(date(bounty.created_at))
