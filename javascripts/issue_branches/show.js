@@ -123,7 +123,7 @@ with (scope('PullRequest', 'App')) {
           // pull request has been merged, but the underlying issue has not been closed
           } else if (solution.pull_request.merged && !solution.issue.closed) {
             render({ into: commits_div },
-              success_message("Your solution has been merged into the base repository. When the underlying issue is also closed, the dispute period will begin, after which you will be paid if your solution is deemed satisfactory."),
+              success_message("Your solution has been merged into the base repository. When the underlying issue is also closed, the two-week dispute period will begin. If your solution is deemed satisfactory after this period, you will be awarded the Bounty."),
               commits_table(solution)
             );
             // the pull_request has not been merged, but it is automatically mergeable
