@@ -42,7 +42,7 @@ with (scope('Payout','IssueBranch')) {
           messages(),
 
           div({ id: '_form_container', style: 'width: 892px; background: #eee; border: 1px solid #ccc; float: left; margin: auto; padding: 20px; display: none;' },
-            div({ id: '_address_form', style: 'display: none;' }, Account.create_address_form(create_mailing_address)),
+            div({ id: '_address_form', style: 'display: none;' }, Account.create_or_update_address_form(create_mailing_address)),
             div({ id: '_paypal_form', style: 'display: none;' }, Paypal.link_account(update_account_with_paypal_email))
           ),
 
