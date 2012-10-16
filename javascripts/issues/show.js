@@ -165,7 +165,7 @@ with (scope('Issue', 'App')) {
       }
     });
     
-    return div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px' },
+    return div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
       ribbon_header("Developers"),
       br(),
       developer_div
@@ -185,9 +185,6 @@ with (scope('Issue', 'App')) {
     if (!Login.required()) return;
 
     BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
-
-      console.log(response);
-
       if (response.meta.success) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch');
       } else {
