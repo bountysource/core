@@ -1,7 +1,7 @@
 with (scope('Account','App')) {
   // generic form, to make create, update, and create/update forms
   define('base_address_form', function(options) {
-    return form({ 'class': 'fancy', action: function(form_data) { options.action(form_data, options.callback) } },
+    return form({ 'class': 'fancy', action: function(form_data) { options.action(form_data, (options.callback||function(){})) } },
       fieldset(
         label('First & Last Names:'),
         text({ style: 'margin-right: 10px;', name: 'first_name', placeholder: 'John' }),
@@ -75,10 +75,12 @@ with (scope('Account','App')) {
 
   define('create_or_update_address', function(form_data, callback) {
     BountySource.basic_user_info(function(response) {
-      if (response.data.address)
+      if (response.data.address) {
         update_address(form_data, callback);
-      else
+      } else {
         create_address(form_data, callback);
+      }
+      callback(response);
     });
   });
 
@@ -89,6 +91,7 @@ with (scope('Account','App')) {
       } else {
         render_message(error_message(response.data.error));
       }
+      callback(response);
     });
   });
 
@@ -99,6 +102,7 @@ with (scope('Account','App')) {
       } else {
         render_message(error_message(response.data.error));
       }
+      callback(response);
     });
   });
 };

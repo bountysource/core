@@ -147,4 +147,8 @@ with (scope('BountySource')) {
   define('update_address', function(data, callback) {
     api('/user/address', 'PUT', data, callback);
   });
+
+  define('link_paypal_account', function(data, callback) {
+    api('/user/link_paypal', 'POST', data, callback);
+  });
 }
