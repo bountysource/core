@@ -134,7 +134,7 @@ with (scope('Issue', 'App')) {
   
   define('developer_box', function(issue) {
     var developer_div = div();
-    IssueBranch.get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution) {
+    IssueBranch.get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution, user_info) {
       if (solution) {
         render({ into: developer_div },
           a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
