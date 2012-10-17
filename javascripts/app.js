@@ -47,7 +47,7 @@ with (scope('App')) {
   define('date', function(date_string) {
     var d = new Date(date_string),
         month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][d.getMonth()];
-    return month + ' ' + d.getDate() + ' ' + d.getFullYear();
+    return month + ' ' + d.getDate() + ', ' + d.getFullYear();
   });
 
 };
