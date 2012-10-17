@@ -35,7 +35,7 @@ with (scope('Contributions', 'App')) {
                 td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                   img({ src: bounty.repository.user.avatar_url, style: 'width: 50px;' })
                 ),
-                td(bounty.repository.full_name),
+                td(a({ href: Repository.get_href(bounty.issue.repository) }, bounty.repository.full_name)),
                 td(a({ href: Issue.get_href(bounty.issue) }, '#'+bounty.issue.number )),
                 td(bounty.issue.state),
                 td(money(bounty.amount)),

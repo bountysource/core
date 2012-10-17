@@ -78,7 +78,7 @@ with (scope('Repository', 'App')) {
           issue_table({ header_class: 'thick-line-blue' }, "Popular", repo.issues_popular),
           issue_table({ header_class: 'thick-line-orange' }, "Most Recent", repo.issues_most_recent),
           
-          div({ style: 'margin-top: 20px; width: 150px' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/issues'}, 'View All Issues'))
+          div({ style: 'margin-top: 20px; width: 150px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues'))
         ),
         div({ 'class': 'split-side' },
 
@@ -124,8 +124,8 @@ with (scope('Repository', 'App')) {
       table(
         issues.map(function(issue) {
           return tr(
-            td({ style: 'padding-right: 10px' }, a({ href: '#repos/'+issue.repository.full_name+'/issues/'+issue.number, style: 'color: #93979a' }, '#' + issue.number)),
-            td({ style: 'width: 100%' }, a({ href: '#repos/'+issue.repository.full_name+'/issues/'+issue.number }, issue.title)),
+            td({ style: 'padding-right: 10px' }, a({ href: Issue.get_href(issue), style: 'color: #93979a' }, '#' + issue.number)),
+            td({ style: 'width: 100%' }, a({ href: Issue.get_href(issue) }, issue.title)),
             td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developer.png' })]),
             td({ style: 'text-align: right; color: #d8a135; white-space: nowrap' }, issue.comments > 0 && [issue.comments, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-comments.png' })]),
             td({ style: 'text-align: right; white-space' }, issue.account_balance > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(issue.account_balance)))

@@ -28,7 +28,7 @@ with (scope('Repository', 'App')) {
 
           (repositories||[]).map(function(repo) {
             return tr(
-              td({ style: 'width: 200px' }, a({ href: '#repos/'+repo.owner+'/'+repo.name }, repo.owner+'/'+repo.name)),
+              td({ style: 'width: 200px' }, a({ href: Repository.get_href(repo) }, repo.owner+'/'+repo.name)),
               td(money(repo.total_bounty)),
               td(formatted_number(repo.followers)),
               td(formatted_number(repo.forks)),

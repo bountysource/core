@@ -13,7 +13,7 @@ with (scope('PullRequest', 'App')) {
       target_div
     );
 
-    Issue.get_solution(login, repository, issue_number, function(solution) {
+    IssueBranch.get_solution(login, repository, issue_number, function(solution) {
       var commits_div = div('Loading...'),
           submit_div = div();
 
@@ -42,11 +42,19 @@ with (scope('PullRequest', 'App')) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
       } else {
         if (solution.accepted) {
-          render({ into: commits_div },
-            success_message(
-              div({ style: 'text-align: center;' }, span({ style: 'margin-bottom: 15px; display: block; font-size: 20px;' }, "Your solution has been accepted!"), a({ 'class': 'blue', style: 'width: 220px; margin: 0 auto;', href: get_route()+'/payout' }, "Claim the Bounty"))
-            )
-          );
+          if (solution.in_dispute_period) {
+            render({ into: commits_div },
+              info_message(
+                IssueBranch.in_dispute_period_message(solution)
+              )
+            );
+          } else {
+            render({ into: commits_div },
+              success_message(
+                div({ style: 'text-align: center;' }, span({ style: 'margin-bottom: 15px; display: block; font-size: 20px;' }, "Your solution has been accepted!"), a({ 'class': 'blue', style: 'width: 220px; margin: 0 auto;', href: get_route()+'/payout' }, "Claim the Bounty"))
+              )
+            );
+          }
         } else if (solution.commits.length <= 0) {
           // show git instructions
           render({ into: commits_div },
