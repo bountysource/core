@@ -99,6 +99,8 @@ with (scope('Issue', 'App')) {
 
       section({ style: 'padding: 21px' },
         form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
+          div({ id: 'create-bounty-errors' }),
+
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
             text({ placeholder: "25", name: 'amount', id: 'amount-input' })
@@ -121,7 +123,7 @@ with (scope('Issue', 'App')) {
                 id: 'payment_method_account' }),
                 label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
                   img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
-                  "Your account (" + money(user.account.balance) + ")")) : ''
+                  "BountySource", span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")"))) : ''
             //  + BountySource.user_info.balance
           ),
           submit({ 'class': 'blue' }, 'Create Bounty')
@@ -200,19 +202,15 @@ with (scope('Issue', 'App')) {
   define('create_bounty', function(login, repository, issue, form_data) {
     var payment_method = form_data.payment_method;
     var amount = form_data.amount;
-    if (payment_method == 'personal') {
-      if (!confirm("Create a bounty of " + money(amount) + " from your account?")) {
-        return false;
-      }
-    }
     BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href,
                                function(response) {
       if (response.meta.success) {
-        window.location.href = response.data.redirect_url;
+        BountySource.user_info(function(response) {
+          Storage.set('user_info', JSON.stringify(response.data));
+          set_route('#repos/'+login+'/'+repository+'/issues/'+issue);
+        });
       } else {
-        render_message(
-          error_message(response.data.error.join(', '), br())
-        );
+        render({ target: 'create-bounty-errors' }, error_message(response.data.error.join(', ')));
       }
     });
   });

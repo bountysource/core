@@ -166,7 +166,7 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 }
 
 #bounty-box .payment-method div {
-  height: 20px;
+  /*height: 20px;*/
   line-height: 20px;
 }
 

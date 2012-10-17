@@ -45,10 +45,10 @@ with (scope('Repository', 'App')) {
                 id: 'payment_method_account' }),
                 label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
                   img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
-                  "Your account (" + money(user.account.balance) + ")")) : ''
+                  "BountySource", span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")"))) : ''
             //  + BountySource.user_info.balance
           ),
-          submit({ 'class': 'blue' }, 'Create Bounty')
+          submit({ 'class': 'blue' }, 'Donate')
         )
       )
     );
@@ -58,9 +58,12 @@ with (scope('Repository', 'App')) {
   define('create_donation', function(repo_full_name, form_data) {
     return BountySource.create_donation(repo_full_name, form_data.amount, form_data.payment_method, window.location.href, function(response) {
       if (response.meta.success) {
-        window.location.href = response.data.redirect_url;
+        BountySource.user_info(function(response) {
+          Storage.set('user_info', JSON.stringify(response.data));
+          set_route('#repos/'+repo_full_name);
+        });
       } else {
-        render({ target: 'create-bounty-errors' }, div(response.data.error.join(', '), br()));
+        render({ target: 'create-bounty-errors' }, error_message(response.data.error.join(', ')));
       }
     });
   });
