@@ -3,7 +3,7 @@ with (scope('Repository', 'App')) {
   // Copied from issues/show.js
   define('donation_box', function(repo) {
     return div({ id: 'bounty-box' },
-      div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
+      div({ style: 'padding: 0 21px' }, ribbon_header("Donate to Project")),
 
       repo.account_balance > 0 && section(
         div({ 'class': 'total_bounties' }, money(repo.account_balance)),
@@ -78,11 +78,14 @@ with (scope('Repository', 'App')) {
           issue_table({ header_class: 'thick-line-blue' }, "Popular", repo.issues_popular),
           issue_table({ header_class: 'thick-line-orange' }, "Most Recent", repo.issues_most_recent),
           
-          div({ style: 'margin-top: 20px; width: 150px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues'))
+          div(
+            div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
+            div({ style: 'margin-top: 20px; width: 180px; float: left;' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/donate'}, 'Donate to Project')),
+            div({ style: 'clear: both '})
+          )
         ),
         div({ 'class': 'split-side' },
 
-          donation_box(repo),
           div({ 'class': 'stats', style: 'width: 150px; padding: 10px; margin: 20px auto auto auto;' },
             h2(formatted_number(repo.followers)),
             h3({ 'class': 'blue-line' }, 'Followers'),
@@ -135,4 +138,46 @@ with (scope('Repository', 'App')) {
     );
   });
 
+
+  route('#repos/:login/:repository/donate', function(login, repository) {
+
+    var target_div = div('Loading...');
+
+    render(
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        a({ href: '#repos/'+login+'/'+repository }, login + '/' + repository),
+        "Donate"
+      ),
+
+      target_div
+    );
+
+    BountySource.get_repository_overview(login, repository, function(response) {
+      if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
+
+      var repo = response.data;
+      render({ into: target_div },
+        div({ 'class': 'split-main' },
+          section({ id: 'faq' },
+            dl(
+              dt("Why should I donate?"),
+              dd("When you donate to a project, you are making sure your money gets allocated to the project's most important issues."),
+
+              dt("Who gets this money?"),
+              dd("The project's Committers control all donations."),
+
+              dt("What can they do with it?"),
+              dd("Committers use project donations to create bounties on issues within their own project.")
+            )
+          )
+        ),
+        div({ 'class': 'split-side' },
+          donation_box(repo)
+        ),
+        div({ 'class': 'split-end' })
+      );
+    });
+  });
+  
 }
