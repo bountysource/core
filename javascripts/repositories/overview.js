@@ -191,7 +191,7 @@ with (scope('Repository', 'App')) {
               dd("When you donate to a project, you are making sure your money gets allocated to the project's most important issues."),
 
               dt("Who gets this money?"),
-              dd("The project's Committers control all donations."),
+              dd("The project's committers control all donations."),
 
               dt("What can they do with it?"),
               dd("Committers use project donations to create bounties on issues within their own project.")
