@@ -3,7 +3,7 @@ with (scope('App')) {
     return section({ id: 'wrapper' },
       header(
         section(
-          h1(a({ href: '#' }, img({ style: 'margin-left: 20px; vertical-align: middle;', src: 'images/logo.png' }))),
+          h1(a({ href: '#' }, img({ style: 'margin-left: 20px; vertical-align: middle;', src: 'images/logo-beta.png?1' }))),
 
           ul(
             //li(a({ href: '#about' }, 'About')),
