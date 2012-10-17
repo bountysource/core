@@ -115,6 +115,11 @@ with (scope('Repository', 'App')) {
             h2(formatted_number(repo.bounties.length)),
             h3({ 'class': 'blue-line' }, 'Open Contests'),
 
+            // TODO: this isn't correct since the account can be withdrawn from
+            // TODO: add a total_donations column
+            h2(money(repo.account_balance)),
+            h3({ 'class': 'blue-line' }, 'Donations'),
+
             h2(money(repo.bounties_total)),
             h3({ 'class': 'orange-line' }, 'Active Bounties')
 
