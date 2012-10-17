@@ -103,6 +103,9 @@ with (scope('BountySource')) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount, payment_method: payment_method, return_url: return_url }, callback);
   });
 
+  define('create_donation', function(repo_full_name, amount, payment_method, return_url, callback) {
+    api('/github/repos/'+repo_full_name+'/donate', 'POST', { amount: amount, payment_method: payment_method, return_url: return_url }, callback);
+  });
   define('get_user_repositories', function(callback) {
     api('/github/user/repos/', callback);
   });
