@@ -18,7 +18,7 @@ with (scope('Github')) {
   define('link_requiring_auth', function(options, text) {
     options = options || {};
 
-    var original_route = '#'+options.href.split('#').slice(-1)[0];
+    var original_route = '#'+(options.href||get_route()).split('#').slice(-1)[0];
 
     // if not logged in, save the intended href, and replace with auth url.
     // when auth returns, pick off the href and set_route there

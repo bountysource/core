@@ -46,4 +46,9 @@ with (scope('App')) {
     return month + ' ' + d.getDate() + ', ' + d.getFullYear();
   });
 
+  // use to check logged in. if passed a callback, execute that if logged in (passing access token as argument)
+  define('logged_in', function(callback) {
+    return callback ? callback(Storage.get('access_token')) : Storage.get('access_token');
+  });
+
 };

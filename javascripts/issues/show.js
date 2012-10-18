@@ -16,6 +16,7 @@ with (scope('Issue', 'App')) {
 
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
+
       render({ into: target_div },
         div({ 'class': 'split-main' },
 
@@ -79,7 +80,8 @@ with (scope('Issue', 'App')) {
   
   define('bounty_box', function(issue) {
     var bountysource_account_div = div();
-    BountySource.get_cached_user_info(function(user) {
+
+    logged_in() && BountySource.get_cached_user_info(function(user) {
       if (user.account && user.account.balance > 0) {
         render({ into: bountysource_account_div },
           radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
@@ -141,27 +143,35 @@ with (scope('Issue', 'App')) {
   
   define('developer_box', function(issue) {
     var developer_div = div();
-    IssueBranch.get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution, user_info) {
-      if (solution) {
-        render({ into: developer_div },
-          a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
-        );
-      } else {
-        var advanced_box = div({ id: 'advanced-developer-box', style: "margin: 10px 0; display: none"}, 
-          b('Name: '), text({ name: 'branch_name', value: 'issue'+issue.number, style: 'width: 100px' })
-        );
-        
-        render({ into: developer_div },
-          form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
-            div('This will create a branch in GitHub for you to solve this issue.'),
-            advanced_box,
-            submit({ 'class': 'green', style: 'margin-top: 10px;' }, 'Create Issue Branch'),
-            div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
-          )
-        );
-      }
-    });
-    
+
+    if (logged_in()) {
+      IssueBranch.get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution, user_info) {
+        if (solution) {
+          render({ into: developer_div },
+            a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
+          );
+        } else {
+          var advanced_box = div({ id: 'advanced-developer-box', style: "margin: 10px 0; display: none"},
+            b('Name: '), text({ name: 'branch_name', value: 'issue'+issue.number, style: 'width: 100px' })
+          );
+
+          render({ into: developer_div },
+            form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
+              div('This will create a branch in GitHub for you to solve this issue.'),
+              advanced_box,
+              submit({ 'class': 'green', style: 'margin-top: 10px;' }, 'Create Issue Branch'),
+              div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
+            )
+          );
+        }
+      });
+    } else {
+      render({ into: developer_div },
+        p("To start working on a solution, link your GitHub account with BountySource"),
+        Github.link_requiring_auth({ 'class': 'blue' }, 'Link GitHub Account')
+      );
+    }
+
     return div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
       ribbon_header("Developers"),
       br(),
