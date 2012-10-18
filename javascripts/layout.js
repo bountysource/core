@@ -6,7 +6,7 @@ with (scope('App')) {
           h1(a({ href: '#' }, img({ style: 'margin-left: 20px; vertical-align: middle;', src: 'images/logo-beta.png' }))),
 
           ul(
-            //li(a({ href: '#about' }, 'About')),
+            li(a({ href: '#about' }, 'About')),
             li(a({ href: '#faq' }, 'FAQ')),
             li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
             //li(a({ href: '#' }, 'Blog')),
