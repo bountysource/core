@@ -106,7 +106,7 @@ with (scope('Faq', 'App')) {
             ),
             
             dt("Do I have to pay taxes on the bounties I collect?"),
-            dd("If payments made to you are more than $600 for the year, we are required to issue you a 1099 Form to report the payments, which will require you to complete a Form W-9. You should consult your tax advisor as to the taxability of the payments."),
+            dd("If you are in the United States and payments made to you are more than $600 for the year, we are required to issue you a Form 1099 to report the payments, which will require you to complete a Form W-9. You should consult your tax advisor as to the taxability of the payments."),
             
             dt("What is your relationship with Github?"),
             dd("We are an independent developer using the ", a({ href: 'http://developer.github.com/v3/oauth/', target: 'blank' }, "GitHub API"), ".")
