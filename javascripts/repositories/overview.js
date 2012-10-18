@@ -8,7 +8,7 @@ with (scope('Repository', 'App')) {
         render({ into: bountysource_account_div },
           radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
           label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
-            img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
+            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
             "BountySource", 
             span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
           )

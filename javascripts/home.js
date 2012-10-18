@@ -75,7 +75,7 @@ with (scope('Home', 'App')) {
           h2('Staff Picks'),
           ul(
             data.projects.featured.map(function(repo) {
-              return li(img({ src: (repo.user.avatar_url || default_avatar_url),
+              return li(img({ src: (repo.user.avatar_url),
                               style: 'width: 32px; height: 32px' }),
                 a({ href: Repository.get_href(repo), style: 'color: #222' }, repo.display_name))
             })
@@ -86,8 +86,7 @@ with (scope('Home', 'App')) {
           h2('Top Backers'),
           ul(
             data.backers.most_total_bounties.map(function(backer) {
-              return li(img({ src: backer.avatar_url || default_avatar_url,
-                style: 'width: 32px; height: 32px' }), backer.display_name)
+              return li(img({ src: backer.avatar_url, style: 'width: 32px; height: 32px' }), backer.display_name)
             })
           )
         ),
@@ -97,8 +96,7 @@ with (scope('Home', 'App')) {
           ul(
             // most_submitted_solutions is dummy data. most_pull_requests isn't but doesn't have data
             data.developers.most_submitted_solutions.map(function(developer) {
-              return li(img({ src: developer.avatar_url || default_avatar_url,
-                style: 'width: 32px; height: 32px' }), developer.github_login)
+              return li(img({ src: developer.avatar_url, style: 'width: 32px; height: 32px' }), developer.login)
             })
           )
         ),

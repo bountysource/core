@@ -67,7 +67,7 @@ with (scope('Issue', 'App')) {
     var user = options.user;
 
     return div({ style: 'margin-bottom: -1px' },
-      img({ src: user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 50px; height: 50px; float: left' }),
+      img({ src: user.avatar_url, style: 'width: 50px; height: 50px; float: left' }),
 
       div({ 'class': 'github_html', style: 'margin-left: 70px; background: #f7f7f7; border-top: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; overflow: auto; padding: 10px;' },
         div({ style: 'color: #b4b4b4; margin-bottom: 6px' }, user.login, ' commented ', time_ago_in_words(options.created_at), ' ago:'),
@@ -84,7 +84,7 @@ with (scope('Issue', 'App')) {
         render({ into: bountysource_account_div },
           radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
           label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
-            img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
+            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
             "BountySource", 
             span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
           )
@@ -130,7 +130,7 @@ with (scope('Issue', 'App')) {
                         id: 'payment_method_amazon' }),
                 label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' },
                       img({ src: 'images/amazon.png'}), "Amazon.com")),
-                      
+
             bountysource_account_div
           ),
           submit({ 'class': 'blue' }, 'Create Bounty')
