@@ -56,12 +56,18 @@ with (scope('Repository', 'App')) {
 
   // Copied from issues/show.js
   define('create_donation', function(repo_full_name, form_data) {
-    return BountySource.create_donation(repo_full_name, form_data.amount, form_data.payment_method, window.location.href, function(response) {
+    var payment_method = form_data.payment_method;
+    var amount = form_data.amount;
+    return BountySource.create_donation(repo_full_name, amount, payment_method, window.location.href, function(response) {
       if (response.meta.success) {
-        BountySource.user_info(function(response) {
-          Storage.set('user_info', JSON.stringify(response.data));
-          set_route('#repos/'+repo_full_name);
-        });
+        if (payment_method == 'personal') {
+          BountySource.user_info(function(response) {
+            Storage.set('user_info', JSON.stringify(response.data));
+            set_route('#repos/'+repo_full_name);
+          });
+        } else {
+          window.location.href = response.data.redirect_url;
+        }
       } else {
         render({ target: 'create-bounty-errors' }, error_message(response.data.error.join(', ')));
       }
