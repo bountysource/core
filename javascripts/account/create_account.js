@@ -21,7 +21,8 @@ with (scope('CreateAccount','App')) {
           ),
           fieldset(
             label('Display Name:'),
-            text({ name: 'display_name', placeholder: 'johndoe42' })
+            text({ name: 'display_name', placeholder: 'John S. Doe' }),
+            small(' (optional)')
           ),
           fieldset(
             label('Email:'),
@@ -29,11 +30,11 @@ with (scope('CreateAccount','App')) {
           ),
           fieldset(
             label('Password:'),
-            password({ name: 'password', placeholder: 'abc123'})
+            password({ name: 'password', placeholder: 'abcd1234'})
           ),
           fieldset(
             label('Confirm Password:'),
-            password({ name: 'password_confirmation', placeholder: 'abc123'})
+            password({ name: 'password_confirmation', placeholder: 'abcd1234'})
           ),
 //          fieldset({ 'class': 'no-label' },
 //            checkbox({ style: 'padding-right: 10px;', name: 'agree_to_terms' }),
