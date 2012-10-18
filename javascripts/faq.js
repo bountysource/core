@@ -47,13 +47,6 @@ with (scope('Faq', 'App')) {
             dt("Who is a committer?"),
             dd("Any ", a({ href: 'https://help.github.com/articles/what-are-the-different-access-permissions', target: 'blank'}, "Github user"), " who can merge pull requests into a project."),
             
-            dt("How does BountySource work?"),
-            dd("It begins with a backer (or group of backers) creating a bounty on a pre-existing GitHub issue (typically a feature request or bug fix). Then, developers can come to BountySource, browse through bounties and begin working on an issue they know they can solve."),
-            dd("Once a developer finishes working on the fix, he or she will submit a pull request. When and if a committer accepts the pull request, the developer is awarded the bounty."),
-            
-            dt("...so, what's my role in all of this?"),
-            dd("The more developers there are working on issues within your project, the more pull requests you will receive. You don't need to do anything out of the ordinary - just let your community know about the bounties, check for and merge pull requests as normal, and we take care of the rest."),
-            
             dt("Why should I use BountySource for my project?"),
             dd(
               'There are several benefits to using BountySource:',
@@ -63,6 +56,13 @@ with (scope('Faq', 'App')) {
                 li(u('Earn money.'), ' As a project committer, you are still eligible to work on issues and collect bounties within your own project. ')
               )
             ),
+
+            dt("How does BountySource work?"),
+            dd("It begins with a backer (or group of backers) creating a bounty on a pre-existing GitHub issue (typically a feature request or bug fix). Then, developers can come to BountySource, browse through bounties and begin working on an issue they know they can solve."),
+            dd("Once a developer finishes working on the fix, he or she will submit a pull request. When and if a committer accepts the pull request, the developer is awarded the bounty."),
+            
+            dt("...so, what's my role in all of this?"),
+            dd("The more developers there are working on issues within your project, the more pull requests you will receive. You don't need to do anything out of the ordinary - just let your community know about the bounties, check for and merge pull requests as normal, and we take care of the rest."),
                         
             dt("Can I work on issues and collect bounties within my own project?"),
             dd("Yes."),
