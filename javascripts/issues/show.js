@@ -78,10 +78,20 @@ with (scope('Issue', 'App')) {
   });
   
   define('bounty_box', function(issue) {
-    var user = user_info();
-
-//    console.log('user_info: ' + user.account.balance);
-
+    var bountysource_account_div = div();
+    BountySource.get_cached_user_info(function(user) {
+      if (user.account && user.account.balance > 0) {
+        render({ into: bountysource_account_div },
+          radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
+          label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
+            img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
+            "BountySource", 
+            span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
+          )
+        );
+      }
+    });
+    
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
@@ -118,13 +128,8 @@ with (scope('Issue', 'App')) {
                         id: 'payment_method_amazon' }),
                 label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' },
                       img({ src: 'images/amazon.png'}), "Amazon.com")),
-            (user.account && user.account.balance > 0) ?
-              div(radio({ name: 'payment_method', value: 'personal',
-                id: 'payment_method_account' }),
-                label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
-                  img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
-                  "BountySource", span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")"))) : ''
-            //  + BountySource.user_info.balance
+                      
+            bountysource_account_div
           ),
           submit({ 'class': 'blue' }, 'Create Bounty')
         )
@@ -206,7 +211,7 @@ with (scope('Issue', 'App')) {
       if (response.meta.success) {
         if (payment_method == 'personal') {
           BountySource.user_info(function(response) {
-            Storage.set('user_info', JSON.stringify(response.data));
+            BountySource.set_cached_user_info(null);
             set_route('#repos/'+login+'/'+repository+'/issues/'+issue);
           });
         } else {

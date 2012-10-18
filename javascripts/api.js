@@ -38,6 +38,23 @@ with (scope('BountySource')) {
   define('user_info', function(callback) {
     api('/user', callback);
   });
+  
+  define('get_cached_user_info', function(callback) {
+    if (Storage.get('user_info')) {
+      callback(JSON.parse(Storage.get('user_info')));
+    } else {
+      user_info(function(response) {
+        if (response.meta.success) {
+          set_cached_user_info(response.data);
+          callback(response.data);
+        }
+      });
+    }
+  });
+
+  define('set_cached_user_info', function(hash) {
+    hash ? Storage.set('user_info', JSON.stringify(hash)) : Storage.remove('user_info');
+  });
 
   define('basic_user_info', function(callback) {
     api('/user', 'GET', { basic: true }, callback);
@@ -46,7 +63,7 @@ with (scope('BountySource')) {
   define('login', function(email, password, callback) {
     api('/user/login', 'POST', { email: email, password: password }, function(response) {
       // store user_info at login
-      if (response.meta.success) Storage.set('user_info', JSON.stringify(response.data));
+      if (response.meta.success) set_cached_user_info(response.data);
       callback(response);
     });
   });

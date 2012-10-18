@@ -3,13 +3,9 @@ with (scope('App')) {
   route ('#login/:access_token', function(access_token) {
     Storage.set('access_token',access_token);
     BountySource.basic_user_info(function(response) {
-      if (response.meta.success) Storage.set('user_info', JSON.stringify(response.data));
+      if (response.meta.success) BountySource.set_cached_user_info(response.data);
       set_route(Storage.remove('_redirect_to_after_login') || '#');
     });
-  });
-
-  define('user_info', function() {
-    return Storage.get('user_info') ? JSON.parse(Storage.get('user_info')) : {};
   });
 
   define('time_ago_in_words', function(time) {

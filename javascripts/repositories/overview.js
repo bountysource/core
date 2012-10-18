@@ -2,7 +2,20 @@ with (scope('Repository', 'App')) {
 
   // TODO: Copied from issues/show.js
   define('donation_box', function(repo) {
-    var user = user_info();
+    var bountysource_account_div = div();
+    BountySource.get_cached_user_info(function(user) {
+      if (user.account && user.account.balance > 0) {
+        render({ into: bountysource_account_div },
+          radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
+          label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
+            img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
+            "BountySource", 
+            span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
+          )
+        );
+      }
+    });
+
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Donate to Project")),
 
@@ -40,13 +53,8 @@ with (scope('Repository', 'App')) {
               id: 'payment_method_amazon' }),
               label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' },
                 img({ src: 'images/amazon.png'}), "Amazon.com")),
-            user.account.balance > 0 ?
-              div(radio({ name: 'payment_method', value: 'personal',
-                id: 'payment_method_account' }),
-                label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
-                  img({ src: user.github_user.avatar_url || 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 16px; height: 16px' }),
-                  "BountySource", span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")"))) : ''
-            //  + BountySource.user_info.balance
+
+            bountysource_account_div
           ),
           submit({ 'class': 'blue' }, 'Donate')
         )
@@ -61,10 +69,8 @@ with (scope('Repository', 'App')) {
     return BountySource.create_donation(repo_full_name, amount, payment_method, window.location.href, function(response) {
       if (response.meta.success) {
         if (payment_method == 'personal') {
-          BountySource.user_info(function(response) {
-            Storage.set('user_info', JSON.stringify(response.data));
-            set_route('#repos/'+repo_full_name);
-          });
+          BountySource.set_cached_user_info(null);
+          set_route('#repos/'+repo_full_name);
         } else {
           window.location.href = response.data.redirect_url;
         }
