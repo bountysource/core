@@ -19,7 +19,7 @@ with (scope('Faq', 'App')) {
             tr(
               td({ style: 'width: 33%'},
                 div({ style: 'border: 1px solid #ccc; margin: 0 15px; padding: 20px'},
-                  p("Do you commit code to existing Open Source projects?"),
+                  p("Do you commit code to existing open-source projects?"),
                   h1("COMMITTERS"),
                   a({ 'class': 'blue', href: curry(show_faq_section, 'committer' )}, "Learn More")
                 )
@@ -35,7 +35,7 @@ with (scope('Faq', 'App')) {
               
               td({ style: 'width: 33%'},
                 div({ style: 'border: 1px solid #ccc; margin: 0 15px; padding: 20px'},
-                  p("Do you use Open Source Software and want to contribute to your favorite projects?"),
+                  p("Do you use open-source software and want to contribute to your favorite projects?"),
                   h1("BACKERS"),
                   a({ 'class': 'blue', href: curry(show_faq_section, 'backer' )}, "Learn More")
                 )
@@ -99,14 +99,14 @@ with (scope('Faq', 'App')) {
             dd(
               'What you do with your money is completely up to you. You can either collect your full 90%, or make donations:',
               ul(
-                li(u('To charity.'), " We currently support donations to EFF, x, x."),
+                li(u('To charity.'), " We support charities like ", a({ href: 'https://www.eff.org/', target: 'blank' }, "EFF"), "."),
                 li(u('Back into the project. '), ' Project committers will be able to use this money to create more bounties on existing issues within the project. (That you could earn again!)'),
                 li(u('To BountySource.'), ' :-)')
               )
             ),
             
             dt("Do I have to pay taxes on the bounties I collect?"),
-            dd("Only if you live inside the United States and earn more than $600 in a year (we'll send you a 1099)."),
+            dd("If payments made to you are more than $600 for the year, we are required to issue you a 1099 Form to report the payments, which will require you to complete a Form W-9. You should consult your tax advisor as to the taxability of the payments."),
             
             dt("What is your relationship with Github?"),
             dd("We are an independent developer using the ", a({ href: 'http://developer.github.com/v3/oauth/', target: 'blank' }, "GitHub API"), ".")
@@ -139,9 +139,6 @@ with (scope('Faq', 'App')) {
             
             dt("When will a solution be made available to the public?"),
             dd("We have no control over when a new OSS release is made. We only award a bounty once code has been merged into the master branch of the project. The rest is up to project owners and committers."),
-          
-            dt("Are you an escrow?"),
-            dd("No."),
 
             dt("What happens if an issue is never closed?"),
             dd("Every bounty has a six month time limit. If you created a bounty on an issue and that is not closed within six months, you will be refunded."),
