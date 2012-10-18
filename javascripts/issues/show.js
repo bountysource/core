@@ -93,12 +93,12 @@ with (scope('Issue', 'App')) {
         );
       }
     });
-    
+
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
-      issue.account_balance > 0 && section(
-        div({ 'class': 'total_bounties' }, money(issue.account_balance)),
+      issue.bounty_amount > 0 && section(
+        div({ 'class': 'total_bounties' }, money(issue.bounty_amount)),
         div({ style: 'text-align: center' }, "From ", issue.bounties.length, " bount" + (issue.bounties.length == 1 ? 'y' : 'ies') + ".")
         
         
@@ -112,6 +112,8 @@ with (scope('Issue', 'App')) {
       section({ style: 'padding: 21px' },
         form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
           div({ id: 'create-bounty-errors' }),
+
+
 
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
