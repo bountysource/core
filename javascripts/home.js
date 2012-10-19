@@ -65,8 +65,8 @@ with (scope('Home', 'App')) {
         h2(money(data.total_unclaimed)),
         h3({ 'class': 'orange-line' }, 'Active Bounties'),
 
-        h2(money(data.total_paid_last_month)),
-        h3({ 'class': 'green-line' }, 'Payout Last Month')
+        h2(formatted_number(data.total_bounties_created_this_month)),
+        h3({ 'class': 'green-line' }, 'Bounties Created This Month')
       );
 
       render({ into: leaderboard_container }, 
