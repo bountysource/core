@@ -26,9 +26,7 @@ with (scope('Issue', 'App')) {
           // title of issue, with closed or open notification
           h1({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 
             '#' + issue.number + ': ' + issue.title,
-            span({ style: 'font-size: 16px; padding-left: 20px' },
-              issue.state == 'open' ? span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Open') : span({ style: 'background: #D11A1A; border-radius: 4px; padding: 4px; color: white' }, 'Closed')
-            )
+            div({ style: 'padding-left: 20px; display: inline-block;' }, Issue.status_element(issue))
           ),
           
           github_user_html_box({ user: issue.user, body_html: issue.body, created_at: issue.remote_created_at }),

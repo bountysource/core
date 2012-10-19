@@ -24,8 +24,9 @@ with (scope('Contributions', 'App')) {
             tr(
               th(),
               th('Project'),
-              th('Issue'),
-              th('Issue Status'),
+              th({ style: 'width: 60px;' }, 'Issue'),
+              th({ style: 'width: 200px;' }),
+              th({ style: 'text-align: center;' }, 'Issue Status'),
               th('Bounty Amount'),
               th('Date')
             ),
@@ -37,7 +38,8 @@ with (scope('Contributions', 'App')) {
                 ),
                 td(a({ href: Repository.get_href(bounty.issue.repository) }, bounty.repository.full_name)),
                 td(a({ href: Issue.get_href(bounty.issue) }, '#'+bounty.issue.number )),
-                td(bounty.issue.state),
+                td({ style: 'color: #888' }, bounty.issue.title),
+                td({ style: 'text-align: center;' }, Issue.status_element(bounty.issue)),
                 td(money(bounty.amount)),
                 td(date(bounty.created_at))
               )

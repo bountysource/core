@@ -22,27 +22,27 @@ with (scope('IssueBranch', 'App')) {
         render({ into: target_div },
           table(
             tr(
-              th('Issue'),
-              th('Base Repository'),
-              th('Head Repository'),
-              th('Head Branch'),
-              th('Submitted'),
-              th('Merged'),
-              th('Actions')
+              th(),
+              th('Project'),
+              th({ style: 'width: 60px;' }, 'Issue'),
+              th({ style: 'width: 200px;' }),
+              th({ style: 'text-align: center; width: 200px' }, 'Issue Branch Status'),
+              th()
             ),
 
-            info.solutions.map(function(s) {
+            info.solutions.map(function(issue_branch) {
               return tr(
-                td(a({ href: Issue.get_href(s.issue) }, '#'+s.issue.number)),
-                td(a({ href: Repository.get_href(s.base.repository) }, s.base.repository.full_name)),
-                td(s.head.repository.full_name),
-                td(s.head.name),
-                td(!!s.pull_request+''),
-                td(!!(s.pull_request && s.pull_request.merged)+''),
+                td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
+                  img({ style: 'width: 50px;', src: issue_branch.base.repository.user.avatar_url })
+                ),
+                td(a({ href: Repository.get_href(issue_branch.base.repository) }, issue_branch.base.repository.full_name)),
+                td(a({ href: Issue.get_href(issue_branch.issue) }, '#'+issue_branch.issue.number)),
+                td({ style: 'color: #888;' }, issue_branch.issue.title),
+                td({ style: 'text-align: center;' }, IssueBranch.status_element(issue_branch)),
 
                 // show View Submission or View Issue Branch, depending on whether or not the solution has been
                 // submitted as a pull request
-                td(div({ style: 'margin: 10px 0px;' }, s.pull_request ? a({ 'class': 'blue', href: IssueBranch.get_href(s) }, 'View Submission') : a({ 'class': 'green', href: IssueBranch.get_href(s) }, 'View Issue Branch')))
+                td(div({ style: 'margin: 10px 0px;' }, issue_branch.pull_request ? a({ 'class': 'blue', href: IssueBranch.get_href(issue_branch) }, 'View Submission') : a({ 'class': 'green', href: IssueBranch.get_href(issue_branch) }, 'View Issue Branch')))
               );
             })
           )
