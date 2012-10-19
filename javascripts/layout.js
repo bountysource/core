@@ -29,7 +29,7 @@ with (scope('App')) {
       section({ id: 'content' },
         yield
       ),
-      footer("BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " All rights reserved. Copyright ©2012, Badger Inc." )
+      footer("BountySource ", a({ href: '#termsofservice' }, 'Terms of Service') , ". BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " All rights reserved. Copyright ©2012, Badger Inc." )
     );
   });
   
