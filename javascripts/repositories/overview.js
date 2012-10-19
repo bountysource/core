@@ -1,87 +1,4 @@
-with (scope('Repository', 'App')) {
-
-  // TODO: Copied from issues/show.js
-  define('donation_box', function(repo) {
-    var bountysource_account_div = div();
-    BountySource.get_cached_user_info(function(user) {
-      if (user.account && user.account.balance > 0) {
-        render({ into: bountysource_account_div },
-          radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
-          label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
-            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
-            "BountySource", 
-            span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
-          )
-        );
-      }
-    });
-
-    return div({ id: 'bounty-box' },
-      div({ style: 'padding: 0 21px' }, ribbon_header("Donate to Project")),
-
-      repo.account_balance > 0 && section(
-        div({ 'class': 'total_bounties' }, money(repo.account_balance)),
-        div({ style: 'text-align: center' }, "From ", repo.bounties.length, " backer" + (repo.bounties.length == 1 ? '' : 's') + ".")
-
-
-        // repo.bounties && (repo.bounties.length > 0) && div(
-        //   repo.bounties.map(function(donation) {
-        //     return div(money(donation.amount));
-        //   })
-        // )
-      ),
-
-      // TODO: Exact copy from issues/show.js except form action
-      section({ style: 'padding: 21px' },
-        form({ action: curry(create_donation, repo.full_name) },
-          div({ id: 'create-bounty-errors' }),
-
-          div({ 'class': 'amount' },
-            label({ 'for': 'amount-input' }, '$'),
-            text({ placeholder: "25", name: 'amount', id: 'amount-input' })
-          ),
-          div({ 'class': 'payment-method' },
-            div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked',
-              id: 'payment_method_paypal' }),
-              label({ 'for': 'payment_method_paypal' },
-                img({ src: 'images/paypal.png'}), "PayPal")),
-            div({ title: 'Coming soon!' },
-              radio({ disabled: true, name: 'payment_method', value: 'google',
-              id: 'payment_method_google' }),
-              label({ style: 'color: #C2C2C2;', 'for': 'payment_method_google' },
-                img({ src: 'images/google-wallet.png'}), "Google Wallet")),
-            div({ title: 'Coming soon!' },
-              radio({ disabled: true, name: 'payment_method', value: 'amazon',
-              id: 'payment_method_amazon' }),
-              label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' },
-                img({ src: 'images/amazon.png'}), "Amazon.com")),
-
-            bountysource_account_div
-          ),
-          submit({ 'class': 'blue' }, 'Donate')
-        )
-      )
-    );
-  });
-
-  // Copied from issues/show.js
-  define('create_donation', function(repo_full_name, form_data) {
-    var payment_method = form_data.payment_method;
-    var amount = form_data.amount;
-    return BountySource.create_donation(repo_full_name, amount, payment_method, window.location.href, function(response) {
-      if (response.meta.success) {
-        if (payment_method == 'personal') {
-          BountySource.set_cached_user_info(null);
-          set_route('#repos/'+repo_full_name);
-        } else {
-          window.location.href = response.data.redirect_url;
-        }
-      } else {
-        render({ target: 'create-bounty-errors' }, error_message(response.data.error.join(', ')));
-      }
-    });
-  });
-
+with (scope('Repository')) {
 
   route('#repos/:login/:repository', function(login, repository) {
     var target_div = div('Loading...');
@@ -108,7 +25,8 @@ with (scope('Repository', 'App')) {
             repo.description && span(repo.description),
             div({ style: 'clear: both' })
           ),
-        
+
+          issue_table({ header_class: 'thick-line-green' }, "Largest Bounties", repo.issues_most_bounteous),
           issue_table({ header_class: 'thick-line-green' }, "Featured", repo.issues_featured),
           issue_table({ header_class: 'thick-line-blue' }, "Popular", repo.issues_popular),
           issue_table({ header_class: 'thick-line-orange' }, "Most Recent", repo.issues_most_recent),
@@ -171,7 +89,7 @@ with (scope('Repository', 'App')) {
             td({ style: 'width: 100%' }, a({ href: Issue.get_href(issue) }, issue.title)),
             td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developer.png' })]),
             td({ style: 'text-align: right; color: #d8a135; white-space: nowrap' }, issue.comments > 0 && [issue.comments, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-comments.png' })]),
-            td({ style: 'text-align: right; white-space' }, issue.account_balance > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(issue.account_balance)))
+            td({ style: 'text-align: right; white-space' }, issue.bounty_amount > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(issue.bounty_amount)))
           );
         })
       )
@@ -217,6 +135,88 @@ with (scope('Repository', 'App')) {
         ),
         div({ 'class': 'split-end' })
       );
+    });
+  });
+
+  define('donation_box', function(repo) {
+    var bountysource_account_div = div();
+
+    BountySource.get_cached_user_info(function(user) {
+      if (user.account && user.account.balance > 0) {
+        render({ into: bountysource_account_div },
+          radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
+          label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
+            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
+            "BountySource",
+            span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
+          )
+        );
+      }
+    });
+
+    return div({ id: 'bounty-box' },
+      div({ style: 'padding: 0 21px' }, ribbon_header("Donate to Project")),
+
+      repo.account_balance > 0 && section(
+        div({ 'class': 'total_bounties' }, money(repo.account_balance)),
+        div({ style: 'text-align: center' }, "From ", repo.bounties.length, " backer" + (repo.bounties.length == 1 ? '' : 's') + ".")
+
+
+        // repo.bounties && (repo.bounties.length > 0) && div(
+        //   repo.bounties.map(function(donation) {
+        //     return div(money(donation.amount));
+        //   })
+        // )
+      ),
+
+      // TODO: Exact copy from issues/show.js except form action
+      section({ style: 'padding: 21px' },
+        form({ action: curry(create_donation, repo.full_name) },
+          div({ id: 'create-bounty-errors' }),
+
+          div({ 'class': 'amount' },
+            label({ 'for': 'amount-input' }, '$'),
+            text({ placeholder: "25", name: 'amount', id: 'amount-input' })
+          ),
+          div({ 'class': 'payment-method' },
+            div(radio({ name: 'payment_method', value: 'paypal', checked: 'checked',
+              id: 'payment_method_paypal' }),
+              label({ 'for': 'payment_method_paypal' },
+                img({ src: 'images/paypal.png'}), "PayPal")),
+            div({ title: 'Coming soon!' },
+              radio({ disabled: true, name: 'payment_method', value: 'google',
+                id: 'payment_method_google' }),
+              label({ style: 'color: #C2C2C2;', 'for': 'payment_method_google' },
+                img({ src: 'images/google-wallet.png'}), "Google Wallet")),
+            div({ title: 'Coming soon!' },
+              radio({ disabled: true, name: 'payment_method', value: 'amazon',
+                id: 'payment_method_amazon' }),
+              label({ style: 'color: #C2C2C2;', 'for': 'payment_method_amazon' },
+                img({ src: 'images/amazon.png'}), "Amazon.com")),
+
+            bountysource_account_div
+          ),
+          submit({ 'class': 'blue' }, 'Donate')
+        )
+      )
+    );
+  });
+
+  // Copied from issues/show.js
+  define('create_donation', function(repo_full_name, form_data) {
+    var payment_method = form_data.payment_method;
+    var amount = form_data.amount;
+    return BountySource.create_donation(repo_full_name, amount, payment_method, window.location.href, function(response) {
+      if (response.meta.success) {
+        if (payment_method == 'personal') {
+          BountySource.set_cached_user_info(null);
+          set_route('#repos/'+repo_full_name);
+        } else {
+          window.location.href = response.data.redirect_url;
+        }
+      } else {
+        render({ target: 'create-bounty-errors' }, error_message(response.data.error.join(', ')));
+      }
     });
   });
   
