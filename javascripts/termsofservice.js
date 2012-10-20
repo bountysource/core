@@ -123,7 +123,7 @@ with (scope('TermsofService', 'App')) {
       p('13.10 ', b('Electronic Delivery, Notice Policy and Your Consent.'), ' By using the Services, you consent to receive from BountySource all communications including notices, agreements, legally required disclosures, or other information in connection with the Services (collectively, "', b('Contract Notices'), '") electronically. BountySource may provide the electronic Contract Notices by posting them on the Site. If you desire to withdraw your consent to receive Contract Notices electronically, you must discontinue your use of the Services.'),
       p('13.11 ', b('Electronic Communications Privacy Act Notice (18 USC §2701-2711).'), ' BOUNTYSOURCE MAKES NO GUARANTY OF CONFIDENTIALITY OR PRIVACY OF ANY COMMUNICATION OR INFORMATION TRANSMITTED ON THE SITE OR ANY WEBSITE LINKED TO THE SITE. BountySource will not be liable for the privacy of email addresses, registration and identification information, disk space, communications, confidential or trade-secret information, or any Solutions received by BountySource or stored on our equipment, transmitted over networks accessed by the Site, or otherwise connected with your use of the Service.'),
       
-      p(i('Effective Date of Revision: October 19, 20Backer12'))
+      p(i('Effective Date of Revision: October 19, 2012'))
     );
   });
 }
