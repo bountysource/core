@@ -53,7 +53,7 @@ with (scope('Repository')) {
             h2(formatted_number(repo.forks)),
             h3({ 'class': 'blue-line' }, 'Forks'),
 
-            h2(formatted_number(repo.bounties.length)),
+            h2(formatted_number(repo.bounteous_issues_count)),
             h3({ 'class': 'blue-line' }, 'Open Contests'),
 
             // TODO: this isn't correct since the account can be withdrawn from
@@ -209,7 +209,7 @@ with (scope('Repository')) {
   define('create_donation', function(repo_full_name, form_data) {
     var payment_method = form_data.payment_method;
     var amount = form_data.amount;
-    return BountySource.create_donation(repo_full_name, amount, payment_method, window.location.href, function(response) {
+    return BountySource.create_donation(repo_full_name, amount, payment_method, function(response) {
       if (response.meta.success) {
         if (payment_method == 'personal') {
           BountySource.set_cached_user_info(null);
