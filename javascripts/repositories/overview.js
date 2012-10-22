@@ -54,7 +54,7 @@ with (scope('Repository')) {
             h3({ 'class': 'blue-line' }, 'Forks'),
 
             h2(formatted_number(repo.bounteous_issues_count)),
-            h3({ 'class': 'blue-line' }, 'Open Contests'),
+            h3({ 'class': 'blue-line' }, 'Issues with Bounties'),
 
             // TODO: this isn't correct since the account can be withdrawn from
             // TODO: add a total_donations column
