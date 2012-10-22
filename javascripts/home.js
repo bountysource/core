@@ -59,14 +59,14 @@ with (scope('Home', 'App')) {
     BountySource.overview(function(response) {
       var data = (response.data||{});
       render({ into: stats_container },
-        h2(formatted_number(data.total_active_issues)),
-        h3({ 'class': 'blue-line' }, 'Open Contest' + (data.total_active_issues == 1 ? '' : 's')),
-
         h2(money(data.total_unclaimed)),
-        h3({ 'class': 'orange-line' }, 'Active Bounties'),
+        h3({ 'class': 'orange-line' }, 'Active Bount' + (data.total_unclaimed == 1 ? 'y' : 'ies')),
+
+        h2(formatted_number(data.total_active_issues)),
+        h3({ 'class': 'blue-line' }, data.total_active_issues == 1 ? 'Issue with Bounty' : 'Issues with Bounties'),
 
         h2(formatted_number(data.total_bounties_created_this_month)),
-        h3({ 'class': 'green-line' }, 'Bounties Created This Month')
+        h3({ 'class': 'green-line' }, 'Bount' + (data.total_bounties_created_this_month == 1 ? 'y' : 'ies') + ' This Month')
       );
 
       render({ into: leaderboard_container }, 

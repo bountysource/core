@@ -16,6 +16,9 @@ with (scope('Repository')) {
       if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
 
       var repo = response.data;
+
+      console.log(repo);
+
       render({ into: target_div },
         div({ 'class': 'split-main' },
           section(
@@ -40,6 +43,9 @@ with (scope('Repository')) {
         div({ 'class': 'split-side' },
 
           div({ 'class': 'stats', style: 'width: 150px; padding: 10px; margin: 20px auto auto auto;' },
+            h2(money(repo.bounties_total)),
+            h3({ 'class': 'orange-line' }, 'Active Bounties'),
+
             h2(formatted_number(repo.followers)),
             h3({ 'class': 'blue-line' }, 'Followers'),
 
@@ -53,10 +59,7 @@ with (scope('Repository')) {
             // TODO: this isn't correct since the account can be withdrawn from
             // TODO: add a total_donations column
             h2(money(repo.account_balance)),
-            h3({ 'class': 'blue-line' }, 'Donations'),
-
-            h2(money(repo.bounties_total)),
-            h3({ 'class': 'orange-line' }, 'Active Bounties')
+            h3({ 'class': 'blue-line' }, 'Donations')
 
 //            h2('$999'),
 //            h3({ 'class': 'green-line' }, 'Payout Last Month')
