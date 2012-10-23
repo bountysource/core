@@ -94,9 +94,8 @@ with (scope('Home', 'App')) {
       );
 
       render({ into: leaderboard_container }, 
-        section({ style: 'width: 390px'},
-          div({ style: 'text-align: center' }, img({ src: 'images/icon-info.png' })),
-          h2('Staff Picks'),
+        section({ style: 'margin-right: 30px'},
+          h2({ style: 'margin-top: 0' }, img({ src: 'images/icon-star.png' }), 'Featured Projects'),
           ul(
             data.projects.featured.map(function(repo) {
               return li(img({ src: (repo.user.avatar_url),
@@ -105,20 +104,12 @@ with (scope('Home', 'App')) {
             })
           )
         ),
-        section({ style: 'width: 200px'},
-          div({ style: 'text-align: center' }, img({ src: 'images/icon-check.png' })),
-          h2('Top Backers'),
+        section(
+          h2(img({ src: 'images/icon-info.png' }), 'Top Backers and Developers'),
           ul(
             data.backers.most_total_bounties.map(function(backer) {
               return li(img({ src: backer.avatar_url, style: 'width: 32px; height: 32px' }), backer.display_name)
-            })
-          )
-        ),
-        section({ style: 'width: 200px; margin-right: 0'},
-          div({ style: 'text-align: center' }, img({ src: 'images/icon-info.png' })),
-          h2('Top Developers'),
-          ul(
-            // most_submitted_solutions is dummy data. most_pull_requests isn't but doesn't have data
+            }),
             data.developers.most_submitted_solutions.map(function(developer) {
               return li(img({ src: developer.avatar_url, style: 'width: 32px; height: 32px' }), developer.login)
             })
