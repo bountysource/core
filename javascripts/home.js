@@ -20,7 +20,7 @@ with (scope('Home', 'App')) {
 
               div({ 'class': 'begin-box' },
                 div({ style: 'margin-left: 70px; margin-right: 40px; float: left; text-align: center; '},
-                  a({ 'class': 'green', style: 'width: 200px; display: block', href: '#bounties' }, 'Browse All Bounties')
+                  a({ 'class': 'blue', style: 'width: 200px; display: block', href: '#bounties' }, 'Browse All Bounties')
                 ),
                 div({ style: 'font-size: 30px; line-height: 40px; float: left; padding: 0 5px'}, 'or'),
 
@@ -38,7 +38,7 @@ with (scope('Home', 'App')) {
             div({ 'class': 'inner' },
               h1("BACKERS"),
               p("Want to help fund your favorite open-source projects?"),
-              a({ 'class': 'blue', href: '#faq/backers' }, "Learn More")
+              a({ 'class': 'gray', href: '#faq/backers' }, "Learn More")
             )
           ),
 
@@ -46,7 +46,7 @@ with (scope('Home', 'App')) {
             div({ 'class': 'inner' },
               h1("DEVELOPERS"),
               p("Want to earn money working on open-source projects?"),
-              a({ 'class': 'blue', href: '#faq/developers' }, "Learn More")
+              a({ 'class': 'gray', href: '#faq/developers' }, "Learn More")
             )
           ),
 
@@ -54,7 +54,7 @@ with (scope('Home', 'App')) {
             div({ 'class': 'inner' },
               h1("COMMITTERS"),
               p("Are you a committer on an open-source projects?"),
-              a({ 'class': 'blue', href: '#faq/committers' }, "Learn More")
+              a({ 'class': 'gray', href: '#faq/committers' }, "Learn More")
             )
           ),
 
@@ -72,7 +72,7 @@ with (scope('Home', 'App')) {
           stats_container=div({ 'class': 'inner stats', style: 'width: 120px; height: 278px' })
         ),
         
-        div({ style: 'clear: both; padding-bottom: 10px' }),
+        div({ style: 'clear: both; padding-bottom: 30px' }),
 
         div({ 'class': 'box' },
           leaderboard_container=div({ 'class': 'inner leaderboard' })
@@ -95,7 +95,7 @@ with (scope('Home', 'App')) {
 
       render({ into: leaderboard_container }, 
         section({ style: 'margin-right: 30px'},
-          h2({ style: 'margin-top: 0' }, img({ src: 'images/icon-star.png' }), 'Featured Projects'),
+          h2('Featured Projects'),
           ul(
             data.projects.featured.map(function(repo) {
               return li(img({ src: (repo.user.avatar_url),
@@ -105,7 +105,7 @@ with (scope('Home', 'App')) {
           )
         ),
         section(
-          h2(img({ src: 'images/icon-info.png' }), 'Top Backers and Developers'),
+          h2('Top Backers and Developers'),
           ul(
             data.backers.most_total_bounties.map(function(backer) {
               return li(img({ src: backer.avatar_url, style: 'width: 32px; height: 32px' }), backer.display_name)
