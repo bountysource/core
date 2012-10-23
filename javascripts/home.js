@@ -11,41 +11,65 @@ with (scope('Home', 'App')) {
     
     render({ into: 'before-content' },
       section({ id: 'homepage' },
-        div({ 'class': 'box', style: 'float: left; margin-right: 10px' },
-          div({ 'class': 'inner bigbox', style: 'width: 694px; height: 250px' },
-            h1(span({ style: 'font-weight: bold' }, 'Bounty'), 'Source is a funding platform for open-source bugs and features.'),
-            div({ 'class': 'h1-line'}, div()),
 
-            div({ 'class': 'devbox' },
-              h2('Developers:'),
-              p('Earn money by contributing to open-source.')
-            ),
+        div({ style: 'float: left; margin-right: 10px' },
 
-            div({ 'class': 'backerbox' },
-              h2('Backers:'),
-              p('Support the projects that have supported you.')
-            ),
+          div({ 'class': 'box' },
+            div({ 'class': 'inner bigbox', style: 'width: 724px; height: 100px' },
+              h1(span({ style: 'font-weight: bold' }, 'Bounty'), 'Source is a funding platform for open-source bugs and features.'),
 
-            div({ style: 'clear: both '}),
+              div({ 'class': 'begin-box' },
+                div({ style: 'margin-left: 70px; margin-right: 40px; float: left; text-align: center; '},
+                  a({ 'class': 'green', style: 'width: 200px; display: block', href: '#bounties' }, 'Browse All Bounties')
+                ),
+                div({ style: 'font-size: 30px; line-height: 40px; float: left; padding: 0 5px'}, 'or'),
 
-            div({ 'class': 'begin-box' },
-              div({ style: 'margin-left: 70px; margin-right: 40px; float: left; text-align: center; '},
-                a({ 'class': 'blue', style: 'width: 200px; display: block', href: '#bounties' }, 'Browse All Projects')
-              ),
-              div({ style: 'font-size: 30px; line-height: 40px; float: left; padding: 0 5px'}, 'or'),
-
-              div({ style: 'width: 330px; float: left; text-align: center'},
-                form({ action: function(form_data) { set_route('#repos/search?query='+escape(form_data.query)) } },
-                  text({ name: 'query', placeholder: 'Project Name' }),
-                  submit({ value: 'Search', 'class': 'green', style: 'width: 80px; margin-left: 3px;' })
+                div({ style: 'width: 330px; float: left; text-align: center'},
+                  form({ action: function(form_data) { set_route('#repos/search?query='+escape(form_data.query)) } },
+                    text({ name: 'query', placeholder: 'Project Name' }),
+                    submit({ value: 'Search', 'class': 'green', style: 'width: 80px; margin-left: 3px;' })
+                  )
                 )
               )
             )
-          )
+          ),
+
+          div({ 'class': 'faq-box', style: 'margin-right: 10px' },
+            div({ 'class': 'inner' },
+              h1("BACKERS"),
+              p("Want to help fund your favorite open-source projects?"),
+              a({ 'class': 'blue', href: '#faq/backers' }, "Learn More")
+            )
+          ),
+
+          div({ 'class': 'faq-box', style: 'margin-right: 10px' },
+            div({ 'class': 'inner' },
+              h1("DEVELOPERS"),
+              p("Want to earn money working on open-source projects?"),
+              a({ 'class': 'blue', href: '#faq/developers' }, "Learn More")
+            )
+          ),
+
+          div({ 'class': 'faq-box' },
+            div({ 'class': 'inner' },
+              h1("COMMITTERS"),
+              p("Are you a committer on an open-source projects?"),
+              a({ 'class': 'blue', href: '#faq/committers' }, "Learn More")
+            )
+          ),
+
+          div({ style: 'clear: both' })
+
+          // div({ 'class': 'box', style: 'margin-top: 10px' },
+          //   div({ 'class': 'inner bigbox', style: 'width: 694px' },
+          // 
+          // 
+          //   )
+          // )
         ),
 
-        div({ 'class': 'box', style: 'float: left' },
-          stats_container=div({ 'class': 'inner stats', style: 'width: 150px; height: 250px' })
+        div({ 'class': 'box', style: 'float: right' },
+          stats_container=div({ 'class': 'inner stats', style: 'width: 120px; height: 278px' })
         ),
         
         div({ style: 'clear: both; padding-bottom: 10px' }),
@@ -59,14 +83,14 @@ with (scope('Home', 'App')) {
     BountySource.overview(function(response) {
       var data = (response.data||{});
       render({ into: stats_container },
-        h2(money(data.total_unclaimed)),
-        h3({ 'class': 'orange-line' }, 'Active Bount' + (data.total_unclaimed == 1 ? 'y' : 'ies')),
+        h2(a({ href: '#bounties' }, money(data.total_unclaimed))),
+        h3({ 'class': 'orange-line' }, a({ href: '#bounties' }, 'Active Bount' + (data.total_unclaimed == 1 ? 'y' : 'ies'))),
 
-        h2(formatted_number(data.total_active_issues)),
-        h3({ 'class': 'blue-line' }, data.total_active_issues == 1 ? 'Issue with Bounty' : 'Issues with Bounties'),
+        h2(a({ href: '#bounties' }, formatted_number(data.total_active_issues))),
+        h3({ 'class': 'blue-line' }, a({ href: '#bounties' }, data.total_active_issues == 1 ? 'Issue with Bounty' : 'Issues with Bounties')),
 
-        h2(formatted_number(data.total_bounties_created_this_month)),
-        h3({ 'class': 'green-line' }, 'Bount' + (data.total_bounties_created_this_month == 1 ? 'y' : 'ies') + ' This Month')
+        h2(a({ href: '#bounties' }, formatted_number(data.total_bounties_created_this_month))),
+        h3({ 'class': 'green-line' }, a({ href: '#bounties' }, 'Bount' + (data.total_bounties_created_this_month == 1 ? 'y' : 'ies') + ' This Month'))
       );
 
       render({ into: leaderboard_container }, 
