@@ -109,9 +109,6 @@ with (scope('Home', 'App')) {
           ul(
             data.backers.most_total_bounties.map(function(backer) {
               return li(img({ src: backer.avatar_url, style: 'width: 32px; height: 32px' }), backer.display_name)
-            }),
-            data.developers.most_submitted_solutions.map(function(developer) {
-              return li(img({ src: developer.avatar_url, style: 'width: 32px; height: 32px' }), developer.login)
             })
           )
         ),
