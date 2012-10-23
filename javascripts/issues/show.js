@@ -51,7 +51,7 @@ with (scope('Issue', 'App')) {
           
         ),
 
-        div({ 'class': 'split-side' },
+        !issue.code && div({ 'class': 'split-side' },
           bounty_box(issue),
           developer_box(issue)
           //misc_box(issue)
