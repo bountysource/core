@@ -218,16 +218,12 @@ with (scope('Issue', 'App')) {
   define('create_bounty', function(login, repository, issue, form_data) {
     var payment_method = form_data.payment_method;
     var amount = form_data.amount;
-    BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href, function(response) {
+    BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href+'/contributions/receipt', function(response) {
       if (response.meta.success) {
         if (payment_method == 'personal') {
-          BountySource.user_info(function(response) {
-            BountySource.set_cached_user_info(null);
-            set_route('#repos/'+login+'/'+repository+'/issues/'+issue);
-          });
-        } else {
-          window.location.href = response.data.redirect_url;
+          BountySource.set_cached_user_info(null);
         }
+        window.location.href = response.data.redirect_url;
       } else {
         render({ target: 'create-bounty-errors' }, error_message(response.data.error.join(', ')));
       }

@@ -101,7 +101,7 @@ with (scope('App')) {
 
   // it puts things inside of a grey box
   define('grey_box', function() {
-    return div({ style: 'background: #eee; border: 1px solid #ccc; padding: 15px 0;' }, arguments);
+    return div({ style: 'background: #eee; border: 1px solid #ccc; padding: 20px 10px;' }, arguments);
   });
 
   // include this element wherever you want to render messages on a page (errors, for instance)
