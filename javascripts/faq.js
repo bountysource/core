@@ -104,7 +104,7 @@ with (scope('Faq', 'App')) {
           dd("We don't guarantee this, but one of the main points of open-source software and making code public is to foster improvement. Committers are always monitoring pull requests, and they likely will accept any and all code they feel is of quality."),
 
           dt("How do I know if my solution has been accepted or rejected?"),
-          dd("You can view the status of each of your submissions from your ", a({ href: '<%= Api::Application.config.www_url %>#issue_branches', target: 'blank' }, "Issue Branches page"), "."),        
+          dd("You can view the status of each of your submissions from your ", a({ href: '#issue_branches', target: 'blank' }, "Issue Branches page"), "."),        
     
           dt("How do you determine who earns the bounty?"),
           dd("Once a Github issue has been closed, BountySource awards the bounty to the developer whose pull request was merged."),
@@ -169,7 +169,7 @@ with (scope('Faq', 'App')) {
           dd("You have the option of donating directly to a project instead of an issue, but these are non-refundable. Donations to projects are made available to project committers who use this money to create bounties on issues they think are key to the project's development."),
         
           dt("What happens after I post a bounty?"),
-          dd("We'll let you know when a pull request is merged in relation to an issue you've backed. Also, you can view your ", a({ href: '<%= Api::Application.config.www_url %>#contributions', target: 'blank' }, "Contributions page"), " at any point to check for updates."),
+          dd("We'll let you know when a pull request is merged in relation to an issue you've backed. Also, you can view your ", a({ href: '#contributions', target: 'blank' }, "Contributions page"), " at any point to check for updates."),
         
           dt("What does it cost to post a bounty?"),
           dd("Nothing!"),
