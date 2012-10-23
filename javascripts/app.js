@@ -51,4 +51,12 @@ with (scope('App')) {
     return callback ? callback(Storage.get('access_token')) : Storage.get('access_token');
   });
 
+  define('github_account_linked', function(callback) {
+    var user_info = JSON.parse(Storage.get('user_info')||'{}');
+    if (user_info) {
+      return callback ? callback(user_info.github_user, user_info) : user_info.github_user;
+    } else {
+      return callback ? callback(null) : false;
+    }
+  });
 };
