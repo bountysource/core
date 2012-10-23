@@ -116,8 +116,8 @@ with (scope('BountySource')) {
     api('/overview', callback);
   });
 
-  define('create_bounty', function(login, repository, issue_number, amount, payment_method, return_url, callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount, payment_method: payment_method, return_url: return_url }, callback);
+  define('create_bounty', function(login, repository, issue_number, amount, payment_method, redirect_url, callback) {
+    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount, payment_method: payment_method, redirect_url: redirect_url }, callback);
   });
 
   define('create_donation', function(repo_full_name, amount, payment_method, return_url, callback) {
@@ -170,5 +170,13 @@ with (scope('BountySource')) {
 
   define('link_paypal_account', function(data, callback) {
     api('/user/link_paypal', 'POST', data, callback);
+  });
+
+  define('get_bounty', function(bounty_id, callback) {
+    api('/user/bounties/'+bounty_id, callback);
+  });
+
+  define('post_github_comment', function(login, repository, issue_number, form_data, callback) {
+    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/comments', 'POST', form_data, callback);
   });
 }
