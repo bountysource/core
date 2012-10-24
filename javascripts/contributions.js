@@ -92,16 +92,17 @@ with (scope('Contributions', 'App')) {
         h2("Your Bounty Has Been Posted"),
         p("A couple of things you should know:"),
         ul(
-          li("Every bounty has a six-month limit. isn't closed within this window, you get a refund."),
-          li("We will keep you posted about the issue status via email. For instance, when a developer submits a solution, you will be notified.")
+          li("Every bounty has a six-month limit. We'll refund you if this issue isn't closed by then."),
+          li("We'll keep you posted on the status of this issue via email, but you can check its issue page at any time too."),
+          li("Once an issue is closed, you will have two weeks to verify the solution and file a dispute if necessary.")
         ),
-        p("Have any more questions? ", a({ href: '#faq' }, 'consult the FAQs'), ", ", a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'email us'), ", or ", a({ href: 'irc://irc.freenode.net/bountysource' }, 'message us via IRC'), "."),
-        p("Thank you for supporting open source software!"),
+        p("More questions? ", a({ href: '#faq' }, 'Consult the FAQ'), ", ", a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'email us'), ", or ", a({ href: 'irc://irc.freenode.net/bountysource' }, 'message us via IRC'), "."),
+        p("Thank you for supporting open-source software!"),
 
         br(),
 
-        h2("Get the Word Out"),
-        p("Now that there is a bounty on this issue, spread the word! Get some developers to start working on solutions, or encourage others to place bounties as well."),
+        h2("Spread The Word!"),
+        p("Encourage developers to start working on a solution, and encourage other backers to create bounties on the same issue."),
 
         github_comment_div
       ),
