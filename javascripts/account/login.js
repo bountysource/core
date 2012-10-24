@@ -56,7 +56,9 @@ with (scope('Login', 'App')) {
   define('login', function(form_data) {
     BountySource.login(form_data.email, form_data.password, function(response) {
       if (response.meta.success) {
-        Storage.set('access_token', response.data.access_token);
+        // store user_info at login
+        if (response.meta.success) set_cached_user_info(response.data);
+        // redirect to a stored route, if one has been set.
         set_route(Storage.remove('_redirect_to_after_login') || '#', { reload_page: true });
       } else {
         render_message(error_message(response.data.error));

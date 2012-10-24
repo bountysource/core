@@ -31,6 +31,10 @@ with (scope('BountySource')) {
     JSONP.get(options);
   });
 
+  define('login', function(email, password, callback) {
+    api('/user/login', 'POST', { email: email, password: password }, callback);
+  });
+
   define('logout', function() {
     Storage.clear({ except: ['environment'] });
     set_route('#', { reload_page: true });
@@ -59,14 +63,6 @@ with (scope('BountySource')) {
 
   define('basic_user_info', function(callback) {
     api('/user', 'GET', { basic: true }, callback);
-  });
-
-  define('login', function(email, password, callback) {
-    api('/user/login', 'POST', { email: email, password: password }, function(response) {
-      // store user_info at login
-      if (response.meta.success) set_cached_user_info(response.data);
-      callback(response);
-    });
   });
 
   define('create_account', function(data, callback) {
