@@ -110,9 +110,12 @@ with (scope('Payout','IssueBranch')) {
     );
 
     IssueBranch.require_accepted_solution(login, repository, issue_number, target_div, function(solution, user_info) {
-      var bounty_total = parseFloat(solution.issue.bounty_amount),
-          bounty_source_tax = parseFloat(solution.bounty_source_tax),
-          project_tax = parseFloat(solution.issue.repository.project_tax);
+      var bounty_source_tax = parseFloat(solution.bounty_source_tax),
+          project_tax = parseFloat(solution.issue.repository.project_tax),
+          bounty_total = parseFloat(solution.issue.bounty_amount);
+
+      // subtract the bountysource tax from bounty_total
+      bounty_total -= (bounty_source_tax * bounty_total);
 
       render({ into: target_div },
         form({ 'class': 'fancy', action: claim_bounty },
@@ -133,11 +136,6 @@ with (scope('Payout','IssueBranch')) {
               label('Charity:'),
               donation_slider({ style: 'width: 500px;', name: 'charity' }),
               p({ style: 'font-style: italic; font-size: 12px; width: 500px;' }, "*Proceeds put into this category are all donated to our charities, which are: ", a({ href: 'https://www.eff.org/', target: '_blank' }, 'the EFF'))
-            ),
-            fieldset(
-              label('BountySource:'),
-              donation_slider({ 'data-tax': bounty_source_tax, style: 'width: 500px;', name: 'bountysource' }),
-              p({ style: 'font-style: italic; font-size: 12px; width: 500px;' }, "*BountySource keeps a small portion of your earnings, but donate more if you would like.")
             )
           ),
 
