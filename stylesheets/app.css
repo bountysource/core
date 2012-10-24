@@ -59,6 +59,17 @@ section#homepage .box .inner { padding: 20px }
 section#homepage .bigbox { background: #f2f3f2; }
 section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 21px; color: #333; font-style: italic }
 
+section#homepage .h1-line { border-bottom: 2px solid #f87956; margin-top: 12px; position: relative; }
+section#homepage .h1-line div { position: absolute;
+  width: 0;
+  height: 0;
+  top: -5px;
+  left: 73px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #f87956;
+}
+
 .stats { background: #f2f3f2; }
 .stats h2 { margin: 0; text-align: right; font-size: 40px; line-height: 40px; font-weight: normal }
 .stats h2 a { color: #5b6163 }
@@ -67,7 +78,7 @@ section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 21px; c
 .stats h3 a { color: #54595c }
 
 
-section#homepage .begin-box { padding-top: 30px }
+section#homepage .begin-box { padding-top: 25px }
 section#homepage .begin-box input[type=text] { width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c; }
 
 section#homepage .faq-box { margin-top: 10px; padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; float: left; width: 233px }

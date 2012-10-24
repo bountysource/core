@@ -17,6 +17,7 @@ with (scope('Home', 'App')) {
           div({ 'class': 'box' },
             div({ 'class': 'inner bigbox', style: 'width: 724px; height: 100px' },
               h1(span({ style: 'font-weight: bold' }, 'Bounty'), 'Source is a funding platform for open-source bugs and features.'),
+              div({ 'class': 'h1-line'}, div()),
 
               div({ 'class': 'begin-box' },
                 div({ style: 'margin-left: 70px; margin-right: 40px; float: left; text-align: center; '},
