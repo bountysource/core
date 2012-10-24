@@ -1,5 +1,7 @@
 with (scope('Contributions', 'App')) {
-  before_filter(Login.required);
+  before_filter(function() {
+    if (!logged_in()) set_route('#login');
+  });
 
   route('#contributions', function() {
     var target_div = div('Loading...');
@@ -111,7 +113,7 @@ with (scope('Contributions', 'App')) {
           ribbon_header("Links"),
           br(),
           a({ 'class': 'blue', href: '#repos/'+login+'/'+repository }, "Back to Project"), br(),
-          a({ 'class': 'blue', href: '#repos/'+login+'/'+repository }, "Back to Issue #"+issue_number)
+          a({ 'class': 'blue', href: '#repos/'+login+'/'+repository+'/issues/'+issue_number }, "Back to Issue #"+issue_number)
         ),
 
 
