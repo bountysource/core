@@ -4,7 +4,7 @@ with (scope('App')) {
     Storage.set('access_token',access_token);
     BountySource.basic_user_info(function(response) {
       if (response.meta.success) BountySource.set_cached_user_info(response.data);
-      set_route(Storage.remove('_redirect_to_after_login') || '#');
+      redirect_to_saved_route();
     });
   });
 
