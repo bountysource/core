@@ -55,7 +55,7 @@ with (scope('Contributions', 'App')) {
 
   route('#repos/:login/:repository/issues/:issue_number/contributions/receipt', function(login, repository, issue_number) {
     var github_comment_div = div(),
-        bounty_amount = get_params().amount;
+        bounty_amount = parseInt(get_params().amount);
 
     // render a comment submit form, or a GitHub account link button
     if (github_account_linked()) {
@@ -141,7 +141,7 @@ with (scope('Contributions', 'App')) {
       + "app_id="           + 280280945425178
       + "&display="         + "popup"
       + "&link="            + encodeURIComponent(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
-      + "&redirect_uri="    + encodeURIComponent(BountySource.api_host+"kill_window")
+      + "&redirect_uri="    + encodeURIComponent(BountySource.api_host+"kill_window_js")
       + "&name="            + "I placed a $"+amount+" bounty on this issue at BountySource"
       + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
       + "&description="     + "Looking to submit a pull request to resolve this issue? A bounty has been placed on it at BountySource, and you can earn it by having your pull request merged.";
@@ -150,7 +150,6 @@ with (scope('Contributions', 'App')) {
   define('share_bounty_on_twitter_url', function(login, repository, issue_number, amount) {
     return "https://twitter.com/share?"
       + "url="    + encodeURIComponent(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
-//      + "&via="   + "BountySource"
       + "&text="  + "I placed a $"+amount+" bounty on this issue through @BountySource.";
   });
 
