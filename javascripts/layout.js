@@ -29,8 +29,8 @@ with (scope('App')) {
           span({ id: 'user_nav_name' }, user.display_name),
           span({ 'class': 'downarrow' }, '↓')),
         div({ id: 'user_nav_flyout' },
-            a({ href: '#account' }, 'Account ' +
-              (user.account.balance > 0 && '(' + money(user.account.balance) + ')')),
+            a({ href: '#account' }, 'Account' +
+              (user.account.balance > 0 ? ' (' + money(user.account.balance) + ')' : '')),
             a({ href: BountySource.logout }, 'Logout'))
       );
     });
