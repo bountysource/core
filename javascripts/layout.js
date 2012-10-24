@@ -3,12 +3,12 @@ with (scope('App')) {
   define('user_nav_flyout_mouseout', function() {
     if (this.usernav_timeout) clearTimeout(this.usernav_timeout);
     this.usernav_timeout = setTimeout(function() {
-      $('#user-nav').removeClass('flyout');
+      document.getElementById('user-nav').className = '';
     }, 500);
   });
 
   define('user_nav_flyout_mouseover', function() {
-    $('#user-nav').addClass('flyout');
+    document.getElementById('user-nav').className = 'flyout';
     if (this.usernav_timeout) {
       clearTimeout(this.usernav_timeout);
       delete this.usernav_timeout;
