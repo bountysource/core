@@ -18,7 +18,7 @@ with (scope('Contributions', 'App')) {
 
       if (!user_info.bounties || user_info.bounties.length <= 0) {
         render({ into: target_div },
-          info_message("You have not yet made any contributions or placed any bounties. ", a({ href: '#' }, "Search for something to back."))
+          info_message("You have not created any bounties yet. ", a({ href: '#' }, "Search for something to back."))
         );
       } else {
         render({ into: target_div },
@@ -64,7 +64,7 @@ with (scope('Contributions', 'App')) {
           messages(),
 
           fieldset(
-            textarea({ 'class': 'fancy', name: 'body', style: 'width: 100%; height: 150px;' }, "Looking to submit a pull request to resolve this issue? \n\nA $"+bounty_amount+" bounty has been placed on it at [BountySource](https://www.bountysource.com), and you can earn it by having your pull request merged. " + BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
+            textarea({ 'class': 'fancy', name: 'body', style: 'width: 100%; height: 150px;' }, "Working on a solution? \n\nA $"+bounty_amount+" bounty has been placed on it at [BountySource](https://www.bountysource.com), and you can earn it by having your pull request merged. " + BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
           ),
           fieldset(
             submit({ 'class': 'green', style: 'width: 230px; margin-top: 15px;' }, 'Comment on GitHub Issue')
@@ -143,15 +143,15 @@ with (scope('Contributions', 'App')) {
       + "&display="         + "popup"
       + "&link="            + encodeURIComponent(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
       + "&redirect_uri="    + encodeURIComponent(BountySource.api_host+"kill_window_js")
-      + "&name="            + "I placed a $"+amount+" bounty on this issue at BountySource"
+      + "&name="            + "I placed a $"+amount+" bounty on this issue at BountySource."
       + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
-      + "&description="     + "Looking to submit a pull request to resolve this issue? A bounty has been placed on it at BountySource, and you can earn it by having your pull request merged.";
+      + "&description="     + "Working on a solution? A bounty has been placed on it at BountySource, and you can earn it by having your pull request merged.";
   });
 
   define('share_bounty_on_twitter_url', function(login, repository, issue_number, amount) {
     return "https://twitter.com/share?"
       + "url="    + encodeURIComponent(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
-      + "&text="  + "I placed a $"+amount+" bounty on this issue through @BountySource.";
+      + "&text="  + "I placed a $"+amount+" bounty on this issue at @BountySource.";
   });
 
   define('post_github_comment', function(login, repository, issue_number, form_data) {
