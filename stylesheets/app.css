@@ -57,7 +57,7 @@ section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #c
 section#homepage .box .inner { padding: 20px }
 
 section#homepage .bigbox { background: #f2f3f2; }
-section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 21px; color: #333; font-style: italic }
+section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 21px; color: #333; font-style: italic; text-align: center }
 
 section#homepage .h1-line { border-bottom: 2px solid #f87956; margin-top: 12px; position: relative; }
 section#homepage .h1-line div { position: absolute;
@@ -81,7 +81,7 @@ section#homepage .h1-line div { position: absolute;
 section#homepage .begin-box { padding-top: 25px }
 section#homepage .begin-box input[type=text] { width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c; }
 
-section#homepage .faq-box { margin-top: 10px; padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; float: left; width: 233px }
+section#homepage .faq-box { margin-top: 10px; padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; float: left; width: 233px; text-align: center }
 section#homepage .faq-box .inner { padding: 10px; background: #f2f3f2; }
 section#homepage .faq-box h1 { text-align: center; font-size: 20px; margin: 0 }
 
