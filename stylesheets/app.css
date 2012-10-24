@@ -59,7 +59,7 @@ section#homepage .box .inner { padding: 20px }
 section#homepage .bigbox { background: #f2f3f2; }
 section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 21px; color: #333; font-style: italic; text-align: center }
 
-section#homepage .h1-line { border-bottom: 2px solid #f87956; margin-top: 12px; position: relative; }
+section#homepage .h1-line { border-bottom: 2px solid #f87956; margin: 12px 20px 0; position: relative; }
 section#homepage .h1-line div { position: absolute;
   width: 0;
   height: 0;
