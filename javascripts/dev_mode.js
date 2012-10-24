@@ -20,8 +20,6 @@ with (scope()) {
         BountySource.access_token_key = 'bountysource_access_token_prod';
       break;
     }
-
-    BountySource.www_host = BountySource.api_host.replace(/api/,'www');
   });
 
   define('set_environment', function(env) {
