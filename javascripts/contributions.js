@@ -1,7 +1,5 @@
 with (scope('Contributions', 'App')) {
-  before_filter(function() {
-    if (!logged_in()) set_route('#login');
-  });
+  before_filter(require_login);
 
   route('#contributions', function() {
     var target_div = div('Loading...');

@@ -7,7 +7,7 @@ with (scope('Github','App')) {
 
     var url = BountySource.api_host+'auth/github';
 
-    if (Storage.get('access_token')) {
+    if (logged_in()) {
       return url + '?access_token='+Storage.get('access_token')+'&redirect_url='+options.redirect_url;
     } else {
       return url + '?redirect_url='+options.redirect_url;

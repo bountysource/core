@@ -188,7 +188,7 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_solution', function(login, repository, issue_number, form_data) {
-    if (!Login.required()) return;
+    if (require_login()) return;
 
     BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
       if (response.meta.success) {

@@ -11,7 +11,7 @@ with (scope('App')) {
             li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
             //li(a({ href: '#' }, 'Blog')),
 
-            Storage.get('access_token') ? [
+            logged_in() ? [
               li(a({ href: '#issue_branches' }, 'Issue Branches')),
               li(a({ href: '#contributions' }, 'Contributions')),
               li(a({ href: '#account' }, 'Account')),

@@ -51,6 +51,17 @@ with (scope('App')) {
     return callback ? callback(Storage.get('access_token')) : Storage.get('access_token');
   });
 
+  // requires login. if not logged in, redirects to #login and returns true
+  // returns true if not logged in, false otherwise.
+  define('require_login', function() {
+    if (logged_in()) {
+      return false;
+    } else {
+      set_route('#login', { reload_page: true });
+      return true;
+    }
+  });
+
   define('github_account_linked', function(callback) {
     var user_info = JSON.parse(Storage.get('user_info')||'{}');
     if (user_info) {

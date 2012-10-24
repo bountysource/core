@@ -1,13 +1,6 @@
 with (scope('Login', 'App')) {
-  define('required', function() {
-    if (Storage.get('access_token')) return true;
-    Storage.set('_redirect_to_after_login', get_route());
-    set_route('#login');
-    return false;
-  });
-
   route('#login', function() {
-    if (Storage.get('access_token')) {
+    if (logged_in()) {
       set_route('#');
       return;
     }

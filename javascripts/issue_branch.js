@@ -26,7 +26,8 @@ with (scope('IssueBranch','App')) {
 
   // get the solution given the repo full_name and issue number.
   define('get_solution', function(login, repository, issue_number, callback) {
-    if (!Storage.get('access_token')) return callback(false);
+    if (!logged_in()) return callback(false);
+
     BountySource.user_info(function(response) {
       var user_info = response.data||{};
       for (var i=0; user_info.solutions && i<user_info.solutions.length; i++) {
