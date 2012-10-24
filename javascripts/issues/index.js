@@ -3,6 +3,11 @@ with (scope('Issue', 'App')) {
   route('#repos/:login/:repository/issues', function(login, repository) {
     var target_div = div('Loading...');
 
+    if (!repository.has_issues) {
+      set_route('#repos/'+login+'/'+repository);
+      return;
+    }
+
     render(
       breadcrumbs(
         a({ href: '#' }, 'Home'),

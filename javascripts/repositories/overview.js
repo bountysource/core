@@ -35,9 +35,11 @@ with (scope('Repository')) {
           issue_table({ header_class: 'thick-line-orange' }, "Most Recent", repo.issues_most_recent),
           
           div(
-            div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
+            repo.has_issues && div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
             div({ style: 'margin-top: 20px; width: 180px; float: left;' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/donate'}, 'Donate to Project')),
-            div({ style: 'clear: both '})
+            div({ style: 'clear: both '}),
+            !repo.has_issues && div({ style: 'margin-top: 1em;' },
+                                    "This repository has issues disabled.")
           )
         ),
         div({ 'class': 'split-side' },
@@ -53,8 +55,8 @@ with (scope('Repository')) {
             h2(formatted_number(repo.forks)),
             h3({ 'class': 'blue-line' }, 'Forks'),
 
-            h2(formatted_number(repo.bounteous_issues_count)),
-            h3({ 'class': 'blue-line' }, 'Issues with Bounties'),
+            repo.has_issues && h2(formatted_number(repo.bounteous_issues_count)),
+            repo.has_issues && h3({ 'class': 'blue-line' }, 'Issues with Bounties'),
 
             // TODO: this isn't correct since the account can be withdrawn from
             // TODO: add a total_donations column
