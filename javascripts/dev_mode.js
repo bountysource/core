@@ -1,21 +1,26 @@
 with (scope()) {
   initializer(function() {
+    // NOTE: this is read before Storage.namespace is set, so it won't get prefixed
     var environment = (navigator.userAgent == 'Selenium') ? 'test' : (Storage.get('environment') || 'prod');
 
     switch (environment) { 
       case 'dev':
+        Storage.namespace = 'dev';
         BountySource.api_host = 'http://api.bountysource.dev/';
         BountySource.access_token_key = 'bountysource_access_token_dev';
       break;
       case 'qa':
+        Storage.namespace = 'qa';
         BountySource.api_host = 'https://api-qa.bountysource.com/';
         BountySource.access_token_key = 'bountysource_access_token_qa';
       break;
       case 'test':
+        Storage.namespace = 'test';
         BountySource.api_host = 'http://test.example/';
         BountySource.access_token_key = 'bountysource_access_token_test';
       break;
       case 'prod':
+        Storage.namespace = 'prod';
         BountySource.api_host = 'https://api.bountysource.com/';
         BountySource.access_token_key = 'bountysource_access_token_prod';
       break;
@@ -23,6 +28,7 @@ with (scope()) {
   });
 
   define('set_environment', function(env) {
+    Storage.namespace = null;
     Storage.set('environment', env);
     document.location.reload();
   });
