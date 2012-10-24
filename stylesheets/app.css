@@ -256,3 +256,32 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 .success-message { padding: 20px 15px; margin-bottom: 15px; border-radius: 3px; background: #DFF7CB; border: 1px solid #B3CFB3; }
 .error-message { padding: 20px 15px; margin-bottom: 15px; border-radius: 3px; background: #FFE5DF; border: 1px solid #DABABA; }
 .info-message { padding: 20px 15px; margin-bottom: 15px; border-radius: 3px; background: #F8F8BB; border: 1px solid #E0D8B4; }
+
+#user-nav {
+  position: relative;
+  z-index: 3;
+  min-width: 120px;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#user-nav a { color: #333 }
+#user-nav a span.downarrow { padding-left: 6px; }
+#user-nav #user_nav_a:hover { text-decoration: none; }
+#user-nav.flyout {
+  box-shadow: 0px 6px 10px 3px rgba(0, 0, 0, 0.4);
+}
+#user-nav        #user_nav_flyout { display: none; }
+#user-nav.flyout #user_nav_flyout {
+  background-color: white;
+  display: block;
+  border-top: 1px solid #333;
+  padding: 7px;
+}
+#user-nav #user_nav_flyout a { display: block; }
+#user-nav #user_nav_name { padding-left: 6px; }
+#user-nav #user_nav_avatar {
+  width: 32px; height: 32px;
+  padding-top: -10px;
+}

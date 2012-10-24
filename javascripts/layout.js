@@ -1,4 +1,43 @@
 with (scope('App')) {
+  // User nav flyout
+  define('user_nav_flyout_mouseout', function() {
+    if (this.usernav_timeout) clearTimeout(this.usernav_timeout);
+    this.usernav_timeout = setTimeout(function() {
+      $('#user-nav').removeClass('flyout');
+    }, 500);
+  });
+
+  define('user_nav_flyout_mouseover', function() {
+    $('#user-nav').addClass('flyout');
+    if (this.usernav_timeout) {
+      clearTimeout(this.usernav_timeout);
+      delete this.usernav_timeout;
+    }
+  });
+
+  define('user_nav', function() {
+    var user_nav = div({ id: 'user-nav',
+                         onMouseOver: user_nav_flyout_mouseover,
+                         onMouseOut:  user_nav_flyout_mouseout },
+      a({ href: function() {} }, 'Loading...')
+    );
+
+    BountySource.get_cached_user_info(function(user) {
+      render({ into: user_nav },
+        a({ href: '#account', id: 'user_nav_a' },
+          img({ id: 'user_nav_avatar', src: user.avatar_url }),
+          span({ id: 'user_nav_name' }, user.display_name),
+          span({ 'class': 'downarrow' }, '↓')),
+        div({ id: 'user_nav_flyout' },
+            a({ href: '#account' }, 'Account ' +
+              (user.account.balance > 0 && '(' + money(user.account.balance) + ')')),
+            a({ href: BountySource.logout }, 'Logout'))
+      );
+    });
+
+    return user_nav;
+  });
+
   define('default_layout', function(yield) {
     return section({ id: 'wrapper' },
       header(
@@ -14,8 +53,7 @@ with (scope('App')) {
             logged_in() ? [
               li(a({ href: '#issue_branches' }, 'Issue Branches')),
               li(a({ href: '#contributions' }, 'Contributions')),
-              li(a({ href: '#account' }, 'Account')),
-              li(a({ href: BountySource.logout }, 'Logout'))
+              li(user_nav)
             ] : [
               li(a({ href: '#login' }, 'Login')),
               li(a({ href: '#create_account' }, 'Create Account'))
@@ -29,9 +67,9 @@ with (scope('App')) {
       section({ id: 'content' },
         yield
       ),
-      footer( 
-        div({ style: 'float: right' }, 
-          "BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " Copyright ©2012, Badger Inc.  All rights reserved. "
+      footer(
+        div({ style: 'float: right' },
+          "BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " Copyright ©2012, Badger Inc. All rights reserved. "
         ),
         ul(
           li(a({ href: '#termsofservice' }, 'Terms of Service')),
@@ -40,7 +78,7 @@ with (scope('App')) {
       )
     );
   });
-  
+
   // empty before-content prior to every rendering
   before_filter(function() {
     inner_html('before-content', '');
