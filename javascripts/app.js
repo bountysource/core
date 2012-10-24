@@ -46,6 +46,10 @@ with (scope('App')) {
     return month + ' ' + d.getDate() + ', ' + d.getFullYear();
   });
 
+  // save routes for redirect after login
+  define('save_route_for_redirect', function() { Storage.set('_redirect_to_after_login', get_route()); });
+  define('redirect_to_saved_route', function() { if (Storage.get('_redirect_to_after_login')) set_route(Storage.remove('_redirect_to_after_login'), { reload_page: true }); });
+
   // use to check logged in. if passed a callback, execute that if logged in (passing access token as argument)
   define('logged_in', function(callback) {
     return callback ? callback(Storage.get('access_token')) : Storage.get('access_token');
@@ -57,7 +61,8 @@ with (scope('App')) {
     if (logged_in()) {
       return false;
     } else {
-      set_route('#login', { reload_page: true });
+      save_route_for_redirect();
+      window.location = '#login'; // faster?
       return true;
     }
   });

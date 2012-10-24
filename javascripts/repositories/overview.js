@@ -16,9 +16,6 @@ with (scope('Repository')) {
       if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
 
       var repo = response.data;
-
-      console.log(repo);
-
       render({ into: target_div },
         div({ 'class': 'split-main' },
           section(

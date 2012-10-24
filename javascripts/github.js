@@ -25,7 +25,7 @@ with (scope('Github','App')) {
     if (!github_account_linked()) options.href = auth_url();
 
     var the_link =  a(options, text);
-    the_link.onclick = function() { Storage.set('_redirect_to_after_login', original_route) };
+    the_link.onclick = save_route_for_redirect;
     return the_link;
   });
 };
