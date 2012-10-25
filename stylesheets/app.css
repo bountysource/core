@@ -156,8 +156,8 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 #bounty-box .amount input {
   position: absolute;
   left: 32px;
-  right: 0;
   top: 0;
+  width: 140px;
   bottom: 0;
   border: 0;
   padding: 0 7px;

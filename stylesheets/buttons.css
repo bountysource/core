@@ -1,5 +1,9 @@
 /* http://www.colorzilla.com/gradient-editor/ */
 
+/* opera doesn't like making inputs big, so we force 'em */
+input[type=submit].blue, input[type=submit].green, input[type=submit].gray { 
+  height: 42px;  
+}
 
 a.blue, a.green, a.gray { 
   display: block; 

@@ -30,7 +30,7 @@ with (scope('About', 'App')) {
       
       p("Once they've identified an issue they know they can solve, they can create an Issue Branch and begin working on a solution. Once they're done, they submit a pull request through BountySource to the project committers on GitHub."),
       
-      h1("For more information, check out our ", a({ href: 'https://www.bountysource.com/#faq', target: 'blank'}, "FAQ"), ".")
+      p(i("For more information, check out our ", a({ href: 'https://www.bountysource.com/#faq', target: 'blank'}, "FAQ"), "."))
     );
   });
 }
