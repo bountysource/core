@@ -26,8 +26,8 @@ with (scope('App')) {
       render({ into: user_nav },
         a({ href: '#account', id: 'user_nav_a' },
           img({ id: 'user_nav_avatar', src: user.avatar_url }),
-          span({ id: 'user_nav_name' }, user.display_name),
-          span({ 'class': 'downarrow' }, '↓')),
+          span({ id: 'user_nav_name' }, user.display_name)
+        ),
         div({ id: 'user_nav_flyout' },
             a({ href: '#account' }, 'Account' +
               (user.account.balance > 0 ? ' (' + money(user.account.balance) + ')' : '')),

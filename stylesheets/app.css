@@ -279,9 +279,12 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   border-top: 1px solid #333;
   padding: 7px;
 }
+#user-nav #user_nav_flyout { line-height: 26px; }
 #user-nav #user_nav_flyout a { display: block; }
 #user-nav #user_nav_name { padding-left: 6px; }
+#user-nav #user_nav_a { margin: 0 10px; }
 #user-nav #user_nav_avatar {
-  width: 32px; height: 32px;
-  padding-top: -10px;
+  width: 32px; 
+  height: 32px;
+  vertical-align: middle;
 }
