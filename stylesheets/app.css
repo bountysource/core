@@ -1,3 +1,6 @@
+/* IE8 doesn't know these are block elements */
+header,nav,article,footer,section,aside,figure,figcaption{display:block}
+
 html, body { width: 100%; padding: 0; margin: 0; }
 body { font-size: 100%; }
 body, input, textarea, select, td, th { font: 15px "StoneSans", "Helvetica Neue", Arial, sans-serif; color: #333; line-height: 18px; }
@@ -6,7 +9,6 @@ a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 input, textarea, select { vertical-align: middle; }
 form, fieldset { margin:0; padding:0; border-style:none; }
-
 html { background: #efe9db url(../images/background.png) repeat top center; }
 
 
@@ -158,7 +160,7 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   left: 32px;
   top: 0;
   width: 140px;
-  bottom: 0;
+  height: 32px;
   border: 0;
   padding: 0 7px;
   margin: 0;
