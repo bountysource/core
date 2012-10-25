@@ -222,7 +222,7 @@ with (scope('Issue', 'App')) {
         }
         window.location.href = response.data.redirect_url;
       } else {
-        render({ target: 'create-bounty-errors' }, error_message(response.data.error.join(', ')));
+        render({ target: 'create-bounty-errors' }, error_message(response.data.error));
       }
     });
   });

@@ -24,6 +24,15 @@ with (scope('BountySource')) {
         Storage.remove('access_token');
         set_route('#login');
       } else {
+        // turn error message into string, or use default
+        if (!response.meta.success) {
+          if (!response.data.error) {
+            response.data.error = "Unexpected error";
+          } else if (response.data.error.push) {
+            response.data.error = response.data.error.join(', ');
+          }
+        }
+
         callback.call(this, response);
       }
     };
