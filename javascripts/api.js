@@ -1,7 +1,7 @@
 with (scope('BountySource')) {
 
   define('api_host', 'https://api.bountysource.com/');
-  define('www_host', api_host.replace(/api/,'www'));
+  define('www_host', window.location.origin+'/');
 
   // parse arguments: url, [http_method], [params], [callback]
   define('api', function() {
@@ -117,9 +117,10 @@ with (scope('BountySource')) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount, payment_method: payment_method, redirect_url: redirect_url }, callback);
   });
 
-  define('create_donation', function(repo_full_name, amount, payment_method, return_url, callback) {
-    api('/github/repos/'+repo_full_name+'/donate', 'POST', { amount: amount, payment_method: payment_method, return_url: return_url }, callback);
+  define('create_donation', function(repo_full_name, amount, payment_method, redirect_url, callback) {
+    api('/github/repos/'+repo_full_name+'/donate', 'POST', { amount: amount, payment_method: payment_method, redirect_url: redirect_url }, callback);
   });
+
   define('get_user_repositories', function(callback) {
     api('/github/user/repos/', callback);
   });
