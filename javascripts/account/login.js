@@ -54,6 +54,7 @@ with (scope('Login', 'App')) {
   });
 
   define('login', function(form_data) {
+    clear_message();
     BountySource.login(form_data.email, form_data.password, function(response) {
       if (response.meta.success) {
         // store user_info at login
