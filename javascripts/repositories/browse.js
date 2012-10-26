@@ -5,7 +5,7 @@ with (scope('Repository', 'App')) {
     render(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
-        ('All Projects')
+        ('All Bounties')
       ),
 
       target_div
@@ -14,10 +14,23 @@ with (scope('Repository', 'App')) {
     BountySource.overview(function(response) {
       var data = (response.data||{});
 
-      render({ into: target_div },
-        div({ style: 'float: right; width: 170px;' },
+      console.log(data);
 
-          div({ 'class': 'stats', style: 'width: 150px; padding: 10px' },
+      render({ into: target_div },
+        div({ 'class': 'split-main' },
+          div(
+            featured_projects_table({ header_class: 'thick-line-red' }, 'Featured Projects', data.projects.featured),
+            issue_table({ header_class: 'thick-line-blue', show_repository: true }, 'Largest Bounties', data.issues.largest_bounties),
+            issue_table({ header_class: 'thick-line-green', show_repository: true }, 'Featured Issues', data.issues.featured),
+            issue_table({ header_class: 'thick-line-blue', show_repository: true }, 'Popular Issues', data.issues.popular),
+            //issue_table({ header_class: 'thick-line-red', show_repository: true }, 'Most Worked On Issues', data.issues.most_worked_on),
+            issue_table({ header_class: 'thick-line-orange', show_repository: true }, 'Newest Issues', data.issues.newest),
+            issue_table({ header_class: 'thick-line-green', show_repository: true }, 'Bounties Expiring Soon', data.issues.expiring_soon)
+          )
+        ),
+
+        div({ 'class': 'split-side' },
+          div({ 'class': 'stats', style: 'width: 150px; padding: 10px; float: right;' },
             h2(money(data.total_paid_to_date)),
             h3({ 'class': 'blue-line' }, 'Paid to Date'),
 
@@ -35,19 +48,7 @@ with (scope('Repository', 'App')) {
           )
         ),
 
-        div({ style: 'margin-right: 190px;' },
-          div(
-            //featured_projects_table({ header_class: 'thick-line-red' }, 'Featured Projects', data.projects.featured),
-            issue_table({ header_class: 'thick-line-blue' }, 'Largest Bounties', data.issues.largest_bounties),
-            issue_table({ header_class: 'thick-line-green' }, 'Featured Issues', data.issues.featured),
-            issue_table({ header_class: 'thick-line-blue' }, 'Popular Issues', data.issues.popular),
-            //issue_table({ header_class: 'thick-line-red' }, 'Most Worked On Issues', data.issues.most_worked_on),
-            issue_table({ header_class: 'thick-line-orange' }, 'Newest Issues', data.issues.newest),
-            issue_table({ header_class: 'thick-line-green' }, 'Bounties Expiring Soon', data.issues.expiring_soon)
-          )
-        ),
-        
-        div({ style: 'clear: both' })
+        div({ 'class': 'split-end' })
       );
     });
   });
@@ -57,15 +58,15 @@ with (scope('Repository', 'App')) {
 
     return section({ 'class': 'issue-table' },
       h2({ 'class': options.header_class }, title),
-      
       table(
-        tr(
-          projects.map(function(project) { 
-            return td(project.display_name);
-          })
-        )
+        projects.map(function(project) {
+          return tr(
+            td({ style: 'vertical-align: middle;' }, a({ href: Repository.get_href(project) }, img({ src: project.user.avatar_url, style: 'width: 50px; border-radius: 3px; margin: 0 5px;' }))),
+            td(a({ href: Repository.get_href(project) }, project.full_name )),
+            td({ style: 'color: #888' }, p({ style: 'width: 250px; min-height: 10px;' }, project.description))
+          );
+        })
       )
     );
   });
-  
 };

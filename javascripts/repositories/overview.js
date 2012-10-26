@@ -86,13 +86,23 @@ with (scope('Repository')) {
       h2({ 'class': options.header_class }, title),
       table(
         issues.map(function(issue) {
-          return tr(
+          var row_data = [];
+
+          if (options.show_repository) {
+            row_data.push(
+              td({ style: 'vertical-align: middle;' }, a({ href: Repository.get_href(issue.repository), title: issue.repository.display_name }, img({ src: issue.repository.user.avatar_url, style: 'width: 30px; border-radius: 3px; margin: 0 5px;' }) ))
+            );
+          }
+
+          row_data.push(
             td({ style: 'padding-right: 10px' }, a({ href: Issue.get_href(issue), style: 'color: #93979a' }, '#' + issue.number)),
             td({ style: 'width: 100%' }, a({ href: Issue.get_href(issue) }, issue.title)),
             td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developer.png' })]),
             td({ style: 'text-align: right; color: #d8a135; white-space: nowrap' }, issue.comments > 0 && [issue.comments, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-comments.png' })]),
             td({ style: 'text-align: right; white-space' }, issue.bounty_amount > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(issue.bounty_amount)))
           );
+
+          return tr(row_data);
         })
       )
     );
