@@ -18,6 +18,7 @@ with (scope('Repository', 'App')) {
       render({ into: target_div },
         table(
           tr(
+            th(),
             th('Repository'),
             th('Bounties'),
             th('Followers'),
@@ -28,6 +29,7 @@ with (scope('Repository', 'App')) {
 
           (repositories||[]).map(function(repo) {
             return tr(
+              td(a({ href: Repository.get_href(repo) }, img({ src: repo.user.avatar_url, style: 'width: 30px; border-radius: 3px; margin: 0 5px;' }))),
               td({ style: 'width: 200px' }, a({ href: Repository.get_href(repo) }, repo.owner+'/'+repo.name)),
               td(money(repo.total_bounty)),
               td(formatted_number(repo.followers)),
