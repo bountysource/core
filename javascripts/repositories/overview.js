@@ -173,7 +173,7 @@ with (scope('Repository')) {
 
       // TODO: Exact copy from issues/show.js except form action
       section({ style: 'padding: 21px' },
-        form({ action: curry(create_donation, repo.full_name) },
+        form({ action: curry(create_donation, repo) },
           div({ id: 'create-bounty-errors' }),
 
           div({ 'class': 'amount' },
@@ -201,17 +201,16 @@ with (scope('Repository')) {
   });
 
   // Copied from issues/show.js
-  define('create_donation', function(repo_full_name, form_data) {
+  define('create_donation', function(repo, form_data) {
     var payment_method = form_data.payment_method;
     var amount = form_data.amount;
-    return BountySource.create_donation(repo_full_name, amount, payment_method, function(response) {
+
+    return BountySource.create_donation(repo.full_name, amount, payment_method, BountySource.www_host+Repository.get_href(repo), function(response) {
       if (response.meta.success) {
         if (payment_method == 'personal') {
           BountySource.set_cached_user_info(null);
-          set_route('#repos/'+repo_full_name);
-        } else {
-          window.location.href = response.data.redirect_url;
         }
+        window.location = response.data.redirect_url;
       } else {
         render({ target: 'create-bounty-errors' }, error_message(response.data.error));
       }
