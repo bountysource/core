@@ -68,6 +68,7 @@ with (scope('App')) {
   });
 
   define('github_account_linked', function(callback) {
+    if (!logged_in()) return false;
     var user_info = JSON.parse(Storage.get('user_info')||'{}');
     if (user_info) {
       return callback ? callback(user_info.github_user, user_info) : user_info.github_user;
