@@ -9,6 +9,8 @@ with (scope('CreateAccount','App')) {
 
       div({ 'class': 'split-main' },
         form({ 'class': 'fancy', action: create_account },
+          get_params().required && info_message("In order to do that, you need to create a BountySource account"),
+
           messages(),
 
           fieldset(
@@ -36,10 +38,10 @@ with (scope('CreateAccount','App')) {
             label('Confirm Password:'),
             password({ name: 'password_confirmation', placeholder: 'abcd1234'})
           ),
-//          fieldset({ 'class': 'no-label' },
-//            checkbox({ style: 'padding-right: 10px;', name: 'agree_to_terms' }),
-//            span('I agree to the BountySource ', a({ href: '#create_account' }, 'terms of agreement'))
-//          ),
+          fieldset({ 'class': 'no-label' },
+            checkbox({ style: 'padding-right: 10px;', name: 'agree_to_terms' }),
+            span('I agree to the BountySource ', a({ href: '#create_account' }, 'terms of service'))
+          ),
           fieldset({ 'class': 'no-label' },
             submit({ 'class': 'green' }, 'Create Account')
           )
@@ -54,7 +56,7 @@ with (scope('CreateAccount','App')) {
       ),
 
       div({ 'class': 'split-end' })
-    )
+    );
   });
 
   define('create_account', function(form_data) {
@@ -64,7 +66,7 @@ with (scope('CreateAccount','App')) {
     BountySource.create_account(form_data, function(response) {
       if (response.meta.success) {
         Storage.set('access_token', response.data.access_token);
-        set_route('#');
+        redirect_to_saved_route();
       } else {
         render_message(error_message(response.data.error));
       }
