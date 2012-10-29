@@ -113,7 +113,7 @@ with (scope('Issue', 'App')) {
 
           !logged_in() && info_message(
             div({ style: 'text-align: center' },
-              p("Want to place a bounty? First, you need a BountySource account."),
+              span({ style: 'margin-bottom: 10px; display: block;' }, "You need a BountySource account to place a bounty."),
               a({ 'class': 'green', href: require_account_creation }, "Create Account")
             )
           ),
