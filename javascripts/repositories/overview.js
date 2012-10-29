@@ -42,7 +42,7 @@ with (scope('Repository')) {
         div({ 'class': 'split-side' },
 
           div({ 'class': 'stats', style: 'width: 150px; padding: 10px; margin: 20px auto auto auto;' },
-            h2(money(repo.bounties_total)),
+            h2(money(repo.bounty_total)),
             h3({ 'class': 'orange-line' }, 'Active Bounties'),
 
             h2(formatted_number(repo.followers)),
