@@ -1,5 +1,7 @@
 with (scope('PullRequest', 'App')) {
   route('#repos/:login/:repository/issues/:issue_number/issue_branch', function(login, repository, issue_number) {
+    if (require_login()) return;
+
     var target_div = div('Loading...');
 
     render(
@@ -19,6 +21,8 @@ with (scope('PullRequest', 'App')) {
 
       solution && render({ into: target_div },
         div({ 'class': 'split-main' },
+          messages(),
+
           (solution.commits||[]).length > 0 && !solution.pull_request && info_message(
             span({ style: 'margin-right: 25px;' }, "Submit your solution for review by the project committers."),
             a({ 'class': 'blue', style: 'width: 200px; display: inline-block;', href: curry(submit_solution, login, repository, issue_number) }, 'Submit Solution')
@@ -194,7 +198,7 @@ with (scope('PullRequest', 'App')) {
       if (response.meta.success) {
         set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch', { reload_page: true });
       } else {
-        render_error(error_message(response.data.error));
+        render_message(error_message(response.data.error));
       }
     });
   });
