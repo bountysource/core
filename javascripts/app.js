@@ -51,8 +51,8 @@ with (scope('App')) {
   define('redirect_to_saved_route', function() { set_route(Storage.get('_redirect_to_after_login') ? Storage.remove('_redirect_to_after_login') : '#', { reload_page: true }) });
 
   // use to check logged in. if passed a callback, execute that if logged in (passing access token as argument)
-  define('logged_in', function(callback) {
-    return callback ? callback(Storage.get('access_token')) : Storage.get('access_token');
+  define('logged_in', function() {
+    return Storage.get('access_token');
   });
 
   // requires login. if not logged in, redirects to #login and returns true
@@ -68,19 +68,15 @@ with (scope('App')) {
   });
 
   // requires user to be logged in, and have a GitHub account linked
-  define('github_account_linked', function(callback) {
+  define('github_account_linked', function() {
     if (!logged_in()) return false;
     var user_info = JSON.parse(Storage.get('user_info')||'{}');
-    if (user_info) {
-      return callback ? callback(user_info.github_user, user_info) : user_info.github_user;
-    } else {
-      return callback ? callback(null) : false;
-    }
+    return user_info.github_user || null;
   });
 
   // requires user to have created a BountySource account
   define('require_account_creation', function() {
     save_route_for_redirect();
-    set_route('#create_account?required=true');
+    set_route('#create_account');
   });
 };

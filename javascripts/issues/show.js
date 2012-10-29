@@ -92,7 +92,7 @@ with (scope('Issue', 'App')) {
       }
     });
 
-    return div({ id: 'bounty-box' },
+    var bounty_box = div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
       issue.bounty_amount > 0 && section(
@@ -108,10 +108,15 @@ with (scope('Issue', 'App')) {
       ),
 
       section({ style: 'padding: 21px' },
-        form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
+        form({ action: logged_in() ? curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) : require_account_creation },
           div({ id: 'create-bounty-errors' }),
 
-
+          !logged_in() && info_message(
+            div({ style: 'text-align: center' },
+              p("Want to place a bounty? First, you need a BountySource account."),
+              a({ 'class': 'green', href: require_account_creation }, "Create Account")
+            )
+          ),
 
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
@@ -131,10 +136,19 @@ with (scope('Issue', 'App')) {
 
             bountysource_account_div
           ),
+
           submit({ 'class': 'blue' }, 'Create Bounty')
         )
       )
     );
+
+    // disable the form inputs if not logged in, a "create account" notice is shown above the box
+    if (!logged_in()) {
+      var inputs = bounty_box.getElementsByTagName('input');
+      for (var i=0; i<inputs.length; i++) inputs[i].disabled = true;
+    }
+
+    return bounty_box;
   });
   
   define('developer_box', function(issue) {
@@ -213,20 +227,27 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_bounty', function(login, repository, issue, form_data) {
-    if (!logged_in()) return require_account_creation();
+    if (!Storage.get('access_token')) {
+      render({ target: 'create-bounty-errors' }, info_message(
+        div({ style: 'text-align: center;' },
+          p("You need to create a BountySource account first!"),
+          a({ 'class': 'green', href: '#create_account' }, 'Create Account')
+        )
+      ));
+    } else {
+      var payment_method = form_data.payment_method;
+      var amount = form_data.amount;
 
-    var payment_method = form_data.payment_method;
-    var amount = form_data.amount;
-
-    BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href+'/contributions/receipt', function(response) {
-      if (response.meta.success) {
-        if (payment_method == 'personal') {
-          BountySource.set_cached_user_info(null);
+      BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href+'/contributions/receipt', function(response) {
+        if (response.meta.success) {
+          if (payment_method == 'personal') {
+            BountySource.set_cached_user_info(null);
+          }
+          window.location.href = response.data.redirect_url;
+        } else {
+          render({ target: 'create-bounty-errors' }, error_message(response.data.error));
         }
-        window.location.href = response.data.redirect_url;
-      } else {
-        render({ target: 'create-bounty-errors' }, error_message(response.data.error));
-      }
-    });
+      });
+    }
   });
 }

@@ -9,8 +9,6 @@ with (scope('CreateAccount','App')) {
 
       div({ 'class': 'split-main' },
         form({ 'class': 'fancy', action: create_account },
-          get_params().required && info_message("In order to do that, you need to create a BountySource account"),
-
           messages(),
 
           fieldset(
