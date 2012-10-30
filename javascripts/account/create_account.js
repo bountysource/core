@@ -38,7 +38,7 @@ with (scope('CreateAccount','App')) {
           ),
           fieldset({ 'class': 'no-label' },
             checkbox({ style: 'padding-right: 10px;', name: 'agree_to_terms' }),
-            span('I agree to the BountySource ', a({ href: '#create_account' }, 'terms of service'))
+            span('I agree to the BountySource ', a({ href: '#termsofservice' }, 'terms of service'))
           ),
           fieldset({ 'class': 'no-label' },
             submit({ 'class': 'green' }, 'Create Account')
