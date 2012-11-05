@@ -47,8 +47,11 @@ with (scope('App')) {
   });
 
   // save routes for redirect after login
-  define('save_route_for_redirect', function() { Storage.set('_redirect_to_after_login', get_route()); });
-  define('redirect_to_saved_route', function() { set_route(Storage.get('_redirect_to_after_login') ? Storage.remove('_redirect_to_after_login') : '#', { reload_page: true }) });
+  define('save_route_for_redirect', function(route) { Storage.set('_redirect_to_after_login', route || get_route()); });
+  define('redirect_to_saved_route', function() {
+    var route = Storage.remove('_redirect_to_after_login') || '#';
+    set_route(route, { reload_page: true });
+  });
 
   // use to check logged in. if passed a callback, execute that if logged in (passing access token as argument)
   define('logged_in', function() {
@@ -76,7 +79,11 @@ with (scope('App')) {
 
   // requires user to have created a BountySource account
   define('require_account_creation', function() {
-    save_route_for_redirect();
-    set_route('#create_account');
+    if (logged_in()) {
+      return false;
+    } else {
+      save_route_for_redirect();
+      set_route('#create_account');
+    }
   });
 };

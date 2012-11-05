@@ -79,19 +79,6 @@ with (scope('Issue', 'App')) {
   define('bounty_box', function(issue) {
     var bountysource_account_div = div();
 
-    logged_in() && BountySource.get_cached_user_info(function(user) {
-      if (user.account && user.account.balance > 0) {
-        render({ into: bountysource_account_div },
-          radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
-          label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
-            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
-            "BountySource", 
-            span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
-          )
-        );
-      }
-    });
-
     var bounty_box = div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
@@ -108,15 +95,8 @@ with (scope('Issue', 'App')) {
       ),
 
       section({ style: 'padding: 21px' },
-        form({ action: logged_in() ? curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) : require_account_creation },
+        form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
           div({ id: 'create-bounty-errors' }),
-
-          !logged_in() && info_message(
-            div({ style: 'text-align: center' },
-              span({ style: 'margin-bottom: 10px; display: block;' }, "You need a BountySource account to place a bounty."),
-              a({ 'class': 'green', href: require_account_creation }, "Create Account")
-            )
-          ),
 
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
@@ -142,12 +122,6 @@ with (scope('Issue', 'App')) {
       )
     );
 
-    // disable the form inputs if not logged in, a "create account" notice is shown above the box
-    if (!logged_in()) {
-      var inputs = bounty_box.getElementsByTagName('input');
-      for (var i=0; i<inputs.length; i++) inputs[i].disabled = true;
-    }
-
     return bounty_box;
   });
   
@@ -169,8 +143,9 @@ with (scope('Issue', 'App')) {
             form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
               div('This will create a branch in GitHub for you to solve this issue.'),
               advanced_box,
-              submit({ 'class': 'green', style: 'margin-top: 10px;' }, 'Create Issue Branch'),
-              div({ style: 'text-align: right; font-size: 11px' }, '(', a({ href: curry(show, advanced_box) }, 'advanced'), ')')
+              br(),
+              submit({ 'class': 'green' }, 'Create Issue Branch'),
+              div({ style: 'text-align: right; font-size: 11px' }, '(', a({ id: 'advanced-button', href: curry(toggle_visibility, advanced_box) }, 'advanced'), ')')
             )
           );
         }
@@ -178,7 +153,7 @@ with (scope('Issue', 'App')) {
     } else {
       render({ into: developer_div },
         p("To start working on a solution, link your GitHub account with BountySource"),
-        Github.link_requiring_auth({ 'class': 'blue' }, 'Link GitHub Account')
+        Github.link_requiring_auth({ 'class': 'blue', scope: 'public_repo' }, 'Link GitHub Account')
       );
     }
 
@@ -227,27 +202,22 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_bounty', function(login, repository, issue, form_data) {
-    if (!Storage.get('access_token')) {
-      render({ target: 'create-bounty-errors' }, info_message(
-        div({ style: 'text-align: center;' },
-          p("You need to create a BountySource account first!"),
-          a({ 'class': 'green', href: '#create_account' }, 'Create Account')
-        )
-      ));
-    } else {
-      var payment_method = form_data.payment_method;
-      var amount = form_data.amount;
+    var payment_method = form_data.payment_method;
+    var amount = form_data.amount;
 
-      BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href+'/contributions/receipt', function(response) {
-        if (response.meta.success) {
-          if (payment_method == 'personal') {
-            BountySource.set_cached_user_info(null);
-          }
-          window.location.href = response.data.redirect_url;
+    BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href+'/contributions/receipt', function(response) {
+      if (response.meta.success) {
+        if (!logged_in()) {
+          // save the route to redirect to after account creation/login
+          save_route_for_redirect(response.data.redirect_url);
+          set_route('#create_account');
         } else {
-          render({ target: 'create-bounty-errors' }, error_message(response.data.error));
+          if (payment_method == 'personal') BountySource.set_cached_user_info(null);
+          window.location.href = response.data.redirect_url;
         }
-      });
-    }
+      } else {
+        render({ target: 'create-bounty-errors' }, error_message(response.data.error));
+      }
+    });
   });
 }
