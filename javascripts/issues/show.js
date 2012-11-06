@@ -79,7 +79,7 @@ with (scope('Issue', 'App')) {
   define('bounty_box', function(issue) {
     var bountysource_account_div = div();
 
-    var bounty_box = div({ id: 'bounty-box' },
+    return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
       issue.bounty_amount > 0 && section(
@@ -121,8 +121,6 @@ with (scope('Issue', 'App')) {
         )
       )
     );
-
-    return bounty_box;
   });
   
   define('developer_box', function(issue) {
@@ -175,6 +173,8 @@ with (scope('Issue', 'App')) {
 
   define('create_solution', function(login, repository, issue_number, form_data) {
     if (require_login()) return;
+
+    render_message('Loading...');
 
     BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
       if (response.meta.success) {
