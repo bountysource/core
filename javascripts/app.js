@@ -77,6 +77,24 @@ with (scope('App')) {
     return user_info.github_user || null;
   });
 
+  // route through github authorization, requiring public_repo permission
+  define('require_github_permissions', function() {
+    var permissions = flatten_to_array(arguments);
+
+    if (!github_account_linked()) return false;
+    BountySource.get_cached_user_info(function(user_info) {
+      if (user_info.github_user.permissions.indexOf() < 0) {
+        save_route_for_redirect(route);
+        // build the auth url
+        var auth_url = Github.auth_url({ scope: permissions.join(',') });
+        window.location.href = auth_url;
+        return false;
+      } else {
+        return true;
+      }
+    });
+  });
+
   // requires user to have created a BountySource account
   define('require_account_creation', function() {
     if (logged_in()) {

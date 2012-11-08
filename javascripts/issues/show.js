@@ -172,7 +172,7 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_solution', function(login, repository, issue_number, form_data) {
-    if (require_login()) return;
+    if (!require_github_permissions('public_repo')) return;
 
     render_message('Loading...');
 
