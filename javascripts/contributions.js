@@ -58,7 +58,7 @@ with (scope('Contributions', 'App')) {
         bounty_amount = parseInt(get_params().amount);
 
     // render a comment submit form, or a GitHub account link button
-    if (github_account_linked()) {
+    if (Github.account_linked()) {
       render({ into: github_comment_div },
         form({ style: 'width: 650px;', action: curry(post_github_comment, login, repository, issue_number) },
           messages(),
