@@ -51,19 +51,16 @@ with (scope('Issue', 'App')) {
           
         ),
 
-        div({ id: 'sidebar', 'class': 'split-side' }),
+        div({ 'class': 'split-side'},
+          !issue.closed && !issue.code && section(
+            bounty_box(issue),
+            developer_box(issue)
+            //misc_box(issue)
+          )
+        ),
 
         div({ 'class': 'split-end' })
       );
-
-      // asynchronously load user info to check permissions on github user
-      BountySource.get_cached_user_info(function(user_info) {
-        !issue.closed && !issue.code && render({ into: 'sidebar' },
-          bounty_box(issue),
-          developer_box(issue, user_info)
-          //misc_box(issue)
-        );
-      });
     });
   });
   
@@ -128,44 +125,46 @@ with (scope('Issue', 'App')) {
     );
   });
   
-  define('developer_box', function(issue, user_info) {
+  define('developer_box', function(issue) {
     var developer_div = div({ id: 'developer-box' });
 
     if (Github.account_linked()) {
-      // render message if read-only permissions
-      if ((user_info.github_user.permissions||[]).indexOf('public_repo') < 0) {
-        render({ into: developer_div },
-          info_message(
-            div({ style: 'text-align: center;' },
-              img({ style: 'width: 75px; border-radius: 3px;', src: user_info.github_user.avatar_url }), span(user_info.github_user.login)
+      BountySource.get_cached_user_info(function(user_info) {
+        // render message if read-only permissions
+        if ((user_info.github_user.permissions||[]).indexOf('public_repo') < 0) {
+          render({ into: developer_div },
+            info_message(
+              div({ style: 'text-align: center;' },
+                img({ style: 'width: 75px; border-radius: 3px;', src: user_info.github_user.avatar_url }), span(user_info.github_user.login)
+              ),
+              span({ style: 'margin-top: 10px; display: block;' }, "Your GitHub account is linked, but we need write permissions to create an issue branch.")
             ),
-            span({ style: 'margin-top: 10px; display: block;' }, "Your GitHub account is linked, but we need write permissions to create an issue branch.")
-          ),
-          Github.link_requiring_auth({ scope: 'public_repo' }, 'Update Permissions')
-        );
-      } else {
-        IssueBranch.get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution) {
-          if (solution) {
-            render({ into: developer_div },
-              a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
-            );
-          } else {
-            var advanced_box = div({ id: 'advanced-developer-box', style: "margin: 10px 0; display: none"},
-              b('Name: '), text({ name: 'branch_name', value: 'issue'+issue.number, style: 'width: 100px' })
-            );
+            Github.link_requiring_auth({ scope: 'public_repo' }, 'Update Permissions')
+          );
+        } else {
+          IssueBranch.get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution) {
+            if (solution) {
+              render({ into: developer_div },
+                a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
+              );
+            } else {
+              var advanced_box = div({ id: 'advanced-developer-box', style: "margin: 10px 0; display: none"},
+                b('Name: '), text({ name: 'branch_name', value: 'issue'+issue.number, style: 'width: 100px' })
+              );
 
-            render({ into: developer_div },
-              form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
-                div('This will create a branch in GitHub for you to solve this issue.'),
-                advanced_box,
-                br(),
-                submit({ 'class': 'green' }, 'Create Issue Branch'),
-                div({ style: 'text-align: right; font-size: 11px' }, '(', a({ id: 'advanced-button', href: curry(toggle_visibility, advanced_box) }, 'advanced'), ')')
-              )
-            );
-          }
-        });
-      }
+              render({ into: developer_div },
+                form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
+                  div('This will create a branch in GitHub for you to solve this issue.'),
+                  advanced_box,
+                  br(),
+                  submit({ 'class': 'green' }, 'Create Issue Branch'),
+                  div({ style: 'text-align: right; font-size: 11px' }, '(', a({ id: 'advanced-button', href: curry(toggle_visibility, advanced_box) }, 'advanced'), ')')
+                )
+              );
+            }
+          });
+        }
+      });
     } else {
       render({ into: developer_div },
         info_message("To start working on a solution, link your GitHub account with BountySource."),
