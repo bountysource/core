@@ -26,10 +26,13 @@ with (scope('App')) {
       render({ into: user_nav },
         a({ href: '#account', id: 'user_nav_a' },
           img({ id: 'user_nav_avatar', src: user.avatar_url }),
-          span({ id: 'user_nav_name' }, user.display_name)
+          span({ id: 'user_nav_name' }, user.display_name, span({ style: 'padding-left: 10px;' }, ascii_down_arrow))
         ),
         div({ id: 'user_nav_flyout' },
-            a({ href: '#account' }, 'Account' +
+          a({ href: '#issue_branches' }, 'Issue Branches'),
+          a({ href: '#contributions' }, 'Contributions'),
+
+          a({ href: '#account' }, 'Account' +
               (user.account.balance > 0 ? ' (' + money(user.account.balance) + ')' : '')),
             a({ href: BountySource.logout }, 'Logout'))
       );
@@ -37,6 +40,8 @@ with (scope('App')) {
 
     return user_nav;
   });
+
+  define('ascii_down_arrow', '▼');
 
   define('default_layout', function(yield) {
     return section({ id: 'wrapper' },
@@ -51,8 +56,6 @@ with (scope('App')) {
             //li(a({ href: '#' }, 'Blog')),
 
             logged_in() ? [
-              li(a({ href: '#issue_branches' }, 'Issue Branches')),
-              li(a({ href: '#contributions' }, 'Contributions')),
               li(user_nav)
             ] : [
               li(a({ href: '#login' }, 'Login')),

@@ -267,6 +267,9 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  background: #EEE;
+  border-radius: 3px 3px 3px 3px;
 }
 #user-nav a { color: #333 }
 #user-nav a span.downarrow { padding-left: 6px; }
@@ -280,6 +283,7 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   display: block;
   border-top: 1px solid #333;
   padding: 7px;
+  border-radius: 0 0 3px 3px;
 }
 #user-nav #user_nav_flyout { line-height: 26px; }
 #user-nav #user_nav_flyout a { display: block; }
