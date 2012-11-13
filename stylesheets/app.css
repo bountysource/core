@@ -16,12 +16,12 @@ html { background: #efe9db url(../images/background.png) repeat top center; }
 header { 
   color: #eee; 
   background: white; 
-  border-top: 4px solid #e0ab45; 
+  border-top: 4px solid #e0ab45;
   border-bottom: 1px solid #ccc6b7; 
   margin-bottom: 20px; 
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
-header section { width: 975px; margin: 0 auto; padding: 4px 0 0 0; line-height: 50px; position: relative; }
+header section { width: 975px; margin: 0 auto; padding: 5px 0 0 0; line-height: 50px; position: relative; }
 header h1 { margin: 0; padding: 0 }
 header h1 a:hover { text-decoration: none; }
 header h1 a {
