@@ -29,7 +29,11 @@ with (scope('App')) {
           span({ id: 'user_nav_name' }, user.display_name)
         ),
         div({ id: 'user_nav_flyout' },
-            a({ href: '#account' }, 'Account' +
+          a({ href: '#account/fundraisers' }, 'Fundraisers'),
+          a({ href: '#contributions' }, 'Contributions'),
+          a({ href: '#issue_branches' }, 'Issue Branches'),
+
+          a({ href: '#account' }, 'Account' +
               (user.account.balance > 0 ? ' (' + money(user.account.balance) + ')' : '')),
             a({ href: BountySource.logout }, 'Logout'))
       );
@@ -49,10 +53,10 @@ with (scope('App')) {
             li(a({ href: '#faq' }, 'FAQ')),
             li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
             //li(a({ href: '#' }, 'Blog')),
+            li(a({ href: '#bounties' }, 'Find Bounties')),
 
             logged_in() ? [
-              li(a({ href: '#issue_branches' }, 'Issue Branches')),
-              li(a({ href: '#contributions' }, 'Contributions')),
+              li(a({ href: '#account/fundraisers/create' }, 'Create Fundraiser')),
               li(user_nav)
             ] : [
               li(a({ href: '#login' }, 'Login')),
