@@ -1,21 +1,87 @@
 with (scope('Fundraisers','App')) {
   route('#account/fundraisers', function() {
+    var fundraisers_table = div('Loading...');
+
     render(
       breadcrumbs(
         'Home',
         a({ href: '#account' }, 'Account'),
         'Fundraisers'
       ),
-      fundraisers_table()
+      fundraisers_table
     );
+
+    BountySource.get_fundraisers(function(response) {
+      if (response.data.length > 0) {
+        render({ into: fundraisers_table },
+          table(
+            tr(
+              th('Title'),
+              th({ style: 'width: 130px;' }, 'Funding Goal'),
+              th({ style: 'width: 200px;' }, 'Progress'),
+              th({ style: 'width: 80px; text-align: center;' }, 'Status')
+            ),
+            response.data.map(function(fundraiser) {
+              // depends on whether or not fundraiser is published
+              var link_href = fundraiser.published ? '#fundraisers/'+fundraiser.id : '#account/fundraisers/edit/'+fundraiser.id;
+              return tr({ style: 'height: 40px;' },
+                td(a({ href: link_href }, abbreviated_text(fundraiser.title || 'Untitled Fundraiser', 100))),
+                td(money(fundraiser.funding_goal || 0)),
+                td('<sick-ass-progress-bar />'),
+                td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser))
+              );
+            })
+          )
+        );
+      } else {
+        render({ into: fundraisers_table },
+          info_message("You don't have any fundraiser drafts saved. ", a({ href: '#account/fundraisers/create' }, "Create one now"))
+        );
+      }
+    });
+  });
+
+  define('fundraiser_published_status', function(fundraiser) {
+    return span({ style: 'font-size; 16px;' },
+      fundraiser.published ? span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Published') : span({ style: 'background: #29A8DD; border-radius: 4px; padding: 4px; color: white' }, 'Draft')
+    );
+  });
+
+  route('#account/fundraisers/edit/:fundraiser_id', function(fundraiser_id) {
+    var fundraiser_form_div = div('Loading...');
+
+    render(
+      breadcrumbs(
+        'Home',
+        a({ href: '#account' }, 'Account'),
+        a({ href: '#account/fundraisers' }, 'Fundraisers'),
+        'Edit'
+      ),
+      fundraiser_form_div
+    );
+
+    BountySource.get_fundraiser(fundraiser_id, function(response) {
+      // save the fundraiser form every 15 seconds
+      LongPoll.execute(curry(save_fundraiser, response.data)).every(15000).while(function() {
+        return /#account\/fundraisers\/edit\/\d+/.test(get_route());
+      }).start();
+
+      render({ into: fundraiser_form_div }, fundraiser_form(response.data));
+    })
   });
 
   // create a new fundraiser
   route('#account/fundraisers/create', function() {
-    // save the fundraiser form every 15 seconds
-    LongPoll.execute(save_fundraiser).every(15000).while(function() {
-      return get_route.call() == '#account/fundraisers/create';
-    }).start();
+    var fundraiser_form_div = div('Loading...');
+
+    BountySource.create_fundraiser(function(response) {
+      // save the fundraiser form every 15 seconds
+      LongPoll.execute(curry(save_fundraiser, response.data)).every(15000).while(function() {
+        return get_route() == '#account/fundraisers/create';
+      }).start();
+
+      render({ into: fundraiser_form_div }, fundraiser_form(response.data));
+    });
 
     render(
       breadcrumbs(
@@ -24,101 +90,114 @@ with (scope('Fundraisers','App')) {
         a({ href: '#account/fundraisers' }, 'Fundraisers'),
         'Create'
       ),
-
-      form({ 'class': 'fancy', action: publish_fundraiser },
-        fundraiser_block({ title: 'Basic Details', description: "Provide some basic information about your proposal." },
-          fieldset(
-            label('Title:'),
-            input({ name: 'title', 'class': 'long', placeholder: 'My OSS Project' })
-          ),
-          fieldset(
-            label('Image URL:'),
-            input({ name: 'image_url', 'class': 'long', placeholder: 'i.imgur.com/abc123' })
-          ),
-          fieldset(
-            label('Homepage:'),
-            input({ name: 'homepage_url', 'class': 'long', placeholder: 'bountysource.com' })
-          ),
-          fieldset(
-            label('Source Repository:'),
-            input({ name: 'repo_url', 'class': 'long', placeholder: 'github.com/badger/frontend' })
-          ),
-          fieldset({ 'class': 'no-label' },
-            a({ 'class': 'green', href: null, style: 'width: 250px;' }, 'Import From GitHub Project')
-          )
-        ),
-
-        br(),
-
-        fundraiser_block({ title: 'Fundraiser Description', description: "This is where you convince people to contribute to your fundraiser. Why is your project interesting, and worthy of funding?" },
-          fieldset(
-            textarea({ name: 'description', style: 'width: 910px; height: 400px;' }, "Very thorough description of your fundraiser proposal.")
-          )
-        ),
-
-        br(),
-
-        fundraiser_block({ title: 'About Me', description: "Convince people that your are skilled enough to deliver on your promise." },
-          fieldset(
-            textarea({ name: 'about_me', style: 'width: 910px; height: 100px;' }, "I am a Ruby on Rails engineer, with 8 years of experience.")
-          )
-        ),
-
-        br(),
-
-        fundraiser_block({ title: 'Funding Details', description: "How much funding do you need to finish this project? How do you want to receive the funding?" },
-          fieldset(
-            label('Funding Goal:'),
-            span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000' })
-          ),
-          fieldset(
-            label('Payout Method:'),
-            select({ name: 'payout_method', style: 'width: 600px;' },
-              option({ value: 'on_funding' },   'Receive all of the funds immediately upon the funding goal being reached'),
-              option({ value: 'fifty_fifty' },  'Receive half of the funds upon your funding goal being reached, and half after delivery of your product.'),
-              option({ value: 'on_delivery' },  'Receive all of the funds after the delivery of your finished product.')
-            )
-          )
-        ),
-
-        br(),
-
-        a({ 'class': 'green', href: save_fundraiser, style: 'display: inline-block; width: 150px; margin: 10px;' }, 'Save'),
-        a({ 'class': 'green', href: preview_fundraiser, style: 'display: inline-block; width: 150px; margin: 10px;' }, 'Preview'),
-
-        submit({ 'class': 'blue', style: 'float: right; width: 150px; margin: 10px;' }, 'Publish')
-      )
+      fundraiser_form_div
     );
   });
 
-  define('fundraisers_table', function(fundraisers) {
-    return table({ 'class': 'fundraiser-table' },
-      tr({ id: 'header' },
-        th('Project Title'),
-        th('')
-      ),
-      tr(
-        td(
-          a({ href: '#account/fundraisers/'+123 }, 'Awesome Project')
+  define('fundraiser_form', function(fundraiser) {
+    return form({ id: 'fundraiser-form', 'class': 'fancy' },
+      messages(),
+
+      fundraiser_block({ title: 'Basic Details', description: "Provide some basic information about your proposal." },
+        fieldset(
+          label('Title:'),
+          input({ name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'' })
         ),
-        td({ 'class': 'description' },'This is a description of the awesome feature/project that the fundraiser is for. Yeeeee gurl.')
-      )
-    )
+        fieldset(
+          label('Image URL:'),
+          input({ name: 'image_url', 'class': 'long', placeholder: 'i.imgur.com/abc123', value: fundraiser.image_url||'' })
+        ),
+        fieldset(
+          label('Homepage:'),
+          input({ name: 'homepage_url', 'class': 'long', placeholder: 'bountysource.com', value: fundraiser.homepage_url||'' })
+        ),
+        fieldset(
+          label('Source Repository:'),
+          input({ name: 'repo_url', 'class': 'long', placeholder: 'github.com/badger/frontend', value: fundraiser.repo_url||'' })
+        )
+
+//        fieldset({ 'class': 'no-label' },
+//          a({ 'class': 'green', href: null, style: 'width: 250px;' }, 'Import From GitHub Project')
+//        )
+      ),
+
+      br(),
+
+      fundraiser_block({ title: 'Fundraiser Description', description: "This is where you convince people to contribute to your fundraiser. Why is your project interesting, and worthy of funding?" },
+        fieldset(
+          textarea({ name: 'description', style: 'width: 910px; height: 400px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
+        )
+      ),
+
+      br(),
+
+      fundraiser_block({ title: 'About Me', description: "Convince people that your are skilled enough to deliver on your promise." },
+        fieldset(
+          textarea({ name: 'about_me', style: 'width: 910px; height: 100px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
+        )
+      ),
+
+      br(),
+
+      fundraiser_block({ title: 'Funding Details', description: "How much funding do you need to finish this project? How do you want to receive the funding?" },
+        fieldset(
+          label('Funding Goal:'),
+          span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000', value: fundraiser.funding_goal||'' })
+        ),
+        fieldset(
+          label('Payout Method:'),
+          select({ name: 'payout_method', style: 'width: 600px;' },
+            option({ value: 'on_funding' },   'Receive all of the funds immediately upon the funding goal being reached'),
+            option({ value: 'fifty_fifty' },  'Receive half of the funds upon your funding goal being reached, and half after delivery of your product.'),
+            option({ value: 'on_delivery' },  'Receive all of the funds after the delivery of your finished product.')
+          )
+        )
+      ),
+
+      br(),
+
+      a({ 'class': 'green', href: curry(save_fundraiser, fundraiser),    style: 'display: inline-block; width: 150px; margin: 10px;' }, 'Save'),
+      a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser), style: 'display: inline-block; width: 150px; margin: 10px;' }, 'Preview'),
+      a({ 'class': 'blue',  href: curry(publish_fundraiser, fundraiser), style: 'float: right; width: 150px; margin: 10px;' },          'Publish')
+    );
   });
 
-  define('publish_fundraiser', function(form_data) {
+  define('publish_fundraiser', function(fundraiser) {
     if (confirm('Are you sure? Once published, a proposal CANNOT be edited. Publish your proposal?')) {
-      console.log(form_data);
+      // first, save it. callback hell: population 2
+      save_fundraiser(fundraiser, function(save_response) {
+        BountySource.publish_fundraiser(fundraiser.id, function(response) {
+          if (response.meta.success) {
+            set_route('#account/fundraisers');
+          } else {
+            window.scrollTo(0,0);
+            render_message(error_message(response.data.error));
+          }
+        });
+      });
     }
   });
 
-  define('preview_fundraiser', function() {
-//    console.log('TODO: preview fundraiser with the form data');
-    console.log(fundraiser_data_from_form());
+  define('preview_fundraiser', function(fundraiser) {
+    console.log('TODO: preview fundraiser with the form data');
+    console.log('form_data', serialize_form('fundraiser-form'));
   });
 
-  define('save_fundraiser', function() {
-    console.log('TODO: get data and POST it to server');
+  define('save_fundraiser', function(fundraiser, callback) {
+    var serialized_form = serialize_form('fundraiser-form'),
+        request_data    = serialized_form_to_hash(serialized_form);
+
+    BountySource.update_fundraiser(fundraiser.id, request_data, function(response) {
+      if (callback) callback.call(response);
+    });
+  });
+
+  // convert the serialized form (array of inputs) to a hash to send to server as request params.
+  // requires unique name attributes on elements.
+  define('serialized_form_to_hash', function(serialized_form) {
+    var request_data = {};
+    serialized_form.map(function(e) { request_data[e.name] = e.value });
+    return request_data;
   });
 
   // a pretty, formatted container for a set of inputs.
@@ -138,18 +217,5 @@ with (scope('Fundraisers','App')) {
         arguments
       )
     );
-  });
-
-  define('fundraiser_data_from_form', function() {
-    return {
-      title:          document.getElementsByName('title')[0].innerHTML,
-      image_url:      document.getElementsByName('image_url')[0].innerHTML,
-      homepage_url:   document.getElementsByName('homepage_url')[0].innerHTML,
-      repo_url:       document.getElementsByName('repo_url')[0].innerHTML,
-      description:    document.getElementsByName('description')[0].innerHTML,
-      about_me:       document.getElementsByName('about_me')[0].innerHTML,
-      funding_goal:   parseInt(document.getElementsByName('funding_goal')[0].innerHTML||'0'),
-      payout_method:  document.getElementsByName('payout_method')[0].selectedOptions[0].value
-    };
   });
 }
