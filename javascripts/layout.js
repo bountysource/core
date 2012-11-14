@@ -165,6 +165,12 @@ with (scope('App')) {
     render({ into: '_page-messages' }, '');
   });
 
+  // abbreviate a body of text
+  define('abbreviated_text', function(text, max_length) {
+    max_length = max_length || 100;
+    return (text.length > max_length) ? (text.substr(0,max_length) + '...') : text;
+  });
+
   // render all of the child inputs with required markings
   define('required_inputs', function() {
     var arguments = flatten_to_array(arguments);
