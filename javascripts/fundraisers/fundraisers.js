@@ -19,7 +19,8 @@ with (scope('Fundraisers','App')) {
               th('Title'),
               th({ style: 'width: 130px;' }, 'Funding Goal'),
               th({ style: 'width: 200px;' }, 'Progress'),
-              th({ style: 'width: 80px; text-align: center;' }, 'Status')
+              th({ style: 'width: 80px; text-align: center;' }, 'Status'),
+              th({ style: 'width: 30px;' })
             ),
             response.data.map(function(fundraiser) {
               // depends on whether or not fundraiser is published
@@ -28,7 +29,8 @@ with (scope('Fundraisers','App')) {
                 td(a({ href: link_href }, abbreviated_text(fundraiser.title || 'Untitled Fundraiser', 100))),
                 td(money(fundraiser.funding_goal || 0)),
                 td('<sick-ass-progress-bar />'),
-                td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser))
+                td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
+                td(fundraiser.published ? '' : a({ href: curry(destroy_fundraiser, fundraiser)}, 'delete'))
               );
             })
           )
@@ -190,6 +192,14 @@ with (scope('Fundraisers','App')) {
     BountySource.update_fundraiser(fundraiser.id, request_data, function(response) {
       if (callback) callback.call(response);
     });
+  });
+
+  define('destroy_fundraiser', function(fundraiser) {
+    if (confirm('Are you sure? It will be gone forever!')) {
+      BountySource.destroy_fundraiser(fundraiser.id, function(response) {
+        window.location.reload();
+      });
+    }
   });
 
   // convert the serialized form (array of inputs) to a hash to send to server as request params.
