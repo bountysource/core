@@ -12,7 +12,11 @@ with (scope('Fundraisers')) {
     render(target_div);
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
-      render({ into: target_div }, fundraiser_template(response.data));
+      if (!response.meta.success || response.data.published) {
+        render({ into: target_div }, fundraiser_template(response.data));
+      } else {
+        render({ into: target_div }, error_message('Fundraiser not found.'));
+      }
     });
   });
 
