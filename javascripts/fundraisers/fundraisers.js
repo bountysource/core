@@ -158,9 +158,9 @@ with (scope('Fundraisers','App')) {
 
       br(),
 
-      a({ 'class': 'green', href: curry(save_fundraiser, fundraiser),    style: 'display: inline-block; width: 150px; margin: 10px;' }, 'Save'),
-      a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser), style: 'display: inline-block; width: 150px; margin: 10px;' }, 'Preview'),
-      a({ 'class': 'blue',  href: curry(publish_fundraiser, fundraiser), style: 'float: right; width: 150px; margin: 10px;' },          'Publish')
+      a({ 'class': 'green', href:     curry(save_fundraiser, fundraiser),    style: 'display: inline-block; width: 150px; margin: 10px;' }, 'Save'),
+      a({ 'class': 'green', onclick:  curry(preview_fundraiser, fundraiser), style: 'display: inline-block; width: 150px; margin: 10px;' }, 'Preview'),
+      a({ 'class': 'blue',  href:     curry(publish_fundraiser, fundraiser), style: 'float: right; width: 150px; margin: 10px;' },          'Publish')
     );
   });
 
@@ -180,9 +180,9 @@ with (scope('Fundraisers','App')) {
     }
   });
 
+  // preview fundraiser in a new window
   define('preview_fundraiser', function(fundraiser) {
-    console.log('TODO: preview fundraiser with the form data');
-    console.log('form_data', serialize_form('fundraiser-form'));
+    window.open(BountySource.www_host+'#fundraisers/'+fundraiser.id+'/preview','','width=1020,height=900');
   });
 
   define('save_fundraiser', function(fundraiser, callback) {
