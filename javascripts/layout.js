@@ -17,8 +17,8 @@ with (scope('App')) {
 
   define('user_nav', function() {
     var user_nav = div({ id: 'user-nav',
-                         onMouseOver: user_nav_flyout_mouseover,
-                         onMouseOut:  user_nav_flyout_mouseout },
+        onMouseOver: user_nav_flyout_mouseover,
+        onMouseOut:  user_nav_flyout_mouseout },
       a({ href: function() {} }, 'Loading...')
     );
 
@@ -29,9 +29,13 @@ with (scope('App')) {
           span({ id: 'user_nav_name' }, user.display_name)
         ),
         div({ id: 'user_nav_flyout' },
-            a({ href: '#account' }, 'Account' +
-              (user.account.balance > 0 ? ' (' + money(user.account.balance) + ')' : '')),
-            a({ href: BountySource.logout }, 'Logout'))
+          a({ href: '#account/fundraisers' }, 'Fundraisers'),
+          a({ href: '#contributions' }, 'Contributions'),
+          a({ href: '#issue_branches' }, 'Issue Branches'),
+
+          a({ href: '#account' }, 'Account' +
+            (user.account.balance > 0 ? ' (' + money(user.account.balance) + ')' : '')),
+          a({ href: BountySource.logout }, 'Logout'))
       );
     });
 
@@ -49,10 +53,10 @@ with (scope('App')) {
             li(a({ href: '#faq' }, 'FAQ')),
             li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
             //li(a({ href: '#' }, 'Blog')),
+            li(a({ href: '#bounties' }, 'Find Bounties')),
 
             logged_in() ? [
-              li(a({ href: '#issue_branches' }, 'Issue Branches')),
-              li(a({ href: '#contributions' }, 'Contributions')),
+              li(a({ href: '#account/fundraisers/create' }, 'Create Fundraiser')),
               li(user_nav)
             ] : [
               li(a({ href: '#login' }, 'Login')),
@@ -92,14 +96,14 @@ with (scope('App')) {
       elements.push(span({ 'class': 'arrow' }, "»"));
     }
     elements.pop(); // shave off extra arrow
-    
+
     // add the up-arrow inside the last crumb
     var last_elem = elements.pop();
-    elements.push(span({ 'class': 'crumb' }, 
+    elements.push(span({ 'class': 'crumb' },
       last_elem.childNodes[0],
       span({ 'class': 'uparrow' })
     ));
-    
+
     return div({ id: 'breadcrumbs' }, elements);
   });
 
@@ -159,6 +163,12 @@ with (scope('App')) {
     render({ into: '_page-messages' }, '');
   });
 
+  // abbreviate a body of text
+  define('abbreviated_text', function(text, max_length) {
+    max_length = max_length || 100;
+    return (text.length > max_length) ? (text.substr(0,max_length) + '...') : text;
+  });
+
   // render all of the child inputs with required markings
   define('required_inputs', function() {
     var arguments = flatten_to_array(arguments);
@@ -187,23 +197,23 @@ with (scope('App')) {
 
 
   /*
-  * Define a group of ranges. The will all scale to the same max set in the options.
-  * If you add a tax attribute to the range, it will set the min value of the range accordingly.
-  *
-  * NOTE: Make sure you add an element with id 'total-cut' somewhere. This will be updated the total amount
-  * remaining after donations/taxes are applied.
-  *
-  * Options:
-  * @data-tax -   A float, representing percentage of the max to set the min.
-  * @max -        The max value for all ranges in the group.
-  *
-  * Arguments:
-  * The remaining arguments are the name attributes of the ranges you want to include in the group
-  * */
+   * Define a group of ranges. The will all scale to the same max set in the options.
+   * If you add a tax attribute to the range, it will set the min value of the range accordingly.
+   *
+   * NOTE: Make sure you add an element with id 'total-cut' somewhere. This will be updated the total amount
+   * remaining after donations/taxes are applied.
+   *
+   * Options:
+   * @data-tax -   A float, representing percentage of the max to set the min.
+   * @max -        The max value for all ranges in the group.
+   *
+   * Arguments:
+   * The remaining arguments are the name attributes of the ranges you want to include in the group
+   * */
   define('donation_slider_group', function() {
     var arguments =           flatten_to_array(arguments),
-        options =             shift_options_from_args(arguments),
-        difference_element =  document.getElementById(options.difference_element_id);
+      options =             shift_options_from_args(arguments),
+      difference_element =  document.getElementById(options.difference_element_id);
 
     // collect all of the specified slider elements
     var all_sliders = [];
@@ -261,7 +271,7 @@ with (scope('App')) {
       this_slider.addEventListener('change', function(e) {
         // collect the other sliders that are not this one.
         var other_sliders = get_other_sliders(e.target),
-            other_slider_min_sum = sum_slider_mins(other_sliders);
+          other_slider_min_sum = sum_slider_mins(other_sliders);
 
         // add max now if missing, since it doesn't work to do it before (maybe it can, this is quicker though)
         if (!e.target.getAttribute('max')) e.target.setAttribute('max', (options.max - other_slider_min_sum));

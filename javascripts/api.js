@@ -186,4 +186,28 @@ with (scope('BountySource')) {
   define('post_github_comment', function(login, repository, issue_number, form_data, callback) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/comments', 'POST', form_data, callback);
   });
+
+  define('get_fundraisers', function(callback) {
+    api('/user/fundraisers', callback);
+  });
+
+  define('get_fundraiser', function(id, callback) {
+    api('/user/fundraisers/'+id, callback);
+  });
+
+  define('create_fundraiser', function(data, callback) {
+    api('/user/fundraisers', 'POST', data, callback);
+  });
+
+  define('update_fundraiser', function(id, data, callback) {
+    api('/user/fundraisers/'+id, 'PUT', data, callback);
+  });
+
+  define('publish_fundraiser', function(id, callback) {
+    api('/user/fundraisers/'+id+'/publish', 'POST', callback);
+  });
+
+  define('destroy_fundraiser', function(id, callback) {
+    api('/user/fundraisers/'+id, 'DELETE', callback);
+  })
 }

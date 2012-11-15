@@ -14,8 +14,6 @@ with (scope('Repository', 'App')) {
     BountySource.overview(function(response) {
       var data = (response.data||{});
 
-      console.log(data);
-
       render({ into: target_div },
         div({ 'class': 'split-main' },
           div(
