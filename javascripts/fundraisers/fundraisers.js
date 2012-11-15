@@ -182,7 +182,7 @@ with (scope('Fundraisers','App')) {
 
   // preview fundraiser in a new window
   define('preview_fundraiser', function(fundraiser) {
-    window.open(BountySource.www_host+'#fundraisers/'+fundraiser.id+'/preview','','width=1020,height=900');
+    window.open(BountySource.www_host+'#fundraisers/'+fundraiser.id+'/preview','','width=1050,height=900');
   });
 
   define('save_fundraiser', function(fundraiser, callback) {
