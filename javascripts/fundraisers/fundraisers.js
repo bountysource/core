@@ -64,7 +64,7 @@ with (scope('Fundraisers','App')) {
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
       // save the fundraiser form every 15 seconds
-      LongPoll.execute(curry(save_fundraiser, response.data)).every(15000).while(function() {
+      LongPoll.execute(curry(save_fundraiser, response.data)).every(15000).condition(function() {
         return /#account\/fundraisers\/edit\/\d+/.test(get_route());
       }).start();
 
@@ -78,7 +78,7 @@ with (scope('Fundraisers','App')) {
 
     BountySource.create_fundraiser(function(response) {
       // save the fundraiser form every 15 seconds
-      LongPoll.execute(curry(save_fundraiser, response.data)).every(15000).while(function() {
+      LongPoll.execute(curry(save_fundraiser, response.data)).every(15000).condition(function() {
         return get_route() == '#account/fundraisers/create';
       }).start();
 
