@@ -46,15 +46,31 @@ with (scope('Fundraisers')) {
     // add the title to the already present header element
     render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
-    return div(
+    return section({ id: 'fundraiser-wrapper' },
       div({ 'class': 'split-main' },
-        h1(fundraiser.title),
-        p(fundraiser.description)
+        section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 25px; text-align: center; color: #5e5f5f;' },
+          h1({ style: 'font-size: 45px; font-weight: normal; margin: 25px auto;' }, fundraiser.title),
+          span({ style: 'font-size: 16px; margin-bottom: 35px;' }, 'by ', fundraiser.person.display_name)
+        ),
+
+        // TODO sharing
+        section({ id: 'fundraiser-share' }),
+
+        section({ id: 'fundraiser-description', style: 'margin: 20px auto; padding: 10px; background: #F7F7F7; border-radius: 2px; border-radius: 3px;' },
+          p({ style: 'margin: 0; white-space: pre-wrap; font-size: 18px; line-height: 35px;' }, fundraiser.description)
+        )
       ),
 
       div({ 'class': 'split-side' },
         grey_box(
-          span({ style: 'padding-right: 10px;' }, 'Goal:'), span({ style: 'font-weight: bold;' }, money(fundraiser.funding_goal))
+          ul({ style: 'list-style-type: none; padding: 0;' },
+            li({ style: 'margin: 20px auto;' },
+              span({ style: 'font-size: 45px;' }, 15+''), span({ style: 'margin-left: 5px;' }, 'backers')
+            ),
+            li({ style: 'margin: 20px auto;' },
+              span({ style: 'font-size: 45px;' }, money(1500)), span({ style: 'margin-left: 5px;' }, 'backers')
+            )
+          )
         )
       ),
 
@@ -64,7 +80,7 @@ with (scope('Fundraisers')) {
 
   // a layout with no navigation, for simply previewing a fundraiser
   define('fundraiser_preview_layout', function(yield) {
-    return section({ id: 'wrapper', style: 'margin-top: 10px;' },
+    return section({ id: 'wrapper', style: 'margin: 10px auto;' },
       section({ id: 'content' }, yield)
     )
   });
