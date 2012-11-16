@@ -59,8 +59,8 @@ with (scope('Fundraisers')) {
 
         section({ id: 'fundraiser-links', style: 'text-align: right; color: #C5C5C5;' },
           span({ style: 'display: block; margin: 10px 0;' }, 'Created ', date(fundraiser.created_at)),
-          fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, 'Homepage: ', a({ href: fundraiser.homepage_url, style: 'color: inherit;' }, fundraiser.homepage_url)),
-          fundraiser.repo_url &&    span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
+          fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, 'Homepage: ', a({ target: '_blank', href: fundraiser.homepage_url, style: 'color: inherit;' }, fundraiser.homepage_url)),
+          fundraiser.repo_url &&    span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
         ),
 
         // TODO sharing
