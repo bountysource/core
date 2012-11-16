@@ -79,4 +79,10 @@ with (scope('App')) {
       set_route('#create_account');
     }
   });
+
+  // remove a DOM element
+  define('remove_element', function(id) {
+    var e = document.getElementById(id);
+    return (e ? (e.parentNode.removeChild(e) && true) : false);
+  });
 };
