@@ -53,7 +53,7 @@ with (scope('App')) {
     set_route(route, { reload_page: true });
   });
 
-  // use to check logged in. if passed a callback, execute that if logged in (passing access token as argument)
+  // use to check logged in
   define('logged_in', function() {
     return Storage.get('access_token');
   });
