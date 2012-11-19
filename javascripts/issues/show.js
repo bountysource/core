@@ -79,49 +79,15 @@ with (scope('Issue', 'App')) {
   });
   
   define('bounty_box', function(issue) {
-    var bountysource_account_div = div();
-
+    var payment_box_div = Payment.payment_box('Bounty', issue.repository, issue.number, window.location.href+'/contributions/receipt');
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
       issue.bounty_amount > 0 && section(
         div({ 'class': 'total_bounties' }, money(issue.bounty_amount)),
         div({ style: 'text-align: center' }, "From ", issue.bounties.length, " bount" + (issue.bounties.length == 1 ? 'y' : 'ies') + ".")
-        
-        
-        // issue.bounties && (issue.bounties.length > 0) && div(
-        //   issue.bounties.map(function(bounty) {
-        //     return div(money(bounty.amount));
-        //   })
-        // )
       ),
-
-      section({ style: 'padding: 21px' },
-        form({ action: curry(create_bounty, issue.repository.owner, issue.repository.name, issue.number) },
-          div({ id: 'create-bounty-errors' }),
-
-          div({ 'class': 'amount' },
-            label({ 'for': 'amount-input' }, '$'),
-            text({ placeholder: "25", name: 'amount', id: 'amount-input' })
-          ),
-          div({ 'class': 'payment-method' },
-            div(radio({ name: 'payment_method', value: 'paypal', id:'payment_method_paypal',
-                        checked: 'checked' }),
-                label({ 'for': 'payment_method_paypal' },
-                      img({ src: 'images/paypal.png'}), "PayPal")),
-            div(radio({ name: 'payment_method', value: 'google', id:'payment_method_google' }),
-                label({ 'for': 'payment_method_google' },
-                      img({ src: 'images/google-wallet.png'}), "Google Wallet")),
-//            div(radio({ name: 'payment_method', value: 'amazon', id:'payment_method_amazon' }),
-//                label({ 'for': 'payment_method_amazon' },
-//                      img({ src: 'images/amazon.png'}), "Amazon.com")),
-
-            bountysource_account_div
-          ),
-
-          submit({ 'class': 'blue' }, 'Create Bounty')
-        )
-      )
+      payment_box_div
     );
   });
   
@@ -225,26 +191,6 @@ with (scope('Issue', 'App')) {
             }
           }
         });
-      }
-    });
-  });
-
-  define('create_bounty', function(login, repository, issue, form_data) {
-    var payment_method = form_data.payment_method;
-    var amount = form_data.amount;
-
-    BountySource.create_bounty(login, repository, issue, amount, payment_method, window.location.href+'/contributions/receipt', function(response) {
-      if (response.meta.success) {
-        if (!logged_in()) {
-          // save the route to redirect to after account creation/login
-          save_route_for_redirect(response.data.redirect_url);
-          set_route('#create_account');
-        } else {
-          if (payment_method == 'personal') BountySource.set_cached_user_info(null);
-          window.location.href = response.data.redirect_url;
-        }
-      } else {
-        render({ target: 'create-bounty-errors' }, error_message(response.data.error));
       }
     });
   });

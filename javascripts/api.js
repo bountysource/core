@@ -122,12 +122,9 @@ with (scope('BountySource')) {
     api('/overview', callback);
   });
 
-  define('create_bounty', function(login, repository, issue_number, amount, payment_method, redirect_url, callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/bounties', 'POST', { amount: amount, payment_method: payment_method, redirect_url: redirect_url }, callback);
-  });
-
-  define('create_donation', function(repo_full_name, amount, payment_method, redirect_url, callback) {
-    api('/github/repos/'+repo_full_name+'/donate', 'POST', { amount: amount, payment_method: payment_method, redirect_url: redirect_url }, callback);
+  define('make_payment', function(item, repo_full_name, issue_number, amount, payment_method, redirect_url, callback) {
+    var url = '/github/repos/'+repo_full_name + (item == 'Bounty' ? '/issues/'+issue_number+'/bounties' : '/donate');
+    api(url, 'POST', { amount: amount, payment_method: payment_method, redirect_url: redirect_url }, callback);
   });
 
   define('get_user_repositories', function(callback) {
