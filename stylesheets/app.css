@@ -291,3 +291,10 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   border-radius: 2px;
   vertical-align: middle;
 }
+
+#milestone-table tr                   { height: 60px; }
+#milestone-table tr.editable          { background: #E7FDE7; }
+#milestone-table tr.editable:hover    { background: #D8FDD8; }
+#milestone-table tr.read-only         { background: #E7FDE7; }
+#milestone-table tr.read-only:hover   { background: #D8FDD8; }
+#milestone-table tr#milestone-inputs  { background: #D9FCBD; }

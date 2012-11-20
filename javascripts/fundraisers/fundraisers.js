@@ -69,7 +69,19 @@ with (scope('Fundraisers','App')) {
       }).start();
 
       render({ into: fundraiser_form_div }, fundraiser_form(response.data));
-    })
+
+      response.data.milestones = [
+        { description: 'first' },
+        { description: 'second' },
+        { description: 'third' }
+      ];
+
+      // after form is rendered, insert saved milestone rows into table
+      (response.data.milestones||[]).map(function(milestone) {
+        var t = Teddy.snuggle('milestone-table');
+        t.at(t.length() - 2).insert(milestone_row_elements(generate_id(), milestone));
+      });
+    });
   });
 
   // create a new fundraiser
@@ -117,15 +129,11 @@ with (scope('Fundraisers','App')) {
           label('Source Repository:'),
           input({ name: 'repo_url', 'class': 'long', placeholder: 'github.com/badger/frontend', value: fundraiser.repo_url||'' })
         )
-
-//        fieldset({ 'class': 'no-label' },
-//          a({ 'class': 'green', href: null, style: 'width: 250px;' }, 'Import From GitHub Project')
-//        )
       ),
 
       br(),
 
-      fundraiser_block({ title: 'Fundraiser Description', description: "This is where you convince people to contribute to your fundraiser. Why is your project interesting, and worthy of funding?" },
+      fundraiser_block({ title: 'Description', description: "This is where you convince people to contribute to your fundraiser. Why is your project interesting, and worthy of funding?" },
         fieldset(
           textarea({ name: 'description', style: 'width: 910px; height: 400px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
         )
@@ -136,6 +144,37 @@ with (scope('Fundraisers','App')) {
       fundraiser_block({ title: 'About Me', description: "Convince people that your are skilled enough to deliver on your promise." },
         fieldset(
           textarea({ name: 'about_me', style: 'width: 910px; height: 100px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
+        )
+      ),
+
+      br(),
+
+      fundraiser_block({ title: 'Milestones', description: "Provide a roadmap of your planned development process. Once the fundraiser is published, you can update the progress of individual milestones. Keep your milestones up to date so that backers can track the progress of your work." },
+        milestone_messages(),
+
+        table({ id: 'milestone-table', style: 'border: 1px solid #C4C4C4;' },
+          tr({ style: 'background: #FDFDFD;' },
+            th('Milestone Description'),
+            th({ style: 'width: 60px;' })
+          ),
+
+          // automatic 'started working' milestone
+          tr({ 'class': 'editable' },
+            td({ style: 'font-style: italic;' }, span({ style: 'margin-left: 15px;' }, 'Started working.')),
+            td('')
+          ),
+
+          // inputs to add new milestone
+          tr({ id: 'milestone-inputs' },
+            td(input({ id: 'milestone-input-description', style: 'width: 810px; margin-left: 5px;', placeholder: 'What is your goal for this milestone?' })),
+            td({ style: 'text-align: center;' }, a({ href: curry(push_milestone_row_from_inputs, 'milestone-inputs') }, img({ src: 'images/add.gif' })))
+          ),
+
+          // automatic 'finished working' milestone
+          tr({ 'class': 'editable' },
+            td({ style: 'font-style: italic;' }, span({ style: 'margin-left: 15px;' }, 'Finished working.')),
+            td('')
+          )
         )
       ),
 
@@ -164,6 +203,65 @@ with (scope('Fundraisers','App')) {
     );
   });
 
+  define('milestone_messages', function() { return div({ id: 'milestone-errors', style: 'margin-bottom: 10px;' }); });
+  define('render_milestone_message', function(yield) { render({ target: 'milestone-errors' }, yield); });
+  define('clear_milestone_messages', function() { document.getElementById('milestone-errors').innerHTML=""; })
+
+  // generate a random ID
+  define('generate_id', function() { return 'milestone-table-row_'+Math.ceil((new Date()).getTime() * Math.random()) });
+
+  // return a row, with the correct id (based on the number of added milestones)
+  define('milestone_row_elements', function(milestone_row_id, milestone_data) {
+    return [
+      { id: milestone_row_id, 'class': 'editable' },
+      td({ style: 'padding-left: 20px;' }, milestone_data.description),
+      td({ style: 'text-align: center;' },
+        a({ href: curry(unlock_milestone_row, milestone_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/edit.gif' })),
+        a({ href: curry(delete_milestone_row, milestone_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/trash.gif' }))
+      )
+    ];
+  });
+
+  // make a row editable after being inserted into the table.
+  define('unlock_milestone_row', function(milestone_row_id) {
+    var t                   = Teddy.snuggle('milestone-table'),
+      milestone_description = t.at(milestone_row_id).children[0].innerText;
+    t.at(milestone_row_id).replace({ id: milestone_row_id, 'class': 'editable' },
+      td(input({ style: 'width: 810px; margin-left: 5px;', name: 'milestone-description', placeholder: 'What is your goal for this milestone?', value: milestone_description||'' })),
+      td({ style: 'text-align: center;' }, a({ href: curry(lock_milestone_row, milestone_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/save.gif' })))
+    ).setAttribute('locked-for-edit', true);
+  });
+
+  // lock a row that is being edited
+  define('lock_milestone_row', function(milestone_row_id) {
+    var t = Teddy.snuggle('milestone-table');
+    t.at(milestone_row_id).removeAttribute('locked-for-edit');
+    t.at(milestone_row_id).replace(milestone_row_elements(milestone_row_id, {
+      description: t.at(milestone_row_id).children[0].children[0].value
+    }));
+  });
+
+  define('delete_milestone_row', function(milestone_row_id) {
+    var t = Teddy.snuggle('milestone-table');
+    if (confirm('Delete milestone?')) t.at(milestone_row_id).remove();
+  });
+
+  // take what is on the inputs row of the milestones table, add it as a new row, and empty the inputs row.
+  define('push_milestone_row_from_inputs', function(milestone_row_id) {
+    clear_milestone_messages();
+
+    var input_row = Teddy.snuggle('milestone-table').at('milestone-inputs'),
+      description_input = document.getElementById('milestone-input-description');
+
+    if (!description_input.value || description_input.value.length == 0) {
+      render_milestone_message(error_message("You must provide a description!"));
+    } else {
+      input_row.insert(milestone_row_elements(milestone_row_id, { description: description_input.value }));
+      description_input.value="";
+      description_input.focus();
+    }
+  });
+
   define('publish_fundraiser', function(fundraiser) {
     if (confirm('Are you sure? Once published, a proposal CANNOT be edited. Publish your proposal?')) {
       // first, save it. callback hell: population 2
@@ -176,28 +274,6 @@ with (scope('Fundraisers','App')) {
             render_message(error_message(response.data.error));
           }
         });
-      });
-    }
-  });
-
-  // preview fundraiser in a new window
-  define('preview_fundraiser', function(fundraiser) {
-    window.open(BountySource.www_host+'#fundraisers/'+fundraiser.id+'/preview','','width=1050,height=900');
-  });
-
-  define('save_fundraiser', function(fundraiser, callback) {
-    var serialized_form = serialize_form('fundraiser-form'),
-        request_data    = serialized_form_to_hash(serialized_form);
-
-    BountySource.update_fundraiser(fundraiser.id, request_data, function(response) {
-      if (callback) callback.call(response);
-    });
-  });
-
-  define('destroy_fundraiser', function(fundraiser) {
-    if (confirm('Are you sure? It will be gone forever!')) {
-      BountySource.destroy_fundraiser(fundraiser.id, function(response) {
-        window.location.reload();
       });
     }
   });
@@ -217,7 +293,7 @@ with (scope('Fundraisers','App')) {
   // options.description  - description of the inputs in the block
   define('fundraiser_block', function() {
     var arguments = flatten_to_array(arguments),
-        options   = shift_options_from_args(arguments);
+      options   = shift_options_from_args(arguments);
     return div({ style: '#eee; border: 1px solid #ccc;' },
       div({ style: 'background: #F7F7F7; border-bottom: 1px solid #D5D5D5; padding: 20px 10px;' },
         span({ style: 'font-size: 25px;' }, options.title),
@@ -227,5 +303,38 @@ with (scope('Fundraisers','App')) {
         arguments
       )
     );
+  });
+
+
+  // preview fundraiser in a new window
+  define('preview_fundraiser', function(fundraiser) {
+    window.open(BountySource.www_host+'#fundraisers/'+fundraiser.id+'/preview','','width=1050,height=900');
+  });
+
+  define('save_fundraiser', function(fundraiser, callback) {
+    var serialized_form = serialize_form('fundraiser-form'),
+      request_data      = serialized_form_to_hash(serialized_form);
+
+    // append serialized milestones array to request_data.
+    var t = Teddy.snuggle('milestone-table');
+    request_data.milestones = [];
+    t.forEach(function(row) {
+      if (row.className == 'editable' && !row.getAttribute('locked-for-edit')) {
+        request_data.milestones.push({ description: row.children[0].innerText });
+      }
+    });
+    request_data.milestones = JSON.stringify(request_data.milestones); // serialize array
+
+    BountySource.update_fundraiser(fundraiser.id, request_data, function(response) {
+      if (callback) callback.call(response);
+    });
+  });
+
+  define('destroy_fundraiser', function(fundraiser) {
+    if (confirm('Are you sure? It will be gone forever!')) {
+      BountySource.destroy_fundraiser(fundraiser.id, function(response) {
+        window.location.reload();
+      });
+    }
   });
 }
