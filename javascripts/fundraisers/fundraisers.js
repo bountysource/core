@@ -161,7 +161,7 @@ with (scope('Fundraisers','App')) {
           // inputs to add new milestone
           tr({ id: 'milestone-inputs' },
             td(input({ id: 'milestone-input-description', style: 'width: 810px; margin-left: 5px;', placeholder: 'What is your goal for this milestone?' })),
-            td({ style: 'text-align: center;' }, a({ href: curry(push_milestone_row_from_inputs, 'milestone-inputs') }, img({ src: 'images/add.gif' })))
+            td({ style: 'text-align: center;' }, a({ href: curry(push_milestone_row_from_inputs) }, img({ src: 'images/add.gif' })))
           ),
 
           // automatic 'finished working' milestone
@@ -241,16 +241,16 @@ with (scope('Fundraisers','App')) {
   });
 
   // take what is on the inputs row of the milestones table, add it as a new row, and empty the inputs row.
-  define('push_milestone_row_from_inputs', function(milestone_row_id) {
+  define('push_milestone_row_from_inputs', function() {
     clear_milestone_messages();
 
-    var input_row = Teddy.snuggle('milestone-table').at('milestone-inputs'),
+    var input_row       = Teddy.snuggle('milestone-table').at('milestone-inputs'),
       description_input = document.getElementById('milestone-input-description');
 
     if (!description_input.value || description_input.value.length == 0) {
       render_milestone_message(error_message("You must provide a description!"));
     } else {
-      input_row.insert(milestone_row_elements(milestone_row_id, { description: description_input.value }));
+      input_row.insert(milestone_row_elements(generate_id(), { description: description_input.value }));
       description_input.value="";
       description_input.focus();
     }
