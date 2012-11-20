@@ -160,7 +160,14 @@ with (scope('Fundraisers','App')) {
 
           // inputs to add new milestone
           tr({ id: 'milestone-inputs' },
-            td(input({ id: 'milestone-input-description', style: 'width: 810px; margin-left: 5px;', placeholder: 'What is your goal for this milestone?' })),
+            td(
+              input({
+                id: 'milestone-input-description',
+                style: 'width: 810px; margin-left: 5px;',
+                placeholder: 'What is your goal for this milestone?',
+                onkeyup: function(e) { if (e.keyCode == 13) push_milestone_row_from_inputs() }
+              })
+            ),
             td({ style: 'text-align: center;' }, a({ href: curry(push_milestone_row_from_inputs) }, img({ src: 'images/add.gif' })))
           ),
 
