@@ -168,7 +168,9 @@ with (scope('Fundraisers','App')) {
                 onkeyup: function(e) { if (e.keyCode == 13) push_milestone_row_from_inputs() }
               })
             ),
-            td({ style: 'text-align: center;' }, a({ href: curry(push_milestone_row_from_inputs) }, img({ src: 'images/add.gif' })))
+            td({ style: 'text-align: center;' },
+              a({ href: curry(push_milestone_row_from_inputs) }, img({ src: 'images/add.gif' }))
+            )
           ),
 
           // automatic 'finished working' milestone
@@ -228,9 +230,18 @@ with (scope('Fundraisers','App')) {
     var t                   = Teddy.snuggle('milestone-table'),
       milestone_description = t.at(milestone_row_id).children[0].innerText;
     t.at(milestone_row_id).replace({ id: milestone_row_id, 'class': 'editable' },
-      td(input({ style: 'width: 810px; margin-left: 5px;', name: 'milestone-description', placeholder: 'What is your goal for this milestone?', value: milestone_description||'' })),
+      td(
+        input({
+          style:        'width: 810px; margin-left: 5px;',
+          name:         'milestone-description',
+          placeholder:  'What is your goal for this milestone?',
+          value:        milestone_description||'',
+          onkeyup:      function(e) { if (e.keyCode == 13) lock_milestone_row(milestone_row_id) }
+        })
+      ),
       td({ style: 'text-align: center;' }, a({ href: curry(lock_milestone_row, milestone_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/save.gif' })))
     ).setAttribute('locked-for-edit', true);
+    t.at(milestone_row_id).children[0].children[0].focus();
   });
 
   // lock a row that is being edited
@@ -244,15 +255,15 @@ with (scope('Fundraisers','App')) {
 
   define('delete_milestone_row', function(milestone_row_id) {
     var t = Teddy.snuggle('milestone-table');
-    if (confirm('Delete milestone?')) t.at(milestone_row_id).remove();
+    t.at(milestone_row_id).remove();
   });
 
   // take what is on the inputs row of the milestones table, add it as a new row, and empty the inputs row.
   define('push_milestone_row_from_inputs', function() {
     clear_milestone_messages();
 
-    var input_row       = Teddy.snuggle('milestone-table').at('milestone-inputs'),
-      description_input = document.getElementById('milestone-input-description');
+    var input_row         = Teddy.snuggle('milestone-table').at('milestone-inputs'),
+        description_input = document.getElementById('milestone-input-description');
 
     if (!description_input.value || description_input.value.length == 0) {
       render_milestone_message(error_message("You must provide a description!"));
