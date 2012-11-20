@@ -70,12 +70,6 @@ with (scope('Fundraisers','App')) {
 
       render({ into: fundraiser_form_div }, fundraiser_form(response.data));
 
-      response.data.milestones = [
-        { description: 'first' },
-        { description: 'second' },
-        { description: 'third' }
-      ];
-
       // after form is rendered, insert saved milestone rows into table
       (response.data.milestones||[]).map(function(milestone) {
         var t = Teddy.snuggle('milestone-table');
