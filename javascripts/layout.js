@@ -90,17 +90,24 @@ with (scope('App')) {
   });
 
   define('breadcrumbs', function() {
-    var elements = [];
+    var elements = [],
+        active_element_index = null;
     for (var i=0; i < arguments.length; i++) {
-      elements.push(span({ 'class': 'crumb' }, arguments[i]));
-      elements.push(span({ 'class': 'arrow' }, "»"));
+      if (!active_element_index && arguments[i].className == 'active') active_element_index = i;
+      elements.push(span(
+        span({ 'class': 'crumb' }, arguments[i]),
+        (i < (arguments.length-1)) && span({ 'class': 'arrow' }, "»")
+      ))
     }
-    elements.pop(); // shave off extra arrow
+//    elements.pop(); // shave off extra arrow
 
-    // add the up-arrow inside the last crumb
-    var last_elem = elements.pop();
-    elements.push(span({ 'class': 'crumb' },
-      last_elem.childNodes[0],
+    var active_element_index = (active_element_index || elements.length- 1),
+        active_element = elements[active_element_index];
+
+    // add the active last crumb. default is last crumb
+    elements.splice(active_element_index, 1, span({ 'class': 'crumb' },
+      active_element.childNodes[0],
+      (active_element_index < (elements.length-1)) && span({ 'class': 'arrow' }, "»"),
       span({ 'class': 'uparrow' })
     ));
 
