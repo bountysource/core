@@ -63,6 +63,22 @@ with (scope('Fundraisers','App')) {
     );
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
+
+      // TODO take this out
+      response.data.rewards = [
+        {
+          description:  "Crackalackin ipsum dolizzle that's the shizzle amet, check out this adipiscing dizzle. Nullizzle sapien velit, crazy volutpizzle, fizzle quizzle, gravida vizzle, shiznit. Pellentesque eget mofo. Sed eros. Fusce things dolor dapibus turpis tempizzle its fo rizzle. Mauris the bizzle nibh et turpizzle. \n\nPot tellivizzle tortor. Pellentesque fizzle rhoncizzle shiznit. In hac its fo rizzle platea dictumst. My shizz uhuh ... yih!. Sure own yo' bling bling, crunk eu, mattizzle ac, eleifend vitae, nunc. Crunk suscipizzle. Integer fizzle check out this bow wow wow purus..",
+          amount:       100,
+          quantity:     15
+        },
+        {
+          description:  "You will be granted godlike powers.",
+          amount:       100000,
+          quantity:     3
+        }
+      ];
+
+
       // save the fundraiser form every 15 seconds
       LongPoll.execute(curry(save_fundraiser, response.data)).every(15000).condition(function() {
         return /#account\/fundraisers\/edit\/\d+/.test(get_route());
@@ -70,10 +86,15 @@ with (scope('Fundraisers','App')) {
 
       render({ into: fundraiser_form_div }, fundraiser_form(response.data));
 
-      // after form is rendered, insert saved milestone rows into table
+      // after form is rendered, insert saved milestone and reward rows into their tables
       (response.data.milestones||[]).map(function(milestone) {
         var t = Teddy.snuggle('milestone-table');
-        t.at(t.length() - 2).insert(milestone_row_elements(generate_id(), milestone));
+        t.at(t.length() - 2).insert(milestone_row_elements(generate_milestone_row_id(), milestone));
+      });
+
+      (response.data.rewards||[]).map(function(reward) {
+        var t = Teddy.snuggle('rewards-table');
+        t.at(0).insert(reward_row_elements(generate_reward_row_id(), reward));
       });
     });
   });
@@ -107,51 +128,71 @@ with (scope('Fundraisers','App')) {
       messages(),
 
       fundraiser_block({ title: 'Basic Details', description: "Provide some basic information about your proposal." },
-        fieldset(
-          label('Title:'),
-          input({ name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'' })
-        ),
-        fieldset(
-          label('Image URL:'),
-          input({ name: 'image_url', 'class': 'long', placeholder: 'i.imgur.com/abc123', value: fundraiser.image_url||'' })
-        ),
-        fieldset(
-          label('Homepage:'),
-          input({ name: 'homepage_url', 'class': 'long', placeholder: 'bountysource.com', value: fundraiser.homepage_url||'' })
-        ),
-        fieldset(
-          label('Source Repository:'),
-          input({ name: 'repo_url', 'class': 'long', placeholder: 'github.com/badger/frontend', value: fundraiser.repo_url||'' })
+        div({ style: 'padding: 20px 10px; background: #eee;' },
+          fieldset(
+            label('Title:'),
+            input({ name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'' })
+          ),
+          fieldset(
+            label('Image URL:'),
+            input({ name: 'image_url', 'class': 'long', placeholder: 'i.imgur.com/abc123', value: fundraiser.image_url||'' })
+          ),
+          fieldset(
+            label('Homepage:'),
+            input({ name: 'homepage_url', 'class': 'long', placeholder: 'bountysource.com', value: fundraiser.homepage_url||'' })
+          ),
+          fieldset(
+            label('Source Repository:'),
+            input({ name: 'repo_url', 'class': 'long', placeholder: 'github.com/badger/frontend', value: fundraiser.repo_url||'' })
+          )
+        )
+      ),
+
+      br(),
+
+      fundraiser_block({ title: 'Funding Details', description: "How much funding do you need to finish this project? How do you want to receive the funding?" },
+        div({ style: 'padding: 20px 10px; background: #eee;' },
+          fieldset(
+            label('Funding Goal:'),
+            span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000', value: fundraiser.funding_goal||'' })
+          ),
+          fieldset(
+            label('Payout Method:'),
+            select({ name: 'payout_method', style: 'width: 600px;' },
+              option({ value: 'on_funding' },   'Receive all of the funds immediately upon the funding goal being reached'),
+              option({ value: 'fifty_fifty' },  'Receive half of the funds upon your funding goal being reached, and half after delivery of your product.'),
+              option({ value: 'on_delivery' },  'Receive all of the funds after the delivery of your finished product.')
+            )
+          )
         )
       ),
 
       br(),
 
       fundraiser_block({ title: 'Description', description: "This is where you convince people to contribute to your fundraiser. Why is your project interesting, and worthy of funding?" },
-        fieldset(
-          textarea({ name: 'description', style: 'width: 910px; height: 400px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
+        div({ style: 'padding: 20px 10px; background: #eee;' },
+          fieldset(
+            textarea({ name: 'description', style: 'width: 910px; height: 400px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
+          )
         )
       ),
 
       br(),
 
       fundraiser_block({ title: 'About Me', description: "Convince people that your are skilled enough to deliver on your promise." },
-        fieldset(
-          textarea({ name: 'about_me', style: 'width: 910px; height: 100px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
+        div({ style: 'padding: 20px 10px; background: #eee;' },
+          fieldset(
+            textarea({ name: 'about_me', style: 'width: 910px; height: 100px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
+          )
         )
       ),
 
       br(),
 
-      fundraiser_block({ title: 'Milestones', description: "Provide a roadmap of your planned development process. Once the fundraiser is published, you can update the progress of individual milestones. Keep your milestones up to date so that backers can track the progress of your work." },
+      fundraiser_block({ 'class': 'full', title: 'Milestones', description: "Provide a roadmap of your planned development process. Once the fundraiser is published, you can update the progress of individual milestones. Keep your milestones up to date so that backers can track the progress of your work." },
         milestone_messages(),
 
-        table({ id: 'milestone-table', style: 'border: 1px solid #C4C4C4;' },
-          tr({ style: 'background: #FDFDFD;' },
-            th('Milestone Description'),
-            th({ style: 'width: 60px;' })
-          ),
-
+        table({ id: 'milestone-table' },
           // automatic 'started working' milestone
           tr({ 'class': 'editable' },
             td({ style: 'font-style: italic;' }, span({ style: 'margin-left: 15px;' }, 'Started working.')),
@@ -163,13 +204,13 @@ with (scope('Fundraisers','App')) {
             td(
               input({
                 id: 'milestone-input-description',
-                style: 'width: 810px; margin-left: 5px;',
+                style: 'width: 800px; margin-left: 5px;',
                 placeholder: 'What is your goal for this milestone?',
                 onkeyup: function(e) { if (e.keyCode == 13) push_milestone_row_from_inputs() }
               })
             ),
-            td({ style: 'text-align: center;' },
-              a({ href: curry(push_milestone_row_from_inputs) }, img({ src: 'images/add.gif' }))
+            td({ style: 'width: 100px;' },
+              a({ 'class': 'green', href: push_milestone_row_from_inputs, style: 'width: 90px;' }, 'Add')
             )
           ),
 
@@ -183,17 +224,35 @@ with (scope('Fundraisers','App')) {
 
       br(),
 
-      fundraiser_block({ title: 'Funding Details', description: "How much funding do you need to finish this project? How do you want to receive the funding?" },
-        fieldset(
-          label('Funding Goal:'),
-          span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000', value: fundraiser.funding_goal||'' })
-        ),
-        fieldset(
-          label('Payout Method:'),
-          select({ name: 'payout_method', style: 'width: 600px;' },
-            option({ value: 'on_funding' },   'Receive all of the funds immediately upon the funding goal being reached'),
-            option({ value: 'fifty_fifty' },  'Receive half of the funds upon your funding goal being reached, and half after delivery of your product.'),
-            option({ value: 'on_delivery' },  'Receive all of the funds after the delivery of your finished product.')
+      fundraiser_block({ title: 'Rewards', description: "Thank your backers. If you don't want to limit the quantity, leave that field blank." },
+        reward_messages(),
+
+        table({ id: 'rewards-table' },
+          tr({ id: 'reward-inputs' },
+            td(
+              div({ style: 'display: inline-block; vertical-align: middle' },
+                fieldset(
+                  label('Amount:'),
+                  span({ style: 'font-size: 25px; padding-right: 5px; vertical-align: middle;' }, '$'),
+                  input({ id: 'reward-input-amount', style: 'width: 100px;', placeholder: 100 })
+                ),
+
+                fieldset(
+                  label('Quantity:'),
+                  input({ id: 'reward-input-quantity', placeholder: 10, style: 'width: 100px; margin-left: 18px;' })
+                )
+              ),
+
+              textarea({
+                id:           'reward-input-description',
+                style:        'margin-left: 25px; display: inline-block;',
+                placeholder:  'Description of the reward'
+              })
+            ),
+
+            td({ style: 'width: 100px;' },
+              a({ 'class': 'green', href: push_reward_row_from_inputs, style: 'width: 90px;' }, 'Add')
+            )
           )
         )
       ),
@@ -206,19 +265,23 @@ with (scope('Fundraisers','App')) {
     );
   });
 
-  define('milestone_messages', function() { return div({ id: 'milestone-errors', style: 'margin-bottom: 10px;' }); });
+  define('milestone_messages', function() { return div({ id: 'milestone-errors' }); });
   define('render_milestone_message', function(yield) { render({ target: 'milestone-errors' }, yield); });
   define('clear_milestone_messages', function() { document.getElementById('milestone-errors').innerHTML=""; })
 
+  /****************************
+   * MILESTONES HELPERS
+   ****************************/
+
   // generate a random ID
-  define('generate_id', function() { return 'milestone-table-row_'+Math.ceil((new Date()).getTime() * Math.random()) });
+  define('generate_milestone_row_id', function() { return 'milestone-table-row_'+Math.ceil((new Date()).getTime() * Math.random()) });
 
   // return a row, with the correct id (based on the number of added milestones)
   define('milestone_row_elements', function(milestone_row_id, milestone_data) {
     return [
       { id: milestone_row_id, 'class': 'editable' },
-      td({ style: 'padding-left: 20px;' }, milestone_data.description),
-      td({ style: 'text-align: center;' },
+      td({ style: 'width: 800px; padding-left: 20px;' }, milestone_data.description),
+      td({ style: 'text-align: center; width: 100px;' },
         a({ href: curry(unlock_milestone_row, milestone_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/edit.gif' })),
         a({ href: curry(delete_milestone_row, milestone_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/trash.gif' }))
       )
@@ -232,14 +295,18 @@ with (scope('Fundraisers','App')) {
     t.at(milestone_row_id).replace({ id: milestone_row_id, 'class': 'editable' },
       td(
         input({
-          style:        'width: 810px; margin-left: 5px;',
+          style:        'width: 800px; margin-left: 5px;',
           name:         'milestone-description',
           placeholder:  'What is your goal for this milestone?',
           value:        milestone_description||'',
           onkeyup:      function(e) { if (e.keyCode == 13) lock_milestone_row(milestone_row_id) }
         })
       ),
-      td({ style: 'text-align: center;' }, a({ href: curry(lock_milestone_row, milestone_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/save.gif' })))
+      td({ style: 'text-align: center;' },
+        a({ href: curry(lock_milestone_row, milestone_row_id) },
+          img({ style: 'margin: 0 3px;', src: 'images/save.gif' })
+        )
+      )
     ).setAttribute('locked-for-edit', true);
     t.at(milestone_row_id).children[0].children[0].focus();
   });
@@ -266,16 +333,151 @@ with (scope('Fundraisers','App')) {
         description_input = document.getElementById('milestone-input-description');
 
     if (!description_input.value || description_input.value.length == 0) {
-      render_milestone_message(error_message("You must provide a description!"));
+      render_milestone_message(
+        div({ style: 'margin: 10px;' }, error_message("You must provide a description."))
+      );
     } else {
-      input_row.insert(milestone_row_elements(generate_id(), { description: description_input.value }));
+      input_row.insert(milestone_row_elements(generate_milestone_row_id(), { description: description_input.value }));
       description_input.value="";
       description_input.focus();
     }
   });
 
+  /****************************
+  * REWARDS HELPERS
+  ****************************/
+
+  // generate a random ID
+  define('generate_reward_row_id', function() { return 'reward-table-row_'+Math.ceil((new Date()).getTime() * Math.random()) });
+
+  define('reward_messages', function() { return div({ id: 'reward-errors' }); });
+  define('render_reward_message', function(yield) { render({ target: 'reward-errors' }, yield); });
+  define('clear_reward_messages', function() { document.getElementById('reward-errors').innerHTML=""; })
+
+  // return a row, with the correct id (based on the number of added milestones)
+  define('reward_row_elements', function(reward_row_id, reward_data) {
+    return [{ id: reward_row_id, 'class': 'editable' },
+      td(
+        div({ style: 'display: inline-block; width: 250px; margin-left: 10px;' },
+          form(
+            fieldset(
+              label('Amount:'),
+              span({ id: 'amount' }, money(reward_data.amount))
+            ),
+            fieldset(
+              label('Quantity:'),
+              span({ id: 'quantity' }, formatted_number(reward_data.quantity))
+            )
+          )
+        ),
+        div({ style: 'display: inline-block; padding: 10px; min-height: 50px; width: 520px; border-radius: 3px; margin: 20px 0 20px 20px; vertical-align: top; background: white; border: 1px solid #B9DABE;' },
+          span({ id: 'description', style: 'white-space: pre-wrap; color: #aaa;' }, reward_data.description)
+        )
+      ),
+      td({ style: 'text-align: center; width: 100px;' },
+        a({ href: curry(unlock_reward_row, reward_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/edit.gif' })),
+        a({ href: curry(delete_reward_row, reward_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/trash.gif' }))
+      )
+    ];
+  });
+
+  define('unlock_reward_row', function(reward_row_id) {
+    var t           = Teddy.snuggle('rewards-table'),
+        spans       = t.at(reward_row_id).getElementsByTagName('span'),
+        amount      = parseInt((spans[0].innerText).match(/\$(\d+)/)[1]),
+        quantity    = parseInt(spans[1].innerText),
+        description = spans[2].innerText;
+
+    t.at(reward_row_id).replace({ id: reward_row_id, 'class': 'editable', style: 'height: 230px;' },
+      td(
+        div({ style: 'display: inline-block; vertical-align: middle' },
+          fieldset(
+            label('Amount:'),
+            span({ style: 'font-size: 25px; padding-right: 5px; vertical-align: middle;' }, '$'),
+            input({ id: 'reward-input-amount', style: 'width: 100px;', placeholder: 100, value: amount })
+          ),
+
+          fieldset(
+            label('Quantity:'),
+            input({
+              id: 'reward-input-quantity',
+              placeholder: 10,
+              style: 'width: 100px; margin-left: 18px;',
+              value: quantity
+            })
+          )
+        ),
+
+        textarea({
+          id:           'reward-input-description',
+          style:        'margin-left: 25px; display: inline-block;',
+          placeholder:  'Description of the reward'
+        }, description)
+      ),
+
+      td({ style: 'width: 100px; text-align: center;' },
+        a({ href: curry(lock_reward_row, reward_row_id) }, img({ src: 'images/save.gif' }))
+      )
+    ).setAttribute('locked-for-edit', true);
+  });
+
+  define('lock_reward_row', function(reward_row_id) {
+    var t           = Teddy.snuggle('rewards-table'),
+        inputs_row  = t.at(reward_row_id);
+
+    var reward_data = {
+      description:  inputs_row.getElementsByTagName('textarea')[0].value,
+      amount:       parseInt(inputs_row.getElementsByTagName('input')[0].value),
+      quantity:     parseInt(inputs_row.getElementsByTagName('input')[1].value)
+    };
+
+    inputs_row.replace(reward_row_elements(reward_row_id, reward_data));
+    inputs_row.removeAttribute('locked-for-edit');
+  });
+
+  define('delete_reward_row', function(reward_row_id) {
+    var t = Teddy.snuggle('rewards-table');
+    t.at(reward_row_id).remove();
+  });
+
+  define('push_reward_row_from_inputs', function() {
+    clear_reward_messages();
+
+    var inputs_row  = Teddy.snuggle('rewards-table').at('reward-inputs');
+    var reward_data = {
+      description:  inputs_row.getElementsByTagName('textarea')[0].value,
+      amount:       parseInt(inputs_row.getElementsByTagName('input')[0].value),
+      quantity:     parseInt(inputs_row.getElementsByTagName('input')[1].value)
+    };
+
+    if (!reward_data.description || reward_data.description.length <= 0) {
+      render_reward_message(
+        div({ style: 'margin: 10px;' }, error_message("You must provide a description."))
+      );
+    } else if (!reward_data.amount || isNaN(reward_data.amount)) {
+      render_reward_message(
+        div({ style: 'margin: 10px;' }, error_message("Amount is invalid."))
+      );
+    } else if (isNaN(reward_data.quantity)) {
+      render_reward_message(
+        div({ style: 'margin: 10px;' }, error_message("Quantity is invalid."))
+      );
+    } else {
+      var t = Teddy.snuggle('rewards-table');
+      t.at('reward-inputs').insert(reward_row_elements(generate_reward_row_id(), reward_data));
+
+      // clear inputs
+      document.getElementById('reward-input-description').value='';
+      document.getElementById('reward-input-amount').value='';
+      document.getElementById('reward-input-quantity').value='';
+
+      //focus on the amount input after appending row
+      document.getElementById('reward-input-amount').focus();
+    }
+  });
+
   define('publish_fundraiser', function(fundraiser) {
-    if (confirm('Are you sure? Once published, a proposal CANNOT be edited. Publish your proposal?')) {
+    if (confirm('Are you sure? Once published, a fundraiser CANNOT be edited.')) {
       // first, save it. callback hell: population 2
       save_fundraiser(fundraiser, function(save_response) {
         BountySource.publish_fundraiser(fundraiser.id, function(response) {
@@ -305,18 +507,15 @@ with (scope('Fundraisers','App')) {
   // options.description  - description of the inputs in the block
   define('fundraiser_block', function() {
     var arguments = flatten_to_array(arguments),
-      options   = shift_options_from_args(arguments);
+        options   = shift_options_from_args(arguments);
     return div({ style: '#eee; border: 1px solid #ccc;' },
       div({ style: 'background: #F7F7F7; border-bottom: 1px solid #D5D5D5; padding: 20px 10px;' },
         span({ style: 'font-size: 25px;' }, options.title),
         div({ style: 'margin-left: 15px; padding-top: 10px; color: gray;' }, options.description)
       ),
-      div({ style: 'padding: 20px 10px; background: #eee;' },
-        arguments
-      )
+      arguments
     );
   });
-
 
   // preview fundraiser in a new window
   define('preview_fundraiser', function(fundraiser) {
@@ -337,8 +536,23 @@ with (scope('Fundraisers','App')) {
     });
     request_data.milestones = JSON.stringify(request_data.milestones); // serialize array
 
+    // append serialized rewards array to request_data
+    var t = Teddy.snuggle('rewards-table');
+    request_data.rewards = [];
+    t.forEach(function(row) {
+      if (row.className == 'editable' && !row.getAttribute('locked-for-edit')) {
+        var spans = row.getElementsByTagName('span');
+        request_data.rewards.push({
+          description:  spans[2].innerText,
+          amount:       parseInt((spans[0].innerText).match(/\$(\d+)/)[1]),
+          quantity:     parseInt(spans[1].innerText)
+        });
+      }
+    });
+    request_data.rewards = JSON.stringify(request_data.rewards); // serialize array
+
     BountySource.update_fundraiser(fundraiser.id, request_data, function(response) {
-      if (callback) callback.call(response);
+      if (callback) callback(response);
     });
   });
 

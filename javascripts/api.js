@@ -206,5 +206,5 @@ with (scope('BountySource')) {
 
   define('destroy_fundraiser', function(id, callback) {
     api('/user/fundraisers/'+id, 'DELETE', callback);
-  })
+  });
 }

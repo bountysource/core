@@ -297,4 +297,10 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 #milestone-table tr.editable:hover    { background: #D8FDD8; }
 #milestone-table tr.read-only         { background: #E7FDE7; }
 #milestone-table tr.read-only:hover   { background: #D8FDD8; }
-#milestone-table tr#milestone-inputs  { background: #D9FCBD; }
+#milestone-table tr#milestone-inputs  { background: #D8FDD8; }
+
+#rewards-table tr#reward-inputs  { height: 230px; background: #D8FDD8; }
+#rewards-table tr textarea  { width: 460px; height: 200px; }
+
+#rewards-table tr.editable        { height: 100px; background: #E7FDE7; }
+#rewards-table tr.editable:hover  { background: #D8FDD8; }
