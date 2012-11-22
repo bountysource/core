@@ -63,22 +63,6 @@ with (scope('Fundraisers','App')) {
     );
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
-
-      // TODO take this out
-      response.data.rewards = [
-        {
-          description:  "Crackalackin ipsum dolizzle that's the shizzle amet, check out this adipiscing dizzle. Nullizzle sapien velit, crazy volutpizzle, fizzle quizzle, gravida vizzle, shiznit. Pellentesque eget mofo. Sed eros. Fusce things dolor dapibus turpis tempizzle its fo rizzle. Mauris the bizzle nibh et turpizzle. \n\nPot tellivizzle tortor. Pellentesque fizzle rhoncizzle shiznit. In hac its fo rizzle platea dictumst. My shizz uhuh ... yih!. Sure own yo' bling bling, crunk eu, mattizzle ac, eleifend vitae, nunc. Crunk suscipizzle. Integer fizzle check out this bow wow wow purus..",
-          amount:       100,
-          quantity:     15
-        },
-        {
-          description:  "You will be granted godlike powers.",
-          amount:       100000,
-          quantity:     3
-        }
-      ];
-
-
       // save the fundraiser form every 15 seconds
       LongPoll.execute(curry(save_fundraiser, response.data)).every(15000).condition(function() {
         return /#account\/fundraisers\/edit\/\d+/.test(get_route());
