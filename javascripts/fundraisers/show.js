@@ -40,8 +40,6 @@ with (scope('Fundraisers')) {
     });
   });
 
-
-
   define('fundraiser_template', function(fundraiser) {
     // add the title to the already present header element
     render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);

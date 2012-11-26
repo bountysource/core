@@ -56,7 +56,7 @@ with (scope('App')) {
             li(a({ href: '#bounties' }, 'Find Bounties')),
 
             logged_in() ? [
-              li(a({ href: '#account/fundraisers/create' }, 'Create Fundraiser')),
+              li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
               li(user_nav)
             ] : [
               li(a({ href: '#login' }, 'Login')),
@@ -93,7 +93,7 @@ with (scope('App')) {
     var elements = [],
         active_element_index = null;
     for (var i=0; i < arguments.length; i++) {
-      if (!active_element_index && arguments[i].className == 'active') active_element_index = i;
+      if (!active_element_index && arguments[i] && arguments[i].className == 'active') active_element_index = i;
       elements.push(span(
         span({ 'class': 'crumb' }, arguments[i]),
         (i < (arguments.length-1)) && span({ 'class': 'arrow' }, "»")
