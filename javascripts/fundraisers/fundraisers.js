@@ -210,12 +210,6 @@ with (scope('Fundraisers','App')) {
 
           fundraiser_block({ id: 'milestones', title: 'Milestones', description: "Provide a roadmap of your planned development process. Once the fundraiser is published, you can update the progress of individual milestones. Keep your milestones up to date so that backers can track the progress of your work." },
             table({ id: 'milestone-table' },
-              // automatic 'started working' milestone
-              tr({ 'class': 'editable' },
-                td({ style: 'font-style: italic;' }, span({ style: 'margin-left: 15px;' }, 'Started working.')),
-                td('')
-              ),
-
               // inputs to add new milestone
               tr({ id: 'milestone-inputs' },
                 td(
@@ -229,12 +223,6 @@ with (scope('Fundraisers','App')) {
                 td({ style: 'width: 100px;' },
                   a({ 'class': 'green', href: push_milestone_row_from_inputs, style: 'width: 90px;' }, 'Add')
                 )
-              ),
-
-              // automatic 'finished working' milestone
-              tr({ 'class': 'editable' },
-                td({ style: 'font-style: italic;' }, span({ style: 'margin-left: 15px;' }, 'Finished working.')),
-                td('')
               )
             )
           ),
@@ -270,6 +258,18 @@ with (scope('Fundraisers','App')) {
             )
           )
         );
+
+        // render saved milestones into table
+        var t = Teddy.snuggle('milestone-table');
+        (fundraiser.milestones || []).forEach(function(milestone) {
+          t.at('milestone-inputs').insert(milestone_row_elements(generate_milestone_row_id(), milestone));
+        });
+
+        // render saved rewards into table
+        var t = Teddy.snuggle('rewards-table');
+        (fundraiser.rewards || []).forEach(function(reward) {
+          t.at('reward-inputs').insert(reward_row_elements(generate_reward_row_id(), reward));
+        });
 
         select_fundraiser_form_section(fundraiser_id, 'basic-info');
       }
@@ -371,7 +371,7 @@ with (scope('Fundraisers','App')) {
         request_data.rewards.push({
           description:  spans[2].innerText,
           amount:       parseInt((spans[0].innerText).match(/\$(\d+)/)[1]),
-          quantity:     parseInt(spans[1].innerText)
+          limited_to:   parseInt(spans[1].innerText)
         });
       }
     });
@@ -380,12 +380,10 @@ with (scope('Fundraisers','App')) {
     BountySource.update_fundraiser(fundraiser_id, request_data, function(response) {
       if (response.meta.success) {
         // show messages after saved
-        render_message(
-          div({ 'class': 'success-message', style: 'text-align: center; padding: 5px;' }, "Fundraiser draft saved")
-        );
+        render_message(small_success_message("Fundraiser draft saved"));
         setTimeout(clear_message, 1250);
       } else {
-        render_message(error_message("Fundraiser draft saved"));
+        render_message(small_error_message("Fundraiser draft saved"));
       }
 
       if (callback) callback(response);

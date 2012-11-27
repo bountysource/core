@@ -66,7 +66,7 @@ with (scope('Fundraisers')) {
       description_input = document.getElementById('milestone-input-description');
 
     if (!description_input.value || description_input.value.length == 0) {
-      render_message(error_message("You must provide a description."));
+      render_message(small_error_message("You must provide a description."));
     } else {
       input_row.insert(milestone_row_elements(generate_milestone_row_id(), { description: description_input.value }));
       description_input.value="";

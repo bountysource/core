@@ -148,6 +148,18 @@ with (scope('App')) {
     return div({ 'class': 'info-message' }, arguments);
   });
 
+  define('small_error_message', function() {
+    return div({ 'class': 'error-message small' }, arguments);
+  });
+
+  define('small_success_message', function() {
+    return div({ 'class': 'success-message small' }, arguments);
+  });
+
+  define('small_info_message', function() {
+    return div({ 'class': 'info-message small' }, arguments);
+  });
+
   // it puts things inside of a grey box
   define('grey_box', function() {
     return div({ style: 'background: #eee; border: 1px solid #ccc; padding: 20px 10px;' }, arguments);

@@ -14,7 +14,7 @@ with (scope('Fundraisers')) {
             ),
             fieldset(
               label('Quantity:'),
-              span({ id: 'quantity' }, formatted_number(reward_data.quantity))
+              span({ id: 'limited_to' }, formatted_number(reward_data.limited_to))
             )
           )
         ),
@@ -31,10 +31,10 @@ with (scope('Fundraisers')) {
 
   define('unlock_reward_row', function(reward_row_id) {
     var t           = Teddy.snuggle('rewards-table'),
-      spans       = t.at(reward_row_id).getElementsByTagName('span'),
-      amount      = parseInt((spans[0].innerText).match(/\$(\d+)/)[1]),
-      quantity    = parseInt(spans[1].innerText),
-      description = spans[2].innerText;
+      spans         = t.at(reward_row_id).getElementsByTagName('span'),
+      amount        = parseInt((spans[0].innerText).match(/\$(\d+)/)[1]),
+      limited_to    = parseInt(spans[1].innerText),
+      description   = spans[2].innerText;
 
     t.at(reward_row_id).replace({ id: reward_row_id, 'class': 'editable', style: 'height: 230px;' },
       td(
@@ -51,7 +51,7 @@ with (scope('Fundraisers')) {
               id: 'reward-input-quantity',
               placeholder: 10,
               style: 'width: 100px; margin-left: 18px;',
-              value: quantity
+              value: limited_to
             })
           )
         ),
@@ -76,7 +76,7 @@ with (scope('Fundraisers')) {
     var reward_data = {
       description:  inputs_row.getElementsByTagName('textarea')[0].value,
       amount:       parseInt(inputs_row.getElementsByTagName('input')[0].value),
-      quantity:     parseInt(inputs_row.getElementsByTagName('input')[1].value)
+      limited_to:   parseInt(inputs_row.getElementsByTagName('input')[1].value)
     };
 
     inputs_row.replace(reward_row_elements(reward_row_id, reward_data));
@@ -95,15 +95,15 @@ with (scope('Fundraisers')) {
     var reward_data = {
       description:  inputs_row.getElementsByTagName('textarea')[0].value,
       amount:       parseInt(inputs_row.getElementsByTagName('input')[0].value),
-      quantity:     parseInt(inputs_row.getElementsByTagName('input')[1].value)
+      limited_to:     parseInt(inputs_row.getElementsByTagName('input')[1].value)
     };
 
     if (!reward_data.description || reward_data.description.length <= 0) {
-      render_message(error_message("You must provide a description."));
+      render_message(small_error_message("You must provide a description."));
     } else if (!reward_data.amount || isNaN(reward_data.amount)) {
-      render_message(error_message("Amount is invalid."));
-    } else if (isNaN(reward_data.quantity)) {
-      render_message(error_message("Quantity is invalid."));
+      render_message(small_error_message("Amount is invalid."));
+    } else if ((reward_data.limited_to && reward_data.limited_to.length > 0) && (isNaN(reward_data.limited_to))) {
+      render_message(small_error_message("Quantity is invalid."));
     } else {
       var t = Teddy.snuggle('rewards-table');
       t.at('reward-inputs').insert(reward_row_elements(generate_reward_row_id(), reward_data));
