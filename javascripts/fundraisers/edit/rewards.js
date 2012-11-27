@@ -58,7 +58,7 @@ with (scope('Fundraisers')) {
 
         textarea({
           id:           'reward-input-description',
-          style:        'margin-left: 25px; display: inline-block;',
+          style:        'margin-left: 10px; display: inline-block;',
           placeholder:  'Description of the reward'
         }, description)
       ),
