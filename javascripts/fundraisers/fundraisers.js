@@ -283,10 +283,12 @@ with (scope('Fundraisers','App')) {
             defaultContent: fundraiser.description || default_description()
           },
           theme: {
-            preview: '/themes/preview/github.css'
+            preview:  '/stylesheets/epiceditor/preview/github.css',
+            editor:   '/stylesheets/epiceditor/editor/epic-dark.css',
+            base:     '/stylesheets/epiceditor/base/epiceditor.css'
           }
         });
-        description_editor.settings.basePath = "lib/epiceditor";
+        description_editor.settings.basePath = "";
         description_editor.element.style.height = '520px';
         description_editor.load();
 
