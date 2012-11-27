@@ -70,7 +70,7 @@ with (scope('Fundraisers','App')) {
   });
 
   route('#account/fundraisers/:fundraiser_id', function(fundraiser_id) {
-    var render_target = form({ id: 'fundraiser-form', 'class': 'fancy' }),
+    var target_div = div('Loading...'),
         header_div = breadcrumbs(
           'Home',
           a({ href: '#account' }, 'Account'),
@@ -78,53 +78,12 @@ with (scope('Fundraisers','App')) {
           'Loading...'
         );
 
-    render(
-      header_div,
-
-      fundraiser_form_nav(
-        li({ id: 'previous-button' }, '«'),
-        li({ id: 'nav-basic-info', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'basic-info') },
-          'Basic Info'
-        ),
-        li({ id: 'nav-description', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'description') },
-          'Description'
-        ),
-        li({ id: 'nav-about-me', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'about-me') },
-          'About Me'
-        ),
-        li({ id: 'nav-funding-details', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'funding-details') },
-          'Funding'
-        ),
-        li({ id: 'nav-milestones', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'milestones') },
-          'Milestones'
-        ),
-        li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'rewards') },
-          'Rewards'
-        ),
-        li({ id: 'next-button' }, '»')
-      ),
-
-      messages({ style: 'height: 40px;' }),
-
-      div({ 'class': 'split-main' }, render_target),
-
-      div({ 'class': 'split-side' },
-        grey_box(
-          a({ 'class': 'green', 'href': curry(save_fundraiser, fundraiser_id) }, 'Save'),
-          br(),
-          a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser_id) }, 'Preview'),
-          br(),
-          a({ 'class': 'blue', href: curry(publish_fundraiser, fundraiser_id) }, 'Publish')
-        )
-      ),
-
-      div({ 'class': 'split-end' })
-    );
+    render(header_div, target_div);
 
     // TODO: handle errors
     BountySource.get_fundraiser(fundraiser_id, function(response) {
       if (!response.meta.success) {
-        render_message(error_message(response.data.error));
+        render(error_message(response.data.error));
       } else {
         var fundraiser = response.data;
 
@@ -151,112 +110,151 @@ with (scope('Fundraisers','App')) {
           );
         }
 
-        render({ into: render_target },
-          messages(),
-
-          fundraiser_block({ id: 'basic-info', title: 'Basic Information', description: "Provide some basic information about your proposal." },
-            div({ style: 'padding: 20px 10px; background: #eee;' },
-              fieldset(
-                label('Title:'),
-                input({ name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'' })
-              ),
-              fieldset(
-                label('Banner Image:'),
-                input({ name: 'image_url', 'class': 'long', placeholder: 'i.imgur.com/abc123', value: fundraiser.image_url||'' })
-              ),
-              fieldset(
-                label('Homepage:'),
-                input({ name: 'homepage_url', 'class': 'long', placeholder: 'bountysource.com', value: fundraiser.homepage_url||'' })
-              ),
-              fieldset(
-                label('Source Repository:'),
-                input({ name: 'repo_url', 'class': 'long', placeholder: 'github.com/badger/frontend', value: fundraiser.repo_url||'' })
-              )
-            )
+        render({ into: target_div },
+          fundraiser_form_nav(
+            li({ id: 'previous-button' }, '«'),
+            li({ id: 'nav-basic-info', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'basic-info') },
+              'Basic Info'
+            ),
+            li({ id: 'nav-description', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'description') },
+              'Description'
+            ),
+            li({ id: 'nav-about-me', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'about-me') },
+              'About Me'
+            ),
+            li({ id: 'nav-funding-details', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'funding-details') },
+              'Funding'
+            ),
+            li({ id: 'nav-milestones', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'milestones') },
+              'Milestones'
+            ),
+            li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser_id, 'rewards') },
+              'Rewards'
+            ),
+            li({ id: 'next-button' }, '»')
           ),
 
-          fundraiser_block({ id: 'description', title: 'Description', description: "This is where you convince people to contribute to your fundraiser. Why is your project interesting, and worthy of funding?" },
-            div({ style: 'padding: 20px 10px; background: #eee;' },
-              fieldset(
-                textarea({ name: 'description', style: 'width: 630px; height: 300px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
-              )
-            )
-          ),
+          messages({ style: 'height: 40px;' }),
 
-          fundraiser_block({ id: 'about-me', title: 'About Me', description: "Convince people that your are skilled enough to deliver on your promise." },
-            div({ style: 'padding: 20px 10px; background: #eee;' },
-              fieldset(
-                textarea({ name: 'about_me', style: 'width: 630px; height: 300px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
-              )
-            )
-          ),
-
-          fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to finish this project? How do you want to receive the funding?" },
-            div({ style: 'padding: 20px 10px; background: #eee;' },
-              fieldset(
-                label('Funding Goal:'),
-                span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000', value: fundraiser.funding_goal||'' })
-              ),
-              fieldset(
-                label('Payout Method:'),
-                select({ name: 'payout_method', style: 'width: 400px;' },
-                  option({ value: 'on_funding' },   'All upon funding goal being reached.'),
-                  option({ value: 'fifty_fifty' },  'Half on funding goal being reached, half after delivery.'),
-                  option({ value: 'on_delivery' },  'All upon delivery.')
+          div({ 'class': 'split-main' },
+            form({ id: 'fundraiser-form', 'class': 'fancy' },
+              fundraiser_block({ id: 'basic-info', title: 'Basic Information', description: "Provide some basic information about your proposal." },
+                div({ style: 'padding: 20px 10px; background: #eee;' },
+                  fieldset(
+                    label('Title:'),
+                    input({ name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'' })
+                  ),
+                  fieldset(
+                    label('Banner Image:'),
+                    input({ name: 'image_url', 'class': 'long', placeholder: 'i.imgur.com/abc123', value: fundraiser.image_url||'' })
+                  ),
+                  fieldset(
+                    label('Homepage:'),
+                    input({ name: 'homepage_url', 'class': 'long', placeholder: 'bountysource.com', value: fundraiser.homepage_url||'' })
+                  ),
+                  fieldset(
+                    label('Source Repository:'),
+                    input({ name: 'repo_url', 'class': 'long', placeholder: 'github.com/badger/frontend', value: fundraiser.repo_url||'' })
+                  )
                 )
-              )
-            )
-          ),
+              ),
 
-          fundraiser_block({ id: 'milestones', title: 'Milestones', description: "Provide a roadmap of your planned development process. Once the fundraiser is published, you can update the progress of individual milestones. Keep your milestones up to date so that backers can track the progress of your work." },
-            table({ id: 'milestone-table' },
-              // inputs to add new milestone
-              tr({ id: 'milestone-inputs' },
-                td(
-                  input({
-                    id: 'milestone-input-description',
-                    style: 'width: 95%; margin-left: 5px;',
-                    placeholder: 'What is your goal for this milestone?',
-                    onkeyup: function(e) { if (e.keyCode == 13) push_milestone_row_from_inputs() }
-                  })
-                ),
-                td({ style: 'width: 100px;' },
-                  a({ 'class': 'green', href: push_milestone_row_from_inputs, style: 'width: 90px;' }, 'Add')
+              fundraiser_block({ id: 'description', title: 'Description', description: "This is where you convince people to contribute to your fundraiser. Why is your project interesting, and worthy of funding?" },
+                div({ style: 'padding: 20px 10px; background: #eee;' },
+                  fieldset(
+                    textarea({ name: 'description', style: 'width: 630px; height: 300px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
+                  )
                 )
-              )
-            )
-          ),
+              ),
 
-          fundraiser_block({ id: 'rewards', title: 'Rewards', description: "Thank your backers. If you don't want to limit the quantity, leave that field blank." },
-            table({ id: 'rewards-table' },
-              tr({ id: 'reward-inputs' },
-                td(
-                  div({ style: 'display: inline-block; vertical-align: middle' },
-                    fieldset(
-                      label('Amount:'),
-                      span({ style: 'font-size: 25px; padding-right: 5px; vertical-align: middle;' }, '$'),
-                      input({ id: 'reward-input-amount', style: 'width: 100px;', placeholder: 100 })
+              fundraiser_block({ id: 'about-me', title: 'About Me', description: "Convince people that your are skilled enough to deliver on your promise." },
+                div({ style: 'padding: 20px 10px; background: #eee;' },
+                  fieldset(
+                    textarea({ name: 'about_me', style: 'width: 630px; height: 300px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
+                  )
+                )
+              ),
+
+              fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to finish this project? How do you want to receive the funding?" },
+                div({ style: 'padding: 20px 10px; background: #eee;' },
+                  fieldset(
+                    label('Funding Goal:'),
+                    span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000', value: fundraiser.funding_goal||'' })
+                  ),
+                  fieldset(
+                    label('Payout Method:'),
+                    select({ name: 'payout_method', style: 'width: 400px;' },
+                      option({ value: 'on_funding' },   'All upon funding goal being reached.'),
+                      option({ value: 'fifty_fifty' },  'Half on funding goal being reached, half after delivery.'),
+                      option({ value: 'on_delivery' },  'All upon delivery.')
+                    )
+                  )
+                )
+              ),
+
+              fundraiser_block({ id: 'milestones', title: 'Milestones', description: "Provide a roadmap of your planned development process. Once the fundraiser is published, you can update the progress of individual milestones. Keep your milestones up to date so that backers can track the progress of your work." },
+                table({ id: 'milestone-table' },
+                  // inputs to add new milestone
+                  tr({ id: 'milestone-inputs' },
+                    td(
+                      input({
+                        id: 'milestone-input-description',
+                        style: 'width: 95%; margin-left: 5px;',
+                        placeholder: 'What is your goal for this milestone?',
+                        onkeyup: function(e) { if (e.keyCode == 13) push_milestone_row_from_inputs() }
+                      })
+                    ),
+                    td({ style: 'width: 100px;' },
+                      a({ 'class': 'green', href: push_milestone_row_from_inputs, style: 'width: 90px;' }, 'Add')
+                    )
+                  )
+                )
+              ),
+
+              fundraiser_block({ id: 'rewards', title: 'Rewards', description: "Thank your backers. If you don't want to limit the quantity, leave that field blank." },
+                table({ id: 'rewards-table' },
+                  tr({ id: 'reward-inputs' },
+                    td(
+                      div({ style: 'display: inline-block; vertical-align: middle' },
+                        fieldset(
+                          label('Amount:'),
+                          span({ style: 'font-size: 25px; padding-right: 5px; vertical-align: middle;' }, '$'),
+                          input({ id: 'reward-input-amount', style: 'width: 100px;', placeholder: 100 })
+                        ),
+
+                        fieldset(
+                          label('Quantity:'),
+                          input({ id: 'reward-input-quantity', placeholder: 10, style: 'width: 100px; margin-left: 18px;' })
+                        )
+                      ),
+
+                      textarea({
+                        id:           'reward-input-description',
+                        style:        'margin-left: 10px; display: inline-block;',
+                        placeholder:  'Description of the reward'
+                      })
                     ),
 
-                    fieldset(
-                      label('Quantity:'),
-                      input({ id: 'reward-input-quantity', placeholder: 10, style: 'width: 100px; margin-left: 18px;' })
+                    td({ style: 'width: 100px;' },
+                      a({ 'class': 'green', href: push_reward_row_from_inputs, style: 'width: 90px;' }, 'Add')
                     )
-                  ),
-
-                  textarea({
-                    id:           'reward-input-description',
-                    style:        'margin-left: 10px; display: inline-block;',
-                    placeholder:  'Description of the reward'
-                  })
-                ),
-
-                td({ style: 'width: 100px;' },
-                  a({ 'class': 'green', href: push_reward_row_from_inputs, style: 'width: 90px;' }, 'Add')
+                  )
                 )
               )
             )
-          )
+          ),
+
+          div({ 'class': 'split-side' },
+            grey_box(
+              a({ 'class': 'green', 'href': curry(save_fundraiser, fundraiser_id) }, 'Save'),
+              br(),
+              a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser_id) }, 'Preview'),
+              br(),
+              a({ 'class': 'blue', href: curry(publish_fundraiser, fundraiser_id) }, 'Publish')
+            )
+          ),
+
+          div({ 'class': 'split-end' })
         );
 
         // render saved milestones into table
