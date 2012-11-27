@@ -149,7 +149,7 @@ with (scope('Fundraisers','App')) {
                     input({ name: 'image_url', 'class': 'long', placeholder: 'i.imgur.com/abc123', value: fundraiser.image_url||'' })
                   ),
                   fieldset(
-                    label('Homepage:'),
+                    label('Project Homepage:'),
                     input({ name: 'homepage_url', 'class': 'long', placeholder: 'bountysource.com', value: fundraiser.homepage_url||'' })
                   ),
                   fieldset(
@@ -159,7 +159,7 @@ with (scope('Fundraisers','App')) {
                 )
               ),
 
-              fundraiser_block({ id: 'description', title: 'Description', description: "This is where you convince people to contribute to your fundraiser. Why is your project interesting, and worthy of funding?" },
+              fundraiser_block({ id: 'description', title: 'Description', description: "Convince people to contribute. Why is your project interesting and worthy of funding?" },
                 div({ style: 'padding: 20px 10px; background: #eee;' },
                   fieldset(
                     textarea({ name: 'description', style: 'width: 630px; height: 300px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
@@ -167,7 +167,7 @@ with (scope('Fundraisers','App')) {
                 )
               ),
 
-              fundraiser_block({ id: 'about-me', title: 'About Me', description: "Convince people that your are skilled enough to deliver on your promise." },
+              fundraiser_block({ id: 'about-me', title: 'About Me', description: "Convince people that you will be able to deliver." },
                 div({ style: 'padding: 20px 10px; background: #eee;' },
                   fieldset(
                     textarea({ name: 'about_me', style: 'width: 630px; height: 300px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
@@ -175,7 +175,7 @@ with (scope('Fundraisers','App')) {
                 )
               ),
 
-              fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to finish this project? How do you want to receive the funding?" },
+              fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to complete this project? How do you want to receive the funds?" },
                 div({ style: 'padding: 20px 10px; background: #eee;' },
                   fieldset(
                     label('Funding Goal:'),
@@ -192,7 +192,7 @@ with (scope('Fundraisers','App')) {
                 )
               ),
 
-              fundraiser_block({ id: 'milestones', title: 'Milestones', description: "Provide a roadmap of your planned development process. Once the fundraiser is published, you can update the progress of individual milestones. Keep your milestones up to date so that backers can track the progress of your work." },
+              fundraiser_block({ id: 'milestones', title: 'Milestones', description: "Provide a road map of your development process. Once published, each milestone can be updated to show your current progress." },
                 table({ id: 'milestone-table' },
                   // inputs to add new milestone
                   tr({ id: 'milestone-inputs' },
@@ -211,7 +211,7 @@ with (scope('Fundraisers','App')) {
                 )
               ),
 
-              fundraiser_block({ id: 'rewards', title: 'Rewards', description: "Thank your backers. If you don't want to limit the quantity, leave that field blank." },
+              fundraiser_block({ id: 'rewards', title: 'Rewards', description: "Thank your backers." },
                 table({ id: 'rewards-table' },
                   tr({ id: 'reward-inputs' },
                     td(
@@ -223,7 +223,7 @@ with (scope('Fundraisers','App')) {
                         ),
 
                         fieldset(
-                          label('Quantity:'),
+                          label('Limit (Optional):'),
                           input({ id: 'reward-input-quantity', placeholder: 10, style: 'width: 100px; margin-left: 18px;' })
                         )
                       ),

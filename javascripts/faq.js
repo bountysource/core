@@ -126,8 +126,7 @@ with (scope('Faq', 'App')) {
             'What you do with your money is completely up to you. You can either collect your full 90%, or make donations:',
             ul(
               li(u('To charity.'), " We support charities like ", a({ href: 'https://www.eff.org/', target: 'blank' }, "EFF"), "."),
-              li(u('Back into the project. '), ' Project committers will be able to use this money to create more bounties on existing issues within the project. (That you could earn again!)'),
-              li(u('To BountySource.'), ' :-)')
+              li(u('Back into the project. '), ' Project committers will be able to use this money to create more bounties on existing issues within the project. (That you could earn again!)')
             )
           ),
         
