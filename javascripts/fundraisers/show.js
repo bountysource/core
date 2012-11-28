@@ -70,7 +70,6 @@ with (scope('Fundraisers')) {
         section({ id: 'fundraiser-share' }),
 
         section({ id: 'fundraiser-description', style: 'margin: 20px auto; padding: 10px; background: #F7F7F7; border-radius: 2px; border-radius: 3px;' },
-//          p({  }, )
           div({ 'class': 'markdown', html: fundraiser.description_html, style: 'margin: 0; padding: 10px; overflow-x: scroll;' })
         )
       ),
@@ -82,7 +81,7 @@ with (scope('Fundraisers')) {
               span({ style: 'font-size: 45px; display: inline-block;' }, 15+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backers')
             ),
             li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, money(1500)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal), ' goal')
+              span({ style: 'font-size: 45px; display: inline-block;' }, money(1500)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal||0), ' goal')
             )
           )
         ),
