@@ -1,8 +1,5 @@
 with (scope('Fundraisers','App')) {
 
-  // used to store the EpicEditor object
-  var description_editor;
-
   route('#account/fundraisers', function() {
     var fundraisers_table = div('Loading...');
 
@@ -166,7 +163,7 @@ with (scope('Fundraisers','App')) {
                 div({ style: 'padding: 20px 10px; background: #eee;' },
                   fieldset(
 //                    textarea({ name: 'description', style: 'width: 630px; height: 300px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
-                    div({ id: 'description' })
+                    div({ id: 'description-editor' })
                   )
                 )
               ),
@@ -276,21 +273,14 @@ with (scope('Fundraisers','App')) {
         // initialize the description markdown edit form.
         // NOTE: description_editor is intentionally made global.
         description_editor = new EpicEditor({
-          container:          'description',
+          container:          'description-editor',
           clientSideStorage:  false,
           file: {
-            name:           'description',
             defaultContent: fundraiser.description || default_description()
-          },
-          theme: {
-            preview:  '/stylesheets/epiceditor/preview/github.css',
-            editor:   '/stylesheets/epiceditor/editor/epic-dark.css',
-            base:     '/stylesheets/epiceditor/base/epiceditor.css'
           }
         });
-        description_editor.settings.basePath = "";
         description_editor.element.style.height = '520px';
-        description_editor.load();
+        description_editor.load(); // insert editor into its div element (rendered above in the fundraiser form)
 
         // if this is the first time the editor is being loaded, throw it into preview mode.
         // this way, the user has to click the edit button to work, teaching them how to use the editor.
@@ -302,13 +292,14 @@ with (scope('Fundraisers','App')) {
   });
 
   define("default_description", function() {
-    return "Description\n===========\n"
-      +"This is the main body of your fundraiser. It is formatted using Markdown.\n\n"
-      +"**To get started, put the editor into edit mode**\n\n"
-      +"Using the Editor\n================\n"
-      +"* To edit the description, click the edit button. ![alt text](/lib/epiceditor/images/edit.png)\n"
-      +"* To preview the rendered description, click the preview button. ![alt text](/lib/epiceditor/images/preview.png)\n"
-      +"* Hyperlinks are automatically made when you include a URL like https://www.bountysource.com\n"
+    return "## Hello World!\n"
+          +"This is the main body of your fundraiser. It is formatted using Markdown. Right now, it is in **preview** mode. **Switch the editor out of preview mode to get started.**\n\n"
+          +"### Using the Editor\n"
+          +"* To edit the description, click the edit button. ![alt text](/images/edit.png)\n"
+          +"* To preview the rendered description, click the preview button. ![alt text](/images/preview.png)\n"
+          +"* Hyperlinks are automatically made when you include a URL, such as https://www.bountysource.com\n\n"
+          +"### More about Markdown\n"
+          +"For more information about Markdown, the Wikipedia article is a good starting point http://en.wikipedia.org/wiki/Markdown";
   });
 
   /*
@@ -413,7 +404,13 @@ with (scope('Fundraisers','App')) {
     request_data.rewards = JSON.stringify(request_data.rewards); // serialize array
 
     // pull markdown out of the description form
-    request_data.description = description_editor.exportFile();
+    var description_raw_markdown = description_editor.exportFile();
+    // if there is nothing but white space, consider the description empty
+    if (description_raw_markdown.replace(/\s+/,'').length == 0) {
+      request_data.description = '';
+    } else {
+      request_data.description = description_raw_markdown;
+    }
 
     BountySource.update_fundraiser(fundraiser_id, request_data, function(response) {
       if (response.meta.success) {
