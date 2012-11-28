@@ -24,8 +24,10 @@ with (scope('Fundraisers','App')) {
               th({ style: 'width: 30px;' })
             ),
             response.data.map(function(fundraiser) {
+              // depends on whether or not its published
+              var fundraiser_href = fundraiser.published ? '#fundraisers/'+fundraiser.id : '#account/fundraisers/'+fundraiser.id;
               return tr({ style: 'height: 40px;' },
-                td(a({ href: '#account/fundraisers/'+fundraiser.id }, abbreviated_text(fundraiser.title || 'Untitled Fundraiser', 100))),
+                td(a({ href: fundraiser_href }, abbreviated_text(fundraiser.title, 100))),
                 td(money(fundraiser.funding_goal || 0)),
                 td('<sick-ass-progress-bar />'),
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
@@ -380,7 +382,7 @@ with (scope('Fundraisers','App')) {
         // show messages after saved
         render_message(small_success_message("Fundraiser draft saved"));
       } else {
-        render_message(small_error_message("Fundraiser draft saved"));
+        render_message(small_error_message(response.data.error));
       }
 
       if (callback) callback(response);
