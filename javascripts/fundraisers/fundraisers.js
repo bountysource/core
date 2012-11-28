@@ -162,8 +162,7 @@ with (scope('Fundraisers','App')) {
               fundraiser_block({ id: 'description', title: 'Description', description: "Convince people to contribute. Why is your project interesting and worthy of funding?" },
                 div({ style: 'padding: 20px 10px; background: #eee;' },
                   fieldset(
-//                    textarea({ name: 'description', style: 'width: 630px; height: 300px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
-                    div({ id: 'description-editor' })
+                    textarea({ name: 'description', style: 'width: 630px; height: 300px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
                   )
                 )
               ),
@@ -270,36 +269,9 @@ with (scope('Fundraisers','App')) {
           t.at('reward-inputs').insert(reward_row_elements(generate_reward_row_id(), reward));
         });
 
-        // initialize the description markdown edit form.
-        // NOTE: description_editor is intentionally made global.
-        description_editor = new EpicEditor({
-          container:          'description-editor',
-          clientSideStorage:  false,
-          file: {
-            defaultContent: fundraiser.description || default_description()
-          }
-        });
-        description_editor.element.style.height = '520px';
-        description_editor.load(); // insert editor into its div element (rendered above in the fundraiser form)
-
-        // if this is the first time the editor is being loaded, throw it into preview mode.
-        // this way, the user has to click the edit button to work, teaching them how to use the editor.
-        if (!fundraiser.description || fundraiser.description.length <= 0) description_editor.preview();
-
         select_fundraiser_form_section(fundraiser_id, 'basic-info');
       }
     })
-  });
-
-  define("default_description", function() {
-    return "## Hello World!\n"
-          +"This is the main body of your fundraiser. It is formatted using Markdown. Right now, it is in **preview** mode. **Switch the editor out of preview mode to get started.**\n\n"
-          +"### Using the Editor\n"
-          +"* To edit the description, click the edit button. ![alt text](/images/edit.png)\n"
-          +"* To preview the rendered description, click the preview button. ![alt text](/images/preview.png)\n"
-          +"* Hyperlinks are automatically made when you include a URL, such as https://www.bountysource.com\n\n"
-          +"### More about Markdown\n"
-          +"For more information about Markdown, the Wikipedia article is a good starting point http://en.wikipedia.org/wiki/Markdown";
   });
 
   /*
@@ -402,15 +374,6 @@ with (scope('Fundraisers','App')) {
       }
     });
     request_data.rewards = JSON.stringify(request_data.rewards); // serialize array
-
-    // pull markdown out of the description form
-    var description_raw_markdown = description_editor.exportFile();
-    // if there is nothing but white space, consider the description empty
-    if (description_raw_markdown.replace(/\s+/,'').length == 0) {
-      request_data.description = '';
-    } else {
-      request_data.description = description_raw_markdown;
-    }
 
     BountySource.update_fundraiser(fundraiser_id, request_data, function(response) {
       if (response.meta.success) {
