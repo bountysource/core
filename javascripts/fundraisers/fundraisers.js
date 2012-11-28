@@ -121,22 +121,22 @@ with (scope('Fundraisers','App')) {
   define('fundraiser_page', function(fundraiser) {
     var fundraiser_page_data = [
       fundraiser_form_nav(
-        li({ id: 'nav-basic-info', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'basic-info') },
+        li({ id: 'nav-basic-info', onclick: curry(save_fundraiser, fundraiser.id, curry(select_fundraiser_form_section, fundraiser.id, 'basic-info')) },
           'Basic Info'
         ),
-        li({ id: 'nav-description', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'description') },
+        li({ id: 'nav-description', onclick: curry(save_fundraiser, fundraiser.id, curry(select_fundraiser_form_section, fundraiser.id, 'description')) },
           'Description'
         ),
-        li({ id: 'nav-about-me', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'about-me') },
+        li({ id: 'nav-about-me', onclick: curry(save_fundraiser, fundraiser.id, curry(select_fundraiser_form_section, fundraiser.id, 'about-me')) },
           'About Me'
         ),
-        li({ id: 'nav-milestones', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'milestones') },
+        li({ id: 'nav-milestones', onclick: curry(save_fundraiser, fundraiser.id, curry(select_fundraiser_form_section, fundraiser.id, 'milestones')) },
           'Milestones'
         ),
-        li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
+        li({ id: 'nav-rewards', onclick: curry(save_fundraiser, fundraiser.id, curry(select_fundraiser_form_section, fundraiser.id, 'rewards')) },
           'Rewards'
         ),
-        li({ id: 'nav-funding-details', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'funding-details') },
+        li({ id: 'nav-funding-details', onclick: curry(save_fundraiser, fundraiser.id, curry(select_fundraiser_form_section, fundraiser.id, 'funding-details')) },
           'Funding'
         )
       ),
@@ -401,11 +401,9 @@ with (scope('Fundraisers','App')) {
   * Save the fundraiser draft, and move to the next section
   * */
   define('save_fundraiser_and_continue', function(fundraiser_id) {
-    var active_nav_element = document.getElementsByClassName('fundraiser-form-nav active')[0];
-    save_fundraiser(fundraiser_id, function() {
-      var next_nav_element_id = active_nav_element.nextSibling.id.split('-').slice(1).join('-');
-      select_fundraiser_form_section(fundraiser_id, next_nav_element_id);
-    });
+    var active_nav_element = document.getElementsByClassName('fundraiser-form-nav active')[0],
+        next_nav_element_id = active_nav_element.nextSibling.id.split('-').slice(1).join('-');
+    select_fundraiser_form_section(fundraiser_id, next_nav_element_id);
   });
 
   define('destroy_fundraiser', function(fundraiser_id) {
