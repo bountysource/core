@@ -137,15 +137,15 @@ with (scope('App')) {
   });
 
   define('error_message', function() {
-    return message({ message_class: 'error-message' }, arguments);
+    return message({ message_class: 'error-message', close_button: false }, arguments);
   });
 
   define('success_message', function() {
-    return message({ message_class: 'success-message' }, arguments);
+    return message({ message_class: 'success-message', close_button: false }, arguments);
   });
 
   define('info_message', function() {
-    return message({ message_class: 'info-message' }, arguments);
+    return message({ message_class: 'info-message', close_button: false }, arguments);
   });
 
   define('small_error_message', function(options) {
@@ -164,7 +164,7 @@ with (scope('App')) {
     var arguments = flatten_to_array(arguments),
         options   = shift_options_from_args(arguments);
     return div({ 'class': options.message_class },
-      a({ 'class': 'close-button', href: options.on_close || clear_message }, 'x'),
+      options.close_button && a({ 'class': 'close-button', href: options.on_close || clear_message }, 'x'),
       arguments
     );
   });
