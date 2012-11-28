@@ -401,9 +401,15 @@ with (scope('Fundraisers','App')) {
   * Save the fundraiser draft, and move to the next section
   * */
   define('save_fundraiser_and_continue', function(fundraiser_id) {
-    var active_nav_element = document.getElementsByClassName('fundraiser-form-nav active')[0],
-        next_nav_element_id = active_nav_element.nextSibling.id.split('-').slice(1).join('-');
-    select_fundraiser_form_section(fundraiser_id, next_nav_element_id);
+    var active_nav_element = document.getElementsByClassName('fundraiser-form-nav active')[0];
+    if (active_nav_element.nextSibling) {
+      var next_nav_element_id = active_nav_element.nextSibling.id.split('-').slice(1).join('-');
+      save_fundraiser(fundraiser_id, function() {
+        select_fundraiser_form_section(fundraiser_id, next_nav_element_id);
+      });
+    } else {
+      save_fundraiser(fundraiser_id);
+    }
   });
 
   define('destroy_fundraiser', function(fundraiser_id) {

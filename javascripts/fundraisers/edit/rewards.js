@@ -117,4 +117,9 @@ with (scope('Fundraisers')) {
       document.getElementById('reward-input-amount').focus();
     }
   });
+
+  // sort method to use with Rewards
+  define('sort_rewards', function(a, b) {
+    return (a.amount < b.amount) ? -1 : ((a.amount == b.amount) ? 0 : 1);
+  });
 }
