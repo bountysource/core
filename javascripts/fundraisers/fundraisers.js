@@ -349,6 +349,8 @@ with (scope('Fundraisers','App')) {
   });
 
   define('save_fundraiser', function(fundraiser_id, callback) {
+    render_message(div({ style: 'text-align: center; padding: 5px;' }, 'Saving...'));
+
     var serialized_form = serialize_form('fundraiser-form'),
         request_data    = serialized_form_to_hash(serialized_form);
 
