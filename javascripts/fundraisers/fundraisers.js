@@ -255,6 +255,8 @@ with (scope('Fundraisers','App')) {
         grey_box(
           a({ 'class': 'green', 'href': curry(save_fundraiser_and_continue, fundraiser.id) }, 'Save and Continue'),
           br(),
+          a({ 'class': 'green', 'href': curry(save_fundraiser, fundraiser.id) }, 'Save'),
+          br(),
           a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser.id) }, 'Preview'),
           br(),
 
