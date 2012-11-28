@@ -71,7 +71,7 @@ with (scope('Fundraisers')) {
 
         section({ id: 'fundraiser-description', style: 'margin: 20px auto; padding: 10px; background: #F7F7F7; border-radius: 2px; border-radius: 3px;' },
 //          p({  }, )
-          div({ 'class': 'markdown', html: fundraiser.description_html, style: 'margin: 0; padding: 10px;' })
+          div({ 'class': 'markdown', html: fundraiser.description_html, style: 'margin: 0; padding: 10px; overflow-x: scroll;' })
         )
       ),
 
