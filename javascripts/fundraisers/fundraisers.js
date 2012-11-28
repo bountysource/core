@@ -111,7 +111,7 @@ with (scope('Fundraisers','App')) {
         }
 
         render({ into: target_div }, fundraiser_page(response.data));
-
+        populate_fundraiser_form_tables(response.data);
         select_fundraiser_form_section(fundraiser_id, 'basic-info');
       }
     })
@@ -270,6 +270,10 @@ with (scope('Fundraisers','App')) {
       div({ 'class': 'split-end' })
     ];
 
+    return fundraiser_page_data;
+  });
+
+  define('populate_fundraiser_form_tables', function(fundraiser) {
     // render saved milestones into table
     var t = Teddy.snuggle('milestone-table');
     (fundraiser.milestones || []).forEach(function(milestone) {
@@ -281,8 +285,6 @@ with (scope('Fundraisers','App')) {
     (fundraiser.rewards || []).forEach(function(reward) {
       t.at('reward-inputs').insert(reward_row_elements(generate_reward_row_id(), reward));
     });
-
-    return fundraiser_page_data;
   });
 
   /*
@@ -385,6 +387,7 @@ with (scope('Fundraisers','App')) {
 
         // render updated fundraiser form
         render({ target: 'fundraiser-div' }, fundraiser_page(response.data));
+        populate_fundraiser_form_tables(response.data);
 
         // select the nav element again
         select_fundraiser_form_section(fundraiser_id, previous_nav_id);
