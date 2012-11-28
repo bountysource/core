@@ -99,7 +99,7 @@ with (scope('Fundraisers')) {
           ),
 
           // show github profile link if provided by user
-          (fundraiser.person.github_user || true) && div({ style: 'border-top: 2px dotted #C7C7C7; padding: 5px;' },
+          (fundraiser.person.github_user) && div({ style: 'border-top: 2px dotted #C7C7C7; padding: 5px;' },
             img({ src: 'images/github.png', style: 'width: 30px; vertical-align: middle' }),
             a({ style: 'vertical-align: middle; margin-left: 10px;', target: '_blank', href: 'https://github.com/'+fundraiser.person.github_user.login }, fundraiser.person.github_user.login)
           ),
