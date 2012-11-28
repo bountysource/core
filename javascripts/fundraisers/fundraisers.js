@@ -29,7 +29,7 @@ with (scope('Fundraisers','App')) {
                 td(money(fundraiser.funding_goal || 0)),
                 td('<sick-ass-progress-bar />'),
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
-                td(fundraiser.published ? '' : a({ href: curry(destroy_fundraiser, fundraiser)}, 'delete'))
+                td(fundraiser.published ? '' : a({ href: curry(destroy_fundraiser, fundraiser.id)}, 'delete'))
               );
             })
           )
@@ -318,15 +318,15 @@ with (scope('Fundraisers','App')) {
     );
   });
 
-  define('publish_fundraiser', function(fundraiser) {
+  define('publish_fundraiser', function(fundraiser_id) {
     if (confirm('Are you sure? Once published, a fundraiser CANNOT be edited.')) {
       // first, save it. callback hell: population 2
-      save_fundraiser(fundraiser, function(save_response) {
-        BountySource.publish_fundraiser(fundraiser.id, function(response) {
+      save_fundraiser(fundraiser_id, function(save_response) {
+        BountySource.publish_fundraiser(fundraiser_id, function(response) {
           if (response.meta.success) {
             set_route('#account/fundraisers');
           } else {
-            render_message(error_message(response.data.error));
+            render_message(small_error_message(response.data.error));
           }
         });
       });
@@ -379,7 +379,6 @@ with (scope('Fundraisers','App')) {
       if (response.meta.success) {
         // show messages after saved
         render_message(small_success_message("Fundraiser draft saved"));
-        setTimeout(clear_message, 1250);
       } else {
         render_message(small_error_message("Fundraiser draft saved"));
       }
@@ -388,9 +387,9 @@ with (scope('Fundraisers','App')) {
     });
   });
 
-  define('destroy_fundraiser', function(fundraiser) {
+  define('destroy_fundraiser', function(fundraiser_id) {
     if (confirm('Are you sure? It will be gone forever!')) {
-      BountySource.destroy_fundraiser(fundraiser.id, function(response) {
+      BountySource.destroy_fundraiser(fundraiser_id, function(response) {
         window.location.reload();
       });
     }

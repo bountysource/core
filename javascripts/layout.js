@@ -137,27 +137,36 @@ with (scope('App')) {
   });
 
   define('error_message', function() {
-    return div({ 'class': 'error-message' }, arguments);
+    return message({ message_class: 'error-message' }, arguments);
   });
 
   define('success_message', function() {
-    return div({ 'class': 'success-message' }, arguments);
+    return message({ message_class: 'success-message' }, arguments);
   });
 
   define('info_message', function() {
-    return div({ 'class': 'info-message' }, arguments);
+    return message({ message_class: 'info-message' }, arguments);
   });
 
-  define('small_error_message', function() {
-    return div({ 'class': 'error-message small' }, arguments);
+  define('small_error_message', function(options) {
+    return message({ message_class: 'error-message small' }, arguments);
   });
 
   define('small_success_message', function() {
-    return div({ 'class': 'success-message small' }, arguments);
+    return message({ message_class: 'success-message small' }, arguments);
   });
 
   define('small_info_message', function() {
-    return div({ 'class': 'info-message small' }, arguments);
+    return message({ message_class: 'info-message small' }, arguments);
+  });
+
+  define('message', function() {
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments);
+    return div({ 'class': options.message_class },
+      a({ 'class': 'close-button', href: options.on_close || clear_message }, 'x'),
+      arguments
+    );
   });
 
   // it puts things inside of a grey box
