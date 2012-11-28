@@ -87,7 +87,7 @@ with (scope('App')) {
   });
 
   define('add_class', function(element, class_name) {
-    if (!element.className) return;
+    if (!element || !element.className) return;
     var parts = element.className.split(/\s+/)
     parts.push(class_name);
     element.className = parts.join(' ');
@@ -95,7 +95,7 @@ with (scope('App')) {
   });
 
   define('remove_class', function(element, class_name) {
-    if (!element.className) return;
+    if (!element || !element.className) return;
     element.className = element.className.replace((new RegExp(class_name)),'').trim();
     return element;
   });
