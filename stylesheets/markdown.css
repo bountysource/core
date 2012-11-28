@@ -1,0 +1,9 @@
+.markdown * { font-size: 16px; line-height: 25px; }
+.markdown h1, h2, h3, h4, h5 { font-weight: normal; padding: 0; margin: 20px auto 25px auto; }
+.markdown h1 { font-size: 50px; }
+.markdown h2 { font-size: 40px; }
+.markdown h3 { font-size: 30px; }
+.markdown h4 { font-size: 25px; }
+
+.markdown p { margin: 15px 0 20px 10px; }
+.markdown pre { padding: 10px; background: #A3A3A3; color: white; border-radius: 3px; }

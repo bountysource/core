@@ -41,6 +41,11 @@ with (scope('Fundraisers')) {
   });
 
   define('fundraiser_template', function(fundraiser) {
+
+
+    console.log(fundraiser);
+
+
     // add the title to the already present header element
     render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
@@ -65,7 +70,8 @@ with (scope('Fundraisers')) {
         section({ id: 'fundraiser-share' }),
 
         section({ id: 'fundraiser-description', style: 'margin: 20px auto; padding: 10px; background: #F7F7F7; border-radius: 2px; border-radius: 3px;' },
-          p({ style: 'margin: 0; white-space: pre-wrap; font-size: 18px; line-height: 35px;' }, fundraiser.description)
+//          p({  }, )
+          div({ 'class': 'markdown', html: fundraiser.description_html, style: 'margin: 0; padding: 10px;' })
         )
       ),
 
