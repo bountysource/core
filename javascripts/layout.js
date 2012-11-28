@@ -149,15 +149,15 @@ with (scope('App')) {
   });
 
   define('small_error_message', function(options) {
-    return message({ message_class: 'error-message small' }, arguments);
+    return message({ message_class: 'error-message small', close_button: true }, arguments);
   });
 
   define('small_success_message', function() {
-    return message({ message_class: 'success-message small' }, arguments);
+    return message({ message_class: 'success-message small', close_button: true }, arguments);
   });
 
   define('small_info_message', function() {
-    return message({ message_class: 'info-message small' }, arguments);
+    return message({ message_class: 'info-message small', close_button: true }, arguments);
   });
 
   define('message', function() {
