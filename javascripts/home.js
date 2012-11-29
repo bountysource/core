@@ -105,6 +105,16 @@ with (scope('Home', 'App')) {
             })
           )
         ),
+        section({ style: 'margin-right: 30px'},
+          h2('Featured Fundraisers'),
+          ul(
+            data.fundraisers.featured.map(function(fundraiser) {
+              return li(img({ src: (fundraiser.image_url),
+                style: 'width: 32px; height: 32px' }),
+                a({ href: Fundraiser.get_href(fundraiser), style: 'color: #222' }, fundraiser.title))
+            })
+          )
+        ),
         section(
           h2('Top Backers and Developers'),
           ul(
