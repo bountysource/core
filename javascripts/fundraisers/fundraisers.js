@@ -130,9 +130,12 @@ with (scope('Fundraisers','App')) {
         li({ id: 'nav-about-me', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'about-me') },
           'About Me'
         ),
-        li({ id: 'nav-milestones', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'milestones') },
-          'Milestones'
-        ),
+
+//        TODO: enable milestones. not worth the extra effort right now
+//        li({ id: 'nav-milestones', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'milestones') },
+//          'Milestones'
+//        ),
+
         li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
           'Rewards'
         ),
