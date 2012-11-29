@@ -12,8 +12,9 @@
 .markdown h4 { font-size: 25px; }
 
 .markdown p { margin: 15px 0; padding-left: 5px; }
-.markdown pre { background: #F0F0F0; border: 1px solid #CFCFCF; padding: 10px 20px; border-radius: 2px; font-size: 12px; line-height: inherit; }
-.markdown pre code { line-height: inherit; font-size: 14px; }
+
+.markdown pre     { line-height: inherit; background: #F0F0F0; border: 1px solid #CFCFCF; border-radius: 3px; margin: 10px 0px; padding: 10px; }
+.markdown p code  { line-height: inherit; background: #F0F0F0; border: 1px solid #CFCFCF; border-radius: 3px; margin: 3px 0px; padding: 3px; }
 
 .markdown blockquote { margin: 10px 0; color: gray; border-left: 5px solid gray; padding: 3px; background: #EEE; }
 .markdown blockquote p { margin: 0; padding: 0; padding-left: 30px; }
