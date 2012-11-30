@@ -40,12 +40,20 @@ with (scope('Fundraisers')) {
     });
   });
 
+  define('backer_box', function(fundraiser) {
+    var payment_box_div = Payment.payment_box('Bounty', fundraiser, null, window.location.href);
+    return div({ id: 'bounty-box' },
+      div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
+
+//      fundraiser.account_balance > 0 && section(
+//        div({ 'class': 'total_bounties' }, money(fundraiser.account_balance)),
+//        div({ style: 'text-align: center' }, "From ", fundraiser.bounties.length, " bount" + (fundraiser.bounties.length == 1 ? 'y' : 'ies') + ".")
+//      ),
+      payment_box_div
+    );
+  });
+
   define('fundraiser_template', function(fundraiser) {
-
-
-    console.log(fundraiser);
-
-
     // add the title to the already present header element
     render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
@@ -70,7 +78,7 @@ with (scope('Fundraisers')) {
         section({ id: 'fundraiser-share' }),
 
         section({ id: 'fundraiser-description', style: 'margin: 20px auto; padding: 10px; background: #F7F7F7; border-radius: 2px; border-radius: 3px;' },
-          div({ 'class': 'markdown', html: fundraiser.description_html, style: 'margin: 0; padding: 10px; overflow-x: scroll;' })
+          p({ style: 'margin: 0; white-space: pre-wrap; font-size: 18px; line-height: 35px;' }, fundraiser.description)
         )
       ),
 
@@ -81,7 +89,7 @@ with (scope('Fundraisers')) {
               span({ style: 'font-size: 45px; display: inline-block;' }, 15+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backers')
             ),
             li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, money(1500)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal||0), ' goal')
+              span({ style: 'font-size: 45px; display: inline-block;' }, money(1500)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal), ' goal')
             )
           )
         ),
@@ -98,7 +106,7 @@ with (scope('Fundraisers')) {
           ),
 
           // show github profile link if provided by user
-          (fundraiser.person.github_user) && div({ style: 'border-top: 2px dotted #C7C7C7; padding: 5px;' },
+          (fundraiser.person.github_user || true) && div({ style: 'border-top: 2px dotted #C7C7C7; padding: 5px;' },
             img({ src: 'images/github.png', style: 'width: 30px; vertical-align: middle' }),
             a({ style: 'vertical-align: middle; margin-left: 10px;', target: '_blank', href: 'https://github.com/'+fundraiser.person.github_user.login }, fundraiser.person.github_user.login)
           ),
