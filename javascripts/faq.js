@@ -53,7 +53,7 @@ with (scope('Faq', 'App')) {
 
       faq_sections(),
       
-      section({ id: 'faqs' },
+      section({ id: 'faq' },
         dl(
           dt({id: 'faq1'}, "Who is a committer?"),
           dd("Any ", a({ href: 'https://help.github.com/articles/what-are-the-different-access-permissions', target: 'blank'}, "Github user"), " who can merge pull requests into a project."),
