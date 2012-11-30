@@ -322,4 +322,5 @@ li.fundraiser-form-nav:hover    { background: #E0E0E0; }
 .fundraiser-form-nav.active     { background: #E0E0E0; }
 
 .close-button { background: grey; opacity: 0.60; border-radius: 10px; font-size: 14px; color: white; float: right; width: 18px; height: 18px; cursor: pointer; }
+a.close-button { text-decoration: none; }
 .close-button:hover { opacity: 0.75; }
