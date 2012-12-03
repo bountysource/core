@@ -376,7 +376,7 @@ with (scope('Fundraisers','App')) {
         var spans = row.getElementsByTagName('span');
         request_data.rewards.push({
           description:  spans[2].innerText,
-          amount:       parseInt((spans[0].innerText).match(/\$(\d+)/)[1]),
+          amount:       parseInt((spans[0].innerText).replace(/\$|\,/g,'')),
           limited_to:   parseInt(spans[1].innerText)
         });
       }
