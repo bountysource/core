@@ -54,6 +54,9 @@ with (scope('Fundraisers')) {
   });
 
   define('fundraiser_template', function(fundraiser) {
+
+    console.log(fundraiser);
+
     // add the title to the already present header element
     render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
@@ -86,10 +89,10 @@ with (scope('Fundraisers')) {
         section({ id: 'fundraiser-stats', style: 'background: #eee; padding: 10px; margin: 10px 0; border-radius: 3px;' },
           ul({ style: 'list-style-type: none; padding: 0;' },
             li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, 15+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backers')
+              span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.backers.length+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backer' + (fundraiser.backers.length == 1 ? '' : 's'))
             ),
             li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, money(1500)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal||0), ' goal')
+              span({ style: 'font-size: 45px; display: inline-block;' }, money(fundraiser.total_pledged)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal||0), ' goal')
             )
           ),
 
