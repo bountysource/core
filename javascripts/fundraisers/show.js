@@ -26,7 +26,7 @@ with (scope('Fundraisers')) {
     var fundraiser_div = div('Loading...');
     var target_div = div(
       breadcrumbs(
-        'Home',
+        a({ href: '#' }, 'Home'),
         'Fundraisers',
         span({ id: 'breadcrumbs-fundraiser-title' }, 'Loading...')
       ),
@@ -89,9 +89,11 @@ with (scope('Fundraisers')) {
               span({ style: 'font-size: 45px; display: inline-block;' }, 15+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backers')
             ),
             li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, money(1500)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal), ' goal')
+              span({ style: 'font-size: 45px; display: inline-block;' }, money(1500)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal||0), ' goal')
             )
-          )
+          ),
+
+          a({ 'class': 'green pledge-button', href: '#fundraisers/' + fundraiser.id + '/pledge'}, 'Make a Pledge')
         ),
 
         br(),
@@ -121,6 +123,135 @@ with (scope('Fundraisers')) {
 
       div({ 'class': 'split-end' })
     );
+  });
+
+  route('#fundraisers/:fundraiser_id/pledge', function(fundraiser_id) {
+    var target_div = div('Loading...'),
+        bountysource_account_div = div();
+
+    render(
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        'Fundraisers',
+        span({ id: 'breadcrumbs-fundraiser-title' }, 'Loading...'),
+        'Make Pledge'
+      ),
+      target_div
+    );
+
+    BountySource.get_fundraiser(fundraiser_id, function(response) {
+      // render the title of the fundraiser into header
+      render({ target: 'breadcrumbs-fundraiser-title' }, a({ href: '#fundraisers/'+fundraiser_id }, response.data.title));
+
+      render({ into: target_div },
+        div({ 'class': 'split-main' },
+          form({ 'class': 'fancy', action: curry(make_pledge, fundraiser_id) },
+            messages(),
+
+            fieldset(
+              label('Pledge Amount:'),
+              span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ autofocus: true, name: 'amount', placeholder: '25' })
+            ),
+
+            // payment method selection
+            fieldset({ 'class': 'no-label' },
+              div({ 'class': 'payment-method' },
+                div(
+                  radio({
+                    name:     'payment_method',
+                    value:    'paypal',
+                    id:       'payment_method_paypal',
+                    checked:  'checked'
+                  }),
+                  label({ 'for': 'payment_method_paypal', style: 'text-align: left; padding-left: 15px;' },
+                    img({ src: 'images/paypal.png'}), "PayPal"
+                  )
+                ),
+                div(
+                  radio({
+                    name:   'payment_method',
+                    value:  'google',
+                    id:     'payment_method_google'
+                  }),
+                  label({ 'for': 'payment_method_google', style: 'text-align: left; padding-left: 15px;' },
+                    img({ src: 'images/google-wallet.png'}), "Google Wallet"
+                  )
+                ),
+                bountysource_account_div
+              )
+            ),
+
+            // rewards table
+            fieldset({ 'class': 'no-label' },
+              (response.data.rewards.length <= 0) && table(
+                tr(
+                  th({ style: 'width: 50px;' }),
+                  th()
+                ),
+                response.data.rewards.map(function(reward) {
+                  return tr(
+                    td(radio()),
+                    td(reward.description)
+                  )
+                })
+              )
+            ),
+
+            fieldset({ 'class': 'no-label' },
+              submit({ 'class': 'green' }, 'Make Pledge')
+            )
+          )
+        ),
+
+        div({ 'class': 'split-side' }),
+
+        div({ 'class': 'split-end' })
+      );
+
+      logged_in() && BountySource.get_cached_user_info(function(user) {
+        if (user.account && user.account.balance > 0) {
+          render({ into: bountysource_account_div },
+            radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
+            label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
+              img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
+              "BountySource",
+              span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
+            )
+          );
+        }
+      });
+
+      // if logged in and account has money, render bountysource account radio
+      logged_in() && BountySource.get_cached_user_info(function(user) {
+        (user.account && user.account.balance > 0) && render({ into: bountysource_account_div },
+          div(
+            radio({
+              name: 'payment_method',
+              value: 'personal',
+              id: 'payment_method_personal'
+            }),
+            label({ 'for': 'payment_method_personal', style: 'text-align: left; padding-left: 15px; display: inline;' },
+              img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
+              "BountySource",
+              span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
+            )
+          )
+        );
+      });
+    });
+  });
+
+  define('make_pledge', function(fundraiser_id, form_data) {
+    form_data.redirect_url = BountySource.www_host+'#receipt?amount='+form_data.amount;
+
+    BountySource.pledge_to_fundraiser(fundraiser_id, form_data, function(response) {
+      if (response.meta.success) {
+        if (form_data.payment_method == 'personal') BountySource.set_cached_user_info(null);
+        window.location.href = response.data.redirect_url;
+      } else {
+        render_message(error_message(response.data.error));
+      }
+    });
   });
 
   // a layout with no navigation, for simply previewing a fundraiser

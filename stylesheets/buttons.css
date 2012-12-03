@@ -61,3 +61,6 @@ a.blue, a.green, a.gray {
   background: linear-gradient(to bottom,  #d3d3d3 0%,#b2b2b2 4%,#939393 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b6f266', endColorstr='#6daf14',GradientType=0 ); /* IE6-9 */
 }
+
+.green.pledge-button        { text-decoration: none; padding: 10px 0; font-size: 20px; }
+.green.pledge-button:hover  { box-shadow: 0 0 20px #5EE95E; }

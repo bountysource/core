@@ -207,4 +207,8 @@ with (scope('BountySource')) {
   define('destroy_fundraiser', function(id, callback) {
     api('/user/fundraisers/'+id, 'DELETE', callback);
   });
+
+  define('pledge_to_fundraiser', function(fundraiser_id, data, callback) {
+    api('/user/fundraisers/'+fundraiser_id+'/pay_in', 'POST', { amount: data.amount, payment_method: data.payment_method, redirect_url: data.redirect_url }, callback);
+  });
 }
