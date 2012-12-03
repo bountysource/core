@@ -169,7 +169,7 @@ with (scope('Fundraisers','App')) {
             )
           ),
 
-          fundraiser_block({ id: 'description', title: 'Description', description: "Convince people to contribute. Why is your project interesting and worthy of funding?" },
+          fundraiser_block({ id: 'description', title: 'Description', description: div("Convince people to contribute. Why is your project interesting and worthy of funding? Formatted with ", a({ href: 'http://github.github.com/github-flavored-markdown/' }, "GitHub Flavored Markdown.")) },
             div({ style: 'padding: 20px 10px; background: #eee;' },
               fieldset(
                 textarea({ name: 'description', style: 'width: 630px; height: 600px; line-height: 18px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
