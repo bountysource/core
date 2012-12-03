@@ -242,7 +242,7 @@ with (scope('Fundraisers')) {
   });
 
   define('make_pledge', function(fundraiser_id, form_data) {
-    form_data.redirect_url = BountySource.www_host+'#receipt?amount='+form_data.amount;
+    form_data.redirect_url = BountySource.www_host+'#fundraisers/' + fundraiser_id + '/receipt?amount='+form_data.amount;
 
     BountySource.pledge_to_fundraiser(fundraiser_id, form_data, function(response) {
       if (response.meta.success) {
