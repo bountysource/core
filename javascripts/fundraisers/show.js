@@ -93,7 +93,12 @@ with (scope('Fundraisers')) {
             )
           ),
 
-          a({ 'class': 'green pledge-button', href: '#fundraisers/' + fundraiser.id + '/pledge'}, 'Make a Pledge')
+          // disable functionality of pledge button if not published
+          fundraiser.published ? [
+            a({ 'class': 'green pledge-button', href: '#fundraisers/' + fundraiser.id + '/pledge' }, 'Make a Pledge')
+          ] : [
+            a({ 'class': 'green pledge-button' }, 'Make a Pledge')
+          ]
         ),
 
         br(),
