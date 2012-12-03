@@ -52,7 +52,6 @@ with (scope('Contributions', 'App')) {
     });
   });
 
-
   route('#repos/:login/:repository/issues/:issue_number/contributions/receipt', function(login, repository, issue_number) {
     var github_comment_div = div(),
         bounty_amount = parseInt(get_params().amount);
@@ -119,9 +118,9 @@ with (scope('Contributions', 'App')) {
         div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
           ribbon_header('Share'),
           br(),
-          facebook_share_button(login, repository, issue_number, bounty_amount),
+          facebook_share_bounty_button(login, repository, issue_number, bounty_amount),
           div({ style: 'height: 20px;' }),
-          twitter_share_button(login, repository, issue_number, bounty_amount)
+          twitter_share_bounty_button(login, repository, issue_number, bounty_amount)
         )
       ),
 
@@ -129,12 +128,80 @@ with (scope('Contributions', 'App')) {
     );
   });
 
-  define('facebook_share_button', function(login, repository, issue_number, bounty_amount) {
+  route('#fundraisers/:fundraiser_id/receipt', function(fundraiser_id) {
+    var target_div = div('Loading...');
+
+    render(
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        'Fundraisers',
+        a({ id: 'breadcrumbs-fundraiser-title', href: '#fundraisers/'+fundraiser_id }, 'Loading...'),
+        'Receipt'
+      ),
+      target_div
+    );
+
+    BountySource.get_fundraiser(fundraiser_id, function(response) {
+      render({ target: 'breadcrumbs-fundraiser-title' }, response.data.title);
+
+      render({ into: target_div },
+        div({ 'class': 'split-main' },
+          h2("Thanks for your contribution!"),
+          p("Your contribution of ", money(get_params().amount), " has been made to ", response.data.title, ".")
+        ),
+
+        div({ 'class': 'split-side' },
+          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
+            ribbon_header("Links"),
+            br(),
+            a({ 'class': 'green', href: '#fundraisers/'+fundraiser_id }, "Back to Fundraiser")
+          ),
+
+          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
+            ribbon_header('Share'),
+            br(),
+            facebook_share_pledge_button(get_params().amount, response.data),
+            div({ style: 'height: 20px;' }),
+            twitter_share_pledge_button(get_params().amount, response.data)
+          )
+        ),
+
+        div({ 'class': 'split-end' })
+      );
+    });
+  });
+
+  define('facebook_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
     return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_bounty_on_facebook_url(login, repository, issue_number, bounty_amount),'','width=680,height=350') } }, img({ src: 'images/share-button-facebook.png', style: 'border-radius: 3px;' }));
   });
 
-  define('twitter_share_button', function(login, repository, issue_number, bounty_amount) {
+  define('twitter_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
     return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_bounty_on_twitter_url(login, repository, issue_number, bounty_amount),'','width=680,height=350') } }, img({ src: 'images/share-button-twitter.png', style: 'border-radius: 3px;' }));
+  });
+
+  define('facebook_share_pledge_button', function(amount, fundraiser) {
+    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_pledge_on_facebook_url(amount, fundraiser),'','width=680,height=350') } }, img({ src: 'images/share-button-facebook.png', style: 'border-radius: 3px;' }));
+  });
+
+  define('twitter_share_pledge_button', function(amount, fundraiser) {
+    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_pledge_on_twitter_url(amount, fundraiser),'','width=680,height=350') } }, img({ src: 'images/share-button-twitter.png', style: 'border-radius: 3px;' }));
+  });
+
+  define("share_pledge_on_facebook_url", function(amount, fundraiser) {
+    return "https://www.facebook.com/dialog/feed?"
+      + "app_id="           + 280280945425178
+      + "&display="         + "popup"
+      + "&link="            + encode_html(BountySource.www_host+'#fundraisers/'+fundraiser.id)
+      + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
+      + "&name="            + "I pledged " + money(amount) + " to " + fundraiser.title + " through BountySource."
+      + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
+      + "&description="     + "Help fund this project, give back to Open Source!";
+  });
+
+  define('share_pledge_on_twitter_url', function(amount, fundraiser) {
+    return "https://twitter.com/share?"
+      + "url="    + encode_html(BountySource.www_host+'#fundraisers/'+fundraiser.id)
+      + "&text="  + "I pledged " + money(amount) + " to " + fundraiser.title + " through BountySource.";
   });
 
   define('share_bounty_on_facebook_url', function(login, repository, issue_number, amount) {
