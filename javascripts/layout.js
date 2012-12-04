@@ -136,6 +136,10 @@ with (scope('App')) {
     return pre({ 'class': 'code' }, args.join("\n"));
   });
 
+  define('percentage', function(value) {
+    return value+'%';
+  });
+
   define('error_message', function() {
     return message({ message_class: 'error-message', close_button: false }, arguments);
   });

@@ -13,6 +13,9 @@ with (scope('Fundraisers','App')) {
     );
 
     BountySource.get_fundraisers(function(response) {
+
+      console.log(response.data);
+
       if (response.data.length > 0) {
         render({ into: fundraisers_table },
           table(
@@ -29,7 +32,7 @@ with (scope('Fundraisers','App')) {
               return tr({ style: 'height: 40px;' },
                 td(a({ href: fundraiser_href }, abbreviated_text(fundraiser.title, 100))),
                 td(money(fundraiser.funding_goal || 0)),
-                td('<sick-ass-progress-bar />'),
+                td(fundraiser.published && percentage((fundraiser.total_pledged / fundraiser.funding_goal) * 100)),
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
                 td(fundraiser.published ? '' : a({ href: curry(destroy_fundraiser, fundraiser.id)}, 'delete'))
               );
