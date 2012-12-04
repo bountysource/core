@@ -211,4 +211,13 @@ with (scope('BountySource')) {
   define('pledge_to_fundraiser', function(fundraiser_id, data, callback) {
     api('/user/fundraisers/'+fundraiser_id+'/pay_in', 'POST', { amount: data.amount, payment_method: data.payment_method, redirect_url: data.redirect_url }, callback);
   });
+
+  define('get_more_cards', function(ignore, callback) {
+    api('/cards', 'GET', { ignore: ignore }, callback);
+  });
+
+  define('recent_people', function(callback) {
+    api('/user/recent', 'GET', callback);
+  });
+
 }

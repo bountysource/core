@@ -58,8 +58,14 @@ section#homepage { width: 978px; margin: 0 auto; }
 section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; }
 section#homepage .box .inner { padding: 20px }
 
-section#homepage .bigbox { background: #f2f3f2; }
-section#homepage .bigbox h1 { margin: 0; font-weight: normal; font-size: 21px; color: #333; font-style: italic; text-align: center }
+
+section#homepage .card-column { width: 233px; float: left; margin-right: 15px; }
+section#homepage .card-column img { max-width: 100% }
+section#homepage .card-column:last-child { margin-right: 0; }
+
+section#homepage .card { background: white; padding: 10px; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px; overflow: hidden }
+
+section#homepage h1 { margin: 30px 0 10px 0; font-weight: normal; font-size: 36px; color: #333; text-align: center; }
 
 section#homepage .h1-line { border-bottom: 2px solid #f87956; margin: 12px 20px 0; position: relative; }
 section#homepage .h1-line div { position: absolute;
