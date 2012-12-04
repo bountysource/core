@@ -14,40 +14,71 @@ with (scope('Contributions', 'App')) {
     );
 
     BountySource.user_info(function(response) {
-      var user_info = response.data;
+      var user_info = response.data,
+          all_contributions = flatten_to_array(user_info.bounties, user_info.pledges);
 
-      if (!user_info.bounties || user_info.bounties.length <= 0) {
+      console.log(user_info);
+
+      if (all_contributions.length <= 0) {
         render({ into: target_div },
           info_message("You have not created any bounties yet. ", a({ href: '#' }, "Search for something to back."))
         );
       } else {
         render({ into: target_div },
-          table(
-            tr(
-              th(),
-              th('Project'),
-              th({ style: 'width: 60px;' }, 'Issue'),
-              th({ style: 'width: 200px;' }),
-              th({ style: 'text-align: center;' }, 'Issue Status'),
-              th('Bounty Amount'),
-              th('Date')
-            ),
-
-            (user_info.bounties||[]).map(function(bounty) {
-              return tr({ style: 'height: 75px;' },
-                td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
-                  img({ src: bounty.repository.user.avatar_url, style: 'width: 50px;' })
+          (user_info.bounties.length > 0) && render({ into: target_div },
+            section({ id: 'bounties-table' },
+              h2("Bounties"),
+              table(
+                tr(
+                  th(),
+                  th('Project'),
+                  th({ style: 'width: 60px;' }, 'Issue'),
+                  th({ style: 'width: 200px;' }),
+                  th({ style: 'text-align: center;' }, 'Issue Status'),
+                  th('Bounty Amount'),
+                  th('Date')
                 ),
-                td(a({ href: Repository.get_href(bounty.issue.repository) }, bounty.repository.full_name)),
-                td(a({ href: Issue.get_href(bounty.issue) }, '#'+bounty.issue.number )),
-                td({ style: 'color: #888' }, bounty.issue.title),
-                td({ style: 'text-align: center;' }, Issue.status_element(bounty.issue)),
-                td(money(bounty.amount)),
-                td(date(bounty.created_at))
+
+                (user_info.bounties||[]).map(function(bounty) {
+                  return tr({ style: 'height: 75px;' },
+                    td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
+                      img({ src: bounty.repository.user.avatar_url, style: 'width: 50px;' })
+                    ),
+                    td(a({ href: Repository.get_href(bounty.issue.repository) }, bounty.repository.full_name)),
+                    td(a({ href: Issue.get_href(bounty.issue) }, '#'+bounty.issue.number )),
+                    td({ style: 'color: #888' }, bounty.issue.title),
+                    td({ style: 'text-align: center;' }, Issue.status_element(bounty.issue)),
+                    td(money(bounty.amount)),
+                    td(date(bounty.created_at))
+                  )
+                })
               )
-            })
+            )
+          ),
+
+          (user_info.pledges.length > 0) && section({ id: 'pledges-table' },
+            h2("Fundraiser Pledges"),
+            table(
+              tr(
+                th(),
+                th({ style: 'width: 300px;' }, 'Fundraiser'),
+                th('Pledge Amount'),
+                th('Date')
+              ),
+
+              user_info.pledges.map(function(pledge) {
+                return tr({ style: 'height: 75px;' },
+                  td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
+                    img({ src: pledge.fundraiser.avatar_url, style: 'width: 50px;' })
+                  ),
+                  td(a({ href: '#fundraisers/'+pledge.fundraiser.id }, pledge.fundraiser.title)),
+                  td(money(pledge.amount)),
+                  td(date(pledge.created_at))
+                )
+              })
+            )
           )
-        );
+        )
       }
     });
   });
