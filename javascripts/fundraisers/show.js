@@ -26,7 +26,7 @@ with (scope('Fundraisers')) {
     var fundraiser_div = div('Loading...');
     var target_div = div(
       breadcrumbs(
-        a({ href: '#' }, 'Home'),
+        'Home',
         'Fundraisers',
         span({ id: 'breadcrumbs-fundraiser-title' }, 'Loading...')
       ),
@@ -123,6 +123,28 @@ with (scope('Fundraisers')) {
               p({ style: 'white-space: pre-wrap; margin: 0;' }, fundraiser.about_me)
             )
           )
+        ),
+
+        br(),
+
+        section({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px;' },
+          (function() {
+            var elements = [], reward;
+            for (var i=0; i<fundraiser.rewards.length; i++) {
+              reward = fundraiser.rewards[i];
+              var element = div({ style: 'min-height: 100px; padding: 15px;' },
+                span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
+
+                // TODO show number remaining if quantity limited
+                (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.num_claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
+
+                p({ style: 'margin-left: 10px;' }, reward.description)
+              );
+              if (i < (fundraiser.rewards.length-1)) element.style['border-bottom'] = '2px dotted #C7C7C7';
+              elements.push(element);
+            }
+            return elements;
+          })()
         )
       ),
 
