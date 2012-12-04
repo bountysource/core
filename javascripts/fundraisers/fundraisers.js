@@ -13,9 +13,6 @@ with (scope('Fundraisers','App')) {
     );
 
     BountySource.get_fundraisers(function(response) {
-
-      console.log(response.data);
-
       if (response.data.length > 0) {
         render({ into: fundraisers_table },
           table(
