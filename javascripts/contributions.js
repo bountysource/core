@@ -159,7 +159,7 @@ with (scope('Contributions', 'App')) {
     );
   });
 
-  route('#fundraisers/:fundraiser_id/receipt', function(fundraiser_id) {
+  route('#fundraisers/:fundraiser_id/pledges/:pledge_id/receipt', function(fundraiser_id, pledge_id) {
     var target_div = div('Loading...');
 
     render(
@@ -172,13 +172,47 @@ with (scope('Contributions', 'App')) {
       target_div
     );
 
-    BountySource.get_fundraiser(fundraiser_id, function(response) {
-      render({ target: 'breadcrumbs-fundraiser-title' }, response.data.title);
+    BountySource.get_pledge(pledge_id, function(response) {
+      var pledge      = response.data,
+          fundraiser  = pledge.fundraiser;
+
+      console.log(pledge);
+
+      render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
-          h2("Thanks for your contribution!"),
-          p("Your contribution of ", money(get_params().amount), " has been made to ", response.data.title, ".")
+          h2("Thanks for your contribution"),
+          p("Your contribution of ", money(pledge.amount), " has been made to ", fundraiser.title, "."),
+
+          !(pledge.reward) && div(
+            h2("Select a reward"),
+            form({ 'class': 'fancy', action: curry(redeem_reward, pledge_id) },
+              messages(),
+
+              section({ id: 'pledge-receipt-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px;' },
+                (function() {
+                  var elements = [], reward;
+                  for (var i=0; i<fundraiser.rewards.length; i++) {
+                    reward = fundraiser.rewards[i];
+                    var element = div({ style: 'min-height: 100px; padding: 15px;' },
+                      radio({ name: 'reward', value: reward.id }), span({ style: 'font-size: 25px; margin-left: 15px;' }, 'Pledge ', money(reward.amount), ' +'),
+
+                      // TODO show number remaining if quantity limited
+                      (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.num_claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
+
+                      p({ style: 'margin-left: 10px;' }, reward.description)
+                    );
+                    if (i < (fundraiser.rewards.length-1)) element.style['border-bottom'] = '2px dotted #C7C7C7';
+                    elements.push(element);
+                  }
+                  return elements;
+                })()
+              ),
+
+              submit({ 'class': 'green' }, "Redeem Reward")
+            )
+          )
         ),
 
         div({ 'class': 'split-side' },
@@ -191,15 +225,27 @@ with (scope('Contributions', 'App')) {
           div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
             ribbon_header('Share'),
             br(),
-            facebook_share_pledge_button(get_params().amount, response.data),
+            facebook_share_pledge_button(pledge),
             div({ style: 'height: 20px;' }),
-            twitter_share_pledge_button(get_params().amount, response.data)
+            twitter_share_pledge_button(pledge)
           )
         ),
 
         div({ 'class': 'split-end' })
       );
     });
+  });
+
+  define('redeem_reward', function(pledge_id, form_data) {
+    if (confirm("Redeem reward?")) {
+      BountySource.redeem_reward(pledge_id, form_data.reward, function(response) {
+        if (response.meta.success) {
+          window.location.reload();
+        } else {
+          render_message(error_message(response.data.error));
+        }
+      });
+    }
   });
 
   define('facebook_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
@@ -210,29 +256,29 @@ with (scope('Contributions', 'App')) {
     return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_bounty_on_twitter_url(login, repository, issue_number, bounty_amount),'','width=680,height=350') } }, img({ src: 'images/share-button-twitter.png', style: 'border-radius: 3px;' }));
   });
 
-  define('facebook_share_pledge_button', function(amount, fundraiser) {
-    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_pledge_on_facebook_url(amount, fundraiser),'','width=680,height=350') } }, img({ src: 'images/share-button-facebook.png', style: 'border-radius: 3px;' }));
+  define('facebook_share_pledge_button', function(pledge) {
+    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_pledge_on_facebook_url(pledge),'','width=680,height=350') } }, img({ src: 'images/share-button-facebook.png', style: 'border-radius: 3px;' }));
   });
 
-  define('twitter_share_pledge_button', function(amount, fundraiser) {
-    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_pledge_on_twitter_url(amount, fundraiser),'','width=680,height=350') } }, img({ src: 'images/share-button-twitter.png', style: 'border-radius: 3px;' }));
+  define('twitter_share_pledge_button', function(pledge) {
+    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_pledge_on_twitter_url(pledge),'','width=680,height=350') } }, img({ src: 'images/share-button-twitter.png', style: 'border-radius: 3px;' }));
   });
 
-  define("share_pledge_on_facebook_url", function(amount, fundraiser) {
+  define("share_pledge_on_facebook_url", function(pledge) {
     return "https://www.facebook.com/dialog/feed?"
       + "app_id="           + 280280945425178
       + "&display="         + "popup"
-      + "&link="            + encode_html(BountySource.www_host+'#fundraisers/'+fundraiser.id)
+      + "&link="            + encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id)
       + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
-      + "&name="            + "I pledged " + money(amount) + " to " + fundraiser.title + " through BountySource."
+      + "&name="            + "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through BountySource."
       + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
       + "&description="     + "Help fund this project, give back to Open Source!";
   });
 
-  define('share_pledge_on_twitter_url', function(amount, fundraiser) {
+  define('share_pledge_on_twitter_url', function(pledge) {
     return "https://twitter.com/share?"
-      + "url="    + encode_html(BountySource.www_host+'#fundraisers/'+fundraiser.id)
-      + "&text="  + "I pledged " + money(amount) + " to " + fundraiser.title + " through BountySource.";
+      + "url="    + encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id)
+      + "&text="  + "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through BountySource.";
   });
 
   define('share_bounty_on_facebook_url', function(login, repository, issue_number, amount) {

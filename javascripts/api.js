@@ -220,4 +220,11 @@ with (scope('BountySource')) {
     api('/user/recent', 'GET', callback);
   });
 
+  define('get_pledge', function(pledge_id, callback) {
+    api('/user/pledges/'+pledge_id, callback);
+  });
+
+  define('redeem_reward', function(pledge_id, reward_id, callback) {
+    api('/user/pledges/'+pledge_id+'/redeem_reward', 'POST', { reward_id: reward_id }, callback);
+  });
 }
