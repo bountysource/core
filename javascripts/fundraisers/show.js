@@ -4,7 +4,7 @@ with (scope('Fundraisers')) {
     var target_div = div(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
-        a({ href: '#fundraisers' }, 'Fundraisers'),
+        'Fundraisers',
         span({ id: 'breadcrumbs-fundraiser-title' }, 'Loading...')
       ),
       fundraiser_div
