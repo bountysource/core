@@ -115,7 +115,10 @@ with (scope('Home', 'App')) {
       div(a({ href: card.href }, card.title)),
       
       p({ style: 'color: #999; font-size: 90%' }, card.description),
-      div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
+
+      a({ href: card.href, style: 'text-decoration: none; color: black;' },
+        div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
+      )
     );
   });
 
