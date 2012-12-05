@@ -184,7 +184,7 @@ with (scope('Contributions', 'App')) {
           p("Your contribution of ", money(pledge.amount), " has been made to ", fundraiser.title, "."),
 
           // ternary hell. if rewards disabled, show nothing. if reward claimed, show it, else show selection form
-          (pledge.fundraiser.rewards.length > 0 &&) && (pledge.reward) ? div(
+          (pledge.fundraiser.rewards.length > 0) && (pledge.reward) ? div(
             h2("Selected Reward"),
             p("You selected the reward \"", pledge.reward.description ,"\"")
           ) : div(
