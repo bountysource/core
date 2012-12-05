@@ -117,7 +117,7 @@ with (scope('Home', 'App')) {
       p({ style: 'color: #999; font-size: 90%' }, card.description),
 
       a({ href: card.href, style: 'text-decoration: none; color: black;' },
-        div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
+        div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0; line-height: 25px;" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
       )
     );
   });
