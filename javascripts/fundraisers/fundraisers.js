@@ -38,7 +38,7 @@ with (scope('Fundraisers','App')) {
         );
       } else {
         render({ into: fundraisers_table },
-          info_message("You don't have any fundraiser drafts saved. ", a({ href: '#account/fundraisers/create' }, "Create one now"))
+          info_message("You don't have any fundraiser drafts saved. ", a({ href: '#account/create_fundraiser' }, "Create one now"))
         );
       }
     });
