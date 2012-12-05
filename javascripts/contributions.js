@@ -174,7 +174,8 @@ with (scope('Contributions', 'App')) {
 
     BountySource.get_pledge(pledge_id, function(response) {
       var pledge      = response.data,
-          fundraiser  = pledge.fundraiser;
+          fundraiser  = pledge.fundraiser,
+          rewards_div = div();
 
       render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
@@ -184,7 +185,31 @@ with (scope('Contributions', 'App')) {
           p("Your contribution of ", money(pledge.amount), " has been made to ", fundraiser.title, "."),
 
           // ternary hell. if rewards disabled, show nothing. if reward claimed, show it, else show selection form
-          (pledge.fundraiser.rewards.length > 0) && (pledge.reward) ? div(
+          rewards_div
+        ),
+
+        div({ 'class': 'split-side' },
+          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
+            ribbon_header("Links"),
+            br(),
+            a({ 'class': 'green', href: '#fundraisers/'+fundraiser_id }, "Back to Fundraiser")
+          ),
+
+          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
+            ribbon_header('Share'),
+            br(),
+            facebook_share_pledge_button(pledge),
+            div({ style: 'height: 20px;' }),
+            twitter_share_pledge_button(pledge)
+          )
+        ),
+
+        div({ 'class': 'split-end' })
+      );
+
+      if (fundraiser.rewards.length > 0) {
+        render({ into: rewards_div },
+          (pledge.reward) ? div(
             h2("Selected Reward"),
             p("You selected the reward \"", pledge.reward.description ,"\"")
           ) : div(
@@ -215,26 +240,8 @@ with (scope('Contributions', 'App')) {
               submit({ 'class': 'green' }, "Redeem Reward")
             )
           )
-        ),
-
-        div({ 'class': 'split-side' },
-          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
-            ribbon_header("Links"),
-            br(),
-            a({ 'class': 'green', href: '#fundraisers/'+fundraiser_id }, "Back to Fundraiser")
-          ),
-
-          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
-            ribbon_header('Share'),
-            br(),
-            facebook_share_pledge_button(pledge),
-            div({ style: 'height: 20px;' }),
-            twitter_share_pledge_button(pledge)
-          )
-        ),
-
-        div({ 'class': 'split-end' })
-      );
+        );
+      }
     });
   });
 
