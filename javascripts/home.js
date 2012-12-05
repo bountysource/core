@@ -112,7 +112,7 @@ with (scope('Home', 'App')) {
       div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, card.repository && card.repository.display_name),
       div({ style: 'clear: both' }),
       
-      div(a({ href: (card.funding_goal ? '#'+card.id : '#repos/' + card.repository.full_name + '/issues/' + card.id.split('/')[3] )}, card.title)),
+      div(a({ href: card.href }, card.title)),
       
       p({ style: 'color: #999; font-size: 90%' }, card.description),
       div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
