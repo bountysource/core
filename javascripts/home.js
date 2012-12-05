@@ -113,7 +113,7 @@ with (scope('Home', 'App')) {
         div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name))
       ] : [
         a({ href: card.href }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-        div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.href, style: 'color: #333' }, 'Fundraiser'))
+        div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: card.href, style: 'color: #333' }, 'Fundraiser'))
       ],
       div({ style: 'clear: both' }),
       
