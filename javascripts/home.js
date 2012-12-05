@@ -31,8 +31,8 @@ with (scope('Home', 'App')) {
     BountySource.recent_people(function(response) {
       render({ into: recent_people_div },
         response.data.map(function(person) {
-          return div({ style: 'float: left; width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin-right: 5px; overflow: hidden; box-shadow: 0 0 4px #aaa;' }, 
-            img({ style: 'width: 50px; height: 50px', src: person.avatar_url })
+          return div({ 'class': 'recent_signups' },
+            img({ src: person.avatar_url })
           );
         }),
         

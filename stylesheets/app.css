@@ -59,6 +59,9 @@ section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #c
 section#homepage .box .inner { padding: 20px }
 
 
+section#homepage .recent_signups { float: left; width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin: 3px; overflow: hidden; box-shadow: 0 0 4px #aaa; }
+section#homepage .recent_signups img { width: 50px; height: 50px }
+
 section#homepage .card-column { width: 233px; float: left; margin-right: 15px; }
 section#homepage .card-column img { max-width: 100% }
 section#homepage .card-column:last-child { margin-right: 0; }
