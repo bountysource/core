@@ -176,8 +176,6 @@ with (scope('Contributions', 'App')) {
       var pledge      = response.data,
           fundraiser  = pledge.fundraiser;
 
-      console.log(pledge);
-
       render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
       render({ into: target_div },
@@ -185,7 +183,8 @@ with (scope('Contributions', 'App')) {
           h2("Thanks for your contribution"),
           p("Your contribution of ", money(pledge.amount), " has been made to ", fundraiser.title, "."),
 
-          (pledge.reward) ? div(
+          // ternary hell. if rewards disabled, show nothing. if reward claimed, show it, else show selection form
+          (pledge.fundraiser.rewards.length > 0 &&) && (pledge.reward) ? div(
             h2("Selected Reward"),
             p("You selected the reward \"", pledge.reward.description ,"\"")
           ) : div(
