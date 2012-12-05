@@ -112,7 +112,7 @@ with (scope('Payout','IssueBranch')) {
     IssueBranch.require_accepted_solution(login, repository, issue_number, target_div, function(solution, user_info) {
       var bounty_source_tax = parseFloat(solution.bounty_source_tax),
           project_tax = parseFloat(solution.issue.repository.project_tax),
-          bounty_total = parseFloat(solution.issue.bounty_amount);
+          bounty_total = parseFloat(solution.issue.bounty_total);
 
       // subtract the bountysource tax from bounty_total
       bounty_total -= (bounty_source_tax * bounty_total);

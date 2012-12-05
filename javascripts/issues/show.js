@@ -83,8 +83,8 @@ with (scope('Issue', 'App')) {
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
-      issue.bounty_amount > 0 && section(
-        div({ 'class': 'total_bounties' }, money(issue.bounty_amount)),
+      issue.bounty_total > 0 && section(
+        div({ 'class': 'total_bounties' }, money(issue.bounty_total)),
         div({ style: 'text-align: center' }, "From ", issue.bounties.length, " bount" + (issue.bounties.length == 1 ? 'y' : 'ies') + ".")
       ),
       payment_box_div
