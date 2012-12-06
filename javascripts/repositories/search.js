@@ -30,7 +30,7 @@ with (scope('Repository', 'App')) {
           (repositories||[]).map(function(repo) {
             return tr(
               td(a({ href: Repository.get_href(repo) }, img({ src: repo.user.avatar_url, style: 'width: 30px; border-radius: 3px; margin: 0 5px;' }))),
-              td({ style: 'width: 200px' }, a({ href: Repository.get_href(repo) }, repo.owner+'/'+repo.name)),
+              td({ style: 'width: 200px' }, a({ href: Repository.get_href(repo) }, repo.owner.login+'/'+repo.name)),
               td(money(repo.bounty_total)),
               td(formatted_number(repo.followers)),
               td(formatted_number(repo.forks)),
