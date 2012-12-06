@@ -141,7 +141,7 @@ with (scope('BountySource')) {
         var forked_repository = response.data;
 
         var check_repository = function() {
-          BountySource.get_repository(forked_repository.owner, forked_repository.name, function(response) {
+          BountySource.get_repository(forked_repository.owner.login, forked_repository.name, function(response) {
             if (response.meta.success) {
               // now we can create the branch, and Solution model
               api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solution', 'POST', { branch_name: branch_name }, callback);

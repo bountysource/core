@@ -111,7 +111,7 @@ with (scope('Issue', 'App')) {
           IssueBranch.get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution) {
             if (solution) {
               render({ into: developer_div },
-                a({ 'class': 'green', href: '#repos/'+issue.repository.owner+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
+                a({ 'class': 'green', href: '#repos/'+issue.repository.owner.login+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
               );
             } else {
               var advanced_box = div({ id: 'advanced-developer-box', style: "margin: 10px 0; display: none"},
@@ -119,7 +119,7 @@ with (scope('Issue', 'App')) {
               );
 
               render({ into: developer_div },
-                form({ action: curry(create_solution, issue.repository.owner, issue.repository.name, issue.number) },
+                form({ action: curry(create_solution, issue.repository.owner.login, issue.repository.name, issue.number) },
                   div('This will create a branch in GitHub for you to solve this issue.'),
                   advanced_box,
                   br(),
