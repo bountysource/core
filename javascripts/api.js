@@ -46,7 +46,7 @@ with (scope('BountySource')) {
 
   define('logout', function() {
     Storage.clear({ except: ['environment'] });
-    set_route('#', { reload_page: true });
+    window.location.reload();
   });
 
   define('user_info', function(callback) {
@@ -208,7 +208,7 @@ with (scope('BountySource')) {
     api('/user/fundraisers/'+id, 'DELETE', callback);
   });
 
-  define('pledge_to_fundraiser', function(fundraiser_id, data, callback) {
+  define('make_pledge', function(fundraiser_id, data, callback) {
     api('/user/fundraisers/'+fundraiser_id+'/pay_in', 'POST', { amount: data.amount, payment_method: data.payment_method, redirect_url: data.redirect_url }, callback);
   });
 

@@ -1,11 +1,11 @@
 with (scope('App')) {
-  // End point for Github login.
-  route ('#login/:access_token', function(access_token) {
-    Storage.set('access_token',access_token);
-    BountySource.basic_user_info(function(response) {
-      if (response.meta.success) BountySource.set_cached_user_info(response.data);
-      redirect_to_saved_route();
-    });
+  // if access token passed as query param, use it to log in
+  before_filter(function() {
+    var params = get_params();
+    if (params.access_token) {
+      Storage.set('access_token', params.access_token);
+      window.location = window.location.href.split('?')[0];
+    }
   });
 
   define('time_ago_in_words', function(time) {

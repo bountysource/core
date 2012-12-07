@@ -79,7 +79,6 @@ with (scope('Issue', 'App')) {
   });
   
   define('bounty_box', function(issue) {
-    var payment_box_div = Payment.payment_box('Bounty', issue.repository, issue.number, window.location.href+'/contributions/receipt');
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
@@ -87,7 +86,7 @@ with (scope('Issue', 'App')) {
         div({ 'class': 'total_bounties' }, money(issue.bounty_total)),
         div({ style: 'text-align: center' }, "From ", issue.bounties.length, " bount" + (issue.bounties.length == 1 ? 'y' : 'ies') + ".")
       ),
-      payment_box_div
+      Payment.payment_box('Bounty', issue.repository, issue.number, window.location.href+'/bounties/:bounty_id/receipt')
     );
   });
   

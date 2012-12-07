@@ -83,31 +83,8 @@ with (scope('Contributions', 'App')) {
     });
   });
 
-  route('#repos/:login/:repository/issues/:issue_number/contributions/receipt', function(login, repository, issue_number) {
-    var github_comment_div = div(),
-        bounty_amount = parseInt(get_params().amount);
-
-    // render a comment submit form, or a GitHub account link button
-    if (Github.account_linked()) {
-      render({ into: github_comment_div },
-        form({ style: 'width: 650px;', action: curry(post_github_comment, login, repository, issue_number) },
-          messages(),
-
-          fieldset(
-            textarea({ 'class': 'fancy', name: 'body', style: 'width: 100%; height: 150px;' }, "Working on a solution? \n\nA $"+bounty_amount+" bounty has been placed on it at [BountySource](https://www.bountysource.com), and you can earn it by having your pull request merged. " + BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
-          ),
-          fieldset(
-            submit({ 'class': 'green', style: 'width: 230px; margin-top: 15px;' }, 'Comment on GitHub Issue')
-          )
-        )
-      );
-    } else {
-      render({ into: github_comment_div },
-        p("You need to have a GitHub account first."),
-        // link GitHub account, and redirect here afterward.
-        Github.link_requiring_auth({ 'class': 'blue', style: 'width: 250px;', href: get_route() }, 'Link Your GitHub Account')
-      )
-    }
+  route('#repos/:login/:repository/issues/:issue_number/bounties/:bounty_id/receipt', function(login, repository, issue_number, bounty_id) {
+    var target_div = div('Loading...');
 
     render(
       breadcrumbs(
@@ -117,46 +94,76 @@ with (scope('Contributions', 'App')) {
         a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, '#' + issue_number),
         'Bounty Receipt'
       ),
-
-      div({ 'class': 'split-main'},
-        h2("Your Bounty Has Been Posted"),
-        p("A couple of things you should know:"),
-        ul(
-          li("Every bounty has a six-month limit. We'll refund you if this issue isn't closed by then."),
-          li("We'll keep you posted on the status of this issue via email, but you can check its issue page at any time too."),
-          li("Once an issue is closed, you will have two weeks to verify the solution and file a dispute if necessary.")
-        ),
-        p("More questions? ", a({ href: '#faq' }, 'Consult the FAQ'), ", ", a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'email us'), ", or ", a({ href: 'irc://irc.freenode.net/bountysource' }, 'message us via IRC'), "."),
-        p("Thank you for supporting open-source software!"),
-
-        br(),
-
-        h2("Spread The Word!"),
-        p("Encourage developers to start working on a solution, and encourage other backers to create bounties on the same issue."),
-
-        github_comment_div
-      ),
-
-      div({ 'class': 'split-side'},
-        div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
-          ribbon_header("Links"),
-          br(),
-          a({ 'class': 'blue', href: '#repos/'+login+'/'+repository }, "Back to Project"), br(),
-          a({ 'class': 'blue', href: '#repos/'+login+'/'+repository+'/issues/'+issue_number }, "Back to Issue #"+issue_number)
-        ),
-
-
-        div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
-          ribbon_header('Share'),
-          br(),
-          facebook_share_bounty_button(login, repository, issue_number, bounty_amount),
-          div({ style: 'height: 20px;' }),
-          twitter_share_bounty_button(login, repository, issue_number, bounty_amount)
-        )
-      ),
-
-      div({ 'class': 'split-end'})
+      target_div
     );
+
+    BountySource.get_bounty(bounty_id, function(response) {
+      var github_comment_div  = div(),
+          bounty              = response.data;
+
+      // render a comment submit form, or a GitHub account link button
+      if (Github.account_linked()) {
+        render({ into: github_comment_div },
+          form({ style: 'width: 650px;', action: curry(post_github_comment, login, repository, issue_number) },
+            messages(),
+
+            fieldset(
+              textarea({ 'class': 'fancy', name: 'body', style: 'width: 100%; height: 150px;' }, "Working on a solution? \n\nA "+money(bounty.amount)+" bounty has been placed on it at [BountySource](https://www.bountysource.com), and you can earn it by having your pull request merged. " + BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
+            ),
+            fieldset(
+              submit({ 'class': 'green', style: 'width: 230px; margin-top: 15px;' }, 'Comment on GitHub Issue')
+            )
+          )
+        );
+      } else {
+        render({ into: github_comment_div },
+          p("You need to have a GitHub account first."),
+          // link GitHub account, and redirect here afterward.
+          a({ 'class': 'blue', style: 'width: 250px;', href: Github.auth_url() }, 'Link Your GitHub Account')
+        )
+      }
+
+      render({ into: target_div },
+        div({ 'class': 'split-main'},
+          h2("Your Bounty Has Been Posted"),
+          p("A couple of things you should know:"),
+          ul(
+            li("Every bounty has a six-month limit. We'll refund you if this issue isn't closed by then."),
+            li("We'll keep you posted on the status of this issue via email, but you can check its issue page at any time too."),
+            li("Once an issue is closed, you will have two weeks to verify the solution and file a dispute if necessary.")
+          ),
+          p("More questions? ", a({ href: '#faq' }, 'Consult the FAQ'), ", ", a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'email us'), ", or ", a({ href: 'irc://irc.freenode.net/bountysource' }, 'message us via IRC'), "."),
+          p("Thank you for supporting open-source software!"),
+
+          br(),
+
+          h2("Spread The Word!"),
+          p("Encourage developers to start working on a solution, and encourage other backers to create bounties on the same issue."),
+
+          github_comment_div
+        ),
+
+        div({ 'class': 'split-side'},
+          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
+            ribbon_header("Links"),
+            br(),
+            a({ 'class': 'blue', href: '#repos/'+login+'/'+repository }, "Back to Project"), br(),
+            a({ 'class': 'blue', href: '#repos/'+login+'/'+repository+'/issues/'+issue_number }, "Back to Issue #"+issue_number)
+          ),
+
+
+          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
+            ribbon_header('Share'),
+            br(),
+            facebook_share_bounty_button(login, repository, issue_number, bounty.amount),
+            div({ style: 'height: 20px;' }),
+            twitter_share_bounty_button(login, repository, issue_number, bounty.amount)
+          )
+        ),
+
+        div({ 'class': 'split-end'})
+      );
+    });
   });
 
   route('#fundraisers/:fundraiser_id/pledges/:pledge_id/receipt', function(fundraiser_id, pledge_id) {

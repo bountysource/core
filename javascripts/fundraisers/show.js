@@ -269,7 +269,10 @@ with (scope('Fundraisers')) {
   });
 
   define('make_pledge', function(fundraiser_id, form_data) {
-    BountySource.pledge_to_fundraiser(fundraiser_id, form_data, function(response) {
+    // build the redirect_url, with pledge_id placeholder
+    form_data.redirect_url = form_data.redirect_url || BountySource.www_host+'#fundraisers/'+fundraiser_id+'/pledges/:pledge_id/receipt';
+
+    BountySource.make_pledge(fundraiser_id, form_data, function(response) {
       if (response.meta.success) {
         if (form_data.payment_method == 'personal') BountySource.set_cached_user_info(null);
         window.location.href = response.data.redirect_url;

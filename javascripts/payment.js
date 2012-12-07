@@ -50,14 +50,10 @@ with (scope('Payment', 'App')) {
 
     BountySource.make_payment(item, repository.full_name, issue_number, amount, payment_method, redirect_url, function(response) {
       if (response.meta.success) {
-        if (!logged_in()) {
-          // save the route to redirect to after account creation/login
-          save_route_for_redirect(response.data.redirect_url);
-          set_route('#create_account');
-        } else {
-          if (payment_method == 'personal') BountySource.set_cached_user_info(null);
-          window.location.href = response.data.redirect_url;
-        }
+        if (payment_method == 'personal') BountySource.set_cached_user_info(null);
+
+        // redirect to Paypal, Google Checkout
+        window.location.href = response.data.redirect_url;
       } else {
         render({ target: 'create-bounty-errors' }, error_message(response.data.error));
       }
