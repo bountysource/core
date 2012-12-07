@@ -17,8 +17,6 @@ with (scope('Contributions', 'App')) {
       var user_info = response.data,
           all_contributions = flatten_to_array(user_info.bounties, user_info.pledges);
 
-      console.log(user_info);
-
       if (all_contributions.length <= 0) {
         render({ into: target_div },
           info_message("You have not created any bounties yet. ", a({ href: '#' }, "Search for something to back."))
@@ -39,7 +37,7 @@ with (scope('Contributions', 'App')) {
                   th('Date')
                 ),
 
-                (user_info.bounties||[]).map(function(bounty) {
+                (user_info.bounties).map(function(bounty) {
                   return tr({ style: 'height: 75px;' },
                     td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                       img({ src: bounty.repository.user.avatar_url, style: 'width: 50px;' })
@@ -100,6 +98,8 @@ with (scope('Contributions', 'App')) {
     BountySource.get_bounty(bounty_id, function(response) {
       var github_comment_div  = div(),
           bounty              = response.data;
+
+      if (!response.meta.success) return set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
 
       // render a comment submit form, or a GitHub account link button
       if (Github.account_linked()) {
