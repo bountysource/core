@@ -303,7 +303,7 @@ with (scope('Contributions', 'App')) {
       + "&display="         + "popup"
       + "&link="            + encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
       + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
-      + "&name="            + "I placed a $"+amount+" bounty on this issue at BountySource."
+      + "&name="            + "I placed a "+money(amount)+" bounty on this issue at BountySource."
       + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
       + "&description="     + "Working on a solution? A bounty has been placed on it at BountySource, and you can earn it by having your pull request merged.";
   });
@@ -311,7 +311,7 @@ with (scope('Contributions', 'App')) {
   define('share_bounty_on_twitter_url', function(login, repository, issue_number, amount) {
     return "https://twitter.com/share?"
       + "url="    + encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
-      + "&text="  + "I placed a $"+amount+" bounty on this issue at @BountySource.";
+      + "&text="  + "I placed a "+money(amount)+" bounty on this issue at @BountySource.";
   });
 
   define('post_github_comment', function(login, repository, issue_number, form_data) {
