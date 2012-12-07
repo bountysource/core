@@ -66,7 +66,8 @@ section#homepage .card-column { width: 233px; float: left; margin-right: 15px; }
 section#homepage .card-column img { max-width: 100% }
 section#homepage .card-column:last-child { margin-right: 0; }
 
-section#homepage .card { background: white; padding: 10px; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px; overflow: hidden }
+section#homepage .card { background: white; padding: 10px; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px; }
+section#homepage .card .inner { overflow: hidden }
 
 section#homepage h1 { margin: 30px 0 10px 0; font-weight: normal; font-size: 36px; color: #333; text-align: center; }
 

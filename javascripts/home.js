@@ -108,21 +108,23 @@ with (scope('Home', 'App')) {
   
   define('card_div', function(card) {
     return div({ 'class': 'card' },
-      card.repository ? [
-        a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-        div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name))
-      ] : [
-        a({ href: card.href }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-        div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: card.href, style: 'color: #333' }, 'Fundraiser'))
-      ],
-      div({ style: 'clear: both' }),
+      div({ 'class': 'inner' },
+        card.repository ? [
+          a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
+          div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name))
+        ] : [
+          a({ href: card.href }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
+          div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: card.href, style: 'color: #333' }, 'Fundraiser'))
+        ],
+        div({ style: 'clear: both' }),
       
-      div(a({ href: card.href }, card.title)),
+        div(a({ href: card.href }, card.title)),
       
-      p({ style: 'color: #999; font-size: 90%' }, card.description),
+        p({ style: 'color: #999; font-size: 90%' }, card.description),
 
-      a({ href: card.href, style: 'text-decoration: none; color: black;' },
-        div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0; line-height: 25px;" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
+        a({ href: card.href, style: 'text-decoration: none; color: black;' },
+          div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0; line-height: 25px;" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
+        )
       )
     );
   });
