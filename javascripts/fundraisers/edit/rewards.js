@@ -14,7 +14,7 @@ with (scope('Fundraisers')) {
             ),
             fieldset(
               label('Quantity:'),
-              span({ id: 'limited_to' }, formatted_number(reward_data.limited_to))
+              span({ id: 'limited_to' }, reward_data.limited_to ? formatted_number(reward_data.limited_to) : '')
             )
           )
         ),
@@ -33,7 +33,7 @@ with (scope('Fundraisers')) {
     var t           = Teddy.snuggle('rewards-table'),
       spans         = t.at(reward_row_id).getElementsByTagName('span'),
       amount        = parseInt((spans[0].innerText).match(/\$(\d+)/)[1]),
-      limited_to    = parseInt(spans[1].innerText),
+      limited_to    = parseInt(spans[1].innerText)||'',
       description   = spans[2].innerText;
 
     t.at(reward_row_id).replace({ id: reward_row_id, 'class': 'editable', style: 'height: 230px;' },
