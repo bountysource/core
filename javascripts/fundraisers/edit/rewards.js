@@ -19,7 +19,7 @@ with (scope('Fundraisers')) {
           )
         ),
         div({ id: 'description-wrapper' },
-          span({ id: 'description', style: 'white-space: pre-wrap; color: #aaa;' }, reward_data.description)
+          span({ id: 'description', style: 'white-space: pre-wrap;' }, reward_data.description)
         )
       ),
       td({ style: 'text-align: center; width: 100px;' },
