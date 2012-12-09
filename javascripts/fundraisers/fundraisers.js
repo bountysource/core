@@ -189,7 +189,7 @@ with (scope('Fundraisers','App')) {
             div({ style: 'padding: 20px 10px; background: #eee;' },
               fieldset(
                 label('Funding Goal:'),
-                span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000', value: fundraiser.funding_goal||'' })
+                span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000', value: formatted_number(fundraiser.funding_goal||'') })
               ),
               fieldset(
                 label('Payout Method:'),
