@@ -137,7 +137,8 @@ with (scope('App')) {
   });
 
   define('percentage', function(value) {
-    return value+'%';
+    var parts = parseFloat(value.toString()).toString().split('.');
+    return parts[0] + '.' + ((parts[1]||'') + '00').substr(0,2) + '%';
   });
 
   define('error_message', function() {
