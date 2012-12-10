@@ -17,15 +17,19 @@ with (scope('Issue', 'App')) {
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
 
+      // TODO remove debuggerage --- CAB
+      issue.closed = true;
+
       render({ into: target_div },
         div({ 'class': 'split-main' },
 
           // used to render messages into
           messages(),
 
-          // title of issue, with closed or open notification
+          // title of issue, with closed or open notification.
+          // if issue is closed, add line-through
           h1({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 
-            '#' + issue.number + ': ' + issue.title,
+            span({ style: issue.closed ? 'text-decoration: line-through;' : '' }, '#' + issue.number + ': ' + issue.title),
             div({ style: 'padding-left: 20px; display: inline-block;' }, Issue.status_element(issue))
           ),
           
