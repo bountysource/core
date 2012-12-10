@@ -95,11 +95,14 @@ with (scope('Contributions', 'App')) {
       target_div
     );
 
+    // if the bounty ID was not subbed into the URL, just go view the issue.
+    // This will happen on Paypal cancel.
+    if (/:bounty_id/.test(bounty_id)) return set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
+
+
     BountySource.get_bounty(bounty_id, function(response) {
       var github_comment_div  = div(),
           bounty              = response.data;
-
-      if (!response.meta.success) return set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
 
       // render a comment submit form, or a GitHub account link button
       if (Github.account_linked()) {
@@ -178,6 +181,10 @@ with (scope('Contributions', 'App')) {
       ),
       target_div
     );
+
+    // if the pledge ID was not subbed into the URL, just go view the issue.
+    // This will happen on Paypal cancel.
+    if (/:pledge_id/.test(pledge_id)) return set_route('#fundraisers/'+fundraiser_id);
 
     BountySource.get_pledge(pledge_id, function(response) {
       var pledge      = response.data,
