@@ -293,7 +293,7 @@ with (scope('Contributions', 'App')) {
       + "&display="         + "popup"
       + "&link="            + encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id)
       + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
-      + "&name="            + "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through BountySource."
+      + "&name="            + "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through @BountySource."
       + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
       + "&description="     + "Help fund this project, give back to Open Source!";
   });
@@ -301,7 +301,7 @@ with (scope('Contributions', 'App')) {
   define('share_pledge_on_twitter_url', function(pledge) {
     return "https://twitter.com/share?"
       + "url="    + encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id)
-      + "&text="  + "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through BountySource.";
+      + "&text="  + "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through @BountySource.";
   });
 
   define('share_bounty_on_facebook_url', function(login, repository, issue_number, amount) {
