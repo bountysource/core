@@ -5,7 +5,9 @@ with (scope('App')) {
     if (params.access_token) {
       Storage.set('access_token', params.access_token);
       BountySource.set_cached_user_info(null);
-      window.location = window.location.href.split('?')[0];
+
+      // strip off query
+      window.location.href = window.location.href.split('?')[0];
     }
   });
 
