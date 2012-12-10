@@ -17,9 +17,6 @@ with (scope('Issue', 'App')) {
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
 
-      // TODO remove debuggerage --- CAB
-      issue.closed = true;
-
       render({ into: target_div },
         div({ 'class': 'split-main' },
 
