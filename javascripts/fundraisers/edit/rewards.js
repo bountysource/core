@@ -104,13 +104,10 @@ with (scope('Fundraisers')) {
       render_message(small_error_message("Amount is invalid."));
     } else if (parseInt(reward_data.amount) <= 0) {
       render_message(small_error_message("Amount must be $1 or more."))
-    } else if ((reward_data.limited_to && !isNaN(reward_data.limited_to))) {
-      if (isNaN(reward_data.limited_to)) {
-        render_message(small_error_message("Quantity is invalid."));
-      } else if (parseInt(reward_data.limited_to) <= 0) {
-        render_message(small_error_message("If specifying a quantity, must be 1 or more."));
-      }
-
+    } else if ((reward_data.limited_to && !isNaN(reward_data.limited_to)) && isNaN(reward_data.limited_to)) {
+      render_message(small_error_message("Quantity is invalid."));
+    } else if ((reward_data.limited_to && !isNaN(reward_data.limited_to)) && parseInt(reward_data.limited_to) <= 0) {
+      render_message(small_error_message("If specifying a quantity, must be 1 or more."));
     } else {
       var t = Teddy.snuggle('rewards-table');
       t.at('reward-inputs').insert(reward_row_elements(generate_reward_row_id(), reward_data));
