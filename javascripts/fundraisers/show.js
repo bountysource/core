@@ -127,6 +127,7 @@ with (scope('Fundraisers')) {
 
         br(),
 
+        fundraiser.rewards && h2({ style: 'text-align: center;' },'Rewards'),
         section({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px;' },
           (function() {
             var elements = [], reward;
