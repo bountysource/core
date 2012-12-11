@@ -42,7 +42,7 @@ with (scope('Profile','App')) {
               ul(
                 profile.bounties.map(function(bounty) {
                   return li(
-                    a({ href: '#github/'+bounty.issue.repository.full_name+'/issues/'+bounty.issue.number }, abbreviated_text(bounty.issue.title, 120))
+                    a({ href: '#repos/'+bounty.issue.repository.full_name+'/issues/'+bounty.issue.number }, abbreviated_text(bounty.issue.title, 120))
                   )
                 })
               )
