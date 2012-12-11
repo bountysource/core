@@ -105,7 +105,9 @@ with (scope('Fundraisers')) {
 
         section({ id: 'fundraiser-about-me', style: 'background: #D2F8D2; padding: 15px; margin: 10px 0; border-radius: 3px;' },
           div({ style: 'margin-bottom: 5px;' },
-            div({ style: 'text-align: left; display: inline-block' }, img({ src: fundraiser.person.avatar_url, style: 'width: 70px; border-radius: 3px;' })),
+            div({ style: 'text-align: left; display: inline-block' },
+              a({ href: '#users/'+fundraiser.person.display_name }, img({ src: fundraiser.person.avatar_url, style: 'width: 70px; border-radius: 3px;' }))
+            ),
             div({ style: 'display: inline-block; vertical-align: top; margin-left: 10px;' },
               span({ style: 'font-size: 14px; color: gray;'}, 'Project by'), br(),
               span(fundraiser.person.display_name)
