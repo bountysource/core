@@ -61,7 +61,7 @@ with (scope('Fundraisers')) {
       div({ 'class': 'split-main' },
         section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 25px; text-align: center; color: #5e5f5f;' },
           h1({ style: 'font-size: 45px; font-weight: normal; margin: 25px auto;' }, fundraiser.title),
-          span({ style: 'font-size: 16px; margin-bottom: 35px;' }, 'by ', fundraiser.person.display_name)
+          span({ style: 'font-size: 16px; margin-bottom: 35px;' }, 'by ', a({ href: '#users/'+fundraiser.person.display_name }, fundraiser.person.display_name))
         ),
 
         fundraiser.image_url && section({ id: 'fundraiser-image', style: 'border-bottom: 2px dotted #C7C7C7; text-align: center;' },
@@ -110,7 +110,7 @@ with (scope('Fundraisers')) {
             ),
             div({ style: 'display: inline-block; vertical-align: top; margin-left: 10px;' },
               span({ style: 'font-size: 14px; color: gray;'}, 'Project by'), br(),
-              span(fundraiser.person.display_name)
+              a({ href: '#users/'+fundraiser.person.display_name }, fundraiser.person.display_name)
             )
           ),
 
