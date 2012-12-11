@@ -18,7 +18,8 @@ with (scope('Home', 'App')) {
           div({ 'class': 'card-column' }),
           div({ 'class': 'card-column' })
         ),
-        div({ style: 'clear: both' })
+        div({ style: 'clear: both' }),
+        div({ id: 'card-loader-div' }, 'Loading...')
       )
     );
 
@@ -85,6 +86,8 @@ with (scope('Home', 'App')) {
   define('add_more_cards', function() {
     if (!page_state.can_load_more_cards) return;
 
+    show('card-loader-div');
+
     page_state.can_load_more_cards = false;
     BountySource.get_more_cards(page_state.current_cards, function(response) {
       var col_container = document.getElementById('column-container');
@@ -100,6 +103,8 @@ with (scope('Home', 'App')) {
 
         target.appendChild(card_div(card));
       }
+
+      hide('card-loader-div');
 
       // if we didn't get a full response, give up
       if (response.data.length == 50) page_state.can_load_more_cards = true;

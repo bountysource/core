@@ -68,6 +68,7 @@ section#homepage .card-column:last-child { margin-right: 0; }
 
 section#homepage .card { background: white; padding: 10px; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px; }
 section#homepage .card .inner { overflow: hidden }
+section#homepage #card-loader-div { background: white; padding: 20px 0; margin: 20px 0; box-shadow: 0 0 5px #ccc8be; font-size: 20px; text-align: center; color: #aaa; font-style: italic }
 
 section#homepage h1 { margin: 30px 0 10px 0; font-weight: normal; font-size: 36px; color: #333; text-align: center; }
 
