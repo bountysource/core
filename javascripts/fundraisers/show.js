@@ -57,7 +57,9 @@ with (scope('Fundraisers')) {
     // add the title to the already present header element
     render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
-    return section({ id: 'fundraiser-wrapper' },
+    var bountysource_account_div = div();
+
+    var fundraiser_form = section({ id: 'fundraiser-wrapper' },
       div({ 'class': 'split-main' },
         section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 25px; text-align: center; color: #5e5f5f;' },
           h1({ style: 'font-size: 45px; font-weight: normal; margin: 25px auto;' }, fundraiser.title),
@@ -93,12 +95,49 @@ with (scope('Fundraisers')) {
             )
           ),
 
-          // disable functionality of pledge button if not published
-          fundraiser.published ? [
-            a({ 'class': 'green pledge-button', href: '#fundraisers/' + fundraiser.id + '/pledge' }, 'Make a Pledge')
-          ] : [
-            a({ 'class': 'green pledge-button' }, 'Make a Pledge')
-          ]
+          form({ action: curry(make_pledge, fundraiser.id) },
+            messages(),
+
+            div({ id: 'bounty-box', style: 'margin: 0;' },
+              div({ 'class': 'amount', style: 'margin: 0;' },
+                label({ 'for': 'amount' }, '$'),
+                text({ placeholder: "25", name: 'amount', id: 'amount', style: 'width: 192px;' })
+              )
+            ),
+
+            // payment method selection
+            div({ 'class': 'payment-method', style: 'margin: 15px 0;' },
+              div(
+                radio({
+                  name:     'payment_method',
+                  value:    'paypal',
+                  id:       'payment_method_paypal',
+                  checked:  'checked'
+                }),
+                label({ 'for': 'payment_method_paypal', style: 'text-align: left; padding-left: 15px;' },
+                  img({ src: 'images/paypal.png'}), "PayPal"
+                )
+              ),
+              div(
+                radio({
+                  name:   'payment_method',
+                  value:  'google',
+                  id:     'payment_method_google'
+                }),
+                label({ 'for': 'payment_method_google', style: 'text-align: left; padding-left: 15px;' },
+                  img({ src: 'images/google-wallet.png'}), "Google Wallet"
+                )
+              ),
+              bountysource_account_div
+            ),
+
+            // disable functionality of pledge button if not published
+            fundraiser.published ? [
+              submit({ 'class': 'green pledge-button', style: 'height: 70px;' }, 'Make a Pledge')
+            ] : [
+              a({ 'class': 'green pledge-button' }, 'Make a Pledge')
+            ]
+          )
         ),
 
         br(),
@@ -153,6 +192,26 @@ with (scope('Fundraisers')) {
 
       div({ 'class': 'split-end' })
     );
+
+    // if logged in and account has money, render bountysource account radio
+    logged_in() && BountySource.get_cached_user_info(function(user) {
+      (user.account && user.account.balance > 0) && render({ into: bountysource_account_div },
+        div(
+          radio({
+            name: 'payment_method',
+            value: 'personal',
+            id: 'payment_method_personal'
+          }),
+          label({ 'for': 'payment_method_personal', style: 'text-align: left; padding-left: 15px; display: inline;' },
+            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
+            "BountySource",
+            span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
+          )
+        )
+      );
+    });
+
+    return fundraiser_form;
   });
 
   route('#fundraisers/:fundraiser_id/pledge', function(fundraiser_id) {
