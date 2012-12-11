@@ -227,4 +227,8 @@ with (scope('BountySource')) {
   define('redeem_reward', function(pledge_id, reward_id, callback) {
     api('/user/pledges/'+pledge_id+'/redeem_reward', 'POST', { reward_id: reward_id }, callback);
   });
+
+  define('get_user_profile', function(display_name, callback) {
+    api('/users/'+display_name, callback);
+  });
 }
