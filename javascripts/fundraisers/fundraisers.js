@@ -113,13 +113,30 @@ with (scope('Fundraisers','App')) {
         render({ into: target_div }, fundraiser_page(response.data));
         populate_fundraiser_form_tables(response.data);
         select_fundraiser_form_section(fundraiser_id, 'basic-info');
+        initialize_short_description_character_counter();
       }
     })
   });
 
+  define('update_short_description_character_count', function(short_description_element, max) {
+    max = max || 140;
+    var char_count_element = document.getElementById('short-description-character-count');
+    render({ into: char_count_element }, '('+short_description_element.value.length+'/'+max+')');
+    char_count_element.style.color = (short_description_element.value.length > max) ? 'red' : 'green';
+  });
+
+  define('initialize_short_description_character_counter', function() {
+    // character counter for short_description
+    var short_description_element = document.getElementById('short-description');
+    short_description_element.addEventListener('keyup', function(e) {
+      update_short_description_character_count(e.target, 140);
+    });
+    update_short_description_character_count(short_description_element, 140);
+  });
+
   // return a giant div containing fundraiser nav and form.
   define('fundraiser_page', function(fundraiser) {
-    var fundraiser_page_data = [
+    return [
       fundraiser_form_nav(
         li({ id: 'nav-basic-info', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'basic-info') },
           'Basic Info'
@@ -165,6 +182,10 @@ with (scope('Fundraisers','App')) {
               fieldset(
                 label('Source Repository:'),
                 input({ name: 'repo_url', 'class': 'long', placeholder: 'https://github.com/badger/frontend', value: fundraiser.repo_url||'' })
+              ),
+              fieldset(
+                label('Short Description:', br(), span({ id: 'short-description-character-count', style: 'font-size: 80%;' })),
+                textarea({ id: 'short-description', name: 'short_description', style: 'width: 392px; height: 150px; line-height: 18px;', placeholder: "Brief description of your fundraiser. Must be 140 characters or less." }, fundraiser.short_description||'')
               )
             )
           ),
@@ -272,8 +293,6 @@ with (scope('Fundraisers','App')) {
 
       div({ 'class': 'split-end' })
     ];
-
-    return fundraiser_page_data;
   });
 
   define('populate_fundraiser_form_tables', function(fundraiser) {
@@ -391,6 +410,7 @@ with (scope('Fundraisers','App')) {
         // render updated fundraiser form
         render({ target: 'fundraiser-div' }, fundraiser_page(response.data));
         populate_fundraiser_form_tables(response.data);
+        initialize_short_description_character_counter();
 
         // select the nav element again
         select_fundraiser_form_section(fundraiser_id, previous_nav_id);
