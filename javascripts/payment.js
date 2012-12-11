@@ -30,12 +30,12 @@ with (scope('Payment', 'App')) {
             checked: 'checked' }),
             label({ 'for': 'payment_method_paypal' },
               img({ src: 'images/paypal.png'}), "PayPal")),
-          div(radio({ name: 'payment_method', value: 'google', id:'payment_method_google' }),
-            label({ 'for': 'payment_method_google' },
-              img({ src: 'images/google-wallet.png'}), "Google Wallet")),
-    //            div(radio({ name: 'payment_method', value: 'amazon', id:'payment_method_amazon' }),
-    //                label({ 'for': 'payment_method_amazon' },
-    //                      img({ src: 'images/amazon.png'}), "Amazon.com")),
+//          div(radio({ name: 'payment_method', value: 'google', id:'payment_method_google' }),
+//            label({ 'for': 'payment_method_google' },
+//              img({ src: 'images/google-wallet.png'}), "Google Wallet")),
+//                div(radio({ name: 'payment_method', value: 'amazon', id:'payment_method_amazon' }),
+//                    label({ 'for': 'payment_method_amazon' },
+//                          img({ src: 'images/amazon.png'}), "Amazon.com")),
 
           bountysource_account_div
         ),

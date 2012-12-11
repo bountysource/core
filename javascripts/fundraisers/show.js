@@ -118,16 +118,16 @@ with (scope('Fundraisers')) {
                   img({ src: 'images/paypal.png'}), "PayPal"
                 )
               ),
-              div(
-                radio({
-                  name:   'payment_method',
-                  value:  'google',
-                  id:     'payment_method_google'
-                }),
-                label({ 'for': 'payment_method_google', style: 'text-align: left; padding-left: 15px;' },
-                  img({ src: 'images/google-wallet.png'}), "Google Wallet"
-                )
-              ),
+//              div(
+//                radio({
+//                  name:   'payment_method',
+//                  value:  'google',
+//                  id:     'payment_method_google'
+//                }),
+//                label({ 'for': 'payment_method_google', style: 'text-align: left; padding-left: 15px;' },
+//                  img({ src: 'images/google-wallet.png'}), "Google Wallet"
+//                )
+//              ),
               bountysource_account_div
             ),
 
