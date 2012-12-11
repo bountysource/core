@@ -32,7 +32,7 @@ with (scope('Home', 'App')) {
       render({ into: recent_people_div },
         response.data.map(function(person) {
           return div({ 'class': 'recent_signups' },
-            img({ src: person.avatar_url })
+            a({ href: '#users/'+person.display_name }, img({ src: person.avatar_url }))
           );
         }),
         
