@@ -8,18 +8,14 @@ with (scope('Profile','App')) {
         'Users',
         display_name
       ),
+      messages(),
       target_div
     );
 
     BountySource.get_user_profile(display_name, function(response) {
       if (response.meta.success) {
-        console.log(response);
-
         var profile = response.data;
-
         render({ into: target_div },
-          messages(),
-
           div({ id: 'profile' },
             div({ id: 'head' },
               img({ id: 'avatar-url', src: profile.avatar_url, style: 'width: 80px; height: 80px; vertical-align: middle;' }),
@@ -50,6 +46,7 @@ with (scope('Profile','App')) {
           )
         );
       } else {
+        render({ target: target_div },'');
         render_message(error_message(response.data.error));
       }
     })
