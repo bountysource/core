@@ -18,6 +18,8 @@ with (scope('Repository')) {
       var repo = response.data;
       render({ into: target_div },
         div({ 'class': 'split-main' },
+          !repo.has_issues && info_message("Issues are disabled for this repository."),
+
           section(
             img({ src: repo.owner.avatar_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, repo.owner.login),
@@ -34,9 +36,7 @@ with (scope('Repository')) {
           div(
             repo.has_issues && div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
             div({ style: 'margin-top: 20px; width: 180px; float: left;' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/donate'}, 'Donate to Project')),
-            div({ style: 'clear: both '}),
-            !repo.has_issues && div({ style: 'margin-top: 1em;' },
-                                    "This repository has issues disabled.")
+            div({ style: 'clear: both '})
           )
         ),
         div({ 'class': 'split-side' },
