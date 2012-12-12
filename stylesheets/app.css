@@ -308,30 +308,6 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   vertical-align: middle;
 }
 
-#milestone-table                      { width: 100%; }
-#milestone-table tr                   { height: 60px; }
-#milestone-table tr.editable          { background: #E7FDE7; }
-#milestone-table tr.editable:hover    { background: #D8FDD8; }
-#milestone-table tr.read-only         { background: #E7FDE7; }
-#milestone-table tr.read-only:hover   { background: #D8FDD8; }
-#milestone-table tr#milestone-inputs  { background: #D8FDD8; }
-
-#rewards-table tr#reward-inputs         { height: 230px; background: #D8FDD8; }
-#rewards-table tr textarea              { width: 205px; height: 200px; }
-#rewards-table tr #description-wrapper  { display: inline-block; padding: 10px; min-height: 50px; width: 250px; border-radius: 3px; margin: 20px 0 20px 20px; vertical-align: top; background: white; border: 1px solid #B9DABE; }
-#rewards-table tr.editable              { height: 100px; background: #E7FDE7; }
-#rewards-table tr.editable #description { width: 240px; }
-#rewards-table tr.editable:hover        { background: #D8FDD8; }
-
-ul.horizontal-nav       { list-style-type: none; padding: 0; margin: 10px 0; -moz-user-select: none; -webkit-user-select: none; }
-ul.horizontal-nav li    { display: inline-block; }
-
-li.fundraiser-form-nav          { text-align: center; cursor: pointer; height: 30px; padding-top: 10px; color: #999; font-size: 18px; }
-li.fundraiser-form-nav a        { color: gray; text-decoration: none; }
-li.fundraiser-form-nav:hover    { background: #E0E0E0; }
-
-.fundraiser-form-nav.active     { background: #E0E0E0; }
-
 .close-button { background: grey; opacity: 0.60; border-radius: 10px; font-size: 14px; color: white; float: right; width: 18px; height: 18px; cursor: pointer; }
 a.close-button { text-decoration: none; }
 .close-button:hover { opacity: 0.75; }
