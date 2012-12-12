@@ -70,11 +70,21 @@ with (scope('Fundraisers')) {
           img({ style: 'max-width: 630px; padding: 20px;', src: fundraiser.image_url })
         ),
 
-        section({ id: 'fundraiser-links', style: 'text-align: right; color: #C5C5C5;' },
-          span({ style: 'display: block; margin: 10px 0;' }, 'Created ', date(fundraiser.created_at)),
-          fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, 'Homepage: ', a({ target: '_blank', href: fundraiser.homepage_url, style: 'color: inherit;' }, fundraiser.homepage_url)),
-          fundraiser.repo_url &&    span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
+        section({ id: 'fundraiser-short-description', style: 'border-bottom: 2px dotted #C7C7C7; color: #5e5f5f; font-size: 20px;' },
+          span({ style: 'padding: 20px 10px; margin: 10px 0; display: inline-block; border-right: 1px solid #E7E7E7; vertical-align: middle; width: 60%; line-height: 25px;' }, fundraiser.short_description||''),
+
+          div({ id: 'fundraiser-links', style: 'color: #C5C5C5; display: inline-block; margin-left: 15px; font-size: 16px; vertical-align: middle;' },
+            span({ style: 'display: block; margin: 10px 0;' }, 'Created ', date(fundraiser.created_at)),
+            fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, a({ target: '_blank', href: fundraiser.homepage_url, style: 'color: inherit;' }, 'Homepage')),
+            fundraiser.repo_url &&    span({ style: 'display: block; margin: 10px 0;' }, a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, 'Repository'))
+          )
         ),
+
+//        section({ id: 'fundraiser-links', style: 'text-align: right; color: #C5C5C5;' },
+//          span({ style: 'display: block; margin: 10px 0;' }, 'Created ', date(fundraiser.created_at)),
+//          fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, 'Homepage: ', a({ target: '_blank', href: fundraiser.homepage_url, style: 'color: inherit;' }, fundraiser.homepage_url)),
+//          fundraiser.repo_url &&    span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
+//        ),
 
         // TODO sharing
         section({ id: 'fundraiser-share' }),
