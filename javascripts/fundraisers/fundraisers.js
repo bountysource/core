@@ -15,13 +15,15 @@ with (scope('Fundraisers','App')) {
     BountySource.get_fundraisers(function(response) {
       if (response.data.length > 0) {
         render({ into: fundraisers_table },
+          messages(),
+
           table(
             tr(
               th('Title'),
               th({ style: 'width: 130px;' }, 'Funding Goal'),
               th({ style: 'width: 200px;' }, 'Progress'),
               th({ style: 'width: 80px; text-align: center;' }, 'Status'),
-              th({ style: 'width: 30px;' })
+              th({ style: 'width: 75px;' })
             ),
             response.data.map(function(fundraiser) {
               // depends on whether or not its published
@@ -31,7 +33,12 @@ with (scope('Fundraisers','App')) {
                 td(money(fundraiser.funding_goal || 0)),
                 td(fundraiser.published && percentage((fundraiser.total_pledged / fundraiser.funding_goal) * 100)),
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
-                td(fundraiser.published ? '' : a({ href: curry(destroy_fundraiser, fundraiser.id)}, 'delete'))
+
+                td({ style: 'text-align: center;' },
+                  a({ href: '#account/fundraisers/'+fundraiser.id }, img({ src: 'images/edit.gif' })),
+                  a({ href: curry(destroy_fundraiser, fundraiser.id), style: 'margin-left: 10px; opacity:' + (fundraiser.published ? 0.25 : 1) + ';' }, img({ src: 'images/trash.gif' }))
+                )
+//                td(fundraiser.published ? '' : a({ href: curry(destroy_fundraiser, fundraiser.id)}, 'delete'))
               );
             })
           )
@@ -153,10 +160,12 @@ with (scope('Fundraisers','App')) {
 //          'Milestones'
 //        ),
 
-        li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
+        !fundraiser.published && li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
           'Rewards'
         ),
-        li({ id: 'nav-funding-details', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'funding-details') },
+
+        // don't show the funding goal edit field if published, since it cannot be updated.
+        !fundraiser.published && li({ id: 'nav-funding-details', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'funding-details') },
           'Funding'
         )
       ),
@@ -277,17 +286,23 @@ with (scope('Fundraisers','App')) {
 
       div({ 'class': 'split-side' },
         grey_box(
-          a({ 'class': 'green', 'href': curry(save_fundraiser_and_continue, fundraiser.id) }, 'Save and Continue'),
-          br(),
-          a({ 'class': 'green', 'href': curry(save_fundraiser, fundraiser.id) }, 'Save'),
-          br(),
-          a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser.id) }, 'Preview'),
+          !fundraiser.published && div(
+            a({ 'class': 'green', 'href': curry(save_fundraiser_and_continue, fundraiser) }, 'Save and Continue'),
+            br()
+          ),
+
+          a({ 'class': 'green', 'href': curry(save_fundraiser, fundraiser) }, 'Save'),
           br(),
 
-          fundraiser.publishable ? a({ 'class': 'blue', href: curry(publish_fundraiser, fundraiser.id) }, 'Publish') : [
-            div({ 'class': 'gray', style: 'text-decoration: none; cursor: auto;' }, 'Publish'),
-            p({ style: 'text-align: center; margin: 15px 0 0 0;' }, "You need to provide all of the necessary data to publish your fundraiser.")
-          ]
+          a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser.id) }, 'Preview'),
+
+          !fundraiser.published && div(
+            br(),
+            fundraiser.publishable ? a({ 'class': 'blue', href: curry(publish_fundraiser, fundraiser) }, 'Publish') : [
+              div({ 'class': 'gray', style: 'text-decoration: none; cursor: auto;' }, 'Publish'),
+              p({ style: 'text-align: center; margin: 15px 0 0 0;' }, "You need to provide all of the necessary data to publish your fundraiser.")
+            ]
+          )
         )
       ),
 
@@ -343,11 +358,11 @@ with (scope('Fundraisers','App')) {
     );
   });
 
-  define('publish_fundraiser', function(fundraiser_id) {
+  define('publish_fundraiser', function(fundraiser) {
     if (confirm('Are you sure? Once published, a fundraiser CANNOT be edited.')) {
       // first, save it. callback hell: population 2
-      save_fundraiser(fundraiser_id, function(save_response) {
-        BountySource.publish_fundraiser(fundraiser_id, function(response) {
+      save_fundraiser(fundraiser, function(save_response) {
+        BountySource.publish_fundraiser(fundraiser.id, function(response) {
           if (response.meta.success) {
             set_route('#account/fundraisers');
           } else {
@@ -371,7 +386,7 @@ with (scope('Fundraisers','App')) {
     window.open(BountySource.www_host+'#fundraisers/'+fundraiser_id+'/preview','','width=1050,height=900');
   });
 
-  define('save_fundraiser', function(fundraiser_id, callback) {
+  define('save_fundraiser', function(fundraiser, callback) {
     render_message(div({ style: 'text-align: center; padding: 5px;' }, 'Saving...'));
 
     var serialized_form = serialize_form('fundraiser-form'),
@@ -402,7 +417,7 @@ with (scope('Fundraisers','App')) {
     });
     request_data.rewards = JSON.stringify(request_data.rewards); // serialize array
 
-    BountySource.update_fundraiser(fundraiser_id, request_data, function(response) {
+    BountySource.update_fundraiser(fundraiser.id, request_data, function(response) {
       if (response.meta.success) {
         // which nav element are we on? need to return to that after rendering page again
         var previous_nav_id = document.getElementsByClassName('fundraiser-form-nav active')[0].id.split('-').slice(1).join('-');
@@ -413,10 +428,10 @@ with (scope('Fundraisers','App')) {
         initialize_short_description_character_counter();
 
         // select the nav element again
-        select_fundraiser_form_section(fundraiser_id, previous_nav_id);
+        select_fundraiser_form_section(fundraiser.id, previous_nav_id);
 
         // show messages after saved
-        render_message(small_success_message("Fundraiser draft saved"));
+        render_message(small_success_message(fundraiser.published ? "Fundraiser updated" : "Fundraiser draft saved"));
       } else {
         render_message(small_error_message(response.data.error));
       }
@@ -428,22 +443,26 @@ with (scope('Fundraisers','App')) {
   /*
   * Save the fundraiser draft, and move to the next section
   * */
-  define('save_fundraiser_and_continue', function(fundraiser_id) {
+  define('save_fundraiser_and_continue', function(fundraiser) {
     var active_nav_element = document.getElementsByClassName('fundraiser-form-nav active')[0];
     if (active_nav_element.nextSibling) {
       var next_nav_element_id = active_nav_element.nextSibling.id.split('-').slice(1).join('-');
-      save_fundraiser(fundraiser_id, function() {
-        select_fundraiser_form_section(fundraiser_id, next_nav_element_id);
+      save_fundraiser(fundraiser, function() {
+        select_fundraiser_form_section(fundraiser.id, next_nav_element_id);
       });
     } else {
-      save_fundraiser(fundraiser_id);
+      save_fundraiser(fundraiser);
     }
   });
 
   define('destroy_fundraiser', function(fundraiser_id) {
     if (confirm('Are you sure? It will be gone forever!')) {
       BountySource.destroy_fundraiser(fundraiser_id, function(response) {
-        window.location.reload();
+        if (response.meta.success) {
+          window.location.reload();
+        } else {
+          render_message(error_message(response.data.error));
+        }
       });
     }
   });
