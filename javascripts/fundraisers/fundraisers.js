@@ -359,7 +359,7 @@ with (scope('Fundraisers','App')) {
   });
 
   define('publish_fundraiser', function(fundraiser) {
-    if (confirm('Are you sure? Once published, a fundraiser CANNOT be edited.')) {
+    if (confirm('Are you sure? Once published, you cannot change the funding goal.')) {
       // first, save it. callback hell: population 2
       save_fundraiser(fundraiser, function(save_response) {
         BountySource.publish_fundraiser(fundraiser.id, function(response) {
