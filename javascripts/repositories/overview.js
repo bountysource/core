@@ -35,15 +35,17 @@ with (scope('Repository')) {
           
           div(
             repo.has_issues && div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
-            div({ style: 'margin-top: 20px; width: 180px; float: left;' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/donate'}, 'Donate to Project')),
+            // div({ style: 'margin-top: 20px; width: 180px; float: left;' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/donate'}, 'Donate to Project')),
             div({ style: 'clear: both '})
           )
         ),
         div({ 'class': 'split-side' },
 
           div({ 'class': 'stats', style: 'width: 150px; padding: 10px; margin: 20px auto auto auto;' },
-            h2(money(repo.bounty_total)),
-            h3({ 'class': 'orange-line' }, 'Active Bounties'),
+            repo.has_issues && div(
+              h2(money(repo.bounty_total)),
+              h3({ 'class': 'orange-line' }, 'Active Bounties')
+            ),
 
             h2(formatted_number(repo.followers)),
             h3({ 'class': 'blue-line' }, 'Followers'),
@@ -52,13 +54,15 @@ with (scope('Repository')) {
             h2(formatted_number(repo.forks)),
             h3({ 'class': 'blue-line' }, 'Forks'),
 
-            repo.has_issues && h2(formatted_number(repo.bounteous_issues_count)),
-            repo.has_issues && h3({ 'class': 'blue-line' }, 'Issues with Bounties'),
+            repo.has_issues && div(
+              h2(formatted_number(repo.bounteous_issues_count)),
+              h3({ 'class': 'blue-line' }, 'Issues with Bounties')
+            )
 
             // TODO: this isn't correct since the account can be withdrawn from
             // TODO: add a total_donations column
-            h2(money(repo.account_balance)),
-            h3({ 'class': 'blue-line' }, 'Donations')
+//            h2(money(repo.account_balance)),
+//            h3({ 'class': 'blue-line' }, 'Donations')
 
 //            h2('$999'),
 //            h3({ 'class': 'green-line' }, 'Payout Last Month')
