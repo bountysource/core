@@ -4,7 +4,7 @@ with (scope('Fundraisers')) {
 
   // return a row, with the correct id (based on the number of added rewards)
   define('reward_row_elements', function(reward_row_id, reward_data) {
-    return [{ id: reward_row_id, 'data-id': (reward_data.id||null), 'class': 'editable published' }, // data-id is the id of model, if saved (fundraiser is published)
+    return [{ id: reward_row_id, 'data-id': (reward_data.id||null), 'class': 'editable' }, // data-id is the id of model, if saved (fundraiser is published)
       td(
         div({ style: 'display: inline-block; width: 250px; margin-left: 10px;' },
           form(
@@ -33,27 +33,58 @@ with (scope('Fundraisers')) {
   define('unlock_reward_row', function(reward_row_id) {
     var t           = Teddy.snuggle('rewards-table'),
       spans         = t.at(reward_row_id).getElementsByTagName('span'),
-      amount        = parseInt((spans[0].innerText).match(/\$(\d+)/)[1]),
+      amount        = parseInt((spans[0].innerText).replace(',','').match(/\$(\d+)/)[1]),
       limited_to    = parseInt(spans[1].innerText)||'',
-      description   = spans[2].innerText;
+      description   = spans[2].innerText,
+      published     = !isNaN(parseInt(t.at(reward_row_id).getAttribute('data-id'))),
+      data_id       = (published ? parseInt(t.at(reward_row_id).getAttribute('data-id')) : null);
 
-    t.at(reward_row_id).replace({ id: reward_row_id, 'class': 'editable', style: 'height: 230px;' },
+    console.log(spans[0]);
+
+    t.at(reward_row_id).replace({ id: reward_row_id, 'data-id': data_id, 'class': 'editable', style: 'height: 230px;' },
       td(
         div({ style: 'display: inline-block; vertical-align: middle' },
           fieldset(
             label('Amount:'),
             span({ style: 'font-size: 25px; padding-right: 5px; vertical-align: middle;' }, '$'),
-            input({ id: 'reward-input-amount', style: 'width: 100px;', placeholder: 100, value: amount })
+
+            published ? [
+              input({
+                id: 'reward-input-amount',
+                style: 'width: 100px; color: gray;',
+                placeholder: 100,
+                value: amount,
+                readonly: true
+              })
+            ] : [
+              input({
+                id: 'reward-input-amount',
+                style: 'width: 100px;',
+                placeholder: 100,
+                value: amount
+              })
+            ]
           ),
 
           fieldset(
             label('Quantity:'),
-            input({
-              id: 'reward-input-quantity',
-              placeholder: 10,
-              style: 'width: 100px; margin-left: 18px;',
-              value: limited_to
-            })
+
+            published ? [
+              input({
+                id: 'reward-input-quantity',
+                placeholder: 10,
+                style: 'width: 100px; margin-left: 18px; color: gray;',
+                value: limited_to,
+                readonly: true
+              })
+            ] : [
+              input({
+                id: 'reward-input-quantity',
+                placeholder: 10,
+                style: 'width: 100px; margin-left: 18px;',
+                value: limited_to
+              })
+            ]
           )
         ),
 
@@ -72,15 +103,19 @@ with (scope('Fundraisers')) {
 
   define('lock_reward_row', function(reward_row_id) {
     var t           = Teddy.snuggle('rewards-table'),
-      inputs_row  = t.at(reward_row_id);
+        inputs_row  = t.at(reward_row_id),
+        published   = !isNaN(parseInt(t.at(reward_row_id).getAttribute('data-id'))),
+        data_id     = (published ? parseInt(t.at(reward_row_id).getAttribute('data-id')) : null);
 
     var reward_data = {
       description:  inputs_row.getElementsByTagName('textarea')[0].value,
       amount:       parseInt(inputs_row.getElementsByTagName('input')[0].value),
-      limited_to:   parseInt(inputs_row.getElementsByTagName('input')[1].value)
+      limited_to:   parseInt(inputs_row.getElementsByTagName('input')[1].value),
+      id:           data_id
     };
 
-    inputs_row.replace(reward_row_elements(reward_row_id, reward_data));
+    var row = inputs_row.replace(reward_row_elements(reward_row_id, reward_data));
+    if (published) add_class(row, 'published');
     inputs_row.removeAttribute('locked-for-edit');
   });
 

@@ -160,7 +160,7 @@ with (scope('Fundraisers','App')) {
 //          'Milestones'
 //        ),
 
-        !fundraiser.published && li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
+        li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
           'Rewards'
         ),
 
@@ -320,7 +320,8 @@ with (scope('Fundraisers','App')) {
     // render saved rewards into table
     var t = Teddy.snuggle('rewards-table');
     (fundraiser.rewards || []).forEach(function(reward) {
-      t.at('reward-inputs').insert(reward_row_elements(generate_reward_row_id(), reward));
+      var row = t.at('reward-inputs').insert(reward_row_elements(generate_reward_row_id(), reward));
+      if (fundraiser.published) add_class(row, 'published');
     });
   });
 
@@ -392,26 +393,27 @@ with (scope('Fundraisers','App')) {
     var serialized_form = serialize_form('fundraiser-form'),
         request_data    = serialized_form_to_hash(serialized_form);
 
-    // append serialized milestones array to request_data.
-    var t = Teddy.snuggle('milestone-table');
-    request_data.milestones = [];
-    t.forEach(function(row) {
-      if (row.className == 'editable' && !row.getAttribute('locked-for-edit')) {
-        request_data.milestones.push({ description: row.children[0].innerText });
-      }
-    });
-    request_data.milestones = JSON.stringify(request_data.milestones); // serialize array
+//    // append serialized milestones array to request_data.
+//    var t = Teddy.snuggle('milestone-table');
+//    request_data.milestones = [];
+//    t.forEach(function(row) {
+//      if (row.className == 'editable' && !row.getAttribute('locked-for-edit')) {
+//        request_data.milestones.push({ description: row.children[0].innerText });
+//      }
+//    });
+//    request_data.milestones = JSON.stringify(request_data.milestones); // serialize array
 
     // append serialized rewards array to request_data
     var t = Teddy.snuggle('rewards-table');
     request_data.rewards = [];
     t.forEach(function(row) {
-      if (row.className == 'editable' && !row.getAttribute('locked-for-edit')) {
+      if (/editable/.test(row.className) && !row.getAttribute('locked-for-edit')) {
         var spans = row.getElementsByTagName('span');
         request_data.rewards.push({
           description:  spans[2].innerText,
           amount:       parseInt((spans[0].innerText).replace(/\$|\,/g,'')),
-          limited_to:   parseInt(spans[1].innerText)
+          limited_to:   parseInt(spans[1].innerText),
+          id:           parseInt(row.getAttribute('data-id')) || null
         });
       }
     });
