@@ -87,6 +87,8 @@ with (scope('Home', 'App')) {
     if (!page_state.can_load_more_cards) return;
 
     show('card-loader-div');
+    
+    _gaq.push(['_trackEvent', 'Homepage', 'Show More Cards']);
 
     page_state.can_load_more_cards = false;
     BountySource.get_more_cards(page_state.current_cards, function(response) {
