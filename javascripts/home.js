@@ -122,7 +122,7 @@ with (scope('Home', 'App')) {
         div({ style: 'clear: both' }),
 
         // languages
-        card.repository.languages && div({ style: 'font-size: 12px; color: gray;' },
+        (card.repository.languages.length > 0) && div({ style: 'font-size: 12px; color: gray;' },
           'Languages: ' + card.repository.languages.map(function(l) { return l.name }).join(', ')
         )
       ),
