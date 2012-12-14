@@ -64,3 +64,5 @@ a.blue, a.green, a.gray {
 
 .green.pledge-button        { text-decoration: none; padding: 10px 0; font-size: 20px; }
 .green.pledge-button:hover  { box-shadow: 0 0 20px #5EE95E; }
+
+a.no-hover:hover { text-decoration: none; }
