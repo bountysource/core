@@ -88,7 +88,7 @@ with (scope('Home', 'App')) {
 
     show('card-loader-div');
     
-    _gaq.push(['_trackEvent', 'Homepage', 'Show More Cards']);
+//    _gaq.push(['_trackEvent', 'Homepage', 'Show More Cards']);
 
     page_state.can_load_more_cards = false;
     BountySource.get_more_cards(page_state.current_cards, function(response) {
@@ -132,7 +132,7 @@ with (scope('Home', 'App')) {
       // title, description, and comment count
       div({ style: 'margin: 15px 5px;' },
         div({ style: '' }, a({ href: card.href, style: 'color: inherit;' }, card.title)),
-        p({ style: 'color: #999; font-size: 80%' }, abbreviated_text(card.description, 100)),
+        p({ style: 'color: #999; font-size: 80%; overflow: scroll;' }, abbreviated_text(card.description, 100)),
         (card.comment_count > 0) && div({ style: 'text-align: right;' },
           span({ style: 'vertical-align: middle; margin-right: 5px; color: #D8A135; font-size: 16px;' }, formatted_number(card.comment_count)),  img({ style: 'vertical-align: middle;', src: 'images/icon-comments.png' })
         )
@@ -143,8 +143,7 @@ with (scope('Home', 'App')) {
       div({ style: 'border-top: 1px solid #eee; padding-top: 10px;' },
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
           (card.account_balance > 0) && div(
-            span({ style: 'display: inline; vertical-align: middle; font-size: 25px;' }, money(card.account_balance)),
-            span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'bounty')
+            span({ style: 'display: inline; vertical-align: middle; font-size: 25px;' }, money(card.account_balance))
           )
         ),
         div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
@@ -169,14 +168,16 @@ with (scope('Home', 'App')) {
 
       // title, description, and comment count
       div({ style: 'margin: 15px 5px;' },
-        p({ style: 'color: #999;' }, card.description)
+        p({ style: 'color: #999; overflow: scroll;' }, card.description)
       ),
 
       div({ style: 'clear: both' }),
 
       div({ style: 'border-top: 1px solid #eee; padding-top: 10px;' },
         // fake 1% to show something on the bar
-        (card.account_balance > 0) && progress_bar({ style: 'margin-bottom: 10px;', percentage: funding_percentage < 1 ? 1 : funding_percentage }),
+        (card.account_balance > 0) && div({ style: 'margin-bottom: 10px;' },
+          progress_bar({ percentage: funding_percentage < 1 ? 1 : funding_percentage })
+        ),
 
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
           (card.account_balance > 0) && div(
