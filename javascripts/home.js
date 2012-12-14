@@ -103,7 +103,7 @@ with (scope('Home', 'App')) {
           if (col_container.childNodes[k].clientHeight < target.clientHeight) target = col_container.childNodes[k];
         }
 
-        target.appendChild(card_div(card));
+        target.appendChild(card.funding_goal ? fundraiser_card(card) : bounty_card(card));
       }
 
       hide('card-loader-div');
@@ -112,29 +112,109 @@ with (scope('Home', 'App')) {
       if (response.data.length == 50) page_state.can_load_more_cards = true;
     });
   });
-  
-  define('card_div', function(card) {
-    return div({ 'class': 'card' },
-      div({ 'class': 'inner' },
-        card.repository ? [
-          a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-          div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name))
-        ] : [
-          a({ href: card.href }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-          div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: card.href, style: 'color: #333' }, 'Fundraiser'))
-        ],
-        div({ style: 'clear: both' }),
-      
-        div(a({ href: card.href }, card.title)),
-      
-        p({ style: 'color: #999; font-size: 90%' }, abbreviated_text(card.description, 100)),
 
-        a({ href: card.href, style: 'text-decoration: none; color: black;' },
-          div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0; line-height: 25px;" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
+  define('bounty_card', function(card) {
+    return div({ 'class': 'card' },
+      div({ style: 'padding: 7px; background: #EEE; margin-bottom: 5px;' },
+        a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 5px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
+        div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name)),
+
+        div({ style: 'clear: both' }),
+
+        // languages
+        card.repository.languages && div({ style: 'font-size: 12px; color: gray;' },
+          'Languages: ' + card.repository.languages.map(function(l) { return l.name }).join(', ')
         )
-      )
+      ),
+
+      div({ style: 'clear: both' }),
+
+      // title, description, and comment count
+      div({ style: 'margin: 15px 5px;' },
+        div({ style: '' }, a({ href: card.href, style: 'color: inherit;' }, card.title)),
+        p({ style: 'color: #999; font-size: 80%' }, abbreviated_text(card.description, 100)),
+        (card.comment_count > 0) && div({ style: 'text-align: right;' },
+          span({ style: 'vertical-align: middle; margin-right: 5px; color: #D8A135; font-size: 16px;' }, formatted_number(card.comment_count)),  img({ style: 'vertical-align: middle;', src: 'images/icon-comments.png' })
+        )
+      ),
+
+      div({ style: 'clear: both' }),
+
+      div({ style: 'border-top: 1px solid #eee; padding-top: 10px;' },
+        div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
+          (card.account_balance > 0) && div(
+            span({ style: 'display: inline; vertical-align: middle; font-size: 25px;' }, money(card.account_balance)),
+            span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'bounty')
+          )
+        ),
+        div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
+          a({ 'class': 'green', href: card.href, style: 'display: inline; padding: 5px 15px; vertical-align: middle;' }, '+')
+        )
+      ),
+
+      div({ style: 'clear: both' })
     );
   });
+
+  define('fundraiser_card', function(card) {
+    var funding_percentage = parseFloat(100 * (card.account_balance / card.funding_goal));
+
+    return div({ 'class': 'card' },
+      div({ style: 'padding: 7px; background: #EEE;' },
+        a({ href: card.href, style: 'display: inline-block; vertical-align: middle; margin-right: 10px;' }, img({ style: 'width: 40px; border-radius: 6px', src: card.image_url })),
+        div({ style: 'font-size: 16px; font-weight: bold; display: inline-block; vertical-align: middle;' }, a({ href: card.href, style: 'color: #333;' }, card.title))
+      ),
+
+      div({ style: 'clear: both' }),
+
+      // title, description, and comment count
+      div({ style: 'margin: 15px 5px;' },
+        p({ style: 'color: #999;' }, card.description)
+      ),
+
+      div({ style: 'clear: both' }),
+
+      div({ style: 'border-top: 1px solid #eee; padding-top: 10px;' },
+        // fake 1% to show something on the bar
+        (card.account_balance > 0) && progress_bar({ style: 'margin-bottom: 10px;', percentage: funding_percentage < 1 ? 1 : funding_percentage }),
+
+        div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
+          (card.account_balance > 0) && div(
+            span({ style: 'vertical-align: middle; font-size: 25px;' }, money(card.account_balance)),
+            span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'of ', money(card.funding_goal))
+          )
+        ),
+        div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
+          a({ 'class': 'green', href: card.href, style: 'display: inline; padding: 5px 15px; vertical-align: middle;' }, '+')
+        )
+      ),
+
+      div({ style: 'clear: both' })
+    );
+  });
+
+//  define('card_div', function(card) {
+//    return div({ 'class': 'card' },
+//      div({ 'class': 'inner' },
+//        card.repository ? [
+//          a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
+//          div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name))
+//        ] : [
+//          a({ href: card.href }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
+//          div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: card.href, style: 'color: #333' }, 'Fundraiser'))
+//        ],
+//        div({ style: 'clear: both' }),
+//
+//        div(a({ href: card.href }, card.title)),
+//
+//        p({ style: 'color: #999; font-size: 90%' }, abbreviated_text(card.description, 100)),
+//
+//        a({ href: card.href, style: 'text-decoration: none; color: black;' },
+//          div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0; line-height: 25px;" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
+//        )
+//      )
+//    );
+//  });
 
   define('check_scroll_to_see_if_we_need_more_cards', function() {
     if (get_route() != '#') return;

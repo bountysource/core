@@ -102,4 +102,17 @@ with (scope('App')) {
     element.className = element.className.replace((new RegExp(class_name)),'').trim();
     return element;
   });
+
+  // create a progress bar. to change the percentage, adjust the width of the element created with id
+  // @id the id of the progress bar element
+  define('progress_bar', function(options) {
+    var inner       = div({ 'class': 'progress-bar-inner' }),
+        outer       = div({ class: 'progress-bar-outer', style: options.style }, inner),
+        percentage  = (parseFloat(options.percentage)||0);
+
+    if (options.id) inner.id = options.id;
+    inner.style.width = percentage+'%';
+
+    return outer;
+  });
 };
