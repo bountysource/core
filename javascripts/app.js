@@ -68,7 +68,7 @@ with (scope('App')) {
       return false;
     } else {
       save_route_for_redirect();
-      window.location = '#login'; // faster?
+      window.location = '#signin'; // faster?
       return true;
     }
   });

@@ -59,8 +59,7 @@ with (scope('App')) {
               li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
               li(user_nav)
             ] : [
-              li(a({ href: '#login' }, 'Login')),
-              li(a({ href: '#create_account' }, 'Create Account'))
+              li(a({ href: '#signin' }, 'Sign In'))
             ]
           )
         )
