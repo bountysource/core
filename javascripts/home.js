@@ -140,12 +140,12 @@ with (scope('Home', 'App')) {
       div({ style: 'clear: both' }),
 
       div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px; font-size: 16px;' },
-        div({ style: 'display: inline-block; width: 25%; vertical-align: middle;'},
+        div({ style: 'display: inline-block; width: 33%; vertical-align: middle;'},
           (card.account_balance > 0) && div(
             a({ href: card.href, style: 'display: inline; vertical-align: middle; text-decoration: none; color: inherit;' }, money(card.account_balance))
           )
         ),
-        div({ style: 'display: inline-block; width: 25%; vertical-align: middle;' },
+        div({ style: 'display: inline-block; width: 33%; vertical-align: middle;' },
           (card.comment_count > 0) && div(
             a({ href: card.href, style: 'vertical-align: middle; color: #D8A135; text-decoration: none;' },
               span({ style: 'vertical-align: middle; margin-right: 5px;' }, formatted_number(card.comment_count)),
@@ -153,8 +153,8 @@ with (scope('Home', 'App')) {
             )
           )
         ),
-        div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
-          a({ href: card.href, style: 'display: inline; padding: 5px 15px; vertical-align: middle;' }, 'Back this!')
+        div({ style: 'display: inline-block; width: 33%; text-align: right; vertical-align: middle;' },
+          a({ href: card.href, style: 'display: inline; vertical-align: middle;' }, 'Back this!')
         )
       ),
 
