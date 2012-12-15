@@ -79,7 +79,7 @@ with (scope('App')) {
       return false;
     } else {
       save_route_for_redirect();
-      set_route('#create_account');
+      set_route('#signin');
     }
   });
 

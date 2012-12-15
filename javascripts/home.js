@@ -49,7 +49,7 @@ with (scope('Home', 'App')) {
         span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Sign in with...'),
         a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
         //a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px' }, "Facebook"),
-        a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#create_account' }, "Email Address")
+        a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin' }, "Email Address")
         //div({ style: 'margin-bottom: 10px' }, a({ 'class': "btn-auth btn-google" }, "Sign in with Google"))
       ),
 
@@ -131,25 +131,26 @@ with (scope('Home', 'App')) {
 
       // title, description, and comment count
       div({ style: 'margin: 15px 5px;' },
-        div({ style: '' }, a({ href: card.href, style: 'color: inherit;' }, card.title)),
+        div({ style: '' }, a({ href: card.href, style: 'color: inherit; overflow: hidden;' }, card.title)),
         p({ style: 'color: #999; font-size: 80%; overflow: hidden;' },
           abbreviated_text(card.description, 100)
-        ),
-
-        (card.comment_count > 0) && div({ style: 'text-align: right;' },
-          a({ href: card.href, style: 'vertical-align: middle; margin-right: 5px; color: #D8A135; font-size: 16px; text-decoration: none;' },
-            span({ style: 'vertical-align: middle; margin-right: 5px;' }, formatted_number(card.comment_count)),
-            img({ style: 'vertical-align: middle;', src: 'images/icon-comments.png' })
-          )
         )
       ),
 
       div({ style: 'clear: both' }),
 
-      div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px;' },
-        div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
+      div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px; font-size: 16px;' },
+        div({ style: 'display: inline-block; width: 25%; vertical-align: middle;'},
           (card.account_balance > 0) && div(
-            a({ href: card.href, style: 'display: inline; vertical-align: middle; font-size: 25px; text-decoration: none; color: inherit;' }, money(card.account_balance))
+            a({ href: card.href, style: 'display: inline; vertical-align: middle; text-decoration: none; color: inherit;' }, money(card.account_balance))
+          )
+        ),
+        div({ style: 'display: inline-block; width: 25%; vertical-align: middle;' },
+          (card.comment_count > 0) && div(
+            a({ href: card.href, style: 'vertical-align: middle; color: #D8A135; text-decoration: none;' },
+              span({ style: 'vertical-align: middle; margin-right: 5px;' }, formatted_number(card.comment_count)),
+              img({ style: 'vertical-align: middle;', src: 'images/icon-comments.png' })
+            )
           )
         ),
         div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
