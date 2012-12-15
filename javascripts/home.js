@@ -140,7 +140,7 @@ with (scope('Home', 'App')) {
 
       div({ style: 'clear: both' }),
 
-      div({ style: 'border-top: 1px solid #eee; padding-top: 10px;' },
+      div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px;' },
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
           (card.account_balance > 0) && div(
             span({ style: 'display: inline; vertical-align: middle; font-size: 25px;' }, money(card.account_balance))
