@@ -132,9 +132,15 @@ with (scope('Home', 'App')) {
       // title, description, and comment count
       div({ style: 'margin: 15px 5px;' },
         div({ style: '' }, a({ href: card.href, style: 'color: inherit;' }, card.title)),
-        p({ style: 'color: #999; font-size: 80%; overflow: hidden;' }, abbreviated_text(card.description, 100)),
+        p({ style: 'color: #999; font-size: 80%; overflow: hidden;' },
+          abbreviated_text(card.description, 100)
+        ),
+
         (card.comment_count > 0) && div({ style: 'text-align: right;' },
-          span({ style: 'vertical-align: middle; margin-right: 5px; color: #D8A135; font-size: 16px;' }, formatted_number(card.comment_count)),  img({ style: 'vertical-align: middle;', src: 'images/icon-comments.png' })
+          a({ href: card.href, style: 'vertical-align: middle; margin-right: 5px; color: #D8A135; font-size: 16px; text-decoration: none;' },
+            span({ style: 'vertical-align: middle; margin-right: 5px;' }, formatted_number(card.comment_count)),
+            img({ style: 'vertical-align: middle;', src: 'images/icon-comments.png' })
+          )
         )
       ),
 
