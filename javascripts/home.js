@@ -149,7 +149,7 @@ with (scope('Home', 'App')) {
       div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px;' },
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
           (card.account_balance > 0) && div(
-            span({ style: 'display: inline; vertical-align: middle; font-size: 25px;' }, money(card.account_balance))
+            a({ href: card.href, style: 'display: inline; vertical-align: middle; font-size: 25px; text-decoration: none; color: inherit;' }, money(card.account_balance))
           )
         ),
         div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
@@ -186,7 +186,7 @@ with (scope('Home', 'App')) {
         ),
 
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
-          (card.account_balance > 0) && div(
+          (card.account_balance > 0) && a({ href: card.href, style: 'text-decoration: none; color: inherit;' },
             span({ style: 'vertical-align: middle; font-size: 25px;' }, money(card.account_balance)),
             span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'of ', money(card.funding_goal))
           )
