@@ -9,14 +9,14 @@ with (scope('SignIn', 'App')) {
 
     render(
       div({ style: 'display: inline-block; width: 540px; margin-right: 25px; padding-right: 24px; vertical-align: top; text-align: center; border-right: 1px solid #E0E0E0;' },
-        div({ style: 'padding-bottom; 15px; margin-bottom: 39px;' },
+        div({ style: 'padding-bottom; 15px; margin-bottom: 59px;' },
           img({ src: 'images/github.png', style: 'height: 100px; vertical-align: middle; margin-right: 15px;' }),
           a({ 'class': 'btn-auth btn-github large hover', style: 'display: inline-block; vertical-align: middle;',  href: Github.auth_url() }, 'Sign in with GitHub')
         ),
 
         fancy_header('or with a BountySource account'),
 
-        div({ style: 'margin-top: 45px;' },
+        div({ style: 'margin-top: 53px;' },
           form({ id: 'login-form', 'class': 'fancy', action: login },
             div({ id: 'login-messages' }),
 
@@ -55,6 +55,10 @@ with (scope('SignIn', 'App')) {
           ),
           div({ style: 'margin-bottom: 10px;' },
             password({ name: 'password', placeholder: 'Choose a password', value: params.password||'' })
+          ),
+          div({ style: 'margin-bottom: 10px;' },
+            checkbox({ style: 'padding-right: 10px;', name: 'agree_to_terms' }),
+            span('I agree to the BountySource ', a({ href: '#termsofservice' }, 'terms of service'))
           ),
 
           submit({ 'class': 'green no-hover' }, 'Sign up')
@@ -103,8 +107,19 @@ with (scope('SignIn', 'App')) {
   });
 
   define('create_account', function(form_data) {
-    console.log(form_data);
-  });
+    render({ target: 'create-account-messages' }, '');
+
+    // convert 'on/off' value of checkbox to boolean
+    form_data.agree_to_terms = form_data.agree_to_terms == 'on';
+    BountySource.create_account(form_data, function(response) {
+      if (response.meta.success) {
+        Storage.set('access_token', response.data.access_token);
+        redirect_to_saved_route();
+      } else {
+        render({ target: 'create-account-messages' }, error_message(response.data.error));
+      }
+    });
+  })
 
   define('request_password_reset', function(form_data) {
     BountySource.request_password_reset(form_data, function(response) {

@@ -147,7 +147,7 @@ with (scope('Home', 'App')) {
           )
         ),
         div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
-          a({ 'class': 'green no-hover', href: card.href, style: 'display: inline; padding: 5px 15px; vertical-align: middle;' }, '+')
+          a({ href: card.href, style: 'display: inline; padding: 5px 15px; vertical-align: middle;' }, 'Back this!')
         )
       ),
 
@@ -186,7 +186,7 @@ with (scope('Home', 'App')) {
           )
         ),
         div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
-          a({ 'class': 'green no-hover', href: card.href, style: 'display: inline; padding: 5px 15px; vertical-align: middle;' }, '+')
+          a({ href: card.href, style: 'display: inline; padding: 5px 15px; vertical-align: middle;' }, 'Pledge!')
         )
       ),
 
