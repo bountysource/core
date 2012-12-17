@@ -114,7 +114,7 @@ with (scope('Home', 'App')) {
   });
 
   define('bounty_card', function(card) {
-    return div({ 'class': 'card' },
+    return div({ 'class': 'card', onClick: curry(set_route, card.href) },
       div({ style: 'padding: 7px; background: #EEE; margin-bottom: 5px;' },
         a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 5px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
         div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name)),
@@ -165,7 +165,7 @@ with (scope('Home', 'App')) {
   define('fundraiser_card', function(card) {
     var funding_percentage = parseFloat(100 * (card.account_balance / card.funding_goal));
 
-    return div({ 'class': 'card' },
+    return div({ 'class': 'card', onClick: curry(set_route, card.href) },
       div({ style: 'padding: 7px; background: #EEE;' },
         a({ href: card.href, style: 'display: inline-block; vertical-align: middle; margin-right: 10px;' }, img({ style: 'width: 40px; border-radius: 6px', src: card.image_url })),
         div({ style: 'font-size: 16px; font-weight: bold; display: inline-block; vertical-align: middle;' }, a({ href: card.href, style: 'color: #333;' }, card.title))
