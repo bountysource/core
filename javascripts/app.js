@@ -114,7 +114,6 @@ with (scope('App')) {
   // this is called by the api when missing authorization for a request.
   define('unauthorized_callback', function(request) {
     save_route_for_redirect();
-    render({ target: 'signin-message' }, error_message("You need to be logged in to do that! Login or create an account to proceed."));
     hide('content');
     show('signin');
   })

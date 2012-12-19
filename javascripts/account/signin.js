@@ -11,8 +11,6 @@ with (scope('App')) {
     var params = get_params();
 
     return div(
-      div({ id: 'signin-message' }),
-
       div({ style: 'display: inline-block; width: 540px; margin-right: 25px; padding-right: 24px; vertical-align: top; text-align: center; border-right: 1px solid #E0E0E0;' },
         div({ style: 'padding-bottom; 15px; margin-bottom: 59px;' },
           img({ src: 'images/github.png', style: 'height: 100px; vertical-align: middle; margin-right: 15px;' }),

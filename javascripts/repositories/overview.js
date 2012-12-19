@@ -94,7 +94,7 @@ with (scope('Repository')) {
 
           if (options.show_repository) {
             row_data.push(
-              td({ style: 'vertical-align: middle;' }, a({ href: Repository.get_href(issue.repository), title: issue.repository.display_name }, img({ src: issue.repository.user.avatar_url, style: 'width: 30px; border-radius: 3px; margin: 0 5px;' }) ))
+              td({ style: 'vertical-align: middle;' }, a({ href: Repository.get_href(issue.repository), title: issue.repository.display_name }, img({ src: issue.repository.owner.avatar_url, style: 'width: 30px; border-radius: 3px; margin: 0 5px;' }) ))
             );
           }
 

@@ -67,7 +67,10 @@ with (scope('App')) {
 
       div({ id: 'before-content'}),
 
-      section({ id: 'signin', style: 'display: none;' }, signin_form()),
+      section({ id: 'signin', style: 'display: none;' },
+        div({ id: 'signin-message' }),
+        signin_form()
+      ),
 
       section({ id: 'content' },
         yield

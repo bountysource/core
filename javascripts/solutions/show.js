@@ -1,5 +1,5 @@
-with (scope('PullRequest', 'App')) {
-  route('#repos/:login/:repository/issues/:issue_number/issue_branch', function(login, repository, issue_number) {
+with (scope('Solutions', 'App')) {
+  route('#repos/:login/:repository/issues/:issue_number/solution', function(login, repository, issue_number) {
     if (require_login()) return;
 
     var target_div = div('Loading...');
