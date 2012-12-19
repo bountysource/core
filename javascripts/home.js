@@ -142,7 +142,7 @@ with (scope('Home', 'App')) {
       div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px; font-size: 16px;' },
         div({ style: 'display: inline-block; width: 33%; vertical-align: middle;'},
           (card.account_balance > 0) && div(
-            a({ href: card.href, style: 'display: inline; vertical-align: middle; text-decoration: none; color: inherit;' }, money(card.account_balance))
+            a({ href: card.href, style: 'display: inline; vertical-align: middle; text-decoration: none; color: #48B848;' }, money(card.account_balance))
           )
         ),
         div({ style: 'display: inline-block; width: 33%; vertical-align: middle;' },
@@ -154,7 +154,7 @@ with (scope('Home', 'App')) {
           )
         ),
         div({ style: 'display: inline-block; width: 33%; text-align: right; vertical-align: middle;' },
-          a({ href: card.href, style: 'display: inline; vertical-align: middle;' }, 'Back this!')
+          a({ href: card.href, style: 'display: inline; vertical-align: middle; color: inherit;' }, 'Back this!')
         )
       ),
 
