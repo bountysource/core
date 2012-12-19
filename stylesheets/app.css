@@ -52,7 +52,7 @@ header ul li a {
 
 
 
-section#content { width: 955px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }
+section#content, section#signin { width: 955px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }
 
 section#homepage { width: 978px; margin: 0 auto; }
 section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; }

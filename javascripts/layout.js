@@ -31,7 +31,7 @@ with (scope('App')) {
         div({ id: 'user_nav_flyout' },
           a({ href: '#account/fundraisers' }, 'Fundraisers'),
           a({ href: '#contributions' }, 'Contributions'),
-          a({ href: '#issue_branches' }, 'Issue Branches'),
+          a({ href: '#solutions' }, 'Solutions'),
 
           a({ href: '#account' }, 'Account' +
             (user.account.balance > 0 ? ' (' + money(user.account.balance) + ')' : '')),
@@ -66,6 +66,8 @@ with (scope('App')) {
       ),
 
       div({ id: 'before-content'}),
+
+      section({ id: 'signin', style: 'display: none;' }, signin_form()),
 
       section({ id: 'content' },
         yield

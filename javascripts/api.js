@@ -22,7 +22,7 @@ with (scope('BountySource')) {
     options.callback = function(response) {
       if (response && response.meta && parseInt(response.meta.status) == 401) {
         Storage.remove('access_token');
-        set_route('#signin');
+        scope.instance.App.unauthorized_callback ? scope.instance.App.unauthorized_callback(options) : set_route('#');
       } else {
         // turn error message into string, or use default
         if (!response.meta.success) {

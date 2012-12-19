@@ -67,9 +67,7 @@ with (scope('App')) {
     if (logged_in()) {
       return false;
     } else {
-      save_route_for_redirect();
-      window.location = '#signin'; // faster?
-      return true;
+      unauthorized_callback();
     }
   });
 
@@ -78,8 +76,7 @@ with (scope('App')) {
     if (logged_in()) {
       return false;
     } else {
-      save_route_for_redirect();
-      set_route('#signin');
+      unauthorized_callback();
     }
   });
 
@@ -113,4 +110,12 @@ with (scope('App')) {
     inner.style.width = percentage+'%';
     return outer;
   });
+
+  // this is called by the api when missing authorization for a request.
+  define('unauthorized_callback', function(request) {
+    save_route_for_redirect();
+    render({ target: 'signin-message' }, error_message("You need to be logged in to do that! Login or create an account to proceed."));
+    hide('content');
+    show('signin');
+  })
 };
