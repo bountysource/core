@@ -94,46 +94,60 @@ with (scope('Issue', 'App')) {
   define('developer_box', function(issue) {
     var developer_div = div({ id: 'developer-box' });
 
-    BountySource.get_cached_user_info(function(user_info) {
-      if (user_info.github_user) {
-        // asynchronously load pull requests for the repo
-        BountySource.get_pull_requests(issue.repository.owner.login, issue.repository.name, user_info.github_user.login, function(response) {
-          if (response.meta.success) {
-            if (response.data.length <= 0) {
-              render({ into: developer_div },
-                info_message({ style: 'margin: 0; text-align: center;' },
-                  span("Submit a pull request through ", a({ href: 'https://github.com/'+issue.repository.full_name, target: '_blank' }, "GitHub"), ", then you can select it as a solution here.")
-                )
-              );
-            } else {
-              render({ into: developer_div },
+    var link_github_account_content = div({ style: 'text-align: center;' },
+      info_message("Want to submit a pull request to solve this issue and earn the bounty?"),
+      a({ 'class': 'btn-auth btn-github large hover', style: 'font-size: 16px;', href: Github.auth_url() }, "Link with GitHub")
+    );
 
-                form({ action: curry(create_solution, issue.repository.owner.login, issue.repository.name, issue.number), style: 'text-align: center;' },
-                  div({ id: 'developer-box-messages' }),
+    // if issue has solution, a pull request has already been submitted
+    if (issue.solution) {
+      var pull_request = issue.solution.pull_request;
+      render({ into: developer_div },
+        success_message({ style: 'margin: 0;' }, "Pull request submitted."),
+        br(),
+        a({ 'class': 'green', href: 'https://github.com/'+issue.repository.full_name+'/issues/'+pull_request.number, target: '_blank' }, 'View Pull Request'),
+        br(),
+        a({ 'class': 'green', href: 'https://github.com/'+issue.repository.full_name+'/issues/'+issue.number, target: '_blank' }, 'View Issue')
+      )
+    } else if (!logged_in()) {
+      render({ into: developer_div }, link_github_account_content);
+    } else {
+      BountySource.get_cached_user_info(function(user_info) {
+        if (logged_in() && user_info.github_user) {
+          // asynchronously load pull requests for the repo
+          BountySource.get_pull_requests(issue.repository.owner.login, issue.repository.name, user_info.github_user.login, function(response) {
+            if (response.meta.success) {
+              if (response.data.length <= 0) {
+                render({ into: developer_div },
+                  info_message({ style: 'margin: 0; text-align: center;' },
+                    span("Submit a pull request through ", a({ href: 'https://github.com/'+issue.repository.full_name, target: '_blank' }, "GitHub"), ", then you can select it as a solution here.")
+                  )
+                );
+              } else {
+                render({ into: developer_div },
 
-                  span({ style: 'margin-bottom: 10px; display: block;' }, "Your pull requests for ", a({ href: 'https://github.com/'+issue.repository.full_name+'/pulls', target: '_blank' }, issue.repository.full_name), ':'),
+                  form({ action: curry(create_solution, issue.repository.owner.login, issue.repository.name, issue.number), style: 'text-align: center;' },
+                    div({ id: 'developer-box-messages' }),
 
-                  select({ name: 'pull_request_number', style: 'width: 100%; margin-bottom: 15px;' },
-                    response.data.map(function(pull_request) {
-                      return option({ value: pull_request.number }, '#'+pull_request.number+': '+pull_request.title)
-                    })
-                  ),
+                    span({ style: 'margin-bottom: 10px; display: block;' }, "Your pull requests for ", a({ href: 'https://github.com/'+issue.repository.full_name+'/pulls', target: '_blank' }, issue.repository.full_name), ':'),
 
-                  submit({ 'class': 'green' }, "Submit Solution")
-                )
-              );
+                    select({ name: 'pull_request_number', style: 'width: 100%; margin-bottom: 15px;' },
+                      response.data.map(function(pull_request) {
+                        return option({ value: pull_request.number }, '#'+pull_request.number+': '+pull_request.title)
+                      })
+                    ),
+
+                    submit({ 'class': 'green' }, "Submit Solution")
+                  )
+                );
+              }
             }
-          }
-        });
-      } else {
-        render({ into: developer_div },
-          div({ style: 'text-align: center;' },
-            info_message("Want to submit a pull request to solve this issue and earn the bounty?"),
-            a({ 'class': 'btn-auth btn-github large hover', style: 'font-size: 16px;', href: Github.auth_url() }, "Link with GitHub")
-          )
-        );
-      }
-    })
+          });
+        } else {
+          render({ into: developer_div }, link_github_account_content);
+        }
+      });
+    }
 
     return div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
       ribbon_header("Developers"),
