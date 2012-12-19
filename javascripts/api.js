@@ -131,35 +131,6 @@ with (scope('BountySource')) {
     api('/github/user/repos/', callback);
   });
 
-  define('create_solution', function(login, repository, issue_number, branch_name, callback) {
-    // first, fork repo
-    api('/github/repos/'+login+'/'+repository+'/fork', 'POST', function(response) {
-      // if the repo fork fails, skip solution creation
-      if (!response.meta.success) {
-        return callback(response);
-      } else {
-        var forked_repository = response.data;
-
-        var check_repository = function() {
-          BountySource.get_repository(forked_repository.owner.login, forked_repository.name, function(response) {
-            if (response.meta.success) {
-              // now we can create the branch, and Solution model
-              api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solution', 'POST', { branch_name: branch_name }, callback);
-            } else {
-              setTimeout(check_repository, 3000);
-            }
-          });
-        };
-
-        setTimeout(check_repository, 3000);
-      }
-    });
-  });
-
-  define('submit_solution', function(login, repository, issue_number, data, callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solution/submit', 'POST', data, callback);
-  });
-  
   define('get_repository_overview', function(login, repository, callback) {
     api('/github/repos/'+login+'/'+repository+'/overview', callback);
   });
@@ -230,5 +201,13 @@ with (scope('BountySource')) {
 
   define('get_user_profile', function(display_name, callback) {
     api('/users/'+display_name, callback);
+  });
+
+  define('get_pull_requests', function(login, repository, github_user_login, callback) {
+    api('/github/repos/'+login+'/'+repository+'/pulls/'+github_user_login, callback);
+  });
+
+  define('create_solution', function(login, repository, issue_number, pull_request_number, callback) {
+    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solutions', 'POST', { pull_request_number: pull_request_number }, callback);
   });
 }

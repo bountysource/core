@@ -94,49 +94,46 @@ with (scope('Issue', 'App')) {
   define('developer_box', function(issue) {
     var developer_div = div({ id: 'developer-box' });
 
-    if (Github.account_linked()) {
-      BountySource.get_cached_user_info(function(user_info) {
-        // render message if read-only permissions
-        if ((user_info.github_user.permissions||[]).indexOf('public_repo') < 0) {
-          render({ into: developer_div },
-            info_message(
-              div({ style: 'text-align: center;' },
-                img({ style: 'width: 75px; border-radius: 3px;', src: user_info.github_user.avatar_url }), span(user_info.github_user.login)
-              ),
-              span({ style: 'margin-top: 10px; display: block;' }, "Your GitHub account is linked, but we need write permissions to create an issue branch.")
-            ),
-            Github.link_requiring_auth({ scope: 'public_repo' }, 'Update Permissions')
-          );
-        } else {
-          IssueBranch.get_solution(issue.repository.user.login, issue.repository.name, issue.number, function(solution) {
-            if (solution) {
+    BountySource.get_cached_user_info(function(user_info) {
+      if (user_info.github_user) {
+        // asynchronously load pull requests for the repo
+        BountySource.get_pull_requests(issue.repository.owner.login, issue.repository.name, user_info.github_user.login, function(response) {
+          if (response.meta.success) {
+            if (response.data.length <= 0) {
               render({ into: developer_div },
-                a({ 'class': 'green', href: '#repos/'+issue.repository.owner.login+'/'+issue.repository.name+'/issues/'+issue.number+'/issue_branch' }, 'View Issue Branch')
+                info_message({ style: 'margin: 0; text-align: center;' },
+                  span("Submit a pull request through ", a({ href: 'https://github.com/'+issue.repository.full_name, target: '_blank' }, "GitHub"), ", then you can select it as a solution here.")
+                )
               );
             } else {
-              var advanced_box = div({ id: 'advanced-developer-box', style: "margin: 10px 0; display: none"},
-                b('Name: '), text({ name: 'branch_name', value: 'issue'+issue.number, style: 'width: 100px' })
-              );
-
               render({ into: developer_div },
-                form({ action: curry(create_solution, issue.repository.owner.login, issue.repository.name, issue.number) },
-                  div('This will create a branch in GitHub for you to solve this issue.'),
-                  advanced_box,
-                  br(),
-                  submit({ 'class': 'green' }, 'Create Issue Branch'),
-                  div({ style: 'text-align: right; font-size: 11px' }, '(', a({ id: 'advanced-button', href: curry(toggle_visibility, advanced_box) }, 'advanced'), ')')
+
+                form({ action: curry(create_solution, issue.repository.owner.login, issue.repository.name, issue.number), style: 'text-align: center;' },
+                  div({ id: 'developer-box-messages' }),
+
+                  span({ style: 'margin-bottom: 10px; display: block;' }, "Your pull requests for ", a({ href: 'https://github.com/'+issue.repository.full_name+'/pulls', target: '_blank' }, issue.repository.full_name), ':'),
+
+                  select({ name: 'pull_request_number', style: 'width: 100%; margin-bottom: 15px;' },
+                    response.data.map(function(pull_request) {
+                      return option({ value: pull_request.number }, '#'+pull_request.number+': '+pull_request.title)
+                    })
+                  ),
+
+                  submit({ 'class': 'green' }, "Submit Solution")
                 )
               );
             }
-          });
-        }
-      });
-    } else {
-      render({ into: developer_div },
-        info_message("To start working on a solution, link your GitHub account with BountySource."),
-        Github.link_requiring_auth({ scope: 'public_repo' }, 'Link GitHub Account')
-      );
-    }
+          }
+        });
+      } else {
+        render({ into: developer_div },
+          div({ style: 'text-align: center;' },
+            info_message("Want to submit a pull request to solve this issue and earn the bounty?"),
+            a({ 'class': 'btn-auth btn-github large hover', style: 'font-size: 16px;', href: Github.auth_url() }, "Link with GitHub")
+          )
+        );
+      }
+    })
 
     return div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
       ribbon_header("Developers"),
@@ -155,42 +152,15 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_solution', function(login, repository, issue_number, form_data) {
-    hide('developer-box');
-    render_message(info_message(
-      h1('This will take a moment...'),
-      p("We are forking the repository (if necessary), and creating a branch for you to work on.")
-    ));
+    // hide('developer-box');
 
-    Github.require_permissions('public_repo', function(authorized, auth_url) {
-      if (!authorized) {
-        save_route_for_redirect();
-        window.location.href = auth_url;
+    BountySource.create_solution(login, repository, issue_number, form_data.pull_request_number, function(response) {
+      console.log(response);
+
+      if (response.meta.success) {
+        render({ target: 'developer-box-messages' }, success_message("Pull Request submitted as solution! We'll keep track of it for you."));
       } else {
-        BountySource.create_solution(login, repository, issue_number, form_data.branch_name, function(response) {
-          show('developer-box');
-
-          if (response.meta.success) {
-            set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number+'/issue_branch');
-          } else {
-            // precondition failed. need to rebase the forked master branch.
-            if (response.meta.status == 412) {
-              render_message(
-                error_message(response.data.error, ' Follow the instructions below to sync your master branch, after which you can begin working on a solution.'),
-
-                h3('Syncing Your Master Branch'),
-                p('To start working on this issue, you need to sync your repository with the original. This minimizes conflicts when you want to submit your solution, making your life much easier.'),
-                p('Navigate to your repository, and run the following commands:'),
-                code(
-                  'git checkout master',
-                  'git pull https://github.com/'+login+'/'+repository+'.git master',
-                  'git push'
-                )
-              );
-            } else {
-              render_message(error_message(response.data.error));
-            }
-          }
-        });
+        render({ target: 'developer-box-messages' }, error_message(response.data.error));
       }
     });
   });

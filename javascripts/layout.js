@@ -141,33 +141,49 @@ with (scope('App')) {
   });
 
   define('error_message', function() {
-    return message({ message_class: 'error-message', close_button: false }, arguments);
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments);
+    return message(merge({ message_class: 'error-message', close_button: false }, options), arguments);
   });
 
   define('success_message', function() {
-    return message({ message_class: 'success-message', close_button: false }, arguments);
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments);
+    return message(merge({ message_class: 'success-message', close_button: false }, options), arguments);
   });
 
   define('info_message', function() {
-    return message({ message_class: 'info-message', close_button: false }, arguments);
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments);
+    return message(merge({ message_class: 'info-message', close_button: false }, options), arguments);
   });
 
   define('small_error_message', function(options) {
-    return message({ message_class: 'error-message small', close_button: true }, arguments);
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments);
+    return message(merge({ message_class: 'error-message small', close_button: true }, options), arguments);
   });
 
   define('small_success_message', function() {
-    return message({ message_class: 'success-message small', close_button: true }, arguments);
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments);
+    return message(merge({ message_class: 'success-message small', close_button: true }, options), arguments);
   });
 
   define('small_info_message', function() {
-    return message({ message_class: 'info-message small', close_button: true }, arguments);
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments);
+    return message(merge({ message_class: 'info-message small', close_button: true }, options), arguments);
   });
 
   define('message', function() {
     var arguments = flatten_to_array(arguments),
         options   = shift_options_from_args(arguments);
-    return div({ 'class': options.message_class },
+
+    options['class'] = options.message_class;
+    delete options.message_class;
+
+    return div(options,
       options.close_button && a({ 'class': 'close-button', href: options.on_close || clear_message }, 'x'),
       arguments
     );
