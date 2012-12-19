@@ -59,7 +59,7 @@ with (scope('Repository', 'App')) {
       table(
         projects.map(function(project) {
           return tr(
-            td({ style: 'vertical-align: middle;' }, a({ href: Repository.get_href(project) }, img({ src: project.user.avatar_url, style: 'width: 50px; border-radius: 3px; margin: 0 5px;' }))),
+            td({ style: 'vertical-align: middle;' }, a({ href: Repository.get_href(project) }, img({ src: project.owner.avatar_url, style: 'width: 50px; border-radius: 3px; margin: 0 5px;' }))),
             td(a({ href: Repository.get_href(project) }, project.full_name )),
             td({ style: 'color: #888' }, p({ style: 'width: 250px; min-height: 10px;' }, project.description))
           );
