@@ -130,9 +130,9 @@ with (scope('Home', 'App')) {
       div({ style: 'clear: both' }),
 
       // title, description, and comment count
-      div({ style: 'margin: 15px 5px;' },
+      div({ style: 'margin: 15px 5px; overflow: auto' },
         div({ style: '' }, a({ href: card.href, style: 'color: inherit; overflow: hidden;' }, card.title)),
-        p({ style: 'color: #999; font-size: 80%; overflow: hidden;' },
+        p({ style: 'color: #999; font-size: 80%;' },
           abbreviated_text(card.description, 100)
         )
       ),
@@ -174,8 +174,8 @@ with (scope('Home', 'App')) {
       div({ style: 'clear: both' }),
 
       // title, description, and comment count
-      div({ style: 'margin: 15px 5px;' },
-        p({ style: 'color: #999; overflow: hidden;' }, card.description)
+      div({ style: 'margin: 15px 5px; overflow: auto' },
+        p({ style: 'color: #999;' }, card.description)
       ),
 
       div({ style: 'clear: both' }),
