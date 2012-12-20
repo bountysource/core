@@ -31,8 +31,8 @@ with (scope('Home', 'App')) {
     var recent_people_div = div();
     BountySource.recent_people(function(response) {
       render({ into: recent_people_div },
-        div({ style: "padding: 30px 10px 10px 10px" },
-          div({ style: 'color: #888; font-style: italic; margin-bottom: 5px' }, "Please join our community of ", b(response.data.total_count, " developers"), ":"),
+        div({ style: "padding: 10px" },
+          div({ style: 'color: #888; font-style: italic; margin-bottom: 5px' }, response.data.total_count, " members have joined BountySource already!"),
 
           response.data.people.map(function(person) {
             return div({ 'class': 'recent_signups' },
@@ -49,7 +49,7 @@ with (scope('Home', 'App')) {
 
       h1('The funding platform for open-source software.'),
 
-      div({ style: 'text-align: center; padding: 30px 0 0 0' },
+      div({ style: 'text-align: center; padding: 30px 0 20px 0' },
         span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Sign in with...'),
         a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
         //a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px' }, "Facebook"),
