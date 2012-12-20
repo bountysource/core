@@ -4,7 +4,9 @@ with (scope('App')) {
       set_route('#');
       return;
     }
-    render(signin_form());
+    render(':)');
+    hide('content');
+    show('signin');
   });
 
   define('signin_form', function() {
@@ -46,7 +48,7 @@ with (scope('App')) {
       div({ style: 'display: inline-block; width: 365px; vertical-align: middle;' },
         fancy_header('CREATE ACCOUNT'),
 
-        form({ 'class': 'fancy', action: create_account },
+        form({ 'class': 'fancy', action: App.create_account },
           div({ id: 'create-account-messages' }),
 
           div({ style: 'margin-bottom: 10px;' },

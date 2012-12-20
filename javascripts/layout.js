@@ -72,7 +72,6 @@ with (scope('App')) {
       div({ id: 'before-content'}),
 
       section({ id: 'signin', style: 'display: none;' },
-        div({ id: 'signin-message' }),
         signin_form()
       ),
 
