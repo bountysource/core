@@ -31,13 +31,17 @@ with (scope('Home', 'App')) {
     var recent_people_div = div();
     BountySource.recent_people(function(response) {
       render({ into: recent_people_div },
-        response.data.map(function(person) {
-          return div({ 'class': 'recent_signups' },
-            a({ href: '#users/'+person.display_name }, img({ src: person.avatar_url }))
-          );
-        }),
-        
-        div({ style: 'clear: both' })
+        div({ style: "padding: 30px 10px 10px 10px" },
+          div({ style: 'color: #888; font-style: italic; margin-bottom: 5px' }, "Please join our community of ", b(response.data.total_count, " developers"), ":"),
+
+          response.data.people.map(function(person) {
+            return div({ 'class': 'recent_signups' },
+              a({ href: '#users/'+person.display_name }, img({ src: person.avatar_url }))
+            );
+          }),
+
+          div({ style: 'clear: both' })
+        )
       )
     });
     
@@ -53,10 +57,8 @@ with (scope('Home', 'App')) {
         //div({ style: 'margin-bottom: 10px' }, a({ 'class': "btn-auth btn-google" }, "Sign in with Google"))
       ),
 
-      div({ style: "padding: 30px 10px 10px 10px" },
-        div({ style: 'color: #888; font-style: italic; margin-bottom: 5px' }, "Recently joined:"),
-        recent_people_div
-      ),
+      recent_people_div,
+      
       div({ style: 'clear: both' })
     );
   });
