@@ -57,7 +57,6 @@ with (scope('App')) {
             li(a({ href: '#faq' }, 'FAQ')),
             li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
             //li(a({ href: '#' }, 'Blog')),
-            li(a({ href: '#bounties' }, 'Find Bounties')),
 
             logged_in() ? [
               li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
