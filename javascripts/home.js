@@ -27,7 +27,8 @@ with (scope('Home', 'App')) {
     check_scroll_to_see_if_we_need_more_cards();
   });
 
-  define('homepage_box', function() {
+  // render the homepage box, which always has recent signups at the bottom
+  define('homepage_box_layout', function() {
     var recent_people_div = div();
     BountySource.recent_people(function(response) {
       render({ into: recent_people_div },
@@ -44,9 +45,16 @@ with (scope('Home', 'App')) {
         )
       )
     });
-    
-    return div({ style: "background: #f2f3f2; border: 10px solid white; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px"},
 
+    return div({ style: "background: #f2f3f2; border: 10px solid white; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px"},
+      arguments,
+      recent_people_div,
+      div({ style: 'clear: both' })
+    );
+  });
+
+  define('homepage_box', function() {
+    return homepage_box_layout(
       h1('The funding platform for open-source software.'),
 
       div({ style: 'text-align: center; padding: 30px 0 20px 0' },
@@ -55,23 +63,18 @@ with (scope('Home', 'App')) {
         //a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px' }, "Facebook"),
         a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin' }, "Email Address")
         //div({ style: 'margin-bottom: 10px' }, a({ 'class': "btn-auth btn-google" }, "Sign in with Google"))
-      ),
-
-      recent_people_div,
-      
-      div({ style: 'clear: both' })
+      )
     );
   });
 
 
   define('homepage_box_authed', function() {
-    return div({ style: "background: #f2f3f2; border: 10px solid white; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px"},
-
+    return homepage_box_layout(
       h1('The funding platform for open-source software.'),
 
       div({ style: 'text-align: center; padding: 30px 0 30px 0;' },
         span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Get started...'),
-        
+
         button({ 'class': 'blue', style: 'width: 200px', onClick: curry(set_route, '#bounties') }, 'Browse All Bounties'),
 
         span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic; padding: 0 25px'}, 'or'),
