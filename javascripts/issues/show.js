@@ -92,7 +92,7 @@ with (scope('Issue', 'App')) {
   });
   
   define('developer_box', function(issue) {
-    var developer_div = div({ id: 'developer-box' });
+    var developer_div = div({ id: 'developer-box' }, p({ style: 'text-align: center;' }, 'Loading...'));
 
     var link_github_account_content = div({ style: 'text-align: center;' },
       info_message("Want to submit a pull request to solve this issue and earn the bounty?"),
