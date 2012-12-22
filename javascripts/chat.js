@@ -1,13 +1,16 @@
 with (scope('Chat', 'App')) {
-  define('chat_server', 'https://www.bountysource.com/chat/bountysource.html');
-
   define('show_chat', function() {
     var chatbar = document.getElementById('chatbar'),
         footer  = document.getElementsByTagName('footer')[0],
         chatbar_content = document.getElementById('chatbar-content');
 
     if (chatbar_content.innerHTML.length <= 0) {
-      render({ target: 'chatbar-content' }, iframe({ src: chat_server }));
+      var url = 'https://www.bountysource.com/chat/bountysource.html';
+      if (Storage.get('user_info')) {
+        var display_name = JSON.parse(scope.instance.Storage.get('user_info')).display_name;
+        if (display_name && display_name.length > 0) url = url + '?display_name=' + display_name.replace(/ /g,'');
+      }
+      render({ target: 'chatbar-content' }, iframe({ src: url }));
       chatbar.classList.remove('minimized');
       chatbar.classList.add('active');
     } else if (chatbar.classList.contains('minimized')) {
