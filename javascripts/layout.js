@@ -47,56 +47,61 @@ with (scope('App')) {
   });
 
   define('default_layout', function(yield) {
-    return section({ id: 'wrapper' },
-      header(
-        section(
-          h1(a({ href: '#' }, img({ style: 'margin-left: 20px; vertical-align: middle;', src: 'images/logo-beta.png' }))),
+    if (!scope.rendered_default_layout) {
+      scope.rendered_default_layout_inner = section({ id: 'content' });
+      scope.rendered_default_layout = section({ id: 'wrapper' },
+        header(
+          section(
+            h1(a({ href: '#' }, img({ style: 'margin-left: 20px; vertical-align: middle;', src: 'images/logo-beta.png' }))),
 
-          ul(
-            li(a({ href: '#about' }, 'About')),
-            li(a({ href: '#faq' }, 'FAQ')),
-            li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
-            //li(a({ href: '#' }, 'Blog')),
+            ul(
+              li(a({ href: '#about' }, 'About')),
+              li(a({ href: '#faq' }, 'FAQ')),
+              li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
+              //li(a({ href: '#' }, 'Blog')),
 
-            logged_in() ? [
-              li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
-              li(user_nav)
-            ] : [
-              li(a({ href: '#signin' }, 'Sign In'))
-            ]
+              logged_in() ? [
+                li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
+                li(user_nav)
+              ] : [
+                li(a({ href: '#signin' }, 'Sign In'))
+              ]
+            )
           )
-        )
-      ),
-
-      div({ id: 'before-content'}),
-
-      section({ id: 'signin', style: 'display: none;' },
-        signin_form()
-      ),
-
-      section({ id: 'content' },
-        yield
-      ),
-      footer(
-        div({ style: 'float: right' },
-          "BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " Copyright ©2012, Badger Inc. All rights reserved. "
         ),
-        ul(
-          li(a({ href: '#termsofservice' }, 'Terms of Service')),
-          li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us'))
-        )
-      ),
 
-      chatbar()
-    );
+        div({ id: 'before-content'}),
+
+        section({ id: 'signin', style: 'display: none;' },
+          signin_form()
+        ),
+
+        scope.rendered_default_layout_inner,
+
+        footer(
+          div({ style: 'float: right' },
+            "BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " Copyright ©2012, Badger Inc. All rights reserved. "
+          ),
+          ul(
+            li(a({ href: '#termsofservice' }, 'Terms of Service')),
+            li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us'))
+          )
+        ),
+
+        chatbar()
+      );
+    }
+
+    render({ into: scope.rendered_default_layout_inner }, yield);
+    return scope.rendered_default_layout;
   });
 
   define('chatbar', function() {
-    return div({ 'class': 'open active', id: 'chatbar' },
+    return div({ 'class': 'active minimized', id: 'chatbar' },
       a({ href: Chat.hide_chat, 'class': 'close-button' }, 'X'),
       a({ href: Chat.minimize_chat, 'class': 'close-button min-button' }, '–'),
-      h2({ onclick: Chat.show_chat }, 'BountySource Chatroom'),
-      div({ id: "chatbar-content" }, iframe({ src: 'http://www-qa.badger.com/chat/bountysource.html' }))
+      h2({ onclick: Chat.show_chat }, div({ style: 'text-align: center' }, 'Click to Chat (#bountysource on irc.freenode.net)')),
+      div({ id: "chatbar-content" })
     );
   });
 
@@ -104,6 +109,7 @@ with (scope('App')) {
   before_filter(function() {
     inner_html('before-content', '');
     show('before-content');
+    show('content');
   });
 
   define('breadcrumbs', function() {

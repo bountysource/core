@@ -15,7 +15,7 @@
 #chatbar.active .close-button { display: block; }
 #chatbar .min-button { display: none; }
 #chatbar.active .min-button { display: block; right: 23px; }
-#chatbar h2 { font: 20px AdelleBold, Titillium, Arial, sans-serif; margin: 5px 5px 7px; padding: 0; text-transform: uppercase; color: #fff; cursor: pointer; text-align: center; border-bottom: 0; }
+#chatbar h2 { font: 20px AdelleBold, Titillium, Arial, sans-serif; margin: 5px 5px 7px; padding: 0; color: #fff; cursor: pointer; text-align: center; border-bottom: 0; }
 #chatbar.active h2 { text-align: left; cursor: auto; }
 
 #chatbar iframe {
