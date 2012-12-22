@@ -10,7 +10,7 @@
 }
 /*#chatbar.closed { top: 260px; top: 180px\9; left: -98px; left: 0\9; width: 220px; height: 36px; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -ms-transform: rotate(-90deg); -o-transform: rotate(90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1); }*/
 #chatbar.closed { display: none; }
-#chatbar.active { height: 250px; width: 980px; margin-left: -495px; left: 50%; bottom: 0px; }
+#chatbar.active { height: 250px; width: 1000px; margin-left: -505px; left: 50%; bottom: 0px; }
 #chatbar .close-button { display: none; }
 #chatbar.active .close-button { display: block; }
 #chatbar .min-button { display: none; }

@@ -34,8 +34,7 @@ with (scope('Chat', 'App')) {
 
   define('maximize_chat', function() {
     var chatbar = document.getElementById('chatbar'),
-        footer  = document.getElementsByTagName('footer')[0],
-        chatbar_content = document.getElementById('chatbar-content');;
+        footer  = document.getElementsByTagName('footer')[0];
     chatbar.classList.remove('minimized');
     footer.classList.add('chatbar');
   });
