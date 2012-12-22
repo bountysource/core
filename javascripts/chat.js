@@ -1,5 +1,5 @@
 with (scope('Chat', 'App')) {
-  define('chat_server', 'https://www-qa.badger.com/chat/bountysource.html');
+  define('chat_server', 'https://www.bountysource.com/chat/bountysource.html');
 
   define('show_chat', function() {
     var chatbar = document.getElementById('chatbar'),
