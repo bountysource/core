@@ -85,7 +85,18 @@ with (scope('App')) {
           li(a({ href: '#termsofservice' }, 'Terms of Service')),
           li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us'))
         )
-      )
+      ),
+
+      chatbar()
+    );
+  });
+
+  define('chatbar', function() {
+    return div({ 'class': 'open active', id: 'chatbar' },
+      a({ href: Chat.hide_chat, 'class': 'close-button' }, 'X'),
+      a({ href: Chat.minimize_chat, 'class': 'close-button min-button' }, '–'),
+      h2({ onclick: Chat.show_chat }, 'BountySource Chatroom'),
+      div({ id: "chatbar-content" }, iframe({ src: 'http://www-qa.badger.com/chat/bountysource.html' }))
     );
   });
 

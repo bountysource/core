@@ -86,18 +86,26 @@ with (scope('App')) {
     return (e ? (e.parentNode.removeChild(e) && true) : false);
   });
 
+  // add class to element
   define('add_class', function(element, class_name) {
-    if (!element || !element.className) return;
-    var parts = element.className.split(/\s+/)
+    if (!element || !element.className || has_class(element, class_name)) return element;
+    var parts = element.className.split(/\s+/);
     parts.push(class_name);
     element.className = parts.join(' ');
     return element;
   });
 
+  // remove class from element
   define('remove_class', function(element, class_name) {
-    if (!element || !element.className) return;
+    if (!element || !element.className || !has_class(element, class_name)) return element;
     element.className = element.className.replace((new RegExp(class_name)),'').trim();
     return element;
+  });
+
+  // check if element has class
+  define('has_class', function(element, class_name) {
+    var class_names = element.className.split(/\s+/);
+    return class_names.indexOf(class_name) >= 0;
   });
 
   // create a progress bar. to change the percentage, adjust the width of the element created with id
