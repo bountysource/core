@@ -122,7 +122,15 @@ with (scope('App')) {
   // this is called by the api when missing authorization for a request.
   define('unauthorized_callback', function(request) {
     save_route_for_redirect();
+
     hide('content');
     show('signin');
+
+    before_filter(function() {
+      if (is_visible('signin')) {
+        hide('signin');
+        show('content');
+      }
+    });
   })
 };
