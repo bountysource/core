@@ -11,8 +11,6 @@ input, textarea, select { vertical-align: middle; }
 form, fieldset { margin:0; padding:0; border-style:none; }
 html { background: #efe9db url(../images/background.png) repeat top center; }
 
-
-
 header { 
   color: #eee; 
   background: white; 
@@ -110,7 +108,7 @@ section#homepage .leaderboard li { list-style: none; margin-top: 8px; width: 195
 section#homepage .leaderboard img { vertical-align: middle; margin-right: 8px }
 
 /*footer { padding: 5px 10px; background: rgba(0,0,0,0.3); margin: 0 20px; border-bottom-left-radius: 7px 7px; border-bottom-right-radius: 7px 7px; }*/
-footer { width: 975px; margin: 0 auto; padding: 25px 0; color: #7e8688; font-size: 12px }
+footer { width: 975px; margin: 0 auto; padding: 12px 0 75px 0; color: #7e8688; font-size: 12px }
 footer a { color: #7e8688; }
 footer ul { margin: 0; padding: 0; list-style: none; height: 18px }
 footer li a { float: left; padding: 0 12px 0 0; } 
