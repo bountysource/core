@@ -57,7 +57,7 @@ with (scope('App')) {
             ul(
               li(a({ href: '#about' }, 'About')),
               li(a({ href: '#faq' }, 'FAQ')),
-              li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us')),
+              li(a({ href: 'mailto:support@bountysource.com' }, 'Contact Us')),
               //li(a({ href: '#' }, 'Blog')),
 
               logged_in() ? [
