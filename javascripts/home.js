@@ -37,7 +37,7 @@ with (scope('Home', 'App')) {
 
           response.data.people.map(function(person) {
             return div({ 'class': 'recent_signups' },
-              a({ href: '#users/'+person.display_name }, img({ src: person.avatar_url }))
+              a({ href: '#users/'+person.id }, img({ src: person.avatar_url }))
             );
           }),
 

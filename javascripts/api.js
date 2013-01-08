@@ -199,8 +199,8 @@ with (scope('BountySource')) {
     api('/user/pledges/'+pledge_id+'/redeem_reward', 'POST', { reward_id: reward_id }, callback);
   });
 
-  define('get_user_profile', function(display_name, callback) {
-    api('/users/'+display_name, callback);
+  define('get_user_profile', function(profile_id, callback) {
+    api('/users/'+profile_id, callback);
   });
 
   define('get_pull_requests', function(login, repository, github_user_login, callback) {

@@ -1,22 +1,25 @@
 with (scope('Profile','App')) {
-  route('#users/:display_name', function(display_name) {
-    var target_div = div('Loading...');
-
+  route('#users/:profile_id', function(profile_id) {
     render(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
-        'Users',
-        display_name
+        '...'
       ),
-      messages(),
-      target_div
+      'Loading...'
     );
 
-    BountySource.get_user_profile(display_name, function(response) {
+    BountySource.get_user_profile(profile_id, function(response) {
       if (response.meta.success) {
         var profile = response.data;
 
-        render({ into: target_div },
+        render(
+          breadcrumbs(
+            a({ href: '#' }, 'Home'),
+            profile.display_name
+          ),
+
+          messages(),
+
           div({ id: 'profile' },
             div({ id: 'head' },
               img({ id: 'avatar-url', src: profile.avatar_url, style: 'width: 80px; height: 80px; vertical-align: middle;' }),
