@@ -63,7 +63,7 @@ with (scope('Fundraisers')) {
       div({ 'class': 'split-main' },
         section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 25px; text-align: center; color: #5e5f5f;' },
           h1({ style: 'font-size: 45px; font-weight: normal; margin: 25px auto;' }, fundraiser.title),
-          span({ style: 'font-size: 16px; margin-bottom: 35px;' }, 'by ', a({ href: '#users/'+fundraiser.person.display_name }, fundraiser.person.display_name))
+          span({ style: 'font-size: 16px; margin-bottom: 35px;' }, 'by ', a({ href: '#users/'+fundraiser.person.id }, fundraiser.person.display_name))
         ),
 
         fundraiser.image_url && section({ id: 'fundraiser-image', style: 'border-bottom: 2px dotted #C7C7C7; text-align: center;' },
@@ -155,11 +155,11 @@ with (scope('Fundraisers')) {
         section({ id: 'fundraiser-about-me', style: 'background: #D2F8D2; padding: 15px; margin: 10px 0; border-radius: 3px;' },
           div({ style: 'margin-bottom: 5px;' },
             div({ style: 'text-align: left; display: inline-block' },
-              a({ href: '#users/'+fundraiser.person.display_name }, img({ src: fundraiser.person.avatar_url, style: 'width: 70px; border-radius: 3px;' }))
+              a({ href: '#users/'+fundraiser.person.id }, img({ src: fundraiser.person.avatar_url, style: 'width: 70px; border-radius: 3px;' }))
             ),
             div({ style: 'display: inline-block; vertical-align: top; margin-left: 10px;' },
               span({ style: 'font-size: 14px; color: gray;'}, 'Project by'), br(),
-              a({ href: '#users/'+fundraiser.person.display_name }, fundraiser.person.display_name)
+              a({ href: '#users/'+fundraiser.person.id }, fundraiser.person.display_name)
             )
           ),
 
