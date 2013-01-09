@@ -11,6 +11,12 @@ with (scope('App')) {
     }
   });
 
+  // parse FB and twitter elements if need be
+  after_filter(function() {
+    window.FB && window.FB.XFBML && window.FB.XFBML.parse();
+    window.twttr && window.twttr.widgets && window.twttr.widgets.load();
+  });
+
   define('time_ago_in_words', function(time) {
     var distance_in_milliseconds = (typeof(time) == "string" ? (new Date(time)) : time) - (new Date());
     var distance_in_minutes = parseInt(Math.abs(distance_in_milliseconds / 60000));
