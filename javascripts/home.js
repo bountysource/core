@@ -47,16 +47,22 @@ with (scope('Home', 'App')) {
     });
 
     return div({ style: "background: #f2f3f2; border: 10px solid white; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px"},
+      h1('The funding platform for open-source software.'),
+
       arguments,
+
       recent_people_div,
-      div({ style: 'clear: both' })
+      div({ style: 'clear: both' }),
+
+      div({ style: 'margin: 10px;' },
+        Twitter.follow_button({ style: 'display: inline-block;' }),
+        Facebook.like_button({ style: 'display: inline-block;' })
+      )
     );
   });
 
   define('homepage_box', function() {
     return homepage_box_layout(
-      h1('The funding platform for open-source software.'),
-
       div({ style: 'text-align: center; padding: 30px 0 20px 0' },
         span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Sign in with...'),
         a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
@@ -70,8 +76,6 @@ with (scope('Home', 'App')) {
 
   define('homepage_box_authed', function() {
     return homepage_box_layout(
-      h1('The funding platform for open-source software.'),
-
       div({ style: 'text-align: center; padding: 30px 0 30px 0;' },
         span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Get started...'),
 

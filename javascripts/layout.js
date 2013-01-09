@@ -50,6 +50,8 @@ with (scope('App')) {
     if (!scope.rendered_default_layout) {
       scope.rendered_default_layout_inner = section({ id: 'content' });
       scope.rendered_default_layout = section({ id: 'wrapper' },
+        div({ id: 'fb-root' }),
+
         header(
           section(
             h1(a({ href: '#' }, img({ style: 'margin-left: 20px; vertical-align: middle;', src: 'images/logo-beta.png' }))),
