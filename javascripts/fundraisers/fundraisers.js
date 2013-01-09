@@ -26,7 +26,7 @@ with (scope('Fundraisers','App')) {
               th({ style: 'width: 75px;' })
             ),
             response.data.map(function(fundraiser) {
-              // depends on whether or not its published
+              // depends on whether or not it's published
               var fundraiser_href = fundraiser.published ? '#fundraisers/'+fundraiser.id : '#account/fundraisers/'+fundraiser.id;
               return tr({ style: 'height: 40px;' },
                 td(a({ href: fundraiser_href }, abbreviated_text(fundraiser.title, 100))),
@@ -329,6 +329,9 @@ with (scope('Fundraisers','App')) {
   * Show a part of the fundraiser edit form. Also, set the actions for next/previous buttons
   * */
   define('select_fundraiser_form_section', function(fundraiser_id, section_id) {
+    // Fake a page view for Analytics
+    if (typeof(_gaq) != 'undefined')
+      _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser_id + '/' + section_id]);
     // show the right part of the form
     var form_section  = document.getElementById(section_id);
     var form_elements = document.getElementById('fundraiser-form').children;
@@ -363,6 +366,9 @@ with (scope('Fundraisers','App')) {
     if (confirm('Are you sure? Once published, you cannot change the funding goal.')) {
       // first, save it. callback hell: population 2
       save_fundraiser(fundraiser, function(save_response) {
+        // Fake a page view for Analytics
+        if (typeof(_gaq) != 'undefined')
+          _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/publish']);
         BountySource.publish_fundraiser(fundraiser.id, function(response) {
           if (response.meta.success) {
             set_route('#account/fundraisers');
@@ -388,6 +394,9 @@ with (scope('Fundraisers','App')) {
   });
 
   define('save_fundraiser', function(fundraiser, callback) {
+    // Fake a page view for Analytics
+    if (typeof(_gaq) != 'undefined')
+      _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/save']);
     render_message(div({ style: 'text-align: center; padding: 5px;' }, 'Saving...'));
 
     var serialized_form = serialize_form('fundraiser-form'),
