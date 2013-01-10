@@ -9,7 +9,7 @@ with (scope('Github','App')) {
   // funnel through Github, to require app link if needed
   define('link_requiring_auth', function(options, text) {
     options = options || {};
-    return a({ 'class': 'green', href: auth_url(options), onclick: curry(save_route_for_redirect, null) }, text);
+    return a({ 'class': 'green', href: auth_url(options) }, text);
   });
 
   // requires user to be logged in, and have a GitHub account linked
