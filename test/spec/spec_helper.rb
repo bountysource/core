@@ -37,6 +37,11 @@ RSpec.configure do |config|
 
     # add a navigate method for scope.js routes
     class << @browser
+      # execute javascript in the scope.js instance
+      def execute_scopejs_script(src)
+        execute_script "with (scope.instance) { #{src} }"
+      end
+
       def goto_route(route)
         goto "https://www-qa.bountysource.com/#{route}"
       end
