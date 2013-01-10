@@ -18,13 +18,16 @@ def proceed_through_paypal_sandbox_flow!
   @browser.input(id: 'login_email').wait_until_present
   @browser.input(id: 'login_email').send_keys     "warren_1346807229_per@badger.com"
   @browser.input(id: 'login_password').send_keys  "346807220"
+  sleep 2
   @browser.button(id: 'submitLogin').click
 
   @browser.checkbox(id: 'esignOpt').wait_until_present
   @browser.checkbox(id: 'esignOpt').click
+  sleep 2
   @browser.button(id: 'agree').click
 
   @browser.button(id: 'continue_abovefold').wait_until_present
+  sleep 2
   @browser.button(id: 'continue_abovefold').click
 end
 
