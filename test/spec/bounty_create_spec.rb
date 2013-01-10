@@ -1,20 +1,7 @@
 require "spec_helper"
 
 describe "Bounty Creation" do
-  before(:all) do
-    # log this browser into the dev paypal account
-    unless @browser.input(id: 'login_email').present?
-      @browser.goto "https://developer.paypal.com/"
-
-      email_input     = @browser.input(id: 'login_email')
-      password_input  = @browser.input(id: 'login_password')
-      email_input.wait_until_present
-
-      email_input.send_keys     "warren@badger.com"
-      password_input.send_keys  "p8DY3mrQ"
-      @browser.button(value: 'Log In').click
-    end
-  end
+  before(:all) { login_to_paypal_sandbox! }
 
   specify do
     @browser.goto_route "#"
@@ -32,16 +19,6 @@ describe "Bounty Creation" do
     @browser.button(value: 'Create Bounty').click
 
     # go through paypal flow
-    @browser.input(id: 'login_email').wait_until_present
-    @browser.input(id: 'login_email').send_keys     "warren_1346807229_per@badger.com"
-    @browser.input(id: 'login_password').send_keys  "346807220"
-    @browser.button(id: 'submitLogin').click
-
-    @browser.checkbox(id: 'esignOpt').wait_until_present
-    @browser.checkbox(id: 'esignOpt').click
-    @browser.button(id: 'agree').click
-
-    @browser.button(id: 'continue_abovefold').wait_until_present
-    @browser.button(id: 'continue_abovefold').click
+    proceed_through_paypal_sandbox_flow!
   end
 end
