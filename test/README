@@ -1,5 +1,0 @@
-Automated browser tests for BountySource
-
-1. `cd test`
-2. `bundle install`
-3. `rake`
