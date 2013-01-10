@@ -20,5 +20,7 @@ describe "Bounty Creation" do
 
     # go through paypal flow
     proceed_through_paypal_sandbox_flow!
+
+    @browser.h2(text: 'Bounty Created!').wait_until_present
   end
 end
