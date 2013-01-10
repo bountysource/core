@@ -126,8 +126,8 @@ with (scope('App')) {
     }
 //    elements.pop(); // shave off extra arrow
 
-    var active_element_index = (active_element_index || elements.length- 1),
-        active_element = elements[active_element_index];
+    active_element_index = (active_element_index || elements.length- 1);
+    var  active_element = elements[active_element_index];
 
     // add the active last crumb. default is last crumb
     elements.splice(active_element_index, 1, span({ 'class': 'crumb' },
@@ -298,21 +298,21 @@ with (scope('App')) {
       var other_sliders = [];
       for (var slider in all_sliders) if (target_element != all_sliders[slider]) other_sliders.push(all_sliders[slider]);
       return other_sliders;
-    }
+    };
 
     // helper function. get the sum of the min values of sliders in the group
     var sum_slider_mins = function(group) {
       var sum = 0;
       for (var index in group) sum += parseInt(group[index].getAttribute('min')||0);
       return sum;
-    }
+    };
 
     // helper function. sum the values of the sliders in the group
     var sum_slider_values = function(group) {
       var sum = 0;
       for (var index in group) sum += parseInt(group[index].value||0);
       return sum;
-    }
+    };
 
     // helper function. adjust the difference view without showing negatives
     var set_difference_element = function(n) { if (difference_element) difference_element.innerHTML = money(n > 0 ? n : 0) };
@@ -320,19 +320,18 @@ with (scope('App')) {
 
     // helper function. adjust the value of all sliders
     var adjust_slider_values = function(amount, group) {
-      for (var index in group) {
-        var adjusted_value = parseInt(group[index].value) + amount;
-        group[index].value = adjusted_value;
+      for (var i=0; i < group.length; i++) {
+        group[i].value = parseInt(group[i].value) + amount;
         // also need to adjust the input
-        set_input_value(parseInt(group[index].value), get_input_from_slider(group[index]));
+        set_input_value(parseInt(group[i].value), get_input_from_slider(group[i]));
       }
       // recalculate the difference_element
       if (difference_element) set_difference_element(options.max - sum_slider_values(all_sliders));
-    }
+    };
 
     // for each slider specified
-    for (var this_slider in all_sliders) {
-      var this_slider = all_sliders[this_slider];
+    for (i=0; i < all_sliders.length; i++) {
+      var this_slider = all_sliders[i];
 
       // set min from tax attribute if present. also make initial value the taxed value, or zero.
       this_slider.setAttribute('min', (this_slider.getAttribute('data-tax')) ? (parseFloat(this_slider.getAttribute('data-tax'))*options.max) : 0);
