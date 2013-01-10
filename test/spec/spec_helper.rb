@@ -31,9 +31,20 @@ def proceed_through_paypal_sandbox_flow!
   @browser.button(id: 'continue_abovefold').click
 end
 
+def login_with_github!
+  @browser.goto 'https://github.com/login'
+  # return if already logged in to GitHub
+  unless @browser.div(id: 'user-links').present?
+    @browser.input(id: 'login_field').wait_until_present
+    @browser.input(id: 'login_field').send_keys "bountysource-qa"
+    @browser.input(id: 'password').send_keys    "badger42"
+    @browser.input(value: 'Sign in').click
+  end
+end
+
 RSpec.configure do |config|
   config.before(:all) do
-    @browser ||= Watir::Browser.new :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate]
+    @browser = Watir::Browser.new :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate]
 
     # add a navigate method for scope.js routes
     class << @browser
