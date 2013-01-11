@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "selenium-webdriver", "2.19.0"
+gem "watir-webdriver", "0.5.3"
 gem "rake"
-gem "watir"
 gem "rspec"

@@ -1,5 +1,6 @@
-require "rspec"
-require "watir-webdriver"
+require "rubygems"
+require 'bundler'
+Bundler.require
 
 def login_to_paypal_sandbox!
   # log this browser into the dev paypal account
@@ -44,7 +45,8 @@ end
 
 RSpec.configure do |config|
   config.before(:all) do
-    @browser = Watir::Browser.new :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate]
+    puts "opening browser"
+    @browser = Watir::Browser.new :chrome #, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate]
 
     # add a navigate method for scope.js routes
     class << @browser
@@ -60,6 +62,7 @@ RSpec.configure do |config|
   end
 
   config.after(:all) do
+    puts "closing browser"
     @browser.close
   end
 end
