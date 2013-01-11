@@ -1,4 +1,11 @@
 with (scope('Home', 'App')) {
+  
+  route('#not_found', function() {
+    render(
+      h1("Oops! That page wasn't found!"),
+      p('If you know what you were expecting, please send us an email: ', a({ href: 'mailto:support@bountysource.com' }, 'support@bountysource.com'))
+    );
+  });
 
   route('#', function() {
     // render nothing, then hide the content for now... we're using before-content!!

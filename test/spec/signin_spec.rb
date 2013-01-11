@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe "Signin" do
+  before(:all) { login_with_github! }
+
   after(:each) do
     @browser.execute_scopejs_script "BountySource.logout();"
-    @browser.a(text: 'Sign In').wait_until_present
   end
 
   it "should sign in with github from home page" do
@@ -11,12 +12,6 @@ describe "Signin" do
     @browser.goto_route '#'
     @browser.a(class: 'btn-auth btn-github large hover').wait_until_present
     @browser.a(class: 'btn-auth btn-github large hover').click
-
-    # login at github with bountysource qa account
-    @browser.input(id: 'login_field').wait_until_present
-    @browser.input(id: 'login_field').send_keys "bountysource-qa"
-    @browser.input(id: 'password').send_keys    "badger42"
-    @browser.input(value: 'Sign in').click
 
     @browser.h1(text: 'The funding platform for open-source software.').wait_until_present
     @browser.div(id: 'user-nav').wait_until_present
@@ -27,12 +22,6 @@ describe "Signin" do
     @browser.goto_route '#signin'
     @browser.a(class: 'btn-auth btn-github large hover').wait_until_present
     @browser.a(class: 'btn-auth btn-github large hover').click
-
-    # login at github with bountysource qa account
-    @browser.input(id: 'login_field').wait_until_present
-    @browser.input(id: 'login_field').send_keys "bountysource-qa"
-    @browser.input(id: 'password').send_keys    "badger42"
-    @browser.input(value: 'Sign in').click
 
     # after login, make sure there is a user nav, ensuring login was successful
     @browser.h1(text: 'The funding platform for open-source software.').wait_until_present
