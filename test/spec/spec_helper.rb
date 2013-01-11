@@ -66,7 +66,6 @@ RSpec.configure do |config|
       end
 
       def goto_route(route)
-        # goto "https://www-qa.bountysource.com/#{route}"
         goto "http://www.bountysource.dev/#{route}"
       end
 
@@ -94,6 +93,11 @@ RSpec.configure do |config|
         )
       end
     end
+
+    puts "setting API server to QA"
+    @browser.goto_route "#not_found"
+    @browser.div(id: 'dev-bar').wait_until_present
+    @browser.div(id: 'dev-bar').a(text: 'qa').click if @browser.div(id: 'dev-bar').a(text: 'qa').exists?
   end
 
   config.after(:all) do
