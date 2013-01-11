@@ -36,8 +36,8 @@ describe "Claiming a Bounty" do
     # select a link from the table after featured projects, which contains issues
     issue_links = @browser.tables[1].links.select { |l| l.href =~ /#repos\/\w+\/\w+\/issues\/\d+$/ }
 
-    # select a random issue to click
-    issue_links.sample.click
+    # goto_route instead of .click because it sometimes doesn't scroll enough and chatbar gets the click
+    @browser.goto_route '#'+issue_links.sample.href.split('#').last
 
     @browser.url.should =~ /#repos\/\w+\/\w+\/issues\/\d+$/
     @browser.div(id: 'bounty-box').wait_until_present

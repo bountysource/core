@@ -1,8 +1,6 @@
 require "spec_helper"
 
 describe "Bounty Creation" do
-  before(:all) { login_to_paypal_sandbox! }
-
   specify do
     @browser.goto_route "#"
 

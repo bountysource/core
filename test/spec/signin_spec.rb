@@ -3,10 +3,6 @@ require 'spec_helper'
 describe "Signin" do
   before(:all) { login_with_github! }
 
-  after(:each) do
-    @browser.execute_scopejs_script "BountySource.logout();"
-  end
-
   it "should sign in with github from home page" do
     # click github login button on home page
     @browser.goto_route '#'
@@ -37,8 +33,8 @@ describe "Signin" do
 
     # login with email and password
     @browser.input(id: 'login-email').wait_until_present
-    @browser.input(name: 'email').send_keys     "qa@bountysource.com"
-    @browser.input(name: 'password').send_keys  "badger42"
+    @browser.input(name: 'email').send_keys     CREDENTIALS['bountysource']['email']
+    @browser.input(name: 'password').send_keys  CREDENTIALS['bountysource']['password']
     @browser.button(value: 'Sign In').click
 
     # after login, make sure there is a user nav, ensuring login was successful

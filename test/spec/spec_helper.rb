@@ -5,22 +5,6 @@ require "watir-webdriver"
 
 CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))
 
-def login_to_paypal_sandbox!
-  @master_credentials = CREDENTIALS["paypal"]["master"]
-
-  # log this browser into the dev paypal account
-  @browser.goto "https://developer.paypal.com/"
-
-  email_input     = @browser.input(id: 'login_email')
-  password_input  = @browser.input(id: 'login_password')
-  email_input.wait_until_present
-
-  email_input.send_keys     @master_credentials["email"]
-  password_input.send_keys  @master_credentials["password"]
-
-  @browser.button(value: 'Log In').click
-end
-
 def proceed_through_paypal_sandbox_flow!
   @buyer_credentials = CREDENTIALS["paypal"]["buyer"]
 
@@ -43,23 +27,24 @@ end
 def login_with_github!
   @browser.goto 'https://github.com/login'
   # return if already logged in to GitHub
-  unless @browser.div(id: 'user-links').present?
-    @github_credentials = CREDENTIALS["github"]
+  return unless @browser.url== "https://github.com/login"
 
-    @browser.input(id: 'login_field').wait_until_present
-    @browser.input(id: 'login_field').send_keys @github_credentials["username"]
-    @browser.input(id: 'password').send_keys    @github_credentials["password"]
-    @browser.input(value: 'Sign in').click
-  end
+  @github_credentials = CREDENTIALS["github"]
+
+  @browser.input(id: 'login_field').wait_until_present
+  @browser.input(id: 'login_field').send_keys @github_credentials["username"]
+  @browser.input(id: 'password').send_keys    @github_credentials["password"]
+  @browser.input(value: 'Sign in').click
+  @browser.ul(id: 'user-links').wait_until_present
 end
 
 RSpec.configure do |config|
-  config.before(:all) do
-    puts "opening browser"
-    @browser = Watir::Browser.new :chrome #, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate]
+  config.before(:suite) do
+    puts ">> opening browser"
+    $browser = Watir::Browser.new :chrome #, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate]
 
     # add a navigate method for scope.js routes
-    class << @browser
+    class << $browser
       # execute javascript in the scope.js instance
       def execute_scopejs_script(src)
         execute_script "with (scope.instance) { #{src} }"
@@ -94,14 +79,35 @@ RSpec.configure do |config|
       end
     end
 
-    puts "setting API server to QA"
-    @browser.goto_route "#not_found"
-    @browser.div(id: 'dev-bar').wait_until_present
-    @browser.div(id: 'dev-bar').a(text: 'qa').click if @browser.div(id: 'dev-bar').a(text: 'qa').exists?
+    puts ">> setting API server to QA"
+    $browser.goto_route "#not_found"
+    $browser.div(id: 'dev-bar').wait_until_present
+    $browser.div(id: 'dev-bar').a(text: 'qa').click if $browser.div(id: 'dev-bar').a(text: 'qa').exists?
+
+
+    puts ">> authenticating with PayPal master account for sandbox"
+    master_credentials = CREDENTIALS["paypal"]["master"]
+    $browser.goto "https://developer.paypal.com/"
+    $browser.input(id: 'login_email').wait_until_present
+    $browser.input(id: 'login_email').send_keys(master_credentials["email"])
+    $browser.input(id: 'login_password').send_keys(master_credentials["password"])
+    $browser.button(value: 'Log In').click
+    $browser.a(text: 'preconfigured account').wait_until_present
+
+    puts ">> running specs\n"
   end
 
-  config.after(:all) do
-    puts "closing browser"
-    @browser.close
+  config.before(:all) do
+    @browser = $browser
+  end
+
+  config.before(:each) do
+    @browser.goto_route '#'
+    @browser.execute_scopejs_script "BountySource.logout();"
+  end
+
+  config.after(:suite) do
+    puts "\n\n>> closing browser"
+    $browser.close
   end
 end
