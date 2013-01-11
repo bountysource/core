@@ -8,8 +8,8 @@ CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __
 def proceed_through_paypal_sandbox_flow!
   @buyer_credentials = CREDENTIALS["paypal"]["buyer"]
 
-  @browser.input(id: 'login_email').wait_until_present
-  @browser.input(id: 'login_email').send_keys     @buyer_credentials["email"]
+  @browser.text_field(id: 'login_email').wait_until_present
+  @browser.text_field(id: 'login_email').set(@buyer_credentials["email"])
   @browser.input(id: 'login_password').send_keys  @buyer_credentials["password"]
   sleep 2
   @browser.button(id: 'submitLogin').click
