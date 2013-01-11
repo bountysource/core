@@ -3,8 +3,10 @@ require "json"
 require "rspec"
 require "watir-webdriver"
 
+CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))
+
 def login_to_paypal_sandbox!
-  @master_credentials = YAML.load_file('../config/credentials.yml')["paypal"]["master"]
+  @master_credentials = CREDENTIALS["paypal"]["master"]
 
   # log this browser into the dev paypal account
   @browser.goto "https://developer.paypal.com/"
@@ -20,7 +22,7 @@ def login_to_paypal_sandbox!
 end
 
 def proceed_through_paypal_sandbox_flow!
-  @buyer_credentials = YAML.load_file('../config/credentials.yml')["paypal"]["buyer"]
+  @buyer_credentials = CREDENTIALS["paypal"]["buyer"]
 
   @browser.input(id: 'login_email').wait_until_present
   @browser.input(id: 'login_email').send_keys     @buyer_credentials["email"]
@@ -42,7 +44,7 @@ def login_with_github!
   @browser.goto 'https://github.com/login'
   # return if already logged in to GitHub
   unless @browser.div(id: 'user-links').present?
-    @github_credentials = YAML.load_file('../config/credentials.yml')["github"]
+    @github_credentials = CREDENTIALS["github"]
 
     @browser.input(id: 'login_field').wait_until_present
     @browser.input(id: 'login_field').send_keys @github_credentials["username"]
