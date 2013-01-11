@@ -1,2 +1,3 @@
 .DS_Store
 chromedriver.log
+test/config/*
