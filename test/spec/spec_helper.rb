@@ -39,12 +39,9 @@ end
 RSpec.configure do |config|
   config.before(:suite) do
     puts ">> opening browser"
+    puts ENV.inspect
 
-    $browser = (case Rails.env
-                 when 'development' then Watir::Browser.new(:chrome)
-                 when 'staging' then Watir::Browser.new(:remote, :url => 'http://165.225.134.232:9515/')
-                 else raise "No browser configured for environment #{Rails.env}"
-               end)
+    $browser = ENV['RAILS_ENV'] == 'staging' ? Watir::Browser.new(:remote, :url => 'http://165.225.134.232:9515/') : Watir::Browser.new(:chrome)
 
     # add a navigate method for scope.js routes
     class << $browser
