@@ -62,15 +62,15 @@ section#homepage .recent_signups img { width: 50px; height: 50px }
 
 .card { border-radius: 5px; }
 
-section#homepage .card-column { width: 233px; float: left; margin-right: 15px; }
-section#homepage .card-column img { max-width: 100% }
-section#homepage .card-column:last-child { margin-right: 0; }
+.card-column { width: 233px; float: left; margin-right: 15px; }
+.card-column img { max-width: 100% }
+.card-column:last-child { margin-right: 0; }
 
-section#homepage .card { background: white; padding: 10px; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px; border: 1px solid white }
+.card { background: white; padding: 10px; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px; border: 1px solid white }
 section#homepage .card:hover { box-shadow: 0 0 10px #B38735; border: 1px solid #E0AB45; cursor: pointer }
 
-section#homepage .card .inner { overflow: hidden }
-section#homepage #card-loader-div { background: white; padding: 20px 0; margin: 20px 0; box-shadow: 0 0 5px #ccc8be; font-size: 20px; text-align: center; color: #aaa; font-style: italic }
+.card .inner { overflow: hidden }
+#card-loader-div { background: white; padding: 20px 0; margin: 20px 0; box-shadow: 0 0 5px #ccc8be; font-size: 20px; text-align: center; color: #aaa; font-style: italic }
 
 section#homepage h1 { margin: 30px 0 10px 0; font-weight: normal; font-size: 36px; color: #333; text-align: center; }
 
@@ -313,3 +313,6 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 .close-button { background: grey; opacity: 0.60; border-radius: 10px; font-size: 14px; color: white; float: right; width: 18px; height: 18px; cursor: pointer; }
 a.close-button { text-decoration: none; }
 .close-button:hover { opacity: 0.75; }
+
+.solutions tr.link:hover { background: rgb(255, 251, 228); }
+.solutions tr.link { cursor: pointer; }

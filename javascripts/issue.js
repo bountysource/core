@@ -11,4 +11,10 @@ with (scope('Issue','App')) {
                               span({ style: 'background: #D11A1A; border-radius: 4px; padding: 4px; color: white' }, 'Closed')
     );
   });
+
+  define('card', function(issue) {
+    issue.image_url = issue.repository.owner.avatar_url;
+    issue.description = issue.body;
+    return Home.bounty_card(issue);
+  })
 }
