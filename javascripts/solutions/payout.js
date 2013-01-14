@@ -1,64 +1,235 @@
-with (scope('Payout','IssueBranch')) {
+with (scope('Payout','Solutions')) {
 
-  route('#repos/:login/:repository/issues/:issue_number/issue_branch/payout', function(login, repository, issue_number) {
+  // landing page for code submission
+  route('#solutions/:solution_id/receipt', function(solution_id) {
     var target_div = div('Loading...');
 
     render(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
-        a({ href: '#repos/' + login + '/' + repository }, login + '/' + repository),
-        a({ href: '#repos/' + login + '/' + repository + '/issues' }, 'Issues'),
-        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, '#' + issue_number),
-        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number + '/issue_branch' }, 'Issue Branch'),
-        ('Payment Details')
+        a({ href: '#solutions' }, 'My Solutions'),
+        span({ id: 'solution-title' }, 'Loading...')
       ),
       target_div
     );
 
-    IssueBranch.require_accepted_solution(login, repository, issue_number, target_div, function(solution, user_info) {
-      render({ into: target_div },
-        div({ style: 'width: 415px; height: 160px; background: #eee; border: 1px solid #ccc; float: left; margin-right: 20px; padding: 20px' },
-          h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Physical Check'),
-          p({ style: 'font-style: italic; color #eee; text-align: center;' }, "I want BountySource to mail me a check for the bounty that I earned."),
+    BountySource.get_solution(solution_id, function(response) {
+      if (response.meta.success) {
+        var solution = response.data;
 
-          a({ 'class': 'blue', style: 'width: 200px; margin: 0 auto;', href: show_address_form }, 'Mail a Check')
-        ),
+        console.log(solution);
 
-        div({ style: 'width: 415px; height: 160px; background: #eee; border: 1px solid #ccc; float: left; padding: 20px' },
-          h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Paypal Transfer'),
-          p({ style: 'font-style: italic; color #eee; text-align: center;' }, "I want BountySource to credit my Paypal account with the bounty that I earned."),
+        render({ target: 'solution-title' }, solution.issue.title);
 
-          a({ 'class': 'blue', style: 'width: 200px; margin: 0 auto;', href: show_paypal_form }, 'Paypal')
-        ),
+        render({ into: target_div },
+          div({ 'class': 'split-main'},
+            h2('Solution Submitted!'),
+            p("If your solution is accepted and merged into the project, we will let you know.")
+          ),
 
-        div({ style: 'clear: both' }),
+          div({ 'class': 'split-side'},
+            Issue.card(solution.issue),
 
-        br(),
-        messages(),
+            div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
+              ribbon_header("Links"),
+              br(),
+              a({ 'class': 'green', href: Issue.get_href(solution.issue) }, "Back to Issue"),
+              br(),
+              a({ 'class': 'green', href: '#bounties' }, "Find Another Bounty")
+            ),
 
-        div({ id: '_form_container', style: 'width: 892px; background: #eee; border: 1px solid #ccc; float: left; margin: auto; padding: 20px; display: none;' },
-          div({ id: '_address_form', style: 'display: none;' }, Account.create_or_update_address_form(after_create_or_update_mailing_address)),
-          div({ id: '_paypal_form', style: 'display: none;' },
-            user_info.paypal_email && div(
-              form({ 'class': 'fancy', action: curry(set_route, get_route()+'/donation') },
-                fieldset(
-                  label("Existing Account:"),
-                  input({ 'class': 'long', name: 'paypal_email', value: user_info.paypal_email, readonly: true })
+            div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
+              ribbon_header('Share'),
+              br(),
+              Facebook.share_dialog_button(facebook_share_solution_url(solution)),
+              div({ style: 'height: 20px;' }),
+              Twitter.share_dialog_button(twitter_share_solution_url(solution))
+            )
+          ),
+
+          div({ 'class': 'split-end'})
+        );
+      } else {
+        render({ into: target_div }, error_message(response.data.error));
+      }
+    });
+  });
+
+  define('facebook_share_solution_url', function(solution) {
+    return Facebook.share_dialog_url({
+      link:         encode_html(BountySource.www_host+'#repos/'+solution.issue.repository.full_name+'/issues/'+solution.issue.number),
+      title:        ("I submitted a solution to " + solution.issue.repository.full_name + " on BountySource."),
+      description:  ("If my solution is accepted I will claim the bounty, which is currently at " + money(solution.issue.bounty_total) + ".")
+    });
+  });
+
+  define('twitter_share_solution_url', function(solution) {
+    return Twitter.share_dialog_url({
+      url:  encode_html(BountySource.www_host+'#repos/'+solution.issue.repository.full_name+'/issues/'+solution.issue.number),
+      text: ("I submitted a solution to " + solution.issue.repository.full_name + " on BountySource.")
+    });
+  });
+
+  // when a solution is accepted, and no longer disputed, a link is provided to this page to, to collect payout info.
+  route ('#solutions/:solution_id/payout', function(solution_id) {
+    var target_div = div('Loading...');
+
+    render(
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        a({ href: '#solutions' }, 'My Solutions'),
+        span({ id: 'solution-title' }, 'Loading...')
+      ),
+      target_div
+    );
+
+    BountySource.get_solution(solution_id, function(response) {
+      if (response.meta.success) {
+        var solution = response.data;
+
+        render({ target: 'solution-title' }, solution.issue.title);
+
+        BountySource.get_cached_user_info(function(user_info) {
+          render({ into: target_div },
+            div({ style: 'width: 415px; height: 160px; background: #eee; border: 1px solid #ccc; float: left; margin-right: 20px; padding: 20px' },
+              h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Physical Check'),
+              p({ style: 'font-style: italic; color #eee; text-align: center;' }, "I want BountySource to mail me a check for the bounty that I earned."),
+
+              a({ 'class': 'blue', style: 'width: 200px; margin: 0 auto;', href: show_address_form }, 'Mail a Check')
+            ),
+
+            div({ style: 'width: 415px; height: 160px; background: #eee; border: 1px solid #ccc; float: left; padding: 20px' },
+              h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Paypal Transfer'),
+              p({ style: 'font-style: italic; color #eee; text-align: center;' }, "I want BountySource to credit my Paypal account with the bounty that I earned."),
+
+              a({ 'class': 'blue', style: 'width: 200px; margin: 0 auto;', href: show_paypal_form }, 'Paypal')
+            ),
+
+            div({ style: 'clear: both' }),
+
+            br(),
+            messages(),
+
+            div({ id: '_form_container', style: 'width: 892px; background: #eee; border: 1px solid #ccc; float: left; margin: auto; padding: 20px; display: none;' },
+              div({ id: '_address_form', style: 'display: none;' }, Account.create_or_update_address_form(after_create_or_update_mailing_address)),
+              div({ id: '_paypal_form', style: 'display: none;' },
+                user_info.paypal_email && div(
+                  form({ 'class': 'fancy', action: curry(set_route, get_route()+'/donation') },
+                    fieldset(
+                      label("Existing Account:"),
+                      input({ 'class': 'long', name: 'paypal_email', value: user_info.paypal_email, readonly: true })
+                    ),
+                    fieldset({ 'class': 'no-label' },
+                      submit({ 'class': 'green' }, "Use Existing Account")
+                    )
+                  ),
+
+                  h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; font-weight: normal; margin-bottom: 10px; margin-left: 257px;' }, 'Or')
                 ),
-                fieldset({ 'class': 'no-label' },
-                  submit({ 'class': 'green' }, "Use Existing Account")
-                )
+
+                Paypal.link_account(after_paypal_link)
               )
             ),
 
-            h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; font-weight: normal; margin-bottom: 10px; margin-left: 257px;' }, 'Or'),
+            div({ style: 'clear: both' })
+          );
+        });
+      } else {
+        render({ into: target_div }, error_message(response.data.error));
+      }
+    });
+  });
 
-            Paypal.link_account(after_paypal_link)
+  // after collecting payout data, give the developer a chance to donate to charity and/or the project.
+  // Warning: kickass (i.e. complicated) sliders ahead!
+  route('#solutions/:solution_id/payout/donation', function(solution_id) {
+    var target_div = div('Loading...');
+
+    render(
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        a({ href: '#solutions' }, 'My Solutions'),
+        span({ id: 'solution-title' }, 'Loading...'),
+        'Donation'
+      ),
+      target_div
+    );
+
+    BountySource.get_solution(solution_id, function(response) {
+      if (response.meta.success) {
+        var solution = response.data;
+
+        render({ target: 'solution-title' }, solution.issue.title);
+
+        var bounty_source_tax = parseFloat(solution.bounty_source_tax),
+            project_tax       = parseFloat(solution.issue.repository.project_tax),
+            bounty_total      = parseFloat(solution.issue.bounty_total);
+
+        // subtract the bountysource tax from bounty_total
+        bounty_total -= (bounty_source_tax * bounty_total);
+
+        render({ into: target_div },
+          form({ 'class': 'fancy', action: claim_bounty },
+            fieldset({ style: 'padding: 10px 0;' },
+              label('Total Bounty:'),
+              div({ id: 'bounty-amount', style: 'font-size: 30px; display: inline; vertical-align: middle;' }, money(bounty_total))
+            ),
+
+            grey_box(
+              h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Donations'),
+
+              fieldset(
+                label('Project:'),
+                donation_slider({ 'data-tax': project_tax, style: 'width: 500px;', name: 'project' }),
+                project_tax > 0 && p({ style: 'font-style: italic; font-size: 12px;' }, '*This project requires a minimum donation.')
+              ),
+              fieldset(
+                label('Charity:'),
+                donation_slider({ style: 'width: 500px;', name: 'charity' }),
+                p({ style: 'font-style: italic; font-size: 12px; width: 500px;' }, "*Proceeds put into this category are all donated to our charities, which are: ", a({ href: 'https://www.eff.org/', target: '_blank' }, 'the EFF'))
+              )
+            ),
+
+            fieldset({ style: 'padding: 10px 0;' },
+              label('Total Donations:'),
+              div({ id: 'donation-total', style: 'font-size: 30px; display: inline; vertical-align: middle;' }, money((bounty_total*project_tax) + (bounty_total*bounty_source_tax)))
+            ),
+            fieldset({ style: 'padding: 10px 0;' },
+              label('Your Cut:'),
+              div({ id: 'total-cut', style: 'font-size: 30px; display: inline; vertical-align: middle;' }, money(bounty_total - ((bounty_total*project_tax) + (bounty_total*bounty_source_tax))))
+            ),
+            fieldset({ 'class': 'no-label' },
+              submit({ 'class': 'green' }, 'Claim Bounty')
+            )
           )
-        ),
+        );
 
-        div({ style: 'clear: both' })
-      );
+        // group dem ranges together
+        var donation_sliders = donation_slider_group({ max: bounty_total }, 'project', 'charity');
+
+        update_font_size(document.getElementById('donation-total'), (bounty_total*project_tax) + (bounty_total*bounty_source_tax), bounty_total);
+        update_font_size(document.getElementById('total-cut'), bounty_total - ((bounty_total*project_tax) + (bounty_total*bounty_source_tax)), bounty_total);
+
+        // watch all sliders for change to update the donations field
+        for (var i in donation_sliders) {
+          donation_sliders[i].addEventListener('change', function(e) {
+            // sum of donations
+            var donation_sum = 0;
+            for (var j in donation_sliders) donation_sum += parseFloat(donation_sliders[j].value);
+            var total_cut = bounty_total - donation_sum;
+
+            // update the values
+            set_donation_total(donation_sum, bounty_total);
+            set_total_cut(total_cut, bounty_total);
+
+            // update the font sizes, weeeee!
+            update_font_size(document.getElementById('donation-total'), donation_sum, bounty_total);
+            update_font_size(document.getElementById('total-cut'), total_cut, bounty_total);
+          });
+        }
+      } else {
+        render({ into: target_div }, error_message(response.data.error));
+      }
     });
   });
 
@@ -88,95 +259,6 @@ with (scope('Payout','IssueBranch')) {
       set_route(get_route()+'/donation');
     else
       render_message(error_message(response.data.error));
-  });
-
-
-
-
-  route('#repos/:login/:repository/issues/:issue_number/issue_branch/payout/donation', function(login, repository, issue_number) {
-    var target_div = div('Loading...');
-
-    render(
-      breadcrumbs(
-        a({ href: '#' }, 'Home'),
-        a({ href: '#repos/' + login + '/' + repository }, login + '/' + repository),
-        a({ href: '#repos/' + login + '/' + repository + '/issues' }, 'Issues'),
-        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, '#' + issue_number),
-        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number + '/issue_branch' }, 'Issue Branch'),
-        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number + '/issue_branch/payout' }, 'Payment Details'),
-        ('Donation')
-      ),
-      target_div
-    );
-
-    IssueBranch.require_accepted_solution(login, repository, issue_number, target_div, function(solution, user_info) {
-      var bounty_source_tax = parseFloat(solution.bounty_source_tax),
-          project_tax = parseFloat(solution.issue.repository.project_tax),
-          bounty_total = parseFloat(solution.issue.bounty_total);
-
-      // subtract the bountysource tax from bounty_total
-      bounty_total -= (bounty_source_tax * bounty_total);
-
-      render({ into: target_div },
-        form({ 'class': 'fancy', action: claim_bounty },
-          fieldset({ style: 'padding: 10px 0;' },
-            label('Total Bounty:'),
-            div({ id: 'bounty-amount', style: 'font-size: 30px; display: inline; vertical-align: middle;' }, money(bounty_total))
-          ),
-
-          grey_box(
-            h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin-bottom: 10px' }, 'Donations'),
-
-            fieldset(
-              label('Project:'),
-              donation_slider({ 'data-tax': project_tax, style: 'width: 500px;', name: 'project' }),
-              project_tax > 0 && p({ style: 'font-style: italic; font-size: 12px;' }, '*This project requires a minimum donation.')
-            ),
-            fieldset(
-              label('Charity:'),
-              donation_slider({ style: 'width: 500px;', name: 'charity' }),
-              p({ style: 'font-style: italic; font-size: 12px; width: 500px;' }, "*Proceeds put into this category are all donated to our charities, which are: ", a({ href: 'https://www.eff.org/', target: '_blank' }, 'the EFF'))
-            )
-          ),
-
-          fieldset({ style: 'padding: 10px 0;' },
-            label('Total Donations:'),
-            div({ id: 'donation-total', style: 'font-size: 30px; display: inline; vertical-align: middle;' }, money((bounty_total*project_tax) + (bounty_total*bounty_source_tax)))
-          ),
-          fieldset({ style: 'padding: 10px 0;' },
-            label('Your Cut:'),
-            div({ id: 'total-cut', style: 'font-size: 30px; display: inline; vertical-align: middle;' }, money(bounty_total - ((bounty_total*project_tax) + (bounty_total*bounty_source_tax))))
-          ),
-          fieldset({ 'class': 'no-label' },
-            submit({ 'class': 'green' }, 'Claim Bounty')
-          )
-        )
-      );
-
-      // group dem ranges together
-      var donation_sliders = donation_slider_group({ max: bounty_total }, 'project', 'charity', 'bountysource');
-
-      update_font_size(document.getElementById('donation-total'), (bounty_total*project_tax) + (bounty_total*bounty_source_tax), bounty_total);
-      update_font_size(document.getElementById('total-cut'), bounty_total - ((bounty_total*project_tax) + (bounty_total*bounty_source_tax)), bounty_total);
-
-      // watch all sliders for change to update the donations field
-      for (var i in donation_sliders) {
-        donation_sliders[i].addEventListener('change', function(e) {
-          // sum of donations
-          var donation_sum = 0;
-          for (var j in donation_sliders) donation_sum += parseFloat(donation_sliders[j].value);
-          var total_cut = bounty_total - donation_sum;
-
-          // update the values
-          set_donation_total(donation_sum, bounty_total);
-          set_total_cut(total_cut, bounty_total);
-
-          // update the font sizes, weeeee!
-          update_font_size(document.getElementById('donation-total'), donation_sum, bounty_total);
-          update_font_size(document.getElementById('total-cut'), total_cut, bounty_total);
-        });
-      }
-    });
   });
 
   // don't go over max, nor under 0
@@ -242,7 +324,7 @@ with (scope('Payout','IssueBranch')) {
     // helper function. get the sum of the min values of sliders in the group
     var sum_slider_mins = function(group) {
       var sum = 0;
-      for (var index in group) sum += parseFloat(group[index].getAttribute('min')||0);
+      for (var i=0; i<group.length; i++) sum += parseFloat(group[i].getAttribute('min')||0);
       return sum;
     }
 

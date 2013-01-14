@@ -210,4 +210,12 @@ with (scope('BountySource')) {
   define('create_solution', function(login, repository, issue_number, pull_request_number, callback) {
     api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solutions', 'POST', { pull_request_number: pull_request_number }, callback);
   });
+
+  define('get_solutions', function(callback) {
+    api('/user/solutions', callback);
+  });
+
+  define('get_solution', function(solution_id, callback) {
+    api('/user/solutions/'+solution_id, callback);
+  });
 }

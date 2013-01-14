@@ -2,7 +2,7 @@ with (scope('Paypal', 'Account')) {
   define('link_account', function(callback) {
     return form({ 'class': 'fancy', action: function(form_data) { link_paypal_account(form_data, (callback||function(){})); } },
       fieldset(
-        label('Email:'),
+        label('PayPal Email:'),
         text({ 'class': 'long', name: 'paypal_email', placeholder: 'john.doe@gmail.com' })
       ),
       fieldset(

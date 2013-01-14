@@ -169,10 +169,8 @@ with (scope('Issue', 'App')) {
     // hide('developer-box');
 
     BountySource.create_solution(login, repository, issue_number, form_data.pull_request_number, function(response) {
-      console.log(response);
-
       if (response.meta.success) {
-        render({ target: 'developer-box-messages' }, success_message("Pull Request submitted as solution! We'll keep track of it for you."));
+        set_route('#solutions/'+response.data.id+'/receipt');
       } else {
         render({ target: 'developer-box-messages' }, error_message(response.data.error));
       }
