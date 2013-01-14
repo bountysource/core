@@ -265,53 +265,49 @@ with (scope('Contributions', 'App')) {
   });
 
   define('facebook_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
-    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_bounty_on_facebook_url(login, repository, issue_number, bounty_amount),'','width=680,height=350') } }, img({ src: 'images/share-button-facebook.png', style: 'border-radius: 3px;' }));
+    return Facebook.share_dialog_button(share_bounty_on_facebook_url(login, repository, issue_number, bounty_amount));
   });
 
   define('twitter_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
-    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_bounty_on_twitter_url(login, repository, issue_number, bounty_amount),'','width=680,height=350') } }, img({ src: 'images/share-button-twitter.png', style: 'border-radius: 3px;' }));
+    return Twitter.share_dialog_button(share_bounty_on_twitter_url(login, repository, issue_number, bounty_amount));
   });
 
   define('facebook_share_pledge_button', function(pledge) {
-    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_pledge_on_facebook_url(pledge),'','width=680,height=350') } }, img({ src: 'images/share-button-facebook.png', style: 'border-radius: 3px;' }));
+    return Facebook.share_dialog_button(share_pledge_on_facebook_url(pledge));
   });
 
   define('twitter_share_pledge_button', function(pledge) {
-    return a({ style: 'display: inline-block; cursor: pointer;', onclick: function() { window.open(share_pledge_on_twitter_url(pledge),'','width=680,height=350') } }, img({ src: 'images/share-button-twitter.png', style: 'border-radius: 3px;' }));
+    return Twitter.share_dialog_button(share_pledge_on_twitter_url(pledge));
   });
 
   define("share_pledge_on_facebook_url", function(pledge) {
-    return "https://www.facebook.com/dialog/feed?"
-      + "app_id="           + 280280945425178
-      + "&display="         + "popup"
-      + "&link="            + encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id)
-      + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
-      + "&name="            + "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through @BountySource."
-      + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
-      + "&description="     + "Help fund this project, give back to Open Source!";
+    return Facebook.share_dialog_url({
+      link:         encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id),
+      title:        "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through BountySource.",
+      description:  "Help fund this project, give back to Open Source!"
+    });
   });
 
   define('share_pledge_on_twitter_url', function(pledge) {
-    return "https://twitter.com/share?"
-      + "url="    + encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id)
-      + "&text="  + "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through @BountySource.";
+    return Twitter.share_dialog_url({
+      url:  encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id),
+      text: "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through @BountySource."
+    });
   });
 
   define('share_bounty_on_facebook_url', function(login, repository, issue_number, amount) {
-    return "https://www.facebook.com/dialog/feed?"
-      + "app_id="           + 280280945425178
-      + "&display="         + "popup"
-      + "&link="            + encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
-      + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
-      + "&name="            + "I placed a "+money(amount)+" bounty on this issue at BountySource."
-      + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
-      + "&description="     + "Working on a solution? A bounty has been placed on it at BountySource, and you can earn it by having your pull request merged.";
+    return Facebook.share_dialog_url({
+      link:         encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number),
+      title:        "I placed a "+money(amount)+" bounty on this issue at BountySource.",
+      description:  "A bounty has been placed on this issue at BountySource."
+    });
   });
 
   define('share_bounty_on_twitter_url', function(login, repository, issue_number, amount) {
-    return "https://twitter.com/share?"
-      + "url="    + encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
-      + "&text="  + "I placed a "+money(amount)+" bounty on this issue at @BountySource.";
+    return Twitter.share_dialog_url({
+      url:  encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number),
+      text: "I placed a "+money(amount)+" bounty on this issue at @BountySource."
+    });
   });
 
   define('post_github_comment', function(login, repository, issue_number, form_data) {

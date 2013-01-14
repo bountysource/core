@@ -28,4 +28,20 @@ with (scope('Facebook','App')) {
       })
     );
   });
+
+  define('share_dialog_url', function(options) {
+    var options = options || {};
+    return "https://www.facebook.com/dialog/feed?"
+      + "app_id="           + 280280945425178
+      + "&display="         + "popup"
+      + "&link="            + options.link
+      + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
+      + "&name="            + options.title
+      + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
+      + "&description="     + options.description;
+  });
+
+  define('share_dialog_button', function(dialog_url, button_text) {
+    return a({ 'class': 'btn-auth btn-facebook large', href: function() { window.open(dialog_url,'','width=680,height=350') } }, button_text || 'Share');
+  });
 };
