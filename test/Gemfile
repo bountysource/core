@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 require "yaml"
 require "json"
 
-gem "selenium-webdriver", "2.19.0"
-gem "watir-webdriver", "0.5.3"
 gem "rake"
 gem "rspec"
+gem "selenium-webdriver", "2.19.0"
+gem "watir-webdriver", "0.5.3"

@@ -3,6 +3,7 @@ Bundler.require
 
 CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))
 BASE_URL = ENV['RAILS_ENV'] == 'staging' ? 'https://www-qa.bountysource.com/' : 'http://www.bountysource.dev/'
+API_ENDPOINT = 'qa'  # 'dev'
 
 def proceed_through_paypal_sandbox_flow!
   @buyer_credentials = CREDENTIALS["paypal"]["buyer"]
@@ -138,10 +139,10 @@ RSpec.configure do |config|
     end
 
     if BASE_URL =~ /bountysource\.dev/
-      puts ">> setting API server to QA"
+      puts ">> setting API server to #{API_ENDPOINT}"
       $browser.goto_route "#not_found"
       $browser.div(id: 'dev-bar').wait_until_present
-      $browser.div(id: 'dev-bar').a(text: 'qa').click if $browser.div(id: 'dev-bar').a(text: 'qa').exists?
+      $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).click if $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).exists?
     end
 
     puts ">> authenticating with GitHub account"
