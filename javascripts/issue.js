@@ -13,8 +13,9 @@ with (scope('Issue','App')) {
   });
 
   define('card', function(issue) {
-    issue.image_url = issue.repository.owner.avatar_url;
+    issue.image_url   = issue.repository.owner.avatar_url;
     issue.description = issue.body;
+    issue.href        = get_href(issue);
     return Home.bounty_card(issue);
   })
 }
