@@ -105,21 +105,21 @@ RSpec.configure do |config|
         )
       end
 
-      # a breakpoint that halts test until button clicked in the browser
+      # a breakpoint that halts testing until browser window clicked.
       def breakpoint!
         puts ">> breakpoint reached. click anywhere in the browser to continue"
 
         execute_scopejs_script %(
           _overlay_element = div({
             id: '_breakpoint_overlay',
-            style: "background-color: #000; opacity: 0.7; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 'z-index': 10;",
+            style: 'background-color: #000; opacity: 0.6; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; text-align: center;',
             onClick: function() { App.remove_element('_breakpoint_overlay'); }
-          });
+          }, p({ style: 'margin-top: 150px; font-size: 50px;' }, 'Click anywhere to continue...'));
           document.body.appendChild(_overlay_element);
-        )
+         )
 
         while execute_scopejs_script("return document.getElementById('_breakpoint_overlay');") do
-          # waiting until click
+          sleep 0.25 # waiting a little
         end
 
         puts ">> continuing from breakpoint"
