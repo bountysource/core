@@ -245,8 +245,6 @@ describe "Claiming a Bounty" do
 
       @browser.a(text: @disputed_solution[:issue][:title]).wait_until_present
 
-      @browser.breakpoint!
-
       @browser.h2(text: 'Physical Check').present?.should be_false
       @browser.div(class: 'error-message', text: 'Solution has not yet been accepted.').present?.should be_true
 
