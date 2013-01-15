@@ -24,18 +24,20 @@ def proceed_through_paypal_sandbox_flow!
   @browser.button(id: 'continue_abovefold').click
 end
 
-def login_with_github!
-  @browser.goto 'https://github.com/login'
-  # return if already logged in to GitHub
-  return unless @browser.url== "https://github.com/login"
+def login_with_email!
+  return if @browser.div(id: 'user-nav').present?
 
-  @github_credentials = CREDENTIALS["github"]
+  @bountysource_credentials = CREDENTIALS["bountysource"]
 
-  @browser.input(id: 'login_field').wait_until_present
-  @browser.input(id: 'login_field').send_keys @github_credentials["username"]
-  @browser.input(id: 'password').send_keys    @github_credentials["password"]
-  @browser.input(value: 'Sign in').click
-  @browser.ul(id: 'user-links').wait_until_present
+  @browser.goto_route '#'
+  @browser.execute_scopejs_script "set_route('#signin');"
+
+  # login with email and password
+  @browser.input(name: 'email').wait_until_present
+  @browser.input(name: 'email').send_keys     @bountysource_credentials["email"]
+  @browser.input(name: 'password').send_keys  @bountysource_credentials["password"]
+  @browser.button(value: 'Sign In').click
+  @browser.div(id: 'user-nav').wait_until_present
 end
 
 RSpec.configure do |config|
@@ -51,19 +53,43 @@ RSpec.configure do |config|
         execute_script "with (scope.instance) { #{src} }"
       end
 
+      # goto route.
       def goto_route(route)
-        goto "#{BASE_URL}#{route}"
+        goto "#{BASE_URL}not_found" unless url =~ /bountysource\.(?:com|dev)/
+        execute_scopejs_script "set_route('#{route}');"
+      end
+
+      def mock_api!
+        execute_scopejs_script %(
+          with (scope('BountySource')) {
+            define('_original_api', api);
+            define('api', function() { console.log('API CALLED', arguments) });
+          }
+        )
+      end
+
+      def restore_api!
+        execute_scopejs_script %(
+          with (scope('BountySource')) {
+            define('api', _original_api);
+            delete BountySource._original_api;
+          }
+        )
       end
 
       # override an API method. results of block will be passed as response.data
-      def override_api_response_data(method, data, options={})
+      def override_api_response_data(method, options={})
+        success = options[:success].nil? ? true : options[:success]
+        # if not status provided, use success to make it 200 or 400
+        status  = options[:status].nil? ? (success ? 200 : 400) : options[:status]
+
         execute_scopejs_script %(
           with (scope('BountySource')) {
             define('_original_#{method}', #{method});
             define('#{method}', function() {
               var arguments = flatten_to_array(arguments);
               var callback = shift_callback_from_args(arguments);
-              callback({ data: #{data.to_json}, meta: { success: #{options[:success].nil? ? true : options[:success]} } });
+              callback({ data: #{options[:data].to_json}, meta: { status: #{status}, success: #{success} } });
             });
           }
         )
@@ -78,6 +104,26 @@ RSpec.configure do |config|
           }
         )
       end
+
+      # a breakpoint that halts test until button clicked in the browser
+      def breakpoint!
+        puts ">> breakpoint reached. click anywhere in the browser to continue"
+
+        execute_scopejs_script %(
+          _overlay_element = div({
+            id: '_breakpoint_overlay',
+            style: "background-color: #000; opacity: 0.7; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 'z-index': 10;",
+            onClick: function() { App.remove_element('_breakpoint_overlay'); }
+          });
+          document.body.appendChild(_overlay_element);
+        )
+
+        while execute_scopejs_script("return document.getElementById('_breakpoint_overlay');") do
+          # waiting until click
+        end
+
+        puts ">> continuing from breakpoint"
+      end
     end
 
     if BASE_URL =~ /bountysource\.dev/
@@ -86,6 +132,15 @@ RSpec.configure do |config|
       $browser.div(id: 'dev-bar').wait_until_present
       $browser.div(id: 'dev-bar').a(text: 'qa').click if $browser.div(id: 'dev-bar').a(text: 'qa').exists?
     end
+
+    puts ">> authenticating with GitHub account"
+    github_credentials = CREDENTIALS["github"]
+    $browser.goto "https://github.com/login"
+    $browser.input(id: 'login_field').wait_until_present
+    $browser.input(id: 'login_field').send_keys github_credentials["username"]
+    $browser.input(id: 'password').send_keys    github_credentials["password"]
+    $browser.input(value: 'Sign in').click
+    $browser.ul(id: 'user-links').wait_until_present
 
     puts ">> authenticating with PayPal master account for sandbox"
     master_credentials = CREDENTIALS["paypal"]["master"]
