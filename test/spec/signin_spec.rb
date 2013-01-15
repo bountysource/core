@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe "Signin" do
-  before(:all) { login_with_github! }
-
   it "should sign in with github from home page" do
     # click github login button on home page
     @browser.goto_route '#'
