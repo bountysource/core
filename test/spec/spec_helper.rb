@@ -4,7 +4,6 @@ Bundler.require
 CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))
 BASE_URL = ENV['RAILS_ENV'] == 'staging' ? 'https://www-qa.bountysource.com/' : 'http://www.bountysource.dev/'
 
-
 def proceed_through_paypal_sandbox_flow!
   @buyer_credentials = CREDENTIALS["paypal"]["buyer"]
 
@@ -65,7 +64,8 @@ RSpec.configure do |config|
 
       # goto route.
       def goto_route(route)
-        goto "#{BASE_URL}not_found" unless url =~ /bountysource\.(?:com|dev)/
+        goto "#{BASE_URL}#not_found" unless url =~ /bountysource\.(?:com|dev)/
+        section(id: 'wrapper').wait_until_present
         execute_scopejs_script "set_route('#{route}');"
       end
 
@@ -170,8 +170,8 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    @browser.goto_route '#'
-    @browser.execute_scopejs_script "BountySource.logout();"
+    $browser.goto_route '#' unless $browser.url =~ /\#$/
+    $browser.execute_scopejs_script "BountySource.logout();"
   end
 
   config.after(:suite) do

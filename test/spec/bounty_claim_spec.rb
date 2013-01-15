@@ -266,8 +266,6 @@ describe "Claiming a Bounty" do
     it "should link a paypal account for payment" do
       login_with_email!
 
-      @browser.mock_api!
-
       @browser.override_api_response_data :get_solution, success: true, data: @accepted_solution
       @browser.override_api_response_data :link_paypal_account, success: true
       @browser.goto_route "#solutions/#{@accepted_solution[:id]}/payout"
