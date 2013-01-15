@@ -36,12 +36,12 @@ with (scope('Facebook','App')) {
       + "&display="         + "popup"
       + "&link="            + options.link
       + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
-      + "&name="            + options.title
+      + "&name="            + options.title||''
       + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
-      + "&description="     + options.description;
+      + "&description="     + options.description||'';
   });
 
   define('share_dialog_button', function(dialog_url, button_text) {
-    return a({ 'class': 'btn-auth btn-facebook large', href: function() { window.open(dialog_url,'','width=680,height=350') } }, button_text || 'Share');
+    return a({ 'class': 'btn-auth btn-facebook', href: function() { window.open(dialog_url,'','width=680,height=350') } }, button_text || 'Share');
   });
 };

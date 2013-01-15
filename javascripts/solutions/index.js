@@ -1,4 +1,4 @@
-with (scope('IssueBranch', 'App')) {
+with (scope('Solution', 'App')) {
   route('#solutions', function() {
     if (require_login()) return false;
 
@@ -30,7 +30,7 @@ with (scope('IssueBranch', 'App')) {
             ),
 
             solutions.map(function(solution) {
-              return tr({ 'class': 'link', onClick: function() { set_route('#solutions/'+solution.id+'/receipt') } },
+              return tr({ 'class': 'link', onClick: function() { set_route('#solutions/'+solution.id) } },
                 td(img({ src: solution.issue.repository.owner.avatar_url, style: 'width: 50px; border-radius: 3px;' })),
                 td(a({ href: Repository.get_href(solution.issue.repository) }, solution.issue.repository.full_name)),
                 td(a({ href: Issue.get_href(solution.issue) }, abbreviated_text(solution.issue.title, 100))),
@@ -78,8 +78,24 @@ with (scope('IssueBranch', 'App')) {
           )
         )
       );
+    } else if (solution.pull_request.merged) {
+      return info_message({ style: 'margin: 0;' },
+        p("The pull request that you submitted has been merged, but the underlying issue has not yet been closed."),
+        p("Your solution will be accepted when your pull request is merged, and the underlying issue is closed."),
+        ul(
+          li('What does this mean? ', a({ href: '#faq/developers' }, 'More info.')),
+          li('Have any questions? Feel free to ', a({ href: 'mailto:support@bountysource.com' }, 'contact support.'))
+        )
+      );
     } else {
-      return info_message({ style: 'margin: 0; text-align: center;' }, solution.pull_request.merged ? 'Merged' : 'Pending Merge');
+      return info_message({ style: 'margin: 0;' },
+        p("Your pull request has not yet been merged."),
+        p("Your solution will be accepted when your pull request is merged, and the underlying issue is closed."),
+        ul(
+          li('What does this mean? ', a({ href: '#faq/developers' }, 'More info.')),
+          li('Have any questions? Feel free to ', a({ href: 'mailto:support@bountysource.com' }, 'contact support.'))
+        )
+      );
     }
   });
 };

@@ -12,10 +12,12 @@ with (scope('Issue','App')) {
     );
   });
 
-  define('card', function(issue) {
-    issue.image_url   = issue.repository.owner.avatar_url;
-    issue.description = issue.body;
-    issue.href        = get_href(issue);
-    return Home.bounty_card(issue);
+  define('card', function(issue, options) {
+    var options = options || {};
+    issue.image_url       = issue.repository.owner.avatar_url;
+    issue.description     = issue.body;
+    issue.href            = get_href(issue);
+    issue.account_balance = issue.bounty_total;
+    return Home.bounty_card(issue, options);
   })
 }

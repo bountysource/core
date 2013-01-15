@@ -1,4 +1,4 @@
-with (scope('Payout','Solutions')) {
+with (scope('Payout','Solution')) {
 
   // landing page for code submission
   route('#solutions/:solution_id/receipt', function(solution_id) {
@@ -8,7 +8,8 @@ with (scope('Payout','Solutions')) {
       breadcrumbs(
         a({ href: '#' }, 'Home'),
         a({ href: '#solutions' }, 'My Solutions'),
-        span({ id: 'solution-title' }, 'Loading...')
+        span({ id: 'solution-title' }, 'Loading...'),
+        'Submission Receipt'
       ),
       target_div
     );
@@ -19,32 +20,16 @@ with (scope('Payout','Solutions')) {
 
         console.log(solution);
 
-        render({ target: 'solution-title' }, solution.issue.title);
+        render({ target: 'solution-title' }, a({ href: Solution.get_href(solution) }, solution.issue.title));
 
         render({ into: target_div },
           div({ 'class': 'split-main'},
             h2('Solution Submitted!'),
-            p("If your solution is accepted and merged into the project, we will let you know.")
+            p("You will be able to claim the bounty when your pull request is merged, and the underling issue is closed.")
           ),
 
           div({ 'class': 'split-side'},
-            Issue.card(solution.issue),
-
-            div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
-              ribbon_header("Links"),
-              br(),
-              a({ 'class': 'green', href: Issue.get_href(solution.issue) }, "Back to Issue"),
-              br(),
-              a({ 'class': 'green', href: '#bounties' }, "Find Another Bounty")
-            ),
-
-            div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
-              ribbon_header('Share'),
-              br(),
-              Facebook.share_dialog_button(facebook_share_solution_url(solution)),
-              div({ style: 'height: 20px;' }),
-              Twitter.share_dialog_button(twitter_share_solution_url(solution))
-            )
+            Issue.card(solution.issue, { show_share_buttons: true })
           ),
 
           div({ 'class': 'split-end'})
@@ -78,7 +63,8 @@ with (scope('Payout','Solutions')) {
       breadcrumbs(
         a({ href: '#' }, 'Home'),
         a({ href: '#solutions' }, 'My Solutions'),
-        span({ id: 'solution-title' }, 'Loading...')
+        span({ id: 'solution-title' }, 'Loading...'),
+        'Claim Bounty'
       ),
       target_div
     );
@@ -87,7 +73,10 @@ with (scope('Payout','Solutions')) {
       if (response.meta.success) {
         var solution = response.data;
 
-        render({ target: 'solution-title' }, solution.issue.title);
+        render({ target: 'solution-title' }, a({ href: Solution.get_href(solution) }, solution.issue.title));
+
+        // if the solution has not been accepted, render error and return
+        if (!solution.accepted || solution.disputed) return render({ into: target_div }, error_message("Solution has not yet been accepted."));
 
         BountySource.get_cached_user_info(function(user_info) {
           render({ into: target_div },
@@ -117,7 +106,7 @@ with (scope('Payout','Solutions')) {
                   form({ 'class': 'fancy', action: curry(set_route, get_route()+'/donation') },
                     fieldset(
                       label("Existing Account:"),
-                      input({ 'class': 'long', name: 'paypal_email', value: user_info.paypal_email, readonly: true })
+                      input({ 'class': 'long', value: user_info.paypal_email, readonly: true, style: 'color: gray;' })
                     ),
                     fieldset({ 'class': 'no-label' },
                       submit({ 'class': 'green' }, "Use Existing Account")
@@ -159,7 +148,10 @@ with (scope('Payout','Solutions')) {
       if (response.meta.success) {
         var solution = response.data;
 
-        render({ target: 'solution-title' }, solution.issue.title);
+        render({ target: 'solution-title' }, a({ href: Solution.get_href(solution) }, solution.issue.title));
+
+        // if the solution has not been accepted, render error and return
+        if (!solution.accepted || solution.disputed) return render({ into: target_div }, error_message("Solution has not yet been accepted."));
 
         var bounty_source_tax = parseFloat(solution.bounty_source_tax),
             project_tax       = parseFloat(solution.issue.repository.project_tax),
@@ -181,12 +173,12 @@ with (scope('Payout','Solutions')) {
               fieldset(
                 label('Project:'),
                 donation_slider({ 'data-tax': project_tax, style: 'width: 500px;', name: 'project' }),
-                project_tax > 0 && p({ style: 'font-style: italic; font-size: 12px;' }, '*This project requires a minimum donation.')
+                project_tax > 0 && p({ style: 'font-style: italic; font-size: 12px;' }, '*This project requires a minimum donation of ', money(bounty_total * project_tax))
               ),
               fieldset(
                 label('Charity:'),
                 donation_slider({ style: 'width: 500px;', name: 'charity' }),
-                p({ style: 'font-style: italic; font-size: 12px; width: 500px;' }, "*Proceeds put into this category are all donated to our charities, which are: ", a({ href: 'https://www.eff.org/', target: '_blank' }, 'the EFF'))
+                p({ style: 'font-style: italic; font-size: 12px; width: 500px;' }, "*Proceeds put into this category are all donated to our charities.")
               )
             ),
 
@@ -306,18 +298,17 @@ with (scope('Payout','Solutions')) {
    * The remaining arguments are the name attributes of the ranges you want to include in the group
    * */
   define('donation_slider_group', function() {
-    var arguments =         flatten_to_array(arguments),
-      options =             shift_options_from_args(arguments),
-      difference_element =  document.getElementById(options.difference_element_id);
+    var arguments           = flatten_to_array(arguments),
+        options             = shift_options_from_args(arguments);
 
     // collect all of the specified slider elements
     var all_sliders = [];
-    for (var arg in arguments) all_sliders.push(document.getElementsByName(arguments[arg])[0]);
+    for (var i=0; i<arguments.length; i++) all_sliders.push(document.getElementsByName(arguments[i])[0]);
 
     // helper function. get all the sliders in the group except for the one specified
     var get_other_sliders = function(target_element) {
       var other_sliders = [];
-      for (var slider in all_sliders) if (target_element != all_sliders[slider]) other_sliders.push(all_sliders[slider]);
+      for (var i=0; i<all_sliders.length; i++) if (target_element != all_sliders[i]) other_sliders.push(all_sliders[i]);
       return other_sliders;
     }
 
@@ -331,7 +322,7 @@ with (scope('Payout','Solutions')) {
     // helper function. sum the values of the sliders in the group
     var sum_slider_values = function(group) {
       var sum = 0;
-      for (var index in group) sum += parseFloat(group[index].value||0);
+      for (var i=0; i<group.length; i++) sum += parseFloat(group[i].value||0);
       return sum;
     }
 
@@ -340,20 +331,20 @@ with (scope('Payout','Solutions')) {
 
     // helper function. adjust the value of all sliders
     var adjust_slider_values = function(amount, group) {
-      for (var index in group) {
-        var adjusted_value = parseFloat(group[index].value) + amount;
-        group[index].value = adjusted_value;
+      for (var i=0; i<group.length; i++) {
+        var adjusted_value = parseFloat(group[i].value) + amount;
+        group[i].value = adjusted_value;
         // also need to adjust the input
-        set_input_value(parseFloat(group[index].value), get_input_from_slider(group[index]));
+        set_input_value(parseFloat(group[i].value), get_input_from_slider(group[i]));
       }
     }
 
     // for each slider specified
-    for (var this_slider in all_sliders) {
-      var this_slider = all_sliders[this_slider];
+    for (var i=0; i<all_sliders.length; i++) {
+      var this_slider = all_sliders[i];
 
       // set min from tax attribute if present. also make initial value the taxed value, or zero.
-      this_slider.setAttribute('min', (this_slider.getAttribute('data-tax')) ? (parseFloat(this_slider.getAttribute('data-tax'))*options.max) : 0);
+      this_slider.setAttribute('min', (this_slider.getAttribute('data-tax')) ? (parseFloat(this_slider.getAttribute('data-tax'))*options.max) : 0.0);
       this_slider.setAttribute('value', this_slider.getAttribute('min'));
 
       // default value for the input
@@ -363,7 +354,7 @@ with (scope('Payout','Solutions')) {
       this_slider.addEventListener('change', function(e) {
         // collect the other sliders that are not this one.
         var other_sliders = get_other_sliders(e.target),
-          other_slider_min_sum = sum_slider_mins(other_sliders);
+            other_slider_min_sum = sum_slider_mins(other_sliders);
 
         // add max now if missing, since it doesn't work to do it before (maybe it can, this is quicker though)
         if (!e.target.getAttribute('max')) e.target.setAttribute('max', (options.max - other_slider_min_sum));
@@ -378,7 +369,7 @@ with (scope('Payout','Solutions')) {
         if (parseFloat(e.target.value) + other_sliders_total > options.max) {
           // collect the other sliders with positive values
           var other_sliders_with_value = [];
-          for (var i in other_sliders) {
+          for (var i=0; i<other_sliders.length; i++) {
             if (parseFloat(other_sliders[i].value) > parseFloat(other_sliders[i].min)) other_sliders_with_value.push(other_sliders[i]);
           }
 
@@ -388,13 +379,7 @@ with (scope('Payout','Solutions')) {
           // adjust the other sliders by that amount
           adjust_slider_values((-1 * amount_over / (other_sliders_with_value.length)), other_sliders_with_value);
         }
-
-        // update the sum element if it was added to the page
-        if (difference_element) set_difference_element(options.max - (other_sliders_total + parseFloat(e.target.value)));
       });
-
-      // default value for sum element
-      if (difference_element) difference_element.innerHTML = money(options.max - sum_slider_values(all_sliders))
     }
 
     return all_sliders;

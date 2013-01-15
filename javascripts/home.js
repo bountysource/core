@@ -129,7 +129,9 @@ with (scope('Home', 'App')) {
     });
   });
 
-  define('bounty_card', function(card) {
+  define('bounty_card', function(card, options) {
+    var options = options || {};
+
     return div({ 'class': 'card', onClick: curry(set_route, card.href) },
       div({ style: 'padding: 7px; background: #EEE; margin-bottom: 5px;' },
         a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 5px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
@@ -155,12 +157,26 @@ with (scope('Home', 'App')) {
 
       div({ style: 'clear: both' }),
 
+      // optionally, show FB and Twitter share buttons. disabled by default because it makes the home page too noisy
+      options.show_share_buttons && div({ style: 'text-align: center; border-top: 1px solid rgb(238, 238, 238); padding: 5px 0;' },
+        Facebook.share_dialog_button(Facebook.share_dialog_url({
+          link:   encode_html(BountySource.www_host+card.href),
+          title:  (money(card.account_balance) + ' Bounty open at BountySource')
+        })),
+        span({ style: 'width: 5px; display: inline-block;' }),
+        Twitter.share_dialog_button(Twitter.share_dialog_url({
+          url:  encode_html(BountySource.www_host+card.href),
+          text: (money(card.account_balance) + ' Bounty open at BountySource')
+        }))
+      ),
+
       div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px; font-size: 16px;' },
         div({ style: 'display: inline-block; width: 33%; vertical-align: middle;'},
           (card.account_balance > 0) && div(
             a({ href: card.href, style: 'display: inline; vertical-align: middle; text-decoration: none; color: #48B848;' }, money(card.account_balance))
           )
         ),
+
         div({ style: 'display: inline-block; width: 33%; vertical-align: middle;' },
           (card.comment_count > 0) && div(
             a({ href: card.href, style: 'vertical-align: middle; color: #D8A135; text-decoration: none;' },

@@ -16,13 +16,17 @@ with (scope('Paypal', 'Account')) {
   });
 
   define('link_paypal_account', function(form_data, callback) {
-    BountySource.link_paypal_account(form_data, callback || function(response) {
-      if (response.meta.success) {
-        render_message(success_message('Paypal account linked!'));
-      } else {
-        render_message(error_message(response.data.error));
-      }
-      callback(response);
-    });
+    if (form_data.paypal_email != form_data.paypal_email_confirmation) {
+      render_message(error_message('PayPal email addresses do not match.'));
+    } else {
+      BountySource.link_paypal_account(form_data, callback || function(response) {
+        if (response.meta.success) {
+          render_message(success_message('Paypal account linked!'));
+        } else {
+          render_message(error_message(response.data.error));
+        }
+        callback(response);
+      });
+    }
   });
 }

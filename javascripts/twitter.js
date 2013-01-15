@@ -44,10 +44,10 @@ with (scope('Twitter','App')) {
     return "https://twitter.com/share?"
       + "via="    + "BountySource"
       + "&url="   + options.url
-      + "&text="  + options.text
+      + "&text="  + options.text||''
   });
 
   define('share_dialog_button', function(dialog_url, button_text) {
-    return a({ 'class': 'btn-auth btn-twitter large', href: function() { window.open(dialog_url,'','width=680,height=350') } }, button_text || 'Share');
+    return a({ 'class': 'btn-auth btn-twitter', href: function() { window.open(dialog_url,'','width=680,height=350') } }, button_text || 'Share');
   })
 };
