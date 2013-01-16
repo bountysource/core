@@ -14,11 +14,13 @@ with (scope('Solution','App')) {
       );
     } else if (solution.accepted) {
       render({ into: the_element },
-        span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Accepted')
+        span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Accepted!')
       );
     } else if (solution.pull_request) {
       render({ into: the_element },
-        span({ style: 'background: #29A8DD; border-radius: 4px; padding: 4px; color: white' }, 'Submitted')
+        a({ style: 'background: #29A8DD; border-radius: 4px; padding: 4px; color: white; text-decoration: none;', href: 'https://github.com/'+solution.issue.repository.full_name+'/pulls/'+solution.pull_request.number, target: '_blank' },
+          'Pull Request Submitted'
+        )
       );
     } else if (solution.rejected) {
       render({ into: the_element },

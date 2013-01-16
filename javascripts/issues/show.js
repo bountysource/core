@@ -36,7 +36,7 @@ with (scope('Issue', 'App')) {
             h2({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 'Comments'),
             issue.comments.map(github_user_html_box)
           )
-          
+
           // issue.events.length > 0 && div(
           //   h2('Events'),
           //   issue.events.map(function(event) {
@@ -49,7 +49,7 @@ with (scope('Issue', 'App')) {
           //     );
           //   })
           // )
-          
+
         ),
 
         div({ 'class': 'split-side'},
@@ -105,9 +105,7 @@ with (scope('Issue', 'App')) {
       render({ into: developer_div },
         success_message({ style: 'margin: 0;' }, "Pull request submitted."),
         br(),
-        a({ 'class': 'green', href: 'https://github.com/'+issue.repository.full_name+'/issues/'+pull_request.number, target: '_blank' }, 'View Pull Request'),
-        br(),
-        a({ 'class': 'green', href: 'https://github.com/'+issue.repository.full_name+'/issues/'+issue.number, target: '_blank' }, 'View Issue')
+        a({ 'class': 'green', href: Solution.get_href(issue.solution) }, 'View Solution')
       )
     } else if (!logged_in()) {
       render({ into: developer_div }, link_github_account_content);
