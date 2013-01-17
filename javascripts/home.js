@@ -74,7 +74,7 @@ with (scope('Home', 'App')) {
         span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Sign in with...'),
         a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
         //a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px' }, "Facebook"),
-        a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin' }, "Email Address")
+        a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin/email' }, "Email Address")
         //div({ style: 'margin-bottom: 10px' }, a({ 'class': "btn-auth btn-google" }, "Sign in with Google"))
       )
     );

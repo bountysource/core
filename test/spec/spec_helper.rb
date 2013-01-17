@@ -29,15 +29,24 @@ def login_with_email!
 
   @bountysource_credentials = CREDENTIALS["bountysource"]
 
-  @browser.goto_route '#'
-  @browser.execute_scopejs_script "set_route('#signin');"
+  @browser.goto_route '#signin/email'
 
   # login with email and password
-  @browser.input(name: 'email').wait_until_present
-  @browser.input(name: 'email').send_keys     @bountysource_credentials["email"]
-  @browser.input(name: 'password').send_keys  @bountysource_credentials["password"]
+  @browser.text_field(name: 'email').set(@bountysource_credentials["email"])
+  @browser.text_field(name: 'password').set(@bountysource_credentials["password"])
+  @browser.div(text: /Email address found/).wait_until_present
   @browser.button(value: 'Sign In').click
   @browser.div(id: 'user-nav').wait_until_present
+end
+
+def login_with_github!
+  github_credentials = CREDENTIALS["github"]
+  @browser.text_field(id: 'login_field').set(github_credentials["username"])
+  @browser.text_field(id: 'password').set(github_credentials["password"])
+  @browser.button(value: 'Sign in').click
+
+  # auto authorize
+  @browser.button(text: 'Authorize app').click if @browser.button(text: 'Authorize app').present?
 end
 
 # matches money.
@@ -65,9 +74,16 @@ RSpec.configure do |config|
 
       # goto route.
       def goto_route(route)
-        goto "#{BASE_URL}#not_found" unless url =~ /bountysource\.(?:com|dev)/
-        section(id: 'wrapper').wait_until_present
-        execute_scopejs_script "set_route('#{route}');"
+        goto "#{BASE_URL}#{route}"
+
+        # ensure we're using the correct API_ENDPOINT
+        if BASE_URL =~ /bountysource\.dev/
+          $browser.div(id: 'dev-bar').wait_until_present
+          if $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).exists?
+            $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).click
+            $browser.div(id: 'dev-bar').b(text: API_ENDPOINT).wait_until_present
+          end
+        end
       end
 
       def mock_api!
@@ -138,30 +154,15 @@ RSpec.configure do |config|
       end
     end
 
-    if BASE_URL =~ /bountysource\.dev/
-      puts ">> setting API server to #{API_ENDPOINT}"
-      $browser.goto_route "#not_found"
-      $browser.div(id: 'dev-bar').wait_until_present
-      $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).click if $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).exists?
-    end
-
-    puts ">> authenticating with GitHub account"
-    github_credentials = CREDENTIALS["github"]
-    $browser.goto "https://github.com/login"
-    $browser.input(id: 'login_field').wait_until_present
-    $browser.input(id: 'login_field').send_keys github_credentials["username"]
-    $browser.input(id: 'password').send_keys    github_credentials["password"]
-    $browser.input(value: 'Sign in').click
-    $browser.ul(id: 'user-links').wait_until_present
-
-    puts ">> authenticating with PayPal master account for sandbox"
-    master_credentials = CREDENTIALS["paypal"]["master"]
-    $browser.goto "https://developer.paypal.com/"
-    $browser.input(id: 'login_email').wait_until_present
-    $browser.input(id: 'login_email').send_keys(master_credentials["email"])
-    $browser.input(id: 'login_password').send_keys(master_credentials["password"])
-    $browser.button(value: 'Log In').click
-    $browser.a(text: 'preconfigured account').wait_until_present
+    #
+    #puts ">> authenticating with PayPal master account for sandbox"
+    #master_credentials = CREDENTIALS["paypal"]["master"]
+    #$browser.goto "https://developer.paypal.com/"
+    #$browser.input(id: 'login_email').wait_until_present
+    #$browser.input(id: 'login_email').send_keys(master_credentials["email"])
+    #$browser.input(id: 'login_password').send_keys(master_credentials["password"])
+    #$browser.button(value: 'Log In').click
+    #$browser.a(text: 'preconfigured account').wait_until_present
 
     puts ">> running specs\n"
   end

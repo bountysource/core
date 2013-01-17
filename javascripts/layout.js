@@ -74,10 +74,6 @@ with (scope('App')) {
 
         div({ id: 'before-content'}),
 
-        section({ id: 'signin', style: 'display: none;' },
-          signin_form()
-        ),
-
         scope.rendered_default_layout_inner,
 
         footer(

@@ -1,15 +1,4 @@
 with (scope('App')) {
-  // if access token passed as query param, use it to log in
-  before_filter(function() {
-    var params = get_params();
-    if (params.access_token) {
-      Storage.set('access_token', params.access_token);
-      BountySource.set_cached_user_info(null);
-
-      // strip off query
-      window.location.href = window.location.href.split('?')[0];
-    }
-  });
 
   // parse FB and twitter elements if need be
   after_filter(function() {

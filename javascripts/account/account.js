@@ -19,12 +19,8 @@ with (scope('Account','App')) {
 
       render({ into: target_div },
         div({ 'class': 'split-main' },
-          !info.account_completed && div({ id: 'account-incomplete-message' },
-            error_message("Your account is not complete! In order to fully use BountySource, fill in the required fields below.")
-          ),
-
-         form({ 'class': 'fancy', action: update_account },
-           messages(),
+          form({ 'class': 'fancy', action: update_account },
+            messages(),
 
             required_inputs(
               fieldset(

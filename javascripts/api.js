@@ -40,19 +40,29 @@ with (scope('BountySource')) {
     JSONP.get(options);
   });
 
-  define('login', function(email, password, callback) {
-    api('/user/login', 'POST', { email: email, password: password }, callback);
+  define('login', function(params, callback) {
+    api('/user/login', 'POST', params, callback);
   });
 
   define('logout', function() {
     Storage.clear({ except: ['environment'] });
-    window.location.reload();
+    set_route('#', { reload_page: true });
   });
 
   define('user_info', function(callback) {
     api('/user', callback);
   });
-  
+
+  define('set_access_token', function(data) {
+    if (typeof(data) == 'string') {
+      Storage.set('access_token', data);
+      BountySource.set_cached_user_info(null);
+    } else {
+      Storage.set('access_token', data.access_token);
+      BountySource.set_cached_user_info(data);
+    }
+  });
+
   define('get_cached_user_info', function(callback) {
     if (Storage.get('user_info')) {
       callback(JSON.parse(Storage.get('user_info')));
