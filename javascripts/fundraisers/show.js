@@ -187,8 +187,7 @@ with (scope('Fundraisers')) {
               var element = div({ style: 'min-height: 100px; padding: 15px;' },
                 span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
 
-                // TODO show number remaining if quantity limited
-                (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.num_claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
+                (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
 
                 p({ style: 'margin-left: 10px;' }, reward.description)
               );
