@@ -77,7 +77,7 @@ with (scope('App')) {
 
   // add class to element
   define('add_class', function(element, class_name) {
-    if (!element || !element.className || has_class(element, class_name)) return element;
+    if (!element || has_class(element, class_name)) return element;
     var parts = element.className.split(/\s+/);
     parts.push(class_name);
     element.className = parts.join(' ');
@@ -86,7 +86,7 @@ with (scope('App')) {
 
   // remove class from element
   define('remove_class', function(element, class_name) {
-    if (!element || !element.className || !has_class(element, class_name)) return element;
+    if (!element || !has_class(element, class_name)) return element;
     element.className = element.className.replace((new RegExp(class_name)),'').trim();
     return element;
   });
