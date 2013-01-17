@@ -109,6 +109,7 @@ with (scope('Home', 'App')) {
     page_state.can_load_more_cards = false;
     BountySource.get_more_cards(page_state.current_cards, function(response) {
       var col_container = document.getElementById('column-container');
+      if (!col_container) return;
 
       for (var j=0; j < response.data.length; j++) {
         var card = response.data[j];

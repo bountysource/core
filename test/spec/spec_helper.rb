@@ -88,8 +88,17 @@ RSpec.configure do |config|
 
       # goto route.
       def goto_route(route)
+        # if there's an FB like box on the page, wait until it loads
+        if $browser.div(class: 'fb-like').present?
+          $browser.div(class: 'fb-like').frame.body.wait_until_present
+        end
+
+        # set the route
         goto "#{BASE_URL}#{route}"
         Watir::Wait.until { execute_script %(return "#{route}".match(scope.current_route)) }
+
+        # wait until scope recognizes it
+        Watir::Wait.until { execute_script %(return typeof(scope) != "undefined" && "#{route}".match(scope.current_route)) }
 
         # ensure we're using the correct API_ENDPOINT
         if BASE_URL =~ /bountysource\.dev/

@@ -7,7 +7,7 @@ with (scope('Facebook','App')) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=280280945425178";
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=0&appId=280280945425178";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   });
@@ -18,7 +18,7 @@ with (scope('Facebook','App')) {
 
   // auto-parsed by FB library
   define('like_button', function(options) {
-    return div(options || {},
+    var tmp_div = div(options || {},
       div({
         'class': 'fb-like',
         'data-href': "http://www.facebook.com/BountySource",
@@ -27,6 +27,18 @@ with (scope('Facebook','App')) {
         'data-show-faces': 'false'
       })
     );
+
+    if (window.FB) {
+      window.FB.XFBML.parse(tmp_div);
+    } else {
+      var previous_async = window.fbAsyncInit;
+      window.fbAsyncInit = function() {
+        if (previous_async) previous_async.call();
+        window.FB.XFBML.parse(tmp_div);
+      };
+    }
+
+    return tmp_div;
   });
 
   define('share_dialog_url', function(options) {
