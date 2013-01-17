@@ -9,8 +9,7 @@ describe "Claiming a Bounty" do
   end
 
   it "should be able to get to #bounties from home page when logged in" do
-    @browser.a(class: 'btn-auth btn-github large hover').wait_until_present
-    @browser.a(class: 'btn-auth btn-github large hover').click
+    login_with_email!
 
     @browser.button(text: 'Browse All Bounties').wait_until_present
     @browser.button(text: 'Browse All Bounties').click

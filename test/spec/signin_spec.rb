@@ -46,7 +46,7 @@ describe "Signin" do
     @browser.span(id: 'user_nav_name', text: 'john.doe').wait_until_present
 
     # logout
-    @browser.span(id: 'user_nav_name').click
+    @browser.span(id: 'user_nav_name').hover
     @browser.a(text: 'Logout').click
     @browser.a(text: 'Sign In').wait_until_present
 

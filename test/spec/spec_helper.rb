@@ -6,6 +6,22 @@ BASE_URL = ENV['RAILS_ENV'] == 'staging' ? 'https://www-qa.bountysource.com/' : 
 API_ENDPOINT = 'qa'  # 'dev'
 
 def proceed_through_paypal_sandbox_flow!
+  # log in to master account if necessary
+  @browser.a(text: /(PayPal Sandbox|User Agreement)/).wait_until_present
+  if @browser.a(text: 'PayPal Sandbox').present?
+    url = @browser.url
+
+    master_credentials = CREDENTIALS["paypal"]["master"]
+    @browser.goto "https://developer.paypal.com/"
+    @browser.input(id: 'login_email').wait_until_present
+    @browser.input(id: 'login_email').send_keys(master_credentials["email"])
+    @browser.input(id: 'login_password').send_keys(master_credentials["password"])
+    @browser.button(value: 'Log In').click
+    @browser.a(text: 'preconfigured account').wait_until_present
+
+    @browser.goto(url)
+  end
+
   @buyer_credentials = CREDENTIALS["paypal"]["buyer"]
 
   @browser.text_field(id: 'login_email').wait_until_present
@@ -29,7 +45,7 @@ def login_with_email!
 
   @bountysource_credentials = CREDENTIALS["bountysource"]
 
-  @browser.goto_route '#signin/email'
+  @browser.goto_route "#signin/email"
 
   # login with email and password
   @browser.text_field(name: 'email').set(@bountysource_credentials["email"])
@@ -61,8 +77,6 @@ end
 
 RSpec.configure do |config|
   config.before(:suite) do
-    puts ">> opening browser"
-
     $browser = ENV['RAILS_ENV'] == 'staging' ? Watir::Browser.new(:remote, :url => 'http://165.225.134.232:9515/') : Watir::Browser.new(:chrome)
 
     # add a navigate method for scope.js routes
@@ -75,6 +89,7 @@ RSpec.configure do |config|
       # goto route.
       def goto_route(route)
         goto "#{BASE_URL}#{route}"
+        Watir::Wait.until { execute_script %(return "#{route}".match(scope.current_route)) }
 
         # ensure we're using the correct API_ENDPOINT
         if BASE_URL =~ /bountysource\.dev/
@@ -153,18 +168,6 @@ RSpec.configure do |config|
         puts ">> continuing from breakpoint"
       end
     end
-
-    #
-    #puts ">> authenticating with PayPal master account for sandbox"
-    #master_credentials = CREDENTIALS["paypal"]["master"]
-    #$browser.goto "https://developer.paypal.com/"
-    #$browser.input(id: 'login_email').wait_until_present
-    #$browser.input(id: 'login_email').send_keys(master_credentials["email"])
-    #$browser.input(id: 'login_password').send_keys(master_credentials["password"])
-    #$browser.button(value: 'Log In').click
-    #$browser.a(text: 'preconfigured account').wait_until_present
-
-    puts ">> running specs\n"
   end
 
   config.before(:all) do
@@ -177,7 +180,6 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    puts "\n\n>> closing browser"
     $browser.close
   end
 end
