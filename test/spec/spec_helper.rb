@@ -95,7 +95,6 @@ RSpec.configure do |config|
 
         # set the route
         goto "#{BASE_URL}#{route}"
-        Watir::Wait.until { execute_script %(return "#{route}".match(scope.current_route)) }
 
         # wait until scope recognizes it
         Watir::Wait.until { execute_script %(return typeof(scope) != "undefined" && "#{route}".match(scope.current_route)) }

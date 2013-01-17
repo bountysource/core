@@ -69,7 +69,7 @@ describe "Signin" do
 
     login_with_github!
 
-    @browser.div(text: /asdfas/).wait_until_present
+    @browser.span(id: 'user_nav_name', text: CREDENTIALS["github"]["username"]).wait_until_present
   end
 end
 
