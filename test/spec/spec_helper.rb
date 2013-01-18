@@ -4,7 +4,7 @@ Bundler.require
 CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))
 BASE_URL = ENV['RAILS_ENV'] == 'staging' ? 'https://www-qa.bountysource.com/' : 'http://www.bountysource.dev/'
 API_ENDPOINT = 'qa'  # 'dev'
-DEMO_MODE = false
+DEMO_MODE = true
 
 def proceed_through_paypal_sandbox_flow!
   # log in to master account if necessary
@@ -189,6 +189,9 @@ RSpec.configure do |config|
 
   config.before(:all) do
     @browser = $browser
+
+    @browser.goto 'https://github.com/login'
+    login_with_github!
   end
 
   config.before(:each) do
