@@ -55,7 +55,7 @@ with (scope('Fundraisers')) {
 
   define('fundraiser_template', function(fundraiser) {
     // add the title to the already present header element
-    render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
+    render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(fundraiser.title, 85));
 
     var fundraiser_form = section({ id: 'fundraiser-wrapper' },
       div({ 'class': 'split-main' },

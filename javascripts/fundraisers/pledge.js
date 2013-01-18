@@ -18,7 +18,7 @@ with (scope('Fundraisers', 'App')) {
           fundraiser = response.data;
 
       // render the title of the fundraiser into header
-      render({ target: 'breadcrumbs-fundraiser-title' }, a({ href: '#fundraisers/'+fundraiser_id }, response.data.title));
+      render({ target: 'breadcrumbs-fundraiser-title' }, a({ href: '#fundraisers/'+fundraiser_id }, abbreviated_text(response.data.title, 60)));
 
       // require the fundraiser to be published
       if (!fundraiser.published) return render({ into: target_div }, error_message('Fundraiser has not been published.'));

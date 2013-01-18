@@ -202,7 +202,7 @@ with (scope('Contributions', 'App')) {
           fundraiser  = pledge.fundraiser,
           rewards_div = div();
 
-        render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
+        render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(response.data.title, 60));
 
         render({ into: target_div },
           div({ 'class': 'split-main' },
