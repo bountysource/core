@@ -190,7 +190,7 @@ with (scope('BountySource')) {
   });
 
   define('make_pledge', function(fundraiser_id, data, callback) {
-    api('/user/fundraisers/'+fundraiser_id+'/pay_in', 'POST', { amount: data.amount, payment_method: data.payment_method, redirect_url: data.redirect_url }, callback);
+    api('/user/fundraisers/'+fundraiser_id+'/pay_in', 'POST', data, callback);
   });
 
   define('get_more_cards', function(ignore, callback) {

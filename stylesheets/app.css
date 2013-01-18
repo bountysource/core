@@ -57,8 +57,18 @@ section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #c
 section#homepage .box .inner { padding: 20px }
 
 
-section#homepage .recent_signups { float: left; width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin: 3px; overflow: hidden; box-shadow: 0 0 4px #aaa; }
-section#homepage .recent_signups img { width: 50px; height: 50px }
+.avatar { width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin: 3px; overflow: hidden; box-shadow: 0 0 4px #aaa; }
+.avatar img { width: 50px; height: 50px; border-radius: 2px; }
+.round-avatar { width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin: 3px; overflow: hidden; box-shadow: 0 0 4px #aaa; }
+.round-avatar img { width: 50px; height: 50px; }
+
+.avatar.small { width: 30px; height: 30px; border-radius: 2px; }
+.avatar.small img { width: 30px; height: 30px; border-radius: 2px; }
+.round-avatar.small { width: 30px; height: 30px; }
+.round-avatar.small img { width: 30px; height: 30px; }
+
+section#homepage .avatar { float: left; }
+section#homepage .round-avatar { float: left; }
 
 .card { border-radius: 5px; }
 

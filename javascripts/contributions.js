@@ -191,8 +191,10 @@ with (scope('Contributions', 'App')) {
           h2("Thanks for your contribution"),
           p("Your contribution of ", money(pledge.amount), " has been made to ", fundraiser.title, "."),
 
-          // ternary hell. if rewards disabled, show nothing. if reward claimed, show it, else show selection form
-          rewards_div
+          pledge.reward && div(
+            h2("Selected Reward"),
+            p("You selected the reward \"", pledge.reward.description ,"\"")
+          )
         ),
 
         div({ 'class': 'split-side' },
@@ -213,55 +215,7 @@ with (scope('Contributions', 'App')) {
 
         div({ 'class': 'split-end' })
       );
-
-      if (fundraiser.rewards.length > 0) {
-        render({ into: rewards_div },
-          (pledge.reward) ? div(
-            h2("Selected Reward"),
-            p("You selected the reward \"", pledge.reward.description ,"\"")
-          ) : div(
-            h2("Select a Reward"),
-            form({ 'class': 'fancy', action: curry(redeem_reward, pledge_id) },
-              messages(),
-
-              section({ id: 'pledge-receipt-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px;' },
-                (function() {
-                  var elements = [], reward;
-                  for (var i=0; i<fundraiser.rewards.length; i++) {
-                    reward = fundraiser.rewards[i];
-                    var element = div({ style: 'min-height: 100px; padding: 15px;' },
-                      radio({ name: 'reward', value: reward.id }), span({ style: 'font-size: 25px; margin-left: 15px;' }, 'Pledge ', money(reward.amount), ' +'),
-
-                      // TODO show number remaining if quantity limited
-                      (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.num_claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
-
-                      p({ style: 'margin-left: 10px;' }, reward.description)
-                    );
-                    if (i < (fundraiser.rewards.length-1)) element.style['border-bottom'] = '2px dotted #C7C7C7';
-                    elements.push(element);
-                  }
-                  return elements;
-                })()
-              ),
-
-              submit({ 'class': 'green' }, "Redeem Reward")
-            )
-          )
-        );
-      }
     });
-  });
-
-  define('redeem_reward', function(pledge_id, form_data) {
-    if (confirm("Redeem reward?")) {
-      BountySource.redeem_reward(pledge_id, form_data.reward, function(response) {
-        if (response.meta.success) {
-          window.location.reload();
-        } else {
-          render_message(error_message(response.data.error));
-        }
-      });
-    }
   });
 
   define('facebook_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
