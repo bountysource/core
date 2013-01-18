@@ -111,7 +111,7 @@ with (scope('Fundraisers', 'App')) {
     // add extra row for specifying no reward
     fundraiser.rewards = flatten_to_array([{
       title:       'No reward',
-      description: "I don't need a reward, but I would still want to help out!",
+      description: "I don't need a reward, but I would still like to help out!",
       id:          -1
     }, fundraiser.rewards]);
 
