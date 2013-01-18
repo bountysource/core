@@ -170,6 +170,8 @@ with (scope('Fundraisers', 'App')) {
   });
 
   define('make_pledge', function(fundraiser, form_data) {
+    clear_message();
+
     // select reward
     // build the redirect_url, with pledge_id placeholder
     form_data.redirect_url = form_data.redirect_url || BountySource.www_host+'#fundraisers/'+fundraiser.id+'/pledges/:pledge_id/receipt';
@@ -179,8 +181,7 @@ with (scope('Fundraisers', 'App')) {
         if (form_data.payment_method == 'personal') BountySource.set_cached_user_info(null);
         window.location.href = response.data.redirect_url;
       } else {
-        // render_message(error_message(response.data.error));
-        alert(response.data.error);
+        render_message(error_message(response.data.error));
       }
     });
   });
