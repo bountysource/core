@@ -82,6 +82,15 @@ with (scope('Contributions', 'App')) {
   });
 
   route('#repos/:login/:repository/issues/:issue_number/bounties/:bounty_id/receipt', function(login, repository, issue_number, bounty_id) {
+    // access token as a param?
+    var params = get_params();
+    if (params['access_token']) {
+      BountySource.set_access_token(params['access_token']);
+      set_route(get_route(), { reload_page: true });
+      return;
+    }
+
+
     var target_div = div('Loading...');
 
     render(
@@ -163,6 +172,14 @@ with (scope('Contributions', 'App')) {
   });
 
   route('#fundraisers/:fundraiser_id/pledges/:pledge_id/receipt', function(fundraiser_id, pledge_id) {
+    // access token as a param?
+    var params = get_params();
+    if (params['access_token']) {
+      BountySource.set_access_token(params['access_token']);
+      set_route(get_route(), { reload_page: true });
+      return;
+    }
+
     var target_div = div('Loading...');
 
     render(
