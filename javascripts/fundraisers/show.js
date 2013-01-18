@@ -62,17 +62,7 @@ with (scope('Fundraisers')) {
         section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 10px; text-align: center; color: #5e5f5f;' },
           h1({ style: 'font-size: 45px; font-weight: normal; margin: 10px 0; line-height: 50px;' }, fundraiser.title),
 
-          div(
-            span('by: '),
-            div({ 'class': 'avatar small', style: 'display: inline-block;' },
-              a({ href: '#users/'+fundraiser.person.id, style: 'display: inline-block; vertical-align: middle' },
-                img({ src: fundraiser.person.avatar_url })
-              )
-            ),
-            div({ style: 'display: inline-block;' }, a({ href: '#users/'+fundraiser.person.id, style: 'margin-left: 5px;' }, fundraiser.person.display_name))
-          ),
-
-          div({ style: 'margin-top: 10px; text-align: center;' },
+          div({ style: 'margin-top: 20px; text-align: center;' },
             Facebook.like_button({ style: 'display: inline-block; vertical-align: middle;' }, {
               width: 300,
               link: window.location.href
@@ -101,7 +91,7 @@ with (scope('Fundraisers')) {
           div({ style: 'margin: 10px 0 25px 0; padding: 20px; background: #EEE; border-radius: 3px; font-size: 20px; line-height: 25px;' }, fundraiser.short_description||''),
 
           div({ id: 'fundraiser-links', style: 'margin-left: 20px; font-size: 14px;' },
-            span({ style: 'display: block; margin: 10px 0;' }, 'Created ', date(fundraiser.created_at)),
+            span({ style: 'display: block; margin: 10px 0;' }, 'Created ', date(fundraiser.created_at), ' by ', a({ href: Profile.get_href(fundraiser.person) }, fundraiser.person.display_name)),
             fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, 'Homepage: ',  a({ target: '_blank', href: fundraiser.homepage_url, style: 'color: inherit;' }, fundraiser.homepage_url)),
             (fundraiser.repo_url && fundraiser.repo_url != fundraiser.homepage_url) && span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
           )

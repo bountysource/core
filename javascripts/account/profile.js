@@ -1,4 +1,8 @@
 with (scope('Profile','App')) {
+  define('get_href', function(person) {
+    return '#users/'+person.id;
+  });
+
   route('#users/:profile_id', function(profile_id) {
     render(
       breadcrumbs(

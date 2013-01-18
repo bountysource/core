@@ -44,7 +44,7 @@ with (scope('Home', 'App')) {
 
           response.data.people.map(function(person) {
             return div({ 'class': 'round-avatar' },
-              a({ href: '#users/'+person.id }, img({ src: person.avatar_url }))
+              a({ href: Profile.get_href(person) }, img({ src: person.avatar_url }))
             );
           }),
 
