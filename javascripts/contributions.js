@@ -180,41 +180,45 @@ with (scope('Contributions', 'App')) {
     if (/:pledge_id/.test(pledge_id)) return set_route('#fundraisers/'+fundraiser_id);
 
     BountySource.get_pledge(pledge_id, function(response) {
-      var pledge      = response.data,
+      if (response.meta.success) {
+        var pledge      = response.data,
           fundraiser  = pledge.fundraiser,
           rewards_div = div();
 
-      render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
+        render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
-      render({ into: target_div },
-        div({ 'class': 'split-main' },
-          h2("Thanks for your contribution"),
-          p("Your contribution of ", money(pledge.amount), " has been made to ", fundraiser.title, "."),
+        render({ into: target_div },
+          div({ 'class': 'split-main' },
+            h2("Thanks for your contribution"),
+            p("Your contribution of ", money(pledge.amount), " has been made to ", fundraiser.title, "."),
 
-          pledge.reward && div(
-            h2("Selected Reward"),
-            p("You selected the reward \"", pledge.reward.description ,"\"")
-          )
-        ),
-
-        div({ 'class': 'split-side' },
-          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
-            ribbon_header("Links"),
-            br(),
-            a({ 'class': 'green', href: '#fundraisers/'+fundraiser_id }, "Back to Fundraiser")
+            pledge.reward && div(
+              h2("Selected Reward"),
+              p("You selected the reward \"", pledge.reward.description ,"\"")
+            )
           ),
 
-          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
-            ribbon_header('Share'),
-            br(),
-            facebook_share_pledge_button(pledge),
-            div({ style: 'height: 20px;' }),
-            twitter_share_pledge_button(pledge)
-          )
-        ),
+          div({ 'class': 'split-side' },
+            div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
+              ribbon_header("Links"),
+              br(),
+              a({ 'class': 'green', href: '#fundraisers/'+fundraiser_id }, "Back to Fundraiser")
+            ),
 
-        div({ 'class': 'split-end' })
-      );
+            div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
+              ribbon_header('Share'),
+              br(),
+              facebook_share_pledge_button(pledge),
+              div({ style: 'height: 20px;' }),
+              twitter_share_pledge_button(pledge)
+            )
+          ),
+
+          div({ 'class': 'split-end' })
+        );
+      } else {
+        render({ into: target_div }, error_message(response.data.error));
+      }
     });
   });
 
