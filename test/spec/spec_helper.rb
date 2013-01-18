@@ -4,7 +4,7 @@ Bundler.require
 CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))
 BASE_URL = ENV['RAILS_ENV'] == 'staging' ? 'https://www-qa.bountysource.com/' : 'http://www.bountysource.dev/'
 API_ENDPOINT = 'qa'  # 'dev'
-DEMO_MODE = true
+DEMO_MODE = false
 
 def proceed_through_paypal_sandbox_flow!
   # log in to master account if necessary
@@ -147,13 +147,15 @@ RSpec.configure do |config|
       end
 
       # restore a method that was previously mocked
-      def restore_api_method(method)
-        execute_scopejs_script %(
-          with (scope('BountySource')) {
-            define('#{method.to_s}', _original_#{method.to_s});
-            delete BountySource._original_#{method.to_s};
-          }
-        )
+      def restore_api_method(*methods)
+        methods.each do |method|
+          execute_scopejs_script %(
+            with (scope('BountySource')) {
+              define('#{method.to_s}', _original_#{method.to_s});
+              delete BountySource._original_#{method.to_s};
+            }
+          )
+        end
       end
 
       # a breakpoint that halts testing until browser window clicked.

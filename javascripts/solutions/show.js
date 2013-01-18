@@ -17,28 +17,36 @@ with (scope('Solution', 'App')) {
 
         render({ target: 'solution-title' }, solution.issue.title);
 
-        render({ into: target_div },
-          div({ 'class': 'split-main'},
-            Solution.solution_status_box(solution),
+        if (solution.accepted && !solution.disputed && !solution.in_dispute_period) {
+          render({ into: target_div },
+            h2('Solution Accepted!'),
+            p("Congratulations, your solution has been accepted and merged into the project!"),
+            a({ 'class': 'green pledge-button', style: 'width: 250px;', href: '#solutions/'+solution.id+'/payout' }, 'Claim Bounty')
+          );
+        } else {
+          render({ into: target_div },
+            div({ 'class': 'split-main'},
+              status_description(solution),
 
-            table(
-              tr({ style: 'height: 40px;' },
-                td('Issue Status:'),
-                td({ style: 'text-align: center;' }, Issue.status_element(solution.issue))
-              ),
-              tr({ style: 'height: 40px;' },
-                td('Solution Status:'),
-                td({ style: 'text-align: center;' }, Solution.status_element(solution))
+              table(
+                tr({ style: 'height: 40px;' },
+                  td('Issue Status:'),
+                  td({ style: 'text-align: center;' }, Issue.status_element(solution.issue))
+                ),
+                tr({ style: 'height: 40px;' },
+                  td('Solution Status:'),
+                  td({ style: 'text-align: center;' }, Solution.status_element(solution))
+                )
               )
-            )
-          ),
+            ),
 
-          div({ 'class': 'split-side'},
-            Issue.card(solution.issue, { show_share_buttons: true })
-          ),
+            div({ 'class': 'split-side'},
+              Issue.card(solution.issue, { show_share_buttons: true })
+            ),
 
-          div({ 'class': 'split-end'})
-        );
+            div({ 'class': 'split-end'})
+          );
+        }
       } else {
         render({ into: target_div }, response.data.error);
       }
@@ -85,4 +93,18 @@ with (scope('Solution', 'App')) {
     });
   });
 
+  define('facebook_share_solution_url', function(solution) {
+    return Facebook.share_dialog_url({
+      link:         encode_html(BountySource.www_host+'#repos/'+solution.issue.repository.full_name+'/issues/'+solution.issue.number),
+      title:        ("I submitted a solution to " + solution.issue.repository.full_name + " on BountySource."),
+      description:  ("If my solution is accepted I will claim the bounty, which is currently at " + money(solution.issue.bounty_total) + ".")
+    });
+  });
+
+  define('twitter_share_solution_url', function(solution) {
+    return Twitter.share_dialog_url({
+      url:  encode_html(BountySource.www_host+'#repos/'+solution.issue.repository.full_name+'/issues/'+solution.issue.number),
+      text: ("I submitted a solution to " + solution.issue.repository.full_name + " on BountySource.")
+    });
+  });
 }
