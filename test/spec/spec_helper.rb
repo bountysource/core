@@ -2,9 +2,19 @@ require "bundler"
 Bundler.require
 
 CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))
-BASE_URL = ENV['RAILS_ENV'] == 'staging' ? 'https://www-qa.bountysource.com/' : 'http://www.bountysource.dev/'
-API_ENDPOINT = 'qa'  # 'dev'
-DEMO_MODE = false
+
+if ENV['RAILS_ENV'] == 'staging'
+  BASE_URL = 'https://www-qa.bountysource.com/'
+  API_ENDPOINT = 'qa'
+  DEMO_MODE = false
+else
+  BASE_URL = 'https://www-qa.bountysource.com/'
+  #BASE_URL = 'http://www.bountysource.dev/'
+  API_ENDPOINT = 'qa'
+  #API_ENDPOINT = 'dev'
+  DEMO_MODE = false
+end
+
 
 def proceed_through_paypal_sandbox_flow!
   # log in to master account if necessary
