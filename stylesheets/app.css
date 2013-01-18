@@ -139,6 +139,15 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
 #faq dd { margin-bottom: 20px; }
 
 
+input.fundraiser-share-url {
+  font-size: 11px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  color: grey;
+  width: 245px;
+  text-align: center;
+}
+
 #bounty-box {
   background: #f1f1f1;
   margin: 0 15px;

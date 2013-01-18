@@ -57,28 +57,48 @@ with (scope('Fundraisers')) {
     // add the title to the already present header element
     render({ target: 'breadcrumbs-fundraiser-title' }, fundraiser.title);
 
-    var bountysource_account_div = div();
-
     var fundraiser_form = section({ id: 'fundraiser-wrapper' },
       div({ 'class': 'split-main' },
         section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 10px; text-align: center; color: #5e5f5f;' },
-          h1({ style: 'font-size: 45px; font-weight: normal; margin: 25px auto; line-height: 50px;' }, fundraiser.title),
+          h1({ style: 'font-size: 45px; font-weight: normal; margin: 10px 0; line-height: 50px;' }, fundraiser.title),
 
-          span('by: '),
-          div({ 'class': 'avatar small', style: 'display: inline-block;' },
-            a({ href: '#users/'+fundraiser.person.id, style: 'display: inline-block; vertical-align: middle' },
-              img({ src: fundraiser.person.avatar_url })
-            )
+          div(
+            span('by: '),
+            div({ 'class': 'avatar small', style: 'display: inline-block;' },
+              a({ href: '#users/'+fundraiser.person.id, style: 'display: inline-block; vertical-align: middle' },
+                img({ src: fundraiser.person.avatar_url })
+              )
+            ),
+            div({ style: 'display: inline-block;' }, a({ href: '#users/'+fundraiser.person.id, style: 'margin-left: 5px;' }, fundraiser.person.display_name))
           ),
-          div({ style: 'display: inline-block;' }, a({ href: '#users/'+fundraiser.person.id, style: 'margin-left: 5px;' }, fundraiser.person.display_name))
+
+          div({ style: 'margin-top: 10px; text-align: center;' },
+            Facebook.like_button({ style: 'display: inline-block; vertical-align: middle;' }, {
+              width: 300,
+              link: window.location.href
+            }),
+
+            Twitter.share_button({ style: 'display: inline-block; vertical-align: middle;' }, {
+              url:  window.location.href,
+              text: fundraiser.title
+            }),
+
+            input({
+              'class':  'fundraiser-share-url',
+              style:    'display: inline-block; vertical-align: middle; margin: -2px 10px 0 10px',
+              value:    window.location.href,
+              readonly: true,
+              onClick:  function(e) {e.target.select(); }
+            })
+          )
         ),
 
-        fundraiser.image_url && section({ id: 'fundraiser-image', style: 'border-bottom: 2px dotted #C7C7C7; text-align: center;' },
+        fundraiser.image_url && section({ id: 'fundraiser-image', style: 'text-align: center;' },
           img({ style: 'max-width: 630px; padding: 20px;', src: fundraiser.image_url })
         ),
 
         section({ id: 'fundraiser-short-description', style: 'border-bottom: 2px dotted #C7C7C7; color: #5E5F5F;' },
-          div({ style: 'margin: 10px 0; padding: 20px; background: #EEE; border-radius: 3px; font-size: 20px; line-height: 25px;' }, fundraiser.short_description||''),
+          div({ style: 'margin: 10px 0 25px 0; padding: 20px; background: #EEE; border-radius: 3px; font-size: 20px; line-height: 25px;' }, fundraiser.short_description||''),
 
           div({ id: 'fundraiser-links', style: 'margin-left: 20px; font-size: 14px;' },
             span({ style: 'display: block; margin: 10px 0;' }, 'Created ', date(fundraiser.created_at)),
@@ -86,9 +106,6 @@ with (scope('Fundraisers')) {
             (fundraiser.repo_url && fundraiser.repo_url != fundraiser.homepage_url) && span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
           )
         ),
-
-        // TODO sharing
-        section({ id: 'fundraiser-share' }),
 
         section({ id: 'fundraiser-description', style: 'margin: 20px auto; padding: 10px;' },
           div({ 'class': 'markdown', html: fundraiser.description_html, style: 'margin: 0; padding: 10px; overflow-x: auto;' })
@@ -123,7 +140,7 @@ with (scope('Fundraisers')) {
             var elements = [];
             for (var i=0; i<fundraiser.rewards.length; i++) {
               var reward = fundraiser.rewards[i];
-              var element = div({ style: 'min-height: 100px; padding: 15px;1', onClick: curry(set_route, '#fundraisers/'+fundraiser.id+'/pledge?reward_id='+reward.id) },
+              var element = div({ style: 'padding: 15px;', onClick: curry(set_route, '#fundraisers/'+fundraiser.id+'/pledge?reward_id='+reward.id) },
                 span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
 
                 (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
@@ -142,23 +159,6 @@ with (scope('Fundraisers')) {
       div({ 'class': 'split-end' })
     );
 
-    // if logged in and account has money, render bountysource account radio
-    logged_in() && BountySource.get_cached_user_info(function(user) {
-      (user.account && user.account.balance > 0) && render({ into: bountysource_account_div },
-        div(
-          radio({
-            name: 'payment_method',
-            value: 'personal',
-            id: 'payment_method_personal'
-          }),
-          label({ 'for': 'payment_method_personal', style: 'text-align: left; padding-left: 15px; display: inline;' },
-            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
-            "BountySource",
-            span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
-          )
-        )
-      );
-    });
 
     return fundraiser_form;
   });

@@ -16,15 +16,32 @@ with (scope('Facebook','App')) {
    * DOM helpers
    * */
 
+  define('share_button', function(options, share_url_options) {
+    var share_url = share_dialog_url(share_url_options||{
+      url:  encode_html('https://www.bountysource.com'),
+      text: "The funding platform for open-source software | @BountySource"
+    });
+
+    return process_twitter_element(div(options,
+      a({
+        'class':      'twitter-share-button',
+        'data-lang':  'en',
+        href:         share_url
+      })
+    ));
+  });
+
+
   // auto-parsed by FB library
-  define('like_button', function(options) {
-    return process_facebook_element(div(options || {},
+  define('like_button', function(options, like_options) {
+    like_options = like_options || {};
+    return process_facebook_element(div(options||{},
       div({
         'class': 'fb-like',
-        'data-href': "http://www.facebook.com/BountySource",
+        'data-href': like_options.link || "http://www.facebook.com/BountySource",
         'data-send': 'false',
-        'data-width': '500px;',
-        'data-show-faces': 'false'
+        'data-width': (like_options.width||500)+'px',
+        'data-show-faces': like_options.show_faces || 'false'
       })
     ));
   });

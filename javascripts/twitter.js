@@ -14,12 +14,18 @@ with (scope('Twitter','App')) {
    * DOM Helpers
    * */
 
-  define('share_button', function(options) {
+  define('share_button', function(options, share_url_options) {
+    var share_url = share_dialog_url(share_url_options||{
+      url:  encode_html('https://www.bountysource.com'),
+      text: "The funding platform for open-source software | @BountySource"
+    });
+
     return process_twitter_element(div(options,
       a({
         'class':      'twitter-share-button',
         'data-lang':  'en',
-        href:         'https://twitter.com/share?url=https://www.bountysource.com&text=The funding platform for open-source software | @BountySource'
+        'data-count':  share_url_options.show_count ? 'horizontal' : 'none',
+        href:         share_url
       })
     ));
   });
