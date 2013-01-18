@@ -4,6 +4,7 @@ Bundler.require
 CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))
 BASE_URL = ENV['RAILS_ENV'] == 'staging' ? 'https://www-qa.bountysource.com/' : 'http://www.bountysource.dev/'
 API_ENDPOINT = 'qa'  # 'dev'
+DEMO_MODE = false
 
 def proceed_through_paypal_sandbox_flow!
   # log in to master account if necessary
@@ -156,16 +157,24 @@ RSpec.configure do |config|
       end
 
       # a breakpoint that halts testing until browser window clicked.
-      def breakpoint!
+      def breakpoint!(text='Click anywhere to continue...', timeout=0)
         puts ">> breakpoint reached. click anywhere in the browser to continue"
 
+        text = text.gsub("\"", "\\\"")
+
         execute_scopejs_script %(
-          _breakpoint_overlay = div({
-            id: '_breakpoint_overlay',
-            style: 'background-color: #000; opacity: 0.6; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; text-align: center;',
-            onClick: function() { App.remove_element('_breakpoint_overlay'); }
-          }, p({ style: 'margin-top: 150px; font-size: 50px;' }, 'Click anywhere to continue...'));
-          document.body.appendChild(_breakpoint_overlay);
+          document.body.appendChild(div(
+            {
+              id: '_breakpoint_overlay',
+              style: 'background-color: rgba(0, 0, 0, 0.6); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; text-align: center;',
+              onClick: function() { App.remove_element('_breakpoint_overlay'); }
+            },
+            p({ style: 'margin: 150px 100px; line-height: 60px; font-size: 50px; color: white; text-shadow: 3px 3px #000' }, "#{text}"))
+          );
+          if (#{timeout} > 0) setTimeout(function() {
+            var e = document.getElementById('_breakpoint_overlay');
+            e.parentNode.removeChild(e);
+          }, #{timeout});
           console.log("** Breakpoint reached **");
          )
 
@@ -185,6 +194,12 @@ RSpec.configure do |config|
   config.before(:each) do
     $browser.goto_route '#' unless $browser.url =~ /\#$/
     $browser.execute_scopejs_script "BountySource.logout();"
+  end
+
+  config.before(:each) do |test|
+    if DEMO_MODE
+      $browser.breakpoint!(test.example.metadata[:full_description], 4000)
+    end
   end
 
   config.after(:suite) do
