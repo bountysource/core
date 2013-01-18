@@ -33,8 +33,11 @@ describe "Claiming a Bounty" do
     @browser.goto_route '#repos/coryboyd/bs-test/issues/18'
 
     # not yet logged in, so a github login button should be present
-    @browser.a(text: 'Link with GitHub').wait_until_present
-    @browser.a(text: 'Link with GitHub').click
+    @browser.a(text: 'Link with GitHub').when_present.click
+
+    login_with_github!
+
+    @browser.goto_route '#repos/coryboyd/bs-test/issues/18'
 
     @browser.select(name: 'pull_request_number').wait_until_present
   end
