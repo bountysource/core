@@ -11,11 +11,12 @@ describe "Fundraiser Pledges" do
     # goto_route instead of .click because it sometimes doesn't scroll enough and chatbar gets the click
     @browser.goto_route '#'+bounty_card.href.split('#').last
 
+    @browser.a(text: 'Make a Pledge').when_present.click
+
     # make a pledge to this fundraiser
-    @browser.input(id: 'amount').wait_until_present
-    @browser.input(id: 'amount').send_keys 25
+    @browser.text_field(id: 'pledge-amount').when_present.set(25)
     @browser.radio(id: 'payment_method_paypal').click
-    @browser.button(value: 'Make a Pledge').click
+    @browser.button(value: 'Continue to payment').click
 
     proceed_through_paypal_sandbox_flow!
 
