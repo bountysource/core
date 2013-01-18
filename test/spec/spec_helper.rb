@@ -104,7 +104,7 @@ RSpec.configure do |config|
           goto_without_scope("#{BASE_URL}#{route}")
         end
 
-        if route =~ /^#/
+        if BASE_URL =~ /bountysource\.dev/ && route =~ /^#/
           $browser.div(id: 'dev-bar').wait_until_present
           if $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).exists?
             $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).click
