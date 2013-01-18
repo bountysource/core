@@ -25,23 +25,70 @@ with (scope('Payment', 'App')) {
           label({ 'for': 'amount-input' }, '$'),
           text({ placeholder: "25", name: 'amount', id: 'amount-input' })
         ),
-        div({ 'class': 'payment-method' },
-          div(radio({ name: 'payment_method', value: 'paypal', id:'payment_method_paypal',
-            checked: 'checked' }),
-            label({ 'for': 'payment_method_paypal' },
-              img({ src: 'images/paypal.png'}), "PayPal")),
-//          div(radio({ name: 'payment_method', value: 'google', id:'payment_method_google' }),
-//            label({ 'for': 'payment_method_google' },
-//              img({ src: 'images/google-wallet.png'}), "Google Wallet")),
-//                div(radio({ name: 'payment_method', value: 'amazon', id:'payment_method_amazon' }),
-//                    label({ 'for': 'payment_method_amazon' },
-//                          img({ src: 'images/amazon.png'}), "Amazon.com")),
 
-          bountysource_account_div
-        ),
+        payment_methods(),
+
         submit({ 'class': 'blue' }, 'Create ' + item)
       )
     );
+  });
+
+  define('payment_methods', function() {
+    var bountysource_account_div = div();
+
+    var payment_methods = div({ 'class': 'payment-method' },
+      div(
+        radio({
+          id: 'payment_method_paypal',
+          name: 'payment_method',
+          value: 'paypal',
+          checked: 'checked'
+        }),
+        label({ 'for': 'payment_method_paypal', style: 'display: inline;' },
+          img({ src: 'images/paypal.png'}), span("PayPal")
+        )
+      ),
+      false && div(
+        radio({
+          id:'payment_method_google',
+          name: 'payment_method',
+          value: 'google'
+        }),
+        label({ 'for': 'payment_method_google', style: 'display: inline;' },
+          img({ src: 'images/google-wallet.png'}), span("Google Wallet")
+        )
+      ),
+      false && div(
+        radio({
+          id:'payment_method_amazon',
+          name: 'payment_method',
+          value: 'amazon'
+        }),
+        label({ 'for': 'payment_method_amazon', style: 'display: inline;' },
+          img({ src: 'images/amazon.png'}), span("Amazon.com")
+        )
+      ),
+      bountysource_account_div
+    );
+
+    // if logged in and account has money, render bountysource account radio
+    logged_in() && BountySource.get_cached_user_info(function(user) {
+      (user.account && user.account.balance > 0) && render({ into: bountysource_account_div },
+        div(
+          radio({
+            name: 'payment_method',
+            value: 'personal',
+            id: 'payment_method_personal'
+          }),
+          label({ 'for': 'payment_method_personal', style: 'display: inline;' },
+            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
+            span("BountySource"), span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
+          )
+        )
+      );
+    });
+
+    return payment_methods;
   });
 
   define('make_payment', function(item, repository, issue_number, redirect_url, form_data) {

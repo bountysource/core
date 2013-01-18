@@ -191,25 +191,13 @@ th { padding: 2px 5px; font-weight: bold; text-align: left; }
   line-height: 32px;
 }
 
-#bounty-box .payment-method {
-  margin: 10px 0;
-}
+.payment-method { margin: 15px 0; }
+.payment-method div { line-height: 20px; margin-bottom: 10px; }
+.payment-method div:last-child { margin-bottom: 0; }
+.payment-method img { padding: 0 6px 0 4px; vertical-align: middle; }
+.payment-method label, .payment-method input { cursor: pointer; }
 
-#bounty-box .payment-method div {
-  /*height: 20px;*/
-  line-height: 20px;
-}
-
-#bounty-box .payment-method img {
-  padding: 0 6px 0 4px;
-  vertical-align: middle;
-}
-
-#bounty-box .payment-method label, #bounty-box .payment-method input { 
-  cursor: pointer;
-}
-
-#bounty-box .total_bounties { 
+.total_bounties {
   margin: 10px 0; 
   font-size: 32px; 
   font-weight: bold; 

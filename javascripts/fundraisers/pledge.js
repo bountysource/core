@@ -32,35 +32,12 @@ with (scope('Fundraisers', 'App')) {
               label('Pledge Amount:'),
               span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
               input({ id: 'pledge-amount', style: 'width: 240px; display: inline-block;', autofocus: true, name: 'amount', placeholder: '25', value: params.amount||'' }),
-              submit({ 'class': 'green', style: 'display: inline-block; height: 60px;' }, 'Continue to payment')
+              submit({ 'class': 'green', style: 'display: inline-block;' }, 'Continue to payment')
             ),
 
             // payment method selection
             fieldset({ 'class': 'no-label' },
-              div({ 'class': 'payment-method' },
-                div(
-                  radio({
-                    name:     'payment_method',
-                    value:    'paypal',
-                    id:       'payment_method_paypal',
-                    checked:  'checked'
-                  }),
-                  label({ 'for': 'payment_method_paypal', style: 'text-align: left; padding-left: 15px;' },
-                    img({ src: 'images/paypal.png'}), "PayPal"
-                  )
-                ),
-//              div(
-//                radio({
-//                  name:   'payment_method',
-//                  value:  'google',
-//                  id:     'payment_method_google'
-//                }),
-//                label({ 'for': 'payment_method_google', style: 'text-align: left; padding-left: 15px;' },
-//                  img({ src: 'images/google-wallet.png'}), "Google Wallet"
-//                )
-//              ),
-                bountysource_account_div
-              )
+              Payment.payment_methods()
             ),
 
             // rewards table
