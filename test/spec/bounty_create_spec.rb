@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Bounty Creation" do
   specify do
-    @browser.goto_route "#"
+    @browser.goto "#"
 
     # find a bounty card and click on it
     bounty_card = @browser.div(class: 'card').a(text: 'Back this!')

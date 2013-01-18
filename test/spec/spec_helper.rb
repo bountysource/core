@@ -46,7 +46,7 @@ def login_with_email!
 
   @bountysource_credentials = CREDENTIALS["bountysource"]
 
-  @browser.goto_route "#signin/email"
+  @browser.goto "#signin/email"
 
   # login with email and password
   @browser.text_field(name: 'email').set(@bountysource_credentials["email"])
@@ -57,13 +57,17 @@ def login_with_email!
 end
 
 def login_with_github!
-  github_credentials = CREDENTIALS["github"]
-  @browser.text_field(id: 'login_field').set(github_credentials["username"])
-  @browser.text_field(id: 'password').set(github_credentials["password"])
-  @browser.button(value: 'Sign in').click
+  @browser.goto 'https://github.com/login' unless @browser.url.start_with?('https://github.com/login')
 
-  # auto authorize
-  @browser.button(text: 'Authorize app').click if @browser.button(text: 'Authorize app').present?
+  if @browser.url.start_with?('https://github.com/login')
+    github_credentials = CREDENTIALS["github"]
+    @browser.text_field(id: 'login_field').set(github_credentials["username"])
+    @browser.text_field(id: 'password').set(github_credentials["password"])
+    @browser.button(value: 'Sign in').click
+
+    # auto authorize
+    @browser.button(text: 'Authorize app').click if @browser.button(text: 'Authorize app').present?
+  end
 end
 
 # matches money.
@@ -87,21 +91,20 @@ RSpec.configure do |config|
         execute_script "with (scope.instance) { #{src} }"
       end
 
-      # goto route.
-      def goto_route(route)
-        # if there's an FB like box on the page, wait until it loads
-        if $browser.div(class: 'fb-like').present?
-          $browser.div(class: 'fb-like').frame.body.wait_until_present
+      alias_method :goto_without_scope, :goto
+      def goto(route)
+        if !(route =~ /^#/)
+          # absolute URL
+          goto_without_scope(route)
+        elsif execute_script("return typeof(scope) != 'undefined' && scope.instance && scope.instance.set_route")
+          # scope route and we're already on a scope page
+          execute_script "scope.instance.set_route('#{route}')"
+        else
+          # scope route but we're not on a scope page
+          goto_without_scope("#{BASE_URL}#{route}")
         end
 
-        # set the route
-        goto "#{BASE_URL}#{route}"
-
-        # wait until scope recognizes it
-        Watir::Wait.until { execute_script %(return typeof(scope) != "undefined" && "#{route}".match(scope.current_route)) }
-
-        # ensure we're using the correct API_ENDPOINT
-        if BASE_URL =~ /bountysource\.dev/
+        if route =~ /^#/
           $browser.div(id: 'dev-bar').wait_until_present
           if $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).exists?
             $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).click
@@ -109,6 +112,26 @@ RSpec.configure do |config|
           end
         end
       end
+
+      ## goto route.
+      #def goto_route(route)
+      #  puts "goto_route #{route}"
+      #
+      #  # set the route
+      #  execute_script %(window.location.href = "#{BASE_URL}#{route}")
+      #  Watir::Wait.until { execute_script %(return typeof(scope) != "undefined" && "#{route}".match(scope.current_route)) }
+      #
+      #  puts "finished goto_route #{route}"
+      #
+      #  # ensure we're using the correct API_ENDPOINT
+      #  if BASE_URL =~ /bountysource\.dev/
+      #    $browser.div(id: 'dev-bar').wait_until_present
+      #    if $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).exists?
+      #      $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).click
+      #      $browser.div(id: 'dev-bar').b(text: API_ENDPOINT).wait_until_present
+      #    end
+      #  end
+      #end
 
       def mock_api!
         execute_scopejs_script %(
@@ -192,12 +215,11 @@ RSpec.configure do |config|
   config.before(:all) do
     @browser = $browser
 
-    @browser.goto 'https://github.com/login'
     login_with_github!
   end
 
   config.before(:each) do
-    $browser.goto_route '#' unless $browser.url =~ /\#$/
+    $browser.goto '#' unless $browser.url =~ /\#$/
     $browser.execute_scopejs_script "BountySource.logout();"
   end
 

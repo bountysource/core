@@ -16,28 +16,28 @@ describe "Claiming a Bounty" do
   end
 
   it "should find a large bounty on #bounties" do
-    @browser.goto_route "#bounties"
+    @browser.goto "#bounties"
     @browser.div(class: 'stats').wait_until_present
 
     # select a link from the table after featured projects, which contains issues
     issue_links = @browser.tables[1].links.select { |l| l.href =~ /#repos\/\w+\/\w+\/issues\/\d+$/ }
 
     # goto_route instead of .click because it sometimes doesn't scroll enough and chatbar gets the click
-    @browser.goto_route '#'+issue_links.sample.href.split('#').last
+    @browser.goto '#'+issue_links.sample.href.split('#').last
 
     @browser.url.should =~ /#repos\/\w+\/\w+\/issues\/\d+$/
   end
 
   # TODO this test needs to be mocked
   it "should see a list of pull requests after logging in" do
-    @browser.goto_route '#repos/coryboyd/bs-test/issues/18'
+    @browser.goto '#repos/coryboyd/bs-test/issues/18'
 
     # not yet logged in, so a github login button should be present
     @browser.a(text: 'Link with GitHub').when_present.click
 
     #login_with_github!
 
-    @browser.goto_route '#repos/coryboyd/bs-test/issues/18'
+    @browser.goto '#repos/coryboyd/bs-test/issues/18'
 
     @browser.select(name: 'pull_request_number').wait_until_present
   end
@@ -188,14 +188,14 @@ describe "Claiming a Bounty" do
       @browser.override_api_response_data :get_solutions, success: true, data: [@accepted_solution]
       @browser.override_api_response_data :get_solution, success: true, data: @accepted_solution
 
-      @browser.goto_route "#solutions"
+      @browser.goto "#solutions"
 
       @browser.table(class: 'solutions').wait_until_present
       row = @browser.table(class: 'solutions').rows[1]
       row.text.should match /Accepted!/i
       row.click
 
-      @browser.button(text: 'Claim Bounty').wait_until_present
+      @browser.a(text: 'Claim Bounty').wait_until_present
 
       # unmock the user info api call
       @browser.restore_api_method :get_solutions, :get_solution
@@ -208,7 +208,7 @@ describe "Claiming a Bounty" do
       @browser.override_api_response_data :get_solutions, success: true, data: [@in_dispute_period_solution]
       @browser.override_api_response_data :get_solution, success: true, data: @in_dispute_period_solution
 
-      @browser.goto_route "#solutions"
+      @browser.goto "#solutions"
 
       @browser.table(class: 'solutions').wait_until_present
       row = @browser.table(class: 'solutions').rows[1]
@@ -229,7 +229,7 @@ describe "Claiming a Bounty" do
       @browser.override_api_response_data :get_solutions, success: true, data: [@disputed_solution]
       @browser.override_api_response_data :get_solution, success: true, data: @disputed_solution
 
-      @browser.goto_route "#solutions"
+      @browser.goto "#solutions"
 
       @browser.table(class: 'solutions').wait_until_present
       row = @browser.table(class: 'solutions').rows[1]

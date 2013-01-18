@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Signin" do
   it "should authenticate with email/password" do
-    @browser.goto_route '#signin/email'
+    @browser.goto '#signin/email'
 
     form = @browser.section(id: 'content').form
     form.text_field(name: 'email').set(CREDENTIALS["bountysource"]['email'])
@@ -13,7 +13,7 @@ describe "Signin" do
   end
 
   it "should show password reset link when email/password are wrong" do
-    @browser.goto_route '#signin/email'
+    @browser.goto '#signin/email'
 
     form = @browser.section(id: 'content').form
     form.text_field(name: 'email').set(CREDENTIALS["bountysource"]['email'])
@@ -32,7 +32,7 @@ describe "Signin" do
     tmp_pass = CREDENTIALS["bountysource"]['password']
 
     # fill in first form
-    @browser.goto_route '#signin/email'
+    @browser.goto '#signin/email'
     form = @browser.section(id: 'content').form
     form.text_field(name: 'email').set(tmp_email)
     form.text_field(name: 'password').set(tmp_pass)
@@ -51,7 +51,7 @@ describe "Signin" do
     @browser.a(text: 'Sign In').wait_until_present
 
     # log back in
-    @browser.goto_route '#signin/email'
+    @browser.goto '#signin/email'
     form = @browser.section(id: 'content').form
     form.text_field(name: 'email').when_present.set(tmp_email)
     form.text_field(name: 'password').set(tmp_pass)
@@ -63,7 +63,7 @@ describe "Signin" do
   end
 
   it "should link with github and create a new account" do
-    @browser.goto_route '#'
+    @browser.goto '#'
     @browser.a(text: 'Sign In').when_present.click
     @browser.a(text: 'GitHub').click
 
