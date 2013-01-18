@@ -107,7 +107,7 @@ with (scope('Fundraisers')) {
           )
         ),
 
-        section({ id: 'fundraiser-description', style: 'margin: 20px auto; padding: 10px;' },
+        section({ id: 'fundraiser-description' },
           div({ 'class': 'markdown', html: fundraiser.description_html, style: 'margin: 0; padding: 10px; overflow-x: auto;' })
         )
       ),
