@@ -199,10 +199,9 @@ with (scope('Contributions', 'App')) {
     BountySource.get_pledge(pledge_id, function(response) {
       if (response.meta.success) {
         var pledge      = response.data,
-          fundraiser  = pledge.fundraiser,
-          rewards_div = div();
+            fundraiser  = pledge.fundraiser;
 
-        render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(response.data.title, 60));
+        render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(fundraiser.title, 60));
 
         render({ into: target_div },
           div({ 'class': 'split-main' },

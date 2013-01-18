@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Fundraiser Pledges" do
   specify do
+    login_with_email!
+
     @browser.goto "#"
 
     # find a fundraiser card and click on it
