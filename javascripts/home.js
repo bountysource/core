@@ -200,7 +200,7 @@ with (scope('Home', 'App')) {
 
     return div({ 'class': 'card', onClick: curry(set_route, card.href) },
       div({ style: 'padding: 7px; background: #EEE;' },
-        a({ href: card.href, style: 'display: inline-block; vertical-align: middle; margin-right: 10px;' }, img({ style: 'width: 40px; border-radius: 6px', src: card.image_url })),
+        card.image_url && a({ href: card.href, style: 'display: inline-block; vertical-align: middle; margin-right: 10px;' }, img({ style: 'width: 40px; border-radius: 6px', src: card.image_url })),
         div({ style: 'font-size: 16px; font-weight: bold; display: inline-block; vertical-align: middle;' }, a({ href: card.href, style: 'color: #333;' }, card.title))
       ),
 
