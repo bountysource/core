@@ -104,6 +104,9 @@ with (scope('App')) {
         outer       = div({ 'class': 'progress-bar-outer' }, inner),
         percentage  = (parseFloat(options.percentage)||0);
 
+    // don't go over 100%
+    if (percentage > 100) percentage = 100;
+
     inner.style.width = percentage+'%';
     return outer;
   });
