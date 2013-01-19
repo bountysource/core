@@ -5,8 +5,18 @@ describe "Bounty Creation" do
     @browser.goto "#"
 
     # find a bounty card and click on it
-    bounty_card = @browser.div(class: 'card').a(text: 'Back this!')
-    bounty_card.wait_until_present
+    bounty_card = nil
+    @browser.div(class: 'card').wait_until_present
+
+    # search through all cards until a bounty card is found
+    @browser.divs(class: 'card').each do |e|
+      if e.text =~ /Back this!/i
+        bounty_card = e
+        break
+      end
+    end
+
+    bounty_card.should_not be_nil
     bounty_card.click
 
     # fill in bounty amount, select paypal and submit bounty create

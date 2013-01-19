@@ -2,7 +2,15 @@ require 'spec_helper'
 
 describe "Claiming a Bounty" do
   it "should find a bounty on the home page" do
-    @browser.div(class: 'card').a(text: 'Back this!').when_present.click
+    bounty_card = nil
+    @browser.div(class: 'card').wait_until_present
+    @browser.divs(class: 'card').each do |e|
+      if e.text =~ /Back this!/i
+        bounty_card = e
+        break
+      end
+    end
+    bounty_card.should_not be_nil
   end
 
   it "should be able to get to #bounties from home page when logged in" do
