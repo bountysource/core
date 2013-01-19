@@ -401,16 +401,6 @@ with (scope('Fundraisers','App')) {
     var serialized_form = serialize_form('fundraiser-form'),
         request_data    = serialized_form_to_hash(serialized_form);
 
-//    // append serialized milestones array to request_data.
-//    var t = Teddy.snuggle('milestone-table');
-//    request_data.milestones = [];
-//    t.forEach(function(row) {
-//      if (row.className == 'editable' && !row.getAttribute('locked-for-edit')) {
-//        request_data.milestones.push({ description: row.children[0].innerText });
-//      }
-//    });
-//    request_data.milestones = JSON.stringify(request_data.milestones); // serialize array
-
     // append serialized rewards array to request_data
     var t = Teddy.snuggle('rewards-table');
     request_data.rewards = [];

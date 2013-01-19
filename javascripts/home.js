@@ -215,12 +215,12 @@ with (scope('Home', 'App')) {
 
       div({ style: 'border-top: 1px solid #eee; padding-top: 10px;' },
         // fake 1% to show something on the bar
-        (card.account_balance > 0) && div({ style: 'margin-bottom: 10px;' },
+        div({ style: 'margin-bottom: 10px;' },
           progress_bar({ percentage: funding_percentage < 1 ? 1 : funding_percentage })
         ),
 
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
-          (card.account_balance > 0) && a({ href: card.href, style: 'text-decoration: none; color: inherit;' },
+          a({ href: card.href, style: 'text-decoration: none; color: inherit;' },
             span({ style: 'vertical-align: middle; font-size: 25px;' }, money(card.account_balance)),
             span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'of ', money(card.funding_goal))
           )
