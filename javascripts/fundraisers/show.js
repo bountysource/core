@@ -36,7 +36,7 @@ with (scope('Fundraisers')) {
     render({ layout: fundraiser_preview_layout }, target_div);
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
-      render({ into: fundraiser_div }, fundraiser_template(response.data));
+      render({ into: fundraiser_div }, fundraiser_template(response.data, { preview: true }));
     });
   });
 
@@ -53,7 +53,9 @@ with (scope('Fundraisers')) {
     );
   });
 
-  define('fundraiser_template', function(fundraiser) {
+  define('fundraiser_template', function(fundraiser, options) {
+    options = options || {};
+
     // add the title to the already present header element
     render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(fundraiser.title, 85));
 
@@ -62,7 +64,7 @@ with (scope('Fundraisers')) {
         section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 10px; text-align: center; color: #5e5f5f;' },
           h1({ style: 'font-size: 45px; font-weight: normal; margin: 10px 0; line-height: 50px;' }, fundraiser.title),
 
-          div({ style: 'margin-top: 20px; text-align: center;' },
+          !options.preview && div({ style: 'margin-top: 20px; text-align: center;' },
             Facebook.like_button({ style: 'display: inline-block; vertical-align: middle;' }, {
               width: 300,
               link: window.location.href
@@ -75,10 +77,10 @@ with (scope('Fundraisers')) {
 
             input({
               'class':  'fundraiser-share-url',
-              style:    'display: inline-block; vertical-align: middle; margin: -2px 10px 0 10px',
+              style:    'display: inline-block; vertical-align: middle; margin: -2px 10px 0 10px;',
               value:    window.location.href,
               readonly: true,
-              onClick:  function(e) {e.target.select(); }
+              onClick:  function(e) { e.target.select(); }
             })
           )
         ),
@@ -117,10 +119,10 @@ with (scope('Fundraisers')) {
             messages(),
 
             // disable functionality of pledge button if not published
-            fundraiser.published ? [
-              a({ 'class': 'green pledge-button', href: '#fundraisers/'+fundraiser.id+'/pledge' }, 'Make a Pledge')
-            ] : [
+            options.preview ? [
               a({ 'class': 'green pledge-button' }, 'Make a Pledge')
+            ] : [
+              a({ 'class': 'green pledge-button', href: '#fundraisers/'+fundraiser.id+'/pledge' }, 'Make a Pledge')
             ]
           )
         ),
@@ -148,7 +150,6 @@ with (scope('Fundraisers')) {
 
       div({ 'class': 'split-end' })
     );
-
 
     return fundraiser_form;
   });
