@@ -131,7 +131,9 @@ with (scope('Fundraisers', 'App')) {
     var decline_reward = reward.id < 0;
 
     // set the pledge value
-    if (!decline_reward) amount_input.value = reward.amount;
+    if (!decline_reward && (isNaN(parseInt(amount_input.value)) || parseInt(amount_input.value) < reward.amount)) {
+      amount_input.value = reward.amount;
+    }
 
     // change class of selected reward
     var reward_rows = document.getElementById('fundraiser-rewards').children;
@@ -142,7 +144,7 @@ with (scope('Fundraisers', 'App')) {
     // set the hidden reward_id input
     document.getElementById('reward-id').value = (decline_reward ? '' : reward.id);
 
-    // scroll to top if need be
+    amount_input.focus();
     scrollTo(0,0);
   });
 
