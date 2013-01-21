@@ -84,14 +84,15 @@ with (scope('Fundraisers','App')) {
           'Home',
           a({ href: '#account' }, 'Account'),
           a({ href: '#account/fundraisers' }, 'Fundraisers'),
-          'Loading...'
+          span({ id: 'fundraiser-title' }, 'Loading...')
         );
 
     render(header_div, target_div);
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
       if (!response.meta.success) {
-        render(error_message(response.data.error));
+        render({ target: 'fundraiser-title' }, 'Not found');
+        render({ into: target_div }, error_message(response.data.error));
       } else {
         // which part of the fundraiser is being edited on this page?
         var page_title = get_route().match(/#account\/fundraisers\/\d+(?:\/(\w+))?/)[1];

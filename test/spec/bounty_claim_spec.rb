@@ -16,8 +16,7 @@ describe "Claiming a Bounty" do
   it "should be able to get to #bounties from home page when logged in" do
     login_with_email!
 
-    @browser.button(text: 'Browse All Bounties').wait_until_present
-    @browser.button(text: 'Browse All Bounties').click
+    @browser.button(text: 'Browse All Bounties').when_present.click
 
     @browser.url.should =~ /#bounties/
     @browser.div(class: 'stats').wait_until_present
