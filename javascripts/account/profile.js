@@ -42,7 +42,7 @@ with (scope('Profile','App')) {
                   strong('Company: '), span(profile.github_user.company)
                 ),
                 profile.github_user.bio && div({ style: 'margin: 15px 0;' },
-                  strong('Bio: '), span(profile.github_user.bio)
+                  strong('Bio: '), span({ style: 'white-space: pre-wrap;' }, profile.github_user.bio)
                 ),
                 div({ style: 'margin: 15px 0'},
                   strong('Followers: '), formatted_number(profile.github_user.followers)
