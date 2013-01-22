@@ -1,5 +1,9 @@
 with (scope('Fundraisers','App')) {
 
+  define('belongs_to', function(person) {
+    return logged_in() && person && parseInt(person.id) == parseInt((Storage.get('access_token')||'').split('.')[0]);
+  });
+
   route('#account/fundraisers', function() {
     var fundraisers_table = div('Loading...');
 
@@ -27,9 +31,8 @@ with (scope('Fundraisers','App')) {
             ),
             response.data.map(function(fundraiser) {
               // depends on whether or not it's published
-              var fundraiser_href = fundraiser.published ? '#fundraisers/'+fundraiser.id : '#account/fundraisers/'+fundraiser.id;
               return tr({ style: 'height: 40px;' },
-                td(a({ href: fundraiser_href }, abbreviated_text(fundraiser.title, 100))),
+                td(a({ href: '#fundraisers/'+fundraiser.id }, abbreviated_text(fundraiser.title, 100))),
                 td(money(fundraiser.funding_goal || 0)),
                 td(fundraiser.published && percentage((fundraiser.total_pledged / fundraiser.funding_goal) * 100)),
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
@@ -83,7 +86,7 @@ with (scope('Fundraisers','App')) {
 
     render(
       breadcrumbs(
-        'Home',
+        a({ href: '#' }, 'Home'),
         a({ href: '#account' }, 'Account'),
         a({ href: '#account/fundraisers' }, 'Fundraisers'),
         span({ id: 'fundraiser-title' }, 'Loading...')
@@ -92,9 +95,9 @@ with (scope('Fundraisers','App')) {
     );
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
-      if (!response.meta.success) {
+      if (!response.meta.success || !Fundraisers.belongs_to(response.data.person)) {
         render({ target: 'fundraiser-title' }, 'Not found');
-        render({ into: target_div }, error_message(response.data.error));
+        render({ into: target_div }, error_message(response.data.error || 'Fundraiser not found'));
       } else {
         var fundraiser = response.data;
 

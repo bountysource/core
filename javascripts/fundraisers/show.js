@@ -13,11 +13,12 @@ with (scope('Fundraisers')) {
     render(target_div);
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
-      if (response.data.published) {
-        render({ into: fundraiser_div }, fundraiser_template(response.data));
+      if (response.meta.success) {
+        var fundraiser = response.data;
+        render({ into: fundraiser_div }, fundraiser_template(fundraiser));
       } else {
         render({ target: 'breadcrumbs-fundraiser-title' }, 'Oh no!');
-        render({ into: fundraiser_div }, error_message('Fundraiser not found.'));
+        render({ into: fundraiser_div }, error_message(response.data.error2));
       }
     });
   });
@@ -106,8 +107,15 @@ with (scope('Fundraisers')) {
 
       div({ 'class': 'split-side' },
         // show edit button if this fundraiser belongs to the user
-        !options.preview && logged_in() && fundraiser.person.id == Storage.get('access_token').split('.')[0] && div(
+        !options.preview && Fundraisers.belongs_to(fundraiser.person) && div(
           info_message(
+            !fundraiser.published && div(
+              div({ style: 'text-align: center;' },
+                p("You haven't published your fundraiser yet, so it isn't public."),
+                p("Finish editing your fundraiser now to publish it!")
+              )
+            ),
+
             a({ 'class': 'blue', href: '#account/fundraisers/'+fundraiser.id, style: 'padding: 5px 0;' },
               div({ style: 'display: inline-block; width: 25%px;' },
                 img({ src: 'images/edit_32.gif', style: 'vertical-align: middle;' })
