@@ -100,17 +100,28 @@ with (scope('Fundraisers', 'App')) {
   });
 
   define('reward_row', function(reward) {
-    return div({ id: 'reward_'+reward.id+'_wrapper', style: 'min-height: 100px; padding: 15px;', onClick: curry(set_pledge_amount_from_reward, reward) },
+    var reward_element = div({ id: 'reward_'+reward.id+'_wrapper', style: 'min-height: 100px; padding: 15px;' },
       div({ style: 'display: inline-block; width: 400px; vertical-align: middle;' },
         span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
 
-        (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
+        (reward.limited_to > 0) && div({ style: 'margin: 10px 0 0 10px;; font-size: 14px;' },
+          div({ style: 'font-style: italic; text-decoration: '+(reward.sold_out ? 'line-through' : 'none')+';' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
+          reward.sold_out && div({ style: 'color: #DF2525;' }, 'sold out')
+        ),
 
         p({ style: 'margin-left: 10px; white-space: pre-wrap;' }, reward.description)
       ),
 
       div({ style: 'clear: both;' })
     );
+
+    if (reward.sold_out) {
+      add_class(reward_element, 'sold-out');
+    } else {
+      reward_element.addEventListener('click', curry(set_pledge_amount_from_reward, reward));
+    };
+
+    return reward_element;
   })
 
   define('set_pledge_amount_from_reward', function(reward, e) {
