@@ -151,7 +151,7 @@ with (scope('Fundraisers', 'App')) {
       if (fundraiser.rewards[i].id == selected_reward_id) selected_reward = fundraiser.rewards[i]; break;
     }
     if (pledge_amount && (!selected_reward && pledge_amount >= fundraiser.rewards[0].amount)) {
-      if (!confirm("Your pledge of "+money(pledge_amount)+" entitles you to one of the rewards below, but you haven't selected one.\n\nContinue without selecting a reward?")) return;
+      if (!confirm("Your pledge of "+money(pledge_amount)+" entitles you to a reward, but you haven't selected one.\n\nContinue without selecting a reward?")) return;
     }
 
     // build the redirect_url, with pledge_id placeholder
