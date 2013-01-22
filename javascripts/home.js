@@ -224,7 +224,7 @@ with (scope('Home', 'App')) {
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
           a({ href: card.href, style: 'text-decoration: none; color: inherit;' },
             span({ style: 'vertical-align: middle; font-size: 25px;' }, money(card.account_balance)),
-            span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'of ', money(card.funding_goal))
+            span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'of ', money(card.funding_goal||0))
           )
         ),
         div({ style: 'display: inline-block; width: 50%; text-align: right; vertical-align: middle;' },
