@@ -210,7 +210,7 @@ with (scope('Home', 'App')) {
 
       // title, description, and comment count
       div({ style: 'margin: 15px 5px; overflow: auto' },
-        p({ style: 'color: #999;' }, card.description)
+        div({ style: 'color: #999;' }, card.description)
       ),
 
       div({ style: 'clear: both' }),
