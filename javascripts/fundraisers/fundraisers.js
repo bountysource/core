@@ -79,46 +79,43 @@ with (scope('Fundraisers','App')) {
   });
 
   route('#account/fundraisers/:fundraiser_id', function(fundraiser_id) {
-    var target_div = div({ id: 'fundraiser-div' }, 'Loading...'),
-        header_div = breadcrumbs(
-          'Home',
-          a({ href: '#account' }, 'Account'),
-          a({ href: '#account/fundraisers' }, 'Fundraisers'),
-          span({ id: 'fundraiser-title' }, 'Loading...')
-        );
+    var target_div = div({ id: 'fundraiser-div' }, 'Loading...');
 
-    render(header_div, target_div);
+    render(
+      breadcrumbs(
+        'Home',
+        a({ href: '#account' }, 'Account'),
+        a({ href: '#account/fundraisers' }, 'Fundraisers'),
+        span({ id: 'fundraiser-title' }, 'Loading...')
+      ),
+      target_div
+    );
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
       if (!response.meta.success) {
         render({ target: 'fundraiser-title' }, 'Not found');
         render({ into: target_div }, error_message(response.data.error));
       } else {
-        // which part of the fundraiser is being edited on this page?
-        var page_title = get_route().match(/#account\/fundraisers\/\d+(?:\/(\w+))?/)[1];
-        if (page_title) {
-          render({ into: header_div },
-            breadcrumbs(
-              'Home',
-              a({ href: '#account' }, 'Account'),
-              a({ href: '#account/fundraisers' }, 'Fundraisers'),
-              a({ href: '#account/fundraisers/'+fundraiser_id }, abbreviated_text(response.data.title, 45)),
-              page_title.replace(/_/,' ')
-            )
-          );
-        } else {
-          render({ into: header_div },
-            breadcrumbs(
-              'Home',
-              a({ href: '#account' }, 'Account'),
-              a({ href: '#account/fundraisers' }, 'Fundraisers'),
-              abbreviated_text(response.data.title, 45)
-            )
-          );
-        }
+        var fundraiser = response.data;
 
-        render({ into: target_div }, fundraiser_page(response.data));
-        populate_fundraiser_form_tables(response.data);
+        render({ target: 'fundraiser-title' }, abbreviated_text(fundraiser.title, 80));
+        render({ into: target_div },
+          div({ id: 'fundraiser-preview-wrapper', style: 'display: none;' },
+            info_message(
+              div({ style: 'font-size: 20px;' },
+                span({ style: 'margin-right: 30px;' }, "This is what your fundraiser will look like once published."),
+                a({ 'class': 'blue', style: 'width: 350px; display: inline-block;', href: hide_preview }, 'Back to Edit Page')
+              )
+            ),
+            div({ id: 'fundraiser-preview' }, fundraiser_template(fundraiser, { preview: true }))
+          ),
+
+          div({ id: 'fundraiser-edit-form' },
+            fundraiser_edit_form(fundraiser)
+          )
+        );
+
+        populate_fundraiser_form_tables(fundraiser);
         select_fundraiser_form_section(fundraiser_id, 'basic-info');
         initialize_short_description_character_counter();
       }
@@ -142,8 +139,8 @@ with (scope('Fundraisers','App')) {
   });
 
   // return a giant div containing fundraiser nav and form.
-  define('fundraiser_page', function(fundraiser) {
-    return [
+  define('fundraiser_edit_form', function(fundraiser) {
+    return div(
       fundraiser_form_nav(
         li({ id: 'nav-basic-info', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'basic-info') },
           'Basic Info'
@@ -155,11 +152,6 @@ with (scope('Fundraisers','App')) {
           'About Me'
         ),
 
-//        TODO: enable milestones. not worth the extra effort right now
-//        li({ id: 'nav-milestones', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'milestones') },
-//          'Milestones'
-//        ),
-
         li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
           'Rewards'
         ),
@@ -170,7 +162,7 @@ with (scope('Fundraisers','App')) {
         )
       ),
 
-      messages({ style: 'height: 40px;' }),
+      div({ id: 'fundraiser-edit-errors', style: 'height: 40px;' }),
 
       div({ 'class': 'split-main' },
         form({ id: 'fundraiser-form', 'class': 'fancy' },
@@ -232,25 +224,6 @@ with (scope('Fundraisers','App')) {
             )
           ),
 
-          fundraiser_block({ id: 'milestones', title: 'Milestones', description: "Provide a road map of your development process. Once published, each milestone can be updated to show your current progress." },
-            table({ id: 'milestone-table' },
-              // inputs to add new milestone
-              tr({ id: 'milestone-inputs' },
-                td(
-                  input({
-                    id: 'milestone-input-description',
-                    style: 'width: 95%; margin-left: 5px;',
-                    placeholder: 'What is your goal for this milestone?',
-                    onkeyup: function(e) { if (e.keyCode == 13) push_milestone_row_from_inputs() }
-                  })
-                ),
-                td({ style: 'width: 100px;' },
-                  a({ 'class': 'green', href: push_milestone_row_from_inputs, style: 'width: 90px;' }, 'Add')
-                )
-              )
-            )
-          ),
-
           fundraiser_block({ id: 'rewards', title: 'Rewards', description: "Thank your backers." },
             table({ id: 'rewards-table' },
               tr({ id: 'reward-inputs' },
@@ -270,7 +243,7 @@ with (scope('Fundraisers','App')) {
 
                   textarea({
                     id:           'reward-input-description',
-                    style:        'margin-left: 10px; display: inline-block;',
+                    style:        'width: 205px; display: inline-block;',
                     placeholder:  'Description of the reward'
                   })
                 ),
@@ -307,7 +280,7 @@ with (scope('Fundraisers','App')) {
       ),
 
       div({ 'class': 'split-end' })
-    ];
+    );
   });
 
   define('populate_fundraiser_form_tables', function(fundraiser) {
@@ -373,7 +346,7 @@ with (scope('Fundraisers','App')) {
           if (response.meta.success) {
             set_route('#account/fundraisers');
           } else {
-            render_message(small_error_message(response.data.error));
+            render({ target: 'fundraiser-edit-errors' }, small_error_message(response.data.error));
           }
         });
       });
@@ -388,16 +361,28 @@ with (scope('Fundraisers','App')) {
     return request_data;
   });
 
-  // preview fundraiser in a new window
+  // show the preview fundraiser
   define('preview_fundraiser', function(fundraiser) {
-    window.open(BountySource.www_host+'#fundraisers/'+fundraiser.id+'/preview','','width=1050,height=900');
+    save_fundraiser(fundraiser, function(response) {
+      render({ target: 'fundraiser-preview' }, fundraiser_template(response.data, { preview: true }));
+      hide('fundraiser-edit-form');
+      show('fundraiser-preview-wrapper');
+    });
+  });
+
+  define('hide_preview', function(){
+    // clear the 'saved' message before coming back to edit form
+    render({ target: 'fundraiser-edit-errors' },'');
+
+    hide('fundraiser-preview-wrapper');
+    show('fundraiser-edit-form');
   });
 
   define('save_fundraiser', function(fundraiser, callback) {
     // Fake a page view for Analytics
     if (typeof(_gaq) != 'undefined')
       _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/save']);
-    render_message(div({ style: 'text-align: center; padding: 5px;' }, 'Saving...'));
+    render({ target: 'fundraiser-edit-errors' }, div({ style: 'text-align: center; padding: 5px;' }, 'Saving...'));
 
     var serialized_form = serialize_form('fundraiser-form'),
         request_data    = serialized_form_to_hash(serialized_form);
@@ -424,7 +409,7 @@ with (scope('Fundraisers','App')) {
         var previous_nav_id = document.getElementsByClassName('fundraiser-form-nav active')[0].id.split('-').slice(1).join('-');
 
         // render updated fundraiser form
-        render({ target: 'fundraiser-div' }, fundraiser_page(response.data));
+        render({ target: 'fundraiser-edit-form' }, fundraiser_edit_form(response.data));
         populate_fundraiser_form_tables(response.data);
         initialize_short_description_character_counter();
 
@@ -432,9 +417,9 @@ with (scope('Fundraisers','App')) {
         select_fundraiser_form_section(fundraiser.id, previous_nav_id);
 
         // show messages after saved
-        render_message(small_success_message(fundraiser.published ? "Fundraiser updated" : "Fundraiser draft saved"));
+        render({ target: 'fundraiser-edit-errors' }, small_success_message(fundraiser.published ? "Fundraiser updated" : "Fundraiser draft saved"));
       } else {
-        render_message(small_error_message(response.data.error));
+        render({ target: 'fundraiser-edit-errors' }, small_error_message(response.data.error));
       }
 
       if (callback) callback(response);
@@ -462,7 +447,7 @@ with (scope('Fundraisers','App')) {
         if (response.meta.success) {
           window.location.reload();
         } else {
-          render_message(error_message(response.data.error));
+          render({ target: 'fundraiser-edit-errors' }, error_message(response.data.error));
         }
       });
     }

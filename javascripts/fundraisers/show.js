@@ -57,7 +57,7 @@ with (scope('Fundraisers')) {
     options = options || {};
 
     // add the title to the already present header element
-    render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(fundraiser.title, 85));
+    if (!options.preview) render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(fundraiser.title, 85));
 
     var fundraiser_form = section({ id: 'fundraiser-wrapper' },
       div({ 'class': 'split-main' },
