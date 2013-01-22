@@ -6,7 +6,7 @@ with (scope('Fundraisers')) {
   define('reward_row_elements', function(reward_row_id, reward_data) {
     return [{ id: reward_row_id, 'data-id': (reward_data.id||null), 'class': 'editable' }, // data-id is the id of model, if saved (fundraiser is published)
       td(
-        div({ style: 'display: inline-block; width: 250px; margin-left: 10px;' },
+        div({ style: 'display: inline-block; width: 250px;' },
           form(
             fieldset(
               label('Amount:'),
@@ -90,7 +90,7 @@ with (scope('Fundraisers')) {
 
         textarea({
           id:           'reward-input-description',
-          style:        'margin-left: 10px; display: inline-block;',
+          style:        'display: inline-block;',
           placeholder:  'Description of the reward'
         }, description)
       ),
