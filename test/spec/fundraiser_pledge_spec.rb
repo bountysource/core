@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Fundraiser Pledges" do
-  specify do
+  it "should pledge to fundraiser and select a reward" do
     login_with_email!
 
     @browser.goto "#"
@@ -18,8 +18,11 @@ describe "Fundraiser Pledges" do
     # make a pledge to this fundraiser
     @browser.text_field(id: 'pledge-amount').when_present.set(25)
     @browser.radio(id: 'payment_method_paypal').click
-    @browser.button(value: 'Continue to payment').click
 
+    # select a reward
+    @browser.div(id: 'fundraiser-rewards').divs.first.click
+
+    @browser.button(value: 'Continue to payment').click
     proceed_through_paypal_sandbox_flow!
 
     @browser.h2(text: 'Thanks for your contribution').wait_until_present
