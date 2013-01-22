@@ -111,8 +111,8 @@ with (scope('Fundraisers','App')) {
           div({ id: 'fundraiser-preview-wrapper', style: 'display: none;' },
             info_message(
               div({ style: 'font-size: 20px;' },
-                span({ style: 'margin-right: 30px;' }, "This is what your fundraiser will look like once published."),
-                a({ 'class': 'blue', style: 'width: 350px; display: inline-block;', href: hide_preview }, 'Back to Edit Page')
+                span({ style: 'margin-right: 30px;' }, "This is what your fundraiser will look like once it is published."),
+                a({ 'class': 'blue', style: 'width: 345px; display: inline-block;', href: hide_preview }, 'Back to Edit Page')
               )
             ),
             div({ id: 'fundraiser-preview' }, fundraiser_template(fundraiser, { preview: true }))
