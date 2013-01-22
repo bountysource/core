@@ -18,7 +18,7 @@ with (scope('Fundraisers', 'App')) {
           fundraiser = response.data;
 
       // render the title of the fundraiser into header
-      render({ target: 'breadcrumbs-fundraiser-title' }, a({ href: '#fundraisers/'+fundraiser_id }, abbreviated_text(response.data.title, 60)));
+      render({ target: 'breadcrumbs-fundraiser-title' }, a({ href: '#fundraisers/'+fundraiser_id }, abbreviated_text(fundraiser.title, 60)));
 
       // require the fundraiser to be published
       if (!fundraiser.published) return render({ into: target_div }, error_message('Fundraiser has not been published.'));
@@ -85,13 +85,6 @@ with (scope('Fundraisers', 'App')) {
   });
 
   define('rewards_table', function(fundraiser) {
-    // add extra row for specifying no reward
-    fundraiser.rewards = flatten_to_array([{
-      title:       'No reward',
-      description: "I don't need a reward, but I would still like to help out!",
-      id:          -1
-    }, fundraiser.rewards]);
-
     return div({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px; box-shadow: 0 0 10px silver;' },
      (function() {
        var elements = [];
@@ -107,14 +100,11 @@ with (scope('Fundraisers', 'App')) {
   });
 
   define('reward_row', function(reward) {
-    // if id is set to negative value, user does not want a reward
-    var decline_reward = reward.id < 0;
-
     return div({ id: 'reward_'+reward.id+'_wrapper', style: 'min-height: 100px; padding: 15px;', onClick: curry(set_pledge_amount_from_reward, reward) },
       div({ style: 'display: inline-block; width: 400px; vertical-align: middle;' },
-        span({ style: 'font-size: 25px;' }, decline_reward ? 'No reward' : ('Pledge '+money(reward.amount)+' +')),
+        span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
 
-        (!decline_reward && reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
+        (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
 
         p({ style: 'margin-left: 10px;' }, reward.description)
       ),
@@ -151,7 +141,19 @@ with (scope('Fundraisers', 'App')) {
   define('make_pledge', function(fundraiser, form_data) {
     clear_message();
 
-    // select reward
+    // if you are pledging enough money to claim a reward, prompt the user before letting them continue
+    var pledge_amount = parseInt(document.getElementById('pledge-amount').value)||null,
+        selected_reward_id = parseInt(document.getElementById('reward-id').value);
+
+    // if no reward selected, prompt user before continuing if they have pledged enough $ to claim one.
+    var selected_reward;
+    for (var i=0; i<fundraiser.rewards.length; i++) {
+      if (fundraiser.rewards[i].id == selected_reward_id) selected_reward = fundraiser.rewards[i]; break;
+    }
+    if (pledge_amount && (!selected_reward && pledge_amount >= fundraiser.rewards[0].amount)) {
+      if (!confirm("Your pledge of "+money(pledge_amount)+" entitles you to one of the rewards below, but you haven't selected one.\n\nContinue without selecting a reward?")) return;
+    }
+
     // build the redirect_url, with pledge_id placeholder
     form_data.redirect_url = form_data.redirect_url || BountySource.www_host+'#fundraisers/'+fundraiser.id+'/pledges/:pledge_id/receipt';
 
