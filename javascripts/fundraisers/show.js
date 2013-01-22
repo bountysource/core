@@ -105,6 +105,18 @@ with (scope('Fundraisers')) {
       ),
 
       div({ 'class': 'split-side' },
+        // show edit button if this fundraiser belongs to the user
+        !options.preview && div(
+          info_message(
+            a({ 'class': 'blue', href: '#account/fundraisers/'+fundraiser.id, style: 'padding: 5px 0;' },
+              div({ style: 'display: inline-block; width: 25%px;' },
+                img({ src: 'images/edit_32.gif', style: 'vertical-align: middle;' })
+              ),
+              div({ style: 'display: inline-block; width: 75%' }, span('Edit'))
+            )
+          )
+        ),
+
         section({ id: 'fundraiser-stats', style: 'background: #eee; padding: 10px; margin: 10px 0; border-radius: 3px;' },
           ul({ style: 'list-style-type: none; padding: 0;' },
             li({ style: 'margin: 20px auto;' },
