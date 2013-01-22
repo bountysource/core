@@ -106,7 +106,10 @@ RSpec.configure do |config|
         if !(route =~ /^#/)
           # absolute URL
           goto_without_scope(route)
-        elsif execute_script("return typeof(scope) != 'undefined' && scope.instance && scope.instance.set_route")
+        elsif url[0, BASE_URL.length] == BASE_URL
+          # wait until scope is loaded and initializers have run
+          Watir::Wait.until { execute_script("return (typeof(scope) != 'undefined') && scope.instance && scope.instance.initializer && (typeof(scope.__initializers) == 'undefined')") }
+
           # scope route and we're already on a scope page
           execute_script "scope.instance.set_route('#{route}')"
         else
