@@ -106,7 +106,7 @@ with (scope('Fundraisers', 'App')) {
 
         (reward.limited_to > 0) && p({ style: 'margin-left: 10px; font-size: 14px; font-style: italic;' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
 
-        p({ style: 'margin-left: 10px;' }, reward.description)
+        p({ style: 'margin-left: 10px; white-space: pre-wrap;' }, reward.description)
       ),
 
       div({ style: 'clear: both;' })
