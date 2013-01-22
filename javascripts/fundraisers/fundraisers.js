@@ -4,6 +4,11 @@ with (scope('Fundraisers','App')) {
     return logged_in() && person && parseInt(person.id) == parseInt((Storage.get('access_token')||'').split('.')[0]);
   });
 
+  define('card', function(fundraiser) {
+    fundraiser.description = fundraiser.short_description;
+    return Home.fundraiser_card(fundraiser);
+  });
+
   route('#account/fundraisers', function() {
     var fundraisers_table = div('Loading...');
 
@@ -279,7 +284,14 @@ with (scope('Fundraisers','App')) {
               p({ style: 'text-align: center; margin: 15px 0 0 0;' }, "You need to provide all of the necessary data to publish your fundraiser.")
             ]
           )
-        )
+        ),
+
+        div({ style: 'text-align: center;' },
+          h4({ style: 'margin: 10px 0 0 0;' }, 'Card Preview:'),
+          p({ style: 'font-size: 12px; margin: 10px 20px;' }, "This is how your fundraiser will be advertised on the home page.")
+        ),
+
+        card(fundraiser)
       ),
 
       div({ 'class': 'split-end' })

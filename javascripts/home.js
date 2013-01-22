@@ -198,10 +198,12 @@ with (scope('Home', 'App')) {
   define('fundraiser_card', function(card) {
     var funding_percentage = parseFloat(100 * (card.account_balance / card.funding_goal));
 
-    return div({ 'class': 'card', onClick: curry(set_route, card.href) },
-      div({ style: 'padding: 7px; background: #EEE;' },
-        card.image_url && a({ href: card.href, style: 'display: inline-block; vertical-align: middle; margin-right: 10px;' }, img({ style: 'width: 40px; border-radius: 6px', src: card.image_url })),
-        div({ style: 'font-size: 16px; font-weight: bold; display: inline-block; vertical-align: middle;' }, a({ href: card.href, style: 'color: #333;' }, card.title))
+    var card_element = div({ 'class': 'card' },
+      card.image_url && div({ style: 'text-align: center; margin-bottom: 10px;' },
+        img({ style: 'max-height: 150px; border-radius: 3px;', src: card.image_url })
+      ),
+      div({ style: 'padding: 7px; background: #EEE; border-radius: 3px;' },
+        div({ style: 'font-size: 16px; font-weight: bold;' }, a({ href: card.href, style: 'color: #333;' }, card.title))
       ),
 
       div({ style: 'clear: both' }),
@@ -232,6 +234,13 @@ with (scope('Home', 'App')) {
 
       div({ style: 'clear: both' })
     );
+
+
+
+    // if an href is supplied, make the card clickable
+    if (card.href) card_element.addEventListener('click', curry(set_route, card.href));
+
+    return card_element;
   });
 
 //  define('card_div', function(card) {

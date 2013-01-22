@@ -23,37 +23,6 @@ with (scope('Fundraisers')) {
     });
   });
 
-  route('#fundraisers/:fundraiser_id/preview', function(fundraiser_id) {
-    var fundraiser_div = div('Loading...');
-    var target_div = div(
-      breadcrumbs(
-        'Home',
-        'Fundraisers',
-        span({ id: 'breadcrumbs-fundraiser-title' }, 'Loading...')
-      ),
-      fundraiser_div
-    );
-
-    render({ layout: fundraiser_preview_layout }, target_div);
-
-    BountySource.get_fundraiser(fundraiser_id, function(response) {
-      render({ into: fundraiser_div }, fundraiser_template(response.data, { preview: true }));
-    });
-  });
-
-  define('backer_box', function(fundraiser) {
-    var payment_box_div = Payment.payment_box('Bounty', fundraiser, null, window.location.href);
-    return div({ id: 'bounty-box' },
-      div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
-
-//      fundraiser.account_balance > 0 && section(
-//        div({ 'class': 'total_bounties' }, money(fundraiser.account_balance)),
-//        div({ style: 'text-align: center' }, "From ", fundraiser.bounties.length, " bount" + (fundraiser.bounties.length == 1 ? 'y' : 'ies') + ".")
-//      ),
-      payment_box_div
-    );
-  });
-
   define('fundraiser_template', function(fundraiser, options) {
     options = options || {};
 
@@ -172,12 +141,5 @@ with (scope('Fundraisers')) {
     );
 
     return fundraiser_form;
-  });
-
-  // a layout with no navigation, for simply previewing a fundraiser
-  define('fundraiser_preview_layout', function(yield) {
-    return section({ id: 'wrapper', style: 'margin: 10px auto;' },
-      section({ id: 'content' }, yield)
-    )
   });
 }
