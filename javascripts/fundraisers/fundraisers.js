@@ -156,9 +156,11 @@ with (scope('Fundraisers','App')) {
         li({ id: 'nav-description', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'description') },
           'Description'
         ),
-        li({ id: 'nav-about-me', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'about-me') },
-          'About Me'
-        ),
+
+// TODO bring back about me
+//        li({ id: 'nav-about-me', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'about-me') },
+//          'About Me'
+//        ),
 
         li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
           'Rewards'
@@ -207,13 +209,14 @@ with (scope('Fundraisers','App')) {
             )
           ),
 
-          fundraiser_block({ id: 'about-me', title: 'About Me', description: "Convince people that you will be able to deliver." },
-            div({ style: 'padding: 20px 10px; background: #eee;' },
-              fieldset(
-                textarea({ name: 'about_me', style: 'width: 630px; height: 300px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
-              )
-            )
-          ),
+// TODO bring back about me
+//          fundraiser_block({ id: 'about-me', title: 'About Me', description: "Convince people that you will be able to deliver." },
+//            div({ style: 'padding: 20px 10px; background: #eee;' },
+//              fieldset(
+//                textarea({ name: 'about_me', style: 'width: 630px; height: 300px;', placeholder: "I am a Ruby on Rails engineer, with 8 years of experience." }, fundraiser.about_me||'')
+//              )
+//            )
+//          ),
 
           fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to complete this project? How do you want to receive the funds?" },
             div({ style: 'padding: 20px 10px; background: #eee;' },
@@ -276,6 +279,14 @@ with (scope('Fundraisers','App')) {
           br(),
 
           a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser) }, 'Preview'),
+
+          // if it's published, add a link to the show page, which saves any changes before changing pages.
+          fundraiser.published && div(
+            br(),
+            a({ 'class': 'blue', href: function() {
+              save_fundraiser(fundraiser, function() { set_route('#fundraisers/'+fundraiser.id); })
+            } }, 'View')
+          ),
 
           !fundraiser.published && div(
             br(),
