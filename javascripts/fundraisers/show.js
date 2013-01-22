@@ -106,7 +106,7 @@ with (scope('Fundraisers')) {
 
       div({ 'class': 'split-side' },
         // show edit button if this fundraiser belongs to the user
-        !options.preview && div(
+        !options.preview && logged_in() && fundraiser.person.id == Storage.get('access_token').split('.')[0] && div(
           info_message(
             a({ 'class': 'blue', href: '#account/fundraisers/'+fundraiser.id, style: 'padding: 5px 0;' },
               div({ style: 'display: inline-block; width: 25%px;' },
