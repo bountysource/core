@@ -44,9 +44,12 @@ with (scope('Fundraisers','App')) {
 
                 td({ style: 'text-align: center;' },
                   a({ href: '#account/fundraisers/'+fundraiser.id }, img({ src: 'images/edit.gif' })),
+
+                  // TODO: info page for fundraiser author to see contributions and rewards that have been claimed
+                  // a({ href: '#account/fundraisers/'+fundraiser.id+'/info', style: 'margin-left: 10px;' }, img({ src: 'images/info.gif' })),
+
                   a({ href: curry(destroy_fundraiser, fundraiser.id), style: 'margin-left: 10px; opacity:' + (fundraiser.published ? 0.25 : 1) + ';' }, img({ src: 'images/trash.gif' }))
                 )
-//                td(fundraiser.published ? '' : a({ href: curry(destroy_fundraiser, fundraiser.id)}, 'delete'))
               );
             })
           )
@@ -126,6 +129,22 @@ with (scope('Fundraisers','App')) {
         populate_fundraiser_form_tables(fundraiser);
         select_fundraiser_form_section(fundraiser_id, 'basic-info');
         initialize_short_description_character_counter();
+
+        // if any of the inputs are changed, set the autosave
+        flatten_to_array([
+          flatten_to_array(document.getElementsByTagName('input')),
+          flatten_to_array(document.getElementsByTagName('textarea'))
+        ]).forEach(function(input) {
+          input.addEventListener('keydown', function() { Fundraisers.save_necessary = true; });
+        });
+
+        // autosave poll
+        LongPoll.execute(function() {
+          if (Fundraisers.save_necessary) save_fundraiser(fundraiser, function() {
+            // kill the success message for user triggered saves
+            render({ into: 'fundraiser-edit-errors' }, '');
+          });
+        }).every(10000).start();
       }
     })
   });
@@ -269,6 +288,9 @@ with (scope('Fundraisers','App')) {
       ),
 
       div({ 'class': 'split-side' },
+        // show message letting the author know that this fundraiser is published
+        // fundraiser.published && info_message("Your fundraiser has been published, meaning that it is now public."),
+
         grey_box(
           !fundraiser.published && div(
             a({ 'class': 'green', 'href': curry(save_fundraiser_and_continue, fundraiser) }, 'Save and Continue'),
@@ -285,7 +307,7 @@ with (scope('Fundraisers','App')) {
             br(),
             a({ 'class': 'blue', href: function() {
               save_fundraiser(fundraiser, function() { set_route('#fundraisers/'+fundraiser.id); })
-            } }, 'View')
+            } }, 'Published Fundraiser')
           ),
 
           !fundraiser.published && div(
@@ -302,7 +324,8 @@ with (scope('Fundraisers','App')) {
           p({ style: 'font-size: 12px; margin: 10px 20px;' }, "This is how your fundraiser will be advertised on the home page.")
         ),
 
-        card(fundraiser)
+        // this is re-rendered after each save
+        div({ id: 'fundraiser-card-preview' }, card(fundraiser))
       ),
 
       div({ 'class': 'split-end' })
@@ -417,7 +440,7 @@ with (scope('Fundraisers','App')) {
     var t = Teddy.snuggle('rewards-table');
     request_data.rewards = [];
     t.forEach(function(row) {
-      if (/editable/.test(row.className) && !row.getAttribute('locked-for-edit')) {
+      if (has_class(row, 'editable') && !row.getAttribute('locked-for-edit')) {
         var spans = row.getElementsByTagName('span');
         request_data.rewards.push({
           description:  spans[2].innerText,
@@ -431,19 +454,18 @@ with (scope('Fundraisers','App')) {
 
     BountySource.update_fundraiser(fundraiser.id, request_data, function(response) {
       if (response.meta.success) {
+        // reset autosave flag
+        Fundraisers.save_necessary = false;
+
         // which nav element are we on? need to return to that after rendering page again
         var previous_nav_id = document.getElementsByClassName('fundraiser-form-nav active')[0].id.split('-').slice(1).join('-');
 
-        // render updated fundraiser form
-        render({ target: 'fundraiser-edit-form' }, fundraiser_edit_form(response.data));
-        populate_fundraiser_form_tables(response.data);
-        initialize_short_description_character_counter();
+        // render updated card preview
+        render({ target: 'fundraiser-card-preview' }, card(response.data));
 
-        // select the nav element again
-        select_fundraiser_form_section(fundraiser.id, previous_nav_id);
-
-        // show messages after saved
+        // show messages after saved, which is automatically cleared after a set interval
         render({ target: 'fundraiser-edit-errors' }, small_success_message(fundraiser.published ? "Fundraiser updated" : "Fundraiser draft saved"));
+        setTimeout(function() { render({ into: 'fundraiser-edit-errors' }, '') },1500);
       } else {
         render({ target: 'fundraiser-edit-errors' }, small_error_message(response.data.error));
       }

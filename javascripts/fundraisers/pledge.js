@@ -106,7 +106,7 @@ with (scope('Fundraisers', 'App')) {
 
         (reward.limited_to > 0) && div({ style: 'margin: 10px 0 0 10px;; font-size: 14px;' },
           div({ style: 'font-style: italic; text-decoration: '+(reward.sold_out ? 'line-through' : 'none')+';' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
-          reward.sold_out && div({ style: 'color: #DF2525;' }, 'sold out')
+          reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!')
         ),
 
         p({ style: 'margin-left: 10px; white-space: pre-wrap;' }, reward.description)

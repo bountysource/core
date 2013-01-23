@@ -91,6 +91,15 @@ with (scope('Fundraisers')) {
               ),
               div({ style: 'display: inline-block; width: 75%' }, span('Edit'))
             )
+
+// TODO: info page for fundraiser author to see contributions and rewards that have been claimed
+//            br(),
+//            a({ 'class': 'blue', href: '#account/fundraisers/'+fundraiser.id+'/info', style: 'padding: 5px 0;' },
+//              div({ style: 'display: inline-block; width: 25%px;' },
+//                img({ src: 'images/info_32.gif', style: 'vertical-align: middle;' })
+//              ),
+//              div({ style: 'display: inline-block; width: 75%' }, span('Info'))
+//            )
           )
         ),
 
@@ -126,7 +135,7 @@ with (scope('Fundraisers')) {
 
                 (reward.limited_to > 0) && div({ style: 'margin: 10px 0 0 10px;; font-size: 14px;' },
                   div({ style: 'font-style: italic; text-decoration: '+(reward.sold_out ? 'line-through' : 'none')+';' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
-                  reward.sold_out && div({ style: 'color: #DF2525;' }, 'sold out')
+                  reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!')
                 ),
 
                 p({ style: 'margin-left: 10px; white-space: pre-wrap;' }, reward.description)
