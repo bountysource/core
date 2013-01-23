@@ -288,8 +288,6 @@ with (scope('Contributions', 'App')) {
     clear_message();
 
     BountySource.post_github_comment(login, repository, issue_number, form_data, function(response) {
-      console.log(response);
-
       if (response.meta.success) {
         render_message(success_message('Comment posted on issue!'));
       } else {

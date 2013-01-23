@@ -39,8 +39,6 @@ with (scope('Fundraisers')) {
       published     = !isNaN(parseInt(t.at(reward_row_id).getAttribute('data-id'))),
       data_id       = (published ? parseInt(t.at(reward_row_id).getAttribute('data-id')) : null);
 
-    console.log(spans[0]);
-
     t.at(reward_row_id).replace({ id: reward_row_id, 'data-id': data_id, 'class': 'editable', style: 'height: 230px;' },
       td(
         div({ style: 'display: inline-block; vertical-align: middle' },

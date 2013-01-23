@@ -71,8 +71,6 @@ with (scope('Solution', 'App')) {
       if (response.meta.success) {
         var solution = response.data;
 
-        console.log(solution);
-
         render({ target: 'solution-title' }, a({ href: Solution.get_href(solution) }, solution.issue.title));
 
         render({ into: target_div },
