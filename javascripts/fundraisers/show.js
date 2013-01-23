@@ -35,7 +35,7 @@ with (scope('Fundraisers')) {
           h1({ style: 'font-size: 45px; font-weight: normal; margin: 10px 0; line-height: 50px;' }, fundraiser.title),
 
           !options.preview && div({ style: 'margin-top: 20px; text-align: center;' },
-            Facebook.like_button({ style: 'display: inline-block; vertical-align: middle;' }, {
+            Facebook.like_button({ style: 'display: inline-block; vertical-align: middle; margin: 0 10px;' }, {
               width: 300,
               link: window.location.href
             }),
