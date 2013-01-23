@@ -199,11 +199,12 @@ with (scope('Home', 'App')) {
     var funding_percentage = parseFloat(100 * (card.account_balance / card.funding_goal));
 
     var card_element = div({ 'class': 'card' },
-      card.image_url && div({ style: 'text-align: center; margin-bottom: 10px;' },
-        img({ style: 'max-height: 150px; border-radius: 3px;', src: card.image_url })
-      ),
       div({ style: 'padding: 7px; background: #EEE; border-radius: 3px;' },
         div({ style: 'font-size: 16px; font-weight: bold;' }, a({ href: card.href, style: 'color: #333;' }, card.title))
+      ),
+
+      card.image_url && div({ style: 'text-align: center; margin-bottom: 10px;' },
+        img({ style: 'max-height: 150px; border-radius: 3px;', src: card.image_url })
       ),
 
       div({ style: 'clear: both' }),
