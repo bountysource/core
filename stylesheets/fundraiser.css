@@ -1,5 +1,7 @@
 #fundraiser-rewards > div:hover { background: #E3F0C7; border-radius: 3px; cursor: pointer; }
 #fundraiser-rewards { background: #EEE; border-radius: 3px; }
+#fundraiser-rewards > .active,
+#fundraiser-rewards > .active:hover { background: #C1F8B0; box-shadow: 0 0 15px #48F748; border: 1px solid #2ADF2A; }
 #fundraiser-rewards > .sold-out,
 #fundraiser-rewards > .sold-out:hover { background: none; cursor: default; }
 
