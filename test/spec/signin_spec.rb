@@ -7,6 +7,7 @@ describe "Signin" do
     form = @browser.section(id: 'content').form
     form.text_field(name: 'email').set(CREDENTIALS["bountysource"]['email'])
     form.text_field(name: 'password').set(CREDENTIALS["bountysource"]['password'])
+    form.div(text: /Email address found/).wait_until_present
     form.button.click
 
     @browser.span(id: 'user_nav_name').wait_until_present
@@ -18,6 +19,7 @@ describe "Signin" do
     form = @browser.section(id: 'content').form
     form.text_field(name: 'email').set(CREDENTIALS["bountysource"]['email'])
     form.text_field(name: 'password').set('wrong-password')
+    form.div(text: /Email address found/).wait_until_present
     form.button.click
 
     @browser.a(text: /reset your password via email/).wait_until_present
