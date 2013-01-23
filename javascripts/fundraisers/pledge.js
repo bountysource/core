@@ -153,14 +153,19 @@ with (scope('Fundraisers', 'App')) {
     clear_message();
 
     // if you are pledging enough money to claim a reward, prompt the user before letting them continue
-    var pledge_amount = parseInt(document.getElementById('pledge-amount').value)||null,
-        selected_reward_id = parseInt(document.getElementById('reward-id').value);
+    var pledge_amount       = parseInt(document.getElementById('pledge-amount').value)||null,
+        selected_reward_id  = parseInt(document.getElementById('reward-id').value);
 
-    // if no reward selected, prompt user before continuing if they have pledged enough $ to claim one.
+    // find the reward from reward_id hidden input value
     var selected_reward;
     for (var i=0; i<fundraiser.rewards.length; i++) {
-      if (fundraiser.rewards[i].id == selected_reward_id) selected_reward = fundraiser.rewards[i]; break;
+      if (parseInt(fundraiser.rewards[i].id) == selected_reward_id) {
+        selected_reward = fundraiser.rewards[i];
+        break;
+      }
     }
+
+    // if no reward selected, prompt user before continuing if they have pledged enough $ to claim one.
     if (pledge_amount && (!selected_reward && pledge_amount >= fundraiser.rewards[0].amount)) {
       if (!confirm("Your pledge of "+money(pledge_amount)+" entitles you to a reward, but you haven't selected one.\n\nContinue without selecting a reward?")) return;
     }
