@@ -203,14 +203,14 @@ with (scope('Home', 'App')) {
         div({ style: 'font-size: 16px; font-weight: bold;' }, a({ href: card.href, style: 'color: #333;' }, card.title))
       ),
 
-      card.image_url && div({ style: 'text-align: center; margin-bottom: 10px;' },
+      card.image_url && div({ style: 'text-align: center; margin-top: 10px;' },
         img({ style: 'max-height: 150px; border-radius: 3px;', src: card.image_url })
       ),
 
       div({ style: 'clear: both' }),
 
       // title, description, and comment count
-      div({ style: 'margin: 15px 5px; overflow: auto' },
+      div({ style: 'margin: 10px 5px; overflow: auto' },
         div({ style: 'color: #999;' }, card.description)
       ),
 
