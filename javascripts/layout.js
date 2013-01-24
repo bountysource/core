@@ -72,6 +72,8 @@ with (scope('App')) {
           )
         ),
 
+        section({ id: 'global-social-buttons' }),
+
         div({ id: 'before-content'}),
 
         scope.rendered_default_layout_inner,
@@ -231,6 +233,18 @@ with (scope('App')) {
   define('abbreviated_text', function(text, max_length) {
     max_length = max_length || 100;
     return (text.length > max_length) ? (text.substr(0,max_length) + '...') : text;
+  });
+
+  // a readonly input with a width that exactly fits the text.
+  define('autosized_input', function(value) {
+    var length_to_px_multiplier = 7.14285714285714;
+    return input({
+      'class': 'autosized',
+      onClick: function(e){e.target.select()},
+      readonly: true,
+      value: value,
+      style: 'width: '+(value.length*length_to_px_multiplier)+'px;'
+    });
   });
 
   // render all of the child inputs with required markings

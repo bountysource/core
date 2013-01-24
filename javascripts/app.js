@@ -1,5 +1,19 @@
 with (scope('App')) {
 
+  after_filter(function() {
+    render({ target: 'global-social-buttons' },
+      ul(
+        li({ style: 'height: 20px;' }, Twitter.follow_button),
+        li({ style: 'height: 20px;' }, Twitter.share_button),
+        li({ style: 'width: 100px;' }, Facebook.like_button({ 'data-layout': 'button_count' })),
+        li(GooglePlus.like_button)
+      )
+    );
+    Twitter.process_elements();
+    GooglePlus.process_elements();
+    Facebook.process_elements();
+  });
+
   define('time_ago_in_words', function(time) {
     var distance_in_milliseconds = (typeof(time) == "string" ? (new Date(time)) : time) - (new Date());
     var distance_in_minutes = parseInt(Math.abs(distance_in_milliseconds / 60000));

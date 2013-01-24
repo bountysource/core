@@ -1,6 +1,4 @@
 with (scope('Facebook','App')) {
-  Facebook.facebook_sdk_loaded = false;
-
   // add FB JS library
   initializer(function() {
     (function(d, s, id) {
@@ -12,59 +10,76 @@ with (scope('Facebook','App')) {
     }(document, 'script', 'facebook-jssdk'));
   });
 
-  /*
-   * DOM helpers
-   * */
-
-  define('share_button', function(options, share_url_options) {
-    var share_url = share_dialog_url(share_url_options||{
-      url:  encode_html('https://www.bountysource.com'),
-      text: "The funding platform for open-source software | @BountySource"
-    });
-
-    return process_twitter_element(div(options,
-      a({
-        'class':      'twitter-share-button',
-        'data-lang':  'en',
-        href:         share_url
-      })
-    ));
-  });
-
-
-  // auto-parsed by FB library
-  define('like_button', function(options, like_options) {
-    like_options = like_options || {};
-    return process_facebook_element(div(options||{},
-      div({
-        'class': 'fb-like',
-        'data-href': like_options.link || "http://www.facebook.com/BountySource",
-        'data-send': 'false',
-        'data-width': (like_options.width||500)+'px',
-        'data-show-faces': like_options.show_faces || 'false'
-      })
-    ));
-  });
-
-  define('process_facebook_element', function(elem) {
+  // parse any facebook elements that have been inserted into the DOM
+  define('process_elements', function() {
     if (window.FB) {
-      window.FB.XFBML.parse(elem);
+      window.FB.XFBML.parse();
     } else {
       var previous_async = window.fbAsyncInit;
       window.fbAsyncInit = function() {
         if (previous_async) previous_async.call();
-        window.FB.XFBML.parse(elem);
+        window.FB.XFBML.parse();
       };
     }
-    return elem;
   });
 
+  /*
+  * Attributes:
+  *
+  * data-href - the URL to like. The XFBML version defaults to the current page.
+  * data-send - specifies whether to include a Send button with the Like button. This only works with the XFBML version.
+  * data-layout - there are three options.
+  *   standard - displays social text to the right of the button and friends' profile photos below. Minimum
+  *     width: 225 pixels. Minimum increases by 40px if action is 'recommend' by and increases by 60px if send is 'true'.
+  *     Default width: 450 pixels. Height: 35 pixels (without photos) or 80 pixels (with photos).
+  *   button_count - displays the total number of likes to the right of the button. Minimum width: 90 pixels. Default
+  *     width: 90 pixels. Height: 20 pixels.
+  *   box_count - displays the total number of likes above the button. Minimum width: 55 pixels. Default width:
+  *     55 pixels. Height: 65 pixels.
+  * data-show_faces - specifies whether to display profile photos below the button (standard layout only)
+  * data-width - the width of the Like button.
+  * data-action - the verb to display on the button. Options: 'like', 'recommend'
+  * data-font - the font to display in the button. Options: 'arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms',
+  *   'verdana'
+  * data-colorscheme - the color scheme for the like button. Options: 'light', 'dark'
+  * data-ref - a label for tracking referrals; must be less than 50 characters and can contain alphanumeric characters and
+  *   some punctuation (currently +/=-.:_). The ref attribute causes two parameters to be added to the referrer URL
+  *   when a user clicks a link from a stream story about a Like action:
+  *
+  *   fb_ref - the ref parameter
+  *   fb_source - the stream type ('home', 'profile', 'search', 'ticker', 'tickerdialog' or 'other') in which the
+  *     click occurred and the story type ('oneline' or 'multiline'), concatenated with an underscore.
+  * */
+  define('like_button', function(options) {
+    options = options || {};
+    options['class']            = 'fb-like';
+    options['data-send']        = false;
+    options['data-href']        = options['data-href']        || window.location.href;
+    options['data-width']       = options['data-width']       || 500;
+    options['data-show-faces']  = options['data-show-faces']  || true;
+    return div(options);
+  });
+
+
+
+
+
+
+
+  /*
+   * ********************************************************
+   *
+   * These are deprecated. Use share_button and follow_button with their appropriate data attributes.
+   * TODO: go update/remove all usages of this.
+   *
+   * ********************************************************
+   * */
   define('share_dialog_url', function(options) {
     var options = options || {};
     return "https://www.facebook.com/dialog/feed?"
       + "app_id="           + 280280945425178
       + "&display="         + "popup"
-      + "&link="            + options.link
+      + "&link="            + options.link||''
       + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
       + "&name="            + options.title||''
       + "&caption="         + "BountySource is a funding platform for open-source bugs and features."

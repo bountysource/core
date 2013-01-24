@@ -1,6 +1,5 @@
 with (scope('Twitter','App')) {
   // add Twitter JS library
-  // WARNING: magical obfuscated JavaScript
   initializer(function() {
     window.twttr = (function (d,s,id) {
       var t, js, fjs = d.getElementsByTagName(s)[0];
@@ -10,55 +9,63 @@ with (scope('Twitter','App')) {
     }(document, "script", "twitter-wjs"));
   });
 
-  /*
-   * DOM Helpers
-   * */
-
-  define('share_button', function(options, share_url_options) {
-    var share_url = share_dialog_url(share_url_options||{
-      url:  encode_html('https://www.bountysource.com'),
-      text: "The funding platform for open-source software | @BountySource"
-    });
-
-    return process_twitter_element(div(options,
-      a({
-        'class':      'twitter-share-button',
-        'data-lang':  'en',
-        'data-count':  share_url_options.show_count ? 'horizontal' : 'none',
-        href:         share_url
-      })
-    ));
-  });
-
-  define('follow_button', function(options) {
-    return process_twitter_element(div(options,
-      a({
-        'class':            'twitter-follow-button',
-        href:               'https://twitter.com/BountySource',
-        'data-show-count':  'true'
-      })
-    ));
-  });
-
-  define('process_twitter_element', function(elem) {
+  // parse any twitter elements that have been inserted into the DOM
+  define('process_elements', function() {
     if (window.twttr.widgets) {
-      window.twttr.widgets.load(elem);
+      window.twttr.widgets.load();
     } else {
       window.twttr.ready(function() {
         setTimeout(function() {
-          window.twttr.widgets.load(elem);
+          window.twttr.widgets.load();
         },0);
       });
     };
-    return elem;
   });
 
+  /*
+   * Attributes:
+   * data-url
+   * data-via - append 'via @UserName' to end of tweet
+   * data-text
+   * data-related
+   * data-count - none, horizontal, vertical
+   * data-lang
+   * data-counturl - URL to which your shared URL resolves
+   * data-hashtags -
+   * data-size - medium (default), large
+   * data-dnt - https://dev.twitter.com/docs/tweet-button#optout
+   * */
+  define('share_button', function(options) {
+    options = options || {};
+    options['class']      = 'twitter-share-button';
+    options['href']       = 'https://twitter.com/share';
+    options['data-lang']  = 'en';
+    options['data-text']  = "I <3 OSS";
+    options['data-url']   = window.location.href;
+    return a(options);
+  });
+
+  define('follow_button', function(options) {
+    options = options || {};
+    options['class'] = 'twitter-follow-button';
+    options['href']  = 'https://twitter.com/BountySource';
+    return a(options);
+  });
+
+  /*
+  * ********************************************************
+  *
+  * These are deprecated. Use share_button and follow_button with their appropriate data attributes.
+  * TODO: go update/remove all usages of this.
+  *
+  * ********************************************************
+  * */
   define('share_dialog_url', function(options) {
-    var options = options || {};
+    options = options || {};
     return "https://twitter.com/share?"
       + "via="    + "BountySource"
-      + "&url="   + options.url
-      + "&text="  + options.text||''
+      + "&url="   + options.url||encode_html(window.location.href)
+      + "&text="  + options.text||'The funding platform for open-source software'
   });
 
   define('share_dialog_button', function(dialog_url, button_text) {

@@ -32,27 +32,7 @@ with (scope('Fundraisers')) {
     var fundraiser_form = section({ id: 'fundraiser-wrapper' },
       div({ 'class': 'split-main' },
         section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 10px; text-align: center; color: #5e5f5f;' },
-          h1({ style: 'font-size: 45px; font-weight: normal; margin: 10px 0; line-height: 50px;' }, fundraiser.title),
-
-          !options.preview && div({ style: 'margin-top: 20px; text-align: center;' },
-            Facebook.like_button({ style: 'display: inline-block; vertical-align: middle; margin: 0 10px;' }, {
-              width: 300,
-              link: window.location.href
-            }),
-
-            Twitter.share_button({ style: 'display: inline-block; vertical-align: middle;' }, {
-              url:  window.location.href,
-              text: fundraiser.title
-            }),
-
-            input({
-              'class':  'fundraiser-share-url',
-              style:    'display: inline-block; vertical-align: middle; margin: -2px 10px 0 10px;',
-              value:    window.location.href,
-              readonly: true,
-              onClick:  function(e) { e.target.select(); }
-            })
-          )
+          h1({ style: 'font-size: 45px; font-weight: normal; margin: 10px 0; line-height: 50px;' }, fundraiser.title)
         ),
 
         fundraiser.image_url && section({ id: 'fundraiser-image', style: 'text-align: center;' },
