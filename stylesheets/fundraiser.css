@@ -1,7 +1,9 @@
+#fundraiser-rewards { background: #EEE; border-radius: 3px; display: inline-block; border-radius: 3px; }
 #fundraiser-rewards > div:hover { background: #E3F0C7; border-radius: 3px; cursor: pointer; }
-#fundraiser-rewards { background: #EEE; border-radius: 3px; }
+#fundraiser-rewards > div { border-bottom: 2px dotted #C7C7C7; padding: 15px; }
+#fundraiser-rewards > div:last-child { border-bottom: 0; }
 #fundraiser-rewards > .active,
-#fundraiser-rewards > .active:hover { background: #C1F8B0; box-shadow: 0 0 15px #48F748; border: 1px solid #2ADF2A; }
+#fundraiser-rewards > .active:hover { background: #C1F8B0; box-shadow: 0 0 15px #48F748; border: 1px solid #A6F3A6; }
 #fundraiser-rewards > .sold-out,
 #fundraiser-rewards > .sold-out:hover { background: none; cursor: default; }
 

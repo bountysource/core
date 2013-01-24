@@ -106,32 +106,26 @@ with (scope('Fundraisers')) {
         ),
 
         (fundraiser.rewards.length > 0) && section({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px;' },
-          (function() {
-            var elements = [];
-            for (var i=0; i<fundraiser.rewards.length; i++) {
-              var reward = fundraiser.rewards[i];
-              var element = div({ style: 'padding: 15px;' },
-                span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
+          fundraiser.rewards.map(function(reward) {
+            var reward_row_element = div(
+              span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
 
-                (reward.limited_to > 0) && div({ style: 'margin: 10px 0 0 10px;; font-size: 14px;' },
-                  div({ style: 'font-style: italic; text-decoration: '+(reward.sold_out ? 'line-through' : 'none')+';' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
-                  reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!')
-                ),
+              (reward.limited_to > 0) && div({ style: 'margin: 10px 0 0 10px;; font-size: 14px;' },
+                div({ style: 'font-style: italic; text-decoration: '+(reward.sold_out ? 'line-through' : 'none')+';' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
+                reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!')
+              ),
 
-                p({ style: 'margin-left: 10px; white-space: pre-wrap;' }, reward.description)
-              );
+              p({ style: 'margin-left: 10px; white-space: pre-wrap;' }, reward.description)
+            );
 
-              if (reward.sold_out) {
-                add_class(element, 'sold-out');
-              } else {
-                element.addEventListener('click', curry(set_route, '#fundraisers/'+fundraiser.id+'/pledge?reward_id='+reward.id));
-              };
-
-              if (i < (fundraiser.rewards.length-1)) element.style['border-bottom'] = '2px dotted #C7C7C7';
-              elements.push(element);
+            if (reward.sold_out) {
+              add_class(reward_row_element, 'sold-out');
+            } else {
+              reward_row_element.addEventListener('click', curry(set_route, '#fundraisers/'+fundraiser.id+'/pledge?reward_id='+reward.id));
             }
-            return elements;
-          })()
+
+            return reward_row_element;
+          })
         )
       ),
 

@@ -33,8 +33,7 @@ with (scope('Fundraisers', 'App')) {
             fieldset(
               label('Pledge Amount:'),
               span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
-              input({ id: 'pledge-amount', style: 'width: 240px; display: inline-block;', autofocus: true, name: 'amount', placeholder: '25', value: params.amount||'' }),
-              submit({ 'class': 'green', style: 'display: inline-block;' }, 'Continue to payment')
+              input({ id: 'pledge-amount', style: 'width: 240px; display: inline-block;', autofocus: true, name: 'amount', placeholder: '25', value: params.amount||'' })
             ),
 
             // payment method selection
@@ -44,27 +43,31 @@ with (scope('Fundraisers', 'App')) {
             ),
 
             // rewards table
-            fieldset({ 'class': 'no-label' },
-              (fundraiser.rewards.length > 0) && div(
-                input({ id: 'reward-id', type: 'hidden', name: 'reward_id' }),
+            (fundraiser.rewards.length > 0) && fieldset(
+              input({ id: 'reward-id', type: 'hidden', name: 'reward_id' }),
 
-                h3('Select Your Reward'),
-                rewards_table(fundraiser)
+              label('Select Reward:'),
+              div({ id: 'fundraiser-rewards', style: 'vertical-align: top; width: 500px;' },
+                // No Reward option
+                reward_row({ description: "No reward please, I just want to help out!" }),
+
+                // populate the table with the actual rewards
+                fundraiser.rewards.map(function(reward) {
+                  return reward_row(reward);
+                })
               )
             )
           )
         ),
 
         div({ 'class': 'split-side' }),
-
         div({ 'class': 'split-end' })
       );
 
       // if a reward id was passed in, select it now
       if (params.reward_id) {
-        fundraiser.rewards.forEach(function(reward) {
-          if (reward.id == parseInt(params.reward_id)) return set_pledge_amount_from_reward(reward);
-        });
+        var e = document.getElementById('reward_'+params.reward_id+'_wrapper');
+        if (e) e.click();
       }
 
       // if logged in and account has money, render bountysource account radio
@@ -87,41 +90,57 @@ with (scope('Fundraisers', 'App')) {
     });
   });
 
-  define('rewards_table', function(fundraiser) {
-    return div({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px; box-shadow: 0 0 10px silver;' },
-     (function() {
-       var elements = [];
-       for (var i=0; i<fundraiser.rewards.length; i++) {
-         var reward = fundraiser.rewards[i];
-         var element = reward_row(reward);
-         if (i < (fundraiser.rewards.length-1)) element.style['border-bottom'] = '2px dotted #C7C7C7';
-         elements.push(element);
-       }
-       return elements;
-     })()
-    );
-  });
-
   define('reward_row', function(reward) {
-    var reward_element = div({ id: 'reward_'+reward.id+'_wrapper', style: 'min-height: 100px; padding: 15px;' },
+    var reward_radio = radio({ id: 'reward_'+reward.id+'_radio', name: 'reward_id_radio', style: 'vertical-align: middle;' });
+    var submit_button = div({ 'class': 'reward-submit-button', style: 'display: none; margin-top: 10px; text-align: center; padding-top: 10px; margin-top: 10px; border-top: 1px solid #AFECAF' },
+      submit({ 'class': 'blue' }, "Continue to payment")
+    );
+    if (reward.sold_out) reward_radio.setAttribute('disabled', true);
+
+    // if the id is set to 0, this is the "No Reward" row
+    var no_reward = (typeof(reward.id) == 'undefined');
+
+    var reward_element = div({ id: 'reward_'+reward.id+'_wrapper', style: 'padding: 15px;' },
       div({ style: 'display: inline-block; width: 400px; vertical-align: middle;' },
-        span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
-
-        (reward.limited_to > 0) && div({ style: 'margin: 10px 0 0 10px;; font-size: 14px;' },
-          div({ style: 'font-style: italic; text-decoration: '+(reward.sold_out ? 'line-through' : 'none')+';' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
-          reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!')
+        div({ style: 'display: inline-block; width: 120px; vertical-align: top;' },
+          div({ style: 'font-size: 16px;' },
+            reward_radio,
+            span({ style: 'vertical-align: middle; margin-left: 5px;' }, (no_reward ? 'No Reward' : (money(reward.amount)+' +')))
+          )
         ),
-
-        p({ style: 'margin-left: 10px; line-height: 15px; white-space: pre-wrap;' }, reward.description)
+        div({ style: 'display: inline-block; vertical-align: middle; width: 280px;' },
+          (reward.limited_to > 0) && div({ style: 'margin-bottom: 10px; font-size: 14px;' },
+            reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!'),
+            div({ style: 'font-style: italic; text-decoration: '+(reward.sold_out ? 'line-through' : 'none')+';' },
+              'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'
+            )
+          ),
+          div({ style: 'line-height: 20px; white-space: pre-wrap;' }, reward.description)
+        )
       ),
-
-      div({ style: 'clear: both;' })
+      div({ style: 'clear: both;' }),
+      submit_button
     );
 
     if (reward.sold_out) {
       add_class(reward_element, 'sold-out');
     } else {
-      reward_element.addEventListener('click', curry(set_pledge_amount_from_reward, reward));
+      reward_element.addEventListener('click', function(e) {
+        // uncheck all radios
+        flatten_to_array(document.getElementsByName('reward_id_radio')).forEach(function(e) {e.removeAttribute('checked'); });
+
+        // check this radio
+        reward_radio.setAttribute('checked','checked');
+
+        // hide all submit buttons
+        flatten_to_array(document.getElementsByClassName('reward-submit-button')).forEach(function(e) { hide(e); });
+
+        // show this submit button
+        show(submit_button);
+
+        // set the pledge input with reward value if needed
+        set_pledge_amount_from_reward(reward);
+      });
     };
 
     return reward_element;
@@ -132,11 +151,11 @@ with (scope('Fundraisers', 'App')) {
     var amount_input = document.getElementById('pledge-amount');
     if (!amount_input) return;
 
-    var decline_reward = reward.id < 0;
+    var decline_reward = (typeof(reward.id) == 'undefined');
 
     // set the pledge value
     if (!decline_reward && (isNaN(parseInt(amount_input.value)) || parseInt(amount_input.value) < reward.amount)) {
-      amount_input.value = reward.amount;
+      amount_input.value = reward.amount||'';
     }
 
     // change class of selected reward
@@ -146,31 +165,16 @@ with (scope('Fundraisers', 'App')) {
     add_class(selected_reward, 'active');
 
     // set the hidden reward_id input
-    document.getElementById('reward-id').value = (decline_reward ? '' : reward.id);
-
-    amount_input.focus();
-    scrollTo(0,0);
+    document.getElementById('reward-id').value = (decline_reward ? 'no-reward' : reward.id);
   });
 
   define('make_pledge', function(fundraiser, form_data) {
     clear_message();
 
-    // if you are pledging enough money to claim a reward, prompt the user before letting them continue
-    var pledge_amount       = parseInt(document.getElementById('pledge-amount').value)||null,
-        selected_reward_id  = parseInt(document.getElementById('reward-id').value);
+    console.log(form_data);
 
-    // find the reward from reward_id hidden input value
-    var selected_reward;
-    for (var i=0; i<fundraiser.rewards.length; i++) {
-      if (parseInt(fundraiser.rewards[i].id) == selected_reward_id) {
-        selected_reward = fundraiser.rewards[i];
-        break;
-      }
-    }
-
-    // if no reward selected, prompt user before continuing if they have pledged enough $ to claim one.
-    if (pledge_amount && (!selected_reward && pledge_amount >= fundraiser.rewards[0].amount)) {
-      if (!confirm("Your pledge of "+money(pledge_amount)+" entitles you to a reward, but you haven't selected one.\n\nContinue without selecting a reward?")) return;
+    if (form_data.reward_id != 'no-reward' && isNaN(parseInt(form_data.reward_id))) {
+      return render_message(error_message('Please select your reward first'));
     }
 
     // build the redirect_url, with pledge_id placeholder
