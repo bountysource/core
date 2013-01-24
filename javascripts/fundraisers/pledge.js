@@ -110,7 +110,7 @@ with (scope('Fundraisers', 'App')) {
           reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!')
         ),
 
-        p({ style: 'margin-left: 10px; white-space: pre-wrap;' }, reward.description)
+        p({ style: 'margin-left: 10px; line-height: 20px; white-space: pre-wrap;' }, reward.description)
       ),
 
       div({ style: 'clear: both;' })
