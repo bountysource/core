@@ -352,8 +352,8 @@ with (scope('Fundraisers','App')) {
   * */
   define('select_fundraiser_form_section', function(fundraiser_id, section_id) {
     // Fake a page view for Analytics
-    if (typeof(_gaq) != 'undefined')
-      _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser_id + '/' + section_id]);
+    _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser_id + '/' + section_id]);
+
     // show the right part of the form
     var form_section  = document.getElementById(section_id);
     var form_elements = document.getElementById('fundraiser-form').children;
@@ -389,8 +389,7 @@ with (scope('Fundraisers','App')) {
       // first, save it. callback hell: population 2
       save_fundraiser(fundraiser, function(save_response) {
         // Fake a page view for Analytics
-        if (typeof(_gaq) != 'undefined')
-          _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/publish']);
+        _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/publish']);
         BountySource.publish_fundraiser(fundraiser.id, function(response) {
           if (response.meta.success) {
             set_route('#account/fundraisers');
@@ -429,8 +428,7 @@ with (scope('Fundraisers','App')) {
 
   define('save_fundraiser', function(fundraiser, callback) {
     // Fake a page view for Analytics
-    if (typeof(_gaq) != 'undefined')
-      _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/save']);
+    _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/save']);
     render({ target: 'fundraiser-edit-errors' }, div({ style: 'text-align: center; padding: 5px;' }, 'Saving...'));
 
     var serialized_form = serialize_form('fundraiser-form'),
