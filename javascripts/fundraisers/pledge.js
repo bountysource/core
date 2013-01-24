@@ -26,7 +26,9 @@ with (scope('Fundraisers', 'App')) {
       render({ into: target_div },
         div({ 'class': 'split-main' },
           form({ 'class': 'fancy', action: curry(make_pledge, fundraiser) },
-            messages(),
+            fieldset({ 'class': 'no-label' },
+              messages()
+            ),
 
             fieldset(
               label('Pledge Amount:'),
@@ -110,7 +112,7 @@ with (scope('Fundraisers', 'App')) {
           reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!')
         ),
 
-        p({ style: 'margin-left: 10px; line-height: 20px; white-space: pre-wrap;' }, reward.description)
+        p({ style: 'margin-left: 10px; line-height: 15px; white-space: pre-wrap;' }, reward.description)
       ),
 
       div({ style: 'clear: both;' })
