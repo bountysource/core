@@ -266,8 +266,8 @@ with (scope('Fundraisers','App')) {
                     ),
 
                     fieldset(
-                      label('Limit (Optional):'),
-                      input({ id: 'reward-input-quantity', placeholder: 10, style: 'width: 100px; margin-left: 18px;' })
+                      label('Quantity:'),
+                      input({ id: 'reward-input-quantity', placeholder: 'Unlimited', style: 'width: 100px; margin-left: 18px;' })
                     )
                   ),
 

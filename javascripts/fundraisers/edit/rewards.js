@@ -14,7 +14,7 @@ with (scope('Fundraisers')) {
             ),
             fieldset(
               label('Quantity:'),
-              span({ id: 'limited_to' }, reward_data.limited_to ? formatted_number(reward_data.limited_to) : '')
+              span({ id: 'limited_to' }, reward_data.limited_to ? formatted_number(reward_data.limited_to) : 'Unlimited')
             )
           )
         ),
@@ -70,7 +70,7 @@ with (scope('Fundraisers')) {
             published ? [
               input({
                 id: 'reward-input-quantity',
-                placeholder: 10,
+                placeholder: 'Unlimtied',
                 style: 'width: 100px; margin-left: 18px; color: gray;',
                 value: limited_to,
                 readonly: true
@@ -78,7 +78,7 @@ with (scope('Fundraisers')) {
             ] : [
               input({
                 id: 'reward-input-quantity',
-                placeholder: 10,
+                placeholder: 'Unlimtied',
                 style: 'width: 100px; margin-left: 18px;',
                 value: limited_to
               })
@@ -129,7 +129,7 @@ with (scope('Fundraisers')) {
     var reward_data = {
       description:  inputs_row.getElementsByTagName('textarea')[0].value,
       amount:       parseInt(inputs_row.getElementsByTagName('input')[0].value),
-      limited_to:     parseInt(inputs_row.getElementsByTagName('input')[1].value)
+      limited_to:   parseInt(inputs_row.getElementsByTagName('input')[1].value)
     };
 
     if (!reward_data.description || reward_data.description.length <= 0) {
