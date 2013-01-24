@@ -7,6 +7,16 @@ with (scope('Twitter','App')) {
       js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
       return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f);} });
     }(document, "script", "twitter-wjs"));
+
+    var push_gaq_social_event = function(e) {
+      if (!e) { return; }
+      _gaq.push(['_trackSocial', 'twitter', e.type]);
+    }
+    bind_event('click', push_gaq_social_event);
+    bind_event('tweet', push_gaq_social_event);
+    bind_event('follow', push_gaq_social_event);
+    bind_event('retweet', push_gaq_social_event);
+    bind_event('favorite', push_gaq_social_event);
   });
 
   // parse any twitter elements that have been inserted into the DOM
@@ -20,6 +30,13 @@ with (scope('Twitter','App')) {
         },0);
       });
     };
+  });
+
+  define('bind_event', function(event, callback) {
+    while (!window.twttr) setTimeout(function() {}, 0)
+    twttr.ready(function(twttr) {
+      twttr.events.bind(event, callback);
+    })
   });
 
   /*
