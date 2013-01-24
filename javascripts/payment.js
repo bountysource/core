@@ -26,17 +26,20 @@ with (scope('Payment', 'App')) {
           text({ placeholder: "25", name: 'amount', id: 'amount-input' })
         ),
 
-        payment_methods(),
+        payment_methods({ style: 'margin: 10px 0;' }),
 
         submit({ 'class': 'blue' }, 'Create ' + item)
       )
     );
   });
 
-  define('payment_methods', function() {
+  define('payment_methods', function(options) {
+    options = options || {};
+    options['class'] = 'payment-method';
+
     var bountysource_account_div = div();
 
-    var payment_methods = div({ 'class': 'payment-method' },
+    var payment_methods = div(options,
       div(
         radio({
           id: 'payment_method_paypal',

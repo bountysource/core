@@ -203,7 +203,7 @@ input.autosized {
   line-height: 32px;
 }
 
-.payment-method { margin: 15px 0; }
+.payment-method { display: inline-block; }
 .payment-method div { line-height: 20px; margin-bottom: 10px; }
 .payment-method div:last-child { margin-bottom: 0; }
 .payment-method img { padding: 0 6px 0 4px; vertical-align: middle; }

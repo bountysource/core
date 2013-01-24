@@ -36,8 +36,9 @@ with (scope('Fundraisers', 'App')) {
             ),
 
             // payment method selection
-            fieldset({ 'class': 'no-label' },
-              Payment.payment_methods()
+            fieldset(
+              label('Payment Source:'),
+              Payment.payment_methods({ style: 'vertical-align: top;' })
             ),
 
             // rewards table
