@@ -21,10 +21,10 @@ with (scope('Fundraisers')) {
         div({ id: 'description-wrapper' },
           span({ id: 'description', style: 'white-space: pre-wrap;' }, reward_data.description)
         ),
-        reward_data.id && p({ style: 'margin: 10px; font-size: 14px; font-style: italic; text-align: right;' },"* This reward has been published. It can be edited, but not removed.")
+        reward_data.id && p({ style: 'margin: 10px; font-size: 14px; font-style: italic; text-align: right;' },"* This reward has already been published.")
       ),
       td({ style: 'text-align: center; width: 100px;' },
-        a({ href: curry(unlock_reward_row, reward_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/edit.gif' })),
+        !reward_data.id && a({ href: curry(unlock_reward_row, reward_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/edit.gif' })),
         !reward_data.id && a({ href: curry(delete_reward_row, reward_row_id) }, img({ style: 'margin: 0 3px;', src: 'images/trash.gif' }))
       )
     ];
