@@ -9,8 +9,10 @@ with (scope('Twitter','App')) {
     }(document, "script", "twitter-wjs"));
 
     var push_gaq_social_event = function(e) {
+      var url = decode_html(e.target.src).match(/url=(.*)&?/)[1];
+
       if (!e) { return; }
-      _gaq.push(['_trackSocial', 'twitter', e.type]);
+      _gaq.push(['_trackSocial', 'twitter', e.type, url||'']);
     }
     bind_event('click', push_gaq_social_event);
     bind_event('tweet', push_gaq_social_event);
@@ -21,19 +23,25 @@ with (scope('Twitter','App')) {
 
   // parse any twitter elements that have been inserted into the DOM
   define('process_elements', function() {
+    after_loaded(function(twttr) {
+      twttr.widgets.load();
+    });
+  });
+
+  define('after_loaded', function(callback) {
     if (window.twttr.widgets) {
-      window.twttr.widgets.load();
+      callback(window.twttr);
     } else {
       window.twttr.ready(function() {
         setTimeout(function() {
-          window.twttr.widgets.load();
-        },0);
+          callback(window.twttr);
+        },10);
       });
     };
   });
 
   define('bind_event', function(event, callback) {
-    while (!window.twttr) setTimeout(function() {}, 0)
+    while (!window.twttr) setTimeout(function() {}, 10);
     twttr.ready(function(twttr) {
       twttr.events.bind(event, callback);
     })

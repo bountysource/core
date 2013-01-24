@@ -8,17 +8,37 @@ with (scope('Facebook','App')) {
       js.src = "//connect.facebook.net/en_US/all.js#xfbml=0&appId=280280945425178";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    bind_event('edge.create', function(url) {
+      _gaq.push(['_trackSocial', 'facebook', 'like', url]);
+    });
+
+    bind_event('edge.remove', function(url) {
+      _gaq.push(['_trackSocial', 'facebook', 'unlike', url]);
+    })
+  });
+
+  define('bind_event', function(event, callback) {
+    after_loaded(function(FB) {
+      FB.Event.subscribe(event, callback);
+    });
   });
 
   // parse any facebook elements that have been inserted into the DOM
   define('process_elements', function() {
-    if (window.FB) {
+    after_loaded(function(FB) {
       window.FB.XFBML.parse();
+    });
+  });
+
+  define('after_loaded', function(callback) {
+    if (window.FB) {
+      callback(window.FB);
     } else {
       var previous_async = window.fbAsyncInit;
       window.fbAsyncInit = function() {
         if (previous_async) previous_async.call();
-        window.FB.XFBML.parse();
+        callback(window.FB);
       };
     }
   });
