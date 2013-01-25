@@ -61,11 +61,12 @@ with (scope('Twitter','App')) {
    * */
   define('share_button', function(options) {
     options = options || {};
-    options['class']      = 'twitter-share-button';
-    options['href']       = 'https://twitter.com/share';
-    options['data-lang']  = 'en';
-    options['data-text']  = "I <3 OSS";
-    options['data-url']   = window.location.href;
+    options['class']          = 'twitter-share-button';
+    options['href']           = 'https://twitter.com/share';
+    options['data-lang']      = 'en';
+    options['data-text']      = options['data-text']      || "I <3 OSS";
+    options['data-url']       = options['data-url']       || window.location.href;
+    options['data-counturl']  = options['data-counturl']  || options['data-url'];
     return a(options);
   });
 
