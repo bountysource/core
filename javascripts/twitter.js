@@ -41,10 +41,9 @@ with (scope('Twitter','App')) {
   });
 
   define('bind_event', function(event, callback) {
-    while (!window.twttr) setTimeout(function() {}, 10);
-    twttr.ready(function(twttr) {
+    after_loaded(function(twttr) {
       twttr.events.bind(event, callback);
-    })
+    });
   });
 
   /*

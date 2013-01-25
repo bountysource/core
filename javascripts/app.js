@@ -4,6 +4,7 @@ with (scope('App')) {
     render({ target: 'global-social-buttons' },
       ul(
         li({ style: 'height: 20px;' }, Twitter.follow_button),
+        li({ style: 'height: 20px;' }, Facebook.follow_button),
         li({ style: 'height: 20px;' }, Twitter.share_button),
         li({ style: 'width: 100px;' }, Facebook.like_button({ 'data-layout': 'button_count' })),
         li(GooglePlus.like_button)

@@ -80,6 +80,15 @@ with (scope('Facebook','App')) {
     return div(options);
   });
 
+  define('follow_button', function(options) {
+    options = options || {};
+    options['class']            = 'fb-follow';
+    options['data-href']        = options['data-href']        || 'http://www.facebook.com/BountySource';
+    options['data-layout']      = options['data-layout']      || 'button_count';
+    options['data-show-faces']  = options['data-show-faces']  || false
+    return div(options);
+  });
+
 
 
 
