@@ -25,22 +25,26 @@ with (scope('Signin','App')) {
   route('#signin/email', function() {
     if (logged_in()) return set_route('#');
 
-    var params = get_params();
     render(
       breadcrumbs(a({ href: '#' }, 'Home'), a({ href: '#signin' }, 'Sign In'), 'Email Address'),
       h1("Sign In with your Email Address"),
       p("Please enter your email address and a password. If you don't have a BountySource account yet, we'll create one for you."),
 
-      super_signin_form({})
+      super_signin_form(get_params())
     );
   });
 
   define('super_signin_form', function(params) {
     var refs = {};
 
-    if (params.email && params.email_is_registered) refs.email_is_registered = true;
-    else if (params.email) refs.email_is_registered = false;
-    else refs.email_is_registered = null;
+    refs.email_is_registered = null;
+    if (params.email) {
+      if (typeof(params.email_is_registered) == 'boolean') {
+        refs.email_is_registered = params.email_is_registered;
+      } else {
+        setTimeout(curry(process_email_address_changed,refs), 0);
+      }
+    }
 
     refs.error_div = div();
 
