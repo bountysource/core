@@ -79,7 +79,7 @@ with (scope('Twitter','App')) {
   /*
    * Craft a share button, optionally passing an element you want to use as the button.
    *
-   * var my_button_element = div({ 'class': 'arbitrary' }, img({ src: 'images/bountysource.png' }))
+   * var my_button_element = div({ 'class': 'arbitrary' });
    * Twitter.custom_share_button(my_button_element);
    * Twitter.custom_share_button({ link: window.location.href, text: 'awwwww yeeeee' });
    * Twitter.custom_share_button({ link: window.location.href }, my_button_element);
