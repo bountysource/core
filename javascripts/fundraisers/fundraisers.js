@@ -4,6 +4,10 @@ with (scope('Fundraisers','App')) {
     return logged_in() && person && parseInt(person.id) == parseInt((Storage.get('access_token')||'').split('.')[0]);
   });
 
+  define('get_href', function(fundraiser) {
+    return '#fundraisers/'+fundraiser.id;
+  });
+
   define('card', function(fundraiser) {
     fundraiser.description = fundraiser.short_description;
     return Home.fundraiser_card(fundraiser);

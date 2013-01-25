@@ -89,11 +89,29 @@ with (scope('Facebook','App')) {
     return div(options);
   });
 
+  /*
+  * Craft a share button, optionally passing an element you want to use as the button.
+  *
+  * var my_button_element = div({ 'class': 'arbitrary' }, img({ src: 'images/bountysource.png' }))
+  * Facebook.custom_share_button(my_button_element);
+  * Facebook.custom_share_button({ link: window.location.href, text: 'awwwww yeeeee' });
+  * Facebook.custom_share_button({ link: window.location.href }, my_button_element);
+   * */
+  define('create_share_button', function() {
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments),
+        element   = arguments[0] || a({ 'class': 'btn-auth btn-facebook' }, 'Share');
 
+    options = options || {};
+    options['method']   = 'feed';
+    options['name']     = options['name']     || 'BountySource';
+    options['link']     = options['link']     || window.location.href;
+    options['caption']  = options['caption']  || 'The funding platform for open source software';
 
+    element.addEventListener('click', curry(after_loaded, function(FB) { FB.ui(options) }));
 
-
-
+    return element;
+  });
 
   /*
    * ********************************************************

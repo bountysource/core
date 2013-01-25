@@ -77,6 +77,29 @@ with (scope('Twitter','App')) {
   });
 
   /*
+   * Craft a share button, optionally passing an element you want to use as the button.
+   *
+   * var my_button_element = div({ 'class': 'arbitrary' }, img({ src: 'images/bountysource.png' }))
+   * Twitter.custom_share_button(my_button_element);
+   * Twitter.custom_share_button({ link: window.location.href, text: 'awwwww yeeeee' });
+   * Twitter.custom_share_button({ link: window.location.href }, my_button_element);
+   * */
+  define('create_share_button', function() {
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments),
+        element   = arguments[0] || a({ 'class': 'btn-auth btn-twitter' }, 'Tweet');
+
+    element.addEventListener('click', function(e) {
+      options['url']  = encode_html(options['url']  || window.location.href);
+      options['text'] = encode_html(options['text'] || 'The funding platform for open source software')
+      window.open(share_dialog_url(options),'','width=680,height=350');
+    });
+
+    return element;
+  });
+
+
+  /*
   * ********************************************************
   *
   * These are deprecated. Use share_button and follow_button with their appropriate data attributes.
@@ -85,11 +108,7 @@ with (scope('Twitter','App')) {
   * ********************************************************
   * */
   define('share_dialog_url', function(options) {
-    options = options || {};
-    return "https://twitter.com/share?"
-      + "via="    + "BountySource"
-      + "&url="   + options.url||encode_html(window.location.href)
-      + "&text="  + options.text||'The funding platform for open-source software'
+    return "https://twitter.com/share" + to_param(options||{});
   });
 
   define('share_dialog_button', function(dialog_url, button_text) {

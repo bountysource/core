@@ -206,27 +206,35 @@ with (scope('Contributions', 'App')) {
         render({ into: target_div },
           div({ 'class': 'split-main' },
             h2("Thanks for your contribution"),
-            p("Your contribution of ", money(pledge.amount), " has been made to ", fundraiser.title, "."),
+            p("You are now a backer of ", fundraiser.title, ". Thanks for supporting open source software!"),
 
-            pledge.reward && div(
-              h2("Selected Reward"),
-              p("You selected the reward \"", pledge.reward.description ,"\"")
+            div(
+              Facebook.create_share_button({
+                link:     BountySource.www_host+Fundraisers.get_href(pledge.fundraiser),
+                name:     pledge.fundraiser.title,
+                caption:  pledge.fundraiser.short_description
+              }, a({ 'class': 'btn-auth btn-facebook', style: 'margin-right: 10px;' }, 'Share')),
+
+              Twitter.create_share_button({
+                url:  BountySource.www_host+Fundraisers.get_href(pledge.fundraiser),
+                text: "I pledged "+money(pledge.amount)+" to "+fundraiser.title
+              }, a({ 'class': 'btn-auth btn-twitter' }, 'Tweet'))
             )
           ),
 
           div({ 'class': 'split-side' },
-            div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
-              ribbon_header("Links"),
-              br(),
-              a({ 'class': 'green', href: '#fundraisers/'+fundraiser_id }, "Back to Fundraiser")
-            ),
+            div({ style: 'margin-top: 20px;' },
+              span({ style: 'color: gray;' }, 'Pledge Amount:'),
+              div({ style: 'margin: 10px 0 10px 20px;' },
+                span({ style: 'font-size: 25px;'}, money(pledge.amount))
+              ),
 
-            div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
-              ribbon_header('Share'),
-              br(),
-              facebook_share_pledge_button(pledge),
-              div({ style: 'height: 20px;' }),
-              twitter_share_pledge_button(pledge)
+              pledge.reward && div(
+                span({ style: 'color: gray;' }, 'Selected Reward:'),
+                div({ style: 'margin: 10px 0 10px 20px;' },
+                  span({ style: 'white-space: pre-wrap;' }, pledge.reward.description)
+                )
+              )
             )
           ),
 
@@ -238,28 +246,12 @@ with (scope('Contributions', 'App')) {
     });
   });
 
-  define('facebook_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
-    return Facebook.share_dialog_button(share_bounty_on_facebook_url(login, repository, issue_number, bounty_amount));
-  });
-
   define('twitter_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
     return Twitter.share_dialog_button(share_bounty_on_twitter_url(login, repository, issue_number, bounty_amount));
   });
 
-  define('facebook_share_pledge_button', function(pledge) {
-    return Facebook.share_dialog_button(share_pledge_on_facebook_url(pledge));
-  });
-
   define('twitter_share_pledge_button', function(pledge) {
     return Twitter.share_dialog_button(share_pledge_on_twitter_url(pledge));
-  });
-
-  define("share_pledge_on_facebook_url", function(pledge) {
-    return Facebook.share_dialog_url({
-      link:         encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id),
-      title:        "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through BountySource.",
-      description:  "Help fund this project, give back to Open Source!"
-    });
   });
 
   define('share_pledge_on_twitter_url', function(pledge) {
@@ -269,30 +261,10 @@ with (scope('Contributions', 'App')) {
     });
   });
 
-  define('share_bounty_on_facebook_url', function(login, repository, issue_number, amount) {
-    return Facebook.share_dialog_url({
-      link:         encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number),
-      title:        "I placed a "+money(amount)+" bounty on this issue at BountySource.",
-      description:  "A bounty has been placed on this issue at BountySource."
-    });
-  });
-
   define('share_bounty_on_twitter_url', function(login, repository, issue_number, amount) {
     return Twitter.share_dialog_url({
       url:  encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number),
       text: "I placed a "+money(amount)+" bounty on this issue at @BountySource."
-    });
-  });
-
-  define('post_github_comment', function(login, repository, issue_number, form_data) {
-    clear_message();
-
-    BountySource.post_github_comment(login, repository, issue_number, form_data, function(response) {
-      if (response.meta.success) {
-        render_message(success_message('Comment posted on issue!'));
-      } else {
-        render_message(error_message(response.data.error));
-      }
     });
   });
 }
