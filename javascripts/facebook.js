@@ -90,13 +90,14 @@ with (scope('Facebook','App')) {
   });
 
   /*
-  * Craft a share button, optionally passing an element you want to use as the button.
-  *
-  * var my_button_element = div({ 'class': 'arbitrary' });
-  * Facebook.custom_share_button(my_button_element);
-  * Facebook.custom_share_button({ link: window.location.href, text: 'awwwww yeeeee' });
-  * Facebook.custom_share_button({ link: window.location.href }, my_button_element);
-   * */
+   * Craft a share button, optionally passing an element you want to use as the button.
+   *
+   * var my_button_element = div({ 'class': 'arbitrary' });
+   *
+   * Facebook.create_share_button(my_button_element);
+   * Facebook.create_share_button({ link: window.location.href, text: 'awwwww yeeeee' });
+   * Facebook.create_share_button({ link: window.location.href }, my_button_element);
+   */
   define('create_share_button', function() {
     var arguments = flatten_to_array(arguments),
         options   = shift_options_from_args(arguments),
