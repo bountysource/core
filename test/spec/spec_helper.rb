@@ -92,7 +92,12 @@ end
 
 RSpec.configure do |config|
   config.before(:suite) do
-    $browser = ENV['RAILS_ENV'] == 'staging' ? Watir::Browser.new(:remote, :url => 'http://165.225.134.232:9515/') : Watir::Browser.new(:chrome)
+    if ENV['RAILS_ENV'] == 'staging'
+      capabilities = Selenium::WebDriver::Remote::Capabilities.chrome('chrome.switches' => ['--user-agent=Selenium'])
+      $browser = Watir::Browser.new(:remote, :url => 'http://165.225.134.232:9515/', :desired_capabilities => capabilities)
+    else
+      $browser = Watir::Browser.new(:chrome, :switches => ['--user-agent=Selenium'])
+    end
 
     # add a navigate method for scope.js routes
     class << $browser
