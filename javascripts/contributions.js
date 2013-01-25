@@ -208,6 +208,7 @@ with (scope('Contributions', 'App')) {
             h2("Thanks for your contribution"),
             p("You are now a backer of ", fundraiser.title, ". Thanks for supporting open source software!"),
 
+            h3("Tell your friends!"),
             div(
               Facebook.create_share_button({
                 link:     BountySource.www_host+Fundraisers.get_href(pledge.fundraiser),
