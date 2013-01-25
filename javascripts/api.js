@@ -65,7 +65,7 @@ with (scope('BountySource')) {
 
   define('get_cached_user_info', function(callback) {
     if (Storage.get('user_info')) {
-      callback(JSON.parse(Storage.get('user_info')));
+      callback(parsed_user_info());
     } else {
       user_info(function(response) {
         if (response.meta.success) {
@@ -78,6 +78,15 @@ with (scope('BountySource')) {
 
   define('set_cached_user_info', function(hash) {
     hash ? Storage.set('user_info', JSON.stringify(hash)) : Storage.remove('user_info');
+  });
+
+  define('parsed_user_info', function() {
+    try {
+      JSON.parse(Storage.get('user_info'))
+    } catch(e) {
+      console.log("ERROR PARSING USER_INFO JSON:", Storage.get('user_info'));
+      return {};
+    }
   });
 
   define('basic_user_info', function(callback) {

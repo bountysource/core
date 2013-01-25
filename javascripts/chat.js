@@ -7,7 +7,7 @@ with (scope('Chat', 'App')) {
     if (chatbar_content.innerHTML.length <= 0) {
       var url = 'https://www.bountysource.com/chat/bountysource.html';
       if (Storage.get('user_info')) {
-        var display_name = JSON.parse(scope.instance.Storage.get('user_info')).display_name;
+        var display_name = parsed_user_info().display_name;
         if (display_name && display_name.length > 0) url = url + '?display_name=' + display_name.replace(/ /g,'');
       }
       render({ target: 'chatbar-content' }, iframe({ src: url }));

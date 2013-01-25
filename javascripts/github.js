@@ -15,7 +15,7 @@ with (scope('Github','App')) {
   // requires user to be logged in, and have a GitHub account linked
   define('account_linked', function() {
     if (!logged_in()) return false;
-    var user_info = JSON.parse(Storage.get('user_info')||'{}');
+    var user_info = parsed_user_info();
     return user_info.github_user || null;
   });
 
