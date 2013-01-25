@@ -78,13 +78,15 @@ with (scope('Twitter','App')) {
 
   /*
   * Craft a share button, optionally passing an element you want to use as the button.
+  * reference: https://dev.twitter.com/docs/tweet-button
   *
-  * var my_button_element = div({ 'class': 'arbitrary' });
-  *
-  * Twitter.create_share_button(my_button_element);
-  * Twitter.create_share_button({ link: window.location.href, text: 'awwwww yeeeee' });
-  * Twitter.create_share_button({ link: window.location.href }, my_button_element);
-  */
+  * Params: [options] [button_element]
+  * @options - optional hash of tweet button attributes.
+  *   default url   - window.location.href
+  *   default text  - @BountySource | The funding platform for open source software
+  * @button_element - A DOM element, to which a click listener is attached.
+  *   default - anchor element with 'btn-auth btn-twitter' class
+  * */
   define('create_share_button', function() {
     var arguments = flatten_to_array(arguments),
         options   = shift_options_from_args(arguments),
@@ -92,7 +94,7 @@ with (scope('Twitter','App')) {
 
     element.addEventListener('click', function(e) {
       options['url']  = encode_html(options['url']  || window.location.href);
-      options['text'] = encode_html(options['text'] || 'The funding platform for open source software')
+      options['text'] = encode_html(options['text'] || '@BountySource | The funding platform for open source software')
       window.open(share_dialog_url(options),'','width=680,height=350');
     });
 

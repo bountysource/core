@@ -91,13 +91,17 @@ with (scope('Facebook','App')) {
 
   /*
    * Craft a share button, optionally passing an element you want to use as the button.
+   * reference: http://developers.facebook.com/docs/reference/javascript/FB.ui/
    *
-   * var my_button_element = div({ 'class': 'arbitrary' });
-   *
-   * Facebook.create_share_button(my_button_element);
-   * Facebook.create_share_button({ link: window.location.href, text: 'awwwww yeeeee' });
-   * Facebook.create_share_button({ link: window.location.href }, my_button_element);
-   */
+   * Params: [options] [button_element]
+   * @options - optional hash of share button attributes.
+   *   default method   - feed
+   *   default name     - 'BountySource'
+   *   default link     - window.location.href
+   *   default caption  - The funding platform for open source software
+   * @button_element - A DOM element, to which a click listener is attached.
+   *   default - anchor element with 'btn-auth btn-twitter' class
+   * */
   define('create_share_button', function() {
     var arguments = flatten_to_array(arguments),
         options   = shift_options_from_args(arguments),

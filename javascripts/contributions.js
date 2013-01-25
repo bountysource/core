@@ -83,13 +83,13 @@ with (scope('Contributions', 'App')) {
 
   route('#repos/:login/:repository/issues/:issue_number/bounties/:bounty_id/receipt', function(login, repository, issue_number, bounty_id) {
     // access token as a param?
+    // TODO: remove when new account creation is ready -- CAB
     var params = get_params();
     if (params['access_token']) {
       BountySource.set_access_token(params['access_token']);
       set_route(get_route(), { reload_page: true });
       return;
     }
-
 
     var target_div = div('Loading...');
 
@@ -108,61 +108,36 @@ with (scope('Contributions', 'App')) {
     // This will happen on Paypal cancel.
     if (/:bounty_id/.test(bounty_id)) return set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
 
-
     BountySource.get_bounty(bounty_id, function(response) {
-      var github_comment_div  = div(),
-          bounty              = response.data;
-
-      // render a comment submit form, or a GitHub account link button
-      if (Github.account_linked()) {
-        render({ into: github_comment_div },
-          form({ style: 'width: 650px;', action: curry(post_github_comment, login, repository, issue_number) },
-            messages(),
-
-            fieldset(
-              textarea({ 'class': 'fancy', name: 'body', style: 'width: 100%; height: 150px;' }, "Working on a solution? \n\nA "+money(bounty.amount)+" bounty has been placed on it at [BountySource](https://www.bountysource.com), and you can earn it by having your pull request merged. " + BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number)
-            ),
-            fieldset(
-              submit({ 'class': 'green', style: 'width: 230px; margin-top: 15px;' }, 'Comment on GitHub Issue')
-            )
-          )
-        );
-      } else {
-        render({ into: github_comment_div },
-          p("You need to have a GitHub account first."),
-          // link GitHub account, and redirect here afterward.
-          a({ 'class': 'blue', style: 'width: 250px;', href: Github.auth_url() }, 'Link Your GitHub Account')
-        )
-      }
+      var bounty = response.data;
 
       render({ into: target_div },
         div({ 'class': 'split-main'},
-          h2("Bounty Created!"),
-          p("Thank you for supporting open-source software!"),
-          p("Questions? ", a({ href: '#faq' }, 'Consult the FAQ'), ", ", a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'email us'), ", or ", a({ href: 'irc://irc.freenode.net/bountysource' }, 'message us via IRC'), "."),
+          h2("Bounty Placed"),
+          p("Thank you for supporting ", bounty.repository.display_name, '.'),
 
-          br(),
+          h3("Tell Your Friends!"),
+          div(
+            Facebook.create_share_button({
+              link:     BountySource.www_host+Issue.get_href(bounty.issue),
+              name:     bounty.repository.display_name,
+              caption:  money(bounty.amount)+' bounty placed on issue #'+bounty.issue.number+' - '+bounty.issue.title
+            }, a({ 'class': 'btn-auth btn-facebook', style: 'margin-right: 10px;' }, 'Share')),
 
-          h2("Spread The Word!"),
-
-          github_comment_div
+            Twitter.create_share_button({
+              url:  BountySource.www_host+Issue.get_href(bounty.issue),
+              text: money(bounty.amount)+" bounty placed",
+              via:  'BountySource'
+            }, a({ 'class': 'btn-auth btn-twitter' }, 'Tweet'))
+          )
         ),
 
         div({ 'class': 'split-side'},
-          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3;' },
-            ribbon_header("Links"),
-            br(),
-            a({ 'class': 'blue', href: '#repos/'+login+'/'+repository }, "Back to Project"), br(),
-            a({ 'class': 'blue', href: '#repos/'+login+'/'+repository+'/issues/'+issue_number }, "Back to Issue #"+issue_number)
-          ),
-
-
-          div({ style: 'background: #f1f1f1; padding: 0 21px 21px 21px; margin: 20px 15px; border-bottom: 1px solid #e3e3e3; text-align: center;' },
-            ribbon_header('Share'),
-            br(),
-            facebook_share_bounty_button(login, repository, issue_number, bounty.amount),
-            div({ style: 'height: 20px;' }),
-            twitter_share_bounty_button(login, repository, issue_number, bounty.amount)
+          div({ style: 'margin-top: 20px;' },
+            span({ style: 'color: gray;' }, 'Bounty Amount:'),
+            div({ style: 'margin: 10px 0 10px 20px;' },
+              span({ style: 'font-size: 25px;'}, money(bounty.amount))
+            )
           )
         ),
 
@@ -173,6 +148,7 @@ with (scope('Contributions', 'App')) {
 
   route('#fundraisers/:fundraiser_id/pledges/:pledge_id/receipt', function(fundraiser_id, pledge_id) {
     // access token as a param?
+    // TODO: remove when new account creation is ready -- CAB
     var params = get_params();
     if (params['access_token']) {
       BountySource.set_access_token(params['access_token']);
@@ -244,28 +220,6 @@ with (scope('Contributions', 'App')) {
       } else {
         render({ into: target_div }, error_message(response.data.error));
       }
-    });
-  });
-
-  define('twitter_share_bounty_button', function(login, repository, issue_number, bounty_amount) {
-    return Twitter.share_dialog_button(share_bounty_on_twitter_url(login, repository, issue_number, bounty_amount));
-  });
-
-  define('twitter_share_pledge_button', function(pledge) {
-    return Twitter.share_dialog_button(share_pledge_on_twitter_url(pledge));
-  });
-
-  define('share_pledge_on_twitter_url', function(pledge) {
-    return Twitter.share_dialog_url({
-      url:  encode_html(BountySource.www_host+'#fundraisers/'+pledge.fundraiser.id),
-      text: "I pledged " + money(pledge.amount) + " to " + pledge.fundraiser.title + " through @BountySource."
-    });
-  });
-
-  define('share_bounty_on_twitter_url', function(login, repository, issue_number, amount) {
-    return Twitter.share_dialog_url({
-      url:  encode_html(BountySource.www_host+'#repos/'+login+'/'+repository+'/issues/'+issue_number),
-      text: "I placed a "+money(amount)+" bounty on this issue at @BountySource."
     });
   });
 }
