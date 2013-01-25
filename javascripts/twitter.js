@@ -93,28 +93,12 @@ with (scope('Twitter','App')) {
         element   = arguments[0] || a({ 'class': 'btn-auth btn-twitter' }, 'Tweet');
 
     element.addEventListener('click', function(e) {
-      options['url']  = encode_html(options['url']  || window.location.href);
-      options['text'] = encode_html(options['text'] || '@BountySource | The funding platform for open source software')
-      window.open(share_dialog_url(options),'','width=680,height=350');
+      options['url']      = encode_html(options['url']  || window.location.href);
+      options['counturl'] = encode_html(options['counturl'] || options['url']);
+      options['text']     = encode_html(options['text'] || '@BountySource | The funding platform for open source software');
+      window.open('https://twitter.com/share'+to_param(options),'','width=680,height=350');
     });
 
     return element;
   });
-
-
-  /*
-  * ********************************************************
-  *
-  * These are deprecated. Use share_button and follow_button with their appropriate data attributes.
-  * TODO: go update/remove all usages of this.
-  *
-  * ********************************************************
-  * */
-  define('share_dialog_url', function(options) {
-    return "https://twitter.com/share" + to_param(options||{});
-  });
-
-  define('share_dialog_button', function(dialog_url, button_text) {
-    return a({ 'class': 'btn-auth btn-twitter', href: function() { window.open(dialog_url,'','width=680,height=350') } }, button_text || 'Share');
-  })
 };
