@@ -111,7 +111,7 @@ with (scope('Signin','App')) {
     else if (refs.email_is_registered == false) render({ into: refs.email_status_div }, "Email address not yet registered.");
 
     // password is visible unless sign up with linked account
-    (refs.account_link_id && !refs.email_is_registered ? hide : show)(refs.password_fieldset);
+    (refs.account_link_id && refs.account_link_id.match(/^(github|facebook|twitter):/) && !refs.email_is_registered ? hide : show)(refs.password_fieldset);
     render({ into: refs.password_label }, refs.email_is_registered == false ? 'Create Password:' : 'Password:');
 
     // signup fields visible only if email isn't registered
