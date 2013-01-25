@@ -1,6 +1,9 @@
 with (scope('GooglePlus','App')) {
+  var test_mode = window.navigator.userAgent == 'Selenium';
 
   initializer(function() {
+    if (test_mode) return;
+
     (function() {
       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
       po.src = 'https://apis.google.com/js/plusone.js';
@@ -10,6 +13,8 @@ with (scope('GooglePlus','App')) {
 
   // parse any google plus elements that have been inserted into the DOM
   define('process_elements', function() {
+    if (test_mode) return;
+
     window.gapi && window.gapi.plusone && window.gapi.plusone.go();
   });
 

@@ -1,6 +1,10 @@
 with (scope('Twitter','App')) {
+  var test_mode = window.navigator.userAgent == 'Selenium';
+
   // add Twitter JS library
   initializer(function() {
+    if (test_mode) return;
+
     window.twttr = (function (d,s,id) {
       var t, js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
@@ -21,14 +25,24 @@ with (scope('Twitter','App')) {
     bind_event('favorite', push_gaq_social_event);
   });
 
+  define('bind_event', function(event, callback) {
+    after_loaded(function(twttr) {
+      twttr.events.bind(event, callback);
+    });
+  });
+
   // parse any twitter elements that have been inserted into the DOM
   define('process_elements', function() {
+    if (test_mode) return;
+
     after_loaded(function(twttr) {
       twttr.widgets.load();
     });
   });
 
   define('after_loaded', function(callback) {
+    if (test_mode) callback();
+
     if (window.twttr.widgets) {
       callback(window.twttr);
     } else {
@@ -38,12 +52,6 @@ with (scope('Twitter','App')) {
         },10);
       });
     };
-  });
-
-  define('bind_event', function(event, callback) {
-    after_loaded(function(twttr) {
-      twttr.events.bind(event, callback);
-    });
   });
 
   /*

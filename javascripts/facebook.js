@@ -1,6 +1,10 @@
 with (scope('Facebook','App')) {
+  var test_mode = window.navigator.userAgent == 'Selenium';
+
   // add FB JS library
   initializer(function() {
+    if (test_mode) return;
+
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
@@ -26,12 +30,16 @@ with (scope('Facebook','App')) {
 
   // parse any facebook elements that have been inserted into the DOM
   define('process_elements', function() {
+    if (test_mode) return;
+
     after_loaded(function(FB) {
-      window.FB.XFBML.parse();
+      FB.XFBML.parse();
     });
   });
 
   define('after_loaded', function(callback) {
+    if (test_mode) callback();
+
     if (window.FB) {
       callback(window.FB);
     } else {
@@ -113,32 +121,8 @@ with (scope('Facebook','App')) {
     options['link']     = options['link']     || window.location.href;
     options['caption']  = options['caption']  || 'The funding platform for open source software';
 
-    element.addEventListener('click', curry(after_loaded, function(FB) { FB.ui(options) }));
+    !test_mode && element.addEventListener('click', curry(after_loaded, function(FB) { FB.ui(options) }));
 
     return element;
-  });
-
-  /*
-   * ********************************************************
-   *
-   * These are deprecated. Use share_button and follow_button with their appropriate data attributes.
-   * TODO: go update/remove all usages of this.
-   *
-   * ********************************************************
-   * */
-  define('share_dialog_url', function(options) {
-    var options = options || {};
-    return "https://www.facebook.com/dialog/feed?"
-      + "app_id="           + 280280945425178
-      + "&display="         + "popup"
-      + "&link="            + options.link||''
-      + "&redirect_uri="    + encode_html(BountySource.api_host+"kill_window_js")
-      + "&name="            + options.title||''
-      + "&caption="         + "BountySource is a funding platform for open-source bugs and features."
-      + "&description="     + options.description||'';
-  });
-
-  define('share_dialog_button', function(dialog_url, button_text) {
-    return a({ 'class': 'btn-auth btn-facebook', href: function() { window.open(dialog_url,'','width=680,height=350') } }, button_text || 'Share');
   });
 };
