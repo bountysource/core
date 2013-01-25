@@ -82,7 +82,7 @@ with (scope('BountySource')) {
 
   define('parsed_user_info', function() {
     try {
-      JSON.parse(Storage.get('user_info'))
+      return JSON.parse(Storage.get('user_info'))
     } catch(e) {
       console.log("ERROR PARSING USER_INFO JSON:", Storage.get('user_info'));
       return {};
