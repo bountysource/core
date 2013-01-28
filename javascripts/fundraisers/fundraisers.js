@@ -295,16 +295,20 @@ with (scope('Fundraisers','App')) {
         // show message letting the author know that this fundraiser is published
         // fundraiser.published && info_message("Your fundraiser has been published, meaning that it is now public."),
 
+        div({ style: 'text-align: left;' },
+          h4({ style: 'margin: 0 0 0 0;' }, 'Card Preview'),
+          p({ style: 'font-size: 12px' }, "This is how your fundraiser will be advertised on the home page. Click to preview full page:")
+        ),
+
+        // this is re-rendered after each save
+        a({ href: curry(preview_fundraiser, fundraiser) },
+          div({ id: 'fundraiser-card-preview' }, card(fundraiser))
+        ),
+
         grey_box(
           !fundraiser.published && div(
-            a({ 'class': 'green', 'href': curry(save_fundraiser_and_continue, fundraiser) }, 'Save and Continue'),
-            br()
+            a({ 'class': 'green', 'href': curry(save_fundraiser_and_continue, fundraiser) }, 'Next')
           ),
-
-          a({ 'class': 'green', 'href': curry(save_fundraiser, fundraiser) }, 'Save'),
-          br(),
-
-          a({ 'class': 'green', href: curry(preview_fundraiser, fundraiser) }, 'Preview'),
 
           // if it's published, add a link to the show page, which saves any changes before changing pages.
           fundraiser.published && div(
@@ -321,15 +325,7 @@ with (scope('Fundraisers','App')) {
               p({ style: 'text-align: center; margin: 15px 0 0 0;' }, "You need to provide all of the necessary data to publish your fundraiser.")
             ]
           )
-        ),
-
-        div({ style: 'text-align: center;' },
-          h4({ style: 'margin: 10px 0 0 0;' }, 'Card Preview:'),
-          p({ style: 'font-size: 12px; margin: 10px 20px;' }, "This is how your fundraiser will be advertised on the home page.")
-        ),
-
-        // this is re-rendered after each save
-        div({ id: 'fundraiser-card-preview' }, card(fundraiser))
+        )
       ),
 
       div({ 'class': 'split-end' })
@@ -377,8 +373,8 @@ with (scope('Fundraisers','App')) {
   // options.title        - the title of the block
   // options.description  - description of the inputs in the block
   define('fundraiser_block', function() {
-    var arguments = flatten_to_array(arguments),
-        options   = shift_options_from_args(arguments);
+    var arguments = flatten_to_array(arguments);
+    var options = shift_options_from_args(arguments);
     return div({ id: options.id||'', style: '#eee; border: 1px solid #ccc;' },
       div({ style: 'background: #F7F7F7; border-bottom: 1px solid #D5D5D5; padding: 20px 10px;' },
         span({ style: 'font-size: 25px;' }, options.title),
