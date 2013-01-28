@@ -41,7 +41,7 @@ with (scope('Solution', 'App')) {
             ),
 
             div({ 'class': 'split-side'},
-              Issue.card(solution.issue, { show_share_buttons: true })
+              Issue.card(solution.issue)
             ),
 
             div({ 'class': 'split-end'})
@@ -80,7 +80,7 @@ with (scope('Solution', 'App')) {
           ),
 
           div({ 'class': 'split-side'},
-            Issue.card(solution.issue, { show_share_buttons: true })
+            Issue.card(solution.issue)
           ),
 
           div({ 'class': 'split-end'})

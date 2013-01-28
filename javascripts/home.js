@@ -106,7 +106,7 @@ with (scope('Home', 'App')) {
 
       for (var j=0; j < response.data.length; j++) {
         var card = response.data[j];
-        page_state.current_cards.push(card.id)
+        page_state.current_cards.push(card.id);
 
         var target = col_container.childNodes[0];
         for (var k=1; k < col_container.childNodes.length; k++) {
@@ -123,9 +123,7 @@ with (scope('Home', 'App')) {
     });
   });
 
-  define('bounty_card', function(card, options) {
-    var options = options || {};
-
+  define('bounty_card', function(card) {
     return div({ 'class': 'card', onClick: curry(set_route, card.href) },
       div({ style: 'padding: 7px; background: #EEE; margin-bottom: 5px;' },
         a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 5px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
