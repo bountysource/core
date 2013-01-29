@@ -1,6 +1,4 @@
 with (scope('GooglePlus','App')) {
-  var test_mode = window.navigator.userAgent == 'Selenium';
-
   initializer(function() {
     if (test_mode) return;
 

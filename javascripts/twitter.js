@@ -1,6 +1,4 @@
 with (scope('Twitter','App')) {
-  var test_mode = window.navigator.userAgent == 'Selenium';
-
   // add Twitter JS library
   initializer(function() {
     if (test_mode) return;

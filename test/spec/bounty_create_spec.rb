@@ -29,6 +29,14 @@ describe "Bounty Creation" do
     # go through paypal flow
     proceed_through_paypal_sandbox_flow!
 
+    form = @browser.section(id: 'content').form
+    form.wait_until_present
+    form.text_field(name: 'email').set(CREDENTIALS["bountysource"]['email'])
+    form.button.focus
+    form.div(text: /Email address found/).wait_until_present
+    form.text_field(name: 'password').set(CREDENTIALS["bountysource"]['password'])
+    form.button.click
+
     @browser.h2(text: 'Bounty Placed').wait_until_present
   end
 end

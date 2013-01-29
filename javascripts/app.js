@@ -1,5 +1,7 @@
 with (scope('App')) {
 
+  define('test_mode', !!window.navigator.userAgent.match('Selenium'));
+
   // refresh user_info and access_token if they're logged in
   initializer(function() {
     if (Storage.get('access_token')) {

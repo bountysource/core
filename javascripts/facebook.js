@@ -1,6 +1,4 @@
 with (scope('Facebook','App')) {
-  var test_mode = window.navigator.userAgent == 'Selenium';
-
   // add FB JS library
   initializer(function() {
     if (test_mode) return;

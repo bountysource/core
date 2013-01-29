@@ -104,10 +104,6 @@ with (scope('Contributions', 'App')) {
       target_div
     );
 
-    // if the bounty ID was not subbed into the URL, just go view the issue.
-    // This will happen on Paypal cancel.
-    if (/:bounty_id/.test(bounty_id)) return set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
-
     BountySource.get_bounty(bounty_id, function(response) {
       var bounty = response.data;
 

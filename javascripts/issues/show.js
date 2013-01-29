@@ -91,7 +91,7 @@ with (scope('Issue', 'App')) {
 
       Payment.payment_box({
         item_number: 'github/' + issue.repository.full_name + '/issues/' + issue.number,
-        success_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number + '/bounties/:bounty_id/receipt',
+        success_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number + '/bounties/:item_id/receipt',
         cancel_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number
       })
     );

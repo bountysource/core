@@ -8,10 +8,10 @@ if ENV['RAILS_ENV'] == 'staging'
   API_ENDPOINT = 'qa'
   DEMO_MODE = false
 else
-  BASE_URL = 'https://www-qa.bountysource.com/'
-  #BASE_URL = 'http://www.bountysource.dev/'
-  API_ENDPOINT = 'qa'
-  #API_ENDPOINT = 'dev'
+  #BASE_URL = 'https://www-qa.bountysource.com/'
+  #API_ENDPOINT = 'qa'
+  BASE_URL = 'http://www.bountysource.dev/'
+  API_ENDPOINT = 'dev'
   DEMO_MODE = false
 end
 
@@ -33,22 +33,30 @@ def proceed_through_paypal_sandbox_flow!
     @browser.goto(url)
   end
 
+  if @browser.button(value: 'Have a PayPal account?').present?
+    @browser.button(value: 'Have a PayPal account?').click
+  end
+
+
   @buyer_credentials = CREDENTIALS["paypal"]["buyer"]
 
   @browser.text_field(id: 'login_email').wait_until_present
   @browser.text_field(id: 'login_email').set(@buyer_credentials["email"])
-  @browser.input(id: 'login_password').send_keys  @buyer_credentials["password"]
-  sleep 2
+  @browser.text_field(id: 'login_password').set(@buyer_credentials["password"])
   @browser.button(id: 'submitLogin').click
 
   @browser.checkbox(id: 'esignOpt').wait_until_present
+  sleep 1
   @browser.checkbox(id: 'esignOpt').click
-  sleep 2
   @browser.button(id: 'agree').click
 
   @browser.button(id: 'continue_abovefold').wait_until_present
-  sleep 2
+  sleep 1
   @browser.button(id: 'continue_abovefold').click
+
+  @browser.button(name: 'merchant_return_link').wait_until_present
+  sleep 1
+  @browser.button(name: 'merchant_return_link').click
 end
 
 def login_with_email!
@@ -92,11 +100,12 @@ end
 
 RSpec.configure do |config|
   config.before(:suite) do
+    user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.56 Safari/537.17 Selenium'
     if ENV['RAILS_ENV'] == 'staging'
-      capabilities = Selenium::WebDriver::Remote::Capabilities.chrome('chrome.switches' => ['--user-agent=Selenium'])
+      capabilities = Selenium::WebDriver::Remote::Capabilities.chrome('chrome.switches' => ["--user-agent='#{user_agent}'"])
       $browser = Watir::Browser.new(:remote, :url => 'http://165.225.134.232:9515/', :desired_capabilities => capabilities)
     else
-      $browser = Watir::Browser.new(:chrome, :switches => ['--user-agent=Selenium'])
+      $browser = Watir::Browser.new(:chrome, :switches => ["--user-agent='#{user_agent}'"])
     end
 
     # add a navigate method for scope.js routes
