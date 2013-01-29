@@ -1,0 +1,276 @@
+.gfm {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding: 30px; }
+
+.gfm > *:first-child {
+  margin-top: 0 !important; }
+.gfm > *:last-child {
+  margin-bottom: 0 !important; }
+
+.gfm a {
+  color: #4183C4; }
+.gfm a.absent {
+  color: #cc0000; }
+.gfm a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+.gfm h1, .gfm h2, .gfm h3, .gfm h4, .gfm h5, .gfm h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+.gfm h1:hover a.anchor, .gfm h2:hover a.anchor, .gfm h3:hover a.anchor, .gfm h4:hover a.anchor, .gfm h5:hover a.anchor, .gfm h6:hover a.anchor {
+  background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;
+  text-decoration: none; }
+
+.gfm h1 tt, .gfm h1 code {
+  font-size: inherit; }
+
+.gfm h2 tt, .gfm h2 code {
+  font-size: inherit; }
+
+.gfm h3 tt, .gfm h3 code {
+  font-size: inherit; }
+
+.gfm h4 tt, .gfm h4 code {
+  font-size: inherit; }
+
+.gfm h5 tt, .gfm h5 code {
+  font-size: inherit; }
+
+.gfm h6 tt, .gfm h6 code {
+  font-size: inherit; }
+
+.gfm h1 {
+  font-size: 28px;
+  color: black; }
+
+.gfm h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+.gfm h3 {
+  font-size: 18px; }
+
+.gfm h4 {
+  font-size: 16px; }
+
+.gfm h5 {
+  font-size: 14px; }
+
+.gfm h6 {
+  color: #777777;
+  font-size: 14px; }
+
+.gfm p, .gfm blockquote, .gfm ul, .gfm ol, .gfm dl, .gfm li, .gfm table, .gfm pre {
+  margin: 15px 0; }
+
+.gfm hr {
+  background: transparent url("../../images/modules/pulls/dirty-shade.png") repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0; }
+
+.gfm body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+.gfm body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+.gfm body > h1:first-child + h2 {
+  margin-top: 0;
+  padding-top: 0; }
+.gfm body > h3:first-child, .gfm body > h4:first-child, .gfm body > h5:first-child, .gfm body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+.gfm a:first-child h1, .gfm a:first-child h2, .gfm a:first-child h3, .gfm a:first-child h4, .gfm a:first-child h5, .gfm a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+.gfm h1 p, .gfm h2 p, .gfm h3 p, .gfm h4 p, .gfm h5 p, .gfm h6 p {
+  margin-top: 0; }
+
+.gfm li p.first {
+  display: inline-block; }
+
+.gfm ul, .gfm ol {
+  padding-left: 30px; }
+
+.gfm ul :first-child, .gfm ol :first-child {
+  margin-top: 0; }
+
+.gfm ul :last-child, .gfm ol :last-child {
+  margin-bottom: 0; }
+
+.gfm dl {
+  padding: 0; }
+.gfm dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px; }
+.gfm dl dt:first-child {
+  padding: 0; }
+.gfm dl dt > :first-child {
+  margin-top: 0; }
+.gfm dl dt > :last-child {
+  margin-bottom: 0; }
+.gfm dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px; }
+.gfm dl dd > :first-child {
+  margin-top: 0; }
+.gfm dl dd > :last-child {
+  margin-bottom: 0; }
+
+.gfm blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+.gfm blockquote > :first-child {
+  margin-top: 0; }
+.gfm blockquote > :last-child {
+  margin-bottom: 0; }
+
+.gfm table {
+  padding: 0; }
+.gfm table tr {
+  border-top: 1px solid #cccccc;
+  background-color: white;
+  margin: 0;
+  padding: 0; }
+.gfm table tr:nth-child(2n) {
+  background-color: #f8f8f8; }
+.gfm table tr th {
+  font-weight: bold;
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px; }
+.gfm table tr td {
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px; }
+.gfm table tr th :first-child, .gfm table tr td :first-child {
+  margin-top: 0; }
+.gfm table tr th :last-child, .gfm table tr td :last-child {
+  margin-bottom: 0; }
+
+.gfm img {
+  max-width: 100%; }
+
+.gfm span.frame {
+  display: block;
+  overflow: hidden; }
+.gfm span.frame > span {
+  border: 1px solid #dddddd;
+  display: block;
+  float: left;
+  overflow: hidden;
+  margin: 13px 0 0;
+  padding: 7px;
+  width: auto; }
+.gfm span.frame span img {
+  display: block;
+  float: left; }
+.gfm span.frame span span {
+  clear: both;
+  color: #333333;
+  display: block;
+  padding: 5px 0 0; }
+.gfm span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+.gfm span.align-center > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px auto 0;
+  text-align: center; }
+.gfm span.align-center span img {
+  margin: 0 auto;
+  text-align: center; }
+.gfm span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+.gfm span.align-right > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px 0 0;
+  text-align: right; }
+.gfm span.align-right span img {
+  margin: 0;
+  text-align: right; }
+.gfm span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+.gfm span.float-left span {
+  margin: 13px 0 0; }
+.gfm span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+.gfm span.float-right > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px auto 0;
+  text-align: right; }
+
+.gfm code, .gfm tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+.gfm pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: #F1F1F1; }
+
+.gfm .highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+.gfm pre {
+  background-color: #F1F1F1;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+.gfm pre code, .gfm pre tt {
+  background-color: #F1F1F1;
+  border: none; }

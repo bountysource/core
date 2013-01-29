@@ -276,8 +276,6 @@ input.autosized {
 
 .code { background: #F0F0F0; border: 1px solid #CFCFCF; padding: 10px 20px; border-radius: 2px; font-size: 12px; }
 
-.github_html p { margin: 0 0 10px 0; }
-
 .success-message  { padding: 20px 15px; margin-bottom: 15px; border-radius: 3px; background: #DFF7CB; border: 1px solid #B3CFB3; }
 .error-message    { padding: 20px 15px; margin-bottom: 15px; border-radius: 3px; background: #FFE5DF; border: 1px solid #DABABA; }
 .info-message     { padding: 20px 15px; margin-bottom: 15px; border-radius: 3px; background: #F8F8BB; border: 1px solid #E0D8B4; }

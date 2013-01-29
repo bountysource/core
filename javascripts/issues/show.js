@@ -29,8 +29,8 @@ with (scope('Issue', 'App')) {
             span({ style: issue.closed ? 'text-decoration: line-through;' : '' }, '#' + issue.number + ': ' + issue.title),
             div({ style: 'padding-left: 20px; display: inline-block;' }, Issue.status_element(issue))
           ),
-          
-          github_user_html_box({ user: issue.user, body_html: issue.body, created_at: issue.remote_created_at }),
+
+          github_user_html_box({ user: issue.user, body_html: issue.body_html, created_at: issue.remote_created_at }),
 
           issue.comments.length > 0 && div(
             h2({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 'Comments'),
@@ -71,16 +71,15 @@ with (scope('Issue', 'App')) {
     return div({ style: 'margin-bottom: -1px' },
       img({ src: user.avatar_url, style: 'width: 50px; height: 50px; float: left' }),
 
-      div({ 'class': 'github_html', style: 'margin-left: 70px; background: #f7f7f7; border-top: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; overflow: auto; padding: 10px;' },
+      div({ style: 'margin-left: 70px; background: #f7f7f7; border-top: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; overflow: auto; padding: 10px;' },
         div({ style: 'color: #b4b4b4; margin-bottom: 6px' }, user.login, ' commented ', time_ago_in_words(options.created_at), ' ago:'),
       
-        div({ html: options.body_html })
+        div({ 'class': 'gfm', html: options.body_html })
       )
     );
   });
   
   define('bounty_box', function(issue) {
-    console.log(issue)
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
