@@ -30,7 +30,7 @@ with (scope('Issue', 'App')) {
             div({ style: 'padding-left: 20px; display: inline-block;' }, Issue.status_element(issue))
           ),
 
-          github_user_html_box({ user: issue.user, body_html: issue.body_html, created_at: issue.remote_created_at }),
+          github_user_html_box({ user: issue.user, body_html: issue.body, created_at: issue.remote_created_at }),
 
           issue.comments.length > 0 && div(
             h2({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 'Comments'),
