@@ -170,9 +170,6 @@ with (scope('Fundraisers', 'App')) {
 
   define('make_pledge', function(fundraiser, form_data) {
     clear_message();
-
-    console.log(form_data);
-
     if (form_data.reward_id != 'no-reward' && isNaN(parseInt(form_data.reward_id))) {
       return render_message(error_message('Please select your reward first'));
     }

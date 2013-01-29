@@ -110,4 +110,14 @@ with (scope('Twitter','App')) {
 
     return element;
   });
+
+  /*
+   * Link Twitter to BountySource account via oauth redirect.
+   * */
+  define('auth_url', function(options) {
+    options = options || {};
+    return BountySource.api_host+'auth/twitter?scope='+(options.scope||'') +
+      '&access_token='+(Storage.get('access_token')||'') +
+      '&redirect_url='+encode_html(window.location.href); // make sure the redirect url is the last param?
+  });
 };

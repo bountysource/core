@@ -125,4 +125,14 @@ with (scope('Facebook','App')) {
 
     return element;
   });
+
+  /*
+  * Link Facebook to BountySource account via oauth redirect.
+  * */
+  define('auth_url', function(options) {
+    options = options || {};
+    return BountySource.api_host+'auth/facebook?scope='+(options.scope||'email') +
+      '&access_token='+(Storage.get('access_token')||'') +
+      '&redirect_url='+encode_html(window.location.href); // make sure the redirect url is the last param?
+  });
 };

@@ -73,7 +73,8 @@ with (scope('Home', 'App')) {
       div({ style: 'text-align: center; padding: 30px 0 20px 0' },
         span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Sign in with...'),
         a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
-        //a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px' }, "Facebook"),
+        a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px', href: Facebook.auth_url() }, "Facebook"),
+        a({ 'class': "btn-auth btn-twitter large", style: 'margin-right: 20px', href: Twitter.auth_url() }, "Twitter"),
         a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin/email' }, "Email Address")
         //div({ style: 'margin-bottom: 10px' }, a({ 'class': "btn-auth btn-google" }, "Sign in with Google"))
       )
@@ -99,14 +100,14 @@ with (scope('Home', 'App')) {
   });
 
   define('filter_cards', function(query) {
-    alert('query: ' + query);
+    // alert('query: ' + query);
     clear_cards();
     page_state.query = query;
     add_more_cards();
   });
 
   define('clear_cards', function() {
-    alert('clear cards');
+    // alert('clear cards');
     render({ into: 'column-container' },
       div({ 'class': 'card-column' }),
       div({ 'class': 'card-column' }),
@@ -225,7 +226,7 @@ with (scope('Home', 'App')) {
 
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
           a({ href: card.href, style: 'text-decoration: none; color: inherit;' },
-            span({ style: 'vertical-align: middle; font-size: 25px;' }, money(card.total_pledged)),
+            span({ style: 'vertical-align: middle; font-size: 25px;' }, money(parseInt(card.account_balance))),
             span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'of ', money(card.funding_goal||0))
           )
         ),
