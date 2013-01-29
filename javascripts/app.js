@@ -1,5 +1,14 @@
 with (scope('App')) {
 
+  // refresh user_info and access_token if they're logged in
+  initializer(function() {
+    if (Storage.get('access_token')) {
+      BountySource.user_info(function(results) {
+        BountySource.set_access_token(results.data);
+      });
+    }
+  });
+
   after_filter(function() {
     render({ target: 'global-social-buttons' },
       ul(
@@ -51,13 +60,6 @@ with (scope('App')) {
     var d = new Date(date_string),
         month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][d.getMonth()];
     return month + ' ' + d.getDate() + ', ' + d.getFullYear();
-  });
-
-  // save routes for redirect after login
-  define('save_route_for_redirect', function(route) { Storage.set('_redirect_to_after_login', route || get_route()); });
-  define('redirect_to_saved_route', function() {
-    var route = Storage.remove('_redirect_to_after_login') || '#';
-    set_route(route, { reload_page: true });
   });
 
   // use to check logged in
@@ -128,14 +130,8 @@ with (scope('App')) {
 
   // this is called by the api when missing authorization for a request.
   define('unauthorized_callback', function(request) {
-    hide('content');
-    show('signin');
-
-    before_filter(function() {
-      if (is_visible('signin')) {
-        hide('signin');
-        show('content');
-      }
-    });
+    Storage.clear({ except: ['environment'] });
+    Storage.set('_redirect_to_after_login', get_route());
+    set_route('#signin', { reload_page: true });
   })
 };

@@ -1,23 +1,8 @@
 with (scope('Payment', 'App')) {
-  define('payment_box', function(item, repository, issue_number, redirect_url) {
-    var bountysource_account_div = div();
-
-    logged_in() && BountySource.get_cached_user_info(function(user) {
-      if (user.account && user.account.balance > 0) {
-        render({ into: bountysource_account_div },
-          radio({ name: 'payment_method', value: 'personal', id: 'payment_method_account' }),
-          label({ 'for': 'payment_method_account', style: 'white-space: nowrap;' },
-            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
-            "BountySource",
-            span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
-          )
-        );
-      }
-    });
-
+  define('payment_box', function(payment_data) {
     return section({ style: 'padding: 21px' },
 
-      form({ action: curry(make_payment, item, repository, issue_number, redirect_url) },
+      form({ action: curry(make_payment, payment_data) },
 
         div({ id: 'create-bounty-errors' }),
 
@@ -28,7 +13,7 @@ with (scope('Payment', 'App')) {
 
         payment_methods({ style: 'margin: 10px 0;' }),
 
-        submit({ 'class': 'blue' }, 'Create ' + item)
+        submit({ 'class': 'blue' }, 'Create Bounty')
       )
     );
   });
@@ -94,16 +79,15 @@ with (scope('Payment', 'App')) {
     return payment_methods;
   });
 
-  define('make_payment', function(item, repository, issue_number, redirect_url, form_data) {
-    var payment_method = form_data.payment_method;
-    var amount = form_data.amount;
+  define('make_payment', function(payment_data, form_data) {
+    // load in amount and payment_method selector
+    payment_data.amount = form_data.amount;
+    payment_data.payment_method = form_data.payment_method;
 
-    BountySource.make_payment(item, repository.full_name, issue_number, amount, payment_method, redirect_url, function(response) {
+    BountySource.make_payment(payment_data, function(response) {
       if (response.meta.success) {
-        if (payment_method == 'personal') BountySource.set_cached_user_info(null);
-
-        // redirect to Paypal, Google Checkout
-        window.location.href = response.data.redirect_url;
+        if (payment_data.payment_method == 'personal') BountySource.set_cached_user_info(null);
+        set_route(response.data.redirect_url);
       } else {
         render({ target: 'create-bounty-errors' }, error_message(response.data.error));
       }

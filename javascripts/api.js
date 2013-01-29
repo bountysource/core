@@ -141,9 +141,8 @@ with (scope('BountySource')) {
     api('/overview', callback);
   });
 
-  define('make_payment', function(item, repo_full_name, issue_number, amount, payment_method, redirect_url, callback) {
-    var url = '/github/repos/'+repo_full_name + (item == 'Bounty' ? '/issues/'+issue_number+'/bounties' : '/donate');
-    api(url, 'POST', { amount: amount, payment_method: payment_method, redirect_url: redirect_url }, callback);
+  define('make_payment', function(data, callback) {
+    api('/payments', 'POST', data, callback);
   });
 
   define('get_user_repositories', function(callback) {
@@ -196,10 +195,6 @@ with (scope('BountySource')) {
 
   define('destroy_fundraiser', function(id, callback) {
     api('/user/fundraisers/'+id, 'DELETE', callback);
-  });
-
-  define('make_pledge', function(fundraiser_id, data, callback) {
-    api('/user/fundraisers/'+fundraiser_id+'/pay_in', 'POST', data, callback);
   });
 
   define('get_more_cards', function(ignore, callback) {

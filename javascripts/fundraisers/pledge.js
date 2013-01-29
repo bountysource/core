@@ -177,13 +177,18 @@ with (scope('Fundraisers', 'App')) {
       return render_message(error_message('Please select your reward first'));
     }
 
-    // build the redirect_url, with pledge_id placeholder
-    form_data.redirect_url = form_data.redirect_url || BountySource.www_host+'#fundraisers/'+fundraiser.id+'/pledges/:pledge_id/receipt';
+    var payment_data = {
+      amount:  form_data.amount,
+      payment_method: form_data.payment_method,
+      item_number: 'fundraisers/' + fundraiser.id + (parseInt(form_data.reward_id) > 0 ? '/'+form_data.reward_id : ''),
+      success_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledges/:item_id/receipt',
+      cancel_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id
+    };
 
-    BountySource.make_pledge(fundraiser.id, form_data, function(response) {
+    BountySource.make_payment(payment_data, function(response) {
       if (response.meta.success) {
         if (form_data.payment_method == 'personal') BountySource.set_cached_user_info(null);
-        window.location.href = response.data.redirect_url;
+        set_route(response.data.redirect_url);
       } else {
         render_message(error_message(response.data.error));
       }

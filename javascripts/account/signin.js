@@ -132,19 +132,34 @@ with (scope('Signin','App')) {
     });
   });
 
+  define('save_user_data_and_redirect', function(response) {
+    var redirect_url = null;
+
+    if (response.data.redirect_url) {
+      redirect_url = response.data.redirect_url;
+      delete response.data.redirect_url;
+    } else if (Storage.get('_redirect_to_after_login')) {
+      redirect_url = Storage.get('_redirect_to_after_login');
+      Storage.clear('_redirect_to_after_login');
+    } else {
+      redirect_url = '#';
+    }
+
+    BountySource.set_access_token(response.data);
+    set_route(redirect_url, { reload_page: true });
+  });
+
   define('process_signin_form', function(refs, form_data) {
     render({ into: refs.error_div });
 
     BountySource.login(form_data, function(response) {
       if (response.meta.success) {
-        BountySource.set_access_token(response.data);
-        redirect_to_saved_route();
+        save_user_data_and_redirect(response);
       } else if (!response.data.email_is_registered && is_visible(refs.signup_fields)) {
         // email isn't registered and the signup fields were visible when they clicked... try to create an account
         BountySource.create_account(form_data, function(response) {
           if (response.meta.success) {
-            BountySource.set_access_token(response.data);
-            redirect_to_saved_route();
+            save_user_data_and_redirect(response);
           } else {
             render({ into: refs.error_div }, error_message(response.data.error));
           }
@@ -233,8 +248,7 @@ with (scope('Signin','App')) {
 
     if (params.status == 'linked') {
       // now they're logged in with this github account
-      BountySource.set_access_token(params.access_token);
-      redirect_to_saved_route();
+      save_user_data_and_redirect({ data: params.access_token });
     } else if (params.status == 'error_needs_account') {
       render(
         breadcrumbs(a({ href: '#' }, 'Home'), 'Sign In'),

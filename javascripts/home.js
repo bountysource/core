@@ -174,7 +174,7 @@ with (scope('Home', 'App')) {
   });
 
   define('fundraiser_card', function(card) {
-    var funding_percentage = parseFloat(100 * (card.account_balance / card.funding_goal));
+    var funding_percentage = parseFloat(100 * (card.total_pledged / card.funding_goal));
 
     var card_element = div({ 'class': 'card' },
       div({ style: 'padding: 7px; background: #EEE; border-radius: 3px;' },
@@ -202,7 +202,7 @@ with (scope('Home', 'App')) {
 
         div({ style: 'display: inline-block; width: 50%; vertical-align: middle;'},
           a({ href: card.href, style: 'text-decoration: none; color: inherit;' },
-            span({ style: 'vertical-align: middle; font-size: 25px;' }, money(card.account_balance)),
+            span({ style: 'vertical-align: middle; font-size: 25px;' }, money(card.total_pledged)),
             span({ style: 'font-size: 14px; margin: 3px 0 0 5px; display: block;' }, 'of ', money(card.funding_goal||0))
           )
         ),

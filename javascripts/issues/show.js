@@ -80,6 +80,7 @@ with (scope('Issue', 'App')) {
   });
   
   define('bounty_box', function(issue) {
+    console.log(issue)
     return div({ id: 'bounty-box' },
       div({ style: 'padding: 0 21px' }, ribbon_header("Backers")),
       
@@ -87,7 +88,12 @@ with (scope('Issue', 'App')) {
         div({ 'class': 'total_bounties' }, money(issue.bounty_total)),
         div({ style: 'text-align: center' }, "From ", issue.bounties.length, " bount" + (issue.bounties.length == 1 ? 'y' : 'ies') + ".")
       ),
-      Payment.payment_box('Bounty', issue.repository, issue.number, window.location.href+'/bounties/:bounty_id/receipt')
+
+      Payment.payment_box({
+        item_number: 'github/' + issue.repository.full_name + '/issues/' + issue.number,
+        success_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number + '/bounties/:bounty_id/receipt',
+        cancel_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number
+      })
     );
   });
   
