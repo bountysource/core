@@ -58,11 +58,11 @@ with (scope('Home', 'App')) {
   });
 
   define('card_filter_box', function() {
-    return div({ style: 'text-align: center; padding: 30px 0 30px 0;' },
+    return div({ style: 'text-align: center; padding: 10px; margin: 20px 0 10px 0; background: #F2F3F2; border: 10px solid white; box-shadow: #CCC8BE 0px 0px 5px' },
       span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic; padding: 0 25px'}, 'Filter:'),
 
       form({ style: 'display: inline', action: function(form_data) { filter_cards(form_data.query) } },
-        text({ name: 'query', style: 'width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;' }),
+        text({name: 'query', placeholder: 'JavaScript', style: 'width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;' }),
         submit({ value: 'Search', 'class': 'green', style: 'width: 80px; margin-left: 3px;' })
       )
     )
