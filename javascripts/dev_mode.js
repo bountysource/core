@@ -1,7 +1,8 @@
 with (scope()) {
   initializer(function() {
     // NOTE: this is read before Storage.namespace is set, so it won't get prefixed
-    var environment = (navigator.userAgent == 'Selenium') ? 'test' : (Storage.get('environment') || 'prod');
+    //var environment = (navigator.userAgent == 'Selenium') ? 'test' : (Storage.get('environment') || 'prod');
+    var environment = Storage.get('environment') || 'prod';
 
     switch (environment) { 
       case 'dev':
