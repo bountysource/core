@@ -291,6 +291,7 @@
     background-image: linear-gradient(#f1f5f7, rgba(255,255,255,0));
     -webkit-box-shadow: inset 0 1px 0 #fff;
     box-shadow: inset 0 1px 0 #fff;
+    text-shadow: 1px 1px #fff;
 }
 
 .btn-twitter:hover,
