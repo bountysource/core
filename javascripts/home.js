@@ -18,18 +18,14 @@ with (scope('Home', 'App')) {
     render({ into: 'before-content' },
       section({ id: 'homepage' },
         (logged_in() ? homepage_box_authed : homepage_box)(),
-      
-        div({ id: 'column-container' },
-          div({ 'class': 'card-column' }),
-          div({ 'class': 'card-column' }),
-          div({ 'class': 'card-column' }),
-          div({ 'class': 'card-column' })
-        ),
+        card_filter_box(),
+        div({ id: 'column-container' }),
         div({ style: 'clear: both' }),
         div({ id: 'card-loader-div' }, 'Loading...')
       )
     );
 
+    clear_cards();
     add_more_cards();
     check_scroll_to_see_if_we_need_more_cards();
   });
@@ -59,6 +55,17 @@ with (scope('Home', 'App')) {
       recent_people_div,
       div({ style: 'clear: both' })
     );
+  });
+
+  define('card_filter_box', function() {
+    return div({ style: 'text-align: center; padding: 30px 0 30px 0;' },
+      span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic; padding: 0 25px'}, 'Filter:'),
+
+      form({ style: 'display: inline', action: function(form_data) { filter_cards(form_data.query) } },
+        text({ name: 'query', style: 'width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;' }),
+        submit({ value: 'Search', 'class': 'green', style: 'width: 80px; margin-left: 3px;' })
+      )
+    )
   });
 
   define('homepage_box', function() {
@@ -91,6 +98,22 @@ with (scope('Home', 'App')) {
     );
   });
 
+  define('filter_cards', function(query) {
+    alert('query: ' + query);
+    clear_cards();
+    page_state.query = query;
+    add_more_cards();
+  });
+
+  define('clear_cards', function() {
+    alert('clear cards');
+    render({ into: 'column-container' },
+      div({ 'class': 'card-column' }),
+      div({ 'class': 'card-column' }),
+      div({ 'class': 'card-column' }),
+      div({ 'class': 'card-column' })
+    );
+  });
 
   define('add_more_cards', function() {
     if (!page_state.can_load_more_cards) return;
@@ -100,7 +123,7 @@ with (scope('Home', 'App')) {
 //    _gaq.push(['_trackEvent', 'Homepage', 'Show More Cards']);
 
     page_state.can_load_more_cards = false;
-    BountySource.get_more_cards(page_state.current_cards, function(response) {
+    BountySource.get_more_cards(page_state.current_cards, page_state.query, function(response) {
       var col_container = document.getElementById('column-container');
       if (!col_container) return;
 

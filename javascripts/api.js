@@ -197,8 +197,8 @@ with (scope('BountySource')) {
     api('/user/fundraisers/'+id, 'DELETE', callback);
   });
 
-  define('get_more_cards', function(ignore, callback) {
-    api('/cards', 'GET', { ignore: ignore }, callback);
+  define('get_more_cards', function(ignore, query, callback) {
+    api('/cards', 'GET', { ignore: ignore, query: query }, callback);
   });
 
   define('recent_people', function(callback) {
