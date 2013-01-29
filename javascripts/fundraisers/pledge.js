@@ -43,13 +43,15 @@ with (scope('Fundraisers', 'App')) {
             ),
 
             // rewards table
-            (fundraiser.rewards.length > 0) && fieldset(
+            fieldset(
               input({ id: 'reward-id', type: 'hidden', name: 'reward_id' }),
 
               label('Select Reward:'),
               div({ id: 'fundraiser-rewards', style: 'vertical-align: top; width: 500px;' },
                 // No Reward option
-                reward_row({ description: "No reward please, I just want to help out!" }),
+                reward_row({
+                  description: "No reward please, I just want to help out!"
+                }),
 
                 // populate the table with the actual rewards
                 fundraiser.rewards.map(function(reward) {
@@ -69,6 +71,9 @@ with (scope('Fundraisers', 'App')) {
         var e = document.getElementById('reward_'+params.reward_id+'_wrapper');
         if (e) e.click();
       }
+
+      // if there are no rewards, automatically select the "No reward" options, which is always present.
+      if (fundraiser.rewards.length <= 0) document.getElementById('fundraiser-rewards').children[0].click();
 
       // if logged in and account has money, render bountysource account radio
       logged_in() && BountySource.get_cached_user_info(function(user) {
