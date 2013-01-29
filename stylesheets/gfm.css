@@ -34,7 +34,6 @@
   position: relative; }
 
 .gfm h1:hover a.anchor, .gfm h2:hover a.anchor, .gfm h3:hover a.anchor, .gfm h4:hover a.anchor, .gfm h5:hover a.anchor, .gfm h6:hover a.anchor {
-  /*background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;*/
   text-decoration: none; }
 
 .gfm h1 tt, .gfm h1 code {
@@ -81,7 +80,6 @@
   margin: 15px 0; }
 
 .gfm hr {
-  /*background: transparent url("../../images/modules/pulls/dirty-shade.png") repeat-x 0 0;*/
   border: 0 none;
   color: #cccccc;
   height: 4px;
