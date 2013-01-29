@@ -105,7 +105,7 @@ with (scope('Fundraisers')) {
           )
         ),
 
-        (fundraiser.rewards.length > 0) && section({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px;' },
+        (fundraiser.rewards.length > 0) && section({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px; width: 100%;' },
           fundraiser.rewards.map(function(reward) {
             var reward_row_element = div(
               span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
