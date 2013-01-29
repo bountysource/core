@@ -80,6 +80,7 @@ section#homepage .round-avatar { float: left; }
 
 .card { background: white; padding: 10px; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px; border: 1px solid white }
 .card:hover { box-shadow: 0 0 10px #B38735; border: 1px solid #E0AB45; cursor: pointer }
+.card.fundraiser:hover { box-shadow: 0 0 10px #59AA2C; border: 1px solid #9ADA8A; cursor: pointer }
 
 .card .inner { overflow: hidden }
 #card-loader-div { background: white; padding: 20px 0; margin: 20px 0; box-shadow: 0 0 5px #ccc8be; font-size: 20px; text-align: center; color: #aaa; font-style: italic }

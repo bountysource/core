@@ -200,9 +200,11 @@ with (scope('Home', 'App')) {
   define('fundraiser_card', function(card) {
     var funding_percentage = parseFloat(100 * (card.total_pledged / card.funding_goal));
 
-    var card_element = div({ 'class': 'card' },
-      div({ style: 'padding: 7px; background: #EEE; border-radius: 3px;' },
-        div({ style: 'font-size: 16px; font-weight: bold;' }, a({ href: card.href, style: 'color: #333;' }, card.title))
+    var card_element = div({ 'class': 'card fundraiser' },
+      div({ style: 'padding: 7px; background: #DFF7CB; border-radius: 3px;' },
+        div({ style: 'font-size: 16px; font-weight: bold;' }, a({ href: card.href, style: 'color: #086D14;' },
+          'Fundraiser: ', card.title
+        ))
       ),
 
       card.image_url && div({ style: 'text-align: center; margin-top: 10px;' },
