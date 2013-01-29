@@ -10,8 +10,8 @@ with (scope('Signin','App')) {
         h1("Sign In to BountySource using:"),
         div({ style: 'margin: 20px 0' },
           a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
-          a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px' }, "Facebook"),
-          a({ 'class': "btn-auth btn-twitter large", style: 'margin-right: 20px' }, "Twitter"),
+          a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px', href: Facebook.auth_url() }, "Facebook"),
+          a({ 'class': "btn-auth btn-twitter large", style: 'margin-right: 20px', href: Twitter.auth_url() }, "Twitter"),
           a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin/email' }, "Email Address")
         ),
         p("Remember, we will never sell your email address or post anything without your permission!")
