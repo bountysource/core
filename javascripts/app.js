@@ -17,7 +17,7 @@ with (scope('App')) {
         li({ style: 'height: 20px;' }, Twitter.follow_button),
         // li({ style: 'height: 20px;' }, Facebook.follow_button),
         li({ style: 'height: 20px;' }, Twitter.share_button),
-        li({ style: 'width: 100px;' }, Facebook.like_button({ 'data-layout': 'button_count' })),
+        li({ style: 'width: 100px;' }, Facebook.like_button({ 'data-layout': 'button_count', style: 'z-index: 3;' })),
         li(GooglePlus.like_button)
       )
     );
