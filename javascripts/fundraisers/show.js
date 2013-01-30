@@ -1,5 +1,10 @@
 with (scope('Fundraisers')) {
-  route('#fundraisers/:fundraiser_id', function(fundraiser_id) {
+
+  // Note: fundraiser identifier will either be just an ID, or and ID with a concatenated title string
+  route('#fundraisers/:identifier', function(identifier) {
+    var identifier_parts  = identifier.split('-'),
+        fundraiser_id     = parseInt(identifier_parts.shift());
+
     var fundraiser_div = div('Loading...');
     var target_div = div(
       breadcrumbs(
@@ -15,6 +20,11 @@ with (scope('Fundraisers')) {
     BountySource.get_fundraiser(fundraiser_id, function(response) {
       if (response.meta.success) {
         var fundraiser = response.data;
+
+        // if the identifier is not pretty, make it so by redirecting
+        var pretty_route = Fundraisers.get_href(fundraiser);
+        if (fundraiser.title && pretty_route != get_route()) return set_route(pretty_route);
+
         render({ into: fundraiser_div }, fundraiser_template(fundraiser));
       } else {
         render({ target: 'breadcrumbs-fundraiser-title' }, 'Oh no!');

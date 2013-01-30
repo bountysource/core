@@ -4,8 +4,15 @@ with (scope('Fundraisers','App')) {
     return logged_in() && person && parseInt(person.id) == parseInt((Storage.get('access_token')||'').split('.')[0]);
   });
 
+  /*
+  * Get the pretty route, which uses the title of the fundraiser joined by dashes, made URL safe.
+  *
+  * Example Usage:
+  * var fundraiser = { id: 1, title: 'My awesome fundraiser & it is URL safe: __waste__of__space_____' };
+  * Fundraiser.get_href(fundraiser) //=> '#fundraisers/1/my-awesome-fundraiser-it-is-url-safe-waste-of-space'
+  * */
   define('get_href', function(fundraiser) {
-    return '#fundraisers/'+fundraiser.id;
+    return pretty_url('#fundraisers/'+fundraiser.id+'-', fundraiser.title);
   });
 
   define('card', function(fundraiser) {
@@ -41,7 +48,7 @@ with (scope('Fundraisers','App')) {
             response.data.map(function(fundraiser) {
               // depends on whether or not it's published
               return tr({ style: 'height: 40px;' },
-                td(a({ href: '#fundraisers/'+fundraiser.id }, abbreviated_text(fundraiser.title, 100))),
+                td(a({ href: Fundraisers.get_href(fundraiser) }, abbreviated_text(fundraiser.title, 100))),
                 td(money(fundraiser.funding_goal || 0)),
                 td(fundraiser.published && percentage((fundraiser.total_pledged / fundraiser.funding_goal) * 100)),
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
@@ -314,7 +321,7 @@ with (scope('Fundraisers','App')) {
           fundraiser.published && div(
             br(),
             a({ 'class': 'blue', href: function() {
-              save_fundraiser(fundraiser, function() { set_route('#fundraisers/'+fundraiser.id); })
+              save_fundraiser(fundraiser, function() { set_route(Fundraisers.get_href(fundraiser)); })
             } }, 'Published Fundraiser')
           ),
 

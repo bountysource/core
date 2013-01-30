@@ -69,7 +69,7 @@ with (scope('Contributions', 'App')) {
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                     img({ src: pledge.fundraiser.avatar_url, style: 'width: 50px;' })
                   ),
-                  td(a({ href: '#fundraisers/'+pledge.fundraiser.id }, pledge.fundraiser.title)),
+                  td(a({ href: Fundraisers.get_href(pledge.fundraiser) }, pledge.fundraiser.title)),
                   td(money(pledge.amount)),
                   td(date(pledge.created_at))
                 )

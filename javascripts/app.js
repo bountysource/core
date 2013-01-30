@@ -26,6 +26,37 @@ with (scope('App')) {
     Facebook.process_elements();
   });
 
+  /*
+   * Get the pretty route, which uses the base string, with a character white listed version of the
+   * source string appended to it.
+   *
+   * Example Usage:
+   *
+   * pretty_route('#fundraisers/1/', 'My awesome fundraiser: it is URL safe ______waste__of___space______')
+   *  //=> '#fundraisers/1/my-awesome-fundraiser-it-is-url-safe-waste-of-space'
+   *
+   * pretty_route('#fundraisers/1/', 'My awesome fundraiser: it is URL safe ______waste__of___space______', 30)
+   *  //=> '#fundraisers/1/my-awesome'
+   *  // doesn't append 'fundraiser' because that would put the route length over 30 characters
+   * */
+  define('pretty_url', function(base_string, source_string, max_route_length) {
+    var parts           = (source_string.split(/\s+/)),
+        new_route_parts   = [],
+        route             = base_string,
+        new_part;
+
+    // add title parts onto route until length at max
+    while (parts.length > 0 && (new_route_parts.join('-').length + route.length) <= (max_route_length || 100)) {
+      new_part = parts.shift();
+      new_part = new_part.replace(/[^0-9a-z\-_]/gi,''); // white list URL safe characters
+      new_part = new_part.replace(/(-|_){1,}/g, '-');   // reduce duplicate hyphens, replace underscores with hyphens
+
+      // lower case dat part
+      if (!new_part.match(/^-$/)) new_route_parts.push(new_part.toLowerCase());
+    }
+    return base_string+(new_route_parts.join('-')).toLowerCase();
+  });
+
   define('time_ago_in_words', function(time) {
     var distance_in_milliseconds = (typeof(time) == "string" ? (new Date(time)) : time) - (new Date());
     var distance_in_minutes = parseInt(Math.abs(distance_in_milliseconds / 60000));
