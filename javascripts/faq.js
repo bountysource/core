@@ -69,7 +69,7 @@ with (scope('Faq', 'App')) {
           ),
 
           dt("How does BountySource work?"),
-          dd("It begins with a backer (or group of backers) creating a bounty on a pre-existing GitHub issue (typically a feature request or bug fix). Then, developers can come to BountySource, browse through bounties and begin working on an issue they know they can solve."),
+          dd("It begins with a backer (or group of backers) creating a bounty on an open GitHub issue (typically a feature request or bug fix). Then, developers can come to BountySource, browse through bounties and begin working on an issue they know they can solve."),
           dd("Once a developer finishes working on the fix, he or she will submit a pull request. When and if a committer accepts the pull request, the developer is awarded the bounty."),
       
           dt("...so, what's my role in all of this?"),
@@ -131,7 +131,7 @@ with (scope('Faq', 'App')) {
           dd("You can receive payment via Paypal or a physical check. Before collecting a bounty, you need to fill out the Payment Information portion of your profile."),
 
           dt("What does it cost to collect a bounty?"),
-          dd("BountySource charges a 10% non-refundable fee upon payout. This covers costs like credit card processing fees, servers, bandwidth, and other expenses."),
+          dd("Upon payout, BountySource will charge a 5% fee in addition to payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses."),
         
           dt("What can I do with my earnings?"),
           dd('What you do with your money is completely up to you. You can either collect your full 90%, or make a donation to charity. We support charities like ', a({ href: 'https://www.eff.org/', target: 'blank' }, "EFF"), "."),    
@@ -192,7 +192,7 @@ with (scope('Faq', 'App')) {
           //dd("You can shorten the time limit on your bounty for a fee."),
       
           dt("Does 100% of my bounty go to the developer?"),
-          dd("No. BountySource charges a 10% non-refundable fee during bounty payout. Our fee covers costs like credit card processing fees, servers, bandwidth, and other expenses.")
+          dd("Upon payout, BountySource will charge a 5% fee in addition to payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses.")
         )
       )
     );
