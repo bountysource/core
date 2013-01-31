@@ -11,6 +11,7 @@ with (scope('App')) {
     }
   });
 
+  // update social buttons
   after_filter(function() {
     render({ target: 'global-social-buttons' },
       ul(
