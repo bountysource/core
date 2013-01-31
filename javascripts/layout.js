@@ -49,7 +49,7 @@ with (scope('App')) {
   define('default_layout', function(yield) {
     if (!scope.rendered_default_layout) {
       scope.rendered_default_layout_inner = section({ id: 'content' });
-      scope.rendered_default_layout = section({ id: 'wrapper' },
+      scope.rendered_default_layout = section({ id: 'wrapper', onDoubleClick: function() { alert('hi') } },
         div({ id: 'fb-root' }),
 
         header(
