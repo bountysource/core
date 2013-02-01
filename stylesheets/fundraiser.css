@@ -19,7 +19,7 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
 #milestone-table tr#milestone-inputs  { background: #D8FDD8; }
 
 #rewards-table tr#reward-inputs         { height: 230px; background: #D8FDD8; }
-#rewards-table tr textarea              { width: 205px; height: 200px; }
+#rewards-table tr textarea              { width: 200px; height: 200px; }
 #rewards-table tr #description-wrapper  { display: inline-block; padding: 10px; min-height: 50px; width: 250px; border-radius: 3px; margin: 20px 0 20px 20px; vertical-align: top; background: white; border: 1px solid #B9DABE; }
 #rewards-table tr.editable              { height: 100px; background: #E7FDE7; }
 #rewards-table tr.editable #description { width: 240px; }

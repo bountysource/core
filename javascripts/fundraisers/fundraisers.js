@@ -141,13 +141,23 @@ with (scope('Fundraisers','App')) {
         select_fundraiser_form_section(fundraiser, 'basic-info');
         initialize_short_description_character_counter();
 
-        // if any of the inputs are changed, set the autosave
-        flatten_to_array([
-          flatten_to_array(document.getElementsByTagName('input')),
-          flatten_to_array(document.getElementsByTagName('textarea'))
-        ]).forEach(function(input) {
-          input.addEventListener('keydown', function() { Fundraisers.save_necessary = true; });
-        });
+        // if any of the inputs are changed, set autosave.
+        var elements_lists = [
+          document.getElementsByTagName('input'),
+          document.getElementsByTagName('textarea')
+        ];
+        for (var i=0; i<elements_lists.length; i++) {
+          for (var j=0; j<elements_lists[i].length; j++) {
+            elements_lists[i][j].addEventListener('keydown', function() {
+              Fundraisers.save_necessary = true;
+            });
+
+            // save on blur of all inputs
+            elements_lists[i][j].addEventListener('blur', function(e) {
+              save_fundraiser(fundraiser);
+            });
+          }
+        }
 
         // autosave poll
         LongPoll.execute(function() {
@@ -184,8 +194,7 @@ with (scope('Fundraisers','App')) {
       placeholder:  fundraiser.min_days_open,
       value:        fundraiser.days_open || fundraiser.min_days_open,
       min:          fundraiser.min_days_open,
-      max:          fundraiser.max_days_open,
-      validation:   true
+      max:          fundraiser.max_days_open
     });
 
     var end_by_date = new Date((new Date()).getTime() + 1000*60*60*24*parseInt(days_open_input.value));
@@ -196,7 +205,7 @@ with (scope('Fundraisers','App')) {
       render({ into: end_by_date_element }, formatted_date(end_by_date));
     });
 
-    var fundraiser_edit_form = div(
+    return div(
       fundraiser_form_nav(
         li({ id: 'nav-basic-info', onclick: curry(select_fundraiser_form_section, fundraiser, 'basic-info') },
           'Basic Info'
@@ -310,7 +319,7 @@ with (scope('Fundraisers','App')) {
 
                   textarea({
                     id:           'reward-input-description',
-                    style:        'width: 205px; display: inline-block;',
+                    style:        'width: 200px; display: inline-block;',
                     placeholder:  'Description of the reward'
                   })
                 ),
@@ -376,17 +385,6 @@ with (scope('Fundraisers','App')) {
 
       div({ 'class': 'split-end' })
     );
-
-    // save on blur of all inputs
-    var elements = flatten_to_array(
-      fundraiser_edit_form.getElementsByTagName('input'),
-      fundraiser_edit_form.getElementsByTagName('textarea')
-    );
-    for (var i=0; i<elements.length; i++) elements[i].addEventListener('blur', function(e) {
-      if (e.target.validity && e.target.validity.valid) save_fundraiser(fundraiser);
-    });
-
-    return fundraiser_edit_form;
   });
 
   define('populate_fundraiser_form_tables', function(fundraiser) {
@@ -483,6 +481,9 @@ with (scope('Fundraisers','App')) {
   define('save_fundraiser', function(fundraiser, callback) {
     // Fake a page view for Analytics
     _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/save']);
+
+    // return if the form is not present
+    if (!document.getElementById('fundraiser-form')) return;
 
     // collect form data from inputs
     var form_data = {
