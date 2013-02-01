@@ -519,16 +519,16 @@ with (scope('Fundraisers','App')) {
     render({ target: 'fundraiser-edit-errors' },'');
 
     BountySource.update_fundraiser(fundraiser.id, form_data, function(response) {
-      if (response.meta.success) {
-        show('fundraiser-publish-button');
+      // show/hide the publish button
+      (response.meta.success && response.data.publishable) ? show('fundraiser-publish-button') : hide('fundraiser-publish-button');
 
+      if (response.meta.success) {
         // reset autosave flag
         Fundraisers.save_necessary = false;
 
         // render updated card preview
         render({ target: 'fundraiser-card-preview' }, card(response.data));
       } else {
-        hide('fundraiser-publish-button');
         render({ target: 'fundraiser-edit-errors' }, small_error_message(response.data.error));
       }
 
