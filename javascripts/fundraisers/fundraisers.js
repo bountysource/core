@@ -138,7 +138,7 @@ with (scope('Fundraisers','App')) {
         );
 
         populate_fundraiser_form_tables(fundraiser);
-        select_fundraiser_form_section(fundraiser_id, 'basic-info');
+        select_fundraiser_form_section(fundraiser, 'basic-info');
         initialize_short_description_character_counter();
 
         // if any of the inputs are changed, set the autosave
@@ -178,39 +178,61 @@ with (scope('Fundraisers','App')) {
 
   // return a giant div containing fundraiser nav and form.
   define('fundraiser_edit_form', function(fundraiser) {
-    return div(
+    var days_open_input = number({
+      name:         'days_open',
+      style:        'width: 50px;',
+      placeholder:  fundraiser.min_days_open,
+      value:        fundraiser.days_open || fundraiser.min_days_open,
+      min:          fundraiser.min_days_open,
+      max:          fundraiser.max_days_open,
+      validation:   true
+    });
+
+    var end_by_date = new Date((new Date()).getTime() + 1000*60*60*24*parseInt(days_open_input.value));
+    var end_by_date_element = span(formatted_date(end_by_date));
+
+    days_open_input.addEventListener('change', function(e) {
+      var end_by_date = new Date((new Date()).getTime() + 1000*60*60*24*parseInt(e.target.value));
+      render({ into: end_by_date_element }, formatted_date(end_by_date));
+    });
+
+    var fundraiser_edit_form = div(
       fundraiser_form_nav(
-        li({ id: 'nav-basic-info', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'basic-info') },
+        li({ id: 'nav-basic-info', onclick: curry(select_fundraiser_form_section, fundraiser, 'basic-info') },
           'Basic Info'
         ),
-        li({ id: 'nav-description', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'description') },
+        li({ id: 'nav-description', onclick: curry(select_fundraiser_form_section, fundraiser, 'description') },
           'Description'
         ),
 
 // TODO bring back about me
-//        li({ id: 'nav-about-me', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'about-me') },
+//        li({ id: 'nav-about-me', onclick: curry(select_fundraiser_form_section, fundraiser, 'about-me') },
 //          'About Me'
 //        ),
 
-        li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'rewards') },
+        li({ id: 'nav-rewards', onclick: curry(select_fundraiser_form_section, fundraiser, 'rewards') },
           'Rewards'
         ),
 
         // don't show the funding goal edit field if published, since it cannot be updated.
-        !fundraiser.published && li({ id: 'nav-funding-details', onclick: curry(select_fundraiser_form_section, fundraiser.id, 'funding-details') },
+        !fundraiser.published && li({ id: 'nav-funding-details', onclick: curry(select_fundraiser_form_section, fundraiser, 'funding-details') },
           'Funding'
+        ),
+
+        !fundraiser.published && li({ id: 'nav-duration', onclick: curry(select_fundraiser_form_section, fundraiser, 'duration') },
+          'Duration'
         )
       ),
 
       div({ id: 'fundraiser-edit-errors', style: 'height: 40px;' }),
 
       div({ 'class': 'split-main' },
-        form({ id: 'fundraiser-form', 'class': 'fancy' },
+        form({ id: 'fundraiser-form', 'class': 'fancy', action: function(){} },
           fundraiser_block({ id: 'basic-info', title: 'Basic Information', description: "Provide some basic information about your proposal." },
             div({ style: 'padding: 20px 10px; background: #eee;' },
               fieldset(
                 label('Title:'),
-                input({ name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'' })
+                input({ name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'', required: true })
               ),
               fieldset(
                 label('Banner Image:'),
@@ -226,7 +248,9 @@ with (scope('Fundraisers','App')) {
               ),
               fieldset(
                 label('Short Description:', br(), span({ id: 'short-description-character-count', style: 'font-size: 80%;' })),
-                textarea({ id: 'short-description', name: 'short_description', style: 'width: 392px; height: 150px; line-height: 18px;', placeholder: "Brief description of your fundraiser. Must be 140 characters or less." }, fundraiser.short_description||'')
+                textarea({ id: 'short-description', name: 'short_description', style: 'width: 392px; height: 150px; line-height: 18px;', placeholder: "Brief description of your fundraiser. Must be 140 characters or less." },
+                  fundraiser.short_description || ''
+                )
               )
             )
           ),
@@ -234,7 +258,9 @@ with (scope('Fundraisers','App')) {
           fundraiser_block({ id: 'description', title: 'Description', description: div("Convince people to contribute. Why is your project interesting and worthy of funding? Formatted with ", a({ target: '_blank', href: 'http://github.github.com/github-flavored-markdown/' }, "GitHub Flavored Markdown.")) },
             div({ style: 'padding: 20px 10px; background: #eee;' },
               fieldset(
-                textarea({ name: 'description', style: 'width: 630px; height: 600px; line-height: 18px;', placeholder: "Very thorough description of your fundraiser proposal." }, fundraiser.description||'')
+                textarea({ name: 'description', style: 'width: 630px; height: 600px; line-height: 18px;', placeholder: "Very thorough description of your fundraiser proposal." },
+                  fundraiser.description || ''
+                )
               )
             )
           ),
@@ -252,7 +278,7 @@ with (scope('Fundraisers','App')) {
             div({ style: 'padding: 20px 10px; background: #eee;' },
               fieldset(
                 label('Funding Goal:'),
-                span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), input({ name: 'funding_goal', placeholder: '50,000', value: formatted_number(fundraiser.funding_goal||'') })
+                span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'), number({ name: 'funding_goal', placeholder: '50,000', value: formatted_number(fundraiser.funding_goal||'') })
               ),
               fieldset(
                 label('Payout Method:'),
@@ -273,12 +299,12 @@ with (scope('Fundraisers','App')) {
                     fieldset(
                       label('Amount:'),
                       span({ style: 'font-size: 25px; padding-right: 5px; vertical-align: middle;' }, '$'),
-                      input({ id: 'reward-input-amount', style: 'width: 100px;', placeholder: 100 })
+                      number({ id: 'reward-input-amount', style: 'width: 100px;', placeholder: 100 })
                     ),
 
                     fieldset(
                       label('Quantity:'),
-                      input({ id: 'reward-input-quantity', placeholder: 'Unlimited', style: 'width: 100px; margin-left: 18px;' })
+                      number({ id: 'reward-input-quantity', placeholder: 'Unlimited', style: 'width: 100px; margin-left: 18px;' })
                     )
                   ),
 
@@ -292,6 +318,20 @@ with (scope('Fundraisers','App')) {
                 td({ style: 'width: 100px;' },
                   a({ 'class': 'green', href: push_reward_row_from_inputs, style: 'width: 90px;' }, 'Add')
                 )
+              )
+            )
+          ),
+
+          fundraiser_block({ id: 'duration', title: 'Duration', description: ("How long would you like your fundraiser to run? It can run between "+fundraiser.min_days_open+" and "+fundraiser.max_days_open+" days.") },
+            div({ style: 'padding: 20px 10px; background: #eee;' },
+              fieldset(
+                label('Days Open:'),
+                days_open_input
+              ),
+
+              fieldset(
+                label('End Date:'),
+                end_by_date_element
               )
             )
           )
@@ -320,23 +360,33 @@ with (scope('Fundraisers','App')) {
           // if it's published, add a link to the show page, which saves any changes before changing pages.
           fundraiser.published && div(
             br(),
+
             a({ 'class': 'blue', href: function() {
               save_fundraiser(fundraiser, function() { set_route(Fundraisers.get_href(fundraiser)); })
             } }, 'Published Fundraiser')
           ),
 
-          !fundraiser.published && div(
-            br(),
-            fundraiser.publishable ? a({ 'class': 'blue', href: curry(publish_fundraiser, fundraiser) }, 'Publish') : [
-              div({ 'class': 'gray', style: 'text-decoration: none; cursor: auto;' }, 'Publish'),
-              p({ style: 'text-align: center; margin: 15px 0 0 0;' }, "You need to provide all of the necessary data to publish your fundraiser.")
-            ]
-          )
+          br(),
+
+          a({ id: 'fundraiser-publish-button', 'class': 'blue', href: curry(publish_fundraiser, fundraiser) }, 'Publish'),
+
+          (!fundraiser.published && !fundraiser.publishable) && p({ style: 'text-align: center; margin: 15px 0 0 0;' }, "You need to provide all of the necessary data to publish your fundraiser.")
         )
       ),
 
       div({ 'class': 'split-end' })
     );
+
+    // save on blur of all inputs
+    var elements = flatten_to_array(
+      fundraiser_edit_form.getElementsByTagName('input'),
+      fundraiser_edit_form.getElementsByTagName('textarea')
+    );
+    for (var i=0; i<elements.length; i++) elements[i].addEventListener('blur', function(e) {
+      if (e.target.validity && e.target.validity.valid) save_fundraiser(fundraiser);
+    });
+
+    return fundraiser_edit_form;
   });
 
   define('populate_fundraiser_form_tables', function(fundraiser) {
@@ -357,21 +407,26 @@ with (scope('Fundraisers','App')) {
   /*
   * Show a part of the fundraiser edit form. Also, set the actions for next/previous buttons
   * */
-  define('select_fundraiser_form_section', function(fundraiser_id, section_id) {
-    // Fake a page view for Analytics
-    _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser_id + '/' + section_id]);
+  define('select_fundraiser_form_section', function(fundraiser, section_id) {
+    save_fundraiser(fundraiser, function(response) {
+      if (response.meta.success) {
+        // Fake a page view for Analytics
+        _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/' + section_id]);
 
-    // show the right part of the form
-    var form_section  = document.getElementById(section_id);
-    var form_elements = document.getElementById('fundraiser-form').children;
-    for (var i=0; i<form_elements.length; i++) hide(form_elements[i]);
-    show(form_section);
+        // show the right part of the form
+        var elements = document.getElementsByClassName('fundraiser-block');
+        for (var i=0; i<elements.length; i++) hide(elements[i]);
+        show(section_id);
 
-    // highlight the correct nav element
-    var nav_elements    = document.getElementsByClassName('fundraiser-form-nav'),
-        active_element  = document.getElementById('nav-'+section_id);
-    for (var i=0; i<nav_elements.length; i++) remove_class(nav_elements[i], 'active');
-    add_class(active_element, 'active');
+        // highlight the correct nav element
+        var nav_elements    = document.getElementsByClassName('fundraiser-form-nav'),
+          active_element  = document.getElementById('nav-'+section_id);
+        for (var i=0; i<nav_elements.length; i++) remove_class(nav_elements[i], 'active');
+        add_class(active_element, 'active');
+      }
+    });
+
+
   });
 
   // a pretty, formatted container for a set of inputs.
@@ -382,7 +437,7 @@ with (scope('Fundraisers','App')) {
   define('fundraiser_block', function() {
     var arguments = flatten_to_array(arguments);
     var options = shift_options_from_args(arguments);
-    return div({ id: options.id||'', style: '#eee; border: 1px solid #ccc;' },
+    return div({ class: 'fundraiser-block', id: options.id||'', style: '#eee; border: 1px solid #ccc;' },
       div({ style: 'background: #F7F7F7; border-bottom: 1px solid #D5D5D5; padding: 20px 10px;' },
         span({ style: 'font-size: 25px;' }, options.title),
         div({ style: 'margin-left: 15px; padding-top: 10px; color: gray;' }, options.description)
@@ -392,7 +447,7 @@ with (scope('Fundraisers','App')) {
   });
 
   define('publish_fundraiser', function(fundraiser) {
-    if (confirm('Are you sure? Once published, you cannot change the funding goal.')) {
+    if (confirm('Are you sure? Once published, you cannot change the funding goal or duration.')) {
       // first, save it. callback hell: population 2
       save_fundraiser(fundraiser, function(save_response) {
         // Fake a page view for Analytics
@@ -406,14 +461,6 @@ with (scope('Fundraisers','App')) {
         });
       });
     }
-  });
-
-  // convert the serialized form (array of inputs) to a hash to send to server as request params.
-  // requires unique name attributes on elements.
-  define('serialized_form_to_hash', function(serialized_form) {
-    var request_data = {};
-    serialized_form.map(function(e) { request_data[e.name] = e.value });
-    return request_data;
   });
 
   // show the preview fundraiser
@@ -436,18 +483,28 @@ with (scope('Fundraisers','App')) {
   define('save_fundraiser', function(fundraiser, callback) {
     // Fake a page view for Analytics
     _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/save']);
-    render({ target: 'fundraiser-edit-errors' }, div({ style: 'text-align: center; padding: 5px;' }, 'Saving...'));
 
-    var serialized_form = serialize_form('fundraiser-form'),
-        request_data    = serialized_form_to_hash(serialized_form);
+    // collect form data from inputs
+    var form_data = {
+      title:              document.getElementsByName('title')[0].value,
+      image_url:          document.getElementsByName('image_url')[0].value,
+      homepage_url:       document.getElementsByName('homepage_url')[0].value,
+      repo_url:           document.getElementsByName('repo_url')[0].value,
+      description:        document.getElementsByName('description')[0].value,
+      // about_me:           document.getElementsByName('about_me')[0].value,
+      funding_goal:       parseInt(document.getElementsByName('funding_goal')[0].value || '0'),
+      payout_method:      document.getElementsByName('payout_method')[0].value,
+      short_description:  document.getElementsByName('short_description')[0].value,
+      days_open:          parseInt(document.getElementsByName('days_open')[0].value || fundraiser.min_days_open)
+    };
 
     // append serialized rewards array to request_data
     var t = Teddy.snuggle('rewards-table');
-    request_data.rewards = [];
+    form_data.rewards = [];
     t.forEach(function(row) {
       if (has_class(row, 'editable') && !row.getAttribute('locked-for-edit')) {
         var spans = row.getElementsByTagName('span');
-        request_data.rewards.push({
+        form_data.rewards.push({
           description:  spans[2].innerText,
           amount:       parseInt((spans[0].innerText).replace(/\$|\,/g,'')),
           limited_to:   parseInt(spans[1].innerText),
@@ -455,23 +512,22 @@ with (scope('Fundraisers','App')) {
         });
       }
     });
-    request_data.rewards = JSON.stringify(request_data.rewards); // serialize array
+    form_data.rewards = JSON.stringify(form_data.rewards); // serialize array
 
-    BountySource.update_fundraiser(fundraiser.id, request_data, function(response) {
+    // clear error messages
+    render({ target: 'fundraiser-edit-errors' },'');
+
+    BountySource.update_fundraiser(fundraiser.id, form_data, function(response) {
       if (response.meta.success) {
+        show('fundraiser-publish-button');
+
         // reset autosave flag
         Fundraisers.save_necessary = false;
 
-        // which nav element are we on? need to return to that after rendering page again
-        var previous_nav_id = document.getElementsByClassName('fundraiser-form-nav active')[0].id.split('-').slice(1).join('-');
-
         // render updated card preview
         render({ target: 'fundraiser-card-preview' }, card(response.data));
-
-        // show messages after saved, which is automatically cleared after a set interval
-        render({ target: 'fundraiser-edit-errors' }, small_success_message(fundraiser.published ? "Fundraiser updated" : "Fundraiser draft saved"));
-        setTimeout(function() { render({ into: 'fundraiser-edit-errors' }, '') },1500);
       } else {
+        hide('fundraiser-publish-button');
         render({ target: 'fundraiser-edit-errors' }, small_error_message(response.data.error));
       }
 
@@ -487,7 +543,7 @@ with (scope('Fundraisers','App')) {
     if (active_nav_element.nextSibling) {
       var next_nav_element_id = active_nav_element.nextSibling.id.split('-').slice(1).join('-');
       save_fundraiser(fundraiser, function() {
-        select_fundraiser_form_section(fundraiser.id, next_nav_element_id);
+        select_fundraiser_form_section(fundraiser, next_nav_element_id);
       });
     } else {
       save_fundraiser(fundraiser);

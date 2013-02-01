@@ -32,7 +32,7 @@ with (scope('Profile','App')) {
 
             div({ style: 'display: inline-block; width: 50%; vertical-align: top; padding: 10px;' },
               div(
-                strong({ style: 'margin: 15px 0;' }, 'Joined: '), date(profile.created_at)
+                strong({ style: 'margin: 15px 0;' }, 'Joined: '), formatted_date(profile.created_at)
               ),
               profile.github_user && [
                 profile.github_user.location && div({ style: 'margin: 15px 0;' },
@@ -87,7 +87,7 @@ with (scope('Profile','App')) {
 
   define('profile_info', function(info) {
     return ul({ style: 'display: inline-block; vertical-align: middle; list-style-type: none; padding: 10px; margin-left: 15px; background: #eee; border-radius: 15px;' },
-      profile_info_li('Joined: ', strong(date(info.created_at))),
+      profile_info_li('Joined: ', strong(formatted_date(info.created_at))),
       info.github_user.followers && [
         profile_info_li('Followers: ', strong(formatted_number(info.github_user.followers))),
         profile_info_li('Following: ', strong(formatted_number(info.github_user.following)))

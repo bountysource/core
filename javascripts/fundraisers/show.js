@@ -53,7 +53,7 @@ with (scope('Fundraisers')) {
           div({ style: 'margin: 10px 0 25px 0; padding: 20px; background: #EEE; border-radius: 3px; font-size: 20px; line-height: 25px;' }, fundraiser.short_description||''),
 
           div({ id: 'fundraiser-links', style: 'margin-left: 20px; font-size: 14px;' },
-            span({ style: 'display: block; margin: 10px 0;' }, 'Created ', date(fundraiser.created_at), ' by ', a({ href: Profile.get_href(fundraiser.person) }, fundraiser.person.display_name)),
+            span({ style: 'display: block; margin: 10px 0;' }, 'Created ', formatted_date(fundraiser.created_at), ' by ', a({ href: Profile.get_href(fundraiser.person) }, fundraiser.person.display_name)),
             fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, 'Homepage: ',  a({ target: '_blank', href: fundraiser.homepage_url, style: 'color: inherit;' }, fundraiser.homepage_url)),
             (fundraiser.repo_url && fundraiser.repo_url != fundraiser.homepage_url) && span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
           )
@@ -98,8 +98,13 @@ with (scope('Fundraisers')) {
             li({ style: 'margin: 20px auto;' },
               span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.backers.length+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backer' + (fundraiser.backers.length == 1 ? '' : 's'))
             ),
+
             li({ style: 'margin: 20px auto;' },
               span({ style: 'font-size: 45px; display: inline-block;' }, money(fundraiser.total_pledged||0)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal||0), ' goal')
+            ),
+
+            li({ style: 'margin: 20px auto;' },
+              span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.days_remaining+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'day', (fundraiser.days_remaining == 1 ? '' : 's'), ' left')
             )
           ),
 

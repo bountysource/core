@@ -64,7 +64,7 @@ with (scope('Solution','App')) {
       return div({ style: 'margin: 5px 0;' },
         error_message({ close_button: false, style: 'margin: 5px 0;' },
           p('Solution has been disputed, and is currently under review.'),
-          p('If all outstanding disputes are resolved before ', strong(date(dispute_period_ends)), ', you will be able to claim the bounty.'),
+          p('If all outstanding disputes are resolved before ', strong(formatted_date(dispute_period_ends)), ', you will be able to claim the bounty.'),
           ul(
             li('What does this mean? ', a({ href: '#faq/developers' }, 'More info.')),
             li('Have any questions? Feel free to ', a({ href: 'mailto:support@bountysource.com' }, 'contact support.'))
@@ -75,7 +75,7 @@ with (scope('Solution','App')) {
       return div({ style: 'margin: 5px 0;' },
         info_message({ close_button: false, style: 'margin: 5px 0;' },
           p('Solution has been merged, but is in the dispute period.'),
-          p('If there are no outstanding disputes after ', strong(date(dispute_period_ends)), ', you will be able to claim the bounty.'),
+          p('If there are no outstanding disputes after ', strong(formatted_date(dispute_period_ends)), ', you will be able to claim the bounty.'),
           ul(
             li('What does this mean? ', a({ href: '#faq/developers' }, 'More info.')),
             li('Have any questions? Feel free to ', a({ href: 'mailto:support@bountysource.com' }, 'contact support.'))

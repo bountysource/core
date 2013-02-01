@@ -47,7 +47,7 @@ with (scope('Contributions', 'App')) {
                     td({ style: 'color: #888' }, bounty.issue.title),
                     td({ style: 'text-align: center;' }, Issue.status_element(bounty.issue)),
                     td(money(bounty.amount)),
-                    td(date(bounty.created_at))
+                    td(formatted_date(bounty.created_at))
                   )
                 })
               )
@@ -71,7 +71,7 @@ with (scope('Contributions', 'App')) {
                   ),
                   td(a({ href: Fundraisers.get_href(pledge.fundraiser) }, pledge.fundraiser.title)),
                   td(money(pledge.amount)),
-                  td(date(pledge.created_at))
+                  td(formatted_date(pledge.created_at))
                 )
               })
             )
