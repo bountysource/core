@@ -132,13 +132,15 @@ with (scope('Fundraisers', 'App')) {
     } else {
       reward_element.addEventListener('click', function(e) {
         // uncheck all radios
-        flatten_to_array(document.getElementsByName('reward_id_radio')).forEach(function(e) {e.removeAttribute('checked'); });
+        var elements = document.getElementsByName('reward_id_radio');
+        for (var i=0; i<elements.length; i++) elements[i].removeAttribute('checked');
 
         // check this radio
         reward_radio.setAttribute('checked','checked');
 
         // hide all submit buttons
-        flatten_to_array(document.getElementsByClassName('reward-submit-button')).forEach(function(e) { hide(e); });
+        var elements = document.getElementsByClassName('reward-submit-button');
+        for (var i=0; i<elements.length; i++) hide(elements[i]);
 
         // show this submit button
         show(submit_button);
