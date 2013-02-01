@@ -127,24 +127,24 @@ with (scope('App')) {
   });
 
   // add class to element
-  define('add_class', function(element, class_name) {
-    if (!element || has_class(element, class_name)) return element;
-    var parts = element.className.split(/\s+/);
+  define('add_class', function(e, class_name) {
+    if (!e || has_class(e, class_name)) return e;
+    var parts = e.className.split(/\s+/);
     parts.push(class_name);
-    element.className = parts.join(' ');
-    return element;
+    e.className = parts.join(' ');
+    return e;
   });
 
   // remove class from element
-  define('remove_class', function(element, class_name) {
-    if (!element || !has_class(element, class_name)) return element;
-    element.className = element.className.replace((new RegExp(class_name)),'').trim();
-    return element;
+  define('remove_class', function(e, class_name) {
+    if (!e || !has_class(e, class_name)) return e;
+    e.className = e.className.replace((new RegExp(class_name)),'').trim();
+    return e;
   });
 
   // check if element has class
-  define('has_class', function(element, class_name) {
-    var class_names = element.className.split(/\s+/);
+  define('has_class', function(e, class_name) {
+    var class_names = e.className.split(/\s+/);
     return class_names.indexOf(class_name) >= 0;
   });
 

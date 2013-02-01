@@ -97,16 +97,16 @@ with (scope('Twitter','App')) {
   define('create_share_button', function() {
     var arguments = flatten_to_array(arguments),
         options   = shift_options_from_args(arguments),
-        element   = arguments[0] || a({ 'class': 'btn-auth btn-twitter' }, 'Tweet');
+        e         = arguments[0] || a({ 'class': 'btn-auth btn-twitter' }, 'Tweet');
 
-    element.addEventListener('click', function(e) {
+    e.addEventListener('click', function(e) {
       options['url']      = encode_html(options['url']  || window.location.href);
       options['counturl'] = encode_html(options['counturl'] || options['url']);
       options['text']     = encode_html(options['text'] || '@BountySource | The funding platform for open source software');
       window.open('https://twitter.com/share'+to_param(options),'','width=680,height=350');
     });
 
-    return element;
+    return e;
   });
 
   /*

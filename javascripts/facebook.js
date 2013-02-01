@@ -111,7 +111,7 @@ with (scope('Facebook','App')) {
   define('create_share_button', function() {
     var arguments = flatten_to_array(arguments),
         options   = shift_options_from_args(arguments),
-        element   = arguments[0] || a({ 'class': 'btn-auth btn-facebook' }, 'Share');
+        e         = arguments[0] || a({ 'class': 'btn-auth btn-facebook' }, 'Share');
 
     options = options || {};
     options['method']   = 'feed';
@@ -119,9 +119,9 @@ with (scope('Facebook','App')) {
     options['link']     = options['link']     || window.location.href;
     options['caption']  = options['caption']  || 'The funding platform for open source software';
 
-    !test_mode && element.addEventListener('click', curry(after_loaded, function(FB) { FB.ui(options) }));
+    !test_mode && e.addEventListener('click', curry(after_loaded, function(FB) { FB.ui(options) }));
 
-    return element;
+    return e;
   });
 
   /*

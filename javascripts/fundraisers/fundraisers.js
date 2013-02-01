@@ -87,9 +87,9 @@ with (scope('Fundraisers','App')) {
         options   = shift_options_from_args(arguments),
         elements  = [];
     for (var i=0; i<arguments.length; i++) {
-      var element = arguments[i];
-      element.style.width = (100.0/arguments.length)+'%';
-      elements.push(element);
+      var e = arguments[i];
+      e.style.width = (100.0/arguments.length)+'%';
+      elements.push(e);
     }
     options['class'] = 'horizontal-nav';
     return ul(options, elements);
