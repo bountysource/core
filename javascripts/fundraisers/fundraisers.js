@@ -506,9 +506,9 @@ with (scope('Fundraisers','App')) {
       if (has_class(row, 'editable') && !row.getAttribute('locked-for-edit')) {
         var spans = row.getElementsByTagName('span');
         form_data.rewards.push({
-          description:  spans[2].innerText,
-          amount:       parseInt((spans[0].innerText).replace(/\$|\,/g,'')),
-          limited_to:   parseInt(spans[1].innerText),
+          description:  spans[2].innerHTML,
+          amount:       parseInt((spans[0].innerHTML).replace(/\$|\,/g,'')),
+          limited_to:   parseInt(spans[1].innerHTML),
           id:           parseInt(row.getAttribute('data-id')) || null
         });
       }

@@ -24,7 +24,7 @@ with (scope('Fundraisers')) {
   // make a row editable after being inserted into the table.
   define('unlock_milestone_row', function(milestone_row_id) {
     var t                   = Teddy.snuggle('milestone-table'),
-      milestone_description = t.at(milestone_row_id).children[0].innerText;
+      milestone_description = t.at(milestone_row_id).children[0].innerHTML;
     t.at(milestone_row_id).replace({ id: milestone_row_id, 'class': 'editable' },
       td(
         input({

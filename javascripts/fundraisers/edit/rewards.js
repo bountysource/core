@@ -33,9 +33,9 @@ with (scope('Fundraisers')) {
   define('unlock_reward_row', function(reward_row_id) {
     var t           = Teddy.snuggle('rewards-table'),
       spans         = t.at(reward_row_id).getElementsByTagName('span'),
-      amount        = parseInt((spans[0].innerText).replace(',','').match(/\$(\d+)/)[1]),
-      limited_to    = parseInt(spans[1].innerText)||'',
-      description   = spans[2].innerText,
+      amount        = parseInt((spans[0].innerHTML).replace(',','').match(/\$(\d+)/)[1]),
+      limited_to    = parseInt(spans[1].innerHTML)||'',
+      description   = spans[2].innerHTML,
       published     = !isNaN(parseInt(t.at(reward_row_id).getAttribute('data-id'))),
       data_id       = (published ? parseInt(t.at(reward_row_id).getAttribute('data-id')) : null);
 
