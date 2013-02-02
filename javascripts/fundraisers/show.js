@@ -21,10 +21,6 @@ with (scope('Fundraisers')) {
       if (response.meta.success) {
         var fundraiser = response.data;
 
-        // if the identifier is not pretty, make it so by redirecting
-        var pretty_route = Fundraisers.get_href(fundraiser);
-        if (fundraiser.title && pretty_route != get_route()) return set_route(pretty_route);
-
         render({ into: fundraiser_div }, fundraiser_template(fundraiser));
       } else {
         render({ target: 'breadcrumbs-fundraiser-title' }, 'Oh no!');
