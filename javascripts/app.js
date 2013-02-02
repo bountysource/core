@@ -120,34 +120,6 @@ with (scope('App')) {
     }
   });
 
-  // remove a DOM element
-  define('remove_element', function(id) {
-    var e = document.getElementById(id);
-    return (e ? (e.parentNode.removeChild(e) && true) : false);
-  });
-
-  // add class to element
-  define('add_class', function(e, class_name) {
-    if (!e || has_class(e, class_name)) return e;
-    var parts = e.className.split(/\s+/);
-    parts.push(class_name);
-    e.className = parts.join(' ');
-    return e;
-  });
-
-  // remove class from element
-  define('remove_class', function(e, class_name) {
-    if (!e || !has_class(e, class_name)) return e;
-    e.className = e.className.replace((new RegExp(class_name)),'').trim();
-    return e;
-  });
-
-  // check if element has class
-  define('has_class', function(e, class_name) {
-    var class_names = e.className.split(/\s+/);
-    return class_names.indexOf(class_name) >= 0;
-  });
-
   // create a progress bar. to change the percentage, adjust the width of the element created with id
   // @id the id of the progress bar element
   define('progress_bar', function(options) {
