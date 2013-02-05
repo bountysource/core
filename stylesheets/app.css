@@ -11,7 +11,13 @@ input, textarea, select { vertical-align: middle; }
 form, fieldset { margin:0; padding:0; border-style:none; }
 html { background: #efe9db url(../images/background.png) repeat top center; }
 
-header { 
+/* force placeholder text to a normal color */
+::-webkit-input-placeholder { color: #aaa; }
+:-moz-placeholder { color: #aaa; }
+::-moz-placeholder { color: #aaa; }
+:-ms-input-placeholder { color: #aaa; }
+
+header {
   color: #eee; 
   background: white; 
   border-top: 4px solid #e0ab45;
