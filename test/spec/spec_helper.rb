@@ -33,8 +33,8 @@ def proceed_through_paypal_sandbox_flow!
     @browser.goto(url)
   end
 
-  if @browser.button(value: 'Have a PayPal account?').present?
-    @browser.button(value: 'Have a PayPal account?').click
+  if @browser.button(name: 'login_button').present?
+    @browser.button(name: 'login_button').click
   end
 
 
