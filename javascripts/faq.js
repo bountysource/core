@@ -133,8 +133,8 @@ with (scope('Faq', 'App')) {
           dt("What does it cost to collect a bounty?"),
           dd("Upon payout, BountySource will charge a 5% fee in addition to payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses."),
         
-          dt("What can I do with my earnings?"),
-          dd('What you do with your money is completely up to you. You can either collect your full 90%, or make a donation to charity. We support charities like ', a({ href: 'https://www.eff.org/', target: 'blank' }, "EFF"), "."),    
+          //dt("What can I do with my earnings?"),
+          //dd('What you do with your money is completely up to you. You can either collect your full 90%, or make a donation to charity. We support charities like ', a({ href: 'https://www.eff.org/', target: 'blank' }, "EFF"), "."),    
               
           dt("Do I have to pay taxes on the bounties I collect?"),
           dd("If you are in the United States and payments made to you are more than $600 for the year, we are required to issue you a Form 1099 to report the payments, which will require you to complete a Form W-9. You should consult your tax advisor as to the taxability of the payments."),
