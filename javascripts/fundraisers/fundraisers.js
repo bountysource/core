@@ -357,7 +357,7 @@ with (scope('Fundraisers','App')) {
         ),
 
         // this is re-rendered after each save
-        a({ href: curry(preview_fundraiser, fundraiser) },
+        div({ onClick: curry(preview_fundraiser, fundraiser) },
           div({ id: 'fundraiser-card-preview' }, card(fundraiser))
         ),
 
