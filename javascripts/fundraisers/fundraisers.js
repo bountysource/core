@@ -423,8 +423,6 @@ with (scope('Fundraisers','App')) {
         add_class(active_element, 'active');
       }
     });
-
-
   });
 
   // a pretty, formatted container for a set of inputs.
@@ -434,8 +432,11 @@ with (scope('Fundraisers','App')) {
   // options.description  - description of the inputs in the block
   define('fundraiser_block', function() {
     var arguments = flatten_to_array(arguments);
-    var options = shift_options_from_args(arguments);
-    return div({ class: 'fundraiser-block', id: options.id||'', style: '#eee; border: 1px solid #ccc;' },
+    var options   = shift_options_from_args(arguments);
+    options['class'] = 'fundraiser-block';
+    options['style'] = options['style'] || '#eee; border: 1px solid #ccc;';
+
+    return div(options,
       div({ style: 'background: #F7F7F7; border-bottom: 1px solid #D5D5D5; padding: 20px 10px;' },
         span({ style: 'font-size: 25px;' }, options.title),
         div({ style: 'margin-left: 15px; padding-top: 10px; color: gray;' }, options.description)

@@ -36,27 +36,12 @@ with (scope('Issue', 'App')) {
             h2({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 'Comments'),
             issue.comments.map(github_user_html_box)
           )
-
-          // issue.events.length > 0 && div(
-          //   h2('Events'),
-          //   issue.events.map(function(event) {
-          //     return div({ style: 'border: 1px solid #888; padding: 5px; margin-bottom: 20px' },
-          //       img({ src: event.actor.avatar_url, style: 'float: left; width:80px; height:80px' }),
-          //       b(event.actor.login), ' on ', event.created_at,
-          //       div(event.event),
-          //       div(event.commit_id),
-          //       div({ style: 'clear: left' })
-          //     );
-          //   })
-          // )
-
         ),
 
         div({ 'class': 'split-side'},
           !issue.closed && !issue.code && section(
             bounty_box(issue),
             developer_box(issue)
-            //misc_box(issue)
           )
         ),
 
@@ -159,15 +144,6 @@ with (scope('Issue', 'App')) {
     );
   });
   
-  define('misc_box', function(issue) {
-    return div({ style: 'background: #e8f6f5; margin: 20px 15px'}, 
-      h3('Fields'),
-      div("Owner: ", issue.owner),
-      div("Has code: ", issue.code ? 'Yes' : 'No'),
-      issue.labels && issue.labels.length > 0 && div("Labels: ", ul(issue.labels))
-    );
-  });
-
   define('create_solution', function(login, repository, issue_number, form_data) {
     // hide('developer-box');
 
