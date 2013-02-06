@@ -69,7 +69,7 @@ with (scope('Contributions', 'App')) {
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                     img({ src: pledge.fundraiser.avatar_url, style: 'width: 50px;' })
                   ),
-                  td(a({ href: Fundraisers.get_href(pledge.fundraiser) }, pledge.fundraiser.title)),
+                  td(a({ href: pledge.fundraiser.url }, pledge.fundraiser.title)),
                   td(money(pledge.amount)),
                   td(formatted_date(pledge.created_at))
                 )
@@ -183,13 +183,13 @@ with (scope('Contributions', 'App')) {
             h3("Tell your friends!"),
             div(
               Facebook.create_share_button({
-                link:     BountySource.www_host+Fundraisers.get_href(pledge.fundraiser),
+                link:     BountySource.www_host+pledge.fundraiser.url,
                 name:     pledge.fundraiser.title,
                 caption:  pledge.fundraiser.short_description
               }, a({ 'class': 'btn-auth btn-facebook', style: 'margin-right: 10px;' }, 'Share')),
 
               Twitter.create_share_button({
-                url:  BountySource.www_host+Fundraisers.get_href(pledge.fundraiser),
+                url:  BountySource.www_host+pledge.fundraiser.url,
                 text: "I pledged "+money(pledge.amount)+" to "+fundraiser.title
               }, a({ 'class': 'btn-auth btn-twitter' }, 'Tweet'))
             )

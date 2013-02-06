@@ -1,10 +1,7 @@
 with (scope('Fundraisers')) {
 
   // Note: fundraiser identifier will either be just an ID, or and ID with a concatenated title string
-  route('#fundraisers/:identifier', function(identifier) {
-    var identifier_parts  = identifier.split('-'),
-        fundraiser_id     = parseInt(identifier_parts.shift());
-
+  route('#fundraisers/:fundraiser_id', function(fundraiser_id) {
     var fundraiser_div = div('Loading...');
     var target_div = div(
       breadcrumbs(
@@ -49,7 +46,7 @@ with (scope('Fundraisers')) {
           div({ style: 'margin: 10px 0 25px 0; padding: 20px; background: #EEE; border-radius: 3px; font-size: 20px; line-height: 25px;' }, fundraiser.short_description||''),
 
           div({ id: 'fundraiser-links', style: 'margin-left: 20px; font-size: 14px;' },
-            span({ style: 'display: block; margin: 10px 0;' }, 'Created ', formatted_date(fundraiser.created_at), ' by ', a({ href: Profile.get_href(fundraiser.person) }, fundraiser.person.display_name)),
+            span({ style: 'display: block; margin: 10px 0;' }, 'Created ', formatted_date(fundraiser.created_at), ' by ', a({ href: fundraiser.person.profile_url }, fundraiser.person.display_name)),
             fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, 'Homepage: ',  a({ target: '_blank', href: fundraiser.homepage_url, style: 'color: inherit;' }, fundraiser.homepage_url)),
             (fundraiser.repo_url && fundraiser.repo_url != fundraiser.homepage_url) && span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
           )

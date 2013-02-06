@@ -59,7 +59,7 @@ with (scope('Profile','App')) {
                 ul(
                   profile.fundraisers.map(function(fundraiser) {
                     return li(
-                      a({ href: Fundraisers.get_href(fundraiser) }, abbreviated_text(fundraiser.title, 120))
+                      a({ href: fundraiser.url }, abbreviated_text(fundraiser.title, 120))
                     )
                   })
                 )

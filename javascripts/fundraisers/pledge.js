@@ -186,7 +186,7 @@ with (scope('Fundraisers', 'App')) {
       payment_method: form_data.payment_method,
       item_number: 'fundraisers/' + fundraiser.id + (parseInt(form_data.reward_id) > 0 ? '/'+form_data.reward_id : ''),
       success_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledges/:item_id/receipt',
-      cancel_url: window.location.href.split('#')[0] + Fundraisers.get_href(fundraiser)
+      cancel_url: window.location.href.split('#')[0] + fundraiser.url
     };
 
     BountySource.make_payment(payment_data, function(response) {

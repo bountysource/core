@@ -34,13 +34,15 @@ with (scope('Home', 'App')) {
   define('homepage_box_layout', function() {
     var recent_people_div = div();
     BountySource.recent_people(function(response) {
+      var recent_people = response.data;
+
       render({ into: recent_people_div },
         div({ style: "padding: 10px" },
-          div({ style: 'color: #888; font-style: italic; margin-bottom: 5px' }, response.data.total_count, " members have joined BountySource already!"),
+          div({ style: 'color: #888; font-style: italic; margin-bottom: 5px' }, recent_people.total_count, " members have joined BountySource already!"),
 
-          response.data.people.map(function(person) {
+          recent_people.people.map(function(person) {
             return div({ 'class': 'round-avatar' },
-              a({ href: Profile.get_href(person) }, img({ src: person.avatar_url }))
+              a({ href: person.profile_url }, img({ src: person.avatar_url }))
             );
           }),
 
@@ -245,7 +247,7 @@ with (scope('Home', 'App')) {
     // if an href is supplied, make the card clickable
     if (card.href) {
       card.id = card.id.match(/fr(\d+)/)[1];
-      card_element.addEventListener('click', curry(set_route, Fundraisers.get_href(card)));
+      card_element.addEventListener('click', curry(set_route, card.href));
     }
 
     return card_element;
