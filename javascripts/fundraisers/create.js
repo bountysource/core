@@ -35,7 +35,7 @@ with (scope('Fundraisers')) {
   define('create_fundraiser', function(form_data) {
     BountySource.create_fundraiser(form_data, function(response) {
       if (response.meta.success) {
-        set_route('#account/fundraisers/'+response.data.id)
+        set_route(response.data.edit_url)
       } else {
         render_message(error_message(response.data.error));
       }

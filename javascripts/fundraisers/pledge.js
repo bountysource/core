@@ -14,11 +14,11 @@ with (scope('Fundraisers', 'App')) {
     );
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
-      var params = get_params(),
-          fundraiser = response.data;
+      var params      = get_params(),
+          fundraiser  = response.data;
 
       // render the title of the fundraiser into header
-      render({ target: 'breadcrumbs-fundraiser-title' }, a({ href: '#fundraisers/'+fundraiser_id }, abbreviated_text(fundraiser.title, 60)));
+      render({ target: 'breadcrumbs-fundraiser-title' }, a({ href: fundraiser.url }, abbreviated_text(fundraiser.title, 60)));
 
       // require the fundraiser to be published
       if (!fundraiser.published) return render({ into: target_div }, error_message('Fundraiser has not been published.'));

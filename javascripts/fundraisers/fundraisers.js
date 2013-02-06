@@ -47,7 +47,7 @@ with (scope('Fundraisers','App')) {
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
 
                 td({ style: 'text-align: center;' },
-                  a({ href: '#account/fundraisers/'+fundraiser.id }, img({ src: 'images/edit.gif' })),
+                  a({ href: fundraiser.edit_url }, img({ src: 'images/edit.gif' })),
 
                   // TODO: info page for fundraiser author to see contributions and rewards that have been claimed
                   // a({ href: '#account/fundraisers/'+fundraiser.id+'/info', style: 'margin-left: 10px;' }, img({ src: 'images/info.gif' })),
@@ -402,7 +402,7 @@ with (scope('Fundraisers','App')) {
     save_fundraiser(fundraiser, function(response) {
       if (response.meta.success) {
         // Fake a page view for Analytics
-        _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/' + section_id]);
+        _gaq.push([fundraiser.edit_url + '/' + section_id]);
 
         // show the right part of the form
         var elements = document.getElementsByClassName('fundraiser-block');
@@ -443,7 +443,7 @@ with (scope('Fundraisers','App')) {
       // first, save it. callback hell: population 2
       save_fundraiser(fundraiser, function(save_response) {
         // Fake a page view for Analytics
-        _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/publish']);
+        _gaq.push([fundraiser.edit_url + '/publish']);
         BountySource.publish_fundraiser(fundraiser.id, function(response) {
           if (response.meta.success) {
             set_route('#account/fundraisers');
@@ -474,7 +474,7 @@ with (scope('Fundraisers','App')) {
 
   define('save_fundraiser', function(fundraiser, callback) {
     // Fake a page view for Analytics
-    _gaq.push(['_trackPageview', '#account/fundraisers/' + fundraiser.id + '/save']);
+    _gaq.push(['_trackPageview', fundraiser.edit_url + '/save']);
 
     // return if the form is not present
     if (!document.getElementById('fundraiser-form')) return;
