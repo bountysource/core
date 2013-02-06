@@ -276,7 +276,7 @@ with (scope('Fundraisers','App')) {
 //            )
 //          ),
 
-          fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to complete this project? How do you want to receive the funds?" },
+          !fundraiser.published && fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to complete this project? How do you want to receive the funds?" },
             div({ style: 'padding: 20px 10px; background: #eee;' },
               fieldset(
                 label('Funding Goal:'),
@@ -324,7 +324,7 @@ with (scope('Fundraisers','App')) {
             )
           ),
 
-          fundraiser_block({ id: 'duration', title: 'Duration', description: ("How long would you like your fundraiser to run? It can run between "+fundraiser.min_days_open+" and "+fundraiser.max_days_open+" days.") },
+          !fundraiser.published && fundraiser_block({ id: 'duration', title: 'Duration', description: ("How long would you like your fundraiser to run? It can run between "+fundraiser.min_days_open+" and "+fundraiser.max_days_open+" days.") },
             div({ style: 'padding: 20px 10px; background: #eee;' },
               fieldset(
                 label('Days Open:'),
@@ -480,18 +480,30 @@ with (scope('Fundraisers','App')) {
     if (!document.getElementById('fundraiser-form')) return;
 
     // collect form data from inputs
-    var form_data = {
-      title:              document.getElementsByName('title')[0].value,
-      image_url:          document.getElementsByName('image_url')[0].value,
-      homepage_url:       document.getElementsByName('homepage_url')[0].value,
-      repo_url:           document.getElementsByName('repo_url')[0].value,
-      description:        document.getElementsByName('description')[0].value,
-      // about_me:           document.getElementsByName('about_me')[0].value,
-      funding_goal:       parseInt(document.getElementsByName('funding_goal')[0].value || '0'),
-      payout_method:      document.getElementsByName('payout_method')[0].value,
-      short_description:  document.getElementsByName('short_description')[0].value,
-      days_open:          parseInt(document.getElementsByName('days_open')[0].value || fundraiser.min_days_open)
-    };
+    if (fundraiser.published) {
+      var form_data = {
+        title:              document.getElementsByName('title')[0].value,
+        image_url:          document.getElementsByName('image_url')[0].value,
+        homepage_url:       document.getElementsByName('homepage_url')[0].value,
+        repo_url:           document.getElementsByName('repo_url')[0].value,
+        description:        document.getElementsByName('description')[0].value,
+        // about_me:           document.getElementsByName('about_me')[0].value,
+        short_description:  document.getElementsByName('short_description')[0].value
+      };
+    } else {
+      var form_data = {
+        title:              document.getElementsByName('title')[0].value,
+        image_url:          document.getElementsByName('image_url')[0].value,
+        homepage_url:       document.getElementsByName('homepage_url')[0].value,
+        repo_url:           document.getElementsByName('repo_url')[0].value,
+        description:        document.getElementsByName('description')[0].value,
+        // about_me:           document.getElementsByName('about_me')[0].value,
+        funding_goal:       parseInt(document.getElementsByName('funding_goal')[0].value || '0'),
+        payout_method:      document.getElementsByName('payout_method')[0].value,
+        short_description:  document.getElementsByName('short_description')[0].value,
+        days_open:          parseInt(document.getElementsByName('days_open')[0].value || fundraiser.min_days_open)
+      };
+    }
 
     // append serialized rewards array to request_data
     var t = Teddy.snuggle('rewards-table');
