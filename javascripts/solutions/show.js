@@ -76,7 +76,7 @@ with (scope('Solution', 'App')) {
         render({ into: target_div },
           div({ 'class': 'split-main'},
             h2('Solution Submitted!'),
-            p("You will be able to claim the bounty when your pull request is merged, and the underling issue is closed.")
+            p("You will be able to claim the bounty when your pull request is merged and the underlying issue is closed.")
           ),
 
           div({ 'class': 'split-side'},
