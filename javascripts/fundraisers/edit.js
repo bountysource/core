@@ -42,7 +42,7 @@ with (scope('Edit', 'Fundraiser')) {
 
           div({ 'class': 'label' },
             span('Basic Info'),
-            section_completed.basic_info ? img({ src: 'images/icon-check.png' }) : img({ src: 'images/alert.gif' })
+            section_completed.basic_info ? img({ src: 'images/icon-check-16.png' }) : img({ src: 'images/alert.gif' })
           )
         )
       ),
@@ -54,7 +54,7 @@ with (scope('Edit', 'Fundraiser')) {
 
           div({ 'class': 'label' },
             span('Description'),
-            section_completed.description ? img({ src: 'images/icon-check.png' }) : img({ src: 'images/alert.gif' })
+            section_completed.description ? img({ src: 'images/icon-check-16.png' }) : img({ src: 'images/alert.gif' })
           )
         )
       ),
@@ -66,7 +66,7 @@ with (scope('Edit', 'Fundraiser')) {
 
           div({ 'class': 'label' },
             span('Rewards'),
-            section_completed.rewards ? img({ src: 'images/icon-check.png' }) : img({ src: 'images/alert.gif' })
+            section_completed.rewards ? img({ src: 'images/icon-check-16.png' }) : img({ src: 'images/alert.gif' })
           )
         )
       ),
@@ -79,7 +79,7 @@ with (scope('Edit', 'Fundraiser')) {
 
           div({ 'class': 'label' },
             span('Funding'),
-            fundraiser.published ? img({ src: 'images/locked.gif' }) : (section_completed.funding ? img({ src: 'images/icon-check.png' }) : img({ src: 'images/alert.gif' }))
+            fundraiser.published ? img({ src: 'images/locked.gif' }) : (section_completed.funding ? img({ src: 'images/icon-check-16.png' }) : img({ src: 'images/alert.gif' }))
           )
         )
       ),
@@ -92,7 +92,7 @@ with (scope('Edit', 'Fundraiser')) {
 
           div({ 'class': 'label' },
             span('Duration'),
-            fundraiser.published ? img({ src: 'images/locked.gif' }) : (section_completed.duration ? img({ src: 'images/icon-check.png' }) : img({ src: 'images/alert.gif' }))
+            fundraiser.published ? img({ src: 'images/locked.gif' }) : (section_completed.duration ? img({ src: 'images/icon-check-16.png' }) : img({ src: 'images/alert.gif' }))
           )
         )
       )
