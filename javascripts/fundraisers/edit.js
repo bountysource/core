@@ -269,10 +269,10 @@ with (scope('Edit', 'Fundraiser')) {
         div({ id: 'rewards' },
 
           fundraiser.rewards.map(function(reward) { return reward_row(fundraiser, reward) }),
-
+          br(),
           div({ id: 'create-reward-errors' }),
 
-          form({ id: 'rewards-create', action: curry(create_reward, fundraiser.id) },
+          form({ id: 'rewards-create', action: curry(create_reward, fundraiser) },
             fieldset(
               label({ 'for': 'amount' }, 'Amount & Quantity:'),
               number({ name: 'amount', placeholder: '$10' }),
