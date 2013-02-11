@@ -17,8 +17,6 @@
   transition:         ease-in 150ms;
 }
 
-.fundraiser-nav img[src*=icon-check] { width: 16px; height: 16px; }
-
 .fundraiser-nav .label * { display: inline-block; vertical-align: middle; margin-right: 5px; }
 .fundraiser-nav .label *:last-child { margin-right: 0; }
 
@@ -71,6 +69,9 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
   -o-transition:      ease-in 200ms;
   transition:         ease-in 200ms;
 }
+#fundraiser-edit-form .edit-reward-buttons * { display: inline; margin-right: 10px; padding: 10px; vertical-align: middle; }
+#fundraiser-edit-form .edit-reward-buttons *:last-child { margin-right: 0; }
+
 #fundraiser-edit-form #rewards .reward-row.active { background: #FAFCE1; height: 400px; cursor: default; }
 #fundraiser-edit-form #rewards .reward-row:hover  { background: #FAFCE1; }
 #fundraiser-edit-form #rewards .reward-row:first-of-type { border-radius: 3px 3px 0 0; }
