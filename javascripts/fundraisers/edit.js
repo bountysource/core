@@ -392,7 +392,7 @@ with (scope('Edit', 'Fundraiser')) {
 
       div({ id: 'reward-row-'+reward.id+'-errors' }),
 
-      form({ class: 'fancy', action: curry(update_reward, fundraiser, reward) },
+      form({ 'class': 'fancy', action: curry(update_reward, fundraiser, reward) },
         fieldset(
           label({ 'for': 'amount' }, 'Amount & Quantity:'),
           number({ name: 'amount', placeholder: '$10', value: reward.amount||'' }),
