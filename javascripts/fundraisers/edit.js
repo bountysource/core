@@ -398,7 +398,7 @@ with (scope('Edit', 'Fundraiser')) {
           label({ 'for': 'amount' }, 'Amount & Quantity:'),
 
           fundraiser.published ? [
-            span({ style: 'font-size: 20px; margin-right: 15px;' }, money(reward.amount))
+            span({ style: 'font-size: 20px; margin-right: 15px; vertical-align: middle;' }, money(reward.amount))
           ] : [
             number({ name: 'amount', required: true, min: 0, placeholder: '$10', value: reward.amount||'' })
           ],
@@ -410,7 +410,7 @@ with (scope('Edit', 'Fundraiser')) {
           label({ 'for': 'description' }, 'Description:'),
 
           fundraiser.published ? [
-            div({ style: 'display: inline-block; white-space: pre-wrap;' },reward.description)
+            div({ style: 'display: inline-block; width: 400px; vertical-align: top;' }, reward.description)
           ] : [
             textarea({ name: 'description', required: true, placeholder: 'What sort of awesome goodies do you want your backers to have?' }, reward.description||'')
           ]
@@ -439,7 +439,7 @@ with (scope('Edit', 'Fundraiser')) {
     return ul(
       li(money(reward.amount||0)),
       li(reward.limited_to ? span('(', formatted_number(reward.claimed), ' of ', formatted_number(reward.limited_to), ' left)') : 'Unlimited'),
-      li(reward.description)
+      li(abbreviated_text(reward.description, 60))
     )
   });
 
