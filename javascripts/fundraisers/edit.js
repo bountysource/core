@@ -268,20 +268,22 @@ with (scope('Edit', 'Fundraiser')) {
       return  fundraiser_block({ id: 'rewards', title: 'Rewards', description: "Thank your backers." },
         div({ id: 'rewards' },
 
-          fundraiser.rewards.map(function(reward) { return reward_row(fundraiser, reward) }),
+          div({ id: 'reward-rows' }, fundraiser.rewards.map(function(reward) { return reward_row(fundraiser, reward) })),
+
           br(),
+
           div({ id: 'create-reward-errors' }),
 
           form({ id: 'rewards-create', action: curry(create_reward, fundraiser) },
             fieldset(
               label({ 'for': 'amount' }, 'Amount & Quantity:'),
-              number({ name: 'amount', placeholder: '$10' }),
-              number({ name: 'limited_to', placeholder: 'Unlimited' })
+              number({ name: 'amount', required: true, min: 0, placeholder: '$10' }),
+              number({ name: 'limited_to', min: 0, placeholder: 'Unlimited' })
             ),
 
             fieldset(
               label({ 'for': 'description' }, 'Description:'),
-              textarea({ name: 'description', placeholder: 'What sort of awesome goodies do you want your backers to have?' })
+              textarea({ name: 'description', required: true, placeholder: 'What sort of awesome goodies do you want your backers to have?' })
             ),
 
             fieldset(
@@ -313,7 +315,7 @@ with (scope('Edit', 'Fundraiser')) {
             span({ style: 'vertical-align: middle; font-size: 25px;' }, money(fundraiser.funding_goal))
           ] : [
             span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
-            number({ 'data-autosave': true, name: 'funding_goal', placeholder: '50,000', value: fundraiser.funding_goal })
+            number({ 'data-autosave': true, name: 'funding_goal', min: 0, placeholder: '50,000', value: fundraiser.funding_goal })
           ]
         ),
 
@@ -385,9 +387,8 @@ with (scope('Edit', 'Fundraiser')) {
   });
 
   define('reward_row', function(fundraiser, reward) {
-    reward = reward || {};
+    var reward_row_element = div({ id: 'reward-row-'+reward.id, 'class': 'reward-row', 'data-amount': (reward.amount||0) },
 
-    var reward_row = div({ id: 'reward-row-'+reward.id, 'class': 'reward-row' },
       div({ id: 'reward-row-'+reward.id+'-info' }, reward_info(reward)),
 
       div({ id: 'reward-row-'+reward.id+'-errors' }),
@@ -395,13 +396,24 @@ with (scope('Edit', 'Fundraiser')) {
       form({ 'class': 'fancy', action: curry(update_reward, fundraiser, reward) },
         fieldset(
           label({ 'for': 'amount' }, 'Amount & Quantity:'),
-          number({ name: 'amount', placeholder: '$10', value: reward.amount||'' }),
-          number({ name: 'limited_to', placeholder: 'Unlimited', value: reward.limited_to||'' })
+
+          fundraiser.published ? [
+            span({ style: 'font-size: 20px; margin-right: 15px;' }, money(reward.amount))
+          ] : [
+            number({ name: 'amount', required: true, min: 0, placeholder: '$10', value: reward.amount||'' })
+          ],
+
+          number({ name: 'limited_to', min: 0, placeholder: 'Unlimited', value: reward.limited_to||'' })
         ),
 
         fieldset(
           label({ 'for': 'description' }, 'Description:'),
-          textarea({ name: 'description', placeholder: 'What sort of awesome goodies do you want your backers to have?' }, reward.description||'')
+
+          fundraiser.published ? [
+            div({ style: 'display: inline-block; white-space: pre-wrap;' },reward.description)
+          ] : [
+            textarea({ name: 'description', required: true, placeholder: 'What sort of awesome goodies do you want your backers to have?' }, reward.description||'')
+          ]
         ),
 
         fieldset(
@@ -409,23 +421,36 @@ with (scope('Edit', 'Fundraiser')) {
           textarea({ name: 'fulfillment_details', placeholder: 'Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc.' }, reward.fulfillment_details||'')
         ),
 
-        fieldset({ 'class': 'no-label' }, submit({ 'class': 'green' }, 'Save Reward'))
+        fieldset({ 'class': 'no-label edit-reward-buttons' },
+          submit({ 'class': 'green', style: 'padding: 0;' }, 'Save'),
+          a({ 'class': 'blue', href: curry(cancel_reward_update, reward) }, 'Cancel'),
+          !fundraiser.published && a({ 'class': 'blue', href: curry(destroy_reward, fundraiser, reward) }, 'Delete')
+        )
       )
     );
 
-    reward_row.addEventListener('click', function() { add_class(this, 'active') });
+    reward_row_element.addEventListener('click', function() { add_class(this, 'active') });
+    if (fundraiser.published) add_class(reward_row_element, 'published');
 
-    if (fundraiser.published) add_class(reward_row, 'published');
-    return reward_row;
+    return reward_row_element;
   });
 
   define('reward_info', function(reward) {
     return ul(
-      li(money(reward.amount)),
+      li(money(reward.amount||0)),
       li(reward.limited_to ? span('(', formatted_number(reward.claimed), ' of ', formatted_number(reward.limited_to), ' left)') : 'Unlimited'),
       li(reward.description)
     )
-  })
+  });
+
+  define('insert_reward_row', function(fundraiser, reward) {
+    document.getElementById('reward-rows').appendChild(reward_row(fundraiser, reward));
+  });
+
+  define('cancel_reward_update', function(reward) {
+    var reward_row = document.getElementById('reward-row-'+reward.id);
+    remove_class(reward_row, 'active')
+  });
 
   define('update_reward', function(fundraiser, reward, data) {
     render({ target: 'reward-row-'+reward.id+'-errors' },'');
@@ -433,7 +458,6 @@ with (scope('Edit', 'Fundraiser')) {
     BountySource.update_reward(fundraiser.id, reward.id, data, function(response) {
       if (response.meta.success) {
         remove_class(document.getElementById('reward-row-'+reward.id), 'active');
-
         render({ target: 'reward-row-'+response.data.id+'-info' }, reward_info(response.data));
       } else {
         render({ target: 'reward-row-'+reward.id+'-errors' }, small_error_message(response.data.error));
@@ -446,13 +470,25 @@ with (scope('Edit', 'Fundraiser')) {
 
     BountySource.create_reward(fundraiser.id, data, function(response) {
       if (response.meta.success) {
-        var reward = response.data;
-
-        console.log('created reward', reward);
+        insert_reward_row(fundraiser, response.data);
       } else {
         render({ target: 'create-reward-errors' }, small_error_message(response.data.error));
       }
     })
+  });
+
+  define('destroy_reward', function(fundraiser, reward) {
+    render({ target: 'reward-row-'+reward.id+'-errors' }, '');
+
+    BountySource.destroy_reward(fundraiser.id, reward.id, function(response) {
+      if (response.meta.success) {
+        // remove the reward row
+        var reward_row = document.getElementById('reward-row-'+reward.id);
+        reward_row.parentElement.removeChild(reward_row);
+      } else {
+        render({ target: 'reward-row-'+reward.id+'-errors' }, small_error_message(response.data.error));
+      }
+    });
   });
 
   define('update_fundraiser', function(fundraiser, data) {
@@ -472,7 +508,7 @@ with (scope('Edit', 'Fundraiser')) {
         render({ target: 'fundraiser-nav-bar' }, nav_bar(fundraiser));
 
         // render publish button again
-        render({ target: 'publish-button' }, publish_button(fundraiser));
+        if (!fundraiser.published) render({ target: 'publish-button' }, publish_button(fundraiser));
 
         // render the preview again
         render({ target: 'fundraiser-preview' }, Show.fundraiser_template(fundraiser, { preview: true }));
