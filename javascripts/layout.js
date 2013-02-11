@@ -150,8 +150,10 @@ with (scope('App')) {
     return '$' + formatted_number(parts[0]) + (show_pennies ? '.' + ((parts[1]||'') + '00').substr(0,2) : '');
   });
 
-  define('formatted_number', function(n) {
-    return (n||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  define('formatted_number', function(value) {
+    var parts = value.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
   });
 
   define('code', function() {

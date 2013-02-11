@@ -304,7 +304,7 @@ with (scope('Edit', 'Fundraiser')) {
         option({ value: 'on_delivery' },  'All upon delivery.')
       );
 
-      payout_method_select.setAttribute('disabled',true);
+      if (fundraiser.published) payout_method_select.setAttribute('disabled', true);
 
       return fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to complete this project? How do you want to receive the funds?" },
         fieldset(
@@ -313,7 +313,7 @@ with (scope('Edit', 'Fundraiser')) {
             span({ style: 'vertical-align: middle; font-size: 25px;' }, money(fundraiser.funding_goal))
           ] : [
             span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
-            number({ 'data-autosave': true, name: 'funding_goal', placeholder: '50,000', value: formatted_number(fundraiser.funding_goal||'') })
+            number({ 'data-autosave': true, name: 'funding_goal', placeholder: '50,000', value: fundraiser.funding_goal })
           ]
         ),
 
