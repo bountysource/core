@@ -67,7 +67,14 @@ section#homepage .box .inner { padding: 20px }
 
 .avatar { width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin: 3px; overflow: hidden; box-shadow: 0 0 4px #aaa; }
 .avatar img { width: 50px; height: 50px; border-radius: 2px; }
-.round-avatar { width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin: 3px; overflow: hidden; box-shadow: 0 0 4px #aaa; }
+.round-avatar {
+  width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin: 3px; overflow: hidden; box-shadow: 0 0 4px #aaa;
+  -webkit-transition: ease-in 50ms;
+  -moz-transition:    ease-in 50ms;
+  -o-transition:      ease-in 50ms;
+  transition:         ease-in 50ms;
+}
+.round-avatar:hover { box-shadow: 0 0 15px #686868; }
 .round-avatar img { width: 50px; height: 50px; }
 
 .avatar.small { width: 30px; height: 30px; border-radius: 2px; }
@@ -78,7 +85,14 @@ section#homepage .box .inner { padding: 20px }
 section#homepage .avatar { float: left; }
 section#homepage .round-avatar { float: left; }
 
-.card { border-radius: 5px; }
+.card {
+  border-radius: 5px;
+
+  -webkit-transition: ease-in-out 100ms;
+  -moz-transition:    ease-in-out 100ms;
+  -o-transition:      ease-in-out 100ms;
+  transition:         ease-in-out 100ms;
+}
 
 .card-column { width: 233px; float: left; margin-right: 15px; }
 .card-column img { max-width: 100% }

@@ -1,4 +1,4 @@
-with (scope('Fundraisers', 'App')) {
+with (scope('Pledge', 'Fundraiser')) {
   route('#fundraisers/:fundraiser_id/pledge', function(fundraiser_id) {
     var target_div = div('Loading...'),
       bountysource_account_div = div();

@@ -1,4 +1,4 @@
-with (scope('Fundraisers')) {
+with (scope('Show', 'Fundraiser')) {
 
   // Note: fundraiser identifier will either be just an ID, or and ID with a concatenated title string
   route('#fundraisers/:fundraiser_id', function(fundraiser_id) {
@@ -59,7 +59,7 @@ with (scope('Fundraisers')) {
 
       div({ 'class': 'split-side' },
         // show edit button if this fundraiser belongs to the user
-        !options.preview && Fundraisers.belongs_to(fundraiser.person) && div(
+        !options.preview && Fundraiser.belongs_to(fundraiser.person) && div(
           info_message(
             !fundraiser.published && div(
               div({ style: 'text-align: center;' },
@@ -101,7 +101,7 @@ with (scope('Fundraisers')) {
             )
           ),
 
-          form({ action: curry(make_pledge, fundraiser.id) },
+          form({ action: curry(Pledge.make_pledge, fundraiser.id) },
             messages(),
 
             // disable functionality of pledge button if not published

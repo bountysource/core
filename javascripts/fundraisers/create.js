@@ -1,4 +1,4 @@
-with (scope('Fundraisers')) {
+with (scope('Create', 'Fundraiser')) {
   // create a new fundraiser
   route('#account/create_fundraiser', function() {
     render(
