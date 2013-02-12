@@ -210,7 +210,7 @@ with (scope('Home', 'App')) {
       ),
 
       card.image_url && div({ style: 'text-align: center; margin-top: 10px;' },
-        img({ style: 'max-height: 150px; border-radius: 3px;', src: card.image_url })
+        img({ style: 'max-width: 100%; border-radius: 3px;', src: card.image_url })
       ),
 
       div({ style: 'clear: both' }),
