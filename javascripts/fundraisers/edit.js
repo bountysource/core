@@ -443,8 +443,25 @@ with (scope('Edit', 'Fundraiser')) {
     )
   });
 
+  // inserts reward row in order based on amount
   define('insert_reward_row', function(fundraiser, reward) {
+    // append the new reward row
     document.getElementById('reward-rows').appendChild(reward_row(fundraiser, reward));
+
+    var reward_rows = [],
+        reward_row_elements = document.getElementById('reward-rows').children;
+    for (var i=0; i<reward_row_elements.length; i++) reward_rows.push(reward_row_elements[i]);
+
+    // sort the reward rows in place
+    var sort_method = function(row1, row2) {
+      var val1 = parseInt(row1.getAttribute('data-amount')||'0'),
+        val2 = parseInt(row2.getAttribute('data-amount')||'0');
+      return val1 == val2 ? 0 : val1 < val2;
+    };
+    reward_rows.sort(sort_method);
+
+    // move the elements in the DOM
+    for (var i=0; i<reward_rows.length; i++) reward_rows[i].parentNode.appendChild(reward_rows[i]);
   });
 
   define('cancel_reward_update', function(reward) {
