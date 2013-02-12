@@ -199,17 +199,17 @@ describe "Fundraiser Creation" do
         Watir::Wait.until { !@browser.li(text: 'Just kidding').present? }
       end
 
-      pending "should insert many rewards with different different amounts, sorting them as pending adds them" do
+      pending "should insert many rewards with different different amounts, sorting them as they are added" do
 
       end
 
       pending "should receive rewards from API in sorted order" do
 
       end
+    end
 
-      it "should now have a publish button" do
-        @browser.a(text: 'Publish').should be_present
-      end
+    it "should now have a publish button" do
+      @browser.a(text: 'Publish').wait_until_present
     end
 
     describe "published fundraiser" do
