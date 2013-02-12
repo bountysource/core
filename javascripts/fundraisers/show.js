@@ -59,7 +59,12 @@ with (scope('Show', 'Fundraiser')) {
 
       div({ 'class': 'split-side' },
         // show edit button if this fundraiser belongs to the user
-        !options.preview && Fundraiser.belongs_to(fundraiser.person) && div(
+        options.preview ? a({ 'class': 'blue', href: Edit.hide_preview, style: 'padding: 10px 0;' },
+          div({ style: 'display: inline-block;' },
+            img({ src: 'images/edit_32.gif', style: 'vertical-align: middle;' })
+          ),
+          div({ style: 'display: inline-block; width: 80%' }, span('Continue Editing'))
+        ) : Fundraiser.belongs_to(fundraiser.person) && div(
           info_message(
             !fundraiser.published && div(
               div({ style: 'text-align: center;' },
@@ -69,7 +74,7 @@ with (scope('Show', 'Fundraiser')) {
             ),
 
             a({ 'class': 'blue', href: fundraiser.edit_url, style: 'padding: 5px 0;' },
-              div({ style: 'display: inline-block; width: 25%px;' },
+              div({ style: 'display: inline-block; width: 25%;' },
                 img({ src: 'images/edit_32.gif', style: 'vertical-align: middle;' })
               ),
               div({ style: 'display: inline-block; width: 75%' }, span('Edit'))

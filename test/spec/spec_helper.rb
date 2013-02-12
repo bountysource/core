@@ -1,4 +1,5 @@
 require "bundler"
+require "ostruct"
 Bundler.require
 
 CREDENTIALS = YAML.load_file(File.expand_path('../../config/credentials.yml', __FILE__))

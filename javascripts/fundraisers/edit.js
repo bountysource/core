@@ -136,7 +136,7 @@ with (scope('Edit', 'Fundraiser')) {
         section
       ),
       target_div
-    )
+    );
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
       if (response.meta.success) {
@@ -145,7 +145,7 @@ with (scope('Edit', 'Fundraiser')) {
         // initialize cached fundraiser
         Edit.cached_fundraiser = fundraiser;
 
-        // render the title into the breadcrumns
+        // render the title into the breadcrumbs
         render({ target: 'fundraiser-title' }, fundraiser.title);
 
         // render everything else
@@ -160,7 +160,7 @@ with (scope('Edit', 'Fundraiser')) {
             messages,
 
             div({ 'class': 'split-main' },
-              edit_form = form({ 'class': 'fancy', id: 'fundraiser-edit-form', action: curry(update_fundraiser, fundraiser) },
+              form({ 'class': 'fancy', id: 'fundraiser-edit-form', action: curry(update_fundraiser, fundraiser) },
                 yield(fundraiser)
               )
             ),
@@ -175,7 +175,7 @@ with (scope('Edit', 'Fundraiser')) {
 
                 div({ style: 'background: #eee; padding: 10px; border-bottom: 1px solid #CCC;' },
                   // this is re-rendered after each save
-                  div({ onClick: curry(preview_fundraiser, fundraiser) },
+                  div({ onClick: show_preview },
                     div({ id: 'fundraiser-card-preview' }, curry(card, fundraiser))
                   )
                 ),
@@ -197,7 +197,7 @@ with (scope('Edit', 'Fundraiser')) {
           for (var j=0; j<input_groups[i].length; j++) {
             if (input_groups[i][j].getAttribute('data-autosave')) {
               input_groups[i][j].addEventListener('blur', function() {
-                data = {};
+                var data = {};
                 data[this.name] = this.value;
                 if (this.value != Edit.cached_fundraiser[this.name]) update_fundraiser(fundraiser, data);
               });
@@ -551,17 +551,14 @@ with (scope('Edit', 'Fundraiser')) {
   });
 
   // show the preview fundraiser
-  define('preview_fundraiser', function(fundraiser) {
+  define('show_preview', function() {
     hide('fundraiser-edit-form-wrapper');
     show('fundraiser-preview-wrapper');
   });
 
-  define('hide_preview', function(){
-    // clear the 'saved' message before coming back to edit form
-    render({ target: 'fundraiser-edit-errors' },'');
-
-    hide('fundraiser-preview-wrapper');
+  define('hide_preview', function() {
     show('fundraiser-edit-form-wrapper');
+    hide('fundraiser-preview-wrapper');
   });
 
   define('destroy_fundraiser', function(fundraiser_id) {
