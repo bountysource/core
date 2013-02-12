@@ -456,7 +456,7 @@ with (scope('Edit', 'Fundraiser')) {
     var sort_method = function(row1, row2) {
       var val1 = parseInt(row1.getAttribute('data-amount')||'0'),
         val2 = parseInt(row2.getAttribute('data-amount')||'0');
-      return val1 == val2 ? 0 : val1 < val2;
+      return val1 == val2 ? 0 : val1 > val2;
     };
     reward_rows.sort(sort_method);
 
