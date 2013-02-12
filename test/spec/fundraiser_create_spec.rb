@@ -70,16 +70,16 @@ describe "Fundraiser Creation" do
 
       # fill in the banner image URL with a random image pulled from the page
       @fundraiser.image_url = @browser.imgs.to_a.sample.src
-      @browser.text_field(name: 'image_url').set @fundraiser.image_url
+      @browser.text_field(name: 'image_url').set @fundraiser.image_url, :tab
 
       # fill in the homepage URL
-      @browser.text_field(name: 'homepage_url').set @fundraiser.homepage_url
+      @browser.text_field(name: 'homepage_url').set @fundraiser.homepage_url, :tab
 
       # fill in the repo URL
-      @browser.text_field(name: 'repo_url').set @fundraiser.repo_url
+      @browser.text_field(name: 'repo_url').set @fundraiser.repo_url, :tab
 
       # fill in the short description, then blur out
-      @browser.text_field(name: 'short_description').set @fundraiser.short_description
+      @browser.text_field(name: 'short_description').set @fundraiser.short_description, :tab
 
       # the card preview should update with the short description and the preview should have updated data
       @browser.div(id: 'fundraiser-card-preview').div(text: @fundraiser.short_description).when_present.click
