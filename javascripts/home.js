@@ -18,7 +18,7 @@ with (scope('Home', 'App')) {
     render({ into: 'before-content' },
       section({ id: 'homepage' },
         (logged_in() ? homepage_box_authed : homepage_box)(),
-        //card_filter_box(),
+        card_filter_box(),
         div({ id: 'column-container' }),
         div({ style: 'clear: both' }),
         div({ id: 'card-loader-div' }, 'Loading...')
@@ -60,12 +60,12 @@ with (scope('Home', 'App')) {
   });
 
   define('card_filter_box', function() {
-    return div({ style: 'text-align: center; padding: 10px; margin: 20px 0 10px 0; background: #F2F3F2; border: 10px solid white; box-shadow: #CCC8BE 0px 0px 5px' },
-      span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic; padding: 0 25px'}, 'Filter:'),
-
-      form({ style: 'display: inline', action: function(form_data) { filter_cards(form_data.query) } },
-        text({name: 'query', placeholder: 'JavaScript', style: 'width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;' }),
-        submit({ value: 'Search', 'class': 'green', style: 'width: 80px; margin-left: 3px;' })
+    return div({ id: 'cardfilterbox' },
+      form({ action: function(form_data) { filter_cards(form_data.text + '|' + form_data.language + '|' + form_data.bounty_min) } },
+        text({name: 'text', placeholder: 'Project/Issue' }),
+        text({name: 'language', placeholder: 'Language' }),
+        text({name: 'bounty_min', placeholder: 'Bounty Min.' }),
+        submit({ value: 'Search', 'class': 'green' })
       )
     )
   });
