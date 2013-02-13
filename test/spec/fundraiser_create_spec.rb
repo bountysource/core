@@ -142,7 +142,7 @@ describe "Fundraiser Creation" do
       # goto preview and make sure description is there
       @browser.div(id: 'fundraiser-card-preview').click
 
-      @browser.span(text: /\$#{@fundraiser.funding_goal}/).should be_present
+      @browser.span(text: /\$#{@fundraiser.funding_goal}/).wait_until_present
     end
 
     it "should fill in duration" do
@@ -162,7 +162,7 @@ describe "Fundraiser Creation" do
       # goto preview and make sure description is there
       @browser.div(id: 'fundraiser-card-preview').click
 
-      @browser.span(text: /#{@fundraiser.days_open}/).should be_present
+      @browser.span(text: /#{@fundraiser.days_open}/).wait_until_present
     end
 
     pending "should show publish button if all data present" do
