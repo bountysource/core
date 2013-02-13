@@ -204,10 +204,29 @@ describe "Fundraiser Creation" do
       end
 
       it "should insert many rewards with different different amounts, sorting them as they are added" do
+        @create_form.text_field(name: 'amount').set 50
+        @create_form.text_field(name: 'description').set "Third"
+        @create_form.button.click
 
+        @create_form.text_field(name: 'amount').set 10
+        @create_form.text_field(name: 'description').set "First"
+        @create_form.button.click
+
+        @create_form.text_field(name: 'amount').set 100
+        @create_form.text_field(name: 'description').set "Fourth"
+        @create_form.button.click
+
+        @create_form.text_field(name: 'amount').set 25
+        @create_form.text_field(name: 'description').set "Second"
+        @create_form.button.click
+
+        @browser.li(text: 'Second').wait_until_present
+
+        @browser.divs(class: 'reward-row').map { |e| e.attribute_value('data-amount').to_i }.should == [10, 25, 50, 100]
       end
 
       pending "should receive rewards from API in sorted order" do
+        @browser.divs(class: 'reward-row').map { |e| e.attribute_value('data-amount').to_i }.should == [10, 25, 50, 100]
       end
     end
 
