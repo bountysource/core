@@ -235,7 +235,23 @@ describe "Fundraiser Creation" do
     end
 
     describe "published fundraiser" do
+      before do
+        @browser.a(text: 'Publish').when_present.click
+      end
+
       pending "should be able to update basic info" do
+        # the correct nav button should be displayed
+        nav_element = @browser.ul(id: 'fundraiser-nav-bar').a(id: 'basic-info')
+        nav_element.attribute_value('class').should match /\bactive\b/
+
+        # the title should already be filled in
+        @browser.text_field(name: 'title').set "I am changing the title"
+
+        # the card preview should update with the short description and the preview should have updated data
+        @browser.div(id: 'fundraiser-card-preview').div(text: @fundraiser.short_description).when_present.click
+
+        # check for title
+        @browser.text.should match /\b#{@fundraiser.title}/
       end
 
       pending "should be able to update description" do
