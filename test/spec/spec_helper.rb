@@ -113,6 +113,7 @@ RSpec.configure do |config|
     class << $browser
       # execute javascript in the scope.js instance
       def execute_scopejs_script(src)
+        Watir::Wait.until { execute_script("return (typeof(scope) != 'undefined') && scope.instance && scope.instance.initializer && (typeof(scope.__initializers) == 'undefined')") }
         execute_script "with (scope.instance) { #{src} }"
       end
 
