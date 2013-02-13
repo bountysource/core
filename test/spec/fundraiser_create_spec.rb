@@ -132,6 +132,9 @@ describe "Fundraiser Creation" do
 
       @browser.text_field(name: 'funding_goal').set @fundraiser.funding_goal, :tab
 
+      # set the payout method
+      @browser.select_list(name: 'payout_method').select_value('fifty_fifty')
+
       # the fundraiser card preview should have been updated
       @browser.div(id: 'fundraiser-card-preview').span(text: /\$#{@fundraiser.funding_goal}/).wait_until_present
 
@@ -199,12 +202,11 @@ describe "Fundraiser Creation" do
         Watir::Wait.until { !@browser.li(text: 'Just kidding').present? }
       end
 
-      pending "should insert many rewards with different different amounts, sorting them as they are added" do
+      it "should insert many rewards with different different amounts, sorting them as they are added" do
 
       end
 
       pending "should receive rewards from API in sorted order" do
-
       end
     end
 

@@ -28,7 +28,7 @@ with (scope('Edit', 'Fundraiser')) {
     var section_completed = {
       basic_info:   not_blank(fundraiser.title) && not_blank(fundraiser.short_description),
       description:  not_blank(fundraiser.description_html),
-      funding:      not_blank(fundraiser.funding_goal) && (fundraiser.funding_goal > 0),
+      funding:      not_blank(fundraiser.funding_goal) && (fundraiser.funding_goal > 0) && not_blank(fundraiser.payout_method),
       rewards:      fundraiser.rewards.length > 0,
       duration:     not_blank(fundraiser.days_open)
     };
@@ -191,7 +191,8 @@ with (scope('Edit', 'Fundraiser')) {
         // initialize auto save on input blur
         var input_groups = [
           document.getElementsByTagName('input'),
-          document.getElementsByTagName('textarea')
+          document.getElementsByTagName('textarea'),
+          document.getElementsByTagName('select')
         ];
         for (var i=0; i<input_groups.length; i++) {
           for (var j=0; j<input_groups[i].length; j++) {
@@ -300,11 +301,14 @@ with (scope('Edit', 'Fundraiser')) {
 
   route('#account/fundraisers/:fundraiser_id/funding', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Funding', function(fundraiser) {
-      var payout_method_select = select({ name: 'payout_method', style: 'width: 400px;' },
+      var payout_method_select = select({ 'data-autosave': true, required: true, name: 'payout_method', style: 'width: 400px;' },
+        option(),
         option({ value: 'on_funding' },   'All upon funding goal being reached.'),
         option({ value: 'fifty_fifty' },  'Half on funding goal being reached, half after delivery.'),
         option({ value: 'on_delivery' },  'All upon delivery.')
       );
+
+      if (fundraiser.payout_method) payout_method_select.value = fundraiser.payout_method;
 
       if (fundraiser.published) payout_method_select.setAttribute('disabled', true);
 
@@ -315,7 +319,7 @@ with (scope('Edit', 'Fundraiser')) {
             span({ style: 'vertical-align: middle; font-size: 25px;' }, money(fundraiser.funding_goal))
           ] : [
             span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
-            number({ 'data-autosave': true, name: 'funding_goal', min: 0, placeholder: '50,000', value: fundraiser.funding_goal })
+            number({ 'data-autosave': true, name: 'funding_goal', min: 1, placeholder: '50,000', value: fundraiser.funding_goal })
           ]
         ),
 
