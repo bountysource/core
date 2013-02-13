@@ -135,9 +135,9 @@ with (scope('Signin','App')) {
   define('save_user_data_and_redirect', function(response) {
     var redirect_url = null;
 
-    if (response.data.redirect_url) {
-      redirect_url = response.data.redirect_url;
-      delete response.data.redirect_url;
+    if (response.redirect_url) {
+      redirect_url = response.redirect_url;
+      delete response.redirect_url;
     } else if (Storage.get('_redirect_to_after_login')) {
       redirect_url = Storage.get('_redirect_to_after_login');
       Storage.clear('_redirect_to_after_login');
@@ -248,7 +248,7 @@ with (scope('Signin','App')) {
 
     if (params.status == 'linked') {
       // now they're logged in with this github account
-      save_user_data_and_redirect({ data: params.access_token });
+      save_user_data_and_redirect({ data: params.access_token, redirect_url: params.redirect_url });
     } else if (params.status == 'error_needs_account') {
       render(
         breadcrumbs(a({ href: '#' }, 'Home'), 'Sign In'),
