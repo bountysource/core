@@ -18,7 +18,7 @@ with (scope('Home', 'App')) {
     render({ into: 'before-content' },
       section({ id: 'homepage' },
         (logged_in() ? homepage_box_authed : homepage_box)(),
-        // card_filter_box(),
+        card_filter_box(),
         div({ id: 'column-container' }),
         div({ style: 'clear: both' }),
         div({ id: 'card-loader-div' }, 'Loading...')
@@ -65,7 +65,8 @@ with (scope('Home', 'App')) {
         text({name: 'text', placeholder: 'Project/Issue' }),
         text({name: 'language', placeholder: 'Language' }),
         text({name: 'bounty_min', placeholder: 'Bounty Min.' }),
-        submit({ value: 'Search', 'class': 'green' })
+        submit({ value: 'Filter', 'class': 'green' }),
+        reset({ value: 'Reset', 'class': 'gray' })
       )
     )
   });
@@ -110,6 +111,8 @@ with (scope('Home', 'App')) {
 
   define('clear_cards', function() {
     // alert('clear cards');
+    page_state.current_cards = [];
+    page_state.can_load_more_cards = true;
     render({ into: 'column-container' },
       div({ 'class': 'card-column' }),
       div({ 'class': 'card-column' }),
@@ -122,13 +125,20 @@ with (scope('Home', 'App')) {
     if (!page_state.can_load_more_cards) return;
 
     show('card-loader-div');
-    
+    render({ into: 'card-loader-div'}, 'Loading...');
+
+
 //    _gaq.push(['_trackEvent', 'Homepage', 'Show More Cards']);
 
     page_state.can_load_more_cards = false;
     BountySource.get_more_cards(page_state.current_cards, page_state.query, function(response) {
       var col_container = document.getElementById('column-container');
       if (!col_container) return;
+
+      if (response.data.length == 0) {
+        render({ into: 'card-loader-div' }, 'No results. Try broadening filter');
+        return;
+      }
 
       for (var j=0; j < response.data.length; j++) {
         var card = response.data[j];
@@ -252,29 +262,6 @@ with (scope('Home', 'App')) {
 
     return card_element;
   });
-
-//  define('card_div', function(card) {
-//    return div({ 'class': 'card' },
-//      div({ 'class': 'inner' },
-//        card.repository ? [
-//          a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-//          div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name))
-//        ] : [
-//          a({ href: card.href }, img({ style: 'float: left; width: 40px; margin-bottom: 10px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-//          div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: card.href, style: 'color: #333' }, 'Fundraiser'))
-//        ],
-//        div({ style: 'clear: both' }),
-//
-//        div(a({ href: card.href }, card.title)),
-//
-//        p({ style: 'color: #999; font-size: 90%' }, abbreviated_text(card.description, 100)),
-//
-//        a({ href: card.href, style: 'text-decoration: none; color: black;' },
-//          div({ style: "text-align: center; font-size: 24px; background: #eee; padding: 10px 0; line-height: 25px;" }, money(card.account_balance), card.funding_goal && [" of ", money(card.funding_goal)] )
-//        )
-//      )
-//    );
-//  });
 
   define('check_scroll_to_see_if_we_need_more_cards', function() {
     if (get_route() != '#') return;

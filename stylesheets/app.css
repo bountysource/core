@@ -354,6 +354,6 @@ input.autosized {
   width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;
 }
 
-#cardfilterbox input[type=submit] {
+#cardfilterbox input[type=submit], #cardfilterbox input[type=reset] {
   width: 80px; margin-left: 3px;
 }
