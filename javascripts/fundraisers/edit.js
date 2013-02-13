@@ -473,6 +473,14 @@ with (scope('Edit', 'Fundraiser')) {
     remove_class(reward_row, 'active')
   });
 
+  define('clear_text_fields', function(form) {
+    // clear the creation form
+    var input_groups = [form.getElementsByTagName('input'), form.getElementsByTagName('textarea')];
+    for (var i=0; i<input_groups.length; i++) {
+      for (var j=0; j<input_groups[i].length; j++) input_groups[i][j].value = "";
+    }
+  });
+
   define('update_reward', function(fundraiser, reward, data) {
     render({ target: 'reward-row-'+reward.id+'-errors' },'');
 
@@ -492,6 +500,7 @@ with (scope('Edit', 'Fundraiser')) {
     BountySource.create_reward(fundraiser.id, data, function(response) {
       if (response.meta.success) {
         insert_reward_row(fundraiser, response.data);
+        clear_text_fields(document.getElementById('rewards-create'));
       } else {
         render({ target: 'create-reward-errors' }, small_error_message(response.data.error));
       }
