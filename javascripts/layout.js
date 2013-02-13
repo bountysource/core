@@ -88,7 +88,7 @@ with (scope('App')) {
           )
         ),
 
-        chatbar()
+        !test_mode && chatbar
       );
     }
 
