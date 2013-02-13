@@ -38,8 +38,8 @@ describe "Fundraiser Creation" do
     login_with_email!
 
     @browser.goto '#account/fundraisers'
-    @browser.table.wait_until_present
-    @browser.as(text: @fundraiser.title).first.click # goto fundraiser show page
+    @browser.link(text: @fundraiser.title).wait_until_present
+    @browser.links(text: @fundraiser.title).last.click # goto fundraiser show page
 
     @browser.span(text: /edit/i).wait_until_present
   end
@@ -50,8 +50,8 @@ describe "Fundraiser Creation" do
 
       # goto fundraiser page
       @browser.goto '#account/fundraisers'
-      @browser.a(text: @fundraiser.title).wait_until_present
-      @browser.as(text: @fundraiser.title).last.click
+      @browser.link(text: @fundraiser.title).wait_until_present
+      @browser.links(text: @fundraiser.title).last.click
 
       # click the edit button
       @browser.span(text: /edit/i).when_present.click
@@ -62,7 +62,7 @@ describe "Fundraiser Creation" do
 
     it "should fill in basic info" do
       # the correct nav button should be displayed
-      nav_element = @browser.ul(id: 'fundraiser-nav-bar').a(id: 'basic-info')
+      nav_element = @browser.ul(id: 'fundraiser-nav-bar').link(id: 'basic-info')
       nav_element.attribute_value('class').should match /\bactive\b/
 
       # the title should already be filled in
@@ -98,10 +98,10 @@ describe "Fundraiser Creation" do
     end
 
     it "should fill in description" do
-      @browser.ul(id: 'fundraiser-nav-bar').a(id: 'description').click
+      @browser.ul(id: 'fundraiser-nav-bar').link(id: 'description').click
 
       # the correct nav button should be displayed
-      nav_element = @browser.ul(id: 'fundraiser-nav-bar').a(id: 'description').when_present
+      nav_element = @browser.ul(id: 'fundraiser-nav-bar').link(id: 'description').when_present
       nav_element.attribute_value('class').should match /\bactive\b/
 
       # set that description, homie. set @fundraiser.description to description element value
@@ -124,10 +124,10 @@ describe "Fundraiser Creation" do
     end
 
     it "should fill in funding goal" do
-      @browser.ul(id: 'fundraiser-nav-bar').a(id: 'funding').click
+      @browser.ul(id: 'fundraiser-nav-bar').link(id: 'funding').click
 
       # the correct nav button should be displayed
-      nav_element = @browser.ul(id: 'fundraiser-nav-bar').a(id: 'funding').when_present
+      nav_element = @browser.ul(id: 'fundraiser-nav-bar').link(id: 'funding').when_present
       nav_element.attribute_value('class').should match /\bactive\b/
 
       # set the payout method
@@ -146,10 +146,10 @@ describe "Fundraiser Creation" do
     end
 
     it "should fill in duration" do
-      @browser.ul(id: 'fundraiser-nav-bar').a(id: 'duration').click
+      @browser.ul(id: 'fundraiser-nav-bar').link(id: 'duration').click
 
       # the correct nav button should be displayed
-      nav_element = @browser.ul(id: 'fundraiser-nav-bar').a(id: 'duration').when_present
+      nav_element = @browser.ul(id: 'fundraiser-nav-bar').link(id: 'duration').when_present
       nav_element.attribute_value('class').should match /\bactive\b/
 
       # get the days open input
@@ -171,10 +171,10 @@ describe "Fundraiser Creation" do
 
     describe "rewards" do
       before do
-        @browser.ul(id: 'fundraiser-nav-bar').a(id: 'rewards').click
+        @browser.ul(id: 'fundraiser-nav-bar').link(id: 'rewards').click
 
         # the correct nav button should be displayed
-        nav_element = @browser.ul(id: 'fundraiser-nav-bar').a(id: 'rewards').when_present
+        nav_element = @browser.ul(id: 'fundraiser-nav-bar').link(id: 'rewards').when_present
         nav_element.attribute_value('class').should match /\bactive\b/
 
         @create_form = @browser.form(id: 'rewards-create')
@@ -199,7 +199,7 @@ describe "Fundraiser Creation" do
 
       it "should delete a reward" do
         @browser.li(text: 'Just kidding').click
-        @browser.a(text: 'Delete').click
+        @browser.link(text: 'Delete').click
         Watir::Wait.until { !@browser.li(text: 'Just kidding').present? }
       end
 
@@ -231,17 +231,17 @@ describe "Fundraiser Creation" do
     end
 
     it "should now have a publish button" do
-      @browser.a(text: 'Publish').wait_until_present
+      @browser.link(text: 'Publish').wait_until_present
     end
 
     describe "published fundraiser" do
       before do
-        @browser.a(text: 'Publish').when_present.click
+        @browser.link(text: 'Publish').when_present.click
       end
 
       pending "should be able to update basic info" do
         # the correct nav button should be displayed
-        nav_element = @browser.ul(id: 'fundraiser-nav-bar').a(id: 'basic-info')
+        nav_element = @browser.ul(id: 'fundraiser-nav-bar').link(id: 'basic-info')
         nav_element.attribute_value('class').should match /\bactive\b/
 
         # the title should already be filled in
