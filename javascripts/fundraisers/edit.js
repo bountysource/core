@@ -28,7 +28,7 @@ with (scope('Edit', 'Fundraiser')) {
     var section_completed = {
       basic_info:   not_blank(fundraiser.title) && not_blank(fundraiser.short_description),
       description:  not_blank(fundraiser.description_html),
-      funding:      not_blank(fundraiser.funding_goal) && (fundraiser.funding_goal > 0) && not_blank(fundraiser.payout_method),
+      funding:      not_blank(fundraiser.funding_goal) && (fundraiser.funding_goal > 0),
       rewards:      fundraiser.rewards.length > 0,
       duration:     not_blank(fundraiser.days_open)
     };
