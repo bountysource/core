@@ -149,7 +149,13 @@ with (scope('Home', 'App')) {
           if (col_container.childNodes[k].clientHeight < target.clientHeight) target = col_container.childNodes[k];
         }
 
-        target.appendChild(card.funding_goal ? fundraiser_card(card) : bounty_card(card));
+        var rendered_card;
+        if (card.id.match(/^gi\d/)) rendered_card = bounty_card(card);
+        else if (card.id.match(/^fr\d/)) rendered_card = fundraiser_card(card);
+        else if (card.id.match(/^gr\d/)) rendered_card = repository_card(card);
+        else rendered_card = div('Unable to render card.');
+
+        target.appendChild(rendered_card);
       }
 
       hide('card-loader-div');
@@ -261,6 +267,40 @@ with (scope('Home', 'App')) {
     }
 
     return card_element;
+  });
+
+  define('repository_card', function(repository) {
+    return div({ 'class': 'card', onClick: curry(set_route, repository.href) },
+      a({ href: '#repos/' + repository.name }, img({ style: 'width: 100%; ', src: repository.avatar_url })),
+
+      div({ style: 'padding: 7px; background: #EEE; margin-bottom: 5px;' },
+        div({ style: 'margin: 4px 0; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + repository.full_name, style: 'color: #333' }, repository.display_name)),
+
+        div({ style: 'overflow: auto; color: #999; font-size: 80%;' },
+          abbreviated_text(repository.description, 100)
+        ),
+
+        // languages
+        (repository.languages_as_string) && div({ style: 'font-size: 12px; color: #999; font-size: 60%; font-style: italic' },
+          repository.languages_as_string
+        )
+      ),
+
+      div({ style: 'margin-bottom: 10px; font-size: 12px' },
+        a({ href: '#' }, 'Some awesome task you should really start working on'),
+        a({ href: '#', style: 'display: inline; vertical-align: middle; text-decoration: none; color: #48B848; margin-left: 8px' }, money(150))
+      ),
+
+      div({ style: 'margin-bottom: 10px; font-size: 12px' },
+        a({ href: '#' }, 'Oh and this thing is so super important... you really should add some money to it!'),
+        a({ href: '#', style: 'display: inline; vertical-align: middle; text-decoration: none; color: #48B848; margin-left: 8px' }, money(85))
+      ),
+
+      div({ style: 'margin-bottom: 10px; font-size: 12px' },
+        a({ href: '#' }, 'And somethign else awesome'),
+        a({ href: '#', style: 'display: inline; vertical-align: middle; text-decoration: none; color: #48B848; margin-left: 8px' }, money(45))
+      )
+    );
   });
 
   define('check_scroll_to_see_if_we_need_more_cards', function() {
