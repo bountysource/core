@@ -130,10 +130,11 @@ describe "Fundraiser Creation" do
       nav_element = @browser.ul(id: 'fundraiser-nav-bar').a(id: 'funding').when_present
       nav_element.attribute_value('class').should match /\bactive\b/
 
-      @browser.text_field(name: 'funding_goal').set @fundraiser.funding_goal, :tab
-
       # set the payout method
       @browser.select_list(name: 'payout_method').select_value('fifty_fifty')
+
+      # set the funding goal
+      @browser.text_field(name: 'funding_goal').set @fundraiser.funding_goal, :tab
 
       # the fundraiser card preview should have been updated
       @browser.div(id: 'fundraiser-card-preview').span(text: /\$#{@fundraiser.funding_goal}/).wait_until_present
@@ -141,7 +142,7 @@ describe "Fundraiser Creation" do
       # goto preview and make sure description is there
       @browser.div(id: 'fundraiser-card-preview').click
 
-      @browser.span(text: /\$#{@funding_goal}/).should be_present
+      @browser.span(text: /\$#{@fundraiser.funding_goal}/).should be_present
     end
 
     it "should fill in duration" do
