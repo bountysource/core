@@ -18,7 +18,7 @@ with (scope('Home', 'App')) {
     render({ into: 'before-content' },
       section({ id: 'homepage' },
         (logged_in() ? homepage_box_authed : homepage_box)(),
-        card_filter_box(),
+//        card_filter_box(),
         div({ id: 'column-container' }),
         div({ style: 'clear: both' }),
         div({ id: 'card-loader-div' }, 'Loading...')
