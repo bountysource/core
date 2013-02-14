@@ -43,8 +43,22 @@ describe "Claiming a Bounty" do
     @browser.a(text: 'Link with GitHub').when_present.click
 
     @browser.span(id: 'user_nav_name').wait_until_present
+
+    @browser.override_api_response_data :get_pull_requests, success: true, data: [
+      {
+        bounty_total: 10,
+        comments: 0,
+        number: 1,
+        repository: { full_name: 'bountysource/frontend' },
+        user: { login: 'bountysource' },
+        login: 'bountysource'
+      }
+    ]
+
     @browser.goto '#repos/coryboyd/bs-test/issues/18'
     @browser.select(name: 'pull_request_number').wait_until_present
+
+    @browser.restore_api_method :get_pull_requests
   end
 
   describe "solutions" do
