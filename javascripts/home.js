@@ -61,9 +61,8 @@ with (scope('Home', 'App')) {
 
   define('card_filter_box', function() {
     return div({ id: 'cardfilterbox' },
-      form({ action: function(form_data) { filter_cards(form_data.text + '|' + form_data.language + '|' + form_data.bounty_min) } },
-        text({name: 'text', placeholder: 'Project/Issue' }),
-        text({name: 'language', placeholder: 'Language' }),
+      form({ action: function(form_data) { filter_cards(form_data.text + '|' + form_data.bounty_min) } },
+        text({name: 'text', placeholder: 'Project/Issue/Language' }),
         text({name: 'bounty_min', placeholder: 'Bounty Min.' }),
         submit({ value: 'Filter', 'class': 'green' }),
         reset({ value: 'Reset', 'class': 'gray' })
