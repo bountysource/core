@@ -124,7 +124,9 @@ with (scope('Contributions', 'App')) {
               url:  BountySource.www_host+Issue.get_href(bounty.issue),
               text: money(bounty.amount)+" bounty placed",
               via:  'BountySource'
-            }, a({ 'class': 'btn-auth btn-twitter' }, 'Tweet'))
+            }, a({ 'class': 'btn-auth btn-twitter', style: 'margin-right: 10px;' }, 'Tweet')),
+
+            Github.issue_comment_form(bounty.issue)
           )
         ),
 

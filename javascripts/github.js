@@ -39,4 +39,56 @@ with (scope('Github','App')) {
       });
     }
   });
+
+  // creates a button with a comment form flyout
+  define('issue_comment_form', function(issue) {
+    var user_info   = Storage.get('user_info') ? JSON.parse(Storage.get('user_info')) : {},
+        github_user = user_info.github_user ? user_info.github_user : {};
+
+    var link_account_button = a({ id: 'github-issue-comment-button', 'class': 'btn-auth btn-github' }, 'GitHub');
+    var comment_form = div({ id: 'comment-form-wrapper' },
+      form({ action: curry(create_issue_comment, issue) },
+        div({ id: 'github-issue-comment-errors' }),
+        textarea({ required: true, name: 'body', placeholder: 'I <3 OSS', value: 'I <3 OSS' }),
+        submit({ 'class': 'btn-auth btn-github hover' }, 'Post')
+      )
+    );
+
+    // if the user has an account liked with the right permissions, make the button show the comment form.
+    // otherwise, make the button fetch the user_repo permission
+    if (github_user.permissions && github_user.permissions.indexOf('public_repo') >= 0) {
+      link_account_button.addEventListener('click', function() {
+        if (has_class(this.parentElement, 'active')) {
+          remove_class(this.parentElement, 'active');
+          remove_class(this, 'hover');
+        } else {
+          add_class(this.parentElement, 'active');
+          add_class(this, 'hover');
+          comment_form.getElementsByTagName('textarea')[0].focus();
+        }
+      });
+    } else {
+
+    }
+
+    return div({ id: 'github-issue-comment-wrapper' },
+      link_account_button,
+      comment_form
+    );
+  });
+
+  define('create_issue_comment', function(issue, form_data) {
+    render({ target: 'github-issue-comment-errors' }, '');
+
+    BountySource.api('/github/repos/'+issue.repository.full_name+'/issues/'+issue.number+'/post_comment', 'POST', form_data, function(response) {
+      if (response.meta.success) {
+        // hide the form, using the click event method that is already defined
+        var e = document.getElementById('github-issue-comment-button');
+        if (e) e.click();
+      } else {
+        render({ target: 'github-issue-comment-errors' }, small_error_message(response.data.error));
+      }
+    });
+  });
+
 };

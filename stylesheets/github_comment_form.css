@@ -1,0 +1,37 @@
+#github-issue-comment-wrapper {
+  display: inline-block;
+}
+
+#github-issue-comment-wrapper #link-account-button,
+#github-issue-comment-wrapper #comment-form-wrapper { display: inline-block; vertical-align: middle; }
+
+#github-issue-comment-wrapper #comment-form-wrapper textarea {
+  height: 100px;
+  width: 70%;
+  font-size: 12px;
+  border: 1px solid gray;
+  border-radius: 2px;
+  display: inline;
+}
+#github-issue-comment-wrapper #comment-form-wrapper input[type=submit] { margin-left: 5px; width: 50px; display: inline; }
+#github-issue-comment-wrapper #comment-form-wrapper form {
+  width: 350px;
+  background: #CADCF3;
+  border: 1px solid #A0A0F3;
+  border-radius: 3px;
+  padding: 10px;
+  margin-left: 3px;
+}
+
+#github-issue-comment-wrapper #comment-form-wrapper {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+
+  -webkit-transition: ease-in 150ms;
+  -moz-transition:    ease-in 150ms;
+  -o-transition:      ease-in 150ms;
+  transition:         ease-in 150ms;
+}
+#github-issue-comment-wrapper.active #comment-form-wrapper { width: 380px; height: 130px; }
