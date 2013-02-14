@@ -203,26 +203,32 @@ describe "Fundraiser Creation" do
         Watir::Wait.until { !@browser.li(text: 'Just kidding').present? }
       end
 
-      it "should insert many rewards with different different amounts, sorting them as they are added" do
-        @create_form.text_field(name: 'amount').set 50
-        @create_form.text_field(name: 'description').set "Third"
+      it "should insert many rewards with different amounts, sorting them as they are added" do
+        @create_form.text_field(name: 'amount').set 50, :tab
+        @create_form.text_field(name: 'description').set "Third", :tab
         @create_form.button.click
 
-        @create_form.text_field(name: 'amount').set 10
-        @create_form.text_field(name: 'description').set "First"
+        sleep 1 # wait for the form to be cleared
+
+        @create_form.text_field(name: 'amount').set 10, :tab
+        @create_form.text_field(name: 'description').set "First", :tab
         @create_form.button.click
 
-        @create_form.text_field(name: 'amount').set 100
-        @create_form.text_field(name: 'description').set "Fourth"
+        sleep 1 # wait for the form to be cleared
+
+        @create_form.text_field(name: 'amount').set 100, :tab
+        @create_form.text_field(name: 'description').set "Fourth", :tab
         @create_form.button.click
 
-        @create_form.text_field(name: 'amount').set 25
-        @create_form.text_field(name: 'description').set "Second"
+        sleep 1 # wait for the form to be cleared
+
+        @create_form.text_field(name: 'amount').set 25, :tab
+        @create_form.text_field(name: 'description').set "Second", :tab
         @create_form.button.click
 
         @browser.li(text: 'Second').wait_until_present
 
-        @browser.divs(class: 'reward-row').map { |e| e.attribute_value('data-amount').to_i }.should == [10, 25, 50, 100]
+        @browser.divs(class: 'reward-row').map { |e| e.attribute_value('data-amount').to_i }.uniq.should == [10, 25, 50, 100]
       end
 
       pending "should receive rewards from API in sorted order" do
