@@ -135,9 +135,9 @@ with (scope('Signin','App')) {
   define('save_user_data_and_redirect', function(response) {
     var redirect_url = null;
 
-    if (response.redirect_url) {
-      redirect_url = response.redirect_url;
-      delete response.redirect_url;
+    if (response.data.redirect_url) {
+      redirect_url = response.data.redirect_url;
+      delete response.data.redirect_url;
     } else if (Storage.get('_redirect_to_after_login')) {
       redirect_url = Storage.get('_redirect_to_after_login');
       Storage.clear('_redirect_to_after_login');
