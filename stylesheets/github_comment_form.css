@@ -3,7 +3,7 @@
 }
 
 #github-issue-comment-wrapper #link-account-button,
-#github-issue-comment-wrapper #comment-form-wrapper { display: inline-block; vertical-align: middle; }
+#github-issue-comment-wrapper #comment-form-wrapper { display: block; }
 
 #github-issue-comment-wrapper #comment-form-wrapper textarea {
   height: 120px;

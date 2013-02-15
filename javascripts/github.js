@@ -47,7 +47,7 @@ with (scope('Github','App')) {
     var user_info   = Storage.get('user_info') ? JSON.parse(Storage.get('user_info')) : {},
         github_user = user_info.github_user ? user_info.github_user : {};
 
-    var link_account_button = a({ id: 'github-issue-comment-button', 'class': 'btn-auth btn-github' }, 'GitHub');
+    var link_account_button = a({ id: 'github-issue-comment-button', 'class': 'btn-auth btn-github large' }, 'GitHub');
     var comment_form = div({ id: 'comment-form-wrapper' },
       form({ action: curry(create_issue_comment, issue) },
         div({ id: 'github-issue-comment-errors' }),

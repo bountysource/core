@@ -117,13 +117,13 @@ with (scope('Contributions', 'App')) {
               link:     BountySource.www_host+Issue.get_href(bounty.issue),
               name:     bounty.repository.display_name,
               caption:  money(bounty.amount)+' bounty placed on issue #'+bounty.issue.number+' - '+bounty.issue.title
-            }, a({ 'class': 'btn-auth btn-facebook', style: 'margin-right: 10px;' }, 'Share')),
+            }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
 
             Twitter.create_share_button({
               url:  BountySource.www_host+Issue.get_href(bounty.issue),
               text: money(bounty.amount)+" bounty placed",
               via:  'BountySource'
-            }, a({ 'class': 'btn-auth btn-twitter', style: 'margin-right: 10px;' }, 'Tweet')),
+            }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet')),
 
             Github.issue_comment_form(bounty.issue, {
               default_text: "I placed a " + money(bounty.amount) + " dollar bounty on this issue using BountySource. The bounty total goes to the person whose pull request gets accepted. Add to or claim the bounty here: " + bounty.issue.url
