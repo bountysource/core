@@ -47,7 +47,7 @@ with (scope('Github','App')) {
     var user_info   = Storage.get('user_info') ? JSON.parse(Storage.get('user_info')) : {},
         github_user = user_info.github_user ? user_info.github_user : {};
 
-    var link_account_button = a({ id: 'github-issue-comment-button', 'class': 'btn-auth btn-github large' }, 'GitHub');
+    var link_account_button = a({ id: 'github-issue-comment-button', style: 'opacity: 0.25;', 'class': 'btn-auth btn-github large' }, 'GitHub');
     var comment_form = div({ id: 'comment-form-wrapper' },
       form({ action: curry(create_issue_comment, issue) },
         div({ id: 'github-issue-comment-errors' }),
@@ -56,26 +56,26 @@ with (scope('Github','App')) {
       )
     );
 
-    console.log(github_user);
+    BountySource.api('/github/user', function(response) {
+      link_account_button.style.opacity = 1;
 
-    // if the user has an account liked with the right permissions, make the button show the comment form.
-    // otherwise, make the button fetch the user_repo permission
-    if (github_user.permissions && github_user.permissions.indexOf('public_repo') >= 0) {
-      link_account_button.addEventListener('click', function() {
-        if (has_class(this.parentElement, 'active')) {
-          remove_class(this.parentElement, 'active');
-          remove_class(this, 'hover');
-          remove_class(this, 'active');
-        } else {
-          add_class(this.parentElement, 'active');
-          add_class(this, 'hover');
-          add_class(this, 'active');
-          comment_form.getElementsByTagName('textarea')[0].focus();
-        }
-      });
-    } else {
-      link_account_button.href = auth_url({ scope: 'public_repo' });
-    }
+      if (!response.meta.success || response.data.permissions.indexOf('public_repo') < 0) {
+        link_account_button.href = auth_url({ scope: 'public_repo' });
+      } else {
+        link_account_button.addEventListener('click', function() {
+          if (has_class(this.parentElement, 'active')) {
+            remove_class(this.parentElement, 'active');
+            remove_class(this, 'hover');
+            remove_class(this, 'active');
+          } else {
+            add_class(this.parentElement, 'active');
+            add_class(this, 'hover');
+            add_class(this, 'active');
+            comment_form.getElementsByTagName('textarea')[0].focus();
+          }
+        });
+      }
+    });
 
     return div({ id: 'github-issue-comment-wrapper' },
       link_account_button,

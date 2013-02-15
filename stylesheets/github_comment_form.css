@@ -34,9 +34,9 @@
 #github-issue-comment-wrapper.active #comment-form-wrapper { min-height: 230px; }
 
 .btn-auth.btn-github {
-  -webkit-transition: box-shadow ease-in 50ms;
-  -moz-transition:    box-shadow ease-in 50ms;
-  -o-transition:      box-shadow ease-in 50ms;
-  transition:         box-shadow ease-in 50ms;
+  -webkit-transition: box-shadow ease-in 50ms, opacity ease-in 100ms;
+  -moz-transition:    box-shadow ease-in 50ms, opacity ease-in 100ms;
+  -o-transition:      box-shadow ease-in 50ms, opacity ease-in 100ms;
+  transition:         box-shadow ease-in 50ms, opacity ease-in 100ms;
 }
 .btn-auth.btn-github.active { box-shadow: 0 0 15px #4274F7; text-shadow: 0 0 8px #C7C7C7; }
