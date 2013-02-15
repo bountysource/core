@@ -110,7 +110,8 @@ with (scope('Contributions', 'App')) {
       render({ into: target_div },
         div({ style: 'text-align: center;' },
           h2(money(bounty.amount), " Bounty Placed"),
-          h3(bounty.issue.title),
+          h3(bounty.issue.repository.display_name),
+          h3('Issue #', bounty.issue.number, ' - ', bounty.issue.title),
 
           div(
             Facebook.create_share_button({
