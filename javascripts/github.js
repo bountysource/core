@@ -56,6 +56,8 @@ with (scope('Github','App')) {
       )
     );
 
+    console.log(github_user);
+
     // if the user has an account liked with the right permissions, make the button show the comment form.
     // otherwise, make the button fetch the user_repo permission
     if (github_user.permissions && github_user.permissions.indexOf('public_repo') >= 0) {
@@ -63,9 +65,11 @@ with (scope('Github','App')) {
         if (has_class(this.parentElement, 'active')) {
           remove_class(this.parentElement, 'active');
           remove_class(this, 'hover');
+          remove_class(this, 'active');
         } else {
           add_class(this.parentElement, 'active');
           add_class(this, 'hover');
+          add_class(this, 'active');
           comment_form.getElementsByTagName('textarea')[0].focus();
         }
       });
