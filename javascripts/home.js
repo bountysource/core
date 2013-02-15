@@ -61,9 +61,14 @@ with (scope('Home', 'App')) {
 
   define('card_filter_box', function() {
     return div({ id: 'cardfilterbox' },
-      form({ action: function(form_data) { filter_cards(form_data.text + '|' + form_data.bounty_min) } },
+      form({ name: 'filter', action: function(form_data) { filter_cards(form_data.text + '|' + form_data.bounty_min) } },
         text({name: 'text', placeholder: 'Project/Issue/Language' }),
-        text({name: 'bounty_min', placeholder: 'Bounty Min.' }),
+        range({style: 'width: 100px; padding 0 200px 0 200px', name: 'bounty_min', value: 0, min: 0, max: 200, step: 10,
+               onChange: curry(function () {
+                 inner_html('bounty_min_ro', '$' + this.value);
+               }) }),
+        span('Bounty minimum: '), span({id: 'bounty_min_ro', style: 'padding 0 200px'}, '$0'),
+    // text({style: 'width: 50px', name: 'bounty_min_ro', placeholder: 'Bounty Min.', readonly: true }),
         submit({ value: 'Filter', 'class': 'green' }),
         reset({ value: 'Reset', 'class': 'gray' })
       )
@@ -149,9 +154,9 @@ with (scope('Home', 'App')) {
         }
 
         var rendered_card;
-        if (card.id.match(/^gi\d/)) rendered_card = bounty_card(card);
-        else if (card.id.match(/^fr\d/)) rendered_card = fundraiser_card(card);
-        else if (card.id.match(/^gr\d/)) rendered_card = repository_card(card);
+        if (card.card_id.match(/^gi\d/)) rendered_card = bounty_card(card);
+        else if (card.card_id.match(/^fr\d/)) rendered_card = fundraiser_card(card);
+        else if (card.card_id.match(/^gr\d/)) rendered_card = repository_card(card);
         else rendered_card = div('Unable to render card.');
 
         target.appendChild(rendered_card);
