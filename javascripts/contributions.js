@@ -108,11 +108,10 @@ with (scope('Contributions', 'App')) {
       var bounty = response.data;
 
       render({ into: target_div },
-        div({ 'class': 'split-main'},
-          h2("Bounty Placed"),
-          p("Thank you for supporting ", bounty.repository.display_name, '.'),
+        div({ style: 'text-align: center;' },
+          h2(money(bounty.amount), " Bounty Placed"),
+          h3(bounty.issue.title),
 
-          h3("Tell Your Friends!"),
           div(
             Facebook.create_share_button({
               link:     BountySource.www_host+Issue.get_href(bounty.issue),
@@ -130,18 +129,7 @@ with (scope('Contributions', 'App')) {
               default_text: "I placed a " + money(bounty.amount) + " dollar bounty on this issue using BountySource. The bounty total goes to the person whose pull request gets accepted. Add to or claim the bounty here: " + bounty.issue.url
             })
           )
-        ),
-
-        div({ 'class': 'split-side'},
-          div({ style: 'margin-top: 20px;' },
-            span({ style: 'color: gray;' }, 'Bounty Amount:'),
-            div({ style: 'margin: 10px 0 10px 20px;' },
-              span({ style: 'font-size: 25px;'}, money(bounty.amount))
-            )
-          )
-        ),
-
-        div({ 'class': 'split-end'})
+        )
       );
     });
   });

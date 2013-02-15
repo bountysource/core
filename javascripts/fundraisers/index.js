@@ -38,7 +38,7 @@ with (scope('Index', 'Fundraiser')) {
                   // TODO: info page for fundraiser author to see contributions and rewards that have been claimed
                   // a({ href: '#account/fundraisers/'+fundraiser.id+'/info', style: 'margin-left: 10px;' }, img({ src: 'images/info.gif' })),
 
-                  !fundraiser.published && a({ href: curry(destroy_fundraiser, fundraiser.id), style: 'margin-left: 10px; opacity:' + (fundraiser.published ? 0.25 : 1) + ';' }, img({ src: 'images/trash.gif' }))
+                  !fundraiser.published && a({ 'class': 'fundraiser-delete-button', href: curry(destroy_fundraiser, fundraiser.id), style: 'margin-left: 10px; opacity:' + (fundraiser.published ? 0.25 : 1) + ';' }, img({ src: 'images/trash.gif' }))
                 )
               );
             })
