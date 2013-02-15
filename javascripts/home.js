@@ -266,7 +266,7 @@ with (scope('Home', 'App')) {
 
     // if an href is supplied, make the card clickable
     if (card.href) {
-      card.id = card.id.match(/fr(\d+)/)[1];
+      card.card_id = card.card_id.match(/fr(\d+)/)[1];
       card_element.addEventListener('click', curry(set_route, card.href));
     }
 
