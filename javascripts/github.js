@@ -41,7 +41,9 @@ with (scope('Github','App')) {
   });
 
   // creates a button with a comment form flyout
-  define('issue_comment_form', function(issue) {
+  define('issue_comment_form', function(issue, options) {
+    options = options || {};
+
     var user_info   = Storage.get('user_info') ? JSON.parse(Storage.get('user_info')) : {},
         github_user = user_info.github_user ? user_info.github_user : {};
 
@@ -49,8 +51,8 @@ with (scope('Github','App')) {
     var comment_form = div({ id: 'comment-form-wrapper' },
       form({ action: curry(create_issue_comment, issue) },
         div({ id: 'github-issue-comment-errors' }),
-        textarea({ required: true, name: 'body', placeholder: 'I <3 OSS', value: 'I <3 OSS' }),
-        submit({ 'class': 'btn-auth btn-github hover' }, 'Post')
+        textarea({ required: true, name: 'body', placeholder: 'I <3 OSS' }, options.default_text||''),
+        submit({ 'class': 'btn-auth btn-github' }, 'Post Comment')
       )
     );
 
@@ -68,7 +70,7 @@ with (scope('Github','App')) {
         }
       });
     } else {
-
+      link_account_button.href = auth_url({ scope: 'public_repo' });
     }
 
     return div({ id: 'github-issue-comment-wrapper' },
