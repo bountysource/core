@@ -37,6 +37,6 @@ describe "Bounty Creation" do
     form.text_field(name: 'password').set(CREDENTIALS["bountysource"]['password'])
     form.button.click
 
-    @browser.h2(text: 'Bounty Placed').wait_until_present
+    @browser.h2(text: /\$\d+\s+bounty\s+placed/i).wait_until_present
   end
 end

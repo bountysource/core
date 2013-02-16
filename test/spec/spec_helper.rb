@@ -9,10 +9,10 @@ if ENV['RAILS_ENV'] == 'staging'
   API_ENDPOINT = 'qa'
   DEMO_MODE = false
 else
-  BASE_URL = 'https://www-qa.bountysource.com/'
-  API_ENDPOINT = 'qa'
-  #BASE_URL = 'http://www.bountysource.dev/'
-  #API_ENDPOINT = 'dev'
+  #BASE_URL = 'https://www-qa.bountysource.com/'
+  #API_ENDPOINT = 'qa'
+  BASE_URL = 'http://www.bountysource.dev/'
+  API_ENDPOINT = 'dev'
   DEMO_MODE = false
 end
 
