@@ -61,16 +61,9 @@ with (scope('Home', 'App')) {
 
   define('card_filter_box', function() {
     return div({ id: 'cardfilterbox' },
-      form({ name: 'filter', action: function(form_data) { filter_cards(form_data.text + '|' + form_data.bounty_min) } },
-        text({name: 'text', placeholder: 'Project/Issue/Language' }),
-        range({style: 'width: 100px; padding 0 200px 0 200px', name: 'bounty_min', value: 0, min: 0, max: 200, step: 10,
-               onChange: curry(function () {
-                 inner_html('bounty_min_ro', '$' + this.value);
-               }) }),
-        span('Bounty minimum: '), span({id: 'bounty_min_ro', style: 'padding 0 200px'}, '$0'),
-    // text({style: 'width: 50px', name: 'bounty_min_ro', placeholder: 'Bounty Min.', readonly: true }),
-        submit({ value: 'Filter', 'class': 'green' }),
-        reset({ value: 'Reset', 'class': 'gray' })
+      form({ name: 'filter', action: function(form_data) { filter_cards(form_data.text) } },
+        text({name: 'text', placeholder: 'znc language:ruby min:$50' }),
+        submit({ value: 'Filter', 'class': 'green' })
       )
     )
   });
