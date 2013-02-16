@@ -68,6 +68,9 @@ describe "Signin" do
     @browser.goto '#'
     @browser.a(text: 'Sign In').when_present.click
     @browser.a(text: 'GitHub').click
+
+    #login_with_github!
+
     @browser.span(id: 'user_nav_name', text: CREDENTIALS["github"]["username"]).wait_until_present
   end
 end

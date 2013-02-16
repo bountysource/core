@@ -13,6 +13,10 @@ describe "Fundraiser Creation" do
     )
   end
 
+  after(:all) do
+    # delete the fundraiser
+  end
+
   it "should see the create fundraiser button" do
     login_with_email!
 
@@ -54,19 +58,6 @@ describe "Fundraiser Creation" do
 
       # wait until on the edit page
       @browser.ul(id: 'fundraiser-nav-bar').wait_until_present
-    end
-
-    after(:all) do
-      login_with_email!
-
-      @browser.goto '#account/fundraisers'
-
-      # mock out window.confirm
-      @browser.execute_script "window.confirm = function(){return true};"
-
-      # click the delete button
-      @browser.link(class: 'fundraiser-delete-button').wait_until_present
-      @browser.links(class: 'fundraiser-delete-button').each(&:click)
     end
 
     it "should fill in basic info" do

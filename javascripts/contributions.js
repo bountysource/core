@@ -108,29 +108,36 @@ with (scope('Contributions', 'App')) {
       var bounty = response.data;
 
       render({ into: target_div },
-        div({ style: 'text-align: center;' },
-          h2(money(bounty.amount), " Bounty Placed"),
-          h3(bounty.issue.repository.display_name),
-          h3('Issue #', bounty.issue.number, ' - ', bounty.issue.title),
+        div({ 'class': 'split-main'},
+          h2("Bounty Placed"),
+          p("Thank you for supporting ", bounty.repository.display_name, '.'),
 
+          h3("Tell Your Friends!"),
           div(
             Facebook.create_share_button({
               link:     BountySource.www_host+Issue.get_href(bounty.issue),
               name:     bounty.repository.display_name,
               caption:  money(bounty.amount)+' bounty placed on issue #'+bounty.issue.number+' - '+bounty.issue.title
-            }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
+            }, a({ 'class': 'btn-auth btn-facebook', style: 'margin-right: 10px;' }, 'Share')),
 
             Twitter.create_share_button({
               url:  BountySource.www_host+Issue.get_href(bounty.issue),
               text: money(bounty.amount)+" bounty placed",
               via:  'BountySource'
-            }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet')),
-
-            Github.issue_comment_form(bounty.issue, {
-              default_text: "I placed a " + money(bounty.amount) + " bounty on this issue using BountySource. The bounty total goes to the person whose pull request gets accepted. Add to or claim the bounty here: " + BountySource.www_host+Issue.get_href(bounty.issue)
-            })
+            }, a({ 'class': 'btn-auth btn-twitter' }, 'Tweet'))
           )
-        )
+        ),
+
+        div({ 'class': 'split-side'},
+          div({ style: 'margin-top: 20px;' },
+            span({ style: 'color: gray;' }, 'Bounty Amount:'),
+            div({ style: 'margin: 10px 0 10px 20px;' },
+              span({ style: 'font-size: 25px;'}, money(bounty.amount))
+            )
+          )
+        ),
+
+        div({ 'class': 'split-end'})
       );
     });
   });
