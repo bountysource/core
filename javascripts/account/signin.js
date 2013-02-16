@@ -134,10 +134,13 @@ with (scope('Signin','App')) {
 
   define('save_user_data_and_redirect', function(response) {
     var redirect_url = null;
+    var params = get_params();
 
     if (response.data.redirect_url) {
       redirect_url = response.data.redirect_url;
       delete response.data.redirect_url;
+    } else if (params.redirect_url) {
+      redirect_url = params.redirect_url;
     } else if (Storage.get('_redirect_to_after_login')) {
       redirect_url = Storage.get('_redirect_to_after_login');
       Storage.clear('_redirect_to_after_login');
@@ -248,7 +251,7 @@ with (scope('Signin','App')) {
 
     if (params.status == 'linked') {
       // now they're logged in with this github account
-      save_user_data_and_redirect({ data: params.access_token, redirect_url: params.redirect_url });
+      save_user_data_and_redirect({ data: params.access_token });
     } else if (params.status == 'error_needs_account') {
       render(
         breadcrumbs(a({ href: '#' }, 'Home'), 'Sign In'),
@@ -256,9 +259,9 @@ with (scope('Signin','App')) {
         super_signin_form(params)
       );
     } else if (params.status == 'error_already_linked') {
-      render('ERROR: Account already linked.')
+      render('ERROR: Account already linked.');
     } else {
-      render('ERROR: Unknown status.')
+      render('ERROR: Unknown status.');
     }
   });
 
