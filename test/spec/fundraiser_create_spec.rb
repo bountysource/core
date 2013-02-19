@@ -25,7 +25,7 @@ describe "Fundraiser Creation" do
 
     @browser.goto '#account/create_fundraiser'
     @browser.text_field(name: 'title').when_present.send_keys @fundraiser.title
-    @browser.button(text: 'Create Fundraiser').click
+    @browser.form.submit
 
     @browser.ul(id: 'fundraiser-nav-bar').wait_until_present
   end
@@ -35,7 +35,8 @@ describe "Fundraiser Creation" do
 
     @browser.goto '#account/fundraisers'
     @browser.link(text: @fundraiser.title).wait_until_present
-    @browser.links(text: @fundraiser.title).last.click # goto fundraiser show page
+    link = @browser.links(text: @fundraiser.title).last
+    @browser.goto link.attribute_value('href') # goto fundraiser show page
 
     @browser.span(text: /edit/i).wait_until_present
   end
@@ -47,7 +48,8 @@ describe "Fundraiser Creation" do
       # goto fundraiser page
       @browser.goto '#account/fundraisers'
       @browser.link(text: @fundraiser.title).wait_until_present
-      @browser.links(text: @fundraiser.title).last.click
+      link = @browser.links(text: @fundraiser.title).last
+      @browser.goto link.attribute_value('href') # goto fundraiser show page
 
       # click the edit button
       @browser.span(text: /edit/i).when_present.click
@@ -200,14 +202,14 @@ describe "Fundraiser Creation" do
       end
 
       it "should update a reward" do
-        @browser.li(text: 'I will sign your chest').click
+        @browser.li(text: 'I will sign your chest').when_present.click
         @browser.text_field(name: 'description', value: 'I will sign your chest').when_present.set "Just kidding"
         @browser.button(text: 'Save').click
         @browser.li(text: 'Just kidding').wait_until_present
       end
 
       it "should delete a reward" do
-        @browser.li(text: 'Just kidding').click
+        @browser.li(text: 'Just kidding').when_present.click
         @browser.link(text: 'Delete').click
         Watir::Wait.until { !@browser.li(text: 'Just kidding').present? }
       end

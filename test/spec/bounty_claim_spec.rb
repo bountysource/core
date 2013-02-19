@@ -35,7 +35,6 @@ describe "Claiming a Bounty" do
     @browser.url.should =~ /#repos\/\w+\/\w+\/issues\/\d+$/
   end
 
-  # TODO this test needs to be mocked
   it "should see a list of pull requests after logging in" do
     @browser.goto '#repos/coryboyd/bs-test/issues/18'
 
