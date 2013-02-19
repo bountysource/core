@@ -32,6 +32,11 @@ with (scope('Issue', 'App')) {
 
           github_user_html_box({ user: issue.user, body_html: issue.body, created_at: issue.remote_created_at }),
 
+          div({ style: 'margin: 25px 0;' },
+            div({ style: 'display: inline-block; vertical-align: middle; margin-right: 10px;' }, 'For more information, or to comment:'),
+            a({ 'class': 'btn-auth btn-github', style: 'display: inline-block; vertical-align: middle;', href: issue.url, target: '_blank' }, 'View Issue on GitHub')
+          ),
+
           issue.comments.length > 0 && div(
             h2({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' }, 'Comments'),
             issue.comments.map(github_user_html_box)
