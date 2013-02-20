@@ -146,7 +146,7 @@ with (scope('Edit', 'Fundraiser')) {
         Edit.cached_fundraiser = fundraiser;
 
         // render the title into the breadcrumbs
-        render({ target: 'fundraiser-title' }, fundraiser.title);
+        render({ target: 'fundraiser-title' }, a({ href: fundraiser.url }, fundraiser.title));
 
         // render everything else
         render({ into: target_div },
