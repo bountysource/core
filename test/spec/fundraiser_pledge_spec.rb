@@ -25,6 +25,6 @@ describe "Fundraiser Pledges" do
     @browser.button(value: 'Continue to payment').click
     proceed_through_paypal_sandbox_flow!
 
-    @browser.h2(text: 'Thanks for your contribution').wait_until_present
+    @browser.h2(text: /\$\d+\s+pledge\s+made/i).wait_until_present
   end
 end
