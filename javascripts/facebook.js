@@ -7,7 +7,7 @@ with (scope('Facebook','App')) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=0&appId=280280945425178";
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=0&appId="+get_app_id();
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
@@ -18,6 +18,16 @@ with (scope('Facebook','App')) {
     bind_event('edge.remove', function(url) {
       _gaq.push(['_trackSocial', 'facebook', 'unlike', url]);
     })
+  });
+
+  define('get_app_id', function() {
+    if (BountySource.api_host.match(/api\.bountysource\.com/)) {
+      return "280280945425178";
+    } else if (BountySource.api_host.match(/api-qa\.bountysource\.com/)) {
+      return "129570157210142";
+    } else if (BountySource.api_host.match(/api\.bountysource\.dev/)) {
+      return "362924703805218";
+    }
   });
 
   define('bind_event', function(event, callback) {
@@ -114,10 +124,12 @@ with (scope('Facebook','App')) {
         e         = arguments[0] || a({ 'class': 'btn-auth btn-facebook' }, 'Share');
 
     options = options || {};
-    options['method']   = 'feed';
-    options['name']     = options['name']     || 'BountySource';
-    options['link']     = options['link']     || window.location.href;
-    options['caption']  = options['caption']  || 'The funding platform for open source software';
+    options['method']       = 'feed';
+    options['name']         = options['name']         || 'BountySource';
+    options['link']         = options['link']         || window.location.href;
+    options['caption']      = options['caption']      || 'The funding platform for open source software';
+    options['picture']      = options['picture']      || '';
+    options['description']  = options['description']  || '';
 
     !test_mode && e.addEventListener('click', curry(after_loaded, function(FB) { FB.ui(options) }));
 

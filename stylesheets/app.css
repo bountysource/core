@@ -53,9 +53,9 @@ header ul li a {
   font-size: 16px;
 }
 
-section#global-social-buttons { width: 955px; margin: 0 auto; margin-bottom: 10px; height: 20px; }
-section#global-social-buttons ul { list-style-type: none; margin: 0; padding: 0; }
-section#global-social-buttons ul li { height: 20px; min-width: 100px; display: inline-block; margin-right: 5px; vertical-align: middle; }
+section#global-social-buttons { width: 955px; margin: auto; margin-bottom: 10px; }
+section#global-social-buttons ul { list-style-type: none; padding: 0; }
+section#global-social-buttons ul li { min-width: 100px; display: inline-block; margin-right: 5px; vertical-align: middle; }
 section#global-social-buttons ul li:last-child { margin-right: 0; }
 
 section#content, section#signin { width: 955px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }

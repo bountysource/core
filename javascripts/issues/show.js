@@ -17,6 +17,13 @@ with (scope('Issue', 'App')) {
     BountySource.get_issue(login, repository, issue_number, function(response) {
       var issue = response.data||{};
 
+      App.update_facebook_like_button({
+        name:         issue.repository.display_name+": Issue #"+issue.number,
+        caption:      issue.title,
+        description:  "BountySource is the funding platform for open-source software. Create a bounty to have this issue resolved, or submit a pull request to earn the bounty yourself!",
+        picture:      issue.repository.owner.avatar_url
+      });
+
       render({ into: target_div },
         div({ 'class': 'split-main' },
 

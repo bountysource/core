@@ -16,6 +16,14 @@ with (scope('Repository')) {
       if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
 
       var repo = response.data;
+
+      App.update_facebook_like_button({
+        name:         repo.display_name,
+        caption:      repo.description,
+        description:  "BountySource is the funding platform for open-source software. Place a bounty on issues you want resolved, or submit pull requests to collect open bounties!",
+        picture:      repo.owner.avatar_url
+      });
+
       render({ into: target_div },
         div({ 'class': 'split-main' },
           !repo.has_issues && info_message("Issues are disabled for this repository."),

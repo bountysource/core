@@ -18,6 +18,13 @@ with (scope('Show', 'Fundraiser')) {
       if (response.meta.success) {
         var fundraiser = response.data;
 
+        App.update_facebook_like_button({
+          name:         fundraiser.title,
+          caption:      fundraiser.short_description,
+          description:  "BountySource is the funding platform for open-source software, contribute by making a pledge to this fundraiser!",
+          picture:      fundraiser.image_url || ''
+        });
+
         render({ into: fundraiser_div }, fundraiser_template(fundraiser));
       } else {
         render({ target: 'breadcrumbs-fundraiser-title' }, 'Oh no!');
