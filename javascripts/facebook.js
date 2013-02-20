@@ -21,11 +21,11 @@ with (scope('Facebook','App')) {
   });
 
   define('get_app_id', function() {
-    if (BountySource.api_host.match(/api\.bountysource\.com/)) {
+    if (BountySource.www_host.match(/www\.bountysource\.com/)) {
       return "280280945425178";
-    } else if (BountySource.api_host.match(/api-qa\.bountysource\.com/)) {
+    } else if (BountySource.www_host.match(/www-qa\.bountysource\.com/)) {
       return "129570157210142";
-    } else if (BountySource.api_host.match(/api\.bountysource\.dev/)) {
+    } else if (BountySource.www_host.match(/www\.bountysource\.dev/)) {
       return "362924703805218";
     }
   });
