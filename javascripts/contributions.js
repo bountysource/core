@@ -82,14 +82,9 @@ with (scope('Contributions', 'App')) {
   });
 
   route('#repos/:login/:repository/issues/:issue_number/bounties/:bounty_id/receipt', function(login, repository, issue_number, bounty_id) {
-    // access token as a param?
-    // TODO: remove when new account creation is ready -- CAB
-    var params = get_params();
-    if (params['access_token']) {
-      BountySource.set_access_token(params['access_token']);
-      set_route(get_route(), { reload_page: true });
-      return;
-    }
+    // if the pledge ID was not subbed into the URL, just go view the issue.
+    // This will happen on Paypal cancel.
+    if (/:bounty_id/.test(bounty_id)) return set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
 
     var target_div = div('Loading...');
 
@@ -117,8 +112,8 @@ with (scope('Contributions', 'App')) {
             Facebook.create_share_button({
               link:         BountySource.www_host+Issue.get_href(bounty.issue),
               name:         bounty.repository.display_name,
-              description:  "BountySource is the funding platform for open-source software. Create a bounty to help get this issue resolved, or submit a pull request to earn the bounty yourself!",
               caption:      money(bounty.amount)+' bounty placed on issue #'+bounty.issue.number+' - '+bounty.issue.title,
+              description:  "BountySource is the funding platform for open-source software. Create a bounty to help get this issue resolved, or submit a pull request to earn the bounty yourself!",
               picture:      bounty.issue.repository.owner.avatar_url || ''
             }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
 
@@ -138,14 +133,9 @@ with (scope('Contributions', 'App')) {
   });
 
   route('#fundraisers/:fundraiser_id/pledges/:pledge_id/receipt', function(fundraiser_id, pledge_id) {
-    // access token as a param?
-    // TODO: remove when new account creation is ready -- CAB
-    var params = get_params();
-    if (params['access_token']) {
-      BountySource.set_access_token(params['access_token']);
-      set_route(get_route(), { reload_page: true });
-      return;
-    }
+    // if the pledge ID was not subbed into the URL, just go view the issue.
+    // This will happen on Paypal cancel.
+    if (/:pledge_id/.test(pledge_id)) return set_route('#fundraisers/'+fundraiser_id);
 
     var target_div = div('Loading...');
 
@@ -153,63 +143,50 @@ with (scope('Contributions', 'App')) {
       breadcrumbs(
         a({ href: '#' }, 'Home'),
         'Fundraisers',
-        a({ id: 'breadcrumbs-fundraiser-title', href: '#fundraisers/'+fundraiser_id }, 'Loading...'),
-        'Receipt'
+        span({ id: 'breadcrumbs-fundraiser-title' }, 'Loading...'),
+        'Pledge Receipt'
       ),
       target_div
     );
 
-    // if the pledge ID was not subbed into the URL, just go view the issue.
-    // This will happen on Paypal cancel.
-    if (/:pledge_id/.test(pledge_id)) return set_route('#fundraisers/'+fundraiser_id);
-
     BountySource.get_pledge(pledge_id, function(response) {
       if (response.meta.success) {
-        var pledge      = response.data,
-            fundraiser  = pledge.fundraiser;
+        var pledge = response.data;
 
-        render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(fundraiser.title, 60));
+        // render the title into the breadcrumbs
+        render({ target: 'breadcrumbs-fundraiser-title' },
+          a({ href: pledge.fundraiser.url }, abbreviated_text(pledge.fundraiser.title, 50))
+        );
 
         render({ into: target_div },
-          div({ 'class': 'split-main' },
-            h2("Thanks for your contribution"),
-            p("You are now a backer of ", fundraiser.title, ". Thanks for supporting open source software!"),
+          div({ style: 'text-align: center;' },
+            h2(money(pledge.amount), " Pledge Made"),
+            h3(pledge.fundraiser.title),
 
-            h3("Tell your friends!"),
+            pledge.reward && div({ style: 'margin: 10px; 0' },
+              h4({ style: 'margin-bottom: 0;' }, 'Reward:'),
+              p({ style: 'margin: 0 200px; padding: 10px;' }, pledge.reward.description)
+            ),
+
             div(
               Facebook.create_share_button({
-                link:     BountySource.www_host+pledge.fundraiser.url,
-                name:     pledge.fundraiser.title,
-                caption:  pledge.fundraiser.short_description
-              }, a({ 'class': 'btn-auth btn-facebook', style: 'margin-right: 10px;' }, 'Share')),
+                link:         BountySource.www_host+pledge.fundraiser.url,
+                name:         "I just backed "+pledge.fundraiser.title,
+                caption:      pledge.fundraiser.short_description,
+                description:  "BountySource is the funding platform for open-source software, contribute by making a pledge to this fundraiser!",
+                picture:      pledge.fundraiser.image_url || ''
+              }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
 
               Twitter.create_share_button({
                 url:  BountySource.www_host+pledge.fundraiser.url,
-                text: "I pledged "+money(pledge.amount)+" to "+fundraiser.title
-              }, a({ 'class': 'btn-auth btn-twitter' }, 'Tweet'))
+                text: money(pledge.amount)+" pledge made to "+pledge.fundraiser.title,
+                via:  'BountySource'
+              }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet'))
             )
-          ),
-
-          div({ 'class': 'split-side' },
-            div({ style: 'margin-top: 20px;' },
-              span({ style: 'color: gray;' }, 'Pledge Amount:'),
-              div({ style: 'margin: 10px 0 10px 20px;' },
-                span({ style: 'font-size: 25px;'}, money(pledge.amount))
-              ),
-
-              pledge.reward && div(
-                span({ style: 'color: gray;' }, 'Selected Reward:'),
-                div({ style: 'margin: 10px 0 10px 20px;' },
-                  span({ style: 'white-space: pre-wrap;' }, pledge.reward.description)
-                )
-              )
-            )
-          ),
-
-          div({ 'class': 'split-end' })
+          )
         );
       } else {
-        render({ into: target_div }, error_message(response.data.error));
+        render(error_message(response.data.error));
       }
     });
   });
