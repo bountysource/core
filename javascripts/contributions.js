@@ -115,9 +115,11 @@ with (scope('Contributions', 'App')) {
 
           div(
             Facebook.create_share_button({
-              link:     BountySource.www_host+Issue.get_href(bounty.issue),
-              name:     bounty.repository.display_name,
-              caption:  money(bounty.amount)+' bounty placed on issue #'+bounty.issue.number+' - '+bounty.issue.title
+              link:         BountySource.www_host+Issue.get_href(bounty.issue),
+              name:         bounty.repository.display_name,
+              description:  "BountySource is the funding platform for open-source software. Create a bounty to help get this issue resolved, or submit a pull request to earn the bounty yourself!",
+              caption:      money(bounty.amount)+' bounty placed on issue #'+bounty.issue.number+' - '+bounty.issue.title,
+              picture:      bounty.issue.repository.owner.avatar_url || ''
             }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
 
             Twitter.create_share_button({
