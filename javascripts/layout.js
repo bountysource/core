@@ -122,10 +122,10 @@ with (scope('App')) {
     );
 
     BountySource.get_friends_activity(function(response) {
-      // add a special class to adjust height to max once the API call is finished
-      add_class(notifications_feed, 'loaded');
-
       if (response.meta.success && response.data.length > 0) {
+        // add a special class to adjust height to max once the API call is finished
+        add_class(notifications_feed, 'loaded');
+
         render({ target: 'notification-feed-count-wrapper' }, span({ 'class': 'notification-feed-count' }, response.data.length));
         render({ target: 'notifications-feed-flyout-inner' }, response.data.map(notification));
       } else {

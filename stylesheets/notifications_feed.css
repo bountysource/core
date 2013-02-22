@@ -4,6 +4,7 @@
   padding: 0 5px;
   cursor: pointer;
   border-radius: 3px;
+  display: none;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -15,6 +16,7 @@
 
 #notifications-feed:hover,
 #notifications-feed.active { background: #F7F7F7; }
+#notifications-feed.loaded { display: inline-block; }
 
 #notifications-feed #feed-icon {
   display: inline-block;
