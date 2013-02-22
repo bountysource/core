@@ -62,7 +62,7 @@
   margin: 0;
   max-height: 250px;
   background: white;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-radius: 0 0 3px 3px;
 }
 
