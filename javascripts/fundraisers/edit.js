@@ -176,7 +176,7 @@ with (scope('Edit', 'Fundraiser')) {
                 div({ style: 'background: #eee; padding: 10px; border-bottom: 1px solid #CCC;' },
                   // this is re-rendered after each save
                   div({ onClick: show_preview },
-                    div({ id: 'fundraiser-card-preview' }, curry(card, fundraiser))
+                    div({ id: 'fundraiser-card-preview' }, curry(fundraiser_card, fundraiser))
                   )
                 ),
 
