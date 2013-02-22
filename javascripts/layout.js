@@ -117,7 +117,6 @@ with (scope('App')) {
       ),
 
       div({ id: 'notifications-feed-flyout-outer' },
-        div({ id: 'notifications-feed-flyout-header' }, span('Recent Friend Activity')),
         div({ id: 'notifications-feed-flyout-inner' }, div({ style: 'text-align: center;' }, 'Loading...'))
       )
     );
@@ -137,6 +136,11 @@ with (scope('App')) {
     // toggle show of feed on click
     notifications_feed.addEventListener('click', function() {
       has_class(this, 'active') ? remove_class(this, 'active') : add_class(this, 'active');
+    });
+
+    // clicking anywhere else closes it
+    document.getElementById('content').addEventListener('click', function() {
+      if (has_class(notifications_feed, 'active')) remove_class(notifications_feed, 'active');
     });
 
     return notifications_feed;

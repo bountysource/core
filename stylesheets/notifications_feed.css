@@ -37,23 +37,21 @@
   padding: 2px;
 }
 
-#notifications-feed #notifications-feed-flyout-header {
-  border-bottom: 1px solid #BBB;
-  padding: 0 10px;
-}
-
 #notifications-feed #notifications-feed-flyout-outer {
   cursor: default;
   z-index: 3;
   position:  absolute;
   display: none;
-  background: #f4f4f4;
-  width: 600px;
+  background: white;
+  width: 550px;
   min-height: 30px;
-  right: 220px;
-  top: 60px;
+  right: 235px;
+  top: 55px;
   border: 1px solid #BBB;
-  border-radius: 3px;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+
+  /*box-shadow: 0 0 10px #B9B9B9;*/
 }
 
 #notifications-feed.active #notifications-feed-flyout-outer {
@@ -61,16 +59,16 @@
 }
 
 #notifications-feed #notifications-feed-flyout-inner {
-  margin: 5px;
+  margin: 0;
   max-height: 250px;
   background: white;
   overflow-y: scroll;
-  border: 1px solid #BBB;
+  border-radius: 0 0 3px 3px;
 }
 
 #notifications-feed .notification-message {
   cursor: pointer;
-  padding: 5px;
+  padding: 0 5px;
   border-bottom: 1px solid #BBB;
 
   -webkit-transition: background ease-in 100ms;
@@ -85,8 +83,8 @@
 #notifications-feed .notification-message img.notification-user {
   display: inline-block;
   vertical-align: middle;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   margin-right: 10px;
 }
 #notifications-feed .notification-message .notification-content {
