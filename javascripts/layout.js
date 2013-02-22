@@ -34,6 +34,7 @@ with (scope('App')) {
           )
         ),
         div({ id: 'user_nav_flyout' },
+          a({ href: '#account/create_fundraiser' }, 'Create Fundraiser'),
           a({ href: '#account/fundraisers' }, 'Fundraisers'),
           a({ href: '#contributions' }, 'Contributions'),
           a({ href: '#solutions' }, 'Solutions'),
@@ -54,16 +55,18 @@ with (scope('App')) {
 
         header(
           section(
-            h1(a({ href: '#' }, img({ style: 'margin-left: 20px; vertical-align: middle;', src: 'images/logo-beta.png' }))),
+            div({ style: 'display: inline-block; vertical-align: middle;' },
+              h1(a({ href: '#' }, img({ style: 'margin-left: 20px; vertical-align: middle;', src: 'images/logo-beta.png' })))
+            ),
 
-            ul(
+            ul({ style: 'display: inline-block;' },
               li(a({ href: '#about' }, 'About')),
               li(a({ href: '#faq' }, 'FAQ')),
               li(a({ href: 'mailto:support@bountysource.com' }, 'Contact Us')),
               //li(a({ href: '#' }, 'Blog')),
 
               logged_in() ? [
-                li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
+                li({ id: 'notification-feed-target' }),
                 li(user_nav)
               ] : [
                 li(a({ href: '#signin' }, 'Sign In'))
@@ -94,6 +97,74 @@ with (scope('App')) {
 
     render({ into: scope.rendered_default_layout_inner }, yield);
     return scope.rendered_default_layout;
+  });
+
+  // render the notifications drop down on every page load
+  after_filter(function() {
+    render({ target: 'notification-feed-target' }, notifications_feed);
+  });
+
+  define('notifications_feed', function() {
+    var arguments = flatten_to_array(arguments),
+        options   = shift_options_from_args(arguments);
+
+    options.id = 'notifications-feed';
+
+    var inner_div = div({ id: 'flyout-inner' }, span({ style: 'text-align: center; color: black;' }, 'Loading...'));
+
+    var notifications_feed = div(options,
+      div({ id: 'head' },
+        img({ src: 'images/users_32.gif' }),
+        span({ id: 'title' }, 'Recent Friend Activity')
+      ),
+      div({ id: 'flyout' }, inner_div)
+    );
+
+    BountySource.get_friends_activity(function(response) {
+      if (response.meta.success) {
+        var notifications = response.data;
+
+        // add a special class to adjust height to max once the API call is finished
+        add_class(notifications_feed, 'loaded');
+
+        if (notifications.length <= 0) {
+          render({ into: inner_div }, 'Nothing to show here!');
+        } else {
+          render({ into: inner_div }, notifications.map(notification));
+        }
+      } else {
+        render({ into: inner_div }, 'Something broke :(');
+      }
+    });
+
+    notifications_feed.addEventListener('mouseover', function() { add_class(this, 'active') });
+    notifications_feed.addEventListener('mouseout', function() { remove_class(this, 'active') });
+
+    return notifications_feed;
+  });
+
+  define('notification', function(object) {
+    var content_div = div();
+
+    if (object.type == 'bounty') {
+      render({ into: content_div }, 'placed a ', money(object.amount), ' bounty on ', object.issue.title);
+    } else if (object.type == 'pledge') {
+      render({ into: content_div }, 'pledged ', money(object.amount), ' to ', object.fundraiser.title);
+    } else if (object.type == 'fundraiser') {
+      render({ into: content_div }, 'created a Fundraiser: ', object.title);
+    }
+
+    var notification_element = a({ href: object.href, 'class': 'notification', style: 'font-size: 12px;' },
+      div({ style: 'padding: 10px;' },
+        img({ src: object.person.avatar_url, style: 'display: inline-block; vertical-align: middle;' }),
+        div({ style: 'display: inline-block; vertical-align: middle; margin-left: 10px;' },
+          a({ href: object.person.profile_url }, object.person.display_name)
+        )
+      ),
+      div({ 'class': 'content' }, content_div)
+    );
+
+    return notification_element
   });
 
   define('chatbar', function() {

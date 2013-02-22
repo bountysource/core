@@ -247,22 +247,26 @@ with (scope('BountySource')) {
   });
 
   define('get_rewards', function(fundraiser_id, callback) {
-    BountySource.api('/user/fundraisers/'+fundraiser_id+'/rewards', 'GET', data, callback);
+    api('/user/fundraisers/'+fundraiser_id+'/rewards', 'GET', data, callback);
   });
 
   define('get_reward', function(fundraiser_id, reward_id, callback) {
-    BountySource.api('/user/fundraisers/'+fundraiser_id+'/rewards/'+reward_id, callback);
+    api('/user/fundraisers/'+fundraiser_id+'/rewards/'+reward_id, callback);
   });
 
   define('create_reward', function(fundraiser_id, data, callback) {
-    BountySource.api('/user/fundraisers/'+fundraiser_id+'/rewards', 'POST', data, callback);
+    api('/user/fundraisers/'+fundraiser_id+'/rewards', 'POST', data, callback);
   });
 
   define('update_reward', function(fundraiser_id, reward_id, data, callback) {
-    BountySource.api('/user/fundraisers/'+fundraiser_id+'/rewards/'+reward_id, 'PUT', data, callback);
+    api('/user/fundraisers/'+fundraiser_id+'/rewards/'+reward_id, 'PUT', data, callback);
   });
 
   define('destroy_reward', function(fundraiser_id, reward_id, callback) {
-    BountySource.api('/user/fundraisers/'+fundraiser_id+'/rewards/'+reward_id, 'DELETE', callback);
+    api('/user/fundraisers/'+fundraiser_id+'/rewards/'+reward_id, 'DELETE', callback);
+  });
+
+  define('get_friends_activity', function(callback) {
+    api('/user/notifications/friends', callback);
   });
 }

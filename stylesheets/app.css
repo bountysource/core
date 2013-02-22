@@ -333,8 +333,8 @@ input.autosized {
 #user-nav #user_nav_name { padding-left: 6px; }
 #user-nav #user_nav_a { margin: 0 10px; }
 #user-nav #user_nav_avatar {
-  width: 24px; 
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 2px;
   vertical-align: middle;
 }

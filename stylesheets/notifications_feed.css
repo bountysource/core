@@ -1,0 +1,77 @@
+#notifications-feed {
+  display: inline-block;
+  vertical-align: middle;
+  width: 210px;
+  height: 50px;
+}
+
+#notifications-feed #head img { style: display: inline-block; vertical-align: middle; margin-right: 10px; }
+#notifications-feed #head #title { style: display: inline-block; vertical-align: middle; }
+
+#notifications-feed #head {
+  color: black;
+  text-align: center;
+
+  -webkit-transition: text-shadow ease-in-out 100ms;
+  -moz-transition:    text-shadow ease-in-out 100ms;
+  -o-transition:      text-shadow ease-in-out 100ms;
+  transition:         text-shadow ease-in-out 100ms;
+}
+
+
+#notifications-feed #flyout {
+  height: 0px;
+  overflow: hidden;
+  z-index: 3;
+  width: 210px;
+  border-top: 0;
+  position: absolute;
+  display: none;
+}
+#notifications-feed.active #flyout {
+  display: block;
+  overflow-y: scroll;
+  background: rgb(250, 250, 250);
+  height: 60px;
+}
+#notifications-feed.active.loaded #flyout { height: 500px; }
+
+#notifications-feed.active #head {
+  border-bottom: 0;
+  background: rgb(250, 250, 250);
+}
+
+#notifications-feed #flyout-inner {
+  text-align: center;
+  box-shadow: 0 0 10px;
+  padding: 5px;
+}
+
+#notifications-feed .notification {
+  text-decoration: none;
+  color: black;
+  display: block;
+  margin-bottom: 5px;
+  line-height: 20px;
+  font-size: 15px;
+  background: rgb(241, 241, 241);
+
+  -webkit-transition: all ease-in-out 100ms;
+  -moz-transition:    all ease-in-out 100ms;
+  -o-transition:      all ease-in-out 100ms;
+  transition:         all ease-in-out 100ms;
+}
+#notifications-feed .notification:hover { box-shadow: 0 0 5px rgb(209, 209, 209); }
+#notifications-feed .notification:last-of-type { margin-bottom: 0; }
+
+#notifications-feed .notification img {
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+}
+#notifications-feed .notification .content {
+  display: inline-block;
+  vertical-align: middle;
+  padding-bottom: 5px;
+  text-align: center;
+}
