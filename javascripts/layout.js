@@ -113,7 +113,7 @@ with (scope('App')) {
     var notifications_feed = div(options,
       div({ id: 'feed-icon' },
         img({ src: 'images/users_32.gif' }),
-        span({ id: 'notification-feed-count' }, '12')
+        div({ id: 'notification-feed-count-wrapper' })
       ),
 
       div({ id: 'notifications-feed-flyout-outer' },
@@ -127,6 +127,7 @@ with (scope('App')) {
       add_class(notifications_feed, 'loaded');
 
       if (response.meta.success && response.data.length > 0) {
+        render({ target: 'notification-feed-count-wrapper' }, span({ 'class': 'notification-feed-count' }, response.data.length));
         render({ target: 'notifications-feed-flyout-inner' }, response.data.map(notification));
       } else {
         render({ target: 'notifications-feed-flyout-inner' }, 'Nothing to show here!');

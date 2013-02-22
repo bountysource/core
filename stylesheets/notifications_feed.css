@@ -24,16 +24,20 @@
   display: inline-block;
   vertical-align: middle;
 }
-#notifications-feed #feed-icon #notification-feed-count {
+#notifications-feed #feed-icon #notification-feed-count-wrapper {
+  display: inline-block;
+  vertical-align: middle;
   font-size: 10px;
   color: white;
+}
+#notifications-feed #feed-icon #notification-feed-count-wrapper .notification-feed-count {
+  display: inline;
   background: #DB0000;
   border-radius: 5px;
   padding: 2px;
 }
 
 #notifications-feed #notifications-feed-flyout-header {
-  background: #E7E7E7;
   border-bottom: 1px solid #BBB;
   padding: 0 10px;
 }
@@ -60,7 +64,7 @@
   margin: 5px;
   max-height: 250px;
   background: white;
-  overflow: scroll;
+  overflow-y: scroll;
   border: 1px solid #BBB;
 }
 
