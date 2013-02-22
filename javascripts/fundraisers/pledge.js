@@ -1,4 +1,5 @@
 with (scope('Pledge', 'Fundraiser')) {
+
   route('#fundraisers/:fundraiser_id/pledge', function(fundraiser_id) {
     var target_div = div('Loading...'),
       bountysource_account_div = div();
@@ -39,7 +40,7 @@ with (scope('Pledge', 'Fundraiser')) {
             // payment method selection
             fieldset(
               label('Payment Source:'),
-              Payment.payment_methods({ style: 'vertical-align: top;' })
+              Payment.payment_methods({ style: 'vertical-align: top;', value: params.payment_method })
             ),
 
             // rewards table
@@ -98,7 +99,7 @@ with (scope('Pledge', 'Fundraiser')) {
   define('reward_row', function(reward) {
     var reward_radio = radio({ id: 'reward_'+reward.id+'_radio', name: 'reward_id_radio', style: 'vertical-align: middle;' });
     var submit_button = div({ 'class': 'reward-submit-button', style: 'display: none; margin-top: 10px; text-align: center; padding-top: 10px; margin-top: 10px; border-top: 1px solid #AFECAF' },
-      submit({ 'class': 'blue' }, "Continue to payment")
+      submit({ 'class': 'blue' }, logged_in() ? "Continue to Payment" : "Sign In and Pay")
     );
     if (reward.sold_out) reward_radio.setAttribute('disabled', true);
 
@@ -186,16 +187,12 @@ with (scope('Pledge', 'Fundraiser')) {
       payment_method: form_data.payment_method,
       item_number: 'fundraisers/' + fundraiser.id + (parseInt(form_data.reward_id) > 0 ? '/'+form_data.reward_id : ''),
       success_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledges/:item_id/receipt',
-      cancel_url: window.location.href.split('#')[0] + fundraiser.url
+      cancel_url: window.location.href.split('#')[0] + fundraiser.url,
+      postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id
     };
 
-    BountySource.make_payment(payment_data, function(response) {
-      if (response.meta.success) {
-        if (form_data.payment_method == 'personal') BountySource.set_cached_user_info(null);
-        set_route(response.data.redirect_url);
-      } else {
-        render_message(error_message(response.data.error));
-      }
+    BountySource.make_payment(payment_data, function(errors) {
+      render_message(error_message(errors));
     });
   });
 }

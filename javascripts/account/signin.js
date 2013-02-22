@@ -136,17 +136,19 @@ with (scope('Signin','App')) {
     var redirect_url = null;
     var params = get_params();
 
-    if (response.data.redirect_url) {
+    if (Storage.get('_redirect_to_after_login')) {
+      redirect_url = Storage.get('_redirect_to_after_login');
+      Storage.clear('_redirect_to_after_login');
+    } else if (response.data.redirect_url) {
       redirect_url = response.data.redirect_url;
       delete response.data.redirect_url;
     } else if (params.redirect_url) {
       redirect_url = params.redirect_url;
-    } else if (Storage.get('_redirect_to_after_login')) {
-      redirect_url = Storage.get('_redirect_to_after_login');
-      Storage.clear('_redirect_to_after_login');
     } else {
       redirect_url = '#';
     }
+
+    if (redirect_url == '#signin') redirect_url = '#';
 
     BountySource.set_access_token(response.data);
     set_route(redirect_url, { reload_page: true });

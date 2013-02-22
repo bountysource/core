@@ -11,7 +11,8 @@ with (scope('BountySource')) {
       url:       api_host + args.shift().replace(/^\//,''),
       method:    typeof(args[0]) == 'string' ? args.shift() : 'GET',
       params:    typeof(args[0]) == 'object' ? args.shift() : {},
-      callback:  typeof(args[0]) == 'function' ? args.shift() : function(){}
+      callback:  typeof(args[0]) == 'function' ? args.shift() : function(){},
+      non_auth_callback:  typeof(args[0]) == 'function' ? args.shift() : function(){}
     }
     
     // add in our access token
@@ -22,7 +23,9 @@ with (scope('BountySource')) {
     options.callback = function(response) {
       if (response && response.meta && parseInt(response.meta.status) == 401) {
         Storage.remove('access_token');
-        scope.instance.App.unauthorized_callback ? scope.instance.App.unauthorized_callback(options) : set_route('#');
+        if (options.non_auth_callback) options.non_auth_callback(response);
+        else if (scope.instance.App.unauthorized_callback) scope.instance.App.unauthorized_callback(options);
+        else set_route('#');
       } else {
         // turn error message into string, or use default
         if (!response.meta.success) {
@@ -141,8 +144,22 @@ with (scope('BountySource')) {
     api('/overview', callback);
   });
 
-  define('make_payment', function(data, callback) {
-    api('/payments', 'POST', data, callback);
+  define('make_payment', function(data, error_callback) {
+    var callback = function(response) {
+      if (response.meta.success) {
+        if (data.payment_method == 'personal') BountySource.set_cached_user_info(null);
+        set_route(response.data.redirect_url);
+      } else {
+        error_callback(response.data.error);
+      }
+    };
+
+    var non_auth_callback = function() {
+      Storage.set('_redirect_to_after_login', data.postauth_url);
+      set_route('#signin');
+    };
+
+    api('/payments', 'POST', data, callback, non_auth_callback);
   });
 
   define('get_user_repositories', function(callback) {

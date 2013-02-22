@@ -121,59 +121,59 @@ with (scope('Repository')) {
   });
 
 
-  route('#repos/:login/:repository/donate', function(login, repository) {
-
-    var target_div = div('Loading...');
-
-    render(
-      breadcrumbs(
-        a({ href: '#' }, 'Home'),
-        a({ href: '#repos/'+login+'/'+repository }, login + '/' + repository),
-        "Donate"
-      ),
-
-      target_div
-    );
-
-    BountySource.get_repository_overview(login, repository, function(response) {
-      if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
-
-      var repo = response.data;
-      render({ into: target_div },
-        div({ 'class': 'split-main' },
-          section({ id: 'faq' },
-            dl(
-              dt("Why should I donate?"),
-              dd("When you donate to a project, you are making sure your money gets allocated to the project's most important issues."),
-
-              dt("Who gets this money?"),
-              dd("The project's committers control all donations."),
-
-              dt("What can they do with it?"),
-              dd("Committers use project donations to create bounties on issues within their own project.")
-            )
-          )
-        ),
-        div({ 'class': 'split-side' },
-          donation_box(repo)
-        ),
-        div({ 'class': 'split-end' })
-      );
-    });
-  });
-
-  define('donation_box', function(repo) {
-    var payment_box_div = Payment.payment_box('Donation', repo, null, BountySource.www_host+Repository.get_href(repo));
-
-    return div({ id: 'bounty-box' },
-      div({ style: 'padding: 0 21px' }, ribbon_header("Donate to Project")),
-
-      repo.account_balance > 0 && section(
-        div({ 'class': 'total_bounties' }, money(repo.account_balance)),
-        div({ style: 'text-align: center' }, "From ", repo.bounties.length, " backer" + (repo.bounties.length == 1 ? '' : 's') + ".")
-      ),
-      payment_box_div
-    );
-  });
+//  route('#repos/:login/:repository/donate', function(login, repository) {
+//
+//    var target_div = div('Loading...');
+//
+//    render(
+//      breadcrumbs(
+//        a({ href: '#' }, 'Home'),
+//        a({ href: '#repos/'+login+'/'+repository }, login + '/' + repository),
+//        "Donate"
+//      ),
+//
+//      target_div
+//    );
+//
+//    BountySource.get_repository_overview(login, repository, function(response) {
+//      if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
+//
+//      var repo = response.data;
+//      render({ into: target_div },
+//        div({ 'class': 'split-main' },
+//          section({ id: 'faq' },
+//            dl(
+//              dt("Why should I donate?"),
+//              dd("When you donate to a project, you are making sure your money gets allocated to the project's most important issues."),
+//
+//              dt("Who gets this money?"),
+//              dd("The project's committers control all donations."),
+//
+//              dt("What can they do with it?"),
+//              dd("Committers use project donations to create bounties on issues within their own project.")
+//            )
+//          )
+//        ),
+//        div({ 'class': 'split-side' },
+//          donation_box(repo)
+//        ),
+//        div({ 'class': 'split-end' })
+//      );
+//    });
+//  });
+//
+//  define('donation_box', function(repo) {
+//    var payment_box_div = Payment.payment_box('Donation', repo, null, BountySource.www_host+Repository.get_href(repo));
+//
+//    return div({ id: 'bounty-box' },
+//      div({ style: 'padding: 0 21px' }, ribbon_header("Donate to Project")),
+//
+//      repo.account_balance > 0 && section(
+//        div({ 'class': 'total_bounties' }, money(repo.account_balance)),
+//        div({ style: 'text-align: center' }, "From ", repo.bounties.length, " backer" + (repo.bounties.length == 1 ? '' : 's') + ".")
+//      ),
+//      payment_box_div
+//    );
+//  });
 
 }

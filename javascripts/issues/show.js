@@ -85,14 +85,39 @@ with (scope('Issue', 'App')) {
         div({ style: 'text-align: center' }, "From ", issue.bounties.length, " bount" + (issue.bounties.length == 1 ? 'y' : 'ies') + ".")
       ),
 
-      Payment.payment_box({
-        item_number: 'github/' + issue.repository.full_name + '/issues/' + issue.number,
-        success_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number + '/bounties/:item_id/receipt',
-        cancel_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number
-      })
+      section({ style: 'padding: 21px' },
+        form({ action: curry(create_bounty, issue) },
+
+          div({ id: 'create-bounty-errors' }),
+
+          div({ 'class': 'amount' },
+            label({ 'for': 'amount-input' }, '$'),
+            text({ placeholder: "25", name: 'amount', id: 'amount-input', value: get_params().amount || '' })
+          ),
+
+          Payment.payment_methods({ style: 'margin: 10px 0;', value: get_params().payment_method }),
+
+          submit({ 'class': 'blue' }, 'Create Bounty')
+        )
+      )
     );
   });
-  
+
+  define('create_bounty', function(issue, form_data) {
+    var payment_data = {
+      amount: form_data.amount,
+      payment_method: form_data.payment_method,
+      item_number: 'github/' + issue.repository.full_name + '/issues/' + issue.number,
+      success_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number + '/bounties/:item_id/receipt',
+      cancel_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number,
+      postauth_url: window.location.href.split('#')[0] + '#repos/' + issue.repository.full_name + '/issues/' + issue.number + '?payment_method='+form_data.payment_method+'&amount='+form_data.amount
+    };
+
+    BountySource.make_payment(payment_data, function(errors) {
+      render({ target: 'create-bounty-errors' }, error_message(errors));
+    });
+  });
+
   define('developer_box', function(issue) {
     var developer_div = div({ id: 'developer-box' }, p({ style: 'text-align: center;' }, 'Loading...'));
 

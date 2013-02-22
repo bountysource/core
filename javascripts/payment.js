@@ -1,26 +1,11 @@
 with (scope('Payment', 'App')) {
-  define('payment_box', function(payment_data) {
-    return section({ style: 'padding: 21px' },
-
-      form({ action: curry(make_payment, payment_data) },
-
-        div({ id: 'create-bounty-errors' }),
-
-        div({ 'class': 'amount' },
-          label({ 'for': 'amount-input' }, '$'),
-          text({ placeholder: "25", name: 'amount', id: 'amount-input' })
-        ),
-
-        payment_methods({ style: 'margin: 10px 0;' }),
-
-        submit({ 'class': 'blue' }, 'Create Bounty')
-      )
-    );
-  });
 
   define('payment_methods', function(options) {
     options = options || {};
     options['class'] = 'payment-method';
+
+    var selected_value = options.value || 'paypal';
+    delete options.value;
 
     var bountysource_account_div = div();
 
@@ -30,7 +15,7 @@ with (scope('Payment', 'App')) {
           id: 'payment_method_paypal',
           name: 'payment_method',
           value: 'paypal',
-          checked: 'checked'
+          checked: (selected_value == 'paypal' ? 'checked' : null)
         }),
         label({ 'for': 'payment_method_paypal', style: 'display: inline;' },
           img({ src: 'images/paypal.png'}), span("PayPal")
@@ -40,7 +25,8 @@ with (scope('Payment', 'App')) {
         radio({
           id:'payment_method_google',
           name: 'payment_method',
-          value: 'google'
+          value: 'google',
+          checked: (selected_value == 'google' ? 'checked' : null)
         }),
         label({ 'for': 'payment_method_google', style: 'display: inline;' },
           img({ src: 'images/google-wallet.png'}), span("Google Wallet")
@@ -50,7 +36,8 @@ with (scope('Payment', 'App')) {
         radio({
           id:'payment_method_amazon',
           name: 'payment_method',
-          value: 'amazon'
+          value: 'amazon',
+          checked: (selected_value == 'amazon' ? 'checked' : null)
         }),
         label({ 'for': 'payment_method_amazon', style: 'display: inline;' },
           img({ src: 'images/amazon.png'}), span("Amazon.com")
@@ -66,7 +53,8 @@ with (scope('Payment', 'App')) {
           radio({
             name: 'payment_method',
             value: 'personal',
-            id: 'payment_method_personal'
+            id: 'payment_method_personal',
+            checked: (selected_value == 'personal' ? 'checked' : null)
           }),
           label({ 'for': 'payment_method_personal', style: 'display: inline;' },
             img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
@@ -77,21 +65,6 @@ with (scope('Payment', 'App')) {
     });
 
     return payment_methods;
-  });
-
-  define('make_payment', function(payment_data, form_data) {
-    // load in amount and payment_method selector
-    payment_data.amount = form_data.amount;
-    payment_data.payment_method = form_data.payment_method;
-
-    BountySource.make_payment(payment_data, function(response) {
-      if (response.meta.success) {
-        if (payment_data.payment_method == 'personal') BountySource.set_cached_user_info(null);
-        set_route(response.data.redirect_url);
-      } else {
-        render({ target: 'create-bounty-errors' }, error_message(response.data.error));
-      }
-    });
   });
 
 }

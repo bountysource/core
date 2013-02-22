@@ -26,16 +26,19 @@ describe "Bounty Creation" do
     bounty_input.send_keys 25
     @browser.button(value: 'Create Bounty').click
 
+    # log in
+    @browser.a(text: 'Email Address').when_present.click
+    form = @browser.section(id: 'content').form
+    form.text_field(name: 'email').set(CREDENTIALS["bountysource"]['email'])
+    form.text_field(name: 'password').set(CREDENTIALS["bountysource"]['password'])
+    form.div(text: /Email address found/).wait_until_present
+    form.button.click
+
+    # should be back on the bounty page... click!
+    @browser.button(value: 'Create Bounty').when_present.click
+
     # go through paypal flow
     proceed_through_paypal_sandbox_flow!
-
-    form = @browser.section(id: 'content').form
-    form.wait_until_present
-    form.text_field(name: 'email').set(CREDENTIALS["bountysource"]['email'])
-    form.button.focus
-    form.div(text: /Email address found/).wait_until_present
-    form.text_field(name: 'password').set(CREDENTIALS["bountysource"]['password'])
-    form.button.click
 
     @browser.h2(text: /\$\d+\s+bounty\s+placed/i).wait_until_present
   end

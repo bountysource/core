@@ -22,7 +22,7 @@ describe "Fundraiser Pledges" do
     # select a reward
     @browser.div(id: 'fundraiser-rewards').divs.first.click
 
-    @browser.button(value: 'Continue to payment').click
+    @browser.button(value: 'Continue to Payment').click
     proceed_through_paypal_sandbox_flow!
 
     @browser.h2(text: /\$\d+\s+pledge\s+made/i).wait_until_present
