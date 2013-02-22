@@ -110,61 +110,55 @@ with (scope('App')) {
 
     options.id = 'notifications-feed';
 
-    var inner_div = div({ id: 'flyout-inner' }, span({ style: 'text-align: center; color: black;' }, 'Loading...'));
-
     var notifications_feed = div(options,
-      div({ id: 'head' },
+      div({ id: 'feed-icon' },
         img({ src: 'images/users_32.gif' }),
-        span({ id: 'title' }, 'Recent Friend Activity')
+        span({ id: 'notification-feed-count' }, '12')
       ),
-      div({ id: 'flyout' }, inner_div)
+
+      div({ id: 'notifications-feed-flyout-outer' },
+        div({ id: 'notifications-feed-flyout-header' }, span('Recent Friend Activity')),
+        div({ id: 'notifications-feed-flyout-inner' }, div({ style: 'text-align: center;' }, 'Loading...'))
+      )
     );
 
     BountySource.get_friends_activity(function(response) {
-      if (response.meta.success) {
-        var notifications = response.data;
+      // add a special class to adjust height to max once the API call is finished
+      add_class(notifications_feed, 'loaded');
 
-        // add a special class to adjust height to max once the API call is finished
-        add_class(notifications_feed, 'loaded');
-
-        if (notifications.length <= 0) {
-          render({ into: inner_div }, 'Nothing to show here!');
-        } else {
-          render({ into: inner_div }, notifications.map(notification));
-        }
+      if (response.meta.success && response.data.length > 0) {
+        render({ target: 'notifications-feed-flyout-inner' }, response.data.map(notification));
       } else {
-        render({ into: inner_div }, 'Something broke :(');
+        render({ target: 'notifications-feed-flyout-inner' }, 'Nothing to show here!');
       }
     });
 
-    notifications_feed.addEventListener('mouseover', function() { add_class(this, 'active') });
-    notifications_feed.addEventListener('mouseout', function() { remove_class(this, 'active') });
+    // toggle show of feed on click
+    notifications_feed.addEventListener('click', function() {
+      has_class(this, 'active') ? remove_class(this, 'active') : add_class(this, 'active');
+    });
 
     return notifications_feed;
   });
 
   define('notification', function(object) {
-    var content_div = div();
-
+    var message = "did something awesome!";
     if (object.type == 'bounty') {
-      render({ into: content_div }, 'placed a ', money(object.amount), ' bounty on ', object.issue.title);
+      message = 'placed a ' + money(object.amount) + ' bounty on ' + object.issue.title;
     } else if (object.type == 'pledge') {
-      render({ into: content_div }, 'pledged ', money(object.amount), ' to ', object.fundraiser.title);
+      message = 'pledged ' + money(object.amount) + ' to ' + object.fundraiser.title;
     } else if (object.type == 'fundraiser') {
-      render({ into: content_div }, 'created a Fundraiser: ', object.title);
+      message = 'created a Fundraiser: '+object.title;
     }
 
-    var notification_element = a({ href: object.href, 'class': 'notification', style: 'font-size: 12px;' },
-      div({ style: 'padding: 10px;' },
-        img({ src: object.person.avatar_url, style: 'display: inline-block; vertical-align: middle;' }),
-        div({ style: 'display: inline-block; vertical-align: middle; margin-left: 10px;' },
-          a({ href: object.person.profile_url }, object.person.display_name)
-        )
+    return div({ 'class': 'notification-message', onClick: curry(set_route, object.href) },
+      a({ href: object.person.profile_url },
+        img({ 'class': 'notification-user', src: object.person.avatar_url })
       ),
-      div({ 'class': 'content' }, content_div)
-    );
-
-    return notification_element
+      div({ 'class': 'notification-content' },
+        a({ href: object.person.profile_url, style: 'font-size: 12px;' }, span(object.person.display_name)), span(' ', message)
+      )
+    )
   });
 
   define('chatbar', function() {

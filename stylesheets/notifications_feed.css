@@ -1,77 +1,93 @@
 #notifications-feed {
+  color: black;
+  font-size: 12px;
+  padding: 0 5px;
+  cursor: pointer;
+  border-radius: 3px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#notifications-feed:hover,
+#notifications-feed.active { background: #F7F7F7; }
+
+#notifications-feed #feed-icon {
   display: inline-block;
   vertical-align: middle;
-  width: 210px;
-  height: 50px;
+}
+#notifications-feed #feed-icon img {
+  display: inline-block;
+  vertical-align: middle;
+}
+#notifications-feed #feed-icon #notification-feed-count {
+  font-size: 10px;
+  color: white;
+  background: #DB0000;
+  border-radius: 5px;
+  padding: 2px;
 }
 
-#notifications-feed #head img { style: display: inline-block; vertical-align: middle; margin-right: 10px; }
-#notifications-feed #head #title { style: display: inline-block; vertical-align: middle; }
-
-#notifications-feed #head {
-  color: black;
-  text-align: center;
-
-  -webkit-transition: text-shadow ease-in-out 100ms;
-  -moz-transition:    text-shadow ease-in-out 100ms;
-  -o-transition:      text-shadow ease-in-out 100ms;
-  transition:         text-shadow ease-in-out 100ms;
+#notifications-feed #notifications-feed-flyout-header {
+  background: #E7E7E7;
+  border-bottom: 1px solid #BBB;
+  padding: 0 10px;
 }
 
-
-#notifications-feed #flyout {
-  height: 0px;
-  overflow: hidden;
+#notifications-feed #notifications-feed-flyout-outer {
+  cursor: default;
   z-index: 3;
-  width: 210px;
-  border-top: 0;
-  position: absolute;
+  position:  absolute;
   display: none;
-}
-#notifications-feed.active #flyout {
-  display: block;
-  overflow-y: scroll;
-  background: rgb(250, 250, 250);
-  height: 60px;
-}
-#notifications-feed.active.loaded #flyout { height: 500px; }
-
-#notifications-feed.active #head {
-  border-bottom: 0;
-  background: rgb(250, 250, 250);
-}
-
-#notifications-feed #flyout-inner {
-  text-align: center;
-  box-shadow: 0 0 10px;
-  padding: 5px;
-}
-
-#notifications-feed .notification {
-  text-decoration: none;
-  color: black;
-  display: block;
-  margin-bottom: 5px;
-  line-height: 20px;
-  font-size: 15px;
-  background: rgb(241, 241, 241);
-
-  -webkit-transition: all ease-in-out 100ms;
-  -moz-transition:    all ease-in-out 100ms;
-  -o-transition:      all ease-in-out 100ms;
-  transition:         all ease-in-out 100ms;
-}
-#notifications-feed .notification:hover { box-shadow: 0 0 5px rgb(209, 209, 209); }
-#notifications-feed .notification:last-of-type { margin-bottom: 0; }
-
-#notifications-feed .notification img {
-  width: 24px;
-  height: 24px;
+  background: #f4f4f4;
+  width: 600px;
+  min-height: 30px;
+  right: 220px;
+  top: 60px;
+  border: 1px solid #BBB;
   border-radius: 3px;
 }
-#notifications-feed .notification .content {
+
+#notifications-feed.active #notifications-feed-flyout-outer {
+  display: block;
+}
+
+#notifications-feed #notifications-feed-flyout-inner {
+  margin: 5px;
+  max-height: 250px;
+  background: white;
+  overflow: scroll;
+  border: 1px solid #BBB;
+}
+
+#notifications-feed .notification-message {
+  cursor: pointer;
+  padding: 5px;
+  border-bottom: 1px solid #BBB;
+
+  -webkit-transition: background ease-in 100ms;
+  -moz-transition:    background ease-in 100ms;
+  -o-transition:      background ease-in 100ms;
+  transition:         background ease-in 100ms;
+}
+#notifications-feed .notification-message:hover {
+  background: #FFFDE7;
+}
+#notifications-feed .notification-message:last-of-type { border-bottom: 0; }
+#notifications-feed .notification-message img.notification-user {
   display: inline-block;
   vertical-align: middle;
-  padding-bottom: 5px;
-  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+#notifications-feed .notification-message .notification-content {
+  width: 89%;
+  line-height: 15px;
+  display: inline-block;
+  vertical-align: middle;
 }
