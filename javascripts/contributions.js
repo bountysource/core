@@ -23,34 +23,32 @@ with (scope('Contributions', 'App')) {
         );
       } else {
         render({ into: target_div },
-          (user_info.bounties.length > 0) && render({ into: target_div },
-            section({ id: 'bounties-table' },
-              h2("Bounties"),
-              table(
-                tr(
-                  th(),
-                  th('Project'),
-                  th({ style: 'width: 60px;' }, 'Issue'),
-                  th({ style: 'width: 200px;' }),
-                  th({ style: 'text-align: center;' }, 'Issue Status'),
-                  th('Bounty Amount'),
-                  th('Date')
-                ),
+          (user_info.bounties.length > 0) && section({ id: 'bounties-table' },
+            h2("Bounties"),
+            table(
+              tr(
+                th(),
+                th('Project'),
+                th({ style: 'width: 60px;' }, 'Issue'),
+                th({ style: 'width: 200px;' }),
+                th({ style: 'text-align: center;' }, 'Issue Status'),
+                th('Bounty Amount'),
+                th('Date')
+              ),
 
-                (user_info.bounties).map(function(bounty) {
-                  return tr({ style: 'height: 75px;' },
-                    td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
-                      img({ src: bounty.repository.owner.avatar_url, style: 'width: 50px;' })
-                    ),
-                    td(a({ href: Repository.get_href(bounty.issue.repository) }, bounty.repository.full_name)),
-                    td(a({ href: Issue.get_href(bounty.issue) }, '#'+bounty.issue.number )),
-                    td({ style: 'color: #888' }, bounty.issue.title),
-                    td({ style: 'text-align: center;' }, Issue.status_element(bounty.issue)),
-                    td(money(bounty.amount)),
-                    td(formatted_date(bounty.created_at))
-                  )
-                })
-              )
+              (user_info.bounties).map(function(bounty) {
+                return tr({ style: 'height: 75px;' },
+                  td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
+                    img({ src: bounty.repository.owner.avatar_url, style: 'width: 50px;' })
+                  ),
+                  td(a({ href: Repository.get_href(bounty.issue.repository) }, bounty.repository.full_name)),
+                  td(a({ href: Issue.get_href(bounty.issue) }, '#'+bounty.issue.number )),
+                  td({ style: 'color: #888' }, bounty.issue.title),
+                  td({ style: 'text-align: center;' }, Issue.status_element(bounty.issue)),
+                  td(money(bounty.amount)),
+                  td(formatted_date(bounty.created_at))
+                )
+              })
             )
           ),
 
@@ -67,7 +65,7 @@ with (scope('Contributions', 'App')) {
               user_info.pledges.map(function(pledge) {
                 return tr({ style: 'height: 75px;' },
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
-                    img({ src: pledge.fundraiser.avatar_url, style: 'width: 50px;' })
+                    img({ src: pledge.fundraiser.image_url, style: 'width: 50px;' })
                   ),
                   td(a({ href: pledge.fundraiser.url }, pledge.fundraiser.title)),
                   td(money(pledge.amount)),
