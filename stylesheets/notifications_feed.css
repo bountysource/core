@@ -45,9 +45,9 @@
   position:  absolute;
   display: none;
   background: white;
-  width: 550px;
+  width: 360px;
   min-height: 30px;
-  right: 235px;
+  right: 170px;
   top: 55px;
   border: 1px solid #BBB;
   border-top: 0;
@@ -90,7 +90,7 @@
   margin-right: 10px;
 }
 #notifications-feed .notification-message .notification-content {
-  width: 89%;
+  width: 88%;
   line-height: 15px;
   display: inline-block;
   vertical-align: middle;
