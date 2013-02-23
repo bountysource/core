@@ -51,6 +51,7 @@ with (scope('Pledge', 'Fundraiser')) {
               div({ id: 'fundraiser-rewards', style: 'vertical-align: top; width: 500px;' },
                 // No Reward option
                 reward_row({
+                  id: 0,
                   description: "No reward please, I just want to help out!"
                 }),
 
@@ -104,7 +105,7 @@ with (scope('Pledge', 'Fundraiser')) {
     if (reward.sold_out) reward_radio.setAttribute('disabled', true);
 
     // if the id is set to 0, this is the "No Reward" row
-    var no_reward = (typeof(reward.id) == 'undefined');
+    var no_reward = (reward.id == 0);
 
     var reward_element = div({ id: 'reward_'+reward.id+'_wrapper', style: 'padding: 15px;' },
       div({ style: 'display: inline-block; width: 400px; vertical-align: middle;' },
@@ -159,7 +160,7 @@ with (scope('Pledge', 'Fundraiser')) {
     var amount_input = document.getElementById('pledge-amount');
     if (!amount_input) return;
 
-    var decline_reward = (typeof(reward.id) == 'undefined');
+    var decline_reward = (reward.id == 0);
 
     // set the pledge value
     if (!decline_reward && (isNaN(parseInt(amount_input.value)) || parseInt(amount_input.value) < reward.amount)) {
@@ -173,12 +174,12 @@ with (scope('Pledge', 'Fundraiser')) {
     add_class(selected_reward, 'active');
 
     // set the hidden reward_id input
-    document.getElementById('reward-id').value = (decline_reward ? 'no-reward' : reward.id);
+    document.getElementById('reward-id').value = reward.id;
   });
 
   define('make_pledge', function(fundraiser, form_data) {
     clear_message();
-    if (form_data.reward_id != 'no-reward' && isNaN(parseInt(form_data.reward_id))) {
+    if (isNaN(parseInt(form_data.reward_id))) {
       return render_message(error_message('Please select your reward first'));
     }
 
