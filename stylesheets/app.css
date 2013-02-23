@@ -85,26 +85,6 @@ section#homepage .box .inner { padding: 20px }
 section#homepage .avatar { float: left; }
 section#homepage .round-avatar { float: left; }
 
-.card {
-  border-radius: 5px;
-
-  -webkit-transition: ease-in-out 100ms;
-  -moz-transition:    ease-in-out 100ms;
-  -o-transition:      ease-in-out 100ms;
-  transition:         ease-in-out 100ms;
-}
-
-.card-column { width: 233px; float: left; margin-right: 15px; }
-.card-column img { max-width: 100% }
-.card-column:last-child { margin-right: 0; }
-
-.card { background: white; padding: 10px; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px; border: 1px solid white }
-.card:hover { box-shadow: 0 0 10px #B38735; border: 1px solid #E0AB45; cursor: pointer }
-.card.fundraiser:hover { box-shadow: 0 0 10px #59AA2C; border: 1px solid #9ADA8A; cursor: pointer }
-
-.card .inner { overflow: hidden }
-#card-loader-div { background: white; padding: 20px 0; margin: 20px 0; box-shadow: 0 0 5px #ccc8be; font-size: 20px; text-align: center; color: #aaa; font-style: italic }
-
 section#homepage h1 { margin: 30px 0 10px 0; font-weight: normal; font-size: 36px; color: #333; text-align: center; }
 
 section#homepage .h1-line { border-bottom: 2px solid #f87956; margin: 12px 20px 0; position: relative; }
@@ -304,7 +284,6 @@ input.autosized {
 .success-message.small { padding: 5px; text-align: center; }
 .error-message.small   { padding: 5px; text-align: center; }
 .info-message.small    { padding: 5px; text-align: center; }
-
 
 #user-nav {
   position: relative;
