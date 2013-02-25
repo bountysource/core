@@ -123,11 +123,8 @@ RSpec.configure do |config|
           # absolute URL
           goto_without_scope(route)
         elsif url[0, BASE_URL.length] == BASE_URL
-          # wait until scope is loaded and initializers have run
-          Watir::Wait.until { execute_script("return (typeof(scope) != 'undefined') && scope.instance && scope.instance.initializer && (typeof(scope.__initializers) == 'undefined')") }
-
           # scope route and we're already on a scope page
-          execute_script "scope.instance.set_route('#{route}')"
+          execute_scopejs_script "set_route('#{route}');"
         else
           # scope route but we're not on a scope page
           goto_without_scope("#{BASE_URL}#{route}")
@@ -141,26 +138,6 @@ RSpec.configure do |config|
           end
         end
       end
-
-      ## goto route.
-      #def goto_route(route)
-      #  puts "goto_route #{route}"
-      #
-      #  # set the route
-      #  execute_script %(window.location.href = "#{BASE_URL}#{route}")
-      #  Watir::Wait.until { execute_script %(return typeof(scope) != "undefined" && "#{route}".match(scope.current_route)) }
-      #
-      #  puts "finished goto_route #{route}"
-      #
-      #  # ensure we're using the correct API_ENDPOINT
-      #  if BASE_URL =~ /bountysource\.dev/
-      #    $browser.div(id: 'dev-bar').wait_until_present
-      #    if $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).exists?
-      #      $browser.div(id: 'dev-bar').a(text: API_ENDPOINT).click
-      #      $browser.div(id: 'dev-bar').b(text: API_ENDPOINT).wait_until_present
-      #    end
-      #  end
-      #end
 
       def mock_api!
         execute_scopejs_script %(
