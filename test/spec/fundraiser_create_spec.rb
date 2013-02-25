@@ -205,13 +205,13 @@ describe "Fundraiser Creation" do
       it "should update a reward" do
         @browser.li(text: 'I will sign your chest').when_present.click
         @browser.text_field(name: 'description', value: 'I will sign your chest').when_present.set "Just kidding"
-        @browser.button(text: 'Save').click
+        @browser.button(text: 'Save').when_present.click
         @browser.li(text: 'Just kidding').wait_until_present
       end
 
       it "should delete a reward" do
         @browser.li(text: 'Just kidding').when_present.click
-        @browser.link(text: 'Delete').click
+        @browser.link(text: 'Delete').when_present.click
         Watir::Wait.until { !@browser.li(text: 'Just kidding').present? }
       end
 
