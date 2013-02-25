@@ -58,6 +58,8 @@ def proceed_through_paypal_sandbox_flow!
   @browser.button(name: 'merchant_return_link').wait_until_present
   sleep 1
   @browser.button(name: 'merchant_return_link').click
+
+  Watir::Wait.until { @browser.execute_script("return (typeof(scope) != 'undefined') && scope.instance && scope.instance.initializer && (typeof(scope.__initializers) == 'undefined')") }
 end
 
 def login_with_email!
