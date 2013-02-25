@@ -17,6 +17,7 @@ describe "Fundraiser Creation" do
     login_with_email!
 
     @browser.goto '#'
+    @browser.div(id: 'user-nav').when_present.hover
     @browser.a(text: 'Create Fundraiser').wait_until_present
   end
 

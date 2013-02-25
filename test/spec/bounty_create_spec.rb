@@ -20,9 +20,8 @@ describe "Bounty Creation" do
     bounty_card.click
 
     # fill in bounty amount, select paypal and submit bounty create
-    bounty_input = @browser.input(id: 'amount-input')
-    bounty_input.wait_until_present
-    @browser.radio(id: 'payment_method_paypal').click
+    bounty_input = @browser.input(id: 'amount-input').when_present
+    @browser.radio(id: 'payment_method_paypal').when_present.click
     bounty_input.send_keys 25
     @browser.button(value: 'Create Bounty').click
 
