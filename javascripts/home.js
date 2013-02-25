@@ -150,8 +150,21 @@ with (scope('Home', 'App')) {
         target.appendChild(Fundraiser.fundraiser_card(card));
       }
 
-      for (j=0; j < response.data.repositories.length; j++) {
-        var card = response.data.repositories[j];
+//      for (j=0; j < response.data.repositories.length; j++) {
+//        var card = response.data.repositories[j];
+//        page_state.current_cards.push(card.card_id);
+//
+//        target = col_container.childNodes[0];
+//        for (var k=1; k < col_container.childNodes.length; k++) {
+//          if (col_container.childNodes[k].clientHeight < target.clientHeight) target = col_container.childNodes[k];
+//        }
+//
+//        target.appendChild(Repository.repository_card(card));
+//
+//      }
+
+      for (j=0; j < response.data.issues.length; j++) {
+        var card = response.data.issues[j];
         page_state.current_cards.push(card.card_id);
 
         target = col_container.childNodes[0];
@@ -159,65 +172,16 @@ with (scope('Home', 'App')) {
           if (col_container.childNodes[k].clientHeight < target.clientHeight) target = col_container.childNodes[k];
         }
 
-        target.appendChild(Repository.repository_card(card));
+        target.appendChild(Issue.issue_card(card));
 
       }
 
       hide('card-loader-div');
 
       // if we didn't get a full response, give up
-      if (response.data.length == 50) page_state.can_load_more_cards = true;
+      var card_count = response.data.fundraisers.length + response.data.repositories.length + response.data.issues.length;
+      if (card_count >= 50) page_state.can_load_more_cards = true;
     });
-  });
-
-  define('bounty_card', function(card) {
-    return div({ 'class': 'card', onClick: curry(set_route, card.href) },
-      div({ style: 'padding: 7px; background: #EEE; margin-bottom: 5px;' },
-        a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 5px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-        div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name)),
-
-        div({ style: 'clear: both' }),
-
-        // languages
-        (card.repository.languages.length > 0) && div({ style: 'font-size: 12px; color: gray;' },
-          'Languages: ' + card.repository.languages.map(function(l) { return l.name }).join(', ')
-        )
-      ),
-
-      div({ style: 'clear: both' }),
-
-      // title, description, and comment count
-      div({ style: 'margin: 15px 5px; overflow: auto' },
-        div({ style: '' }, a({ href: card.href, style: 'color: inherit; overflow: hidden;' }, card.title)),
-        p({ style: 'color: #999; font-size: 80%;' },
-          abbreviated_text(card.description, 100)
-        )
-      ),
-
-      div({ style: 'clear: both' }),
-
-      div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px; font-size: 16px;' },
-        div({ style: 'display: inline-block; width: 33%; vertical-align: middle;'},
-          (card.account_balance > 0) && div(
-            a({ href: card.href, style: 'display: inline; vertical-align: middle; text-decoration: none; color: #48B848;' }, money(card.account_balance))
-          )
-        ),
-
-        div({ style: 'display: inline-block; width: 33%; vertical-align: middle;' },
-          (card.comment_count > 0) && div(
-            a({ href: card.href, style: 'vertical-align: middle; color: #D8A135; text-decoration: none;' },
-              span({ style: 'vertical-align: middle; margin-right: 5px;' }, formatted_number(card.comment_count)),
-              img({ style: 'vertical-align: middle;', src: 'images/icon-comments.png' })
-            )
-          )
-        ),
-        div({ style: 'display: inline-block; width: 33%; text-align: right; vertical-align: middle;' },
-          a({ href: card.href, style: 'display: inline; vertical-align: middle; color: inherit;' }, 'Back this!')
-        )
-      ),
-
-      div({ style: 'clear: both' })
-    );
   });
 
 
