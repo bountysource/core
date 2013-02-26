@@ -4,12 +4,14 @@ with (scope('Profile','App')) {
   });
 
   route('#users/:profile_id', function(profile_id) {
+    var target_div = ('Loading...');
+
     render(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
         '...'
       ),
-      'Loading...'
+      target_div
     );
 
     BountySource.get_user_profile(profile_id, function(response) {
@@ -44,10 +46,10 @@ with (scope('Profile','App')) {
                 profile.github_user.bio && div({ style: 'margin: 15px 0;' },
                   strong('Bio: '), span({ style: 'white-space: pre-wrap;' }, profile.github_user.bio)
                 ),
-                div({ style: 'margin: 15px 0'},
+                profile.github_user.followers && div({ style: 'margin: 15px 0'},
                   strong('Followers: '), formatted_number(profile.github_user.followers)
                 ),
-                div({ style: 'margin: 15px 0'},
+                profile.github_user.following && div({ style: 'margin: 15px 0'},
                   strong('Following: '), formatted_number(profile.github_user.following)
                 )
               ]
@@ -79,8 +81,7 @@ with (scope('Profile','App')) {
           )
         );
       } else {
-        render({ target: target_div },'');
-        render_message(error_message(response.data.error));
+        render({ into: target_div }, error_message(response.data.error));
       }
     });
   });
