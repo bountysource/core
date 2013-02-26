@@ -532,7 +532,7 @@ with (scope('Edit', 'Fundraiser')) {
         Edit.cached_fundraiser = fundraiser;
 
         // render card preview again
-        render({ target: 'fundraiser-card-preview' }, card(fundraiser));
+        render({ target: 'fundraiser-card-preview' }, fundraiser_card(fundraiser));
 
         // render nav again
         render({ target: 'fundraiser-nav-bar' }, nav_bar(fundraiser));
