@@ -477,7 +477,7 @@ with (scope('Edit', 'Fundraiser')) {
     // clear the creation form
     var input_groups = [form.getElementsByTagName('input'), form.getElementsByTagName('textarea')];
     for (var i=0; i<input_groups.length; i++) {
-      for (var j=0; j<input_groups[i].length; j++) input_groups[i][j].value = "";
+      for (var j=0; j<input_groups[i].length && input_groups[i][j].type!='submit'; j++) input_groups[i][j].value = "";
     }
   });
 
