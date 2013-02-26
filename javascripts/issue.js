@@ -17,6 +17,6 @@ with (scope('Issue','App')) {
     issue.description     = issue.body;
     issue.href            = get_href(issue);
     issue.account_balance = issue.bounty_total;
-    return Home.bounty_card(issue);
+    return issue_card(issue);
   })
 }

@@ -40,7 +40,7 @@ with (scope('Home', 'App')) {
         div({ style: "padding: 10px" },
           div({ style: 'color: #888; font-style: italic; margin-bottom: 5px' }, recent_people.total_count, " members have joined BountySource already!"),
 
-          recent_people.people.map(function(person) {
+          (recent_people.people||[]).map(function(person) {
             return div({ 'class': 'round-avatar' },
               a({ href: person.profile_url }, img({ src: person.avatar_url }))
             );
