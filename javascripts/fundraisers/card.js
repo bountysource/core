@@ -17,7 +17,7 @@ with (scope('Fundraiser', 'App')) {
 
       // title, description, and comment count
       div({ style: 'margin: 10px 5px; overflow: auto' },
-        div({ style: 'color: #999;' }, card.short_description)
+        div({ style: 'color: #999;' }, card.description)
       ),
 
       div({ style: 'clear: both' }),
