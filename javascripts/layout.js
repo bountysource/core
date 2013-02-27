@@ -53,6 +53,12 @@ with (scope('App')) {
       scope.rendered_default_layout = section({ id: 'wrapper' },
         div({ id: 'fb-root' }),
 
+        div({ id: 'forkme' },
+          a({ href: "https://github.com/bountysource/frontend", target: '_blank' },
+            img({ src: "images/forkme.png", alt: "Fork me on GitHub"})
+          )
+        ),
+
         header(
           section(
             div({ style: 'display: inline-block; vertical-align: middle;' },

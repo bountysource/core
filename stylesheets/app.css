@@ -336,3 +336,6 @@ input.autosized {
 #cardfilterbox input[type=submit], #cardfilterbox input[type=reset] {
   width: 80px; margin-left: 3px;
 }
+
+#forkme { display: none; position: absolute; right: 0; top: 64px; }
+@media screen and (min-width: 1250px) { #forkme { display: block; } }
