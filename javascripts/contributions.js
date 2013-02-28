@@ -121,7 +121,8 @@ with (scope('Contributions', 'App')) {
               via:  'BountySource'
             }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet')),
 
-            Github.issue_comment_form(bounty.issue, {
+            // TODO fix it! --- CAB
+            false && Github.issue_comment_form(bounty.issue, {
               default_text: "I placed a " + money(bounty.amount) + " bounty on this issue using BountySource. The bounty total goes to the person whose pull request gets accepted. Add to or claim the bounty here: " + BountySource.www_host+Issue.get_href(bounty.issue)
             })
           )
