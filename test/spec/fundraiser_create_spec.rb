@@ -42,6 +42,22 @@ describe "Fundraiser Creation" do
     @browser.span(text: /edit/i).wait_until_present
   end
 
+  it "should see edit button on fundraiser show page" do
+    login_with_email!
+
+    @browser.goto '#account/fundraisers'
+    @browser.link(text: @fundraiser.title).wait_until_present
+    link = @browser.links(text: @fundraiser.title).last
+    @browser.goto link.attribute_value('href') # goto fundraiser show page
+
+    @browser.span(text: /info/i).wait_until_present
+
+    # click the info button
+    @browser.span(text: /info/i).when_present.click
+
+    @browser.span(text: @fundraiser.title).wait_until_present
+  end
+
   describe "with newly created fundraiser" do
     before do
       login_with_email!
