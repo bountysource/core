@@ -110,7 +110,7 @@ describe "Fundraiser Creation" do
       @browser.text_field(name: 'short_description').set @fundraiser.short_description, :tab
 
       # the card preview should update with the short description and the preview should have updated data
-      @browser.div(id: 'fundraiser-card-preview').div(text: @fundraiser.short_description).when_present.click
+      @browser.div(id: 'fundraiser-card-preview').when_present.click
 
       # check for title
       @browser.text.should match /\b#{@fundraiser.title}/
