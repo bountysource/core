@@ -207,6 +207,16 @@ with (scope('Contributions', 'App')) {
       target_div
     );
 
+    define('redeem_reward', function(form_data) {
+      BountySource.redeem_pledge_reward(pledge_id, form_data, function(response) {
+        if (response.meta.success) {
+          render_message(success_message("Your reward has been redeemed"));
+        } else {
+          render_message(error_message(response.data.error));
+        }
+      });
+    });
+
     BountySource.get_pledge(pledge_id, function(response) {
       if (response.meta.success) {
         var pledge = response.data;
@@ -215,17 +225,17 @@ with (scope('Contributions', 'App')) {
 
         // render the title into the breadcrumbs
         render({ target: 'breadcrumbs-fundraiser-title' },
-          a({ href: pledge.fundraiser.url }, abbreviated_text(pledge.fundraiser.title, 50))
+          a({ href: fundraiser.url }, abbreviated_text(fundraiser.title, 50))
         );
 
         render({ into: target_div },
           div({ style: 'text-align: center;' },
             h2(money(pledge.amount), " Pledge Made"),
-            h3(pledge.fundraiser.title),
+            h3(fundraiser.title),
 
-            pledge.reward && div({ style: 'margin: 10px; 0' },
+            reward && div({ style: 'margin: 10px; 0' },
               h4({ style: 'margin-bottom: 0;' }, 'Reward:'),
-              p({ style: 'margin: 0 200px; padding: 10px;' }, pledge.reward.description)
+              p({ style: 'margin: 0 200px; padding: 10px;' }, reward.description)
             ),
 
             fundraiser.funding_goal_reached && reward.fulfillment_details && div(
@@ -245,16 +255,16 @@ with (scope('Contributions', 'App')) {
 
             div(
               Facebook.create_share_button({
-                link:         BountySource.www_host+pledge.fundraiser.url,
-                name:         "I just backed "+pledge.fundraiser.title,
-                caption:      pledge.fundraiser.short_description,
+                link:         BountySource.www_host+fundraiser.url,
+                name:         "I just backed "+fundraiser.title,
+                caption:      fundraiser.short_description,
                 description:  "BountySource is the funding platform for open-source software, contribute by making a pledge to this fundraiser!",
-                picture:      pledge.fundraiser.image_url || ''
+                picture:      fundraiser.image_url || ''
               }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
 
               Twitter.create_share_button({
-                url:  BountySource.www_host+pledge.fundraiser.url,
-                text: money(pledge.amount)+" pledge made to "+pledge.fundraiser.title,
+                url:  BountySource.www_host+fundraiser.url,
+                text: money(pledge.amount)+" pledge made to "+fundraiser.title,
                 via:  'BountySource'
               }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet'))
             )
@@ -263,16 +273,6 @@ with (scope('Contributions', 'App')) {
       } else {
         render(error_message(response.data.error));
       }
-    });
-
-    define('redeem_reward', function(form_data) {
-      BountySource.redeem_pledge_reward(pledge_id, form_data, function(response) {
-        if (response.meta.success) {
-          render_message(success_message("Your reward has been redeemed"));
-        } else {
-          render_message(error_message(response.data.error));
-        }
-      });
     });
   });
 }

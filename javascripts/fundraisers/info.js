@@ -29,7 +29,6 @@ with (scope('Info', 'Fundraiser')) {
   });
 
   define('reward_template', function(reward) {
-    console.log(reward)
     var reward_element = div({class: "reward"},
       h2({class: "reward-name"}, (reward.amount ? "$" + reward.amount + " Reward: " : "No Reward:")),
       reward.description && div({style: "font-style: italic"}, reward.description),
