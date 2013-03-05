@@ -21,7 +21,7 @@ with (scope('Payment', 'App')) {
           img({ src: 'images/paypal.png'}), span("PayPal")
         )
       ),
-      false && div(
+      div(
         radio({
           id:'payment_method_google',
           name: 'payment_method',
