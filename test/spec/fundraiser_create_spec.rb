@@ -42,6 +42,22 @@ describe "Fundraiser Creation" do
     @browser.span(text: /edit/i).wait_until_present
   end
 
+  it "should see edit button on fundraiser show page" do
+    login_with_email!
+
+    @browser.goto '#account/fundraisers'
+    @browser.link(text: @fundraiser.title).wait_until_present
+    link = @browser.links(text: @fundraiser.title).last
+    @browser.goto link.attribute_value('href') # goto fundraiser show page
+
+    @browser.span(text: /info/i).wait_until_present
+
+    # click the info button
+    @browser.span(text: /info/i).when_present.click
+
+    @browser.span(text: @fundraiser.title).wait_until_present
+  end
+
   describe "with newly created fundraiser" do
     before do
       login_with_email!
@@ -94,7 +110,7 @@ describe "Fundraiser Creation" do
       @browser.text_field(name: 'short_description').set @fundraiser.short_description, :tab
 
       # the card preview should update with the short description and the preview should have updated data
-      @browser.div(id: 'fundraiser-card-preview').div(text: @fundraiser.short_description).when_present.click
+      @browser.div(id: 'fundraiser-card-preview').when_present.click
 
       # check for title
       @browser.text.should match /\b#{@fundraiser.title}/

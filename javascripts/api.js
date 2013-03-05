@@ -14,10 +14,10 @@ with (scope('BountySource')) {
       callback:  typeof(args[0]) == 'function' ? args.shift() : function(){},
       non_auth_callback:  typeof(args[0]) == 'function' ? args.shift() : function(){}
     }
-    
+
     // add in our access token
     options.params.access_token = Storage.get('access_token');
-    
+
     // reload the page if they're not authorized
     var callback = options.callback;
     options.callback = function(response) {
@@ -39,7 +39,7 @@ with (scope('BountySource')) {
         callback.call(this, response);
       }
     };
-    
+
     JSONP.get(options);
   });
 
@@ -268,5 +268,13 @@ with (scope('BountySource')) {
 
   define('get_friends_activity', function(callback) {
     api('/user/notifications/friends', callback);
+  });
+
+  define('get_fundraiser_pledges_overview', function(fundraiser_id, callback) {
+    api('/user/fundraisers/' + fundraiser_id + '/pledges', callback);
+  });
+
+  define('redeem_pledge_reward', function(pledge_id, data, callback) {
+    api('/user/pledges/' + pledge_id + '/redeem_reward', 'POST', data, callback);
   });
 }
