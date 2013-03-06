@@ -1,6 +1,7 @@
 with (scope('BountySource')) {
 
-  define('api_host', 'https://api.bountysource.com/');
+  // define('api_host', 'https://api.bountysource.com/');
+  define('api_host', 'https://api.bountysource.dev/');
   define('www_host', document.location.href.split('#')[0]);
 
   // parse arguments: url, [http_method], [params], [callback]
@@ -14,10 +15,10 @@ with (scope('BountySource')) {
       callback:  typeof(args[0]) == 'function' ? args.shift() : function(){},
       non_auth_callback:  typeof(args[0]) == 'function' ? args.shift() : function(){}
     }
-    
+
     // add in our access token
     options.params.access_token = Storage.get('access_token');
-    
+
     // reload the page if they're not authorized
     var callback = options.callback;
     options.callback = function(response) {
@@ -39,7 +40,7 @@ with (scope('BountySource')) {
         callback.call(this, response);
       }
     };
-    
+
     JSONP.get(options);
   });
 
@@ -116,28 +117,20 @@ with (scope('BountySource')) {
     api('/user/request_password_reset', 'POST', data, callback);
   });
 
-  define('search_users', function(term, callback) {
-    api('/github/user/search/' + term, callback);
+  define('search', function(query, callback) {
+    api('/search', 'POST', { query: query }, callback);
   });
 
-  define('search_repositories', function(term, callback) {
-    api('/github/repos/search', 'GET', { query: term }, callback);
+  define('get_tracker', function(tracker_id, callback) {
+    api('/trackers/'+tracker_id, callback);
   });
 
-  define('search_issues', function(login, repository, term, callback) {
-    api('/github/issues/search/'+login+'/'+repository+'/'+term, callback);
+  define('get_issues', function(tracker_id, callback) {
+    api('/trackers/'+tracker_id+'/issues', callback);
   });
 
-  define('get_repository', function(login, repository, callback) {
-    api('/github/repos/'+login+'/'+repository, callback);
-  });
-
-  define('get_issues', function(login, repository, callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues', callback);
-  });
-
-  define('get_issue', function(login, repository, issue_number, callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number, callback);
+  define('get_issue', function(issue_id, callback) {
+    api('/issues/'+issue_id, callback);
   });
 
   define('overview', function(callback) {
@@ -166,8 +159,8 @@ with (scope('BountySource')) {
     api('/github/user/repos/', callback);
   });
 
-  define('get_repository_overview', function(login, repository, callback) {
-    api('/github/repos/'+login+'/'+repository+'/overview', callback);
+  define('get_repository_overview', function(tracker_id, callback) {
+    api('/trackers/'+tracker_id+'/overview', callback);
   });
 
   define('create_address', function(data, callback) {
@@ -230,22 +223,6 @@ with (scope('BountySource')) {
     api('/users/'+profile_id, callback);
   });
 
-  define('get_pull_requests', function(login, repository, github_user_login, callback) {
-    api('/github/repos/'+login+'/'+repository+'/pulls/'+github_user_login, callback);
-  });
-
-  define('create_solution', function(login, repository, issue_number, pull_request_number, callback) {
-    api('/github/repos/'+login+'/'+repository+'/issues/'+issue_number+'/solutions', 'POST', { pull_request_number: pull_request_number }, callback);
-  });
-
-  define('get_solutions', function(callback) {
-    api('/user/solutions', callback);
-  });
-
-  define('get_solution', function(solution_id, callback) {
-    api('/user/solutions/'+solution_id, callback);
-  });
-
   define('get_rewards', function(fundraiser_id, callback) {
     api('/user/fundraisers/'+fundraiser_id+'/rewards', 'GET', data, callback);
   });
@@ -267,6 +244,53 @@ with (scope('BountySource')) {
   });
 
   define('get_friends_activity', function(callback) {
+    if (scope.__friend_activity) {
+      setTimeout(curry(callback, scope.__friend_activity), 0);
+    } else {
+      api('/user/notifications/friends', function(response) {
+        scope.__friend_activity = response;
+        callback(response);
+      });
+    }
     api('/user/notifications/friends', callback);
+  });
+
+  /*
+  * Solutions
+  * */
+  define('get_solutions', function(callback) {
+    api('/user/solutions', callback);
+  });
+
+  define('get_solution', function(id, callback) {
+    api('/user/solutions/'+id, callback);
+  });
+
+  define('create_solution', function(issue_id, callback) {
+    api('/user/solutions', 'POST', { issue_id: issue_id }, callback);
+  });
+
+  define('update_solution', function(id, data, callback) {
+    api('/user/solutions/'+id, 'PUT', data, callback);
+  });
+
+  define('destroy_solution', function(id, data, callback) {
+    api('/user/solutions/'+id, 'DELETE', data, callback);
+  });
+
+  define('submit_solution', function(id, callback) {
+    api('/user/solutions/'+id+'/submit', 'POST', callback);
+  });
+
+  define('solutions_for_issue', function(issue_id, callback) {
+    api('/issues/'+issue_id+'/solutions', callback);
+  });
+
+  define('create_issue', function(data, callback) {
+    api('/issues', 'POST', data, callback);
+  });
+
+  define('payout_solution', function(id, data, callback) {
+    api('/user/solutions/'+id+'/payout', 'POST', data, callback);
   });
 }

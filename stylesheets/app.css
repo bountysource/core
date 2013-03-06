@@ -86,6 +86,7 @@ section#homepage .avatar { float: left; }
 section#homepage .round-avatar { float: left; }
 
 section#homepage h1 { margin: 30px 0 10px 0; font-weight: normal; font-size: 36px; color: #333; text-align: center; }
+section#homepage h2 { padding: 0 100px; line-height: 30px; font-weight: normal; font-size: 20px; color: #888; text-align: center; }
 
 section#homepage .h1-line { border-bottom: 2px solid #f87956; margin: 12px 20px 0; position: relative; }
 section#homepage .h1-line div { position: absolute;
@@ -288,7 +289,7 @@ input.autosized {
 #user-nav {
   position: relative;
   z-index: 3;
-  min-width: 120px;
+  min-width: 150px;
   max-width: 250px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -339,3 +340,69 @@ input.autosized {
 
 #forkme { display: none; position: absolute; right: 0; top: 64px; }
 @media screen and (min-width: 1250px) { #forkme { display: block; } }
+
+.solution-row {
+  cursor: pointer;
+  height: 50px;
+
+  -webkit-transition: background ease-in 75ms;
+  -moz-transition:    background ease-in 75ms;
+  -o-transition:      background ease-in 75ms;
+  transition:         background ease-in 75ms;
+}
+.solution-row:hover {
+  background: #FFFFE4;
+}
+
+.range-with-input { display: inline-block; }
+
+#solution-payout-info fieldset { margin: 15px 0; }
+#solution-payout-info fieldset:first-of-type { margin: 0 0 15px 0; }
+#solution-payout-info fieldset:last-of-type { margin: 15px 0 0 0; }
+#solution-payout-info #developer-cut {  }
+#solution-payout-info label {
+  display: inline-block;
+  width: 130px;
+  font-size: 14px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.dollar-sign { font-size: 25px; display: inline-block; vertical-align: middle; margin-right: 5px; }
+
+.info-message {
+  border: 1px solid #e2c822;
+  background: #fff9d7;
+  padding: 14px 20px;
+  margin-bottom: 10px;
+
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+#split-wrapper {}
+#split-main {
+  z-index: 1;
+  display: inline-block;
+  width: 660px;
+  margin-right: 20px;
+
+  -webkit-transition: ease-in 100ms;
+  -moz-transition:    ease-in 100ms;
+  -o-transition:      ease-in 100ms;
+  transition:         ease-in 100ms;
+}
+#split-main.expanded {
+  width: 955px;
+}
+#split-side {
+  display: inline-block;
+  vertical-align: top;
+  width: 275px;
+  z-index: 0;
+}
+#split-side.collapsed {
+  display: none;
+}
+

@@ -57,7 +57,7 @@ with (scope('Payment', 'App')) {
             checked: (selected_value == 'personal' ? 'checked' : null)
           }),
           label({ 'for': 'payment_method_personal', style: 'display: inline;' },
-            img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
+            img({ src: user.image_url, style: 'width: 16px; height: 16px' }),
             span("BountySource"), span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
           )
         )

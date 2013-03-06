@@ -28,7 +28,7 @@ with (scope('Profile','App')) {
 
           div({ id: 'profile' },
             div({ id: 'head' },
-              img({ id: 'avatar-url', src: profile.avatar_url, style: 'width: 80px; height: 80px; vertical-align: middle;' }),
+              img({ id: 'avatar-url', src: profile.image_url, style: 'width: 80px; height: 80px; vertical-align: middle;' }),
               span({ id: 'display-name', style: 'font-size: 40px; vertical-align: middle;' }, profile.display_name)
             ),
 
@@ -61,7 +61,7 @@ with (scope('Profile','App')) {
                 ul(
                   profile.fundraisers.map(function(fundraiser) {
                     return li(
-                      a({ href: fundraiser.url }, abbreviated_text(fundraiser.title, 120))
+                      a({ href: fundraiser.frontend_path }, truncate(fundraiser.title, 120))
                     )
                   })
                 )
@@ -72,7 +72,7 @@ with (scope('Profile','App')) {
                 ul(
                   profile.bounties.map(function(bounty) {
                     return li(
-                      a({ href: '#repos/'+bounty.issue.repository.full_name+'/issues/'+bounty.issue.number }, abbreviated_text(bounty.issue.title, 120))
+                      a({ href: bounty.issue.frontend_path }, truncate(bounty.issue.title, 120))
                     )
                   })
                 )

@@ -29,8 +29,7 @@ with (scope('Contributions', 'App')) {
               tr(
                 th(),
                 th('Project'),
-                th({ style: 'width: 60px;' }, 'Issue'),
-                th({ style: 'width: 200px;' }),
+                th({ style: 'width: 260px;' }, 'Issue'),
                 th({ style: 'text-align: center;' }, 'Issue Status'),
                 th('Bounty Amount'),
                 th('Date')
@@ -39,11 +38,10 @@ with (scope('Contributions', 'App')) {
               (user_info.bounties).map(function(bounty) {
                 return tr({ style: 'height: 75px;' },
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
-                    img({ src: bounty.repository.owner.avatar_url, style: 'width: 50px;' })
+                    img({ src: bounty.issue.tracker.image_url, style: 'width: 50px;' })
                   ),
-                  td(a({ href: Repository.get_href(bounty.issue.repository) }, bounty.repository.full_name)),
-                  td(a({ href: Issue.get_href(bounty.issue) }, '#'+bounty.issue.number )),
-                  td({ style: 'color: #888' }, bounty.issue.title),
+                  td(a({ href: Repository.get_href(bounty.issue.tracker) }, bounty.issue.tracker.name)),
+                  td(a({ href: Issue.get_href(bounty.issue) }, bounty.issue.title )),
                   td({ style: 'text-align: center;' }, Issue.status_element(bounty.issue)),
                   td(money(bounty.amount)),
                   td(formatted_date(bounty.created_at))
@@ -67,7 +65,7 @@ with (scope('Contributions', 'App')) {
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                     img({ src: pledge.fundraiser.image_url, style: 'width: 50px;' })
                   ),
-                  td(a({ href: pledge.fundraiser.url }, pledge.fundraiser.title)),
+                  td(a({ href: pledge.fundraiser.frontend_path }, pledge.fundraiser.title)),
                   td(money(pledge.amount)),
                   td(formatted_date(pledge.created_at))
                 )
@@ -76,58 +74,6 @@ with (scope('Contributions', 'App')) {
           )
         )
       }
-    });
-  });
-
-  route('#repos/:login/:repository/issues/:issue_number/bounties/:bounty_id/receipt', function(login, repository, issue_number, bounty_id) {
-    // if the pledge ID was not subbed into the URL, just go view the issue.
-    // This will happen on Paypal cancel.
-    if (/:bounty_id/.test(bounty_id)) return set_route('#repos/'+login+'/'+repository+'/issues/'+issue_number);
-
-    var target_div = div('Loading...');
-
-    render(
-      breadcrumbs(
-        a({ href: '#' }, 'Home'),
-        a({ href: '#repos/' + login + '/' + repository }, login + '/' + repository),
-        a({ href: '#repos/' + login + '/' + repository + '/issues' }, 'Issues'),
-        a({ href: '#repos/' + login + '/' + repository + '/issues/' + issue_number }, '#' + issue_number),
-        'Bounty Receipt'
-      ),
-      target_div
-    );
-
-    BountySource.get_bounty(bounty_id, function(response) {
-      var bounty = response.data;
-
-      render({ into: target_div },
-        div({ style: 'text-align: center;' },
-          h2(money(bounty.amount), " Bounty Placed"),
-          h3(bounty.issue.repository.display_name),
-          h3('Issue #', bounty.issue.number, ' - ', bounty.issue.title),
-
-          div(
-            Facebook.create_share_button({
-              link:         BountySource.www_host+Issue.get_href(bounty.issue),
-              name:         bounty.repository.display_name,
-              caption:      money(bounty.amount)+' bounty placed on issue #'+bounty.issue.number+' - '+bounty.issue.title,
-              description:  "BountySource is the funding platform for open-source software. Create a bounty to help get this issue resolved, or submit a pull request to earn the bounty yourself!",
-              picture:      bounty.issue.repository.owner.avatar_url || ''
-            }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
-
-            Twitter.create_share_button({
-              url:  BountySource.www_host+Issue.get_href(bounty.issue),
-              text: money(bounty.amount)+" bounty placed",
-              via:  'BountySource'
-            }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet')),
-
-            // TODO fix it! --- CAB
-            false && Github.issue_comment_form(bounty.issue, {
-              default_text: "I placed a " + money(bounty.amount) + " bounty on this issue using BountySource. The bounty total goes to the person whose pull request gets accepted. Add to or claim the bounty here: " + BountySource.www_host+Issue.get_href(bounty.issue)
-            })
-          )
-        )
-      );
     });
   });
 
@@ -154,7 +100,7 @@ with (scope('Contributions', 'App')) {
 
         // render the title into the breadcrumbs
         render({ target: 'breadcrumbs-fundraiser-title' },
-          a({ href: pledge.fundraiser.url }, abbreviated_text(pledge.fundraiser.title, 50))
+          a({ href: pledge.fundraiser.frontend_path }, truncate(pledge.fundraiser.title, 50))
         );
 
         render({ into: target_div },
@@ -169,7 +115,7 @@ with (scope('Contributions', 'App')) {
 
             div(
               Facebook.create_share_button({
-                link:         BountySource.www_host+pledge.fundraiser.url,
+                link:         pledge.fundraiser.frontend_url,
                 name:         "I just backed "+pledge.fundraiser.title,
                 caption:      pledge.fundraiser.short_description,
                 description:  "BountySource is the funding platform for open-source software, contribute by making a pledge to this fundraiser!",
@@ -177,7 +123,7 @@ with (scope('Contributions', 'App')) {
               }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
 
               Twitter.create_share_button({
-                url:  BountySource.www_host+pledge.fundraiser.url,
+                url:  pledge.fundraiser.frontend_url,
                 text: money(pledge.amount)+" pledge made to "+pledge.fundraiser.title,
                 via:  'BountySource'
               }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet'))

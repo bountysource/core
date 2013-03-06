@@ -4,47 +4,18 @@ with (scope('Solution','App')) {
     return '#solutions/'+solution.id;
   });
 
-  // return a pretty element for issue_branch status. Statuses are: started, submitted, disputed, accepted
   define('status_element', function(solution) {
-    var the_element = span({ style: 'font-size: 16px;' });
-
-    if (solution.disputed) {
-      render({ into: the_element },
-        span({ style: 'background: #F3B13C; border-radius: 4px; padding: 4px; color: white' }, 'Disputed')
-      );
-    } else if (solution.in_dispute_period) {
-      render({ into: the_element },
-        span({ style: 'background: #F3B13C; border-radius: 4px; padding: 4px; color: white' }, 'In Dispute Period')
-      );
+    if (solution.paid_out) {
+      return span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Paid Out');
     } else if (solution.accepted) {
-      render({ into: the_element },
-        span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Accepted!')
-      );
-    } else if (solution.pull_request) {
-      if (solution.pull_request.merged) {
-        render({ into: the_element },
-          a({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white; text-decoration: none;', href: 'https://github.com/'+solution.issue.repository.full_name+'/issues/'+solution.pull_request.number, target: '_blank' },
-            'Pull Request Merged'
-          )
-        );
-      } else {
-        render({ into: the_element },
-          a({ style: 'background: #29A8DD; border-radius: 4px; padding: 4px; color: white; text-decoration: none;', href: 'https://github.com/'+solution.issue.repository.full_name+'/issues/'+solution.pull_request.number, target: '_blank' },
-            'Pull Request Submitted'
-          )
-        );
-      }
-    } else if (solution.rejected) {
-      render({ into: the_element },
-        span({ style: 'background: #D11A1A; border-radius: 4px; padding: 4px; color: white' }, 'Rejected')
-      );
+      return span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Accepted');
+    } else if (solution.disputed) {
+      return span({ style: 'background: #F3B13C; border-radius: 4px; padding: 4px; color: white' }, 'Disputed');
+    } else if (solution.submitted) {
+      return span({ style: 'background: #F3B13C; border-radius: 4px; padding: 4px; color: white' }, 'In Dispute Period');
     } else {
-      render({ into: the_element },
-        span({ style: 'background: #29A8DD; border-radius: 4px; padding: 4px; color: white' }, 'Started')
-      );
+      return span({ style: 'background: #29A8DD; border-radius: 4px; padding: 4px; color: white' }, 'Started');
     }
-
-    return the_element;
   });
 
   // render status box for solution. states are: pending merge, in dispute period, disputed, accepted.
@@ -58,7 +29,7 @@ with (scope('Solution','App')) {
     if (solution.accepted && !solution.disputed && !solution.in_dispute_period) {
       return div({ style: 'margin: 5px 0;' },
         small_success_message({ close_button: false, style: 'margin: 5px 0;' }, 'Solution accepted!'),
-        a({ 'class': 'green', href: '#solutions/'+solution.id+'/payout' }, 'Claim Bounty!')
+        a({ 'class': 'green', href: '#solutions/'+solution.id }, 'Claim Bounty!')
       );
     } else if (solution.disputed) {
       return div({ style: 'margin: 5px 0;' },
@@ -82,7 +53,7 @@ with (scope('Solution','App')) {
           )
         )
       );
-    } else if (solution.pull_request.merged) {
+    } else if (solution.pull_request && solution.pull_request.merged) {
       return info_message({ style: 'margin: 0;' },
         p("The pull request that you submitted has been merged, but the underlying issue has not yet been closed."),
         p("Your solution will be accepted when your pull request is merged, and the underlying issue is closed."),

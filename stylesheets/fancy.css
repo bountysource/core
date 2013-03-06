@@ -2,7 +2,12 @@
 .fancy fieldset { line-height: 25px; margin: 20px 0; }
 .fancy input[type='password'] { width: 180px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }
 .fancy fieldset.no-label, form.fancy p { margin-left: 174px; }
-.fancy input[type='text'], .fancy input[type='number'] { width: 250px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; margin-right: 10px; height: 40px; }
+
+.fancy input[type='text'],
+.fancy input[type='number'],
+.fancy input[type='email'],
+.fancy input[type='url'] { width: 250px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; margin-right: 10px; height: 40px; }
+
 .fancy input[type='text'].short { width: 150px; }
 .fancy input[type='text'].shortish { width: 180px; }
 .fancy input[type='text'].long { width: 392px; }

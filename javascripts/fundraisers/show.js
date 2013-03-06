@@ -37,7 +37,7 @@ with (scope('Show', 'Fundraiser')) {
     options = options || {};
 
     // add the title to the already present header element
-    if (!options.preview) render({ target: 'breadcrumbs-fundraiser-title' }, abbreviated_text(fundraiser.title, 85));
+    if (!options.preview) render({ target: 'breadcrumbs-fundraiser-title' }, truncate(fundraiser.title, 85));
 
     var fundraiser_form = section({ id: 'fundraiser-wrapper' },
       div({ 'class': 'split-main' },
@@ -80,7 +80,7 @@ with (scope('Show', 'Fundraiser')) {
               )
             ),
 
-            a({ 'class': 'blue', href: fundraiser.edit_url, style: 'padding: 5px 0;' },
+            a({ 'class': 'blue', href: fundraiser.frontend_edit_path, style: 'padding: 5px 0;' },
               div({ style: 'display: inline-block; width: 25%;' },
                 img({ src: 'images/edit_32.gif', style: 'vertical-align: middle;' })
               ),
@@ -89,7 +89,7 @@ with (scope('Show', 'Fundraiser')) {
 
 // TODO: info page for fundraiser author to see contributions and rewards that have been claimed
 //            br(),
-//            a({ 'class': 'blue', href: fundraiser.edit_url+'/info', style: 'padding: 5px 0;' },
+//            a({ 'class': 'blue', href: fundraiser.frontend_edit_path+'/info', style: 'padding: 5px 0;' },
 //              div({ style: 'display: inline-block; width: 25%px;' },
 //                img({ src: 'images/info_32.gif', style: 'vertical-align: middle;' })
 //              ),
@@ -101,7 +101,7 @@ with (scope('Show', 'Fundraiser')) {
         section({ id: 'fundraiser-stats', style: 'background: #eee; padding: 10px; margin: 10px 0; border-radius: 3px;' },
           ul({ style: 'list-style-type: none; padding: 0;' },
             li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.backers.length+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backer' + (fundraiser.backers.length == 1 ? '' : 's'))
+              span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.pledges.length+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backer' + (fundraiser.pledges.length == 1 ? '' : 's'))
             ),
 
             li({ style: 'margin: 20px auto;' },

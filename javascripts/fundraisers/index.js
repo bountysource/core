@@ -27,13 +27,13 @@ with (scope('Index', 'Fundraiser')) {
             response.data.map(function(fundraiser) {
               // depends on whether or not it's published
               return tr({ style: 'height: 40px;' },
-                td(a({ href: fundraiser.url }, abbreviated_text(fundraiser.title, 100))),
+                td(a({ href: fundraiser.frontend_path }, truncate(fundraiser.title, 100))),
                 td(money(fundraiser.funding_goal || 0)),
                 td(fundraiser.published && percentage((fundraiser.total_pledged / fundraiser.funding_goal) * 100)),
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
 
                 td({ style: 'text-align: center;' },
-                  a({ href: fundraiser.edit_url }, img({ src: 'images/edit.gif' })),
+                  a({ href: fundraiser.frontend_edit_path }, img({ src: 'images/edit.gif' })),
 
                   // TODO: info page for fundraiser author to see contributions and rewards that have been claimed
                   // a({ href: '#account/fundraisers/'+fundraiser.id+'/info', style: 'margin-left: 10px;' }, img({ src: 'images/info.gif' })),

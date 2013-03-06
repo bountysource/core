@@ -1,5 +1,5 @@
 with (scope('Home', 'App')) {
-  
+
   route('#not_found', function() {
     render(
       h1("Oops! That page wasn't found!"),
@@ -17,8 +17,16 @@ with (scope('Home', 'App')) {
 
     render({ into: 'before-content' },
       section({ id: 'homepage' },
-        (logged_in() ? homepage_box_authed : homepage_box)(),
-//        card_filter_box(),
+
+        div({ style: "background: #f2f3f2; border: 10px solid white; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px"},
+          h1('The funding platform for open-source software.'),
+          h2('Improve the open-source projects you love by creating and collecting bounties!'),
+          get_started_actions(),
+          div({ style: 'clear: both; border-top: 2px solid #e0ab45; margin: 10px' }),
+          recent_people_div(),
+          !logged_in() && sign_in_with_buttons()
+        ),
+
         div({ id: 'column-container' }),
         div({ style: 'clear: both' }),
         div({ id: 'card-loader-div' }, 'Loading...')
@@ -31,7 +39,7 @@ with (scope('Home', 'App')) {
   });
 
   // render the homepage box, which always has recent signups at the bottom
-  define('homepage_box_layout', function() {
+  define('recent_people_div', function() {
     var recent_people_div = div();
     BountySource.recent_people(function(response) {
       var recent_people = response.data;
@@ -42,7 +50,7 @@ with (scope('Home', 'App')) {
 
           (recent_people.people||[]).map(function(person) {
             return div({ 'class': 'round-avatar' },
-              a({ href: person.profile_url }, img({ src: person.avatar_url }))
+              a({ href: person.frontend_path }, img({ src: person.image_url }))
             );
           }),
 
@@ -51,12 +59,7 @@ with (scope('Home', 'App')) {
       )
     });
 
-    return div({ style: "background: #f2f3f2; border: 10px solid white; box-shadow: 0 0 5px #ccc8be; margin-bottom: 15px"},
-      h1('The funding platform for open-source software.'),
-      arguments,
-      recent_people_div,
-      div({ style: 'clear: both' })
-    );
+    return recent_people_div;
   });
 
   define('card_filter_box', function() {
@@ -68,33 +71,23 @@ with (scope('Home', 'App')) {
     )
   });
 
-  define('homepage_box', function() {
-    return homepage_box_layout(
-      div({ style: 'text-align: center; padding: 30px 0 20px 0' },
-        span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Sign in with...'),
-        a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
-        a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px', href: Facebook.auth_url() }, "Facebook"),
-        a({ 'class': "btn-auth btn-twitter large", style: 'margin-right: 20px', href: Twitter.auth_url() }, "Twitter"),
-        a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin/email' }, "Email Address")
-        //div({ style: 'margin-bottom: 10px' }, a({ 'class': "btn-auth btn-google" }, "Sign in with Google"))
-      )
+  define('sign_in_with_buttons', function() {
+    return div({ style: 'text-align: center; margin: 10px 0' },
+      span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Sign in with...'),
+      a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
+      a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px', href: Facebook.auth_url() }, "Facebook"),
+      a({ 'class': "btn-auth btn-twitter large", style: 'margin-right: 20px', href: Twitter.auth_url() }, "Twitter"),
+      a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin/email' }, "Email Address")
+      //div({ style: 'margin-bottom: 10px' }, a({ 'class': "btn-auth btn-google" }, "Sign in with Google"))
     );
   });
 
 
-  define('homepage_box_authed', function() {
-    return homepage_box_layout(
-      div({ style: 'text-align: center; padding: 30px 0 30px 0;' },
-        span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic' }, 'Get started...'),
-
-        button({ 'class': 'blue', style: 'width: 200px', onClick: curry(set_route, '#bounties') }, 'Browse All Bounties'),
-
-        span({ style: 'font-size: 20px; color: #888; margin-right: 20px; font-style: italic; padding: 0 25px'}, 'or'),
-
-        form({ style: 'display: inline', action: function(form_data) { set_route('#repos/search?query='+escape(form_data.query)) } },
-          text({ name: 'query', style: 'width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;', placeholder: 'Project Name' }),
-          submit({ value: 'Search', 'class': 'green', style: 'width: 80px; margin-left: 3px;' })
-        )
+  define('get_started_actions', function() {
+    return div({ style: 'text-align: center; padding: 0 0 20px 0;' },
+      form({ style: 'display: inline', action: Search.search_from_homepage },
+        text({ name: 'query', style: 'width: 300px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;', placeholder: 'Issue URL, Project Name, Search Terms, etc.' }),
+        submit({ value: 'Search', 'class': 'green', style: 'width: 80px; margin-left: 3px;' })
       )
     );
   });
@@ -179,7 +172,7 @@ with (scope('Home', 'App')) {
       hide('card-loader-div');
 
       // if we didn't get a full response, give up
-      var card_count = response.data.fundraisers.length + response.data.repositories.length + response.data.issues.length;
+      var card_count = response.data.fundraisers.length + response.data.issues.length;
       if (card_count >= 50) page_state.can_load_more_cards = true;
     });
   });
@@ -187,12 +180,12 @@ with (scope('Home', 'App')) {
 
   define('check_scroll_to_see_if_we_need_more_cards', function() {
     if (get_route() != '#') return;
-    
+
     var pageHeight = document.documentElement.scrollHeight;
     var clientHeight = document.documentElement.clientHeight;
     var scrollPos = document.documentElement.scrollTop || window.pageYOffset;
     if ((pageHeight - (scrollPos + clientHeight) < 100)) add_more_cards();
-    
+
     setTimeout(check_scroll_to_see_if_we_need_more_cards, 500);
   });
 
@@ -201,27 +194,27 @@ with (scope('Home', 'App')) {
   //   // render nothing, then hide the content for now... we're using before-content!!
   //   render('');
   //   hide('content');
-  // 
+  //
   //   var default_avatar_url = 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png';
-  // 
+  //
   //   var stats_container, leaderboard_container;
-  //   
+  //
   //   render({ into: 'before-content' },
   //     section({ id: 'homepage' },
-  // 
+  //
   //       div({ style: 'float: left; margin-right: 10px' },
-  // 
+  //
   //         div({ 'class': 'box' },
   //           div({ 'class': 'inner bigbox', style: 'width: 724px; height: 100px' },
   //             h1(span({ style: 'font-weight: bold' }, 'Bounty'), 'Source is a funding platform for open-source bugs and features.'),
   //             div({ 'class': 'h1-line'}, div()),
-  // 
+  //
   //             div({ 'class': 'begin-box' },
   //               div({ style: 'margin-left: 70px; margin-right: 40px; float: left; text-align: center; '},
   //                 a({ 'class': 'blue', style: 'width: 200px; display: block', href: '#bounties' }, 'Browse All Bounties')
   //               ),
   //               div({ style: 'font-size: 30px; line-height: 40px; float: left; padding: 0 5px'}, 'or'),
-  // 
+  //
   //               div({ style: 'width: 330px; float: left; text-align: center'},
   //                 form({ action: function(form_data) { set_route('#repos/search?query='+escape(form_data.query)) } },
   //                   text({ name: 'query', placeholder: 'Project Name' }),
@@ -231,7 +224,7 @@ with (scope('Home', 'App')) {
   //             )
   //           )
   //         ),
-  // 
+  //
   //         div({ 'class': 'faq-box', style: 'margin-right: 10px' },
   //           div({ 'class': 'inner' },
   //             h1("BACKERS"),
@@ -239,7 +232,7 @@ with (scope('Home', 'App')) {
   //             a({ 'class': 'gray', href: '#faq/backers' }, "Learn More")
   //           )
   //         ),
-  // 
+  //
   //         div({ 'class': 'faq-box', style: 'margin-right: 10px' },
   //           div({ 'class': 'inner' },
   //             h1("DEVELOPERS"),
@@ -247,7 +240,7 @@ with (scope('Home', 'App')) {
   //             a({ 'class': 'gray', href: '#faq/developers' }, "Learn More")
   //           )
   //         ),
-  // 
+  //
   //         div({ 'class': 'faq-box' },
   //           div({ 'class': 'inner' },
   //             h1("COMMITTERS"),
@@ -255,43 +248,43 @@ with (scope('Home', 'App')) {
   //             a({ 'class': 'gray', href: '#faq/committers' }, "Learn More")
   //           )
   //         ),
-  // 
+  //
   //         div({ style: 'clear: both' })
-  // 
+  //
   //         // div({ 'class': 'box', style: 'margin-top: 10px' },
   //         //   div({ 'class': 'inner bigbox', style: 'width: 694px' },
-  //         // 
-  //         // 
+  //         //
+  //         //
   //         //   )
   //         // )
   //       ),
-  // 
+  //
   //       div({ 'class': 'box', style: 'float: right' },
   //         stats_container=div({ 'class': 'inner stats', style: 'width: 120px; height: 278px' })
   //       ),
-  //       
+  //
   //       div({ style: 'clear: both; padding-bottom: 30px' }),
-  // 
+  //
   //       div({ 'class': 'box' },
   //         leaderboard_container=div({ 'class': 'inner leaderboard' })
   //       )
   //     )
   //   );
-  // 
+  //
   //   BountySource.overview(function(response) {
   //     var data = (response.data||{});
   //     render({ into: stats_container },
   //       h2(a({ href: '#bounties' }, money(data.total_unclaimed))),
   //       h3({ 'class': 'orange-line' }, a({ href: '#bounties' }, 'Active Bount' + (data.total_unclaimed == 1 ? 'y' : 'ies'))),
-  // 
+  //
   //       h2(a({ href: '#bounties' }, formatted_number(data.total_active_issues))),
   //       h3({ 'class': 'blue-line' }, a({ href: '#bounties' }, data.total_active_issues == 1 ? 'Issue with Bounty' : 'Issues with Bounties')),
-  // 
+  //
   //       h2(a({ href: '#bounties' }, formatted_number(data.total_bounties_created_this_month))),
   //       h3({ 'class': 'green-line' }, a({ href: '#bounties' }, 'Bount' + (data.total_bounties_created_this_month == 1 ? 'y' : 'ies') + ' This Month'))
   //     );
-  // 
-  //     render({ into: leaderboard_container }, 
+  //
+  //     render({ into: leaderboard_container },
   //       section({ style: 'margin-right: 30px'},
   //         h2('Featured Projects'),
   //         ul(
@@ -324,5 +317,5 @@ with (scope('Home', 'App')) {
   //     );
   //   })
   // });
-  
+
 }

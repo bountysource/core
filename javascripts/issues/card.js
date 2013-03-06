@@ -1,16 +1,16 @@
 with (scope('Issue', 'App')) {
 
   define('issue_card', function(card) {
-    return div({ 'class': 'card', onClick: curry(set_route, card.href) },
+    return div({ 'class': 'card', onClick: curry(set_route, card.frontend_path) },
       div({ style: 'padding: 7px; background: #EEE; margin-bottom: 5px;' },
-        a({ href: '#repos/' + card.repository.full_name }, img({ style: 'float: left; width: 40px; margin-bottom: 5px; margin-right: 10px; border-radius: 6px', src: card.image_url })),
-        div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: '#repos/' + card.repository.full_name, style: 'color: #333' }, card.repository.display_name)),
+        a({ href: card.tracker.frontend_path}, img({ style: 'float: left; width: 40px; margin-bottom: 5px; margin-right: 10px; border-radius: 6px', src: card.tracker.image_url })),
+        div({ style: 'margin-left: 50px; margin-top: 8px; font-size: 16px; font-weight: bold' }, a({ href: card.tracker.frontend_path, style: 'color: #333' }, card.tracker.name)),
 
         div({ style: 'clear: both' }),
 
         // languages
-        (card.repository.languages.length > 0) && div({ style: 'font-size: 12px; color: gray;' },
-          'Languages: ' + card.repository.languages.map(function(l) { return l.name }).join(', ')
+        card.tracker.languages && (card.tracker.languages.length > 0) && div({ style: 'font-size: 12px; color: gray;' },
+          'Languages: ' + card.tracker.languages.map(function(l) { return l.name }).join(', ')
         )
       ),
 
@@ -20,7 +20,7 @@ with (scope('Issue', 'App')) {
       div({ style: 'margin: 15px 5px; overflow: auto' },
         div({ style: '' }, a({ href: card.href, style: 'color: inherit; overflow: hidden;' }, card.title)),
         p({ style: 'color: #999; font-size: 80%;' },
-          abbreviated_text(card.description, 100)
+          card.short_body
         )
       ),
 
@@ -28,8 +28,8 @@ with (scope('Issue', 'App')) {
 
       div({ style: 'border-top: 1px solid #eee; padding-top: 10px; padding-bottom; 5px; font-size: 16px;' },
         div({ style: 'display: inline-block; width: 33%; vertical-align: middle;'},
-          (card.account_balance > 0) && div(
-            a({ href: card.href, style: 'display: inline; vertical-align: middle; text-decoration: none; color: #48B848;' }, money(card.account_balance))
+          (card.bounty_total > 0) && div(
+            a({ href: card.href, style: 'display: inline; vertical-align: middle; text-decoration: none; color: #48B848;' }, money(card.bounty_total))
           )
         ),
 

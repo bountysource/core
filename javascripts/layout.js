@@ -27,7 +27,7 @@ with (scope('App')) {
 
       render({ into: user_nav },
         a({ href: '#account', id: 'user_nav_a' },
-          img({ id: 'user_nav_avatar', src: user.avatar_url }),
+          img({ id: 'user_nav_avatar', src: user.image_url }),
           span({ id: 'user_nav_name' },
             user.display_name,
             (user.account.balance > 0) && span({ style: 'margin-left: 5px;' }, ' (' + money(user.account.balance, show_pennies) + ')')
@@ -154,20 +154,24 @@ with (scope('App')) {
 
   define('notification', function(object) {
     var message = "did something awesome!";
+    var frontend_path;
     if (object.type == 'bounty') {
       message = 'placed a ' + money(object.amount) + ' bounty on ' + object.issue.title;
+      frontend_path = object.issue.frontend_path;
     } else if (object.type == 'pledge') {
       message = 'pledged ' + money(object.amount) + ' to ' + object.fundraiser.title;
+      frontend_path = object.fundraiser.frontend_path;
     } else if (object.type == 'fundraiser') {
       message = 'created a Fundraiser: '+object.title;
+      frontend_path = object.frontend_path;
     }
 
-    return div({ 'class': 'notification-message', onClick: curry(set_route, object.href) },
-      a({ href: object.person.profile_url },
-        img({ 'class': 'notification-user', src: object.person.avatar_url })
+    return div({ 'class': 'notification-message', onClick: curry(set_route, frontend_path) },
+      a({ href: object.person.frontend_path },
+        img({ 'class': 'notification-user', src: object.person.image_url })
       ),
       div({ 'class': 'notification-content' },
-        a({ href: object.person.profile_url, style: 'font-size: 12px;' }, span(object.person.display_name)), span(' ', message)
+        a({ href: object.person.frontend_path, style: 'font-size: 12px;' }, span(object.person.display_name)), span(' ', message)
       )
     )
   });
@@ -308,9 +312,10 @@ with (scope('App')) {
   });
 
   // abbreviate a body of text
-  define('abbreviated_text', function(text, max_length) {
+  define('truncate', function(text, max_length) {
+    text = text || '';
     max_length = max_length || 100;
-    return (text.length > max_length) ? (text.substr(0,max_length) + '...') : text;
+    return (text.length > max_length) ? (text.substr(0,max_length-3) + '...') : text;
   });
 
   // a readonly input with a width that exactly fits the text.
@@ -350,140 +355,72 @@ with (scope('App')) {
     }
     return arguments;
   });
+}
 
+with (scope('Columns')) {
+  define('create', function(options) {
+    Columns._options  = { show_side: true };
+    Columns._main     = div({ id: 'split-main' });
+    Columns._side     = div({ id: 'split-side' });
+    Columns._wrapper  = div({ id: 'split-wrapper' }, Columns._main, Columns._side);
 
-  /*
-   * Define a group of ranges. The will all scale to the same max set in the options.
-   * If you add a tax attribute to the range, it will set the min value of the range accordingly.
-   *
-   * NOTE: Make sure you add an element with id 'total-cut' somewhere. This will be updated the total amount
-   * remaining after donations/taxes are applied.
-   *
-   * Options:
-   * @data-tax -   A float, representing percentage of the max to set the min.
-   * @max -        The max value for all ranges in the group.
-   *
-   * Arguments:
-   * The remaining arguments are the name attributes of the ranges you want to include in the group
-   * */
-  define('donation_slider_group', function() {
-    var arguments =           flatten_to_array(arguments),
-      options =             shift_options_from_args(arguments),
-      difference_element =  document.getElementById(options.difference_element_id);
-
-    // collect all of the specified slider elements
-    var all_sliders = [];
-    for (var arg in arguments) all_sliders.push(document.getElementsByName(arguments[arg])[0]);
-
-    // helper function. get all the sliders in the group except for the one specified
-    var get_other_sliders = function(target_element) {
-      var other_sliders = [];
-      for (var slider in all_sliders) if (target_element != all_sliders[slider]) other_sliders.push(all_sliders[slider]);
-      return other_sliders;
-    };
-
-    // helper function. get the sum of the min values of sliders in the group
-    var sum_slider_mins = function(group) {
-      var sum = 0;
-      for (var index in group) sum += parseInt(group[index].getAttribute('min')||0);
-      return sum;
-    };
-
-    // helper function. sum the values of the sliders in the group
-    var sum_slider_values = function(group) {
-      var sum = 0;
-      for (var index in group) sum += parseInt(group[index].value||0);
-      return sum;
-    };
-
-    // helper function. adjust the difference view without showing negatives
-    var set_difference_element = function(n) { if (difference_element) difference_element.innerHTML = money(n > 0 ? n : 0) };
-    var set_input_value = function(n, input) { input.value = formatted_number(n > 0 ? Math.ceil(n) : 0) }
-
-    // helper function. adjust the value of all sliders
-    var adjust_slider_values = function(amount, group) {
-      for (var i=0; i < group.length; i++) {
-        group[i].value = parseInt(group[i].value) + amount;
-        // also need to adjust the input
-        set_input_value(parseInt(group[i].value), get_input_from_slider(group[i]));
-      }
-      // recalculate the difference_element
-      if (difference_element) set_difference_element(options.max - sum_slider_values(all_sliders));
-    };
-
-    // for each slider specified
-    for (i=0; i < all_sliders.length; i++) {
-      var this_slider = all_sliders[i];
-
-      // set min from tax attribute if present. also make initial value the taxed value, or zero.
-      this_slider.setAttribute('min', (this_slider.getAttribute('data-tax')) ? (parseFloat(this_slider.getAttribute('data-tax'))*options.max) : 0);
-      this_slider.setAttribute('value', this_slider.getAttribute('min'));
-
-      // default value for the input
-      get_input_from_slider(this_slider).setAttribute('value',  parseInt(this_slider.getAttribute('value')) || 0);
-
-      // on slider change...
-      this_slider.addEventListener('change', function(e) {
-        // collect the other sliders that are not this one.
-        var other_sliders = get_other_sliders(e.target),
-          other_slider_min_sum = sum_slider_mins(other_sliders);
-
-        // add max now if missing, since it doesn't work to do it before (maybe it can, this is quicker though)
-        if (!e.target.getAttribute('max')) e.target.setAttribute('max', (options.max - other_slider_min_sum));
-
-        // when the this_slider changes, show the value in the input
-        set_input_value(e.target.value, get_input_from_slider(e.target));
-
-        // check this value + sum of the other sliders
-        var other_sliders_total = sum_slider_values(other_sliders);
-
-        // change the other slider values if need be
-        if (parseInt(e.target.value) + other_sliders_total > options.max) {
-          // collect the other sliders with positive values
-          var other_sliders_with_value = [];
-          for (var i in other_sliders) {
-            if (parseInt(other_sliders[i].value) > parseInt(other_sliders[i].min)) other_sliders_with_value.push(other_sliders[i]);
-          }
-
-          // calculate the amount to step down by on other sliders
-          var amount_over = ((parseInt(e.target.value) + other_sliders_total) - options.max);
-
-          // adjust the other sliders by that amount
-          adjust_slider_values((-1 * amount_over / (other_sliders_with_value.length)), other_sliders_with_value);
-        }
-
-        // update the sum element if it was added to the page
-        if (difference_element) set_difference_element(options.max - (other_sliders_total + parseInt(e.target.value)));
-      });
-
-      // default value for sum element
-      if (difference_element) difference_element.innerHTML = money(options.max - sum_slider_values(all_sliders))
+    // merge into Columns options
+    options = options || {};
+    for (var k in options) {
+      Columns._options[k] = options[k];
     }
 
-    return all_sliders;
+    return Columns._wrapper;
   });
 
-  // HTML5 slider helper
-  define('donation_slider', function(options) {
-    var unique_bit = Math.ceil(new Date().getTime() * Math.random());
+  define('main', function() {
+    render({ into: Columns._main }, arguments);
 
-    options['id'] = '_slider-'+unique_bit;
-    options['class'] = 'donation-slider';
-    options['value'] = 0;
-    options['step'] = 1;
-    var dat_range = range(options),
-      range_input = text({ id: '_input-'+unique_bit, style: 'width: 65px; color: #9C9999;', value: 0, readonly: true });
-
-    return div({ style: 'display: inline-block;' },
-      div({ style: 'margin-right: 5px; display: inline;' }, dat_range), span({ style: 'font-size: 25px; vertical-align: middle; padding-right: 5px;' }, '$'), range_input
-    );
+    // hide the side by default
+    if (!Columns._options.show_side) hide_side();
   });
 
-  define('get_input_from_slider', function(slider_element) {
-    return document.getElementById('_input-'+slider_element.getAttribute('id').split('-').slice(-1));
+  define('side', function() {
+    render({ into: Columns._side }, arguments);
   });
 
-  define('get_slider_from_input', function(input_element) {
-    return document.getElementById('_slider-'+input_element.getAttribute('id').split('-').slice(-1));
+  define('show_side', function() {
+    remove_class(Columns._main, 'expanded');
+    remove_class(Columns._side, 'collapsed');
+  });
+
+  define('hide_side', function() {
+    add_class(Columns._main, 'expanded');
+    add_class(Columns._side, 'collapsed');
+  });
+}
+
+with (scope('Split')) {
+  initializer(function() {
+    Split._main     = div({ id: 'split-main' });
+    Split._side     = div({ id: 'split-side' });
+    Split._wrapper  = div({ id: 'split-wrapper' }, Split._main, Split._side);
+  });
+
+  define('create', function() {
+    return Split._wrapper;
+  });
+
+  define('main', function() {
+    render({ into: Split._main }, arguments);
+  });
+
+  define('side', function() {
+    render({ into: Split._side }, arguments);
+  });
+
+  define('show_side', function() {
+    remove_class(Split._main, 'expanded');
+    remove_class(Split._side, 'collapsed');
+  });
+
+  define('hide_side', function() {
+    add_class(Split._main, 'expanded');
+    add_class(Split._side, 'collapsed');
   });
 }

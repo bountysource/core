@@ -1,93 +1,75 @@
 with (scope('Repository')) {
 
-  route('#repos/:login/:repository', function(login, repository) {
+  route('#trackers/:tracker_id', function(tracker_id) {
     var target_div = div('Loading...');
 
-    render(
-      breadcrumbs(
-        a({ href: '#' }, 'Home'),
-        (login + '/' + repository)
-      ),
+    render(target_div);
 
-      target_div
-    );
-
-    BountySource.get_repository_overview(login, repository, function(response) {
+    BountySource.get_repository_overview(tracker_id, function(response) {
       if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
 
       var repo = response.data;
 
       App.update_facebook_like_button({
-        name:         repo.display_name,
+        name:         repo.name,
         caption:      repo.description,
         description:  "BountySource is the funding platform for open-source software. Place a bounty on issues you want resolved, or submit pull requests to collect open bounties!",
-        picture:      repo.owner.avatar_url
+        picture:      repo.image_url
       });
 
       render({ into: target_div },
-        div({ 'class': 'split-main' },
-          !repo.has_issues && info_message("Issues are disabled for this repository."),
 
+        breadcrumbs(
+          a({ href: '#' }, 'Home'),
+          repo.name
+        ),
+
+        Columns.create(),
+
+        Columns.main(
           section(
-            img({ src: repo.owner.avatar_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
-            h2({ style: 'margin: 0 0 10px 0' }, repo.owner.login),
-            repo.owner.login != repo.name && h2({ style: 'margin: 0 0 10px 0' }, repo.name),
+            img({ src: repo.image_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
+            h2({ style: 'margin: 0 0 10px 0' }, repo.name),
             repo.description && span(repo.description),
             div({ style: 'clear: both' })
           ),
 
-          issue_table({ header_class: 'thick-line-green' }, "Largest Bounties", repo.issues_most_bounteous),
+          issue_table({ header_class: 'thick-line-green' }, "Largest Bounties", repo.issues_valuable),
           issue_table({ header_class: 'thick-line-green' }, "Featured", repo.issues_featured),
           issue_table({ header_class: 'thick-line-blue' }, "Popular", repo.issues_popular),
-          issue_table({ header_class: 'thick-line-orange' }, "Most Recent", repo.issues_most_recent),
-          
+          issue_table({ header_class: 'thick-line-orange' }, "Most Recent", repo.issues_newest),
+
           div(
-            repo.has_issues && div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
+            div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
             // div({ style: 'margin-top: 20px; width: 180px; float: left;' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/donate'}, 'Donate to Project')),
             div({ style: 'clear: both '})
           )
         ),
-        div({ 'class': 'split-side' },
 
+        Columns.side(
           div({ 'class': 'stats', style: 'width: 150px; padding: 10px; margin: 20px auto auto auto;' },
-            repo.has_issues && div(
+            repo.bounty_total && div(
               h2(money(repo.bounty_total)),
               h3({ 'class': 'orange-line' }, 'Active Bounties')
             ),
 
-            h2(formatted_number(repo.followers)),
-            h3({ 'class': 'blue-line' }, 'Followers'),
+            repo.watchers && [
+              h2(formatted_number(repo.watchers)),
+              h3({ 'class': 'blue-line' }, 'Followers')
+            ],
 
 
-            h2(formatted_number(repo.forks)),
-            h3({ 'class': 'blue-line' }, 'Forks'),
+            repo.forks && [
+              h2(formatted_number(repo.forks)),
+              h3({ 'class': 'blue-line' }, 'Forks')
+            ],
 
-            repo.has_issues && div(
+            repo.bounteous_issues_count && div(
               h2(formatted_number(repo.bounteous_issues_count)),
               h3({ 'class': 'blue-line' }, 'Issues with Bounties')
             )
-
-            // TODO: this isn't correct since the account can be withdrawn from
-            // TODO: add a total_donations column
-//            h2(money(repo.account_balance)),
-//            h3({ 'class': 'blue-line' }, 'Donations')
-
-//            h2('$999'),
-//            h3({ 'class': 'green-line' }, 'Payout Last Month')
           )
-          
-//          repo.committers && div({ style: 'background: #dff7cb; padding: 10px; margin-top: 20px' },
-//            h2({ style: 'color: #93a385; text-align: center; font-size: 18px; font-weight: normal; margin: 0 0 10px 0' }, "Committers"),
-//            ul({ style: 'margin: 0; padding: 0' }, repo.committers.map(function(commiter) {
-//              return li({ style: 'margin: 0 0 5px 0; padding: 0; list-style: none' },
-//                img({ src: 'https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png', style: 'width: 32px; height: 32px; vertical-align: middle; margin-right: 10px' }),
-//                commiter
-//              );
-//            }))
-//          )
-
-        ),
-        div({ 'class': 'split-end' })
+        )
       );
     });
   });
@@ -102,15 +84,15 @@ with (scope('Repository')) {
 
           if (options.show_repository) {
             row_data.push(
-              td({ style: 'vertical-align: middle;' }, a({ href: Repository.get_href(issue.repository), title: issue.repository.display_name }, img({ src: issue.repository.owner.avatar_url, style: 'width: 30px; border-radius: 3px; margin: 0 5px;' }) ))
+              td({ style: 'vertical-align: middle;' }, a({ href: Repository.get_href(issue.tracker), title: issue.tracker.name }, img({ src: issue.tracker.image_url, style: 'width: 30px; border-radius: 3px; margin: 0 5px;' }) ))
             );
           }
 
           row_data.push(
-            td({ style: 'padding-right: 10px' }, a({ href: Issue.get_href(issue), style: 'color: #93979a' }, '#' + issue.number)),
+            issue.number && td({ style: 'padding-right: 10px' }, a({ href: Issue.get_href(issue), style: 'color: #93979a' }, '#' + issue.number)),
             td({ style: 'width: 100%' }, a({ href: Issue.get_href(issue) }, issue.title)),
-            td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developer.png' })]),
-            td({ style: 'text-align: right; color: #d8a135; white-space: nowrap' }, issue.comments > 0 && [issue.comments, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-comments.png' })]),
+            //td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developer.png' })]),
+            td({ style: 'text-align: right; color: #d8a135; white-space: nowrap' }, issue.comment_count > 0 && [issue.comment_count, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-comments.png' })]),
             td({ style: 'text-align: right; white-space' }, issue.bounty_total > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(issue.bounty_total)))
           );
 

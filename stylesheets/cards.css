@@ -19,7 +19,7 @@
 .card-column:last-child { margin-right: 0; }
 
 .card:hover { box-shadow: 0 0 10px #B38735; border: 1px solid #E0AB45; cursor: pointer }
-.card .fundraiser:hover { box-shadow: 0 0 10px #59AA2C; border: 1px solid #9ADA8A; cursor: pointer }
+.card.fundraiser:hover { box-shadow: 0 0 10px #59AA2C; border: 1px solid #9ADA8A; cursor: pointer }
 
 #card-loader-div {
   background: white;

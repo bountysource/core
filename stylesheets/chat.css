@@ -1,4 +1,5 @@
 #chatbar {
+  z-index: 3;
   position: fixed;
   background: #8cb82b;
   color: #f0f0f0;

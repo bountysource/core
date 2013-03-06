@@ -1,7 +1,7 @@
 with (scope('Repository','App')) {
   // get the link for a repository object
   define('get_href', function(repository) {
-    return '#repos/'+repository.full_name;
+    return repository.frontend_path;
   });
 
   // get link to the issues for a repository

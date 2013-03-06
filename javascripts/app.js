@@ -158,4 +158,5 @@ with (scope('App')) {
     Storage.set('_redirect_to_after_login', get_route());
     set_route('#signin', { reload_page: true });
   })
+
 };
