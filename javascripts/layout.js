@@ -66,7 +66,6 @@ with (scope('App')) {
             ),
 
             ul({ style: 'display: inline-block;' },
-              li(a({ href: 'http://blog.bountysource.com', target: '_blank' }, 'Blog')),
               li(a({ href: '#about' }, 'About')),
               li(a({ href: '#faq' }, 'FAQ')),
               li(a({ href: 'mailto:support@bountysource.com' }, 'Contact Us')),
