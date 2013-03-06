@@ -68,7 +68,7 @@ with (scope('Show', 'Issue')) {
 
           Columns.side(
             bounty_box(issue),
-            logged_in() && DeveloperBox.create(issue)
+            DeveloperBox.create(issue)
           )
         );
       }

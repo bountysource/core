@@ -12,8 +12,8 @@ with (scope('BountySource')) {
       method:    typeof(args[0]) == 'string' ? args.shift() : 'GET',
       params:    typeof(args[0]) == 'object' ? args.shift() : {},
       callback:  typeof(args[0]) == 'function' ? args.shift() : function(){},
-      non_auth_callback:  typeof(args[0]) == 'function' ? args.shift() : function(){}
-    }
+      non_auth_callback:  typeof(args[0]) == 'function' ? args.shift() : null
+    };
 
     // add in our access token
     options.params.access_token = Storage.get('access_token');
