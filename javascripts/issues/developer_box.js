@@ -18,7 +18,7 @@ with (scope('DeveloperBox','Issue')) {
     );
 
     DeveloperBox.start_work_div = div({ id: 'start-work' },
-      info_message("Want to earn the bounty on this issue? Submit a solution!"),
+      div({ style: 'margin-bottom: 10px;' }, "Want to earn the bounty on this issue? Submit a solution!"),
       a({ id: 'create-solution', 'class': 'green', href: create_solution }, 'Start Work'),
 
       issue.solutions && issue.solutions.length <= 0 && p({ style: 'font-size: 14px; font-style: italic; margin-bottom: 0;'},
