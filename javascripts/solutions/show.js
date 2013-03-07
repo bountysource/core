@@ -48,11 +48,13 @@ with (scope('Show','Solution')) {
             ribbon_header("Links"),
             br,
 
-            a({ 'class': 'green', href: solution.issue.frontend_path }, 'Back to Issue'),
+            a({ 'class': 'green', href: solution.issue.frontend_path }, 'Issue'),
+            br,
+            a({ 'class': 'green', href: '#solutions' }, 'My Solutions'),
 
             solution.code_url && div(
               br,
-              a({ 'class': 'blue', href: solution.code_url, target: '_blank' }, 'Your Submission')
+              a({ 'class': 'blue', href: solution.code_url, target: '_blank' }, 'My Submission')
             )
           )
         );
