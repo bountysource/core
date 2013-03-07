@@ -88,12 +88,10 @@ with (scope('App')) {
         scope.rendered_default_layout_inner,
 
         footer(
-          div({ style: 'float: right' },
-            "BountySource is a part of ", a({ href: 'https://www.badger.com/' }, 'Badger Inc.'), " Copyright ©2012, Badger Inc. All rights reserved. "
-          ),
+          div({ style: 'float: right' }, "Copyright ©2013, BountySource Inc. All rights reserved."),
           ul(
             li(a({ href: '#termsofservice' }, 'Terms of Service')),
-            li(a({ href: 'mailto:support@bountysource.com', target: '_blank' }, 'Contact Us'))
+            li(a({ href: 'mailto:support@bountysource.com' }, 'Contact Us'))
           )
         ),
 
