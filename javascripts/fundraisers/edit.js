@@ -125,6 +125,7 @@ with (scope('Edit', 'Fundraiser')) {
   });
 
   define('with_fundraiser_edit_layout', function(fundraiser_id, section, yield) {
+    Edit.errors_div = div();
     var target_div = div(loading);
 
     render(
@@ -157,16 +158,15 @@ with (scope('Edit', 'Fundraiser')) {
           ),
 
           div({ id: 'fundraiser-edit-form-wrapper' },
-            messages,
+            Edit.errors_div,
 
-            div({ 'class': 'split-main' },
-              form({ 'class': 'fancy', id: 'fundraiser-edit-form', action: curry(update_fundraiser, fundraiser) },
-                yield(fundraiser)
-              )
+            Columns.create({ show_side: true }),
+
+            Columns.main(
+              yield(fundraiser)
             ),
 
-            div({ 'class': 'split-side' },
-
+            Columns.side(
               div({ style: 'box-shadow: 0 0 10px #DADADA; border: 1px solid #CCC; border-radius: 3px;' },
                 div({ style: 'background: #F7F7F7; border-bottom: 1px solid #CCC; padding: 10px;' },
                   h4({ style: 'margin: 0 0 5px 0;' }, 'Card Preview'),
@@ -182,9 +182,7 @@ with (scope('Edit', 'Fundraiser')) {
 
                 !fundraiser.published && div({ style: 'padding: 10px;' }, curry(publish_button, fundraiser))
               )
-            ),
-
-            div({ 'class': 'split-end' })
+            )
           )
         );
 
@@ -213,26 +211,28 @@ with (scope('Edit', 'Fundraiser')) {
 
   route('#fundraisers/:fundraiser_id/edit/basic-info', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Basic Info', function(fundraiser) {
-      return fundraiser_block({ id: 'basic-info', title: 'Basic Information', description: "Provide some basic information about your proposal." },
-        fieldset(
-          label('Title:'),
-          input({ 'data-autosave': true, name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'' })
-        ),
-        fieldset(
-          label('Banner Image:'),
-          input({ 'data-autosave': true, name: 'image_url', 'class': 'long', placeholder: 'http://i.imgur.com/abc123', value: fundraiser.image_url||'' })
-        ),
-        fieldset(
-          label('Project Homepage:'),
-          input({ 'data-autosave': true, name: 'homepage_url', 'class': 'long', placeholder: 'https://www.bountysource.com', value: fundraiser.homepage_url||'' })
-        ),
-        fieldset(
-          label('Source Repository:'),
-          input({ 'data-autosave': true, name: 'repo_url', 'class': 'long', placeholder: 'https://github.com/badger/frontend', value: fundraiser.repo_url||'' })
-        ),
-        fieldset(
-          label('Short Description:'),
-          textarea({ 'data-autosave': true, id: 'short-description', name: 'short_description', style: 'width: 392px; height: 150px; line-height: 18px;', placeholder: "Brief description of your fundraiser. Must be 140 characters or less." }, fundraiser.short_description || '')
+      return form({ 'class': 'fancy', id: 'fundraiser-edit-form', action: curry(update_fundraiser, fundraiser) },
+        fundraiser_block({ id: 'basic-info', title: 'Basic Information', description: "Provide some basic information about your proposal." },
+          fieldset(
+            label('Title:'),
+            input({ 'data-autosave': true, name: 'title', 'class': 'long', placeholder: 'My OSS Project', value: fundraiser.title||'' })
+          ),
+          fieldset(
+            label('Banner Image:'),
+            input({ 'data-autosave': true, name: 'image_url', 'class': 'long', placeholder: 'http://i.imgur.com/abc123', value: fundraiser.image_url||'' })
+          ),
+          fieldset(
+            label('Project Homepage:'),
+            input({ 'data-autosave': true, name: 'homepage_url', 'class': 'long', placeholder: 'https://www.bountysource.com', value: fundraiser.homepage_url||'' })
+          ),
+          fieldset(
+            label('Source Repository:'),
+            input({ 'data-autosave': true, name: 'repo_url', 'class': 'long', placeholder: 'https://github.com/badger/frontend', value: fundraiser.repo_url||'' })
+          ),
+          fieldset(
+            label('Short Description:'),
+            textarea({ 'data-autosave': true, id: 'short-description', name: 'short_description', style: 'width: 392px; height: 150px; line-height: 18px;', placeholder: "Brief description of your fundraiser. Must be 140 characters or less." }, fundraiser.short_description || '')
+          )
         )
       );
     });
@@ -254,8 +254,10 @@ with (scope('Edit', 'Fundraiser')) {
         }
       }, 3000);
 
-      return fundraiser_block({ id: 'description', title: 'Description', description: div("Convince people to contribute. Why is your project interesting and worthy of funding? Formatted with ", a({ target: '_blank', href: 'http://github.github.com/github-flavored-markdown/' }, "GitHub Flavored Markdown.")) },
-        description_textarea
+      return form({ 'class': 'fancy', id: 'fundraiser-edit-form', action: curry(update_fundraiser, fundraiser) },
+        fundraiser_block({ id: 'description', title: 'Description', description: div("Convince people to contribute. Why is your project interesting and worthy of funding? Formatted with ", a({ target: '_blank', href: 'http://github.github.com/github-flavored-markdown/' }, "GitHub Flavored Markdown.")) },
+          description_textarea
+        )
       );
     });
   });
@@ -264,16 +266,16 @@ with (scope('Edit', 'Fundraiser')) {
     with_fundraiser_edit_layout(fundraiser_id, 'Rewards', function(fundraiser) {
       Edit.rewards = fundraiser.rewards;
 
-      return  fundraiser_block({ id: 'rewards', title: 'Rewards', description: "Thank your backers." },
+      return fundraiser_block({ id: 'rewards', title: 'Rewards', description: "Thank your backers." },
         div({ id: 'rewards' },
 
           div({ id: 'reward-rows' }, fundraiser.rewards.map(function(reward) { return reward_row(fundraiser, reward) })),
 
-          br(),
+          br,
 
           div({ id: 'create-reward-errors' }),
 
-          form({ id: 'rewards-create', action: curry(create_reward, fundraiser) },
+          form({ 'class': 'fancy', id: 'rewards-create', action: curry(create_reward, fundraiser) },
             fieldset(
               label({ 'for': 'amount' }, 'Amount & Quantity:'),
               number({ name: 'amount', required: true, min: 0, placeholder: '$10' }),
@@ -310,20 +312,22 @@ with (scope('Edit', 'Fundraiser')) {
 
       if (fundraiser.published) payout_method_select.setAttribute('disabled', true);
 
-      return fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to complete this project? How do you want to receive the funds?" },
-        fieldset(
-          label('Funding Goal:'),
-          fundraiser.published ? [
-            span({ style: 'vertical-align: middle; font-size: 25px;' }, money(fundraiser.funding_goal))
-          ] : [
-            span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
-            number({ 'data-autosave': true, name: 'funding_goal', min: 1, placeholder: '50,000', value: fundraiser.funding_goal })
-          ]
-        ),
+      return form({ 'class': 'fancy', id: 'fundraiser-edit-form', action: curry(update_fundraiser, fundraiser) },
+        fundraiser_block({ id: 'funding-details', title: 'Funding Details', description: "How much funding do you need to complete this project? How do you want to receive the funds?" },
+          fieldset(
+            label('Funding Goal:'),
+            fundraiser.published ? [
+              span({ style: 'vertical-align: middle; font-size: 25px;' }, money(fundraiser.funding_goal))
+            ] : [
+              span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
+              number({ 'data-autosave': true, name: 'funding_goal', min: 1, placeholder: '50,000', value: fundraiser.funding_goal })
+            ]
+          ),
 
-        fieldset(
-          label('Payout Method:'),
-          payout_method_select
+          fieldset(
+            label('Payout Method:'),
+            payout_method_select
+          )
         )
       );
     });
@@ -352,15 +356,17 @@ with (scope('Edit', 'Fundraiser')) {
         render({ into: end_by_date_element }, formatted_date(end_by_date));
       });
 
-      return fundraiser_block({ id: 'duration', title: 'Duration', description: ("How long would you like your fundraiser to run? It can run between "+fundraiser.min_days_open+" and "+fundraiser.max_days_open+" days.") },
-        fieldset(
-          label('Days Open:'),
-          fundraiser.published ? span({ style: 'vertical-align: middle; font-size: 25px;' }, formatted_number(fundraiser.days_open)) : days_open_input
-        ),
+      return form({ 'class': 'fancy', id: 'fundraiser-edit-form', action: curry(update_fundraiser, fundraiser) },
+        fundraiser_block({ id: 'duration', title: 'Duration', description: ("How long would you like your fundraiser to run? It can run between "+fundraiser.min_days_open+" and "+fundraiser.max_days_open+" days.") },
+          fieldset(
+            label('Days Open:'),
+            fundraiser.published ? span({ style: 'vertical-align: middle; font-size: 25px;' }, formatted_number(fundraiser.days_open)) : days_open_input
+          ),
 
-        fieldset(
-          label('End Date:'),
-          end_by_date_element
+          fieldset(
+            label('End Date:'),
+            end_by_date_element
+          )
         )
       );
     });
@@ -427,7 +433,7 @@ with (scope('Edit', 'Fundraiser')) {
 
         fieldset({ 'class': 'no-label edit-reward-buttons' },
           submit({ 'class': 'green', style: 'padding: 0;' }, 'Save'),
-          a({ 'class': 'blue', href: curry(cancel_reward_update, reward) }, 'Cancel'),
+          a({ 'class': 'blue', style: 'display: inline-block; width: 100px;', href: curry(cancel_reward_update, reward) }, 'Cancel'),
           !fundraiser.published && a({ 'class': 'blue', href: curry(destroy_reward, fundraiser, reward) }, 'Delete')
         )
       )
@@ -473,14 +479,6 @@ with (scope('Edit', 'Fundraiser')) {
     remove_class(reward_row, 'active')
   });
 
-  define('clear_text_fields', function(form) {
-    // clear the creation form
-    var input_groups = [form.getElementsByTagName('input'), form.getElementsByTagName('textarea')];
-    for (var i=0; i<input_groups.length; i++) {
-      for (var j=0; j<input_groups[i].length && input_groups[i][j].type!='submit'; j++) input_groups[i][j].value = "";
-    }
-  });
-
   define('update_reward', function(fundraiser, reward, data) {
     render({ target: 'reward-row-'+reward.id+'-errors' },'');
 
@@ -500,7 +498,7 @@ with (scope('Edit', 'Fundraiser')) {
     BountySource.create_reward(fundraiser.id, data, function(response) {
       if (response.meta.success) {
         insert_reward_row(fundraiser, response.data);
-        clear_text_fields(document.getElementById('rewards-create'));
+        document.getElementById('rewards-create').reset();
       } else {
         render({ target: 'create-reward-errors' }, small_error_message(response.data.error));
       }
@@ -522,8 +520,6 @@ with (scope('Edit', 'Fundraiser')) {
   });
 
   define('update_fundraiser', function(fundraiser, data) {
-    clear_message();
-
     BountySource.update_fundraiser(fundraiser.id, data, function(response) {
       if (response.meta.success) {
         var fundraiser = response.data;
@@ -544,7 +540,7 @@ with (scope('Edit', 'Fundraiser')) {
         render({ target: 'fundraiser-preview' }, Show.fundraiser_template(fundraiser, { preview: true }));
       } else {
         Edit.cached_fundraiser = {};
-        render_message(error_message(response.data.error));
+        render({ into: Edit.errors_div }, error_message(response.data.error));
       }
     })
   });
@@ -557,7 +553,7 @@ with (scope('Edit', 'Fundraiser')) {
         if (response.meta.success) {
           set_route('#account/fundraisers');
         } else {
-          render({ target: 'fundraiser-edit-errors' }, small_error_message(response.data.error));
+          render({ into: Edit.errors_div }, small_error_message(response.data.error));
         }
       });
     }
@@ -580,7 +576,7 @@ with (scope('Edit', 'Fundraiser')) {
         if (response.meta.success) {
           window.location.reload();
         } else {
-          render({ target: 'fundraiser-edit-errors' }, error_message(response.data.error));
+          render({ into: Edit.errors_div }, error_message(response.data.error));
         }
       });
     }
