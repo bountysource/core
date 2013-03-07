@@ -1,8 +1,9 @@
 with (scope('Pledge', 'Fundraiser')) {
 
   route('#fundraisers/:fundraiser_id/pledge', function(fundraiser_id) {
-    var target_div = div('Loading...'),
-      bountysource_account_div = div();
+    Pledge.errors_div = div({ style: 'width: 500px;' });
+
+    var target_div = div('Loading...');
 
     render(
       breadcrumbs(
@@ -25,10 +26,12 @@ with (scope('Pledge', 'Fundraiser')) {
       if (!fundraiser.published) return render({ into: target_div }, error_message('Fundraiser has not been published.'));
 
       render({ into: target_div },
-        div({ 'class': 'split-main' },
+        Columns.create({ show_side: false }),
+
+        Columns.main(
           form({ 'class': 'fancy', action: curry(make_pledge, fundraiser) },
             fieldset({ 'class': 'no-label' },
-              messages()
+              Pledge.errors_div
             ),
 
             fieldset(
@@ -62,10 +65,7 @@ with (scope('Pledge', 'Fundraiser')) {
               )
             )
           )
-        ),
-
-        div({ 'class': 'split-side' }),
-        div({ 'class': 'split-end' })
+        )
       );
 
       // if a reward id was passed in, select it now
@@ -76,24 +76,6 @@ with (scope('Pledge', 'Fundraiser')) {
 
       // if there are no rewards, automatically select the "No reward" options, which is always present.
       if (fundraiser.rewards.length <= 0) document.getElementById('fundraiser-rewards').children[0].click();
-
-      // if logged in and account has money, render bountysource account radio
-      logged_in() && BountySource.get_cached_user_info(function(user) {
-        (user.account && user.account.balance > 0) && render({ into: bountysource_account_div },
-          div(
-            radio({
-              name: 'payment_method',
-              value: 'personal',
-              id: 'payment_method_personal'
-            }),
-            label({ 'for': 'payment_method_personal', style: 'text-align: left; padding-left: 15px; display: inline;' },
-              img({ src: user.avatar_url, style: 'width: 16px; height: 16px' }),
-              "BountySource",
-              span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
-            )
-          )
-        );
-      });
     });
   });
 
@@ -132,7 +114,7 @@ with (scope('Pledge', 'Fundraiser')) {
     if (reward.sold_out) {
       add_class(reward_element, 'sold-out');
     } else {
-      reward_element.addEventListener('click', function(e) {
+      reward_element.addEventListener('click', function() {
         // uncheck all radios
         var elements = document.getElementsByName('reward_id_radio');
         for (var i=0; i<elements.length; i++) elements[i].removeAttribute('checked');
@@ -148,14 +130,14 @@ with (scope('Pledge', 'Fundraiser')) {
         show(submit_button);
 
         // set the pledge input with reward value if needed
-        set_pledge_amount_from_reward(reward);
+        if (!has_class(this, 'active')) set_pledge_amount_from_reward(reward);
       });
     };
 
     return reward_element;
   })
 
-  define('set_pledge_amount_from_reward', function(reward, e) {
+  define('set_pledge_amount_from_reward', function(reward) {
     // set pledge amount from reward if it's empty, or iff the reward min pledge amount > current pledge amount
     var amount_input = document.getElementById('pledge-amount');
     if (!amount_input) return;
@@ -178,7 +160,6 @@ with (scope('Pledge', 'Fundraiser')) {
   });
 
   define('make_pledge', function(fundraiser, form_data) {
-    clear_message();
     if (isNaN(parseInt(form_data.reward_id))) {
       return render_message(error_message('Please select your reward first'));
     }
@@ -193,7 +174,7 @@ with (scope('Pledge', 'Fundraiser')) {
     };
 
     BountySource.make_payment(payment_data, function(errors) {
-      render_message(error_message(errors));
+      render({ into: Pledge.errors_div }, error_message(errors));
     });
   });
 }
