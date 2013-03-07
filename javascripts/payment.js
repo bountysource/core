@@ -33,7 +33,7 @@ with (scope('Payment', 'App')) {
           img({ src: 'images/google-wallet.png'}), span("Coinbase's BitCoin")
         )
       ),
-      false && div(
+      div(
         radio({
           id:'payment_method_google',
           name: 'payment_method',
