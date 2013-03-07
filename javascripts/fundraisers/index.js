@@ -13,6 +13,7 @@ with (scope('Index', 'Fundraiser')) {
 
     BountySource.get_fundraisers(function(response) {
       if (response.data.length > 0) {
+
         render({ into: fundraisers_table },
           messages(),
 
@@ -33,7 +34,7 @@ with (scope('Index', 'Fundraiser')) {
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
 
                 td({ style: 'text-align: center;' },
-                  a({ href: fundraiser.frontend_edit_path }, img({ src: 'images/edit.gif' })),
+                  a({ href: fundraiser.edit_path }, img({ src: 'images/edit.gif' })),
 
                   // TODO: info page for fundraiser author to see contributions and rewards that have been claimed
                   // a({ href: '#account/fundraisers/'+fundraiser.id+'/info', style: 'margin-left: 10px;' }, img({ src: 'images/info.gif' })),

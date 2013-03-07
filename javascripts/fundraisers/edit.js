@@ -38,7 +38,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'basic-info',
           'class':  (section_completed.basic_info ? 'complete': 'warning'),
-          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/basic-info') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/basic-info') },
 
           div({ 'class': 'label' },
             span('Basic Info'),
@@ -50,7 +50,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'description',
           'class':  (section_completed.description ? 'complete' : 'warning'),
-          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/description') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/description') },
 
           div({ 'class': 'label' },
             span('Description'),
@@ -62,7 +62,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'rewards',
           'class':  section_completed.rewards ? 'complete' : 'warning',
-          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/rewards') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/rewards') },
 
           div({ 'class': 'label' },
             span('Rewards'),
@@ -75,7 +75,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'funding',
           'class':  (fundraiser.published ? 'locked' : (section_completed.funding ? 'complete' : 'warning')),
-          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/funding') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/funding') },
 
           div({ 'class': 'label' },
             span('Funding'),
@@ -88,7 +88,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'duration',
           'class':  (fundraiser.published ? 'locked' : (section_completed.duration ? 'complete' : 'warning')),
-          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/duration') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/duration') },
 
           div({ 'class': 'label' },
             span('Duration'),
@@ -101,7 +101,7 @@ with (scope('Edit', 'Fundraiser')) {
     // make an li active based on route
     var nav_bar_links = nav_bar_ul.getElementsByTagName('a');
     for (var i=0; i<nav_bar_links.length; i++) {
-      if (get_route() == fundraiser.frontend_edit_path+'/'+nav_bar_links[i].id) add_class(nav_bar_links[i], 'active');
+      if (get_route() == fundraiser.edit_path+'/'+nav_bar_links[i].id) add_class(nav_bar_links[i], 'active');
     }
 
     return nav_bar_ul;
@@ -211,9 +211,7 @@ with (scope('Edit', 'Fundraiser')) {
     });
   });
 
-  route('#account/fundraisers/:fundraiser_id', function() { set_route(get_route()+'/basic-info') });
-
-  route('#account/fundraisers/:fundraiser_id/basic-info', function(fundraiser_id) {
+  route('#fundraisers/:fundraiser_id/edit/basic-info', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Basic Info', function(fundraiser) {
       return fundraiser_block({ id: 'basic-info', title: 'Basic Information', description: "Provide some basic information about your proposal." },
         fieldset(
@@ -240,7 +238,7 @@ with (scope('Edit', 'Fundraiser')) {
     });
   });
 
-  route('#account/fundraisers/:fundraiser_id/description', function(fundraiser_id) {
+  route('#fundraisers/:fundraiser_id/edit/description', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Description', function(fundraiser) {
       var description_textarea = textarea({ 'data-autosave': true, name: 'description', style: 'width: 630px; height: 600px; line-height: 18px;', placeholder: "Very thorough description of your fundraiser proposal." },
         fundraiser.description || ''
@@ -262,7 +260,7 @@ with (scope('Edit', 'Fundraiser')) {
     });
   });
 
-  route('#account/fundraisers/:fundraiser_id/rewards', function(fundraiser_id) {
+  route('#fundraisers/:fundraiser_id/edit/rewards', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Rewards', function(fundraiser) {
       Edit.rewards = fundraiser.rewards;
 
@@ -299,7 +297,7 @@ with (scope('Edit', 'Fundraiser')) {
     });
   });
 
-  route('#account/fundraisers/:fundraiser_id/funding', function(fundraiser_id) {
+  route('#fundraisers/:fundraiser_id/edit/funding', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Funding', function(fundraiser) {
       var payout_method_select = select({ 'data-autosave': true, required: true, name: 'payout_method', style: 'width: 400px;' },
         option(),
@@ -331,8 +329,10 @@ with (scope('Edit', 'Fundraiser')) {
     });
   });
 
-  route('#account/fundraisers/:fundraiser_id/duration', function(fundraiser_id) {
+  route('#fundraisers/:fundraiser_id/edit/duration', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Duration', function(fundraiser) {
+
+      console.log(fundraiser);
 
       var days_open_input = number({
         'data-autosave': true,
@@ -552,7 +552,7 @@ with (scope('Edit', 'Fundraiser')) {
   define('publish_fundraiser', function(fundraiser) {
     if (confirm('Are you sure? Once published, you cannot change the funding goal or duration.')) {
       // Fake a page view for Analytics
-      _gaq.push([fundraiser.frontend_edit_path + '/publish']);
+      _gaq.push([fundraiser.edit_path + '/publish']);
       BountySource.publish_fundraiser(fundraiser.id, function(response) {
         if (response.meta.success) {
           set_route('#account/fundraisers');
