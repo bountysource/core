@@ -406,3 +406,9 @@ input.autosized {
   display: none;
 }
 
+.with-ribbon-header {
+  background: #f1f1f1;
+  padding: 0 21px 21px 21px;
+  margin: 20px 15px;
+  border-bottom: 1px solid #e3e3e3;
+}

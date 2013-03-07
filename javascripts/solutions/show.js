@@ -2,19 +2,29 @@ with (scope('Show','Solution')) {
   route('#solutions/:id', function(id) {
     Show.error_message_container          = div();
     Show.submit_solution_errors_container = div(),
-    Show.update_solution_errors_container = div({ style: 'width: 525px;' }),
-    Show.target_div                       = div('Loading...');
+    Show.update_solution_errors_container = div({ style: 'width: 473px;' }),
+    Show.target_div                       = div('Loading...'),
+    Show.side_bar_div                     = div();
 
     var breadrcrumbs_div = div(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
         'Loading...'
-      ),
-      Show.error_message_container,
-      Show.target_div
+      )
     );
 
-    render(breadrcrumbs_div, Show.target_div);
+    render(breadrcrumbs_div,
+      Columns.create({ show_side: true }),
+
+      Columns.main(
+        Show.error_message_container,
+        Show.target_div
+      ),
+
+      Columns.side(
+        Show.side_bar_div
+      )
+    );
 
     BountySource.get_solution(id, function(response) {
       if (response.meta.success) {
@@ -29,6 +39,21 @@ with (scope('Show','Solution')) {
             a({ href: '#' }, 'Home'),
             a({ href: '#solutions' }, 'My Solutions'),
             truncate(solution.issue.title, 70)
+          )
+        );
+
+        // render links into sidebar
+        render({ into: Show.side_bar_div },
+          div({ 'class': 'with-ribbon-header' },
+            ribbon_header("Links"),
+            br,
+
+            a({ 'class': 'green', href: solution.issue.frontend_path }, 'Back to Issue'),
+
+            solution.code_url && div(
+              br,
+              a({ 'class': 'blue', href: solution.code_url, target: '_blank' }, 'Your Submission')
+            )
           )
         );
 
@@ -57,13 +82,13 @@ with (scope('Show','Solution')) {
                   required: true,
                   name: 'code_url',
                   placeholder: 'https://github.com/bountysource/frontend/pull/2',
-                  style: 'width: 500px; font-size: 14px;',
+                  style: 'width: 450px; font-size: 14px;',
                   value: solution.code_url||''
                 })
               ),
               fieldset({ 'for': 'body' },
                 label('Submission Message:'),
-                textarea({ required: true, name: 'body', placeholder: 'Removed X from Y, and refactored Z', style: 'width: 500px; height: 150px;' },
+                textarea({ required: true, name: 'body', placeholder: 'Removed X from Y, and refactored Z', style: 'width: 450px; height: 150px;' },
                   solution.body
                 )
               ),
@@ -73,8 +98,8 @@ with (scope('Show','Solution')) {
             )
           );
         } else {
-          var code_url_input = url({ required: true, name: 'code_url', placeholder: 'https://github.com/bountysource/frontend/pull/2', style: 'width: 500px; font-size: 14px;' });
-          var body_input = textarea({ required: true, name: 'body', placeholder: 'Removed X from Y, and refactored Z', style: 'width: 500px; height: 150px;' });
+          var code_url_input = url({ required: true, name: 'code_url', placeholder: 'https://github.com/bountysource/frontend/pull/2', style: 'width: 450px; font-size: 14px;' });
+          var body_input = textarea({ required: true, name: 'body', placeholder: 'Removed X from Y, and refactored Z', style: 'width: 450px; height: 150px;' });
 
           code_url_input.addEventListener('blur', update_solution_event_callback);
           body_input.addEventListener('blur', update_solution_event_callback);

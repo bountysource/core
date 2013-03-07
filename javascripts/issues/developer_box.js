@@ -18,18 +18,9 @@ with (scope('DeveloperBox','Issue')) {
     );
 
     DeveloperBox.start_work_div = div({ id: 'start-work' },
-      div({ style: 'margin-bottom: 10px;' }, "Want to earn the bounty on this issue? Submit a solution!"),
-      a({ id: 'create-solution', 'class': 'green', href: create_solution }, 'Start Work'),
-
-      issue.solutions && issue.solutions.length <= 0 && p({ style: 'font-size: 14px; font-style: italic; margin-bottom: 0;'},
-        'Be the first developer to start working on a solution!'
-      ),
-
-      issue.solutions && issue.solutions.length > 0 && p({ style: 'font-size: 14px; font-style: italic; margin-bottom: 0;'},
-        formatted_number(issue.solutions.length),
-        (issue.solutions.length == 1 ? ' developer has started' : ' developers have'),
-        span(' started working on this.')
-      )
+      div("Want to earn the bounty on this issue? Submit a solution!"),
+      br,
+      a({ id: 'create-solution', 'class': 'green', href: create_solution }, 'Start Work')
     );
 
     reload_content();
@@ -64,22 +55,46 @@ with (scope('DeveloperBox','Issue')) {
               );
             } else {
               render({ into: DeveloperBox.inner_div },
-                info_message("You are currently working on a solution to this issue."),
+                div("You are currently working on a solution to this issue."),
+                br,
                 a({ 'class': 'green', href: my_solution.frontend_path }, "I'm Finished"),
                 br,
-                a({ 'class': 'gray', href: destroy_solution }, "Cancel")
+                a({ 'class': 'gray', href: destroy_solution }, "Cancel"),
+                other_developers_message
               );
             }
           } else {
-            render({ into: DeveloperBox.inner_div }, DeveloperBox.start_work_div);
+            render({ into: DeveloperBox.inner_div },
+              DeveloperBox.start_work_div,
+              other_developers_message
+            );
           }
         } else {
           render({ target: this.inner_div }, error_message(response.data.error));
         }
       });
     } else {
-      render({ into: DeveloperBox.inner_div }, DeveloperBox.start_work_div);
+      render({ into: DeveloperBox.inner_div },
+        DeveloperBox.start_work_div,
+        other_developers_message
+      );
     }
+  });
+
+  define('other_developers_message', function() {
+    var issue = DeveloperBox.issue;
+
+    return div(
+      issue.solutions && issue.solutions.length <= 0 && p({ style: 'font-size: 14px; font-style: italic; margin-bottom: 0;'},
+        'Be the first developer to start working on a solution!'
+      ),
+
+      issue.solutions && issue.solutions.length > 0 && p({ style: 'font-size: 14px; font-style: italic; margin-bottom: 0;'},
+        formatted_number(issue.solutions.length),
+        (issue.solutions.length == 1 ? ' developer has started' : ' developers have'),
+        span(' started working on this.')
+      )
+    );
   });
 
   define('create_solution', function() {
@@ -99,7 +114,7 @@ with (scope('DeveloperBox','Issue')) {
   define('destroy_solution', function() {
     render({ target: DeveloperBox.error_message_div },'');
 
-    BountySource.destroy_solution(DeveloperBox.solution.id, function(response) {
+    BountySource.destroy_solution(DeveloperBox.my_solution.id, function(response) {
       if (response.meta.success) {
         DeveloperBox.solution = undefined;
         reload_content();
