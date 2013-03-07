@@ -38,7 +38,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'basic-info',
           'class':  (section_completed.basic_info ? 'complete': 'warning'),
-          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/basic-info') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/basic-info') },
 
           div({ 'class': 'label' },
             span('Basic Info'),
@@ -50,7 +50,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'description',
           'class':  (section_completed.description ? 'complete' : 'warning'),
-          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/description') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/description') },
 
           div({ 'class': 'label' },
             span('Description'),
@@ -62,7 +62,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'rewards',
           'class':  section_completed.rewards ? 'complete' : 'warning',
-          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/rewards') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/rewards') },
 
           div({ 'class': 'label' },
             span('Rewards'),
@@ -75,7 +75,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'funding',
           'class':  (fundraiser.published ? 'locked' : (section_completed.funding ? 'complete' : 'warning')),
-          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/funding') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/funding') },
 
           div({ 'class': 'label' },
             span('Funding'),
@@ -88,7 +88,7 @@ with (scope('Edit', 'Fundraiser')) {
         a({
           id:       'duration',
           'class':  (fundraiser.published ? 'locked' : (section_completed.duration ? 'complete' : 'warning')),
-          href:     curry(update_fundraiser_then_set_route, fundraiser.edit_path+'/duration') },
+          href:     curry(update_fundraiser_then_set_route, fundraiser.frontend_edit_path+'/duration') },
 
           div({ 'class': 'label' },
             span('Duration'),
@@ -101,7 +101,7 @@ with (scope('Edit', 'Fundraiser')) {
     // make an li active based on route
     var nav_bar_links = nav_bar_ul.getElementsByTagName('a');
     for (var i=0; i<nav_bar_links.length; i++) {
-      if (get_route() == fundraiser.edit_path+'/'+nav_bar_links[i].id) add_class(nav_bar_links[i], 'active');
+      if (get_route() == fundraiser.frontend_edit_path+'/'+nav_bar_links[i].id) add_class(nav_bar_links[i], 'active');
     }
 
     return nav_bar_ul;
@@ -552,7 +552,7 @@ with (scope('Edit', 'Fundraiser')) {
   define('publish_fundraiser', function(fundraiser) {
     if (confirm('Are you sure? Once published, you cannot change the funding goal or duration.')) {
       // Fake a page view for Analytics
-      _gaq.push([fundraiser.edit_path + '/publish']);
+      _gaq.push([fundraiser.frontend_edit_path + '/publish']);
       BountySource.publish_fundraiser(fundraiser.id, function(response) {
         if (response.meta.success) {
           set_route('#account/fundraisers');
