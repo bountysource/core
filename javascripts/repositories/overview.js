@@ -88,9 +88,14 @@ with (scope('Repository')) {
             );
           }
 
+          if (issue.number) {
+            row_data.push(
+              td({ style: 'padding-right: 10px' }, a({ href: issue.frontend_path, style: 'color: #93979a' }, '#' + issue.number))
+            );
+          }
+
           row_data.push(
-            issue.number && td({ style: 'padding-right: 10px' }, a({ href: Issue.get_href(issue), style: 'color: #93979a' }, '#' + issue.number)),
-            td({ style: 'width: 100%' }, a({ href: Issue.get_href(issue) }, issue.title)),
+            td({ style: 'width: 100%' }, a({ href: issue.frontend_path }, issue.title)),
             //td({ style: 'text-align: right; color: #7cc5e3; white-space: nowrap' }, issue.solutions > 0 && [issue.solutions, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-developer.png' })]),
             td({ style: 'text-align: right; color: #d8a135; white-space: nowrap' }, issue.comment_count > 0 && [issue.comment_count, ' ', img({ style: 'vertical-align: middle', src: 'images/icon-comments.png' })]),
             td({ style: 'text-align: right; white-space' }, issue.bounty_total > 0 && span({ style: 'background: #83d11a; border-radius: 2px; padding: 3px; color: white' }, money(issue.bounty_total)))
