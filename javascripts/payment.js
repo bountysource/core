@@ -21,6 +21,18 @@ with (scope('Payment', 'App')) {
           img({ src: 'images/paypal.png'}), span("PayPal")
         )
       ),
+      div(
+        radio({
+          id:'payment_method_coinbase',
+          name: 'payment_method',
+          value: 'coinbase',
+          checked: (selected_value == 'coinbase' ? 'checked' : null)
+        }),
+        label({ 'for': 'payment_method_coinbase', style: 'display: inline;' },
+          // TODO: Change this image
+          img({ src: 'images/google-wallet.png'}), span("Coinbase's BitCoin")
+        )
+      ),
       false && div(
         radio({
           id:'payment_method_google',
