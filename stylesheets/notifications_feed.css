@@ -47,8 +47,8 @@
   background: white;
   width: 360px;
   min-height: 30px;
-  right: 170px;
-  top: 55px;
+  right: 5px;
+  top: 48px;
   border: 1px solid #BBB;
   border-top: 0;
   border-radius: 0 0 3px 3px;
@@ -70,7 +70,7 @@
 
 #notifications-feed .notification-message {
   cursor: pointer;
-  padding: 0 5px;
+  padding: 5px;
   border-bottom: 1px solid #BBB;
 
   -webkit-transition: background ease-in 100ms;

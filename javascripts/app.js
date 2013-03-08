@@ -11,40 +11,6 @@ with (scope('App')) {
     }
   });
 
-  define('reload_social_buttons', function() {
-    render({ target: 'global-social-buttons' },
-      ul(
-        li({ style: 'padding-top: 3px;' }, Twitter.follow_button),
-        // li({ style: 'height: 20px;' }, Facebook.follow_button),
-        li({ style: 'padding-top: 3px;' }, Twitter.share_button),
-
-        li({ style: 'padding-top: 3px;' }, GooglePlus.like_button),
-
-        // li({ style: 'width: 100px;' }, Facebook.like_button({ 'data-layout': 'button_count', 'data-name': 'name', style: 'z-index: 3;' })),
-
-        li({ id: 'fb-like-button' }, Facebook.create_share_button({
-          name:         'BountySource',
-          caption:      '',
-          description:  '',
-          link:         window.location.href,
-          // picture:      'images/bountysource-icon.png'
-        }))
-      )
-    );
-    Twitter.process_elements();
-    GooglePlus.process_elements();
-    Facebook.process_elements();
-  });
-
-  // update social buttons after loading the page
-  after_filter(reload_social_buttons);
-
-  // update the FB like button in place with new meta data
-  define('update_facebook_like_button', function(new_attributes) {
-    new_attributes = new_attributes || {};
-    render({ target: 'fb-like-button' }, Facebook.create_share_button(new_attributes));
-  });
-
   /*
    * Get the pretty route, which uses the base string, with a character white listed version of the
    * source string appended to it.

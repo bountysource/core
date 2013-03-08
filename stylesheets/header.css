@@ -1,0 +1,87 @@
+header {
+  color: #eee;
+  background: white;
+  border-top: 4px solid #e0ab45;
+  border-bottom: 1px solid #ccc6b7;
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+header section {
+  width: 975px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+header .bountysource-logo,
+header .bountysource-logo img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+header #signin-buttons {
+  display: inline-block;
+}
+
+header #signin-buttons span {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  font-size: 18px;
+
+  color: black;
+}
+
+header #signin-buttons ul {
+  display: inline-block;
+  vertical-align: middle;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+
+}
+header #signin-buttons ul li {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+header #signin-buttons ul li a {
+  text-decoration: none;
+}
+header #signin-buttons ul li a img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  border-radius: 3px;
+}
+header #signin-buttons ul li:last-child {
+  margin-right: 0;
+}
+
+header #global-search {
+  display: inline-block;
+  margin: 0 20px;
+}
+header #global-search input {
+  width: 350px;
+}
+
+header ul#user-action-items {
+  display: inline-block;
+  vertical-align: middle;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+header ul#user-action-items li {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  min-height: 30px;
+}
+header ul#user-action-items li:last-of-type {
+  margin-right: 0;
+}
+
+

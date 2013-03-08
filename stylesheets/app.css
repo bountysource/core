@@ -17,53 +17,12 @@ html { background: #efe9db url(../images/background.png) repeat top center; }
 ::-moz-placeholder { color: #aaa; }
 :-ms-input-placeholder { color: #aaa; }
 
-header {
-  color: #eee; 
-  background: white; 
-  border-top: 4px solid #e0ab45;
-  border-bottom: 1px solid #ccc6b7; 
-  margin-bottom: 10px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-header section { width: 975px; margin: 0 auto; padding: 5px 0 0 0; line-height: 50px; position: relative; }
-header h1 { margin: 0; padding: 0 }
-header h1 a:hover { text-decoration: none; }
-header h1 a {
-  font-size: 30px; 
-	color: #222;
-} 
-header h1 a .source { font-weight: normal; letter-spacing: 0 }
-
-header ul { 
-  margin: 0; 
-  padding: 0; 
-  position: absolute; 
-  right: 20px; 
-  top: 5px;
-}
-header ul li {
-  margin: 0 0 0 20px;
-  padding: 0;
-  float: left;
-  list-style: none;
-}
-
-header ul li a {
-  color: #333;
-  font-size: 16px;
-}
-
 section#global-social-buttons { width: 955px; margin: auto; margin-bottom: 10px; }
 section#global-social-buttons ul { list-style-type: none; padding: 0; }
 section#global-social-buttons ul li { min-width: 100px; display: inline-block; margin-right: 5px; vertical-align: middle; }
 section#global-social-buttons ul li:last-child { margin-right: 0; }
 
 section#content, section#signin { width: 955px; margin: 0 auto; padding: 30px 20px 20px 20px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be;  }
-
-section#homepage { width: 978px; margin: 0 auto; }
-section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; }
-section#homepage .box .inner { padding: 20px }
-
 
 .avatar { width: 50px; height: 50px; border-radius: 30px; border: 3px solid white; margin: 3px; overflow: hidden; box-shadow: 0 0 4px #aaa; }
 .avatar img { width: 50px; height: 50px; border-radius: 2px; }
@@ -82,44 +41,12 @@ section#homepage .box .inner { padding: 20px }
 .round-avatar.small { width: 30px; height: 30px; }
 .round-avatar.small img { width: 30px; height: 30px; }
 
-section#homepage .avatar { float: left; }
-section#homepage .round-avatar { float: left; }
-
-section#homepage h1 { margin: 30px 0 10px 0; font-weight: normal; font-size: 36px; color: #333; text-align: center; }
-section#homepage h2 { padding: 0 100px; line-height: 30px; font-weight: normal; font-size: 20px; color: #888; text-align: center; }
-
-section#homepage .h1-line { border-bottom: 2px solid #f87956; margin: 12px 20px 0; position: relative; }
-section#homepage .h1-line div { position: absolute;
-  width: 0;
-  height: 0;
-  top: -5px;
-  left: 73px;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid #f87956;
-}
-
 .stats { background: #f2f3f2; }
 .stats h2 { margin: 0; text-align: right; font-size: 40px; line-height: 40px; font-weight: normal }
 .stats h2 a { color: #5b6163 }
 .stats h2 a:hover { text-decoration: none }
 .stats h3 { margin: 0; text-align: right; font-size: 13px; line-height: 13px; font-weight: normal; margin-top: 5px; margin-bottom: 40px; padding-bottom: 10px; }
 .stats h3 a { color: #54595c }
-
-
-section#homepage .begin-box { padding-top: 25px }
-section#homepage .begin-box input[type=text] { width: 150px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c; }
-
-section#homepage .faq-box { margin-top: 10px; padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; float: left; width: 233px; text-align: center }
-section#homepage .faq-box .inner { padding: 10px; background: #f2f3f2; }
-section#homepage .faq-box h1 { text-align: center; font-size: 20px; margin: 0 }
-
-section#homepage .leaderboard { padding: 10px; }
-section#homepage .leaderboard section { float: left; width: 423px }
-section#homepage .leaderboard section h2 { margin: 0; font-weight: normal; color: #b1abab; text-transform: uppercase; font-size: 20px; border-bottom: 1px solid #ddd; margin-bottom: 6px; padding-bottom: 3px }
-section#homepage .leaderboard ul { margin: 0; padding: 0; }
-section#homepage .leaderboard li { list-style: none; margin-top: 8px; width: 195px; float: left; }
-section#homepage .leaderboard img { vertical-align: middle; margin-right: 8px }
 
 /*footer { padding: 5px 10px; background: rgba(0,0,0,0.3); margin: 0 20px; border-bottom-left-radius: 7px 7px; border-bottom-right-radius: 7px 7px; }*/
 footer { width: 975px; margin: 0 auto; padding: 12px 0 75px 0; color: #7e8688; font-size: 12px }
@@ -286,39 +213,6 @@ input.autosized {
 .error-message.small   { padding: 5px; text-align: center; }
 .info-message.small    { padding: 5px; text-align: center; }
 
-#user-nav {
-  position: relative;
-  z-index: 3;
-  min-width: 150px;
-  max-width: 250px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-#user-nav a { color: #333 }
-#user-nav a span.downarrow { padding-left: 6px; }
-#user-nav #user_nav_a:hover { text-decoration: none; }
-#user-nav.flyout {
-  box-shadow: 0px 6px 10px 3px rgba(0, 0, 0, 0.4);
-}
-#user-nav        #user_nav_flyout { display: none; }
-#user-nav.flyout #user_nav_flyout {
-  background-color: white;
-  display: block;
-  border-top: 1px solid #333;
-  padding: 7px;
-}
-#user-nav #user_nav_flyout { line-height: 26px; }
-#user-nav #user_nav_flyout a { display: block; }
-#user-nav #user_nav_name { padding-left: 6px; }
-#user-nav #user_nav_a { margin: 0 10px; }
-#user-nav #user_nav_avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 2px;
-  vertical-align: middle;
-}
-
 .solutions tr.link:hover { background: rgb(255, 251, 228); }
 .solutions tr.link { cursor: pointer; }
 
@@ -338,8 +232,7 @@ input.autosized {
   width: 80px; margin-left: 3px;
 }
 
-#forkme { display: none; position: absolute; right: 0; top: 64px; }
-@media screen and (min-width: 1250px) { #forkme { display: block; } }
+#forkme { float: right; }
 
 .solution-row {
   cursor: pointer;
