@@ -3,7 +3,6 @@ with (scope('UserNav', 'App')) {
     UserNav._wrapper = div({ id: 'user-nav' });
     UserNav._flyout = div({ id: 'user-nav-flyout-wrapper' });
     UserNav.reload();
-    console.log('moved on');
     return UserNav._wrapper;
   });
 

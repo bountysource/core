@@ -250,33 +250,3 @@ with (scope('Columns')) {
     add_class(Columns._side, 'collapsed');
   });
 }
-
-with (scope('Split')) {
-  initializer(function() {
-    Split._main     = div({ id: 'split-main' });
-    Split._side     = div({ id: 'split-side' });
-    Split._wrapper  = div({ id: 'split-wrapper' }, Split._main, Split._side);
-  });
-
-  define('create', function() {
-    return Split._wrapper;
-  });
-
-  define('main', function() {
-    render({ into: Split._main }, arguments);
-  });
-
-  define('side', function() {
-    render({ into: Split._side }, arguments);
-  });
-
-  define('show_side', function() {
-    remove_class(Split._main, 'expanded');
-    remove_class(Split._side, 'collapsed');
-  });
-
-  define('hide_side', function() {
-    add_class(Split._main, 'expanded');
-    add_class(Split._side, 'collapsed');
-  });
-}
