@@ -1,33 +1,4 @@
 with (scope('Faq', 'App')) {
-  define('faq_sections', function() {
-    return table({ style: 'margin-bottom: 20px' },
-      tr(
-        td({ style: 'width: 33%; border-top: 0'},
-          div({ style: 'border: 1px solid #ccc; margin: 0 15px; padding: 20px'},
-            h1({style: 'text-align: center; font-size: 20px; margin: 0'}, "BACKERS"),
-            p("Do you want to fund your favorite open-source projects?"),
-            a({ 'class': 'blue', href: '#faq/backers' }, "Learn More")
-          )
-        ),
-
-        td({ style: 'width: 33%; border-top: 0'},
-          div({ style: 'border: 1px solid #ccc; margin: 0 15px; padding: 20px'},
-            h1({style: 'text-align: center; font-size: 20px; margin: 0'}, "DEVELOPERS"),
-            p("Do you want to earn money while working on open-source projects?"),
-            a({ 'class': 'blue', href: '#faq/developers' }, "Learn More")
-          )
-        ),
-        
-        td({ style: 'width: 33%; border-top: 0'},
-          div({ style: 'border: 1px solid #ccc; margin: 0 15px; padding: 20px'},
-            h1({style: 'text-align: center; font-size: 20px; margin: 0'}, "COMMITTERS"),
-            p("Do you commit code to existing open-source projects?"),
-            a({ 'class': 'blue', href: '#faq/committers' }, "Learn More")
-          )
-        )
-      )
-    );
-  });
 
   route('#faq', function() {
     render(
@@ -37,164 +8,152 @@ with (scope('Faq', 'App')) {
         "Frequently Asked Questions"
       ),
 
-      faq_sections()
-    )
-  });
-
-
-  route('#faq/committers', function() {
-    render(
-
-      breadcrumbs(
-        a({ href: '#' }, "BountySource"),
-        a({ href: '#faq' }, "Frequently Asked Questions"),
-        "Committers"
-      ),
-
-      faq_sections(),
+      h2({ style: 'text-align: center'}, "Frequently Asked Questions"),
       
-      section({ id: 'faq' },
-        dl(
-          dt("Who is a committer?"),
-          dd("Any ", a({ href: 'https://help.github.com/articles/what-are-the-different-access-permissions', target: 'blank'}, "Github user"), " who can merge pull requests into a project."),
+      //table of contents
       
-          dt("Why should I use BountySource for my project?"),
-          dd(
-            'There are several benefits to using BountySource:',
-            ul(
-              li(u('Increase development.'), ' Encourage developers to submit quality pull requests more frequently by creating bounties on existing issues.'),
-              li(u('Close issues faster.'), ' Incentivize unpopular but necessary issues by adding higher bounties on them.'),
-              li(u('Earn money.'), ' As a project committer, you are still eligible to work on issues and collect bounties within your own project. ')
-            )
+      h1('General'),
+      
+      dl(
+        dt("How does BountySource work?"),
+        dd("There are two main functions: Fundraisers and Bounties."),
+        dd(i("How Bounties work:")),
+        dd(
+            ol(
+              li('Users fund bounties on open issues or feature requests they want to see addressed.'),
+              li('These users spread the word about the bounty, enticing developers to create a solution.'),
+              li('Developers create solutions and submit them on BountySource.'),
+              li('BountySource tracks these solutions, sees which one gets accepted by the open-source project, and then pays the bounty to the developer.')
+              //li('Learn more...')
+              )
           ),
-
-          dt("How does BountySource work?"),
-          dd("It begins with a backer (or group of backers) creating a bounty on an open GitHub issue (typically a feature request or bug fix). Then, developers can come to BountySource, browse through bounties and begin working on an issue they know they can solve."),
-          dd("Once a developer finishes working on the fix, he or she will submit a pull request. When and if a committer accepts the pull request, the developer is awarded the bounty."),
-      
-          dt("...so, what's my role in all of this?"),
-          dd("The more developers there are working on issues within your project, the more pull requests you will receive. You don't need to do anything out of the ordinary - just let your community know about the bounties, check for and merge pull requests as normal, and we take care of the rest."),
-                  
-          dt("Can I work on issues and collect bounties within my own project?"),
-          dd("Yes."),
-    
-          dt("Who can collect a bounty?"),
-          dd("Anybody who has a GitHub account."),
-          
-          dt("I'm worried about introducing money into my community."),
-          dd("As long as you continue to accept or reject code based on its merit, there shouldn't be any issues. The great thing about open-source is that, at the end of the day, it doesn't matter what someone's motivations are - code speaks for itself.")
-        )
-      )
-    )
-  });
-
-
-
-  route('#faq/developers', function() {
-    render(
-
-      breadcrumbs(
-        a({ href: '#' }, "BountySource"),
-        a({ href: '#faq' }, "Frequently Asked Questions"),
-        "Developers"
+        dd(i('How Fundraiers work:')),
+        dd(
+            ol(
+              li('Anyone can come to BountySource and create a Fundraiser. Open-source fundraisers are typically used to raise money for new projects, big updates to existing projects, or to raise money for bounties.'),
+              li('The Fundraiser creator spreads the word about the Fundraiser to their communities.'),
+              li('Anyone can come to BountySource and make pledges to a Fundraiser, helping it reach its funding goal in time.')
+              //li('Learn more...')
+              )
+          ),
+        
+        dt('What makes Fundraisers different from Kickstarter, Indiegogo, etc?'),
+        dd('Several things:'),
+        dd(
+            ul(
+              li('We\'re focused entirely on open-source software, so our user base is more valuable in that sense. BountySource users are familiar with the open-source community and projects; there\'s a higher chance of gaining contributions upon discovery as opposed to crowdfunding sites that cater to all types of projects.'),
+              li('We offer reward fulfillment for physical goods - from creation to delivery. If you\'re interested in starting a Fundraiser and want shirts, stickers, thumbdrives, or more please ', a({ href: 'mailto:support@bountysource.com' }, "contact us"), ' for more details!'),
+              li('Users have a direct line of communication with the team - no hoops to jump through, you can find the entire team on ', a({ href: 'irc://irc.freenode.net/bountysource' }, "IRC (#bountysource on Freenode)"), '.'),
+              li(a({ target: '_blank', href: 'https://github.com/bountysource/frontend' }, "Our front-end is open-source"), '! See things you don\'t like? Feel free to make changes and submit the code to us for review.')
+              )
+          ),        
+        
+        dt('Why should I use BountySource?'),
+        dd(
+          'There are several benefits to using BountySource:',
+          ul(
+            li(u('Increase development.'), ' Encourage developers to submit quality pull requests more frequently by creating bounties on existing issues.'),
+            li(u('Close issues faster.'), ' Incentivize unpopular but necessary issues by adding higher bounties on them.'),
+            li(u('Earn money.'), ' Create solutions to open issues and collect bounties within any project (including your own).')
+          )
+        ),
+        
+        dt('I\'m an admin/manager/committer on a project. What\'s my role in all of this?'),
+        dd("The more developers there are working on issues within your project, the more code/solutions you will receive. You don't need to do anything out of the ordinary - just let your community know about the bounties, check for and merge code as normal, and we take care of the rest."),
+        
+        dt('I\'m worried about introducing money into my community.'),
+        dd("As long as you continue to accept or reject code based on its merit, there won't be any issues. The great thing about open-source is that, at the end of the day, it doesn't matter what someone's motivations are - code speaks for itself.")        
+  
       ),
-
-      faq_sections(),
       
-      section({ id: 'faq' },
-        dl(
-          dt("How do you know a project committer will accept any pull requests at all?"),
-          dd("We don't guarantee this, but one of the main points of open-source software and making code public is to foster improvement. Committers are always monitoring pull requests, and they likely will accept any and all code they feel is of quality."),
-
-          dt("How do I know if my solution has been accepted or rejected?"),
-          dd("We'll email you."),        
-    
-          dt("How do you determine who earns the bounty?"),
-          dd("Once a Github issue has been closed, BountySource awards the bounty to the developer whose pull request was merged."),
-        
-          dt("How do I begin working on a solution?"),                                                                                                                                                                                                             
-          dd(
-              ol(
-                li('Fork the repository.'),
-                li('Do your work.'),
-                //add 'clean merge' below
-                li('Submit a pull request on GitHub.'),
-                li('Associate this pull request with the appropriate issue on BountySource.')
-                )
-            ),
+      h1('Bounties'),
       
-          dt("When does payout occur?"),
-          dd("Once an issue is closed, we hold the bounty for a two-week dispute period. This is when backers and other developers can verify that the merged code does what it should. If there are no outstanding disputes at the end of this period, the winning developer can collect the bounty."),
+      dl(
+        dt("What is a bounty?"),
+        dd("A bounty is money offered as a reward for successfully resolving an issue within an open-source project."),
         
-          dt("How do I receive payment?"),
-          //need to add a link to payment information part of profile here
-          dd("You can receive payment via Paypal or a physical check. Before collecting a bounty, you need to fill out the Payment Information portion of your profile."),
+        dt("Who can create a bounty?"),
+        dd("Anybody with a PayPal account. We’ll be supporting other payment methods (including Google Wallet and Bitcoins) very soon!"),
+        
+        dt("What can I put bounties on?"),
+        dd("You can create bounties on any open issue within any open-source project."),
+        
+        dt("What does it cost to post a bounty?"),
+        dd("Nothing! We do not charge any fees for placing a bounty. However, you will be required to pay the full amount of the bounty in order for the bounty to show up on BountySource."),
+        
+        dt("Can several people put bounties on the same issue?"),
+        dd("Yes! That is ideal. A $10 bounty from 1 person might not be appealing, but a $200 bounty from 10 people might be."),
+        
+        dt("What happens after I post a bounty?"),
+        dd("We'll let you know when a solution is accepted for an issue you've backed. At that point, you will have two weeks to verify that it does what you want it to before we pay the developer."),
+        
+        dt("How can I keep track of all the bounties I’ve posted?"),
+        dd("You can view all of the issues you've backed via your ", a({ target: '_blank', href: 'https://www.bountysource.com/#contributions' }, "Contributions page"), '.'),
+        
+        dt("What if I'm unsatisfied with the solution to an issue I've backed?"),
+        dd("After a solution is accepted, you will have two weeks to open any disputes you may have."),
+        dd("If you feel that an accepted solution does not meet the criteria of the issue, please email us at support@bountysource.com."),// [email us at support@bountysource.com](use the same mailto: link with the subject/body as on the issue page)
+        //"mailto:support@bountysource.com?subject="+ encodeURIComponent("Dispute") +
+        //"&body=" + encodeURIComponent("Issue Name: " + solution.issue.title + "\nIssue URL: " + solution.issue.frontend_path + "\n\nPlease describe the issue you have with " + solution.person.display_name + "'s solution:")
+        
+        dt("An issue I've backed has been closed. When will the solution be made available to the public?"),
+        dd("We have no control over when a project makes a new release. We award a bounty once code has been merged into the project. The rest is up to project owners and committers."),
+        
+        dt("What happens if an issue I’ve backed is closed without a solution?"),
+        dd("You will be refunded."),
+        
+        dt("Does 100% of the bounty go to the developer?"),
+        dd("Upon payout, BountySource will charge a 5% fee in addition to any payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses."),
+        
+        dt("How do you know a project committer will accept any pull requests at all?"),
+        dd("We don't guarantee this, but one of the main points of open-source software and making code public is to foster improvement. Committers are always monitoring pull requests, and they likely will accept any and all code they feel is of quality."),
+        
+        dt("How do I know if my solution has been accepted or rejected?"),
+        dd("You can check on the status of your solutions via your ", a({ target: '_blank', href: 'https://www.bountysource.com/#solutions' }, "Solutions page"), '.'),
+        
+        dt("My solution was accepted. When do I get paid?"),
+        dd("Once a solution is accepted, it enters a two-week dispute period. If there are no outstanding disputes, you get paid after this period."),
+        
+        dt("How do I receive payment?"),
+        dd("You can receive payment via Paypal or a physical check."),
+        
+        dt("Who can collect a bounty?"),
+        dd("Anybody!"),
+        
+        dt("Do I have to pay taxes on bounties I collect?"),
+        dd("If you are in the United States and payments made to you are more than $600 for the year, we are required to issue you a Form 1099 to report the payments, which will require you to complete a Form W-9. You should consult your tax advisor as to the taxability of the payments.")
 
-          dt("What does it cost to collect a bounty?"),
-          dd("Upon payout, BountySource will charge a 5% fee in addition to payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses."),
+      ),
+      
+      h1('Fundraisers'),
+      
+      dl(
+        dt("What is a Fundraiser?"),
+        dd("A means of collecting monetary contributions for a specific goal. In particular, BountySource Fundraisers are primarily used to raise money for new projects, new versions of existing projects, or for bounties."),
         
-          //dt("What can I do with my earnings?"),
-          //dd('What you do with your money is completely up to you. You can either collect your full 90%, or make a donation to charity. We support charities like ', a({ href: 'https://www.eff.org/', target: 'blank' }, "EFF"), "."),    
-              
-          dt("Do I have to pay taxes on the bounties I collect?"),
-          dd("If you are in the United States and payments made to you are more than $600 for the year, we are required to issue you a Form 1099 to report the payments, which will require you to complete a Form W-9. You should consult your tax advisor as to the taxability of the payments."),
+        dt("Who can create a fundraiser?"),
+        dd("Anybody!"),
         
-          dt("What is your relationship with Github?"),
-          dd("We are an independent developer using the ", a({ href: 'http://developer.github.com/v3/oauth/', target: 'blank' }, "GitHub API"), ".")
-        )
-      )
+        dt("What do you charge upon completion?"),
+        dd("BountySource charges a 5% fee plus payment processing fees."),
+        
+        dt("When do I get paid?"),
+        dd("We give you the money as soon as your goal is met. If you reach your funding goal before your fundraiser deadline, we’ll pay you the goal amount immediately, and give you all the excess once the fundraiser is over.")
+        
+      ),
+      
+      h1('Is your question still not answered? ', a({ href: 'mailto:support@bountysource.com'}, "Contact us!"))
+      
     );
   });
+}
 
+//Questions to add:
 
-  route('#faq/backers', function() {
-    render(
+//dt("How do I post a bounty?")
 
-      breadcrumbs(
-        a({ href: '#' }, "BountySource"),
-        a({ href: '#faq' }, "Frequently Asked Questions"),
-        "Backers"
-      ),
+//What happens if an issue is never closed?[do we handle this?]
+//Every bounty has a six month time limit. If an issue isn’t closed within that time frame, all backers are refunded.
 
-      faq_sections(),
-      
-      section({ id: 'faq' },
-        dl(
-          dt("Who is a backer?"),
-          dd("A backer is anyone who creates a bounty on an issue."),
-        
-          dt("What is a bounty?"),
-          dd("A bounty is money offered up as a reward for successfully resolving an open issue."),
-        
-          dt("Who can create a bounty?"),
-          //add google wallet back
-          dd("Anybody who has a PayPal account."),
-        
-          dt("What can I put bounties on?"),
-          dd("You can create bounties on any open issues within any GitHub project."),
-          //dd("You have the option of donating directly to a project instead of an issue, but these are non-refundable. Donations to projects are made available to project committers who use this money to create bounties on issues they think are key to the project's development."),
-        
-          dt("What happens after I post a bounty?"),
-          dd("We'll let you know when a pull request is merged in relation to an issue you've backed. Also, you can view your ", a({ href: '#contributions', target: 'blank' }, "Contributions page"), " at any point to check for updates."),
-        
-          dt("What does it cost to post a bounty?"),
-          dd("Nothing!"),
-        
-          dt("What if I am unsatisfied with the solution to an issue I've backed?"),
-          dd("When an issue is closed, we will notify you and all other backers. You will have two weeks to open any disputes you may have with the accepted solution."),
-          dd("If you feel that an accepted solution does not meet the criteria of the issue, please email us at: ", a({ href: 'mailto:support@bountysource.com' }, "support@bountysource.com"), "."),
-        
-          dt("When will a solution be made available to the public?"),
-          dd("We have no control over when a new OSS release is made. We only award a bounty once code has been merged into the master branch of the project. The rest is up to project owners and committers."),
-
-          dt("What happens if an issue is never closed?"),
-          dd("Every bounty has a six month time limit. If you created a bounty on an issue and that is not closed within six months, you will be refunded."),
-          //dd("You can shorten the time limit on your bounty for a fee."),
-      
-          dt("Does 100% of my bounty go to the developer?"),
-          dd("Upon payout, BountySource will charge a 5% fee in addition to payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses.")
-        )
-      )
-    );
-  });
-};
+//How do you determine who earns the bounty?[do we want to distinguish between Github/supported trackers and generic?]
+//When a developer submits a Solution through BountySource, the solution enters a two week “Dispute Period”. If there are no unresolved issues after that period, the deverloper earns the bounty.
