@@ -10,7 +10,7 @@ with (scope('UserNav', 'App')) {
     UserNav._wrapper.removeEventListener('mouseover', user_nav_flyout_mouseover);
     UserNav._wrapper.removeEventListener('mouseout',  user_nav_flyout_mouseout);
 
-    render({ into: UserNav._wrapper }, div({ style: "padding: 10px; color: black;" }, 'Loading...'));
+    render({ into: UserNav._wrapper }, div({ style: "padding: 5px; color: black;" }, 'Loading...'));
 
     BountySource.user_info(function(response) {
       var user = response.data;

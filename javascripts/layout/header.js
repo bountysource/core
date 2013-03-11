@@ -22,11 +22,13 @@ with (scope('Header','App')) {
         ),
 
         Header.global_search,
-        logged_in() && NotificationFeed.create,
 
         div({ style: 'float: right; margin-top: 15px;' },
           // logged in? show the user nav dropdown
-          logged_in() && UserNav.create,
+          logged_in() && [
+            NotificationFeed.create,
+            UserNav.create
+          ],
 
           // not logged in? show the signin buttons!
           !logged_in() && Header.signin_buttons
