@@ -1,7 +1,9 @@
 with (scope('UserNav', 'App')) {
   define('create', function() {
     UserNav._wrapper = div({ id: 'user-nav' });
+    UserNav._flyout = div({ id: 'user-nav-flyout-wrapper' });
     UserNav.reload();
+    console.log('moved on');
     return UserNav._wrapper;
   });
 
@@ -9,10 +11,23 @@ with (scope('UserNav', 'App')) {
     UserNav._wrapper.removeEventListener('mouseover', user_nav_flyout_mouseover);
     UserNav._wrapper.removeEventListener('mouseout',  user_nav_flyout_mouseout);
 
-    render({ into: UserNav._wrapper }, div({ style: "padding: 10px;" }, img({ src: 'images/spinner.gif' })));
+    render({ into: UserNav._wrapper }, div({ style: "padding: 10px; color: black;" }, 'Loading...'));
 
-    BountySource.get_cached_user_info(function(user) {
+    BountySource.user_info(function(response) {
+      var user = response.data;
+
       var show_pennies = user.account.balance && user.account.balance.toString().split('.').length > 1;
+
+      render({ into: UserNav._flyout },
+        ul(
+          li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
+          li(a({ href: '#account/fundraisers' },       'Fundraisers')),
+          li(a({ href: '#contributions' },             'Contributions')),
+          li(a({ href: '#solutions' },                 'Solutions')),
+          li(a({ href: '#account' },                   'Account')),
+          li(a({ href: BountySource.logout },          'Logout'))
+        )
+      );
 
       render({ into: UserNav._wrapper },
         div({ id: 'btn' },
@@ -23,18 +38,13 @@ with (scope('UserNav', 'App')) {
             (user.account.balance > 0) && span('(' + money(user.account.balance, show_pennies) + ')')
           )
         ),
-
-        div({ id: 'user-nav-flyout-wrapper' },
-          ul(
-            li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
-            li(a({ href: '#account/fundraisers' },       'Fundraisers')),
-            li(a({ href: '#contributions' },             'Contributions')),
-            li(a({ href: '#solutions' },                 'Solutions')),
-            li(a({ href: '#account' },                   'Account')),
-            li(a({ href: BountySource.logout },          'Logout'))
-          )
-        )
+        UserNav._flyout
       );
+
+      // update the width of the flyout
+      console.log('width of wrapper:', UserNav._wrapper.offsetWidth);
+
+      UserNav._flyout.style.width = UserNav._wrapper.offsetWidth+'px';
 
       UserNav._wrapper.addEventListener('mouseover', user_nav_flyout_mouseover);
       UserNav._wrapper.addEventListener('mouseout',  user_nav_flyout_mouseout);

@@ -12,25 +12,31 @@ header section {
   padding-top: 10px;
   padding-bottom: 5px;
 }
+header section > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+header section > *:last-child {
+  margin-right: 0;
+}
 header .bountysource-logo,
 header .bountysource-logo img {
   display: inline-block;
   vertical-align: middle;
 }
 
-header #signin-buttons {
-  display: inline-block;
-}
-
+/*
+  Signin buttons
+*/
+header #signin-buttons {}
 header #signin-buttons span {
   display: inline-block;
   vertical-align: middle;
   margin-right: 10px;
   font-size: 18px;
-
   color: black;
 }
-
 header #signin-buttons ul {
   display: inline-block;
   vertical-align: middle;
@@ -59,36 +65,21 @@ header #signin-buttons ul li:last-child {
   margin-right: 0;
 }
 
-header #global-search {
-  display: inline-block;
-  margin: 0 20px;
-}
+/*
+  Search bar
+*/
+header #global-search {}
 header #global-search input[name='query'] {
   height: 30px;
   border: 1px solid #ADADAD;
   padding-left: 10px;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 2px;
 }
 
-header ul#user-action-items {
-  display: inline-block;
-  vertical-align: middle;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  position: relative;
-}
-header ul#user-action-items li {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-  min-height: 30px;
-}
-header ul#user-action-items li:last-of-type {
-  margin-right: 0;
-}
-
+/*
+  Share buttons
+*/
 header #global-social-buttons {
   display: block;
   margin-top: 3px;

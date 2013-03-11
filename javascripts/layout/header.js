@@ -1,13 +1,15 @@
 with (scope('Header','App')) {
   // reload the signin buttons on every page load, so that they have the correct redirect URl
-  with (scope('App')) { after_filter(function() { reload_signin_buttons() }) }
+  with (scope('App')) { after_filter(function() { !logged_in() && reload_signin_buttons() }) }
 
   define('create', function() {
     Header.global_social_buttons = div({ id: 'global-social-buttons' });
-    Header.signin_buttons = div({ id: 'signin-buttons' });
     Header.global_search_input = input({ name: 'query', placeholder: 'Issue URL, Project Name, Search Terms, etc.' });
     Header.global_search = form({ id: 'global-search', action: Search.search_from_homepage }, Header.global_search_input);
 
+    if (!logged_in()) {
+      Header.signin_buttons = div({ id: 'signin-buttons' });
+    }
 
     // adjust width when logged in/out
     Header.global_search_input.style.width = logged_in() ? '410px' : '395px';
@@ -20,15 +22,15 @@ with (scope('Header','App')) {
         ),
 
         Header.global_search,
+        logged_in() && NotificationFeed.create,
 
-        // logged in? show the notifications and user nav dropdowns
-        logged_in() && ul({ id: 'user-action-items' },
-          li(NotificationFeed.create),
-          li(UserNav.create)
-        ),
+        div({ style: 'float: right; margin-top: 15px;' },
+          // logged in? show the user nav dropdown
+          logged_in() && UserNav.create,
 
-        // not logged in? show the signin buttons!
-        !logged_in() && Header.signin_buttons
+          // not logged in? show the signin buttons!
+          !logged_in() && Header.signin_buttons
+        )
       ),
 
       div({ id: 'forkme' },
