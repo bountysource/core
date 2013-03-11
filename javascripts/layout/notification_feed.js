@@ -34,15 +34,8 @@ with (scope('NotificationFeed', 'App')) {
       }
     });
 
-    // show on click
-    notifications_feed.addEventListener('click', function() {
-      has_class(this, 'active') ? remove_class(this, 'active') : add_class(this, 'active');
-    });
-
-//    // clicking anywhere else closes it
-//    document.getElementById('content').addEventListener('click', function() {
-//      if (has_class(notifications_feed, 'active')) remove_class(notifications_feed, 'active');
-//    });
+    notifications_feed.addEventListener('mouseover', expand_flyout_listener);
+    notifications_feed.addEventListener('mouseout', retract_flyout_listener);
 
     return notifications_feed;
   });
@@ -69,5 +62,23 @@ with (scope('NotificationFeed', 'App')) {
         a({ href: object.person.frontend_path, style: 'font-size: 12px;' }, span(object.person.display_name)), span(' ', message)
       )
     )
+  });
+
+  // User nav flyout events
+  define('expand_flyout_listener', function(e) {
+    add_class(this, 'active');
+
+    if (this.flyout_timeout) {
+      clearTimeout(this.flyout_timeout);
+      delete this.flyout_timeout;
+    }
+  });
+
+  define('retract_flyout_listener', function(e) {
+    var notifications_wrapper = this;
+    if (this.flyout_timeout) clearTimeout(this.flyout_timeout);
+    this.flyout_timeout = setTimeout(function() {
+      remove_class(notifications_wrapper, 'active');
+    }, 250);
   });
 }

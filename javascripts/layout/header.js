@@ -26,7 +26,7 @@ with (scope('Header','App')) {
         div({ style: 'float: right; margin-top: 15px;' },
           // logged in? show the user nav dropdown
           logged_in() && [
-            NotificationFeed.create,
+            span({ style: 'margin-right: 10px;'}, NotificationFeed.create),
             UserNav.create
           ],
 

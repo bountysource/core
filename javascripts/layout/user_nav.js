@@ -41,8 +41,6 @@ with (scope('UserNav', 'App')) {
       );
 
       // update the width of the flyout
-      console.log('width of wrapper:', UserNav._wrapper.offsetWidth);
-
       UserNav._flyout.style.width = UserNav._wrapper.offsetWidth+'px';
 
       UserNav._wrapper.addEventListener('mouseover', user_nav_flyout_mouseover);
