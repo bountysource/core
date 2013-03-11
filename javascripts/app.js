@@ -11,6 +11,18 @@ with (scope('App')) {
     }
   });
 
+  // reload the signin buttons on every page load, so that they have the correct redirect URl
+  // after_filter(reload_signin_buttons);
+
+
+  // update the FB like button in place with new meta data
+  define('update_facebook_like_button', function(new_attributes) {
+    return console.log('TODO fix this');
+
+    new_attributes = new_attributes || {};
+    render({ target: 'fb-like-button' }, Facebook.create_share_button(new_attributes));
+  });
+
   /*
    * Get the pretty route, which uses the base string, with a character white listed version of the
    * source string appended to it.

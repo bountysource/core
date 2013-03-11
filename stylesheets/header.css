@@ -9,7 +9,8 @@ header {
 header section {
   width: 975px;
   margin: 0 auto;
-  padding: 10px 0;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 header .bountysource-logo,
 header .bountysource-logo img {
@@ -62,8 +63,12 @@ header #global-search {
   display: inline-block;
   margin: 0 20px;
 }
-header #global-search input {
-  width: 350px;
+header #global-search input[name='query'] {
+  height: 30px;
+  border: 1px solid #ADADAD;
+  padding-left: 10px;
+  font-size: 14px;
+  border-radius: 2px;
 }
 
 header ul#user-action-items {
@@ -81,6 +86,25 @@ header ul#user-action-items li {
   min-height: 30px;
 }
 header ul#user-action-items li:last-of-type {
+  margin-right: 0;
+}
+
+header #global-social-buttons {
+  display: block;
+  margin-top: 3px;
+}
+header #global-social-buttons ul {
+  display: block;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+header #global-social-buttons ul li {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+}
+header #global-social-buttons ul li:last-of-type {
   margin-right: 0;
 }
 

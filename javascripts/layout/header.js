@@ -1,78 +1,78 @@
 with (scope('Header','App')) {
-  // update social buttons after loading the page
-  // after_filter(reload_social_buttons);
-
+  // reload the signin buttons on every page load, so that they have the correct redirect URl
+  with (scope('App')) { after_filter(function() { reload_signin_buttons() }) }
 
   define('create', function() {
-     return header(
-       section(
-         a({ 'class': 'bountysource-logo', href: '#' },
-           img({
-             // style: 'margin-left: 20px; vertical-align: middle;',
-             src: 'images/logo-beta.png'
-           })
-         ),
+    Header.global_social_buttons = div({ id: 'global-social-buttons' });
+    Header.signin_buttons = div({ id: 'signin-buttons' });
+    Header.global_search_input = input({ name: 'query', placeholder: 'Issue URL, Project Name, Search Terms, etc.' });
+    Header.global_search = form({ id: 'global-search', action: Search.search_from_homepage }, Header.global_search_input);
 
-         global_search,
 
-         logged_in() && ul({ id: 'user-action-items' },
-           li(NotificationFeed.create),
-           li(UserNav.create),
-           div({ style: 'clear: both;' })
-         ),
+    // adjust width when logged in/out
+    Header.global_search_input.style.width = logged_in() ? '410px' : '395px';
 
-         !logged_in() && div({ id: 'signin-buttons' },
-           span('Sign In with:'),
+    var header_element = header(
+      section(
+        a({ 'class': 'bountysource-logo', href: '#' },
+          img({ src: 'images/logo.png' }),
+          Header.global_social_buttons
+        ),
 
-           ul(
-             li(a({ href: Github.auth_url() },   img({ src: 'images/github.png' }))),
-             li(a({ href: Facebook.auth_url() }, img({ src: 'images/facebook.png' }))),
-             li(a({ href: Twitter.auth_url() },  img({ src: 'images/twitter.png' }))),
-             li(a({ href: '#signin/email' },     img({ src: 'images/facebook.png' })))
-           )
-         ),
+        Header.global_search,
 
-         div({ style: 'clear: both;' })
-       ),
+        // logged in? show the notifications and user nav dropdowns
+        logged_in() && ul({ id: 'user-action-items' },
+          li(NotificationFeed.create),
+          li(UserNav.create)
+        ),
 
-       div({ id: 'forkme' },
-         a({ href: "https://github.com/bountysource/frontend", target: '_blank' },
-           img({ src: "images/forkme.png", alt: "Fork me on GitHub"})
-         )
-       )
-     );
+        // not logged in? show the signin buttons!
+        !logged_in() && Header.signin_buttons
+      ),
+
+      div({ id: 'forkme' },
+        a({ href: "https://github.com/bountysource/frontend", target: '_blank' },
+          img({ src: "images/forkme.png", alt: "Fork me on GitHub"})
+        )
+      )
+    );
+
+    reload_social_buttons();
+
+    return header_element;
   });
 
   define('reload_social_buttons', function() {
-    render({ target: 'global-social-buttons' },
+    render({ into: Header.global_social_buttons },
       ul(
-        li({ style: 'padding-top: 3px;' }, Twitter.follow_button),
-        // li({ style: 'height: 20px;' }, Facebook.follow_button),
-        li({ style: 'padding-top: 3px;' }, Twitter.share_button),
+        li(Twitter.follow_button({
+          'data-count':             'none',
+          'data-show-screen-name':  false
+        })),
 
-        li({ style: 'padding-top: 3px;' }, GooglePlus.like_button),
+        li(GooglePlus.like_button({
+          'data-annotation': 'none'
+        })),
 
-        // li({ style: 'width: 100px;' }, Facebook.like_button({ 'data-layout': 'button_count', 'data-name': 'name', style: 'z-index: 3;' })),
-
-        li({ id: 'fb-like-button' }, Facebook.create_share_button({
-          name:         'BountySource',
-          caption:      '',
-          description:  '',
-          link:         window.location.href,
-          // picture:      'images/bountysource-icon.png'
-        }))
+        li(Facebook.follow_button)
       )
     );
+
     Twitter.process_elements();
     GooglePlus.process_elements();
     Facebook.process_elements();
   });
 
-  // update the FB like button in place with new meta data
-  define('update_facebook_like_button', function(new_attributes) {
-    return console.log('TODO fix this');
-
-    new_attributes = new_attributes || {};
-    render({ target: 'fb-like-button' }, Facebook.create_share_button(new_attributes));
+  define('reload_signin_buttons', function() {
+    render({ into: Header.signin_buttons },
+      span('Sign In with:'),
+      ul(
+        li(a({ href: Github.auth_url() },   img({ src: 'images/github.png' }))),
+        li(a({ href: Facebook.auth_url() }, img({ src: 'images/facebook.png' }))),
+        li(a({ href: Twitter.auth_url() },  img({ src: 'images/twitter.png' }))),
+        li(a({ href: '#signin/email' },     img({ src: 'images/facebook.png' })))
+      )
+    );
   });
 }

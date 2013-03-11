@@ -32,12 +32,6 @@ with (scope('App')) {
     return scope.rendered_default_layout;
   });
 
-  define('global_search', function() {
-    return form({ id: 'global-search', action: Search.search_from_homepage },
-      search({ name: 'query', placeholder: 'Issue URL, Project Name, Search Terms, etc.' })
-    );
-  });
-
   define('chatbar', function() {
     return div({ 'class': 'active minimized', id: 'chatbar' },
       a({ href: Chat.hide_chat, 'class': 'close-button' }, 'X'),
