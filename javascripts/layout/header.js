@@ -59,7 +59,9 @@ with (scope('Header','App')) {
           'data-annotation': 'none'
         })),
 
-        li(Facebook.follow_button)
+        li(Facebook.like_button({
+          'data-href': 'https://www.bountysource.com'
+        }))
       )
     );
 
