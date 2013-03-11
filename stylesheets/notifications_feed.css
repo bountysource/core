@@ -42,13 +42,12 @@
 #notifications-feed #notifications-feed-flyout-outer {
   cursor: default;
   z-index: 3;
-  position:  absolute;
+  position: absolute;
+  margin: 21px 0 0 -250px;
   display: none;
   background: white;
-  width: 360px;
+  width: 300px;
   min-height: 30px;
-  right: 170px;
-  top: 55px;
   border: 1px solid #BBB;
   border-top: 0;
   border-radius: 0 0 3px 3px;
@@ -70,7 +69,7 @@
 
 #notifications-feed .notification-message {
   cursor: pointer;
-  padding: 0 5px;
+  padding: 5px;
   border-bottom: 1px solid #BBB;
 
   -webkit-transition: background ease-in 100ms;

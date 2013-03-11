@@ -90,9 +90,10 @@ with (scope('Facebook','App')) {
     options = options || {};
     options['class']            = 'fb-like';
     options['data-send']        = false;
+    options['data-layout']      = options['data-layout']      || 'button_count'
     options['data-href']        = options['data-href']        || window.location.href;
-    options['data-width']       = options['data-width']       || 500;
-    options['data-show-faces']  = options['data-show-faces']  || true;
+//    options['data-width']       = options['data-width']       || 50;
+    options['data-show-faces']  = options['data-show-faces']  || false;
     return div(options);
   });
 
