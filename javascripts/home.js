@@ -17,7 +17,10 @@ with (scope('Home', 'App')) {
 
     Home.top_box = div({ id: 'top-box' },
       h1('The funding platform for open-source software.'),
-      h2('Improve the open-source projects you love by creating and collecting bounties!'),
+      h2({ style: 'margin-bottom: 0;' }, 'Improve the open-source projects you love by creating and collecting bounties!'),
+
+      a({ id: 'learn-more', 'class': 'blue', href: '#faq', style: 'display: inline-block; width: 150px;' }, "Learn More"),
+
       div({ style: 'clear: both;' }),
       recent_people_div
     );
@@ -41,7 +44,7 @@ with (scope('Home', 'App')) {
 
   // render the homepage box, which always has recent signups at the bottom
   define('recent_people_div', function() {
-    var recent_people_div = div();
+    var recent_people_div = div({ style: 'margin-top: 10px;' });
     BountySource.recent_people(function(response) {
       // expand the top box
       add_class(Home.top_box, 'loaded');
@@ -49,8 +52,8 @@ with (scope('Home', 'App')) {
       var recent_people = response.data;
 
       render({ into: recent_people_div },
-        div({ style: "padding: 10px" },
-          div({ style: 'color: #888; margin-bottom: 5px; text-align: center' }, "Join ", formatted_number(recent_people.total_count), " others in the BountySource revolution!"),
+        div({ style: "padding: 0 10px;" },
+          div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' }, "Join ", formatted_number(recent_people.total_count), " others in the BountySource revolution!"),
 
           (recent_people.people||[]).map(function(person) {
             return div({ 'class': 'round-avatar' },

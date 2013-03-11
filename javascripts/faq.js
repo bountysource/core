@@ -23,7 +23,7 @@ with (scope('Faq', 'App')) {
 
       Columns.side(
         ul({ id: 'faq-nav' },
-          li(a({ 'class': 'faq-nav-button', id: 'nav-general',     href: curry(scrollTo, 0, 0) }, 'General')),
+          li(a({ 'class': 'faq-nav-button active', id: 'nav-general',     href: curry(scrollTo, 0, 0) }, 'General')),
           li(a({ 'class': 'faq-nav-button', id: 'nav-bounties',    href: curry(scroll_to_marker, location_markers.bounties) },     'Bounties')),
           li(a({ 'class': 'faq-nav-button', id: 'nav-fundraisers', href: curry(scroll_to_marker, location_markers.fundraisers) },  'Fundraisers'))
         )

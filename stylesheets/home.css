@@ -34,20 +34,34 @@ section#homepage .leaderboard li { list-style: none; margin-top: 8px; width: 195
 section#homepage .leaderboard img { vertical-align: middle; margin-right: 8px }
 
 section#homepage #top-box {
+  text-align: center;
   background: #f2f3f2;
   border: 10px solid white;
   box-shadow: 0 0 5px #ccc8be;
   margin-bottom: 15px;
   overflow: hidden;
 
-  height: 110px;
+  height: 160px;
 
   -webkit-transition: ease-in 100ms;
   -moz-transition:    ease-in 100ms;
   -o-transition:      ease-in 100ms;
   transition:         ease-in 100ms;
 }
-
 section#homepage #top-box.loaded {
-  height: 280px;
+  height: 325px;
+}
+section#homepage #top-box a#learn-more {
+  display: inline-block;
+  width: 100px;
+  text-decoration: none;
+  margin: 10px 0;
+
+  -webkit-transition: ease-in 100ms;
+  -moz-transition:    ease-in 100ms;
+  -o-transition:      ease-in 100ms;
+  transition:         ease-in 100ms;
+}
+section#homepage #top-box a#learn-more:hover {
+  box-shadow: 0 0 15px #56ACF0;
 }
