@@ -174,7 +174,10 @@ a.card { text-decoration: none; }
 /*
   List of bounties on issues for project
 */
-.card.project .issues-with-bounties { padding: 0 10px; }
+.card.project .issues-with-bounties {
+  padding: 0 10px;
+  height: 95px;
+}
 .card.project .issues-with-bounties > * {}
 .card.project .issues-with-bounties > * > *:first-child { color: #00DB00; font-size: 16px; margin-right: 5px; }
 .card.project .issues-with-bounties > * > *:last-child { color: black; font-size: 12px; }
