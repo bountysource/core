@@ -22,8 +22,8 @@
 }
 
 #faq-nav {
+  width: 275px;
   position: fixed;
-  width: 200px;
   list-style-type: none;
   padding: 0;
 }
