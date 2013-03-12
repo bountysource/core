@@ -17,7 +17,8 @@ with (scope('Fundraiser', 'App')) {
     var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' });
     var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner);
 
-    progress_bar_inner.style.width = funding_percentage + '%';
+    // add the percentage to progress bar, cap at 100%
+    progress_bar_inner.style.width = (funding_percentage > 100 ? 100 : funding_percentage) + '%';
 
     return a({ 'class': 'card fundraiser', href: fundraiser.frontend_path },
       image_element,
@@ -30,9 +31,9 @@ with (scope('Fundraiser', 'App')) {
 
       div({ 'class': 'fundraiser-stats' },
         div({ 'class': 'fundraiser-data' },
-          span({ style: 'color: #00B900;' }, money(fundraiser.total_pledged)), ' raised',
+          span({ style: 'color: #00B900; font-size: 16px;' }, money(fundraiser.total_pledged)), ' raised',
           br,
-          span({ style: 'color: #00B900;' }, formatted_number(fundraiser.days_remaining)), ' days left'
+          span({ style: 'color: #00B900; font-size: 16px;' }, formatted_number(fundraiser.days_remaining)), ' days left'
         ),
 
         div({ 'class': 'fundraiser-percentage' }, parseInt(funding_percentage), '%')

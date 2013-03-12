@@ -10,11 +10,9 @@ with (scope('Home', 'App')) {
     );
   });
 
-  define('fundraiser_card_row_div', div({ 'class': 'card-row-wrapper', id: 'fundraiser-card-row-wrapper' }));
-  define('issue_card_row_div',      div({ 'class': 'card-row-wrapper', id: 'issue-card-row-wrapper' }));
-  define('project_card_row_div',    div({ 'class': 'card-row-wrapper', id: 'project-card-row-wrapper' }));
+  define('cards_per_row', 4);
 
-  route ('#', function() {
+  route('#', function() {
     // render nothing, then hide the content for now... we're using before-content!!
     render('');
     hide('content');
@@ -36,53 +34,96 @@ with (scope('Home', 'App')) {
       section({ id: 'homepage' },
         Home.top_box,
 
-        div({ style: 'text-align: center;' },
-          fundraiser_card_row_div,
-
-          project_card_row_div,
-
-          false && issue_card_row_div
+        div({ id: 'card-rows-container' },
+          fundraiser_cards_row,
+          project_cards_row
         )
       )
     );
+  });
 
-    BountySource.get_cards(page_state.query, function(response) {
+  define('fundraiser_cards_row', function(title) {
+    var fundraiser_card_row_wrapper = div({ 'class': 'card-row-wrapper', id: 'fundraiser-card-row-wrapper' });
+
+    BountySource.get_fundraiser_cards(function(response) {
       if (response.meta.success) {
-        if (response.data.fundraisers) {
-          render({ into: fundraiser_card_row_div },
-            div({ 'class': 'card-row header' }, span('Fundraisers')),
+        var fundraiser_cards_row = div({ 'class': 'card-row fundraisers', id: 'fundraiser-cards-row' },
+          response.data.map(function(fundraiser) { return Fundraiser.card(fundraiser) })
+        );
 
-            div({ 'class': 'card-row', id: 'fundraiser-card-row' },
-              response.data.fundraisers.map(function(fundraiser) { return Fundraiser.card(fundraiser) })
-            )
-          );
-        }
-
-        if (response.data.issues) {
-          render({ into: issue_card_row_div },
-            div({ 'class': 'card-row header' }, span('Issues')),
-
-            div({ 'class': 'card-row', id: 'issue-card-row' },
-              response.data.issues.map(function(issue) { return Issue.card(issue) })
-            )
-          );
-        }
-
-        if (response.data.repositories) {
-          console.log('projects', response.data.repositories);
-
-          render({ into: project_card_row_div },
-            div({ 'class': 'card-row header' }, span('Projects')),
-
-            div({ 'class': 'card-row', id: 'project-card-row' },
-              response.data.repositories.map(function(project) { return Project.card(project) })
-            )
-          )
-        }
+        render({ into: fundraiser_card_row_wrapper },
+          card_row_header('Featured Fundraisers', fundraiser_cards_row, {
+            show_nav_buttons: response.data.length > cards_per_row
+          }),
+          fundraiser_cards_row
+        );
       } else {
-        throw('cards fail');
+        console.log('Fundraiser cards failed to load!');
       }
     });
+
+    return fundraiser_card_row_wrapper;
+  });
+
+  define('project_cards_row', function(title) {
+    var project_cards_row_wrapper = div({ 'class': 'card-row-wrapper', id: 'project-card-row-wrapper' });
+
+    BountySource.get_project_cards(function(response) {
+      if (response.meta.success) {
+        var project_cards_row = div({ 'class': 'card-row projects', id: 'project-cards-row' },
+          response.data.map(function(project) { return Project.card(project) })
+        );
+
+        render({ into: project_cards_row_wrapper },
+          card_row_header('Open Bounties by Project', project_cards_row, {
+            show_nav_buttons: response.data.length > cards_per_row
+          }),
+          project_cards_row
+        );
+      } else {
+        console.log('Project cards failed to load!');
+      }
+    });
+
+    return project_cards_row_wrapper;
+  });
+
+  define('card_row_header', function(title, row_element, options) {
+    options = options || {};
+    options.show_nav_buttons = options.show_nav_buttons || false;
+
+    // number of pixels to scroll to show the next 4 cards
+    var scroll_amount = 992;
+
+    var previous_button = div({ 'class': 'card-nav-button previous' }, div('<')),
+        next_button     = div({ 'class': 'card-nav-button next' }, div('>'));
+
+    var nav_button_listener = function(row_element, event) {
+      var button_element = this;
+
+      // add class that makes all cards fade to opacity 0
+      add_class(row_element, 'transition');
+
+      // set animation to let animation play before changing cards
+      setTimeout(function() {
+        remove_class(row_element, 'transition');
+
+        if (has_class(button_element, 'previous')) {
+          row_element.scrollLeft -= scroll_amount;
+        } else if (has_class(button_element, 'next')) {
+          row_element.scrollLeft += scroll_amount;
+        }
+      }, 100);
+    };
+
+    previous_button.addEventListener('click', curry(nav_button_listener, row_element));
+    next_button.addEventListener('click',     curry(nav_button_listener, row_element));
+
+    return div({ 'class': 'card-row header' },
+      options.show_nav_buttons && previous_button,
+      div({ 'class': 'card-nav-title' }, title),
+      options.show_nav_buttons && next_button
+    );
   });
 
   // render the homepage box, which always has recent signups at the bottom
@@ -115,98 +156,4 @@ with (scope('Home', 'App')) {
     return recent_people_div;
   });
 
-  define('clear_cards', function() {
-    // alert('clear cards');
-    page_state.current_cards = [];
-    page_state.can_load_more_cards = true;
-    render({ into: 'column-container' },
-      div({ 'class': 'card-column' }),
-      div({ 'class': 'card-column' }),
-      div({ 'class': 'card-column' }),
-      div({ 'class': 'card-column' })
-    );
-  });
-
-  define('add_more_cards', function() {
-    if (!page_state.can_load_more_cards) return;
-
-    show('card-loader-div');
-    render({ into: 'card-loader-div'}, 'Loading...');
-
-
-//    _gaq.push(['_trackEvent', 'Homepage', 'Show More Cards']);
-
-    page_state.can_load_more_cards = false;
-    BountySource.get_more_cards(page_state.current_cards, page_state.query, function(response) {
-
-      console.log(response);
-
-
-      var col_container = document.getElementById('column-container');
-      if (!col_container) return;
-
-      if (response.data.length == 0) {
-        render({ into: 'card-loader-div' }, 'No results. Try broadening filter');
-        return;
-      }
-
-      var j, target;
-      for (j=0; j < response.data.fundraisers.length; j++) {
-        var fundraiser = response.data.fundraisers[j];
-
-        page_state.current_cards.push(fundraiser.card_id);
-
-        target = col_container.childNodes[0];
-        for (var k=1; k < col_container.childNodes.length; k++) {
-          if (col_container.childNodes[k].clientHeight < target.clientHeight) target = col_container.childNodes[k];
-        }
-
-        target.appendChild(Fundraiser.card(fundraiser));
-      }
-
-//      for (j=0; j < response.data.repositories.length; j++) {
-//        var card = response.data.repositories[j];
-//        page_state.current_cards.push(card.card_id);
-//
-//        target = col_container.childNodes[0];
-//        for (var k=1; k < col_container.childNodes.length; k++) {
-//          if (col_container.childNodes[k].clientHeight < target.clientHeight) target = col_container.childNodes[k];
-//        }
-//
-//        target.appendChild(Repository.repository_card(card));
-//
-//      }
-
-      for (j=0; j < response.data.issues.length; j++) {
-        var card = response.data.issues[j];
-        page_state.current_cards.push(card.card_id);
-
-        target = col_container.childNodes[0];
-        for (var k=1; k < col_container.childNodes.length; k++) {
-          if (col_container.childNodes[k].clientHeight < target.clientHeight) target = col_container.childNodes[k];
-        }
-
-        target.appendChild(Issue.issue_card(card));
-
-      }
-
-      hide('card-loader-div');
-
-      // if we didn't get a full response, give up
-      var card_count = response.data.fundraisers.length + response.data.issues.length;
-      if (card_count >= 50) page_state.can_load_more_cards = true;
-    });
-  });
-
-
-  define('check_scroll_to_see_if_we_need_more_cards', function() {
-    if (get_route() != '#') return;
-
-    var pageHeight = document.documentElement.scrollHeight;
-    var clientHeight = document.documentElement.clientHeight;
-    var scrollPos = document.documentElement.scrollTop || window.pageYOffset;
-    if ((pageHeight - (scrollPos + clientHeight) < 100)) add_more_cards();
-
-    setTimeout(check_scroll_to_see_if_we_need_more_cards, 500);
-  });
 }

@@ -1,4 +1,4 @@
-section#homepage { width: 978px; margin: 0 auto; }
+section#homepage { width: 994px; margin: 0 auto; }
 section#homepage .box { padding: 10px; background: #fdfdfd; border: 1px solid #ccc8be; border-radius: 3px 3px; box-shadow: 0 0 5px #ccc8be; }
 section#homepage .box .inner { padding: 20px }
 
@@ -38,7 +38,7 @@ section#homepage #top-box {
   background: #f2f3f2;
   border: 10px solid white;
   box-shadow: 0 0 5px #ccc8be;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   overflow: hidden;
 
   height: 160px;

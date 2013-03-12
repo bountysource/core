@@ -206,18 +206,6 @@ with (scope('BountySource')) {
     api('/user/fundraisers/'+id, 'DELETE', callback);
   });
 
-  define('get_more_cards', function(ignore, query, callback) {
-    api('/cards', 'GET', { ignore: ignore, query: query }, callback);
-  });
-
-  define('get_cards', function(query, callback) {
-    if (arguments.length == 2) {
-      api('/cards', { query: query }, callback);
-    } else {
-      api('/cards', callback);
-    }
-  });
-
   define('recent_people', function(callback) {
     api('/user/recent', 'GET', callback);
   });
@@ -299,5 +287,18 @@ with (scope('BountySource')) {
 
   define('payout_solution', function(id, data, callback) {
     api('/user/solutions/'+id+'/payout', 'POST', data, callback);
+  });
+
+
+
+  /*
+  * Cards
+  * */
+  define('get_fundraiser_cards', function(callback) {
+    api('/fundraisers/cards', callback);
+  });
+
+  define('get_project_cards', function(callback) {
+    api('/trackers/cards', callback);
   });
 }

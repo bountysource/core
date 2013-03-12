@@ -10,8 +10,6 @@
   border: 1px solid #D5D5D5;
   box-shadow: 0 0 5px #ccc8be;
   height: 400px;
-
-  /*width: 323px;*/
   width: 236px;
 
   -webkit-transition: ease-in-out 100ms;
@@ -32,27 +30,75 @@ a.card { text-decoration: none; }
 /*************************
   Card Rows
 *************************/
+#homepage #card-rows-container > *.card-row-wrapper {
+  margin-bottom: 10px;
+}
+#homepage #card-rows-container > *.card-row-wrapper:last-of-type {
+  margin-bottom: 0;
+}
 .card-row {
   padding: 5px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   white-space: nowrap;
+  background: rgba(255, 255, 255, 0.29);
+  border-radius: 0 0 3px 3px;
+  border: 1px solid #D1D1D1;
+  box-shadow: 0 0 5px #ccc8be;
 }
 .card-row .card {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 .card-row .card:last-of-type {
   margin-right: 0;
 }
-#homepage .card-row.header {
-  text-align: center;
+
+/* when transitioning, hide all cards first */
+.card-row.transition .card {
+  opacity: 0;
 }
-#homepage .card-row.header h1 {
-  margin: 5px;
+
+/*************************
+  Card Row Header
+*************************/
+#homepage .card-row.header {
   padding: 0;
-  font-size: 25px;
-  font-weight: normal;
-  color: gray;
+  text-align: center;
+  background: #F2F3F2;
+  border-radius: 3px 3px 0 0;
+  border-bottom: 0;
+  font-size: 16px;
+  color: #B4B4B4;
+}
+#homepage .card-row.header .card-nav-title {
+  display: inline-block;
+  margin: 10px 0;
+}
+/* nav buttons */
+#homepage .card-row.header .card-nav-button {
+  text-align: center;
+  background: #E4E4E4;
+  width: 100px;
+  cursor: pointer;
+
+  -webkit-transition: ease-in-out 100ms;
+  -moz-transition:    ease-in-out 100ms;
+  -o-transition:      ease-in-out 100ms;
+  transition:         ease-in-out 100ms;
+}
+#homepage .card-row.header .card-nav-button:hover { background: #E4DEDE; }
+#homepage .card-row.header .card-nav-button div {
+  font-size: 20px;
+  padding: 10px 0;
+}
+#homepage .card-row.header .card-nav-button.next {
+  border-left: 1px solid #D1D1D1;
+  float: right;
+  border-radius: 0 3px 0 0;
+}
+#homepage .card-row.header .card-nav-button.previous {
+  border-right: 1px solid #D1D1D1;
+  float: left;
+  border-radius: 3px 0 0 0;
 }
 
 
@@ -111,6 +157,7 @@ a.card { text-decoration: none; }
   color: gray;
   padding: 0 10px;
 }
+/* days left, money raised, etc. */
 .card.fundraiser .fundraiser-stats .fundraiser-data {
   display: inline-block;
   vertical-align: middle;
@@ -146,6 +193,7 @@ a.card { text-decoration: none; }
   Project cards
 *************************/
 .card.project { height: 332px; }
+.card.project:hover { background: #F2F9FF; }
 .card.project > * { margin-bottom: 10px; }
 .card.project > *:last-of-type { margin-bottom: 0; }
 
@@ -161,13 +209,14 @@ a.card { text-decoration: none; }
   background-color: rgba(82, 82, 82, 0.8);
   padding: 15px;
   border-radius: 0 0 0 15px;
-  color: #77CC47;
+  color: #1FA8CA;
   font-size: 25px;
   float: right;
 }
 .card.project .project-name {
   font-size: 18px;
-  color: #00C200;
+  /*color: #00C200;*/
+  color: #1FA8CA;
   padding: 0 10px;
 }
 
@@ -178,15 +227,21 @@ a.card { text-decoration: none; }
   padding: 0 10px;
   height: 95px;
 }
-.card.project .issues-with-bounties > * {}
-.card.project .issues-with-bounties > * > *:first-child { color: #00DB00; font-size: 16px; margin-right: 5px; }
-.card.project .issues-with-bounties > * > *:last-child { color: black; font-size: 12px; }
+/* issue total bounty */
+.card.project .issues-with-bounties > * > *:first-child {
+  display: inline-block;
+  color: #31D3FC;
+  font-size: 16px;
+  margin-right: 5px;
+}
+/* issue title */
+.card.project .issues-with-bounties > * > *:last-child { color: gray; font-size: 12px; }
 
 /*
   Big button at bottom
 */
 .card.project .bottom-button {
-  background: #5ADD5A;
+  background: #23BDE4;
   text-align: center;
   padding: 10px 0;
   color: white;
