@@ -84,6 +84,13 @@ a.card { text-decoration: none; }
   -moz-transition:    ease-in-out 100ms;
   -o-transition:      ease-in-out 100ms;
   transition:         ease-in-out 100ms;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 #homepage .card-row.header .card-nav-button:hover { background: #E4DEDE; }
 #homepage .card-row.header .card-nav-button div {
