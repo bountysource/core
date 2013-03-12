@@ -173,11 +173,9 @@ with (scope('Edit', 'Fundraiser')) {
                   div({ style: 'font-size: 12px' }, "Home page card preview. Click to preview full fundraiser page:")
                 ),
 
-                div({ style: 'background: #eee; padding: 10px; border-bottom: 1px solid #CCC;' },
+                div({ style: 'padding: 10px; border-bottom: 1px solid #CCC;' },
                   // this is re-rendered after each save
-                  div({ onClick: show_preview },
-                    div({ id: 'fundraiser-card-preview' }, curry(fundraiser_card, fundraiser))
-                  )
+                  div({ id: 'fundraiser-card-preview' }, Fundraiser.card(fundraiser, { href: show_preview }))
                 ),
 
                 !fundraiser.published && div({ style: 'padding: 10px;' }, curry(publish_button, fundraiser))

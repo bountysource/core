@@ -88,3 +88,4 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
 #rewards-create textarea,
 #rewards .reward-row textarea { width: 400px; height: 75px; }
 
+#fundraiser-card-preview { text-align: center; }

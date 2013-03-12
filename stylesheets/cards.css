@@ -2,15 +2,17 @@
   All cards
 */
 .card {
+  text-align: left;
   display: inline-block;
   vertical-align: top;
   color: black;
   background: white;
   border: 1px solid #D5D5D5;
+  box-shadow: 0 0 5px #ccc8be;
   height: 400px;
 
   /*width: 323px;*/
-  width: 238px;
+  width: 236px;
 
   -webkit-transition: ease-in-out 100ms;
   -moz-transition:    ease-in-out 100ms;
@@ -21,12 +23,15 @@ a.card { text-decoration: none; }
 .card-row-wrapper {
   margin: auto;
 }
+.card:hover {
+  background: #F3FFF2;
+}
 
 /*
   Card Rows
 */
 .card-row {
-  padding: 5px 0;
+  padding: 5px;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -102,13 +107,13 @@ a.card { text-decoration: none; }
 .card.fundraiser .fundraiser-stats {
   font-size: 12px;
   color: gray;
-  padding: 0 5px;
+  padding: 0 10px;
 }
 .card.fundraiser .fundraiser-stats .fundraiser-data {
   display: inline-block;
   vertical-align: middle;
   text-align: left;
-  width: 130px;
+  width: 115px;
 }
 .card.fundraiser .fundraiser-stats .fundraiser-percentage {
   display: inline-block;

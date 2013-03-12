@@ -35,8 +35,10 @@ with (scope('Home', 'App')) {
       section({ id: 'homepage' },
         Home.top_box,
 
-        fundraiser_card_row_div,
-        issue_card_row_div
+        div({ style: 'text-align: center;' },
+          fundraiser_card_row_div,
+          issue_card_row_div
+        )
       )
     );
 
