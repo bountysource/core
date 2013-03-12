@@ -16,7 +16,7 @@ with (scope('Fundraiser', 'App')) {
     // if (funding_percentage > 100) funding_percentage = 100;
 
     var image_element = div({ 'class': 'fundraiser-image' });
-    image_element.style['background-image'] = 'url(' + (fundraiser.image_url || 'images/logo.png') + ')';
+    image_element.style['background-image'] = 'url(' + (fundraiser.image_url || 'images/logo-gray.png') + ')';
 
     var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' });
     var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner);
