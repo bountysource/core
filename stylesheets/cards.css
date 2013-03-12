@@ -1,6 +1,6 @@
-/*
+/*************************
   All cards
-*/
+*************************/
 .card {
   text-align: left;
   display: inline-block;
@@ -27,9 +27,11 @@ a.card { text-decoration: none; }
   background: #F3FFF2;
 }
 
-/*
+
+
+/*************************
   Card Rows
-*/
+*************************/
 .card-row {
   padding: 5px;
   overflow-x: auto;
@@ -55,9 +57,9 @@ a.card { text-decoration: none; }
 
 
 
-/*
+/*************************
   Fundraiser cards
-*/
+*************************/
 .card.fundraiser {}
 .card.fundraiser > * {
   margin-bottom: 5px;
@@ -124,7 +126,6 @@ a.card { text-decoration: none; }
   width: 100px;
 }
 
-
 /*
   Fundraiser card progress bar
 */
@@ -139,9 +140,59 @@ a.card { text-decoration: none; }
 }
 
 
+
+
+/*************************
+  Project cards
+*************************/
+.card.project { height: 332px; }
+.card.project > * { margin-bottom: 10px; }
+.card.project > *:last-of-type { margin-bottom: 0; }
+
+.card.project .project-image {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 100%;
+  background-color: #EEE;
+  border-bottom: 1px solid #D5D5D5;
+  height: 150px;
+}
+.card.project .project-bounty-total {
+  background-color: rgba(82, 82, 82, 0.8);
+  padding: 15px;
+  border-radius: 0 0 0 15px;
+  color: #77CC47;
+  font-size: 25px;
+  float: right;
+}
+.card.project .project-name {
+  font-size: 18px;
+  color: #00C200;
+  padding: 0 10px;
+}
+
 /*
-  Filter Box
+  List of bounties on issues for project
 */
+.card.project .issues-with-bounties { padding: 0 10px; }
+.card.project .issues-with-bounties > * {}
+.card.project .issues-with-bounties > * > *:first-child { color: #00DB00; font-size: 16px; margin-right: 5px; }
+.card.project .issues-with-bounties > * > *:last-child { color: black; font-size: 12px; }
+
+/*
+  Big button at bottom
+*/
+.card.project .bottom-button {
+  background: #5ADD5A;
+  text-align: center;
+  padding: 10px 0;
+  color: white;
+}
+
+
+/*************************
+  Filter Box
+*************************/
 #cardfilterbox {
   text-align: left; padding: 10px; margin: 20px 0 10px 0; background: #f2f3f2; border: 10px solid white; box-shadow: #ccc8be 0px 0px 5px;
 }

@@ -12,6 +12,7 @@ with (scope('Home', 'App')) {
 
   define('fundraiser_card_row_div', div({ 'class': 'card-row-wrapper', id: 'fundraiser-card-row-wrapper' }));
   define('issue_card_row_div',      div({ 'class': 'card-row-wrapper', id: 'issue-card-row-wrapper' }));
+  define('project_card_row_div',    div({ 'class': 'card-row-wrapper', id: 'project-card-row-wrapper' }));
 
   route ('#', function() {
     // render nothing, then hide the content for now... we're using before-content!!
@@ -37,7 +38,10 @@ with (scope('Home', 'App')) {
 
         div({ style: 'text-align: center;' },
           fundraiser_card_row_div,
-          issue_card_row_div
+
+          project_card_row_div,
+
+          false && issue_card_row_div
         )
       )
     );
@@ -49,7 +53,7 @@ with (scope('Home', 'App')) {
             div({ 'class': 'card-row header' }, span('Fundraisers')),
 
             div({ 'class': 'card-row', id: 'fundraiser-card-row' },
-              response.data.fundraisers.map(Fundraiser.card)
+              response.data.fundraisers.map(function(fundraiser) { return Fundraiser.card(fundraiser) })
             )
           );
         }
@@ -59,9 +63,21 @@ with (scope('Home', 'App')) {
             div({ 'class': 'card-row header' }, span('Issues')),
 
             div({ 'class': 'card-row', id: 'issue-card-row' },
-              response.data.issues.map(Issue.card)
+              response.data.issues.map(function(issue) { return Issue.card(issue) })
             )
           );
+        }
+
+        if (response.data.repositories) {
+          console.log('projects', response.data.repositories);
+
+          render({ into: project_card_row_div },
+            div({ 'class': 'card-row header' }, span('Projects')),
+
+            div({ 'class': 'card-row', id: 'project-card-row' },
+              response.data.repositories.map(function(project) { return Project.card(project) })
+            )
+          )
         }
       } else {
         throw('cards fail');
