@@ -7,7 +7,9 @@ with (scope('Fundraiser', 'App')) {
 
     var funding_percentage = parseFloat(100 * (fundraiser.total_pledged / fundraiser.funding_goal));
     if (funding_percentage < 1) funding_percentage = 1;
-    if (funding_percentage > 100) funding_percentage = 100;
+
+    // allow > 100% ~=--= YOLO =--=~
+    // if (funding_percentage > 100) funding_percentage = 100;
 
     var image_element = div({ 'class': 'fundraiser-image' });
     image_element.style['background-image'] = 'url(' + (fundraiser.image_url || 'images/logo.png') + ')';
