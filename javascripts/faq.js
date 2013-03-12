@@ -48,7 +48,7 @@ with (scope('Faq', 'App')) {
                 //li('Learn more...')
               )
             ),
-            dd(i('How Fundraiers work:')),
+            dd(i('How Fundraisers work:')),
             dd(
               ol(
                 li('Anyone can come to BountySource and create a Fundraiser. Open-source fundraisers are typically used to raise money for new projects, big updates to existing projects, or to raise money for bounties.'),
