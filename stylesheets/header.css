@@ -68,8 +68,9 @@ header #signin-buttons ul li:last-child {
 /*
   Search bar
 */
-header #global-search {}
+header #global-search { margin-left: 20px; }
 header #global-search input[name='query'] {
+  width: 300px;
   height: 30px;
   border: 1px solid #ADADAD;
   padding-left: 10px;

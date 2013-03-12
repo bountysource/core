@@ -11,9 +11,6 @@ with (scope('Header','App')) {
       Header.signin_buttons = div({ id: 'signin-buttons' });
     }
 
-    // adjust width when logged in/out
-    Header.global_search_input.style.width = logged_in() ? '410px' : '395px';
-
     var header_element = header(
       section(
         a({ 'class': 'bountysource-logo', href: '#' },
