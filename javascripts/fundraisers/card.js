@@ -6,7 +6,11 @@ with (scope('Fundraiser', 'App')) {
     options.href      = options.href      || fundraiser.frontend_path;
 
     var funding_percentage = parseFloat(100 * (fundraiser.total_pledged / fundraiser.funding_goal));
-    if (funding_percentage < 1) funding_percentage = 1;
+    if (isNaN(funding_percentage)) {
+      funding_percentage = 0;
+    } else if (funding_percentage < 1) {
+      funding_percentage = 1;
+    }
 
     // allow > 100% ~=--= YOLO =--=~
     // if (funding_percentage > 100) funding_percentage = 100;
@@ -33,7 +37,7 @@ with (scope('Fundraiser', 'App')) {
         div({ 'class': 'fundraiser-data' },
           span({ style: 'color: #00B900; font-size: 16px;' }, money(fundraiser.total_pledged)), ' raised',
           br,
-          span({ style: 'color: #00B900; font-size: 16px;' }, formatted_number(fundraiser.days_remaining)), ' days left'
+          span({ style: 'color: #00B900; font-size: 16px;' }, formatted_number(fundraiser.days_remaining || 0)), ' days left'
         ),
 
         div({ 'class': 'fundraiser-percentage' }, parseInt(funding_percentage), '%')

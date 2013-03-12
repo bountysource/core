@@ -17,7 +17,7 @@ with (scope('App')) {
 
   // update the FB like button in place with new meta data
   define('update_facebook_like_button', function(new_attributes) {
-    return console.log('TODO fix this');
+    return; // TODO bring back like button for every page
 
     new_attributes = new_attributes || {};
     render({ target: 'fb-like-button' }, Facebook.create_share_button(new_attributes));

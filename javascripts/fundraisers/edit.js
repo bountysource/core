@@ -333,9 +333,6 @@ with (scope('Edit', 'Fundraiser')) {
 
   route('#fundraisers/:fundraiser_id/edit/duration', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Duration', function(fundraiser) {
-
-      console.log(fundraiser);
-
       var days_open_input = number({
         'data-autosave': true,
         name:         'days_open',
