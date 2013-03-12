@@ -11,6 +11,7 @@
   box-shadow: 0 0 5px #ccc8be;
   height: 400px;
   width: 236px;
+  white-space: normal;
 
   -webkit-transition: ease-in-out 100ms;
   -moz-transition:    ease-in-out 100ms;
@@ -199,7 +200,7 @@ a.card { text-decoration: none; }
 /*************************
   Project cards
 *************************/
-.card.project { height: 332px; }
+.card.project { height: 354px; }
 .card.project:hover { background: #F2F9FF; }
 .card.project > * { margin-bottom: 10px; }
 .card.project > *:last-of-type { margin-bottom: 0; }
@@ -222,9 +223,9 @@ a.card { text-decoration: none; }
 }
 .card.project .project-name {
   font-size: 18px;
-  /*color: #00C200;*/
   color: #1FA8CA;
   padding: 0 10px;
+  height: 40px;
 }
 
 /*
