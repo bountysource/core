@@ -10,6 +10,9 @@ with (scope('Home', 'App')) {
     );
   });
 
+  define('fundraiser_card_row_div', div({ 'class': 'card-row-wrapper', id: 'fundraiser-card-row-wrapper' }));
+  define('issue_card_row_div',      div({ 'class': 'card-row-wrapper', id: 'issue-card-row-wrapper' }));
+
   route ('#', function() {
     // render nothing, then hide the content for now... we're using before-content!!
     render('');
@@ -19,27 +22,49 @@ with (scope('Home', 'App')) {
       h1('The funding platform for open-source software.'),
       h2({ style: 'margin-bottom: 0;' }, 'Improve the open-source projects you love by creating and collecting bounties!'),
 
-      a({ id: 'learn-more', 'class': 'blue', href: '#faq', style: 'display: inline-block; width: 150px;' }, "Learn More"),
+      !logged_in() && a({ id: 'learn-more', 'class': 'blue', href: '#faq', style: 'display: inline-block; width: 150px;' }, "Learn More"),
 
       div({ style: 'clear: both;' }),
       recent_people_div
     );
 
+    // make the box smaller if logged in
+    if (logged_in()) add_class(Home.top_box, 'small');
+
     render({ into: 'before-content' },
       section({ id: 'homepage' },
         Home.top_box,
 
-        // div({ id: 'card-sections-wrapper' }, 'TODO: sections for cards')
-
-        div({ id: 'column-container' }),
-        div({ style: 'clear: both' }),
-        div({ id: 'card-loader-div' }, 'Loading...')
+        fundraiser_card_row_div,
+        issue_card_row_div
       )
     );
 
-    clear_cards();
-    add_more_cards();
-    check_scroll_to_see_if_we_need_more_cards();
+    BountySource.get_cards(page_state.query, function(response) {
+      if (response.meta.success) {
+        if (response.data.fundraisers) {
+          render({ into: fundraiser_card_row_div },
+            div({ 'class': 'card-row header' }, span('Fundraisers')),
+
+            div({ 'class': 'card-row', id: 'fundraiser-card-row' },
+              response.data.fundraisers.map(Fundraiser.card)
+            )
+          );
+        }
+
+        if (response.data.issues) {
+          render({ into: issue_card_row_div },
+            div({ 'class': 'card-row header' }, span('Issues')),
+
+            div({ 'class': 'card-row', id: 'issue-card-row' },
+              response.data.issues.map(Issue.card)
+            )
+          );
+        }
+      } else {
+        throw('cards fail');
+      }
+    });
   });
 
   // render the homepage box, which always has recent signups at the bottom
@@ -49,32 +74,28 @@ with (scope('Home', 'App')) {
       // expand the top box
       add_class(Home.top_box, 'loaded');
 
+      // if logged in, don't make the box as large
+      if (logged_in()) add_class(Home.top_box, 'small');
+
       var recent_people = response.data;
 
+      // show less people if signed in
+      if (logged_in()) response.data.people = response.data.people.slice(0,17);
+
       render({ into: recent_people_div },
-        div({ style: "padding: 0 10px;" },
-          div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' }, "Join ", formatted_number(recent_people.total_count), " others in the BountySource revolution!"),
-
+        div(
+          !logged_in() && div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' },
+            "Join ", formatted_number(recent_people.total_count), " others in the BountySource revolution!"
+          ),
           (recent_people.people||[]).map(function(person) {
-            return div({ 'class': 'round-avatar' },
-              a({ href: person.frontend_path }, img({ src: person.image_url }))
-            );
-          }),
-
-          div({ style: 'clear: both' })
+            return a({ href: person.frontend_path }, img({ 'class': 'recent-person-avatar', src: person.image_url }));
+          })
         )
       );
     });
 
     return recent_people_div;
   });
-
-
-
-
-
-
-
 
   define('clear_cards', function() {
     // alert('clear cards');
@@ -99,6 +120,10 @@ with (scope('Home', 'App')) {
 
     page_state.can_load_more_cards = false;
     BountySource.get_more_cards(page_state.current_cards, page_state.query, function(response) {
+
+      console.log(response);
+
+
       var col_container = document.getElementById('column-container');
       if (!col_container) return;
 
@@ -109,15 +134,16 @@ with (scope('Home', 'App')) {
 
       var j, target;
       for (j=0; j < response.data.fundraisers.length; j++) {
-        var card = response.data.fundraisers[j];
-        page_state.current_cards.push(card.card_id);
+        var fundraiser = response.data.fundraisers[j];
+
+        page_state.current_cards.push(fundraiser.card_id);
 
         target = col_container.childNodes[0];
         for (var k=1; k < col_container.childNodes.length; k++) {
           if (col_container.childNodes[k].clientHeight < target.clientHeight) target = col_container.childNodes[k];
         }
 
-        target.appendChild(Fundraiser.fundraiser_card(card));
+        target.appendChild(Fundraiser.card(fundraiser));
       }
 
 //      for (j=0; j < response.data.repositories.length; j++) {

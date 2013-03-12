@@ -38,7 +38,7 @@ section#homepage #top-box {
   background: #f2f3f2;
   border: 10px solid white;
   box-shadow: 0 0 5px #ccc8be;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   overflow: hidden;
 
   height: 160px;
@@ -48,9 +48,9 @@ section#homepage #top-box {
   -o-transition:      ease-in 100ms;
   transition:         ease-in 100ms;
 }
-section#homepage #top-box.loaded {
-  height: 325px;
-}
+section#homepage #top-box.small { height: 105px; }
+section#homepage #top-box.loaded { height: 305px; }
+section#homepage #top-box.loaded.small { height: 165px; }
 section#homepage #top-box a#learn-more {
   display: inline-block;
   width: 100px;
@@ -64,4 +64,20 @@ section#homepage #top-box a#learn-more {
 }
 section#homepage #top-box a#learn-more:hover {
   box-shadow: 0 0 15px #56ACF0;
+}
+
+section#homepage #top-box .recent-person-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 3px 3px 0 3px;
+
+  -webkit-transition: ease-in 50ms;
+  -moz-transition:    ease-in 50ms;
+  -o-transition:      ease-in 50ms;
+  transition:         ease-in 50ms;
+}
+section#homepage #top-box .recent-person-avatar:hover {
+  box-shadow: 0 0 10px #8A8A8A;
 }

@@ -210,6 +210,14 @@ with (scope('BountySource')) {
     api('/cards', 'GET', { ignore: ignore, query: query }, callback);
   });
 
+  define('get_cards', function(query, callback) {
+    if (arguments.length == 2) {
+      api('/cards', { query: query }, callback);
+    } else {
+      api('/cards', callback);
+    }
+  });
+
   define('recent_people', function(callback) {
     api('/user/recent', 'GET', callback);
   });

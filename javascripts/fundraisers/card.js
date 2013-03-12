@@ -1,4 +1,45 @@
 with (scope('Fundraiser', 'App')) {
+
+  define('card', function(fundraiser) {
+    var funding_percentage = parseFloat(100 * (fundraiser.total_pledged / fundraiser.funding_goal));
+    if (funding_percentage < 1) funding_percentage = 1;
+    if (funding_percentage > 100) funding_percentage = 100;
+
+    var image_element = div({ 'class': 'fundraiser-image' });
+    image_element.style['background-image'] = 'url(' + (fundraiser.image_url || 'images/logo.png') + ')';
+
+    var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' });
+    var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner);
+
+    progress_bar_inner.style.width = funding_percentage + '%';
+
+    return a({ 'class': 'card fundraiser', href: fundraiser.frontend_path },
+      image_element,
+
+      div({ 'class': 'fundraiser-text' },
+        div({ 'class': 'fundraiser-title' }, fundraiser.title),
+        div({ 'class': 'fundraiser-author' }, 'by ', a({ href: fundraiser.person.frontend_path }, fundraiser.person.display_name)),
+        div({ 'class': 'fundraiser-description' }, fundraiser.short_description)
+      ),
+
+      div({ 'class': 'fundraiser-stats' },
+        div({ 'class': 'fundraiser-data' },
+          span({ style: 'color: #00DB00' }, money(fundraiser.total_pledged)), ' raised',
+          br,
+          span({ style: 'color: #00DB00' }, formatted_number(fundraiser.days_remaining)), ' days left'
+        ),
+
+        div({ 'class': 'fundraiser-percentage' },
+          span(parseInt(funding_percentage)),
+          span('%')
+        )
+      ),
+
+      progress_bar_div
+    );
+  });
+
+
   define('fundraiser_card', function(card) {
     var funding_percentage = parseFloat(100 * (card.total_pledged / card.funding_goal));
 

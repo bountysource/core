@@ -1,5 +1,14 @@
 with (scope('Issue', 'App')) {
 
+  define('card', function(issue) {
+    return a({ 'class': 'card issue', href: issue.frontend_path },
+      'Issue Card'
+    )
+  });
+
+
+
+
   define('issue_card', function(card) {
     return div({ 'class': 'card', onClick: curry(set_route, card.frontend_path) },
       div({ style: 'padding: 7px; background: #EEE; margin-bottom: 5px;' },

@@ -216,22 +216,6 @@ input.autosized {
 .solutions tr.link:hover { background: rgb(255, 251, 228); }
 .solutions tr.link { cursor: pointer; }
 
-#cardfilterbox {
-  text-align: left; padding: 10px; margin: 20px 0 10px 0; background: #f2f3f2; border: 10px solid white; box-shadow: #ccc8be 0px 0px 5px;
-}
-
-#cardfilterbox form {
-  display: inline;
-}
-
-#cardfilterbox input {
-  width: 250px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;
-}
-
-#cardfilterbox input[type=submit], #cardfilterbox input[type=reset] {
-  width: 80px; margin-left: 3px;
-}
-
 #forkme { float: right; }
 
 .solution-row {

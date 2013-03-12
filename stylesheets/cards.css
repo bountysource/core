@@ -1,33 +1,154 @@
+/*
+  All cards
+*/
 .card {
+  display: inline-block;
+  vertical-align: top;
+  color: black;
   background: white;
-  padding: 10px;
-  box-shadow: 0 0 5px #ccc8be;
-  margin-bottom: 15px;
+  border: 1px solid #D5D5D5;
+  height: 400px;
 
-  border: 1px solid white;
-  border-radius: 5px;
+  /*width: 323px;*/
+  width: 238px;
 
   -webkit-transition: ease-in-out 100ms;
   -moz-transition:    ease-in-out 100ms;
   -o-transition:      ease-in-out 100ms;
   transition:         ease-in-out 100ms;
-
+}
+a.card { text-decoration: none; }
+.card-row-wrapper {
+  margin: auto;
 }
 
-.card-column { width: 233px; float: left; margin-right: 15px; }
-.card-column img { max-width: 100% }
-.card-column:last-child { margin-right: 0; }
-
-.card:hover { box-shadow: 0 0 10px #B38735; border: 1px solid #E0AB45; cursor: pointer }
-.card.fundraiser:hover { box-shadow: 0 0 10px #59AA2C; border: 1px solid #9ADA8A; cursor: pointer }
-
-#card-loader-div {
-  background: white;
-  color: #aaa;
-  padding: 20px 0;
-  margin: 20px 0;
-  box-shadow: 0 0 5px #ccc8be;
-  font-size: 20px;
-  font-style: italic;
+/*
+  Card Rows
+*/
+.card-row {
+  padding: 5px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.card-row .card {
+  margin-right: 5px;
+}
+.card-row .card:last-of-type {
+  margin-right: 0;
+}
+#homepage .card-row.header {
   text-align: center;
+}
+#homepage .card-row.header h1 {
+  margin: 5px;
+  padding: 0;
+  font-size: 25px;
+  font-weight: normal;
+  color: gray;
+}
+
+
+
+/*
+  Fundraiser cards
+*/
+.card.fundraiser {}
+.card.fundraiser > * {
+  margin-bottom: 5px;
+}
+.card.fundraiser > *:last-of-type {
+  margin-bottom: 0;
+}
+
+/*
+  Fundraiser card image
+*/
+.card.fundraiser .fundraiser-image {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% auto;
+  background-color: #EEE;
+  border-bottom: 1px solid #D5D5D5;
+  height: 150px;
+}
+
+/*
+  Fundraiser card title and description
+*/
+.card.fundraiser .fundraiser-text {
+  margin: 10px;
+  white-space: normal;
+  height: 167px
+}
+.card.fundraiser .fundraiser-text > * { margin-bottom: 5px; }
+.card.fundraiser .fundraiser-text > *:last-of-type { margin-bottom: 0; }
+.card.fundraiser .fundraiser-text .fundraiser-title {
+  font-size: 18px;
+  color: #00C200;
+  line-height: 20px;
+}
+.card.fundraiser .fundraiser-text .fundraiser-author {
+  font-size: 14px;
+  color: gray;
+}
+.card.fundraiser .fundraiser-text .fundraiser-description {
+  font-size: 12px;
+}
+
+/*
+  Fundraiser card stats and percentage complete
+*/
+.card.fundraiser .fundraiser-stats {
+  font-size: 12px;
+  color: gray;
+  padding: 0 5px;
+}
+.card.fundraiser .fundraiser-stats .fundraiser-data {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  width: 130px;
+}
+.card.fundraiser .fundraiser-stats .fundraiser-percentage {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  font-size: 38px;
+  color: #00DB00;
+  width: 100px;
+}
+
+
+/*
+  Fundraiser card progress bar
+*/
+.card.fundraiser .fundraiser-progress-bar-outer {
+  border-top: 1px solid #D5D5D5;
+  background: #e3e3e3;
+  height: 20px;
+}
+.card.fundraiser .fundraiser-progress-bar-inner {
+  background: #00DB00;
+  height: 20px;
+}
+
+
+/*
+  Filter Box
+*/
+#cardfilterbox {
+  text-align: left; padding: 10px; margin: 20px 0 10px 0; background: #f2f3f2; border: 10px solid white; box-shadow: #ccc8be 0px 0px 5px;
+}
+
+#cardfilterbox form {
+  display: inline;
+}
+
+#cardfilterbox input {
+  width: 250px; line-height: 24px; padding: 0 15px; height: 40px; border: 1px solid #9dce5c;
+}
+
+#cardfilterbox input[type=submit], #cardfilterbox input[type=reset] {
+  width: 80px; margin-left: 3px;
 }
