@@ -48,7 +48,7 @@ with (scope('Faq', 'App')) {
                 //li('Learn more...')
               )
             ),
-            dd(i('How Fundraiers work:')),
+            dd(i('How Fundraisers work:')),
             dd(
               ol(
                 li('Anyone can come to BountySource and create a Fundraiser. Open-source fundraisers are typically used to raise money for new projects, big updates to existing projects, or to raise money for bounties.'),
@@ -116,7 +116,7 @@ with (scope('Faq', 'App')) {
 
             dt("What if I'm unsatisfied with the solution to an issue I've backed?"),
             dd("After a solution is accepted, you will have two weeks to open any disputes you may have."),
-            dd("If you feel that an accepted solution does not meet the criteria of the issue, please email us at ", a({ href: 'mailto:support@bountysource.com' }, 'support@bountysource.com'), "."),// [email us at support@bountysource.com](use the same mailto: link with the subject/body as on the issue page)
+            dd("If you feel that an accepted solution does not meet the criteria of the issue, please email us at ", a({ href: 'mailto:support@bountysource.com?subject=Dispute' }, 'support@bountysource.com'), "."),// [email us at support@bountysource.com](use the same mailto: link with the subject/body as on the issue page)
             //"mailto:support@bountysource.com?subject="+ encodeURIComponent("Dispute") +
             //"&body=" + encodeURIComponent("Issue Name: " + solution.issue.title + "\nIssue URL: " + solution.issue.frontend_path + "\n\nPlease describe the issue you have with " + solution.person.display_name + "'s solution:")
 
