@@ -164,27 +164,19 @@ with (scope('Home', 'App')) {
         add_class(Home.top_box, 'loaded');
 
         // if logged in, don't make the box as large
-        if (logged_in()) add_class(Home.top_box, 'small');
-
         if (logged_in()) {
-          render({ into: recent_people_div },
-            div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' },
-              "Welcome the newest of our " + formatted_number(response.data.total_count) + " members:"
-            ),
-            response.data.people.slice(0,17).map(function(person) {
-              return a({ href: person.frontend_path }, img({ 'class': 'recent-person-avatar', src: person.image_url }));
-            })
-          );
-        } else {
-          render({ into: recent_people_div },
-            div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' },
-              "Join ", formatted_number(response.data.total_count), " others in the BountySource revolution!"
-            ),
-            response.data.people.map(function(person) {
-              return a({ href: person.frontend_path }, img({ 'class': 'recent-person-avatar', src: person.image_url }));
-            })
-          );
-        }
+          add_class(Home.top_box, 'small');
+          response.data.people = response.data.people.slice(0,17);
+        };
+
+        render({ into: recent_people_div },
+          div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' },
+            "Welcome the newest of our " + formatted_number(response.data.total_count) + " members:"
+          ),
+          response.data.people.map(function(person) {
+            return a({ href: person.frontend_path }, img({ 'class': 'recent-person-avatar', src: person.image_url }));
+          })
+        );
       }
     });
 
