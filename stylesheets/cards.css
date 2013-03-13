@@ -93,7 +93,7 @@ a.card { text-decoration: none; }
   -ms-user-select: none;
   user-select: none;
 }
-#homepage .card-row.header .card-nav-button:hover { background: #E4DEDE; }
+#homepage .card-row.header .card-nav-button:hover { background: #D5D5D5; }
 #homepage .card-row.header .card-nav-button div {
   font-size: 20px;
   padding: 10px 0;
