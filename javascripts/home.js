@@ -48,6 +48,10 @@ with (scope('Home', 'App')) {
           response.data.map(function(fundraiser) { return Fundraiser.card(fundraiser) })
         );
 
+        // add pagination data to row element
+        fundraiser_cards_row['data-page-count'] = Math.ceil(response.data.length / cards_per_row);
+        fundraiser_cards_row['data-page-index'] = 0;
+
         render({ into: fundraiser_card_row_wrapper },
           card_row_header('Featured Fundraisers', fundraiser_cards_row, {
             show_nav_buttons: response.data.length > cards_per_row
@@ -119,23 +123,30 @@ with (scope('Home', 'App')) {
         remove_class(other_button, 'disabled');
 
         setTimeout(function() {
-          if ((page_index - 1) == 0) add_class(button_element, 'disabled');
+          remove_class(row_element, 'transition');
 
           row_element.scrollLeft -= scroll_amount;
-          row_element['data-page-index'] = page_index - 1;
+          page_index -= 1;
 
-          remove_class(row_element, 'transition');
+          if (page_index == 0) add_class(button_element, 'disabled');
+
+          // assign the variables back to the row element
+          row_element['data-page-index'] = page_index;
         }, 100);
       } else if (has_class(button_element, 'next') && (page_index + 1) <= num_pages) {
         remove_class(other_button, 'disabled');
 
         setTimeout(function() {
-          if ((page_index + 1) == num_pages) add_class(button_element, 'disabled');
-
-          row_element.scrollLeft += scroll_amount;
-          row_element['data-page-index'] = page_index + 1;
-
           remove_class(row_element, 'transition');
+
+          // adjust page index
+          row_element.scrollLeft += scroll_amount;
+          page_index += 1;
+
+          if (page_index == (num_pages - 1)) add_class(button_element, 'disabled');
+
+          // assign the variables back to the row element
+          row_element['data-page-index'] = page_index;
         }, 100);
       } else {
         remove_class(row_element, 'transition');

@@ -8,7 +8,7 @@ with (scope('Project', 'App')) {
     return a(options,
       div({
         'class': 'project-image',
-        style: 'background-image: url("' + project.image_url + '");'
+        style: 'background-image: url("' + (project.image_url || '/images/bountysource-icon.png') + '");'
       }),
 
       div({ 'class': 'project-name' }, truncate(project.name, 70)),
