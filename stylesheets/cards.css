@@ -187,7 +187,7 @@ a.card { text-decoration: none; }
 .card.fundraiser .fundraiser-progress-bar-outer {
   border-top: 1px solid #D5D5D5;
   background: #e3e3e3;
-  height: 20px;
+  height: 18px;
 }
 .card.fundraiser .fundraiser-progress-bar-inner {
   background: #00DB00;
