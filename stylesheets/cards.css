@@ -67,10 +67,11 @@ a.card { text-decoration: none; }
   background: #F2F3F2;
   border-radius: 3px 3px 0 0;
   border-bottom: 0;
-  font-size: 16px;
-  color: #B4B4B4;
 }
 #homepage .card-row.header .card-nav-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
   display: inline-block;
   margin: 10px 0;
 }
