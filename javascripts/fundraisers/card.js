@@ -40,7 +40,7 @@ with (scope('Fundraiser', 'App')) {
             span('funded')
           ),
           div(
-            span(formatted_number(fundraiser.days_remaining)),
+            span(formatted_number(fundraiser.days_remaining || 0)),
             span('days left')
           )
         ),
