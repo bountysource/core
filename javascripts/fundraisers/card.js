@@ -15,11 +15,6 @@ with (scope('Fundraiser', 'App')) {
     // allow > 100% ~=--= YOLO =--=~
     // if (funding_percentage > 100) funding_percentage = 100;
 
-    var image_element = div({
-      'class': 'fundraiser-image',
-      style: 'background-image: url("' + (fundraiser.image_url || '/images/logo-gray.png') + '");'
-    });
-
     var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' });
     var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner);
 
@@ -27,7 +22,10 @@ with (scope('Fundraiser', 'App')) {
     progress_bar_inner.style.width = (funding_percentage > 100 ? 100 : funding_percentage) + '%';
 
     return a({ 'class': 'card fundraiser', href: fundraiser.frontend_path },
-      image_element,
+      div({
+        'class': 'fundraiser-image',
+        style: 'background-image: url("' + (fundraiser.image_url || '/images/logo-gray.png') + '");'
+      }),
 
       div({ 'class': 'fundraiser-text' },
         div({ 'class': 'fundraiser-title' }, fundraiser.title),
