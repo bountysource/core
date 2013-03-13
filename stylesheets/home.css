@@ -50,7 +50,7 @@ section#homepage #top-box {
 }
 section#homepage #top-box.small { height: 105px; }
 section#homepage #top-box.loaded { height: 305px; }
-section#homepage #top-box.loaded.small { height: 165px; }
+section#homepage #top-box.loaded.small { height: 190px; }
 section#homepage #top-box a#learn-more {
   display: inline-block;
   width: 100px;

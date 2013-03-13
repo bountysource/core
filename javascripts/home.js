@@ -1,8 +1,5 @@
 with (scope('Home', 'App')) {
 
-  // local cache for cards
-  define('page_state', {});
-
   route('#not_found', function() {
     render(
       h1("Oops! That page wasn't found!"),
@@ -129,28 +126,35 @@ with (scope('Home', 'App')) {
   // render the homepage box, which always has recent signups at the bottom
   define('recent_people_div', function() {
     var recent_people_div = div({ style: 'margin-top: 10px;' });
+
     BountySource.recent_people(function(response) {
-      // expand the top box
-      add_class(Home.top_box, 'loaded');
+      if (response.meta.success) {
+        // expand the top box
+        add_class(Home.top_box, 'loaded');
 
-      // if logged in, don't make the box as large
-      if (logged_in()) add_class(Home.top_box, 'small');
+        // if logged in, don't make the box as large
+        if (logged_in()) add_class(Home.top_box, 'small');
 
-      var recent_people = response.data;
-
-      // show less people if signed in
-      if (logged_in()) response.data.people = response.data.people.slice(0,17);
-
-      render({ into: recent_people_div },
-        div(
-          !logged_in() && div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' },
-            "Join ", formatted_number(recent_people.total_count), " others in the BountySource revolution!"
-          ),
-          (recent_people.people||[]).map(function(person) {
-            return a({ href: person.frontend_path }, img({ 'class': 'recent-person-avatar', src: person.image_url }));
-          })
-        )
-      );
+        if (logged_in()) {
+          render({ into: recent_people_div },
+            div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' },
+              "Welcome the newest " + formatted_number(response.data.total_count) + " members to our community"
+            ),
+            response.data.people.slice(0,17).map(function(person) {
+              return a({ href: person.frontend_path }, img({ 'class': 'recent-person-avatar', src: person.image_url }));
+            })
+          );
+        } else {
+          render({ into: recent_people_div },
+            div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' },
+              "Join ", formatted_number(response.data.total_count), " others in the BountySource revolution!"
+            ),
+            response.data.people.map(function(person) {
+              return a({ href: person.frontend_path }, img({ 'class': 'recent-person-avatar', src: person.image_url }));
+            })
+          );
+        }
+      }
     });
 
     return recent_people_div;
