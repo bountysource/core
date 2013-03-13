@@ -35,12 +35,20 @@ with (scope('Fundraiser', 'App')) {
 
       div({ 'class': 'fundraiser-stats' },
         div({ 'class': 'fundraiser-data' },
-          span({ style: 'color: #00B900; font-size: 16px;' }, money(fundraiser.total_pledged)), ' raised',
-          br,
-          span({ style: 'color: #00B900; font-size: 16px;' }, formatted_number(fundraiser.days_remaining || 0)), ' days left'
+          div(
+            span(parseInt(funding_percentage) + '%'),
+            span('funded')
+          ),
+          div(
+            span(formatted_number(fundraiser.days_remaining)),
+            span('days left')
+          )
         ),
 
-        div({ 'class': 'fundraiser-percentage' }, parseInt(funding_percentage), '%')
+        div({ 'class': 'fundraiser-total-pledged' },
+          div(money(fundraiser.total_pledged)),
+          div('pledged')
+        )
       ),
 
       progress_bar_div
