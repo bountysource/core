@@ -99,7 +99,8 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
   color: #5e5f5f;
   font-size: 45px;
   font-weight: normal;
-  margin: 10px 0 40px 0;
+  margin: 0 0 10px 0;
+  line-height: 50px;
 }
 
 /* image */
