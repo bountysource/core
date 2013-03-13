@@ -216,7 +216,8 @@ input.autosized {
 .solutions tr.link:hover { background: rgb(255, 251, 228); }
 .solutions tr.link { cursor: pointer; }
 
-#forkme { float: right; }
+#forkme { display: none; position: absolute; right: 0; top: 82px; }
+@media screen and (min-width: 1250px) { #forkme { display: block; } }
 
 .solution-row {
   cursor: pointer;
