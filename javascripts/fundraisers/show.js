@@ -3,16 +3,8 @@ with (scope('Show', 'Fundraiser')) {
   // Note: fundraiser identifier will either be just an ID, or and ID with a concatenated title string
   route('#fundraisers/:fundraiser_id', function(fundraiser_id) {
     var fundraiser_div = div('Loading...');
-    var target_div = div(
-      breadcrumbs(
-        a({ href: '#' }, 'Home'),
-        'Fundraisers',
-        span({ id: 'breadcrumbs-fundraiser-title' }, 'Loading...')
-      ),
-      fundraiser_div
-    );
 
-    render(target_div);
+    render(fundraiser_div);
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
       if (response.meta.success) {
@@ -26,9 +18,12 @@ with (scope('Show', 'Fundraiser')) {
         });
 
         render({ into: fundraiser_div }, fundraiser_template(fundraiser));
+
+        Facebook.process_elements();
+        Twitter.process_elements();
+        GooglePlus.process_elements();
       } else {
-        render({ target: 'breadcrumbs-fundraiser-title' }, 'Oh no!');
-        render({ into: fundraiser_div }, error_message(response.data.error2));
+        render({ into: fundraiser_div }, error_message(response.data.error));
       }
     });
   });
@@ -36,35 +31,65 @@ with (scope('Show', 'Fundraiser')) {
   define('fundraiser_template', function(fundraiser, options) {
     options = options || {};
 
-    // add the title to the already present header element
-    if (!options.preview) render({ target: 'breadcrumbs-fundraiser-title' }, truncate(fundraiser.title, 85));
-
     var fundraiser_form = section({ id: 'fundraiser-wrapper' },
-      div({ 'class': 'split-main' },
-        section({ id: 'fundraiser-head', style: 'border-bottom: 2px dotted #C7C7C7; padding-bottom: 10px; text-align: center; color: #5e5f5f;' },
-          h1({ style: 'font-size: 45px; font-weight: normal; margin: 10px 0; line-height: 50px;' }, fundraiser.title)
-        ),
+      Columns.create({ show_side: true }),
 
-        fundraiser.image_url && section({ id: 'fundraiser-image', style: 'text-align: center;' },
-          img({ style: 'max-width: 630px; padding: 20px;', src: fundraiser.image_url })
-        ),
+      Columns.main(
+        h1({ id: 'fundraiser-title' }, fundraiser.title),
 
-        section({ id: 'fundraiser-short-description', style: 'border-bottom: 2px dotted #C7C7C7; color: #5E5F5F;' },
-          div({ style: 'margin: 10px 0 25px 0; padding: 20px; background: #EEE; border-radius: 3px; font-size: 20px; line-height: 25px;' }, fundraiser.short_description||''),
+        fundraiser.image_url && img({ id: 'fundraiser-image', src: fundraiser.image_url }),
 
-          div({ id: 'fundraiser-links', style: 'margin-left: 20px; font-size: 14px;' },
-            span({ style: 'display: block; margin: 10px 0;' }, 'Created ', formatted_date(fundraiser.created_at), ' by ', a({ href: fundraiser.person.profile_url }, fundraiser.person.display_name)),
-            fundraiser.homepage_url &&  span({ style: 'display: block; margin: 10px 0;' }, 'Homepage: ',  a({ target: '_blank', href: fundraiser.homepage_url, style: 'color: inherit;' }, fundraiser.homepage_url)),
-            (fundraiser.repo_url && fundraiser.repo_url != fundraiser.homepage_url) && span({ style: 'display: block; margin: 10px 0;' }, 'Repository: ', a({ target: '_blank', href: fundraiser.repo_url, style: 'color: inherit;' }, fundraiser.repo_url))
+        div({ id: 'short-description' }, fundraiser.short_description || ''),
+
+        div({ id: 'fundraiser-links' },
+          div(
+            div('Created'),
+            div(formatted_date(fundraiser.created_at), ' by ', fundraiser.person.display_name)
+          ),
+
+          fundraiser.homepage_url && div(
+            div('Homepage:'),
+            a({ target: '_blank', href: fundraiser.homepage_url }, fundraiser.homepage_url)
+          ),
+
+          fundraiser.repo_url && fundraiser.repo_url != fundraiser.homepage_url && div(
+            div('Repository:'),
+            a({ target: '_blank', href: fundraiser.repo_url }, fundraiser.repo_url)
           )
         ),
 
-        section({ id: 'fundraiser-description' },
-          div({ 'class': 'markdown', html: fundraiser.description_html, style: 'margin: 0; padding: 10px; overflow-x: auto;' })
-        )
+        ul({ 'class': 'fundraiser-social-buttons' },
+          li(Facebook.like_button),
+          li(
+            Twitter.share_button({
+              'data-count': 'none'
+            })
+          ),
+          li(
+            GooglePlus.like_button({
+              'data-annotation': 'none'
+            })
+          ),
+          li(
+            input({
+              id: 'fundraiser-embed',
+              value: Fundraiser.embed_iframe(fundraiser).outerHTML,
+              readonly: true,
+              onClick: function() { this.select() }
+            })
+          )
+        ),
+
+        div({ style: 'border-bottom: 2px dotted #E4E4E4;' }),
+
+        div({
+          id: 'fundraiser-description',
+          'class': 'markdown',
+          html: fundraiser.description_html
+        })
       ),
 
-      div({ 'class': 'split-side' },
+      Columns.side(
         // show edit button if this fundraiser belongs to the user
         options.preview ? a({ 'class': 'blue', href: Edit.hide_preview, style: 'padding: 10px 0;' },
           div({ style: 'display: inline-block;' },
@@ -98,7 +123,7 @@ with (scope('Show', 'Fundraiser')) {
           )
         ),
 
-        section({ id: 'fundraiser-stats', style: 'background: #eee; padding: 10px; margin: 10px 0; border-radius: 3px;' },
+        section({ id: 'fundraiser-stats', style: 'margin: 10px 0; border-radius: 3px;' },
           ul({ style: 'list-style-type: none; padding: 0;' },
             li({ style: 'margin: 20px auto;' },
               span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.pledges.length+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'backer' + (fundraiser.pledges.length == 1 ? '' : 's'))
@@ -147,9 +172,7 @@ with (scope('Show', 'Fundraiser')) {
             return reward_row_element;
           })
         )
-      ),
-
-      div({ 'class': 'split-end' })
+      )
     );
 
     return fundraiser_form;

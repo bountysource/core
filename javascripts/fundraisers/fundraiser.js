@@ -18,4 +18,11 @@ with (scope('Fundraiser', 'App')) {
       fundraiser.published ? span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Published') : span({ style: 'background: #29A8DD; border-radius: 4px; padding: 4px; color: white' }, 'Draft')
     );
   });
+
+  define('embed_iframe', function(fundraiser) {
+    return iframe({
+      src:    BountySource.api_host + 'user/fundraisers/' + fundraiser.id + '/embed',
+      style:  'width: 238px; height: 402px; overflow: hidden; border: 0;'
+    });
+  });
 }

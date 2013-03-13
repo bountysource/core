@@ -89,3 +89,77 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
 #rewards .reward-row textarea { width: 400px; height: 75px; }
 
 #fundraiser-card-preview { text-align: center; }
+
+
+/*
+  Fundraiser Show
+*/
+/* header */
+#fundraiser-wrapper h1#fundraiser-title {
+  color: #5e5f5f;
+  font-size: 45px;
+  font-weight: normal;
+  margin: 10px 0 40px 0;
+}
+
+/* image */
+#fundraiser-wrapper #fundraiser-image {
+  width: 100%;
+}
+
+/* short description */
+#fundraiser-wrapper #short-description {
+  color: #5E5F5F;
+  margin: 15px 0;
+  line-height: 50px;
+  font-size: 25px;
+}
+
+/* links */
+#fundraiser-wrapper #fundraiser-links { font-size: 14px; }
+#fundraiser-wrapper #fundraiser-links > * { margin-bottom: 5px; }
+#fundraiser-wrapper #fundraiser-links > *:last-of-type { margin-bottom: 0; }
+
+#fundraiser-wrapper #fundraiser-links > * > *:nth-child(1) {
+  display: inline-block;
+  vertical-align: middle;
+  color: black;
+  width: 100px;
+}
+#fundraiser-wrapper #fundraiser-links > * > *:nth-child(2) {
+  display: inline-block;
+  vertical-align: middle;
+  color: grey;
+}
+
+/* social buttonz */
+#fundraiser-wrapper .fundraiser-social-buttons {
+  list-style-type: none;
+  padding: 15px 0;
+  margin: 0;
+}
+#fundraiser-wrapper .fundraiser-social-buttons li {
+  margin-right: 5px;
+  display: inline-block;
+  vertical-align: top;
+}
+#fundraiser-wrapper .fundraiser-social-buttons li:last-of-type {
+  margin-right: 0;
+}
+
+/* embed input */
+#fundraiser-wrapper #fundraiser-embed {
+  height: 20px;
+  border: 1px solid #C2C2C2;
+  border-radius: 2px;
+  padding: 0 5px;
+  width: 250px;
+  font-size: 10px;
+  color: #979595;
+}
+
+/* description */
+#fundraiser-wrapper #fundraiser-description{
+  overflow-x: auto;
+  margin: 0;
+}
