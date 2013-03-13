@@ -71,6 +71,10 @@ with (scope('Home', 'App')) {
           response.data.map(function(project) { return Project.card(project) })
         );
 
+        // add pagination data to row element
+        project_cards_row['data-page-count'] = Math.ceil(response.data.length / cards_per_row);
+        project_cards_row['data-page-index'] = 0;
+
         render({ into: project_cards_row_wrapper },
           card_row_header('Open Bounties by Project', project_cards_row, {
             show_nav_buttons: response.data.length > cards_per_row
@@ -89,40 +93,54 @@ with (scope('Home', 'App')) {
     options = options || {};
     options.show_nav_buttons = options.show_nav_buttons || false;
 
-    // number of pixels to scroll to show the next 4 cards
-    var scroll_amount = 992;
-
-    var previous_button = div({ 'class': 'card-nav-button previous' }, div('←')),
+    var previous_button = div({ 'class': 'card-nav-button previous disabled' }, div('←')),
         next_button     = div({ 'class': 'card-nav-button next' }, div('→'));
 
-    var nav_button_listener = function(row_element, event) {
-      var button_element = this;
-
-      // add class that makes all cards fade to opacity 0
-      add_class(row_element, 'transition');
-
-      // set animation to let animation play before changing cards
-      setTimeout(function() {
-        remove_class(row_element, 'transition');
-
-        if (has_class(button_element, 'previous')) {
-          row_element.scrollLeft -= scroll_amount;
-        } else if (has_class(button_element, 'next')) {
-          row_element.scrollLeft += scroll_amount;
-        }
-      }, 100);
-    };
-
-    previous_button.addEventListener('click', curry(nav_button_listener, row_element));
-    next_button.addEventListener('click',     curry(nav_button_listener, row_element));
+    previous_button.addEventListener('click', curry(card_nav_button_listener, row_element, next_button));
+    next_button.addEventListener('click',     curry(card_nav_button_listener, row_element, previous_button));
 
     return div({ 'class': 'card-row header' },
       options.show_nav_buttons && previous_button,
       div({ 'class': 'card-nav-title' }, title),
-      options.show_nav_buttons && next_button,
-
-      div({ style: 'clear: both;' })
+      options.show_nav_buttons && next_button
     );
+  });
+
+  define('card_nav_button_listener', function(row_element, other_button, event) {
+    var button_element  = this,
+        scroll_amount   = 992,
+        num_pages       = parseInt(row_element['data-page-count']),
+        page_index      = parseInt(row_element['data-page-index']);
+
+    if (!has_class(button_element, 'disabled')) {
+      add_class(row_element, 'transition');
+
+      if (has_class(button_element, 'previous') && (page_index - 1) >= 0) {
+        remove_class(other_button, 'disabled');
+
+        setTimeout(function() {
+          if ((page_index - 1) == 0) add_class(button_element, 'disabled');
+
+          row_element.scrollLeft -= scroll_amount;
+          row_element['data-page-index'] = page_index - 1;
+
+          remove_class(row_element, 'transition');
+        }, 100);
+      } else if (has_class(button_element, 'next') && (page_index + 1) <= num_pages) {
+        remove_class(other_button, 'disabled');
+
+        setTimeout(function() {
+          if ((page_index + 1) == num_pages) add_class(button_element, 'disabled');
+
+          row_element.scrollLeft += scroll_amount;
+          row_element['data-page-index'] = page_index + 1;
+
+          remove_class(row_element, 'transition');
+        }, 100);
+      } else {
+        remove_class(row_element, 'transition');
+      }
+    }
   });
 
   // render the homepage box, which always has recent signups at the bottom

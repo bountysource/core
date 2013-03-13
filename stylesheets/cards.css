@@ -94,6 +94,11 @@ a.card { text-decoration: none; }
   user-select: none;
 }
 #homepage .card-row.header .card-nav-button:hover { background: #e0e0e0; }
+#homepage .card-row.header .card-nav-button.disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+#homepage .card-row.header .card-nav-button.disabled.hover { background: inherit; }
 #homepage .card-row.header .card-nav-button div {
   font-size: 30px;
   padding: 10px 0;
