@@ -92,8 +92,8 @@ with (scope('Home', 'App')) {
     // number of pixels to scroll to show the next 4 cards
     var scroll_amount = 992;
 
-    var previous_button = div({ 'class': 'card-nav-button previous' }, div('<')),
-        next_button     = div({ 'class': 'card-nav-button next' }, div('>'));
+    var previous_button = div({ 'class': 'card-nav-button previous' }, div('←')),
+        next_button     = div({ 'class': 'card-nav-button next' }, div('→'));
 
     var nav_button_listener = function(row_element, event) {
       var button_element = this;
@@ -119,7 +119,9 @@ with (scope('Home', 'App')) {
     return div({ 'class': 'card-row header' },
       options.show_nav_buttons && previous_button,
       div({ 'class': 'card-nav-title' }, title),
-      options.show_nav_buttons && next_button
+      options.show_nav_buttons && next_button,
+
+      div({ style: 'clear: both;' })
     );
   });
 
@@ -138,7 +140,7 @@ with (scope('Home', 'App')) {
         if (logged_in()) {
           render({ into: recent_people_div },
             div({ style: 'color: #888; margin-bottom: 5px; text-align: center; font-style: italic; font-size: 14px;' },
-              "Welcome the newest " + formatted_number(response.data.total_count) + " members to our community"
+              "Welcome the newest of our " + formatted_number(response.data.total_count) + " members:"
             ),
             response.data.people.slice(0,17).map(function(person) {
               return a({ href: person.frontend_path }, img({ 'class': 'recent-person-avatar', src: person.image_url }));

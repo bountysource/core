@@ -42,7 +42,6 @@ a.card { text-decoration: none; }
   overflow: hidden;
   white-space: nowrap;
   background: rgba(255, 255, 255, 0.29);
-  border-radius: 0 0 3px 3px;
   border: 1px solid #D1D1D1;
   box-shadow: 0 0 5px #ccc8be;
 }
@@ -65,15 +64,15 @@ a.card { text-decoration: none; }
   padding: 0;
   text-align: center;
   background: #F2F3F2;
-  border-radius: 3px 3px 0 0;
   border-bottom: 0;
 }
 #homepage .card-row.header .card-nav-title {
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
   display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  color: black;
   margin: 10px 0;
+  width: 790px;
 }
 /* nav buttons */
 #homepage .card-row.header .card-nav-button {
@@ -96,18 +95,19 @@ a.card { text-decoration: none; }
 }
 #homepage .card-row.header .card-nav-button:hover { background: #e0e0e0; }
 #homepage .card-row.header .card-nav-button div {
-  font-size: 20px;
+  font-size: 30px;
   padding: 10px 0;
+  color: grey;
 }
 #homepage .card-row.header .card-nav-button.next {
+  display: inline-block;
+  vertical-align: middle;
   border-left: 1px solid #D1D1D1;
-  float: right;
-  border-radius: 0 3px 0 0;
 }
 #homepage .card-row.header .card-nav-button.previous {
+  display: inline-block;
+  vertical-align: middle;
   border-right: 1px solid #D1D1D1;
-  float: left;
-  border-radius: 3px 0 0 0;
 }
 
 
@@ -147,7 +147,7 @@ a.card { text-decoration: none; }
 .card.fundraiser .fundraiser-text > *:last-of-type { margin-bottom: 0; }
 .card.fundraiser .fundraiser-text .fundraiser-title {
   font-size: 18px;
-  color: #00C200;
+  color: #70C770;
   line-height: 20px;
 }
 .card.fundraiser .fundraiser-text .fundraiser-author {
@@ -188,7 +188,7 @@ a.card { text-decoration: none; }
 }
 .card.fundraiser .fundraiser-stats .fundraiser-data > * > *:first-child {
   font-size: 16px;
-  color: #00DB00;
+  color: #70C770;
 }
 .card.fundraiser .fundraiser-stats .fundraiser-data > * > *:last-child {
   margin-right: 0;
@@ -200,7 +200,7 @@ a.card { text-decoration: none; }
 }
 .card.fundraiser .fundraiser-stats .fundraiser-total-pledged > *:first-child {
   font-size: 20px;
-  color: #00DB00;
+  color: #70C770;
 }
 .card.fundraiser .fundraiser-stats .fundraiser-total-pledged > *:last-child {
   font-size: 12px;
@@ -214,9 +214,10 @@ a.card { text-decoration: none; }
   border-top: 1px solid #D5D5D5;
   background: #e3e3e3;
   height: 18px;
+  overflow: hidden;
 }
 .card.fundraiser .fundraiser-progress-bar-inner {
-  background: #00DB00;
+  background: #77E077;
   height: 18px;
 }
 
@@ -227,7 +228,7 @@ a.card { text-decoration: none; }
   Project cards
 *************************/
 .card.project { height: 354px; }
-.card.project:hover { background: #F2F9FF; }
+.card.project:hover { background: #F5FCFD; }
 .card.project > * { margin-bottom: 10px; }
 .card.project > *:last-of-type { margin-bottom: 0; }
 
@@ -239,17 +240,9 @@ a.card { text-decoration: none; }
   border-bottom: 1px solid #D5D5D5;
   height: 150px;
 }
-.card.project .project-bounty-total {
-  background-color: rgba(82, 82, 82, 0.8);
-  padding: 15px;
-  border-radius: 0 0 0 15px;
-  color: #1FA8CA;
-  font-size: 25px;
-  float: right;
-}
 .card.project .project-name {
   font-size: 18px;
-  color: #1FA8CA;
+  color: #70BED1;
   padding: 0 10px;
   height: 40px;
 }
@@ -264,7 +257,7 @@ a.card { text-decoration: none; }
 /* issue total bounty */
 .card.project .issues-with-bounties > * > *:first-child {
   display: inline-block;
-  color: #31D3FC;
+  color: #70BED1;
   font-size: 16px;
   margin-right: 5px;
 }
@@ -275,10 +268,10 @@ a.card { text-decoration: none; }
   Big button at bottom
 */
 .card.project .bottom-button {
-  background: #23BDE4;
+  background: #DDF4FA;
   text-align: center;
   padding: 10px 0;
-  color: white;
+  color: #5FAEC0;
 }
 
 
