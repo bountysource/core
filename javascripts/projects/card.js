@@ -13,9 +13,9 @@ with (scope('Project', 'App')) {
 
       div({ 'class': 'project-name' }, truncate(project.name, 70)),
 
-      div({ 'class': 'issues-with-bounties' },
+      div({ 'class': 'issue-rows' },
         (project.issues).slice(0,5).map(function(issue) {
-          return div(
+          return div({ 'class': (issue.can_add_bounty ? 'open' : 'closed') },
             span(money(issue.bounty_total)),
             span(truncate(issue.title, 30))
           );

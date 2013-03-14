@@ -255,19 +255,30 @@ a.card { text-decoration: none; }
 /*
   List of bounties on issues for project
 */
-.card.project .issues-with-bounties {
+.card.project .issue-rows {
   padding: 0 10px;
   height: 95px;
 }
 /* issue total bounty */
-.card.project .issues-with-bounties > * > *:first-child {
+.card.project .issue-rows > * > *:first-child {
   display: inline-block;
   color: #70BED1;
   font-size: 16px;
   margin-right: 5px;
 }
+.card.project .issue-rows > *.closed > *:first-child{
+  color: #E27A75;
+  text-decoration: line-through;
+}
+
 /* issue title */
-.card.project .issues-with-bounties > * > *:last-child { color: gray; font-size: 12px; }
+.card.project .issue-rows > * > *:last-child {
+  color: gray;
+  font-size: 12px;
+}
+.card.project .issue-rows > *.closed > *:last-child{
+  text-decoration: line-through;
+}
 
 /*
   Big button at bottom
