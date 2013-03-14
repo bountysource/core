@@ -12,11 +12,12 @@ with (scope('Fundraiser', 'App')) {
       funding_percentage = 1;
     }
 
-    // allow > 100% ~=--= YOLO =--=~
-    // if (funding_percentage > 100) funding_percentage = 100;
+    var large_percentage = div({ 'class': 'fundraiser-percentage gteq-50' }, parseInt(funding_percentage)+'%');
 
-    var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' });
-    var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner);
+    var small_percentage = div({ 'class': 'fundraiser-percentage lt-50' }, parseInt(funding_percentage)+'%');
+
+    var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' }, funding_percentage >= 50 && large_percentage);
+    var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner, funding_percentage< 50 && small_percentage);
 
     // add the percentage to progress bar, cap at 100%
     progress_bar_inner.style.width = (funding_percentage > 100 ? 100 : funding_percentage) + '%';
@@ -36,18 +37,13 @@ with (scope('Fundraiser', 'App')) {
       div({ 'class': 'fundraiser-stats' },
         div({ 'class': 'fundraiser-data' },
           div(
-            span(parseInt(funding_percentage) + '%'),
-            span('funded')
+            div(money(fundraiser.total_pledged)),
+            div('pledged')
           ),
           div(
             span(formatted_number(fundraiser.days_remaining || 0)),
             span('days left')
           )
-        ),
-
-        div({ 'class': 'fundraiser-total-pledged' },
-          div(money(fundraiser.total_pledged)),
-          div('pledged')
         )
       ),
 
