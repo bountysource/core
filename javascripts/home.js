@@ -70,7 +70,7 @@ with (scope('Home', 'App')) {
 
         if (all_projects && all_projects.length > 0) {
           render({ into: all_projects_cards_container },
-            cards_row('Projects', all_projects, Project.card)
+            cards_row('Open Bounties by Project', all_projects, Project.card)
           );
         }
       }
@@ -100,7 +100,6 @@ with (scope('Home', 'App')) {
       cards_row
     ];
   });
-
 
   define('card_row_header', function(title, row_element, options) {
     options = options || {};
