@@ -7,7 +7,10 @@ with (scope('Home', 'App')) {
     );
   });
 
-  define('cards_per_row', 4);
+  define('cards_per_page', 4);
+  define('fundraiser_cards_container',        div({ 'class': 'card-row-wrapper' }));
+  define('featured_projects_cards_container', div({ 'class': 'card-row-wrapper' }));
+  define('all_projects_cards_container',      div({ 'class': 'card-row-wrapper' }));
 
   route('#', function() {
     // render nothing, then hide the content for now... we're using before-content!!
@@ -32,66 +35,72 @@ with (scope('Home', 'App')) {
         Home.top_box,
 
         div({ id: 'card-rows-container' },
-          fundraiser_cards_row,
-          project_cards_row
+          fundraiser_cards_container,
+          featured_projects_cards_container,
+          all_projects_cards_container
         )
       )
     );
-  });
 
-  define('fundraiser_cards_row', function(title) {
-    var fundraiser_card_row_wrapper = div({ 'class': 'card-row-wrapper', id: 'fundraiser-card-row-wrapper' });
-
+    // get all fundraiser cards, render them
     BountySource.get_fundraiser_cards(function(response) {
       if (response.meta.success) {
-        var fundraiser_cards_row = div({ 'class': 'card-row fundraisers', id: 'fundraiser-cards-row' },
-          response.data.map(function(fundraiser) { return Fundraiser.card(fundraiser) })
-        );
+        var fundraisers = response.data;
 
-        // add pagination data to row element
-        fundraiser_cards_row['data-page-count'] = Math.ceil(response.data.length / cards_per_row);
-        fundraiser_cards_row['data-page-index'] = 0;
-
-        render({ into: fundraiser_card_row_wrapper },
-          card_row_header('Featured Fundraisers', fundraiser_cards_row, {
-            show_nav_buttons: response.data.length > cards_per_row
-          }),
-          fundraiser_cards_row
+        render({ into: fundraiser_cards_container },
+          cards_row('Featured Fundraisers', fundraisers, Fundraiser.card)
         );
-      } else {
-        console.log('Fundraiser cards failed to load!');
       }
     });
 
-    return fundraiser_card_row_wrapper;
-  });
-
-  define('project_cards_row', function(title) {
-    var project_cards_row_wrapper = div({ 'class': 'card-row-wrapper', id: 'project-card-row-wrapper' });
-
+    // get all tracker cards, render them
     BountySource.get_project_cards(function(response) {
       if (response.meta.success) {
-        var project_cards_row = div({ 'class': 'card-row projects', id: 'project-cards-row' },
-          response.data.map(function(project) { return Project.card(project) })
-        );
+        var featured_projects = response.data.featured_trackers,
+            all_projects      = response.data.all_trackers;
 
-        // add pagination data to row element
-        project_cards_row['data-page-count'] = Math.ceil(response.data.length / cards_per_row);
-        project_cards_row['data-page-index'] = 0;
+        console.log('featured_projects', featured_projects);
+        console.log('all_projects', all_projects);
 
-        render({ into: project_cards_row_wrapper },
-          card_row_header('Open Bounties by Project', project_cards_row, {
-            show_nav_buttons: response.data.length > cards_per_row
-          }),
-          project_cards_row
-        );
-      } else {
-        console.log('Project cards failed to load!');
+        if (featured_projects && featured_projects.length > 0) {
+          render({ into: featured_projects_cards_container },
+            cards_row('Featured Projects', featured_projects, Project.card)
+          );
+        }
+
+        if (all_projects && all_projects.length > 0) {
+          render({ into: all_projects_cards_container },
+            cards_row('Projects', all_projects, Project.card)
+          );
+        }
       }
     });
-
-    return project_cards_row_wrapper;
   });
+
+  define('cards_row', function(title, cards_data, card_template_method) {
+    var cards_row = div({ 'class': 'card-row', id: 'fundraiser-cards-row' },
+      cards_data.map(function(card) { return card_template_method(card) })
+    );
+
+    // need to insert blank cards to fill space?
+    if (cards_data.length % cards_per_page != 0) {
+      // build a fake card, get its width
+      var placeholder = div({ style: 'width: 238px;' });
+      for (var i=0; i<(cards_per_page - cards_data.length % cards_per_page); i++) {
+        cards_row.appendChild(div({ 'class': 'card', style: 'opacity: 0; margin-right: 10px; height: 0;' }));
+      }
+    }
+
+    // add pagination data to row element
+    cards_row['data-page-count'] = Math.ceil(cards_data.length / cards_per_page);
+    cards_row['data-page-index'] = 0;
+
+    return [
+      card_row_header(title, cards_row, { show_nav_buttons: cards_data.length > cards_per_page }),
+      cards_row
+    ];
+  });
+
 
   define('card_row_header', function(title, row_element, options) {
     options = options || {};

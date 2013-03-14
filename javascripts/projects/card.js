@@ -14,7 +14,7 @@ with (scope('Project', 'App')) {
       div({ 'class': 'project-name' }, truncate(project.name, 70)),
 
       div({ 'class': 'issues-with-bounties' },
-        project.issues.slice(0,5).map(function(issue) {
+        (project.issues).slice(0,5).map(function(issue) {
           return div(
             span(money(issue.bounty_total)),
             span(truncate(issue.title, 30))
