@@ -59,9 +59,6 @@ with (scope('Home', 'App')) {
         var featured_projects = response.data.featured_trackers,
             all_projects      = response.data.all_trackers;
 
-        console.log('featured_projects', featured_projects);
-        console.log('all_projects', all_projects);
-
         if (featured_projects && featured_projects.length > 0) {
           render({ into: featured_projects_cards_container },
             cards_row('Featured Projects', featured_projects, Project.card)
