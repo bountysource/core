@@ -194,7 +194,7 @@ with (scope('Contributions', 'App')) {
                 ),
 
                 fieldset({ 'class': 'no-label', style: 'margin-left: 0' },
-                  submit({class: 'green'}, 'Redeem reward')
+                  submit({ 'class': 'green' }, 'Redeem reward')
                 )
               )
             ),
