@@ -289,8 +289,6 @@ with (scope('BountySource')) {
     api('/user/solutions/'+id+'/payout', 'POST', data, callback);
   });
 
-
-
   /*
   * Cards
   * */
@@ -312,6 +310,14 @@ with (scope('BountySource')) {
   */
   define('get_fundraiser_info', function(fundraiser_id, callback) {
     api('/user/fundraisers/' + fundraiser_id + '/info', callback);
+  });
+
+
+  /*
+  * Get contributions for the authenticated user
+  * */
+  define('get_contributions', function(callback) {
+    api('/user/contributions', callback);
   });
 
 }

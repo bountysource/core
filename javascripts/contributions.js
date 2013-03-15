@@ -13,17 +13,14 @@ with (scope('Contributions', 'App')) {
       target_div
     );
 
-    BountySource.user_info(function(response) {
-      var user_info = response.data,
-          all_contributions = flatten_to_array(user_info.bounties, user_info.pledges);
+    BountySource.get_contributions(function(response) {
 
-      if (all_contributions.length <= 0) {
+      if (response.meta.success) {
+        var bounties  = response.data.bounties,
+            pledges   = response.data.pledges;
+
         render({ into: target_div },
-          info_message("You have not created any bounties yet. ", a({ href: '#' }, "Search for something to back."))
-        );
-      } else {
-        render({ into: target_div },
-          (user_info.bounties.length > 0) && section({ id: 'bounties-table' },
+          bounties.length > 0 && section({ id: 'bounties-table' },
             h2("Bounties"),
             table(
               tr(
@@ -35,7 +32,7 @@ with (scope('Contributions', 'App')) {
                 th('Date')
               ),
 
-              (user_info.bounties).map(function(bounty) {
+              bounties.map(function(bounty) {
                 return tr({ style: 'height: 75px;' },
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                     img({ src: bounty.issue.tracker.image_url, style: 'width: 50px;' })
@@ -50,7 +47,7 @@ with (scope('Contributions', 'App')) {
             )
           ),
 
-          (user_info.pledges.length > 0) && section({ id: 'pledges-table' },
+          pledges.length > 0 && section({ id: 'pledges-table' },
             h2("Fundraiser Pledges"),
             table(
               tr(
@@ -60,7 +57,7 @@ with (scope('Contributions', 'App')) {
                 th('Date')
               ),
 
-              user_info.pledges.map(function(pledge) {
+              pledges.map(function(pledge) {
                 return tr({ style: 'height: 75px;' },
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                     img({ src: pledge.fundraiser.image_url, style: 'width: 50px;' })
@@ -72,7 +69,9 @@ with (scope('Contributions', 'App')) {
               })
             )
           )
-        )
+        );
+      } else {
+        render({ into: target_div }, error_message(response.data.error));
       }
     });
   });
