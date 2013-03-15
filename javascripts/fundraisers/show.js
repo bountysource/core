@@ -37,6 +37,12 @@ with (scope('Show', 'Fundraiser')) {
       Columns.main(
         h1({ id: 'fundraiser-title' }, fundraiser.title),
 
+        // edit and info links
+        fundraiser.owner && ul({ id: 'edit-links' },
+          li(a({ href: fundraiser.frontend_edit_path }, img({ src: 'images/edit.gif' }), span('Edit'))),
+          li(a({ href: fundraiser.frontend_info_path }, img({ src: 'images/info.gif' }), span('Pledges')))
+        ),
+
         fundraiser.image_url && img({ id: 'fundraiser-image', src: fundraiser.image_url }),
 
         div({ id: 'short-description' }, fundraiser.short_description || ''),
@@ -91,33 +97,18 @@ with (scope('Show', 'Fundraiser')) {
 
       Columns.side(
         // show edit button if this fundraiser belongs to the user
-        options.preview ? a({ 'class': 'blue', href: Edit.hide_preview, style: 'padding: 10px 0;' },
+        options.preview && a({ 'class': 'blue', href: Edit.hide_preview, style: 'padding: 10px 0;' },
           div({ style: 'display: inline-block;' },
             img({ src: 'images/edit_32.gif', style: 'vertical-align: middle;' })
           ),
           div({ style: 'display: inline-block; width: 80%' }, span('Continue Editing'))
-        ) : Fundraiser.belongs_to(fundraiser.person) && div(
-          info_message(
-            !fundraiser.published && div(
-              div({ style: 'text-align: center;' },
-                p("You haven't published your fundraiser yet, so it isn't public."),
-                p("Finish editing your fundraiser now to publish it!")
-              )
-            ),
+        ),
 
-            a({ 'class': 'blue', href: fundraiser.frontend_edit_path, style: 'padding: 5px 0;' },
-              div({ style: 'display: inline-block; width: 25%;' },
-                img({ src: 'images/edit_32.gif', style: 'vertical-align: middle;' })
-              ),
-              div({ style: 'display: inline-block; width: 75%' }, span('Edit'))
-            ),
-            br(),
-            a({ 'class': 'blue', href: fundraiser.edit_url + '/info', style: 'padding: 5px 0;' },
-              div({ style: 'display: inline-block; width: 25%px;' },
-                img({ src: 'images/info_32.gif', style: 'vertical-align: middle;' })
-              ),
-              div({ style: 'display: inline-block; width: 75%' }, span('Info'))
-            )
+        // publish button. hidden in preview mode
+        fundraiser.owner && !fundraiser.published && info_message(
+          div({ style: 'text-align: center;' },
+            p("You haven't published your fundraiser yet, so it isn't public."),
+            p("Finish editing your fundraiser now to publish it!")
           )
         ),
 

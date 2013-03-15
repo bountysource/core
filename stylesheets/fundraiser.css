@@ -103,6 +103,42 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
   line-height: 50px;
 }
 
+/* edit links */
+#fundraiser-wrapper #edit-links {
+  list-style-type: none;
+  margin: 0 0 10px 0;
+  padding: 0;
+  display: block;
+}
+#fundraiser-wrapper #edit-links li {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+#fundraiser-wrapper #edit-links li:last-child { margin-right: 0; }
+#fundraiser-wrapper #edit-links li a {
+  padding: 5px;
+  background: #F1F1F1;
+  border: 1px solid #D6D6D6;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  color: black;
+  text-decoration: none;
+
+  -webkit-transition: ease-in 50ms;
+  -moz-transition:    ease-in 50ms;
+  -o-transition:      ease-in 50ms;
+  transition:         ease-in 50ms;
+}
+#fundraiser-wrapper #edit-links li a:hover { background: #E9E7E7; }
+#fundraiser-wrapper #edit-links li a > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+#fundraiser-wrapper #edit-links li a > *:nth-child(2) { margin-right: 0; }
+
 /* image */
 #fundraiser-wrapper #fundraiser-image {
   width: 100%;
@@ -163,4 +199,43 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
 #fundraiser-wrapper #fundraiser-description{
   overflow-x: auto;
   margin: 0;
+}
+
+/*
+  Fundraiser Info page
+*/
+#fundraiser-info .reward-info {
+  margin-bottom: 10px;
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+}
+#fundraiser-info .reward-info .reward-description {
+  background: #F8F8F8;
+  padding: 10px;
+  border-bottom: 1px solid #e3e3e3;
+}
+#fundraiser-info .reward-info .reward-description > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+#fundraiser-info .reward-info .reward-description > *:last-child { margin-right: 0px; }
+#fundraiser-info .reward-info .reward-description > *:nth-child(1) {
+  font-size: 25px;
+}
+#fundraiser-info .reward-info .reward-description > *:nth-child(2) {
+  font-size: 14px;
+}
+#fundraiser-info .reward-info .reward-description > *:nth-child(3) {
+  display: block;
+  margin: 10px 0 10px 20px;
+  font-size: 14px;
+}
+#fundraiser-info .reward-info .pledge-table {
+  padding: 10px;
+}
+#fundraiser-info .reward-info .pledge-table table tr:first-of-type * { font-weight: normal; }
+#fundraiser-info .reward-info .pledge-table table tr td img {
+  height: 24px;
+  height: 24px;
 }

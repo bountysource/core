@@ -1,8 +1,4 @@
 with (scope('Fundraiser', 'App')) {
-  define('belongs_to', function(person) {
-    return logged_in() && person && parseInt(person.id) == parseInt((Storage.get('access_token')||'').split('.')[0]);
-  });
-
   define('get_href', function(fundraiser) {
     return pretty_url('#fundraisers/'+fundraiser.id+'-', fundraiser.title);
   });

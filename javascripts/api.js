@@ -302,11 +302,16 @@ with (scope('BountySource')) {
     api('/trackers/cards', callback);
   });
 
-  define('get_fundraiser_pledges_overview', function(fundraiser_id, callback) {
-    api('/user/fundraisers/' + fundraiser_id + '/pledges', callback);
-  });
-
   define('redeem_pledge_reward', function(pledge_id, data, callback) {
     api('/user/pledges/' + pledge_id + '/redeem_reward', 'POST', data, callback);
   });
+
+  /*
+    Get extended information about a Fundraiser if you are the owner.
+    Includes the pledges
+  */
+  define('get_fundraiser_info', function(fundraiser_id, callback) {
+    api('/user/fundraisers/' + fundraiser_id + '/info', callback);
+  });
+
 }
