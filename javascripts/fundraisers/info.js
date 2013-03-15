@@ -45,9 +45,6 @@ with (scope('Info', 'Fundraiser')) {
   });
 
   define('reward_table', function(reward) {
-
-    console.log(reward);
-
     return div({ 'class': 'reward-info' },
       div({ 'class': 'reward-description' },
         div(money(reward.amount)),
@@ -79,46 +76,6 @@ with (scope('Info', 'Fundraiser')) {
             )
           })
         )
-      )
-    );
-
-
-    return table(
-      tr(
-        th('Name'),
-        th('Description'),
-        th()
-      )
-    );
-
-
-
-
-    return div({ 'class': 'reward' },
-      h2({ 'class': 'reward-name' },
-        (reward.amount ? "$" + reward.amount + " Reward: " : "No Reward:")
-      ),
-
-      reward.description && div({ style: "font-style: italic" }, reward.description),
-
-      div({ 'class': "reward-info" },
-        span("Claimed: " + (reward.amount ? reward.claimed : reward.pledges.length)),
-        (reward.limited_to ? span({ style: 'margin-left: 15px' }, "Limited to: " + reward.limited_to) : "")
-      ),
-
-      reward.fulfillment_details && div({ 'class': 'survey-question' }, "Fulfillment Details: " + reward.fulfillment_details),
-
-      reward.pledges.length > 0 && table({ 'class': 'users' },
-        tr(
-          th('User'),
-          th('Amount'),
-          th('Survey Response')
-        ),
-        reward.pledges.map(function(pledge) {
-          return tr(
-
-          );
-        })
       )
     );
   });
