@@ -135,4 +135,90 @@ with (scope('Contributions', 'App')) {
       }
     });
   });
+
+  route('#fundraisers/:fundraiser_id/pledges/:pledge_id/survey', function(fundraiser_id, pledge_id) {
+    // if the pledge ID was not subbed into the URL, just go view the issue.
+    // This will happen on Paypal cancel.
+    if (/:pledge_id/.test(pledge_id)) return set_route('#fundraisers/'+fundraiser_id);
+
+    var target_div = div('Loading...');
+
+    render(
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        'Fundraisers',
+        span({ id: 'breadcrumbs-fundraiser-title' }, 'Loading...'),
+        'Pledge Survey'
+      ),
+      target_div
+    );
+
+    define('redeem_reward', function(form_data) {
+      BountySource.redeem_pledge_reward(pledge_id, form_data, function(response) {
+        if (response.meta.success) {
+          render_message(success_message("Your reward has been redeemed"));
+        } else {
+          render_message(error_message(response.data.error));
+        }
+      });
+    });
+
+    BountySource.get_pledge(pledge_id, function(response) {
+      if (response.meta.success) {
+        var pledge = response.data;
+        var fundraiser = pledge.fundraiser;
+        var reward = pledge.reward
+
+        // render the title into the breadcrumbs
+        render({ target: 'breadcrumbs-fundraiser-title' },
+          a({ href: fundraiser.url }, abbreviated_text(fundraiser.title, 50))
+        );
+
+        render({ into: target_div },
+          div({ style: 'text-align: center;' },
+            h2(money(pledge.amount), " Pledge Made"),
+            h3(fundraiser.title),
+
+            reward && div({ style: 'margin: 10px; 0' },
+              h4({ style: 'margin-bottom: 0;' }, 'Reward:'),
+              p({ style: 'margin: 0 200px; padding: 10px;' }, reward.description)
+            ),
+
+            fundraiser.funding_goal_reached && reward.fulfillment_details && div(
+              form({ 'class': 'fancy', action: redeem_reward },
+                messages(),
+                fieldset(
+                  label({style: 'width: auto; font-weight: bold; padding: 0'}, reward.fulfillment_details),
+                  br(),
+                  textarea({style: 'width: 300px; height: 100px;', name: 'survey_response', placeholder: 'I want it to ship to the moon' })
+                ),
+
+                fieldset({ 'class': 'no-label', style: 'margin-left: 0' },
+                  submit({class: 'green'}, 'Redeem reward')
+                )
+              )
+            ),
+
+            div(
+              Facebook.create_share_button({
+                link:         BountySource.www_host+fundraiser.url,
+                name:         "I just backed "+fundraiser.title,
+                caption:      fundraiser.short_description,
+                description:  "BountySource is the funding platform for open-source software, contribute by making a pledge to this fundraiser!",
+                picture:      fundraiser.image_url || ''
+              }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
+
+              Twitter.create_share_button({
+                url:  BountySource.www_host+fundraiser.url,
+                text: money(pledge.amount)+" pledge made to "+fundraiser.title,
+                via:  'BountySource'
+              }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet'))
+            )
+          )
+        );
+      } else {
+        render(error_message(response.data.error));
+      }
+    });
+  });
 }
