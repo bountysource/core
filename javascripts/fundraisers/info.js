@@ -29,11 +29,20 @@ with (scope('Info', 'Fundraiser')) {
           Columns.create({ show_side: false }),
 
           Columns.main(
-            h3('Rewards with Pledges'),
-            rewards_with_pledges.map(reward_table),
+            response.data.rewards.length <= 0 && info_message(
+              "You haven't added any rewards to your fundraiser. ",
+              a({ href: fundraiser.frontend_edit_path+'/rewards' }, "Add some now!")
+            ),
 
-            h3('Remaining Rewards'),
-            remaining_rewards.map(reward_table)
+            rewards_with_pledges.length > 0 && [
+              h3('Rewards with Pledges'),
+              rewards_with_pledges.map(reward_table)
+            ],
+
+            remaining_rewards.length > 0 && [
+              h3('Remaining Rewards'),
+              remaining_rewards.map(reward_table)
+            ]
           ),
 
           Columns.side()

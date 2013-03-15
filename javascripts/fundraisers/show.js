@@ -108,7 +108,7 @@ with (scope('Show', 'Fundraiser')) {
         fundraiser.owner && !fundraiser.published && info_message(
           div({ style: 'text-align: center;' },
             p("You haven't published your fundraiser yet, so it isn't public."),
-            p("Finish editing your fundraiser now to publish it!")
+            p(a({ href: fundraiser.frontend_edit_path+'/basic-info' }, 'Finish editing your fundraiser'), " now to publish it!")
           )
         ),
 
