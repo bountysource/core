@@ -141,7 +141,6 @@ with (scope('App')) {
   define('message', function() {
     var arguments = flatten_to_array(arguments),
         options   = shift_options_from_args(arguments);
-
     return div(options, arguments);
   });
 

@@ -159,6 +159,84 @@ with (scope('Pledge', 'Fundraiser')) {
     document.getElementById('reward-id').value = reward.id;
   });
 
+  route('#fundraisers/:fundraiser_id/pledges/:pledge_id/survey', function(fundraiser_id, pledge_id) {
+    // if the pledge ID was not subbed into the URL, just go view the issue.
+    // This will happen on Paypal cancel.
+    if (/:pledge_id/.test(pledge_id)) return set_route('#fundraisers/'+fundraiser_id);
+
+    var target_div = div('Loading...');
+
+    render(target_div);
+
+    BountySource.get_pledge(pledge_id, function(response) {
+
+      console.log(response);
+
+      if (response.meta.success) {
+        var pledge      = response.data,
+          fundraiser  = pledge.fundraiser,
+          reward      = pledge.reward;
+
+        Pledge.errors = div();
+
+        render({ into: target_div },
+          breadcrumbs(
+            a({ href: '#' }, 'Home'),
+            a({ href: fundraiser.frontend_path }, truncate(fundraiser.title, 100)),
+            a({ href: '#contributions' }, 'Pledges'),
+            'Survey'
+          ),
+
+          Columns.create({ show_side: true }),
+
+          Columns.main(
+            info_message("In order to receive the reward you selected, please complete the following survey from the fundraiser creator:"),
+
+            errors,
+
+            form({ 'class': 'fancy', action: curry(update_pledge, pledge) },
+              fieldset(
+                label("Question:"),
+                div({ style: 'display: inline-block; vertical-align: middle; text-align: left;' }, reward.fulfillment_details)
+              ),
+
+              fieldset(
+                label('Response:'),
+                textarea({ required: true, name: 'survey_response', style: 'height: 100px; width: 300px;' }, pledge.survey_response || '')
+              ),
+
+              fieldset({ 'class': 'no-label' },
+                button({ 'class': 'green', style: 'width: 200px;' }, 'Answer Survey')
+              )
+            )
+          ),
+
+          Columns.side(
+            h4('Reward'),
+            p({ style: 'white-space: pre-wrap;' }, reward.description)
+          )
+        );
+      } else {
+        render({ into: target_div }, error_message(response.data.error));
+      }
+    });
+  });
+
+  define('update_pledge', function(pledge, form_data) {
+    render({ into: Pledge.errors }, '');
+
+    BountySource.update_pledge(pledge.id, form_data, function(response) {
+
+      console.log(response);
+
+      if (response.meta.success) {
+        render({ into: Pledge.errors }, success_message('Survey response received, thanks!'));
+      } else {
+        render({ into: Pledge.errors }, error_message(response.data.error));
+      }
+    });
+  });
+
   define('make_pledge', function(fundraiser, form_data) {
     if (isNaN(parseInt(form_data.reward_id))) {
       return render_message(error_message('Please select your reward first'));

@@ -300,10 +300,6 @@ with (scope('BountySource')) {
     api('/trackers/cards', callback);
   });
 
-  define('redeem_pledge_reward', function(pledge_id, data, callback) {
-    api('/user/pledges/' + pledge_id + '/redeem_reward', 'POST', data, callback);
-  });
-
   /*
     Get extended information about a Fundraiser if you are the owner.
     Includes the pledges
@@ -318,6 +314,14 @@ with (scope('BountySource')) {
   * */
   define('get_contributions', function(callback) {
     api('/user/contributions', callback);
+  });
+
+
+  /*
+  * Update a pledge with the survey response
+  * */
+  define('update_pledge', function(pledge_id, data, callback) {
+    api('/user/pledges/'+pledge_id, 'PUT', data, callback);
   });
 
 }

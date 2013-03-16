@@ -60,6 +60,12 @@ with (scope('Info', 'Fundraiser')) {
         p(reward.description)
       ),
       div({ 'class': 'pledge-table' },
+        reward.fulfillment_details.length > 0 && div(
+          h4('Fulfillment details:'),
+          p(reward.fulfillment_details),
+          br
+        ),
+
         reward.pledges.length <= 0 && div(
           div({ style: 'font-style: italic;' }, 'No pledges have been made for this reward.')
         ),
