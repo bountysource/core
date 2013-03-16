@@ -34,7 +34,7 @@ with (scope('Index', 'Fundraiser')) {
                 td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
 
                 td({ style: 'text-align: center;' },
-                  a({ href: fundraiser.frontend_edit_path }, img({ src: 'images/edit.gif' })),
+                  a({ href: fundraiser.frontend_edit_path+'/basic-info' }, img({ src: 'images/edit.gif' })),
 
                   // TODO: info page for fundraiser author to see contributions and rewards that have been claimed
                   a({ href: fundraiser.frontend_info_path, style: 'margin-left: 10px;' }, img({ src: 'images/info.gif' })),

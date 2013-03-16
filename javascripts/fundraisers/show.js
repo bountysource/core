@@ -39,7 +39,7 @@ with (scope('Show', 'Fundraiser')) {
 
         // edit and info links
         fundraiser.owner && ul({ id: 'edit-links' },
-          li(a({ href: fundraiser.frontend_edit_path }, img({ src: 'images/edit.gif' }), span('Edit'))),
+          li(a({ href: fundraiser.frontend_edit_path+'/basic-info' }, img({ src: 'images/edit.gif' }), span('Edit'))),
           li(a({ href: fundraiser.frontend_info_path }, img({ src: 'images/info.gif' }), span('Pledges')))
         ),
 
