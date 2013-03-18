@@ -169,9 +169,6 @@ with (scope('Pledge', 'Fundraiser')) {
     render(target_div);
 
     BountySource.get_pledge(pledge_id, function(response) {
-
-      console.log(response);
-
       if (response.meta.success) {
         var pledge      = response.data,
             fundraiser  = pledge.fundraiser,
