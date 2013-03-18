@@ -28,7 +28,7 @@ with (scope('Account','App')) {
         text({ name: 'country', placeholder: 'US' })
       ),
       fieldset({ 'class': 'no-label' },
-        submit({ 'class': 'green' }, options.submit_label)
+        submit({ 'class': 'button green' }, options.submit_label)
       )
     );
   });

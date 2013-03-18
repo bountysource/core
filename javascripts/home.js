@@ -21,7 +21,7 @@ with (scope('Home', 'App')) {
       h1('The funding platform for open-source software.'),
       h2({ style: 'margin-bottom: 0;' }, 'Improve the open-source projects you love by creating and collecting bounties!'),
 
-      !logged_in() && a({ id: 'learn-more', 'class': 'blue', href: '#faq', style: 'display: inline-block; width: 150px;' }, "Learn More"),
+      !logged_in() && a({ id: 'learn-more', 'class': 'button blue', href: '#faq', style: 'display: inline-block; width: 150px;' }, "Learn More"),
 
       div({ style: 'clear: both;' }),
       recent_people_div

@@ -152,7 +152,7 @@ with (scope('Payout','Solution')) {
             ),
 
             fieldset({ style: 'text-align: center; margin-top: 30px;' },
-              button({ 'class': 'green', style: 'width: 200px;' }, 'Payout!')
+              button({ 'class': 'button green', style: 'width: 200px;' }, 'Payout!')
             )
           )
         )

@@ -10,7 +10,7 @@ with (scope('Paypal', 'Account')) {
         text({ 'class': 'long', name: 'paypal_email_confirmation', placeholder: 'john.doe@gmail.com' })
       ),
       fieldset({ 'class': 'no-label' },
-        submit({ 'class': 'green' }, 'Link Paypal Account')
+        submit({ 'class': 'button green' }, 'Link Paypal Account')
       )
     );
   });

@@ -40,7 +40,7 @@ with (scope('Repository')) {
           issue_table({ header_class: 'thick-line-orange' }, "Most Recent", repo.issues_newest),
 
           div(
-            div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
+            div({ style: 'margin-top: 20px; width: 150px; float: left; padding-right: 20px' }, a({ 'class': 'button blue', href: Repository.get_issues_href(repo) }, 'View All Issues')),
             // div({ style: 'margin-top: 20px; width: 180px; float: left;' }, a({ 'class': 'blue', href: '#repos/'+repo.full_name+'/donate'}, 'Donate to Project')),
             div({ style: 'clear: both '})
           )

@@ -24,7 +24,7 @@ with (scope('Account','App')) {
         ),
 
         fieldset({ 'class': 'no-label' },
-          submit({ 'class': 'green' }, 'Change Password')
+          submit({ 'class': 'button green' }, 'Change Password')
         )
       )
     );

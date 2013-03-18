@@ -82,7 +82,7 @@ with (scope('Pledge', 'Fundraiser')) {
   define('reward_row', function(reward) {
     var reward_radio = radio({ id: 'reward_'+reward.id+'_radio', name: 'reward_id_radio', style: 'vertical-align: middle;' });
     var submit_button = div({ 'class': 'reward-submit-button', style: 'display: none; margin-top: 10px; text-align: center; padding-top: 10px; margin-top: 10px; border-top: 1px solid #AFECAF' },
-      submit({ 'class': 'blue' }, logged_in() ? "Continue to Payment" : "Sign In and Pay")
+      submit({ 'class': 'button blue' }, logged_in() ? "Continue to Payment" : "Sign In and Pay")
     );
     if (reward.sold_out) reward_radio.setAttribute('disabled', true);
 
@@ -206,7 +206,7 @@ with (scope('Pledge', 'Fundraiser')) {
               ),
 
               fieldset({ 'class': 'no-label' },
-                button({ 'class': 'green', style: 'width: 200px;' }, 'Answer Survey')
+                button({ 'class': 'button green', style: 'width: 200px;' }, 'Answer Survey')
               )
             )
           ),

@@ -50,7 +50,7 @@ with (scope('Signin','App')) {
 
     refs.email_status_div = div({ style: 'margin-left: 175px; font-size: 11px; font-style:italic' });
 
-    refs.sign_in_up_button = submit({ 'class': 'green no-hover' }, 'Continue');
+    refs.sign_in_up_button = submit({ 'class': 'button green no-hover' }, 'Continue');
 
     refs.account_link_id = params.account_link_id;
 

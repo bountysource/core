@@ -112,12 +112,12 @@ with (scope('Edit', 'Fundraiser')) {
 
     if (fundraiser.publishable) {
       render({ into: publish_button_content },
-        a({ 'class': 'blue', href: curry(publish_fundraiser, fundraiser) }, 'Publish')
+        a({ 'class': 'button blue', href: curry(publish_fundraiser, fundraiser) }, 'Publish')
       );
     } else {
       render({ into: publish_button_content },
         info_message("You need to provide all of the necessary data to publish your fundraiser."),
-        div({ 'class': 'gray', style: 'text-decoration: none;' }, 'Publish Fundraiser')
+        div({ 'class': 'button gray', style: 'text-decoration: none;' }, 'Publish Fundraiser')
       );
     }
 
@@ -290,7 +290,7 @@ with (scope('Edit', 'Fundraiser')) {
               textarea({ name: 'fulfillment_details', placeholder: 'Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc.' })
             ),
 
-            fieldset({ 'class': 'no-label' }, submit({ 'class': 'green' }, 'Create Reward'))
+            fieldset({ 'class': 'no-label' }, submit({ 'class': 'button green' }, 'Create Reward'))
           )
         )
       );
@@ -427,9 +427,9 @@ with (scope('Edit', 'Fundraiser')) {
         ),
 
         fieldset({ 'class': 'no-label edit-reward-buttons' },
-          submit({ 'class': 'green', style: 'padding: 0;' }, 'Save'),
-          a({ 'class': 'blue', style: 'display: inline-block; width: 100px;', href: curry(cancel_reward_update, reward) }, 'Cancel'),
-          !fundraiser.published && a({ 'class': 'blue', href: curry(destroy_reward, fundraiser, reward) }, 'Delete')
+          submit({ 'class': 'button green', style: 'padding: 0;' }, 'Save'),
+          a({ 'class': 'button blue', style: 'display: inline-block; width: 100px;', href: curry(cancel_reward_update, reward) }, 'Cancel'),
+          !fundraiser.published && a({ 'class': 'button blue', href: curry(destroy_reward, fundraiser, reward) }, 'Delete')
         )
       )
     );

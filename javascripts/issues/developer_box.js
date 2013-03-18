@@ -20,7 +20,7 @@ with (scope('DeveloperBox','Issue')) {
     DeveloperBox.start_work_div = div({ id: 'start-work' },
       div("Want to earn the bounty on this issue? Submit a solution!"),
       br,
-      a({ id: 'create-solution', 'class': 'green', href: create_solution }, 'Start Work')
+      a({ id: 'create-solution', 'class': 'button green', href: create_solution }, 'Start Work')
     );
 
     reload_content();
@@ -51,15 +51,15 @@ with (scope('DeveloperBox','Issue')) {
             } else if (my_solution.submitted) {
               render({ into: DeveloperBox.inner_div },
                 success_message("Your submission has been submitted."),
-                a({ 'class': 'green', href: curry(set_route, my_solution.frontend_path) }, "My Submission")
+                a({ 'class': 'button green', href: curry(set_route, my_solution.frontend_path) }, "My Submission")
               );
             } else {
               render({ into: DeveloperBox.inner_div },
                 div("You are currently working on a solution to this issue."),
                 br,
-                a({ 'class': 'green', href: my_solution.frontend_path }, "I'm Finished"),
+                a({ 'class': 'button green', href: my_solution.frontend_path }, "I'm Finished"),
                 br,
-                a({ 'class': 'gray', href: destroy_solution }, "Cancel"),
+                a({ 'class': 'button gray', href: destroy_solution }, "Cancel"),
                 other_developers_message
               );
             }

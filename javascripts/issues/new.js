@@ -44,7 +44,7 @@ with (scope('Issue', 'App')) {
           ),
 
           fieldset({ 'class': 'no-label '},
-            submit({ 'class': 'blue' }, 'Add Issue')
+            submit({ 'class': 'button blue' }, 'Add Issue')
           )
         )
       )

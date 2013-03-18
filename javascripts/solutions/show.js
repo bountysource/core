@@ -48,13 +48,13 @@ with (scope('Show','Solution')) {
             ribbon_header("Links"),
             br,
 
-            a({ 'class': 'green', href: solution.issue.frontend_path }, 'Issue'),
+            a({ 'class': 'button green', href: solution.issue.frontend_path }, 'Issue'),
             br,
-            a({ 'class': 'green', href: '#solutions' }, 'My Solutions'),
+            a({ 'class': 'button green', href: '#solutions' }, 'My Solutions'),
 
             solution.code_url && div(
               br,
-              a({ 'class': 'blue', href: solution.code_url, target: '_blank' }, 'My Submission')
+              a({ 'class': 'button blue', href: solution.code_url, target: '_blank' }, 'My Submission')
             )
           )
         );
@@ -95,7 +95,7 @@ with (scope('Show','Solution')) {
                 )
               ),
               fieldset({ 'class': 'no-label' },
-                submit({ 'class': 'green' }, 'Update')
+                submit({ 'class': 'button green' }, 'Update')
               )
             )
           );
@@ -121,8 +121,8 @@ with (scope('Show','Solution')) {
                 body_input
               ),
               fieldset({ 'class': 'no-label' },
-                submit({ 'class': 'blue' }, 'Submit Code'),
-                a({ 'class': 'gray', href: destroy_solution, style: 'display: inline-block; vertical-align: middle; width: 200px; margin-left: 10px;' }, 'Stop Work')
+                submit({ 'class': 'button blue' }, 'Submit Code'),
+                a({ 'class': 'button gray', href: destroy_solution, style: 'display: inline-block; vertical-align: middle; width: 200px; margin-left: 10px;' }, 'Stop Work')
               )
             )
           );

@@ -42,14 +42,14 @@ with (scope('Account','App')) {
             ),
 
             fieldset({ 'class': 'no-label' },
-              submit({ 'class': 'green' }, 'Update Account')
+              submit({ 'class': 'button green' }, 'Update Account')
             )
           )
         ),
 
         div({ 'class': 'split-side' },
           div({ style: 'background: #eee; padding: 0 21px 21px 21px;' }, ribbon_header('Account Settings'), br(),
-            a({ 'class': 'blue', href: '#account/change_password' }, 'Change Password')
+            a({ 'class': 'button blue', href: '#account/change_password' }, 'Change Password')
           ),
 
           br(),
@@ -63,7 +63,7 @@ with (scope('Account','App')) {
               span(response.data.github_user.login)
             ] : [
               h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin: 0 auto 15px auto; line-height: 25px;' }, 'Have a GitHub Account?'),
-              a({ 'class': 'blue', href: Github.auth_url() }, 'Link GitHub Account')
+              a({ 'class': 'button blue', href: Github.auth_url() }, 'Link GitHub Account')
             ]
           )
         ),

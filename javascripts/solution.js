@@ -29,7 +29,7 @@ with (scope('Solution','App')) {
     if (solution.accepted && !solution.disputed && !solution.in_dispute_period) {
       return div({ style: 'margin: 5px 0;' },
         small_success_message({ close_button: false, style: 'margin: 5px 0;' }, 'Solution accepted!'),
-        a({ 'class': 'green', href: '#solutions/'+solution.id }, 'Claim Bounty!')
+        a({ 'class': 'button green', href: '#solutions/'+solution.id }, 'Claim Bounty!')
       );
     } else if (solution.disputed) {
       return div({ style: 'margin: 5px 0;' },

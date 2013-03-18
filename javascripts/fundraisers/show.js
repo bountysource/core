@@ -97,7 +97,7 @@ with (scope('Show', 'Fundraiser')) {
 
       Columns.side(
         // show edit button if this fundraiser belongs to the user
-        options.preview && a({ 'class': 'blue', href: Edit.hide_preview, style: 'padding: 10px 0;' },
+        options.preview && a({ 'class': 'button blue', href: Edit.hide_preview },
           div({ style: 'display: inline-block;' },
             img({ src: 'images/edit_32.gif', style: 'vertical-align: middle;' })
           ),

@@ -19,7 +19,7 @@ with (scope('Create', 'Fundraiser')) {
           ),
 
           fieldset({ 'class': 'no-label' },
-            submit({ 'class': 'green' }, 'Create Fundraiser')
+            submit({ 'class': 'button blue' }, 'Create Fundraiser')
           )
         )
       ),

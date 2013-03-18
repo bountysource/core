@@ -92,7 +92,7 @@ with (scope('Show', 'Issue')) {
           )
         ),
 
-        a({ href: issue.accepted_solution.code_url, target: '_blank', 'class': 'blue', style: 'width: 200px; display: inline-block;' }, 'View Solution')
+        a({ href: issue.accepted_solution.code_url, target: '_blank', 'class': 'button blue' }, 'View Solution')
       );
 
       return target_div;
@@ -121,7 +121,7 @@ with (scope('Show', 'Issue')) {
 
           p('"' + solution.body + '"'),
 
-          a({ href: solution.code_url, target: '_blank', 'class': 'blue', style: 'width: 200px; display: inline-block;' }, 'View Solution'),
+          a({ href: solution.code_url, target: '_blank', 'class': 'button blue' }, 'View Solution'),
 
           p({ style: 'line-height: 25px;' },
             "If you feel that this solution does not sufficiently solve the issue, file a ",
@@ -175,7 +175,7 @@ with (scope('Show', 'Issue')) {
 
           Payment.payment_methods({ style: 'margin: 10px 0;', value: get_params().payment_method }),
 
-          submit({ 'class': 'blue' }, 'Create Bounty')
+          submit({ 'class': 'button blue', style: 'width: 100%;' }, 'Create Bounty')
         )
       )
     );

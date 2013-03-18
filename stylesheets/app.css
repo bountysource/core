@@ -290,3 +290,15 @@ input.autosized {
   margin: 20px 15px;
   border-bottom: 1px solid #e3e3e3;
 }
+
+/*
+  Status elements on #contributions page, and elsewhere
+*/
+.status-indicator {
+  padding: 4px;
+  border-radius: 4px;
+  color: white;
+}
+.status-indicator.green   { background: #83D11A; }
+.status-indicator.red     { background: #83D11A; }
+.status-indicator.orange  { background: #F3B13C; }

@@ -20,6 +20,34 @@ with (scope('Contributions', 'App')) {
             pledges   = response.data.pledges;
 
         render({ into: target_div },
+          pledges.length > 0 && section({ id: 'pledges-table' },
+            h2("Fundraiser Pledges"),
+            table(
+              tr(
+                th(),
+                th({ style: 'width: 300px;' }, 'Fundraiser'),
+                th('Pledge Amount'),
+                th('Date'),
+                th({ style: 'width: 175px; text-align: center;' }, 'Status')
+              ),
+
+              pledges.map(function(pledge) {
+
+                console.log(pledge);
+
+                return tr({ style: 'height: 75px;' },
+                  td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
+                    img({ src: pledge.fundraiser.image_url, style: 'width: 50px;' })
+                  ),
+                  td(a({ href: pledge.fundraiser.frontend_path }, pledge.fundraiser.title)),
+                  td(money(pledge.amount)),
+                  td(formatted_date(pledge.created_at)),
+                  td({ style: 'width: 175px; text-align: center;' }, status_link_for_pledge(pledge))
+                )
+              })
+            )
+          ),
+
           bounties.length > 0 && section({ id: 'bounties-table' },
             h2("Bounties"),
             table(
@@ -45,35 +73,20 @@ with (scope('Contributions', 'App')) {
                 )
               })
             )
-          ),
-
-          pledges.length > 0 && section({ id: 'pledges-table' },
-            h2("Fundraiser Pledges"),
-            table(
-              tr(
-                th(),
-                th({ style: 'width: 300px;' }, 'Fundraiser'),
-                th('Pledge Amount'),
-                th('Date')
-              ),
-
-              pledges.map(function(pledge) {
-                return tr({ style: 'height: 75px;' },
-                  td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
-                    img({ src: pledge.fundraiser.image_url, style: 'width: 50px;' })
-                  ),
-                  td(a({ href: pledge.fundraiser.frontend_path }, pledge.fundraiser.title)),
-                  td(money(pledge.amount)),
-                  td(formatted_date(pledge.created_at))
-                )
-              })
-            )
           )
         );
       } else {
         render({ into: target_div }, error_message(response.data.error));
       }
     });
+  });
+
+  define('status_link_for_pledge', function(pledge) {
+    if (pledge.reward && pledge.reward.fulfillment_details) {
+      return a({ 'class': 'status-indicator orange', href: pledge.frontend_path+'/survey' }, 'Info Needed');
+    } else {
+      return a({ 'class': 'status-indicator green', href: pledge.frontend_path }, 'Fine and Dandy');
+    }
   });
 
   route('#fundraisers/:fundraiser_id/pledges/:pledge_id/receipt', function(fundraiser_id, pledge_id) {

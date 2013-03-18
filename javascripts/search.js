@@ -87,7 +87,9 @@ with (scope('Search', 'App')) {
             div({ 'class': 'info-message' },
               p(b("Don't see what you want?")),
               p("If you don't see the issue you're looking for, you can quickly add it to our database."),
-              a({ href: '#issues/new', 'class': 'blue' }, "Add Issue by URL")
+              div({ style: 'text-align: center;' },
+                a({ href: '#issues/new', 'class': 'button blue' }, "Add Issue by URL")
+              )
             )
           )
 
