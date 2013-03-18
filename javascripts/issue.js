@@ -7,10 +7,17 @@ with (scope('Issue','App')) {
 
   // render a pretty 'open' or 'closed' element
   define('status_element', function(issue) {
-    return a({ style: 'font-size: 16px; text-decoration: none;', href: get_href(issue) },
-      issue.can_add_bounty ? span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Open') :
-                              span({ style: 'background: #D11A1A; border-radius: 4px; padding: 4px; color: white' }, 'Closed')
-    );
+    var element = a({ 'class': 'status-indicator', href: issue.frontend_path });
+
+    if (issue.can_add_bounty) {
+      element.innerHTML = 'Open';
+      add_class(element, 'green');
+    } else {
+      element.innerHTML = 'Closed';
+      add_class(element, 'red');
+    }
+
+    return element;
   });
 
   define('card', function(issue) {

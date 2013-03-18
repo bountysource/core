@@ -122,20 +122,18 @@ with (scope('Show', 'Fundraiser')) {
               span({ style: 'font-size: 45px; display: inline-block;' }, money(fundraiser.total_pledged||0)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal||0), ' goal')
             ),
 
-            li({ style: 'margin: 20px auto;' },
+            fundraiser.in_progress && li({ style: 'margin: 20px auto;' },
               span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.days_remaining+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'day', (fundraiser.days_remaining == 1 ? '' : 's'), ' left')
+            ),
+
+            !fundraiser.in_progress && li({ style: 'margin: 20px auto;' },
+              span({ style: 'font-size: 45px; display: inline-block;' }, 'Closed'), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'ended ', formatted_date(fundraiser.ends_at))
             )
           ),
 
-          form({ action: curry(Pledge.make_pledge, fundraiser.id) },
+          fundraiser.in_progress && form({ action: curry(Pledge.make_pledge, fundraiser.id) },
             messages(),
-
-            // disable functionality of pledge button if not published
-            options.preview ? [
-              a({ 'class': 'green pledge-button' }, 'Make a Pledge')
-            ] : [
-              a({ 'class': 'green pledge-button', href: '#fundraisers/'+fundraiser.id+'/pledge' }, 'Make a Pledge')
-            ]
+            a({ 'class': 'button green pledge-button', href: '#fundraisers/'+fundraiser.id+'/pledge' }, 'Make a Pledge')
           )
         ),
 
@@ -154,7 +152,7 @@ with (scope('Show', 'Fundraiser')) {
 
             if (reward.sold_out) {
               add_class(reward_row_element, 'sold-out');
-            } else {
+            } else if (fundraiser.in_progress) {
               reward_row_element.addEventListener('click', curry(set_route, '#fundraisers/'+fundraiser.id+'/pledge?reward_id='+reward.id));
             }
 

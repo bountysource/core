@@ -5,17 +5,26 @@ with (scope('Solution','App')) {
   });
 
   define('status_element', function(solution) {
+    var element = a({ 'class': 'status-indicator', href: solution.frontend_path });
+
     if (solution.paid_out) {
-      return span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Paid Out');
+      element.innerHTML = 'Paid Out';
+      add_class(element, 'green');
     } else if (solution.accepted) {
-      return span({ style: 'background: #83d11a; border-radius: 4px; padding: 4px; color: white' }, 'Accepted');
+      element.innerHTML = 'Accepted';
+      add_class(element, 'green');
     } else if (solution.disputed) {
-      return span({ style: 'background: #F3B13C; border-radius: 4px; padding: 4px; color: white' }, 'Disputed');
+      element.innerHTML = 'Disputed';
+      add_class(element, 'red');
     } else if (solution.submitted) {
-      return span({ style: 'background: #F3B13C; border-radius: 4px; padding: 4px; color: white' }, 'In Dispute Period');
+      element.innerHTML = 'In Dispute Period';
+      add_class(element, 'orange');
     } else {
-      return span({ style: 'background: #29A8DD; border-radius: 4px; padding: 4px; color: white' }, 'Started');
+      element.innerHTML = 'Started';
+      add_class(element, 'blue');
     }
+
+    return element;
   });
 
   // render status box for solution. states are: pending merge, in dispute period, disputed, accepted.

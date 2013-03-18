@@ -135,7 +135,7 @@ with (scope('Pledge', 'Fundraiser')) {
     };
 
     return reward_element;
-  })
+  });
 
   define('set_pledge_amount_from_reward', function(reward) {
     // set pledge amount from reward if it's empty, or iff the reward min pledge amount > current pledge amount
@@ -159,7 +159,7 @@ with (scope('Pledge', 'Fundraiser')) {
     document.getElementById('reward-id').value = reward.id;
   });
 
-  route('#fundraisers/:fundraiser_id/pledges/:pledge_id/survey', function(fundraiser_id, pledge_id) {
+  route('#fundraisers/:fundraiser_id/pledges/:pledge_id', function(fundraiser_id, pledge_id) {
     // if the pledge ID was not subbed into the URL, just go view the issue.
     // This will happen on Paypal cancel.
     if (/:pledge_id/.test(pledge_id)) return set_route('#fundraisers/'+fundraiser_id);
@@ -174,8 +174,8 @@ with (scope('Pledge', 'Fundraiser')) {
 
       if (response.meta.success) {
         var pledge      = response.data,
-          fundraiser  = pledge.fundraiser,
-          reward      = pledge.reward;
+            fundraiser  = pledge.fundraiser,
+            reward      = pledge.reward;
 
         Pledge.errors = div();
 
@@ -184,20 +184,28 @@ with (scope('Pledge', 'Fundraiser')) {
             a({ href: '#' }, 'Home'),
             a({ href: fundraiser.frontend_path }, truncate(fundraiser.title, 100)),
             a({ href: '#contributions' }, 'Pledges'),
-            'Survey'
+            a({ href: pledge.frontend_path }, money(pledge.amount))
           ),
 
           Columns.create({ show_side: true }),
 
+          Columns.side(
+            div({ style: 'text-align: center;' },
+              Fundraiser.card(pledge.fundraiser)
+            )
+          )
+        );
+
+        if (pledge.reward && pledge.reward.fulfillment_details && !pledge.survey_response) {
           Columns.main(
             info_message("In order to receive the reward you selected, please complete the following survey from the fundraiser creator:"),
 
-            errors,
+            Pledge.errors,
 
             form({ 'class': 'fancy', action: curry(update_pledge, pledge) },
               fieldset(
                 label("Question:"),
-                div({ style: 'display: inline-block; vertical-align: middle; text-align: left;' }, reward.fulfillment_details)
+                div({ style: 'display: inline-block; vertical-align: middle; text-align: left; width: 450px;' }, reward.fulfillment_details)
               ),
 
               fieldset(
@@ -209,13 +217,43 @@ with (scope('Pledge', 'Fundraiser')) {
                 button({ 'class': 'button green', style: 'width: 200px;' }, 'Answer Survey')
               )
             )
-          ),
+          );
+        } else {
+          Columns.main(
+            div({ style: 'text-align: center;' },
+              h2(money(pledge.amount), " Pledge Made"),
 
-          Columns.side(
-            h4('Reward'),
-            p({ style: 'white-space: pre-wrap;' }, reward.description)
+              pledge.reward && div({ style: 'margin: 10px; 0' },
+                h4({ style: 'margin-bottom: 0;' }, 'Reward:'),
+                p({ style: 'margin: 0 200px; padding: 10px;' }, pledge.reward.description),
+
+                pledge.reward.fulfillment_details && pledge.survey_response && [
+                  h4({ style: 'margin-bottom: 0;' }, 'Reward Question:'),
+                  p({ style: 'margin: 0 200px; padding: 10px;' }, pledge.reward.fulfillment_details),
+
+                  h4({ style: 'margin-bottom: 0;' }, 'Your Response:'),
+                  p({ style: 'margin: 0 200px; padding: 10px;' }, pledge.survey_response)
+                ]
+              ),
+
+              div(
+                Facebook.create_share_button({
+                  link:         pledge.fundraiser.frontend_url,
+                  name:         "I just backed "+pledge.fundraiser.title,
+                  caption:      pledge.fundraiser.short_description,
+                  description:  "BountySource is the funding platform for open-source software, contribute by making a pledge to this fundraiser!",
+                  picture:      pledge.fundraiser.image_url || ''
+                }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
+
+                Twitter.create_share_button({
+                  url:  pledge.fundraiser.frontend_url,
+                  text: money(pledge.amount)+" pledge made to "+pledge.fundraiser.title,
+                  via:  'BountySource'
+                }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet'))
+              )
+            )
           )
-        );
+        }
       } else {
         render({ into: target_div }, error_message(response.data.error));
       }
@@ -230,7 +268,7 @@ with (scope('Pledge', 'Fundraiser')) {
       console.log(response);
 
       if (response.meta.success) {
-        render({ into: Pledge.errors }, success_message('Survey response received, thanks!'));
+        set_route(pledge.frontend_path);
       } else {
         render({ into: Pledge.errors }, error_message(response.data.error));
       }

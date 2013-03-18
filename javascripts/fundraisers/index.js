@@ -31,7 +31,7 @@ with (scope('Index', 'Fundraiser')) {
                 td(a({ href: fundraiser.frontend_path }, truncate(fundraiser.title, 100))),
                 td(money(fundraiser.funding_goal || 0)),
                 td(fundraiser.published && percentage((fundraiser.total_pledged / fundraiser.funding_goal) * 100)),
-                td({ style: 'text-align: center;' }, fundraiser_published_status(fundraiser)),
+                td({ style: 'text-align: center;' }, status_element(fundraiser)),
 
                 td({ style: 'text-align: center;' },
                   a({ href: fundraiser.frontend_edit_path+'/basic-info' }, img({ src: 'images/edit.gif' })),

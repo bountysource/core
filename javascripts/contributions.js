@@ -7,7 +7,6 @@ with (scope('Contributions', 'App')) {
     render(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
-        a({ href: '#bounties' }, 'All Projects'),
         'Contributions'
       ),
       target_div
@@ -32,9 +31,6 @@ with (scope('Contributions', 'App')) {
               ),
 
               pledges.map(function(pledge) {
-
-                console.log(pledge);
-
                 return tr({ style: 'height: 75px;' },
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                     img({ src: pledge.fundraiser.image_url, style: 'width: 50px;' })
@@ -42,7 +38,7 @@ with (scope('Contributions', 'App')) {
                   td(a({ href: pledge.fundraiser.frontend_path }, pledge.fundraiser.title)),
                   td(money(pledge.amount)),
                   td(formatted_date(pledge.created_at)),
-                  td({ style: 'width: 175px; text-align: center;' }, status_link_for_pledge(pledge))
+                  td({ style: 'width: 175px; text-align: center;' }, Fundraiser.pledge_status_element(pledge))
                 )
               })
             )
@@ -79,14 +75,6 @@ with (scope('Contributions', 'App')) {
         render({ into: target_div }, error_message(response.data.error));
       }
     });
-  });
-
-  define('status_link_for_pledge', function(pledge) {
-    if (pledge.reward && pledge.reward.fulfillment_details) {
-      return a({ 'class': 'status-indicator orange', href: pledge.frontend_path+'/survey' }, 'Info Needed');
-    } else {
-      return a({ 'class': 'status-indicator green', href: pledge.frontend_path }, 'Fine and Dandy');
-    }
   });
 
   route('#fundraisers/:fundraiser_id/pledges/:pledge_id/receipt', function(fundraiser_id, pledge_id) {

@@ -40,9 +40,15 @@ with (scope('Fundraiser', 'App')) {
             div(money(fundraiser.total_pledged)),
             div('pledged')
           ),
-          div(
+
+          fundraiser.in_progress && div(
             span(formatted_number(fundraiser.days_remaining || 0)),
             span('days left')
+          ),
+
+          !fundraiser.in_progress && div(
+            span('Ended'),
+            span(formatted_date(fundraiser.ends_at))
           )
         )
       ),

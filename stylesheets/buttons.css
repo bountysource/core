@@ -56,7 +56,7 @@
 */
 .button.green.pledge-button {
   text-decoration: none;
-  padding: 20px;
+  padding: 20px 0;
   font-size: 20px;
 }
 .button.green.pledge-button:hover {
