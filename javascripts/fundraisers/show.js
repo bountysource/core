@@ -142,7 +142,11 @@ with (scope('Show', 'Fundraiser')) {
             var reward_row_element = div(
               span({ style: 'font-size: 25px;' }, 'Pledge ', money(reward.amount), ' +'),
 
-              (reward.limited_to > 0) && div({ style: 'margin: 10px 0 0 10px;; font-size: 14px;' },
+              (reward.claimed > 0) && div({ style: 'margin: 10px 0 0 10px; font-size: 14px; font-style: italic' },
+                span(formatted_number(reward.claimed) + ' claimed')
+              ),
+
+              (reward.limited_to > 0) && div({ style: 'margin: 10px 0 0 10px; font-size: 14px;' },
                 div({ style: 'font-style: italic; text-decoration: '+(reward.sold_out ? 'line-through' : 'none')+';' }, 'Limited: ', formatted_number(reward.limited_to - (reward.claimed||0)), ' of ', formatted_number(reward.limited_to), ' left'),
                 reward.sold_out && div({ style: 'color: #DF2525;' }, 'Sold out!')
               ),
