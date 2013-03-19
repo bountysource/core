@@ -5,8 +5,6 @@ with (scope('Fundraiser', 'App')) {
     options['class']  = 'card fundraiser';
     options.href      = options.href      || fundraiser.frontend_path;
 
-    console.log(fundraiser);
-
     var funding_percentage = parseFloat(100 * (fundraiser.total_pledged / fundraiser.funding_goal));
     if (isNaN(funding_percentage)) {
       funding_percentage = 0;
@@ -19,6 +17,15 @@ with (scope('Fundraiser', 'App')) {
 
     var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' }, funding_percentage >= 50 && large_percentage);
     var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner, funding_percentage< 50 && small_percentage);
+
+    var time_left       = fundraiser.days_remaining,
+        time_left_words = 'day' + (time_left == 1 ? '' : 's') + ' left';
+
+    // calculate hours left, if necessary
+    if (time_left <= 0) {
+      time_left       = hours_from(fundraiser.ends_at);
+      time_left_words = 'hour' + (time_left == 1 ? '' : 's') + ' left';
+    }
 
     // add the percentage to progress bar, cap at 100%
     progress_bar_inner.style.width = (funding_percentage > 100 ? 100 : funding_percentage) + '%';
@@ -43,8 +50,8 @@ with (scope('Fundraiser', 'App')) {
           ),
 
           (fundraiser.in_progress || !fundraiser.published) && div(
-            span(formatted_number(fundraiser.days_remaining || 0)),
-            span((fundraiser.days_remaining == 1 ? 'day' : 'days') + ' left')
+            span(formatted_number(Math.ceil(time_left))),
+            span(time_left_words)
           ),
 
           (!fundraiser.in_progress && fundraiser.published) && div(

@@ -86,6 +86,10 @@ with (scope('App')) {
     return words;
   });
 
+  define('hours_from', function(end_date) {
+    return ((new Date(end_date).getTime()) - (new Date().getTime())) / (1000*60*60);
+  });
+
   define('formatted_date', function(date_string) {
     var d = new Date(date_string),
         month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][d.getMonth()];

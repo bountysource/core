@@ -31,7 +31,17 @@ with (scope('Show', 'Fundraiser')) {
   define('fundraiser_template', function(fundraiser, options) {
     options = options || {};
 
-    var fundraiser_form = section({ id: 'fundraiser-wrapper' },
+    var time_left       = fundraiser.days_remaining,
+        time_left_words = 'day' + (time_left == 1 ? '' : 's') + ' left';
+
+    if (time_left <= 0) {
+      time_left       = hours_from(fundraiser.ends_at);
+      time_left_words = 'hour' + (time_left == 1 ? '' : 's') + ' left';
+    }
+
+    console.log(time_left, time_left_words);
+
+    return section({ id: 'fundraiser-wrapper' },
       Columns.create({ show_side: true }),
 
       Columns.main(
@@ -126,9 +136,9 @@ with (scope('Show', 'Fundraiser')) {
             ),
 
             (fundraiser.in_progress || !fundraiser.published) && li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.days_remaining+''),
+              span({ style: 'font-size: 45px; display: inline-block;' }, Math.ceil(time_left)),
               br,
-              span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'day', (fundraiser.days_remaining == 1 ? '' : 's'), ' left')
+              span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, time_left_words)
             ),
 
             (!fundraiser.in_progress && fundraiser.published) && li({ style: 'margin: 20px auto;' },
@@ -170,7 +180,5 @@ with (scope('Show', 'Fundraiser')) {
         )
       )
     );
-
-    return fundraiser_form;
   });
 }
