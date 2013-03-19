@@ -1,0 +1,9 @@
+.contributions-table.row {
+  cursor: pointer;
+  -webkit-transition: ease-in 50ms;
+  -moz-transition:    ease-in 50ms;
+  -o-transition:      ease-in 50ms;
+  transition:         ease-in 50ms;
+}
+.contributions-table.row:hover  { background: #FFFFE4; }
+.contributions-table.row.pledge {}

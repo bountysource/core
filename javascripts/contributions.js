@@ -27,11 +27,11 @@ with (scope('Contributions', 'App')) {
                 th({ style: 'width: 300px;' }, 'Fundraiser'),
                 th('Pledge Amount'),
                 th('Date'),
-                th({ style: 'width: 175px; text-align: center;' }, 'Status')
+                th({ style: 'width: 175px; text-align: center;' })
               ),
 
               pledges.map(function(pledge) {
-                return tr({ style: 'height: 75px;' },
+                return tr({ 'class': 'contributions-table row pledge', style: 'height: 75px;', onClick: curry(set_route, pledge.frontend_path) },
                   td({ style: 'width: 60px; text-align: center; vertical-align: middle;' },
                     img({ src: pledge.fundraiser.image_url, style: 'width: 50px;' })
                   ),

@@ -252,7 +252,8 @@ a.card { text-decoration: none; }
 .card.fundraiser .fundraiser-ended-at-message {
   text-align: center;
   padding: 10px 0;
-  color: #D8FCC7;
+  font-size: 14px;
+  color: #929292;
 }
 
 
