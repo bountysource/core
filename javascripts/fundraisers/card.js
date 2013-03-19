@@ -36,11 +36,11 @@ with (scope('Fundraiser', 'App')) {
     /*
     * Show hours and minutes left if days left is 0
     * */
-    var time_left       = fundraiser.days_remaining,
+    var time_left = fundraiser.days_remaining,
         time_left_words = 'day' + (time_left == 1 ? '' : 's') + ' left';
     // calculate hours left, if necessary
-    if (time_left <= 0) {
-      time_left       = hours_and_minutes_from(fundraiser.ends_at);
+    if (fundraiser.days_remaining <= 0) {
+      time_left = hours_and_minutes_from(fundraiser.ends_at);
 
       // first, add the minutes
       time_left_words = time_left.minutes + ' min' + (time_left.minutes != 1 && 's') + ' left';
@@ -70,7 +70,14 @@ with (scope('Fundraiser', 'App')) {
           ),
 
           (fundraiser.in_progress || !fundraiser.published) && div(
-            span(time_left_words)
+            fundraiser.days_remaining > 0 && [
+              span(time_left),
+              span(time_left_words)
+            ],
+
+            fundraiser.days_remaining == 0 && [
+              span(time_left_words)
+            ]
           ),
 
           (!fundraiser.in_progress && fundraiser.published) && div(
