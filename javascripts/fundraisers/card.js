@@ -5,36 +5,49 @@ with (scope('Fundraiser', 'App')) {
     options['class']  = 'card fundraiser';
     options.href      = options.href      || fundraiser.frontend_path;
 
+    /*
+    * Progress bar calculations and element creation
+    * */
     var funding_percentage = parseFloat(100 * (fundraiser.total_pledged / fundraiser.funding_goal));
     if (isNaN(funding_percentage)) {
       funding_percentage = 0;
     } else if (funding_percentage < 1) {
       funding_percentage = 1;
     }
-
-    var large_percentage = div({ 'class': 'fundraiser-percentage gteq-50' }, parseInt(funding_percentage)+'%');
-    var small_percentage = div({ 'class': 'fundraiser-percentage lt-50' }, parseInt(funding_percentage)+'%');
-
+    var large_percentage  = div({ 'class': 'fundraiser-percentage gteq-50' }, parseInt(funding_percentage)+'%');
+    var small_percentage  = div({ 'class': 'fundraiser-percentage lt-50' }, parseInt(funding_percentage)+'%');
     var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' }, funding_percentage >= 50 && large_percentage);
-    var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner, funding_percentage< 50 && small_percentage);
+    var progress_bar_div = div({ 'class': 'fundraiser-progress-bar-outer' }, progress_bar_inner, funding_percentage < 50 && small_percentage);
 
+    /*
+     * Add the percentage to progress bar, cap at 100%
+     * */
+    progress_bar_inner.style.width = (funding_percentage > 100 ? 100 : funding_percentage) + '%';
+
+    /*
+    * If fundraiser over, render end date into progress bar
+    * */
+    if (fundraiser.published && !fundraiser.in_progress) {
+      render({ into: progress_bar_inner },
+        div({ 'class': 'fundraiser-ended-at-message' }, 'Ended ' + formatted_date(fundraiser.ends_at))
+      );
+    }
+
+    /*
+    * Show hours left if days left is 0
+    * */
     var time_left       = fundraiser.days_remaining,
         time_left_words = 'day' + (time_left == 1 ? '' : 's') + ' left';
-
     // calculate hours left, if necessary
     if (time_left <= 0) {
       time_left       = hours_from(fundraiser.ends_at);
       time_left_words = 'hour' + (time_left == 1 ? '' : 's') + ' left';
     }
 
-    // add the percentage to progress bar, cap at 100%
-    progress_bar_inner.style.width = (funding_percentage > 100 ? 100 : funding_percentage) + '%';
-
     return a({ 'class': 'card fundraiser', href: fundraiser.frontend_path },
-      div({
-        'class': 'fundraiser-image',
-        style: 'background-image: url("' + (fundraiser.image_url || '/images/logo-gray.png') + '");'
-      }),
+      div({ 'class': 'fundraiser-image', style: 'background-image: url("' + (fundraiser.image_url || '/images/logo-gray.png') + '");'},
+        (fundraiser.published && (fundraiser.total_pledged >= fundraiser.funding_goal)) && div({ 'class': 'funded-message' }, 'Completed!')
+      ),
 
       div({ 'class': 'fundraiser-text' },
         div({ 'class': 'fundraiser-title' }, fundraiser.title),
@@ -55,8 +68,8 @@ with (scope('Fundraiser', 'App')) {
           ),
 
           (!fundraiser.in_progress && fundraiser.published) && div(
-            span('Ended'),
-            span(formatted_date(fundraiser.ends_at))
+            span(parseInt(funding_percentage)+'%'),
+            span('funded')
           )
         )
       ),
@@ -65,6 +78,8 @@ with (scope('Fundraiser', 'App')) {
     );
   });
 
-  // try to support legacy cards
+  /*
+  * Try to support legacy cards if they are still around or introduced
+  * */
   define('fundraiser_card', function(fundraiser) { return card(fundraiser) });
 }

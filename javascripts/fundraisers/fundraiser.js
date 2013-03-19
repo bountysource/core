@@ -26,9 +26,6 @@ with (scope('Fundraiser', 'App')) {
     if (pledge.reward && pledge.reward.fulfillment_details && !pledge.survey_response) {
       element.innerHTML = 'Info Needed';
       add_class(element, 'orange');
-    } else {
-      element.innerHTML = 'Fine and Dandy';
-      add_class(element, 'green');
     }
 
     return element;

@@ -39,8 +39,6 @@ with (scope('Show', 'Fundraiser')) {
       time_left_words = 'hour' + (time_left == 1 ? '' : 's') + ' left';
     }
 
-    console.log(time_left, time_left_words);
-
     return section({ id: 'fundraiser-wrapper' },
       Columns.create({ show_side: true }),
 
@@ -142,7 +140,7 @@ with (scope('Show', 'Fundraiser')) {
             ),
 
             (!fundraiser.in_progress && fundraiser.published) && li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, 'Closed'), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'ended ', formatted_date(fundraiser.ends_at))
+              span({ style: 'font-size: 45px; display: inline-block;' }, 'Completed'), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'ended ', formatted_date(fundraiser.ends_at))
             )
           ),
 

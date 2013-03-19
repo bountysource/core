@@ -191,11 +191,20 @@ a.card { text-decoration: none; }
   vertical-align: middle;
   margin-right: 5px;
 }
-.card.fundraiser .fundraiser-stats .fundraiser-data > * > *:first-child {
+.card.fundraiser .fundraiser-stats .fundraiser-data > * > *:nth-child(1) {
   font-size: 18px;
   color: #70C770;
 }
-.card.fundraiser .fundraiser-stats .fundraiser-data > * > *:last-child {
+.card.fundraiser .fundraiser-stats .fundraiser-data > * > *:nth-child(2) {
+  margin-right: 0;
+  font-size: 12px;
+}
+/* change colors when fundraiser is closed */
+.card.fundraiser .fundraiser-stats .fundraiser-data > *.closed > *:nth-child(1) {
+  font-size: 18px;
+  color: #DD6454;
+}
+.card.fundraiser .fundraiser-stats .fundraiser-data > *.closed > *:nth-child(2) {
   margin-right: 0;
   font-size: 12px;
 }
@@ -211,14 +220,15 @@ a.card { text-decoration: none; }
 }
 .card.fundraiser .fundraiser-progress-bar-inner {
   display: inline-block;
+  vertical-align: middle;
   background: #77E077;
-  height: 38px;
+  height: 36px;
 }
 /* percentage, in/out of percentage bar */
 .card.fundraiser .fundraiser-percentage {
-  font-size:  30px;
-  padding: 10px 0;
+  font-size:  16px;
   display: inline-block;
+  vertical-align: middle;
   margin: 0 10px;
 }
 .card.fundraiser .fundraiser-percentage.lt-50 {
@@ -227,6 +237,22 @@ a.card { text-decoration: none; }
 .card.fundraiser .fundraiser-percentage.gteq-50 {
   color: #D8FCC7;
   float: right;
+  position: relative;
+  top: 10px;
+}
+/* when funded, the message rendered into the progress bar inner div, and above image */
+.card.fundraiser .fundraiser-image .funded-message {
+  text-align: center;
+  padding: 15px 0;
+  font-size: 25px;
+  color: #E7FFDD;
+  background: rgba(119, 224, 119, 0.50);
+  text-shadow: 0 0 15px #46CC46;
+}
+.card.fundraiser .fundraiser-ended-at-message {
+  text-align: center;
+  padding: 10px 0;
+  color: #D8FCC7;
 }
 
 

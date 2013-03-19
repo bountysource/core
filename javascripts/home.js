@@ -45,11 +45,17 @@ with (scope('Home', 'App')) {
     // get all fundraiser cards, render them
     BountySource.get_fundraiser_cards(function(response) {
       if (response.meta.success) {
-        var fundraisers = response.data;
+        var in_progress = response.data.in_progress,
+            completed   = response.data.completed;
 
-        render({ into: fundraiser_cards_container },
-          cards_row('Featured Fundraisers', fundraisers, Fundraiser.card)
-        );
+        // for now, just merge the two data sets
+        var fundraisers = in_progress.concat(completed);
+
+        if (fundraisers.length > 0) {
+          render({ into: fundraiser_cards_container },
+            cards_row('Featured Fundraisers', fundraisers, Fundraiser.card)
+          );
+        }
       }
     });
 
