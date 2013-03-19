@@ -46,7 +46,7 @@ with (scope('Fundraiser', 'App')) {
 
     return a({ 'class': 'card fundraiser', href: fundraiser.frontend_path },
       div({ 'class': 'fundraiser-image', style: 'background-image: url("' + (fundraiser.image_url || '/images/logo-gray.png') + '");'},
-        (fundraiser.published && (fundraiser.total_pledged >= fundraiser.funding_goal)) && div({ 'class': 'funded-message' }, 'Completed!')
+        (fundraiser.published && !fundraiser.in_progress && (fundraiser.total_pledged >= fundraiser.funding_goal)) && div({ 'class': 'funded-message' }, 'Completed!')
       ),
 
       div({ 'class': 'fundraiser-text' },
