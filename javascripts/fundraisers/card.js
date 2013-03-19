@@ -28,8 +28,8 @@ with (scope('Fundraiser', 'App')) {
     * If fundraiser over, render end date into progress bar
     * */
     if (fundraiser.published && !fundraiser.in_progress) {
-      render({ into: progress_bar_inner },
-        div({ 'class': 'fundraiser-ended-at-message' }, 'Ended ' + formatted_date(fundraiser.ends_at))
+      render({ into: progress_bar_div },
+        div({ 'class': 'fundraiser-ended-at-message' }, 'Completed ' + formatted_date(fundraiser.ends_at))
       );
     }
 
