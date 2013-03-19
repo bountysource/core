@@ -86,8 +86,14 @@ with (scope('App')) {
     return words;
   });
 
-  define('hours_from', function(end_date) {
-    return ((new Date(end_date).getTime()) - (new Date().getTime())) / (1000*60*60);
+  define('hours_and_minutes_from', function(end_date) {
+    var total_minutes = ((new Date(end_date).getTime()) - (new Date().getTime())) / (1000*60);
+
+    var hours   = Math.floor(total_minutes / 60);
+    // don't fuck up because of % 0
+    var minutes = Math.ceil(total_minutes % (hours * 60)) || Math.ceil(total_minutes % 60);
+
+    return { hours: hours, minutes: minutes };
   });
 
   define('formatted_date', function(date_string) {

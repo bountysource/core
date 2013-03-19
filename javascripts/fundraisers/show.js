@@ -31,12 +31,22 @@ with (scope('Show', 'Fundraiser')) {
   define('fundraiser_template', function(fundraiser, options) {
     options = options || {};
 
-    var time_left       = fundraiser.days_remaining,
+    /*
+     * Show hours and minutes left if days left is 0
+     * */
+    var time_left       = parseInt(fundraiser.days_remaining),
         time_left_words = 'day' + (time_left == 1 ? '' : 's') + ' left';
+    if (fundraiser.days_remaining <= 0) {
+      time_left_words = 'time left';
+      var hrs_and_mins = hours_and_minutes_from(fundraiser.ends_at);
 
-    if (time_left <= 0) {
-      time_left       = hours_from(fundraiser.ends_at);
-      time_left_words = 'hour' + (time_left == 1 ? '' : 's') + ' left';
+      // first, add the minutes
+      time_left = hrs_and_mins.minutes + ' min' + (hrs_and_mins.minutes != 1 && 's');
+
+      // if hours > 0, add hours
+      if (hrs_and_mins.hours > 0) {
+        time_left = hrs_and_mins.hours + ' hr' + (hrs_and_mins.hours != 1 && 's') + ' ' + time_left;
+      }
     }
 
     return section({ id: 'fundraiser-wrapper' },
@@ -134,9 +144,11 @@ with (scope('Show', 'Fundraiser')) {
             ),
 
             (fundraiser.in_progress || !fundraiser.published) && li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, Math.ceil(time_left)),
+              fundraiser.days_remaining > 0 && span({ style: 'font-size: 45px; display: inline-block;' }, time_left),
+              fundraiser.days_remaining == 0 && span({ style: 'font-size: 30px; display: inline-block;' }, time_left),
               br,
-              span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, time_left_words)
+              fundraiser.days_remaining > 0 && span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, time_left_words),
+              fundraiser.days_remaining == 0 && span({ style: 'margin-left: 5px; margin-top: 3px; display: inline-block;' }, time_left_words)
             ),
 
             (!fundraiser.in_progress && fundraiser.published) && li({ style: 'margin: 20px auto;' },
