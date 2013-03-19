@@ -125,11 +125,13 @@ with (scope('Show', 'Fundraiser')) {
               span({ style: 'font-size: 45px; display: inline-block;' }, money(fundraiser.total_pledged||0)), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'pledged of ', money(fundraiser.funding_goal||0), ' goal')
             ),
 
-            fundraiser.in_progress && li({ style: 'margin: 20px auto;' },
-              span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.days_remaining+''), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'day', (fundraiser.days_remaining == 1 ? '' : 's'), ' left')
+            (fundraiser.in_progress || !fundraiser.published) && li({ style: 'margin: 20px auto;' },
+              span({ style: 'font-size: 45px; display: inline-block;' }, fundraiser.days_remaining+''),
+              br,
+              span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'day', (fundraiser.days_remaining == 1 ? '' : 's'), ' left')
             ),
 
-            !fundraiser.in_progress && li({ style: 'margin: 20px auto;' },
+            (!fundraiser.in_progress && fundraiser.published) && li({ style: 'margin: 20px auto;' },
               span({ style: 'font-size: 45px; display: inline-block;' }, 'Closed'), br(), span({ style: 'margin-left: 5px; margin-top: 12px; display: inline-block;' }, 'ended ', formatted_date(fundraiser.ends_at))
             )
           ),

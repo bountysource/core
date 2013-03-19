@@ -5,6 +5,8 @@ with (scope('Fundraiser', 'App')) {
     options['class']  = 'card fundraiser';
     options.href      = options.href      || fundraiser.frontend_path;
 
+    console.log(fundraiser);
+
     var funding_percentage = parseFloat(100 * (fundraiser.total_pledged / fundraiser.funding_goal));
     if (isNaN(funding_percentage)) {
       funding_percentage = 0;
@@ -13,7 +15,6 @@ with (scope('Fundraiser', 'App')) {
     }
 
     var large_percentage = div({ 'class': 'fundraiser-percentage gteq-50' }, parseInt(funding_percentage)+'%');
-
     var small_percentage = div({ 'class': 'fundraiser-percentage lt-50' }, parseInt(funding_percentage)+'%');
 
     var progress_bar_inner = div({ 'class': 'fundraiser-progress-bar-inner' }, funding_percentage >= 50 && large_percentage);
@@ -41,12 +42,12 @@ with (scope('Fundraiser', 'App')) {
             div('pledged')
           ),
 
-          fundraiser.in_progress && div(
+          (fundraiser.in_progress || !fundraiser.published) && div(
             span(formatted_number(fundraiser.days_remaining || 0)),
-            span('days left')
+            span((fundraiser.days_remaining == 1 ? 'day' : 'days') + ' left')
           ),
 
-          !fundraiser.in_progress && div(
+          (!fundraiser.in_progress && fundraiser.published) && div(
             span('Ended'),
             span(formatted_date(fundraiser.ends_at))
           )

@@ -6,8 +6,13 @@ with (scope('Fundraiser', 'App')) {
   define('status_element', function(fundraiser) {
     var element = a({ 'class': 'status-indicator', href: fundraiser.frontend_path });
     if (fundraiser.published) {
-      element.innerHTML = 'Published';
-      add_class(element, 'green');
+      if (fundraiser.in_progress) {
+        element.innerHTML = 'Published';
+        add_class(element, 'green');
+      } else {
+        element.innerHTML = 'Closed';
+        add_class(element, 'red');
+      }
     } else {
       element.innerHTML = 'Draft';
       add_class(element, 'blue');
