@@ -77,11 +77,14 @@ with (scope('Show', 'Fundraiser')) {
             })
           ),
           li(
+            span({ style: 'display: inline-block; vertical-align: middle; margin-right: 5px;' }, 'Embed:'),
             input({
               id: 'fundraiser-embed',
               value: Fundraiser.embed_iframe(fundraiser).outerHTML,
               readonly: true,
-              onClick: function() { this.select() }
+              onClick: function() { this.select() },
+
+              style: 'display: inline-block; vertical-align: middle;'
             })
           )
         ),
