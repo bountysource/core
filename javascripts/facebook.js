@@ -126,7 +126,7 @@ with (scope('Facebook','App')) {
 
     options = options || {};
     options['method']       = 'feed';
-    options['name']         = options['name']         || 'BountySource';
+    options['name']         = options['name']         || 'Bountysource';
     options['link']         = options['link']         || window.location.href;
     options['caption']      = options['caption']      || 'The funding platform for open source software';
     options['picture']      = options['picture']      || '';

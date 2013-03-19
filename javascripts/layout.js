@@ -14,7 +14,7 @@ with (scope('App')) {
         scope.rendered_default_layout_inner,
 
         footer(
-          div({ style: 'float: right' }, "Copyright ©2013, BountySource Inc. All rights reserved."),
+          div({ style: 'float: right' }, "Copyright ©2013, Bountysource Inc. All rights reserved."),
           ul(
             li(a({ href: '#about' }, 'About')),
             li(a({ href: '#faq' }, 'FAQ')),

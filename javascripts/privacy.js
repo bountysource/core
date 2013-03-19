@@ -4,20 +4,20 @@ with (scope('Privacy', 'App')) {
     render(
 
       breadcrumbs(
-        a({ href: '#' }, "BountySource"),
+        a({ href: '#' }, "Bountysource"),
         "Privacy Policy"
       ),
 
-      h2({ style: 'text-align: center'}, "BountySource"),
+      h2({ style: 'text-align: center'}, "Bountysource"),
       h2({ style: 'text-align: center'}, "Privacy Policy"),
       
-      p("BountySource's Privacy Policy is designed to provide clarity about the information we collect and how we use it to provide a better experience. By using our Website or Services or agreeing to our Terms of Service, you consent to our collection, storage, use and disclosure of your personal information as described in this Privacy Policy."),
+      p("Bountysource's Privacy Policy is designed to provide clarity about the information we collect and how we use it to provide a better experience. By using our Website or Services or agreeing to our Terms of Service, you consent to our collection, storage, use and disclosure of your personal information as described in this Privacy Policy."),
       
       //table of contents
       
       h1('1. Introduction'),
       
-      p('We provide the BountySource services (the "', b('Services'), '") through our website at www.BountySource.com and related websites (the "', b('Websites'), '"). This Privacy Policy describes:'),
+      p('We provide the Bountysource services (the "', b('Services'), '") through our website at www.Bountysource.com and related websites (the "', b('Websites'), '"). This Privacy Policy describes:'),
       
       ul(
           li('the information we collect, how we do so and the purposes of our collection'),
@@ -35,11 +35,11 @@ with (scope('Privacy', 'App')) {
       
       p({style: 'padding-left: 15px'}, 'When you "register" with us, you may be required to provide the following information: your age or birthday (for age screening and/or to better understand who our users are); your first and last names; your e-mail address; your mailing address; a password and other information that helps us confirm that it is you accessing your account. We collect the information that you provide for purposes of enabling you to use our Service and Website.'),
       
-      p({style: 'padding-left: 15px'}, 'We may also offer you the option to complete a user profile that is visible to other BountySource users. Your user profile may include: a profile photo; username(s); gender; biographic details that you provide; and links to your profiles on various social networks.'),
+      p({style: 'padding-left: 15px'}, 'We may also offer you the option to complete a user profile that is visible to other Bountysource users. Your user profile may include: a profile photo; username(s); gender; biographic details that you provide; and links to your profiles on various social networks.'),
       
-      p({style: 'padding-left: 15px'}, 'Your first and last names and profile picture are considered "public" on BountySource Websites. Please be aware that search engines may index this publicly available information. When we offer profiles, we will also offer functionality that allows you to opt-out of public indexing of your public profile information.'),
+      p({style: 'padding-left: 15px'}, 'Your first and last names and profile picture are considered "public" on Bountysource Websites. Please be aware that search engines may index this publicly available information. When we offer profiles, we will also offer functionality that allows you to opt-out of public indexing of your public profile information.'),
       
-      p({style: 'padding-left: 15px'}, 'We may also offer you the ability to import your address book or social network contacts or manually enter e-mail addresses so that you can (i) locate your contacts on BountySource; and (ii) invite those contacts to join BountySource. If you elect to use this feature, we will access or store those contacts for purposes of helping you and your contacts make connections on our Website. If you do not want your contacts accessed or stored, please do not use this feature of our Service. Passwords provided to BountySource for the purpose of accessing your address book or social network contacts will not be stored.'),
+      p({style: 'padding-left: 15px'}, 'We may also offer you the ability to import your address book or social network contacts or manually enter e-mail addresses so that you can (i) locate your contacts on Bountysource; and (ii) invite those contacts to join Bountysource. If you elect to use this feature, we will access or store those contacts for purposes of helping you and your contacts make connections on our Website. If you do not want your contacts accessed or stored, please do not use this feature of our Service. Passwords provided to Bountysource for the purpose of accessing your address book or social network contacts will not be stored.'),
       
       p({style: 'padding-left: 15px'}, b('2.2 Payment Information')),
 
@@ -67,7 +67,7 @@ with (scope('Privacy', 'App')) {
       
       p({style: 'padding-left: 15px'}, b('3.2 Communications Features')),
       
-      p({style: 'padding-left: 15px'}, 'You may be able to take part in certain activities on our Websites or Services that give you the opportunity to communicate or share information not just with BountySource, but also with other users of our Services. These include:'),
+      p({style: 'padding-left: 15px'}, 'You may be able to take part in certain activities on our Websites or Services that give you the opportunity to communicate or share information not just with Bountysource, but also with other users of our Services. These include:'),
       
       p({style: 'padding-left: 15px'}, 
         ul(
@@ -88,11 +88,11 @@ with (scope('Privacy', 'App')) {
       
       p({style: 'padding-left: 15px'}, 'We may also employ other technologies including (i) web beacons, which allow us to know if a certain page was visited or whether an e-mail was opened; (ii) tracking pixels, which allow us to advertise more efficiently by excluding our current users from certain promotional messages, identifying the source of a new installation or delivering ads to you on other websites; and (iii) local shared objects also known as flash cookies, which help us to prevent fraud, remember your site preferences and speed up load times.'),
       
-      p({style: 'padding-left: 15px'}, 'You can set your web browser to warn you about attempts to place cookies on your computer or limit the type of cookies you allow. Flash cookies operate differently than browser cookies and cookie management tools available in a web browser may not remove flash cookies. To learn more about and manage flash cookies you can visit ', a({ target: '_blank', href: 'http://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html' }, "http://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html"), '. If you disable cookies, you may lose some of the features and functionality of our Services, as BountySource cookies are necessary to track and enhance your activities. Please note that companies delivering advertisements on our Websites may also use cookies or other technologies, and those practices are subject to their own policies.'),
+      p({style: 'padding-left: 15px'}, 'You can set your web browser to warn you about attempts to place cookies on your computer or limit the type of cookies you allow. Flash cookies operate differently than browser cookies and cookie management tools available in a web browser may not remove flash cookies. To learn more about and manage flash cookies you can visit ', a({ target: '_blank', href: 'http://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html' }, "http://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html"), '. If you disable cookies, you may lose some of the features and functionality of our Services, as Bountysource cookies are necessary to track and enhance your activities. Please note that companies delivering advertisements on our Websites may also use cookies or other technologies, and those practices are subject to their own policies.'),
       
       p({style: 'padding-left: 15px'}, b('3.4 Other Sources')),
       
-      p({style: 'padding-left: 15px'}, 'We may collect or receive information about you from other sources including (i) other BountySource users who choose to upload their email contacts; (ii) social networks (if you use these features of our Service); (iii) repositories such as GitHub; and (iv) third party information providers. This information will be used to supplement your profile, to help you and your contacts connect, to help manage and offer Service you request, and to offer you Services in which you may be interested. It may be combined with other information we collect.'),
+      p({style: 'padding-left: 15px'}, 'We may collect or receive information about you from other sources including (i) other Bountysource users who choose to upload their email contacts; (ii) social networks (if you use these features of our Service); (iii) repositories such as GitHub; and (iv) third party information providers. This information will be used to supplement your profile, to help you and your contacts connect, to help manage and offer Service you request, and to offer you Services in which you may be interested. It may be combined with other information we collect.'),
       
       p({style: 'padding-left: 15px'}, b('3.5 Repositories')),
       
@@ -112,24 +112,24 @@ with (scope('Privacy', 'App')) {
           li('to inform users about new Services or promotional offers'),
           li('to assist in resolving disputes and administering the use of our Services'),
           li('to engage in commonly accepted practices, such as contacting you at the email address we have on file if you are a potential winner in a contest or sweepstakes'),
-          li('to identify and suggest connections with other BountySource users'),
+          li('to identify and suggest connections with other Bountysource users'),
           li('to enable user-to-user communications'),
           li('to deliver and target advertising')
         ),
       
-      p('One important use of your information is communication. If you have provided your e-mail address to BountySource, we\'ll use it to respond to (i) customer support inquiries, and (ii) keep you informed of your account activity. Some messages, such as invites for friends to join BountySource, may include your name and profile photo. We may also send promotional e-mail messages and promotional SMS messages ("', b('Promotional Communications'), '") directly or in partnership with parties other than BountySource. Each Promotional Communication will generally offer recipients choices about receiving additional messages.'),
+      p('One important use of your information is communication. If you have provided your e-mail address to Bountysource, we\'ll use it to respond to (i) customer support inquiries, and (ii) keep you informed of your account activity. Some messages, such as invites for friends to join Bountysource, may include your name and profile photo. We may also send promotional e-mail messages and promotional SMS messages ("', b('Promotional Communications'), '") directly or in partnership with parties other than Bountysource. Each Promotional Communication will generally offer recipients choices about receiving additional messages.'),
       
       h1('5. Sharing of Your Information'),      
       
-      p('We will share your information (in some cases personal information) with third parties, that is parties other than BountySource, in the following circumstances:'),
+      p('We will share your information (in some cases personal information) with third parties, that is parties other than Bountysource, in the following circumstances:'),
       
       p({style: 'padding-left: 15px'}, b('5.1 Third Party Service Providers')),
       
-      p({style: 'padding-left: 15px'}, 'We will provide your information to third party companies to perform services on our behalf, including payment processing, data analysis, e-mail delivery, hosting services, customer service and to assist us in our marketing efforts. We direct all such third party service providers to maintain the confidentiality of the information disclosed to them and to not use your information for any purpose other than to provide services on BountySource\'s behalf.'),
+      p({style: 'padding-left: 15px'}, 'We will provide your information to third party companies to perform services on our behalf, including payment processing, data analysis, e-mail delivery, hosting services, customer service and to assist us in our marketing efforts. We direct all such third party service providers to maintain the confidentiality of the information disclosed to them and to not use your information for any purpose other than to provide services on Bountysource\'s behalf.'),
       
-      p({style: 'padding-left: 15px'}, b('5.2 Friends and Other BountySource Users')),
+      p({style: 'padding-left: 15px'}, b('5.2 Friends and Other Bountysource Users')),
       
-      p({style: 'padding-left: 15px'}, 'The Service supports and may encourage interaction among users. In most BountySource Services your social networks friends will see your name, profile photo and descriptions of your activity. In many BountySource Services friends and other users will be able to see your profile, which may include your name and your profile photo. Other users may also be able to send you communications through our or the related social networks’ communication channels.'),
+      p({style: 'padding-left: 15px'}, 'The Service supports and may encourage interaction among users. In most Bountysource Services your social networks friends will see your name, profile photo and descriptions of your activity. In many Bountysource Services friends and other users will be able to see your profile, which may include your name and your profile photo. Other users may also be able to send you communications through our or the related social networks’ communication channels.'),
       
       p({style: 'padding-left: 15px'}, b('5.3 Advertising of Third Party Products and Services')),
       
@@ -141,7 +141,7 @@ with (scope('Privacy', 'App')) {
       
       p({style: 'padding-left: 15px'}, b('5.5 Sale or Merger')),
       
-      p({style: 'padding-left: 15px'}, 'In the event that BountySource undergoes a business transition, such as a merger, acquisition by another company, or sale of all or a portion of its assets, we may transfer all of your information, including personal information, to the successor organization in the transition.'),
+      p({style: 'padding-left: 15px'}, 'In the event that Bountysource undergoes a business transition, such as a merger, acquisition by another company, or sale of all or a portion of its assets, we may transfer all of your information, including personal information, to the successor organization in the transition.'),
       
       p({style: 'padding-left: 15px'}, b('5.6 Affiliates')),
       
@@ -159,28 +159,28 @@ with (scope('Privacy', 'App')) {
       
       p({style: 'padding-left: 15px'}, b('7.1 Information We Receive From Social Networks')),
       
-      p({style: 'padding-left: 15px'}, 'To manage the information BountySource receives about you from a social network where you use our Services, you will need to follow the instructions at that site for updating your information and changing your privacy settings. The privacy management tools for various sites are below. You can manage certain aspects of information collection and use by going to the settings of your (mobile) device and reviewing the permissions of each application.'),
+      p({style: 'padding-left: 15px'}, 'To manage the information Bountysource receives about you from a social network where you use our Services, you will need to follow the instructions at that site for updating your information and changing your privacy settings. The privacy management tools for various sites are below. You can manage certain aspects of information collection and use by going to the settings of your (mobile) device and reviewing the permissions of each application.'),
       
       p({style: 'padding-left: 15px'}, 'Facebook privacy information can be found ', a({ target: '_blank', href: 'http://www.facebook.com/settings/?tab=privacy' }, "here"), '.'),
       p({style: 'padding-left: 15px'}, 'Google+ privacy information can be found ', a({ target: '_blank', href: 'https://plus.google.com/u/0/settings/privacy?hl=en&tab=4' }, "here"), '.'),
       p({style: 'padding-left: 15px'}, 'Twitter privacy information can be found ', a({ target: '_blank', href: 'https://twitter.com/privacy' }, "here"), '.'),
       p({style: 'padding-left: 15px'}, 'GitHub privacy information can be found ', a({ target: '_blank', href: 'https://help.github.com/articles/github-privacy-policy' }, "here"), '.'),
       
-      p({style: 'padding-left: 15px'}, 'Once BountySource receives your information from a social network, that information is stored and used by BountySource in accordance with this Privacy Policy, and you may access and update that information as described below. Accounts created with BountySource are considered active until we receive a user request to delete them or deactivate them.'),
+      p({style: 'padding-left: 15px'}, 'Once Bountysource receives your information from a social network, that information is stored and used by Bountysource in accordance with this Privacy Policy, and you may access and update that information as described below. Accounts created with Bountysource are considered active until we receive a user request to delete them or deactivate them.'),
       
       p({style: 'padding-left: 15px'}, b('7.2 Other Methods of Accessing and Controlling your Information')),
       
-      p({style: 'padding-left: 15px'}, 'If you no longer want BountySource to make active use of your information, you may send an e-mail to ', a({ href: 'mailto:support@bountysource.com' }, "support@bountysource.com"), '. Place "Delete My Account" in the subject line and include your first name, last name, and e-mail address in the body of the e-mail. We will respond to your request within thirty (30) days. Please note that certain records, for example those pertaining to payments or customer service matters, will be retained for legal and accounting purposes. If you have sent or posted content on the Service, we may not be able to delete it.'),
+      p({style: 'padding-left: 15px'}, 'If you no longer want Bountysource to make active use of your information, you may send an e-mail to ', a({ href: 'mailto:support@bountysource.com' }, "support@bountysource.com"), '. Place "Delete My Account" in the subject line and include your first name, last name, and e-mail address in the body of the e-mail. We will respond to your request within thirty (30) days. Please note that certain records, for example those pertaining to payments or customer service matters, will be retained for legal and accounting purposes. If you have sent or posted content on the Service, we may not be able to delete it.'),
 
       p({style: 'padding-left: 15px'}, 'You may change your e-mail preferences at any time, by visiting your e-mail preference page in your online account.'),
       
-      p({style: 'padding-left: 15px'}, 'If you wish to review or change the information BountySource has about you, or if you have additional questions about this Privacy Policy, contact us at ', a({ href: 'mailto:support@bountysource.com' }, "support@bountysource.com"), '.'),
+      p({style: 'padding-left: 15px'}, 'If you wish to review or change the information Bountysource has about you, or if you have additional questions about this Privacy Policy, contact us at ', a({ href: 'mailto:support@bountysource.com' }, "support@bountysource.com"), '.'),
       
       h1('8. Your Sharing and Messaging Options'),
       
       p({style: 'padding-left: 15px'}, b('8.1 Opting Out of Promotional Communications')),
       
-      p({style: 'padding-left: 15px'}, 'You can choose to opt out of receiving additional promotional e-mails from BountySource by clicking on the "unsubscribe" link in any such e-mail. Please note that once we receive your request, it may take an additional period of time for your opt-out to become effective. Your unsubscribe or e-mail preference change will be processed promptly, and in no event longer than 10 business days.'),
+      p({style: 'padding-left: 15px'}, 'You can choose to opt out of receiving additional promotional e-mails from Bountysource by clicking on the "unsubscribe" link in any such e-mail. Please note that once we receive your request, it may take an additional period of time for your opt-out to become effective. Your unsubscribe or e-mail preference change will be processed promptly, and in no event longer than 10 business days.'),
       
       p({style: 'padding-left: 15px'}, b('8.2 Opting Out of Other Communications')),
       
@@ -196,21 +196,21 @@ with (scope('Privacy', 'App')) {
       
       h1('10. Privacy Policies of Linked Sites and Advertisers'),
       
-      p('Our Website and Services may contain site links or advertisements from companies other than BountySource that may link to their own websites. For example, our Service works in conjunction with Repositories such as GitHub, but we are not affiliated with these Repositories in any legal or corporate sense. We are not responsible for the privacy practices or the content of such websites. If you have any questions about how these other websites use your information, you should review their policies and contact them directly.'),
+      p('Our Website and Services may contain site links or advertisements from companies other than Bountysource that may link to their own websites. For example, our Service works in conjunction with Repositories such as GitHub, but we are not affiliated with these Repositories in any legal or corporate sense. We are not responsible for the privacy practices or the content of such websites. If you have any questions about how these other websites use your information, you should review their policies and contact them directly.'),
       
       h1('11. Security of Your Information'),
       
-      p('BountySource implements reasonable security measures to protect the security of your information both online and offline, and we are committed to the protection of customer information.'),
+      p('Bountysource implements reasonable security measures to protect the security of your information both online and offline, and we are committed to the protection of customer information.'),
             
-      p({style: 'padding-left: 15px'}, '11.1 User account information is protected by the password each member uses to access their online account. It is important that you protect and maintain the security of your account and that you immediately notify us of any unauthorized use of your account. If you forget the password to your BountySource account, the Website allows you to request that instructions be sent to you that explain how to reset your password. When you sign into your account or enter payment information (such as a credit card number when purchasing virtual currency), we encrypt the transmission of that information using secure socket layer technology.'),
+      p({style: 'padding-left: 15px'}, '11.1 User account information is protected by the password each member uses to access their online account. It is important that you protect and maintain the security of your account and that you immediately notify us of any unauthorized use of your account. If you forget the password to your Bountysource account, the Website allows you to request that instructions be sent to you that explain how to reset your password. When you sign into your account or enter payment information (such as a credit card number when purchasing virtual currency), we encrypt the transmission of that information using secure socket layer technology.'),
       
-      p({style: 'padding-left: 15px'}, '11.2 While we take reasonable precautions against possible security breaches of our Websites and our customer databases and records, no website or Internet transmission is completely secure, and we cannot guarantee that unauthorized access, hacking, data loss, or other breaches will never occur. We urge you to take steps to keep your personal information safe (including your account password), and to log out of your account after use. If your social networks account is hacked, this may lead to unauthorized use of your BountySource account, so be careful to keep your account information secure. If you have questions about the security of our Websites, please contact us at ', a({ href: 'mailto:support@bountysource.com' }, "support@bountysource.com"), '.'),  
+      p({style: 'padding-left: 15px'}, '11.2 While we take reasonable precautions against possible security breaches of our Websites and our customer databases and records, no website or Internet transmission is completely secure, and we cannot guarantee that unauthorized access, hacking, data loss, or other breaches will never occur. We urge you to take steps to keep your personal information safe (including your account password), and to log out of your account after use. If your social networks account is hacked, this may lead to unauthorized use of your Bountysource account, so be careful to keep your account information secure. If you have questions about the security of our Websites, please contact us at ', a({ href: 'mailto:support@bountysource.com' }, "support@bountysource.com"), '.'),
       
       p({style: 'padding-left: 15px'}, '11.3 Unfortunately, the transmission of information over the Internet is not completely secure. Although we strive to protect your personal data, we cannot guarantee the security of your data while it is being transmitted to our Website; any transmission is at your own risk. Once we have received your information, we have procedures and security features in place to try to prevent unauthorized access.'),
       
       h1('12. Changes to Our Privacy Policy'),
       
-      p('If we decide to make material changes to our Privacy Policy, we will notify you and other users by placing a notice on BountySource.com or by sending you a notice to the e-mail address we have on file for you. We may supplement this process by placing notices in our Services and on other BountySource Websites. You should periodically check ', a({ target: '_blank', href: 'https://www.bountysource.com' }, "www.bountysource.com"), ' and this privacy page for updates.'),
+      p('If we decide to make material changes to our Privacy Policy, we will notify you and other users by placing a notice on Bountysource.com or by sending you a notice to the e-mail address we have on file for you. We may supplement this process by placing notices in our Services and on other Bountysource Websites. You should periodically check ', a({ target: '_blank', href: 'https://www.bountysource.com' }, "www.bountysource.com"), ' and this privacy page for updates.'),
       
       h1('13. Your California Privacy Rights'),
       
@@ -222,7 +222,7 @@ with (scope('Privacy', 'App')) {
       
       p('If you have any questions, comments or concerns regarding our Privacy Policy and/or practices, please e-mail us at ', a({ href: 'mailto:support@bountysource.com' }, "support@bountysource.com"), '.'),
       
-      p('BountySource Inc.',
+      p('Bountysource Inc.',
         br(),
         '548 Market Street #40189, San Francisco, CA 94104-5401'
         ),

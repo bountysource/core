@@ -79,7 +79,7 @@ with (scope('Twitter','App')) {
   define('follow_button', function(options) {
     options = options || {};
     options['class'] = 'twitter-follow-button';
-    options['href']  = 'https://twitter.com/BountySource';
+    options['href']  = 'https://twitter.com/Bountysource';
     return a(options);
   });
 
@@ -102,7 +102,7 @@ with (scope('Twitter','App')) {
     e.addEventListener('click', function(e) {
       options['url']      = encode_html(options['url']  || window.location.href);
       options['counturl'] = encode_html(options['counturl'] || options['url']);
-      options['text']     = encode_html(options['text'] || '@BountySource | The funding platform for open source software');
+      options['text']     = encode_html(options['text'] || '@Bountysource | The funding platform for open source software');
       window.open('https://twitter.com/share'+to_param(options),'','width=680,height=350');
     });
 

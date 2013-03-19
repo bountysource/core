@@ -15,7 +15,7 @@ with (scope('Faq', 'App')) {
   route('#faq', function() {
     render(
       breadcrumbs(
-        a({ href: '#' }, "BountySource"),
+        a({ href: '#' }, "Bountysource"),
         "Frequently Asked Questions"
       ),
 
@@ -35,7 +35,7 @@ with (scope('Faq', 'App')) {
           h1('General'),
 
           dl(
-            dt("How does BountySource work?"),
+            dt("How does Bountysource work?"),
 
             dd("There are two main functions: Fundraisers and Bounties."),
             dd(i("How Bounties work:")),
@@ -44,16 +44,16 @@ with (scope('Faq', 'App')) {
                 li('Users fund bounties on open issues or feature requests they want to see addressed.'),
                 li('These users spread the word about the bounty, enticing developers to create a solution.'),
                 li('Developers create solutions and submit them on BountySource.'),
-                li('BountySource tracks these solutions, sees which one gets accepted by the open-source project, and then pays the bounty to the developer.')
+                li('Bountysource tracks these solutions, sees which one gets accepted by the open-source project, and then pays the bounty to the developer.')
                 //li('Learn more...')
               )
             ),
             dd(i('How Fundraisers work:')),
             dd(
               ol(
-                li('Anyone can come to BountySource and create a Fundraiser. Open-source fundraisers are typically used to raise money for new projects, big updates to existing projects, or to raise money for bounties.'),
+                li('Anyone can come to Bountysource and create a Fundraiser. Open-source fundraisers are typically used to raise money for new projects, big updates to existing projects, or to raise money for bounties.'),
                 li('The Fundraiser creator spreads the word about the Fundraiser to their communities.'),
-                li('Anyone can come to BountySource and make pledges to a Fundraiser, helping it reach its funding goal in time.')
+                li('Anyone can come to Bountysource and make pledges to a Fundraiser, helping it reach its funding goal in time.')
                 //li('Learn more...')
               )
             ),
@@ -62,16 +62,16 @@ with (scope('Faq', 'App')) {
             dd('Several things:'),
             dd(
               ul(
-                li('We\'re focused entirely on open-source software, so our user base is more valuable in that sense. BountySource users are familiar with the open-source community and projects; there\'s a higher chance of gaining contributions upon discovery as opposed to crowdfunding sites that cater to all types of projects.'),
+                li('We\'re focused entirely on open-source software, so our user base is more valuable in that sense. Bountysource users are familiar with the open-source community and projects; there\'s a higher chance of gaining contributions upon discovery as opposed to crowdfunding sites that cater to all types of projects.'),
                 li('We offer reward fulfillment for physical goods - from creation to delivery. If you\'re interested in starting a Fundraiser and want shirts, stickers, thumbdrives, or more please ', a({ href: 'mailto:support@bountysource.com' }, "contact us"), ' for more details!'),
                 li('Users have a direct line of communication with the team - no hoops to jump through, you can find the entire team on ', a({ href: 'irc://irc.freenode.net/bountysource' }, "IRC (#bountysource on Freenode)"), '.'),
                 li(a({ target: '_blank', href: 'https://github.com/bountysource/frontend' }, "Our front-end is open-source"), '! See things you don\'t like? Feel free to make changes and submit the code to us for review.')
               )
             ),
 
-            dt('Why should I use BountySource?'),
+            dt('Why should I use Bountysource?'),
             dd(
-              'There are several benefits to using BountySource:',
+              'There are several benefits to using Bountysource:',
               ul(
                 li(u('Increase development.'), ' Encourage developers to submit quality pull requests more frequently by creating bounties on existing issues.'),
                 li(u('Close issues faster.'), ' Incentivize unpopular but necessary issues by adding higher bounties on them.'),
@@ -103,7 +103,7 @@ with (scope('Faq', 'App')) {
             dd("You can create bounties on any open issue within any open-source project."),
 
             dt("What does it cost to post a bounty?"),
-            dd("Nothing! We do not charge any fees for placing a bounty. However, you will be required to pay the full amount of the bounty in order for the bounty to show up on BountySource."),
+            dd("Nothing! We do not charge any fees for placing a bounty. However, you will be required to pay the full amount of the bounty in order for the bounty to show up on Bountysource."),
 
             dt("Can several people put bounties on the same issue?"),
             dd("Yes! That is ideal. A $10 bounty from 1 person might not be appealing, but a $200 bounty from 10 people might be."),
@@ -127,7 +127,7 @@ with (scope('Faq', 'App')) {
             dd("You will be refunded."),
 
             dt("Does 100% of the bounty go to the developer?"),
-            dd("Upon payout, BountySource will charge a 5% fee in addition to any payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses."),
+            dd("Upon payout, Bountysource will charge a 5% fee in addition to any payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses."),
 
             dt("How do you know a project committer will accept any pull requests at all?"),
             dd("We don't guarantee this, but one of the main points of open-source software and making code public is to foster improvement. Committers are always monitoring pull requests, and they likely will accept any and all code they feel is of quality."),
@@ -156,13 +156,13 @@ with (scope('Faq', 'App')) {
 
           dl(
             dt("What is a Fundraiser?"),
-            dd("A means of collecting monetary contributions for a specific goal. In particular, BountySource Fundraisers are primarily used to raise money for new projects, new versions of existing projects, or for bounties."),
+            dd("A means of collecting monetary contributions for a specific goal. In particular, Bountysource Fundraisers are primarily used to raise money for new projects, new versions of existing projects, or for bounties."),
 
             dt("Who can create a fundraiser?"),
             dd("Anybody!"),
 
             dt("What do you charge upon completion?"),
-            dd("BountySource charges a 5% fee plus payment processing fees."),
+            dd("Bountysource charges a 5% fee plus payment processing fees."),
 
             dt("When do I get paid?"),
             dd("We give you the money as soon as your goal is met. If you reach your funding goal before your fundraiser deadline, we’ll pay you the goal amount immediately, and give you all the excess once the fundraiser is over.")
@@ -232,4 +232,4 @@ with (scope('Faq', 'App')) {
 //Every bounty has a six month time limit. If an issue isn’t closed within that time frame, all backers are refunded.
 
 //How do you determine who earns the bounty?[do we want to distinguish between Github/supported trackers and generic?]
-//When a developer submits a Solution through BountySource, the solution enters a two week “Dispute Period”. If there are no unresolved issues after that period, the deverloper earns the bounty.
+//When a developer submits a Solution through Bountysource, the solution enters a two week “Dispute Period”. If there are no unresolved issues after that period, the deverloper earns the bounty.

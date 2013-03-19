@@ -58,7 +58,7 @@ with (scope('Payment', 'App')) {
           }),
           label({ 'for': 'payment_method_personal', style: 'display: inline;' },
             img({ src: user.image_url, style: 'width: 16px; height: 16px' }),
-            span("BountySource"), span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
+            span("Bountysource"), span({ style: "color: #888; font-size: 80%" }, " (" + money(user.account.balance) + ")")
           )
         )
       );

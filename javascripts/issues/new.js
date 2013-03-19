@@ -14,7 +14,7 @@ with (scope('Issue', 'App')) {
 
           div({ id: 'create-issue-errors' }),
 
-          div("Please help us out by adding missing Issues to BountySource."),
+          div("Please help us out by adding missing Issues to Bountysource."),
 
           fieldset(
             label({ 'for': 'url-input' }, 'Issue URL:'),

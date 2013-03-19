@@ -10,7 +10,7 @@ with (scope('Payout','Solution')) {
     if (solution.paid_out) {
       return div(
         h2("Woo!"),
-        p("The bounty has been credited to your BountySource account."),
+        p("The bounty has been credited to your Bountysource account."),
         p("If you would like to cash this out, please contact us at ", a({ href: 'mailto:support@bountysource.com' }, 'support@bountysource.com'), ". You'll be able to do that on your own soon :)")
       )
     } else if (!solution.accepted || solution.disputed) {
@@ -127,7 +127,7 @@ with (scope('Payout','Solution')) {
             ),
 
             fieldset(
-              label('BountySource Fee:'),
+              label('Bountysource Fee:'),
               div({ style: 'font-size: 16px; display: inline; vertical-align: middle;' }, span('-'), money(bountysource_fee, true))
             ),
 

@@ -7,7 +7,7 @@ with (scope('Signin','App')) {
       breadcrumbs(a({ href: '#' }, 'Home'), 'Sign In'),
 
       div({ style: 'text-align: center' },
-        h1("Sign In to BountySource using:"),
+        h1("Sign In to Bountysource using:"),
         div({ style: 'margin: 20px 0' },
           a({ 'class': "btn-auth btn-github large hover", style: 'margin-right: 20px', href: Github.auth_url() }, "GitHub"),
           a({ 'class': "btn-auth btn-facebook large", style: 'margin-right: 20px', href: Facebook.auth_url() }, "Facebook"),
@@ -28,7 +28,7 @@ with (scope('Signin','App')) {
     render(
       breadcrumbs(a({ href: '#' }, 'Home'), a({ href: '#signin' }, 'Sign In'), 'Email Address'),
       h1("Sign In with your Email Address"),
-      p("Please enter your email address and a password. If you don't have a BountySource account yet, we'll create one for you."),
+      p("Please enter your email address and a password. If you don't have a Bountysource account yet, we'll create one for you."),
 
       super_signin_form(get_params())
     );

@@ -16,7 +16,7 @@ with (scope('Show', 'Issue')) {
         App.update_facebook_like_button({
           name:         issue.tracker.name+": "+issue.title,
           caption:      issue.title,
-          description:  "BountySource is the funding platform for open-source software. Create a bounty to help get this issue resolved, or submit a pull request to earn the bounty yourself!",
+          description:  "Bountysource is the funding platform for open-source software. Create a bounty to help get this issue resolved, or submit a pull request to earn the bounty yourself!",
           picture:      issue.tracker.image_url
         });
 

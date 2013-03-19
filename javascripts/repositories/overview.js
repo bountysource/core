@@ -13,7 +13,7 @@ with (scope('Repository')) {
       App.update_facebook_like_button({
         name:         repo.name,
         caption:      repo.description,
-        description:  "BountySource is the funding platform for open-source software. Place a bounty on issues you want resolved, or submit pull requests to collect open bounties!",
+        description:  "Bountysource is the funding platform for open-source software. Place a bounty on issues you want resolved, or submit pull requests to collect open bounties!",
         picture:      repo.image_url
       });
 

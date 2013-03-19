@@ -238,14 +238,14 @@ with (scope('Pledge', 'Fundraiser')) {
                   link:         pledge.fundraiser.frontend_url,
                   name:         "I just backed "+pledge.fundraiser.title,
                   caption:      pledge.fundraiser.short_description,
-                  description:  "BountySource is the funding platform for open-source software, contribute by making a pledge to this fundraiser!",
+                  description:  "Bountysource is the funding platform for open-source software, contribute by making a pledge to this fundraiser!",
                   picture:      pledge.fundraiser.image_url || ''
                 }, a({ 'class': 'btn-auth btn-facebook large', style: 'margin-right: 10px;' }, 'Share')),
 
                 Twitter.create_share_button({
                   url:  pledge.fundraiser.frontend_url,
                   text: money(pledge.amount)+" pledge made to "+pledge.fundraiser.title,
-                  via:  'BountySource'
+                  via:  'Bountysource'
                 }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet'))
               )
             )
