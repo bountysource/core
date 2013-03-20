@@ -28,7 +28,7 @@ with (scope('Edit', 'Fundraiser')) {
     var section_completed = {
       basic_info:   not_blank(fundraiser.title) && not_blank(fundraiser.short_description),
       description:  not_blank(fundraiser.description_html),
-      funding:      not_blank(fundraiser.funding_goal) && (fundraiser.funding_goal > 0) && not_blank(fundraiser.payout_method),
+      funding:      not_blank(fundraiser.funding_goal) && (fundraiser.funding_goal > 0),
       rewards:      fundraiser.rewards.length > 0,
       duration:     not_blank(fundraiser.days_open)
     };
@@ -238,7 +238,7 @@ with (scope('Edit', 'Fundraiser')) {
 
   route('#fundraisers/:fundraiser_id/edit/description', function(fundraiser_id) {
     with_fundraiser_edit_layout(fundraiser_id, 'Description', function(fundraiser) {
-      var description_textarea = textarea({ 'data-autosave': true, name: 'description', style: 'width: 630px; height: 600px; line-height: 18px;', placeholder: "Very thorough description of your fundraiser proposal." },
+      var description_textarea = textarea({ 'data-autosave': true, name: 'description', style: 'width: 615px; height: 600px; line-height: 18px;', placeholder: "Very thorough description of your fundraiser proposal." },
         fundraiser.description || ''
       );
 
@@ -320,11 +320,6 @@ with (scope('Edit', 'Fundraiser')) {
               span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
               number({ 'data-autosave': true, name: 'funding_goal', min: 1, placeholder: '50,000', value: fundraiser.funding_goal })
             ]
-          ),
-
-          fieldset(
-            label('Payout Method:'),
-            payout_method_select
           )
         )
       );
