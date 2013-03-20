@@ -4,11 +4,13 @@ with (scope('App')) {
 
   // refresh user_info and access_token if they're logged in
   initializer(function() {
-    BountySource.user_info(function(response) {
-      if (response.meta.success) {
-        BountySource.set_cached_user_info(response.data);
-      }
-    })
+    if (logged_in()) {
+      BountySource.user_info(function(response) {
+        if (response.meta.success) {
+          BountySource.set_cached_user_info(response.data);
+        }
+      });
+    }
   });
 
   // update the FB like button in place with new meta data
