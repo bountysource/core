@@ -229,7 +229,7 @@ with (scope('Pledge', 'Fundraiser')) {
                   p({ style: 'margin: 0 200px; padding: 10px;' }, pledge.reward.fulfillment_details),
 
                   h4({ style: 'margin-bottom: 0;' }, 'Your Response:'),
-                  p({ style: 'margin: 0 200px; padding: 10px;' }, pledge.survey_response)
+                  p({ style: 'margin: 0 200px; padding: 10px; white-space: pre-wrap;' }, pledge.survey_response)
                 ]
               ),
 
