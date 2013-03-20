@@ -4,16 +4,12 @@ with (scope('App')) {
 
   // refresh user_info and access_token if they're logged in
   initializer(function() {
-    if (Storage.get('access_token')) {
-      BountySource.user_info(function(results) {
-        BountySource.set_access_token(results.data);
-      });
-    }
+    BountySource.user_info(function(response) {
+      if (response.meta.success) {
+        BountySource.set_cached_user_info(response.data);
+      }
+    })
   });
-
-  // reload the signin buttons on every page load, so that they have the correct redirect URl
-  // after_filter(reload_signin_buttons);
-
 
   // update the FB like button in place with new meta data
   define('update_facebook_like_button', function(new_attributes) {
@@ -21,37 +17,6 @@ with (scope('App')) {
 
     new_attributes = new_attributes || {};
     render({ target: 'fb-like-button' }, Facebook.create_share_button(new_attributes));
-  });
-
-  /*
-   * Get the pretty route, which uses the base string, with a character white listed version of the
-   * source string appended to it.
-   *
-   * Example Usage:
-   *
-   * pretty_route('#fundraisers/1/', 'My awesome fundraiser: it is URL safe ______waste__of___space______')
-   *  //=> '#fundraisers/1/my-awesome-fundraiser-it-is-url-safe-waste-of-space'
-   *
-   * pretty_route('#fundraisers/1/', 'My awesome fundraiser: it is URL safe ______waste__of___space______', 30)
-   *  //=> '#fundraisers/1/my-awesome'
-   *  // doesn't append 'fundraiser' because that would put the route length over 30 characters
-   * */
-  define('pretty_url', function(base_string, source_string, max_route_length) {
-    var parts           = (source_string.split(/\s+/)),
-        new_route_parts   = [],
-        route             = base_string,
-        new_part;
-
-    // add title parts onto route until length at max
-    while (parts.length > 0 && (new_route_parts.join('-').length + route.length) <= (max_route_length || 100)) {
-      new_part = parts.shift();
-      new_part = new_part.replace(/[^0-9a-z\-_]/gi,''); // white list URL safe characters
-      new_part = new_part.replace(/(-|_){1,}/g, '-');   // reduce duplicate hyphens, replace underscores with hyphens
-
-      // lower case dat part
-      if (!new_part.match(/^-$/)) new_route_parts.push(new_part.toLowerCase());
-    }
-    return base_string+(new_route_parts.join('-')).toLowerCase();
   });
 
   define('time_ago_in_words', function(time) {
@@ -86,6 +51,17 @@ with (scope('App')) {
     return words;
   });
 
+  /*
+  * Return the hours and minutes away from end_date
+  * @end_date - a valid date string (not a Date object)
+  *
+  * example:
+  * future_date = '2013-01-04 05:15:00 UTC';
+  * # right now, the date is: 2013-01-04 03:00:00 UTC
+  *
+  * hours_and_minutes_from(future_date);
+  * #=> { hours: 2, minutes: 15 }
+  * */
   define('hours_and_minutes_from', function(end_date) {
     var total_minutes = ((new Date(end_date).getTime()) - (new Date().getTime())) / (1000*60);
 
@@ -145,6 +121,6 @@ with (scope('App')) {
     Storage.clear({ except: ['environment'] });
     Storage.set('_redirect_to_after_login', get_route());
     set_route('#signin', { reload_page: true });
-  })
+  });
 
-};
+}

@@ -1,8 +1,4 @@
 with (scope('Fundraiser', 'App')) {
-  define('get_href', function(fundraiser) {
-    return pretty_url('#fundraisers/'+fundraiser.id+'-', fundraiser.title);
-  });
-
   define('status_element', function(fundraiser) {
     var element = a({ 'class': 'status-indicator', href: fundraiser.frontend_path });
     if (fundraiser.published) {
