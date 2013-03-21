@@ -40,7 +40,7 @@ with (scope('Info', 'Fundraiser')) {
             ],
 
             remaining_rewards.length > 0 && [
-              h3('Remaining Rewards'),
+              h3('Rewards without Pledges'),
               remaining_rewards.map(reward_table)
             ]
           ),
@@ -56,11 +56,11 @@ with (scope('Info', 'Fundraiser')) {
   define('reward_table', function(reward) {
     return div({ 'class': 'reward-info' },
       div({ 'class': 'reward-description' },
-        div(money(reward.amount)),
+        div(reward.amount == 0 ? '♡' : money(reward.amount)),
         p(reward.description)
       ),
       div({ 'class': 'pledge-table' },
-        reward.fulfillment_details.length > 0 && div(
+        reward.fulfillment_details && div(
           h4('Fulfillment details:'),
           p(reward.fulfillment_details),
           br
@@ -74,7 +74,7 @@ with (scope('Info', 'Fundraiser')) {
           tr(
             th('Backer'),
             th('Pledge Amount'),
-            reward.fulfillment_details.length > 0 && th('Survey Response')
+            reward.fulfillment_details && th('Survey Response')
           ),
 
           reward.pledges.map(function(pledge) {
@@ -85,7 +85,7 @@ with (scope('Info', 'Fundraiser')) {
               td(
                 money(pledge.amount)
               ),
-              reward.fulfillment_details.length > 0 && td({ style: 'white-space: pre-wrap; padding: 5px 0;' },
+              reward.fulfillment_details && td(
                 pledge.survey_response
               )
             )

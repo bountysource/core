@@ -1,5 +1,9 @@
 /* http://www.colorzilla.com/gradient-editor/ */
 
+input[type='submit'].button {
+  padding: 13px 0;
+}
+
 .button {
   border-radius: 2px;
   display: block;

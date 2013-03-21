@@ -422,9 +422,9 @@ with (scope('Edit', 'Fundraiser')) {
         ),
 
         fieldset({ 'class': 'no-label edit-reward-buttons' },
-          submit({ 'class': 'button green', style: 'padding: 0;' }, 'Save'),
-          a({ 'class': 'button blue', style: 'display: inline-block; width: 100px;', href: curry(cancel_reward_update, reward) }, 'Cancel'),
-          !fundraiser.published && a({ 'class': 'button blue', href: curry(destroy_reward, fundraiser, reward) }, 'Delete')
+          submit({ 'class': 'button green' }, 'Save'),
+          a({ 'class': 'button blue', style: 'width: 100px;', href: curry(cancel_reward_update, reward) }, 'Cancel'),
+          !fundraiser.published && a({ 'class': 'button blue', style: 'width: 100px;',href: curry(destroy_reward, fundraiser, reward) }, 'Delete')
         )
       )
     );

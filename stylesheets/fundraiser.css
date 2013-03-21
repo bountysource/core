@@ -69,8 +69,12 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
   -o-transition:      ease-in 50ms;
   transition:         ease-in 50ms;
 }
-.edit-reward-buttons * { display: inline-block; margin-right: 10px; vertical-align: middle; }
-.edit-reward-buttons *:last-child { margin-right: 0; }
+.edit-reward-buttons > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.edit-reward-buttons > *:last-child { margin-right: 0; }
 
 #rewards .reward-row.active { background: #FAFCE1; height: 400px; cursor: default; }
 #rewards .reward-row:hover  { background: #FAFCE1; }
@@ -217,7 +221,7 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
 #fundraiser-info .reward-info .reward-description > * {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 #fundraiser-info .reward-info .reward-description > *:last-child { margin-right: 0px; }
 #fundraiser-info .reward-info .reward-description > *:nth-child(1) {
@@ -225,6 +229,8 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
 }
 #fundraiser-info .reward-info .reward-description > *:nth-child(2) {
   font-size: 14px;
+  white-space: pre-wrap;
+  width: 850px;
 }
 #fundraiser-info .reward-info .reward-description > *:nth-child(3) {
   display: block;
