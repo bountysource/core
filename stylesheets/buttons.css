@@ -1,6 +1,8 @@
 /* http://www.colorzilla.com/gradient-editor/ */
 
 input[type='submit'].button {
+  display: inline-block;
+  vertical-align: middle;
   padding: 13px 0;
 }
 
