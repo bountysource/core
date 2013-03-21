@@ -510,6 +510,8 @@ with (scope('Edit', 'Fundraiser')) {
   });
 
   define('update_fundraiser', function(fundraiser, data) {
+    render({ into: Edit.errors_div }, '');
+
     BountySource.update_fundraiser(fundraiser.id, data, function(response) {
       if (response.meta.success) {
         var fundraiser = response.data;
