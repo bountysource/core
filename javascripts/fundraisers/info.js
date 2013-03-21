@@ -85,7 +85,7 @@ with (scope('Info', 'Fundraiser')) {
               td(
                 money(pledge.amount)
               ),
-              reward.fulfillment_details && td(
+              reward.fulfillment_details && td({ style: 'white-space: pre-wrap; padding: 5px 0;' },
                 pledge.survey_response
               )
             )
