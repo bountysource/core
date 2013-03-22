@@ -324,4 +324,30 @@ with (scope('BountySource')) {
     api('/user/pledges/'+pledge_id, 'PUT', data, callback);
   });
 
+  /*
+  * Fundraiser updates
+  * */
+  define('get_fundraiser_updates', function(fundraiser_id, callback) {
+    api('/user/fundraisers/' + fundraiser_id + '/updates', callback);
+  });
+
+  define('create_fundraiser_update', function(fundraiser_id, data, callback) {
+    api('/user/fundraisers/' + fundraiser_id + '/updates', 'POST', data, callback);
+  });
+
+  define('get_fundraiser_update', function(fundraiser_id, update_id, callback) {
+    api('/user/fundraisers/' + fundraiser_id + '/updates/' + update_id, callback);
+  });
+
+  define('update_fundraiser_update', function(fundraiser_id, update_id, data, callback) {
+    api('/user/fundraisers/' + fundraiser_id + '/updates/' + update_id, 'PUT', data, callback);
+  });
+
+  define('publish_fundraiser_update', function(fundraiser_id, update_id, callback) {
+    api('/user/fundraisers/' + fundraiser_id + '/updates/' + update_id + '/publish', 'POST', callback);
+  });
+
+  define('destroy_fundraiser_update', function(fundraiser_id, update_id, callback) {
+    api('/user/fundraisers/' + fundraiser_id + '/updates/' + update_id, 'DELETE', callback);
+  });
 }

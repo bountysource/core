@@ -92,7 +92,7 @@ with (scope('Show', 'Issue')) {
           )
         ),
 
-        a({ href: issue.accepted_solution.code_url, target: '_blank', 'class': 'button blue' }, 'View Solution')
+        a({ href: issue.accepted_solution.code_url, target: '_blank', 'class': 'button blue', style: 'width: 200px; display: inline-block;' }, 'View Solution')
       );
 
       return target_div;

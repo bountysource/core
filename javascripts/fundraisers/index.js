@@ -21,9 +21,9 @@ with (scope('Index', 'Fundraiser')) {
             tr(
               th('Title'),
               th({ style: 'width: 130px;' }, 'Funding Goal'),
-              th({ style: 'width: 200px;' }, 'Progress'),
+              th({ style: 'width: 175px;' }, 'Progress'),
               th({ style: 'width: 80px; text-align: center;' }, 'Status'),
-              th({ style: 'width: 75px;' })
+              th({ style: 'width: 100px;' })
             ),
             response.data.map(function(fundraiser) {
               // depends on whether or not it's published
@@ -36,8 +36,9 @@ with (scope('Index', 'Fundraiser')) {
                 td({ style: 'text-align: center;' },
                   (!fundraiser.published || fundraiser.in_progress) && a({ href: fundraiser.frontend_edit_path+'/basic-info' }, img({ src: 'images/edit.gif' })),
 
-                  // TODO: info page for fundraiser author to see contributions and rewards that have been claimed
                   a({ href: fundraiser.frontend_info_path, style: 'margin-left: 10px;' }, img({ src: 'images/info.gif' })),
+
+                  fundraiser.published && a({ href: fundraiser.frontend_updates_path, style: 'margin-left: 10px;' }, img({ src: 'images/clipboard.gif' })),
 
                   !fundraiser.published && a({ 'class': 'fundraiser-delete-button', href: curry(destroy_fundraiser, fundraiser.id), style: 'margin-left: 10px; opacity:' + (fundraiser.published ? 0.25 : 1) + ';' }, img({ src: 'images/trash.gif' }))
                 )

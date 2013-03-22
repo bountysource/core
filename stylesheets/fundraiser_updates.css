@@ -1,0 +1,48 @@
+/*
+  index page
+*/
+.fundraiser-update.index-row {
+  display: block;
+  text-decoration: none;
+  color: black;
+  padding: 30px 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+
+  -webkit-transition: background ease-in 100ms;
+  -moz-transition:    background ease-in 100ms;
+  -o-transition:      background ease-in 100ms;
+  transition:         background ease-in 100ms;
+}
+.fundraiser-update.index-row:last-of-type { border-bottom: 0; }
+.fundraiser-update.index-row.active,
+.fundraiser-update.index-row:hover {
+  background: #FFFFE4;
+}
+.fundraiser-update.index-row > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.fundraiser-update.index-row > *:nth-child(1) { color: #70C770; }
+.fundraiser-update.index-row.draft > *:nth-child(1) { color: #4d99c7; }
+.fundraiser-update.index-row > *:nth-child(3) {
+  display: block;
+  margin: 10px 0 0 10px;
+  font-size: 14px;
+  font-style: italic;
+  color: gray;
+}
+
+#fundraiser-updates-buttons {
+  list-style-type: none;
+  display: block;
+  margin: 10px 0;
+  padding: 0;
+}
+#fundraiser-updates-buttons li {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 20px 0 0;
+}
+#fundraiser-updates-buttons li:last-of-type { margin: 0; }

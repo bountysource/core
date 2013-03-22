@@ -21,6 +21,37 @@ input[type='submit'].button {
 .button:hover { text-decoration: underline; }
 .button.no-hover { text-decoration: none; }
 
+/*
+  Wee little buttons for wee little actions
+*/
+.button.small {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 2px;
+  color: black;
+  text-decoration: none;
+
+  -webkit-transition: ease-in 50ms;
+  -moz-transition:    ease-in 50ms;
+  -o-transition:      ease-in 50ms;
+  transition:         ease-in 50ms;
+}
+.button.small > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.button.small > *:last-child { margin-right: 0; }
+.button.small > img { width: 16px; height: 16px; }
+
+.button.small.gray {
+  background: #F1F1F1;
+  border: 1px solid #D6D6D6;
+}
+.button.small.gray:hover { background: #E9E7E7; }
+
 .button.green {
   border: 1px solid #70b539;
   background: #b6f266;  /* Old browsers */
