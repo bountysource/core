@@ -245,6 +245,7 @@ with (scope('Edit', 'Fundraiser')) {
       // long poll saving for description
       Edit.update_needed = false;
       description_textarea.addEventListener('keydown', function() { Edit.update_needed = true });
+
       setInterval(function() {
         if (Edit.update_needed) {
           update_fundraiser(fundraiser, { description: description_textarea.value });

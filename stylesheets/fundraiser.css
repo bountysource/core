@@ -230,7 +230,7 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
 #fundraiser-info .reward-info .reward-description > *:nth-child(2) {
   font-size: 14px;
   white-space: pre-wrap;
-  width: 850px;
+  width: 800px;
 }
 #fundraiser-info .reward-info .reward-description > *:nth-child(3) {
   display: block;

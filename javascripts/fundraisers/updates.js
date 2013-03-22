@@ -141,6 +141,57 @@ with (scope('Updates', 'Fundraiser')) {
             error_message('This update has already been published, it cannot be edited.')
           )
         } else {
+          var title_input = input({
+            'class':      'auto-saved',
+            style:        'width: 463px; margin: 0; font-size: 14px;',
+            required:     true,
+            name:         'title',
+            placeholder:  'Title of your update',
+            value:        update.title||''
+          });
+
+          var body_input = textarea({
+            'class':      'auto-saved',
+            style:        'width: 463px; height: 300px; margin: 0; border-radius: 0; vertical-align: top;',
+            required:     true,
+            name:         'body',
+            placeholder:  'Content of your update'
+          }, update.body||'');
+
+          body_input['data-save-needed'] = false;
+
+          body_input.addEventListener('keydown', function() {
+            body_input['data-save-needed'] = true;
+          });
+          setInterval(function() {
+            if (body_input['data-save-needed']) {
+              BountySource.update_fundraiser_update(fundraiser.id, update.id, { body: body_input.value }, function(response) {
+                if (response.meta.success) {
+                  add_class(body_input, 'saved');
+                } else {
+                  remove_class(body_input, 'saved');
+                }
+              });
+              body_input['data-save-needed'] = false;
+            }
+          }, 3000);
+
+          // post to the server on blur
+          var update_on_blur = function() {
+            var input_element = this;
+            var request_data = {};
+            request_data[this.name] = this.value;
+            BountySource.update_fundraiser_update(fundraiser.id, update.id, request_data, function(response) {
+              if (response.meta.success) {
+                add_class(input_element, 'saved');
+              } else {
+                remove_class(input_element, 'saved');
+              }
+            });
+          };
+          title_input.addEventListener('blur', update_on_blur);
+          body_input.addEventListener('blur', update_on_blur);
+
           render(
             breadcrumbs(
               a({ href: '#' }, 'Home'),
@@ -160,23 +211,12 @@ with (scope('Updates', 'Fundraiser')) {
 
                 fieldset(
                   label('Title:'),
-                  input({
-                    style: 'width: 463px; margin: 0; font-size: 14px;',
-                    required: true,
-                    name: 'title',
-                    placeholder: 'Title of your update',
-                    value: update.title||''
-                  })
+                  title_input
                 ),
 
                 fieldset(
                   label('Content:'),
-                  textarea({
-                    style: 'width: 463px; height: 300px; margin: 0; border-radius: 0; vertical-align: top;',
-                    required: true,
-                    name: 'body',
-                    placeholder: 'Content of your update'
-                  }, update.body||'')
+                  body_input
                 ),
                 fieldset({ 'class': 'no-label' },
                   submit({

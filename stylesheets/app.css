@@ -305,3 +305,10 @@ input.autosized {
 .status-indicator.red     { background: #DF523F; }
 .status-indicator.orange  { background: #F3B13C; }
 .status-indicator.blue    { background: #29A8DD; }
+
+/* pretty green glow to add if and input field was auto-saved */
+input.auto-saved,
+textarea.auto-saved {}
+
+input.auto-saved.saved,
+textarea.auto-saved.saved { box-shadow: 0 0 15px #9BD59B; }
