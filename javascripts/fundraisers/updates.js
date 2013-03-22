@@ -27,7 +27,7 @@ with (scope('Updates', 'Fundraiser')) {
               ))
             ),
 
-            updates.length <= 0 && p({ style: 'font-style: italic;' }, "No updates have been made."),
+            updates.length <= 0 && p({ style: 'font-style: italic;' }, "No updates have been posted."),
 
             updates.map(function(update) {
               var update_row = a({ 'class': 'fundraiser-update index-row', href: update.frontend_path },
