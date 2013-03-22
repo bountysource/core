@@ -168,9 +168,9 @@ with (scope('Updates', 'Fundraiser')) {
                     value: update.title||''
                   })
                 ),
+
                 fieldset(
                   label('Content:'),
-                  // p("Formatted with ", a({ target: '_blank', href: 'http://github.github.com/github-flavored-markdown/' }, "GitHub Flavored Markdown.")),
                   textarea({
                     style: 'width: 463px; height: 300px; margin: 0; border-radius: 0; vertical-align: top;',
                     required: true,
@@ -200,7 +200,11 @@ with (scope('Updates', 'Fundraiser')) {
             ),
 
             Columns.side(
-              p("Update the backers of your fundraiser. When published, the backers will receive an email with the update.")
+              h4('Note:'),
+              p("When published, all of your backers will receive an email with the update."),
+
+              h4('Formatting:'),
+              p("Formatted with ", a({ target: '_blank', href: 'http://github.github.com/github-flavored-markdown/' }, "GitHub Flavored Markdown."))
             )
           )
 
