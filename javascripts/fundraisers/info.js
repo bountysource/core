@@ -40,6 +40,7 @@ with (scope('Info', 'Fundraiser')) {
             ],
 
             remaining_rewards.length > 0 && [
+              br,
               h3('Rewards without Pledges'),
               remaining_rewards.map(reward_table)
             ]
