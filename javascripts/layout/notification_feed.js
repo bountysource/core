@@ -28,7 +28,13 @@ with (scope('NotificationFeed', 'App')) {
         add_class(notifications_feed, 'loaded');
 
         render({ target: 'notification-feed-count-wrapper' }, span({ 'class': 'notification-feed-count' }, response.data.length));
-        render({ target: 'notifications-feed-flyout-inner' }, response.data.map(notification));
+        render({ target: 'notifications-feed-flyout-inner' }, response.data.map(function(object) {
+          try{
+            return notification(object);
+          } catch(e) {
+            return console.log('Unable to render notification for object: ', object);
+          }
+        }));
       } else {
         render({ target: 'notifications-feed-flyout-inner' }, 'Nothing to show here!');
       }
