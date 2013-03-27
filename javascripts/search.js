@@ -102,7 +102,7 @@ with (scope('Search', 'App')) {
           h1("No results"),
           p(
             "We were unable to find anything. If you were expecting to see something, please send us an email: ",
-            a({ href: 'mailto:support@bountysource.com' }, 'mailto:support@bountysource.com')
+            a({ href: 'mailto:support@bountysource.com' }, 'support@bountysource.com')
           )
         );
       }
