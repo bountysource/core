@@ -14,7 +14,7 @@ with (scope('Signin','App')) {
           a({ 'class': "btn-auth btn-twitter large", style: 'margin-right: 20px', href: Twitter.auth_url() }, "Twitter"),
           a({ 'class': "btn-auth btn-email large", style: 'margin-right: 20px', href: '#signin/email' }, "Email Address")
         ),
-        p("We will never sell your email address or post anything without your permission! (", a({ href: '#privacypolicy' }, 'Privacy Policy'), ')')
+        p("We will never sell your email address or post anything without your permission!")
       )
 
     );
