@@ -16,11 +16,12 @@ with (scope('App')) {
         footer(
           div({ style: 'float: right' }, "Copyright ©2013, Bountysource Inc. All rights reserved."),
           ul(
-            li(a({ href: '#about' }, 'About')),
+            //li(a({ href: '#about' }, 'About')),
             li(a({ href: '#faq' }, 'FAQ')),
-            //li(a({ href: '#' }, 'Blog')),
+            li(a({ target: '_blank', href: 'http://blog.bountysource.com/' }, 'Blog')),
             li(a({ href: 'mailto:support@bountysource.com' }, 'Contact Us')),
-            li(a({ href: '#termsofservice' }, 'Terms of Service'))
+            li(a({ href: '#termsofservice' }, 'Terms of Service')),
+            li(a({ href: '#privacypolicy' }, 'Privacy Policy'))
           )
         ),
 
