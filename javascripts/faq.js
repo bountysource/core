@@ -124,7 +124,10 @@ with (scope('Faq', 'App')) {
             dd("We have no control over when a project makes a new release. We award a bounty once code has been merged into the project. The rest is up to project owners and committers."),
 
             dt("What happens if an issue I’ve backed is closed without a solution?"),
-            dd("You will be refunded."),
+            dd("If an issue with bounties is closed without a solution, all backers are refunded."),
+            
+            dt("What happens if an issue I've backed is never closed?"),
+            dd("Every bounty has a six month time limit. If you backed an issue that is not closed within those six months, you will be refunded."),
 
             dt("Does 100% of the bounty go to the developer?"),
             dd("Upon payout, Bountysource will charge a 5% fee in addition to any payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses."),
