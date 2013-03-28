@@ -10,4 +10,7 @@ with (scope('LegacyRoutes', 'LazyHacks')) {
   route('#account/fundraisers/:id/rewards', function(id) { set_route('#fundraisers/'+id+'/edit/rewards') });
   route('#account/fundraisers/:id/funding', function(id) { set_route('#fundraisers/'+id+'/edit/funding') });
   route('#account/fundraisers/:id/duration', function(id) { set_route('#fundraisers/'+id+'/edit/duration') });
+
+  route('#bounties', curry(set_route, '#'));
+
 }
