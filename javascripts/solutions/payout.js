@@ -122,7 +122,7 @@ with (scope('Payout','Solution')) {
             ),
 
             fieldset(
-              label('Payment Fee:'),
+              label('Processing Fee:'),
               div({ style: 'font-size: 16px; display: inline; vertical-align: middle;' }, span('-'), money(processing_fee, true))
             ),
 

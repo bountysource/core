@@ -13,7 +13,6 @@ with (scope('Index', 'Fundraiser')) {
 
     BountySource.get_fundraisers(function(response) {
       if (response.data.length > 0) {
-
         render({ into: fundraisers_table },
           messages(),
 
