@@ -26,8 +26,6 @@ with (scope('Show','Solution')) {
       )
     );
 
-    render('Loading...');
-
     BountySource.get_solution(id, function(response) {
       if (response.meta.success) {
         var solution = response.data;
