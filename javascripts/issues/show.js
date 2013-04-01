@@ -79,6 +79,8 @@ with (scope('Show', 'Issue')) {
   define('solution_info', function(issue) {
     var target_div = div({ id: 'solution-status', style: 'text-align: center; padding: 10px 30px; background: #EBFFE4; box-shadow: 0 0 10px #A1E9A1; border-radius: 3px;' });
 
+    console.log(issue);
+
     if (issue.accepted_solution) {
       // a solution was accepted, awesome!
       render({ into: target_div },
@@ -108,29 +110,36 @@ with (scope('Show', 'Issue')) {
 
       // does it exist? say something about it!
       if (solution) {
-        render({ into: target_div },
-          h2({ style: 'margin: 10px 0;' }, 'Solution Submitted'),
+        // if there is no dispute period end date, the solution is pending acceptance
+        if (solution.dispute_period_end_date) {
+          render({})
+        } else {
+          render({ into: target_div },
+            h2({ style: 'margin: 10px 0;' }, 'Solution Submitted'),
 
-          div({ style: 'margin-bottom: 10px;' },
-            'by ',
-            a({ href: solution.person.frontend_path },
-              img({ style: 'display: inline-block; vertical-align: middle; width: 24px; height: 24px; border-radius: 2px;', src: solution.person.image_url }),
-              div({ style: 'display: inline-block; vertical-align: middle; margin-left: 5px;' }, solution.person.display_name)
-            )
-          ),
+            div({ style: 'margin-bottom: 10px;' },
+              'by ',
+              a({ href: solution.person.frontend_path },
+                img({ style: 'display: inline-block; vertical-align: middle; width: 24px; height: 24px; border-radius: 2px;', src: solution.person.image_url }),
+                div({ style: 'display: inline-block; vertical-align: middle; margin-left: 5px;' }, solution.person.display_name)
+              )
+            ),
 
-          p('"' + solution.body + '"'),
+            p('"' + solution.body + '"'),
 
-          a({ href: solution.code_url, target: '_blank', 'class': 'button blue' }, 'View Solution'),
+            a({ href: solution.code_url, target: '_blank', 'class': 'button blue' }, 'View Solution'),
 
-          p({ style: 'line-height: 25px;' },
-            "If you feel that this solution does not sufficiently solve the issue, file a ",
-            a({ href: dispute_period_email_href(solution) }, 'dispute'),
-            " with us. If there are no outstanding disputes after ",
-            strong(formatted_date(solution.dispute_period_end_date)),
-            ", then the solution will be accepted and the bounty paid out."
-          )
-        );
+            solution.dispute_period_end_date && p({ style: 'line-height: 25px;' },
+              "If you feel that this solution does not sufficiently solve the issue, file a ",
+              a({ href: dispute_period_email_href(solution) }, 'dispute'),
+              " with us. If there are no outstanding disputes after ",
+              strong(formatted_date(solution.dispute_period_end_date)),
+              ", then the solution will be accepted and the bounty paid out."
+            ),
+
+            !solution.dispute_period_end_date && p({  })
+          );
+        }
 
         return target_div;
       }
