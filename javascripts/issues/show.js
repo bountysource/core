@@ -79,8 +79,6 @@ with (scope('Show', 'Issue')) {
   define('solution_info', function(issue) {
     var target_div = div({ id: 'solution-status', style: 'text-align: center; padding: 10px 30px; background: #EBFFE4; box-shadow: 0 0 10px #A1E9A1; border-radius: 3px;' });
 
-    console.log(issue);
-
     if (issue.accepted_solution) {
       // a solution was accepted, awesome!
       render({ into: target_div },
@@ -111,9 +109,9 @@ with (scope('Show', 'Issue')) {
       // does it exist? say something about it!
       if (solution) {
         // if there is no dispute period end date, the solution is pending acceptance
-        if (solution.dispute_period_end_date) {
-          render({})
-        } else {
+//        if (solution.dispute_period_end_date) {
+//          render({})
+//        } else {
           render({ into: target_div },
             h2({ style: 'margin: 10px 0;' }, 'Solution Submitted'),
 
@@ -139,7 +137,7 @@ with (scope('Show', 'Issue')) {
 
             !solution.dispute_period_end_date && p({  })
           );
-        }
+//        }
 
         return target_div;
       }
