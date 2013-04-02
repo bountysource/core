@@ -125,7 +125,7 @@ with (scope('Show', 'Issue')) {
 
             p('"' + solution.body + '"'),
 
-            a({ href: solution.code_url, target: '_blank', 'class': 'button blue' }, 'View Solution'),
+            a({ href: solution.code_url, target: '_blank', 'class': 'button blue', style: 'display: inline-block; width: 200px;' }, 'View Solution'),
 
             solution.dispute_period_end_date && p({ style: 'line-height: 25px;' },
               "If you feel that this solution does not sufficiently solve the issue, file a ",
