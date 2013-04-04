@@ -13,6 +13,9 @@ with (scope('Solution','App')) {
     } else if (solution.accepted) {
       element.innerHTML = 'Accepted';
       add_class(element, 'green');
+    } else if (solution.rejected) {
+      element.innerHTML = 'Closed';
+      add_class(element, 'red');
     } else if (solution.disputed) {
       element.innerHTML = 'Disputed';
       add_class(element, 'red');

@@ -61,6 +61,11 @@ with (scope('Show','Solution')) {
 
         if (solution.accepted) {
           render({ into: Show.target_div }, Payout.page_for_solution(solution));
+        } else if (solution.rejected) {
+          render({ into: Show.target_div },
+            h2('Solution Closed'),
+            p("Another solution was accepted, which earned the bounty on this issue.")
+          );
         } else if (solution.submitted) {
           render({ into: Show.target_div },
             h2('Solution Submitted!'),
