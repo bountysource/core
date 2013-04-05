@@ -75,6 +75,11 @@ with (scope('Show', 'Issue')) {
 
   // show the currently submitted and/or accepted Solution
   define('solution_info', function(issue) {
+
+
+    console.log(issue);
+
+
     var target_div = div({ id: 'solution-status', style: 'text-align: center; padding: 10px 30px; background: #EBFFE4; box-shadow: 0 0 10px #A1E9A1; border-radius: 3px;' });
 
     if (issue.accepted_solution) {
@@ -137,7 +142,7 @@ with (scope('Show', 'Issue')) {
 
   define('dispute_period_email_href', function(solution) {
     return  "mailto:support@bountysource.com?subject="+ encodeURIComponent("Dispute") +
-      "&body=" + encodeURIComponent("Issue Name: " + solution.issue.title + "\nIssue URL: " + solution.issue.frontend_path + "\n\nPlease describe the issue you have with " + solution.person.display_name + "'s solution:");
+      "&body=" + encodeURIComponent("Issue Name: " + solution.issue.title + "\nIssue URL: " + solution.issue.frontend_url + "\n\nPlease describe the issue you have with " + solution.person.display_name + "'s solution:");
   });
 
   define('github_user_html_box', function(options) {
