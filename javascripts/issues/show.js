@@ -28,9 +28,7 @@ with (scope('Show', 'Issue')) {
             truncate(issue.title,40)
           ),
 
-          Columns.create({
-            show_side: issue.can_add_bounty && !issue.accepted_solution
-          }),
+          Columns.create({ show_side: true }),
 
           Columns.main(
             // used to render messages into
@@ -67,7 +65,7 @@ with (scope('Show', 'Issue')) {
           ),
 
           Columns.side(
-            bounty_box(issue),
+            issue.can_add_bounty && bounty_box(issue),
             DeveloperBox.create(issue)
           )
         );
@@ -95,53 +93,46 @@ with (scope('Show', 'Issue')) {
         a({ href: issue.accepted_solution.code_url, target: '_blank', 'class': 'button blue', style: 'width: 200px; display: inline-block;' }, 'View Solution')
       );
 
-      return target_div;
-    } else if (issue.submitted_solutions) {
+    } else if (issue.submitted_solutions.length > 0) {
+      // TODO show all submitted solutions
       // select the first solution that was submitted
-      var solution;
-      for (var i=0; issue.submitted_solutions.length; i++) {
-        if (issue.submitted_solutions[i].submitted) {
-          solution = issue.submitted_solutions[i];
-          break;
-        }
-      }
+      var solution = issue.submitted_solutions[0];
 
       // does it exist? say something about it!
       if (solution) {
         // if there is no dispute period end date, the solution is pending acceptance
-//        if (solution.dispute_period_end_date) {
-//          render({})
-//        } else {
-          render({ into: target_div },
-            h2({ style: 'margin: 10px 0;' }, 'Solution Submitted'),
+        render({ into: target_div },
+          h2({ style: 'margin: 10px 0;' }, 'Solution Submitted'),
 
-            div({ style: 'margin-bottom: 10px;' },
-              'by ',
-              a({ href: solution.person.frontend_path },
-                img({ style: 'display: inline-block; vertical-align: middle; width: 24px; height: 24px; border-radius: 2px;', src: solution.person.image_url }),
-                div({ style: 'display: inline-block; vertical-align: middle; margin-left: 5px;' }, solution.person.display_name)
-              )
-            ),
+          div({ style: 'margin-bottom: 10px;' },
+            'by ',
+            a({ href: solution.person.frontend_path },
+              img({ style: 'display: inline-block; vertical-align: middle; width: 24px; height: 24px; border-radius: 2px;', src: solution.person.image_url }),
+              div({ style: 'display: inline-block; vertical-align: middle; margin-left: 5px;' }, solution.person.display_name)
+            )
+          ),
 
-            p('"' + solution.body + '"'),
+          p('"' + solution.body + '"'),
 
-            a({ href: solution.code_url, target: '_blank', 'class': 'button blue', style: 'display: inline-block; width: 200px;' }, 'View Solution'),
+          a({ href: solution.code_url, target: '_blank', 'class': 'button blue', style: 'display: inline-block; width: 200px;' }, 'View Solution'),
 
-            solution.dispute_period_end_date && p({ style: 'line-height: 25px;' },
-              "If you feel that this solution does not sufficiently solve the issue, file a ",
-              a({ href: dispute_period_email_href(solution) }, 'dispute'),
-              " with us. If there are no outstanding disputes after ",
-              strong(formatted_date(solution.dispute_period_end_date)),
-              ", then the solution will be accepted and the bounty paid out."
-            ),
-
-            !solution.dispute_period_end_date && p({  })
-          );
-//        }
-
-        return target_div;
+          solution.dispute_period_end_date && p({ style: 'line-height: 25px;' },
+            "If you feel that this solution does not sufficiently solve the issue, file a ",
+            a({ href: dispute_period_email_href(solution) }, 'dispute'),
+            " with us. If there are no outstanding disputes after ",
+            strong(formatted_date(solution.dispute_period_end_date)),
+            ", then the solution will be accepted and the bounty paid out."
+          )
+        );
       }
+    } else if (!issue.can_add_bounty && issue.bounty_total > 0) {
+      render({ into: target_div },
+        h2({ style: 'margin: 10px 0;' }, money(issue.bounty_total), ' Bounty Available'),
+        p("Did you solve this issue? Submit a solution and claim the bounty!")
+      );
     }
+
+    if (target_div.innerHTML) return target_div;
   });
 
   define('dispute_period_email_href', function(solution) {
