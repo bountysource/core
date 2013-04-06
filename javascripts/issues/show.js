@@ -66,7 +66,7 @@ with (scope('Show', 'Issue')) {
 
           Columns.side(
             issue.can_add_bounty && bounty_box(issue),
-            DeveloperBox.create(issue)
+            (issue.bounty_total > 0 && !issue.accepted_solution) && DeveloperBox.create(issue)
           )
         );
       }
@@ -75,11 +75,6 @@ with (scope('Show', 'Issue')) {
 
   // show the currently submitted and/or accepted Solution
   define('solution_info', function(issue) {
-
-
-    console.log(issue);
-
-
     var target_div = div({ id: 'solution-status', style: 'text-align: center; padding: 10px 30px; background: #EBFFE4; box-shadow: 0 0 10px #A1E9A1; border-radius: 3px;' });
 
     if (issue.accepted_solution) {
