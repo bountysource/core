@@ -33,24 +33,6 @@ with (scope('Fundraiser', 'App')) {
       );
     }
 
-    /*
-    * Show hours and minutes left if days left is 0
-    * */
-    var time_left = fundraiser.days_remaining,
-        time_left_words = 'day' + (time_left == 1 ? '' : 's') + ' left';
-    // calculate hours left, if necessary
-    if (fundraiser.days_remaining <= 0) {
-      time_left = hours_and_minutes_from(fundraiser.ends_at);
-
-      // first, add the minutes
-      time_left_words = time_left.minutes + ' min' + (time_left.minutes != 1 && 's') + ' left';
-
-      // if hours > 0, add hours
-      if (time_left.hours > 0) {
-        time_left_words = time_left.hours + ' hr' + (time_left.hours != 1 && 's') + ' ' + time_left_words;
-      }
-    }
-
     return a({ 'class': 'card fundraiser', href: fundraiser.frontend_path },
       div({ 'class': 'fundraiser-image', style: 'background-image: url("' + (fundraiser.image_url || '/images/logo-gray.png') + '");'},
         (fundraiser.published && !fundraiser.in_progress && (fundraiser.total_pledged >= fundraiser.funding_goal)) && div({ 'class': 'funded-message' }, 'Completed!')
@@ -70,14 +52,8 @@ with (scope('Fundraiser', 'App')) {
           ),
 
           (fundraiser.in_progress || !fundraiser.published) && div(
-            fundraiser.days_remaining > 0 && [
-              span(time_left),
-              span(time_left_words)
-            ],
-
-            fundraiser.days_remaining == 0 && [
-              span(time_left_words)
-            ]
+            span(time_left_in_words(fundraiser.ends_at)),
+            span('left')
           ),
 
           (!fundraiser.in_progress && fundraiser.published) && div(

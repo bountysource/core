@@ -53,6 +53,26 @@ with (scope('App')) {
     return words;
   });
 
+  define('time_left_in_words', function(end_date) {
+    var time_left = hours_and_minutes_from(end_date),
+        hours     = time_left.hours,
+        minutes   = time_left.minutes;
+
+    // hours after which to start displaying hours instead of days
+    var hours_threshold = 48;
+
+    // show just days
+    if (hours >= hours_threshold) {
+      return Math.ceil(hours / 24) + " days";
+    // show just minutes
+    } else if (hours <= 0) {
+      return minutes + ' minute' + (minutes != 1 ? 's' : '');
+    // show hours and minutes
+    } else {
+      return hours + ' hour' + (hours != 1 ? 's' : '');
+    }
+  });
+
   /*
   * Return the hours and minutes away from end_date
   * @end_date - a valid date string (not a Date object)
