@@ -4,7 +4,7 @@ with (scope('Header','App')) {
 
   define('create', function() {
     Header.global_social_buttons = div({ id: 'global-social-buttons' });
-    Header.global_search_input = input({ name: 'query', placeholder: 'Issue URL, Project Name, Search Terms, etc.' });
+    Header.global_search_input = input({ name: 'query', placeholder: 'Issue URL, Project Name, Search Terms, etc.', required: true });
     Header.global_search = form({ id: 'global-search', action: Search.search_from_homepage }, Header.global_search_input);
 
     if (!logged_in()) {
