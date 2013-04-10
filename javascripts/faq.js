@@ -35,6 +35,21 @@ with (scope('Faq', 'App')) {
           h1('General'),
 
           dl(
+            dt("What types of projects are allowed on Bountysource?"),
+            
+            dd("Any type of Open-Source or Free Software (as in speech) projects are allowed. Generally speaking, any software licenses approved by either the Open Source Initiative or the Free Software Foundation are acceptable. For a full list of OSI-approved licenses, please see ", a({ target: '_blank', href: 'http://opensource.org/licenses/alphabetical' }, "http://opensource.org/licenses/alphabetical"), '. For a full list of GNU licenses, please see', a({ target: '_blank', href: 'http://www.gnu.org/licenses/' }, "http://www.gnu.org/licenses/"), '.'),
+            
+            dt("You mentioned Free Software. How is that different from Open-Source?"),
+            
+            dd("Free Software and Open-Source software are, generally speaking, two sides of the same coin. Both can be considered separate movements within the same community, but with varying goals. We suggest you read up on both sides yourself to better understand them."),
+            
+            dd(
+              ol(
+                li('"Free Software": ', a({ target: '_blank', href: 'http://www.gnu.org/philosophy/open-source-misses-the-point.html' }, "http://www.gnu.org/philosophy/open-source-misses-the-point.html")),
+                li('"Open-Source": ', a({ target: '_blank', href: 'http://opensource.org/faq#free-software' }, "http://opensource.org/faq#free-software"))
+                )
+              ),
+            
             dt("How does Bountysource work?"),
 
             dd("There are two main functions: Fundraisers and Bounties."),
