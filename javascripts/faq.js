@@ -37,7 +37,7 @@ with (scope('Faq', 'App')) {
           dl(
             dt("What types of projects are allowed on Bountysource?"),
             
-            dd("Any type of Open-Source or Free Software (as in speech) projects are allowed. Generally speaking, any software licenses approved by either the Open Source Initiative or the Free Software Foundation are acceptable. For a full list of OSI-approved licenses, please see ", a({ target: '_blank', href: 'http://opensource.org/licenses/alphabetical' }, "http://opensource.org/licenses/alphabetical"), '. For a full list of GNU licenses, please see', a({ target: '_blank', href: 'http://www.gnu.org/licenses/' }, "http://www.gnu.org/licenses/"), '.'),
+            dd("Any type of Open-Source or Free Software (as in speech) projects are allowed. Generally speaking, any software licenses approved by either the Open Source Initiative or the Free Software Foundation are acceptable. For a full list of OSI-approved licenses, please see ", a({ target: '_blank', href: 'http://opensource.org/licenses/alphabetical' }, "http://opensource.org/licenses/alphabetical"), '. For a full list of GNU licenses, please see ', a({ target: '_blank', href: 'http://www.gnu.org/licenses/' }, "http://www.gnu.org/licenses/"), '.'),
             
             dt("You mentioned Free Software. How is that different from Open-Source?"),
             
