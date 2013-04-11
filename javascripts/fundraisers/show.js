@@ -49,9 +49,9 @@ with (scope('Show', 'Fundraiser')) {
         div({ id: 'short-description' }, fundraiser.short_description || ''),
 
         div({ id: 'fundraiser-links' },
-          div(
-            div('Created'),
-            div(formatted_date(fundraiser.created_at), ' by ', fundraiser.person.display_name)
+          fundraiser.published && div(
+            div('Published:'),
+            div(formatted_date(fundraiser.published_at), ' by ', fundraiser.person.display_name)
           ),
 
           fundraiser.homepage_url && div(
