@@ -23,7 +23,10 @@ with (scope('Header','App')) {
         div({ style: 'float: right; margin-top: 15px;' },
           // logged in? show the user nav dropdown
           logged_in() && [
-            span({ style: 'margin-right: 10px;'}, NotificationFeed.create),
+
+            // TODO: Enable notifications feed when it is populated with more data
+            // span({ style: 'margin-right: 10px;'}, NotificationFeed.create),
+
             UserNav.create
           ],
 
