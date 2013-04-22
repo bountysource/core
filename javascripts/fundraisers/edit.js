@@ -334,7 +334,7 @@ with (scope('Edit', 'Fundraiser')) {
         name:         'days_open',
         style:        'width: 50px;',
         placeholder:  fundraiser.min_days_open,
-        value:        fundraiser.days_open || fundraiser.min_days_open,
+        value:        fundraiser.days_open || fundraiser.max_days_open,
         min:          fundraiser.min_days_open,
         max:          fundraiser.max_days_open
       });
