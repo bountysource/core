@@ -56,11 +56,11 @@ with (scope('Account','App')) {
 
           // show GitHub account if logged in
           div({ style: 'background: #eee; border: 1px solid #ccc; padding: 20px; text-align: center;' },
-            response.data.github_user ? [
+            response.data.github_account ? [
               h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin: 0 auto 15px auto; line-height: 25px;' }, 'GitHub Account Linked'),
-              img({ style: 'border: 1px solid #ccc; width: 80px;', src: response.data.github_user.avatar_url }),
+              img({ style: 'border: 1px solid #ccc; width: 80px;', src: response.data.github_account.avatar_url }),
               br(),
-              span(response.data.github_user.login)
+              span(response.data.github_account.login)
             ] : [
               h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin: 0 auto 15px auto; line-height: 25px;' }, 'Have a GitHub Account?'),
               a({ 'class': 'button blue', href: Github.auth_url() }, 'Link GitHub Account')
