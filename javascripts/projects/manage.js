@@ -18,8 +18,6 @@ with (scope('Project', 'App')) {
     )
 
     BountySource.get_cached_user_info(function(user_info) {
-      console.log(user_info);
-
       if (user_info.github_account) {
         render({ into: target_div }, curry(get, 'projects'))
       } else {
@@ -47,6 +45,37 @@ with (scope('Project', 'App')) {
     })
   });
 
+  define('update_plugin', function(relation, form_data) {
+    var request_data = {
+      add_bounty_to_title:      !!(form_data.add_bounty_to_title == 'on'),
+      add_label:                !!(form_data.add_label == 'on'),
+      add_link_to_description:  !!(form_data.add_link_to_description == 'on')
+    };
+
+    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
+      if (response.meta.success) {
+        set('update_plugin_alert_'+relation.id, success_message('Project settings updated! Changes maye take a few minutes to be applied.'))
+      } else {
+
+      }
+    })
+  });
+
+  define('set_update_plugin_checkbox_listener', function(check_box, relation) {
+    check_box.addEventListener('change', function(e) {
+      var request_data = {};
+      request_data[this.getAttribute('name')] = this.checked;
+
+      BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
+        if (response.meta.success) {
+          // set('update_plugin_alert_'+relation.id, success_message('Project settings updated! Changes maye take a few minutes to be applied.'))
+        } else {
+          // set('update_plugin_alert_'+relation.id, small_error_message('Oh no, something went wrong :('))
+        }
+      });
+    });
+  });
+
   define('projects_table', function(project_relations) {
     return table({ 'class': 'projects-table' },
       tr(
@@ -57,6 +86,15 @@ with (scope('Project', 'App')) {
         var project = relation.project;
         var linked_account = relation.linked_account;
         var tracker_plugin = project.tracker_plugin;
+
+
+        if (tracker_plugin) {
+          var add_bounty_to_title_checkbox  = checkbox({ id: 'add_bounty_to_title_'+relation.id, name: 'add_bounty_to_title', checked: tracker_plugin.add_bounty_to_title });
+          var add_label_checkbox            = checkbox({ id: 'add_label_'+relation.id, name: 'add_label', checked: tracker_plugin.add_label });
+
+          set_update_plugin_checkbox_listener(add_bounty_to_title_checkbox, relation);
+          set_update_plugin_checkbox_listener(add_label_checkbox, relation);
+        }
 
         return tr(
           td(project.name),
@@ -72,21 +110,13 @@ with (scope('Project', 'App')) {
               form({ 'class': 'fancy', action: curry(update_plugin, relation) },
                 fieldset(
                   label({ 'for': 'add_bounty_to_title_'+relation.id }, 'Add bounty total to Issue titles:'),
-                  checkbox({ id: 'add_bounty_to_title_'+relation.id, name: 'add_bounty_to_title', checked: tracker_plugin.add_bounty_to_title })
+                  add_bounty_to_title_checkbox
                 ),
 
                 fieldset(
                   label({ 'for': 'add_label_'+relation.id }, "Add 'Bountysource' label to Issues"),
-                  checkbox({ id: 'add_label_'+relation.id, name: 'add_label', checked: tracker_plugin.add_label })
-                ),
-
-// TODO enable link in description
-//                fieldset(
-//                  label({ 'for': 'add_link_to_description_'+project.id }, "Add link to bounty in issue description"),
-//                  checkbox({ id: 'add_link_to_description_'+project.id, name: 'add_link_to_description', checked: tracker_plugin.add_link_to_description })
-//                ),
-
-                submit
+                  add_label_checkbox
+                )
               )
             )
           )
@@ -105,22 +135,6 @@ with (scope('Project', 'App')) {
         set('create_plugin_errors', error_message(response.data.error));
       }
     });
-  });
-
-  define('update_plugin', function(relation, form_data) {
-    var request_data = {
-      add_bounty_to_title:      !!(form_data.add_bounty_to_title == 'on'),
-      add_label:                !!(form_data.add_label == 'on'),
-      add_link_to_description:  !!(form_data.add_link_to_description == 'on')
-    };
-
-    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
-      if (response.meta.success) {
-        set('update_plugin_alert_'+relation.id, success_message('Project settings updated! Changes maye take a few minutes to be applied.'))
-      } else {
-
-      }
-    })
   });
 
   // TODO destroy
