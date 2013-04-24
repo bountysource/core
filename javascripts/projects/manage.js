@@ -78,9 +78,12 @@ with (scope('Project', 'App')) {
 
   define('update_plugin', function(project, form_data) {
     var request_data = {
-      add_bounty_to_title:  (form_data.add_bounty_to_title === 'on' ? 1 : 0),
-      add_label:            (form_data.add_label === 'on' ? 1 : 0)
+      add_bounty_to_title:      !!(form_data.add_bounty_to_title == 'on'),
+      add_label:                !!(form_data.add_label == 'on'),
+      add_link_to_description:  !!(form_data.add_link_to_description == 'on')
     };
+
+    console.log(request_data);
 
     BountySource.api('/trackers/' + project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
       if (response.meta.success) {
