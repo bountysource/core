@@ -312,3 +312,6 @@ textarea.auto-saved {}
 
 input.auto-saved.saved,
 textarea.auto-saved.saved { box-shadow: 0 0 15px #9BD59B; }
+
+/* Projects table on #projects */
+table.projects-table tr td { padding: 10px; }

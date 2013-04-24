@@ -44,9 +44,7 @@ with (scope('Account','App')) {
             fieldset({ 'class': 'no-label' },
               submit({ 'class': 'button green' }, 'Update Account')
             )
-          ),
-
-          TrackerPlugins.show_for_linked_account(info.github_account)
+          )
         ),
 
         div({ 'class': 'split-side' },

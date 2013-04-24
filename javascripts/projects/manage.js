@@ -1,67 +1,74 @@
 with (scope('Project', 'App')) {
 
-  route('#trackers/:tracker_id/relations/:relation_id', function(tracker_id, relation_id) {
-    load_relation(relation_id);
+  route('#projects', function() {
+    load_projects();
 
     render(
-      curry(get, 'project_relation')
-    );
+      breadcrumbs(
+        a({ href: '#' }, 'Home'),
+        'My Projects'
+      ),
+      curry(get, 'projects')
+    )
   });
 
-  define('load_relation', function(relation_id) {
-    set('project_relation', 'Loading...');
+  define('load_projects', function() {
+    set('projects', 'Loading...');
 
-    BountySource.api('/project_relations/'+relation_id, function(response) {
+    BountySource.api('/project_relations', function(response) {
       if (response.meta.success) {
-        var project = response.data.project;
-        var linked_account = response.data.linked_account;
+        set('projects', projects_table(response.data));
+      } else {
+        set('projects', response.data.error);
+      }
+    })
+  });
+
+  define('projects_table', function(project_relations) {
+    return table({ 'class': 'projects-table' },
+      tr(
+        th({ style: 'width: 200px;' }, 'Name'),
+        th()
+      ),
+      project_relations.map(function(relation) {
+        var project = relation.project;
+        var linked_account = relation.linked_account;
         var tracker_plugin = project.tracker_plugin;
 
-        if (tracker_plugin) {
-
-          set('project_relation', div(
-            breadcrumbs(
-              a({ href: '#' }, 'Home'),
-              a({ href: '#account' }, 'Account'),
-              a({ href: project.frontend_path }, project.name),
-              'Manage'
+        return tr(
+          td(project.name),
+          td(
+            !tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
+              curry(get, 'create_plugin_errors'),
+              a({ style: 'display: inline-block;', href: curry(create_plugin, project, linked_account) }, 'Create Plugin')
             ),
 
-            form({ 'class': 'fancy', action: curry(update_plugin, project) },
-              fieldset(
-                label({ 'for': 'add_bounty_to_title' }, 'Add bounty total to Issue titles:'),
-                checkbox({ id: 'add_bounty_to_title', name: 'add_bounty_to_title', checked: tracker_plugin.add_bounty_to_title })
-              ),
+            tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
+              curry(get, 'update_plugin_alert_'+project.id),
 
-              fieldset(
-                label({ 'for': 'add_label' }, "Add 'Bountysource' label to Issues"),
-                checkbox({ id: 'add_label', name: 'add_label', checked: tracker_plugin.add_label })
-              ),
+              form({ 'class': 'fancy', action: curry(update_plugin, project) },
+                fieldset(
+                  label({ 'for': 'add_bounty_to_title_'+project.id }, 'Add bounty total to Issue titles:'),
+                  checkbox({ id: 'add_bounty_to_title_'+project.id, name: 'add_bounty_to_title', checked: tracker_plugin.add_bounty_to_title })
+                ),
 
-              submit({ 'class': 'button green' }),
-              a({ href: '' })
+                fieldset(
+                  label({ 'for': 'add_label_'+project.id }, "Add 'Bountysource' label to Issues"),
+                  checkbox({ id: 'add_label_'+project.id, name: 'add_label', checked: tracker_plugin.add_label })
+                ),
+
+//                fieldset(
+//                  label({ 'for': 'add_link_to_description_'+project.id }, "Add link to bounty in issue description"),
+//                  checkbox({ id: 'add_link_to_description_'+project.id, name: 'add_link_to_description', checked: tracker_plugin.add_link_to_description })
+//                ),
+
+                submit
+              )
             )
-          ));
-
-        } else {
-
-          set('project_relation', div(
-            breadcrumbs(
-              a({ href: '#' }, 'Home'),
-              a({ href: '#account' }, 'Account'),
-              a({ href: project.frontend_path }, project.name),
-              'Manage'
-            ),
-
-            curry(get, 'create_plugin_errors'),
-            a({ 'class': 'button green', style: 'display: inline-block;', href: curry(create_plugin, project, linked_account) }, 'Create Plugin')
-          ));
-
-        }
-      } else {
-        set('project_relation', error_message(response.data.error));
-      }
-    });
+          )
+        );
+      })
+    )
   });
 
   define('create_plugin', function(project, linked_account) {
@@ -83,11 +90,9 @@ with (scope('Project', 'App')) {
       add_link_to_description:  !!(form_data.add_link_to_description == 'on')
     };
 
-    console.log(request_data);
-
     BountySource.api('/trackers/' + project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
       if (response.meta.success) {
-        set_route(get_route());
+        set('update_plugin_alert_'+project.id, success_message('Project settings updated! Changes maye take a few minutes to be applied.'))
       } else {
 
       }

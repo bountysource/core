@@ -19,12 +19,13 @@ with (scope('UserNav', 'App')) {
 
       render({ into: UserNav._flyout },
         ul(
-          li(a({ href: '#account/create_fundraiser' }, 'Create Fundraiser')),
-          li(a({ href: '#account/fundraisers' },       'Fundraisers')),
-          li(a({ href: '#contributions' },             'Contributions')),
-          li(a({ href: '#solutions' },                 'Solutions')),
-          li(a({ href: '#account' },                   'Account')),
-          li(a({ href: BountySource.logout },          'Logout'))
+          li(a({ href: '#projects' },                   'Manage Projects')),
+          li(a({ href: '#account/create_fundraiser' },  'Create Fundraiser')),
+          li(a({ href: '#account/fundraisers' },        'Fundraisers')),
+          li(a({ href: '#contributions' },              'Contributions')),
+          li(a({ href: '#solutions' },                  'Solutions')),
+          li(a({ href: '#account' },                    'Account')),
+          li(a({ href: BountySource.logout },           'Logout'))
         )
       );
 
