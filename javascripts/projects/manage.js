@@ -40,23 +40,24 @@ with (scope('Project', 'App')) {
           td(
             !tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
               curry(get, 'create_plugin_errors'),
-              a({ style: 'display: inline-block;', href: curry(create_plugin, project, linked_account) }, 'Create Plugin')
+              a({ style: 'display: inline-block;', href: curry(create_plugin, relation) }, 'Create Plugin')
             ),
 
             tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
-              curry(get, 'update_plugin_alert_'+project.id),
+              curry(get, 'update_plugin_alert_'+relation.id),
 
-              form({ 'class': 'fancy', action: curry(update_plugin, project) },
+              form({ 'class': 'fancy', action: curry(update_plugin, relation) },
                 fieldset(
-                  label({ 'for': 'add_bounty_to_title_'+project.id }, 'Add bounty total to Issue titles:'),
-                  checkbox({ id: 'add_bounty_to_title_'+project.id, name: 'add_bounty_to_title', checked: tracker_plugin.add_bounty_to_title })
+                  label({ 'for': 'add_bounty_to_title_'+relation.id }, 'Add bounty total to Issue titles:'),
+                  checkbox({ id: 'add_bounty_to_title_'+relation.id, name: 'add_bounty_to_title', checked: tracker_plugin.add_bounty_to_title })
                 ),
 
                 fieldset(
-                  label({ 'for': 'add_label_'+project.id }, "Add 'Bountysource' label to Issues"),
-                  checkbox({ id: 'add_label_'+project.id, name: 'add_label', checked: tracker_plugin.add_label })
+                  label({ 'for': 'add_label_'+relation.id }, "Add 'Bountysource' label to Issues"),
+                  checkbox({ id: 'add_label_'+relation.id, name: 'add_label', checked: tracker_plugin.add_label })
                 ),
 
+// TODO enable link in description
 //                fieldset(
 //                  label({ 'for': 'add_link_to_description_'+project.id }, "Add link to bounty in issue description"),
 //                  checkbox({ id: 'add_link_to_description_'+project.id, name: 'add_link_to_description', checked: tracker_plugin.add_link_to_description })
@@ -71,8 +72,8 @@ with (scope('Project', 'App')) {
     )
   });
 
-  define('create_plugin', function(project, linked_account) {
-    BountySource.api('/trackers/' + project.id + '/tracker_plugin', 'POST', { linked_account_id: linked_account.id }, function(response) {
+  define('create_plugin', function(relation) {
+    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'POST', { linked_account_id: relation.linked_account.id }, function(response) {
       if (response.meta.success) {
         set_route(get_route());
       } else if (response.meta.status == 424) {
@@ -83,31 +84,29 @@ with (scope('Project', 'App')) {
     });
   });
 
-  define('update_plugin', function(project, form_data) {
+  define('update_plugin', function(relation, form_data) {
     var request_data = {
       add_bounty_to_title:      !!(form_data.add_bounty_to_title == 'on'),
       add_label:                !!(form_data.add_label == 'on'),
       add_link_to_description:  !!(form_data.add_link_to_description == 'on')
     };
 
-    BountySource.api('/trackers/' + project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
+    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
       if (response.meta.success) {
-        set('update_plugin_alert_'+project.id, success_message('Project settings updated! Changes maye take a few minutes to be applied.'))
+        set('update_plugin_alert_'+relation.id, success_message('Project settings updated! Changes maye take a few minutes to be applied.'))
       } else {
 
       }
     })
   });
 
+  // TODO destroy
   define('destroy_plugin', function(project) {
     BountySource.api('/trackers/' + project.id + '/tracker_plugin', 'DELETE', function(response) {
-
-      console.log(response);
 
       if (response.meta.success) {
         set_route('#account');
       } else {
-
       }
     })
   });
