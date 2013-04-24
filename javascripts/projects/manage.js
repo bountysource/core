@@ -83,14 +83,23 @@ with (scope('Project', 'App')) {
         th()
       ),
       project_relations.map(function(relation) {
-        var project = relation.project;
-        var linked_account = relation.linked_account;
-        var tracker_plugin = project.tracker_plugin;
-
+        var project         = relation.project;
+        var tracker_plugin  = project.tracker_plugin;
 
         if (tracker_plugin) {
-          var add_bounty_to_title_checkbox  = checkbox({ id: 'add_bounty_to_title_'+relation.id, name: 'add_bounty_to_title', checked: tracker_plugin.add_bounty_to_title });
-          var add_label_checkbox            = checkbox({ id: 'add_label_'+relation.id, name: 'add_label', checked: tracker_plugin.add_label });
+          var add_bounty_to_title_checkbox = checkbox({
+            id: 'add_bounty_to_title_'+relation.id,
+            name: 'add_bounty_to_title',
+            style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+            checked: tracker_plugin.add_bounty_to_title
+          });
+
+          var add_label_checkbox = checkbox({
+            id: 'add_label_'+relation.id,
+            name: 'add_label',
+            style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+            checked: tracker_plugin.add_label
+          });
 
           set_update_plugin_checkbox_listener(add_bounty_to_title_checkbox, relation);
           set_update_plugin_checkbox_listener(add_label_checkbox, relation);
@@ -107,17 +116,21 @@ with (scope('Project', 'App')) {
             tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
               curry(get, 'update_plugin_alert_'+relation.id),
 
-              form({ 'class': 'fancy', action: curry(update_plugin, relation) },
-                fieldset(
-                  label({ 'for': 'add_bounty_to_title_'+relation.id }, 'Add bounty total to Issue titles:'),
-                  add_bounty_to_title_checkbox
-                ),
+              add_bounty_to_title_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, 'Add bounty total to Issue titles:'),
+              br,
+              add_label_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, "Add 'Bountysource' label to Issues")
 
-                fieldset(
-                  label({ 'for': 'add_label_'+relation.id }, "Add 'Bountysource' label to Issues"),
-                  add_label_checkbox
-                )
-              )
+//              form({ 'class': 'fancy', action: curry(update_plugin, relation) },
+//                fieldset(
+//                  label({ 'for': 'add_bounty_to_title_'+relation.id }, 'Add bounty total to Issue titles:'),
+//                  add_bounty_to_title_checkbox
+//                ),
+//
+//                fieldset(
+//                  label({ 'for': 'add_label_'+relation.id }, "Add 'Bountysource' label to Issues"),
+//                  add_label_checkbox
+//                )
+//              )
             )
           )
         );
