@@ -3,13 +3,32 @@ with (scope('Project', 'App')) {
   route('#projects', function() {
     load_projects();
 
+    var target_div = div();
+
     render(
       breadcrumbs(
         a({ href: '#' }, 'Home'),
         'My Projects'
       ),
-      curry(get, 'projects')
+
+      p("Below are all projects associated with your GitHub account."),
+      p("You can enable or disable Bountysource services that allows Bountysource to automatically add/update a bounty total in issue titles as well as add the Bountysource label to the GitHub issue."),
+
+      target_div
     )
+
+    BountySource.get_cached_user_info(function(user_info) {
+      console.log(user_info);
+
+      if (user_info.github_account) {
+        render({ into: target_div }, curry(get, 'projects'))
+      } else {
+        render({ into: target_div },
+          p("First, you need to ", a({ href: Github.auth_url({ scope: 'public_repo' }) }, 'link your GitHub account'), '.')
+        )
+      }
+
+    });
   });
 
   define('load_projects', function() {
@@ -17,7 +36,11 @@ with (scope('Project', 'App')) {
 
     BountySource.api('/project_relations', function(response) {
       if (response.meta.success) {
-        set('projects', projects_table(response.data));
+        if (response.data.length > 0) {
+          set('projects', projects_table(response.data));
+        } else {
+          set('projects', p("No projects found."));
+        }
       } else {
         set('projects', response.data.error);
       }
@@ -27,7 +50,7 @@ with (scope('Project', 'App')) {
   define('projects_table', function(project_relations) {
     return table({ 'class': 'projects-table' },
       tr(
-        th({ style: 'width: 200px;' }, 'Name'),
+        th({ style: 'width: 200px;' }),
         th()
       ),
       project_relations.map(function(relation) {
