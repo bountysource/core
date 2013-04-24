@@ -14,6 +14,11 @@ with (scope('Project', 'App')) {
       p("Below are all projects associated with your GitHub account."),
       p("You can enable or disable Bountysource services that allows Bountysource to automatically add/update a bounty total in issue titles as well as add the Bountysource label to the GitHub issue."),
 
+      p("Here is an example of what your issues will look like on GitHub:"),
+      img({ style:'float-right', src: '/images/github-plugin-example.png' }),
+
+      br,
+
       target_div
     )
 
