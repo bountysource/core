@@ -76,7 +76,7 @@ with (scope('Header','App')) {
       ul(
         li(a({ href: Github.auth_url() },   img({ src: 'images/github.png' }))),
         li(a({ href: Facebook.auth_url() }, img({ src: 'images/facebook.png' }))),
-        li(a({ href: Twitter.auth_url() },  img({ src: 'images/twitter.png' }))),
+        // li(a({ href: Twitter.auth_url() },  img({ src: 'images/twitter.png' }))),
         li(a({ href: '#signin/email' },     img({ src: 'images/email.png' })))
       )
     );
