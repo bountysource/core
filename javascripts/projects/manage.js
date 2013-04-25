@@ -11,11 +11,26 @@ with (scope('Project', 'App')) {
         'My Projects'
       ),
 
-      p("Below are all projects associated with your GitHub account."),
-      p("You can enable or disable Bountysource services that allows Bountysource to automatically add/update a bounty total in issue titles as well as add the Bountysource label to the GitHub issue."),
+
+      p('You can enable or disable services that allow Bountysource to automatically do a few things whenever a bounty is posted or updated:'),
+      ul(
+        li('add or update bounty total in issue titles'),
+        li('add a Bountysource label to GitHub issues with bounties'),
+        li('add a link to the bounty at the bottom of the issue body')
+      ),
 
       p("Here is an example of what your issues will look like on GitHub:"),
-      img({ style:'float-right', src: '/images/github-plugin-example.png' }),
+
+      ul(
+        li(
+          p('Bounty total in issue title:'),
+          img({ style:'border: 1px solid #E6E6E6;', src: '/images/github-plugin-example.png' })
+        ),
+        li(
+          p('Bounty link in issue body:'),
+          img({ style:'border: 1px solid #E6E6E6;', src: '/images/github-plugin-example2.png' })
+        )
+      ),
 
       br,
 
