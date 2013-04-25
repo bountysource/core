@@ -24,7 +24,9 @@ with (scope('Project', 'App')) {
 
     BountySource.get_cached_user_info(function(user_info) {
       if (user_info.github_account) {
-        render({ into: target_div }, curry(get, 'projects'))
+        render({ into: target_div },
+          curry(get, 'projects')
+        )
       } else {
         render({ into: target_div },
           p("First, you need to ", a({ href: Github.auth_url({ scope: 'public_repo' }) }, 'link your GitHub account'), '.')
@@ -111,11 +113,11 @@ with (scope('Project', 'App')) {
         }
 
         return tr(
-          td(project.name),
+          td(project.full_name),
           td(
             !tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
               curry(get, 'create_plugin_errors'),
-              a({ style: 'display: inline-block;', href: curry(create_plugin, relation) }, 'Create Plugin')
+              a({ 'class': 'btn-auth btn-github small', style: 'display: inline-block;', href: curry(create_plugin, relation) }, 'Install Plugin')
             ),
 
             tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
