@@ -71,7 +71,7 @@ with (scope('Project', 'App')) {
   define('set_update_plugin_checkbox_listener', function(check_box, relation) {
     check_box.addEventListener('change', function(e) {
       var request_data = {};
-      request_data[this.getAttribute('name')] = this.checked;
+      request_data[this.getAttribute('name')] = this.checked+'';
 
       BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
         if (response.meta.success) {
@@ -90,69 +90,76 @@ with (scope('Project', 'App')) {
         th()
       ),
       project_relations.map(function(relation) {
-        var project         = relation.project;
-        var tracker_plugin  = project.tracker_plugin;
-
-        if (tracker_plugin) {
-          var add_bounty_to_title_checkbox = checkbox({
-            id: 'add_bounty_to_title_'+relation.id,
-            name: 'add_bounty_to_title',
-            style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
-            checked: tracker_plugin.add_bounty_to_title
-          });
-
-          var add_label_checkbox = checkbox({
-            id: 'add_label_'+relation.id,
-            name: 'add_label',
-            style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
-            checked: tracker_plugin.add_label
-          });
-
-          set_update_plugin_checkbox_listener(add_bounty_to_title_checkbox, relation);
-          set_update_plugin_checkbox_listener(add_label_checkbox, relation);
-        }
-
         return tr(
-          td(project.full_name),
-          td(
-            !tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
-              curry(get, 'create_plugin_errors'),
-              a({ 'class': 'btn-auth btn-github small', style: 'display: inline-block;', href: curry(create_plugin, relation) }, 'Install Plugin')
-            ),
-
-            tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
-              curry(get, 'update_plugin_alert_'+relation.id),
-
-              add_bounty_to_title_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, 'Add bounty total to Issue titles:'),
-              br,
-              add_label_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, "Add 'Bountysource' label to Issues")
-
-//              form({ 'class': 'fancy', action: curry(update_plugin, relation) },
-//                fieldset(
-//                  label({ 'for': 'add_bounty_to_title_'+relation.id }, 'Add bounty total to Issue titles:'),
-//                  add_bounty_to_title_checkbox
-//                ),
-//
-//                fieldset(
-//                  label({ 'for': 'add_label_'+relation.id }, "Add 'Bountysource' label to Issues"),
-//                  add_label_checkbox
-//                )
-//              )
-            )
-          )
+          td(relation.project.full_name),
+          td(div({ id: 'tracker-plugin-widget-'+relation.id }, tracker_plugin_widget_content(relation)))
         );
       })
     )
   });
 
+  define('tracker_plugin_widget_content', function(relation) {
+    var project         = relation.project;
+    var tracker_plugin  = project.tracker_plugin;
+
+    if (tracker_plugin) {
+      var add_bounty_to_title_checkbox = checkbox({
+        id: 'add_bounty_to_title_'+relation.id,
+        name: 'add_bounty_to_title',
+        style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+        checked: tracker_plugin.add_bounty_to_title
+      });
+
+      var add_label_checkbox = checkbox({
+        id: 'add_label_'+relation.id,
+        name: 'add_label',
+        style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+        checked: tracker_plugin.add_label
+      });
+
+      var add_link_to_description = checkbox({
+        id: 'add_link_to_description_'+relation.id,
+        name: 'add_link_to_description',
+        style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+        checked: tracker_plugin.add_link_to_description
+      });
+
+      set_update_plugin_checkbox_listener(add_bounty_to_title_checkbox, relation);
+      set_update_plugin_checkbox_listener(add_label_checkbox, relation);
+      set_update_plugin_checkbox_listener(add_link_to_description, relation);
+    }
+
+    return [
+      !tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
+        curry(get, 'create_plugin_errors'),
+        a({ 'class': 'btn-auth btn-github small', style: 'display: inline-block;', href: curry(create_plugin, relation) }, 'Install Plugin')
+      ),
+
+      tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
+        curry(get, 'update_plugin_alert_'+relation.id),
+        add_bounty_to_title_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, 'Add bounty total to issue titles'),
+        br,
+        add_label_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, "Add 'Bountysource' label to issues"),
+        br,
+        add_link_to_description, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, "Add link to bounties at the bottom of issue bodies")
+      )
+    ]
+  });
+
   define('create_plugin', function(relation) {
     BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'POST', { linked_account_id: relation.linked_account.id }, function(response) {
       if (response.meta.success) {
-        set_route(get_route());
+        // build a fake relation model from server response
+        var fake_relation = { project: response.data.tracker, linked_account: response.data.linked_account };
+        fake_relation.project.tracker_plugin = response.data;
+
+        render({ target: 'tracker-plugin-widget-'+relation.id },
+          tracker_plugin_widget_content(fake_relation)
+        );
       } else if (response.meta.status == 424) {
         window.location = Github.auth_url({ scope: 'public_repo' });
       } else {
-        set('create_plugin_errors', error_message(response.data.error));
+        alert(response.data.error);
       }
     });
   });
