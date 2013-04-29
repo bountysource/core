@@ -91,7 +91,7 @@ with (scope('DeveloperBox','Issue')) {
 
       issue.solutions && issue.solutions.length > 0 && p({ style: 'font-size: 14px; font-style: italic; margin-bottom: 0;'},
         formatted_number(issue.solutions.length),
-        (issue.solutions.length == 1 ? ' developer has started' : ' developers have'),
+        (issue.solutions.length == 1 ? ' developer has' : ' developers have'),
         span(' started working on this.')
       )
     );
