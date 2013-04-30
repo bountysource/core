@@ -54,7 +54,7 @@ with (scope('Show', 'Fundraiser')) {
             div(formatted_date(fundraiser.published_at), ' by ',
               a({ href: fundraiser.person.frontend_path, style: 'color: grey' },
                 fundraiser.person.display_name,
-                fundraiser.person.image_url && img({ src: fundraiser.person.image_url, style: 'width: 40px; height: 40px; vertical-align: middle; padding-left: 5px' })
+                fundraiser.person.image_url && img({ src: fundraiser.person.image_url, style: 'width: 24px; height: 24px; vertical-align: middle; padding-left: 5px' })
               )
             )
           ),
