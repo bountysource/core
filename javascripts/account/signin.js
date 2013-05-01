@@ -37,6 +37,9 @@ with (scope('Signin','App')) {
   define('super_signin_form', function(params) {
     var refs = {};
 
+    // redirect to after successful account create/login
+    refs.redirect_url = params.redirect_url;
+
     refs.email_is_registered = null;
     if (params.email) {
       if (typeof(params.email_is_registered) == 'boolean') {
@@ -77,7 +80,7 @@ with (scope('Signin','App')) {
 
     refs.display_name_fieldset = fieldset(
       label('Display Name:'),
-      text({ name: 'display_name', placeholder: 'john.doe', value: params.display_name||(params.email && params.email.split('@')[0])||'' }),
+      text({ name: 'display_name', placeholder: 'john.doe', value: params.display_name||params.login||(params.email && params.email.split('@')[0])||'' }),
       params.avatar_url && img({ src: params.avatar_url, style: "vertical-align: middle; width: 42px; height: 42px" })
     );
 
@@ -111,7 +114,7 @@ with (scope('Signin','App')) {
     else if (refs.email_is_registered == false) render({ into: refs.email_status_div }, "Email address not yet registered.");
 
     // password is visible unless sign up with linked account
-    (refs.account_link_id && refs.account_link_id.match(/^(github|facebook|twitter):/) && !refs.email_is_registered ? hide : show)(refs.password_fieldset);
+    (refs.account_link_id && refs.account_link_id.match(/^(github|facebook|twitter|gittip):/) && !refs.email_is_registered ? hide : show)(refs.password_fieldset);
     render({ into: refs.password_label }, refs.email_is_registered == false ? 'Create Password:' : 'Password:');
 
     // signup fields visible only if email isn't registered
@@ -151,6 +154,7 @@ with (scope('Signin','App')) {
     if (redirect_url == '#signin') redirect_url = '#';
 
     BountySource.set_access_token(response.data);
+
     set_route(redirect_url, { reload_page: true });
   });
 
@@ -262,8 +266,66 @@ with (scope('Signin','App')) {
       );
     } else if (params.status == 'error_already_linked') {
       render('ERROR: Account already linked.');
+    } else if (params.status == 'unauthorized') {
+      render('Unauthorized');
     } else {
       render('ERROR: Unknown status.');
+    }
+  });
+
+  route('#auth/:provider/confirm', function(provider) {
+    var params = get_params();
+    params.access_token = Storage.get('access_token');
+    window.location = BountySource.api_host + 'auth/'+provider+'/connect' + to_param(params);
+  });
+
+  // first point of contact for Gittip account link.
+  route('#auth/:provider/connect', function(provider) {
+    var params = get_params();
+
+    // set post login redirect if not logged in.
+    if (!logged_in()) Storage.set('_redirect_to_after_login', get_route() + to_param(params));
+
+    render(
+      div({ style: 'text-align: center; padding-bottom: 20px;' },
+        h2('Authorize Bountysource'),
+
+        // need to create an account first
+        !logged_in() && div(
+          p("First, you need to create or sign in to an existing Bountysource account."),
+          super_signin_form(params)
+        ),
+
+        // if logged in, show approve/reject buttons
+        logged_in() && div(
+          p("This will link your Gittip and Bountysource accounts, allowing for jolly cooperation!"),
+
+          a({
+            'class': 'button green',
+            style: 'width: 120px; display: inline-block; vertical-align: middle; margin-right: 15px;',
+            href: curry(approve_connect, provider, params.external_access_token)
+          }, 'Accept'),
+          a({
+            'class': 'button blue',
+            style: 'width: 120px; display: inline-block; vertical-align: middle;',
+            href: params.redirect_url
+          }, 'Reject')
+        )
+      )
+    );
+  });
+
+  define('approve_connect', function(provider) {
+    var params = get_params();
+
+    if (provider == 'gittip') {
+      BountySource.api('/auth/' + provider + '/approve_connect', 'POST', params, function(response) {
+        if (response.meta.success) {
+          window.location = response.data.redirect_url;
+        } else {
+          render(error_message(response.data.error));
+        }
+      });
     }
   });
 
