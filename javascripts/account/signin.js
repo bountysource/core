@@ -275,7 +275,7 @@ with (scope('Signin','App')) {
 
   route('#auth/:provider/confirm', function(provider) {
     var params = get_params();
-    params.access_token = Storage.get('access_token');
+    if (logged_in()) params.access_token = Storage.get('access_token');
     window.location = BountySource.api_host + 'auth/'+provider+'/connect' + to_param(params);
   });
 
@@ -291,7 +291,7 @@ with (scope('Signin','App')) {
         h2('Authorize Bountysource'),
 
         // need to create an account first
-        !logged_in() && div(
+        !logged_in() && div({ style: 'text-align: left; margin-left: 165px;' },
           p("First, you need to create or sign in to an existing Bountysource account."),
           super_signin_form(params)
         ),
