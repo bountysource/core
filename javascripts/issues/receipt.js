@@ -6,7 +6,6 @@ with (scope('Issue', 'App')) {
     render(target_div);
 
     BountySource.get_bounty(bounty_id, function(response) {
-      console.log(response)
       var bounty = response.data;
 
       render({ into: target_div },
