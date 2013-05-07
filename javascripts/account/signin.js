@@ -291,9 +291,12 @@ with (scope('Signin','App')) {
         h2('Authorize Bountysource'),
 
         // need to create an account first
-        !logged_in() && div({ style: 'text-align: left; margin-left: 165px;' },
+        !logged_in() && div(
           p("First, you need to create or sign in to an existing Bountysource account."),
-          super_signin_form(params)
+
+          div({ style: 'text-align: left; margin-left: 165px;' },
+            super_signin_form(params)
+          )
         ),
 
         // if logged in, show approve/reject buttons
