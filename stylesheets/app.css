@@ -318,17 +318,13 @@ table.projects-table tr td { padding: 10px; }
 
 #global-notice-wrapper {
   width: 985px;
-  margin: 0 auto;
-}
-#global-notice-wrapper .notice {
+  margin: 0 auto 10px auto;
   text-align: center;
-  margin-bottom: 10px;
   border: 1px solid #C0BB43;
   border-radius: 3px;
   background: #FCFCD1;
   padding: 5px 0;
+}
+#global-notice-wrapper .notice {
   color: #777;
-  display: inline-block;
-  text-decoration: none;
-  width: 100%;
 }

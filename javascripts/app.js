@@ -208,7 +208,7 @@ with (scope('App')) {
 
   define('track_click_and_follow_link', function(notice_data) {
     _gaq.push(['_trackEvent', 'click', 'global_notices', (notice_data.text + ' | ' + notice_data.href)]);
-    set_route(href);
+    set_route(notice_data.href);
   });
 
   define('update_banner_notice', function() {
@@ -218,7 +218,7 @@ with (scope('App')) {
     _gaq.push(['_trackEvent', 'impression', 'global_notices', (notice_data.text + ' | ' + notice_data.href)]);
 
     render({ target: 'global-notice-wrapper' },
-      a({ 'class': 'notice', href: notice_data.href, target: notice_data.target }, notice_data.text)
+      a({ 'class': 'notice', href: curry(track_click_and_follow_link, notice_data), target: notice_data.target }, notice_data.text)
     );
   });
 
