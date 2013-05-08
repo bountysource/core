@@ -315,3 +315,13 @@ textarea.auto-saved.saved { box-shadow: 0 0 15px #9BD59B; }
 
 /* Projects table on #projects */
 table.projects-table tr td { padding: 10px; }
+
+#global-banner-notice {
+  text-align: center;
+  margin: 10px auto;
+  width: 980px;
+  border: 1px solid #C0BB43;
+  border-radius: 3px;
+  background: #FCFCD1;
+  padding: 5px;
+}

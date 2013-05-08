@@ -145,4 +145,49 @@ with (scope('App')) {
     set_route('#signin', { reload_page: true });
   });
 
+
+
+  define('banner_notices', [
+    // install github plugin notice
+    span("Own or contribute to projects on GitHub? Bountysource has a ", a({ href: '#projects' }, "Github plugin!")),
+
+    // check out our frontend repository
+    span("Our JavaScript frontend is ", a({ href: 'https://github.com/Bountysource/frontend' }, "available at GitHub"), ". Pull requests are encouraged!"),
+
+    // create a fundraiser notice
+    span(a({ href: '#account/create_fundraiser' }, "Create a fundraiser"), " to make new projects and ideas come to life, or to enhance existing projects."),
+
+    // we handle merchandising
+    span('Bountysource will handle the merchandising for you fundraiser rewards! Contact us by ', a({ href: 'mailto:support@bountysource.com' }, 'email'), ' or ', a({ href: 'irc:irc.freenode.net/bountysource' }, 'IRC'), ' for more information.'),
+
+    // tweet your love of bountysource
+    span('Exclaim your love of Bountysource to the world! ', a({ href: 'https://twitter.com/share?via=Bountysource&text=<3', target: '_blank' }, 'Tweet'), ' about us to receive copious amounts of brownie points.')
+  ]);
+
+  define('update_banner_notice', function() {
+    // add extra notices!
+    if (logged_in()) {
+      var user_info_raw = Storage.get('user_info');
+      if (user_info_raw) {
+        var user_info = JSON.parse(user_info_raw);
+
+        // link github account notice
+        if (!user_info.github_account) {
+          banner_notices.push(
+            span("You haven't linked a GitHub account yet. ", a({ href: Github.auth_url() }, "Do so now!"))
+          );
+        }
+      }
+    }
+
+
+    var i = Math.floor(Math.random()*banner_notices.length);
+
+    render({ target: 'global-banner-notice' },
+      banner_notices[i]
+    );
+  });
+
+  after_filter(update_banner_notice);
+
 }
