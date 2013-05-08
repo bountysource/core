@@ -316,13 +316,19 @@ textarea.auto-saved.saved { box-shadow: 0 0 15px #9BD59B; }
 /* Projects table on #projects */
 table.projects-table tr td { padding: 10px; }
 
-#global-banner-notice {
+#global-notice-wrapper {
+  width: 985px;
+  margin: 0 auto;
+}
+#global-notice-wrapper .notice {
   text-align: center;
-  margin: 10px auto;
-  width: 980px;
+  margin-bottom: 10px;
   border: 1px solid #C0BB43;
   border-radius: 3px;
   background: #FCFCD1;
-  padding: 5px;
+  padding: 5px 0;
   color: #777;
+  display: inline-block;
+  text-decoration: none;
+  width: 100%;
 }

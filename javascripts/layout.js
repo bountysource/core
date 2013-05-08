@@ -8,9 +8,7 @@ with (scope('App')) {
         Header.create(),
 
         // Global message flasher
-        div({ id: 'global-banner-notice' }),
-
-        // section({ id: 'global-social-buttons' }),
+        div({ id: 'global-notice-wrapper' }),
 
         div({ id: 'before-content'}),
 
