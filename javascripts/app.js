@@ -169,7 +169,8 @@ with (scope('App')) {
 
     // we handle merchandising
     {
-      href: "mailto:support@bountysource.com",
+      href: "mailto:support@bountysource.com?subject=Merchandise",
+      target: '_blank',
       text: "Bountysource will handle the merchandising for you fundraiser rewards! Contact us by email for more information."
     },
 
