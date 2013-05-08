@@ -152,7 +152,7 @@ with (scope('App')) {
     span("Own or contribute to projects on GitHub? Bountysource has a ", a({ href: '#projects' }, "Github plugin!")),
 
     // check out our frontend repository
-    span("Our JavaScript frontend is ", a({ href: 'https://github.com/Bountysource/frontend' }, "available at GitHub"), ". Pull requests are encouraged!"),
+    span("Our JavaScript frontend is ", a({ href: 'https://github.com/Bountysource/frontend', target: '_blank' }, "available at GitHub"), ". Pull requests are encouraged!"),
 
     // create a fundraiser notice
     span(a({ href: '#account/create_fundraiser' }, "Create a fundraiser"), " to make new projects and ideas come to life, or to enhance existing projects."),
@@ -161,7 +161,10 @@ with (scope('App')) {
     span('Bountysource will handle the merchandising for you fundraiser rewards! Contact us by ', a({ href: 'mailto:support@bountysource.com' }, 'email'), ' or ', a({ href: 'irc:irc.freenode.net/bountysource' }, 'IRC'), ' for more information.'),
 
     // tweet your love of bountysource
-    span('Exclaim your love of Bountysource to the world! ', a({ href: 'https://twitter.com/share?via=Bountysource&text=<3', target: '_blank' }, 'Tweet'), ' about us to receive copious amounts of brownie points.')
+    span('Exclaim your love of Bountysource to the world! ', a({ href: 'https://twitter.com/share?via=Bountysource&text=<3', target: '_blank' }, 'Tweet'), ' about us to receive copious amounts of brownie points.'),
+
+    // bountysource blog
+    span('Check out the ', a({ href: 'http://blog.bountysource.com', target: '_blank' }, 'Bountysource blog'), ' for updates and other exciting news!')
   ]);
 
   define('update_banner_notice', function() {
