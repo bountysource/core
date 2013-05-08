@@ -183,7 +183,6 @@ with (scope('App')) {
       }
     }
 
-
     var i = Math.floor(Math.random()*banner_notices.length);
 
     render({ target: 'global-banner-notice' },
