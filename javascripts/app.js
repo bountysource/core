@@ -207,7 +207,7 @@ with (scope('App')) {
   });
 
   define('track_click_and_follow_link', function(notice_data) {
-    _gaq.push(['_trackEvent', 'click', 'global_notices', (notice_data.text + ' | ' + notice_data.href)]);
+    _gaq.push(['_trackEvent', 'global_notices', 'click', (notice_data.text + ' | ' + notice_data.href)]);
     set_route(notice_data.href);
   });
 
@@ -215,10 +215,10 @@ with (scope('App')) {
     var notice_data = banner_notices[Math.floor(Math.random()*banner_notices.length)];
 
     // log impression
-    _gaq.push(['_trackEvent', 'impression', 'global_notices', (notice_data.text + ' | ' + notice_data.href)]);
+    _gaq.push(['_trackEvent', 'global_notices', 'impression', (notice_data.text + ' | ' + notice_data.href)]);
 
     render({ target: 'global-notice-wrapper' },
-      a({ 'class': 'notice', href: curry(track_click_and_follow_link, notice_data), target: notice_data.target }, notice_data.text)
+      a({ 'class': 'notice', target: notice_data.target, href: curry(track_click_and_follow_link, notice_data) }, notice_data.text)
     );
   });
 
