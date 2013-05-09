@@ -169,14 +169,14 @@ with (scope('App')) {
 
     // we handle merchandising
     {
-      href: "mailto:support@bountysource.com?subject=Merchandise",
+      href: "mailto:support@bountysource.com?subject=I'm%20interested%20in%20Fundraiser%20merchandise%20fulfillment!",
       target: '_blank',
       text: "Bountysource will handle the merchandising for you fundraiser rewards! Contact us by email for more information."
     },
 
     // tweet your love of bountysource
     {
-      href:   'https://twitter.com/share?via=Bountysource&text=<3',
+      href:   "https://twitter.com/share?url2=&via=Bountysource&text=Developers%20don't%20get%20enough%20credit%20for%20%23opensource.%20Let's%20fix%20that%20with%20Bountysource.com%20%23crowdfunding",
       target: '_blank',
       text:   'Exclaim your love of Bountysource to the world! Tweet about us to receive copious amounts of brownie points.'
     },
