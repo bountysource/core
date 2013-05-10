@@ -52,6 +52,14 @@ input[type='submit'].button {
 }
 .button.small.gray:hover { background: #E9E7E7; }
 
+.button.small.red {
+  background: #ECCEC8;
+  border: 1px solid #ECB0B0;
+  color: #D55B5B;
+}
+.button.small.red:hover { background: #ECC3BB; }
+
+
 .button.green {
   border: 1px solid #70b539;
   background: #b6f266;  /* Old browsers */

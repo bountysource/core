@@ -1,9 +1,7 @@
 with (scope('Project', 'App')) {
 
   route('#projects', function() {
-    load_projects();
-
-    var target_div = div();
+    var target_div = div('Loading...');
 
     render(
       breadcrumbs(
@@ -35,157 +33,252 @@ with (scope('Project', 'App')) {
       br,
 
       target_div
-    )
+    );
 
     BountySource.get_cached_user_info(function(user_info) {
       if (user_info.github_account) {
-        render({ into: target_div },
-          curry(get, 'projects')
-        )
+        BountySource.api('/project_relations', function(response) {
+          if (response.meta.success) {
+            if (response.data.length > 0) {
+              render({ into: target_div },
+                projects_table(response.data),
+                div({ id: 'project-manager-container', style: 'display: inline-block; vertical-align: top; display: none;' })
+              );
+            } else {
+              render({ into: target_div },
+                p("No projects found")
+              );
+            }
+          } else {
+            render({ into: target_div }, error_message(response.data.error));
+          }
+        });
       } else {
         render({ into: target_div },
           p("First, you need to ", a({ href: Github.auth_url({ scope: 'public_repo' }) }, 'link your GitHub account'), '.')
-        )
+        );
       }
-
     });
   });
 
-  define('load_projects', function() {
-    set('projects', 'Loading...');
-
-    BountySource.api('/project_relations', function(response) {
-      if (response.meta.success) {
-        if (response.data.length > 0) {
-          set('projects', projects_table(response.data));
-        } else {
-          set('projects', p("No projects found."));
-        }
-      } else {
-        set('projects', response.data.error);
-      }
-    })
+  define('install_or_manage_plugin_button', function(relation) {
+    if (relation.project.tracker_plugin) {
+      return manage_plugin_button(relation);
+    } else {
+      return install_plugin_button(relation);
+    }
   });
 
-  define('update_plugin', function(relation, form_data) {
-    var request_data = {
-      add_bounty_to_title:      !!(form_data.add_bounty_to_title == 'on'),
-      add_label:                !!(form_data.add_label == 'on'),
-      add_link_to_description:  !!(form_data.add_link_to_description == 'on')
-    };
-
-    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
-      if (response.meta.success) {
-        set('update_plugin_alert_'+relation.id, success_message('Project settings updated! Changes maye take a few minutes to be applied.'))
-      } else {
-
-      }
-    })
+  define('install_plugin_button', function(relation) {
+    return a({ 'class': 'btn-auth btn-github small', style: 'display: inline-block; width: 130px;', href: curry(create_plugin, relation) }, 'Install Plugin');
   });
 
-  define('set_update_plugin_checkbox_listener', function(check_box, relation) {
-    check_box.addEventListener('change', function(e) {
-      var request_data = {};
-      request_data[this.getAttribute('name')] = this.checked+'';
+  define('manage_plugin_button', function(relation) {
+    return a({ 'class': 'btn-auth btn-github small hover', style: 'display: inline-block; width: 130px;', href: curry(show_project_manager, relation) }, 'Manage Plugin');
+  });
 
-      BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
-        if (response.meta.success) {
-          // set('update_plugin_alert_'+relation.id, success_message('Project settings updated! Changes maye take a few minutes to be applied.'))
-        } else {
-          // set('update_plugin_alert_'+relation.id, small_error_message('Oh no, something went wrong :('))
-        }
-      });
-    });
+  define('reload_install_or_manage_plugin_button', function(new_relation) {
+    render({ target: 'tracker-plugin-widget-'+new_relation.id }, install_or_manage_plugin_button(new_relation));
+  });
+
+  define('reset_plugin_button', function(relation) {
+    render({ target: 'tracker-plugin-widget-'+relation.id }, install_plugin_button(relation));
   });
 
   define('projects_table', function(project_relations) {
-    return table({ 'class': 'projects-table' },
-      tr(
-        th({ style: 'width: 200px;' }),
-        th()
-      ),
+    return table({ id: 'projects-table' },
       project_relations.map(function(relation) {
-        return tr(
+        return tr({ id: 'tracker-plugin-row-'+relation.id },
           td(relation.project.full_name),
-          td(div({ id: 'tracker-plugin-widget-'+relation.id }, tracker_plugin_widget_content(relation)))
+          td(div({ id: 'tracker-plugin-widget-'+relation.id },
+            curry(install_or_manage_plugin_button, relation)
+          ))
         );
       })
     )
   });
 
-  define('tracker_plugin_widget_content', function(relation) {
-    var project         = relation.project;
-    var tracker_plugin  = project.tracker_plugin;
+  define('show_project_manager', function(relation) {
+    var tracker_plugin = relation.project.tracker_plugin;
 
-    if (tracker_plugin) {
-      var add_bounty_to_title_checkbox = checkbox({
-        id: 'add_bounty_to_title_'+relation.id,
-        name: 'add_bounty_to_title',
-        style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
-        checked: tracker_plugin.add_bounty_to_title
-      });
+    var add_bounty_to_title_checkbox = checkbox({
+      id: 'add_bounty_to_title_'+relation.id,
+      name: 'add_bounty_to_title',
+      style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+      checked: tracker_plugin.add_bounty_to_title
+    });
 
-      var add_label_checkbox = checkbox({
-        id: 'add_label_'+relation.id,
-        name: 'add_label',
-        style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
-        checked: tracker_plugin.add_label
-      });
+    var add_label_checkbox = checkbox({
+      id: 'add_label_'+relation.id,
+      name: 'add_label',
+      style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+      checked: tracker_plugin.add_label
+    });
 
-      var add_link_to_description = checkbox({
-        id: 'add_link_to_description_'+relation.id,
-        name: 'add_link_to_description',
-        style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
-        checked: tracker_plugin.add_link_to_description
-      });
+    var set_label_name_input = input({
+      name: 'label_name',
+      placeholder: 'Bountysource',
+      style: 'margin-left: 30px;',
+      disabled: 'disabled',
+      value: tracker_plugin.label_name||'Bountysource'
+    });
 
-      set_update_plugin_checkbox_listener(add_bounty_to_title_checkbox, relation);
-      set_update_plugin_checkbox_listener(add_label_checkbox, relation);
-      set_update_plugin_checkbox_listener(add_link_to_description, relation);
-    }
+    var add_link_to_description = checkbox({
+      id: 'add_link_to_description_'+relation.id,
+      name: 'add_link_to_description',
+      style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+      checked: tracker_plugin.add_link_to_description
+    });
 
-    return [
-      !tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
-        curry(get, 'create_plugin_errors'),
-        a({ 'class': 'btn-auth btn-github small', style: 'display: inline-block;', href: curry(create_plugin, relation) }, 'Install Plugin')
-      ),
+    var add_link_to_all_issues_checkbox = checkbox({
+      id: 'add_link_to_all_issues_'+relation.id,
+      name: 'add_link_to_all_issues',
+      style: 'display: inline-block; vertical-align: middle; margin-right: 5px;',
+      disabled: 'disabled',
+      checked: tracker_plugin.add_link_to_all_issues
+    });
 
-      tracker_plugin && div({ 'class': 'projects-table-tracker-plugin' },
-        curry(get, 'update_plugin_alert_'+relation.id),
+    // show hide add_link_to_closed_issues
+    add_link_to_description.addEventListener('change', function() {
+      if (this.checked) {
+        add_link_to_all_issues_checkbox.removeAttribute('disabled');
+      } else {
+        add_link_to_all_issues_checkbox.setAttribute('disabled', 'disabled');
+      }
+    });
+
+    // show/hide label name input if add label checkbox changed
+    add_label_checkbox.addEventListener('change', function() {
+      if (this.checked) {
+        set_label_name_input.removeAttribute('disabled');
+      } else {
+        set_label_name_input.setAttribute('disabled', 'disabled');
+      }
+    });
+
+    render({ target: 'project-manager-container' },
+      form({ id: 'update-tracker-plugin-form', action: curry(update_plugin, relation) },
+        h3({ style: 'margin-top: 0;' }, 'Manage ' + relation.project.full_name),
+
+        p({ style: 'font-size: 14px;' }, 'Note: Changes may take a few minutes to be applied at GitHub.'),
+
+        div({ id: 'project-manager-message' }),
+
         add_bounty_to_title_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, 'Add bounty total to issue titles'),
+
         br,
-        add_label_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, "Add 'Bountysource' label to issues"),
+        add_label_checkbox, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, "Add label to issues with bounties"),
+        div({ id: 'set-label-name-wrapper', style: 'margin-left: 30px;' },
+          span('Label: '),
+          set_label_name_input
+        ),
+
         br,
-        add_link_to_description, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, "Add link to bounties at the bottom of issue bodies")
+        add_link_to_description, div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0;' }, "Include link to active bounties on issues"),
+
+        div({ id: 'add-link-to-all-issues-wrapper', style: 'margin-left: 30px;' },
+          add_link_to_all_issues_checkbox,
+          div({ style: 'display: inline-block; vertical-align: middle; padding: 10px 0; width: 300px;' }, "Include 'create bounty' link on open issues without bounties")
+        ),
+
+        br,
+        button({ style: 'width: 70px; display: inline-block; vertical-align: middle;' }, 'Save'),
+
+        // Uninstall button
+        button({
+          style: 'margin-left: 10px; width: 70px; display: inline-block; vertical-align: middle;',
+          name: 'uninstall',
+          value: true,
+          onClick: curry(destroy_plugin, relation)
+        }, 'Uninstall'),
+
+        br,
+        p({ id: 'project-manager-updated-message' }, 'Updated ' + new Date(tracker_plugin.updated_at).toLocaleString())
       )
-    ]
+    );
+
+    // show label input if labels are enabled
+    if (add_label_checkbox.checked) set_label_name_input.removeAttribute('disabled');
+
+    // show checkbox to include closed issues if add link to description is enabled
+    if (add_link_to_description.checked) add_link_to_all_issues_checkbox.removeAttribute('disabled');
+
+    // make the manager visible and scroll to that shit
+    var e = document.getElementById('project-manager-container');
+    e.style['display'] = 'inline-block';
+    if (document.body.scrollTop > e.offsetTop) scrollTo(0, e.offsetTop - 50);
+
+    // set the row as active
+    var plugin_table = document.getElementById('projects-table');
+    for (var i=0; i<plugin_table.rows.length; i++) remove_class(plugin_table.rows[i], 'active');
+    var active_row = document.getElementById('tracker-plugin-row-'+relation.id);
+    add_class(active_row, 'active');
+  });
+
+  define('update_plugin', function(relation, form_data) {
+    var request_data = {
+      add_bounty_to_title:        !!(form_data.add_bounty_to_title == 'on'),
+      add_label:                  !!(form_data.add_label == 'on'),
+      add_link_to_description:    !!(form_data.add_link_to_description == 'on'),
+      add_link_to_all_issues:     !!(form_data.add_link_to_all_issues == 'on'),
+      label_name:                 form_data.label_name
+    };
+
+    render({ target: 'project-manager-updated-message' }, 'Saving...');
+
+    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
+      if (response.meta.success) {
+        // replace dat manage button with updated tracker data
+        reload_install_or_manage_plugin_button(response.data);
+
+        // render saved at time into manager window
+        render({ target: 'project-manager-updated-message' }, 'Saved ' + new Date(response.data.updated_at).toLocaleString());
+      }
+    })
   });
 
   define('create_plugin', function(relation) {
+    render({ target: 'tracker-plugin-widget-'+relation.id }, 'Installing...');
+
     BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'POST', { linked_account_id: relation.linked_account.id }, function(response) {
       if (response.meta.success) {
-        // build a fake relation model from server response
-        var fake_relation = { project: response.data.tracker, linked_account: response.data.linked_account };
-        fake_relation.project.tracker_plugin = response.data;
+        var new_relation = response.data;
 
-        render({ target: 'tracker-plugin-widget-'+relation.id },
-          tracker_plugin_widget_content(fake_relation)
-        );
+        // reload to show manage button
+        reload_install_or_manage_plugin_button(new_relation);
+
+        // go to that plugin
+        show_project_manager(new_relation);
       } else if (response.meta.status == 424) {
         window.location = Github.auth_url({ scope: 'public_repo' });
       } else {
+        render({ target: 'tracker-plugin-widget-'+relation.id },
+          a({ 'class': 'btn-auth btn-github small', style: 'display: inline-block; width: 130px;', href: curry(create_plugin, relation) }, 'Install Plugin')
+        );
+
         alert(response.data.error);
       }
     });
   });
 
-  // TODO destroy
-  define('destroy_plugin', function(project) {
-    BountySource.api('/trackers/' + project.id + '/tracker_plugin', 'DELETE', function(response) {
+  define('destroy_plugin', function(relation) {
+    render({ target: 'project-manager-updated-message' }, 'Uninstalling...');
 
+    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'DELETE', function(response) {
       if (response.meta.success) {
-        set_route('#account');
+        // reload the 'Install' button
+        reset_plugin_button(relation);
+
+        // row is no longer active
+        var plugin_table = document.getElementById('projects-table');
+        for (var i=0; i<plugin_table.rows.length; i++) remove_class(plugin_table.rows[i], 'active');
+
+        // clear the manager view and make it invisible!
+        var e = document.getElementById('project-manager-container');
+        render({ into: e }, '');
+        hide(e);
       } else {
+        alert('Failed to delete plugin: ' + response.data.error);
       }
     })
   });
