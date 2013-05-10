@@ -44,6 +44,21 @@ with (scope('Project', 'App')) {
                 projects_table(response.data),
                 div({ id: 'project-manager-container', style: 'display: inline-block; vertical-align: top; display: none;' })
               );
+
+              // check for install_id. It is appended before Github auth,
+              // so that we can now install the plugin. do it homie.
+              var params = get_params();
+
+              if (params.install_id) {
+                var id = parseInt(params.install_id);
+                var button_wrapper = document.getElementById('tracker-plugin-widget-'+id);
+
+                if (button_wrapper && button_wrapper.childNodes.length > 0) {
+                  // click the button
+                  button_wrapper.childNodes[0].click();
+                }
+              }
+
             } else {
               render({ into: target_div },
                 p("No projects found")
@@ -250,7 +265,7 @@ with (scope('Project', 'App')) {
         // go to that plugin
         show_project_manager(new_relation);
       } else if (response.meta.status == 424) {
-        window.location = Github.auth_url({ scope: 'public_repo' });
+        window.location = Github.auth_url({ scope: 'public_repo', redirect_url: BountySource.www_host + get_route() + '?install_id=' + relation.id });
       } else {
         render({ target: 'tracker-plugin-widget-'+relation.id },
           a({ 'class': 'btn-auth btn-github small', style: 'display: inline-block; width: 130px;', href: curry(create_plugin, relation) }, 'Install Plugin')

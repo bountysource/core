@@ -3,7 +3,7 @@ with (scope('Github','App')) {
     options = options || {};
     return BountySource.api_host+'auth/github?scope='+(options.scope||'') +
       '&access_token='+(Storage.get('access_token')||'') +
-      '&redirect_url='+encode_html(window.location.href); // make sure the redirect url is the last param?
+      '&redirect_url='+encode_html(options.redirect_url || window.location.href); // make sure the redirect url is the last param?
   });
 
   // funnel through Github, to require app link if needed
