@@ -199,13 +199,13 @@ with (scope('Project', 'App')) {
         br,
         button({ style: 'width: 70px; display: inline-block; vertical-align: middle;' }, 'Save'),
 
-        // Uninstall button
-        button({
-          style: 'margin-left: 10px; width: 70px; display: inline-block; vertical-align: middle;',
-          name: 'uninstall',
-          value: true,
-          onClick: curry(destroy_plugin, relation)
-        }, 'Uninstall'),
+//        // Uninstall button
+//        button({
+//          style: 'margin-left: 10px; width: 70px; display: inline-block; vertical-align: middle;',
+//          name: 'uninstall',
+//          value: true,
+//          onClick: curry(destroy_plugin, relation)
+//        }, 'Uninstall'),
 
         br,
         p({ id: 'project-manager-updated-message' }, 'Updated ' + new Date(tracker_plugin.updated_at).toLocaleString())
@@ -276,26 +276,26 @@ with (scope('Project', 'App')) {
     });
   });
 
-  define('destroy_plugin', function(relation) {
-    render({ target: 'project-manager-updated-message' }, 'Uninstalling...');
-
-    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'DELETE', function(response) {
-      if (response.meta.success) {
-        // reload the 'Install' button
-        reset_plugin_button(relation);
-
-        // row is no longer active
-        var plugin_table = document.getElementById('projects-table');
-        for (var i=0; i<plugin_table.rows.length; i++) remove_class(plugin_table.rows[i], 'active');
-
-        // clear the manager view and make it invisible!
-        var e = document.getElementById('project-manager-container');
-        render({ into: e }, '');
-        hide(e);
-      } else {
-        alert('Failed to delete plugin: ' + response.data.error);
-      }
-    })
-  });
+//  define('destroy_plugin', function(relation) {
+//    render({ target: 'project-manager-updated-message' }, 'Uninstalling...');
+//
+//    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'DELETE', function(response) {
+//      if (response.meta.success) {
+//        // reload the 'Install' button
+//        reset_plugin_button(relation);
+//
+//        // row is no longer active
+//        var plugin_table = document.getElementById('projects-table');
+//        for (var i=0; i<plugin_table.rows.length; i++) remove_class(plugin_table.rows[i], 'active');
+//
+//        // clear the manager view and make it invisible!
+//        var e = document.getElementById('project-manager-container');
+//        render({ into: e }, '');
+//        hide(e);
+//      } else {
+//        alert('Failed to delete plugin: ' + response.data.error);
+//      }
+//    })
+//  });
 
 }
