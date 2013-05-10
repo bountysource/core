@@ -37,12 +37,13 @@ with (scope('Project', 'App')) {
 
     BountySource.get_cached_user_info(function(user_info) {
       if (user_info.github_account) {
-        BountySource.api('/project_relations', function(response) {
+        BountySource.api('/project_relations', { per_page: 300 }, function(response) {
           if (response.meta.success) {
             if (response.data.length > 0) {
               render({ into: target_div },
-                projects_table(response.data),
-                div({ id: 'project-manager-container', style: 'display: inline-block; vertical-align: top; display: none;' })
+                projects_table(response.data.slice(0,5)),
+                div({ id: 'project-manager-container', style: 'display: inline-block; vertical-align: top; display: none;' }),
+                div({ style: 'clear: both;' })
               );
 
               // check for install_id. It is appended before Github auth,
