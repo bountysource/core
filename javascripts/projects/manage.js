@@ -133,10 +133,10 @@ with (scope('Project', 'App')) {
 
     var set_label_name_input = input({
       name: 'label_name',
-      placeholder: 'Bountysource',
+      placeholder: 'bounty',
       style: 'margin-left: 30px;',
       disabled: 'disabled',
-      value: tracker_plugin.label_name||'Bountysource'
+      value: tracker_plugin.label_name
     });
 
     var add_link_to_description = checkbox({
