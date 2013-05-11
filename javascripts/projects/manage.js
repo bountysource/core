@@ -41,7 +41,7 @@ with (scope('Project', 'App')) {
           if (response.meta.success) {
             if (response.data.length > 0) {
               render({ into: target_div },
-                projects_table(response.data.slice(0,5)),
+                projects_table(response.data),
                 div({ id: 'project-manager-container', style: 'display: inline-block; vertical-align: top; display: none;' }),
                 div({ style: 'clear: both;' })
               );
