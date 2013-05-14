@@ -75,7 +75,7 @@ with (scope('Show','Solution')) {
             p("The following needs to happen before you earn the bounty:"),
             ol(
               li("Your solution must be merged into the project by the committers"),
-              li("Your solution must have no outstanding disputes by any of the backers after ", strong(formatted_date(solution.dispute_period_end_date)))
+              li("The underlying issue must be closed")
             ),
 
             h3("Update your submission"),
