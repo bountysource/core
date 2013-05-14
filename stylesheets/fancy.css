@@ -10,7 +10,10 @@
 
 .fancy input[type='text'].short { width: 150px; }
 .fancy input[type='text'].shortish { width: 180px; }
-.fancy input[type='text'].long { width: 392px; }
+
+.fancy input[type='text'].long,
+.fancy input[type='email'] { width: 392px; }
+
 .fancy span.big_text { font-size: 18px; }
 
 .fancy input[type='password'].long { width: 392px; border: 1px solid #ccc; font-size: 18px; line-height: 18px; padding: 0 10px; height: 40px; }

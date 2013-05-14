@@ -18,8 +18,13 @@ with (scope('Account','App')) {
       for (k in info) if (info[k] == '__undefined__') delete info[k];
 
       render({ into: target_div },
-        div({ 'class': 'split-main' },
+
+        Columns.create(),
+
+        Columns.main(
           form({ 'class': 'fancy', action: update_account },
+            h3('Bountysource Account'),
+
             messages(),
 
             required_inputs(
@@ -41,13 +46,18 @@ with (scope('Account','App')) {
               )
             ),
 
+            fieldset(
+              label({ 'for': 'paypal_email' }, img({ style: 'display: inline-block; vertical-align: middle; margin-right: 5px;', src: 'images/paypal.png' }), span({ style: 'display: inline-block; vertical-align: middle;' }, 'Paypal Email:')),
+              email({ id: 'paypal_email', 'class': 'long', name: 'paypal_email', placeholder: 'john.doe@gmail.com', value: info.paypal_email||'' })
+            ),
+
             fieldset({ 'class': 'no-label' },
-              submit({ 'class': 'button green' }, 'Update Account')
+              submit({ 'class': 'button green', style: 'width: 250px;' }, 'Update Bountysource Account')
             )
           )
         ),
 
-        div({ 'class': 'split-side' },
+        Columns.side(
           div({ style: 'background: #eee; padding: 0 21px 21px 21px;' }, ribbon_header('Account Settings'), br(),
             a({ 'class': 'button blue', href: '#account/change_password' }, 'Change Password')
           ),
@@ -66,9 +76,7 @@ with (scope('Account','App')) {
               a({ 'class': 'button blue', href: Github.auth_url() }, 'Link GitHub Account')
             ]
           )
-        ),
-
-        div({ 'class': 'split-end' })
+        )
       );
     });
   });
