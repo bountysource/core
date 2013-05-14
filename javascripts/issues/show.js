@@ -36,9 +36,9 @@ with (scope('Show', 'Issue')) {
 
             // title of issue, with closed or open notification.
             // if issue is closed, add line-through
-            h1({ style: 'font-size: 26px; line-height: 30px; font-weight: normal; color: #565656' },
-              span({ style: !issue.can_add_bounty ? 'text-decoration: line-through;' : '' }, (issue.number  ? '#' + issue.number + ': ' : '') + issue.title),
-              div({ style: 'padding-left: 20px; display: inline-block;' }, Issue.status_element(issue))
+            h1({ id: 'issue-title' },
+              div(Issue.status_element(issue)),
+              div({ style: !issue.can_add_bounty ? 'text-decoration: line-through;' : '' }, (issue.number  ? '#' + issue.number + ': ' : '') + issue.title)
             ),
 
             // show status of the submitted solution

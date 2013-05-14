@@ -295,6 +295,8 @@ input.autosized {
   Status elements on #contributions page, and elsewhere
 */
 .status-indicator {
+  display: inline;
+  vertical-align: middle;
   padding: 5px;
   border-radius: 3px;
   color: white;
@@ -359,3 +361,20 @@ table#projects-table tr td:nth-child(2) {
   margin: 10px 0 0 0;
   padding: 0;
 }
+
+/* Header on Issue show page */
+
+#issue-title {
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: normal;
+  color: #565656;
+}
+
+/* open/closed indicator */
+#issue-title > div {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+#issue-title > div:last-of-type { margin-right: 0; }
