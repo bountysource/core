@@ -19,9 +19,12 @@ with (scope('Solution','App')) {
     } else if (solution.disputed) {
       element.innerHTML = 'Disputed';
       add_class(element, 'red');
-    } else if (solution.submitted) {
+    } else if (solution.merged) {
       element.innerHTML = 'In Dispute Period';
       add_class(element, 'orange');
+    } else if (solution.submitted) {
+      element.innerHTML = 'Submitted';
+      add_class(element, 'blue');
     } else {
       element.innerHTML = 'Started';
       add_class(element, 'blue');

@@ -95,35 +95,69 @@ with (scope('Show', 'Issue')) {
 
     } else if (issue.submitted_solutions.length > 0) {
       // TODO show all submitted solutions
-      // select the first solution that was submitted
-      var solution = issue.submitted_solutions[0];
+
+      // select the first merged solution, if any.
+      var solution;
+      for (var i=0; i<issue.submitted_solutions.length; i++) {
+        if (issue.submitted_solutions[i].merged) {
+          solution = issue.submitted_solutions[i];
+          break;
+        }
+      }
+
+      // if no solution has been merged, show the first one that was submitted.
+      if (!solution) solution = issue.submitted_solutions[0];
 
       // does it exist? say something about it!
       if (solution) {
-        // if there is no dispute period end date, the solution is pending acceptance
-        render({ into: target_div },
-          h2({ style: 'margin: 10px 0;' }, 'Solution Submitted'),
 
-          div({ style: 'margin-bottom: 10px;' },
-            'by ',
-            a({ href: solution.person.frontend_path },
-              img({ style: 'display: inline-block; vertical-align: middle; width: 24px; height: 24px; border-radius: 2px;', src: solution.person.image_url }),
-              div({ style: 'display: inline-block; vertical-align: middle; margin-left: 5px;' }, solution.person.display_name)
+        if (solution.merged) {
+          // if there is no dispute period end date, the solution is pending acceptance
+
+          render({ into: target_div },
+            h2({ style: 'margin: 10px 0;' }, 'Solution In Dispute Period'),
+
+            div({ style: 'margin-bottom: 10px;' },
+              'by ',
+              a({ href: solution.person.frontend_path },
+                img({ style: 'display: inline-block; vertical-align: middle; width: 24px; height: 24px; border-radius: 2px;', src: solution.person.image_url }),
+                div({ style: 'display: inline-block; vertical-align: middle; margin-left: 5px;' }, solution.person.display_name)
+              )
+            ),
+
+            p('"' + solution.body + '"'),
+
+            a({ href: solution.code_url, target: '_blank', 'class': 'button blue', style: 'display: inline-block; width: 200px;' }, 'View Solution'),
+
+            solution.dispute_period_end_date && p({ style: 'line-height: 25px;' },
+              "If you feel that this solution does not sufficiently solve the issue, file a ",
+              a({ href: dispute_period_email_href(solution) }, 'dispute'),
+              " with us. If there are no outstanding disputes after ",
+              strong(formatted_date(solution.dispute_period_end_date)),
+              ", then the solution will be accepted and the bounty paid out."
             )
-          ),
+          );
+        } else {
+          // solution is pending merge
 
-          p('"' + solution.body + '"'),
+          render({ into: target_div },
+            h2({ style: 'margin: 10px 0;' }, 'Solution Submitted'),
 
-          a({ href: solution.code_url, target: '_blank', 'class': 'button blue', style: 'display: inline-block; width: 200px;' }, 'View Solution'),
+            div({ style: 'margin-bottom: 10px;' },
+              'by ',
+              a({ href: solution.person.frontend_path },
+                img({ style: 'display: inline-block; vertical-align: middle; width: 24px; height: 24px; border-radius: 2px;', src: solution.person.image_url }),
+                div({ style: 'display: inline-block; vertical-align: middle; margin-left: 5px;' }, solution.person.display_name)
+              )
+            ),
 
-          solution.dispute_period_end_date && p({ style: 'line-height: 25px;' },
-            "If you feel that this solution does not sufficiently solve the issue, file a ",
-            a({ href: dispute_period_email_href(solution) }, 'dispute'),
-            " with us. If there are no outstanding disputes after ",
-            strong(formatted_date(solution.dispute_period_end_date)),
-            ", then the solution will be accepted and the bounty paid out."
-          )
-        );
+            !solution.pull_request && p('"' + solution.body + '"'),
+
+            a({ href: solution.code_url, target: '_blank', 'class': 'button blue', style: 'display: inline-block; width: 200px;' }, 'View Solution'),
+
+            p("This solution has been submitted, but the project has not yet taken any action with it.")
+          );
+        }
       }
     } else if (!issue.can_add_bounty && issue.bounty_total > 0) {
       render({ into: target_div },
