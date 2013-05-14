@@ -362,6 +362,8 @@ table#projects-table tr td:nth-child(2) {
   padding: 0;
 }
 
+
+
 /* Header on Issue show page */
 
 #issue-title {
@@ -378,3 +380,23 @@ table#projects-table tr td:nth-child(2) {
   margin-right: 15px;
 }
 #issue-title > div:last-of-type { margin-right: 0; }
+
+
+/* The box on the issue show page showing the submitted solution */
+#issue-solution-wrapper {
+  text-align: center;
+  padding: 10px 30px;
+  background: #EBFFE4;
+  box-shadow: 0 0 10px #A1E9A1;
+  border-radius: 3px;
+}
+#issue-solution-wrapper h1 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+#issue-solution-wrapper #solution-status {
+  margin: 15px 0;
+}
+#issue-solution-wrapper #solution-body {
+  margin: 10px 0;
+}
