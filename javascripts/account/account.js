@@ -46,10 +46,10 @@ with (scope('Account','App')) {
               )
             ),
 
-            fieldset(
-              label({ 'for': 'paypal_email' }, img({ style: 'display: inline-block; vertical-align: middle; margin-right: 5px;', src: 'images/paypal.png' }), span({ style: 'display: inline-block; vertical-align: middle;' }, 'Paypal Email:')),
-              email({ id: 'paypal_email', 'class': 'long', name: 'paypal_email', placeholder: 'john.doe@gmail.com', value: info.paypal_email||'' })
-            ),
+//            fieldset(
+//              label({ 'for': 'paypal_email' }, img({ style: 'display: inline-block; vertical-align: middle; margin-right: 5px;', src: 'images/paypal.png' }), span({ style: 'display: inline-block; vertical-align: middle;' }, 'Paypal Email:')),
+//              email({ id: 'paypal_email', 'class': 'long', name: 'paypal_email', placeholder: 'john.doe@gmail.com', value: info.paypal_email||'' })
+//            ),
 
             fieldset({ 'class': 'no-label' },
               submit({ 'class': 'button green', style: 'width: 250px;' }, 'Update Bountysource Account')
