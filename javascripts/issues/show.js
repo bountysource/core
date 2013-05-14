@@ -111,9 +111,10 @@ with (scope('Show', 'Issue')) {
       // does it exist? say something about it!
       if (solution) {
 
-        if (solution.merged) {
-          // if there is no dispute period end date, the solution is pending acceptance
+        var view_solution_button_class  = solution.pull_request ? 'btn-auth btn-github' : 'button blue';
+        var view_solution_button_text   = solution.pull_request ? 'View Solution on GitHub' : 'View Solution';
 
+        if (solution.merged) {
           render({ into: target_div },
             h2({ style: 'margin: 10px 0;' }, 'Solution In Dispute Period'),
 
@@ -127,7 +128,7 @@ with (scope('Show', 'Issue')) {
 
             p('"' + solution.body + '"'),
 
-            a({ href: solution.code_url, target: '_blank', 'class': 'button blue', style: 'display: inline-block; width: 200px;' }, 'View Solution'),
+            a({ href: solution.code_url, target: '_blank', 'class': view_solution_button_class, style: 'display: inline-block; width: 200px;' }, view_solution_button_text),
 
             solution.dispute_period_end_date && p({ style: 'line-height: 25px;' },
               "If you feel that this solution does not sufficiently solve the issue, file a ",
@@ -151,9 +152,9 @@ with (scope('Show', 'Issue')) {
               )
             ),
 
-            !solution.pull_request && p('"' + solution.body + '"'),
+            p('"' + solution.body + '"'),
 
-            a({ href: solution.code_url, target: '_blank', 'class': 'button blue', style: 'display: inline-block; width: 200px;' }, 'View Solution'),
+            a({ href: solution.code_url, target: '_blank', 'class': view_solution_button_class, style: 'display: inline-block; width: 200px;' }, view_solution_button_text),
 
             p("This solution has been submitted, but the project has not yet taken any action with it.")
           );
