@@ -113,10 +113,11 @@ with (scope('Show', 'Issue')) {
         var view_solution_button_class  = solution.pull_request ? 'btn-auth btn-github' : 'button blue';
         var view_solution_button_text   = solution.pull_request ? 'View Solution on GitHub' : 'View Solution';
 
+        var solution_title_element = h2('Solution');
         var solution_status_div = div({ id: 'solution-status' });
 
         render({ into: target_div },
-          h2(get('solution_title')),
+          solution_title_element,
 
           div({ style: 'margin-bottom: 10px;' },
             'by ',
@@ -134,6 +135,8 @@ with (scope('Show', 'Issue')) {
         );
 
         if (solution.in_dispute_period) {
+          render({ into: solution_title_element }, 'Solution In Dispute Period');
+
           // already in dispute period, show that message
           render({ into: solution_status_div },
             div({ style: 'line-height: 25px;' },
@@ -145,6 +148,7 @@ with (scope('Show', 'Issue')) {
             )
           );
         } else {
+          render({ into: solution_title_element }, 'Solution Submitted');
 
           var message_div = div();
 
