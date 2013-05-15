@@ -110,6 +110,9 @@ with (scope('Show', 'Issue')) {
 
       // does it exist? say something about it!
       if (solution) {
+        // if issue is disputed, add class to wrapper div
+        if (solution.disputed) add_class(target_div, 'disputed');
+
         var view_solution_button_class  = solution.pull_request ? 'btn-auth btn-github' : 'button blue';
         var view_solution_button_text   = solution.pull_request ? 'View Solution on GitHub' : 'View Solution';
 
@@ -134,14 +137,57 @@ with (scope('Show', 'Issue')) {
           solution_status_div
         );
 
-        if (solution.in_dispute_period) {
+        if (solution.disputed) {
+          render({ into: solution_title_element }, 'Solution Disputed');
+
+          var disputes_table = table({ 'id': 'solution-disputes' }, 'Loading...');
+
+          // solution has been disputed. show all of the disputes!
+          render({ into: solution_status_div },
+            div({ style: 'line-height: 25px;' },
+              "If you feel that this solution does not sufficiently solve the issue, file a ",
+              a({ href: file_dispute_href(solution) }, 'dispute'),
+              " with us. If there are no outstanding disputes after ",
+              strong(formatted_date(solution.dispute_period_end_date)),
+              ", then the solution will be accepted and the bounty paid out."
+            ),
+
+            h4("Disputed Filed"),
+            disputes_table,
+            p("To join the discussion regarding disputes, refer to the ", a({ href: issue.url, target: '_blank' }, "issue comments"))
+          );
+
+          // load disputes
+          Bountysource.api('/issues/'+issue.id+'/solutions/'+solution.id+'/disputes', function(response) {
+            render({ into: disputes_table },
+              tr(
+                th({ style: 'width: 100px;' }),
+                th(),
+                th({ style: 'width: 75px; text-align: center;' })
+              ),
+              response.data.map(function(dispute) {
+                var row = tr(
+                  td('Dispute #' + dispute.number),
+                  td(dispute.body),
+                  td({ style: 'text-align: center;' }, dispute.closed ? 'Resolved' : 'Unresolved')
+                );
+
+                // strikethrough resolved disputes
+                if (dispute.closed) add_class(row, 'closed');
+
+                return row;
+              })
+            );
+          });
+
+        } else if (solution.in_dispute_period) {
           render({ into: solution_title_element }, 'Solution In Dispute Period');
 
           // already in dispute period, show that message
           render({ into: solution_status_div },
             div({ style: 'line-height: 25px;' },
               "If you feel that this solution does not sufficiently solve the issue, file a ",
-              a({ href: dispute_period_email_href(solution) }, 'dispute'),
+              a({ href: file_dispute_href(solution) }, 'dispute'),
               " with us. If there are no outstanding disputes after ",
               strong(formatted_date(solution.dispute_period_end_date)),
               ", then the solution will be accepted and the bounty paid out."
@@ -179,9 +225,8 @@ with (scope('Show', 'Issue')) {
     if (target_div.innerHTML) return target_div;
   });
 
-  define('dispute_period_email_href', function(solution) {
-    return  "mailto:support@bountysource.com?subject="+ encodeURIComponent("Dispute") +
-      "&body=" + encodeURIComponent("Issue Name: " + solution.issue.title + "\nIssue URL: " + solution.issue.frontend_url + "\n\nPlease describe the issue you have with " + solution.person.display_name + "'s solution:");
+  define('file_dispute_href', function(solution) {
+    return '#issues/'+solution.issue.id+'/solutions/'+solution.id+'/disputes/create';
   });
 
   define('github_user_html_box', function(options) {

@@ -1,4 +1,4 @@
-with (scope('BountySource')) {
+with (scope('Bountysource')) {
 
   define('api_host', 'https://api.bountysource.com/');
   define('www_host', document.location.href.split('#')[0]);
@@ -351,3 +351,6 @@ with (scope('BountySource')) {
     api('/user/fundraisers/' + fundraiser_id + '/updates/' + update_id, 'DELETE', callback);
   });
 }
+
+// legacy camel case support
+BountySource = scope.instance.Bountysource;

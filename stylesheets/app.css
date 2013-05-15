@@ -390,6 +390,12 @@ table#projects-table tr td:nth-child(2) {
   box-shadow: 0 0 10px #A1E9A1;
   border-radius: 3px;
 }
+
+#issue-solution-wrapper.disputed {
+  box-shadow: 0 0 10px #E9C4A1;
+  background: #FFECE4;
+}
+
 #issue-solution-wrapper h1 {
   font-size: 18px;
   margin: 10px 0;
@@ -400,3 +406,6 @@ table#projects-table tr td:nth-child(2) {
 #issue-solution-wrapper #solution-body {
   margin: 10px 0;
 }
+
+#issue-solution-wrapper table#solution-disputes { text-align: left; }
+#issue-solution-wrapper table#solution-disputes tr.closed { text-decoration: line-through; }
