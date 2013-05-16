@@ -175,8 +175,7 @@ with (scope('Show', 'Issue')) {
 
                     // logged in person filed the dispute? show close button
                     (dispute.owner && !dispute.closed) && div(
-                      br,
-                      button({ onClick: curry(close_dispute, solution, dispute) }, 'Close Dispute')
+                      button({ style: 'margin-top: 5px;', onClick: curry(close_dispute, solution, dispute) }, 'Close Dispute')
                     )
                   )
                 );
