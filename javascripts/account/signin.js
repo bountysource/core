@@ -128,7 +128,7 @@ with (scope('Signin','App')) {
 
   define('process_email_address_changed', function(refs) {
     refs.sign_in_up_button.disabled = true;
-    Bountysource.login({ email: refs.email.value }, function(response) {
+    BountySource.login({ email: refs.email.value }, function(response) {
       refs.sign_in_up_button.disabled = false;
       refs.email_is_registered = response.data.email_is_registered;
       auto_adjust_super_form_fields(refs);
@@ -153,7 +153,7 @@ with (scope('Signin','App')) {
 
     if (redirect_url == '#signin') redirect_url = '#';
 
-    Bountysource.set_access_token(response.data);
+    BountySource.set_access_token(response.data);
 
     set_route(redirect_url, { reload_page: true });
   });
@@ -161,12 +161,12 @@ with (scope('Signin','App')) {
   define('process_signin_form', function(refs, form_data) {
     render({ into: refs.error_div });
 
-    Bountysource.login(form_data, function(response) {
+    BountySource.login(form_data, function(response) {
       if (response.meta.success) {
         save_user_data_and_redirect(response);
       } else if (!response.data.email_is_registered && is_visible(refs.signup_fields)) {
         // email isn't registered and the signup fields were visible when they clicked... try to create an account
-        Bountysource.create_account(form_data, function(response) {
+        BountySource.create_account(form_data, function(response) {
           if (response.meta.success) {
             save_user_data_and_redirect(response);
           } else {
@@ -191,7 +191,7 @@ with (scope('Signin','App')) {
   });
 
   define('send_password_reset_email', function(refs, email) {
-    Bountysource.request_password_reset({ email: email }, function(response) {
+    BountySource.request_password_reset({ email: email }, function(response) {
       if (response.meta.success) {
         render({ into: refs.error_div }, success_message('Password reset email has been sent.'));
       } else {
@@ -241,7 +241,7 @@ with (scope('Signin','App')) {
   define('reset_password', function(error_div, form_data) {
     render({ into: error_div });
 
-    Bountysource.reset_password(form_data, function(response) {
+    BountySource.reset_password(form_data, function(response) {
       if (response.meta.success) {
         process_signin_form(error_div, { email: form_data.email, password: form_data.new_password });
       } else {
@@ -276,7 +276,7 @@ with (scope('Signin','App')) {
   route('#auth/:provider/confirm', function(provider) {
     var params = get_params();
     if (logged_in()) params.access_token = Storage.get('access_token');
-    window.location = Bountysource.api_host + 'auth/'+provider+'/connect' + to_param(params);
+    window.location = BountySource.api_host + 'auth/'+provider+'/connect' + to_param(params);
   });
 
   // first point of contact for Gittip account link.
@@ -322,7 +322,7 @@ with (scope('Signin','App')) {
     var params = get_params();
 
     if (provider == 'gittip') {
-      Bountysource.api('/auth/' + provider + '/approve_connect', 'POST', params, function(response) {
+      BountySource.api('/auth/' + provider + '/approve_connect', 'POST', params, function(response) {
         if (response.meta.success) {
           window.location = response.data.redirect_url;
         } else {

@@ -32,7 +32,7 @@ with (scope('Account','App')) {
 
   define('change_password', function(form_data) {
     clear_message();
-    Bountysource.change_password(form_data, function(response) {
+    BountySource.change_password(form_data, function(response) {
       document.getElementsByTagName('input[type=password]')
       if (response.meta.success) {
         render_message(success_message('Password changed!'));

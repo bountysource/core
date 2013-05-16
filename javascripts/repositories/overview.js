@@ -5,7 +5,7 @@ with (scope('Repository')) {
 
     render(target_div);
 
-    Bountysource.get_repository_overview(tracker_id, function(response) {
+    BountySource.get_repository_overview(tracker_id, function(response) {
       if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
 
       var repo = response.data;
@@ -122,7 +122,7 @@ with (scope('Repository')) {
 //      target_div
 //    );
 //
-//    Bountysource.get_repository_overview(login, repository, function(response) {
+//    BountySource.get_repository_overview(login, repository, function(response) {
 //      if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
 //
 //      var repo = response.data;
@@ -150,7 +150,7 @@ with (scope('Repository')) {
 //  });
 //
 //  define('donation_box', function(repo) {
-//    var payment_box_div = Payment.payment_box('Donation', repo, null, Bountysource.www_host+Repository.get_href(repo));
+//    var payment_box_div = Payment.payment_box('Donation', repo, null, BountySource.www_host+Repository.get_href(repo));
 //
 //    return div({ id: 'bounty-box' },
 //      div({ style: 'padding: 0 21px' }, ribbon_header("Donate to Project")),

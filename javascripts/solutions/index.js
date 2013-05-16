@@ -13,7 +13,7 @@ with (scope('Solution', 'App')) {
       target_div
     );
 
-    Bountysource.get_solutions(function(response) {
+    BountySource.get_solutions(function(response) {
       if (response.meta.success) {
         var solutions = response.data;
 

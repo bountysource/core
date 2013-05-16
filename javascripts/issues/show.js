@@ -6,7 +6,7 @@ with (scope('Show', 'Issue')) {
 
     render(Show.target_div);
 
-    Bountysource.get_issue(issue_id, function(response) {
+    BountySource.get_issue(issue_id, function(response) {
       if (!response.meta.success) {
         render({ into: Show.errors_div }, error_message(response.data.error));
         render({ into: Show.target_div }, '');
@@ -159,7 +159,7 @@ with (scope('Show', 'Issue')) {
           );
 
           // load disputes
-          Bountysource.api('/issues/'+issue.id+'/solutions/'+solution.id+'/disputes', function(response) {
+          BountySource.api('/issues/'+issue.id+'/solutions/'+solution.id+'/disputes', function(response) {
             render({ into: disputes_table },
               tr(
                 th({ style: 'width: 100px;' }),
@@ -287,13 +287,13 @@ with (scope('Show', 'Issue')) {
       postauth_url: window.location.href.split('#')[0] + issue.frontend_path + '?payment_method='+form_data.payment_method+'&amount='+form_data.amount
     };
 
-    Bountysource.make_payment(payment_data, function(errors) {
+    BountySource.make_payment(payment_data, function(errors) {
       render({ target: 'create-bounty-errors' }, error_message(errors));
     });
   });
 
   define('create_solution', function(login, repository, issue_number, form_data) {
-    Bountysource.create_solution(login, repository, issue_number, form_data.pull_request_number, function(response) {
+    BountySource.create_solution(login, repository, issue_number, form_data.pull_request_number, function(response) {
       if (response.meta.success) {
         set_route('#solutions/'+response.data.id+'/receipt');
       } else {
@@ -306,7 +306,7 @@ with (scope('Show', 'Issue')) {
     if (confirm('Are you sure you want to close your dispute?')) {
       render({ target: 'dispute-alerts' }, '');
 
-      Bountysource.api('/issues/'+solution.issue.id+'/solutions/'+solution.id+'/disputes/'+dispute.number+'/close', 'POST', function(response) {
+      BountySource.api('/issues/'+solution.issue.id+'/solutions/'+solution.id+'/disputes/'+dispute.number+'/close', 'POST', function(response) {
 
         console.log(response);
 

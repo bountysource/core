@@ -59,10 +59,10 @@ with (scope('Bountysource')) {
   define('set_access_token', function(data) {
     if (typeof(data) == 'string') {
       Storage.set('access_token', data);
-      Bountysource.set_cached_user_info(null);
+      BountySource.set_cached_user_info(null);
     } else {
       Storage.set('access_token', data.access_token);
-      Bountysource.set_cached_user_info(data);
+      BountySource.set_cached_user_info(data);
     }
   });
 
@@ -139,7 +139,7 @@ with (scope('Bountysource')) {
   define('make_payment', function(data, error_callback) {
     var callback = function(response) {
       if (response.meta.success) {
-        if (data.payment_method == 'personal') Bountysource.set_cached_user_info(null);
+        if (data.payment_method == 'personal') BountySource.set_cached_user_info(null);
         set_route(response.data.redirect_url);
       } else {
         error_callback(response.data.error);

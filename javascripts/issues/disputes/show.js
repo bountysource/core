@@ -5,7 +5,7 @@ with (scope('Disputes', 'App')) {
 
     render(target_div);
 
-    Bountysource.api('/issues/'+issue_id+'/solutions/'+solution_id+'/disputes/'+dispute_number, function(response) {
+    BountySource.api('/issues/'+issue_id+'/solutions/'+solution_id+'/disputes/'+dispute_number, function(response) {
       if (response.meta.success) {
         var dispute = response.data;
         var issue   = dispute.solution.issue;

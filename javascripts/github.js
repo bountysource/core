@@ -1,7 +1,7 @@
 with (scope('Github','App')) {
   define('auth_url', function(options) {
     options = options || {};
-    return Bountysource.api_host+'auth/github?scope='+(options.scope||'') +
+    return BountySource.api_host+'auth/github?scope='+(options.scope||'') +
       '&access_token='+(Storage.get('access_token')||'') +
       '&redirect_url='+encode_html(options.redirect_url || window.location.href); // make sure the redirect url is the last param?
   });
@@ -29,7 +29,7 @@ with (scope('Github','App')) {
     if (!account_linked()) {
       callback(false, necessary_auth_url);
     } else {
-      Bountysource.get_cached_user_info(function(user_info) {
+      BountySource.get_cached_user_info(function(user_info) {
         // loop through permissions, check if all accounted for
         var authorized = true;
         for (var i=0; authorized && i<needed_permissions.length; i++) {
@@ -56,7 +56,7 @@ with (scope('Github','App')) {
       )
     );
 
-    Bountysource.api('/github/user', function(response) {
+    BountySource.api('/github/user', function(response) {
       link_account_button.style.opacity = 1;
 
       if (!response.meta.success || response.data.permissions.indexOf('public_repo') < 0) {
@@ -86,7 +86,7 @@ with (scope('Github','App')) {
   define('create_issue_comment', function(issue, form_data) {
     render({ target: 'github-issue-comment-errors' }, '');
 
-    Bountysource.api('/github/repos/'+issue.repository.full_name+'/issues/'+issue.number+'/post_comment', 'POST', form_data, function(response) {
+    BountySource.api('/github/repos/'+issue.repository.full_name+'/issues/'+issue.number+'/post_comment', 'POST', form_data, function(response) {
       if (response.meta.success) {
         // hide the form, using the click event method that is already defined
         var e = document.getElementById('github-issue-comment-button');

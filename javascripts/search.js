@@ -31,7 +31,7 @@ with (scope('Search', 'App')) {
       target_div
     );
 
-    Bountysource.search(form_data.query, function(response) {
+    BountySource.search(form_data.query, function(response) {
 
       if (response.meta.success) {
         var results = response.data||[];

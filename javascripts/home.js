@@ -43,7 +43,7 @@ with (scope('Home', 'App')) {
     );
 
     // get all fundraiser cards, render them
-    Bountysource.get_fundraiser_cards(function(response) {
+    BountySource.get_fundraiser_cards(function(response) {
       if (response.meta.success) {
         var in_progress = response.data.in_progress,
             completed   = response.data.completed;
@@ -60,7 +60,7 @@ with (scope('Home', 'App')) {
     });
 
     // get all tracker cards, render them
-    Bountysource.get_project_cards(function(response) {
+    BountySource.get_project_cards(function(response) {
       if (response.meta.success) {
         var featured_projects = response.data.featured_trackers,
             all_projects      = response.data.all_trackers;
@@ -169,7 +169,7 @@ with (scope('Home', 'App')) {
   define('recent_people_div', function() {
     var recent_people_div = div({ style: 'margin-top: 10px;' });
 
-    Bountysource.recent_people(function(response) {
+    BountySource.recent_people(function(response) {
       if (response.meta.success) {
         // expand the top box
         add_class(Home.top_box, 'loaded');

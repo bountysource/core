@@ -21,11 +21,11 @@ with (scope('Facebook','App')) {
   });
 
   define('get_app_id', function() {
-    if (Bountysource.www_host.match(/www\.bountysource\.com/)) {
+    if (BountySource.www_host.match(/www\.bountysource\.com/)) {
       return "280280945425178";
-    } else if (Bountysource.www_host.match(/www-qa\.bountysource\.com/)) {
+    } else if (BountySource.www_host.match(/www-qa\.bountysource\.com/)) {
       return "129570157210142";
-    } else if (Bountysource.www_host.match(/www\.bountysource\.dev/)) {
+    } else if (BountySource.www_host.match(/www\.bountysource\.dev/)) {
       return "362924703805218";
     }
   });
@@ -142,7 +142,7 @@ with (scope('Facebook','App')) {
   * */
   define('auth_url', function(options) {
     options = options || {};
-    return Bountysource.api_host+'auth/facebook?scope='+(options.scope||'email') +
+    return BountySource.api_host+'auth/facebook?scope='+(options.scope||'email') +
       '&access_token='+(Storage.get('access_token')||'') +
       '&redirect_url='+encode_html(window.location.href); // make sure the redirect url is the last param?
   });

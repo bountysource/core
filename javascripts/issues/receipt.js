@@ -5,7 +5,7 @@ with (scope('Issue', 'App')) {
 
     render(target_div);
 
-    Bountysource.get_bounty(bounty_id, function(response) {
+    BountySource.get_bounty(bounty_id, function(response) {
       var bounty = response.data;
 
       render({ into: target_div },
@@ -38,7 +38,7 @@ with (scope('Issue', 'App')) {
 
             // TODO fix it! --- CAB
             false && Github.issue_comment_form(bounty.issue, {
-              default_text: "I placed a " + money(bounty.amount) + " bounty on this issue using Bountysource. The bounty total goes to the person whose pull request gets accepted. Add to or claim the bounty here: " + Bountysource.www_host+Issue.get_href(bounty.issue)
+              default_text: "I placed a " + money(bounty.amount) + " bounty on this issue using Bountysource. The bounty total goes to the person whose pull request gets accepted. Add to or claim the bounty here: " + BountySource.www_host+Issue.get_href(bounty.issue)
             })
           )
         )

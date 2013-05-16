@@ -12,7 +12,7 @@ with (scope('Contributions', 'App')) {
       target_div
     );
 
-    Bountysource.get_contributions(function(response) {
+    BountySource.get_contributions(function(response) {
 
       if (response.meta.success) {
         var bounties  = response.data.bounties,

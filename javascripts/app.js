@@ -5,9 +5,9 @@ with (scope('App')) {
   // refresh user_info and access_token if they're logged in
   initializer(function() {
     if (logged_in()) {
-      Bountysource.user_info(function(response) {
+      BountySource.user_info(function(response) {
         if (response.meta.success) {
-          Bountysource.set_cached_user_info(response.data);
+          BountySource.set_cached_user_info(response.data);
         }
       });
     }

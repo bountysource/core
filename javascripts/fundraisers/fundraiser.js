@@ -31,7 +31,7 @@ with (scope('Fundraiser', 'App')) {
 
   define('embed_iframe', function(fundraiser) {
     return iframe({
-      src:    Bountysource.api_host + 'user/fundraisers/' + fundraiser.id + '/embed',
+      src:    BountySource.api_host + 'user/fundraisers/' + fundraiser.id + '/embed',
       style:  'width: 238px; height: 402px; overflow: hidden; border: 0;'
     });
   });

@@ -6,7 +6,7 @@ with (scope('Disputes', 'App')) {
 
     render(target_div);
 
-    Bountysource.api('/issues/' + issue_id + '/solutions/' + solution_id + '/', function(response) {
+    BountySource.api('/issues/' + issue_id + '/solutions/' + solution_id + '/', function(response) {
 
       if (response.meta.success) {
         var solution  = response.data;
@@ -71,7 +71,7 @@ with (scope('Disputes', 'App')) {
 
   define('file_dispute', function(solution, form_data) {
     if (confirm("Are you sure?")) {
-      Bountysource.api('/issues/' + solution.issue.id + '/solutions/' + solution.id + '/disputes', 'POST', form_data, function(response) {
+      BountySource.api('/issues/' + solution.issue.id + '/solutions/' + solution.id + '/disputes', 'POST', form_data, function(response) {
 
         console.log(response);
 

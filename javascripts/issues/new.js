@@ -52,7 +52,7 @@ with (scope('Issue', 'App')) {
   });
 
   define('create_issue', function(form_data) {
-    Bountysource.create_issue(form_data, function(response) {
+    BountySource.create_issue(form_data, function(response) {
       if (response.meta.success) {
         set_route(response.data.frontend_path);
       } else {

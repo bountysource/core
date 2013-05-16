@@ -14,7 +14,7 @@ with (scope('Profile','App')) {
       target_div
     );
 
-    Bountysource.get_user_profile(profile_id, function(response) {
+    BountySource.get_user_profile(profile_id, function(response) {
       if (response.meta.success) {
         var profile = response.data;
 
