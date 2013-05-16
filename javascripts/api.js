@@ -1,4 +1,4 @@
-with (scope('Bountysource')) {
+with (scope('BountySource')) {
 
   define('api_host', 'https://api.bountysource.com/');
   define('www_host', document.location.href.split('#')[0]);
