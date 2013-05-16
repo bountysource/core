@@ -26,7 +26,7 @@ with (scope('Show','Solution')) {
       )
     );
 
-    BountySource.get_solution(id, function(response) {
+    Bountysource.get_solution(id, function(response) {
       if (response.meta.success) {
         var solution = response.data;
 
@@ -142,7 +142,7 @@ with (scope('Show','Solution')) {
   define('update_solution_event_callback', function() {
     var request_data = {};
     request_data[this.getAttribute('name')] = this.value;
-    BountySource.update_solution(Show.solution.id, request_data, function(response) {
+    Bountysource.update_solution(Show.solution.id, request_data, function(response) {
       if (!response.meta.success) {
         render({ into: Show.submit_solution_errors_container }, error_message(response.data.error));
       }
@@ -152,7 +152,7 @@ with (scope('Show','Solution')) {
   define('submit_solution', function() {
     render({ into: Show.submit_solution_errors_container }, '');
 
-    BountySource.submit_solution(Show.solution.id, function(response) {
+    Bountysource.submit_solution(Show.solution.id, function(response) {
       if (response.meta.success) {
         set_route(get_route());
       } else {
@@ -164,7 +164,7 @@ with (scope('Show','Solution')) {
   define('destroy_solution', function() {
     render({ into: Show.submit_solution_errors_container }, '');
 
-    BountySource.destroy_solution(Show.solution.id, function(response) {
+    Bountysource.destroy_solution(Show.solution.id, function(response) {
       if (response.meta.success) {
         set_route(Show.solution.issue.frontend_path);
       } else {
@@ -176,7 +176,7 @@ with (scope('Show','Solution')) {
   define('update_solution', function(form_data) {
     render({ into: Show.update_solution_errors_container },'');
 
-    BountySource.update_solution(Show.solution.id, form_data, function(response) {
+    Bountysource.update_solution(Show.solution.id, form_data, function(response) {
       if (response.meta.success) {
         // update the cached solution model
         Show.solution = response.data;

@@ -40,7 +40,7 @@ with (scope('Account','App')) {
   define('update_address_form', function(callback) {
     var dat_form = base_address_form({ action: update_address, submit_label: 'Update Address', callback: callback });
 
-    BountySource.basic_user_info(function(response) {
+    Bountysource.basic_user_info(function(response) {
       var address = (response.data.address||{});
       document.getElementsByName('first_name')[0].value = address.first_name||'';
       document.getElementsByName('last_name')[0].value = address.last_name||'';
@@ -58,7 +58,7 @@ with (scope('Account','App')) {
   define('create_or_update_address_form', function(callback) {
     var dat_form = base_address_form({ action: create_or_update_address, submit_label: 'Create/Update Address', callback: callback });
 
-    BountySource.basic_user_info(function(response) {
+    Bountysource.basic_user_info(function(response) {
       var address = (response.data.address||{});
       document.getElementsByName('first_name')[0].value = address.first_name||'';
       document.getElementsByName('last_name')[0].value = address.last_name||'';
@@ -74,7 +74,7 @@ with (scope('Account','App')) {
   });
 
   define('create_or_update_address', function(form_data, callback) {
-    BountySource.basic_user_info(function(response) {
+    Bountysource.basic_user_info(function(response) {
       if (response.data.address) {
         update_address(form_data, callback);
       } else {
@@ -85,7 +85,7 @@ with (scope('Account','App')) {
   });
 
   define('create_address', function(form_data, callback) {
-    BountySource.create_address(form_data, callback || function(response) {
+    Bountysource.create_address(form_data, callback || function(response) {
       if (response.meta.success) {
         render_message(success_message('Address created.'));
       } else {
@@ -96,7 +96,7 @@ with (scope('Account','App')) {
   });
 
   define('update_address', function(form_data, callback) {
-    BountySource.update_address(form_data, callback || function(response) {
+    Bountysource.update_address(form_data, callback || function(response) {
       if (response.meta.success) {
         render_message(success_message('Address updated.'));
       } else {

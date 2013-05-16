@@ -172,7 +172,7 @@ with (scope('Payout','Solution')) {
 //      target_div
 //    );
 //
-//    BountySource.get_solution(solution_id, function(response) {
+//    Bountysource.get_solution(solution_id, function(response) {
 //      if (response.meta.success) {
 //        var solution = response.data;
 //
@@ -194,7 +194,7 @@ with (scope('Payout','Solution')) {
   define('payout', function(form_data) {
     render({ into: Payout.errors_div }, '');
 
-    BountySource.payout_solution(Payout.solution.id, form_data, function(response) {
+    Bountysource.payout_solution(Payout.solution.id, form_data, function(response) {
       if (response.meta.success) {
         set_route(get_route());
       } else {

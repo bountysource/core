@@ -4,7 +4,7 @@ with (scope('Updates', 'Fundraiser')) {
 
     Updates.create_errors = div();
 
-    BountySource.get_fundraiser_updates(fundraiser_id, function(response) {
+    Bountysource.get_fundraiser_updates(fundraiser_id, function(response) {
       if (response.meta.success) {
         var fundraiser  = response.data,
             updates     = fundraiser.updates;
@@ -59,7 +59,7 @@ with (scope('Updates', 'Fundraiser')) {
   define('create_update', function(fundraiser) {
     render({ into: Updates.create_errors }, '');
 
-    BountySource.create_fundraiser_update(fundraiser.id, function(response) {
+    Bountysource.create_fundraiser_update(fundraiser.id, function(response) {
       if (response.meta.success) {
         var update = response.data.update;
         set_route(update.frontend_edit_path);
@@ -72,7 +72,7 @@ with (scope('Updates', 'Fundraiser')) {
   route('#fundraisers/:fundraiser_id/updates/:id', function(fundraiser_id, id) {
     render('Loading...');
 
-    BountySource.get_fundraiser_update(fundraiser_id, id, function(response) {
+    Bountysource.get_fundraiser_update(fundraiser_id, id, function(response) {
       if (response.meta.success) {
         var fundraiser  = response.data,
             update      = fundraiser.update;
@@ -124,7 +124,7 @@ with (scope('Updates', 'Fundraiser')) {
 
     Updates.create_errors = div();
 
-    BountySource.get_fundraiser_update(fundraiser_id, id, function(response) {
+    Bountysource.get_fundraiser_update(fundraiser_id, id, function(response) {
       if (response.meta.success) {
         var fundraiser  = response.data,
             update      = fundraiser.update;
@@ -165,7 +165,7 @@ with (scope('Updates', 'Fundraiser')) {
           });
           setInterval(function() {
             if (body_input['data-save-needed']) {
-              BountySource.update_fundraiser_update(fundraiser.id, update.id, { body: body_input.value }, function(response) {
+              Bountysource.update_fundraiser_update(fundraiser.id, update.id, { body: body_input.value }, function(response) {
                 if (response.meta.success) {
                   add_class(body_input, 'saved');
                 } else {
@@ -181,7 +181,7 @@ with (scope('Updates', 'Fundraiser')) {
             var input_element = this;
             var request_data = {};
             request_data[this.name] = this.value;
-            BountySource.update_fundraiser_update(fundraiser.id, update.id, request_data, function(response) {
+            Bountysource.update_fundraiser_update(fundraiser.id, update.id, request_data, function(response) {
               if (response.meta.success) {
                 add_class(input_element, 'saved');
               } else {
@@ -258,7 +258,7 @@ with (scope('Updates', 'Fundraiser')) {
   define('save_update', function(fundraiser, update, form_data) {
     render({ into: Updates.create_errors }, '');
 
-    BountySource.update_fundraiser_update(fundraiser.id, update.id, form_data, function(response) {
+    Bountysource.update_fundraiser_update(fundraiser.id, update.id, form_data, function(response) {
       if (response.meta.success) {
         render({ into: Updates.create_errors }, small_success_message('Update has been saved.'));
       } else {
@@ -271,7 +271,7 @@ with (scope('Updates', 'Fundraiser')) {
     if (confirm('Destroy update draft?')) {
       render({ into: Updates.create_errors }, '');
 
-      BountySource.destroy_fundraiser_update(fundraiser.id, update.id, function(response) {
+      Bountysource.destroy_fundraiser_update(fundraiser.id, update.id, function(response) {
         if (response.meta.success) {
           set_route(fundraiser.frontend_updates_path);
         } else {
@@ -285,7 +285,7 @@ with (scope('Updates', 'Fundraiser')) {
     if (confirm('Publish update?')) {
       render({ into: Updates.create_errors }, '');
 
-      BountySource.publish_fundraiser_update(fundraiser.id, update.id, function(response) {
+      Bountysource.publish_fundraiser_update(fundraiser.id, update.id, function(response) {
         if (response.meta.success) {
           set_route(update.frontend_path);
         } else {

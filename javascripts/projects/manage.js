@@ -35,9 +35,9 @@ with (scope('Project', 'App')) {
       target_div
     );
 
-    BountySource.get_cached_user_info(function(user_info) {
+    Bountysource.get_cached_user_info(function(user_info) {
       if (user_info.github_account) {
-        BountySource.api('/project_relations', { per_page: 300 }, function(response) {
+        Bountysource.api('/project_relations', { per_page: 300 }, function(response) {
           if (response.meta.success) {
             if (response.data.length > 0) {
               render({ into: target_div },
@@ -242,7 +242,7 @@ with (scope('Project', 'App')) {
 
     render({ target: 'project-manager-updated-message' }, 'Saving...');
 
-    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
+    Bountysource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'PUT', request_data, function(response) {
       if (response.meta.success) {
         // replace dat manage button with updated tracker data
         reload_install_or_manage_plugin_button(response.data);
@@ -256,7 +256,7 @@ with (scope('Project', 'App')) {
   define('create_plugin', function(relation) {
     render({ target: 'tracker-plugin-widget-'+relation.id }, 'Installing...');
 
-    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'POST', { linked_account_id: relation.linked_account.id }, function(response) {
+    Bountysource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'POST', { linked_account_id: relation.linked_account.id }, function(response) {
       if (response.meta.success) {
         var new_relation = response.data;
 
@@ -266,7 +266,7 @@ with (scope('Project', 'App')) {
         // go to that plugin
         show_project_manager(new_relation);
       } else if (response.meta.status == 424) {
-        window.location = Github.auth_url({ scope: 'public_repo', redirect_url: BountySource.www_host + get_route() + '?install_id=' + relation.id });
+        window.location = Github.auth_url({ scope: 'public_repo', redirect_url: Bountysource.www_host + get_route() + '?install_id=' + relation.id });
       } else {
         render({ target: 'tracker-plugin-widget-'+relation.id },
           a({ 'class': 'btn-auth btn-github small', style: 'display: inline-block; width: 130px;', href: curry(create_plugin, relation) }, 'Install Plugin')
@@ -280,7 +280,7 @@ with (scope('Project', 'App')) {
 //  define('destroy_plugin', function(relation) {
 //    render({ target: 'project-manager-updated-message' }, 'Uninstalling...');
 //
-//    BountySource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'DELETE', function(response) {
+//    Bountysource.api('/trackers/' + relation.project.id + '/tracker_plugin', 'DELETE', function(response) {
 //      if (response.meta.success) {
 //        // reload the 'Install' button
 //        reset_plugin_button(relation);

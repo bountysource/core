@@ -32,7 +32,7 @@ with (scope('DeveloperBox','Issue')) {
     render({ target: this.inner_div }, 'Loading...');
 
     if (logged_in()) {
-      BountySource.get_solutions(function(response) {
+      Bountysource.get_solutions(function(response) {
         if (response.meta.success) {
           var my_solution;
           for (var i=0; i<response.data.length; i++) {
@@ -100,7 +100,7 @@ with (scope('DeveloperBox','Issue')) {
   define('create_solution', function() {
     render({ target: DeveloperBox.error_message_div },'');
 
-    BountySource.create_solution(DeveloperBox.issue.id, function(response) {
+    Bountysource.create_solution(DeveloperBox.issue.id, function(response) {
       if (response.meta.success) {
         // set cached solution
         DeveloperBox.solution = response.data;
@@ -114,7 +114,7 @@ with (scope('DeveloperBox','Issue')) {
   define('destroy_solution', function() {
     render({ target: DeveloperBox.error_message_div },'');
 
-    BountySource.destroy_solution(DeveloperBox.my_solution.id, function(response) {
+    Bountysource.destroy_solution(DeveloperBox.my_solution.id, function(response) {
       if (response.meta.success) {
         DeveloperBox.solution = undefined;
         reload_content();

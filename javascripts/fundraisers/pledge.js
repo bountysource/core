@@ -15,7 +15,7 @@ with (scope('Pledge', 'Fundraiser')) {
       target_div
     );
 
-    BountySource.get_fundraiser(fundraiser_id, function(response) {
+    Bountysource.get_fundraiser(fundraiser_id, function(response) {
       var params      = get_params(),
           fundraiser  = response.data;
 
@@ -168,7 +168,7 @@ with (scope('Pledge', 'Fundraiser')) {
 
     render(target_div);
 
-    BountySource.get_pledge(pledge_id, function(response) {
+    Bountysource.get_pledge(pledge_id, function(response) {
       if (response.meta.success) {
         var pledge      = response.data,
             fundraiser  = pledge.fundraiser,
@@ -260,7 +260,7 @@ with (scope('Pledge', 'Fundraiser')) {
   define('update_pledge', function(pledge, form_data) {
     render({ into: Pledge.errors }, '');
 
-    BountySource.update_pledge(pledge.id, form_data, function(response) {
+    Bountysource.update_pledge(pledge.id, form_data, function(response) {
 
       console.log(response);
 
@@ -286,7 +286,7 @@ with (scope('Pledge', 'Fundraiser')) {
       postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id
     };
 
-    BountySource.make_payment(payment_data, function(errors) {
+    Bountysource.make_payment(payment_data, function(errors) {
       render({ into: Pledge.errors_div }, error_message(errors));
     });
   });

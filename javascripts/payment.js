@@ -49,7 +49,7 @@ with (scope('Payment', 'App')) {
 
     // if logged in and account has money, render bountysource and gittip payment options
     if (logged_in()) {
-      BountySource.get_cached_user_info(function(user) {
+      Bountysource.get_cached_user_info(function(user) {
         var bountysource_account_div = div();
         var gittip_account_div = div();
 

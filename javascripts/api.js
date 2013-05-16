@@ -59,10 +59,10 @@ with (scope('Bountysource')) {
   define('set_access_token', function(data) {
     if (typeof(data) == 'string') {
       Storage.set('access_token', data);
-      BountySource.set_cached_user_info(null);
+      Bountysource.set_cached_user_info(null);
     } else {
       Storage.set('access_token', data.access_token);
-      BountySource.set_cached_user_info(data);
+      Bountysource.set_cached_user_info(data);
     }
   });
 
@@ -139,7 +139,7 @@ with (scope('Bountysource')) {
   define('make_payment', function(data, error_callback) {
     var callback = function(response) {
       if (response.meta.success) {
-        if (data.payment_method == 'personal') BountySource.set_cached_user_info(null);
+        if (data.payment_method == 'personal') Bountysource.set_cached_user_info(null);
         set_route(response.data.redirect_url);
       } else {
         error_callback(response.data.error);
@@ -351,6 +351,3 @@ with (scope('Bountysource')) {
     api('/user/fundraisers/' + fundraiser_id + '/updates/' + update_id, 'DELETE', callback);
   });
 }
-
-// legacy camel case support
-BountySource = scope.instance.Bountysource;

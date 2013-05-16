@@ -6,7 +6,7 @@ with (scope('Show', 'Fundraiser')) {
 
     render(fundraiser_div);
 
-    BountySource.get_fundraiser(fundraiser_id, function(response) {
+    Bountysource.get_fundraiser(fundraiser_id, function(response) {
       if (response.meta.success) {
         var fundraiser = response.data;
 

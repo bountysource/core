@@ -12,7 +12,7 @@ with (scope('TrackerPlugins', 'App')) {
   define('load_my_projects', function() {
     set('my_projects', 'Loading...');
 
-    BountySource.api('/project_relations', function(response) {
+    Bountysource.api('/project_relations', function(response) {
       if (response.meta.success) {
         set('my_projects', projects_table(response.data));
       } else {

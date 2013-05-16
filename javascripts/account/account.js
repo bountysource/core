@@ -10,7 +10,7 @@ with (scope('Account','App')) {
       target_div
     );
 
-    BountySource.basic_user_info(function(response) {
+    Bountysource.basic_user_info(function(response) {
       var info = response.data;
 
       // if filler data set to create account, delete out of info
@@ -83,7 +83,7 @@ with (scope('Account','App')) {
 
   define('update_account', function(form_data) {
     clear_message();
-    BountySource.update_account(form_data, function(response) {
+    Bountysource.update_account(form_data, function(response) {
       if (response.meta.success) {
         if (document.getElementById('account-incomplete-message')) render({ into: 'account-incomplete-message' }, '');
         render_message(success_message('Account updated!'));

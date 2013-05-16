@@ -6,7 +6,7 @@ with (scope('Issue', 'App')) {
     render(target_div);
 
 
-    BountySource.get_tracker(tracker_id, function(response) {
+    Bountysource.get_tracker(tracker_id, function(response) {
       if (!response.meta.success) {
         render({ into: target_div }, error_message(response.data.error));
       } else {
@@ -24,7 +24,7 @@ with (scope('Issue', 'App')) {
         );
       }
 
-      BountySource.get_issues(tracker_id, function(response) {
+      Bountysource.get_issues(tracker_id, function(response) {
         if (!response.meta.success) {
           render({ into: new_target_div }, error_message(response.data.error));
         } else {

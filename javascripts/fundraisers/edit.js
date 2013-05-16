@@ -139,7 +139,7 @@ with (scope('Edit', 'Fundraiser')) {
       target_div
     );
 
-    BountySource.get_fundraiser(fundraiser_id, function(response) {
+    Bountysource.get_fundraiser(fundraiser_id, function(response) {
       if (response.meta.success) {
         var fundraiser = response.data;
 
@@ -473,7 +473,7 @@ with (scope('Edit', 'Fundraiser')) {
   define('update_reward', function(fundraiser, reward, data) {
     render({ target: 'reward-row-'+reward.id+'-errors' },'');
 
-    BountySource.update_reward(fundraiser.id, reward.id, data, function(response) {
+    Bountysource.update_reward(fundraiser.id, reward.id, data, function(response) {
       if (response.meta.success) {
         remove_class(document.getElementById('reward-row-'+reward.id), 'active');
         render({ target: 'reward-row-'+response.data.id+'-info' }, reward_info(response.data));
@@ -486,7 +486,7 @@ with (scope('Edit', 'Fundraiser')) {
   define('create_reward', function(fundraiser, data) {
     render({ target: 'create-reward-errors' },'');
 
-    BountySource.create_reward(fundraiser.id, data, function(response) {
+    Bountysource.create_reward(fundraiser.id, data, function(response) {
       if (response.meta.success) {
         insert_reward_row(fundraiser, response.data);
         document.getElementById('rewards-create').reset();
@@ -499,7 +499,7 @@ with (scope('Edit', 'Fundraiser')) {
   define('destroy_reward', function(fundraiser, reward) {
     render({ target: 'reward-row-'+reward.id+'-errors' }, '');
 
-    BountySource.destroy_reward(fundraiser.id, reward.id, function(response) {
+    Bountysource.destroy_reward(fundraiser.id, reward.id, function(response) {
       if (response.meta.success) {
         // remove the reward row
         var reward_row = document.getElementById('reward-row-'+reward.id);
@@ -513,7 +513,7 @@ with (scope('Edit', 'Fundraiser')) {
   define('update_fundraiser', function(fundraiser, data) {
     render({ into: Edit.errors_div }, '');
 
-    BountySource.update_fundraiser(fundraiser.id, data, function(response) {
+    Bountysource.update_fundraiser(fundraiser.id, data, function(response) {
       if (response.meta.success) {
         var fundraiser = response.data;
 
@@ -542,7 +542,7 @@ with (scope('Edit', 'Fundraiser')) {
     if (confirm('Are you sure? Once published, you cannot change the funding goal or duration.')) {
       // Fake a page view for Analytics
       _gaq.push([fundraiser.frontend_edit_path + '/publish']);
-      BountySource.publish_fundraiser(fundraiser.id, function(response) {
+      Bountysource.publish_fundraiser(fundraiser.id, function(response) {
         if (response.meta.success) {
           set_route('#account/fundraisers');
         } else {
@@ -565,7 +565,7 @@ with (scope('Edit', 'Fundraiser')) {
 
   define('destroy_fundraiser', function(fundraiser_id) {
     if (confirm('Are you sure? It will be gone forever!')) {
-      BountySource.destroy_fundraiser(fundraiser_id, function(response) {
+      Bountysource.destroy_fundraiser(fundraiser_id, function(response) {
         if (response.meta.success) {
           window.location.reload();
         } else {

@@ -12,7 +12,7 @@ with (scope('UserNav', 'App')) {
 
     render({ into: UserNav._wrapper }, div({ style: "padding: 5px; color: black;" }, 'Loading...'));
 
-    BountySource.user_info(function(response) {
+    Bountysource.user_info(function(response) {
       var user = response.data;
 
       var show_pennies = user.account.balance && user.account.balance.toString().split('.').length > 1;
@@ -25,7 +25,7 @@ with (scope('UserNav', 'App')) {
           li(a({ href: '#contributions' },              'Contributions')),
           li(a({ href: '#solutions' },                  'Solutions')),
           li(a({ href: '#account' },                    'Account')),
-          li(a({ href: BountySource.logout },           'Logout'))
+          li(a({ href: Bountysource.logout },           'Logout'))
         )
       );
 

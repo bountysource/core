@@ -11,7 +11,7 @@ with (scope('Index', 'Fundraiser')) {
       fundraisers_table
     );
 
-    BountySource.get_fundraisers(function(response) {
+    Bountysource.get_fundraisers(function(response) {
       if (response.data.length > 0) {
         render({ into: fundraisers_table },
           messages(),
@@ -55,7 +55,7 @@ with (scope('Index', 'Fundraiser')) {
 
   define('destroy_fundraiser', function(fundraiser_id) {
     if (confirm('Are you sure? It will be gone forever!')) {
-      BountySource.destroy_fundraiser(fundraiser_id, function(response) {
+      Bountysource.destroy_fundraiser(fundraiser_id, function(response) {
         if (response.meta.success) {
           window.location.reload();
         } else {
