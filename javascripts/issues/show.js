@@ -153,6 +153,7 @@ with (scope('Show', 'Issue')) {
             ),
 
             h4("Disputed Filed"),
+            div({ id: 'dispute-alerts' }),
             disputes_table,
             p("To join the discussion regarding disputes, refer to the ", a({ href: issue.url, target: '_blank' }, "issue comments"))
           );
@@ -163,13 +164,21 @@ with (scope('Show', 'Issue')) {
               tr(
                 th({ style: 'width: 100px;' }),
                 th(),
-                th({ style: 'width: 75px; text-align: center;' })
+                th({ style: 'width: 100px; text-align: center;' })
               ),
               response.data.map(function(dispute) {
                 var row = tr(
                   td('Dispute #' + dispute.number),
                   td(dispute.body),
-                  td({ style: 'text-align: center;' }, dispute.closed ? 'Resolved' : 'Unresolved')
+                  td({ style: 'text-align: center;' },
+                    div(dispute.closed ? 'Resolved' : 'Unresolved'),
+
+                    // logged in person filed the dispute? show close button
+                    (dispute.owner && !dispute.closed) && div(
+                      br,
+                      button({ onClick: curry(close_dispute, solution, dispute) }, 'Close Dispute')
+                    )
+                  )
                 );
 
                 // strikethrough resolved disputes
@@ -291,5 +300,22 @@ with (scope('Show', 'Issue')) {
         render({ target: 'developer-box-messages' }, error_message(response.data.error));
       }
     });
+  });
+
+  define('close_dispute', function(solution, dispute) {
+    if (confirm('Are you sure you want to close your dispute?')) {
+      render({ target: 'dispute-alerts' }, '');
+
+      Bountysource.api('/issues/'+solution.issue.id+'/solutions/'+solution.id+'/disputes/'+dispute.number+'/close', 'POST', function(response) {
+
+        console.log(response);
+
+        if (response.meta.success) {
+          set_route(solution.issue.frontend_path);
+        } else {
+          render({ target: 'dispute-alerts' }, error_message(response.data.error));
+        }
+      });
+    }
   });
 }
