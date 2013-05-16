@@ -53,18 +53,18 @@ with (scope('Repository')) {
               h3({ 'class': 'orange-line' }, 'Active Bounties')
             ),
 
-            repo.watchers && [
+            (repo.watchers > 0) && [
               h2(formatted_number(repo.watchers)),
               h3({ 'class': 'blue-line' }, 'Followers')
             ],
 
 
-            repo.forks && [
+            (repo.forks > 0) && [
               h2(formatted_number(repo.forks)),
               h3({ 'class': 'blue-line' }, 'Forks')
             ],
 
-            repo.bounteous_issues_count && div(
+            (repo.bounteous_issues_count > 0) && div(
               h2(formatted_number(repo.bounteous_issues_count)),
               h3({ 'class': 'blue-line' }, 'Issues with Bounties')
             )
