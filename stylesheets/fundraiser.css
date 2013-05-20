@@ -245,26 +245,3 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
   height: 24px;
   height: 24px;
 }
-
-/* Backer Leaderboard */
-table#fundraiser-leaderboard {}
-table#fundraiser-leaderboard tr td > * {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 2px 0;
-}
-
-table#fundraiser-leaderboard tr td img {
-  width: 25px;
-  height: 25px;
-  border-radius: 2px;
-}
-
-table#fundraiser-leaderboard tr:nth-child(1) > * { font-size: 130%; }
-/*table#fundraiser-leaderboard tr:nth-child(2) > * { font-size: 120%; }*/
-/*table#fundraiser-leaderboard tr:nth-child(3) > * { font-size: 110%; }*/
-
-table#fundraiser-leaderboard tr:nth-child(1) td img { width: 40px; height: 40px }
-/*table#fundraiser-leaderboard tr:nth-child(2) td img { width: 35px; height: 35px }*/
-/*table#fundraiser-leaderboard tr:nth-child(3) td img { width: 30px; height: 30px }*/
-

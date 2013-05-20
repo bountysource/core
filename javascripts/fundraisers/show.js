@@ -149,9 +149,9 @@ with (scope('Show', 'Fundraiser')) {
         ),
 
         // leaderboard of top 5 backers!
-        p({ style: 'font-size: 22px; margin: 30px 0 15px 0; padding: 0;' }, 'Top Backers'),
+        p({ style: 'margin: 15px 0 10px 0; padding: 0;' }, 'Top Pledges:'),
 
-        table({ id: 'fundraiser-leaderboard' },
+        table({ 'class': 'leaderboard', style: 'margin-bottom: 5px;' },
           fundraiser.pledges.slice(0,3).map(function(pledge) {
             return tr(
               td({ style: 'width: 30px; text-align: center;' }, a({ href: pledge.person.frontend_path }, img({ src: pledge.person.avatar_url }))),

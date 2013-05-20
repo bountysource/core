@@ -1,0 +1,19 @@
+/* Backer Leaderboard */
+table.leaderboard {
+  background: rgb(231, 255, 231);
+  border: 1px solid rgb(226, 226, 226);
+}
+table.leaderboard tr td > * { color: black; }
+
+table.leaderboard tr td img {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 2px 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+table.leaderboard tr:nth-child(1) > * { font-size: 120%; }
+table.leaderboard tr:nth-child(1) td img { width: 30px; height: 30px; }
+
