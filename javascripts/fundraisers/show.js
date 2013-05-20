@@ -148,6 +148,19 @@ with (scope('Show', 'Fundraiser')) {
           )
         ),
 
+        // leaderboard of top 5 backers!
+        p({ style: 'font-size: 22px; margin: 30px 0 15px 0; padding: 0;' }, 'Top Backers'),
+
+        table({ id: 'fundraiser-leaderboard' },
+          fundraiser.pledges.slice(0,3).map(function(pledge) {
+            return tr(
+              td({ style: 'width: 30px; text-align: center;' }, a({ href: pledge.person.frontend_path }, img({ src: pledge.person.avatar_url }))),
+              td(a({ href: pledge.person.frontend_path }, pledge.person.display_name)),
+              td({ style: 'text-align: right;' }, money(pledge.amount))
+            )
+          })
+        ),
+
         (fundraiser.rewards.length > 0) && section({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px; width: 100%;' },
           fundraiser.rewards.map(function(reward) {
             var reward_row_element = div(
