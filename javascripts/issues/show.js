@@ -74,9 +74,6 @@ with (scope('Show', 'Issue')) {
 
             table({ 'class': 'leaderboard', style: 'margin-bottom: 5px;' },
               issue.bounties.slice(0,3).map(function(bounty) {
-
-                console.log(bounty);
-
                 return tr(
                   td({ style: 'width: 30px; text-align: center;' }, a({ href: bounty.person.frontend_path }, img({ src: bounty.person.image_url }))),
                   td(a({ href: bounty.person.frontend_path }, bounty.person.display_name)),
