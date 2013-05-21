@@ -67,7 +67,7 @@ with (scope('Show', 'Issue')) {
           Columns.side(
             issue.can_add_bounty && bounty_box(issue),
 
-            issue.bounties.length > 0 && div(
+            issue.bounties.length > 0 && div({ style: 'margin: 15px;' },
               // leaderboard of top 5 backers!
               // always show that shit homie
               p({ style: 'margin: 15px 0 10px 15px; padding: 0;' }, 'Top Bounties:'),
