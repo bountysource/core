@@ -105,9 +105,6 @@ with (scope('Tag', 'App')) {
 
   define('inline_for_item', function() {
     init(arguments);
-
-    console.log('something');
-
     if (Tag.tag_relations) {
       return div({ id: 'inline-tags' },
         item.tags.map(function(tag) { return inline_tag(tag) }),
