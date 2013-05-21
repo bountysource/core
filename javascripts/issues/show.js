@@ -81,7 +81,7 @@ with (scope('Show', 'Issue')) {
                   )
                 })
               )
-            )
+            ),
 
             (issue.bounty_total > 0 && !issue.accepted_solution) && DeveloperBox.create(issue)
           )
