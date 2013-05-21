@@ -44,6 +44,7 @@ with (scope('Tag', 'App')) {
           div(
             img({ src: tag.image_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, tag.name),
+            p('Tagged in ' + formatted_number(tag.count) + ' projects with ' + formatted_number(tag.weight) + ' total points'),
             div({ style: 'clear: both' })
           ),
 
