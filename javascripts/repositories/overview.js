@@ -34,6 +34,13 @@ with (scope('Repository')) {
             div({ style: 'clear: both' })
           ),
 
+          div({ style: 'margin: 10px 0;' },
+            Tag.inline_for_item({
+              item: repo,
+              api_path: '/trackers/'+repo.id+'/tags'
+            })
+          ),
+
           issue_table({ header_class: 'thick-line-green' }, "Largest Bounties", repo.issues_valuable),
           issue_table({ header_class: 'thick-line-green' }, "Featured", repo.issues_featured),
           issue_table({ header_class: 'thick-line-blue' }, "Popular", repo.issues_popular),

@@ -31,10 +31,10 @@ a.card { text-decoration: none; }
 /*************************
   Card Rows
 *************************/
-#homepage #card-rows-container > *.card-row-wrapper {
+#card-rows-container > *.card-row-wrapper {
   margin-bottom: 10px;
 }
-#homepage #card-rows-container > *.card-row-wrapper:last-of-type {
+#card-rows-container > *.card-row-wrapper:last-of-type {
   margin-bottom: 0;
 }
 .card-row {
@@ -60,13 +60,13 @@ a.card { text-decoration: none; }
 /*************************
   Card Row Header
 *************************/
-#homepage .card-row.header {
+.card-row.header {
   padding: 0;
   text-align: center;
   background: #F2F3F2;
   border-bottom: 0;
 }
-#homepage .card-row.header .card-nav-title {
+.card-row.header .card-nav-title {
   display: inline-block;
   vertical-align: middle;
   font-size: 16px;
@@ -75,7 +75,7 @@ a.card { text-decoration: none; }
   width: 790px;
 }
 /* nav buttons */
-#homepage .card-row.header .card-nav-button {
+.card-row.header .card-nav-button {
   text-align: center;
   background: #E4E4E4;
   width: 100px;
@@ -93,23 +93,23 @@ a.card { text-decoration: none; }
   -ms-user-select: none;
   user-select: none;
 }
-#homepage .card-row.header .card-nav-button:hover { background: #e0e0e0; }
-#homepage .card-row.header .card-nav-button.disabled {
+.card-row.header .card-nav-button:hover { background: #e0e0e0; }
+.card-row.header .card-nav-button.disabled {
   opacity: 0.25;
   cursor: default;
 }
-#homepage .card-row.header .card-nav-button.disabled.hover { background: inherit; }
-#homepage .card-row.header .card-nav-button div {
+.card-row.header .card-nav-button.disabled.hover { background: inherit; }
+.card-row.header .card-nav-button div {
   font-size: 30px;
   padding: 10px 0;
   color: grey;
 }
-#homepage .card-row.header .card-nav-button.next {
+.card-row.header .card-nav-button.next {
   display: inline-block;
   vertical-align: middle;
   border-left: 1px solid #D1D1D1;
 }
-#homepage .card-row.header .card-nav-button.previous {
+.card-row.header .card-nav-button.previous {
   display: inline-block;
   vertical-align: middle;
   border-right: 1px solid #D1D1D1;
