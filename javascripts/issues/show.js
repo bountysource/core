@@ -67,20 +67,21 @@ with (scope('Show', 'Issue')) {
           Columns.side(
             issue.can_add_bounty && bounty_box(issue),
 
+            issue.bounties.length > 0 && div(
+              // leaderboard of top 5 backers!
+              // always show that shit homie
+              p({ style: 'margin: 15px 0 10px 15px; padding: 0;' }, 'Top Bounties:'),
 
-            // leaderboard of top 5 backers!
-            // always show that shit homie
-            p({ style: 'margin: 15px 0 10px 15px; padding: 0;' }, 'Top Bounties:'),
-
-            table({ 'class': 'leaderboard', style: 'margin-bottom: 5px;' },
-              issue.bounties.slice(0,3).map(function(bounty) {
-                return tr(
-                  td({ style: 'width: 30px; text-align: center;' }, a({ href: bounty.person.frontend_path }, img({ src: bounty.person.image_url }))),
-                  td(a({ href: bounty.person.frontend_path }, bounty.person.display_name)),
-                  td({ style: 'text-align: right;' }, money(bounty.amount))
-                )
-              })
-            ),
+              table({ 'class': 'leaderboard', style: 'margin-bottom: 5px;' },
+                issue.bounties.slice(0,3).map(function(bounty) {
+                  return tr(
+                    td({ style: 'width: 30px; text-align: center;' }, a({ href: bounty.person.frontend_path }, img({ src: bounty.person.image_url }))),
+                    td(a({ href: bounty.person.frontend_path }, bounty.person.display_name)),
+                    td({ style: 'text-align: right;' }, money(bounty.amount))
+                  )
+                })
+              )
+            )
 
             (issue.bounty_total > 0 && !issue.accepted_solution) && DeveloperBox.create(issue)
           )
