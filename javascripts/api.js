@@ -273,6 +273,10 @@ with (scope('BountySource')) {
     api('/user/solutions/'+id, 'DELETE', data, callback);
   });
 
+  define('delete_solution', function(id, callback) {
+    api('/user/solutions/'+id, 'DELETE', callback);
+  });
+
   define('submit_solution', function(id, callback) {
     api('/user/solutions/'+id+'/submit', 'POST', callback);
   });

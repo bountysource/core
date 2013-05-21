@@ -76,6 +76,18 @@ input[type='submit'].button {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6adfff', endColorstr='#2499c9',GradientType=0 );
 }
 
+.button.red {
+  border: 1px solid #7c2a1a;
+  background: #de5d44;
+  background: -moz-linear-gradient(top,  #de5d44 0%, #b04935 4%, #9e4130 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#de5d44), color-stop(4%,#b04935), color-stop(100%,#9e4130));
+  background: -webkit-linear-gradient(top,  #de5d44 0%,#b04935 4%,#9e4130 100%);
+  background: -o-linear-gradient(top,  #de5d44 0%,#b04935 4%,#9e4130 100%);
+  background: -ms-linear-gradient(top,  #de5d44 0%,#b04935 4%,#9e4130 100%);
+  background: linear-gradient(to bottom,  #de5d44 0%,#b04935 4%,#9e4130 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de5d44', endColorstr='#9e4130',GradientType=0 );
+}
+
 .button.gray, .button.grey {
   border: 1px solid #868686;
   background: #d3d3d3;
