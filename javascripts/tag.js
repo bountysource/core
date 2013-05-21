@@ -44,7 +44,7 @@ with (scope('Tag', 'App')) {
           div(
             img({ src: tag.image_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, tag.name),
-            p('Tagged in ' + formatted_number(tag.count) + ' projects with ' + formatted_number(tag.weight) + ' total point' + (tag.weight == 1 ? '' : 's')),
+            p('Tagged in ' + formatted_number(tag.count) + ' project' + (tag.count == 1 ? '' : 's') + '.'),
             div({ style: 'clear: both' })
           ),
 
@@ -53,19 +53,21 @@ with (scope('Tag', 'App')) {
           projects_div
         );
 
-        BountySource.api('/tags/'+name+'/projects', { per_page: 250 }, function(response) {
+        BountySource.api('/tags/'+name+'/projects', { per_page: 20 }, function(response) {
           if (response.meta.success && response.data.length > 0) {
             render({ into: projects_div },
               table(
                 tr(
                   th({ style: 'width: 50px; text-align: center;' }),
                   th({ style: 'width: 200px;' }),
+                  th({ style: 'text-align: center; width: 100px;' }, 'Bounty Total'),
                   th()
                 ),
                 response.data.map(function(project) {
                   return tr(
-                    td(a({ href: project.frontend_path }, img({ style: 'width: 45px; height: 45px; border-radius: 2px;', src: project.image_url }))),
+                    td(a({ href: project.frontend_path }, img({ style: 'display: inline-block; vertical-align: middle; padding: 3px 0; width: 45px; height: 45px; border-radius: 2px;', src: project.image_url }))),
                     td(a({ href: project.frontend_path }, project.name)),
+                    td({ style: 'text-align: center; width: 100px;' }, money(project.bounty_total)),
                     td(project.description)
                   );
                 })
