@@ -44,7 +44,7 @@ with (scope('Tag', 'App')) {
           div(
             img({ src: tag.image_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
             h2({ style: 'margin: 0 0 10px 0' }, tag.name),
-            p('Tagged in ' + formatted_number(tag.count) + ' projects with ' + formatted_number(tag.weight) + ' total points'),
+            p('Tagged in ' + formatted_number(tag.count) + ' projects with ' + formatted_number(tag.weight) + ' total point' + (tag.weight == 1 ? '' : 's')),
             div({ style: 'clear: both' })
           ),
 
@@ -53,13 +53,22 @@ with (scope('Tag', 'App')) {
           projects_div
         );
 
-        BountySource.api('/tags/'+name+'/projects', function(response) {
+        BountySource.api('/tags/'+name+'/projects', { per_page: 250 }, function(response) {
           if (response.meta.success && response.data.length > 0) {
-            var projects = response.data;
-
             render({ into: projects_div },
-              div({ id: 'card-rows-container' },
-                Home.cards_row('Projects', projects, Project.card)
+              table(
+                tr(
+                  th({ style: 'width: 50px; text-align: center;' }),
+                  th({ style: 'width: 200px;' }),
+                  th()
+                ),
+                response.data.map(function(project) {
+                  return tr(
+                    td(a({ href: project.frontend_path }, img({ style: 'width: 45px; height: 45px; border-radius: 2px;', src: project.image_url }))),
+                    td(a({ href: project.frontend_path }, project.name)),
+                    td(project.description)
+                  );
+                })
               )
             );
           } else {
@@ -95,6 +104,8 @@ with (scope('Tag', 'App')) {
   define('inline_for_item', function() {
     init(arguments);
 
+    console.log('something');
+
     if (Tag.tag_relations) {
       return div({ id: 'inline-tags' },
         item.tags.map(function(tag) { return inline_tag(tag) }),
@@ -108,8 +119,8 @@ with (scope('Tag', 'App')) {
 
     return div({ 'class': 'inline-tag', 'data-id': tag.id },
       a({ href: '#tags/'+tag.name }, tag.name), span({ style: 'font-size: 80%;' }, '(' + formatted_number(tag_relation.weight) + ')'),
-      a({ 'class': 'downvote', href: downvote_inline_tag_method(tag) }, '[-]'),
-      a({ 'class': 'upvote', href: upvote_inline_tag_method(tag) }, '[+]')
+      tag_relation.vote >= 0 && a({ 'class': 'downvote', href: downvote_inline_tag_method(tag) }, '[-]'),
+      tag_relation.vote <= 0 && a({ 'class': 'upvote', href: upvote_inline_tag_method(tag) }, '[+]')
     )
   });
 
