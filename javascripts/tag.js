@@ -107,6 +107,7 @@ with (scope('Tag', 'App')) {
     init(arguments);
     if (Tag.tag_relations) {
       return div({ id: 'inline-tags' },
+        div({ style: 'display: inline-block; vertical-align: middle;' }, 'Tags:'),
         item.tags.map(function(tag) { return inline_tag(tag) }),
         inline_create
       )
@@ -197,6 +198,7 @@ with (scope('Tag', 'App')) {
     // re-sort and render tags again
     sort_tag_relations();
     render({ target: 'inline-tags' },
+      div({ style: 'display: inline-block; vertical-align: middle;' }, 'Tags:'),
       Tag.tag_relations.map(function(tag_relation) { return inline_tag(tag_relation) }),
       inline_create
     );
@@ -209,12 +211,6 @@ with (scope('Tag', 'App')) {
       return 0;
     })
   });
-
-
-
-
-
-
 
   define('table_for_item', function() {
     init(arguments);
