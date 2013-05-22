@@ -14,7 +14,7 @@ with (scope('Tag', 'App')) {
           div({ id: 'inline-tags' },
             response.data.map(function(tag) {
               return div({ 'class': 'inline-tag' },
-                a({ href: '#tags/'+tag.name }, tag.name), span({ style: 'font-size: 80%;' }, '(' + formatted_number(tag.weight) + ')')
+                a({ href: '#tags/'+tag.name }, tag.name), span({ style: 'font-size: 80%;' }, '(' + formatted_number(tag.count) + ')')
               );
             })
           )
