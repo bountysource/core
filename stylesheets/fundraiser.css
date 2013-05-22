@@ -245,3 +245,29 @@ section#pledge-receipt-rewards > div#data-selected { background: #adff2f; border
   height: 24px;
   height: 24px;
 }
+
+/* Special form on fundraiser create page */
+form#fundraiser-create {}
+
+form#fundraiser-create input[type="text"] {
+  width: 400px;
+  height: 45px;
+  padding: 0 10px;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 3px;
+  margin-right: 15px;
+}
+form#fundraiser-create input[type="submit"] {
+  width: 150px;
+}
+
+/* expandable tips on fundraiser create page */
+#fundraiser-tips {
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: ease 500ms;
+  -moz-transition:    ease 500ms;
+  -o-transition:      ease 500ms;
+  transition:         ease 500ms;
+}
+#fundraiser-tips.active { height: 360px; }
