@@ -37,13 +37,19 @@ with (scope('Pledge', 'Fundraiser')) {
             fieldset(
               label('Pledge Amount:'),
               span({ style: 'font-size: 30px; vertical-align: middle; padding-right: 5px;' }, '$'),
-              input({ id: 'pledge-amount', style: 'width: 240px; display: inline-block;', autofocus: true, name: 'amount', placeholder: '25', value: params.amount||'' })
+              number({ required: true, min: 1, id: 'pledge-amount', style: 'width: 240px; display: inline-block;', autofocus: true, name: 'amount', placeholder: '25', value: params.amount||'' })
             ),
 
             // payment method selection
             fieldset(
               label('Payment Source:'),
-              Payment.payment_methods({ style: 'vertical-align: top;', value: params.payment_method })
+              Payment.payment_methods({ style: 'vertical-align: top;', value: params.payment_method }),
+
+              // anon checkbox
+              fieldset({ 'class': 'no-label', style: 'margin-top: 0;' },
+                checkbox({ id: 'anonymous', name: 'anonymous' }),
+                label({ 'for': 'anonymous', style: 'font-size: 12px; text-align: left;' }, 'Contribute anonymously')
+              )
             ),
 
             // rewards table
@@ -278,6 +284,7 @@ with (scope('Pledge', 'Fundraiser')) {
     }
 
     var payment_data = {
+      anonymous: form_data.anonymous,
       amount:  form_data.amount,
       payment_method: form_data.payment_method,
       item_number: 'fundraisers/' + fundraiser.id + (parseInt(form_data.reward_id) > 0 ? '/'+form_data.reward_id : ''),

@@ -282,10 +282,17 @@ with (scope('Show', 'Issue')) {
 
           div({ 'class': 'amount' },
             label({ 'for': 'amount-input' }, '$'),
-            text({ placeholder: "25", name: 'amount', id: 'amount-input', value: get_params().amount || '' })
+            number({ required: true, min: 5, placeholder: "25", name: 'amount', id: 'amount-input', value: get_params().amount || '' })
           ),
 
-          Payment.payment_methods({ style: 'margin: 10px 0;', value: get_params().payment_method }),
+          Payment.payment_methods({ style: 'margin-top: 10px;', value: get_params().payment_method }),
+
+          div({ style: 'margin-bottom: 15px; font-size: 12px;' },
+            fieldset(
+              checkbox({ id: 'anonymous', name: 'anonymous' }),
+              label({ 'for': 'anonymous' }, 'contribute anonymously')
+            )
+          ),
 
           submit({ 'class': 'button blue', style: 'width: 100%;' }, 'Create Bounty')
         )
@@ -295,6 +302,7 @@ with (scope('Show', 'Issue')) {
 
   define('create_bounty', function(issue, form_data) {
     var payment_data = {
+      anonymous: form_data.anonymous,
       amount: form_data.amount,
       payment_method: form_data.payment_method,
       item_number: 'issues/' + issue.id,
