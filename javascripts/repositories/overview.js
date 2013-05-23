@@ -34,6 +34,8 @@ with (scope('Repository')) {
             div({ style: 'clear: both' })
           ),
 
+          follow_project_button(repo),
+
           div({ style: 'margin: 10px 0;' },
             Tag.inline_for_item({
               item: repo,
@@ -114,60 +116,32 @@ with (scope('Repository')) {
     );
   });
 
+  define('follow_project_button', function(tracker) {
+    return div({ id: 'follow-button-container' }, tracker.followed ? unfollow_link_element(tracker) : follow_link_element(tracker));
+  });
 
-//  route('#repos/:login/:repository/donate', function(login, repository) {
-//
-//    var target_div = div('Loading...');
-//
-//    render(
-//      breadcrumbs(
-//        a({ href: '#' }, 'Home'),
-//        a({ href: '#repos/'+login+'/'+repository }, login + '/' + repository),
-//        "Donate"
-//      ),
-//
-//      target_div
-//    );
-//
-//    BountySource.get_repository_overview(login, repository, function(response) {
-//      if (!response.meta.success) return render({ into: target_div }, response.data.error || response.data.message);
-//
-//      var repo = response.data;
-//      render({ into: target_div },
-//        div({ 'class': 'split-main' },
-//          section({ id: 'faq' },
-//            dl(
-//              dt("Why should I donate?"),
-//              dd("When you donate to a project, you are making sure your money gets allocated to the project's most important issues."),
-//
-//              dt("Who gets this money?"),
-//              dd("The project's committers control all donations."),
-//
-//              dt("What can they do with it?"),
-//              dd("Committers use project donations to create bounties on issues within their own project.")
-//            )
-//          )
-//        ),
-//        div({ 'class': 'split-side' },
-//          donation_box(repo)
-//        ),
-//        div({ 'class': 'split-end' })
-//      );
-//    });
-//  });
-//
-//  define('donation_box', function(repo) {
-//    var payment_box_div = Payment.payment_box('Donation', repo, null, BountySource.www_host+Repository.get_href(repo));
-//
-//    return div({ id: 'bounty-box' },
-//      div({ style: 'padding: 0 21px' }, ribbon_header("Donate to Project")),
-//
-//      repo.account_balance > 0 && section(
-//        div({ 'class': 'total_bounties' }, money(repo.account_balance)),
-//        div({ style: 'text-align: center' }, "From ", repo.bounties.length, " backer" + (repo.bounties.length == 1 ? '' : 's') + ".")
-//      ),
-//      payment_box_div
-//    );
-//  });
+  define('follow_link_element', function(tracker) {
+    return a({ href: curry(follow_tracker, tracker) }, 'Follow');
+  });
+
+  define('unfollow_link_element', function(tracker) {
+    return a({ href: curry(unfollow_tracker, tracker) }, 'Unfollow');
+  });
+
+  define('follow_tracker', function(tracker) {
+    BountySource.api('/follows', 'PUT', { item_id: tracker.id, item_type: 'tracker' }, function(response) {
+      if (response.meta.success) {
+        render({ target: 'follow-button-container' }, unfollow_link_element(tracker));
+      }
+    });
+  });
+
+  define('unfollow_tracker', function(tracker) {
+    BountySource.api('/follows', 'DELETE', { item_id: tracker.id, item_type: 'tracker' }, function(response) {
+      if (response.meta.success) {
+        render({ target: 'follow-button-container' }, follow_link_element(tracker));
+      }
+    });
+  });
 
 }
