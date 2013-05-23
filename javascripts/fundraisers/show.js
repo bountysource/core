@@ -3,6 +3,7 @@ with (scope('Show', 'Fundraiser')) {
   // Note: fundraiser identifier will either be just an ID, or and ID with a concatenated title string
   route('#fundraisers/:fundraiser_id', function(fundraiser_id) {
     var fundraiser_div = div('Loading...');
+    var leaderboard_div = div('Loading...')
 
     render(fundraiser_div);
 
@@ -30,6 +31,38 @@ with (scope('Show', 'Fundraiser')) {
 
   define('fundraiser_template', function(fundraiser, options) {
     options = options || {};
+
+    var leaderboard_div = div('Loading...');
+
+    // leaderboard of top 3 pledges
+    BountySource.api('/user/fundraisers/'+fundraiser.id+'/pledges', 'GET', function(response) {
+      if (response.meta.success) {
+        render({ into: leaderboard_div },
+          p({ style: 'margin: 15px 0 10px 0; padding: 0;' }, 'Top Pledges:'),
+
+          table({ 'class': 'leaderboard', style: 'margin-bottom: 5px;' },
+            response.data.slice(0,3).map(function(pledge) {
+
+              // if person anon, show dunny stuffs
+              if (pledge.person) {
+                return tr(
+                  td({ style: 'width: 30px; text-align: center;' }, a({ href: pledge.person.frontend_path }, img({ src: pledge.person.image_url }))),
+                  td(a({ href: pledge.person.frontend_path }, pledge.person.display_name)),
+                  td({ style: 'text-align: right;' }, money(pledge.amount))
+                )
+              } else {
+                return tr(
+                  td({ style: 'width: 30px; text-align: center;' }, img({ src: 'images/mystery-man.jpg' })),
+                  td('Anonymous'),
+                  td({ style: 'text-align: right;' }, money(pledge.amount))
+                )
+              }
+            })
+          )
+        );
+      }
+    });
+
 
     return section({ id: 'fundraiser-wrapper' },
       Columns.create({ show_side: true }),
@@ -162,20 +195,8 @@ with (scope('Show', 'Fundraiser')) {
           )
         ),
 
-        fundraiser.pledges.length > 0 && div(
-          // leaderboard of top 5 backers!
-          p({ style: 'margin: 15px 0 10px 0; padding: 0;' }, 'Top Pledges:'),
-
-          table({ 'class': 'leaderboard', style: 'margin-bottom: 5px;' },
-            fundraiser.pledges.slice(0,3).map(function(pledge) {
-              return tr(
-                td({ style: 'width: 30px; text-align: center;' }, a({ href: pledge.person.frontend_path }, img({ src: pledge.person.avatar_url }))),
-                td(a({ href: pledge.person.frontend_path }, pledge.person.display_name)),
-                td({ style: 'text-align: right;' }, money(pledge.amount))
-              )
-            })
-          )
-        ),
+        // render leaderboard if there are pledges
+        fundraiser.pledge_count > 0 && leaderboard_div,
 
         (fundraiser.rewards.length > 0) && section({ id: 'fundraiser-rewards', style: 'background: #EEE; margin: 10px 0; border-radius: 3px; width: 100%;' },
           fundraiser.rewards.map(function(reward) {

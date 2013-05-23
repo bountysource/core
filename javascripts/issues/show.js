@@ -75,8 +75,12 @@ with (scope('Show', 'Issue')) {
               table({ 'class': 'leaderboard', style: 'margin-bottom: 5px;' },
                 issue.bounties.slice(0,3).map(function(bounty) {
                   return tr(
-                    td({ style: 'width: 30px; text-align: center;' }, a({ href: bounty.person.frontend_path }, img({ src: bounty.person.image_url }))),
-                    td(a({ href: bounty.person.frontend_path }, bounty.person.display_name)),
+                    bounty.person && td({ style: 'width: 30px; text-align: center;' }, a({ href: bounty.person.frontend_path }, img({ src: bounty.person.image_url }))),
+                    !bounty.person && td({ style: 'width: 30px; text-align: center;' }, img({ src: 'images/mystery-man.jpg' })),
+
+                    bounty.person && td(a({ href: bounty.person.frontend_path }, bounty.person.display_name)),
+                    !bounty.person && td('Anonymous'),
+
                     td({ style: 'text-align: right;' }, money(bounty.amount))
                   )
                 })
