@@ -52,8 +52,12 @@ with (scope('BountySource')) {
     set_route('#', { reload_page: true });
   });
 
-  define('user_info', function(callback) {
-    api('/user', callback);
+  define('user_info', function(callback, dont_redirect_to_signin) {
+    var non_auth_callback = dont_redirect_to_signin ? function(){} : function() {
+      Storage.clear({ except: ['environment'] });
+      set_route(get_route(), { reload_page: true });
+    };
+    api('/user', callback, non_auth_callback);
   });
 
   define('set_access_token', function(data) {
