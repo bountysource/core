@@ -97,6 +97,20 @@ with (scope('Show', 'Fundraiser')) {
 
         div({ style: 'border-bottom: 2px dotted #E4E4E4;' }),
 
+        // show the latest update
+        fundraiser.updates.length > 0 && div({ 'class': 'gfm', style: 'padding: 0; margin: 10px 0;' },
+          strong('Updates from the fundraiser creator, ', a({ href: fundraiser.person.frontend_path }, fundraiser.person.display_name)),
+          table(
+            fundraiser.updates.map(function(update) {
+              return tr(
+                td("Update #" + update.number + " (" + formatted_date(update.published_at) + "): ", a({ href: update.frontend_path }, update.title))
+              )
+            })
+          ),
+
+          div({ style: 'border-bottom: 2px dotted #E4E4E4;' })
+        ),
+
         div({
           id: 'fundraiser-description',
           'class': 'markdown',
