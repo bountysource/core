@@ -29,12 +29,12 @@ with (scope('Repository')) {
         Columns.main(
           section(
             img({ src: repo.image_url, style: 'width: 75px; height: 75px; vertical-align: middle; margin-right: 10px; float: left'}),
-            h2({ style: 'margin: 0 0 10px 0' }, repo.name),
+            h2({ style: 'margin: 0 0 10px 0; display: inline-block; vertical-align: middle;' }, repo.name),
+            span({ style: 'margin-left: 10px;' }, follow_project_button(repo)),
+            br,
             repo.description && span(repo.description),
             div({ style: 'clear: both' })
           ),
-
-          follow_project_button(repo),
 
           div({ style: 'margin: 10px 0;' },
             Tag.inline_for_item({
@@ -117,15 +117,23 @@ with (scope('Repository')) {
   });
 
   define('follow_project_button', function(tracker) {
-    return div({ id: 'follow-button-container' }, tracker.followed ? unfollow_link_element(tracker) : follow_link_element(tracker));
+    return div({ style: 'display: inline-block; vertical-align: top;', id: 'follow-button-container' }, tracker.followed ? unfollow_link_element(tracker) : follow_link_element(tracker));
   });
 
   define('follow_link_element', function(tracker) {
-    return a({ href: curry(follow_tracker, tracker) }, 'Follow');
+    return a({
+      href: curry(follow_tracker, tracker),
+      style: 'display: inline-block; vertical-align: middle; padding: 0; width: 60px; font-size: 12px; text-decoration: none;',
+      'class': 'button grey'
+    }, 'Follow');
   });
 
   define('unfollow_link_element', function(tracker) {
-    return a({ href: curry(unfollow_tracker, tracker) }, 'Unfollow');
+    return a({
+      href: curry(unfollow_tracker, tracker),
+      style: 'display: inline-block; vertical-align: middle; padding: 0; width: 60px; font-size: 12px; text-decoration: none;',
+      'class': 'button green'
+    }, 'Follow');
   });
 
   define('follow_tracker', function(tracker) {
