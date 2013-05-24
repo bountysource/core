@@ -58,7 +58,7 @@ with (scope('Faq', 'App')) {
               ol(
                 li('Users fund bounties on open issues or feature requests they want to see addressed.'),
                 li('These users spread the word about the bounty, enticing developers to create a solution.'),
-                li('Developers create solutions and submit them on BountySource.'),
+                li('Developers create solutions and submit them on Bountysource.'),
                 li('Bountysource tracks these solutions, sees which one gets accepted by the open-source project, and then pays the bounty to the developer.')
                 //li('Learn more...')
               )
