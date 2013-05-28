@@ -38,7 +38,9 @@ with (scope('Show', 'Issue')) {
             // if issue is closed, add line-through
             h1({ id: 'issue-title' },
               div(Issue.status_element(issue)),
-              div({ style: !issue.can_add_bounty ? 'text-decoration: line-through;' : '' }, (issue.number  ? '#' + issue.number + ': ' : '') + issue.title)
+              div({ style: 'width: 592px;' },
+                div({ style: !issue.can_add_bounty ? 'text-decoration: line-through;' : '' }, (issue.number  ? '#' + issue.number + ': ' : '') + issue.title)
+              )
             ),
 
             // show status of the submitted solution
