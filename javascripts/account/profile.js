@@ -21,7 +21,7 @@ with (scope('Profile','App')) {
 
             profile.location && p(profile.location),
             profile.public_email && p(a({ href: 'mailto:'+profile.public_email }, profile.public_email)),
-            profile.url && p(a({ href: profile.url }, profile.url)),
+            profile.url && p(a({ href: profile.url, target: '_blank' }, profile.url)),
 
             h4('Linked Accounts'),
             profile.github_account && div({ 'class': 'profile-linked-account' },

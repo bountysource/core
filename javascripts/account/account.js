@@ -11,11 +11,15 @@ with (scope('Account','App')) {
     );
 
     BountySource.basic_user_info(function(response) {
-      var info = response.data;
+      var person = response.data;
+
+
+      console.log(person);
+
 
       // if filler data set to create account, delete out of info
       // so that the 'complete your profile' message shows up
-      for (k in info) if (info[k] == '__undefined__') delete info[k];
+      for (k in person) if (person[k] == '__undefined__') delete person[k];
 
       render({ into: target_div },
 
@@ -25,47 +29,60 @@ with (scope('Account','App')) {
           form({ 'class': 'fancy', action: update_account },
             messages(),
 
+            fieldset({ 'class': 'no-label' },
+              h3('Account Details')
+            ),
+
             fieldset(
               label('First Name:'),
-              text({ name: 'first_name', placeholder: 'John', value: (info.first_name||'') })
+              text({ name: 'first_name', placeholder: 'John', value: (person.first_name||'') })
             ),
             fieldset(
               label('Last Name:'),
-              text({ name: 'last_name', placeholder: 'Doe', value: (info.last_name||'') })
+              text({ name: 'last_name', placeholder: 'Doe', value: (person.last_name||'') })
             ),
             fieldset(
               label('Display Name:'),
-              text({ name: 'display_name', placeholder: 'johndoe42', value: (info.display_name||'') })
+              text({ name: 'display_name', placeholder: 'johndoe42', value: (person.display_name||'') })
             ),
             fieldset(
               label('Email:'),
-              text({ 'class': 'long', name: 'email', placeholder: 'john.doe@gmail.com', value: (info.email||'') })
+              text({ 'class': 'long', name: 'email', placeholder: 'john.doe@gmail.com', value: (person.email||'') })
             ),
 
-            br,
+            fieldset({ 'class': 'no-label' },
+              h3('Public Profile')
+            ),
 
             fieldset(
               label('Public Email:'),
-              email({ 'class': 'long', name: 'public_email', placeholder: 'john.doe@gmail.com', value: (info.gravatar_email||'') })
+              email({ 'class': 'long', name: 'public_email', placeholder: 'john.doe@gmail.com', value: (person.public_email||'') })
             ),
             fieldset(
               label('Location:'),
-              text({ 'class': 'long', name: 'location', placeholder: 'San Francisco, CA', value: (info.location||'') })
+              text({ 'class': 'long', name: 'location', placeholder: 'San Francisco, CA', value: (person.location||'') })
             ),
             fieldset(
               label('Company:'),
-              text({ 'class': 'long', name: 'company', placeholder: 'Dunder Mifflin', value: (info.company||'') })
+              text({ 'class': 'long', name: 'company', placeholder: 'Dunder Mifflin', value: (person.company||'') })
             ),
             fieldset(
               label('Website:'),
-              text({ 'class': 'long', name: 'url', placeholder: 'http://johndoe.net', value: (info.url||'') })
+              text({ 'class': 'long', name: 'url', placeholder: 'http://johndoe.net', value: (person.url||'') })
             ),
 
-            br,
+            fieldset({ 'class': 'no-label' },
+              h3('Gravatar Image')
+            ),
 
             fieldset(
               label('Gravatar Email:'),
-              email({ 'class': 'long', name: 'gravatar_email', placeholder: 'john.doe@gmail.com', value: (info.gravatar_email||'') })
+              email({ 'class': 'long', name: 'gravatar_email', placeholder: 'john.doe@gmail.com', value: (person.gravatar_email||'') })
+            ),
+
+            fieldset({ 'class': 'no-label' },
+              img({ src: person.image_url, style: 'width: 40px; height: 100%; vertical-align: middle; display: inline-block;' }),
+              a({ href: 'https://gravatar.com/', style: 'vertical-align: middle; margin-left: 15px;' }, 'Change image at Gravatar.com')
             ),
 
             fieldset({ 'class': 'no-label' },
@@ -75,13 +92,26 @@ with (scope('Account','App')) {
         ),
 
         Columns.side(
-          div({ style: 'background: #eee; padding: 0 21px 21px 21px;' }, ribbon_header('Account Settings'), br(),
-            a({ 'class': 'button blue', href: '#account/change_password' }, 'Change Password')
+          h3('Linked Accounts'),
+          person.github_account && div({ 'class': 'profile-linked-account' },
+            a({ href: 'https://github.com/'+person.github_account.login, target: '_blank' }, img({ src: 'images/github.png' })),
+            a({ href: 'https://github.com/'+person.github_account.login, target: '_blank' }, person.github_account.login)
           ),
 
-          br,
+          person.twitter_account && div({ 'class': 'profile-linked-account' },
+            a({ href: 'https://twitter.com/'+person.twitter_account.login, target: '_blank' }, img({ src: 'images/twitter.png' })),
+            a({ href: 'https://twitter.com/'+person.twitter_account.login, target: '_blank' }, person.twitter_account.login)
+          ),
 
-          div('TODO show all linked accounts')
+          person.facebook_account && div({ 'class': 'profile-linked-account' },
+            a({ href: 'https://facebook.com/'+person.facebook_account.login, target: '_blank' }, img({ src: 'images/facebook.png' })),
+            a({ href: 'https://facebook.com/'+person.facebook_account.login, target: '_blank' }, person.facebook_account.login)
+          ),
+
+          person.gittip_account && div({ 'class': 'profile-linked-account' },
+            a({ href: 'https://gittip.com/'+person.gittip_account.login, target: '_blank' }, img({ src: 'images/gittip.png' })),
+            a({ href: 'https://gittip.com/'+person.gittip_account.login, target: '_blank' }, person.gittip_account.login)
+          )
         )
       );
     });
