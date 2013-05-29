@@ -6,79 +6,91 @@ with (scope('Profile','App')) {
   route('#users/:profile_id', function(profile_id) {
     var target_div = ('Loading...');
 
-    render(
-      breadcrumbs(
-        a({ href: '#' }, 'Home'),
-        '...'
-      ),
-      target_div
-    );
+    render(target_div);
 
     BountySource.get_user_profile(profile_id, function(response) {
       if (response.meta.success) {
         var profile = response.data;
 
         render(
-          breadcrumbs(
-            a({ href: '#' }, 'Home'),
-            profile.display_name
+          div({ style: 'float: left; vertical-align: top; width: 25%;' },
+            img({ id: 'profile-avatar', src: profile.image_url }),
+            br,
+            div({ style: 'font-size: 25px; margin-top: 10px; text-align: center;' }, profile.display_name),
+            br,
+
+            profile.location && p(profile.location),
+            profile.public_email && p(a({ href: 'mailto:'+profile.public_email }, profile.public_email)),
+            profile.url && p(a({ href: profile.url }, profile.url)),
+
+            h4('Linked Accounts'),
+            profile.github_account && div({ 'class': 'profile-linked-account' },
+              a({ href: 'https://github.com/'+profile.github_account.login, target: '_blank' }, img({ src: 'images/github.png' })),
+              a({ href: 'https://github.com/'+profile.github_account.login, target: '_blank' }, profile.github_account.login)
+            ),
+
+            profile.twitter_account && div({ 'class': 'profile-linked-account' },
+              a({ href: 'https://twitter.com/'+profile.twitter_account.login, target: '_blank' }, img({ src: 'images/twitter.png' })),
+              a({ href: 'https://twitter.com/'+profile.twitter_account.login, target: '_blank' }, profile.twitter_account.login)
+            ),
+
+            profile.facebook_account && div({ 'class': 'profile-linked-account' },
+              a({ href: 'https://facebook.com/'+profile.facebook_account.login, target: '_blank' }, img({ src: 'images/facebook.png' })),
+              a({ href: 'https://facebook.com/'+profile.facebook_account.login, target: '_blank' }, profile.facebook_account.login)
+            ),
+
+            profile.gittip_account && div({ 'class': 'profile-linked-account' },
+              a({ href: 'https://gittip.com/'+profile.gittip_account.login, target: '_blank' }, img({ src: 'images/gittip.png' })),
+              a({ href: 'https://gittip.com/'+profile.gittip_account.login, target: '_blank' }, profile.gittip_account.login)
+            )
           ),
 
-          messages(),
+          div({ style: 'float: right; vertical-align: top; width: 70%;' },
 
-          div({ id: 'profile' },
-            div({ id: 'head' },
-              img({ id: 'avatar-url', src: profile.image_url, style: 'width: 80px; height: 80px; vertical-align: middle;' }),
-              span({ id: 'display-name', style: 'font-size: 40px; vertical-align: middle;' }, profile.display_name)
-            ),
+            // Activity feed
+            div({ style: 'font-size: 18px; font-weight: normal; margin-bottom: 15px;' }, 'What has ' + profile.display_name + ' been up to?'),
+            table(
+              profile.activity.map(function(data) {
 
-            div({ style: 'display: inline-block; width: 50%; vertical-align: top; padding: 10px;' },
-              div(
-                strong({ style: 'margin: 15px 0;' }, 'Joined: '), formatted_date(profile.created_at)
-              ),
-              profile.github_user && [
-                profile.github_user.location && div({ style: 'margin: 15px 0;' },
-                  strong('Location: '), span(profile.github_user.location)
-                ),
-                profile.github_user.company && div({ style: 'margin: 15px 0;' },
-                  strong('Company: '), span(profile.github_user.company)
-                ),
-                profile.github_user.bio && div({ style: 'margin: 15px 0;' },
-                  strong('Bio: '), span({ style: 'white-space: pre-wrap;' }, profile.github_user.bio)
-                ),
-                profile.github_user.followers && div({ style: 'margin: 15px 0'},
-                  strong('Followers: '), formatted_number(profile.github_user.followers)
-                ),
-                profile.github_user.following && div({ style: 'margin: 15px 0'},
-                  strong('Following: '), formatted_number(profile.github_user.following)
-                )
-              ]
-            ),
+                // build the body
+                var activity_content = p({ style: 'margin: 5px 0;' });
 
-            div({ style: 'display: inline-block; width: 45%; vertical-align: top;' },
-              (profile.fundraisers.length > 0) && div({ id: 'fundraisers' },
-                strong('Fundraisers Created'),
-                ul(
-                  profile.fundraisers.map(function(fundraiser) {
-                    return li(
-                      a({ href: fundraiser.frontend_path }, truncate(fundraiser.title, 120))
+                if (data.type == 'pledge') {
+                  render({ into: activity_content },
+                    span("Pledged ", money(data.amount), " to ", a({ href: data.target_path }, data.target_name)),
+                    span({ style: 'color: gray; font-style: italic; font-size: 80%; margin-left: 10px;' }, time_ago_in_words(data.created_at) + ' ago')
+                  );
+                } else if (data.type == 'bounty') {
+                  render({ into: activity_content },
+                    span("Placed a ", money(data.amount), " bounty on ", a({ href: data.target_path }, data.target_name)),
+                    span({ style: 'color: gray; font-style: italic; font-size: 80%; margin-left: 10px;' }, time_ago_in_words(data.created_at) + ' ago')
+                  );
+                } else if (data.type == 'tracker_plugin') {
+                  render({ into: activity_content },
+                    span("Installed the GitHub Plugin for ", a({ href: data.target_path }, data.target_name)),
+                    span({ style: 'color: gray; font-style: italic; font-size: 80%; margin-left: 10px;' }, time_ago_in_words(data.created_at) + ' ago')
+                  );
+                }
+
+                return tr(
+                  td({ style: 'width: 25px; text-align: center;' },
+                    a({ href: data.target_path },
+                      img({ src: data.image_url, style: 'width: 100%; margin: 5px 0; vertical-align: middle;' })
                     )
-                  })
-                )
-              ),
+                  ),
+                  td(activity_content)
+                );
+              }),
 
-              (profile.bounties.length > 0) && div({ id: 'bounties' },
-                strong('Bounties Placed'),
-                ul(
-                  profile.bounties.map(function(bounty) {
-                    return li(
-                      a({ href: bounty.issue.frontend_path }, truncate(bounty.issue.title, 120))
-                    )
-                  })
-                )
+              // joined at row always present
+              tr(
+                td({ style: 'width: 30px; text-align: center;' }, img({ src: 'images/bountysource-icon.png', style: 'width: 100%; vertical-align: middle;' })),
+                td(p('Joined the Bountysource family ' + formatted_date(profile.created_at)))
               )
             )
-          )
+          ),
+
+          div({ style: 'clear: both;' })
         );
       } else {
         render({ into: target_div }, error_message(response.data.error));
@@ -86,17 +98,8 @@ with (scope('Profile','App')) {
     });
   });
 
-  define('profile_info', function(info) {
-    return ul({ style: 'display: inline-block; vertical-align: middle; list-style-type: none; padding: 10px; margin-left: 15px; background: #eee; border-radius: 15px;' },
-      profile_info_li('Joined: ', strong(formatted_date(info.created_at))),
-      info.github_user.followers && [
-        profile_info_li('Followers: ', strong(formatted_number(info.github_user.followers))),
-        profile_info_li('Following: ', strong(formatted_number(info.github_user.following)))
-      ]
-    );
+  define('expand_content', function(id) {
+    var e = document.getElementById(id);
+    is_visible(e) ? hide(e) : show(e);
   });
-
-  define('profile_info_li', function() {
-    return li({ style: 'display: inline-block; padding: 0 15px;' }, arguments);
-  })
 }

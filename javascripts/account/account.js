@@ -23,36 +23,53 @@ with (scope('Account','App')) {
 
         Columns.main(
           form({ 'class': 'fancy', action: update_account },
-            h3('Bountysource Account'),
-
             messages(),
 
-            required_inputs(
-              fieldset(
-                label('First Name:'),
-                text({ name: 'first_name', placeholder: 'John', value: (info.first_name||'') })
-              ),
-              fieldset(
-                label('Last Name:'),
-                text({ name: 'last_name', placeholder: 'Doe', value: (info.last_name||'') })
-              ),
-              fieldset(
-                label('Display Name:'),
-                text({ name: 'display_name', placeholder: 'johndoe42', value: (info.display_name||'') })
-              ),
-              fieldset(
-                label('Email:'),
-                text({ 'class': 'long', name: 'email', placeholder: 'john.doe@gmail.com', value: (info.email||'') })
-              )
+            fieldset(
+              label('First Name:'),
+              text({ name: 'first_name', placeholder: 'John', value: (info.first_name||'') })
+            ),
+            fieldset(
+              label('Last Name:'),
+              text({ name: 'last_name', placeholder: 'Doe', value: (info.last_name||'') })
+            ),
+            fieldset(
+              label('Display Name:'),
+              text({ name: 'display_name', placeholder: 'johndoe42', value: (info.display_name||'') })
+            ),
+            fieldset(
+              label('Email:'),
+              text({ 'class': 'long', name: 'email', placeholder: 'john.doe@gmail.com', value: (info.email||'') })
             ),
 
-//            fieldset(
-//              label({ 'for': 'paypal_email' }, img({ style: 'display: inline-block; vertical-align: middle; margin-right: 5px;', src: 'images/paypal.png' }), span({ style: 'display: inline-block; vertical-align: middle;' }, 'Paypal Email:')),
-//              email({ id: 'paypal_email', 'class': 'long', name: 'paypal_email', placeholder: 'john.doe@gmail.com', value: info.paypal_email||'' })
-//            ),
+            br,
+
+            fieldset(
+              label('Public Email:'),
+              email({ 'class': 'long', name: 'public_email', placeholder: 'john.doe@gmail.com', value: (info.gravatar_email||'') })
+            ),
+            fieldset(
+              label('Location:'),
+              text({ 'class': 'long', name: 'location', placeholder: 'San Francisco, CA', value: (info.location||'') })
+            ),
+            fieldset(
+              label('Company:'),
+              text({ 'class': 'long', name: 'company', placeholder: 'Dunder Mifflin', value: (info.company||'') })
+            ),
+            fieldset(
+              label('Website:'),
+              text({ 'class': 'long', name: 'url', placeholder: 'http://johndoe.net', value: (info.url||'') })
+            ),
+
+            br,
+
+            fieldset(
+              label('Gravatar Email:'),
+              email({ 'class': 'long', name: 'gravatar_email', placeholder: 'john.doe@gmail.com', value: (info.gravatar_email||'') })
+            ),
 
             fieldset({ 'class': 'no-label' },
-              submit({ 'class': 'button green', style: 'width: 250px;' }, 'Update Bountysource Account')
+              submit({ 'class': 'button green', style: 'width: 250px;' }, 'Update Account')
             )
           )
         ),
@@ -62,20 +79,9 @@ with (scope('Account','App')) {
             a({ 'class': 'button blue', href: '#account/change_password' }, 'Change Password')
           ),
 
-          br(),
+          br,
 
-          // show GitHub account if logged in
-          div({ style: 'background: #eee; border: 1px solid #ccc; padding: 20px; text-align: center;' },
-            response.data.github_account ? [
-              h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin: 0 auto 15px auto; line-height: 25px;' }, 'GitHub Account Linked'),
-              img({ style: 'border: 1px solid #ccc; width: 80px;', src: response.data.github_account.avatar_url }),
-              br(),
-              span(response.data.github_account.login)
-            ] : [
-              h2({ style: 'text-transform: uppercase; color: #5e5f5f; font-size: 21px; text-align: center; font-weight: normal; margin: 0 auto 15px auto; line-height: 25px;' }, 'Have a GitHub Account?'),
-              a({ 'class': 'button blue', href: Github.auth_url() }, 'Link GitHub Account')
-            ]
-          )
+          div('TODO show all linked accounts')
         )
       );
     });
