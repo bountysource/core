@@ -82,6 +82,19 @@ with (scope('Account','App')) {
             ),
 
             fieldset({ 'class': 'no-label' },
+              h3('Settings')
+            ),
+
+            fieldset({ 'class': 'no-label' },
+              checkbox({
+                id: 'exclude_from_newsletter',
+                checked: !person.exclude_from_newsletter,
+                style: 'display: inline-block; vertical-align: middle; margin-right: 10px;'
+              }),
+              label({ 'for': 'exclude_from_newsletter', style: 'display: inline-block; vertical-align: middle; text-align: left; width: inherit; font-size: inherit;' }, "Receive the Bountysource newsletter")
+            ),
+
+            fieldset({ 'class': 'no-label' },
               submit({ 'class': 'button green', style: 'width: 250px;' }, 'Update Account')
             )
           )
@@ -114,6 +127,11 @@ with (scope('Account','App')) {
   });
 
   define('update_account', function(form_data) {
+
+    // append bool for exclude_from_newsletter input, because javascript sucks
+    var e = document.getElementById('exclude_from_newsletter');
+    form_data.exclude_from_newsletter = !e.checked;
+
     clear_message();
     BountySource.update_account(form_data, function(response) {
       if (response.meta.success) {
