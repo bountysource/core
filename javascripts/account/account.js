@@ -13,10 +13,6 @@ with (scope('Account','App')) {
     BountySource.basic_user_info(function(response) {
       var person = response.data;
 
-
-      console.log(person);
-
-
       // if filler data set to create account, delete out of info
       // so that the 'complete your profile' message shows up
       for (k in person) if (person[k] == '__undefined__') delete person[k];
