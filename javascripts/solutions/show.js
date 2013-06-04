@@ -60,7 +60,7 @@ with (scope('Show','Solution')) {
         );
 
         if (solution.accepted) {
-          render({ into: Show.target_div }, Payout.page_for_solution(solution));
+          render(Payout.page_for_solution(solution));
         } else if (solution.rejected) {
           render({ into: Show.target_div },
             h2('Solution Closed'),
