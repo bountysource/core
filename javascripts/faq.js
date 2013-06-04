@@ -98,7 +98,10 @@ with (scope('Faq', 'App')) {
             dd("The more developers there are working on issues within your project, the more code/solutions you will receive. You don't need to do anything out of the ordinary - just let your community know about the bounties, check for and merge code as normal, and we take care of the rest."),
 
             dt('I\'m worried about introducing money into my community.'),
-            dd("As long as you continue to accept or reject code based on its merit, there won't be any issues. The great thing about open-source is that, at the end of the day, it doesn't matter what someone's motivations are - code speaks for itself.")
+            dd("This is a valid and common hesitation. However, one of the main points of open-source software and making code public is to foster improvement. Regardless of someone's motivations, if quality code is being contributed to a project - due to a bounty or otherwise - there shouldn't be any issues.")
+            
+            //dt('Will introducing money into my community encourage people to hold features and fixes for "ransom"?'),
+            //dd("No. Issues are often addressed out of necessity. The addition of bounties on issues will encourage developers to solve problems they themselves don't need fixed. Bounties will also encourage new developers to contribute to your project.")
 
           ),
 
@@ -112,21 +115,34 @@ with (scope('Faq', 'App')) {
             dd("A bounty is money offered as a reward for successfully resolving an issue within an open-source project."),
 
             dt("Who can create a bounty?"),
-            dd("Anybody with a PayPal account. We’ll be supporting other payment methods (including Google Wallet and Bitcoins) very soon!"),
+            dd("Anybody with a PayPal account. We'll be supporting other payment methods (including Google Wallet and Bitcoins) very soon!"),
 
             dt("What can I put bounties on?"),
             dd("You can create bounties on any open issue within any open-source project."),
 
             dt("What does it cost to post a bounty?"),
-            dd("Nothing! We do not charge any fees for placing a bounty. However, you will be required to pay the full amount of the bounty in order for the bounty to show up on Bountysource."),
-
+            dd("Bountysource charges a 10% non-refundable fee for placing bounties in addition to the specific bounty amount. For example, to place a $50 bounty, you will be charged a total of $55."),
+            dd("You will be required to pay the full amount of the bounty in order for the bounty to show up on Bountysource."),
+            
+            dt("Does 100% of the bounty go to the developer?"),
+            dd("Yes. The developer who solves the issue will receive the full bounty displayed."),
+            
+            dt("Who can claim a bounty?"),
+            dd("Anybody who submits an accepted solution to us."),
+            
+            dt("When is a solution considered accepted?"),
+            dd("When project committers/maintainers merge the solution into the project and close out the underlying issue."),
+            
+            dt("What does it cost to claim a bounty?"),
+            dd("Nothing. The amount displayed as the bounty total is the exact amount a developer will receive upon payout."),
+            
             dt("Can several people put bounties on the same issue?"),
-            dd("Yes! That is ideal. A $10 bounty from 1 person might not be appealing, but a $200 bounty from 10 people might be."),
+            dd("Yes! That is ideal. A $50 bounty from 1 person might not be appealing, but a $2,000 bounty from 25 people might be."),
 
             dt("What happens after I post a bounty?"),
             dd("We'll let you know when a solution is accepted for an issue you've backed. At that point, you will have two weeks to verify that it does what you want it to before we pay the developer."),
 
-            dt("How can I keep track of all the bounties I’ve posted?"),
+            dt("How can I keep track of all the bounties I've posted?"),
             dd("You can view all of the issues you've backed via your ", a({ target: '_blank', href: 'https://www.bountysource.com/#contributions' }, "Contributions page"), '.'),
 
             dt("What if I'm unsatisfied with the solution to an issue I've backed?"),
@@ -138,14 +154,11 @@ with (scope('Faq', 'App')) {
             dt("An issue I've backed has been closed. When will the solution be made available to the public?"),
             dd("We have no control over when a project makes a new release. We award a bounty once code has been merged into the project. The rest is up to project owners and committers."),
 
-            dt("What happens if an issue I’ve backed is closed without a solution?"),
+            dt("What happens if an issue I've backed is closed without a solution?"),
             dd("If an issue with bounties is closed without a solution, all backers are refunded."),
             
-            dt("What happens if an issue I've backed is never closed?"),
-            dd("Every bounty has a six month time limit. If you backed an issue that is not closed within those six months, you will be refunded."),
-
-            dt("Does 100% of the bounty go to the developer?"),
-            dd("Upon payout, Bountysource will charge a 5% fee in addition to any payment processing fees. Our 5% will cover costs like servers, bandwidth, and other expenses."),
+            //dt("What happens if an issue I've backed is never closed?"),
+            //dd("Every bounty has a six month time limit. If you backed an issue that is not closed within those six months, you will be refunded."),
 
             dt("How do you know a project committer will accept any pull requests at all?"),
             dd("We don't guarantee this, but one of the main points of open-source software and making code public is to foster improvement. Committers are always monitoring pull requests, and they likely will accept any and all code they feel is of quality."),
@@ -158,9 +171,6 @@ with (scope('Faq', 'App')) {
 
             dt("How do I receive payment?"),
             dd("You can receive payment via Paypal or a physical check."),
-
-            dt("Who can collect a bounty?"),
-            dd("Anybody!"),
 
             dt("Do I have to pay taxes on bounties I collect?"),
             dd("If you are in the United States and payments made to you are more than $600 for the year, we are required to issue you a Form 1099 to report the payments, which will require you to complete a Form W-9. You should consult your tax advisor as to the taxability of the payments.")
@@ -178,12 +188,15 @@ with (scope('Faq', 'App')) {
 
             dt("Who can create a fundraiser?"),
             dd("Anybody!"),
-
-            dt("What do you charge upon completion?"),
-            dd("Bountysource charges a 5% fee plus payment processing fees."),
-
+            
+            dt("What does it cost to start a fundraiser?"),
+            dd("Nothing! Go ", a({ target: '_blank', href: 'https://www.bountysource.com/#account/create_fundraiser' }, "start one"), ' today.'),
+            
+            dt("Are there fees charged at the end of a fundraiser?"),
+            dd("Yes. There is a 10% fee on all pledges. If a fundraiser meets its goal, the fee is deducted from the amount raised. If unsuccessful, the fee is deducted from each backer's refund."),
+            
             dt("When do I get paid?"),
-            dd("We give you the money as soon as your goal is met. If you reach your funding goal before your fundraiser deadline, we’ll pay you the goal amount immediately, and give you all the excess once the fundraiser is over.")
+            dd("We usually make two payouts - the first payout happens when the fundraiser meets its goal and the second payout happens when the fundraiser expires (for all additional pledges made).")
 
           ),
 
