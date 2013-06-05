@@ -254,10 +254,8 @@ with (scope('App')) {
       var input_listener = function() {
         if (this.type == 'number' || this.type == 'text') {
           range_element.value = isNaN(parseInt(this.value)) ? 0 : this.value;
-          render({ target: display_element }, money(this.value / 100, true));
         } else if (this.type == 'range') {
           input_element.value = this.value;
-          render({ target: display_element }, money(this.value / 100, true));
         }
         this.dispatchEvent(SliderWithInput.change_event);
       }

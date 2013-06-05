@@ -70,18 +70,22 @@ with (scope('Payout','Solution')) {
 
       for (var i=0; i<slider_group.length; i++) {
         slider_group[i].addEventListener('SliderWithInputChange', function() {
-         var charity_total = parseInt(this.slider_group_sum);
+         var charity_total_pennies = parseInt(this.slider_group_sum);
 
-          if (charity_total < 0) charity_total = 0;
-          if (charity_total > bounty_total_pennies) charity_total = bounty_total_pennies;
+          if (charity_total_pennies < 0) charity_total_pennies = 0;
+          if (charity_total_pennies > bounty_total_pennies) charity_total_pennies = bounty_total_pennies;
 
-          var new_developer_cut = bounty_total_pennies - charity_total;
+          var new_developer_cut = bounty_total_pennies - charity_total_pennies;
 
           if (new_developer_cut < 0) new_developer_cut = 0;
           if (new_developer_cut > bounty_total_pennies) new_developer_cut = bounty_total_pennies;
 
-          render({ target: 'charity-total' }, money(charity_total / 100, true));
+          // update totals on this page
+          render({ target: 'charity-total' }, money(charity_total_pennies / 100, true));
           render({ target: 'developer-cut' }, money(new_developer_cut / 100, true));
+
+          // update this slider's displayed amount
+          render({ into: this.display_element }, money(this.range_element.value / 100, true));
         });
       }
 
