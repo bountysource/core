@@ -101,7 +101,7 @@ with (scope('Contributions', 'App')) {
       href: curry(publicize_pledge, pledge),
       style: 'display: inline-block; vertical-align: middle; padding: 0; width: 80px; font-size: 12px; text-decoration: none;',
       'class': 'button grey'
-    }, 'Public');
+    }, 'Make Public');
   });
 
   define('unpublicize_pledge_link_element', function(pledge) {
@@ -109,7 +109,7 @@ with (scope('Contributions', 'App')) {
       href: curry(unpublicize_pledge, pledge),
       style: 'display: inline-block; vertical-align: middle; padding: 0; width: 80px; font-size: 12px; text-decoration: none;',
       'class': 'button green'
-    }, 'Public');
+    }, 'Make Private');
   });
 
   define('publicize_pledge', function(pledge) {
@@ -147,7 +147,7 @@ with (scope('Contributions', 'App')) {
       href: curry(publicize_bounty, bounty),
       style: 'display: inline-block; vertical-align: middle; padding: 0; width: 80px; font-size: 12px; text-decoration: none;',
       'class': 'button grey'
-    }, 'Public');
+    }, 'Make Public');
   });
 
   define('unpublicize_bounty_link_element', function(bounty) {
@@ -155,7 +155,7 @@ with (scope('Contributions', 'App')) {
       href: curry(unpublicize_bounty, bounty),
       style: 'display: inline-block; vertical-align: middle; padding: 0; width: 80px; font-size: 12px; text-decoration: none;',
       'class': 'button green'
-    }, 'Public');
+    }, 'Make Private');
   });
 
   define('publicize_bounty', function(bounty) {
