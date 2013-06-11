@@ -140,24 +140,6 @@ with (scope('BountySource')) {
     api('/overview', callback);
   });
 
-  define('make_payment', function(data, error_callback) {
-    var callback = function(response) {
-      if (response.meta.success) {
-        if (data.payment_method == 'personal') BountySource.set_cached_user_info(null);
-        set_route(response.data.redirect_url);
-      } else {
-        error_callback(response.data.error);
-      }
-    };
-
-    var non_auth_callback = function() {
-      Storage.set('_redirect_to_after_login', data.postauth_url);
-      set_route('#signin');
-    };
-
-    api('/payments', 'POST', data, callback, non_auth_callback);
-  });
-
   define('get_user_repositories', function(callback) {
     api('/github/user/repos/', callback);
   });

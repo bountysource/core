@@ -1,5 +1,16 @@
 with (scope('Pledge', 'Fundraiser')) {
 
+  initializer(function() {
+    document.body.appendChild(script({ src: 'https://sandbox.google.com/checkout/inapp/lib/buy.js' }));
+
+    // when all of the items are ready, show the payment method
+    addEventListener('GoogleWalletItemsLoaded', function(e) {
+      console.log('meep');
+
+      show('google-wallet-payment-method-wrapper');
+    });
+  });
+
   route('#fundraisers/:fundraiser_id/pledge', function(fundraiser_id) {
     Pledge.errors_div = div({ style: 'width: 500px;' });
 
@@ -16,14 +27,16 @@ with (scope('Pledge', 'Fundraiser')) {
     );
 
     BountySource.get_fundraiser(fundraiser_id, function(response) {
-      var params      = get_params(),
-          fundraiser  = response.data;
+      var params      = get_params();
+      var fundraiser  = response.data;
 
       // render the title of the fundraiser into header
       render({ target: 'breadcrumbs-fundraiser-title' }, a({ href: fundraiser.frontend_path }, truncate(fundraiser.title, 60)));
 
       // require the fundraiser to be published
       if (!fundraiser.published) return render({ into: target_div }, error_message('Fundraiser has not been published.'));
+
+      // create
 
       render({ into: target_div },
         Columns.create({ show_side: false }),
@@ -267,9 +280,6 @@ with (scope('Pledge', 'Fundraiser')) {
     render({ into: Pledge.errors }, '');
 
     BountySource.update_pledge(pledge.id, form_data, function(response) {
-
-      console.log(response);
-
       if (response.meta.success) {
         set_route(pledge.frontend_path);
       } else {
@@ -293,7 +303,7 @@ with (scope('Pledge', 'Fundraiser')) {
       postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id
     };
 
-    BountySource.make_payment(payment_data, function(errors) {
+    Payment.create(payment_data, function(errors) {
       render({ into: Pledge.errors_div }, error_message(errors));
     });
   });

@@ -317,7 +317,7 @@ with (scope('Show', 'Issue')) {
       postauth_url: window.location.href.split('#')[0] + issue.frontend_path + '?payment_method='+form_data.payment_method+'&amount='+form_data.amount
     };
 
-    BountySource.make_payment(payment_data, function(errors) {
+    Payment.create(payment_data, function(errors) {
       render({ target: 'create-bounty-errors' }, error_message(errors));
     });
   });

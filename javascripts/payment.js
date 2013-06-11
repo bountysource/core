@@ -1,5 +1,42 @@
 with (scope('Payment', 'App')) {
 
+  define('create', function(data, error_callback) {
+    var callback = function(response) {
+      if (response.meta.success) {
+        if (data.payment_method == 'personal') BountySource.set_cached_user_info(null);
+        if (data.payment_method == 'google') {
+          var jwt = response.data.jwt;
+
+          // now that we have the JWT, trigger the buy!
+          window.google.payments.inapp.buy({
+            jwt: jwt,
+
+            success: function() {
+              console.log(arguments);
+            },
+
+            failure: function() {
+              console.log(arguments);
+              // set_route(fundraiser.frontend_path);
+            }
+          });
+
+        } else {
+          set_route(response.data.redirect_url);
+        }
+      } else {
+        error_callback(response.data.error);
+      }
+    };
+
+    var non_auth_callback = function() {
+      Storage.set('_redirect_to_after_login', data.postauth_url);
+      set_route('#signin');
+    };
+
+    BountySource.api('/payments', 'POST', data, callback, non_auth_callback);
+  });
+
   define('payment_methods', function(options) {
     options = options || {};
     options['class'] = 'payment-method';
@@ -21,7 +58,7 @@ with (scope('Payment', 'App')) {
           img({ src: 'images/paypal.png'}), span("PayPal")
         )
       ),
-      false && div(
+      div(
         radio({
           id:'payment_method_google',
           name: 'payment_method',
