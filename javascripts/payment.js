@@ -49,17 +49,6 @@ with (scope('Payment', 'App')) {
     var payment_methods = div(options,
       div(
         radio({
-          id: 'payment_method_paypal',
-          name: 'payment_method',
-          value: 'paypal',
-          checked: (selected_value == 'paypal' ? 'checked' : null)
-        }),
-        label({ 'for': 'payment_method_paypal', style: 'display: inline;' },
-          img({ src: 'images/paypal.png'}), span("PayPal")
-        )
-      ),
-      div(
-        radio({
           id:'payment_method_google',
           name: 'payment_method',
           value: 'google',
@@ -67,6 +56,17 @@ with (scope('Payment', 'App')) {
         }),
         label({ 'for': 'payment_method_google', style: 'display: inline;' },
           img({ src: 'images/google-wallet.png'}), span("Google Wallet")
+        )
+      ),
+      div(
+        radio({
+          id: 'payment_method_paypal',
+          name: 'payment_method',
+          value: 'paypal',
+          checked: (selected_value == 'paypal' ? 'checked' : null)
+        }),
+        label({ 'for': 'payment_method_paypal', style: 'display: inline;' },
+          img({ src: 'images/paypal.png'}), span("PayPal")
         )
       ),
       false && div(
