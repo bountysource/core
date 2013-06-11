@@ -41,7 +41,7 @@ with (scope('Payment', 'App')) {
     options = options || {};
     options['class'] = 'payment-method';
 
-    var selected_value = options.value || 'paypal';
+    var selected_value = options.value || 'google';
     delete options.value;
 
     var authed_accounts_div = div();
