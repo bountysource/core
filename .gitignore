@@ -1,4 +1,6 @@
+node_modules
+dist
+.tmp
+.sass-cache
+app/components
 .DS_Store
-chromedriver.log
-test/config/credentials.yml
-node_modules/

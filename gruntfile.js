@@ -1,90 +1,305 @@
-module.exports = function(grunt) {
+'use strict';
+var modRewrite = require('connect-modrewrite');
+var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+var mountFolder = function (connect, dir) {
+  return connect.static(require('path').resolve(dir));
+};
+
+module.exports = function (grunt) {
+  // load all grunt tasks
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  // configurable paths
+  var yeomanConfig = {
+    app: 'app',
+    dist: 'dist'
+  };
+
+  try {
+    yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
+  } catch (e) {}
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    concat: {
-      options: {
-        separator: ';'
+    yeoman: yeomanConfig,
+    watch: {
+      coffee: {
+        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+        tasks: ['coffee:dist']
       },
-      dist: {
-        src: ['javascripts/**/*.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+      coffeeTest: {
+        files: ['test/spec/{,*/}*.coffee'],
+        tasks: ['coffee:test']
+      },
+      compass: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        tasks: ['compass']
+      },
+      livereload: {
+        files: [
+          '<%= yeoman.app %>/**/*.html',
+          '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
+          '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
+          '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
+        ],
+        tasks: ['livereload']
       }
     },
-    html_src: {
+    connect: {
+      options: {
+        port: 9000,
+        // Change this to '0.0.0.0' to access the server from outside.
+        hostname: 'localhost'
+      },
+      livereload: {
+        options: {
+          middleware: function (connect, options) {
+            return [
+              lrSnippet,
+              modRewrite(['!\\.html|\\images|\\.js|\\.css|\\swf$ /index.html']),
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, yeomanConfig.app),
+            ];
+          }
+        }
+      },
+      test: {
+        options: {
+          middleware: function (connect) {
+            return [
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'test')
+            ];
+          }
+        }
+      }
+    },
+    open: {
+      server: {
+        url: 'http://localhost:<%= connect.options.port %>'
+      }
+    },
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= yeoman.dist %>/*',
+            '!<%= yeoman.dist %>/.git*'
+          ]
+        }]
+      },
+      server: '.tmp'
+    },
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
+      all: [
+        'Gruntfile.js',
+        '<%= yeoman.app %>/scripts/{,*/}*.js'
+      ]
+    },
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js',
+        singleRun: true
+      }
+    },
+    coffee: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/scripts',
+          src: '{,*/}*.coffee',
+          dest: '.tmp/scripts',
+          ext: '.js'
+        }]
+      },
+      test: {
+        files: [{
+          expand: true,
+          cwd: 'test/spec',
+          src: '{,*/}*.coffee',
+          dest: '.tmp/spec',
+          ext: '.js'
+        }]
+      }
+    },
+    compass: {
+      options: {
+        sassDir: '<%= yeoman.app %>/styles',
+        cssDir: '.tmp/styles',
+        imagesDir: '<%= yeoman.app %>/images',
+        javascriptsDir: '<%= yeoman.app %>/scripts',
+        fontsDir: '<%= yeoman.app %>/styles/fonts',
+        importPath: '<%= yeoman.app %>/components',
+        relativeAssets: true
+      },
+      dist: {},
+      server: {
+        options: {
+          debugInfo: true
+        }
+      }
+    },
+    concat: {
       dist: {
         files: {
-          'index.html': ['<%= concat.dist.src %>'],
-          'test/test.html': ['<%= concat.dist.src %>', 'test/**/*.js']
+          '<%= yeoman.dist %>/scripts/scripts.js': [
+            '.tmp/scripts/{,*/}*.js',
+            '<%= yeoman.app %>/scripts/{,*/}*.js'
+          ]
         }
+      }
+    },
+    useminPrepare: {
+      html: '<%= yeoman.app %>/index.html',
+      options: {
+        dest: '<%= yeoman.dist %>'
+      }
+    },
+    usemin: {
+      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      options: {
+        dirs: ['<%= yeoman.dist %>']
+      }
+    },
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '{,*/}*.{png,jpg,jpeg}',
+          dest: '<%= yeoman.dist %>/images'
+        }]
+      }
+    },
+    cssmin: {
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/styles/main.css': [
+            '.tmp/styles/{,*/}*.css',
+            '<%= yeoman.app %>/styles/{,*/}*.css'
+          ]
+        }
+      }
+    },
+    htmlmin: {
+      dist: {
+        options: {
+          /*removeCommentsFromCDATA: true,
+          // https://github.com/yeoman/grunt-usemin/issues/44
+          //collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          removeAttributeQuotes: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: true,
+          removeOptionalTags: true*/
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>',
+          src: ['*.html', 'views/*.html'],
+          dest: '<%= yeoman.dist %>'
+        }]
+      }
+    },
+    cdnify: {
+      dist: {
+        html: ['<%= yeoman.dist %>/*.html']
+      }
+    },
+    ngmin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.dist %>/scripts',
+          src: '*.js',
+          dest: '<%= yeoman.dist %>/scripts'
+        }]
       }
     },
     uglify: {
-      options: {
-        banner: '/*! bountysource.js <%=pkg.version%> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          '<%= yeoman.dist %>/scripts/scripts.js': [
+            '<%= yeoman.dist %>/scripts/scripts.js'
+          ]
         }
       }
     },
-    qunit: {
-      files: ['test/**/*.html']
-    },
-    jshint: {
-      files: ['gruntfile.js', 'javascripts/**/*.js', 'test/**/*.js'],
-      options: {
-        // options here to override JSHint defaults
-        globals: {
-          jQuery: true,
-          console: true,
-          module: true,
-          document: true
-        },
-        withstmt: true
+    rev: {
+      dist: {
+        files: {
+          src: [
+            '<%= yeoman.dist %>/scripts/{,*/}*.js',
+            '<%= yeoman.dist %>/styles/{,*/}*.css',
+            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= yeoman.dist %>/styles/fonts/*'
+          ]
+        }
       }
     },
-    watch: {
-      files: ['<%= jshint.files %>', 'test/**/*.html'],
-      tasks: ['jshint', 'concat', 'html_src', 'uglify', 'qunit']
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            '*.{ico,txt}',
+            '.htaccess',
+            'components/**/*',
+            'images/{,*/}*.{gif,webp}',
+            'styles/fonts/*'
+          ]
+        }]
+      }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.renameTask('regarde', 'watch');
 
-  grunt.registerTask('test', ['jshint', 'qunit']);
+  grunt.registerTask('server', [
+    'clean:server',
+    'coffee:dist',
+    'compass:server',
+    'livereload-start',
+    'connect:livereload',
+    'open',
+    'watch'
+  ]);
 
-  grunt.registerTask('default', ['jshint', 'concat', 'html_src', 'uglify', 'qunit']);
+  grunt.registerTask('test', [
+    'clean:server',
+    'coffee',
+    'compass',
+    'connect:test',
+    'karma'
+  ]);
 
+  grunt.registerTask('build', [
+    'clean:dist',
+    'jshint',
+    'test',
+    'coffee',
+    'compass:dist',
+    'useminPrepare',
+    'imagemin',
+    'cssmin',
+    'htmlmin',
+    'concat',
+    'copy',
+    'cdnify',
+    'ngmin',
+    'uglify',
+    'rev',
+    'usemin'
+  ]);
 
-  // automatically put javascript tags into index.html
-  grunt.registerMultiTask('html_src', 'Rebuild static HTML files with file paths', function() {
-      this.files.forEach(function(f) {
-        var orig_src = grunt.file.read(f.dest);
-        var src = ''+orig_src;
-
-        // remove existing tags
-        src = src.replace(/[\n\r\t ]+<!-- html_src start -->[\s\S]+?<!-- html_src end -->/,'');
-
-        // add our own script references
-        var script_tags = "\n\n    <!-- html_src start -->\n";
-        f.src.map(function(filepath) {
-          script_tags += "    <script src=\"" + filepath + "\" type=\"text\/javascript\"></script>\n";
-        });
-        script_tags += "    <!-- html_src end -->\n";
-        src = src.replace(/[\n\r\t ]*<\/head>/, script_tags + "  </head>");
-
-        if (src != orig_src) {
-          grunt.log.writeln('File "' + f.dest + '" updated.');
-          grunt.file.write(f.dest, src);
-        }
-
-      });
-  });
-
+  grunt.registerTask('default', ['build']);
 };

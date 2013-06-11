@@ -1,0 +1,14 @@
+@import "compass_twitter_bootstrap";
+@import "compass_twitter_bootstrap/responsive";
+
+/* layout */
+body { border-top: 60px solid transparent; }
+.navbar { border-top: 4px solid #e0ab45; }
+.navbar .brand { color: #000;  }
+.navbar-search { position: relative; }
+.navbar-search .search-query { padding-left: 29px; }
+.navbar-search .icon-search { position: absolute; top: 7px; left: 11px; }
+@media (max-width: 979px) {
+  .navbar-search .icon-search { top: 17px; left: 27px; }
+  body { border-top: 0px; }
+}
