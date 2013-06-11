@@ -19,6 +19,10 @@ with (scope('Payment', 'App')) {
 
               set_route(BountySource.api_host + 'payments/google/success' + to_param(params));
             },
+
+            failure: function() {
+              console.log('Google Wallet transaction failed', arguments);
+            }
           });
 
         } else {
@@ -41,13 +45,13 @@ with (scope('Payment', 'App')) {
     options = options || {};
     options['class'] = 'payment-method';
 
-    var selected_value = options.value || 'google';
+    var selected_value = options.value || 'paypal';
     delete options.value;
 
     var authed_accounts_div = div();
 
     var payment_methods = div(options,
-      div(
+      div({ id: 'super-ultra-hidden-google-wallet-radio', style: 'display: none;' },
         radio({
           id:'payment_method_google',
           name: 'payment_method',
