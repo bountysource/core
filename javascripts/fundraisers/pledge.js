@@ -1,7 +1,11 @@
 with (scope('Pledge', 'Fundraiser')) {
 
   initializer(function() {
-    document.body.appendChild(script({ src: 'https://sandbox.google.com/checkout/inapp/lib/buy.js' }));
+    if (BountySource.api_host == "https://api.bountysource.com/") {
+      document.body.appendChild(script({ src: 'https://wallet.google.com/inapp/lib/buy.js' }));
+    } else {
+      document.body.appendChild(script({ src: 'https://sandbox.google.com/checkout/inapp/lib/buy.js' }));
+    }
 
     // when all of the items are ready, show the payment method
     addEventListener('GoogleWalletItemsLoaded', function(e) {
