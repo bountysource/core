@@ -231,7 +231,7 @@ with (scope('Show', 'Issue')) {
 
           render({ into: solution_status_div },
             strong('Status: '), message_div,
-            p("When this is completed, the solution will enter a two week dispute period. If there are outstanding disputes after that period, the bounty will be awarded to the developer.")
+            p("When this is completed, the solution will enter a two week dispute period. If there are no outstanding disputes after that period, the bounty will be awarded to the developer.")
           );
 
           // waiting for issue to be closed
