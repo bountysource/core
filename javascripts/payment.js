@@ -11,14 +11,10 @@ with (scope('Payment', 'App')) {
           window.google.payments.inapp.buy({
             jwt: jwt,
 
-            success: function() {
-              console.log(arguments);
+            success: function(result) {
+              var order_id = result.response.orderId;
+              set_route(BountySource.api_host+'payments/google/success?order_id='+order_id);
             },
-
-            failure: function() {
-              console.log(arguments);
-              // set_route(fundraiser.frontend_path);
-            }
           });
 
         } else {
