@@ -12,8 +12,12 @@ with (scope('Payment', 'App')) {
             jwt: jwt,
 
             success: function(result) {
-              var order_id = result.response.orderId;
-              set_route(BountySource.api_host+'payments/google/success?order_id='+order_id);
+              var params = {
+                access_token: Storage.get('access_token'),
+                order_id: result.response.orderId
+              };
+
+              set_route(BountySource.api_host + 'payments/google/success' + to_param(params));
             },
           });
 
