@@ -1,12 +1,7 @@
 with (scope()) {
 
-  define('fundraiser', {
-    title: 'I want to raise all the monies.',
-    description: "So awesome!!!"
-  });
-
-  route('#fundraisers/:issue_id', function(issue_id) {
-    //TODO: var issue_id = params.issue_id;
+  route('#fundraisers/:fundraiser_id', function(fundraiser_id) {
+    var fundraiser = Fundraiser.find(fundraiser_id);
 
     render(
       ul({ 'class': 'breadcrumb' },

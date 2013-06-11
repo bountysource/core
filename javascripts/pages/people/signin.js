@@ -1,4 +1,10 @@
-with (scope('People','VC')) {
+with (scope('People')) {
+
+  route('#signin', function() {
+    render(
+      h1("Please sign in to continue.")
+    );
+  });
 
   route('#signin/email', function() {
     //if (logged_in()) return set_route('#');
@@ -53,6 +59,24 @@ with (scope('People','VC')) {
         )
       )
     );
+  });
+
+  route('#auth/:provider', function(provider) {
+    alert('oh hai');
+//    if (params.status == 'linked') {
+//      // now they're logged in with this github account
+//      save_user_data_and_redirect({ data: params.access_token });
+//    } else if (params.status == 'error_needs_account') {
+//      render(
+//        breadcrumbs(a({ href: '#' }, 'Home'), 'Sign In'),
+//        h1("Last step to Sign In"),
+//        super_signin_form(params)
+//      );
+//    } else if (params.status == 'error_already_linked') {
+//      render('ERROR: Account already linked.');
+//    } else {
+//      render('ERROR: Unknown status.');
+//    }
   });
 
 //  define('super_signin_form', function(params) {
@@ -117,21 +141,21 @@ with (scope('People','VC')) {
 
   define('auto_adjust_super_form_fields', function(refs) {
     // email help text
-    if (refs.email_is_registered == null) render({ into: refs.email_status_div });
-    else if (refs.email_is_registered == true) render({ into: refs.email_status_div }, "Email address found. Enter your password to Sign In.");
-    else if (refs.email_is_registered == false) render({ into: refs.email_status_div }, "Email address not yet registered.");
+    if (refs.email_is_registered === null) render({ into: refs.email_status_div });
+    else if (refs.email_is_registered === true) render({ into: refs.email_status_div }, "Email address found. Enter your password to Sign In.");
+    else if (refs.email_is_registered === false) render({ into: refs.email_status_div }, "Email address not yet registered.");
 
     // password is visible unless sign up with linked account
     (refs.account_link_id && refs.account_link_id.match(/^(github|facebook|twitter):/) && !refs.email_is_registered ? hide : show)(refs.password_fieldset);
-    render({ into: refs.password_label }, refs.email_is_registered == false ? 'Create Password:' : 'Password:');
+    render({ into: refs.password_label }, refs.email_is_registered === false ? 'Create Password:' : 'Password:');
 
     // signup fields visible only if email isn't registered
-    (refs.email_is_registered == false ? show : hide)(refs.signup_fields);
+    (refs.email_is_registered === false ? show : hide)(refs.signup_fields);
 
     // text on the submit button
-    if (refs.email_is_registered == null) refs.sign_in_up_button.value = 'Continue';
-    else if (refs.email_is_registered == true) refs.sign_in_up_button.value = 'Sign In';
-    else if (refs.email_is_registered == false) refs.sign_in_up_button.value = 'Sign Up';
+    if (refs.email_is_registered === null) refs.sign_in_up_button.value = 'Continue';
+    else if (refs.email_is_registered === true) refs.sign_in_up_button.value = 'Sign In';
+    else if (refs.email_is_registered === false) refs.sign_in_up_button.value = 'Sign Up';
   });
 
   define('process_email_address_changed', function(refs) {
@@ -261,25 +285,5 @@ with (scope('People','VC')) {
 //    })
 //  });
 //
-//  ///////////////////////////////////////////////////////////////////
-//
-//  route('#auth/:provider', function(provider) {
-//    var params = get_params();
-//
-//    if (params.status == 'linked') {
-//      // now they're logged in with this github account
-//      save_user_data_and_redirect({ data: params.access_token });
-//    } else if (params.status == 'error_needs_account') {
-//      render(
-//        breadcrumbs(a({ href: '#' }, 'Home'), 'Sign In'),
-//        h1("Last step to Sign In"),
-//        super_signin_form(params)
-//      );
-//    } else if (params.status == 'error_already_linked') {
-//      render('ERROR: Account already linked.');
-//    } else {
-//      render('ERROR: Unknown status.');
-//    }
-//  });
 
 }

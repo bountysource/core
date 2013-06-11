@@ -1,3 +1,4 @@
 .DS_Store
 chromedriver.log
 test/config/credentials.yml
+node_modules/
