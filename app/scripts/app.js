@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', [])
+angular.module('app', ['ui.bootstrap'])
   .config(function ($routeProvider, $locationProvider, $provide) {
 
     //  NOTE: uncomment to test # mode
