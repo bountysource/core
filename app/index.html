@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="styles/chatroom.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="app">
+  <body ng-app="app" ng-class="{'chatroom': showChatroom}">
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -48,6 +48,7 @@
     <!-- build:js scripts/scripts.js -->
     <script src="pages/app.js"></script>
     <script src="pages/api.js"></script>
+    <script src="pages/layout/chatroom.js"></script>
     <script src="pages/filters.js"></script>
     <script src="pages/home/home.js"></script>
     <script src="pages/fundraisers/index.js"></script>
