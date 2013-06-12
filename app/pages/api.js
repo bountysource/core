@@ -20,17 +20,33 @@ angular.module('api.bountysource',[]).
       people_recent: function(id) {
         var deferred = $q.defer();
         $http.jsonp("https://api.bountysource.com/user/recent?callback=JSON_CALLBACK").success(function(response) {
+          deferred.resolve(response.data);
+        });
+        return deferred.promise;
+      },
+
+      person_get: function(id) {
+        var deferred = $q.defer();
+        $http.jsonp("https://api.bountysource.com/users/"+id+"?callback=JSON_CALLBACK").success(function(response) {
           console.log(response);
           deferred.resolve(response.data);
         });
         return deferred.promise;
       },
 
-      project_cards: function(id) {
+      project_cards: function() {
         var deferred = $q.defer();
         $http.jsonp("https://api.bountysource.com/trackers/cards?callback=JSON_CALLBACK").success(function(response) {
-          console.log(response);
           deferred.resolve(response.data.featured_trackers.concat(response.data.all_trackers));
+        });
+        return deferred.promise;
+      },
+
+      tracker_get: function(id) {
+        var deferred = $q.defer();
+        $http.jsonp("https://api.bountysource.com/trackers/"+id+"/overview?callback=JSON_CALLBACK").success(function(response) {
+          console.log(response);
+          deferred.resolve(response.data);
         });
         return deferred.promise;
       }

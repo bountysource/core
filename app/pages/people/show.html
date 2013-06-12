@@ -1,0 +1,26 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/people">People</a><span class="divider">»</span></li>
+  <li><a href="/people/{{person.id}}">{{ person.display_name ||'Loading...' }}</a></li>
+</ul>
+
+<h1>{{person.display_name}}</h1>
+
+<div class="row-fluid" ng-show="person">
+  <div class="span4">
+    <div class="well">
+      <div><img src="{{person.image_url}}" /></div>
+      <h3>{{person.display_name}}</h3>
+    </div>
+  </div>
+
+  <div class="span8">
+
+    <ul class="nav nav-tabs">
+      <li class='active'><a href="/people/{{person.slug}}" data-toggle="tab">Overview</a></li>
+      <li><a href="/people/{{person.slug}}/timeline" data-toggle="tab">Timeline</a></li>
+    </ul>
+
+  </div>
+
+</div>

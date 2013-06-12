@@ -1,0 +1,75 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/trackers">Trackers</a><span class="divider">»</span></li>
+  <li><a href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a></li>
+</ul>
+
+<h1>{{tracker.name}}</h1>
+
+<div class="row-fluid" ng-show="tracker">
+  <div class="span4">
+    <div class="well">
+      <div><img src="{{tracker.image_url}}" /></div>
+      <div>{{ tracker.description }}</div>
+      <ul>
+        <li>Bounties: {{ tracker.bounty_total | currency }}</li>
+        <li>URL: {{ tracker.url }}</li>
+        <li>Forks: {{ tracker.forks }}</li>
+        <li>Watchers: {{ tracker.watchers }}</li>
+        <li>Languages:
+          <ul>
+            <li ng-repeat="language in tracker.languages">{{language.name}}</li>
+          </ul>
+        </li>
+        <li>Tags:
+          <ul>
+            <li ng-repeat="tag in tracker.tags">{{tag.tag.name}}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="span8">
+
+    <ul class="nav nav-tabs">
+      <li class='active'><a href="/trackers/{{tracker.slug}}" data-toggle="tab">Issues</a></li>
+      <li><a href="/trackers/{{tracker.slug}}/timeline" data-toggle="tab">Timeline</a></li>
+    </ul>
+
+    <h3>Valuable</h3>
+    <ul>
+      <li ng-repeat="issue in tracker.issues_valuable">
+        <a href="/issues/{{issue.slug}}">
+          <span class="badge badge-success">{{issue.bounty_total|currency}}</span>
+          <span class="badge badge-info">{{issue.comment_count}} <i class="icon-comment icon-white"></i></span>
+          #{{issue.id}}: {{issue.title}}
+        </a>
+      </li>
+    </ul>
+
+    <h3>Popular</h3>
+    <ul>
+      <li ng-repeat="issue in tracker.issues_popular">
+        <a href="/issues/{{issue.slug}}">
+          <span class="badge badge-success">{{issue.bounty_total|currency}}</span>
+          <span class="badge badge-info">{{issue.comment_count}} <i class="icon-comment icon-white"></i></span>
+          #{{issue.id}}: {{issue.title}}
+        </a>
+      </li>
+    </ul>
+
+    <h3>Newest</h3>
+    <ul>
+      <li ng-repeat="issue in tracker.issues_newest">
+        <a href="/issues/{{issue.slug}}">
+          <span class="badge badge-success">{{issue.bounty_total|currency}}</span>
+          <span class="badge badge-info">{{issue.comment_count}} <i class="icon-comment icon-white"></i></span>
+          #{{issue.id}}: {{issue.title}}
+        </a>
+      </li>
+    </ul>
+
+  </div>
+
+</div>
