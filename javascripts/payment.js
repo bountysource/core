@@ -51,7 +51,7 @@ with (scope('Payment', 'App')) {
     var authed_accounts_div = div();
 
     var payment_methods = div(options,
-      div({ id: 'super-ultra-hidden-google-wallet-radio', style: 'display: none;' },
+      div(
         radio({
           id:'payment_method_google',
           name: 'payment_method',
