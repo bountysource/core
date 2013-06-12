@@ -9,5 +9,7 @@ angular.module('app')
       });
   })
   .controller('HomeCtrl', function ($scope, $api) {
-    $scope.fundraisers = $api.fundraiser.cards();
+    $scope.fundraisers = $api.fundraiser_cards();
+    $scope.recent_people = $api.people_recent();
+    $scope.trackers = $api.project_cards();
   });

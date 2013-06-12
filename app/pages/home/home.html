@@ -2,7 +2,16 @@
   <h1>The funding platform for open-source software.</h1>
 </div>
 
-<h1>Fundraisers</h1>
+<h2>Recent Users ({{recent_people.total_count | number}})</h2>
+<ul class="thumbnails">
+  <li class="span1" ng-repeat="person in recent_people.people">
+    <a href="/people/{{person.slug}}" class="thumbnail">
+      <img src="{{person.image_url}}" />
+    </a>
+  </li>
+</ul>
+
+<h2>Fundraisers</h2>
 <ul class="thumbnails">
   <li class="span3 homepage-card" ng-repeat="fundraiser in fundraisers">
     <div class="thumbnail">
@@ -12,10 +21,24 @@
       </a>
       <p>{{fundraiser.short_description}}</p>
 
-      <div class="progress">
-        <div class="bar bar-success" style="width: {{100 * fundraiser.total_pledged / fundraiser.funding_goal}}%;">{{100 * fundraiser.total_pledged / fundraiser.funding_goal}}%</div>
-      </div>
+      <div>{{ fundraiser.total_pledged | currency }} of {{ fundraiser.funding_goal | currency:'$':0 }}</div>
+      <div>{{ fundraiser.days_remaining }} days remaining</div>
 
+      <div class="progress">
+        <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:10 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<h2>Projects</h2>
+<ul class="thumbnails">
+  <li class="span3 homepage-card" ng-repeat="tracker in trackers">
+    <div class="thumbnail">
+      <a href="/trackers/{{tracker.id}}">
+        <img src="{{tracker.image_url}}" />
+        <h3>{{tracker.name}}</h3>
+      </a>
     </div>
   </li>
 </ul>

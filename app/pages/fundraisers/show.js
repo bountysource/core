@@ -9,6 +9,6 @@ angular.module('app')
       });
   })
   .controller('FundraisersShow', function ($scope, $routeParams, $api) {
-    $scope.fundraiser = $api.fundraiser.find($routeParams.id);
+    $scope.fundraiser = $api.fundraiser_get($routeParams.id);
   });
 
