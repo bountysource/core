@@ -11,5 +11,8 @@ body { border-top: 60px solid transparent; }
   body { border-top: 0px; }
 }
 
+/* bug in bootstrap... dropup is black but should be gray unless active */
+.dropup .caret { border-bottom-color: #777; }
+
 .homepage-card { height: 500px; overflow: hidden; }
 .hero-unit h1 { font-size: 40px; text-align: center; }
