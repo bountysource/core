@@ -4,7 +4,15 @@
   <li><a href="/issues/{{issue.id}}">{{issue.title ||'Loading...'}}</a></li>
 </ul>
 
-<h1>{{issue.title}}</h1>
+<div class="page-header" ng-show="issue">
+  <h3>
+    {{ issue.title }}
+    <small>
+      <span ng-show="issue.can_add_bounty" class="label label-success">Open</span>
+      <span ng-hide="issue.can_add_bounty" class="label label-fail">Closed</span>
+    </small>
+  </h3>
+</div>
 
 <div class="row-fluid" ng-show="issue">
   <div class="span8">
@@ -20,6 +28,10 @@
 
         <pane heading="Bounties ({{ issue.bounties.length }})">
           <ng-include src="'pages/issues/partials/bounties.html'"></ng-include>
+        </pane>
+
+        <pane heading="Solutions ({{ issue.solutions.length }})">
+          <ng-include src="'pages/issues/partials/solutions.html'"></ng-include>
         </pane>
       </tabs>
     </div>
