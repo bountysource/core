@@ -4,9 +4,10 @@
   <li><a href="/fundraisers/{{fundraiser.id}}">{{fundraiser.title ||'Loading...'}}</a></li>
 </ul>
 
+<h1>{{fundraiser.title}}</h1>
+
 <div class="row-fluid" ng-show="fundraiser">
   <div class="span8">
-    <h3>{{fundraiser.title}}</h3>
 
     <ul class="nav nav-tabs">
       <li class='active'><a href="/fundraisers/{{fundraiser.id}}" data-toggle="tab">Overview</a></li>
@@ -14,11 +15,19 @@
       <li><a href="/fundraisers/{{fundraiser.id}}/pledges" data-toggle="tab">Pledges ({{fundraiser.pledge_count}})</a></li>
     </ul>
 
-    <img src="{{fundraiser.image_url}}"/>
+    <img src="{{fundraiser.image_url}}" style="float: left; width: 20%; padding: 0 10px 10px 0"/>
+    <h3>{{fundraiser.short_description}}</h3>
+    <div style="clear: both"></div>
     <div ng-bind-html="fundraiser.description_html"></div>
   </div>
+
   <div class="span4">
-    <div class="alert alert-info">
+    <div class="well">
+      <div><img src="{{fundraiser.person.image_url}}" /></div>
+      <h3>{{fundraiser.person.display_name}}</h3>
+    </div>
+
+    <div class="well">
       <ul>
         <li>Pledges: {{fundraiser.pledge_count}}</li>
         <li>Raised: {{fundraiser.total_pledged | currency }} of {{fundraiser.funding_goal | currency}}</li>
@@ -26,7 +35,7 @@
       </ul>
     </div>
 
-    <div ng-repeat="reward in fundraiser.rewards" class="alert alert-success">
+    <div ng-repeat="reward in fundraiser.rewards" class="well">
       <div>{{reward.amount}}</div>
       <div>{{reward.description}}</div>
     </div>

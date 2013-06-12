@@ -51,9 +51,9 @@ module.exports = function (grunt) {
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost'
       },
-      push_state: {
+      pushstate: {
         options: {
-          middleware: function (connect, options) {
+          middleware: function (connect) {
             return [
               modRewrite(['!\\.html|\\images|\\.js|\\.css|\\swf$ /index.html']),
               mountFolder(connect, '.tmp'),
@@ -266,7 +266,7 @@ module.exports = function (grunt) {
     'clean:server',
     'coffee:dist',
     'compass:server',
-    'connect:push_state',
+    'connect:pushstate',
     'open',
     'watch'
   ]);
