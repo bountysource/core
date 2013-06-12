@@ -3,25 +3,21 @@
 angular.module('app', [])
   .config(function ($routeProvider, $locationProvider, $provide) {
 
-//  NOTE: uncomment to test # mode
-//  $provide.decorator('$sniffer', function($delegate) {
-//    $delegate.history = false;
-//    return $delegate;
-//  });
+    //  NOTE: uncomment to test # mode
+    //  $provide.decorator('$sniffer', function($delegate) {
+    //    $delegate.history = false;
+    //    return $delegate;
+    //  });
 
     $locationProvider.html5Mode(true);
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl'
       })
       .when('/person', {
         templateUrl: 'views/person.html',
         controller: 'PersonCtrl'
-      })
-      .when('/bounty', {
-        templateUrl: 'views/bounty.html',
-        controller: 'BountyCtrl'
       })
       .when('/fundraiser', {
         templateUrl: 'views/fundraiser.html',
