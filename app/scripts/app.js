@@ -1,13 +1,10 @@
 'use strict';
 
-angular.module('app', ['ui.bootstrap'])
+angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize'])
   .config(function ($routeProvider, $locationProvider, $provide) {
 
-    //  NOTE: uncomment to test # mode
-    //  $provide.decorator('$sniffer', function($delegate) {
-    //    $delegate.history = false;
-    //    return $delegate;
-    //  });
+    //  NOTE: uncomment to test hashbang # mode
+    //  $provide.decorator('$sniffer', function($delegate) { $delegate.history = false; return $delegate; });
 
     $locationProvider.html5Mode(true);
     $routeProvider
