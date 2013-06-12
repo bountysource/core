@@ -33,12 +33,23 @@
 
 <h2>Projects</h2>
 <ul class="thumbnails">
-  <li class="span2 homepage-card" ng-repeat="tracker in trackers">
+  <li class="span3 homepage-card" ng-repeat="tracker in trackers">
     <div class="thumbnail">
       <a href="/trackers/{{tracker.slug}}">
         <img src="{{tracker.image_url}}" />
         <h3>{{tracker.name}}</h3>
       </a>
+
+      <ul>
+        <li ng-repeat="issue in tracker.issues">
+          <a href="/issues/{{issue.slug}}">
+            <span class="badge badge-success">{{issue.bounty_total|currency}}</span>
+            <span class="badge badge-info">{{issue.comment_count}} <i class="icon-comment icon-white"></i></span>
+            #{{issue.id}}: {{issue.title}}
+          </a>
+        </li>
+      </ul>
+
     </div>
   </li>
 </ul>

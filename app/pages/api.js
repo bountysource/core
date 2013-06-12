@@ -37,6 +37,7 @@ angular.module('api.bountysource',[]).
       project_cards: function() {
         var deferred = $q.defer();
         $http.jsonp("https://api.bountysource.com/trackers/cards?callback=JSON_CALLBACK").success(function(response) {
+          console.log(response);
           deferred.resolve(response.data.featured_trackers.concat(response.data.all_trackers));
         });
         return deferred.promise;
@@ -49,7 +50,17 @@ angular.module('api.bountysource',[]).
           deferred.resolve(response.data);
         });
         return deferred.promise;
+      },
+
+      issue_get: function(id) {
+        var deferred = $q.defer();
+        $http.jsonp("https://api.bountysource.com/issues/"+id+"?callback=JSON_CALLBACK").success(function(response) {
+          console.log(response);
+          deferred.resolve(response.data);
+        });
+        return deferred.promise;
       }
+
     };
   });
 
