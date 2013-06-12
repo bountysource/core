@@ -4,3 +4,5 @@ dist
 .sass-cache
 app/components
 .DS_Store
+*.log
+.idea
