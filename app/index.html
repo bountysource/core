@@ -30,8 +30,8 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng:include src="'views/layout/navbar.html'"></div>
-    <div ng:include src="'views/layout/chatroom.html'"></div>
+    <div ng:include src="'pages/layout/navbar.html'"></div>
+    <div ng:include src="'pages/layout/chatroom.html'"></div>
     <div class="container" ng-view></div>
 
     <!-- angular components -->
@@ -44,10 +44,11 @@
     <script src="http://localhost:35729/livereload.js"></script>
 
     <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/api.js"></script>
-    <script src="scripts/controllers/home.js"></script>
-    <script src="scripts/controllers/fundraisers.js"></script>
+    <script src="pages/app.js"></script>
+    <script src="pages/api.js"></script>
+    <script src="pages/home/home.js"></script>
+    <script src="pages/fundraisers/index.js"></script>
+    <script src="pages/fundraisers/show.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

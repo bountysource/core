@@ -1,0 +1,21 @@
+<div class="hero-unit">
+  <h1>The funding platform for open-source software.</h1>
+</div>
+
+<h1>Fundraisers</h1>
+<ul class="thumbnails">
+  <li class="span3 homepage-card" ng-repeat="fundraiser in fundraisers">
+    <div class="thumbnail">
+      <a href="/fundraisers/{{fundraiser.id}}">
+        <img src="{{fundraiser.image_url}}" />
+        <h3>{{fundraiser.title}}</h3>
+      </a>
+      <p>{{fundraiser.short_description}}</p>
+
+      <div class="progress">
+        <div class="bar bar-success" style="width: {{100 * fundraiser.total_pledged / fundraiser.funding_goal}}%;">{{100 * fundraiser.total_pledged / fundraiser.funding_goal}}%</div>
+      </div>
+
+    </div>
+  </li>
+</ul>

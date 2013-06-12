@@ -1,0 +1,34 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
+  <li><a href="/fundraisers/{{fundraiser.id}}">{{fundraiser.title ||'Loading...'}}</a></li>
+</ul>
+
+<div class="row-fluid" ng-show="fundraiser">
+  <div class="span8">
+    <h3>{{fundraiser.title}}</h3>
+
+    <ul class="nav nav-tabs">
+      <li class='active'><a href="/fundraisers/{{fundraiser.id}}" data-toggle="tab">Overview</a></li>
+      <li ng-show="fundraiser.updates.length>0"><a href="/fundraisers/{{fundraiser.id}}/updates" data-toggle="tab">Updates ({{fundraiser.updates.length}})</a></li>
+      <li><a href="/fundraisers/{{fundraiser.id}}/pledges" data-toggle="tab">Pledges ({{fundraiser.pledge_count}})</a></li>
+    </ul>
+
+    <img src="{{fundraiser.image_url}}"/>
+    <div ng-bind-html="fundraiser.description_html"></div>
+  </div>
+  <div class="span4">
+    <div class="alert alert-info">
+      <ul>
+        <li>Pledges: {{fundraiser.pledge_count}}</li>
+        <li>Raised: {{fundraiser.total_pledged | currency }} of {{fundraiser.funding_goal | currency}}</li>
+        <li>Days remaining: {{fundraiser.days_remaining}}</li>
+      </ul>
+    </div>
+
+    <div ng-repeat="reward in fundraiser.rewards" class="alert alert-success">
+      <div>{{reward.amount}}</div>
+      <div>{{reward.description}}</div>
+    </div>
+  </div>
+</div>
