@@ -8,15 +8,21 @@
 
 <div class="row-fluid" ng-show="issue">
   <div class="span8">
-    <ul class="nav nav-tabs">
-      <li class='active'><a href="/issues/{{issue.slug}}" data-toggle="tab">Overview</a></li>
-      <li><a href="/issues/{{issue.slug}}/comments" data-toggle="tab">Comments ({{issue.comments.length}})</a></li>
-      <li><a href="/issues/{{issue.slug}}/pledges" data-toggle="tab">Bounties ({{issue.bounties.length}})</a></li>
-    </ul>
+    <div ng-controller="IssueShow">
+      <tabs>
+        <pane heading="Overview" active="true">
+          <ng-include src="'pages/issues/partials/overview.html'"></ng-include>
+        </pane>
 
-    <img src="{{issue.image_url}}" style="float: left; width: 20%; padding: 0 10px 10px 0"/>
-    <div style="clear: both"></div>
-    <div ng-bind-html="issue.body_html"></div>
+        <pane heading="Comments ({{ issue.comments.length }})">
+          <ng-include src="'pages/issues/partials/comments.html'"></ng-include>
+        </pane>
+
+        <pane heading="Bounties ({{ issue.bounties.length }})">
+          <ng-include src="'pages/issues/partials/bounties.html'"></ng-include>
+        </pane>
+      </tabs>
+    </div>
   </div>
 
   <div class="span4">

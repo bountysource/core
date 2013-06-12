@@ -5,10 +5,10 @@ angular.module('app')
     $routeProvider
       .when('/issues/:id', {
         templateUrl: 'pages/issues/show.html',
-        controller: 'IssuesShow'
+        controller: 'IssueShow'
       });
   })
-  .controller('IssuesShow', function ($scope, $routeParams, $api) {
+  .controller('IssueShow', function ($scope, $routeParams, $api) {
     $scope.issue = $api.issue_get($routeParams.id);
   });
 
