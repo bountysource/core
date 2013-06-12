@@ -15,9 +15,8 @@
       <li><a href="/fundraisers/{{fundraiser.id}}/pledges" data-toggle="tab">Pledges ({{fundraiser.pledge_count}})</a></li>
     </ul>
 
-    <img src="{{fundraiser.image_url}}" style="float: left; width: 20%; padding: 0 10px 10px 0"/>
     <h3>{{fundraiser.short_description}}</h3>
-    <div style="clear: both"></div>
+    <img src="{{fundraiser.image_url}}" style="float: right; width: 20%; padding: 0 0 20px 20px"/>
     <div ng-bind-html="fundraiser.description_html"></div>
   </div>
 
@@ -36,7 +35,7 @@
     </div>
 
     <div ng-repeat="reward in fundraiser.rewards" class="well">
-      <div>{{reward.amount}}</div>
+      <div><button class="btn btn-primary btn-large" type="button">{{reward.amount | currency}}</button></div>
       <div>{{reward.description}}</div>
     </div>
   </div>
