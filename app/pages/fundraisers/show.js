@@ -5,10 +5,18 @@ angular.module('app')
     $routeProvider
       .when('/fundraisers/:id', {
         templateUrl: 'pages/fundraisers/show.html',
-        controller: 'FundraisersShow'
+        controller: 'FundraisersController'
       });
   })
-  .controller('FundraisersShow', function ($scope, $routeParams, $api) {
-    $scope.fundraiser = $api.fundraiser_get($routeParams.id);
-  });
 
+  .controller('FundraisersController', function ($scope, $routeParams, $api) {
+    $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
+      console.log('fundraiser', response);
+      return response;
+    });
+
+    $scope.pledges = $api.fundraiser_pledges_get($routeParams.id).then(function(response) {
+      console.log('pledges', response);
+      return response;
+    });
+  });

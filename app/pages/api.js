@@ -28,6 +28,14 @@ angular.module('api.bountysource',[]).
         return deferred.promise;
       },
 
+      fundraiser_update_get: function(fundraiser_id, id) {
+        var deferred = $q.defer();
+        $http.jsonp(api_host+"/user/fundraisers/"+fundraiser_id+"/updates/"+id+"?callback=JSON_CALLBACK").success(function(response) {
+          deferred.resolve(response.data);
+        });
+        return deferred.promise;
+      },
+
       people_recent: function(id) {
         var deferred = $q.defer();
         $http.jsonp(api_host+"/user/recent?callback=JSON_CALLBACK").success(function(response) {
