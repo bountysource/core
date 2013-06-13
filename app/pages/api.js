@@ -47,7 +47,14 @@ angular.module('api.bountysource',[]).
       person_get: function(id) {
         var deferred = $q.defer();
         $http.jsonp(api_host+"/users/"+id+"?callback=JSON_CALLBACK").success(function(response) {
-          console.log(response);
+          deferred.resolve(response.data);
+        });
+        return deferred.promise;
+      },
+
+      person_timeline_get: function(id) {
+        var deferred = $q.defer();
+        $http.jsonp(api_host+"/users/"+id+"/activity?callback=JSON_CALLBACK").success(function(response) {
           deferred.resolve(response.data);
         });
         return deferred.promise;

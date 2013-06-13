@@ -16,10 +16,15 @@
 
   <div class="span8">
 
-    <ul class="nav nav-tabs">
-      <li class='active'><a href="/people/{{person.slug}}" data-toggle="tab">Overview</a></li>
-      <li><a href="/people/{{person.slug}}/timeline" data-toggle="tab">Timeline</a></li>
-    </ul>
+    <tabs>
+      <pane heading="Overview">
+        <ng-include src="'pages/people/partials/overview.html'"></ng-include>
+      </pane>
+
+      <pane heading="Timeline">
+        <ng-include src="'pages/people/partials/timeline.html'"></ng-include>
+      </pane>
+    </tabs>
 
   </div>
 

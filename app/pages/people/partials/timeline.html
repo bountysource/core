@@ -1,0 +1,31 @@
+<table id="person-timeline-table" class="table table-striped">
+  <thead>
+  <tr>
+    <th>Action</th>
+    <th>Date</th>
+  </tr>
+  </thead>
+
+  <tr ng-repeat="action in timeline">
+    <td ng-show="action.type == 'pledge'">
+      <strong>{{ person.display_name }}</strong> pledged <strong>{{ action.amount | currency }}</strong> to <a href="/fundraisers/{{ action.target_slug }}">{{ action.target_name }}</a>
+    </td>
+
+    <td ng-show="action.type == 'bounty'">
+      <strong>{{ person.display_name }}</strong> placed a <strong>{{ action.amount | currency }}</strong> bounty on <a href="/issues/{{ action.target_slug }}">{{ action.target_name }}</a>
+    </td>
+
+    <td ng-show="action.type == 'tracker_plugin'">
+      <strong>{{ person.display_name }}</strong> installed the GitHub plugin for <a href="/trackers/{{ action.target_slug }}">{{ action.target_name }}</a>
+    </td>
+
+    <td class="muted">{{ action.created_at | date:'medium' }}</td>
+  </tr>
+
+  <tr>
+    <td>
+      Joined the Bountysource family
+    </td>
+    <td class="muted">{{ person.created_at | date:'medium' }}</td>
+  </tr>
+</table>
