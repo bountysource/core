@@ -1,1 +1,31 @@
-<p class="alert">TODO this shit</p>
+<div class="alert alert-info" ng-hide="issue.bounties.length > 0">
+  No bounties have been placed.
+</div>
+
+<div ng-show="issue.bounties.length > 0">
+  <table id="bounties-table" class="table table-striped">
+    <tr>
+      <th>Backer</th>
+      <th></th>
+      <th>Amount</th>
+      <th></th>
+    </tr>
+    <tr ng-repeat="bounty in issue.bounties">
+      <td>
+        <img ng-show="bounty.person" class="thumbnail" src="{{ bounty.person.image_url }}" />
+        <img ng-hide="bounty.person" class="thumbnail" src="{{ bounty.person.image_url }}" />
+      </td>
+      <td>
+        <a ng-show="bounty.person" href="/people/{{ bounty.person.slug }}">{{ bounty.person.display_name }}</a>
+        <div ng-hide="bounty.person">Anonymous</div>
+      </td>
+      <td>
+        <div>{{ bounty.amount | currency }}</div>
+      </td>
+      <td>
+        <div>{{ bounty.created_at | date }}</div>
+      </td>
+    </tr>
+  </div>
+</div>
+

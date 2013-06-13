@@ -1,4 +1,8 @@
-<div ng-repeat="comment in issue.comments">
+<div class="alert alert-info" ng-hide="issue.comments.length > 0">
+  No comments have been made.
+</div>
+
+<div ng-show="issue.comments.length > 0" ng-repeat="comment in issue.comments">
   <div>
     <img src="{{comment.author_image_url}}" style="width:50px;height:50px"/>
     {{comment.author_name}} on {{comment.created_at | date}}

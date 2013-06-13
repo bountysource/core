@@ -2,6 +2,8 @@
   No solutions have been submitted.
 </div>
 
-<div ng-show="issue.solutions.length > 0">
+<div ng-show="issue.solutions.length > 0" ng-repeat="solution in issue.solutions">
+  {{solution}}
+  <hr />
 </div>
 
