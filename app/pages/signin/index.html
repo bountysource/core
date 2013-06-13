@@ -1,0 +1,76 @@
+<form class="form-horizontal form-signin">
+  <h2>Please sign in to continue</h2>
+
+  <p>The easiest way is to use an account you already have.</p>
+
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Use a Service:</label>
+    <div class="controls">
+      <ul ng-controller="Signin">
+        <li><a href="{{github_signin_url}}"><img src="images/favicon-github.png"> GitHub</a></li>
+        <li><a href="{{facebook_signin_url}}"><img src="images/favicon-facebook.png"> Facebook</a></li>
+        <li><a href="{{twitter_signin_url}}"><img src="images/favicon-twitter.png"> Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Otherwise, enter your email address to continue.</p>
+
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email Address:</label>
+    <div class="controls">
+      <input type="text" id="inputEmail" placeholder="john@doe.com">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success">Sign In</button>
+    </div>
+  </div>
+
+
+
+  <!--
+        <label class="checkbox">
+          <input type="checkbox"> I agree to <a href="#">Terms of Services</a>
+        </label>
+
+
+    <div class="control-group">
+      <label class="control-label" for="inputCompanyName">Company Name</label>
+      <div class="controls">
+        <input type="text" id="inputCompanyName" placeholder="E.g. Some Software Pvt. Ltd.">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputFirst">First Name</label>
+      <div class="controls">
+        <input type="text" id="inputFirst" placeholder="E.g. Ashwin">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputLast">Last Name</label>
+      <div class="controls">
+        <input type="text" id="inputLast" placeholder="E.g. Hegde">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputUser">Username</label>
+      <div class="controls">
+        <input type="text" id="inputUser" placeholder="E.g. ashwinhegde">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputPassword">Password</label>
+      <div class="controls">
+        <input type="password" id="inputPassword" placeholder="Min. 8 Characters">
+      </div>
+    </div>
+    <div class="alert alert-info">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>Confirmation: </strong> A confirmation email has been sent to your email.<br>
+      Thank you for your registration.
+    </div>
+  -->
+</form>
