@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
   <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
-  <li><a href="/fundraisers/{{fundraiser.id}}">{{fundraiser.title ||'Loading...'}}</a></li>
+  <li><a href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.title ||'Loading...'}}</a></li>
 </ul>
 
 <h1>{{fundraiser.title}}</h1>
@@ -10,9 +10,9 @@
   <div class="span8">
 
     <ul class="nav nav-tabs">
-      <li class='active'><a href="/fundraisers/{{fundraiser.id}}" data-toggle="tab">Overview</a></li>
-      <li ng-show="fundraiser.updates.length>0"><a href="/fundraisers/{{fundraiser.id}}/updates" data-toggle="tab">Updates ({{fundraiser.updates.length}})</a></li>
-      <li><a href="/fundraisers/{{fundraiser.id}}/pledges" data-toggle="tab">Pledges ({{fundraiser.pledge_count}})</a></li>
+      <li class='active'><a href="/fundraisers/{{fundraiser.slug}}" data-toggle="tab">Overview</a></li>
+      <li ng-show="fundraiser.updates.length>0"><a href="/fundraisers/{{fundraiser.slug}}/updates" data-toggle="tab">Updates ({{fundraiser.updates.length}})</a></li>
+      <li><a href="/fundraisers/{{fundraiser.slug}}/pledges" data-toggle="tab">Pledges ({{fundraiser.pledge_count}})</a></li>
     </ul>
 
     <h3>{{fundraiser.short_description}}</h3>
