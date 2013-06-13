@@ -1,0 +1,31 @@
+<div ng-hide="pledges">Loading...</div>
+
+<table id="pledges-table" ng-show="pledges && pledges.length > 0" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Backer</th>
+      <th></th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="pledge in pledges">
+    <td>
+      <img ng-show="pledge.person" class="thumbnail" src="{{ pledge.person.image_url }}" />
+      <img ng-hide="pledge.person" class="thumbnail" src="" />
+    </td>
+
+    <td>
+      <a ng-show="pledge.person" href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
+      <div ng-hide="pledge.person" class="muted">Anonymous</div>
+    </td>
+
+    <td>
+      <div>{{ pledge.amount | currency }}</div>
+    </td>
+
+    <td>
+      <div class="muted">{{ pledge.created_at | date }}</div>
+    </td>
+  </tr>
+</table>
