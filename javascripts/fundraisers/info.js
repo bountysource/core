@@ -81,7 +81,8 @@ with (scope('Info', 'Fundraiser')) {
           reward.pledges.map(function(pledge) {
             return tr(
               td({ style: 'height: 30px;' },
-                a({ href: pledge.person.frontend_path }, pledge.person.display_name)
+                pledge.person && a({ href: pledge.person.frontend_path }, pledge.person.display_name),
+                !pledge.person && span('Anonymous')
               ),
               td(
                 money(pledge.amount)
