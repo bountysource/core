@@ -1,7 +1,8 @@
 angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieStore, $rootScope, $location) {
     this.api_host = "https://api.bountysource.com/";
-    //this.api_host = "http://api.bountysource.dev/";
+//    this.api_host = "http://api.bountysource.dev/";
+//    this.api_host = "https://www-qa.bountysource.com/";
 
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
@@ -15,7 +16,7 @@ angular.module('api.bountysource',[]).
       // merge in params
       params.callback = 'JSON_CALLBACK';
       params._method = method;
-      if ($rootScope.current_person) params.access_token = $rootScope.current_person.access_token;
+      if ($cookieStore.get('access_token')) params.access_token = $cookieStore.get('access_token');
 
       // deferred JSONP call with a promise
       var deferred = $q.defer();
@@ -31,6 +32,10 @@ angular.module('api.bountysource',[]).
 
     this.fundraiser_get = function(id) {
       return this.call("/user/fundraisers/"+id);
+    };
+
+    this.fundraiser_update = function(id, data) {
+      return this.call("/user/fundraisers/"+id, "PUT", data);
     };
 
     this.fundraiser_pledges_get = function(id) {
@@ -84,7 +89,7 @@ angular.module('api.bountysource',[]).
       var access_token = $cookieStore.get('access_token');
       if (access_token) {
         var that = this;
-        this.call("/user", { access_token: access_token}, function(response) {
+        this.call("/user", { access_token: access_token }, function(response) {
           if (response.meta.status == 200) {
             console.log("access token still valid");
             $rootScope.current_person = response.data;

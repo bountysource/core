@@ -1,3 +1,5 @@
+<div ng-show="!pledges || pledges.length <= 0" class="alert alert-info">No pledges have been made :(</div>
+
 <div ng-hide="pledges">Loading...</div>
 
 <table id="pledges-table" ng-show="pledges && pledges.length > 0" class="table table-striped">
