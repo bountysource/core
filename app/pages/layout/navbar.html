@@ -13,7 +13,8 @@
           <li><a href="/explore">Explore</a></li>
           <li><a href="/blog">Blog</a></li>
           <li ng-class="{'dropdown': true, 'dropup': true, 'active': showChatroom}"><a href="" ng-controller="ChatroomController" ng-click="toggleChatroom()">Chatroom <b class="caret"></b></a></li>
-          <li class="dropdown">
+
+          <li class="dropdown" ng-hide="person">
             <a href="/signin" class="dropdown-toggle" data-toggle="dropdown">Sign In<b class="caret"></b></a>
             <ul class="dropdown-menu" ng-controller="Signin">
               <li style="padding-left: 10px;">Using:</li>
@@ -23,6 +24,15 @@
               <li><a href="/signin"><img src="images/favicon-email.png"> Email Address</a></li>
             </ul>
           </li>
+
+          <li class="dropdown" ng-show="person">
+            <a href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> {{person.display_name}}<b class="caret"></b></a>
+            <ul class="dropdown-menu" ng-controller="Signin">
+              <li><a href="/people/{{person.slug}}">Settings</a></li>
+              <li><a href="" ng-controller="Signout" ng-click="signout()">Logout</a></li>
+            </ul>
+          </li>
+
         </ul>
       </div>
     </div>

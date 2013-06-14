@@ -1,103 +1,105 @@
 angular.module('api.bountysource',[]).
-  factory('$api', function($http, $q){
-    // var api_host = "https://api.bountysource.com";
-    var api_host = "http://api.bountysource.dev";
+  service('$api', function($http, $q, $cookieStore, $rootScope, $location) {
+    this.api_host = "https://api.bountysource.com/";
+    //this.api_host = "http://api.bountysource.dev/";
 
-    return {
-      fundraiser_cards: function() {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/fundraisers/cards?callback=JSON_CALLBACK").success(function(response) {
-          deferred.resolve(response.data.in_progress.concat(response.data.completed));
-        });
-        return deferred.promise;
-      },
+    // call(url, 'POST', { foo: bar }, optional_callback)
+    this.call = function() {
+      // parse arguments
+      var args = Array.prototype.slice.call(arguments);
+      var url = this.api_host + args.shift().replace(/^\//,'');
+      var method = typeof(args[0]) == 'string' ? args.shift() : 'GET';
+      var params = typeof(args[0]) == 'object' ? args.shift() : {};
+      var callback = typeof(args[0]) == 'function' ? args.shift() : function(response) { return response.data; };
 
-      fundraiser_get: function(id) {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/user/fundraisers/"+id+"?callback=JSON_CALLBACK").success(function(response) {
-          deferred.resolve(response.data);
-        });
-        return deferred.promise;
-      },
+      // merge in params
+      params.callback = 'JSON_CALLBACK';
+      params._method = method;
+      if ($rootScope.person) params.access_token = $rootScope.person.access_token;
 
-      fundraiser_pledges_get: function(id) {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/user/fundraisers/"+id+"/pledges?callback=JSON_CALLBACK").success(function(response) {
-          deferred.resolve(response.data);
-        });
-        return deferred.promise;
-      },
-
-      fundraiser_update_get: function(fundraiser_id, id) {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/user/fundraisers/"+fundraiser_id+"/updates/"+id+"?callback=JSON_CALLBACK").success(function(response) {
-          deferred.resolve(response.data);
-        });
-        return deferred.promise;
-      },
-
-      people_recent: function(id) {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/user/recent?callback=JSON_CALLBACK").success(function(response) {
-          deferred.resolve(response.data);
-        });
-        return deferred.promise;
-      },
-
-      person_get: function(id) {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/users/"+id+"?callback=JSON_CALLBACK").success(function(response) {
-          deferred.resolve(response.data);
-        });
-        return deferred.promise;
-      },
-
-      person_timeline_get: function(id) {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/users/"+id+"/activity?callback=JSON_CALLBACK").success(function(response) {
-          deferred.resolve(response.data);
-        });
-        return deferred.promise;
-      },
-
-      project_cards: function() {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/trackers/cards?callback=JSON_CALLBACK").success(function(response) {
-          console.log(response);
-          deferred.resolve(response.data.featured_trackers.concat(response.data.all_trackers));
-        });
-        return deferred.promise;
-      },
-
-      tracker_get: function(id) {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/trackers/"+id+"/overview?callback=JSON_CALLBACK").success(function(response) {
-          console.log(response);
-          deferred.resolve(response.data);
-        });
-        return deferred.promise;
-      },
-
-      issue_get: function(id) {
-        var deferred = $q.defer();
-        $http.jsonp(api_host+"/issues/"+id+"?callback=JSON_CALLBACK").success(function(response) {
-          console.log(response);
-          deferred.resolve(response.data);
-        });
-        return deferred.promise;
-      }
-
+      // deferred JSONP call with a promise
+      var deferred = $q.defer();
+      $http.jsonp(url, { params: params }).success(function(response) {
+        deferred.resolve(callback(response));
+      });
+      return deferred.promise;
     };
+
+    this.fundraiser_cards = function() {
+      return this.call("/fundraisers/cards", function(r) { return r.data.in_progress.concat(r.data.completed); });
+    };
+
+    this.fundraiser_get = function(id) {
+      return this.call("/user/fundraisers/"+id);
+    };
+
+    this.fundraiser_pledges_get = function(id) {
+      return this.call("/user/fundraisers/"+id+"/pledges");
+    };
+
+    this.fundraiser_update_get = function(fundraiser_id, id) {
+      return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id);
+    };
+
+    this.people_recent = function() {
+      return this.call("/user/recent");
+    };
+
+    this.person_get = function(id) {
+      return this.call("/users/"+id);
+    };
+
+    this.person_timeline_get = function(id) {
+      return this.call("/users/"+id+"/activity");
+    };
+
+    this.project_cards = function() {
+      return this.call("/trackers/cards", function(r) { return r.data.featured_trackers.concat(r.data.all_trackers); });
+    };
+
+    this.tracker_get = function(id) {
+      return this.call("/trackers/"+id+"/overview");
+    };
+
+    this.issue_get = function(id) {
+      return this.call("/issues/"+id);
+    };
+
+
+    // these should probably go in an "AuthenticationController" or something more angular
+
+    this.signin = function(email, password) {
+      return this.call("/user/login", "POST", { email: email, password: password }, function(response) {
+        console.log(response);
+        if (response.meta.status == 200) {
+          $rootScope.person = response.data;
+          $cookieStore.put('access_token', $rootScope.person.access_token);
+          $location.path("/");
+        }
+      });
+    };
+
+    this.verify_access_token = function() {
+      console.log("verifying")
+      var access_token = $cookieStore.get('access_token');
+      if (access_token) {
+        var that = this;
+        this.call("/user", { access_token: access_token}, function(response) {
+          if (response.meta.status == 200) {
+            console.log("access token still valid");
+            $rootScope.person = response.data;
+          } else {
+            console.log("access token expired. signing out.");
+            that.signout();
+          }
+        });
+      }
+    };
+
+    this.signout = function() {
+      $rootScope.person = null;
+      $cookieStore.remove('access_token');
+      $location.path("/");
+    };
+
   });
-
-
-
-//    return {
-//      fundraiser: $resource('https://api.bountysource.com/user/fundraisers/:id',
-//        { callback: 'JSON_CALLBACK' },
-//        { get: { method: 'JSONP' } }
-//      ),
-//      issue:
-//
-//      };
-//    };

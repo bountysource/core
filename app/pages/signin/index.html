@@ -19,20 +19,20 @@
   <div class="control-group">
     <label class="control-label" for="inputEmail">Email Address:</label>
     <div class="controls">
-      <input type="text" id="inputEmail" placeholder="john@doe.com">
+      <input type="text" id="inputEmail" placeholder="john@doe.com" ng-model="email" />
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="inputPassword">Password:</label>
     <div class="controls">
-      <input type="password" id="inputPassword" placeholder="abc123">
+      <input type="password" id="inputPassword" placeholder="abc123" ng-model="password" />
     </div>
   </div>
 
   <div class="control-group">
     <div class="controls">
-      <button type="submit" class="btn btn-success">Sign In</button>
+      <button type="submit" class="btn btn-success" ng-click="submit()">Sign In</button>
     </div>
   </div>
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize'])
+angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies'])
   .config(function ($routeProvider, $locationProvider, $provide) {
 
     //  NOTE: uncomment to test hashbang # mode
@@ -8,4 +8,6 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize'])
 
     $locationProvider.html5Mode(true);
     $routeProvider.otherwise({ templateUrl: 'pages/layout/not_found.html' });
+  }).run(function($api) {
+    $api.verify_access_token();
   });
