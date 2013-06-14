@@ -1,8 +1,21 @@
 angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieStore, $rootScope, $location) {
-    this.api_host = "https://api.bountysource.com/";
-//    this.api_host = "http://api.bountysource.dev/";
-//    this.api_host = "https://www-qa.bountysource.com/";
+    // environment
+    $rootScope.environment = $cookieStore.get('environment') || 'prod';
+    if ($rootScope.environment == 'dev') {
+      this.api_host = "http://api.bountysource.dev/";
+    } else if ($rootScope.environment == 'qa') {
+      this.api_host = "https://api-qa.bountysource.com/";
+    } else if ($rootScope.environment == 'prod') {
+      this.api_host = "https://api.bountysource.com/";
+    }
+
+    this.setEnvironment = function(env) {
+      $cookieStore.put('environment', env);
+      window.location.reload();
+    };
+
+
 
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
