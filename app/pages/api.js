@@ -15,7 +15,7 @@ angular.module('api.bountysource',[]).
       // merge in params
       params.callback = 'JSON_CALLBACK';
       params._method = method;
-      if ($rootScope.person) params.access_token = $rootScope.person.access_token;
+      if ($rootScope.current_person) params.access_token = $rootScope.current_person.access_token;
 
       // deferred JSONP call with a promise
       var deferred = $q.defer();
@@ -72,8 +72,8 @@ angular.module('api.bountysource',[]).
       return this.call("/user/login", "POST", { email: email, password: password }, function(response) {
         console.log(response);
         if (response.meta.status == 200) {
-          $rootScope.person = response.data;
-          $cookieStore.put('access_token', $rootScope.person.access_token);
+          $rootScope.current_person = response.data;
+          $cookieStore.put('access_token', $rootScope.current_person.access_token);
           $location.path("/");
         }
       });
@@ -87,7 +87,7 @@ angular.module('api.bountysource',[]).
         this.call("/user", { access_token: access_token}, function(response) {
           if (response.meta.status == 200) {
             console.log("access token still valid");
-            $rootScope.person = response.data;
+            $rootScope.current_person = response.data;
           } else {
             console.log("access token expired. signing out.");
             that.signout();
@@ -97,7 +97,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.signout = function() {
-      $rootScope.person = null;
+      $rootScope.current_person = null;
       $cookieStore.remove('access_token');
       $location.path("/");
     };

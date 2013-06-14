@@ -4,18 +4,18 @@
   <li><a href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
 </ul>
 
-<div class="page-header">
-  <h3>
-    {{ issue.title || 'Loading...' }}
-    <small ng-show="issue">
-      <span ng-show="issue.can_add_bounty" class="label label-success">Open</span>
-      <span ng-hide="issue.can_add_bounty" class="label label-fail">Closed</span>
-    </small>
-  </h3>
-</div>
-
 <div class="row-fluid" ng-show="issue">
   <div class="span8">
+    <div class="page-header">
+      <h4>
+        {{ issue.title || 'Loading...' }}
+        <small ng-show="issue">
+          <span ng-show="issue.can_add_bounty" class="label label-success">Open</span>
+          <span ng-hide="issue.can_add_bounty" class="label label-fail">Closed</span>
+        </small>
+      </h4>
+    </div>
+
     <tabs>
       <pane heading="Overview" active="true">
         <ng-include src="'pages/issues/partials/overview.html'"></ng-include>
