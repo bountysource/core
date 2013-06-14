@@ -295,7 +295,7 @@ with (scope('Show', 'Issue')) {
 
           div({ style: 'margin-bottom: 15px; font-size: 12px;' },
             fieldset(
-              checkbox({ id: 'anonymous', name: 'anonymous' }),
+              checkbox({ id: 'anonymous', name: 'anonymous', checked: get_params().anonymous }),
               label({ 'for': 'anonymous' }, 'contribute anonymously')
             )
           ),
@@ -314,7 +314,7 @@ with (scope('Show', 'Issue')) {
       item_number: 'issues/' + issue.id,
       success_url: window.location.href.split('#')[0] + issue.frontend_path + '/bounties/:item_id/receipt',
       cancel_url: window.location.href.split('#')[0] + issue.frontend_path,
-      postauth_url: window.location.href.split('#')[0] + issue.frontend_path + '?payment_method='+form_data.payment_method+'&amount='+form_data.amount
+      postauth_url: window.location.href.split('#')[0] + issue.frontend_path + '?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&anonymous='+form_data.anonymous
     };
 
     Payment.create(payment_data, function(errors) {

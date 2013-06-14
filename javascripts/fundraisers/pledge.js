@@ -40,8 +40,6 @@ with (scope('Pledge', 'Fundraiser')) {
       // require the fundraiser to be published
       if (!fundraiser.published) return render({ into: target_div }, error_message('Fundraiser has not been published.'));
 
-      // create
-
       render({ into: target_div },
         Columns.create({ show_side: false }),
 
@@ -90,6 +88,12 @@ with (scope('Pledge', 'Fundraiser')) {
           )
         )
       );
+      
+      // if anon checkbox was passed through signin redirect, set it again now!
+      if (params.anonymous) {
+        var e = document.getElementById('anonymous');
+        e.checked = true;
+      }
 
       // if a reward id was passed in, select it now
       if (params.reward_id) {
@@ -304,7 +308,7 @@ with (scope('Pledge', 'Fundraiser')) {
       item_number: 'fundraisers/' + fundraiser.id + (parseInt(form_data.reward_id) > 0 ? '/'+form_data.reward_id : ''),
       success_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledges/:item_id',
       cancel_url: window.location.href.split('#')[0] + fundraiser.frontend_path,
-      postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id
+      postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id+'&anonymous='+form_data.anonymous
     };
 
     Payment.create(payment_data, function(errors) {
