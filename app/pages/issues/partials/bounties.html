@@ -4,12 +4,6 @@
 
 <div ng-show="issue.bounties.length > 0">
   <table id="bounties-table" class="table table-striped">
-    <tr>
-      <th>Backer</th>
-      <th></th>
-      <th>Amount</th>
-      <th></th>
-    </tr>
     <tr ng-repeat="bounty in issue.bounties">
       <td>
         <img ng-show="bounty.person" class="thumbnail" src="{{ bounty.person.image_url }}" />
@@ -20,10 +14,10 @@
         <div ng-hide="bounty.person">Anonymous</div>
       </td>
       <td>
-        <div>{{ bounty.amount | currency }}</div>
+        <div><strong>{{ bounty.amount | currency }}</strong></div>
       </td>
       <td>
-        <div>{{ bounty.created_at | date }}</div>
+        <div class="muted">{{ bounty.created_at | date }}</div>
       </td>
     </tr>
   </div>
