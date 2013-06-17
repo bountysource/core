@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies'])
-  .config(function ($routeProvider, $locationProvider, $provide) {
+  .config(function ($routeProvider, $locationProvider) {   //, $provide) {
 
     //  NOTE: uncomment to test hashbang # mode
     //  $provide.decorator('$sniffer', function($delegate) { $delegate.history = false; return $delegate; });

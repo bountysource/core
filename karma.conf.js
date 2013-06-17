@@ -9,8 +9,10 @@ files = [
   JASMINE_ADAPTER,
   'app/components/angular/angular.js',
   'app/components/angular-mocks/angular-mocks.js',
-  'app/scripts/*.js',
-  'app/scripts/**/*.js',
+  'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
+  'app/components/angular-cookies/angular-cookies.js',
+  'app/components/angular-sanitize/angular-sanitize.js',
+  'app/pages/**/*.js',
   'test/mock/**/*.js',
   'test/spec/**/*.js'
 ];
@@ -46,6 +48,7 @@ autoWatch = false;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
+//browsers = ['Chrome'];
 browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it

@@ -33,17 +33,17 @@ angular.module('app')
     $scope.row_class_for_solution = function(solution) {
       var status = $scope.status_for_solution(solution);
 
-      if (status == 'started') {
+      if (status === 'started') {
         return;
-      } else if (status == 'pending_merge') {
+      } else if (status === 'pending_merge') {
         return 'warning';
-      } else if (status == 'in_dispute_period') {
+      } else if (status === 'in_dispute_period') {
         return 'info';
-      } else if (status == 'disputed') {
+      } else if (status === 'disputed') {
         return 'warning';
-      } else if (status == 'rejected') {
+      } else if (status === 'rejected') {
         return 'error';
-      } else if (status == 'accepted') {
+      } else if (status === 'accepted') {
         return 'success';
       }
     };

@@ -16,7 +16,7 @@ angular.module('app')
 
   .controller('FundraisersController', function ($scope, $routeParams, $q, $api) {
     $scope.new  = !$routeParams.id && !$scope.fundraiser;
-    $scope.edit = !$scope.new && $routeParams.mode == 'edit';
+    $scope.edit = !$scope.new && $routeParams.mode === 'edit';
 
     $scope.fundraiser = $scope.new ? undefined : $api.fundraiser_get($routeParams.id).then(function(response) {
       console.log('fundraiser', response);
@@ -58,5 +58,5 @@ angular.module('app')
     $scope.cancel = function() {
       $scope.edit = false;
       console.log('cancel');
-    }
+    };
   });
