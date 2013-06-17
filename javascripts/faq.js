@@ -115,7 +115,7 @@ with (scope('Faq', 'App')) {
             dd("A bounty is money offered as a reward for successfully resolving an issue within an open-source project."),
 
             dt("Who can create a bounty?"),
-            dd("Anybody with a PayPal account. We'll be supporting other payment methods (including Google Wallet and Bitcoins) very soon!"),
+            dd("Anybody with a Google Wallet or PayPal account. We plan to support other payment methods (such as Bitcoins) if there's demand for it!"),
 
             dt("What can I put bounties on?"),
             dd("You can create bounties on any open issue within any open-source project."),
@@ -170,7 +170,7 @@ with (scope('Faq', 'App')) {
             dd("Once a solution is accepted, it enters a two-week dispute period. If there are no outstanding disputes, you get paid after this period."),
 
             dt("How do I receive payment?"),
-            dd("You can receive payment via Paypal or a physical check."),
+            dd("You can receive payment via Google Wallet, Paypal, or a physical check."),
 
             dt("Do I have to pay taxes on bounties I collect?"),
             dd("If you are in the United States and payments made to you are more than $600 for the year, we are required to issue you a Form 1099 to report the payments, which will require you to complete a Form W-9. You should consult your tax advisor as to the taxability of the payments.")
