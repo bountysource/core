@@ -9,19 +9,24 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserCreateController', function($scope, $routeParams, $api) {
-    $scope.fr_title = "My Fundraiser";
+  .controller('FundraiserCreateController', function($scope, $routeParams, $location, $api) {
+    $scope.changes = {};
 
-    $scope.create = function () {
-      var data = {
-        title: $scope.fr_title,
-        description: $scope.fr_description,
-        short_description: $scope.fr_short_description
-      };
+    $scope.alerts = [];
+    $scope.close_alert = function(i) { $scope.alerts.splice(i,1) };
 
-      $scope.fundraiser = $api.fundraiser_create(data).then(function(response) {
-        $location.path("/fundraisers/"+response.slug+"/edit");
+    $scope.create = function() {
+      $api.fundraiser_create($scope.changes).then(function(response) {
+
+        console.log(response);
+
+        if (response.error) {
+          $scope.alerts.push({ type: 'error', msg: response.error });
+        } else {
+          $location.path("/fundraisers/"+response.slug+"/edit");
+        }
+
         return response;
       });
-    }
+    };
   });

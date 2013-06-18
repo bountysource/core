@@ -7,15 +7,9 @@
 
 <div class="row-fluid">
   <div class="span9">
-    <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{alert.msg}}</alert>
-
-
+    <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{ alert.msg }}</alert>
 
     <div ng-include="'pages/fundraisers/partials/header_inputs.html'"></div>
-
-    <div class="muted" ng-show="fundraiser">A fundraiser by <a href="/people/{{ fundraiser.person.slug }}">{{ fundraiser.person.display_name }}</a></div>
-    <hr />
-
     <div ng-include="'pages/fundraisers/partials/description_input.html'"></div>
   </div>
 

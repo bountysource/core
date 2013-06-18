@@ -10,7 +10,7 @@
     <button class="btn btn-small" popover-title="Fundraiser Header" popover="This section consists of a title and quick description of your fundraiser.">More Info</button>
     <button ng-click="reset_header()" class="btn btn-small">Cancel Changes</button>
 
-    <button ng-hide="header.$dirty" class="btn btn-small">No Changes</button>
+    <button ng-hide="header.$dirty" class="btn btn-small" disabled>Save Changes</button>
     <button ng-show="header.$dirty" ng-click="save_header()" class="btn btn-small btn-primary">Save Changes</button>
   </div>
   <div class="clearfix"></div>

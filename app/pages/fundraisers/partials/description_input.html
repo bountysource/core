@@ -9,7 +9,7 @@
     <button class="btn btn-small" popover-title="Fundraiser Description" popover="This the main text body of your fundraiser. Make sure to clearly outline your goals. Pro Tip: You can format this body with GitHub flavored Markdown!">More Info</button>
     <button ng-click="reset_description()" class="btn btn-small">Cancel Changes</button>
 
-    <button ng-hide="description.$dirty" class="btn btn-small">No Changes</button>
+    <button ng-hide="description.$dirty" class="btn btn-small" disabled>Save Changes</button>
     <button ng-show="description.$dirty" ng-click="save_description()" class="btn btn-small btn-primary">Save Changes</button>
   </div>
   <div class="clearfix"></div>
