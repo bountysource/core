@@ -4,7 +4,7 @@
   <li><a href="/fundraisers/{{fundraiser.id}}">{{ fundraiser.title || 'Loading...' }}</a></li>
 </ul>
 
-<form class="form" ng-show="fundraiser">
+<form class="form" ng-show="fundraiser" ng-controller="FundraiserShowController">
   <ul class="nav nav-tabs">
     <li class="active"><a>Overview</a></li>
     <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
@@ -42,33 +42,7 @@
     </div>
 
     <div class="span4">
-      <div class="well">
-        <div><img src="{{fundraiser.person.image_url}}" /></div>
-        <h3>{{fundraiser.person.display_name}}</h3>
-
-        <hr/>
-
-        <div><strong>{{ fundraiser.pledge_count | number }}</strong> pledges</div>
-        <div><strong>{{ fundraiser.total_pledged | currency }}</strong> raised of <strong>{{ fundraiser.funding_goal | currency }}</strong></div>
-        <div><strong>{{ fundraiser.days_remaining | number }}</strong> Days remaining</div>
-
-        <br/>
-
-        <div class="progress">
-          <div class="bar bar-success" ng-style="funding_bar_style"></div>
-        </div>
-
-        <!--<ul>-->
-          <!--<li>Pledges</li>-->
-          <!--<li>Raised: {{fundraiser.total_pledged | currency }} of {{fundraiser.funding_goal | currency}}</li>-->
-          <!--<li>Days remaining: {{fundraiser.days_remaining}}</li>-->
-        <!--</ul>-->
-      </div>
-
-      <div ng-repeat="reward in fundraiser.rewards" class="well">
-        <div><button class="btn btn-primary btn-large" type="button">{{reward.amount | currency}}</button></div>
-        <div>{{reward.description}}</div>
-      </div>
+      <div ng-include="'pages/fundraisers/partials/side_content.html'"></div>
     </div>
   </div>
 </form>

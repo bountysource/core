@@ -12,17 +12,12 @@
 
   <div class="row-fluid">
     <div class="span8">
-      <h2>{{ fundraiser.title || 'Loading...' }}</h2>
-      <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
-      <span class="muted" ng-show="fundraiser">A fundraiser by <a href="/people/{{ fundraiser.person.slug }}">{{ fundraiser.person.display_name }}</a></span>
-
       <div ng-show="can_manage">
-        <hr/>
         <button ng-click="new_update()" class="btn btn-small btn-success">New Update</button>
         <a ng-href="/fundraisers/{{fundraiser.slug}}/edit" class="btn btn-small">Edit Fundraiser</a>
         <a ng-href="manage_rewards()" class="btn btn-small">Manage Rewards</a>
+        <hr/>
       </div>
-      <hr />
 
       <div class="alert alert-info" ng-show="updates.length <= 0">
         No updates have been published yet.
@@ -60,29 +55,6 @@
       <div class="well">
         <div><img src="{{fundraiser.person.image_url}}" /></div>
         <h3>{{fundraiser.person.display_name}}</h3>
-
-        <hr/>
-
-        <div><strong>{{ fundraiser.pledge_count | number }}</strong> pledges</div>
-        <div><strong>{{ fundraiser.total_pledged | currency }}</strong> raised of <strong>{{ fundraiser.funding_goal | currency }}</strong></div>
-        <div><strong>{{ fundraiser.days_remaining | number }}</strong> Days remaining</div>
-
-        <br/>
-
-        <div class="progress">
-          <div class="bar bar-success" ng-style="funding_bar_style"></div>
-        </div>
-
-        <!--<ul>-->
-        <!--<li>Pledges</li>-->
-        <!--<li>Raised: {{fundraiser.total_pledged | currency }} of {{fundraiser.funding_goal | currency}}</li>-->
-        <!--<li>Days remaining: {{fundraiser.days_remaining}}</li>-->
-        <!--</ul>-->
-      </div>
-
-      <div ng-repeat="reward in fundraiser.rewards" class="well">
-        <div><button class="btn btn-primary btn-large" type="button">{{reward.amount | currency}}</button></div>
-        <div>{{reward.description}}</div>
       </div>
     </div>
   </div>

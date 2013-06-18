@@ -10,10 +10,14 @@ angular.module('app')
   })
 
   .controller('FundraiserShowController', function ($scope, $rootScope, $routeParams, $location, $api) {
-    $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
-      $scope.can_manage = response.person && $scope.current_person && response.person.id == $scope.current_person.id;
-      $scope.funding_bar_style = { width: "50%" };
-      return response;
+    $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(r) {
+      // authorization
+      $scope.can_manage = r.person && $scope.current_person && r.person.id == $scope.current_person.id;
+
+      // calculate percentage bar
+      $scope.funding_percentage = Math.min(r.total_pledged / r.funding_goal, 100) * 100;
+
+      return r;
     });
 
     $scope.edit = function() { $location.path("/fundraisers/"+$routeParams.id+"/edit") };

@@ -1,0 +1,19 @@
+<table class="table table-striped table-hover">
+  <tr ng-repeat="reward in fundraiser.rewards" ng-class="reward.sold_out && 'warning'">
+    <td style="width:35%">
+      <button ng-hide="reward.sold_out" ng-click="pledge(reward.amount)" style="width:100%;" class="btn btn-large btn-primary">{{ reward.amount | currency }}</button>
+      <button popover-placement="left" popover-title="Oh no!" popover="This reward is sold out, but you can still claim another one!" popover-trigger="mouseenter" ng-show="reward.sold_out" style="width:100%;" class="btn btn-large btn-warning">{{ reward.amount | currency }}</button>
+    </td>
+    <td>
+      <span class="pull-right label label-warning">merch</span>
+      <div>
+        <div ng-show="reward.limited_to">
+          <strong>{{ reward.claimed | number }}</strong> of <strong>{{ reward.limited_to | number }}</strong> claimed
+        </div>
+        <div ng-hide="reward.limited_to"><strong>{{ reward.claimed | number }}</strong> claimed</div>
+        <br />
+      </div>
+      <p style="white-space: pre-wrap;">{{ reward.description }}</p>
+    </td>
+  </tr>
+</table>
