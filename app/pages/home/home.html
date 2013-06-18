@@ -1,15 +1,84 @@
-<div style="text-align: center;" class="hero-unit">
-  <h1>The funding platform for open-source software.</h1>
+<div class="row-fluid homepage">
+  <div class="span12">
+    <h1>The funding platform for open-source software.</h1>
+    <h2>Backers get code. Developers earn money.</h2>
 
-  <br />
+    <div class="row-fluid">
+      <div class="span6 well">
+        <h3>Top Backers</h3>
+        <ul class="thumbnails">
+          <li class="span2" ng-repeat="person in recent_people.people.slice(0,6)">
+            <a href="/people/{{person.slug}}" class="thumbnail">
+              <img src="{{person.image_url}}" /><br/>
+              $5,000 this month
+            </a>
+          </li>
+        </ul>
 
-  <div>
-    <a href="/fundraisers/new" class="btn btn-large">Create Fundraiser</a>
+        <div class="row-fluid">
+          <div class="span6">
+            <h4>Featured Projects</h4>
+            <ul>
+              <li>textmate</li>
+              <li>rails</li>
+              <li>ZNC</li>
+            </ul>
+            <a class="btn btn-large btn-primary btn-block">Create Bounty</a>
+          </div>
+          <div class="span6">
+            <h4>Featured Fundraisers</h4>
+            <ul>
+              <li>JS-Git</li>
+              <li>JRuby</li>
+              <li>Farwest</li>
+            </ul>
+            <a class="btn btn-large btn-primary btn-block">Browse Fundraisers</a>
+          </div>
+        </div>
+      </div>
 
-    <a class="btn btn-large">Create Bounty</a>
-    <a class="btn btn-large">Explore Bounties</a>
+
+      <div class="span6 well">
+        <h3>Top Developers</h3>
+
+        <ul class="thumbnails">
+          <li class="span2" ng-repeat="person in recent_people.people.slice(0,6)">
+            <a href="/people/{{person.slug}}" class="thumbnail">
+              <img src="{{person.image_url}}" /><br/>
+              $5,000 this month
+            </a>
+          </li>
+        </ul>
+
+
+        <div class="row-fluid">
+          <div class="span6">
+            <h4>Top Issues</h3>
+              <ul>
+                <li><span class="badge badge-success">$1,500</span> split-pane support</li>
+                <li><span class="badge badge-success">$900</span> scrollie wheels</li>
+                <li><span class="badge badge-success">$800</span> lightning in a bottle</li>
+              </ul>
+              <a class="btn btn-large btn-primary btn-block">Browse Bounties</a>
+          </div>
+          <div class="span6">
+            <h4>Top BLANKS??</h3>
+              <ul>
+                <li>foo</li>
+                <li>bar</li>
+                <li>boz</li>
+              </ul>
+              <a class="btn btn-large btn-primary btn-block">Create Fundraiser</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 </div>
+
+
 
 <h2>Recent Users ({{recent_people.total_count | number}})</h2>
 <ul class="thumbnails">
