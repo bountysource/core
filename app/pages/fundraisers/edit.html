@@ -1,23 +1,15 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
   <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
-  <li>
-    <a ng-show="fundraiser" href="/fundraisers/{{fundraiser.id}}">{{fundraiser.title}}</a>
-    <a ng-hide="fundraiser">Loading...</a>
-    <span class="divider">»</span>
-  </li>
+  <li><a href="/fundraisers/{{fundraiser.id}}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
   <li><a>Edit</a></li>
 </ul>
 
 <div class="row-fluid">
-  <div class="span8">
+  <div class="span9">
     <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{alert.msg}}</alert>
 
-    <div class="alert alert-info">
-      <p><strong>Note:</strong> This fundraiser is now in edit mode.</p>
-      <button ng-click="cancel_all()" class="btn">Cancel</button>
-      <button ng-click="save_all()" class="btn btn-primary">Save</button>
-    </div>
+
 
     <div ng-include="'pages/fundraisers/partials/header_inputs.html'"></div>
 
@@ -27,7 +19,12 @@
     <div ng-include="'pages/fundraisers/partials/description_input.html'"></div>
   </div>
 
-  <div class="span4">
+  <div class="span3">
+    <div class="well well-large">
+      <button ng-click="save_all()" class="btn btn-primary btn-large btn-block">Save</button>
+      <button ng-click="cancel_all()" class="btn btn-large btn-block">Cancel</button>
+    </div>
 
+    <div ng-show="fundraiser.rewards.length > 0" ng-include="'pages/fundraisers/partials/rewards.html'"></div>
   </div>
 </div>

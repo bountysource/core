@@ -51,11 +51,8 @@ angular.module('app')
         if (response.error) {
           $scope.alerts.push({ type: 'error', msg: response.error });
         } else {
-          $scope.alerts.push({ type: 'success', msg: "Fundraiser saved!" });
-          $scope.master.description = response.description;
-          $scope.master.description_html = response.description_html;
+          $location.path("/fundraisers/"+$scope.master.slug);
         }
-        return response;
       });
     };
 

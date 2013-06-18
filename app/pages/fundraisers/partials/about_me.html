@@ -1,0 +1,8 @@
+<div style="margin-bottom: 15px;">
+  <h3 style="margin-top: 0;">About <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
+  <a class="thumbnail" ng-href="/people/{{fundraiser.person.slug}}">
+    <img src="{{fundraiser.person.image_url}}">
+  </a>
+
+  <div>{{ fundraiser.person.bio }}</div>
+</div>

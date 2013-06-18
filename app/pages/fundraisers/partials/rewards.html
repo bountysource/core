@@ -4,16 +4,18 @@
   <tr ng-repeat="reward in fundraiser.rewards" ng-class="reward.sold_out && 'warning'">
     <td>
       <div style="text-align: center;">
-
         <h2 style="margin-bottom:0"><strong>{{ reward.amount | currency }}</strong></h2>
-        <span>{{ reward.claimed | number }} of {{ reward.limited_to | number }} claimed</span>
+
+        <span ng-show="reward.limited_to">{{ reward.claimed | number }} of {{ reward.limited_to | number }} claimed</span>
+        <span ng-hide="reward.limited_to">{{ reward.claimed | number }} claimed</span>
 
       </div>
       <br>
       <p style="padding: 0 10px; white-space: pre-wrap;">{{ reward.description }}</p>
 
       <div style="text-align: center;">
-        <button class="btn btn-large btn-info">Claim Reward</button>
+        <button ng-hide="reward.sold_out" class="btn btn-large btn-info">Claim Reward</button>
+        <button ng-show="reward.sold_out" class="btn btn-large" disabled>Sold Out</button>
       </div>
 
       <br>

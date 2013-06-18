@@ -1,0 +1,29 @@
+<div class="row-fluid">
+  <div class="span12" style="text-align: center;">
+    <div style="margin-top: 10px;" >
+      <div class="row-fluid">
+        <div class="span3">
+          <h1 style="margin-bottom:0"><strong>${{ fundraiser.total_pledged | number:0 }}</strong></h1>
+          <span>raised of <strong>${{ fundraiser.funding_goal | number:0 }}</strong> goal</span>
+        </div>
+
+        <div class="span3" style="text-align: center;">
+          <h1 style="margin-bottom:0"><strong>{{ fundraiser.pledge_count | number }}</strong></h1>
+          <span>backers</span>
+        </div>
+
+        <div class="span3" style="text-align: center;">
+          <h1 style="margin-bottom:0"><strong>{{ funding_percentage | number:0 }}%</strong></h1>
+          <span>funded</span>
+        </div>
+
+        <div class="span3" style="text-align: center;">
+          <h1 style="margin-bottom:0"><strong>{{ fundraiser.days_remaining | number }}</strong></h1>
+          <span>days left</span>
+        </div>
+      </div>
+      <br/>
+      <progress class="progress-success progress-striped" value="funding_percentage"></progress>
+    </div>
+  </div>
+</div>
