@@ -5,44 +5,66 @@
 </ul>
 
 <form class="form" ng-show="fundraiser" ng-controller="FundraiserShowController">
-  <ul class="nav nav-tabs">
-    <li class="active"><a>Overview</a></li>
-    <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
-  </ul>
-
   <div class="row-fluid">
-    <div class="span8">
-      <h2>{{ fundraiser.title || 'Loading...' }}</h2>
+    <div class="span9">
+      <h2 style="margin-top: 0;">{{ fundraiser.title || 'Loading...' }}</h2>
       <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
-      <span class="muted" ng-show="fundraiser">A fundraiser by <a href="/people/{{ fundraiser.person.slug }}">{{ fundraiser.person.display_name }}</a></span>
 
+      <ul class="nav nav-tabs">
+        <li class="active"><a>Overview</a></li>
+        <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
+      </ul>
+
+      <div class="row-fluid">
+        <div class="span4">
+          <div class="fundraiser-image" ng-style="fundraiser_image_style"></div>
+        </div>
+
+        <div class="span8" style="text-align: center;">
+          <div style="margin-top: 10px;" >
+            <div class="row-fluid">
+              <div class="span4" style="text-align: center;">
+                <h1 style="margin-bottom:0"><strong>${{ fundraiser.total_pledged | number:0 }}</strong></h1>
+                <span>raised of <strong>${{ fundraiser.funding_goal | number:0 }}</strong> goal</span>
+              </div>
+
+              <div class="span3" style="text-align: center;">
+                <h1 style="margin-bottom:0"><strong>{{ fundraiser.pledge_count | number }}</strong></h1>
+                <span>backers</span>
+              </div>
+
+              <div class="span3" style="text-align: center;">
+                <h1 style="margin-bottom:0"><strong>{{ fundraiser.days_remaining | number }}</strong></h1>
+                <span>days left</span>
+              </div>
+
+              <div class="span2" style="text-align: center;">
+                <h1 style="margin-bottom:0"><strong>{{ funding_percentage | number:0 }}%</strong></h1>
+                <span>funded</span>
+              </div>
+            </div>
+            <br/>
+            <progress class="progress-success progress-striped" value="funding_percentage"></progress>
+          </div>
+
+          <button class="btn btn-large btn-success">Pledge Now</button>
+        </div>
+      </div>
+
+      <hr />
+
+      <div ng-bind-html="fundraiser.description_html"></div>
+    </div>
+
+    <div class="span3">
       <div ng-show="can_manage">
-        <hr/>
         <button ng-click="new_update()" class="btn btn-small btn-success">New Update</button>
         <a ng-href="/fundraisers/{{fundraiser.slug}}/edit" class="btn btn-small">Edit Fundraiser</a>
         <a ng-href="manage_rewards()" class="btn btn-small">Manage Rewards</a>
       </div>
-      <hr />
 
-      <div ng-bind-html="fundraiser.description_html"></div>
-
-      <!--<tabs>-->
-        <!--<pane ng-click="test()" heading="Overview">-->
-          <!--<ng-include src="'pages/fundraisers/partials/overview.html'"></ng-include>-->
-        <!--</pane>-->
-
-        <!--<pane heading="Updates ({{ fundraiser.updates.length }})">-->
-          <!--<ng-include ng-controller="FundraiserUpdatesController" src="'pages/fundraisers/partials/updates.html'"></ng-include>-->
-        <!--</pane>-->
-
-        <!--<pane heading="Pledges ({{ fundraiser.pledge_count }})">-->
-          <!--<ng-include src="'pages/fundraisers/partials/pledges.html'"></ng-include>-->
-        <!--</pane>-->
-      <!--</tabs>-->
-    </div>
-
-    <div class="span4">
       <div ng-include="'pages/fundraisers/partials/side_content.html'"></div>
+      <div ng-show="fundraiser.rewards.length > 0" ng-include="'pages/fundraisers/partials/rewards.html'"></div>
     </div>
   </div>
 </form>

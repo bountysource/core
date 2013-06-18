@@ -1,9 +1,8 @@
-<div>
-  <div><strong>{{ fundraiser.pledge_count | number }}</strong> pledges</div>
-  <div><strong>{{ fundraiser.total_pledged | currency }}</strong> raised of <strong>{{ fundraiser.funding_goal | currency }}</strong></div>
-  <div><strong>{{ fundraiser.days_remaining | number }}</strong> Days remaining</div>
-  <br/>
-  <progress class="progress-success" value="funding_percentage"></progress>
-</div>
+<div class="well well-small">
+  <h4 style="margin-top: 0;">About {{fundraiser.person.display_name}}</h4>
 
-<div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+  <img src="{{fundraiser.person.image_url}}">
+
+  <a href="/people/{{ fundraiser.person.slug }}">{{ fundraiser.person.display_name }}</a>
+  <div>fbhdsjaohb fiudsh aiufohjds uiaohfuds hjfkdlshajfklhdsajk lhjkfldh sajklfhjkdsa!</div>
+</div>
