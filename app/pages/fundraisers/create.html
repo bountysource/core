@@ -1,0 +1,47 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
+  <li><a>New Fundraiser</a></li>
+</ul>
+
+<div class="row-fluid" ng-controller="FundraiserShowController">
+  <div class="span8">
+    <div class="hero-unit">
+      <h2>Create Fundraiser</h2>
+      <p>You are creating a new fundraiser, it is awesome.</p>
+      <button ng-click="create()" class="btn btn-large btn-primary">Save Changes</button>
+    </div>
+
+    <input id="fundraiser-title" class="span12" type="text" ng-model="title" placeholder="Help me get a puppy" autofocus="true" />
+    <textarea class="span12 lead" rows="3" placeholder="I have been an active contributor to Puppysource for 10 years, and am now trying to get a puppy of my own."></textarea>
+    <span class="muted">A fundraiser by <a href="/people/{{ current_person.slug }}">{{ current_person.display_name }}</a></span>
+
+    <hr />
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a>Overview</a></li>
+    </ul>
+
+    <textarea class="span12" rows="15" id="fundraiser-description" ng-model="description" placeholder="A description of your goal with this fundraiser. You can use GitHub flavored markdown here."></textarea>
+  </div>
+
+  <div class="span4">
+    <div class="well">
+      <div><img src="{{current_person.image_url}}" /></div>
+      <h3>{{current_person.display_name}}</h3>
+    </div>
+
+    <div class="well">
+      <!--<ul>-->
+        <!--<li>Pledges: {{ (fundraiser.pledge_count || 0) | number }}</li>-->
+        <!--<li>Raised: {{fundraiser.total_pledged | currency }} of {{fundraiser.funding_goal | currency}}</li>-->
+        <!--<li>Days remaining: {{fundraiser.days_remaining}}</li>-->
+      <!--</ul>-->
+    </div>
+
+    <div ng-repeat="reward in fundraiser.rewards" class="well">
+      <div><button class="btn btn-primary btn-large" type="button">{{reward.amount | currency}}</button></div>
+      <div>{{reward.description}}</div>
+    </div>
+  </div>
+</div>

@@ -4,10 +4,10 @@
   <li><a href="/fundraisers/{{fundraiser.id}}">{{ fundraiser.title || 'Loading...' }}</a></li>
 </ul>
 
-<form class="form" ng-show="fundraiser">
+<form class="form" ng-show="fundraiser" ng-controller="FundraiserShowController">
   <ul class="nav nav-tabs">
-    <li class="active"><a>Overview</a></li>
-    <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
+    <li><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
+    <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
   </ul>
 
   <div class="row-fluid">
@@ -24,20 +24,35 @@
       </div>
       <hr />
 
-      <div ng-bind-html="fundraiser.description_html"></div>
+      <div class="alert alert-info" ng-show="updates.length <= 0">
+        No updates have been published yet.
+      </div>
+
+      <table class="table table-striped" ng-show="updates.length > 0">
+        <tr ng-repeat="update in updates" ng-controller="FundraiserUpdatesController">
+          <td>
+            <a href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">
+              #{{ update.number }} {{ update.title }}
+            </a>
+          </td>
+          <td>
+            <div class="muted">{{ update.published_at | date }}</div>
+          </td>
+        </tr>
+      </table>
 
       <!--<tabs>-->
-        <!--<pane ng-click="test()" heading="Overview">-->
-          <!--<ng-include src="'pages/fundraisers/partials/overview.html'"></ng-include>-->
-        <!--</pane>-->
+      <!--<pane ng-click="test()" heading="Overview">-->
+      <!--<ng-include src="'pages/fundraisers/partials/overview.html'"></ng-include>-->
+      <!--</pane>-->
 
-        <!--<pane heading="Updates ({{ fundraiser.updates.length }})">-->
-          <!--<ng-include ng-controller="FundraiserUpdatesController" src="'pages/fundraisers/partials/updates.html'"></ng-include>-->
-        <!--</pane>-->
+      <!--<pane heading="Updates ({{ fundraiser.updates.length }})">-->
+      <!--<ng-include ng-controller="FundraiserUpdatesController" src="'pages/fundraisers/partials/updates.html'"></ng-include>-->
+      <!--</pane>-->
 
-        <!--<pane heading="Pledges ({{ fundraiser.pledge_count }})">-->
-          <!--<ng-include src="'pages/fundraisers/partials/pledges.html'"></ng-include>-->
-        <!--</pane>-->
+      <!--<pane heading="Pledges ({{ fundraiser.pledge_count }})">-->
+      <!--<ng-include src="'pages/fundraisers/partials/pledges.html'"></ng-include>-->
+      <!--</pane>-->
       <!--</tabs>-->
     </div>
 
@@ -59,9 +74,9 @@
         </div>
 
         <!--<ul>-->
-          <!--<li>Pledges</li>-->
-          <!--<li>Raised: {{fundraiser.total_pledged | currency }} of {{fundraiser.funding_goal | currency}}</li>-->
-          <!--<li>Days remaining: {{fundraiser.days_remaining}}</li>-->
+        <!--<li>Pledges</li>-->
+        <!--<li>Raised: {{fundraiser.total_pledged | currency }} of {{fundraiser.funding_goal | currency}}</li>-->
+        <!--<li>Days remaining: {{fundraiser.days_remaining}}</li>-->
         <!--</ul>-->
       </div>
 

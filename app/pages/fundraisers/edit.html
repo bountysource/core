@@ -1,0 +1,40 @@
+<div ng-include="'pages/fundraisers/edit/partials/breadcrumbs.html'"></div>
+
+<div class="row-fluid">
+  <div class="span8">
+    <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{alert.msg}}</alert>
+
+    <div class="alert alert-info">
+      <p><strong>Note:</strong> This fundraiser is now in edit mode.</p>
+      <button ng-click="cancel_all()" class="btn">Cancel</button>
+      <button ng-click="save_all()" class="btn btn-primary">Save</button>
+    </div>
+
+    <div ng-include="'pages/fundraisers/partials/header_inputs.html'"></div>
+
+    <div class="muted" ng-show="fundraiser">A fundraiser by <a href="/people/{{ fundraiser.person.slug }}">{{ fundraiser.person.display_name }}</a></div>
+    <hr />
+
+    <div ng-include="'pages/fundraisers/partials/description_input.html'"></div>
+  </div>
+
+  <div class="span4">
+    <div class="well">
+      <div><img src="{{ fundraiser.person.image_url }}" /></div>
+      <h3>{{fundraiser.person.display_name}}</h3>
+    </div>
+
+    <div class="well">
+      <ul>
+        <li>Pledges: {{fundraiser.pledge_count}}</li>
+        <li>Raised: {{fundraiser.total_pledged | currency }} of {{fundraiser.funding_goal | currency}}</li>
+        <li>Days remaining: {{fundraiser.days_remaining}}</li>
+      </ul>
+    </div>
+
+    <div ng-repeat="reward in fundraiser.rewards" class="well">
+      <div><button class="btn btn-primary btn-large" type="button">{{reward.amount | currency}}</button></div>
+      <div>{{reward.description}}</div>
+    </div>
+  </div>
+</div>

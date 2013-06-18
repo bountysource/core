@@ -15,14 +15,8 @@ table#pledges-table tr td img.thumbnail {
 #fundraiser-title h1 {
   font-size: 30px;
 }
-#fundraiser-title input {
-  width: 100%;
+#fundraiser-title  {
   height: 50px;
   font-size: 30px;
   line-height: 40px;
-}
-
-#fundraiser-description {
-  width: 75%;
-  height: 500px;
 }

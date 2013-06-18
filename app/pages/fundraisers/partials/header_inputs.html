@@ -1,0 +1,17 @@
+<div class="well well-small">
+  <alert ng-repeat="alert in header_alerts" type="alert.type" close="close_header_alert($index)">{{alert.msg}}</alert>
+
+  <form class="form" name="header">
+    <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="changes.title" placeholder="Help me get a puppy" />
+    <textarea class="span12 lead" rows="3" name="description" ng-model="changes.short_description" placeholder="I have been an active contributor to Puppysource for 10 years, and am now trying to get a puppy of my own."></textarea>
+  </form>
+
+  <div class="pull-right">
+    <button class="btn btn-small" popover-title="Fundraiser Header" popover="This section consists of a title and quick description of your fundraiser.">More Info</button>
+    <button ng-click="reset_header()" class="btn btn-small">Cancel Changes</button>
+
+    <button ng-hide="header.$dirty" class="btn btn-small">No Changes</button>
+    <button ng-show="header.$dirty" ng-click="save_header()" class="btn btn-small btn-primary">Save Changes</button>
+  </div>
+  <div class="clearfix"></div>
+</div>
