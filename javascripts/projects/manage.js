@@ -34,47 +34,53 @@ with (scope('Project', 'App')) {
 
       target_div
     );
+    
+    if (logged_in()) {
+      BountySource.get_cached_user_info(function(user_info) {
+        if (user_info.github_account) {
+          BountySource.api('/project_relations', { per_page: 300 }, function(response) {
+            if (response.meta.success) {
+              if (response.data.length > 0) {
+                render({ into: target_div },
+                  projects_table(response.data),
+                  div({ id: 'project-manager-container', style: 'display: inline-block; vertical-align: top; display: none;' }),
+                  div({ style: 'clear: both;' })
+                );
 
-    BountySource.get_cached_user_info(function(user_info) {
-      if (user_info.github_account) {
-        BountySource.api('/project_relations', { per_page: 300 }, function(response) {
-          if (response.meta.success) {
-            if (response.data.length > 0) {
-              render({ into: target_div },
-                projects_table(response.data),
-                div({ id: 'project-manager-container', style: 'display: inline-block; vertical-align: top; display: none;' }),
-                div({ style: 'clear: both;' })
-              );
+                // check for install_id. It is appended before Github auth,
+                // so that we can now install the plugin. do it homie.
+                var params = get_params();
 
-              // check for install_id. It is appended before Github auth,
-              // so that we can now install the plugin. do it homie.
-              var params = get_params();
+                if (params.install_id) {
+                  var id = parseInt(params.install_id);
+                  var button_wrapper = document.getElementById('tracker-plugin-widget-'+id);
 
-              if (params.install_id) {
-                var id = parseInt(params.install_id);
-                var button_wrapper = document.getElementById('tracker-plugin-widget-'+id);
-
-                if (button_wrapper && button_wrapper.childNodes.length > 0) {
-                  // click the button
-                  button_wrapper.childNodes[0].click();
+                  if (button_wrapper && button_wrapper.childNodes.length > 0) {
+                    // click the button
+                    button_wrapper.childNodes[0].click();
+                  }
                 }
-              }
 
+              } else {
+                render({ into: target_div },
+                  p("No projects found")
+                );
+              }
             } else {
-              render({ into: target_div },
-                p("No projects found")
-              );
+              render({ into: target_div }, error_message(response.data.error));
             }
-          } else {
-            render({ into: target_div }, error_message(response.data.error));
-          }
-        });
-      } else {
-        render({ into: target_div },
-          p("First, you need to ", a({ href: Github.auth_url({ scope: 'public_repo' }) }, 'link your GitHub account'), '.')
-        );
-      }
-    });
+          });
+        } else {
+          render({ into: target_div },
+            p("First, you need to ", a({ href: Github.auth_url({ scope: 'public_repo' }) }, 'link your GitHub account'), '.')
+          );
+        }
+      });
+    } else {
+      render({ into: target_div },
+        p("To start using the GitHub plugin, you need to " , a({ href: "#signin" }, "login or create an account"), ".")
+      );
+    }
   });
 
   define('install_or_manage_plugin_button', function(relation) {
