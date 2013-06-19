@@ -9,15 +9,17 @@ angular.module('app')
       });
   })
   .controller('Signin', function ($scope, $routeParams, $api) {
-    $scope.github_signin_url = 'https://api.bountysource.com/auth/github?redirect_url=' + encodeURIComponent('http://localhost:9000/');
-    $scope.facebook_signin_url = 'https://api.bountysource.com/auth/facebook?redirect_url=' + encodeURIComponent('http://localhost:9000/');
-    $scope.twitter_signin_url = 'https://api.bountysource.com/auth/twitter?redirect_url=' + encodeURIComponent('http://localhost:9000/');
+    $scope.providers = [
+      { id: 'github', name: 'GitHub', image_url: 'images/favicon-github.png' },
+      { id: 'twitter', name: 'Twitter', image_url: 'images/favicon-twitter.png' },
+      { id: 'facebook', name: 'Facebook', image_url: 'images/favicon-facebook.png' }
+    ];
 
     $scope.submit = function() {
       $api.signin($scope.email, $scope.password);
     };
 
-  }).controller('Signout', function ($scope, $api) {
+    $scope.signin_url_for = $api.signin_url_for;
     $scope.signout = $api.signout;
   });
 

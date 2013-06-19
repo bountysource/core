@@ -7,9 +7,9 @@
     <label class="control-label" for="inputEmail">Use a Service:</label>
     <div class="controls">
       <ul ng-controller="Signin">
-        <li><a href="{{github_signin_url}}"><img src="images/favicon-github.png"> GitHub</a></li>
-        <li><a href="{{facebook_signin_url}}"><img src="images/favicon-facebook.png"> Facebook</a></li>
-        <li><a href="{{twitter_signin_url}}"><img src="images/favicon-twitter.png"> Twitter</a></li>
+        <li ng-repeat="provider in providers" class="provider-link">
+          <a href="{{ signin_url_for(provider.id) }}"><img src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
+        </li>
       </ul>
     </div>
   </div>

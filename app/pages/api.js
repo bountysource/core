@@ -2,14 +2,13 @@
 
 angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieStore, $rootScope, $location) {
+    var api_host = "https://api.bountysource.com/";
     // environment
     $rootScope.environment = $cookieStore.get('environment') || 'prod';
     if ($rootScope.environment === 'dev') {
-      this.api_host = "http://api.bountysource.dev/";
+      api_host = "http://api.bountysource.dev/";
     } else if ($rootScope.environment === 'qa') {
-      this.api_host = "https://api-qa.bountysource.com/";
-    } else if ($rootScope.environment === 'prod') {
-      this.api_host = "https://api.bountysource.com/";
+      api_host = "https://api-qa.bountysource.com/";
     }
 
     this.setEnvironment = function(env) {
@@ -23,7 +22,7 @@ angular.module('api.bountysource',[]).
     this.call = function() {
       // parse arguments
       var args = Array.prototype.slice.call(arguments);
-      var url = this.api_host + args.shift().replace(/^\//,'');
+      var url = api_host + args.shift().replace(/^\//,'');
       var method = typeof(args[0]) === 'string' ? args.shift() : 'GET';
       var params = typeof(args[0]) === 'object' ? args.shift() : {};
       var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
@@ -106,7 +105,6 @@ angular.module('api.bountysource',[]).
     };
 
     this.verify_access_token = function() {
-      console.log("verifying");
       var access_token = $cookieStore.get('access_token');
       if (access_token) {
         var that = this;
@@ -120,6 +118,10 @@ angular.module('api.bountysource',[]).
           }
         });
       }
+    };
+
+    this.signin_url_for = function(provider) {
+      return api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent('http://localhost:9000/');
     };
 
     this.signout = function() {
