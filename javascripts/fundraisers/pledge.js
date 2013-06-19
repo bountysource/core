@@ -308,7 +308,7 @@ with (scope('Pledge', 'Fundraiser')) {
       item_number: 'fundraisers/' + fundraiser.id + (parseInt(form_data.reward_id) > 0 ? '/'+form_data.reward_id : ''),
       success_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledges/:item_id',
       cancel_url: window.location.href.split('#')[0] + fundraiser.frontend_path,
-      postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id+'&anonymous='+form_data.anonymous
+      postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id+'&anonymous='+(form_data.anonymous ? 'true' : '')
     };
 
     Payment.create(payment_data, function(errors) {
