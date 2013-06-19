@@ -142,8 +142,10 @@ with (scope('Facebook','App')) {
   * */
   define('auth_url', function(options) {
     options = options || {};
+    var redirect_url = (options.redirect_url || window.location.href).replace(BountySource.www_host,'');
+    var auth_redirect_url = BountySource.www_host + '#auth/facebook?redirect_url=' + encode_html(redirect_url);
     return BountySource.api_host+'auth/facebook?scope='+(options.scope||'email') +
       '&access_token='+(Storage.get('access_token')||'') +
-      '&redirect_url='+encode_html(window.location.href); // make sure the redirect url is the last param?
+      '&redirect_url='+encode_html(auth_redirect_url); // make sure the redirect url is the last param?
   });
 };

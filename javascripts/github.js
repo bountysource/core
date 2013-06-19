@@ -1,9 +1,11 @@
 with (scope('Github','App')) {
   define('auth_url', function(options) {
     options = options || {};
+    var redirect_url = (options.redirect_url || window.location.href).replace(BountySource.www_host,'');
+    var auth_redirect_url = BountySource.www_host + '#auth/github?redirect_url=' + encode_html(redirect_url);
     return BountySource.api_host+'auth/github?scope='+(options.scope||'') +
       '&access_token='+(Storage.get('access_token')||'') +
-      '&redirect_url='+encode_html(options.redirect_url || window.location.href); // make sure the redirect url is the last param?
+      '&redirect_url='+encode_html(auth_redirect_url); // make sure the redirect url is the last param?
   });
 
   // funnel through Github, to require app link if needed
