@@ -104,9 +104,26 @@ angular.module('api.bountysource',[]).
       });
     };
 
+    this.signin_with_access_token = function(access_token) {
+      var deferred = $q.defer();
+      this.call("/user", { access_token: access_token }, function(response) {
+        if (response.meta.status === 200) {
+          $rootScope.current_person = response.data;
+          // TODO: why doesn't /user return an access_token like /user/login ?
+          $rootScope.current_person.access_token = access_token;
+          $cookieStore.put('access_token', $rootScope.current_person.access_token);
+          deferred.resolve(true);
+        } else {
+          deferred.resolve(false);
+        }
+      });
+      return deferred.promise;
+    };
+
     this.verify_access_token = function() {
       var access_token = $cookieStore.get('access_token');
       if (access_token) {
+        console.log("Verifying access token: " + access_token);
         var that = this;
         this.call("/user", { access_token: access_token }, function(response) {
           if (response.meta.status === 200) {
@@ -121,7 +138,8 @@ angular.module('api.bountysource',[]).
     };
 
     this.signin_url_for = function(provider) {
-      return api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent('http://localhost:9000/');
+      // todo, include redirect_url in callback
+      return api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent('http://localhost:9000/signin/callback?provider='+provider);
     };
 
     this.signout = function() {
