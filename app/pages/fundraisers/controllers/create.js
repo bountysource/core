@@ -13,7 +13,7 @@ angular.module('app')
     $scope.changes = {};
 
     $scope.alerts = [];
-    $scope.close_alert = function(i) { $scope.alerts.splice(i,1) };
+    $scope.close_alert = function(i) { $scope.alerts.splice(i,1); };
 
     $scope.create = function() {
       $api.fundraiser_create($scope.changes).then(function(response) {

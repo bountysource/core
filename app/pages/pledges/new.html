@@ -1,0 +1,55 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
+  <li><a href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
+  <li><a>Make Pledge</a></li>
+</ul>
+
+<form class="form" ng-show="fundraiser">
+  <div class="row-fluid">
+    <div class="span8" ng-include="'pages/fundraisers/partials/header.html'"></div>
+  </div>
+
+  <hr/>
+
+  <div class="row-fluid">
+    <div class="span5">
+      <div class="well well-large" style="text-align: center;">
+        <input id="pledge-input" style="padding: 0 20px; text-align: center;" maxlength="14" class="span12" type="text" min="5.0" ng-model="pledge.amount" placeholder="Pledge Amount" />
+
+        <div class="btn-group btn-group-vertical" style="width: 100%">
+          <button class="btn btn-block btn-large" ng-model="payment_method" btn-radio="'google'">Google Wallet</button>
+          <button class="btn btn-block btn-large" ng-model="payment_method" btn-radio="'paypal'">Paypal</button>
+
+          <button ng-show="current_person && current_person.gittip_account.account_balance > 0" class="btn btn-block btn-large" ng-model="payment_method" btn-radio="'gittip'" >Gittip ({{ current_person.account.balance | currency }})</button>
+          <button ng-show="current_person && current_person.account.balance > 0" class="btn btn-block btn-large" ng-model="payment_method" btn-radio="'personal'" >Bountysource ({{ current_person.account.balance | currency }})</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="span4">
+      <div ng-hide="pledge.amount">
+        <alert type="warning"><strong>Enter a pledge amount or select a reward to continue</strong></alert>
+      </div>
+
+      <div ng-show="pledge.amount" class="well" style="text-align: center;">
+        <h2 style="margin: 0 auto"><strong>{{ pledge.amount | currency }} Pledge</strong></h2>
+
+        <div ng-hide="pledge.reward">With no reward</div>
+        <div ng-show="pledge.reward">With the {{ pledge.reward.amount | currency }} reward</div>
+
+        <br/>
+        <p style="text-align: left; white-space: pre-wrap;">{{ pledge.reward.description }}</p>
+
+        <hr/>
+
+        <button ng-show="payment_method" class="btn btn-large btn-block btn-success">Make {{ pledge.amount | currency }} Pledge</button>
+        <button ng-hide="payment_method" class="btn btn-large btn-block" disabled>Make {{ pledge.amount | currency }} Pledge</button>
+      </div>
+    </div>
+
+    <div class="span3">
+      <div ng-include="'pages/pledges/partials/rewards.html'"></div>
+    </div>
+  </div>
+</form>

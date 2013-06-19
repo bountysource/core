@@ -43,7 +43,7 @@ angular.module('app')
     };
 
     $scope.alerts = [];
-    $scope.close_alert = function(index) { $scope.alerts.splice(index, 1) };
+    $scope.close_alert = function(index) { $scope.alerts.splice(index, 1); };
 
     $scope.save_all = function() {
       $api.fundraiser_update($routeParams.id, $scope.changes).then(function(response) {
@@ -56,7 +56,7 @@ angular.module('app')
       });
     };
 
-    $scope.can_save_all = function() { return !angular.equals($scope.changes, $scope.master) };
+    $scope.can_save_all = function() { return !angular.equals($scope.changes, $scope.master); };
 
     $scope.header_alerts = [];
     $scope.close_header_alert = function(index) { $scope.header_alerts.splice(index, 1); };

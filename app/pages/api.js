@@ -57,7 +57,7 @@ angular.module('api.bountysource',[]).
 
     this.fundraiser_create = function(data) {
       return this.call("/user/fundraisers", "POST", data);
-    }
+    };
 
     this.fundraiser_pledges_get = function(id) {
       return this.call("/user/fundraisers/"+id+"/pledges");

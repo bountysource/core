@@ -9,8 +9,8 @@
       <br>
       <p style="padding: 0 10px; white-space: pre-wrap;">{{ reward.description }}</p>
       <div style="text-align: center;">
-        <button ng-hide="reward.sold_out" class="btn btn-large btn-info">Claim Reward</button>
-        <button ng-show="reward.sold_out" class="btn btn-large" disabled>Sold Out</button>
+        <button ng-click="select_reward(reward)" ng-hide="reward.sold_out" class="btn btn-info">Select Reward</button>
+        <button ng-show="reward.sold_out" class="btn" disabled>Sold Out</button>
       </div>
       <br>
     </td>

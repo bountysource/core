@@ -4,12 +4,12 @@ angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/fundraisers/:id/pledges', {
-        templateUrl: 'pages/fundraisers/pledges/index.html',
-        controller: 'FundraiserPledgesController'
+        templateUrl: 'pages/pledges/index.html',
+        controller: 'FundraiserPledgeController'
       });
   })
 
-  .controller('FundraiserPledgesController', function ($scope, $routeParams, $api) {
+  .controller('FundraiserPledgeController', function ($scope, $routeParams, $api) {
     $scope.pledges = $api.fundraiser_pledges_get($routeParams.id).then(function(r) {
       console.log('pledges', r);
 

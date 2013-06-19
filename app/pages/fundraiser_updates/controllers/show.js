@@ -4,7 +4,7 @@ angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/fundraisers/:id/updates', {
-        templateUrl: 'pages/fundraisers/updates.html',
+        templateUrl: 'pages/fundraisers/updates/index.html',
         controller: 'FundraiserUpdatesController'
       });
   })

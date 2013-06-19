@@ -22,3 +22,10 @@ table#pledges-table tr td img.thumbnail {
   background-size: 275px auto;
   background-repeat: no-repeat;
 }
+
+#pledge-input {
+  height: 60px;
+  font-size: 35px;
+  font-weight: 200;
+  line-height: 40px;
+}

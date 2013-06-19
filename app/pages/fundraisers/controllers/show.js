@@ -12,7 +12,7 @@ angular.module('app')
   .controller('FundraiserShowController', function ($scope, $routeParams, $location, $api) {
     $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(r) {
       // authorization
-      $scope.can_manage = r.person && $scope.current_person && r.person.id == $scope.current_person.id;
+      $scope.can_manage = r.person && $scope.current_person && r.person.id === $scope.current_person.id;
 
       // calculate percentage bar
       $scope.funding_percentage = Math.min(r.total_pledged / r.funding_goal, 100) * 100;

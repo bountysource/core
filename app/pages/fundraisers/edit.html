@@ -19,6 +19,11 @@
       <button ng-click="cancel_all()" class="btn btn-large btn-block">Cancel</button>
     </div>
 
-    <div ng-show="fundraiser.rewards.length > 0" ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+    <div ng-show="fundraiser.rewards.length > 0">
+      <h3>Rewards</h3>
+      <table class="table table-striped table-bordered">
+        <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+      </table>
+    </div>
   </div>
 </div>

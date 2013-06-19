@@ -39,6 +39,7 @@
     <div ng:include src="'pages/layout/chatroom.html'"></div>
     <div class="container" ng-view></div>
 
+
     <!-- angular components -->
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -57,13 +58,19 @@
     <script src="pages/signin/index.js"></script>
     <script src="pages/filters.js"></script>
     <script src="pages/home/home.js"></script>
-    <script src="pages/fundraisers/index.js"></script>
-    <script src="pages/fundraisers/updates.js"></script>
-    <script src="pages/fundraisers/create.js"></script>
-    <script src="pages/fundraisers/edit.js"></script>
-    <script src="pages/fundraisers/show.js"></script>
-    <script src="pages/fundraisers/pledges/pledges.js"></script>
+
+    <script src="pages/fundraisers/controllers/index.js"></script>
+    <script src="pages/fundraisers/controllers/create.js"></script>
+    <script src="pages/fundraisers/controllers/edit.js"></script>
+    <script src="pages/fundraisers/controllers/show.js"></script>
+
+    <script src="pages/fundraiser_updates/controllers/show.js"></script>
+
+    <script src="pages/pledges/controllers/pledges.js"></script>
+    <script src="pages/pledges/controllers/new.js"></script>
+
     <script src="pages/fundraiser_updates/show.js"></script>
+
     <script src="pages/people/show.js"></script>
     <script src="pages/trackers/show.js"></script>
     <script src="pages/issues/show.js"></script>
