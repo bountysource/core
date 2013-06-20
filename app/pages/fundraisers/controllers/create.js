@@ -10,14 +10,16 @@ angular.module('app')
   })
 
   .controller('FundraiserCreateController', function($scope, $routeParams, $location, $api) {
-    $scope.changes = {};
-
-    $scope.alerts = [];
-    $scope.close_alert = function(i) { $scope.alerts.splice(i,1); };
+    $scope.fundraiser = {
+      funding_goal: 1500,
+      total_pledged: 0,
+      pledge_count: 0,
+      funding_percentage: 0,
+      days_remaining: 30
+    };
 
     $scope.create = function() {
-      $api.fundraiser_create($scope.changes).then(function(response) {
-
+      $api.fundraiser_create($scope.fundraiser).then(function(response) {
         console.log(response);
 
         if (response.error) {

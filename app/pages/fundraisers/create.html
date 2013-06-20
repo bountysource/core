@@ -9,14 +9,68 @@
     <div class="span9">
       <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{alert.msg}}</alert>
 
-      <div ng-include="'pages/fundraisers/partials/header_inputs.html'"></div>
-      <div ng-include="'pages/fundraisers/partials/description_input.html'"></div>
+      <!--Edit Title and Short Description-->
+      <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="fundraiser.title" placeholder="The title of your fundraiser" />
+      <textarea class="span12 lead" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
+
+      <!--Show progress element, with fundraiser goal edit field-->
+      <div class="row-fluid">
+        <div class="span12" style="text-align: center;">
+          <div style="margin-top: 10px;" >
+            <div class="row-fluid">
+              <div class="span3">
+                <h1 style="margin-bottom:0"><strong>${{ fundraiser.total_pledged | number:0 }}</strong></h1>
+
+                <!--gross inline styling-->
+                <div style="margin-top: 5px;">
+                  <div style="vertical-align: middle; display: inline-block;">raised of $</div>
+                  <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" type="number" min="0" ng-model="fundraiser.funding_goal" />
+                  <div style="vertical-align: middle; display: inline-block;">goal</div>
+                </div>
+              </div>
+
+              <div class="span3" style="text-align: center;">
+                <h1 style="margin-bottom:0"><strong>{{ fundraiser.pledge_count | number }}</strong></h1>
+                <span>backers</span>
+              </div>
+
+              <div class="span3" style="text-align: center;">
+                <h1 style="margin-bottom:0"><strong>{{ funding_percentage | number:0 }}%</strong></h1>
+                <span>funded</span>
+              </div>
+
+              <div class="span3" style="text-align: center;">
+                <h1 style="margin-bottom:0"><strong>{{ fundraiser.days_remaining | number }}</strong></h1>
+                <span>days left</span>
+              </div>
+            </div>
+            <br/>
+            <progress class="progress-success progress-striped" value="funding_percentage"></progress>
+          </div>
+        </div>
+      </div>
+
+      <!--Edit main Description-->
+      <textarea id="fundraiser-description" class="span12" rows="15" ng-model="fundraiser.description" placeholder="A description of your goal with this fundraiser. You can use GitHub flavored markdown here."></textarea>
     </div>
 
     <div class="span3">
+      <!--Big Create Fundraiser button-->
       <div class="well well-large">
         <button ng-click="create()" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
       </div>
+
+      <!--About the author-->
+      <h3>By <a ng-href="/people/{{current_person.slug}}">{{current_person.display_name}}</a></h3>
+      <div style="margin-bottom: 15px;">
+        <a class="thumbnail" ng-href="/people/{{current_person.slug}}">
+          <img src="{{current_person.image_url}}">
+        </a>
+        <div>{{ current_person.bio }}</div>
+      </div>
+
+      <!--Disabled Pledge Now button-->
+      <button class="btn btn-block btn-large btn-success" disabled>Pledge Now</button>
     </div>
   </div>
 </form>

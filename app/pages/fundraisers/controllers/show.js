@@ -14,9 +14,6 @@ angular.module('app')
       // authorization
       $scope.can_manage = r.person && $scope.current_person && r.person.id === $scope.current_person.id;
 
-      // calculate percentage bar
-      $scope.funding_percentage = Math.min(r.total_pledged / r.funding_goal, 100) * 100;
-
       return r;
     });
   });

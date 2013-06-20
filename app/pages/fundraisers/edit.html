@@ -9,8 +9,49 @@
   <div class="span9">
     <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{ alert.msg }}</alert>
 
-    <div ng-include="'pages/fundraisers/partials/header_inputs.html'"></div>
-    <div ng-include="'pages/fundraisers/partials/description_input.html'"></div>
+    <!--Edit Title and Short Description-->
+    <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="changes.title" placeholder="The title of your fundraiser" />
+    <textarea class="span12 lead" rows="2" name="description" ng-model="changes.short_description" placeholder="Briefly describe your fundraiser"></textarea>
+
+    <!--Show progress element, with fundraiser goal edit field-->
+    <div class="row-fluid">
+      <div class="span12" style="text-align: center;">
+        <div style="margin-top: 10px;" >
+          <div class="row-fluid">
+            <div class="span3">
+              <h1 style="margin-bottom:0"><strong>${{ changes.total_pledged | number:0 }}</strong></h1>
+
+              <!--gross inline styling-->
+              <div style="margin-top: 5px;">
+                <div style="vertical-align: middle; display: inline-block;">raised of $</div>
+                <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" type="number" min="0" ng-model="changes.funding_goal" />
+                <div style="vertical-align: middle; display: inline-block;">goal</div>
+              </div>
+            </div>
+
+            <div class="span3" style="text-align: center;">
+              <h1 style="margin-bottom:0"><strong>{{ changes.pledge_count | number }}</strong></h1>
+              <span>backers</span>
+            </div>
+
+            <div class="span3" style="text-align: center;">
+              <h1 style="margin-bottom:0"><strong>{{ funding_percentage | number:0 }}%</strong></h1>
+              <span>funded</span>
+            </div>
+
+            <div class="span3" style="text-align: center;">
+              <h1 style="margin-bottom:0"><strong>{{ changes.days_remaining | number }}</strong></h1>
+              <span>days left</span>
+            </div>
+          </div>
+          <br/>
+          <progress class="progress-success progress-striped" value="funding_percentage"></progress>
+        </div>
+      </div>
+    </div>
+
+    <!--Edit main Description-->
+    <textarea id="fundraiser-description" class="span12" rows="15" ng-model="changes.description" placeholder="A description of your goal for this fundraiser. You can use GitHub flavored markdown here."></textarea>
   </div>
 
   <div class="span3">
@@ -19,7 +60,7 @@
       <button ng-click="cancel_all()" class="btn btn-large btn-block">Cancel</button>
     </div>
 
-    <div ng-show="fundraiser.rewards.length > 0">
+    <div ng-show="changes.rewards.length > 0">
       <h3>Rewards</h3>
       <table class="table table-striped table-bordered">
         <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>

@@ -1,16 +1,1 @@
-<div class="well well-small">
-  <alert ng-repeat="alert in description_alerts" type="alert.type" close="close_description_alert($index)">{{alert.msg}}</alert>
-
-  <form class="form" name="description">
-    <textarea id="fundraiser-description" class="span12" rows="15" ng-model="changes.description" placeholder="A description of your goal with this fundraiser. You can use GitHub flavored markdown here."></textarea>
-  </form>
-
-  <div class="pull-right">
-    <button class="btn btn-small" popover-title="Fundraiser Description" popover="This the main text body of your fundraiser. Make sure to clearly outline your goals. Pro Tip: You can format this body with GitHub flavored Markdown!">More Info</button>
-    <button ng-click="reset_description()" class="btn btn-small">Cancel Changes</button>
-
-    <button ng-hide="description.$dirty" class="btn btn-small" disabled>Save Changes</button>
-    <button ng-show="description.$dirty" ng-click="save_description()" class="btn btn-small btn-primary">Save Changes</button>
-  </div>
-  <div class="clearfix"></div>
-</div>
+<textarea id="fundraiser-description" class="span12" rows="15" ng-model="changes.description" placeholder="A description of your goal with this fundraiser. You can use GitHub flavored markdown here."></textarea>
