@@ -19,16 +19,12 @@ angular.module('app')
     };
 
     $scope.create = function() {
-      $api.fundraiser_create($scope.fundraiser).then(function(response) {
-        console.log(response);
-
-        if (response.error) {
-          $scope.alerts.push({ type: 'error', msg: response.error });
+      $api.fundraiser_create($scope.fundraiser, function(response) {
+        if (response.meta.success) {
+          $location.url("/fundraisers/"+response.data.slug+"/edit");
         } else {
-          $location.path("/fundraisers/"+response.slug+"/edit");
+          $scope.error = response.data.error;
         }
-
-        return response;
       });
     };
   });

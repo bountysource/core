@@ -4,11 +4,13 @@
   <li><a>New Fundraiser</a></li>
 </ul>
 
+<alert ng-show="error" type="error" close="error = null">Error</alert>
+
 <form name="create_form">
+  <alert ng-show="error">{{ error }}</alert>
+
   <div class="row-fluid">
     <div class="span9">
-      <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{alert.msg}}</alert>
-
       <!--Edit Title and Short Description-->
       <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="fundraiser.title" placeholder="The title of your fundraiser" />
       <textarea class="span12 lead" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
@@ -57,7 +59,7 @@
     <div class="span3">
       <!--Big Create Fundraiser button-->
       <div class="well well-large">
-        <button ng-click="create()" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
+        <button ng-click="create()" ng-disabled="!fundraiser.title" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
       </div>
 
       <!--About the author-->

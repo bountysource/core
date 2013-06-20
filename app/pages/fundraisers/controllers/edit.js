@@ -41,9 +41,6 @@ angular.module('app')
 
     $scope.create_reward = function(fundraiser) {
       $api.reward_create(fundraiser.id, $scope.new_reward, function(response) {
-
-        console.log(response);
-
         if (response.meta.success) {
           // reset the new_reward model
           $scope.new_reward = {};
@@ -57,14 +54,22 @@ angular.module('app')
     };
 
     $scope.update_reward = function(fundraiser, reward) {
-      console.log('TODO update reward with reward.id');
-
       $api.reward_update(fundraiser.id, reward.id, reward, function(response) {
-
+        console.log('update_reward', response);
       });
     };
 
     $scope.destroy_reward = function(fundraiser, reward) {
-      console.log('TODO destroy reward with reward.id');
+      $api.reward_destroy(fundraiser.id, reward.id, function(response) {
+        if (response.meta.success) {
+          // traverse the cached rewards, and remove this one
+          for (var i=0; i<fundraiser.rewards.length; i++) {
+            if (fundraiser.rewards[i].id === reward.id) {
+              fundraiser.rewards.splice(i,1);
+              break;
+            }
+          }
+        }
+      });
     };
   });

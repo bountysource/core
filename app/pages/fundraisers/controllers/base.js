@@ -5,17 +5,6 @@ angular.module('app')
     $scope.fundraiser.then(function(res) {
       $scope.can_manage = res.person && $scope.current_person && res.person.id === $scope.current_person.id;
       $scope.publishable = res.title && res.short_description && res.funding_goal && res.description;
-
-      $scope.publish = function() {
-        $api.fundraiser_publish(res.id, function(response) {
-          if (response.meta.success) {
-            $location.url("/fundraisers/"+res.slug).replace();
-          } else {
-            $scope.error = "ERROR: " + response.data.error
-          }
-        });
-      };
-
       return res;
     });
   });

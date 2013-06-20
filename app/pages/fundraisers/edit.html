@@ -129,6 +129,9 @@
 
             <!--Add that bad boy!-->
             <button ng-click="update_reward(fundraiser, reward)" class="btn btn-large btn-primary btn-block">Save</button>
+
+            <!--Destroy button-->
+            <button ng-disabled="fundraiser.published" ng-click="destroy_reward(fundraiser, reward)" class="btn btn-large btn-warning btn-block">Remove</button>
           </td>
         </tr>
       </table>
