@@ -71,6 +71,10 @@ angular.module('api.bountysource',[]).
       return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id);
     };
 
+    this.fundraiser_publish = function(id, callback) {
+      return this.call("/user/fundraisers/"+id+"/publish", "POST", callback);
+    };
+
     this.people_recent = function() {
       return this.call("/user/recent");
     };

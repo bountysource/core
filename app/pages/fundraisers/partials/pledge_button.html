@@ -1,1 +1,2 @@
-<a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge" class="btn btn-large btn-success btn-block">Pledge Now</a>
+<a ng-hide="fundraiser.published" disabled class="btn btn-large btn-success btn-block">Pledge Now</a>
+<a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge" ng-show="fundraiser.published" class="btn btn-large btn-success btn-block">Pledge Now</a>

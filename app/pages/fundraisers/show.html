@@ -1,40 +1,40 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
-  <li><a href="/fundraisers/{{fundraiser.id}}">{{ fundraiser.title || 'Loading...' }}</a></li>
-</ul>
+<div ng-controller="FundraisersController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider">»</span></li>
+    <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
+    <li><a href="/fundraisers/{{fundraiser.id}}">{{ fundraiser.title || 'Loading...' }}</a></li>
+  </ul>
 
-<form class="form" ng-show="fundraiser">
-  <div class="row-fluid">
-    <div class="span9">
-      <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+  <form class="form" ng-show="fundraiser">
+    <div class="row-fluid">
+      <div class="span9">
+        <div ng-include="'pages/fundraisers/partials/header.html'"></div>
 
-      <ul class="nav nav-tabs">
-        <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
-        <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
-        <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges">Pledges</a></li>
-        <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Make a Pledge</a></li>
-      </ul>
+        <ul class="nav nav-tabs">
+          <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
+          <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
+          <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges">Pledges</a></li>
+          <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Make a Pledge</a></li>
+        </ul>
 
-      <div ng-include="'pages/fundraisers/partials/progress.html'"></div>
-      <hr />
-      <div ng-bind-html="fundraiser.description_html"></div>
-    </div>
-
-    <div class="span3">
-      <div class="well well-large">
-        <a ng-href="/fundraisers/{{ fundraiser.slug }}/edit" class="btn btn-large btn-block">Edit Fundraiser</a>
+        <div ng-include="'pages/fundraisers/partials/progress.html'"></div>
+        <hr />
+        <div ng-bind-html="fundraiser.description_html"></div>
       </div>
 
-      <h3 style="margin-top: 0;">By <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
-      <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
+      <div class="span3">
+        <div ng-include="'pages/fundraisers/partials/manage.html'"></div>
 
-      <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
+        <h3 style="margin-top: 0;">By <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
+        <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
 
-      <div ng-show="fundraiser.rewards.length > 0">
-        <h3>Rewards</h3>
-        <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
+
+        <div ng-show="fundraiser.rewards.length > 0">
+          <h3>Rewards</h3>
+          <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+        </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+</div>

@@ -5,7 +5,7 @@
 </ul>
 
 <form name="create_form">
-  <div class="row-fluid" ng-controller="FundraiserShowController">
+  <div class="row-fluid" ng-controller="FundraisersController">
     <div class="span9">
       <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{alert.msg}}</alert>
 
@@ -35,7 +35,7 @@
               </div>
 
               <div class="span3" style="text-align: center;">
-                <h1 style="margin-bottom:0"><strong>{{ funding_percentage | number:0 }}%</strong></h1>
+                <h1 style="margin-bottom:0"><strong>{{ funding_percentage(fundraiser) | number:0 }}%</strong></h1>
                 <span>funded</span>
               </div>
 
@@ -45,7 +45,7 @@
               </div>
             </div>
             <br/>
-            <progress class="progress-success progress-striped" value="funding_percentage"></progress>
+            <progress class="progress-success progress-striped" value="funding_percentage(fundraiser)"></progress>
           </div>
         </div>
       </div>

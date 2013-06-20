@@ -11,7 +11,7 @@ angular.module('app')
 
   .controller('FundraiserCreateController', function($scope, $routeParams, $location, $api) {
     $scope.fundraiser = {
-      funding_goal: 1500,
+      funding_goal: 25000,
       total_pledged: 0,
       pledge_count: 0,
       funding_percentage: 0,
