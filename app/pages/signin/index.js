@@ -28,7 +28,8 @@ angular.module('app')
       first_name: $routeParams.first_name,
       last_name: $routeParams.last_name,
       display_name: $routeParams.display_name,
-      avatar_url: $routeParams.avatar_url
+      avatar_url: $routeParams.avatar_url,
+      terms: false
     };
 
     // this tracks form state
@@ -67,29 +68,33 @@ angular.module('app')
 
     // form submit
     $scope.signin = function() {
-      $scope.show_validations = true;
-      $scope.error = null;
-      $api.signin($scope.form_data).then(function(response) {
-        if (response.email_is_registered) {
-          $scope.signin_or_signup = 'signin';
-        } else {
-          $scope.signin_or_signup = 'signup';
-        }
-        if (response.error) {
-          $scope.error = response.error;
-        }
-        console.log(response);
-      });
+      if ($scope.signin_or_signup != 'pending') {
+        $scope.show_validations = true;
+        $scope.error = null;
+        $api.signin($scope.form_data).then(function(response) {
+          if (response.email_is_registered) {
+            $scope.signin_or_signup = 'signin';
+          } else {
+            $scope.signin_or_signup = 'signup';
+          }
+          if (response.error) {
+            $scope.error = response.error;
+          }
+          console.log(response);
+        });
+      }
     };
 
     $scope.signup = function() {
-      $scope.show_validations = true;
-      $scope.error = null;
-      $api.signup($scope.form_data).then(function(response) {
-        if (response.error) {
-          $scope.error = response.error;
-        }
-      });
+      if ($scope.signin_or_signup != 'pending') {
+        $scope.show_validations = true;
+        $scope.error = null;
+        $api.signup($scope.form_data).then(function(response) {
+          if (response.error) {
+            $scope.error = response.error;
+          }
+        });
+      }
     };
 
   });
