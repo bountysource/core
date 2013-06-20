@@ -13,7 +13,7 @@
         </div>
 
         <div class="span3" style="text-align: center;">
-          <h1 style="margin-bottom:0"><strong>{{ funding_percentage | number:0 }}%</strong></h1>
+          <h1 style="margin-bottom:0"><strong>{{ fundraiser.funding_percentage | number:0 }}%</strong></h1>
           <span>funded</span>
         </div>
 
@@ -23,7 +23,8 @@
         </div>
       </div>
       <br/>
-      <progress class="progress-success progress-striped" value="funding_percentage"></progress>
+
+      <progress class="progress-success progress-striped" value="fundraiser.funding_percentage"></progress>
     </div>
   </div>
 </div>

@@ -46,7 +46,13 @@ angular.module('api.bountysource',[]).
     };
 
     this.fundraiser_get = function(id) {
-      return this.call("/user/fundraisers/"+id);
+      return this.call("/user/fundraisers/"+id, function(res) {
+        // hacky way to add calculated funding percentage to data.
+        // TODO proper Models
+        if (res.meta.success) res.data.funding_percentage = Math.min(Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100), 100);
+
+        return res.data;
+      });
     };
 
     this.fundraiser_update = function(id, data) {
