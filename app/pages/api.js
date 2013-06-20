@@ -75,6 +75,18 @@ angular.module('api.bountysource',[]).
       return this.call("/user/fundraisers/"+id+"/publish", "POST", callback);
     };
 
+    this.reward_create = function(fundraiser_id, data, callback) {
+      this.call("/user/fundraisers/"+fundraiser_id+"/rewards", "POST", data, callback);
+    };
+
+    this.reward_update = function(fundraiser_id, id, data, callback) {
+      this.call("/user/fundraisers/"+fundraiser_id+"/rewards/"+id, "PUT", data, callback);
+    };
+
+    this.reward_destroy = function(fundraiser_id, id, callback) {
+      this.call("/user/fundraisers/"+fundraiser_id+"/rewards/"+id, "DELETE", callback);
+    };
+
     this.people_recent = function() {
       return this.call("/user/recent");
     };

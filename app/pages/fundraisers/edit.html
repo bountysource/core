@@ -5,6 +5,8 @@
   <li><a>Edit</a></li>
 </ul>
 
+<alert ng-show="error" type="error" close="error = null">{{ error }}</alert>
+
 <div class="row-fluid">
   <div class="span9">
     <alert ng-repeat="alert in alerts" type="alert.type" close="close_alert($index)">{{ alert.msg }}</alert>
@@ -25,7 +27,7 @@
               <div style="margin-top: 5px;">
                 <div style="vertical-align: middle; display: inline-block;">raised of $</div>
                 <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" type="number" min="0" ng-model="changes.funding_goal" />
-                <div style="vertical-align: middle; display: inline-block;">goal</div>
+                <div style="vertical-align: middle; display: inline-block;"> goal</div>
               </div>
             </div>
 
@@ -56,14 +58,79 @@
 
   <div class="span3">
     <div class="well well-large">
-      <button ng-click="save_all()" class="btn btn-primary btn-large btn-block">Save</button>
-      <button ng-click="cancel_all()" class="btn btn-large btn-block">Cancel</button>
+      <button ng-click="save()" class="btn btn-primary btn-large btn-block">Save</button>
+      <button ng-click="cancel()" class="btn btn-large btn-block">Cancel</button>
     </div>
 
-    <div ng-show="changes.rewards.length > 0">
+    <div ng-controller="RewardsController">
       <h3>Rewards</h3>
+
       <table class="table table-striped table-bordered">
-        <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+        <tr>
+          <td>
+            <div style="text-align: center;">
+              <!--Reward amount-->
+              <div class="input-prepend" style="margin-bottom:0">
+                <span class="add-on">$</span>
+                <input type="number" ng-model="new_reward.amount" min="5" placeholder="Minimum Pledge Amount" />
+              </div>
+
+              <!--Reward quantity-->
+              <div style="margin-top: 5px;">
+                <div style="vertical-align: middle; display: inline-block;">0 of </div>
+                <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" placeholder="Quantity" type="number" min="0" ng-model="new_reward.limited_to" />
+                <div style="vertical-align: middle; display: inline-block;"> claimed</div>
+              </div>
+            </div>
+            <br>
+
+            <!--Reward description-->
+            <div>
+              <textarea class="span12" rows="4" ng-model="new_reward.description" placeholder="A description of this reward."></textarea>
+            </div>
+
+            <!--Fulfillment Details-->
+            <div>
+              <textarea class="span12" rows="6" ng-model="new_reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
+            </div>
+
+            <!--Add that bad boy!-->
+            <button ng-disabled="!new_reward.amount || !new_reward.description" ng-click="create_reward(fundraiser)" class="btn btn-large btn-primary btn-block">Add ${{ (new_reward.amount || 0) | number:0 }} Reward</button>
+          </td>
+        </tr>
+
+        <tr ng-repeat="reward in fundraiser.rewards | orderBy:'amount'">
+          <td>
+            <div style="text-align: center;">
+              <!--Reward amount-->
+              <div class="input-prepend" style="margin-bottom:0">
+                <span class="add-on">$</span>
+                <input type="number" ng-model="reward.amount" min="5" placeholder="Minimum Pledge Amount" ng-disabled="fundraiser.published" />
+              </div>
+
+              <!--Reward quantity-->
+              <div style="margin-top: 5px;">
+                <div style="vertical-align: middle; display: inline-block;">0 of </div>
+                <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" placeholder="Quantity" type="number" min="0" ng-model="new_reward.limited_to" ng-disabled="fundraiser.published" />
+                <div style="vertical-align: middle; display: inline-block;"> claimed</div>
+              </div>
+            </div>
+            <br>
+
+            <!--Reward description-->
+            <div>
+              <textarea class="span12" rows="4" ng-model="reward.description" placeholder="A description of this reward." ng-disabled="fundraiser.published"></textarea>
+            </div>
+
+            <!--Fulfillment Details-->
+            <div>
+              <textarea class="span12" rows="6" ng-model="reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
+            </div>
+
+            <!--Add that bad boy!-->
+            <button ng-click="update_reward(fundraiser, reward)" class="btn btn-large btn-primary btn-block">Save</button>
+          </td>
+        </tr>
       </table>
     </div>
   </div>

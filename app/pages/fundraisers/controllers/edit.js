@@ -19,35 +19,14 @@ angular.module('app')
       // if you don't create a copy, these are both bound to the input
       $scope.master = angular.copy(response);
       $scope.changes = angular.copy(response);
-
       return response;
     });
 
-    $scope.cancel_all = function() {
-      $location.path("/fundraisers/"+$scope.master.slug);
-    };
+    $scope.cancel = function() { $location.url("/fundraisers/"+$scope.master.slug); };
 
-    $scope.reset_header = function() {
-      $scope.changes.title = $scope.master.title;
-      $scope.changes.short_description = $scope.master.short_description;
-    };
-
-    $scope.reset_description = function() {
-      $scope.changes.description = $scope.master.description;
-      $scope.changes.description_html = $scope.master.description_html;
-    };
-
-    $scope.reset_all = function() {
-      $scope.reset_header();
-      $scope.reset_description();
-    };
-
-    $scope.alerts = [];
-    $scope.close_alert = function(index) { $scope.alerts.splice(index, 1); };
-
-    $scope.save_all = function() {
+    $scope.save = function() {
       $api.fundraiser_update($routeParams.id, $scope.changes).then(function(response) {
-        // TODO proper error callback through the $q server `promise.reject(response)`
+        // TODO proper error callback through the $q promise api `promise.reject(response)`
         if (response.error) {
           $scope.alerts.push({ type: 'error', msg: response.error });
         } else {
@@ -55,47 +34,37 @@ angular.module('app')
         }
       });
     };
+  })
 
-    $scope.can_save_all = function() { return !angular.equals($scope.changes, $scope.master); };
+  .controller('RewardsController', function($scope, $api) {
+    $scope.new_reward = {};
 
-    $scope.header_alerts = [];
-    $scope.close_header_alert = function(index) { $scope.header_alerts.splice(index, 1); };
+    $scope.create_reward = function(fundraiser) {
+      $api.reward_create(fundraiser.id, $scope.new_reward, function(response) {
 
-    $scope.save_header = function() {
-      var data = {
-        title: $scope.changes.title,
-        short_description: $scope.changes.short_description
-      };
-      $api.fundraiser_update($routeParams.id, data).then(function(response) {
-        // TODO proper error callback through the $q server `promise.reject(response)`
-        if (response.error) {
-          $scope.header_alerts.push({ type: 'error', msg: response.error });
+        console.log(response);
+
+        if (response.meta.success) {
+          // reset the new_reward model
+          $scope.new_reward = {};
+
+          // push this new reward onto the table
+          fundraiser.rewards.push(response.data);
         } else {
-          $scope.header_alerts.push({ type: 'success', msg: "Title and Short Description saved!" });
-          $scope.master.title = response.title;
-          $scope.master.short_description = response.short_description;
+          $scope.error = response.data.error;
         }
-
-        return response;
       });
     };
 
-    $scope.description_alerts = [];
-    $scope.close_description_alert = function(index) { $scope.description_alerts.splice(index, 1); };
+    $scope.update_reward = function(fundraiser, reward) {
+      console.log('TODO update reward with reward.id');
 
-    $scope.save_description = function() {
-      var data = { description: $scope.changes.description };
-      $api.fundraiser_update($routeParams.id, data).then(function(response) {
-        // TODO proper error callback through the $q server `promise.reject(response)`
-        if (response.error) {
-          $scope.description_alerts.push({ type: 'error', msg: response.error });
-        } else {
-          $scope.description_alerts.push({ type: 'success', msg: "Description saved!" });
-          $scope.master.description = response.description;
-          $scope.master.description_html = response.description_html;
-        }
+      $api.reward_update(fundraiser.id, reward.id, reward, function(response) {
 
-        return response;
       });
+    };
+
+    $scope.destroy_reward = function(fundraiser, reward) {
+      console.log('TODO destroy reward with reward.id');
     };
   });
