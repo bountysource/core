@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('api.bountysource',[]).
-  service('$api', function($http, $q, $cookieStore, $rootScope, $location) {
+  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window) {
     var api_host = "https://api.bountysource.com/";
     // environment
     $rootScope.environment = $cookieStore.get('environment') || 'prod';
@@ -15,8 +15,6 @@ angular.module('api.bountysource',[]).
       $cookieStore.put('environment', env);
       window.location.reload();
     };
-
-
 
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
@@ -94,18 +92,20 @@ angular.module('api.bountysource',[]).
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(email, password) {
+      var that = this;
       return this.call("/user/login", "POST", { email: email, password: password }, function(response) {
         console.log(response);
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          $location.path("/");
+          that.after_signin(response);
         }
       });
     };
 
     this.signin_with_access_token = function(access_token) {
       var deferred = $q.defer();
+      var that = this;
       this.call("/user", { access_token: access_token }, function(response) {
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
@@ -113,11 +113,22 @@ angular.module('api.bountysource',[]).
           $rootScope.current_person.access_token = access_token;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
           deferred.resolve(true);
+          that.after_signin(response);
         } else {
           deferred.resolve(false);
         }
       });
       return deferred.promise;
+    };
+
+    this.after_signin = function(response) {
+      // is there a stored redirect URL? go to it!
+      // otherwise, just land on root page
+      if ($cookieStore.get('postauth_url')) {
+        $window.location = $cookieStore.get('postauth_url');
+      } else {
+        $location.path("/");
+      }
     };
 
     this.verify_access_token = function() {
@@ -146,6 +157,39 @@ angular.module('api.bountysource',[]).
       $rootScope.current_person = null;
       $cookieStore.remove('access_token');
       $location.path("/");
+    };
+
+    this.process_payment = function(current_scope, data) {
+      var that = this;
+
+      return this.call("/payments", "POST", data, function(response) {
+        if (response.meta.success) {
+          if (data.payment_method == 'google') {
+            // a JWT is returned, trigger buy
+            $window.google.payments.inapp.buy({
+              jwt: response.data.jwt,
+              success: function(result) {
+                console.log('Google Wallet: Great Success!', result);
+                that.call("/payments/google/success?access_token="+$cookieStore.get('access_token')+"&order_id="+result.response.orderId);
+              },
+              failure: function(result) {
+                console.log('Google Wallet: Error', result);
+              }
+            });
+          } else if (data.payment_method == 'personal') {
+
+            console.log('TODO Update personal account balance');
+
+          } else {
+            $window.location = response.data.redirect_url;
+          }
+        } else if (response.meta.status == 401) {
+          $cookieStore.put('postauth_url', data.postauth_url);
+          $location.path('/signin');
+        } else {
+          current_scope.payment_error = response.data.error;
+        }
+      });
     };
 
   });

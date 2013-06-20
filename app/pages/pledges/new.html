@@ -5,51 +5,94 @@
   <li><a>Make Pledge</a></li>
 </ul>
 
-<form class="form" ng-show="fundraiser">
-  <div class="row-fluid">
-    <div class="span8" ng-include="'pages/fundraisers/partials/header.html'"></div>
-  </div>
+<div class="row-fluid" ng-show="fundraiser">
+  <div class="span9">
+    <div ng-include="'pages/fundraisers/partials/header.html'"></div>
 
-  <hr/>
+    <ul class="nav nav-tabs">
+      <li><a>Overview</a></li>
+      <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
+      <li ng-show="fundraiser.pledge_count > 0"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges">Pledges</a></li>
+      <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Make a Pledge</a></li>
+    </ul>
 
-  <div class="row-fluid">
-    <div class="span5">
-      <div class="well well-large" style="text-align: center;">
-        <input id="pledge-input" style="padding: 0 20px; text-align: center;" maxlength="14" class="span12" type="text" min="5.0" ng-model="pledge.amount" placeholder="Pledge Amount" />
+    <form class="form-horizontal" name="pledge_form">
+      <div class="control-group" ng-show="payment_error">
+        <alert type="error" close="payment_error = null">{{ payment_error }}</alert>
+      </div>
 
-        <div class="btn-group btn-group-vertical" style="width: 100%">
-          <button class="btn btn-block btn-large" ng-model="payment_method" btn-radio="'google'">Google Wallet</button>
-          <button class="btn btn-block btn-large" ng-model="payment_method" btn-radio="'paypal'">Paypal</button>
+      <div class="control-group">
+        <label class="control-label" for="amount">Pledge Amount</label>
 
-          <button ng-show="current_person && current_person.gittip_account.account_balance > 0" class="btn btn-block btn-large" ng-model="payment_method" btn-radio="'gittip'" >Gittip ({{ current_person.account.balance | currency }})</button>
-          <button ng-show="current_person && current_person.account.balance > 0" class="btn btn-block btn-large" ng-model="payment_method" btn-radio="'personal'" >Bountysource ({{ current_person.account.balance | currency }})</button>
+        <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on">$</span>
+            <input type="number" min="5" id="amount" ng-model="pledge.amount" placeholder="Pledge amount" autofocus />
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="span4">
-      <div ng-hide="pledge.amount">
-        <alert type="warning"><strong>Enter a pledge amount or select a reward to continue</strong></alert>
+      <div class="control-group">
+        <label class="control-label">Payment Method</label>
+
+        <div class="controls">
+          <label class="radio">
+            <input type="radio" ng-model="pledge.payment_method" value="google" selected/>
+            <img src="images/google-wallet.png">
+            Google Wallet
+          </label>
+
+          <label class="radio">
+            <input type="radio" ng-model="pledge.payment_method" value="paypal" />
+            <img src="images/paypal.png">
+            PayPal
+          </label>
+
+          <!--<label class="radio">-->
+            <!--<input type="radio" ng-model="pledge.payment_method" value="gittip" />-->
+            <!--<img src="images/gittip.png">-->
+            <!--Gittip-->
+          <!--</label>-->
+
+          <label class="radio" ng-show="current_person && current_person.account.balance > 0">
+            <input type="radio" ng-model="pledge.payment_method" value="personal" />
+            <img src="favicon.ico">
+            Bountysource {{ current_person.account.balance | currency }}
+          </label>
+
+          <label class="checkbox">
+            Make anonymous
+            <input type="checkbox" id="anonymous" ng-model="pledge.anonymous" />
+          </label>
+        </div>
       </div>
 
-      <div ng-show="pledge.amount" class="well" style="text-align: center;">
-        <h2 style="margin: 0 auto"><strong>{{ pledge.amount | currency }} Pledge</strong></h2>
+      <div class="control-group">
+        <label class="control-label">Select a Reward</label>
 
-        <div ng-hide="pledge.reward">With no reward</div>
-        <div ng-show="pledge.reward">With the {{ pledge.reward.amount | currency }} reward</div>
+        <div class="controls span2">
+          <label class="radio" popover="No reward please, I just want to help out." popover-title="No reward" popover-placement="right" popover-trigger="mouseenter">
+            <input type="radio" ng-model="pledge.reward_id" value="0" ng-change="set_reward(0)" />
+            <strong>No Reward</strong>
+          </label>
 
-        <br/>
-        <p style="text-align: left; white-space: pre-wrap;">{{ pledge.reward.description }}</p>
-
-        <hr/>
-
-        <button ng-show="payment_method" class="btn btn-large btn-block btn-success">Make {{ pledge.amount | currency }} Pledge</button>
-        <button ng-hide="payment_method" class="btn btn-large btn-block" disabled>Make {{ pledge.amount | currency }} Pledge</button>
+          <label class="radio" ng-repeat="reward in fundraiser.rewards" popover="{{reward.description}}" popover-title="${{reward.amount | number:0}} reward tier" popover-placement="right" popover-trigger="mouseenter">
+            <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" />
+            <strong>${{ reward.amount | number:0 }}</strong>
+          </label>
+        </div>
       </div>
-    </div>
 
-    <div class="span3">
-      <div ng-include="'pages/pledges/partials/rewards.html'"></div>
-    </div>
+      <div class="control-group">
+        <div class="controls">
+          <button ng-click="create_payment()" class="btn btn-success btn-large" ng-disabled="!pledge.amount || !pledge.payment_method">Make ${{ (pledge.amount || 0) | number:0 }} Pledge</button>
+        </div>
+      </div>
+    </form>
   </div>
-</form>
+
+  <div class="span3">
+    <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
+    <div ng-include="'pages/fundraisers/partials/progress_small.html'"></div>
+  </div>
+</div>

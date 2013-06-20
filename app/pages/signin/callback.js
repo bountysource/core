@@ -13,10 +13,8 @@ angular.module('app')
 
     if ($routeParams.status == 'linked') {
       $api.signin_with_access_token($routeParams.access_token).then(function(response) {
-        if (response === true) {
-          $location.url(redirect_url);
-        } else {
-          $scope.error = "ERROR: Unexpected linked account response."
+        if (response === false) {
+          $scope.error = "ERROR: Unexpected linked account response.";
         }
       });
     } else if ($routeParams.status == 'error_needs_account') {

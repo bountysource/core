@@ -25,9 +25,10 @@
         <a ng-href="/fundraisers/{{ fundraiser.slug }}/edit" class="btn btn-large btn-block">Edit Fundraiser</a>
       </div>
 
+      <h3 style="margin-top: 0;">By <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
       <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
 
-      <a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges/new" class="btn btn-large btn-success btn-block">Pledge Now</a>
+      <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
 
       <div ng-show="fundraiser.rewards.length > 0">
         <h3>Rewards</h3>
