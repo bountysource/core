@@ -1,4 +1,4 @@
-html, body { height: 100%; }
+html, body { height: 100%; margin: 0; padding: 0; }
 
 .navbar { border-top: 4px solid #e0ab45; }
 .navbar .brand { padding: 2px 15px 2px 0; }
@@ -6,12 +6,10 @@ html, body { height: 100%; }
 .navbar-search { position: relative; }
 .navbar-search .search-query { padding-left: 29px; }
 .navbar-search .icon-search { position: absolute; top: 7px; left: 11px; }
-@media (max-width: 979px) {
-  .navbar-search .icon-search { top: 17px; left: 27px; }
-  body { border-top: 0px; }
-}
-
-
+/*@media (max-width: 979px) {*/
+  /*.navbar-search .icon-search { top: 17px; left: 27px; }*/
+  /*#main { border-top: 0px; }*/
+/*}*/
 
 footer { text-align: center; color: #888; }
 footer a { padding-left: 12px; }

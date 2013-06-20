@@ -1,38 +1,73 @@
-<form class="form-horizontal form-signin">
+<form class="form-horizontal form-signin" name="form" novalidate>
   <h2>Please sign in to continue</h2>
 
-  <p>The easiest way is to use an account you already have.</p>
+  <div ng-hide="provider">
+    <p>The easiest way is to use an account you already have.</p>
 
-  <div class="control-group">
-    <label class="control-label" for="inputEmail">Use a Service:</label>
-    <div class="controls">
-      <ul ng-controller="Signin">
-        <li ng-repeat="provider in providers" class="provider-link">
-          <a href="{{ signin_url_for(provider.id) }}"><img src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
-        </li>
-      </ul>
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Use a Service:</label>
+      <div class="controls">
+        <ul ng-controller="Signin">
+          <li ng-repeat="provider in providers" class="provider-link">
+            <a href="{{ signin_url_for(provider.id) }}"><img src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
+          </li>
+        </ul>
+      </div>
     </div>
+
+    <p>Otherwise, enter an email address and password to continue.</p>
   </div>
 
-  <p>Otherwise, enter an email address and password to continue.</p>
+  <input type="hidden" ng-model="form_data.account_link_id" />
 
-  <div class="control-group">
+  <div class="alert alert-error" ng-show="error">{{error}}</div>
+
+  <div class="control-group" ng-class="{ error: (show_validations && form.email.$invalid) || (form.email.$error.email), success: (signin_or_signup == 'signin' || signin_or_signup == 'signup'), warning: signin_or_signup == 'pending' }">
     <label class="control-label" for="inputEmail">Email Address:</label>
     <div class="controls">
-      <input type="text" id="inputEmail" placeholder="john@doe.com" ng-model="email" />
+      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" ng-change="email_changing()" ng-blur="email_changed()" required />
+      <span class="help-inline" ng-show="signin_or_signup=='signin'">Found!</span>
+      <span class="help-inline" ng-show="signin_or_signup=='signup'">Available!</span>
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="control-group" ng-hide="provider && signin_or_signup!='signin'" ng-class="{ error: (show_validations && form.password.$invalid) || (form.password.$error.pattern || form.password.$error.minlength) }">
     <label class="control-label" for="inputPassword">Password:</label>
     <div class="controls">
-      <input type="password" id="inputPassword" placeholder="abc123" ng-model="password" />
+      <input type="password" name="password" id="inputPassword" placeholder="abcd1234" ng-model="form_data.password" class="input-medium" ng-minlength="8" ng-pattern="/[a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]/" required />
+      <span class="help-inline"><small>Letter, number and 8+ chars.</small></span>
+    </div>
+  </div>
+
+  <div class="control-group" ng-show="signin_or_signup=='signup'">
+    <label class="control-label" for="inputFirstName">First and Last Name:</label>
+    <div class="controls">
+      <input type="text" id="inputFirstName" placeholder="John" ng-model="form_data.first_name" class="input-small" />
+      <input type="text" placeholder="Doe" ng-model="form_data.last_name" class="input-small" />
+    </div>
+  </div>
+
+  <div class="control-group" ng-show="signin_or_signup=='signup'">
+    <label class="control-label" for="inputDisplayName">Display Name:</label>
+    <div class="controls">
+      <input type="text" id="inputDisplayName" placeholder="johnny5" ng-model="form_data.display_name" class="input-medium" />
+      <img src="{{form_data.avatar_url}}" style="width: 30px; height: 30px" ng-show="form_data.avatar_url" />
+    </div>
+  </div>
+
+  <div class="control-group" ng-show="signin_or_signup=='signup'">
+    <label class="control-label" for="inputTerms">Legal:</label>
+    <div class="controls">
+      <label class="checkbox">
+        <input type="checkbox" id="inputTerms" /> I agree to the <a href="/terms">Terms of Services</a>.
+      </label>
     </div>
   </div>
 
   <div class="control-group">
     <div class="controls">
-      <button type="submit" class="btn btn-success" ng-click="submit()">Sign In</button>
+      <button type="submit" class="btn btn-success" ng-click="signin()" ng-show="signin_or_signup!='signup'">Sign In</button>
+      <button type="submit" class="btn btn-success" ng-click="signup()" ng-show="signin_or_signup=='signup'">Sign Up</button>
     </div>
   </div>
 
@@ -48,24 +83,6 @@
       <label class="control-label" for="inputCompanyName">Company Name</label>
       <div class="controls">
         <input type="text" id="inputCompanyName" placeholder="E.g. Some Software Pvt. Ltd.">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="inputFirst">First Name</label>
-      <div class="controls">
-        <input type="text" id="inputFirst" placeholder="E.g. Ashwin">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="inputLast">Last Name</label>
-      <div class="controls">
-        <input type="text" id="inputLast" placeholder="E.g. Hegde">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="inputUser">Username</label>
-      <div class="controls">
-        <input type="text" id="inputUser" placeholder="E.g. ashwinhegde">
       </div>
     </div>
     <div class="control-group">

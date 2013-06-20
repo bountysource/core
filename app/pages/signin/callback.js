@@ -8,9 +8,6 @@ angular.module('app')
         template: '{{ error || "Redirecting..." }}'
       });
   }).controller('SigninCallback', function($scope, $api, $routeParams, $location) {
-
-    var redirect_url = '/'; //todo
-
     if ($routeParams.status == 'linked') {
       $api.signin_with_access_token($routeParams.access_token).then(function(response) {
         if (response === false) {
@@ -18,11 +15,11 @@ angular.module('app')
         }
       });
     } else if ($routeParams.status == 'error_needs_account') {
-      $scope.error = "TODO: NEEDS ACCOUNT";
-    } else if (params.status == 'error_already_linked') {
+      $location.path('/signin').search($routeParams).replace();
+    } else if ($routeParams.status == 'error_already_linked') {
       $scope.error = "ERROR: Account already linked.";
       console.log('ERROR: ');
-    } else if (params.status == 'unauthorized') {
+    } else if ($routeParams.status == 'unauthorized') {
       $scope.error = "ERROR: Unauthorized.";
     } else {
       $scope.error = "ERROR: Unknown status.";

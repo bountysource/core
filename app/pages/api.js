@@ -98,46 +98,53 @@ angular.module('api.bountysource',[]).
 
     // these should probably go in an "AuthenticationController" or something more angular
 
-    this.signin = function(email, password) {
+    this.signin = function(form_data) {
       var that = this;
-      return this.call("/user/login", "POST", { email: email, password: password }, function(response) {
-        console.log(response);
+      return this.call("/user/login", "POST", { email: form_data.email, password: form_data.password, account_link_id: form_data.account_link_id }, function(response) {
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
           that.after_signin(response);
         }
+        return response.data;
       });
     };
 
-    this.signin_with_access_token = function(access_token) {
-      var deferred = $q.defer();
+    this.signup = function(form_data) {
       var that = this;
-      this.call("/user", { access_token: access_token }, function(response) {
+      return this.call("/user", "POST", form_data, function(response) {
+        if (response.meta.status === 200) {
+          $rootScope.current_person = response.data;
+          $cookieStore.put('access_token', $rootScope.current_person.access_token);
+          that.after_signin(response);
+        }
+        return response.data;
+      });
+    };
+
+    this.check_email_address = function(email) {
+      return this.call("/user/login", "POST", { email: email });
+    };
+
+    this.signin_with_access_token = function(access_token) {
+      var that = this;
+      return this.call("/user", { access_token: access_token }, function(response) {
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
           // TODO: why doesn't /user return an access_token like /user/login ?
           $rootScope.current_person.access_token = access_token;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          deferred.resolve(true);
           that.after_signin(response);
+          return true;
         } else {
-          deferred.resolve(false);
+          return false;
         }
       });
-      return deferred.promise;
     };
 
     this.after_signin = function(response) {
-      // is there a stored redirect URL? go to it!
-      // otherwise, just land on root page
-      if ($cookieStore.get('postauth_url')) {
-        var url = $cookieStore.get('postauth_url');
-        $cookieStore.remove('postauth_url');
-        $window.location = $cookieStore.get('postauth_url');
-      } else {
-        $location.path("/");
-      }
+      $location.url($cookieStore.get('postauth_url') || '/').replace();
+      $cookieStore.remove('postauth_url');
     };
 
     this.verify_access_token = function() {
