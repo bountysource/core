@@ -1,18 +1,4 @@
-/* layout */
-body { border-top: 60px solid transparent; }
 a{ cursor: pointer; }
-
-.navbar { border-top: 4px solid #e0ab45; }
-.navbar .brand { padding: 2px 15px 2px 0; }
-.navbar .brand strong { display: none }
-.navbar-search { position: relative; }
-.navbar-search .search-query { padding-left: 29px; }
-.navbar-search .icon-search { position: absolute; top: 7px; left: 11px; }
-@media (max-width: 979px) {
-    .navbar-search .icon-search { top: 17px; left: 27px; }
-    body { border-top: 0px; }
-}
 
 /* bug in bootstrap... dropup is black but should be gray unless active */
 .dropup .caret { border-bottom-color: #777; }
-

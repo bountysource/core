@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="styles/people.css">
     <link rel="stylesheet" href="styles/signin.css">
     <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/layout.css">
     <!-- endbuild -->
   </head>
   <body ng-app="app" ng-class="{'chatroom': showChatroom}">
@@ -37,9 +38,14 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng:include src="'pages/layout/navbar.html'"></div>
+    <div id="wrap">
+      <div id="main" class="container clear-top">
+        <div ng:include src="'pages/layout/navbar.html'"></div>
+        <div class="container" ng-view></div>
+      </div>
+    </div>
     <div ng:include src="'pages/layout/chatroom.html'"></div>
-    <div class="container" ng-view></div>
+    <div ng:include src="'pages/layout/footer.html'"></div>
 
 
     <!-- angular components -->
