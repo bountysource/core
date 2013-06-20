@@ -18,6 +18,10 @@
     <p>Otherwise, enter an email address and password to continue.</p>
   </div>
 
+  <div ng-show="provider && signin_or_signup=='signin'">
+    <p>Enter your password to link with your existing Bountysource account.</p>
+  </div>
+
   <input type="hidden" ng-model="form_data.account_link_id" />
 
   <div class="alert alert-error" ng-show="error">{{error}}</div>
@@ -31,7 +35,7 @@
     </div>
   </div>
 
-  <div class="control-group" ng-hide="provider && signin_or_signup!='signin'" ng-class="{ error: (show_validations && form.password.$invalid) || (form.password.$error.pattern || form.password.$error.minlength) }">
+  <div class="control-group" ng-hide="provider && signin_or_signup=='signup'" ng-class="{ error: (show_validations && form.password.$invalid) || (form.password.$error.pattern || form.password.$error.minlength) }">
     <label class="control-label" for="inputPassword">Password:</label>
     <div class="controls">
       <input type="password" name="password" id="inputPassword" placeholder="abcd1234" ng-model="form_data.password" class="input-medium" ng-minlength="8" ng-pattern="/[a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]/" required tooltip="Letter, number and 8+ characters." tooltip-placement="right" tooltip-trigger="focus" />
@@ -59,7 +63,7 @@
     <label class="control-label" for="inputTerms">Legal:</label>
     <div class="controls">
       <label class="checkbox">
-        <input type="checkbox" id="inputTerms" /> I agree to the <a href="/terms">Terms of Services</a>.
+        <input type="checkbox" id="inputTerms" /> I agree to the <a href="/terms" target="_blank">Terms of Services</a>.
       </label>
     </div>
   </div>
@@ -71,30 +75,4 @@
     </div>
   </div>
 
-
-
-  <!--
-        <label class="checkbox">
-          <input type="checkbox"> I agree to <a href="#">Terms of Services</a>
-        </label>
-
-
-    <div class="control-group">
-      <label class="control-label" for="inputCompanyName">Company Name</label>
-      <div class="controls">
-        <input type="text" id="inputCompanyName" placeholder="E.g. Some Software Pvt. Ltd.">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="inputPassword">Password</label>
-      <div class="controls">
-        <input type="password" id="inputPassword" placeholder="Min. 8 Characters">
-      </div>
-    </div>
-    <div class="alert alert-info">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>Confirmation: </strong> A confirmation email has been sent to your email.<br>
-      Thank you for your registration.
-    </div>
-  -->
 </form>

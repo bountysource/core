@@ -21,6 +21,7 @@ angular.module('app')
     $scope.signin_url_for = $api.signin_url_for;
 
     // passed in with a linked account
+    $scope.provider = $routeParams.provider;
     $scope.form_data = {
       email: $routeParams.email,
       account_link_id: $routeParams.account_link_id,
