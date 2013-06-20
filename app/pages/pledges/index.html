@@ -2,7 +2,7 @@
   <li><a href="/">Home</a><span class="divider">»</span></li>
   <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
   <li><a href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
-  <li><a>Updates</a></li>
+  <li><a>Pledges</a></li>
 </ul>
 
 <form class="form" ng-show="fundraiser" ng-controller="FundraiserShowController">
@@ -14,6 +14,7 @@
         <li><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
         <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
         <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges">Pledges</a></li>
+        <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Make a Pledge</a></li>
       </ul>
 
       <table id="pledges-table" ng-show="pledges && pledges.length > 0" class="table table-striped">

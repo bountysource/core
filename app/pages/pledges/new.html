@@ -10,9 +10,9 @@
     <div ng-include="'pages/fundraisers/partials/header.html'"></div>
 
     <ul class="nav nav-tabs">
-      <li><a>Overview</a></li>
-      <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">Updates</a></li>
-      <li ng-show="fundraiser.pledge_count > 0"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges">Pledges</a></li>
+      <li><a ng-href="/fundraisers/{{fundraiser.slug}}">Overview</a></li>
+      <li><a ng-href="/fundraisers/{{fundraiser.slug}}/updates">Updates</a></li>
+      <li ng-show="fundraiser.pledge_count > 0"><a ng-href="/fundraisers/{{fundraiser.slug}}/pledges">Pledges</a></li>
       <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Make a Pledge</a></li>
     </ul>
 

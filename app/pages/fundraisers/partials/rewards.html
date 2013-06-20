@@ -9,7 +9,7 @@
       <br>
       <p style="padding: 0 10px; white-space: pre-wrap;">{{ reward.description }}</p>
       <div style="text-align: center;">
-        <button ng-hide="reward.sold_out" class="btn btn-large btn-info">Claim Reward</button>
+        <a ng-hide="reward.sold_out" ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amount={{reward.amount}}" class="btn btn-large btn-info">Claim Reward</a>
         <button ng-show="reward.sold_out" class="btn btn-large" disabled>Sold Out</button>
       </div>
       <br>
