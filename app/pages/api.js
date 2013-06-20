@@ -125,7 +125,9 @@ angular.module('api.bountysource',[]).
       // is there a stored redirect URL? go to it!
       // otherwise, just land on root page
       if ($cookieStore.get('postauth_url')) {
-        $window.location = $cookieStore.get('postauth_url');
+        var url = $cookieStore.get('postauth_url');
+        $cookieStore.remove('postauth_url');
+        $window.location = url;
       } else {
         $location.path("/");
       }
