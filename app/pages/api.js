@@ -2,25 +2,26 @@
 
 angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window) {
-    var api_host = "https://api.bountysource.com/";
+    $rootScope.api_host = "https://api.bountysource.com/";
+
     // environment
     $rootScope.environment = $cookieStore.get('environment') || 'prod';
     if ($rootScope.environment === 'dev') {
-      api_host = "http://api.bountysource.dev/";
+      $rootScope.api_host = "http://api.bountysource.dev/";
     } else if ($rootScope.environment === 'qa') {
-      api_host = "https://api-qa.bountysource.com/";
+      $rootScope.api_host = "https://api-qa.bountysource.com/";
     }
 
     this.setEnvironment = function(env) {
       $cookieStore.put('environment', env);
-      window.location.reload();
+      $window.location.reload();
     };
 
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
       // parse arguments
       var args = Array.prototype.slice.call(arguments);
-      var url = api_host + args.shift().replace(/^\//,'');
+      var url = $rootScope.api_host + args.shift().replace(/^\//,'');
       var method = typeof(args[0]) === 'string' ? args.shift() : 'GET';
       var params = typeof(args[0]) === 'object' ? args.shift() : {};
       var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
@@ -127,7 +128,7 @@ angular.module('api.bountysource',[]).
       if ($cookieStore.get('postauth_url')) {
         var url = $cookieStore.get('postauth_url');
         $cookieStore.remove('postauth_url');
-        $window.location = url;
+        $window.location = $cookieStore.get('postauth_url');
       } else {
         $location.path("/");
       }
@@ -152,7 +153,7 @@ angular.module('api.bountysource',[]).
 
     this.signin_url_for = function(provider) {
       // todo, include redirect_url in callback
-      return api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent('http://localhost:9000/signin/callback?provider='+provider);
+      return $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent('http://localhost:9000/signin/callback?provider='+provider);
     };
 
     this.signout = function() {
@@ -162,8 +163,6 @@ angular.module('api.bountysource',[]).
     };
 
     this.process_payment = function(current_scope, data) {
-      var that = this;
-
       return this.call("/payments", "POST", data, function(response) {
         if (response.meta.success) {
           if (data.payment_method == 'google') {
@@ -172,7 +171,7 @@ angular.module('api.bountysource',[]).
               jwt: response.data.jwt,
               success: function(result) {
                 console.log('Google Wallet: Great Success!', result);
-                that.call("/payments/google/success?access_token="+$cookieStore.get('access_token')+"&order_id="+result.response.orderId);
+                $window.location = $rootScope.api_host + "payments/google/success?access_token="+$cookieStore.get('access_token')+"&order_id="+result.response.orderId;
               },
               failure: function(result) {
                 console.log('Google Wallet: Error', result);
