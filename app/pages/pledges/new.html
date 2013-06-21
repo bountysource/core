@@ -12,8 +12,14 @@
 
       <ul class="nav nav-tabs">
         <li><a ng-href="/fundraisers/{{fundraiser.slug}}">Overview</a></li>
-        <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{fundraiser.slug}}/updates">Updates</a></li>
-        <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{fundraiser.slug}}/pledges">Pledges</a></li>
+        <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{fundraiser.slug}}/updates">
+          Updates
+          <span ng-show="fundraiser.updates.length > 0" class="badge badge-warning">{{fundraiser.updates.length | number:0}}</span>
+        </a></li>
+        <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{fundraiser.slug}}/pledges">
+          Pledges
+          <span ng-show="fundraiser.pledge_count > 0" class="badge badge-warning">{{fundraiser.pledge_count | number:0}}</span>
+        </a></li>
         <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Make a Pledge</a></li>
       </ul>
 
@@ -71,16 +77,21 @@
         <div class="control-group">
           <label class="control-label">Select a Reward</label>
 
-          <div class="controls span2">
-            <label class="radio" popover="No reward please, I just want to help out." popover-title="No reward" popover-placement="right" popover-trigger="mouseenter">
-              <input type="radio" ng-model="pledge.reward_id" value="0" ng-change="set_reward(0)" />
-              <strong>No Reward</strong>
-            </label>
+          <div class="controls">
 
-            <label class="radio" ng-repeat="reward in fundraiser.rewards" popover="{{reward.description}}" popover-title="${{reward.amount | number:0}} reward tier" popover-placement="right" popover-trigger="mouseenter">
-              <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" />
-              <strong>${{ reward.amount | number:0 }}</strong>
-            </label>
+            <div class="row-fluid">
+              <div class="span4">
+                <label class="radio" popover="No reward please, I just want to help out." popover-title="No reward" popover-placement="right" popover-trigger="mouseenter">
+                  <input type="radio" ng-model="pledge.reward_id" value="0" ng-change="set_reward(0)" />
+                  <div>No Reward</div>
+                </label>
+
+                <label class="radio" ng-repeat="reward in fundraiser.rewards" popover="{{reward.description}}" popover-title="${{reward.amount | number:0}} reward tier" popover-placement="right" popover-trigger="mouseenter">
+                  <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" />
+                  <div>${{ reward.amount | number:0 }} Reward tier</div>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
 
