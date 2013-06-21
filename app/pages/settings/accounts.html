@@ -7,3 +7,30 @@
 <h1>Settings</h1>
 
 <ng-include src="'pages/settings/tabs.html'"></ng-include>
+
+<form class="form-horizontal" name="form" novalidate>
+  <div class="alert alert-error" ng-show="error">{{error}}</div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Login Email:</label>
+    <div class="controls">
+      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputDisplayName">Change Password:</label>
+    <div class="controls">
+      <input type="password" id="inputDisplayName" placeholder="abcd1234" ng-model="form_data.password" class="input-medium" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success" ng-click="save()">Save</button>
+    </div>
+  </div>
+
+  Linked Accounts:
+
+</form>

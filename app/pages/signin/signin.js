@@ -4,7 +4,7 @@ angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/signin', {
-        templateUrl: 'pages/signin/index.html',
+        templateUrl: 'pages/signin/signin.html',
         controller: 'Signin'
       });
   })

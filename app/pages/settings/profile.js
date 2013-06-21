@@ -4,7 +4,7 @@ angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/settings', {
-        templateUrl: 'pages/settings/index.html',
+        templateUrl: 'pages/settings/profile.html',
         controller: 'Settings'
       });
   })

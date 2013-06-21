@@ -7,3 +7,28 @@
 <h1>Settings</h1>
 
 <ng-include src="'pages/settings/tabs.html'"></ng-include>
+
+<form class="form-horizontal" name="form" novalidate>
+  <div class="alert alert-error" ng-show="error">{{error}}</div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email Options:</label>
+    <div class="controls">
+      <label class="checkbox">
+        <input type="checkbox" id="inputTerms" ng-model="form_data.terms" /> Weekly Newsletter
+      </label>
+
+      <label class="checkbox">
+        <input type="checkbox" id="inputTerms" ng-model="form_data.terms" /> Alerts
+      </label>
+
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success" ng-click="save()">Save</button>
+    </div>
+  </div>
+
+</form>
