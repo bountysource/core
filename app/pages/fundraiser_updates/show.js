@@ -10,21 +10,15 @@ angular.module('app')
   })
 
   .controller('FundraiserUpdatesShow', function ($scope, $routeParams, $api) {
-    $scope.num_pages = 1;
-    $scope.current_page = 1;
-    $scope.max_size = 10;
-
     $scope.fundraiser = $api.fundraiser_get($routeParams.fundraiser_id).then(function(response) {
-      console.log('fundraiser', response);
-
       $scope.num_pages = response.updates.length;
+      $scope.current_page = 1;
+      $scope.max_size = 10;
 
       return response;
     });
 
-    $scope.update = $api.fundraiser_update_get($routeParams.fundraiser_id, $routeParams.id).then(function(response) {
-      console.log('update', response);
-
+    var update_load_callback = function(response) {
       // what the hell, why is the update inside of a fundraiser object?
       var update = response.update;
 
@@ -32,5 +26,11 @@ angular.module('app')
       $scope.current_page = update.number;
 
       return update;
-    });
+    };
+
+    $scope.update = $api.fundraiser_update_get($routeParams.fundraiser_id, $routeParams.id).then(update_load_callback);
+
+    $scope.load_update = function(id) {
+      $scope.update = $api.fundraiser_update_get($routeParams.fundraiser_id, id).then(update_load_callback);
+    }
   });
