@@ -29,6 +29,10 @@ module.exports = function (grunt) {
         files: ['gruntfile.js', 'app/pages/**/*.js', 'test/**/*.js'],
         tasks: ['jshint']
       },
+      html_src: {
+        files: ['gruntfile.js', 'app/pages/**/*.js', 'app/index.html'],
+        tasks: ['html_src']
+      },
       livereload: {
         files: [
           'app/**/*.html',
@@ -149,6 +153,13 @@ module.exports = function (grunt) {
         }
       }
     },
+    html_src: {
+      dist: {
+        files: {
+          'app/index.html': ['app/pages/app.js','app/pages/**/*.js']
+        }
+      }
+    },
     useminPrepare: {
       html: 'app/index.html',
       options: {
@@ -261,6 +272,7 @@ module.exports = function (grunt) {
   grunt.registerTask('server', [
     'clean:server',
     'coffee:dist',
+    'html_src',
     'compass:server',
     'connect:pushstate',
     'open',
@@ -281,6 +293,7 @@ module.exports = function (grunt) {
     'jshint',
     'test',
     'coffee',
+    'html_src',
     'compass:dist',
     'useminPrepare',
     'imagemin',
@@ -296,4 +309,30 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', ['build']);
+
+  // automatically put javascript tags into index.html
+  grunt.registerMultiTask('html_src', 'Rebuild static HTML files with file paths', function() {
+    this.files.forEach(function(f) {
+      var orig_src = grunt.file.read(f.dest);
+      var src = ''+orig_src;
+      var relative_path = f.dest.replace(/[^/]*?$/,'');
+
+      // add our own script references
+      var script_tags = "<!-- html_src start -->\n";
+      f.src.map(function(filepath) {
+        script_tags += "    <script src=\"" + filepath.replace(relative_path,"") + "\" type=\"text\/javascript\"></script>\n";
+      });
+      script_tags += "    <!-- html_src end -->";
+
+      // remove existing tags
+      src = src.replace(/<!-- html_src start -->[\s\S]+?<!-- html_src end -->/,script_tags);
+
+      if (src !== orig_src) {
+        grunt.log.writeln('File "' + f.dest + '" updated.');
+        grunt.file.write(f.dest, src);
+      }
+
+    });
+  });
+
 };
