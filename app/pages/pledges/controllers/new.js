@@ -10,15 +10,16 @@ angular.module('app')
   })
 
   .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $location, $api) {
-    $scope.redirect_base_url = $location.protocol() + '://' +$location.host() + ($location.port() ? ':' + $location.port() : '') + '/fundraisers/' + $routeParams.id;
+    $scope.base_url = $location.protocol() + '://' +$location.host() + ($location.port() ? ':' + $location.port() : '');
 
     $scope.pledge = {
       amount: parseInt($routeParams.amount, 10) || 100,
       anonymous: $routeParams.anonymous || false,
-      payment_method: $routeParams.payment_method || 'google',
+      payment_method: $routeParams.payment_method || "google",
       reward_id: parseInt($routeParams.reward_id, 10) || 0,
-      success_url: $scope.redirect_base_url + '/pledges/:item_id',
-      cancel_url: $scope.redirect_base_url
+
+      success_url: $scope.base_url + "/activity/pledges",
+      cancel_url: $scope.base_url + "/fundraisers/" + $routeParams.id
     };
 
     $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {

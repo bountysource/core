@@ -249,10 +249,6 @@ angular.module('api.bountysource',[]).
                 console.log('Google Wallet: Error', result);
               }
             });
-          } else if (data.payment_method === 'personal') {
-
-            console.log('TODO Update personal account balance');
-
           } else {
             $window.location = response.data.redirect_url;
           }
