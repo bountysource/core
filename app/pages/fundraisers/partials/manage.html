@@ -1,4 +1,16 @@
 <div class="well well-large" ng-show="can_manage">
-  <a ng-href="/fundraisers/{{ fundraiser.slug }}/edit" class="btn btn-large btn-block">Edit Fundraiser</a>
-  <button ng-hide="fundraiser.published" ng-disabled="!fundraiser.publishable" ng-click="publish(fundraiser)" class="btn btn-large btn-block btn-success">Publish Fundraiser</button>
+  <a ng-href="/fundraisers/{{ fundraiser.slug }}/edit" class="btn btn-large btn-block">
+    <i class="icon-edit"></i>
+    Edit Fundraiser
+  </a>
+
+  <a ng-show="fundraiser.published" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/new" class="btn btn-large btn-block">
+    <i class="icon-pencil"></i>
+    New Update
+  </a>
+
+  <button ng-hide="fundraiser.published" ng-disabled="!fundraiser.publishable" ng-click="publish(fundraiser)" class="btn btn-large btn-block btn-success">
+    <i class="icon-globe"></i>
+    Publish Fundraiser
+  </button>
 </div>
