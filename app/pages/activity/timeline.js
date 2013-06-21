@@ -10,7 +10,9 @@ angular.module('app')
   })
   .controller('Activity', function($scope, $routeParams, $api) {
     $scope.$watch("current_person", function() {
-      if ($scope.current_person) $scope.timeline = $api.person_timeline_get($scope.current_person.id);
-    })
+      if ($scope.current_person) {
+        $scope.timeline = $api.person_timeline_get($scope.current_person.id);
+      }
+    });
   });
 

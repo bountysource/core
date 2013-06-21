@@ -9,5 +9,6 @@ angular.module('app')
       });
   })
   .controller('AccountSettings', function($scope, $routeParams, $api) {
+    console.log('hax', $scope, $routeParams, $api);
   });
 

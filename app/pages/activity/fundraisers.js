@@ -10,7 +10,9 @@ angular.module('app')
   })
   .controller('FundraiserActivity', function($scope, $routeParams, $api) {
     $scope.$watch("current_person", function() {
-      if ($scope.current_person) $scope.fundraisers = $api.fundraiser_activity();
-    })
+      if ($scope.current_person) {
+        $scope.fundraisers = $api.fundraiser_activity();
+      }
+    });
   });
 

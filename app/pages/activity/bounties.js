@@ -10,7 +10,9 @@ angular.module('app')
   })
   .controller('BountyActivity', function($scope, $routeParams, $api) {
     $scope.$watch("current_person", function() {
-      if ($scope.current_person) $scope.bounties = $api.bounty_activity();
+      if ($scope.current_person) {
+        $scope.bounties = $api.bounty_activity();
+      }
     });
   });
 

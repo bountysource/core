@@ -8,7 +8,7 @@ angular.module('app')
       { name: 'Email', url: '/settings/email' }
     ];
     $scope.is_active = function(url) {
-      return url == $location.path();
+      return url === $location.path();
     };
 
   });

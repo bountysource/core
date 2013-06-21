@@ -49,7 +49,9 @@ angular.module('api.bountysource',[]).
       return this.call("/user/fundraisers/"+id, function(res) {
         // hacky way to add calculated funding percentage to data.
         // TODO proper Models
-        if (res.meta.success) res.data.funding_percentage = Math.min(Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100), 100);
+        if (res.meta.success) {
+          res.data.funding_percentage = Math.min(Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100), 100);
+        }
 
         return res.data;
       });
@@ -115,23 +117,24 @@ angular.module('api.bountysource',[]).
 
     this.bounty_activity = function() {
       return this.call('/user/bounties');
-    }
+    };
 
     this.pledge_activity = function() {
       return this.call('/user/contributions', function(response) { return response.data.pledges; });
-    }
+    };
 
     this.fundraiser_activity = function() {
       return this.call('/user/fundraisers');
-    }
+    };
 
     this.solution_activity = function() {
       return this.call('/user/solutions');
-    }
+    };
 
     this.transaction_activity = function() {
       return this.call('/user/transactions');
-    }
+    };
+
 
 
 
@@ -144,7 +147,7 @@ angular.module('api.bountysource',[]).
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          that.after_signin(response);
+          that.after_signin();
         }
         return response.data;
       });
@@ -156,7 +159,7 @@ angular.module('api.bountysource',[]).
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          that.after_signin(response);
+          that.after_signin();
         }
         return response.data;
       });
@@ -174,7 +177,7 @@ angular.module('api.bountysource',[]).
           // TODO: why doesn't /user return an access_token like /user/login ?
           $rootScope.current_person.access_token = access_token;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          that.after_signin(response);
+          that.after_signin();
           return true;
         } else {
           return false;
@@ -182,7 +185,7 @@ angular.module('api.bountysource',[]).
       });
     };
 
-    this.after_signin = function(response) {
+    this.after_signin = function() {
       $location.url($cookieStore.get('postauth_url') || '/').replace();
       $cookieStore.remove('postauth_url');
     };
@@ -218,7 +221,7 @@ angular.module('api.bountysource',[]).
     this.process_payment = function(current_scope, data) {
       return this.call("/payments", "POST", data, function(response) {
         if (response.meta.success) {
-          if (data.payment_method == 'google') {
+          if (data.payment_method === 'google') {
             // a JWT is returned, trigger buy
             $window.google.payments.inapp.buy({
               jwt: response.data.jwt,
@@ -230,14 +233,14 @@ angular.module('api.bountysource',[]).
                 console.log('Google Wallet: Error', result);
               }
             });
-          } else if (data.payment_method == 'personal') {
+          } else if (data.payment_method === 'personal') {
 
             console.log('TODO Update personal account balance');
 
           } else {
             $window.location = response.data.redirect_url;
           }
-        } else if (response.meta.status == 401) {
+        } else if (response.meta.status === 401) {
           $cookieStore.put('postauth_url', data.postauth_url);
           $location.path('/signin');
         } else {

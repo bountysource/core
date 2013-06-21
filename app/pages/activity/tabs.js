@@ -11,7 +11,7 @@ angular.module('app')
       { name: 'Transactions', url: '/activity/transactions' }
     ];
     $scope.is_active = function(url) {
-      return url == $location.path();
+      return url === $location.path();
     };
 
   });

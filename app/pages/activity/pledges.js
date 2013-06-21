@@ -10,7 +10,9 @@ angular.module('app')
   })
   .controller('PledgeActivity', function($scope, $routeParams, $api) {
     $scope.$watch("current_person", function() {
-      if ($scope.current_person) $scope.pledges = $api.pledge_activity();
+      if ($scope.current_person) {
+        $scope.pledges = $api.pledge_activity();
+      }
     });
   });
 

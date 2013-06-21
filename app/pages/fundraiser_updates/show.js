@@ -32,5 +32,5 @@ angular.module('app')
 
     $scope.load_update = function(id) {
       $scope.update = $api.fundraiser_update_get($routeParams.fundraiser_id, id).then(update_load_callback);
-    }
+    };
   });

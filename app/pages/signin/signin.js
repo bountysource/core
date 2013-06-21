@@ -48,7 +48,7 @@ angular.module('app')
     };
 
     $scope.email_changed = function() {
-      if ($scope.email_previous != $scope.form_data.email) {
+      if ($scope.email_previous !== $scope.form_data.email) {
         $scope.email_previous = $scope.form_data.email;
         $scope.signin_or_signup = 'pending';
         $api.check_email_address($scope.form_data.email).then(function(response) {
@@ -68,7 +68,7 @@ angular.module('app')
 
     // form submit
     $scope.signin = function() {
-      if ($scope.signin_or_signup != 'pending') {
+      if ($scope.signin_or_signup !== 'pending') {
         $scope.show_validations = true;
         $scope.error = null;
         $api.signin($scope.form_data).then(function(response) {
@@ -86,7 +86,7 @@ angular.module('app')
     };
 
     $scope.signup = function() {
-      if ($scope.signin_or_signup != 'pending') {
+      if ($scope.signin_or_signup !== 'pending') {
         $scope.show_validations = true;
         $scope.error = null;
         $api.signup($scope.form_data).then(function(response) {

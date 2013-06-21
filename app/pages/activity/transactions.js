@@ -9,5 +9,10 @@ angular.module('app')
       });
   })
   .controller('TransactionActivity', function($scope, $routeParams, $api) {
+    $scope.$watch("current_person", function() {
+      if ($scope.current_person) {
+        $scope.transactions = $api.transaction_activity();
+      }
+    });
   });
 
