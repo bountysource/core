@@ -16,7 +16,7 @@ angular.module('app')
       amount: parseInt($routeParams.amount) || 100,
       anonymous: $routeParams.anonymous || false,
       payment_method: $routeParams.payment_method || 'google',
-      reward_id: $routeParams.reward_id || 0,
+      reward_id: parseInt($routeParams.reward_id) || 0,
       success_url: $scope.redirect_base_url + '/pledges/:item_id',
       cancel_url: $scope.redirect_base_url
     };
@@ -26,30 +26,28 @@ angular.module('app')
       $scope.pledge.base_item_number = 'fundraisers/'+response.id;
       $scope.pledge.item_number = $scope.pledge.base_item_number;
 
+      // select reward to have the object cached. handled after this by set_reward(reward)
+      $scope.selected_reward = null;
+      for (var i=0; $scope.pledge.reward_id && i<response.rewards.length; i++) {
+        if (response.rewards[i].id === $scope.pledge.reward_id) {
+          $scope.selected_reward = response.rewards[i];
+          break;
+        }
+      }
+
       return response;
     });
 
     $scope.set_reward = function(reward) {
+      $scope.selected_reward = reward;
       $scope.pledge.reward_id = reward.id || 0;
 
       // add reward item to item number
       $scope.pledge.item_number = $scope.pledge.base_item_number + (reward.id == 0 ? '' : '/'+reward.id);
 
+      // if the reward amount is higher than current pledge amount, raise it.
       if (reward.amount && (!$scope.pledge.amount || $scope.pledge.amount < reward.amount)) {
         $scope.pledge.amount = reward.amount;
-      }
-    };
-
-    $scope.clear_reward = function() {
-      $scope.pledge.reward = null;
-      $scope.selected_reward = null;
-    };
-
-    $scope.reward_row_class = function(reward) {
-      if (reward.sold_out) {
-        return 'warning';
-      } else if ($scope.pledge.reward == reward) {
-        return 'info';
       }
     };
 

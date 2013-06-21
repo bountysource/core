@@ -15,11 +15,11 @@
           <li><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
           <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">
             Updates
-            <span ng-show="fundraiser.updates.length > 0" class="badge badge-warning">{{fundraiser.updates.length | number:0}}</span>
+            <span ng-show="fundraiser.updates.length > 0" class="badge badge-info">{{fundraiser.updates.length | number:0}}</span>
           </a></li>
           <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges">
             Pledges
-            <span ng-show="fundraiser.pledge_count > 0" class="badge badge-warning">{{fundraiser.pledge_count | number:0}}</span>
+            <span ng-show="fundraiser.pledge_count > 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
           </a></li>
           <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Make a Pledge</a></li>
         </ul>
@@ -60,7 +60,7 @@
         <div ng-include="'pages/fundraisers/partials/manage.html'"></div>
         <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
         <div ng-include="'pages/fundraisers/partials/progress_small.html'"></div>
-        <a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges/new" class="btn btn-large btn-success btn-block">Pledge Now</a>
+        <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
       </div>
     </div>
   </form>
