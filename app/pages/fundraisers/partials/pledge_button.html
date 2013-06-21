@@ -1,2 +1,3 @@
-<a ng-hide="fundraiser.published" disabled class="btn btn-large btn-success btn-block">Pledge Now</a>
-<a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge" ng-show="fundraiser.published" class="btn btn-large btn-success btn-block">Pledge Now</a>
+<a ng-show="!fundraiser.published" disabled class="btn btn-large btn-block">Pledge Now</a>
+<a ng-show="fundraiser.days_remaining <= 0" disabled class="btn btn-large btn-block">Completed {{fundraiser.ends_at | date:medium}}</a>
+<a ng-show="fundraiser.in_progress" ng-href="/fundraisers/{{ fundraiser.slug }}/pledge" ng-show="fundraiser.published" class="btn btn-large btn-success btn-block">Pledge Now</a>

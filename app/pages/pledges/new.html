@@ -81,12 +81,12 @@
 
             <div class="row-fluid">
               <div class="span4">
-                <label class="radio" popover="No reward please, I just want to help out." popover-title="No reward" popover-placement="right" popover-trigger="mouseenter">
+                <label class="radio" popover="No reward please, I just want to help out." popover-placement="right" popover-trigger="mouseenter">
                   <input type="radio" ng-model="pledge.reward_id" value="0" ng-change="set_reward(0)" />
                   <div>No Reward</div>
                 </label>
 
-                <label class="radio" ng-repeat="reward in fundraiser.rewards" popover="{{reward.description}}" popover-title="${{reward.amount | number:0}} reward tier" popover-placement="right" popover-trigger="mouseenter">
+                <label class="radio" ng-repeat="reward in fundraiser.rewards" popover="{{reward.description}}" popover-placement="right" popover-trigger="mouseenter">
                   <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" />
                   <div>${{ reward.amount | number:0 }} Reward tier</div>
                 </label>
