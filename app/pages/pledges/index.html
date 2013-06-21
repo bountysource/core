@@ -34,9 +34,10 @@
           </tr>
           </thead>
           <tr ng-repeat="pledge in pledges">
-            <td>
-              <img ng-show="pledge.person" class="thumbnail" src="{{ pledge.person.image_url }}" />
-              <img ng-hide="pledge.person" class="thumbnail" src="" />
+            <!--Profile picture. No link if anon-->
+            <td style="width:70px">
+              <a ng-show="pledge.person" ng-href="/people/{{pledge.person.slug}}"><img class="thumbnail" src="{{ pledge.person.image_url }}" /></a>
+              <img ng-hide="pledge.person" class="thumbnail" src="images/anon.jpg" />
             </td>
 
             <td>
