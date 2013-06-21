@@ -35,14 +35,19 @@
         </div>
 
         <table class="table table-striped" ng-show="updates.length > 0">
-          <tr ng-repeat="update in updates" ng-controller="FundraiserUpdatesController">
+          <!--Published updates row-->
+          <tr ng-repeat="update in updates">
             <td>
-              <a href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">
-                #{{ update.number }} {{ update.title }}
-              </a>
+              <a ng-show="update.published_at" href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">#{{ update.number }} {{ update.title }}</a>
+
+              <div ng-hide="update.published_at">
+                <a class="label label-info" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">Draft</a>
+                <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title || 'Untitled' }}</a>
+              </div>
             </td>
             <td>
-              <div class="muted">{{ update.published_at | date }}</div>
+              <div ng-show="update.published_at" class="muted">Published {{ update.published_at | date }}</div>
+              <div ng-hide="update.published_at" class="muted">Last modified {{ update.published_at | date }}</div>
             </td>
           </tr>
         </table>

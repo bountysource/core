@@ -4,10 +4,10 @@
     Edit Fundraiser
   </a>
 
-  <a ng-show="fundraiser.published" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/new" class="btn btn-large btn-block">
+  <button ng-show="fundraiser.published" ng-click="create_update()" class="btn btn-large btn-block">
     <i class="icon-pencil"></i>
     New Update
-  </a>
+  </button>
 
   <button ng-hide="fundraiser.published" ng-disabled="!fundraiser.publishable" ng-click="publish(fundraiser)" class="btn btn-large btn-block btn-success">
     <i class="icon-globe"></i>

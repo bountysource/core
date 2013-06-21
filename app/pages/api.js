@@ -73,16 +73,16 @@ angular.module('api.bountysource',[]).
       return this.call("/user/fundraisers/"+id+"/publish", "POST", callback);
     };
 
-    this.fundraiser_update_get = function(fundraiser_id, id) {
-      return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id);
+    this.fundraiser_update_get = function(fundraiser_id, id, callback) {
+      return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id, callback);
     };
 
     this.fundraiser_update_create = function(fundraiser_id, data, callback) {
       return this.call("/user/fundraisers/"+fundraiser_id+"/updates", "POST", data, callback);
     };
 
-    this.fundraiser_update_edit = function(fundraiser_id, data, callback) {
-      return this.call("/user/fundraisers/"+fundraiser_id+"/updates", "PUT", data, callback);
+    this.fundraiser_update_edit = function(fundraiser_id, id, data, callback) {
+      return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id, "PUT", data, callback);
     };
 
     this.fundraiser_update_destroy = function(fundraiser_id, id, callback) {
