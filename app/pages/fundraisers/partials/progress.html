@@ -18,8 +18,16 @@
         </div>
 
         <div class="span3" style="text-align: center;">
-          <h1 style="margin-bottom:0"><strong>{{ fundraiser.days_remaining | number }}</strong></h1>
-          <span>days left</span>
+          <div ng-show="!fundraiser.published || fundraiser.days_remaining > 0">
+            <h1 style="margin-bottom:0"><strong>{{ (fundraiser.days_remaining || 30) | number }}</strong></h1>
+            <span>days left</span>
+          </div>
+
+          <div ng-show="fundraiser.days_remaining <= 0">
+            <h1 style="margin-bottom:0"><strong>Completed</strong></h1>
+            <span>{{ fundraiser.ends_at | date:'medium' }}</span>
+          </div>
+
         </div>
       </div>
       <br/>
