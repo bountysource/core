@@ -112,6 +112,30 @@ angular.module('api.bountysource',[]).
     };
 
 
+
+    this.bounty_activity = function() {
+      return this.call('/user/bounties');
+    }
+
+    this.pledge_activity = function() {
+      return this.call('/user/contributions', function(response) { return response.data.pledges; });
+    }
+
+    this.fundraiser_activity = function() {
+      return this.call('/user/fundraisers');
+    }
+
+    this.solution_activity = function() {
+      return this.call('/user/solutions');
+    }
+
+    this.transaction_activity = function() {
+      return this.call('/user/transactions');
+    }
+
+
+
+
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {

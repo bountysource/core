@@ -1,0 +1,31 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/activity">My Activity</a><span class="divider">»</span></li>
+  <li><a href="/activity/bounties">Bounties</a></li>
+</ul>
+
+<h1>Bounties</h1>
+
+<ng-include src="'pages/activity/tabs.html'"></ng-include>
+
+<table class="table table-striped">
+  <tr>
+    <th>Tracker</th>
+    <th>Issue</th>
+    <th>Issue Open</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Anonymous</th>
+    <th>Date</th>
+  </tr>
+
+  <tr ng-repeat="bounty in bounties">
+    <td><a href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
+    <td><a href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}</a></td>
+    <td>{{ bounty.issue.can_add_bounty }}</td>
+    <td>{{ bounty.amount | currency }}</td>
+    <td>{{ bounty.status }}</td>
+    <td>{{ bounty.anonymous }}</td>
+    <td>{{ bounty.created_at | date }}</td>
+  </tr>
+</table>

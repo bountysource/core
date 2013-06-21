@@ -9,11 +9,9 @@
           <input type="text" class="search-query" placeholder="Issue URL, Project, Language, etc. ">
         </form>
         <ul class="nav pull-right">
-          <li><a href="/about">About</a></li>
-          <li><a href="/explore">Explore</a></li>
-          <li><a href="/blog">Blog</a></li>
+          <li><a href="http://blog.bountysource.com" target="_blank">Blog</a></li>
           <li ng-class="{'dropdown': true, 'dropup': true, 'active': showChatroom}"><a ng-controller="ChatroomController" ng-click="toggleChatroom()">Chatroom <b class="caret"></b></a></li>
-
+          <li ng-show="current_person"><a href="/activity">My Activity</a></li>
           <li class="dropdown" ng-controller="Signin">
             <a href="/signin" class="dropdown-toggle" data-toggle="dropdown" ng-hide="!!current_person">Sign In<b class="caret"></b></a>
             <ul class="dropdown-menu" ng-hide="!!current_person">
@@ -26,7 +24,8 @@
 
             <a href="/people/{{current_person.slug}}" class="dropdown-toggle" data-toggle="dropdown" ng-show="!!current_person"><i class="icon-user"></i> {{current_person.display_name}}<b class="caret"></b></a>
             <ul class="dropdown-menu" ng-show="!!current_person">
-              <li><a href="/people/{{current_person.slug}}">Settings</a></li>
+              <li><a href="/people/{{current_person.slug}}">Public Profile</a></li>
+              <li><a href="/settings">Settings</a></li>
               <li><a href="/signin" ng-click="signout()">Logout</a></li>
             </ul>
           </li>

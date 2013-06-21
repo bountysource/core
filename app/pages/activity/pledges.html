@@ -1,0 +1,23 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/activity">My Activity</a><span class="divider">»</span></li>
+  <li><a href="/activity/pledges">Pledges</a></li>
+</ul>
+
+<h1>Pledges</h1>
+
+<ng-include src="'pages/activity/tabs.html'"></ng-include>
+
+<table class="table table-striped">
+  <tr>
+    <th>Fundraiser</th>
+    <th>Pledge Amount</th>
+    <th>Date</th>
+  </tr>
+
+  <tr ng-repeat="pledge in pledges">
+    <td><a href="/fundraisers/{{ pledge.fundraiser.slug }}">{{ pledge.fundraiser.title }}</a></td>
+    <td><a href="/issues/{{bounty.issue.slug}}">{{ pledge.amount | currency }}</a></td>
+    <td>{{ pledge.created_at | date }}</td>
+  <tr>
+</table>

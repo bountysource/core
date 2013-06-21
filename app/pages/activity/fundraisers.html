@@ -1,0 +1,25 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/activity">My Activity</a><span class="divider">»</span></li>
+  <li><a href="/activity/fundraisers">Fundraisers</a></li>
+</ul>
+
+<h1>Fundraisers</h1>
+
+<ng-include src="'pages/activity/tabs.html'"></ng-include>
+
+<table class="table table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Goal</th>
+    <th>Progress</th>
+    <th>Status</th>
+  </tr>
+
+  <tr ng-repeat="fundraiser in fundraisers">
+    <td><a href="/fundraisers/{{fundraiser.slug}}">{{ fundraiser.title }}</a></td>
+    <td>{{ fundraiser.funding_goal | currency }}</td>
+    <td>{{ (fundraiser.total_pledged / fundraiser.funding_goal) | percent }}</td>
+    <td>{{ bounty.amount | currency }}</td>
+  </tr>
+</table>
