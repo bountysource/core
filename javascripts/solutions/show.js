@@ -101,7 +101,8 @@ with (scope('Show','Solution')) {
               ),
               fieldset({ 'class': 'no-label' },
                 submit({ 'class': 'button green' }, 'Update')
-              )
+              ),
+              a({ 'class': 'button red', href: curry(delete_solution, solution.id) }, 'Murder It')
             )
           );
         } else {
