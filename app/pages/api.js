@@ -50,7 +50,7 @@ angular.module('api.bountysource',[]).
         // hacky way to add calculated funding percentage to data.
         // TODO proper Models
         if (res.meta.success) {
-          res.data.funding_percentage = Math.min(Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100), 100);
+          res.data.funding_percentage = Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100);
         }
 
         return res.data;
@@ -69,12 +69,28 @@ angular.module('api.bountysource',[]).
       return this.call("/user/fundraisers/"+id+"/pledges");
     };
 
+    this.fundraiser_publish = function(id, callback) {
+      return this.call("/user/fundraisers/"+id+"/publish", "POST", callback);
+    };
+
     this.fundraiser_update_get = function(fundraiser_id, id) {
       return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id);
     };
 
-    this.fundraiser_publish = function(id, callback) {
-      return this.call("/user/fundraisers/"+id+"/publish", "POST", callback);
+    this.fundraiser_update_create = function(fundraiser_id, data, callback) {
+      return this.call("/user/fundraisers/"+fundraiser_id+"/updates", "POST", data, callback);
+    };
+
+    this.fundraiser_update_edit = function(fundraiser_id, data, callback) {
+      return this.call("/user/fundraisers/"+fundraiser_id+"/updates", "PUT", data, callback);
+    };
+
+    this.fundraiser_update_destroy = function(fundraiser_id, id, callback) {
+      return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id, "DELETE", callback);
+    };
+
+    this.fundraiser_update_publish = function(fundraiser_id, id, callback) {
+      return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id+"/publish", "POST", callback);
     };
 
     this.reward_create = function(fundraiser_id, data, callback) {
