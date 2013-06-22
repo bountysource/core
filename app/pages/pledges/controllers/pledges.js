@@ -10,8 +10,17 @@ angular.module('app')
   })
 
   .controller('FundraiserPledgeController', function ($scope, $routeParams, $api) {
-    $scope.pledges = $api.fundraiser_pledges_get($routeParams.id).then(function(r) {
-      console.log('pledges', r);
-      return r;
-    });
+    $scope.pledges = $api.fundraiser_pledges_get($routeParams.id);
+
+    $scope.sort_column = 'amount';
+    $scope.sort_reverse = true;
+
+    $scope.sort_by = function(col) {
+      // if clicking this column again, then reverse the direction.
+      if ($scope.sort_column === col) {
+        $scope.sort_reverse = !$scope.sort_reverse;
+      } else {
+        $scope.sort_column = col;
+      }
+    };
   });

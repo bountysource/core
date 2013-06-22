@@ -21,6 +21,10 @@
             Pledges
             <span ng-show="fundraiser.pledge_count > 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
           </a></li>
+          <li ng-show="fundraiser.can_manage"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
+            <i class="icon-lock"></i>
+            Reward Stats
+          </a></li>
           <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a></li>
         </ul>
 
@@ -29,13 +33,13 @@
         <table id="pledges-table" ng-show="pledges && pledges.length > 0" class="table table-striped">
           <thead>
           <tr>
-            <th>Backer</th>
+            <th><a ng-click="sort_by('person.display_name')">Backer</a></th>
             <th></th>
-            <th>Amount</th>
-            <th>Date</th>
+            <th><a ng-click="sort_by('amount')">Amount</a></th>
+            <th><a ng-click="sort_by('created_at')">Date</a></th>
           </tr>
           </thead>
-          <tr ng-repeat="pledge in pledges">
+          <tr ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse">
             <!--Profile picture. No link if anon-->
             <td style="width:70px">
               <a ng-show="pledge.person" ng-href="/people/{{pledge.person.slug}}"><img class="thumbnail" src="{{ pledge.person.image_url }}" /></a>
@@ -67,3 +71,4 @@
     </div>
   </form>
 </div>
+
