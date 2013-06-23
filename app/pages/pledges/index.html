@@ -30,7 +30,7 @@
 
         <div class="alert alert-info" ng-show="pledges.length <= 0">No pledges have been made. <a ng-href="/fundraisers/{{fundraiser.slug}}/pledge">Why don't you make the first pledge?</a></div>
 
-        <table id="pledges-table" ng-show="pledges && pledges.length > 0" class="table table-striped">
+        <table ng-show="pledges && pledges.length > 0" class="table table-striped pledges-table">
           <thead>
           <tr>
             <th><a ng-click="sort_by('person.display_name')">Backer</a></th>

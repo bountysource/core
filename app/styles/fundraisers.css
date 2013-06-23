@@ -1,8 +1,10 @@
-table#pledges-table tr td {
+table.pledges-table { margin: 0; }
+
+table.pledges-table tr td {
   vertical-align: middle;
 }
 
-table#pledges-table tr td img.thumbnail {
+table.pledges-table tr td img.thumbnail {
   width: 50px;
   height: 50px;
 }
