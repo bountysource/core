@@ -33,4 +33,11 @@
 
   Linked Accounts:
 
+  <table>
+    <tr ng-repeat="account in accounts">
+      <td><img src="{{ account.avatar_url }}" style="width: 50px; height: 50px" /></td>
+      <td>{{ account.login }}</td>
+      <td>{{account}}</td>
+    </tr>
+  </table>
 </form>

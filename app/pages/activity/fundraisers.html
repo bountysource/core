@@ -16,8 +16,8 @@
 
   <tr ng-repeat="fundraiser in fundraisers">
     <td><a href="/fundraisers/{{fundraiser.slug}}">{{ fundraiser.title }}</a></td>
-    <td>{{ fundraiser.funding_goal | currency }}</td>
+    <td>{{ fundraiser.funding_goal | dollars }}</td>
     <td>{{ (fundraiser.total_pledged / fundraiser.funding_goal) | percent }}</td>
-    <td>{{ bounty.amount | currency }}</td>
+    <td>{{ bounty.amount | dollars }}</td>
   </tr>
 </table>

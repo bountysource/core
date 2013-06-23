@@ -15,10 +15,11 @@ angular.module('app')
       first_name: $scope.current_person.first_name,
       last_name: $scope.current_person.last_name,
       display_name: $scope.current_person.display_name,
+      bio: $scope.current_person.bio,
       location: $scope.current_person.location,
-      company: $scope.current_person.comapny,
-      website: $scope.current_person.website,
-      public_email_address: $scope.current_person.public_email_address
+      company: $scope.current_person.company,
+      url: $scope.current_person.url,
+      public_email: $scope.current_person.public_email
     };
   });
 

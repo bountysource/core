@@ -70,7 +70,7 @@
                 <label class="radio" ng-show="current_person && current_person.account.balance > 0">
                   <input type="radio" ng-model="pledge.payment_method" value="personal" />
                   <img src="favicon.ico">
-                  Bountysource {{ current_person.account.balance | currency }}
+                  Bountysource {{ current_person.account.balance | dollars }}
                 </label>
 
                 <label class="checkbox">

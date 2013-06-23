@@ -40,7 +40,7 @@
     <ul>
       <li ng-repeat="issue in tracker.issues_valuable">
         <a href="/issues/{{issue.slug}}">
-          <span class="badge badge-success">{{issue.bounty_total|currency}}</span>
+          <span class="badge badge-success">{{ issue.bounty_total | dollars }}</span>
           <span class="badge badge-info">{{issue.comment_count}} <i class="icon-comment icon-white"></i></span>
           #{{issue.id}}: {{issue.title}}
         </a>
@@ -51,7 +51,7 @@
     <ul>
       <li ng-repeat="issue in tracker.issues_popular">
         <a href="/issues/{{issue.slug}}">
-          <span class="badge badge-success">{{issue.bounty_total|currency}}</span>
+          <span class="badge badge-success">{{ issue.bounty_total | dollars }}</span>
           <span class="badge badge-info">{{issue.comment_count}} <i class="icon-comment icon-white"></i></span>
           #{{issue.id}}: {{issue.title}}
         </a>
@@ -62,7 +62,7 @@
     <ul>
       <li ng-repeat="issue in tracker.issues_newest">
         <a href="/issues/{{issue.slug}}">
-          <span class="badge badge-success">{{issue.bounty_total|currency}}</span>
+          <span class="badge badge-success">{{ issue.bounty_total | dollars }}</span>
           <span class="badge badge-info">{{issue.comment_count}} <i class="icon-comment icon-white"></i></span>
           #{{issue.id}}: {{issue.title}}
         </a>

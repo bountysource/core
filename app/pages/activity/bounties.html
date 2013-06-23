@@ -21,7 +21,7 @@
     <td><a href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
     <td><a href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}</a></td>
     <td>{{ bounty.issue.can_add_bounty }}</td>
-    <td>{{ bounty.amount | currency }}</td>
+    <td>{{ bounty.amount | dollars }}</td>
     <td>{{ bounty.status }}</td>
     <td>{{ bounty.anonymous }}</td>
     <td>{{ bounty.created_at | date }}</td>

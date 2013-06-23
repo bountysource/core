@@ -1,11 +1,11 @@
 <table id="person-timeline-table" class="table table-striped">
   <tr ng-repeat="action in timeline">
     <td ng-show="action.type == 'pledge'">
-      <strong>{{ person.display_name }}</strong> pledged <strong>{{ action.amount | currency }}</strong> to <a href="/fundraisers/{{ action.target_slug }}">{{ action.target_name }}</a>
+      <strong>{{ person.display_name }}</strong> pledged <strong>{{ action.amount | dollars }}</strong> to <a href="/fundraisers/{{ action.target_slug }}">{{ action.target_name }}</a>
     </td>
 
     <td ng-show="action.type == 'bounty'">
-      <strong>{{ person.display_name }}</strong> placed a <strong>{{ action.amount | currency }}</strong> bounty on <a href="/issues/{{ action.target_slug }}">{{ action.target_name }}</a>
+      <strong>{{ person.display_name }}</strong> placed a <strong>{{ action.amount | dollars }}</strong> bounty on <a href="/issues/{{ action.target_slug }}">{{ action.target_name }}</a>
     </td>
 
     <td ng-show="action.type == 'tracker_plugin'">

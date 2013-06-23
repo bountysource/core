@@ -10,6 +10,10 @@ angular.module('app')
       });
   })
   .controller('AccountSettings', function($scope, $routeParams, $api) {
-    console.log('hax', $scope, $routeParams, $api);
+    $scope.accounts = [
+      $scope.current_person.github_account,
+      $scope.current_person.facebook_account,
+      $scope.current_person.twitter_account
+    ];
   });
 
