@@ -2,6 +2,8 @@
 
 angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window) {
+    var $api = this; // hack to store self reference
+
     $rootScope.api_host = "https://api.bountysource.com/";
 
     // environment
@@ -168,24 +170,41 @@ angular.module('api.bountysource',[]).
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {
-      var that = this;
       return this.call("/user/login", "POST", { email: form_data.email, password: form_data.password, account_link_id: form_data.account_link_id }, function(response) {
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          that.after_signin();
+          $api.goto_post_auth_url();
         }
         return response.data;
       });
     };
 
+    this.set_current_person = function(obj) {
+      if (obj) {
+        $rootScope.current_person = obj;
+        $cookieStore.put('access_token', $rootScope.current_person.access_token);
+      } else {
+        $rootScope.current_person = false;
+        $cookieStore.remove('access_token');
+      }
+    };
+
+    this.set_post_auth_url = function(url) {
+      $cookieStore.put('postauth_url', url);
+    };
+
+    this.goto_post_auth_url = function() {
+      var dest = $cookieStore.get('postauth_url').replace(/^https?:\/\/[^/]+/,'') || '/';
+      $location.url(dest).replace();
+      $cookieStore.remove('postauth_url');
+    };
+
     this.signup = function(form_data) {
-      var that = this;
       return this.call("/user", "POST", form_data, function(response) {
         if (response.meta.status === 200) {
-          $rootScope.current_person = response.data;
-          $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          that.after_signin();
+          $api.set_current_person(response.data);
+          $api.goto_post_auth_url();
         }
         return response.data;
       });
@@ -196,14 +215,11 @@ angular.module('api.bountysource',[]).
     };
 
     this.signin_with_access_token = function(access_token) {
-      var that = this;
       return this.call("/user", { access_token: access_token }, function(response) {
         if (response.meta.status === 200) {
-          $rootScope.current_person = response.data;
-          // TODO: why doesn't /user return an access_token like /user/login ?
-          $rootScope.current_person.access_token = access_token;
-          $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          that.after_signin();
+          response.data.access_token = access_token; // FIXME: why doesn't /user include an access token when it's you?
+          $api.set_current_person(response.data);
+          $api.goto_post_auth_url();
           return true;
         } else {
           return false;
@@ -211,25 +227,22 @@ angular.module('api.bountysource',[]).
       });
     };
 
-    this.after_signin = function() {
-      $location.url($cookieStore.get('postauth_url') || '/').replace();
-      $cookieStore.remove('postauth_url');
-    };
-
-    this.verify_access_token = function() {
+    this.load_current_person_from_cookies = function() {
       var access_token = $cookieStore.get('access_token');
       if (access_token) {
         console.log("Verifying access token: " + access_token);
-        var that = this;
         this.call("/user", { access_token: access_token }, function(response) {
           if (response.meta.status === 200) {
             console.log("access token still valid");
-            $rootScope.current_person = response.data;
+            response.data.access_token = access_token; // FIXME: why doesn't /user include an access token when it's you?
+            $api.set_current_person(response.data);
           } else {
             console.log("access token expired. signing out.");
-            that.signout();
+            $api.set_current_person();
           }
         });
+      } else {
+        $api.set_current_person();
       }
     };
 
@@ -239,8 +252,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.signout = function() {
-      $rootScope.current_person = null;
-      $cookieStore.remove('access_token');
+      $api.set_current_person();
       $location.path("/");
     };
 
@@ -263,7 +275,7 @@ angular.module('api.bountysource',[]).
             $window.location = response.data.redirect_url;
           }
         } else if (response.meta.status === 401) {
-          $cookieStore.put('postauth_url', data.postauth_url);
+          $api.set_post_auth_url(data.postauth_url);
           $location.path('/signin');
         } else {
           current_scope.payment_error = response.data.error;
@@ -271,4 +283,39 @@ angular.module('api.bountysource',[]).
       });
     };
 
+  }).constant('$person', {
+    // this returns a promise and is meant to block rotues via "resolve: $person". it redirects to /signin if need be.
+    resolver: function($api, $q, $rootScope, $location, $cookieStore) {
+      var deferred = $q.defer();
+
+      var success = function() {
+        deferred.resolve();
+      };
+
+      var failure = function() {
+        deferred.reject();
+        $api.set_post_auth_url($location.url());
+        $location.url('/signin').replace();
+      };
+
+      if ($rootScope.current_person) {
+        // already logged in? go ahead and resolve immediately
+        $rootScope.$evalAsync(success);
+      } else if ($rootScope.current_person === false) {
+        // not logged in? go ahead and fail
+        $rootScope.$evalAsync(failure);
+      } else {
+        // otherwise we're still waiting on load_current_person_from_cookies (likely a fresh page load)
+        $rootScope.$watch('current_person', function(new_val) {
+          console.log('oh hai current_person', new_val);
+          if ($rootScope.current_person) {
+            success()
+          } else if ($rootScope.current_person === false) {
+            failure()
+          }
+        });
+      }
+
+      return deferred.promise;
+    }
   });

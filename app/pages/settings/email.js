@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $person) {
     $routeProvider
       .when('/settings/email', {
         templateUrl: 'pages/settings/email.html',
-        controller: 'Settings'
+        controller: 'Settings',
+        resolve: $person
       });
   })
   .controller('Settings', function($scope, $routeParams, $api) {

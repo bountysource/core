@@ -9,5 +9,5 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     $locationProvider.html5Mode(true);
     $routeProvider.otherwise({ templateUrl: 'pages/layout/not_found.html' });
   }).run(function($api) {
-    $api.verify_access_token();
+    $api.load_current_person_from_cookies();
   });

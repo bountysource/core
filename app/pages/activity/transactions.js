@@ -1,18 +1,15 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $person) {
     $routeProvider
       .when('/activity/transactions', {
         templateUrl: 'pages/activity/transactions.html',
-        controller: 'TransactionActivity'
+        controller: 'TransactionActivity',
+        resolve: $person
       });
   })
   .controller('TransactionActivity', function($scope, $routeParams, $api) {
-    $scope.$watch("current_person", function() {
-      if ($scope.current_person) {
-        $scope.transactions = $api.transaction_activity();
-      }
-    });
+    $scope.transactions = $api.transaction_activity();
   });
 
