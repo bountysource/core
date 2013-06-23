@@ -20,6 +20,10 @@
           Pledges
           <span ng-show="fundraiser.pledge_count > 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
         </a></li>
+        <li ng-show="fundraiser.can_manage"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
+          <i class="icon-lock"></i>
+          Reward Stats
+        </a></li>
         <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a></li>
       </ul>
 
@@ -101,13 +105,16 @@
           </div>
 
           <div class="span6">
-            <div class="alert alert-block" ng-show="selected_reward.fulfillment_details">
-              <strong>Reward Survey</strong>
-              <span class="pull-right label label-important">required</span>
-              <p style="white-space: pre-wrap;">{{ selected_reward.fulfillment_details }}</p>
-              <br />
-              <textarea autofocus="true" class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required></textarea>
+            <div collapse="!selected_reward.fulfillment_details">
+              <div class="alert alert-block" ng-show="selected_reward.fulfillment_details">
+                <strong>Reward Survey</strong>
+                <span class="pull-right label label-important">required</span>
+                <p style="white-space: pre-wrap;">{{ selected_reward.fulfillment_details }}</p>
+                <br />
+                <textarea autofocus="true" class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required></textarea>
+              </div>
             </div>
+
 
             <div class="alert alert-block alert-info">
               <strong ng-show="selected_reward">Selected Reward: ${{ selected_reward.amount | number:0 }}</strong>

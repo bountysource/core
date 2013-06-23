@@ -17,9 +17,6 @@ angular.module('app')
 
     $scope.create_update = function() {
       $api.fundraiser_update_create($routeParams.id, {}, function(response) {
-
-        console.log(response);
-
         if (response.meta.success) {
           var fundraiser = response.data;
           var update = response.data.update;

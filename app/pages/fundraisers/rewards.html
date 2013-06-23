@@ -3,7 +3,7 @@
     <li><a href="/">Home</a><span class="divider">»</span></li>
     <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
     <li><a href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
-    <li><a>Updates</a></li>
+    <li><a>Rewards</a></li>
   </ul>
 
   <form class="form" ng-show="fundraiser">
@@ -13,7 +13,7 @@
 
         <ul class="nav nav-tabs">
           <li><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
-          <li class="active"><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">
+          <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">
             Updates
             <span ng-show="fundraiser.updates.length > 0" class="badge badge-info">{{fundraiser.updates.length | number:0}}</span>
           </a></li>
@@ -21,40 +21,42 @@
             Pledges
             <span ng-show="fundraiser.pledge_count > 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
           </a></li>
-          <li ng-show="fundraiser.can_manage"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
+          <li class="active" ng-show="fundraiser.can_manage"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
             <i class="icon-lock"></i>
             Reward Stats
           </a></li>
           <li><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a></li>
         </ul>
 
-        <div ng-show="can_manage" class="hero-unit">
-          <h2>Updates</h2>
-          <p>Publish updates about your fundraiser. Published updates are emailed to the backers of your fundraiser.</p>
-          <button ng-href="/fundraisers/{{fundraiser.slug}}/updates/new" class="btn btn-large btn-primary">New Update</button>
+        <div class="hero-unit">
+          <h2>Reward Stats</h2>
+          <p>This is a collection of all of the pledges made to your fundraiser. For rewards that require extra information, such as a mailing address, the backers' responses will be shown here.</p>
         </div>
 
-        <div class="alert alert-info" ng-show="updates.length <= 0">
-          No updates have been published.
+        <div ng-repeat="reward in rewards">
+          <h3 ng-show="reward.amount > 0">${{ reward.amount | number:0 }} Reward</h3>
+          <h3 ng-hide="reward.amount > 0">No Reward</h3>
+
+          <p style="white-space: pre-wrap;">{{reward.description}}</p>
+
+          <table id="pledges-table" ng-show="reward.pledges.length > 0" class="table table-striped">
+            <tr ng-repeat="pledge in reward.pledges">
+              <td style="width:70px;">
+                <a ng-show="pledge.person" ng-href="/people/{{pledge.person.slug}}"><img class="thumbnail" src="{{ pledge.person.image_url }}" /></a>
+                <img ng-hide="pledge.person" class="thumbnail" src="images/anon.jpg" />
+              </td>
+
+              <td>
+                <a ng-show="pledge.person" href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
+                <div ng-hide="pledge.person" class="muted">Anonymous</div>
+              </td>
+
+              <td>
+
+              </td>
+            </tr>
+          </table>
         </div>
-
-        <table class="table table-striped" ng-show="updates.length > 0">
-          <!--Published updates row-->
-          <tr ng-repeat="update in updates">
-            <td>
-              <a ng-show="update.published_at" href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">#{{ update.number }} {{ update.title }}</a>
-
-              <div ng-hide="update.published_at">
-                <a class="label label-info" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">Draft</a>
-                <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title || 'Untitled' }}</a>
-              </div>
-            </td>
-            <td>
-              <div ng-show="update.published_at" class="muted">Published {{ update.published_at | date }}</div>
-              <div ng-hide="update.published_at" class="muted">Last modified {{ update.published_at | date }}</div>
-            </td>
-          </tr>
-        </table>
       </div>
 
       <div class="span3">

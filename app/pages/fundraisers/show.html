@@ -20,6 +20,10 @@
             Pledges
             <span ng-show="fundraiser.pledge_count > 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
           </a></li>
+          <li ng-show="fundraiser.can_manage"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
+            <i class="icon-lock"></i>
+            Reward Stats
+          </a></li>
           <li ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a></li>
         </ul>
 

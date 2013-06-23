@@ -13,12 +13,18 @@ angular.module('app')
     // initialize fundraiser data and changes
     $scope.master = {};
     $scope.changes = {};
+    $scope.rewards = [];
+    $scope.master_rewards = [];
 
     $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
       // cache the fundraiser. angular.copy does a deep copy, FYI
       // if you don't create a copy, these are both bound to the input
       $scope.master = angular.copy(response);
       $scope.changes = angular.copy(response);
+
+      // also cache rewards
+      $scope.master_rewards = angular.copy(response.rewards);;
+      $scope.rewards = angular.copy(response.rewards);;
       return response;
     });
 
@@ -26,9 +32,10 @@ angular.module('app')
 
     $scope.save = function() {
       $api.fundraiser_update($routeParams.id, $scope.changes).then(function(response) {
-        // TODO proper error callback through the $q promise api `promise.reject(response)`
         if (response.error) {
-          $scope.alerts.push({ type: 'error', msg: response.error });
+          $scope.error = response.error;
+
+          // TODO replace master reward with the current one
         } else {
           $location.path("/fundraisers/"+$scope.master.slug);
         }
@@ -48,15 +55,41 @@ angular.module('app')
           // push this new reward onto the table
           fundraiser.rewards.push(response.data);
         } else {
-          $scope.error = response.data.error;
+          $scope.reward_error = response.data.error;
         }
       });
     };
 
     $scope.update_reward = function(fundraiser, reward) {
       $api.reward_update(fundraiser.id, reward.id, reward, function(response) {
-        console.log('update_reward', response);
+        if (response.meta.success) {
+          for (var i=0; i<$scope.rewards.length; i++) {
+            if ($scope.rewards[i].id === reward.id) {
+              // copy attributes from current reward to master
+              for (var k in $scope.rewards[i]) {
+                $scope.master_rewards[i][k] = $scope.rewards[i][k];
+              }
+              $scope.rewards[i].$is_open = false;
+              return;
+            }
+          }
+        } else {
+          $scope.reward_error = response.data.error;
+        }
       });
+    };
+
+    $scope.cancel_reward_changes = function(reward) {
+      for (var i=0; i<$scope.master_rewards.length; i++) {
+        if ($scope.master_rewards[i].id === reward.id) {
+          // copy attributes from master reward to this one
+          for (var k in $scope.master_rewards[i]) {
+            $scope.rewards[i][k] = $scope.master_rewards[i][k];
+          }
+          $scope.rewards[i].$is_open = false;
+          return;
+        }
+      }
     };
 
     $scope.destroy_reward = function(fundraiser, reward) {
