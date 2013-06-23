@@ -7,7 +7,7 @@
     <tr ng-repeat="bounty in issue.bounties">
       <td>
         <img ng-show="bounty.person" class="thumbnail" src="{{ bounty.person.image_url }}" />
-        <img ng-hide="bounty.person" class="thumbnail" src="images/anon.png" />
+        <img ng-hide="bounty.person" class="thumbnail" src="images/anon.jpg" />
       </td>
       <td>
         <a ng-show="bounty.person" href="/people/{{ bounty.person.slug }}">{{ bounty.person.display_name }}</a>

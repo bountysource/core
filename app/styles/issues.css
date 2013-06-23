@@ -14,3 +14,7 @@ table#solutions-table tr td img.thumbnail {
   width: 130px;
   height: 130px;
 }
+
+.obama-buttons .btn { margin-top: 0; }
+.obama-buttons .controls { margin-top: 10px; }
+.obama-buttons .controls:first-of-type { margin-top: 0; }

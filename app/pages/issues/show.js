@@ -8,11 +8,21 @@ angular.module('app')
         controller: 'IssueShow'
       });
   })
+
   .controller('IssueShow', function ($scope, $routeParams, $api) {
     $scope.issue = $api.issue_get($routeParams.id).then(function(response) {
       console.log('issue', response);
       return response;
     });
+
+    $scope.bounty = {
+      anonymous: false,
+      payment_method: 'google'
+    };
+
+    $scope.process_payment = function() {
+      console.log('bounty', $scope.bounty);
+    };
 
     $scope.status_for_solution = function(solution) {
       if (!solution.submitted) {
