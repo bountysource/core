@@ -1,0 +1,30 @@
+<div class="well">
+  <div><img src="{{person.image_url}}" /></div>
+  <h2>{{person.first_name}} {{person.last_name}}</h2>
+  <h3>{{person.display_name}}</h3>
+  <h4>{{person.company}}</h4>
+  <p><strong></strong> {{person.location}}</p>
+  <p><strong></strong> {{person.bio}}</p>
+  <p><strong></strong: {{person.url}}</p>
+
+  Profiles:
+  <ul>
+    <li class="provider-link" ng-show="person.github_account">
+      <a href="http://github.com/{{person.github_account.login}}" target="_blank"><img src="images/favicon-github.png"> <span>{{person.github_account.login}}</span></a>
+    </li>
+    <li class="provider-link" ng-show="person.twitter_account">
+      <a href="http://twitter.com/{{person.twitter_account.login}}"><img src="images/favicon-twitter.png"> <span>{{person.twitter_account.login}}</span></a>
+    </li>
+    <li class="provider-link" ng-show="person.facebook_account">
+      <a href="http://facebook.com/profile.php?id={{person.facebook_account.uid}}"><img src="images/favicon-facebook.png"> <span>{{person.facebook_account.login}}</span></a>
+    </li>
+    <!--<li class="provider-link" ng-show="person.gittip_account">-->
+      <!--<a href="http://gittip.com/"><img src="images/favicon-facebook.png"> <span>{{person.gittip_account.login}}</span></a>-->
+    <!--</li>-->
+  </ul>
+
+
+  <div ng-show="current_person.id == person.id" class="text-center">
+    <a href="/settings" class="btn btn-primary">Edit Your Profile</a>
+  </div>
+</div>

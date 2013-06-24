@@ -6,20 +6,13 @@
 
 <div class="row-fluid" ng-show="person">
   <div class="span4">
-    <div class="well">
-      <div><img src="{{person.image_url}}" /></div>
-      <h2>{{person.first_name}} {{person.last_name}}</h2>
-      <h3>{{person.display_name}}</h3>
-    </div>
+    <ng-include src="'pages/people/partials/infobox.html'"></ng-include>
   </div>
 
   <div class="span8">
-    <tabs>
-      <pane heading="Activity">
-        <ng-include src="'pages/people/partials/timeline.html'"></ng-include>
-      </pane>
-    </tabs>
+    <ng-include src="'pages/people/partials/tabs.html'"></ng-include>
 
+    <ng-include src="'pages/people/partials/timeline.html'"></ng-include>
   </div>
 
 </div>

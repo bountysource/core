@@ -10,7 +10,7 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('Settings', function($scope, $routeParams, $api) {
+  .controller('Settings', function($scope, $routeParams, $api, $location) {
     $scope.form_data = {
       first_name: $scope.current_person.first_name,
       last_name: $scope.current_person.last_name,
@@ -20,6 +20,19 @@ angular.module('app')
       company: $scope.current_person.company,
       url: $scope.current_person.url,
       public_email: $scope.current_person.public_email
+    };
+
+    $scope.profile_pics = [
+      ($scope.current_person.github_account||{}).avatar_url,
+      ($scope.current_person.twitter_account||{}).avatar_url,
+      ($scope.current_person.facebook_account||{}).avatar_url
+    ];
+
+    $scope.save = function() {
+      console.log($scope.form_data);
+      $api.person_put($scope.form_data).then(function(response) {
+        $location.url('/people/' + $scope.current_person.slug);
+      })
     };
   });
 

@@ -4,7 +4,7 @@ angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/people/:id', {
-        templateUrl: 'pages/people/show.html',
+        templateUrl: 'pages/people/activity.html',
         controller: 'PeopleShow'
       });
   })

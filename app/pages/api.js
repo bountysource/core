@@ -125,6 +125,24 @@ angular.module('api.bountysource',[]).
       return this.call("/users/"+id);
     };
 
+    this.person_put = function(data) {
+      var promise = this.call("/user", "PUT", data);
+      promise.then($api.set_current_person);
+      return promise;
+    };
+
+//    define('change_password', function(data, callback) {
+//      api('/user/change_password', 'POST', data, callback);
+//    });
+//
+//    define('reset_password', function(data, callback) {
+//      api('/user/reset_password', 'POST', data, callback);
+//    });
+//
+//    define('request_password_reset', function(data, callback) {
+//      api('/user/request_password_reset', 'POST', data, callback);
+//    });
+
     this.person_timeline_get = function(id) {
       return this.call("/users/"+id+"/activity");
     };
@@ -182,6 +200,11 @@ angular.module('api.bountysource',[]).
 
     this.set_current_person = function(obj) {
       if (obj) {
+        // FIXME: special case when updating set_current_person with a newer version of the same object but it's missing an access_token
+        if (obj && $rootScope.current_person && (obj.id === $rootScope.current_person.id) && !obj.access_token && $rootScope.current_person.access_token) {
+          obj.access_token = $rootScope.current_person.access_token;
+        }
+
         $rootScope.current_person = obj;
         $cookieStore.put('access_token', $rootScope.current_person.access_token);
       } else {
@@ -195,7 +218,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.goto_post_auth_url = function() {
-      var dest = $cookieStore.get('postauth_url').replace(/^https?:\/\/[^/]+/,'') || '/';
+      var dest = ($cookieStore.get('postauth_url') || '/').replace(/^https?:\/\/[^/]+/,'');
       $location.url(dest).replace();
       $cookieStore.remove('postauth_url');
     };
