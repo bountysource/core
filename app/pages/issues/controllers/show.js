@@ -10,6 +10,13 @@ angular.module('app')
   })
 
   .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api) {
+    $scope.active_tab = function(name) {
+      if (name == 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
+      if (name == 'comments' && (/^\/issues\/[a-z-_0-9]+\/comments$/).test($location.path())) { return "active"; }
+      if (name == 'bounties' && (/^\/issues\/[a-z-_0-9]+\/bounties$/).test($location.path())) { return "active"; }
+      if (name == 'solutions' && (/^\/issues\/[a-z-_0-9]+\/solutions$/).test($location.path())) { return "active"; }
+    };
+
     $scope.bounty = {
       amount: parseInt($routeParams.amount, 10),
       anonymous: $routeParams.anonymous || false,
@@ -45,39 +52,5 @@ angular.module('app')
 
       return response;
     });
-
-    $scope.status_for_solution = function(solution) {
-      if (!solution.submitted) {
-        return 'started';
-      } else if (solution.submitted && !solution.merged) {
-        return 'pending_merge';
-      } else if (solution.in_dispute_period && !solution.disputed) {
-        return 'in_dispute_period';
-      } else if (solution.disputed) {
-        return 'disputed';
-      } else if (solution.rejected) {
-        return 'rejected';
-      } else if (solution.accepted) {
-        return 'accepted';
-      }
-    };
-
-    $scope.row_class_for_solution = function(solution) {
-      var status = $scope.status_for_solution(solution);
-
-      if (status === 'started') {
-        return;
-      } else if (status === 'pending_merge') {
-        return 'warning';
-      } else if (status === 'in_dispute_period') {
-        return 'info';
-      } else if (status === 'disputed') {
-        return 'warning';
-      } else if (status === 'rejected') {
-        return 'error';
-      } else if (status === 'accepted') {
-        return 'success';
-      }
-    };
   });
 

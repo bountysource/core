@@ -1,0 +1,54 @@
+<div class="well obama-buttons">
+  <h4>Post a Bounty</h4>
+  <div class="controls controls-row">
+    <button ng-click="bounty.amount = 15" ng-disabled="bounty.amount==15" class="span4 btn btn-block" type="button">$15</button>
+    <button ng-click="bounty.amount = 35" ng-disabled="bounty.amount==35" class="span4 btn btn-block" type="button">$35</button>
+    <button ng-click="bounty.amount = 50" ng-disabled="bounty.amount==50" class="span4 btn btn-block" type="button">$50</button>
+  </div>
+
+  <div class="controls controls-row">
+    <button ng-click="bounty.amount = 100" ng-disabled="bounty.amount==100" class="span4 btn btn-block" type="button">$100</button>
+    <button ng-click="bounty.amount = 250" ng-disabled="bounty.amount==250" class="span4 btn btn-block" type="button">$250</button>
+    <button ng-click="bounty.amount = 500" ng-disabled="bounty.amount==500" class="span4 btn btn-block" type="button">$500</button>
+  </div>
+
+  <div class="controls controls-row">
+    <button class="span4 btn btn-block" ng-disabled="bounty.amount==1000" ng-click="bounty.amount = 1000">$1000</button>
+    <input type="number" min="5" ng-model="bounty.amount" class="span8 input-small" placeholder="Other amount" />
+  </div>
+
+  <div collapse="!bounty.amount || bounty.amount <= 0">
+    <br />
+    <label class="radio" style="margin-left: 5px;">
+      <input type="radio" ng-model="bounty.payment_method" value="google" selected/>
+      <img src="images/google-wallet.png">
+      Google Wallet
+    </label>
+
+    <label class="radio" style="margin-left: 5px;">
+      <input type="radio" ng-model="bounty.payment_method" value="paypal" />
+      <img src="images/paypal.png">
+      PayPal
+    </label>
+
+    <!--<label class="radio" style="margin-left: 5px;">-->
+    <!--<input type="radio" ng-model="bounty.payment_method" value="gittip" />-->
+    <!--<img src="images/gittip.png">-->
+    <!--Gittip-->
+    <!--</label>-->
+
+    <label class="radio" ng-show="current_person && current_person.account.balance > 0" style="margin-left: 5px;">
+      <input type="radio" ng-model="bounty.payment_method" value="personal" />
+      <img src="favicon.ico">
+      Bountysource {{ current_person.account.balance | currency }}
+    </label>
+
+    <label class="checkbox" style="margin-left: 5px;">
+      Make anonymous
+      <input type="checkbox" id="anonymous" ng-model="bounty.anonymous" />
+    </label>
+
+    <br />
+    <button ng-click="create_payment()" class="btn btn-block btn-large btn-success">Create ${{bounty.amount | number:0}} Bounty</button>
+  </div>
+</div>

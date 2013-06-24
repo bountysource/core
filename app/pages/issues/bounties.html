@@ -1,0 +1,58 @@
+<div ng-controller="IssueShow">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider">»</span></li>
+    <li><a href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
+    <li><a href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
+  </ul>
+
+  <div class="row-fluid" ng-show="issue">
+    <div class="span9">
+      <div ng-include="'pages/issues/partials/header.html'"></div>
+      <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+
+      <div class="alert alert-info" ng-hide="issue.bounties.length > 0">
+        No bounties have been placed.
+      </div>
+
+      <div ng-show="issue.bounties.length > 0">
+        <table id="bounties-table" class="table table-striped">
+          <thead>
+          <tr>
+            <th>Backer</th>
+            <th></th>
+            <th>Amount</th>
+            <th>Created At</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="bounty in issue.bounties">
+            <td>
+              <img ng-show="bounty.person" class="thumbnail" src="{{ bounty.person.image_url }}" />
+              <img ng-hide="bounty.person" class="thumbnail" src="images/anon.jpg" />
+            </td>
+            <td>
+              <a ng-show="bounty.person" href="/people/{{ bounty.person.slug }}">{{ bounty.person.display_name }}</a>
+              <div ng-hide="bounty.person">Anonymous</div>
+            </td>
+            <td>
+              <div><strong>{{ bounty.amount | dollars }}</strong></div>
+            </td>
+            <td>
+              <div class="muted">{{ bounty.created_at | date }}</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="span3">
+      <div class="well">
+        <img ng-src="{{issue.tracker.image_url}}" style="width: 100%;" />
+        <h3>{{issue.tracker.name}}</h3>
+      </div>
+
+      <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
+    </div>
+  </div>
+</div>

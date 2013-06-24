@@ -1,0 +1,36 @@
+<div ng-controller="IssueShow">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider">»</span></li>
+    <li><a href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
+    <li><a href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
+  </ul>
+
+  <div class="row-fluid" ng-show="issue">
+    <div class="span9">
+      <div ng-include="'pages/issues/partials/header.html'"></div>
+      <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+
+      <div class="alert alert-info" ng-hide="issue.comments.length > 0">
+        No comments have been made.
+      </div>
+
+      <div ng-show="issue.comments.length > 0" ng-repeat="comment in issue.comments">
+        <div>
+          <img src="{{comment.author_image_url}}" style="width:50px;height:50px"/>
+          {{comment.author_name}} on {{comment.created_at | date}}
+        </div>
+        <div ng-bind-html="comment.body_html"></div>
+        <hr/>
+      </div>
+    </div>
+
+    <div class="span3">
+      <div class="well">
+        <img ng-src="{{issue.tracker.image_url}}" style="width: 100%;" />
+        <h3>{{issue.tracker.name}}</h3>
+      </div>
+
+      <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
+    </div>
+  </div>
+</div>
