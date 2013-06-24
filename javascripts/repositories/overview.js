@@ -133,7 +133,7 @@ with (scope('Repository')) {
       href: curry(unfollow_tracker, tracker),
       style: 'display: inline-block; vertical-align: middle; padding: 0; width: 60px; font-size: 12px; text-decoration: none;',
       'class': 'button green'
-    }, 'Follow');
+    }, 'Following');
   });
 
   define('follow_tracker', function(tracker) {
