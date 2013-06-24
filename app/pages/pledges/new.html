@@ -40,7 +40,7 @@
               <div class="controls">
                 <div class="input-prepend">
                   <span class="add-on">$</span>
-                  <input type="number" min="5" id="amount" ng-model="pledge.amount" placeholder="Pledge amount" autofocus />
+                  <input type="number" min="5" name="amount" id="amount" ng-model="pledge.amount" placeholder="Pledge amount" />
                 </div>
               </div>
             </div>
@@ -111,7 +111,7 @@
                 <span class="pull-right label label-important">required</span>
                 <p style="white-space: pre-wrap;">{{ selected_reward.fulfillment_details }}</p>
                 <br />
-                <textarea autofocus="true" class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required></textarea>
+                <textarea class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required></textarea>
               </div>
             </div>
 

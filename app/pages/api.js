@@ -192,7 +192,7 @@ angular.module('api.bountysource',[]).
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          $api.goto_post_auth_url();
+          $api.goto_post_auth_redirect();
         }
         return response.data;
       });
@@ -213,21 +213,34 @@ angular.module('api.bountysource',[]).
       }
     };
 
-    this.set_post_auth_url = function(url) {
-      $cookieStore.put('postauth_url', url);
+    this.set_post_auth_redirect = function(options) {
+      $cookieStore.put('postauth_redirect', options);
     };
 
-    this.goto_post_auth_url = function() {
-      var dest = ($cookieStore.get('postauth_url') || '/').replace(/^https?:\/\/[^/]+/,'');
-      $location.url(dest).replace();
-      $cookieStore.remove('postauth_url');
+    this.set_post_auth_url = function(url) {
+      this.set_postauth_redirect({ url: url });
+    };
+
+    this.goto_post_auth_redirect = function() {
+      var redirect_options = $cookieStore.get('postauth_redirect');
+      $cookieStore.remove('postauth_redirect');
+
+      if (redirect_options.url) {
+        var dest = (redirect_options.url || '/').replace(/^https?:\/\/[^/]+/,'');
+        $location.url(dest).replace();
+      } else {
+        var dest = redirect_options.path || "/";
+        $location.path(dest);
+        $location.search(redirect_options.path.params || {});
+        $location.replace();
+      }
     };
 
     this.signup = function(form_data) {
       return this.call("/user", "POST", form_data, function(response) {
         if (response.meta.status === 200) {
           $api.set_current_person(response.data);
-          $api.goto_post_auth_url();
+          $api.goto_post_auth_redirect();
         }
         return response.data;
       });
@@ -242,7 +255,7 @@ angular.module('api.bountysource',[]).
         if (response.meta.status === 200) {
           response.data.access_token = access_token; // FIXME: why doesn't /user include an access token when it's you?
           $api.set_current_person(response.data);
-          $api.goto_post_auth_url();
+          $api.goto_post_auth_redirect();
           return true;
         } else {
           return false;
@@ -278,35 +291,9 @@ angular.module('api.bountysource',[]).
       $api.set_current_person();
       $location.path("/");
     };
+  })
 
-    this.process_payment = function(current_scope, data) {
-      return this.call("/payments", "POST", data, function(response) {
-        if (response.meta.success) {
-          if (data.payment_method === 'google') {
-            // a JWT is returned, trigger buy
-            $window.google.payments.inapp.buy({
-              jwt: response.data.jwt,
-              success: function(result) {
-                console.log('Google Wallet: Great Success!', result);
-                $window.location = $rootScope.api_host + "payments/google/success?access_token="+$cookieStore.get('access_token')+"&order_id="+result.response.orderId;
-              },
-              failure: function(result) {
-                console.log('Google Wallet: Error', result);
-              }
-            });
-          } else {
-            $window.location = response.data.redirect_url;
-          }
-        } else if (response.meta.status === 401) {
-          $api.set_post_auth_url(data.postauth_url);
-          $location.path('/signin');
-        } else {
-          current_scope.payment_error = response.data.error;
-        }
-      });
-    };
-
-  }).constant('$person', {
+  .constant('$person', {
     // this returns a promise and is meant to block rotues via "resolve: $person". it redirects to /signin if need be.
     resolver: function($api, $q, $rootScope, $location, $cookieStore) {
       var deferred = $q.defer();
@@ -317,7 +304,7 @@ angular.module('api.bountysource',[]).
 
       var failure = function() {
         deferred.reject();
-        $api.set_post_auth_url($location.url());
+        $api.set_post_auth_redirect({ url: $location.url() }); // $location.url()
         $location.url('/signin').replace();
       };
 

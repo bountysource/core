@@ -9,17 +9,12 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $location, $api) {
-    $scope.base_url = $location.protocol() + '://' +$location.host() + ($location.port() ? ':' + $location.port() : '');
-
+  .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $window, $location, $payment, $api) {
     $scope.pledge = {
       amount: parseInt($routeParams.amount, 10) || 100,
       anonymous: $routeParams.anonymous || false,
       payment_method: $routeParams.payment_method || "google",
-      reward_id: parseInt($routeParams.reward_id, 10) || 0,
-
-      success_url: $scope.base_url + "/activity/pledges",
-      cancel_url: $scope.base_url + "/fundraisers/" + $routeParams.id
+      reward_id: parseInt($routeParams.reward_id, 10) || 0
     };
 
     $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
@@ -36,6 +31,27 @@ angular.module('app')
         }
       }
 
+      // build the create payment method
+      $scope.create_payment = function() {
+        var base_url = $window.location.href.replace(/\/fundraisers.*$/,'');
+        var payment_params = angular.copy($scope.pledge);
+
+        payment_params.success_url = base_url + "/activity/pledges";
+        payment_params.cancel_url = $window.location.href;
+
+        $payment.process(payment_params, {
+          error: function(response) { console.log("Payment Error:", response) },
+
+          noauth: function() {
+            $api.set_post_auth_redirect({
+              path: "/fundraisers/" + $scope.issue.id + "/pledge",
+              params: payment_params
+            });
+            $location.url("/signin");
+          }
+        });
+      };
+
       return response;
     });
 
@@ -50,21 +66,5 @@ angular.module('app')
       if (reward.amount && (!$scope.pledge.amount || $scope.pledge.amount < reward.amount)) {
         $scope.pledge.amount = reward.amount;
       }
-    };
-
-    $scope.alert = null;
-    $scope.create_payment = function() {
-      // append post-signin URL with that data
-      $scope.pledge.postauth_url = $scope.redirect_base_url + '/pledge?payment_method='+$scope.pledge.payment_method+'&amount='+$scope.pledge.amount+'&anonymous='+$scope.pledge.anonymous;
-      if ($scope.pledge.reward_id) {
-        $scope.pledge.postauth_url = $scope.pledge.postauth_url + '&reward_id='+$scope.pledge.reward_id;
-      }
-
-      // kill off extra attributes
-      var payment_params = angular.copy($scope.pledge);
-      delete payment_params.reward;
-      delete payment_params.base_item_number;
-
-      $api.process_payment($scope, $scope.pledge);
     };
   });

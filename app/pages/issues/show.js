@@ -9,20 +9,42 @@ angular.module('app')
       });
   })
 
-  .controller('IssueShow', function ($scope, $routeParams, $api) {
+  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api) {
+    $scope.bounty = {
+      amount: parseInt($routeParams.amount, 10),
+      anonymous: $routeParams.anonymous || false,
+      payment_method: $routeParams.payment_method || 'google'
+    };
+
     $scope.issue = $api.issue_get($routeParams.id).then(function(response) {
-      console.log('issue', response);
+      // append item number now that we have issue
+      $scope.bounty.item_number = "issues/"+response.id;
+
+      $scope.create_payment = function() {
+        var base_url = $window.location.href.replace(/\/issues.*$/,'');
+        var payment_params = angular.copy($scope.bounty);
+
+        payment_params.success_url = base_url + "/activity/bounties";
+        payment_params.cancel_url = $window.location.href;
+
+        $payment.process(payment_params, {
+          error: function(response) {
+            console.log("Payment Error:", response)
+          },
+
+          noauth: function() {
+            $api.set_post_auth_redirect({
+              path: "/issues/" + $scope.issue.id,
+              params: payment_params
+            });
+
+            $location.url("/signin");
+          }
+        });
+      };
+
       return response;
     });
-
-    $scope.bounty = {
-      anonymous: false,
-      payment_method: 'google'
-    };
-
-    $scope.process_payment = function() {
-      console.log('bounty', $scope.bounty);
-    };
 
     $scope.status_for_solution = function(solution) {
       if (!solution.submitted) {
