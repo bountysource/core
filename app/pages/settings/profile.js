@@ -30,9 +30,9 @@ angular.module('app')
 
     $scope.save = function() {
       console.log($scope.form_data);
-      $api.person_put($scope.form_data).then(function(response) {
+      $api.person_put($scope.form_data).then(function() {
         $location.url('/people/' + $scope.current_person.slug);
-      })
+      });
     };
   });
 

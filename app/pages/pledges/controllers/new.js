@@ -40,7 +40,7 @@ angular.module('app')
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {
-          error: function(response) { console.log("Payment Error:", response) },
+          error: function(response) { console.log("Payment Error:", response); },
 
           noauth: function() {
             $api.set_post_auth_redirect({

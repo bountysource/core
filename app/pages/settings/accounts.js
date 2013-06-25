@@ -9,7 +9,7 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('AccountSettings', function($scope, $routeParams, $api) {
+  .controller('AccountSettings', function($scope) {
     $scope.accounts = [
       $scope.current_person.github_account,
       $scope.current_person.facebook_account,

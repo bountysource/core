@@ -20,7 +20,7 @@ angular.module('app')
 
       if ($scope.form.$valid) {
         $api.reset_password($scope.form_data).then(function(response) {
-          if (response.message == 'Password reset') {
+          if (response.message === 'Password reset') {
             $api.signin({ email: $scope.form_data.email, password: $scope.form_data.new_password });
           } else {
             $scope.error = response.error || response.message;
@@ -28,6 +28,6 @@ angular.module('app')
         });
       }
     };
- });
+  });
 
 

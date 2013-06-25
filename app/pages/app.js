@@ -13,18 +13,18 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     if ((window.location.hash||'').match(/^#[^/]/)) {
       window.location.hash = '#/' + window.location.hash.replace(/^#/,'');
     }
-  }).run(function($api, $rootScope) {
+  }).run(function($api) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
   })
 
   // currently only used for bounty and pledge creation.
   // $payment.create({ amount: 15, payment_method: 'google', ... }).process();
-  .service('$payment', function($rootScope, $location, $window,$log, $api) {
+  .service('$payment', function($rootScope, $location, $window,$log, $api, $cookieStore) {
     this._default_options = {
       success: function(response) { console.log('Payment success', response); },
       error: function(response) { console.log('Payment error', response); },
-      noauth: function(response) { console.log('Payment noauth', response) }
+      noauth: function(response) { console.log('Payment noauth', response); }
     };
 
     this.process = function(data, options) {

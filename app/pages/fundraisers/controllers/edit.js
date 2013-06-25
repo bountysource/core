@@ -23,8 +23,8 @@ angular.module('app')
       $scope.changes = angular.copy(response);
 
       // also cache rewards
-      $scope.master_rewards = angular.copy(response.rewards);;
-      $scope.rewards = angular.copy(response.rewards);;
+      $scope.master_rewards = angular.copy(response.rewards);
+      $scope.rewards = angular.copy(response.rewards);
       return response;
     });
 

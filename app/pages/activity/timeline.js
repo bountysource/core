@@ -10,7 +10,7 @@ angular.module('app')
       });
   })
   .controller('Activity', function($scope, $routeParams, $api) {
-    console.log("whee activity controller")
+    console.log("whee activity controller");
     $scope.timeline = $api.person_timeline_get($scope.current_person.id);
   });
 

@@ -227,8 +227,8 @@ angular.module('api.bountysource',[]).
       $cookieStore.remove('postauth_redirect');
 
       if (redirect_options.url) {
-        var dest = (redirect_options.url || '/').replace(/^https?:\/\/[^/]+/,'');
-        $location.url(dest).replace();
+        var dest1 = (redirect_options.url || '/').replace(/^https?:\/\/[^/]+/,'');
+        $location.url(dest1).replace();
       } else {
         var dest = redirect_options.path || "/";
         $location.path(dest);
@@ -296,7 +296,7 @@ angular.module('api.bountysource',[]).
 
   .constant('$person', {
     // this returns a promise and is meant to block rotues via "resolve: $person". it redirects to /signin if need be.
-    resolver: function($api, $q, $rootScope, $location, $cookieStore) {
+    resolver: function($api, $q, $rootScope, $location) {
       var deferred = $q.defer();
 
       var success = function() {
@@ -320,9 +320,9 @@ angular.module('api.bountysource',[]).
         $rootScope.$watch('current_person', function(new_val) {
           console.log('oh hai current_person', new_val);
           if ($rootScope.current_person) {
-            success()
+            success();
           } else if ($rootScope.current_person === false) {
-            failure()
+            failure();
           }
         });
       }

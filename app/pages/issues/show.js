@@ -29,7 +29,7 @@ angular.module('app')
 
         $payment.process(payment_params, {
           error: function(response) {
-            console.log("Payment Error:", response)
+            console.log("Payment Error:", response);
           },
 
           noauth: function() {

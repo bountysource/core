@@ -25,5 +25,5 @@ angular.module('app')
           $scope.error = response.data.error;
         }
       });
-    }
+    };
   });
