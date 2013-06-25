@@ -97,6 +97,12 @@ angular.module('app')
       }
     };
 
+    $scope.forgot_password = function() {
+      $api.request_password_reset({ email: $scope.form_data.email }).then(function(response) {
+        $scope.error = response.message;
+      });
+    };
+
   });
 
 

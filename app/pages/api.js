@@ -29,6 +29,7 @@ angular.module('api.bountysource',[]).
       var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
 
       // merge in params
+      params = angular.copy(params);
       params.callback = 'JSON_CALLBACK';
       params._method = method;
       if ($cookieStore.get('access_token')) {
@@ -131,17 +132,17 @@ angular.module('api.bountysource',[]).
       return promise;
     };
 
-//    define('change_password', function(data, callback) {
-//      api('/user/change_password', 'POST', data, callback);
-//    });
-//
-//    define('reset_password', function(data, callback) {
-//      api('/user/reset_password', 'POST', data, callback);
-//    });
-//
-//    define('request_password_reset', function(data, callback) {
-//      api('/user/request_password_reset', 'POST', data, callback);
-//    });
+    this.change_password = function(data) {
+      return this.call("/user/change_password", "POST", data);
+    };
+
+    this.reset_password = function(data) {
+      return this.call("/user/reset_password", "POST", data);
+    };
+
+    this.request_password_reset = function(data) {
+      return this.call("/user/request_password_reset", "POST", data);
+    };
 
     this.person_timeline_get = function(id) {
       return this.call("/users/"+id+"/activity");
