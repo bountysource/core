@@ -39,7 +39,8 @@ module.exports = function (grunt) {
           '{.tmp,app}/styles/**/*.css',
           '{.tmp,app}/pages/**/*.js',
           'app/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
-        ]
+        ],
+        tasks: ['jshint']
       }
     },
     connect: {
