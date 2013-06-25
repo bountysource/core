@@ -1,0 +1,54 @@
+<div ng-show="solution_error" class="alert alert-error">{{solution_error}}</div>
+
+<div class="well">
+  <div ng-show="my_solution">
+    <div style="text-align: center;">
+      <h3 style="margin-top: 0;">Your Solution</h3>
+
+      <p ng-hide="my_solution.submitted">When your code is ready to submit, provide the URL to your solution, as well as a short summary of what you did.</p>
+      <p ng-show="my_solution.submitted">Your solution has been submitted. Waiting for the issue to be resolved.</p>
+
+      <form class="form" name="solution_submit" style="margin: 0;" ng-show="!my_solution.submitted">
+        <input required ng-disabled="my_solution.submitted" type="url" class="span12 input-small" ng-model="my_solution.code_url" placeholder="https://github.com/bountysource/frontend/pulls/1" tooltip="Solution code URL" />
+        <textarea required ng-disabled="my_solution.submitted" class="span12 input-small" rows="4" placeholder="I implemented quicksort in lua" ng-model="my_solution.body"></textarea>
+      </form>
+    </div>
+
+    <div ng-show="my_solution.submitted">
+      <div class="row-fluid">
+        <div class="span6">
+          <a ng-href="/issues/{{issue.slug}}/solutions" ng-show="my_solution.submitted" class="btn btn-block">Status</a>
+        </div>
+        <div class="span6">
+          <a href="{{my_solution.code_url}}" target="_blank" ng-show="my_solution.submitted" class="btn btn-block">Discussion</a>
+        </div>
+      </div>
+    </div>
+
+    <div ng-hide="my_solution.submitted">
+      <div class="row-fluid" >
+        <div class="span6">
+          <button ng-disabled="solution_submit.$invalid" ng-click="submit_solution(my_solution)" class="btn btn-block btn-primary">Submit</button>
+        </div>
+        <div class="span6">
+          <button ng-disabled="my_solution.submitted" ng-click="destroy_solution(my_solution)" class="btn btn-block btn-danger" tooltip="Delete">
+            <i class="icon-trash icon-white"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-hide="my_solution">
+    <div style="text-align: center;">
+      <h3 style="margin-top: 0;">Earn the Bounty</h3>
+      <p>Resolving this issue? Let us know! If your solution is accepted, you are awarded the bounty.</p>
+    </div>
+
+    <button ng-click="create_solution()" class="btn btn-block">Start Work</button>
+  </div>
+</div>
+
+
+

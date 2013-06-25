@@ -9,114 +9,40 @@
     <div class="span9">
       <div ng-include="'pages/issues/partials/header.html'"></div>
       <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+      <div ng-include="'pages/issues/partials/my_solution_box.html'"></div>
 
-      <div>
-        <button ng-click="" class="btn btn-success">Begin working on a Solution</button>
-      </div>
-      <br />
-
-      <div class="alert alert-info" ng-hide="issue.solutions.length > 0">
-        No solutions have been submitted.
-      </div>
-
-      <div ng-show="issue.solutions.length > 0">
-        <table id="solutions-table" class="table">
-          <tr ng-repeat="solution in issue.solutions" ng-class="row_class_for_solution(solution)" ng-init="set_status_for_solution(solution)">
-            <td>
-              <a href="/people/{{ solution.person.slug }}">
-                <img tooltip="{{ solution.person.display_name }}" tooltip-placement="bottom" class="thumbnail" src="{{ solution.person.image_url }}" />
-              </a>
-            </td>
-
-            <td class="solution-content-cell">
-              <div ng-show="status_for_solution(solution) == 'started'">
-                <div class="well" style="margin-bottom: 0;">
-                  <p class="lead text-info">
-                    Solution started
-                  </p>
-
-                  <p>
-                    When the developer is ready, they will mark their solution as disputed and this will be updated.
-                  </p>
-                </div>
-              </div>
-
-              <div ng-show="status_for_solution(solution) == 'pending_merge'">
-                <div class="well" style="margin-bottom: 0;">
-                  <p class="lead text-warning">
-                    Solution submitted
-                  </p>
-
-                  <p>
-                    Waiting for the solution to be merged by the project committers.
-                  </p>
-                </div>
-              </div>
-
-              <div ng-show="status_for_solution(solution) == 'in_dispute_period'">
-                <div class="well" style="margin-bottom: 0;">
-                  <p class="text-info">
-                    Solution merged
-                  </p>
-
-                  <p>
-                    The solution has been merged into thje project, and is now in a two week dispute period, ending on <strong>{{ solution.dispute_period_end_date | date:'medium' }}</strong>.
-                    If the solution has no outstanding disputes after that date, it will be accepted and the bounty will be awarded to <a href="/people/{{ solution.person.slug }}">{{ solution.person.display_name }}'s</a>.
-                  </p>
-                </div>
-              </div>
-
-              <div ng-show="status_for_solution(solution) == 'disputed'">
-                <div class="well" style="margin-bottom: 0;">
-                  <p class="text-error">
-                    Solution disputed
-                  </p>
-
-                  <p>
-                    One or more of the backers have disputed this solution. The solution cannot be accepted until all disputes have been resolved.
-                    If you would like to join the discussion regarding this solution, refer to the <a href="{{issue.url}}" target="_blank">issue comments</a>.
-                  </p>
-                </div>
-              </div>
-
-              <div ng-show="status_for_solution(solution) == 'rejected'">
-                <div class="well" style="margin-bottom: 0;">
-                  <p class="text-error">
-                    Solution rejected
-                  </p>
-
-                  <p>
-                    The project committers have rejected this solution, and it cannot win the bounty.
-                  </p>
-                </div>
-              </div>
-
-              <div ng-show="status_for_solution(solution) == 'accepted'">
-                <div class="well" style="margin-bottom: 0;">
-                  <p class="text-success">
-                    Solution accepted
-                  </p>
-
-                  <p>
-                    The solution was merged by the project, and has been awarded the bounty! Way to go
-                    <strong><a href="/people/{{ solution.person.slug }}">{{ solution.person.display_name }}</a></strong>!
-                  </p>
-                </div>
-              </div>
-            </td>
+      <div id="solutions-table" ng-show="issue.solutions.length > 0">
+        <table id="bounties-table" class="table table-striped">
+          <thead>
+          <tr>
+            <th>Developer</th>
+            <th></th>
+            <th>Started At</th>
+            <th style="text-align: center;">Status</th>
           </tr>
+          </thead>
+
+          <tbody>
+          <tr ng-repeat="solution in issue.solutions">
+            <td>
+              <img class="thumbnail" ng-src="{{ solution.person.image_url }}" />
+            </td>
+            <td>
+              <a ng-href="/people/{{ solution.person.slug }}">{{ solution.person.display_name }}</a>
+            </td>
+            <td>
+              <div class="muted">{{ solution.created_at | date }}</div>
+            </td>
+            <td style="text-align: center;">{{solution_status(solution) | from_snake_case | title}}</td>
+          </tr>
+          </tbody>
         </table>
       </div>
-
     </div>
 
     <div class="span3">
-      <div class="well">
-        <img ng-src="{{issue.tracker.image_url}}" style="width: 100%;" />
-        <h3>{{issue.tracker.name}}</h3>
-      </div>
-
       <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
+      <div ng-include="'pages/issues/partials/developer_box.html'"></div>
     </div>
   </div>
 </div>

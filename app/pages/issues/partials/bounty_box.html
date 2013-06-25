@@ -1,19 +1,24 @@
 <div class="well obama-buttons">
-  <h4>Post a Bounty</h4>
-  <div class="controls controls-row">
-    <button ng-click="bounty.amount = 15" ng-disabled="bounty.amount==15" class="span4 btn btn-block" type="button">$15</button>
-    <button ng-click="bounty.amount = 35" ng-disabled="bounty.amount==35" class="span4 btn btn-block" type="button">$35</button>
-    <button ng-click="bounty.amount = 50" ng-disabled="bounty.amount==50" class="span4 btn btn-block" type="button">$50</button>
+  <div style="text-align: center;">
+    <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
+    <div ng-show="issue.bounties.length == 1">from 1 bounty</div>
+    <div ng-hide="issue.bounties.length == 1">from {{issue.bounties.length | number}} bounties</div>
   </div>
 
   <div class="controls controls-row">
-    <button ng-click="bounty.amount = 100" ng-disabled="bounty.amount==100" class="span4 btn btn-block" type="button">$100</button>
-    <button ng-click="bounty.amount = 250" ng-disabled="bounty.amount==250" class="span4 btn btn-block" type="button">$250</button>
-    <button ng-click="bounty.amount = 500" ng-disabled="bounty.amount==500" class="span4 btn btn-block" type="button">$500</button>
+    <button ng-click="bounty.amount = 15" ng-disabled="bounty.amount==15" class="span4 btn btn-primary btn-block" type="button">$15</button>
+    <button ng-click="bounty.amount = 35" ng-disabled="bounty.amount==35" class="span4 btn btn-primary btn-block" type="button">$35</button>
+    <button ng-click="bounty.amount = 50" ng-disabled="bounty.amount==50" class="span4 btn btn-primary btn-block" type="button">$50</button>
   </div>
 
   <div class="controls controls-row">
-    <button class="span4 btn btn-block" ng-disabled="bounty.amount==1000" ng-click="bounty.amount = 1000">$1000</button>
+    <button ng-click="bounty.amount = 100" ng-disabled="bounty.amount==100" class="span4 btn btn-primary btn-block" type="button">$100</button>
+    <button ng-click="bounty.amount = 250" ng-disabled="bounty.amount==250" class="span4 btn btn-primary btn-block" type="button">$250</button>
+    <button ng-click="bounty.amount = 500" ng-disabled="bounty.amount==500" class="span4 btn btn-primary btn-block" type="button">$500</button>
+  </div>
+
+  <div class="controls controls-row">
+    <button class="span4 btn btn-primary btn-block" ng-disabled="bounty.amount==1000" ng-click="bounty.amount = 1000">$1000</button>
     <input type="number" min="5" ng-model="bounty.amount" class="span8 input-small" placeholder="Other amount" />
   </div>
 

@@ -1,8 +1,4 @@
 <div class="page-header">
-  <div ng-show="issue.bounty_total > 0">
-    <alert type="'info'"><strong>You! Yes, You!</strong> There is currently a <strong>{{issue.bounty_total | currency}}</strong> bounty open on this issue.</alert>
-  </div>
-
   <h4>
     {{ issue.title || 'Loading...' }}
     <small ng-show="issue">

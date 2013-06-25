@@ -47,12 +47,8 @@
     </div>
 
     <div class="span3">
-      <div class="well">
-        <img ng-src="{{issue.tracker.image_url}}" style="width: 100%;" />
-        <h3>{{issue.tracker.name}}</h3>
-      </div>
-
       <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
+      <div ng-include="'pages/issues/partials/developer_box.html'"></div>
     </div>
   </div>
 </div>

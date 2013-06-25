@@ -182,6 +182,22 @@ angular.module('api.bountysource',[]).
       return this.call('/user/transactions');
     };
 
+    this.solution_create = function(issue_id, callback) {
+      return this.call("/issues/"+issue_id+"/solutions", "POST", callback);
+    };
+
+    this.solution_destroy = function(id, callback) {
+      return this.call("/user/solutions/"+id, "DELETE", callback);
+    };
+
+    this.solution_update = function(id, data, callback) {
+      return this.call("/user/solutions/"+id, "PUT", data, callback);
+    };
+
+    this.solution_submit = function(id, callback) {
+      return this.call("/user/solutions/"+id+"/submit", "POST", callback);
+    };
+
 
 
 
