@@ -43,10 +43,7 @@ angular.module('app')
           error: function(response) { console.log("Payment Error:", response); },
 
           noauth: function() {
-            $api.set_post_auth_redirect({
-              path: "/fundraisers/" + $scope.issue.id + "/pledge",
-              params: payment_params
-            });
+            $api.set_post_auth_url("/fundraisers/" + $scope.issue.id + "/pledge", payment_params);
             $location.url("/signin");
           }
         });

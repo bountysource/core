@@ -209,7 +209,7 @@ angular.module('api.bountysource',[]).
         if (response.meta.status === 200) {
           $rootScope.current_person = response.data;
           $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          $api.goto_post_auth_redirect();
+          $api.goto_post_auth_url();
         }
         return response.data;
       });
@@ -230,17 +230,13 @@ angular.module('api.bountysource',[]).
       }
     };
 
-    this.set_post_auth_redirect = function(options) {
-      $cookieStore.put('postauth_redirect', options);
+    this.set_post_auth_url = function(url, params) {
+      $cookieStore.put('postauth_url', $api.pathMerge(url, params));
     };
 
-    this.set_post_auth_url = function(url) {
-      this.set_postauth_redirect({ url: url });
-    };
-
-    this.goto_post_auth_redirect = function() {
+    this.goto_post_auth_url = function() {
       var redirect_options = $cookieStore.get('postauth_redirect') || {};
-      $cookieStore.remove('postauth_redirect');
+      $cookieStore.remove('postauth_url');
 
       if (redirect_options.url) {
         var dest1 = (redirect_options.url || '/').replace(/^https?:\/\/[^/]+/,'');
@@ -257,7 +253,7 @@ angular.module('api.bountysource',[]).
       return this.call("/user", "POST", form_data, function(response) {
         if (response.meta.status === 200) {
           $api.set_current_person(response.data);
-          $api.goto_post_auth_redirect();
+          $api.goto_post_auth_url();
         }
         return response.data;
       });
@@ -272,7 +268,7 @@ angular.module('api.bountysource',[]).
         if (response.meta.status === 200) {
           response.data.access_token = access_token; // FIXME: why doesn't /user include an access token when it's you?
           $api.set_current_person(response.data);
-          $api.goto_post_auth_redirect();
+          $api.goto_post_auth_url();
           return true;
         } else {
           return false;
@@ -308,6 +304,34 @@ angular.module('api.bountysource',[]).
       $api.set_current_person();
       $location.path("/");
     };
+
+
+    // helper functions... definitely doesn't belong here
+    this.pathMerge = function(url, params) {
+      var new_url = angular.copy(url);
+      if (params) {
+        new_url += (url.indexOf('?') >= 0 ? '&' : '?') + $api.toKeyValue(params);
+      }
+      return new_url;
+    };
+
+    this.toKeyValue = function(obj) {
+      var parts = [];
+      angular.forEach(obj, function(value, key) {
+        parts.push($api.encodeUriQuery(key, true) + (value === true ? '' : '=' + $api.encodeUriQuery(value, true)));
+      });
+      return parts.length ? parts.join('&') : '';
+    };
+
+    this.encodeUriQuery = function(val, pctEncodeSpaces) {
+      return encodeURIComponent(val).
+        replace(/%40/gi, '@').
+        replace(/%3A/gi, ':').
+        replace(/%24/g, '$').
+        replace(/%2C/gi, ',').
+        replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
+    };
+
   })
 
   .constant('$person', {
@@ -321,7 +345,7 @@ angular.module('api.bountysource',[]).
 
       var failure = function() {
         deferred.reject();
-        $api.set_post_auth_redirect({ url: $location.url() }); // $location.url()
+        $api.set_post_auth_url($location.url());
         $location.url('/signin').replace();
       };
 
