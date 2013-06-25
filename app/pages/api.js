@@ -239,7 +239,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.goto_post_auth_redirect = function() {
-      var redirect_options = $cookieStore.get('postauth_redirect');
+      var redirect_options = $cookieStore.get('postauth_redirect') || {};
       $cookieStore.remove('postauth_redirect');
 
       if (redirect_options.url) {
