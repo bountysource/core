@@ -22,5 +22,20 @@ angular.module('app').
     return function (input, other) {
       return (input < other) ? input : other;
     };
+  // Convert snakecase to words
+  }).filter('from_snake_case', function() {
+    return function(s) {
+      var parts = s.replace(/[_-]/g, " ").split(" ");
+      var new_parts = [];
+      for (var i=0; i<parts.length; i++) { new_parts.push(parts[i][0] + parts[i].slice(1)); }
+      return new_parts.join(" ");
+    };
+  }).filter('title', function() {
+    return function(s) {
+      var parts = s.split(" ");
+      var new_parts = [];
+      for (var i=0; i<parts.length; i++) { new_parts.push(parts[i][0].toUpperCase() + parts[i].slice(1)); }
+      return new_parts.join(" ");
+    };
   });
 
