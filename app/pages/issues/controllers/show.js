@@ -73,15 +73,12 @@ angular.module('app')
 
       // for each solution, load the disputes
       angular.forEach(issue.solutions, function(solution) {
-        solution.disputes = [];
         solution.disputes = $api.disputes_get(issue.id, solution.id, function(response) {
-
-          // locate your dispute (skip resolved disptues)
+          // locate your dispute (skip resolved disputes)
           for (var i=0; i<response.data.length; i++) {
-            // there is an owner boolean returned if you are the person that filed this
-            // dispute. I think returning a person from the API is better!
             if (!response.data[i].closed && response.data[i].person.id === $scope.current_person.id) {
               solution.$my_dispute = response.data[i];
+              break;
             }
           }
 
@@ -114,9 +111,6 @@ angular.module('app')
 
       $scope.create_solution = function() {
         $api.solution_create($routeParams.id, function(response) {
-
-          console.log(response);
-
           if (response.meta.success) {
             $scope.my_solution = response.data;
             $scope.reload_solution_status($scope.my_solution);
@@ -204,12 +198,8 @@ angular.module('app')
     };
 
     $scope.resolve_dispute = function(issue, solution, dispute) {
-      console.log('resolve dispute!', arguments);
-
-
-
       $api.dispute_resolve(issue.id, solution.id, dispute.number, function(response) {
-        console.log(response);
+
       });
     };
 
