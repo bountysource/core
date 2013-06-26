@@ -86,12 +86,16 @@
                         <br />
                       </div>
 
-                      <div>
+                      <div ng-hide="dispute.closed">
                         <p class="text-center">Join the discussion to help resolve this dispute.</p>
                         <a href="{{issue.url}}" target="_blank" class="btn btn-block btn-small">
                           <i class="icon-comment"></i>
                           Discussion
                         </a>
+                      </div>
+
+                      <div ng-show="dispute.closed">
+                        <p class="text-info text-center">This dispute has been resolved.</p>
                       </div>
                     </div>
                   </div>
