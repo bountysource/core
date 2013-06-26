@@ -15,14 +15,10 @@
     </div>
 
     <div ng-show="my_solution.submitted">
-      <div class="row-fluid">
-        <div class="span6">
-          <a ng-href="/issues/{{issue.slug}}/solutions" ng-show="my_solution.submitted" class="btn btn-block">Status</a>
-        </div>
-        <div class="span6">
-          <a href="{{my_solution.code_url}}" target="_blank" ng-show="my_solution.submitted" class="btn btn-block">Discussion</a>
-        </div>
-      </div>
+      <a href="{{issue.url}}" target="_blank" ng-show="my_solution.submitted" class="btn btn-block">
+        <i class="icon-comment"></i>
+        Issue Discussion
+      </a>
     </div>
 
     <div ng-hide="my_solution.submitted">

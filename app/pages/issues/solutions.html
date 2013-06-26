@@ -12,18 +12,19 @@
       <div ng-include="'pages/issues/partials/my_solution_box.html'"></div>
 
       <div id="solutions-table" ng-show="issue.solutions.length > 0">
-        <table id="bounties-table" class="table table-striped">
+        <table id="bounties-table" class="table table-striped table-bordered">
           <thead>
           <tr>
             <th>Developer</th>
             <th></th>
-            <th>Started At</th>
-            <th style="text-align: center;">Status</th>
+            <th style="width: 50%;">Submission</th>
+            <th style="width: 15%"></th>
+            <th style="width: 15%; text-align: center;">Status</th>
           </tr>
           </thead>
 
           <tbody>
-          <tr ng-repeat="solution in issue.solutions">
+          <tr ng-repeat="solution in issue.solutions" ng-class="{ error: (solution.rejected), warning: (solution.disputed), info: (solution.submitted && !(solution.disputes || solution.rejected)) }">
             <td>
               <img class="thumbnail" ng-src="{{ solution.person.image_url }}" />
             </td>
@@ -31,7 +32,72 @@
               <a ng-href="/people/{{ solution.person.slug }}">{{ solution.person.display_name }}</a>
             </td>
             <td>
-              <div class="muted">{{ solution.created_at | date }}</div>
+              <!--Show the dispute that you filed-->
+              <div ng-repeat="dispute in solution.disputes | filter:'closed' | orderBy:'number'" collapse="!solution.$my_dispute" class="text-warning">
+                <strong>Dispute #{{dispute.number}}</strong>
+                <div><small>filed by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>
+                <p>"{{solution.$my_dispute.body}}"</p>
+                <br />
+              </div>
+
+              <!--Collapsed dispute form-->
+              <div ng-show="solution.submitted" collapse="!solution.$show_dispute">
+                <div ng-show="solution.$dispute_error">
+                  <div class="alert alert-error">{{solution.$dispute_error}}</div>
+                </div>
+
+                <!--File a dispute form-->
+                <div class="alert alert-warning">
+                  <p><strong>File a dispute: </strong>This solution will not be accepted if there are any outstanding disputes. For more info about disputes, refer to the FAQ.</p>
+                  <form class="form" name="dispute" style="margin: 0;">
+                    <textarea required name="body" class="span12" rows="3" placeholder="Description of why this solution does not resolve the issue." ng-model="solution.new_dispute.body"></textarea>
+                    <button ng-disabled="dispute.$invalid" class="btn" ng-click="dispute_solution(issue, solution, solution.new_dispute)">File Dispute</button>
+                  </form>
+                </div>
+              </div>
+
+              <!--&lt;!&ndash;Asynchronously loaded disputes&ndash;&gt;-->
+              <!--<div ng-show="solution.disputes.length > 0">-->
+                <!--<table class="table">-->
+
+                  <!--<tbody>-->
+                  <!--<tr ng-repeat="dispute in solution.disputes">-->
+                    <!--<td>{{dispute.body}}</td>-->
+                  <!--</tr>-->
+                  <!--</tbody>-->
+                <!--</table>-->
+              <!--</div>-->
+
+              <!--Solution submitted body from the developer-->
+              <div class="text-info" ng-hide="solution.submitted">
+                <strong>{{solution.person.display_name}}'s solution</strong>
+                <div><small>started {{solution.created_at | date}}</small></div>
+                <p style="margin: 0;"><i><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a> has not yet submitted a solution.</i></p>
+              </div>
+
+              <div class="text-success" ng-show="solution.submitted && !solution.accepted">
+                <strong>{{solution.person.display_name}}'s solution</strong>
+                <div><small>submitted {{solution.submitted_at | date}}</small></div>
+                <p style="white-space: pre-wrap; margin: 0;">{{solution.body}}</p>
+              </div>
+            </td>
+            <td>
+              <button ng-hide="solution.submitted" class="btn btn-small btn-block" disabled>
+                <i class="icon-globe"></i>
+                Submission
+              </button>
+              <a ng-show="solution.submitted" class="btn btn-small btn-block" href="{{solution.code_url}}" target="_blank">
+                <i class="icon-globe"></i>
+                Submission
+              </a>
+              <button ng-click="init_dispute(solution)" class="btn btn-small btn-block btn-danger" ng-disabled="solution.$my_dispute || solution.person.id == current_person.id || !solution.submitted || !solution.in_dispute_period" ng-model="solution.$show_dispute" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" popover-title="Filing a Dispute" popover-trigger="mouseenter" popover-placement="right" popover="If you are not satisfied with this solution, file a dispute against it. Once disputed, the developer and the backers should work together toward resolving the dispute. Only the backer that filed the dispute can resolve it.">
+                <i class="icon-ban-circle icon-white"></i>
+                Dispute
+              </button>
+              <button ng-show="solution.$my_dispute" ng-click="resolve_dispute(issue, solution, solution.$my_dispute)" class="btn btn-block btn-small btn-success" popover-title="Resolve your Dispute" popover-trigger="mouseenter" popover-placement="right" popover="Resolving your dispute will allow the solution to be accepted. Disputes should be resolved by working with the developer, then marking them as such here.">
+                <i class="icon-check icon-white"></i>
+                Resolve
+              </button>
             </td>
             <td style="text-align: center;">{{solution_status(solution) | from_snake_case | title}}</td>
           </tr>

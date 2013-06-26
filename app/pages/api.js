@@ -160,8 +160,6 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+id);
     };
 
-
-
     this.bounty_activity = function() {
       return this.call('/user/bounties');
     };
@@ -196,6 +194,19 @@ angular.module('api.bountysource',[]).
 
     this.solution_submit = function(id, callback) {
       return this.call("/user/solutions/"+id+"/submit", "POST", callback);
+    };
+
+    this.dispute_create = function(issue_id, solution_id, data, callback) {
+      // BountySource.api('/issues/' + solution.issue.id + '/solutions/' + solution.id + '/disputes', 'POST', form_data, function(response) {
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/disputes", "POST", data, callback);
+    };
+
+    this.disputes_get = function(issue_id, solution_id, callback) {
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/disputes", callback);
+    };
+
+    this.dispute_resolve = function(issue_id, solution_id, dispute_number, callback) {
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/disputes/"+dispute_number+"/close", "POST", callback);
     };
 
 

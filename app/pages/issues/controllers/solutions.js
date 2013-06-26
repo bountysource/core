@@ -10,6 +10,7 @@ angular.module('app')
   })
 
   .controller('IssueSolutionsController', function ($scope, $routeParams, $api) {
-    console.log($scope, $routeParams, $api);
+
+
   });
 

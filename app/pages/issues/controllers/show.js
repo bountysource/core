@@ -71,6 +71,24 @@ angular.module('app')
         }
       }
 
+      // for each solution, load the disputes
+      angular.forEach(issue.solutions, function(solution) {
+        solution.disputes = [];
+        solution.disputes = $api.disputes_get(issue.id, solution.id, function(response) {
+
+          // locate your dispute (skip resolved disptues)
+          for (var i=0; i<response.data.length; i++) {
+            // there is an owner boolean returned if you are the person that filed this
+            // dispute. I think returning a person from the API is better!
+            if (!response.data[i].closed && response.data[i].person.id === $scope.current_person.id) {
+              solution.$my_dispute = response.data[i];
+            }
+          }
+
+          return response.data;
+        });
+      });
+
       // build the status hash for my solution
       if ($scope.my_solution) { $scope.reload_solution_status($scope.my_solution); }
 
@@ -96,6 +114,9 @@ angular.module('app')
 
       $scope.create_solution = function() {
         $api.solution_create($routeParams.id, function(response) {
+
+          console.log(response);
+
           if (response.meta.success) {
             $scope.my_solution = response.data;
             $scope.reload_solution_status($scope.my_solution);
@@ -142,6 +163,15 @@ angular.module('app')
               if (response.meta.success) {
                 $scope.my_solution = angular.copy(response.data);
                 $scope.reload_solution_status($scope.my_solution);
+
+                // find the solution issue.solutions array and update its attributes
+                for (var i=0; i<issue.solutions.length; i++) {
+                  if (issue.solutions[i].id === $scope.my_solution.id) {
+                    for (var k in $scope.my_solution) { issue.solutions[i][k] = $scope.my_solution[k]; }
+                    break;
+                  }
+                }
+
               } else {
                 $scope.solution_error = response.data.error;
               }
@@ -155,6 +185,33 @@ angular.module('app')
 
       return issue;
     });
+
+    $scope.init_dispute = function(solution) {
+      solution.new_dispute = solution.new_dispute || { body: "" };
+    };
+
+    $scope.dispute_solution = function(issue, solution, form_data) {
+      console.log('dispute_solution', arguments);
+
+      $api.dispute_create(issue.id, solution.id, form_data, function(response) {
+        if (response.meta.success) {
+          // add the dispute to solution
+          solution.disputes.push(response.data);
+        } else {
+          solution.$dispute_error = response.data.error;
+        }
+      });
+    };
+
+    $scope.resolve_dispute = function(issue, solution, dispute) {
+      console.log('resolve dispute!', arguments);
+
+
+
+      $api.dispute_resolve(issue.id, solution.id, dispute.number, function(response) {
+        console.log(response);
+      });
+    };
 
   });
 
