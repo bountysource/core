@@ -12,7 +12,7 @@
       <div ng-include="'pages/issues/partials/my_solution_box.html'"></div>
 
       <div id="solutions-table" ng-show="issue.solutions.length > 0">
-        <table id="bounties-table" class="table table-striped table-bordered">
+        <table id="bounties-table" class="table table-bordered">
           <thead>
           <tr>
             <th>Developer</th>
@@ -24,7 +24,7 @@
           </thead>
 
           <tbody>
-          <tr ng-repeat="solution in issue.solutions">
+          <tr ng-repeat="solution in issue.solutions | orderBy:['-accepted','-in_dispute_period','+disputed','-submitted_at','-submitted','-created_at']">
             <td>
               <img class="thumbnail" ng-src="{{ solution.person.image_url }}" />
             </td>
@@ -45,18 +45,19 @@
                     <button ng-disabled="dispute.$invalid" class="btn btn-danger" ng-click="dispute_solution(issue, solution, solution.new_dispute)">File Dispute</button>
                   </form>
                 </div>
+                <br />
               </div>
 
               <!--Solution submitted body from the developer-->
               <div class="text-info" ng-hide="solution.submitted">
                 <strong>{{solution.person.display_name}} started working on a solution</strong>
-                <div><small>started on {{solution.created_at | date}}</small></div>
+                <div><small>started on {{solution.created_at | date:'medium'}}</small></div>
                 <p style="margin: 0;"><i><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a> has not submitted a solution yet.</i></p>
               </div>
 
               <div class="text-success" ng-show="solution.submitted && !solution.accepted">
                 <strong>{{solution.person.display_name}}'s solution</strong>
-                <div><small>submitted {{solution.submitted_at | date}}</small></div>
+                <div><small>submitted {{solution.submitted_at | date:'medium'}}</small></div>
                 <p style="white-space: pre-wrap; margin: 0;">{{solution.body}}</p>
               </div>
 
@@ -64,7 +65,7 @@
 
               <!--Show the disputes-->
               <accordion close-others="false" style="margin: 0;">
-                <accordion-group ng-repeat="dispute in solution.disputes | orderBy:['+closed','number']" is-open="!dispute.closed">
+                <accordion-group ng-repeat="dispute in solution.disputes | orderBy:['+closed','-number']" is-open="!dispute.closed">
                   <accordion-heading>
                     <span ng-class="{ 'text-info': dispute.closed, 'text-error': !dispute.closed }">Dispute #{{dispute.number}}</span>
                       <div ng-hide="dispute.closed" class="pull-right"><small>filed by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>

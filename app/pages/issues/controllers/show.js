@@ -28,7 +28,7 @@ angular.module('app')
         return 'started';
       } else if (solution.submitted && !solution.merged) {
         return 'pending_merge';
-      } else if (solution.in_dispute_period && !solution.disputed) {
+      } else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) {
         return 'in_dispute_period';
       } else if (solution.disputed) {
         return 'disputed';
