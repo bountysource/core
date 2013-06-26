@@ -48,7 +48,7 @@ angular.module('app')
       } else if (status === "pending_merge") {
         $scope.my_solution_progress = { value: 50, type: "progress-success", status: status, description: "Your solution has been submitted. Waiting for the issue to be resolved" };
       } else if (status === "in_dispute_period") {
-        $scope.my_solution_progress = { value: 75, type: "progress-success", status: status, description: "The issue has been resolved, and your issue is in the dispute period." };
+        $scope.my_solution_progress = { value: 75, type: "progress-success", status: status, description: "The issue has been resolved, and your solution is in the dispute period." };
       } else if (status === "disputed") {
         $scope.my_solution_progress = { value: 75, type: "progress-warning", status: status, description: "Your solution has been disputed." };
       } else if (status === "rejected") {
