@@ -82,6 +82,36 @@ angular.module('app')
             }
           }
 
+          // define dispute methods after the disputes array is present on solution
+          $scope.dispute_solution = function(issue, solution, form_data) {
+            console.log('dispute_solution', arguments);
+
+            $api.dispute_create(issue.id, solution.id, form_data, function(response) {
+              if (response.meta.success) {
+                // set my solution and hide the dispute form
+                solution.$my_dispute = angular.copy(response.data);
+                solution.$show_dispute = false;
+
+                // add the dispute to solution
+                solution.disputes.push(response.data);
+              } else {
+                solution.$dispute_error = response.data.error;
+              }
+            });
+          };
+
+          $scope.resolve_dispute = function(issue, solution, dispute) {
+            $api.dispute_resolve(issue.id, solution.id, dispute.number, function(response) {
+              console.log(response);
+
+              if (response.meta.success) {
+                dispute.closed = true;
+              } else {
+                $scope.$dispute_error = response.data.error;
+              }
+            });
+          };
+
           return response.data;
         });
       });
@@ -182,25 +212,6 @@ angular.module('app')
 
     $scope.init_dispute = function(solution) {
       solution.new_dispute = solution.new_dispute || { body: "" };
-    };
-
-    $scope.dispute_solution = function(issue, solution, form_data) {
-      console.log('dispute_solution', arguments);
-
-      $api.dispute_create(issue.id, solution.id, form_data, function(response) {
-        if (response.meta.success) {
-          // add the dispute to solution
-          solution.disputes.push(response.data);
-        } else {
-          solution.$dispute_error = response.data.error;
-        }
-      });
-    };
-
-    $scope.resolve_dispute = function(issue, solution, dispute) {
-      $api.dispute_resolve(issue.id, solution.id, dispute.number, function(response) {
-
-      });
     };
 
   });

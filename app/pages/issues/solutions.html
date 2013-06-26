@@ -24,7 +24,7 @@
           </thead>
 
           <tbody>
-          <tr ng-repeat="solution in issue.solutions" ng-class="{ error: (solution.rejected), warning: (solution.disputed), info: (solution.submitted && !(solution.disputes || solution.rejected)) }">
+          <tr ng-repeat="solution in issue.solutions">
             <td>
               <img class="thumbnail" ng-src="{{ solution.person.image_url }}" />
             </td>
@@ -32,41 +32,20 @@
               <a ng-href="/people/{{ solution.person.slug }}">{{ solution.person.display_name }}</a>
             </td>
             <td>
-              <!--Show the dispute that you filed-->
-              <div ng-repeat="dispute in solution.disputes | filter:'closed' | orderBy:'number'" collapse="!solution.$my_dispute" class="text-warning">
-                <strong>Dispute #{{dispute.number}}</strong>
-                <div><small>filed by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>
-                <p>"{{solution.$my_dispute.body}}"</p>
-                <br />
-              </div>
-
-              <!--Collapsed dispute form-->
+              <!--Collapsed dispute create form form-->
               <div ng-show="solution.submitted" collapse="!solution.$show_dispute">
                 <div ng-show="solution.$dispute_error">
                   <div class="alert alert-error">{{solution.$dispute_error}}</div>
                 </div>
 
-                <!--File a dispute form-->
-                <div class="alert alert-warning">
+                <div>
                   <p><strong>File a dispute: </strong>This solution will not be accepted if there are any outstanding disputes. For more info about disputes, refer to the FAQ.</p>
                   <form class="form" name="dispute" style="margin: 0;">
                     <textarea required name="body" class="span12" rows="3" placeholder="Description of why this solution does not resolve the issue." ng-model="solution.new_dispute.body"></textarea>
-                    <button ng-disabled="dispute.$invalid" class="btn" ng-click="dispute_solution(issue, solution, solution.new_dispute)">File Dispute</button>
+                    <button ng-disabled="dispute.$invalid" class="btn btn-danger" ng-click="dispute_solution(issue, solution, solution.new_dispute)">File Dispute</button>
                   </form>
                 </div>
               </div>
-
-              <!--&lt;!&ndash;Asynchronously loaded disputes&ndash;&gt;-->
-              <!--<div ng-show="solution.disputes.length > 0">-->
-                <!--<table class="table">-->
-
-                  <!--<tbody>-->
-                  <!--<tr ng-repeat="dispute in solution.disputes">-->
-                    <!--<td>{{dispute.body}}</td>-->
-                  <!--</tr>-->
-                  <!--</tbody>-->
-                <!--</table>-->
-              <!--</div>-->
 
               <!--Solution submitted body from the developer-->
               <div class="text-info" ng-hide="solution.submitted">
@@ -80,6 +59,44 @@
                 <div><small>submitted {{solution.submitted_at | date}}</small></div>
                 <p style="white-space: pre-wrap; margin: 0;">{{solution.body}}</p>
               </div>
+
+              <br />
+
+              <!--Show the disputes-->
+              <accordion close-others="false" style="margin: 0;">
+                <accordion-group ng-repeat="dispute in solution.disputes | orderBy:['+closed','number']" is-open="!dispute.closed">
+                  <accordion-heading>
+                    <span ng-class="{ 'text-info': dispute.closed, 'text-error': !dispute.closed }">Dispute #{{dispute.number}}</span>
+                      <div ng-hide="dispute.closed" class="pull-right"><small>filed by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>
+                    <div ng-show="dispute.closed" class="pull-right"><small>resolved by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>
+                  </accordion-heading>
+
+
+                  <div class="row-fluid">
+                    <div class="span6">
+                      <p style="white-space: pre-wrap;">{{dispute.body}}</p>
+                    </div>
+                    <div class="span6">
+                      <div ng-show="solution.$my_dispute.id == dispute.id">
+                        <p class="text-success text-center">Resolve your dispute to allow this solution to be accepted.</p>
+                        <button ng-click="resolve_dispute(issue, solution, dispute)" class="btn btn-block btn-small btn-success">
+                          <i class="icon-check icon-white"></i>
+                          Resolve
+                        </button>
+                        <br />
+                      </div>
+
+                      <div>
+                        <p class="text-center">Join the discussion to help resolve this dispute.</p>
+                        <a href="{{issue.url}}" target="_blank" class="btn btn-block btn-small">
+                          <i class="icon-comment"></i>
+                          Discussion
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </accordion-group>
+              </accordion>
             </td>
             <td>
               <button ng-hide="solution.submitted" class="btn btn-small btn-block" disabled>
@@ -93,10 +110,6 @@
               <button ng-click="init_dispute(solution)" class="btn btn-small btn-block btn-danger" ng-disabled="solution.$my_dispute || solution.person.id == current_person.id || !solution.submitted || !solution.in_dispute_period" ng-model="solution.$show_dispute" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" popover-title="Filing a Dispute" popover-trigger="mouseenter" popover-placement="right" popover="If you are not satisfied with this solution, file a dispute against it. Once disputed, the developer and the backers should work together toward resolving the dispute. Only the backer that filed the dispute can resolve it.">
                 <i class="icon-ban-circle icon-white"></i>
                 Dispute
-              </button>
-              <button ng-show="solution.$my_dispute" ng-click="resolve_dispute(issue, solution, solution.$my_dispute)" class="btn btn-block btn-small btn-success" popover-title="Resolve your Dispute" popover-trigger="mouseenter" popover-placement="right" popover="Resolving your dispute will allow the solution to be accepted. Disputes should be resolved by working with the developer, then marking them as such here.">
-                <i class="icon-check icon-white"></i>
-                Resolve
               </button>
             </td>
             <td style="text-align: center;">{{solution_status(solution) | from_snake_case | title}}</td>
