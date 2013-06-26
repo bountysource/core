@@ -70,9 +70,9 @@
 
               <!--Solution submitted body from the developer-->
               <div class="text-info" ng-hide="solution.submitted">
-                <strong>{{solution.person.display_name}}'s solution</strong>
-                <div><small>started {{solution.created_at | date}}</small></div>
-                <p style="margin: 0;"><i><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a> has not yet submitted a solution.</i></p>
+                <strong>{{solution.person.display_name}} started working on a solution</strong>
+                <div><small>started on {{solution.created_at | date}}</small></div>
+                <p style="margin: 0;"><i><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a> has not submitted a solution yet.</i></p>
               </div>
 
               <div class="text-success" ng-show="solution.submitted && !solution.accepted">
