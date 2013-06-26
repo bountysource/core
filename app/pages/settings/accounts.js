@@ -9,11 +9,14 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('AccountSettings', function($scope) {
-    $scope.accounts = [
-      $scope.current_person.github_account,
-      $scope.current_person.facebook_account,
-      $scope.current_person.twitter_account
-    ];
+  .controller('AccountSettings', function($scope, $api, $location) {
+    $scope.set_post_auth_url = function() {
+      $api.set_post_auth_url($location.url());
+    };
+
+    $scope.github_link = $api.signin_url_for('github');
+    $scope.twitter_link = $api.signin_url_for('twitter');
+    $scope.facebook_link = $api.signin_url_for('facebook');
+
   });
 

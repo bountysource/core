@@ -218,9 +218,8 @@ angular.module('api.bountysource',[]).
     this.signin = function(form_data) {
       return this.call("/user/login", "POST", { email: form_data.email, password: form_data.password, account_link_id: form_data.account_link_id }, function(response) {
         if (response.meta.status === 200) {
-          $rootScope.current_person = response.data;
-          $cookieStore.put('access_token', $rootScope.current_person.access_token);
-          $api.goto_post_auth_url();
+          // NOTE: /user/login doesn't return the same as /user... so to be safe we make another api call
+          $api.signin_with_access_token(response.data.access_token);
         }
         return response.data;
       });
@@ -246,18 +245,9 @@ angular.module('api.bountysource',[]).
     };
 
     this.goto_post_auth_url = function() {
-      var redirect_options = $cookieStore.get('postauth_redirect') || {};
+      var redirect_url = $cookieStore.get('postauth_url') || '/';
       $cookieStore.remove('postauth_url');
-
-      if (redirect_options.url) {
-        var dest1 = (redirect_options.url || '/').replace(/^https?:\/\/[^/]+/,'');
-        $location.url(dest1).replace();
-      } else {
-        var dest = redirect_options.path || "/";
-        $location.path(dest);
-        $location.search(redirect_options.path.params || {});
-        $location.replace();
-      }
+      $location.url(redirect_url).replace();
     };
 
     this.signup = function(form_data) {
@@ -307,8 +297,18 @@ angular.module('api.bountysource',[]).
     };
 
     this.signin_url_for = function(provider) {
-      // todo, include redirect_url in callback
-      return $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent('http://localhost:9000/signin/callback?provider='+provider);
+      // TODO: why isn't this provided by angular.js somewhere?? seems silly that we need to rebuild baseHref
+      var DEFAULT_PORTS = {'http': 80, 'https': 443, 'ftp': 21};
+      var protocol = $location.protocol(),
+          host = $location.host(),
+          port = $location.port();
+      var redirect_url = protocol + '://' + host + (port == DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
+
+      var url = $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent(redirect_url);
+      if ($cookieStore.get('access_token')) {
+        url += '&access_token=' + encodeURIComponent($cookieStore.get('access_token'));
+      }
+      return url;
     };
 
     this.signout = function() {

@@ -11,33 +11,58 @@
 <form class="form-horizontal" name="form" novalidate>
   <div class="alert alert-error" ng-show="error">{{error}}</div>
 
+  <p>This is the email address you use to login and receive important emails (password reset, etc).</p>
   <div class="control-group">
-    <label class="control-label" for="inputEmail">Primary Email:</label>
+    <label class="control-label" for="inputEmail">Email:</label>
     <div class="controls">
-      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" />
+      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" class="input-medium" />
+      <button type="submit" class="btn btn-success" ng-click="save()">Change</button>
     </div>
   </div>
 
+  <p>This is the password you use to login.  If you were curious, we use bcrypt so your password will be salted.</p>
   <div class="control-group">
-    <label class="control-label" for="inputDisplayName">Change Password:</label>
+    <label class="control-label" for="inputDisplayName">Password:</label>
     <div class="controls">
       <input type="password" id="inputDisplayName" placeholder="abcd1234" ng-model="form_data.password" class="input-medium" />
+      <button type="submit" class="btn btn-success" ng-click="save()">Change</button>
+    </div>
+  </div>
+
+
+  <p>These accounts can be used for login and more.</p>
+
+  <div class="control-group">
+    <label class="control-label" for="inputDisplayName">Github:</label>
+    <div class="controls" ng-show="current_person.github_account">
+      <img src="{{current_person.github_account.avatar_url}}" style="width: 50px; height: 50px" />
+      {{ current_person.github_account.login }}
+    </div>
+    <div class="controls" ng-hide="current_person.github_account">
+      <a href="{{github_link}}" ng-click="set_post_auth_url()">Link with GitHub</a>
     </div>
   </div>
 
   <div class="control-group">
-    <div class="controls">
-      <button type="submit" class="btn btn-success" ng-click="save()">Save</button>
+    <label class="control-label" for="inputDisplayName">Twitter:</label>
+    <div class="controls" ng-show="current_person.twitter_account">
+      <img src="{{current_person.twitter_account.avatar_url}}" style="width: 50px; height: 50px" />
+      {{ current_person.twitter_account.login }}
+    </div>
+    <div class="controls" ng-hide="current_person.twitter_account">
+      <a href="{{twitter_link}}" ng-click="set_post_auth_url()">Link with Twitter</a>
     </div>
   </div>
 
-  Linked Accounts:
+  <div class="control-group">
+    <label class="control-label" for="inputDisplayName">Facebook:</label>
+    <div class="controls" ng-show="current_person.facebook_account">
+      <img src="{{current_person.facebook_account.avatar_url}}" style="width: 50px; height: 50px" />
+      {{ current_person.facebook_account.login }}
+    </div>
+    <div class="controls" ng-hide="current_person.facebook_account">
+      <a href="{{facebook_link}}" ng-click="set_post_auth_url()">Link with Facebook</a>
+    </div>
+  </div>
 
-  <table>
-    <tr ng-repeat="account in accounts">
-      <td><img src="{{ account.avatar_url }}" style="width: 50px; height: 50px" /></td>
-      <td>{{ account.login }}</td>
-      <td>{{account}}</td>
-    </tr>
-  </table>
 </form>
