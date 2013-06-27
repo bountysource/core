@@ -8,28 +8,35 @@
 
 <ng-include src="'pages/settings/tabs.html'"></ng-include>
 
-<form class="form-horizontal" name="form" novalidate>
-  <div class="alert alert-error" ng-show="error">{{error}}</div>
+<div class="alert alert-error" ng-show="error">{{error}}</div>
+<div class="alert alert-success" ng-show="success">{{success}}</div>
 
-  <p>This is the email address you use to login and receive important emails (password reset, etc).</p>
+<form class="form-horizontal" name="form" ng-submit="change_password()" novalidate>
+  <p>If you were curious, we use bcrypt so your password will be salted.</p>
   <div class="control-group">
-    <label class="control-label" for="inputEmail">Email:</label>
+    <label class="control-label" for="inputDisplayName">Current Password:</label>
     <div class="controls">
-      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" class="input-medium" />
-      <button type="submit" class="btn btn-success" ng-click="save()">Change</button>
-    </div>
-  </div>
-
-  <p>This is the password you use to login.  If you were curious, we use bcrypt so your password will be salted.</p>
-  <div class="control-group">
-    <label class="control-label" for="inputDisplayName">Password:</label>
-    <div class="controls">
-      <input type="password" id="inputDisplayName" placeholder="abcd1234" ng-model="form_data.password" class="input-medium" />
-      <button type="submit" class="btn btn-success" ng-click="save()">Change</button>
+      <input type="password" id="inputDisplayName" placeholder="abcd1234" ng-model="form_data.current_password" class="input-medium" />
     </div>
   </div>
 
 
+  <div class="control-group">
+    <label class="control-label" for="inputDisplayName">New Password:</label>
+    <div class="controls">
+      <input type="password" id="inputDisplayName" placeholder="abcd1234" ng-model="form_data.new_password" class="input-medium" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success">Change Password</button>
+    </div>
+  </div>
+
+</form>
+
+<form class="form-horizontal" novalidate>
   <p>These accounts can be used for login and more.</p>
 
   <div class="control-group">

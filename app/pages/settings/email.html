@@ -8,26 +8,29 @@
 
 <ng-include src="'pages/settings/tabs.html'"></ng-include>
 
-<form class="form-horizontal" name="form" novalidate>
-  <div class="alert alert-error" ng-show="error">{{error}}</div>
+<div class="alert alert-error" ng-show="error">{{error}}</div>
+<div class="alert alert-success" ng-show="success">{{success}}</div>
+
+<form class="form-horizontal" name="form" ng-submit="submit()" novalidate>
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Primary Email:</label>
+    <div class="controls">
+      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" class="input-medium" />
+    </div>
+  </div>
 
   <div class="control-group">
     <label class="control-label" for="inputEmail">Email Options:</label>
     <div class="controls">
       <label class="checkbox">
-        <input type="checkbox" id="inputTerms" ng-model="form_data.terms" /> Weekly Newsletter
+        <input type="checkbox" id="inputTerms" ng-model="form_data.weekly_newsletter" /> Weekly Newsletter
       </label>
-
-      <label class="checkbox">
-        <input type="checkbox" id="inputTerms" ng-model="form_data.terms" /> Alerts
-      </label>
-
     </div>
   </div>
 
   <div class="control-group">
     <div class="controls">
-      <button type="submit" class="btn btn-success" ng-click="save()">Save</button>
+      <button type="submit" class="btn btn-success">Save</button>
     </div>
   </div>
 
