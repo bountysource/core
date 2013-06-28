@@ -202,7 +202,8 @@ with (scope('Pledge', 'Fundraiser')) {
             reward      = pledge.reward;
 
         Pledge.errors = div();
-
+        var pledge_div = div();
+        
         render({ into: target_div },
           breadcrumbs(
             a({ href: '#' }, 'Home'),
@@ -210,18 +211,11 @@ with (scope('Pledge', 'Fundraiser')) {
             a({ href: '#contributions' }, 'Pledges'),
             a({ href: pledge.frontend_path }, money(pledge.amount))
           ),
-
-          Columns.create({ show_side: true }),
-
-          Columns.side(
-            div({ style: 'text-align: center;' },
-              Fundraiser.card(pledge.fundraiser)
-            )
-          )
+          pledge_div
         );
 
         if (pledge.reward && pledge.reward.fulfillment_details && !pledge.survey_response) {
-          Columns.main(
+          render({ into: pledge_div },
             info_message("In order to receive the reward you selected, please complete the following survey from the fundraiser creator:"),
 
             Pledge.errors,
@@ -243,7 +237,7 @@ with (scope('Pledge', 'Fundraiser')) {
             )
           );
         } else {
-          Columns.main(
+          render({ into: pledge_div },
             div({ style: 'text-align: center;' },
               h2(money(pledge.amount), " Pledge Made"),
 
@@ -276,7 +270,7 @@ with (scope('Pledge', 'Fundraiser')) {
                 }, a({ 'class': 'btn-auth btn-twitter large', style: 'margin-right: 10px;' }, 'Tweet'))
               )
             )
-          )
+          );
         }
       } else {
         render({ into: target_div }, error_message(response.data.error));
@@ -308,9 +302,9 @@ with (scope('Pledge', 'Fundraiser')) {
       item_number: 'fundraisers/' + fundraiser.id + (parseInt(form_data.reward_id) > 0 ? '/'+form_data.reward_id : ''),
       success_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledges/:item_id',
       cancel_url: window.location.href.split('#')[0] + fundraiser.frontend_path,
-      postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id+'&anonymous='+(form_data.anonymous ? 'true' : '')
+      postauth_url: window.location.href.split('#')[0] + '#fundraisers/'+fundraiser.id+'/pledge?payment_method='+form_data.payment_method+'&amount='+form_data.amount+'&reward_id='+form_data.reward_id+'&anonymous='+form_data.anonymous
     };
-
+    
     Payment.create(payment_data, function(errors) {
       render({ into: Pledge.errors_div }, error_message(errors));
     });
