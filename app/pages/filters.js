@@ -22,6 +22,19 @@ angular.module('app').
     return function (input, other) {
       return (input < other) ? input : other;
     };
+  }).filter('truncate', function() {
+    // truncate string, add '...' or custom text.
+    // note, size is the EXACT length of the string returned,
+    // which factors in the length of replacement.
+    //
+    // $scope.text = "Apples are delicious"
+    // <span>{{ text | truncate:12 }}</span> ==> <span>Apples ar...</span>
+    return function(s, size, replacement) {
+      size = size || 50;
+      replacement = replacement || "...";
+      if (!s || s.length <= (size + replacement.length)) return s;
+      return s.slice(0,size+replacement.length) + replacement;
+    };
   }).filter('from_snake_case', function() {
     // Convert snakecase to words
     return function(s) {
