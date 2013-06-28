@@ -22,8 +22,8 @@ angular.module('app').
     return function (input, other) {
       return (input < other) ? input : other;
     };
-  // Convert snakecase to words
   }).filter('from_snake_case', function() {
+    // Convert snakecase to words
     return function(s) {
       var parts = s.replace(/[_-]/g, " ").split(" ");
       var new_parts = [];
@@ -31,11 +31,37 @@ angular.module('app').
       return new_parts.join(" ");
     };
   }).filter('title', function() {
+    // Capitalize all words
     return function(s) {
       var parts = s.split(" ");
       var new_parts = [];
       for (var i=0; i<parts.length; i++) { new_parts.push(parts[i][0].toUpperCase() + parts[i].slice(1)); }
       return new_parts.join(" ");
+    };
+  }).filter('solution_status', function() {
+    return function(solution) {
+      if (!solution) { return ""; }
+      if (!solution.submitted) { return 'started'; }
+      else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
+      else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
+      else if (solution.disputed) { return 'disputed'; }
+      else if (solution.rejected) { return 'rejected'; }
+      else if (solution.accepted && !solution.paid_out) { return 'accepted'; }
+      else if (solution.accepted && solution.paid_out) { return 'paid_out'; }
+      else { return ""; }
+    };
+  }).filter('solution_progress_description', function($filter) {
+    var get_status = $filter('solution_status');
+    return function(solution) {
+      var status = get_status(solution);
+      if (status === "started") { return "You have started working on a solution."; }
+      else if (status === "pending_merge") { return "Your solution has been submitted. Waiting for the issue to be resolved"; }
+      else if (status === "in_dispute_period") { return "The issue has been resolved, and your solution is in the dispute period."; }
+      else if (status === "disputed") { return "Your solution has been disputed."; }
+      else if (status === "rejected") { return "Your solution has been rejected."; }
+      else if (status === "paid_out") { return "You have claimed the bounty for this issue."; }
+      else if (status === "accepted") { return "Your solution has been accepted!"; }
+      else { return ""; }
     };
   });
 

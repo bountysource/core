@@ -1,7 +1,149 @@
-<div ng-show="my_solution">
+<div ng-show="issue.my_solution">
   <div class="well">
-    <h2></h2>
-    <p class="lead">{{my_solution_progress.description}}</p>
-    <progress style="margin: 0;" value="my_solution_progress.value" class="progress-striped progress-success"></progress>
+    <p class="lead text-center">{{ issue.my_solution | solution_progress_description }}</p>
+
+    <form name="submit_solution" ng-show="!issue.my_solution.submitted" class="form-horizontal">
+      <p class="text-center"><strong>Ready to submit your solution?</strong> Provide the URL to your code, as well as a brief description of how it resolves the issue.</p>
+      <br />
+
+      <div class="control-group">
+        <label class="control-label" for="code_url">Code URL</label>
+        <div class="controls">
+          <input class="span10" type="url" id="code_url" ng-model="issue.my_solution.submit.code_url" placeholder="https://github.com/bountysource/frontend/pulls/1" required />
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="body">Description</label>
+        <div class="controls">
+          <textarea class="span10" id="body" rows="4" ng-model="issue.my_solution.submit.body" placeholder="I implemented quicksort in lua." required></textarea>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-primary" ng-disabled="submit_solution.$invalid" ng-click="issue.my_solution.submit()">Submit Solution</button>
+        </div>
+      </div>
+    </form>
+
+    <div ng-show="issue.my_solution.accepted && issue.my_solution.paid_out">
+
+    </div>
+
+    <div ng-show="issue.my_solution.accepted && !issue.my_solution.paid_out">
+      <div class="row-fluid">
+        <div class="span6">
+          <form name="claim_bounty" ng-show="issue.my_solution.accepted" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="code_url">Total Bounty</label>
+              <div class="controls">
+                <div class="input-prepend">
+                  <div class="add-on">$</div>
+                  <input type="text" value="{{bounty_claim.bounty_total | dollars}}" disabled />
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="code_url">Donations</label>
+              <div class="controls">
+                <label class="inline">
+                  <input type="number" name="eff" class="span6" min="0" max="{{issue.bounty_total}}" ng-model="bounty_claim.donations.eff.amount" ng-change="update_bounty_claim()" ng-focus="charity_focus(bounty_claim.donations.eff)" ng-blur="charity_blur(bounty_claim.donations.eff)" />
+                  <span class="badge badge-success">EFF</span>
+                </label>
+
+                <label class="inline">
+                  <input type="number" class="span6" min="0" max="{{issue.bounty_total}}" ng-model="bounty_claim.donations.fsf.amount" ng-change="update_bounty_claim()" ng-focus="charity_focus(bounty_claim.donations.fsf)" ng-blur="charity_blur(bounty_claim.donations.fsf)" />
+                  <span class="badge badge-success">FSF</span>
+                </label>
+
+                <label class="inline">
+                  <input type="number" class="span6" min="0" max="{{issue.bounty_total}}" ng-model="bounty_claim.donations.spi.amount" ng-change="update_bounty_claim()" ng-focus="charity_focus(bounty_claim.donations.spi)" ng-blur="charity_blur(bounty_claim.donations.spi)" />
+                  <span class="badge badge-success">SPI</span>
+                </label>
+
+                <label class="inline">
+                  <input type="number" class="span6" min="0" max="{{issue.bounty_total}}" ng-model="bounty_claim.donations.dwb.amount" ng-change="update_bounty_claim()" ng-focus="charity_focus(bounty_claim.donations.dwb)" ng-blur="charity_blur(bounty_claim.donations.dwb)" />
+                  <span class="badge badge-success">DWB</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="code_url">Donation</label>
+              <div class="controls">
+                <div class="input-prepend">
+                  <div class="add-on">$</div>
+                  <input type="text" value="{{bounty_claim.donation_total | dollars}}" disabled />
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="code_url">Your Cut</label>
+              <div class="controls">
+                <div class="input-prepend">
+                  <div class="add-on">$</div>
+                  <input type="text" value="{{bounty_claim.your_cut | dollars}}" disabled />
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+                <button type="submit" class="btn btn-success" ng-disabled="claim_bounty.$invalid" ng-click="issue.my_solution.claim_bounty()">Collect Bounty</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="span5 offset1">
+          <div collapse="!bounty_claim.donations.eff.$show_info">
+            <h4>
+              <a href="https://www.eff.org/" target="_blank">Electronic Frontier Foundation</a>
+            </h4>
+            <p>EFF is a donor-funded nonprofit and depends on your support to continue successfully defending your digital rights. Litigation is particularly expensive; because two-thirds of our budget comes from individual donors, every contribution is critical to helping EFF fight—and win—more cases.</p>
+          </div>
+
+          <div collapse="!bounty_claim.donations.fsf.$show_info">
+            <h4>
+              <a href="https://www.fsf.org/" target="_blank">Free Software Foundation</a>
+            </h4>
+            <p>The Free Software Foundation (FSF) is a nonprofit with a worldwide mission to promote computer user freedom and to defend the rights of all free software users.</p>
+          </div>
+
+          <div collapse="!bounty_claim.donations.spi.$show_info">
+            <h4>
+              <a href="http://www.spi-inc.org/" target="_blank">Software in the Public Interest</a>
+            </h4>
+            <p>SPI is a non-profit organization which was founded to help organizations develop and distribute open hardware and software. We encourage programmers to use the GNU General Public License or other licenses that allow free redistribution and use of software, and hardware developers to distribute documentation that will allow device drivers to be written for their product.</p>
+          </div>
+
+          <div collapse="!bounty_claim.donations.dwb.$show_info">
+            <h4>
+              <a href="https://www.doctorswithoutborders.org/" target="_blank">Doctors Without Borders</a>
+            </h4>
+            <p>Doctors Without Borders/Médecins Sans Frontières (MSF) is an international medical humanitarian organization created by doctors and journalists in France in 1971.</p>
+            <p>In 1999, MSF received the Nobel Peace Prize.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <progress value="issue.my_solution.$percentage" class="progress-striped progress-info"></progress>
+
+    <div class="row-fluid">
+      <div class="span3 text-right" ng-class="{ 'text-info': (issue.my_solution.$percentage >= 25) }">
+        Started Work
+      </div>
+      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 50), 'text-info': (issue.my_solution.$percentage >= 50) }">
+        Code Submitted
+      </div>
+      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 75), 'text-info': (issue.my_solution.$percentage >= 75) }">
+        Pending Acceptance
+      </div>
+      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 100), 'text-info': (issue.my_solution.$percentage >= 100) }">
+        Accepted
+      </div>
+    </div>
   </div>
 </div>

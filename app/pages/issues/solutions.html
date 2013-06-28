@@ -1,132 +1,130 @@
-<div ng-controller="IssueShow">
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a><span class="divider">»</span></li>
-    <li><a href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
-    <li><a href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
-  </ul>
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
+</ul>
 
-  <div class="row-fluid" ng-show="issue">
-    <div class="span9">
-      <div ng-include="'pages/issues/partials/header.html'"></div>
-      <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
-      <div ng-include="'pages/issues/partials/my_solution_box.html'"></div>
+<div class="row-fluid" ng-show="issue">
+  <div class="span9">
+    <div ng-include="'pages/issues/partials/header.html'"></div>
+    <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+    <div ng-include="'pages/issues/partials/my_solution_box.html'"></div>
 
-      <div id="solutions-table" ng-show="issue.solutions.length > 0">
-        <table id="bounties-table" class="table table-bordered">
-          <thead>
-          <tr>
-            <th>Developer</th>
-            <th></th>
-            <th style="width: 50%;">Submission</th>
-            <th style="width: 15%"></th>
-            <th style="width: 15%; text-align: center;">Status</th>
-          </tr>
-          </thead>
+    <div id="solutions-table" ng-show="issue.solutions.length > 0">
+      <table id="bounties-table" class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Developer</th>
+          <th></th>
+          <th style="width: 50%;">Submission</th>
+          <th style="width: 15%"></th>
+          <th style="width: 15%; text-align: center;">Status</th>
+        </tr>
+        </thead>
 
-          <tbody>
-          <tr ng-repeat="solution in issue.solutions | orderBy:['-accepted','-in_dispute_period','+disputed','-submitted_at','-submitted','-created_at']">
-            <td>
-              <img class="thumbnail" ng-src="{{ solution.person.image_url }}" />
-            </td>
-            <td>
-              <a ng-href="/people/{{ solution.person.slug }}">{{ solution.person.display_name }}</a>
-            </td>
-            <td>
-              <!--Collapsed dispute create form form-->
-              <div ng-show="solution.submitted" collapse="!solution.$show_dispute">
-                <div ng-show="solution.$dispute_error">
-                  <div class="alert alert-error">{{solution.$dispute_error}}</div>
-                </div>
-
-                <div>
-                  <p><strong>File a dispute: </strong>This solution will not be accepted if there are any outstanding disputes. For more info about disputes, refer to the FAQ.</p>
-                  <form class="form" name="dispute" style="margin: 0;">
-                    <textarea required name="body" class="span12" rows="3" placeholder="Description of why this solution does not resolve the issue." ng-model="solution.new_dispute.body"></textarea>
-                    <button ng-disabled="dispute.$invalid" class="btn btn-danger" ng-click="dispute_solution(issue, solution, solution.new_dispute)">File Dispute</button>
-                  </form>
-                </div>
-                <br />
+        <tbody>
+        <tr ng-repeat="solution in issue.solutions | orderBy:['-accepted','-in_dispute_period','+disputed','-submitted_at','-submitted','-created_at']">
+          <td>
+            <img class="thumbnail" ng-src="{{ solution.person.image_url }}" />
+          </td>
+          <td>
+            <a ng-href="/people/{{ solution.person.slug }}">{{ solution.person.display_name }}</a>
+          </td>
+          <td>
+            <!--Collapsed dispute create form form-->
+            <div ng-show="solution.submitted" collapse="!solution.$show_dispute">
+              <div ng-show="solution.$dispute_error">
+                <div class="alert alert-error">{{solution.$dispute_error}}</div>
               </div>
 
-              <!--Solution submitted body from the developer-->
-              <div class="text-info" ng-hide="solution.submitted">
-                <strong>{{solution.person.display_name}} started working on a solution</strong>
-                <div><small>started on {{solution.created_at | date:'medium'}}</small></div>
-                <p style="margin: 0;"><i><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a> has not submitted a solution yet.</i></p>
+              <div>
+                <p><strong>File a dispute: </strong>This solution will not be accepted if there are any outstanding disputes. For more info about disputes, refer to the FAQ.</p>
+                <form class="form" name="dispute" style="margin: 0;">
+                  <textarea required name="body" class="span12" rows="3" placeholder="Description of why this solution does not resolve the issue." ng-model="solution.new_dispute.body"></textarea>
+                  <button ng-disabled="dispute.$invalid" class="btn btn-danger" ng-click="solution.dispute()">File Dispute</button>
+                </form>
               </div>
-
-              <div class="text-success" ng-show="solution.submitted && !solution.accepted">
-                <strong>{{solution.person.display_name}}'s solution</strong>
-                <div><small>submitted {{solution.submitted_at | date:'medium'}}</small></div>
-                <p style="white-space: pre-wrap; margin: 0;">{{solution.body}}</p>
-              </div>
-
               <br />
+            </div>
 
-              <!--Show the disputes-->
-              <accordion close-others="false" style="margin: 0;">
-                <accordion-group ng-repeat="dispute in solution.disputes | orderBy:['+closed','-number']" is-open="!dispute.closed">
-                  <accordion-heading>
-                    <span ng-class="{ 'text-info': dispute.closed, 'text-error': !dispute.closed }">Dispute #{{dispute.number}}</span>
-                      <div ng-hide="dispute.closed" class="pull-right"><small>filed by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>
-                    <div ng-show="dispute.closed" class="pull-right"><small>resolved by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>
-                  </accordion-heading>
+            <!--Solution submitted body from the developer-->
+            <div class="text-info" ng-hide="solution.submitted">
+              <strong>{{solution.person.display_name}} started working on a solution</strong>
+              <div><small>started on {{solution.created_at | date:'medium'}}</small></div>
+              <p style="margin: 0;"><i><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a> has not submitted a solution yet.</i></p>
+            </div>
 
+            <div class="text-success" ng-show="solution.submitted">
+              <strong>{{solution.person.display_name}}'s solution</strong>
+              <div><small>submitted {{solution.submitted_at | date:'medium'}}</small></div>
+              <p style="white-space: pre-wrap; margin: 0;">{{solution.body}}</p>
+            </div>
 
-                  <div class="row-fluid">
-                    <div class="span6">
-                      <p style="white-space: pre-wrap;">{{dispute.body}}</p>
+            <br />
+
+            <!--Show the disputes-->
+            <accordion close-others="false" style="margin: 0;">
+              <accordion-group ng-repeat="dispute in solution.disputes | orderBy:['+closed','-number']" is-open="!dispute.closed">
+                <accordion-heading>
+                  <span ng-class="{ 'text-info': dispute.closed, 'text-error': !dispute.closed }">Dispute #{{dispute.number}}</span>
+                    <div ng-hide="dispute.closed" class="pull-right"><small>filed by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>
+                  <div ng-show="dispute.closed" class="pull-right"><small>resolved by <a ng-href="/people/{{dispute.person.slug}}">{{dispute.person.display_name}}</a> on {{dispute.created_at | date}}</small></div>
+                </accordion-heading>
+
+                <div class="row-fluid">
+                  <div class="span6">
+                    <p style="white-space: pre-wrap;">{{dispute.body}}</p>
+                  </div>
+                  <div class="span6">
+
+                    <div ng-show="!solution.my_dispute.closed && solution.my_dispute.id == dispute.id">
+                      <p class="text-success text-center">Resolve your dispute to allow this solution to be accepted.</p>
+                      <button ng-click="dispute.resolve()" class="btn btn-block btn-small btn-success">
+                        <i class="icon-check icon-white"></i>
+                        Resolve
+                      </button>
+                      <br />
                     </div>
-                    <div class="span6">
-                      <div ng-show="solution.$my_dispute.id == dispute.id">
-                        <p class="text-success text-center">Resolve your dispute to allow this solution to be accepted.</p>
-                        <button ng-click="resolve_dispute(issue, solution, dispute)" class="btn btn-block btn-small btn-success">
-                          <i class="icon-check icon-white"></i>
-                          Resolve
-                        </button>
-                        <br />
-                      </div>
 
-                      <div ng-hide="dispute.closed">
-                        <p class="text-center">Join the discussion to help resolve this dispute.</p>
-                        <a href="{{issue.url}}" target="_blank" class="btn btn-block btn-small">
-                          <i class="icon-comment"></i>
-                          Discussion
-                        </a>
-                      </div>
+                    <div ng-hide="dispute.closed">
+                      <p class="text-center">Join the discussion to help resolve this dispute.</p>
+                      <a href="{{issue.url}}" target="_blank" class="btn btn-block btn-small">
+                        <i class="icon-comment"></i>
+                        Discussion
+                      </a>
+                    </div>
 
-                      <div ng-show="dispute.closed">
-                        <p class="text-info text-center">This dispute has been resolved.</p>
-                      </div>
+                    <div ng-show="dispute.closed">
+                      <p class="text-info text-center">This dispute has been resolved.</p>
                     </div>
                   </div>
-                </accordion-group>
-              </accordion>
-            </td>
-            <td>
-              <button ng-hide="solution.submitted" class="btn btn-small btn-block" disabled>
-                <i class="icon-globe"></i>
-                Submission
-              </button>
-              <a ng-show="solution.submitted" class="btn btn-small btn-block" href="{{solution.code_url}}" target="_blank">
-                <i class="icon-globe"></i>
-                Submission
-              </a>
-              <button ng-click="init_dispute(solution)" class="btn btn-small btn-block btn-danger" ng-disabled="solution.$my_dispute || solution.person.id == current_person.id || !solution.submitted || !solution.in_dispute_period" ng-model="solution.$show_dispute" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" popover-title="Filing a Dispute" popover-trigger="mouseenter" popover-placement="right" popover="If you are not satisfied with this solution, file a dispute against it. Once disputed, the developer and the backers should work together toward resolving the dispute. Only the backer that filed the dispute can resolve it.">
-                <i class="icon-ban-circle icon-white"></i>
-                Dispute
-              </button>
-            </td>
-            <td style="text-align: center;">{{solution_status(solution) | from_snake_case | title}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+                </div>
+              </accordion-group>
+            </accordion>
+          </td>
+          <td>
+            <button ng-hide="solution.submitted" class="btn btn-small btn-block" disabled>
+              <i class="icon-globe"></i>
+              Submission
+            </button>
+            <a ng-show="solution.submitted" class="btn btn-small btn-block" href="{{solution.code_url}}" target="_blank">
+              <i class="icon-globe"></i>
+              Submission
+            </a>
+            <button ng-model="solution.$show_dispute" class="btn btn-small btn-block btn-danger" ng-hide="(solution.my_dispute && !solution.my_dispute.closed) || solution.person.id == current_person.id || !solution.in_dispute_period" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" >
+              <i class="icon-ban-circle icon-white"></i>
+              Dispute
+            </button>
+          </td>
+          <td style="text-align: center;">{{ solution | solution_status | from_snake_case | title }}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 
-    <div class="span3">
-      <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
-      <div ng-include="'pages/issues/partials/developer_box.html'"></div>
-    </div>
+  <div class="span3">
+    <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
+    <div ng-include="'pages/issues/partials/developer_box.html'"></div>
   </div>
 </div>

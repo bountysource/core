@@ -1,50 +1,42 @@
-<div ng-show="solution_error" class="alert alert-error">{{solution_error}}</div>
+<div ng-controller="DeveloperBoxController">
+  <div ng-show="error" class="alert alert-error">{{error}}</div>
 
-<div class="well">
-  <div ng-show="my_solution">
-    <div style="text-align: center;">
-      <h3 style="margin-top: 0;">Your Solution</h3>
-
-      <p ng-hide="my_solution.submitted">When your code is ready to submit, provide the URL to your solution, as well as a short summary of what you did.</p>
-      <p ng-show="my_solution.submitted">Your solution has been submitted. Waiting for the issue to be resolved.</p>
-
-      <form class="form" name="solution_submit" style="margin: 0;" ng-show="!my_solution.submitted">
-        <input required ng-disabled="my_solution.submitted" type="url" class="span12 input-small" ng-model="my_solution.code_url" placeholder="https://github.com/bountysource/frontend/pulls/1" tooltip="Solution code URL" />
-        <textarea required ng-disabled="my_solution.submitted" class="span12 input-small" rows="4" placeholder="I implemented quicksort in lua" ng-model="my_solution.body"></textarea>
-      </form>
-    </div>
-
-    <div ng-show="my_solution.submitted">
-      <a href="{{issue.url}}" target="_blank" ng-show="my_solution.submitted" class="btn btn-block">
-        <i class="icon-comment"></i>
-        Issue Discussion
-      </a>
-    </div>
-
-    <div ng-hide="my_solution.submitted">
-      <div class="row-fluid" >
-        <div class="span6">
-          <button ng-disabled="solution_submit.$invalid" ng-click="submit_solution(my_solution)" class="btn btn-block btn-primary">Submit</button>
+  <div class="well">
+    <div ng-show="issue.my_solution">
+      <div class="text-center">
+        <div ng-show="!issue.my_solution.submitted">
+          <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
+          <p class="text-info">Have you finished your solution? If so, you need to submit it!</p>
+          <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-primary">Update Solution</a>
         </div>
-        <div class="span6">
-          <button ng-disabled="my_solution.submitted" ng-click="destroy_solution(my_solution)" class="btn btn-block btn-danger" tooltip="Delete">
-            <i class="icon-trash icon-white"></i>
-            Delete
-          </button>
+
+        <div ng-show="issue.my_solution.submitted && !issue.my_solution.accepted">
+          <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
+          <p class="text-info">Your solution has been submitted.</p>
+          <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-info">Check Status</a>
+        </div>
+
+        <div ng-show="issue.my_solution.accepted && !issue.my_solution.paid_out">
+          <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
+          <p class="text-success">Your solution was accepted!</p>
+          <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-large btn-success">Claim Bounty</a>
+        </div>
+
+        <div ng-show="issue.my_solution.accepted && issue.my_solution.paid_out">
+          <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
+          <p class="text-success">You have claimed the bounty on this issue. Good work!</p>
+          <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block">View Solution</a>
         </div>
       </div>
     </div>
-  </div>
 
-  <div ng-hide="my_solution">
-    <div style="text-align: center;">
-      <h3 style="margin-top: 0;">Earn the Bounty</h3>
-      <p>Resolving this issue? Let us know! If your solution is accepted, you are awarded the bounty.</p>
+    <div ng-hide="issue.my_solution">
+      <div class="text-center">
+        <p>Working on a solution to this issue? Let us know! If your solution is accepted, you are awarded the bounty.</p>
+      </div>
+
+      <button ng-click="issue.create_solution()" class="btn btn-block">Start Work</button>
     </div>
-
-    <button ng-click="create_solution()" class="btn btn-block">Start Work</button>
   </div>
 </div>
-
-
 

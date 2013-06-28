@@ -156,8 +156,8 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+id+"/overview");
     };
 
-    this.issue_get = function(id) {
-      return this.call("/issues/"+id);
+    this.issue_get = function(id, callback) {
+      return this.call("/issues/"+id, callback);
     };
 
     this.bounty_activity = function() {
@@ -195,6 +195,12 @@ angular.module('api.bountysource',[]).
     this.solution_submit = function(id, callback) {
       return this.call("/user/solutions/"+id+"/submit", "POST", callback);
     };
+
+
+    this.solution_payout = function(id, form_data, callback) {
+      return this.call("/user/solutions/"+id+"/payout", "POST", form_data, callback);
+    };
+
 
     this.dispute_create = function(issue_id, solution_id, data, callback) {
       // BountySource.api('/issues/' + solution.issue.id + '/solutions/' + solution.id + '/disputes', 'POST', form_data, function(response) {
@@ -302,7 +308,7 @@ angular.module('api.bountysource',[]).
       var protocol = $location.protocol(),
           host = $location.host(),
           port = $location.port();
-      var redirect_url = protocol + '://' + host + (port == DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
+      var redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
 
       var url = $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent(redirect_url);
       if ($cookieStore.get('access_token')) {
