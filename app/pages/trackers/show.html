@@ -21,7 +21,7 @@
     </div>
 
     <ul class="inline">
-      <li ng-repeat="language in tracker.languages"><span class="badge badge-success">{{language.name}}</span></li>
+      <li ng-repeat="language in tracker.languages"><span class="badge">{{language.name}}</span></li>
     </ul>
   </div>
 
@@ -33,11 +33,13 @@
     <div class="row-fluid">
       <div class="span4">
         <div class="well well-small">
-          <input type="number" class="span4" min="0" ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()" />
+          <input type="text" class="span12" min="0" placeholder="Search issues" ng-model="issue_filter_options.text" ng-change="update_filter_options()" />
+
+          <input type="number" class="span4" min="0" placeholder="50" ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()" />
           <span>Bounty Min</span>
 
           <br />
-          <input type="number" class="span4" min="0" ng-model="issue_filter_options.bounty_max" ng-change="update_filter_options()" />
+          <input type="number" class="span4" min="0" placeholder="3000" ng-model="issue_filter_options.bounty_max" ng-change="update_filter_options()" />
           <span>Bounty Max</span>
 
           <label class="checkbox">
