@@ -28,7 +28,8 @@ angular.module('app')
       text: null,
       bounty_min: null,
       bounty_max: null,
-      only_valuable: false
+      only_valuable: false,
+      show_closed: true
     };
 
     $scope.update_filter_options = function() {
@@ -44,15 +45,27 @@ angular.module('app')
       if (!isNaN(bounty_min) && bounty_total < bounty_min) return false;
       if (!isNaN(bounty_max) && bounty_total > bounty_max) return false;
       if ($scope.issue_filter_options.only_valuable && bounty_total <= 0) return false;
+      if (!$scope.issue_filter_options.show_closed) return issue.can_add_bounty;
 
       if ($scope.issue_filter_options.text) {
         var regexp = new RegExp(".*?"+$scope.issue_filter_options.text+".*?", "i");
-        return regexp.test(issue.title);
+        return regexp.test(issue.title) || (issue.number && issue.number.toString() === $scope.issue_filter_options.text) ;
       }
 
       return true;
     };
 
-    $scope.issue_order_columns = [];
+    $scope.order_col = "bounty_total";
+    $scope.order_reverse = true;
+    $scope.change_order_col = function(col) {
+      console.log('change order!', 'old', $scope.order_col, $scope.order_reverse);
+      if ($scope.order_col === col) {
+        $scope.order_reverse = !$scope.order_reverse;
+      } else {
+        $scope.order_reverse = true;
+        $scope.order_col = col;
+      }
+      console.log('new', $scope.order_col, $scope.order_reverse);
+    };
   });
 
