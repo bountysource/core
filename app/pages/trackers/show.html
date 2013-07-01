@@ -50,12 +50,14 @@
 
           <label class="checkbox">
             <input type="checkbox" ng-model="issue_filter_options.show_closed" />
-            Include Closed Issues
+            Show Closed Issues
           </label>
         </div>
       </div>
       <div class="span9">
-        <table class="table table-condensed table-striped">
+        <div ng-show="(tracker.issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
+
+        <table class="table table-condensed table-striped" ng-show="(tracker.issues | filter:issue_filter).length > 0">
           <thead>
           <tr>
             <th><a ng-click="change_order_col('bounty_total')">Bounty</a></th>
@@ -70,7 +72,7 @@
               <span ng-show="issue.bounty_total > 0" class="badge badge-success">{{issue.bounty_total | dollars}}</span>
             </td>
             <td class="span7">
-              <a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a>
+              <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">{{issue.title}}</a>
             </td>
             <td>
               <a ng-href="/issues/{{issue.slug}}/comments" class="btn btn-block btn-mini">
