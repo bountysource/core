@@ -12,12 +12,21 @@
     </div>
 
     <div class="well well-small">
-      <h3 ng-show="tracker.bounty_total > 0" class="text-center">{{tracker.bounty_total | dollars}} in bounties</h3>
-      <ul>
-        <li>URL: {{ tracker.url | truncate:20 }}</li>
-        <li>Forks: {{ tracker.forks }}</li>
-        <li>Watchers: {{ tracker.watchers }}</li>
-      </ul>
+      <div class="text-center">
+        <h2 style="margin: 0;" ng-show="tracker.bounty_total > 0" class="text-center">{{tracker.bounty_total | dollars}}</h2>
+        <div>in bounties</div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span6 text-center">
+          <h3 style="margin: 0;">{{tracker.forks | number}}</h3>
+          <div>{{'fork' | pluralize:tracker.forks}}</div>
+        </div>
+        <div class="span6 text-center">
+          <h3 style="margin: 0;">{{tracker.watchers | number}}</h3>
+          <div>{{'watcher' | pluralize:tracker.watchers}}</div>
+        </div>
+      </div>
     </div>
 
     <h3>Tags</h3>
@@ -38,10 +47,6 @@
 
           <input type="number" class="span5" min="0" placeholder="50" ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()" />
           <span>Bounty Min</span>
-
-          <br />
-          <input type="number" class="span5" min="0" placeholder="3000" ng-model="issue_filter_options.bounty_max" ng-change="update_filter_options()" />
-          <span>Bounty Max</span>
 
           <label class="checkbox">
             <input type="checkbox" ng-model="issue_filter_options.only_valuable" />

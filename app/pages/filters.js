@@ -51,6 +51,11 @@ angular.module('app').
       for (var i=0; i<parts.length; i++) { new_parts.push(parts[i][0].toUpperCase() + parts[i].slice(1)); }
       return new_parts.join(" ");
     };
+  }).filter('pluralize', function() {
+    // add 's' to string if num is not 1
+    return function(s,num) {
+      return s + (num !== 1 ? 's' : '');
+    };
   }).filter('solution_status', function() {
     return function(solution) {
       if (!solution) { return ""; }
