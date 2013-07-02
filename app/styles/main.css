@@ -1,4 +1,0 @@
-a{ cursor: pointer; }
-
-/* bug in bootstrap... dropup is black but should be gray unless active */
-.dropup .caret { border-bottom-color: #777; }
