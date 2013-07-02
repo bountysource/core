@@ -9,6 +9,8 @@
           <input type="text" class="search-query" ng-model="search_query" placeholder="Issue URL, Project, Language, etc. ">
         </form>
         <ul class="nav pull-right">
+          <li><a href="/faq/developers">Developers</a></li>
+          <li><a href="/faq/backers">Backers</a></li>
           <li><a href="http://blog.bountysource.com" target="_blank">Blog</a></li>
           <li ng-class="{'dropdown': true, 'dropup': true, 'active': showChatroom}"><a ng-controller="ChatroomController" ng-click="toggleChatroom()">Chatroom <b class="caret"></b></a></li>
           <li class="dropdown" ng-controller="Signin">

@@ -1,59 +1,57 @@
 <div class="homepage">
+  <div class="background"></div>
 
-  <h1>The funding platform for open-source software.</h1>
+  <div class="well">
+    <h1>The funding platform for open-source software.</h1>
 
-  <div class="row-fluid">
-    <div class="span6 well">
-      <h2><span>Developers:</span> Get rewarded for your contributions.</h2>
+    <div class="row-fluid">
+      <div class="span6 home-developers">
+        <h2>Developers</h2>
 
-      <ul class="thumbnails">
-        <li class="span2" ng-repeat="person in recent_people.people.slice(0,6)">
-          <a href="/people/{{person.slug}}" class="thumbnail">
-            <img src="{{person.image_url}}" />
-            <strong>{{person.display_name}}</strong>
-            $5,000
-          </a>
-        </li>
-      </ul>
-      <!--<div style="text-align: center">Top: <b>All Time</b> | <a href="#">This Month</a> | <a href="#">This Week</a> </div>-->
-      <!--<br/>-->
+        <a class="btn btn-success btn-large" href="/faq/developers">Developers &raquo;</a>
 
-      <div class="row-fluid">
-        <div class="span6">
-          <p>Raise money for a future project.</p>
-          <a class="btn btn-large btn-primary btn-block" href="/fundraisers/new">Create Fundraiser</a>
-        </div>
-        <div class="span6">
-          <p>Solve open issues to earn bounties.</p>
-          <a class="btn btn-large btn-primary btn-block">Browse Bounties</a>
-        </div>
+        <ul>
+          <li>Get rewarded for your contributions.</li>
+          <li>Raise money for a future project.</li>
+          <li>Solve open issues to earn bounties.</li>
+        </ul>
+
+        <h3>top | recent</h3>
+        <ul class="top-pics">
+          <li class="span2" ng-repeat="person in recent_people.people.slice(0,6)">
+            <a href="/people/{{person.slug}}">
+              <img src="{{person.image_url}}" />
+              <!--<strong>{{person.display_name}}</strong>-->
+            </a>
+          </li>
+        </ul>
       </div>
 
-    </div>
+      <div class="span6 home-backers">
+        <h2>Backers</h2>
 
-    <div class="span6 well">
-      <h2><span>Backers:</span> Accelerate open-source development.</h2>
-      <ul class="thumbnails">
-        <li class="span2" ng-repeat="person in recent_people.people.slice(0,6)">
-          <a href="/people/{{person.slug}}" class="thumbnail">
-            <img src="{{person.image_url}}" />
-            <strong>{{person.display_name}}</strong>
-            $5,000
-          </a>
-        </li>
-      </ul>
-      <!--<div style="text-align: center">Top: <b>All Time</b> | <a href="#">This Month</a> | <a href="#">This Week</a> </div>-->
-      <!--<br/>-->
+        <a class="btn btn-success btn-large" href="/faq/backers">Backers &raquo;</a>
 
-      <div class="row-fluid">
-        <div class="span6">
-          <p>Incentivize developers to solve issues.</p>
-          <a class="btn btn-large btn-primary btn-block">Create Bounty</a>
-        </div>
-        <div class="span6">
-          <p>Fund the next generation of projects.</p>
-          <a class="btn btn-large btn-primary btn-block">Browse Fundraisers</a>
-        </div>
+        <ul>
+          <li>Accelerate open-source development.</li>
+          <li>Incentivize developers to solve issues.</li>
+          <li>Fund the next generation of projects.</li>
+        </ul>
+
+        <h3>top | recent</h3>
+        <ul class="top-pics">
+          <li class="span2" ng-repeat="person in recent_people.people.slice(0,6)">
+            <a href="/people/{{person.slug}}">
+              <img src="{{person.image_url}}" />
+              <!--<strong>{{person.display_name}}</strong>-->
+              <!--$5,000-->
+            </a>
+          </li>
+        </ul>
+        <!--<div style="text-align: center">Top: <b>All Time</b> | <a href="#">This Month</a> | <a href="#">This Week</a> </div>-->
+        <!--<br/>-->
+
+
       </div>
     </div>
   </div>
@@ -62,7 +60,7 @@
     <div class="span3">
       <h3>Fundraisers</h3>
       <ul class="featured-list">
-        <li ng-repeat="fundraiser in fundraisers">
+        <li ng-repeat="fundraiser in fundraisers.slice(0,6)">
           <div>
             <a href="/fundraisers/{{fundraiser.slug}}"><img src="{{fundraiser.image_url}}" /></a>
             <div class="progress">
@@ -80,7 +78,7 @@
     <div class="span3">
       <h3>Projects</h3>
       <ul class="featured-list">
-        <li ng-repeat="tracker in trackers">
+        <li ng-repeat="tracker in trackers.slice(0,6)">
           <div>
             <a href="/trackers/{{tracker.slug}}">
               <img src="{{tracker.image_url}}" />
@@ -91,12 +89,6 @@
       </ul>
     </div>
 
-    <div class="span3">
-      <h3>Issues</h3>
-      <ul class="featured-list">
-        <li>TODO</li>
-      </ul>
-    </div>
 
     <div class="span3">
       <h3>Testimonials</h3>
@@ -111,6 +103,14 @@
         </li>
       </ul>
     </div>
+
+    <div class="span3">
+      <h3>Twitter</h3>
+      <a class="twitter-timeline" href="https://twitter.com/Bountysource" data-widget-id="350658875873169411">Tweets by @Bountysource</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div>
+
+
   </div>
 </div>
 

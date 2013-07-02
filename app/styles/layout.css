@@ -11,24 +11,27 @@ html, body { height: 100%; margin: 0; padding: 0; }
   /*#main { border-top: 0px; }*/
 /*}*/
 
-footer { text-align: center; color: #888; }
-footer a { padding-left: 12px; }
+/* footer */
+footer {
+  position: relative;
+  margin-top: -206px; /* negative value of footer height */
+  clear:both;
+  padding-top: 30px;
+  color: #888;
+  background-color: #303030;
+  height: 200px;
+  border-top: 6px solid #505050;
+}
+footer ul { margin: 0; list-style: none; }
+#main { border-bottom: 240px solid transparent; }
 
+
+/* space for navbar and footer */
 #wrap {
   min-height: 100%;
 }
-
-/* space for navbar and footer */
 #main {
   overflow:auto;
   border-top: 70px solid transparent;
-  border-bottom: 70px solid transparent;
 }
 
-.footer {
-  position: relative;
-  margin-top: -70px; /* negative value of footer height */
-  height: 40px;
-  clear:both;
-  padding-top: 30px;
-}
