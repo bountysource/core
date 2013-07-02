@@ -156,6 +156,14 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+id+"/overview");
     };
 
+    this.tracker_follow = function(id, callback) {
+      return this.call("/follows", "PUT", { item_id: id, item_type: "tracker" });
+    };
+
+    this.tracker_unfollow = function(id, callback) {
+      return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
+    };
+
     this.issue_get = function(id, callback) {
       return this.call("/issues/"+id, callback);
     };
@@ -195,7 +203,6 @@ angular.module('api.bountysource',[]).
     this.solution_submit = function(id, callback) {
       return this.call("/user/solutions/"+id+"/submit", "POST", callback);
     };
-
 
     this.solution_payout = function(id, form_data, callback) {
       return this.call("/user/solutions/"+id+"/payout", "POST", form_data, callback);

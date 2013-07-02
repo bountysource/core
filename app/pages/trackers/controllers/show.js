@@ -10,10 +10,6 @@ angular.module('app')
   })
   .controller('TrackerShow', function ($scope, $routeParams, $api) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
-      console.log(tracker);
-
-      $scope.tracker = tracker;
-
       // merge all of the issue arrays into one
       tracker.issues = [];
       for (var i in tracker.issues_valuable) { tracker.issues.push(tracker.issues_valuable[i]); }
@@ -22,6 +18,23 @@ angular.module('app')
 
       // turn all of the bounty totals into floats. dunno why that isn't the case.
       for (var i in tracker.issues) { tracker.issues[i].bounty_total = parseFloat(tracker.issues[i].bounty_total); }
+
+      // follow and unfollow API method wrappers
+      tracker.follow = function() {
+        if (tracker.followed) {
+          $api.tracker_unfollow($scope.tracker.id).then(function() {
+            // assume API call success, update the button state (tracker.followed)
+            tracker.followed = false;
+          });
+        } else {
+          $api.tracker_follow($scope.tracker.id).then(function() {
+            // assume API call success, update the button state (tracker.followed)
+            tracker.followed = true;
+          });
+        }
+      };
+
+      $scope.tracker = tracker;
     });
 
     $scope.issue_filter_options = {
@@ -33,7 +46,6 @@ angular.module('app')
 
     $scope.update_filter_options = function() {
       $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
-      $scope.issue_filter_options.bounty_max = parseFloat($scope.issue_filter_options.bounty_max);
     };
 
     $scope.issue_filter = function(issue) {
