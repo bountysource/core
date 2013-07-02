@@ -8,6 +8,8 @@
   <div class="span9">
     <div ng-include="'pages/issues/partials/header.html'"></div>
     <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+
+    <img ng-show="issue.author_image_url" ng-src="{{issue.author_image_url}}" class="pull-left thumbnail" style="margin: 0 10px 10px 0; width: 100px; height: 100px;" tooltip="{{issue.author_name}}" tooltip-placement="bottom" />
     <div ng-bind-html="issue.body_html"></div>
   </div>
 
