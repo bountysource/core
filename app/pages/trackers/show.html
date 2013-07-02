@@ -83,15 +83,10 @@
             <td class="span7">
               <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">{{issue.title}}</a>
             </td>
-            <td>
-              <a ng-href="/issues/{{issue.slug}}/comments" class="btn btn-block btn-mini">
-                <i class="icon-comment"></i>
+            <td class="text-center">
+              <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">
+                <i class="icon-comment icon-white"></i>
                 {{issue.comment_count | number}}
-              </a>
-            </td>
-            <td class="span1">
-              <a ng-href="{{issue.url}}" class="btn btn-block btn-mini" target="blank" tooltip="View Issue" tooltip-placement="top">
-                <i class="icon-globe"></i>
               </a>
             </td>
           </tr>
