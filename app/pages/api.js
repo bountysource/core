@@ -168,6 +168,10 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+id, callback);
     };
 
+    this.issue_create = function(data, callback) {
+      return this.call("/issues", "POST", data, callback);
+    };
+
     this.bounty_activity = function() {
       return this.call('/user/bounties');
     };

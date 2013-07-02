@@ -12,7 +12,6 @@ angular.module('app')
   .controller('NavbarSearchController', function ($scope, $location) {
     $scope.search_query = null;
     $scope.submit_search = function() {
-      console.log('search submit!');
       if ($scope.search_query && $scope.search_query.length > 0) {
         $location.path("/search").search({ query: $scope.search_query });
       }

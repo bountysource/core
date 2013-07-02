@@ -1,0 +1,53 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a>Add Issue by URL</a></li>
+</ul>
+
+<div ng-show="error">
+  <alert type="'error'" close="error = null">{{error}}</alert>
+</div>
+
+<form class="form-horizontal" name="form">
+  <div class="control-group">
+    <label class="control-label" for="issue_url">Issue URL</label>
+    <div class="controls">
+      <input type="url" id="issue_url" ng-model="new_issue.issue_url" class="span8" placeholder="https://trac.someproject.com/ticket/123" required />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="title">Issue Title</label>
+    <div class="controls">
+      <input type="text" id="title" ng-model="new_issue.title" class="span8" placeholder="Title of the issue" required />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="number">Issue Number</label>
+    <div class="controls">
+      <input type="text" id="number" ng-model="new_issue.number" class="span2" placeholder="Issue number" />
+    </div>
+  </div>
+
+  <br />
+
+  <div class="control-group">
+    <label class="control-label" for="project_name">Project Name</label>
+    <div class="controls">
+      <input type="text" id="project_name" ng-model="new_issue.project_name" class="span8" placeholder="Name of the project" required />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="project_url">Project Tracker URL</label>
+    <div class="controls">
+      <input type="text" id="project_url" ng-model="new_issue.project_url" class="span8" placeholder="https://trac.someproject.com/" required />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button class="btn btn-large btn-primary" ng-disabled="form.$invalid" ng-click="create_issue()">Add Issue</button>
+    </div>
+  </div>
+</form>
