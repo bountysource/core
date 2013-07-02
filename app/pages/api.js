@@ -222,7 +222,9 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/disputes/"+dispute_number+"/close", "POST", callback);
     };
 
-
+    this.search = function(query) {
+      return this.call("/search", "POST", { query: query });
+    };
 
 
 

@@ -1,0 +1,51 @@
+<div class="row-fluid">
+  <div class="span3">
+    <h2>Search Results</h2>
+    <div class="well">
+      Ultimate Nav Thing
+    </div>
+  </div>
+  <div class="span9">
+    <div ng-show="search_pending" class="text-center">
+      <p class="lead">Performing search...</p>
+      <progress value="100" class="progress-striped active"></progress>
+    </div>
+
+    <div ng-hide="search_pending">
+      <div class="row-fluid">
+        <div class="span6">
+          <div ng-show="results.trackers.length == 0" class="alert alert-info">No projects found</div>
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>Projects <span class="label label-info">{{results.trackers.length | number}}</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="tracker in results.trackers | orderBy:'-bounty_total'">
+              <td><a ng-href="/trackers/{{tracker.slug}}">{{tracker.name}}</a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="span6">
+          <div ng-show="results.issues.length == 0" class="alert alert-info">No issues found</div>
+
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>Issues <span class="label label-info">{{results.issues.length | number}}</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="issue in results.issues | orderBy:'-bounty_total'">
+              <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
