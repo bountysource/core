@@ -3,7 +3,7 @@
 angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/privacy-policy', {
+      .when('/privacy', {
         templateUrl: 'pages/about/privacy_policy.html',
         controller: 'Static'
       });
