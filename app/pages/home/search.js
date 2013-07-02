@@ -30,7 +30,9 @@ angular.module('app')
         if (response.redirect_to) {
           // LEGACY replace the '#' with '/'
           var url = response.redirect_to;
-          if (url[0] === '#') url = '/' + url.slice(1);
+          if (url[0] === '#') {
+            url = '/' + url.slice(1);
+          }
           $location.path(url).replace();
         } else if (response.create_issue) {
           // oh no, nothing was found! redirect to page to create issue for arbitrary URL
@@ -59,5 +61,5 @@ angular.module('app')
       // if it is neither an issue nor a project, just show it
       // (though that won't happen with the current API response)
       return true;
-    }
+    };
   });

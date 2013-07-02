@@ -32,7 +32,9 @@ angular.module('app').
     return function(s, size, replacement) {
       size = size || 50;
       replacement = replacement || "...";
-      if (!s || s.length <= (size + replacement.length)) return s;
+      if (!s || s.length <= (size + replacement.length)) {
+        return s;
+      }
       return s.slice(0,size+replacement.length) + replacement;
     };
   }).filter('from_snake_case', function() {

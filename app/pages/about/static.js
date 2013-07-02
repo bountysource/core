@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('Static', function ($scope, $api) {
+  .controller('Static', function () {
     // does absolutely nothing... inherit this for static pages!!
+    return true;
   });

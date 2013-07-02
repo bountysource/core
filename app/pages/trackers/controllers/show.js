@@ -13,11 +13,11 @@ angular.module('app')
       // merge all of the issue arrays into one
       tracker.issues = [];
       for (var i in tracker.issues_valuable) { tracker.issues.push(tracker.issues_valuable[i]); }
-      for (var i in tracker.issues_popular) { tracker.issues.push(tracker.issues_popular[i]); }
-      for (var i in tracker.issues_newest) { tracker.issues.push(tracker.issues_newest[i]); }
+      for (i in tracker.issues_popular) { tracker.issues.push(tracker.issues_popular[i]); }
+      for (i in tracker.issues_newest) { tracker.issues.push(tracker.issues_newest[i]); }
 
       // turn all of the bounty totals into floats. dunno why that isn't the case.
-      for (var i in tracker.issues) { tracker.issues[i].bounty_total = parseFloat(tracker.issues[i].bounty_total); }
+      for (i in tracker.issues) { tracker.issues[i].bounty_total = parseFloat(tracker.issues[i].bounty_total); }
 
       // follow and unfollow API method wrappers
       tracker.follow = function() {
@@ -52,9 +52,15 @@ angular.module('app')
       var bounty_total = parseFloat(issue.bounty_total);
       var bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
 
-      if (!isNaN(bounty_min) && bounty_total < bounty_min) return false;
-      if ($scope.issue_filter_options.only_valuable && bounty_total <= 0) return false;
-      if (!$scope.issue_filter_options.show_closed) return issue.can_add_bounty;
+      if (!isNaN(bounty_min) && bounty_total < bounty_min) {
+        return false;
+      }
+      if ($scope.issue_filter_options.only_valuable && bounty_total <= 0) {
+        return false;
+      }
+      if (!$scope.issue_filter_options.show_closed) {
+        return issue.can_add_bounty;
+      }
 
       if ($scope.issue_filter_options.text) {
         var regexp = new RegExp(".*?"+$scope.issue_filter_options.text+".*?", "i");

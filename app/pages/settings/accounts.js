@@ -9,7 +9,7 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('AccountSettings', function($scope, $api) {
+  .controller('AccountSettings', function($scope, $api, $location) {
     $scope.set_post_auth_url = function() {
       $api.set_post_auth_url($location.url());
     };
@@ -34,7 +34,7 @@ angular.module('app')
           $scope.success = 'Successfully updated password!';
         }
       });
-    }
+    };
 
   });
 

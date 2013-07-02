@@ -156,11 +156,11 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+id+"/overview");
     };
 
-    this.tracker_follow = function(id, callback) {
+    this.tracker_follow = function(id) {
       return this.call("/follows", "PUT", { item_id: id, item_type: "tracker" });
     };
 
-    this.tracker_unfollow = function(id, callback) {
+    this.tracker_unfollow = function(id) {
       return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
     };
 
