@@ -24,13 +24,23 @@ angular.module('app')
     $scope.search_pending = true;
 
     if ($routeParams.query) {
-      $api.search($routeParams.query).then(function(results) {
+      $api.search($routeParams.query).then(function(response) {
         $scope.search_pending = false;
-        $scope.results = results;
 
-
-
-        console.log(results);
+        // did we recognize this as a URL? Redirect to the appropriate issue or project page.
+        if (response.redirect_to) {
+          // LEGACY replace the '#' with '/'
+          var url = response.redirect_to;
+          if (url[0] === '#') url = '/' + url.slice(1);
+          $location.path(url).replace();
+        } else if (response.create_issue) {
+          // oh no, nothing was found! redirect to page to create issue for arbitrary URL
+          $location.path("/issues/new").search({ url: $scope.search_query }).replace();
+        } else {
+          // just render normal search results, returned by the API as
+          // response.trackers and response.issues
+          $scope.results = response;
+        }
       });
     }
 
