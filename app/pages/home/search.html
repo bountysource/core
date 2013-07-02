@@ -1,17 +1,30 @@
-<div class="row-fluid">
+<h2>Search</h2>
+<hr />
+
+<div class="text-center" collapse="!search_pending">
+  <p class="lead">Searching for '{{search_query}}'...</p>
+  <progress value="100" class="progress-striped active"></progress>
+</div>
+
+<div class="row-fluid" collapse="search_pending">
   <div class="span3">
-    <h2>Search Results</h2>
-    <div class="well">
-      Ultimate Nav Thing
+    <div collapse="search_pending">
+      <div class="well">
+        <input style="margin: 0;" type="text" class="span12" ng-model="search_filter" placeholder="Filter search results..." />
+      </div>
+    </div>
+
+    <div collapse="search_pending">
+      <div class="well text-center">
+        <div><strong>Don't see what you're looking for?</strong></div>
+        <br />
+        <button class="btn btn-block">Add a Project</button>
+        <button class="btn btn-block">Add an Issue</button>
+      </div>
     </div>
   </div>
   <div class="span9">
-    <div ng-show="search_pending" class="text-center">
-      <p class="lead">Performing search...</p>
-      <progress value="100" class="progress-striped active"></progress>
-    </div>
-
-    <div ng-hide="search_pending">
+    <div>
       <div class="row-fluid">
         <div class="span6">
           <div ng-show="results.trackers.length == 0" class="alert alert-info">No projects found</div>
@@ -22,7 +35,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="tracker in results.trackers | orderBy:'-bounty_total'">
+            <tr ng-repeat="tracker in results.trackers | filter:filter_search_results | orderBy:'-bounty_total'">
               <td><a ng-href="/trackers/{{tracker.slug}}">{{tracker.name}}</a></td>
             </tr>
             </tbody>
@@ -39,7 +52,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="issue in results.issues | orderBy:'-bounty_total'">
+            <tr ng-repeat="issue in results.issues | filter:filter_search_results | orderBy:'-bounty_total'">
               <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
             </tr>
             </tbody>
