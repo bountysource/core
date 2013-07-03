@@ -66,10 +66,7 @@
             <div class="progress">
               <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:10 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
             </div>
-            <h4><a href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.title}}</a></h4>
-
-
-            <!--<div>{{ fundraiser.total_pledged | currency }} of {{ fundraiser.funding_goal | currency:'$':0 }}</div>-->
+            <a href="/fundraisers/{{fundraiser.slug}}"><strong>{{fundraiser.title}}</strong></a>
           </div>
         </li>
       </ul>
@@ -80,9 +77,12 @@
       <ul class="featured-list">
         <li ng-repeat="tracker in trackers.slice(0,6)">
           <div>
-            <a href="/trackers/{{tracker.slug}}">
+            <a href="/trackers/{{tracker.slug}}" style="text-decoration: none;">
               <img src="{{tracker.image_url}}" />
-              <h4>{{tracker.name}} ($500)</h4>
+              <strong>
+                {{tracker.name}}
+                <div ng-show="tracker.bounty_total > 0" class="label label-success">{{tracker.bounty_total | dollars}}</div>
+              </strong>
             </a>
           </div>
         </li>
