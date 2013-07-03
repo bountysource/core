@@ -216,7 +216,6 @@ angular.module('api.bountysource',[]).
       return this.call("/user/solutions/"+id+"/payout", "POST", form_data, callback);
     };
 
-
     this.dispute_create = function(issue_id, solution_id, data, callback) {
       // BountySource.api('/issues/' + solution.issue.id + '/solutions/' + solution.id + '/disputes', 'POST', form_data, function(response) {
       return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/disputes", "POST", data, callback);
@@ -246,6 +245,9 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+tracker_id+"/tracker_plugin", "PUT", data);
     };
 
+    this.approve_connect = function(provider, data) {
+      return this.call("/auth/"+provider+"/approve_connect", "POST", data);
+    };
 
 
     // these should probably go in an "AuthenticationController" or something more angular
