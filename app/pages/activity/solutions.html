@@ -15,8 +15,8 @@
   </tr>
 
   <tr ng-repeat="solution in solutions">
-    <td><a href="/trackers/{{solution.issue.tracker.slug}}">{{ solution.issue.tracker.name }}</a></td>
-    <td><a href="/issues/{{solution.issue.slug}}">{{ solution.issue.title }}</a></td>
+    <td><a ng-href="/trackers/{{solution.issue.tracker.slug}}">{{ solution.issue.tracker.name }}</a></td>
+    <td><a ng-href="/issues/{{solution.issue.slug}}">{{ solution.issue.title }}</a></td>
     <td></td>
     <td>{{ solution.created_at | date }}</td>
   </tr>

@@ -54,7 +54,7 @@ angular.module('api.bountysource',[]).
         // TODO proper Models
         if (res.meta.success) {
           res.data.funding_percentage = Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100);
-          res.data.can_manage = $rootScope.current_person && (res.data.person.admin || res.data.person.id === $rootScope.current_person.id);
+          res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
         }
         return res.data;
       });

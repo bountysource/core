@@ -12,7 +12,6 @@ angular.module('app')
     $scope.person = $api.person_get($routeParams.id);
 
     $scope.timeline = $api.person_timeline_get($routeParams.id).then(function(response) {
-      console.log(response);
       return response;
     });
   });
