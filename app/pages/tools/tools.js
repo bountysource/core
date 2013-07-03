@@ -26,9 +26,6 @@ angular.module('app')
         $scope.selected_relation = relation;
         if (!$scope.hide_info) $scope.hide_info = true;
 
-        // add model representing the plugin
-        relation.$tracker_plugin = {};
-
         // add flag set when waiting for plugin to be installed
         relation.$installing_plugin = false;
 
