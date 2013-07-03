@@ -1,0 +1,143 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/tools">Tools</a></li>
+</ul>
+
+<h1>Tools</h1>
+<hr />
+
+<div collapse="relations" class="text-center">
+  <p class="lead">Loading tools...</p>
+  <progress value="100" class="progress-striped active"></progress>
+</div>
+
+<div class="row-fluid" collapse="!relations">
+  <div class="span4">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>
+          Projects <span class="badge badge-info">{{(relations | filter:relations_filter).length | number}}</span>
+          <small ng-show="(relations | filter:relations_filter).length != relations.length" class="muted">of {{relations.length | number}}</small>
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <!--Filter options-->
+      <tr>
+        <div class="well">
+          <input style="margin: 0;" type="text" class="span12" placeholder="Search projects..." ng-model="filter_options.text" />
+        </div>
+      </tr>
+
+      <!--Not found message-->
+      <tr ng-show="(relations | filter:relations_filter).length <= 0" class="info">
+        <td class="text-info"><i>No projects found :(</i></td>
+      </tr>
+
+      <!--Projects!-->
+      <tr ng-repeat="relation in relations | orderBy:relations_order:true | filter:relations_filter">
+        <td>
+          <button ng-click="relation.select()" class="btn btn-link">{{relation.project.name}}</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="span8">
+    <!--Show error or success messages-->
+    <div ng-show="tracker_plugin_alert">
+      <alert type="tracker_plugin_alert.type" close="tracker_plugin_alert=null">{{tracker_plugin_alert.message}}</alert>
+    </div>
+
+    <!--Info explaining the plugin. Only shown until you click a project-->
+    <div collapse="hide_info || selected_relation">
+      <div class="hero-unit">
+        <p class="lead">You can enable or disable services that allow Bountysource to automatically do a few things whenever a bounty is posted or updated</p>
+        <ul>
+          <li>add or update bounty total in issue titles</li>
+          <li>add a Bountysource label to GitHub issues with bounties</li>
+          <li>add a link to the bounty at the bottom of the issue body</li>
+        </ul>
+
+        <p class="lead">Here is an example of what your issues will look like on GitHub:</p>
+        <p>Bounty total in issue title:</p>
+        <img class="thumbnail" src="images/github-plugin-example.png" />
+        <br />
+        <p>Bounty link in issue body:</p>
+        <img class="thumbnail" src="images/github-plugin-example2.png" />
+      </div>
+    </div>
+
+    <div collapse="!selected_relation">
+      <div collapse="selected_relation.project.tracker_relation">
+        <div class="well well-large">
+          <!--Installing spinner action-->
+          <div collapse="!selected_relation.$installing_plugin" class="text-center">
+            <p class="lead">Installing GitHub Plugin...</p>
+            <progress value="100" class="progress-striped active"></progress>
+          </div>
+
+          <div collapse="selected_relation.$installing_plugin">
+            <!--Manage plugin form-->
+            <div ng-show="selected_relation.project.tracker_plugin">
+
+              <div>{{relation.project.tracker_plugin}}</div>
+
+              <h3>Manage {{selected_relation.project.name}}</h3>
+              <form class="form-horizontal">
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="selected_relation.project.tracker_plugin.add_bounty_to_title" />
+                  Add bounty total to issue title
+                </label>
+
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="selected_relation.project.tracker_plugin.add_label" />
+                  Add label to issues with bounties
+                </label>
+
+                <div style="margin-left: 20px;">
+                  <form class="form-horizontal">
+                    <div class="control-group">
+                      <label class="control-label">Label Name</label>
+                      <div class="controls">
+                        <input class="inline" type="text" placeholder="bounty" ng-model="selected_relation.project.tracker_plugin.label_name" ng-disabled="!selected_relation.project.tracker_plugin.add_label" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="selected_relation.project.tracker_plugin.add_link_to_description" />
+                  Include link to active bounties on issues
+                </label>
+
+                <label class="checkbox" style="margin-left: 20px;">
+                  <input type="checkbox" ng-model="selected_relation.project.tracker_plugin.add_link_to_all_issues" ng-disabled="!selected_relation.project.tracker_plugin.add_link_to_description" />
+                  Include "create bounty" link on open issues without bounties
+                </label>
+
+                <br />
+
+                <button class="btn btn-primary" ng-click="selected_relation.project.tracker_plugin.update()" ng-disabled="selected_relation.project.tracker_plugin.is_changed()">Save</button>
+                <button class="btn" ng-click="selected_relation.project.tracker_plugin.reset()" ng-disabled="selected_relation.project.tracker_plugin.is_changed()">Reset</button>
+                <button class="btn" ng-click="selected_relation.project.tracker_plugin.close()">Close</button>
+              </form>
+            </div>
+
+            <!--Install plugin prompt-->
+            <div ng-hide="selected_relation.project.tracker_plugin">
+              <h2>{{selected_relation.project.name}}</h2>
+              <p>Start managing this project</p>
+              <button class="btn btn-large btn-primary" ng-click="selected_relation.install_plugin()">
+                <i class="icon-flag icon-white"></i>
+                Install GitHub Plugin
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
