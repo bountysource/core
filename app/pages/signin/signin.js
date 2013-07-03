@@ -80,7 +80,7 @@ angular.module('app')
           if (response.error) {
             $scope.error = response.error;
           }
-          console.log(response);
+          //console.log(response);
         });
       }
     };

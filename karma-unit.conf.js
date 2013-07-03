@@ -8,11 +8,8 @@ files = [
   JASMINE,
   JASMINE_ADAPTER,
   'app/components/angular/angular.js',
-  'app/components/angular-mocks/angular-mocks.js',
+  'app/components/angular-*/angular-*.js',
   'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
-  'app/components/angular-resource/angular-resource.js',
-  'app/components/angular-cookies/angular-cookies.js',
-  'app/components/angular-sanitize/angular-sanitize.js',
   'app/pages/app.js',
   'app/pages/**/*.js',
   'test/mock/**/*.js',
@@ -20,11 +17,11 @@ files = [
 ];
 
 // list of files to exclude
-exclude = [];
+exclude = ['app/components/angular-scenario/angular-scenario.js'];
 
 // test results reporter to use
 // possible values: dots || progress || growl
-reporters = ['progress'];
+reporters = ['dots'];
 
 // web server port
 port = 8080;
@@ -50,7 +47,6 @@ autoWatch = false;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-//browsers = ['Chrome'];
 browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it
@@ -58,4 +54,4 @@ captureTimeout = 5000;
 
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
-singleRun = false;
+singleRun = true;

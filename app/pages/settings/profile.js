@@ -2,7 +2,7 @@
 
 angular.module('app')
   .config(function ($routeProvider, $person) {
-    console.log($person);
+    //console.log($person);
     $routeProvider
       .when('/settings', {
         templateUrl: 'pages/settings/profile.html',

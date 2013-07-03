@@ -7,21 +7,22 @@ basePath = '';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
-  'test/e2e/**/*.js'
+  'test/e2e/*.js'
 ];
+frameworks = ["ng-scenario"];
 
 // list of files to exclude
 exclude = [];
 
 // test results reporter to use
 // possible values: dots || progress || growl
-reporters = ['progress'];
+reporters = ['dots'];
 
 // web server port
-port = 8080;
+port = 8081;
 
 // cli runner port
-runnerPort = 9100;
+runnerPort = 9101;
 
 // enable / disable colors in the output (reporters and logs)
 colors = true;
@@ -33,6 +34,11 @@ logLevel = LOG_INFO;
 // enable / disable watching file and executing tests whenever any file changes
 autoWatch = false;
 
+proxies = {
+	'/': 'http://localhost:9000/'
+};
+urlRoot = "/_karma_/";
+
 // Start these browsers, currently available:
 // - Chrome
 // - ChromeCanary
@@ -41,11 +47,13 @@ autoWatch = false;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
+
+//browsers = ['Firefox', 'Safari', 'Chrome'];
 browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 5000;
 
 // Continuous Integration mode
+singleRun = true;
 // if true, it capture browsers, run tests and exit
-singleRun = false;

@@ -13,18 +13,18 @@ module.exports = function (grunt) {
       options: {
         livereload: true
       },
-      coffee: {
-        files: ['app/pages/**/*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/**/*.coffee'],
-        tasks: ['coffee:test']
-      },
-      compass: {
-        files: ['app/styles/**/*.{scss,sass}'],
-        tasks: ['compass']
-      },
+//      coffee: {
+//        files: ['app/pages/**/*.coffee'],
+//        tasks: ['coffee:dist']
+//      },
+//      coffeeTest: {
+//        files: ['test/spec/**/*.coffee'],
+//        tasks: ['coffee:test']
+//      },
+//      compass: {
+//        files: ['app/styles/**/*.{scss,sass}'],
+//        tasks: ['compass']
+//      },
       jshint: {
         files: ['gruntfile.js', 'app/pages/**/*.js', 'test/**/*.js'],
         tasks: ['jshint']
@@ -44,12 +44,9 @@ module.exports = function (grunt) {
       }
     },
     connect: {
-      options: {
-        port: 9000,
-        hostname: 'localhost'  // change to 0.0.0.0 for outside access
-      },
-      pushstate: {
+      app: {
         options: {
+          port: 9000,
           middleware: function (connect) {
             return [
               modRewrite(['!\\.html|/images|\\.ico|\\.js|\\.css|\\swf$ /index.html']),
@@ -59,20 +56,27 @@ module.exports = function (grunt) {
           }
         }
       },
-      test: {
+      e2e: {
         options: {
+          port: 9001,
+          keepalive: true,
           middleware: function (connect) {
             return [
+              modRewrite(['!\\.html|/images|\\.ico|\\.js|\\.css|\\swf$ /index.html']),
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
+              mountFolder(connect, 'app'),
+              mountFolder(connect, 'test/e2e')
             ];
           }
         }
       }
     },
     open: {
-      server: {
-        url: 'http://localhost:<%= connect.options.port %>'
+      app: {
+        url: 'http://localhost:<%= connect.app.options.port %>'
+      },
+      e2e: {
+        url: 'http://localhost:<%= connect.e2e.options.port %>/test.html'
       }
     },
     clean: {
@@ -103,47 +107,49 @@ module.exports = function (grunt) {
     },
     karma: {
       unit: {
-        configFile: 'karma.conf.js',
-        singleRun: true
-      }
-    },
-    coffee: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: 'app/pages',
-          src: '**/*.coffee',
-          dest: '.tmp/pages',
-          ext: '.js'
-        }]
+        configFile: 'karma-unit.conf.js'
       },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '**/*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
+      e2e: {
+        configFile: 'karma-e2e.conf.js'
       }
     },
-    compass: {
-      options: {
-        sassDir: 'app/styles',
-        cssDir: '.tmp/styles',
-        imagesDir: 'app/images',
-        javascriptsDir: 'app/pages',
-        fontsDir: 'app/styles/fonts',
-        importPath: 'app/components',
-        relativeAssets: true
-      },
-      dist: {},
-      server: {
-        options: {
-          debugInfo: true
-        }
-      }
-    },
+//    coffee: {
+//      dist: {
+//        files: [{
+//          expand: true,
+//          cwd: 'app/pages',
+//          src: '**/*.coffee',
+//          dest: '.tmp/pages',
+//          ext: '.js'
+//        }]
+//      },
+//      test: {
+//        files: [{
+//          expand: true,
+//          cwd: 'test/spec',
+//          src: '**/*.coffee',
+//          dest: '.tmp/spec',
+//          ext: '.js'
+//        }]
+//      }
+//    },
+//    compass: {
+//      options: {
+//        sassDir: 'app/styles',
+//        cssDir: '.tmp/styles',
+//        imagesDir: 'app/images',
+//        javascriptsDir: 'app/pages',
+//        fontsDir: 'app/styles/fonts',
+//        importPath: 'app/components',
+//        relativeAssets: true
+//      },
+//      dist: {},
+//      server: {
+//        options: {
+//          debugInfo: true
+//        }
+//      }
+//    },
     concat: {
       dist: {
         files: {
@@ -270,32 +276,62 @@ module.exports = function (grunt) {
     }
   });
 
+
+//    'coffee:dist',
+//    'compass:server',
+//    'coffee',
+//    'compass',
+//    'coffee',
+//    'compass',
+//    'coffee',
+//    'compass',
+//    'coffee',
+//    'compass:dist',
+//    'connect:test',
+
+
+//  grunt.registerTask('test-unit', [
+//    'clean:server',
+//    'connect:test',
+//    'jshint',
+//    'karma'
+//  ]);
+//  grunt.registerTask('test-e2e', [
+//    'clean:server',
+//    'connect:e2e',
+//    'karma:e2e'
+//  ]);
+/////////////////////////////////////
+
+
+
   grunt.registerTask('server', [
     'clean:server',
-    'coffee:dist',
     'html_src',
-    'compass:server',
-    'connect:pushstate',
-    'open',
+    'connect:app',
+    'open:app',
     'watch'
   ]);
 
   grunt.registerTask('test', [
+    'html_src',
     'clean:server',
-    'coffee',
-    'compass',
-    'connect:test',
     'jshint',
+    'connect:app',
     'karma'
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'jshint',
-    'test',
-    'coffee',
+  grunt.registerTask('e2e', [
     'html_src',
-    'compass:dist',
+    'clean:server',
+    'jshint',
+    'open:e2e',
+    'connect:e2e'
+  ]);
+
+  grunt.registerTask('build', [
+    'test',
+    'clean:dist',
     'useminPrepare',
     'imagemin',
     'cssmin',
