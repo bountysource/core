@@ -105,14 +105,15 @@ angular.module('app')
     };
 
     $scope.relations_filter = function(relation) {
+      var filter_it = false;
       if ($scope.filter_options.text) {
         var regexp = new RegExp(".*?"+$scope.filter_options.text+".*?", "i");
-        return regexp.test(relation.project.name) || regexp.test(relation.project.full_name) ;
+        filter_it = filter_it || !(regexp.test(relation.project.name) || regexp.test(relation.project.full_name));
       }
       if ($scope.filter_options.only_with_plugin) {
-        return !!relation.project.tracker_plugin;
+        filter_it = filter_it || !relation.project.tracker_plugin;
       }
-      return true;
+      return !filter_it;
     };
   });
 
