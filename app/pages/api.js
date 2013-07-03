@@ -122,6 +122,10 @@ angular.module('api.bountysource',[]).
       return this.call("/user/recent");
     };
 
+    this.people_interesting = function() {
+      return this.call("/user/interesting");
+    };
+
     this.person_get = function(id) {
       return this.call("/users/"+id);
     };

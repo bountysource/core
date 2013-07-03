@@ -18,7 +18,7 @@
 
         <h3>top | recent</h3>
         <ul class="top-pics">
-          <li class="span2" ng-repeat="person in recent_people.people.slice(0,6)">
+          <li class="span2" ng-repeat="person in people.developers.top.slice(0,6)">
             <a href="/people/{{person.slug}}">
               <img src="{{person.image_url}}" />
               <!--<strong>{{person.display_name}}</strong>-->
@@ -40,7 +40,7 @@
 
         <h3>top | recent</h3>
         <ul class="top-pics">
-          <li class="span2" ng-repeat="person in recent_people.people.slice(0,6)">
+          <li class="span2" ng-repeat="person in people.backers.top.slice(0,6)">
             <a href="/people/{{person.slug}}">
               <img src="{{person.image_url}}" />
               <!--<strong>{{person.display_name}}</strong>-->
