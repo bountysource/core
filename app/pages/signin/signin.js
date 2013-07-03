@@ -72,15 +72,9 @@ angular.module('app')
         $scope.show_validations = true;
         $scope.error = null;
         $api.signin($scope.form_data).then(function(response) {
-          if (response.email_is_registered) {
-            $scope.signin_or_signup = 'signin';
-          } else {
-            $scope.signin_or_signup = 'signup';
-          }
           if (response.error) {
             $scope.error = response.error;
           }
-          //console.log(response);
         });
       }
     };
