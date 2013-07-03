@@ -51,19 +51,6 @@ module.exports = function (grunt) {
             return [
               modRewrite(['!\\.html|/images|\\.ico|\\.js|\\.css|\\swf$ /index.html']),
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'app')
-            ];
-          }
-        }
-      },
-      e2e: {
-        options: {
-          port: 9001,
-          keepalive: true,
-          middleware: function (connect) {
-            return [
-              modRewrite(['!\\.html|/images|\\.ico|\\.js|\\.css|\\swf$ /index.html']),
-              mountFolder(connect, '.tmp'),
               mountFolder(connect, 'app'),
               mountFolder(connect, 'test/e2e')
             ];
@@ -76,7 +63,7 @@ module.exports = function (grunt) {
         url: 'http://localhost:<%= connect.app.options.port %>'
       },
       e2e: {
-        url: 'http://localhost:<%= connect.e2e.options.port %>/test.html'
+        url: 'http://localhost:<%= connect.app.options.port %>/test.html'
       }
     },
     clean: {
@@ -94,9 +81,7 @@ module.exports = function (grunt) {
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc',
-        camelcase: false,
-        quotmark: false
+        jshintrc: '.jshintrc'
       },
 
       all: [
@@ -325,8 +310,9 @@ module.exports = function (grunt) {
     'html_src',
     'clean:server',
     'jshint',
+    'connect:app',
     'open:e2e',
-    'connect:e2e'
+    'watch'
   ]);
 
   grunt.registerTask('build', [
