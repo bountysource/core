@@ -27,7 +27,12 @@
       <!--Filter options-->
       <tr>
         <div class="well">
-          <input style="margin: 0;" type="text" class="span12" placeholder="Search projects..." ng-model="filter_options.text" />
+          <input type="text" class="span12" placeholder="Search projects..." ng-model="filter_options.text" />
+          <br />
+          <label class="checkbox">
+            <input type="checkbox" ng-model="filter_options.only_with_plugin" />
+            Hide projects without GitHub plugin
+          </label>
         </div>
       </tr>
 
@@ -37,9 +42,10 @@
       </tr>
 
       <!--Projects!-->
-      <tr ng-repeat="relation in relations | orderBy:relations_order:true | filter:relations_filter">
+      <tr ng-repeat="relation in relations | orderBy:relations_order:true | filter:relations_filter" ng-class="{ info: (selected_relation.id == relation.id) }">
         <td>
           <button ng-click="relation.select()" class="btn btn-link">{{relation.project.name}}</button>
+          <div ng-show="relation.project.tracker_plugin" class="pull-right badge badge-info">Plugin Installed</div>
         </td>
       </tr>
       </tbody>
@@ -129,7 +135,7 @@
             <!--Install plugin prompt-->
             <div ng-hide="selected_relation.project.tracker_plugin">
               <h2>{{selected_relation.project.name}}</h2>
-              <p>Start managing this project</p>
+              <p class="lead">Automatically display bounty information on GitHub issues. Install the GitHub plugin to get started!</p>
               <button class="btn btn-large btn-primary" ng-click="selected_relation.install_plugin()">
                 <i class="icon-flag icon-white"></i>
                 Install GitHub Plugin
