@@ -6,15 +6,10 @@
 <h1>Tools</h1>
 <hr />
 
-<div collapse="relations" class="text-center">
-  <p class="lead">Loading tools...</p>
-  <progress value="100" class="progress-striped active"></progress>
-</div>
-
-<div class="row-fluid" collapse="!relations">
+<div class="row-fluid">
   <div class="span4">
     <table class="table table-striped">
-      <thead>
+      <thead ng-show="relations">
       <tr>
         <th>
           Projects <span class="badge badge-info">{{(relations | filter:relations_filter).length | number}}</span>
@@ -41,8 +36,16 @@
         <td class="text-info"><i>No projects found :(</i></td>
       </tr>
 
+      <!--Loading projects-->
+      <tr ng-hide="relations">
+        <td class="text-center">
+          <p class="lead">Loading Projects....</p>
+          <progress value="100" class="progress-striped active"></progress>
+        </td>
+      </tr>
+
       <!--Projects!-->
-      <tr ng-repeat="relation in relations | orderBy:relations_order:true | filter:relations_filter" ng-class="{ info: (selected_relation.id == relation.id) }">
+      <tr ng-show="relations" ng-repeat="relation in relations | orderBy:relations_order:true | filter:relations_filter" ng-class="{ info: (selected_relation.id == relation.id) }">
         <td>
           <button ng-click="relation.select()" class="btn btn-link">{{relation.project.name}}</button>
           <div ng-show="relation.project.tracker_plugin" class="pull-right badge badge-info">Plugin Installed</div>
