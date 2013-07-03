@@ -24,7 +24,9 @@ angular.module('app')
     $scope.init_relation = function(relation) {
       relation.select = function() {
         $scope.selected_relation = relation;
-        if (!$scope.hide_info) $scope.hide_info = true;
+        if (!$scope.hide_info) {
+          $scope.hide_info = true;
+        }
 
         // add flag set when waiting for plugin to be installed
         relation.$installing_plugin = false;
@@ -41,7 +43,7 @@ angular.module('app')
             $api.tracker_plugin_create(relation.project.id, relation.linked_account.id).then(function(new_relation) {
               // find and update the relation
               for (var i=0; i<$scope.relations.length; i++) {
-                if ($scope.relations[i].id == new_relation.id) {
+                if ($scope.relations[i].id === new_relation.id) {
                   for (var k in new_relation) { $scope.relations[i][k] = new_relation[k]; }
                   $scope.init_tracker_plugin($scope.relations[i]);
                   break;
@@ -92,8 +94,8 @@ angular.module('app')
     };
 
     $scope.relations_order = function(relation) {
-      if (relation.type === 'owner') return 2;
-      if (!angular.isUndefined(relation.type)) return 1;
+      if (relation.type === 'owner') { return 2; }
+      if (!angular.isUndefined(relation.type)) { return 1; }
       return 0;
     };
 
