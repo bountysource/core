@@ -9,7 +9,7 @@
     </td>
 
     <td ng-show="action.type == 'tracker_plugin'">
-      <strong>{{ person.display_name }}</strong> installed the GitHub plugin for <a href="/trackers/{{ action.target_slug }}">{{ action.target_name }}</a>
+      <strong>{{ person.display_name }}</strong> installed the <a href="/tools">GitHub plugin</a> for <a href="/trackers/{{ action.target_slug }}">{{ action.target_name }}</a>
     </td>
 
     <td class="muted">{{ action.created_at | date:'medium' }}</td>
