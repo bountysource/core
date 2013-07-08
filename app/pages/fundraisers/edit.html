@@ -69,7 +69,7 @@
       <h3>Rewards</h3>
 
       <accordion close-others="false">
-        <div ng-repeat="reward in rewards | orderBy:'amount'">
+        <div ng-repeat="reward in fundraiser.rewards | orderBy:'amount'">
           <accordion-group heading="${{reward.amount | number:0}} Reward" is-open="reward.$is_open">
             <div style="text-align: center;">
               <!--Reward amount-->

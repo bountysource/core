@@ -24,7 +24,6 @@ angular.module('app')
 
       // also cache rewards
       $scope.master_rewards = angular.copy(response.rewards);
-      $scope.rewards = angular.copy(response.rewards);
       return response;
     });
 
@@ -48,6 +47,7 @@ angular.module('app')
 
     $scope.create_reward = function(fundraiser) {
       $api.reward_create(fundraiser.id, $scope.new_reward, function(response) {
+
         if (response.meta.success) {
           // reset the new_reward model
           $scope.new_reward = {};
