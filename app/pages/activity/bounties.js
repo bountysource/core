@@ -11,5 +11,11 @@ angular.module('app')
   })
   .controller('BountyActivity', function($scope, $routeParams, $api) {
     $scope.bounties = $api.bounty_activity();
+
+    $scope.toggle_anonymous = function(bounty) {
+      $api.bounty_anonymity_toggle(bounty).then(function(response) {
+        bounty.anonymous = !bounty.anonymous;
+      });
+    };
   });
 

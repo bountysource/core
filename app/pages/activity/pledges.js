@@ -11,5 +11,11 @@ angular.module('app')
   })
   .controller('PledgeActivity', function($scope, $routeParams, $api) {
     $scope.pledges = $api.pledge_activity();
+
+    $scope.toggle_anonymous = function(pledge) {
+      $api.pledge_anonymity_toggle(pledge).then(function() {
+        pledge.anonymous = !pledge.anonymous;
+      });
+    };
   });
 

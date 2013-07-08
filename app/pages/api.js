@@ -249,6 +249,14 @@ angular.module('api.bountysource',[]).
       return this.call("/auth/"+provider+"/approve_connect", "POST", data);
     };
 
+    this.pledge_anonymity_toggle = function(pledge) {
+      return this.call("/user/pledges/"+pledge.id, "PUT", { anonymous: (pledge.anonymous ? 0 : 1) });
+    };
+
+    this.bounty_anonymity_toggle = function(bounty) {
+      return this.call("/user/bounties/"+bounty.id, "PUT", { anonymous: (bounty.anonymous ? 0 : 1) });
+    };
+
 
     // these should probably go in an "AuthenticationController" or something more angular
 
