@@ -83,5 +83,13 @@ angular.module('app').
       else if (status === "accepted") { return "Your solution has been accepted!"; }
       else { return ""; }
     };
+  }).filter('fundraiser_status', function() {
+    return function(fundraiser) {
+      if (!fundraiser) return "";
+      if (!fundraiser.published) { return "draft"; }
+      else if (fundraiser.published && fundraiser.in_progress) { return "published"; }
+      else if (!fundraiser.in_progress) { return "completed"; }
+      else { return ""; }
+    };
   });
 
