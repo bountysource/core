@@ -55,6 +55,12 @@ angular.module('app')
       $scope.update_bounty_claim();
     };
 
+    // form data for submitting solution
+    $scope.my_solution_submit = {
+      code_url: "",
+      body: ""
+    };
+
     $scope.$locate_my_solution = function(issue) {
       for (var i=0; $scope.current_person && i<issue.solutions.length; i++) {
         if (issue.solutions[i].person.id === $scope.current_person.id) {
@@ -73,13 +79,12 @@ angular.module('app')
           $scope.solution_error = null;
 
           // first update the solution...
-          $api.solution_update(issue.my_solution.id, issue.my_solution, function(response) {
+          $api.solution_update(issue.my_solution.id, $scope.my_solution_submit, function(response) {
             if (response.meta.success) {
               //... then submit it!
               $api.solution_submit(issue.my_solution.id, function(response) {
                 if (response.meta.success) {
                   $scope.my_solution = angular.copy(response.data);
-                  $scope.reload_solution_status($scope.my_solution);
 
                   // find the solution issue.solutions array and update its attributes
                   for (var i=0; i<issue.solutions.length; i++) {
