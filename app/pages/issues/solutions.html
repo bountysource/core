@@ -15,8 +15,7 @@
         <thead>
         <tr>
           <th>Developer</th>
-          <th></th>
-          <th style="width: 50%;">Submission</th>
+          <th style="width: 50%;">Submission Notes</th>
           <th style="width: 15%"></th>
           <th style="width: 15%; text-align: center;">Status</th>
         </tr>
@@ -25,10 +24,10 @@
         <tbody>
         <tr ng-repeat="solution in issue.solutions | orderBy:['-accepted','-in_dispute_period','+disputed','-submitted_at','-submitted','-created_at']">
           <td>
-            <img class="thumbnail" ng-src="{{ solution.person.image_url }}" />
-          </td>
-          <td>
-            <a ng-href="/people/{{ solution.person.slug }}">{{ solution.person.display_name }}</a>
+            <a class="thumbnail text-center" ng-href="/people/{{solution.person.slug}}" style="text-decoration: none;">
+              <img ng-src="{{ solution.person.image_url }}" />
+              <span>{{solution.person.display_name}}</span>
+            </a>
           </td>
           <td>
             <!--Collapsed dispute create form form-->
@@ -51,7 +50,6 @@
             <div class="text-info" ng-hide="solution.submitted">
               <strong>{{solution.person.display_name}} started working on a solution</strong>
               <div><small>started on {{solution.created_at | date:'medium'}}</small></div>
-              <p style="margin: 0;"><i><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a> has not submitted a solution yet.</i></p>
             </div>
 
             <div class="text-success" ng-show="solution.submitted">
@@ -105,11 +103,11 @@
           <td>
             <button ng-hide="solution.submitted" class="btn btn-small btn-block" disabled>
               <i class="icon-globe"></i>
-              Submission
+              View Solution
             </button>
             <a ng-show="solution.submitted" class="btn btn-small btn-block" href="{{solution.code_url}}" target="_blank">
               <i class="icon-globe"></i>
-              Submission
+              View Solution
             </a>
             <button ng-model="solution.$show_dispute" class="btn btn-small btn-block btn-danger" ng-hide="(solution.my_dispute && !solution.my_dispute.closed) || solution.person.id == current_person.id || !solution.in_dispute_period" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" >
               <i class="icon-ban-circle icon-white"></i>
