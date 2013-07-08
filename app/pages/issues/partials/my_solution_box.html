@@ -132,17 +132,21 @@
     <progress value="issue.my_solution.$percentage" class="progress-striped progress-info"></progress>
 
     <div class="row-fluid">
-      <div class="span3 text-right" ng-class="{ 'text-info': (issue.my_solution.$percentage >= 25) }">
-        Started Work
+      <div class="span3 text-right">
+        <span ng-class="{ 'text-info': (issue.my_solution.$percentage >= 25) }">1. Started Work</span>
+        <a popover-placement="bottom" popover-trigger="mouseenter" popover-title="You have started working on a solution" popover="When you have finished, submit your code."><i class="icon-question-sign"></i></a>
       </div>
-      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 50), 'text-info': (issue.my_solution.$percentage >= 50) }">
-        Code Submitted
+      <div class="span3 text-right">
+        <span ng-class="{ muted: (issue.my_solution.$percentage < 50), 'text-info': (issue.my_solution.$percentage >= 50) }">2. Code Submitted</span>
+        <a popover-placement="bottom" popover-trigger="mouseenter" popover-title="Your code has been submitted" popover="Waiting for the project to close the issue and merge your code."><i class="icon-question-sign"></i></a>
       </div>
-      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 75), 'text-info': (issue.my_solution.$percentage >= 75) }">
-        Pending Acceptance
+      <div class="span3 text-right">
+        <span ng-class="{ muted: (issue.my_solution.$percentage < 75), 'text-info': (issue.my_solution.$percentage >= 75) }">3. Pending Acceptance</span>
+        <a popover-placement="bottom" popover-trigger="mouseenter" popover-title="Your code has been merged" popover="Your solution is in a two week period during which the backers may submit disputes against your solution."><i class="icon-question-sign"></i></a>
       </div>
-      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 100), 'text-info': (issue.my_solution.$percentage >= 100) }">
-        Accepted
+      <div class="span3 text-right">
+        <span ng-class="{ muted: (issue.my_solution.$percentage < 100), 'text-info': (issue.my_solution.$percentage >= 100) }">4. Accepted</span>
+        <a popover-placement="bottom" popover-trigger="mouseenter" popover-title="Your solution was accepted!" popover="You earned the bounty! Congrats!"><i class="icon-question-sign"></i></a>
       </div>
     </div>
   </div>
