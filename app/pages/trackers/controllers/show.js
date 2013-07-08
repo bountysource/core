@@ -73,14 +73,12 @@ angular.module('app')
     $scope.order_col = "bounty_total";
     $scope.order_reverse = true;
     $scope.change_order_col = function(col) {
-      console.log('change order!', 'old', $scope.order_col, $scope.order_reverse);
       if ($scope.order_col === col) {
         $scope.order_reverse = !$scope.order_reverse;
       } else {
         $scope.order_reverse = true;
         $scope.order_col = col;
       }
-      console.log('new', $scope.order_col, $scope.order_reverse);
     };
   });
 
