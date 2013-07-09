@@ -1,7 +1,11 @@
-<h3>
-  {{ issue.title || 'Loading...' }}
-  <small ng-show="issue">
-    <span ng-show="issue.can_add_bounty" class="label label-success">Open</span>
-    <span ng-hide="issue.can_add_bounty" class="label label-important">Closed</span>
-  </small>
-</h3>
+<div class="row-fluid">
+  <div class="span1">
+    <a ng-href="/trackers/{{issue.tracker.slug}}"><img ng-src="{{issue.tracker.image_url}}" class="thumbnail" /></a>
+  </div>
+  <div class="span11">
+    <h4 style="margin-top: 0;">{{ issue.title || 'Loading...' }}</h4>
+    <span ng-show="issue.can_add_bounty" class="label label-success">Issue Open</span>
+    <span ng-hide="issue.can_add_bounty" class="label label-important">Issue Closed</span>
+  </div>
+</div>
+<br />

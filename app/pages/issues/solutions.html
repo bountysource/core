@@ -14,8 +14,8 @@
       <table id="bounties-table" class="table table-bordered">
         <thead>
         <tr>
-          <th>Developer</th>
-          <th style="width: 50%;">Submission Notes</th>
+          <th style="">Developer</th>
+          <th style="width: 55%;">Submission Notes</th>
           <th style="width: 15%"></th>
           <th style="width: 15%; text-align: center;">Status</th>
         </tr>
@@ -23,6 +23,7 @@
 
         <tbody>
         <tr ng-repeat="solution in issue.solutions | orderBy:['-accepted','-in_dispute_period','+disputed','-submitted_at','-submitted','-created_at']">
+          <!--Developer-->
           <td>
             <a class="thumbnail text-center" ng-href="/people/{{solution.person.slug}}" style="text-decoration: none;">
               <img ng-src="{{ solution.person.image_url }}" />
