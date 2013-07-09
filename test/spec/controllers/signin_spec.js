@@ -92,7 +92,8 @@ describe('Controller: Signin', function () {
 
   describe('FORGOT PASSWORD', function () {
     it('should request passowrd THROUGH forgot_password', function () {
-      api.request_password_reset = jasmine.createSpy("HOORAY").andReturn(HELPERS.promise(MOCKS.forgot_password));
+      // api.request_password_reset = jasmine.createSpy("HOORAY").andReturn(HELPERS.promise(MOCKS.forgot_password));
+      spyOn(api, 'request_password_reset').andReturn(HELPERS.promise(MOCKS.forgot_password));
       scope.forgot_password();
       expect(api.request_password_reset).toHaveBeenCalled();
       expect(scope.error).toEqual(MOCKS.forgot_password.message);
@@ -124,15 +125,19 @@ describe('Controller: Signin', function () {
       });
       it("should send REQUEST WHEN response is SIGN IN", function () {
         scope.form_data = MOCKS.form_data;
-        spyOn(api,'signup').andReturn(HELPERS.promise(MOCKS.email_registered));
+        spyOn(api, 'signin').andReturn(HELPERS.promise(MOCKS.email_registered));
+
         scope.signin();
+
         expect(api.signin).toHaveBeenCalledWith(MOCKS.form_data);
         expect(scope.error).toEqual(MOCKS.email_registered.error);
       });
       it("should send REQUEST WHEN response is SIGN UP", function () {
         scope.form_data = MOCKS.form_data;
         spyOn(api,'signup').andReturn(HELPERS.promise(MOCKS.email_not_registered));
+
         scope.signup();
+
         expect(api.signup).toHaveBeenCalledWith(MOCKS.form_data);
         expect(scope.error).toEqual(MOCKS.email_not_registered.error);
       });
@@ -167,7 +172,9 @@ describe('Controller: Signin', function () {
       scope.form_data = MOCKS.form_data;
       var previous_signup_or_signin = 'something_random';
       scope.signin_or_signup = previous_signup_or_signin;
+      
       scope.email_changed();
+
       var next_signin_or_signup = scope.signin_or_signup;
       expect(previous_signup_or_signin).toEqual(next_signin_or_signup);
     });
