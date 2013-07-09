@@ -44,55 +44,66 @@
     <p class="lead">{{tracker.description}}</p>
     <div ng-include="'pages/trackers/partials/nav_tabs.html'"></div>
 
-    <div class="row-fluid">
-      <div class="span3">
-        <div class="well well-small">
+    <!--No issues shown message -->
+    <div ng-show="(tracker.issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
+
+    <!--Issue filter box-->
+    <div class="well well-small">
+      <div class="row-fluid">
+        <div class="span6">
           <input type="text" class="span12" min="0" placeholder="Search issues" ng-model="issue_filter_options.text" ng-change="update_filter_options()" />
+        </div>
 
-          <input type="number" class="span5" min="0" placeholder="50" ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()" />
-          <span>Bounty Min</span>
+        <div class="span6">
+          <div style="display:inline-block;vertical-align:middle">Bounty Range: $</div>
+          <input type="number" class="span4" min="1" placeholder="50" ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()" style="margin-bottom:0;display:inline-block;vertical-align:middle" tooltip="Minimum bounty amount" tooltip-placement="bottom" tooltip-trigger="focus" />
+          <div style="display:inline-block;vertical-align:middle"> - </div>
+          <input type="number" class="span4" min="1" placeholder="Infinity" ng-model="issue_filter_options.bounty_max" ng-change="update_filter_options()" style="margin-bottom:0;display:inline-block;vertical-align:middle" tooltip="Maximum bounty amount" tooltip-placement="bottom" tooltip-trigger="focus" />
+        </div>
+      </div>
 
+      <ul class="inline" style="margin-bottom: 0;">
+        <li>
           <label class="checkbox">
             <input type="checkbox" ng-model="issue_filter_options.only_valuable" />
             Has active bounties
           </label>
-
+        </li>
+        <li>
           <label class="checkbox">
             <input type="checkbox" ng-model="issue_filter_options.show_closed" />
             Show Closed Issues
           </label>
-        </div>
-      </div>
-      <div class="span9">
-        <div ng-show="(tracker.issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
-
-        <table class="table table-condensed table-striped" ng-show="(tracker.issues | filter:issue_filter).length > 0">
-          <thead>
-          <tr>
-            <th><a ng-click="change_order_col('bounty_total')">Bounty</a></th>
-            <th></th>
-            <th><a ng-click="change_order_col('comment_count')">Comments</a></th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <tr ng-repeat="issue in tracker.issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
-            <td>
-              <span ng-show="issue.bounty_total > 0" class="badge badge-success">{{issue.bounty_total | dollars}}</span>
-            </td>
-            <td class="span7">
-              <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">{{issue.title}}</a>
-            </td>
-            <td class="text-center">
-              <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">
-                <i class="icon-comment icon-white"></i>
-                {{issue.comment_count | number}}
-              </a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+        </li>
+      </ul>
     </div>
+
+    <!--Table of issues-->
+    <table class="table table-condensed table-striped" ng-show="(tracker.issues | filter:issue_filter).length > 0">
+      <thead>
+      <tr>
+        <th class="span1"><a ng-click="change_order_col('bounty_total')">Bounty</a></th>
+        <th class="span10"></th>
+        <th class="span1"><a ng-click="change_order_col('comment_count')">Comments</a></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr ng-repeat="issue in tracker.issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+        <td>
+          <span ng-show="issue.bounty_total > 0" class="badge badge-success">{{issue.bounty_total | dollars}}</span>
+        </td>
+        <td class="span7">
+          <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">{{issue.title}}</a>
+        </td>
+        <td class="text-center">
+          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">
+            <i class="icon-comment icon-white"></i>
+            {{issue.comment_count | number}}
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

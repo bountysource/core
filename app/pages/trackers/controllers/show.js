@@ -40,19 +40,25 @@ angular.module('app')
     $scope.issue_filter_options = {
       text: null,
       bounty_min: null,
+      bounty_max: null,
       only_valuable: false,
       show_closed: true
     };
 
     $scope.update_filter_options = function() {
       $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
+      $scope.issue_filter_options.bounty_max = parseFloat($scope.issue_filter_options.bounty_max);
     };
 
     $scope.issue_filter = function(issue) {
       var bounty_total = parseFloat(issue.bounty_total);
       var bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
+      var bounty_max = parseFloat($scope.issue_filter_options.bounty_max);
 
       if (!isNaN(bounty_min) && bounty_total < bounty_min) {
+        return false;
+      }
+      if (!isNaN(bounty_max) && bounty_total > bounty_max) {
         return false;
       }
       if ($scope.issue_filter_options.only_valuable && bounty_total <= 0) {
