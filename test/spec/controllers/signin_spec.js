@@ -19,17 +19,17 @@ describe('Controller: Signin', function () {
   };
   var MOCKS = {
     forgot_password: {
-      message: "ello ello",
+      message: "Password forgotten",
       email_is_registered: true,
       error: "some error"
     },
     email_registered: {
-      message: "ello ello",
+      message: "Email is registered",
       email_is_registered: true,
       error: "some error"
     },
     email_not_registered: {
-      message: "ello ello",
+      message: "Email Available",
       email_is_registered: false,
       error: "some error"
     },
@@ -122,40 +122,42 @@ describe('Controller: Signin', function () {
       it("should have some form_data", function () {
         expect(scope.form_data).toBeDefined();
       });
-      it("should send REQUEST WHEN response is SIGNIN", function () {
+      it("should send REQUEST WHEN response is SIGN IN", function () {
         scope.form_data = MOCKS.form_data;
-        api.signin = jasmine.createSpy("COOL SPY").andReturn(HELPERS.promise(MOCKS.email_registered));
+        spyOn(api,'signup').andReturn(HELPERS.promise(MOCKS.email_registered));
         scope.signin();
         expect(api.signin).toHaveBeenCalledWith(MOCKS.form_data);
         expect(scope.error).toEqual(MOCKS.email_registered.error);
-        expect(scope.signin_or_signup).toEqual('signin');
       });
-      it("should send REQUEST WHEN response is SIGNEDUP", function () {
+      it("should send REQUEST WHEN response is SIGN UP", function () {
         scope.form_data = MOCKS.form_data;
-        api.signin = jasmine.createSpy("COOL SPY").andReturn(HELPERS.promise(MOCKS.email_not_registered));
-        scope.signin();
-        expect(api.signin).toHaveBeenCalledWith(MOCKS.form_data);
+        spyOn(api,'signup').andReturn(HELPERS.promise(MOCKS.email_not_registered));
+        scope.signup();
+        expect(api.signup).toHaveBeenCalledWith(MOCKS.form_data);
         expect(scope.error).toEqual(MOCKS.email_not_registered.error);
-        expect(scope.signin_or_signup).toEqual('signup');
       });
     });
   });
 
-  describe('EMAIL CHECKING', function () {
-    it("should send REQUEST WHEN response is SIGNEDUP", function () {
-      scope.form_data = MOCKS.form_data;
+  describe('EMAIL CHANGED', function () {
+    it("should send REQUEST WHEN response is SIGNEDUP", function () {      
+      scope.form_data = MOCKS.form_data; // SETUP
       scope.signin_or_signup = 'pending';
-      api.check_email_address = jasmine.createSpy("COOL SPY").andReturn(HELPERS.promise(MOCKS.email_not_registered));
-      scope.email_changed();
-      expect(api.check_email_address).toHaveBeenCalledWith(scope.form_data.email);
+      spyOn(api,'check_email_address').andReturn(HELPERS.promise(MOCKS.email_not_registered));
+      
+      scope.email_changed();  // RUN
+
+      expect(api.check_email_address).toHaveBeenCalledWith(scope.form_data.email); // VERIFY
       expect(scope.signin_or_signup).toEqual('signup');
     });
     it("should send REQUEST WHEN response is SIGNIN", function () {
-      scope.form_data = MOCKS.form_data;
+      scope.form_data = MOCKS.form_data;  //SETUP
       scope.signin_or_signup = 'pending';
-      api.check_email_address = jasmine.createSpy("COOL SPY").andReturn(HELPERS.promise(MOCKS.email_registered));
-      scope.email_changed();
-      expect(api.check_email_address).toHaveBeenCalledWith(scope.form_data.email);
+      spyOn(api,'check_email_address').andReturn(HELPERS.promise(MOCKS.email_registered));
+
+      scope.email_changed();  // RUN
+
+      expect(api.check_email_address).toHaveBeenCalledWith(scope.form_data.email);  // VERIFY
       expect(scope.signin_or_signup).toEqual('signin');
     });
     it("should do NOTHING if email has NOT changed", function () {
