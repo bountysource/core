@@ -343,7 +343,7 @@ table#projects-table tr td:nth-child(2) {
   float: right;
   width: 400px;
 }
-#global-notice-wrapper {
+#global-notice-wrapper .notice-container {
   width: 985px;
   margin: 0 auto 10px auto;
   text-align: center;
@@ -352,7 +352,7 @@ table#projects-table tr td:nth-child(2) {
   background: #FCFCD1;
   padding: 5px 0;
 }
-#global-notice-wrapper .notice {
+#global-notice-wrapper .notice-container .notice {
   color: #777;
 }
 #project-manager-updated-message {

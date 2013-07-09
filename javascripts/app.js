@@ -218,7 +218,18 @@ with (scope('App')) {
     _gaq.push(['_trackEvent', 'global_notices', 'impression', (notice_data.text + ' | ' + notice_data.href)]);
 
     render({ target: 'global-notice-wrapper' },
-      a({ 'class': 'notice', target: notice_data.target, onClick: curry(track_click, notice_data), href: notice_data.href }, notice_data.text)
+      get_route() == '#' ? [
+        div({ style: 'text-align: center; margin-bottom: 15px' },
+          a({ href: 'http://www.teslasciencecenter.org/donate-to-revive-wardenclyffe?affiliates=13', target: '_blank' },
+            img({ src: 'https://c10078377.ssl.cf2.rackcdn.com/d81468824697a287e08775e70896ca6f.png' }),
+            div("Happy Birthday Nikola Tesla!  Please help restore Wardenclyffe, Tesla’s iconic laboratory in New York.")
+          )
+        )
+      ] : [
+        div({ 'class': 'notice-container' },
+          a({ 'class': 'notice', target: notice_data.target, onClick: curry(track_click, notice_data), href: notice_data.href }, notice_data.text)
+        )
+      ]
     );
   });
 
