@@ -42,8 +42,8 @@ angular.module('app')
       bounty_min: null,
       bounty_max: null,
       only_valuable: false,
-      show_closed: true,
-      show_open: true
+      hide_closed: false,
+      hide_open: false
     };
 
     $scope.update_filter_options = function() {
@@ -65,12 +65,16 @@ angular.module('app')
       if ($scope.issue_filter_options.only_valuable && bounty_total <= 0) {
         return false;
       }
-      if (!$scope.issue_filter_options.show_closed) {
+      if ($scope.issue_filter_options.hide_closed && $scope.issue_filter_options.hide_open) {
+        return false;
+      }
+      if ($scope.issue_filter_options.hide_closed) {
         return issue.can_add_bounty;
       }
-      if (!$scope.issue_filter_options.show_open) {
+      if ($scope.issue_filter_options.hide_open) {
         return !issue.can_add_bounty;
       }
+
 
 
       if ($scope.issue_filter_options.text) {

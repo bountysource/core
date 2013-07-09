@@ -8,10 +8,15 @@
     <div class="well text-center">
       <div><img src="{{tracker.image_url}}" /></div>
       <br />
-
-      <button class="btn btn-block btn-large" ng-class="{ active: (tracker.followed), 'btn-success': (!tracker.followed) }" ng-click="tracker.follow()">
-        <span ng-show="tracker.followed">Following</span>
-        <span ng-hide="tracker.followed">Follow</span>
+      <button class="btn btn-block" ng-class="{ active: (tracker.followed) }" ng-click="tracker.follow()">
+        <span ng-show="tracker.followed">
+          <i class="icon-star"></i>
+          Following project
+        </span>
+        <span ng-hide="tracker.followed">
+          <i class="icon-star-empty"></i>
+          Follow this project
+        </span>
       </button>
     </div>
 
@@ -44,9 +49,6 @@
     <p class="lead">{{tracker.description}}</p>
     <div ng-include="'pages/trackers/partials/nav_tabs.html'"></div>
 
-    <!--No issues shown message -->
-    <div ng-show="(tracker.issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
-
     <!--Issue filter box-->
     <div class="well well-small">
       <div class="row-fluid">
@@ -71,18 +73,21 @@
         </li>
         <li>
           <label class="checkbox">
-            <input type="checkbox" ng-model="issue_filter_options.show_open" />
-            Show Open Issues
+            <input type="checkbox" ng-model="issue_filter_options.hide_open" />
+            Hide open issues
           </label>
         </li>
         <li>
           <label class="checkbox">
-            <input type="checkbox" ng-model="issue_filter_options.show_closed" />
-            Show Closed Issues
+            <input type="checkbox" ng-model="issue_filter_options.hide_closed" />
+            Hide closed issues
           </label>
         </li>
       </ul>
     </div>
+
+    <!--No issues shown message -->
+    <div ng-show="(tracker.issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
 
     <!--Table of issues-->
     <table class="table table-condensed table-striped" ng-show="(tracker.issues | filter:issue_filter).length > 0">
@@ -100,7 +105,10 @@
           <span ng-show="issue.bounty_total > 0" class="badge badge-success">{{issue.bounty_total | dollars}}</span>
         </td>
         <td class="span7">
-          <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">{{issue.title}}</a>
+          <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
+            <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
+            {{issue.title}}
+          </a>
         </td>
         <td class="text-center">
           <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">
