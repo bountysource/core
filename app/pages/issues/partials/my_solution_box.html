@@ -129,7 +129,12 @@
       </div>
     </div>
 
-    <progress value="issue.my_solution.$percentage" class="progress-striped progress-info"></progress>
+    <div ng-switch="issue.my_solution.$status">
+      <div ng-switch-when="disputed"><progress value="issue.my_solution.$percentage" class="progress-striped progress-warning"></progress></div>
+      <div ng-switch-when="rejected"><progress value="issue.my_solution.$percentage" class="progress-striped progress-danger"></progress></div>
+      <div ng-switch-when="accepted"><progress value="issue.my_solution.$percentage" class="progress-striped progress-success"></progress></div>
+      <div ng-switch-default><progress value="issue.my_solution.$percentage" class="progress-striped progress-info"></progress></div>
+    </div>
 
     <div class="row-fluid">
       <div class="span3 text-center" ng-class="{ 'text-info': (issue.my_solution.$percentage >= 25) }" popover-placement="bottom" popover-trigger="mouseenter" popover-title="You have started working on a solution" popover="When you have finished, submit your code.">
