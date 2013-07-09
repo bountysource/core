@@ -207,18 +207,14 @@ angular.module('app')
     };
 
     $scope.$init_solutions = function(issue) {
-
-      console.log(issue.solutions);
-
       // if a solution was accepted, manually change the status of all issues to rejected.
       // the backend should do this.... kind of a hack for v2 development
       if (issue.accepted_solution) {
-
-        console.log('accepted solution', issue.accepted_solution);
-
         // update all solutions except for that one to rejected status
         for (var i=0; i<issue.solutions.length; i++) {
-          if (issue.solutions[i].id !== issue.accepted_solution.id) { issue.solutions[i].rejected = true; }
+          if (issue.solutions[i].id !== issue.accepted_solution.id) {
+            issue.solutions[i].rejected = true;
+          }
         }
       }
 
@@ -227,13 +223,13 @@ angular.module('app')
     };
 
     $scope.solution_status = function(solution) {
-      if (!solution.submitted) { return 'started'; }
-      else if (solution.rejected) { return 'rejected'; }
+      if (solution.rejected) { return 'rejected'; }
       else if (solution.disputed) { return 'disputed'; }
       else if (solution.accepted && !solution.paid_out) { return 'accepted'; }
       else if (solution.accepted && solution.paid_out) { return 'paid_out'; }
       else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
       else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
+      else if (!solution.submitted) { return 'started'; }
       else { return ""; }
     };
 

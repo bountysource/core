@@ -61,13 +61,13 @@ angular.module('app').
   }).filter('solution_status', function() {
     return function(solution) {
       if (!solution) { return ""; }
-      if (!solution.submitted) { return 'started'; }
-      else if (solution.rejected) { return 'rejected'; }
+      if (solution.rejected) { return 'rejected'; }
       else if (solution.disputed) { return 'disputed'; }
       else if (solution.accepted && !solution.paid_out) { return 'accepted'; }
       else if (solution.accepted && solution.paid_out) { return 'paid_out'; }
       else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
       else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
+      else if (!solution.submitted) { return 'started'; }
       else { return ""; }
     };
   }).filter('solution_progress_description', function($filter) {

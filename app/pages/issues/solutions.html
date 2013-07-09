@@ -53,7 +53,7 @@
               <div><small>started on {{solution.created_at | date:'medium'}}</small></div>
             </div>
 
-            <div class="text-success" ng-show="solution.$status == 'pending_merge' || solution.$status == 'in_dispute_period' || solution.$status == 'accepted'">
+            <div class="text-success" ng-show="solution.$status == 'pending_merge' || solution.$status == 'in_dispute_period' || solution.$status == 'accepted' || solution.$status == 'paid_out'">
               <strong>{{solution.person.display_name}}'s solution</strong>
               <div><small>submitted {{solution.submitted_at | date:'medium'}}</small></div>
               <p style="white-space: pre-wrap; margin: 0;">{{solution.body}}</p>
@@ -67,7 +67,7 @@
 
             <div class="text-error" ng-show="solution.$status == 'rejected'">
               <strong>{{solution.person.display_name}}'s solution</strong>
-              <div><small>submitted {{solution.submitted_at | date:'medium'}}</small></div>
+              <div ng-show="solution.submitted"><small>submitted {{solution.submitted_at | date:'medium'}}</small></div>
               <p style="white-space: pre-wrap; margin: 0;">{{solution.body}}</p>
             </div>
 
@@ -118,17 +118,16 @@
             <!--Solution Progress-->
             <div class="text-center">
               <h5>
-                <!--issue status to proper title-->
-                <span ng-switch="solution.$status">
-                  <span ng-switch-when="started">Started Work</span>
-                  <span ng-switch-when="pending_merge">Submitted</span>
-                  <span ng-switch-when="in_dispute_period">Pending Acceptance</span>
-                  <span ng-switch-when="disputed">Disputed</span>
-                  <span ng-switch-when="rejected">Rejected</span>
-                  <span ng-switch-when="accepted">Accepted</span>
-                </span>
-
-                <a ng-click="solution.$toggle_show_status_description()">
+                <a ng-click="solution.$toggle_show_status_description()" style="text-decoration: none;">
+                  <span ng-switch="solution.$status">
+                    <span ng-switch-when="started" class="text-info">Started Work</span>
+                    <span ng-switch-when="pending_merge" class="text-info">Submitted</span>
+                    <span ng-switch-when="in_dispute_period" class="text-info">Pending Acceptance</span>
+                    <span ng-switch-when="disputed" class="text-warning">Disputed</span>
+                    <span ng-switch-when="rejected" class="text-error">Rejected</span>
+                    <span ng-switch-when="accepted" class="text-success">Accepted</span>
+                    <span ng-switch-when="paid_out" class="text-success">Accepted</span>
+                  </span>
                   <i class="icon-question-sign"></i>
                 </a>
               </h5>
@@ -142,15 +141,16 @@
                   <p ng-switch-when="disputed">The solution has been disputed by one of the backers.</p>
                   <p ng-switch-when="rejected">The solution was rejected by the project.</p>
                   <p ng-switch-when="accepted">The solution was accepted!</p>
+                  <p ng-switch-when="paid_out">The solution was accepted!</p>
                 </div>
               </div>
 
-              <!--sexy progress bars-->
-
+              <!--Sexy progress bars-->
               <div ng-switch="solution.$status" >
                 <div ng-switch-when="disputed"><progress value="solution.$percentage" class="progress-warning"></progress></div>
-                <div ng-switch-when="rejected"><progress value="solution.$percentage" class="progress-danger"></progress></div>
-                <div ng-switch-when="accepted"><progress value="solution.$percentage" class="progress-success"></progress></div>
+                <div ng-switch-when="rejected"><!--NOTHINGGGG--></div>
+                <div ng-switch-when="accepted"><!--NOTHINGGGG--></div>
+                <div ng-switch-when="paid_out"><!--NOTHINGGGG--></div>
                 <div ng-switch-default><progress value="solution.$percentage" class="progress-info"></progress></div>
               </div>
             </div>
