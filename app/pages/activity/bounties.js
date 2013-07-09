@@ -13,7 +13,7 @@ angular.module('app')
     $scope.bounties = $api.bounty_activity();
 
     $scope.toggle_anonymous = function(bounty) {
-      $api.bounty_anonymity_toggle(bounty).then(function(response) {
+      $api.bounty_anonymity_toggle(bounty).then(function() {
         bounty.anonymous = !bounty.anonymous;
       });
     };
