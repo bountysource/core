@@ -358,7 +358,7 @@ angular.module('api.bountysource',[]).
 
     this.signout = function() {
       $api.set_current_person();
-      $location.path("/");
+      $window.location.reload();
     };
 
 
