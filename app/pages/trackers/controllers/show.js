@@ -42,7 +42,8 @@ angular.module('app')
       bounty_min: null,
       bounty_max: null,
       only_valuable: false,
-      show_closed: true
+      show_closed: true,
+      show_open: true
     };
 
     $scope.update_filter_options = function() {
@@ -67,6 +68,10 @@ angular.module('app')
       if (!$scope.issue_filter_options.show_closed) {
         return issue.can_add_bounty;
       }
+      if (!$scope.issue_filter_options.show_open) {
+        return !issue.can_add_bounty;
+      }
+
 
       if ($scope.issue_filter_options.text) {
         var regexp = new RegExp(".*?"+$scope.issue_filter_options.text+".*?", "i");
