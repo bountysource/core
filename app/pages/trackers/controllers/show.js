@@ -154,4 +154,10 @@ angular.module('app')
         }
       };
     };
+
+    // override the filter and sort settings to only show open bounties
+    $scope.show_bounties = function() {
+      $scope.order_col = "amount";
+      $scope.issue_filter_options = { only_valuable: true };
+    }
   });

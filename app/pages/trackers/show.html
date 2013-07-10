@@ -27,7 +27,7 @@
 
     <div class="well well-small">
       <div class="text-center">
-        <h2 style="margin: 0;" ng-show="tracker.bounty_total > 0" class="text-center">{{tracker.bounty_total | dollars}}</h2>
+        <a ng-click="show_bounties()"><h2 style="margin: 0;" ng-show="tracker.bounty_total > 0" class="text-center">{{tracker.bounty_total | dollars}}</h2></a>
         <div>in bounties</div>
       </div>
 
