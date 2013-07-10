@@ -133,6 +133,7 @@
         <td class="span7">
           <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
             <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
+            <span ng-show="!issue.can_add_bounty" class="label label-warning">closed</span>
             {{issue.title}}
           </a>
         </td>
