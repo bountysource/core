@@ -49,10 +49,22 @@ module.exports = function (grunt) {
           port: 9000,
           middleware: function (connect) {
             return [
-              modRewrite(['!\\.html|/images|\\.ico|\\.js|\\.css|\\swf$ /index.html']),
+              modRewrite(['!\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\swf$ /index.html']),
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'app'),
               mountFolder(connect, 'test/e2e')
+            ];
+          }
+        }
+      },
+      dist: {
+        options: {
+          keepalive: true,
+          port: 9000,
+          middleware: function (connect) {
+            return [
+              modRewrite(['!\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\.swf$ /index.html']),
+              mountFolder(connect, 'dist')
             ];
           }
         }
@@ -298,6 +310,11 @@ module.exports = function (grunt) {
     'watch'
   ]);
 
+  grunt.registerTask('dist', [
+    'open:app',
+    'connect:dist'
+  ]);
+
   grunt.registerTask('test', [
     'html_src',
     'clean:server',
@@ -316,7 +333,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'test',
+    //'test',
     'clean:dist',
     'useminPrepare',
     'imagemin',
