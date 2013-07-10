@@ -20,4 +20,21 @@ angular.module('app').
         });
       });
     };
+  }]).
+  directive('ngClickRequireAuth', ['$parse', '$api', function($parse, $api) {
+    return {
+      restrict: "A",
+      link: function(scope, element, attr) {
+        var action = $parse(attr.ngClickRequireAuth);
+        element.bind('click', function(event) {
+          scope.$apply(function() {
+            if (scope.current_person) {
+              action(scope, {$event: event});
+            } else {
+              $api.require_signin();
+            }
+          })
+        });
+      }
+    };
   }]);

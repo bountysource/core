@@ -1,5 +1,4 @@
 <div ng-controller="DeveloperBoxController">
-
   <div ng-show="issue.accepted_solution" class="well text-center">
     <h3 style="margin: 0;">Bounty Claimed</h3>
     <p><a ng-href="/people/{{issue.accepted_solution.person.slug}}">{{issue.accepted_solution.person.display_name}}</a> claimed the bounty.</p>
@@ -45,7 +44,7 @@
         <h3 style="margin: 0;">Earn the Bounty</h3>
         <p>Working on a solution to this issue? Let us know! If your solution is accepted, you are awarded the bounty.</p>
       </div>
-      <button ng-click="issue.create_solution()" class="btn btn-block">Start Work</button>
+      <button ng-click-require-auth="issue.create_solution()" class="btn btn-block">Start Work</button>
     </div>
   </div>
 </div>

@@ -402,10 +402,16 @@ angular.module('api.bountysource',[]).
 
     // save the previous URL for postauth redirect,
     // then request signin
-    this.require_signin = function() {
-      var url = $location.path();
-      this.set_post_auth_url(url);
-      $location.url("/signin");
+    this.require_signin = function(path, params) {
+      if (!$rootScope.current_person) {
+        if (path) {
+          this.set_post_auth_url(path, params);
+        } else {
+          var url = $location.path();
+          this.set_post_auth_url(url);
+        }
+        $location.url("/signin");
+      }
     };
   })
 
