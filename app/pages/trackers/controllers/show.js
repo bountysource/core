@@ -8,7 +8,7 @@ angular.module('app')
         controller: 'TrackerShow'
       });
   })
-  .controller('TrackerShow', function ($scope, $routeParams, $api) {
+  .controller('TrackerShow', function ($scope, $routeParams, $location, $api) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
       // merge all of the issue arrays into one
       tracker.issues = [];
@@ -21,6 +21,8 @@ angular.module('app')
 
       // follow and unfollow API method wrappers
       tracker.follow = function() {
+        if (!$scope.current_person) { return $api.require_signin(); }
+
         if (tracker.followed) {
           $api.tracker_unfollow($scope.tracker.id).then(function() {
             // assume API call success, update the button state (tracker.followed)

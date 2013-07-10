@@ -388,6 +388,13 @@ angular.module('api.bountysource',[]).
         replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
     };
 
+    // save the previous URL for postauth redirect,
+    // then request signin
+    this.require_signin = function() {
+      var url = $location.path();
+      this.set_post_auth_url(url);
+      $location.url("/signin");
+    };
   })
 
   .constant('$person', {
