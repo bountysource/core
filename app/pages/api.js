@@ -257,6 +257,18 @@ angular.module('api.bountysource',[]).
       return this.call("/user/bounties/"+bounty.id, "PUT", { anonymous: (bounty.anonymous ? 0 : 1) });
     };
 
+    this.tracker_tags_upvote = function(tracker_id, name) {
+      return this.call("/trackers/"+tracker_id+"/tags", "PUT", { name: name });
+    };
+
+    this.tracker_tags_downvote = function(tracker_id, name) {
+      return this.call("/trackers/"+tracker_id+"/tags", "DELETE", { name: name });
+    };
+
+    this.tracker_tags_create = function(tracker_id, name) {
+      return this.call("/trackers/"+tracker_id+"/tags", "POST", { name: name });
+    };
+
 
     // these should probably go in an "AuthenticationController" or something more angular
 

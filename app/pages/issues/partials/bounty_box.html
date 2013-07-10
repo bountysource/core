@@ -19,7 +19,7 @@
 
   <div class="controls controls-row">
     <button class="span4 btn btn-primary btn-block" ng-disabled="bounty.amount==1000" ng-click="bounty.amount = 1000">$1000</button>
-    <input type="number" min="5" ng-model="bounty.amount" class="span8 input-small" placeholder="Other amount" />
+    <input type="number" min="5" ng-model="bounty.amount" class="span8 input-small" placeholder="Other amount" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus"/>
   </div>
 
   <div collapse="!bounty.amount || bounty.amount <= 0">
