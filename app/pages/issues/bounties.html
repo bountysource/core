@@ -25,7 +25,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="bounty in issue.bounties | orderBy:sort_column:sort_order">
+          <tr ng-repeat="bounty in issue.bounties | orderBy:sort_column:sort_reverse">
             <td>
               <img ng-show="bounty.person" class="thumbnail" ng-src="{{ bounty.person.image_url }}" />
               <img ng-hide="bounty.person" class="thumbnail" src="images/anon.jpg" />
