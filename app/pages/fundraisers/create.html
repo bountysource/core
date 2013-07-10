@@ -53,6 +53,9 @@
       </div>
 
       <!--Edit main Description-->
+      <div class="alert alert-info">
+        <strong>Protip:</strong> You can format your description using <a href="https://help.github.com/articles/github-flavored-markdown" target="_blank">GitHub Flavored Markdown</a>.
+      </div>
       <textarea id="fundraiser-description" class="span12" rows="15" ng-model="fundraiser.description" placeholder="A description of your goal with this fundraiser. You can use GitHub flavored markdown here."></textarea>
     </div>
 
@@ -66,7 +69,7 @@
       <h3>By <a ng-href="/people/{{current_person.slug}}">{{current_person.display_name}}</a></h3>
       <div style="margin-bottom: 15px;">
         <a class="thumbnail" ng-href="/people/{{current_person.slug}}">
-          <img src="{{current_person.image_url}}">
+          <img ng-src="{{current_person.image_url}}">
         </a>
         <div>{{ current_person.bio }}</div>
       </div>

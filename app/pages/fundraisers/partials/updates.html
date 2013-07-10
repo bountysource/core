@@ -12,7 +12,7 @@
 
   <tr ng-repeat="update in fundraiser.updates">
     <td>
-      <a href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">
+      <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">
         #{{ update.number }} {{ update.title }}
       </a>
     </td>

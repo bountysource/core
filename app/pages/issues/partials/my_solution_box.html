@@ -9,13 +9,13 @@
       <div class="control-group">
         <label class="control-label" for="code_url">Code URL</label>
         <div class="controls">
-          <input class="span10" type="url" id="code_url" ng-model="issue.my_solution.submit.code_url" placeholder="https://github.com/bountysource/frontend/pulls/1" required />
+          <input class="span10" type="url" id="code_url" ng-model="my_solution_submit.code_url" placeholder="https://github.com/bountysource/frontend/pulls/1"  />
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="body">Description</label>
         <div class="controls">
-          <textarea class="span10" id="body" rows="4" ng-model="issue.my_solution.submit.body" placeholder="I implemented quicksort in lua." required></textarea>
+          <textarea class="span10" id="body" rows="4" ng-model="my_solution_submit.body" placeholder="I implemented quicksort in lua."></textarea>
         </div>
       </div>
       <div class="control-group">
@@ -129,20 +129,29 @@
       </div>
     </div>
 
-    <progress value="issue.my_solution.$percentage" class="progress-striped progress-info"></progress>
+    <div ng-switch="issue.my_solution.$status">
+      <div ng-switch-when="disputed"><progress value="issue.my_solution.$percentage" class="progress-striped progress-warning"></progress></div>
+      <div ng-switch-when="rejected"><progress value="issue.my_solution.$percentage" class="progress-striped progress-danger"></progress></div>
+      <div ng-switch-when="accepted"><progress value="issue.my_solution.$percentage" class="progress-striped progress-success"></progress></div>
+      <div ng-switch-default><progress value="issue.my_solution.$percentage" class="progress-striped progress-info"></progress></div>
+    </div>
 
     <div class="row-fluid">
-      <div class="span3 text-right" ng-class="{ 'text-info': (issue.my_solution.$percentage >= 25) }">
-        Started Work
+      <div class="span3 text-center" ng-class="{ 'text-info': (issue.my_solution.$percentage >= 25) }" popover-placement="bottom" popover-trigger="mouseenter" popover-title="You have started working on a solution" popover="When you have finished, submit your code.">
+        1. Started Work
+        <i ng-show="issue.my_solution.$percentage >= 25" class="icon-ok"></i>
       </div>
-      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 50), 'text-info': (issue.my_solution.$percentage >= 50) }">
-        Code Submitted
+      <div class="span3 text-center" ng-class="{ muted: (issue.my_solution.$percentage < 50), 'text-info': (issue.my_solution.$percentage >= 50) }" popover-placement="bottom" popover-trigger="mouseenter" popover-title="Your code has been submitted" popover="Waiting for the project to close the issue and merge your code.">
+        2. Code Submitted
+        <i ng-show="issue.my_solution.$percentage >= 50" class="icon-ok"></i>
       </div>
-      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 75), 'text-info': (issue.my_solution.$percentage >= 75) }">
-        Pending Acceptance
+      <div class="span3 text-center" ng-class="{ muted: (issue.my_solution.$percentage < 75), 'text-info': (issue.my_solution.$percentage >= 75) }" popover-placement="bottom" popover-trigger="mouseenter" popover-title="Your code has been merged" popover="Your solution is in a two week period during which the backers may submit disputes against your solution.">
+        3. Pending Acceptance
+        <i ng-show="issue.my_solution.$percentage >= 75" class="icon-ok"></i>
       </div>
-      <div class="span3 text-right" ng-class="{ muted: (issue.my_solution.$percentage < 100), 'text-info': (issue.my_solution.$percentage >= 100) }">
-        Accepted
+      <div class="span3 text-center" ng-class="{ muted: (issue.my_solution.$percentage < 100), 'text-info': (issue.my_solution.$percentage >= 100) }" popover-placement="bottom" popover-trigger="mouseenter" popover-title="Your solution was accepted!" popover="You earned the bounty! Congrats!">
+        4. Accepted
+        <i ng-show="issue.my_solution.$percentage >= 100" class="icon-ok"></i>
       </div>
     </div>
   </div>

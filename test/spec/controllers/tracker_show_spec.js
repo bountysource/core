@@ -1,7 +1,7 @@
 /* jshint -W117 */
 'use strict';
 
-describe("TrackerShow Controller -- ", function() {
+describe("TrackerShow Controller --", function() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //reply_with takes in mock data and returns an
   // OBJECT  that has a then attr is a
@@ -45,8 +45,7 @@ describe("TrackerShow Controller -- ", function() {
   var scope;
   var routeparams;
   var httpBackend;
-  // promise returns a callback fn that responds to 
-  // Initialize the controller and a mock scope
+
   beforeEach(module('app'));
 
   beforeEach(inject(function ($controller, $rootScope, $routeParams, $api, $httpBackend) {
@@ -67,23 +66,28 @@ describe("TrackerShow Controller -- ", function() {
     // only call controller when api mock setup
     tracker_ctrl = $controller('TrackerShow', {$scope: scope, $routeParams: routeparams, $api: api});
   }));
-  describe("initial state values", function() {
+  describe("INIT:", function() {
     it("should get TRACKERS from API", function() {
       expect(api.tracker_get).toHaveBeenCalled();
       expect(api.tracker_get).toHaveBeenCalledWith(mock_route_param.id);
     });
 
-    describe("filter options", function() {
+    describe("Filter Options:", function() {
       it("should initialize issue_filter_options", function() {
         expect(scope.issue_filter_options).toBeDefined();
         expect(scope.issue_filter_options).not.toBeNull();
       });
-      it("should SET initial option Values", function() {
-        var options = scope.issue_filter_options;
-        expect(options.text).toBeNull();
-        expect(options.bounty_min).toBeNull();
-        expect(options.only_valuable).toBeFalsy();
-        expect(options.show_closed).toBeTruthy();
+      describe("Initializing FilterOptionValues:", function() {
+        var options;
+        beforeEach(function() {
+          options = scope.issue_filter_options;
+        });
+        it("should set 'text'         to null",   function() {expect(options.text).toBeNull();            });
+        it("should set 'bounty_min'   to null",   function() {expect(options.bounty_min).toBeNull();      });
+        it("should set 'bounty_max'   to null",   function() {expect(options.bounty_max).toBeNull();      });
+        it("should set 'only_valuable'to false",  function() {expect(options.only_valuable).toBeFalsy();  });
+        it("should set 'hide_closed'  to false",  function() {expect(options.hide_closed).toBeFalsy();    });
+        it("should set 'hide_open'    to false",  function() {expect(options.hide_open).toBeFalsy();      });
       });
     });
 
@@ -95,8 +99,10 @@ describe("TrackerShow Controller -- ", function() {
     });
 
   });
-  describe("AFTER tracker recieved", function() {
-    var unfollowed_tracker = get_new_object(mock_tracker);
-    unfollowed_tracker.followed = 
+  xdescribe("AFTER tracker recieved", function() {
+    xit("should respond when NOT Following", function() {
+      var unfollowed_tracker = get_new_object(mock_tracker);
+      expect(unfollowed_tracker).not.toBeNull();
+    });
   });
 });

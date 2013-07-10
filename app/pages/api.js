@@ -249,6 +249,26 @@ angular.module('api.bountysource',[]).
       return this.call("/auth/"+provider+"/approve_connect", "POST", data);
     };
 
+    this.pledge_anonymity_toggle = function(pledge) {
+      return this.call("/user/pledges/"+pledge.id, "PUT", { anonymous: (pledge.anonymous ? 0 : 1) });
+    };
+
+    this.bounty_anonymity_toggle = function(bounty) {
+      return this.call("/user/bounties/"+bounty.id, "PUT", { anonymous: (bounty.anonymous ? 0 : 1) });
+    };
+
+    this.tracker_tags_upvote = function(tracker_id, name) {
+      return this.call("/trackers/"+tracker_id+"/tags", "PUT", { name: name });
+    };
+
+    this.tracker_tags_downvote = function(tracker_id, name) {
+      return this.call("/trackers/"+tracker_id+"/tags", "DELETE", { name: name });
+    };
+
+    this.tracker_tags_create = function(tracker_id, name) {
+      return this.call("/trackers/"+tracker_id+"/tags", "POST", { name: name });
+    };
+
 
     // these should probably go in an "AuthenticationController" or something more angular
 
@@ -350,7 +370,7 @@ angular.module('api.bountysource',[]).
 
     this.signout = function() {
       $api.set_current_person();
-      $location.path("/");
+      $window.location.reload();
     };
 
 
@@ -380,6 +400,19 @@ angular.module('api.bountysource',[]).
         replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
     };
 
+    // save the previous URL for postauth redirect,
+    // then request signin
+    this.require_signin = function(path, params) {
+      if (!$rootScope.current_person) {
+        if (path) {
+          this.set_post_auth_url(path, params);
+        } else {
+          var url = $location.path();
+          this.set_post_auth_url(url);
+        }
+        $location.url("/signin");
+      }
+    };
   })
 
   .constant('$person', {

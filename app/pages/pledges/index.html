@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li><a href="/">Home</a><span class="divider">»</span></li>
     <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
-    <li><a href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
+    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
     <li><a>Pledges</a></li>
   </ul>
 
@@ -26,12 +26,12 @@
           <tr ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse">
             <!--Profile picture. No link if anon-->
             <td style="width:70px">
-              <a ng-show="pledge.person" ng-href="/people/{{pledge.person.slug}}"><img class="thumbnail" src="{{ pledge.person.image_url }}" /></a>
+              <a ng-show="pledge.person" ng-href="/people/{{pledge.person.slug}}"><img class="thumbnail" ng-src="{{ pledge.person.image_url }}" /></a>
               <img ng-hide="pledge.person" class="thumbnail" src="images/anon.jpg" />
             </td>
 
             <td>
-              <a ng-show="pledge.person" href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
+              <a ng-show="pledge.person" ng-href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
               <div ng-hide="pledge.person" class="muted">Anonymous</div>
             </td>
 

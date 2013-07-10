@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li><a href="/">Home</a><span class="divider">»</span></li>
     <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
-    <li><a href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
+    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
     <li><a>Updates</a></li>
   </ul>
 
@@ -26,7 +26,7 @@
           <!--Published updates row-->
           <tr ng-repeat="update in updates">
             <td>
-              <a ng-show="update.published_at" href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">#{{ update.number }} {{ update.title }}</a>
+              <a ng-show="update.published_at" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">#{{ update.number }} {{ update.title }}</a>
 
               <div ng-hide="update.published_at">
                 <a class="label label-info" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">Draft</a>

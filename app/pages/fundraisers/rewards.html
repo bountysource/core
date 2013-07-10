@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li><a href="/">Home</a><span class="divider">»</span></li>
     <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
-    <li><a href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
+    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
     <li><a>Rewards</a></li>
   </ul>
 
@@ -46,7 +46,7 @@
                     <tbody>
                     <tr ng-repeat="pledge in reward.pledges">
                       <td>
-                        <a ng-show="pledge.person" href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
+                        <a ng-show="pledge.person" ng-href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
                         <div ng-hide="pledge.person" class="muted">Anonymous</div>
                       </td>
                       <td>{{ pledge.amount | currency }}</td>
@@ -93,7 +93,7 @@
                     <tbody>
                       <tr ng-repeat="pledge in reward.pledges">
                         <td>
-                          <a ng-show="pledge.person" href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
+                          <a ng-show="pledge.person" ng-href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
                           <div ng-hide="pledge.person" class="muted">Anonymous</div>
                         </td>
                         <td>{{ pledge.amount | currency }}</td>

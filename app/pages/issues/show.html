@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
-  <li><a href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
+  <li><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a ng-href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
 </ul>
 
 <div class="row-fluid" ng-show="issue">
@@ -9,7 +9,16 @@
     <div ng-include="'pages/issues/partials/header.html'"></div>
     <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
 
-    <img ng-show="issue.author_image_url" ng-src="{{issue.author_image_url}}" class="pull-left thumbnail" style="margin: 0 10px 10px 0; width: 100px; height: 100px;" tooltip="{{issue.author_name}}" tooltip-placement="bottom" />
+    <div class="row-fluid">
+      <div class="span1">
+        <img ng-show="issue.author_image_url" ng-src="{{issue.author_image_url}}" class="thumbnail" style="width: 100%;" />
+      </div>
+      <div class="span11">
+        <p class="muted">{{issue.author_name}} opened this issue on {{issue.created_at | date}}</p>
+        <a ng-href="{{issue.url}}" target="_blank">View this issue on the tracker</a>
+      </div>
+    </div>
+    <br />
     <div ng-bind-html="issue.body_html"></div>
   </div>
 

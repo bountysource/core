@@ -55,6 +55,12 @@ angular.module('app')
       $scope.update_bounty_claim();
     };
 
+    // form data for submitting solution
+    $scope.my_solution_submit = {
+      code_url: "",
+      body: ""
+    };
+
     $scope.$locate_my_solution = function(issue) {
       for (var i=0; $scope.current_person && i<issue.solutions.length; i++) {
         if (issue.solutions[i].person.id === $scope.current_person.id) {
@@ -65,21 +71,17 @@ angular.module('app')
 
       // does the authenicated user have a solution?
       if (issue.my_solution) {
-        // calculate and add percentage to the model
-        issue.my_solution.$percentage = $scope.solution_percentage(issue.my_solution);
-
         // add submission method
         issue.my_solution.submit = function() {
           $scope.solution_error = null;
 
           // first update the solution...
-          $api.solution_update(issue.my_solution.id, issue.my_solution, function(response) {
+          $api.solution_update(issue.my_solution.id, $scope.my_solution_submit, function(response) {
             if (response.meta.success) {
               //... then submit it!
               $api.solution_submit(issue.my_solution.id, function(response) {
                 if (response.meta.success) {
                   $scope.my_solution = angular.copy(response.data);
-                  $scope.reload_solution_status($scope.my_solution);
 
                   // find the solution issue.solutions array and update its attributes
                   for (var i=0; i<issue.solutions.length; i++) {
@@ -140,6 +142,9 @@ angular.module('app')
 
     // add extra functionality and model data to a solution.
     $scope.$init_solution = function(issue, solution) {
+      // calculate and add percentage to the model
+      solution.$percentage = $scope.solution_percentage(solution);
+
       // add status
       solution.$status = $scope.solution_status(solution);
 
@@ -196,22 +201,37 @@ angular.module('app')
           }
         });
       };
+
+      solution.$show_status_description = false;
+      solution.$toggle_show_status_description = function() { solution.$show_status_description = !solution.$show_status_description; };
     };
 
     $scope.$init_solutions = function(issue) {
-      for (var i in issue.solutions) { $scope.$init_solution(issue, issue.solutions[i]); }
+      var i;
+
+      // if a solution was accepted, manually change the status of all issues to rejected.
+      // the backend should do this.... kind of a hack for v2 development
+      if (issue.accepted_solution) {
+        // update all solutions except for that one to rejected status
+        for (i=0; i<issue.solutions.length; i++) {
+          if (issue.solutions[i].id !== issue.accepted_solution.id) {
+            issue.solutions[i].rejected = true;
+          }
+        }
+      }
+
+      // now, go through and initialize solutions
+      for (i in issue.solutions) { $scope.$init_solution(issue, issue.solutions[i]); }
     };
 
-
-
     $scope.solution_status = function(solution) {
-      if (!solution.submitted) { return 'started'; }
-      else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
-      else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
+      if (solution.rejected) { return 'rejected'; }
       else if (solution.disputed) { return 'disputed'; }
-      else if (solution.rejected) { return 'rejected'; }
       else if (solution.accepted && !solution.paid_out) { return 'accepted'; }
       else if (solution.accepted && solution.paid_out) { return 'paid_out'; }
+      else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
+      else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
+      else if (!solution.submitted) { return 'started'; }
       else { return ""; }
     };
 

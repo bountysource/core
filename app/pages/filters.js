@@ -61,13 +61,13 @@ angular.module('app').
   }).filter('solution_status', function() {
     return function(solution) {
       if (!solution) { return ""; }
-      if (!solution.submitted) { return 'started'; }
-      else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
-      else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
+      if (solution.rejected) { return 'rejected'; }
       else if (solution.disputed) { return 'disputed'; }
-      else if (solution.rejected) { return 'rejected'; }
       else if (solution.accepted && !solution.paid_out) { return 'accepted'; }
       else if (solution.accepted && solution.paid_out) { return 'paid_out'; }
+      else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
+      else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
+      else if (!solution.submitted) { return 'started'; }
       else { return ""; }
     };
   }).filter('solution_progress_description', function($filter) {
@@ -81,6 +81,14 @@ angular.module('app').
       else if (status === "rejected") { return "Your solution has been rejected."; }
       else if (status === "paid_out") { return "You have claimed the bounty for this issue."; }
       else if (status === "accepted") { return "Your solution has been accepted!"; }
+      else { return ""; }
+    };
+  }).filter('fundraiser_status', function() {
+    return function(fundraiser) {
+      if (!fundraiser) { return ""; }
+      if (!fundraiser.published) { return "draft"; }
+      else if (fundraiser.published && fundraiser.in_progress) { return "published"; }
+      else if (!fundraiser.in_progress) { return "completed"; }
       else { return ""; }
     };
   });

@@ -13,29 +13,54 @@
           <li><a href="/faq/backers">Backers</a></li>
           <li><a href="http://blog.bountysource.com" target="_blank">Blog</a></li>
           <li ng-class="{'dropdown': true, 'dropup': true, 'active': showChatroom}"><a ng-controller="ChatroomController" ng-click="toggleChatroom()">Chatroom <b class="caret"></b></a></li>
+
           <li class="dropdown" ng-controller="Signin">
             <a href="/signin" class="dropdown-toggle" data-toggle="dropdown" ng-hide="!!current_person">Sign In<b class="caret"></b></a>
-            <ul class="dropdown-menu" ng-hide="!!current_person">
+            <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
               <li style="padding-left: 10px;">Using:</li>
               <li ng-repeat="provider in providers">
-                <a href="{{ signin_url_for(provider.id) }}"><img src="{{provider.image_url}}"> {{provider.name}}</a>
+                <a ng-click="save_route()" ng-href="{{ signin_url_for(provider.id) }}"><img ng-src="{{provider.image_url}}"> {{provider.name}}</a>
               </li>
               <li><a href="/signin"><img src="images/favicon-email.png"> Email Address</a></li>
             </ul>
 
-            <a href="/people/{{current_person.slug}}" class="dropdown-toggle" data-toggle="dropdown" ng-show="!!current_person"><i class="icon-user"></i> {{current_person.display_name}}<b class="caret"></b></a>
+            <a href="/people/{{current_person.slug}}" class="dropdown-toggle" data-toggle="dropdown" ng-show="!!current_person">
+              <img class="img-rounded" ng-src="{{current_person.image_url}}" style="width: 18px; height: 18px; margin-right: 5px;" />
+              {{current_person.display_name}}
+              <b class="caret"></b>
+            </a>
+
             <ul class="dropdown-menu" ng-show="!!current_person">
-              <li><a href="/activity">Activity</a></li>
-              <li><a href="/people/{{current_person.slug}}">Profile</a></li>
-              <li><a href="/tools">Tools</a></li>
-              <li><a href="/settings">Settings</a></li>
+              <li><a href="/activity">
+                <i class="icon-bullhorn"></i>
+                Activity
+              </a></li>
+              <li><a ng-href="/people/{{current_person.slug}}">
+                <i class="icon-user"></i>
+                Profile
+              </a></li>
+              <li><a href="/tools">
+                <i class="icon-wrench"></i>
+                Tools
+              </a></li>
+              <li><a href="/settings">
+                <i class="icon-cog"></i>
+                Settings
+              </a></li>
               <li class="divider"></li>
-              <li><a href="/signin" ng-click="signout()">Sign Out</a></li>
+              <li><a href="/signin" ng-click="signout()">
+                <i class="icon-off"></i>
+                Sign Out
+              </a></li>
             </ul>
           </li>
 
           <li class="dropdown">
-            <a href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown"><span class="badge badge-important">{{environment}}</span><b class="caret"></b></a>
+            <a ng-href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="badge badge-important">{{environment}}</span>
+              <b class="caret"></b>
+            </a>
+
             <ul class="dropdown-menu" ng-controller="Navbar">
               <li><a href="" ng-click="setEnv('dev')">development</a></li>
               <li><a href="" ng-click="setEnv('qa')">staging</a></li>

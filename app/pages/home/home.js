@@ -11,6 +11,9 @@ angular.module('app')
   .controller('HomeCtrl', function ($scope, $window, $api) {
     $scope.fundraisers = $api.fundraiser_cards();
 
+    $scope.show_developers_type = 'top';
+    $scope.show_backers_type = 'top';
+
     // $scope.recent_people = $api.people_recent();
     $api.people_interesting().then(function(people) {
       console.log(people);
@@ -19,5 +22,11 @@ angular.module('app')
 
     $scope.trackers = $api.project_cards();
 
-    $window.twttr.widgets.load();
+    // poll until twitter loaded, then load the widget!
+    var poll = setInterval(function() {
+      if (angular.isDefined($window.twttr)) {
+        clearInterval(poll);
+        $window.twttr.widgets.load();
+      }
+    }, 50);
   });

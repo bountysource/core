@@ -92,7 +92,6 @@ describe('Controller: Signin', function () {
 
   describe('FORGOT PASSWORD', function () {
     it('should request passowrd THROUGH forgot_password', function () {
-      // api.request_password_reset = jasmine.createSpy("HOORAY").andReturn(HELPERS.promise(MOCKS.forgot_password));
       spyOn(api, 'request_password_reset').andReturn(HELPERS.promise(MOCKS.forgot_password));
       scope.forgot_password();
       expect(api.request_password_reset).toHaveBeenCalled();
