@@ -89,7 +89,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      templates: ['dist/templates.js', 'dist/pages']
     },
     jshint: {
       options: {
@@ -147,16 +148,6 @@ module.exports = function (grunt) {
 //        }
 //      }
 //    },
-    concat: {
-      dist: {
-        files: {
-          'dist/scripts/scripts.js': [
-            '.tmp/pages/**/*.js',
-            'app/pages/**/*.js'
-          ]
-        }
-      }
-    },
     html_src: {
       dist: {
         files: {
@@ -172,7 +163,7 @@ module.exports = function (grunt) {
     },
     usemin: {
       html: ['dist/**/*.html'],
-      css: ['dist/styles/**/*.css'],
+      css: ['dist/assets/**/*.css'],
       options: {
         dirs: ['dist']
       }
@@ -183,73 +174,57 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'app/images',
           src: '**/*.{png,jpg,jpeg}',
-          dest: 'dist/images'
+          dest: 'dist/assets'
         }]
       }
     },
-    cssmin: {
-      dist: {
-        files: {
-          'dist/styles/main.css': [
-            '.tmp/styles/**/*.css',
-            'app/styles/**/*.css'
-          ]
-        }
-      }
-    },
     htmlmin: {
-      dist: {
+      index: {
+        files: [{
+          expand: true,
+          cwd: 'app',
+          src: ['*.html'],
+          dest: 'dist'
+        }]
+      },
+      pages: {
         options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
+          // NOTE: this saves 20kb or so but we rely on whitespace in some places to add horizontal spacing between elements
+          //collapseWhitespace: true
         },
         files: [{
           expand: true,
           cwd: 'app',
-          src: ['*.html', 'pages/**.html'],
+          src: ['pages/**/*.html'],
           dest: 'dist'
         }]
       }
     },
-    cdnify: {
-      dist: {
-        html: ['dist/*.html']
+    ngtemplates: {
+      app: {
+        options: {
+          concat: 'dist/assets/app.js',
+          base: 'dist'
+        },
+        src: 'dist/pages/**/*.html',
+        dest: 'dist/templates.js'
       }
     },
     ngmin: {
       dist: {
         files: [{
           expand: true,
-          cwd: 'dist/scripts',
+          cwd: 'dist/assets',
           src: '*.js',
-          dest: 'dist/scripts'
+          dest: 'dist/assets'
         }]
-      }
-    },
-    uglify: {
-      dist: {
-        files: {
-          'dist/scripts/scripts.js': [
-            'dist/scripts/scripts.js'
-          ]
-        }
       }
     },
     rev: {
       dist: {
         files: {
           src: [
-            'dist/scripts/**/*.js',
-            'dist/styles/**/*.css',
-            'dist/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
-            'dist/styles/fonts/*'
+            'dist/assets/*'
           ]
         }
       }
@@ -262,11 +237,8 @@ module.exports = function (grunt) {
           cwd: 'app',
           dest: 'dist',
           src: [
-            '*.{ico,txt}',
-            '.htaccess',
-            'components/**/*',
-            'images/**/*.{gif,webp}',
-            'styles/fonts/*'
+            'favicon.ico',
+            'robots.txt'
           ]
         }]
       }
@@ -339,9 +311,10 @@ module.exports = function (grunt) {
     'imagemin',
     'cssmin',
     'htmlmin',
+    'ngtemplates',
     'concat',
+    'clean:templates',
     'copy',
-    'cdnify',
     'ngmin',
     'uglify',
     'rev',
