@@ -37,4 +37,18 @@ angular.module('app').
         });
       }
     };
+  }]).
+  directive('requireTwitter', ['$twttr', function($twttr) {
+    return {
+      restrict: "A",
+      scope: "isolate",
+      link: function() { $twttr.widgets.load(); }
+    };
+  }]).
+  directive('requireGplus', ['$gplus', function($gplus) {
+    return {
+      restrict: "A",
+      scope: "isolate",
+      link: function() { $gplus.plusone.go(); } // $gplus.widgets.load();
+    };
   }]);

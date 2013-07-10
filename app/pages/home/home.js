@@ -8,7 +8,7 @@ angular.module('app')
         controller: 'HomeCtrl'
       });
   })
-  .controller('HomeCtrl', function ($scope, $window, $api) {
+  .controller('HomeCtrl', function ($scope, $window, $api, $twttr) {
     $scope.fundraisers = $api.fundraiser_cards();
 
     $scope.show_developers_type = 'top';
@@ -21,12 +21,4 @@ angular.module('app')
     });
 
     $scope.trackers = $api.project_cards();
-
-    // poll until twitter loaded, then load the widget!
-    var poll = setInterval(function() {
-      if (angular.isDefined($window.twttr)) {
-        clearInterval(poll);
-        $window.twttr.widgets.load();
-      }
-    }, 50);
   });
