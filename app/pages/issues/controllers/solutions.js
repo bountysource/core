@@ -207,11 +207,13 @@ angular.module('app')
     };
 
     $scope.$init_solutions = function(issue) {
+      var i;
+
       // if a solution was accepted, manually change the status of all issues to rejected.
       // the backend should do this.... kind of a hack for v2 development
       if (issue.accepted_solution) {
         // update all solutions except for that one to rejected status
-        for (var i=0; i<issue.solutions.length; i++) {
+        for (i=0; i<issue.solutions.length; i++) {
           if (issue.solutions[i].id !== issue.accepted_solution.id) {
             issue.solutions[i].rejected = true;
           }
@@ -219,7 +221,7 @@ angular.module('app')
       }
 
       // now, go through and initialize solutions
-      for (var i in issue.solutions) { $scope.$init_solution(issue, issue.solutions[i]); }
+      for (i in issue.solutions) { $scope.$init_solution(issue, issue.solutions[i]); }
     };
 
     $scope.solution_status = function(solution) {
