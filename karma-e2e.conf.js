@@ -50,6 +50,7 @@ urlRoot = "/_karma_/";
 
 //browsers = ['Firefox', 'Safari', 'Chrome'];
 browsers = ['Chrome'];
+// browsers = ['Firefox'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 5000;

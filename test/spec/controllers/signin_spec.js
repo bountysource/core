@@ -145,11 +145,11 @@ describe('Controller: Signin', function () {
   });
 
   describe('EMAIL CHANGED', function () {
-    it("should send REQUEST WHEN response is SIGNEDUP", function () {      
-      scope.form_data = MOCKS.form_data; // SETUP
+    it("should send REQUEST WHEN response is SIGNEDUP", function () {
+      scope.form_data = MOCKS.form_data;  // SETUP
       scope.signin_or_signup = 'pending';
       spyOn(api,'check_email_address').andReturn(HELPERS.promise(MOCKS.email_not_registered));
-      
+
       scope.email_changed();  // RUN
 
       expect(api.check_email_address).toHaveBeenCalledWith(scope.form_data.email); // VERIFY
@@ -172,7 +172,7 @@ describe('Controller: Signin', function () {
       scope.form_data = MOCKS.form_data;
       var previous_signup_or_signin = 'something_random';
       scope.signin_or_signup = previous_signup_or_signin;
-      
+
       scope.email_changed();
 
       var next_signin_or_signup = scope.signin_or_signup;

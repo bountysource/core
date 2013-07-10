@@ -13,7 +13,8 @@ files = [
   'app/pages/app.js',
   'app/pages/**/*.js',
   'test/mock/**/*.js',
-  'test/spec/**/*.js'
+  'test/spec/**/*.js',
+  'test/spec/controller/*.js'
 ];
 
 // list of files to exclude
