@@ -51,7 +51,7 @@ angular.module('app')
           // only push it if it doesn't exist
           var push_it_real_good = true;
           for (var i=0; i<tracker.tags.length; i++) {
-            if (tracker.tags[i].id == new_tag_relation.id) {
+            if (tracker.tags[i].id === new_tag_relation.id) {
               push_it_real_good = false;
             }
           }
