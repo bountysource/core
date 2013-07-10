@@ -18,7 +18,7 @@
             <ul class="dropdown-menu" ng-hide="!!current_person">
               <li style="padding-left: 10px;">Using:</li>
               <li ng-repeat="provider in providers">
-                <a href="{{ signin_url_for(provider.id) }}"><img src="{{provider.image_url}}"> {{provider.name}}</a>
+                <a ng-href="{{ signin_url_for(provider.id) }}"><img ng-src="{{provider.image_url}}"> {{provider.name}}</a>
               </li>
               <li><a href="/signin"><img src="images/favicon-email.png"> Email Address</a></li>
             </ul>
@@ -29,7 +29,7 @@
                 <i class="icon-bullhorn"></i>
                 Activity
               </a></li>
-              <li><a href="/people/{{current_person.slug}}">
+              <li><a ng-href="/people/{{current_person.slug}}">
                 <i class="icon-user"></i>
                 Profile
               </a></li>
@@ -50,7 +50,7 @@
           </li>
 
           <li class="dropdown">
-            <a href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown"><span class="badge badge-important">{{environment}}</span><b class="caret"></b></a>
+            <a ng-href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown"><span class="badge badge-important">{{environment}}</span><b class="caret"></b></a>
             <ul class="dropdown-menu" ng-controller="Navbar">
               <li><a href="" ng-click="setEnv('dev')">development</a></li>
               <li><a href="" ng-click="setEnv('qa')">staging</a></li>

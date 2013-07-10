@@ -21,8 +21,8 @@
 
   <tbody>
   <tr ng-repeat="pledge in pledges">
-    <td><a href="/fundraisers/{{ pledge.fundraiser.slug }}">{{ pledge.fundraiser.title }}</a></td>
-    <td><a href="/issues/{{bounty.issue.slug}}">{{ pledge.amount | dollars }}</a></td>
+    <td><a ng-href="/fundraisers/{{ pledge.fundraiser.slug }}">{{ pledge.fundraiser.title }}</a></td>
+    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ pledge.amount | dollars }}</a></td>
     <td>{{ pledge.created_at | date }}</td>
 
     <td ng-show="pledge.anonymous">

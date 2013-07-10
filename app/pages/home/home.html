@@ -20,7 +20,7 @@
         <ul class="top-pics">
           <li class="span2" ng-repeat="person in people.developers.top.slice(0,6)">
             <a href="/people/{{person.slug}}">
-              <img src="{{person.image_url}}" />
+              <img ng-src="{{person.image_url}}" />
               <!--<strong>{{person.display_name}}</strong>-->
             </a>
           </li>
@@ -42,7 +42,7 @@
         <ul class="top-pics">
           <li class="span2" ng-repeat="person in people.backers.top.slice(0,6)">
             <a href="/people/{{person.slug}}">
-              <img src="{{person.image_url}}" />
+              <img ng-src="{{person.image_url}}" />
               <!--<strong>{{person.display_name}}</strong>-->
               <!--$5,000-->
             </a>
@@ -62,11 +62,11 @@
       <ul class="featured-list">
         <li ng-repeat="fundraiser in fundraisers.slice(0,6)">
           <div>
-            <a href="/fundraisers/{{fundraiser.slug}}"><img src="{{fundraiser.image_url}}" /></a>
+            <a ng-href="/fundraisers/{{fundraiser.slug}}"><img ng-src="{{fundraiser.image_url}}" /></a>
             <div class="progress">
               <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:10 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
             </div>
-            <a href="/fundraisers/{{fundraiser.slug}}"><strong>{{fundraiser.title}}</strong></a>
+            <a ng-href="/fundraisers/{{fundraiser.slug}}"><strong>{{fundraiser.title}}</strong></a>
           </div>
         </li>
       </ul>
@@ -77,8 +77,8 @@
       <ul class="featured-list">
         <li ng-repeat="tracker in trackers.slice(0,6)">
           <div>
-            <a href="/trackers/{{tracker.slug}}" style="text-decoration: none;">
-              <img src="{{tracker.image_url}}" />
+            <a ng-href="/trackers/{{tracker.slug}}" style="text-decoration: none;">
+              <img ng-src="{{tracker.image_url}}" />
               <strong>
                 {{tracker.name}}
                 <div ng-show="tracker.bounty_total > 0" class="label label-success">{{tracker.bounty_total | dollars}}</div>

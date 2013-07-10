@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
-  <li><a href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
+  <li><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a ng-href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
 </ul>
 
 <div class="row-fluid" ng-show="issue">

@@ -1,12 +1,12 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a></li>
+  <li><a ng-href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a></li>
 </ul>
 
 <div class="row-fluid" ng-show="tracker">
   <div class="span3">
     <div class="well text-center">
-      <div><img src="{{tracker.image_url}}" /></div>
+      <div><img ng-src="{{tracker.image_url}}" /></div>
       <br />
       <button class="btn btn-block" ng-click="tracker.follow()">
         <span ng-show="tracker.followed">

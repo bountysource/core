@@ -69,7 +69,7 @@
       <h3>By <a ng-href="/people/{{current_person.slug}}">{{current_person.display_name}}</a></h3>
       <div style="margin-bottom: 15px;">
         <a class="thumbnail" ng-href="/people/{{current_person.slug}}">
-          <img src="{{current_person.image_url}}">
+          <img ng-src="{{current_person.image_url}}">
         </a>
         <div>{{ current_person.bio }}</div>
       </div>

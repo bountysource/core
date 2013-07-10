@@ -9,7 +9,7 @@
       <div class="controls">
         <ul ng-controller="Signin">
           <li ng-repeat="provider in providers" class="provider-link">
-            <a href="{{ signin_url_for(provider.id) }}"><img src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
+            <a ng-href="{{ signin_url_for(provider.id) }}"><img ng-src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
           </li>
         </ul>
       </div>
@@ -57,7 +57,7 @@
     <label class="control-label" for="inputDisplayName">Display Name:</label>
     <div class="controls">
       <input type="text" id="inputDisplayName" placeholder="johnny5" ng-model="form_data.display_name" class="input-medium" />
-      <img src="{{form_data.avatar_url}}" style="width: 30px; height: 30px" ng-show="form_data.avatar_url" />
+      <img ng-src="{{form_data.avatar_url}}" style="width: 30px; height: 30px" ng-show="form_data.avatar_url" />
     </div>
   </div>
 

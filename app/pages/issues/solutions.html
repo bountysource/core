@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
-  <li><a href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
+  <li><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a ng-href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
 </ul>
 
 <div class="row-fluid" ng-show="issue">
@@ -99,7 +99,7 @@
 
                     <div ng-hide="dispute.closed">
                       <p class="text-center">Join the discussion to help resolve this dispute.</p>
-                      <a href="{{issue.url}}" target="_blank" class="btn btn-block btn-small">
+                      <a ng-href="{{issue.url}}" target="_blank" class="btn btn-block btn-small">
                         <i class="icon-comment"></i>
                         Discussion
                       </a>
@@ -160,7 +160,7 @@
               <i class="icon-globe"></i>
               View Solution
             </button>
-            <a ng-show="solution.submitted" class="btn btn-small btn-block" href="{{solution.code_url}}" target="_blank">
+            <a ng-show="solution.submitted" class="btn btn-small btn-block" ng-href="{{solution.code_url}}" target="_blank">
               <i class="icon-globe"></i>
               View Solution
             </a>

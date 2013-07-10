@@ -24,8 +24,8 @@
 
   <tbody>
   <tr ng-repeat="bounty in bounties">
-    <td><a href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
-    <td><a href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}</a></td>
+    <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
+    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}</a></td>
     <td>{{ bounty.issue.can_add_bounty }}</td>
     <td>{{ bounty.amount | dollars }}</td>
     <td>{{ bounty.status }}</td>
