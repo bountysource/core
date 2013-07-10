@@ -22,5 +22,11 @@ angular.module('app')
 
     $scope.trackers = $api.project_cards();
 
-//    $window.twttr.ready(function() { $window.twttr.widgets.load(); });
+    // poll until twitter loaded, then load the widget!
+    var poll = setInterval(function() {
+      if (angular.isDefined($window.twttr)) {
+        clearInterval(poll);
+        $window.twttr.widgets.load();
+      }
+    }, 50);
   });
