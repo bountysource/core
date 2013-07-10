@@ -15,13 +15,12 @@
           <li>Raise money for a future project.</li>
           <li>Solve open issues to earn bounties.</li>
         </ul>
-
-        <h3>top | recent</h3>
+        <br />
+        <br />
         <ul class="top-pics">
           <li class="span2" ng-repeat="person in people.developers.top.slice(0,6)">
             <a href="/people/{{person.slug}}">
               <img ng-src="{{person.image_url}}" />
-              <!--<strong>{{person.display_name}}</strong>-->
             </a>
           </li>
         </ul>
@@ -37,21 +36,15 @@
           <li>Incentivize developers to solve issues.</li>
           <li>Fund the next generation of projects.</li>
         </ul>
-
-        <h3>top | recent</h3>
+        <br />
+        <br />
         <ul class="top-pics">
           <li class="span2" ng-repeat="person in people.backers.top.slice(0,6)">
             <a href="/people/{{person.slug}}">
               <img ng-src="{{person.image_url}}" />
-              <!--<strong>{{person.display_name}}</strong>-->
-              <!--$5,000-->
             </a>
           </li>
         </ul>
-        <!--<div style="text-align: center">Top: <b>All Time</b> | <a href="#">This Month</a> | <a href="#">This Week</a> </div>-->
-        <!--<br/>-->
-
-
       </div>
     </div>
   </div>
