@@ -10,7 +10,7 @@
         </form>
         <ul class="nav pull-right">
           <li><a href="http://blog.bountysource.com" target="_blank">Blog</a></li>
-          <li ng-class="{'dropdown': true, 'dropup': true, 'active': showChatroom}"><a ng-click="chatroomToggle()">Chatroom <b class="caret"></b></a></li>
+          <li ng-class="{'dropdown': true, 'dropup': true, 'active': chatroom.show}"><a ng-click="chatroom.toggle()">Chatroom <b class="caret"></b></a></li>
 
           <li class="dropdown" ng-controller="Signin">
             <a href="/signin" class="dropdown-toggle" data-toggle="dropdown" ng-hide="!!current_person">Sign In<b class="caret"></b></a>

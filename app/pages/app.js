@@ -20,7 +20,11 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     $api.load_current_person_from_cookies();
 
     // this really doesn't belong here
-    $rootScope.chatroomToggle = function() { $rootScope.showChatroom = !$rootScope.showChatroom; };
-    $rootScope.chatroomNick = "Guest" + Math.ceil(Math.random() * 100000);
-    $rootScope.chatroomConnect = function() { $rootScope.chatroomIframe = 'show'; };
+    $rootScope.chatroom = {
+      show: false,
+      toggle: function() { $rootScope.chatroom.show = !$rootScope.chatroom.show; },
+      nick: "Guest" + Math.ceil(Math.random() * 100000),
+      url: "none",
+      connect: function() { console.log($rootScope.chatroom.nick); $rootScope.chatroom.url = '/chat/?nick=' + $rootScope.chatroom.nick; }
+    };
   });
