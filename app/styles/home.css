@@ -15,7 +15,7 @@
   left: 0;
   top: 380px;
   width: 100%;
-  height: 200px;
+  height: 245px;
   z-index: -1;
 }
 
@@ -33,23 +33,23 @@
   background: rgb(245, 245, 245);
   position: absolute;
   left: 0;
-  top: 920px;
+  top: 960px;
   width: 100%;
   height: 400px;
   z-index: -1;
 }
 
 .homepage section#top {
-  height: 310px;
+  height: 320px;
 }
 
 .homepage section#users {
   text-align: center;
-  height: 190px;
+  height: 240px;
 }
 
 .homepage section#fundraisers {
-  height: 335px;
+  height: 330px;
 }
 
 .homepage section#projects {
