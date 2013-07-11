@@ -51,4 +51,14 @@ angular.module('app').
       scope: "isolate",
       link: function() { $gplus.plusone.go(); } // $gplus.widgets.load();
     };
-  }]);
+  }]).
+  directive('selectOnClick', function () {
+    return {
+      restrict: "A",
+      link: function (scope, element, attr) {
+        element.bind('click', function() {
+          element[0].select();
+        });
+      }
+    }
+  });
