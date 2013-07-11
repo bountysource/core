@@ -53,7 +53,7 @@
             </div>
 
             <div class="span10">
-              <strong><a>{{fundraiser.title}}</a></strong>
+              <strong><a ng-href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.title}}</a></strong>
               <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}">{{fundraiser.person.display_name}}</a></small>
               <br />
               <small class="muted"><a ng-href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.short_description | truncate:70}}</a></small>
@@ -75,7 +75,7 @@
             </div>
 
             <div class="span10">
-              <strong><a>{{fundraiser.title}}</a></strong>
+              <strong><a ng-href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.title}}</a></strong>
               <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}">{{fundraiser.person.display_name}}</a></small>
               <br />
               <small class="muted"><a ng-href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.short_description | truncate:70}}</a></small>
