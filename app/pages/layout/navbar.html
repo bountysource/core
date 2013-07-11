@@ -53,7 +53,7 @@
             </ul>
           </li>
 
-          <li class="dropdown">
+          <li class="dropdown" ng-show="can_switch_environments">
             <a ng-href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown">
               <span class="badge badge-important">{{environment}}</span>
               <b class="caret"></b>

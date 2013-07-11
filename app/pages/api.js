@@ -4,14 +4,23 @@ angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window) {
     var $api = this; // hack to store self reference
 
-    $rootScope.api_host = "https://api.bountysource.com/";
+    // set environment
+    if ($location.host().match(/localhost/)) {
+      $rootScope.can_switch_environments = true;
+      $rootScope.environment = $cookieStore.get('environment') || 'qa';
+    } else if ($location.host().match(/www-qa\.bountysource\.com/)) {
+      $rootScope.environment = 'qa';
+    } else {
+      $rootScope.environment = 'prod';
+    }
 
-    // environment
-    $rootScope.environment = $cookieStore.get('environment') || 'prod';
+    // set API host based on environment
     if ($rootScope.environment === 'dev') {
       $rootScope.api_host = "http://api.bountysource.dev/";
     } else if ($rootScope.environment === 'qa') {
       $rootScope.api_host = "https://api-qa.bountysource.com/";
+    } else if ($rootScope.environment === 'prod') {
+      $rootScope.api_host = "https://api.bountysource.com/";
     }
 
     this.setEnvironment = function(env) {
