@@ -16,6 +16,10 @@ angular.module('app')
     $scope.rewards = [];
     $scope.master_rewards = [];
 
+    $scope.unsaved_changes = function() {
+      return !angular.equals($scope.master, $scope.changes);
+    };
+
     $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
       // cache the fundraiser. angular.copy does a deep copy, FYI
       // if you don't create a copy, these are both bound to the input

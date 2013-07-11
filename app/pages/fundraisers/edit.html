@@ -60,6 +60,10 @@
   </div>
 
   <div class="span3">
+    <div ng-show="unsaved_changes()">
+      <alert class="alert alert-warning"><strong>Hey! You have unsaved changes!</strong> Don't forget to <a ng-click="save()">save your changes</a> when you are done.</alert>
+    </div>
+
     <div class="well well-large">
       <button ng-click="save()" class="btn btn-primary btn-large btn-block">Save</button>
       <button ng-click="cancel()" class="btn btn-large btn-block">Cancel</button>
