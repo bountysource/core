@@ -23,7 +23,7 @@ angular.module('app')
             $window.google.payments.inapp.buy({
               jwt:     response.data.jwt,
               success: function (result) {
-                $window.location = $rootScope.api_host + "payments/google/success?access_token=" + $cookieStore.get('access_token') + "&order_id=" + result.response.orderId;
+                $window.location = $rootScope.api_host + "payments/google/success?access_token=" + $cookieStore.get($api.access_token_cookie_name) + "&order_id=" + result.response.orderId;
               },
               failure: function (result) {
                 console.log('Google Wallet: Error', result);

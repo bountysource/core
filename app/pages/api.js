@@ -3,6 +3,7 @@
 angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window) {
     var $api = this; // hack to store self reference
+    this.access_token_cookie_name = 'v2_access_token';
 
     // set environment
     $rootScope.environment = window.BS_ENV;
@@ -38,8 +39,8 @@ angular.module('api.bountysource',[]).
       params = angular.copy(params);
       params.callback = 'JSON_CALLBACK';
       params._method = method;
-      if ($cookieStore.get('access_token')) {
-        params.access_token = $cookieStore.get('access_token');
+      if ($cookieStore.get($api.access_token_cookie_name)) {
+        params.access_token = $cookieStore.get($api.access_token_cookie_name);
       }
 
       // deferred JSONP call with a promise
@@ -296,10 +297,10 @@ angular.module('api.bountysource',[]).
         }
 
         $rootScope.current_person = obj;
-        $cookieStore.put('access_token', $rootScope.current_person.access_token);
+        $cookieStore.put($api.access_token_cookie_name, $rootScope.current_person.access_token);
       } else {
         $rootScope.current_person = false;
-        $cookieStore.remove('access_token');
+        $cookieStore.remove($api.access_token_cookie_name);
       }
     };
 
@@ -341,7 +342,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.load_current_person_from_cookies = function() {
-      var access_token = $cookieStore.get('access_token');
+      var access_token = $cookieStore.get($api.access_token_cookie_name);
       if (access_token) {
         console.log("Verifying access token: " + access_token);
         this.call("/user", { access_token: access_token }, function(response) {
@@ -368,8 +369,8 @@ angular.module('api.bountysource',[]).
       var redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
 
       var url = $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent(redirect_url);
-      if ($cookieStore.get('access_token')) {
-        url += '&access_token=' + encodeURIComponent($cookieStore.get('access_token'));
+      if ($cookieStore.get($api.access_token_cookie_name)) {
+        url += '&access_token=' + encodeURIComponent($cookieStore.get($api.access_token_cookie_name));
       }
       return url;
     };
