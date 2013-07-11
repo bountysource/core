@@ -31,7 +31,11 @@ angular.module('app').
             if (scope.current_person) {
               action(scope, {$event: event});
             } else {
-              $api.require_signin();
+              // if it has an href attribute, save that as the postauth URL
+              var url = element.attr('href');
+              element.removeAttr('href');
+              element.removeAttr('ng-href'); // don't know if this actually has to be removed. oh well.
+              $api.require_signin(url);
             }
           })
         });
