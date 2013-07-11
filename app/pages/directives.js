@@ -37,7 +37,7 @@ angular.module('app').
               element.removeAttr('ng-href'); // don't know if this actually has to be removed. oh well.
               $api.require_signin(url);
             }
-          })
+          });
         });
       }
     };
@@ -59,12 +59,12 @@ angular.module('app').
   directive('selectOnClick', function () {
     return {
       restrict: "A",
-      link: function (scope, element, attr) {
+      link: function (scope, element) {
         element.bind('click', function() {
           element[0].select();
         });
       }
-    }
+    };
   }).
   directive('fundraiserCard', function() {
     return {
