@@ -22,5 +22,5 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     // this really doesn't belong here
     $rootScope.chatroomToggle = function() { $rootScope.showChatroom = !$rootScope.showChatroom; };
     $rootScope.chatroomNick = "Guest" + Math.ceil(Math.random() * 100000);
-    $rootScope.chatroomConnect = function() { $rootScope.chatroomIframe = true; };
+    $rootScope.chatroomConnect = function() { $rootScope.chatroomIframe = 'show'; };
   });

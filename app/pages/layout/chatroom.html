@@ -1,6 +1,6 @@
-<div id="chatroom">
-  
-  <div class="connect" ng-hide="chatroomIframe">
+<div id="chatroom" ng-switch="chatroomIframe">
+  <iframe ng-switch-when="show" ng-src="https://www-qa.bountysource.com/chat/?nick={{chatroomNick}}"></iframe>
+  <div ng-switch-default class="connect">
     <p style="text-align: center; padding-top: 10px;">The #Bountysource IRC Chatroom is a place to communicate with other Bountysource users.</p>
     <form action="" style="text-align: center; padding-top: 10px;">
       <span>Nickname:</span>
