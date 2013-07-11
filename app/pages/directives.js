@@ -65,4 +65,22 @@ angular.module('app').
         });
       }
     }
+  }).
+  directive('fundraiserCard', function() {
+    return {
+      restrict: "E",
+      scope: {
+        fundraiser: "="
+      },
+      templateUrl: "pages/fundraisers/partials/homepage_card.html"
+    };
+  }).
+  directive('projectCard', function() {
+    return {
+      restrict: "E",
+      scope: {
+        project: "="
+      },
+      templateUrl: "pages/trackers/partials/homepage_card.html"
+    };
   });

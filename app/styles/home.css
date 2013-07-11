@@ -5,7 +5,7 @@
   left: 0;
   top: 45px;
   width: 100%;
-  height: 300px;
+  height: 335px;
   z-index: -1;
 }
 
@@ -13,32 +13,48 @@
   background: rgb(245, 245, 245);
   position: absolute;
   left: 0;
-  top: 345px;
+  top: 380px;
   width: 100%;
   height: 200px;
   z-index: -1;
 }
 
-.homepage .background-fundraisers {
-  background: white;
+/*.homepage .background-fundraisers {*/
+  /*background: white;*/
+  /*position: absolute;*/
+  /*left: 0;*/
+  /*top: 580px;*/
+  /*width: 100%;*/
+  /*height: 400px;*/
+  /*z-index: -1;*/
+/*}*/
+
+.homepage .background-projects {
+  background: rgb(245, 245, 245);
   position: absolute;
   left: 0;
-  top: 545px;
+  top: 920px;
   width: 100%;
   height: 400px;
   z-index: -1;
 }
 
-.homepage section#fundraisers {
-  height: 400px;
+.homepage section#top {
+  height: 310px;
 }
 
 .homepage section#users {
   text-align: center;
-  height: 200px;
+  height: 190px;
 }
 
+.homepage section#fundraisers {
+  height: 335px;
+}
 
+.homepage section#projects {
+  height: 270px;
+}
 
 /* backer/developer box (background and text) */
 .homepage .well { background-color: rgba(0,0,0,0.5); color: #fff; border: 0; }
@@ -46,7 +62,7 @@
 .homepage .well h2 { padding: 0 0 0px 0; margin: 0 0 10px; font-size: 25px; }
 .homepage .well h3 { padding: 0 0 0px 0; margin: 0; font-size: 16px; margin-left: 24px; font-weight: normal; }
 .homepage .well .home-developers li, .homepage .home-backers li  { font-size: 16px; line-height: 24px; }
-.homepage .well .btn { float: right; }
+/*.homepage .well .btn { float: right; }*/
 
 /* backer/developer box (vertical white line) */
 .homepage .home-developers { border-right: 2px solid white; margin-right: -1px; padding-right: 20px; }
