@@ -16,5 +16,10 @@ angular.module('app')
       $scope.people = people;
     });
 
-    $scope.trackers = $api.project_cards();
+    $scope.trackers = $api.project_cards().then(function(trackers) {
+      for (var i=0; i<trackers.length; i++) {
+        trackers[i].bounty_total = parseFloat(trackers[i].bounty_total);
+      }
+      return trackers;
+    });
   });
