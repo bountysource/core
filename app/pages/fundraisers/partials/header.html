@@ -1,2 +1,18 @@
-<h1 style="margin-top: 0;">{{ fundraiser.title || 'Loading...' }}</h1>
+<div style="margin-bottom: 10px;">
+  <a ng-href="/fundraisers/{{fundraiser.slug}}" style="display: inline-block; vertical-align: middle; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
+  </a>
+  <h1 style="margin: 0; display: inline-block; vertical-align: middle;">{{ fundraiser.title || 'Loading...' }}</h1>
+</div>
+
+
+<a require-twitter href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+<div require-gplus class="g-plusone" data-size="medium" data-annotation="bubble"></div>
+<div class="input-prepend">
+  <div class="add-on">
+    <i class="icon-share"></i>
+    Embed
+  </div>
+  <input select-on-click type="text" style="cursor: pointer;" value="<iframe src='https://api.bountysource.com/user/fundraisers/{{fundraiser.id}}/embed' style='width: 238px; height: 402px; overflow: hidden; border: 0px;'></iframe>" readonly/>
+</div>
+
 <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>

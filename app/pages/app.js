@@ -1,5 +1,7 @@
 'use strict';
 
+window.BS_ENV = (document.location.host === 'www.bountysource.com' ? 'prod' : 'qa');
+
 angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies'])
   .config(function ($routeProvider, $locationProvider) {   //, $provide) {
 

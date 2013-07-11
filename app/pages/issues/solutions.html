@@ -164,7 +164,7 @@
               <i class="icon-globe"></i>
               View Solution
             </a>
-            <button ng-model="solution.$show_dispute" class="btn btn-small btn-block btn-danger" ng-hide="solution.rejected || solution.accepted || (solution.my_dispute && !solution.my_dispute.closed) || solution.person.id == current_person.id || !solution.in_dispute_period" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" >
+            <button ng-click-require-auth ng-model="solution.$show_dispute" class="btn btn-small btn-block btn-danger" ng-hide="solution.rejected || solution.accepted || (solution.my_dispute && !solution.my_dispute.closed) || solution.person.id == current_person.id || !solution.in_dispute_period" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" >
               <i class="icon-ban-circle icon-white"></i>
               Dispute
             </button>

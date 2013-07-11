@@ -1,27 +1,33 @@
 'use strict';
-
 angular.module('app')
-  .service('$payment', function($rootScope, $location, $window,$log, $api, $cookieStore) {
-      // currently only used for bounty and pledge creation.
-      // $payment.create({ amount: 15, payment_method: 'google', ... }).process();
-
+  .service('$payment', function ($rootScope, $location, $window, $log, $api, $cookieStore) {
+    // currently only used for bounty and pledge creation.
+    // $payment.create({ amount: 15, payment_method: 'google', ... }).process();
     this._default_options = {
-      success: function(response) { console.log('Payment success', response); },
-      error: function(response) { console.log('Payment error', response); },
-      noauth: function(response) { console.log('Payment noauth', response); }
+      success: function (response) {
+        console.log('Payment success', response);
+      },
+      error:   function (response) {
+        console.log('Payment error', response);
+      },
+      noauth:  function (response) {
+        console.log('Payment noauth', response);
+      }
     };
-
-    this.process = function(data, options) {
+    this.process = function (data, options) {
       options = angular.extend(angular.copy(this._default_options), options);
-
-      $api.call("/payments", "POST", data, function(response) {
+      $api.call("/payments", "POST", data, function (response) {
         if (response.meta.success) {
           if (data.payment_method === 'google') {
             // a JWT is returned, trigger buy
             $window.google.payments.inapp.buy({
-              jwt: response.data.jwt,
-              success: function(result) { $window.location = $rootScope.api_host + "payments/google/success?access_token="+$cookieStore.get('access_token')+"&order_id="+result.response.orderId; },
-              failure: function(result) { console.log('Google Wallet: Error', result); }
+              jwt:     response.data.jwt,
+              success: function (result) {
+                $window.location = $rootScope.api_host + "payments/google/success?access_token=" + $cookieStore.get('access_token') + "&order_id=" + result.response.orderId;
+              },
+              failure: function (result) {
+                console.log('Google Wallet: Error', result);
+              }
             });
           } else {
             $window.location = response.data.redirect_url;
@@ -35,84 +41,93 @@ angular.module('app')
       });
     };
   })
-
-  .service('$twttr', function($window) {
+  .service('$twttr', function ($window) {
     // Twitter script
-    if (angular.isUndefined($window.twttr)) { !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs"); }
+    if (angular.isUndefined($window.twttr)) {
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+          js = d.createElement(s);
+          js.id = id;
+          js.src = p + "://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }
+      })(document, "script", "twitter-wjs");
+    }
     var that = this;
-
     this.$$queue = [];
-    this.$$enqueue = function() {
+    this.$$enqueue = function () {
       var method = arguments;
-      return function() {
+      return function () {
         var args = arguments;
         that.$$queue.push([method, args]);
       };
     };
-
     // stub widgets with method to enqueue requests while
     // the sdk loads
     this.widgets = {
       load: this.$$enqueue('widgets', 'load')
     };
-
     // poll until twitter sdk loaded
-    var poll = $window.setInterval(function() {
+    var poll = $window.setInterval(function () {
       if (angular.isDefined($window.twttr)) {
         clearInterval(poll);
-
         // when twitter loads, copy all of it's attributes to this service
-        for (var k in $window.twttr) { that[k] = angular.copy($window.twttr[k]); }
-
+        for (var k in $window.twttr) {
+          that[k] = angular.copy($window.twttr[k]);
+        }
         // pop off queued sdk invocations
         while (that.$$queue.length > 0) {
           var msg = that.$$queue.shift();
           var method;
-          for (var i=0; i<msg[0].length; i++) { method = (method ? method[msg[0][i]] : that[msg[0][i]]) }
+          for (var i = 0; i < msg[0].length; i++) {
+            method = (method ? method[msg[0][i]] : that[msg[0][i]]);
+          }
           method.apply(msg[1]);
         }
       }
     }, 5);
   })
-
-  .service('$gplus', function($window) {
+  .service('$gplus', function ($window) {
     if (angular.isUndefined($window.gapi)) {
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      (function () {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
         po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
       })();
     }
     var that = this;
-
     this.$$queue = [];
-    this.$$enqueue = function() {
+    this.$$enqueue = function () {
       var method = arguments;
-      return function() {
+      return function () {
         var args = arguments;
         that.$$queue.push([method, args]);
       };
     };
-
     // stub widgets with method to enqueue requests while
     // the sdk loads
     this.plusone = {
       go: this.$$enqueue('plusone', 'go')
     };
-
     // poll until twitter sdk loaded
-    var poll = $window.setInterval(function() {
+    var poll = $window.setInterval(function () {
       if (angular.isDefined($window.gapi)) {
         clearInterval(poll);
-
         // when twitter loads, copy all of it's attributes to this service
-        for (var k in $window.gapi) { that[k] = $window.gapi[k]; }
-
+        for (var k in $window.gapi) {
+          that[k] = $window.gapi[k];
+        }
         // pop off queued sdk invocations
         while (that.$$queue.length > 0) {
           var msg = that.$$queue.shift();
           var method;
-          for (var i=0; i<msg[0].length; i++) { method = (method ? method[msg[0][i]] : that[msg[0][i]]) }
+          for (var i = 0; i < msg[0].length; i++) {
+            method = (method ? method[msg[0][i]] : that[msg[0][i]]);
+          }
           method.apply(msg[1]);
         }
       }

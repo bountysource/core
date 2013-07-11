@@ -36,7 +36,6 @@ angular.module('app')
 
           noauth: function() {
             $api.set_post_auth_url("/issues/" + $scope.issue.id, payment_params);
-
             $location.url("/signin");
           }
         });

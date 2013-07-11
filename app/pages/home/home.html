@@ -1,106 +1,90 @@
 <div class="homepage">
-  <div class="background"></div>
+  <div class="background-top"></div>
+  <div class="background-users"></div>
+  <div class="background-fundraisers"></div>
+  <div class="background-projects"></div>
 
-  <div class="well">
-    <h1>The funding platform for open-source software.</h1>
+  <section id="top">
+    <div class="well">
+      <h1>The funding platform for open-source software.</h1>
 
+      <div class="row-fluid">
+        <div class="span4 offset2">
+          <h2 style="margin-left: 30px;">Anyone Can:</h2>
+          <div>
+            <i class="icon-check icon-white"></i>
+            <span>Accelerate open-source development.</span>
+          </div>
+          <div>
+            <i class="icon-check icon-white"></i>
+            <span>Incentivize developers to solve issues.</span>
+          </div>
+          <div>
+            <i class="icon-check icon-white"></i>
+            <span>Fund the next generation of projects.</span>
+          </div>
+        </div>
+
+        <div class="span4">
+          <h2 style="margin-left: 30px;">Developers Can:</h2>
+          <div>
+            <i class="icon-check icon-white"></i>
+            <span>Get rewarded for your contributions.</span>
+          </div>
+          <div>
+            <i class="icon-check icon-white"></i>
+            <span>Raise money for a future project.</span>
+          </div>
+          <div>
+            <i class="icon-check icon-white"></i>
+            <span>Solve open issues to earn bounties.</span>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="text-center">
+        <a class="btn btn-success btn-large" href="/faq">How Does It Work?</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="users">
+    <h3 class="text-center" style="margin: 0;">Top Developers</h3>
+    <ul class="inline">
+      <li ng-repeat="person in people.developers.top.slice(0,18)">
+        <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+      </li>
+    </ul>
+    <h3 class="text-center" style="margin: 0;">Top Backers</h3>
+    <ul class="inline">
+      <li ng-repeat="person in people.backers.top.slice(0,18)">
+        <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+      </li>
+    </ul>
+  </section>
+
+  <section id="fundraisers">
+    <h3 class="text-center">Featured Fundraisers</h3>
     <div class="row-fluid">
-      <div class="span6 home-developers">
-        <h2>Developers</h2>
-
-        <a class="btn btn-success btn-large" href="/faq/developers">Developers &raquo;</a>
-
-        <ul>
-          <li>Get rewarded for your contributions.</li>
-          <li>Raise money for a future project.</li>
-          <li>Solve open issues to earn bounties.</li>
-        </ul>
-        <br />
-        <br />
-        <ul class="top-pics">
-          <li class="span2" ng-repeat="person in people.developers.top.slice(0,6)">
-            <a href="/people/{{person.slug}}">
-              <img ng-src="{{person.image_url}}" />
-            </a>
-          </li>
-        </ul>
+      <div class="span6">
+        <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:3" fundraiser="fundraiser"></fundraiser-card>
       </div>
-
-      <div class="span6 home-backers">
-        <h2>Backers</h2>
-
-        <a class="btn btn-success btn-large" href="/faq/backers">Backers &raquo;</a>
-
-        <ul>
-          <li>Accelerate open-source development.</li>
-          <li>Incentivize developers to solve issues.</li>
-          <li>Fund the next generation of projects.</li>
-        </ul>
-        <br />
-        <br />
-        <ul class="top-pics">
-          <li class="span2" ng-repeat="person in people.backers.top.slice(0,6)">
-            <a href="/people/{{person.slug}}">
-              <img ng-src="{{person.image_url}}" />
-            </a>
-          </li>
-        </ul>
+      <div class="span6">
+        <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:3:6" fundraiser="fundraiser"></fundraiser-card>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="row-fluid">
-    <div class="span4">
-      <h3>Fundraisers</h3>
-      <ul class="featured-list">
-        <li ng-repeat="fundraiser in fundraisers.slice(0,6)">
-          <div>
-            <a ng-href="/fundraisers/{{fundraiser.slug}}"><img ng-src="{{fundraiser.image_url}}" /></a>
-            <div class="progress">
-              <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:10 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
-            </div>
-            <a ng-href="/fundraisers/{{fundraiser.slug}}"><strong>{{fundraiser.title}}</strong></a>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="span4">
-      <h3>Projects</h3>
-      <ul class="featured-list">
-        <li ng-repeat="tracker in trackers.slice(0,6)">
-          <div>
-            <a ng-href="/trackers/{{tracker.slug}}" style="text-decoration: none;">
-              <img ng-src="{{tracker.image_url}}" />
-              <strong>
-                {{tracker.name}}
-                <div ng-show="tracker.bounty_total > 0" class="label label-success">{{tracker.bounty_total | dollars}}</div>
-              </strong>
-            </a>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <!--<div class="span3">-->
-      <!--<h3>Testimonials</h3>-->
-      <!--<ul class="featured-list">-->
-        <!--<li>-->
-          <!--<img src="https://i2.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png?ssl=1"/>-->
-          <!--"So rad" -- Some dude.-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<img src="https://i2.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png?ssl=1"/>-->
-          <!--"WoahMG" -- That guy.-->
-        <!--</li>-->
-      <!--</ul>-->
-    <!--</div>-->
-
-    <div class="span4">
-      <div style="margin-top: 10px;">
-        <a require-twitter class="twitter-timeline" href="https://twitter.com/Bountysource" data-widget-id="352481476828352512"></a>
+  <section id="projects">
+    <h3 class="text-center">Top Projects</h3>
+    <div class="row-fluid">
+      <div class="span6">
+        <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:0:3" project="project"></project-card>
+      </div>
+      <div class="span6">
+        <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:3:6" project="project"></project-card>
       </div>
     </div>
-  </div>
+  </section>
 </div>
 

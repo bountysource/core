@@ -22,6 +22,11 @@ angular.module('app').
     return function (input, other) {
       return (input < other) ? input : other;
     };
+  }).filter('slice', function() {
+    return function(a,start,end) {
+      if (!a) { return []; }
+      return a.slice(start,end);
+    };
   }).filter('truncate', function() {
     // truncate string, add '...' or custom text.
     // note, size is the EXACT length of the string returned,

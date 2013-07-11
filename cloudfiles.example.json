@@ -1,0 +1,6 @@
+{
+  "user": "your login name",
+  "key": "your API key",
+  "base_url": "https://YOUR-UNIQUE-PREFIX.ssl.cf2.rackcdn.com/",
+  "container": "YOU ARE MISSING YOUR cloudfiles.json CONFIG FILE"
+}
