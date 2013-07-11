@@ -1,5 +1,7 @@
 <div class="homepage">
-  <div class="background"></div>
+  <div class="background-top"></div>
+  <div class="background-users"></div>
+  <div class="background-fundraisers"></div>
 
   <div class="well">
     <h1>The funding platform for open-source software.</h1>
@@ -7,100 +9,86 @@
     <div class="row-fluid">
       <div class="span6 home-developers">
         <h2>Developers</h2>
-
         <a class="btn btn-success btn-large" href="/faq/developers">Developers &raquo;</a>
-
         <ul>
           <li>Get rewarded for your contributions.</li>
           <li>Raise money for a future project.</li>
           <li>Solve open issues to earn bounties.</li>
         </ul>
-        <br />
-        <br />
-        <ul class="top-pics">
-          <li class="span2" ng-repeat="person in people.developers.top.slice(0,6)">
-            <a href="/people/{{person.slug}}">
-              <img ng-src="{{person.image_url}}" />
-            </a>
-          </li>
-        </ul>
       </div>
 
       <div class="span6 home-backers">
         <h2>Backers</h2>
-
         <a class="btn btn-success btn-large" href="/faq/backers">Backers &raquo;</a>
-
         <ul>
           <li>Accelerate open-source development.</li>
           <li>Incentivize developers to solve issues.</li>
           <li>Fund the next generation of projects.</li>
         </ul>
-        <br />
-        <br />
-        <ul class="top-pics">
-          <li class="span2" ng-repeat="person in people.backers.top.slice(0,6)">
-            <a href="/people/{{person.slug}}">
-              <img ng-src="{{person.image_url}}" />
-            </a>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
 
-  <div class="row-fluid">
-    <div class="span4">
-      <h3>Fundraisers</h3>
-      <ul class="featured-list">
-        <li ng-repeat="fundraiser in fundraisers.slice(0,6)">
-          <div>
-            <a ng-href="/fundraisers/{{fundraiser.slug}}"><img ng-src="{{fundraiser.image_url}}" /></a>
-            <div class="progress">
-              <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:10 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+  <br />
+
+  <section id="users">
+    <h3 class="text-center">Recent Users</h3>
+    <ul class="inline">
+      <li ng-repeat="person in people.developers.top.slice(0,9)">
+        <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 100px; height: 100px;" ng-src="{{person.image_url}}" /></a>
+      </li>
+    </ul>
+  </section>
+
+  <seciton id="fundraisers">
+    <h3 class="text-center">Featured Fundraisers</h3>
+
+    <div class="row-fluid">
+      <div class="span6">
+        <div ng-repeat="fundraiser in fundraisers.slice(0,3) | orderBy:'-created_at'" style="margin-bottom: 10px; padding: 2px; border-bottom: 1px solid rgb(236, 236, 236);">
+          <div class="row-fluid">
+            <div class="span2">
+              <a ng-href="/fundraisers/{{fundraiser.slug}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
+              </a>
             </div>
-            <a ng-href="/fundraisers/{{fundraiser.slug}}"><strong>{{fundraiser.title}}</strong></a>
+
+            <div class="span10">
+              <strong><a>{{fundraiser.title}}</a></strong>
+              <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}">{{fundraiser.person.display_name}}</a></small>
+              <br />
+              <small class="muted"><a ng-href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.short_description | truncate:70}}</a></small>
+              <br />
+              <div class="progress" style="margin: 0; width: 60%; display: inline-block; vertical-align: middle;">
+                <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+              </div>
+              <div style="display: inline-block; vertical-align: middle;"><small><strong>{{fundraiser.total_pledged | dollars}}</strong> of <strong>{{fundraiser.funding_goal | dollars}}</strong> pledged</small></div>
+            </div>
           </div>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div ng-repeat="fundraiser in fundraisers.slice(3,6) | orderBy:'-created_at'" style="margin-bottom: 10px; padding: 2px; border-bottom: 1px solid rgb(236, 236, 236);">
+          <div class="row-fluid">
+            <div class="span2">
+              <a ng-href="/fundraisers/{{fundraiser.slug}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
+              </a>
+            </div>
 
-    <div class="span4">
-      <h3>Projects</h3>
-      <ul class="featured-list">
-        <li ng-repeat="tracker in trackers.slice(0,6)">
-          <div>
-            <a ng-href="/trackers/{{tracker.slug}}" style="text-decoration: none;">
-              <img ng-src="{{tracker.image_url}}" />
-              <strong>
-                {{tracker.name}}
-                <div ng-show="tracker.bounty_total > 0" class="label label-success">{{tracker.bounty_total | dollars}}</div>
-              </strong>
-            </a>
+            <div class="span10">
+              <strong><a>{{fundraiser.title}}</a></strong>
+              <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}">{{fundraiser.person.display_name}}</a></small>
+              <br />
+              <small class="muted"><a ng-href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.short_description | truncate:70}}</a></small>
+              <br />
+              <div class="progress" style="margin: 0; width: 60%; display: inline-block; vertical-align: middle;">
+                <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+              </div>
+              <div style="display: inline-block; vertical-align: middle;"><small><strong>{{fundraiser.total_pledged | dollars}}</strong> of <strong>{{fundraiser.funding_goal | dollars}}</strong> pledged</small></div>
+            </div>
           </div>
-        </li>
-      </ul>
-    </div>
-
-    <!--<div class="span3">-->
-      <!--<h3>Testimonials</h3>-->
-      <!--<ul class="featured-list">-->
-        <!--<li>-->
-          <!--<img src="https://i2.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png?ssl=1"/>-->
-          <!--"So rad" -- Some dude.-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<img src="https://i2.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-user-420.png?ssl=1"/>-->
-          <!--"WoahMG" -- That guy.-->
-        <!--</li>-->
-      <!--</ul>-->
-    <!--</div>-->
-
-    <div class="span4">
-      <div style="margin-top: 10px;">
-        <a require-twitter class="twitter-timeline" href="https://twitter.com/Bountysource" data-widget-id="352481476828352512"></a>
+        </div>
       </div>
     </div>
-  </div>
+  </seciton>
 </div>
 

@@ -1,2 +1,9 @@
 <h1 style="margin-top: 0;">{{ fundraiser.title || 'Loading...' }}</h1>
+
+<a require-twitter href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+<div require-gplus class="g-plusone" data-size="medium" data-annotation="bubble"></div>
+<button style="margin-bottom: 12px;" class="btn btn-mini">
+  <i class="icon-share"></i>
+  Embed
+</button>
 <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
