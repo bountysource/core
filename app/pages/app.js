@@ -15,7 +15,12 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     if ((window.location.hash||'').match(/^#[^/]/)) {
       window.location.hash = '#/' + window.location.hash.replace(/^#/,'');
     }
-  }).run(function($api) {
+  }).run(function($api, $rootScope) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
+
+    // this really doesn't belong here
+    $rootScope.chatroomToggle = function() { $rootScope.showChatroom = !$rootScope.showChatroom; };
+    $rootScope.chatroomNick = "Guest" + Math.ceil(Math.random() * 100000);
+    $rootScope.chatroomConnect = function() { $rootScope.chatroomIframe = true; };
   });
