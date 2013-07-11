@@ -20,9 +20,12 @@ angular.module('app')
 
   .controller('SearchController', function ($scope, $location, $routeParams, $api) {
     $scope.search_query = $routeParams.query;
-    $scope.search_pending = true;
+    $scope.search_query_submitted = (angular.isDefined($scope.search_query) && $scope.search_query.length > 0);
+    $scope.search_pending = $scope.search_query_submitted;
 
-    if ($routeParams.query) {
+    if ($routeParams.query) { $scope.submit_search(); }
+
+    $scope.submit_search = function() {
       $api.search($routeParams.query).then(function(response) {
         $scope.search_pending = false;
 
@@ -43,7 +46,7 @@ angular.module('app')
           $scope.results = response;
         }
       });
-    }
+    };
 
     $scope.search_filter = null;
     $scope.filter_search_results = function(result) {
