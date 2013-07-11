@@ -6,3 +6,4 @@ app/components
 .DS_Store
 *.log
 .idea
+cloudfiles.json

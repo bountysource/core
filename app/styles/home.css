@@ -1,8 +1,6 @@
 /* backer/developer box */
 .homepage .background-top {
-  /*background: transparent url(/images/oss-logos/code3.jpg) no-repeat center center;*/
-  /*background-size: cover;*/
-  background: transparent url(/images/purty_wood.png) center center;
+  background: transparent url(../images/purty_wood.png) center center;
   position: absolute;
   left: 0;
   top: 45px;
