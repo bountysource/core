@@ -13,7 +13,7 @@ module.exports = function (grunt) {
     cloudfile_config = grunt.file.readJSON('cloudfiles.json');
   } catch (e) {
     cloudfile_config = grunt.file.readJSON('cloudfiles.example.json');
-  };
+  }
 
   grunt.initConfig({
     watch: {
@@ -424,7 +424,7 @@ module.exports = function (grunt) {
           contents = contents.replace(matcher, '$1'+cdn_url+'$2');
         }
         grunt.file.write(filepath, contents);
-      })
+      });
     });
 
 //    this.files.forEach(function(f) {

@@ -5,13 +5,10 @@ angular.module('api.bountysource',[]).
     var $api = this; // hack to store self reference
 
     // set environment
+    $rootScope.environment = window.BS_ENV;
     if ($location.host().match(/localhost/)) {
       $rootScope.can_switch_environments = true;
-      $rootScope.environment = $cookieStore.get('environment') || 'qa';
-    } else if ($location.host().match(/www-qa\.bountysource\.com/)) {
-      $rootScope.environment = 'qa';
-    } else {
-      $rootScope.environment = 'prod';
+      $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
 
     // set API host based on environment
