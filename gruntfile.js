@@ -377,8 +377,8 @@ module.exports = function (grunt) {
     'md5cdn:css',        // update compiled css with CDN urls
     'md5:css_js',        // create md5 copies of css/js in dist/compiled
     'md5cdn:html',       // update root HTML with CDN'd css/js
-    'cloudfiles'        // copy all of compiled/ up to CDN
-    //'clean:dist_assets'  // clean up assets now that they're all up on CDN
+    'cloudfiles',        // copy all of compiled/ up to CDN
+    'clean:dist_assets'  // clean up assets now that they're all up on CDN
   ]);
 
   grunt.registerTask('default', ['build']);
