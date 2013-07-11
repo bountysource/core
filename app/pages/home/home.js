@@ -8,7 +8,7 @@ angular.module('app')
         controller: 'HomeCtrl'
       });
   })
-  .controller('HomeCtrl', function ($scope, $window, $api, $twttr) {
+  .controller('HomeCtrl', function ($scope, $window, $api) {
     $scope.fundraisers = $api.fundraiser_cards();
 
     // $scope.recent_people = $api.people_recent();
