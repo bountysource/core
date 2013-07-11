@@ -1,4 +1,4 @@
-<div class="well well-large" ng-show="can_manage">
+<div class="well well-large" ng-show="can_manage" ng-hide="fundraiser.published && !fundraiser.in_progress">
   <a ng-href="/fundraisers/{{ fundraiser.slug }}/edit" class="btn btn-large btn-block">
     <i class="icon-edit"></i>
     Edit Fundraiser

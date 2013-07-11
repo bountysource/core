@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $person) {
     $routeProvider
       .when('/fundraisers/new', {
         templateUrl: 'pages/fundraisers/create.html',
-        controller: 'FundraiserCreateController'
+        controller: 'FundraiserCreateController',
+        resolve: $person
       });
   })
 
