@@ -41,15 +41,23 @@ angular.module('app')
             relation.$installing_plugin = true;
 
             $api.tracker_plugin_create(relation.project.id, relation.linked_account.id).then(function(new_relation) {
-              // find and update the relation
-              for (var i=0; i<$scope.relations.length; i++) {
-                if ($scope.relations[i].id === new_relation.id) {
-                  for (var k in new_relation) { $scope.relations[i][k] = new_relation[k]; }
-                  $scope.init_tracker_plugin($scope.relations[i]);
-                  break;
+              relation.$installing_plugin = false;
+
+              if (new_relation.error) {
+                // if error present, it means you lack permission to install the plugin.
+                // set flag to hide install button
+                relation.$hide_install_button = true;
+                relation.$install_failed_error = new_relation.error;
+              } else {
+                // find and update the relation
+                for (var i=0; i<$scope.relations.length; i++) {
+                  if ($scope.relations[i].id === new_relation.id) {
+                    for (var k in new_relation) { $scope.relations[i][k] = new_relation[k]; }
+                    $scope.init_tracker_plugin($scope.relations[i]);
+                    break;
+                  }
                 }
               }
-              relation.$installing_plugin = false;
             });
           };
         }
