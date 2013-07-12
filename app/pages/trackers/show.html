@@ -43,29 +43,29 @@
       </div>
     </div>
 
-    <h4>Tags</h4>
+    <!--<h4>Tags</h4>-->
 
-    <form class="form-inline">
-      <input type="text" class="span7" ng-model="tracker.new_tag.name" placeholder="Add a new tag" />
-      <button type="submit" class="btn btn-primary" ng-click="tracker.create_tag()">
-        <i class="icon-tag icon-white"></i>
-        Add Tag
-      </button>
-    </form>
+    <!--<form class="form-inline">-->
+      <!--<input type="text" class="span7" ng-model="tracker.new_tag.name" placeholder="Add a new tag" />-->
+      <!--<button type="submit" class="btn btn-primary" ng-click="tracker.create_tag()">-->
+        <!--<i class="icon-tag icon-white"></i>-->
+        <!--Add Tag-->
+      <!--</button>-->
+    <!--</form>-->
 
-    <div ng-repeat="tag_relation in tracker.tags | orderBy:'weight':true">
-      <ul class="inline">
-        <li style="width: 24px;"><a ng-show="tag_relation.vote <= 0" ng-click="tag_relation.upvote()"><i class="icon-thumbs-up"></i></a></li>
-        <li style="width: 24px;"><a ng-show="tag_relation.vote >= 0" ng-click="tag_relation.downvote()"><i class="icon-thumbs-down"></i></a></li>
-        <li><strong>{{tag_relation.weight}}</strong></li>
-        <li>
-          <span class="label label-info">
-            <i class="icon-tag icon-white"></i>
-            {{tag_relation.tag.name}}
-          </span>
-        </li>
-      </ul>
-    </div>
+    <!--<div ng-repeat="tag_relation in tracker.tags | orderBy:'weight':true">-->
+      <!--<ul class="inline">-->
+        <!--<li style="width: 24px;"><a ng-show="tag_relation.vote <= 0" ng-click="tag_relation.upvote()"><i class="icon-thumbs-up"></i></a></li>-->
+        <!--<li style="width: 24px;"><a ng-show="tag_relation.vote >= 0" ng-click="tag_relation.downvote()"><i class="icon-thumbs-down"></i></a></li>-->
+        <!--<li><strong>{{tag_relation.weight}}</strong></li>-->
+        <!--<li>-->
+          <!--<span class="label label-info">-->
+            <!--<i class="icon-tag icon-white"></i>-->
+            <!--{{tag_relation.tag.name}}-->
+          <!--</span>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
   </div>
 
   <div class="span9">
