@@ -6,7 +6,7 @@
 
 <alert ng-show="error" type="error" close="error = null">Error</alert>
 
-<form name="create_form">
+<ng-form name="form">
   <alert ng-show="error">{{ error }}</alert>
 
   <div class="row-fluid">
@@ -15,54 +15,40 @@
       <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="fundraiser.title" placeholder="The title of your fundraiser" />
       <textarea class="span12 lead" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
 
-      <!--Show progress element, with fundraiser goal edit field-->
-      <div class="row-fluid">
-        <div class="span12" style="text-align: center;">
-          <div style="margin-top: 10px;" >
-            <div class="row-fluid">
-              <div class="span3">
-                <h1 style="margin-bottom:0"><strong>${{ fundraiser.total_pledged | number:0 }}</strong></h1>
-
-                <!--gross inline styling-->
-                <div style="margin-top: 5px;">
-                  <div style="vertical-align: middle; display: inline-block;">raised of $</div>
-                  <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" type="number" min="0" ng-model="fundraiser.funding_goal" />
-                  <div style="vertical-align: middle; display: inline-block;">goal</div>
-                </div>
-              </div>
-
-              <div class="span3" style="text-align: center;">
-                <h1 style="margin-bottom:0"><strong>0</strong></h1>
-                <span>backers</span>
-              </div>
-
-              <div class="span3" style="text-align: center;">
-                <h1 style="margin-bottom:0"><strong>0%</strong></h1>
-                <span>funded</span>
-              </div>
-
-              <div class="span3" style="text-align: center;">
-                <h1 style="margin-bottom:0"><strong>30</strong></h1>
-                <span>days left</span>
-              </div>
-            </div>
-            <br/>
-            <progress class="progress-success progress-striped" value="funding_percentage(fundraiser)"></progress>
+      <ng-form class="form-horizontal" name="urls">
+        <div class="control-group">
+          <label class="control-label" for="repo-url">Image URL</label>
+          <div class="controls">
+            <input class="span8" id="repo-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />
           </div>
         </div>
-      </div>
+
+        <div class="control-group">
+          <label class="control-label" for="homepage-url">Homepage</label>
+          <div class="controls">
+            <input class="span8" id="homepage-url" type="url" ng-model="fundraiser.homepage_url" placeholder="https://www.bountysource.com" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="repo-url">Repository</label>
+          <div class="controls">
+            <input class="span8" id="repo-url" type="url" ng-model="fundraiser.repo_url" placeholder="https://github.com/bountysource/frontend" />
+          </div>
+        </div>
+      </ng-form>
 
       <!--Edit main Description-->
       <div class="alert alert-info">
         <strong>Protip:</strong> You can format your description using <a href="https://help.github.com/articles/github-flavored-markdown" target="_blank">GitHub Flavored Markdown</a>.
       </div>
-      <textarea id="fundraiser-description" class="span12" rows="15" ng-model="fundraiser.description" placeholder="A description of your goal with this fundraiser. You can use GitHub flavored markdown here."></textarea>
+      <textarea id="fundraiser-description" class="span12" rows="15" ng-model="fundraiser.description" placeholder="A description of your goal with this fundraiser."></textarea>
     </div>
 
     <div class="span3">
       <!--Big Create Fundraiser button-->
       <div class="well well-large">
-        <button ng-click="create()" ng-disabled="!fundraiser.title" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
+        <button ng-click="create()" ng-disabled="!fundraiser.title || urls.$invalid" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
       </div>
 
       <!--About the author-->
@@ -78,4 +64,4 @@
       <button class="btn btn-block btn-large" disabled>Pledge Now</button>
     </div>
   </div>
-</form>
+</ng-form>
