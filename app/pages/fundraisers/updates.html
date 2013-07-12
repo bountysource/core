@@ -15,7 +15,7 @@
         <div ng-show="can_manage" class="hero-unit">
           <h2>Updates</h2>
           <p>Publish updates about your fundraiser. Published updates are emailed to the backers of your fundraiser.</p>
-          <button ng-href="/fundraisers/{{fundraiser.slug}}/updates/new" class="btn btn-large btn-primary">New Update</button>
+          <button ng-controller="FundraiserUpdatesController" ng-click="create_update()" class="btn btn-large btn-primary">New Update</button>
         </div>
 
         <div class="alert alert-info" ng-show="updates.length <= 0">
