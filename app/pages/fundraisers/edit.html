@@ -129,20 +129,20 @@
             <!--Reward amount-->
             <div class="input-prepend" style="margin-bottom:0">
               <span class="add-on">$</span>
-              <input type="number" name="amount" ng-model="new_reward.amount" min="5" required placeholder="Minimum Pledge Amount" ng-disabled="fundraiser.published" />
+              <input type="number" name="amount" ng-model="new_reward.amount" min="5" required placeholder="Minimum Pledge Amount" />
             </div>
 
             <!--Reward quantity-->
             <div style="margin-top: 5px;">
               <div style="vertical-align: middle; display: inline-block;">0 of </div>
-              <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" placeholder="∞" type="number" min="0" ng-model="new_reward.limited_to" ng-disabled="fundraiser.published" tooltip="Leave empty for no limit" tooltip-placement="bottom" tooltip-trigger="focus" />
+              <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" placeholder="∞" type="number" min="0" ng-model="new_reward.limited_to" tooltip="Leave empty for no limit" tooltip-placement="bottom" tooltip-trigger="focus" />
               <div style="vertical-align: middle; display: inline-block;"> claimed</div>
             </div>
           </div>
           <br>
 
           <!--Reward description-->
-          <textarea class="span12" rows="5" ng-model="new_reward.description" required placeholder="A description of this reward." ng-disabled="fundraiser.published"></textarea>
+          <textarea class="span12" rows="5" ng-model="new_reward.description" required placeholder="A description of this reward."></textarea>
 
           <!--Fulfillment Details-->
           <textarea class="span12" rows="5" ng-model="new_reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
