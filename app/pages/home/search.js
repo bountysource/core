@@ -23,8 +23,6 @@ angular.module('app')
     $scope.search_query_submitted = (angular.isDefined($scope.search_query) && $scope.search_query.length > 0);
     $scope.search_pending = $scope.search_query_submitted;
 
-    if ($routeParams.query) { $scope.submit_search(); }
-
     $scope.submit_search = function() {
       $api.search($routeParams.query).then(function(response) {
         $scope.search_pending = false;
@@ -47,6 +45,8 @@ angular.module('app')
         }
       });
     };
+
+    if ($routeParams.query) { $scope.submit_search(); }
 
     $scope.search_filter = null;
     $scope.filter_search_results = function(result) {
