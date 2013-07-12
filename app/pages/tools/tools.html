@@ -139,7 +139,7 @@
             <div ng-hide="selected_relation.project.tracker_plugin">
               <h2>{{selected_relation.project.name}}</h2>
               <p class="lead">Automatically display bounty information on GitHub issues. Install the GitHub plugin to get started!</p>
-              <button class="btn btn-large btn-primary" ng-click="selected_relation.install_plugin()" ng-hide="selected_relation.$hide_install_button">
+              <button require-github-auth="public_repo" class="btn btn-large btn-primary" ng-click="selected_relation.install_plugin()" ng-hide="selected_relation.$hide_install_button">
                 <i class="icon-flag icon-white"></i>
                 Install GitHub Plugin
               </button>

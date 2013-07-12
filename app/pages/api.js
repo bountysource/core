@@ -364,26 +364,10 @@ angular.module('api.bountysource',[]).
       }
     };
 
-    this.signin_url_for = function(provider) {
-      // TODO: why isn't this provided by angular.js somewhere?? seems silly that we need to rebuild baseHref
-      var DEFAULT_PORTS = {'http': 80, 'https': 443, 'ftp': 21};
-      var protocol = $location.protocol(),
-          host = $location.host(),
-          port = $location.port();
-      var redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
-
-      var url = $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent(redirect_url);
-      if ($cookieStore.get($api.access_token_cookie_name)) {
-        url += '&access_token=' + encodeURIComponent($cookieStore.get($api.access_token_cookie_name));
-      }
-      return url;
-    };
-
     this.signout = function() {
       $api.set_current_person();
       $window.location.reload();
     };
-
 
     // helper functions... definitely doesn't belong here
     this.pathMerge = function(url, params) {
@@ -400,6 +384,20 @@ angular.module('api.bountysource',[]).
         parts.push($api.encodeUriQuery(key, true) + (value === true ? '' : '=' + $api.encodeUriQuery(value, true)));
       });
       return parts.length ? parts.join('&') : '';
+    };
+
+    this.signin_url_for = function(provider, options) {
+      options = options || {};
+
+      // TODO: why isn't this provided by angular.js somewhere?? seems silly that we need to rebuild baseHref
+      var DEFAULT_PORTS = {'http': 80, 'https': 443, 'ftp': 21};
+      var protocol = $location.protocol();
+      var host = $location.host();
+      var port = $location.port();
+
+      options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
+      options.access_token = $cookieStore.get($api.access_token_cookie_name);
+      return $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?' + $api.toKeyValue(options);
     };
 
     this.encodeUriQuery = function(val, pctEncodeSpaces) {
