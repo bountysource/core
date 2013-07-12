@@ -57,14 +57,10 @@ angular.module('app')
     });
 
     // merge all of the issue arrays into one
-    $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues, response) {
-      console.log(issues);
-      return issues
+    $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+      for (var i=0; i<issues.length; i++) { issues[i].bounty_total = parseFloat(issues[i].bounty_total); }
+      return issues;
     });
-
-//    // turn all of the bounty totals into floats. dunno why that isn't the case.
-//    for (i in tracker.issues) { tracker.issues[i].bounty_total = parseFloat(tracker.issues[i].bounty_total); }
-
 
     $scope.issue_filter_options = {
       text: null,
