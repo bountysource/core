@@ -7,11 +7,10 @@
 <hr />
 
 <div ng-hide="search_query_submitted">
-  <form>
-
+  <form ng-submit="submit_search()" >
+    <input type="text" class="search-query span4" ng-model="search_query" placeholder="Issue URL, Project, Language, etc." />
+    <button type="submit" class="btn btn-primary" ng-disabled="!search_query"><i class="icon-search icon-white"></i> Search</button>
   </form>
-  <input type="text" class="search-query span4" ng-model="search_query" placeholder="Issue URL, Project, Language, etc." />
-  <button type="submit" class="btn btn-primary" ng-click="submit_search()" ng-disabled="!search_query"><i class="icon-search icon-white"></i> Search</button>
 </div>
 
 <div class="text-center" collapse="!search_query_submitted || !search_pending">
