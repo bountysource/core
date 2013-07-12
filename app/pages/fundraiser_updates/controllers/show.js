@@ -16,9 +16,11 @@ angular.module('app')
     });
 
     $scope.publish = function() {
-      console.log('meep');
       $api.fundraiser_update_publish($routeParams.fundraiser_id, $routeParams.id, function(response) {
         if (response.meta.success) {
+          // update the... update
+          $scope.update = angular.copy(response.data.update);
+
           $location.url("/fundraisers/"+$routeParams.fundraiser_id+"/updates/"+$routeParams.id);
         } else {
           $scope.error = response.data.error;
