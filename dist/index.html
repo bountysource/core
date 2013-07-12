@@ -17,14 +17,14 @@
 
     <link rel="stylesheet" href="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/321fc11cdf12bc36117bae3014dfed74.css">
 
-    <link rel="stylesheet" href="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/2defbeff3fc9063920e78264808ba722.css">
+    <link rel="stylesheet" href="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/0349bd6e07f90044261d6f83a16e85a7.css">
   </head>
-  <body ng-app="app" ng-class="{'chatroom': chatroom.show}">
+  <body ng-app="app" ng-class="{'chatroom': chatroom.show}" ng-controller="MainController">
 
     <div id="wrap">
-      <div id="main" class="container clear-top">
+      <div id="main" class="clear-top">
         <div ng:include="" src="'pages/layout/navbar.html'"></div>
-        <div class="container" ng-view=""></div>
+        <div ng-class="{ 'container': !no_container }" ng-view=""></div>
       </div>
     </div>
     <div ng:include="" src="'pages/layout/chatroom.html'"></div>
@@ -37,6 +37,6 @@
 
     <script src="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/2be9d2c8fdc1328a506feb170c4c8f9a.js"></script>
 
-    <script src="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/65adfa674512f41fc0651c3f21f54a72.js"></script>
+    <script src="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/b9e1397345b2750a3318041c1733d601.js"></script>
   </body>
 </html>
