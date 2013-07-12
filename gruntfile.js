@@ -233,6 +233,11 @@ module.exports = function (grunt) {
         }]
       }
     },
+    uglify: {
+      options: {
+        mangle: false
+      }
+    },
     copy: {
       dist: {
         files: [{
@@ -360,6 +365,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     //'test',              // run tests first, don't build unless all tests pass
     'clean:dist',        // start off with empty folder
+    'html_src',          // make sure all our html_srcs are included correctly
     'copy',              // copy in static files like favicon.ico and robots.txt
     'imagemin',          // copy in minified version of images
     'md5:binary',        // create md5-named copies of binary files (images, fonts, etc)

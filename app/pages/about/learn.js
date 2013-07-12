@@ -3,8 +3,8 @@
 angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/faq/backers', {
-        templateUrl: 'pages/about/backers.html',
+      .when('/learn', {
+        templateUrl: 'pages/about/learn.html',
         controller: 'Static'
       });
   });

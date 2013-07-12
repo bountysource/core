@@ -43,29 +43,29 @@
       </div>
     </div>
 
-    <h4>Tags</h4>
+    <!--<h4>Tags</h4>-->
 
-    <form class="form-inline">
-      <input type="text" class="span7" ng-model="tracker.new_tag.name" placeholder="Add a new tag" />
-      <button type="submit" class="btn btn-primary" ng-click="tracker.create_tag()">
-        <i class="icon-tag icon-white"></i>
-        Add Tag
-      </button>
-    </form>
+    <!--<form class="form-inline">-->
+      <!--<input type="text" class="span7" ng-model="tracker.new_tag.name" placeholder="Add a new tag" />-->
+      <!--<button type="submit" class="btn btn-primary" ng-click="tracker.create_tag()">-->
+        <!--<i class="icon-tag icon-white"></i>-->
+        <!--Add Tag-->
+      <!--</button>-->
+    <!--</form>-->
 
-    <div ng-repeat="tag_relation in tracker.tags | orderBy:'weight':true">
-      <ul class="inline">
-        <li style="width: 24px;"><a ng-show="tag_relation.vote <= 0" ng-click="tag_relation.upvote()"><i class="icon-thumbs-up"></i></a></li>
-        <li style="width: 24px;"><a ng-show="tag_relation.vote >= 0" ng-click="tag_relation.downvote()"><i class="icon-thumbs-down"></i></a></li>
-        <li><strong>{{tag_relation.weight}}</strong></li>
-        <li>
-          <span class="label label-info">
-            <i class="icon-tag icon-white"></i>
-            {{tag_relation.tag.name}}
-          </span>
-        </li>
-      </ul>
-    </div>
+    <!--<div ng-repeat="tag_relation in tracker.tags | orderBy:'weight':true">-->
+      <!--<ul class="inline">-->
+        <!--<li style="width: 24px;"><a ng-show="tag_relation.vote <= 0" ng-click="tag_relation.upvote()"><i class="icon-thumbs-up"></i></a></li>-->
+        <!--<li style="width: 24px;"><a ng-show="tag_relation.vote >= 0" ng-click="tag_relation.downvote()"><i class="icon-thumbs-down"></i></a></li>-->
+        <!--<li><strong>{{tag_relation.weight}}</strong></li>-->
+        <!--<li>-->
+          <!--<span class="label label-info">-->
+            <!--<i class="icon-tag icon-white"></i>-->
+            <!--{{tag_relation.tag.name}}-->
+          <!--</span>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
   </div>
 
   <div class="span9">
@@ -113,10 +113,10 @@
     </div>
 
     <!--No issues shown message -->
-    <div ng-show="(tracker.issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
+    <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
 
     <!--Table of issues-->
-    <table class="table table-condensed table-striped" ng-show="(tracker.issues | filter:issue_filter).length > 0">
+    <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length > 0">
       <thead>
       <tr>
         <th class="span1"><a ng-click="change_order_col('bounty_total')">Bounty</a></th>
@@ -126,7 +126,7 @@
       </thead>
 
       <tbody>
-      <tr ng-repeat="issue in tracker.issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+      <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
         <td>
           <span ng-show="issue.bounty_total > 0" class="badge badge-success">{{issue.bounty_total | dollars}}</span>
         </td>

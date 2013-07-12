@@ -1,67 +1,26 @@
-/* backer/developer box */
-.homepage .background-top {
-  background: transparent url(../images/purty_wood.png) center center;
-  position: absolute;
-  left: 0;
-  top: 45px;
-  width: 100%;
-  height: 335px;
-  z-index: -1;
-}
-
-.homepage .background-users {
-  background: rgb(245, 245, 245);
-  position: absolute;
-  left: 0;
-  top: 380px;
-  width: 100%;
-  height: 245px;
-  z-index: -1;
-}
-
-/*.homepage .background-fundraisers {*/
-  /*background: white;*/
-  /*position: absolute;*/
-  /*left: 0;*/
-  /*top: 580px;*/
-  /*width: 100%;*/
-  /*height: 400px;*/
-  /*z-index: -1;*/
-/*}*/
-
-.homepage .background-projects {
-  background: rgb(245, 245, 245);
-  position: absolute;
-  left: 0;
-  top: 960px;
-  width: 100%;
-  height: 400px;
-  z-index: -1;
-}
-
 .homepage section#top {
-  height: 320px;
+  background: #444;
+  text-align: center;
+  padding: 20px 0 40px 0;
 }
 
 .homepage section#users {
+  background: #eee;
   text-align: center;
-  height: 240px;
 }
 
 .homepage section#fundraisers {
-  height: 330px;
 }
 
 .homepage section#projects {
-  height: 270px;
+  background: #eee;
 }
 
 /* backer/developer box (background and text) */
-.homepage .well { background-color: rgba(0,0,0,0.5); color: #fff; border: 0; }
-.homepage .well h1 { text-align: center; padding: 10px 0 20px 0; margin: 0; }
-.homepage .well h2 { padding: 0 0 0px 0; margin: 0 0 10px; font-size: 25px; }
-.homepage .well h3 { padding: 0 0 0px 0; margin: 0; font-size: 16px; margin-left: 24px; font-weight: normal; }
-.homepage .well .home-developers li, .homepage .home-backers li  { font-size: 16px; line-height: 24px; }
+.homepage #top { background-color: rgba(0,0,0,0); color: #fff; border: 0; }
+.homepage #top h1 { text-align: center; padding: 10px 0 0px 0; margin: 0; font-size: 34px; }
+.homepage #top h2 { padding: 0 0 0px 0; margin: 0 0 30px; font-size: 24px; font-weight: normal; }
+.homepage #top h3 { padding: 0 0 0px 0; margin: 0; font-size: 16px; margin-left: 24px; font-weight: normal; }
 /*.homepage .well .btn { float: right; }*/
 
 /* backer/developer box (vertical white line) */

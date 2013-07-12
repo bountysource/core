@@ -26,16 +26,22 @@
     <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="styles/issues.css">
     <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/learn.css">
     <link rel="stylesheet" href="styles/people.css">
     <link rel="stylesheet" href="styles/signin.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="app" ng-class="{'chatroom': showChatroom}">
+  <body ng-app="app" ng-class="{'chatroom': chatroom.show}" ng-controller="MainController">
 
     <div id="wrap">
-      <div id="main" class="container clear-top">
+      <div id="main" class="clear-top">
         <div ng:include src="'pages/layout/navbar.html'"></div>
-        <div class="container" ng-view></div>
+        <div class="container">
+          <div class="alert" style="text-align: center">
+            <strong>You're testing our new website!</strong> If you experience any issues, please email us at <a href="mailto:support@bountysource.com">support@bountysource.com</a> or <a href="https://github.com/bountysource/frontend/issues/new" target="_blank">create an issue on GitHub</a>. Pull Requests are encouraged!
+          </div>
+        </div>
+        <div ng-class="{ 'container': !no_container }" ng-view></div>
       </div>
     </div>
     <div ng:include src="'pages/layout/chatroom.html'"></div>
@@ -58,11 +64,11 @@
     <!-- build:js assets/app.js -->
     <!-- html_src start -->
     <script src="pages/app.js" type="text/javascript"></script>
-    <script src="pages/about/backers.js" type="text/javascript"></script>
-    <script src="pages/about/developers.js" type="text/javascript"></script>
     <script src="pages/about/faq.js" type="text/javascript"></script>
+    <script src="pages/about/fees.js" type="text/javascript"></script>
     <script src="pages/about/history.js" type="text/javascript"></script>
     <script src="pages/about/jobs.js" type="text/javascript"></script>
+    <script src="pages/about/learn.js" type="text/javascript"></script>
     <script src="pages/about/privacy_policy.js" type="text/javascript"></script>
     <script src="pages/about/static.js" type="text/javascript"></script>
     <script src="pages/about/terms.js" type="text/javascript"></script>
@@ -98,9 +104,10 @@
     <script src="pages/issues/controllers/new.js" type="text/javascript"></script>
     <script src="pages/issues/controllers/show.js" type="text/javascript"></script>
     <script src="pages/issues/controllers/solutions.js" type="text/javascript"></script>
-    <script src="pages/layout/chatroom.js" type="text/javascript"></script>
     <script src="pages/layout/navbar.js" type="text/javascript"></script>
+    <script src="pages/legacy_route.js" type="text/javascript"></script>
     <script src="pages/livereload.js" type="text/javascript"></script>
+    <script src="pages/main.js" type="text/javascript"></script>
     <script src="pages/people/activity.js" type="text/javascript"></script>
     <script src="pages/people/following.js" type="text/javascript"></script>
     <script src="pages/people/partials/tabs.js" type="text/javascript"></script>

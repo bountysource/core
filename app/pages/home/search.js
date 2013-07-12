@@ -20,30 +20,38 @@ angular.module('app')
 
   .controller('SearchController', function ($scope, $location, $routeParams, $api) {
     $scope.search_query = $routeParams.query;
-    $scope.search_pending = true;
+    $scope.search_query_submitted = (angular.isDefined($scope.search_query) && $scope.search_query.length > 0);
+    $scope.search_pending = $scope.search_query_submitted;
 
-    if ($routeParams.query) {
-      $api.search($routeParams.query).then(function(response) {
-        $scope.search_pending = false;
+    $scope.submit_search = function() {
+      if ($scope.search_query.length > 0) {
+        $scope.search_query_submitted = true;
+        $scope.search_pending = true;
 
-        // did we recognize this as a URL? Redirect to the appropriate issue or project page.
-        if (response.redirect_to) {
-          // LEGACY replace the '#' with '/'
-          var url = response.redirect_to;
-          if (url[0] === '#') {
-            url = '/' + url.slice(1);
+        $api.search($scope.search_query).then(function(response) {
+          $scope.search_pending = false;
+
+          // did we recognize this as a URL? Redirect to the appropriate issue or project page.
+          if (response.redirect_to) {
+            // LEGACY replace the '#' with '/'
+            var url = response.redirect_to;
+            if (url[0] === '#') {
+              url = '/' + url.slice(1);
+            }
+            $location.path(url).replace();
+          } else if (response.create_issue) {
+            // oh no, nothing was found! redirect to page to create issue for arbitrary URL
+            $location.path("/issues/new").search({ url: $scope.search_query }).replace();
+          } else {
+            // just render normal search results, returned by the API as
+            // response.trackers and response.issues
+            $scope.results = response;
           }
-          $location.path(url).replace();
-        } else if (response.create_issue) {
-          // oh no, nothing was found! redirect to page to create issue for arbitrary URL
-          $location.path("/issues/new").search({ url: $scope.search_query }).replace();
-        } else {
-          // just render normal search results, returned by the API as
-          // response.trackers and response.issues
-          $scope.results = response;
-        }
-      });
-    }
+        });
+      }
+    };
+
+    if ($routeParams.query) { $scope.submit_search(); }
 
     $scope.search_filter = null;
     $scope.filter_search_results = function(result) {

@@ -5,9 +5,9 @@
 body.chatroom #chatroom { height: 200px; }
 body.chatroom .navbar { top: 200px; box-shadow: 0px -5px 5px rgba(0,0,0,0.1); }
 body.chatroom #main { padding-top: 200px; }
-body #main { -webkit-transition: padding-top 0.25s; }
-.navbar { -webkit-transition: top 0.25s; }
-#chatroom { -webkit-transition: height 0.25s; }
+body #main { -webkit-transition: padding-top 0.5s; }
+.navbar { -webkit-transition: top 0.5s; }
+#chatroom { -webkit-transition: height 0.5s; }
 @media (max-width: 979px) {
   #chatroom { position: absolute; }
 }

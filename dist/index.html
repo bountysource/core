@@ -15,16 +15,21 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/321fc11cdf12bc36117bae3014dfed74.css">
+    <link rel="stylesheet" href="assets/bootstrap.css">
 
-    <link rel="stylesheet" href="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/796188f23251eaaea4a5b17e7b2f1bbb.css">
+    <link rel="stylesheet" href="assets/app.css">
   </head>
-  <body ng-app="app" ng-class="{'chatroom': showChatroom}">
+  <body ng-app="app" ng-class="{'chatroom': chatroom.show}" ng-controller="MainController">
 
     <div id="wrap">
-      <div id="main" class="container clear-top">
+      <div id="main" class="clear-top">
         <div ng:include="" src="'pages/layout/navbar.html'"></div>
-        <div class="container" ng-view=""></div>
+        <div class="container">
+          <div class="alert" style="text-align: center">
+            <strong>You're testing our new website!</strong> If you experience any issues, please email us at <a href="mailto:support@bountysource.com">support@bountysource.com</a> or <a href="https://github.com/bountysource/frontend/issues/new" target="_blank">create an issue on GitHub</a>. Pull Requests are encouraged!
+          </div>
+        </div>
+        <div ng-class="{ 'container': !no_container }" ng-view=""></div>
       </div>
     </div>
     <div ng:include="" src="'pages/layout/chatroom.html'"></div>
@@ -35,8 +40,8 @@
       <script src="components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <script src="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/0c464a84774ffeda24055fc8547e6bef.js"></script>
+    <script src="assets/angular.js"></script>
 
-    <script src="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/5d29f4a738496b93350a0e0a14f18add.js"></script>
+    <script src="assets/app.js"></script>
   </body>
 </html>

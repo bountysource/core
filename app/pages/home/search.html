@@ -6,12 +6,19 @@
 <h2>Search</h2>
 <hr />
 
-<div class="text-center" collapse="!search_pending">
+<div ng-hide="search_query_submitted">
+  <form ng-submit="submit_search()" >
+    <input type="text" class="search-query span4" ng-model="search_query" placeholder="Issue URL, Project, Language, etc." />
+    <button type="submit" class="btn btn-primary" ng-disabled="!search_query"><i class="icon-search icon-white"></i> Search</button>
+  </form>
+</div>
+
+<div class="text-center" collapse="!search_query_submitted || !search_pending">
   <p class="lead">Searching for '{{search_query}}'...</p>
   <progress value="100" class="progress-striped active"></progress>
 </div>
 
-<div class="row-fluid" collapse="search_pending">
+<div class="row-fluid" collapse="!search_query_submitted || search_pending">
   <div class="span3">
     <div collapse="search_pending">
       <div class="well">

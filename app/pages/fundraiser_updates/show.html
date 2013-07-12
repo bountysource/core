@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
+  <!--<li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>-->
   <li><a ng-href="/fundraisers/{{fundraiser.id}}">{{fundraiser.title ||'Loading...'}}</a><span class="divider">»</span></li>
   <li><a ng-href="/fundraisers/{{fundraiser.id}}/updates">Updates</a><span class="divider">»</span></li>
   <li ng-show="update"><a ng-href="/fundraisers/{{fundraiser.id}}/updates/{{update.id}}">Update #{{update.number}}</a></li>
@@ -21,7 +21,7 @@
 
       <div ng-hide="update.published_at">
         <div class="alert alert-info"><strong>Note:</strong> This update has not been published. When you are ready to ship it, click the Publish button to the right!</div>
-        <h2><span class="text-info">#{{ fundraiser.updates.length + 1 }}</span> {{ update.title || 'Untitled' }}</h2>
+        <h2><span class="text-info">#{{ fundraiser.updates.length }}</span> {{ update.title || 'Untitled' }}</h2>
         <div class="muted">Last modified {{ update.updated_at | date }}</div>
       </div>
 

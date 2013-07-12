@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
+  <!--<li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>-->
   <li><a href="/fundraisers/{{fundraiser.id}}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
   <li><a>Edit</a></li>
 </ul>
@@ -15,42 +15,28 @@
     <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="changes.title" placeholder="The title of your fundraiser" />
     <textarea class="span12 lead" rows="2" name="description" ng-model="changes.short_description" placeholder="Briefly describe your fundraiser"></textarea>
 
-    <!--Show progress element, with fundraiser goal edit field-->
-    <div class="row-fluid">
-      <div class="span12" style="text-align: center;">
-        <div style="margin-top: 10px;" >
-          <div class="row-fluid">
-            <div class="span3">
-              <h1 style="margin-bottom:0"><strong>${{ changes.total_pledged | number:0 }}</strong></h1>
-
-              <!--gross inline styling-->
-              <div style="margin-top: 5px;">
-                <div style="vertical-align: middle; display: inline-block;">raised of $</div>
-                <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" type="number" min="0" ng-model="changes.funding_goal" />
-                <div style="vertical-align: middle; display: inline-block;"> goal</div>
-              </div>
-            </div>
-
-            <div class="span3" style="text-align: center;">
-              <h1 style="margin-bottom:0"><strong>{{ changes.pledge_count | number }}</strong></h1>
-              <span>backers</span>
-            </div>
-
-            <div class="span3" style="text-align: center;">
-              <h1 style="margin-bottom:0"><strong>{{ fundraiser.funding_percentage | number:0 }}%</strong></h1>
-              <span>funded</span>
-            </div>
-
-            <div class="span3" style="text-align: center;">
-              <h1 style="margin-bottom:0"><strong>{{ changes.days_remaining | number }}</strong></h1>
-              <span>days left</span>
-            </div>
-          </div>
-          <br/>
-          <progress class="progress-success progress-striped" value="fundraiser.funding_percentage"></progress>
+    <ng-form class="form-horizontal" name="urls">
+      <div class="control-group">
+        <label class="control-label" for="repo-url">Image URL</label>
+        <div class="controls">
+          <input class="span8" id="repo-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />
         </div>
       </div>
-    </div>
+
+      <div class="control-group">
+        <label class="control-label" for="homepage-url">Homepage</label>
+        <div class="controls">
+          <input class="span8" id="homepage-url" type="url" ng-model="fundraiser.homepage_url" placeholder="https://www.bountysource.com" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="repo-url">Repository</label>
+        <div class="controls">
+          <input class="span8" id="repo-url" type="url" ng-model="fundraiser.repo_url" placeholder="https://github.com/bountysource/frontend" />
+        </div>
+      </div>
+    </ng-form>
 
     <!--Edit main Description-->
     <div class="alert alert-info">
@@ -129,20 +115,20 @@
             <!--Reward amount-->
             <div class="input-prepend" style="margin-bottom:0">
               <span class="add-on">$</span>
-              <input type="number" name="amount" ng-model="new_reward.amount" min="5" required placeholder="Minimum Pledge Amount" ng-disabled="fundraiser.published" />
+              <input type="number" name="amount" ng-model="new_reward.amount" min="5" required placeholder="Minimum Pledge Amount" />
             </div>
 
             <!--Reward quantity-->
             <div style="margin-top: 5px;">
               <div style="vertical-align: middle; display: inline-block;">0 of </div>
-              <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" placeholder="∞" type="number" min="0" ng-model="new_reward.limited_to" ng-disabled="fundraiser.published" tooltip="Leave empty for no limit" tooltip-placement="bottom" tooltip-trigger="focus" />
+              <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" placeholder="∞" type="number" min="0" ng-model="new_reward.limited_to" tooltip="Leave empty for no limit" tooltip-placement="bottom" tooltip-trigger="focus" />
               <div style="vertical-align: middle; display: inline-block;"> claimed</div>
             </div>
           </div>
           <br>
 
           <!--Reward description-->
-          <textarea class="span12" rows="5" ng-model="new_reward.description" required placeholder="A description of this reward." ng-disabled="fundraiser.published"></textarea>
+          <textarea class="span12" rows="5" ng-model="new_reward.description" required placeholder="A description of this reward."></textarea>
 
           <!--Fulfillment Details-->
           <textarea class="span12" rows="5" ng-model="new_reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>

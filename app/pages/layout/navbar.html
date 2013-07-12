@@ -1,16 +1,16 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
+      <button type="button" class="btn btn-navbar" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       <a class="brand" href="/"><strong>Bountysource</strong><img src="/images/logo-small.png" /></a>
-      <div class="nav-collapse collapse">
+      <div class="nav-collapse" collapse="!isCollapsed">
         <form class="navbar-search" ng-controller="NavbarSearchController" ng-submit="submit_search()">
           <div class="icon-search"></div>
-          <input type="text" class="search-query" ng-model="search_query" placeholder="Issue URL, Project, Language, etc. ">
+          <input type="text" class="search-query" ng-model="search_query" placeholder="Issue URL, Project, Language, etc.">
         </form>
         <ul class="nav pull-right">
           <li><a href="http://blog.bountysource.com" target="_blank">Blog</a></li>
-          <li ng-class="{'dropdown': true, 'dropup': true, 'active': showChatroom}"><a ng-controller="ChatroomController" ng-click="toggleChatroom()">Chatroom <b class="caret"></b></a></li>
+          <li ng-class="{'dropdown': true, 'dropup': true, 'active': chatroom.show}"><a ng-click="chatroom.toggle()">Chatroom <b class="caret"></b></a></li>
 
           <li class="dropdown" ng-controller="Signin">
             <a href="/signin" class="dropdown-toggle" data-toggle="dropdown" ng-hide="!!current_person">Sign In<b class="caret"></b></a>

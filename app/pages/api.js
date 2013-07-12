@@ -3,6 +3,7 @@
 angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window) {
     var $api = this; // hack to store self reference
+    this.access_token_cookie_name = 'v2_access_token';
 
     // set environment
     $rootScope.environment = window.BS_ENV;
@@ -38,8 +39,8 @@ angular.module('api.bountysource',[]).
       params = angular.copy(params);
       params.callback = 'JSON_CALLBACK';
       params._method = method;
-      if ($cookieStore.get('access_token')) {
-        params.access_token = $cookieStore.get('access_token');
+      if ($cookieStore.get($api.access_token_cookie_name)) {
+        params.access_token = $cookieStore.get($api.access_token_cookie_name);
       }
 
       // deferred JSONP call with a promise
@@ -174,6 +175,10 @@ angular.module('api.bountysource',[]).
       return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
     };
 
+    this.tracker_issues_get = function(id) {
+      return this.call("/projects/"+id+"/issues");
+    };
+
     this.issue_get = function(id, callback) {
       return this.call("/issues/"+id, callback);
     };
@@ -296,10 +301,10 @@ angular.module('api.bountysource',[]).
         }
 
         $rootScope.current_person = obj;
-        $cookieStore.put('access_token', $rootScope.current_person.access_token);
+        $cookieStore.put($api.access_token_cookie_name, $rootScope.current_person.access_token);
       } else {
         $rootScope.current_person = false;
-        $cookieStore.remove('access_token');
+        $cookieStore.remove($api.access_token_cookie_name);
       }
     };
 
@@ -341,7 +346,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.load_current_person_from_cookies = function() {
-      var access_token = $cookieStore.get('access_token');
+      var access_token = $cookieStore.get($api.access_token_cookie_name);
       if (access_token) {
         console.log("Verifying access token: " + access_token);
         this.call("/user", { access_token: access_token }, function(response) {
@@ -359,26 +364,10 @@ angular.module('api.bountysource',[]).
       }
     };
 
-    this.signin_url_for = function(provider) {
-      // TODO: why isn't this provided by angular.js somewhere?? seems silly that we need to rebuild baseHref
-      var DEFAULT_PORTS = {'http': 80, 'https': 443, 'ftp': 21};
-      var protocol = $location.protocol(),
-          host = $location.host(),
-          port = $location.port();
-      var redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
-
-      var url = $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?redirect_url=' + encodeURIComponent(redirect_url);
-      if ($cookieStore.get('access_token')) {
-        url += '&access_token=' + encodeURIComponent($cookieStore.get('access_token'));
-      }
-      return url;
-    };
-
     this.signout = function() {
       $api.set_current_person();
       $window.location.reload();
     };
-
 
     // helper functions... definitely doesn't belong here
     this.pathMerge = function(url, params) {
@@ -395,6 +384,20 @@ angular.module('api.bountysource',[]).
         parts.push($api.encodeUriQuery(key, true) + (value === true ? '' : '=' + $api.encodeUriQuery(value, true)));
       });
       return parts.length ? parts.join('&') : '';
+    };
+
+    this.signin_url_for = function(provider, options) {
+      options = options || {};
+
+      // TODO: why isn't this provided by angular.js somewhere?? seems silly that we need to rebuild baseHref
+      var DEFAULT_PORTS = {'http': 80, 'https': 443, 'ftp': 21};
+      var protocol = $location.protocol();
+      var host = $location.host();
+      var port = $location.port();
+
+      options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
+      options.access_token = $cookieStore.get($api.access_token_cookie_name);
+      return $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?' + $api.toKeyValue(options);
     };
 
     this.encodeUriQuery = function(val, pctEncodeSpaces) {
