@@ -9,9 +9,8 @@ window._gaq.push(['_setAccount', document.location.host === 'www.bountysource.co
   s.parentNode.insertBefore(g,s);
 }(document,'script'));
 
-angular.module('app').service('analytics', function($rootScope, $window, $location) {
-  var track = function() {
+angular.module('app').run(function($rootScope, $window, $location) {
+  $rootScope.$on('$viewContentLoaded', function() {
     $window._gaq.push(['_trackPageview', $location.path()]);
-  };
-  $rootScope.$on('$viewContentLoaded', track);
+  });
 });
