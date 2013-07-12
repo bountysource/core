@@ -9,8 +9,22 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api) {
+  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize) {
     $scope.fundraiser = $api.fundraiser_get($routeParams.id);
+
+    // $sanitize but allow iframes (i.e. youtube videos)
+    $scope.fundraiser.then(function(fundraiser) {
+      var html = fundraiser.description_html;
+      var matches = html.match(/<iframe[^>]+><\/iframe>/g) || [];
+      for (var i=0; i < matches.length; i++) {
+        html = html.replace(matches[i], '{{iframe:'+i+'}}');
+      }
+      html = $sanitize(html);
+      for (i=0; i < matches.length; i++) {
+        html = html.replace('{{iframe:'+i+'}}', matches[i]);
+      }
+      $scope.sanitized_description = html;
+    });
 
     $scope.publish = function(fundraiser) {
       $api.fundraiser_publish(fundraiser.id, function(response) {

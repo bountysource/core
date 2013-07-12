@@ -12,7 +12,7 @@
         <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
         <div ng-include="'pages/fundraisers/partials/progress.html'"></div>
         <hr />
-        <div ng-bind-html="fundraiser.description_html"></div>
+        <div ng-bind-html-unsafe="sanitized_description"></div>
       </div>
 
       <div class="span3">
