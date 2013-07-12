@@ -32,9 +32,10 @@ angular.module('app')
     });
 
     $scope.locate_my_bounty = function(issue) {
+      // TODO: note, this skips past anonymous pledges. might break things if it's your bounty that is anonymous
       $scope.my_bounty = null;
       for (var i=0; $scope.current_person && i<issue.bounties.length; i++) {
-        if (issue.bounties[i].person.id === $scope.current_person.id) {
+        if (issue.bounties[i].person && issue.bounties[i].person.id === $scope.current_person.id) {
           $scope.my_bounty = issue.bounties[i];
           break;
         }
