@@ -9,21 +9,6 @@ angular.module('app')
       });
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api) {
-    $scope.issue_filter_options = {
-      text: null,
-      bounty_min: null,
-      bounty_max: null,
-      only_valuable: false,
-      hide_closed: false,
-      hide_open: false
-    };
-
-    $scope.order_col = "bounty_total";
-    $scope.order_reverse = true;
-
-    $scope.init_tags = function(tracker) {
-      for (var i in tracker.tags) { $scope.init_tag(tracker, tracker.tags[i]); }
-    };
     $api.tracker_get($routeParams.id).then(function(tracker) {
       $scope.init_tags(tracker);
 
@@ -122,6 +107,8 @@ angular.module('app')
       return true;
     };
 
+    $scope.order_col = "bounty_total";
+    $scope.order_reverse = true;
     $scope.change_order_col = function(col) {
       if ($scope.order_col === col) {
         $scope.order_reverse = !$scope.order_reverse;
@@ -131,6 +118,9 @@ angular.module('app')
       }
     };
 
+    $scope.init_tags = function(tracker) {
+      for (var i in tracker.tags) { $scope.init_tag(tracker, tracker.tags[i]); }
+    };
 
     $scope.init_tag = function(tracker, tag_relation) {
       tag_relation.upvote = function() {
