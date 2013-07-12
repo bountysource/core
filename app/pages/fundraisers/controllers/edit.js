@@ -65,9 +65,6 @@ angular.module('app')
     };
 
     $scope.update_reward = function(fundraiser, reward) {
-
-      console.log()
-
       $api.reward_update(fundraiser.id, reward.id, reward, function(response) {
         if (response.meta.success) {
           for (var i=0; i<$scope.rewards.length; i++) {

@@ -23,8 +23,23 @@ angular.module('app')
       // store it on $scope.issue.my_solution
       $scope.$locate_my_solution(issue);
 
+      // find the logged in users bounty, if present.
+      // need this to determine whether or not they can
+      // dispute solutions.
+      $scope.locate_my_bounty(issue);
+
       return issue;
     });
+
+    $scope.locate_my_bounty = function(issue) {
+      $scope.my_bounty = null;
+      for (var i=0; $scope.current_person && i<issue.bounties.length; i++) {
+        if (issue.bounties[i].person.id === $scope.current_person.id) {
+          $scope.my_bounty = issue.bounties[i];
+          break;
+        }
+      }
+    };
 
     $scope.solution_submit = { body: "", code_url: "" };
 
@@ -195,6 +210,13 @@ angular.module('app')
       solution.dispute = function() {
         $api.dispute_create(issue.id, solution.id, solution.new_dispute, function(response) {
           if (response.meta.success) {
+            solution.$show_dispute = false;
+
+            // manually change attributes, because YOLO
+            solution.disputed = true;
+            solution.$percentage = $scope.solution_percentage(solution);
+            solution.$status = $scope.solution_status(solution);
+
             solution.push_dispute(response.data);
           } else {
             solution.dispute_error = response.data.error;

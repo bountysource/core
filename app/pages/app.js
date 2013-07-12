@@ -15,7 +15,7 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     if ((window.location.hash||'').match(/^#[^/]/)) {
       window.location.hash = '#/' + window.location.hash.replace(/^#/,'');
     }
-  }).run(function($api, $rootScope) {
+  }).run(function($api) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
   });

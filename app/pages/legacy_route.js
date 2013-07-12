@@ -130,5 +130,5 @@ angular.module('app')
       .when('/bounties', {
         redirectTo: "/",
         controller: 'Static'
-      })
+      });
   });

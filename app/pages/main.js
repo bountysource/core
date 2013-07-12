@@ -13,6 +13,6 @@ angular.module('app')
     };
 
     $rootScope.$on('$viewContentLoaded', function() {
-      $scope.no_container = $location.path() == '/';
+      $scope.no_container = $location.path() === '/';
     });
   });
