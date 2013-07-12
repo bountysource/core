@@ -1,88 +1,55 @@
 <div class="homepage">
-  <div class="background-top"></div>
-  <div class="background-users"></div>
-  <div class="background-fundraisers"></div>
-  <div class="background-projects"></div>
-
   <section id="top">
-    <div class="well">
-      <h1>The funding platform for open-source software.</h1>
+    <div class="container">
+      <h1><img src="/images/Bountysource-white.png" style="padding-bottom:5px"/> is the funding platform for open-source software.</h1>
+      <h2>Accelerate open-source development with our community.</h2>
 
-      <div class="row-fluid">
-        <div class="span4 offset2">
-          <h2 style="margin-left: 30px;">Anyone can:</h2>
-          <div>
-            <i class="icon-check icon-white"></i>
-            <span>Accelerate open-source development.</span>
-          </div>
-          <div>
-            <i class="icon-check icon-white"></i>
-            <span>Incentivize developers to solve issues.</span>
-          </div>
-          <div>
-            <i class="icon-check icon-white"></i>
-            <span>Fund the next generation of projects.</span>
-          </div>
-        </div>
-
-        <div class="span4">
-          <h2 style="margin-left: 30px;">Developers can:</h2>
-          <div>
-            <i class="icon-check icon-white"></i>
-            <span>Get rewarded for your contributions.</span>
-          </div>
-          <div>
-            <i class="icon-check icon-white"></i>
-            <span>Raise money for a future project.</span>
-          </div>
-          <div>
-            <i class="icon-check icon-white"></i>
-            <span>Solve open issues to earn bounties.</span>
-          </div>
-        </div>
-      </div>
-      <br />
-      <div class="text-center">
-        <a class="btn btn-success btn-large" href="/learn">How Does It Work?</a>
-      </div>
+      <a class="btn btn-info btn-large" href="/learn" style="margin-right: 10px; width: 100px">Learn More</a>
+      <a class="btn btn-info btn-large" href="/signin" style="margin-left: 10px; width: 100px">Sign Up</a>
     </div>
   </section>
 
   <section id="users">
-    <h3 class="text-center" style="margin: 0;">Top Developers</h3>
-    <ul class="inline">
-      <li ng-repeat="person in people.developers.top.slice(0,18)">
-        <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
-      </li>
-    </ul>
-    <h3 class="text-center" style="margin: 0;">Top Backers</h3>
-    <ul class="inline">
-      <li ng-repeat="person in people.backers.top.slice(0,18)">
-        <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
-      </li>
-    </ul>
+    <div class="container">
+      <h3 class="text-center" style="margin: 0;">Top Developers</h3>
+      <ul class="inline">
+        <li ng-repeat="person in people.developers.top.slice(0,18)">
+          <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+        </li>
+      </ul>
+      <h3 class="text-center" style="margin: 0;">Top Backers</h3>
+      <ul class="inline">
+        <li ng-repeat="person in people.backers.top.slice(0,18)">
+          <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <section id="fundraisers">
-    <h3 class="text-center">Featured Fundraisers</h3>
-    <div class="row-fluid">
-      <div class="span6">
-        <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:3" fundraiser="fundraiser"></fundraiser-card>
-      </div>
-      <div class="span6">
-        <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:3:6" fundraiser="fundraiser"></fundraiser-card>
+    <div class="container">
+      <h3 class="text-center">Featured Fundraisers</h3>
+      <div class="row-fluid">
+        <div class="span6">
+          <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:3" fundraiser="fundraiser"></fundraiser-card>
+        </div>
+        <div class="span6">
+          <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:3:6" fundraiser="fundraiser"></fundraiser-card>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="projects">
-    <h3 class="text-center">Top Projects</h3>
-    <div class="row-fluid">
-      <div class="span6">
-        <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:0:3" project="project"></project-card>
-      </div>
-      <div class="span6">
-        <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:3:6" project="project"></project-card>
+    <div class="container">
+      <h3 class="text-center">Top Projects</h3>
+      <div class="row-fluid">
+        <div class="span6">
+          <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:0:3" project="project"></project-card>
+        </div>
+        <div class="span6">
+          <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:3:6" project="project"></project-card>
+        </div>
       </div>
     </div>
   </section>

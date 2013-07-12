@@ -18,13 +18,4 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
   }).run(function($api, $rootScope) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
-
-    // this really doesn't belong here
-    $rootScope.chatroom = {
-      show: false,
-      toggle: function() { $rootScope.chatroom.show = !$rootScope.chatroom.show; },
-      nick: "Guest" + Math.ceil(Math.random() * 100000),
-      url: "none",
-      connect: function() { console.log($rootScope.chatroom.nick); $rootScope.chatroom.url = '/chat/?nick=' + $rootScope.chatroom.nick; }
-    };
   });
