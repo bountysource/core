@@ -11,6 +11,7 @@ a{ cursor: pointer; }
 .navbar-search { position: relative; }
 .navbar-search .search-query { padding-left: 29px; }
 .navbar-search .icon-search { position: absolute; top: 7px; left: 11px; }
+@media (max-width: 979px) { .navbar-search .icon-search { top: 17px; left: 26px; } }
 /*@media (max-width: 979px) {*/
   /*.navbar-search .icon-search { top: 17px; left: 27px; }*/
   /*#main { border-top: 0px; }*/
@@ -39,5 +40,16 @@ footer a { color: #005230; }
   overflow:auto;
   border-top: 45px solid transparent;
 }
-#main > .container { border-top: 25px solid transparent; }
+@media (max-width: 979px) {
+  #main { border-top: 0; }
+  footer { height: auto; }
+}
 
+@media (max-width: 767px) {
+  .container { margin: 0 10px; }
+}
+
+
+.navbar-fixed-top { margin: 0; }
+
+#main > .container { border-top: 25px solid transparent; }
