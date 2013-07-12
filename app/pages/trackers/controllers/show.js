@@ -10,16 +10,6 @@ angular.module('app')
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
-      // merge all of the issue arrays into one
-      tracker.issues = [];
-
-      for (var i in tracker.issues_valuable) { tracker.issues.push(tracker.issues_valuable[i]); }
-      for (i in tracker.issues_popular) { tracker.issues.push(tracker.issues_popular[i]); }
-      for (i in tracker.issues_newest) { tracker.issues.push(tracker.issues_newest[i]); }
-
-      // turn all of the bounty totals into floats. dunno why that isn't the case.
-      for (i in tracker.issues) { tracker.issues[i].bounty_total = parseFloat(tracker.issues[i].bounty_total); }
-
       $scope.init_tags(tracker);
 
       // follow and unfollow API method wrappers
@@ -46,8 +36,6 @@ angular.module('app')
       tracker.create_tag = function() {
         if (!$scope.current_person) { return $api.require_signin(); }
         $api.tracker_tags_create(tracker.id, tracker.new_tag.name).then(function(new_tag_relation) {
-          console.log(new_tag_relation);
-
           // only push it if it doesn't exist
           var push_it_real_good = true;
           for (var i=0; i<tracker.tags.length; i++) {
@@ -67,6 +55,16 @@ angular.module('app')
 
       $scope.tracker = tracker;
     });
+
+    // merge all of the issue arrays into one
+    $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues, response) {
+      console.log(issues);
+      return issues
+    });
+
+//    // turn all of the bounty totals into floats. dunno why that isn't the case.
+//    for (i in tracker.issues) { tracker.issues[i].bounty_total = parseFloat(tracker.issues[i].bounty_total); }
+
 
     $scope.issue_filter_options = {
       text: null,
@@ -105,7 +103,6 @@ angular.module('app')
       if ($scope.issue_filter_options.hide_open) {
         return !issue.can_add_bounty;
       }
-
       if ($scope.issue_filter_options.text) {
         var regexp = new RegExp(".*?"+$scope.issue_filter_options.text+".*?", "i");
         return regexp.test(issue.title) || (issue.number && issue.number.toString() === $scope.issue_filter_options.text) ;

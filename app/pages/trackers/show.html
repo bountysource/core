@@ -113,10 +113,10 @@
     </div>
 
     <!--No issues shown message -->
-    <div ng-show="(tracker.issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
+    <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
 
     <!--Table of issues-->
-    <table class="table table-condensed table-striped" ng-show="(tracker.issues | filter:issue_filter).length > 0">
+    <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length > 0">
       <thead>
       <tr>
         <th class="span1"><a ng-click="change_order_col('bounty_total')">Bounty</a></th>
@@ -126,7 +126,7 @@
       </thead>
 
       <tbody>
-      <tr ng-repeat="issue in tracker.issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+      <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
         <td>
           <span ng-show="issue.bounty_total > 0" class="badge badge-success">{{issue.bounty_total | dollars}}</span>
         </td>

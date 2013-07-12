@@ -175,6 +175,10 @@ angular.module('api.bountysource',[]).
       return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
     };
 
+    this.tracker_issues_get = function(id) {
+      return this.call("/projects/"+id+"/issues");
+    };
+
     this.issue_get = function(id, callback) {
       return this.call("/issues/"+id, callback);
     };
