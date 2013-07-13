@@ -397,7 +397,7 @@ angular.module('api.bountysource',[]).
       var port = $location.port();
 
       options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
-      options.access_token = $cookieStore.get($api.access_token_cookie_name);
+      if ($cookieStore.get($api.access_token_cookie_name)) { options.access_token = $cookieStore.get($api.access_token_cookie_name); }
       return $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?' + $api.toKeyValue(options);
     };
 
