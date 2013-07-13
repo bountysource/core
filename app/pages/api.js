@@ -62,6 +62,7 @@ angular.module('api.bountysource',[]).
         if (res.meta.success) {
           res.data.funding_percentage = Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100);
           res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
+          res.data.image_url = res.data.image_url || "/images/bountysource-grey.png";
         }
         return res.data;
       });
