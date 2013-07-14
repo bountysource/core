@@ -22,8 +22,6 @@ angular.module('app')
   })
 
   .controller('NavbarLinkedAccountSignin', function($scope, $location, $api) {
-    window.scope = $scope;
-
     $scope.save_route = function() {
       $api.set_post_auth_url($location.url());
     };
