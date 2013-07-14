@@ -17,13 +17,13 @@
 
 /* backer/developer box (background and text) */
 .homepage #top { background-color: rgba(0,0,0,0); color: #fff; border: 0; }
-.homepage #top h1 { text-align: center; padding: 10px 0 0px 0; margin: 0; font-size: 34px; }
-.homepage #top h2 { padding: 0 0 0px 0; margin: 0 0 30px; font-size: 24px; font-weight: normal; }
+.homepage #top h1 { text-align: center; padding: 0; margin: 10px 0 0 0; font-size: 34px; line-height: 40px; }
+.homepage #top h2 { padding: 0 0 0px 0; margin: 20px 0 30px; font-size: 24px; font-weight: normal; }
 .homepage #top h3 { padding: 0 0 0px 0; margin: 0; font-size: 16px; margin-left: 24px; font-weight: normal; }
 /*.homepage .well .btn { float: right; }*/
 
 .homepage section#top span span { display: none; }
-.homepage section#top span img { padding-bottom: 4px; }
+.homepage section#top span img { vertical-align: -21px; }
 
 
 /* backer/developer box (vertical white line) */
