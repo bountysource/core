@@ -23,9 +23,9 @@ footer {
   margin-top: -206px; /* negative value of footer height */
   clear:both;
   padding-top: 30px;
-  background-color: #005230;
+  background-color: #333;
   height: 200px;
-  border-top: 3px solid #129e5e;
+  border-top: 4px solid #129e5e;
 }
 footer ul { margin: 0; list-style: none; }
 footer a, footer { color: #bbb; }
