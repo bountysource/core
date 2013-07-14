@@ -1,0 +1,86 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/settings">Settings</a><span class="divider">»</span></li>
+  <li><a href="/settings">Profile</a></li>
+</ul>
+
+<h1>Settings</h1>
+<ng-include src="'pages/settings/tabs.html'"></ng-include>
+
+<form class="form-horizontal" name="form" novalidate>
+  <div class="alert alert-error" ng-show="error">{{error}}</div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputFirstName">First and Last Name:</label>
+    <div class="controls">
+      <input type="text" id="inputFirstName" placeholder="John" ng-model="form_data.first_name" class="input-small" />
+      <input type="text" placeholder="Doe" ng-model="form_data.last_name" class="input-small" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputDisplayName">Display Name:</label>
+    <div class="controls">
+      <input type="text" id="inputDisplayName" placeholder="johnny5" ng-model="form_data.display_name" class="input-medium" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputLocation">Location:</label>
+    <div class="controls">
+      <input type="text" id="inputLocation" name="location" placeholder="San Francisco, CA" ng-model="form_data.location" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputCompany">Company:</label>
+    <div class="controls">
+      <input type="text" id="inputCompany" name="company" placeholder="Dunder Mifflin" ng-model="form_data.company" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputUrl">Website:</label>
+    <div class="controls">
+      <input type="text" id="inputUrl" name="url" placeholder="http://awesome.site/" ng-model="form_data.url" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputPublicEmail">Public Email Address:</label>
+    <div class="controls">
+      <input type="text" id="inputPublicEmail" name="email" placeholder="john@doe.com" ng-model="form_data.public_email" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputBio">Bio:</label>
+    <div class="controls">
+      <textarea rows="3" id="inputBio" name="bio" placeholder="Once upon a time..." ng-model="form_data.bio"></textarea>
+    </div>
+  </div>
+
+  <!--<div class="control-group" ng-show="form_data.image_url.match(/gravatar\.com/)">-->
+    <!--<label class="control-label" for="inputPublicEmail">Gravatar Email Address:</label>-->
+    <!--<div class="controls">-->
+      <!--<input type="text" id="inputPublicEmail" name="email" placeholder="john@doe.com" ng-model="form_data.gravatar_email" />-->
+      <!--<img src="{{form_data.image_url}}" style="width: 50px; height: 50px" ng-show="form_data.image_url" />-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="control-group">-->
+    <!--<label class="control-label" for="inputPicture">Picture:</label>-->
+    <!--<div class="controls">-->
+      <!--<label class="radio" ng-repeat="image_url in profile_pics" style="display: inline-block; padding-right: 30px">-->
+        <!--<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" style="margin-top: 18px">-->
+        <!--<img src="{{image_url}}" style="width: 50px; height: 50px" />-->
+      <!--</label>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success" ng-click="save()">Save</button>
+    </div>
+  </div>
+</form>

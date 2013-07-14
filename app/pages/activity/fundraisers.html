@@ -1,0 +1,23 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/activity">Activity</a><span class="divider">»</span></li>
+  <li><a href="/activity/fundraisers">Fundraisers</a></li>
+</ul>
+
+<ng-include src="'pages/activity/tabs.html'"></ng-include>
+
+<table class="table table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Goal</th>
+    <th>Progress</th>
+    <th>Status</th>
+  </tr>
+
+  <tr ng-repeat="fundraiser in fundraisers">
+    <td><a ng-href="/fundraisers/{{fundraiser.slug}}">{{ fundraiser.title }}</a></td>
+    <td>{{ fundraiser.funding_goal | dollars }}</td>
+    <td>{{ (fundraiser.total_pledged / fundraiser.funding_goal) | percent }}</td>
+    <td ng-class="{ 'text-info': ((fundraiser | fundraiser_status) == 'draft'), 'text-success': ((fundraiser | fundraiser_status) == 'completed') }">{{ fundraiser | fundraiser_status }}</td>
+  </tr>
+</table>

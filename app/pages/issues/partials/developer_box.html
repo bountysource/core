@@ -1,0 +1,51 @@
+<div ng-controller="DeveloperBoxController">
+  <div ng-show="issue.accepted_solution" class="well text-center">
+    <h3 style="margin: 0;">Bounty Claimed</h3>
+    <p><a ng-href="/people/{{issue.accepted_solution.person.slug}}">{{issue.accepted_solution.person.display_name}}</a> claimed the bounty.</p>
+
+    <!--<a class="thumbnail" ng-href="/people/{{issue.accepted_solution.person.slug}}"><img ng-src="{{issue.accepted_solution.person.image_url}}" /></a>-->
+    <!--<br />-->
+
+    <a ng-href="{{issue.accepted_solution.code_url}}" target="_blank" class="btn btn-block">
+      <i class="icon-globe"></i>
+      View Submission
+    </a>
+    <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block">
+      <i class="icon-list"></i>
+      View All Solutions
+    </a>
+  </div>
+
+  <div ng-show="!issue.accepted_solution && (issue.can_add_bounty || issue.bounty_total > 0)">
+    <div ng-show="issue.my_solution" class="well">
+      <div class="text-center">
+        <div ng-show="!issue.my_solution.submitted">
+          <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
+          <p class="text-info">Have you finished your solution? If so, you need to submit it!</p>
+          <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-primary">Update Solution</a>
+        </div>
+
+        <div ng-show="issue.my_solution.submitted && !issue.my_solution.accepted">
+          <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
+          <p class="text-info">Your solution has been submitted.</p>
+          <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-info">Check Status</a>
+        </div>
+
+        <div ng-show="issue.my_solution.accepted && !issue.my_solution.paid_out">
+          <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
+          <p class="text-success">Your solution was accepted!</p>
+          <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-large btn-success">Claim Bounty</a>
+        </div>
+      </div>
+    </div>
+
+    <div ng-hide="issue.my_solution" class="well">
+      <div class="text-center">
+        <h3 style="margin: 0;">Earn the Bounty</h3>
+        <p>Working on a solution to this issue? Let us know! If your solution is accepted, you are awarded the bounty.</p>
+      </div>
+      <button ng-click-require-auth="issue.create_solution()" class="btn btn-block">Start Work</button>
+    </div>
+  </div>
+</div>
+

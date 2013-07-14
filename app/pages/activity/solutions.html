@@ -1,0 +1,23 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/activity">Activity</a><span class="divider">»</span></li>
+  <li><a href="/activity/solutions">Solutions</a></li>
+</ul>
+
+<ng-include src="'pages/activity/tabs.html'"></ng-include>
+
+<table class="table table-striped">
+  <tr>
+    <th>Tracker</th>
+    <th>Issue</th>
+    <th>Status</th>
+    <th>Date</th>
+  </tr>
+
+  <tr ng-repeat="solution in solutions">
+    <td><a ng-href="/trackers/{{solution.issue.tracker.slug}}">{{ solution.issue.tracker.name }}</a></td>
+    <td><a ng-href="/issues/{{solution.issue.slug}}/solutions">{{ solution.issue.title }}</a></td>
+    <td ng-class="{ 'text-success': (solution.accepted), 'text-warning': (solution.disputed), 'text-error': (solution.rejected), 'text-info': (!solution.disputed && !solution.accepted && !solution.rejected) }">{{ solution | solution_status | from_snake_case | title }}</td>
+    <td>{{ solution.created_at | date }}</td>
+  </tr>
+</table>

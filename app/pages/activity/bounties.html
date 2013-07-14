@@ -1,0 +1,48 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/activity">Activity</a><span class="divider">»</span></li>
+  <li><a href="/activity/bounties">Bounties</a></li>
+</ul>
+
+<ng-include src="'pages/activity/tabs.html'"></ng-include>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Tracker</th>
+    <th>Issue</th>
+    <th>Issue Open</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Date</th>
+    <th>
+      Anonymous
+      <a popover-title="Anonymous Bounties" popover="If you want to hide your identity on a bounty, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="icon-question-sign"></i></a>
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr ng-repeat="bounty in bounties">
+    <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
+    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}</a></td>
+    <td>{{ bounty.issue.can_add_bounty }}</td>
+    <td>{{ bounty.amount | dollars }}</td>
+    <td>{{ bounty.status }}</td>
+    <td>{{ bounty.created_at | date }}</td>
+
+    <td ng-show="bounty.anonymous">
+      <button class="btn btn-small btn-block active" ng-click="toggle_anonymous(bounty)">
+        <i class="icon-eye-close"></i>
+        Anonymized
+      </button>
+    </td>
+    <td ng-hide="bounty.anonymous">
+      <button class="btn btn-small btn-block btn-success" ng-click="toggle_anonymous(bounty)">
+        <i class="icon-eye-open icon-white"></i>
+        Publicized
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

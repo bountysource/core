@@ -1,0 +1,33 @@
+<div ng-controller="FundraisersController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider">»</span></li>
+    <!--<li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>-->
+    <li><a href="/fundraisers/{{fundraiser.id}}">{{ fundraiser.title || 'Loading...' }}</a></li>
+  </ul>
+
+  <form class="form" ng-show="fundraiser">
+    <div class="row-fluid">
+      <div class="span9">
+        <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/progress.html'"></div>
+        <hr />
+        <div ng-bind-html-unsafe="sanitized_description"></div>
+      </div>
+
+      <div class="span3">
+        <div ng-include="'pages/fundraisers/partials/manage.html'"></div>
+
+        <h3 style="margin-top: 0;">By <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
+        <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
+
+        <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
+
+        <div ng-show="fundraiser.rewards.length > 0">
+          <h3>Rewards</h3>
+          <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+<div ng-controller="FundraiserShowController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider">»</span></li>
+    <!--<li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>-->
+    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
+    <li><a>Pledges</a></li>
+  </ul>
+
+  <form class="form" ng-show="fundraiser">
+    <div class="row-fluid">
+      <div class="span9">
+        <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
+
+        <div class="alert alert-info" ng-show="pledges.length <= 0">No pledges have been made. <a ng-href="/fundraisers/{{fundraiser.slug}}/pledge">Why don't you make the first pledge?</a></div>
+
+        <table ng-show="pledges && pledges.length > 0" class="table table-striped pledges-table">
+          <thead>
+          <tr>
+            <th><a ng-click="sort_by('person.display_name')">Backer</a></th>
+            <th></th>
+            <th><a ng-click="sort_by('amount')">Amount</a></th>
+            <th><a ng-click="sort_by('created_at')">Date</a></th>
+          </tr>
+          </thead>
+          <tr ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse">
+            <!--Profile picture. No link if anon-->
+            <td style="width:70px">
+              <a ng-show="pledge.person" ng-href="/people/{{pledge.person.slug}}"><img class="thumbnail" ng-src="{{ pledge.person.image_url }}" /></a>
+              <img ng-hide="pledge.person" class="thumbnail" src="images/anon.jpg" />
+            </td>
+
+            <td>
+              <a ng-show="pledge.person" ng-href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
+              <div ng-hide="pledge.person" class="muted">Anonymous</div>
+            </td>
+
+            <td>
+              <div>{{ pledge.amount | currency }}</div>
+            </td>
+
+            <td>
+              <div class="muted">{{ pledge.created_at | date }}</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="span3" ng-controller="FundraisersController">
+        <div ng-include="'pages/fundraisers/partials/manage.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/progress_small.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
+      </div>
+    </div>
+  </form>
+</div>
+

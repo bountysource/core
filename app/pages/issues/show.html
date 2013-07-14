@@ -1,0 +1,29 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a ng-href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
+</ul>
+
+<div class="row-fluid" ng-show="issue">
+  <div class="span9">
+    <div ng-include="'pages/issues/partials/header.html'"></div>
+    <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+
+    <div class="row-fluid">
+      <div class="span1">
+        <img ng-show="issue.author_image_url" ng-src="{{issue.author_image_url}}" class="thumbnail" style="width: 100%;" />
+      </div>
+      <div class="span11">
+        <p class="muted">{{issue.author_name}} opened this issue on {{issue.created_at | date}}</p>
+        <a ng-href="{{issue.url}}" target="_blank">View this issue on the tracker</a>
+      </div>
+    </div>
+    <br />
+    <div ng-bind-html="issue.body_html"></div>
+  </div>
+
+  <div class="span3">
+    <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
+    <div ng-include="'pages/issues/partials/developer_box.html'"></div>
+  </div>
+</div>

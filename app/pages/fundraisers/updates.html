@@ -1,0 +1,53 @@
+<div ng-controller="FundraisersController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider">»</span></li>
+    <!--<li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>-->
+    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
+    <li><a>Updates</a></li>
+  </ul>
+
+  <form class="form" ng-show="fundraiser">
+    <div class="row-fluid">
+      <div class="span9">
+        <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
+
+        <div ng-show="can_manage" class="hero-unit">
+          <h2>Updates</h2>
+          <p>Publish updates about your fundraiser. Published updates are emailed to the backers of your fundraiser.</p>
+          <button ng-controller="FundraiserUpdatesController" ng-click="create_update()" class="btn btn-large btn-primary">New Update</button>
+        </div>
+
+        <div class="alert alert-info" ng-show="updates.length <= 0">
+          No updates have been published.
+        </div>
+
+        <table class="table table-striped" ng-show="updates.length > 0">
+          <!--Published updates row-->
+          <tr ng-repeat="update in updates">
+            <td>
+              <a ng-show="update.published_at" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">#{{ update.number }} {{ update.title }}</a>
+
+              <div ng-hide="update.published_at">
+                <a class="label label-info" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">Draft</a>
+                <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title || 'Untitled' }}</a>
+              </div>
+            </td>
+            <td>
+              <div ng-show="update.published_at" class="muted">Published {{ update.published_at | date }}</div>
+              <div ng-hide="update.published_at" class="muted">Last modified {{ update.published_at | date }}</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="span3">
+        <div ng-include="'pages/fundraisers/partials/manage.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/progress_small.html'"></div>
+        <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
+      </div>
+    </div>
+  </form>
+
+</div>

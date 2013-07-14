@@ -1,0 +1,33 @@
+table.pledges-table { margin: 0; }
+
+table.pledges-table tr td {
+  vertical-align: middle;
+}
+
+table.pledges-table tr td img.thumbnail {
+  width: 50px;
+  height: 50px;
+}
+
+#fundraiser-title h1 {
+  font-size: 30px;
+}
+#fundraiser-title  {
+  height: 50px;
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.fundraiser-image {
+  height: 200px;
+  background-position: center center;
+  background-size: 275px auto;
+  background-repeat: no-repeat;
+}
+
+#pledge-input {
+  height: 60px;
+  font-size: 35px;
+  font-weight: 200;
+  line-height: 40px;
+}

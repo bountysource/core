@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs" ng-controller="IssueNavTabsController">
+  <li ng-class="active_tab('overview')"><a ng-href="/issues/{{issue.slug}}">Overview</a></li>
+  <li ng-class="active_tab('comments')"><a ng-href="/issues/{{issue.slug}}/comments">
+    Comments
+    <span class="badge badge-info" ng-show="issue.comments.length > 0">{{issue.comments.length}}</span>
+  </a></li>
+  <li ng-class="active_tab('bounties')"><a ng-href="/issues/{{issue.slug}}/bounties">
+    Bounties
+    <span class="badge badge-info" ng-show="issue.bounties.length > 0">{{issue.bounties.length}}</span>
+  </a></li>
+  <li ng-class="active_tab('solutions')"><a ng-href="/issues/{{issue.slug}}/solutions">
+    Solutions
+    <span class="badge badge-info" ng-show="issue.solutions.length > 0">{{issue.solutions.length}}</span>
+  </a></li>
+</ul>

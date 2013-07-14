@@ -1,0 +1,26 @@
+<ul class="breadcrumb">
+  <li><a ng-href="/">Home</a><span class="divider">»</span></li>
+  <!--<li><a ng-href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>-->
+  <li><a ng-href="/fundraisers/{{fundraiser.id}}">{{fundraiser.title ||'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a ng-href="/fundraisers/{{fundraiser.id}}/updates">Updates</a><span class="divider">»</span></li>
+  <li><a>New Update</a></li>
+</ul>
+
+<div class="row-fluid" ng-show="fundraiser">
+  <div class="span9">
+    <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+    <hr>
+
+    <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="changes.title" placeholder="The title of your update" />
+    <textarea class="span12" ng-model="changes.body" rows="15" placeholder="The body of your update. You can use GitHub Flavored Markdown here."></textarea>
+  </div>
+
+  <div class="span3">
+    <div class="well well-large">
+      <button ng-disabled="!changes.title || !changes.body" ng-click="save()" class="btn btn-large btn-block btn-primary">Save</button>
+      <button ng-click="back()" class="btn btn-large btn-block">Cancel</button>
+    </div>
+
+    <div ng-include="'pages/fundraisers/partials/progress_small.html'"></div>
+  </div>
+</div>

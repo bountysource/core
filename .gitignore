@@ -1,4 +1,8 @@
+node_modules
+.tmp
+.sass-cache
+app/components
 .DS_Store
-chromedriver.log
-test/config/credentials.yml
+*.log
 .idea
+cloudfiles.json

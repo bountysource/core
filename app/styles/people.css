@@ -1,0 +1,8 @@
+table#person-timeline-table tr td {
+  vertical-align: middle;
+}
+
+table#person-timeline-table tr td img.thumbnail {
+  width: 30px;
+  height: 30px;
+}

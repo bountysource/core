@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span12" style="text-align: center;">
+    <div style="margin-top: 10px;" >
+      <div class="row-fluid">
+        <div class="span6">
+          <h3 style="margin-bottom:0"><strong>${{ fundraiser.total_pledged | number:0 }}</strong></h3>
+          <span>raised of <strong>${{ fundraiser.funding_goal | number:0 }}</strong> goal</span>
+        </div>
+
+        <div class="span6" style="text-align: center;">
+          <div ng-show="!fundraiser.published || fundraiser.days_remaining > 0">
+            <h3 style="margin-bottom:0"><strong>{{ (fundraiser.days_remaining || 30) | number }}</strong></h3>
+            <span>days left</span>
+          </div>
+
+          <div ng-show="fundraiser.days_remaining <= 0">
+            <h3 style="margin-bottom:0"><strong>Completed</strong></h3>
+            <span>{{fundraiser.ends_at | date}}</span>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <progress class="progress-success progress-striped" value="fundraiser.funding_percentage"></progress>
+    </div>
+  </div>
+</div>

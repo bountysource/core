@@ -1,0 +1,44 @@
+.homepage section#top {
+  background: #444;
+  text-align: center;
+  padding: 20px 0 40px 0;
+}
+
+.homepage section#users {
+  background: #eee;
+  text-align: center;
+}
+
+.homepage section#fundraisers {
+}
+
+.homepage section#projects {
+  background: #eee;
+}
+
+/* backer/developer box (background and text) */
+.homepage #top { background-color: rgba(0,0,0,0); color: #fff; border: 0; }
+.homepage #top h1 { text-align: center; padding: 10px 0 0px 0; margin: 0; font-size: 34px; }
+.homepage #top h2 { padding: 0 0 0px 0; margin: 0 0 30px; font-size: 24px; font-weight: normal; }
+.homepage #top h3 { padding: 0 0 0px 0; margin: 0; font-size: 16px; margin-left: 24px; font-weight: normal; }
+/*.homepage .well .btn { float: right; }*/
+
+/* backer/developer box (vertical white line) */
+.homepage .home-developers { border-right: 2px solid white; margin-right: -1px; padding-right: 20px; }
+
+/* backer/developer box (top developer and backer pics) */
+.homepage .thumbnails li { background: none; overflow: hidden; text-align: center; }
+.homepage .thubmnails li a { border: 0; }
+.homepage .thumbnails li img { display: block; padding-bottom: 0; }
+.homepage .thumbnails li strong { display: block; color: #333; }
+.homepage .home-developers ul.top-pics { height: 75px }
+
+/* featured columns */
+.homepage h3 { font-size: 18px; }
+.homepage h4 { font-size: 15px; margin: 0; padding: 0; }
+.homepage p { text-align: center; }
+.homepage .featured-list { margin: 0; padding: 0; }
+.homepage .featured-list li { list-style: none; padding: 0; margin: 0 0 20px 55px; clear: left; }
+.homepage .featured-list img { max-width: 50px; max-height: 50px; float: left; margin-left: -55px; padding: 0 5px 5px 0; }
+.homepage .featured-list .progress { height: 5px; margin-bottom: 0; padding-bottom: 0; }
+
