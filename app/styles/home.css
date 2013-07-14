@@ -5,15 +5,14 @@
 }
 
 .homepage section#users {
-  background: #eee;
   text-align: center;
 }
 
 .homepage section#fundraisers {
+  background: #eee;
 }
 
 .homepage section#projects {
-  background: #eee;
 }
 
 /* backer/developer box (background and text) */
