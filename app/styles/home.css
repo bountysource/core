@@ -22,6 +22,10 @@
 .homepage #top h3 { padding: 0 0 0px 0; margin: 0; font-size: 16px; margin-left: 24px; font-weight: normal; }
 /*.homepage .well .btn { float: right; }*/
 
+.homepage section#top span span { display: none; }
+.homepage section#top span img { padding-bottom: 4px; }
+
+
 /* backer/developer box (vertical white line) */
 .homepage .home-developers { border-right: 2px solid white; margin-right: -1px; padding-right: 20px; }
 
