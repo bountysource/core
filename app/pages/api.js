@@ -42,6 +42,7 @@ angular.module('api.bountysource',[]).
       if ($cookieStore.get($api.access_token_cookie_name)) {
         params.access_token = $cookieStore.get($api.access_token_cookie_name);
       }
+      params.per_page = params.per_page || 250;
 
       // deferred JSONP call with a promise
       var deferred = $q.defer();
