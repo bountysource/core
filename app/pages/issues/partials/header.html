@@ -4,8 +4,7 @@
   </div>
   <div class="span11">
     <h4 style="margin-top: 0;">{{ issue.title || 'Loading...' }}</h4>
-    <span ng-show="issue.can_add_bounty" class="label label-success">Issue Open</span>
-    <span ng-hide="issue.can_add_bounty" class="label label-important">Issue Closed</span>
+    <issue-status-label issue="issue"></issue-status-label>
   </div>
 </div>
 <br />

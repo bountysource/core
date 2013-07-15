@@ -11,9 +11,7 @@
   <tr>
     <th>Tracker</th>
     <th>Issue</th>
-    <th>Issue Open</th>
     <th>Amount</th>
-    <th>Status</th>
     <th>Date</th>
     <th>
       Anonymous
@@ -23,12 +21,10 @@
   </thead>
 
   <tbody>
-  <tr ng-repeat="bounty in bounties">
+  <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
     <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
-    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}</a></td>
-    <td>{{ bounty.issue.can_add_bounty }}</td>
+    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }} <issue-status-label issue="issue"></issue-status-label></a></td>
     <td>{{ bounty.amount | dollars }}</td>
-    <td>{{ bounty.status }}</td>
     <td>{{ bounty.created_at | date }}</td>
 
     <td ng-show="bounty.anonymous">
