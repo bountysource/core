@@ -347,6 +347,14 @@ angular.module('api.bountysource',[]).
       });
     };
 
+    this.set_access_token = function(new_access_token) {
+      return $cookieStore.put(this.access_token_cookie_name, new_access_token);
+    };
+
+    this.get_access_token = function() {
+      return $cookieStore.get(this.access_token_cookie_name);
+    };
+
     this.load_current_person_from_cookies = function() {
       var access_token = $cookieStore.get($api.access_token_cookie_name);
       if (access_token) {
