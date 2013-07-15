@@ -41,7 +41,7 @@
           <table class="table table-striped table-hover">
             <thead>
             <tr>
-              <th>Projects <span class="label label-info">{{results.trackers.length | number}}</span></th>
+              <th>Projects <span class="label label-info">{{results.trackers_total | number}}</span></th>
             </tr>
             </thead>
 
@@ -49,7 +49,7 @@
             <tr ng-show="results.trackers.length == 0" class="text-info">
               <td><i>No projects found</i></td>
             </tr>
-            <tr ng-repeat="tracker in results.trackers | filter:filter_search_results | orderBy:'-bounty_total'">
+            <tr ng-repeat="tracker in results.trackers | filter:filter_search_results ">
               <td><a ng-href="/trackers/{{tracker.slug}}">{{tracker.name}}</a></td>
             </tr>
             </tbody>
@@ -60,7 +60,7 @@
           <table class="table table-striped table-hover">
             <thead>
             <tr>
-              <th>Issues <span class="label label-info">{{results.issues.length | number}}</span></th>
+              <th>Issues <span class="label label-info">{{results.issues_total | number}}</span></th>
             </tr>
             </thead>
 
@@ -68,7 +68,7 @@
             <tr ng-show="results.issues.length == 0" class="text-info">
               <td><i>No issues found</i></td>
             </tr>
-            <tr ng-repeat="issue in results.issues | filter:filter_search_results | orderBy:'-bounty_total'">
+            <tr ng-repeat="issue in results.issues | filter:filter_search_results ">
               <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
             </tr>
             </tbody>
