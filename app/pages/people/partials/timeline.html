@@ -8,9 +8,9 @@
       <strong>{{ person.display_name }}</strong> placed a <strong>{{ action.amount | dollars }}</strong> bounty on <a ng-href="/issues/{{ action.target_slug }}">{{ action.target_name }}</a>
     </td>
 
-    <td ng-show="action.type == 'tracker_plugin'">
-      <strong>{{ person.display_name }}</strong> installed the <a ng-href="/tools">GitHub plugin</a> for <a ng-href="/trackers/{{ action.target_slug }}">{{ action.target_name }}</a>
-    </td>
+    <!--<td ng-show="action.type == 'tracker_plugin'">-->
+      <!--<strong>{{ person.display_name }}</strong> installed the <a ng-href="/tools">GitHub plugin</a> for <a ng-href="/trackers/{{ action.target_slug }}">{{ action.target_name }}</a>-->
+    <!--</td>-->
 
     <td class="muted">{{ action.created_at | date:'medium' }}</td>
   </tr>

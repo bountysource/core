@@ -23,6 +23,10 @@ angular.module('app')
         redirectTo: "/tools",
         controller: 'Static'
       })
+      .when('/tools', {
+        redirectTo: "/",
+        controller: 'Static'
+      })
       .when('/users/:id', {
         redirectTo: function(param) { return "/people/"+param.id; },
         controller: 'Static'
