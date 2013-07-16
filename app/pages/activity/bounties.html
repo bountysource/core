@@ -23,7 +23,7 @@
   <tbody>
   <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
     <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
-    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }} <issue-status-label issue="issue"></issue-status-label></a></td>
+    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }} <issue-status-label issue="bounty.issue"></issue-status-label></a></td>
     <td>{{ bounty.amount | dollars }}</td>
     <td>{{ bounty.created_at | date }}</td>
 
