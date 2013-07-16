@@ -10,7 +10,8 @@
 }
 .btn {
   border: none;
-  background: #bdc3c7;
+  /*background: #bdc3c7;*/
+  background: #3498db;
   color: #ffffff;
   padding: 9px 12px 10px;
   line-height: 22px;
@@ -31,7 +32,8 @@
 .btn:hover,
 .btn:focus,
 .btn-group:focus .btn.dropdown-toggle {
-  background-color: #cacfd2;
+  /*background-color: #cacfd2;*/
+  background-color: #5dade2;
   color: #ffffff;
   outline: none;
   -webkit-transition: 0.25s;
@@ -43,7 +45,8 @@
 .btn:active,
 .btn-group.open .btn.dropdown-toggle,
 .btn.active {
-  background-color: #a1a6a9;
+  /*background-color: #a1a6a9;*/
+  background-color: #2c81ba;
   color: rgba(255, 255, 255, 0.75);
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
