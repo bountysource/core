@@ -19,7 +19,8 @@ angular.module('app')
       location: $scope.current_person.location,
       company: $scope.current_person.company,
       url: $scope.current_person.url,
-      public_email: $scope.current_person.public_email
+      public_email: $scope.current_person.public_email,
+      gravatar_email: $scope.current_person.gravatar_email
     };
 
     $scope.profile_pics = [
