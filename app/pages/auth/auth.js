@@ -11,7 +11,6 @@ angular.module('app')
   })
   .controller("AuthConfirmController", function($scope, $routeParams, $window, $location, $api) {
     $scope.provider = $routeParams.provider;
-    console.log("auth confirm", $routeParams.provider, $scope.current_person);
 
     $scope.accept = function() {
       $scope.pending_connect = true;
