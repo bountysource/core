@@ -461,7 +461,7 @@ angular.module('api.bountysource',[]).
         $rootScope.$evalAsync(failure);
       } else {
         // otherwise we're still waiting on load_current_person_from_cookies (likely a fresh page load)
-        $rootScope.$watch('current_person', function(new_val) {
+        $rootScope.$watch('current_person', function() {
           if ($rootScope.current_person) {
             success();
           } else if ($rootScope.current_person === false) {

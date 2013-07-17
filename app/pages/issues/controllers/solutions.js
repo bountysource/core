@@ -10,7 +10,6 @@ angular.module('app')
   })
 
   .controller('IssueSolutionsController', function ($scope, $routeParams, $location, $api) {
-
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       // set solution accepted bounty claim model
       $scope.$init_bounty_claim(issue);
@@ -27,6 +26,30 @@ angular.module('app')
       // need this to determine whether or not they can
       // dispute solutions.
       $scope.locate_my_bounty(issue);
+
+      // on solution update
+      $scope.$watch('my_solution', function(solution) {
+        if (solution) {
+          $scope.$init_solution(issue, solution);
+          $scope.$init_my_solution(issue, solution);
+
+          // find the solution on issue.solutions array and update its attributes
+          for (var i=0; i<issue.solutions.length; i++) {
+            if (issue.solutions[i].id === solution.id) {
+              for (var k in solution) { issue.solutions[i][k] = solution[k]; }
+              break;
+            }
+          }
+        }
+      });
+
+      // when the solution is created, initialize dat stuff
+      $scope.$on('mySolutionCreated', function(e, solution) {
+        $scope.my_solution = solution;
+        issue.solutions.push(solution);
+        $scope.$init_solution(issue, solution);
+        $scope.$init_my_solution(issue, solution);
+      });
 
       return issue;
     });
@@ -77,83 +100,80 @@ angular.module('app')
       body: ""
     };
 
+    $scope.my_solution = null;
     $scope.$locate_my_solution = function(issue) {
       for (var i=0; $scope.current_person && i<issue.solutions.length; i++) {
         if (issue.solutions[i].person.id === $scope.current_person.id) {
-          issue.my_solution = issue.solutions[i];
+          $scope.my_solution = issue.solutions[i];
           break;
         }
       }
 
-      // does the authenicated user have a solution?
-      if (issue.my_solution) {
-        // add submission method
-        issue.my_solution.submit = function() {
-          $scope.solution_error = null;
-
-          // first update the solution...
-          $api.solution_update(issue.my_solution.id, $scope.my_solution_submit, function(response) {
-            if (response.meta.success) {
-              //... then submit it!
-              $api.solution_submit(issue.my_solution.id, function(response) {
-                if (response.meta.success) {
-                  $scope.my_solution = angular.copy(response.data);
-
-                  // find the solution issue.solutions array and update its attributes
-                  for (var i=0; i<issue.solutions.length; i++) {
-                    if (issue.solutions[i].id === $scope.my_solution.id) {
-                      for (var k in $scope.my_solution) { issue.solutions[i][k] = $scope.my_solution[k]; }
-                      break;
-                    }
-                  }
-
-                } else {
-                  $scope.solution_error = response.data.error;
-                }
-              });
-            } else {
-              $scope.solution_error = response.data.error;
-            }
-          });
-        };
-
-        issue.my_solution.destroy = function() {
-          console.log('TODO issue.my_solution.destroy');
-        };
-
-        if (issue.my_solution.accepted) {
-          var default_donation_percentage = 0.05;
-          var default_donation = (issue.bounty_total * default_donation_percentage);
-
-          issue.my_solution.claim_bounty_data = {
-            total: issue.bounty_total,
-            donation: default_donation,
-            dev_cut: issue.bounty_total  - default_donation
-          };
-
-          issue.my_solution.claim_bounty = function() {
-            var donation_amounts = {
-              eff_donation_amount: $scope.bounty_claim.donations.eff.amount,
-              fsf_donation_amount: $scope.bounty_claim.donations.fsf.amount,
-              spi_donation_amount: $scope.bounty_claim.donations.spi.amount,
-              dwb_donation_amount: $scope.bounty_claim.donations.dwb.amount
-            };
-
-            $api.solution_payout(issue.my_solution.id, donation_amounts, function(response) {
-              console.log(response);
-
-              if (response.meta.success) {
-                $location.url("/activity/solutions");
-              } else {
-                $scope.error = response.data.error;
-              }
-            });
-          };
-        }
+      // does the authenicated user have a solution? init!
+      if ($scope.my_solution) {
+        $scope.$init_my_solution(issue, $scope.my_solution);
       }
 
       // add model for submitting solution
-      return $scope.issue.my_solution;
+      return $scope.my_solution;
+    };
+
+    $scope.$init_my_solution = function(issue, solution) {
+      // add submission method
+      solution.submit = function() {
+        $scope.solution_error = null;
+
+        // first update the solution...
+        $api.solution_update(solution.id, $scope.my_solution_submit, function(response) {
+          if (response.meta.success) {
+            //... then submit it!
+            $api.solution_submit(solution.id, function(response) {
+
+
+
+              if (response.meta.success) {
+                $scope.my_solution = angular.copy(response.data);
+              } else {
+                $scope.solution_error = response.data.error;
+              }
+            });
+          } else {
+            $scope.solution_error = response.data.error;
+          }
+        });
+      };
+
+      solution.destroy = function() {
+        console.log('TODO solution.destroy');
+      };
+
+      if (solution.accepted) {
+        var default_donation_percentage = 0.05;
+        var default_donation = (issue.bounty_total * default_donation_percentage);
+
+        solution.claim_bounty_data = {
+          total: issue.bounty_total,
+          donation: default_donation,
+          dev_cut: issue.bounty_total  - default_donation
+        };
+
+        solution.claim_bounty = function() {
+          var donation_amounts = {
+            eff_donation_amount: $scope.bounty_claim.donations.eff.amount,
+            fsf_donation_amount: $scope.bounty_claim.donations.fsf.amount,
+            spi_donation_amount: $scope.bounty_claim.donations.spi.amount,
+            dwb_donation_amount: $scope.bounty_claim.donations.dwb.amount
+          };
+
+          $api.solution_payout(solution.id, donation_amounts, function(response) {
+            if (response.meta.success) {
+              $location.url("/activity/solutions");
+            } else {
+              $scope.error = response.data.error;
+            }
+          });
+        };
+      }
     };
 
     // add extra functionality and model data to a solution.

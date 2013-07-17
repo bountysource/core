@@ -17,21 +17,21 @@
   </div>
 
   <div ng-show="!issue.accepted_solution && (issue.can_add_bounty || issue.bounty_total > 0)">
-    <div ng-show="issue.my_solution" class="well">
+    <div ng-show="my_solution" class="well">
       <div class="text-center">
-        <div ng-show="!issue.my_solution.submitted">
+        <div ng-show="!my_solution.submitted">
           <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
           <p class="text-info">Have you finished your solution? If so, you need to submit it!</p>
           <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-primary">Update Solution</a>
         </div>
 
-        <div ng-show="issue.my_solution.submitted && !issue.my_solution.accepted">
+        <div ng-show="my_solution.submitted && !my_solution.accepted">
           <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
           <p class="text-info">Your solution has been submitted.</p>
           <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-info">Check Status</a>
         </div>
 
-        <div ng-show="issue.my_solution.accepted && !issue.my_solution.paid_out">
+        <div ng-show="my_solution.accepted && !my_solution.paid_out">
           <h3 style="margin: 0;" class="text-center">Earn the Bounty</h3>
           <p class="text-success">Your solution was accepted!</p>
           <a ng-href="/issues/{{issue.slug}}/solutions" class="btn btn-block btn-large btn-success">Claim Bounty</a>
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div ng-hide="issue.my_solution" class="well">
+    <div ng-hide="my_solution" class="well">
       <div class="text-center">
         <h3 style="margin: 0;">Earn the Bounty</h3>
         <p>Working on a solution to this issue? Let us know! If your solution is accepted, you are awarded the bounty.</p>
