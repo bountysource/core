@@ -314,9 +314,13 @@ angular.module('api.bountysource',[]).
       $cookieStore.put('postauth_url', $api.pathMerge(url, params));
     };
 
+    this.clear_post_auth_url = function() {
+      $cookieStore.remove('postauth_url');
+    };
+
     this.goto_post_auth_url = function() {
       var redirect_url = $cookieStore.get('postauth_url') || '/';
-      $cookieStore.remove('postauth_url');
+      this.clear_post_auth_url();
       $location.url(redirect_url).replace();
     };
 
@@ -450,7 +454,9 @@ angular.module('api.bountysource',[]).
       };
 
       if ($rootScope.current_person) {
-        // already logged in? go ahead and resolve immediately
+        // already logged in? go ahead and resolve immediately.
+        // before doing that, kill the redirect cookie
+        $api.clear_post_auth_url();
         $rootScope.$evalAsync(success);
       } else if ($rootScope.current_person === false) {
         // not logged in? go ahead and fail
@@ -458,7 +464,11 @@ angular.module('api.bountysource',[]).
       } else {
         // otherwise we're still waiting on load_current_person_from_cookies (likely a fresh page load)
         $rootScope.$watch('current_person', function(new_val) {
-          console.log('oh hai current_person', new_val);
+
+
+          console.log('waiting for person....', new_val);
+
+
           if ($rootScope.current_person) {
             success();
           } else if ($rootScope.current_person === false) {

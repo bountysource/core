@@ -31,8 +31,6 @@ angular.module('app')
           }, 1500);
         }
       });
-
-//      setTimeout(function(){ $scope.pending_connect = false; }, 1000);
     };
 
     $scope.reject = function() {
