@@ -17,6 +17,13 @@
 
       <ng-form class="form-horizontal" name="urls">
         <div class="control-group">
+          <label class="control-label" for="funding-goal">Funding Goal</label>
+          <div class="controls">
+            <input class="span8" id="funding-goal" type="number" ng-model="fundraiser.funding_goal" placeholder="Funding goal" />
+          </div>
+        </div>
+
+        <div class="control-group">
           <label class="control-label" for="repo-url">Image URL</label>
           <div class="controls">
             <input class="span8" id="repo-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />

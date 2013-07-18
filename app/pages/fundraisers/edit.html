@@ -17,23 +17,30 @@
 
     <ng-form class="form-horizontal" name="urls">
       <div class="control-group">
+        <label class="control-label" for="funding-goal">Funding Goal</label>
+        <div class="controls">
+          <input class="span8" id="funding-goal" type="number" min="5" ng-model="changes.funding_goal" placeholder="Funding goal" />
+        </div>
+      </div>
+
+      <div class="control-group">
         <label class="control-label" for="repo-url">Image URL</label>
         <div class="controls">
-          <input class="span8" id="repo-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />
+          <input class="span8" id="repo-url" type="url" ng-model="changes.image_url" placeholder="https://cdn.awesome.com/abc123" />
         </div>
       </div>
 
       <div class="control-group">
         <label class="control-label" for="homepage-url">Homepage</label>
         <div class="controls">
-          <input class="span8" id="homepage-url" type="url" ng-model="fundraiser.homepage_url" placeholder="https://www.bountysource.com" />
+          <input class="span8" id="homepage-url" type="url" ng-model="changes.homepage_url" placeholder="https://www.bountysource.com" />
         </div>
       </div>
 
       <div class="control-group">
         <label class="control-label" for="repo-url">Repository</label>
         <div class="controls">
-          <input class="span8" id="repo-url" type="url" ng-model="fundraiser.repo_url" placeholder="https://github.com/bountysource/frontend" />
+          <input class="span8" id="repo-url" type="url" ng-model="changes.repo_url" placeholder="https://github.com/bountysource/frontend" />
         </div>
       </div>
     </ng-form>
