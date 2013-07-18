@@ -19,7 +19,7 @@
       <div class="control-group">
         <label class="control-label" for="funding-goal">Funding Goal</label>
         <div class="controls">
-          <input class="span8" id="funding-goal" type="number" min="5" ng-model="changes.funding_goal" placeholder="Funding goal" />
+          <input class="span8" id="funding-goal" type="number" min="5" ng-disabled="fundraiser.published" ng-model="changes.funding_goal" placeholder="Funding goal" />
         </div>
       </div>
 
