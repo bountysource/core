@@ -7,17 +7,6 @@
   <div class="span3">
     <div class="well text-center">
       <div><img ng-src="{{tracker.image_url}}" /></div>
-      <br />
-      <button class="btn btn-block" ng-click="tracker.follow()">
-        <span ng-show="tracker.followed">
-          <i class="icon-star icon-white"></i>
-          Following this project
-        </span>
-        <span ng-hide="tracker.followed">
-          <i class="icon-star-empty icon-white"></i>
-          Follow this project
-        </span>
-      </button>
 
       <a ng-href="{{tracker.url}}" target="_blank" class="btn btn-block">
         <i class="icon-globe icon-white"></i>
@@ -69,7 +58,20 @@
   </div>
 
   <div class="span9">
-    <h1>{{tracker.name}}</h1>
+     <div id="blue">
+
+         <div class="starcontainer" ng-click="tracker.follow()">
+            <span ng-show="tracker.followed">
+              <img src="/images/star_gold_32.png"/>
+            </span>
+            <span ng-hide="tracker.followed">
+              <img src="/images/star_white_32.png"/>
+            </span>
+         </div>
+
+        <h1 class="tracker-header">{{tracker.name}}</h1>
+
+      </div>
     <p class="lead">{{tracker.description}}</p>
 
     <!--<div ng-include="'pages/trackers/partials/nav_tabs.html'"></div>-->

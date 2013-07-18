@@ -1,0 +1,20 @@
+.starcontainer {
+  margin-top: 15px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.starcontainer:hover {
+  cursor: pointer;
+}
+
+.tracker-header {
+  display: inline-block;
+  margin-bottom: 0px;
+  position: absolute;
+}
+
+#blue {
+  height: 60px;
+  position: relative;
+}
