@@ -5,6 +5,10 @@
 </ul>
 
 <ng-include src="'pages/activity/tabs.html'"></ng-include>
+<div class="alert alert-info">
+  <a ng-show="fundraisers.length <= 0" href="/fundraisers/new">Get started on your first fundraiser today!</a>
+  <a ng-show="fundraisers.length > 0" href="/fundraisers/new">Get started on another fundraiser today!</a>
+</div>
 
 <table class="table table-striped">
   <tr>
