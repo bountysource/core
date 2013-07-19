@@ -282,36 +282,6 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+tracker_id+"/tags", "POST", { name: name });
     };
 
-    this.company_create = function(form_data) {
-      return this.call("/companies", "POST", form_data);
-    };
-
-    this.company_get = function(id) {
-      return this.call("/companies/"+id);
-    };
-
-    this.company_update = function(id, form_data) {
-      return this.call("/companies/"+id, "PUT", form_data);
-    };
-
-    this.company_tracker_add = function(id, tracker_id) {
-      return this.call("/companies/"+id+"/trackers", "PUT", { tracker_id: tracker_id });
-    };
-
-    this.company_tracker_remove = function(id, tracker_id) {
-      return this.call("/companies/"+id+"/trackers", "DELETE", { tracker_id: tracker_id });
-    };
-
-    this.company_claim_ownership = function(id) {
-      return this.call("/companies/"+id+"/claim_ownership", "PUT");
-    };
-
-    this.company_set_slug = function(id, slug) {
-      return this.call("/companies/"+id+"/set_slug", "PUT", { slug: slug });
-    };
-
-
-
 
     // these should probably go in an "AuthenticationController" or something more angular
 
