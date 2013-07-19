@@ -17,3 +17,4 @@
 .provider-link a:hover { text-decoration: none; }
 .provider-link a:hover span { text-decoration: underline; }
 
+.hide-tooltip .tooltip { display: none !important; }
