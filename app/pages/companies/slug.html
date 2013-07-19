@@ -1,0 +1,16 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a>New Company</a><span class="divider">»</span></li>
+  <li><a>Set URL</a></li>
+</ul>
+
+<h1>Set profile URL</h1>
+<p class="lead">Create a unique URL on Bountysource for your company.</p>
+
+<ng-form class="form-inline" ng-submit="set_slug()">
+  <div class="input-prepend">
+    <div class="add-on">https://www.bountysource.com/</div>
+    <input type="text" ng-model="slug" placeholder="bountysource" />
+  </div>
+  <button class="btn btn-primary" ng-click="set_slug()">Save URL and Continue</button>
+</ng-form>

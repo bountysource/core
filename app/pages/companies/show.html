@@ -1,0 +1,39 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a>{{company.name || 'Loading...'}}</a></li>
+</ul>
+
+<div ng-show="company">
+  <div class="row-fluid">
+    <div class="span3">
+      <div class="well">
+        <div><img ng-src="{{company.image_url}}" style="width: 100%;"/></div>
+        <h3>{{company.name}}</h3>
+        <a ng-href="{{company.url}}">{{company.url}}</a>
+      </div>
+    </div>
+    <div class="span9">
+      <div class="well">
+        <p>Add the projects that your company uses:</p>
+        <ng-form class="form-inline" name="search_form" ng-submit="search_projects()">
+          <input
+            name="input"
+            type="text"
+            class="search-query span4"
+            placeholder="Search for projects"
+            ng-model="project_search"
+            typeahead="project.id as project.name for project in projects | filter:$viewValue | filter:project.$added"
+          />
+        </ng-form>
+      </div>
+
+      <table>
+        <tbody>
+        <tr ng-repeat="tracker in company.trackers">
+          <td>{{tracker}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
