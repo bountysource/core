@@ -58,8 +58,7 @@ describe('Scenario: Signining In --', function() {
 			// expect(binding('signin_or_signup')).toBe("signin");
 		});
 		it("should ERROR for incorrectly formatted PASSWORD", function() {
-			var no_number_password_user = {};
-			for (var key in MOCK.signed_in_user) {no_number_password_user[key] = MOCK.signed_in_user[key];}
+			var no_number_password_user = angular.copy(MOCK.signed_in_user);
 			no_number_password_user.password = 'aaaaaaaaaaaaaaaaaaaaa';
 			fill_form(no_number_password_user);
 			element("button:contains('Sign In')").click();
@@ -89,11 +88,3 @@ describe('Scenario: Signining In --', function() {
 		});
 	});
 });
-/////////////////////////////////////////////////////////////////
-//////////////////////// EXAMPLE TEST ///////////////////////////
-/////////////////////////////////////////////////////////////////
-// it('should auto compile', function () {
-	// expect(element('h2').text()).toBe('Please sign in to continue');
-// });
-/////////////////////////////////////////////////////////////////
-
