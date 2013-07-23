@@ -338,6 +338,7 @@ angular.module('app')
       });
       return issue;
     };
+    // HERE IS THE CALL
     $scope.issue = $api.issue_get($routeParams.id).then($scope.issue_response_handler);
   });
 

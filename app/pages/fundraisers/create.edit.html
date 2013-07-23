@@ -13,7 +13,8 @@
     <div class="span9">
       <!--Edit Title and Short Description-->
       <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="fundraiser.title" placeholder="The title of your fundraiser" />
-      <textarea class="span12 lead" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
+      <!--  ???MISSING ID <textarea class="span12 lead" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea> MISSINGID??? -->
+      <textarea class="span12 lead" id="fundraiser-shortdes" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
 
       <ng-form class="form-horizontal" name="urls">
         <div class="control-group">
@@ -26,7 +27,8 @@
         <div class="control-group">
           <label class="control-label" for="repo-url">Image URL</label>
           <div class="controls">
-            <input class="span8" id="repo-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />
+            <!--? IMAGE URL <input class="span8" id="repo-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" /> IMAGE URL?-->
+            <input class="span8" id="image-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />
           </div>
         </div>
 
@@ -40,7 +42,7 @@
         <div class="control-group">
           <label class="control-label" for="repo-url">Repository</label>
           <div class="controls">
-            <input class="span8" id="repo-url" type="url" ng-model="fundraiser.repo_url" placeholder="https://github.com/bountysource/frontend" />
+            <input class="span8" id="repo-url" type="url" ng-model="fundraiser.repo_url" placeholder="https://github.com/bountysource/frontend" /> 
           </div>
         </div>
       </ng-form>
@@ -55,7 +57,7 @@
     <div class="span3">
       <!--Big Create Fundraiser button-->
       <div class="well well-large">
-        <button ng-click="create()" ng-disabled="!fundraiser.title || urls.$invalid" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
+        <button id="create-fundraiser-submit" ng-click="create()" ng-disabled="!fundraiser.title || urls.$invalid" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
       </div>
 
       <!--About the author-->

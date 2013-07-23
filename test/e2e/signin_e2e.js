@@ -34,7 +34,6 @@ describe('Scenario: Signining In --', function() {
 			expect(element('#inputEmail:visible').count()).toBe(1);
 		});
 		it("PASSWORD field should initialized", function() {
-			// expect(element('#inputPassword').attr('placeholder')).toBe('abcd1234');
 			expect(element('#inputPassword').attr('placeholder')).toMatch('[a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]');
 			expect(element('#inputPassword:visible').count()).toBe(1);
 		});
@@ -50,29 +49,26 @@ describe('Scenario: Signining In --', function() {
 			input('form_data.email').enter(MOCK.new_user_valid.email);
 			input('form_data.password').enter('aa123');
 			expect(element(".help-inline").text()).toContain("Available!");		//INCOMPLETE
-			// expect(element("ng-show=='signup'").text()).toContain("Available!");
 		});
+
 		it("should FIND user that EXISTS", function() {
 			input('form_data.email').enter(MOCK.new_user_valid.email);
 			expect(element(".help-inline").text()).toContain("Found!");		//INCOMPLETE
-			// expect(binding('signin_or_signup')).toBe("signin");
 		});
+
 		it("should ERROR for incorrectly formatted PASSWORD", function() {
 			var no_number_password_user = angular.copy(MOCK.signed_in_user);
 			no_number_password_user.password = 'aaaaaaaaaaaaaaaaaaaaa';
 			fill_form(no_number_password_user);
 			element("button:contains('Sign In')").click();
 			expect(element('.alert.alert-error').text()).toContain('Password not correct');
-			// expect(binding('form.input.$valid')).toEqual('false');
 		});
 	});
+
 	describe("VALID SIGN UP", function() {
 		it("should NOT show errors for for correct signup", function() {
 			fill_form(MOCK.new_user_valid);
 			element("button:contains('Sign Up')").click();		//INCOMPLETE
-			// input('form_data.password').enter(MOCK.new_user_valid.password);
-			// fill_form(MOCK.signed_in_user);
-			// expect(element('.alert.alert-error').text()).toBeNull();
 		});
 	});
 
@@ -86,5 +82,25 @@ describe('Scenario: Signining In --', function() {
 		it("should show user's DISPLAY_NAME in NAVBAR", function() {
 			expect(binding("current_person.display_name")).toBe(MOCK.new_user_valid.display_name);
 		});
+	});
+});
+
+
+describe('Scenario: Creating A Fundraiser --', function() {
+	beforeEach(function() {
+		browser().navigateTo("/fundraisers/new");
+	});
+	function id_exists(id) {
+		return expect(element("#" + id).count()).toEqual(1);
+	}
+	// First test you can find all the required elements on the page
+	describe('Fundraiser Input IDs exist', function () {
+		it("should have an element title",						function(){id_exists("fundraiser-title");});
+		it("should have an element for funding goal",	function(){id_exists("funding-goal"); });
+		it("should have an element for repo url",			function(){id_exists("repo-url"); });
+		it("should have an element for homepage url",	function(){id_exists("homepage-url"); });
+		it("should have an element for image url",		function(){id_exists("image-url"); });
+		it("should have an element for description",	function(){id_exists("fundraiser-shortdes"); });
+		it("should have a Button to submit",					function(){id_exists("create-fundraiser-submit"); });
 	});
 });

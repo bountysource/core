@@ -345,6 +345,13 @@ module.exports = function (grunt) {
     'connect:dist'
   ]);
 
+  // grunt.registerTask('test', [
+  //   'html_src',
+  //   'clean:server',
+  //   'jshint',
+  //   'connect:app',
+  //   'karma'
+  // ]);
   grunt.registerTask('test', [
     'html_src',
     'clean:server',
@@ -455,7 +462,4 @@ module.exports = function (grunt) {
 //
 //    });
   });
-
-
-
 };
