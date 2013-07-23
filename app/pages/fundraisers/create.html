@@ -55,7 +55,7 @@
     <div class="span3">
       <!--Big Create Fundraiser button-->
       <div class="well well-large">
-        <button ng-click="create()" ng-disabled="!fundraiser.title || urls.$invalid" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
+        <button ng-click="create()" ng-disabled="!fundraiser.title || !fundraiser.short_description || !fundraiser.description || urls.$invalid" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
       </div>
 
       <!--About the author-->
