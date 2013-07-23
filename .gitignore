@@ -5,4 +5,5 @@ app/components
 .DS_Store
 *.log
 .idea
+dist/*
 cloudfiles.json

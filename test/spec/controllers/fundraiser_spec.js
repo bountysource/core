@@ -72,7 +72,7 @@ describe("FundraiserCreate Controller --", function() {
 		fund_create_ctrl = $controller('FundraiserCreateController', {$scope: scope, $routeParams: routeparams, $location: location, $api: api});
 	}));
 
-	describe("INIT scope.fundraiser", function() {
+	xdescribe("INIT scope.fundraiser", function() {
 		var f;
 		beforeEach(function() {
 			f = scope.fundraiser;

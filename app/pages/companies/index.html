@@ -1,0 +1,27 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a>Companies</a></li>
+</ul>
+
+<h1>Companies Using Open-Source Software</h1>
+
+<div class="row-fluid">
+
+  <div class="span9">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="/companies">Popular</a></li>
+      <li><a href="/companies/new">Create</a></li>
+    </ul>
+
+    <ul class="thumbnails">
+      <li class="span2" ng-repeat="company in companies">
+        <a href="/companies/{{company.slug}}" class="thumbnail text-center">
+          <img src="{{ company.image_url }}" /><br/>
+          {{ company.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="span3" ng-include="'pages/companies/partials/index-side.html'"></div>
+</div>
