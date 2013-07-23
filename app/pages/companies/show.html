@@ -34,7 +34,7 @@
             <img ng-src="{{tracker.image_url}}"/>
             {{tracker.name}}
           </a>
-          <button type="button" class="close" ng-click="remove_tracker(tracker.id)">&times;</button>
+          <button type="button" ng-show="is_admin" class="close" ng-click="remove_tracker(tracker.id)">&times;</button>
         </li>
       </ul>
     </div>
