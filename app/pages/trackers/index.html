@@ -3,10 +3,6 @@
   <li><a>Projects</a></li>
 </ul>
 
-<div ng-show="$pagination" style="text-align: center;">
-  <pagination on-select-page="change_page(page)" max-size="15" boundary-links="true" num-pages="$pagination.pages" current-page="$pagination.page" class="pagination"></pagination>
-</div>
-
 <div ng-show="projects">
   <table class="table table-striped">
     <thead>
@@ -20,7 +16,7 @@
     <tbody>
     <tr ng-repeat="project in projects | filter:filter_method | orderBy:['-bounty_total', '-comment_count']">
       <td>
-        <a class="thumbnail" ng-href="/trackers/{{project.slug}}"><img  ng-src="{{project.image_url || 'images/bountysource-grey.png'}}" /></td></a>
+        <a class="thumbnail" ng-href="/trackers/{{project.slug}}"><img ng-src="{{project.image_url || 'images/bountysource-grey.png'}}" /></a>
       </td>
       <td><a ng-href="/trackers/{{project.slug}}">{{project.name}}</a></td>
       <td class="muted">{{project.description}}</td>
@@ -31,4 +27,8 @@
     </tr>
     </tbody>
   </table>
+</div>
+
+<div ng-show="$pagination && projects && projects.length > 0" style="text-align: center;">
+  <pagination on-select-page="change_page(page)" max-size="15" boundary-links="true" num-pages="$pagination.pages" current-page="$pagination.page" class="pagination"></pagination>
 </div>
