@@ -52,3 +52,11 @@ footer a, footer { color: #bbb; }
 .navbar-fixed-top { margin: 0; }
 
 #main > .container { border-top: 25px solid transparent; }
+
+
+/* https://github.com/twitter/bootstrap/issues/3494 */
+.row-fluid ul.thumbnails li.span12 + li { margin-left : 0px; clear: left; }
+.row-fluid ul.thumbnails li.span6:nth-child(2n + 3) { margin-left : 0px; clear: left; }
+.row-fluid ul.thumbnails li.span4:nth-child(3n + 4) { margin-left : 0px; clear: left; }
+.row-fluid ul.thumbnails li.span3:nth-child(4n + 5) { margin-left : 0px; clear: left; }
+.row-fluid ul.thumbnails li.span2:nth-child(6n + 7) { margin-left : 0px; clear: left; }

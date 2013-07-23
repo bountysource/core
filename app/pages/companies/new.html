@@ -1,0 +1,21 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/companies">Companies</a><span class="divider">»</span></li>
+  <li><a>Create</a></li>
+</ul>
+
+<h1>Create a Company Page</h1>
+<p class="lead">Show off your company's support for open-source software.</p>
+<br />
+
+<form class="form-horizontal" ng-submit="create_company()">
+  <div class="alert alert-error" ng-show="error">{{error}}</div>
+
+  <ng-include src="'pages/companies/partials/form.html'"></ng-include>
+
+  <div class="control-group">
+    <div class="controls">
+      <submit type="submit" ng-click="create_company()" class="btn btn-large btn-primary">Continue</submit>
+    </div>
+  </div>
+</form>
