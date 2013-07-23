@@ -4,18 +4,33 @@
   <li><a>Create</a></li>
 </ul>
 
-<h1>Create a Company Page</h1>
-<p class="lead">Show off your company's support for open-source software.</p>
-<br />
+<h1>Companies Using Open-Source Software</h1>
 
-<form class="form-horizontal" ng-submit="create_company()">
-  <div class="alert alert-error" ng-show="error">{{error}}</div>
+<div class="row-fluid">
 
-  <ng-include src="'pages/companies/partials/form.html'"></ng-include>
 
-  <div class="control-group">
-    <div class="controls">
-      <submit type="submit" ng-click="create_company()" class="btn btn-large btn-primary">Continue</submit>
-    </div>
+  <div class="span9">
+    <ul class="nav nav-tabs">
+      <li><a href="/companies">Popular</a></li>
+      <li class="active"><a href="/companies/new">Create</a></li>
+    </ul>
+
+
+    <p class="lead">Show off your company's support for open-source software.</p>
+    <br />
+
+    <form class="form-horizontal" ng-submit="create_company()">
+      <div class="alert alert-error" ng-show="error">{{error}}</div>
+
+      <ng-include src="'pages/companies/partials/form.html'"></ng-include>
+
+      <div class="control-group">
+        <div class="controls">
+          <submit type="submit" ng-click="create_company()" class="btn btn-large btn-primary">Continue</submit>
+        </div>
+      </div>
+    </form>
   </div>
-</form>
+
+  <div class="span3" ng-include="'pages/companies/partials/index-side.html'"></div>
+</div>
