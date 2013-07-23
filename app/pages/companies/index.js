@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider) {
     $routeProvider
       .when('/companies', {
         templateUrl: 'pages/companies/index.html',

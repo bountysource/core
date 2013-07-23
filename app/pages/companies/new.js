@@ -26,7 +26,7 @@ angular.module('app')
       return (text||"").toLowerCase().replace(/[ ]+/g,'-').replace(/[,.]/g,'').replace(/-(inc|llc)$/,'');
     };
 
-    $scope.$watch('form_data.name', function(whee) {
+    $scope.$watch('form_data.name', function() {
       $scope.form_data.slug = $scope.slugify($scope.form_data.name);
     });
   });

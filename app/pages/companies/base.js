@@ -5,7 +5,7 @@ angular.module('app')
     $scope.company = $api.company_get($routeParams.id);
     $scope.set_company = function(company) {
       $scope.company = company;
-    }
+    };
 
     $scope.company.then(function(company) {
       $scope.tabs = [

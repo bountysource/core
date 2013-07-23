@@ -306,10 +306,6 @@ angular.module('api.bountysource',[]).
       return this.call("/companies/"+id+"/remove_tracker", "DELETE", { tracker_id: tracker_id });
     };
 
-    this.company_claim_ownership = function(id) {
-      return this.call("/companies/"+id+"/claim_ownership", "PUT");
-    };
-
     this.list_companies = function() {
       return this.call("/companies", "GET");
     };
@@ -318,8 +314,8 @@ angular.module('api.bountysource',[]).
       if (query && (query.length >= 2)) {
         return this.call("/search/typeahead", "GET", { query: query, type: 'tracker' });
       } else {
-        return { then: function() { return []; }}
-      };
+        return { then: function() { return []; } };
+      }
     };
 
 
