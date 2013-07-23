@@ -115,6 +115,10 @@ angular.module('api.bountysource',[]).
       return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id+"/publish", "POST", callback);
     };
 
+    this.fundraisers_get = function() {
+      return this.call("/fundraisers");
+    };
+
     this.reward_create = function(fundraiser_id, data, callback) {
       this.call("/user/fundraisers/"+fundraiser_id+"/rewards", "POST", data, callback);
     };
