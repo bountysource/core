@@ -53,9 +53,29 @@
     </div>
 
     <div class="span3">
-      <!--Big Create Fundraiser button-->
       <div class="well well-large">
-        <button ng-click="create()" ng-disabled="!fundraiser.title || !fundraiser.short_description || !fundraiser.description || urls.$invalid" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
+        <!--Outline required inputs-->
+        <h4 style="margin-top: 0;">Required Steps</h4>
+        <label class="checkbox" style="cursor: default;">
+          <input type="checkbox" ng-checked="!!fundraiser.title" disabled style="cursor: default;" />
+          <small ng-class="{ 'text-success': !!fundraiser.title }">Add a title</small>
+        </label>
+        <label class="checkbox" style="cursor: default;">
+          <input type="checkbox" ng-checked="!!fundraiser.short_description" disabled style="cursor: default;" />
+          <small ng-class="{ 'text-success': !!fundraiser.short_description }">Add a short description</small>
+        </label>
+        <label class="checkbox" style="cursor: default;">
+          <input type="checkbox" ng-checked="!!fundraiser.funding_goal" disabled style="cursor: default;" />
+          <small ng-class="{ 'text-success': !!fundraiser.funding_goal }">Set your funding goal</small>
+        </label>
+        <label class="checkbox" style="cursor: default;">
+          <input type="checkbox" ng-checked="!!fundraiser.description" disabled style="cursor: default;" />
+          <small ng-class="{ 'text-success': !!fundraiser.description }">Add a description</small>
+        </label>
+        <br />
+
+        <!--Big Create Fundraiser button-->
+        <button ng-click="create()" ng-disabled="!fundraiser.title || !fundraiser.short_description || !fundraiser.description || !fundraiser.funding_goal || urls.$invalid" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
       </div>
 
       <!--About the author-->
