@@ -1,0 +1,76 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <!--<li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>-->
+  <li><a>New Fundraiser</a></li>
+</ul>
+
+<alert ng-show="error" type="error" close="error = null">Error</alert>
+
+<ng-form name="form">
+  <alert ng-show="error">{{ error }}</alert>
+
+  <div class="row-fluid">
+    <div class="span9">
+      <!--Edit Title and Short Description-->
+      <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="fundraiser.title" placeholder="The title of your fundraiser" />
+      <!--  ???MISSING ID <textarea class="span12 lead" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea> MISSINGID??? -->
+      <textarea class="span12 lead" id="fundraiser-shortdes" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
+
+      <ng-form class="form-horizontal" name="urls">
+        <div class="control-group">
+          <label class="control-label" for="funding-goal">Funding Goal</label>
+          <div class="controls">
+            <input class="span8" id="funding-goal" type="number" ng-model="fundraiser.funding_goal" placeholder="Funding goal" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="repo-url">Image URL</label>
+          <div class="controls">
+            <!--? IMAGE URL <input class="span8" id="repo-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" /> IMAGE URL?-->
+            <input class="span8" id="image-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="homepage-url">Homepage</label>
+          <div class="controls">
+            <input class="span8" id="homepage-url" type="url" ng-model="fundraiser.homepage_url" placeholder="https://www.bountysource.com" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="repo-url">Repository</label>
+          <div class="controls">
+            <input class="span8" id="repo-url" type="url" ng-model="fundraiser.repo_url" placeholder="https://github.com/bountysource/frontend" /> 
+          </div>
+        </div>
+      </ng-form>
+
+      <!--Edit main Description-->
+      <div class="alert alert-info">
+        <strong>Protip:</strong> You can format your description using <a href="https://help.github.com/articles/github-flavored-markdown" target="_blank">GitHub Flavored Markdown</a>.
+      </div>
+      <textarea id="fundraiser-description" class="span12" rows="15" ng-model="fundraiser.description" placeholder="A description of your goal with this fundraiser."></textarea>
+    </div>
+
+    <div class="span3">
+      <!--Big Create Fundraiser button-->
+      <div class="well well-large">
+        <button id="create-fundraiser-submit" ng-click="create()" ng-disabled="!fundraiser.title || urls.$invalid" class="btn btn-large btn-block btn-success">Create Fundraiser</button>
+      </div>
+
+      <!--About the author-->
+      <h3>By <a ng-href="/people/{{current_person.slug}}">{{current_person.display_name}}</a></h3>
+      <div style="margin-bottom: 15px;">
+        <a class="thumbnail" ng-href="/people/{{current_person.slug}}">
+          <img ng-src="{{current_person.image_url}}">
+        </a>
+        <div>{{ current_person.bio }}</div>
+      </div>
+
+      <!--Disabled Pledge Now button-->
+      <button class="btn btn-block btn-large" disabled>Pledge Now</button>
+    </div>
+  </div>
+</ng-form>

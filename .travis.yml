@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - 0.8
+
+before_script:
+  - npm install --quiet -g grunt-cli
+  - npm install --quiet -g bower
+  - bower install
+  - sleep 1 	#let server start
+
+script: grunt test
