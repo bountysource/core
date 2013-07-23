@@ -37,6 +37,7 @@ autoWatch = false;
 proxies = {
 	'/': 'http://localhost:9000/'
 };
+
 urlRoot = "/_karma_/";
 
 // Start these browsers, currently available:
