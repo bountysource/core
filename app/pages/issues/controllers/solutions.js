@@ -144,7 +144,14 @@ angular.module('app')
       };
 
       solution.destroy = function() {
-        console.log('TODO solution.destroy');
+        $api.solution_destroy(solution.id).then(function() {
+          for (var i=0; i<issue.solutions.length; i++) {
+            if (issue.solutions[i].id === $scope.my_solution.id) {
+              issue.solutions.splice(i,1);
+            }
+          }
+          $scope.my_solution = null;
+        });
       };
 
       if (solution.accepted) {
