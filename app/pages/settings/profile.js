@@ -28,26 +28,6 @@ angular.module('app')
     $scope.profile_input = {
       radio: $scope.form_data.image_url
     };
-    $scope.profile_pics = [
-      { src: $scope.current_person.image_url }
-    ];
-    if ($scope.current_person.github_account) {
-      $scope.profile_pics.push({
-        src: $scope.current_person.github_account.avatar_url
-      });
-    }
-    if ($scope.current_person.twitter_account) {
-      $scope.profile_pics.push({
-        src: $scope.current_person.twitter_account.avatar_url,
-        value: 'twitter:' + $scope.current_person.twitter_account.login
-      });
-    }
-    if ($scope.current_person.facebook_account) {
-      $scope.profile_pics.push({
-        src: $scope.current_person.twitter_account.avatar_url,
-        value: 'facebook:' + ($scope.current_person.facebook_account.login || $scope.current_person.facebook_account.uid)
-      });
-    }
 
     $scope.save = function() {
       $scope.error = null;

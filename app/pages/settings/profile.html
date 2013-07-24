@@ -29,10 +29,26 @@
     <label class="control-label">Picture:</label>
 
     <div class="controls">
-      <label class="radio" ng-repeat="profile_pic in profile_pics" style="display: inline-block; padding-right: 30px">
-        <input type="radio" ng-model="profile_input.radio" value="{{profile_pic.value || profile_pic.src}}" style="margin-top: 18px">
-        <img src="{{profile_pic.src}}" style="width: 50px; height: 50px"/>
+      <label class="radio setings_profile_pic">
+        <input type="radio" ng-model="profile_input.radio" value="{{current_person.image_url}}">
+        <img src="{{form_data.image_url}}" tooltip="Current" />
       </label>
+
+      <label class="radio setings_profile_pic" ng-show="current_person.github_account">
+        <input type="radio" ng-model="profile_input.radio" value="{{current_person.github_account.avatar_url}}">
+        <img src="{{current_person.github_account.avatar_url}}" tooltip="GitHub" />
+      </label>
+
+      <label class="radio setings_profile_pic" ng-show="current_person.twitter_account">
+        <input type="radio" ng-model="profile_input.radio" value="twitter:{{current_person.twitter_account.login}}">
+        <img src="{{current_person.twitter_account.avatar_url}}" tooltip="Twitter" />
+      </label>
+
+      <label class="radio setings_profile_pic" ng-show="current_person.facebook_account">
+        <input type="radio" ng-model="profile_input.radio" value="facebook:{{current_person.facebook_account.login || current_person.facebook_account.uid}}" style="margin-top: 18px">
+        <img src="{{current_person.facebook_account.avatar_url}}" tooltip="Facebook" />
+      </label>
+
       <br/>
       <input type="radio" ng-model="profile_input.radio" value="custom">
       <input type="text" ng-model="profile_input.text" ng-change="profile_input.radio='custom'" placeholder="Image URL or Gravatar Email"/>
