@@ -332,7 +332,9 @@ angular.module('api.bountysource',[]).
     };
 
     this.set_current_person = function(obj) {
-      if (obj) {
+      if (obj && obj.error) {
+        // don't do anything
+      } else if (obj) {
         // FIXME: special case when updating set_current_person with a newer version of the same object but it's missing an access_token
         if (obj && $rootScope.current_person && (obj.id === $rootScope.current_person.id) && !obj.access_token && $rootScope.current_person.access_token) {
           obj.access_token = $rootScope.current_person.access_token;

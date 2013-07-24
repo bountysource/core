@@ -31,7 +31,7 @@
       <ul class="thumbnails company-tracker-thumbnails">
         <li ng-repeat="tracker in company.trackers" class="span2">
           <a ng-href="/trackers/{{tracker.slug}}" class="thumbnail text-center">
-            <img ng-src="{{tracker.image_url}}"/>
+            <img ng-src="{{tracker.medium_image_url}}"/>
             {{tracker.name}}
           </a>
           <button type="button" ng-show="is_admin" class="close" ng-click="remove_tracker(tracker.id)">&times;</button>

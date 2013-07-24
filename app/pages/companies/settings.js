@@ -15,7 +15,6 @@ angular.module('app')
       $scope.form_data = {
         name: company.name,
         slug: company.slug,
-        image_url: company.image_url,
         url: company.url
       };
 

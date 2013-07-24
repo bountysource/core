@@ -25,6 +25,7 @@ angular.module('app')
       // if you don't create a copy, these are both bound to the input
       $scope.master = angular.copy(response);
       $scope.changes = angular.copy(response);
+      delete $scope.changes.image_url;
 
       // also cache rewards
       $scope.master_rewards = angular.copy(response.rewards);

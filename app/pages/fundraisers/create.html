@@ -26,7 +26,7 @@
         <div class="control-group">
           <label class="control-label" for="repo-url">Image URL</label>
           <div class="controls">
-            <input class="span8" id="repo-url" type="url" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />
+            <input class="span8" id="repo-url" type="text" ng-model="fundraiser.image_url" placeholder="https://cdn.awesome.com/abc123" />
           </div>
         </div>
 
@@ -82,7 +82,7 @@
       <h3>By <a ng-href="/people/{{current_person.slug}}">{{current_person.display_name}}</a></h3>
       <div style="margin-bottom: 15px;">
         <a class="thumbnail" ng-href="/people/{{current_person.slug}}">
-          <img ng-src="{{current_person.image_url}}">
+          <img ng-src="{{current_person.large_image_url}}">
         </a>
         <div>{{ current_person.bio }}</div>
       </div>
