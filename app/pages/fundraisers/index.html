@@ -21,7 +21,9 @@
   <tbody>
   <tr ng-repeat="fundraiser in selected_fundraisers | filter:filter_method | orderBy:order_by:order_reverse">
     <td>
-      <a class="thumbnail" ng-href="/fundraisers/{{fundraiser.slug}}"><img ng-src="{{fundraiser.image_url || 'images/bountysource-grey.png'}}" /></a>
+      <a class="thumbnail" ng-href="/fundraisers/{{fundraiser.slug}}">
+        <img ng-src="{{fundraiser.image_url || 'images/bountysource-grey.png'}}" style="width: 100%;" />
+      </a>
     </td>
     <td>
       <a ng-href="/fundraisers/{{fundraiser.slug}}"><span ng-show="fundraiser.featured" class="label label-info">Featured!</span> {{fundraiser.title}}</a>

@@ -16,7 +16,9 @@
     <tbody>
     <tr ng-repeat="project in projects | filter:filter_method | orderBy:['-bounty_total', '-comment_count']">
       <td>
-        <a class="thumbnail" ng-href="/trackers/{{project.slug}}"><img ng-src="{{project.image_url || 'images/bountysource-grey.png'}}" /></a>
+        <a class="thumbnail" ng-href="/trackers/{{project.slug}}">
+          <img ng-src="{{project.image_url || 'images/bountysource-grey.png'}}" style="width: 100%;" />
+        </a>
       </td>
       <td><a ng-href="/trackers/{{project.slug}}">{{project.name}}</a></td>
       <td class="muted">{{project.description}}</td>
