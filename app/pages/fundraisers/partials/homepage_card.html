@@ -1,15 +1,15 @@
 <div style="margin-bottom: 10px; padding: 2px;">
   <div class="row-fluid">
     <div class="span2">
-      <a ng-href="/fundraisers/{{fundraiser.slug}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
+      <a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-img-{{fundraiser.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
       </a>
     </div>
 
     <div class="span10">
-      <strong><a ng-href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.title}}</a></strong>
-      <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}">{{fundraiser.person.display_name}}</a></small>
+      <strong><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-title-{{fundraiser.id}}" >{{fundraiser.title}}</a></strong>
+      <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}" id="home-fr-person-{{fundraiser.id}}">{{fundraiser.person.display_name}}</a></small>
       <br />
-      <small class="muted"><a ng-href="/fundraisers/{{fundraiser.slug}}">{{fundraiser.short_description | truncate:70}}</a></small>
+      <small class="muted"><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-desc-{{fundraiser.id}}">{{fundraiser.short_description | truncate:70}}</a></small>
       <br />
       <div class="progress" style="margin: 0; width: 60%; display: inline-block; vertical-align: middle;">
         <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>

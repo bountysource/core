@@ -2,39 +2,39 @@
   <div class="navbar-inner">
     <div class="container">
       <button type="button" class="btn btn-navbar" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      <a class="brand" href="/"><strong>Bountysource</strong><img src="/images/Bountysource-green.png" style="width: 100px; height: 30px" /></a>
+      <a class="brand" href="/" id="navbar-logo"><strong>Bountysource</strong><img src="/images/Bountysource-green.png" style="width: 100px; height: 30px" /></a>
       <div class="nav-collapse" collapse="!isCollapsed">
         <form class="navbar-search" ng-controller="NavbarSearchController" ng-submit="submit_search()">
           <div class="icon-search"></div>
           <input type="text" class="search-query" ng-model="search_query" placeholder="Issue URL, Project, Language, etc.">
         </form>
         <ul class="nav pull-right">
-          <li><a href="http://blog.bountysource.com" target="_blank">Blog</a></li>
-          <li><a href="https://github.com/bountysource/frontend/issues" target="_blank">Bug Reports</a></li>
-          <li ng-class="{'dropdown': true, 'dropup': true, 'active': chatroom.show}"><a ng-click="chatroom.toggle()">Chatroom <b class="caret"></b></a></li>
+          <li><a href="http://blog.bountysource.com" target="_blank" id="navbar-blog">Blog</a></li>
+          <li><a href="https://github.com/bountysource/frontend/issues" target="_blank" id="navbar-bugs">Bug Reports</a></li>
+          <li ng-class="{'dropdown': true, 'dropup': true, 'active': chatroom.show}"><a ng-click="chatroom.toggle()" id="navbar-chatroom">Chatroom <b class="caret"></b></a></li>
 
           <li class="dropdown" ng-controller="Signin">
-            <a href="/signin" class="dropdown-toggle" data-toggle="dropdown" ng-hide="!!current_person">Sign In<b class="caret"></b></a>
+            <a href="/signin" class="dropdown-toggle" data-toggle="dropdown" ng-hide="!!current_person" id="navbar-signin">Sign In<b class="caret"></b></a>
             <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
               <li style="padding-left: 10px;">Using:</li>
               <li ng-repeat="provider in providers">
-                <a ng-click="save_route()" ng-href="{{ signin_url_for(provider.id) }}"><img ng-src="{{provider.image_url}}"> {{provider.name}}</a>
+                <a ng-click="save_route()" ng-href="{{ signin_url_for(provider.id) }}" id="navbar-provider-{{provider.id}}"><img ng-src="{{provider.image_url}}"> {{provider.name}}</a>
               </li>
-              <li><a href="/signin"><img src="images/favicon-email.png"> Email Address</a></li>
+              <li><a href="/signin" id="navbar-provider-email"><img src="images/favicon-email.png"> Email Address</a></li>
             </ul>
 
-            <a href="/people/{{current_person.slug}}" class="dropdown-toggle" data-toggle="dropdown" ng-show="!!current_person">
+            <a href="/people/{{current_person.slug}}" class="dropdown-toggle" data-toggle="dropdown" ng-show="!!current_person" id="navbar-user">
               <img class="img-rounded" ng-src="{{current_person.image_url}}" style="width: 18px; height: 18px; margin-right: 5px;" />
               {{current_person.display_name}}
               <b class="caret"></b>
             </a>
 
             <ul class="dropdown-menu" ng-show="!!current_person">
-              <li><a href="/activity">
+              <li><a href="/activity" id="navbar-user-activity">
                 <i class="icon-bullhorn"></i>
                 Activity
               </a></li>
-              <li><a ng-href="/people/{{current_person.slug}}">
+              <li><a ng-href="/people/{{current_person.slug}}" id="navbar-user-profile">
                 <i class="icon-user"></i>
                 Profile
               </a></li>
@@ -42,12 +42,12 @@
                 <!--<i class="icon-wrench"></i>-->
                 <!--Tools-->
               <!--</a></li>-->
-              <li><a href="/settings">
+              <li><a href="/settings" id="navbar-user-settings">
                 <i class="icon-cog"></i>
                 Settings
               </a></li>
               <li class="divider"></li>
-              <li><a href="/signin" ng-click="signout()">
+              <li><a href="/signin" ng-click="signout()" id="navbar-user-signout">
                 <i class="icon-off"></i>
                 Sign Out
               </a></li>

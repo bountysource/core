@@ -4,24 +4,24 @@
       <h1><span><span>Bountysource</span><img src="/images/Bountysource-white.png" style="width: 210px; height: 63px"/></span> is the funding platform for open-source software.</h1>
       <h2>Accelerate open-source development with our community.</h2>
 
-      <a class="btn btn-info btn-large" href="/learn" style="width: 100px">Learn More</a>
-      <a class="btn btn-info btn-large" href="/signin" style="margin-left: 10px; width: 100px" ng-hide="current_person">Sign In</a>
-      <a class="btn btn-info btn-large" href="/activity" style="margin-left: 10px; width: 100px" ng-show="current_person">Activity</a>
+      <a class="btn btn-info btn-large" href="/learn" id="home-learn" style="width: 100px">Learn More</a>
+      <a class="btn btn-info btn-large" href="/signin" id="home-signin" style="margin-left: 10px; width: 100px" ng-hide="current_person">Sign In</a>
+      <a class="btn btn-info btn-large" href="/activity" id="home-activity" style="margin-left: 10px; width: 100px" ng-show="current_person">Activity</a>
     </div>
   </section>
 
   <section id="users">
     <div class="container">
-      <h3 class="text-center" style="margin: 0;">Top Developers</h3>
+      <h3 class="text-center" style="margin: 0;">Top Developers {{ has_webp }}</h3>
       <ul class="inline">
         <li ng-repeat="person in people.developers.top.slice(0,18)">
-          <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+          <a ng-href="/people/{{person.slug}}" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
         </li>
       </ul>
       <h3 class="text-center" style="margin: 0;">Top Backers</h3>
       <ul class="inline">
         <li ng-repeat="person in people.backers.top.slice(0,18)">
-          <a ng-href="/people/{{person.slug}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+          <a ng-href="/people/{{person.slug}}" id="home-back-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
         </li>
       </ul>
     </div>
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="text-center" style="margin: 15px 0;">
-        <a href="/fundraisers">View more fundraisers »</a>
+        <a href="/fundraisers" id="home-fundraisers" >View more fundraisers »</a>
       </div>
     </div>
   </section>
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="text-center" style="margin-top: 15px;">
-        <a href="/trackers">View more projects »</a>
+        <a href="/trackers" id="home-projects">View more projects »</a>
       </div>
     </div>
   </section>
