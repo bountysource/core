@@ -32,7 +32,7 @@ angular.module('app')
     $scope.save = function() {
       $scope.error = null;
 
-      if ($scope.profile_input.radio == 'custom') {
+      if ($scope.profile_input.radio === 'custom') {
         $scope.form_data.image_url = $scope.profile_input.text;
       } else {
         $scope.form_data.image_url = $scope.profile_input.radio;
