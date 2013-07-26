@@ -8,7 +8,14 @@ angular.module('app')
         controller: 'Signin'
       });
   })
-  .controller('Signin', function ($scope, $routeParams, $api) {
+  .controller('Signin', function ($scope, $routeParams, $api, $location, $rootScope) {
+
+
+    if($rootScope.$root.current_person != false){
+        console.log('true');
+        $location.path("/");
+    }
+
     // probably doesn't belong here... this is how navbar's "Sign Out" is wired
     $scope.signout = $api.signout;
 
