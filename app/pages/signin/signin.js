@@ -10,9 +10,8 @@ angular.module('app')
   })
   .controller('Signin', function ($scope, $routeParams, $api, $location, $rootScope) {
 
-
+    //redirect user to homepage if already logged in
     if($rootScope.$root.current_person != false){
-        console.log('true');
         $location.path("/");
     }
 
