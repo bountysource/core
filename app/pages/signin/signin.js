@@ -8,11 +8,11 @@ angular.module('app')
         controller: 'Signin'
       });
   })
-  .controller('Signin', function ($scope, $routeParams, $api, $location, $rootScope) {
+  .controller('Signin', function ($scope, $routeParams, $api, $location) {
 
     //redirect user to homepage if already logged in
-    if($rootScope.$root.current_person != false){
-        $location.path("/");
+    if($scope.current_person != false){
+        $location.url("/");
     }
 
     // probably doesn't belong here... this is how navbar's "Sign Out" is wired
