@@ -8,7 +8,7 @@ angular.module('app')
         controller: 'PeopleShow'
       });
   })
-  .controller('PeopleShow', function ($scope, $routeParams, $api, $rootScope) {
+  .controller('PeopleShow', function ($scope, $routeParams, $api) {
 
     $scope.person = $api.person_get($routeParams.id);
 
@@ -17,7 +17,7 @@ angular.module('app')
     });
 
     $scope.timeline = $api.person_timeline_get($routeParams.id).then(function(response) {
-      //return response;
+      return response;
     });
 
   });

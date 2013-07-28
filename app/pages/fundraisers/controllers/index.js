@@ -9,7 +9,7 @@ angular.module('app')
         title: 'Bountysource - Fundraisers'
       });
   })
-  .controller('FundraisersIndex', function ($scope, $api, $rootScope) {
+  .controller('FundraisersIndex', function ($scope, $api) {
     $scope.current = [];
     $scope.completed = [];
     $scope.type = "current";
