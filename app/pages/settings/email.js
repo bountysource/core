@@ -6,7 +6,8 @@ angular.module('app')
       .when('/settings/email', {
         templateUrl: 'pages/settings/email.html',
         controller: 'SettingsEmail',
-        resolve: $person
+        resolve: $person,
+        title: 'Bountysource - Email'
       });
   })
   .controller('SettingsEmail', function($scope, $routeParams, $api) {

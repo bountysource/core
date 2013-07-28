@@ -7,7 +7,8 @@ angular.module('app')
       .when('/settings', {
         templateUrl: 'pages/settings/profile.html',
         controller: 'Settings',
-        resolve: $person
+        resolve: $person,
+        title: 'Bountysource - Profile'
       });
   })
   .controller('Settings', function($scope, $routeParams, $api, $location) {

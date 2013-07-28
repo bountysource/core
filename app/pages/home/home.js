@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/', {
         templateUrl: 'pages/home/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        title: 'Bountysource'
       });
   })
   .controller('HomeCtrl', function ($scope, $window, $api) {
@@ -22,4 +23,5 @@ angular.module('app')
       }
       return trackers;
     });
+
   });

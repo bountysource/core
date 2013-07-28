@@ -5,6 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/jobs', {
         templateUrl: 'pages/about/jobs.html',
-        controller: 'Static'
+        controller: 'Static',
+        title: 'Bountysource - Jobs'
       });
   });

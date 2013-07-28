@@ -8,11 +8,17 @@ angular.module('app')
         controller: 'PeopleShow'
       });
   })
-  .controller('PeopleShow', function ($scope, $routeParams, $api) {
+  .controller('PeopleShow', function ($scope, $routeParams, $api, $rootScope) {
+
     $scope.person = $api.person_get($routeParams.id);
 
-    $scope.timeline = $api.person_timeline_get($routeParams.id).then(function(response) {
-      return response;
+    $scope.person.then(function(person){
+      $rootScope.pageTitle = 'Bountysource - '+person.display_name;
     });
+
+    $scope.timeline = $api.person_timeline_get($routeParams.id).then(function(response) {
+      //return response;
+    });
+
   });
 

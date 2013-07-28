@@ -2,11 +2,11 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="app" ng-controller="MainController"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Bountysource</title>
+    <title ng:bind="pageTitle">Bountysource</title>
     <base href="/"/>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="styles/search.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="app" ng-class="{'chatroom': chatroom.show}" ng-controller="MainController">
+  <body ng-class="{'chatroom': chatroom.show}">
 
     <div id="wrap">
       <div id="main" class="clear-top">

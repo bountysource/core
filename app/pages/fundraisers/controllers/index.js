@@ -5,10 +5,11 @@ angular.module('app')
     $routeProvider
       .when('/fundraisers', {
         templateUrl: 'pages/fundraisers/index.html',
-        controller: 'FundraisersIndex'
+        controller: 'FundraisersIndex',
+        title: 'Bountysource - Fundraisers'
       });
   })
-  .controller('FundraisersIndex', function ($scope, $api) {
+  .controller('FundraisersIndex', function ($scope, $api, $rootScope) {
     $scope.current = [];
     $scope.completed = [];
     $scope.type = "current";
