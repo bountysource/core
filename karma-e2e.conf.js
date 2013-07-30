@@ -35,7 +35,7 @@ logLevel = LOG_INFO;
 autoWatch = false;
 
 proxies = {
-	'/': 'http://localhost:9001/'
+	'/': 'http://localhost:9000/'
 };
 
 urlRoot = "/_karma_/";
