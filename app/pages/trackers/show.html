@@ -1,32 +1,45 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/trackers">Projects</a><span class="divider">»</span></li>
   <li><a ng-href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a></li>
 </ul>
 
 <div class="row-fluid" ng-show="tracker">
   <div class="span3">
     <div class="well text-center">
-      <div><img ng-src="{{tracker.image_url}}" /></div>
+
+      <div><img ng-src="{{tracker.large_image_url}}" /></div>
+      <br />
+      <button class="btn btn-block" ng-click="tracker.follow()">
+        <span ng-show="tracker.followed">
+          <i class="icon-star"></i>
+          Following this project
+        </span>
+        <span ng-hide="tracker.followed">
+          <i class="icon-star-empty"></i>
+          Follow this project
+        </span>
+      </button>
 
       <a ng-href="{{tracker.url}}" target="_blank" class="btn btn-block">
-        <i class="icon-globe icon-white"></i>
+        <i class="icon-globe"></i>
         View Issue Tracker
       </a>
     </div>
 
-    <div class="well well-small">
-      <div class="text-center">
-        <a ng-click="show_bounties()"><h2 style="margin: 0;" ng-show="tracker.bounty_total > 0" class="text-center">{{tracker.bounty_total | dollars}}</h2></a>
+    <div class="well well-small" ng-show="tracker.bounty_total > 0 || tracker.tracker_type == 'Github::Repository'">
+      <div class="text-center" ng-show="tracker.bounty_total > 0">
+        <a ng-click="show_bounties()"><h2 style="margin: 0;" class="text-center">{{tracker.bounty_total | dollars}}</h2></a>
         <div>in bounties</div>
       </div>
 
-      <div class="row-fluid">
+      <div class="row-fluid" ng-show="tracker.tracker_type == 'Github::Repository'">
         <div class="span6 text-center">
-          <h3 style="margin: 0;">{{tracker.forks | number}}</h3>
+          <h3 style="margin: 0;">{{tracker.forks || 0 | number}}</h3>
           <div>{{'fork' | pluralize:tracker.forks}}</div>
         </div>
         <div class="span6 text-center">
-          <h3 style="margin: 0;">{{tracker.watchers | number}}</h3>
+          <h3 style="margin: 0;">{{tracker.watchers || 0 | number}}</h3>
           <div>{{'watcher' | pluralize:tracker.watchers}}</div>
         </div>
       </div>

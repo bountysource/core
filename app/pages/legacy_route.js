@@ -47,6 +47,10 @@ angular.module('app')
         redirectTo: function(param) { return "/issues/"+param.issue_id+"/solutions"; },
         controller: 'Static'
       })
+      .when('/issues/:issue_id/comments', {
+        redirectTo: function(param) { return "/issues/"+param.issue_id; },
+        controller: 'Static'
+      })
       .when('/solutions', {
         redirectTo: "/activity/solutions",
         controller: 'Static'

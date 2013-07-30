@@ -3,14 +3,39 @@
   <li><a>Search</a></li>
 </ul>
 
-<h2>Search</h2>
-<hr />
+<!--<h2>Search</h2>-->
+<!--<hr />-->
 
 <div ng-hide="search_query_submitted">
-  <form ng-submit="submit_search()" >
-    <input type="text" class="search-query span4" ng-model="search_query" placeholder="Issue URL, Project, Language, etc." />
-    <button type="submit" class="btn btn-primary" ng-disabled="!search_query"><i class="icon-search icon-white"></i> Search</button>
-  </form>
+  <div class="row-fluid" style="margin-top: 40px;">
+    <div class="span8 offset2">
+      <form ng-submit="submit_search()" class="form-inline">
+        <input style="height: 45px; padding: 0 10px;" type="text" class="span10" ng-model="search_query" placeholder="Search all projects and issues" autofocus />
+        <button type="submit" class="btn btn-primary btn-large" ng-disabled="!search_query"><i class="icon-search icon-white"></i> Search</button>
+      </form>
+
+      <p>You can search for projects and issues by entering:</p>
+      <ol class="search-bullets">
+        <li>
+          <strong>Search terms</strong>
+          <ul>
+            <li>Project name "Fabric.js"</li>
+            <li>Issue description "split pane"</li>
+          </ul>
+        </li>
+        <li>
+          <strong>URLs</strong>
+          <ul>
+            <li>GitHub repositories: "https://github.com/bountysource/frontend"</li>
+            <li>GitHub issues: "https://github.com/bountysource/frontend/issues/49"</li>
+            <li>Trac issues: "https://trac.torproject.org/projects/tor/ticket/3790"</li>
+            <li>Bugzilla issues: "https://bugzilla.mozilla.org/show_bug.cgi?id=355127"</li>
+            <li>and issues from Bitbucket, JIRA, Google Code, Launchpad and Pivotal Tracker</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
 </div>
 
 <div class="text-center" collapse="!search_query_submitted || !search_pending">
@@ -50,7 +75,7 @@
               <td><i>No projects found</i></td>
             </tr>
             <tr ng-repeat="tracker in results.trackers | filter:filter_search_results ">
-              <td><a ng-href="/trackers/{{tracker.slug}}">{{tracker.name}}</a></td>
+              <td><a ng-href="/trackers/{{tracker.slug}}"><span class="label label-success" ng-show="tracker.bounty_total > 0">{{tracker.bounty_total | dollars}}</span> {{tracker.name}}</a></td>
             </tr>
             </tbody>
           </table>
@@ -69,7 +94,7 @@
               <td><i>No issues found</i></td>
             </tr>
             <tr ng-repeat="issue in results.issues | filter:filter_search_results ">
-              <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
+              <td><a ng-href="/issues/{{issue.slug}}"><span class="label label-success" ng-show="issue.bounty_total > 0">{{issue.bounty_total | dollars}}</span> {{issue.title}}</a></td>
             </tr>
             </tbody>
           </table>

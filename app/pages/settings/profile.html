@@ -26,6 +26,37 @@
   </div>
 
   <div class="control-group">
+    <label class="control-label">Picture:</label>
+
+    <div class="controls">
+      <label class="radio setings_profile_pic">
+        <input type="radio" ng-model="profile_input.radio" value="{{current_person.image_url}}">
+        <img src="{{form_data.image_url}}" tooltip="Current" />
+      </label>
+
+      <label class="radio setings_profile_pic" ng-show="current_person.github_account">
+        <input type="radio" ng-model="profile_input.radio" value="{{current_person.github_account.avatar_url}}">
+        <img src="{{current_person.github_account.avatar_url}}" tooltip="GitHub" />
+      </label>
+
+      <label class="radio setings_profile_pic" ng-show="current_person.twitter_account">
+        <input type="radio" ng-model="profile_input.radio" value="twitter:{{current_person.twitter_account.login}}">
+        <img src="{{current_person.twitter_account.avatar_url}}" tooltip="Twitter" />
+      </label>
+
+      <label class="radio setings_profile_pic" ng-show="current_person.facebook_account">
+        <input type="radio" ng-model="profile_input.radio" value="facebook:{{current_person.facebook_account.login || current_person.facebook_account.uid}}" style="margin-top: 18px">
+        <img src="{{current_person.facebook_account.avatar_url}}" tooltip="Facebook" />
+      </label>
+
+      <br/>
+      <input type="radio" ng-model="profile_input.radio" value="custom">
+      <input type="text" ng-model="profile_input.text" ng-change="profile_input.radio='custom'" placeholder="Image URL or Gravatar Email"/>
+    </div>
+  </div>
+
+
+  <div class="control-group">
     <label class="control-label" for="inputLocation">Location:</label>
     <div class="controls">
       <input type="text" id="inputLocation" name="location" placeholder="San Francisco, CA" ng-model="form_data.location" />
@@ -54,36 +85,11 @@
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="inputGravatarEmail">Gravatar Email:</label>
-    <div class="controls">
-      <input type="text" id="inputGravatarEmail" name="gravatar_email" placeholder="john@doe.com" ng-model="form_data.gravatar_email" />
-    </div>
-  </div>
-
-  <div class="control-group">
     <label class="control-label" for="inputBio">Bio:</label>
     <div class="controls">
       <textarea rows="3" id="inputBio" name="bio" placeholder="Once upon a time..." ng-model="form_data.bio"></textarea>
     </div>
   </div>
-
-  <!--<div class="control-group" ng-show="form_data.image_url.match(/gravatar\.com/)">-->
-    <!--<label class="control-label" for="inputPublicEmail">Gravatar Email Address:</label>-->
-    <!--<div class="controls">-->
-      <!--<input type="text" id="inputPublicEmail" name="email" placeholder="john@doe.com" ng-model="form_data.gravatar_email" />-->
-      <!--<img src="{{form_data.image_url}}" style="width: 50px; height: 50px" ng-show="form_data.image_url" />-->
-    <!--</div>-->
-  <!--</div>-->
-
-  <!--<div class="control-group">-->
-    <!--<label class="control-label" for="inputPicture">Picture:</label>-->
-    <!--<div class="controls">-->
-      <!--<label class="radio" ng-repeat="image_url in profile_pics" style="display: inline-block; padding-right: 30px">-->
-        <!--<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" style="margin-top: 18px">-->
-        <!--<img src="{{image_url}}" style="width: 50px; height: 50px" />-->
-      <!--</label>-->
-    <!--</div>-->
-  <!--</div>-->
 
   <div class="control-group">
     <div class="controls">

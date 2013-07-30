@@ -1,5 +1,6 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/trackers">Projects</a><span class="divider">»</span></li>
   <li><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
   <li><a ng-href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
 </ul>
@@ -28,7 +29,7 @@
           <td>
             <div class="text-center">
               <a class="thumbnail text-center" ng-href="/people/{{solution.person.slug}}">
-                <img ng-src="{{ solution.person.image_url }}" />
+                <img ng-src="{{ solution.person.image_url }}" style="width: 100%;" />
               </a>
             </div>
           </td>

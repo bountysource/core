@@ -115,6 +115,10 @@ angular.module('api.bountysource',[]).
       return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id+"/publish", "POST", callback);
     };
 
+    this.fundraisers_get = function() {
+      return this.call("/fundraisers");
+    };
+
     this.reward_create = function(fundraiser_id, data, callback) {
       this.call("/user/fundraisers/"+fundraiser_id+"/rewards", "POST", data, callback);
     };
@@ -282,6 +286,38 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+tracker_id+"/tags", "POST", { name: name });
     };
 
+    this.company_create = function(form_data) {
+      return this.call("/companies", "POST", form_data);
+    };
+
+    this.company_get = function(id) {
+      return this.call("/companies/"+id);
+    };
+
+    this.company_update = function(id, form_data) {
+      return this.call("/companies/"+id, "PUT", form_data);
+    };
+
+    this.company_tracker_add = function(id, tracker_id) {
+      return this.call("/companies/"+id+"/add_tracker", "PUT", { tracker_id: tracker_id });
+    };
+
+    this.company_tracker_remove = function(id, tracker_id) {
+      return this.call("/companies/"+id+"/remove_tracker", "DELETE", { tracker_id: tracker_id });
+    };
+
+    this.list_companies = function() {
+      return this.call("/companies", "GET");
+    };
+
+    this.tracker_typeahead = function(query) {
+      if (query && (query.length >= 2)) {
+        return this.call("/search/typeahead", "GET", { query: query, type: 'tracker' });
+      } else {
+        return { then: function() { return []; } };
+      }
+    };
+
 
     // these should probably go in an "AuthenticationController" or something more angular
 
@@ -296,7 +332,9 @@ angular.module('api.bountysource',[]).
     };
 
     this.set_current_person = function(obj) {
-      if (obj) {
+      if (obj && obj.error) {
+        // don't do anything
+      } else if (obj) {
         // FIXME: special case when updating set_current_person with a newer version of the same object but it's missing an access_token
         if (obj && $rootScope.current_person && (obj.id === $rootScope.current_person.id) && !obj.access_token && $rootScope.current_person.access_token) {
           obj.access_token = $rootScope.current_person.access_token;

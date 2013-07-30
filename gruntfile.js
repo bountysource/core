@@ -56,7 +56,19 @@ module.exports = function (grunt) {
           port: 9000,
           middleware: function (connect) {
             return [
-              modRewrite(['!\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\swf$ /index.html']),
+              modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\swf)$ /index.html']),
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'app')
+            ];
+          }
+        }
+      },
+      test: {
+        options: {
+          port: 9001,
+          middleware: function (connect) {
+            return [
+              modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\swf)$ /index.html']),
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'app'),
               mountFolder(connect, 'test/e2e')
@@ -70,7 +82,7 @@ module.exports = function (grunt) {
           port: 9000,
           middleware: function (connect) {
             return [
-              modRewrite(['!\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\.swf$ /index.html']),
+              modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\.swf)$ /index.html']),
               mountFolder(connect, 'dist')
             ];
           }
@@ -349,21 +361,12 @@ module.exports = function (grunt) {
     'html_src',
     'clean:server',
     'jshint',
-    'connect:app',
-    'karma'
-  ]);
-
-  grunt.registerTask('e2e', [
-    'html_src',
-    'clean:server',
-    'jshint',
-    'connect:app',
-    'open:e2e',
-    'watch'
+    'karma:unit',
+    'connect:test',
+    'karma:e2e'
   ]);
 
   grunt.registerTask('build', [
-    //'test',              // run tests first, don't build unless all tests pass
     'clean:dist',        // start off with empty folder
     'html_src',          // make sure all our html_srcs are included correctly
     'copy',              // copy in static files like favicon.ico and robots.txt
@@ -387,7 +390,12 @@ module.exports = function (grunt) {
     'clean:dist_assets'  // clean up assets now that they're all up on CDN
   ]);
 
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('deploy', [
+    'test',
+    'build'
+  ]);
+
+  grunt.registerTask('default', ['test']);
 
   // automatically put javascript tags into index.html
   grunt.registerMultiTask('html_src', 'Rebuild static HTML files with file paths', function() {
@@ -432,28 +440,6 @@ module.exports = function (grunt) {
         grunt.file.write(filepath, contents);
       });
     });
-
-//    this.files.forEach(function(f) {
-//      var orig_src = grunt.file.read(f.dest);
-//      var src = ''+orig_src;
-//      var relative_path = f.dest.replace(/[^/]*?$/,'');
-//
-//      // add our own script references
-//      var script_tags = "<!-- html_src start -->\n";
-//      f.src.map(function(filepath) {
-//        script_tags += "    <script src=\"" + filepath.replace(relative_path,"") + "\" type=\"text\/javascript\"></script>\n";
-//      });
-//      script_tags += "    <!-- html_src end -->";
-//
-//      // remove existing tags
-//      src = src.replace(/<!-- html_src start -->[\s\S]+?<!-- html_src end -->/,script_tags);
-//
-//      if (src !== orig_src) {
-//        grunt.log.writeln('File "' + f.dest + '" updated.');
-//        grunt.file.write(f.dest, src);
-//      }
-//
-//    });
   });
 
 

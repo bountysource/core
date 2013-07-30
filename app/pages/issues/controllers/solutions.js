@@ -10,50 +10,6 @@ angular.module('app')
   })
 
   .controller('IssueSolutionsController', function ($scope, $routeParams, $location, $api) {
-    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
-      // set solution accepted bounty claim model
-      $scope.$init_bounty_claim(issue);
-
-      // make solutions disputable
-      // store them on $scope.issue.solutions
-      $scope.$init_solutions(issue);
-
-      // select the current user's solution if it's there.
-      // store it on $scope.issue.my_solution
-      $scope.$locate_my_solution(issue);
-
-      // find the logged in users bounty, if present.
-      // need this to determine whether or not they can
-      // dispute solutions.
-      $scope.locate_my_bounty(issue);
-
-      // on solution update
-      $scope.$watch('my_solution', function(solution) {
-        if (solution) {
-          $scope.$init_solution(issue, solution);
-          $scope.$init_my_solution(issue, solution);
-
-          // find the solution on issue.solutions array and update its attributes
-          for (var i=0; i<issue.solutions.length; i++) {
-            if (issue.solutions[i].id === solution.id) {
-              for (var k in solution) { issue.solutions[i][k] = solution[k]; }
-              break;
-            }
-          }
-        }
-      });
-
-      // when the solution is created, initialize dat stuff
-      $scope.$on('mySolutionCreated', function(e, solution) {
-        $scope.my_solution = solution;
-        issue.solutions.push(solution);
-        $scope.$init_solution(issue, solution);
-        $scope.$init_my_solution(issue, solution);
-      });
-
-      return issue;
-    });
-
     $scope.locate_my_bounty = function(issue) {
       // TODO: note, this skips past anonymous pledges. might break things if it's your bounty that is anonymous
       $scope.my_bounty = null;
@@ -144,7 +100,14 @@ angular.module('app')
       };
 
       solution.destroy = function() {
-        console.log('TODO solution.destroy');
+        $api.solution_destroy(solution.id).then(function() {
+          for (var i=0; i<issue.solutions.length; i++) {
+            if (issue.solutions[i].id === $scope.my_solution.id) {
+              issue.solutions.splice(i,1);
+            }
+          }
+          $scope.my_solution = null;
+        });
       };
 
       if (solution.accepted) {
@@ -288,5 +251,49 @@ angular.module('app')
       else if (solution.$status === "accepted" || solution.$status === "paid_out") { return 100; }
       else { return 1; }
     };
+
+    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+      // set solution accepted bounty claim model
+      $scope.$init_bounty_claim(issue);
+
+      // make solutions disputable
+      // store them on $scope.issue.solutions
+      $scope.$init_solutions(issue);
+
+      // select the current user's solution if it's there.
+      // store it on $scope.issue.my_solution
+      $scope.$locate_my_solution(issue);
+
+      // find the logged in users bounty, if present.
+      // need this to determine whether or not they can
+      // dispute solutions.
+      $scope.locate_my_bounty(issue);
+
+      // on solution update
+      $scope.$watch('my_solution', function(solution) {
+        if (solution) {
+          $scope.$init_solution(issue, solution);
+          $scope.$init_my_solution(issue, solution);
+
+          // find the solution on issue.solutions array and update its attributes
+          for (var i=0; i<issue.solutions.length; i++) {
+            if (issue.solutions[i].id === solution.id) {
+              for (var k in solution) { issue.solutions[i][k] = solution[k]; }
+              break;
+            }
+          }
+        }
+      });
+
+      // when the solution is created, initialize dat stuff
+      $scope.$on('mySolutionCreated', function(e, solution) {
+        $scope.my_solution = solution;
+        issue.solutions.push(solution);
+        $scope.$init_solution(issue, solution);
+        $scope.$init_my_solution(issue, solution);
+      });
+
+      return issue;
+    });
   });
 

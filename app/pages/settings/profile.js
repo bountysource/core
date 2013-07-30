@@ -20,19 +20,30 @@ angular.module('app')
       company: $scope.current_person.company,
       url: $scope.current_person.url,
       public_email: $scope.current_person.public_email,
-      gravatar_email: $scope.current_person.gravatar_email
+      image_url: $scope.current_person.image_url
     };
 
-    $scope.profile_pics = [
-      ($scope.current_person.github_account||{}).avatar_url,
-      ($scope.current_person.twitter_account||{}).avatar_url,
-      ($scope.current_person.facebook_account||{}).avatar_url
-    ];
+
+    // profile pictures
+    $scope.profile_input = {
+      radio: $scope.form_data.image_url
+    };
 
     $scope.save = function() {
-      console.log($scope.form_data);
-      $api.person_put($scope.form_data).then(function() {
-        $location.url('/people/' + $scope.current_person.slug);
+      $scope.error = null;
+
+      if ($scope.profile_input.radio === 'custom') {
+        $scope.form_data.image_url = $scope.profile_input.text;
+      } else {
+        $scope.form_data.image_url = $scope.profile_input.radio;
+      }
+
+      $api.person_put($scope.form_data).then(function(response) {
+        if (response.error) {
+          $scope.error = response.error;
+        } else {
+          $location.url('/people/' + $scope.current_person.slug);
+        }
       });
     };
   });

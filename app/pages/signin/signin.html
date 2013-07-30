@@ -9,7 +9,7 @@
       <div class="controls">
         <ul ng-controller="Signin">
           <li ng-repeat="provider in providers" class="provider-link">
-            <a ng-href="{{ signin_url_for(provider.id) }}"><img ng-src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
+            <a ng-href="{{ signin_url_for(provider.id) }}" id="signin-{{provider.id}}"><img ng-src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
           </li>
         </ul>
       </div>
@@ -39,7 +39,7 @@
 
   <div class="control-group" ng-hide="provider && (signin_or_signup!='signin')" ng-class="{ error: (show_validations && form.password.$invalid) || (form.password.$error.pattern || form.password.$error.minlength) }">
     <label class="control-label" for="inputPassword">Password:</label>
-    <div class="controls">
+    <div class="controls" ng-class="{ 'hide-tooltip': signin_or_signup=='signin' }">
       <input type="password" name="password" id="inputPassword" placeholder="abcd1234" ng-model="form_data.password" class="input-medium" ng-minlength="8" ng-pattern="/[a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]/" required tooltip="Letter, number and 8+ characters." tooltip-placement="right" tooltip-trigger="focus" />
       <span class="help-inline" ng-show="signin_or_signup=='signin'"><small><a ng-click="forgot_password()">Forgot?</a></small></span>
     </div>
