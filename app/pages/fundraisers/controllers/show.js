@@ -29,10 +29,12 @@ angular.module('app')
       }
     });
 
-    $scope.pledges = $api.fundraiser_pledges_get($routeParams.id).then(function(pledges) {
-      // need to turn amounts into float so that it's sortable
-      for (var i in pledges) { pledges[i].amount = parseFloat(pledges[i].amount); }
-      return pledges;
+    $scope.pledges = $api.call("/user/fundraisers/"+$routeParams.id+"/pledges", { per_page: "3" }, function(response) {
+      if (response.meta.success) {
+        var pledges = response.data;
+        for (var i in pledges) { pledges[i].amount = parseFloat(pledges[i].amount); }
+        return pledges;
+      }
     });
 
     $scope.publish = function(fundraiser) {
