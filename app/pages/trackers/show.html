@@ -7,6 +7,7 @@
 <div class="row-fluid" ng-show="tracker">
   <div class="span3">
     <div class="well text-center">
+
       <div><img ng-src="{{tracker.large_image_url}}" /></div>
       <br />
       <button class="btn btn-block" ng-click="tracker.follow()">
@@ -70,7 +71,20 @@
   </div>
 
   <div class="span9">
-    <h1>{{tracker.name}}</h1>
+     <div id="tracker-header">
+
+         <div class="starcontainer" ng-click="tracker.follow()">
+            <span ng-show="tracker.followed">
+              <img src="/images/star_gold_32.png"/>
+            </span>
+            <span ng-hide="tracker.followed">
+              <img src="/images/star_white_32.png"/>
+            </span>
+         </div>
+
+        <h1 class="tracker-name">{{tracker.name}}</h1>
+
+      </div>
     <p class="lead">{{tracker.description}}</p>
 
     <!--<div ng-include="'pages/trackers/partials/nav_tabs.html'"></div>-->
