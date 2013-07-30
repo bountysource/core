@@ -1,5 +1,5 @@
 <div class="well text-center">
-  <img ng-src="{{fundraiser.person.large_image_url}}">
+  <a ng-href="/people/{{fundraiser.person.slug}}"><img ng-src="{{fundraiser.person.large_image_url}}"></a>
   <h3 style="margin-top: 0;">By <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
   <p>{{ fundraiser.person.bio }}</p>
 </div>
