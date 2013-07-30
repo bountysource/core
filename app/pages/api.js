@@ -67,8 +67,8 @@ angular.module('api.bountysource',[]).
 
           // calculate time left
           // using Moment.js
-          var now = new moment();
-          var ends = new moment(res.data.ends_at);
+          var now = new Moment();
+          var ends = new Moment(res.data.ends_at);
           res.data.$days_left = ends.diff(now, "days");
           res.data.$hours_left = ends.diff(now, "hours");
           res.data.$minutes_left = ends.diff(now, "minutes");

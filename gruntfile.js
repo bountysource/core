@@ -358,15 +358,32 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
+    'test:unit',
+    'test:e2e'
+  ]);
+
+  grunt.registerTask('test:unit', [
     'html_src',
     'clean:server',
     'jshint',
-    'karma:unit',
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('test:e2e', [
+    'html_src',
+    'clean:server',
+    'jshint',
     'connect:test',
     'karma:e2e'
   ]);
 
   grunt.registerTask('build', [
+    'test:unit',
+    'compile',
+    'deploy'
+  ]);
+
+  grunt.registerTask('compile', [
     'clean:dist',        // start off with empty folder
     'html_src',          // make sure all our html_srcs are included correctly
     'copy',              // copy in static files like favicon.ico and robots.txt
@@ -381,18 +398,16 @@ module.exports = function (grunt) {
     'clean:templates',   // remove angular templates as they're now compiled and included in JS
     'ngmin',             // tweak JS files so uglify works with angular dependencies. specifically: function($scope)... becomes ['$scope', function(a)...]
     'uglify',            // compress JS files
-    'cssmin',            // compress CSS files
+    'cssmin'             // compress CSS files
+  ]);
+
+  grunt.registerTask('deploy', [
     'md5cdn:js',         // update angular templates with CDN urls to md5:binary files
     'md5cdn:css',        // update compiled css with CDN urls
     'md5:css_js',        // create md5 copies of css/js in dist/compiled
     'md5cdn:html',       // update root HTML with CDN'd css/js
     'cloudfiles',        // copy all of compiled/ up to CDN
     'clean:dist_assets'  // clean up assets now that they're all up on CDN
-  ]);
-
-  grunt.registerTask('deploy', [
-    'test',
-    'build'
   ]);
 
   grunt.registerTask('default', ['test']);

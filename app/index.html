@@ -50,18 +50,16 @@
       <script src="components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- build:js assets/moment.js -->
-      <script src="components/momentjs/moment.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js assets/angular.js -->
+    <!-- build:js assets/components.js -->
     <!-- angular components -->
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="components/momentjs/moment.js"></script>
     <!-- endbuild -->
+    <script>window.Moment = window.moment;</script>
 
     <!-- build:js assets/app.js -->
     <!-- html_src start -->
