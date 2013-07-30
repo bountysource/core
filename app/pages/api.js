@@ -64,6 +64,14 @@ angular.module('api.bountysource',[]).
           res.data.funding_percentage = Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100);
           res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
           res.data.image_url = res.data.image_url || "/images/bountysource-grey.png";
+
+          // calculate time left
+          // using Moment.js
+          var now = new moment();
+          var ends = new moment(res.data.ends_at);
+          res.data.$days_left = ends.diff(now, "days");
+          res.data.$hours_left = ends.diff(now, "hours");
+          res.data.$minutes_left = ends.diff(now, "minutes");
         }
         return res.data;
       });
