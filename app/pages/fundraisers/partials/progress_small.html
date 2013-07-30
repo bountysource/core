@@ -32,8 +32,8 @@
         </div>
       </div>
       <br/>
-      <div class="progress">
-        <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+      <div class="progress progress-striped">
+        <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{ 100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
       </div>
     </div>
   </div>
