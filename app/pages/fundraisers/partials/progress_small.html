@@ -1,10 +1,10 @@
 <div class="row-fluid">
-  <div class="span12" style="text-align: center;">
-    <div style="margin-top: 10px;" >
+  <div class="span12" class="text-center">
+    <div>
       <div class="row-fluid">
         <div class="span6">
           <h3 style="margin-bottom:0"><strong>${{ fundraiser.total_pledged | number:0 }}</strong></h3>
-          <span>raised of <strong>${{ fundraiser.funding_goal | number:0 }}</strong> goal</span>
+          <span>of <strong>${{ fundraiser.funding_goal | number:0 }}</strong></span>
         </div>
 
         <div class="span6" style="text-align: center;">
@@ -20,7 +20,9 @@
         </div>
       </div>
       <br/>
-      <progress class="progress-success progress-striped" value="fundraiser.funding_percentage"></progress>
+      <div class="progress">
+        <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+      </div>
     </div>
   </div>
 </div>

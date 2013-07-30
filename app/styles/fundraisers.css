@@ -31,3 +31,5 @@ table.pledges-table tr td img.thumbnail {
   font-weight: 200;
   line-height: 40px;
 }
+
+table.top-backers-table td { border-top: 0; }

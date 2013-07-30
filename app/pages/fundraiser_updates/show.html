@@ -7,13 +7,17 @@
   <li ng-hide="update"><a ng-href="/fundraisers/{{fundraiser.id}}/updates/{{update.id}}">Loading...</a></li>
 </ul>
 
+<div ng-include="'pages/fundraisers/partials/header.html'"></div>
+<div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
+
 <div class="row-fluid" ng-show="fundraiser">
+  <div class="span3">
+    <div ng-include="'pages/fundraisers/partials/left_column.html'"></div>
+  </div>
+
   <div class="span9">
-    <div ng-include="'pages/fundraisers/partials/header.html'"></div>
-
-    <hr />
-
     <div ng-show="update" ng-controller="FundraisersController">
+
       <div ng-show="update.published_at">
         <h2><span class="text-success">#{{ update.number }}</span> {{ update.title }}</h2>
         <div class="muted">Published {{ update.published_at | date }}</div>
@@ -25,15 +29,26 @@
         <div class="muted">Last modified {{ update.updated_at | date }}</div>
       </div>
 
+      <div style="float: right; margin-top: -70px">
+        <a class="btn" ng-hide="update.published_at" ng-href="/fundraisers/{{fundraiser.slug}}/updates/{{update.id}}/edit">
+          <i class="icon-pencil"></i>
+          Edit
+        </a>
+        <button ng-click="publish()" ng-hide="update.published_at" class="btn btn-success">
+          <i class="icon-globe icon-white"></i>
+          Publish
+        </button>
+        <button ng-click="destroy()" ng-hide="update.published_at" class="btn btn-danger">
+          <i class="icon icon-trash icon-white"></i>
+          Delete
+        </button>
+      </div>
+
+
+
+
       <br />
       <div ng-bind-html="update.body_html"></div>
     </div>
-  </div>
-
-  <div class="span3" ng-controller="FundraisersController">
-    <div ng-include="'pages/fundraiser_updates/partials/manage.html'"></div>
-    <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
-    <div ng-include="'pages/fundraisers/partials/progress_small.html'"></div>
-    <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
   </div>
 </div>
