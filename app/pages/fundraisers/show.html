@@ -6,26 +6,44 @@
   </ul>
 
   <form class="form" ng-show="fundraiser">
+    <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+    <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
     <div class="row-fluid">
-      <div class="span9">
-        <div ng-include="'pages/fundraisers/partials/header.html'"></div>
-        <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
-        <div ng-include="'pages/fundraisers/partials/progress.html'"></div>
-        <hr />
-        <div ng-bind-html-unsafe="sanitized_description"></div>
+      <div class="span3">
+        <div ng-include="'pages/fundraisers/partials/left_column.html'"></div>
       </div>
 
-      <div class="span3">
-        <div ng-include="'pages/fundraisers/partials/manage.html'"></div>
+      <div class="span9">
+        <div class="row-fluid">
+          <div class="span9">
+            <div ng-bind-html-unsafe="sanitized_description"></div>
+          </div>
 
-        <h3 style="margin-top: 0;">By <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
-        <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
+          <div class="span3">
+            <div ng-controller="FundraiserLeaderboardController" ng-show="pledges && pledges.length > 0">
+              <h3>Top Backers</h3>
+              <table class="table top-backers-table">
+                <tr ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse | limitTo:3">
+                  <!--Profile picture. No link if anon-->
+                  <td style="width: 50px">
+                    <a class="thumbnail" ng-show="pledge.person" ng-href="/people/{{pledge.person.slug}}"><img style="width: 50px; max-width: 50px; height: 50px" ng-src="{{ pledge.person.image_url }}" /></a>
+                    <img class="thumbnail" ng-hide="pledge.person" style="width: 50px; max-width: 50px; height: 50px" src="images/anon.jpg" />
+                  </td>
 
-        <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
+                  <td>
+                    <a ng-show="pledge.person" ng-href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
+                    <div ng-hide="pledge.person" class="muted">Anonymous</div>
+                    <div><b>{{ pledge.amount | dollars }}</b></div>
+                  </td>
+                </tr>
+              </table>
+            </div>
 
-        <div ng-show="fundraiser.rewards.length > 0">
-          <h3>Rewards</h3>
-          <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+            <h3>Rewards</h3>
+            <div ng-show="fundraiser.rewards.length > 0">
+              <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

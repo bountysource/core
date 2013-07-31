@@ -6,11 +6,15 @@
     <li><a>Rewards</a></li>
   </ul>
 
-  <div class="row-fluid">
-    <div class="span9">
-      <div ng-include="'pages/fundraisers/partials/header.html'"></div>
-      <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
+  <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+  <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
 
+  <div class="row-fluid">
+    <div class="span3">
+      <div ng-include="'pages/fundraisers/partials/left_column.html'"></div>
+    </div>
+
+    <div class="span9">
       <div ng-show="rewards">
         <button ng-show="expand_all" class="btn" ng-click="toggle_expand_all()">Collapse All</button>
         <button ng-hide="expand_all" class="btn" ng-click="toggle_expand_all()">Expand All</button>
@@ -110,13 +114,6 @@
           </div>
         </div>
       </accordion>
-    </div>
-
-    <div class="span3">
-      <div ng-include="'pages/fundraisers/partials/manage.html'"></div>
-      <div ng-include="'pages/fundraisers/partials/about_me.html'"></div>
-      <div ng-include="'pages/fundraisers/partials/progress_small.html'"></div>
-      <div ng-include="'pages/fundraisers/partials/pledge_button.html'"></div>
     </div>
   </div>
 

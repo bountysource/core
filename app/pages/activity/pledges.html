@@ -6,25 +6,58 @@
 
 <ng-include src="'pages/activity/tabs.html'"></ng-include>
 
+<div ng-show="(pledges | filter:'$show_survey').length > 0">
+  <div class="alert"><strong>Hey!</strong> The creator of one of the fundraisers that you backed needs information from you.</div>
+</div>
+
 <table class="table table-striped">
   <thead>
   <tr>
     <th>Fundraiser</th>
     <th>Amount</th>
     <th>Date</th>
-    <th class="span2">
-      Anonymous
-      <a popover-title="Anonymous Pledges" popover="If you want to hide your identity on a pledge, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="icon-question-sign"></i></a>
-    </th>
+    <th class="span2">Anonymous <a popover-title="Anonymous Pledges" popover="If you want to hide your identity on a pledge, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="icon-question-sign"></i></a></th>
   </tr>
   </thead>
 
   <tbody>
-  <tr ng-repeat="pledge in pledges">
-    <td><a ng-href="/fundraisers/{{ pledge.fundraiser.slug }}">{{ pledge.fundraiser.title }}</a></td>
+  <tr ng-repeat="pledge in pledges" ng-class="{ 'warning': (pledge.$show_survey) }">
+    <td>
+      <a ng-href="/fundraisers/{{ pledge.fundraiser.slug }}">{{ pledge.fundraiser.title }}</a>
+
+      <div ng-show="pledge.$show_survey">
+        <hr />
+        <ng-form class="form-horizontal">
+          <div class="control-group">
+            <div class="controls">
+              <div class="row-fluid">
+                <div class="span1">
+                  <img class="thumbnail" style="width: 100%;" ng-src="{{pledge.fundraiser.person.image_url}}" />
+                </div>
+                <div class="span11">
+                  <p class="text-warning" style="white-space: pre-wrap;">"{{pledge.reward.fulfillment_details}}"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Your Request</label>
+            <div class="controls">
+              <textarea style="width: 90%;" rows="4" ng-model="pledge.survey_response" placeholder="Your response"></textarea>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn btn-primary" ng-click="submit_survey(pledge)">Submit Response</button>
+            </div>
+          </div>
+        </ng-form>
+      </div>
+    </td>
     <td><a ng-href="/fundraisers/{{pledge.fundraiser.slug}}/pledges">{{ pledge.amount | dollars }}</a></td>
     <td>{{ pledge.created_at | date }}</td>
-
     <td ng-show="pledge.anonymous">
       <button class="btn btn-small btn-block active" ng-click="toggle_anonymous(pledge)">
         <i class="icon-eye-close"></i>

@@ -17,6 +17,8 @@ angular.module('app')
       reward_id: parseInt($routeParams.reward_id, 10) || 0
     };
 
+    $scope.fundraiser_hide_pledge_button = true;
+
     $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
       // add the base item number, with just fundraiser id
       $scope.pledge.base_item_number = 'fundraisers/'+response.id;

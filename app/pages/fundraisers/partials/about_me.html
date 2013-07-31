@@ -1,7 +1,5 @@
-<div style="margin-bottom: 15px;">
-  <a class="thumbnail" ng-href="/people/{{fundraiser.person.slug}}">
-    <img ng-src="{{fundraiser.person.large_image_url}}">
-  </a>
-
-  <div>{{ fundraiser.person.bio }}</div>
+<div class="well text-center">
+  <a ng-href="/people/{{fundraiser.person.slug}}"><img ng-src="{{fundraiser.person.large_image_url}}"></a>
+  <h3 style="margin-top: 0;">By <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
+  <p>{{ fundraiser.person.bio }}</p>
 </div>

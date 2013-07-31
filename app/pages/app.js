@@ -3,7 +3,7 @@
 window.BS_ENV = (document.location.host === 'www.bountysource.com' ? 'prod' : 'qa');
 
 angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies'])
-  .config(function ($routeProvider, $locationProvider) {   //, $provide) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, $provide) {
 
     //  NOTE: uncomment to test hashbang # mode
     //  $provide.decorator('$sniffer', function($delegate) { $delegate.history = false; return $delegate; });
@@ -15,6 +15,12 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     if ((window.location.hash||'').match(/^#[^/]/)) {
       window.location.hash = '#/' + window.location.hash.replace(/^#/,'');
     }
+
+    // CORS support
+    $provide.decorator('$sniffer', function($delegate) { $delegate.cors = true; return $delegate; });
+    // HACK: angular 1.0 adds this bad header... not needed in 1.1 per https://github.com/angular/angular.js/pull/1454
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
   }).run(function($api) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();

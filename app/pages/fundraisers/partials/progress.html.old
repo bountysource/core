@@ -18,12 +18,24 @@
         </div>
 
         <div class="span3" style="text-align: center;">
-          <div ng-show="!fundraiser.published || fundraiser.days_remaining > 0">
-            <h1 style="margin-bottom:0"><strong>{{ (fundraiser.days_remaining || 30) | number }}</strong></h1>
-            <span>days left</span>
+          <div ng-show="fundraiser.published && fundraiser.in_progress">
+            <div ng-show="fundraiser.$days_left > 0">
+              <h1 style="margin-bottom:0"><strong>{{ fundraiser.$days_left | number }}</strong></h1>
+              <span>{{ 'day' | pluralize:fundraiser.$days_left }} left</span>
+            </div>
+            <div ng-show="fundraiser.$days_left <= 0">
+              <div ng-show="fundraiser.$hours_left > 0">
+                <h1 style="margin-bottom:0"><strong>{{ fundraiser.$hours_left | number }}</strong></h1>
+                <span>{{ 'hour' | pluralize:fundraiser.$hours_left }} left</span>
+              </div>
+              <div ng-show="fundraiser.$hours_left <= 0">
+                <h1 style="margin-bottom:0"><strong>{{ fundraiser.$minutes_left || 1 | number }}</strong></h1>
+                <span>{{ 'minute' | pluralize:fundraiser.$minutes_left }} left</span>
+              </div>
+            </div>
           </div>
 
-          <div ng-show="fundraiser.days_remaining <= 0">
+          <div ng-show="fundraiser.published && !fundraiser.in_progress">
             <h1 style="margin-bottom:0"><strong>Completed</strong></h1>
             <span>{{ fundraiser.ends_at | date:'medium' }}</span>
           </div>
