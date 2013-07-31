@@ -227,6 +227,10 @@ angular.module('api.bountysource',[]).
       return this.call('/user/contributions', function(response) { return response.data.pledges; });
     };
 
+    this.pledge_update = function(id, data) {
+      return this.call("/user/pledges/"+id, "PUT", data);
+    };
+
     this.fundraiser_activity = function() {
       return this.call('/user/fundraisers');
     };
