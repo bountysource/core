@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('api.bountysource',[]).
-  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window) {
+  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer) {
     var $api = this; // hack to store self reference
     this.access_token_cookie_name = 'v2_access_token';
 
@@ -37,8 +37,6 @@ angular.module('api.bountysource',[]).
 
       // merge in params
       params = angular.copy(params);
-      params.callback = 'JSON_CALLBACK';
-      params._method = method;
       if ($cookieStore.get($api.access_token_cookie_name)) {
         params.access_token = $cookieStore.get($api.access_token_cookie_name);
       }
@@ -46,9 +44,29 @@ angular.module('api.bountysource',[]).
 
       // deferred JSONP call with a promise
       var deferred = $q.defer();
-      $http.jsonp(url, { params: params }).success(function(response) {
-        deferred.resolve(callback(response));
-      });
+      if ($sniffer.cors) {
+
+        // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
+        params.callback = 'CORS';
+        var cors_callback = function(response) {
+          response = response.replace(/^CORS\(/,'').replace(/\)$/,'');
+          deferred.resolve(callback(JSON.parse(response)));
+        };
+
+        // make actual HTTP call with promise
+        if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
+        else if (method === 'HEAD') { $http.head(url, { params: params }).success(cors_callback); }
+        else if (method === 'DELETE') { $http.delete(url, { params: params }).success(cors_callback); }
+        else if (method === 'POST') { $http.post(url, params, {}).success(cors_callback); }
+        else if (method === 'PUT') { $http.put(url, params, {}).success(cors_callback); }
+
+      } else {
+        params._method = method;
+        params.callback = 'JSON_CALLBACK';
+        $http.jsonp(url, { params: params }).success(function(response) {
+          deferred.resolve(callback(response));
+        });
+      }
       return deferred.promise;
     };
 
