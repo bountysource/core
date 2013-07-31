@@ -35,7 +35,7 @@ logLevel = LOG_INFO;
 autoWatch = false;
 
 proxies = {
-	'/': 'http://localhost:9001/'
+  '/': 'http://localhost:9001/'
 };
 
 urlRoot = "/_karma_/";
@@ -56,5 +56,5 @@ browsers = ['Chrome'];
 captureTimeout = 5000;
 
 // Continuous Integration mode
-singleRun = true;
+singleRun = false; // true
 // if true, it capture browsers, run tests and exit
