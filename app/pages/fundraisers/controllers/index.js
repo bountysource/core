@@ -24,6 +24,9 @@ angular.module('app')
       // add percentage to fundraiser
       fundraiser.$percentage = (fundraiser.total_pledged / fundraiser.funding_goal) * 100;
 
+      // turn total_pledged into a number
+      fundraiser.total_pledged = parseFloat(fundraiser.total_pledged);
+
       // push into either current or completed fundraisers arrays
       if (fundraiser.in_progress) {
         $scope.current.push(fundraiser);
