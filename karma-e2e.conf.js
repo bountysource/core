@@ -35,7 +35,7 @@ logLevel = LOG_INFO;
 autoWatch = false;
 
 proxies = {
-	'/': 'http://localhost:9000/'
+	'/': 'http://localhost:9001/'
 };
 
 urlRoot = "/_karma_/";
@@ -50,7 +50,7 @@ urlRoot = "/_karma_/";
 // - IE (only Windows)
 
 //browsers = ['Firefox', 'Safari', 'Chrome'];
-browsers = ['PhantomJS'];
+browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 5000;

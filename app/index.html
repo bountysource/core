@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="styles/settings.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="app" ng-class="{'chatroom': chatroom.show}" ng-controller="MainController">
+  <body ng-app="appTest" ng-class="{'chatroom': chatroom.show}" ng-controller="MainController">
 
     <div id="wrap">
       <div id="main" class="clear-top">
@@ -134,5 +134,10 @@
     <script src="pages/trackers/controllers/show.js" type="text/javascript"></script>
     <!-- html_src end -->
     <!-- endbuild -->
+
+    <!-- test components -->
+    <script src="components/angular-mocks/angular-mocks.js" type="text/javascript"></script>
+    <script src="api-test.js" type="text/javascript"></script>
+    <!-- relocate source of api-test.js to test file when complete -->
   </body>
 </html>
