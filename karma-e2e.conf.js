@@ -7,6 +7,7 @@ basePath = '';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
+  'test/mock/mock.js',
   'test/e2e/*.js'
 ];
 frameworks = ["ng-scenario"];
@@ -56,5 +57,5 @@ browsers = ['Chrome'];
 captureTimeout = 5000;
 
 // Continuous Integration mode
-singleRun = false; // true
+singleRun = false;
 // if true, it capture browsers, run tests and exit
