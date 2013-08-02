@@ -57,5 +57,5 @@ browsers = ['Chrome'];
 captureTimeout = 5000;
 
 // Continuous Integration mode
-singleRun = true;
+singleRun = false;
 // if true, it capture browsers, run tests and exit

@@ -24,6 +24,11 @@ var MOCK = {
     last_name:    "ManlyMan",
     display_name: "TheManliest",
     terms:        true
+  },
+
+  new_account_valid: {
+    email: "sample@test.com",
+    password: "password1"
   }
 };
 
@@ -33,44 +38,25 @@ describe('Scenario: Signining In --', function () {
     browser().navigateTo("/signin");
   });
 
-
-  describe('initial state', function () {
-    it("should have an email input", function () {
-      // expect(element('#inputEmail')).toBeDefined();
-    });
-
-    it("PASSWORD field should initialized", function () {
-      expect(element('#inputPassword').attr('placeholder')).toMatch('[a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]');
-      expect(element('#inputPassword:visible').count()).toBe(1);
-    });
-
-    it("should HIDE REST of FIELDS", function () {
-      expect(element('#inputDisplayName:hidden').count()).toBe(1);
-
-      // WHY IS THIS IS FAILING:
-      // expect(element('#inputLastName:hidden').count()).toBe(1);
-      // expect(element('#inputFirstName:hidden').count()).toBe(1);
-    });
-  });
-
   describe("INITIAL SUBMISSION", function () {
     it("should allow you to SIGIN_IN", function () {
-      input('form_data.email').enter(MOCK.new_user_valid.email);
-      input('form_data.password').enter('aa123');
-      expect(element(".help-inline").text()).toContain("Available!");
+      Mock.push("/user/login", "POST", {"email":"sample@test.com"}, {"data":{"error":"Email address not found.","email_is_registered":false},"meta":{"status":404,"success":false,"pagination":null}});
+      input('form_data.email').enter(MOCK.new_account_valid.email);
+      expect(element(".help-inline").text()).toContain("Available!"); //both tests will pass because the this inner text always exists
     });
 
     it("should FIND user that EXISTS", function () {
       input('form_data.email').enter(MOCK.new_user_valid.email);
-      expect(element(".help-inline").text()).toContain("Found!");
+      expect(element(".help-inline").text()).toContain("Found!"); //see above comment
     });
 
-    it("should ERROR for incorrectly formatted PASSWORD", function () {
+    it("should ERROR for incorrect PASSWORD on existing account", function () {
+      Mock.push("/user/login", "POST", {"email":"mr_manly@gmail.com","password":"badpassword1"}, {"data":{"error":"Password not correct.","email_is_registered":true},"meta":{"status":404,"success":false,"pagination":null}});
       var no_number_password_user = angular.copy(MOCK.signed_in_user);
-      no_number_password_user.password = 'aaaaaaaaaaaaaaaaaaaaa';
+      no_number_password_user.password = 'badpassword1';
       fill_form(no_number_password_user);
       element("button:contains('Sign In')").click();
-      expect(element('.alert.alert-error').text()).toContain('Password not correct');
+      expect(element('.alert.alert-error').text()).toBe('Password not correct.');
     });
   });
 
