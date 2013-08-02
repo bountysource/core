@@ -10,5 +10,4 @@ before_script:
   - grunt selenium
   - sleep 1 # let server start
 
-script:
-  - grunt protractor
+script: grunt protractor

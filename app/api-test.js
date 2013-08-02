@@ -28,8 +28,6 @@ appTest.run(function ($rootScope, $httpBackend, $api, $window, $q) {
         params  = JSON.parse(stub_parts.shift()),
         data    = JSON.parse(stub_parts.shift());
 
-
-
       if (request.path === path && request.method === method) {
         var deferred = $q.defer();
         deferred.resolve(data);
