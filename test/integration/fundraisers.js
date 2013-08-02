@@ -10,7 +10,7 @@ var ptor;
 describe('Fundraisers', function() {
   beforeEach(function() {
     ptor = protractor.getInstance();
-    Mock.init();
+    mock.init();
   });
 
   describe('Create', function () {
