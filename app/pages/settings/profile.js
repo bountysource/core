@@ -42,7 +42,7 @@ angular.module('app')
         if (response.error) {
           $scope.error = response.error;
         } else {
-          $location.url('/people/' + $scope.current_person.slug);
+          $scope.success = 'Settings have been saved.';
         }
       });
     };
