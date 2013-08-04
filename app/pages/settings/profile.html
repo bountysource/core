@@ -9,7 +9,7 @@
 
 <form class="form-horizontal" name="form" novalidate>
   <div class="alert alert-error" ng-show="error">{{error}}</div>
-
+  <div class="alert alert-success" ng-show="success">{{success}}</div>
   <div class="control-group">
     <label class="control-label" for="inputFirstName">First and Last Name:</label>
     <div class="controls">
@@ -90,7 +90,7 @@
       <textarea rows="3" id="inputBio" name="bio" placeholder="Once upon a time..." ng-model="form_data.bio"></textarea>
     </div>
   </div>
-
+  
   <div class="control-group">
     <div class="controls">
       <button type="submit" class="btn btn-success" ng-click="save()">Save</button>
