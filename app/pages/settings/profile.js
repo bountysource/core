@@ -43,10 +43,8 @@ angular.module('app')
           $scope.error = response.error;
         } else {
           $scope.success = 'Settings have been saved.';
-	}
+        }
       });
     };
-
-   
   });
 
