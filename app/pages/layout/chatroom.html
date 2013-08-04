@@ -1,18 +1,12 @@
 <div id="chatroom" ng-switch="chatroom.url">
-  <div ng-show="!!current_person" class="connect">
+   <div ng-switch-when="none" class="connect">
     <p style="text-align: center; padding-top: 10px;">The #Bountysource IRC Chatroom is a place to communicate with other Bountysource users.</p>
     <form style="text-align: center; padding-top: 10px;">
       <span>Nickname:</span>
-      <input type="text" class="input-text input-medium" name="nick" ng-model="current_person.display_name" style="margin: 0px 10px;">
-      <button type="submit" class="btn btn-success" ng-click="chatroom.connect()">Connect</button>
-    </form>
-  </div>
-  <div ng-hide="!!current_person" ng-switch-when="none" class="connect">
-    <p style="text-align: center; padding-top: 10px;">The #Bountysource IRC Chatroom is a place to communicate with other Bountysource users.</p>
-    <form style="text-align: center; padding-top: 10px;">
-      <span>Nickname:</span>
-      <input type="text" class="input-text input-medium" name="nick" ng-model="chatroom.nick" style="margin: 0px 10px;">
-      <button type="submit" class="btn btn-success" ng-click="chatroom.connect()">Connect</button>
+      <input ng-hide="!!current_person" type="text" class="input-text input-medium" name="nick" ng-model="chatroom.nick" style="margin: 0px 10px;">
+      <button ng-hide="!!current_person" type="submit" class="btn btn-success" ng-click="chatroom.connect()">Connect</button>
+      <input ng_show="!!current_person" type="text" class="input-text input-medium" name="nick" ng-model="current_person.display_name" style="margin: 0px 10px;">
+      <button ng_show="!!current_person" type="submit" class="btn btn-success" ng-click="chatroom.connect()">Connect</button>
     </form>
   </div>
   <iframe ng-switch-default ng-src="{{chatroom.url}}"></iframe>
