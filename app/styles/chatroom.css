@@ -11,3 +11,5 @@ body #main { -webkit-transition: padding-top 0.5s; }
 @media (max-width: 979px) {
   #chatroom { position: absolute; }
 }
+#chatroom form { text-align: center; padding-top: 10px; }
+#chatroom input[name=nick] { margin: 0px 10px; }

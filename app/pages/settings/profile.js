@@ -10,7 +10,7 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('Settings', function($scope, $routeParams, $api, $location) {
+  .controller('Settings', function($scope, $routeParams, $api) {
     $scope.form_data = {
       first_name: $scope.current_person.first_name,
       last_name: $scope.current_person.last_name,
@@ -22,7 +22,6 @@ angular.module('app')
       public_email: $scope.current_person.public_email,
       image_url: $scope.current_person.image_url
     };
-
 
     // profile pictures
     $scope.profile_input = {
