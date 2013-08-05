@@ -20,10 +20,10 @@ appTest.run(function ($rootScope, $httpBackend, $api, $window, $q) {
     };
 
     // build stubs from localStorage.
-    // a stub is comprised of 3 elements on the arrauy
+    // a stub is comprised of 4 elements on the array
     var stub_parts = (window.localStorage.getItem('stubs') || "").split(",");
     for (var i=0; i<stub_parts.length; i++) {
-      var path    = stub_parts.shift(),
+      var path  = stub_parts.shift(),
         method  = stub_parts.shift(),
         params  = JSON.parse(stub_parts.shift()),
         data    = JSON.parse(stub_parts.shift());
