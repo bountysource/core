@@ -1,12 +1,12 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app="app" ng-controller="MainController"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" ng-app="app" ng-controller="MainController"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" ng-app="app" ng-controller="MainController"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="app" ng-controller="MainController"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Bountysource</title>
+    <title ng:bind="pageTitleFull">Bountysource</title>
     <base href="/">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/794c93845080936a6a533af08c71352e.css">
   </head>
-  <body ng-app="app" ng-class="{'chatroom': chatroom.show}" ng-controller="MainController">
+  <body ng-class="{'chatroom': chatroom.show}">
 
     <div id="wrap">
       <div id="main" class="clear-top">
@@ -38,6 +38,6 @@
     <script src="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/a4fd83c84554927b6073909a3c19c0d4.js"></script>
     <script>window.Moment = window.moment;</script>
 
-    <script src="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/779624637274ebc7b2ef98931c58fbbd.js"></script>
+    <script src="https://6b12869a42f76dc79c80-06859ceb5de77e46d38fcd4d5ca57319.ssl.cf2.rackcdn.com/17906c9c2eb9f80e626fbe731e444b46.js"></script>
   </body>
 </html>

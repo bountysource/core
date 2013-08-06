@@ -6,6 +6,6 @@ angular.module('app')
       .when('/jobs', {
         templateUrl: 'pages/about/jobs.html',
         controller: 'Static',
-        title: 'Bountysource - Jobs'
+        title: 'Jobs'
       });
   });

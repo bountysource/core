@@ -7,7 +7,7 @@ angular.module('app')
         templateUrl: 'pages/settings/accounts.html',
         controller: 'AccountSettings',
         resolve: $person,
-        title: 'Bountysource - Accounts'
+        title: 'Accounts'
       });
   })
   .controller('AccountSettings', function($scope, $api, $location) {

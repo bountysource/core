@@ -6,7 +6,7 @@ angular.module('app')
       .when('/issues/new', {
         templateUrl: 'pages/issues/new.html',
         controller: 'IssueCreateController',
-        title: 'Bountysource - Add Issue'
+        title: 'Add Issue'
       });
   })
 

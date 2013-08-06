@@ -7,7 +7,7 @@ angular.module('app')
         templateUrl: 'pages/activity/pledges.html',
         controller: 'PledgeActivity',
         resolve: $person,
-        title: 'Bountysource - Pledges'
+        title: ['Pledges', 'Activity']
       });
   })
   .controller('PledgeActivity', function($scope, $routeParams, $api) {

@@ -6,7 +6,7 @@ angular.module('app')
       .when('/search', {
         templateUrl: 'pages/home/search.html',
         controller: 'SearchController',
-        title: 'Bountysource - Search'
+        title: 'Search'
       });
   })
 

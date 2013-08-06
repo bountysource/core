@@ -11,8 +11,8 @@ angular.module('app')
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $rootScope) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
 
-      $rootScope.pageTitle = tracker.name + ' - Project';
-      
+      $rootScope.pageTitle = [tracker.name, 'Projects'];
+
       $scope.init_tags(tracker);
 
       // follow and unfollow API method wrappers

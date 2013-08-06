@@ -20,7 +20,7 @@ angular.module('app')
 
 
       var issue = response.data;
-      $rootScope.pageTitle = issue.title+' - '+issue.tracker.name;
+      $rootScope.pageTitle = [issue.title, issue.tracker.name];
 
       // append item number now that we have issue
       $scope.bounty.item_number = "issues/"+issue.id;

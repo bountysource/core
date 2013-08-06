@@ -8,7 +8,7 @@ angular.module('app')
         templateUrl: 'pages/settings/profile.html',
         controller: 'Settings',
         resolve: $person,
-        title: 'Bountysource - Profile'
+        title: 'Profile'
       });
   })
   .controller('Settings', function($scope, $routeParams, $api) {

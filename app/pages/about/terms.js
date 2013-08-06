@@ -6,6 +6,6 @@ angular.module('app')
       .when('/terms', {
         templateUrl: 'pages/about/terms.html',
         controller: 'Static',
-        title: 'Bountysource - Terms of Service'
+        title: 'Terms of Service'
       });
   });

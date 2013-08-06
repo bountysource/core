@@ -6,7 +6,7 @@ angular.module('app')
       .when('/companies', {
         templateUrl: 'pages/companies/index.html',
         controller: 'CompaniesIndexController',
-        title: 'Bountysource - Companies'
+        title: 'Companies'
       });
   })
   .controller('CompaniesIndexController', function ($scope, $location, $api) {

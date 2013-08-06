@@ -6,6 +6,6 @@ angular.module('app')
       .when('/fees', {
         templateUrl: 'pages/about/fees.html',
         controller: 'Static',
-        title: 'Bountysource - Pricing'
+        title: 'Pricing'
       });
   });

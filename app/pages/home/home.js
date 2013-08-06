@@ -5,8 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/', {
         templateUrl: 'pages/home/home.html',
-        controller: 'HomeCtrl',
-        title: 'Bountysource'
+        controller: 'HomeCtrl'
       });
   })
   .controller('HomeCtrl', function ($scope, $window, $api) {

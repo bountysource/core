@@ -13,7 +13,7 @@ angular.module('app')
 
     $scope.company.then(function(company) {
 
-      $rootScope.pageTitle = company.name+' - Company';
+      $rootScope.pageTitle = [company.name, 'Companies'];
 
       $scope.$watch('project_search', function() {
         if (typeof($scope.project_search) === 'number') {

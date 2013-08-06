@@ -7,7 +7,7 @@ angular.module('app')
         templateUrl: 'pages/activity/timeline.html',
         controller: 'Activity',
         resolve: $person,
-        title: 'Bountysource - Timeline'
+        title: ['Timeline', 'Activity']
       });
   })
   .controller('Activity', function($scope, $routeParams, $api) {

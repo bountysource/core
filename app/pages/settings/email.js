@@ -7,7 +7,7 @@ angular.module('app')
         templateUrl: 'pages/settings/email.html',
         controller: 'SettingsEmail',
         resolve: $person,
-        title: 'Bountysource - Email'
+        title: 'Email'
       });
   })
   .controller('SettingsEmail', function($scope, $routeParams, $api) {

@@ -6,6 +6,6 @@ angular.module('app')
       .when('/faq', {
         templateUrl: 'pages/about/faq.html',
         controller: 'Static',
-        title: 'Bountysource - Frequently Asked Questions'
+        title: 'Frequently Asked Questions'
       });
   });

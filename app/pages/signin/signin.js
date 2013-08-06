@@ -6,7 +6,7 @@ angular.module('app')
       .when('/signin', {
         templateUrl: 'pages/signin/signin.html',
         controller: 'Signin',
-        title: 'Bountysource - Sign in'
+        title: 'Sign in'
       });
   })
   .controller('Signin', function ($scope, $routeParams, $api) {

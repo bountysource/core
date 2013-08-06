@@ -7,7 +7,7 @@ angular.module('app')
         templateUrl: 'pages/companies/new.html',
         controller: 'NewCompaniesController',
         resolve: $person,
-        title: 'Bountysource - Create New Company'
+        title: 'Create New Company'
       });
   })
   .controller('NewCompaniesController', function ($scope, $location, $api) {
