@@ -138,5 +138,9 @@ angular.module('app')
       .when('/bounties', {
         redirectTo: "/",
         controller: 'Static'
+      })
+      .when('/create_account', {
+        redirectTo: "/signin",
+        controller: 'Static'
       });
   });
