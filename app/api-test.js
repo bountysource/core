@@ -37,7 +37,7 @@ appTest.run(function ($rootScope, $httpBackend, $api, $window, $q) {
 
     var mock_response = $api.$shift_mock_response();
 
-    console.log(mock_response);
+    // console.log(mock_response);
 
     var deferred = $q.defer();
     deferred.resolve(mock_response);
