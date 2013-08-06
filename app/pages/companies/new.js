@@ -6,7 +6,8 @@ angular.module('app')
       .when('/companies/new', {
         templateUrl: 'pages/companies/new.html',
         controller: 'NewCompaniesController',
-        resolve: $person
+        resolve: $person,
+        title: 'Bountysource - Create New Company'
       });
   })
   .controller('NewCompaniesController', function ($scope, $location, $api) {

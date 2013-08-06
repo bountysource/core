@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/trackers', {
         templateUrl: 'pages/trackers/index.html',
-        controller: 'TrackersIndex'
+        controller: 'TrackersIndex',
+        title: 'Bountysource - Projects'
       });
   })
   .controller('TrackersIndex', function ($scope, $api) {

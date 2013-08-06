@@ -5,6 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/terms', {
         templateUrl: 'pages/about/terms.html',
-        controller: 'Static'
+        controller: 'Static',
+        title: 'Bountysource - Terms of Service'
       });
   });
