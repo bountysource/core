@@ -25,9 +25,7 @@
     "matchdep": "~0.1.1",
     "grunt-ngmin": "~0.0.2",
     "grunt-angular-templates": "~0.3.10",
-    "connect-modrewrite": "~0.2.1",
-    "protractor": "~0.6.1",
-    "grunt-shell": "~0.3.1"
+    "connect-modrewrite": "~0.2.1"
   },
   "engines": {
     "node": ">=0.8.0"

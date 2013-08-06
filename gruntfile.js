@@ -312,20 +312,6 @@ module.exports = function (grunt) {
           stripcomponents: 2
         }]
       }
-    },
-    shell: {
-      protractor: {
-        command: "./node_modules/protractor/bin/protractor protractor-conf.js",
-        options: {
-          stdout: true
-        }
-      },
-      selenium: {
-        command: "java -jar ./selenium/selenium-server-standalone-2.33.0.jar -Dwebdriver.chrome.driver=./selenium/chromedriver",
-        options: {
-          stdout: true
-        }
-      }
     }
   });
 
@@ -424,17 +410,6 @@ module.exports = function (grunt) {
     'clean:dist_assets'  // clean up assets now that they're all up on CDN
   ]);
 
-  grunt.registerTask('selenium', [
-    'shell:selenium'
-  ]);
-
-  grunt.registerTask('protractor', [
-    'html_src',
-    'clean:server',
-    'jshint',
-    'connect:test',
-    'shell:protractor'
-  ]);
 
   grunt.registerTask('default', ['test']);
 

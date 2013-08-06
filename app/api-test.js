@@ -52,12 +52,8 @@ appTest.run(function ($rootScope, $httpBackend, $api, $window, $q) {
       // decrement count
       window.localStorage.setItem('stubsCount', count - 1);
 
-      return {
-        path:   localStorage.getItem('path'+count),
-        method: localStorage.getItem('method'+count),
-        params: JSON.parse(localStorage.getItem('params'+count)),
-        data:   JSON.parse(localStorage.getItem('data'+count))
-      };
+      return JSON.parse(localStorage.getItem('data'+count));
+
     } else {
       throw("Nothing left :/");
     }

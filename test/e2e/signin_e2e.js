@@ -1,5 +1,7 @@
 /*jshint -W117 */
+
 'use strict';
+
 
 var fill_form = function (data) {
   for (var key in data) {
@@ -17,7 +19,7 @@ var MOCK = {
     email:    "mr_manly@gmail.com",
     password: "MANLINESS123456"
   },
-  new_user_valid: {
+  existing_user: {
     email:        "mr_manly@gmail.com",
     password:     "MANLINESS123456",
     first_name:   "Mister",
@@ -28,55 +30,77 @@ var MOCK = {
 
   new_account_valid: {
     email: "sample@test.com",
-    password: "password1"
+    password: "password1",
+    first_name: "Test",
+    last_name: "McTest",
+    display_name: "TestMcTest",
+    terms: true
   }
 };
 
 describe('Scenario: Signining In --', function () {
   beforeEach(function () {
+    browser().navigateTo('/signin');
     Mock.init();
-    browser().navigateTo("/signin");
   });
 
   describe("INITIAL SUBMISSION", function () {
-    it("should allow you to SIGIN_IN", function () {
-      Mock.push("/user/login", "POST", {"email":"sample@test.com"}, {"data":{"error":"Email address not found.","email_is_registered":false},"meta":{"status":404,"success":false,"pagination":null}});
-      input('form_data.email').enter(MOCK.new_account_valid.email);
-      expect(element(".help-inline").text()).toContain("Available!"); //both tests will pass because the this inner text always exists
+    it("should allow new user to create account", function () {
+      Mock.push("/user/login", "POST", {"email": MOCK.new_account_valid.email}, {"error":"Email address not found.","email_is_registered":false});
+      fill_form(MOCK.new_account_valid);
+      using('form[name=form]').element("input[name=email]").query(function(element, done) {
+        var evt = document.createEvent("Event");
+        evt.initEvent('blur', false, true);
+        element[0].dispatchEvent(evt);
+        done();
+      });
+      pause();
+      expect(element(".help-inline:visible").html()).toEqual("<small>Available!</small>");
+      expect(using('form[name=form]').element(".btn:visible").text()).toEqual("Sign Up");
+
+      //need to mock out clicking sign up
     });
 
     it("should FIND user that EXISTS", function () {
-      input('form_data.email').enter(MOCK.new_user_valid.email);
-      expect(element(".help-inline").text()).toContain("Found!"); //see above comment
+      Mock.push("/user/login", "POST", {"email": MOCK.existing_user.email}, {"error":"Password not correct.","email_is_registered":true});
+      input('form_data.email').enter(MOCK.existing_user.email);
+      using('form[name=form]').element("input[name=email]").query(function(element, done) {
+        var evt = document.createEvent("Event");
+        evt.initEvent('blur', false, true);
+        element[0].dispatchEvent(evt);
+        done();
+      });
+      pause();
+      expect(element(".help-inline:visible").html()).toEqual("<small>Found!</small>");
     });
 
-    it("should ERROR for incorrect PASSWORD on existing account", function () {
-      Mock.push("/user/login", "POST", {"email":"mr_manly@gmail.com","password":"badpassword1"}, {"data":{"error":"Password not correct.","email_is_registered":true},"meta":{"status":404,"success":false,"pagination":null}});
-      var no_number_password_user = angular.copy(MOCK.signed_in_user);
-      no_number_password_user.password = 'badpassword1';
-      fill_form(no_number_password_user);
-      element("button:contains('Sign In')").click();
-      expect(element('.alert.alert-error').text()).toBe('Password not correct.');
-    });
-  });
+  //   it("should ERROR for incorrect PASSWORD on existing account", function () {
+  //     Mock.push("/user/login", "POST", {"email":"mr_manly@gmail.com","password":"badpassword1"}, {"data":{"error":"Password not correct.","email_is_registered":true},"meta":{"status":404,"success":false,"pagination":null}});
+  //     var no_number_password_user = angular.copy(MOCK.signed_in_user);
+  //     no_number_password_user.password = 'badpassword1';
+  //     fill_form(no_number_password_user);
+  //     element("button:contains('Sign In')").click();
+  //     expect(element('.alert.alert-error').text()).toBe('Password not correct.');
+  //   });
+  // });
 
-  describe("VALID SIGN UP", function () {
-    it("should NOT show errors for for correct signup", function () {
-      fill_form(MOCK.new_user_valid);
-      element("button:contains('Sign Up')").click();		//INCOMPLETE
-    });
-  });
+  // describe("VALID SIGN UP", function () {
+  //   it("should NOT show errors for for correct signup", function () {
+  //     fill_form(MOCK.new_user_valid);
+  //     element("button:contains('Sign Up')").click();		//INCOMPLETE
+  //   });
+  // });
 
-  // since user already gets created look at the possible paths
-  describe("REDIRECT to the HOMEPAGE", function () {
-    it("should have HOME URL", function () {
-      fill_form(MOCK.signed_in_user);
-      element("button:contains('Sign In')").click();
-      expect(browser().location().url()).toBe("/");
-    });
+  // // since user already gets created look at the possible paths
+  // describe("REDIRECT to the HOMEPAGE", function () {
+  //   it("should have HOME URL", function () {
+  //     fill_form(MOCK.signed_in_user);
+  //     element("button:contains('Sign In')").click();
+  //     expect(browser().location().url()).toBe("/");
+  //   });
 
-    it("should show user's DISPLAY_NAME in NAVBAR", function () {
-      expect(binding("current_person.display_name")).toBe(MOCK.new_user_valid.display_name);
-    });
+  //   it("should show user's DISPLAY_NAME in NAVBAR", function () {
+  //     expect(binding("current_person.display_name")).toBe(MOCK.new_user_valid.display_name);
+  //   });
   });
 });

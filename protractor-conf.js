@@ -6,14 +6,16 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-    'test/integration/fundraisers.js'
+    // 'test/integration/fundraisers.js',
+    'test/integration/signin.js'
   ],
 
   // ----- Capabilities to be passed to the webdriver instance.
   // For a full list of available capabilities, see
   // https://code.google.com/p/selenium/wiki/DesiredCapabilities
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'webStorageEnabled': true
   },
 
   // A base URL for your application under test. Calls to protractor.get()
