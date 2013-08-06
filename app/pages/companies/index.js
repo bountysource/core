@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/companies', {
         templateUrl: 'pages/companies/index.html',
-        controller: 'CompaniesIndexController'
+        controller: 'CompaniesIndexController',
+        title: 'Bountysource - Companies'
       });
   })
   .controller('CompaniesIndexController', function ($scope, $location, $api) {

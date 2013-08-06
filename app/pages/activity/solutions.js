@@ -6,7 +6,8 @@ angular.module('app')
       .when('/activity/solutions', {
         templateUrl: 'pages/activity/solutions.html',
         controller: 'SolutionActivity',
-        resolve: $person
+        resolve: $person,
+        title: 'Bountysource - Solutions'
       });
   })
   .controller('SolutionActivity', function($scope, $routeParams, $api) {
