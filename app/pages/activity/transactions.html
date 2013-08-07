@@ -5,3 +5,15 @@
 </ul>
 
 <ng-include src="'pages/activity/tabs.html'"></ng-include>
+
+<h3>Account Balance</h3>
+<p>Your current Bountysource balance is <b>{{current_person.account.balance | currency}}</b>.</p>
+
+<div ng-show="current_person.account.balance > 0">
+  To cash out this balance, please send an email to <a href="mailto:support@bountysource.com">support@bountysource.com</a> with one of the following:
+  <ul>
+    <li>PayPal email address</li>
+    <li>Postal address for a paper check</li>
+  </ul>
+  Support for automatic transfers to your bank account is coming soon.
+</div>
