@@ -7,23 +7,21 @@ angular.module('app')
     });
 
     // change page title on change route
-    $rootScope.$on('$routeChangeSuccess', function (event, current) {
+    $rootScope.$on('$routeChangeStart', function (event, current) {
       if (!current.$$route) {
         $rootScope.pageTitle = 'Page Not Found';
       } else if (current.$$route.title) {
         $rootScope.pageTitle = current.$$route.title;
+      } else {
+        $rootScope.pageTitle = null;
       }
-    });
-
-    $rootScope.$on('$routeChangeStart', function () {
-      $rootScope.pageTitle = null;
     });
 
     $rootScope.$watch('pageTitle', function() {
       var parts;
       if (($rootScope.pageTitle === null) || ($rootScope.pageTitle === undefined) || ($rootScope.pageTitle === false)) {
         // no page title, do nothing
-        parts = [];
+        parts = [ 'Bountysource' ];
       } else if (typeof($rootScope.pageTitle) === 'string') {
         // string page title, append
         parts = [ $rootScope.pageTitle ];
@@ -31,7 +29,6 @@ angular.module('app')
         // array page title, slice
         parts = $rootScope.pageTitle.slice(0);
       }
-      parts.push('Bountysource');
       $rootScope.pageTitleFull = parts.join(' - ');
     });
 

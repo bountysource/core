@@ -13,7 +13,7 @@ angular.module('app')
     $scope.person = $api.person_get($routeParams.id);
 
     $scope.person.then(function(person){
-      $rootScope.pageTitle = [person.display_name, 'People'];
+      $rootScope.pageTitle = [person.display_name, 'Profile'];
     });
 
     $scope.timeline = $api.person_timeline_get($routeParams.id).then(function(response) {
