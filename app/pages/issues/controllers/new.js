@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/issues/new', {
         templateUrl: 'pages/issues/new.html',
-        controller: 'IssueCreateController'
+        controller: 'IssueCreateController',
+        title: 'Add Issue'
       });
   })
 

@@ -7,10 +7,11 @@ angular.module('app')
       .when('/settings', {
         templateUrl: 'pages/settings/profile.html',
         controller: 'Settings',
-        resolve: $person
+        resolve: $person,
+        title: 'Profile'
       });
   })
-  .controller('Settings', function($scope, $routeParams, $api, $location) {
+  .controller('Settings', function($scope, $routeParams, $api) {
     $scope.form_data = {
       first_name: $scope.current_person.first_name,
       last_name: $scope.current_person.last_name,
@@ -22,7 +23,6 @@ angular.module('app')
       public_email: $scope.current_person.public_email,
       image_url: $scope.current_person.image_url
     };
-
 
     // profile pictures
     $scope.profile_input = {
@@ -42,7 +42,7 @@ angular.module('app')
         if (response.error) {
           $scope.error = response.error;
         } else {
-          $location.url('/people/' + $scope.current_person.slug);
+          $scope.success = 'Settings have been saved.';
         }
       });
     };

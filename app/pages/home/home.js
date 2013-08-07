@@ -22,4 +22,5 @@ angular.module('app')
       }
       return trackers;
     });
+
   });

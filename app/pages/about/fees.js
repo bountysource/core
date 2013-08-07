@@ -5,6 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/fees', {
         templateUrl: 'pages/about/fees.html',
-        controller: 'Static'
+        controller: 'Static',
+        title: 'Pricing'
       });
   });

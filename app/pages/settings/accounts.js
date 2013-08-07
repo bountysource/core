@@ -6,7 +6,8 @@ angular.module('app')
       .when('/settings/accounts', {
         templateUrl: 'pages/settings/accounts.html',
         controller: 'AccountSettings',
-        resolve: $person
+        resolve: $person,
+        title: 'Accounts'
       });
   })
   .controller('AccountSettings', function($scope, $api, $location) {

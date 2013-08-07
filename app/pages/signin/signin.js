@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/signin', {
         templateUrl: 'pages/signin/signin.html',
-        controller: 'Signin'
+        controller: 'Signin',
+        title: 'Sign in'
       });
   })
   .controller('Signin', function ($scope, $routeParams, $api) {

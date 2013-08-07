@@ -11,6 +11,6 @@ window._gaq.push(['_setAccount', document.location.host === 'www.bountysource.co
 
 angular.module('app').run(function($rootScope, $window, $location) {
   $rootScope.$on('$viewContentLoaded', function() {
-    $window._gaq.push(['_trackPageview', $location.path()]);
+    $window._gaq.push(['_trackPageview', $location.url()]);
   });
 });

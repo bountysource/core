@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/search', {
         templateUrl: 'pages/home/search.html',
-        controller: 'SearchController'
+        controller: 'SearchController',
+        title: 'Search'
       });
   })
 

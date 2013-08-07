@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/fundraisers', {
         templateUrl: 'pages/fundraisers/index.html',
-        controller: 'FundraisersIndex'
+        controller: 'FundraisersIndex',
+        title: 'Fundraisers'
       });
   })
   .controller('FundraisersIndex', function ($scope, $api) {
