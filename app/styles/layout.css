@@ -60,3 +60,16 @@ footer a, footer { color: #bbb; }
 .row-fluid ul.thumbnails li.span4:nth-child(3n + 4) { margin-left : 0px; clear: left; }
 .row-fluid ul.thumbnails li.span3:nth-child(4n + 5) { margin-left : 0px; clear: left; }
 .row-fluid ul.thumbnails li.span2:nth-child(6n + 7) { margin-left : 0px; clear: left; }
+
+
+/* Fix for this bootstrap issue: https://github.com/twbs/bootstrap/pull/9167 */
+@media (max-width: 767px) {
+  .row-fluid .controls-row [class*="span"] + [class*="span"] {
+    margin-left: 0;
+    /* 
+    The margin-top is unrelated to the bootstrap issue.
+    I just think it looks nicer.
+    */
+    margin-top: 10px;
+  }
+}
