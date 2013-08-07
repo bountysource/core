@@ -9,12 +9,12 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $rootScope) {
+  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize) {
     $scope.fundraiser = $api.fundraiser_get($routeParams.id);
 
     // $sanitize but allow iframes (i.e. youtube videos)
     $scope.fundraiser.then(function(fundraiser) {
-      $rootScope.pageTitle = [fundraiser.title, 'Fundraisers'];
+      $scope.setPageTitle(fundraiser.title, 'Fundraisers');
 
       $scope.sanitized_description = "";
       if (fundraiser.description_html) {

@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $rootScope) {
+  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api) {
     $scope.bounty = {
       amount: parseInt($routeParams.amount, 10),
       anonymous: $routeParams.anonymous || false,
@@ -20,7 +20,7 @@ angular.module('app')
 
 
       var issue = response.data;
-      $rootScope.pageTitle = [issue.title, issue.tracker.name];
+      $scope.setPageTitle(issue.title, issue.tracker.name);
 
       // append item number now that we have issue
       $scope.bounty.item_number = "issues/"+issue.id;

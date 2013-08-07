@@ -8,10 +8,10 @@ angular.module('app')
         controller: 'TrackerShow'
       });
   })
-  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $rootScope) {
+  .controller('TrackerShow', function ($scope, $routeParams, $location, $api) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
 
-      $rootScope.pageTitle = [tracker.name, 'Projects'];
+      $scope.setPageTitle(tracker.name, 'Projects');
 
       $scope.init_tags(tracker);
 
