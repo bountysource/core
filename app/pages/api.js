@@ -353,8 +353,6 @@ angular.module('api.bountysource',[]).
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {
-      console.log("SIGNIN CALLED!!!!");
-      console.log(form_data);
       return this.call("/user/login", "POST", { email: form_data.email, password: form_data.password, account_link_id: form_data.account_link_id }, function(response) {
         if (response.meta.status === 200) {
           // NOTE: /user/login doesn't return the same as /user... so to be safe we make another api call
@@ -432,9 +430,11 @@ angular.module('api.bountysource',[]).
 
     this.load_current_person_from_cookies = function() {
       var access_token = $cookieStore.get($api.access_token_cookie_name);
+      debugger;
       if (access_token) {
         console.log("Verifying access token: " + access_token);
         this.call("/user", { access_token: access_token }, function(response) {
+          debugger;
           if (response.meta.status === 200) {
             console.log("access token still valid");
             response.data.access_token = access_token; // FIXME: why doesn't /user include an access token when it's you?

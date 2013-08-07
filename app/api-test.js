@@ -3,6 +3,7 @@
 var appTest = angular.module("appTest", ['app', 'ngMockE2E']);
 
 appTest.run(function ($rootScope, $httpBackend, $api, $window, $q) {
+  
   var request_regex = /.*/;
   $httpBackend.whenGET(request_regex).passThrough();
   $httpBackend.whenPOST(request_regex).passThrough();
@@ -16,7 +17,8 @@ appTest.run(function ($rootScope, $httpBackend, $api, $window, $q) {
     var request = {
       path: args.shift(),
       method: typeof(args[0]) === 'string' ? args.shift() : 'GET',
-      params: typeof(args[0]) === 'object' ? args.shift() : {}
+      params: typeof(args[0]) === 'object' ? args.shift() : {},
+      callback: typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data;}
     };
 
 //    // build stubs from localStorage.
@@ -35,12 +37,13 @@ appTest.run(function ($rootScope, $httpBackend, $api, $window, $q) {
 //      }
 //    }
 
-    var mock_response = $api.$shift_mock_response();
 
-    // console.log(mock_response);
+    console.log("Request", request);
+    var mock_response = $api.$shift_mock_response();
+    request.callback(mock_response);
 
     var deferred = $q.defer();
-    deferred.resolve(mock_response);
+    deferred.resolve(request.callback(mock_response));
     return deferred.promise;
 
     throw('LIVE API CALL:', path, method, params);
@@ -52,7 +55,7 @@ appTest.run(function ($rootScope, $httpBackend, $api, $window, $q) {
       // decrement count
       window.localStorage.setItem('stubsCount', count - 1);
 
-      return JSON.parse(localStorage.getItem('data'+count));
+      return JSON.parse(localStorage.getItem('response'+count));
 
     } else {
       throw("Nothing left :/");
