@@ -77,7 +77,7 @@ angular.module('app')
             $scope.error = response.error;
           }
         });
-      }       
+      }
     };
 
     $scope.signup = function() {
