@@ -13,7 +13,7 @@ angular.module('app')
     // Redirect user to homepage if already logged in.
     // Need to wait to see if current_person is explicitly set to false.
     $scope.$watch('current_person', function(current_person) {
-      if (current_person !== false) {
+      if ($location.path() === '/signin' && current_person !== false) {
         $location.url("/").replace();
       }
     });
