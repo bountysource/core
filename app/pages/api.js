@@ -30,7 +30,7 @@ angular.module('api.bountysource',[]).
 
     //set flag for test environment. see call() to view implementation. hardcoded--revisit later.
     if (window.location.host === "localhost:8081") {
-      $rootScope.test = true;
+      $rootScope.__test__ = true;
     }
 
     this.$shift_mock_response = function() {
@@ -47,7 +47,7 @@ angular.module('api.bountysource',[]).
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
       //if we are in the test environment, call the mocked $api.call() otherwise, use the prod call()
-      if ($rootScope.test) {
+      if ($rootScope.__test__) {
         var mockArgs = Array.prototype.slice.call(arguments);
         var request = {
           path: mockArgs.shift(),
