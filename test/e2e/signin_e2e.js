@@ -85,7 +85,7 @@ var MOCK = {
     description: "A cool t shirt",
     fulfillment_details: "Please email your size!"
   }
-  
+
 };
 
 describe('Scenario: Signining In --', function () {

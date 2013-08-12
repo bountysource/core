@@ -57,10 +57,11 @@ angular.module('api.bountysource',[]).
         };
 
         console.log("Request", request);
+        console.log("PARAMS", JSON.stringify(request.params));
         var mock_response = this.$shift_mock_response();
 
         console.log("Mock response:", mock_response);
-        request.callback(mock_response);
+        // request.callback(mock_response);
 
         var mockDeferred = $q.defer();
         mockDeferred.resolve(request.callback(mock_response));
