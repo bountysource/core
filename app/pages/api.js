@@ -12,6 +12,7 @@ angular.module('api.bountysource',[]).
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
 
+
     // set API host based on environment
     if ($rootScope.environment === 'dev') {
       $rootScope.api_host = "http://api.bountysource.dev/";
@@ -26,48 +27,87 @@ angular.module('api.bountysource',[]).
       $window.location.reload();
     };
 
+    //set flag for test environment. see call() to view implementation. hardcoded--revisit later.
+    if (window.location.host === "localhost:8081") {
+      $rootScope.__test__ = true;
+    }
+
+    this.$shift_mock_response = function() {
+      var count = parseInt(window.localStorage.getItem('stubsCount'), 10);
+      if (count > 0) {
+        // decrement count
+        window.localStorage.setItem('stubsCount', count - 1);
+
+        return JSON.parse(localStorage.getItem('response'+count));
+      } else {
+        throw("Nothing left :/");
+      }
+    };
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
-      // parse arguments
-      var args = Array.prototype.slice.call(arguments);
-      var url = $rootScope.api_host + args.shift().replace(/^\//,'');
-      var method = typeof(args[0]) === 'string' ? args.shift() : 'GET';
-      var params = typeof(args[0]) === 'object' ? args.shift() : {};
-      var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
-
-      // merge in params
-      params = angular.copy(params);
-      if ($cookieStore.get($api.access_token_cookie_name)) {
-        params.access_token = $cookieStore.get($api.access_token_cookie_name);
-      }
-      params.per_page = params.per_page || 250;
-
-      // deferred JSONP call with a promise
-      var deferred = $q.defer();
-      if ($sniffer.cors) {
-
-        // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
-        params.callback = 'CORS';
-        var cors_callback = function(response) {
-          response = response.replace(/^CORS\(/,'').replace(/\)$/,'');
-          deferred.resolve(callback(JSON.parse(response)));
+      //if we are in the test environment, call the mocked $api.call() otherwise, use the prod call()
+      if ($rootScope.__test__) {
+        var mockArgs = Array.prototype.slice.call(arguments);
+        var request = {
+          path: mockArgs.shift(),
+          method: typeof(mockArgs[0]) === 'string' ? mockArgs.shift() : 'GET',
+          params: typeof(mockArgs[0]) === 'object' ? mockArgs.shift() : {},
+          callback: typeof(mockArgs[0]) === 'function' ? mockArgs.shift() : function(response) { return response.data;}
         };
 
-        // make actual HTTP call with promise
-        if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
-        else if (method === 'HEAD') { $http.head(url, { params: params }).success(cors_callback); }
-        else if (method === 'DELETE') { $http.delete(url, { params: params }).success(cors_callback); }
-        else if (method === 'POST') { $http.post(url, params, {}).success(cors_callback); }
-        else if (method === 'PUT') { $http.put(url, params, {}).success(cors_callback); }
+        console.log("Request", JSON.stringify(request));
+        console.log("PARAMS", JSON.stringify(request.params));
+        var mock_response = this.$shift_mock_response();
+
+        console.log("Mock response:", mock_response);
+        // request.callback(mock_response);
+
+        var mockDeferred = $q.defer();
+        mockDeferred.resolve(request.callback(mock_response));
+        return mockDeferred.promise;
 
       } else {
-        params._method = method;
-        params.callback = 'JSON_CALLBACK';
-        $http.jsonp(url, { params: params }).success(function(response) {
-          deferred.resolve(callback(response));
-        });
+
+      // parse arguments
+        var args = Array.prototype.slice.call(arguments);
+        var url = $rootScope.api_host + args.shift().replace(/^\//,'');
+        var method = typeof(args[0]) === 'string' ? args.shift() : 'GET';
+        var params = typeof(args[0]) === 'object' ? args.shift() : {};
+        var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
+
+        // merge in params
+        params = angular.copy(params);
+        if ($cookieStore.get($api.access_token_cookie_name)) {
+          params.access_token = $cookieStore.get($api.access_token_cookie_name);
+        }
+        params.per_page = params.per_page || 250;
+
+        // deferred JSONP call with a promise
+        var deferred = $q.defer();
+        if ($sniffer.cors) {
+
+          // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
+          params.callback = 'CORS';
+          var cors_callback = function(response) {
+            response = response.replace(/^CORS\(/,'').replace(/\)$/,'');
+            deferred.resolve(callback(JSON.parse(response)));
+          };
+          // make actual HTTP call with promise
+          if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
+          else if (method === 'HEAD') { $http.head(url, { params: params }).success(cors_callback); }
+          else if (method === 'DELETE') { $http.delete(url, { params: params }).success(cors_callback); }
+          else if (method === 'POST') { $http.post(url, params, {}).success(cors_callback); }
+          else if (method === 'PUT') { $http.put(url, params, {}).success(cors_callback); }
+
+        } else {
+          params._method = method;
+          params.callback = 'JSON_CALLBACK';
+          $http.jsonp(url, { params: params }).success(function(response) {
+            deferred.resolve(callback(response));
+          });
+        }
+        return deferred.promise;
       }
-      return deferred.promise;
     };
 
     this.fundraiser_cards = function() {
@@ -369,7 +409,6 @@ angular.module('api.bountysource',[]).
         if (obj && $rootScope.current_person && (obj.id === $rootScope.current_person.id) && !obj.access_token && $rootScope.current_person.access_token) {
           obj.access_token = $rootScope.current_person.access_token;
         }
-
         $rootScope.current_person = obj;
         $cookieStore.put($api.access_token_cookie_name, $rootScope.current_person.access_token);
       } else {
@@ -508,6 +547,7 @@ angular.module('api.bountysource',[]).
 
   .constant('$person', {
     // this returns a promise and is meant to block rotues via "resolve: $person". it redirects to /signin if need be.
+
     resolver: function($api, $q, $rootScope, $location) {
       var deferred = $q.defer();
 
