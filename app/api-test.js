@@ -3,7 +3,7 @@
 var appTest = angular.module("appTest", ['app', 'ngMockE2E']);
 
 appTest.run(function($rootScope, $httpBackend, $api, $window, $q) {
-  $httpBackend.whenPOST("/payments", "POST").respond("called google wallet");
+
   var request_regex = /.*/;
   $httpBackend.whenGET(request_regex).passThrough();
   $httpBackend.whenPOST(request_regex).passThrough();
