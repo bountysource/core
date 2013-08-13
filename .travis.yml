@@ -7,7 +7,6 @@ before_script:
   - npm install --quiet -g grunt-cli
   - npm install --quiet -g bower
   - bower install
-  - grunt selenium
   - sleep 1 # let server start
 
-script: grunt protractor
+script: grunt test

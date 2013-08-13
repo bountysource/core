@@ -21,7 +21,6 @@ angular.module('api.bountysource',[]).
     } else if ($rootScope.environment === 'prod') {
       $rootScope.api_host = "https://api.bountysource.com/";
     }
-    // $rootScope.api_host = "https://break-api.bountysource.com/"; //break the api call to see where templates are getting loaded
 
     this.setEnvironment = function(env) {
       $cookieStore.put('environment', env);
