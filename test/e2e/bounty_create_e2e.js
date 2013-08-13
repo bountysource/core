@@ -2,7 +2,7 @@
 'use strict';
 
 describe("Scenario: Creating Bounties", function() {
-//bare bones test of creating a bounty -- not exhaustive
+
   beforeEach(function () {
     Mock.init();
   });
@@ -66,6 +66,7 @@ describe("Scenario: Creating Bounties", function() {
 
 describe("CLEAR COOKIES TO ALLOW REFRESH", function() {
   it("should clear cookies at end of test", function() {
-    cookies().clear("v2_access_token"); //clear cookies at the end of the rest to allow refreshing of tests in-browser
+    //clear cookies at the end of the test. Allows refreshing of tests in-browser when singlerun-mode is false
+    cookies().clear("v2_access_token");
   });
 });
