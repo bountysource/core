@@ -1,4 +1,4 @@
-<div class="well bounty-buttons" ng-show="issue.can_add_bounty || issue.bounty_total > 0" ng-controller="IssueShow">
+<div class="well bounty-buttons" ng-show="!issue.accepted_solution && (issue.can_add_bounty || issue.bounty_total > 0)" ng-controller="IssueShow">
   <ng-form name="form">
     <div style="text-align: center;">
       <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
