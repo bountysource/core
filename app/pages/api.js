@@ -56,7 +56,7 @@ angular.module('api.bountysource',[]).
           callback: typeof(mockArgs[0]) === 'function' ? mockArgs.shift() : function(response) { return response.data;}
         };
 
-        console.log("Request", request);
+        console.log("Request", JSON.stringify(request));
         console.log("PARAMS", JSON.stringify(request.params));
         var mock_response = this.$shift_mock_response();
 

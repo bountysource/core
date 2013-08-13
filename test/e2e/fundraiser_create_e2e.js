@@ -1,33 +1,6 @@
 /*jshint -W117 */
 'use strict';
 
-angular.scenario.dsl('cookies', function() {
-  var chain = {};
-  chain.clear = function(name) {
-      return this.addFutureAction('clear cookies', function($window, $document, done) {
-            var injector = $window.angular.element($window.document.body).inheritedData('$injector');
-            var cookies = injector.get('$cookies');
-            console.log("Clearing cookie", cookies[name]);
-            var root = injector.get('$rootScope');
-            delete cookies[name];
-            root.$apply(); // forcibly flush the cookie changes
-            done();
-          });
-    };
-
-  return function() {
-    return chain;
-  };
-});
-
-function findAndFillFields (formPrefix, mockData) {
-  for (var key in mockData) {
-    input(formPrefix + "." + key).enter(mockData[key]);
-    expect(input(formPrefix + "." + key).val()).toBe(mockData[key]);
-  }
-}
-
-
 describe('Scenario: Creating A Fundraiser --', function () {
   beforeEach(function () {
     Mock.init();
@@ -260,10 +233,4 @@ describe('Scenario: Creating A Fundraiser --', function () {
 
   });
 
-});
-
-describe("CLEAR COOKIES TO ALLOW REFRESH", function() {
-  it("should clear cookies at end of test", function() {
-    cookies().clear("v2_access_token"); //clear cookies at the end of the rest to allow refreshing of tests in-browser
-  });
 });
