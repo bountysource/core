@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/slicebo123/frontend.png)](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
+[![Build Status](https://travis-ci.org/slicebo123/frontend.png)](https://travis-ci.org/slicebo123/frontend)
 # Bountysource
 This repository contains the javascripts, stylesheets and images that power www.bountysource.com.  Our frontend is built using:
 
