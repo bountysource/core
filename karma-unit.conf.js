@@ -12,7 +12,6 @@ files = [
   'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
   'app/pages/app.js',
   'app/pages/**/*.js',
-  'test/mock/**/*.js',
   'test/spec/**/*.js'
 ];
 

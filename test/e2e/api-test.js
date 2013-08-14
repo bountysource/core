@@ -2,7 +2,7 @@
 
 var appTest = angular.module("appTest", ['app', 'ngMockE2E']);
 
-appTest.run(function($rootScope, $httpBackend, $api, $window, $q) {
+appTest.run(function($rootScope, $httpBackend) {
 
   var request_regex = /.*/;
   $httpBackend.whenGET(request_regex).passThrough();
