@@ -10,9 +10,9 @@ files = [
   'test/e2e/api-test.js',
   'test/e2e/mock.js',
   'test/e2e/helper.js',
-  // 'test/e2e/signin_e2e.js',
-  // 'test/e2e/fundraiser_create_e2e.js',
-  // 'test/e2e/bounty_create_e2e.js',
+  'test/e2e/signin_e2e.js',
+  'test/e2e/fundraiser_create_e2e.js',
+  'test/e2e/bounty_create_e2e.js',
   'test/e2e/profile_edit_e2e.js'
 ];
 frameworks = ["ng-scenario"];
@@ -56,11 +56,11 @@ urlRoot = "/_karma_/";
 // - IE (only Windows)
 
 //browsers = ['Firefox', 'Safari', 'Chrome'];
-browsers = ['Chrome'];
+browsers = ['PhantomJS'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 5000;
 
 // Continuous Integration mode
-singleRun = false;
+singleRun = true;
 // if true, it capture browsers, run tests and exit
