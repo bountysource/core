@@ -7,7 +7,7 @@ basePath = '';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
-  'app/api-test.js',
+  'test/e2e/api-test.js',
   'test/e2e/mock.js',
   'test/e2e/helper.js',
   'test/e2e/signin_e2e.js',

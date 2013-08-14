@@ -68,7 +68,7 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function (connect) {
             return [
-              modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\swf)$ /index-test.html']),
+              modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\swf)$ /index.html']),
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'app'),
               mountFolder(connect, 'test/e2e')
