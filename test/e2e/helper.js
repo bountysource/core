@@ -59,11 +59,6 @@ angular.scenario.dsl('google_wallet', function() {
   };
 });
 
-// angular.scenario.dsl('select_row', function() {
-//   var chain = {};
-//   chain.
-// });
-
 function findAndFillFields (formPrefix, mockData) {
   for (var key in mockData) {
     input(formPrefix + "." + key).enter(mockData[key]);
