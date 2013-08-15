@@ -1,4 +1,17 @@
-<div style="margin-bottom: 10px; padding: 2px;">
+<div style="margin-bottom: 10px; padding: 2px;" class="fundraiser-card-wrapper">
+<style>
+    .fundraiser-card-wrapper {
+        transition: 300ms all ease;
+        -webkit-transition: 300ms all ease;
+        -moz-transition: 300ms all ease;
+        -ms-transition: 300ms all ease;
+        -o-transition: 300ms all ease;
+    }
+    .fundraiser-card-wrapper:hover {
+        background-color: rgba(200, 200, 200, 0.4);
+        box-shadow: 0 0 5px lightgray;
+    }
+</style>
   <div class="row-fluid">
     <div class="span2">
       <a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-img-{{fundraiser.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
