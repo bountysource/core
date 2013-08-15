@@ -1,5 +1,5 @@
 <!-- Show message explaining bounty status -->
-<div ng-controller="IssueShow" collapse="issue.can_add_bounty || !bounty_alert.show">
+<div ng-controller="IssueShow" ng-hide="issue.can_add_bounty || !bounty_alert.show">
   <alert type="bounty_alert.type" close="bounty_alert.show = false">
     <div ng-show="bounty_alert.state == 'submitted'">
       <h4>Bounty Claim Pending</h4>
