@@ -66,6 +66,13 @@ function findAndFillFields (formPrefix, mockData) {
   }
 }
 
+function findFields (formPrefix, mockData) {
+  for (var key in mockData) {
+    expect(input(formPrefix + "." + key).val()).toBeDefined();
+  }
+}
+
+
 var MOCK = {
   valid_user: {
     email:    "mr_manly@gmail.com",
@@ -129,6 +136,16 @@ var MOCK = {
     limited_to: "10",
     description: "A cool t shirt",
     fulfillment_details: "Please email your size!"
-  }
+  },
 
+  edit_existing_user: {
+    first_name: "Mister",
+    last_name: "ManlyMan",
+    display_name: "TheManliest",
+    location: "",
+    company: "",
+    url: "",
+    public_email: "",
+    bio: ""
+  }
 };
