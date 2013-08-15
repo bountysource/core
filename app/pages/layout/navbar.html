@@ -46,6 +46,11 @@
                 <i class="icon-cog"></i>
                 Settings
               </a></li>
+              <li ng-show="current_person.account.balance > 0"><a ng-href="/activity/transactions" id="navbar-user-profile">
+                <i class="icon-gift"></i>
+                Balance ({{current_person.account.balance | currency}})
+              </a></li>
+
               <li class="divider"></li>
               <li><a href="/signin" ng-click="signout()" id="navbar-user-signout">
                 <i class="icon-off"></i>

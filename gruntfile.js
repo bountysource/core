@@ -410,6 +410,7 @@ module.exports = function (grunt) {
     'clean:dist_assets'  // clean up assets now that they're all up on CDN
   ]);
 
+
   grunt.registerTask('default', ['test']);
 
   // automatically put javascript tags into index.html
@@ -437,7 +438,6 @@ module.exports = function (grunt) {
     });
   });
 
-
   grunt.registerMultiTask('md5cdn', 'Replace relative links with absolute CDN md5 urls', function() {
     var base_url = this.options().base_url;
 
@@ -456,7 +456,4 @@ module.exports = function (grunt) {
       });
     });
   });
-
-
-
 };

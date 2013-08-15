@@ -5,6 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/learn', {
         templateUrl: 'pages/about/learn.html',
-        controller: 'Static'
+        controller: 'Static',
+        title: 'Learn'
       });
   });

@@ -114,7 +114,7 @@ angular.module('app')
           break;
         }
       }
-    }
+    };
 
     $scope.$set_winning_bounty_claim = function(issue) {
       issue.$winning_bounty_claim = issue.$winning_bounty_claim || issue.bounty_claims[0];

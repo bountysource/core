@@ -5,6 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/faq', {
         templateUrl: 'pages/about/faq.html',
-        controller: 'Static'
+        controller: 'Static',
+        title: 'Frequently Asked Questions'
       });
   });

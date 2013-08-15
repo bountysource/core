@@ -6,7 +6,7 @@ angular.module('app')
       .when('/issues/:id/solutions', {
         redirectTo: function(params) { return "/issues/"+params.id+"/claims"; }
       });
-  })
+  });
 
 
 //angular.module('app')

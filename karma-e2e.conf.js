@@ -7,7 +7,12 @@ basePath = '';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
-  'test/e2e/*.js'
+  'test/e2e/api-test.js',
+  'test/e2e/mock.js',
+  'test/e2e/helper.js',
+  'test/e2e/signin_e2e.js',
+  'test/e2e/fundraiser_create_e2e.js',
+  'test/e2e/bounty_create_e2e.js'
 ];
 frameworks = ["ng-scenario"];
 
@@ -35,7 +40,7 @@ logLevel = LOG_INFO;
 autoWatch = false;
 
 proxies = {
-	'/': 'http://localhost:9001/'
+  '/': 'http://localhost:9001/'
 };
 
 urlRoot = "/_karma_/";
@@ -50,7 +55,7 @@ urlRoot = "/_karma_/";
 // - IE (only Windows)
 
 //browsers = ['Firefox', 'Safari', 'Chrome'];
-browsers = ['PhantomJS'];
+browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 5000;

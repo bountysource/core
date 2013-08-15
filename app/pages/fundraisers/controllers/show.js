@@ -14,6 +14,8 @@ angular.module('app')
 
     // $sanitize but allow iframes (i.e. youtube videos)
     $scope.fundraiser.then(function(fundraiser) {
+      $scope.setPageTitle(fundraiser.title, 'Fundraisers');
+
       $scope.sanitized_description = "";
       if (fundraiser.description_html) {
         var html = fundraiser.description_html;

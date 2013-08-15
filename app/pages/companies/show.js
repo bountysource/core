@@ -13,6 +13,8 @@ angular.module('app')
 
     $scope.company.then(function(company) {
 
+      $scope.setPageTitle(company.name, 'Companies');
+
       $scope.$watch('project_search', function() {
         if (typeof($scope.project_search) === 'number') {
           $api.company_tracker_add(company.slug, $scope.project_search).then(function(updated_company) {

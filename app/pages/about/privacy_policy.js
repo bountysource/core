@@ -5,6 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/privacy', {
         templateUrl: 'pages/about/privacy_policy.html',
-        controller: 'Static'
+        controller: 'Static',
+        title: 'Privacy Policy'
       });
   });
