@@ -1,4 +1,5 @@
 # Bountysource
+[![Build Status](https://travis-ci.org/slicebo123/frontend.png)](https://travis-ci.org/slicebo123/frontend)
 This repository contains the javascripts, stylesheets and images that power www.bountysource.com.  Our frontend is built using:
 
 - angular.js (javascript framework)
@@ -9,7 +10,6 @@ This repository contains the javascripts, stylesheets and images that power www.
 - karma (testing)
 
 Please use our [issue tracker](https://github.com/bountysource/frontend/issues) to report any bugs or request new features.  Or, if you're a developer, send us a pull request!
-[![Build Status](https://travis-ci.org/slicebo123/frontend.png)](https://travis-ci.org/slicebo123/frontend)
 
 # We :heart: Pull Requests!
 Seriously, we really do.  It doesn't matter whether you're fixing a typo or overhauling a major area of the code base.  You will be showered in :thumbsup: :thumbsup: :thumbsup:
