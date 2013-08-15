@@ -1,5 +1,5 @@
-# Bountysource
-[![Build Status](https://travis-ci.org/slicebo123/frontend.png)](https://travis-ci.org/slicebo123/frontend)
+# Bountysource [![Build Status](https://travis-ci.org/slicebo123/frontend.png)](https://travis-ci.org/slicebo123/frontend)
+
 This repository contains the javascripts, stylesheets and images that power www.bountysource.com.  Our frontend is built using:
 
 - angular.js (javascript framework)
