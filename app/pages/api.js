@@ -7,7 +7,7 @@ angular.module('api.bountysource',[]).
 
     // set environment
     $rootScope.environment = window.BS_ENV;
-    if ($location.host().match(/localhost/)) {
+    if ($location.host().match(/localhost|v2\.pagekite/)) {
       $rootScope.can_switch_environments = true;
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
@@ -212,7 +212,30 @@ angular.module('api.bountysource',[]).
     };
 
     this.issue_get = function(id, callback) {
-      return this.call("/issues/"+id, callback);
+      return this.call("/issues/"+id, callback).then(function(issue) {
+        // find your bounty claim
+        issue.my_bounty_claim = undefined;
+        for (var i=0; issue.bounty_claims && i<issue.bounty_claims.length; i++) {
+          if ($rootScope.current_person && issue.bounty_claims[i].person.id === $rootScope.current_person.id) {
+            issue.my_bounty_claim = issue.bounty_claims[i];
+            break;
+          }
+        }
+
+        // can you respond to claims?
+        // determine if you can accept/reject claims
+        issue.can_respond_to_claims = false;
+        if ($rootScope.current_person) {
+          for (var i=0; i<issue.bounties.length; i++) {
+            if (issue.bounties[i].person.id === $rootScope.current_person.id) {
+              issue.can_respond_to_claims = true;
+              break;
+            }
+          }
+        }
+
+        return issue;
+      });
     };
 
     this.issue_create = function(data, callback) {
@@ -347,6 +370,46 @@ angular.module('api.bountysource',[]).
         return { then: function() { return []; } };
       }
     };
+
+
+    this.bounty_claim_create = function(issue_id, data) {
+      data.issue_id = issue_id;
+      return this.call("/bounty_claims", "POST", data);
+    };
+
+    this.bounty_claim_index = function() {
+      return this.call("/bounty_claims");
+    };
+
+    this.bounty_claim_show = function(id) {
+      return this.call("/bounty_claims/"+id);
+    };
+
+    this.bounty_claim_update = function(id, data) {
+      return this.call("/bounty_claims/"+id, "PUT", data);
+    };
+
+    this.bounty_claim_destroy = function(id) {
+      return this.call("/bounty_claims/"+id, "DELETE");
+    };
+
+    this.bounty_claim_show = function(id) {
+      return this.call("/bounty_claims/"+id);
+    };
+
+    this.bounty_claim_accept = function(id) {
+      return this.call("/bounty_claims/"+id+"/response", "PUT");
+    };
+
+    this.bounty_claim_reject = function(id, description) {
+      return this.call("/bounty_claims/"+id+"/response", "DELETE", { description: description });
+    };
+
+    this.bounty_claim_reset = function(id) {
+      return this.call("/bounty_claims/"+id+"/response", "POST");
+    };
+
+
 
 
     // these should probably go in an "AuthenticationController" or something more angular

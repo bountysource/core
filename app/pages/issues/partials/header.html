@@ -1,3 +1,33 @@
+<!-- Show message explaining bounty status -->
+<div ng-controller="IssueShow" collapse="issue.can_add_bounty || !bounty_alert.show">
+  <alert type="bounty_alert.type" close="bounty_alert.show = false">
+    <div ng-show="bounty_alert.state == 'submitted'">
+      <h4>Bounty Claim Pending</h4>
+      <div>A developer is claiming the bounty. <a ng-href="/issues/{{issue.slug}}/claims">Go vote on it!</a></div>
+    </div>
+
+    <div ng-show="bounty_alert.state == 'contested'">
+      <h4>This bounty is contested!</h4>
+      <div>Multiple developers are trying to claim the bounty. The backers of the bounty need to vote for a winner.</div>
+    </div>
+
+    <div ng-show="bounty_alert.state == 'rejected'">
+      <h4>Claim Rejected</h4>
+      <div>The claim made by <a ng-href="/people/{{issue.bounty_claims[0].person.slug.slug}}">{{issue.bounty_claims[0].person.display_name}}</a> for the bounty has been rejected. <a ng-href="/issues/{{issue.slug}}/claims">Submit your own claim!</a></div>
+    </div>
+
+    <div ng-show="bounty_alert.state == 'accepted'">
+      <h4>Accepted</h4>
+      <div><a ng-href="/people/{{issue.bounty_claims[0].person.slug.slug}}">{{issue.bounty_claims[0].person.display_name}}</a> claimed the bounty on this issue! Yay!</div>
+    </div>
+
+    <div ng-show="bounty_alert.state == 'available'">
+      <h4>{{issue.bounty_total | dollars}} Bounty Available</h4>
+      <div>Did you resolve this issue? <a ng-href="/issues/{{issue.slug}}/claims">Submit a claim for the bounty</a> to earn it!</div>
+    </div>
+  </alert>
+</div>
+
 <div class="row-fluid">
   <div class="span1">
     <a ng-href="/trackers/{{issue.tracker.slug}}"><img ng-src="{{issue.tracker.image_url}}" class="thumbnail" /></a>

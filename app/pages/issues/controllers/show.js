@@ -16,8 +16,15 @@ angular.module('app')
       payment_method: $routeParams.payment_method || 'google'
     };
 
-    $scope.issue = $api.issue_get($routeParams.id, function(response) {
-      var issue = response.data;
+    // alert above the issue title about bounty status
+    $scope.bounty_alert = {
+      type: 'warning',
+      show: true,
+      state: "available"
+    };
+
+    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+      // $scope.setPageTitle(issue.title, issue.tracker.name);
 
       // append item number now that we have issue
       $scope.bounty.item_number = "issues/"+issue.id;
@@ -40,6 +47,30 @@ angular.module('app')
           }
         });
       };
+
+      // set bounty info message data
+      if (issue.bounty_claims.length === 0) {
+        $scope.bounty_alert.state = "available";
+        $scope.bounty_alert.type = "info";
+      } else if (issue.accepted_bounty_claim) {
+        $scope.bounty_alert.state = "accepted";
+        $scope.bounty_alert.type = "success";
+      } else if (issue.bounty_claims.length === 1) {
+        if (issue.bounty_claims[0].rejected) {
+          $scope.bounty_alert.state = "rejected";
+          $scope.bounty_alert.type = "error";
+        } else if (issue.bounty_claims[0].disputed) {
+          $scope.bounty_alert.state = "disputed";
+          $scope.bounty_alert.type = "warning";
+        } else {
+          // good! go vote on that shit
+          $scope.bounty_alert.state = "submitted";
+          $scope.bounty_alert.type = "info";
+        }
+      } else {
+        $scope.bounty_alert.state = "contested";
+        $scope.bounty_alert.type = "warning";
+      }
 
       return issue;
     });
