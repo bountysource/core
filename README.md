@@ -1,4 +1,4 @@
-# Bountysource [![Build Status](https://travis-ci.org/slicebo123/frontend.png?branch=master)](https://travis-ci.org/slicebo123/frontend)
+# Bountysource [![Build Status](https://travis-ci.org/bountysource/frontend.png?branch=master)](https://travis-ci.org/bountysource/frontend)
 
 This repository contains the javascripts, stylesheets and images that power www.bountysource.com.  Our frontend is built using:
 
