@@ -72,6 +72,11 @@ function findFields (formPrefix, mockData) {
   }
 }
 
+function profileCheck (mockData) {
+  for (var key in mockData) {
+    expect(binding("person."+key)).toBe(mockData[key]);
+  }
+}
 
 var MOCK = {
   valid_user: {
@@ -139,13 +144,23 @@ var MOCK = {
   },
 
   edit_existing_user: {
-    first_name: "Mister",
-    last_name: "ManlyMan",
-    display_name: "TheManliest",
-    location: "",
-    company: "",
-    url: "",
-    public_email: "",
-    bio: ""
+    first_name: "Senor",
+    last_name: "Danly",
+    display_name: "Manifold",
+    location: "Sunnyvale Trailer Park, Nova Scotia",
+    company: "B & E",
+    url: "internet.com",
+    public_email: "freedom35@fakemail.com",
+    bio: "What's a bio?"
+  },
+
+  check_existing_user: {
+    first_name: "Senor",
+    last_name: "Danly",
+    display_name: "Manifold",
+    location: "Sunnyvale Trailer Park, Nova Scotia",
+    company: "B & E",
+    url: "internet.com",
+    bio: "What's a bio?"
   }
 };
