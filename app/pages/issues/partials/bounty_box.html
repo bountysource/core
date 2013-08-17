@@ -4,7 +4,7 @@
     <div ng-show="issue.bounties.length == 1">from 1 bounty</div>
     <div ng-hide="issue.bounties.length == 1">from {{issue.bounties.length | number}} bounties</div>
   </div>
-
+  <br />
   <ng-form name="form">
     <div class="controls controls-row">
       <button ng-click="bounty.amount = 15" ng-disabled="bounty.amount==15" class="span4 btn btn-primary btn-block" type="button">$15</button>

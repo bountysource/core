@@ -10,8 +10,8 @@ angular.module('app')
   })
   .controller('BountyClaimsController', function ($scope, $routeParams, $location, $window, $api) {
     $scope.new_bounty_claim = {
-      code_url: "",
-      description: ""
+      code_url: $routeParams.code_url || "",
+      description: $routeParams.description || ""
     };
 
     $scope.show_new_claim_form = false;
@@ -20,14 +20,12 @@ angular.module('app')
       // initialize all bounty claims
       for (var i=0; i<issue.bounty_claims.length; i++) { $scope.$init_bounty_claim(issue.bounty_claims[i]); }
 
-      // console.log('issue', issue);
-
-      // locate the winning bounty claim, sets issue.$winning_bounty_claim
-      $scope.$set_winning_bounty_claim(issue);
-
       // submit a new bounty claim
       $scope.bounty_claim_submit = function() {
-        if ($scope.new_bounty_claim.code_url || $scope.new_bounty_claim.description) {
+        if (!$scope.current_person) {
+          $api.set_post_auth_url($location.path(), $scope.new_bounty_claim);
+          $location.url("/signin");
+        } else if ($scope.new_bounty_claim.code_url || $scope.new_bounty_claim.description) {
           $api.bounty_claim_create(issue.id, $scope.new_bounty_claim).then(function(bounty_claim) {
             console.log('bounty_claim create', bounty_claim);
 
@@ -39,17 +37,6 @@ angular.module('app')
             }
           });
         }
-      };
-
-      // define filter to white the table down
-      $scope.claims_table_filter = function(claim) {
-        // if claim removed from list, skip
-        if (!claim) { return false; }
-
-        // reject the winning claim, it gets its own spot above the table
-        if (issue.$winning_bounty_claim && issue.$winning_bounty_claim.id === claim.id) { return false; }
-
-        return true;
       };
 
       return issue;
@@ -73,8 +60,13 @@ angular.module('app')
       };
 
       // model for a new dispute
-      bounty_claim.dispute = {
-        description: ""
+      bounty_claim.show_dispute_form = false;
+      bounty_claim.new_dispute = { description: "" };
+      bounty_claim.submit_reject = function() {
+        $api.bounty_claim_reject(bounty_claim.id, bounty_claim.new_dispute.description).then(function(updates) {
+          bounty_claim.show_dispute_form = false;
+          $scope.$update_bounty_claim(bounty_claim, updates);
+        });
       };
 
       bounty_claim.reject = function() {
@@ -83,8 +75,16 @@ angular.module('app')
             $scope.$update_bounty_claim(bounty_claim, updates);
           });
         } else {
-          $api.bounty_claim_reject(bounty_claim.id, bounty_claim.dispute.description).then(function(updates) {
-            $scope.$update_bounty_claim(bounty_claim, updates);
+          bounty_claim.show_dispute_form = true;
+        }
+      };
+
+      bounty_claim.show_resolve_form = false;
+      bounty_claim.new_resolve = { description: "" };
+      bounty_claim.resolve = function() {
+        if (bounty_claim.$my_response === false) {
+          $api.bounty_claim_resolve(bounty_claim.id, bounty_claim.new_resolve.description).then(function(updated_bounty_claim) {
+            $scope.$update_bounty_claim(bounty_claim, updated_bounty_claim);
           });
         }
       };
@@ -100,6 +100,11 @@ angular.module('app')
     $scope.$update_bounty_claim = function(bounty_claim, updates) {
       for (var k in bounty_claim) { bounty_claim[k] = updates[k]; }
       $scope.$init_bounty_claim(bounty_claim);
+
+      // is it now accepted?
+      if (bounty_claim.collected) {
+        $scope.issue.winning_bounty_claim = bounty_claim;
+      }
     };
 
     $scope.$update_percentage = function(bounty_claim) {
@@ -112,34 +117,6 @@ angular.module('app')
         if (bounty_claim.responses[i].person.id === $scope.current_person.id) {
           bounty_claim.$my_response = bounty_claim.responses[i].value;
           break;
-        }
-      }
-    };
-
-    $scope.$set_winning_bounty_claim = function(issue) {
-      issue.$winning_bounty_claim = issue.$winning_bounty_claim || issue.bounty_claims[0];
-      var claim;
-      for (var i=1; i<issue.bounty_claims.length; i++) {
-        claim = issue.bounty_claims[i];
-        if (claim.collected) {
-          // if the claim was collected, no other claim can be the winner. break!
-          issue.$winning_bounty_claim = issue.bounty_claims[i];
-          break;
-        } else if (!claim.disputed && !claim.rejected) {
-          // for claims that are neither disputed nor rejected
-          if (!issue.$winning_bounty_claim) {
-            // we haven't set a winner yet, initialize it and continue
-            issue.$winning_bounty_claim = issue.bounty_claims[i];
-            continue;
-          } else {
-            // prioritize by creation date
-            var current_claim_date = new Moment(issue.$winning_bounty_claim.created_at);
-            var this_claim_date = new Moment(claim.created_at);
-            if (this_claim_date < current_claim_date) {
-              issue.$winning_bounty_claim = issue.bounty_claims[i];
-              continue;
-            }
-          }
         }
       }
     };

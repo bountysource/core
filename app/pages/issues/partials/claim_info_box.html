@@ -1,4 +1,12 @@
-<div class="well" ng-hide="issue.can_add_bounty || issue.bounty_total <= 0" style="text-align: center;">
+<!-- If the issue is still open, then show info about claims -->
+<div class="well text-center" ng-show="issue.can_add_bounty">
+  <h3 style="margin-top: 0;">Claim Bounty</h3>
+  <!--<p>When the issue is closed, the bounty can be claimed.</p>-->
+  <p>You can only claim this bounty once the issue has been closed.</p>
+  <p>Please work with the development team on <a ng-href="{{issue.url}}" target="_blank">the original issue tracker</a> to get it to the closed state.</p>
+</div>
+
+<div ng-hide="issue.can_add_bounty || issue.bounty_total <= 0" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-error': (!issue.winning_bounty_claim && issue.bounty_claims.length > 1), 'alert alert-block alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 1) }">
   <div style="text-align: center;">
     <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
     <strong>Bounty</strong>
@@ -7,20 +15,38 @@
 
   <!-- Backers -->
   <div class="row-fluid">
-    <h4 style="margin-top: 0;">{{issue.bounties.length | number}} {{ 'Backer' | pluralize:issue.bounties.length }}</h4>
+    <h4 style="margin: 0 0 5px 0;">{{issue.bounties.length | number}} {{ 'Backer' | pluralize:issue.bounties.length }}</h4>
     <ul class="inline" style="margin-bottom: 0;">
       <li ng-repeat="bounty in issue.bounties.slice(0,8)">
         <a class="thumbnail" ng-href="/people/{{bounty.person.slug}}" tooltip="{{bounty.amount | dollars}} - {{bounty.person.display_name}}"><img style="width: 25px; height: 25px;" ng-src="{{bounty.person.image_url}}" /></a>
       </li>
     </ul>
   </div>
-  <br />
+
+  <!-- Bounty is available! Provide link to claim submit form -->
+  <div ng-show="issue.bounty_claims.length <= 0">
+    <br />
+    <h4 style="margin-bottom: 10px;">Claim Bounty</h4>
+    <p><strong>Hey! Listen!</strong> The {{issue.bounty_total | dollars}} bounty on this issue is up for grabs. If you resolved the issue, <a ng-href="/issues/{{issue.slug}}/claims">claim it!</a></p>
+  </div>
 
   <!-- Bounty Claims -->
   <div class="row-fluid" ng-show="issue.bounty_claims.length > 0">
+    <!-- A claim was accepted, yay! -->
+    <div ng-show="issue.winning_bounty_claim">
+      <br />
+      <h4 style="margin-bottom: 5px;">Bounty Claimed!</h4>
+      <div class="text-success">
+        <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}"><img class="thumbnail" style="width: 35px; height: 35px; display: inline-block;" ng-src="{{issue.bounty_claims[0].person.image_url}}" /></a>
+        <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}">{{issue.bounty_claims[0].person.display_name}}</a>
+        won the bounty!
+      </div>
+    </div>
+
     <!-- When there is one claim, say that a claim is in progress -->
-    <div ng-show="issue.bounty_claims.length == 1">
-      <h4 style="margin-top: 0;">Bounty Claim Pending</h4>
+    <div ng-show="!issue.winning_bounty_claim && issue.bounty_claims.length == 1">
+      <br />
+      <h4 style="margin-bottom: 5px;">Bounty Claim Pending</h4>
       <div ng-init="show_more_info = false">
         <div style="display: inline-block; vertical-align: middle;">
           <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}"><img class="thumbnail" style="width: 35px; height: 35px; display: inline-block;" ng-src="{{issue.bounty_claims[0].person.image_url}}" /></a>
@@ -45,8 +71,9 @@
     </div>
 
     <!-- If more than one claim, say that the bounty is contested -->
-    <div ng-show="issue.bounty_claims.length > 1">
-      <h4 style="margin-top: 0;">Bounty Contested!</h4>
+    <div ng-show="!issue.winning_bounty_claim && issue.bounty_claims.length > 1">
+      <br />
+      <h4 style="margin-bottom: 5px;">Bounty Contested!</h4>
       <ul class="inline" style="margin-bottom: 0;">
         <li ng-repeat="bounty in issue.bounty_claims.slice(0,16)">
           <a class="thumbnail" ng-href="/people/{{bounty.person.slug}}" tooltip="{{bounty.person.display_name}}"><img style="width: 25px; height: 25px;" ng-src="{{bounty.person.image_url}}" /></a>
@@ -56,9 +83,9 @@
     </div>
 
     <!-- Show your claim status -->
-    <div ng-show="issue.my_bounty_claim">
+    <div ng-show="!issue.winning_bounty_claim && issue.my_bounty_claim">
       <br />
-      <h4 style="margin-top: 0;">Your Bounty Claim</h4>
+      <h4 style="margin-bottom: 5px;">Your Bounty Claim</h4>
       <p class="text-center">Votes: <strong class="text-success">{{issue.my_bounty_claim.accept_count | number}}</strong> of <strong>{{issue.my_bounty_claim.backers_count | number}}</strong></p>
 
       <!--&lt;!&ndash; This is the only claim, so it can be automatically accepted after the dispute period ends &ndash;&gt;-->

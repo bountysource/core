@@ -253,24 +253,28 @@ angular.module('api.bountysource',[]).
 
     this.issue_get = function(id, callback) {
       return this.call("/issues/"+id, callback).then(function(issue) {
-        // find your bounty claim
         issue.my_bounty_claim = undefined;
-        for (var i=0; issue.bounty_claims && i<issue.bounty_claims.length; i++) {
+        issue.winning_bounty_claim = undefined;
+
+        for (var i=0; i<issue.bounty_claims.length; i++) {
+          // find your claim
           if ($rootScope.current_person && issue.bounty_claims[i].person.id === $rootScope.current_person.id) {
             issue.my_bounty_claim = issue.bounty_claims[i];
-            break;
+          }
+
+          // find the winning bounty claim
+          if (!issue.winning_bounty_claim && issue.bounty_claims[i].collected) {
+            issue.winning_bounty_claim = issue.bounty_claims[i];
           }
         }
 
         // can you respond to claims?
         // determine if you can accept/reject claims
         issue.can_respond_to_claims = false;
-        if ($rootScope.current_person) {
-          for (i=0; i<issue.bounties.length; i++) {
-            if (issue.bounties[i].person.id === $rootScope.current_person.id) {
-              issue.can_respond_to_claims = true;
-              break;
-            }
+        for (var j=0; j<issue.bounties.length; j++) {
+          if ($rootScope.current_person && issue.bounties[j].person.id === $rootScope.current_person.id) {
+            issue.can_respond_to_claims = true;
+            break;
           }
         }
 
@@ -438,15 +442,19 @@ angular.module('api.bountysource',[]).
     };
 
     this.bounty_claim_accept = function(id) {
-      return this.call("/bounty_claims/"+id+"/response", "PUT");
+      return this.call("/bounty_claims/"+id+"/response/accept", "PUT");
     };
 
     this.bounty_claim_reject = function(id, description) {
-      return this.call("/bounty_claims/"+id+"/response", "DELETE", { description: description });
+      return this.call("/bounty_claims/"+id+"/response/reject", "PUT", { description: description });
+    };
+
+    this.bounty_claim_resolve = function(id, description) {
+      return this.call("/bounty_claims/"+id+"/response/resolve", "PUT", { description: description });
     };
 
     this.bounty_claim_reset = function(id) {
-      return this.call("/bounty_claims/"+id+"/response", "POST");
+      return this.call("/bounty_claims/"+id+"/response/reset", "PUT");
     };
 
 

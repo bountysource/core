@@ -52,7 +52,7 @@ angular.module('app')
       if (issue.bounty_claims.length === 0) {
         $scope.bounty_alert.state = "available";
         $scope.bounty_alert.type = "info";
-      } else if (issue.accepted_bounty_claim) {
+      } else if (issue.winning_bounty_claim) {
         $scope.bounty_alert.state = "accepted";
         $scope.bounty_alert.type = "success";
       } else if (issue.bounty_claims.length === 1) {
@@ -69,7 +69,7 @@ angular.module('app')
         }
       } else {
         $scope.bounty_alert.state = "contested";
-        $scope.bounty_alert.type = "warning";
+        $scope.bounty_alert.type = "error";
       }
 
       return issue;
