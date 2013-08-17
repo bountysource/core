@@ -1,4 +1,4 @@
-<div ng-controller="DeveloperBoxController">
+<div ng-controller="DeveloperBoxController" ng-show="issue.bounty_total > 0">
   <div ng-show="issue.accepted_solution" class="well text-center">
     <h3 style="margin: 0;">Bounty Claimed</h3>
     <p><a ng-href="/people/{{issue.accepted_solution.person.slug}}">{{issue.accepted_solution.person.display_name}}</a> claimed the bounty.</p>
