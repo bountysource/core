@@ -28,6 +28,9 @@ angular.module('app')
           html = html.replace('{{iframe:'+i+'}}', matches[i]);
         }
         $scope.sanitized_description = html;
+      } else {
+        $location.path('/fundraisers');
+        $location.replace();
       }
     });
 
