@@ -9,7 +9,6 @@
   <div class="span9">
     <div ng-include="'pages/issues/partials/header.html'"></div>
     <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
-    <div ng-include="'pages/issues/partials/my_solution_box.html'"></div>
 
     <!-- Discrete button to add new claim, for when there are other claims present -->
     <div collapse="show_new_claim_form" ng-hide="issue.winning_bounty_claim || issue.bounty_claims.length <= 0 || issue.my_bounty_claim">
@@ -83,13 +82,16 @@
           </a>
         </div>
 
-        <!-- Code submission button -->
-        <div ng-show="claim.code_url" style="margin: 10px 0;">
-          <a class="btn btn-block btn-small" ng-href="{{claim.code_url}}" target="_blank"><i class="icon-globe"></i> View Code</a>
-        </div>
-
         <!-- Hide all of this if the claim is a winner -->
-        <div ng-hide="claim.collected">
+        <div ng-hide="claim.collected" style="margin: 10px 0;">
+          <!-- Vote count -->
+          <p class="text-center">Votes: <strong class="text-success">{{claim.accept_count | number}}</strong> of <strong>{{claim.backers_count | number}}</strong></p>
+
+          <!-- Code submission button -->
+          <div ng-show="claim.code_url" style="margin-bottom: 10px;">
+            <a class="btn btn-block btn-small" ng-href="{{claim.code_url}}" target="_blank"><i class="icon-globe"></i> View Code</a>
+          </div>
+
           <!-- Accept/Reject buttons -->
           <div ng-hide="claim.$my_response == false && claim.$my_response != null">
             <div class="row-fluid" ng-hide="!issue.can_respond_to_claims || (!claim.in_dispute_period && issue.bounty_claims.length == 1) || (issue.my_bounty_claim && issue.my_bounty_claim.id == claim.id)" style="margin: 10px 0;">
@@ -104,16 +106,8 @@
 
           <!-- Resolve dispute button -->
           <div ng-show="claim.$my_response == false && claim.$my_response != null">
-            <button class="btn btn-block btn-small btn-success" ng-class="{ active: (claim.show_resolve_form) }" ng-click="claim.show_resolve_form = !claim.show_resolve_form">Resolve Dispute</button>
+            <button class="btn btn-block btn-small btn-success" ng-class="{ active: (claim.show_resolve_form) }" ng-click="claim.show_resolve_form = !claim.show_resolve_form"><i class="icon-thumbs-up icon-white"></i> Resolve Dispute</button>
           </div>
-
-          <!-- Retract claim button, if it's yours -->
-          <div ng-show="issue.my_bounty_claim && claim.id == issue.my_bounty_claim.id" style="margin: 10px 0;">
-            <button class="btn btn-small btn-block btn-danger" ng-click="claim.destroy()"><i class="icon-trash icon-white"></i> Retract Claim</button>
-          </div>
-
-          <!-- Vote count -->
-          <p class="text-center">Votes: <strong class="text-success">{{claim.accept_count | number}}</strong> of <strong>{{claim.backers_count | number}}</strong></p>
         </div>
       </div>
       <div class="span10">
@@ -121,29 +115,35 @@
         <div ng-class="{ 'text-success': (claim.collected), 'text-error': (claim.disputed || claim.rejected) }">
           <!-- Title for claims from other developers -->
           <h4 ng-show="!issue.my_bounty_claim || claim.id != issue.my_bounty_claim.id" style="margin: 0;">
-            <span class="label label-important" ng-show="claim.disputed">Disputed</span>
-            <span class="label label-important" ng-show="claim.accepted">Rejected</span>
-            <span class="label label-success" ng-show="claim.collected">Accepted!</span>
             Claim by <a ng-href="/people/{{claim.person.slug}}">{{claim.person.display_name}}</a>
-          </h4>
-          <!-- Title for your own claim -->
-          <h4 ng-show="issue.my_bounty_claim && claim.id == issue.my_bounty_claim.id" style="margin: 0;">
+
             <!-- so DRY like wut -->
             <span class="label label-important" ng-show="claim.disputed">Disputed</span>
             <span class="label label-important" ng-show="claim.accepted">Rejected</span>
             <span class="label label-success" ng-show="claim.collected">Accepted!</span>
+          </h4>
+          <!-- Title for your own claim -->
+          <h4 ng-show="issue.my_bounty_claim && claim.id == issue.my_bounty_claim.id" style="margin: 0;">
             Your claim
+
+            <!-- so DRY like wut -->
+            <span class="label label-important" ng-show="claim.disputed">Disputed</span>
+            <span class="label label-important" ng-show="claim.accepted">Rejected</span>
+            <span class="label label-success" ng-show="claim.collected">Accepted!</span>
           </h4>
         </div>
+
+        <!-- Submitted at date -->
         <p class="muted">submitted {{claim.created_at | date}}</p>
 
         <!-- Submit rejection form -->
         <div collapse="!claim.show_dispute_form">
           <div class="alert alert-danger">
             <p>Why are you rejecting this claim?</p>
-            <form ng-submit="claim.submit_reject()" style="margin-bottom: 0">
+            <form style="margin-bottom: 0">
               <textarea ng-model="claim.new_dispute.description" style="width: 100%;" rows="3" placeholder="Another developer deserves this bounty." ></textarea>
-              <button type="submit" class="btn btn-danger" ng-click="claim.submit_reject()">Reject claim</button>
+              <button class="btn btn-danger" ng-click="claim.submit_reject()"><i class="icon-thumbs-down icon-white"></i> Reject claim</button>
+              <button class="btn" ng-click="claim.show_dispute_form = false">Cancel</button>
             </form>
           </div>
         </div>
@@ -154,7 +154,8 @@
             <p>How was your dispute resolved?</p>
             <form style="margin-bottom: 0">
               <textarea ng-model="claim.new_resolve.description" style="width: 100%;" rows="3" placeholder="{{claim.person.display_name}} addressed my concerns, thanks!" ></textarea>
-              <button type="submit" class="btn btn-success" ng-click="claim.resolve()">Resolve Dispute</button>
+              <button class="btn btn-success" ng-click="claim.resolve()"><i class="icon-thumbs-up icon-white"></i> Resolve Dispute</button>
+              <button class="btn" ng-click="claim.show_resolve_form = false">Cancel</button>
             </form>
           </div>
         </div>
@@ -186,15 +187,15 @@
                     <div>{{event.description}}</div>
                   </div>
                 </div>
-                <!--<div ng-switch-when="BountyClaimEvent::Collected" class="text-success">-->
-                  <!--<div class="span1">-->
-                    <!--<a ng-href="/people/{{claim.person.slug}}"><img class="thumbnail" ng-src="{{claim.person.image_url}}" /></a>-->
-                  <!--</div>-->
-                  <!--<div class="span11">-->
-                    <!--<div class="text-success">Bounty awarded <small class="muted">{{event.created_at | date:'medium'}}</small></div>-->
-                    <!--<div><a ng-href="/people/{{claim.person.slug}}">{{claim.person.display_name}}</a> earned the bounty, congrats!</div>-->
-                  <!--</div>-->
-                <!--</div>-->
+                <div ng-switch-when="BountyClaimEvent::Collected" class="text-success">
+                  <div class="span1">
+                    <a ng-href="/people/{{claim.person.slug}}"><img class="thumbnail" ng-src="{{claim.person.image_url}}" /></a>
+                  </div>
+                  <div class="span11">
+                    <div class="text-success">Bounty awarded <small class="muted">{{event.created_at | date:'medium'}}</small></div>
+                    <div><a ng-href="/people/{{claim.person.slug}}">{{claim.person.display_name}}</a> earned the bounty, congrats!</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

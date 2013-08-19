@@ -1,9 +1,13 @@
 <div class="well bounty-buttons" ng-show="issue.can_add_bounty" ng-controller="IssueShow">
   <div style="text-align: center;">
     <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
-    <div ng-show="issue.bounties.length == 1">from 1 bounty</div>
-    <div ng-hide="issue.bounties.length == 1">from {{issue.bounties.length | number}} bounties</div>
+    <strong>Bounty</strong>
   </div>
+  <br />
+
+  <!-- Backers! -->
+  <backer-thumbnails style="text-align: center;" issue="issue"></backer-thumbnails>
+
   <br />
   <ng-form name="form">
     <div class="controls controls-row">

@@ -15,10 +15,23 @@ angular.module('app')
     };
 
     $scope.show_new_claim_form = false;
+    $scope.claim_accepted = false;
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+      // redirect to overview if the issue is not closed yet
+      if (issue.can_add_bounty && (/\/issues\/[^\/]+\/claims$/).test($location.path())) {
+        $location.url("/issues/"+$routeParams.id).replace();
+      }
+
       // initialize all bounty claims
-      for (var i=0; i<issue.bounty_claims.length; i++) { $scope.$init_bounty_claim(issue.bounty_claims[i]); }
+      for (var i=0; i<issue.bounty_claims.length; i++) {
+        $scope.$init_bounty_claim(issue.bounty_claims[i]);
+
+        // has the person accepted a claim already?
+        if (!$scope.claim_accepted && $scope.current_person && issue.bounty_claims[i].value === true) {
+          $scope.claim_accepted = true;
+        }
+      }
 
       // submit a new bounty claim
       $scope.bounty_claim_submit = function() {
@@ -105,6 +118,9 @@ angular.module('app')
       if (bounty_claim.collected) {
         $scope.issue.winning_bounty_claim = bounty_claim;
       }
+
+      // update whether or not the user has accepted a claim
+      if ($scope.current_person) { $scope.claim_accepted = true; }
     };
 
     $scope.$update_percentage = function(bounty_claim) {

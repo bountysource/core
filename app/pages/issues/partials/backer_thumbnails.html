@@ -1,0 +1,8 @@
+<div class="row-fluid">
+  <h4 style="margin: 0 0 5px 0;">{{issue.bounties.length | number}} {{ 'Backer' | pluralize:issue.bounties.length }}</h4>
+  <ul class="inline" style="margin-bottom: 0;">
+    <li ng-repeat="bounty in issue.bounties.slice(0,8)">
+      <a class="thumbnail" ng-href="/people/{{bounty.person.slug}}" tooltip="{{bounty.amount | dollars}} - {{bounty.person.display_name}}"><img style="width: 25px; height: 25px;" ng-src="{{bounty.person.image_url}}" /></a>
+    </li>
+  </ul>
+</div>
