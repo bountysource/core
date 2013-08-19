@@ -14,23 +14,26 @@ angular.module('app')
 
     // $sanitize but allow iframes (i.e. youtube videos)
     $scope.fundraiser.then(function(fundraiser) {
-      $scope.setPageTitle(fundraiser.title, 'Fundraisers');
-
-      $scope.sanitized_description = "";
-      if (fundraiser.description_html) {
-        var html = fundraiser.description_html;
-        var matches = html.match(/<iframe[^>]+><\/iframe>/g) || [];
-        for (var i=0; i < matches.length; i++) {
-          html = html.replace(matches[i], '{{iframe:'+i+'}}');
-        }
-        html = $sanitize(html);
-        for (i=0; i < matches.length; i++) {
-          html = html.replace('{{iframe:'+i+'}}', matches[i]);
-        }
-        $scope.sanitized_description = html;
+      if (fundraiser.error) {
+        // API returns error if you are not authorized to view it (it hasn't been published)
+        // Just redirect to the index page
+        $location.url('/fundraisers').replace();
       } else {
-        $location.path('/fundraisers');
-        $location.replace();
+        $scope.setPageTitle(fundraiser.title, 'Fundraisers');
+
+        $scope.sanitized_description = "";
+        if (fundraiser.description_html) {
+          var html = fundraiser.description_html;
+          var matches = html.match(/<iframe[^>]+><\/iframe>/g) || [];
+          for (var i=0; i < matches.length; i++) {
+            html = html.replace(matches[i], '{{iframe:'+i+'}}');
+          }
+          html = $sanitize(html);
+          for (i=0; i < matches.length; i++) {
+            html = html.replace('{{iframe:'+i+'}}', matches[i]);
+          }
+          $scope.sanitized_description = html;
+        }
       }
     });
 
