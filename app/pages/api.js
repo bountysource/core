@@ -272,7 +272,7 @@ angular.module('api.bountysource',[]).
         // determine if you can accept/reject claims
         issue.can_respond_to_claims = false;
         for (var j=0; j<issue.bounties.length; j++) {
-          if ($rootScope.current_person && issue.bounties[j].person.id === $rootScope.current_person.id) {
+          if ($rootScope.current_person && issue.bounties[j].person && issue.bounties[j].person.id === $rootScope.current_person.id) {
             issue.can_respond_to_claims = true;
             break;
           }
@@ -302,45 +302,12 @@ angular.module('api.bountysource',[]).
       return this.call('/user/fundraisers');
     };
 
-    this.solution_activity = function() {
-      return this.call('/user/solutions');
+    this.bounty_claims_activity = function() {
+      return this.call('/bounty_claims');
     };
 
     this.transaction_activity = function() {
       return this.call('/user/transactions');
-    };
-
-    this.solution_create = function(issue_id, callback) {
-      return this.call("/issues/"+issue_id+"/solutions", "POST", callback);
-    };
-
-    this.solution_destroy = function(id, callback) {
-      return this.call("/user/solutions/"+id, "DELETE", callback);
-    };
-
-    this.solution_update = function(id, data, callback) {
-      return this.call("/user/solutions/"+id, "PUT", data, callback);
-    };
-
-    this.solution_submit = function(id, callback) {
-      return this.call("/user/solutions/"+id+"/submit", "POST", callback);
-    };
-
-    this.solution_payout = function(id, form_data, callback) {
-      return this.call("/user/solutions/"+id+"/payout", "POST", form_data, callback);
-    };
-
-    this.dispute_create = function(issue_id, solution_id, data, callback) {
-      // BountySource.api('/issues/' + solution.issue.id + '/solutions/' + solution.id + '/disputes', 'POST', form_data, function(response) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/disputes", "POST", data, callback);
-    };
-
-    this.disputes_get = function(issue_id, solution_id, callback) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/disputes", callback);
-    };
-
-    this.dispute_resolve = function(issue_id, solution_id, dispute_number, callback) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/disputes/"+dispute_number+"/close", "POST", callback);
     };
 
     this.search = function(query) {

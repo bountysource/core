@@ -142,5 +142,9 @@ angular.module('app')
       .when('/create_account', {
         redirectTo: "/signin",
         controller: 'Static'
+      })
+      .when('/activity/solutions', {
+        redirectTo: "/activity/claims",
+        controller: 'Static'
       });
   });

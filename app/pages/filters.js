@@ -63,31 +63,6 @@ angular.module('app').
     return function(s,num) {
       return s + (num !== 1 ? 's' : '');
     };
-  }).filter('solution_status', function() {
-    return function(solution) {
-      if (!solution) { return ""; }
-      if (solution.rejected) { return 'rejected'; }
-      else if (solution.disputed) { return 'disputed'; }
-      else if (solution.accepted && !solution.paid_out) { return 'accepted'; }
-      else if (solution.accepted && solution.paid_out) { return 'paid_out'; }
-      else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
-      else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
-      else if (!solution.submitted) { return 'started'; }
-      else { return ""; }
-    };
-  }).filter('solution_progress_description', function($filter) {
-    var get_status = $filter('solution_status');
-    return function(solution) {
-      var status = get_status(solution);
-      if (status === "started") { return "You have started working on a solution."; }
-      else if (status === "pending_merge") { return "Your solution has been submitted. Waiting for the issue to be resolved"; }
-      else if (status === "in_dispute_period") { return "The issue has been resolved, and your solution is in the dispute period."; }
-      else if (status === "disputed") { return "Your solution has been disputed."; }
-      else if (status === "rejected") { return "Your solution has been rejected."; }
-      else if (status === "paid_out") { return "You have claimed the bounty for this issue."; }
-      else if (status === "accepted") { return "Your solution has been accepted!"; }
-      else { return ""; }
-    };
   }).filter('fundraiser_status', function() {
     return function(fundraiser) {
       if (!fundraiser) { return ""; }

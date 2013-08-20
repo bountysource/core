@@ -9,7 +9,6 @@
   <div class="span9">
     <div ng-include="'pages/issues/partials/header.html'"></div>
     <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
-    <div ng-include="'pages/issues/partials/my_solution_box.html'"></div>
 
     <div class="alert alert-info" ng-show="issue.solutions.length <= 0" ng-controller="DeveloperBoxController">Nobody is working on a solution yet. Working on a solution yourself? <a ng-click="issue.create_solution()">Start a solution now!</a></div>
 
