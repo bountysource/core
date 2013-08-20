@@ -70,13 +70,7 @@ angular.module('app')
 
       bounty_claim.accept = function() {
         $api.bounty_claim_accept(bounty_claim.id).then(function(updates) {
-
-          // if that was the vote to accept it, just reload
-          if (updates.collected) {
-            $window.location.reload();
-          } else {
-            $scope.$update_bounty_claim(bounty_claim, updates);
-          }
+          $scope.$update_bounty_claim(bounty_claim, updates);
         });
       };
 
@@ -122,9 +116,9 @@ angular.module('app')
       for (var k in bounty_claim) { bounty_claim[k] = updates[k]; }
       $scope.$init_bounty_claim(bounty_claim);
 
-      // is it now accepted?
+      // is it now accepted? reload!
       if (bounty_claim.collected) {
-        $scope.issue.winning_bounty_claim = bounty_claim;
+        $window.location.reload();
       }
 
       // update whether or not the user has accepted a claim
