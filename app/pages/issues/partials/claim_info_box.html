@@ -6,18 +6,19 @@
   <p>Please work with the development team on <a ng-href="{{issue.url}}" target="_blank">the original issue tracker</a> to get it to the closed state.</p>
 </div>
 
-<div ng-controller="BountyClaimsController" ng-hide="issue.can_add_bounty || issue.bounty_total <= 0" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-error': (!issue.winning_bounty_claim && issue.bounty_claims.length > 1), 'alert alert-block alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 1) }">
+<div ng-controller="BountyClaimsController" ng-hide="issue.can_add_bounty || issue.bounty_total <= 0" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-error': ((!issue.winning_bounty_claim && issue.bounty_claims.length > 1) || issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected), 'alert alert-block alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 0) }">
   <!-- A claim was accepted, yay! -->
   <div ng-show="issue.winning_bounty_claim">
-    <h3 style="margin: 0;">Bounty Claimed!</h3>
-    <h4>By</h4>
+    <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
+    <h4 style="margin: 0;">Bounty Claimed!</h4>
+    <strong>By</strong>
     <div class="text-success" style="margin: 10px 0;">
       <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}"><img class="thumbnail" style="width: 35px; height: 35px; display: inline-block;" ng-src="{{issue.bounty_claims[0].person.image_url}}" /></a>
       <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}">{{issue.bounty_claims[0].person.display_name}}</a>
     </div>
   </div>
 
-  <div style="text-align: center;">
+  <div style="text-align: center;" ng-hide="issue.winning_bounty_claim">
     <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
     <strong>Bounty</strong>
   </div>
@@ -37,7 +38,12 @@
     <!-- When there is one claim, say that a claim is in progress -->
     <div ng-show="!issue.winning_bounty_claim && issue.bounty_claims.length == 1">
       <br />
-      <h4 style="margin-bottom: 5px;">Bounty Claim Pending</h4>
+
+      <!-- Title for claim. It's good, rejected, or disputed -->
+      <h4 ng-hide="issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Pending</h4>
+      <h4 ng-show="issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Disputed</h4>
+      <h4 ng-show="issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Rejected</h4>
+
       <div ng-init="show_more_info = false">
         <div style="display: inline-block; vertical-align: middle;">
           <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}"><img class="thumbnail" style="width: 35px; height: 35px; display: inline-block;" ng-src="{{issue.bounty_claims[0].person.image_url}}" /></a>
@@ -50,10 +56,12 @@
       </div>
       <div collapse="!show_more_info" class="text-center">
         <br />
-        <p>Votes: <strong class="text-success">{{issue.my_bounty_claim.accept_count | number}}</strong> of <strong>{{issue.my_bounty_claim.backers_count | number}}</strong></p>
         <p>
-          <strong>{{issue.bounty_claims[0].accept_count | number}}</strong> of <strong>{{issue.bounty_claims[0].backers_count | number}}</strong>
-          backers have voted in favor of this claim
+          <strong ng-show="issue.bounty_claims[0].accept_count > 0">
+            {{issue.bounty_claims[0].accept_count | number}}</strong> of <strong>{{issue.bounty_claims[0].backers_count | number}}
+          </strong>
+          <strong ng-show="issue.bounty_claims[0].accept_count <= 0">No</strong>
+          backers have voted in favor of this claim.
         </p>
         <p>Automatically accepted in
           <strong>{{issue.bounty_claims[0].dispute_period_ends_at | time_left_in_words}}</strong>

@@ -12,7 +12,7 @@
 
     <!-- Discrete button to add new claim, for when there are other claims present -->
     <div collapse="show_new_claim_form" ng-hide="issue.winning_bounty_claim || issue.bounty_claims.length <= 0 || issue.my_bounty_claim">
-      <button class="btn btn-small" style="margin-bottom: 10px; float: right;" ng-click-require-auth="show_new_claim_form = !show_new_claim_form">Submit your own Claim</button>
+      <button class="btn btn-small btn-info" style="margin-bottom: 10px; float: right;" ng-click-require-auth="show_new_claim_form = !show_new_claim_form">Submit your own Claim</button>
     </div>
 
     <!-- Massive form for a new claim if there aren't any yet -->
