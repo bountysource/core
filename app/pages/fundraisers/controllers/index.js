@@ -7,17 +7,28 @@ angular.module('app')
         templateUrl: 'pages/fundraisers/index.html',
         controller: 'FundraisersIndex',
         title: 'Fundraisers'
+      })
+      .when('/fundraisers/completed', {
+        templateUrl: 'pages/fundraisers/index.html',
+        controller: 'CompletedFundraisersIndex',
+        title: 'Fundraisers'
       });
   })
   .controller('FundraisersIndex', function ($scope, $api) {
+    fundraisers_index($scope, $api, 'current');
+  })
+  .controller('CompletedFundraisersIndex', function ($scope, $api) {
+    fundraisers_index($scope, $api, 'completed');
+  });
+
+  var fundraisers_index = function($scope, $api, type) {
     $scope.current = [];
     $scope.completed = [];
-    $scope.type = "current";
     $scope.all = $api.fundraisers_get().then(function(fundraisers) {
       for (var i=0; i<fundraisers.length; i++) {
         $scope.$init_fundraiser(fundraisers[i]);
       }
-      $scope.select_fundraisers('current');
+      $scope.select_fundraisers(type);
       return fundraisers;
     });
 
@@ -73,5 +84,4 @@ angular.module('app')
       }
       $scope.order_by = order;
     };
-  });
-
+  };
