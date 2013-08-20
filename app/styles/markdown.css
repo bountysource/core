@@ -1,0 +1,4 @@
+li.task-list-item {
+	list-style-image: url(/images/checkbox.png);
+	line-height: 0px; /* reset bootstrap line-height */
+}
