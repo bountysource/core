@@ -33,8 +33,8 @@
   </div>
 
   <!-- Show description, just a link to code if absent -->
-  <div ng-show="claim.description" class="well well-small" style="white-space: pre-wrap; margin: 0;">{{claim.description}}<br /><br /><a ng-show="claim.code_url" ng-href="{{claim.code_url}}" target="_blank">View Code »</a></div>
-  <div ng-hide="claim.description" class="well well-small" style="margin: 0;"><a ng-show="claim.code_url" ng-href="{{claim.code_url}}" target="_blank">View Code »</a></div>
+  <div ng-show="claim.description" class="well well-small" style="white-space: pre-wrap; margin-bottom: 10px;">{{claim.description}}<br /><br /><a ng-show="claim.code_url" ng-href="{{claim.code_url}}" target="_blank">View Code »</a></div>
+  <div ng-hide="claim.description" class="well well-small" style="margin-bottom: 10px;"><a ng-show="claim.code_url" ng-href="{{claim.code_url}}" target="_blank">View Code »</a></div>
 
   <!-- Show events -->
   <div ng-show="claim.events.length > 0" class="bounty-claim-events-table">
