@@ -1,0 +1,66 @@
+<div>
+  <div style="margin-bottom: 10px;">
+    <div style="display: inline-block; vertical-align: top;">
+      <img class="img-rounded" style="height: 60px; width: 60px;" ng-src="{{claim.person.image_url}}" />
+    </div>
+    <div style="display: inline-block; vertical-align: top;">
+      <!-- Tile of claim, with state badge and submitted date -->
+      <div ng-class="{ 'text-success': (claim.collected), 'text-error': (claim.disputed || claim.rejected) }">
+        <!-- Title for claims from other developers -->
+        <h4 ng-show="!issue.my_bounty_claim || claim.id != issue.my_bounty_claim.id" style="margin: 0;">
+          Claim by {{claim.person.display_name}}
+
+          <!-- so DRY like wut -->
+          <span class="label label-important" ng-show="claim.disputed">Disputed</span>
+          <span class="label label-important" ng-show="claim.accepted">Rejected</span>
+        </h4>
+        <!-- Title for your own claim -->
+        <h4 ng-show="issue.my_bounty_claim && claim.id == issue.my_bounty_claim.id" style="margin: 0;">
+          Your claim
+
+          <!-- so DRY like wut -->
+          <span class="label label-important" ng-show="claim.disputed">Disputed</span>
+          <span class="label label-important" ng-show="claim.accepted">Rejected</span>
+        </h4>
+      </div>
+
+      <!-- Submitted at date -->
+      <div class="muted">submitted {{claim.created_at | date}}</div>
+
+      <!-- Vote count -->
+      <div>Votes: <strong class="text-success">{{claim.accept_count | number}}</strong> of <strong>{{claim.backers_count | number}}</strong></div>
+    </div>
+  </div>
+
+  <!-- Show description, just a link to code if absent -->
+  <div ng-show="claim.description" class="well well-small" style="white-space: pre-wrap; margin: 0;">{{claim.description}}<br /><br /><a ng-show="claim.code_url" ng-href="{{claim.code_url}}" target="_blank">View Code »</a></div>
+  <div ng-hide="claim.description" class="well well-small" style="margin: 0;"><a ng-show="claim.code_url" ng-href="{{claim.code_url}}" target="_blank">View Code »</a></div>
+
+  <!-- Show events -->
+  <div ng-show="claim.events.length > 0" class="bounty-claim-events-table">
+    <div ng-repeat="event in claim.events | orderBy:['+created_at']" class="bounty-claim-events-row">
+      <div class="row-fluid">
+        <div ng-switch="event.type">
+          <div ng-switch-when="BountyClaimEvent::BackerDisputed">
+            <div class="span1">
+              <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
+            </div>
+            <div class="span11">
+              <div class="text-error">Rejected by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="muted">{{event.created_at | date:'medium'}}</small></div>
+              <div>{{event.description}}</div>
+            </div>
+          </div>
+          <div ng-switch-when="BountyClaimEvent::BackerDisputeResolved">
+            <div class="span1">
+              <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
+            </div>
+            <div class="span11">
+              <div class="text-success">Dispute from <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> resolved <small class="muted">{{event.created_at | date:'medium'}}</small></div>
+              <div>{{event.description}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

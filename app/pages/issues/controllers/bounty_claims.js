@@ -14,8 +14,9 @@ angular.module('app')
       description: $routeParams.description || ""
     };
 
-    $scope.show_new_claim_form = false;
+    $scope.show_new_claim_form = parseInt($routeParams.show_new_claim_form);
     $scope.claim_accepted = false;
+    $scope.can_respond_to_claims = false;
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       // redirect to overview if the issue is not closed yet
@@ -30,6 +31,13 @@ angular.module('app')
         // has the person accepted a claim already?
         if (!$scope.claim_accepted && $scope.current_person && issue.bounty_claims[i].value === true) {
           $scope.claim_accepted = true;
+        }
+
+        // can you respond to claims?
+        // determine if you can accept/reject claims
+        if ($scope.current_person && issue.bounties[i].person && issue.bounties[i].person.id === $scope.current_person.id) {
+          $scope.can_respond_to_claims = true;
+          break;
         }
       }
 
@@ -61,15 +69,15 @@ angular.module('app')
       $scope.$update_my_response(bounty_claim);
 
       bounty_claim.accept = function() {
-        if (bounty_claim.$my_response === true) {
-          $api.bounty_claim_reset(bounty_claim.id).then(function(updates) {
+        $api.bounty_claim_accept(bounty_claim.id).then(function(updates) {
+
+          // if that was the vote to accept it, just reload
+          if (updates.collected) {
+            $window.location.reload();
+          } else {
             $scope.$update_bounty_claim(bounty_claim, updates);
-          });
-        } else {
-          $api.bounty_claim_accept(bounty_claim.id).then(function(updates) {
-            $scope.$update_bounty_claim(bounty_claim, updates);
-          });
-        }
+          }
+        });
       };
 
       // model for a new dispute
@@ -83,13 +91,7 @@ angular.module('app')
       };
 
       bounty_claim.reject = function() {
-        if (bounty_claim.$my_response === false) {
-          $api.bounty_claim_reset(bounty_claim.id).then(function(updates) {
-            $scope.$update_bounty_claim(bounty_claim, updates);
-          });
-        } else {
-          bounty_claim.show_dispute_form = true;
-        }
+        bounty_claim.show_dispute_form = true;
       };
 
       bounty_claim.show_resolve_form = false;
@@ -106,6 +108,12 @@ angular.module('app')
         $api.bounty_claim_destroy(bounty_claim.id).then(function() {
           // just reload page
           $window.location.reload();
+        });
+      };
+
+      bounty_claim.reset = function() {
+        $api.bounty_claim_reset(bounty_claim.id).then(function(updates) {
+          $scope.$update_bounty_claim(bounty_claim, updates);
         });
       };
     };
@@ -134,6 +142,16 @@ angular.module('app')
           bounty_claim.$my_response = bounty_claim.responses[i].value;
           break;
         }
+      }
+    };
+
+    $scope.goto_claim_bounty = function() {
+      if ($scope.current_person) {
+        $location.path("issues/"+$routeParams.id+"/claims").search({ show_new_claim_form: 1 });
+      } else {
+        // save route, get auth, redirect
+        $api.set_post_auth_url("/claims", { show_new_claim_form: true });
+        $location.url("/signin");
       }
     };
   });

@@ -10,12 +10,10 @@
   <!-- A claim was accepted, yay! -->
   <div ng-show="issue.winning_bounty_claim">
     <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
-    <h4 style="margin: 0;">Bounty Claimed!</h4>
-    <strong>By</strong>
-    <div class="text-success" style="margin: 10px 0;">
-      <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}"><img class="thumbnail" style="width: 35px; height: 35px; display: inline-block;" ng-src="{{issue.bounty_claims[0].person.image_url}}" /></a>
-      <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}">{{issue.bounty_claims[0].person.display_name}}</a>
-    </div>
+    <h4 style="margin: 0;">Bounty</h4>
+    <br />
+    <h4 style="margin: 0;">Claimed by:</h4>
+    <person-icon format="vertical" person="issue.winning_bounty_claim.person" size="60px"></person-icon>
   </div>
 
   <div style="text-align: center;" ng-hide="issue.winning_bounty_claim">
@@ -30,7 +28,7 @@
   <!-- Bounty is available! Provide link to claim submit form -->
   <div ng-show="issue.bounty_claims.length <= 0">
     <h3>Claim Bounty</h3>
-    <p><strong>Hey! Listen!</strong> The {{issue.bounty_total | dollars}} bounty on this issue is up for grabs. If you resolved the issue, <a ng-href="/issues/{{issue.slug}}/claims">claim it!</a></p>
+    <p>Did you resolve this issue? <a ng-href="/issues/{{issue.slug}}/claims">Claim the {{issue.bounty_total | dollars}} bounty!</a></p>
   </div>
 
   <!-- Bounty Claims -->
@@ -82,10 +80,15 @@
       <p>Multiple developers have submitted claims for this bounty. The backers must <a ng-href="/issues/{{issue.slug}}/claims">vote for a winner</a>.</p>
     </div>
 
-    <!-- Show your claim status -->
-    <div ng-show="!issue.winning_bounty_claim && issue.my_bounty_claim">
+    <!-- Show your claim status, or button to create claim -->
+    <div ng-show="!issue.winning_bounty_claim">
       <br />
-      <button class="btn btn-block btn-danger" ng-click="issue.my_bounty_claim.destroy()"><i class="icon-trash icon-white"></i> Retract My Claim</button>
+      <button ng-show="issue.my_bounty_claim" class="btn btn-block btn-danger" ng-click="issue.my_bounty_claim.destroy()"><i class="icon-trash icon-white"></i> Retract My Claim</button>
+
+      <div ng-hide="issue.my_bounty_claim">
+        <h4 style="margin-bottom: 5px;">Claim Bounty</h4>
+        <p>Did you resolve this issue? <a ng-click="goto_claim_bounty()" ng-click-require-auth>Claim the {{issue.bounty_total | dollars}} bounty!</a></p>
+      </div>
     </div>
   </div>
 </div>
