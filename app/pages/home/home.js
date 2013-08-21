@@ -5,15 +5,16 @@ angular.module('app')
     $routeProvider
       .when('/', {
         templateUrl: 'pages/home/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        resolve: {
+          count: function($rootScope, $api) {
+            $rootScope.people_count = $api.people_count();
+          }
+        }
       });
   })
   .controller('HomeCtrl', function ($scope, $window, $api) {
     $scope.fundraisers = $api.fundraiser_cards();
-
-    $scope.total_members = $api.people_recent().then(function(response) {
-      return response.total_count;
-    });
 
     $api.people_interesting().then(function(people) {
       $scope.people = people;

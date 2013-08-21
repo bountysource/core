@@ -205,6 +205,10 @@ angular.module('api.bountysource',[]).
       return this.call("/user/interesting");
     };
 
+    this.people_count = function() {
+      return this.call("/people/count");
+    };
+
     this.person_get = function(id) {
       return this.call("/users/"+id);
     };
