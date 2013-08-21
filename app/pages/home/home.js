@@ -11,7 +11,10 @@ angular.module('app')
   .controller('HomeCtrl', function ($scope, $window, $api) {
     $scope.fundraisers = $api.fundraiser_cards();
 
-    // $scope.recent_people = $api.people_recent();
+    $scope.total_members = $api.people_recent().then(function(response) {
+      return response.total_count;
+    });
+
     $api.people_interesting().then(function(people) {
       $scope.people = people;
     });
