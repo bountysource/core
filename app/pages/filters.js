@@ -63,31 +63,6 @@ angular.module('app').
     return function(s,num) {
       return s + (num !== 1 ? 's' : '');
     };
-  }).filter('solution_status', function() {
-    return function(solution) {
-      if (!solution) { return ""; }
-      if (solution.rejected) { return 'rejected'; }
-      else if (solution.disputed) { return 'disputed'; }
-      else if (solution.accepted && !solution.paid_out) { return 'accepted'; }
-      else if (solution.accepted && solution.paid_out) { return 'paid_out'; }
-      else if (solution.submitted && !solution.merged) { return 'pending_merge'; }
-      else if (solution.in_dispute_period && !solution.disputed && !solution.accepted) { return 'in_dispute_period'; }
-      else if (!solution.submitted) { return 'started'; }
-      else { return ""; }
-    };
-  }).filter('solution_progress_description', function($filter) {
-    var get_status = $filter('solution_status');
-    return function(solution) {
-      var status = get_status(solution);
-      if (status === "started") { return "You have started working on a solution."; }
-      else if (status === "pending_merge") { return "Your solution has been submitted. Waiting for the issue to be resolved"; }
-      else if (status === "in_dispute_period") { return "The issue has been resolved, and your solution is in the dispute period."; }
-      else if (status === "disputed") { return "Your solution has been disputed."; }
-      else if (status === "rejected") { return "Your solution has been rejected."; }
-      else if (status === "paid_out") { return "You have claimed the bounty for this issue."; }
-      else if (status === "accepted") { return "Your solution has been accepted!"; }
-      else { return ""; }
-    };
   }).filter('fundraiser_status', function() {
     return function(fundraiser) {
       if (!fundraiser) { return ""; }
@@ -95,6 +70,32 @@ angular.module('app').
       else if (fundraiser.published && fundraiser.in_progress) { return "published"; }
       else if (!fundraiser.in_progress) { return "completed"; }
       else { return ""; }
+    };
+  }).filter('time_left_in_words', function() {
+    return function(date) {
+      var now = new Moment();
+      var ends = new Moment(date);
+      var days_left = ends.diff(now, "days");
+      var hours_left = ends.diff(now, "hours");
+      var minutes_left = ends.diff(now, "minutes");
+      var seconds_left = ends.diff(now, "seconds");
+      var time_left, time_left_unit;
+      if (days_left > 0) {
+        time_left = days_left;
+        time_left_unit = "day";
+      } else if (hours_left > 0) {
+        time_left = hours_left;
+        time_left_unit = "hour";
+      } else if (minutes_left > 0) {
+        time_left = minutes_left;
+        time_left_unit = "minute";
+      } else {
+        time_left = Math.max(seconds_left, 0);
+        time_left_unit = "second";
+      }
+      // pluralize the unit if necessary
+      if (time_left !== 1) { time_left_unit += "s"; }
+      return time_left + " " + time_left_unit;
     };
   });
 
