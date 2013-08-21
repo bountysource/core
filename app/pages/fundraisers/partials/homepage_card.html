@@ -16,6 +16,10 @@
         <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
       </div>
       <div class="text-success" style="display: inline-block; vertical-align: middle;"><small><strong>{{fundraiser.total_pledged | dollars}}</strong> of <strong>{{fundraiser.funding_goal | dollars}}</strong> pledged</small></div>
+      <div>
+        <span class="label label-success" ng-show="!fundraiser.in_progress">Completed</span>
+        <span class="label label-info" ng-show="fundraiser.in_progress">Days left : {{fundraiser.days_remaining}}</span>
+      </div>
     </div>
   </div>
 </div>
