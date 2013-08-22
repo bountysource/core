@@ -20,7 +20,8 @@ angular.module('app')
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       // redirect to overview if the issue is not closed yet
-      if (issue.can_add_bounty && (/\/issues\/[^\/]+\/claims$/).test($location.path())) {
+      // AND the issue is not generic
+      if (!issue.generic && issue.can_add_bounty && (/\/issues\/[^\/]+\/claims$/).test($location.path())) {
         $location.url("/issues/"+$routeParams.id).replace();
       }
 
