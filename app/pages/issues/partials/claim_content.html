@@ -1,6 +1,6 @@
 <div>
   <div style="margin-bottom: 10px;">
-    <div style="display: inline-block; vertical-align: top;">
+    <div style="display: inline-block; vertical-align: top; margin-right: 5px;">
       <img class="img-rounded" style="height: 60px; width: 60px;" ng-src="{{claim.person.image_url}}" />
     </div>
     <div style="display: inline-block; vertical-align: top;">
@@ -28,7 +28,8 @@
       <div class="muted">submitted {{claim.created_at | date}}</div>
 
       <!-- Vote count -->
-      <div>Votes: <strong class="text-success">{{claim.accept_count | number}}</strong> of <strong>{{claim.backers_count | number}}</strong></div>
+      <div ng-hide="claim.collected">Votes: <strong class="text-success">{{claim.accept_count | number}}</strong> of <strong>{{claim.backers_count | number}}</strong></div>
+      <div ng-show="claim.collected" class="text-success">All backers have voted in favor of this claim.</div>
     </div>
   </div>
 
