@@ -14,7 +14,7 @@ angular.module('app')
       description: $routeParams.description || ""
     };
 
-    $scope.show_new_claim_form = parseInt($routeParams.show_new_claim_form);
+    $scope.show_new_claim_form = parseInt($routeParams.show_new_claim_form, 10);
     $scope.claim_accepted = false;
     $scope.can_respond_to_claims = false;
 
@@ -35,7 +35,7 @@ angular.module('app')
 
         // can you respond to claims?
         // determine if you can accept/reject claims
-        if ($scope.current_person && issue.bounties[i].person && issue.bounties[i].person.id === $scope.current_person.id) {
+        if ($scope.current_person && issue.bounties[i] && issue.bounties[i].person && issue.bounties[i].person.id === $scope.current_person.id) {
           $scope.can_respond_to_claims = true;
           break;
         }
