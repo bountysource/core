@@ -1,12 +1,12 @@
-<!-- If the issue is still open, then show info about claims -->
-<div class="well text-center" ng-show="issue.can_add_bounty">
+<!-- If the issue is still open, and not generic, then show info about claims -->
+<div class="well text-center" ng-show="issue.can_add_bounty && !issue.generic">
   <h3 style="margin-top: 0;">Claim Bounty</h3>
   <!--<p>When the issue is closed, the bounty can be claimed.</p>-->
   <p>You can only claim this bounty once the issue has been closed.</p>
   <p>Please work with the development team on <a ng-href="{{issue.url}}" target="_blank">the original issue tracker</a> to get it to the closed state.</p>
 </div>
 
-<div ng-controller="BountyClaimsController" ng-hide="issue.can_add_bounty || issue.bounty_total <= 0" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-error': ((!issue.winning_bounty_claim && issue.bounty_claims.length > 1) || issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected), 'alert alert-block alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 0) }">
+<div ng-controller="BountyClaimsController" ng-show="issue.winning_bounty_claim || issue.bounty_total > 0 && (!issue.can_add_bounty || issue.generic)" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-error': ((!issue.winning_bounty_claim && issue.bounty_claims.length > 1) || issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected), 'alert alert-block alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 0) }">
   <!-- A claim was accepted, yay! -->
   <div ng-show="issue.winning_bounty_claim">
     <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
@@ -14,20 +14,24 @@
     <br />
     <h4 style="margin: 0;">Claimed by:</h4>
     <person-icon format="vertical" person="issue.winning_bounty_claim.person" size="60px"></person-icon>
+    <br />
+    <backer-thumbnails issue="issue"></backer-thumbnails>
   </div>
 
-  <div style="text-align: center;" ng-hide="issue.winning_bounty_claim">
-    <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
-    <strong>Bounty</strong>
+  <!-- Note, we don't need to show this if the issue is generic, because the bounty box is still there -->
+  <div ng-hide="issue.generic || issue.winning_bounty_claim">
+    <div style="text-align: center;" ng-hide="issue.winning_bounty_claim">
+      <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
+      <strong>Bounty</strong>
+    </div>
+    <br />
+    <backer-thumbnails issue="issue"></backer-thumbnails>
   </div>
-  <br />
-
-  <!-- Backers! -->
-  <backer-thumbnails issue="issue"></backer-thumbnails>
 
   <!-- Bounty is available! Provide link to claim submit form -->
   <div ng-show="issue.bounty_claims.length <= 0">
-    <h3>Claim Bounty</h3>
+    <h3 ng-hide="issue.generic">Claim Bounty</h3>
+    <h3 ng-show="issue.generic" style="margin-top: 0px;">Claim Bounty</h3>
     <p>Did you resolve this issue? <a ng-href="/issues/{{issue.slug}}/claims">Claim the {{issue.bounty_total | dollars}} bounty!</a></p>
   </div>
 
@@ -55,10 +59,8 @@
       <div collapse="!show_more_info" class="text-center">
         <br />
         <p>
-          <strong ng-show="issue.bounty_claims[0].accept_count > 0">
-            {{issue.bounty_claims[0].accept_count | number}}</strong> of <strong>{{issue.bounty_claims[0].backers_count | number}}
-          </strong>
-          <strong ng-show="issue.bounty_claims[0].accept_count <= 0">No</strong>
+          <span ng-show="issue.bounty_claims[0].accept_count > 0"><strong>{{issue.bounty_claims[0].accept_count | number}}</strong> of <strong>{{issue.bounty_claims[0].backers_count | number}}</strong></span>
+          <span ng-show="issue.bounty_claims[0].accept_count <= 0"><strong>No</strong></span>
           backers have voted in favor of this claim.
         </p>
         <p>Automatically accepted in

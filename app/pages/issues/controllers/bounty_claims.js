@@ -14,13 +14,14 @@ angular.module('app')
       description: $routeParams.description || ""
     };
 
-    $scope.show_new_claim_form = parseInt($routeParams.show_new_claim_form);
+    $scope.show_new_claim_form = parseInt($routeParams.show_new_claim_form, 10);
     $scope.claim_accepted = false;
     $scope.can_respond_to_claims = false;
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       // redirect to overview if the issue is not closed yet
-      if (issue.can_add_bounty && (/\/issues\/[^\/]+\/claims$/).test($location.path())) {
+      // AND the issue is not generic
+      if (!issue.generic && issue.can_add_bounty && (/\/issues\/[^\/]+\/claims$/).test($location.path())) {
         $location.url("/issues/"+$routeParams.id).replace();
       }
 
@@ -35,7 +36,7 @@ angular.module('app')
 
         // can you respond to claims?
         // determine if you can accept/reject claims
-        if ($scope.current_person && issue.bounties[i].person && issue.bounties[i].person.id === $scope.current_person.id) {
+        if ($scope.current_person && issue.bounties[i] && issue.bounties[i].person && issue.bounties[i].person.id === $scope.current_person.id) {
           $scope.can_respond_to_claims = true;
           break;
         }
