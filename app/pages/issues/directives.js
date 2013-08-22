@@ -33,4 +33,12 @@ angular.module('app').
       templateUrl: "pages/issues/partials/claim_content.html",
       replace: true
     };
+  }).directive('issueStatusLabel', function() {
+    return {
+      restrict: "E",
+      scope: {
+        issue: "="
+      },
+      templateUrl: "pages/issues/partials/status_label.html"
+    };
   });
