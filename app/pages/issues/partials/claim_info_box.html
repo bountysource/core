@@ -14,6 +14,8 @@
     <br />
     <h4 style="margin: 0;">Claimed by:</h4>
     <person-icon format="vertical" person="issue.winning_bounty_claim.person" size="60px"></person-icon>
+    <br />
+    <backer-thumbnails issue="issue"></backer-thumbnails>
   </div>
 
   <!-- Note, we don't need to show this if the issue is generic, because the bounty box is still there -->
@@ -22,10 +24,7 @@
       <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
       <strong>Bounty</strong>
     </div>
-
     <br />
-
-    <!-- Backers! -->
     <backer-thumbnails issue="issue"></backer-thumbnails>
   </div>
 
