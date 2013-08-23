@@ -1,0 +1,6 @@
+.bounty-claim-events-table .bounty-claim-events-row {
+  margin-bottom: 5px;
+}
+.bounty-claim-events-table .bounty-claim-events-row:last-of-type {
+  margin-bottom: 0;
+}
