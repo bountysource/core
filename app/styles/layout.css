@@ -48,6 +48,7 @@ footer a, footer { color: #bbb; }
   .container { margin: 0 10px; }
 }
 
+.show-global-banner { display: block !important; }
 
 .navbar-fixed-top { margin: 0; }
 
