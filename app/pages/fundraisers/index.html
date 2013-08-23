@@ -6,8 +6,8 @@
   Have an idea or project that needs funding? <a href="/fundraisers/new">Create your own fundraiser!</a>
 </div>
 <ul class="nav nav-tabs">
-  <li ng-class="active_tab('current')"><a ng-click="select_fundraisers('current')">Current</a></li>
-  <li ng-class="active_tab('completed')"><a ng-click="select_fundraisers('completed')">Completed</a></li>
+  <li ng-class="active_tab('current')"><a href="/fundraisers">Current</a></li>
+  <li ng-class="active_tab('completed')"><a href="/fundraisers/completed">Completed</a></li>
 </ul>
 <table class="table table-striped" ng-hide="!selected_fundraisers || (selected_fundraisers | filter:filter_method).length <= 0">
   <thead>
