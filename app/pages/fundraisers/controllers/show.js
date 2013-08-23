@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize) {
+  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
     $scope.fundraiser = $api.fundraiser_get($routeParams.id);
 
     // $sanitize but allow iframes (i.e. youtube videos)
@@ -19,7 +19,7 @@ angular.module('app')
         // Just redirect to the index page
         $location.url('/fundraisers').replace();
       } else {
-        $scope.setPageTitle(fundraiser.title, 'Fundraisers');
+        $pageTitle.set(fundraiser.title, 'Fundraisers');
 
         $scope.sanitized_description = "";
         if (fundraiser.description_html) {

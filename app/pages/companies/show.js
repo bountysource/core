@@ -8,12 +8,12 @@ angular.module('app')
         controller: 'BaseCompanyController'
       });
   })
-  .controller('CompanyTrackersController', function ($scope, $routeParams, $api) {
+  .controller('CompanyTrackersController', function ($scope, $routeParams, $api, $pageTitle) {
     $scope.projects = [];
 
     $scope.company.then(function(company) {
 
-      $scope.setPageTitle(company.name, 'Companies');
+      $pageTitle.set(company.name, 'Companies');
 
       $scope.$watch('project_search', function() {
         if (typeof($scope.project_search) === 'number') {

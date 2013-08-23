@@ -8,12 +8,12 @@ angular.module('app')
         controller: 'PeopleShow'
       });
   })
-  .controller('PeopleShow', function ($scope, $routeParams, $api) {
+  .controller('PeopleShow', function ($scope, $routeParams, $api, $pageTitle) {
 
     $scope.person = $api.person_get($routeParams.id);
 
     $scope.person.then(function(person){
-      $scope.setPageTitle(person.display_name, 'Profile');
+      $pageTitle.set(person.display_name, 'Profile');
     });
 
     $scope.timeline = $api.person_timeline_get($routeParams.id).then(function(response) {
