@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="styles/markdown.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="app" ng-controller="MainController" ng-class="{'chatroom': chatroom.show}">
+  <body ng-app="app" ng-controller="MainController">
 
     <div id="wrap">
       <div id="main" class="clear-top">
@@ -44,7 +44,7 @@
         <div ng-class="{ 'container': !no_container }" ng-view></div>
       </div>
     </div>
-    <div ng:include src="'pages/layout/chatroom.html'"></div>
+    <!--<div ng:include src="'pages/layout/chatroom.html'"></div>-->
     <div ng:include src="'pages/layout/footer.html'"></div>
 
     <!--[if lt IE 9]>

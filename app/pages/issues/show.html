@@ -25,7 +25,8 @@
           </td>
         </tr>
         <tr class="no-stripe">
-          <td colspan="2"><h4>Comments ({{issue.comments.length}})</h4></td>
+          <td colspan="2" ng-show="issue.comments.length > 0"><h4>Comments ({{issue.comments.length}})</h4></td>
+          <td colspan="2" ng-show="issue.comments.length == 0"><h4>No comments.</h4></td>
         </tr>
 
         <tr ng-repeat="comment in issue.comments">

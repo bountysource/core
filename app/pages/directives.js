@@ -111,15 +111,6 @@ angular.module('app').
       }
     };
   }]).
-  directive('issueStatusLabel', function() {
-    return {
-      restrict: "E",
-      scope: {
-        issue: "="
-      },
-      templateUrl: "pages/issues/partials/status_label.html"
-    };
-  }).
   directive('targetBlank', function() {
     return {
         restrict: "A",

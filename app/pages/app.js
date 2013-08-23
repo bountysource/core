@@ -1,6 +1,10 @@
 'use strict';
 
-window.BS_ENV = (document.location.host === 'www.bountysource.com' ? 'prod' : 'qa');
+if (document.location.host === 'www.bountysource.com') {
+  window.BS_ENV = 'prod';
+} else {
+  window.BS_ENV = 'staging';
+}
 
 angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies'])
   .config(function ($routeProvider, $locationProvider, $httpProvider, $provide) {
