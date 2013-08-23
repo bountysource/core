@@ -25,6 +25,7 @@ angular.module('app')
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       $scope.setPageTitle(issue.title, issue.tracker.name);
+      $scope.setTargetBlank();
 
       // append item number now that we have issue
       $scope.bounty.item_number = "issues/"+issue.id;

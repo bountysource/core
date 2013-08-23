@@ -111,16 +111,6 @@ angular.module('app').
       }
     };
   }]).
-  directive('targetBlank', function() {
-    return {
-        restrict: "A",
-        link: function(scope, element) {
-            setTimeout(function() {
-              element.find('a').attr('target', '_blank');
-            }, 0);
-        }
-    };
-  }).
   directive('integerOnly', function() {
   return {
     require: 'ngModel',
