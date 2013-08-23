@@ -205,6 +205,10 @@ angular.module('api.bountysource',[]).
       return this.call("/user/interesting");
     };
 
+    this.people_count = function() {
+      return this.call("/people/count");
+    };
+
     this.person_get = function(id) {
       return this.call("/users/"+id);
     };
@@ -265,16 +269,6 @@ angular.module('api.bountysource',[]).
           // find the winning bounty claim
           if (!issue.winning_bounty_claim && issue.bounty_claims[i].collected) {
             issue.winning_bounty_claim = issue.bounty_claims[i];
-          }
-        }
-
-        // can you respond to claims?
-        // determine if you can accept/reject claims
-        issue.can_respond_to_claims = false;
-        for (var j=0; j<issue.bounties.length; j++) {
-          if ($rootScope.current_person && issue.bounties[j].person && issue.bounties[j].person.id === $rootScope.current_person.id) {
-            issue.can_respond_to_claims = true;
-            break;
           }
         }
 

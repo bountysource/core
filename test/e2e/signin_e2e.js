@@ -3,8 +3,13 @@
 
 describe('Scenario: Signining In --', function () {
 
+  beforeEach(function() {
+    Mock.init();
+    Mock.push("/people/count", "GET", {}, {"data":{"total":9859},"meta":{"status":200,"success":true,"pagination":null}});
+  });
+
   describe('Initial State', function() {
-    it ("should have a SIGNIN Button that redirects to SIGNIN Page", function() {
+    it("should have a SIGNIN Button that redirects to SIGNIN Page", function() {
       browser().navigateTo('/');
       expect(element('#home-signin').text()).toBe("Sign In");
       element('#home-signin').click();
