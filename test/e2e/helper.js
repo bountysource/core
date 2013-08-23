@@ -66,6 +66,18 @@ function findAndFillFields (formPrefix, mockData) {
   }
 }
 
+function findFields (formPrefix, mockData) {
+  for (var key in mockData) {
+    expect(input(formPrefix + "." + key).val()).toBeDefined();
+  }
+}
+
+function profileCheck (mockData) {
+  for (var key in mockData) {
+    expect(binding("person."+key)).toBe(mockData[key]);
+  }
+}
+
 var MOCK = {
   valid_user: {
     email:    "mr_manly@gmail.com",
@@ -129,6 +141,27 @@ var MOCK = {
     limited_to: "10",
     description: "A cool t shirt",
     fulfillment_details: "Please email your size!"
-  }
+  },
 
+  edit_existing_user: {
+
+    first_name: "Senor",
+    last_name: "Danly",
+    display_name: "Manifold",
+    location: "Sunnyvale Trailer Park, Nova Scotia",
+    company: "B & E",
+    url: "internet.com",
+    public_email: "freedom35@fakemail.com",
+    bio: "What's a bio?"
+  },
+
+  check_existing_user: {
+    first_name: "Senor",
+    last_name: "Danly",
+    display_name: "Manifold",
+    location: "Sunnyvale Trailer Park, Nova Scotia",
+    company: "B & E",
+    url: "internet.com",
+    bio: "What's a bio?"
+  }
 };
