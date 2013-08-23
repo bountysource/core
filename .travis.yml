@@ -10,3 +10,6 @@ before_script:
   - sleep 1 # let server start
 
 script: grunt test
+
+notifications:
+  irc: "chat.freenode.net#bs-staff"
