@@ -6,3 +6,4 @@ app/components
 *.log
 .idea
 cloudfiles.json
+dist/
