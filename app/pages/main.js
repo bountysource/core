@@ -22,16 +22,6 @@ angular.module('app')
       $window.document.title = parts.join(' - ');
     };
 
-    $rootScope.setTargetBlank = function() {
-      var allDivs = document.querySelectorAll('div[target-blank]');
-      for(var i = 0; i < allDivs.length; i++) {
-        var allLinks = allDivs[i].querySelectorAll('a');
-        for(var j = 0; j < allLinks.length; j++) {
-          allLinks[j].target = '_blank';
-        }
-      }
-    }
-
     // change page title on change route
     $rootScope.$on('$routeChangeStart', function (event, current) {
       if (!current.$$route) {
