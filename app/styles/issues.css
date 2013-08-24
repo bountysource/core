@@ -20,3 +20,8 @@ table#solutions-table tr td img.thumbnail {
 .bounty-buttons .controls:first-of-type { margin-top: 0; }
 
 .no-stripe td { border-top: 0; background-color: transparent !important; }
+
+li.task-list-item {
+  list-style: none;
+  list-style-image: url('../images/checkbox.png');
+}
