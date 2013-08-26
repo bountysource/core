@@ -344,28 +344,28 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+tracker_id+"/tags", "POST", { name: name });
     };
 
-    this.company_create = function(form_data) {
-      return this.call("/companies", "POST", form_data);
+    this.team_create = function(form_data) {
+      return this.call("/teams", "POST", form_data);
     };
 
-    this.company_get = function(id) {
-      return this.call("/companies/"+id);
+    this.team_get = function(id) {
+      return this.call("/teams/"+id);
     };
 
-    this.company_update = function(id, form_data) {
-      return this.call("/companies/"+id, "PUT", form_data);
+    this.team_update = function(id, form_data) {
+      return this.call("/teams/"+id, "PUT", form_data);
     };
 
-    this.company_tracker_add = function(id, tracker_id) {
-      return this.call("/companies/"+id+"/add_tracker", "PUT", { tracker_id: tracker_id });
+    this.team_tracker_add = function(id, tracker_id) {
+      return this.call("/teams/"+id+"/add_tracker", "PUT", { tracker_id: tracker_id });
     };
 
-    this.company_tracker_remove = function(id, tracker_id) {
-      return this.call("/companies/"+id+"/remove_tracker", "DELETE", { tracker_id: tracker_id });
+    this.team_tracker_remove = function(id, tracker_id) {
+      return this.call("/teams/"+id+"/remove_tracker", "DELETE", { tracker_id: tracker_id });
     };
 
-    this.list_companies = function() {
-      return this.call("/companies", "GET");
+    this.list_teams = function() {
+      return this.call("/teams", "GET");
     };
 
     this.tracker_typeahead = function(query) {
