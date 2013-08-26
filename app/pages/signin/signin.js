@@ -43,9 +43,7 @@ angular.module('app')
 
     // If the email changes in the model (this can happen from autofill or query params),
     // kick off the change right away.
-    $scope.$watch('form_data.email', function() {
-      $scope.email_changed();
-    });
+    $scope.$watch('form_data.email', $scope.email_changed);
 
     // this tracks form state
     //   null == don't show errors yet
@@ -63,7 +61,7 @@ angular.module('app')
     };
 
     $scope.email_changed = function() {
-      if ($scope.email_previous !== $scope.form_data.email && $scope.form.email.$valid) {
+      if ($scope.email_previous !== $scope.form_data.email) {
         $scope.email_previous = $scope.form_data.email;
         $scope.signin_or_signup = 'pending';
         $api.check_email_address($scope.form_data.email).then(function(response) {

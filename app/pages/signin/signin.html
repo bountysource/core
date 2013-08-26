@@ -32,7 +32,7 @@
     <label class="control-label" for="inputEmail">Email Address:</label>
     <div class="controls">
       <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" autofocus
-       ng-change="email_changing()" required />
+       ng-change="email_changing()" ng-blur="email_changed()" required />
       <span class="help-inline" ng-show="signin_or_signup=='signin'"><small>Found!</small></span>
       <span class="help-inline" ng-show="signin_or_signup=='signup'"><small>Available!</small></span>
     </div>

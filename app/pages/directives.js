@@ -30,7 +30,7 @@ angular.module('app').
       // ** 'change' event fires for Chrome/Firefox
       // ** 'keydown' for Safari 6.0.1
       // ** 'propertychange' for IE
-      element.bind('change keydown propertychange', function(event) {
+      element.bind('change keydown propertychange', function() {
         // Trigger 'input' so underlying model changes. Don't wrap in scope.$apply as the handler
         // will trigger its own $apply.
         element.find('input').triggerHandler('input');
