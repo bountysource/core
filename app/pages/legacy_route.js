@@ -146,5 +146,9 @@ angular.module('app')
       .when('/activity/solutions', {
         redirectTo: "/activity/claims",
         controller: 'Static'
+      })
+      .when('/issues/:id/bounties', {
+        redirectTo: function(param) { return "/issues/"+param.id+"/backers"; },
+        controller: 'Static'
       });
   });

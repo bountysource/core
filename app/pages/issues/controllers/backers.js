@@ -3,8 +3,8 @@
 angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/issues/:id/bounties', {
-        templateUrl: 'pages/issues/bounties.html',
+      .when('/issues/:id/backers', {
+        templateUrl: 'pages/issues/backers.html',
         controller: 'IssueBountiesController'
       });
   })
@@ -22,4 +22,3 @@ angular.module('app')
       }
     };
   });
-
