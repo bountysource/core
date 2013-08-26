@@ -44,4 +44,5 @@
 .homepage .featured-list li { list-style: none; padding: 0; margin: 0 0 20px 55px; clear: left; }
 .homepage .featured-list img { max-width: 50px; max-height: 50px; float: left; margin-left: -55px; padding: 0 5px 5px 0; }
 .homepage .featured-list .progress { height: 5px; margin-bottom: 0; padding-bottom: 0; }
-
+.homepage .card { margin-bottom: 10px; padding: 15px; transition: all 0.25s ease-in-out; -webkit-transition: all 0.25s ease-in-out; -moz-transition: all 0.25s ease-in-out; -ms-transition: all 0.25s ease-in-out; -o-transition: all 0.25s ease-in-out; }
+.homepage .card:hover { background: #fff; box-shadow: 0 0 8px #ddd; -webkit-box-shadow: 0 0 8px #ddd; -moz-box-shadow: 0 0 8px #ddd; }
