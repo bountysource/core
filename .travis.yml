@@ -13,3 +13,4 @@ script: grunt test
 
 notifications:
   irc: "chat.freenode.net#bs-staff"
+  skip_join: true
