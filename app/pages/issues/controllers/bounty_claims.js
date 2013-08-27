@@ -33,10 +33,12 @@ angular.module('app')
         if (!$scope.claim_accepted && $scope.current_person && issue.bounty_claims[i].value === true) {
           $scope.claim_accepted = true;
         }
+      }
 
-        // can you respond to claims?
-        // determine if you can accept/reject claims
-        if ($scope.current_person && issue.bounties[i] && issue.bounties[i].person && issue.bounties[i].person.id === $scope.current_person.id) {
+      // can you respond to claims?
+      // determine if you can accept/reject claims
+      for (var j=0; j<issue.bounties.length; j++) {
+        if ($scope.current_person && issue.bounties[j].person && issue.bounties[j].person.id === $scope.current_person.id) {
           $scope.can_respond_to_claims = true;
           break;
         }
