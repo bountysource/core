@@ -16,7 +16,7 @@
           <td><img ng-show="issue.author_image_url" ng-src="{{issue.author_image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px" /></td>
           <td class="span12">
             <p class="muted">{{issue.author_name}} opened this issue on {{issue.created_at | date}}</p>
-            <div ng-bind-html="issue.body_html"></div>
+            <div ng-bind-html="issue.body_html" target-blank></div>
 
             <p class="muted">
               <a ng-href="{{issue.url}}" target="_blank">View original issue &raquo;</a>
@@ -33,7 +33,7 @@
           <td><img ng-show="comment.author_image_url" ng-src="{{comment.author_image_url}}" class="thumbnail" style="width: 50px; height: 50px; max-width: 50px" /></td>
           <td class="span12">
             <p class="muted">{{comment.author_name}} on {{comment.created_at | date}}</p>
-            <div ng-bind-html="comment.body_html"></div>
+            <div ng-bind-html="comment.body_html" target-blank></div>
           </td>
         </tr>
         </tbody>
