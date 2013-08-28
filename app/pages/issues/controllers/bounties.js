@@ -24,6 +24,7 @@ angular.module('app')
         $scope.sort_column = col;
       }
     };
+
     //hacky quick fix for sorting by strings of numbers
     $scope.sort_by_amount = function() {
       if (typeof($scope.sort_column) === 'function') {
