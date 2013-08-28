@@ -10,7 +10,10 @@ angular.module('app')
   })
 
   .controller('IssueBountiesController', function ($scope) {
-    $scope.sort_column = 'amount';
+    $scope.sort_column = function(bounty) {
+      return Number(bounty.amount);
+    };
+
     $scope.sort_reverse = true;
 
     $scope.sort_by = function(col) {
@@ -19,6 +22,16 @@ angular.module('app')
         $scope.sort_reverse = !$scope.sort_reverse;
       } else {
         $scope.sort_column = col;
+      }
+    };
+    //hacky quick fix for sorting by strings of numbers
+    $scope.sort_by_amount = function() {
+      if (typeof($scope.sort_column) === 'function') {
+        $scope.sort_reverse = !$scope.sort_reverse;
+      } else {
+        $scope.sort_column = function(bounty) {
+          return Number(bounty.amount);
+        };
       }
     };
   });
