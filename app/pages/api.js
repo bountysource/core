@@ -275,6 +275,10 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+id+"/overview");
     };
 
+    this.tracker_get_activity = function(id) {
+      return this.call("/trackers/"+id+"/activity");
+    };
+
     this.tracker_follow = function(id) {
       return this.call("/follows", "PUT", { item_id: id, item_type: "Tracker" });
     };
