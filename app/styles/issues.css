@@ -20,3 +20,11 @@ table#solutions-table tr td img.thumbnail {
 .bounty-buttons .controls:first-of-type { margin-top: 0; }
 
 .no-stripe td { border-top: 0; background-color: transparent !important; }
+
+td.imagerow {
+  width: 60px;
+}
+
+td.noimagerow {
+  width: 0px;
+}
