@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/trackers/:id', {
         templateUrl: 'pages/trackers/show.html',
-        controller: 'TrackerShow'
+        controller: 'TrackerShow',
+        reloadOnSearch: false
       });
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle) {
@@ -66,17 +67,29 @@ angular.module('app')
     });
 
     $scope.issue_filter_options = {
-      text: null,
-      bounty_min: null,
-      bounty_max: null,
-      only_valuable: false,
-      hide_closed: false,
-      hide_open: false
+      text:          $location.search().text                    || null,
+      bounty_min:    $location.search().bounty_min              || null,
+      bounty_max:    $location.search().bounty_max              || null,
+      only_valuable: $location.search().only_valuable == 'true' || false,
+      hide_closed:   $location.search().hide_closed   == 'true' || false,
+      hide_open:     $location.search().hide_open     == 'true' || false
     };
 
+    $scope.$watch('issue_filter_options', function(filters) {
+      var key, value;
+      // remove falsy values
+      for (key in filters) {
+        value = filters[key];
+        if (value === null || value === false) {
+          delete filters[key];
+        }
+      }
+      $location.search(filters).replace();
+    }, true);
+
     $scope.update_filter_options = function() {
-      $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
-      $scope.issue_filter_options.bounty_max = parseFloat($scope.issue_filter_options.bounty_max);
+      $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min) || null;
+      $scope.issue_filter_options.bounty_max = parseFloat($scope.issue_filter_options.bounty_max) || null;
     };
 
     $scope.issue_filter = function(issue) {
