@@ -14,7 +14,7 @@ Please use our [issue tracker](https://github.com/bountysource/frontend/issues) 
 # We :heart: Pull Requests!
 Seriously, we really do.  It doesn't matter whether you're fixing a typo or overhauling a major area of the code base.  You will be showered in :thumbsup: :thumbsup: :thumbsup:
 
-# Quickstart Developer Guide
+## Quickstart Developer Guide
 Fork our repository on GitHub, clone it locally, install components and modules, and start the server.
 
 ```bash
@@ -26,3 +26,7 @@ bower install  # installs web components into app/components/*
 grunt server   # runs grunt server on http://localhost:9000/
 ```
 
+## Staging vs. Production
+We have two APIs available:
+- https://api.bountysource.com/ - This is our production API and should be used for real transactions.  This is the API endpoint that powers www.bountysource.com.
+- https://staging-api.bountysource.com/ - This is our test API and should be used for all testing purposes.  Our staging environment often contains code that hasn't been fully tested.  Paypal and Google Wallet are in "sandbox" mode which means financial transactions aren't real.  User data has been anonymized (emails, passwords, etc).

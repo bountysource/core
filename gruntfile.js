@@ -54,6 +54,7 @@ module.exports = function (grunt) {
       app: {
         options: {
           port: 9000,
+          hostname: '*',
           middleware: function (connect) {
             return [
               modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\swf)$ /index.html']),
@@ -66,6 +67,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           port: 9001,
+          hostname: '*',
           middleware: function (connect) {
             return [
               modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\swf)$ /index.html']),
@@ -80,6 +82,7 @@ module.exports = function (grunt) {
         options: {
           keepalive: true,
           port: 9000,
+          hostname: '*',
           middleware: function (connect) {
             return [
               modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\.swf)$ /index.html']),

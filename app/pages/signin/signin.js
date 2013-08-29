@@ -41,6 +41,10 @@ angular.module('app')
       terms: false
     };
 
+    // If the email changes in the model (this can happen from autofill or query params),
+    // kick off the change right away.
+    $scope.$watch('form_data.email', $scope.email_changed);
+
     // this tracks form state
     //   null == don't show errors yet
     //   'pending' == user typed email and blurred it
@@ -69,11 +73,6 @@ angular.module('app')
         });
       }
     };
-
-    // if it was passsed in with query params, kick this off right away
-    if ($scope.form_data.email) {
-      $scope.email_changed();
-    }
 
     // form submit
     $scope.signin = function() {
@@ -107,5 +106,3 @@ angular.module('app')
     };
 
   });
-
-

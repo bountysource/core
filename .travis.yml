@@ -12,4 +12,8 @@ before_script:
 script: grunt test
 
 notifications:
-  irc: "chat.freenode.net#bs-staff"
+  irc:
+    channels: "chat.freenode.net#bs-staff"
+    skip_join: true
+    on_success: change
+    on_failure: change
