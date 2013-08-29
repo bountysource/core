@@ -1,20 +1,18 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/companies">Companies</a><span class="divider">»</span></li>
-  <li><a>{{company.name || 'Loading...'}}</a></li>
+  <li><a href="/teams">Teams</a><span class="divider">»</span></li>
+  <li><a>{{team.name || 'Loading...'}}</a></li>
 </ul>
 
-<div ng-show="company">
+<div ng-show="team">
   <div class="row-fluid">
     <div class="span3">
-      <ng-include src="'pages/companies/partials/infobox.html'"></ng-include>
+      <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
     </div>
-    <div class="span9" ng-controller="CompanyTrackersController">
-
-      <ng-include src="'pages/companies/partials/tabs.html'"></ng-include>
+    <div class="span9" ng-controller="TeamTrackersController">
+      <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
       <div class="well" ng-show="is_admin">
-
         <ng-form class="form-inline" name="search_form" ng-submit="search_projects()">
           Add an open-source project your company uses:
           <input
@@ -28,8 +26,8 @@
         </ng-form>
       </div>
 
-      <ul class="thumbnails company-tracker-thumbnails">
-        <li ng-repeat="tracker in company.trackers" class="span2">
+      <ul class="thumbnails team-tracker-thumbnails">
+        <li ng-repeat="tracker in team.trackers" class="span2">
           <a ng-href="/trackers/{{tracker.slug}}" class="thumbnail text-center">
             <img ng-src="{{tracker.medium_image_url}}"/>
             {{tracker.name}}

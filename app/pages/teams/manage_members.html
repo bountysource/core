@@ -1,0 +1,69 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/teams">Teams</a><span class="divider">»</span></li>
+  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a ng-href="/teams/{{team.slug}}/members">Members</a><span class="divider">»</span></li>
+  <li><a>Manage</a></li>
+</ul>
+
+<div ng-show="team && members" ng-controller="ManageTeamMembersController">
+  <div class="row-fluid">
+    <div class="span3">
+      <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+    </div>
+    <div class="span6">
+      <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
+
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th style="width: 30%; text-align: center;"></th>
+          <th style="width: 10%; text-align: center;">Public</th>
+          <th style="width: 10%; text-align: center;">Spender</th>
+          <th style="width: 10%; text-align: center;">Admin</th>
+          <th style="width: 10%; text-align: center;"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="member in members">
+          <td>
+            <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
+          </td>
+          <td style="text-align: center;">
+            <input type="checkbox" ng-model="member.is_public" ng-change="update_member(member, 'public')" />
+          </td>
+          <td style="text-align: center;">
+            <input type="checkbox" ng-model="member.is_spender" ng-change="update_member(member, 'spender')" ng-disabled="member.is_admin" ng-checked="member.is_spender || member.is_admin" />
+          </td>
+          <td style="text-align: center;">
+            <input type="checkbox" ng-model="member.is_admin" ng-change="update_member(member, 'admin')" ng-disabled="is_admin && current_person.id == member.id" />
+          </td>
+          <td style="text-align: center;">
+            <button ng-click="remove_member(member)" class="btn btn-mini btn-danger" ng-disabled="member.id == current_person.id" tooltip="Remove" tooltip-placement="right"><i class="icon-trash icon-white"></i></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-error" ng-show="new_member.error">
+        {{new_member.error}}
+      </div>
+
+      <!-- Add new member input -->
+      <form ng-submit="add_member()">
+        <span style="margin-right: 5px;"><strong class="">Add member:</strong></span>
+        <input type="email" class="search-query span6" ng-model="new_member.email" placeholder="Member email address" />
+      </form>
+    </div>
+    <div class="span3">
+      <div class="well">
+        <h4>Public</h4>
+        <p>Publicly displayed as a member of {{team.name}} on the <a ng-href="/teams/{{team.slug}}/members">members</a> tab.</p>
+        <h4>Spender</h4>
+        <p>Authorized to <strong>spend money</strong> from the {{team.name}} account.</p>
+        <h4>Admin</h4>
+        <p>Can <strong>add/remove projects and members</strong> to the team, and spend money from the team account.</p>
+      </div>
+    </div>
+  </div>
+</div>
