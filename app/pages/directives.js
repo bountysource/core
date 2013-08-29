@@ -131,9 +131,9 @@ angular.module('app').
     return {
       restrict: "E",
       link: function($scope, element) {
-        var modelName = element.attr('model')
+        var modelName = element.attr('model');
         $scope.$watch(modelName, function(model) {
-          if (model != null) {
+          if (model !== null) {
             setTimeout(function() {
               element.find('a').attr('target', '_blank');
             }, 0);
@@ -141,7 +141,7 @@ angular.module('app').
         });
       }
     };
-  }). 
+  }).
   directive('integerOnly', function() {
   return {
     require: 'ngModel',
