@@ -3,22 +3,22 @@
 angular.module('app')
   .config(function ($routeProvider, $person) {
     $routeProvider
-      .when('/companies/new', {
-        templateUrl: 'pages/companies/new.html',
-        controller: 'NewCompaniesController',
+      .when('/teams/new', {
+        templateUrl: 'pages/teams/new.html',
+        controller: 'NewTeamController',
         resolve: $person,
-        title: 'Create New Company'
+        title: 'Create New Team'
       });
   })
-  .controller('NewCompaniesController', function ($scope, $location, $api) {
+  .controller('NewTeamController', function ($scope, $location, $api) {
     $scope.form_data = {};
 
-    $scope.create_company = function () {
-      $api.company_create($scope.form_data).then(function(company) {
-        if (company.error) {
-          $scope.error = company.error;
+    $scope.create_team = function () {
+      $api.team_create($scope.form_data).then(function(team) {
+        if (team.error) {
+          $scope.error = team.error;
         } else {
-          $location.url("/companies/"+company.slug);
+          $location.url("/teams/"+team.slug);
         }
       });
     };

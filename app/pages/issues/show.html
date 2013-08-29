@@ -16,8 +16,9 @@
           <td ng-class="{imagerow: issue.author_image_url, noimagerow: !issue.author_image_url}"><img ng-show="issue.author_image_url" ng-src="{{issue.author_image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px" /></td>
           <td style="overflow-x:scroll" >
             <p class="muted">{{issue.author_name}} opened this issue on {{issue.created_at | date}}</p>
-            <div ng-bind-html="issue.body_html"></div>
-
+            <target-blank model="issue">
+              <div ng-bind-html="issue.body_html"></div>
+            </target-blank>
             <p class="muted">
               <a ng-href="{{issue.url}}" target="_blank">View original issue &raquo;</a>
             </p>
@@ -33,7 +34,9 @@
           <td><img ng-show="comment.author_image_url" ng-src="{{comment.author_image_url}}" class="thumbnail" style="width: 50px; height: 50px; max-width: 50px" /></td>
           <td style="overflow-x:scroll">
             <p class="muted">{{comment.author_name}} on {{comment.created_at | date}}</p>
-            <div ng-bind-html="comment.body_html"></div>
+            <target-blank model="issue">
+              <div ng-bind-html="comment.body_html"></div>
+            </target-blank>
           </td>
         </tr>
         </tbody>
