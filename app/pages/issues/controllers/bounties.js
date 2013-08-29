@@ -9,10 +9,18 @@ angular.module('app')
       });
   })
 
-  .controller('IssueBountiesController', function ($scope) {
+  .controller('IssueBountiesController', function ($scope, $routeParams, $api) {
+    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+      for (var i=0; i<issue.bounties.length; i++) {
+        issue.bounties[i].amount = new Number(issue.bounties[i].amount);
+      }
+
+      return issue;
+    });
+
+
     $scope.sort_column = 'amount';
     $scope.sort_reverse = true;
-
     $scope.sort_by = function(col) {
       // if clicking this column again, then reverse the direction.
       if ($scope.sort_column === col) {
