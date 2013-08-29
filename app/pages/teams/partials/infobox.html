@@ -1,5 +1,6 @@
-<div class="well">
+<div class="well text-center">
   <div><img ng-src="{{team.large_image_url}}" style="width: 100%;"/></div>
-  <h3>{{team.name}}</h3>
-  <a ng-href="{{team.url}}" target="_blank">{{team.url}}</a>
+  <h3 style="margin-bottom: 0;">{{team.name}}</h3>
+  <h4 style="margin-top: 0;">{{ (members | filter:{ is_public: true }).length | number }} {{ 'member' | pluralize:(members | filter:{ is_public: true }).length }}</h4>
+  <a class="btn btn-block" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a>
 </div>

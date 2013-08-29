@@ -37,7 +37,9 @@ angular.module('app')
           spender: member.is_spender,
           public: member.is_public
         };
-        $api.team_member_update($routeParams.id, member.id, payload);
+        $api.team_member_update($routeParams.id, member.id, payload).then(function(update_member) {
+          for (var k in update_member) { member[k] = update_member[k]; }
+        });
       };
 
       $scope.remove_member = function(member) {
