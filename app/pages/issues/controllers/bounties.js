@@ -9,30 +9,24 @@ angular.module('app')
       });
   })
 
-  .controller('IssueBountiesController', function ($scope) {
-    $scope.sort_column = function(bounty) {
-      return Number(bounty.amount);
-    };
+  .controller('IssueBountiesController', function ($scope, $routeParams, $api) {
+    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+      for (var i=0; i<issue.bounties.length; i++) {
+        issue.bounties[i].amount = new Number(issue.bounties[i].amount);
+      }
 
+      return issue;
+    });
+
+
+    $scope.sort_column = 'amount';
     $scope.sort_reverse = true;
-
     $scope.sort_by = function(col) {
       // if clicking this column again, then reverse the direction.
       if ($scope.sort_column === col) {
         $scope.sort_reverse = !$scope.sort_reverse;
       } else {
         $scope.sort_column = col;
-      }
-    };
-
-    //hacky quick fix for sorting by strings of numbers
-    $scope.sort_by_amount = function() {
-      if (typeof($scope.sort_column) === 'function') {
-        $scope.sort_reverse = !$scope.sort_reverse;
-      } else {
-        $scope.sort_column = function(bounty) {
-          return Number(bounty.amount);
-        };
       }
     };
   });
