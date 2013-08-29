@@ -1,0 +1,26 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/teams">Teams</a><span class="divider">»</span></li>
+  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a>Members</a></li>
+</ul>
+
+<div ng-show="team">
+  <div class="row-fluid">
+    <div class="span3">
+      <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+    </div>
+    <div class="span9">
+      <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
+
+      <ul class="thumbnails">
+        <li class="span2 member-thumbnail text-center" ng-repeat="member in members">
+          <a ng-href="/people/{{member.slug}}" class="thumbnail">
+            <img ng-src="{{member.medium_image_url}}" />
+            {{member.display_name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

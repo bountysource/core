@@ -11,7 +11,6 @@ angular.module('app')
   })
   .controller('EditTeamController', function ($scope, $routeParams, $location, $api) {
     $scope.team.then(function(team) {
-
       $scope.form_data = {
         name: team.name,
         slug: team.slug,
@@ -19,7 +18,7 @@ angular.module('app')
       };
 
       $scope.save_team = function() {
-        $api.team_update(company.slug, $scope.form_data).then(function(updated_team) {
+        $api.team_update(team.slug, $scope.form_data).then(function(updated_team) {
           if (updated_team.error) {
             $scope.error = updated_team.error;
           } else {
@@ -27,7 +26,6 @@ angular.module('app')
           }
         });
       };
-
     });
 
   });

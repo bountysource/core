@@ -348,6 +348,10 @@ angular.module('api.bountysource',[]).
       return this.call("/teams", "POST", form_data);
     };
 
+    this.list_teams = function() {
+      return this.call("/teams", "GET");
+    };
+
     this.team_get = function(id) {
       return this.call("/teams/"+id);
     };
@@ -357,15 +361,27 @@ angular.module('api.bountysource',[]).
     };
 
     this.team_tracker_add = function(id, tracker_id) {
-      return this.call("/teams/"+id+"/add_tracker", "PUT", { tracker_id: tracker_id });
+      return this.call("/teams/"+id+"/trackers/"+tracker_id, "POST");
     };
 
     this.team_tracker_remove = function(id, tracker_id) {
-      return this.call("/teams/"+id+"/remove_tracker", "DELETE", { tracker_id: tracker_id });
+      return this.call("/teams/"+id+"/trackers/"+tracker_id, "DELETE");
     };
 
-    this.list_teams = function() {
-      return this.call("/teams", "GET");
+    this.team_members_get = function(id) {
+      return this.call("/teams/"+id+"/members");
+    };
+
+    this.team_member_add = function(team_id, email) {
+      return this.call("/teams/"+team_id+"/members", "POST", { email: email });
+    };
+
+    this.team_member_remove = function(team_id, member_id) {
+      return this.call("/teams/"+team_id+"/members/"+member_id, "DELETE");
+    };
+
+    this.team_member_update = function(team_id, member_id, data) {
+      return this.call("/teams/"+team_id+"/members/"+member_id, "PUT", data);
     };
 
     this.tracker_typeahead = function(query) {
