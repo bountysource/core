@@ -33,7 +33,7 @@
             <input type="checkbox" ng-model="member.is_public" ng-change="update_member(member, 'public')" />
           </td>
           <td style="text-align: center;">
-            <input type="checkbox" ng-model="member.is_spender" ng-change="update_member(member, 'spender')" ng-disabled="member.is_admin" ng-checked="member.is_spender || member.is_admin" />
+            <input type="checkbox" ng-model="member.is_spender" ng-change="update_member(member, 'spender')" />
           </td>
           <td style="text-align: center;">
             <input type="checkbox" ng-model="member.is_admin" ng-change="update_member(member, 'admin')" ng-disabled="is_admin && current_person.id == member.id" />
