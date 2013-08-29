@@ -23,3 +23,14 @@ angular.module('app')
     };
   });
 
+/* code to fix issue: https://www.bountysource.com/issues/467715-all-external-links-should-open-in-a-new-tab */
+function setupExternalLinks(){
+  var allLinks = document.getElementsByTagName('a');
+  for(var i = 0; i < allLinks.length; i++){
+    if(allLinks[i].href.indexOf('http://') === 0 && allLinks[i].href.indexOf('https://www.bountysource.com') !== 0 && allLinks[i].href.indexOf('http://www.bountysource.com') !== 0){
+        allLinks[i].target = '_blank';
+    }
+  }
+}
+
+setupExternalLinks();
