@@ -16,7 +16,7 @@ angular.module('app')
       if (value === false) {
         $location.path("/teams/"+$routeParams.id).replace();
       }
-    })
+    });
 
     $scope.members.then(function(members) {
       $scope.add_member = function() {
