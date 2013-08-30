@@ -12,7 +12,7 @@ angular.module('app')
   .controller('IssueBountiesController', function ($scope, $routeParams, $api) {
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       for (var i=0; i<issue.bounties.length; i++) {
-        issue.bounties[i].amount = new Number(issue.bounties[i].amount);
+        issue.bounties[i].amount = Number(issue.bounties[i].amount);
       }
 
       return issue;
