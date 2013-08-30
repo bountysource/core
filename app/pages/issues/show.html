@@ -30,7 +30,7 @@
           <td colspan="2" ng-show="issue.comments.length == 0"><h4>No comments.</h4></td>
         </tr>
 
-        <tr ng-repeat="comment in issue.comments">
+        <tr ng-repeat="comment in issue.comments | orderBy:['+created_at']">
           <td><img ng-show="comment.author_image_url" ng-src="{{comment.author_image_url}}" class="thumbnail" style="width: 50px; height: 50px; max-width: 50px" /></td>
           <td style="overflow-x:scroll">
             <p class="muted">{{comment.author_name}} on {{comment.created_at | date}}</p>
