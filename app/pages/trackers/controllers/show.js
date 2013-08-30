@@ -169,4 +169,9 @@ angular.module('app')
       $scope.order_col = "amount";
       $scope.issue_filter_options = { only_valuable: true };
     };
+
+    $scope.tracker_stats = $api.tracker_stats($routeParams.id).then(function(tracker_stats) {
+      return tracker_stats;
+    });
+
   });
