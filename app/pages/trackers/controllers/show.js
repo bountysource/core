@@ -70,9 +70,9 @@ angular.module('app')
       text:          $location.search().text                    || null,
       bounty_min:    $location.search().bounty_min              || null,
       bounty_max:    $location.search().bounty_max              || null,
-      only_valuable: $location.search().only_valuable == 'true' || false,
-      hide_closed:   $location.search().hide_closed   == 'true' || false,
-      hide_open:     $location.search().hide_open     == 'true' || false
+      only_valuable: $location.search().only_valuable === 'true' || false,
+      hide_closed:   $location.search().hide_closed   === 'true' || false,
+      hide_open:     $location.search().hide_open     === 'true' || false
     };
 
     $scope.$watch('issue_filter_options', function(filters) {
