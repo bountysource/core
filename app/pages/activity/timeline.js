@@ -9,7 +9,7 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('Activity', function($scope, $routeParams, $api, $pateTitle) {
+  .controller('Activity', function($scope, $routeParams, $api, $pageTitle) {
     $pageTitle.set('Timeline', 'Activity');
 
     $scope.timeline = $api.person_timeline_get($scope.current_person.id);
