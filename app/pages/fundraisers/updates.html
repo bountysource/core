@@ -17,34 +17,48 @@
       </div>
 
       <div class="span9">
+        <div class="span9">
+          <div ng-show="can_manage" class="hero-unit">
+            <h2>Updates</h2>
+            <p>Publish updates about your fundraiser. Published updates are emailed to the backers of your fundraiser.</p>
+            <button ng-controller="FundraiserUpdatesController" ng-click="create_update()" class="btn btn-large btn-primary">New Update</button>
+          </div>
 
-        <div ng-show="can_manage" class="hero-unit">
-          <h2>Updates</h2>
-          <p>Publish updates about your fundraiser. Published updates are emailed to the backers of your fundraiser.</p>
-          <button ng-controller="FundraiserUpdatesController" ng-click="create_update()" class="btn btn-large btn-primary">New Update</button>
+          <div class="alert alert-info" ng-show="updates.length <= 0">
+            No updates have been published.
+          </div>
+
+          <table class="table table-striped table-bordered table-hover update_table" ng-show="updates.length > 0">
+            <!--Published updates row-->
+            <thead>
+              <tr><th><strong>Title</strong></th><th><strong>Published On</strong></th></tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="update in updates">
+                <td>
+                  <a ng-show="update.published_at" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title }}</a>
+
+                  <div ng-hide="update.published_at">
+                    <a class="label label-info" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">Draft</a>
+                    <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title || 'Untitled' }}</a>
+                  </div>
+                </td>
+                <td>
+                  <div ng-show="update.published_at" class="muted">{{ update.published_at | date }}</div>
+                  <div ng-hide="update.published_at" class="muted">Last modified {{ update.published_at | date }}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <div class="span3">
+            <div ng-include="'pages/fundraisers/partials/top_backers.html'"></div>
 
-        <div class="alert alert-info" ng-show="updates.length <= 0">
-          No updates have been published.
+            <div ng-show="fundraiser.rewards.length > 0">
+              <h3>Rewards</h3>
+              <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+            </div>
         </div>
-
-        <table class="table table-striped" ng-show="updates.length > 0">
-          <!--Published updates row-->
-          <tr ng-repeat="update in updates">
-            <td>
-              <a ng-show="update.published_at" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">#{{ update.number }} {{ update.title }}</a>
-
-              <div ng-hide="update.published_at">
-                <a class="label label-info" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">Draft</a>
-                <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title || 'Untitled' }}</a>
-              </div>
-            </td>
-            <td>
-              <div ng-show="update.published_at" class="muted">Published {{ update.published_at | date }}</div>
-              <div ng-hide="update.published_at" class="muted">Last modified {{ update.published_at | date }}</div>
-            </td>
-          </tr>
-        </table>
       </div>
     </div>
   </form>
