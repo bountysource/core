@@ -6,12 +6,12 @@ angular.module('app')
       .when('/activity', {
         templateUrl: 'pages/activity/timeline.html',
         controller: 'Activity',
-        resolve: $person,
-        title: ['Timeline', 'Activity']
+        resolve: $person
       });
   })
-  .controller('Activity', function($scope, $routeParams, $api) {
-    console.log("whee activity controller");
+  .controller('Activity', function($scope, $routeParams, $api, $pateTitle) {
+    $pageTitle.set('Timeline', 'Activity');
+
     $scope.timeline = $api.person_timeline_get($scope.current_person.id);
   });
 

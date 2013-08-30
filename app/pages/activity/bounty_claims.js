@@ -6,11 +6,12 @@ angular.module('app')
       .when('/activity/claims', {
         templateUrl: 'pages/activity/bounty_claims.html',
         controller: 'BountyClaimActivity',
-        resolve: $person,
-        title: ['Bounty Claims', 'Activity']
+        resolve: $person
       });
   })
-  .controller('BountyClaimActivity', function($scope, $routeParams, $api) {
+  .controller('BountyClaimActivity', function($scope, $routeParams, $api, $pageTitle) {
+    $pageTitle.set('Bounty Claims', 'Activity');
+
     $scope.bounty_claims = $api.bounty_claims_activity().then(function(bounty_claims) {
       // set status of claims
       for (var i=0; i<bounty_claims.length; i++) {

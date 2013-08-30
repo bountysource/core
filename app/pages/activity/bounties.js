@@ -6,11 +6,12 @@ angular.module('app')
       .when('/activity/bounties', {
         templateUrl: 'pages/activity/bounties.html',
         controller: 'BountyActivity',
-        resolve: $person,
-        title: ['Bounties', 'Activity']
+        resolve: $person
       });
   })
-  .controller('BountyActivity', function($scope, $routeParams, $api) {
+  .controller('BountyActivity', function($scope, $routeParams, $api, $pageTitle) {
+    $pageTitle.set('Bounties', 'Activity');
+
     $scope.bounties = $api.call("/user/bounties");
 
     $scope.toggle_anonymous = function(bounty) {
