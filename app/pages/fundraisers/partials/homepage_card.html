@@ -6,7 +6,7 @@
     </div>
 
     <div class="span10" style="white-space: nowrap; text-overflow: ellipsis;  overflow: hidden;">
-      <strong><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-title-{{fundraiser.id}}" >{{fundraiser.title}}</a></strong>
+      <strong><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-title-{{fundraiser.id}}" >{{fundraiser.title|truncate:44-fundraiser.person.display_name.length}}</a></strong>
       <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}" id="home-fr-person-{{fundraiser.id}}">{{fundraiser.person.display_name}}</a></small>
       <br />
       <small class="muted"><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-desc-{{fundraiser.id}}">{{fundraiser.short_description | truncate:70}}</a></small>
