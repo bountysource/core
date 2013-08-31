@@ -1,15 +1,30 @@
-<div style="margin-bottom: 10px; padding: 2px;">
+<!--  ng-href="/fundraisers/{{fundraiser.slug}}" -->
+<a ng-href="/fundraisers/{{fundraiser.slug}}">
+<div style="margin-bottom: 10px; padding: 12px;" class="fundraiser-card-wrapper">
+<style>
+    .fundraiser-card-wrapper {
+        transition: 0.2s all ease-in-out 0s;
+        -webkit-transition: 0.2s all ease-in-out 0s;
+        -moz-transition: 0.2s all ease-in-out 0s;
+        -ms-transition: 0.2s all ease-in-out 0s;
+        -o-transition: 0.2s all ease-in-out 0s;
+    }
+    .fundraiser-card-wrapper:hover {
+        background-color: rgb(220, 220, 220) ;
+        box-shadow: 0px 0px 5px rgb(200, 200, 200);
+    }
+</style>
   <div class="row-fluid">
     <div class="span2">
-      <a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-img-{{fundraiser.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
-      </a>
+      <span  id="home-fr-img-{{fundraiser.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
+      </span>
     </div>
 
     <div class="span10">
-      <strong><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-title-{{fundraiser.id}}" >{{fundraiser.title}}</a></strong>
-      <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}" id="home-fr-person-{{fundraiser.id}}">{{fundraiser.person.display_name}}</a></small>
+      <strong>{{fundraiser.title}}</strong>
+      <small class="muted">by {{fundraiser.person.display_name}}</small>
       <br />
-      <small class="muted"><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-desc-{{fundraiser.id}}">{{fundraiser.short_description | truncate:70}}</a></small>
+      <small class="muted">{{fundraiser.short_description | truncate:70}}</small>
       <br />
       <div class="progress progress-striped" style="margin: 0; width: 60%; display: inline-block; vertical-align: middle;">
         <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
@@ -18,3 +33,4 @@
     </div>
   </div>
 </div>
+</a>
