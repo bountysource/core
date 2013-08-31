@@ -1,13 +1,31 @@
-<div class="row-fluid">
-  <div class="span2">
-    <a ng-href="/trackers/{{project.slug}}" id="home-tr-img-{{project.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{project.image_url}})">
-    </a>
-  </div>
-  <div class="span10">
-    <strong><a ng-href="/trackers/{{project.slug}}" id="home-tr-name-{{project.id}}">{{project.name}}</a></strong>
-    <br />
-    <small class="muted">{{project.description | truncate:70}}</small>
-    <br />
-    <small class="text-success"><strong>{{project.bounty_total | dollars}}</strong> in bounties</small>
-  </div>
-</div>
+<a ng-href="/trackers/{{project.slug}}">
+    <div class="row-fluid project-card-wrapper">
+      
+      <div class="span2">
+        <span id="home-tr-img-{{project.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{project.image_url}})">
+        </span>
+      </div>
+      <div class="span10">
+        <strong>{{project.name}}</strong>
+        <br />
+        <small class="muted">{{project.description | truncate:70}}</small>
+        <br />
+        <small class="text-success"><strong>{{project.bounty_total | dollars}}</strong> in bounties</small>
+      </div>
+    </div>
+</a>
+
+<style>
+  .project-card-wrapper {
+    padding: 12px;
+      transition: 0.2s all ease-in-out 0s;
+      -webkit-transition: 0.2s all ease-in-out 0s;
+      -moz-transition: 0.2s all ease-in-out 0s;
+      -ms-transition: 0.2s all ease-in-out 0s;
+      -o-transition: 0.2s all ease-in-out 0s;
+  }
+  .project-card-wrapper:hover {
+      background-color: rgba(220, 220, 220) ;
+      box-shadow: 0px 0px 5px rgb(200, 200, 200);
+  }
+</style>
