@@ -11,9 +11,17 @@ angular.module('app')
 
   .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $pageTitle) {
     $scope.bounty = {
-      amount: parseInt($routeParams.amount, 10),
+      amount: parseInt($routeParams.amount, 10) || 0,
       anonymous: $routeParams.anonymous || false,
       payment_method: $routeParams.payment_method || 'google'
+    };
+
+    $scope.currencyFormatting = function(value) {
+      return "$" + value.toString();
+    };
+
+    $scope.validate_bounty_input = function() {
+      $scope.bounty.amount = $scope.bounty.amount || 0;
     };
 
     // alert above the issue title about bounty status
