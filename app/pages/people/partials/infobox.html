@@ -1,6 +1,9 @@
 <div class="well person-infobox">
   <div><img ng-src="{{person.large_image_url}}" /></div>
-  <h2 ng-show="!person.display_name">{{person.first_name}} {{person.last_name}}</h2>
+  <h2 ng-show="!person.display_name">
+    <span ng-show="person.first_name!='[unknown]'">{{person.first_name}}</span>
+    <span ng-show="person.last_name!='[unknown]'">{{person.last_name}}</span>
+  </h2>
   <h3>{{person.display_name}}</h3>
   <h4 ng-show="person.company">Company: {{person.company}}</h4>
   <p ng-show="person.location"><strong>Location: </strong> {{person.location}}</p>
