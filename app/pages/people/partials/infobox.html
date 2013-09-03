@@ -1,14 +1,18 @@
 <div class="well person-infobox">
   <div><img ng-src="{{person.large_image_url}}" /></div>
-  <h2>{{person.first_name}} {{person.last_name}}</h2>
+  <h2 ng-show="!person.display_name">
+    <span ng-show="person.first_name!='[unknown]'">{{person.first_name}}</span>
+    <span ng-show="person.last_name!='[unknown]'">{{person.last_name}}</span>
+  </h2>
   <h3>{{person.display_name}}</h3>
-  <h4>{{person.company}}</h4>
-  <p><strong></strong> {{person.location}}</p>
-  <p><strong></strong> {{person.bio}}</p>
-  <p><strong></strong> {{person.url}}</p>
+  <h4 ng-show="person.company">Company: {{person.company}}</h4>
+  <p ng-show="person.location"><strong>Location: </strong> {{person.location}}</p>
+  <p ng-show="person.bio"><strong>Bio: </strong> {{person.bio}}</p>
+  <p ng-show="person.public_email"><strong>Email: </strong><a ng-href="mailto:{{person.public_email}}">{{person.public_email}}</a></p>
+  <p ng-show="person.url"><strong>URL: </strong><a ng-href="{{person.url}}">{{person.url}}</a></p>
 
   <div ng-show="person.github_account || person.twitter_account || person.facebook_account">
-    Profiles:
+    Linked Accounts:
     <ul>
       <li class="provider-link" ng-show="person.github_account">
         <a ng-href="http://github.com/{{person.github_account.login}}" target="_blank"><img src="images/favicon-github.png"> <span>{{person.github_account.login}}</span></a>
