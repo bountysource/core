@@ -7,21 +7,21 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th style="width: 50px;"></th>
-      <th class="span3">Name</th>
-      <th class="span7">Description</th>
-      <th class="span2" style="text-align: center;">Bounty Total</th>
+      <th style="width: 50px;" class="hidden-phone"></th>
+      <th class="span4">Name</th>
+      <th class="span6 hidden-phone">Description</th>
+      <th class="span2" style="text-align: center;">Bounty <span class="hidden-phone">Total</span></th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="project in projects | filter:filter_method | orderBy:['-bounty_total', '-comment_count']">
-      <td>
+      <td class="hidden-phone">
         <a class="thumbnail" ng-href="/trackers/{{project.slug}}">
           <img ng-src="{{project.image_url || 'images/bountysource-grey.png'}}" style="width: 100%;" />
         </a>
       </td>
-      <td><a ng-href="/trackers/{{project.slug}}">{{project.name}}</a></td>
-      <td class="muted">{{project.description}}</td>
+      <td><img class="visible-phone pull-left" style="width: 20px; height:20px; margin-right:10px" src="{{project.image_url}}"></img><a ng-href="/trackers/{{project.slug}}">{{project.name}}</a></td>
+      <td class="muted hidden-phone">{{project.description}}</td>
       <td style="text-align: center;">
         <div ng-show="project.bounty_total > 0"><strong>{{project.bounty_total | dollars}}</strong></div>
         <div ng-show="project.bounty_total <= 0"><a class="btn" ng-href="/trackers/{{project.slug}}">Add a Bounty</a></div>
