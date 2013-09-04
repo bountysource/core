@@ -149,4 +149,17 @@ angular.module('app')
       }
       $window.document.title = parts.join(' - ');
     };
+  })
+  .service('$metaTags', function ($window) {
+    this.add = function(tags) {
+      var key, value, head, metaTag;
+      head = $window.document.getElementsByTagName('head')[0];
+      for (key in tags) {
+        value           = tags[key];
+        metaTag         = document.createElement('meta');
+        metaTag.name    = key;
+        metaTag.content = value;
+        head.appendChild(metaTag);
+      }
+    };
   });

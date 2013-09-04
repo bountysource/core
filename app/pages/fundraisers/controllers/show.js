@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
+  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle, $metaTags, $filter) {
     $scope.fundraiser = $api.fundraiser_get($routeParams.id);
 
     // $sanitize but allow iframes (i.e. youtube videos)
@@ -20,6 +20,28 @@ angular.module('app')
         $location.url('/fundraisers').replace();
       } else {
         $pageTitle.set(fundraiser.title, 'Fundraisers');
+        $metaTags.add({
+          'twitter:card':                'product',
+          'twitter:site':                '@bountysource',
+          'twitter:creator':             '',
+          'twitter:title':               fundraiser.title,
+          'twitter:description':         fundraiser.short_description,
+          'twitter:image:src':           fundraiser.large_image_url,
+          'twitter:data1':               $filter('dollars')(fundraiser.total_pledged),
+          'twitter:label1':              'Raised',
+          'twitter:data2':               $filter('dollars')(fundraiser.funding_goal),
+          'twitter:label2':              'Goal',
+          'twitter:domain':              'bountysource.com',
+          'twitter:app:name:iphone':     '',
+          'twitter:app:name:ipad':       '',
+          'twitter:app:name:googleplay': '',
+          'twitter:app:url:iphone':      '',
+          'twitter:app:url:ipad':        '',
+          'twitter:app:url:googleplay':  '',
+          'twitter:app:id:iphone':       '',
+          'twitter:app:id:ipad':         '',
+          'twitter:app:id:googleplay':   ''
+        });
 
         $scope.sanitized_description = "";
         if (fundraiser.description_html) {

@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $pageTitle) {
+  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $pageTitle, $metaTags, $filter) {
     $scope.bounty = {
       amount: parseInt($routeParams.amount, 10),
       anonymous: $routeParams.anonymous || false,
@@ -26,6 +26,29 @@ angular.module('app')
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
 
       $pageTitle.set(issue.title, issue.tracker.name);
+      console.log(issue);
+      $metaTags.add({
+        'twitter:card':                'product',
+        'twitter:site':                '@bountysource',
+        'twitter:creator':             '',
+        'twitter:title':               issue.title,
+        'twitter:description':         issue.short_body,
+        'twitter:image:src':           issue.tracker.large_image_url,
+        'twitter:data1':               $filter('dollars')(issue.bounty_total),
+        'twitter:label1':              'Bounties',
+        'twitter:data2':               issue.bounties.length,
+        'twitter:label2':              $filter('pluralize')('Backer', issue.bounties.length),
+        'twitter:domain':              'bountysource.com',
+        'twitter:app:name:iphone':     '',
+        'twitter:app:name:ipad':       '',
+        'twitter:app:name:googleplay': '',
+        'twitter:app:url:iphone':      '',
+        'twitter:app:url:ipad':        '',
+        'twitter:app:url:googleplay':  '',
+        'twitter:app:id:iphone':       '',
+        'twitter:app:id:ipad':         '',
+        'twitter:app:id:googleplay':   ''
+      });
       // append item number now that we have issue
       $scope.bounty.item_number = "issues/"+issue.id;
 

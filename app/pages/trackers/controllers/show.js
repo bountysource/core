@@ -9,10 +9,32 @@ angular.module('app')
         reloadOnSearch: false
       });
   })
-  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle) {
+  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $metaTags, $filter) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
 
       $pageTitle.set(tracker.name, 'Projects');
+      $metaTags.add({
+        'twitter:card':                'product',
+        'twitter:site':                '@bountysource',
+        'twitter:creator':             '',
+        'twitter:title':               tracker.name,
+        'twitter:description':         tracker.description,
+        'twitter:image:src':           tracker.large_image_url,
+        'twitter:data1':               $filter('dollars')(tracker.bounty_total),
+        'twitter:label1':              'Bounties',
+        'twitter:data2':               tracker.watchers,
+        'twitter:label2':              'Watchers',
+        'twitter:domain':              'bountysource.com',
+        'twitter:app:name:iphone':     '',
+        'twitter:app:name:ipad':       '',
+        'twitter:app:name:googleplay': '',
+        'twitter:app:url:iphone':      '',
+        'twitter:app:url:ipad':        '',
+        'twitter:app:url:googleplay':  '',
+        'twitter:app:id:iphone':       '',
+        'twitter:app:id:ipad':         '',
+        'twitter:app:id:googleplay':   ''
+      });
 
       $scope.init_tags(tracker);
 
