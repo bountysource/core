@@ -11,20 +11,13 @@
   <br />
   <ng-form name="form">
     <div class="controls controls-row">
-      <button ng-click="bounty.amount = 15" ng-disabled="bounty.amount==15" class="span4 btn btn-primary btn-block" type="button">$15</button>
-      <button ng-click="bounty.amount = 35" ng-disabled="bounty.amount==35" class="span4 btn btn-primary btn-block" type="button">$35</button>
-      <button ng-click="bounty.amount = 50" ng-disabled="bounty.amount==50" class="span4 btn btn-primary btn-block" type="button">$50</button>
+      <slider floor="0" ceiling="1000" ng-model="bounty.amount" translate="currencyFormatting"></slider>
     </div>
 
+    <span class="muted">Customize amount</span>
     <div class="controls controls-row">
-      <button ng-click="bounty.amount = 100" ng-disabled="bounty.amount==100" class="span4 btn btn-primary btn-block" type="button">$100</button>
-      <button ng-click="bounty.amount = 250" ng-disabled="bounty.amount==250" class="span4 btn btn-primary btn-block" type="button">$250</button>
-      <button ng-click="bounty.amount = 500" ng-disabled="bounty.amount==500" class="span4 btn btn-primary btn-block" type="button">$500</button>
-    </div>
-
-    <div class="controls controls-row">
-      <button class="span4 btn btn-primary btn-block" ng-disabled="bounty.amount==1000" ng-click="bounty.amount = 1000">$1000</button>
-      <input integer-only name="amount" type="number" min="5" ng-model="bounty.amount" class="span8 input-small" placeholder="Other amount" ng-change="validate_bounty_input()" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus"/>
+      <span class="span1" style="line-height:30px">$</span>
+      <input integer-only name="amount" type="text" min="5" ng-model="bounty.amount" class="span11 input-small" ng-change="validate_bounty_input()" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus"/>
     </div>
 
     <div collapse="!bounty.amount || bounty.amount <= 0">
