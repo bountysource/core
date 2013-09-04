@@ -10,9 +10,31 @@
   </div>
 
   <div class="span8">
-    <ng-include src="'pages/people/partials/tabs.html'"></ng-include>
+    <h2 style="margin-top: 0;">{{person.display_name}}'s Recent Activity</h2>
+    <table id="person-timeline-table" class="table table-striped">
+      <tbody>
+      <tr ng-repeat="action in timeline">
+        <td ng-show="action.type == 'pledge'">
+          <strong>{{ person.display_name }}</strong> pledged <strong>{{ action.amount | dollars }}</strong> to <a ng-href="/fundraisers/{{ action.target_slug }}">{{ action.target_name }}</a>
+        </td>
 
-    <ng-include src="'pages/people/partials/timeline.html'"></ng-include>
+        <td ng-show="action.type == 'bounty'">
+          <strong>{{ person.display_name }}</strong> placed a <strong>{{ action.amount | dollars }}</strong> bounty on <a ng-href="/issues/{{ action.target_slug }}">{{ action.target_name }}</a>
+        </td>
+
+        <!--<td ng-show="action.type == 'tracker_plugin'">-->
+        <!--<strong>{{ person.display_name }}</strong> installed the <a ng-href="/tools">GitHub plugin</a> for <a ng-href="/trackers/{{ action.target_slug }}">{{ action.target_name }}</a>-->
+        <!--</td>-->
+
+        <td class="muted">{{ action.created_at | date:'medium' }}</td>
+      </tr>
+      <tr>
+        <td>
+          Joined the Bountysource family
+        </td>
+        <td class="muted">{{ person.created_at | date:'medium' }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-
 </div>

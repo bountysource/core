@@ -1,7 +1,7 @@
 <div class="well person-infobox">
   <div><img ng-src="{{person.large_image_url}}" /></div>
   <h3>{{person.display_name}}</h3>
-  <table class="table">
+  <table id="person-profile-sidebar" class="table">
     <tr ng-show="person.company">
       <td>
         Company:
@@ -15,7 +15,7 @@
         Location:
       </td>
       <td>
-        {{person.location}}
+        <div>{{person.location}}</div>
       </td>
     </tr>
     <tr ng-show="person.bio">
@@ -47,7 +47,7 @@
         Linked accounts:
       </td>
       <td>
-        <ul>
+        <ul style="margin: 0;">
           <li class="provider-link" ng-show="person.github_account">
             <a ng-href="http://github.com/{{person.github_account.login}}" target="_blank"><img src="images/favicon-github.png"> <span>{{person.github_account.login}}</span></a>
           </li>
