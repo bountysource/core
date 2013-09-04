@@ -11,19 +11,31 @@
 
   <section id="users">
     <div class="container">
-      <h3 class="text-center" style="margin: 0;">Top Developers {{ has_webp }}</h3>
-      <ul class="inline">
-        <li ng-repeat="person in people.developers.top.slice(0,18)">
-          <a ng-href="/people/{{person.slug}}" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
-        </li>
-      </ul>
       <h3 class="text-center" style="margin: 0;">Top Backers</h3>
       <ul class="inline">
         <li ng-repeat="person in people.backers.top.slice(0,18)">
           <a ng-href="/people/{{person.slug}}" id="home-back-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
         </li>
       </ul>
+      <div class="row-fluid">
+      <div class="span6">
+      <h3 class="text-center" style="margin: 0;">Top Developers {{ has_webp }}</h3>
+      <ul class="inline">
+        <li ng-repeat="person in people.developers.top.slice(0,8)">
+          <a ng-href="/people/{{person.slug}}" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+        </li>
+      </ul>
     </div>
+    <div class="span6">
+      <h3 class="text-center" style="margin: 0;">Top Earners {{ has_webp }}</h3>
+      <ul class="inline">
+        <li ng-repeat="person in people.earners.top.slice(0,8)">
+          <a ng-href="/people/{{person.slug}}" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
   </section>
 
   <section id="fundraisers">
