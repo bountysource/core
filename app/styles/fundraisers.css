@@ -33,3 +33,7 @@ table.pledges-table tr td img.thumbnail {
 }
 
 table.top-backers-table td { border-top: 0; }
+
+table.update_table th:nth-child(2) {
+  width: 30%;
+}

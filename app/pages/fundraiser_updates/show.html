@@ -16,39 +16,48 @@
   </div>
 
   <div class="span9">
-    <div ng-show="update" ng-controller="FundraisersController">
+    <div class="row-fluid">
+      <div class="span9">
+        <div ng-show="update" ng-controller="FundraisersController">
 
-      <div ng-show="update.published_at">
-        <h2><span class="text-success">#{{ update.number }}</span> {{ update.title }}</h2>
-        <div class="muted">Published {{ update.published_at | date }}</div>
+          <div ng-show="update.published_at">
+            <h2><span class="text-success">#{{ update.number }}</span> {{ update.title }}</h2>
+            <div class="muted">Published {{ update.published_at | date }}</div>
+          </div>
+
+          <div ng-hide="update.published_at">
+            <div class="alert alert-info"><strong>Note:</strong> This update has not been published. When you are ready to ship it, click the Publish button to the right!</div>
+            <h2><span class="text-info">#{{ fundraiser.updates.length }}</span> {{ update.title || 'Untitled' }}</h2>
+            <div class="muted">Last modified {{ update.updated_at | date }}</div>
+          </div>
+
+          <div style="float: right; margin-top: -70px">
+            <a class="btn" ng-hide="update.published_at" ng-href="/fundraisers/{{fundraiser.slug}}/updates/{{update.id}}/edit">
+              <i class="icon-pencil"></i>
+              Edit
+            </a>
+            <button ng-click="publish()" ng-hide="update.published_at" class="btn btn-success">
+              <i class="icon-globe icon-white"></i>
+              Publish
+            </button>
+            <button ng-click="destroy()" ng-hide="update.published_at" class="btn btn-danger">
+              <i class="icon icon-trash icon-white"></i>
+              Delete
+            </button>
+          </div>
+
+          <br />
+          <div ng-bind-html="update.body_html"></div>
+        </div>
       </div>
+      <div class="span3">
+        <div ng-include="'pages/fundraiser_updates/partials/top_backers.html'"></div>
 
-      <div ng-hide="update.published_at">
-        <div class="alert alert-info"><strong>Note:</strong> This update has not been published. When you are ready to ship it, click the Publish button to the right!</div>
-        <h2><span class="text-info">#{{ fundraiser.updates.length }}</span> {{ update.title || 'Untitled' }}</h2>
-        <div class="muted">Last modified {{ update.updated_at | date }}</div>
+        <div ng-show="fundraiser.rewards.length > 0">
+          <h3>Rewards</h3>
+          <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+        </div>
       </div>
-
-      <div style="float: right; margin-top: -70px">
-        <a class="btn" ng-hide="update.published_at" ng-href="/fundraisers/{{fundraiser.slug}}/updates/{{update.id}}/edit">
-          <i class="icon-pencil"></i>
-          Edit
-        </a>
-        <button ng-click="publish()" ng-hide="update.published_at" class="btn btn-success">
-          <i class="icon-globe icon-white"></i>
-          Publish
-        </button>
-        <button ng-click="destroy()" ng-hide="update.published_at" class="btn btn-danger">
-          <i class="icon icon-trash icon-white"></i>
-          Delete
-        </button>
-      </div>
-
-
-
-
-      <br />
-      <div ng-bind-html="update.body_html"></div>
     </div>
   </div>
 </div>

@@ -6,11 +6,12 @@ angular.module('app')
       .when('/activity/fundraisers', {
         templateUrl: 'pages/activity/fundraisers.html',
         controller: 'FundraiserActivity',
-        resolve: $person,
-        title: ['Fundraisers', 'Activity']
+        resolve: $person
       });
   })
-  .controller('FundraiserActivity', function($scope, $routeParams, $api) {
+  .controller('FundraiserActivity', function($scope, $routeParams, $api, $pageTitle) {
+    $pageTitle.set('Fundraisers', 'Activity');
+
     $scope.fundraisers = $api.fundraiser_activity();
   });
 

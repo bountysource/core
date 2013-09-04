@@ -9,7 +9,7 @@
   Need something fixed? <a href="/search">Search for issues</a> and place bounties on them!
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped" ng-show="bounties.length > 0">
   <thead>
   <tr>
     <th>Tracker</th>
@@ -26,7 +26,12 @@
   <tbody>
   <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
     <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
-    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }} <issue-status-label issue="bounty.issue"></issue-status-label></a></td>
+    <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
+      <span ng-show="bounty.status == 'refunded'" class="label label-warning">Refunded</span>
+      <div ng-hide="bounty.status == 'refunded'">
+        <issue-status-label issue="bounty.issue"></issue-status-label>
+      </div>
+    </a></td>
     <td>{{ bounty.amount | dollars }}</td>
     <td>{{ bounty.created_at | date }}</td>
 

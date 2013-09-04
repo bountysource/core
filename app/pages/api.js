@@ -255,6 +255,10 @@ angular.module('api.bountysource',[]).
       return this.call("/projects/"+id+"/issues");
     };
 
+    this.tracker_stats = function(id) {
+      return this.call("/stats/trackers/"+id);
+    };
+
     this.issue_get = function(id, callback) {
       return this.call("/issues/"+id, callback).then(function(issue) {
         issue.my_bounty_claim = undefined;

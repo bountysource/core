@@ -6,11 +6,12 @@ angular.module('app')
       .when('/activity/pledges', {
         templateUrl: 'pages/activity/pledges.html',
         controller: 'PledgeActivity',
-        resolve: $person,
-        title: ['Pledges', 'Activity']
+        resolve: $person
       });
   })
-  .controller('PledgeActivity', function($scope, $routeParams, $api) {
+  .controller('PledgeActivity', function($scope, $routeParams, $api, $pageTitle) {
+    $pageTitle.set('Pledges', 'Activity');
+
     $scope.pledges = $api.call("/user/pledges").then(function(pledges) {
       for (var i=0; i<pledges.length; i++) { $scope.$init_pledge(pledges[i]); }
       return pledges;
