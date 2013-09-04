@@ -15,6 +15,7 @@ angular.module('app')
       $pageTitle.set(tracker.name, 'Projects');
 
       $scope.init_tags(tracker);
+      $scope.issues_loaded = false;
 
       // follow and unfollow API method wrappers
       tracker.follow = function() {
@@ -62,6 +63,7 @@ angular.module('app')
 
     // merge all of the issue arrays into one
     $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+      $scope.issues_loaded = true;
       for (var i=0; i<issues.length; i++) { issues[i].bounty_total = parseFloat(issues[i].bounty_total); }
       return issues;
     });

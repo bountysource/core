@@ -123,6 +123,9 @@
     <!--No issues shown message -->
     <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
 
+    <!--Loading... -->
+    <img src="images/spinner.gif" ng-hide="issues_loaded" />
+
     <!--Table of issues-->
     <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length > 0">
       <thead>
