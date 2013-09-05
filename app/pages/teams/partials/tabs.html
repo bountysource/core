@@ -15,4 +15,7 @@
     <i class="icon-cog"></i>
     Settings
   </a></li>
+  <li ng-show="is_admin" ng-class="{ active: active_tab('account') }"><a ng-href="/teams/{{team.slug}}/account">
+    Add Funds
+  </a></li>
 </ul>

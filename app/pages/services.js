@@ -3,6 +3,7 @@ angular.module('app')
   .service('$payment', function ($rootScope, $location, $window, $log, $api, $cookieStore) {
     // currently only used for bounty and pledge creation.
     // $payment.create({ amount: 15, payment_method: 'google', ... }).process();
+    // NOTE: also used to add money to teams!
     this._default_options = {
       success: function (response) {
         console.log('Payment success', response);
