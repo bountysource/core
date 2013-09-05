@@ -28,7 +28,6 @@ td.imagerow {
 td.noimagerow {
   width: 0px;
 }
-
-.ng-binding li {
-	line-height: 0px;
+.ng-binding li + br {
+  display: none;
 }
