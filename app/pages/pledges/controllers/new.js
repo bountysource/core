@@ -12,7 +12,7 @@ angular.module('app')
   .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $window, $location, $payment, $api) {
     $scope.pledge = {
       amount: parseInt($routeParams.amount, 10) || 100,
-      anonymous: ($routeParams.anonymous == "true") || false,
+      anonymous: ($routeParams.anonymous === "true") || false,
       payment_method: $routeParams.payment_method || "google",
       reward_id: parseInt($routeParams.reward_id, 10) || 0
     };
