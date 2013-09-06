@@ -15,6 +15,10 @@
 
       <div class="row-fluid">
         <div class="span7">
+          <div ng-show="error">
+            <div class="alert alert-error">{{error}}</div>
+          </div>
+
           <form ng-submit="create_payment()" name="form_data" class="form-horizontal">
             <div class="control-group">
               <label class="control-label">From</label>

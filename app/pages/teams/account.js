@@ -23,7 +23,7 @@ angular.module('app')
     };
 
     $scope.team.then(function(team) {
-      $scope.pay_in.item_number = "teams/"+team.id
+      $scope.pay_in.item_number = "teams/"+team.id;
     });
 
     // build the create payment method
@@ -34,7 +34,14 @@ angular.module('app')
       payment_params.cancel_url = $window.location.href;
 
       $payment.process(payment_params, {
-        error: function(response) { console.log("Payment Error:", response); },
+        error: function(response) {
+          // if response is forbidden, the person cannot add money to the team account.
+          if (response.meta.status === 403) {
+            $scope.error = "You are not authorized to add funds to the team account.";
+          } else {
+            $scope.error = response.data.error;
+          }
+        },
 
         noauth: function(response) {
           $api.set_post_auth_url("/fundraisers/" + response.slug + "/pledge", payment_params);

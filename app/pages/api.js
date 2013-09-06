@@ -438,6 +438,10 @@ angular.module('api.bountysource',[]).
       return this.call("/bounty_claims/"+id+"/response/reset", "PUT");
     };
 
+    this.person_teams = function(person_id) {
+      return this.call("/people/"+person_id+"/teams");
+    };
+
 
 
 
