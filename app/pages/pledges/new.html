@@ -77,7 +77,7 @@
                 <label class="checkbox">
                   <input type="checkbox" ng-model="pledge.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && pledge.anonymous" />
                   <span ng-class="{ muted: !can_make_anonymous }">Make anonymous</span>
-                  <small class="text-info" ng-show="!can_make_anonymous">* Cannot make anonymous using a team account</small>
+                  <small class="text-info" ng-show="!can_make_anonymous">* Team pledges cannot be anonymous</small>
                 </label>
               </div>
             </div>
