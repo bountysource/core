@@ -21,7 +21,8 @@
             class="search-query span4"
             placeholder="Search for projects"
             ng-model="project_search"
-            typeahead="project.id as project.name for project in projects | filter:$viewValue | filter:project.$added"
+            typeahead="project.id as project.name for project in doTypeahead($viewValue)"
+            typeahead-editable="false"
           />
         </ng-form>
       </div>

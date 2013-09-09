@@ -14,16 +14,16 @@ angular.module('app')
     $scope.team.then(function(team) {
       $pageTitle.set(team.name, 'Teams');
 
+      $scope.doTypeahead = function($viewValue) {
+        return $api.tracker_typeahead($viewValue);
+      };
+
       $scope.$watch('project_search', function() {
-        if (typeof($scope.project_search) === 'number') {
+        if ($scope.project_search) {
           $api.team_tracker_add(team.slug, $scope.project_search).then(function(updated_team) {
             $scope.set_team(updated_team);
           });
           $scope.project_search = null;
-        } else {
-          $api.tracker_typeahead($scope.project_search).then(function(result) {
-            $scope.projects = result;
-          });
         }
       });
 
