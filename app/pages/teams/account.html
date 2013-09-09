@@ -21,6 +21,13 @@
 
           <form ng-submit="create_payment()" name="form_data" class="form-horizontal">
             <div class="control-group">
+              <label class="control-label">Current Balance</label>
+              <div class="controls">
+                <strong style="line-height: 30px;">{{team.account_balance | dollars}}</strong>
+              </div>
+            </div>
+
+            <div class="control-group">
               <label class="control-label">From</label>
               <div class="controls">
                 <label class="radio" style="margin-left: 5px;">
@@ -59,7 +66,6 @@
           <div class="well">
             <h4 style="margin-top: 0;">Team Account</h4>
             <p>This account is shared by the <strong>spenders</strong> of the team to create <strong>bounties</strong> and <strong>pledges</strong>.</p>
-            <p>Current balance: <strong>{{team.account_balance | currency}}</strong></p>
           </div>
         </div>
       </div>
