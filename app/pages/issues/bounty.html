@@ -14,6 +14,8 @@
       <div class="control-group">
         <label class="control-label">Payment Method:</label>
         <div class="controls">
+          <h5>Personal</h5>
+
           <!-- Google Wallet -->
           <label class="radio">
             <input type="radio" ng-model="bounty.payment_method" value="google" />
@@ -30,7 +32,6 @@
 
           <!-- Personal account -->
           <div ng-show="current_person && current_person.account.balance > 0">
-            <h5>Personal</h5>
             <label class="radio">
               <input type="radio" ng-model="bounty.payment_method" value="personal" />
               <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
