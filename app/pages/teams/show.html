@@ -26,6 +26,10 @@
         </ng-form>
       </div>
 
+      <div ng-hide="teams.length > 0">
+        <div class="alert alert-info">{{team.name}} has not specified the open-source projects that they use.</div>
+      </div>
+
       <ul class="thumbnails team-tracker-thumbnails">
         <li ng-repeat="tracker in team.trackers" class="span2">
           <a ng-href="/trackers/{{tracker.slug}}" class="thumbnail text-center">
