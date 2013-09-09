@@ -6,7 +6,8 @@ angular.module('app')
       .when('/teams/:id/account', {
         templateUrl: 'pages/teams/account.html',
         controller: 'BaseTeamController',
-        resolve: $person
+        resolve: $person,
+        reloadOnSearch: false
       });
   })
   .controller('TeamAccountController', function ($scope, $routeParams, $location, $api, $payment, $window) {
@@ -15,6 +16,12 @@ angular.module('app')
         $location.path("/teams/"+$routeParams.id).replace();
       }
     });
+
+    // pick off query string to show amount added to account
+    if ($location.search().funds_added) {
+      $scope.funds_added = parseInt($location.search().funds_added, 10) || undefined;
+      $location.search({}).replace();
+    }
 
     $scope.pay_in = {
       amount: 0,
@@ -30,7 +37,7 @@ angular.module('app')
     $scope.create_payment = function() {
       var payment_params = angular.copy($scope.pay_in);
 
-      payment_params.success_url = $window.location.href;
+      payment_params.success_url = $window.location.href+"?funds_added="+$scope.pay_in.amount;
       payment_params.cancel_url = $window.location.href;
 
       $payment.process(payment_params, {
