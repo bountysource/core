@@ -2,9 +2,9 @@
   <h4 style="margin: 0 0 5px 0;">{{issue.bounties.length | number}} {{ 'Backer' | pluralize:issue.bounties.length }}</h4>
   <ul class="inline" style="margin-bottom: 0;">
     <li ng-repeat="bounty in issue.bounties.slice(0, 15)">
-      <div tooltip="{{bounty.amount | dollars}} - {{bounty.person.display_name}}">
+      <div tooltip="{{bounty.amount | dollars}} - {{bounty.person.display_name || 'Anonymous'}}">
         <owner-profile-link model="bounty" class="thumbnail">
-          <img style="width: 25px; height: 25px;" ng-src="{{bounty.person.image_url}}" />
+          <img style="width: 25px; height: 25px;" ng-src="{{bounty.person.image_url || 'images/anon.jpg'}}" />
         </owner-profile-link>
       </div>
     </li>

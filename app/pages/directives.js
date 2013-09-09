@@ -183,18 +183,22 @@ angular.module('app').
       template: '<a ng-transclude></a>',
       link: function(scope, element) {
         scope.$watch("model", function(model) {
-          if (model) {
-            if (!model.owner_type) {
-              throw("ownerProfileLink: Model is missing owner_type attribute");
-            } else if (!model.person) {
-              throw("ownerProfileLink: Model is missing person");
-            } else if (model.owner_type === "Person") {
-              element.attr("href", "/people/"+model.person.slug);
-            } else if (model.owner_type === "Team") {
-              element.attr("href", "/teams/"+model.person.slug);
-            } else {
-              throw("ownerProfileLink: Unexpected owner_type:", model.owner_type);
+          try {
+            if (model) {
+              if (!model.owner_type) {
+                throw("Model is missing owner_type attribute");
+              } else if (!model.person) {
+                throw("Model is missing person");
+              } else if (model.owner_type === "Person") {
+                element.attr("href", "/people/"+model.person.slug);
+              } else if (model.owner_type === "Team") {
+                element.attr("href", "/teams/"+model.person.slug);
+              } else {
+                throw("Unexpected owner_type:", model.owner_type);
+              }
             }
+          } catch(e) {
+            console.log("ownerProfileLink: ", e);
           }
         });
       }
