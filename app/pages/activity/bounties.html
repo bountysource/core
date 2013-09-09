@@ -28,9 +28,9 @@
     <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
     <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
       <span ng-show="bounty.status == 'refunded'" class="label label-warning">Refunded</span>
-      <div ng-hide="bounty.status == 'refunded'">
+      <span ng-hide="bounty.status == 'refunded'">
         <issue-status-label issue="bounty.issue"></issue-status-label>
-      </div>
+      </span>
     </a></td>
     <td>{{ bounty.amount | dollars }}</td>
     <td>{{ bounty.created_at | date }}</td>
