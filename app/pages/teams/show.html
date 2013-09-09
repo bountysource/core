@@ -12,7 +12,7 @@
     <div class="span9" ng-controller="TeamTrackersController">
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
-      <div ng-show="is_admin">
+      <div ng-show="is_admin && team.trackers.length <= 0">
         <div class="alert" style="padding: 20px;">
           <h4 style="margin-top: 0;">Show off the open-source projects your team uses by adding them now!</h4>
           <p>Search for projects that your team uses and add them to your profile.</p>
