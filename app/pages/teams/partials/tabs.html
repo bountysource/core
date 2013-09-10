@@ -7,6 +7,9 @@
     Members
     <span class="badge badge-info" ng-show="members.length > 0">{{(members | filter:{ is_public: true }).length | number}}</span>
   </a></li>
+  <li ng-class="{ active: active_tab('activity') }"><a ng-href="/teams/{{team.slug}}/activity">
+    Activity
+  </a></li>
   <li ng-show="is_admin" ng-class="{ active: active_tab('manage_members') }"><a ng-href="/teams/{{team.slug}}/members/manage">
     <i class="icon-lock"></i>
     Manage Members
