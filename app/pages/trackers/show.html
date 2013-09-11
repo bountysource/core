@@ -154,7 +154,8 @@
           </td>
 
           <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"  tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom">
+            <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
+
               {{issue.bounty_total | dollars:{space:true} }}
             </a>
           </td>
@@ -167,21 +168,21 @@
           <!--</td>-->
 
           <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning" ng-show="issue.thumbs_up_count > 0" tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning" ng-show="issue.thumbs_up_count > 0"> <!-- TODO (PERF ISSUE):  tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom"-->
               <i class="icon-thumbs-up icon-white"></i>
               {{issue.thumbs_up_count | number}}
             </a>
           </td>
 
           <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important" ng-show="issue.participants_count > 1" tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important" ng-show="issue.participants_count > 1"> <!--  TODO (PERF ISSUE):  tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom"-->
               <i class="icon-user icon-white"></i>
               {{issue.participants_count | number}}
             </a>
           </td>
 
           <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info" tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info"> <!--tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom"-->
               {{issue.created_at | time_ago_short }}
             </a>
           </td>

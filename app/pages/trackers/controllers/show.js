@@ -62,7 +62,14 @@ angular.module('app')
 
     // merge all of the issue arrays into one
     $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
-      for (var i=0; i<issues.length; i++) { issues[i].bounty_total = parseFloat(issues[i].bounty_total); }
+      for (var i=0; i<issues.length; i++) {
+        issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+
+        // sorting doesn't like nulls.. this is a quick hack
+        issues[i].participants_count = issues[i].participants_count || 0;
+        issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+        issues[i].comment_count = issues[i].comment_count || 0;
+      }
       return issues;
     });
 
