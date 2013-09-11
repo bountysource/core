@@ -167,7 +167,7 @@ angular.module('app').
       scope: {
         domain: "@"
       },
-      template: '<img ng-src="http://www.google.com/s2/favicons?domain={{domain}}" />'
+      template: '<img ng-src="https://www.google.com/s2/favicons?domain={{domain}}" />'
     };
   }).
   directive('ownerProfileLink', function() {
