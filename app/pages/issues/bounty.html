@@ -80,7 +80,7 @@
         <div class="controls">
           <label class="checkbox">
             <input type="checkbox" ng-model="bounty.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && bounty.anonymous" />
-            <span ng-class="{ muted: !can_make_anonymous }">Make anonymous</span>
+            <span ng-class="{ muted: !can_make_anonymous }">Post anonymously</span>
             <small class="text-info" ng-show="!can_make_anonymous">* Team bounties cannot be anonymous</small>
           </label>
         </div>
