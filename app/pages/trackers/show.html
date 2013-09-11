@@ -143,9 +143,12 @@
 
       <tbody>
         <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
-          <td class="span8">
+          <td>
+            <span ng-show="issue.bounty_total > 0" class="badge badge-success">{{issue.bounty_total | dollars}}</span>
+          </td>
+          <td class="span7">
+            <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
             <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
-              <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
               {{issue.title}}
               <span ng-show="issue.paid_out" class="label label-info">paid out</span>
               <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
