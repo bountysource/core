@@ -16,7 +16,7 @@
 
       <div class="row-fluid">
         <div class="span8">
-          <table class="table table-hover">
+          <table class="table table-hover" ng-show="members.length > 0">
             <thead>
             <tr>
               <th style="width: 30%; text-align: center;"></th>
@@ -53,14 +53,16 @@
             </tbody>
           </table>
 
-          <div class="alert alert-error" ng-show="new_member.error">
-            {{new_member.error}}
+          <div ng-show="new_member.error">
+            <alert type="'error'" close="new_member.error = null">{{new_member.error}}</alert>
           </div>
 
           <!-- Add new member input -->
-          <form ng-submit="add_member()">
-            <span style="margin-right: 5px;"><strong class="">Add member:</strong></span>
-            <input type="email" class="search-query span6" ng-model="new_member.email" placeholder="Member email address" />
+          <form ng-submit="add_member()" name="add_member_form" style="text-align: center;">
+            <strong style="line-height: 25px;">Add member:</strong>
+            <input id="email" name="email" type="email" class="search-query span6" ng-model="new_member.email" placeholder="Member email address" />
+            <button type="submit" class="btn btn-primary" ng-disabled="!new_member.email || add_member_form.email.$invalid">Add</button>
+            <p class="text-info" style="margin-top: 10px;">To add a member, enter the email address associated with their account.</p>
           </form>
         </div>
         <div class="span4">
