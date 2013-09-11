@@ -61,7 +61,7 @@
 
             <div class="control-group">
               <div class="controls">
-                <button type="submit" class="btn btn-primary">Add Funds</button>
+                <button type="submit" class="btn btn-primary" ng-disabled="!pay_in.amount || form_data.amount.$invalid">Add Funds</button>
               </div>
             </div>
           </form>

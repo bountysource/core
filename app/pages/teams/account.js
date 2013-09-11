@@ -35,25 +35,27 @@ angular.module('app')
 
     // build the create payment method
     $scope.create_payment = function() {
-      var payment_params = angular.copy($scope.pay_in);
+      if ($scope.pay_in.amount && angular.isNumber($scope.pay_in.amount)) {
+        var payment_params = angular.copy($scope.pay_in);
 
-      payment_params.success_url = $window.location.href+"?funds_added="+$scope.pay_in.amount;
-      payment_params.cancel_url = $window.location.href;
+        payment_params.success_url = $window.location.href+"?funds_added="+$scope.pay_in.amount;
+        payment_params.cancel_url = $window.location.href;
 
-      $payment.process(payment_params, {
-        error: function(response) {
-          // if response is forbidden, the person cannot add money to the team account.
-          if (response.meta.status === 403) {
-            $scope.error = "You are not authorized to add funds to the team account.";
-          } else {
-            $scope.error = response.data.error;
+        $payment.process(payment_params, {
+          error: function(response) {
+            // if response is forbidden, the person cannot add money to the team account.
+            if (response.meta.status === 403) {
+              $scope.error = "You are not authorized to add funds to the team account.";
+            } else {
+              $scope.error = response.data.error;
+            }
+          },
+
+          noauth: function(response) {
+            $api.set_post_auth_url("/fundraisers/" + response.slug + "/pledge", payment_params);
+            $location.url("/signin");
           }
-        },
-
-        noauth: function(response) {
-          $api.set_post_auth_url("/fundraisers/" + response.slug + "/pledge", payment_params);
-          $location.url("/signin");
-        }
-      });
+        });
+      }
     };
   });
