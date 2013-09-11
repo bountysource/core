@@ -27,21 +27,27 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="member in members">
+            <tr ng-repeat="member in members" ng-class="{ 'info': (member.$dirty) }">
               <td>
                 <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
               </td>
               <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_public" ng-change="update_member(member, 'public')" />
+                <input type="checkbox" ng-model="member.is_public" ng-change="member_changed(member)" />
               </td>
               <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_spender" ng-change="update_member(member, 'spender')" />
+                <input type="checkbox" ng-model="member.is_spender" ng-change="member_changed(member)" />
               </td>
               <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_admin" ng-change="update_member(member, 'admin')" ng-disabled="is_admin && current_person.id == member.id" />
+                <input type="checkbox" ng-model="member.is_admin" ng-change="member_changed(member)" ng-disabled="is_admin && current_person.id == member.id" />
               </td>
               <td style="text-align: center;">
-                <button ng-click="remove_member(member)" class="btn btn-mini btn-danger" ng-disabled="member.id == current_person.id" tooltip="Remove" tooltip-placement="right"><i class="icon-trash icon-white"></i></button>
+                <div collapse="member.$dirty">
+                  <button ng-click="remove_member(member)" class="btn btn-mini btn-danger" ng-disabled="member.id == current_person.id"><i class="icon-trash icon-white"></i></button>
+                </div>
+                <div collapse="!member.$dirty">
+                  <button ng-click="update_member(member)" class="btn btn-mini btn-primary" ><i class="icon-ok icon-white"></i></button>
+                  <button ng-click="cancel_member_changes(member)" class="btn btn-mini" ><i class="icon-remove"></i></button>
+                </div>
               </td>
             </tr>
             </tbody>
