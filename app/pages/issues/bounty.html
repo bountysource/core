@@ -10,6 +10,10 @@
     <div ng-include="'pages/issues/partials/header.html'"></div>
     <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
 
+    <div ng-show="error">
+      <alert type="'error'" close="error = null">{{error}}</alert>
+    </div>
+
     <form name="form" class="form-horizontal" ng-submit="create_payment()">
       <div class="control-group">
         <label class="control-label">Payment Method:</label>

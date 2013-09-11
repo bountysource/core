@@ -37,8 +37,9 @@ angular.module('app')
             // if paying from team, but not a spender
             if ((/\Ateam\/(\d+)\Z/).test(payment_params.payment_method) && response.meta.status === 403) {
               console.log("Forbidden:", response);
+              $scope.error = "You do not have permission to do that.";
             } else {
-              console.log("Payment Error:", response);
+              $scope.error = response.data.error;
             }
           },
 
