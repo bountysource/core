@@ -72,7 +72,8 @@ angular.module('app')
       bounty_max:    $location.search().bounty_max              || null,
       only_valuable: $location.search().only_valuable === 'true' || false,
       hide_closed:   $location.search().hide_closed   === 'true' || false,
-      hide_open:     $location.search().hide_open     === 'true' || false
+      hide_open:     $location.search().hide_open     === 'true' || false,
+      show_paid_out: $location.search().show_paid_out === 'true' || false
     };
 
     $scope.$watch('issue_filter_options', function(filters) {
@@ -97,6 +98,14 @@ angular.module('app')
       var bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
       var bounty_max = parseFloat($scope.issue_filter_options.bounty_max);
 
+      if ($scope.issue_filter_options.show_paid_out ) {
+        return issue.paid_out;
+      }
+
+      if (!$scope.issue_filter_options.show_paid_out && issue.paid_out) {
+        return false;
+      }
+
       if (!isNaN(bounty_min) && bounty_total < bounty_min) {
         return false;
       }
@@ -112,7 +121,7 @@ angular.module('app')
       if ($scope.issue_filter_options.hide_closed) {
         return issue.can_add_bounty;
       }
-      if ($scope.issue_filter_options.hide_open) {
+      if ($scope.issue_filter_options.hide_open && !issue.paid_out) {
         return !issue.can_add_bounty;
       }
       if ($scope.issue_filter_options.text) {

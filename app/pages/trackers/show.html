@@ -117,6 +117,12 @@
             Hide closed issues
           </label>
         </li>
+        <li>
+          <label class="checkbox">
+            <input type="checkbox" ng-model="issue_filter_options.show_paid_out" />
+            Only show paid out issues
+          </lable>
+        </li>
       </ul>
     </div>
 
@@ -141,7 +147,8 @@
             <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
               <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
               {{issue.title}}
-              <span ng-show="!issue.can_add_bounty" class="label label-warning">closed</span>
+              <span ng-show="issue.paid_out" class="label label-info">paid out</span>
+              <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
             </a>
           </td>
           <td class="span1" style="text-align: center">
