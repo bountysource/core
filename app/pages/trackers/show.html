@@ -34,7 +34,7 @@
         </div>
 
         <div class="text-center span6" ng-show="tracker_stats.collected_total > 0">
-          <h3 style="margin:0; line-height:35px;" class="text-center">{{tracker_stats.collected_total | dollars}}</h3>
+          <a ng-click="show_claimed_bounties()"><h3 style="margin:0; line-height:35px;" class="text-center">{{tracker_stats.collected_total | dollars}}</h3></a>
           <div>claimed</div>
         </div>
       </div>
@@ -143,7 +143,7 @@
       </thead>
 
       <tbody>
-        <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+        <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:issue_filter_options.sort:!issue_filter_options.sort_asc" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
           <td>
             <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
               <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
