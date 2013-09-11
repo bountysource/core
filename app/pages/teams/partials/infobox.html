@@ -1,5 +1,13 @@
 <div class="well text-center">
   <div><img ng-src="{{team.large_image_url}}" style="width: 100%;"/></div>
   <br />
+  <div class="row-fluid" ng-show="is_spender || is_admin">
+    <div class="span7 text-right">
+      <strong>Account Balance</strong>
+    </div>
+    <div class="span5 text-left">
+      <span>{{team.account_balance | currency}}</span>
+    </div>
+  </div>
   <div><a class="btn btn-block" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a></div>
 </div>
