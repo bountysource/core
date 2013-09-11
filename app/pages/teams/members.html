@@ -15,7 +15,7 @@
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
       <ul class="thumbnails">
-        <li class="span2 member-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true }">
+        <li class="span2 member-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
           <a ng-href="/people/{{member.slug}}" class="thumbnail">
             <img ng-src="{{member.medium_image_url}}" />
             {{member.display_name}}

@@ -28,7 +28,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="member in members" ng-class="{ 'info': (member.$dirty) }">
+            <tr ng-repeat="member in members | orderBy:'+added_at'" ng-class="{ 'info': (member.$dirty) }">
               <td>
                 <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
               </td>
