@@ -61,24 +61,44 @@ angular.module('app')
     });
 
     $scope.can_make_anonymous = true;
+    $scope.has_fee = true;
 
-    // watch payment method for team account.
-    // if it is, disable the anonymous checkbox
     $scope.$watch("bounty.payment_method", function(payment_method) {
+      // Can make anonymous?
+      // Only team bounties/pledges cannot be made anonymous.
       if ((/^team\/\d+$/).test(payment_method)) {
         $scope.can_make_anonymous = false;
       } else {
         $scope.can_make_anonymous = true;
       }
+
+      // Bountysource charges a fee?
+      // Only personal accounts are exempt from the fee.
+      if (payment_method === "personal") {
+        $scope.has_fee = false;
+      } else {
+        $scope.has_fee = true;
+      }
+    });
+
+    // when fee changes, so does the total
+    $scope.$watch("has_fee", function(has_fee) {
+      if (has_fee === true) {
+        $scope.bounty.fee = $scope.bounty.total * 0.10;
+        $scope.bounty.total += $scope.bounty.fee;
+      } else if (has_fee === false) {
+        $scope.bounty.total -= $scope.bounty.fee;
+        $scope.bounty.fee = 0;
+      }
     });
 
     $scope.$watch("bounty.amount", function(amount) {
       if (angular.isNumber(amount)) {
-        $scope.bounty.fee = $filter('currency')(amount * 0.10);
-        $scope.bounty.total = $filter('currency')(amount * 1.10);
+        $scope.bounty.fee = $scope.has_fee ? amount * 0.10 : 0;
+        $scope.bounty.total = $scope.has_fee ? (amount + $scope.bounty.fee) : amount;
       } else {
-        $scope.bounty.fee = $filter('currency')(0);
-        $scope.bounty.total = $filter('currency')(0);
+        $scope.bounty.total = 0;
+        $scope.bounty.fee = 0;
       }
     });
   });
