@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('CreateBountyController', function ($scope, $routeParams, $window, $location, $payment, $api, $filter) {
+  .controller('CreateBountyController', function ($scope, $routeParams, $window, $location, $payment, $api) {
     $scope.bounty = {
       amount: parseInt($routeParams.amount || 0, 10),
       anonymous: ($routeParams.anonymous === "true") || false,
