@@ -14,8 +14,6 @@
       <div class="control-group">
         <label class="control-label">Payment Method:</label>
         <div class="controls">
-          <h5>Personal</h5>
-
           <!-- Google Wallet -->
           <label class="radio">
             <input type="radio" ng-model="bounty.payment_method" value="google" />
@@ -41,7 +39,6 @@
 
           <!-- Team accounts -->
           <div ng-show="teams.length > 0">
-            <h5>{{'Team' | pluralize:teams.length}}</h5>
             <label ng-repeat="team in teams | orderBy:'-account_balance'" class="radio" ng-show="team.account_balance">
               <input type="radio" ng-model="bounty.payment_method" value="team/{{team.id}}" ng-disabled="team.account_balance <= 0" />
               <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
