@@ -28,9 +28,15 @@ angular.module('app')
       });
 
       $scope.remove_tracker = function(tracker_id) {
-        $api.team_tracker_remove(team.slug, tracker_id).then(function(updated_team) {
-          $scope.set_team(updated_team);
-        });
+        // remove the tracker from array immediately
+        for (var i=0; i<$scope.team.trackers.length; i++) {
+          if ($scope.team.trackers[i].id === tracker_id) {
+            $scope.team.trackers.splice(i,1);
+            break;
+          }
+        }
+        // actually remove the project!
+        $api.team_tracker_remove(team.slug, tracker_id);
       };
     });
   });

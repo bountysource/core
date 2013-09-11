@@ -41,11 +41,11 @@
 
       <ul class="thumbnails team-tracker-thumbnails">
         <li ng-repeat="tracker in team.trackers" class="span2">
-          <a ng-href="/trackers/{{tracker.slug}}" class="thumbnail text-center">
-            <img ng-src="{{tracker.medium_image_url}}"/>
-            {{tracker.name}}
-          </a>
-          <button type="button" ng-show="is_admin" class="close" ng-click="remove_tracker(tracker.id)">&times;</button>
+          <div class="thumbnail text-center">
+            <button type="button" ng-show="is_admin" class="close" ng-click="remove_tracker(tracker.id)"><i class="icon-remove"></i></button>
+            <a ng-href="/trackers/{{tracker.slug}}"><img ng-src="{{tracker.medium_image_url}}"/></a>
+            <a ng-href="/trackers/{{tracker.slug}}">{{tracker.name}}</a>
+          </div>
         </li>
       </ul>
     </div>
