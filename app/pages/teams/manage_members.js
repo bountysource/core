@@ -39,12 +39,8 @@ angular.module('app')
 
       $scope.member_changed = function(member) {
         var master = angular.copy(member.$master);
-
         delete master.$master;
         delete master.$dirty;
-
-        console.log(master, member);
-
         member.$dirty = !angular.equals(member, master);
       };
 
@@ -62,13 +58,11 @@ angular.module('app')
           spender: member.is_spender,
           public: member.is_public
         };
-        $api.team_member_update($routeParams.id, member.id, payload).then(function(update_member) {
-          console.log(update_member);
 
-          for (var k in update_member) { member[k] = update_member[k]; }
-          member.$master = angular.copy(update_member);
-          member.$dirty = false;
-        });
+        member.$master = angular.copy(member);
+        member.$dirty = false;
+
+        $api.team_member_update($routeParams.id, member.id, payload);
       };
 
       $scope.remove_member = function(member) {

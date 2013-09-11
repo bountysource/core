@@ -20,7 +20,8 @@ angular.module('app')
       $scope.form_data = {
         name: team.name,
         slug: team.slug,
-        url: team.url
+        url: team.url,
+        bio: team.bio
       };
 
       $scope.save_team = function() {
