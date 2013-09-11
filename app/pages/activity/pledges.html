@@ -68,8 +68,13 @@
         Anonymized
       </button>
     </td>
+
     <td ng-hide="pledge.anonymous">
-      <button class="btn btn-small btn-block btn-success" ng-click="toggle_anonymous(pledge)">
+      <button class="btn btn-small btn-block btn-success" ng-click="toggle_anonymous(pledge)" ng-hide="pledge.owner_type == 'Team'">
+        <i class="icon-eye-open icon-white"></i>
+        Publicized
+      </button>
+      <button class="btn btn-small btn-block btn-success disabled" ng-show="pledge.owner_type == 'Team'" tooltip="Team pledges cannot be anonymous">
         <i class="icon-eye-open icon-white"></i>
         Publicized
       </button>

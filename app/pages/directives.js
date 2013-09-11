@@ -143,20 +143,64 @@ angular.module('app').
     };
   }).
   directive('integerOnly', function() {
-  return {
-    require: 'ngModel',
-    link: function(scope, elm, attrs, ctrl) {
-      ctrl.$parsers.unshift(function(viewValue) {
-        if (/^\-?\d*$/.test(viewValue)) {
-          // it is valid
-          ctrl.$setValidity('integer', true);
-          return viewValue;
-        } else {
-          // it is invalid, return undefined (no model update)
-          ctrl.$setValidity('integer', false);
-          return undefined;
-        }
-      });
-    }
-  };
-});
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$parsers.unshift(function(viewValue) {
+          if (/^\-?\d*$/.test(viewValue)) {
+            // it is valid
+            ctrl.$setValidity('integer', true);
+            return viewValue;
+          } else {
+            // it is invalid, return undefined (no model update)
+            ctrl.$setValidity('integer', false);
+            return undefined;
+          }
+        });
+      }
+    };
+  }).
+  directive('favicon', function() {
+    return {
+      restrict: "E",
+      replace: true,
+      scope: {
+        domain: "@"
+      },
+      template: '<img ng-src="https://www.google.com/s2/favicons?domain={{domain}}" />'
+    };
+  }).
+  directive('ownerProfileLink', function() {
+    // Looks at a model and provides a link to its owner's profile.
+    // Polymorphic on model.owner_type
+    return {
+      restrict: "E",
+      transclude: true,
+      replace: true,
+      scope: {
+        model: "="
+      },
+      template: '<a ng-transclude></a>',
+      link: function(scope, element) {
+        scope.$watch("model", function(model) {
+          try {
+            if (model) {
+              if (!model.owner_type) {
+                throw("Model is missing owner_type attribute");
+              } else if (!model.person) {
+                throw("Model is missing person");
+              } else if (model.owner_type === "Person") {
+                element.attr("href", "/people/"+model.person.slug);
+              } else if (model.owner_type === "Team") {
+                element.attr("href", "/teams/"+model.person.slug);
+              } else {
+                throw("Unexpected owner_type:", model.owner_type);
+              }
+            }
+          } catch(e) {
+            console.log("ownerProfileLink: ", e);
+          }
+        });
+      }
+    };
+  });

@@ -133,29 +133,51 @@
     <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length > 0">
       <thead>
         <tr>
-          <th class="span1"><a ng-click="change_order_col('bounty_total')">Bounty</a></th>
-          <th class="span10">Issue Title</th>
-          <th class="span1"><a ng-click="change_order_col('comment_count')">Comments</a></th>
+          <th class="span8">Title</th>
+          <th class="span1" style="text-align: center"><a ng-click="change_order_col('bounty_total')">$</a></th>
+          <th class="span1" style="text-align: center"><a ng-click="change_order_col('participants_count')"><i class="icon-user"></i></a></th>
+          <th class="span1" style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>
+          <th class="span1" style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"><i class="icon-thumbs-up"></i></a></th>
         </tr>
       </thead>
 
       <tbody>
-        <tr ng-repeat="issue in issues | orderBy:order_col:order_reverse | filter:issue_filter" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+        <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
           <td>
             <span ng-show="issue.bounty_total > 0" class="badge badge-success">{{issue.bounty_total | dollars}}</span>
           </td>
           <td class="span7">
             <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
-            <span ng-show="issue.paid_out" class="label label-info">paid out</span>
-            <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
             <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
               {{issue.title}}
+              <span ng-show="issue.paid_out" class="label label-info">paid out</span>
+              <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
             </a>
           </td>
-          <td class="text-center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">
+          <td class="span1" style="text-align: center">
+            <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"  tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom">
+              {{issue.bounty_total | dollars}}
+            </a>
+          </td>
+
+          <td class="span1" style="text-align: center">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info" ng-show="issue.participants_count > 1" tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom">
+              <i class="icon-user icon-white"></i>
+              {{issue.participants_count | number}}
+            </a>
+          </td>
+
+          <td class="span1" style="text-align: center">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info" ng-show="issue.comment_count > 0" tooltip="{{issue.comment_count | number}} Comments" tooltip-placement="bottom">
               <i class="icon-comment icon-white"></i>
               {{issue.comment_count | number}}
+            </a>
+          </td>
+
+          <td class="span1" style="text-align: center">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning" ng-show="issue.thumbs_up_count > 0" tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom">
+              <i class="icon-thumbs-up icon-white"></i>
+              {{issue.thumbs_up_count | number}}
             </a>
           </td>
         </tr>

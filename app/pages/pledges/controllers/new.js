@@ -12,7 +12,7 @@ angular.module('app')
   .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $window, $location, $payment, $api) {
     $scope.pledge = {
       amount: parseInt($routeParams.amount, 10) || 100,
-      anonymous: $routeParams.anonymous || false,
+      anonymous: ($routeParams.anonymous === "true") || false,
       payment_method: $routeParams.payment_method || "google",
       reward_id: parseInt($routeParams.reward_id, 10) || 0
     };
@@ -66,4 +66,22 @@ angular.module('app')
         $scope.pledge.amount = reward.amount;
       }
     };
+
+    // if logged in, populate teams accounts!
+    $scope.$watch("current_person", function(person) {
+      if (person) {
+        $scope.teams = $api.person_teams(person.id);
+      }
+    });
+
+    $scope.can_make_anonymous = true;
+    // watch payment method for team account.
+    // if it is, disable the anonymous checkbox
+    $scope.$watch("pledge.payment_method", function(payment_method) {
+      if ((/^team\/\d+$/).test(payment_method)) {
+        $scope.can_make_anonymous = false;
+      } else {
+        $scope.can_make_anonymous = true;
+      }
+    });
   });

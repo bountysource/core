@@ -3,19 +3,21 @@ angular.module('app')
   .service('$payment', function ($rootScope, $location, $window, $log, $api, $cookieStore) {
     // currently only used for bounty and pledge creation.
     // $payment.create({ amount: 15, payment_method: 'google', ... }).process();
+    // NOTE: also used to add money to teams!
     this._default_options = {
       success: function (response) {
         console.log('Payment success', response);
       },
-      error:   function (response) {
+      error: function (response) {
         console.log('Payment error', response);
       },
-      noauth:  function (response) {
+      noauth: function (response) {
         console.log('Payment noauth', response);
       }
     };
     this.process = function (data, options) {
       options = angular.extend(angular.copy(this._default_options), options);
+
       $api.call("/payments", "POST", data, function (response) {
         if (response.meta.success) {
           if (data.payment_method === 'google') {

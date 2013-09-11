@@ -388,6 +388,10 @@ angular.module('api.bountysource',[]).
       return this.call("/teams/"+team_id+"/members/"+member_id, "PUT", data);
     };
 
+    this.team_activity = function(team_id) {
+      return this.call("/teams/"+team_id+"/activity");
+    };
+
     this.tracker_typeahead = function(query) {
       if (query && (query.length >= 2)) {
         return this.call("/search/typeahead", "GET", { query: query, type: 'tracker' });
@@ -436,6 +440,10 @@ angular.module('api.bountysource',[]).
 
     this.bounty_claim_reset = function(id) {
       return this.call("/bounty_claims/"+id+"/response/reset", "PUT");
+    };
+
+    this.person_teams = function(person_id) {
+      return this.call("/people/"+person_id+"/teams");
     };
 
 

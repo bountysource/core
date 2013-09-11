@@ -1,13 +1,16 @@
-<div class="row-fluid">
-  <div class="span2">
-    <a ng-href="/trackers/{{project.slug}}" id="home-tr-img-{{project.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{project.image_url}})">
-    </a>
-  </div>
-  <div class="span10">
-    <strong><a ng-href="/trackers/{{project.slug}}" id="home-tr-name-{{project.id}}">{{project.name}}</a></strong>
-    <br />
-    <small class="muted">{{project.description | truncate:70}}</small>
-    <br />
-    <small class="text-success"><strong>{{project.bounty_total | dollars}}</strong> in bounties</small>
+<div class="card">
+  <a ng-href="/trackers/{{project.slug}}" class="link">{{project.name}}</a>
+  <div class="row-fluid">
+    <div class="span2">
+      <a ng-href="/trackers/{{project.slug}}" id="home-tr-img-{{project.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{project.image_url}})">
+      </a>
+    </div>
+    <div class="span10">
+      <strong><a ng-href="/trackers/{{project.slug}}" id="home-tr-name-{{project.id}}">{{project.name}}</a></strong>
+      <br />
+      <small class="muted">{{project.description | truncate:70}}</small>
+      <br />
+      <small class="text-success"><strong>{{project.bounty_total | dollars}}</strong> in bounties</small>
+    </div>
   </div>
 </div>

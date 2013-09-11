@@ -12,18 +12,30 @@
     <div class="span9" ng-controller="TeamTrackersController">
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
-      <div class="well" ng-show="is_admin">
-        <ng-form class="form-inline" name="search_form" ng-submit="search_projects()">
-          Add an open-source project your company uses:
-          <input
-            name="input"
-            type="text"
-            class="search-query span4"
-            placeholder="Search for projects"
-            ng-model="project_search"
-            typeahead="project.id as project.name for project in projects | filter:$viewValue | filter:project.$added"
-          />
-        </ng-form>
+      <div ng-show="is_admin && team.trackers.length <= 0">
+        <div class="alert" style="padding: 20px;">
+          <h4 style="margin-top: 0;">Show off the open-source projects your team uses by adding them now!</h4>
+          <p>Search for projects that your team uses and add them to your profile.</p>
+        </div>
+
+        <div class="well">
+          <ng-form class="form-inline" name="search_form" ng-submit="search_projects()">
+            Add an open-source project your company uses:
+            <input
+              name="input"
+              type="text"
+              class="search-query span4"
+              placeholder="Search for projects"
+              ng-model="project_search"
+              typeahead="project.id as project.name for project in doTypeahead($viewValue)"
+              typeahead-editable="false"
+              />
+          </ng-form>
+        </div>
+      </div>
+
+      <div ng-hide="team.trackers.length > 0 || is_admin">
+        <div class="alert alert-info">{{team.name}} has not added any projects to their profile.</div>
       </div>
 
       <ul class="thumbnails team-tracker-thumbnails">

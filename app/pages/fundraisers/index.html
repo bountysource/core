@@ -12,9 +12,9 @@
 <table class="table table-striped" ng-hide="!selected_fundraisers || (selected_fundraisers | filter:filter_method).length <= 0">
   <thead>
   <tr>
-    <th style="width: 75px;"></th>
+    <th style="width: 75px;" class="hidden-phone"></th>
     <th><a ng-click="change_order('title')">Title</a></th>
-    <th class="span7">Description</th>
+    <th class="span7 hidden-phone">Description</th>
     <th><a ng-click="change_order('funding_goal')">Goal</a></th>
     <th><a ng-click="change_order('total_pledged')">Pledged</a></th>
     <th><a ng-click="change_order('days_remaining')">Time Left</a></th>
@@ -22,15 +22,16 @@
   </thead>
   <tbody>
   <tr ng-repeat="fundraiser in selected_fundraisers | filter:filter_method | orderBy:order_by:order_reverse">
-    <td>
+    <td class="hidden-phone">
       <a class="thumbnail" ng-href="/fundraisers/{{fundraiser.slug}}">
         <img ng-src="{{fundraiser.image_url || 'images/bountysource-grey.png'}}" style="width: 100%;" />
       </a>
     </td>
     <td>
+      <img class="visible-phone pull-left" style="width: 20px; height:20px; margin-right:10px" src="{{fundraiser.image_url}}"></img>
       <a ng-href="/fundraisers/{{fundraiser.slug}}"><span ng-show="fundraiser.featured" class="label label-info">Featured!</span> {{fundraiser.title}}</a>
     </td>
-    <td class="muted">{{fundraiser.short_description}}</td>
+    <td class="muted hidden-phone">{{fundraiser.short_description}}</td>
     <td>{{fundraiser.funding_goal | dollars}}</td>
     <td>{{fundraiser.total_pledged | dollars}}</td>
     <td>
