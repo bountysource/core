@@ -32,6 +32,7 @@ angular.module('app')
           if (member.error) {
             $scope.new_member.error = member.error;
           } else {
+            $scope.new_member.email = "";
             members.push(member);
           }
         });
