@@ -61,10 +61,14 @@
 
                 <!-- Team accounts -->
                 <div ng-show="teams.length > 0">
-                  <label ng-repeat="team in teams | orderBy:'-account_balance'" class="radio" ng-show="team.account_balance">
-                    <input type="radio" ng-model="pledge.payment_method" value="team/{{team.id}}" ng-disabled="team.account_balance <= 0" />
+                  <label ng-repeat="team in teams | orderBy:'-account_balance'" class="radio">
+                    <input type="radio" ng-model="pledge.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_spender || team.account_balance <= 0" />
                     <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
-                    <span ng-class="{ 'muted': (team.account_balance <= 0) }">{{team.name}} <strong>${{ team.account_balance | number }}</strong></span>
+                    <span ng-class="{ 'muted': (!team.is_spender || team.account_balance <= 0) }">
+                      {{team.name}}
+                      <strong ng-show="team.is_spender">{{ team.account_balance | currency }}</strong>
+                      <strong ng-hide="team.is_spender">{{ 0 | currency }}</strong>
+                    </span>
                   </label>
                 </div>
               </div>
