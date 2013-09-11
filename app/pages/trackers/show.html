@@ -133,17 +133,18 @@
     <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length > 0">
       <thead>
         <tr>
-          <th class="span8">Title</th>
-          <th class="span1" style="text-align: center"><a ng-click="change_order_col('bounty_total')">$</a></th>
-          <th class="span1" style="text-align: center"><a ng-click="change_order_col('participants_count')"><i class="icon-user"></i></a></th>
-          <th class="span1" style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>
-          <th class="span1" style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"><i class="icon-thumbs-up"></i></a></th>
+          <th class="span9">Title</th>
+          <th style="text-align: center"><a ng-click="change_order_col('bounty_total')"><span style="color: black">$</span></a></th>
+          <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
+          <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"><i class="icon-thumbs-up"></i></a></th>
+          <th style="text-align: center"><a ng-click="change_order_col('participants_count')"><i class="icon-user"></i></a></th>
+          <th style="text-align: center"><a ng-click="change_order_col('created_at')"><i class="icon-time"></i></a></th>
         </tr>
       </thead>
 
       <tbody>
         <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:order_col:order_reverse" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
-          <td class="span8">
+          <td>
             <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
               <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
               {{issue.title}}
@@ -151,30 +152,37 @@
               <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
             </a>
           </td>
-          <td class="span1" style="text-align: center">
+
+          <td style="text-align: center">
             <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"  tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom">
-              {{issue.bounty_total | dollars}}
+              {{issue.bounty_total | dollars:{space:true} }}
             </a>
           </td>
 
-          <td class="span1" style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info" ng-show="issue.participants_count > 1" tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom">
+          <!--<td style="text-align: center">-->
+            <!--<a ng-href="/issues/{{issue.slug}}/comments" class="label label-info" ng-show="issue.comment_count > 0" tooltip="{{issue.comment_count | number}} Comments" tooltip-placement="bottom">-->
+              <!--<i class="icon-comment icon-white"></i>-->
+              <!--{{issue.comment_count | number}}-->
+            <!--</a>-->
+          <!--</td>-->
+
+          <td style="text-align: center">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning" ng-show="issue.thumbs_up_count > 0" tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom">
+              <i class="icon-thumbs-up icon-white"></i>
+              {{issue.thumbs_up_count | number}}
+            </a>
+          </td>
+
+          <td style="text-align: center">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important" ng-show="issue.participants_count > 1" tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom">
               <i class="icon-user icon-white"></i>
               {{issue.participants_count | number}}
             </a>
           </td>
 
-          <td class="span1" style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info" ng-show="issue.comment_count > 0" tooltip="{{issue.comment_count | number}} Comments" tooltip-placement="bottom">
-              <i class="icon-comment icon-white"></i>
-              {{issue.comment_count | number}}
-            </a>
-          </td>
-
-          <td class="span1" style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning" ng-show="issue.thumbs_up_count > 0" tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom">
-              <i class="icon-thumbs-up icon-white"></i>
-              {{issue.thumbs_up_count | number}}
+          <td style="text-align: center">
+            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info" tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom">
+              {{issue.created_at | time_ago_short }}
             </a>
           </td>
         </tr>
