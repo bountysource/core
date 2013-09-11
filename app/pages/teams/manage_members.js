@@ -43,15 +43,17 @@ angular.module('app')
       };
 
       $scope.remove_member = function(member) {
-        $api.team_member_remove($routeParams.id, member.id).then(function() {
-          // remove from the members list
-          for (var i=0; i<members.length; i++) {
-            if (members[i].id === member.id) {
-              members.splice(i,1);
-              break;
+        if (confirm("Are you sure you want to remove " + member.display_name + " from the team?")) {
+          $api.team_member_remove($routeParams.id, member.id).then(function() {
+            // remove from the members list
+            for (var i=0; i<members.length; i++) {
+              if (members[i].id === member.id) {
+                members.splice(i,1);
+                break;
+              }
             }
-          }
-        });
+          });
+        }
       };
     });
   });
