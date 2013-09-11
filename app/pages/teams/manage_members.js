@@ -9,7 +9,7 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('ManageTeamMembersController', function($scope, $routeParams, $location, $api) {
+  .controller('ManageTeamMembersController', function($scope, $routeParams, $location, $api, $window) {
     $scope.new_member = { email: "", error: null };
 
     $scope.$watch('is_admin', function(value) {
@@ -43,7 +43,7 @@ angular.module('app')
       };
 
       $scope.remove_member = function(member) {
-        if (confirm("Are you sure you want to remove " + member.display_name + " from the team?")) {
+        if ($window.confirm("Are you sure you want to remove " + member.display_name + " from the team?")) {
           $api.team_member_remove($routeParams.id, member.id).then(function() {
             // remove from the members list
             for (var i=0; i<members.length; i++) {
