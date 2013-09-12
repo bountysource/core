@@ -20,6 +20,7 @@
     <th>Fundraiser</th>
     <th>Amount</th>
     <th>Date</th>
+    <th style="width: 50px;">Owner</th>
     <th class="span2">Anonymous <a popover-title="Anonymous Pledges" popover="If you want to hide your identity on a pledge, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="icon-question-sign"></i></a></th>
   </tr>
   </thead>
@@ -62,6 +63,21 @@
     </td>
     <td><a ng-href="/fundraisers/{{pledge.fundraiser.slug}}/pledges">{{ pledge.amount | dollars }}</a></td>
     <td>{{ pledge.created_at | date }}</td>
+    <td>
+      <div ng-show="pledge.person">
+        <div class="thumbnail" tooltip="{{pledge.person.display_name}}" tooltip-placement="left">
+          <owner-profile-link model="pledge">
+            <img ng-src="{{pledge.person.image_url}}" />
+          </owner-profile-link>
+        </div>
+      </div>
+      <div ng-hide="pledge.person">
+        <div class="thumbnail" tooltip="Anonymous" tooltip-placement="left">
+          <img src="images/anon.jpg" />
+        </div>
+      </div>
+    </td>
+
     <td ng-show="pledge.anonymous">
       <button class="btn btn-small btn-block active" ng-click="toggle_anonymous(pledge)">
         <i class="icon-eye-close"></i>

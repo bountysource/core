@@ -16,6 +16,7 @@
     <th>Issue</th>
     <th>Amount</th>
     <th>Date</th>
+    <th style="width: 50px;">Owner</th>
     <th>
       Anonymous
       <a popover-title="Anonymous Bounties" popover="If you want to hide your identity on a bounty, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="icon-question-sign"></i></a>
@@ -34,10 +35,20 @@
     </a></td>
     <td>{{ bounty.amount | dollars }}</td>
     <td>{{ bounty.created_at | date }}</td>
-
-    <span>
-
-    </span>
+    <td>
+      <div ng-show="bounty.person">
+        <div class="thumbnail" tooltip="{{bounty.person.display_name}}" tooltip-placement="left">
+          <owner-profile-link model="bounty">
+            <img ng-src="{{bounty.person.image_url}}" />
+          </owner-profile-link>
+        </div>
+      </div>
+      <div ng-hide="bounty.person">
+        <div class="thumbnail" tooltip="Anonymous" tooltip-placement="left">
+          <img src="images/anon.jpg" />
+        </div>
+      </div>
+    </td>
 
     <td ng-show="bounty.anonymous && bounty.owner_type != 'Team'">
       <button class="btn btn-small btn-block active" ng-click="toggle_anonymous(bounty)">
