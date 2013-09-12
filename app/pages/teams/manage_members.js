@@ -63,6 +63,10 @@ angular.module('app')
         member.$master = angular.copy(member);
         member.$dirty = false;
 
+        $scope.is_admin   = member.is_admin;
+        $scope.is_spender = member.is_spender;
+        $scope.is_public  = member.is_public;
+
         $api.team_member_update($routeParams.id, member.id, payload);
       };
 

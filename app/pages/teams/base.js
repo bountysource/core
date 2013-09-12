@@ -22,6 +22,7 @@ angular.module('app')
         if (person) {
           for (var i=0; i<members.length; i++) {
             if (members[i].id === $scope.current_person.id) {
+              $scope.is_member  = true;
               $scope.is_admin   = members[i].is_admin;
               $scope.is_spender = members[i].is_spender;
               $scope.is_public  = members[i].is_public;
@@ -31,6 +32,7 @@ angular.module('app')
         }
 
         // explicitly set to false if the logged in user is not part of the team
+        $scope.is_member  = $scope.is_member || false;
         $scope.is_admin   = $scope.is_admin || false;
         $scope.is_spender = $scope.is_spender || false;
         $scope.is_public  = $scope.is_public || false;
