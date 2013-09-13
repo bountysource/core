@@ -19,7 +19,6 @@
         <div class="span8">
           <h3 style="margin-bottom: 0;">Members</h3>
           <p>Members of your team. You can change the permissions for your team members.</p>
-
           <table class="table table-hover table-striped" ng-show="members.length > 0">
             <thead>
             <tr>
@@ -34,19 +33,25 @@
             <tr ng-repeat="member in members | orderBy:'+added_at'" ng-class="{ 'info': (member.$dirty) }">
               <td>
                 <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
+                <div ng-show="member.$saving">
+                  <small class="text-info"><i>Saving changes...</i></small>
+                </div>
+                <div ng-show="!member.$saving && member.$saved_at">
+                  <small class="muted text-success">Saved {{member.$saved_at | date:'medium'}}</small>
+                </div>
               </td>
               <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_public" ng-change="member_changed(member)" />
+                <input type="checkbox" ng-model="member.is_public" ng-change="member_changed(member)" ng-disabled="member.$saving" />
               </td>
               <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_spender" ng-change="member_changed(member)" />
+                <input type="checkbox" ng-model="member.is_spender" ng-change="member_changed(member)" ng-disabled="member.$saving" />
               </td>
               <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_admin" ng-change="member_changed(member)" ng-disabled="is_admin && current_person.id == member.id" />
+                <input type="checkbox" ng-model="member.is_admin" ng-change="member_changed(member)" ng-disabled="member.$saving || (is_admin && current_person.id == member.id)" />
               </td>
               <td style="text-align: center;">
                 <div collapse="member.$dirty">
-                  <button ng-click="remove_member(member)" class="btn btn-mini btn-danger" ng-disabled="member.id == current_person.id"><i class="icon-trash icon-white"></i></button>
+                  <button ng-click="remove_member(member)" class="btn btn-mini btn-block btn-danger" ng-disabled="member.id == current_person.id"><i class="icon-trash icon-white"></i></button>
                 </div>
                 <div collapse="!member.$dirty">
                   <button ng-click="update_member(member)" class="btn btn-mini btn-primary" ><i class="icon-ok icon-white"></i></button>
