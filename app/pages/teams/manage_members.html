@@ -17,10 +17,13 @@
 
       <div class="row-fluid">
         <div class="span8">
+          <h3 style="margin-bottom: 0;">Members</h3>
+          <p>Members of your team. You can change the permissions for your team members.</p>
+
           <table class="table table-hover" ng-show="members.length > 0">
             <thead>
             <tr>
-              <th style="width: 30%; text-align: center;"></th>
+              <th style="width: 30%;">Username</th>
               <th style="width: 10%; text-align: center;">Public</th>
               <th style="width: 10%; text-align: center;">Spender</th>
               <th style="width: 10%; text-align: center;">Admin</th>
@@ -54,17 +57,54 @@
             </tbody>
           </table>
 
-          <div ng-show="new_member.error">
-            <alert type="'error'" close="new_member.error = null">{{new_member.error}}</alert>
+          <h3 style="margin-bottom: 0;">Add Members</h3>
+          <p>Enter the email address of the person you would like to add to the team. If they do not have an account, they will receive an invitation email.</p>
+
+          <div ng-show="add_member_error.message">
+            <alert type="add_member_error.type" close="add_member_error.message = null">{{add_member_error.message}}</alert>
           </div>
 
-          <!-- Add new member input -->
-          <form ng-submit="add_member()" name="add_member_form" style="text-align: center;">
-            <strong style="line-height: 25px;">Add member:</strong>
-            <input id="email" name="email" type="email" class="search-query span6" ng-model="new_member.email" placeholder="Member email address" />
-            <button type="submit" class="btn btn-primary" ng-disabled="!new_member.email || add_member_form.email.$invalid">Add</button>
-            <p class="text-info" style="margin-top: 10px;">To add a member, enter the email address associated with their account.</p>
-          </form>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th style="width: 30%;">Email</th>
+              <th style="width: 10%; text-align: center;">Public</th>
+              <th style="width: 10%; text-align: center;">Spender</th>
+              <th style="width: 10%; text-align: center;">Admin</th>
+              <th style="width: 10%; text-align: center;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="invite in pending_invites | orderBy:'-created_at'">
+              <td>{{invite.email}}</td>
+
+              <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.public" disabled /></td>
+              <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.spender" disabled /></td>
+              <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.admin" disabled /></td>
+
+              <td style="text-align: center;"><button ng-click="team_invite_reject(invite)" class="btn btn-mini btn-block" tooltip="Cancel Invite"><i class="icon-remove"></i></button></td>
+            </tr>
+            <!-- New member row -->
+            <tr ng-class="{ success: new_member.registered, info: (new_member.email && !new_member.registered) }">
+              <form ng-submit="team_invite_create()">
+                <td><input style="margin-bottom: 0;" type="email" name="email" class="span12" ng-model="new_member.email" ng-change="validate_new_member_email()" placeholder="Email address" /></td>
+
+                <td style="text-align: center;"><input type="checkbox" ng-model="new_member.public" /></td>
+                <td style="text-align: center;"><input type="checkbox" ng-model="new_member.spender"  /></td>
+                <td style="text-align: center;"><input type="checkbox" ng-model="new_member.admin" /></td>
+
+                <td style="text-align: center;">
+                  <div ng-show="new_member.email && !new_member.registered" tooltip="Send Invite">
+                    <button type="submit" class="btn btn-mini btn-block btn-primary"><i class="icon-envelope icon-white"></i></button>
+                  </div>
+                  <div ng-show="new_member.email && new_member.registered" tooltip="Add to Team">
+                    <button type="submit" class="btn btn-mini btn-block btn-success"><i class="icon-plus icon-white"></i></button>
+                  </div>
+                </td>
+              </form>
+            </tr>
+            </tbody>
+          </table>
         </div>
         <div class="span4">
           <div class="well">

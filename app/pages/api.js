@@ -376,8 +376,8 @@ angular.module('api.bountysource',[]).
       return this.call("/teams/"+id+"/members");
     };
 
-    this.team_member_add = function(team_id, email) {
-      return this.call("/teams/"+team_id+"/members", "POST", { email: email });
+    this.team_member_add = function(team_id, data) {
+      return this.call("/teams/"+team_id+"/members", "POST", data);
     };
 
     this.team_member_remove = function(team_id, member_id) {
@@ -390,6 +390,26 @@ angular.module('api.bountysource',[]).
 
     this.team_activity = function(team_id) {
       return this.call("/teams/"+team_id+"/activity");
+    };
+
+    this.team_invite_accept = function(team_id, token) {
+      return this.call("/teams/"+team_id+"/invites", "PUT", { token: token });
+    };
+
+    this.team_invite_reject = function(team_id, token) {
+      return this.call("/teams/"+team_id+"/invites", "DELETE", { token: token });
+    };
+
+    this.team_invite_create = function(team_id, data) {
+      return this.call("/teams/"+team_id+"/invites", "POST", data);
+    };
+
+    this.team_invites_get = function(team_id) {
+      return this.call("/teams/"+team_id+"/invites", "GET");
+    };
+
+    this.email_registered = function(email) {
+      return this.call("/email_registered", "GET", { email: email });
     };
 
     this.tracker_typeahead = function(query) {
