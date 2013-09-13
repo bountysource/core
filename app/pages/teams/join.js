@@ -13,7 +13,7 @@ angular.module('app')
     // redirect if already a member. edge case.
     $scope.$watch("is_member", function(val) {
       if (val === true) {
-        $location.url("/teams/"+$routeParams.id).replace();
+        $location.url("/teams/"+$routeParams.id+"/members").replace();
       }
     });
 
@@ -27,7 +27,7 @@ angular.module('app')
 
     $scope.accept = function() {
       $api.team_invite_accept($routeParams.id, $routeParams.token).then(function() {
-        $location.url("/teams/"+$routeParams.id).replace();
+        $location.url("/teams/"+$routeParams.id+"/members").replace();
       });
     };
   });
