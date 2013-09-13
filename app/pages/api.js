@@ -231,8 +231,8 @@ angular.module('api.bountysource',[]).
       return this.call("/user/request_password_reset", "POST", data);
     };
 
-    this.person_timeline_get = function(id) {
-      return this.call("/users/"+id+"/activity");
+    this.person_activity = function(id) {
+      return this.call("/people/"+id+"/activity");
     };
 
     this.project_cards = function() {
