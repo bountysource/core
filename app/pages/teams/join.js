@@ -20,9 +20,9 @@ angular.module('app')
     $scope.token = $routeParams.token;
 
     $scope.permissions = {
-      public: $routeParams.public == 'false' || true,
-      spender: $routeParams.spender == 'true' || false,
-      admin: $routeParams.admin == 'true' || false
+      public: $routeParams.public === 'false' || true,
+      spender: $routeParams.spender === 'true' || false,
+      admin: $routeParams.admin === 'true' || false
     };
 
     $scope.accept = function() {

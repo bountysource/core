@@ -124,7 +124,7 @@ angular.module('app')
 
     $scope.pending_invites = $api.team_invites_get($routeParams.id).then(function(invites) {
       $scope.team_invite_reject = function(invite) {
-        if (confirm("Are you sure you want to revoke this invite?")) {
+        if ($window.confirm("Are you sure you want to revoke this invite?")) {
           $api.team_invite_reject($routeParams.id, invite.token).then(function() {
             for (var i=0; i<invites.length; i++) {
               if (invites[i].token === invite.token) {
