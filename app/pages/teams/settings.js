@@ -16,6 +16,8 @@ angular.module('app')
       }
     });
 
+    $scope.form_data = {};
+
     $scope.team.then(function(team) {
       $scope.form_data = {
         name: team.name,

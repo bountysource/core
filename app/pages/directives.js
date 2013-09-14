@@ -203,4 +203,19 @@ angular.module('app').
         });
       }
     };
-  });
+  }).
+  directive('inputSlug', ['$filter', function($filter) {
+    return {
+      restrict: "AC",
+      require: "ngModel",
+      link: function(scope, element, attr, ctrl) {
+        ctrl.$parsers.unshift(function(viewValue) {
+          var slugifiedViewValue = $filter('slug')(viewValue);
+          if (viewValue !== slugifiedViewValue) {
+            ctrl.$setViewValue(slugifiedViewValue);
+            ctrl.$render();
+          }
+        });
+      }
+    };
+  }]);

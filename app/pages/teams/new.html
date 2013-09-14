@@ -15,7 +15,7 @@
   <p class="lead">Show off your teams's support for open-source software.</p>
   <br />
 
-  <form class="form-horizontal" ng-submit="create_team()">
+  <form class="form-horizontal" ng-submit="create_team()" ng-controller="NewTeamController">
     <div class="alert alert-error" ng-show="error">{{error}}</div>
 
     <ng-include src="'pages/teams/partials/form.html'"></ng-include>

@@ -124,6 +124,10 @@ angular.module('app').
       }
       return time_left + ' ' + time_left_unit;
     };
+  }).filter('slug', function() {
+    return function(val) {
+      return (val||"").toLowerCase().replace(/[ ]+/g,'-').replace(/[,.]/g,'').replace(/-(inc|llc)$/,'').replace(/[^a-z1-9-_]/g,'');
+    }
   });
 
 
