@@ -21,13 +21,49 @@
       </button>
 
       <a ng-href="{{tracker.url}}" target="_blank" class="btn btn-block">
-        <i class="icon-globe"></i>
-        View Repository
+        <div ng-switch="tracker.tracker_type | lowercase">
+          <div ng-switch-when="github::repository">
+            <img src="/images/trackers/favicon-github.png" />
+            View on GitHub
+          </div>
+          <div ng-switch-when="jira::repository">
+            <img src="/images/trackers/favicon-jira.png" />
+            View on Jira
+          </div>
+          <div ng-switch-when="bitbucket::repository">
+            <img src="/images/trackers/favicon-bitbucket.png" />
+            View on BitBucket
+          </div>
+          <div ng-switch-when="launchpad::repository">
+            <img src="/images/trackers/favicon-launchpad.png" />
+            View on Launchpad
+          </div>
+          <div ng-switch-when="sourceforge::repository">
+            <img src="/images/trackers/favicon-sourceforge.png" />
+            View on Sourceforge
+          </div>
+          <div ng-switch-when="trac::repository">
+            <img src="/images/trackers/favicon-trac.png" />
+            View on Trac
+          </div>
+          <div ng-switch-when="pivotal::repository">
+            <img src="/images/trackers/favicon-pivotal.png" />
+            View on Pivotal
+          </div>
+          <div ng-switch-when="bugzilla::repository">
+            <img src="/images/trackers/favicon-bugzilla.png" />
+            View on Bugzilla
+          </div>
+          <div ng-switch-default>
+            <i class="icon-globe"></i>
+            View Repository
+          </div>
+        </div>
       </a>
     </div>
 
     <div class="well well-small" ng-show="tracker.bounty_total > 0 || tracker.tracker_type == 'Github::Repository'">
-      <div class="row-fluid">      
+      <div class="row-fluid">
         <div class="text-center" ng-class="{span6: tracker_stats.collected_total > 0, span12: tracker_stats.collected_total == 0}"ng-show="tracker.bounty_total > 0">
           <a ng-click="show_bounties()"><h3 style="margin: 0; line-height:35px" class="text-center">{{tracker.bounty_total | dollars}}</h3></a>
           <div>in bounties</div>
