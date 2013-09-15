@@ -22,7 +22,7 @@ angular.module('app')
         if (team.error) {
           $scope.error = team.error;
         } else {
-          $location.url("/teams/"+team.slug);
+          $location.url("/teams/"+team.slug+"/members/manage");
         }
       });
     };
