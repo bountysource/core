@@ -3,7 +3,7 @@
     Projects
     <span class="badge badge-info" ng-show="team.trackers.length > 0">{{team.trackers.length | number}}</span>
   </a></li>
-  <li ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">
+  <li ng-show="members.length > 0" ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">
     Members
     <span class="badge badge-info" ng-show="members.length > 0">{{(members | filter:{ is_public: true }).length | number}}</span>
   </a></li>
