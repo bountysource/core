@@ -232,7 +232,21 @@ angular.module('api.bountysource',[]).
     };
 
     this.person_activity = function(id) {
-      return this.call("/people/"+id+"/activity");
+      return this.call("/people/"+id+"/activity").then(function(activity) {
+        var timeline = [], i;
+
+        for (i in activity.bounties) { timeline.push(activity.bounties[i]); }
+        for (i in activity.pledges) { timeline.push(activity.pledges[i]); }
+        for (i in activity.fundraisers) { timeline.push(activity.fundraisers[i]); }
+        for (i in activity.teams) { timeline.push(activity.teams[i]); }
+
+        // add sort date since the col is either added_at (teams) or created_at (everything else)
+        for (i in timeline) {
+          timeline[i].sort_date = timeline[i].added_at || timeline[i].created_at;
+        }
+
+        return timeline;
+      });
     };
 
     this.project_cards = function() {

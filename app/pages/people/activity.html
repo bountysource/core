@@ -11,35 +11,6 @@
 
   <div class="span8">
     <ng-include src="'pages/people/partials/tabs.html'"></ng-include>
-
-    <table id="person-timeline-table" class="table table-striped">
-      <tr ng-repeat="action in timeline | orderBy:'-sort_date'">
-        <td ng-show="action.type == 'Pledge'">
-          <strong>{{ person.display_name }}</strong> pledged <strong>{{ action.amount | dollars }}</strong> to <a ng-href="/fundraisers/{{ action.fundraiser.target_slug }}">{{action.fundraiser.title}}</a>
-        </td>
-
-        <td ng-show="action.type == 'Bounty'">
-          <strong>{{ person.display_name }}</strong> placed a <a ng-href="/issues/{{ action.issue.slug }}">{{action.amount | dollars}} bounty</a>
-          <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
-        </td>
-
-        <td ng-show="action.type == 'Fundraiser'">
-          <strong>{{ person.display_name }}</strong> created the fundraiser <a ng-href="fundraisers/{{action.slug}}">{{action.title}}</a>
-        </td>
-
-        <td ng-show="action.type == 'Team'">
-          <strong>{{ person.display_name }}</strong> joined the team <a ng-href="teams/{{action.slug}}">{{action.name}}</a>
-        </td>
-
-        <td class="muted">{{ action.sort_date | date:'medium' }}</td>
-      </tr>
-
-      <tr>
-        <td>
-          Joined the Bountysource family
-        </td>
-        <td class="muted">{{ person.created_at | date:'medium' }}</td>
-      </tr>
-    </table>
+    <ng-include src="'pages/people/partials/activity.html'"></ng-include>
   </div>
 </div>
