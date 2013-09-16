@@ -16,9 +16,7 @@ angular.module('app')
   .controller('HomeCtrl', function ($scope, $window, $api) {
     $scope.fundraisers = $api.fundraiser_cards();
 
-    $api.people_interesting().then(function(people) {
-      $scope.people = people;
-    });
+    $scope.people = $api.people_interesting();
 
     $scope.trackers = $api.project_cards().then(function(trackers) {
       for (var i=0; i<trackers.length; i++) {
@@ -26,5 +24,4 @@ angular.module('app')
       }
       return trackers;
     });
-
   });
