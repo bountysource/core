@@ -21,7 +21,7 @@
       <ul class="inline">
         <li ng-repeat="person in people.backers.top.slice(0,18)">
           <a ng-show="person.type =='Person'" ng-href="/people/{{person.slug}}" id="home-back-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
-          <a ng-show="person.type =='Team'" ng-href="/teams/{{person.slug}}" id="home-back-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+          <a ng-show="person.type =='Team'" ng-href="/teams/{{person.slug}}/activity" id="home-back-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
         </li>
       </ul>
     </div>
