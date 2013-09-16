@@ -1,14 +1,6 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/issues/:id', {
-        templateUrl: 'pages/issues/show.html',
-        controller: 'BountyBoxController'
-      });
-  })
-
   .controller('BountyBoxController', function ($scope, $routeParams, $window, $location) {
     $scope.bounty = {
       amount: parseInt($routeParams.amount, 10)
