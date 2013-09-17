@@ -185,16 +185,16 @@ angular.module('app').
         scope.$watch("model", function(model) {
           try {
             if (model) {
-              if (!model.owner_type) {
-                throw("Model is missing owner_type attribute");
-              } else if (!model.person) {
-                throw("Model is missing person");
-              } else if (model.owner_type === "Person") {
-                element.attr("href", "/people/"+model.person.slug);
-              } else if (model.owner_type === "Team") {
-                element.attr("href", "/teams/"+model.person.slug);
+              if (!model.owner) {
+                throw("Model is missing owner");
+              } else if (!model.owner.type) {
+                throw("Model is missing owner.type attribute");
+              } else if (model.owner.type === "Person") {
+                element.attr("href", "/people/"+model.owner.slug);
+              } else if (model.owner.type === "Team") {
+                element.attr("href", "/teams/"+model.owner.slug);
               } else {
-                throw("Unexpected owner_type:", model.owner_type);
+                throw("Unexpected owner " + model.owner.type);
               }
             }
           } catch(e) {

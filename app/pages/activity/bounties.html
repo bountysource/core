@@ -36,14 +36,14 @@
     <td>{{ bounty.amount | dollars }}</td>
     <td>{{ bounty.created_at | date }}</td>
     <td>
-      <div ng-show="bounty.person">
-        <div class="thumbnail" tooltip="{{bounty.person.display_name}}" tooltip-placement="left">
+      <div ng-show="bounty.owner">
+        <div class="thumbnail" tooltip="{{bounty.owner.display_name}}" tooltip-placement="left">
           <owner-profile-link model="bounty">
-            <img ng-src="{{bounty.person.image_url}}" />
+            <img ng-src="{{bounty.owner.image_url}}" />
           </owner-profile-link>
         </div>
       </div>
-      <div ng-hide="bounty.person">
+      <div ng-hide="bounty.owner">
         <div class="thumbnail" tooltip="Anonymous" tooltip-placement="left">
           <img src="images/anon.jpg" />
         </div>
