@@ -5,7 +5,7 @@
     </td>
 
     <td ng-show="action.type == 'Bounty'">
-      <strong>{{ person.display_name }}</strong> placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">an issue</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
+      <strong>{{ person.display_name }}</strong> placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">an issue</a> for <a ng-href="/trackers/{{action.issue.tracker.slug || action.issue.repository.slug}}">{{action.issue.tracker.name || action.issue.repository.name}}</a> <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
     </td>
 
     <td ng-show="action.type == 'Fundraiser'">
