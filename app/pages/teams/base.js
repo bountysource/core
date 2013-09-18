@@ -11,8 +11,10 @@ angular.module('app')
     $scope.active_tab = function(tab) {
       if (tab === 'projects' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
       else if (tab === 'members' && (/^\/teams\/[^\/]+\/members$/).test($location.path())) { return true; }
+      else if (tab === 'activity' && (/^\/teams\/[^\/]+\/activity$/).test($location.path())) { return true; }
       else if (tab === 'manage_members' && (/^\/teams\/[^\/]+\/members\/manage$/).test($location.path())) { return true; }
       else if (tab === 'settings' && (/^\/teams\/[^\/]+\/settings$/).test($location.path())) { return true; }
+      else if (tab === 'account' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
     };
 
     $scope.members = $api.team_members_get($routeParams.id).then(function(members) {
@@ -20,6 +22,7 @@ angular.module('app')
         if (person) {
           for (var i=0; i<members.length; i++) {
             if (members[i].id === $scope.current_person.id) {
+              $scope.is_member  = true;
               $scope.is_admin   = members[i].is_admin;
               $scope.is_spender = members[i].is_spender;
               $scope.is_public  = members[i].is_public;
@@ -29,6 +32,7 @@ angular.module('app')
         }
 
         // explicitly set to false if the logged in user is not part of the team
+        $scope.is_member  = $scope.is_member || false;
         $scope.is_admin   = $scope.is_admin || false;
         $scope.is_spender = $scope.is_spender || false;
         $scope.is_public  = $scope.is_public || false;

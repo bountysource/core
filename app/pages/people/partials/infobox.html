@@ -1,7 +1,8 @@
 <div class="well person-infobox">
   <div><img ng-src="{{person.large_image_url}}" /></div>
   <h3>{{person.display_name}}</h3>
-  <table id="person-profile-sidebar" class="table">
+  <h3 ng-show="!person.display_name">{{person.first_name}} {{person.last_name}}</h3>
+  <table class="table profile-infobox">
     <tr ng-show="person.company">
       <td>
         Company:
@@ -15,7 +16,7 @@
         Location:
       </td>
       <td>
-        <div>{{person.location}}</div>
+        {{person.location}}
       </td>
     </tr>
     <tr ng-show="person.bio">

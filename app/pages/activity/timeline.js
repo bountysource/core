@@ -12,6 +12,6 @@ angular.module('app')
   .controller('Activity', function($scope, $routeParams, $api, $pageTitle) {
     $pageTitle.set('Timeline', 'Activity');
 
-    $scope.timeline = $api.person_timeline_get($scope.current_person.id);
+    $scope.timeline = $api.person_activity($scope.current_person.id);
   });
 

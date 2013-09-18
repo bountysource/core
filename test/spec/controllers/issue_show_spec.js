@@ -58,17 +58,18 @@ describe("Issue Show Controller --", function() {
       expect(api.issue_get).toHaveBeenCalledWith(routeParams.id);
     });
 
-    it("should initialize a bounty object on scope", function() {
-      expect(scope.bounty).toBeDefined();
-    });
-
-    it("should set the bounty amount to zero by default", function() {
-      expect(scope.bounty.amount).toEqual(0);
-    });
-
-    it("should set bounty anonymity to false by default", function() {
-      expect(scope.bounty.anonymous).toBe(false);
-    });
+// TODO: move coverage to test bounty.html and bounty.js
+//    it("should initialize a bounty object on scope", function() {
+//      expect(scope.bounty).toBeDefined();
+//    });
+//
+//    it("should set the bounty amount to zero by default", function() {
+//      expect(scope.bounty.amount).toEqual(0);
+//    });
+//
+//    it("should set bounty anonymity to false by default", function() {
+//      expect(scope.bounty.anonymous).toBe(false);
+//    });
 
   });
 
@@ -86,11 +87,6 @@ describe("Issue Show Controller --", function() {
       $controller('IssueShow', {$scope: scope, $routeParams: routeParams, $api: api, $payment: payment});
     }));
 
-    it("should set anonymous to true", function() {
-      expect(scope.bounty.anonymous).toBeTruthy();
-      httpBackend.flush();
-    });
-
     it("should return the mock response as issues", function () {
       var result;
       scope.issue.then(function(data) {
@@ -100,13 +96,18 @@ describe("Issue Show Controller --", function() {
       expect(result.id).toBe(mocks.response.data.id);
     });
 
-    it("should call payment process when the create_payment function is called", function() {
-      spyOn(payment, "process");
-      httpBackend.flush();
-      scope.create_payment();
-      expect(payment.process).toHaveBeenCalled();
-    });
+// TODO: move coverage to test bounty.html and bounty.js
+//    it("should call payment process when the create_payment function is called", function() {
+//      spyOn(payment, "process");
+//      httpBackend.flush();
+//      scope.create_payment();
+//      expect(payment.process).toHaveBeenCalled();
+//    });
+//
+//    it("should set anonymous to true", function() {
+//      expect(scope.bounty.anonymous).toBeTruthy();
+//      httpBackend.flush();
+//    });
 
   });
-
 });

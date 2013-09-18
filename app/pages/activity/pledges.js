@@ -12,10 +12,7 @@ angular.module('app')
   .controller('PledgeActivity', function($scope, $routeParams, $api, $pageTitle) {
     $pageTitle.set('Pledges', 'Activity');
 
-    $scope.pledges = $api.call("/user/pledges").then(function(pledges) {
-      for (var i=0; i<pledges.length; i++) { $scope.$init_pledge(pledges[i]); }
-      return pledges;
-    });
+    $scope.pledges = $api.call("/user/pledges");
 
     $scope.toggle_anonymous = function(pledge) {
       $api.pledge_anonymity_toggle(pledge).then(function() {

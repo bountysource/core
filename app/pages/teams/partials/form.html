@@ -8,7 +8,7 @@
 <div class="control-group">
   <label class="control-label" for="slug">Custom URL:</label>
   <div class="controls">
-    <span class="muted">bountysource.com/teams/</span> <input id="slug" type="text" ng-model="form_data.slug" />
+    <span class="muted">bountysource.com/teams/</span> <input id="slug" type="text" ng-model="form_data.slug" input-slug />
   </div>
 </div>
 
@@ -27,21 +27,28 @@
   </div>
 </div>
 
+<div class="control-group">
+  <label class="control-label" for="bio">Bio:</label>
+  <div class="controls">
+    <textarea class="span9" id="bio" ng-model="form_data.bio" rows="5" placeholder="Bountysource is the funding platform for open-source software."></textarea>
+  </div>
+</div>
+
 <!--<div class="control-group">-->
-  <!--<label class="control-label" for="image_url">Twitter:</label>-->
-  <!--<div class="controls">-->
-    <!--<div class="input-prepend">-->
-      <!--<span class="add-on">@</span>-->
-      <!--<input id="twitter" type="url" ng-model="form_data.twitter" class="input-medium" placeholder="Bountysource" />-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<label class="control-label" for="image_url">Twitter:</label>-->
+<!--<div class="controls">-->
+<!--<div class="input-prepend">-->
+<!--<span class="add-on">@</span>-->
+<!--<input id="twitter" type="url" ng-model="form_data.twitter" class="input-medium" placeholder="Bountysource" />-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 
 <!--<div class="control-group">-->
-  <!--<label class="control-label" for="image_url">Facebook:</label>-->
-  <!--<div class="controls">-->
-    <!--<div class="input-prepend">-->
-      <!--<input id="facebook" type="url" ng-model="form_data.facebook" class="input-medium" placeholder="Bountysource" />-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<label class="control-label" for="image_url">Facebook:</label>-->
+<!--<div class="controls">-->
+<!--<div class="input-prepend">-->
+<!--<input id="facebook" type="url" ng-model="form_data.facebook" class="input-medium" placeholder="Bountysource" />-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->

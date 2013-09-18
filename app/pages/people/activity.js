@@ -9,7 +9,6 @@ angular.module('app')
       });
   })
   .controller('PeopleShow', function ($scope, $routeParams, $api, $pageTitle) {
-
     $scope.person = $api.person_get($routeParams.id);
 
     $scope.person.then(function(person){
@@ -17,9 +16,6 @@ angular.module('app')
       $pageTitle.set(person.display_name, 'Profile');
     });
 
-    $scope.timeline = $api.person_timeline_get($routeParams.id).then(function(response) {
-      return response;
-    });
-
+    $scope.timeline = $api.person_activity($routeParams.id);
   });
 
