@@ -62,6 +62,8 @@ angular.module('app')
 
     // merge all of the issue arrays into one
     $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+      $scope.issues_resolved = true;
+
       for (var i=0; i<issues.length; i++) {
         issues[i].bounty_total = parseFloat(issues[i].bounty_total);
 
@@ -110,11 +112,9 @@ angular.module('app')
       if ($scope.issue_filter_options.show_paid_out ) {
         return issue.paid_out;
       }
-
       if (!$scope.issue_filter_options.show_paid_out && issue.paid_out) {
         return false;
       }
-
       if (!isNaN(bounty_min) && bounty_total < bounty_min) {
         return false;
       }
