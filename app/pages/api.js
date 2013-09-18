@@ -434,6 +434,10 @@ angular.module('api.bountysource',[]).
       return this.call("/teams/"+team_id+"/invites", "GET");
     };
 
+    this.person_teams_get = function(id) {
+      return this.call("/people/" + id + "/teams");
+    }
+
     this.email_registered = function(email) {
       return this.call("/email_registered", "GET", { email: email });
     };

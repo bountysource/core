@@ -17,5 +17,7 @@ angular.module('app')
     });
 
     $scope.timeline = $api.person_activity($routeParams.id);
+
+    $scope.teams = $api.person_teams_get($routeParams.id);
   });
 
