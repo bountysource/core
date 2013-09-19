@@ -8,7 +8,7 @@
       <div ng-class="{ 'text-success': (claim.collected), 'text-error': (claim.disputed || claim.rejected) }">
         <!-- Title for claims from other developers -->
         <h4 ng-show="!issue.my_bounty_claim || claim.id != issue.my_bounty_claim.id" style="margin: 0;">
-          Claim by {{claim.person.display_name}}
+          Claim by <a ng-href="/people/{{claim.person.slug}}">{{claim.person.display_name}}</a>
 
           <!-- so DRY like wut -->
           <span class="label label-important" ng-show="claim.disputed">Disputed</span>
