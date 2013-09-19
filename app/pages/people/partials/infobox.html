@@ -48,7 +48,7 @@
     </div>
 
     <!-- Hacky. add line break only if linked accounts shown -->
-    <div ng-show="person.github_account || person.twitter_account || person.facebook_account">
+    <div ng-show="teams.length > 0 && (person.github_account || person.twitter_account || person.facebook_account)">
       <br />
     </div>
 
