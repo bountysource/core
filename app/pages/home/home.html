@@ -16,7 +16,7 @@
           <h3 class="text-center" style="margin: 0;">New Members</h3>
 
           <!-- Mobile/Tablet view -->
-          <ul class="inline visible-tablet visible-tablet">
+          <ul class="inline visible-mobile visible-tablet">
             <li ng-repeat="person in people.new.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}}">
               <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
             </li>
@@ -33,8 +33,8 @@
           <h3 class="text-center" style="margin: 0;">Top Developers</h3>
 
           <!-- Mobile/Tablet view -->
-          <ul class="inline visible-tablet visible-tablet">
-            <li ng-repeat="person in people.developers.top.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.followers}} followers">
+          <ul class="inline visible-mobile visible-tablet">
+            <li ng-repeat="person in people.developers.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.followers}} followers">
               <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
             </li>
           </ul>
@@ -51,7 +51,7 @@
         <div class="span6">
           <h3 class="text-center" style="margin: 0;">Top Backers</h3>
           <!-- Mobile/Tablet view -->
-          <ul class="inline visible-tablet visible-tablet">
+          <ul class="inline visible-mobile visible-tablet">
             <li ng-repeat="person in people.backers.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.total_backed | dollars}} backed">
               <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
             </li>
@@ -68,7 +68,7 @@
           <h3 class="text-center" style="margin: 0;">Top Earners</h3>
 
           <!-- Mobile/Tablet view -->
-          <ul class="inline visible-tablet visible-tablet">
+          <ul class="inline visible-mobile visible-tablet">
             <li ng-repeat="person in people.earners.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.total_earned | dollars}} earned">
               <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
             </li>
