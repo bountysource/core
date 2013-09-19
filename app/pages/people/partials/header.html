@@ -1,0 +1,8 @@
+<h1 style="margin-top: 0;">
+  <span>{{person.display_name}}</span>
+  <span ng-hide="person.display_name">{{person.first_name}} {{person.last_name}}</span>
+</h1>
+
+<div ng-show="person.bio">
+  <p class="lead" style="white-space: pre-wrap;">{{person.bio}}</p>
+</div>

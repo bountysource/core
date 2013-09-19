@@ -1,28 +1,69 @@
-<div class="well person-infobox">
-  <div><img ng-src="{{person.large_image_url}}" /></div>
-  <h2>{{person.first_name}} {{person.last_name}}</h2>
-  <h3>{{person.display_name}}</h3>
-  <h4>{{person.company}}</h4>
-  <p><strong></strong> {{person.location}}</p>
-  <p><strong></strong> {{person.bio}}</p>
-  <p><strong></strong> {{person.url}}</p>
+<div id="infobox-wrapper">
+  <div class="well">
+    <div><img ng-src="{{person.large_image_url}}" /></div>
+    <br />
+    <a ng-show="person.url" class="btn btn-block" ng-href="{{person.url}}"><i class="icon-globe"></i> {{person.url | truncate:25}}</a>
+    <a ng-show="person.public_email" class="btn btn-block" ng-href="mailto:{{person.public_email}}"><i class="icon-envelope"></i> {{person.public_email | truncate:25}}</a>
+  </div>
 
-  <div ng-show="person.github_account || person.twitter_account || person.facebook_account">
-    Profiles:
-    <ul>
-      <li class="provider-link" ng-show="person.github_account">
-        <a ng-href="http://github.com/{{person.github_account.login}}" target="_blank"><img src="images/favicon-github.png"> <span>{{person.github_account.login}}</span></a>
-      </li>
-      <li class="provider-link" ng-show="person.twitter_account">
-        <a ng-href="http://twitter.com/{{person.twitter_account.login}}"><img src="images/favicon-twitter.png"> <span>{{person.twitter_account.login}}</span></a>
-      </li>
-      <li class="provider-link" ng-show="person.facebook_account">
-        <a ng-href="http://facebook.com/profile.php?id={{person.facebook_account.uid}}"><img src="images/favicon-facebook.png"> <span>{{person.facebook_account.login}}</span></a>
-      </li>
-      <!--<li class="provider-link" ng-show="person.gittip_account">-->
-        <!--<a href="http://gittip.com/"><img src="images/favicon-facebook.png"> <span>{{person.gittip_account.login}}</span></a>-->
-      <!--</li>-->
-    </ul>
+  <div class="well">
+    <div class="row-fluid" ng-show="person.company">
+      <div class="span4 text-right">
+        <strong>Company</strong>
+      </div>
+      <div class="span7 offset1">
+        {{person.company}}
+      </div>
+    </div>
+
+    <div class="row-fluid" ng-show="person.location">
+      <div class="span4 text-right">
+        <strong>Location</strong>
+      </div>
+      <div class="span7 offset1">
+        {{person.location}}
+      </div>
+    </div>
+
+    <div class="row-fluid" ng-show="person.github_account || person.twitter_account || person.facebook_account">
+      <div class="span4 text-right">
+        <strong>Linked Accounts</strong>
+      </div>
+      <div class="span7 offset1">
+        <ul style="margin: 0;">
+          <li class="provider-link" ng-show="person.github_account">
+            <a ng-href="http://github.com/{{person.github_account.login}}" target="_blank"><img src="images/favicon-github.png"> <span>{{person.github_account.login}}</span></a>
+          </li>
+          <li class="provider-link" ng-show="person.twitter_account">
+            <a ng-href="http://twitter.com/{{person.twitter_account.login}}"><img src="images/favicon-twitter.png"> <span>{{person.twitter_account.login}}</span></a>
+          </li>
+          <li class="provider-link" ng-show="person.facebook_account">
+            <a ng-href="http://facebook.com/profile.php?id={{person.facebook_account.uid}}"><img src="images/favicon-facebook.png"> <span>{{person.facebook_account.login}}</span></a>
+          </li>
+          <!--<li class="provider-link" ng-show="person.gittip_account">-->
+          <!--<a href="http://gittip.com/"><img src="images/favicon-gittip.png"> <span>{{person.gittip_account.login}}</span></a>-->
+          <!--</li>-->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hacky. add line break only if linked accounts shown -->
+    <div ng-show="person.github_account || person.twitter_account || person.facebook_account">
+      <br />
+    </div>
+
+    <div class="row-fluid" ng-show="teams.length > 0">
+      <div class="span4 text-right">
+        <strong>Teams</strong>
+      </div>
+      <div class="span7 offset1">
+        <ul style="margin: 0;">
+          <li class="provider-link" ng-repeat="team in teams | orderBy:'-added_at'">
+            <a ng-href="/teams/{{team.slug}}"><img ng-src="{{team.image_url}}" style="width: 16px; height: 16px;" /> {{team.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div ng-show="current_person.id == person.id" class="text-center">

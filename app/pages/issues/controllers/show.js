@@ -10,12 +10,6 @@ angular.module('app')
   })
 
   .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $pageTitle) {
-    $scope.bounty = {
-      amount: parseInt($routeParams.amount, 10),
-      anonymous: $routeParams.anonymous || false,
-      payment_method: $routeParams.payment_method || 'google'
-    };
-
     // alert above the issue title about bounty status
     $scope.bounty_alert = {
       type: 'warning',
@@ -24,29 +18,7 @@ angular.module('app')
     };
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
-
       $pageTitle.set(issue.title, issue.tracker.name);
-      // append item number now that we have issue
-      $scope.bounty.item_number = "issues/"+issue.id;
-
-      $scope.create_payment = function() {
-        var base_url = $window.location.href.replace(/\/issues.*$/,'');
-        var payment_params = angular.copy($scope.bounty);
-
-        payment_params.success_url = base_url + "/activity/bounties";
-        payment_params.cancel_url = $window.location.href;
-
-        $payment.process(payment_params, {
-          error: function(response) {
-            console.log("Payment Error:", response);
-          },
-
-          noauth: function() {
-            $api.set_post_auth_url("/issues/" + issue.slug, payment_params);
-            $location.url("/signin");
-          }
-        });
-      };
 
       // set bounty info message data
       if (issue.bounty_claims.length === 0) {

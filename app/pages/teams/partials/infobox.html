@@ -1,6 +1,35 @@
 <div class="well text-center">
   <div><img ng-src="{{team.large_image_url}}" style="width: 100%;"/></div>
-  <h3 style="margin-bottom: 0;">{{team.name}}</h3>
-  <h4 style="margin-top: 0;">{{ (members | filter:{ is_public: true }).length | number }} {{ 'member' | pluralize:(members | filter:{ is_public: true }).length }}</h4>
-  <a class="btn btn-block" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a>
+  <br />
+  <div><a class="btn btn-block" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a></div>
+</div>
+
+<div ng-show="is_member">
+  <div class="well">
+    <div class="text-center">
+      <h4 style="margin-top: 0;">Your Membership</h4>
+    </div>
+
+    <!-- Permissions -->
+    <div>
+      <label class="checkbox">
+        <span>membership publicized</span>
+        <input type="checkbox" ng-checked="is_public" style="cursor: default;" disabled />
+      </label>
+      <label class="checkbox">
+        <span>can spend from team account</span>
+        <input type="checkbox" ng-checked="is_spender" style="cursor: default;" disabled />
+      </label>
+      <label class="checkbox">
+        <span>administrative privileges</span>
+        <input type="checkbox" ng-checked="is_admin" style="cursor: default;" disabled />
+      </label>
+    </div>
+
+    <!-- Account Balance -->
+    <div class="text-center" ng-show="is_spender || is_admin">
+      <h4>Team Account Balance</h4>
+      <strong>{{team.account_balance | currency}}</strong>
+    </div>
+  </div>
 </div>
