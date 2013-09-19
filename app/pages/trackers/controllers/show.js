@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/trackers/:id', {
         templateUrl: 'pages/trackers/show.html',
-        controller: 'TrackerShow'
+        controller: 'TrackerShow',
+        reloadOnSearch: false
       });
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle) {
@@ -61,22 +62,46 @@ angular.module('app')
 
     // merge all of the issue arrays into one
     $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
-      for (var i=0; i<issues.length; i++) { issues[i].bounty_total = parseFloat(issues[i].bounty_total); }
+      $scope.issues_resolved = true;
+
+      for (var i=0; i<issues.length; i++) {
+        issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+
+        // sorting doesn't like nulls.. this is a quick hack
+        issues[i].participants_count = issues[i].participants_count || 0;
+        issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+        issues[i].comment_count = issues[i].comment_count || 0;
+      }
       return issues;
     });
 
     $scope.issue_filter_options = {
-      text: null,
-      bounty_min: null,
-      bounty_max: null,
-      only_valuable: false,
-      hide_closed: false,
-      hide_open: false
+      text:          $location.search().text                    || null,
+      bounty_min:    $location.search().bounty_min              || null,
+      bounty_max:    $location.search().bounty_max              || null,
+      only_valuable: $location.search().only_valuable === 'true' || false,
+      hide_closed:   $location.search().hide_closed   === 'true' || false,
+      hide_open:     $location.search().hide_open     === 'true' || false,
+      show_paid_out: $location.search().show_paid_out === 'true' || false,
+      sort:          $location.search().sort || "bounty_total",
+      sort_asc:  $location.search().sort_asc || false
     };
 
+    $scope.$watch('issue_filter_options', function(filters) {
+      var key, value;
+      // remove falsy values
+      for (key in filters) {
+        value = filters[key];
+        if (value === null || value === false || value === "bounty_total") {
+          delete filters[key];
+        }
+      }
+      $location.search(filters).replace();
+    }, true);
+
     $scope.update_filter_options = function() {
-      $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
-      $scope.issue_filter_options.bounty_max = parseFloat($scope.issue_filter_options.bounty_max);
+      $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min) || null;
+      $scope.issue_filter_options.bounty_max = parseFloat($scope.issue_filter_options.bounty_max) || null;
     };
 
     $scope.issue_filter = function(issue) {
@@ -84,6 +109,12 @@ angular.module('app')
       var bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
       var bounty_max = parseFloat($scope.issue_filter_options.bounty_max);
 
+      if ($scope.issue_filter_options.show_paid_out ) {
+        return issue.paid_out;
+      }
+      if (!$scope.issue_filter_options.show_paid_out && issue.paid_out) {
+        return false;
+      }
       if (!isNaN(bounty_min) && bounty_total < bounty_min) {
         return false;
       }
@@ -99,7 +130,7 @@ angular.module('app')
       if ($scope.issue_filter_options.hide_closed) {
         return issue.can_add_bounty;
       }
-      if ($scope.issue_filter_options.hide_open) {
+      if ($scope.issue_filter_options.hide_open && !issue.paid_out) {
         return !issue.can_add_bounty;
       }
       if ($scope.issue_filter_options.text) {
@@ -110,14 +141,12 @@ angular.module('app')
       return true;
     };
 
-    $scope.order_col = "bounty_total";
-    $scope.order_reverse = true;
     $scope.change_order_col = function(col) {
-      if ($scope.order_col === col) {
-        $scope.order_reverse = !$scope.order_reverse;
+      if ($scope.issue_filter_options.sort === col) {
+        $scope.issue_filter_options.sort_asc = !$scope.issue_filter_options.sort_asc;
       } else {
-        $scope.order_reverse = true;
-        $scope.order_col = col;
+        $scope.issue_filter_options.sort_asc = false;
+        $scope.issue_filter_options.sort = col;
       }
     };
 
@@ -153,7 +182,15 @@ angular.module('app')
 
     // override the filter and sort settings to only show open bounties
     $scope.show_bounties = function() {
-      $scope.order_col = "amount";
-      $scope.issue_filter_options = { only_valuable: true };
+      $scope.issue_filter_options = { only_valuable: true, sort: 'bounty_total' };
     };
+
+    $scope.show_claimed_bounties = function() {
+      $scope.issue_filter_options = { show_paid_out: true, sort: 'bounty_total' };
+    };
+
+    $scope.tracker_stats = $api.tracker_stats($routeParams.id).then(function(tracker_stats) {
+      return tracker_stats;
+    });
+
   });

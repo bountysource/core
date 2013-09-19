@@ -37,12 +37,7 @@ angular.module('app')
 
       // can you respond to claims?
       // determine if you can accept/reject claims
-      for (var j=0; j<issue.bounties.length; j++) {
-        if ($scope.current_person && issue.bounties[j].person && issue.bounties[j].person.id === $scope.current_person.id) {
-          $scope.can_respond_to_claims = true;
-          break;
-        }
-      }
+      $scope.can_respond_to_claims = issue.can_respond_to_claims;
 
       // submit a new bounty claim
       $scope.bounty_claim_submit = function() {

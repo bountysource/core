@@ -21,6 +21,18 @@ table#solutions-table tr td img.thumbnail {
 
 .no-stripe td { border-top: 0; background-color: transparent !important; }
 
+td.imagerow {
+  width: 60px;
+}
+
+td.noimagerow {
+  width: 0px;
+}
+
+.ng-binding ul > br {
+  display: none;
+}
+
 li.task-list-item {
   list-style: none;
   list-style-image: url('../images/checkbox.png');

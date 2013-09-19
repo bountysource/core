@@ -154,7 +154,14 @@ angular.module('api.bountysource',[]).
     };
 
     this.fundraiser_pledges_get = function(id) {
-      return this.call("/user/fundraisers/"+id+"/pledges");
+      return this.call("/user/fundraisers/"+id+"/pledges").then(function(pledges) {
+        for (var i=0; i<pledges.length; i++) {
+          // TODO actually use owner, not this person legacy hack
+          pledges[i].person = pledges[i].owner;
+        }
+
+        return pledges;
+      });
     };
 
     this.fundraiser_publish = function(id, callback) {
@@ -231,8 +238,22 @@ angular.module('api.bountysource',[]).
       return this.call("/user/request_password_reset", "POST", data);
     };
 
-    this.person_timeline_get = function(id) {
-      return this.call("/users/"+id+"/activity");
+    this.person_activity = function(id) {
+      return this.call("/people/"+id+"/activity").then(function(activity) {
+        var timeline = [], i;
+
+        for (i in activity.bounties) { timeline.push(activity.bounties[i]); }
+        for (i in activity.pledges) { timeline.push(activity.pledges[i]); }
+        for (i in activity.fundraisers) { timeline.push(activity.fundraisers[i]); }
+        for (i in activity.teams) { timeline.push(activity.teams[i]); }
+
+        // add sort date since the col is either added_at (teams) or created_at (everything else)
+        for (i in timeline) {
+          timeline[i].sort_date = timeline[i].added_at || timeline[i].created_at;
+        }
+
+        return timeline;
+      });
     };
 
     this.project_cards = function() {
@@ -255,6 +276,10 @@ angular.module('api.bountysource',[]).
       return this.call("/projects/"+id+"/issues");
     };
 
+    this.tracker_stats = function(id) {
+      return this.call("/stats/trackers/"+id);
+    };
+
     this.issue_get = function(id, callback) {
       return this.call("/issues/"+id, callback).then(function(issue) {
         issue.my_bounty_claim = undefined;
@@ -270,6 +295,11 @@ angular.module('api.bountysource',[]).
           if (!issue.winning_bounty_claim && issue.bounty_claims[i].collected) {
             issue.winning_bounty_claim = issue.bounty_claims[i];
           }
+        }
+
+        // TODO legacy hack, turn owner into person
+        for (i=0; i<issue.bounties.length; i++) {
+          issue.bounties[i].person = issue.bounties[i].owner;
         }
 
         return issue;
@@ -372,8 +402,8 @@ angular.module('api.bountysource',[]).
       return this.call("/teams/"+id+"/members");
     };
 
-    this.team_member_add = function(team_id, email) {
-      return this.call("/teams/"+team_id+"/members", "POST", { email: email });
+    this.team_member_add = function(team_id, data) {
+      return this.call("/teams/"+team_id+"/members", "POST", data);
     };
 
     this.team_member_remove = function(team_id, member_id) {
@@ -382,6 +412,34 @@ angular.module('api.bountysource',[]).
 
     this.team_member_update = function(team_id, member_id, data) {
       return this.call("/teams/"+team_id+"/members/"+member_id, "PUT", data);
+    };
+
+    this.team_activity = function(team_id) {
+      return this.call("/teams/"+team_id+"/activity");
+    };
+
+    this.team_invite_accept = function(team_id, token) {
+      return this.call("/teams/"+team_id+"/invites", "PUT", { token: token });
+    };
+
+    this.team_invite_reject = function(team_id, token) {
+      return this.call("/teams/"+team_id+"/invites", "DELETE", { token: token });
+    };
+
+    this.team_invite_create = function(team_id, data) {
+      return this.call("/teams/"+team_id+"/invites", "POST", data);
+    };
+
+    this.team_invites_get = function(team_id) {
+      return this.call("/teams/"+team_id+"/invites", "GET");
+    };
+
+    this.person_teams_get = function(id) {
+      return this.call("/people/" + id + "/teams");
+    };
+
+    this.email_registered = function(email) {
+      return this.call("/email_registered", "GET", { email: email });
     };
 
     this.tracker_typeahead = function(query) {
@@ -432,6 +490,10 @@ angular.module('api.bountysource',[]).
 
     this.bounty_claim_reset = function(id) {
       return this.call("/bounty_claims/"+id+"/response/reset", "PUT");
+    };
+
+    this.person_teams = function(person_id) {
+      return this.call("/people/"+person_id+"/teams");
     };
 
 

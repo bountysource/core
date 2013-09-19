@@ -127,21 +127,111 @@ angular.module('app').
       }
     };
   }]).
+  directive('targetBlank', function() {
+    return {
+      restrict: "E",
+      link: function($scope, element) {
+        var modelName = element.attr('model');
+        $scope.$watch(modelName, function(model) {
+          if (model !== null) {
+            setTimeout(function() {
+              element.find('a').attr('target', '_blank');
+            }, 0);
+          }
+        });
+      }
+    };
+  }).
   directive('integerOnly', function() {
-  return {
-    require: 'ngModel',
-    link: function(scope, elm, attrs, ctrl) {
-      ctrl.$parsers.unshift(function(viewValue) {
-        if (/^\-?\d*$/.test(viewValue)) {
-          // it is valid
-          ctrl.$setValidity('integer', true);
-          return viewValue;
-        } else {
-          // it is invalid, return undefined (no model update)
-          ctrl.$setValidity('integer', false);
-          return undefined;
-        }
-      });
-    }
-  };
-});
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$parsers.unshift(function(viewValue) {
+          if (/^\-?\d*$/.test(viewValue)) {
+            // it is valid
+            ctrl.$setValidity('integer', true);
+            return viewValue;
+          } else {
+            // it is invalid, return undefined (no model update)
+            ctrl.$setValidity('integer', false);
+            return undefined;
+          }
+        });
+      }
+    };
+  }).
+  directive('favicon', function() {
+    return {
+      restrict: "E",
+      replace: true,
+      scope: {
+        domain: "@"
+      },
+      template: '<img ng-src="https://www.google.com/s2/favicons?domain={{domain}}" />'
+    };
+  }).
+  directive('ownerProfileLink', function() {
+    // Looks at a model and provides a link to its owner's profile.
+    // Polymorphic on model.owner_type
+    return {
+      restrict: "E",
+      transclude: true,
+      replace: true,
+      scope: {
+        model: "="
+      },
+      template: '<a ng-transclude></a>',
+      link: function(scope, element) {
+        scope.$watch("model", function(model) {
+          try {
+            if (model) {
+              if (!model.owner) {
+                throw("Model is missing owner");
+              } else if (!model.owner.type) {
+                throw("Model is missing owner.type attribute");
+              } else if (model.owner.type === "Person") {
+                element.attr("href", "/people/"+model.owner.slug);
+              } else if (model.owner.type === "Team") {
+                element.attr("href", "/teams/"+model.owner.slug);
+              } else {
+                throw("Unexpected owner " + model.owner.type);
+              }
+            }
+          } catch(e) {
+            console.log("ownerProfileLink: ", e);
+          }
+        });
+      }
+    };
+  }).
+  directive('inputSlug', ['$filter', function($filter) {
+    return {
+      restrict: "AC",
+      require: "ngModel",
+      link: function(scope, element, attr, ctrl) {
+        ctrl.$parsers.unshift(function(viewValue) {
+          var slugifiedViewValue = $filter('slug')(viewValue);
+          if (viewValue !== slugifiedViewValue) {
+            ctrl.$setViewValue(slugifiedViewValue);
+            ctrl.$render();
+          }
+        });
+      }
+    };
+  }])
+  .directive('ownerHref', function() {
+    return {
+      restrict: "AC",
+      link: function(scope, element, attr) {
+        scope.$watch(attr.ownerHref, function(owner) {
+          if (owner) {
+            if ((/^person$/i).test(owner.type)) {
+              element.attr("href", "/people/"+owner.slug);
+            } else if ((/^team$/i).test(owner.type)) {
+              element.attr("href", "/teams/"+owner.slug);
+            }
+          }
+        });
+      }
+    };
+  });

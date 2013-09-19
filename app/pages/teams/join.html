@@ -1,0 +1,29 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/teams">Teams</a><span class="divider">»</span></li>
+  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
+</ul>
+
+<div ng-show="team" ng-controller="JoinTeamController">
+  <div class="row-fluid">
+    <div class="span3">
+      <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+    </div>
+    <div class="span9">
+      <div class="well well-large" style="text-align: center;">
+        <h1 style="margin-top: 0;">Join <a ng-href="teams/{{team.slug}}">{{team.name}}</a> ?</h1>
+        <p class="lead">You were invited to join this team with the following permissions:</p>
+
+        <div ng-class="{ muted: !permissions.public, 'text-success': permissions.public }"><strong>Public</strong>: displayed as a member of {{team.name}}</div>
+        <div ng-class="{ muted: !permissions.spender, 'text-success': permissions.spender }"><strong>Spender</strong>: use the team account to create bounties</div>
+        <div ng-class="{ muted: !permissions.admin, 'text-success': permissions.admin }"><strong>Administrative</strong>: add/remove team members, fund team account</div>
+        <br />
+
+        <form name="form" class="form-inline" ng-submit="accept()" style="margin-bottom: 0;">
+          <!--<input type="text" class="span6" ng-model="token" placeholder="Invite token" required />-->
+          <button type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">Accept Invitation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

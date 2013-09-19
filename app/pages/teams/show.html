@@ -10,29 +10,42 @@
       <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
     </div>
     <div class="span9" ng-controller="TeamTrackersController">
+      <ng-include src="'pages/teams/partials/header.html'"></ng-include>
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
-      <div class="well" ng-show="is_admin">
-        <ng-form class="form-inline" name="search_form" ng-submit="search_projects()">
-          Add an open-source project your company uses:
-          <input
-            name="input"
-            type="text"
-            class="search-query span4"
-            placeholder="Search for projects"
-            ng-model="project_search"
-            typeahead="project.id as project.name for project in projects | filter:$viewValue | filter:project.$added"
-          />
-        </ng-form>
+      <div ng-show="is_admin">
+        <div class="alert" style="padding: 20px;" ng-hide="team.trackers.length > 0">
+          <h4 style="margin-top: 0;">Show off the open-source projects your team uses by adding them now!</h4>
+          Search for projects that your team uses and add them to your profile.
+        </div>
+
+        <div class="well">
+          <ng-form class="form-inline" name="search_form" ng-submit="search_projects()">
+            Add an open-source project your company uses:
+            <input
+              name="input"
+              type="text"
+              class="search-query span4"
+              placeholder="Search for projects"
+              ng-model="project_search"
+              typeahead="project.id as project.name for project in doTypeahead($viewValue)"
+              typeahead-editable="false"
+              />
+          </ng-form>
+        </div>
+      </div>
+
+      <div ng-hide="team.trackers.length > 0 || is_admin">
+        <div class="alert alert-info">{{team.name}} has not added any projects to their profile.</div>
       </div>
 
       <ul class="thumbnails team-tracker-thumbnails">
         <li ng-repeat="tracker in team.trackers" class="span2">
-          <a ng-href="/trackers/{{tracker.slug}}" class="thumbnail text-center">
+          <a class="thumbnail text-center" ng-href="/trackers/{{tracker.slug}}">
+            <button type="button" ng-show="is_admin" class="close" ng-click="remove_tracker(tracker.id)"><i class="icon-remove"></i></button>
             <img ng-src="{{tracker.medium_image_url}}"/>
-            {{tracker.name}}
+            <span>{{tracker.name}}</span>
           </a>
-          <button type="button" ng-show="is_admin" class="close" ng-click="remove_tracker(tracker.id)">&times;</button>
         </li>
       </ul>
     </div>
