@@ -14,8 +14,11 @@ angular.module('app')
     $scope.fundraiser = {
       funding_goal: 25000,
       description: "",
-      short_description: ""
+      short_description: "",
+      team_id: null
     };
+
+    $scope.teams = $api.person_teams($scope.current_person.id);
 
     $scope.create = function() {
       $api.fundraiser_create($scope.fundraiser, function(response) {
