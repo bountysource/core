@@ -33,7 +33,7 @@ angular.module('app')
         var base_url = $window.location.href.replace(/\/issues.*$/,'');
         var payment_params = angular.copy($scope.bounty);
 
-        payment_params.success_url = base_url + "/activity/bounties";
+        payment_params.success_url = base_url + '/issues/receipt?issue=' + issue.id + '&tracker=' + issue.tracker.id + '&amount=' + $scope.bounty.amount + '&anonymous=' + $scope.bounty.anonymous + '&timestamp=' + moment().unix();
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {
