@@ -12,20 +12,33 @@ angular.module('app')
     })
     .controller('PledgeReceiptController', function($scope, $routeParams, $api)
     { 
+        /*  Basic validation of querystring parameters; redirect if they're not present. */
         if ( $routeParams.timestamp == null ||
              $routeParams.amount == null ||
              $routeParams.anonymous == null ||
              $routeParams.fundraiser == null ||
+             $routeParams.reward == null )
         {
             $location.url("/");
         }
 
-        $scope.fundraisers = $api.fundraisers_get();
-        $scope.fundraiser = $api.fundraiser_get($routeParams.fundraiser);
         $scope.date = moment.unix($routeParams.timestamp).format('MMMM D, YYYY');
         $scope.amount = $routeParams.amount;
         $scope.anonymous = $routeParams.anonymous;
 
+        /*  Grab a list of fundraisers to display as potentially interesting. */
+        $api.fundraisers_get().then(function(fundraisers)
+        {
+            $scope.fundraisers = fundraisers;
+        });
+
+        /*  Grab the details of the fundraiser just pledged to. */
+        $api.fundraiser_get($routeParams.fundraiser).then(function(fundraiser)
+        {
+            $scope.fundraiser = fundraiser;
+        });
+
+        /*  Locate the reward that the user requested. */
         $api.fundraiser_info_get($routeParams.fundraiser).then(function(fundraiser_info)
         {
             for ( var x = 0; x < fundraiser_info.rewards.length; ++x )
@@ -38,6 +51,7 @@ angular.module('app')
             }
         });
 
+        /*  Get a tracker for following the fundraiser. */
         $api.tracker_get($routeParams.fundraiser).then(function(tracker)
         {
             // Follow and unfollow API method wrappers

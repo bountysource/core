@@ -12,6 +12,7 @@ angular.module('app')
     })
     .controller('IssueReceiptController', function($scope, $routeParams, $window, $location, $api)
     {
+        /*  Basic validation of querystring parameters; redirect if they're not present. */
         if ( $routeParams.timestamp == null ||
              $routeParams.amount == null ||
              $routeParams.anonymous == null ||
@@ -25,11 +26,13 @@ angular.module('app')
         $scope.amount = $routeParams.amount;
         $scope.anonymous = $routeParams.anonymous;
 
+        /*  Grab the issue details for the bounty. */
         $api.issue_get($routeParams.issue).then(function(issue)
         {
             $scope.issue = issue;
         });
 
+        /*  Get a tracker for following the project. */
         $api.tracker_get($routeParams.tracker).then(function(tracker)
         {
             // Follow and unfollow API method wrappers
