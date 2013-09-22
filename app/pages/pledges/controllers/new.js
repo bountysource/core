@@ -44,8 +44,6 @@ angular.module('app')
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {
-          success: function(response, data) {
-          },
           error: function(response) { console.log("Payment Error:", response); },
 
           noauth: function() {
