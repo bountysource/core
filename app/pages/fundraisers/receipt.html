@@ -1,0 +1,61 @@
+<h1 class="text-center">Thanks for Your Pledge to <a ng-href="{{fundraiser.frontend_path}}" href="{{fundraiser.frontend_path}}" class="ng-binding">{{fundraiser.title}}</a></h1>
+<div class="text-center">
+    <button class="btn" ng-click="tracker.follow()">
+        <span ng-show="tracker.followed">
+            <i class="icon-star"></i>
+            Following this project
+        </span>
+        <span ng-hide="tracker.followed">
+            <i class="icon-star-empty"></i>
+            Follow this project
+        </span>
+    </button>
+</div>
+<br />
+<div class="row-fluid">
+    <div class="span3">
+        <div ng-include="'pages/fundraisers/partials/share.html'"></div>
+        <h4>You May Also Like:</h4>
+        <div class="well">
+            <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-days_remaining' | slice:0:3" fundraiser="fundraiser"></fundraiser-card>
+        </div>
+    </div>
+    <div class="span9">
+        <h3>Pledge Details</h3>
+
+        <table class="table">
+            <thead>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Anonymous</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{amount | currency}}</td>
+                    <td>{{date}}</td>
+                    <td><button class="btn btn-small btn-disabled btn-success" disabled>
+                            <i class="icon-eye-open icon-white"></i>Publicized
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <h3>Reward Details</h3>
+        <table class="table">
+            <thead>
+                <th>Tier</th>
+                <th>Description</th>
+                <th>Details</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="reward in rewards | orderBy:'amount'">
+                <tr>
+                    <td>{{reward.amount | currency}}</td>
+                    <td>{{reward.description}}</td>
+                    <td>{{reward.fulfillment_details}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

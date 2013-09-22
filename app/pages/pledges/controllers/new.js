@@ -38,10 +38,14 @@ angular.module('app')
         var base_url = $window.location.href.replace(/\/fundraisers.*$/,'');
         var payment_params = angular.copy($scope.pledge);
 
-        payment_params.success_url = base_url + "/activity/pledges";
+        /*  This strikes me as dodgy, but there appears to be no standard for returning state information after a payment redirect, and there is approximately zero information on the payment API or how to properly utilize it.
+        */
+        payment_params.success_url = base_url + '/fundraisers/receipt?fundraiser=' + response.id + '&reward=' + $scope.selected_reward.id + '&amount=' + $scope.pledge.amount + '&anonymous=' + $scope.pledge.anonymous + '&timestamp=' + moment().unix();
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {
+          success: function(response, data) {
+          },
           error: function(response) { console.log("Payment Error:", response); },
 
           noauth: function() {

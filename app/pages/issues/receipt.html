@@ -1,0 +1,68 @@
+<h1 class="text-center">Thanks for Your Bounty for <a ng-href="{{issue.frontend_path}}" href="{{issue.frontend_path}}" class="ng-binding">{{issue.id}} - {{issue.title}}</a></h1>
+<div class="text-center">
+    <button class="btn" ng-click="tracker.follow()">
+        <span ng-show="tracker.followed">
+            <i class="icon-star"></i>
+            Following this project
+        </span>
+        <span ng-hide="tracker.followed">
+            <i class="icon-star-empty"></i>
+            Follow this project
+        </span>
+    </button>
+</div>
+<br />
+<div class="row-fluid">
+    <div class="span3">
+        <div ng-include="'pages/issues/partials/share.html'"></div>
+    </div>
+    <div class="span9">
+        <h3>Bounty Details</h3>
+
+        <table class="table table-striped table-condened">
+            <thead>
+                <th>Amount</th>
+                <th>Issue</th>
+                <th>Date</th>
+                <th>Anonymous</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{amount | currency}}</td>
+                    <td><a ng-href="{{issue.frontend_path}}" href="{{issue.frontend_path}}" class="ng-binding">{{issue.title}}</a></td>
+                    <td>{{date}}</td>
+                    <td><button class="btn btn-small btn-disabled btn-success" disabled>
+                            <i class="icon-eye-open icon-white"></i>Publicized
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <div ng-show="tracker.issues_popular.length > 0">
+        <h3>You May Also Like:</h3>
+        <table class="table table-condensed table-striped">
+            <thead>
+                <th>Tracker</th>
+                <th>Issue</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Comments</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="issue in tracker.issues_popular | orderBy:'-bounty_total' | slice:0:3">
+                    <td><a ng-href="{{tracker.frontend_path}}" class="ng-binding" href="{{tracker.frontend_path}}">{{tracker.name}}</a></td>
+                    <td><span ng-show="!issue.can_add_bounty" class="label label-warning">closed</span><a href="{{issue.frontend_path}}">{{issue.title}}</a><issue-status-label issue="bounty.issue" class="ng-isolate-scope ng-scope"><span ng-show="!issue.generic &amp;&amp; issue.can_add_bounty" class="label label-success">Open</span>
+<span ng-hide="issue.generic || issue.can_add_bounty" class="label label-important" style="display: none;">Closed</span>
+<span ng-show="issue.winning_bounty_claim" class="label label-success" style="display: none;">Paid Out!</span>
+</issue-status-label></td>
+                    <td><span ng-show="issue.bounty_total &gt; 0" class="badge badge-success ng-binding">{{issue.bounty_total | currency}}</span></td>
+                    <td>{{issue.created_at | date}}</td>
+                    <td><a ng-href="{{issue.frontend_path}}/comments" class="label label-info ng-binding" href="{{issue.frontend_path}}/comments">
+                        <i class="icon-comment icon-white"></i>{{issue.comment_count}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
