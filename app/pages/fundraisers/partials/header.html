@@ -1,4 +1,4 @@
-<h1 class="text-center">{{ fundraiser.title || 'Loading...' }} <small>by <a href="{{ fundraiser.person.frontend_path }}">{{ fundraiser.person.display_name }}</a></small></h1>
+<h1 class="text-center">{{ fundraiser.title || 'Loading...' }}</h1>
  <p class="lead text-center" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
 
 <div ng-show="fundraiser.owner && !fundraiser.in_progress" class="alert alert-info text-center">
