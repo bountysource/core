@@ -10,7 +10,7 @@ angular.module('app')
   }).controller('PressController', function($scope) {
 
     $scope.articles = [
-      { date: '9/17/13', source: 'Opensource.com', title: 'Bountysource CEO talks open source crowdfunding and bounties for developers', href: 'http://opensource.com/business/13/9/bountysource-CEO-interview' },
+      { date: '9/17/13', source: 'Opensource.com', title: 'Bountysource CEO talks open source crowdfunding and bounties for developers', href: 'http://opensource.com/business/13/9/bountysource-CEO-interview', author: 'Ginny Skalski' },
       { date: '8/1/13', source: "NetworkWorld's Linux Tycoon", title: 'Open source gets its own crowd-funding site, with bounties included', author: 'Bryan Lunduke', href: 'http://www.networkworld.com/community/node/83569' },
       { date: '7/26/13', source: 'Crowdsourcing.org', title: 'Inside Bountysource, a crowdfunding and challenge site for open-source software', author: 'Eric Blattberg', href: 'http://www.crowdsourcing.org/editorial/inside-bountysource-a-crowdfunding-and-challenge-site-for-open-source-software/27343' },
       { date: '7/24/13', source: 'The Frank Peters Show', title: 'Video: Warren Konkel, Bountysource', author: 'Frank Peters', href: 'http://thefrankpetersshow.com/2013/warren-konkel-bountysource/' },
