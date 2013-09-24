@@ -133,7 +133,6 @@ angular.module('app').
       console.log(arguments);
       var retval = [];
       for (var i=0; i < input.length; i++) {
-        console.log(input[i], field)
         retval.push(input[i][field]);
       }
       return retval;
@@ -142,7 +141,9 @@ angular.module('app').
     return function(input) {
       var retval = [];
       for (var i=0; i < input.length; i++) {
-        if (retval.indexOf(input[i]) == -1) retval.push(input[i]);
+        if (retval.indexOf(input[i]) === -1) {
+          retval.push(input[i]);
+        }
       }
       return retval;
     };
