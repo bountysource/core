@@ -79,7 +79,7 @@
           <div>claimed</div>
         </div>
       </div>
-      <br>
+      <br ng-hide="tracker.bounty_total == 0">
       <div class="row-fluid" ng-show="tracker.tracker_type == 'Github::Repository'">
         <div class="span6 text-center">
           <h3 style="margin: 0; line-height:35px;">{{tracker.forks || 0 | number}}</h3>
