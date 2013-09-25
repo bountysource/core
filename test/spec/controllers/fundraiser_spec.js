@@ -31,7 +31,8 @@ var MOCKS = {
 			homepage_url: jasmine.any(String),
 			repo_url: jasmine.any(String),
 			description: jasmine.any(String),
-		}
+		},
+    teams: []
 	},
 	RESPONSE: {
 		meta: {
@@ -60,6 +61,7 @@ describe("FundraiserCreate Controller --", function() {
 	var routeparams;
 	var location;
 	var create_fundraiser_spy;
+  var teams;
 
 	beforeEach(module('app'));
 
@@ -67,6 +69,7 @@ describe("FundraiserCreate Controller --", function() {
 		scope = $rootScope.$new();
 		api = $api;
 		create_fundraiser_spy = spyOn(api, 'fundraiser_create').andReturn(PROMISE.reply_with(MOCKS.RESPONSE));
+    teams = spyOn(api, 'person_teams').andReturn(PROMISE.reply_with(MOCKS.SCOPE.teams));
 		routeparams = $routeParams;
 		location = $location;
 		fund_create_ctrl = $controller('FundraiserCreateController', {$scope: scope, $routeParams: routeparams, $location: location, $api: api});
@@ -129,6 +132,7 @@ describe("FundraiserEditController Controller --", function() {
 	var location;
 	var update;
 	var read;
+  var teams;
 
 	beforeEach(module('app'));
 
@@ -138,6 +142,7 @@ describe("FundraiserEditController Controller --", function() {
 		api = $api;
 		read = spyOn(api, 'fundraiser_get').andReturn(PROMISE.reply_with(MOCKS.SCOPE.fundraiser));
 		update = spyOn(api, 'fundraiser_update').andReturn(PROMISE.reply_with(MOCKS.SCOPE.fundraiser));
+    teams = spyOn(api, 'person_teams').andReturn(PROMISE.reply_with(MOCKS.SCOPE.teams));
 
 		routeparams = angular.copy(MOCKS.ROUTEPARAMS);
 		routeparams.id = "someguy-5";

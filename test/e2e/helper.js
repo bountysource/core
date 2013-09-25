@@ -28,7 +28,7 @@ angular.scenario.dsl('cookies', function() {
       return this.addFutureAction('clear cookies', function($window, $document, done) {
             var injector = $window.angular.element($window.document.body).inheritedData('$injector');
             var cookies = injector.get('$cookies');
-            console.log("Clearing cookie", cookies[name]);
+//            console.log("Clearing cookie", cookies[name]);
             var root = injector.get('$rootScope');
             delete cookies[name];
             root.$apply(); // forcibly flush the cookie changes

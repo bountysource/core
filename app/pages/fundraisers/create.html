@@ -43,6 +43,15 @@
             <input class="span8" id="repo-url" type="url" ng-model="fundraiser.repo_url" placeholder="https://github.com/bountysource/frontend" />
           </div>
         </div>
+
+        <div class="control-group" ng-show="teams.length > 0">
+          <label class="control-label" for="repo-url">Team</label>
+          <div class="controls">
+            <select ng-options="team.id as team.name for team in teams" ng-model="fundraiser.team_id">
+              <option value="">No Team</option>
+            </select>
+          </div>
+        </div>
       </ng-form>
 
       <!--Edit main Description-->
