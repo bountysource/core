@@ -8,52 +8,63 @@
 
 <div class="row-fluid">
   <div class="span4">
-    <table class="table table-striped">
-      <thead ng-show="relations">
-      <tr>
-        <th>
-          Projects <span class="badge badge-info">{{(relations | filter:relations_filter).length | number}}</span>
-          <small ng-show="(relations | filter:relations_filter).length != relations.length" class="muted">of {{relations.length | number}}</small>
-        </th>
-      </tr>
-      </thead>
+    <!-- Good to go, show sort box and trackers -->
+    <div ng-show="__can_use_plugin__">
+      <table class="table table-striped table-condensed">
+        <thead ng-show="relations">
+        <tr>
+          <th>
+            Projects <span class="badge badge-info">{{(relations | filter:relations_filter).length | number}}</span>
+            <small ng-show="(relations | filter:relations_filter).length != relations.length" class="muted">of {{relations.length | number}}</small>
+          </th>
+        </tr>
+        </thead>
 
-      <tbody>
-      <!--Filter options-->
-      <tr>
-        <div class="well">
-          <input type="text" class="span12" placeholder="Search projects..." ng-model="filter_options.text" />
-          <br />
-          <label class="checkbox">
-            <input type="checkbox" ng-model="filter_options.only_with_plugin" />
-            Hide projects without GitHub plugin
-          </label>
-        </div>
-      </tr>
+        <tbody>
+        <!--Filter options-->
+        <tr>
+          <div class="well">
+            <input type="text" class="span12" placeholder="Search projects..." ng-model="filter_options.text" />
+            <br />
+            <label class="checkbox">
+              <input type="checkbox" ng-model="filter_options.only_with_plugin" />
+              Hide projects without GitHub plugin
+            </label>
+          </div>
+        </tr>
 
-      <!--Not found message-->
-      <tr ng-show="(relations | filter:relations_filter).length <= 0" class="info">
-        <td class="text-info"><i>No projects found :(</i></td>
-      </tr>
+        <!--Not found message-->
+        <tr ng-show="(relations | filter:relations_filter).length <= 0" class="info">
+          <td class="text-info"><i>No projects found :(</i></td>
+        </tr>
 
-      <!--Loading projects-->
-      <tr ng-hide="relations">
-        <td class="text-center">
-          <p class="lead">Loading Projects....</p>
-          <progress value="100" class="progress-striped active"></progress>
-        </td>
-      </tr>
+        <!--Loading projects-->
+        <tr ng-hide="relations">
+          <td class="text-center">
+            <p class="lead">Loading Projects....</p>
+            <progress value="100" class="progress-striped active"></progress>
+          </td>
+        </tr>
 
-      <!--Projects!-->
-      <tr ng-show="relations" ng-repeat="relation in relations | orderBy:relations_order:true | filter:relations_filter" ng-class="{ info: (selected_relation.id == relation.id) }">
-        <td>
-          <button ng-click="relation.select()" class="btn btn-link">{{relation.project.name}}</button>
-          <div ng-show="relation.project.tracker_plugin" class="pull-right badge badge-info">Plugin Installed</div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+        <!--Projects!-->
+        <tr ng-show="relations" ng-repeat="relation in relations | orderBy:relations_order:true | filter:relations_filter" ng-class="{ info: (selected_relation.id == relation.id) }">
+          <td>
+            <button ng-click="relation.select()" class="btn btn-link">{{relation.project.name}}</button>
+            <div ng-show="relation.project.tracker_plugin" class="pull-right badge badge-info">Plugin Installed</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Need to enable public repo -->
+    <div class="text-center" ng-hide="__can_use_plugin__">
+      <div><button ng-click="github_auth()" class="btn btn-large btn-primary" style="width: 200px; height: 60px;">Get Started!</button></div>
+      <br />
+      <p class="lead"><strong>Note:</strong> You will need to grant Bountysource the <code>public_repo</code> permission in order to use the plugin.</p>
+    </div>
   </div>
+
   <div class="span8">
     <!--Show error or success messages-->
     <div ng-show="tracker_plugin_alert">
@@ -143,7 +154,6 @@
                 <i class="icon-flag icon-white"></i>
                 Install GitHub Plugin
               </button>
-              <p ng-show="selected_relation.$hide_install_button" class="text-error">{{selected_relation.$install_failed_error}}</p>
             </div>
           </div>
         </div>

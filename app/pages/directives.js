@@ -103,7 +103,7 @@ angular.module('app').
   directive('requireGithubAuth', ["$api", "$window", "$location", function($api, $window, $location) {
     // TODO support more than 1 scope
     return {
-      restrict: "A",
+      restrict: "AC",
       link: function(scope, element, attr) {
         element.bind('click', function() {
           scope.$apply(function() {

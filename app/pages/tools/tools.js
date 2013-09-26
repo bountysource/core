@@ -11,7 +11,7 @@ angular.module('app')
           permissions: function($rootScope) {
             $rootScope.$watch('current_person', function(person) {
               $rootScope.__can_use_plugin__ = person && person.github_account && person.github_account.permissions.indexOf("public_repo") >= 0;
-            })
+            });
           }
         })
       });
