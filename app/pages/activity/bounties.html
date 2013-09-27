@@ -33,7 +33,7 @@
         <issue-status-label issue="bounty.issue"></issue-status-label>
       </span>
     </a></td>
-    <td>{{ bounty.amount | dollars }}</td>
+    <td><a ng-href="/issues/{{ bounty.issue.id }}/bounties/receipt?bounty_id={{ bounty.id }}">{{ bounty.amount | dollars }}</a></td>
     <td>{{ bounty.created_at | date }}</td>
     <td>
       <div ng-show="bounty.owner">

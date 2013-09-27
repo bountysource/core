@@ -1,0 +1,62 @@
+<div class="row-fluid">
+
+  <div class="span9">
+    <h1 class="text-center">Thank you for pledging to <a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title }}</a>!</h1>
+    <h2 class="text-center" style="margin-bottom:0px;">Spread the word!</h2>
+    <div ng-include="'pages/pledges/partials/share.html'"></div>
+
+  </div>
+
+  <div class="span3 well">
+
+    <h2 class="text-center">Pledge Details</h2>
+    <div class="row-fluid">
+      <div class="offset1 span5"><strong><h5>Amount:</h5></strong></div>
+      <div class="span6"><h5>{{ pledge.amount | currency}}</h5></div>
+    </div>
+    <div class="row-fluid">
+      <div class="offset1 span5"><strong><h5>Date:</h5></strong></div>
+      <div class="span6"><h5>{{ pledge.created_at | date: 'medium' }}</h5></div>
+    </div>
+    <div class="row-fluid">
+      <div class="offset1 span5"><strong><h5>Anonymous:<a style="margin-bottom:0px" popover-title="Anonymous Pledges" popover="If you want to hide your identity on a pledge, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="icon-question-sign"></i></a></h5></strong></div>
+      <div class="span6">
+        <span ng-show="pledge.anonymous">
+          <button class="btn btn-small active" style="margin-top:8px;" ng-click="toggle_anonymous(pledge)">
+            <i class="icon-eye-close"></i>
+            Anonymized
+          </button>
+        </span>
+
+        <span ng-hide="pledge.anonymous">
+          <button class="btn btn-small btn-success" style="margin-top:8px;" ng-click="toggle_anonymous(pledge)" ng-hide="pledge.owner_type == 'Team'">
+            <i class="icon-eye-open icon-white"></i>
+            Publicized
+          </button>
+          <button class="btn btn-small btn-success disabled" style="margin-top:8px;" ng-show="pledge.owner_type == 'Team'" tooltip="Team pledges cannot be anonymous">
+            <i class="icon-eye-open icon-white"></i>
+            Publicized
+          </button>
+        </span></div>
+      </div>
+      <br>
+    <!--   <h2>Reward Details</h2>
+      <table class="table">
+        <thead>
+          <th>Tier</th>
+          <th>Description</th>
+          <th>Details</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>{{ pledge.amount | currency}}</td>
+            <td>{{ pledge.created_at | date: 'medium' }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table> -->
+    </div>
+
+
+  </div>

@@ -29,7 +29,7 @@ angular.module('app')
         var payment_params = angular.copy($scope.bounty);
 
         delete payment_params.fee;
-        payment_params.success_url = base_url + "/activity/bounties";
+        payment_params.success_url = base_url + "/issues/"+issue.id+"/bounties/receipt";
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {
