@@ -66,8 +66,8 @@
                     <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
                     <span ng-class="{ 'muted': (!team.is_spender || team.account_balance <= 0) }">
                       {{team.name}}
-                      <strong ng-show="team.is_spender">{{ team.account_balance | currency }}</strong>
-                      <strong ng-hide="team.is_spender">{{ 0 | currency }}</strong>
+                      <strong ng-show="team.is_spender">${{ team.account_balance | number:0 }}</strong>
+                      <strong ng-hide="team.is_spender">${{ 0 }}</strong>
                     </span>
                   </label>
                 </div>
