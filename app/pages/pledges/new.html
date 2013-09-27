@@ -68,6 +68,7 @@
                       {{team.name}}
                       <strong ng-show="team.is_spender">${{ team.account_balance | number:0 }}</strong>
                       <strong ng-hide="team.is_spender">${{ 0 }}</strong>
+                      <span ng-show="team.is_admin && team.account_balance < 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
                     </span>
                   </label>
                 </div>
