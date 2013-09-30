@@ -7,3 +7,4 @@ app/components
 .idea
 cloudfiles.json
 dist/
+*coverage/
