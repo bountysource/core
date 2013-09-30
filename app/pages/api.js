@@ -37,7 +37,10 @@ angular.module('api.bountysource',[]).
       if (count > 0) {
         // decrement count
         window.localStorage.setItem('stubsCount', count - 1);
-
+        var responseInfo = window.localStorage.getItem('responseInfo'+count);
+        if (responseInfo) {
+          console.log("MOCK RESPONSE INFO ****"+responseInfo+"****");
+        }
         return JSON.parse(localStorage.getItem('response'+count));
       } else {
         throw("Nothing left :/");
@@ -55,11 +58,13 @@ angular.module('api.bountysource',[]).
           callback: typeof(mockArgs[0]) === 'function' ? mockArgs.shift() : function(response) { return response.data;}
         };
 
+        console.log("------------------------");
         console.log("Request", JSON.stringify(request));
         console.log("PARAMS", JSON.stringify(request.params));
         var mock_response = this.$shift_mock_response();
 
-        console.log("Mock response:", mock_response);
+        console.log("Mock response:", JSON.stringify(mock_response));
+        console.log("------------------------");
         // request.callback(mock_response);
 
         var mockDeferred = $q.defer();

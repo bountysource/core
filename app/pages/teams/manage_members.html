@@ -19,7 +19,7 @@
         <div class="span8">
           <h3 style="margin-bottom: 0;">Members</h3>
           <p>Members of your team. You can change the permissions for your team members.</p>
-          <table class="table table-hover table-striped" ng-show="members.length > 0">
+          <table class="table members table-hover table-striped" ng-show="members.length > 0">
             <thead>
             <tr>
               <th style="width: 30%;">Username</th>
@@ -62,7 +62,7 @@
             </tbody>
           </table>
 
-          <div collapse="!pending_invites || pending_invites.length <= 0">
+          <div id="pending-members" collapse="!pending_invites || pending_invites.length <= 0">
             <h3 style="margin-bottom: 0;">Pending Members</h3>
             <div ng-show="add_member_error.message">
               <alert type="add_member_error.type" close="add_member_error.message = null">{{add_member_error.message}}</alert>
