@@ -367,8 +367,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'test:unit',
-    'test:e2e',
-    'coveralls'
+    'test:e2e'
   ]);
 
   grunt.registerTask('test:unit', [
@@ -384,6 +383,12 @@ module.exports = function (grunt) {
     'jshint',
     'connect:test',
     'karma:e2e'
+  ]);
+
+  grunt.registerTask('test:travis', [
+    'test:unit',
+    'test:e2e',
+    'coveralls'
   ]);
 
   grunt.registerTask('build', [
