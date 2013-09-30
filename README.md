@@ -1,6 +1,10 @@
-# Bountysource [![Build Status](https://travis-ci.org/bountysource/frontend.png?branch=master)](https://travis-ci.org/bountysource/frontend)
+# Bountysource
+[![Build Status](https://travis-ci.org/bountysource/frontend.png?branch=master)](https://travis-ci.org/bountysource/frontend)
+[![Coverage Status](https://coveralls.io/repos/bountysource/frontend/badge.png)](https://coveralls.io/r/bountysource/frontend)
 
-This repository contains the javascripts, stylesheets and images that power www.bountysource.com.  Our frontend is built using:
+This repository contains the javascripts, stylesheets and images that power www.bountysource.com.  
+
+Our frontend is built using:
 
 - angular.js (javascript framework)
 - twitter-bootstrap (stylesheet framework)

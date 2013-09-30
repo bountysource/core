@@ -20,7 +20,7 @@ exclude = ['app/components/angular-scenario/angular-scenario.js'];
 
 // test results reporter to use
 // possible values: dots || progress || growl
-reporters = ['dots'];
+reporters = ['dots', 'coverage'];
 
 // web server port
 port = 8080;
@@ -54,3 +54,17 @@ captureTimeout = 5000;
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
 singleRun = true;
+
+// All things code coverage related
+preprocessors = {
+      "**/app/pages/**/*.js": "coverage"
+};
+
+coverageReporter = {
+      type: "lcov",
+          dir: "coverage/"
+};
+
+plugins = [
+      'karma-coverage',
+];

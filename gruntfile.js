@@ -132,7 +132,7 @@ module.exports = function (grunt) {
       },
       e2e: {
         configFile: 'karma-e2e.conf.js'
-      }
+      },
     },
 //    coffee: {
 //      dist: {
@@ -315,6 +315,11 @@ module.exports = function (grunt) {
           stripcomponents: 2
         }]
       }
+    },
+    coveralls: {
+      options: {
+        coverage_dir: 'coverage/'
+      }
     }
   });
 
@@ -378,6 +383,12 @@ module.exports = function (grunt) {
     'jshint',
     'connect:test',
     'karma:e2e'
+  ]);
+
+  grunt.registerTask('test:travis', [
+    'test:unit',
+    'test:e2e',
+    'coveralls'
   ]);
 
   grunt.registerTask('build', [
