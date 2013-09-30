@@ -194,4 +194,7 @@ angular.module('app')
       return tracker_stats;
     });
 
+    $scope.update_filter_options();
+    //populate bindings with bounty_min, bounty_max
+
   });
