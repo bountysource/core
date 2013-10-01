@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('CreateBountyController', function ($scope, $routeParams, $window, $location, $payment, $api) {
+  .controller('CreateBountyController', function ($scope, $routeParams, $window, $location, $payment, $api, $filter) {
     $scope.bounty = {
       amount: parseInt($routeParams.amount || 0, 10),
       anonymous: ($routeParams.anonymous === "true") || false,
@@ -92,14 +92,33 @@ angular.module('app')
       }
     });
 
-    $scope.$watch("bounty.amount", function(amount) {
+    $scope.update_bounty_amount = function() {
+      var total = $scope.bounty.total;
+      if (angular.isNumber(total)) {
+        var fee = (total * 0.1) / 1.1;
+        fee = Number($filter('number')(fee, 2).replace(/[^0-9|\.]/g, ''));
+        var amount = total / 1.1;
+        amount = Number($filter('number')(amount, 2).replace(/[^0-9|\.]/g, ''));
+        $scope.bounty.fee = $scope.has_fee ? fee : 0;
+        $scope.bounty.amount = $scope.has_fee ? amount : total;
+      } else {
+        $scope.bounty.amount = 0;
+        $scope.bounty.fee = 0;
+      }
+    };
+
+    $scope.update_bounty_total = function() {
+      var amount = $scope.bounty.amount;
       if (angular.isNumber(amount)) {
-        $scope.bounty.fee = $scope.has_fee ? amount * 0.10 : 0;
-        $scope.bounty.total = $scope.has_fee ? (amount + $scope.bounty.fee) : amount;
+        var fee = amount * 0.10;
+        fee = Number($filter('number')(fee, 2).replace(/[^0-9|\.]/g, ''));
+        amount = Number($filter('number')(amount, 2).replace(/[^0-9|\.]/g, ''));
+        $scope.bounty.fee = $scope.has_fee ? fee : 0;
+        $scope.bounty.total = $scope.has_fee ? Number($filter('number')(amount + fee, 2).replace(/[^0-9|\.]/g, '')) : amount;
       } else {
         $scope.bounty.total = 0;
         $scope.bounty.fee = 0;
       }
-    });
+    };
   });
 
