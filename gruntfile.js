@@ -274,7 +274,8 @@ module.exports = function (grunt) {
         keepExtension: true,
         afterEach: function(changes) {
           var hash_map = grunt.config('md5_hash') || {};
-          hash_map[changes.oldPath.split('/').pop()] = changes.newPath.split('/').pop();
+          hash_map[changes.oldPath.replace('dist/assets/','')] = changes.newPath.split('/').pop();
+          hash_map['compiled/' + changes.newPath.split('/').pop()] = changes.newPath.split('/').pop();
           grunt.config('md5_hash', hash_map);
         }
       },
@@ -291,17 +292,19 @@ module.exports = function (grunt) {
         }
       }
     },
-    md5cdn: {
-      options: {
-        base_url: cloudfile_config.base_url
+    md5_path: {
+      css_js_local: {
+        options: { base_url: '/compiled/' },
+        src: ['dist/assets/*.css', 'dist/assets/*.js']
       },
-      css: {
-        src: 'dist/assets/*.css'
+
+      css_js_cdn: {
+        options: { base_url: cloudfile_config.base_url },
+        src: ['dist/assets/*.css', 'dist/assets/*.js']
       },
-      js: {
-        src: 'dist/assets/*.js'
-      },
-      html: {
+
+      html_cdn: {
+        options: { base_url: cloudfile_config.base_url },
         src: 'dist/*.html'
       }
     },
@@ -402,7 +405,6 @@ module.exports = function (grunt) {
     'html_src',          // make sure all our html_srcs are included correctly
     'copy',              // copy in static files like favicon.ico and robots.txt
     'imagemin',          // copy in minified version of images
-    'md5:binary',        // create md5-named copies of binary files (images, fonts, etc)
     'htmlmin:index',     // copy index.html, 404.html, etc
     'useminPrepare',     // update in-memory configs for concat/cssmin/uglify based on "build blocks"
     'usemin',            // replace "build blocks" in html files with path to "compiled" version
@@ -412,14 +414,15 @@ module.exports = function (grunt) {
     'clean:templates',   // remove angular templates as they're now compiled and included in JS
     'ngmin',             // tweak JS files so uglify works with angular dependencies. specifically: function($scope)... becomes ['$scope', function(a)...]
     'uglify',            // compress JS files
-    'cssmin'             // compress CSS files
+    'cssmin',            // compress CSS files
+    'md5:binary',        // create md5-named copies of binary files (images, fonts, etc)
+    'md5_path:css_js_local' // update css/js files with better paths
   ]);
 
   grunt.registerTask('deploy', [
-    'md5cdn:js',         // update angular templates with CDN urls to md5:binary files
-    'md5cdn:css',        // update compiled css with CDN urls
+    'md5_path:css_js_cdn', // update angular templates with CDN urls to md5:binary files
     'md5:css_js',        // create md5 copies of css/js in dist/compiled
-    'md5cdn:html',       // update root HTML with CDN'd css/js
+    'md5_path:html_cdn', // update root HTML with CDN'd css/js
     'cloudfiles',        // copy all of compiled/ up to CDN
     'clean:dist_assets'  // clean up assets now that they're all up on CDN
   ]);
@@ -452,7 +455,7 @@ module.exports = function (grunt) {
     });
   });
 
-  grunt.registerMultiTask('md5cdn', 'Replace relative links with absolute CDN md5 urls', function() {
+  grunt.registerMultiTask('md5_path', 'Replace relative links with absolute CDN md5 urls', function() {
     var base_url = this.options().base_url;
 
     this.files.forEach(function(f) {
