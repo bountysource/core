@@ -32,3 +32,8 @@ td.noimagerow {
 .ng-binding ul > br {
   display: none;
 }
+
+li.task-list-item {
+  list-style: none;
+  list-style-image: url('../images/checkbox.png');
+}
