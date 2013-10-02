@@ -200,11 +200,3 @@ describe("Scenario: Editing Profile Information", function() {
   });
 
 });
-
-
-describe("CLEAR COOKIES TO ALLOW REFRESH", function() {
-  it("should clear cookies at end of test", function() {
-    //clear cookies at the end of the test. Allows refreshing of tests in-browser when singlerun-mode is false
-    cookies().clear("v2_access_token");
-  });
-});
