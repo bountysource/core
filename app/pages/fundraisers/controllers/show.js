@@ -48,10 +48,12 @@ angular.module('app')
     };
 
     $scope.pledge_redirect = function(amount) {
-      amount = amount || $scope.pledge.amount;
-      if (angular.isNumber(amount) && $scope.fundraiser.published) {
-        $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
-      }
+      $scope.fundraiser.then(function(fundraiser) {
+        amount = amount || $scope.pledge.amount;
+        if (angular.isNumber(amount) && fundraiser.published) {
+          $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
+        }
+      });
     };
 
     $scope.publish = function(fundraiser) {
