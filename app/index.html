@@ -45,7 +45,7 @@
 <div id="wrap">
   <div id="main" class="clear-top">
     <div ng:include src="'pages/layout/navbar.html'"></div>
-    <div style="display: none" class="container" ng-show="no_container == false">
+    <div style="display: none" class="container" ng-controller="AlertNotificationBar" ng-show="show_alert_notification_bar">
       <div class="alert alert-success" style="text-align: center; margin: 0">
         Want to earn some cash? Bountysource's Bootstrap+AngularJS open-source frontend has <a href="/trackers/47-bountysource-frontend">$5,385 in open bounties</a>.
       </div>
