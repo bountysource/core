@@ -10,6 +10,7 @@ files = [
   'app/components/angular/angular.js',
   'app/components/angular-*/angular-*.js',
   'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
+  'app/components/angular-bootstrap-colorpicker/js/*.js',
   'app/pages/app.js',
   'app/pages/**/*.js',
   'test/spec/**/*.js'

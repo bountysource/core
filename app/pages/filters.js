@@ -152,7 +152,7 @@ angular.module('app').
       if (input) {
         return input.replace(/[^0-9a-f]/i, "");
       }
-    }
+    };
   });
 
 

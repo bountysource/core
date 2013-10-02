@@ -3,8 +3,8 @@
 angular.module('app')
   .controller('BaseToolsController', function ($scope, $routeParams, $window, $location, $api) {
     $scope.active_tab = function(tab) {
-      if (tab === 'all' && /^\/tools$/i.test($location.path())) { return 'active' }
-      else if (tab === 'installed' && /^\/tools\/installed$/i.test($location.path())) { return 'active' }
+      if (tab === 'all' && /^\/tools$/i.test($location.path())) { return 'active'; }
+      else if (tab === 'installed' && /^\/tools\/installed$/i.test($location.path())) { return 'active'; }
     };
 
     $scope.github_auth = function(redirect_url) {
@@ -41,14 +41,14 @@ angular.module('app')
     $scope.all_trackers = $api.trackers_get().then(function(trackers) {
       $scope.loading_trackers = false;
 
-      var owner_map = {}, owner = undefined;
+      var owner_map = {}, owner;
       for (var i=0; i<trackers.length; i++) {
         owner = trackers[i].full_name.split('/')[0];
         owner_map[owner] = owner_map[owner] || [];
         owner_map[owner].push(trackers[i]);
       }
 
-      $scope.open_by_default = Object.keys(owner_map).length == 1;
+      $scope.open_by_default = Object.keys(owner_map).length === 1;
 
       return owner_map;
     });
@@ -73,7 +73,8 @@ angular.module('app')
 
       $scope.plugin_changed = function(plugin) {
         if (plugin) {
-          var copy = angular.copy(plugin); delete copy.$master;
+          var copy = angular.copy(plugin);
+          delete copy.$master;
           return !angular.equals(plugin.$master, copy);
         }
       };
@@ -106,7 +107,8 @@ angular.module('app')
           if (updated_plugin.error) {
             $scope.plugin_alert.text = updated_plugin.error;
           } else {
-            var copy = angular.copy(plugin); delete copy.$master;
+            var copy = angular.copy(plugin);
+            delete copy.$master;
             plugin.$master = copy;
 
             // update the cached version
