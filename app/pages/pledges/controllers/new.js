@@ -37,8 +37,7 @@ angular.module('app')
       $scope.create_payment = function() {
         var base_url = $window.location.href.replace(/\/fundraisers.*$/,'');
         var payment_params = angular.copy($scope.pledge);
-
-        payment_params.success_url = base_url + "/activity/pledges";
+        payment_params.success_url = base_url + "/fundraisers/"+response.id+"/receipts/recent";
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {

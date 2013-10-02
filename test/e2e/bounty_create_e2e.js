@@ -80,6 +80,7 @@ describe("Scenario: Creating Bounties --", function() {
       });
 
       it("$scope.bounty.amount is initialized to the amount specified on the button", function() {
+        Mock.pushScenario("/issues/:id", "GET", "success");
         element("a[ng-click='place_bounty_redirect(15)']").click();
         expect(input("bounty.amount").val()).toBe("15");
       });

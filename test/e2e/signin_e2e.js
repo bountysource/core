@@ -2,6 +2,15 @@
 /*jshint -W069 */
 'use strict';
 
+describe("CLEAR COOKIES TO ALLOW REFRESH", function() {
+  it("should clear cookies at start of test", function() {
+    browser().navigateTo('/');
+    //clear cookies at the end of the test. Allows refreshing of tests in-browser when singlerun-mode is false
+    cookies().clear("v2_access_token");
+  });
+});
+
+
 describe('Scenario: Signing In --', function () {
 
   beforeEach(function() {
@@ -154,12 +163,18 @@ describe('Scenario: Signing In --', function () {
 });
 
 describe("Scenario: Signin redirect from bounty creation page --", function() {
+
+  beforeEach(function() {
+    Mock.init();
+  });
+
   it("setting up BountySource account with service provider auth", function() {
 
     Mock.pushScenario("/issues/:id/bounty", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-github-auth");
     Mock.pushScenario("/user/login", "POST", "email-address-available");
     Mock.pushScenario("/payments", "POST", "missing-access-token");
+    Mock.pushScenario("/user/bounties", "GET", "missing-access-token");
     Mock.pushScenario("/issues/:id/bounty", "GET", "success");
 
     browser().navigateTo('/issues/644-use-an-array-for-web-breadcrumbs-5-00/bounty?amount=15');
@@ -186,6 +201,7 @@ describe("Scenario: Signin redirect from bounty creation page --", function() {
     Mock.pushScenario("/issues/:id/bounty", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-github-auth");
     Mock.pushScenario("/payments", "POST", "missing-access-token");
+    Mock.pushScenario("/user/bounties", "GET", "missing-access-token");
     Mock.pushScenario("/issues/:id/bounty", "GET", "success");
 
     browser().navigateTo('/issues/644-use-an-array-for-web-breadcrumbs-5-00/bounty?amount=15');
@@ -216,6 +232,7 @@ describe("Scenario: Signin redirect from pledge creation page --", function() {
     Mock.pushScenario("/user/login", "POST", "email-address-available");
     Mock.pushScenario("/payments", "POST", "missing-access-token");
     Mock.pushScenario("/fundraisers/:id", "GET", "success");
+    Mock.pushScenario("/user/contributions", "GET", "missing-access-token");
     Mock.pushScenario("/fundraisers/:id", "GET", "success");
 
     browser().navigateTo('/fundraisers/451-fake-fundraiser/pledge');
@@ -250,6 +267,7 @@ describe("Scenario: Signin redirect from pledge creation page --", function() {
 
     Mock.pushScenario("/payments", "POST", "missing-access-token");
     Mock.pushScenario("/fundraisers/:id", "GET", "success");
+    Mock.pushScenario("/user/contributions", "GET", "missing-access-token");
     Mock.pushScenario("/fundraisers/:id", "GET", "success");
 
     browser().navigateTo('/fundraisers/451-fake-fundraiser/pledge');
