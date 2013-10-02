@@ -5,7 +5,7 @@
     <span ng-show="fundraiser.updates.length > 0" class="badge badge-info">{{fundraiser.updates.length | number:0}}</span>
   </a></li>
   <li ng-class="active_tab('pledges')" ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledges">
-    Pledges
+    Backers
     <span ng-show="fundraiser.pledge_count > 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
   </a></li>
   <li ng-class="active_tab('rewards')" ng-show="fundraiser.can_manage && fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
