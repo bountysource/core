@@ -130,7 +130,7 @@ angular.module('app').
     };
   }).filter('pluck', function() {
     return function(input, field) {
-      console.log(arguments);
+      // console.log(arguments);
       var retval = [];
       for (var i=0; i < input.length; i++) {
         retval.push(input[i][field]);
@@ -147,6 +147,12 @@ angular.module('app').
       }
       return retval;
     };
+  }).filter('hex', function() {
+    return function(input) {
+      if (input) {
+        return input.replace(/[^0-9a-f]/i, "");
+      }
+    }
   });
 
 

@@ -347,10 +347,6 @@ angular.module('api.bountysource',[]).
       return this.call("/project_relations");
     };
 
-    this.tracker_plugin_create = function(tracker_id, linked_account_id) {
-      return this.call("/trackers/"+tracker_id+"/tracker_plugin", "POST", { linked_account_id: linked_account_id });
-    };
-
     this.tracker_plugin_update = function(tracker_id, data) {
       return this.call("/trackers/"+tracker_id+"/tracker_plugin", "PUT", data);
     };
@@ -501,6 +497,19 @@ angular.module('api.bountysource',[]).
       return this.call("/people/"+person_id+"/teams");
     };
 
+
+    this.trackers_get = function() {
+      return this.call("/projects");
+    };
+
+    this.tracker_plugins_get = function() {
+      return this.call("/tracker_plugins");
+    };
+
+    this.tracker_plugin_create = function(tracker_id, data) {
+      data.tracker_id = tracker_id;
+      return this.call("/tracker_plugins", "POST", data);
+    };
 
 
 

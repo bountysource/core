@@ -1,0 +1,18 @@
+<accordion ng-repeat="(owner, trackers) in all_trackers" close-others="oneAtATime">
+  <accordion-group is-open="false">
+    <accordion-heading>{{owner}} <small class="muted"><strong>{{trackers.length | number}} {{"project" | pluralize:trackers.length}}</strong></small></accordion-heading>
+    <table class="table table-projects">
+      <tbody>
+      <tr ng-repeat="tracker in trackers" ng-class="{ 'info': (current_tracker && tracker.id == current_tracker.id) }">
+        <td><a ng-click="expand_tracker(tracker)">{{tracker.full_name}}</a></td>
+        <td style="width: 5%;">
+                <span ng-show="plugin_installed(tracker) || tracker.$plugin_installed">
+                  <i class="icon-ok"></i>
+                </span>
+        </td>
+        <td style="width: 5%;"><a ng-click="expand_tracker(tracker)"><i class="icon-wrench"></i></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </accordion-group>
+</accordion>

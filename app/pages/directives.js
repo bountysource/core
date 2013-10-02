@@ -218,8 +218,8 @@ angular.module('app').
         });
       }
     };
-  }])
-  .directive('ownerHref', function() {
+  }]).
+  directive('ownerHref', function() {
     return {
       restrict: "AC",
       link: function(scope, element, attr) {
@@ -233,5 +233,13 @@ angular.module('app').
           }
         });
       }
+    };
+  }).
+  directive('loadingBar', function() {
+    return {
+      restrict: "E",
+      replace: true,
+      transclude: true,
+      template: '<div><div class="text-center"><p class="lead" ng-transclude></p><progress value="100" class="progress-striped active"></progress></div></div>'
     };
   });
