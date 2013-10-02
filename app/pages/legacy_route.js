@@ -24,7 +24,7 @@ angular.module('app')
         controller: 'Static'
       })
       .when('/tools', {
-        redirectTo: "/",
+        redirectTo: "/tools",
         controller: 'Static'
       })
       .when('/users/:id', {

@@ -10,6 +10,7 @@ files = [
   'app/components/angular/angular.js',
   'app/components/angular-*/angular-*.js',
   'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
+  'app/components/angular-bootstrap-colorpicker/js/*.js',
   'app/pages/app.js',
   'app/pages/**/*.js',
   'test/spec/**/*.js'
@@ -20,7 +21,7 @@ exclude = ['app/components/angular-scenario/angular-scenario.js'];
 
 // test results reporter to use
 // possible values: dots || progress || growl
-reporters = ['dots'];
+reporters = ['dots', 'coverage'];
 
 // web server port
 port = 8080;
@@ -54,3 +55,17 @@ captureTimeout = 5000;
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
 singleRun = true;
+
+// All things code coverage related
+preprocessors = {
+      "**/app/pages/**/*.js": "coverage"
+};
+
+coverageReporter = {
+      type: "lcov",
+          dir: "coverage/"
+};
+
+plugins = [
+      'karma-coverage',
+];

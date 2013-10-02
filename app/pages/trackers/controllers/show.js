@@ -84,7 +84,8 @@ angular.module('app')
       hide_open:     $location.search().hide_open     === 'true' || false,
       show_paid_out: $location.search().show_paid_out === 'true' || false,
       sort:          $location.search().sort || "bounty_total",
-      sort_asc:  $location.search().sort_asc || false
+      sort_asc:      $location.search().sort_asc || false,
+      show_issue_id: $location.search().show_issue_id || false
     };
 
     $scope.$watch('issue_filter_options', function(filters) {
@@ -192,5 +193,8 @@ angular.module('app')
     $scope.tracker_stats = $api.tracker_stats($routeParams.id).then(function(tracker_stats) {
       return tracker_stats;
     });
+
+    $scope.update_filter_options();
+    //populate bindings with bounty_min, bounty_max
 
   });

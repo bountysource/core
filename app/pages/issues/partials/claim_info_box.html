@@ -61,7 +61,7 @@
         <p>
           <span ng-show="issue.bounty_claims[0].accept_count > 0"><strong>{{issue.bounty_claims[0].accept_count | number}}</strong> of <strong>{{issue.bounty_claims[0].backers_count | number}}</strong></span>
           <span ng-show="issue.bounty_claims[0].accept_count <= 0"><strong>No</strong></span>
-          backers have voted in favor of this claim.
+          <ng-pluralize count="issue.bounty_claims[0].accept_count" when="{'0': 'backers have voted in favor of this claim.', '1': 'backers has voted in favor of this claim.', 'other': 'backers have voted in favor of this claim.'}"></ng-pluralize>
         </p>
         <p>Automatically accepted in
           <strong>{{issue.bounty_claims[0].dispute_period_ends_at | time_left_in_words}}</strong>

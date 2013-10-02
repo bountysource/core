@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div class="well">
+  <div ng-show="person.company || person.location || person.github_account || person.twitter_account || person.facebook_account || teams.length > 0" class="well">
     <div class="row-fluid" ng-show="person.company">
       <div class="span4 text-right">
         <strong>Company</strong>

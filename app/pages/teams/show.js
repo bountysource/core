@@ -8,12 +8,11 @@ angular.module('app')
         controller: 'BaseTeamController'
       });
   })
-  .controller('TeamTrackersController', function ($scope, $routeParams, $api, $pageTitle) {
+  .controller('TeamTrackersController', function ($scope, $routeParams, $api, $pageTitle, $location) {
     $scope.projects = [];
 
     $scope.team.then(function(team) {
       $pageTitle.set(team.name, 'Teams');
-
       $scope.doTypeahead = function($viewValue) {
         return $api.tracker_typeahead($viewValue);
       };
@@ -41,6 +40,17 @@ angular.module('app')
         $api.team_tracker_remove(team.slug, tracker_id);
       };
 
+      $scope.members.then(function(members) {
+        if ($location.path() === "/teams/"+$routeParams.id && team.trackers.length === 0 && !$scope.is_member) {
+          if (members.length > 0) {
+            $location.path('/teams/'+$routeParams.id+'/members');
+          } else {
+            $location.path('/teams/'+$routeParams.id+'/activity');
+          }
+        }
+      });
+
       return team;
     });
+
   });

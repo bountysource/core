@@ -37,7 +37,10 @@ angular.module('api.bountysource',[]).
       if (count > 0) {
         // decrement count
         window.localStorage.setItem('stubsCount', count - 1);
-
+        var responseInfo = window.localStorage.getItem('responseInfo'+count);
+        if (responseInfo) {
+          console.log("MOCK RESPONSE INFO ****"+responseInfo+"****");
+        }
         return JSON.parse(localStorage.getItem('response'+count));
       } else {
         throw("Nothing left :/");
@@ -55,11 +58,13 @@ angular.module('api.bountysource',[]).
           callback: typeof(mockArgs[0]) === 'function' ? mockArgs.shift() : function(response) { return response.data;}
         };
 
+        console.log("------------------------");
         console.log("Request", JSON.stringify(request));
         console.log("PARAMS", JSON.stringify(request.params));
         var mock_response = this.$shift_mock_response();
 
-        console.log("Mock response:", mock_response);
+        console.log("Mock response:", JSON.stringify(mock_response));
+        console.log("------------------------");
         // request.callback(mock_response);
 
         var mockDeferred = $q.defer();
@@ -77,8 +82,8 @@ angular.module('api.bountysource',[]).
 
         // merge in params
         params = angular.copy(params);
-        if ($cookieStore.get($api.access_token_cookie_name)) {
-          params.access_token = $cookieStore.get($api.access_token_cookie_name);
+        if ($api.get_access_token()) {
+          params.access_token = $api.get_access_token();
         }
         params.per_page = params.per_page || 250;
 
@@ -342,10 +347,6 @@ angular.module('api.bountysource',[]).
       return this.call("/project_relations");
     };
 
-    this.tracker_plugin_create = function(tracker_id, linked_account_id) {
-      return this.call("/trackers/"+tracker_id+"/tracker_plugin", "POST", { linked_account_id: linked_account_id });
-    };
-
     this.tracker_plugin_update = function(tracker_id, data) {
       return this.call("/trackers/"+tracker_id+"/tracker_plugin", "PUT", data);
     };
@@ -497,6 +498,19 @@ angular.module('api.bountysource',[]).
     };
 
 
+    this.trackers_get = function() {
+      return this.call("/projects");
+    };
+
+    this.tracker_plugins_get = function() {
+      return this.call("/tracker_plugins");
+    };
+
+    this.tracker_plugin_create = function(tracker_id, data) {
+      data.tracker_id = tracker_id;
+      return this.call("/tracker_plugins", "POST", data);
+    };
+
 
 
     // these should probably go in an "AuthenticationController" or something more angular
@@ -520,10 +534,10 @@ angular.module('api.bountysource',[]).
           obj.access_token = $rootScope.current_person.access_token;
         }
         $rootScope.current_person = obj;
-        $cookieStore.put($api.access_token_cookie_name, $rootScope.current_person.access_token);
+        $api.set_access_token($rootScope.current_person.access_token);
       } else {
         $rootScope.current_person = false;
-        $cookieStore.remove($api.access_token_cookie_name);
+        $api.set_access_token(null);
       }
     };
 
@@ -569,7 +583,14 @@ angular.module('api.bountysource',[]).
     };
 
     this.set_access_token = function(new_access_token) {
-      return $cookieStore.put(this.access_token_cookie_name, new_access_token);
+      if (new_access_token) {
+        // TODO: need secure cookies support in angularjs -- https://github.com/angular/angular.js/issues/950
+        $cookieStore.put(this.access_token_cookie_name, new_access_token);
+      } else {
+        $cookieStore.remove(this.access_token_cookie_name);
+      }
+
+      return new_access_token;
     };
 
     this.get_access_token = function() {
@@ -577,7 +598,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.load_current_person_from_cookies = function() {
-      var access_token = $cookieStore.get($api.access_token_cookie_name);
+      var access_token = $api.get_access_token();
       if (access_token) {
         console.log("Verifying access token: " + access_token);
         this.call("/user", { access_token: access_token }, function(response) {
@@ -627,7 +648,7 @@ angular.module('api.bountysource',[]).
       var port = $location.port();
 
       options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
-      if ($cookieStore.get($api.access_token_cookie_name)) { options.access_token = $cookieStore.get($api.access_token_cookie_name); }
+      if ($api.get_access_token()) { options.access_token = $api.get_access_token(); }
       return $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?' + $api.toKeyValue(options);
     };
 

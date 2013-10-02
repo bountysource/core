@@ -1,6 +1,6 @@
 'use strict';
 angular.module('app')
-  .service('$payment', function ($rootScope, $location, $window, $log, $api, $cookieStore) {
+  .service('$payment', function ($rootScope, $location, $window, $log, $api) {
     // currently only used for bounty and pledge creation.
     // $payment.create({ amount: 15, payment_method: 'google', ... }).process();
     // NOTE: also used to add money to teams!
@@ -25,7 +25,7 @@ angular.module('app')
             $window.google.payments.inapp.buy({
               jwt:     response.data.jwt,
               success: function (result) {
-                $window.location = $rootScope.api_host + "payments/google/success?access_token=" + $cookieStore.get($api.access_token_cookie_name) + "&order_id=" + result.response.orderId;
+                $window.location = $rootScope.api_host + "payments/google/success?access_token=" + $api.get_access_token() + "&order_id=" + result.response.orderId;
               },
               failure: function (result) {
                 console.log('Google Wallet: Error', result);
