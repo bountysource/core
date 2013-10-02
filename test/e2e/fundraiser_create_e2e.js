@@ -233,7 +233,6 @@ describe('Scenario: Creating A Fundraiser --', function () {
         sleep(1); //allow time for the page to load
         expect(browser().location().path()).toEqual("/fundraisers/451-fake-fundraiser");
         expect(element("button[ng-click='create_update()']").count()).toBe(1);
-        expect(element("a[ng-show='fundraiser.published && fundraiser.in_progress && !fundraiser_hide_pledge_button']").css("display")).toBe("block");
       });
 
     });
