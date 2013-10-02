@@ -124,7 +124,7 @@ angular.module('api.bountysource',[]).
         // hacky way to add calculated funding percentage to data.
         // TODO proper Models
         if (res.meta.success) {
-          res.data.funding_percentage = Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100);
+          res.data.funding_percentage = Math.round((res.data.total_pledged / res.data.funding_goal) * 100);
           res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
           res.data.image_url = res.data.image_url || "/images/bountysource-grey.png";
 
@@ -143,7 +143,7 @@ angular.module('api.bountysource',[]).
     this.fundraiser_info_get = function(id) {
       return this.call("/user/fundraisers/"+id+"/info", function(res) {
         if (res.meta.success) {
-          res.data.funding_percentage = Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100);
+          res.data.funding_percentage = Math.round((res.data.total_pledged / res.data.funding_goal) * 100);
           res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
         }
         return res.data;
