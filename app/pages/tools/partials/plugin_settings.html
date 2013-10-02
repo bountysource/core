@@ -8,51 +8,51 @@
   <div>
     <loading-bar ng-show="plugin_loading">{{plugin_loading}}</loading-bar>
 
-    <div class="row-fluid" ng-hide="plugin_loading">
-      <div class="span6">
-        <strong>Issue Text</strong>
-        <small>
-          <p>Choose what Bountysource is allowed to modify.</p>
-        </small>
+    <div ng-hide="plugin_loading">
+      <div class="row-fluid">
+        <div class="span6">
+          <strong>Issue Text</strong>
+          <small>
+            <p>Choose what Bountysource is allowed to modify.</p>
+          </small>
 
-        <ng-form class="form-horizontal">
-          <label class="checkbox">
-            <input type="checkbox" ng-model="current_plugin.modify_title" />
-            Modify issue titles
+          <ng-form class="form-horizontal">
+            <label class="checkbox">
+              <input type="checkbox" ng-model="current_plugin.modify_title" />
+              Modify issue titles
+            </label>
+
+            <label class="checkbox">
+              <input type="checkbox" ng-model="current_plugin.modify_body" />
+              Modify issue bodies
+            </label>
+          </ng-form>
+        </div>
+
+        <div class="span6">
+          <strong>Label</strong>
+          <label class="checkbox" STYLE="margin-bottom: 5px;">
+            <input type="checkbox" ng-model="current_plugin.add_label" />
+            Add <span class="label" style="background-color: {{current_plugin.label_color}};">{{current_plugin.label_name}}</span> label to issues with bounty
           </label>
-
-          <label class="checkbox">
-            <input type="checkbox" ng-model="current_plugin.modify_body" />
-            Modify issue bodies
-          </label>
-        </ng-form>
-      </div>
-
-      <div class="span6">
-        <strong>Label</strong>
-        <label class="checkbox" STYLE="margin-bottom: 5px;">
-          <input type="checkbox" ng-model="current_plugin.add_label" />
-          Add <span class="label" style="background-color: {{current_plugin.label_color}};">{{current_plugin.label_name}}</span> label to issues with bounty
-        </label>
-        <div class="row-fluid">
-          <div class="span8">
-            <input class="span12" type="text" ng-model="current_plugin.label_name" placeholder="Label name" ng-disabled="!current_plugin.add_label" />
-          </div>
-          <div class="span4">
-            <input type="text" class="span12" colorpicker="hex" placeholder="#129e5e" ng-model="current_plugin.label_color" ng-disabled="!current_plugin.add_label" />
+          <div class="row-fluid">
+            <div class="span8">
+              <input class="span12" type="text" ng-model="current_plugin.label_name" placeholder="Label name" ng-disabled="!current_plugin.add_label" />
+            </div>
+            <div class="span4">
+              <input type="text" class="span12" colorpicker="hex" placeholder="#129e5e" ng-model="current_plugin.label_color" ng-disabled="!current_plugin.add_label" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <br />
+      <div>
+        <!-- Modify existing plugin, show save button. Otherwise, show install button -->
+        <button ng-show="current_tracker.$plugin_installed" class="btn btn-primary" ng-disabled="!plugin_changed(current_plugin)" ng-click="update_plugin(current_plugin)">Save</button>
+        <button ng-hide="current_tracker.$plugin_installed" class="btn btn-success" ng-click="create_plugin()">Install</button>
 
-    <br />
-
-    <div>
-      <!-- Modify existing plugin, show save button. Otherwise, show install button -->
-      <button ng-show="current_tracker.$plugin_installed" class="btn btn-primary" ng-disabled="!plugin_changed(current_plugin)" ng-click="update_plugin(current_plugin)">Save</button>
-      <button ng-hide="current_tracker.$plugin_installed" class="btn btn-success" ng-click="create_plugin()">Install</button>
-
-      <button class="btn" ng-click="collapse_tracker()">Close</button>
+        <button class="btn" ng-click="collapse_tracker()">Close</button>
+      </div>
     </div>
   </div>
 </div>
