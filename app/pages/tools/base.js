@@ -101,7 +101,15 @@ angular.module('app')
       $scope.update_plugin = function(plugin) {
         $scope.plugin_loading = "Saving changes...";
 
-        $api.tracker_plugin_update(plugin.tracker.id, plugin.$changes).then(function(updated_plugin) {
+        var payload = {
+          modify_body: plugin.modify_body,
+          modify_title: plugin.modify_title,
+          add_label: plugin.add_label,
+          label_name: plugin.label_name,
+          label_color: plugin.label_color
+        };
+
+        $api.tracker_plugin_update(plugin.tracker.id, payload).then(function(updated_plugin) {
           $scope.plugin_loading = false;
 
           if (updated_plugin.error) {
