@@ -13,7 +13,7 @@ files = [
   'app/components/angular-bootstrap-colorpicker/js/*.js',
   'app/pages/app.js',
   'app/pages/**/*.js',
-  'test/spec/**/*.js'
+  'test/unit/**/*.js'
 ];
 
 // list of files to exclude
