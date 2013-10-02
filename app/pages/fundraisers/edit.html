@@ -5,7 +5,7 @@
   <li><a>Edit</a></li>
 </ul>
 
-<div class="row-fluid">
+<div class="row-fluid" ng-show="fundraiser">
   <div class="span9">
     <div ng-show="error" >
       <alert type="'error'" close="error = null" >{{ error }}</alert>

@@ -85,7 +85,7 @@
               </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group" ng-show="fundraiser.rewards.length > 0">
               <label class="control-label">Choose a Reward</label>
 
               <div class="controls">
@@ -109,7 +109,7 @@
             </div>
           </div>
 
-          <div class="span6">
+          <div class="span6" ng-show="fundraiser.rewards.length > 0">
             <div collapse="!selected_reward.fulfillment_details">
               <div class="alert alert-block" ng-show="selected_reward.fulfillment_details">
                 <strong>Reward Survey</strong>
