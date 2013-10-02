@@ -1,0 +1,60 @@
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider">»</span></li>
+    <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
+    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a><span class="divider">»</span></li>
+    <li><a>Receipts</a></li>
+  </ul>
+
+  <form class="form" ng-show="fundraiser">
+    <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+    <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="row-fluid">
+          <div class="span12">
+            <div ng-show="receipts.length > 1  && !pledge">
+              <table class="table table-striped">
+                <thead>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Full Receipt</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="receipt in receipts">
+                    <td>{{ receipt.amount | currency }}</td>
+                    <td>{{ receipt.created_at | date:'medium' }}</td>
+                    <td><a ng-href="/fundraisers/{{ fundraiser.id }}/receipts?pledge_id={{ receipt.id }}">See full receipt</a></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <div ng-show="pledge">
+                <div class="row-fluid">
+                <div class="span9">
+                  <h1 class="text-center">Thank you for your pledge!</h1>
+                  <h2 class="text-center" style="margin-bottom:0px;">Spread the word!</h2>
+                  <div ng-include="'pages/pledges/partials/share.html'"></div>
+
+                </div>
+
+                <div class="span3 well">
+
+                  <h2 class="text-center">Pledge Details</h2>
+                  <div class="row-fluid">
+                    <div class="span3"><strong><h5>Amount:</h5></strong></div>
+                    <div class="offset1 span8"><h5>{{ pledge.amount | currency}}</h5></div>
+                  </div>
+                  <div class="row-fluid">
+                    <div class="span3"><strong><h5>Date:</h5></strong></div>
+                    <div class="offset1 span8"><h5>{{ pledge.created_at | date: 'longDate' }}</h5></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
