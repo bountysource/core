@@ -10,9 +10,7 @@ window._gaq.push(['_setAccount', document.location.host === 'www.bountysource.co
 }(document,'script'));
 
 angular.module('app').run(function($rootScope, $window, $location) {
-  console.log("firing google analytics pixel");
   $rootScope.$on('$viewContentLoaded', function() {
-    console.log("really firing google analytics pixel");
     $window._gaq.push(['_trackPageview', $location.url()]);
   });
 });
