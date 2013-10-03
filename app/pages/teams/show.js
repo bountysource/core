@@ -12,6 +12,9 @@ angular.module('app')
     $scope.projects = [];
 
     $scope.team.then(function(team) {
+      if (team.error) {
+        $location.path('/teams');
+      }
       $pageTitle.set(team.name, 'Teams');
       $scope.doTypeahead = function($viewValue) {
         return $api.tracker_typeahead($viewValue);
