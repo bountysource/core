@@ -63,7 +63,7 @@ angular.module('app')
         } else if ($scope.current_person && $scope.current_person.github_account && b[0] === $scope.current_person.github_account.login) {
           return 1;
         } else {
-          return a[1].length == b[1].length ? 0 : (a[1].length < b[1].length ? 1 : -1);
+          return a[1].length === b[1].length ? 0 : (a[1].length < b[1].length ? 1 : -1);
         }
       });
 
