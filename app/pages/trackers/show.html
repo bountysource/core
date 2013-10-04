@@ -191,6 +191,7 @@
       <thead>
         <tr>
           <th ng-show="issue_filter_options.show_issue_id">ID</th>
+          <th ng-show="issue_filter_options.show_issue_number">#</th>
           <th class="span9">Title</th>
           <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
           <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
@@ -203,6 +204,7 @@
       <tbody>
         <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:issue_filter_options.sort:!issue_filter_options.sort_asc" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
           <td ng-show="issue_filter_options.show_issue_id">{{issue.id}}</td>
+          <td ng-show="issue_filter_options.show_issue_number">{{issue.number}}</td>
 
           <td>
             <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
