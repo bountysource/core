@@ -15,14 +15,21 @@
   "quotmark": false,
   "regexp": true,
   "undef": true,
-  "unused": true,
+  "unused": false,
   "strict": true,
   "trailing": true,
   "smarttabs": true,
   "globals": {
     "angular": false,
     "Moment": false,
-    "describe": false
+    "describe": false,
+    "it": false,
+    "expect": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "inject": false,
+    "dump": false,
+    "CORS": false
   }
 }
 

@@ -13,7 +13,8 @@ module.exports = function(config) {
       'app/components/angular-bootstrap-colorpicker/js/*.js',
       'app/pages/app.js',
       'app/pages/**/*.js',
-      'test/unit/**/**/*.js'
+      'test/unit/**/*.js',
+      'test/mock/*.js'
     ],
 
     // list of files to exclude
@@ -50,7 +51,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 5000,
@@ -72,7 +73,8 @@ module.exports = function(config) {
     plugins: [
       'karma-coverage',
       'karma-jasmine',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-chrome-launcher'
     ]
   });
 };
