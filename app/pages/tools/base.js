@@ -70,10 +70,6 @@ angular.module('app')
       return owner_trackers;
     });
 
-    $scope.$watch('all_trackers', function(all_trackers) {
-      console.log(all_trackers);
-    });
-
     $scope.plugins = $api.tracker_plugins_get().then(function(plugins) {
       // Get the plugin for a tracker, if installed.
       // if not installed, return model for a new plugin
