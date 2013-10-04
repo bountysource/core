@@ -227,6 +227,7 @@ describe('Scenario: Creating A Fundraiser --', function () {
         Mock.pushScenario("/user/fundraisers/:id/pledges", "GET", "success");
         Mock.pushScenario("/user/fundraisers/:id/pledges", "GET", "success");
         Mock.pushScenario("/user/fundraisers/:id", "GET", "success-update");
+        Mock.pushScenario("/people/:id/teams", "GET", "success");
         Mock.pushScenario("/user", "GET", "success-email-auth");
         Mock.pushScenario("/user/fundraisers/:id/publish", "POST", "success");
         element("button[ng-click='publish(fundraiser)']").click();

@@ -12,7 +12,9 @@ describe("Scenario: Creating a team --", function() {
   it("should error without name", function() {
     Mock.pushScenario("/teams", "POST", "missing-name-input");
     Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
+    Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
     Mock.pushScenario("/teams/:id", "GET", "team-not-found");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-email-auth");
 
     using('form').input('form_data.name').enter(MOCK.invalid_team_no_name.name);
@@ -21,14 +23,13 @@ describe("Scenario: Creating a team --", function() {
     using('form').input('form_data.image_url').enter('https://cloudinary-a.akamaihd.net/bountysource/image/upload/d_noaoqqwxegvmulwus0un.png,c_pad,w_400,h_400/jny9veh9xwqljpqpox0z.png');
     using('form').input('form_data.bio').enter("bountysource is THE open source funding platform");
     using('form').element('submit.btn').click();
-    expect(element('.alert.alert-error').text()).toContain("Missing required fields");
-    expect(element('.alert.alert-error').text()).toContain(":name");
-
+    expect(element('.alert.alert-error').text()).toContain("Team not found");
   });
 
   it("should not allow characters in custom url", function() {
     Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
     Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-email-auth");
     using('form').input('form_data.name').enter(MOCK.invalid_team_bad_slug.name);
     using('form').input('form_data.slug').enter(MOCK.invalid_team_bad_slug.slug);
@@ -47,6 +48,7 @@ describe("Scenario: Creating a team --", function() {
       Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
 
       Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
+      Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
 
       using('form').input('form_data.name').enter(MOCK.valid_team.name);
@@ -69,10 +71,12 @@ describe("Scenario: Using Team Account --", function() {
   it("should let you create a bounty", function() {
     Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/issues/:id", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-email-auth");
 
     Mock.pushScenario("/teams/:id/members", "GET", "success");
     Mock.pushScenario("/teams/:id", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-email-auth");
 
     browser().navigateTo('/teams/'+MOCK.valid_team.slug);
@@ -95,6 +99,7 @@ describe("Scenario: Using Team Account --", function() {
     Mock.pushScenario("/user/fundraisers/:id", "GET", "success");
     Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user/fundraisers/:id", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-email-auth");
     browser().navigateTo('/fundraisers/'+MOCK.fundraiser.id+'/pledge');
     var radioButton = ["input[value='team/", MOCK.valid_team.id, "']"].join("");
@@ -116,6 +121,7 @@ describe("Scenario: Using Team Account --", function() {
       Mock.pushScenario("/teams/:id", "PUT", "success");
       Mock.pushScenario("/teams/:id/members", "GET", "success");
       Mock.pushScenario("/teams/:id", "GET", "success");
+      Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
       browser().navigateTo('/teams/'+MOCK.valid_team.slug+'/settings');
     });
@@ -163,6 +169,7 @@ describe("Scenario: Using Team Account --", function() {
       Mock.pushScenario("/teams/:id/invites", "GET", "success");
       Mock.pushScenario("/teams/:id/members", "GET", "success");
       Mock.pushScenario("/teams/:id", "GET", "success");
+      Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
       browser().navigateTo('/teams/'+MOCK.valid_team.slug+'/members/manage');
 
@@ -186,6 +193,7 @@ describe("Scenario: Using Team Account --", function() {
       Mock.pushScenario("/teams/:id/invites", "GET", "success");
       Mock.pushScenario("/teams/:id/members", "GET", "success");
       Mock.pushScenario("/teams/:id", "GET", "success");
+      Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
       browser().navigateTo('/teams/'+MOCK.valid_team.slug+'/members/manage');
 
@@ -200,6 +208,7 @@ describe("Scenario: Using Team Account --", function() {
       Mock.pushScenario("/teams/:id/invites", "GET", "success");
       Mock.pushScenario("/teams/:id/members", "GET", "success");
       Mock.pushScenario("/teams/:id", "GET", "success");
+      Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
       browser().navigateTo('/teams/'+MOCK.valid_team.slug+'/members/manage');
 
