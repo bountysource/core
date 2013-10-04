@@ -35,10 +35,11 @@ angular.module('app')
       $scope.plugin_alert = {};
       $scope.$watch('plugin_changed(current_plugin)', function() {
         if (tracker.$plugin_installed && $scope.plugin_changed($scope.current_plugin)) {
-          $scope.plugin_alert = { text: 'There are unsaved changes.', type: 'warning'};
-        }
-        else {
-          $scope.plugin_alert = {};
+          if (!$scope.plugin_alert.initial_message) {
+            $scope.plugin_alert = { text: 'There are unsaved changes.', type: 'warning'};
+          } else {
+            $scope.plugin_alert.initial_message = false;
+          }
         }
       });
 
@@ -142,7 +143,7 @@ angular.module('app')
                 break;
               }
             }
-            $scope.plugin_alert = { text: 'Changes successfully saved.', type: 'success'};
+            $scope.plugin_alert = { text: 'Changes successfully saved.', type: 'success', initial_message: true};
           }
         });
       };
@@ -164,7 +165,7 @@ angular.module('app')
                 $scope.current_tracker.$plugin_installed = true;
                 $scope.expand_tracker($scope.current_tracker);
                 plugins.push(plugin);
-                $scope.plugin_alert = { text: 'Plugin successfully installed.', type: 'success'};
+                $scope.plugin_alert = { text: 'Plugin successfully installed.', type: 'success', initial_message: true};
               }
             });
           }
