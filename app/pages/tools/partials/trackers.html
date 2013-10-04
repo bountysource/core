@@ -5,7 +5,7 @@
       <tbody>
       <tr ng-repeat="tracker in trackers" ng-class="{ 'info': (current_tracker && tracker.id == current_tracker.id) }" ng-click="expand_tracker(tracker)">
         <td style="width: 5%;">
-          <span class="label label-success" ng-show="plugin_installed(tracker) || tracker.$plugin_installed">
+          <span class="label label-success" ng-show="(plugin_installed(tracker) || tracker.$plugin_installed) && !hide_installed_button">
             Installed
           </span>
         </td>

@@ -42,4 +42,5 @@ angular.module('app')
       });
       return plugins;
     });
+    $scope.hide_installed_button = true;
   });
