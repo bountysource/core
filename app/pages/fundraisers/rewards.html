@@ -50,8 +50,8 @@
                     <tbody>
                     <tr ng-repeat="pledge in reward.pledges">
                       <td>
-                        <a ng-show="pledge.person" ng-href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
-                        <div ng-hide="pledge.person" class="muted">Anonymous</div>
+                        <a ng-show="pledge.owner" ng-href="/people/{{ pledge.owner.slug }}">{{ pledge.owner.display_name }}</a>
+                        <div ng-hide="pledge.owner" class="muted">Anonymous</div>
                       </td>
                       <td>{{ pledge.amount | currency }}</td>
                       <td>{{ pledge.created_at | date:'medium' }}</td>
@@ -97,8 +97,8 @@
                     <tbody>
                       <tr ng-repeat="pledge in reward.pledges">
                         <td>
-                          <a ng-show="pledge.person" ng-href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
-                          <div ng-hide="pledge.person" class="muted">Anonymous</div>
+                          <a ng-show="pledge.owner" ng-href="/people/{{ pledge.owner.slug }}">{{ pledge.owner.display_name }}</a>
+                          <div ng-hide="pledge.owner" class="muted">Anonymous</div>
                         </td>
                         <td>{{ pledge.amount | currency }}</td>
                         <td>{{ pledge.created_at | date:'medium' }}</td>
