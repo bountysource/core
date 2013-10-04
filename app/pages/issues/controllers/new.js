@@ -15,7 +15,7 @@ angular.module('app')
 
     // don't show initial validations until form has been submitted
     $scope.show_validations = false;
-    
+
     $scope.create_issue = function() {
       $scope.show_validations = true;
       $scope.error = null;
