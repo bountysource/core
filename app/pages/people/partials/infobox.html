@@ -4,7 +4,7 @@
 
     <div ng-show="person.url || person.public_email">
       <br />
-      <a ng-show="person.url" class="btn btn-block" ng-href="{{person.url}}"><i class="icon-globe"></i> {{person.url | truncate:25}}</a>
+      <a ng-show="person.url" class="btn btn-block" ng-href="{{person.url}}"><i class="icon-globe"></i> {{person.url | clean_url | truncate:25}}</a>
       <a ng-show="person.public_email" class="btn btn-block" ng-href="mailto:{{person.public_email}}"><i class="icon-envelope"></i> {{person.public_email | truncate:25}}</a>
     </div>
   </div>

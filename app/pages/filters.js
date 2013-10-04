@@ -38,10 +38,16 @@ angular.module('app').
     return function(s, size, replacement) {
       size = size || 50;
       replacement = replacement || "...";
-      if (!s || s.length <= (size + replacement.length)) {
+      if (!s || s.length <= size) {
         return s;
       }
       return s.slice(0,size+replacement.length) + replacement;
+    };
+  }).filter('clean_url', function() {
+    return function(s) {
+      var new_url = s.replace(/http:\/\/|https:\/\//, '');
+      new_url = new_url.replace(/\/$/, '');
+      return new_url;
     };
   }).filter('from_snake_case', function() {
     // Convert snakecase to words
