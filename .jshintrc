@@ -21,7 +21,8 @@
   "smarttabs": true,
   "globals": {
     "angular": false,
-    "Moment": false
+    "Moment": false,
+    "describe": false
   }
 }
 
