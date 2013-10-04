@@ -14,6 +14,7 @@ describe("Scenario: Creating Bounties --", function() {
       Mock.pushScenario("/stats/trackers/:id", "GET", "success");
       Mock.pushScenario("/projects/:id/issues", "GET", "success");
       Mock.pushScenario("/trackers/:id/overview", "GET", "success");
+      Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
       browser().navigateTo("/trackers/47-bountysource-frontend");
       expect(element("button[ng-click='tracker.follow()']").count()).toBe(1);
@@ -65,6 +66,8 @@ describe("Scenario: Creating Bounties --", function() {
         Mock.pushScenario("/issues/:id", "GET", "success");
         Mock.pushScenario("/issues/:id", "GET", "success");
         Mock.pushScenario("/issues/:id", "GET", "success");
+        Mock.pushScenario("/people/:id/teams", "GET", "success");
+        Mock.pushScenario("/user", "GET", "success-email-auth");
         browser().navigateTo("/issues/467715-all-external-links-should-open-in-a-new-tab/");
       });
 
