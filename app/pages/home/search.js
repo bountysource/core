@@ -39,7 +39,7 @@ angular.module('app')
             if (url[0] === '#') {
               url = '/' + url.slice(1);
             }
-            $location.path(url).replace();
+            $location.url(url).replace();
           } else if (response.create_issue) {
             // oh no, nothing was found! redirect to page to create issue for arbitrary URL
             $location.path("/issues/new").search({ url: $scope.search_query }).replace();
