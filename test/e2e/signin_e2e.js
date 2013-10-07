@@ -100,6 +100,7 @@ describe('Scenario: Signing In --', function () {
         Mock.pushScenario("/user", "GET", "success-github-auth");
         Mock.pushScenario("/user", "GET", "success-github-auth");
         Mock.pushScenario("/fundraisers/cards", "GET", "success");
+        Mock.pushScenario("/people/:id/teams", "GET", "success");
         Mock.pushScenario("/people/count", "GET", "success");
         Mock.pushScenario("/user", "GET", "success-github-auth");
         expect(element("a#signin-github").count()).toEqual(1);
@@ -141,11 +142,14 @@ describe('Scenario: Signing In --', function () {
         Mock.pushScenario("/trackers/cards", "GET", "success");
         Mock.pushScenario("/user/interesting", "GET", "success");
         Mock.pushScenario("/fundraisers/cards", "GET", "success");
+        Mock.pushScenario("/people/:id/teams", "GET", "success");
         Mock.pushScenario("/people/count", "GET", "success");
         Mock.pushScenario("/user", "GET", "success-github-auth");
+
         Mock.pushScenario("/trackers/cards", "GET", "success");
         Mock.pushScenario("/user/interesting", "GET", "success");
         Mock.pushScenario("/fundraisers/cards", "GET", "success");
+        Mock.pushScenario("/people/:id/teams", "GET", "success");
         Mock.pushScenario("/people/count", "GET", "success");
         Mock.pushScenario("/user", "GET", "success-github-auth");
 
@@ -169,13 +173,28 @@ describe("Scenario: Signin redirect from bounty creation page --", function() {
   });
 
   it("setting up BountySource account with service provider auth", function() {
+    Mock.pushScenario("/issues/:id", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
 
-    Mock.pushScenario("/issues/:id/bounty", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-github-auth");
     Mock.pushScenario("/user/login", "POST", "email-address-available");
     Mock.pushScenario("/payments", "POST", "missing-access-token");
-    Mock.pushScenario("/user/bounties", "GET", "missing-access-token");
-    Mock.pushScenario("/issues/:id/bounty", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
+
+    Mock.pushScenario("/trackers/cards", "GET", "success");
+    Mock.pushScenario("/user/interesting", "GET", "success");
+    Mock.pushScenario("/fundraisers/cards", "GET", "success");
+    Mock.pushScenario("/people/count", "GET", "success");
+
+    Mock.pushScenario("/user/login", "POST", "login-success-email-auth");
+    Mock.pushScenario("/user/login", "POST", "email-address-available");
+    Mock.pushScenario("/payments", "POST", "missing-access-token");
+    Mock.pushScenario("/user/bounties", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
 
     browser().navigateTo('/issues/644-use-an-array-for-web-breadcrumbs-5-00/bounty?amount=15');
     using("form[name=form]").element('button[type=submit].btn:visible').click();
@@ -193,16 +212,16 @@ describe("Scenario: Signin redirect from bounty creation page --", function() {
     expect(element("a#navbar-user").text()).toContain("TheManliest");
 
     element('#navbar-user-signout').click();
-
   });
 
   it("logging into BountySource account with service provider auth", function() {
 
-    Mock.pushScenario("/issues/:id/bounty", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-github-auth");
     Mock.pushScenario("/payments", "POST", "missing-access-token");
     Mock.pushScenario("/user/bounties", "GET", "missing-access-token");
-    Mock.pushScenario("/issues/:id/bounty", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
 
     browser().navigateTo('/issues/644-use-an-array-for-web-breadcrumbs-5-00/bounty?amount=15');
     using("form[name=form]").element('button[type=submit].btn:visible').click();
@@ -223,9 +242,11 @@ describe("Scenario: Signin redirect from pledge creation page --", function() {
   it("sets up a BountySource account with service provider auth", function() {
     //GET request for "/fundraisers/455-edutrac" occurs twice with each page load
 
+
+    Mock.pushScenario("/user/fundraisers/:id", "GET", "success-update");
     Mock.pushScenario("/people/:id/teams", "GET", "success");
-    Mock.pushScenario("/fundraisers/:id", "GET", "success");
-    Mock.pushScenario("/fundraisers/:id", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
+    Mock.pushScenario("/people/:id/teams", "GET", "success");
 
     Mock.pushScenario("/user", "GET", "success-github-auth");
 

@@ -85,7 +85,8 @@ angular.module('app')
       show_paid_out: $location.search().show_paid_out === 'true' || false,
       sort:          $location.search().sort || "bounty_total",
       sort_asc:      $location.search().sort_asc || false,
-      show_issue_id: $location.search().show_issue_id || false
+      show_issue_id: $location.search().show_issue_id || false,
+      show_issue_number: $location.search().show_issue_number || false
     };
 
     $scope.$watch('issue_filter_options', function(filters) {

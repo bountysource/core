@@ -1,11 +1,11 @@
-<accordion ng-repeat="(owner, trackers) in all_trackers | orderObjectBy:'trackers':false" close-others="oneAtATime">
+<accordion ng-repeat="owner_trackers in all_trackers" close-others="oneAtATime">
   <accordion-group is-open="trackers_count < 25">
-    <accordion-heading>{{trackers[0].owner}} <small class="muted"><strong>{{trackers.length | number}} {{"project" | pluralize:trackers.length}}</strong></small></accordion-heading>
+    <accordion-heading>{{owner_trackers[0]}} <small class="muted"><strong>{{owner_trackers[1].length | number}} {{"project" | pluralize:owner_trackers[1].length}}</strong></small></accordion-heading>
     <table class="table table-projects">
       <tbody>
-      <tr ng-repeat="tracker in trackers" ng-class="{ 'info': (current_tracker && tracker.id == current_tracker.id) }" ng-click="expand_tracker(tracker)">
+      <tr ng-repeat="tracker in owner_trackers[1]" ng-class="{ 'info': (current_tracker && tracker.id == current_tracker.id) }" ng-click="expand_tracker(tracker)">
         <td style="width: 5%;">
-          <span class="label label-success" ng-show="(plugin_installed(tracker) || tracker.$plugin_installed) && !hide_installed_button">
+          <span class="label label-success" ng-show="plugin_installed(tracker) || tracker.$plugin_installed">
             Installed
           </span>
         </td>

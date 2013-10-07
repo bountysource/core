@@ -57,16 +57,31 @@ angular.module('app')
       $scope.trackers_count = trackers.length;
       $scope.loading_trackers = false;
 
-      var owner_map = {}, owner;
+      var owner_map = [], owner;
       for (var i=0; i<trackers.length; i++) {
         owner = trackers[i].full_name.split('/')[0];
         owner_map[owner] = owner_map[owner] || [];
         trackers[i].owner = owner;
         owner_map[owner].push(trackers[i]);
       }
+      // turn object into array so that it can be sorted
+      var owner_trackers = [];
+      for (var k in owner_map) {
+        owner_trackers.push([k, owner_map[k]]);
+      }
 
-      $scope.open_by_default = Object.keys(owner_map).length === 1;
-      return owner_map;
+      // order by owner name FIRST, then by number of projects
+      owner_trackers.sort(function(a, b) {
+        if ($scope.current_person && $scope.current_person.github_account && a[0] === $scope.current_person.github_account.login) {
+          return -1;
+        } else if ($scope.current_person && $scope.current_person.github_account && b[0] === $scope.current_person.github_account.login) {
+          return 1;
+        } else {
+          return a[1].length === b[1].length ? 0 : (a[1].length < b[1].length ? 1 : -1);
+        }
+      });
+
+      return owner_trackers;
     });
 
     $scope.plugins = $api.tracker_plugins_get().then(function(plugins) {
