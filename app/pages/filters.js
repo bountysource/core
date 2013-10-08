@@ -45,7 +45,7 @@ angular.module('app').
     };
   }).filter('clean_url', function() {
     return function(s) {
-      var new_url = s.replace(/http:\/\/|https:\/\//, '');
+      var new_url = (s||"").replace(/https?:\/\//, '');
       new_url = new_url.replace(/\/$/, '');
       return new_url;
     };
