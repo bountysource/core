@@ -8,46 +8,51 @@
 </div>
 
 <form class="form-horizontal" name="form">
-  <div class="control-group">
+  <div class="control-group" ng-class="{ error: (show_validations && form.issue_url.$invalid) || (form.issue_url.$error.url), success: (form.issue_url.$valid) }">
     <label class="control-label" for="issue_url">Issue URL</label>
     <div class="controls">
-      <input type="url" id="issue_url" ng-model="new_issue.issue_url" class="span8" placeholder="https://trac.someproject.com/ticket/123" required />
+      <input type="url" id="issue_url" name="issue_url" ng-model="new_issue.issue_url" class="span8" placeholder="https://trac.someproject.com/ticket/123" required />
+      <span class="help-inline" ng-show="show_validations && form.issue_url.$error.required">This is a required field.</span>
+      <span class="help-inline" ng-show="show_validations && form.issue_url.$error.url">Please provide a valid URL.</span>
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="control-group" ng-class="{ error: (show_validations && form.title.$invalid), success: (form.title.$valid) }">
     <label class="control-label" for="title">Issue Title</label>
     <div class="controls">
-      <input type="text" id="title" ng-model="new_issue.title" class="span8" placeholder="Title of the issue" required />
+      <input type="text" id="title" name="title" ng-model="new_issue.title" class="span8" placeholder="Title of the issue" required />
+      <span class="help-inline" ng-show="show_validations && form.title.$error.required">This is a required field.</span>
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="number">Issue Number</label>
     <div class="controls">
-      <input type="text" id="number" ng-model="new_issue.number" class="span2" placeholder="Issue number" />
+      <input type="text" id="number" name="number" ng-model="new_issue.number" class="span2" placeholder="Issue number" />
     </div>
   </div>
 
   <br />
 
-  <div class="control-group">
+  <div class="control-group" ng-class="{ error: (show_validations && form.project_name.$invalid), success: (form.project_name.$valid) }">
     <label class="control-label" for="project_name">Project Name</label>
     <div class="controls">
-      <input type="text" id="project_name" ng-model="new_issue.project_name" class="span8" placeholder="Name of the project" required />
+      <input type="text" id="project_name" name="project_name" ng-model="new_issue.project_name" class="span8" placeholder="Name of the project" required />
+      <span class="help-inline" ng-show="show_validations && form.project_name.$error.required">This is a required field.</span>
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="control-group" ng-class="{ error: (show_validations && form.project_url.$invalid), success: (form.project_url.$valid) }">
     <label class="control-label" for="project_url">Project Tracker URL</label>
     <div class="controls">
-      <input type="text" id="project_url" ng-model="new_issue.project_url" class="span8" placeholder="https://trac.someproject.com/" required />
+      <input type="text" id="project_url" name="project_url" ng-model="new_issue.project_url" class="span8" placeholder="https://trac.someproject.com/" required />
+      <span class="help-inline" ng-show="show_validations && form.project_url.$error.required">This is a required field.</span>
     </div>
   </div>
 
   <div class="control-group">
     <div class="controls">
-      <button class="btn btn-large btn-primary" ng-disabled="form.$invalid" ng-click="create_issue()">Add Issue</button>
+      <button class="btn btn-large btn-primary" ng-click="create_issue()">Add Issue</button>
     </div>
   </div>
 </form>
