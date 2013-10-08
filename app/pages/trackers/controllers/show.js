@@ -12,6 +12,12 @@ angular.module('app')
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
 
+      // Edge case: GitHub repo changes owner, and we create a new Tracker model.
+      // If the requested tracker model has a redirect to another, change the URL to that tracker.
+      if (($routeParams.id || '').split('-')[0] !== tracker.id) {
+        $location.url("/trackers/"+tracker.slug).replace();
+      }
+
       $pageTitle.set(tracker.name, 'Projects');
 
       $scope.init_tags(tracker);
