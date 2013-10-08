@@ -11,8 +11,8 @@ describe("Scenario: Creating Bounties --", function() {
   describe("Loading the bounty tracker page", function() {
 
     it("should show the bounty tracker page", function() {
-      Mock.pushScenario("/stats/trackers/:id", "GET", "success");
       Mock.pushScenario("/projects/:id/issues", "GET", "success");
+      Mock.pushScenario("/stats/trackers/:id", "GET", "success");
       Mock.pushScenario("/trackers/:id/overview", "GET", "success");
       Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
