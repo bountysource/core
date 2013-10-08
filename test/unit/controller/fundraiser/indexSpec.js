@@ -5,9 +5,9 @@ describe('FundraiserIndexController', function() {
 
   var $httpBackend, $rootScope, createController;
 
-  beforeEach(inject(function($injector, defaultJSON) {
+  beforeEach(inject(function($injector, defaultJSON, $http) {
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.expect('GET', 'https://staging-api.bountysource.com/fundraisers?callback=CORS&per_page=250').respond(function(response) { return defaultJSON.data; });
+    $httpBackend.when('GET', 'https://staging-api.bountysource.com/fundraisers?callback=CORS&per_page=250').respond( function() {return defaultJSON;} );
 
     $rootScope = $injector.get('$rootScope');
 
@@ -16,6 +16,7 @@ describe('FundraiserIndexController', function() {
     createController = function() {
       return $controller('FundraisersIndex', {'$scope': $rootScope});
     };
+
   }));
 
   afterEach(function() {
@@ -26,6 +27,7 @@ describe('FundraiserIndexController', function() {
   it('should return a list of fundraisers', function() {
     var controller = createController();
     $httpBackend.flush();
-    dump($rootScope.current);
+
+    dump($rootScope);
   });
 });
