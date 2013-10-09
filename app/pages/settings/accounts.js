@@ -37,5 +37,11 @@ angular.module('app')
       });
     };
 
+    $scope.forgot_password = function() {
+      $api.request_password_reset({ email: $scope.current_person.email }).then(function(response) {
+        $scope.info = response.message;
+      });
+    };
+
   });
 

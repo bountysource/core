@@ -15,6 +15,22 @@ table#solutions-table tr td img.thumbnail {
   height: 130px;
 }
 
+li.task-list-item {
+  list-style: square outside url(/images/checkbox.png);
+}
+
+li.task-list-item-checked {
+  list-style: square outside url(/images/checkbox_checked.png);
+}
+
+li.task-list-item br {
+  display: none;
+}
+
+li.task-list-item-checked br {
+  display: none;
+}
+
 .bounty-buttons .btn { margin-top: 0; }
 .bounty-buttons .controls { margin-top: 10px; }
 .bounty-buttons .controls:first-of-type { margin-top: 0; }
