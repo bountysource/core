@@ -13,6 +13,7 @@ module.exports = function(config) {
       'app/components/angular-bootstrap-colorpicker/js/*.js',
       'app/pages/app.js',
       'app/pages/**/*.js',
+      'app/components/momentjs/moment.js',
       'test/unit/**/*.js',
       'test/mock/*.js'
     ],
