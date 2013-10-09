@@ -9,7 +9,7 @@ angular.module('app')
         reloadOnSearch: false
       });
   })
-  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle) {
+  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
 
       // Edge case: GitHub repo changes owner, and we create a new Tracker model.
@@ -64,21 +64,33 @@ angular.module('app')
       };
 
       $scope.tracker = tracker;
-    });
 
-    // merge all of the issue arrays into one
-    $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
-      $scope.issues_resolved = true;
+      // merge all of the issue arrays into one
+      $scope.init_issues = function() {
+        $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+          $scope.issues_resolved = true;
 
-      for (var i=0; i<issues.length; i++) {
-        issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+          for (var i=0; i<issues.length; i++) {
+            issues[i].bounty_total = parseFloat(issues[i].bounty_total);
 
-        // sorting doesn't like nulls.. this is a quick hack
-        issues[i].participants_count = issues[i].participants_count || 0;
-        issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
-        issues[i].comment_count = issues[i].comment_count || 0;
+            // sorting doesn't like nulls.. this is a quick hack
+            issues[i].participants_count = issues[i].participants_count || 0;
+            issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+            issues[i].comment_count = issues[i].comment_count || 0;
+          }
+          return issues;
+        });
+      };
+
+      // if the backend hasn't previously cached issue data, wait three seconds
+      if (!tracker.synced_at) {
+        $timeout(function() {
+          $scope.init_issues();
+        },3000);
+      } else {
+        $scope.init_issues();
       }
-      return issues;
+
     });
 
     $scope.issue_filter_options = {
