@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $person) {
     $routeProvider
       .when('/fundraisers/:id/edit', {
         templateUrl: 'pages/fundraisers/edit.html',
-        controller: 'FundraiserEditController'
+        controller: 'FundraiserEditController',
+        resolve: $person
       });
   })
 
@@ -20,11 +21,21 @@ angular.module('app')
       return !angular.equals($scope.master, $scope.changes);
     };
 
+    $scope.teams = $api.person_teams($scope.current_person.id);
+
     $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
       // cache the fundraiser. angular.copy does a deep copy, FYI
       // if you don't create a copy, these are both bound to the input
-      $scope.master = angular.copy(response);
-      $scope.changes = angular.copy(response);
+
+      var fundraiser = angular.copy(response);
+      if (fundraiser.team) {
+        fundraiser.team_id = fundraiser.team.id;
+      }
+      delete fundraiser.team;
+
+      $scope.master = angular.copy(fundraiser);
+      $scope.changes = angular.copy(fundraiser);
+
       delete $scope.changes.image_url;
 
       // also cache rewards

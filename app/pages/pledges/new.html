@@ -113,6 +113,8 @@
               <div class="alert alert-block" ng-show="selected_reward.fulfillment_details">
                 <strong>Reward Survey</strong>
                 <span class="pull-right label label-important">required</span>
+                <br>
+                <small>You can edit your response later if you need to.</small>
                 <p style="white-space: pre-wrap;">{{ selected_reward.fulfillment_details }}</p>
                 <br />
                 <textarea class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required></textarea>
