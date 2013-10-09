@@ -1,19 +1,19 @@
 <table id="person-timeline-table" class="table table-striped">
   <tr ng-repeat="action in timeline | orderBy:'-sort_date'">
     <td ng-show="action.type == 'Pledge'">
-      <strong>{{ person.display_name }}</strong> pledged <strong>{{ action.amount | dollars }}</strong> to <a ng-href="/fundraisers/{{ action.fundraiser.slug }}">{{action.fundraiser.title}}</a> <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
+      Pledged <strong>{{ action.amount | dollars }}</strong> to <a ng-href="/fundraisers/{{ action.fundraiser.target_slug }}">{{action.fundraiser.title}}</a> <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
     </td>
 
     <td ng-show="action.type == 'Bounty'">
-      <strong>{{ person.display_name }}</strong> placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">an issue</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
+      Placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">an issue</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
     </td>
 
     <td ng-show="action.type == 'Fundraiser'">
-      <strong>{{ person.display_name }}</strong> created the fundraiser <a ng-href="fundraisers/{{action.slug}}">{{action.title}}</a>
+      Created the fundraiser <a ng-href="fundraisers/{{action.slug}}">{{action.title}}</a>
     </td>
 
     <td ng-show="action.type == 'Team'">
-      <strong>{{ person.display_name }}</strong> joined the team <a ng-href="teams/{{action.slug}}">{{action.name}}</a>
+      Joined the team <a ng-href="teams/{{action.slug}}">{{action.name}}</a>
     </td>
 
     <td class="muted">{{ action.sort_date | date:'medium' }}</td>
@@ -23,6 +23,6 @@
     <td>
       Joined the Bountysource family
     </td>
-    <td class="muted">{{ person.created_at | date:'medium' }}</td>
+    <td class="muted">{{ action.created_at | date:'medium' }}</td>
   </tr>
 </table>
