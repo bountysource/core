@@ -8,7 +8,7 @@ describe('FundraiserCreateController', function() {
   beforeEach(inject(function($injector, defaultJSON, $http) {
     $location = $injector.get('$location');
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.expect('GET', 'https://staging-api.bountysource.com/people/4/teams?callback=CORS&per_page=250').respond( function() { return [200, "CORS(" + JSON.stringify(defaultJSON) + ")"];} );
+    $httpBackend.expect('GET', 'https://staging-api.bountysource.com/people/4/teams?callback=CORS&per_page=250').respond( function() { return [200, "CORS(" + JSON.stringify(defaultJSON) + ")"];});
 
     $rootScope = $injector.get('$rootScope');
 
@@ -42,11 +42,21 @@ describe('FundraiserCreateController', function() {
     var controller = createController();
     $httpBackend.flush();
 
+    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraisers').respond(function() { return [200, 'CORS({"data": {"slug": "asdfasdf"}, "meta": {"success": true}})']; });
+    $rootScope.create();
+    $httpBackend.flush();
+
+    expect($location.url()).toEqual('/fundraisers/asdfasdf/edit');
   });
 
   it('sets error scope if the request was not successful', function() {
     var controller = createController();
     $httpBackend.flush();
 
+    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraisers').respond(function() { return [200, 'CORS({"data": {"error": "There was an error"}, "meta": {"success": false}})']; });
+    $rootScope.create();
+    $httpBackend.flush();
+
+    expect($rootScope.error).toEqual("There was an error");
   });
 });
