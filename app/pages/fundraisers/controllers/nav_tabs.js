@@ -8,6 +8,7 @@ angular.module('app').controller('FundraiserNavTabsController', function ($scope
     if (name === 'rewards' && (/^\/fundraisers\/[a-z-_0-9]+\/rewards$/i).test($location.path())) { return "active"; }
     if (name === 'pledge_now' && (/^\/fundraisers\/[a-z-_0-9]+\/pledge$/i).test($location.path())) { return "active"; }
     if (name === 'receipts' && (/^\/fundraisers\/[a-z-_0-9]+\/receipts$/i).test($location.path())) { return "active"; }
+    if (name === 'receipts' && (/^\/fundraisers\/[a-z-_0-9]+\/receipts\/recent$/i).test($location.path())) { return "active"; }
   };
 
   $scope.receipts = [];

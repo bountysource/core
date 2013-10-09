@@ -12,7 +12,7 @@
       <div class="span12">
         <div class="row-fluid">
           <div class="span12">
-            <div ng-show="receipts.length > 1  && !pledge">
+            <div ng-show="type == 'index' && receipts.length > 1 && !pledge">
               <table class="table table-striped">
                 <thead>
                   <th>Amount</th>
@@ -30,7 +30,7 @@
 
             </div>
 
-            <div ng-show="pledge">
+            <div ng-show="type == 'recent' || pledge">
                 <div class="row-fluid">
                 <div class="span9">
                   <h1 class="text-center">Thank you for your pledge!</h1>
