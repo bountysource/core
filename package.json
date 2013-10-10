@@ -18,7 +18,7 @@
     "grunt-contrib-watch": "~0.4.4",
     "grunt-bower-requirejs": "~0.4.1",
     "grunt-usemin": "~0.1.10",
-    "grunt-karma": "~0.3.0",
+    "grunt-karma": "~0.6.2",
     "grunt-open": "~0.2.0",
     "grunt-md5": "~0.1.11",
     "grunt-cloudfiles": "~0.0.4",
@@ -26,7 +26,9 @@
     "grunt-ngmin": "~0.0.2",
     "grunt-angular-templates": "~0.3.10",
     "connect-modrewrite": "~0.2.1",
-    "grunt-karma-coveralls": "~2.0.2"
+    "grunt-karma-coveralls": "~2.0.2",
+    "karma-coverage": "~0.1.0",
+    "karma-ng-scenario": "~0.1.0"
   },
   "engines": {
     "node": ">=0.8.0"
