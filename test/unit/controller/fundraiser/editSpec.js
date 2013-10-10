@@ -133,5 +133,122 @@ describe('FundraiserEditController', function() {
     expect($rootScope.reward_error).toEqual("Uh Oh, there was an error");
   });
 
+  it('it should update the reward accordingly', function() {
+    var controller = createController();
+    var reward_ctrl = createRewardController();
+    $httpBackend.flush();
+    $rootScope.rewards = [{
+      "id": 10001,
+      "amount": 100,
+      "description": "fooo",
+      "claimed": 0,
+      "limited_to": null,
+      "sold_out": false,
+      "created_at": "2013-09-27T19:03:54Z",
+      "fulfillment_details": "home address"
+    }];
+    $rootScope.master_rewards = [{
+      "id": 10001,
+      "amount": 2000,
+      "description": "beautiful set of stationary that I have hand painted",
+      "claimed": 0,
+      "limited_to": null,
+      "sold_out": false,
+      "created_at": "2013-09-27T19:03:54Z",
+      "fulfillment_details": "home address"
+    }];
 
+    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraisers/479/rewards/10001')
+    .respond(function() { return [200, 'CORS({"data": {"amount": 100}, "meta": {"success": true}})']; });
+
+    // passing in master so I don't need to create another fundraiser object
+    $rootScope.update_reward($rootScope.master, {"id": 10001});
+    $httpBackend.flush();
+
+    expect($rootScope.master_rewards[0].amount).toEqual(100);
+    expect($rootScope.master_rewards[0].description).toEqual('fooo');
+    expect($rootScope.reward_error).toBeUndefined();
+  });
+
+  it('it should set error if reward cannot be updated', function() {
+    var controller = createController();
+    var reward_ctrl = createRewardController();
+    $httpBackend.flush();
+    $rootScope.rewards = [{
+      "id": 10001,
+      "amount": 100,
+      "description": "fooo",
+      "claimed": 0,
+      "limited_to": null,
+      "sold_out": false,
+      "created_at": "2013-09-27T19:03:54Z",
+      "fulfillment_details": "home address"
+    }];
+    $rootScope.master_rewards = [{
+      "id": 10001,
+      "amount": 2000,
+      "description": "beautiful set of stationary that I have hand painted",
+      "claimed": 0,
+      "limited_to": null,
+      "sold_out": false,
+      "created_at": "2013-09-27T19:03:54Z",
+      "fulfillment_details": "home address"
+    }];
+
+    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraisers/479/rewards/10001')
+    .respond(function() { return [200, 'CORS({"data": {"error": "Darn, something went wrong"}, "meta": {"success": false}})']; });
+
+    // passing in master so I don't need to create another fundraiser object
+    $rootScope.update_reward($rootScope.master, {"id": 10001});
+    $httpBackend.flush();
+
+    expect($rootScope.reward_error).toEqual('Darn, something went wrong');
+  });
+
+  it('it should allow you to cancel an update', function() {
+    var controller = createController();
+    var reward_ctrl = createRewardController();
+    $httpBackend.flush();
+    $rootScope.rewards = [{
+      "id": 10001,
+      "amount": 100,
+      "description": "fooo",
+      "claimed": 0,
+      "limited_to": null,
+      "sold_out": false,
+      "created_at": "2013-09-27T19:03:54Z",
+      "fulfillment_details": "home address"
+    }];
+    $rootScope.master_rewards = [{
+      "id": 10001,
+      "amount": 2000,
+      "description": "beautiful set of stationary that I have hand painted",
+      "claimed": 0,
+      "limited_to": null,
+      "sold_out": false,
+      "created_at": "2013-09-27T19:03:54Z",
+      "fulfillment_details": "home address"
+    }];
+
+    // passing in master so I don't need to create another fundraiser object
+    $rootScope.cancel_reward_changes({"id": 10001});
+
+    expect($rootScope.master_rewards[0].description).toEqual($rootScope.rewards[0].description);
+    expect($rootScope.rewards[0].$is_open).toBeFalsy();
+  });
+
+  it('it should destroy a reward', function() {
+    var controller = createController();
+    var reward_ctrl = createRewardController();
+    $httpBackend.flush();
+
+    $httpBackend.expect('DELETE', 'https://staging-api.bountysource.com/user/fundraisers/479/rewards/876?callback=CORS&per_page=250')
+    .respond(function() { return [200, 'CORS({"data": {}, "meta": {"success": true}})']; });
+
+    // passing in master so I don't need to create another fundraiser object
+    $rootScope.destroy_reward($rootScope.master, {"id": 876});
+    $httpBackend.flush();
+
+    expect($rootScope.master.rewards.length).toEqual(0);
+  });
 });
