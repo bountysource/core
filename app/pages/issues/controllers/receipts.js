@@ -51,10 +51,29 @@ angular.module('app')
             }
           }
         });
-      } else if ($scope.type === 'recent') { //API bounty activity call for recent receipt view
+      } else if ($scope.type === 'recent') { //api bounty activity call for recent receipt view
         $api.bounty_activity().then(function (response) {
-          $scope.bounty = response[0];
+          $scope.bounty = response[0]; //FIX currently gathers data from users most recent receipt, issue agnostic
           $scope.issue = response[0].issue;
+
+          var related_issues = [];
+          $scope.related_issues = $api.tracker_issues_get($scope.issue.tracker.id).then(function(issues) {
+            for (var i=0; i<issues.length; i++) {
+              issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+
+              // sorting doesn't like nulls.. this is a quick hack
+              issues[i].participants_count = issues[i].participants_count || 0;
+              issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+              issues[i].comment_count = issues[i].comment_count || 0;
+
+              if (issues[i].id === $scope.issue.id || !issues[i].can_add_bounty || issues[i].paid_out) {
+                // dont add to list if current issue, or if bounties cannot be added, or if issue has been paid out
+              } else {
+                related_issues.push(issues[i]);
+              }
+            }
+            $scope.related_issues = related_issues;
+          });
         });
       }
 
@@ -85,17 +104,21 @@ angular.module('app')
     $scope.calculateFee = function (bounty) {
       if ($scope.fee) {
         return $filter('currency')($scope.fee);
+      } else if (bounty) {
+        var fee = bounty.amount * 0.10;
+        return $filter('currency')(fee);
       }
-      var fee = bounty.amount * 0.10;
-      return $filter('currency')(fee);
     };
 
     $scope.calculateTotal = function (bounty) {
       if ($scope.total) {
         return $filter('currency')($scope.total);
+      } else if (bounty) {
+        var total = bounty.amount * 1.10;
+        return $filter("currency")(total);
       }
-      var total = bounty.amount * 1.10;
-      return $filter("currency")(total);
     };
+
+    $scope.share_issue_link = $location.absUrl().replace(/\/receipts.*$/, '');
 
   });

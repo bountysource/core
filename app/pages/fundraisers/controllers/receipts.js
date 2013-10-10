@@ -48,7 +48,7 @@ angular.module('app')
             }
           }
         } else {
-          $scope.pledge = response[0];
+          $scope.pledge = response[0]; //FIX currently gathers data from users most recent receipt, issue agnostic
           $scope.fundraiser = response[0].fundraiser;
         }
 
@@ -77,5 +77,17 @@ angular.module('app')
       $window.open(url, "Google+", 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600,top='+top+', left='+left);
       return false;
     };
+
+    $api.fundraisers_get().then(function(fundraisers) {
+      var highlighted_fundraisers = [];
+      for (var i = 0; i < fundraisers.length; i++) {
+        if (fundraisers[i].in_progress && fundraisers[i].featured) {
+          highlighted_fundraisers.push(fundraisers[i]);
+        }
+      }
+      $scope.highlighted_fundraisers = highlighted_fundraisers;
+    });
+
+    $scope.share_fundraiser_link = $location.absUrl().replace(/\/receipts.*$/, '');
 
   });
