@@ -10,7 +10,7 @@ angular.module('app')
       });
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
-    $api.tracker_get($routeParams.id).then(function(tracker) {
+    $scope.tracker = $api.tracker_get($routeParams.id).then(function(tracker) {
 
       // Edge case: GitHub repo changes owner, and we create a new Tracker model.
       // If the requested tracker model has a redirect to another, change the URL to that tracker.
@@ -63,10 +63,9 @@ angular.module('app')
         });
       };
 
-      $scope.tracker = tracker;
-
-      // merge all of the issue arrays into one
-      $scope.init_issues = function() {
+      // Load issues for tracker. If the tracker was just created (has not been synced yet),
+      // throw in a timeout to allow time for issues to be added
+      $timeout(function() {
         $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
           $scope.issues_resolved = true;
 
@@ -80,17 +79,9 @@ angular.module('app')
           }
           return issues;
         });
-      };
+      }, tracker.synced_at ? 0 : 2500);
 
-      // if the backend hasn't previously cached issue data, wait three seconds
-      if (!tracker.synced_at) {
-        $timeout(function() {
-          $scope.init_issues();
-        },3000);
-      } else {
-        $scope.init_issues();
-      }
-
+      return tracker;
     });
 
     $scope.issue_filter_options = {
