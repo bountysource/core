@@ -11,9 +11,9 @@ module.exports = function(config) {
       'app/components/angular-*/angular-*.js',
       'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
       'app/components/angular-bootstrap-colorpicker/js/*.js',
+      'app/components/momentjs/moment.js',
       'app/pages/app.js',
       'app/pages/**/*.js',
-      'app/components/momentjs/moment.js',
       'test/unit/**/*.js',
       'test/mock/*.js'
     ],
