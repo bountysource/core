@@ -129,12 +129,13 @@ angular.module('api.bountysource',[]).
           res.data.image_url = res.data.image_url || "/images/bountysource-grey.png";
 
           // calculate time left
-          // using Moment.js
-          var now = new Moment();
-          var ends = new Moment(res.data.ends_at);
-          res.data.$days_left = ends.diff(now, "days");
-          res.data.$hours_left = ends.diff(now, "hours");
-          res.data.$minutes_left = ends.diff(now, "minutes");
+          var now = new Date().getTime();
+          var ends = new Date(res.data.ends_at);
+          var diff = ends - now;
+          res.data.$days_left = Math.floor(diff / (1000*60*60*24));
+          res.data.$hours_left = Math.floor(diff / (1000*60*60));
+          res.data.$minutes_left = Math.floor(diff / (1000*60));
+          res.data.$seconds_left = Math.round(diff / (1000));
         }
         return res.data;
       });
