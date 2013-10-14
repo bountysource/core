@@ -1,8 +1,8 @@
 .navbar { transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); }
 
 .homepage section#top {
-  /* credit goes to: https://secure.flickr.com/photos/flaaa/2330164329/ */
-  background: url(/images/background5.jpg) center center no-repeat;
+  /* credit goes to: http://www.flickr.com/photos/wikimediail/8810765530 */
+  background: url(/images/top_background.jpg) center center no-repeat;
   background-size: cover;
   text-align: center;
   padding: 20px 0 20px 0;
