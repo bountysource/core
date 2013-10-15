@@ -1,2 +1,10 @@
 li.member-thumbnail { text-align: center; }
 li.member-thumbnail .member-thumbnail-actions { text-align: right; }
+.team-signup-card {
+  height: 400px;
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+}

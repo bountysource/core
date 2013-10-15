@@ -10,6 +10,10 @@ angular.module('app')
       });
   })
   .controller('EditTeamController', function ($scope, $routeParams, $location, $api) {
+
+    //hide the type option if on settings page
+    $scope.settings_page = true;
+
     $scope.$watch('is_admin', function(value) {
       if (value === false) {
         $location.path("/teams/"+$routeParams.id).replace();

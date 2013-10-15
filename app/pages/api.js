@@ -7,7 +7,7 @@ angular.module('api.bountysource',[]).
 
     // set environment
     $rootScope.environment = window.BS_ENV;
-    if ($location.host().match(/localhost|v2\.pagekite/)) {
+    if ($location.host().match(/localhost|v2\.pagekite|.*\.local/)) {
       $rootScope.can_switch_environments = true;
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
@@ -501,6 +501,14 @@ angular.module('api.bountysource',[]).
 
     this.trackers_get = function() {
       return this.call("/projects");
+    };
+
+    this.claim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/claim", "POST", {owner_id: owner_id, owner_type: owner_type});
+    };
+
+    this.unclaim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/unclaim", "POST", {owner_id: owner_id, owner_type: owner_type});
     };
 
     this.tracker_plugins_get = function() {

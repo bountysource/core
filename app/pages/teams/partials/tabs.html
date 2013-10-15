@@ -1,5 +1,6 @@
 <ul class="nav nav-tabs">
-  <li ng-show="is_member || team.trackers.length > 0" ng-class="{ active: active_tab('projects') }"><a ng-href="/teams/{{team.slug}}">
+  <li ng-class="{ active: active_tab('home') }"><a ng-href="/teams/{{ team.slug }}">Home</a></li>
+  <li ng-show="is_member || team.trackers.length > 0" ng-class="{ active: active_tab('projects') }"><a ng-href="/teams/{{team.slug}}/projects">
     Projects
   </a></li>
   <li ng-show="members.length > 0" ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">
