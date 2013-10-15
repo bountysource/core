@@ -14,7 +14,7 @@ angular.module('app')
     $scope.team_options = [
       { param: "project", label: "Open Source Project", value: "Team::Project" },
       { param: "startup", label: "Startup", value: "Team::Startup" },
-      { param: "enterprise", label: "Enterprise", value: "Team::Enterprise" },
+      { param: "enterprise", label: "Enterprise", value: "Team::Enterprise" }
     ];
 
     $scope.form_data = {

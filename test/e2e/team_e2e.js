@@ -62,7 +62,7 @@ describe("Scenario: Creating a team --", function() {
       using('form').input('form_data.bio').enter("bountysource is THE open source funding platform");
       using('form').element('submit.btn').click();
 
-      expect(browser().location().path()).toEqual('/teams/'+MOCK.valid_team.slug+'/members/manage');
+      expect(browser().location().path()).toEqual('/teams/'+MOCK.valid_team.slug);
     });
   });
 
