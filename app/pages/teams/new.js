@@ -12,14 +12,15 @@ angular.module('app')
   })
   .controller('NewTeamController', function ($scope, $location, $api, $filter, $routeParams) {
     $scope.team_options = [
-      {param: "project", label: "Open Source Project", value: "Team::Project"},
-      {param: "startup", label: "Startup", value: "Team::Startup"},
-      {param: "enterprise", label: "Enterprise", value: "Team::Enterprise"},
+      { param: "project", label: "Open Source Project", value: "Team::Project" },
+      { param: "startup", label: "Startup", value: "Team::Startup" },
+      { param: "enterprise", label: "Enterprise", value: "Team::Enterprise" },
     ];
 
     $scope.form_data = {};
+    $scope.creating_team = false;
 
-    //set the default team type through route params
+    // set the default team type through route params
     if ($routeParams.type) {
       for (var i = 0; i < $scope.team_options.length; i++) {
         if ($routeParams.type === $scope.team_options[i].param) {
@@ -36,7 +37,11 @@ angular.module('app')
     });
 
     $scope.create_team = function () {
+      $scope.creating_team = true;
+
       $api.team_create($scope.form_data).then(function(team) {
+        $scope.creating_team = false;
+
         if (team.error) {
           $scope.error = team.error;
         } else {
