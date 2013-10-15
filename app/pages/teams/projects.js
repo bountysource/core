@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .
-  fig(function ($routeProvider) {
+  .config(function ($routeProvider) {
     $routeProvider
       .when('/teams/:id/projects', {
         templateUrl: 'pages/teams/projects.html',
