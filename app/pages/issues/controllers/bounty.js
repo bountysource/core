@@ -60,24 +60,24 @@ angular.module('app')
       }
     });
 
+    $scope.selected_team = undefined;
+      $scope.select_team = function(team) {
+      $scope.selected_team = team;
+    };
+
     $scope.can_make_anonymous = true;
     $scope.has_fee = true;
 
     $scope.$watch("bounty.payment_method", function(payment_method) {
-      // Can make anonymous?
-      // Only team bounties/pledges cannot be made anonymous.
-      if ((/^team\/\d+$/).test(payment_method)) {
-        $scope.can_make_anonymous = false;
-      } else {
-        $scope.can_make_anonymous = true;
-      }
-
-      // Bountysource charges a fee?
-      // Only personal accounts are exempt from the fee.
-      if (payment_method === "personal") {
-        $scope.has_fee = false;
-      } else {
-        $scope.has_fee = true;
+      if (payment_method) {
+        // is it an enterprise team or personal account? No fee!
+        if ((/^team\/\d+$/).test(payment_method) && $scope.selected_team && (/^Team::Enterprise$/).test($scope.selected_team.type||"")) {
+          $scope.has_fee = false;
+        } else if (payment_method === "personal") {
+          $scope.has_fee = false;
+        } else {
+          $scope.has_fee = true;
+        }
       }
     });
 
