@@ -61,7 +61,7 @@ angular.module('app')
     });
 
     $scope.selected_team = undefined;
-      $scope.select_team = function(team) {
+    $scope.select_team = function(team) {
       $scope.selected_team = team;
     };
 
