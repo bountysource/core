@@ -17,19 +17,20 @@ angular.module('app')
       { param: "enterprise", label: "Enterprise", value: "Team::Enterprise" },
     ];
 
-    $scope.form_data = {};
+    $scope.form_data = {
+      type: "Team::Project"
+    };
+
     $scope.creating_team = false;
 
     // set the default team type through route params
     if ($routeParams.type) {
-      for (var i = 0; i < $scope.team_options.length; i++) {
+      for (var i=0; i<$scope.team_options.length; i++) {
         if ($routeParams.type === $scope.team_options[i].param) {
           $scope.form_data.type = $scope.team_options[i].value;
+          break;
         }
       }
-    } else {
-      //if none is specified, default to Project
-      $scope.form_data.type = "Team::Project";
     }
 
     $scope.$watch('form_data.name', function() {
@@ -45,7 +46,7 @@ angular.module('app')
         if (team.error) {
           $scope.error = team.error;
         } else {
-          $location.url("/teams/"+team.slug+"/members/manage");
+          $location.url("/teams/"+team.slug);
         }
       });
     };
