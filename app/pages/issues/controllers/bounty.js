@@ -67,17 +67,30 @@ angular.module('app')
 
     $scope.can_make_anonymous = true;
     $scope.has_fee = true;
+    $scope.show_fee = false;
 
     $scope.$watch("bounty.payment_method", function(payment_method) {
       if (payment_method) {
-        // is it an enterprise team or personal account? No fee!
-        if ((/^team\/\d+$/).test(payment_method) && $scope.selected_team && (/^Team::Enterprise$/).test($scope.selected_team.type||"")) {
-          $scope.has_fee = false;
+
+        if ((/^team\/\d+$/).test(payment_method)) {
+          // is it an enterprise team or personal account? No fee!
+          if ($scope.selected_team && (/^Team::Enterprise$/).test($scope.selected_team.type||"")) {
+            $scope.has_fee = false;
+            $scope.show_fee = false;
+          } else {
+            $scope.has_fee = true;
+            $scope.show_fee = true;
+          }
         } else if (payment_method === "personal") {
           $scope.has_fee = false;
+          $scope.show_fee = true;
         } else {
           $scope.has_fee = true;
+          $scope.show_fee = true;
         }
+
+        // Cannot make anon if payment method is a team
+        $scope.can_make_anonymous = !(/^team\/\d+$/).test(payment_method);
       }
     });
 

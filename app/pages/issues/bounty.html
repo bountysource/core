@@ -67,19 +67,21 @@
         </div>
       </div>
 
-      <div class="control-group">
-        <label class="control-label">Bountysource Fee:</label>
-        <div class="controls">
-          <div style="line-height: 30px;"><strong>{{bounty.fee | currency}}</strong></div>
+      <div collapse="!show_fee">
+        <div class="control-group">
+          <label class="control-label">Bountysource Fee:</label>
+          <div class="controls">
+            <div style="line-height: 30px;"><strong>{{bounty.fee | currency}}</strong></div>
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <label class="control-label">Total:</label>
-        <div class="controls">
-          <div class="input-prepend">
-            <span class="add-on">$</span>
-            <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" />
+        <div class="control-group">
+          <label class="control-label">Total:</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">$</span>
+              <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" />
+            </div>
           </div>
         </div>
       </div>
