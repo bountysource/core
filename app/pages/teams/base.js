@@ -9,12 +9,13 @@ angular.module('app')
     };
 
     $scope.active_tab = function(tab) {
-      if (tab === 'projects' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
+      if (tab === 'home' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
       else if (tab === 'members' && (/^\/teams\/[^\/]+\/members$/).test($location.path())) { return true; }
       else if (tab === 'activity' && (/^\/teams\/[^\/]+\/activity$/).test($location.path())) { return true; }
       else if (tab === 'manage_members' && (/^\/teams\/[^\/]+\/members\/manage$/).test($location.path())) { return true; }
       else if (tab === 'settings' && (/^\/teams\/[^\/]+\/settings$/).test($location.path())) { return true; }
       else if (tab === 'account' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
+      else if (tab === 'projects' && (/^\/teams\/[^\/]+\/projects+$/).test($location.path())) { return true; }
     };
 
     $scope.members = $api.team_members_get($routeParams.id).then(function(members) {
