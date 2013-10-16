@@ -59,7 +59,7 @@ angular.module('app')
         // select the team once loaded.
         // if it's enterprise, then we need to know so that we hide the fees
         $scope.teams = $api.person_teams(person.id).then(function(teams) {
-          var team_id = parseInt((($scope.bounty.payment_method).match(/^team\/(\d+)$/))[1]);
+          var team_id = parseInt((($scope.bounty.payment_method).match(/^team\/(\d+)$/))[1], 10);
 
           if (team_id) {
             for (var i=0; i<teams.length; i++) {
