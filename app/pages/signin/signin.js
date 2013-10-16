@@ -111,4 +111,15 @@ angular.module('app')
       });
     };
 
+    $scope.save_analytics = function(url) {
+      var pathArray = url.split("?");
+      try { 
+        window._gaq.push(['_trackEvent', 'Signin-Page' , 'LinkOut', pathArray[0]]); 
+      } catch(err){}
+
+      setTimeout(function() {
+        window.location = url;
+      }, 100);
+    };
+
   });

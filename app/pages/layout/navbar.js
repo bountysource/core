@@ -27,5 +27,16 @@ angular.module('app')
     $scope.save_route = function() {
       $api.set_post_auth_url($location.url());
     };
+
+    $scope.save_analytics = function(url) {
+      var pathArray = url.split("?");
+      try { 
+        window._gaq.push(['_trackEvent', 'Navbar-Signin' , 'LinkOut', pathArray[0]]); 
+      } catch(err){}
+
+      setTimeout(function() {
+        window.location = url;
+      }, 100);
+    };
   });
 
