@@ -73,7 +73,10 @@ describe("Scenario: Using Team Account --", function() {
     Mock.init();
   });
 
-  it("should let you create a bounty", function() {
+  // TODO: This doesn't test teams being able to place bounties.
+  // It should use the form on "/teams/:slug", then submit payment with TEAM
+  // as the payment method, not Google Wallet..
+  xit("should let you create a bounty", function() {
     Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/issues/:id", "GET", "success");
     Mock.pushScenario("/people/:id/teams", "GET", "success");
