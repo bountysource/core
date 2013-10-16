@@ -56,7 +56,29 @@ angular.module('app')
     // if logged in, populate teams accounts!
     $scope.$watch("current_person", function(person) {
       if (person) {
-        $scope.teams = $api.person_teams(person.id);
+        // select the team once loaded.
+        // if it's enterprise, then we need to know so that we hide the fees
+        $scope.teams = $api.person_teams(person.id).then(function(teams) {
+          var team_id = parseInt((($scope.bounty.payment_method).match(/^team\/(\d+)$/))[1]);
+
+          if (team_id) {
+            for (var i=0; i<teams.length; i++) {
+              if (teams[i].id === team_id) {
+                $scope.selected_team = teams[i];
+
+                if ((/^Team::Enterprise$/).test(teams[i].type)) {
+                  $scope.show_fee = false;
+                } else {
+                  $scope.show_fee = true;
+                }
+
+                break;
+              }
+            }
+          }
+
+          return teams;
+        });
       }
     });
 
