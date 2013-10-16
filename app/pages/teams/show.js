@@ -24,7 +24,7 @@ angular.module('app')
     $scope.submit_search = function (query_url, amount) {
       $scope.create_bounty_params.amount = amount;
 
-      if (query_url.length > 0) {
+      if ((query_url || "").length > 0) {
         $api.search(query_url).then(function (response) {
           console.log(response);
           if (response.redirect_to) {
