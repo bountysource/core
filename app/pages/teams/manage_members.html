@@ -117,10 +117,10 @@
 
                 <td style="text-align: center;">
                   <div ng-show="new_member.email && !new_member.registered" tooltip="Send Invite">
-                    <button type="submit" class="btn btn-mini btn-block btn-primary"><i class="icon-envelope icon-white"></i></button>
+                    <button type="submit" class="btn btn-mini btn-block btn-primary" ng-click="team_invite_create()"><i class="icon-envelope icon-white"></i></button>
                   </div>
                   <div ng-show="new_member.email && new_member.registered" tooltip="Add to Team">
-                    <button type="submit" class="btn btn-mini btn-block btn-success"><i class="icon-plus icon-white"></i></button>
+                    <button type="submit" class="btn btn-mini btn-block btn-success" ng-click="team_invite_create()"><i class="icon-plus icon-white"></i></button>
                   </div>
                 </td>
               </form>
