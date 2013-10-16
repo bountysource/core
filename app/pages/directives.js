@@ -227,7 +227,7 @@ angular.module('app').
           if (owner) {
             if ((/^person$/i).test(owner.type)) {
               element.attr("href", "/people/"+owner.slug);
-            } else if ((/^team$/i).test(owner.type)) {
+            } else if ((/^team(?:::[a-z]+)*$/i).test(owner.type)) {
               element.attr("href", "/teams/"+owner.slug);
             }
           }
