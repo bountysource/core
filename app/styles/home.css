@@ -27,9 +27,19 @@
 @media (min-width: 980px) and (max-width: 1199px) {
   .homepage #top h1 { font-size: 30px; line-height: 30px; }
   .homepage #top h2 { font-size: 22px; margin: 10px 0 10px; }
+  .well { min-height: 290px; max-height: 290px;}
+  .search-query { width: 150px; }
+  .button1 {margin-top: 20px; }
+  .button2 {margin-top: 40px; }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .well { min-height: 320px; max-heigth: 320px; }
+  .search-query { width: 100px; }
+  .button1 {margin-top: 40px; }
+  .button2 {margin-top: 20px; }
 }
 
-.homepage #top .team-signup-card { color: white; text-align: center; background: rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; }
+.homepage #top .team-signup-card { color: white; text-align: center; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 10px; }
 .homepage #top .team-signup-card h3 { padding: 0; margin: 0; font-size: 20px; text-align: center; }
 .homepage #top .team-signup-card h4 { font-weight: normal; margin-bottom: 10px; }
 
