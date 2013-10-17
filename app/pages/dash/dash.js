@@ -6,7 +6,6 @@ angular.module('app')
     .when('/suchwowdashboard', {
       template_url: 'pages/dash/dash.html',
       controller: 'Dash',
-      title: 'User Dashboard',
       resolve: $person
   });
 })
