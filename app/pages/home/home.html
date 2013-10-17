@@ -1,40 +1,41 @@
 <div class="homepage">
   <section id="top">
-    <div class="container">
-      <h1>Bountysource is the funding platform for open-source software.</h1>
-      <span><h2>Accelerate open-source development with our community of {{people_count.total | number}} members.</h2></span>
+    <div class="outer">
+      <div class="container">
+        <h1>Bountysource is the funding platform for open-source software.</h1>
+        <span><h2>Accelerate open-source development with our community of {{people_count.total | number}} members.</h2></span>
 
-      <div class="row-fluid">
-        <div class="span4 offset2">
-          <div class="team-signup-card" ng-controller="NavbarSearchController">
-            <h3>Post a Bounty</h3>
-            <h4>Paste issue URL or search by keyword.</h4>
-            <form class="form-search" ng-submit="submit_search()">
-              <div class="input-append">
-                <input type="text" class="search-query" ng-model="search_query" placeholder="https://github.com/.../issues/123">
-                <button type="submit" class="btn btn-success">Search</button>
-              </div>
-            </form>
+        <div class="row-fluid">
+          <div class="span4 offset2">
+            <div class="team-signup-card" ng-controller="NavbarSearchController">
+              <h3>Post a Bounty</h3>
+              <h4>Paste issue URL or search by keyword.</h4>
+              <form class="form-search" ng-submit="submit_search()">
+                <div class="input-append">
+                  <input type="text" class="search-query" ng-model="search_query" placeholder="https://github.com/.../issues/123">
+                  <button type="submit" class="btn btn-success">Search</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
 
-        <div class="span4">
-          <div class="team-signup-card">
-            <h3 class="text-center">Claim a Bounty</h3>
-            <h4>Earn cash by solving open-source issues.</h4>
-            <!--<ol>-->
-              <!--<li>Find bounties.</li>-->
-              <!--<li>Submit code to project.</li>-->
-              <!--<li>Claim bounties.</li>-->
-            <!--</ol>-->
-            <form class="form-search">
-              <a ng-href="/trackers" class="btn btn-success">Browse Projects</a>
-            </form>
+          <div class="span4">
+            <div class="team-signup-card">
+              <h3 class="text-center">Claim a Bounty</h3>
+              <h4>Earn cash by solving open-source issues.</h4>
+              <!--<ol>-->
+                <!--<li>Find bounties.</li>-->
+                <!--<li>Submit code to project.</li>-->
+                <!--<li>Claim bounties.</li>-->
+              <!--</ol>-->
+              <form class="form-search">
+                <a ng-href="/trackers" class="btn btn-success">Browse Projects</a>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
   </section>
 
   <section id="teams">

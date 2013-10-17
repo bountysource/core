@@ -5,9 +5,12 @@
   background: url(/images/top_background.jpg) center center no-repeat;
   background-size: cover;
   text-align: center;
-  padding: 20px 0 20px 0;
   border: 0;
   box-shadow: 0 0 5px #000;
+}
+.homepage #top .outer {
+  background: rgba(0,0,0,0.55);
+  padding: 20px 0 20px 0;
 }
 
 .homepage section#teams {
@@ -22,8 +25,8 @@
 }
 
 /* backer/developer box (background and text) */
-.homepage #top h1 { text-align: center; padding: 0; margin: 10px 0 0 0; font-size: 34px; line-height: 40px; color: #fff; text-shadow: -2px -2px 3px #000, 2px -2px 3px #000, -2px 2px 3px #000, 2px 2px 3px #000; }
-.homepage #top h2 { padding: 0 0 0px 0; margin: 20px 0 20px; font-size: 24px; font-weight: normal; color: #fff; text-shadow: -1px -1px 3px #000, 1px -1px 3px #000, -1px 1px 3px #000, 1px 1px 3px #000; }
+.homepage #top h1 { text-align: center; padding: 0; margin: 10px 0 0 0; font-size: 34px; line-height: 40px; color: #fff; }
+.homepage #top h2 { padding: 0 0 0px 0; margin: 20px 0 20px; font-size: 24px; font-weight: normal; color: #fff; }
 @media (min-width: 980px) and (max-width: 1199px) {
   .homepage #top h1 { font-size: 30px; line-height: 30px; }
   .homepage #top h2 { font-size: 22px; margin: 10px 0 10px; }
@@ -39,7 +42,7 @@
   .button2 {margin-top: 20px; }
 }
 
-.homepage #top .team-signup-card { color: white; text-align: center; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 10px; }
+.homepage #top .team-signup-card { color: white; text-align: center; padding: 10px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; }
 .homepage #top .team-signup-card h3 { padding: 0; margin: 0; font-size: 20px; text-align: center; }
 .homepage #top .team-signup-card h4 { font-weight: normal; margin-bottom: 10px; }
 
