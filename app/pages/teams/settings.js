@@ -17,8 +17,6 @@ angular.module('app')
     $scope.form_data = {};
 
     $scope.team.then(function(team) {
-      console.log(team);
-
       $scope.form_data = {
         name: team.name,
         slug: team.slug,

@@ -3,7 +3,7 @@
     <span ng-show="is_admin || is_developer">Home</span>
     <span ng-hide="is_admin || is_developer">Projects</span>
   </a></li>
-  <li ng-show="team.trackers.length > 0 && is_member && (is_admin || is_developer)" ng-class="{ active: active_tab('projects') }"><a ng-href="/teams/{{team.slug}}/projects">
+  <li ng-show=" (is_admin || is_developer) || team.trackers.length > 0" ng-class="{ active: active_tab('projects') }"><a ng-href="/teams/{{team.slug}}/projects">
     Projects
   </a></li>
   <li ng-show="members.length > 0" ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">
