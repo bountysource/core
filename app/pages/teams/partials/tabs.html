@@ -1,6 +1,9 @@
 <ul class="nav nav-tabs">
-  <li ng-class="{ active: active_tab('home') }"><a ng-href="/teams/{{ team.slug }}">Home</a></li>
-  <li ng-show="is_member || team.trackers.length > 0" ng-class="{ active: active_tab('projects') }"><a ng-href="/teams/{{team.slug}}/projects">
+  <li ng-class="{ active: active_tab('home') }"><a ng-href="/teams/{{ team.slug }}">
+    <span ng-show="is_admin || is_developer">Home</span>
+    <span ng-hide="is_admin || is_developer">Projects</span>
+  </a></li>
+  <li ng-show="team.trackers.length > 0 && is_member && (is_admin || is_developer)" ng-class="{ active: active_tab('projects') }"><a ng-href="/teams/{{team.slug}}/projects">
     Projects
   </a></li>
   <li ng-show="members.length > 0" ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">
@@ -13,7 +16,7 @@
     <i class="icon-lock"></i>
     Manage Members
   </a></li>
-  <li ng-show="is_admin" ng-class="{ active: active_tab('settings') }"><a ng-href="/teams/{{team.slug}}/settings">
+  <li ng-show="is_admin || is_developer" ng-class="{ active: active_tab('settings') }"><a ng-href="/teams/{{team.slug}}/settings">
     <i class="icon-lock"></i>
     Settings
   </a></li>

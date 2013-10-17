@@ -5,11 +5,18 @@ angular.module('app')
     $routeProvider
     .when('/teams/:id', {
       templateUrl: 'pages/teams/show.html',
-      controller: 'BaseTeamController'
+      controller: 'BaseTeamController',
+      reloadOnSearch: false
     });
   })
   .controller('TeamHomeController', function ($route, $scope, $routeParams, $api, $pageTitle, $location) {
     $scope.create_bounty_params = {};
+
+    // pick off query string to show amount added to account
+    if ($location.search().funds_added) {
+      $scope.funds_added = parseInt($location.search().funds_added, 10) || undefined;
+      $location.search({}).replace();
+    }
 
     $scope.team.then(function (team) {
       $pageTitle.set(team.name, 'Teams');
@@ -19,7 +26,6 @@ angular.module('app')
 
       return team;
     });
-
 
     $scope.submit_search = function (query_url, amount) {
       $scope.create_bounty_params.amount = amount;

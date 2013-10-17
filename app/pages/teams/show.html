@@ -4,115 +4,103 @@
   <li><a>{{team.name || 'Loading...'}}</a></li>
 </ul>
 
-<div ng-show="team">
-  <div class="row-fluid">
-    <div class="span3">
-      <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+<div class="row-fluid" ng-show="team">
+  <div class="span3">
+    <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+  </div>
+  <div class="span9" ng-controller="TeamHomeController">
+    <ng-include src="'pages/teams/partials/header.html'"></ng-include>
+    <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
+
+    <div ng-show="funds_added">
+      <alert type="'success'" close="funds_added = null">Successfully added <strong>{{funds_added | dollars}}</strong>
+        to <strong>{{team.name}}'s</strong> balance. Current balance of <strong>{{team.account_balance |
+          dollars}}</strong> is available to spend immediately.
+      </alert>
     </div>
-    <div class="span9" ng-controller="TeamHomeController">
-      <ng-include src="'pages/teams/partials/header.html'"></ng-include>
-      <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
-      
-      <div class="row-fluid" ng-show="is_member">
-        <div class="span6 well" style="height: 280px">
-          <h4>Post a Bounty</h4>
-          <p>Paste the URL to an issue and enter an amount.</p>
-          <form class="form-horizontal" style="margin-top:30px">
-            <div class="control-group">
-              <label class="control-label" style="width:inherit">URL:</label>
-              <div class="controls" style="margin-left:70px"><input ng-model="search_query" type="text" class="span12" placeholder="https://github.com/.../issues/123"></input></div>
-            </div>
 
-            <div class="control-group">
-              <label class="control-label" style="width:inherit">Amount:</label>
-              <div class="controls" style="margin-left:70px">
-                <div class="input-prepend"><span class="add-on">$</span><input ng-model="bounty_amount" type="number" class="span6" placeholder="30.00"></input></div>
-              </div>
-            </div>
+    <!-- Not a member, or just a public member. Do nothing but show the projects used -->
+    <div ng-show="!is_member || !(is_admin || is_developer)">
 
-            <div class="control-group">
-              <div class="controls" style="margin-left:70px;"><button ng-click="submit_search(search_query, bounty_amount)" class="btn btn-primary">Post Bounty</button></div>
-            </div>
-          </form>
-        </div>
+      <!-- If you don't own any projects, no title -->
+      <div ng-show="team.owned_trackers.length <= 0">
+        <team-tracker-thumbnails trackers="team.trackers"></team-tracker-thumbnails>
+      </div>
 
-        <div class="span3 well" style="height:280px;">
-          <div style="height:75%">
-            <h4>Invite Members</h4>
-            <ul>
-              <li>Add members and send email invites</li>
-              <li>Assign roles to members</li>
-              <li>Show off your team</li>
-            </ul>
+      <!-- If you own projects, split them apart and add titles -->
+      <div ng-show="team.owned_trackers.length > 0">
+        <h3>{{team.name}}'s Projects</h3>
+        <team-tracker-thumbnails trackers="team.owned_trackers"></team-tracker-thumbnails>
+
+        <h3>Projects Used By {{team.name}}</h3>
+        <team-tracker-thumbnails trackers="team.unowned_trackers"></team-tracker-thumbnails>
+      </div>
+    </div>
+
+    <!-- Developer view. Can only add projects and place bounties -->
+    <div class="row-fluid" ng-show="!is_admin && is_developer">
+      <div class="span9">
+        <ng-include src="'pages/teams/partials/post_bounty_box.html'"></ng-include>
+      </div>
+
+      <div class="span3">
+        <div class="well text-center" style="height: 240px;">
+          <h4>Add Projects</h4>
+          <br />
+          <p>Highlight your team's own projects.</p>
+          <p>Keep track of the open-source projects your team uses</p>
+          <br />
+          <div style="text-align: center;">
+            <a ng-href="/teams/{{team.slug}}/projects" class="btn btn-primary">Add Projects</a>
           </div>
-          <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/members/manage" class="btn btn-primary">Invite Members</a></div>
         </div>
+      </div>
+    </div>
 
-        <div class="span3 well" style="height:280px;" ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
-          <div style="height:75%">
-            <h4>Add Funds</h4>
-            <ul>
-             <li>Create a shared team balance</li>
-             <li>Fund with Paypal or Google Wallet</li>
-             <li> Post bounties & pledge to fundraisers</li>
-           </ul>
-         </div>
-         <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/account" class="btn btn-primary">Add Funds</a></div>
-       </div>
+    <!-- Admin view. Can do all of the things! -->
+    <div class="row-fluid" ng-show="is_admin">
+      <div class="span6">
+        <ng-include src="'pages/teams/partials/post_bounty_box.html'"></ng-include>
+      </div>
 
-       <div class="span3 well" style="height:280px;" ng-show="team.type == 'Team::Project'">
+      <div class="span3 well" style="height:280px;">
+        <div style="height:75%">
+          <h4>Invite Members</h4>
+          <ul>
+            <li>Add members and send email invites</li>
+            <li>Assign roles to members</li>
+            <li>Show off your team</li>
+          </ul>
+        </div>
+        <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/members/manage" class="btn btn-primary">Invite
+          Members</a></div>
+      </div>
+
+      <div class="span3 well" style="height:280px;"
+           ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
+        <div style="height:75%">
+          <h4>Add Funds</h4>
+          <ul>
+            <li>Create a shared team balance</li>
+            <li>Fund with Paypal or Google Wallet</li>
+            <li> Post bounties & pledge to fundraisers</li>
+          </ul>
+        </div>
+        <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/account" class="btn btn-primary">Add
+          Funds</a></div>
+      </div>
+
+      <div class="span3 well" style="height:280px;" ng-show="team.type == 'Team::Project'">
         <div style="height:75%">
           <h4>Install Plugin</h4>
           <ul>
-           <li>Add/update bounty total in Issue title</li>
-           <li>Add bounty information to the issue body</li>
-           <li>Apply label to all issues with a bounty</li>
-         </ul>
-       </div>
-       <div style="text-align:center"><a ng-href="/tools" class="btn btn-primary">Install Plugin</a></div>
-     </div>
-   </div>
-
-<!--    <div class="row-fluid" ng-show="is_member || team.type == 'Team::Project'">
-    <div class="span6 well">
-      <h4>Add a Tracker</h4>
-      <p>Paste the URL for a project your team owns.</p>
-      <form class="form-horizontal">
-        <div class="control-group">
-          <label class="control-label" style="width:inherit">URL:</label>
-          <div class="controls" style="margin-left:70px"><input ng-model="search_query" type="text" class="span12" placeholder="https://github.com/bountysource/frontend/issues/249"></input></div>
+            <li>Add/update bounty total in Issue title</li>
+            <li>Add bounty information to the issue body</li>
+            <li>Apply label to all issues with a bounty</li>
+          </ul>
         </div>
-
-        <div class="control-group">
-          <div class="controls" style="margin-left:70px;"><button ng-click="submit_search(search_query, bounty_amount)" class="btn btn-primary">Get Started</button></div>
-        </div>
-      </form>
-    </div>
-
-    <div class="span3 well" style="height:210px;">
-      <div style="height:75%">
-        <h4>Invite Members</h4>
-        <ul>
-          <li>Short ribs turducken</li>
-          <li>Short ribs turducken</li>
-          <li>Short ribs turducken</li>
-        </ul>
+        <div style="text-align:center"><a ng-href="/tools" class="btn btn-primary">Install Plugin</a></div>
       </div>
-      <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/members/manage" class="btn btn-primary">Invite Members</a></div>
     </div>
-
-    <div class="span3 well" style="height:210px;">
-      <div style="height:75%">
-        <h4>Install Plugin</h4>
-        <ul>
-         <li>Short ribs turducken</li>
-         <li>Short ribs turducken</li>
-         <li>Short ribs turducken</li>
-       </ul>
-     </div>
-     <div style="text-align:center"><a ng-href="/tools" class="btn btn-primary">Install Plugin</a></div>
-   </div>
- </div> -->
-
-</div>
+  </div>
 </div>

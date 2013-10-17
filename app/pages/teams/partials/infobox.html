@@ -17,17 +17,21 @@
         <input type="checkbox" ng-checked="is_public" style="cursor: default;" disabled />
       </label>
       <label class="checkbox">
-        <span>can spend from team account</span>
-        <input type="checkbox" ng-checked="is_spender" style="cursor: default;" disabled />
+        <span>can modify team settings</span>
+        <input type="checkbox" ng-checked="is_admin || is_developer" style="cursor: default;" disabled />
       </label>
       <label class="checkbox">
-        <span>administrative privileges</span>
+        <span>can manage team projects</span>
+        <input type="checkbox" ng-checked="is_admin || is_developer" style="cursor: default;" disabled />
+      </label>
+      <label class="checkbox">
+        <span>can manage team members</span>
         <input type="checkbox" ng-checked="is_admin" style="cursor: default;" disabled />
       </label>
     </div>
 
     <!-- Account Balance -->
-    <div class="text-center" ng-show="is_spender || is_admin">
+    <div class="text-center" ng-show="is_developer || is_admin">
       <h4>Team Account Balance</h4>
       <strong>{{team.account_balance | currency}}</strong>
     </div>

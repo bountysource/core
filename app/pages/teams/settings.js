@@ -14,15 +14,11 @@ angular.module('app')
     //hide the type option if on settings page
     $scope.settings_page = true;
 
-    $scope.$watch('is_admin', function(value) {
-      if (value === false) {
-        $location.path("/teams/"+$routeParams.id).replace();
-      }
-    });
-
     $scope.form_data = {};
 
     $scope.team.then(function(team) {
+      console.log(team);
+
       $scope.form_data = {
         name: team.name,
         slug: team.slug,
@@ -33,9 +29,11 @@ angular.module('app')
       $scope.save_team = function() {
         $api.team_update(team.slug, $scope.form_data).then(function(updated_team) {
           if (updated_team.error) {
-            $scope.error = updated_team.error;
+            $scope.alert = { text: updated_team.error, type: "error" };
           } else {
-            $location.url("/teams/"+updated_team.slug);
+            $scope.alert = { text: "Team updated!", type: "success" };
+            for (var k in updated_team) { team[k] = updated_team[k]; }
+            $scope.saved_at = new Date();
           }
         });
       };

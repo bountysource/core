@@ -4,7 +4,7 @@ angular.module('mockedTeams', [])
 .value('defaultJSON', {
   "data": [{
     "is_public": true,
-    "is_spender": false,
+    "is_developer": false,
     "is_admin": true,
     "id": 11,
     "name": "LinkedIn",
@@ -17,7 +17,7 @@ angular.module('mockedTeams', [])
     "featured": false
   }, {
     "is_public": true,
-    "is_spender": false,
+    "is_developer": false,
     "is_admin": true,
     "id": 15,
     "name": "Rdio",
@@ -30,7 +30,7 @@ angular.module('mockedTeams', [])
     "featured": false
   }, {
     "is_public": true,
-    "is_spender": false,
+    "is_developer": false,
     "is_admin": true,
     "id": 17,
     "name": "Yammer",
@@ -43,7 +43,7 @@ angular.module('mockedTeams', [])
     "featured": false
   }, {
     "is_public": true,
-    "is_spender": false,
+    "is_developer": false,
     "is_admin": true,
     "id": 75,
     "name": "Geeklist",
@@ -56,7 +56,7 @@ angular.module('mockedTeams', [])
     "featured": false
   }, {
     "is_public": true,
-    "is_spender": false,
+    "is_developer": false,
     "is_admin": true,
     "id": 77,
     "name": "LincolnLoop",
@@ -69,7 +69,7 @@ angular.module('mockedTeams', [])
     "featured": false
   }, {
     "is_public": true,
-    "is_spender": false,
+    "is_developer": false,
     "is_admin": false,
     "id": 130,
     "name": "Focaccia, Inc #yoloswag",
@@ -82,7 +82,7 @@ angular.module('mockedTeams', [])
     "featured": false
   }, {
     "is_public": true,
-    "is_spender": true,
+    "is_developer": true,
     "is_admin": true,
     "id": 1,
     "name": "Bountysource",
