@@ -39,19 +39,36 @@
 
     <!-- Developer view. Can only add projects and place bounties -->
     <div class="row-fluid" ng-show="!is_admin && is_developer">
-      <div class="span9">
+      <div class="span6">
         <ng-include src="'pages/teams/partials/post_bounty_box.html'"></ng-include>
       </div>
 
       <div class="span3">
-        <div class="well text-center" style="height: 240px;">
-          <h4>Add Projects</h4>
-          <br />
-          <p>Highlight your team's own projects.</p>
-          <p>Keep track of the open-source projects your team uses</p>
-          <br />
+        <div class="well" style="height: 240px;">
+          <div style="min-height: 180px;">
+            <h4>Add Projects</h4>
+            <ul>
+              <li>Highlight your team's own projects.</li>
+              <li>Keep track of the open-source projects your team uses</li>
+            </ul>
+          </div>
           <div style="text-align: center;">
             <a ng-href="/teams/{{team.slug}}/projects" class="btn btn-primary">Add Projects</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="span3">
+        <div class="well" style="height: 240px;">
+          <div style="min-height: 180px;">
+            <h4>Change Settings</h4>
+            <ul>
+              <li>Update team name, logo, and homepage</li>
+              <li>Set a custom Bio for your team</li>
+            </ul>
+          </div>
+          <div style="text-align: center;">
+            <a ng-href="/teams/{{team.slug}}/settings" class="btn btn-primary">Change Settings</a>
           </div>
         </div>
       </div>
