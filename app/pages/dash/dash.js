@@ -11,8 +11,13 @@ angular.module('app')
 })
 
 .controller('Dash', function($scope, $location, $api) {
+  //supposed to be some sort of api response
+  var favLang = ['ruby', 'java', 'clojure']
+
   $scope.person = $api.person_get($scope.current_person.id);
   $scope.teams = $api.person_teams_get($scope.current_person.id);
-  console.log('wow');
-  console.log($scope.current_person);
+
+  $scope.issues = $api.search(favLang[0]).then(function(data) {
+    return data.issues.slice(0,3)
+  });
 });
