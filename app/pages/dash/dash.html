@@ -10,23 +10,39 @@
           <h1>Fix an issue - Get Paid</h1>
           <small>Issues you could fix right now, based on your language preference</small>
         </div>
+          <ul id="fixit-list">
+            <li ng-repeat="issue in issues">
+            <span class="label label-success">{{issue.bounty_total | currency}}</span> - <a ng-href="{{issue.frontend_path}}">{{issue.title}}</a>
+            </li>
+          </ul>
       </div>
     </div>
 
     <div class="row">
       <div class="span8 offset1">
         <div class="page-header">
-          <h1>Fix an issue - Get Paid</h1>
-          <small>Issues you could fix right now, based on your language preference</small>
+          <h1>Get Your Issues Fixed - Give</h1>
+          <small>Set bounties on issues that you have previously reported, prime the pump.</small>
         </div>
+        <ul id="bugs">
+          <li ng-repeat="bug in myBugs">
+            <a class="bug-link" ng-href="{{bug.url}}">{{bug.title}}</a>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="row">
       <div class="span8 offset1">
         <div class="page-header">
-          <h1>Fix an issue - Get Paid</h1>
-          <small>Issues you could fix right now, based on your language preference</small>
+          <h1>Get Involved - Add Project</h1>
+          <small>Kick off a fundraiser or just add our tracker to your project.</small>
+        </div>
+        <div class="span4 offset2">
+          <a class="btn btn-inverse" type="button" href="/fundraisers/new">Start Fundraiser</a>
+        </div>
+        <div class="span4 offset1">
+          <a class="btn btn-inverse" type="button" href="/tools">Get Bounties</a>
         </div>
       </div>
     </div>

@@ -1,0 +1,8 @@
+#fixit-list, #bugs {
+  list-style: none;
+  margin: 0;
+}
+
+.bug-link {
+  font-size: 12px;
+}
