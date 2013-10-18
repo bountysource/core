@@ -1,3 +1,15 @@
+<script>$("body").on("click", "a", function() {
+		  	fromTop = 150;
+		  	href = $(this).attr("href");
+		  	if(href && href.indexOf("#") != -1 && href.indexOf("#") != href.length - 1) {
+			    href = href.substring(href.indexOf("#"));
+			    if($(href).length > 0) {
+				    $('html, body').animate({scrollTop: $(href).offset().top - 60}, 100);
+				    return false;
+	    		}
+	  		}
+		}); 
+</script>
 <h1 class="text-center">Jobs</h1>
 			<hr><p class="lead">Bountysource is a fast-growing startup that is constantly on hunt for top talent. If you don’t see an opening here that suits you but you feel like you should be a part of our team, contact us anyway and tell us why we should hire you.<br>Bountysource is located in the Financial District of San Francisco (3rd & Market) with easy access to BART and MUNI.<br>To apply to any of these positions, please drop us a line at <a href="mailto:jobs@bountysource.com">jobs@bountysource.com</a>. Resumes and cover letters are important, but so are GitHub profiles and open-source contributions.</p>
 			<hr>
