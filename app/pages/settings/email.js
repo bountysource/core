@@ -13,13 +13,14 @@ angular.module('app')
   .controller('SettingsEmail', function($scope, $routeParams, $api) {
     $scope.form_data = {
       email: $scope.current_person.email,
-      weekly_newsletter: !$scope.current_person.exclude_from_newsletter
+      weekly_newsletter: !$scope.current_person.exclude_from_newsletter,
+      developer_alerts: $scope.current_person.developer_alerts
     };
 
     $scope.submit = function() {
       $scope.error = $scope.success = null;
 
-      var updates = { email: $scope.form_data.email, exclude_from_newsletter: !$scope.form_data.weekly_newsletter };
+      var updates = { email: $scope.form_data.email, exclude_from_newsletter: !$scope.form_data.weekly_newsletter, developer_alerts: $scope.form_data.developer_alerts };
       $api.person_put(updates).then(function() {
         if ($scope.current_person.email === $scope.form_data.email) {
           $scope.success = 'Email settings updated!';
