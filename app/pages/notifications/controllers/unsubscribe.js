@@ -15,5 +15,5 @@ angular.module('app')
       email: email_address,
       type: email_list
     };
-    $scope.response = $api.call("/notifications/unsubscribe", 'POST', data);
+    $scope.response = $api.notification_unsubscribe(data);
   });

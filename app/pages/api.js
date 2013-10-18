@@ -232,6 +232,12 @@ angular.module('api.bountysource',[]).
       return promise;
     };
 
+    this.notification_unsubscribe = function(data) {
+      return this.call("/notifications/unsubscribe", 'POST', data, function(response) {
+        return response;
+      });
+    };
+
     this.change_password = function(data) {
       return this.call("/user/change_password", "POST", data);
     };

@@ -1,1 +1,4 @@
-<p>{{response.message}}</p>
+<div class="text-center">
+  <h3>{{response.data.message}}.</h3>
+  <h4 ng-show="response.meta.success">If you wish to resubscribe to Bounty Alerts, please go to your <a ng-href="/settings/email">email settings</a>.</h4>
+</div>
