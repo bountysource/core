@@ -29,11 +29,15 @@
 
       <!-- If you own projects, split them apart and add titles -->
       <div ng-show="team.owned_trackers.length > 0">
-        <h3>{{team.name}}'s Projects</h3>
-        <team-tracker-thumbnails trackers="team.owned_trackers"></team-tracker-thumbnails>
+        <div ng-show="team.owned_trackers.length > 0">
+          <h3>{{team.name}}'s Projects</h3>
+          <team-tracker-thumbnails trackers="team.owned_trackers"></team-tracker-thumbnails>
+        </div>
 
-        <h3>Projects Used by {{team.name}}</h3>
-        <team-tracker-thumbnails trackers="team.unowned_trackers"></team-tracker-thumbnails>
+        <div ng-show="team.unowned_trackers.length > 0">
+          <h3>Projects Used by {{team.name}}</h3>
+          <team-tracker-thumbnails trackers="team.unowned_trackers"></team-tracker-thumbnails>
+        </div>
       </div>
     </div>
 
