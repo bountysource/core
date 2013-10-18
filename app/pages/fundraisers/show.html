@@ -22,7 +22,7 @@
           <div class="span3">
             <div ng-include="'pages/fundraisers/partials/top_backers.html'"></div>
 
-            <div class="bounty-buttons">
+            <div class="bounty-buttons" ng-show="fundraiser.published && fundraiser.in_progress">
               <h3>Pledge Now</h3>
 
               <form ng-submit="pledge_redirect()">
