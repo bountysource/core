@@ -22,12 +22,7 @@
           <div class="span3">
             <div ng-include="'pages/fundraisers/partials/top_backers.html'"></div>
 
-            <div ng-show="fundraiser.rewards.length > 0">
-              <h3>Rewards</h3>
-              <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
-            </div>
-
-            <div ng-show="fundraiser.rewards.length == 0" class="bounty-buttons" >
+            <div class="bounty-buttons">
               <h3>Pledge Now</h3>
 
               <form ng-submit="pledge_redirect()">
@@ -51,6 +46,10 @@
               </form>
             </div>
 
+            <div ng-show="fundraiser.rewards.length > 0">
+              <h3>Rewards</h3>
+              <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+            </div>
           </div>
         </div>
       </div>
