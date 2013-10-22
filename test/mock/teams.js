@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mockedTeams', [])
-.value('defaultJSON', {
+.value('teamJSON', {
   "data": [{
     "is_public": true,
     "is_developer": false,

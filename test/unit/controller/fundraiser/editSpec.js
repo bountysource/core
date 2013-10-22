@@ -5,12 +5,12 @@ describe('FundraiserEditController', function() {
 
   var $httpBackend, $rootScope, createRewardController, createController, $location;
 
-  beforeEach(inject(function($injector, defaultJSON, fundraiserJSON, $http) {
+  beforeEach(inject(function($injector, teamJSON, fundraiserJSON, $http) {
     $location = $injector.get('$location');
     $httpBackend = $injector.get('$httpBackend');
 
     $httpBackend.when('GET', 'https://staging-api.bountysource.com/people/4/teams?callback=CORS&per_page=250')
-    .respond( function() { return [200, "CORS(" + JSON.stringify(defaultJSON) + ")"];} );
+    .respond( function() { return [200, "CORS(" + JSON.stringify(teamJSON) + ")"];} );
 
     $httpBackend.when('GET', 'https://staging-api.bountysource.com/user/fundraisers/101?callback=CORS&per_page=250')
     .respond( function() { return [200, "CORS(" + JSON.stringify(fundraiserJSON) + ")"];} );
