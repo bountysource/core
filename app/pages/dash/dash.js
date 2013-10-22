@@ -21,6 +21,14 @@ angular.module('app')
     return data.issues.slice(0,3);
   });
 
+  $scope.installed = $api.call("/tracker_plugins", {per_page: 3}).then(function(data) {
+    console.log(data);
+  });
+
+  $scope.projects = $api.call("/projects", {per_page: 3}).then(function(data) {
+    console.log(data);
+  });
+
   $scope.myBugs = {
     issue1: {
       project: "Ruby on Rails",

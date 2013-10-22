@@ -4,48 +4,58 @@
   </div>
 
   <div class="span9">
-    <div class="row">
-      <div class="span8 offset1">
-        <div class="page-header">
-          <h1>Fix an issue - Get Paid</h1>
-          <small>Issues you could fix right now, based on your language preference</small>
-        </div>
-          <ul id="fixit-list">
-            <li ng-repeat="issue in issues">
-            <span class="label label-success">{{issue.bounty_total | currency}}</span> - <a ng-href="{{issue.frontend_path}}">{{issue.title}}</a>
-            </li>
-          </ul>
+    <h1>Welcome, {{person.display_name}}!</h1>
+    <h3>{{person.bio}}</h3>
+    <hr></hr>
+
+      <h1>Fix an issue</h1>
+      <small>Issues you could fix right now, based on your language preference</small>
+    <table class="table">
+      <th>Amount</th><th>Issue Description</th>
+      <tr ng-repeat="issue in issues">
+        <td><span class="label label-success">{{issue.bounty_total | currency}}</span></td> <td><a ng-href="{{issue.frontend_path}}">{{issue.title}}</a></td>
+      </tr>
+    </table>
+
+    <div class="well well-large">
+        <h1>Get Involved - Start a Fundraiser</h1>
+        <small>Kick off a fundraiser or go checkout some samples</small>
+        <br />
+      <div class="span9 offset4">
+        <a class="btn btn-large btn-inverse spacing" type="button" href="/fundraisers/new">Start Fundraiser</a>
       </div>
+      <br />
+    <table class="table">
+      <th>Name</th><th>Goal</th><th>Raised</th><th>Status</th>
+      <tr ng-repeat="project in projects">
+        <td><span class="label label-success">{{issue.bounty_total | currency}}</span></td> <td><a ng-href="{{issue.frontend_path}}">{{project.title}}</a></td>
+      </tr>
+    </table>
     </div>
 
-    <div class="row">
-      <div class="span8 offset1">
-        <div class="page-header">
-          <h1>Get Your Issues Fixed - Give</h1>
-          <small>Set bounties on issues that you have previously reported, prime the pump.</small>
-        </div>
-        <ul id="bugs">
-          <li ng-repeat="bug in myBugs">
-            <a class="bug-link" ng-href="{{bug.url}}">{{bug.title}}</a>
-          </li>
-        </ul>
-      </div>
+    <div class="row-fluid">
+    <div class="span6">
+      <h1>Bounty an Issue</h1>
+      <small>Set bounties on issues that you have previously reported, prime the pump.</small>
+    <table class="table">
+      <th>Description of Bug</th>
+      <tr ng-repeat="bug in myBugs">
+      <td><a class="bug-link" ng-href="{{bug.url}}">{{bug.title}}</a></td>
+      </tr>
+    </table>
     </div>
 
-    <div class="row">
-      <div class="span8 offset1">
-        <div class="page-header">
-          <h1>Get Involved - Add Project</h1>
-          <small>Kick off a fundraiser or just add our tracker to your project.</small>
-        </div>
-        <div class="span4 offset2">
-          <a class="btn btn-inverse" type="button" href="/fundraisers/new">Start Fundraiser</a>
-        </div>
-        <div class="span4 offset1">
-          <a class="btn btn-inverse" type="button" href="/tools">Get Bounties</a>
-        </div>
-      </div>
+    <div class="span6">
+      <h1>Bounty an Issue</h1>
+      <small>Set bounties on issues that you have previously reported, prime the pump.</small>
+    <table class="table">
+      <th>Description of Bug</th>
+      <tr ng-repeat="bug in myBugs">
+      <td><a class="bug-link" ng-href="{{bug.url}}">{{bug.title}}</a></td>
+      </tr>
+    </table>
     </div>
+  </div>
 
   </div>
 </div>
