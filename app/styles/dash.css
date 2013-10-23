@@ -1,6 +1,12 @@
-#fixit-list, #bugs {
+p {
+  font-size: 12px;
+}
+
+.PostBounty, #bugs {
   list-style: none;
   margin: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
 .bug-link {
@@ -9,4 +15,18 @@
 
 .spacing {
   margin-bottom: 10px;
+}
+
+.button-pad {
+  margin-bottom: 10px;
+}
+
+.rounded-border {
+  padding: 2px;
+  margin-bottom: 10px;
+  min-height: 330px;
+  border: 1px solid #e3e3e3;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; /* future proofing */
 }

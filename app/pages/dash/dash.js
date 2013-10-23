@@ -10,12 +10,18 @@ angular.module('app')
     });
   })
 
-.controller('Dash', function($scope, $location, $api) {
+.controller('Dash', function($scope, $location, $api, $search) {
   //supposed to be some sort of api response
   var favLang = ['ruby', 'java', 'clojure'];
 
   $scope.person = $api.person_get($scope.current_person.id);
   $scope.teams = $api.person_teams_get($scope.current_person.id);
+
+  $scope.bounties = $api.search(favLang[0]).then(function(data) {
+    var randOne = Math.floor((Math.random()*10)+1);
+    var randTwo = randOne + 3
+    return data.issues.slice(randOne,randTwo);
+  });
 
   $scope.issues = $api.search(favLang[0]).then(function(data) {
     return data.issues.slice(0,3);
@@ -27,6 +33,14 @@ angular.module('app')
 
   $scope.projects = $api.call("/projects", {per_page: 3}).then(function(data) {
     console.log(data);
+  });
+
+  $scope.search_submit = function(query, amount) {
+    $search.submit(query, amount);
+  };
+
+  $scope.fundraisers = $api.fundraisers_get().then(function(data) {
+    return data.slice(0,3);
   });
 
   $scope.myBugs = {

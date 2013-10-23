@@ -151,4 +151,31 @@ angular.module('app')
       }
       $window.document.title = parts.join(' - ');
     };
+  })
+  .service('$search', function($api, $location) {
+    this.submit = function (query_url, amount) {
+      var create_bounty_params = {}
+      create_bounty_params.amount = amount;
+
+      if ((query_url || "").length > 0) {
+        $api.search(query_url).then(function (response) {
+          console.log(response);
+          if (response.redirect_to) {
+            var url = response.redirect_to;
+
+            if (url[0] === '#') {
+              url = '/' + url.slice(1);
+            }
+            url = url + "/bounty"; // take user directly to bounty create page
+
+            //add in the amount params and redirect to create bounty page
+            $location.path(url).search(create_bounty_params);
+          } else  if (response.create_issue) {
+            $location.path("/issues/new").search({ url: query_url });
+          } else {
+            $location.path("/search").search({ query: query_url });
+          }
+        });
+      }
+    };
   });
