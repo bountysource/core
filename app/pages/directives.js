@@ -242,4 +242,16 @@ angular.module('app').
       transclude: true,
       template: '<div><div class="text-center"><p class="lead" ng-transclude></p><progress value="100" class="progress-striped active"></progress></div></div>'
     };
-  });
+  }).
+  directive('gaClick', ['$window', function($window) {
+    return {
+      restirct: "A",
+      link: function(scope, element, attr) {
+        element.bind("click", function() {
+          var trackArray = ['_trackEvent']
+          var pushArray = trackArray.concat(attr.gaClick.split(","));
+          $window._gaq.push(pushArray);
+        });
+      }
+    };
+  }]);
