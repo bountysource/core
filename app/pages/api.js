@@ -271,11 +271,11 @@ angular.module('api.bountysource',[]).
     };
 
     this.tracker_follow = function(id) {
-      return this.call("/follows", "PUT", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "PUT", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_unfollow = function(id) {
-      return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "DELETE", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_issues_get = function(id) {
