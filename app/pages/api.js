@@ -7,7 +7,7 @@ angular.module('api.bountysource',[]).
 
     // set environment
     $rootScope.environment = window.BS_ENV;
-    if ($location.host().match(/localhost|v2\.pagekite/)) {
+    if ($location.host().match(/localhost|v2\.pagekite|.*\.local/)) {
       $rootScope.can_switch_environments = true;
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
@@ -128,12 +128,14 @@ angular.module('api.bountysource',[]).
           res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
           res.data.image_url = res.data.image_url || "/images/bountysource-grey.png";
 
+          // calculate time left
           var now = new Date().getTime();
           var ends = new Date(res.data.ends_at);
-          var diff = now - ends;
-          res.data.$days_left = diff / (1000*60*60*24);
-          res.data.$hours_left = diff / (1000*60*60);
-          res.data.minutes_left = diff / (1000*60);
+          var diff = ends - now;
+          res.data.$days_left = Math.floor(diff / (1000*60*60*24));
+          res.data.$hours_left = Math.floor(diff / (1000*60*60));
+          res.data.$minutes_left = Math.floor(diff / (1000*60));
+          res.data.$seconds_left = Math.round(diff / (1000));
         }
         return res.data;
       });
@@ -499,6 +501,14 @@ angular.module('api.bountysource',[]).
 
     this.trackers_get = function() {
       return this.call("/projects");
+    };
+
+    this.claim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/claim", "POST", {owner_id: owner_id, owner_type: owner_type});
+    };
+
+    this.unclaim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/unclaim", "POST", {owner_id: owner_id, owner_type: owner_type});
     };
 
     this.tracker_plugins_get = function() {

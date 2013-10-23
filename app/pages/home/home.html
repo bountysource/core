@@ -1,11 +1,86 @@
 <div class="homepage">
   <section id="top">
+    <div class="outer">
+      <div class="container">
+        <h1>Bountysource is the funding platform for open-source software.</h1>
+        <span><h2>Accelerate open-source development with our community of {{people_count.total | number}} members.</h2></span>
+
+        <div class="row-fluid">
+          <div class="span4 offset2">
+            <div class="team-signup-card" ng-controller="NavbarSearchController">
+              <h3>Post a Bounty</h3>
+              <h4>Paste issue URL or search by keyword.</h4>
+              <form class="form-search" ng-submit="submit_search()">
+                <div class="input-append">
+                  <input type="text" class="search-query" ng-model="search_query" placeholder="https://github.com/.../issues/123">
+                  <button type="submit" class="btn btn-success">Search</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="span4">
+            <div class="team-signup-card">
+              <h3 class="text-center">Claim a Bounty</h3>
+              <h4>Earn cash by solving open-source issues.</h4>
+              <!--<ol>-->
+                <!--<li>Find bounties.</li>-->
+                <!--<li>Submit code to project.</li>-->
+                <!--<li>Claim bounties.</li>-->
+              <!--</ol>-->
+              <form class="form-search">
+                <a ng-href="/trackers" class="btn btn-success">Browse Projects</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="teams">
     <div class="container">
-      <h1><span><span>Bountysource</span><img src="/images/Bountysource-white.png" style="width: 210px; height: 63px"/></span> is the funding platform for open-source software.</h1>
-      <span><h2>Accelerate open-source development with our community of {{people_count.total | number}} members.</h2></span>
-      <a class="btn btn-info btn-large" href="/learn" id="home-learn" style="width: 100px">Learn More</a>
-      <a class="btn btn-info btn-large" href="/signin" id="home-signin" style="margin-left: 10px; width: 100px" ng-hide="current_person">Sign In</a>
-      <a class="btn btn-info btn-large" href="/activity" id="home-activity" style="margin-left: 10px; width: 100px" ng-show="current_person">Activity</a>
+      <div class="row-fluid team-signup">
+        <div class="span4">
+          <div class="team-signup-card well">
+            <h3 class="text-center">Projects</h3>
+
+            <h5>For open-source projects looking to grow their community.</h5>
+            <ul>
+              <li>No fees on bounties.</li>
+              <li>Create fundraisers and get your bugs to zero.</li>
+              <li>Project tools to encourage contributions.</li>
+            </ul>
+            <div style="text-align: center"><a ng-href="/teams/new?type=project" class="btn btn-success btn-large button1">Create Team</a></div>
+          </div>
+        </div>
+
+        <div class="span4">
+          <div class="team-signup-card well">
+            <h3 class="text-center">Startups</h3>
+            <h5>Help your small engineering team stay focused on internal priorities.</h5>
+            <ul>
+              <li>Set up a team bounty budget.</li>
+              <li>Post bounties on projects you use.</li>
+              <li>Reduce development costs with crowdfunding.</li>
+            </ul>
+            <div style="text-align: center"><a ng-href="/teams/new?type=startup" class="btn btn-success btn-large button2">Get Started Now</a></div>
+          </div>
+        </div>
+
+        <div class="span4">
+          <div class="team-signup-card well">
+            <h3 class="text-center">Enterprise</h3>
+            <h5>Direct open-source communities toward problems you need solved.</h5>
+            <ul>
+              <li>Account manager to help you get started.</li>
+              <li>Monthly invoicing and activity reports.</li>
+              <li>Global payment processing to developers.</li>
+            </ul>
+            <div style="text-align: center"><a ng-href="/enterprise" class="btn btn-success btn-large button3">Learn More</a></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -87,35 +162,22 @@
 
   <section id="fundraisers">
     <div class="container">
-      <h3 class="text-center">Featured Fundraisers</h3>
       <div class="row-fluid">
         <div class="span6">
-          <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:3" fundraiser="fundraiser"></fundraiser-card>
+          <h3 class="text-center">Top Projects</h3>
+          <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:0:6" project="project"></project-card>
+          <div class="text-center" style="margin-top: 15px;">
+            <a href="/trackers" id="home-projects">View more projects »</a>
+          </div>
         </div>
-        <div class="span6">
-          <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:3:6" fundraiser="fundraiser"></fundraiser-card>
-        </div>
-      </div>
-      <div class="text-center" style="margin: 15px 0;">
-        <a href="/fundraisers" id="home-fundraisers" >View more fundraisers »</a>
-      </div>
-    </div>
-  </section>
 
-  <section id="projects">
-    <div class="container">
-      <h3 class="text-center">Top Projects</h3>
-      <div class="row-fluid">
         <div class="span6">
-          <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:0:3" project="project"></project-card>
+          <h3 class="text-center">Top Fundraisers</h3>
+          <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:6" fundraiser="fundraiser"></fundraiser-card>
+          <div class="text-center" style="margin: 15px 0;">
+            <a href="/fundraisers" id="home-fundraisers" >View more fundraisers »</a>
+          </div>
         </div>
-        <div class="span6">
-          <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:3:6" project="project"></project-card>
-        </div>
-      </div>
-      <div class="text-center" style="margin-top: 15px;">
-        <a href="/trackers" id="home-projects">View more projects »</a>
-      </div>
     </div>
   </section>
 </div>

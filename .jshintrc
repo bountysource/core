@@ -29,7 +29,8 @@
     "afterEach": false,
     "inject": false,
     "dump": false,
-    "CORS": false
+    "CORS": false,
+    "spyOn": false
   }
 }
 

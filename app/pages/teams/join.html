@@ -15,8 +15,8 @@
         <p class="lead">You were invited to join this team with the following permissions:</p>
 
         <div ng-class="{ muted: !permissions.public, 'text-success': permissions.public }"><strong>Public</strong>: displayed as a member of {{team.name}}</div>
-        <div ng-class="{ muted: !permissions.spender, 'text-success': permissions.spender }"><strong>Spender</strong>: use the team account to create bounties</div>
-        <div ng-class="{ muted: !permissions.admin, 'text-success': permissions.admin }"><strong>Administrative</strong>: add/remove team members, fund team account</div>
+        <div ng-class="{ muted: !permissions.developer, 'text-success': permissions.developer }"><strong>Developer</strong>: create bounties/pledges from team account, change team info, add/remove projects</div>
+        <div ng-class="{ muted: !permissions.admin, 'text-success': permissions.admin }"><strong>Administrative</strong>: add/remove team members, change team info, fund team account</div>
         <br />
 
         <form name="form" class="form-inline" ng-submit="accept()" style="margin-bottom: 0;">

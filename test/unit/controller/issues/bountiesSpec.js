@@ -13,7 +13,7 @@ describe('IssueBountiesController', function() {
 
     var $controller = $injector.get('$controller');
 
-    $httpBackend.expect('GET', 'https://staging-api.bountysource.com/issues/651929?callback=CORS&per_page=250')
+    $httpBackend.when('GET', 'https://staging-api.bountysource.com/issues/651929?callback=CORS&per_page=250')
     .respond( function() {return [200, "CORS(" + JSON.stringify(issueJSON) + ")"];} );
 
     createController = function() {
@@ -28,10 +28,23 @@ describe('IssueBountiesController', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('', function() {
+  it('should have a bounties array with amounts filled in', function() {
     var controller = createController();
+    $rootScope.issue.then(function(data) {expect(data.bounties.length).toBeGreaterThan(0);});
     $httpBackend.flush();
+  });
 
-    dump($rootScope.issue.then());
+  it('should set sort column when passed a different column', function() {
+    var controller = createController();
+    $rootScope.sort_by('created_at');
+    $httpBackend.flush();
+    expect($rootScope.sort_column).toEqual('created_at');
+  });
+
+  it('should set reverse to false if passed the same column', function() {
+    var controller = createController();
+    $rootScope.sort_by('amount');
+    $httpBackend.flush();
+    expect($rootScope.sort_reverse).toBeFalsy();
   });
 });

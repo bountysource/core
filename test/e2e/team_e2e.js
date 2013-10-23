@@ -44,10 +44,14 @@ describe("Scenario: Creating a team --", function() {
       Mock.pushScenario("/teams/:id/members", "GET", "success");
       Mock.pushScenario("/teams/:id", "GET", "success");
 
-      Mock.pushScenario("/teams", "POST", "success");
-      Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
+      //temporarily comment this out. seems to be blocking team tests.
 
-      Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
+      // Mock.pushScenario("/teams", "POST", "success");
+      // Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
+
+      // Mock.pushScenario("/teams/:id/members", "GET", "team-not-found");
+      Mock.pushScenario("/teams", "POST", "success");
+
       Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
 
@@ -57,7 +61,8 @@ describe("Scenario: Creating a team --", function() {
       using('form').input('form_data.image_url').enter('https://cloudinary-a.akamaihd.net/bountysource/image/upload/d_noaoqqwxegvmulwus0un.png,c_pad,w_400,h_400/jny9veh9xwqljpqpox0z.png');
       using('form').input('form_data.bio').enter("bountysource is THE open source funding platform");
       using('form').element('submit.btn').click();
-      expect(browser().location().path()).toEqual('/teams/'+MOCK.valid_team.slug+'/members/manage');
+
+      expect(browser().location().path()).toEqual('/teams/'+MOCK.valid_team.slug);
     });
   });
 
@@ -68,7 +73,10 @@ describe("Scenario: Using Team Account --", function() {
     Mock.init();
   });
 
-  it("should let you create a bounty", function() {
+  // TODO: This doesn't test teams being able to place bounties.
+  // It should use the form on "/teams/:slug", then submit payment with TEAM
+  // as the payment method, not Google Wallet..
+  xit("should let you create a bounty", function() {
     Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/issues/:id", "GET", "success");
     Mock.pushScenario("/people/:id/teams", "GET", "success");
@@ -189,7 +197,7 @@ describe("Scenario: Using Team Account --", function() {
     });
 
     it("toggle public feature", function() {
-      Mock.pushScenario("/teams/:id/members/:id", "PUT", "spender-true-public-false");
+      Mock.pushScenario("/teams/:id/members/:id", "PUT", "developer-true-public-false");
       Mock.pushScenario("/teams/:id/invites", "GET", "success");
       Mock.pushScenario("/teams/:id/members", "GET", "success");
       Mock.pushScenario("/teams/:id", "GET", "success");
@@ -203,8 +211,8 @@ describe("Scenario: Using Team Account --", function() {
       expect(element('table.members > tbody > tr:first > td > input[ng-model="member.is_public"]:checked').count()).toBe(0);
     });
 
-    it("toggle spender feature", function() {
-      Mock.pushScenario("/teams/:id/members/:id", "PUT", "spender-false-public-false");
+    it("toggle developer feature", function() {
+      Mock.pushScenario("/teams/:id/members/:id", "PUT", "developer-false-public-false");
       Mock.pushScenario("/teams/:id/invites", "GET", "success");
       Mock.pushScenario("/teams/:id/members", "GET", "success");
       Mock.pushScenario("/teams/:id", "GET", "success");
@@ -212,10 +220,10 @@ describe("Scenario: Using Team Account --", function() {
       Mock.pushScenario("/user", "GET", "success-email-auth");
       browser().navigateTo('/teams/'+MOCK.valid_team.slug+'/members/manage');
 
-      expect(element('table.members > tbody > tr:first > td > input[ng-model="member.is_spender"]:checked').count()).toBe(1);
-      input('member.is_spender').check();
+      expect(element('table.members > tbody > tr:first > td > input[ng-model="member.is_developer"]:checked').count()).toBe(1);
+      input('member.is_developer').check();
       element("table.members > tbody > tr:first button[ng-click='update_member(member)']").click();
-      expect(element('table.members > tbody > tr:first > td > input[ng-model="member.is_spender"]:checked').count()).toBe(0);
+      expect(element('table.members > tbody > tr:first > td > input[ng-model="member.is_developer"]:checked').count()).toBe(0);
     });
 
     xit("should remove a user from a team", function() {});

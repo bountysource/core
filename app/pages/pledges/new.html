@@ -61,13 +61,13 @@
 
                 <!-- Team accounts -->
                 <div ng-show="teams.length > 0">
-                  <label ng-repeat="team in teams | orderBy:['-is_spender', '-account_balance']" class="radio">
-                    <input type="radio" ng-model="pledge.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_spender || team.account_balance <= 0" />
+                  <label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="radio">
+                    <input type="radio" ng-model="pledge.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0" />
                     <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
-                    <span ng-class="{ 'muted': (!team.is_spender || team.account_balance <= 0) }">
+                    <span ng-class="{ 'muted': (!team.is_developer || team.account_balance <= 0) }">
                       {{team.name}}
-                      <strong ng-show="team.is_spender">{{ team.account_balance | dollars }}</strong>
-                      <strong ng-hide="team.is_spender">$0</strong>
+                      <strong ng-show="team.is_developer">{{ team.account_balance | dollars }}</strong>
+                      <strong ng-hide="team.is_developer">$0</strong>
                       <span ng-show="team.is_admin && team.account_balance < 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
                     </span>
                   </label>

@@ -21,13 +21,13 @@ angular.module('app')
 
     $scope.permissions = {
       public: $routeParams.public === 'false' || true,
-      spender: $routeParams.spender === 'true' || false,
+      developer: $routeParams.developer === 'true' || false,
       admin: $routeParams.admin === 'true' || false
     };
 
     $scope.accept = function() {
       $api.team_invite_accept($routeParams.id, $routeParams.token).then(function() {
-        $location.url("/teams/"+$routeParams.id+"/members").replace();
+        $location.url("/teams/"+$routeParams.id).replace();
       });
     };
   });
