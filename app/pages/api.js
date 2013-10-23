@@ -344,6 +344,11 @@ angular.module('api.bountysource',[]).
       return this.call("/search", "POST", { query: query });
     };
 
+    this.bounty_search = function(query) {
+      //query will come from the frontend as a JSON object
+      return this.call("/search/bounty_search", "GET", query);
+    };
+
     this.tracker_relations_get = function() {
       return this.call("/project_relations");
     };
