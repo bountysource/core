@@ -27,15 +27,12 @@ angular.module('app')
         if (!$scope.current_person) { return $api.require_signin(); }
 
         if (tracker.followed) {
-          $api.tracker_unfollow($scope.tracker.id).then(function() {
-            // assume API call success, update the button state (tracker.followed)
-            tracker.followed = false;
-          });
+          // assume API call success, update the button state (tracker.followed)
+          tracker.followed = false;
+          $api.tracker_unfollow($routeParams.id);
         } else {
-          $api.tracker_follow($scope.tracker.id).then(function() {
-            // assume API call success, update the button state (tracker.followed)
-            tracker.followed = true;
-          });
+          tracker.followed = true;
+          $api.tracker_follow($routeParams.id);
         }
       };
 
