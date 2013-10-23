@@ -69,8 +69,8 @@ angular.module('mockedTeams', [])
     "featured": false
   }, {
     "is_public": true,
-    "is_developer": false,
-    "is_admin": false,
+    "is_developer": true,
+    "is_admin": true,
     "id": 130,
     "name": "Focaccia, Inc #yoloswag",
     "slug": "focaccia",
@@ -84,6 +84,7 @@ angular.module('mockedTeams', [])
     "is_public": true,
     "is_developer": true,
     "is_admin": true,
+    "type": "Team::Enterprise",
     "id": 1,
     "name": "Bountysource",
     "slug": "bountysource",
