@@ -21,11 +21,4 @@ angular.module('app')
     $scope.$on('$routeChangeSuccess', function() {
       $scope.show_alert_notification_bar = !$location.path().match(/^(\/|\/fundraisers\/.*)$/);
     });
-  })
-
-  .controller('NavbarLinkedAccountSignin', function($scope, $location, $api) {
-    $scope.save_route = function() {
-      $api.set_post_auth_url($location.url());
-    };
   });
-

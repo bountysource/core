@@ -97,3 +97,7 @@
   a[id^="home-tr-img-"] { margin-left: 25px; }
   a[id^="home-fr-img-"] { margin-left: 25px; }
 }
+
+#github_logo {
+  margin-right: 5px;
+}
