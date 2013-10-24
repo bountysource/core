@@ -43,7 +43,7 @@
       <div class="row-fluid team-signup">
         <div class="span4">
           <div class="team-signup-card well">
-            <h3 class="text-center">Projects</h3>
+            <h3 class="text-center">Developers</h3>
 
             <h5>For open-source projects looking to grow their community.</h5>
             <ul>
@@ -51,33 +51,37 @@
               <li>Create fundraisers and get your bugs to zero.</li>
               <li>Project tools to encourage contributions.</li>
             </ul>
-            <div style="text-align: center"><a ng-href="/teams/new?type=project" class="btn btn-success btn-large button1">Create Team</a></div>
+            <div ng-controller="Signin">
+              <div ng-click="save_route()" style="text-align: center"><a ng-href="{{signin_url_for(providers[0].id)}}" class="btn btn-success btn-large button1">
+                  <img id="github_logo" ng-src="{{providers[0].image_url}}">Login with GitHub</a>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="span4">
           <div class="team-signup-card well">
-            <h3 class="text-center">Startups</h3>
+            <h3 class="text-center">Projects</h3>
             <h5>Help your small engineering team stay focused on internal priorities.</h5>
             <ul>
               <li>Set up a team bounty budget.</li>
               <li>Post bounties on projects you use.</li>
               <li>Reduce development costs with crowdfunding.</li>
             </ul>
-            <div style="text-align: center"><a ng-href="/teams/new?type=startup" class="btn btn-success btn-large button2">Get Started Now</a></div>
+            <div style="text-align: center"><a ng-href="/teams/new?type=project" class="btn btn-success btn-large button2">Create Project</a></div>
           </div>
         </div>
 
         <div class="span4">
           <div class="team-signup-card well">
-            <h3 class="text-center">Enterprise</h3>
+            <h3 class="text-center">Business</h3>
             <h5>Direct open-source communities toward problems you need solved.</h5>
             <ul>
               <li>Account manager to help you get started.</li>
               <li>Monthly invoicing and activity reports.</li>
               <li>Global payment processing to developers.</li>
             </ul>
-            <div style="text-align: center"><a ng-href="/enterprise" class="btn btn-success btn-large button3">Learn More</a></div>
+            <div style="text-align: center"><a ng-href="/enterprise" class="btn btn-success btn-large button3">Get Down to It</a></div>
           </div>
         </div>
       </div>

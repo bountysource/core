@@ -16,7 +16,7 @@
 
           <li class="dropdown" ng-controller="Signin">
             <a href="/signin" class="dropdown-toggle" data-toggle="dropdown" ng-hide="!!current_person" id="navbar-signin">Sign In<b class="caret"></b></a>
-            <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
+            <ul class="dropdown-menu" ng-hide="!!current_person" >
               <li style="padding-left: 10px;">Using:</li>
               <li ng-repeat="provider in providers">
                 <a ng-click="save_route()" ng-href="{{ signin_url_for(provider.id) }}" id="navbar-provider-{{provider.id}}"><img ng-src="{{provider.image_url}}"> {{provider.name}}</a>
