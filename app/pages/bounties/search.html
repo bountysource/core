@@ -1,0 +1,55 @@
+<div class="row-fluid">
+  <div class="span3">
+    <div style="border: 1px solid #ddd; border-radius: 10px;">
+     <form>
+      <input type="text" placeholder="Enter search terms here" ng-model="form_data.search"></input>
+      <select ng-model="form_data.order" ng-options="option.value as option.label for option in sort_options"></select>
+      <div class="btn-group">
+        <button class="btn btn-primary" btn-radio="'asc'" ng-model="form_data.direction">Asc</button>
+        <button class="btn btn-primary" btn-radio="'desc'" ng-model="form_data.direction">Desc</button>
+      </div>
+      <label>Language:</label>
+      <input
+      name="input"
+      type="text"
+      class="search-query"
+      placeholder="Search for languages"
+      ng-model="selected_language"
+      typeahead="language as language.name for language in languages | filter:$viewValue | limitTo: 8"
+      typeahead-editable="true"
+      />
+      <div>
+       <span class="badge badge-info" ng-repeat="language in languages_selected">
+         {{ language.name }}
+         <button type="button" class="close" ng-click="remove_language(language)">
+           <i class="icon-remove icon-white"></i>
+         </button>
+       </span>
+     </div>
+     <label>Min:</label>
+     <input type="number" class="span4" ng-model="form_data.min" placeholder=></input>
+     <label>Max:</label>
+     <input type="number" class="span4" ng-model="form_data.max"></input>
+      <input
+      name="input"
+      type="text"
+      class="search-query"
+      placeholder="Search in projects"
+      ng-model="selected_tracker"
+      typeahead="tracker as tracker.name for tracker in doTypeahead($viewValue)"
+      typeahead-editable="true"
+      />
+      <div>
+       <span class="badge badge-info" ng-repeat="tracker in trackers_selected">
+         {{ tracker.name }}
+         <button type="button" class="close" ng-click="remove_tracker(tracker)">
+           <i class="icon-remove icon-white"></i>
+         </button>
+       </span>
+     </div>
+     <button class="btn btn-primary" ng-click="submit_query()">Search</button>
+   </form>
+ </div>
+</div>
+<div class="span9"></div>
+</div>

@@ -349,6 +349,10 @@ angular.module('api.bountysource',[]).
       return this.call("/search/bounty_search", "GET", query);
     };
 
+    this.languages_get = function() {
+      return this.call("/languages"); 
+    };
+
     this.tracker_relations_get = function() {
       return this.call("/project_relations");
     };
