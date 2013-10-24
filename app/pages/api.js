@@ -226,10 +226,8 @@ angular.module('api.bountysource',[]).
       return this.call("/users/"+id);
     };
 
-    this.person_put = function(data) {
-      var promise = this.call("/user", "PUT", data);
-      promise.then($api.set_current_person);
-      return promise;
+    this.person_update = function(data) {
+      return this.call("/user", "PUT", data);
     };
 
     this.notification_unsubscribe = function(type, data) {

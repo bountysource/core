@@ -24,13 +24,20 @@ angular.module('app')
     $scope.submit = function() {
       $scope.error = $scope.success = null;
 
-      var updates = { email: $scope.form_data.email, exclude_from_newsletter: !$scope.form_data.weekly_newsletter, receive_developer_alerts: $scope.form_data.receive_developer_alerts };
+      var payload = {
+        email: $scope.form_data.email,
+        exclude_from_newsletter: !$scope.form_data.weekly_newsletter,
+        receive_developer_alerts: $scope.form_data.receive_developer_alerts
+      };
 
-      $api.person_put(updates).then(function() {
-        if ($scope.current_person.email === $scope.form_data.email) {
-          $scope.success = 'Email settings updated!';
+      $api.person_update(payload).then(function(updated_person) {
+        if (!updated_person.error) {
+          $scope.alert = { type: 'success', message: 'Email settings updated!'};
+
+          // Update cached person
+          $api.set_current_person(updated_person);
         } else {
-          $scope.error = 'Unable to update email settings!';
+          $scope.error = { type: 'error', message: 'Unable to update email settings' };
         }
       });
     };
