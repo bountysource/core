@@ -5,15 +5,21 @@ angular.module('app')
     $routeProvider
       .when('/notifications/unsubscribe', {
         templateUrl: 'pages/notifications/unsubscribe.html',
-        controller: 'NotificationsController',
-        title: 'Unsubscribe from Bountysource Emails'
+        controller: 'NotificationsController'
       });
-  }).controller('NotificationsController', function($routeParams, $scope, $api) {
-    var email_address = $routeParams.email;
-    var email_list = $routeParams.type;
-    var data = {
-      email: email_address,
-      type: email_list
+  }).controller('NotificationsController', function($scope, $routeParams, $api, $pageTitle) {
+    $pageTitle.set("Unsubscribe from Bountysource Emails");
+
+    $scope.email = $routeParams.email;
+    $scope.approved = false;
+
+    $scope.unsubscribe = function() {
+      $scope.approved = true;
+      $scope.processing = true;
+
+      $scope.success = $api.notification_unsubscribe($routeParams.type, { email: $scope.email }).then(function(success) {
+        $scope.processing = false;
+        return success;
+      });
     };
-    $scope.response = $api.notification_unsubscribe(data);
   });

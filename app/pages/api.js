@@ -232,9 +232,10 @@ angular.module('api.bountysource',[]).
       return promise;
     };
 
-    this.notification_unsubscribe = function(data) {
+    this.notification_unsubscribe = function(type, data) {
+      data.type = type;
       return this.call("/notifications/unsubscribe", 'POST', data, function(response) {
-        return response;
+        return response.meta.success;
       });
     };
 

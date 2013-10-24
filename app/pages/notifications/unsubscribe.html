@@ -1,4 +1,28 @@
-<div class="text-center">
-  <h3>{{response.data.message}}.</h3>
-  <h4 ng-show="response.meta.success">If you wish to resubscribe to Bounty Alerts, please go to your <a ng-href="/settings/email">email settings</a>.</h4>
+<div ng-hide="approved">
+  <div class="hero-unit text-center">
+    <h2>Unsubscribe</h2>
+    <p class="lead">Unsubscribe <strong>{{email}}</strong> from bountysource alerts?</p>
+    <a style="width: 110px;" href="/" class="btn btn-large btn-danger">Cancel</a>
+    <button style="width: 150px;" ng-click="unsubscribe()" class="btn btn-large btn-success">Unsubscribe</button>
+  </div>
+</div>
+<div ng-show="approved">
+  <loading-bar ng-show="processing">Just a moment please...</loading-bar>
+
+  <div class="hero-unit" ng-hide="processing">
+    <div class="text-center">
+      <h2>Unsubscribed</h2>
+
+      <div ng-show="success">
+        <p class="lead">If you wish to resubscribe to Bounty Alerts, please go to your <a ng-href="/settings/email">email settings</a>.</p>
+      </div>
+
+      <!-- This should never happen, but just in case... -->
+      <div ng-hide="success">
+        <p class="lead text-error">Oh no! Something went wrong, please contact <a nref="email:support@bountysource.com">support@bountysource.com</a>.</p>
+      </div>
+
+      <a href="/" class="btn btn-large btn-primary">Continue to Bountysource</a>
+    </div>
+  </div>
 </div>
