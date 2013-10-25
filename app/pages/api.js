@@ -130,7 +130,7 @@ angular.module('api.bountysource',[]).
 
           // calculate time left
           var now = new Date().getTime();
-          var ends = new Date(res.data.ends_at);
+          var ends = Date.parse(res.data.ends_at);
           var diff = ends - now;
           res.data.$days_left = Math.floor(diff / (1000*60*60*24));
           res.data.$hours_left = Math.floor(diff / (1000*60*60));
