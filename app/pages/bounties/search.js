@@ -13,12 +13,14 @@ angular.module('app')
 
     $scope.form_data = {
       direction: "desc"
-    }
+    };
 
     $scope.sort_options = [
       {},
       { label: "Bounty Total", value: "bounty_total" },
-      { label: "Age of Issue", value: "remote_created_at"}
+      { label: "Age of Issue", value: "remote_created_at"},
+      { label: "Number of Backers", value: "backer_count"},
+      { label: "Date Bounty Created", value: "earliest_bounty"}
     ];
 
     $scope.languages_selected = [];
@@ -33,16 +35,17 @@ angular.module('app')
     });
 
     $scope.languages = $api.languages_get().then(function(languages) {
-
       $scope.$watch('selected_language', function(newValue, oldValue, scope) {
-
         for (var i = 0; i < languages.length; i++) {
+          if (!newValue) {
+            break;
+          }
           if (newValue.id === languages[i].id) {
             scope.languages_selected.push(newValue);
             scope.selected_language = "";
             break;
           }
-        };
+        }
       });
       return languages;
     });
@@ -70,21 +73,25 @@ angular.module('app')
     $scope.doTypeahead = function ($viewValue) {
       return $api.tracker_typeahead($viewValue).then(function (trackers) {
         $scope.$watch('selected_tracker', function(newValue, oldValue, scope) {
-
           for (var i = 0; i < trackers.length; i++) {
+            if (!newValue) {
+              break;
+            }
             if (newValue.id === trackers[i].id) {
               scope.trackers_selected.push(newValue);
               scope.selected_tracker = "";
               console.log(scope.trackers_selected);
               break;
             }
-          };
+          }
         });
         return trackers;
       });
     };
-    
+
     $scope.submit_query = function() {
+      $scope.working = true; //api call under way
+
       $scope.form_data.languages = $scope.languages_selected.map(function(language) {
         return language.id;
       });
@@ -95,9 +102,17 @@ angular.module('app')
 
       $scope.form_data.per_page = 50;
 
+      // $scope.search_results, $scope.result_length = $api.bounty_search($scope.form_data).then(function(response) {
+      //   $scope.working = false; //api call is finished
+      //   return [response.issues, response.count];
+      // });
+
       $api.bounty_search($scope.form_data).then(function(response) {
-        console.log(response);  
-        return response;
+        $scope.working = false; //api call is finished
+        $scope.search_results = response.issues;
+        $scope.issues_count = response.issues_total;
+        console.log(response);
       });
+
     };
   });
