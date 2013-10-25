@@ -25,7 +25,7 @@ angular.module('app')
       $scope.pledge.base_item_number = 'fundraisers/'+response.id;
       $scope.pledge.item_number = $scope.pledge.base_item_number;
       if ($scope.pledge.reward_id) {
-        $scope.pledge.item_number += "/" + $scope.pledge.reward_id
+        $scope.pledge.item_number += "/" + $scope.pledge.reward_id;
       }
 
       // select reward to have the object cached. handled after this by set_reward(reward)
