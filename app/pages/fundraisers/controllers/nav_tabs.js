@@ -14,7 +14,7 @@ angular.module('app').controller('FundraiserNavTabsController', function ($scope
   $scope.receipts = [];
   $scope.fundraiser.then(function (fundraiser) {
     $api.pledge_activity().then(function (response) {
-      for (var i = 0; i < response.length; i++) {  //grab all of the users pledges, if any of them have the same ID as this fundraiser, then push to the receipts array
+      for (var i=0; response && i<response.length; i++) {  //grab all of the users pledges, if any of them have the same ID as this fundraiser, then push to the receipts array
         if (response[i].fundraiser.id === fundraiser.id) {
           $scope.receipts.push(response[i]);
         }

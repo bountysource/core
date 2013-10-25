@@ -14,6 +14,7 @@ angular.module('app')
       amount: parseInt($routeParams.amount, 10) || 100,
       anonymous: ($routeParams.anonymous === "true") || false,
       payment_method: $routeParams.payment_method || "google",
+      survey_response: $routeParams.survey_response || "",
       reward_id: parseInt($routeParams.reward_id, 10) || 0
     };
 
