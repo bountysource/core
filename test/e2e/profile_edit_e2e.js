@@ -177,15 +177,15 @@ describe("Scenario: Editing Profile Information", function() {
       Mock.pushScenario("/user", "GET", "success-email-auth");
       element("a[ng-href='/settings/email']").click();
       input("form_data.email").enter("lol");
-      element("button:contains('Save')").click();
-      expect(binding("error")).toBe("Unable to update email settings!");
+      expect(element("button:contains('Save')").attr("disabled")).toBe("disabled");
     });
 
     it("should allow saving of valid primary email address", function() {
       Mock.pushScenario("/user", "PUT", "success-new-email");
       input("form_data.email").enter("newemail@gmail.com");
       element("button:contains('Save')").click();
-      expect(binding("success")).toBe("Email settings updated!");
+      expect(element("button:contains('Save')").attr("disabled")).not().toBe("disabled");
+      expect(binding("alert.message")).toBe("Email settings updated!");
     });
 
 //    it("should allow toggling of weekly newsletter", function() {

@@ -22,7 +22,7 @@ angular.module('app')
     });
 
     $scope.submit = function() {
-      $scope.error = $scope.success = null;
+      $scope.alert = {};
 
       var payload = {
         email: $scope.form_data.email,
@@ -37,7 +37,7 @@ angular.module('app')
           // Update cached person
           $api.set_current_person(updated_person);
         } else {
-          $scope.error = { type: 'error', message: 'Unable to update email settings' };
+          $scope.alert = { type: 'error', message: 'Unable to update email settings' };
         }
       });
     };
