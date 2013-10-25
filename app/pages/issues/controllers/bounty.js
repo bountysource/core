@@ -69,7 +69,7 @@ angular.module('app')
           }
 
           if (team_id) {
-            for (var i=0; i<teams.length; i++) {
+            for (i=0; i<teams.length; i++) {
               if (teams[i].id === team_id) {
                 $scope.selected_team = teams[i];
 
