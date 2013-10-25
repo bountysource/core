@@ -12,7 +12,15 @@ angular.module('app')
   .controller('PledgeActivity', function($scope, $routeParams, $api, $pageTitle) {
     $pageTitle.set('Pledges', 'Activity');
 
-    $scope.pledges = $api.call("/user/pledges");
+    $scope.pledges = $api.call("/user/pledges").then(function(pledges) {
+      for (var i=0; i<pledges.length; i++) {
+        if (pledges[i].reward && pledges[i].reward.fulfillment_details && !pledges[i].survey_response) {
+          pledges[i].$show_survey = true;
+        }
+      }
+
+      return pledges;
+    });
 
     $scope.toggle_anonymous = function(pledge) {
       $api.pledge_anonymity_toggle(pledge).then(function() {

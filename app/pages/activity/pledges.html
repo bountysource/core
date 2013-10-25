@@ -22,6 +22,7 @@
     <th>Date</th>
     <th style="width: 50px;">Owner</th>
     <th class="span2">Anonymous <a popover-title="Anonymous Pledges" popover="If you want to hide your identity on a pledge, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="icon-question-sign"></i></a></th>
+    <th class="span1"></th>
   </tr>
   </thead>
 
@@ -61,8 +62,11 @@
         </ng-form>
       </div>
     </td>
+
     <td><a ng-href="/fundraisers/{{pledge.fundraiser.id}}/receipts?pledge_id={{ pledge.id }}">{{ pledge.amount | dollars }}</a></td>
+
     <td>{{ pledge.created_at | date }}</td>
+
     <td>
       <div ng-show="pledge.owner">
         <div class="thumbnail" tooltip="{{pledge.owner.display_name}}" tooltip-placement="left">
@@ -94,6 +98,10 @@
         <i class="icon-eye-open icon-white"></i>
         Publicized
       </button>
+    </td>
+
+    <td>
+      <button class="btn btn-small btn-primary" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Edit</button>
     </td>
   <tr>
   </tbody>
