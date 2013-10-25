@@ -12,6 +12,10 @@ angular.module('app')
       $api.signin_with_access_token($routeParams.access_token).then(function(response) {
         if (response === false) {
           $scope.error = "ERROR: Unexpected linked account response.";
+        } else {
+          try {
+            window._gaq.push(['_trackEvent', 'Signin', 'Success-3rdParty-Auth']);
+          } catch(err) {}
         }
       });
     } else if ($routeParams.status === 'error_needs_account') {

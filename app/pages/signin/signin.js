@@ -88,6 +88,10 @@ angular.module('app')
         $api.signin($scope.form_data).then(function(response) {
           if (response.error) {
             $scope.error = response.error;
+          } else {
+            try {
+              window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
+            } catch(err) {}
           }
         });
       }
@@ -100,6 +104,10 @@ angular.module('app')
         $api.signup($scope.form_data).then(function(response) {
           if (response.error) {
             $scope.error = response.error;
+          } else {
+            try {
+              window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
+            } catch(err) {}
           }
         });
       }
@@ -109,6 +117,17 @@ angular.module('app')
       $api.request_password_reset({ email: $scope.form_data.email }).then(function(response) {
         $scope.error = response.message;
       });
+    };
+
+    $scope.save_analytics = function(url) {
+      var pathArray = url.split("?");
+      try {
+        window._gaq.push(['_trackEvent', 'Signin-Page' , 'LinkOut', pathArray[0]]);
+      } catch(err){}
+
+      setTimeout(function() {
+        window.location = url;
+      }, 100);
     };
 
   });
