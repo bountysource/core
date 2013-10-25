@@ -77,7 +77,7 @@ angular.module('app')
         });
       }
 
-      var tweet_text = "I just placed a "+$filter('currency')($scope.bounty.amount)+" bounty on Bountysource!";
+      var tweet_text = "I just placed a "+$filter('dollars')($scope.bounty.amount)+" bounty on Bountysource!";
       $scope.tweet_text = encodeURIComponent(tweet_text);
       var tweet_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
       $scope.tweet_url = encodeURIComponent(tweet_url);

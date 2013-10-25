@@ -61,6 +61,13 @@ angular.module('app')
           // oh god, that's like the wost line of JS I have ever written
           var team_id = parseInt(((($scope.bounty.payment_method).match(/^team\/(\d+)$/) || {})[1]), 10);
 
+          // TODO undo hax. turn all enterprise team types into project
+          for (var i=0; i<teams.length; i++) {
+            if (teams[i].type === "Team::Enterprise") {
+              teams[i].type = "Team::Startup";
+            }
+          }
+
           if (team_id) {
             for (var i=0; i<teams.length; i++) {
               if (teams[i].id === team_id) {
@@ -95,14 +102,19 @@ angular.module('app')
       if (payment_method) {
 
         if ((/^team\/\d+$/).test(payment_method)) {
-          // is it an enterprise team or personal account? No fee!
-          if ($scope.selected_team && (/^Team::Enterprise$/).test($scope.selected_team.type||"")) {
-            $scope.has_fee = false;
-            $scope.show_fee = false;
-          } else {
-            $scope.has_fee = true;
-            $scope.show_fee = true;
-          }
+          // TODO undo disalbe of nofee for enterprise team
+          $scope.has_fee = true;
+          $scope.show_fee = true;
+
+
+//          // is it an enterprise team or personal account? No fee!
+//          if ($scope.selected_team && (/^Team::Enterprise$/).test($scope.selected_team.type||"")) {
+//            $scope.has_fee = false;
+//            $scope.show_fee = false;
+//          } else {
+//            $scope.has_fee = true;
+//            $scope.show_fee = true;
+//          }
         } else if (payment_method === "personal") {
           $scope.has_fee = false;
           $scope.show_fee = true;
