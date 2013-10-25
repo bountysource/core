@@ -110,7 +110,7 @@
           </div>
 
           <div class="span6" ng-show="fundraiser.rewards.length > 0">
-            <div collapse="!selected_reward.fulfillment_details">
+            <div ng-show="selected_reward.fulfillment_details">
               <div class="alert alert-block" ng-show="selected_reward.fulfillment_details">
                 <strong>Reward Survey</strong>
                 <span class="pull-right label label-important">required</span>
