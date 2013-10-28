@@ -19,7 +19,10 @@
             <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
               <li style="padding-left: 10px;">Using:</li>
               <li ng-repeat="provider in providers">
-                <a ng-click="save_route();save_analytics(signin_url_for(provider.id))" ng-href="" id="navbar-provider-{{provider.id}}"><img ng-src="{{provider.image_url}}"> {{provider.name}}</a>
+                <!-- Link with Google Analytics event tracking -->
+                <a gaq-track-click ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="navbar-provider-{{provider.id}}" ng-click="save_route()">
+                  <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
+                </a>
               </li>
               <li><a href="/signin" id="navbar-provider-email"><img src="images/favicon-email.png"> Email Address</a></li>
             </ul>

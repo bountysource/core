@@ -9,7 +9,7 @@ angular.module('app')
         title: 'Sign in'
       });
   })
-  .controller('Signin', function ($scope, $routeParams, $api, $location) {
+  .controller('Signin', function ($scope, $routeParams, $api, $location, $window) {
     // Redirect user to homepage if already logged in.
     // Need to wait to see if current_person is explicitly set to false.
     $scope.teams = [];
@@ -89,9 +89,7 @@ angular.module('app')
           if (response.error) {
             $scope.error = response.error;
           } else {
-            try {
-              window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
-            } catch(err) {}
+            $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
           }
         });
       }
@@ -105,9 +103,7 @@ angular.module('app')
           if (response.error) {
             $scope.error = response.error;
           } else {
-            try {
-              window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
-            } catch(err) {}
+            $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
           }
         });
       }
@@ -118,16 +114,4 @@ angular.module('app')
         $scope.error = response.message;
       });
     };
-
-    $scope.save_analytics = function(url) {
-      var pathArray = url.split("?");
-      try {
-        window._gaq.push(['_trackEvent', 'Signin-Page' , 'LinkOut', pathArray[0]]);
-      } catch(err){}
-
-      setTimeout(function() {
-        window.location = url;
-      }, 100);
-    };
-
   });
