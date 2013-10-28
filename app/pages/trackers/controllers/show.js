@@ -62,21 +62,19 @@ angular.module('app')
 
       // Load issues for tracker. If the tracker was just created (has not been synced yet),
       // throw in a timeout to allow time for issues to be added
-      $timeout(function() {
-        $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
-          $scope.issues_resolved = true;
+      $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+        $scope.issues_resolved = true;
 
-          for (var i=0; i<issues.length; i++) {
-            issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+        for (var i=0; i<issues.length; i++) {
+          issues[i].bounty_total = parseFloat(issues[i].bounty_total);
 
-            // sorting doesn't like nulls.. this is a quick hack
-            issues[i].participants_count = issues[i].participants_count || 0;
-            issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
-            issues[i].comment_count = issues[i].comment_count || 0;
-          }
-          return issues;
-        });
-      }, tracker.synced_at ? 0 : 2500);
+          // sorting doesn't like nulls.. this is a quick hack
+          issues[i].participants_count = issues[i].participants_count || 0;
+          issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+          issues[i].comment_count = issues[i].comment_count || 0;
+        }
+        return issues;
+      });
 
       return tracker;
     });
