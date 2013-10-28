@@ -51,7 +51,7 @@
                   <span ng-show="reward.amount > 0">{{reward.amount | dollars}} Reward tier</span>
                 </div>
                 <div style="padding-left: 15px;">
-                  <small ng-class="{ 'text-info': (reward.amount < pledge.amount), 'muted': (reward.amount >= pledge.amount) }">{{reward.description}}</small>
+                  <small class="text-info">{{reward.description}}</small>
                 </div>
               </label>
             </div>
