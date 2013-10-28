@@ -14,10 +14,14 @@
   You haven't made any pledges yet! Checkout our <a href="/fundraisers">list of fundraisers</a>.
 </div>
 
+<div ng-show="alert">
+  <alert type="alert.type" close="alert=null">{{alert.message}}</alert>
+</div>
+
 <table class="table table-striped" ng-show="pledges.length > 0">
   <thead>
   <tr>
-    <th>Fundraiser</th>
+    <th style="width: 50%;">Fundraiser</th>
     <th>Amount</th>
     <th>Date</th>
     <th style="width: 50px;">Owner</th>
@@ -27,43 +31,59 @@
   </thead>
 
   <tbody>
-  <tr ng-repeat="pledge in pledges" ng-class="{ 'warning': (pledge.$show_survey) }">
+  <tr ng-repeat="pledge in pledges">
     <td>
       <a ng-href="/fundraisers/{{ pledge.fundraiser.slug }}">{{ pledge.fundraiser.title }}</a>
+      <div ng-show="pledge.$updated_at">
+        <small class="text-info"><i>Updated reward {{pledge.$updated_at | date:'medium'}}</i></small>
+      </div>
 
       <div ng-show="pledge.$show_survey">
-        <hr />
-        <ng-form class="form-horizontal">
+        <br />
+        <form class="form-horizontal" name="form">
           <div class="control-group">
+            <label class="control-label">Reward:</label>
             <div class="controls">
-              <div class="row-fluid">
-                <div class="span1">
-                  <img class="thumbnail" style="width: 100%;" ng-src="{{pledge.fundraiser.person.image_url}}" />
+              <label class="radio" ng-repeat="reward in pledge.fundraiser.rewards" ng-show="pledge.amount >= reward.amount">
+                <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-click="select_reward(pledge, reward)" ng-disabled="pledge.amount < reward.amount" />
+                <div ng-class="{ 'muted': (pledge.amount < reward.amount && reward.amount > 0) }">
+                  <span ng-show="reward.amount == 0">No Reward</span>
+                  <span ng-show="reward.amount > 0">{{reward.amount | dollars}} Reward tier</span>
                 </div>
-                <div class="span11">
-                  <p class="text-warning" style="white-space: pre-wrap;">"{{pledge.reward.fulfillment_details}}"</p>
+                <div style="padding-left: 15px;">
+                  <small ng-class="{ 'text-info': (reward.amount < pledge.amount), 'muted': (reward.amount >= pledge.amount) }">{{reward.description}}</small>
                 </div>
+              </label>
+            </div>
+          </div>
+
+          <div ng-show="pledge.reward.fulfillment_details">
+            <div class="control-group text-warning">
+              <label class="control-label">Required Information:</label>
+              <div class="controls">
+                <p style="white-space: pre-wrap; padding-top: 5px;">{{pledge.reward.fulfillment_details}}</p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">Your Response:</label>
+              <div class="controls">
+                <textarea style="width: 100%;" rows="4" ng-model="pledge.survey_response" placeholder="Your response"></textarea>
               </div>
             </div>
           </div>
 
           <div class="control-group">
-            <label class="control-label">Your Request</label>
             <div class="controls">
-              <textarea style="width: 90%;" rows="4" ng-model="pledge.survey_response" placeholder="Your response"></textarea>
+              <button type="submit" class="btn btn-primary" ng-click="update_pledge(pledge)" ng-disabled="form.$pristine">Save Changes</button>
+              <button class="btn" ng-click="pledge.$show_survey = false">Close</button>
             </div>
           </div>
-
-          <div class="control-group">
-            <div class="controls">
-              <button type="submit" class="btn btn-primary" ng-click="submit_survey(pledge)">Submit Response</button>
-            </div>
-          </div>
-        </ng-form>
+        </form>
       </div>
     </td>
 
-    <td><a ng-href="/fundraisers/{{pledge.fundraiser.id}}/receipts?pledge_id={{ pledge.id }}">{{ pledge.amount | dollars }}</a></td>
+    <td><a ng-href="/fundraisers/{{pledge.fundraiser.id}}/receipts?pledge_id={{ pledge.id }}">{{pledge.amount | dollars}}</a></td>
 
     <td>{{ pledge.created_at | date }}</td>
 
@@ -101,7 +121,7 @@
     </td>
 
     <td>
-      <button class="btn btn-small btn-primary" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Edit</button>
+      <button ng-show="pledge.reward || pledge.fundraiser.rewards.length > 0" class="btn btn-small btn-primary" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Reward</button>
     </td>
   <tr>
   </tbody>
