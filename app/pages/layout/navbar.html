@@ -1,5 +1,5 @@
 <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
+ <div class="navbar-inner">
     <div class="container">
       <button type="button" class="btn btn-navbar" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       <a class="brand" href="/" id="navbar-logo"><strong>Bountysource</strong><img src="/images/Bountysource-green.png" style="width: 100px; height: 30px" /></a>
@@ -19,7 +19,7 @@
             <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
               <li style="padding-left: 10px;">Using:</li>
               <li ng-repeat="provider in providers">
-                <a ng-click="save_route()" ng-href="{{ signin_url_for(provider.id) }}" id="navbar-provider-{{provider.id}}"><img ng-src="{{provider.image_url}}"> {{provider.name}}</a>
+                <a ng-click="save_route();save_analytics(signin_url_for(provider.id))" ng-href="" id="navbar-provider-{{provider.id}}"><img ng-src="{{provider.image_url}}"> {{provider.name}}</a>
               </li>
               <li><a href="/signin" id="navbar-provider-email"><img src="images/favicon-email.png"> Email Address</a></li>
             </ul>

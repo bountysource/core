@@ -9,7 +9,7 @@
       <div class="controls">
         <ul ng-controller="Signin">
           <li ng-repeat="provider in providers" class="provider-link">
-            <a ng-href="{{ signin_url_for(provider.id) }}" id="signin-{{provider.id}}"><img ng-src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
+            <a ng-click="save_analytics(signin_url_for(provider.id))" ng-href="" id="signin-{{provider.id}}"><img ng-src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
           </li>
         </ul>
       </div>
