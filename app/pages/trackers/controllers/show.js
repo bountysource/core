@@ -9,8 +9,8 @@ angular.module('app')
         reloadOnSearch: false
       });
   })
-  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle) {
-    $api.tracker_get($routeParams.id).then(function(tracker) {
+  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
+    $scope.tracker = $api.tracker_get($routeParams.id).then(function(tracker) {
 
       // Edge case: GitHub repo changes owner, and we create a new Tracker model.
       // If the requested tracker model has a redirect to another, change the URL to that tracker.
@@ -63,32 +63,35 @@ angular.module('app')
         });
       };
 
-      $scope.tracker = tracker;
-    });
+      // Load issues for tracker. If the tracker was just created (has not been synced yet),
+      // throw in a timeout to allow time for issues to be added
+      $timeout(function() {
+        $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+          $scope.issues_resolved = true;
 
-    // merge all of the issue arrays into one
-    $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
-      $scope.issues_resolved = true;
+          for (var i=0; i<issues.length; i++) {
+            issues[i].bounty_total = parseFloat(issues[i].bounty_total);
 
-      for (var i=0; i<issues.length; i++) {
-        issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+            // sorting doesn't like nulls.. this is a quick hack
+            issues[i].participants_count = issues[i].participants_count || 0;
+            issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+            issues[i].comment_count = issues[i].comment_count || 0;
+          }
+          return issues;
+        });
+      }, tracker.synced_at ? 0 : 2500);
 
-        // sorting doesn't like nulls.. this is a quick hack
-        issues[i].participants_count = issues[i].participants_count || 0;
-        issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
-        issues[i].comment_count = issues[i].comment_count || 0;
-      }
-      return issues;
+      return tracker;
     });
 
     $scope.issue_filter_options = {
       text:          $location.search().text                    || null,
       bounty_min:    $location.search().bounty_min              || null,
       bounty_max:    $location.search().bounty_max              || null,
-      only_valuable: $location.search().only_valuable === 'true' || false,
-      hide_closed:   $location.search().hide_closed   === 'true' || false,
-      hide_open:     $location.search().hide_open     === 'true' || false,
-      show_paid_out: $location.search().show_paid_out === 'true' || false,
+      only_valuable: $location.search().only_valuable || false,
+      hide_closed:   $location.search().hide_closed   || false,
+      hide_open:     $location.search().hide_open     || false,
+      show_paid_out: $location.search().show_paid_out || false,
       sort:          $location.search().sort || "bounty_total",
       sort_asc:      $location.search().sort_asc || false,
       show_issue_id: $location.search().show_issue_id || false,
