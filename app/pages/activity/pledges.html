@@ -38,7 +38,7 @@
         <small class="text-info"><i>Updated reward {{pledge.$updated_at | date:'medium'}}</i></small>
       </div>
 
-      <div ng-show="pledge.$show_survey">
+      <div collapse="!pledge.$show_survey">
         <br />
         <form class="form-horizontal" name="form">
           <div class="control-group">
@@ -91,13 +91,13 @@
       <div ng-show="pledge.owner">
         <div class="thumbnail" tooltip="{{pledge.owner.display_name}}" tooltip-placement="left">
           <owner-profile-link model="pledge">
-            <img ng-src="{{pledge.owner.image_url}}" />
+            <img style="width: 100%" ng-src="{{pledge.owner.image_url}}" />
           </owner-profile-link>
         </div>
       </div>
       <div ng-hide="pledge.owner">
         <div class="thumbnail" tooltip="Anonymous" tooltip-placement="left">
-          <img src="images/anon.jpg" />
+          <img style="width: 100%" src="images/anon.jpg" />
         </div>
       </div>
     </td>
@@ -121,7 +121,7 @@
     </td>
 
     <td>
-      <button ng-show="pledge.reward || pledge.fundraiser.rewards.length > 0" class="btn btn-small btn-primary" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Reward</button>
+      <button ng-show="pledge.fundraiser.rewards.length > 1 && pledge.reward.amount > 0" class="btn btn-small btn-primary" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Reward</button>
     </td>
   <tr>
   </tbody>
