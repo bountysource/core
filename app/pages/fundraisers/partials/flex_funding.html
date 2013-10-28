@@ -1,4 +1,5 @@
 <div id="flex-box" class="text-left">
   <h5>Flexible Funding</h5>
-  <p>This campaign will receive all funds raised even if it does not reach its goal.</p>
+  <p ng-show="in_progress">This campaign will receive all funds raised even if it does not reach its goal.</p>
+  <p ng-show="!in_progress">This fundraiser has completed and will receive all funds raised.</p>
 </div>
