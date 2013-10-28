@@ -68,7 +68,7 @@
             <div class="control-group">
               <label class="control-label">Your Response:</label>
               <div class="controls">
-                <textarea style="width: 100%;" rows="4" ng-model="pledge.survey_response" placeholder="Your response"></textarea>
+                <textarea style="width: 360px;" rows="4" ng-model="pledge.survey_response" placeholder="Your response"></textarea>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@
     </td>
 
     <td>
-      <button ng-show="pledge.fundraiser.rewards.length > 1 && pledge.reward.amount > 0" class="btn btn-small btn-primary" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Reward</button>
+      <button ng-show="pledge.fundraiser.rewards.length > 1 && pledge.amount >= (pledge.fundraiser.rewards | orderBy:['amount'])[1].amount" class="btn btn-small btn-primary" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Reward</button>
     </td>
   <tr>
   </tbody>
