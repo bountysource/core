@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('CreateBountyController', function ($scope, $routeParams, $window, $location, $payment, $api) {
+  .controller('CreateBountyController', function ($scope, $routeParams, $window, $location, $payment, $api, $filter) {
     $scope.bounty = {
       amount: parseInt($routeParams.amount || 0, 10),
       anonymous: ($routeParams.anonymous === "true") || false,
@@ -29,14 +29,13 @@ angular.module('app')
         var payment_params = angular.copy($scope.bounty);
 
         delete payment_params.fee;
-        payment_params.success_url = base_url + "/activity/bounties";
+        payment_params.success_url = base_url + "/issues/"+issue.id+"/receipts/recent";
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {
           error: function(response) {
-            // if paying from team, but not a spender
-            if ((/\Ateam\/(\d+)\Z/).test(payment_params.payment_method) && response.meta.status === 403) {
-              console.log("Forbidden:", response);
+            // if paying from team, but not a developer
+            if ((/^team\/(\d+)$/).test(payment_params.payment_method) && response.meta.status === 403) {
               $scope.error = "You do not have permission to do that.";
             } else {
               $scope.error = response.data.error;
@@ -56,28 +55,64 @@ angular.module('app')
     // if logged in, populate teams accounts!
     $scope.$watch("current_person", function(person) {
       if (person) {
-        $scope.teams = $api.person_teams(person.id);
+        // select the team once loaded.
+        // if it's enterprise, then we need to know so that we hide the fees
+        $scope.teams = $api.person_teams(person.id).then(function(teams) {
+          // oh god, that's like the wost line of JS I have ever written
+          var team_id = parseInt(((($scope.bounty.payment_method).match(/^team\/(\d+)$/) || {})[1]), 10);
+
+          if (team_id) {
+            for (var i=0; i<teams.length; i++) {
+              if (teams[i].id === team_id) {
+                $scope.selected_team = teams[i];
+
+                if ((/^Team::Enterprise$/).test(teams[i].type)) {
+                  $scope.show_fee = false;
+                } else {
+                  $scope.show_fee = true;
+                }
+
+                break;
+              }
+            }
+          }
+
+          return teams;
+        });
       }
     });
 
+    $scope.selected_team = undefined;
+    $scope.select_team = function(team) {
+      $scope.selected_team = team;
+    };
+
     $scope.can_make_anonymous = true;
     $scope.has_fee = true;
+    $scope.show_fee = false;
 
     $scope.$watch("bounty.payment_method", function(payment_method) {
-      // Can make anonymous?
-      // Only team bounties/pledges cannot be made anonymous.
-      if ((/^team\/\d+$/).test(payment_method)) {
-        $scope.can_make_anonymous = false;
-      } else {
-        $scope.can_make_anonymous = true;
-      }
+      if (payment_method) {
 
-      // Bountysource charges a fee?
-      // Only personal accounts are exempt from the fee.
-      if (payment_method === "personal") {
-        $scope.has_fee = false;
-      } else {
-        $scope.has_fee = true;
+        if ((/^team\/\d+$/).test(payment_method)) {
+          // is it an enterprise team or personal account? No fee!
+          if ($scope.selected_team && (/^Team::Enterprise$/).test($scope.selected_team.type||"")) {
+            $scope.has_fee = false;
+            $scope.show_fee = false;
+          } else {
+            $scope.has_fee = true;
+            $scope.show_fee = true;
+          }
+        } else if (payment_method === "personal") {
+          $scope.has_fee = false;
+          $scope.show_fee = true;
+        } else {
+          $scope.has_fee = true;
+          $scope.show_fee = true;
+        }
+
+        // Cannot make anon if payment method is a team
+        $scope.can_make_anonymous = !(/^team\/\d+$/).test(payment_method);
       }
     });
 
@@ -92,14 +127,33 @@ angular.module('app')
       }
     });
 
-    $scope.$watch("bounty.amount", function(amount) {
+    $scope.update_bounty_amount = function() {
+      var total = $scope.bounty.total;
+      if (angular.isNumber(total)) {
+        var fee = (total * 0.1) / 1.1;
+        fee = Number($filter('number')(fee, 2).replace(/[^0-9|\.]/g, ''));
+        var amount = total / 1.1;
+        amount = Number($filter('number')(amount, 2).replace(/[^0-9|\.]/g, ''));
+        $scope.bounty.fee = $scope.has_fee ? fee : 0;
+        $scope.bounty.amount = $scope.has_fee ? amount : total;
+      } else {
+        $scope.bounty.amount = 0;
+        $scope.bounty.fee = 0;
+      }
+    };
+
+    $scope.update_bounty_total = function() {
+      var amount = $scope.bounty.amount;
       if (angular.isNumber(amount)) {
-        $scope.bounty.fee = $scope.has_fee ? amount * 0.10 : 0;
-        $scope.bounty.total = $scope.has_fee ? (amount + $scope.bounty.fee) : amount;
+        var fee = amount * 0.10;
+        fee = Number($filter('number')(fee, 2).replace(/[^0-9|\.]/g, ''));
+        amount = Number($filter('number')(amount, 2).replace(/[^0-9|\.]/g, ''));
+        $scope.bounty.fee = $scope.has_fee ? fee : 0;
+        $scope.bounty.total = $scope.has_fee ? Number($filter('number')(amount + fee, 2).replace(/[^0-9|\.]/g, '')) : amount;
       } else {
         $scope.bounty.total = 0;
         $scope.bounty.fee = 0;
       }
-    });
+    };
   });
 

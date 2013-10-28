@@ -7,7 +7,7 @@ angular.module('api.bountysource',[]).
 
     // set environment
     $rootScope.environment = window.BS_ENV;
-    if ($location.host().match(/localhost|v2\.pagekite/)) {
+    if ($location.host().match(/localhost|v2\.pagekite|.*\.local/)) {
       $rootScope.can_switch_environments = true;
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
@@ -37,7 +37,10 @@ angular.module('api.bountysource',[]).
       if (count > 0) {
         // decrement count
         window.localStorage.setItem('stubsCount', count - 1);
-
+        var responseInfo = window.localStorage.getItem('responseInfo'+count);
+        if (responseInfo) {
+          console.log("MOCK RESPONSE INFO ****"+responseInfo+"****");
+        }
         return JSON.parse(localStorage.getItem('response'+count));
       } else {
         throw("Nothing left :/");
@@ -55,11 +58,13 @@ angular.module('api.bountysource',[]).
           callback: typeof(mockArgs[0]) === 'function' ? mockArgs.shift() : function(response) { return response.data;}
         };
 
+        console.log("------------------------");
         console.log("Request", JSON.stringify(request));
         console.log("PARAMS", JSON.stringify(request.params));
         var mock_response = this.$shift_mock_response();
 
-        console.log("Mock response:", mock_response);
+        console.log("Mock response:", JSON.stringify(mock_response));
+        console.log("------------------------");
         // request.callback(mock_response);
 
         var mockDeferred = $q.defer();
@@ -77,8 +82,8 @@ angular.module('api.bountysource',[]).
 
         // merge in params
         params = angular.copy(params);
-        if ($cookieStore.get($api.access_token_cookie_name)) {
-          params.access_token = $cookieStore.get($api.access_token_cookie_name);
+        if ($api.get_access_token()) {
+          params.access_token = $api.get_access_token();
         }
         params.per_page = params.per_page || 250;
 
@@ -119,17 +124,18 @@ angular.module('api.bountysource',[]).
         // hacky way to add calculated funding percentage to data.
         // TODO proper Models
         if (res.meta.success) {
-          res.data.funding_percentage = Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100);
+          res.data.funding_percentage = Math.round((res.data.total_pledged / res.data.funding_goal) * 100);
           res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
           res.data.image_url = res.data.image_url || "/images/bountysource-grey.png";
 
           // calculate time left
-          // using Moment.js
-          var now = new Moment();
-          var ends = new Moment(res.data.ends_at);
-          res.data.$days_left = ends.diff(now, "days");
-          res.data.$hours_left = ends.diff(now, "hours");
-          res.data.$minutes_left = ends.diff(now, "minutes");
+          var now = new Date().getTime();
+          var ends = new Date(res.data.ends_at);
+          var diff = ends - now;
+          res.data.$days_left = Math.floor(diff / (1000*60*60*24));
+          res.data.$hours_left = Math.floor(diff / (1000*60*60));
+          res.data.$minutes_left = Math.floor(diff / (1000*60));
+          res.data.$seconds_left = Math.round(diff / (1000));
         }
         return res.data;
       });
@@ -138,7 +144,7 @@ angular.module('api.bountysource',[]).
     this.fundraiser_info_get = function(id) {
       return this.call("/user/fundraisers/"+id+"/info", function(res) {
         if (res.meta.success) {
-          res.data.funding_percentage = Math.ceil((res.data.total_pledged / res.data.funding_goal) * 100);
+          res.data.funding_percentage = Math.round((res.data.total_pledged / res.data.funding_goal) * 100);
           res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
         }
         return res.data;
@@ -265,11 +271,11 @@ angular.module('api.bountysource',[]).
     };
 
     this.tracker_follow = function(id) {
-      return this.call("/follows", "PUT", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "PUT", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_unfollow = function(id) {
-      return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "DELETE", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_issues_get = function(id) {
@@ -340,10 +346,6 @@ angular.module('api.bountysource',[]).
 
     this.tracker_relations_get = function() {
       return this.call("/project_relations");
-    };
-
-    this.tracker_plugin_create = function(tracker_id, linked_account_id) {
-      return this.call("/trackers/"+tracker_id+"/tracker_plugin", "POST", { linked_account_id: linked_account_id });
     };
 
     this.tracker_plugin_update = function(tracker_id, data) {
@@ -497,6 +499,27 @@ angular.module('api.bountysource',[]).
     };
 
 
+    this.trackers_get = function() {
+      return this.call("/projects");
+    };
+
+    this.claim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/claim", "POST", {owner_id: owner_id, owner_type: owner_type});
+    };
+
+    this.unclaim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/unclaim", "POST", {owner_id: owner_id, owner_type: owner_type});
+    };
+
+    this.tracker_plugins_get = function() {
+      return this.call("/tracker_plugins");
+    };
+
+    this.tracker_plugin_create = function(tracker_id, data) {
+      data.tracker_id = tracker_id;
+      return this.call("/tracker_plugins", "POST", data);
+    };
+
 
 
     // these should probably go in an "AuthenticationController" or something more angular
@@ -520,10 +543,10 @@ angular.module('api.bountysource',[]).
           obj.access_token = $rootScope.current_person.access_token;
         }
         $rootScope.current_person = obj;
-        $cookieStore.put($api.access_token_cookie_name, $rootScope.current_person.access_token);
+        $api.set_access_token($rootScope.current_person.access_token);
       } else {
         $rootScope.current_person = false;
-        $cookieStore.remove($api.access_token_cookie_name);
+        $api.set_access_token(null);
       }
     };
 
@@ -569,7 +592,14 @@ angular.module('api.bountysource',[]).
     };
 
     this.set_access_token = function(new_access_token) {
-      return $cookieStore.put(this.access_token_cookie_name, new_access_token);
+      if (new_access_token) {
+        // TODO: need secure cookies support in angularjs -- https://github.com/angular/angular.js/issues/950
+        $cookieStore.put(this.access_token_cookie_name, new_access_token);
+      } else {
+        $cookieStore.remove(this.access_token_cookie_name);
+      }
+
+      return new_access_token;
     };
 
     this.get_access_token = function() {
@@ -577,7 +607,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.load_current_person_from_cookies = function() {
-      var access_token = $cookieStore.get($api.access_token_cookie_name);
+      var access_token = $api.get_access_token();
       if (access_token) {
         console.log("Verifying access token: " + access_token);
         this.call("/user", { access_token: access_token }, function(response) {
@@ -627,7 +657,7 @@ angular.module('api.bountysource',[]).
       var port = $location.port();
 
       options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
-      if ($cookieStore.get($api.access_token_cookie_name)) { options.access_token = $cookieStore.get($api.access_token_cookie_name); }
+      if ($api.get_access_token()) { options.access_token = $api.get_access_token(); }
       return $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?' + $api.toKeyValue(options);
     };
 

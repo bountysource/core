@@ -6,7 +6,7 @@ if (document.location.host === 'www.bountysource.com') {
   window.BS_ENV = 'staging';
 }
 
-angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies'])
+angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies', 'colorpicker.module'])
   .config(function ($routeProvider, $locationProvider, $httpProvider, $provide) {
 
     //  NOTE: uncomment to test hashbang # mode
@@ -25,7 +25,7 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     // HACK: angular 1.0 adds this bad header... not needed in 1.1 per https://github.com/angular/angular.js/pull/1454
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-  }).run(function($api) {
+  }).run(function($api, $rootScope) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
   });

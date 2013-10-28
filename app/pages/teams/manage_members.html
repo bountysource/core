@@ -11,6 +11,7 @@
     <div class="span3">
       <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
     </div>
+
     <div class="span9">
       <ng-include src="'pages/teams/partials/header.html'"></ng-include>
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
@@ -19,12 +20,12 @@
         <div class="span8">
           <h3 style="margin-bottom: 0;">Members</h3>
           <p>Members of your team. You can change the permissions for your team members.</p>
-          <table class="table table-hover table-striped" ng-show="members.length > 0">
+          <table class="table members table-hover table-striped" ng-show="members.length > 0">
             <thead>
             <tr>
               <th style="width: 30%;">Username</th>
               <th style="width: 10%; text-align: center;">Public</th>
-              <th style="width: 10%; text-align: center;">Spender</th>
+              <th style="width: 10%; text-align: center;">Developer</th>
               <th style="width: 10%; text-align: center;">Admin</th>
               <th style="width: 10%; text-align: center;"></th>
             </tr>
@@ -44,7 +45,7 @@
                 <input type="checkbox" ng-model="member.is_public" ng-change="member_changed(member)" ng-disabled="member.$saving" />
               </td>
               <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_spender" ng-change="member_changed(member)" ng-disabled="member.$saving" />
+                <input type="checkbox" ng-model="member.is_developer" ng-change="member_changed(member)" ng-disabled="member.$saving" />
               </td>
               <td style="text-align: center;">
                 <input type="checkbox" ng-model="member.is_admin" ng-change="member_changed(member)" ng-disabled="member.$saving || (is_admin && current_person.id == member.id)" />
@@ -62,7 +63,7 @@
             </tbody>
           </table>
 
-          <div collapse="!pending_invites || pending_invites.length <= 0">
+          <div id="pending-members" collapse="!pending_invites || pending_invites.length <= 0">
             <h3 style="margin-bottom: 0;">Pending Members</h3>
             <div ng-show="add_member_error.message">
               <alert type="add_member_error.type" close="add_member_error.message = null">{{add_member_error.message}}</alert>
@@ -85,7 +86,7 @@
                 </td>
 
                 <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.public" disabled /></td>
-                <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.spender" disabled /></td>
+                <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.developer" disabled /></td>
                 <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.admin" disabled /></td>
 
                 <td style="text-align: center;"><button ng-click="team_invite_reject(invite)" class="btn btn-mini btn-block" tooltip="Cancel Invite"><i class="icon-remove"></i></button></td>
@@ -101,7 +102,7 @@
             <tr>
               <th style="width: 30%;">Email</th>
               <th style="width: 10%; text-align: center;">Public</th>
-              <th style="width: 10%; text-align: center;">Spender</th>
+              <th style="width: 10%; text-align: center;">Developer</th>
               <th style="width: 10%; text-align: center;">Admin</th>
               <th style="width: 10%; text-align: center;"></th>
             </tr>
@@ -112,15 +113,15 @@
                 <td><input style="margin-bottom: 0;" type="email" name="email" class="span12" ng-model="new_member.email" ng-change="validate_new_member_email()" placeholder="Email address" /></td>
 
                 <td style="text-align: center;"><input type="checkbox" ng-model="new_member.public" /></td>
-                <td style="text-align: center;"><input type="checkbox" ng-model="new_member.spender"  /></td>
+                <td style="text-align: center;"><input type="checkbox" ng-model="new_member.developer"  /></td>
                 <td style="text-align: center;"><input type="checkbox" ng-model="new_member.admin" /></td>
 
                 <td style="text-align: center;">
                   <div ng-show="new_member.email && !new_member.registered" tooltip="Send Invite">
-                    <button type="submit" class="btn btn-mini btn-block btn-primary"><i class="icon-envelope icon-white"></i></button>
+                    <button type="submit" class="btn btn-mini btn-block btn-primary" ng-click="team_invite_create()"><i class="icon-envelope icon-white"></i></button>
                   </div>
                   <div ng-show="new_member.email && new_member.registered" tooltip="Add to Team">
-                    <button type="submit" class="btn btn-mini btn-block btn-success"><i class="icon-plus icon-white"></i></button>
+                    <button type="submit" class="btn btn-mini btn-block btn-success" ng-click="team_invite_create()"><i class="icon-plus icon-white"></i></button>
                   </div>
                 </td>
               </form>
@@ -132,8 +133,8 @@
           <div class="well">
             <h4>Public</h4>
             <p>Publicly displayed as a member of {{team.name}} on the <a ng-href="/teams/{{team.slug}}/members">members</a> tab.</p>
-            <h4>Spender</h4>
-            <p>Authorized to <strong>spend money</strong> from the {{team.name}} account.</p>
+            <h4>Developer</h4>
+            <p>Authorized to <strong>spend</strong> money from the {{team.name}} account. Can change team settings (name, logo, projects used, etc).</p>
             <h4>Admin</h4>
             <p>Can <strong>add/remove projects and members</strong> to the team, as well as <strong>assign roles</strong> to members.</p>
           </div>

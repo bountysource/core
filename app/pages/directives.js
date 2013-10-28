@@ -103,7 +103,7 @@ angular.module('app').
   directive('requireGithubAuth', ["$api", "$window", "$location", function($api, $window, $location) {
     // TODO support more than 1 scope
     return {
-      restrict: "A",
+      restrict: "AC",
       link: function(scope, element, attr) {
         element.bind('click', function() {
           scope.$apply(function() {
@@ -218,8 +218,8 @@ angular.module('app').
         });
       }
     };
-  }])
-  .directive('ownerHref', function() {
+  }]).
+  directive('ownerHref', function() {
     return {
       restrict: "AC",
       link: function(scope, element, attr) {
@@ -227,11 +227,19 @@ angular.module('app').
           if (owner) {
             if ((/^person$/i).test(owner.type)) {
               element.attr("href", "/people/"+owner.slug);
-            } else if ((/^team$/i).test(owner.type)) {
+            } else if ((/^team(?:::[a-z]+)*$/i).test(owner.type)) {
               element.attr("href", "/teams/"+owner.slug);
             }
           }
         });
       }
+    };
+  }).
+  directive('loadingBar', function() {
+    return {
+      restrict: "E",
+      replace: true,
+      transclude: true,
+      template: '<div><div class="text-center"><p class="lead" ng-transclude></p><progress value="100" class="progress-striped active"></progress></div></div>'
     };
   });

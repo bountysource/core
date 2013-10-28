@@ -43,13 +43,14 @@
 
           <!-- Team accounts -->
           <div ng-show="teams.length > 0">
-            <label ng-repeat="team in teams | orderBy:['-is_spender', '-account_balance']" class="radio">
-              <input type="radio" ng-model="bounty.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_spender || team.account_balance <= 0" />
+            <label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="radio">
+              <input type="radio" ng-model="bounty.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0" ng-change="select_team(team)" />
               <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
-              <span ng-class="{ 'muted': (!team.is_spender || team.account_balance <= 0) }">
+              <span ng-class="{ 'muted': (!team.is_developer || team.account_balance <= 0) }">
                 {{team.name}}
-                <strong ng-show="team.is_spender">{{ team.account_balance | currency }}</strong>
-                <strong ng-hide="team.is_spender">{{ 0 | currency }}</strong>
+                <strong ng-show="team.is_developer">{{ team.account_balance | dollars }}</strong>
+                <strong ng-hide="team.is_developer">$0</strong>
+                <span ng-show="team.is_admin && team.account_balance < 100 && team.type != 'Team::Enterprise'">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
               </span>
             </label>
           </div>
@@ -61,22 +62,27 @@
         <div class="controls">
           <div class="input-prepend">
             <span class="add-on">$</span>
-            <input id="amount" type="number" min="5" step="0.01" ng-model="bounty.amount" placeholder="Bounty amount" autofocus required />
+            <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="Bounty amount" />
           </div>
         </div>
       </div>
 
-      <div class="control-group">
-        <label class="control-label">Bountysource Fee:</label>
-        <div class="controls">
-          <div style="line-height: 30px;"><strong>{{bounty.fee | currency}}</strong></div>
+      <div collapse="!show_fee">
+        <div class="control-group">
+          <label class="control-label">Bountysource Fee:</label>
+          <div class="controls">
+            <div style="line-height: 30px;"><strong>{{bounty.fee | currency}}</strong></div>
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <label class="control-label">Total:</label>
-        <div class="controls">
-          <div style="line-height: 30px;"><strong>{{bounty.total | currency}}</strong></div>
+        <div class="control-group">
+          <label class="control-label">Total:</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on">$</span>
+              <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" />
+            </div>
+          </div>
         </div>
       </div>
 

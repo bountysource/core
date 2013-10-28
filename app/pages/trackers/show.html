@@ -79,7 +79,7 @@
           <div>claimed</div>
         </div>
       </div>
-      <br>
+      <br ng-hide="tracker.bounty_total == 0">
       <div class="row-fluid" ng-show="tracker.tracker_type == 'Github::Repository'">
         <div class="span6 text-center">
           <h3 style="margin: 0; line-height:35px;">{{tracker.forks || 0 | number}}</h3>
@@ -190,17 +190,22 @@
     <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length > 0">
       <thead>
         <tr>
+          <th ng-show="issue_filter_options.show_issue_id">ID</th>
+          <th ng-show="issue_filter_options.show_issue_number">#</th>
           <th class="span9">Title</th>
-          <th style="text-align: center"><a ng-click="change_order_col('bounty_total')"><span style="color: black">$</span></a></th>
+          <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
           <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
-          <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"><i class="icon-thumbs-up"></i></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('participants_count')"><i class="icon-user"></i></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('created_at')"><i class="icon-time"></i></a></th>
+          <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')" tooltip="+1 and Thumbsup total"><i class="icon-thumbs-up"></i></a></th>
+          <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Participants"><i class="icon-user"></i></a></th>
+          <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i class="icon-time"></i></a></th>
         </tr>
       </thead>
 
       <tbody>
         <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:issue_filter_options.sort:!issue_filter_options.sort_asc" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+          <td ng-show="issue_filter_options.show_issue_id">{{issue.id}}</td>
+          <td ng-show="issue_filter_options.show_issue_number">{{issue.number}}</td>
+
           <td>
             <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
               <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>

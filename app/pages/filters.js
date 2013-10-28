@@ -38,10 +38,16 @@ angular.module('app').
     return function(s, size, replacement) {
       size = size || 50;
       replacement = replacement || "...";
-      if (!s || s.length <= (size + replacement.length)) {
+      if (!s || s.length <= size) {
         return s;
       }
       return s.slice(0,size+replacement.length) + replacement;
+    };
+  }).filter('clean_url', function() {
+    return function(s) {
+      var new_url = (s||"").replace(/https?:\/\//, '');
+      new_url = new_url.replace(/\/$/, '');
+      return new_url;
     };
   }).filter('from_snake_case', function() {
     // Convert snakecase to words
@@ -128,6 +134,53 @@ angular.module('app').
     return function(val) {
       return (val||"").toLowerCase().replace(/[ ]+/g,'-').replace(/[,.]/g,'').replace(/-(inc|llc)$/,'').replace(/[^a-z1-9-_]/g,'');
     };
+  }).filter('pluck', function() {
+    return function(input, field) {
+      // console.log(arguments);
+      var retval = [];
+      for (var i=0; i < input.length; i++) {
+        retval.push(input[i][field]);
+      }
+      return retval;
+    };
+  }).filter('unique', function() {
+    return function(input) {
+      var retval = [];
+      for (var i=0; i < input.length; i++) {
+        if (retval.indexOf(input[i]) === -1) {
+          retval.push(input[i]);
+        }
+      }
+      return retval;
+    };
+  }).filter('orderObjectBy', function() {
+    return function(items, field, reverse) {
+      var filtered = [];
+      angular.forEach(items, function(item) {
+        filtered.push(item);
+      });
+      filtered.sort(function (a, b) {
+        if (a[field] > b[field]) {
+          return 1;
+        }
+        if (a[field] < b[field]) {
+          return -1;
+        }
+        return 0;
+      });
+      if (reverse) {
+        filtered.reverse();
+      }
+      return filtered;
+    };
+  }).filter('hex', function() {
+    return function(input) {
+      if (input) {
+        return input.replace(/[^0-9a-f]/i, "");
+      }
+    };
+  }).filter('encodeURIComponent', function() {
+    return window.encodeURIComponent;
   });
 
 

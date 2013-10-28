@@ -32,7 +32,7 @@
               <img ng-hide="bounty.person" class="thumbnail" src="images/anon.jpg" />
             </td>
             <td>
-              <owner-profile-link model="bounty">{{bounty.person.display_name}}</owner-profile-link>
+              <a owner-href="bounty.owner">{{bounty.owner.display_name}}</a>
               <div ng-hide="bounty.person">Anonymous</div>
             </td>
             <td>

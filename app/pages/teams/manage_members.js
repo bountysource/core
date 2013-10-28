@@ -43,7 +43,7 @@ angular.module('app')
       $scope.update_member = function(member) {
         var payload = {
           admin: member.is_admin,
-          spender: member.is_spender,
+          developer: member.is_developer,
           public: member.is_public
         };
 
@@ -52,7 +52,7 @@ angular.module('app')
 
         if (member.id === $scope.current_person.id) {
           $scope.is_admin   = member.is_admin;
-          $scope.is_spender = member.is_spender;
+          $scope.is_developer = member.is_developer;
           $scope.is_public  = member.is_public;
         }
 
@@ -107,7 +107,7 @@ angular.module('app')
       email: "",
       public: true,
       admin: false,
-      spender: false,
+      developer: true,
       registered: false
     };
 

@@ -31,22 +31,48 @@
             </a>
 
             <ul class="dropdown-menu" ng-show="!!current_person">
-              <li><a href="/activity" id="navbar-user-activity">
+              <li class="dropdown-submenu"><a href="/activity" id="navbar-user-activity">
                 <i class="icon-bullhorn"></i>
                 Activity
-              </a></li>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/activity">Timeline</a></li>
+                <li><a href="/activity/bounties">Bounties</a></li>
+                <li><a href="/activity/fundraisers">Fundraisers</a></li>
+                <li><a href="/activity/pledges">Pledges</a></li>
+                <li><a href="/activity/claims">Bounty Claims</a></li>
+              </ul>
+            </li>
               <li><a ng-href="/people/{{current_person.slug}}" id="navbar-user-profile">
                 <i class="icon-user"></i>
                 Profile
               </a></li>
-              <!--<li><a href="/tools">-->
-                <!--<i class="icon-wrench"></i>-->
-                <!--Tools-->
-              <!--</a></li>-->
-              <li><a href="/settings" id="navbar-user-settings">
-                <i class="icon-cog"></i>
-                Settings
+              <li><a href="/tools">
+                <i class="icon-wrench"></i>
+                Tools
               </a></li>
+              <li ng-show="teams.length > 0" class="dropdown-submenu">
+                <a href="/teams" id="navbar-user-teams">
+                  <i class="icon-globe"></i>
+                  Teams
+                </a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="team in teams"><a ng-href="/teams/{{team.slug}}">{{team.name}}</a></li>
+                  <li class="divider"></li>
+                  <li><a tabindex="-1" href="/teams/new">Create a Team</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a href="/settings" id="navbar-user-settings">
+                  <i class="icon-cog"></i>
+                  Settings
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/settings">Profile</a></li>
+                  <li><a href="/settings/accounts">Accounts</a></li>
+                  <li><a href="/settings/email">Email</a></li>
+                </ul>
+              </li>
               <li ng-show="current_person.account.balance > 0"><a ng-href="/activity/transactions" id="navbar-user-profile">
                 <i class="icon-gift"></i>
                 Balance ({{current_person.account.balance | currency}})
