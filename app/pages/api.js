@@ -350,7 +350,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.languages_get = function() {
-      return this.call("/languages"); 
+      return this.call("/languages");
     };
 
     this.tracker_relations_get = function() {
