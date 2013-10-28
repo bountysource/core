@@ -179,6 +179,8 @@ angular.module('app').
         return input.replace(/[^0-9a-f]/i, "");
       }
     };
+  }).filter('encodeURIComponent', function() {
+    return window.encodeURIComponent;
   });
 
 

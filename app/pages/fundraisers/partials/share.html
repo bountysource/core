@@ -1,5 +1,8 @@
 <div class="well">
-<a require-twitter href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+<!--
+<a require-twitter href="https://twitter.com/share" class="twitter-share-button" data-url="{{fundraiser.frontend_url}}" data-text="Support {{fundraiser.title}} on @Bountysource!" data-ng-lang="en">Tweet</a>
+-->
+<iframe allowtransparency="true" frameborder="0" scrolling="no" ng-src="https://platform.twitter.com/widgets/tweet_button.html?text=Support {{fundraiser.title | encodeURIComponent}} on @Bountysource!&amp;url={{fundraiser.frontend_url | encodeURIComponent}}" style="width:130px; height:20px;"></iframe>
 <div require-gplus class="g-plusone" data-size="medium" data-annotation="bubble"></div>
 <br />
 <br />
