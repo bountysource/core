@@ -130,7 +130,7 @@ angular.module('api.bountysource',[]).
 
           // calculate time left
           var now = new Date().getTime();
-          var ends = new Date(res.data.ends_at);
+          var ends = Date.parse(res.data.ends_at);
           var diff = ends - now;
           res.data.$days_left = Math.floor(diff / (1000*60*60*24));
           res.data.$hours_left = Math.floor(diff / (1000*60*60));
@@ -226,10 +226,15 @@ angular.module('api.bountysource',[]).
       return this.call("/users/"+id);
     };
 
-    this.person_put = function(data) {
-      var promise = this.call("/user", "PUT", data);
-      promise.then($api.set_current_person);
-      return promise;
+    this.person_update = function(data) {
+      return this.call("/user", "PUT", data);
+    };
+
+    this.notification_unsubscribe = function(type, data) {
+      data.type = type;
+      return this.call("/notifications/unsubscribe", 'POST', data, function(response) {
+        return response.meta.success;
+      });
     };
 
     this.change_password = function(data) {

@@ -9,7 +9,9 @@
       <div class="controls">
         <ul ng-controller="Signin">
           <li ng-repeat="provider in providers" class="provider-link">
-            <a ng-href="{{ signin_url_for(provider.id) }}" id="signin-{{provider.id}}"><img ng-src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
+            <a gaq-track-click ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="signin-{{provider.id}}" ng-click="save_route()">
+              <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
+            </a>
           </li>
         </ul>
       </div>

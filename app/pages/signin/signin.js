@@ -9,7 +9,7 @@ angular.module('app')
         title: 'Sign in'
       });
   })
-  .controller('Signin', function ($scope, $routeParams, $api, $location) {
+  .controller('Signin', function ($scope, $routeParams, $api, $location, $window) {
     // Redirect user to homepage if already logged in.
     // Need to wait to see if current_person is explicitly set to false.
     $scope.teams = [];
@@ -88,6 +88,8 @@ angular.module('app')
         $api.signin($scope.form_data).then(function(response) {
           if (response.error) {
             $scope.error = response.error;
+          } else {
+            $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
           }
         });
       }
@@ -100,6 +102,8 @@ angular.module('app')
         $api.signup($scope.form_data).then(function(response) {
           if (response.error) {
             $scope.error = response.error;
+          } else {
+            $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
           }
         });
       }
@@ -110,5 +114,4 @@ angular.module('app')
         $scope.error = response.message;
       });
     };
-
   });

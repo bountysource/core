@@ -54,3 +54,7 @@ table.update_table th:nth-child(2) {
   line-height: 12px;
   margin-bottom: 0px;
 }
+/* receipts */
+ul.fundraiser-highlight > li > div{
+  margin-right: 2%;
+}
