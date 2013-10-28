@@ -3,7 +3,10 @@
   <li><a>Teams</a></li>
 </ul>
 
-<h1>Teams Using Open-Source Software</h1>
+<div>
+  <h1>Featured Teams</h1>
+  <br />
+</div>
 
 <div class="row-fluid">
 
@@ -17,7 +20,7 @@
       <li class="span2" ng-repeat="team in teams | filter:{ featured: true }">
         <a href="/teams/{{team.slug}}" class="thumbnail text-center">
           <img src="{{team.medium_image_url}}" /><br/>
-          {{ team.name }}
+          {{team.name}}
         </a>
       </li>
     </ul>

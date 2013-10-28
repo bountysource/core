@@ -14,6 +14,7 @@ angular.module('app')
       amount: parseInt($routeParams.amount, 10) || 100,
       anonymous: ($routeParams.anonymous === "true") || false,
       payment_method: $routeParams.payment_method || "google",
+      survey_response: $routeParams.survey_response || "",
       reward_id: parseInt($routeParams.reward_id, 10) || 0
     };
 
@@ -23,6 +24,9 @@ angular.module('app')
       // add the base item number, with just fundraiser id
       $scope.pledge.base_item_number = 'fundraisers/'+response.id;
       $scope.pledge.item_number = $scope.pledge.base_item_number;
+      if ($scope.pledge.reward_id) {
+        $scope.pledge.item_number += "/" + $scope.pledge.reward_id;
+      }
 
       // select reward to have the object cached. handled after this by set_reward(reward)
       $scope.selected_reward = null;

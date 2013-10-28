@@ -4,50 +4,124 @@
   <li><a>{{team.name || 'Loading...'}}</a></li>
 </ul>
 
-<div ng-show="team">
-  <div class="row-fluid">
-    <div class="span3">
-      <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+<div class="row-fluid" ng-show="team">
+  <div class="span3">
+    <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+  </div>
+  <div class="span9" ng-controller="TeamHomeController">
+    <ng-include src="'pages/teams/partials/header.html'"></ng-include>
+    <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
+
+    <div ng-show="funds_added">
+      <alert type="'success'" close="funds_added = null">Successfully added <strong>{{funds_added | dollars}}</strong>
+        to <strong>{{team.name}}'s</strong> balance. Current balance of <strong>{{team.account_balance |
+          dollars}}</strong> is available to spend immediately.
+      </alert>
     </div>
-    <div class="span9" ng-controller="TeamTrackersController">
-      <ng-include src="'pages/teams/partials/header.html'"></ng-include>
-      <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
-      <div ng-show="is_admin">
-        <div class="alert" style="padding: 20px;" ng-hide="team.trackers.length > 0">
-          <h4 style="margin-top: 0;">Show off the open-source projects your team uses by adding them now!</h4>
-          Search for projects that your team uses and add them to your profile.
+    <!-- Not a member, or just a public member. Do nothing but show the projects used -->
+    <div ng-show="!is_member || !(is_admin || is_developer)">
+
+      <!-- If you don't own any projects, no title -->
+      <div ng-show="team.owned_trackers.length <= 0">
+        <team-tracker-thumbnails trackers="team.trackers"></team-tracker-thumbnails>
+      </div>
+
+      <!-- If you own projects, split them apart and add titles -->
+      <div ng-show="team.owned_trackers.length > 0">
+        <div ng-show="team.owned_trackers.length > 0">
+          <h3>{{team.name}}'s Projects</h3>
+          <team-tracker-thumbnails trackers="team.owned_trackers"></team-tracker-thumbnails>
         </div>
 
-        <div class="well">
-          <ng-form class="form-inline" name="search_form" ng-submit="search_projects()">
-            Add an open-source project your company uses:
-            <input
-              name="input"
-              type="text"
-              class="search-query span4"
-              placeholder="Search for projects"
-              ng-model="project_search"
-              typeahead="project.id as project.name for project in doTypeahead($viewValue)"
-              typeahead-editable="false"
-              />
-          </ng-form>
+        <div ng-show="team.unowned_trackers.length > 0">
+          <h3>Projects Used by {{team.name}}</h3>
+          <team-tracker-thumbnails trackers="team.unowned_trackers"></team-tracker-thumbnails>
+        </div>
+      </div>
+    </div>
+
+    <!-- Developer view. Can only add projects and place bounties -->
+    <div class="row-fluid" ng-show="!is_admin && is_developer">
+      <div class="span6">
+        <ng-include src="'pages/teams/partials/post_bounty_box.html'"></ng-include>
+      </div>
+
+      <div class="span3">
+        <div class="well" style="height: 240px;">
+          <div style="min-height: 180px;">
+            <h4>Add Projects</h4>
+            <ul>
+              <li>Highlight your team's own projects.</li>
+              <li>Keep track of the open-source projects your team uses</li>
+            </ul>
+          </div>
+          <div style="text-align: center;">
+            <a ng-href="/teams/{{team.slug}}/projects" class="btn btn-primary">Add Projects</a>
+          </div>
         </div>
       </div>
 
-      <div ng-hide="team.trackers.length > 0 || is_admin">
-        <div class="alert alert-info">{{team.name}} has not added any projects to their profile.</div>
+      <div class="span3">
+        <div class="well" style="height: 240px;">
+          <div style="min-height: 180px;">
+            <h4>Change Settings</h4>
+            <ul>
+              <li>Update team name, logo, and homepage</li>
+              <li>Set a custom Bio for your team</li>
+            </ul>
+          </div>
+          <div style="text-align: center;">
+            <a ng-href="/teams/{{team.slug}}/settings" class="btn btn-primary">Change Settings</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin view. Can do all of the things! -->
+    <div class="row-fluid" ng-show="is_admin">
+      <div class="span6">
+        <ng-include src="'pages/teams/partials/post_bounty_box.html'"></ng-include>
       </div>
 
-      <ul class="thumbnails team-tracker-thumbnails">
-        <li ng-repeat="tracker in team.trackers" class="span2">
-          <a class="thumbnail text-center" ng-href="/trackers/{{tracker.slug}}">
-            <button type="button" ng-show="is_admin" class="close" ng-click="remove_tracker(tracker.id)"><i class="icon-remove"></i></button>
-            <img ng-src="{{tracker.medium_image_url}}"/>
-            <span>{{tracker.name}}</span>
-          </a>
-        </li>
-      </ul>
+      <div class="span3 well" style="height:280px;">
+        <div style="height:75%">
+          <h4>Invite Members</h4>
+          <ul>
+            <li>Add members and send email invites</li>
+            <li>Assign roles to members</li>
+            <li>Show off your team</li>
+          </ul>
+        </div>
+        <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/members/manage" class="btn btn-primary">Invite
+          Members</a></div>
+      </div>
+
+      <div class="span3 well" style="height:280px;"
+           ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
+        <div style="height:75%">
+          <h4>Add Funds</h4>
+          <ul>
+            <li>Create a shared team balance</li>
+            <li>Fund with Paypal or Google Wallet</li>
+            <li> Post bounties & pledge to fundraisers</li>
+          </ul>
+        </div>
+        <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/account" class="btn btn-primary">Add
+          Funds</a></div>
+      </div>
+
+      <div class="span3 well" style="height:280px;" ng-show="team.type == 'Team::Project'">
+        <div style="height:75%">
+          <h4>Install Plugin</h4>
+          <ul>
+            <li>Add/update bounty total in Issue title</li>
+            <li>Add bounty information to the issue body</li>
+            <li>Apply label to all issues with a bounty</li>
+          </ul>
+        </div>
+        <div style="text-align:center"><a ng-href="/tools" class="btn btn-primary">Install Plugin</a></div>
+      </div>
     </div>
   </div>
 </div>

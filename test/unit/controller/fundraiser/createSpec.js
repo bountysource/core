@@ -5,10 +5,10 @@ describe('FundraiserCreateController', function() {
 
   var $httpBackend, $rootScope, createController, $location;
 
-  beforeEach(inject(function($injector, defaultJSON, $http) {
+  beforeEach(inject(function($injector, teamJSON, $http) {
     $location = $injector.get('$location');
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.expect('GET', 'https://staging-api.bountysource.com/people/4/teams?callback=CORS&per_page=250').respond( function() { return [200, "CORS(" + JSON.stringify(defaultJSON) + ")"];});
+    $httpBackend.expect('GET', 'https://staging-api.bountysource.com/people/4/teams?callback=CORS&per_page=250').respond( function() { return [200, "CORS(" + JSON.stringify(teamJSON) + ")"];});
 
     $rootScope = $injector.get('$rootScope');
 

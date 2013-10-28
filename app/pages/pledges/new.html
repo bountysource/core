@@ -61,13 +61,13 @@
 
                 <!-- Team accounts -->
                 <div ng-show="teams.length > 0">
-                  <label ng-repeat="team in teams | orderBy:['-is_spender', '-account_balance']" class="radio">
-                    <input type="radio" ng-model="pledge.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_spender || team.account_balance <= 0" />
+                  <label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="radio">
+                    <input type="radio" ng-model="pledge.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0" />
                     <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
-                    <span ng-class="{ 'muted': (!team.is_spender || team.account_balance <= 0) }">
+                    <span ng-class="{ 'muted': (!team.is_developer || team.account_balance <= 0) }">
                       {{team.name}}
-                      <strong ng-show="team.is_spender">{{ team.account_balance | dollars }}</strong>
-                      <strong ng-hide="team.is_spender">$0</strong>
+                      <strong ng-show="team.is_developer">{{ team.account_balance | dollars }}</strong>
+                      <strong ng-hide="team.is_developer">$0</strong>
                       <span ng-show="team.is_admin && team.account_balance < 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
                     </span>
                   </label>
@@ -110,7 +110,7 @@
           </div>
 
           <div class="span6" ng-show="fundraiser.rewards.length > 0">
-            <div collapse="!selected_reward.fulfillment_details">
+            <div ng-show="selected_reward.fulfillment_details">
               <div class="alert alert-block" ng-show="selected_reward.fulfillment_details">
                 <strong>Reward Survey</strong>
                 <span class="pull-right label label-important">required</span>
@@ -119,7 +119,6 @@
                 <textarea class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required></textarea>
               </div>
             </div>
-
 
             <div class="alert alert-block alert-info">
               <strong ng-show="selected_reward">Selected Reward: ${{ selected_reward.amount | number:0 }}</strong>

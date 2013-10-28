@@ -357,7 +357,7 @@ describe('All the wonderful routes we have', function() {
 
     it('should map routes for new', function() {
       inject(function($route) {
-        expect($route.routes['/teams/new'].controller).toBe('BaseTeamController');
+        expect($route.routes['/teams/new'].controller).toBe('NewTeamController');
         expect($route.routes['/teams/new'].templateUrl).toEqual('pages/teams/new.html');
       });
     });

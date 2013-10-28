@@ -7,7 +7,7 @@ angular.module('api.bountysource',[]).
 
     // set environment
     $rootScope.environment = window.BS_ENV;
-    if ($location.host().match(/localhost|v2\.pagekite/)) {
+    if ($location.host().match(/localhost|v2\.pagekite|.*\.local/)) {
       $rootScope.can_switch_environments = true;
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
@@ -129,12 +129,13 @@ angular.module('api.bountysource',[]).
           res.data.image_url = res.data.image_url || "/images/bountysource-grey.png";
 
           // calculate time left
-          // using Moment.js
-          var now = new Moment();
-          var ends = new Moment(res.data.ends_at);
-          res.data.$days_left = ends.diff(now, "days");
-          res.data.$hours_left = ends.diff(now, "hours");
-          res.data.$minutes_left = ends.diff(now, "minutes");
+          var now = new Date().getTime();
+          var ends = Date.parse(res.data.ends_at);
+          var diff = ends - now;
+          res.data.$days_left = Math.floor(diff / (1000*60*60*24));
+          res.data.$hours_left = Math.floor(diff / (1000*60*60));
+          res.data.$minutes_left = Math.floor(diff / (1000*60));
+          res.data.$seconds_left = Math.round(diff / (1000));
         }
         return res.data;
       });
@@ -225,10 +226,15 @@ angular.module('api.bountysource',[]).
       return this.call("/users/"+id);
     };
 
-    this.person_put = function(data) {
-      var promise = this.call("/user", "PUT", data);
-      promise.then($api.set_current_person);
-      return promise;
+    this.person_update = function(data) {
+      return this.call("/user", "PUT", data);
+    };
+
+    this.notification_unsubscribe = function(type, data) {
+      data.type = type;
+      return this.call("/notifications/unsubscribe", 'POST', data, function(response) {
+        return response.meta.success;
+      });
     };
 
     this.change_password = function(data) {
@@ -270,11 +276,11 @@ angular.module('api.bountysource',[]).
     };
 
     this.tracker_follow = function(id) {
-      return this.call("/follows", "PUT", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "PUT", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_unfollow = function(id) {
-      return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "DELETE", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_issues_get = function(id) {
@@ -500,6 +506,14 @@ angular.module('api.bountysource',[]).
 
     this.trackers_get = function() {
       return this.call("/projects");
+    };
+
+    this.claim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/claim", "POST", {owner_id: owner_id, owner_type: owner_type});
+    };
+
+    this.unclaim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/unclaim", "POST", {owner_id: owner_id, owner_type: owner_type});
     };
 
     this.tracker_plugins_get = function() {
