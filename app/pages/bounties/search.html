@@ -75,9 +75,21 @@
 
    </form>
  </div>
+  <div ng-show="issues_count > 0" class="text-center results-info">
+    <span class="label label-info">{{issues_count | number}}</span> Issues Found
+  </div>
 </div>
 <div class="span9">
-  <div ng-show="featured_bounties"><h1>Featured Bounties</h1></div>
+  <div ng-show="featured_issues" class="text-center">
+    <h3>Featured Bounties</h3>
+    <ul class="inline">
+      <li ng-repeat="issue in featured_issues | limitTo: 5" tooltip="{{issue.title}} - {{issue.bounty_total | dollars }}" tooltip-placement="bottom" class="tracker-box">
+        <a ng-href="{{issue.frontend_path}}">
+          <img class="thumbnail" ng-src="{{issue.tracker.image_url}}" />
+        </a>
+      </li>
+    </ul>
+  </div>
   <div class="text-center">
     <h3>Top 5 Projects by Bounties</h3>
     <ul class="inline">
@@ -90,19 +102,10 @@
   </div>
   <loading-bar ng-show="working">Searching</loading-bar>
   <div ng-show="!working">
-    <div ng-show="issues_count == 0">
-      <span class="text-info"><i>No issues found</i></span>
-    </div>
-    <div ng-show="issues_count > 0 && issues_count <= 50">
-      <hr />
-      <span class="label label-info">{{issues_count | number}}</span> Issues Found
-    </div>
-
+    <hr />
+    <div ng-show="issues_count == 0" class="alert alert-error">No results found.</div>
     <div ng-show="issues_count > 50">
-      <hr />
-      <span class="label label-info">{{issues_count | number}}</span> Issues Found
       <pagination total-items="issues_count" current-page="form_data.page" max-size="maxSize" num-pages="pageCount" items-per-page="perPage" on-select-page="updatePage(page)"></pagination>
-      
     </div>
 
     <table ng-show="issues_count > 0" class="table table-striped table-condensed table-hover">

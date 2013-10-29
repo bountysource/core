@@ -71,6 +71,10 @@ angular.module('app')
     });
 
 
+    $scope.featured_issues = $api.issues_featured({limit: 5}).then(function(response) {
+      return response;
+    });
+
     //grabs all languages. Pushes all languages into languages_selected array
     $scope.languages_selected = [];
 
