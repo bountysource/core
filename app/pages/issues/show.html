@@ -6,10 +6,15 @@
 </ul>
 
 <div class="row-fluid" ng-show="issue">
-  <div class="span9">
+  <div id="title" class="span9">
     <div ng-include="'pages/issues/partials/header.html'"></div>
     <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
-
+  </div>
+  <div id="bounty" class="span3">
+    <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
+    <div ng-include="'pages/issues/partials/claim_info_box.html'"></div>
+  </div>
+  <div id="tabs" class="span9">
     <table class="table table-striped" style="table-layout:fixed">
       <tbody>
         <tr class="no-stripe">
@@ -41,10 +46,5 @@
         </tr>
         </tbody>
     </table>
-  </div>
-
-  <div class="span3">
-    <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
-    <div ng-include="'pages/issues/partials/claim_info_box.html'"></div>
   </div>
 </div>
