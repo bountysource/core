@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('api.bountysource',[]).
-  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer) {
+  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter) {
     var $api = this; // hack to store self reference
     this.access_token_cookie_name = 'v2_access_token';
 
@@ -525,8 +525,6 @@ angular.module('api.bountysource',[]).
       return this.call("/tracker_plugins", "POST", data);
     };
 
-
-
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {
@@ -667,12 +665,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.encodeUriQuery = function(val, pctEncodeSpaces) {
-      return encodeURIComponent(val).
-        replace(/%40/gi, '@').
-        replace(/%3A/gi, ':').
-        replace(/%24/g, '$').
-        replace(/%2C/gi, ',').
-        replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
+      return $filter('encodeUriQuery')(val, pctEncodeSpaces);
     };
 
     // save the previous URL for postauth redirect,
