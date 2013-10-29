@@ -1,10 +1,17 @@
-<div class="row-fluid">
-  <div class="span1">
-    <a ng-href="/trackers/{{issue.tracker.slug}}"><img ng-src="{{issue.tracker.image_url}}" class="thumbnail" /></a>
+<div>
+  <div class="hidden-phone">
+    <div class="row-fluid">
+      <div class="span1">
+        <a ng-href="/trackers/{{issue.tracker.slug}}"><img ng-src="{{issue.tracker.image_url}}" class="thumbnail" /></a>
+      </div>
+      <div class="span11">
+        <h4 style="margin-top: 0;">{{ issue.title || 'Loading...' }}</h4>
+        <issue-status-label issue="issue"></issue-status-label>
+      </div>
+    </div>
   </div>
-  <div class="span11">
-    <h4 style="margin-top: 0;">{{ issue.title || 'Loading...' }}</h4>
-    <issue-status-label issue="issue"></issue-status-label>
-  </div>
+  <div class="visible-phone">
+    <h4 style="margin-top: 0;">{{ issue.title || 'Loading...' }} <issue-status-label issue="issue"></issue-status-label></h4>
+ </div>
+  <br />
 </div>
-<br />
