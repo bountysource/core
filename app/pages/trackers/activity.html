@@ -51,15 +51,37 @@
     <p class="lead">{{tracker.description}}</p>
     <div ng-include="'pages/trackers/partials/nav_tabs.html'"></div>
     <!--<hr />-->
-    <div ng-show="!hasActivities" class="alert alert-info">No activities found :(</div>
+    <div collapse="hasActivities" class="text-center">
+      <p class="lead">Loading activities...</p>
+      <div class="progress progress-striped active">
+        <div class="bar" style="width: 100%;"></div>
+      </div>
+    </div>
 
     <!--Issue filter box-->
-    <table class="table table-condensed table-striped" ng-show="hasActivities">
-      <tr ng-repeat="action in timeline | orderBy:'-created_at'">
-        <td ng-show="action.type == 'bounty'"><strong>{{action.amount | dollars}}</strong> bounty was placed on an issue.</td>
-        <td ng-show="action.type == 'collected'"><strong>{{action.amount | dollars}}</strong> bounty on this <a ng-href="{{action.code_url}}">issue</a> was awarded.</td>
-        <td class="muted">{{ action.created_at | date:'medium' }}</td>
+<!--     <table class="table table-condensed table-striped" ng-show="hasActivities">
+      <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
+        <td>{{bounty.person.display_name}} posted a bounty on <a ng-href="{{bounty.code_url}}">{{bounty.issue.title}}</a></td>
+        <td class="muted">{{ bounty.created_at | date:'medium' }}</td>
       </tr>
+    </table>
+    <hr /> -->
+    <table class="table table-condensed table-striped" ng-show="hasActivities" >
+      <tr ng-repeat="action in timeline | orderBy:'-created_at'">
+        
+        <td ng-show="action.type == 'bounty'">{{action.person.display_name}} posted a bounty on <a ng-href="/issues/{{action.issue.id}}">{{action.issue.title}}</a></td>
+        <td ng-show="action.type == 'bounty'" class="muted">{{ action.created_at | date:'medium' }}</td>
+
+        <td ng-show="action.type == 'submitted'">{{action.person.display_name}} claimed a {{ action.issue.bounty_total | dollars}} bounty on <a ng-href="/issues/{{action.issue.id}}">{{action.issue.title}}</a></td>
+        <td ng-show="action.type == 'submitted'" class="muted">{{ action.created_at | date:'medium' }}</td>
+
+        <td ng-show="action.type == 'collected'">{{action.person.display_name}} received a bounty of {{ action.issue.bounty_total | dollars}} for resolving <a ng-href="/issues/{{action.issue.id}}">{{action.issue.title}}</a></td>
+        <td ng-show="action.type == 'collected'" class="muted">{{ generate_date(action)| date:'medium' }}</td>
+
+        <td ng-show="action.type == 'rejected'">The bounty claim submitted by {{action.person.display_name}} was rejected for <a ng-href="/issues/{{action.issue.id}}">{{action.issue.title}}</a></td>
+        <td ng-show="action.type == 'rejected'" class="muted">{{ generate_date(action) | date:'medium' }}</td>
+      </tr>
+
     </table>
 
   </div>

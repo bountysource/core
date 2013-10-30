@@ -42,6 +42,7 @@ angular.module('app')
     $scope.hasActivities = false;
 
     $scope.timeline = $api.tracker_get_activity($routeParams.id).then(function(activities) {
+
       var key, value, totalClaims, timeline;
       totalClaims = 0;
       timeline = [];
@@ -70,8 +71,27 @@ angular.module('app')
       if (totalClaims > 0) {
         $scope.hasActivities = true;
       }
-      window.activities = activities;
-      window.timeline = timeline;
       return timeline;
     });
+
+    $scope.generate_date = function(claim) {
+      if (!claim.events) {
+        return claim.created_at;
+      }
+      var event_map = {
+        'BountyClaimEvent::Collected': 'collected',
+        'BountyClaimEvent::Rejected': 'rejected',
+        'BountyClaimEvent::BackerDisputed': 'disputed',
+        'BountyClaimEvent::DisputeResolved': 'dispute_resolved'
+      };
+      var type = claim.type;
+      var bounty_events = claim.events;
+      for (var i=0; i < bounty_events.length; i++) {
+        if (event_map[bounty_events[i].type] === type) {
+          return bounty_events[i].created_at;
+        }
+      }
+      return claim.created_at;
+    };
+
   });
