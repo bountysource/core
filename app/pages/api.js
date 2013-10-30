@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('api.bountysource',[]).
-  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer) {
+  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter) {
     var $api = this; // hack to store self reference
     this.access_token_cookie_name = 'v2_access_token';
 
@@ -130,7 +130,7 @@ angular.module('api.bountysource',[]).
 
           // calculate time left
           var now = new Date().getTime();
-          var ends = new Date(res.data.ends_at);
+          var ends = Date.parse(res.data.ends_at);
           var diff = ends - now;
           res.data.$days_left = Math.floor(diff / (1000*60*60*24));
           res.data.$hours_left = Math.floor(diff / (1000*60*60));
@@ -226,10 +226,15 @@ angular.module('api.bountysource',[]).
       return this.call("/users/"+id);
     };
 
-    this.person_put = function(data) {
-      var promise = this.call("/user", "PUT", data);
-      promise.then($api.set_current_person);
-      return promise;
+    this.person_update = function(data) {
+      return this.call("/user", "PUT", data);
+    };
+
+    this.notification_unsubscribe = function(type, data) {
+      data.type = type;
+      return this.call("/notifications/unsubscribe", 'POST', data, function(response) {
+        return response.meta.success;
+      });
     };
 
     this.change_password = function(data) {
@@ -271,11 +276,11 @@ angular.module('api.bountysource',[]).
     };
 
     this.tracker_follow = function(id) {
-      return this.call("/follows", "PUT", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "PUT", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_unfollow = function(id) {
-      return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "DELETE", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_issues_get = function(id) {
@@ -533,8 +538,6 @@ angular.module('api.bountysource',[]).
       return this.call("/tracker_plugins", "POST", data);
     };
 
-
-
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {
@@ -675,12 +678,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.encodeUriQuery = function(val, pctEncodeSpaces) {
-      return encodeURIComponent(val).
-        replace(/%40/gi, '@').
-        replace(/%3A/gi, ':').
-        replace(/%24/g, '$').
-        replace(/%2C/gi, ',').
-        replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
+      return $filter('encodeUriQuery')(val, pctEncodeSpaces);
     };
 
     // save the previous URL for postauth redirect,

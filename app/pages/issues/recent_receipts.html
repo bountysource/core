@@ -26,14 +26,14 @@
             <div class="span3"><strong><h5>Amount:</h5></strong></div>
             <div class="offset1 span8"><h5>{{ bounty.amount | currency}}</h5></div>
           </div>
-          <!--<div class="row-fluid">-->
-            <!--<div class="span3"><strong><h5>Fee:</h5></strong></div>-->
-            <!--<div class="offset1 span8"><h5>{{ calculateFee(bounty) }}</h5></div>-->
-          <!--</div>-->
-            <!--<div class="row-fluid">-->
-            <!--<div class="span3"><strong><h5>Total:</h5></strong></div>-->
-            <!--<div class="offset1 span8"><h5>{{ calculateTotal(bounty) }}</h5></div>-->
-          <!--</div>-->
+          <div class="row-fluid">
+            <div class="span3"><strong><h5>Fee:</h5></strong></div>
+            <div class="offset1 span8"><h5>{{ calculateFee(bounty) }}</h5></div>
+          </div>
+            <div class="row-fluid">
+            <div class="span3"><strong><h5>Total:</h5></strong></div>
+            <div class="offset1 span8"><h5>{{ calculateTotal(bounty) }}</h5></div>
+          </div>
           <div class="row-fluid">
             <div class="span3"><strong><h5>Date:</h5></strong></div>
             <div class="offset1 span8"><h5>{{ bounty.created_at | date: 'longDate' }}</h5></div>
