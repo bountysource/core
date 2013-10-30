@@ -25,13 +25,14 @@ angular.module('app')
 
     $scope.fundraiser.then(function (fundraiser) {
       $api.pledge_activity().then(function (response) {
-        if ($scope.type === 'index') {
-          for (var e = 0; e < response.length; e++) {  //grab all of the users pledges, if any of them have the same ID as this fundraiser, then push to the receipts array
-            if (response[e].fundraiser.id === fundraiser.id) {
-              $scope.receipts.push(response[e]);
-            }
+        //grab all of the users pledges, if any of them have the same ID as this fundraiser, then push to the receipts array
+        for (var e = 0; e < response.length; e++) {
+          if (response[e].fundraiser.id === fundraiser.id) {
+            $scope.receipts.push(response[e]);
           }
+        }
 
+        if ($scope.type === 'index') { //show all of users pledges for a fundraiser
           if ($scope.receipts.length === 1) {
             $scope.pledge = $scope.receipts[0];
             $scope.fundraiser = $scope.receipts[0].fundraiser;
@@ -48,8 +49,8 @@ angular.module('app')
             }
           }
         } else {
-          $scope.pledge = response[0]; //FIX currently gathers data from users most recent receipt, issue agnostic
-          $scope.fundraiser = response[0].fundraiser;
+          $scope.pledge = $scope.receipts[0];
+          $scope.fundraiser = $scope.receipts[0].fundraiser;
         }
 
         var tweet_text = "I just pledged "+$filter('dollars')($scope.pledge.amount)+" to "+$scope.fundraiser.title+"!";
