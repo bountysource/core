@@ -53,6 +53,16 @@ angular.module('app')
           $scope.fundraiser = $scope.receipts[0].fundraiser;
         }
 
+        $scope.highlighted_fundraisers = $api.fundraisers_get().then(function(fundraisers) {
+          var highlighted_fundraisers = [];
+          for (var i = 0; i < fundraisers.length; i++) {
+            if (fundraisers[i].in_progress && fundraisers[i].featured && fundraisers[i].id !== fundraiser.id) {
+              highlighted_fundraisers.push(fundraisers[i]);
+            }
+          }
+          return highlighted_fundraisers;
+        });
+
         var tweet_text = "I just pledged "+$filter('dollars')($scope.pledge.amount)+" to "+$scope.fundraiser.title+"!";
         $scope.tweet_text = encodeURIComponent(tweet_text);
 
