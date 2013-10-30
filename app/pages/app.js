@@ -25,10 +25,7 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     // HACK: angular 1.0 adds this bad header... not needed in 1.1 per https://github.com/angular/angular.js/pull/1454
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-  }).run(function($api, $rootScope, $window) {
-    // ensure google analytics queue exists before everything
-    $window._gaq = [];
-
+  }).run(function($api) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
   });
