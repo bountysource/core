@@ -72,16 +72,15 @@ angular.module('app')
             $scope.related_issues = related_issues;
           });
         }
+        var tweet_text = "I just placed a "+$filter('dollars')($scope.bounty.amount)+" bounty on Bountysource!";
+        $scope.tweet_text = encodeURIComponent(tweet_text);
+        var tweet_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
+        $scope.tweet_url = encodeURIComponent(tweet_url);
+        var google_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
+        $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
+        var facebook_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
+        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
       });
-
-      var tweet_text = "I just placed a "+$filter('dollars')($scope.bounty.amount)+" bounty on Bountysource!";
-      $scope.tweet_text = encodeURIComponent(tweet_text);
-      var tweet_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-      $scope.tweet_url = encodeURIComponent(tweet_url);
-      var google_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-      $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
-      var facebook_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-      $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
     });
 
     $scope.openFacebook = function (url) {
