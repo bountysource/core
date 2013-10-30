@@ -287,6 +287,10 @@ angular.module('api.bountysource',[]).
       return this.call("/projects/"+id+"/issues");
     };
 
+    this.issues_featured = function(data) {
+      return this.call("/issues/featured", "GET", data);
+    };
+
     this.tracker_stats = function(id) {
       return this.call("/stats/trackers/"+id);
     };
@@ -347,6 +351,15 @@ angular.module('api.bountysource',[]).
 
     this.search = function(query) {
       return this.call("/search", "POST", { query: query });
+    };
+
+    this.bounty_search = function(query) {
+      //query will come from the frontend as a JSON object
+      return this.call("/search/bounty_search", "GET", query);
+    };
+
+    this.languages_get = function() {
+      return this.call("/languages");
     };
 
     this.tracker_relations_get = function() {
