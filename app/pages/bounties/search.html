@@ -44,14 +44,14 @@
           <label>Min Amount:</label>
           <div class="input-prepend">
             <span class="add-on">$</span>
-            <input type="number" class="span8" min="0" ng-model="form_data.min" ></input>
+            <input type="number" class="span8" min="0" step="any" ng-model="form_data.min" ></input>
           </div>
         </div>
         <div class="span6">
           <label>Max Amount:</label>
           <div class="input-prepend">
             <span class="add-on">$</span>
-            <input type="number" class="span8" ng-model="form_data.max"></input>
+            <input type="number" class="span8" min="1" step="any" ng-model="form_data.max"></input>
           </div>
         </div>
       </div>
@@ -101,16 +101,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="issue in featured_issues" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+      <tr ng-repeat="issue in featured_issues">
         <td>
-          {{issue.tracker.name}}
+          <a ng-href="/trackers/{{ issue.tracker.slug }}">{{issue.tracker.name}}</a>
         </td>
         <td>
-          <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
+          <a ng-href="/issues/{{issue.slug}}">
             <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
             {{issue.title}}
-            <span ng-show="issue.paid_out" class="label label-info">paid out</span>
-            <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
           </a>
         </td>
 
@@ -157,10 +155,10 @@
         <tbody>
         <tr ng-repeat="issue in search_results" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
           <td>
-            {{issue.tracker.name}}
+            <a ng-href="/trackers/{{ issue.tracker.slug }}" ng-class="{ 'text-success': (issue.bounty_total > 0)}">{{issue.tracker.name}}</a>
           </td>
           <td>
-            <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
+            <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0)}">
               <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
               {{issue.title}}
               <span ng-show="issue.paid_out" class="label label-info">paid out</span>
