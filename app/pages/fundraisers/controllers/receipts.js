@@ -77,7 +77,9 @@ angular.module('app')
             highlighted_fundraisers.push(fundraisers[i]);
           }
         }
-        $scope.highlighted_fundraisers = highlighted_fundraisers;
+        if (highlighted_fundraisers.length > 0) {
+          $scope.highlighted_fundraisers = highlighted_fundraisers;
+        }
       });
     };
 

@@ -83,7 +83,9 @@ angular.module('app')
             related_issues.push(issues[i]);
           }
         }
-        $scope.related_issues = related_issues;
+        if (related_issues.length > 0) {
+          $scope.related_issues = related_issues;
+        }
       });
     };
 
