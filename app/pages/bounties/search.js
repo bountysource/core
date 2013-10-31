@@ -14,7 +14,7 @@ angular.module('app')
     //sets defaults search options
     $scope.form_data = {
       direction: "desc",
-      order: "bounty_total",
+      order: "bounty_total"
     };
 
     //sets drop-down sorting options
@@ -60,7 +60,10 @@ angular.module('app')
     //grabs all languages. Pushes all languages into languages_selected array
     $scope.languages_selected = [];
 
-    $scope.languages = $api.languages_get().then(function(languages) {
+    $scope.languages = [];
+    $api.languages_get().then(function(languages) {
+      $scope.languages = languages;
+
       $scope.$watch('selected_language', function(newValue, oldValue, scope) {
         for (var i = 0; i < languages.length; i++) {
           if (!newValue) {
@@ -73,7 +76,6 @@ angular.module('app')
           }
         }
       });
-      return languages;
     });
 
     //removes languages from selected_languages array
