@@ -25,7 +25,7 @@
             <td>{{ calculateFee(receipt) }}</td>
             <td>{{ calculateTotal(receipt) }}</td>
             <td>{{ receipt.created_at | date:'medium' }}</td>
-            <td><a ng-href="/issues/{{ issue.id }}/receipts?bounty_id={{ receipt.id }}">See full receipt</a></td>
+            <td><a ng-href="/issues/{{ issue.slug }}/receipts?bounty_id={{ receipt.id }}">See full receipt</a></td>
           </tr>
         </tbody>
       </table>

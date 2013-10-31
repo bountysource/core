@@ -23,7 +23,7 @@
                   <tr ng-repeat="receipt in receipts">
                     <td>{{ receipt.amount | currency }}</td>
                     <td>{{ receipt.created_at | date:'medium' }}</td>
-                    <td><a ng-href="/fundraisers/{{ fundraiser.id }}/receipts?pledge_id={{ receipt.id }}">See full receipt</a></td>
+                    <td><a ng-href="/fundraisers/{{ fundraiser.slug }}/receipts?pledge_id={{ receipt.id }}">See full receipt</a></td>
                   </tr>
                 </tbody>
               </table>
