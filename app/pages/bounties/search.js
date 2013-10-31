@@ -22,9 +22,7 @@ angular.module('app')
       { label: "Bounty Total", value: "bounty_total", asc: "High to Low", desc: "Low to High"},
       { label: "Age of Issue", value: "remote_created_at"},
       { label: "Number of Backers", value: "backer_count"},
-      { label: "Date Bounty Created", value: "earliest_bounty"},
-      { label: "Thumbs Up", value: "thumbs_up_count"},
-      { label: "Participant Count", value: "participants_count"}
+      { label: "Date Bounty Created", value: "earliest_bounty"}
     ];
 
     //renders direction toggle button
@@ -47,31 +45,15 @@ angular.module('app')
         asc_string = "Oldest";
         desc_string = "Newest";
         break;
-      case "thumbs_up_count":
-        asc_string = "Least";
-        desc_string = "Most";
-        break;
-      case "participants_count":
-        asc_string = "Least";
-        desc_string = "Most";
-        break;
       default:
         asc_string = "Asc";
         desc_string = "Desc";
         break;
       }
-      return {asc: asc_string, desc: desc_string};
+      return { asc: asc_string, desc: desc_string };
     };
 
-    $scope.top_trackers = $api.project_cards().then(function(trackers) {
-      for (var i=0; i<trackers.length; i++) {
-        trackers[i].bounty_total = parseFloat(trackers[i].bounty_total);
-      }
-      return trackers;
-    });
-
-
-    $scope.featured_issues = $api.issues_featured({limit: 5}).then(function(response) {
+    $scope.featured_issues = $api.issues_featured({ limit: 5 }).then(function(response) {
       return response;
     });
 
@@ -103,8 +85,6 @@ angular.module('app')
         }
       }
     };
-
-
 
     //adds trackers to trackers_selected array
     $scope.trackers_selected = [];
@@ -139,6 +119,8 @@ angular.module('app')
 
     //parses query parameters and submits form with pagination
     $scope.submit_query = function(page) {
+      $scope.search_submitted = true;
+
       if (!page) {
         $scope.working = true;
       }
@@ -162,7 +144,6 @@ angular.module('app')
         $scope.pageCount = Math.ceil($scope.issues_count / $scope.perPage);
         $scope.working = false;
       });
-
     };
 
     //updates pagination. resubmits query with new page number.
@@ -184,12 +165,4 @@ angular.module('app')
 
       $scope.submit_query(page);
     };
-
-
-    // This code will auto-submit the query upon any change for any form_data attribute.
-
-    // $scope.$watch('form_data', function(newValue, oldValue, scope) {
-    //   scope.submit_query();
-    // }, true);
-
   });
