@@ -45,6 +45,7 @@ angular.module('app')
                   $scope.issue = $scope.receipts[i].issue;
                   $scope.fee = parseInt($scope.bounty.amount, 10)*0.10;
                   $scope.total = parseInt($scope.bounty.amount, 10) + parseInt($scope.bounty.amount, 10)*0.10;
+                  $scope.haveRelatedIssues();
                 }
               }
             }
@@ -52,25 +53,7 @@ angular.module('app')
         } else if ($scope.type === 'recent') { //api bounty activity call for recent receipt view
           $scope.bounty = $scope.receipts[0];
           $scope.issue = $scope.receipts[0].issue;
-
-          var related_issues = [];
-          $scope.related_issues = $api.tracker_issues_get($scope.issue.tracker.id).then(function(issues) {
-            for (var i=0; i<issues.length; i++) {
-              issues[i].bounty_total = parseFloat(issues[i].bounty_total);
-
-              // sorting doesn't like nulls.. this is a quick hack
-              issues[i].participants_count = issues[i].participants_count || 0;
-              issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
-              issues[i].comment_count = issues[i].comment_count || 0;
-
-              if (issues[i].id === $scope.issue.id || !issues[i].can_add_bounty || issues[i].paid_out) {
-                // dont add to list if current issue, or if bounties cannot be added, or if issue has been paid out
-              } else {
-                related_issues.push(issues[i]);
-              }
-            }
-            $scope.related_issues = related_issues;
-          });
+          $scope.haveRelatedIssues();
         }
         var tweet_text = "I just placed a "+$filter('dollars')($scope.bounty.amount)+" bounty on Bountysource!";
         $scope.tweet_text = encodeURIComponent(tweet_text);
@@ -82,6 +65,27 @@ angular.module('app')
         $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
       });
     });
+
+    $scope.haveRelatedIssues = function() { //will populate $scope.related_issues, and trigger an ng-show on view
+      $api.tracker_issues_get($scope.issue.tracker.id).then(function(issues) {
+        var related_issues = [];
+        for (var i=0; i<issues.length; i++) {
+          issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+
+          // sorting doesn't like nulls.. this is a quick hack
+          issues[i].participants_count = issues[i].participants_count || 0;
+          issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+          issues[i].comment_count = issues[i].comment_count || 0;
+
+          if (issues[i].id === $scope.issue.id || !issues[i].can_add_bounty || issues[i].paid_out) {
+            // dont add to list if current issue, or if bounties cannot be added, or if issue has been paid out
+          } else {
+            related_issues.push(issues[i]);
+          }
+        }
+        $scope.related_issues = related_issues;
+      });
+    };
 
     $scope.openFacebook = function (url) {
       var left = screen.width/2 - 300;
