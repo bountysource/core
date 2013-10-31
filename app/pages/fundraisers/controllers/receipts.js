@@ -47,21 +47,13 @@ angular.module('app')
                 }
               }
             }
+            $scope.haveHighlightedFundraisers($scope.fundraiser);
           }
         } else {
           $scope.pledge = $scope.receipts[0];
           $scope.fundraiser = $scope.receipts[0].fundraiser;
+          $scope.haveHighlightedFundraisers($scope.fundraiser);
         }
-
-        $scope.highlighted_fundraisers = $api.fundraisers_get().then(function(fundraisers) {
-          var highlighted_fundraisers = [];
-          for (var i = 0; i < fundraisers.length; i++) {
-            if (fundraisers[i].in_progress && fundraisers[i].featured && fundraisers[i].id !== fundraiser.id) {
-              highlighted_fundraisers.push(fundraisers[i]);
-            }
-          }
-          return highlighted_fundraisers;
-        });
 
         var tweet_text = "I just pledged "+$filter('dollars')($scope.pledge.amount)+" to "+$scope.fundraiser.title+"!";
         $scope.tweet_text = encodeURIComponent(tweet_text);
@@ -78,6 +70,21 @@ angular.module('app')
       });
     });
 
+    $scope.haveHighlightedFundraisers = function(current) { //will populate $scope.highlighted_fundraisers, and trigger an ng-show on view
+      if (!current) {
+        throw "needs current object";
+      }
+      $api.fundraisers_get().then(function(fundraisers) {
+        var highlighted_fundraisers = [];
+        for (var i = 0; i < fundraisers.length; i++) {
+          if (fundraisers[i].in_progress && fundraisers[i].featured && fundraisers[i].id !== current.id) {
+            highlighted_fundraisers.push(fundraisers[i]);
+          }
+        }
+        $scope.highlighted_fundraisers = highlighted_fundraisers;
+      });
+    };
+
     $scope.openFacebook = function (url) {
       var left = screen.width/2 - 300;
       var top = screen.height/2 - 300;
@@ -91,16 +98,6 @@ angular.module('app')
       $window.open(url, "Google+", 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600,top='+top+', left='+left);
       return false;
     };
-
-    $api.fundraisers_get().then(function(fundraisers) {
-      var highlighted_fundraisers = [];
-      for (var i = 0; i < fundraisers.length; i++) {
-        if (fundraisers[i].in_progress && fundraisers[i].featured) {
-          highlighted_fundraisers.push(fundraisers[i]);
-        }
-      }
-      $scope.highlighted_fundraisers = highlighted_fundraisers;
-    });
 
     $scope.share_fundraiser_link = $location.absUrl().replace(/\/receipts.*$/, '');
 
