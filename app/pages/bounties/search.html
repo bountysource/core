@@ -25,7 +25,7 @@
       class="search span12"
       placeholder="Search for languages"
       ng-model="selected_language"
-      typeahead="language as language.name for language in languages | filter:($viewValue) | limitTo: 8"
+      typeahead="language as language.name for language in languages | filter:$viewValue | limitTo: 8"
       typeahead-editable="false"
       autocomplete="off"
       />
@@ -44,7 +44,7 @@
           <label>Min Amount:</label>
           <div class="input-prepend">
             <span class="add-on">$</span>
-            <input type="number" class="span8" ng-model="form_data.min"></input>
+            <input type="number" class="span8" min="0" ng-model="form_data.min" ></input>
           </div>
         </div>
         <div class="span6">

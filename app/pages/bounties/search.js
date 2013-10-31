@@ -22,7 +22,7 @@ angular.module('app')
       { label: "Bounty Total", value: "bounty_total", asc: "High to Low", desc: "Low to High"},
       { label: "Age of Issue", value: "remote_created_at"},
       { label: "Number of Backers", value: "backer_count"},
-      { label: "Date Bounty Created", value: "earliest_bounty"}
+      { label: "Date Bounty Posted", value: "earliest_bounty"}
     ];
 
     //renders direction toggle button

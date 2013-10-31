@@ -136,7 +136,7 @@ angular.module('app')
         controller: 'Static'
       })
       .when('/bounties', {
-        redirectTo: "/",
+        redirectTo: "/bounties/search",
         controller: 'Static'
       })
       .when('/create_account', {
