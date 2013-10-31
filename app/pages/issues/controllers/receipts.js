@@ -55,14 +55,14 @@ angular.module('app')
           $scope.issue = $scope.receipts[0].issue;
           $scope.haveRelatedIssues();
         }
+
         var tweet_text = "I just placed a "+$filter('dollars')($scope.bounty.amount)+" bounty on Bountysource!";
         $scope.tweet_text = encodeURIComponent(tweet_text);
-        var tweet_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-        $scope.tweet_url = encodeURIComponent(tweet_url);
-        var google_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-        $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
-        var facebook_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
+
+        var issue_url = $location.absUrl().replace(/\/receipts.*$/, '');
+        $scope.tweet_url = encodeURIComponent(issue_url);
+        $scope.google_url = "https://plus.google.com/share?url=" + encodeURIComponent(issue_url);
+        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(issue_url);
       });
     });
 

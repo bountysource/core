@@ -58,14 +58,10 @@ angular.module('app')
         var tweet_text = "I just pledged "+$filter('dollars')($scope.pledge.amount)+" to "+$scope.fundraiser.title+"!";
         $scope.tweet_text = encodeURIComponent(tweet_text);
 
-        var tweet_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-        $scope.tweet_url = encodeURIComponent(tweet_url);
-
-        var google_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-        $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
-
-        var facebook_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
+        var fundraiser_url = $location.absUrl().replace(/\/receipts.*$/, '');
+        $scope.tweet_url = encodeURIComponent(fundraiser_url);
+        $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(fundraiser_url);
+        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(fundraiser_url);
 
       });
     });
