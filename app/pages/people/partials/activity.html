@@ -16,8 +16,8 @@
       Joined the team <a ng-href="teams/{{action.slug}}">{{action.name}}</a>
     </td>
 
-    <td ng-show="action.type == 'BountyClaim'">
-      Claimed bounty on <a ng-href="issues/{{action.issue.slug}}">{{action.issue.title}}</a>
+    <td ng-show="action.type == 'Collected'">
+      Collected bounty on <a ng-href="issues/{{action.bounty_claim.issue.frontend_path}}">{{action.bounty_claim.issue.title}}</a>
     </td>
 
     <td class="muted">{{ action.sort_date | date:'medium' }}</td>

@@ -257,7 +257,7 @@ angular.module('api.bountysource',[]).
         for (i in activity.pledges) { timeline.push(activity.pledges[i]); }
         for (i in activity.fundraisers) { timeline.push(activity.fundraisers[i]); }
         for (i in activity.teams) { timeline.push(activity.teams[i]); }
-        for (i in activity.bounty_claims) {timeline.push(activity.bounty_claims[i]); }
+        for (i in activity.bounty_claim_events) {timeline.push(activity.bounty_claim_events[i]); }
 
         // add sort date since the col is either added_at (teams) or created_at (everything else)
         for (i in timeline) {
