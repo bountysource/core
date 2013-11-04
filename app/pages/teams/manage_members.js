@@ -79,7 +79,6 @@ angular.module('app')
 
       $scope.add_member = function() {
         $scope.add_member_error.message = "";
-
         var request_data = angular.copy($scope.new_member);
         delete request_data.registered;
 
@@ -103,13 +102,17 @@ angular.module('app')
       };
     });
 
-    $scope.new_member = {
-      email: "",
-      public: true,
-      admin: false,
-      developer: true,
-      registered: false
-    };
+    $scope.reset_member_form = function() {
+      $scope.new_member = {
+        email: "",
+        public: true,
+        admin: false,
+        developer: true,
+        registered: false
+      }
+    }
+
+    $scope.reset_member_form();
 
     $scope.checked_emails = {};
 
@@ -156,6 +159,7 @@ angular.module('app')
             invites.push(new_invite);
           });
         }
+        $scope.reset_member_form();
       };
 
       return invites;
