@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('api.bountysource',[]).
-  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter) {
+  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter, $log) {
     var $api = this; // hack to store self reference
     this.access_token_cookie_name = 'v2_access_token';
 
@@ -95,7 +95,21 @@ angular.module('api.bountysource',[]).
           params.callback = 'CORS';
           var cors_callback = function(response) {
             response = response.replace(/^CORS\(/,'').replace(/\)$/,'');
-            deferred.resolve(callback(JSON.parse(response)));
+
+            var parsed_response = JSON.parse(response);
+
+            if (parsed_response.meta && parsed_response.meta.status == 500) {
+              // obfuscate sensitive data
+              var logged_params = angular.copy(params);
+              if (logged_params.access_token) { logged_params.access_token = "..."; }
+
+              $log.warn("API Error");
+              $log.info(" * Request", method, url);
+              $log.info(" * Request Params", logged_params);
+              $log.info(" * Response:", angular.copy(parsed_response));
+            }
+
+            deferred.resolve(callback(parsed_response));
           };
           // make actual HTTP call with promise
           if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
