@@ -98,7 +98,7 @@ angular.module('api.bountysource',[]).
 
             var parsed_response = JSON.parse(response);
 
-            if (parsed_response.meta && parsed_response.meta.status == 500) {
+            if (parsed_response.meta && parsed_response.meta.status === 500) {
               // obfuscate sensitive data
               var logged_params = angular.copy(params);
               if (logged_params.access_token) { logged_params.access_token = "..."; }
