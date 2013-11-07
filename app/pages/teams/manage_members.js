@@ -99,6 +99,9 @@ angular.module('app')
           // reset form and push onto members.
           $scope.new_member.email = "";
           members.push(new_member);
+          //initialize master and dirty attributes
+          members[members.length - 1].$master = angular.copy(members[i]);
+          members[members.length - 1].$dirty = false;
         });
       };
     });
