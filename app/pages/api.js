@@ -98,15 +98,21 @@ angular.module('api.bountysource',[]).
 
             var parsed_response = JSON.parse(response);
 
-            if (parsed_response.meta && parsed_response.meta.status === 500) {
-              // obfuscate sensitive data
-              var logged_params = angular.copy(params);
-              if (logged_params.access_token) { logged_params.access_token = "..."; }
+            if (parsed_response.meta) {
+              // Handle 500 server errors, log request and response data
+              if (parsed_response.meta.status === 500) {
+                // obfuscate sensitive data
+                var logged_params = angular.copy(params);
+                if (logged_params.access_token) { logged_params.access_token = "..."; }
 
-              $log.warn("API Error");
-              $log.info(" * Request", method, url);
-              $log.info(" * Request Params", logged_params);
-              $log.info(" * Response:", angular.copy(parsed_response));
+                $log.warn("API Error");
+                $log.info(" * Request", method, url);
+                $log.info(" * Request Params", logged_params);
+                $log.info(" * Response:", angular.copy(parsed_response));
+              } else if (parsed_response.meta.status === 301) {
+                $log.info("Content moved, redirecting to ", parsed_response.data.url);
+                $window.location = parsed_response.data.url;
+              }
             }
 
             deferred.resolve(callback(parsed_response));
