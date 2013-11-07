@@ -265,4 +265,11 @@ angular.module('app').
         });
       }
     };
-  }]);
+  }]).directive('abRandomize', function () {
+    return {
+      restrict: "AC",
+      link: function (scope, element, attrs) {
+        console.log(element);
+      }
+    };
+  });

@@ -21,9 +21,11 @@ angular.module('app')
       total: parseInt($routeParams.amount || 0, 10)
     };
 
+    //Logic to show bounty_options template
+
+    $scope.expiration = Math.floor(Math.random()*2);
     $scope.issue.then(function(issue) {
       $scope.bounty.item_number = "issues/"+issue.id;
-
       $scope.create_payment = function() {
         var base_url = $window.location.href.replace(/\/issues.*$/,'');
         var payment_params = angular.copy($scope.bounty);
