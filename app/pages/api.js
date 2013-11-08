@@ -103,7 +103,11 @@ angular.module('api.bountysource',[]).
               if (parsed_response.meta.status === 500) {
                 // obfuscate sensitive data
                 var logged_params = angular.copy(params);
-                if (logged_params.access_token) { logged_params.access_token = "..."; }
+                if (logged_params.access_token) {
+                  logged_params.access_token = "...";
+                  logged_params.password = "...";
+                  logged_params.oauth_token = "...";
+                }
 
                 $log.warn("API Error");
                 $log.info(" * Request", method, url);
