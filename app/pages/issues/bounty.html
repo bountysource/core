@@ -75,15 +75,15 @@
             <div class="controls" ng-switch-when="1" ng-include="'pages/issues/partials/options/expiration_down.html'"></div>
           </span>
         </div>
-
         <div class="control-group">
           <label class="control-label">Upon Expiration:</label>
-          <div ab-randomize>
-            <div class="controls" ng-include="'pages/issues/partials/options/upon_expiration.html'"></div>
-          </div>
+          <div ab-randomize class="controls" ng-include="'pages/issues/partials/options/upon_expiration.html'" onload="broadcastLoad()"></div>
         </div>
 
-        <div></div>
+        <div class="control-group">
+          <label class="control-label">Promotion:</label>
+          <div ab-randomize class="controls" ng-include="'pages/issues/partials/options/promotion.html'" onload="broadcastLoad()"></div>
+        </div>
       </div>
 
       <div collapse="!show_fee">
