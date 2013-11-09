@@ -1,30 +1,22 @@
-<script>$("body").on("click", "a", function() {
-		  	fromTop = 150;
-		  	href = $(this).attr("href");
-		  	if(href && href.indexOf("#") != -1 && href.indexOf("#") != href.length - 1) {
-			    href = href.substring(href.indexOf("#"));
-			    if($(href).length > 0) {
-				    $('html, body').animate({scrollTop: $(href).offset().top - 60}, 100);
-				    return false;
-	    		}
-	  		}
-		}); 
-</script>
+<style>.dl-horizontal > dt {overflow: clip; white-space: normal; width: 250px;}</style>
+<style>@media (min-width: 768px) {.dl-horizontal dd {margin-left: 265px;}}</style>
+<style>.dl-horizontal > hr {margin-top: 5px; margin-bottom: 5px;}</style>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="navbar-brand">Simulating the 60px navbar</div>
+</nav>
 <div class="container">
 	<h1 class="text-center">Frequently Asked Questions</h1>
-	<div class="well panel-group" id="faqpanels">
+	<div class="well">
 		<div id="general" class="panel panel-success">
-			<div class="panel-heading accordion-toggle" data-toggle="collapse" data-parent="#faqpanels" href="#faqgeneral" style="cursor: s-resize;">
-				<h4 style="margin-top: 10px; margin-right: 10px;">General<i class="pull-right glyphicon glyphicon-bookmark"></i></h4>
+			<div class="panel-heading">
+				<h4 style="margin-top: 10px; margin-right: 10px;"><a href="#general">General</a><i class="pull-right glyphicon glyphicon-bookmark"></i></h4>
 			</div>
 			<div id="faqgeneral" class="panel-collapse collapse in">
 			<div class="panel-body">
 				<dl class="dl-horizontal">
-					<span class="spacer"></span>
 					<dt id="general-1"><a title="Click for perma-link" href="#general-1">What is Bountysource?</a></dt>
 					<dd>Bountysource is the funding platform for open-source software. Users can improve the open-source projects they love by creating/collecting bounties and pledging to fundraisers.</dd>
 					<hr>
-					<span class="spacer"></span>
 					<dt id="general-2"><a title="Click for perma-link" href="#general-2">What types of projects are allowed on Bountysource?</a></dt>
 					<dd>Any type of Open-Source or Free Software (as in speech) projects are allowed. Generally speaking, any software
 					  licenses approved by either the Open Source Initiative or the Free Software Foundation are acceptable. For a
@@ -100,10 +92,9 @@
 			</div>
 		</div>
 		<div id="bounties" class="panel panel-success">
-			<div class="panel-heading accordion-toggle" data-toggle="collapse" data-parent="#faqpanels" href="#faqbounties" style="cursor: s-resize;">
-				<h4 style="margin-top: 10px; margin-right: 10px;">Bounties<i class="pull-right glyphicon glyphicon-star"></i></h4>
+			<div class="panel-heading">
+				<h4 style="margin-top: 10px; margin-right: 10px;"><a href="#bounties">Bounties</a><i class="pull-right glyphicon glyphicon-star"></i></h4>
 			</div>
-			<div id="faqbounties" class="panel-collapse collapse in">
 			<div class="panel-body">
 				<dl class="dl-horizontal">
 					<dt id="bounties-1"><a title="Click for perma-link" href="#bounties-1">What is a bounty?</a></dt>
@@ -191,13 +182,11 @@
 					</dd>
 				</dl>
 			</div>
-			</div>
 		</div>
 		<div id="fundraisers" class="panel panel-success">
-			<div class="panel-heading accordion-toggle" data-toggle="collapse" data-parent="#faqpanels" href="#faqfundraisers" style="cursor: s-resize;">
-				<h4 style="margin-top: 10px; margin-right: 10px;">Fundraisers<i class="pull-right glyphicon glyphicon-bullhorn"></i></h4>
+			<div class="panel-heading">
+				<h4 style="margin-top: 10px; margin-right: 10px;"><a href="#fundraisers">Fundraisers</a><i class="pull-right glyphicon glyphicon-bullhorn"></i></h4>
 			</div>
-			<div id="faqfundraisers" class="panel-collapse collapse in">
 			<div class="panel-body">
 				<dl class="dl-horizontal">
 					<dt id="fundraisers-1"><a title="Click for perma-link" href="#fundraisers-1">What is a Fundraiser?</a></dt>
@@ -243,9 +232,30 @@
 					</dd>
 				</dl>
 			</div>
-			</div>
 		</div>
-		<br>
-		Have any further questions? <a href="mailto:support@bountysource.com">Contact us!</a>
+		<br>Have any further questions? <a href="mailto:support@bountysource.com">Contact us!</a>
 	</div>
 </div>
+
+<!--JS sources-->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>$("body").on("click", "a", function() {
+		  	fromTop = 150;
+		  	href = $(this).attr("href");
+		  	if(href && href.indexOf("#") != -1 && href.indexOf("#") != href.length - 1) {
+			    href = href.substring(href.indexOf("#"));
+			    if($(href).length > 0) {
+				    $('html, body').animate({scrollTop: $(href).offset().top - 60}, 300);
+	    		}
+	  		}
+		}); 
+		$(document).ready(function () {
+		  	hash = window.location.hash;
+		  	if(hash && hash.indexOf("#") != -1 && hash.indexOf("#") != hash.length - 1) {
+			    hash = hash.substring(hash.indexOf("#"));
+			    if($(hash).length > 0) {
+				    $('html, body').animate({scrollTop: $(hash).offset().top - 60}, 300);
+	    		}
+	  		}
+		}); 
+</script>
