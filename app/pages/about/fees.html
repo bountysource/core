@@ -1,64 +1,89 @@
-<script>$("body").on("click", "a", function() {
-  	fromTop = 150;
-  	href = $(this).attr("href");
-  	if(href && href.indexOf("#") != -1 && href.indexOf("#") != href.length - 1) {
-	    href = href.substring(href.indexOf("#"));
-	    if($(href).length > 0) {
-		    $('html, body').animate({scrollTop: $(href).offset().top - 60}, 100);
-		    return false;
-		}
-		}
-}); 
-</script>
 <div class="container">
-	<br>
 	<h1 class="text-center">Fees &amp; Payments</h1>
-	<hr>
-	<h2 id="fundraiser"><a title="Click for perma-link" href="#fundraiser">&#9654; Fundraiser Fees</a></h2>
-	<hr>
-	<h3 id="fundraiser-1"><a title="Click for perma-link" href="#fundraiser-1">Bountysource Fee</a></h3>
 	<div class="well">
-		Bountysource collects a 10% non-refundable fee from all pledges.
-		<br>If an all-or-nothing fundraiser's goal is not met, backers are refunded their pledged amount less the Bountysource fee.
+		<div id="payments" class="panel panel-success">
+			<div class="panel-heading">
+				<h4 style="margin-top: 10px; margin-right: 10px;"><a href="#payments">Payments</a><i class="pull-right glyphicon glyphicon-bullhorn"></i></h4>
+			</div>
+			<div class="panel-body">
+				<h2 id="payments-1"><a title="Click for perma-link" href="#payments-1">Payout vs. Cashout</a></h2>
+				<blockquote>
+					<p>A Payout is a transfer of money from Bountysource to a Bountysource account.</p>
+					<p>A Cashout is a withdrawal of your Bountysource balance. All cashouts are processed on a per-request basis. We can send you money via Paypal, Google Wallet, physical check, or bank wire. Bountysource is not responsible for any fees incurred due to the chosen cashout method.<br>To request a cashout of your current Bountysource balance, please <a href="mailto:support@bountysource.com">contact us</a>.</p>
+				</blockquote>
+				<h2 id="payments-2"><a title="Click for perma-link" href="#payments-2">Bounty Payouts</a></h2>
+				<blockquote>
+					<p>Bounties are automatically paid out to a developer's Bountysource account once their solution is accepted. You can request a cashout <a href='mailto:support@bountysource.com'>via email</a>.</p>
+				</blockquote>
+				<h2 id="payments-3"><a title="Click for perma-link" href="#payments-3">Fundraiser Payouts</a></h2>
+				<h4 id="payments-4" style="margin-left:50px;"><a title="Click for perma-link" href="#payments-4">Flexible Funding</a></h4>
+				<blockquote style="margin-left:50px;">
+					<p>Pledges are paid out to a developer's Bountysource account as soon as the fundraiser breaches its funding goal. If the fundraiser raises more than its funding goal, a second payout occurs at the end of the fundraiser.</p>
+					<p>If the funding goal is never met, payout occurs when the fundraiser ends.</p>
+				</blockquote>
+				<h4 id="payments-5" style="margin-left:50px;"><a title="Click for perma-link" href="#payments-5"> All-or-Nothing</a></h4>
+				<blockquote style="margin-left:50px;">
+			        <p>Pledges are paid out to a developer's Bountysource account as soon as the fundraiser breaches its funding goal. If the fundraiser raises more than its funding goal, a second payout occurs at the end of the fundraiser.</p>
+			    </blockquote>
+			</div>
+		</div>
+		<div id="bounties" class="panel panel-success">
+			<div class="panel-heading">
+				<h4 style="margin-top: 10px; margin-right: 10px;"><a href="#bounties">Bounty Fees</a><i class="pull-right glyphicon glyphicon-bullhorn"></i></h4>
+			</div>
+			<div class="panel-body">
+				<h2 id="bounty-1"><a title="Click for perma-link" href="#bounties-1">Claiming a bounty</a></h2>
+				<blockquote>
+					<p>We do not charge anything to claim a bounty. The amount displayed as the bounty total is the exact amount a developer will receive upon payout.</p>
+				</blockquote>
+				<h2 id="bounty-2"><a title="Click for perma-link" href="#bounties-2">Placing a bounty</a></h2>
+				<blockquote>
+					<p>Bountysource charges a 10% non-refundable fee for placing bounties in addition to the specified bounty amount.</p><p>For example, to place a $1,000 bounty on an issue, you will be charged $1,100.</p>
+				</blockquote>
+			</div>
+		</div>
+		<div id="fundraisers" class="panel panel-success">
+			<div class="panel-heading">
+				<h4 style="margin-top: 10px; margin-right: 10px;"><a href="#fundraisers">Fundraiser Fees</a><i class="pull-right glyphicon glyphicon-bullhorn"></i></h4>
+			</div>
+			<div class="panel-body">
+				<h2 id="fundraiser-1"><a title="Click for perma-link" href="#fundraiser-1">Bountysource Fee</a></h2>
+				<blockquote>
+					<p>Bountysource collects a 10% non-refundable fee from all pledges.</p>
+					<p>If an all-or-nothing fundraiser's goal is not met, backers are refunded their pledged amount less the Bountysource fee.</p>
+				</blockquote>
+				<h2 id="fundraiser-2"><a title="Click for perma-link" href="#fundraiser-2">Payment Processing Fees</a></h2>
+				<blockquote>
+					<p>Bountysource does not charge any payment processing fees. Payment processing costs are factored into our 10% fee.</p>
+				</blockquote>
+				<h2 id="fundraiser-3"><a title="Click for perma-link" href="#fundraiser-3">Merchandise Fees</a></h2>
+				<blockquote>
+					<p>If a fundraiser creator chooses to have Bountysource fulfill merchandise, this cost will also be deducted from the funds raised. If you're considering a fundraiser and would like to have Bountysource create t-shirts, stickers, or other merchandise, <a href="mailto:support@bountysource.com">contact us</a>.</p>
+				</blockquote>
+			</div>
+		</div>
+		<br>Have any further questions? <a href="mailto:support@bountysource.com">Contact us!</a>
 	</div>
-	<h3 id="fundraiser-2"><a title="Click for perma-link" href="#fundraiser-2">Payment Processing Fees</a></h3>
-	<div class="well">
-		Bountysource does not charge any payment processing fees. Payment processing costs are factored into our 10% fee.
-	</div>
-	<h3 id="fundraiser-3"><a title="Click for perma-link" href="#fundraiser-3">Merchandise Fees</a></h3>
-	<div class="well">
-		If a fundraiser creator chooses to have Bountysource fulfill merchandise, this cost will also be deducted from the funds raised. If you're considering a fundraiser and would like to have Bountysource create t-shirts, stickers, or other merchandise, <a href="mailto:support@bountysource.com">contact us</a>.
-	</div>
-	<hr>
-    <h2 id="bounty"><a title="Click for perma-link" href="#bounty">&#9654; Bounty Fees</a></h2>
-    <hr>
-    <h3 id="bounty-1"><a title="Click for perma-link" href="#bounty-1">Claiming a bounty</a></h3>
-	<div class="well">
-		We do not charge anything to claim a bounty. The amount displayed as the bounty total is the exact amount a developer will receive upon payout.
-	</div>
-	<h3 id="bounty-2"><a title="Click for perma-link" href="#bounty-2">Placing a bounty</a></h3>
-	<div class="well">
-		Bountysource charges a 10% non-refundable fee for placing bounties in addition to the specified bounty amount.<br>For example, to place a $1,000 bounty on an issue, you will be charged $1,100.
-	</div>
-	<hr>
-    <h2 id="payments"><a title="Click for perma-link" href="#payments">&#9654; Payments</a></h2>
-    <hr>
-    <h3 id="payments-1"><a title="Click for perma-link" href="#payments-1">Payout vs. Cashout</a></h3>
-	<div class="well">
-		A Payout is a transfer of money from Bountysource to a Bountysource account.<br>A Cashout is a withdrawal of your Bountysource balance. All cashouts are processed on a per-request basis. We can send you money via Paypal, Google Wallet, physical check, or bank wire. Bountysource is not responsible for any fees incurred due to the chosen cashout method.<br>To request a cashout of your current Bountysource balance, please <a href="mailto:support@bountysource.com">contact us</a>.
-	</div>
-	<h3 id="payments-2"><a title="Click for perma-link" href="#payments-2">Bounty Payouts</a></h3>
-	<div class="well">
-		Bounties are automatically paid out to a developer's Bountysource account once their solution is accepted. You can request a cashout <a href='mailto:support@bountysource.com'>via email</a>.
-	</div>
-	<h3 id="payments-3"><a title="Click for perma-link" href="#payments-3">Fundraiser Payouts</a></h3>
-	<h4 id="payments-4" style="margin-left:50px;"><a title="Click for perma-link" href="#payments-4">Flexible Funding</a></h4>
-	<div class="well well-sm" style="margin-left:50px;">
-		Pledges are paid out to a developer's Bountysource account as soon as the fundraiser breaches its funding goal. If the fundraiser raises more than its funding goal, a second payout occurs at the end of the fundraiser.<br>If the funding goal is never met, payout occurs when the fundraiser ends.
-	</div>
-	<h4 id="payments-5" style="margin-left:50px;"><a title="Click for perma-link" href="#payments-5"> All-or-Nothing</a></h4>
-	<div class="well well-sm" style="margin-left:50px;">
-        Pledges are paid out to a developer's Bountysource account as soon as the fundraiser breaches its funding goal. If the fundraiser raises more than its funding goal, a second payout occurs at the end of the fundraiser.
-    </div>
-    Have any further questions? Take a look at our <a href="faq.html">FaQ</a> or <a href="mailto:support@bountysource.com">Contact us!</a>
 </div>
+<!--JS sources-->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>$("body").on("click", "a", function() {
+		  	fromTop = 150;
+		  	href = $(this).attr("href");
+		  	if(href && href.indexOf("#") != -1 && href.indexOf("#") != href.length - 1) {
+			    href = href.substring(href.indexOf("#"));
+			    if($(href).length > 0) {
+				    $('html, body').animate({scrollTop: $(href).offset().top - 60}, 300);
+	    		}
+	  		}
+		}); 
+		$(document).ready(function () {
+		  	hash = window.location.hash;
+		  	if(hash && hash.indexOf("#") != -1 && hash.indexOf("#") != hash.length - 1) {
+			    hash = hash.substring(hash.indexOf("#"));
+			    if($(hash).length > 0) {
+				    $('html, body').animate({scrollTop: $(hash).offset().top - 60}, 300);
+	    		}
+	  		}
+		}); 
+</script>
