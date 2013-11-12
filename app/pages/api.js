@@ -562,6 +562,24 @@ angular.module('api.bountysource',[]).
       return this.call("/tracker_plugins", "POST", data);
     };
 
+    this.start_developer_bid = function(issue_id) {
+      var data = {};
+      data.issue_id = issue_id;
+      return this.call("/developer_bid_events/start_work", "POST", data);
+    }
+
+    this.stop_developer_bid = function(issue_id) {
+      var data = {};
+      data.issue_id = issue_id;
+      return this.call("/developer_bid_events/stop_work", "POST", data);
+    }
+
+    this.continue_developer_bid = function(issue_id) {
+      var data = {};
+      data.issue_id = issue_id;
+      return this.call("/developer_bid_events/complete_work", "POST", data);
+    }
+
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {

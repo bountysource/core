@@ -46,5 +46,21 @@ angular.module('app')
 
       return issue;
     });
+  
+    $scope.developer_bid = {
+      type: 'info',
+      show: true,
+      state: 'available'
+    }
+
+    $scope.developer_bid = $api.get_bids($routeParams.id).then(function(bid) {
+
+      // needs status of developer_bid, not trigger eventsesses
+      // $scope.start_developer_bid = $api.start_developer_bid(issue.id);
+      // $scope.continue_developer_bid = $api.continue_developer_bid(issue.id);
+      // $scope.stop_developer_bid = $api.stop_developer_bid(issue.id);
+
+      // backend should provide bid.type value (e.g., "idle", "stopped", "working"), "working" is either the started working or continued working state
+    });
   });
 
