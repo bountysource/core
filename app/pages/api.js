@@ -563,21 +563,23 @@ angular.module('api.bountysource',[]).
     };
 
     this.start_developer_bid = function(issue_id) {
-      var data = {};
-      data.issue_id = issue_id;
-      return this.call("/developer_bid_events/start_work", "POST", data);
+      return this.call("/developer_bid_events/start_work", "POST", {issue_id: issue_id});
     }
 
     this.stop_developer_bid = function(issue_id) {
-      var data = {};
-      data.issue_id = issue_id;
-      return this.call("/developer_bid_events/stop_work", "POST", data);
+      return this.call("/developer_bid_events/stop_work", "POST", {issue_id: issue_id});
     }
 
     this.continue_developer_bid = function(issue_id) {
-      var data = {};
-      data.issue_id = issue_id;
-      return this.call("/developer_bid_events/complete_work", "POST", data);
+      return this.call("/developer_bid_events/continue_work", "POST", {issue_id: issue_id});
+    }
+
+    this.complete_developer_bid = function(issue_id) {
+      return this.call("/developer_bid_events/complete_work", "POST", {issue_id: issue_id});
+    }
+
+    this.developer_bid_status = function(issue_id) {
+      return this.call("/developer_bid_events/status/"+issue_id, "GET");
     }
 
     // these should probably go in an "AuthenticationController" or something more angular

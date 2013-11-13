@@ -1,0 +1,27 @@
+<div ng-switch="developer_bid.type" class="well">
+  <div ng-switch-when="DeveloperBidEvent::StartedWork">
+    <p>Work has started</p>
+    <button ng-click="stop_developer_bid()" class="btn btn-info btn-block">Stop Work</button>
+    <button ng-click="complete_developer_bid()" class="btn btn-info btn-block">Mark Completed</button>
+  </div>
+  <div ng-switch-when="DeveloperBidEvent::Idle">
+    <p>You've been marked as idle on this issue</p>
+    <button ng-click="continue_developer_bid()" class="btn btn-info btn-block">Continue Work</button>
+  </div>
+  <div ng-switch-when="DeveloperBidEvent::ContinuedWork">
+    <p>You're continuing to work on this issue</p>
+    <button ng-click="stop_developer_bid()" class="btn btn-info btn-block">Stop Work</button>
+    <button ng-click="complete_developer_bid()" class="btn btn-info btn-block">Mark Completed</button>
+  </div>
+  <div ng-switch-when="DeveloperBidEvent::StoppedWork">
+    <p>You've stopped this work</p>
+    <button ng-click="continue_developer_bid()" class="btn btn-info btn-block">Restart Work</button>
+  </div>
+  <div ng-switch-when="DeveloperBidEvent::CompletedWork">
+    <p>You've completed this work</p>
+  </div>
+  <div ng-switch-default>
+    <p>Let backer's know that you're working on this issue</p>
+    <button ng-click="start_developer_bid()" class="btn btn-info btn-block">Start Work</button>
+  </div>
+</div>
