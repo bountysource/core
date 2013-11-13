@@ -560,6 +560,18 @@ angular.module('api.bountysource',[]).
       return this.call("/tracker_plugins", "POST", data);
     };
 
+    this.job_finished = function(id) {
+      var deferred = $q.defer();
+      this.call("/jobs/"+id+"/poll", function(response) {
+        if (response.meta.status === 304) {
+          deferred.resolve(false);
+        } else {
+          deferred.resolve(true);
+        }
+      });
+      return deferred.promise;
+    };
+
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {
