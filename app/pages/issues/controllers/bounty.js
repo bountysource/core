@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('CreateBountyController', function ($scope, $routeParams, $window, $location, $payment, $api, $filter) {
+  .controller('CreateBountyController', function ($scope, $rootScope, $routeParams, $window, $location, $payment, $api, $filter) {
     $scope.bounty = {
       amount: parseInt($routeParams.amount || 0, 10),
       anonymous: ($routeParams.anonymous === "true") || false,
@@ -21,13 +21,21 @@ angular.module('app')
       total: parseInt($routeParams.amount || 0, 10)
     };
 
+    //Logic to show bounty_options template
+
+    //created a custom event. Multiple ng includes made it hard to pin point the event
+    $scope.broadcastLoad = function () {
+      $rootScope.$emit("$load_expiration_options");
+    };
+
+    //randomly includes partial
+    $scope.expiration = Math.floor(Math.random()*2);
+
     $scope.issue.then(function(issue) {
       $scope.bounty.item_number = "issues/"+issue.id;
-
       $scope.create_payment = function() {
         var base_url = $window.location.href.replace(/\/issues.*$/,'');
         var payment_params = angular.copy($scope.bounty);
-
         delete payment_params.fee;
         payment_params.success_url = base_url + "/issues/"+issue.id+"/receipts/recent";
         payment_params.cancel_url = $window.location.href;

@@ -67,6 +67,37 @@
         </div>
       </div>
 
+      <div>
+        <div class="control-group">
+          <label class="control-label">
+            <div>Bounty Expiration:</div>
+            <div><small class="muted"><em>Optional</em></small></div>
+          </label>
+          <span ng-switch="expiration">
+            <div class="controls" ng-switch-when="0" ng-include="'pages/issues/partials/options/expiration_up.html'"></div>
+            <div class="controls" ng-switch-when="1" ng-include="'pages/issues/partials/options/expiration_down.html'"></div>
+          </span>
+        </div>
+
+        <div collapse="!bounty.bounty_expiration || bounty.bounty_expiration == 'never'">
+          <div class="control-group">
+            <div class="controls">
+              <h5>When the bounty expires...</h5>
+              <div ab-randomize ng-include="'pages/issues/partials/options/upon_expiration.html'" onload="broadcastLoad()"></div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="control-group">
+          <label class="control-label">
+            <div>Promotion:</div>
+            <div><small class="muted"><em>Optional</em></small></div>
+          </label>
+          <div ab-randomize class="controls" ng-include="'pages/issues/partials/options/promotion.html'" onload="broadcastLoad()"></div>
+        </div>
+      </div>
+
       <div collapse="!show_fee">
         <div class="control-group">
           <label class="control-label">Bountysource Fee:</label>
