@@ -37,7 +37,7 @@
                   <h1 class="text-center">Thank you for your pledge!</h1>
                   <h2 class="text-center" style="margin-bottom:0px;">Spread the word!</h2>
                   <div class="text-center input-prepend">
-                    <span class="add-on" data-toggle="tooltip" data-title="copy to clipboard" data-clipboard-target="bounty-share-url" href="#"><i class="icon-share"></i></span>
+                    <span id="copy" class="add-on" data-toggle="tooltip" data-title="copy to clipboard" data-clipboard-target="bounty-share-url" href="#"><i class="icon-share"></i></span>
                     <input id="bounty-share-url" type="url" select-on-click readonly value="{{share_fundraiser_link}}" />
                   </div>
                   <div ng-include="'pages/pledges/partials/share.html'"></div>
