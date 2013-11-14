@@ -133,7 +133,7 @@ describe('IssueShow', function() {
                                              medium_image_url : 'https://cloudinary-a.akamaihd.net/bountysource/image/upload/d_noaoqqwxegvmulwus0un.png,c_pad,w_200,h_200/k8y1g92ktgeam2ad8fop.jpg',
                                              large_image_url : 'https://cloudinary-a.akamaihd.net/bountysource/image/upload/d_noaoqqwxegvmulwus0un.png,c_pad,w_400,h_400/k8y1g92ktgeam2ad8fop.jpg',
                                              created_at : '2013-08-29T01:12:37Z', featured : false });
-    expect($rootScope.show_fee).toBeTruthy();
+    expect($rootScope.show_fee).toBeFalsy();
   });
 
 //  TODO Undisable/change
@@ -183,7 +183,7 @@ describe('IssueShow', function() {
     $httpBackend.flush();
 
     expect($rootScope.has_fee).toBeFalsy();
-    expect($rootScope.show_fee).toBeTruthy();
+    expect($rootScope.show_fee).toBeFalsy();
   });
 
   it('should watch has_fee and add the fee according accordingly', function() {
