@@ -19,8 +19,18 @@ angular.module('app')
     $scope.pay_in = {
       amount: 0,
       item_number: "",
-      payment_method: "google"
+      payment_method: "google",
+
+      // only used to alter the displayed amount,
+      // not actually sent in the payment process request.
+      fee: 0,
+      total: 0
     };
+
+    $scope.$watch('pay_in.amount', function() {
+      $scope.pay_in.fee = ($scope.pay_in.amount || 0) * 0.10;
+      $scope.pay_in.total = ($scope.pay_in.amount||0) + $scope.pay_in.fee;
+    });
 
     $scope.team.then(function(team) {
       $scope.pay_in.item_number = "teams/"+team.id;

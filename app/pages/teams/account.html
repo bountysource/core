@@ -56,6 +56,20 @@
             </div>
 
             <div class="control-group">
+              <label class="control-label">Bountysource Fee</label>
+              <div class="controls">
+                <div style="line-height: 30px;"><b>{{pay_in.fee | currency}}</b></div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">Total</label>
+              <div class="controls">
+                <div style="line-height: 30px;"><strong>{{pay_in.total | currency}}</strong></div>
+              </div>
+            </div>
+
+            <div class="control-group">
               <div class="controls">
                 <button type="submit" class="btn btn-primary" ng-disabled="!pay_in.amount || form_data.amount.$invalid">Add Funds</button>
               </div>
