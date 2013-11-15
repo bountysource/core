@@ -62,7 +62,9 @@ angular.module('app')
 
     $scope.languages = [];
     $api.languages_get().then(function(languages) {
-      $scope.languages = languages;
+      languages.sort(function(a,b) {
+        return (a.weight > b.weight ? -1 : (a.weight == b.weight ? 0 : 1));
+      });
 
       $scope.$watch('selected_language', function(newValue, oldValue, scope) {
         for (var i = 0; i < languages.length; i++) {
@@ -76,6 +78,9 @@ angular.module('app')
           }
         }
       });
+
+      $scope.languages = angular.copy(languages);
+      return $scope.languages;
     });
 
     //removes languages from selected_languages array
