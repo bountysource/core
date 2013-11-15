@@ -25,7 +25,7 @@
             <!--<td>{{ calculateFee(receipt) }}</td>-->
             <!--<td>{{ calculateTotal(receipt) }}</td>-->
             <td>{{ receipt.created_at | date:'medium' }}</td>
-            <td><a ng-href="/issues/{{ issue.id }}/receipts?bounty_id={{ receipt.id }}">See full receipt</a></td>
+            <td><a ng-href="/issues/{{ issue.slug }}/receipts?bounty_id={{ receipt.id }}">See full receipt</a></td>
           </tr>
         </tbody>
       </table>
@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-      <div ng-show="type == 'recent'" class="row-fluid">
+      <div ng-show="related_issues" class="row-fluid">
         <div class="span9 well issues-box">
           <h4>You may also be interested in backing these issues from {{issue.tracker.name}}</h4>
           <table class="table table-condensed table-striped" ng-show="(related_issues | filter:issue_filter).length > 0">

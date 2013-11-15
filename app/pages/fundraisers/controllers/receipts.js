@@ -25,13 +25,14 @@ angular.module('app')
 
     $scope.fundraiser.then(function (fundraiser) {
       $api.pledge_activity().then(function (response) {
-        if ($scope.type === 'index') {
-          for (var e = 0; e < response.length; e++) {  //grab all of the users pledges, if any of them have the same ID as this fundraiser, then push to the receipts array
-            if (response[e].fundraiser.id === fundraiser.id) {
-              $scope.receipts.push(response[e]);
-            }
+        //grab all of the users pledges, if any of them have the same ID as this fundraiser, then push to the receipts array
+        for (var e = 0; e < response.length; e++) {
+          if (response[e].fundraiser.id === fundraiser.id) {
+            $scope.receipts.push(response[e]);
           }
+        }
 
+        if ($scope.type === 'index') { //show all of users pledges for a fundraiser
           if ($scope.receipts.length === 1) {
             $scope.pledge = $scope.receipts[0];
             $scope.fundraiser = $scope.receipts[0].fundraiser;
@@ -46,26 +47,41 @@ angular.module('app')
                 }
               }
             }
+            $scope.haveHighlightedFundraisers($scope.fundraiser);
           }
         } else {
-          $scope.pledge = response[0]; //FIX currently gathers data from users most recent receipt, issue agnostic
-          $scope.fundraiser = response[0].fundraiser;
+          $scope.pledge = $scope.receipts[0];
+          $scope.fundraiser = $scope.receipts[0].fundraiser;
+          $scope.haveHighlightedFundraisers($scope.fundraiser);
         }
 
         var tweet_text = "I just pledged "+$filter('dollars')($scope.pledge.amount)+" to "+$scope.fundraiser.title+"!";
         $scope.tweet_text = encodeURIComponent(tweet_text);
 
-        var tweet_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-        $scope.tweet_url = encodeURIComponent(tweet_url);
-
-        var google_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-        $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
-
-        var facebook_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
+        var fundraiser_url = $location.absUrl().replace(/\/receipts.*$/, '');
+        $scope.tweet_url = encodeURIComponent(fundraiser_url);
+        $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(fundraiser_url);
+        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(fundraiser_url);
 
       });
     });
+
+    $scope.haveHighlightedFundraisers = function(current) { //will populate $scope.highlighted_fundraisers, and trigger an ng-show on view
+      if (!current) {
+        throw "needs current object";
+      }
+      $api.fundraisers_get().then(function(fundraisers) {
+        var highlighted_fundraisers = [];
+        for (var i = 0; i < fundraisers.length; i++) {
+          if (fundraisers[i].in_progress && fundraisers[i].featured && fundraisers[i].id !== current.id) {
+            highlighted_fundraisers.push(fundraisers[i]);
+          }
+        }
+        if (highlighted_fundraisers.length > 0) {
+          $scope.highlighted_fundraisers = highlighted_fundraisers;
+        }
+      });
+    };
 
     $scope.openFacebook = function (url) {
       var left = screen.width/2 - 300;
@@ -80,16 +96,6 @@ angular.module('app')
       $window.open(url, "Google+", 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600,top='+top+', left='+left);
       return false;
     };
-
-    $api.fundraisers_get().then(function(fundraisers) {
-      var highlighted_fundraisers = [];
-      for (var i = 0; i < fundraisers.length; i++) {
-        if (fundraisers[i].in_progress && fundraisers[i].featured) {
-          highlighted_fundraisers.push(fundraisers[i]);
-        }
-      }
-      $scope.highlighted_fundraisers = highlighted_fundraisers;
-    });
 
     $scope.share_fundraiser_link = $location.absUrl().replace(/\/receipts.*$/, '');
 

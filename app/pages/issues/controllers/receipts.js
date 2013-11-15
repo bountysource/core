@@ -24,14 +24,13 @@ angular.module('app')
     $scope.issue = $api.issue_get($routeParams.id);
 
     $scope.issue.then(function (issue) {
-      if ($scope.type === 'index') {
-        $api.bounty_activity().then(function (response) {
-          for (var e = 0; e < response.length; e++) {  //grab all of the users pledges, if any of them have the same ID as this issue, then push to the receipts array
-            if (response[e].issue.id === issue.id) {
-              $scope.receipts.push(response[e]);
-            }
+      $api.bounty_activity().then(function (response) {
+        for (var e = 0; e < response.length; e++) {  //grab all of the users pledges, if any of them have the same ID as this issue, then push to the receipts array
+          if (response[e].issue.id === issue.id) {
+            $scope.receipts.push(response[e]);
           }
-
+        }
+        if ($scope.type === 'index') {
           if ($scope.receipts.length === 1) {
             $scope.bounty = $scope.receipts[0];
             $scope.fee = parseInt($scope.receipts[0].amount, 10)*0.10;
@@ -46,46 +45,49 @@ angular.module('app')
                   $scope.issue = $scope.receipts[i].issue;
                   $scope.fee = parseInt($scope.bounty.amount, 10)*0.10;
                   $scope.total = parseInt($scope.bounty.amount, 10) + parseInt($scope.bounty.amount, 10)*0.10;
+                  $scope.haveRelatedIssues();
                 }
               }
             }
           }
-        });
-      } else if ($scope.type === 'recent') { //api bounty activity call for recent receipt view
-        $api.bounty_activity().then(function (response) {
-          $scope.bounty = response[0]; //FIX currently gathers data from users most recent receipt, issue agnostic
-          $scope.issue = response[0].issue;
+        } else if ($scope.type === 'recent') { //api bounty activity call for recent receipt view
+          $scope.bounty = $scope.receipts[0];
+          $scope.issue = $scope.receipts[0].issue;
+          $scope.haveRelatedIssues();
+        }
 
-          var related_issues = [];
-          $scope.related_issues = $api.tracker_issues_get($scope.issue.tracker.id).then(function(issues) {
-            for (var i=0; i<issues.length; i++) {
-              issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+        var tweet_text = "I just placed a "+$filter('dollars')($scope.bounty.amount)+" bounty on Bountysource!";
+        $scope.tweet_text = encodeURIComponent(tweet_text);
 
-              // sorting doesn't like nulls.. this is a quick hack
-              issues[i].participants_count = issues[i].participants_count || 0;
-              issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
-              issues[i].comment_count = issues[i].comment_count || 0;
-
-              if (issues[i].id === $scope.issue.id || !issues[i].can_add_bounty || issues[i].paid_out) {
-                // dont add to list if current issue, or if bounties cannot be added, or if issue has been paid out
-              } else {
-                related_issues.push(issues[i]);
-              }
-            }
-            $scope.related_issues = related_issues;
-          });
-        });
-      }
-
-      var tweet_text = "I just placed a "+$filter('dollars')($scope.bounty.amount)+" bounty on Bountysource!";
-      $scope.tweet_text = encodeURIComponent(tweet_text);
-      var tweet_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-      $scope.tweet_url = encodeURIComponent(tweet_url);
-      var google_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-      $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
-      var facebook_url = "https://www.bountysource.com/issues/"+$scope.issue.id;
-      $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
+        var issue_url = $location.absUrl().replace(/\/receipts.*$/, '');
+        $scope.tweet_url = encodeURIComponent(issue_url);
+        $scope.google_url = "https://plus.google.com/share?url=" + encodeURIComponent(issue_url);
+        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(issue_url);
+      });
     });
+
+    $scope.haveRelatedIssues = function() { //will populate $scope.related_issues, and trigger an ng-show on view
+      $api.tracker_issues_get($scope.issue.tracker.id).then(function(issues) {
+        var related_issues = [];
+        for (var i=0; i<issues.length; i++) {
+          issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+
+          // sorting doesn't like nulls.. this is a quick hack
+          issues[i].participants_count = issues[i].participants_count || 0;
+          issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+          issues[i].comment_count = issues[i].comment_count || 0;
+
+          if (issues[i].id === $scope.issue.id || !issues[i].can_add_bounty || issues[i].paid_out) {
+            // dont add to list if current issue, or if bounties cannot be added, or if issue has been paid out
+          } else {
+            related_issues.push(issues[i]);
+          }
+        }
+        if (related_issues.length > 0) {
+          $scope.related_issues = related_issues;
+        }
+      });
+    };
 
     $scope.openFacebook = function (url) {
       var left = screen.width/2 - 300;
