@@ -1,6 +1,6 @@
 <!-- If the issue is still open, and not generic, then show info about claims -->
-<div class="well text-center" ng-show="issue.can_add_bounty && !issue.generic && issue.bounty_total > 0">
-  <h3 style="margin-top: 0;">Claim Bounty</h3>
+<div class="text-center" ng-show="issue.can_add_bounty && !issue.generic && issue.bounty_total > 0">
+  <h4>Claim the bounty</h4>
   <!--<p>When the issue is closed, the bounty can be claimed.</p>-->
   <p>You can only claim this bounty once the issue has been closed.</p>
   <p>Please work with the development team on <a ng-href="{{issue.url}}" target="_blank">the original issue tracker</a> to get it to the closed state.</p>

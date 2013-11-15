@@ -563,24 +563,43 @@ angular.module('api.bountysource',[]).
     };
 
     this.start_developer_bid = function(issue_id) {
-      return this.call("/developer_bid_events/start_work", "POST", {issue_id: issue_id});
-    }
+      return this.call("/developer_bid_events/start_work", "POST", {issue_id: issue_id}, function(response) {
+        $api.require_signin();
+        return response.data;
+      });
+    };
 
     this.stop_developer_bid = function(issue_id) {
       return this.call("/developer_bid_events/stop_work", "POST", {issue_id: issue_id});
-    }
+    };
 
     this.continue_developer_bid = function(issue_id) {
       return this.call("/developer_bid_events/continue_work", "POST", {issue_id: issue_id});
-    }
+    };
 
     this.complete_developer_bid = function(issue_id) {
       return this.call("/developer_bid_events/complete_work", "POST", {issue_id: issue_id});
-    }
+    };
 
     this.developer_bid_status = function(issue_id) {
       return this.call("/developer_bid_events/status/"+issue_id, "GET");
-    }
+    };
+
+    this.create_developer_goal = function(data) {
+      return this.call("/issues/"+issue_id+"/developer_goal", "POST", data);
+    };
+
+    this.update_developer_goal = function(data) {
+      return this.call("/issues/"+issue_id+"/developer_goal", "PUT", data);
+    };
+
+    this.get_developer_goal = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/developer_goal", "GET");
+    };
+
+    this.get_issue_goals = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/developer_goals", "GET");
+    };
 
     // these should probably go in an "AuthenticationController" or something more angular
 

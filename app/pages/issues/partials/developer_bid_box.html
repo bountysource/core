@@ -1,27 +1,38 @@
-<div ng-switch="developer_bid.type" class="well">
+<div ng-show="issue.can_add_bounty" ng-switch="developer_bid.type">
   <div ng-switch-when="DeveloperBidEvent::StartedWork">
-    <p>Work has started</p>
-    <button ng-click="stop_developer_bid()" class="btn btn-info btn-block">Stop Work</button>
-    <button ng-click="complete_developer_bid()" class="btn btn-info btn-block">Mark Completed</button>
+    <h5 class="text-center">Work has started</h5>
+    <button ng-click="stop_developer_bid()" class="btn btn-primary btn-block">Stop Work</button>
+    <!-- <button ng-click="complete_developer_bid()" class="btn btn-primary btn-block">Mark Completed</button> -->
+    <p class="small">Last updated at: {{developer_bid.created_at | date:'medium'}}</p>
   </div>
   <div ng-switch-when="DeveloperBidEvent::Idle">
-    <p>You've been marked as idle on this issue</p>
-    <button ng-click="continue_developer_bid()" class="btn btn-info btn-block">Continue Work</button>
+    <h5 class="text-center">You've been marked as idle</h5>
+    <button ng-click="continue_developer_bid()" class="btn btn-primary btn-block">Continue Work</button>
+    <p class="small">Last updated at: {{developer_bid.created_at | date:'medium'}}</p>
   </div>
   <div ng-switch-when="DeveloperBidEvent::ContinuedWork">
-    <p>You're continuing to work on this issue</p>
-    <button ng-click="stop_developer_bid()" class="btn btn-info btn-block">Stop Work</button>
-    <button ng-click="complete_developer_bid()" class="btn btn-info btn-block">Mark Completed</button>
+    <h5 class="text-center">You're working on this issue</h5>
+    <button ng-click="stop_developer_bid()" class="btn btn-primary btn-block">Stop Work</button>
+    <!-- <button ng-click="complete_developer_bid()" class="btn btn-primary btn-block">Mark Completed</button> -->
+    <p class="small">Last updated at: {{developer_bid.created_at | date:'medium'}}</p>
   </div>
   <div ng-switch-when="DeveloperBidEvent::StoppedWork">
-    <p>You've stopped this work</p>
-    <button ng-click="continue_developer_bid()" class="btn btn-info btn-block">Restart Work</button>
+    <h5 class="text-center">You've stopped this work</h5>
+    <button ng-click="continue_developer_bid()" class="btn btn-primary btn-block">Restart Work</button>
+    <p class="small">Last updated at: {{developer_bid.created_at | date:'medium'}}</p>
   </div>
   <div ng-switch-when="DeveloperBidEvent::CompletedWork">
-    <p>You've completed this work</p>
+    <h5 class="text-center">You've completed this work</h5>
   </div>
   <div ng-switch-default>
-    <p>Let backer's know that you're working on this issue</p>
-    <button ng-click="start_developer_bid()" class="btn btn-info btn-block">Start Work</button>
+    <h4 class="text-center">Earn the bounty!</h4>
+    <p>Are you working to solve this issue? Let the backers know.</p>
+    <button ng-click="start_developer_bid()" class="btn btn-primary btn-block">Start Work</button>
   </div>
 </div>
+<!-- <div ng-show="developer_bid && !issue.can_add_bounty">
+  <div>
+    <h5 class="text-center">Your work status: {{developer_bid.type}}</p>
+  </div>
+</div> -->
+
