@@ -63,7 +63,7 @@ angular.module('app')
     $scope.languages = [];
     $api.languages_get().then(function(languages) {
       languages.sort(function(a,b) {
-        return (a.weight > b.weight ? -1 : (a.weight == b.weight ? 0 : 1));
+        return (a.weight > b.weight ? -1 : (a.weight === b.weight ? 0 : 1));
       });
 
       $scope.$watch('selected_language', function(newValue, oldValue, scope) {
