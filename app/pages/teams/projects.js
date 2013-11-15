@@ -18,12 +18,10 @@ angular.module('app')
       $pageTitle.set(team.name, 'Teams');
 
       $scope.doTypeahead = function ($viewValue, type) {
-        // return $api.tracker_typeahead($viewValue);
-        return $api.tracker_typeahead($viewValue).then(function (response) {
-
+        return $api.tracker_typeahead($viewValue).then(function(results) {
           $scope.$watch(type, function (newValue, oldValue, scope) {
-            for (var i = 0; i < response.length; i++) {
-              if (newValue === response[i].id) {
+            for (var i = 0; i < results.length; i++) {
+              if (newValue === results[i].id) {
                 if (type === "project_owner_search") {
                   scope.own_project(newValue);
                 } else {
@@ -34,7 +32,7 @@ angular.module('app')
             }
           });
 
-          return response;
+          return results;
         });
       };
 
@@ -47,57 +45,19 @@ angular.module('app')
           $scope.project_search = null;
 
         } else if (project_search && project_search.length > 0) {
-          $scope.add_working = true;
-          $api.search(project_search).then(function (response) {
-            var tracker_id;
-            if (response.redirect_to || response.tracker_id) {
-              tracker_id = response.tracker_id ? response.tracker_id : response.redirect_to.match(/\d+/);
-              $api.team_tracker_add(team.slug, tracker_id).then(function (updated_team) {
-                $scope.add_working = false;
-                $scope.set_team(updated_team);
-                team.trackers = updated_team.trackers;
-              });
-              $scope.project_search = null;
-
-            } else {
-
-              $scope.search_results = response;
-              // MAKE VIEW FOR SEARCH RESULTS
-            }
-          });
+          // ????
         }
-
       };
 
       $scope.own_project = function (project_search) {
-
         if (typeof(project_search) === "number") {
           $api.claim_tracker(project_search, team.id, "Team").then(function (updated_team) {
             $scope.set_team(updated_team);
             team.trackers = updated_team.trackers;
             $scope.project_owner_search = null;
           });
-
         } else if (project_search && project_search.length > 0) {
-          $scope.working = true;
-          $api.search(project_search).then(function (response) {
-
-            var tracker_id;
-            if (response.redirect_to || response.tracker_id) {
-              tracker_id = response.tracker_id ? response.tracker_id : response.redirect_to.match(/\d+/);
-
-              $api.claim_tracker(tracker_id, team.id, "Team").then(function (updated_team) {
-                $scope.working = false;
-                $scope.set_team(updated_team);
-                team.trackers = updated_team.trackers;
-              });
-
-              $scope.project_owner_search = null;
-            } else {
-              $scope.search_results = response;
-              // MAKE VIEW FOR SEARCH RESULTS
-            }
-          });
+          // ????
         }
       };
 
