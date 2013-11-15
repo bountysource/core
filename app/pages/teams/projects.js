@@ -130,6 +130,12 @@ angular.module('app')
         };
       };
 
+      $scope.trackerUsed = function() {
+        return function(tracker) {
+          return !tracker.$owned;
+        }
+      };
+
       return team;
     });
   });

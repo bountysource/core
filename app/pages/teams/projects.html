@@ -81,7 +81,7 @@
       </div>
 
       <ul class="thumbnails team-tracker-thumbnails">
-        <li ng-repeat="tracker in team.trackers" class="span2">
+        <li ng-repeat="tracker in team.trackers | filter:trackerUsed()" class="span2">
           <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="remove_tracker(tracker)"><i
             class="icon-remove"></i></button>
           <a class="thumbnail text-center" ng-href="/trackers/{{tracker.slug}}">
