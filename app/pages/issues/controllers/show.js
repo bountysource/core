@@ -19,11 +19,11 @@ angular.module('app')
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       // depending on the tracker, issue/comment bodies will either be html or text.
-      issue.$comment_ctype = "text";
-      issue.$body_ctype = "text";
-      if (issue.type === "Github::Issue") {
-        issue.$comment_ctype = "html";
-        issue.$body_ctype = "html";
+      issue.$comment_ctype = "html";
+      issue.$body_ctype = "html";
+      if (issue.type === "Bugzilla::Issue") {
+        issue.$comment_ctype = "text";
+        issue.$body_ctype = "text";
       }
 
       $pageTitle.set(issue.title, issue.tracker.name);
