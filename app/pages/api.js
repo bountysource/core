@@ -341,22 +341,20 @@ angular.module('api.bountysource',[]).
 
         //START enforce list of unique backers (prevent repeat backers)
         var unique_backer_bounties = {};
-        for (var i=0; i<issue.bounties.length; i++) {
+        for (i=0; i<issue.bounties.length; i++) {
           var bounty = issue.bounties[i];
           if (bounty.owner) {
             var backer_id = bounty.owner.id;
+            if (unique_backer_bounties[backer_id]) { // backer already exists, add amounts
+              var previous_bounty_amount = parseInt(unique_backer_bounties[backer_id].amount, 10);
+              var bounty_amount = parseInt(bounty.amount, 10);
+              var new_amount = previous_bounty_amount + bounty_amount;
+              unique_backer_bounties[backer_id].amount = ""+new_amount;
+            } else {
+              unique_backer_bounties[backer_id] = bounty;
+            }
           } else {
-            unique_backer_bounties["anon_"+i] = bounty; //anonymous backer, add to list and move on
-            continue;
-          }
-
-          if (unique_backer_bounties[backer_id]) { // backer already exists, add amounts
-            var previous_bounty_amount = parseInt(unique_backer_bounties[backer_id].amount, 10);
-            var bounty_amount = parseInt(bounty.amount, 10);
-            var new_amount = previous_bounty_amount + bounty_amount;
-            unique_backer_bounties[backer_id].amount = ""+new_amount;
-          } else {
-            unique_backer_bounties[backer_id] = bounty;
+            unique_backer_bounties["anon_"+i] = bounty; //anonymous backer, add to list
           }
         }
         //cast back into array
