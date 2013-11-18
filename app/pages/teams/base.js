@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('app')
-  .controller('BaseTeamController', function($scope, $location, $routeParams, $api) {
+  .controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle) {
+    $pageTitle.set("Teams");
+
     $scope.team = $api.team_get($routeParams.id).then(function(team) {
+      $pageTitle.set(team.name, "Teams");
+
       team.owned_trackers = [];
       team.unowned_trackers = [];
 
