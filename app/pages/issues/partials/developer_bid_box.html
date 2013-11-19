@@ -1,38 +1,36 @@
-<div ng-show="issue.can_add_bounty" ng-switch="developer_bid.type">
-  <div ng-switch-when="DeveloperBidEvent::StartedWork">
-    <h5 class="text-center">Work has started</h5>
-    <button ng-click="stop_developer_bid()" class="btn btn-primary btn-block">Stop Work</button>
-    <!-- <button ng-click="complete_developer_bid()" class="btn btn-primary btn-block">Mark Completed</button> -->
-    <p class="small">Last updated at: {{developer_bid.created_at | date:'medium'}}</p>
+<div ng-show="issue.can_add_bounty" ng-switch="status.type">
+  
+  <div ng-switch-when="SolutionEvent::Started">
+    <h4 class="text-center">Work In Progress</h4>
+    <p class="small">You started working on {{solution.created_at | date:'longDate'}}</p>
+    <button ng-click="stop_solution()" class="btn btn-primary btn-block">Stop Work</button>
+    <br>
   </div>
-  <div ng-switch-when="DeveloperBidEvent::Idle">
-    <h5 class="text-center">You've been marked as idle</h5>
-    <button ng-click="continue_developer_bid()" class="btn btn-primary btn-block">Continue Work</button>
-    <p class="small">Last updated at: {{developer_bid.created_at | date:'medium'}}</p>
+
+  <div ng-switch-when="SolutionEvent::CheckedIn">
+    <h4 class="text-center">Work has started</h4>
+    <p class="small">You last checked-in on {{solution.created_at | date:'longDate'}}</p>
+    <button ng-click="stop_solution()" class="btn btn-primary btn-block">Stop Work</button>
+    <br>
   </div>
-  <div ng-switch-when="DeveloperBidEvent::ContinuedWork">
-    <h5 class="text-center">You're working on this issue</h5>
-    <button ng-click="stop_developer_bid()" class="btn btn-primary btn-block">Stop Work</button>
-    <!-- <button ng-click="complete_developer_bid()" class="btn btn-primary btn-block">Mark Completed</button> -->
-    <p class="small">Last updated at: {{developer_bid.created_at | date:'medium'}}</p>
+  
+  <div ng-switch-when="SolutionEvent::Idle">
+    <h4 class="text-center">You've been marked as idle</h4>
+    <p class="small">You have been idle since {{solution.created_at | date:'longDate'}}</p>
+    <button ng-click="checkin_solution()" class="btn btn-primary btn-block">Check In</button>
+    <br>
   </div>
-  <div ng-switch-when="DeveloperBidEvent::StoppedWork">
-    <h5 class="text-center">You've stopped this work</h5>
-    <button ng-click="continue_developer_bid()" class="btn btn-primary btn-block">Restart Work</button>
-    <p class="small">Last updated at: {{developer_bid.created_at | date:'medium'}}</p>
+  
+  <div ng-switch-when="SolutionEvent::Stopped">
+    <h4 class="text-center">Work Stopped</h4>
+    <p class="small">You stopped working on {{solution.created_at | date:'longDate'}}</p>
+    <button ng-click="restart_solution()" class="btn btn-primary btn-block">Restart Work</button>
+    <br>
   </div>
-  <div ng-switch-when="DeveloperBidEvent::CompletedWork">
-    <h5 class="text-center">You've completed this work</h5>
-  </div>
+  
   <div ng-switch-default>
-    <h4 class="text-center">Earn the bounty!</h4>
-    <p>Are you working to solve this issue? Let the backers know.</p>
-    <button ng-click="start_developer_bid()" class="btn btn-primary btn-block">Start Work</button>
+    <h4 class="text-center">Earn this bounty!</h4>
+    <p>Click Start Work to let everyone know you’re working on a solution. You can submit a bounty claim once the issue is closed on the <a ng-href="/issues/{{ issue.slug }}">original issue tracker</a>.</p>
+    <button ng-click="start_solution()" class="btn btn-primary btn-block">Start Work</button>
   </div>
 </div>
-<!-- <div ng-show="developer_bid && !issue.can_add_bounty">
-  <div>
-    <h5 class="text-center">Your work status: {{developer_bid.type}}</p>
-  </div>
-</div> -->
-

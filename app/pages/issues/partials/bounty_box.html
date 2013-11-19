@@ -10,8 +10,21 @@
     <a ng-click="toggle_goal_data_view()" ng-show="next_goal">of ${{next_goal.amount}} bounty goal</a>
   </div>
   <div ng-show="goal_data_view">
-    <p>A bounty goal is a funding goal set by developers for this particular issue. The above displayed goal is the average of all goals.</p>
-    <p ng-show="total_goals > 0">This issue has goals set by {{total_goals}} <ng-pluralize count="total_goals" when="{'1': 'developer', 'other': 'developers'}"></ng-pluralize>.</p>
+    <p>A bounty goal is a funding target set by a developer for this specific issue.</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Developer</th>
+          <th>Goal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="goal in all_goals | orderBy:'+amount'">
+          <td><a ng-href="{{ goal.person.frontend_path }}"><img ng-src="{{ goal.person.image_url }}" style="width: 25px; height: 25px"></img><span style="margin-left:5px">{{ goal.person.display_name | truncate: 10}}</span></a></td>
+          <td>{{ goal.amount | dollars }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <br />
 

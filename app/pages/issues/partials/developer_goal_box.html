@@ -1,4 +1,4 @@
-<div ng-switch="developer_goal">
+<div ng-show="issue.can_add_bounty" ng-switch="developer_goal">
   <div ng-switch-when="false">
     <h4 class="text-center">Bounty too low?</h4>
     <p>Set a goal so the community has a bounty target. Get notified when the bounty reaches your goal!</p>

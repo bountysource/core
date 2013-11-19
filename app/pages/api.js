@@ -562,35 +562,42 @@ angular.module('api.bountysource',[]).
       return this.call("/tracker_plugins", "POST", data);
     };
 
-    this.start_developer_bid = function(issue_id) {
-      return this.call("/developer_bid_events/start_work", "POST", {issue_id: issue_id}, function(response) {
+    this.start_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solutions", "POST", function(response) {
         $api.require_signin();
         return response.data;
       });
     };
 
-    this.stop_developer_bid = function(issue_id) {
-      return this.call("/developer_bid_events/stop_work", "POST", {issue_id: issue_id});
+    this.restart_solution = function (issue_id, solution_id) {
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/start_work", "POST")
     };
 
-    this.continue_developer_bid = function(issue_id) {
-      return this.call("/developer_bid_events/continue_work", "POST", {issue_id: issue_id});
+    this.stop_solution = function(issue_id, solution_id) {
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/stop_work", "POST")
     };
 
-    this.complete_developer_bid = function(issue_id) {
-      return this.call("/developer_bid_events/complete_work", "POST", {issue_id: issue_id});
+    this.checkin_solution = function(issue_id, solution_id) {
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/check_in", "POST")
     };
 
-    this.developer_bid_status = function(issue_id) {
-      return this.call("/developer_bid_events/status/"+issue_id, "GET");
+    this.complete_solution = function(issue_id, solution_id) {
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/complete_work", "POST");
+    };
+
+    this.solution_status = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solutions/status", "GET");
     };
 
     this.create_developer_goal = function(data) {
-      return this.call("/issues/"+issue_id+"/developer_goal", "POST", data);
+      return this.call("/issues/"+data.issue_id+"/developer_goals", "POST", data, function (response) {
+        $api.require_signin();
+        return response.data;
+      });
     };
 
     this.update_developer_goal = function(data) {
-      return this.call("/issues/"+issue_id+"/developer_goal", "PUT", data);
+      return this.call("/issues/"+data.issue_id+"/developer_goal", "PUT", data);
     };
 
     this.get_developer_goal = function(issue_id) {

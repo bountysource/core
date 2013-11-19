@@ -21,7 +21,6 @@ angular.module('app')
     $scope.developer_goal = false;
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
-      console.log(issue);
       $pageTitle.set(issue.title, issue.tracker.name);
 
       // set bounty info message data
@@ -62,6 +61,7 @@ angular.module('app')
         } else {
           // NO Goals
         }
+        $scope.all_goals = goals;
         $scope.met_goals = met_goals;
         $scope.next_goal = orderByFilter(unmet_goals, '+amount')[0]; //grab the nearest next goal
         $scope.total_goals = goals.length;
@@ -73,52 +73,64 @@ angular.module('app')
     $scope.$watch('current_person', function(newValue, oldValue, scope) {
       if (scope.current_person) {
         
-        $api.developer_bid_status($routeParams.id).then(function(bid) {
-          if (!bid) {
-            scope.developer_bid = false;
+        $api.solution_status($routeParams.id).then(function(solution) {
+          if (!solution) {
+            scope.solution = false;
           } else {
-            scope.developer_bid = bid;
+            scope.solution = solution;
+            scope.status = solution.solution_events[0];
           }
         });
 
-        $api.get_developer_goal($routeParams.id).then(function(goal) {
-          if (!goal) {
+        $api.get_developer_goal($routeParams.id).then(function(response) {
+          if (response.error) {
             scope.developer_goal = false;
           } else {
-            scope.developer_goal = goal;
+            scope.developer_goal = response;
           }
         });
       }
     });
 
-    $scope.start_developer_bid = function() {
-      $api.start_developer_bid($routeParams.id).then(function(response) {
+    $scope.start_solution = function() {
+      $api.start_solution($routeParams.id).then(function(response) {
         if (response) {
-          $scope.developer_bid = response;
+          $scope.solution = response;
+          $scope.status = response.solution_events[0];
         }
       });
     };
 
-    $scope.stop_developer_bid = function() {
-      $api.stop_developer_bid($routeParams.id).then(function(response) {
+    $scope.restart_solution = function () {
+      $api.restart_solution($routeParams.id, $scope.solution.id).then(function (response) {
+        $scope.solution = response;
+        $scope.status = response.solution_events[0];
+      })
+    }
+
+    $scope.stop_solution = function() {
+      $api.stop_solution($routeParams.id, $scope.solution.id).then(function(response) {
         if (response) {
-          $scope.developer_bid = response;
+          $scope.solution = response;
+          $scope.status = response.solution_events[0];
         }
       });
     };
 
-    $scope.continue_developer_bid = function() {
-      $api.continue_developer_bid($routeParams.id).then(function(response) {
+    $scope.checkin_solution = function() {
+      $api.checkin_solution($routeParams.id).then(function(response) {
         if (response) {
-          $scope.developer_bid = response;
+          $scope.solution = response;
+          $scope.status = response.solution_events[0];
         }
       });
     };
 
-    $scope.complete_developer_bid = function() {
-      $api.complete_developer_bid($routeParams.id).then(function(response) {
+    $scope.complete_solution = function() {
+      $api.complete_solution($routeParams.id).then(function(response) {
         if (response) {
-          $scope.developer_bid = response;
+          $scope.solution = response;
+          $scope.status = response.solution_events[0];
         }
       });
     };
@@ -154,8 +166,6 @@ angular.module('app')
     $scope.toggle_goal_data_view = function() {
       $scope.goal_data_view = !$scope.goal_data_view;
     };
-
-    console.log("the developer goal", $scope.developer_goal);
 
   });
 

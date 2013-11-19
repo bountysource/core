@@ -45,10 +45,10 @@
 
   <div class="span3">
     <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
-    <div class="well">
+    <div ng-show="issue.can_add_bounty" class="well">
       <div ng-include="'pages/issues/partials/developer_goal_box.html'"></div>
       <div ng-include="'pages/issues/partials/developer_bid_box.html'"></div>
-      <div ng-include="'pages/issues/partials/claim_info_box.html'"></div>
     </div>
+    <div  ng-show="!issue.can_add_bounty" ng-include="'pages/issues/partials/claim_info_box.html'"></div>
   </div>
 </div>
