@@ -3,6 +3,29 @@
     <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
     <strong>Bounty</strong>
   </div>
+  <div class="issue-goals progress progress-striped" ng-show="next_goal">
+    <div class="bar bar-success" style="width: {{100*issue.bounty_total/next_goal.amount | at_least:15 | at_most:100 | number:0 }}%;">{{ 100*issue.bounty_total/next_goal.amount | number:0 }}%</div>
+  </div>
+  <div class="span12 text-center">
+    <a ng-click="toggle_goal_data_view()" ng-show="next_goal">of ${{next_goal.amount}} bounty goal</a>
+  </div>
+  <div ng-show="goal_data_view">
+    <p>A bounty goal is a funding target set by a developer for this specific issue.</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Developer</th>
+          <th>Goal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="goal in all_goals | orderBy:'+amount'">
+          <td><a ng-href="{{ goal.person.frontend_path }}"><img ng-src="{{ goal.person.image_url }}" style="width: 25px; height: 25px"></img><span style="margin-left:5px">{{ goal.person.display_name | truncate: 10}}</span></a></td>
+          <td>{{ goal.amount | dollars }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <br />
 
   <!-- Backers! -->

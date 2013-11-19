@@ -49,6 +49,10 @@ td.noimagerow {
   display: none;
 }
 
+.issue-goals.progress {
+  margin-bottom: 10px;
+}
+
 /* receipt */
 input#bounty-share-url {
   cursor: pointer;

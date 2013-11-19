@@ -572,6 +572,52 @@ angular.module('api.bountysource',[]).
       return deferred.promise;
     };
 
+    this.start_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution", "POST", function(response) {
+        $api.require_signin();
+        return response.data;
+      });
+    };
+
+    this.restart_solution = function (issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/start_work", "POST");
+    };
+
+    this.stop_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/stop_work", "POST");
+    };
+
+    this.checkin_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/check_in", "POST");
+    };
+
+    this.complete_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/complete_work", "POST");
+    };
+
+    this.solution_status = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution", "GET");
+    };
+
+    this.create_developer_goal = function(data) {
+      return this.call("/issues/"+data.issue_id+"/developer_goals", "POST", data, function (response) {
+        $api.require_signin();
+        return response.data;
+      });
+    };
+
+    this.update_developer_goal = function(data) {
+      return this.call("/issues/"+data.issue_id+"/developer_goal", "PUT", data);
+    };
+
+    this.get_developer_goal = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/developer_goal", "GET");
+    };
+
+    this.get_issue_goals = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/developer_goals", "GET");
+    };
+
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {
