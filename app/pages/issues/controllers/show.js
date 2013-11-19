@@ -17,7 +17,12 @@ angular.module('app')
       state: "available"
     };
 
+    $scope.goal_data_view = false;
+    $scope.developer_goal = false;
+
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+      $pageTitle.set(issue.title, issue.tracker.name);
+
       // depending on the tracker, issue/comment bodies will either be html or text.
       issue.$comment_ctype = "html";
       issue.$body_ctype = "html";
@@ -25,12 +30,6 @@ angular.module('app')
         issue.$comment_ctype = "text";
         issue.$body_ctype = "text";
       }
-
-    $scope.goal_data_view = false;
-    $scope.developer_goal = false;
-
-    $scope.issue = $api.issue_get($routeParams.id).then(function (issue) {
-      $pageTitle.set(issue.title, issue.tracker.name);
 
       // set bounty info message data
       if (issue.bounty_claims.length === 0) {
@@ -78,6 +77,7 @@ angular.module('app')
 
       return issue;
     });
+
     $scope.$watch('current_person', function (newValue, oldValue, scope) {
       if (scope.current_person) {
 
@@ -174,6 +174,5 @@ angular.module('app')
     $scope.toggle_goal_data_view = function () {
       $scope.goal_data_view = !$scope.goal_data_view;
     };
-
   });
 
