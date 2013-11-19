@@ -570,15 +570,15 @@ angular.module('api.bountysource',[]).
     };
 
     this.restart_solution = function (issue_id, solution_id) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/start_work", "POST")
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/start_work", "POST");
     };
 
     this.stop_solution = function(issue_id, solution_id) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/stop_work", "POST")
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/stop_work", "POST");
     };
 
     this.checkin_solution = function(issue_id, solution_id) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/check_in", "POST")
+      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/check_in", "POST");
     };
 
     this.complete_solution = function(issue_id, solution_id) {

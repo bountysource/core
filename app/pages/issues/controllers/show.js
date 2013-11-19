@@ -20,7 +20,7 @@ angular.module('app')
     $scope.goal_data_view = false;
     $scope.developer_goal = false;
 
-    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+    $scope.issue = $api.issue_get($routeParams.id).then(function (issue) {
       $pageTitle.set(issue.title, issue.tracker.name);
 
       // set bounty info message data
@@ -47,7 +47,7 @@ angular.module('app')
         $scope.bounty_alert.type = "error";
       }
 
-      $api.get_issue_goals($routeParams.id).then(function(goals) {
+      $api.get_issue_goals($routeParams.id).then(function (goals) {
         var met_goals = [];
         var unmet_goals = [];
         if (goals.length > 0) {
@@ -69,11 +69,10 @@ angular.module('app')
 
       return issue;
     });
-    
-    $scope.$watch('current_person', function(newValue, oldValue, scope) {
+    $scope.$watch('current_person', function (newValue, oldValue, scope) {
       if (scope.current_person) {
-        
-        $api.solution_status($routeParams.id).then(function(solution) {
+
+        $api.solution_status($routeParams.id).then(function (solution) {
           if (!solution) {
             scope.solution = false;
           } else {
@@ -82,7 +81,7 @@ angular.module('app')
           }
         });
 
-        $api.get_developer_goal($routeParams.id).then(function(response) {
+        $api.get_developer_goal($routeParams.id).then(function (response) {
           if (response.error) {
             scope.developer_goal = false;
           } else {
@@ -92,8 +91,8 @@ angular.module('app')
       }
     });
 
-    $scope.start_solution = function() {
-      $api.start_solution($routeParams.id).then(function(response) {
+    $scope.start_solution = function () {
+      $api.start_solution($routeParams.id).then(function (response) {
         if (response) {
           $scope.solution = response;
           $scope.status = response.solution_events[0];
@@ -105,11 +104,11 @@ angular.module('app')
       $api.restart_solution($routeParams.id, $scope.solution.id).then(function (response) {
         $scope.solution = response;
         $scope.status = response.solution_events[0];
-      })
-    }
+      });
+    };
 
-    $scope.stop_solution = function() {
-      $api.stop_solution($routeParams.id, $scope.solution.id).then(function(response) {
+    $scope.stop_solution = function () {
+      $api.stop_solution($routeParams.id, $scope.solution.id).then(function (response) {
         if (response) {
           $scope.solution = response;
           $scope.status = response.solution_events[0];
@@ -117,8 +116,8 @@ angular.module('app')
       });
     };
 
-    $scope.checkin_solution = function() {
-      $api.checkin_solution($routeParams.id).then(function(response) {
+    $scope.checkin_solution = function () {
+      $api.checkin_solution($routeParams.id).then(function (response) {
         if (response) {
           $scope.solution = response;
           $scope.status = response.solution_events[0];
@@ -126,8 +125,8 @@ angular.module('app')
       });
     };
 
-    $scope.complete_solution = function() {
-      $api.complete_solution($routeParams.id).then(function(response) {
+    $scope.complete_solution = function () {
+      $api.complete_solution($routeParams.id).then(function (response) {
         if (response) {
           $scope.solution = response;
           $scope.status = response.solution_events[0];
@@ -135,11 +134,11 @@ angular.module('app')
       });
     };
 
-    $scope.create_developer_goal = function(amount) {
+    $scope.create_developer_goal = function (amount) {
       var data = {};
       data.amount = amount;
       data.issue_id = $routeParams.id;
-      $api.create_developer_goal(data).then(function(response) {
+      $api.create_developer_goal(data).then(function (response) {
         if (response) {
           $scope.developer_goal = response;
           $scope.developer_goal_updated = true;
@@ -147,11 +146,11 @@ angular.module('app')
       });
     };
 
-    $scope.update_developer_goal = function(amount) {
+    $scope.update_developer_goal = function (amount) {
       var data = {};
       data.amount = amount;
       data.issue_id = $routeParams.id;
-      $api.update_developer_goal(data).then(function(response) {
+      $api.update_developer_goal(data).then(function (response) {
         if (response) {
           $scope.developer_goal = response;
           $scope.developer_goal_updated = true;
@@ -159,11 +158,11 @@ angular.module('app')
       });
     };
 
-    $scope.hide_developer_goal_alert = function() {
+    $scope.hide_developer_goal_alert = function () {
       $scope.developer_goal_updated = false;
     };
 
-    $scope.toggle_goal_data_view = function() {
+    $scope.toggle_goal_data_view = function () {
       $scope.goal_data_view = !$scope.goal_data_view;
     };
 
