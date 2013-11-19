@@ -563,30 +563,30 @@ angular.module('api.bountysource',[]).
     };
 
     this.start_solution = function(issue_id) {
-      return this.call("/issues/"+issue_id+"/solutions", "POST", function(response) {
+      return this.call("/issues/"+issue_id+"/solution", "POST", function(response) {
         $api.require_signin();
         return response.data;
       });
     };
 
-    this.restart_solution = function (issue_id, solution_id) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/start_work", "POST");
+    this.restart_solution = function (issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/start_work", "POST");
     };
 
-    this.stop_solution = function(issue_id, solution_id) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/stop_work", "POST");
+    this.stop_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/stop_work", "POST");
     };
 
-    this.checkin_solution = function(issue_id, solution_id) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/check_in", "POST");
+    this.checkin_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/check_in", "POST");
     };
 
-    this.complete_solution = function(issue_id, solution_id) {
-      return this.call("/issues/"+issue_id+"/solutions/"+solution_id+"/complete_work", "POST");
+    this.complete_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/complete_work", "POST");
     };
 
     this.solution_status = function(issue_id) {
-      return this.call("/issues/"+issue_id+"/solutions/status", "GET");
+      return this.call("/issues/"+issue_id+"/solution", "GET");
     };
 
     this.create_developer_goal = function(data) {

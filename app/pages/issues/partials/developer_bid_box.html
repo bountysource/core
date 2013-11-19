@@ -1,5 +1,4 @@
 <div ng-show="issue.can_add_bounty" ng-switch="status.type">
-  
   <div ng-switch-when="SolutionEvent::Started">
     <h4 class="text-center">Work In Progress</h4>
     <p class="small">You started working on {{solution.created_at | date:'longDate'}}</p>
@@ -31,6 +30,6 @@
   <div ng-switch-default>
     <h4 class="text-center">Earn this bounty!</h4>
     <p>Click Start Work to let everyone know you’re working on a solution. You can submit a bounty claim once the issue is closed on the <a ng-href="/issues/{{ issue.slug }}">original issue tracker</a>.</p>
-    <button ng-click="start_solution()" class="btn btn-primary btn-block">Start Work</button>
+    <button ng-click-require-auth="start_solution()" class="btn btn-primary btn-block">Start Work</button>
   </div>
 </div>
