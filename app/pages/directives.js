@@ -191,7 +191,7 @@ angular.module('app').
                 throw("Model is missing owner.type attribute");
               } else if (model.owner.type === "Person") {
                 element.attr("href", "/people/"+model.owner.slug);
-              } else if (model.owner.type === "Team") {
+              } else if ((/^Team/).test(model.owner.type)) {
                 element.attr("href", "/teams/"+model.owner.slug);
               } else {
                 throw("Unexpected owner " + model.owner.type);
