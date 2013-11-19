@@ -1,12 +1,8 @@
-#faq h1,
-#fees h1 {
-  margin: 0;
-}
-
 #faq h2,
 #faq h4,
 #fees h2,
 #fees h4 {
+  margin-top: -25px;
   padding-top: 45px;
 }
 
@@ -14,7 +10,7 @@
 #fees dd {
   border-bottom: 2px solid #129e5e;
   margin-left: 0;
-  padding-bottom: 45px;
+  padding-bottom: 20px;
 }
 
 .ui-scrollfix {
