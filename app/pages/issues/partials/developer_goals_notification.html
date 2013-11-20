@@ -1,4 +1,7 @@
-<div ng-controller="DeveloperGoalsBaseController" collapse="!next_developer_goal">
+<div ng-controller="DeveloperGoalsBaseController" >
+
+  <pre>developer_goals: {{developer_goals}}</pre>
+
   <div class="well">
     <div style="text-align: center;" ng-show="issue.bounty_total < next_developer_goal.amount">
       <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name}}</a> set a bounty goal of {{next_developer_goal.amount | dollars}}</h3>
