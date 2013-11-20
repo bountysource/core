@@ -37,3 +37,17 @@
     </div>
   </div>
 </div>
+
+<div class="well well-small">
+  <div class="row-fluid">
+    <div class="text-center span6">
+      <a ng-href="trackers/{{team.slug}}/bounties"><h3 style="margin: 0; line-height:35px" class="text-center">{{team.open_bounties_amount | dollars}}</h3></a>
+      <div>in bounties</div>
+    </div>
+
+    <div class="text-center span6">
+      <a ng-href="trackers/{{team.slug}}/bounties"><h3 style="margin:0; line-height:35px;" class="text-center">{{team.open_issues_count}}</h3></a>
+      <div>open issues</div>
+    </div>
+  </div>
+</div>
