@@ -11,7 +11,6 @@ angular.module('app')
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
     $scope.tracker = $api.tracker_get($routeParams.id).then(function(tracker) {
-
       // Edge case: GitHub repo changes owner, and we create a new Tracker model.
       // If the requested tracker model has a redirect to another, change the URL to that tracker.
       if (($routeParams.id || '').split('-')[0] !== tracker.id) {
@@ -64,6 +63,7 @@ angular.module('app')
       // throw in a timeout to allow time for issues to be added
       $timeout(function() {
         $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+          console.log(issues);
           $scope.issues_resolved = true;
 
           for (var i=0; i<issues.length; i++) {

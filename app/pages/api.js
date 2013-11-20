@@ -317,6 +317,12 @@ angular.module('api.bountysource',[]).
       return this.call("/stats/trackers/"+id);
     };
 
+    this.tracker_top_backers = function (id, options) {
+      return this.call("/trackers/"+id+"/top_backers", function (response) {
+        return response;
+      });
+    };
+
     this.issue_get = function(id, callback) {
       return this.call("/issues/"+id, callback).then(function(issue) {
         issue.my_bounty_claim = undefined;
