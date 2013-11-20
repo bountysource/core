@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter) {
+  .controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter, $q) {
     $scope.initializing = true;
 
     $scope.my_solution = undefined;
@@ -15,6 +15,7 @@ angular.module('app')
         $scope.initializing = false;
 
         $scope.set_status_for_solution(my_solution);
+
         return my_solution;
       });
 
@@ -65,7 +66,9 @@ angular.module('app')
     });
 
     $scope.$on('solutionCreateReceived', function(event, new_solution) {
-      $scope.my_solution = new_solution;
+      var deferred = $q.defer();
+      deferred.resolve(new_solution);
+      $scope.my_solution = deferred.promise;
       $scope.set_status_for_solution(new_solution);
     });
 
