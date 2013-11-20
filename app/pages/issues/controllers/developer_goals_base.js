@@ -35,7 +35,7 @@ angular.module('app')
 
       // Redirect to bounty create page with the min amount to fulfill the next goal
       $scope.create_minimum_bounty = function() {
-        $location.path("/issues/"+issue.id+"/bounty").search({ amount: $scope.$bounty_amount });
+        $location.path("/issues/"+issue.id+"/bounty").search({ amount: Math.max($scope.$bounty_amount, 5) });
       };
 
       // If the person is logged in, attempt to find their developer goal
