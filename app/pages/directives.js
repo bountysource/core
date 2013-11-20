@@ -198,7 +198,6 @@ angular.module('app').
               }
             }
           } catch(e) {
-            console.log("ownerProfileLink: ", e);
           }
         });
       }
