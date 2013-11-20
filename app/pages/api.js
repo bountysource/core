@@ -460,6 +460,10 @@ angular.module('api.bountysource',[]).
       return this.call("/teams/"+team_id+"/activity");
     };
 
+    this.team_bounties = function(team_id) {
+      return this.call("/teams/"+team_id+"/bounties");
+    };
+
     this.team_invite_accept = function(team_id, token) {
       return this.call("/teams/"+team_id+"/invites", "PUT", { token: token });
     };
