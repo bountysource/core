@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $pageTitle, orderByFilter) {
+  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $pageTitle) {
     // alert above the issue title about bounty status
     $scope.bounty_alert = {
       type: 'warning',
@@ -54,26 +54,6 @@ angular.module('app')
         $scope.bounty_alert.state = "contested";
         $scope.bounty_alert.type = "error";
       }
-
-      $api.get_issue_goals($routeParams.id).then(function (goals) {
-        var met_goals = [];
-        var unmet_goals = [];
-        if (goals.length > 0) {
-          for (var i = 0; i < goals.length; i++) {
-            if (goals[i].amount < issue.bounty_total) {
-              met_goals.push(goals[i]);
-            } else {
-              unmet_goals.push(goals[i]);
-            }
-          }
-        } else {
-          // NO Goals
-        }
-        $scope.all_goals = goals;
-        $scope.met_goals = met_goals;
-        $scope.next_goal = orderByFilter(unmet_goals, '+amount')[0]; //grab the nearest next goal
-        $scope.total_goals = goals.length;
-      });
 
       return issue;
     });

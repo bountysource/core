@@ -334,9 +334,10 @@ angular.module('api.bountysource',[]).
           }
         }
 
-        // TODO legacy hack, turn owner into person
         for (i=0; i<issue.bounties.length; i++) {
+          // TODO legacy hack, turn owner into person
           issue.bounties[i].person = issue.bounties[i].owner;
+          issue.bounties[i].amount = parseInt(issue.bounties[i].amount, 10);
         }
 
         //START enforce list of unique backers (prevent repeat backers)
@@ -643,7 +644,7 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+issue_id+"/developer_goal", "GET");
     };
 
-    this.get_issue_goals = function(issue_id) {
+    this.get_developer_goals = function(issue_id) {
       return this.call("/issues/"+issue_id+"/developer_goals", "GET");
     };
 
