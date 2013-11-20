@@ -20,7 +20,7 @@ angular.module('app')
       desc: true
     };
     $scope.update_sort = function(obj, column) {
-      if (obj.column == column) {
+      if (obj.column === column) {
         obj.desc = !obj.desc;
       } else {
         obj.column = column;
@@ -37,7 +37,7 @@ angular.module('app')
         bounty.amount = parseInt(bounty.amount, 10);
         if (bounty.issue.paid_out) {
           claimed_bounties.push(bounty);
-          total_paid_out += bounty.amount
+          total_paid_out += bounty.amount;
         } else {
           open_bounties.push(bounty);
         }
