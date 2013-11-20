@@ -37,7 +37,8 @@
         <div class="span9 well">
           <h1 class="text-center">Thank you for backing this issue!</h1>
           <h2 class="text-center" style="margin-bottom:0px;">Spread the word!</h2>
-          <div class="text-center">
+          <div class="text-center input-prepend">
+            <span id="copy" class="add-on" data-toggle="tooltip" data-title="copy to clipboard" data-clipboard-target="bounty-share-url" href="#"><i class="icon-share"></i></span>
             <input id="bounty-share-url" type="url" select-on-click readonly value="{{share_issue_link}}" />
           </div>
           <div ng-include="'pages/issues/partials/share.html'"></div>
@@ -129,6 +130,17 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
+<script src="https://raw.github.com/zeroclipboard/zeroclipboard/master/ZeroClipboard.min.js"></script>
+<script>
+  var clip = new ZeroClipboard( document.getElementById("copy"), {
+  moviePath: "http://my.awesomecdn.com/javascripts/ZeroClipboard.swf"
+  } );
+  
+  clip.on( "load", function(client) {
+  } );
+</script>
+<script>
+  $('[data-toggle="tooltip"]').tooltip()
+</script>
