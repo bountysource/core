@@ -6,9 +6,9 @@ angular.module('app')
       if (response.meta.success) {
         var backers = response.data.top_backers;
         for (var i = 0; i < backers.length; i++) {
-          backers[i].total_backed = parseFloat(backers[i].total_backed, 10)
-        };
+          backers[i].total_backed = parseFloat(backers[i].total_backed, 10);
+        }
         $scope.backers = backers;
       }
-    })
+    });
   });
