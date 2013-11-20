@@ -6,20 +6,24 @@
         <h4 style="margin-top: 0;">Your Bounty Goal</h4>
         <div><small>Set on {{my_developer_goal.created_at | date:'medium'}}</small></div>
       </div>
-
       <br />
-
-      <form ng-submit="update_developer_goal(my_developer_goal.amount)" style="margin: 0;" class="form-horizontal">
+      <form name="form" ng-submit="update_developer_goal(my_developer_goal.amount)" style="margin: 0;" class="form-horizontal">
         <div class="row-fluid">
           <div class="input-prepend span6" style="margin: 0;">
             <span class="add-on">$</span>
-            <input type="number" class="span9" min="{{issue.bounty_total + 1}}" step="1" ng-model="my_developer_goal.amount" ng-value="my_developer_goal.amount" required />
+            <input name="amount" type="number" class="span9" min="{{issue.bounty_total + 1}}" step="1" ng-model="my_developer_goal.amount" ng-value="my_developer_goal.amount" required />
           </div>
           <div class="span6">
-            <button type="submit" class="btn btn-block btn-primary" ng-disabled="my_developer_goal.amount <= issue.bounty_total || my_developer_goal.amount < 5">Update Goal</button>
+            <button type="submit" class="btn btn-block btn-primary" ng-disabled="form.amount.$pristine || my_developer_goal.amount <= issue.bounty_total || my_developer_goal.amount < 5">Update Goal</button>
           </div>
         </div>
       </form>
+
+      <div collapse="!my_developer_goal_updated_at">
+        <div style="margin-top: 10px; text-align: center;">
+          <small class="text-success"><em>Updated {{my_developer_goal_updated_at | date:'medium'}}</em></small>
+        </div>
+      </div>
     </div>
   </div>
 

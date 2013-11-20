@@ -14,26 +14,8 @@ angular.module('app')
     $scope.issue.then(function(issue) {
       issue.bounty_total = parseInt(issue.bounty_total, 10);
 
-      $scope.developer_goals = $api.get_developer_goals(issue.id).then(function(developer_goals) {
-        // Collect developer goals that have not yet been met
-        $scope.unmet_developer_goals = [];
-        for (var i=0; i<developer_goals.length; i++) {
-          if (issue.bounty_total < developer_goals[i].amount) {
-            $scope.unmet_developer_goals.push(developer_goals[i]);
-          }
-        }
-
-        // The next developer goal is the unmet goal with the amount closest to the bounty total
-        $scope.next_developer_goal = $filter('orderBy')($scope.unmet_developer_goals, ["+amount"])[0];
-
-        // if a goal was picked up, set the default bounty amount in the box to
-        // the difference of goal and the current bounty_total.
-        if ($scope.next_developer_goal) {
-          $scope.$bounty_amount = $scope.next_developer_goal.amount - issue.bounty_total;
-        }
-
-        return developer_goals;
-      });
+      // set $scope.developer_events
+      $scope.initialize_developer_goals();
 
       // Redirect to bounty create page with the min amount to fulfill the next goal
       $scope.create_minimum_bounty = function() {
@@ -83,5 +65,37 @@ angular.module('app')
       for (var k in updated_developer_goal) {
         $scope.my_developer_goal[k] = updated_developer_goal[k];
       }
+
+      // reload developer goals
+      $scope.initialize_developer_goals();
+
+      $scope.my_developer_goal_updated_at = new Date();
     });
+
+    $scope.initialize_developer_goals = function() {
+      $scope.issue.then(function(issue) {
+        $scope.developer_goals = $api.get_developer_goals(issue.id).then(function(developer_goals) {
+          // Collect developer goals that have not yet been met
+          $scope.unmet_developer_goals = [];
+          for (var i=0; i<developer_goals.length; i++) {
+            if (issue.bounty_total < developer_goals[i].amount) {
+              $scope.unmet_developer_goals.push(developer_goals[i]);
+            }
+          }
+
+          // The next developer goal is the unmet goal with the amount closest to the bounty total
+          $scope.next_developer_goal = $filter('orderBy')($scope.unmet_developer_goals, ["+amount"])[0];
+
+          // if a goal was picked up, set the default bounty amount in the box to
+          // the difference of goal and the current bounty_total.
+          if ($scope.next_developer_goal) {
+            $scope.$bounty_amount = $scope.next_developer_goal.amount - issue.bounty_total;
+          }
+
+          return developer_goals;
+        });
+
+        return issue;
+      });
+    };
   });

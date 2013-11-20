@@ -2,32 +2,58 @@
   <div class="well" ng-show="issue.can_add_bounty" ng-switch="status.type">
     <div ng-switch-when="SolutionEvent::Started">
       <h4 style="margin-top: 0;" class="text-center">Work In Progress</h4>
-      <p class="small">You started working on {{my_solution.created_at | date:'longDate'}}.</p>
-      <button ng-click="stop_solution()" class="btn btn-primary btn-block">Stop Work</button>
+
+      <div style="text-align: center;">
+        <small>Started {{my_solution.created_at | date:'longDate'}}.</small>
+      </div>
+      <br />
+      <div>
+        <button ng-click="stop_solution()" class="btn btn-primary btn-block">Stop Work</button>
+      </div>
     </div>
 
     <div ng-switch-when="SolutionEvent::CheckedIn">
       <h4 style="margin-top: 0;" class="text-center">Work has started</h4>
-      <p class="small">You last checked-in on {{my_solution.created_at | date:'longDate'}}.</p>
-      <button ng-click="stop_solution()" class="btn btn-primary btn-block">Stop Work</button>
+
+      <div style="text-align: center;">
+        <small>Last checked-in {{my_solution.created_at | date:'longDate'}}.</small>
+      </div>
+      <br />
+      <div>
+        <button ng-click="stop_solution()" class="btn btn-primary btn-block">Stop Work</button>
+      </div>
     </div>
 
     <div ng-switch-when="SolutionEvent::Idle">
       <h4 style="margin-top: 0;" class="text-center">You've been marked as idle</h4>
-      <p class="small">You have been idle since {{my_solution.created_at | date:'longDate'}}.</p>
-      <button ng-click="checkin_solution()" class="btn btn-primary btn-block">Check In</button>
+
+      <div style="text-align: center;">
+        <small>Idle since {{my_solution.created_at | date:'longDate'}}.</small>
+      </div>
+      <br />
+      <div>
+        <button ng-click="checkin_solution()" class="btn btn-primary btn-block">Check In</button>
+      </div>
     </div>
 
     <div ng-switch-when="SolutionEvent::Stopped">
       <h4 style="margin-top: 0;" class="text-center">Work Stopped</h4>
-      <p class="small">You stopped working on {{my_solution.created_at | date:'longDate'}}.</p>
-      <button ng-click="restart_solution()" class="btn btn-primary btn-block">Restart Work</button>
+
+      <div style="text-align: center;">
+        <small>You stopped working on {{my_solution.created_at | date:'longDate'}}.</small>
+      </div>
+      <br />
+      <div>
+        <button ng-click="restart_solution()" class="btn btn-primary btn-block">Restart Work</button>
+      </div>
     </div>
 
     <div ng-switch-default>
       <h4 style="margin-top: 0;" class="text-center">Earn this bounty!</h4>
       <p>Click Start Work to let everyone know you’re working on a solution. You can submit a bounty claim once the issue is closed on the <a ng-href="/issues/{{ issue.slug }}">original issue tracker</a>.</p>
-      <button ng-click-require-auth="start_solution()" class="btn btn-primary btn-block">Start Work</button>
+      <div>
+        <button ng-click-require-auth="start_solution()" class="btn btn-primary btn-block">Start Work</button>
+      </div>
     </div>
   </div>
 </div>
