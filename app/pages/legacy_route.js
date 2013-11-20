@@ -149,5 +149,7 @@ angular.module('app')
       }).when('/fundraisers/:id/pledges', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/backers"; },
         controller: 'Static'
+      }).when('/issues/:issue_id/solutions', {
+        redirectTo: function(params) { return "/issues/"+params.issue_id+"/claims"; }
       });
   });

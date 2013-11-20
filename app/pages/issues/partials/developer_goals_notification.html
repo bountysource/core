@@ -1,19 +1,19 @@
-<div ng-controller="DeveloperGoalNotificationController" ng-show="issue && issue.$next_developer_goal">
+<div ng-controller="DeveloperGoalsBaseController" collapse="!next_developer_goal">
   <div class="well">
-    <div style="text-align: center;" ng-show="issue.bounty_total < issue.$next_developer_goal.amount">
-      <h3 style="margin: 0;"><a owner-href="issue.$next_developer_goal.person">{{issue.$next_developer_goal.person.display_name}}</a> set a bounty goal of {{issue.$next_developer_goal.amount | dollars}}</h3>
-      <div>When the bounty reaches this goal, <a owner-href="issue.$next_developer_goal.person">{{issue.$next_developer_goal.person.display_name}}</a> will be prompted to start on a solution.</div>
+    <div style="text-align: center;" ng-show="issue.bounty_total < next_developer_goal.amount">
+      <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name}}</a> set a bounty goal of {{next_developer_goal.amount | dollars}}</h3>
+      <div>When the bounty reaches this goal, <a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name}}</a> will be prompted to start on a solution.</div>
 
       <div ng-show="developer_goals.length > 1">
-        <small>{{developer_goals.length - 1 | number}} other developers have set bounty goals. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small>
+        <small>{{developer_goals.length - 1 | number}} other {{"developer" | pluralize:(developer_goals.length - 1)}} have set bounty goals. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small>
       </div>
     </div>
 
-    <div style="text-align: center;" ng-show="issue.bounty_total >= issue.$next_developer_goal.amount">
-      <h3 style="margin: 0;"><a owner-href="issue.$next_developer_goal.person">{{issue.$next_developer_goal.person.display_name}}</a>'s bounty goal has been met!</h3>
+    <div style="text-align: center;" ng-show="issue.bounty_total >= next_developer_goal.amount">
+      <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name}}</a>'s bounty goal has been met!</h3>
 
       <div ng-show="developer_goals.length > 1">
-        <small>{{developer_goals.length - 1 | number}} other developers have set bounty goals. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small>
+        <small>{{developer_goals.length - 1 | number}} other {{"developer" | pluralize:(developer_goals.length - 1)}} have set bounty goals. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small>
       </div>
     </div>
 
@@ -56,7 +56,7 @@
     <div class="alert alert-success" style="padding: 15px; margin-bottom: 0;">
       <div class="row-fluid">
         <div class="span4">
-          <!--<span><strong style="font-size: 20px;">{{issue.bounty_total | dollars}}</strong> of <strong style="font-size: 20px;">{{issue.$next_developer_goal.amount | dollars}}</strong></span>-->
+          <!--<span><strong style="font-size: 20px;">{{issue.bounty_total | dollars}}</strong> of <strong style="font-size: 20px;">{{next_developer_goal.amount | dollars}}</strong></span>-->
 
           <div class="row-fluid">
             <div class="span5" style="text-align: center;">
@@ -69,7 +69,7 @@
             </div>
 
             <div class="span5" style="text-align: center;">
-              <h3 style="margin: 0; line-height: 25px;">{{issue.$next_developer_goal.amount | dollars}}</h3>
+              <h3 style="margin: 0; line-height: 25px;">{{next_developer_goal.amount | dollars}}</h3>
               <strong>Goal</strong>
             </div>
           </div>
@@ -77,8 +77,8 @@
 
         <div class="span5">
           <div class="issue-goals progress progress-striped" style="margin-top: 10px;">
-            <div class="bar bar-success" style="width: {{100*issue.bounty_total/issue.$next_developer_goal.amount | at_least:5 | at_most:100 | number:0 }}%;">
-              <span>{{issue.bounty_total/issue.$next_developer_goal.amount | percent}}</span>
+            <div class="bar bar-success" style="width: {{100*issue.bounty_total/next_developer_goal.amount | at_least:5 | at_most:100 | number:0 }}%;">
+              <span>{{issue.bounty_total/next_developer_goal.amount | percent}}</span>
             </div>
           </div>
         </div>
