@@ -66,8 +66,10 @@ angular.module('app')
       $scope.$update_percentage(bounty_claim);
       $scope.$update_my_response(bounty_claim);
 
+      bounty_claim.show_accept_form = false;
+      bounty_claim.new_accept = { description: "" };
       bounty_claim.accept = function() {
-        $api.bounty_claim_accept(bounty_claim.id).then(function(updates) {
+        $api.bounty_claim_accept(bounty_claim.id, bounty_claim.new_accept.description).then(function(updates) {
           $scope.$update_bounty_claim(bounty_claim, updates);
         });
       };
