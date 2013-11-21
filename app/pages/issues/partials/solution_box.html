@@ -50,7 +50,7 @@
 
     <div ng-switch-default>
       <h4 style="margin-top: 0;" class="text-center">Earn this bounty!</h4>
-      <p>Click Start Work to let everyone know you’re working on a solution. You can submit a bounty claim once the issue is closed on the <a ng-href="/issues/{{ issue.slug }}">original issue tracker</a>.</p>
+      <p>Click Start Work to let everyone know you’re working on a solution. You can submit a bounty claim once the issue is closed on the <a ng-href="{{issue.url}}" target="_blank">original issue tracker</a>.</p>
       <div>
         <button ng-click-require-auth="start_solution()" class="btn btn-primary btn-block">Start Work</button>
       </div>
