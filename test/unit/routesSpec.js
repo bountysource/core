@@ -191,21 +191,21 @@ describe('All the wonderful routes we have', function() {
   describe('Issues', function() {
     it('should map routes for bounties', function() {
       inject(function($route) {
-        expect($route.routes['/issues/:id/bounties'].controller).toBe('IssueBountiesController');
+        expect($route.routes['/issues/:id/bounties'].controller).toBe('IssuesBaseController');
         expect($route.routes['/issues/:id/bounties'].templateUrl).toEqual('pages/issues/bounties.html');
       });
     });
 
     it('should map routes for search', function() {
       inject(function($route) {
-        expect($route.routes['/issues/:id/bounty'].controller).toBe('IssueShow');
+        expect($route.routes['/issues/:id/bounty'].controller).toBe('IssuesBaseController');
         expect($route.routes['/issues/:id/bounty'].templateUrl).toEqual('pages/issues/bounty.html');
       });
     });
 
     it('should map routes for bounty claims', function() {
       inject(function($route) {
-        expect($route.routes['/issues/:id/claims'].controller).toBe('BountyClaimsController');
+        expect($route.routes['/issues/:id/claims'].controller).toBe('IssuesBaseController');
         expect($route.routes['/issues/:id/claims'].templateUrl).toEqual('pages/issues/bounty_claims.html');
       });
     });
@@ -219,7 +219,7 @@ describe('All the wonderful routes we have', function() {
 
     it('should map routes for show', function() {
       inject(function($route) {
-        expect($route.routes['/issues/:id'].controller).toBe('IssueShow');
+        expect($route.routes['/issues/:id'].controller).toBe('IssuesBaseController');
         expect($route.routes['/issues/:id'].templateUrl).toEqual('pages/issues/show.html');
       });
     });

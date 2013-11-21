@@ -5,7 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/issues/:id', {
         templateUrl: 'pages/issues/show.html',
-        controller: 'IssueShow'
+        controller: 'IssuesBaseController'
       });
   })
 
@@ -18,6 +18,8 @@ angular.module('app')
     };
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+      $pageTitle.set(issue.title, issue.tracker.name);
+
       // depending on the tracker, issue/comment bodies will either be html or text.
       issue.$comment_ctype = "html";
       issue.$body_ctype = "html";
@@ -25,8 +27,6 @@ angular.module('app')
         issue.$comment_ctype = "text";
         issue.$body_ctype = "text";
       }
-
-      $pageTitle.set(issue.title, issue.tracker.name);
 
       // set bounty info message data
       if (issue.bounty_claims.length === 0) {

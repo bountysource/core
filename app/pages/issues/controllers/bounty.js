@@ -5,7 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/issues/:id/bounty', {
         templateUrl: 'pages/issues/bounty.html',
-        controller: 'IssueShow'
+        controller: 'IssuesBaseController'
       });
   })
 
@@ -31,7 +31,7 @@ angular.module('app')
     //randomly includes partial
     $scope.expiration = Math.floor(Math.random()*2);
 
-    $scope.issue.then(function(issue) {
+    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       $scope.bounty.item_number = "issues/"+issue.id;
       $scope.create_payment = function() {
         var base_url = $window.location.href.replace(/\/issues.*$/,'');

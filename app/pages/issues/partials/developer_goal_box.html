@@ -1,0 +1,51 @@
+<div ng-controller="DeveloperGoalsBaseController" collang-hidepse="initializing">
+  <!-- You have set a goal -->
+  <div ng-show="my_developer_goal">
+    <div class="well">
+      <div class="text-center">
+        <h4 style="margin-top: 0;">Your Bounty Goal</h4>
+        <div><small>Set on {{my_developer_goal.created_at | date:'medium'}}</small></div>
+      </div>
+      <br />
+      <form name="form" ng-submit="update_developer_goal(my_developer_goal.amount)" style="margin: 0;" class="form-horizontal">
+        <div class="row-fluid">
+          <div class="input-prepend span6" style="margin: 0;">
+            <span class="add-on">$</span>
+            <input name="amount" type="number" class="span9" min="{{issue.bounty_total + 1}}" step="1" ng-model="my_developer_goal.amount" ng-value="my_developer_goal.amount" required />
+          </div>
+          <div class="span6">
+            <button type="submit" class="btn btn-block btn-primary" ng-disabled="form.amount.$pristine || my_developer_goal.amount <= issue.bounty_total || my_developer_goal.amount < 5">Update Goal</button>
+          </div>
+        </div>
+      </form>
+
+      <div collapse="!my_developer_goal_updated_at">
+        <div style="margin-top: 10px; text-align: center;">
+          <small class="text-success"><em>Updated {{my_developer_goal_updated_at | date:'medium'}}</em></small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- You have not set a goal -->
+  <div ng-hide="my_developer_goal">
+    <div class="well">
+      <div class="text-center">
+        <h4 style="margin-top: 0;">Set A Bounty Goal</h4>
+        <p>Set a goal so the community has a bounty target. Get notified when the bounty reaches your goal!</p>
+      </div>
+
+      <form ng-submit="create_developer_goal()" style="margin: 0;" class="form-horizontal">
+        <div class="row-fluid">
+          <div class="input-prepend span6" style="margin: 0;">
+            <span class="add-on">$</span>
+            <input type="number" class="span9" min="{{issue.bounty_total + 1}}" step="1" ng-model="new_developer_goal.amount" placeholder="{{issue.bounty_total + 100}}" required />
+          </div>
+          <div class="span6">
+            <button type="submit" class="btn btn-block btn-primary" ng-disabled="new_developer_goal.amount <= issue.bounty_total || new_developer_goal.amount < 5">Set Goal</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

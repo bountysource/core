@@ -1,39 +1,57 @@
-<div class="well text-center">
-  <div><img ng-src="{{team.large_image_url}}" style="width: 100%;"/></div>
-  <br />
-  <div><a class="btn btn-block" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a></div>
-</div>
+<div>
+  <div class="well text-center">
+    <div><img ng-src="{{team.large_image_url}}" style="width: 100%;"/></div>
+    <br />
+    <div><a class="btn btn-block" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a></div>
+  </div>
 
-<div ng-show="is_member">
-  <div class="well">
-    <div class="text-center">
-      <h4 style="margin-top: 0;">Your Membership</h4>
+  <div ng-show="is_member">
+    <div class="well">
+      <div class="text-center">
+        <h4 style="margin-top: 0;">Your Membership</h4>
+      </div>
+
+      <!-- Permissions -->
+      <div>
+        <label class="checkbox" ng-show="is_public">
+          <span>membership publicized</span>
+          <input type="checkbox" style="cursor: default;" disabled checked />
+        </label>
+        <label class="checkbox" ng-show="is_admin || is_developer">
+          <span>can change team settings</span>
+          <input type="checkbox" style="cursor: default;" disabled checked />
+        </label>
+        <label class="checkbox" ng-show="is_admin || is_developer">
+          <span>can manage team projects</span>
+          <input type="checkbox" style="cursor: default;" disabled checked />
+        </label>
+        <label class="checkbox" ng-show="is_admin">
+          <span>can manage team members</span>
+          <input type="checkbox" style="cursor: default;" disabled checked />
+        </label>
+      </div>
+
+      <!-- Account Balance -->
+      <div class="text-center" ng-show="is_developer || is_admin">
+        <h4>Team Account Balance</h4>
+        <strong>{{team.account_balance | currency}}</strong>
+      </div>
     </div>
+  </div>
 
-    <!-- Permissions -->
-    <div>
-      <label class="checkbox" ng-show="is_public">
-        <span>membership publicized</span>
-        <input type="checkbox" style="cursor: default;" disabled checked />
-      </label>
-      <label class="checkbox" ng-show="is_admin || is_developer">
-        <span>can change team settings</span>
-        <input type="checkbox" style="cursor: default;" disabled checked />
-      </label>
-      <label class="checkbox" ng-show="is_admin || is_developer">
-        <span>can manage team projects</span>
-        <input type="checkbox" style="cursor: default;" disabled checked />
-      </label>
-      <label class="checkbox" ng-show="is_admin">
-        <span>can manage team members</span>
-        <input type="checkbox" style="cursor: default;" disabled checked />
-      </label>
-    </div>
+  <div ng-show="team.open_bounties_amount > 0">
+    <div class="well well-small">
+      <div class="row-fluid">
+        <div class="text-center span6">
+          <a ng-href="teams/{{team.slug}}/bounties"><h3 style="margin: 0; line-height:35px" class="text-center">{{team.open_bounties_amount | dollars}}</h3></a>
+          <div>in bounties</div>
+        </div>
 
-    <!-- Account Balance -->
-    <div class="text-center" ng-show="is_developer || is_admin">
-      <h4>Team Account Balance</h4>
-      <strong>{{team.account_balance | currency}}</strong>
+        <div class="text-center span6">
+          <a ng-href="teams/{{team.slug}}/bounties"><h3 style="margin:0; line-height:35px;" class="text-center">{{team.open_issues_count}}</h3></a>
+          <div>open issues</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

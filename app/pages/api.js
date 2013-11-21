@@ -340,10 +340,40 @@ angular.module('api.bountysource',[]).
           }
         }
 
-        // TODO legacy hack, turn owner into person
         for (i=0; i<issue.bounties.length; i++) {
+          // TODO legacy hack, turn owner into person
           issue.bounties[i].person = issue.bounties[i].owner;
+          issue.bounties[i].amount = parseInt(issue.bounties[i].amount, 10);
         }
+
+        //START enforce list of unique backers (prevent repeat backers)
+        var unique_backer_bounties = {};
+        for (i=0; i<issue.bounties.length; i++) {
+          var bounty = issue.bounties[i];
+          if (bounty.owner) {
+            var backer_id = bounty.owner.id + bounty.owner.type; // adding id+type prevents collision between multiple owner types
+            if (unique_backer_bounties[backer_id]) { // backer already exists, add amounts
+              var previous_bounty_amount = unique_backer_bounties[backer_id].amount;
+              var bounty_amount = parseInt(bounty.amount, 10);
+              var new_amount = previous_bounty_amount + bounty_amount;
+              unique_backer_bounties[backer_id].amount = new_amount;
+            } else {
+              unique_backer_bounties[backer_id] = bounty;
+              unique_backer_bounties[backer_id].amount = parseInt(bounty.amount, 10);
+            }
+          } else {
+            unique_backer_bounties["anon_"+i] = bounty; //anonymous backer, add to list
+            unique_backer_bounties["anon_"+i].amount = parseInt(bounty.amount, 10);
+          }
+        }
+        //cast back into array
+        var unique_backer_bounties_arr = [];
+        for (var key in unique_backer_bounties) {
+          unique_backer_bounties_arr.push(unique_backer_bounties[key]);
+        }
+        //override original bounties list with new uniqueified list
+        issue.bounties = unique_backer_bounties_arr;
+        //END list of unique backers
 
         return issue;
       });
@@ -466,6 +496,10 @@ angular.module('api.bountysource',[]).
       return this.call("/teams/"+team_id+"/activity");
     };
 
+    this.team_bounties = function(team_id) {
+      return this.call("/teams/"+team_id+"/bounties");
+    };
+
     this.team_invite_accept = function(team_id, token) {
       return this.call("/teams/"+team_id+"/invites", "PUT", { token: token });
     };
@@ -576,6 +610,52 @@ angular.module('api.bountysource',[]).
         }
       });
       return deferred.promise;
+    };
+
+    this.start_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution", "POST", function(response) {
+        $api.require_signin();
+        return response.data;
+      });
+    };
+
+    this.restart_solution = function (issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/start_work", "POST");
+    };
+
+    this.stop_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/stop_work", "POST");
+    };
+
+    this.checkin_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/check_in", "POST");
+    };
+
+    this.complete_solution = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution/complete_work", "POST");
+    };
+
+    this.solution_get = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solution", "GET");
+    };
+
+    this.create_developer_goal = function(issue_id, data) {
+      return this.call("/issues/"+issue_id+"/developer_goals", "POST", data, function (response) {
+        $api.require_signin();
+        return response.data;
+      });
+    };
+
+    this.update_developer_goal = function(issue_id, data) {
+      return this.call("/issues/"+issue_id+"/developer_goal", "PUT", data);
+    };
+
+    this.get_developer_goal = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/developer_goal", "GET");
+    };
+
+    this.get_developer_goals = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/developer_goals", "GET");
     };
 
     // these should probably go in an "AuthenticationController" or something more angular

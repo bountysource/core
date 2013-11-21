@@ -16,7 +16,7 @@ describe('IssueShow', function() {
     $api = $injector.get('$api');
 
     createController = function() {
-      return $controller('IssueShow', {'$scope': $rootScope});
+      return $controller('IssuesBaseController', {'$scope': $rootScope});
     };
 
     createBountyController = function() {

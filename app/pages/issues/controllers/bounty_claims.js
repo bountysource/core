@@ -5,7 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/issues/:id/claims', {
         templateUrl: 'pages/issues/bounty_claims.html',
-        controller: 'BountyClaimsController'
+        controller: 'IssuesBaseController'
       });
   })
   .controller('BountyClaimsController', function ($scope, $routeParams, $location, $window, $api) {
