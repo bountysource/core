@@ -1,4 +1,4 @@
-<div ng-controller="DeveloperGoalsBaseController" >
+<div ng-controller="DeveloperGoalsBaseController" ng-show="issue.can_add_bounty && next_developer_goal">
   <div class="well">
     <div style="text-align: center;" ng-show="issue.bounty_total < next_developer_goal.amount">
       <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name}}</a> set a bounty goal of {{next_developer_goal.amount | dollars}}</h3>
@@ -41,7 +41,7 @@
           </td>
           <td style="width: 40%">
             <div class="issue-goals progress progress-striped" style="margin: 0;">
-              <div class="bar bar-success" style="width: {{100*issue.bounty_total/developer_goal.amount | at_least:10 | at_most:100 | number:0 }}%;">
+              <div class="bar bar-success" style="width: {{ 100*issue.bounty_total/developer_goal.amount | at_least:15 | at_most:100 | percent }};">
                 <span>{{issue.bounty_total/developer_goal.amount | percent}}</span>
               </div>
             </div>
