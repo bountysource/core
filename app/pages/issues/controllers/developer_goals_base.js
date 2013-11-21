@@ -13,7 +13,10 @@ angular.module('app')
 
     $scope.$on('developerGoalCreateReceived', function(event, new_developer_goal) {
       $scope.my_developer_goal = new_developer_goal;
-      $scope.developer_goals.push(new_developer_goal);
+      $scope.developer_goals.then(function(developer_goals) {
+        developer_goals.push(new_developer_goal);
+        return developer_goals;
+      });
     });
 
     $scope.$on('developerGoalUpdateReceived', function(event, updated_developer_goal) {
