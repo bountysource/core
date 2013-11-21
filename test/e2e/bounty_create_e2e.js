@@ -19,7 +19,7 @@ describe("Scenario: Creating Bounties --", function() {
       browser().navigateTo("/trackers/47-bountysource-frontend");
       expect(element("button[ng-click='tracker.follow()']").count()).toBe(1);
       expect(element("a[ng-href='https://github.com/bountysource/frontend']").count()).toBe(1);
-      expect(element("a[ng-click='show_bounties()']").count()).toBe(1);
+      expect(element("a[ng-click='show_bounties()']").count()).toBe(2);
       expect(binding("tracker_stats.collected_total | dollars")).toBe("$280");
       expect(input("issue_filter_options.text").val()).toBeDefined();
       expect(input("issue_filter_options.bounty_min").val()).toBeDefined();
