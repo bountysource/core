@@ -58,3 +58,22 @@ table.update_table th:nth-child(2) {
 ul.fundraiser-highlight > li > div{
   margin-right: 2%;
 }
+
+/* updates header */
+div.update-header-options {
+  position: relative;
+  min-height: 30px;
+}
+
+div.update-header-options > * {
+  position: absolute;
+  bottom: 4px;
+}
+
+div.update-header-options > span.update-date {
+  left: 0px;
+}
+
+div.update-header-options > div.update-options {
+  right: 0px;
+}
