@@ -1,6 +1,6 @@
 <h1 class="text-center">{{ fundraiser.title || 'Loading...' }}</h1>
  <p class="lead text-center" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
 
-<div ng-show="fundraiser.owner && !fundraiser.in_progress" class="alert alert-info text-center">
+<div ng-show="fundraiser.owner && fundraiser.published && !fundraiser.in_progress" class="alert alert-info text-center">
   All money raised is now on your Bountysource account. You can request a cash-out <a href="/activity/transactions">here</a>.
 </div>
