@@ -4,18 +4,22 @@
   <li><a>Create</a></li>
 </ul>
 
-<h1>Teams Using Open-Source Software</h1>
-
-<div class="row-fluid">
-  <ul class="nav nav-tabs">
-    <li><a href="/teams">Popular</a></li>
-    <li class="active"><a href="/teams/new">Create</a></li>
-  </ul>
-
-  <p class="lead">Show off your teams's support for open-source software.</p>
+<div>
+  <h1>Create your team now</h1>
   <br />
+</div>
 
-  <form class="form-horizontal" ng-submit="create_team()" ng-controller="NewTeamController">
+<ul class="nav nav-tabs">
+  <li><a href="/teams">Popular</a></li>
+  <li class="active"><a href="/teams/new">Create</a></li>
+</ul>
+
+<div collapse="!creating_team">
+  <loading-bar>Creating {{form_data.name || "team"}}...</loading-bar>
+</div>
+
+<div collapse=creating_team>
+  <form class="form-horizontal" ng-submit="create_team()">
     <div class="alert alert-error" ng-show="error">{{error}}</div>
 
     <ng-include src="'pages/teams/partials/form.html'"></ng-include>

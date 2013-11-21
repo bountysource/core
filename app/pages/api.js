@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('api.bountysource',[]).
-  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer) {
+  service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter, $log) {
     var $api = this; // hack to store self reference
     this.access_token_cookie_name = 'v2_access_token';
 
     // set environment
     $rootScope.environment = window.BS_ENV;
-    if ($location.host().match(/localhost|v2\.pagekite/)) {
+    if ($location.host().match(/localhost|v2\.pagekite|.*\.local/)) {
       $rootScope.can_switch_environments = true;
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
@@ -95,7 +95,29 @@ angular.module('api.bountysource',[]).
           params.callback = 'CORS';
           var cors_callback = function(response) {
             response = response.replace(/^CORS\(/,'').replace(/\)$/,'');
-            deferred.resolve(callback(JSON.parse(response)));
+
+            var parsed_response = JSON.parse(response);
+
+            if (parsed_response.meta) {
+              // Handle 500 server errors, log request and response data
+              if (parsed_response.meta.status === 500) {
+                // obfuscate sensitive data
+                var logged_params = angular.copy(params);
+                if (logged_params.access_token) { logged_params.access_token = "..."; }
+                if (logged_params.password) { logged_params.password = "..."; }
+                if (logged_params.oauth_token) { logged_params.oauth_token = "..."; }
+
+                $log.warn("API Error");
+                $log.info(" * Request", method, url);
+                $log.info(" * Request Params", logged_params);
+                $log.info(" * Response:", angular.copy(parsed_response));
+              } else if (parsed_response.meta.status === 301) {
+                $log.info("Content moved, redirecting to ", parsed_response.data.url);
+                $window.location = parsed_response.data.url;
+              }
+            }
+
+            deferred.resolve(callback(parsed_response));
           };
           // make actual HTTP call with promise
           if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
@@ -129,12 +151,13 @@ angular.module('api.bountysource',[]).
           res.data.image_url = res.data.image_url || "/images/bountysource-grey.png";
 
           // calculate time left
-          // using Moment.js
-          var now = new Moment();
-          var ends = new Moment(res.data.ends_at);
-          res.data.$days_left = ends.diff(now, "days");
-          res.data.$hours_left = ends.diff(now, "hours");
-          res.data.$minutes_left = ends.diff(now, "minutes");
+          var now = new Date().getTime();
+          var ends = Date.parse(res.data.ends_at);
+          var diff = ends - now;
+          res.data.$days_left = Math.floor(diff / (1000*60*60*24));
+          res.data.$hours_left = Math.floor(diff / (1000*60*60));
+          res.data.$minutes_left = Math.floor(diff / (1000*60));
+          res.data.$seconds_left = Math.round(diff / (1000));
         }
         return res.data;
       });
@@ -225,10 +248,15 @@ angular.module('api.bountysource',[]).
       return this.call("/users/"+id);
     };
 
-    this.person_put = function(data) {
-      var promise = this.call("/user", "PUT", data);
-      promise.then($api.set_current_person);
-      return promise;
+    this.person_update = function(data) {
+      return this.call("/user", "PUT", data);
+    };
+
+    this.notification_unsubscribe = function(type, data) {
+      data.type = type;
+      return this.call("/notifications/unsubscribe", 'POST', data, function(response) {
+        return response.meta.success;
+      });
     };
 
     this.change_password = function(data) {
@@ -270,15 +298,19 @@ angular.module('api.bountysource',[]).
     };
 
     this.tracker_follow = function(id) {
-      return this.call("/follows", "PUT", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "PUT", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_unfollow = function(id) {
-      return this.call("/follows", "DELETE", { item_id: id, item_type: "tracker" });
+      return this.call("/follows", "DELETE", { item_id: id, item_type: "Tracker" });
     };
 
     this.tracker_issues_get = function(id) {
       return this.call("/projects/"+id+"/issues");
+    };
+
+    this.issues_featured = function(data) {
+      return this.call("/issues/featured", "GET", data);
     };
 
     this.tracker_stats = function(id) {
@@ -341,6 +373,15 @@ angular.module('api.bountysource',[]).
 
     this.search = function(query) {
       return this.call("/search", "POST", { query: query });
+    };
+
+    this.bounty_search = function(query) {
+      //query will come from the frontend as a JSON object
+      return this.call("/search/bounty_search", "GET", query);
+    };
+
+    this.languages_get = function() {
+      return this.call("/languages");
     };
 
     this.tracker_relations_get = function() {
@@ -502,6 +543,14 @@ angular.module('api.bountysource',[]).
       return this.call("/projects");
     };
 
+    this.claim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/claim", "POST", {owner_id: owner_id, owner_type: owner_type});
+    };
+
+    this.unclaim_tracker = function(id, owner_id, owner_type) {
+      return this.call("/trackers/"+id+"/unclaim", "POST", {owner_id: owner_id, owner_type: owner_type});
+    };
+
     this.tracker_plugins_get = function() {
       return this.call("/tracker_plugins");
     };
@@ -511,7 +560,17 @@ angular.module('api.bountysource',[]).
       return this.call("/tracker_plugins", "POST", data);
     };
 
-
+    this.job_finished = function(id) {
+      var deferred = $q.defer();
+      this.call("/jobs/"+id+"/poll", function(response) {
+        if (response.meta.status === 304) {
+          deferred.resolve(false);
+        } else {
+          deferred.resolve(true);
+        }
+      });
+      return deferred.promise;
+    };
 
     // these should probably go in an "AuthenticationController" or something more angular
 
@@ -653,12 +712,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.encodeUriQuery = function(val, pctEncodeSpaces) {
-      return encodeURIComponent(val).
-        replace(/%40/gi, '@').
-        replace(/%3A/gi, ':').
-        replace(/%24/g, '$').
-        replace(/%2C/gi, ',').
-        replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
+      return $filter('encodeUriQuery')(val, pctEncodeSpaces);
     };
 
     // save the previous URL for postauth redirect,

@@ -227,7 +227,7 @@ angular.module('app').
           if (owner) {
             if ((/^person$/i).test(owner.type)) {
               element.attr("href", "/people/"+owner.slug);
-            } else if ((/^team$/i).test(owner.type)) {
+            } else if ((/^team(?:::[a-z]+)*$/i).test(owner.type)) {
               element.attr("href", "/teams/"+owner.slug);
             }
           }
@@ -242,4 +242,44 @@ angular.module('app').
       transclude: true,
       template: '<div><div class="text-center"><p class="lead" ng-transclude></p><progress value="100" class="progress-striped active"></progress></div></div>'
     };
-  });
+  }).
+  directive('gaqTrackClick', ['$timeout', '$window', function($timeout, $window) {
+    return {
+      restrict: "AC",
+      link: function(scope, element, attrs) {
+        element.bind('click', function(e){
+          e.preventDefault();
+        });
+        var gaqArgsWatcher = scope.$watch(attrs.gaqArgs, function(gaqArgs) {
+          gaqArgsWatcher();
+          if (gaqArgs) {
+            element.bind('click', function(){
+              gaqArgs.push(attrs.href);
+              $window._gaq.push(gaqArgs);
+
+              $timeout(function() {
+                $window.location = attrs.href;
+              }, 250);
+            });
+          }
+        });
+      }
+    };
+  }]).directive('abRandomize', ['$rootScope', '$compile', function ($rootScope, $compile) {
+    return {
+      restrict: "AC",
+      link: function (scope, element, attrs) {
+        $rootScope.$on("$load_expiration_options", function () {
+          var radio_array = element[0].children;
+          var children_array = [];
+          for (var i = 0; i < radio_array.length; i++) {
+            children_array.push(radio_array[i]);
+          }
+          children_array = children_array.sort(function() {return 0.5 - Math.random();});
+          element.children().remove();
+          element.append(children_array);
+          $compile(element.contents())(scope);
+        });
+      }
+    };
+  }]);

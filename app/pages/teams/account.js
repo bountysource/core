@@ -6,8 +6,7 @@ angular.module('app')
       .when('/teams/:id/account', {
         templateUrl: 'pages/teams/account.html',
         controller: 'BaseTeamController',
-        resolve: $person,
-        reloadOnSearch: false
+        resolve: $person
       });
   })
   .controller('TeamAccountController', function ($scope, $routeParams, $location, $api, $payment, $window) {
@@ -17,17 +16,21 @@ angular.module('app')
       }
     });
 
-    // pick off query string to show amount added to account
-    if ($location.search().funds_added) {
-      $scope.funds_added = parseInt($location.search().funds_added, 10) || undefined;
-      $location.search({}).replace();
-    }
-
     $scope.pay_in = {
       amount: 0,
       item_number: "",
-      payment_method: "google"
+      payment_method: "google",
+
+      // only used to alter the displayed amount,
+      // not actually sent in the payment process request.
+      fee: 0,
+      total: 0
     };
+
+    $scope.$watch('pay_in.amount', function() {
+      $scope.pay_in.fee = ($scope.pay_in.amount || 0) * 0.10;
+      $scope.pay_in.total = ($scope.pay_in.amount||0) + $scope.pay_in.fee;
+    });
 
     $scope.team.then(function(team) {
       $scope.pay_in.item_number = "teams/"+team.id;
@@ -38,7 +41,7 @@ angular.module('app')
       if ($scope.pay_in.amount && angular.isNumber($scope.pay_in.amount)) {
         var payment_params = angular.copy($scope.pay_in);
 
-        payment_params.success_url = $window.location.href+"?funds_added="+$scope.pay_in.amount;
+        payment_params.success_url = $window.location.protocol + "//" + $window.location.host + "/teams/" + $routeParams.id + "?funds_added=" + $scope.pay_in.amount;
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {

@@ -14,6 +14,7 @@ angular.module('app')
       amount: parseInt($routeParams.amount, 10) || 100,
       anonymous: ($routeParams.anonymous === "true") || false,
       payment_method: $routeParams.payment_method || "google",
+      survey_response: $routeParams.survey_response || "",
       reward_id: parseInt($routeParams.reward_id, 10) || 0
     };
 
@@ -23,6 +24,10 @@ angular.module('app')
       // add the base item number, with just fundraiser id
       $scope.pledge.base_item_number = 'fundraisers/'+response.id;
       $scope.pledge.item_number = $scope.pledge.base_item_number;
+
+      if ($scope.pledge.reward_id) {
+        $scope.pledge.item_number += "/" + $scope.pledge.reward_id;
+      }
 
       // select reward to have the object cached. handled after this by set_reward(reward)
       $scope.selected_reward = null;
@@ -58,7 +63,11 @@ angular.module('app')
       $scope.pledge.reward_id = reward.id || 0;
 
       // add reward item to item number
-      $scope.pledge.item_number = $scope.pledge.base_item_number + (reward.id === 0 ? '' : '/'+reward.id);
+      if ($scope.selected_reward) {
+        $scope.pledge.item_number = $scope.pledge.base_item_number + '/' + reward.id;
+      } else {
+        $scope.pledge.item_number = $scope.pledge.base_item_number;
+      }
 
       // if the reward amount is higher than current pledge amount, raise it.
       if (reward.amount && (!$scope.pledge.amount || $scope.pledge.amount < reward.amount)) {

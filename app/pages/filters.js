@@ -132,7 +132,7 @@ angular.module('app').
     };
   }).filter('slug', function() {
     return function(val) {
-      return (val||"").toLowerCase().replace(/[ ]+/g,'-').replace(/[,.]/g,'').replace(/-(inc|llc)$/,'').replace(/[^a-z1-9-_]/g,'');
+      return (val||"").toLowerCase().replace(/[ ]+/g,'-').replace(/[,.]/g,'').replace(/-(inc|llc)$/,'').replace(/[^a-z0-9-_]/g,'');
     };
   }).filter('pluck', function() {
     return function(input, field) {
@@ -178,6 +178,15 @@ angular.module('app').
       if (input) {
         return input.replace(/[^0-9a-f]/i, "");
       }
+    };
+  }).filter('encodeUriQuery', function() {
+    return function(val, pctEncodeSpaces) {
+      return encodeURIComponent(val).
+        replace(/%40/gi, '@').
+        replace(/%3A/gi, ':').
+        replace(/%24/g, '$').
+        replace(/%2C/gi, ',').
+        replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
     };
   });
 

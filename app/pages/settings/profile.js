@@ -38,11 +38,14 @@ angular.module('app')
         $scope.form_data.image_url = $scope.profile_input.radio;
       }
 
-      $api.person_put($scope.form_data).then(function(response) {
-        if (response.error) {
-          $scope.error = response.error;
+      $api.person_update($scope.form_data).then(function(updated_person) {
+        if (updated_person.error) {
+          $scope.error = updated_person.error;
         } else {
           $scope.success = 'Settings have been saved.';
+
+          // Update cached person
+          $api.set_current_person(updated_person);
         }
       });
     };

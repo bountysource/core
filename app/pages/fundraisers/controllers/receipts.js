@@ -7,45 +7,62 @@ angular.module('app')
         templateUrl: 'pages/fundraisers/receipts.html',
         controller: 'FundraiserReceiptsController',
         resolve: $person
+      })
+      .when('/fundraisers/:id/receipts/recent', {
+        templateUrl: 'pages/fundraisers/receipts.html',
+        controller: 'FundraiserReceiptsController',
+        resolve: $person
       });
   })
 
   .controller('FundraiserReceiptsController', function ($scope, $twttr, $routeParams, $api, $location, $filter, $window) {
     $scope.receipts = [];
+    $scope.type = 'index';
     $scope.fundraiser = $api.fundraiser_get($routeParams.id);
+    if ((/^\/fundraisers\/[A-Za-z-_0-9]+\/receipts\/recent[\/]?$/i).test($location.path())) {
+      $scope.type = 'recent';
+    }
 
     $scope.fundraiser.then(function (fundraiser) {
       $api.pledge_activity().then(function (response) {
-        for (var e = 0; e < response.length; e++) {  //grab all of the users pledges, if any of them have the same ID as this fundraiser, then push to the receipts array
-          if (response[e].fundraiser.id === fundraiser.id) {
-            $scope.receipts.push(response[e]);
-          }
-        }
-
-        if ($scope.receipts.length === 1) {
-          $scope.pledge = $scope.receipts[0];
-          $scope.fundraiser = $scope.receipts[0].fundraiser;
-        }
-
-        if ($location.search().pledge_id || $scope.pledge) { //if a pledge_id is specified load that particular receipt page
-          if (!$scope.pledge) {
-            for (var i = 0; i < $scope.receipts.length; i++) {
-              if ($scope.receipts[i].id === parseInt($location.search().pledge_id, 10)) {
-                $scope.pledge = $scope.receipts[i];
-                $scope.fundraiser = $scope.receipts[i].fundraiser;
-              }
+        if ($scope.type === 'index') {
+          for (var e = 0; e < response.length; e++) {  //grab all of the users pledges, if any of them have the same ID as this fundraiser, then push to the receipts array
+            if (response[e].fundraiser.id === fundraiser.id) {
+              $scope.receipts.push(response[e]);
             }
           }
 
-          var tweet_text = "I just pledged "+$filter('currency')($scope.pledge.amount)+" to "+$scope.fundraiser.title+"!";
-          $scope.tweet_text = encodeURIComponent(tweet_text);
-          var tweet_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-          $scope.tweet_url = encodeURIComponent(tweet_url);
-          var google_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-          $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
-          var facebook_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
-          $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
+          if ($scope.receipts.length === 1) {
+            $scope.pledge = $scope.receipts[0];
+            $scope.fundraiser = $scope.receipts[0].fundraiser;
+          }
+
+          if ($location.search().pledge_id || $scope.pledge) { //if a pledge_id is specified load that particular receipt page
+            if (!$scope.pledge) {
+              for (var i = 0; i < $scope.receipts.length; i++) {
+                if ($scope.receipts[i].id === parseInt($location.search().pledge_id, 10)) {
+                  $scope.pledge = $scope.receipts[i];
+                  $scope.fundraiser = $scope.receipts[i].fundraiser;
+                }
+              }
+            }
+          }
+        } else {
+          $scope.pledge = response[0]; //FIX currently gathers data from users most recent receipt, issue agnostic
+          $scope.fundraiser = response[0].fundraiser;
         }
+
+        var tweet_text = "I just pledged "+$filter('dollars')($scope.pledge.amount)+" to "+$scope.fundraiser.title+"!";
+        $scope.tweet_text = encodeURIComponent(tweet_text);
+
+        var tweet_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
+        $scope.tweet_url = encodeURIComponent(tweet_url);
+
+        var google_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
+        $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
+
+        var facebook_url = "https://www.bountysource.com/fundraisers/"+$scope.fundraiser.id;
+        $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
 
       });
     });
@@ -63,5 +80,17 @@ angular.module('app')
       $window.open(url, "Google+", 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600,top='+top+', left='+left);
       return false;
     };
+
+    $api.fundraisers_get().then(function(fundraisers) {
+      var highlighted_fundraisers = [];
+      for (var i = 0; i < fundraisers.length; i++) {
+        if (fundraisers[i].in_progress && fundraisers[i].featured) {
+          highlighted_fundraisers.push(fundraisers[i]);
+        }
+      }
+      $scope.highlighted_fundraisers = highlighted_fundraisers;
+    });
+
+    $scope.share_fundraiser_link = $location.absUrl().replace(/\/receipts.*$/, '');
 
   });

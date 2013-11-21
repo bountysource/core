@@ -7,6 +7,7 @@ angular.module('app').controller('IssueNavTabsController', function ($scope, $lo
     if (name === 'claims' && (/^\/issues\/[a-z-_0-9]+\/claims$/).test($location.path())) { return "active"; }
     if (name === 'bounty' && (/^\/issues\/[a-z-_0-9]+\/bounty$/).test($location.path())) { return "active"; }
     if (name === 'receipts' && (/^\/issues\/[a-z-_0-9]+\/receipts$/).test($location.path())) { return "active"; }
+    if (name === 'receipts' && (/^\/issues\/[A-Za-z-_0-9]+\/receipts\/recent$/i).test($location.path())) { return "active"; }
   };
 
   $scope.receipts = [];

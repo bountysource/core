@@ -136,7 +136,7 @@ angular.module('app')
         controller: 'Static'
       })
       .when('/bounties', {
-        redirectTo: "/",
+        redirectTo: "/bounties/search",
         controller: 'Static'
       })
       .when('/create_account', {
@@ -145,6 +145,9 @@ angular.module('app')
       })
       .when('/activity/solutions', {
         redirectTo: "/activity/claims",
+        controller: 'Static'
+      }).when('/fundraisers/:id/pledges', {
+        redirectTo: function(param) { return "/fundraisers/"+param.id+"/backers"; },
         controller: 'Static'
       });
   });

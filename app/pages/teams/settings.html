@@ -15,7 +15,9 @@
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
       <form class="form-horizontal" ng-submit="create_team()" ng-controller="EditTeamController">
-        <div class="alert alert-error" ng-show="error">{{error}}</div>
+        <div ng-show="alert.text">
+          <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
+        </div>
 
         <ng-include src="'pages/teams/partials/form.html'"></ng-include>
 

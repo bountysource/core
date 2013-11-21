@@ -3,7 +3,7 @@
 angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/fundraisers/:id/pledges', {
+      .when('/fundraisers/:id/backers', {
         templateUrl: 'pages/pledges/index.html',
         controller: 'FundraiserPledgeController'
       });

@@ -22,8 +22,11 @@ describe('Scenario: Signing In --', function () {
     it("should have a SIGNIN Button that redirects to SIGNIN Page", function() {
       Mock.pushScenario("/people/count", "GET", "success");
       browser().navigateTo('/');
-      expect(element('#home-signin').text()).toBe("Sign In");
-      element('#home-signin').click();
+
+      var e = element('#navbar-provider-email');
+      expect(e.attr('href')).toBe("/signin");
+      e.click();
+
       expect(browser().location().path()).toBe("/signin");
     });
 

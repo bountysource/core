@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('CreateBountyController', function ($scope, $routeParams, $window, $location, $payment, $api, $filter) {
+  .controller('CreateBountyController', function ($scope, $rootScope, $routeParams, $window, $location, $payment, $api, $filter) {
     $scope.bounty = {
       amount: parseInt($routeParams.amount || 0, 10),
       anonymous: ($routeParams.anonymous === "true") || false,
@@ -21,22 +21,29 @@ angular.module('app')
       total: parseInt($routeParams.amount || 0, 10)
     };
 
+    //Logic to show bounty_options template
+
+    //created a custom event. Multiple ng includes made it hard to pin point the event
+    $scope.broadcastLoad = function () {
+      $rootScope.$emit("$load_expiration_options");
+    };
+
+    //randomly includes partial
+    $scope.expiration = Math.floor(Math.random()*2);
+
     $scope.issue.then(function(issue) {
       $scope.bounty.item_number = "issues/"+issue.id;
-
       $scope.create_payment = function() {
         var base_url = $window.location.href.replace(/\/issues.*$/,'');
         var payment_params = angular.copy($scope.bounty);
-
         delete payment_params.fee;
         payment_params.success_url = base_url + "/issues/"+issue.id+"/receipts/recent";
         payment_params.cancel_url = $window.location.href;
 
         $payment.process(payment_params, {
           error: function(response) {
-            // if paying from team, but not a spender
-            if ((/\Ateam\/(\d+)\Z/).test(payment_params.payment_method) && response.meta.status === 403) {
-              console.log("Forbidden:", response);
+            // if paying from team, but not a developer
+            if ((/^team\/(\d+)$/).test(payment_params.payment_method) && response.meta.status === 403) {
               $scope.error = "You do not have permission to do that.";
             } else {
               $scope.error = response.data.error;
@@ -56,28 +63,51 @@ angular.module('app')
     // if logged in, populate teams accounts!
     $scope.$watch("current_person", function(person) {
       if (person) {
-        $scope.teams = $api.person_teams(person.id);
+        // select the team once loaded.
+        // if it's enterprise, then we need to know so that we hide the fees
+        $scope.teams = $api.person_teams(person.id).then(function(teams) {
+          // oh god, that's like the wost line of JS I have ever written
+          var team_id = parseInt(((($scope.bounty.payment_method).match(/^team\/(\d+)$/) || {})[1]), 10);
+
+          if (team_id) {
+            for (var i=0; i<teams.length; i++) {
+              if (teams[i].id === team_id) {
+                $scope.selected_team = teams[i];
+                break;
+              }
+            }
+          }
+
+          return teams;
+        });
       }
     });
 
+    $scope.selected_team = undefined;
+    $scope.select_team = function(team) {
+      $scope.selected_team = team;
+    };
+
     $scope.can_make_anonymous = true;
     $scope.has_fee = true;
+    $scope.show_fee = false;
 
     $scope.$watch("bounty.payment_method", function(payment_method) {
-      // Can make anonymous?
-      // Only team bounties/pledges cannot be made anonymous.
-      if ((/^team\/\d+$/).test(payment_method)) {
-        $scope.can_make_anonymous = false;
-      } else {
-        $scope.can_make_anonymous = true;
-      }
+      if (payment_method) {
 
-      // Bountysource charges a fee?
-      // Only personal accounts are exempt from the fee.
-      if (payment_method === "personal") {
-        $scope.has_fee = false;
-      } else {
-        $scope.has_fee = true;
+        if ((/^team\/\d+$/).test(payment_method)) {
+          $scope.has_fee = false;
+          $scope.show_fee = false;
+        } else if (payment_method === "personal") {
+          $scope.has_fee = false;
+          $scope.show_fee = false;
+        } else {
+          $scope.has_fee = true;
+          $scope.show_fee = true;
+        }
+
+        // Cannot make anon if payment method is a team
+        $scope.can_make_anonymous = !(/^team\/\d+$/).test(payment_method);
       }
     });
 

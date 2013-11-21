@@ -1,5 +1,5 @@
 <form class="form-horizontal form-signin" name="form" novalidate ng-autofill-aware>
-  <h2>Please sign in to continue</h2>
+  <h2>Sign in or create an account</h2>
 
   <div ng-hide="provider">
     <p>The easiest way is to use an account you already have.</p>
@@ -9,13 +9,15 @@
       <div class="controls">
         <ul ng-controller="Signin">
           <li ng-repeat="provider in providers" class="provider-link">
-            <a ng-href="{{ signin_url_for(provider.id) }}" id="signin-{{provider.id}}"><img ng-src="{{provider.image_url}}"> <span>{{provider.name}}</span></a>
+            <a gaq-track-click ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="signin-{{provider.id}}" ng-click="save_route()">
+              <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
+            </a>
           </li>
         </ul>
       </div>
     </div>
 
-    <p>Otherwise, enter an email address and password to continue.</p>
+    <p>Otherwise, enter an email address and password to continue. If you do not already have an account, you will be prompted to create one.</p>
   </div>
 
   <div ng-show="provider" ng-switch on="signin_or_signup">

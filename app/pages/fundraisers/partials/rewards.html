@@ -4,8 +4,8 @@
       <p style="white-space: pre-wrap;">{{ reward.description }}</p>
 
       <p class="muted text-center">
-        <span ng-show="reward.limited_to">{{ reward.claimed | number }} of {{ reward.limited_to | number }} claimed</span>
-        <span ng-hide="reward.limited_to">{{ reward.claimed | number }} claimed</span>
+        <em ng-show="reward.limited_to">{{ reward.claimed | number }} of {{ reward.limited_to | number }} claimed</em>
+        <em ng-hide="reward.limited_to">{{ reward.claimed | number }} claimed</em>
       </p>
 
       <div style="text-align: center;">

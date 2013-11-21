@@ -9,8 +9,8 @@ angular.module('app')
         reloadOnSearch: false
       });
   })
-  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle) {
-    $api.tracker_get($routeParams.id).then(function(tracker) {
+  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
+    $scope.tracker = $api.tracker_get($routeParams.id).then(function(tracker) {
 
       // Edge case: GitHub repo changes owner, and we create a new Tracker model.
       // If the requested tracker model has a redirect to another, change the URL to that tracker.
@@ -27,15 +27,12 @@ angular.module('app')
         if (!$scope.current_person) { return $api.require_signin(); }
 
         if (tracker.followed) {
-          $api.tracker_unfollow($scope.tracker.id).then(function() {
-            // assume API call success, update the button state (tracker.followed)
-            tracker.followed = false;
-          });
+          // assume API call success, update the button state (tracker.followed)
+          tracker.followed = false;
+          $api.tracker_unfollow($routeParams.id);
         } else {
-          $api.tracker_follow($scope.tracker.id).then(function() {
-            // assume API call success, update the button state (tracker.followed)
-            tracker.followed = true;
-          });
+          tracker.followed = true;
+          $api.tracker_follow($routeParams.id);
         }
       };
 
@@ -63,22 +60,25 @@ angular.module('app')
         });
       };
 
-      $scope.tracker = tracker;
-    });
+      // Load issues for tracker. If the tracker was just created (has not been synced yet),
+      // throw in a timeout to allow time for issues to be added
+      $timeout(function() {
+        $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+          $scope.issues_resolved = true;
 
-    // merge all of the issue arrays into one
-    $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
-      $scope.issues_resolved = true;
+          for (var i=0; i<issues.length; i++) {
+            issues[i].bounty_total = parseFloat(issues[i].bounty_total);
 
-      for (var i=0; i<issues.length; i++) {
-        issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+            // sorting doesn't like nulls.. this is a quick hack
+            issues[i].participants_count = issues[i].participants_count || 0;
+            issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+            issues[i].comment_count = issues[i].comment_count || 0;
+          }
+          return issues;
+        });
+      }, tracker.synced_at ? 0 : 2500);
 
-        // sorting doesn't like nulls.. this is a quick hack
-        issues[i].participants_count = issues[i].participants_count || 0;
-        issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
-        issues[i].comment_count = issues[i].comment_count || 0;
-      }
-      return issues;
+      return tracker;
     });
 
     $scope.issue_filter_options = {
