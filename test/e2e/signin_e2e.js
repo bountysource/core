@@ -198,6 +198,7 @@ describe("Scenario: Signin redirect from bounty creation page --", function() {
     Mock.pushScenario("/payments", "POST", "missing-access-token");
     Mock.pushScenario("/user/bounties", "GET", "success");
     Mock.pushScenario("/issues/:id", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
 
     browser().navigateTo('/issues/644-use-an-array-for-web-breadcrumbs-5-00/bounty?amount=15');
     using("form[name=form]").element('button[type=submit].btn:visible').click();
@@ -220,17 +221,20 @@ describe("Scenario: Signin redirect from bounty creation page --", function() {
   it("logging into BountySource account with service provider auth", function() {
 
     Mock.pushScenario("/issues/:id", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
     Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-github-auth");
     Mock.pushScenario("/payments", "POST", "missing-access-token");
     Mock.pushScenario("/user/bounties", "GET", "missing-access-token");
     Mock.pushScenario("/issues/:id", "GET", "success");
+    Mock.pushScenario("/issues/:id", "GET", "success");
+
 
     browser().navigateTo('/issues/644-use-an-array-for-web-breadcrumbs-5-00/bounty?amount=15');
     using("form[name=form]").element('button[type=submit].btn:visible').click();
     expect(browser().location().path()).toEqual("/signin");
     browser().navigateTo('/signin/callback?provider=github&access_token=20117.1379028878.167f0b872b1c1d6f4763e1e78aea6e2fe7e9aa27&status=linked');
-
     expect(browser().location().path()).toEqual('/issues/644-use-an-array-for-web-breadcrumbs-5-00/bounty');
     expect(input('bounty.amount').val()).toEqual('15');
     expect(element("a#navbar-user").text()).toContain("TheManliest");
