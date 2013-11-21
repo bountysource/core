@@ -11,7 +11,6 @@ angular.module('app')
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
     $scope.tracker = $api.tracker_get($routeParams.id).then(function(tracker) {
-
       // Edge case: GitHub repo changes owner, and we create a new Tracker model.
       // If the requested tracker model has a redirect to another, change the URL to that tracker.
       if (($routeParams.id || '').split('-')[0] !== tracker.id) {
@@ -65,10 +64,12 @@ angular.module('app')
       $timeout(function() {
         $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
           $scope.issues_resolved = true;
-
+          $scope.open_bounties = 0 //frontend count of unclaimed bounties
           for (var i=0; i<issues.length; i++) {
             issues[i].bounty_total = parseFloat(issues[i].bounty_total);
-
+            if (issues[i].bounty_total > 0 && !issues[i].paid_out) {
+              $scope.open_bounties++
+            }
             // sorting doesn't like nulls.. this is a quick hack
             issues[i].participants_count = issues[i].participants_count || 0;
             issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
