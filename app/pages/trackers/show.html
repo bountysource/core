@@ -95,30 +95,6 @@
         </div>
       </div>
     </div>
-
-    <!--<h4>Tags</h4>-->
-
-    <!--<form class="form-inline">-->
-    <!--<input type="text" class="span7" ng-model="tracker.new_tag.name" placeholder="Add a new tag" />-->
-    <!--<button type="submit" class="btn btn-primary" ng-click="tracker.create_tag()">-->
-    <!--<i class="icon-tag icon-white"></i>-->
-    <!--Add Tag-->
-    <!--</button>-->
-    <!--</form>-->
-
-    <!--<div ng-repeat="tag_relation in tracker.tags | orderBy:'weight':true">-->
-    <!--<ul class="inline">-->
-    <!--<li style="width: 24px;"><a ng-show="tag_relation.vote <= 0" ng-click="tag_relation.upvote()"><i class="icon-thumbs-up"></i></a></li>-->
-    <!--<li style="width: 24px;"><a ng-show="tag_relation.vote >= 0" ng-click="tag_relation.downvote()"><i class="icon-thumbs-down"></i></a></li>-->
-    <!--<li><strong>{{tag_relation.weight}}</strong></li>-->
-    <!--<li>-->
-    <!--<span class="label label-info">-->
-    <!--<i class="icon-tag icon-white"></i>-->
-    <!--{{tag_relation.tag.name}}-->
-    <!--</span>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
   </div>
 
   <div class="span9">
@@ -206,7 +182,8 @@
         <tr ng-switch-when="bugzilla::tracker">
           <th ng-show="issue_filter_options.show_issue_id">ID</th>
           <th ng-show="issue_filter_options.show_issue_number">#</th>
-          <th class="span9">Title</th>
+          <th class="span8">Title</th>
+          <th class="span3"><a ng-click="change_order_col('priority')">Importance</a></th>
           <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
           <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
           <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
@@ -239,9 +216,12 @@
             </a>
           </td>
 
+          <td ng-show="issue.priority">
+            <span><strong>{{issue.priority}}</strong> <span ng-show="issue.severity">{{issue.severity}}</span></span>
+          </td>
+
           <td style="text-align: center">
             <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
-
               {{issue.bounty_total | dollars:{space:true} }}
             </a>
           </td>
