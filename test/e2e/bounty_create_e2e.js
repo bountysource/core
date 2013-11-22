@@ -12,10 +12,33 @@ describe("Scenario: Creating Bounties --", function() {
 
     it("should show the bounty tracker page", function() {
       Mock.pushScenario("/projects/:id/issues", "GET", "success");
+
+      Mock.pushScenario("/projects/:id/issues", "GET", "success");
+      Mock.pushScenario("/projects/:id/issues", "GET", "success");
+      Mock.pushScenario("/projects/:id/issues", "GET", "success");
+      Mock.pushScenario("/projects/:id/issues", "GET", "success");
+
+      Mock.pushScenario("/trackers/:id/top_backers", "GET", "success");
+
+      Mock.pushScenario("/trackers/:id/top_backers", "GET", "success");
+      Mock.pushScenario("/trackers/:id/top_backers", "GET", "success");
+      Mock.pushScenario("/trackers/:id/top_backers", "GET", "success");
+      Mock.pushScenario("/trackers/:id/top_backers", "GET", "success");
+      Mock.pushScenario("/stats/trackers/:id", "GET", "success");
+      Mock.pushScenario("/trackers/:id/top_backers", "GET", "success");
+
+      Mock.pushScenario("/trackers/:id/overview", "GET", "success");
+      Mock.pushScenario("/stats/trackers/:id", "GET", "success");
+      Mock.pushScenario("/trackers/:id/overview", "GET", "success");
+      Mock.pushScenario("/stats/trackers/:id", "GET", "success");
+
+      Mock.pushScenario("/projects/:id/issues", "GET", "success");
+      Mock.pushScenario("/trackers/:id/top_backers", "GET", "success");
       Mock.pushScenario("/stats/trackers/:id", "GET", "success");
       Mock.pushScenario("/trackers/:id/overview", "GET", "success");
       Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
+
       browser().navigateTo("/trackers/47-bountysource-frontend");
       expect(element("button[ng-click='tracker.follow()']").count()).toBe(1);
       expect(element("a[ng-href='https://github.com/bountysource/frontend']").count()).toBe(1);
@@ -34,7 +57,6 @@ describe("Scenario: Creating Bounties --", function() {
       Mock.pushScenario("/issues/:id", "GET", "success");
       Mock.pushScenario("/issues/:id", "GET", "success");
       Mock.pushScenario("/issues/:id", "GET", "success");
-
       element("a:contains('All external links should open in a new tab')").click();
       expect(browser().location().path()).toBe("/issues/467715-all-external-links-should-open-in-a-new-tab");
       expect(binding("issue.bounty_total")).toBe("$5");
@@ -83,6 +105,7 @@ describe("Scenario: Creating Bounties --", function() {
       });
 
       it("$scope.bounty.amount is initialized to the amount specified on the button", function() {
+        Mock.pushScenario("/issues/:id", "GET", "success");
         Mock.pushScenario("/issues/:id", "GET", "success");
         element("a[ng-click='place_bounty_redirect(15)']").click();
         expect(input("bounty.amount").val()).toBe("15");
