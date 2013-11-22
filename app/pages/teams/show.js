@@ -32,7 +32,6 @@ angular.module('app')
 
       if ((query_url || "").length > 0) {
         $api.search(query_url).then(function (response) {
-          console.log(response);
           if (response.redirect_to) {
             var url = response.redirect_to;
 
