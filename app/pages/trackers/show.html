@@ -183,7 +183,8 @@
           <th ng-show="issue_filter_options.show_issue_id">ID</th>
           <th ng-show="issue_filter_options.show_issue_number">#</th>
           <th class="span8">Title</th>
-          <th class="span3"><a style="color: black;" ng-click="change_order_col('priority')">Importance</a></th>
+          <th class="span3"><a style="color: black;" ng-click="change_order_col('priority')">Priority</a></th>
+          <th class="span3"><a style="color: black;" ng-click="change_order_col('severity')">Severity</a></th>
           <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
           <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
           <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Watchers"><i class="icon-user"></i></a></th>
@@ -215,9 +216,8 @@
             </a>
           </td>
 
-          <td ng-show="issue.priority">
-            <span><strong>{{issue.priority}}</strong> <span ng-show="issue.severity">{{issue.severity}}</span></span>
-          </td>
+          <td ng-show="issue.priority"><strong>{{issue.priority}}</strong></td>
+          <td ng-show="issue.severity"><span>{{issue.severity}}</span></td>
 
           <td style="text-align: center">
             <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
