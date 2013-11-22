@@ -558,8 +558,8 @@ angular.module('api.bountysource',[]).
       return this.call("/bounty_claims/"+id);
     };
 
-    this.bounty_claim_accept = function(id) {
-      return this.call("/bounty_claims/"+id+"/response/accept", "PUT");
+    this.bounty_claim_accept = function(id, description) {
+      return this.call("/bounty_claims/"+id+"/response/accept", "PUT", { description: description });
     };
 
     this.bounty_claim_reject = function(id, description) {
