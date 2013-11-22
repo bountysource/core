@@ -203,55 +203,42 @@
       </thead>
 
       <tbody>
-        <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:issue_filter_options.sort:!issue_filter_options.sort_asc" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
-          <td ng-show="issue_filter_options.show_issue_id">{{issue.id}}</td>
-          <td ng-show="issue_filter_options.show_issue_number">{{issue.number}}</td>
-
-          <td>
-            <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
-              <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
-              {{issue.title}}
-              <span ng-show="issue.paid_out" class="label label-info">paid out</span>
-              <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
-            </a>
-          </td>
-
-          <td ng-show="issue.priority"><strong>{{issue.priority}}</strong></td>
-          <td ng-show="issue.severity"><span>{{issue.severity}}</span></td>
-
-          <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
-              {{issue.bounty_total | dollars:{space:true} }}
-            </a>
-          </td>
-
-          <!--<td style="text-align: center">-->
-            <!--<a ng-href="/issues/{{issue.slug}}/comments" class="label label-info" ng-show="issue.comment_count > 0" tooltip="{{issue.comment_count | number}} Comments" tooltip-placement="bottom">-->
-              <!--<i class="icon-comment icon-white"></i>-->
-              <!--{{issue.comment_count | number}}-->
-            <!--</a>-->
-          <!--</td>-->
-
-          <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning" ng-show="issue.thumbs_up_count > 0"> <!-- TODO (PERF ISSUE):  tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom"-->
-              <i class="icon-thumbs-up icon-white"></i>
-              {{issue.thumbs_up_count | number}}
-            </a>
-          </td>
-
-          <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important" ng-show="issue.participants_count > 1"> <!--  TODO (PERF ISSUE):  tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom"-->
-              <i class="icon-user icon-white"></i>
-              {{issue.participants_count | number}}
-            </a>
-          </td>
-
-          <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info"> <!--tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom"-->
-              {{issue.created_at | time_ago_short }}
-            </a>
-          </td>
-        </tr>
+      <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:issue_filter_options.sort:!issue_filter_options.sort_asc" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+        <td ng-show="issue_filter_options.show_issue_id">{{issue.id}}</td>
+        <td ng-show="issue_filter_options.show_issue_number">{{issue.number}}</td>
+        <td>
+          <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
+            <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
+            {{issue.title}}
+            <span ng-show="issue.paid_out" class="label label-info">paid out</span>
+            <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
+          </a>
+        </td>
+        <td><strong>{{issue.priority}}</strong></td>
+        <td><span>{{issue.severity}}</span></td>
+        <td style="text-align: center">
+          <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
+            {{issue.bounty_total | dollars:{space:true} }}
+          </a>
+        </td>
+        <td style="text-align: center">
+          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning" ng-show="issue.thumbs_up_count > 0"> <!-- TODO (PERF ISSUE):  tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom"-->
+            <i class="icon-thumbs-up icon-white"></i>
+            {{issue.thumbs_up_count | number}}
+          </a>
+        </td>
+        <td style="text-align: center">
+          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important" ng-show="issue.participants_count > 1"> <!--  TODO (PERF ISSUE):  tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom"-->
+            <i class="icon-user icon-white"></i>
+            {{issue.participants_count | number}}
+          </a>
+        </td>
+        <td style="text-align: center">
+          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info"> <!--tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom"-->
+            {{issue.created_at | time_ago_short }}
+          </a>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>

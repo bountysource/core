@@ -19,8 +19,8 @@
           <td style="overflow-x:auto" >
             <p class="muted">{{issue.author_name}} opened this issue on {{issue.created_at | date}}</p>
             <target-blank model="issue">
-              <div ng-show="issue.$comment_ctype == 'html'" ng-bind-html="issue.body_html"></div>
-              <div ng-show="issue.$comment_ctype == 'text'" style="white-space: pre-wrap;">{{issue.body_html}}</div>
+              <div ng-show="issue.$body_ctype == 'html'" ng-bind-html="issue.body_html"></div>
+              <div ng-show="issue.$body_ctype == 'text'" style="white-space: pre-wrap;">{{issue.body_html}}</div>
             </target-blank>
             <p class="muted">
               <a ng-href="{{issue.url}}" target="_blank">View original issue &raquo;</a>
