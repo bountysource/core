@@ -8,7 +8,11 @@ angular.module('app')
         controller: 'PeopleShow'
       });
   })
-  .controller('PeopleShow', function ($scope, $routeParams, $api, $pageTitle) {
+  .controller('PeopleShow', function ($scope, $routeParams, $api, $pageTitle, $location) {
+    if ((/^18483-/).test($routeParams.id)) {
+      $location.url("/teams/bountysource").replace();
+    }
+
     $scope.person = $api.person_get($routeParams.id);
 
     $scope.person.then(function(person){
