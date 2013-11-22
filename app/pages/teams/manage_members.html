@@ -62,12 +62,8 @@
             </tr>
             </tbody>
           </table>
-
           <div id="pending-members" collapse="!pending_invites || pending_invites.length <= 0">
             <h3 style="margin-bottom: 0;">Pending Members</h3>
-            <div ng-show="add_member_error.message">
-              <alert type="add_member_error.type" close="add_member_error.message = null">{{add_member_error.message}}</alert>
-            </div>
             <table class="table table-hover table-striped">
               <thead>
               <tr>
@@ -118,16 +114,19 @@
 
                 <td style="text-align: center;">
                   <div ng-show="new_member.email && !new_member.registered" tooltip="Send Invite">
-                    <button type="submit" class="btn btn-mini btn-block btn-primary" ng-click="team_invite_create()"><i class="icon-envelope icon-white"></i></button>
+                    <button type="submit" class="btn btn-mini btn-block btn-primary"><i class="icon-envelope icon-white"></i></button>
                   </div>
                   <div ng-show="new_member.email && new_member.registered" tooltip="Add to Team">
-                    <button type="submit" class="btn btn-mini btn-block btn-success" ng-click="team_invite_create()"><i class="icon-plus icon-white"></i></button>
+                    <button type="submit" class="btn btn-mini btn-block btn-success"><i class="icon-plus icon-white"></i></button>
                   </div>
                 </td>
               </form>
             </tr>
             </tbody>
           </table>
+          <div ng-show="add_member_error.message">
+            <alert type="add_member_error.type" close="add_member_error.message = null">{{add_member_error.message}}</alert>
+          </div>
         </div>
         <div class="span4">
           <div class="well">
