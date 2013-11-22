@@ -111,8 +111,8 @@ angular.module('app')
         admin: false,
         developer: true,
         registered: false
-      }
-    }
+      };
+    };
 
     $scope.reset_member_form();
 
@@ -160,7 +160,7 @@ angular.module('app')
             if (new_invite.meta.success) {
               invites.push(new_invite.data);
             } else if (new_invite.meta.status === 422) {
-               $scope.add_member_error = {
+              $scope.add_member_error = {
                 message: request_data.email + " has already been sent an invitation!",
                 type: "info"
               };
