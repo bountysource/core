@@ -1,6 +1,7 @@
 # Bountysource
 [![Build Status](https://travis-ci.org/bountysource/frontend.png?branch=master)](https://travis-ci.org/bountysource/frontend)
 [![Coverage Status](https://coveralls.io/repos/bountysource/frontend/badge.png)](https://coveralls.io/r/bountysource/frontend)
+[![Visit our IRC channel](https://kiwiirc.com/buttons/irc.freenode.net/Bountysource.png)](https://kiwiirc.com/client/irc.freenode.net/?nick=Bountyuser|?#Bountysource)
 
 This repository contains the javascripts, stylesheets and images that power www.bountysource.com.  
 
