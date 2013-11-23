@@ -108,7 +108,6 @@
               <button class="btn btn-block btn-success" ng-class="{ active: (claim.show_accept_form) }" ng-click="claim.show_accept_form = !claim.show_accept_form"><i class="icon-thumbs-up icon-white"></i> Accept</button>
               <button class="btn btn-block btn-danger" ng-class="{ active: (claim.show_dispute_form) }" ng-click="claim.show_dispute_form = !claim.show_dispute_form"><i class="icon-thumbs-down icon-white"></i> Reject</button>
             </div>
-
           </div>
         </div>
 
@@ -136,21 +135,22 @@
               </form>
             </div>
           </div>
-        </div>
 
-        <!-- Submit accept form -->
-        <div collapse="!claim.show_accept_form">
-          <div class="alert alert-success">
-            <form style="margin-bottom: 0">
-              <textarea ng-model="claim.new_accept.description" style="width: 100%;" rows="3" placeholder="You did a great job {{claim.person.display_name}}, thanks for the fix!" ></textarea>
-              <button class="btn btn-success" ng-click="claim.accept()"><i class="icon-thumbs-up icon-white"></i> Accept claim</button>
-              <button class="btn" ng-click="claim.show_accept_form = false">Cancel</button>
-            </form>
+          <!-- Accept solution form -->
+          <div collapse="!claim.show_accept_form">
+            <div class="alert alert-success">
+              <p>You are accepting {{claim.person.display_name}}'s solution as the winner of the {{issue.bounty_total | dollars}} bounty. Have anything to say to them?</p>
+              <form style="margin-bottom: 0">
+                <textarea ng-model="claim.new_accept.description" style="width: 100%;" rows="3" placeholder="You did a great job {{claim.person.display_name}}, thanks for the fix!" ></textarea>
+                <button class="btn btn-success" ng-click="claim.accept()"><i class="icon-thumbs-up icon-white"></i> Accept</button>
+                <button class="btn" ng-click="claim.show_accept_form = false">Cancel</button>
+              </form>
+            </div>
           </div>
-        </div>
 
-        <!-- Main claim content -->
-        <claim-content claim="claim" issue="issue"></claim-content>
+          <!-- Main claim content -->
+          <claim-content claim="claim" issue="issue"></claim-content>
+        </div>
       </div>
     </div>
 
