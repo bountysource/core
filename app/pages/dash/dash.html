@@ -1,0 +1,106 @@
+<div class="row-fluid" ng-show"person">
+  <div class="span3">
+    <ng-include src="'pages/people/partials/infobox.html'"></ng-include>
+  </div>
+
+  <div class="span9">
+    <h1>Welcome, {{person.display_name}}!</h1>
+    <h3>{{person.bio}}</h3>
+    <ul class="nav nav-tabs">
+      <li class="active">
+      <a href="#">Home</a>
+      </li>
+      <li>
+      <a href="#">Bounty Activity</a>
+      </li>
+      <li>
+      <a href="#">Profile Edit</a>
+      </li>
+    </ul>
+
+    <div class="well well-large">
+      <h1 class="text-center">Post a Bounty</h1>
+      <ul class="PostBounty">
+        <li ng-repeat="bounty in bounties">
+        <span class="label label-success">{{bounty.tracker.name}} </span> <a ng-href="{{bounty.frontend_path}}">{{bounty.title}}</a>
+        </li>
+      </ul>
+      <form class="form-inline">
+        <span>Or add an issue from a url: </span>
+        <input ng-model="search_query" type="text" class="input-large search-query">
+        <div class="input-prepend">
+          <span class="add-on">$</span>
+          <input ng-model="bounty_amount" class="span5" id="appendedInput" type="number">
+          <button ng-click="search_submit(search_query, bounty_amount)" class="btn">Place Bounty</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="rounded-border">
+          <h1 class="text-center">Solve an Issue & Earn</h1>
+          <p class="text-center">Set bounties on issues that you have previously reported, prime the pump.</p>
+          <table class="table">
+            <th>Amount</th> <th>Bug Description</th><th>Opened</th>
+            <tr ng-repeat="bug in myBugs">
+              <tr ng-repeat="issue in issues">
+                <td><span class="label label-success">{{issue.bounty_total | currency}}</span></td> <td><a ng-href="{{issue.frontend_path}}">{{issue.title}}</a></td>
+                <td>{{issue.created_at | time_ago_short }}</td>
+              </tr>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="span6">
+        <div class="rounded-border">
+          <h1 class="text-center">Enhance Your Project</h1>
+          <p class="text-center">Set bounties on issues that you have previously reported, prime the pump.</p>
+          <table class="table">
+            <th>Description of Bug</th>
+            <tr ng-repeat="bug in myBugs">
+              <td><a class="bug-link" ng-href="{{bug.url}}">{{bug.title}}</a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="rounded-border">
+          <h1 class="text-center">Featured Bounties</h1>
+          <p class="text-center">Set bounties on issues that you have previously reported, prime the pump.</p>
+          <div class="span9 offset4">
+            <button class="btn button-pad" type="button">Place Bounty</button>
+          </div>
+          <table class="table">
+            <th>Description of Bug</th>
+            <tr ng-repeat="bug in myBugs">
+              <td><a class="bug-link" ng-href="{{bug.url}}">{{bug.title}}</a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="span6">
+        <div class="rounded-border">
+          <h1 class="text-center">Fundraisers</h1>
+          <p class="text-center">Set bounties on issues that you have previously reported, prime the pump.</p>
+          <div class="span9 offset4">
+            <button class="btn button-pad" type="button">Start a Fundraiser</button>
+          </div>
+          <table class="table">
+            <th>Description of Bug</th>
+            <tr ng-repeat="bug in myBugs">
+              <td><a class="bug-link" ng-href="{{bug.url}}">{{bug.title}}</a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
