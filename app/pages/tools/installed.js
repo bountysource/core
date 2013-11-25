@@ -16,31 +16,39 @@ angular.module('app')
         })
       });
   }).
-  controller("InstalledPluginsController", function($scope) {
+  controller("InstalledPluginsController", function($scope, $api) {
     // Nested callbacks to filter out trackers that don't have a plugin
     $scope.plugins.then(function(plugins) {
-      $scope.all_trackers_listener = $scope.$watch('all_trackers', function(owner_map) {
-        if (owner_map) {
-          var trackers, new_owner_map = {};
 
-          for (var k in owner_map) {
-            trackers = owner_map[k];
+      console.log(plugins);
 
-            for (var i=0; i<trackers.length; i++) {
-              for (var j=0; j<plugins.length; j++) {
-                if (trackers[i].id === plugins[j].tracker.id) {
-                  new_owner_map[k] = new_owner_map[k] || [];
-                  new_owner_map[k].push(trackers[i]);
-                  break;
-                }
-              }
-            }
-          }
-          $scope.all_trackers = new_owner_map;
-          $scope.all_trackers_listener();
+      var all_trackers_map = {}, tracker_name;
+      for (var i=0; i<plugins.length; i++) {
+        tracker_name = plugins[i].tracker.full_name.split('/')[0];
+        all_trackers_map[tracker_name] = all_trackers_map[tracker_name] || [];
+        all_trackers_map[tracker_name].push(plugins[i].tracker);
+      }
+
+      $scope.all_trackers = []
+      for (var k in all_trackers_map) {
+        $scope.all_trackers.push([k, all_trackers_map[k]]);
+      }
+
+      // order by owner name FIRST, then by number of projects
+      $scope.all_trackers.sort(function(a, b) {
+        if ($scope.current_person && $scope.current_person.github_account && a[0] === $scope.current_person.github_account.login) {
+          return -1;
+        } else if ($scope.current_person && $scope.current_person.github_account && b[0] === $scope.current_person.github_account.login) {
+          return 1;
+        } else {
+          return a[1].length === b[1].length ? 0 : (a[1].length < b[1].length ? 1 : -1);
         }
       });
+
       return plugins;
     });
+
     $scope.hide_installed_button = true;
+
+    $scope.$watch('all_trackers', function(dat) { console.log('dat', dat); });
   });
