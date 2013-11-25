@@ -30,7 +30,8 @@
     "inject": false,
     "dump": false,
     "CORS": false,
-    "spyOn": false
+    "spyOn": false,
+    "ga": false
   }
 }
 

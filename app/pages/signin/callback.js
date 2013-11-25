@@ -13,7 +13,7 @@ angular.module('app')
         if (response === false) {
           $scope.error = "ERROR: Unexpected linked account response.";
         } else {
-          $window._gaq.push(['_trackEvent', 'Signin', 'Success-3rdParty-Auth']);
+          ga('send', 'event', 'Signin', 'Success-3rdParty-Auth');
         }
       });
     } else if ($routeParams.status === 'error_needs_account') {

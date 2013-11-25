@@ -89,7 +89,7 @@ angular.module('app')
           if (response.error) {
             $scope.error = response.error;
           } else {
-            $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
+            ga('send', 'event', 'Signin-Form' , 'Successful-Submit');
           }
         });
       }
@@ -103,7 +103,7 @@ angular.module('app')
           if (response.error) {
             $scope.error = response.error;
           } else {
-            $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
+            ga('send', 'event', 'Signup-Form' , 'Successful-Submit');
           }
         });
       }

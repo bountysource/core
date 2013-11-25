@@ -30,7 +30,7 @@
                 <tr ng-repeat="update in fundraiser.updates">
                   <td>
                     <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">
-                      #{{ update.number }} {{ update.title }}
+                      #{{ update.ndumber }} {{ update.title }}
                     </a>
                   </td>
                   <td>
@@ -50,21 +50,21 @@
             <div class="bounty-buttons" ng-show="fundraiser.published && fundraiser.in_progress">
               <h3>Pledge Now</h3>
 
-              <form ng-submit="pledge_redirect()">
+              <form gaq-event-track gaq-event="submit" gaq-args="'event', 'FundraiserPledging' , 'CustomValue', 'Fundraiser{{ fundraiser.id }}', {{ pledge.amount }}" ng-submit="pledge_redirect()">
                 <div class="controls controls-row">
-                  <a ng-click="pledge_redirect(15)" class="span4 btn btn-primary btn-block">$15</a>
-                  <a ng-click="pledge_redirect(35)" class="span4 btn btn-primary btn-block">$35</a>
-                  <a ng-click="pledge_redirect(50)" class="span4 btn btn-primary btn-block">$50</a>
+                  <a gaq-event-track gaq-event="click" gaq-args="'event', 'FundraiserPledging' , 'Button15', 'Fundraiser{{ fundraiser.id }}', 15" ng-click="pledge_redirect(15)" class="span4 btn btn-primary btn-block">$15</a>
+                  <a gaq-event-track gaq-event="click" gaq-args="'event', 'FundraiserPledging' , 'Button35', 'Fundraiser{{ fundraiser.id }}', 35" ng-click="pledge_redirect(35)" class="span4 btn btn-primary btn-block">$35</a>
+                  <a gaq-event-track gaq-event="click" gaq-args="'event', 'FundraiserPledging' , 'Button50', 'Fundraiser{{ fundraiser.id }}', 50" ng-click="pledge_redirect(50)" class="span4 btn btn-primary btn-block">$50</a>
                 </div>
 
                 <div class="controls controls-row">
-                  <a ng-click="pledge_redirect(100)" class="span4 btn btn-primary btn-block">$100</a>
-                  <a ng-click="pledge_redirect(250)" class="span4 btn btn-primary btn-block">$250</a>
-                  <a ng-click="pledge_redirect(500)" class="span4 btn btn-primary btn-block">$500</a>
+                  <a gaq-event-track gaq-event="click" gaq-args="'event', 'FundraiserPledging' , 'Button100, 'Fundraiser{{ fundraiser.id }}', 100" ng-click="pledge_redirect(100)" class="span4 btn btn-primary btn-block">$100</a>
+                  <a gaq-event-track gaq-event="click" gaq-args="'event', 'FundraiserPledging' , 'Button250, 'Fundraiser{{ fundraiser.id }}', 250" ng-click="pledge_redirect(250)" class="span4 btn btn-primary btn-block">$250</a>
+                  <a gaq-event-track gaq-event="click" gaq-args="'event', 'FundraiserPledging' , 'Button500, 'Fundraiser{{ fundraiser.id }}', 500" ng-click="pledge_redirect(500)" class="span4 btn btn-primary btn-block">$500</a>
                 </div>
 
                 <div class="controls controls-row">
-                  <a class="span4 btn btn-primary btn-block" ng-click="pledge_redirect(1000)">$1000</a>
+                  <a gaq-event-track gaq-event="click" gaq-args="'event', 'FundraiserPledging' , 'Button1000', 'Fundraiser{{ fundraiser.id }}', 1000" class="span4 btn btn-primary btn-block" ng-click="pledge_redirect(1000)">$1000</a>
                   <input style="margin-bottom: 0;" integer-only type="number" min="5" ng-model="pledge.amount" class="span8 input-small" placeholder="Other amount" tooltip="$5 minimum pledge" tooltip-placement="bottom" toolip-trigger="focus"/>
                   <input style="display:none;" type="submit" id="custom-amount-submit" />
                 </div>

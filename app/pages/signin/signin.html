@@ -9,7 +9,7 @@
       <div class="controls">
         <ul ng-controller="Signin">
           <li ng-repeat="provider in providers" class="provider-link">
-            <a gaq-track-click ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="signin-{{provider.id}}" ng-click="save_route()">
+            <a gaq-track-click ng-href="{{signin_url_for(provider.id)}}" gaq-args="'event', 'Navbar-Signin' , 'LinkOut'" id="signin-{{provider.id}}" ng-click="save_route()">
               <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
             </a>
           </li>

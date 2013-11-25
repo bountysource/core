@@ -10,7 +10,7 @@
 
       <div style="text-align: center;">
         <a ng-show="fundraiser.in_progress && !reward.sold_out && !fundraiser.published" class="btn btn-large btn-info" disabled>{{ reward.amount | dollars }}</a>
-        <a ng-show="fundraiser.in_progress && !reward.sold_out && fundraiser.published" ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amount={{reward.amount}}" class="btn btn-large btn-success">{{ reward.amount | dollars }}</a>
+        <a gaq-event-track gaq-event="click" gaq-args="'event', 'FundraiserPledging' , 'RewardButton', 'Fundraiser{{ fundraiser.id }}', {{ reward.amount }}" ng-show="fundraiser.in_progress && !reward.sold_out && fundraiser.published" ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amount={{reward.amount}}" class="btn btn-large btn-success">{{ reward.amount | dollars }}</a>
         <a ng-show="!fundraiser.in_progress && fundraiser.published" class="btn btn-large btn-success" style="cursor: not-allowed;" disabled>{{ reward.amount | dollars }}</a>
 
         <a ng-show="fundraiser.in_progress && reward.sold_out" class="btn btn-large" disabled>Sold Out</a>
