@@ -29,7 +29,7 @@ angular.module('app')
         all_trackers_map[tracker_name].push(plugins[i].tracker);
       }
 
-      $scope.all_trackers = []
+      $scope.all_trackers = [];
       for (var k in all_trackers_map) {
         $scope.all_trackers.push([k, all_trackers_map[k]]);
       }
