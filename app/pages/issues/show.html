@@ -50,7 +50,10 @@
     <div class="span3">
       <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
       <div ng-include="'pages/issues/partials/developer_goal_box.html'" ng-show="issue.can_add_bounty"></div>
-      <div ng-include="'pages/issues/partials/solution_box.html'" ng-show="issue.can_add_bounty"></div>
+      <div class="well" ng-show="issue.can_add_bounty" style="padding-bottom:0;">
+        <div ng-include="'pages/issues/partials/solution_box.html'"></div>
+        <div ng-include="'pages/issues/partials/solutions_status.html'"></div>
+      </div>
       <div ng-include="'pages/issues/partials/claim_info_box.html'" ng-hide="issue.can_add_bounty"></div>
     </div>
   </div>

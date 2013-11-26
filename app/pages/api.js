@@ -639,6 +639,10 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+issue_id+"/solution", "GET");
     };
 
+    this.solutions_get = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solutions", "GET");
+    };
+
     this.create_developer_goal = function(issue_id, data) {
       return this.call("/issues/"+issue_id+"/developer_goals", "POST", data, function (response) {
         $api.require_signin();
