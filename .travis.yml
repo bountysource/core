@@ -12,6 +12,8 @@ before_script:
 script: grunt test:travis
 
 notifications:
+  email:
+    - travisci@bountysource.com
   irc:
     channels: "chat.freenode.net#bs-staff"
     skip_join: true
