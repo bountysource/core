@@ -68,40 +68,40 @@ angular.module('app')
 
       $scope.show_claim_form = function(name) {
         switch(name) {
-          case "accept":
-            if (bounty_claim.showing_accept_form) {
-              bounty_claim.showing_accept_form = false;
-              break;
-            }
-            bounty_claim.showing_accept_form = true;
-            bounty_claim.showing_dispute_form = false;
-            bounty_claim.showing_resolve_form = false;
-            break;
-          case "dispute":
-            if (bounty_claim.showing_dispute_form) {
-              bounty_claim.showing_dispute_form = false;
-              break;
-            }
-            bounty_claim.showing_dispute_form = true;
+        case "accept":
+          if (bounty_claim.showing_accept_form) {
             bounty_claim.showing_accept_form = false;
-            bounty_claim.showing_resolve_form = false;
             break;
-          case "resolve":
-            if (bounty_claim.showing_resolve_form) {
-              bounty_claim.showing_resolve_form = false;
-              break;
-            }
-            bounty_claim.showing_resolve_form = true;
-            bounty_claim.showing_accept_form = false;
+          }
+          bounty_claim.showing_accept_form = true;
+          bounty_claim.showing_dispute_form = false;
+          bounty_claim.showing_resolve_form = false;
+          break;
+        case "dispute":
+          if (bounty_claim.showing_dispute_form) {
             bounty_claim.showing_dispute_form = false;
             break;
-          default:
+          }
+          bounty_claim.showing_dispute_form = true;
+          bounty_claim.showing_accept_form = false;
+          bounty_claim.showing_resolve_form = false;
+          break;
+        case "resolve":
+          if (bounty_claim.showing_resolve_form) {
             bounty_claim.showing_resolve_form = false;
-            bounty_claim.showing_accept_form = false;
-            bounty_claim.showing_dispute_form = false;
             break;
+          }
+          bounty_claim.showing_resolve_form = true;
+          bounty_claim.showing_accept_form = false;
+          bounty_claim.showing_dispute_form = false;
+          break;
+        default:
+          bounty_claim.showing_resolve_form = false;
+          bounty_claim.showing_accept_form = false;
+          bounty_claim.showing_dispute_form = false;
+          break;
         }
-      }
+      };
 
       bounty_claim.new_accept = { description: "" };
       bounty_claim.accept = function() {
