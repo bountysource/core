@@ -66,7 +66,43 @@ angular.module('app')
       $scope.$update_percentage(bounty_claim);
       $scope.$update_my_response(bounty_claim);
 
-      bounty_claim.show_accept_form = false;
+      $scope.show_claim_form = function(name) {
+        switch(name) {
+          case "accept":
+            if (bounty_claim.showing_accept_form) {
+              bounty_claim.showing_accept_form = false;
+              break;
+            }
+            bounty_claim.showing_accept_form = true;
+            bounty_claim.showing_dispute_form = false;
+            bounty_claim.showing_resolve_form = false;
+            break;
+          case "dispute":
+            if (bounty_claim.showing_dispute_form) {
+              bounty_claim.showing_dispute_form = false;
+              break;
+            }
+            bounty_claim.showing_dispute_form = true;
+            bounty_claim.showing_accept_form = false;
+            bounty_claim.showing_resolve_form = false;
+            break;
+          case "resolve":
+            if (bounty_claim.showing_resolve_form) {
+              bounty_claim.showing_resolve_form = false;
+              break;
+            }
+            bounty_claim.showing_resolve_form = true;
+            bounty_claim.showing_accept_form = false;
+            bounty_claim.showing_dispute_form = false;
+            break;
+          default:
+            bounty_claim.showing_resolve_form = false;
+            bounty_claim.showing_accept_form = false;
+            bounty_claim.showing_dispute_form = false;
+            break;
+        }
+      }
+
       bounty_claim.new_accept = { description: "" };
       bounty_claim.accept = function() {
         $api.bounty_claim_accept(bounty_claim.id, bounty_claim.new_accept.description).then(function(updates) {
@@ -75,20 +111,18 @@ angular.module('app')
       };
 
       // model for a new dispute
-      bounty_claim.show_dispute_form = false;
       bounty_claim.new_dispute = { description: "" };
       bounty_claim.submit_reject = function() {
         $api.bounty_claim_reject(bounty_claim.id, bounty_claim.new_dispute.description).then(function(updates) {
-          bounty_claim.show_dispute_form = false;
+          bounty_claim.showing_dispute_form = false;
           $scope.$update_bounty_claim(bounty_claim, updates);
         });
       };
 
       bounty_claim.reject = function() {
-        bounty_claim.show_dispute_form = true;
+        bounty_claim.showing_dispute_form = true;
       };
 
-      bounty_claim.show_resolve_form = false;
       bounty_claim.new_resolve = { description: "" };
       bounty_claim.resolve = function() {
         if (bounty_claim.$my_response === false) {
