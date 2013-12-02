@@ -1,14 +1,29 @@
-<label class="radio">
+<label class="radio" ng-click="set_bounty_amount(50)">
   <input type="radio" ng-model="bounty.promotion" value="feature" ng-disabled="promotion_disabled.feature" />
-  <span ng-class="{ 'muted': promotion_disabled.feature }">Feature this bounty on Bountysource.com<span ng-show="promotion_disabled.feature"> ($50 min)</span></span>
+  <span>
+    <span ng-class="{ 'muted': promotion_disabled.feature }">Feature this bounty on Bountysource.com</span>
+    <span class="label" ng-class="{ 'label-success': !promotion_disabled.feature, 'label-warning': promotion_disabled.feature }">
+      {{50 | dollars}} minimum bounty
+    </span>
+  </span>
 </label>
 
-<label class="radio">
+<label class="radio" ng-click="set_bounty_amount(150)">
   <input type="radio" ng-model="bounty.promotion" value="tweet" ng-disabled="promotion_disabled.tweet" />
-  <span ng-class="{ 'muted': promotion_disabled.tweet }">Tweet this bounty from <strong>@Bountysource</strong><span ng-show="promotion_disabled.tweet"> ($150 min)</span></span>
+  <span>
+    <span ng-class="{ 'muted': promotion_disabled.tweet }">Tweet this bounty from <strong>@Bountysource</strong></span>
+    <span class="label" ng-class="{ 'label-success': !promotion_disabled.tweet, 'label-warning': promotion_disabled.tweet }">
+      {{150 | dollars}} minimum bounty
+    </span>
+  </span>
 </label>
 
-<label class="radio">
+<label class="radio" ng-click="set_bounty_amount(150)">
   <input type="radio" ng-model="bounty.promotion" value="newsletter" ng-disabled="promotion_disabled.newsletter" />
-  <span ng-class="{ 'muted': promotion_disabled.newsletter }">Include in Weekly newsletter<span ng-show="promotion_disabled.newsletter"> ($150 min)</span></span>
+  <span>
+    <span ng-class="{ 'muted': promotion_disabled.newsletter }">Include in Weekly newsletter</span>
+    <span class="label" ng-class="{ 'label-success': !promotion_disabled.newsletter, 'label-warning': promotion_disabled.newsletter }">
+      {{150 | dollars}} minimum bounty
+    </span>
+  </span>
 </label>

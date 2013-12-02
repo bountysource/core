@@ -188,5 +188,12 @@ angular.module('app')
         $scope.bounty.fee = 0;
       }
     };
+
+    $scope.set_bounty_amount = function(new_amount) {
+      if (new_amount > $scope.bounty.amount) {
+        $scope.bounty.amount = new_amount;
+        $scope.update_bounty_total();
+      }
+    };
   });
 
