@@ -90,7 +90,15 @@
               <div>Promotion:</div>
               <div><small class="muted"><em>Optional</em></small></div>
             </label>
-            <div ab-randomize class="controls" ng-include="'pages/issues/partials/options/promotion.html'" onload="broadcastLoad()"></div>
+            <div class="controls">
+              <div ab-randomize ng-include="'pages/issues/partials/options/promotion.html'" onload="broadcastLoad()"></div>
+              <div collapse="!bounty.promotion">
+                <a class="btn btn-small" ng-click="bounty.promotion = undefined">
+                  <i class="icon-remove"></i>
+                  No promotion
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
