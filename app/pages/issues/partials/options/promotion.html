@@ -1,14 +1,14 @@
 <label class="radio">
-  <input type="radio" ng-model="bounty.promotion" value="feature" />
-  <span>Feature this bounty on Bountysource.com</span>
+  <input type="radio" ng-model="bounty.promotion" value="feature" ng-disabled="promotion_disabled.feature" />
+  <span ng-class="{ 'muted': promotion_disabled.feature }">Feature this bounty on Bountysource.com<span ng-show="promotion_disabled.feature"> ($50 min)</span></span>
 </label>
 
 <label class="radio">
-  <input type="radio" ng-model="bounty.promotion" value="tweet" />
-  <span>Tweet this bounty from <strong>@Bountysource</strong></span>
+  <input type="radio" ng-model="bounty.promotion" value="tweet" ng-disabled="promotion_disabled.tweet" />
+  <span ng-class="{ 'muted': promotion_disabled.tweet }">Tweet this bounty from <strong>@Bountysource</strong><span ng-show="promotion_disabled.tweet"> ($150 min)</span></span>
 </label>
 
 <label class="radio">
-  <input type="radio" ng-model="bounty.promotion" value="newsletter" />
-  <span>Include in Weekly newsletter</span>
+  <input type="radio" ng-model="bounty.promotion" value="newsletter" ng-disabled="promotion_disabled.newsletter" />
+  <span ng-class="{ 'muted': promotion_disabled.newsletter }">Include in Weekly newsletter<span ng-show="promotion_disabled.newsletter"> ($150 min)</span></span>
 </label>
