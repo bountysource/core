@@ -6,20 +6,26 @@ angular.module('app')
       .when('/bounties/search', {
         templateUrl: 'pages/bounties/search.html',
         controller: 'BountiesSearchController',
+        reloadOnSearch: false
       });
   })
 
   .controller('BountiesSearchController', function($scope, $routeParams, $location, $api) {
 
-    //sets defaults search options
-    $scope.form_data = {
-      direction: "desc",
-      order: "bounty_total"
+    $scope.reset_form_data = function() {
+      $scope.form_data = {
+        direction: "desc",
+        order: "bounty_total",
+        languages: [],
+        trackers: []
+      };
     };
+
+    $scope.reset_form_data();
 
     //sets drop-down sorting options
     $scope.sort_options = [
-      { label: "Bounty Total", value: "bounty_total", asc: "High to Low", desc: "Low to High"},
+      { label: "Bounty Total", value: "bounty_total"},
       { label: "Age of Issue", value: "remote_created_at"},
       { label: "Number of Backers", value: "backer_count"},
       { label: "Date Bounty Posted", value: "earliest_bounty"}
@@ -53,114 +59,8 @@ angular.module('app')
       return { asc: asc_string, desc: desc_string };
     };
 
-    $scope.featured_issues = $api.issues_featured({ limit: 5 }).then(function(response) {
-      return response;
-    });
-
-    //grabs all languages. Pushes all languages into languages_selected array
-    $scope.languages_selected = [];
-
-    $scope.languages = [];
-    $api.languages_get().then(function(languages) {
-      languages.sort(function(a,b) {
-        return (a.weight > b.weight ? -1 : (a.weight === b.weight ? 0 : 1));
-      });
-
-      $scope.$watch('selected_language', function(newValue, oldValue, scope) {
-        for (var i = 0; i < languages.length; i++) {
-          if (!newValue) {
-            break;
-          }
-          if (newValue.id === languages[i].id) {
-            scope.languages_selected.push(newValue);
-            scope.selected_language = "";
-            break;
-          }
-        }
-      });
-
-      $scope.languages = angular.copy(languages);
-      return $scope.languages;
-    });
-
-    //removes languages from selected_languages array
-    $scope.remove_language = function(language) {
-      for (var i = 0; i < $scope.languages_selected.length; i++) {
-        if (language.id === $scope.languages_selected[i].id) {
-          $scope.languages_selected.splice(i, 1);
-          break;
-        }
-      }
-    };
-
-    //adds trackers to trackers_selected array
-    $scope.trackers_selected = [];
-
-    $scope.doTypeahead = function ($viewValue) {
-      return $api.tracker_typeahead($viewValue).then(function (trackers) {
-        $scope.$watch('selected_tracker', function(newValue, oldValue, scope) {
-          for (var i = 0; i < trackers.length; i++) {
-            if (!newValue) {
-              break;
-            }
-            if (newValue.id === trackers[i].id) {
-              scope.trackers_selected.push(newValue);
-              scope.selected_tracker = "";
-              break;
-            }
-          }
-        });
-        return trackers;
-      });
-    };
-
-    //removes trackers from trackers_selected array
-    $scope.remove_tracker = function(tracker) {
-      for (var i = 0; i < $scope.trackers_selected.length; i++) {
-        if (tracker.id === $scope.trackers_selected[i].id) {
-          $scope.trackers_selected.splice(i, 1);
-          break;
-        }
-      }
-    };
-
-    //parses query parameters and submits form with pagination
-    $scope.submit_query = function(page) {
-      $scope.search_submitted = true;
-
-      if (!page) {
-        $scope.working = true;
-      }
-
-      $scope.form_data.languages = $scope.languages_selected.map(function(language) {
-        return language.id;
-      });
-
-      $scope.form_data.trackers = $scope.trackers_selected.map(function(tracker) {
-        return tracker.id;
-      });
-
-      $scope.form_data.per_page = 50;
-      $scope.form_data.page = page || 1;
-
-      $api.bounty_search($scope.form_data).then(function(response) {
-        $scope.search_results = response.issues;
-        $scope.issues_count = response.issues_total;
-        $scope.perPage = 50;
-        $scope.maxSize = 10;
-        $scope.pageCount = Math.ceil($scope.issues_count / $scope.perPage);
-        $scope.working = false;
-      });
-    };
-
-    //updates pagination. resubmits query with new page number.
-    $scope.updatePage = function(page) {
-      $scope.submit_query(page);
-    };
-
     //toggles column order and submits query
     $scope.change_order_col = function(col, page) {
-
       if ($scope.form_data.order === col) {
         if ($scope.form_data.direction === 'asc') {
           $scope.form_data.direction = 'desc';
@@ -172,4 +72,219 @@ angular.module('app')
 
       $scope.submit_query(page);
     };
+
+    $scope.trackers_to_load_from_params = [];
+    $scope.trackers_loaded = [];
+
+    $scope.languages_to_load_from_params = [];
+    $scope.languages_loaded = [];
+
+
+    // set up all_languages array for typeahead on languages_input field
+    $scope.all_languages = [];
+    $api.languages_get().then(function(all_languages) {
+      $scope.all_languages = all_languages.sort(function(a,b) {
+        return (a.weight > b.weight ? -1 : (a.weight === b.weight ? 0 : 1));
+      });
+
+      $scope.$watch('languages_to_load_from_params', function(newValue, oldValue, scope) {
+        if (scope.languages_to_load_from_params && $scope.languages_to_load_from_params.length > 0) {
+          for (var i=0;i<scope.languages_to_load_from_params.length; i++) {
+            var language_id = scope.languages_to_load_from_params[i];
+            for (var e=0;e<all_languages.length;e++) {
+              if (language_id === all_languages[e].id) {
+                scope.languages_loaded.push(all_languages[e]);
+                continue;
+              }
+            }
+          }
+          scope.languages_to_load_from_params = [];
+        }
+      });
+
+      // watches selected_language input model, adds value to languages_loaded array
+      $scope.$watch('languages_input', function(newValue, oldValue, scope) {
+        for (var i=0;i<all_languages.length;i++) {
+          if (!newValue) {
+            break;
+          }
+          else if (newValue.id === all_languages[i].id) {
+            scope.languages_loaded.push(all_languages[i]); // language badge
+            scope.form_data.languages.push(all_languages[i].id);
+            scope.languages_input = "";
+            break;
+          }
+        }
+      });
+
+      // removes languages from languages_loaded array
+      $scope.remove_language = function(language) {
+        for (var i=0;i<$scope.languages_loaded.length;i++) {
+          if (language.id === $scope.languages_loaded[i].id) {
+            $scope.languages_loaded.splice(i, 1);
+            break;
+          }
+        }
+        for (var e=0;e<$scope.form_data.languages.length;e++) {
+          if (language.id === $scope.form_data.languages[e]) {
+            $scope.form_data.languages.splice(e, 1);
+            break;
+          }
+        }
+      };
+
+    });
+
+    $scope.do_tracker_typeahead = function($viewValue) {
+      return $api.tracker_typeahead($viewValue).then(function (trackers) {
+
+        $scope.$watch('trackers_input', function(newValue, oldValue, scope) {
+          for (var i = 0; i < trackers.length; i++) {
+            if (!newValue) {
+              break;
+            }
+            if (newValue.id === trackers[i].id) {
+              scope.trackers_loaded.push(newValue);
+              scope.form_data.trackers.push(trackers[i].id);
+              scope.trackers_input = "";
+              break;
+            }
+          }
+        });
+
+        return trackers;
+      });
+    };
+
+    //removes trackers from trackers_loaded array
+    $scope.remove_tracker = function(tracker) {
+      for (var i=0;i<$scope.trackers_loaded.length;i++) {
+        if (tracker.id === $scope.trackers_loaded[i].id) {
+          $scope.trackers_loaded.splice(i, 1);
+          break;
+        }
+      }
+      for (var e=0;e<$scope.form_data.trackers.length;e++) {
+        if (tracker.id === $scope.form_data.trackers[e]) {
+          $scope.form_data.trackers.splice(e, 1);
+          break;
+        }
+      }
+    };
+
+    $scope.submit_query = function(page) {
+
+      if (!page) {
+        $scope.loading_search_results = true;
+      }
+
+      $scope.form_data.per_page = 50;
+      $scope.form_data.page = page || 1;
+
+      var form_data_for_url = clean_object($scope.form_data);
+      $location.search(form_data_for_url);
+      $scope.featured_issues = []; // removes featured issues from view
+      $api.bounty_search($scope.form_data).then(function(response) {
+        $scope.search_results = response.issues;
+        $scope.issues_count = response.issues_total;
+        $scope.perPage = 50;
+        $scope.maxSize = 10;
+        $scope.pageCount = Math.ceil($scope.issues_count / $scope.perPage);
+        $scope.loading_search_results = false;
+      });
+    };
+
+    var clean_object = function(data) {
+      if (!data) {
+        return false;
+      }
+      var result = {};
+      for (var key in data) {
+        var value = data[key];
+        if (!value) { // null or undefined ng-model values
+          continue;
+        }
+        var value_typeof = typeof value;
+        switch(value_typeof) {
+        case 'string':
+          if (value !== "") {
+            result[key] = value;
+          }
+          break;
+        case 'object':
+          if (typeof value.length !== 'undefined') { // needed to prevent a value.length of zero from evaluating to false
+            if (value.length > 0) {
+              result[key] = value;
+            }
+          } else { // not a hash, keep object
+            result[key] = value;
+          }
+          break;
+        case 'number':
+          if (value !== 0) {
+            result[key] = value;
+          }
+          break;
+        }
+      }
+      return result;
+    };
+
+    //updates pagination. resubmits query with new page number.
+    $scope.updatePage = function(page) {
+      $scope.submit_query(page);
+    };
+
+    $scope.$watch('trackers_to_load_from_params', function(newValue, oldValue, scope) {
+      if (newValue && newValue.length > 0) {
+        var ids = newValue.join(",");
+        $api.trackers_get_bulk(ids).then(function(response) {
+          if (!response.error) {
+            $scope.trackers_loaded = $scope.trackers_loaded.concat(response);
+            newValue = [];
+          }
+        });
+      }
+    });
+
+    $scope.populate_form_data_with_route_params = function() {
+      $scope.reset_form_data();
+      for (var key in $routeParams) {
+        if (!$routeParams[key] || $routeParams[key] === "" || $routeParams[key].length < 1) { // if $routeParams value is undefined, blank, or length is less than 1
+          continue;
+        }
+        else if (key === "languages" || key === "trackers") {
+          var result_arr = [];
+          if ($routeParams[key].match(/^\d+$/)) { // parse to integer if just a stringified number (e.g., '9')
+            result_arr.push(parseInt($routeParams[key], 10));
+          }
+          else if ($routeParams[key].match(/^\d+,{1,}\d+$/)) { // get ids from comma separated values (e.g., '45,67,5')
+            var string_arr = $routeParams[key].split(",");
+            for (var i=0;i<string_arr.length;i++) {
+              result_arr.push(parseInt(string_arr[i], 10));
+            }
+          }
+          var key_name = key + "_to_load_from_params"; // $scope.trackers_to_load_from_params or $scope.languages_to_load_from_params
+          $scope[key_name] = result_arr; // add to $scope.trackers_to_load_from_params or $scope.languages_to_load_from_params, triggering their respective watches for creating badge
+          $scope.form_data[key] = result_arr;
+        }
+        else if (key === "min" || key === "max") {
+          $scope.form_data[key] = parseInt($routeParams[key], 10);
+        }
+        else {
+          $scope.form_data[key] = $routeParams[key];
+        }
+      }
+    };
+
+    if (Object.keys($routeParams).length > 0) {
+      $scope.populate_form_data_with_route_params();
+      $scope.submit_query();
+    } else {
+      $scope.loading_featured_issues = true;
+      $scope.featured_issues = $api.issues_featured({ limit: 5 }).then(function(response) {
+        $scope.loading_featured_issues = false;
+        return response;
+      });
+    }
   });
