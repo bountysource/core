@@ -11,6 +11,9 @@ angular.module('app')
       $scope.$broadcast('developerGoalUpdateReceived', updated_developer_goal);
     });
 
+    $scope.$on('developerGoalDeletePushed', function(event, deleted_developer_goal) {
+      $scope.$broadcast('developerGoalDeleteReceived', deleted_developer_goal);
+    });
 
     // Listen for solution create/updates. Broadcast update to all Controller instances.
     $scope.$on('solutionCreatePushed', function(event, new_solution) {
