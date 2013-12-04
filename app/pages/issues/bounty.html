@@ -10,6 +10,10 @@
         <alert type="'error'" close="error = null">{{error}}</alert>
       </div>
 
+      <div ng-show="previous_bounty_total > 0">
+        <alert type="'success'">So far, you have posted {{previous_bounty_total | dollars}} worth of bounties on this issue</alert>
+      </div>
+
       <form name="form" class="form-horizontal" ng-submit="create_payment()">
         <div class="control-group">
           <label class="control-label">Payment Method:</label>
