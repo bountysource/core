@@ -387,6 +387,10 @@ angular.module('api.bountysource',[]).
       return this.call('/user/bounties');
     };
 
+    this.user_issue_bounty_total = function(issue_id) {
+      return this.call('/user/issues/'+issue_id+'/bounty_total');
+    };
+
     this.pledge_activity = function() {
       return this.call('/user/contributions', function(response) { return response.data.pledges; });
     };
