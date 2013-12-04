@@ -84,7 +84,6 @@ angular.module('app')
         $api.user_issue_bounty_total(parseInt($routeParams.id, 10)).then(function(response) {
           $scope.previous_bounty_total = response.bounty_total;
         });
-
       }
     });
 

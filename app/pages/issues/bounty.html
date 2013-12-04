@@ -10,10 +10,6 @@
         <alert type="'error'" close="error = null">{{error}}</alert>
       </div>
 
-      <div ng-show="previous_bounty_total > 0">
-        <alert type="'success'">So far, you have posted {{previous_bounty_total | dollars}} worth of bounties on this issue</alert>
-      </div>
-
       <form name="form" class="form-horizontal" ng-submit="create_payment()">
         <div class="control-group">
           <label class="control-label">Payment Method:</label>
@@ -62,7 +58,7 @@
           <div class="controls">
             <div class="input-prepend">
               <span class="add-on">$</span>
-              <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="Bounty amount" />
+              <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="Bounty amount" required />
             </div>
           </div>
         </div>
@@ -119,7 +115,7 @@
             <div class="controls">
               <div class="input-prepend">
                 <span class="add-on">$</span>
-                <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" />
+                <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" required />
               </div>
             </div>
           </div>
@@ -137,7 +133,13 @@
 
         <div class="control-group">
           <div class="controls">
-            <button type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">Create {{bounty.amount || 0 | dollars}} Bounty</button>
+            <button ng-hide="previous_bounty_total > 0" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
+              <span >Post {{bounty.amount || 0 | dollars}} Bounty</span>
+            </button>
+
+            <button ng-show="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
+              <span>Increase Bounty by {{bounty.amount | dollars}}</span>
+            </button>
           </div>
         </div>
       </form>

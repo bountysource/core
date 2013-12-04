@@ -2,7 +2,7 @@
   <input type="radio" ng-model="bounty.promotion" value="feature" ng-disabled="promotion_disabled.feature" />
   <span>
     <span ng-class="{ 'muted': promotion_disabled.feature }">Feature this bounty on Bountysource.com</span>
-    <span class="label" ng-class="{ 'label-success': !promotion_disabled.feature, 'label-warning': promotion_disabled.feature }">
+    <span class="label label-warning" ng-show="promotion_disabled.feature">
       {{50 | dollars}} minimum bounty
     </span>
   </span>
@@ -12,7 +12,7 @@
   <input type="radio" ng-model="bounty.promotion" value="tweet" ng-disabled="promotion_disabled.tweet" />
   <span>
     <span ng-class="{ 'muted': promotion_disabled.tweet }">Tweet this bounty from <strong>@Bountysource</strong></span>
-    <span class="label" ng-class="{ 'label-success': !promotion_disabled.tweet, 'label-warning': promotion_disabled.tweet }">
+    <span class="label label-warning" ng-show="promotion_disabled.tweet">
       {{150 | dollars}} minimum bounty
     </span>
   </span>
@@ -22,7 +22,7 @@
   <input type="radio" ng-model="bounty.promotion" value="newsletter" ng-disabled="promotion_disabled.newsletter" />
   <span>
     <span ng-class="{ 'muted': promotion_disabled.newsletter }">Include in Weekly newsletter</span>
-    <span class="label" ng-class="{ 'label-success': !promotion_disabled.newsletter, 'label-warning': promotion_disabled.newsletter }">
+    <span class="label label-warning" ng-show="promotion_disabled.newsletter">
       {{150 | dollars}} minimum bounty
     </span>
   </span>
