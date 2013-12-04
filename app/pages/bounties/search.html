@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a>Bounty Search</a></li>
+  <li><a href="/bounties/search">Bounty Search</a></li>
 </ul>
 
 <div class="row-fluid">
@@ -24,14 +24,14 @@
       type="text"
       class="search span12"
       placeholder="Search for languages"
-      ng-model="selected_language"
-      typeahead="language as language.name for language in languages | filter:$viewValue | limitTo: 8"
+      ng-model="languages_input"
+      typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8"
       typeahead-editable="false"
       autocomplete="off"
       />
 
-      <div class="filter-box">
-        <span class="badge search-filter" ng-repeat="language in languages_selected">
+      <div class="filter-box" collapse="languages_loaded.length <= 0">
+        <span class="badge search-filter" ng-repeat="language in languages_loaded">
           <button type="button" class="close" ng-click="remove_language(language)">
             <i class="icon-remove icon-white"></i>
           </button>
@@ -44,45 +44,44 @@
           <label>Min Amount:</label>
           <div class="input-prepend">
             <span class="add-on">$</span>
-            <input type="number" class="span8" min="0" step="any" ng-model="form_data.min" ></input>
+            <input type="number" class="span8" min="0" step="any" ng-model="form_data.min" />
           </div>
         </div>
         <div class="span6">
           <label>Max Amount:</label>
           <div class="input-prepend">
             <span class="add-on">$</span>
-            <input type="number" class="span8" min="1" step="any" ng-model="form_data.max"></input>
+            <input type="number" class="span8" min="1" step="any" ng-model="form_data.max" />
           </div>
         </div>
       </div>
-
       <label>Limit to projects:</label>
       <input
       name="input"
       type="text"
       class="search span12"
       placeholder="Search in projects"
-      ng-model="selected_tracker"
-      typeahead="tracker as tracker.name for tracker in doTypeahead($viewValue)"
+      ng-model="trackers_input"
+      typeahead="tracker as tracker.name for tracker in do_tracker_typeahead($viewValue)"
       typeahead-editable="false"
       />
 
-      <div class="project-box">
-       <span class="badge search-filter" ng-repeat="tracker in trackers_selected">
-         <button type="button" class="close" ng-click="remove_tracker(tracker)">
-           <i class="icon-remove icon-white"></i>
-         </button>
-         {{tracker.name}}
-       </span>
-     </div>
+      <div class="project-box" collapse="trackers_loaded <= 0">
+        <span class="badge search-filter" ng-repeat="tracker in trackers_loaded">
+          <button type="button" class="close" ng-click="remove_tracker(tracker)">
+            <i class="icon-remove icon-white"></i>
+          </button>
+          {{tracker.name}}
+        </span>
+      </div>
 
-     <button class="btn btn-primary btn-block" type="submit">Search</button>
+    <button class="btn btn-primary btn-block" type="submit">Search</button>
 
-   </form>
+    </form>
   </div>
 </div>
 <div class="span9">
-  <loading-bar ng-hide="featured_issues.length > 0">Loading featured issues...</loading-bar>
+  <loading-bar ng-show="loading_featured_issues">Loading featured issues...</loading-bar>
 
   <!-- Featured Issues Table -->
   <div ng-show="featured_issues.length > 0">
@@ -128,12 +127,12 @@
     </table>
   </div>
 
-  <loading-bar ng-show="working">Searching...</loading-bar>
+  <loading-bar ng-show="loading_search_results">Searching...</loading-bar>
 
-  <div ng-show="!working">
+  <div ng-show="!loading_search_results">
     <div ng-show="issues_count == 0" class="alert alert-error">No results found.</div>
 
-    <div ng-show="search_submitted && search_results.length > 0">
+    <div ng-show="search_results.length > 0">
       <h3>Search Results</h3>
       <div>
         <em>Found <strong>{{issues_count | number}}</strong> issues</em>
