@@ -18,7 +18,10 @@ angular.module('app')
       team_id: null
     };
 
-    $scope.teams = $api.person_teams($scope.current_person.id);
+    $api.person_teams($scope.current_person.id).then(function(teams) {
+      $scope.teams = teams;
+      return teams;
+    });
 
     $scope.create = function() {
       $api.fundraiser_create($scope.fundraiser, function(response) {

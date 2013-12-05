@@ -12,7 +12,7 @@ angular.module('app')
   .controller('PledgeActivity', function($scope, $routeParams, $api, $pageTitle, $filter) {
     $pageTitle.set('Pledges', 'Activity');
 
-    $scope.pledges = $api.call("/user/pledges").then(function(pledges) {
+    $api.call("/user/pledges").then(function(pledges) {
       for (var i=0; i<pledges.length; i++) {
         // Get the zero reward and put it on fundraiser
         for (var j=0; j<pledges[i].fundraiser.rewards.length; j++) {
@@ -34,6 +34,8 @@ angular.module('app')
           }
         }
       }
+
+      $scope.pledges = pledges;
 
       return pledges;
     });

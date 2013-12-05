@@ -10,7 +10,10 @@ angular.module('app')
   })
 
   .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
-    $scope.fundraiser = $api.fundraiser_get($routeParams.id);
+    $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
+      $scope.fundraiser = fundraiser;
+      return fundraiser;
+    });
 
     // $sanitize but allow iframes (i.e. youtube videos)
     $scope.fundraiser.then(function(fundraiser) {

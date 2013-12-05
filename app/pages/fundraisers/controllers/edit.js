@@ -21,7 +21,10 @@ angular.module('app')
       return !angular.equals($scope.master, $scope.changes);
     };
 
-    $scope.teams = $api.person_teams($scope.current_person.id);
+    $api.person_teams($scope.current_person.id).then(function(teams) {
+      $scope.teams = teams;
+      return teams;
+    });
 
     $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
       // cache the fundraiser. angular.copy does a deep copy, FYI

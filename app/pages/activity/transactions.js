@@ -12,9 +12,7 @@ angular.module('app')
   .controller('TransactionActivity', function($scope, $routeParams, $api) {
     $scope.resolved = false;
 
-    $scope.transactions_promise = $api.call("/transactions").then(function(transactions) {
-      $scope.resolved = true;
-
+    $api.transaction_activity().then(function(transactions) {
       $scope.transactions = transactions;
       return transactions;
     });

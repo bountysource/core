@@ -18,7 +18,7 @@ angular.module('app')
     $scope.claim_accepted = false;
     $scope.can_respond_to_claims = false;
 
-    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+    $api.issue_get($routeParams.id).then(function(issue) {
       // redirect to overview if the issue is not closed yet
       // AND the issue is not generic
       if (!issue.generic && issue.can_add_bounty && (/\/issues\/[^\/]+\/claims$/).test($location.path())) {
@@ -58,6 +58,7 @@ angular.module('app')
         }
       };
 
+      $scope.issue = issue;
       return issue;
     });
 

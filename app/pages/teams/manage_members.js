@@ -171,7 +171,7 @@ angular.module('app')
       }
     });
 
-    $scope.pending_invites = $api.team_invites_get($routeParams.id).then(function(invites) {
+    $api.team_invites_get($routeParams.id).then(function(invites) {
       $scope.team_invite_reject = function(invite) {
         if ($window.confirm("Are you sure you want to revoke this invite?")) {
           $api.team_invite_reject($routeParams.id, invite.token).then(function() {
@@ -208,6 +208,7 @@ angular.module('app')
         $scope.reset_member_form();
       };
 
+      $scope.pending_invites = invites;
       return invites;
     });
   });

@@ -10,9 +10,10 @@ angular.module('app')
   })
 
   .controller('FundraiserUpdatesController', function ($scope, $routeParams, $location, $api) {
-    $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
-      $scope.updates = response.updates;
-      return response;
+    $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
+      $scope.fundraiser = fundraiser;
+      $scope.updates = fundraiser.updates;
+      return fundraiser;
     });
 
     $scope.create_update = function() {
