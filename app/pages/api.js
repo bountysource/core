@@ -309,8 +309,8 @@ angular.module('api.bountysource',[]).
       return this.call("/projects/"+id+"/issues");
     };
 
-    this.issues_featured = function(data) {
-      return this.call("/issues/featured", "GET", data);
+    this.issues_featured = function() {
+      return this.call("/issues/featured");
     };
 
     this.tracker_stats = function(id) {
