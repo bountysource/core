@@ -242,7 +242,7 @@ angular.module('app.directives').
       restrict: "E",
       replace: true,
       transclude: true,
-      template: '<div><div class="text-center"><p class="lead" ng-transclude></p><progress value="100" class="progress-striped active"></progress></div></div>'
+      template: '<div><div class="text-center"><p class="lead" ng-transclude></p><progress percent="100" class="progress-striped active"></progress></div></div>'
     };
   }).
   directive('gaqTrackClick', ['$timeout', '$window', function($timeout, $window) {
