@@ -17,7 +17,7 @@ angular.module('app')
       state: "available"
     };
 
-    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+    $api.issue_get($routeParams.id).then(function(issue) {
       $pageTitle.set(issue.title, issue.tracker.name);
 
       // depending on the tracker, issue/comment bodies will either be html or text.
@@ -52,6 +52,7 @@ angular.module('app')
         $scope.bounty_alert.type = "error";
       }
 
+      $scope.issue = issue;
       return issue;
     });
   });

@@ -21,11 +21,13 @@ angular.module('app')
     }
     $scope.current = [];
     $scope.completed = [];
-    $scope.all = $api.fundraisers_get().then(function(fundraisers) {
+    $api.fundraisers_get().then(function(fundraisers) {
       for (var i=0; i<fundraisers.length; i++) {
         $scope.$init_fundraiser(fundraisers[i]);
       }
       $scope.select_fundraisers($scope.type);
+
+      $scope.all = fundraisers;
       return fundraisers;
     });
 

@@ -12,6 +12,9 @@ angular.module('app')
   .controller('FundraiserActivity', function($scope, $routeParams, $api, $pageTitle) {
     $pageTitle.set('Fundraisers', 'Activity');
 
-    $scope.fundraisers = $api.fundraiser_activity();
+    $api.fundraiser_activity().then(function(fundraisers) {
+      $scope.fundraisers = fundraisers;
+      return fundraisers;
+    });
   });
 

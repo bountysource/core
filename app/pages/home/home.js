@@ -14,11 +14,18 @@ angular.module('app')
       });
   })
   .controller('HomeCtrl', function ($scope, $window, $api) {
-    $scope.fundraisers = $api.fundraiser_cards();
+    $api.fundraiser_cards().then(function(fundraisers) {
+      $scope.fundraisers = fundraisers;
+      return fundraisers;
+    });
 
-    $scope.people = $api.people_interesting();
+    $api.people_interesting().then(function(people) {
+      $scope.people = people;
+      return people;
+    });
 
-    $scope.trackers = $api.project_cards().then(function(trackers) {
+    $api.project_cards().then(function(trackers) {
+      $scope.trackers = trackers;
       for (var i=0; i<trackers.length; i++) {
         trackers[i].bounty_total = parseFloat(trackers[i].bounty_total);
       }

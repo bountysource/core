@@ -61,6 +61,7 @@ angular.module('app')
 
     $api.issues_featured().then(function(issues) {
       $scope.featured_issues = $filter('shuffle')(issues).slice(0,5);
+      return issues;
     });
 
     //toggles column order and submits query

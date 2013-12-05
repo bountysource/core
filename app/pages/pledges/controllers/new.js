@@ -25,7 +25,7 @@ angular.module('app')
 
     $scope.fundraiser_hide_pledge_button = true;
 
-    $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
+    $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
       // add the base item number, with just fundraiser id
       $scope.pledge.base_item_number = 'fundraisers/'+fundraiser.id;
       $scope.pledge.item_number = $scope.pledge.base_item_number;
@@ -72,7 +72,6 @@ angular.module('app')
                   cart.checkout(checkout_method).then(successCallback, errorCallback);
                 });
               });
-
               return cart;
             });
           } else if (person === false) {

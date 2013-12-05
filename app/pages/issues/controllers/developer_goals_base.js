@@ -105,7 +105,7 @@ angular.module('app')
 
     $scope.initialize_developer_goals = function() {
       $scope.issue.then(function(issue) {
-        $scope.developer_goals = $api.get_developer_goals(issue.id).then(function(developer_goals) {
+        $api.get_developer_goals(issue.id).then(function(developer_goals) {
           // Collect developer goals that have not yet been met
           $scope.unmet_developer_goals = [];
           for (var i=0; i<developer_goals.length; i++) {
@@ -128,6 +128,7 @@ angular.module('app')
             $scope.$bounty_amount = $scope.next_developer_goal.amount - issue.bounty_total;
           }
 
+          $scope.developer_goals = developer_goals;
           return developer_goals;
         });
 

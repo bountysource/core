@@ -10,7 +10,8 @@ angular.module('app')
   })
 
   .controller('IssueBountiesController', function ($scope, $routeParams, $api) {
-    $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+    $api.issue_get($routeParams.id).then(function(issue) {
+      $scope.issue = issue;
       return issue;
     });
 

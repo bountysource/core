@@ -9,7 +9,10 @@ angular.module('app')
       });
   })
   .controller('PeopleFollowing', function ($scope, $routeParams, $api) {
-    $scope.person = $api.person_get($routeParams.id);
+    $api.person_get($routeParams.id).then(function(person) {
+      $scope.person = person;
+      return person;
+    });
 
     $scope.timeline = $api.person_timeline_get($routeParams.id).then(function(response) {
       console.log(response);

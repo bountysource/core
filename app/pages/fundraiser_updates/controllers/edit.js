@@ -12,10 +12,10 @@ angular.module('app')
   .controller('FundraiserEditUpdateController', function ($scope, $routeParams, $location, $api) {
     $scope.changes = {};
 
-    $scope.fundraiser = $api.fundraiser_update_get($routeParams.fundraiser_id, $routeParams.id, function(response) {
-      $scope.update = response.data.update;
+    $api.fundraiser_update_get($routeParams.fundraiser_id, $routeParams.id).then(function(fundraiser) {
+      $scope.update = fundraiser.update;
       $scope.changes = $scope.update;
-      return response.data;
+      return fundraiser;
     });
 
     $scope.save = function() {

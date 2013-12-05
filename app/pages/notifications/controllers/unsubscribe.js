@@ -17,8 +17,9 @@ angular.module('app')
       $scope.approved = true;
       $scope.processing = true;
 
-      $scope.success = $api.notification_unsubscribe($routeParams.type, { email: $scope.email }).then(function(success) {
+      $api.notification_unsubscribe($routeParams.type, { email: $scope.email }).then(function(success) {
         $scope.processing = false;
+        $scope.success = success;
         return success;
       });
     };

@@ -10,13 +10,14 @@ angular.module('app')
   })
 
   .controller('FundraiserRewardsInfoController', function ($scope, $routeParams, $location, $api) {
-    $scope.fundraiser = $api.fundraiser_info_get($routeParams.id).then(function(response) {
-      $scope.rewards = response.rewards;
+    $api.fundraiser_info_get($routeParams.id).then(function(fundraiser) {
+      $scope.rewards = fundraiser.rewards;
+      $scope.fundraiser = fundraiser;
 
       // initially open all of the tabs
       angular.forEach($scope.rewards, function(r) { r.$is_open = true; });
 
-      return response;
+      return fundraiser;
     });
 
     $scope.expand_all = true;
