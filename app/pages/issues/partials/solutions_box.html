@@ -17,7 +17,7 @@
 
         <td>
           <div>
-            <span><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a></span>
+            <span><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name | truncate:14 }}</a></span>
           </div>
           <div ng-switch="solution.status.type">
             <span ng-switch-when="SolutionEvent::Started" class="label label-info">Started Solution</span>

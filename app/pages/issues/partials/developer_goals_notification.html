@@ -1,15 +1,15 @@
 <div ng-controller="DeveloperGoalsBaseController" ng-show="issue.can_add_bounty && next_developer_goal">
   <div class="well">
     <div style="text-align: center;" ng-show="issue.bounty_total < next_developer_goal.amount">
-      <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name}}</a> set a bounty goal of {{next_developer_goal.amount | dollars}}</h3>
-      <div>When the bounty reaches this goal, <a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name}}</a> will be notified.</div>
+      <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name | truncate:20 }}</a> set a bounty goal of {{next_developer_goal.amount | dollars}}</h3>
+      <div>When the bounty reaches this goal, <a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name | truncate:20 }}</a> will be notified.</div>
 
       <div ng-show="developer_goals.length == 2"><small>1 other developer has set a bounty goal. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
       <div ng-show="developer_goals.length > 2"><small>{{developer_goals.length - 1 | number}} other {{"developer" | pluralize:(developer_goals.length - 1)}} have set bounty goals. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
     </div>
 
     <div style="text-align: center;" ng-show="issue.bounty_total >= next_developer_goal.amount">
-      <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name}}</a>'s bounty goal has been met!</h3>
+      <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name | truncate:20 }}</a>'s bounty goal has been met!</h3>
 
       <div ng-show="developer_goals.length == 2"><small>1 other developer has set a bounty goal. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
       <div ng-show="developer_goals.length > 2"><small>{{developer_goals.length - 1 | number}} other {{"developer" | pluralize:(developer_goals.length - 1)}} have set bounty goals. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
@@ -31,7 +31,7 @@
         <tbody>
         <tr ng-repeat="developer_goal in developer_goals | orderBy:['+amount']" ng-class="{ success: (issue.bounty_total >= developer_goal.amount) }">
           <td>
-            <a owner-href="developer_goal.person">{{developer_goal.person.display_name}}</a>
+            <a owner-href="developer_goal.person">{{developer_goal.person.display_name | truncate:20 }}</a>
           </td>
           <td>
             <strong>{{developer_goal.amount | dollars}}</strong>
