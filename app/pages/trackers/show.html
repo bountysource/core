@@ -65,6 +65,7 @@
           </div>
         </div>
       </a>
+      <a ng-href="/trackers/{{ tracker.slug }}/edit" class="btn btn-block">Edit this Tracker</a>
     </div>
 
     <div class="well well-small" ng-show="tracker.bounty_total > 0 || tracker.tracker_type == 'Github::Repository'">

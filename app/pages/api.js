@@ -297,6 +297,12 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+id+"/overview");
     };
 
+    this.update_tracker = function (id, form_data) {
+      return this.call("/tracker_versions/update_tracker", "POST", { tracker_id: id, edits: form_data }, function (response) {
+        return response;
+      });
+    };
+
     this.tracker_follow = function(id) {
       return this.call("/follows", "PUT", { item_id: id, item_type: "Tracker" });
     };

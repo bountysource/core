@@ -1,0 +1,91 @@
+<ul class="breadcrumb" >
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/trackers">Projects</a><span class="divider">»</span></li>
+  <li><a ng-href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a><span class="divider">»</span></li>
+  <li><a ng-href="/trackers/{{ tracker.slug }}/edit">Edit</a></li>
+</ul>
+
+<h1>Tracker Edit</h1>
+<div class="alert alert-success" ng-show="success">Tracker was successfully updated!</div>
+<div class="alert alert-error" ng-show="error">{{ error }}.</div>
+<form class="form-horizontal" name="form">
+  <div class="control-group">
+    <label class="control-label" for="inputName">Name:</label>
+    <div class="controls">
+      <input type="text" id="inputName" placeholder="John" ng-model="form_data.name" class="input" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputDescription">Description:</label>
+    <div class="controls">
+      <input type="text" id="inputDescription" placeholder="Something about your project" ng-model="form_data.description" class="input" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputName">Picture:</label>
+    <div class="controls">
+      <label class="radio setings_profile_pic">
+        <input type="radio" ng-model="tracker_input.radio" value="{{tracker.image_url}}">
+        <img src="{{form_data.image_url}}" tooltip="Current" />
+      </label>
+      <br/>
+      <input type="radio" ng-model="tracker_input.radio" value="custom">
+      <input type="text" ng-model="tracker_input.text" ng-change="tracker_input.radio='custom'" placeholder="Image URL or Gravatar Email"/>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputName">Homepage:</label>
+    <div class="controls">
+      <input type="text" id="inputName" placeholder="Homepage for this project" ng-model="form_data.homepage" class="input" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputName">Repository URL:</label>
+    <div class="controls">
+      <input type="text" id="inputName" placeholder="Code Repo URL" ng-model="form_data.repo_url" class="input" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputName">Languages:</label>
+    <div class="controls">
+      <table class="table table-hover span4" style="margin-left:0">
+        <thead>
+          <tr>
+            <th style="width: 75%; text-align: center;"></th>
+            <th style="width: 25%; text-align: center;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding-left:0px">
+              <input
+                type="text"
+                class="input"
+                placeholder="Add a language"
+                ng-model="selected_language"
+                typeahead="language as language.name for language in languages | filter:$viewValue |limitTo: 8"
+                typeahead-editable="false"
+                autocomplete="off"
+              />
+            </td>
+            <td><button class="btn btn-mini btn-primary btn-block"><i class="icon-plus icon-white"></i></button></td>
+          </tr>
+          <tr ng-repeat="language in form_data.languages">
+            <td><strong>{{ language.name }}</strong></td>
+            <td><button class="btn btn-mini btn-danger btn-block" ng-click="remove_language(language)"><i class="icon-trash icon-white"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success" ng-click="save()">Save Tracker</button>
+    </div>
+  </div>
+</form>
