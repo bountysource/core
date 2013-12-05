@@ -18,7 +18,7 @@ angular.module('app')
       $location.search({}).replace();
     }
 
-    $scope.team.then(function (team) {
+    $scope.team_promise.then(function (team) {
       $pageTitle.set(team.name, 'Teams');
 
       // Set payment method on params so that team is the selected payment method on Bounty page

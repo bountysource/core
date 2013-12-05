@@ -43,7 +43,7 @@ angular.module('app')
       else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
     };
 
-    $scope.members = $api.team_members_get($routeParams.id).then(function(members) {
+    $scope.members_promise = $api.team_members_get($routeParams.id).then(function(members) {
       $scope.$watch('current_person', function(person) {
         if (person) {
           for (var i=0; i<members.length; i++) {
@@ -72,6 +72,7 @@ angular.module('app')
         }
       });
 
+      $scope.members = members;
       return members;
     });
   });

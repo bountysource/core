@@ -58,7 +58,7 @@ angular.module('app')
       });
     };
 
-    $api.trackers_get().then(function(trackers) {
+    $scope.trackers_promise = $api.trackers_get().then(function(trackers) {
       $scope.trackers_count = trackers.length;
       $scope.loading_trackers = false;
 
@@ -95,7 +95,7 @@ angular.module('app')
       return owner_trackers;
     });
 
-    $api.tracker_plugins_get().then(function(plugins) {
+    $scope.plugins_promise = $api.tracker_plugins_get().then(function(plugins) {
       // Get the plugin for a tracker, if installed.
       // if not installed, return model for a new plugin
       $scope.tracker_plugins_count = plugins.length;
