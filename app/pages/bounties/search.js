@@ -81,14 +81,8 @@ angular.module('app')
     $scope.trackers_to_load_from_params = [];
     $scope.trackers_loaded = [];
 
-    $scope.languages_to_load_from_params = [];
-    $scope.languages_loaded = [];
-
-
-    // set up all_languages array for typeahead on languages_input field
-    $scope.all_languages = [];
-    $api.languages_get().then(function(all_languages) {
-      $scope.all_languages = all_languages.sort(function(a,b) {
+    $scope.languages_promise = $api.languages_get().then(function(languages) {
+      languages.sort(function(a,b) {
         return (a.weight > b.weight ? -1 : (a.weight === b.weight ? 0 : 1));
       });
 
@@ -122,13 +116,16 @@ angular.module('app')
         }
       });
 
-      // removes languages from languages_loaded array
-      $scope.remove_language = function(language) {
-        for (var i=0;i<$scope.languages_loaded.length;i++) {
-          if (language.id === $scope.languages_loaded[i].id) {
-            $scope.languages_loaded.splice(i, 1);
-            break;
-          }
+      $scope.languages = languages;
+      return languages;
+    });
+
+    //removes languages from selected_languages array
+    $scope.remove_language = function(language) {
+      for (var i = 0; i < $scope.languages_selected.length; i++) {
+        if (language.id === $scope.languages_selected[i].id) {
+          $scope.languages_selected.splice(i, 1);
+          break;
         }
         for (var e=0;e<$scope.form_data.languages.length;e++) {
           if (language.id === $scope.form_data.languages[e]) {
@@ -137,8 +134,7 @@ angular.module('app')
           }
         }
       };
-
-    });
+    };
 
     $scope.do_tracker_typeahead = function($viewValue) {
       return $api.tracker_typeahead($viewValue).then(function (trackers) {
