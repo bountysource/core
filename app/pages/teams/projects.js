@@ -11,7 +11,7 @@ angular.module('app')
   .controller('TeamTrackersController', function ($scope, $routeParams, $api, $pageTitle, $location) {
     $scope.projects = [];
 
-    $scope.team.then(function (team) {
+    $scope.team_promise.then(function (team) {
       if (team.error) {
         $location.path('/teams');
       }

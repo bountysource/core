@@ -18,7 +18,7 @@ angular.module('app')
 
     $scope.add_member_error = {};
 
-    $scope.members.then(function(members) {
+    $scope.members_promise.then(function(members) {
       // initialize master
       for (var i=0; i<members.length; i++) {
         members[i].$master = angular.copy(members[i]);

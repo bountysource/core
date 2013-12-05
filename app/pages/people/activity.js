@@ -14,13 +14,12 @@ angular.module('app')
     }
 
     $api.person_get($routeParams.id).then(function(person) {
+      $pageTitle.set(person.display_name, 'Profile');
+
+      person.display_name = person.display_name.replace(/\(unknown\)/g, '').trim();
+
       $scope.person = person;
       return person;
-    });
-
-    $scope.person.then(function(person){
-      person.display_name = person.display_name.replace(/\(unknown\)/g, '').trim();
-      $pageTitle.set(person.display_name, 'Profile');
     });
 
     $api.person_activity($routeParams.id).then(function(timeline) {
