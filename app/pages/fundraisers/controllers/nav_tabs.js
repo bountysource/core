@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('FundraiserNavTabsController', function ($scope, $location, $api) {
+angular.module('app').controller('FundraiserNavTabsController', function ($scope, $location, $api, $routeParams) {
   $scope.active_tab = function(name) {
     if (name === 'overview' && (/^\/fundraisers\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
     if (name === 'updates' && (/^\/fundraisers\/[a-z-_0-9]+\/updates$/i).test($location.path())) { return "active"; }
