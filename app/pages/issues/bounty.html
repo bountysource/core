@@ -58,7 +58,7 @@
           <div class="controls">
             <div class="input-prepend">
               <span class="add-on">$</span>
-              <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="Bounty amount" />
+              <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="Bounty amount" required />
             </div>
           </div>
         </div>
@@ -90,7 +90,15 @@
               <div>Promotion:</div>
               <div><small class="muted"><em>Optional</em></small></div>
             </label>
-            <div ab-randomize class="controls" ng-include="'pages/issues/partials/options/promotion.html'" onload="broadcastLoad()"></div>
+            <div class="controls">
+              <div ab-randomize ng-include="'pages/issues/partials/options/promotion.html'" onload="broadcastLoad()"></div>
+              <div collapse="!bounty.promotion">
+                <a class="btn btn-small" ng-click="bounty.promotion = undefined">
+                  <i class="icon-remove"></i>
+                  No promotion
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -107,7 +115,7 @@
             <div class="controls">
               <div class="input-prepend">
                 <span class="add-on">$</span>
-                <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" />
+                <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" required />
               </div>
             </div>
           </div>
@@ -125,7 +133,13 @@
 
         <div class="control-group">
           <div class="controls">
-            <button type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">Create {{bounty.amount || 0 | dollars}} Bounty</button>
+            <button ng-hide="previous_bounty_total > 0" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
+              <span >Post {{bounty.amount || 0 | dollars}} Bounty</span>
+            </button>
+
+            <button ng-show="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
+              <span>Increase Bounty by {{bounty.amount | dollars}}</span>
+            </button>
           </div>
         </div>
       </form>

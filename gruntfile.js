@@ -8,14 +8,8 @@ module.exports = function (grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  var cloudfile_config;
-  try {
-    cloudfile_config = grunt.file.readJSON('cloudfiles.json');
-  } catch (e) {
-    cloudfile_config = grunt.file.readJSON('cloudfiles.example.json');
-  }
-
   grunt.initConfig({
+    aws: (function() { try { return grunt.file.readYAML('../../config/aws-s3.yml'); } catch(e) { return {}; }})(),
     watch: {
       options: {
         livereload: true
@@ -299,23 +293,32 @@ module.exports = function (grunt) {
       },
 
       css_js_cdn: {
-        options: { base_url: cloudfile_config.base_url },
+        options: { base_url: '<%= aws.base_url %>' },
         src: ['dist/assets/*.css', 'dist/assets/*.js']
       },
 
       html_cdn: {
-        options: { base_url: cloudfile_config.base_url },
+        options: { base_url: '<%= aws.base_url %>' },
         src: 'dist/*.html'
       }
     },
-    cloudfiles: {
+    s3: {
       prod: {
-        'user': cloudfile_config.user,
-        'key': cloudfile_config.key,
-        'upload': [{
-          'container': cloudfile_config.container,
-          'src': 'dist/compiled/*',
-          stripcomponents: 2
+        options: {
+          key: '<%= aws.key %>',
+          secret: '<%= aws.secret %>',
+          bucket: '<%= aws.bucket %>',
+          access: 'public-read',
+          region: '<%= aws.region %>',
+          headers: {
+            // Two Year cache policy (1000 * 60 * 60 * 24 * 730)
+            "Cache-Control": "max-age=630720000, public",
+            "Expires": new Date(Date.now() + 63072000000).toUTCString()
+          }
+        },
+        upload: [{
+          src: 'dist/compiled/*',
+          dest: ''
         }]
       }
     },
@@ -423,7 +426,7 @@ module.exports = function (grunt) {
     'md5_path:css_js_cdn', // update angular templates with CDN urls to md5:binary files
     'md5:css_js',        // create md5 copies of css/js in dist/compiled
     'md5_path:html_cdn', // update root HTML with CDN'd css/js
-    'cloudfiles',        // copy all of compiled/ up to CDN
+    's3:prod',           // copy all of compiled/ up to CDN
     'clean:dist_assets'  // clean up assets now that they're all up on CDN
   ]);
 

@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('BountiesSearchController', function($scope, $routeParams, $location, $api) {
+  .controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter) {
 
     //sets defaults search options
     $scope.form_data = {
@@ -53,8 +53,8 @@ angular.module('app')
       return { asc: asc_string, desc: desc_string };
     };
 
-    $scope.featured_issues = $api.issues_featured({ limit: 5 }).then(function(response) {
-      return response;
+    $scope.featured_issues = $api.issues_featured().then(function(issues) {
+      return $filter('shuffle')(issues).slice(0,5);
     });
 
     //grabs all languages. Pushes all languages into languages_selected array

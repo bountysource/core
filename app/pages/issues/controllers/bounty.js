@@ -80,6 +80,10 @@ angular.module('app')
 
           return teams;
         });
+
+        $api.user_issue_bounty_total(parseInt($routeParams.id, 10)).then(function(response) {
+          $scope.previous_bounty_total = response.bounty_total;
+        });
       }
     });
 
@@ -122,6 +126,44 @@ angular.module('app')
       }
     });
 
+    $scope.promotion_disabled = {
+      'newsletter': true,
+      'feature': true,
+      'tweet': true
+    };
+
+    $scope.$watch("bounty.amount", function(amount) {
+      for (var key in $scope.promotion_disabled) {
+        $scope.promotion_disabled[key] = $scope.update_promotion_disabled(key);
+        if (key === $scope.bounty.promotion && $scope.promotion_disabled[key]) {
+          $scope.bounty.promotion = undefined;
+        }
+      }
+    });
+
+    $scope.update_promotion_disabled = function(promotion) {
+      var result;
+      if ($scope.bounty.amount) {
+        switch(promotion) {
+        case 'newsletter':
+          result = $scope.bounty.amount < 150 ? true : false;
+          break;
+        case 'tweet':
+          result = $scope.bounty.amount < 150 ? true : false;
+          break;
+        case 'feature':
+          result = $scope.bounty.amount < 50 ? true : false;
+          break;
+        default:
+          result = true;
+          break;
+        }
+      } else {
+        result = true;
+      }
+      return result;
+    };
+
     $scope.update_bounty_amount = function() {
       var total = $scope.bounty.total;
       if (angular.isNumber(total)) {
@@ -148,6 +190,13 @@ angular.module('app')
       } else {
         $scope.bounty.total = 0;
         $scope.bounty.fee = 0;
+      }
+    };
+
+    $scope.set_bounty_amount = function(new_amount) {
+      if (new_amount > $scope.bounty.amount) {
+        $scope.bounty.amount = new_amount;
+        $scope.update_bounty_total();
       }
     };
   });

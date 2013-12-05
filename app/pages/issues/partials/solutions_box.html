@@ -1,0 +1,91 @@
+<div class="well">
+  <div ng-controller="SolutionsBaseController" ng-show="solutions.length > 0" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 15px; border-bottom: 1px solid #DDD;">
+    <!-- <h4 class="text-center">Recent Developer Work</h4> -->
+    <h4 class="text-center" style="margin-top: 0;"><ng-pluralize count="solutions.length" when="{'one': '1 Developer Working', 'other': '{} Developers Working'}"></ng-pluralize></h4>
+    <table class="table top-backers-table" style="margin-bottom:10px;">
+      <tr ng-repeat="solution in solutions | orderBy:'-status.created_at'| limitTo:4">
+        <!--Profile picture. No link if anon-->
+        <td style="width: 50px">
+          <div>
+            <div>
+              <a class="thumbnail">
+                <img style="width: 50px; max-width: 50px; height: 50px" ng-src="{{solution.person.image_url}}" />
+              </a>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div>
+            <span><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a></span>
+          </div>
+          <div ng-switch="solution.status.type">
+            <span ng-switch-when="SolutionEvent::Started" class="label label-info">Started Solution</span>
+            <span ng-switch-when="SolutionEvent::CheckIn" class="label label-info">Checked In</span>
+            <span ng-switch-when="SolutionEvent::Stopped" class="label label-important">Stopped Working</span>
+            <span ng-switch-when="SolutionEvent::Idle" class="label label-warning">Went Idle</span>
+            <span ng-switch-when="SolutionEvent::Completed" class="label label-success">Finished</span>
+            <span ng-switch-default></span>
+          </div>
+          <div class="muted">{{ solution.status.created_at | date }}</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div ng-controller="SolutionsBaseController" ng-hide="initializing">
+    <div ng-switch="status.type">
+      <div ng-switch-when="SolutionEvent::Started">
+        <h4 style="margin-top:0;" class="text-center">Work In Progress</h4>
+
+        <div style="text-align:center;margin-bottom:10px;">
+          <small>as of {{my_solution.created_at | date:'longDate'}}.</small>
+        </div>
+        <div>
+          <button ng-click="stop_solution()" class="btn btn-primary btn-block">Stop Work</button>
+        </div>
+      </div>
+
+      <div ng-switch-when="SolutionEvent::CheckedIn">
+        <h4 style="margin-top:0;" class="text-center">Work In Progress</h4>
+
+        <div style="text-align:center;margin-bottom:10px;">
+          <small>last checked-in {{my_solution.created_at | date:'longDate'}}.</small>
+        </div>
+        <div>
+          <button ng-click="stop_solution()" class="btn btn-primary btn-block">Stop Work</button>
+        </div>
+      </div>
+
+      <div ng-switch-when="SolutionEvent::Idle">
+        <h4 style="margin-top:0;" class="text-center">You've been marked as idle</h4>
+
+        <div style="text-align:center;margin-bottom:10px;">
+          <small>since {{my_solution.created_at | date:'longDate'}}.</small>
+        </div>
+        <div>
+          <button ng-click="checkin_solution()" class="btn btn-primary btn-block">Check In</button>
+        </div>
+      </div>
+
+      <div ng-switch-when="SolutionEvent::Stopped">
+        <h4 style="margin-top:0;" class="text-center">Work Stopped</h4>
+
+        <div style="text-align:center;margin-bottom:10px;">
+          <small>on {{my_solution.created_at | date:'longDate'}}.</small>
+        </div>
+        <div>
+          <button ng-click="restart_solution()" class="btn btn-primary btn-block">Restart Work</button>
+        </div>
+      </div>
+
+      <div ng-switch-default>
+        <h4 style="margin-top:0;" class="text-center">Earn this bounty!</h4>
+        <p class="text-center">Click Start Work to let everyone know you’re working on a solution. You can submit a bounty claim once the issue is closed on the <a ng-href="{{issue.url}}" target="_blank">original issue tracker</a>.</p>
+        <div>
+          <button ng-click-require-auth="start_solution()" class="btn btn-primary btn-block">Start Work</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

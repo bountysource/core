@@ -315,8 +315,8 @@ angular.module('api.bountysource',[]).
       return this.call("/projects/"+id+"/issues");
     };
 
-    this.issues_featured = function(data) {
-      return this.call("/issues/featured", "GET", data);
+    this.issues_featured = function() {
+      return this.call("/issues/featured");
     };
 
     this.tracker_stats = function(id) {
@@ -391,6 +391,10 @@ angular.module('api.bountysource',[]).
 
     this.bounty_activity = function() {
       return this.call('/user/bounties');
+    };
+
+    this.user_issue_bounty_total = function(issue_id) {
+      return this.call('/user/issues/'+issue_id+'/bounty_total');
     };
 
     this.pledge_activity = function() {
