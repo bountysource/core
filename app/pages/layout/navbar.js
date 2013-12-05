@@ -31,6 +31,6 @@ angular.module('app')
     $scope.send_to_email_login = function() {
       $scope.save_route();
       $location.url("/signin");
-    }
+    };
   });
 
