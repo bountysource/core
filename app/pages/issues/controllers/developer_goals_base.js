@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('DeveloperGoalsBaseController', function ($scope, $api, $filter, $location) {
+  .controller('DeveloperGoalsBaseController', function ($scope, $api, $filter, $location, $routeParams) {
     $scope.developer_goals = [];
     $scope.new_developer_goal = { amount: undefined };
     $scope.my_developer_goal = undefined;
@@ -47,7 +47,7 @@ angular.module('app')
       });
     });
 
-    $scope.issue.then(function(issue) {
+    $api.issue_get($routeParams.id).then(function(issue) {
       issue.bounty_total = parseInt(issue.bounty_total, 10);
 
       // set $scope.developer_events
@@ -61,7 +61,7 @@ angular.module('app')
       // If the person is logged in, attempt to find their developer goal
       $scope.$watch('current_person', function(current_person) {
         if (current_person) {
-          $scope.developer_goals.then(function(developer_goals) {
+          $api.get_developer_goals(issue.id).then(function(developer_goals) {
             $scope.initializing_my_developer_goal = false;
 
             for (var i=0; i<developer_goals.length; i++) {
@@ -104,7 +104,7 @@ angular.module('app')
     });
 
     $scope.initialize_developer_goals = function() {
-      $scope.issue.then(function(issue) {
+      $api.issue_get($routeParams.id).then(function(issue) {
         $api.get_developer_goals(issue.id).then(function(developer_goals) {
           // Collect developer goals that have not yet been met
           $scope.unmet_developer_goals = [];
