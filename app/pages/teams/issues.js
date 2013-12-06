@@ -25,6 +25,17 @@ angular.module('app')
       }
     };
 
-    $scope.issues = []; $scope.issues_resolved = true; // replace line with api call, setting $scope.issues
+    $api.team_issues($routeParams.id).then(function(issues) {
+
+      for (var i in issues) {
+        // sorting doesn't like nulls.. this is a quick hack
+        issues[i].participants_count = issues[i].participants_count || 0;
+        issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+        issues[i].comment_count = issues[i].comment_count || 0;
+      }
+
+      $scope.issues = issues;
+      $scope.issues_resolved = true;
+    });
 
   });

@@ -472,6 +472,10 @@ angular.module('api.bountysource',[]).
       return this.call("/teams/"+id, "PUT", form_data);
     };
 
+    this.team_issues = function(team_id) {
+      return this.call("/teams/" + team_id + "/issues");
+    };
+
     this.team_tracker_add = function(id, tracker_id) {
       return this.call("/teams/"+id+"/trackers/"+tracker_id, "POST");
     };
