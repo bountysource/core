@@ -12,7 +12,7 @@ angular.module('app')
     $scope.issues_resolved = false;
 
     $scope.issue_sort = {
-      column: "created_at",
+      column: "participants_count",
       desc: true
     };
 
