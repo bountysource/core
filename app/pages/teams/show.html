@@ -48,7 +48,7 @@
       </div>
 
       <div class="span3">
-        <div class="well" style="height: 240px;">
+        <div class="well" style="min-height: 240px;">
           <div style="min-height: 180px;">
             <h4>Add Projects</h4>
             <ul>
@@ -63,7 +63,7 @@
       </div>
 
       <div class="span3">
-        <div class="well" style="height: 240px;">
+        <div class="well" style="min-height: 240px;">
           <div style="min-height: 180px;">
             <h4>Change Settings</h4>
             <ul>
@@ -84,8 +84,8 @@
         <ng-include src="'pages/teams/partials/post_bounty_box.html'"></ng-include>
       </div>
 
-      <div class="span3 well" style="height:280px;">
-        <div style="height:75%">
+      <div class="span3 well" style="min-height:280px;">
+        <div style="min-height:75%">
           <h4>Invite Members</h4>
           <ul>
             <li>Add members and send email invites</li>
@@ -93,13 +93,12 @@
             <li>Show off your team</li>
           </ul>
         </div>
-        <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/members/manage" class="btn btn-primary">Invite
+        <div style="text-align:center;position:relative;"><a ng-href="/teams/{{ team.slug }}/members/manage" class="btn btn-primary">Invite
           Members</a></div>
       </div>
 
-      <div class="span3 well" style="height:280px;"
-           ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
-        <div style="height:75%">
+      <div class="span3 well" style="min-height:280px;" ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
+        <div style="min-height:75%">
           <h4>Add Funds</h4>
           <ul>
             <li>Create a shared team balance</li>
@@ -111,8 +110,8 @@
           Funds</a></div>
       </div>
 
-      <div class="span3 well" style="height:280px;" ng-show="team.type == 'Team::Project'">
-        <div style="height:75%">
+      <div class="span3 well" style="min-height:280px;" ng-show="team.type == 'Team::Project'">
+        <div style="min-height:75%">
           <h4>Install Plugin</h4>
           <ul>
             <li>Add/update bounty total in Issue title</li>
