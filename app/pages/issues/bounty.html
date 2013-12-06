@@ -133,7 +133,7 @@
 
         <div class="control-group">
           <div class="controls">
-            <button ng-hide="previous_bounty_total > 0" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
+            <button ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
               <span >Post {{bounty.amount || 0 | dollars}} Bounty</span>
             </button>
 
