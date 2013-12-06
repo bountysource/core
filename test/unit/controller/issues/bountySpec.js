@@ -29,6 +29,9 @@ describe('IssueShow', function() {
     $httpBackend.when('GET', 'https://staging-api.bountysource.com/people/4/teams?callback=CORS&per_page=250')
     .respond( function() {return [200, "CORS(" + JSON.stringify(teamJSON) + ")"];} );
 
+    $httpBackend.when('GET', 'https://staging-api.bountysource.com/user/issues/651929/bounty_total?callback=CORS&per_page=250')
+    .respond( function() {return [200, "CORS(" + JSON.stringify({"data":{"bounty_total":0}}) + ")"];} );
+
     $routeParams.id = 651929;
   }));
 
