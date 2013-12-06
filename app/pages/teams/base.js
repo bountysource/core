@@ -34,6 +34,7 @@ angular.module('app')
       else if (tab === 'account' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
       else if (tab === 'projects' && (/^\/teams\/[^\/]+\/projects+$/).test($location.path())) { return true; }
       else if (tab === 'bounties' && (/^\/teams\/[^\/]+\/bounties$/).test($location.path())) { return true; }
+      else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
     };
 
     $scope.members = $api.team_members_get($routeParams.id).then(function(members) {
