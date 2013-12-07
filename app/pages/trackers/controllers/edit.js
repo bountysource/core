@@ -1,27 +1,29 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $person) {
     $routeProvider
       .when('/trackers/:id/edit', {
         templateUrl: 'pages/trackers/edit.html',
         controller: 'TrackersEditController',
-        title: 'Projects'
+        title: 'Projects',
+        resolve: $person
       });
   })
-  .controller('TrackersEditController', function ($scope, $api, $routeParams, $pageTitle) {
+  .controller('TrackersEditController', function ($scope, $api, $routeParams, $pageTitle, $location) {
     $api.tracker_get($routeParams.id).then(function (tracker) {
-
-      $scope.tracker = tracker;
       $scope.form_data = {
         name: tracker.name,
         description: tracker.description,
+        image_url: undefined,
         homepage: tracker.homepage,
-        image_url: tracker.image_url,
-        repo_url: tracker.repo_url,
+        repo_url: tracker.repo_url
       };
 
       $scope.form_data.languages = tracker.languages;
+
+      // Save master copy of form data to detect changes
+      $scope.form_data_master = angular.copy($scope.form_data);
 
       // tracker pictures
       $scope.tracker_input = {
@@ -30,36 +32,81 @@ angular.module('app')
 
       $pageTitle.set(tracker.name, 'Edit Project');
 
-      $scope.save = function (form_data) {
-        $scope.error = false;
-        $scope.success = false;
-
-        if ($scope.tracker_input.radio === 'custom') {
-          $scope.form_data.image_url = $scope.tracker_input.text;
-        } else {
-          $scope.form_data.image_url = $scope.tracker_input.radio;
-        }
-
-        //clean form_data before submission
-        $scope.form_data.language_ids = [];
-        for (var i = 0; i < $scope.form_data.languages.length; i++) {
-          $scope.form_data.language_ids.push($scope.form_data.languages[i].id);
-        }
-
-        $scope.final_form_data = angular.copy($scope.form_data)
-       ;delete $scope.final_form_data.languages;
-
-        $api.update_tracker(tracker.id, $scope.final_form_data).then(function (response) {
-          if (response.error) {
-            $scope.error = response.error;
-          } else {
-            $scope.form_data.languages = response.data.languages;
-            $scope.success = true;
-          }
-        });
-
-      };
+      $scope.tracker = tracker;
+      return tracker;
     });
+
+    // Save form data changes, applying changes to the Tracker
+    $scope.save = function() {
+      console.log('save');
+
+      if ($scope.form.$invalid || !$scope.unsaved_changes()) {
+        return;
+      }
+
+      $scope.saving = true;
+
+      var payload = angular.copy($scope.form_data);
+      payload.image_url = $scope.form_data.image_url || $scope.tracker.large_image_url;
+
+      // Add language IDs from selected languages
+      payload.language_ids = [];
+      for (var i=0; i<$scope.form_data.languages.length; i++) {
+        payload.language_ids.push($scope.form_data.languages[i].id);
+      }
+      delete payload.languages;
+
+      $api.update_tracker($routeParams.id, payload).then(function(response) {
+        if (!response.meta.success) {
+          $scope.alert = { message: response.data.error, type: 'error' };
+        } else {
+          $scope.saving = false;
+
+          // $scope.alert = { message: "Tracker updated!", type: 'success' };
+
+          // Rebuild form data and master copy of data
+          $scope.form_data = {
+            name: response.data.name,
+            description: response.data.description,
+            image_url: undefined,
+            homepage: response.data.homepage,
+            repo_url: response.data.repo_url
+          };
+          $scope.form_data.languages = response.data.languages;
+          $scope.form_data_master = angular.copy($scope.form_data);
+
+          // Update the underlying Tracker model
+          for (var k in response.data) {
+            $scope.tracker[k] = response.data[k];
+          }
+
+          // Reload page title with new tracker, to handle the name being changed
+          $pageTitle.set($scope.tracker.name, "Edit");
+        }
+      });
+
+    };
+
+    // Cancel changes and go back to Tracker overview page
+    $scope.cancel = function() {
+      console.log('cancel');
+
+      if ($scope.unsaved_changes() && confirm("You have unsaved changes. Cancel anyway?")) {
+        $location.url("/trackers/"+$routeParams.id);
+      } else {
+        $location.url("/trackers/"+$routeParams.id);
+      }
+    };
+
+    // Are there unsaved changes pending?
+    $scope.unsaved_changes = function() {
+      return !angular.equals($scope.form_data_master, $scope.form_data);
+    };
+
+    // Check to see if a single value has been changed from the current value
+    $scope.value_changed = function(name) {
+      !angular.equals($scope.form_data[name], $scope.form_data_master[name]);
+    };
 
     //grabs all languages. Pushes all languages into languages_selected array
     $scope.languages_selected = [];
