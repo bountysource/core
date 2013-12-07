@@ -38,23 +38,19 @@ angular.module('app')
 
     // Save form data changes, applying changes to the Tracker
     $scope.save = function() {
-      console.log('save');
-
-      if ($scope.form.$invalid || !$scope.unsaved_changes()) {
-        return;
-      }
+      if ($scope.form.$invalid || !$scope.unsaved_changes()) { return; }
 
       $scope.saving = true;
 
       var payload = angular.copy($scope.form_data);
       payload.image_url = $scope.form_data.image_url || $scope.tracker.large_image_url;
 
-      // Add language IDs from selected languages
-      payload.language_ids = [];
-      for (var i=0; i<$scope.form_data.languages.length; i++) {
-        payload.language_ids.push($scope.form_data.languages[i].id);
-      }
-      delete payload.languages;
+//      // Add language IDs from selected languages
+//      payload.language_ids = [];
+//      for (var i=0; i<$scope.form_data.languages.length; i++) {
+//        payload.language_ids.push($scope.form_data.languages[i].id);
+//      }
+//      delete payload.languages;
 
       $api.update_tracker($routeParams.id, payload).then(function(response) {
         if (!response.meta.success) {
@@ -89,8 +85,6 @@ angular.module('app')
 
     // Cancel changes and go back to Tracker overview page
     $scope.cancel = function() {
-      console.log('cancel');
-
       if ($scope.unsaved_changes() && $window.confirm("You have unsaved changes. Cancel anyway?")) {
         $location.url("/trackers/"+$routeParams.id);
       } else {
