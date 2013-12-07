@@ -1,3 +1,19 @@
+.label-warning[href], .badge-warning[href] {
+  background-color: #F89406;
+}
+
+.label-info[href], .badge-info[href] {
+  background-color: #3A87AD;
+}
+
+.label-success[href], .badge-success[href] {
+  background-color: #468847;
+}
+
+.label-important[href], .badge-important[href] {
+  background-color: #B94A48;
+}
+
 table#bounties-table tr td {
   vertical-align: middle;
 }
