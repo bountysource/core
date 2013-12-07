@@ -11,11 +11,11 @@
   <p>If you need further assistance, please contact <a href="mailto:support@bountysource.com">support@bountysource.com</a></p>
 </div>
 
-<div collapse="tracker">
+<div ng-hide="tracker">
   <loading-bar>Loading tracker...</loading-bar>
 </div>
 
-<div collapse="!tracker">
+<div ng-show="tracker">
   <div class="row-fluid">
     <div class="span3">
       <ng-include src="'pages/trackers/partials/sidebar.html'"></ng-include>
@@ -25,11 +25,11 @@
         <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
       </div>
 
-      <div collapse="!saving">
+      <div ng-show="saving">
         <loading-bar>Saving changes...</loading-bar>
       </div>
 
-      <div collapse="saving">
+      <div ng-hide="saving">
         <form class="form-horizontal" name="form" ng-submit="save()">
           <div class="control-group">
             <label class="control-label" for="inputName">Name:</label>
