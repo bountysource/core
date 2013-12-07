@@ -85,8 +85,10 @@ angular.module('app')
 
     // Cancel changes and go back to Tracker overview page
     $scope.cancel = function() {
-      if ($scope.unsaved_changes() && $window.confirm("You have unsaved changes. Cancel anyway?")) {
-        $location.url("/trackers/"+$routeParams.id);
+      if ($scope.unsaved_changes()) {
+        if ($window.confirm("You have unsaved changes. Cancel anyway?")) {
+          $location.url("/trackers/"+$routeParams.id);
+        }
       } else {
         $location.url("/trackers/"+$routeParams.id);
       }
