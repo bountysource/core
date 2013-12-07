@@ -293,12 +293,16 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/cards", function(r) { return r.data.featured_trackers.concat(r.data.all_trackers); });
     };
 
-    this.tracker_get = function(id) {
+    this.tracker_overview = function(id) {
       return this.call("/trackers/"+id+"/overview");
     };
 
-    this.update_tracker = function (id, form_data) {
-      return this.call("/tracker_versions/update_tracker", "POST", { tracker_id: id, edits: form_data }, function (response) {
+    this.tracker_get = function(id) {
+      return this.call("/trackers/"+id);
+    };
+
+    this.update_tracker = function (id, data) {
+      return this.call("/trackers/"+id+"/update", "POST", data, function (response) {
         return response;
       });
     };
