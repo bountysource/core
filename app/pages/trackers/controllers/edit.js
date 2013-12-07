@@ -10,7 +10,7 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('TrackersEditController', function ($scope, $api, $routeParams, $pageTitle, $location) {
+  .controller('TrackersEditController', function ($scope, $api, $routeParams, $pageTitle, $location, $window) {
     $api.tracker_get($routeParams.id).then(function (tracker) {
       $scope.form_data = {
         name: tracker.name,
@@ -91,7 +91,7 @@ angular.module('app')
     $scope.cancel = function() {
       console.log('cancel');
 
-      if ($scope.unsaved_changes() && confirm("You have unsaved changes. Cancel anyway?")) {
+      if ($scope.unsaved_changes() && $window.confirm("You have unsaved changes. Cancel anyway?")) {
         $location.url("/trackers/"+$routeParams.id);
       } else {
         $location.url("/trackers/"+$routeParams.id);
@@ -105,7 +105,7 @@ angular.module('app')
 
     // Check to see if a single value has been changed from the current value
     $scope.value_changed = function(name) {
-      !angular.equals($scope.form_data[name], $scope.form_data_master[name]);
+      return !angular.equals($scope.form_data[name], $scope.form_data_master[name]);
     };
 
     //grabs all languages. Pushes all languages into languages_selected array
