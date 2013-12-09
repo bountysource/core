@@ -1,0 +1,29 @@
+#faq h2,
+#faq h4,
+#fees h2,
+#fees h4 {
+  margin-top: -25px;
+  padding-top: 45px;
+}
+
+#faq dd,
+#fees dd {
+  border-bottom: 2px solid #129e5e;
+  margin-left: 0;
+  padding-bottom: 20px;
+}
+
+.ui-scrollfix {
+  position: fixed;
+  top: 65px;
+  width: 270px;
+}
+
+@media (max-width: 767px) {
+  .ui-scrollfix {
+    position: static;
+    width: auto;
+    margin-bottom: 20px;
+    display: block;
+  }
+}
