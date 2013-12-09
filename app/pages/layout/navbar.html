@@ -24,7 +24,7 @@
                   <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
                 </a>
               </li>
-              <li><a href="/signin" id="navbar-provider-email"><img src="images/favicon-email.png"> Email Address</a></li>
+              <li><a ng-click="send_to_email_login()" id="navbar-provider-email"><img src="images/favicon-email.png"> Email Address</a></li>
             </ul>
 
             <a href="/people/{{current_person.slug}}" class="dropdown-toggle" data-toggle="dropdown" ng-show="!!current_person" id="navbar-user">
