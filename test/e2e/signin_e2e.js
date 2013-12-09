@@ -24,7 +24,6 @@ describe('Scenario: Signing In --', function () {
       browser().navigateTo('/');
 
       var e = element('#navbar-provider-email');
-      expect(e.attr('href')).toBe("/signin");
       e.click();
 
       expect(browser().location().path()).toBe("/signin");
