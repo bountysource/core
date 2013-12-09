@@ -2,7 +2,7 @@
   <div ng-controller="SolutionsBaseController" ng-show="solutions.length > 0" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 15px; border-bottom: 1px solid #DDD;">
     <!-- <h4 class="text-center">Recent Developer Work</h4> -->
     <h4 class="text-center" style="margin-top: 0;"><ng-pluralize count="solutions.length" when="{'one': '1 Developer Working', 'other': '{} Developers Working'}"></ng-pluralize></h4>
-    <table class="table top-backers-table" style="margin-bottom:10px;">
+    <table class="table top-backers-table" style="margin-bottom:10px; word-wrap: break-word; table-layout:fixed;">
       <tr ng-repeat="solution in solutions | orderBy:'-status.created_at'| limitTo:4">
         <!--Profile picture. No link if anon-->
         <td style="width: 50px">
@@ -17,7 +17,7 @@
 
         <td>
           <div>
-            <span><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name}}</a></span>
+            <span><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name | truncate:14 }}</a></span>
           </div>
           <div ng-switch="solution.status.type">
             <span ng-switch-when="SolutionEvent::Started" class="label label-info">Started Solution</span>
