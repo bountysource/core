@@ -4,7 +4,12 @@
     <div class="well">
       <div class="text-center">
         <h4 style="margin-top: 0;">Your Bounty Goal</h4>
-        <div><small>Set on {{my_developer_goal.created_at | date:'medium'}}</small></div>
+        <div>
+          <small>Set on {{my_developer_goal.created_at | date:'medium'}}</small>
+        </div>
+        <div style="line-height:6px;">
+          <small><a ng-click="delete_developer_goal()">(Remove Bounty Goal)</a></small>
+        </div>
       </div>
       <br />
       <form name="form" ng-submit="update_developer_goal(my_developer_goal.amount)" style="margin: 0;" class="form-horizontal">

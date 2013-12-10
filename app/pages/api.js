@@ -672,6 +672,10 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+issue_id+"/developer_goal", "PUT", data);
     };
 
+    this.delete_developer_goal = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/developer_goal", "DELETE");
+    };
+
     this.get_developer_goal = function(issue_id) {
       return this.call("/issues/"+issue_id+"/developer_goal", "GET");
     };
