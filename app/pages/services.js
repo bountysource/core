@@ -1,5 +1,5 @@
 'use strict';
-angular.module('app')
+angular.module('app.services')
   .service('$payment', function ($rootScope, $location, $window, $log, $api) {
     // currently only used for bounty and pledge creation.
     // $payment.create({ amount: 15, payment_method: 'google', ... }).process();

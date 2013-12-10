@@ -684,6 +684,10 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+issue_id+"/developer_goals", "GET");
     };
 
+    this.get_cart = function() {
+      return this.call("/cart");
+    };
+
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {
