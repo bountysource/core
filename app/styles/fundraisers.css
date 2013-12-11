@@ -78,5 +78,5 @@ div.update-header-options > div.update-options {
   right: 0px;
 }
 
-.table-fundraiser-issues .goal-met a { text-decoration:line-through; }
+.table-fundraiser-issues .goal-met td:first-child a { text-decoration:line-through; }
 .table-fundraiser-issues .goal-met td:first-child:before { content: '✓ '; color: green; font-weight: bold; text-decoration: none !important; }
