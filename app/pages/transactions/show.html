@@ -1,0 +1,13 @@
+<div>
+  <loading-bar ng-hide="transaction">Loading transaction...</loading-bar>
+  <h1>Transaction</h1>
+  <ul>
+    <li>Gross: {{transaction.gross | dollars}}</li>
+    <li>Items: {{transaction.items | dollars}}</li>
+    <li>Fees: {{transaction.fees | dollars}}</li>
+  </ul>
+  <h2>Splits</h2>
+  <div ng-show="transaction">
+    <pre ng-repeat="split in transaction.splits">{{split}}</pre>
+  </div>
+</div>

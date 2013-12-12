@@ -12,10 +12,10 @@ angular.module('api.bountysource',[]).
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
 
-
     // set API host based on environment
     if ($rootScope.environment === 'dev') {
-      $rootScope.api_host = "http://localhost:5000/";
+      // $rootScope.api_host = "http://localhost:5000/";
+      $rootScope.api_host = "https://v2api.pagekite.me/";
     } else if ($rootScope.environment === 'staging') {
       $rootScope.api_host = "https://staging-api.bountysource.com/";
     } else if ($rootScope.environment === 'prod') {
@@ -712,6 +712,9 @@ angular.module('api.bountysource',[]).
       return this.call("/cart/export", "POST", cart.items);
     };
 
+    this.cart_checkout = function(checkout_method) {
+      return this.call("/cart/checkout", "POST", { checkout_method: checkout_method });
+    };
 
     // these should probably go in an "AuthenticationController" or something more angular
 
