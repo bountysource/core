@@ -111,8 +111,8 @@ angular.module('api.bountysource',[]).
                 $log.info(" * Request", method, url);
                 $log.info(" * Request Params", logged_params);
                 $log.info(" * Response:", angular.copy(parsed_response));
-              } else if (parsed_response.meta.status === 301) {
-                $log.info("Content moved, redirecting to ", parsed_response.data.url);
+              } else if (parsed_response.meta.status === 302) {
+                $log.info("Redirecting to ", parsed_response.data.url);
                 $window.location = parsed_response.data.url;
               }
             }

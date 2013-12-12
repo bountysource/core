@@ -55,9 +55,9 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
             }
           });
         } else if (checkout_method === 'paypal') {
-          console.log('TODO PAYPAL');
+          // PayPal is going to redirect, do not resolve the promise.
+          // deferred.reject(response);
 
-          deferred.resolve(response);
         } else {
           deferred.resolve(response);
         }
