@@ -76,7 +76,6 @@
 
               <tbody>
               <tr ng-repeat="related_issue in related_issues | filter:issue_filter | orderBy:bounty_total | orderBy:participants_count | limitTo:5" ng-class="{ success: (related_issue.bounty_total > 0), warning: (!related_issue.can_add_bounty) }">
-
                 <td>
                   <a ng-href="/issues/{{related_issue.slug}}" ng-class="{ 'text-success': (related_issue.bounty_total > 0), 'text-warning': (!related_issue.can_add_bounty) }">
                     <i ng-show="related_issue.bounty_total >= 1000" class="icon-fire"></i>

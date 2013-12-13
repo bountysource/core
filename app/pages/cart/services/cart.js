@@ -26,7 +26,6 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     * Depending on the payment method, a third-party redirect may be necessary.
     *
     * @param checkout_method - the name of the checkout method to use
-    * @return promise of checkout data
     *
     * Checkout data has the following attributes:
     *   redirect_url - if checkout method requires redirect, this is where to redirect to for third-party checkout.
@@ -47,19 +46,17 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
                 order_id: result.response.orderId
               });
 
+              deferred.resolve(true);
+
               $window.location = $rootScope.api_host + "payments/google/success?" + query;
             },
 
             failure: function() {
-              deferred.resolve();
+              deferred.resolve(false);
             }
           });
-        } else if (checkout_method === 'paypal') {
-          // PayPal is going to redirect, do not resolve the promise.
-          // deferred.reject(response);
-
         } else {
-          deferred.resolve(response);
+          deferred.resolve(true);
         }
       });
 

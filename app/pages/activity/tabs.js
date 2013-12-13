@@ -7,7 +7,9 @@ angular.module('app')
       { name: 'Bounties', url: '/activity/bounties' },
       { name: 'Fundraisers', url: '/activity/fundraisers' },
       { name: 'Pledges', url: '/activity/pledges' },
-      { name: 'Bounty Claims', url: '/activity/claims' }
+      { name: 'Bounty Claims', url: '/activity/claims' },
+      { name: 'Account', url: '/activity/account' },
+      { name: 'Transactions', url: '/activity/transactions' }
     ];
     $scope.is_active = function(url) {
       return url === $location.path();

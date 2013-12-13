@@ -1,13 +1,69 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/activity">Activity</a><span class="divider">»</span></li>
+  <li><a href="/activity/transactions">Transactions</a><span class="divider">»</span></li>
+  <li><a>
+    <span ng-hide="transaction">Loading...</span>
+    <span ng-show="transaction">Order #{{transaction.number}}</span>
+  </a></li>
+</ul>
+
 <div>
   <loading-bar ng-hide="transaction">Loading transaction...</loading-bar>
-  <h1>Transaction</h1>
-  <ul>
-    <li>Gross: {{transaction.gross | dollars}}</li>
-    <li>Items: {{transaction.items | dollars}}</li>
-    <li>Fees: {{transaction.fees | dollars}}</li>
-  </ul>
-  <h2>Splits</h2>
+
   <div ng-show="transaction">
-    <pre ng-repeat="split in transaction.splits">{{split}}</pre>
+    <div class="row-fluid">
+      <div class="span12">
+        <h4>Items</h4>
+        <table class="table table-striped">
+          <tbody>
+          <tr ng-repeat="item in transaction.items">
+            <td>
+              <strong>{{item.amount | dollars}}</strong>
+            </td>
+            <td ng-switch="item.type">
+              <div ng-switch-when="Pledge">
+                <span>Pledge on <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a></span>
+              </div>
+
+              <div ng-switch-when="Bounty">
+                <span>Bounty on <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></span>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div>Total: <strong>{{transaction.gross | currency}}</strong></div>
+        <div ng-show="transaction.fees > 0">Fee: <strong>{{transaction.fees | currency}}</strong></div>
+        <div>
+          <span>Payment Method:</span>
+          <strong ng-hide="transaction.checkout_method.owner">{{transaction.checkout_method.display_name}}</strong>
+          <a ng-show="transaction.checkout_method.owner" owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
+        </div>
+      </div>
+
+      <!--<div class="span4">-->
+        <!--<h4>Related Issues</h4>-->
+        <!--<table class="table table-striped">-->
+          <!--<thead>-->
+          <!--<tr>-->
+            <!--<th class="span9">Title</th>-->
+            <!--<th style="text-align: center"><a href="#" tooltip="Bounty total"><span style="color: black">$</span></a></th>-->
+            <!--&lt;!&ndash;<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>&ndash;&gt;-->
+            <!--<th style="text-align: center"><a href="#" tooltip="+1 and Thumbsup total"><i class="icon-thumbs-up"></i></a></th>-->
+            <!--<th style="text-align: center"><a href="#" tooltip="Participants"><i class="icon-user"></i></a></th>-->
+            <!--<th style="text-align: center"><a href="#" tooltip="Age of Issue"><i class="icon-time"></i></a></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+
+          <!--<tbody>-->
+          <!--<tr>-->
+
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</table>-->
+      <!--</div>-->
+    </div>
   </div>
 </div>

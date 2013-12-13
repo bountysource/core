@@ -16,7 +16,7 @@ angular.module('app')
     });
 
     $scope.bounty = {
-      amount: parseInt($routeParams.amount || 0, 10),
+      amount: parseInt($routeParams.amount || 15, 10),
       anonymous: ($routeParams.anonymous === "true") || false,
       checkout_method: $routeParams.checkout_method || 'google',
 
@@ -51,8 +51,10 @@ angular.module('app')
           // wow, so spaghetti
           cart.clear().then(function() {
             cart.add_bounty($scope.bounty.amount, issue, attrs).then(function() {
-              cart.checkout(checkout_method).then(function() {
-                $scope.processing_payment = false;
+              cart.checkout(checkout_method).then(function(success) {
+                if (success === false) {
+                  $scope.processing_payment = false;
+                }
               });
             });
           });
