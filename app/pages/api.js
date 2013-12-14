@@ -14,8 +14,7 @@ angular.module('api.bountysource',[]).
 
     // set API host based on environment
     if ($rootScope.environment === 'dev') {
-      // $rootScope.api_host = "http://localhost:5000/";
-      $rootScope.api_host = "https://v2api.pagekite.me/";
+      $rootScope.api_host = "http://localhost:5000/";
     } else if ($rootScope.environment === 'staging') {
       $rootScope.api_host = "https://staging-api.bountysource.com/";
     } else if ($rootScope.environment === 'prod') {
