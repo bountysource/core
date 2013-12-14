@@ -44,6 +44,7 @@
                 <li><a href="/activity/fundraisers">Fundraisers</a></li>
                 <li><a href="/activity/pledges">Pledges</a></li>
                 <li><a href="/activity/claims">Bounty Claims</a></li>
+                <li><a href="/activity/transactions">Transactions</a></li>
               </ul>
             </li>
               <li><a ng-href="/people/{{current_person.slug}}" id="navbar-user-profile">
@@ -76,7 +77,7 @@
                   <li><a href="/settings/email">Email</a></li>
                 </ul>
               </li>
-              <li ng-show="current_person.account.balance > 0"><a ng-href="/activity/transactions" id="navbar-user-profile">
+              <li ng-show="current_person.account.balance > 0"><a ng-href="/activity/account" id="navbar-user-profile">
                 <i class="icon-gift"></i>
                 Balance ({{current_person.account.balance | currency}})
               </a></li>

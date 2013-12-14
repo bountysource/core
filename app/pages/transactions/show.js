@@ -9,7 +9,9 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('TransactionShowController', function ($scope, $routeParams, $api, $filter) {
+  .controller('TransactionShowController', function ($scope, $routeParams, $api) {
+    $scope.is_receipt = parseInt($routeParams.receipt, 10) === 1;
+
     $scope.transaction_promise = $api.call("/transactions/"+$routeParams.id).then(function(transaction) {
       console.log(transaction);
 
@@ -28,6 +30,8 @@ angular.module('app')
       return transaction;
     });
 
+
+
     // Watch for trackers collected form Transaction items.
     // Generate list of related issues.
     $scope.$watch('trackers', function(trackers) {
@@ -44,31 +48,6 @@ angular.module('app')
         // TODO recommended fundraisers?
       }
     });
-
-//    $scope.related_issues_promise = $api.tracker_issues_get($scope.issue.tracker.id).then(function(issues) {
-//      $filter('filter')
-//
-//      var related_issues = [];
-//      for (var i=0; i<issues.length; i++) {
-//        issues[i].bounty_total = parseFloat(issues[i].bounty_total);
-//
-//        // sorting doesn't like nulls.. this is a quick hack
-//        issues[i].participants_count = issues[i].participants_count || 0;
-//        issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
-//        issues[i].comment_count = issues[i].comment_count || 0;
-//
-//        if (issues[i].id === $scope.issue.id || !issues[i].can_add_bounty || issues[i].paid_out) {
-//          // dont add to list if current issue, or if bounties cannot be added, or if issue has been paid out
-//        } else {
-//          related_issues.push(issues[i]);
-//        }
-//      }
-//
-//      console.log(related_issues);
-//
-//      $scope.related_issues = related_issues;
-//      return related_issues;
-//    });
 
   });
 

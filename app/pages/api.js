@@ -45,6 +45,7 @@ angular.module('api.bountysource',[]).
         throw("Nothing left :/");
       }
     };
+
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
       //if we are in the test environment, call the mocked $api.call() otherwise, use the prod call()
