@@ -684,38 +684,6 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+issue_id+"/developer_goals", "GET");
     };
 
-    this.get_cart = function() {
-      return this.call("/cart");
-    };
-
-    this.cart_add_item = function(type, amount, attributes) {
-      var payload = attributes;
-      payload.item_type = type;
-      return this.call("/cart/add_item", "POST", attributes);
-    };
-
-    this.cart_remove_item = function(index) {
-      return this.call("/cart/remove_item", "DELETE", { index: index });
-    };
-
-    this.cart_update_item = function(index, data) {
-      var payload = data;
-      payload.index = index;
-      return this.call("/cart/update_item", "PUT", payload);
-    };
-
-    this.clear_cart = function() {
-      return this.call("/cart", "DELETE");
-    };
-
-    this.export_cart = function(cart) {
-      return this.call("/cart/export", "POST", cart.items);
-    };
-
-    this.cart_checkout = function(checkout_method) {
-      return this.call("/cart/checkout", "POST", { checkout_method: checkout_method });
-    };
-
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {

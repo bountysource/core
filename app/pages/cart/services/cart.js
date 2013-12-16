@@ -9,10 +9,46 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     this.class = type;
     this.amount = amount;
     this.attributes = attributes || {};
+  };
 
-//    // Added to cart date, if passed on attributes
-//    this.added_at = this.attributes.added_at || new Date().getTime();
-//    delete this.attributes.added_at;
+  var API = function() {
+    this.call = $api.call;
+
+    this.get = function() {
+      return this.call("/cart");
+    };
+
+    this.add_item = function(type, amount, attributes) {
+      var payload = attributes;
+      payload.item_type = type;
+      return this.call("/cart/add_item", "POST", attributes);
+    };
+
+    this.remove_item = function(index) {
+      return this.call("/cart/remove_item", "DELETE", { index: index });
+    };
+
+    this.update_item = function(index, data) {
+      var payload = data;
+      payload.index = index;
+      return this.call("/cart/update_item", "PUT", payload);
+    };
+
+    this.clear = function() {
+      return this.call("/cart", "DELETE");
+    };
+
+    this.export = function(cart) {
+      return this.call("/cart/export", "POST", cart.items);
+    };
+
+    this.checkout = function(checkout_method) {
+      var deferred = $q.defer();
+      this.call("/cart/checkout", "POST", { checkout_method: checkout_method }, function(response) {
+        deferred.resolve(response);
+      });
+      return deferred.promise;
+    };
   };
 
   /*
@@ -20,6 +56,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
   * */
   var Cart = function(items) {
     this.items = items || [];
+    this.api = new API();
 
     /*
     * Request checkout using a specific payment method.
@@ -34,29 +71,29 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     this.checkout = function(checkout_method) {
       var deferred = $q.defer();
 
-      $api.cart_checkout(checkout_method).then(function(response) {
-        if (checkout_method === 'google') {
+      this.api.checkout(checkout_method).then(function(response) {
+        if (!response.meta.success) {
+          deferred.reject(response);
+        } else if (checkout_method === 'google') {
           // a JWT is returned, trigger Google Wallet buy
           $window.google.payments.inapp.buy({
-            jwt: response.jwt,
+            jwt: response.data.jwt,
 
             success: function(result) {
               var query = $api.toKeyValue({
                 access_token: $api.get_access_token(),
                 order_id: result.response.orderId
               });
-
               deferred.resolve(true);
-
               $window.location = $rootScope.api_host + "payments/google/success?" + query;
             },
 
             failure: function() {
-              deferred.resolve(false);
+              deferred.reject(response);
             }
           });
         } else {
-          deferred.resolve(true);
+          deferred.resolve(response);
         }
       });
 
@@ -75,6 +112,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
       attributes = attributes || {};
 
       var deferred = $q.defer();
+      var that = this;
 
       var item = new Item(type, amount, attributes);
       this.items.push(item);
@@ -82,7 +120,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
       // Add item to server-side cart if logged in.
       this._require_person().then(function(person) {
         if (person) {
-          $api.cart_add_item(item.class, item.amount, item.attributes).then(function(updated_cart) {
+          that.api.add_item(item.class, item.amount, item.attributes).then(function(updated_cart) {
             deferred.resolve(item);
           });
         } else {
@@ -120,6 +158,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     * */
     this.remove_item = function(index) {
       var deferred = $q.defer();
+      var that = this;
 
       // Remove item from local cart
       var removed_item;
@@ -134,7 +173,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
       // Remove cart on server
       this._require_person().then(function(person) {
         if (person) {
-          $api.cart_remove_item(index).then(function(updated_cart) {
+          that.api.remove_item(index).then(function(updated_cart) {
             deferred.resolve(removed_item);
           });
         } else {
@@ -155,6 +194,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     * */
     this.update_item = function(index, attributes) {
       var deferred = $q.defer();
+      var that = this;
 
       // Update local version of item
       var updated_item;
@@ -171,7 +211,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
       // Update item on server
       this._require_person().then(function(person) {
         if (person) {
-          $api.cart_update_item(index, updated_item.attributes).then(function(updated_cart) {
+          that.api.update_item(index, updated_item.attributes).then(function(updated_cart) {
             deferred.resolve(updated_item);
           });
         } else {
@@ -190,12 +230,13 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
      * */
     this.clear = function() {
       var deferred = $q.defer();
+      var that = this;
 
       this.items = [];
 
       this._require_person().then(function(person) {
         if (person) {
-          $api.clear_cart().then(function(updated_cart) {
+          that.api.clear().then(function(updated_cart) {
             deferred.resolve(this);
           });
         } else if (person === false) {
@@ -214,13 +255,14 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
      * */
     this._export = function() {
       var deferred = $q.defer();
+      var that = this;
 
       if (this.items.length <= 0) {
         deferred.resolve(this);
       } else {
         this._require_person().then(function(person) {
           if (person) {
-            $api.export_cart().then(function(updated_cart) {
+            that.api.export().then(function(updated_cart) {
               deferred.resolve(updated_cart);
             });
           } else {
@@ -260,6 +302,9 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
   * */
   this.load = function() {
     var deferred = $q.defer();
+    var cart = new Cart();
+    deferred.resolve(cart);
+    return deferred.promise;
 
 //    // If logged in, get cart from server, after exporting local cart
 //    $rootScope.$watch('current_person', function(person) {
@@ -276,11 +321,6 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
 //        deferred.resolve(local_cart);
 //      }
 //    });
-
-    var cart = new Cart();
-    deferred.resolve(cart);
-
-    return deferred.promise;
   };
 
 });
