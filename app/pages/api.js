@@ -771,7 +771,7 @@ angular.module('api.bountysource',[]).
     this.load_current_person_from_cookies = function() {
       var access_token = $api.get_access_token();
       if (access_token) {
-        console.log("Verifying access token: " + access_token);
+        //console.log("Verifying access token: " + access_token);
         this.call("/user", { access_token: access_token }, function(response) {
           if (response.meta.status === 200) {
             console.log("access token still valid");
