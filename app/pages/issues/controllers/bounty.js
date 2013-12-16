@@ -40,6 +40,15 @@ angular.module('app')
       $scope.bounty.item_number = "issues/"+issue.id;
 
       $scope.create_payment = function() {
+        var successCallback = function(response) {
+          console.log('Checkout success!', response);
+        };
+
+        var errorCallback = function(response) {
+          $scope.processing_payment = false;
+          $scope.alert = { message: response.data.error, type: 'error' };
+        };
+
         $scope.cart_promise.then(function(cart) {
           var attrs = angular.copy($scope.bounty);
           var checkout_method = attrs.checkout_method;
@@ -51,11 +60,7 @@ angular.module('app')
           // wow, so spaghetti
           cart.clear().then(function() {
             cart.add_bounty($scope.bounty.amount, issue, attrs).then(function() {
-              cart.checkout(checkout_method).then(function(success) {
-                if (success === false) {
-                  $scope.processing_payment = false;
-                }
-              });
+              cart.checkout(checkout_method).then(successCallback, errorCallback);
             });
           });
 

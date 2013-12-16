@@ -8,6 +8,10 @@
 
       <loading-bar ng-show="processing_payment">Processing payment...</loading-bar>
 
+      <div ng-show="alert.message">
+        <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
+      </div>
+
       <div ng-hide="processing_payment">
         <div ng-show="error">
           <alert type="'error'" close="error = null">{{error}}</alert>
@@ -136,7 +140,7 @@
 
           <div class="control-group">
             <div class="controls">
-              <button ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
+              <button ng-click-require-auth  ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
                 <span >Post {{bounty.amount || 0 | dollars}} Bounty</span>
               </button>
 

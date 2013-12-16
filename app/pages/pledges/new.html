@@ -18,6 +18,10 @@
       </div>
 
       <div class="span9">
+        <div ng-show="alert.message">
+          <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
+        </div>
+
         <form class="form-horizontal" name="pledge_form">
           <div class="row-fluid">
             <div class="span6">

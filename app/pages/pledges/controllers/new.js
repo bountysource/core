@@ -51,15 +51,20 @@ angular.module('app')
         var checkout_method = attrs.checkout_method;
         delete attrs.checkout_method;
 
+        var successCallback = function(response) {
+          console.log('Checkout success!', response);
+        };
+
+        var errorCallback = function(response) {
+          $scope.processing_payment = false;
+          $scope.alert = { message: response.data.error, type: 'error' };
+        };
+
         // wow, so spaghetti
         $scope.cart_promise.then(function(cart) {
           cart.clear().then(function() {
             cart.add_pledge($scope.pledge.amount, fundraiser, attrs).then(function() {
-              cart.checkout(checkout_method).then(function(success) {
-                if (success === false) {
-                  $scope.processing_payment = false;
-                }
-              });
+              cart.checkout(checkout_method).then(successCallback, errorCallback);
             });
           });
 
