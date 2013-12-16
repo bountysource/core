@@ -54,6 +54,7 @@ angular.module('app')
           $api.claim_tracker(project_search, team.id, "Team").then(function (updated_team) {
             $scope.set_team(updated_team);
             team.trackers = updated_team.trackers;
+            team = $scope.process_owned_unowned_trackers(team);
             $scope.project_owner_search = null;
           });
         } else if (project_search && project_search.length > 0) {
