@@ -21,6 +21,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     this.add_item = function(type, amount, attributes) {
       var payload = attributes;
       payload.item_type = type;
+      payload.amount = amount;
       return this.call("/cart/add_item", "POST", attributes);
     };
 
@@ -148,6 +149,15 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
       attributes = attributes || {};
       attributes.issue_id = issue.id;
       return this.add_item('Bounty', amount, attributes);
+    };
+
+    /*
+    * Helper method to add a payin for Team account.
+    * */
+    this.add_team_payin = function(amount, team, attributes) {
+      attributes = attributes || {};
+      attributes.team_id = team.id;
+      return this.add_item('TeamPayin', amount, attributes);
     };
 
     /*

@@ -4,7 +4,7 @@ angular.module('app')
   .controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle) {
     $pageTitle.set("Teams");
 
-    $scope.team = $api.team_get($routeParams.id).then(function(team) {
+    $scope.team_promise = $scope.team = $api.team_get($routeParams.id).then(function(team) {
       $pageTitle.set(team.name, "Teams");
 
       team.owned_trackers = [];
