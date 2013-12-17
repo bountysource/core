@@ -17,7 +17,7 @@ angular.module('app')
 
     $scope.bounty = {
       amount: parseInt($routeParams.amount || 15, 10),
-      anonymous: ($routeParams.anonymous === "true") || false,
+      anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
       checkout_method: $routeParams.checkout_method || 'google',
       bounty_expiration: $routeParams.bounty_expiration || '',
       upon_expiration: $routeParams.upon_expiration || '',
