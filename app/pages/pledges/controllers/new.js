@@ -78,7 +78,7 @@ angular.module('app')
           } else if (person === false) {
             // turn anon bool into 1 or 0
             var anon = (attrs.anonymous === true ? 1 : 0);
-            attrs.anonymous = anon
+            attrs.anonymous = anon;
 
               // save route, redirect to login
             $api.set_post_auth_url($location.path(), attrs);
