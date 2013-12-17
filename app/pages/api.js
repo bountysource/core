@@ -430,6 +430,10 @@ angular.module('api.bountysource',[]).
       return this.call("/search/bounty_search", "GET", query);
     };
 
+    this.saved_search_tabs = function() {
+      return this.call("/tabs");
+    };
+
     this.languages_get = function() {
       return this.call("/languages");
     };

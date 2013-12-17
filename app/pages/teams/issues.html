@@ -38,7 +38,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="issue in issues | orderBy:issue_sort.column:issue_sort.desc">
-                <td><a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}"><img src="{{issue.tracker.small_image_url}}" style="max-height:20px;max-width:20px;" /></a></td>
+                <td><a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}"><img src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;" /></a></td>
                 <td><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a></td>
                 <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
                 <td style="text-align: center">
