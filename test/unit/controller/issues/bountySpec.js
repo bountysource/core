@@ -48,6 +48,9 @@ describe('IssueShow', function() {
       amount: 15,
       anonymous: false,
       checkout_method: 'google',
+      bounty_expiration: '',
+      upon_expiration: '',
+      promotion: '',
       fee: 0,
       total: 0
     };
