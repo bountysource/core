@@ -102,8 +102,11 @@
                   </label>
 
                   <label class="radio" ng-repeat="reward in fundraiser.rewards">
-                    <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" />
-                    <div>{{reward.amount | dollars}} Reward tier</div>
+                    <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" ng-disabled="reward.sold_out" />
+                    <div ng-class="{ muted: reward.sold_out }">
+                      {{reward.amount | dollars}} Reward tier
+                      <span ng-show="reward.sold_out" class="label label-warning">Sold out</span>
+                    </div>
                   </label>
                 </div>
               </div>

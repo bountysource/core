@@ -62,6 +62,7 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     /*
     * Request checkout using a specific payment method.
     * Depending on the payment method, a third-party redirect may be necessary.
+    * Requires items to be in the cart.
     *
     * @param checkout_method - the name of the checkout method to use
     *
@@ -73,37 +74,46 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
       var deferred = $q.defer();
       var that = this;
 
-      this._require_person().then(function(person) {
-        if (person) {
-          that.api.checkout(checkout_method).then(function(response) {
-            if (!response.meta.success) {
-              deferred.reject(response);
-            } else if (checkout_method === 'google') {
-              // a JWT is returned, trigger Google Wallet buy
-              $window.google.payments.inapp.buy({
-                jwt: response.data.jwt,
+      if (this.items.length <= 0) {
+        deferred.reject();
+      } else {
+        this._require_person().then(function(person) {
+          if (person) {
+            that.api.checkout(checkout_method).then(function(response) {
+              if (!response.meta.success) {
+                deferred.reject(response);
 
-                success: function(result) {
-                  var query = $api.toKeyValue({
-                    access_token: $api.get_access_token(),
-                    order_id: result.response.orderId
-                  });
-                  deferred.resolve(true);
-                  $window.location = $rootScope.api_host + "payments/google/success?" + query;
-                },
+              } else if (checkout_method === 'paypal') {
+                // redirect to the provided checkout URL for cart
+                $window.location = response.data.checkout_url;
 
-                failure: function() {
-                  deferred.reject(response);
-                }
-              });
-            } else {
-              deferred.resolve(response);
-            }
-          });
-        } else {
-          deferred.reject();
-        }
-      });
+              } else if (checkout_method === 'google') {
+                // a JWT is returned, trigger Google Wallet buy
+                $window.google.payments.inapp.buy({
+                  jwt: response.data.jwt,
+
+                  success: function(result) {
+                    var query = $api.toKeyValue({
+                      access_token: $api.get_access_token(),
+                      order_id: result.response.orderId
+                    });
+                    deferred.resolve(true);
+                    $window.location = $rootScope.api_host + "payments/google/success?" + query;
+                  },
+
+                  failure: function() {
+                    deferred.reject(response);
+                  }
+                });
+              } else {
+                deferred.resolve(response);
+              }
+            });
+          } else {
+            deferred.reject();
+          }
+        });
+      }
 
       return deferred.promise;
     };
