@@ -17,7 +17,7 @@
           <alert type="'error'" close="error = null">{{error}}</alert>
         </div>
 
-        <form name="form" class="form-horizontal" ng-submit="create_payment()">
+        <form name="form" class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Payment Method:</label>
             <div class="controls">
@@ -76,10 +76,10 @@
                 <div>Bounty Expiration:</div>
                 <div><small class="muted"><em>Optional</em></small></div>
               </label>
-          <span ng-switch="expiration">
-            <div class="controls" ng-switch-when="0" ng-include="'pages/issues/partials/options/expiration_up.html'"></div>
-            <div class="controls" ng-switch-when="1" ng-include="'pages/issues/partials/options/expiration_down.html'"></div>
-          </span>
+              <span ng-switch="expiration">
+                <div class="controls" ng-switch-when="0" ng-include="'pages/issues/partials/options/expiration_up.html'"></div>
+                <div class="controls" ng-switch-when="1" ng-include="'pages/issues/partials/options/expiration_down.html'"></div>
+              </span>
             </div>
 
             <div collapse="!bounty.bounty_expiration || bounty.bounty_expiration == 'never'">
@@ -140,11 +140,11 @@
 
           <div class="control-group">
             <div class="controls">
-              <button ng-click-require-auth ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
+              <button ng-click="create_payment()" ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
                 <span >Post {{bounty.amount || 0 | dollars}} Bounty</span>
               </button>
 
-              <button type="submit" ng-show="previous_bounty_total > 0" class="btn btn-large btn-primary" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
+              <button type="submit" ng-click="create_payment()" ng-show="previous_bounty_total > 0" class="btn btn-large btn-primary" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
                 <span>Increase Bounty by {{bounty.amount | dollars}}</span>
               </button>
             </div>

@@ -19,6 +19,9 @@ angular.module('app')
       amount: parseInt($routeParams.amount || 15, 10),
       anonymous: ($routeParams.anonymous === "true") || false,
       checkout_method: $routeParams.checkout_method || 'google',
+      bounty_expiration: $routeParams.bounty_expiration || '',
+      upon_expiration: $routeParams.upon_expiration || '',
+      promotion: $routeParams.promotion || '',
 
       // only used to alter the displayed amount,
       // not actually sent in the payment process request.
@@ -38,33 +41,46 @@ angular.module('app')
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       $scope.create_payment = function() {
-        var successCallback = function(response) {
-          console.log('Checkout success!', response);
-        };
+        var attrs = angular.copy($scope.bounty);
+        delete attrs.fee;
 
-        var errorCallback = function(response) {
-          if (response.data && response.data.error) {
-            $scope.processing_payment = false;
-            $scope.alert = { message: response.data.error, type: 'error' };
-          }
-        };
+        $scope.$watch('current_person', function(person) {
+          if (person) {
+            $scope.cart_promise.then(function(cart) {
+              $scope.processing_payment = true;
 
-        $scope.cart_promise.then(function(cart) {
-          var attrs = angular.copy($scope.bounty);
-          var checkout_method = attrs.checkout_method;
-          delete attrs.checkout_method;
-          delete attrs.fee;
+              // remove checkout method and fees
+              var checkout_method = attrs.checkout_method;
+              delete attrs.checkout_method;
 
-          $scope.processing_payment = true;
+              // checkout callbacks
+              var successCallback = function(response) {
+                console.log('Checkout success!', response);
+              };
+              var errorCallback = function(response) {
+                if (response.data && response.data.error) {
+                  $scope.processing_payment = false;
+                  $scope.alert = { message: response.data.error, type: 'error' };
+                }
+              };
 
-          // wow, so spaghetti
-          cart.clear().then(function() {
-            cart.add_bounty($scope.bounty.amount, issue, attrs).then(function() {
-              cart.checkout(checkout_method).then(successCallback, errorCallback);
+              // wow, so spaghetti
+              cart.clear().then(function() {
+                cart.add_bounty($scope.bounty.amount, issue, attrs).then(function() {
+                  cart.checkout(checkout_method).then(successCallback, errorCallback);
+                });
+              });
+
+              return cart;
             });
-          });
+          } else if (person === false) {
+            // turn anon bool into 1 or 0
+            attrs.anonymous = (attrs.anonymous === true ? 1 : 0);
 
-          return cart;
+            // save route, redirect to login
+            $api.set_post_auth_url($location.path(), attrs);
+            $location.url("/signin");
+          }
         });
       };
 

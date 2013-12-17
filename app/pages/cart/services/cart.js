@@ -71,10 +71,11 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     * */
     this.checkout = function(checkout_method) {
       var deferred = $q.defer();
+      var that = this;
 
       this._require_person().then(function(person) {
         if (person) {
-          this.api.checkout(checkout_method).then(function(response) {
+          that.api.checkout(checkout_method).then(function(response) {
             if (!response.meta.success) {
               deferred.reject(response);
             } else if (checkout_method === 'google') {

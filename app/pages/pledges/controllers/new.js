@@ -17,7 +17,7 @@ angular.module('app')
 
     $scope.pledge = {
       amount: parseInt($routeParams.amount, 10) || 100,
-      anonymous: ($routeParams.anonymous === "true") || false,
+      anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
       checkout_method: $routeParams.checkout_method || "google",
       survey_response: $routeParams.survey_response || "",
       reward_id: parseInt($routeParams.reward_id, 10) || 0
@@ -76,7 +76,11 @@ angular.module('app')
               return cart;
             });
           } else if (person === false) {
-            // save route, redirect to login
+            // turn anon bool into 1 or 0
+            var anon = (attrs.anonymous === true ? 1 : 0);
+            attrs.anonymous = anon
+
+              // save route, redirect to login
             $api.set_post_auth_url($location.path(), attrs);
             $location.url("/signin");
           }
