@@ -72,29 +72,35 @@ angular.module('app.services').service('$cart', function($rootScope, $api, $q, $
     this.checkout = function(checkout_method) {
       var deferred = $q.defer();
 
-      this.api.checkout(checkout_method).then(function(response) {
-        if (!response.meta.success) {
-          deferred.reject(response);
-        } else if (checkout_method === 'google') {
-          // a JWT is returned, trigger Google Wallet buy
-          $window.google.payments.inapp.buy({
-            jwt: response.data.jwt,
-
-            success: function(result) {
-              var query = $api.toKeyValue({
-                access_token: $api.get_access_token(),
-                order_id: result.response.orderId
-              });
-              deferred.resolve(true);
-              $window.location = $rootScope.api_host + "payments/google/success?" + query;
-            },
-
-            failure: function() {
+      this._require_person().then(function(person) {
+        if (person) {
+          this.api.checkout(checkout_method).then(function(response) {
+            if (!response.meta.success) {
               deferred.reject(response);
+            } else if (checkout_method === 'google') {
+              // a JWT is returned, trigger Google Wallet buy
+              $window.google.payments.inapp.buy({
+                jwt: response.data.jwt,
+
+                success: function(result) {
+                  var query = $api.toKeyValue({
+                    access_token: $api.get_access_token(),
+                    order_id: result.response.orderId
+                  });
+                  deferred.resolve(true);
+                  $window.location = $rootScope.api_host + "payments/google/success?" + query;
+                },
+
+                failure: function() {
+                  deferred.reject(response);
+                }
+              });
+            } else {
+              deferred.resolve(response);
             }
           });
         } else {
-          deferred.resolve(response);
+          deferred.reject();
         }
       });
 
