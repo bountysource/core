@@ -43,8 +43,10 @@ angular.module('app')
         };
 
         var errorCallback = function(response) {
-          $scope.processing_payment = false;
-          $scope.alert = { message: response.data.error, type: 'error' };
+          if (response.data && response.data.error) {
+            $scope.processing_payment = false;
+            $scope.alert = { message: response.data.error, type: 'error' };
+          }
         };
 
         $scope.cart_promise.then(function(cart) {
