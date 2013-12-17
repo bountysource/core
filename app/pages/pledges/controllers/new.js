@@ -45,30 +45,41 @@ angular.module('app')
 
       // build the create payment method
       $scope.create_payment = function() {
-        $scope.processing_payment = true;
-
+        // request payload
         var attrs = angular.copy($scope.pledge);
-        var checkout_method = attrs.checkout_method;
-        delete attrs.checkout_method;
 
-        var successCallback = function(response) {
-          console.log('Checkout success!', response);
-        };
+        $scope.$watch('current_person', function(person) {
+          if (person) {
+            $scope.processing_payment = true;
 
-        var errorCallback = function(response) {
-          $scope.processing_payment = false;
-          $scope.alert = { message: response.data.error, type: 'error' };
-        };
+            // remove checkout method from payload
+            var checkout_method = attrs.checkout_method;
+            delete attrs.checkout_method;
 
-        // wow, so spaghetti
-        $scope.cart_promise.then(function(cart) {
-          cart.clear().then(function() {
-            cart.add_pledge($scope.pledge.amount, fundraiser, attrs).then(function() {
-              cart.checkout(checkout_method).then(successCallback, errorCallback);
+            // callbacks for cart checkout
+            var successCallback = function(response) {
+              console.log('Checkout success!', response);
+            };
+            var errorCallback = function(response) {
+              $scope.processing_payment = false;
+              $scope.alert = { message: response.data.error, type: 'error' };
+            };
+
+            // wow, so spaghetti
+            $scope.cart_promise.then(function(cart) {
+              cart.clear().then(function() {
+                cart.add_pledge($scope.pledge.amount, fundraiser, attrs).then(function() {
+                  cart.checkout(checkout_method).then(successCallback, errorCallback);
+                });
+              });
+
+              return cart;
             });
-          });
-
-          return cart;
+          } else if (person === false) {
+            // save route, redirect to login
+            $api.set_post_auth_url($location.path(), attrs);
+            $location.url("/signin");
+          }
         });
       };
 
