@@ -30,8 +30,6 @@ angular.module('app')
       return transaction;
     });
 
-
-
     // Watch for trackers collected form Transaction items.
     // Generate list of related issues.
     $scope.$watch('trackers', function(trackers) {

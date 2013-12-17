@@ -31,6 +31,10 @@
               <div ng-switch-when="Bounty">
                 <span><strong>{{item.amount | dollars}}</strong> Bounty on <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></span>
               </div>
+
+              <div ng-switch-when="TeamPayin">
+                <span><strong>{{item.amount | dollars}}</strong> added to <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a> account</span>
+              </div>
             </td>
             <td class="span1"></td>
           </tr>
