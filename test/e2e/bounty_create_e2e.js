@@ -121,7 +121,7 @@ describe("Scenario: Creating Bounties --", function() {
     it("should allow a bounty to be placed on an issue", function() {
       input('bounty.amount').enter("25");
       expect(element('button[type=submit]').count()).toBeGreaterThan(0);
-      using("form[ng-submit='create_payment()']").element('button[type=submit]').click();
+      using("form").element(':button :visible').click();
       expect(google_wallet().start()).toBe("Google wallet called");
     });
 
