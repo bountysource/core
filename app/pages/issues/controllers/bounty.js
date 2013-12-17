@@ -37,8 +37,6 @@ angular.module('app')
     $scope.expiration = Math.floor(Math.random()*2);
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
-      $scope.bounty.item_number = "issues/"+issue.id;
-
       $scope.create_payment = function() {
         var successCallback = function(response) {
           console.log('Checkout success!', response);
