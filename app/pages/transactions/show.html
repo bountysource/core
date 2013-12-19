@@ -44,7 +44,7 @@
       <div class="span4">
         <div>
           <div>Total: <strong>{{transaction.gross | currency}}</strong></div>
-          <div ng-show="transaction.fees > 0">Fee: <strong>{{transaction.fees | currency}}</strong></div>
+          <div ng-show="transaction.fees > 0">Fee: <strong>{{transaction.fee | currency}}</strong></div>
           <div>Order placed: <strong>{{transaction.created_at | date:'medium'}}</strong></div>
           <div>
             <span>Payment Method:</span>
