@@ -29,7 +29,11 @@
     "connect-modrewrite": "~0.2.1",
     "grunt-karma-coveralls": "~2.0.2",
     "karma-coverage": "~0.1.0",
-    "karma-ng-scenario": "~0.1.0"
+    "karma-ng-scenario": "~0.1.0",
+    "protractor": "~0.14.0",
+    "grunt-protractor-runner": "~0.2.0",
+    "selenium": "~2.20.0",
+    "chromedriver": "~2.6.0"
   },
   "engines": {
     "node": ">=0.8.0"
