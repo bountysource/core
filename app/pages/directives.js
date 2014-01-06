@@ -207,14 +207,17 @@ angular.module('app').
     return {
       restrict: "AC",
       require: "ngModel",
-      link: function(scope, element, attr, ctrl) {
-        ctrl.$parsers.unshift(function(viewValue) {
+      link: function(scope, element, attrs, ctrl) {
+        var slugify = function(viewValue) {
           var slugifiedViewValue = $filter('slug')(viewValue);
-          if (viewValue !== slugifiedViewValue) {
+          if (slugifiedViewValue !== viewValue) {
             ctrl.$setViewValue(slugifiedViewValue);
             ctrl.$render();
           }
-        });
+          return slugifiedViewValue;
+        };
+        ctrl.$parsers.push(slugify);
+        slugify(scope[attrs.ngModel]); // initial value
       }
     };
   }]).

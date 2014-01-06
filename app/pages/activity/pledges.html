@@ -83,7 +83,7 @@
       </div>
     </td>
 
-    <td><a ng-href="/fundraisers/{{pledge.fundraiser.id}}/receipts?pledge_id={{ pledge.id }}">{{pledge.amount | dollars}}</a></td>
+    <td><a ng-href="/fundraisers/{{ pledge.fundraiser.slug }}">{{pledge.amount | dollars}}</a></td>
 
     <td>{{ pledge.created_at | date }}</td>
 

@@ -6,19 +6,38 @@
 
 <ng-include src="'pages/activity/tabs.html'"></ng-include>
 
-<h3>Account Balance</h3>
-<p>Your current Bountysource balance is <b>{{current_person.account.balance | currency}}</b>.</p>
+<loading-bar ng-hide="resolved">Loading transactions...</loading-bar>
 
-<div ng-show="current_person.account.balance > 0">
-  To cash out your balance, please send an email to <a href="mailto:support@bountysource.com">support@bountysource.com</a>. Include the amount you wish to cash out, desired payout method, and any information required for us to process your request. We can cash out via:
-  <ul>
-    <li>Paypal</li>
-    <li>Google Wallet</li>
-    <li>Physical Check (include mailing address)</li>
-    <li>Bank Wire (include bank information, may incur additional fees)</li>
-    <li>Coming Soon: Automatic ACH Bank Deposit</li>
-  </ul>
+<div ng-show="resolved">
+  <div ng-show="transactions.length <= 0">
+    <div class="alert alert-info">No transactions created.</div>
+  </div>
 
-  Emails must be sent from an account that's associated with your Bountysource account.
-
+  <div ng-show="transactions.length > 0">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Order</th>
+        <th>Date</th>
+        <th>Payment Method</th>
+        <th>Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="transaction in transactions">
+        <td><a ng-href="/transactions/{{transaction.id}}">Order #{{transaction.number}}</a></td>
+        <td>{{transaction.created_at | date:'medium'}}</td>
+        <td>
+          <div ng-hide="transaction.checkout_method.owner">
+            <span>{{transaction.checkout_method.display_name}}</span>
+          </div>
+          <div ng-show="transaction.checkout_method.owner">
+            <a owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
+          </div>
+        </td>
+        <td>{{transaction.gross | dollars}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

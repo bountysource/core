@@ -9,139 +9,150 @@
   <div ng-include="'pages/fundraisers/partials/header.html'"></div>
   <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
 
-  <div class="row-fluid" ng-show="fundraiser">
-    <div class="span3">
-      <div ng-include="'pages/fundraisers/partials/left_column.html'"></div>
-    </div>
+  <loading-bar ng-show="processing_payment">Processing payment...</loading-bar>
 
-    <div class="span9">
-      <form class="form-horizontal" name="pledge_form">
-        <div class="row-fluid">
-          <div class="span6">
-            <div class="control-group" ng-show="payment_error">
-              <alert type="error" close="payment_error = null">{{payment_error}}</alert>
-            </div>
+  <div ng-hide="processing_payment">
+    <div class="row-fluid" ng-show="fundraiser">
+      <div class="span3">
+        <div ng-include="'pages/fundraisers/partials/left_column.html'"></div>
+      </div>
 
-            <div class="control-group">
-              <label class="control-label" for="amount">Pledge Amount</label>
+      <div class="span9">
+        <div ng-show="alert.message">
+          <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
+        </div>
 
-              <div class="controls">
-                <div class="input-prepend">
-                  <span class="add-on">$</span>
-                  <input type="number" min="5" step="0.01" name="amount" id="amount" ng-model="pledge.amount" placeholder="Pledge amount" />
+        <form class="form-horizontal" name="pledge_form">
+          <div class="row-fluid">
+            <div class="span6">
+              <div class="control-group" ng-show="payment_error">
+                <alert type="error" close="payment_error = null">{{payment_error}}</alert>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="amount">Pledge Amount</label>
+
+                <div class="controls">
+                  <div class="input-prepend">
+                    <span class="add-on">$</span>
+                    <input type="number" min="5" step="0.01" name="amount" id="amount" ng-model="pledge.amount" placeholder="Pledge amount" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="control-group">
-              <label class="control-label">Payment Method:</label>
-              <div class="controls">
-                <!-- Google Wallet -->
-                <label class="radio">
-                  <input type="radio" ng-model="pledge.payment_method" value="google" />
-                  <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
-                  <span>Google Wallet</span>
-                </label>
-
-                <!-- PayPal -->
-                <label class="radio">
-                  <input type="radio" ng-model="pledge.payment_method" value="paypal" />
-                  <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
-                  <span>PayPal</span>
-                </label>
-
-                <!-- Personal account -->
-                <div ng-show="current_person && current_person.account.balance > 0">
+              <div class="control-group">
+                <label class="control-label">Payment Method:</label>
+                <div class="controls">
+                  <!-- Google Wallet -->
                   <label class="radio">
-                    <input type="radio" ng-model="pledge.payment_method" value="personal" />
-                    <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
-                    <span>{{current_person.display_name}} <strong>{{ current_person.account.balance | currency }}</strong></span>
+                    <input type="radio" ng-model="pledge.checkout_method" value="google" />
+                    <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
+                    <span>Google Wallet</span>
                   </label>
-                </div>
 
-                <!-- Team accounts -->
-                <div ng-show="teams.length > 0">
-                  <label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="radio">
-                    <input type="radio" ng-model="pledge.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0" />
-                    <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
+                  <!-- PayPal -->
+                  <label class="radio">
+                    <input type="radio" ng-model="pledge.checkout_method" value="paypal" />
+                    <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
+                    <span>PayPal</span>
+                  </label>
+
+                  <!-- Personal account -->
+                  <div ng-show="current_person && current_person.account.balance > 0">
+                    <label class="radio">
+                      <input type="radio" ng-model="pledge.checkout_method" value="personal" />
+                      <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
+                      <span>{{current_person.display_name}} <strong>{{ current_person.account.balance | currency }}</strong></span>
+                    </label>
+                  </div>
+
+                  <!-- Team accounts -->
+                  <div ng-show="teams.length > 0">
+                    <label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="radio">
+                      <input type="radio" ng-model="pledge.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0" />
+                      <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
                     <span ng-class="{ 'muted': (!team.is_developer || team.account_balance <= 0) }">
                       {{team.name}}
                       <strong ng-show="team.is_developer">{{ team.account_balance | dollars }}</strong>
                       <strong ng-hide="team.is_developer">$0</strong>
                       <span ng-show="team.is_admin && team.account_balance < 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
                     </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="controls">
+                  <label class="checkbox">
+                    <input type="checkbox" ng-model="pledge.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && pledge.anonymous" />
+                    <span ng-class="{ muted: !can_make_anonymous }">Post anonymously</span>
+                    <small class="text-info" ng-show="!can_make_anonymous">* Team pledges cannot be anonymous</small>
                   </label>
                 </div>
               </div>
-            </div>
 
-            <div class="control-group">
-              <div class="controls">
-                <label class="checkbox">
-                  <input type="checkbox" ng-model="pledge.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && pledge.anonymous" />
-                  <span ng-class="{ muted: !can_make_anonymous }">Post anonymously</span>
-                  <small class="text-info" ng-show="!can_make_anonymous">* Team pledges cannot be anonymous</small>
-                </label>
+              <div class="control-group" ng-show="fundraiser.rewards.length > 0">
+                <label class="control-label">Choose a Reward</label>
+
+                <div class="controls">
+                  <label class="radio">
+                    <input type="radio" ng-model="pledge.reward_id" value="0" ng-change="set_reward(0)" />
+                    <div>No Reward</div>
+                  </label>
+
+                  <label class="radio" ng-repeat="reward in fundraiser.rewards">
+                    <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" ng-disabled="reward.sold_out" />
+                    <div ng-class="{ muted: reward.sold_out }">
+                      {{reward.amount | dollars}} Reward tier
+                      <span ng-show="reward.sold_out" class="label label-warning">Sold out</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="controls">
+                  <button class="btn btn-large" ng-show="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)" popover-placement="right" popover-trigger="mouseenter" popover="You need to provide the above information to receive this reward.">Make Pledge</button>
+                  <button ng-click="create_payment()" class="btn btn-large btn-success" ng-hide="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)">Make Pledge</button>
+                </div>
               </div>
             </div>
 
-            <div class="control-group" ng-show="fundraiser.rewards.length > 0">
-              <label class="control-label">Choose a Reward</label>
-
-              <div class="controls">
-                <label class="radio">
-                  <input type="radio" ng-model="pledge.reward_id" value="0" ng-change="set_reward(0)" />
-                  <div>No Reward</div>
-                </label>
-
-                <label class="radio" ng-repeat="reward in fundraiser.rewards">
-                  <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" />
-                  <div>{{reward.amount | dollars}} Reward tier</div>
-                </label>
+            <div class="span6" ng-show="fundraiser.rewards.length > 0">
+              <div ng-show="selected_reward.fulfillment_details">
+                <div class="alert alert-block" ng-show="selected_reward.fulfillment_details" style="padding: 15px;">
+                  <div>
+                    <h4>
+                      Reward Survey
+                      <span class="pull-right label label-important">required</span>
+                    </h4>
+                  </div>
+                  <br />
+                  <div>
+                    <strong style="white-space: pre-wrap;">{{ selected_reward.fulfillment_details }}</strong>
+                  </div>
+                  <br />
+                  <div>
+                    <textarea class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required></textarea>
+                  </div>
+                  <div style="margin: 10px 0 0 10px;">
+                    <small><i>* You can edit your response later if you need to.</i></small>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="control-group">
-              <div class="controls">
-                <button class="btn btn-large" ng-show="!pledge.amount || !pledge.payment_method || (selected_reward.fulfillment_details && !pledge.survey_response)" popover-placement="right" popover-trigger="mouseenter" popover="You need to provide the above information to receive this reward.">Make Pledge</button>
-                <button ng-click="create_payment()" class="btn btn-large btn-success" ng-hide="!pledge.amount || !pledge.payment_method || (selected_reward.fulfillment_details && !pledge.survey_response)">Make Pledge</button>
+              <div class="alert alert-block alert-info" style="padding: 15px;">
+                <strong ng-show="selected_reward">Selected Reward: ${{ selected_reward.amount | number:0 }}</strong>
+                <strong ng-hide="selected_reward">Selected Reward: None</strong>
+
+                <p ng-show="selected_reward" style="white-space: pre-wrap;">{{ selected_reward.description }}</p>
+                <p ng-hide="selected_reward" style="white-space: pre-wrap;">I just want to help out</p>
               </div>
             </div>
           </div>
-
-          <div class="span6" ng-show="fundraiser.rewards.length > 0">
-            <div ng-show="selected_reward.fulfillment_details">
-              <div class="alert alert-block" ng-show="selected_reward.fulfillment_details" style="padding: 15px;">
-                <div>
-                  <h4>
-                    Reward Survey
-                    <span class="pull-right label label-important">required</span>
-                  </h4>
-                </div>
-                <br />
-                <div>
-                  <strong style="white-space: pre-wrap;">{{ selected_reward.fulfillment_details }}</strong>
-                </div>
-                <br />
-                <div>
-                  <textarea class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required></textarea>
-                </div>
-                <div style="margin: 10px 0 0 10px;">
-                  <small><i>* You can edit your response later if you need to.</i></small>
-                </div>
-              </div>
-            </div>
-
-            <div class="alert alert-block alert-info" style="padding: 15px;">
-              <strong ng-show="selected_reward">Selected Reward: ${{ selected_reward.amount | number:0 }}</strong>
-              <strong ng-hide="selected_reward">Selected Reward: None</strong>
-
-              <p ng-show="selected_reward" style="white-space: pre-wrap;">{{ selected_reward.description }}</p>
-              <p ng-hide="selected_reward" style="white-space: pre-wrap;">I just want to help out</p>
-            </div>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>

@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $pageTitle) {
+  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $api, $pageTitle) {
     // alert above the issue title about bounty status
     $scope.bounty_alert = {
       type: 'warning',

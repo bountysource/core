@@ -12,7 +12,6 @@ angular.module('api.bountysource',[]).
       $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
     }
 
-
     // set API host based on environment
     if ($rootScope.environment === 'dev') {
       $rootScope.api_host = "http://localhost:5000/";
@@ -46,6 +45,7 @@ angular.module('api.bountysource',[]).
         throw("Nothing left :/");
       }
     };
+
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
       //if we are in the test environment, call the mocked $api.call() otherwise, use the prod call()
@@ -111,8 +111,8 @@ angular.module('api.bountysource',[]).
                 $log.info(" * Request", method, url);
                 $log.info(" * Request Params", logged_params);
                 $log.info(" * Response:", angular.copy(parsed_response));
-              } else if (parsed_response.meta.status === 301) {
-                $log.info("Content moved, redirecting to ", parsed_response.data.url);
+              } else if (parsed_response.meta.status === 302) {
+                $log.info("Redirecting to ", parsed_response.data.url);
                 $window.location = parsed_response.data.url;
               }
             }
@@ -279,12 +279,12 @@ angular.module('api.bountysource',[]).
         for (i in activity.pledges) { timeline.push(activity.pledges[i]); }
         for (i in activity.fundraisers) { timeline.push(activity.fundraisers[i]); }
         for (i in activity.teams) { timeline.push(activity.teams[i]); }
+        for (i in activity.bounty_claim_events) {timeline.push(activity.bounty_claim_events[i]); }
 
         // add sort date since the col is either added_at (teams) or created_at (everything else)
         for (i in timeline) {
           timeline[i].sort_date = timeline[i].added_at || timeline[i].created_at;
         }
-
         return timeline;
       });
     };
@@ -293,8 +293,22 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/cards", function(r) { return r.data.featured_trackers.concat(r.data.all_trackers); });
     };
 
-    this.tracker_get = function(id) {
+    this.tracker_overview = function(id) {
       return this.call("/trackers/"+id+"/overview");
+    };
+
+    this.tracker_get = function(id) {
+      return this.call("/trackers/"+id);
+    };
+
+    this.update_tracker = function (id, data) {
+      return this.call("/trackers/"+id+"/update", "POST", data, function (response) {
+        return response;
+      });
+    };
+
+    this.trackers_get_bulk = function(ids) {
+      return this.call("/bulk/trackers", "GET", {ids: ids});
     };
 
     this.tracker_follow = function(id) {
@@ -309,12 +323,18 @@ angular.module('api.bountysource',[]).
       return this.call("/projects/"+id+"/issues");
     };
 
-    this.issues_featured = function(data) {
-      return this.call("/issues/featured", "GET", data);
+    this.issues_featured = function() {
+      return this.call("/issues/featured");
     };
 
     this.tracker_stats = function(id) {
       return this.call("/stats/trackers/"+id);
+    };
+
+    this.tracker_top_backers = function (id, options) {
+      return this.call("/trackers/"+id+"/top_backers", function (response) {
+        return response;
+      });
     };
 
     this.issue_get = function(id, callback) {
@@ -381,6 +401,10 @@ angular.module('api.bountysource',[]).
       return this.call('/user/bounties');
     };
 
+    this.user_issue_bounty_total = function(issue_id) {
+      return this.call('/user/issues/'+issue_id+'/bounty_total');
+    };
+
     this.pledge_activity = function() {
       return this.call('/user/contributions', function(response) { return response.data.pledges; });
     };
@@ -408,6 +432,10 @@ angular.module('api.bountysource',[]).
     this.bounty_search = function(query) {
       //query will come from the frontend as a JSON object
       return this.call("/search/bounty_search", "GET", query);
+    };
+
+    this.saved_search_tabs = function() {
+      return this.call("/tabs");
     };
 
     this.languages_get = function() {
@@ -460,6 +488,10 @@ angular.module('api.bountysource',[]).
 
     this.team_update = function(id, form_data) {
       return this.call("/teams/"+id, "PUT", form_data);
+    };
+
+    this.team_issues = function(team_id) {
+      return this.call("/teams/" + team_id + "/issues");
     };
 
     this.team_tracker_add = function(id, tracker_id) {
@@ -554,8 +586,8 @@ angular.module('api.bountysource',[]).
       return this.call("/bounty_claims/"+id);
     };
 
-    this.bounty_claim_accept = function(id) {
-      return this.call("/bounty_claims/"+id+"/response/accept", "PUT");
+    this.bounty_claim_accept = function(id, description) {
+      return this.call("/bounty_claims/"+id+"/response/accept", "PUT", { description: description });
     };
 
     this.bounty_claim_reject = function(id, description) {
@@ -635,6 +667,10 @@ angular.module('api.bountysource',[]).
       return this.call("/issues/"+issue_id+"/solution", "GET");
     };
 
+    this.solutions_get = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/solutions", "GET");
+    };
+
     this.create_developer_goal = function(issue_id, data) {
       return this.call("/issues/"+issue_id+"/developer_goals", "POST", data, function (response) {
         $api.require_signin();
@@ -644,6 +680,10 @@ angular.module('api.bountysource',[]).
 
     this.update_developer_goal = function(issue_id, data) {
       return this.call("/issues/"+issue_id+"/developer_goal", "PUT", data);
+    };
+
+    this.delete_developer_goal = function(issue_id) {
+      return this.call("/issues/"+issue_id+"/developer_goal", "DELETE");
     };
 
     this.get_developer_goal = function(issue_id) {
@@ -741,7 +781,7 @@ angular.module('api.bountysource',[]).
     this.load_current_person_from_cookies = function() {
       var access_token = $api.get_access_token();
       if (access_token) {
-        console.log("Verifying access token: " + access_token);
+        //console.log("Verifying access token: " + access_token);
         this.call("/user", { access_token: access_token }, function(response) {
           if (response.meta.status === 200) {
             console.log("access token still valid");

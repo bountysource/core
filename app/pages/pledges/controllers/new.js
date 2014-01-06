@@ -9,20 +9,25 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $window, $location, $payment, $api) {
+  .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $window, $location, $api, $cart) {
+    $scope.cart_promise = $cart.load().then(function(cart) {
+      $scope.cart = cart;
+      return cart;
+    });
+
     $scope.pledge = {
       amount: parseInt($routeParams.amount, 10) || 100,
-      anonymous: ($routeParams.anonymous === "true") || false,
-      payment_method: $routeParams.payment_method || "google",
+      anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
+      checkout_method: $routeParams.checkout_method || "google",
       survey_response: $routeParams.survey_response || "",
       reward_id: parseInt($routeParams.reward_id, 10) || 0
     };
 
     $scope.fundraiser_hide_pledge_button = true;
 
-    $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
+    $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
       // add the base item number, with just fundraiser id
-      $scope.pledge.base_item_number = 'fundraisers/'+response.id;
+      $scope.pledge.base_item_number = 'fundraisers/'+fundraiser.id;
       $scope.pledge.item_number = $scope.pledge.base_item_number;
 
       if ($scope.pledge.reward_id) {
@@ -31,31 +36,59 @@ angular.module('app')
 
       // select reward to have the object cached. handled after this by set_reward(reward)
       $scope.selected_reward = null;
-      for (var i=0; $scope.pledge.reward_id && i<response.rewards.length; i++) {
-        if (response.rewards[i].id === $scope.pledge.reward_id) {
-          $scope.selected_reward = response.rewards[i];
+      for (var i=0; $scope.pledge.reward_id && i<fundraiser.rewards.length; i++) {
+        if (fundraiser.rewards[i].id === $scope.pledge.reward_id) {
+          $scope.selected_reward = fundraiser.rewards[i];
           break;
         }
       }
 
       // build the create payment method
       $scope.create_payment = function() {
-        var base_url = $window.location.href.replace(/\/fundraisers.*$/,'');
-        var payment_params = angular.copy($scope.pledge);
-        payment_params.success_url = base_url + "/fundraisers/"+response.id+"/receipts/recent";
-        payment_params.cancel_url = $window.location.href;
+        // request payload
+        var attrs = angular.copy($scope.pledge);
 
-        $payment.process(payment_params, {
-          error: function(response) { console.log("Payment Error:", response); },
+        $scope.$watch('current_person', function(person) {
+          if (person) {
+            $scope.processing_payment = true;
 
-          noauth: function() {
-            $api.set_post_auth_url("/fundraisers/" + response.slug + "/pledge", payment_params);
+            // remove checkout method from payload
+            var checkout_method = attrs.checkout_method;
+            delete attrs.checkout_method;
+
+            // callbacks for cart checkout
+            var successCallback = function(response) {
+              console.log('Checkout success!', response);
+            };
+            var errorCallback = function(response) {
+              $scope.processing_payment = false;
+              $scope.alert = { message: response.data.error, type: 'error' };
+            };
+
+            // wow, so spaghetti
+            $scope.cart_promise.then(function(cart) {
+              cart.clear().then(function() {
+                cart.add_pledge($scope.pledge.amount, fundraiser, attrs).then(function() {
+                  cart.checkout(checkout_method).then(successCallback, errorCallback);
+                });
+              });
+
+              return cart;
+            });
+          } else if (person === false) {
+            // turn anon bool into 1 or 0
+            var anon = (attrs.anonymous === true ? 1 : 0);
+            attrs.anonymous = anon;
+
+              // save route, redirect to login
+            $api.set_post_auth_url($location.path(), attrs);
             $location.url("/signin");
           }
         });
       };
 
-      return response;
+      $scope.fundraiser = fundraiser;
+      return fundraiser;
     });
 
     $scope.set_reward = function(reward) {
@@ -85,8 +118,8 @@ angular.module('app')
     $scope.can_make_anonymous = true;
     // watch payment method for team account.
     // if it is, disable the anonymous checkbox
-    $scope.$watch("pledge.payment_method", function(payment_method) {
-      if ((/^team\/\d+$/).test(payment_method)) {
+    $scope.$watch("pledge.checkout_method", function(checkout_method) {
+      if ((/^team\/\d+$/).test(checkout_method)) {
         $scope.can_make_anonymous = false;
       } else {
         $scope.can_make_anonymous = true;

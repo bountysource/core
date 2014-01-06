@@ -10,6 +10,14 @@ angular.module('app')
     $scope.issue.then(function(issue) {
       $scope.bounty_total = parseInt(issue.bounty_total, 10);
 
+      $scope.solutions = $api.solutions_get(issue.id).then(function(solutions) {
+        // Get the lastest event and set as the Solution status
+        for (var i=0; i<solutions.length; i++) {
+          solutions[i].status = solutions[i].solution_events[solutions[i].solution_events.length - 1];
+        }
+        return solutions;
+      });
+
       // If the person is logged in, attempt to find their developer goal
       $scope.my_solution = $api.solution_get(issue.id).then(function(my_solution) {
         $scope.initializing = false;
@@ -69,6 +77,12 @@ angular.module('app')
       var deferred = $q.defer();
       deferred.resolve(new_solution);
       $scope.my_solution = deferred.promise;
+      $scope.solutions.then(function(solutions) {
+        var solution = angular.copy(new_solution);
+        solution.status = solution.solution_events[solution.solution_events.length - 1];
+        solutions.push(solution);
+        return solutions;
+      });
       $scope.set_status_for_solution(new_solution);
     });
 
