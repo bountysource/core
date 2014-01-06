@@ -93,37 +93,37 @@
 
           <h3 style="margin-bottom: 0;">Add Member</h3>
           <p>Enter the email address of the person you would like to add to the team. If they do not have an account, they will receive an invitation email.</p>
-          <table class="table">
-            <thead>
-            <tr>
-              <th style="width: 30%;">Email</th>
-              <th style="width: 10%; text-align: center;">Public</th>
-              <th style="width: 10%; text-align: center;">Developer</th>
-              <th style="width: 10%; text-align: center;">Admin</th>
-              <th style="width: 10%; text-align: center;"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-class="{ success: new_member.registered, info: (new_member.email && !new_member.registered) }">
-              <form ng-submit="team_invite_create()">
-                <td><input style="margin-bottom: 0;" type="email" name="email" class="span12" ng-model="new_member.email" ng-change="validate_new_member_email()" placeholder="Email address" /></td>
+          <form ng-submit="team_invite_create()">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 30%;">Email</th>
+                  <th style="width: 10%; text-align: center;">Public</th>
+                  <th style="width: 10%; text-align: center;">Developer</th>
+                  <th style="width: 10%; text-align: center;">Admin</th>
+                  <th style="width: 10%; text-align: center;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-class="{ success: new_member.registered, info: (new_member.email && !new_member.registered) }">
+                  <td><input style="margin-bottom: 0;" type="email" name="email" class="span12" ng-model="new_member.email" ng-change="validate_new_member_email()" placeholder="Email address" /></td>
 
-                <td style="text-align: center;"><input type="checkbox" ng-model="new_member.public" /></td>
-                <td style="text-align: center;"><input type="checkbox" ng-model="new_member.developer"  /></td>
-                <td style="text-align: center;"><input type="checkbox" ng-model="new_member.admin" /></td>
+                  <td style="text-align: center;"><input type="checkbox" ng-model="new_member.public" /></td>
+                  <td style="text-align: center;"><input type="checkbox" ng-model="new_member.developer"  /></td>
+                  <td style="text-align: center;"><input type="checkbox" ng-model="new_member.admin" /></td>
 
-                <td style="text-align: center;">
-                  <div ng-show="new_member.email && !new_member.registered" tooltip="Send Invite">
-                    <button type="submit" class="btn btn-mini btn-block btn-primary"><i class="icon-envelope icon-white"></i></button>
-                  </div>
-                  <div ng-show="new_member.email && new_member.registered" tooltip="Add to Team">
-                    <button type="submit" class="btn btn-mini btn-block btn-success"><i class="icon-plus icon-white"></i></button>
-                  </div>
-                </td>
-              </form>
-            </tr>
-            </tbody>
-          </table>
+                  <td style="text-align: center;">
+                    <div ng-show="new_member.email && !new_member.registered" tooltip="Send Invite">
+                      <button type="submit" class="btn btn-mini btn-block btn-primary"><i class="icon-envelope icon-white"></i></button>
+                    </div>
+                    <div ng-show="new_member.email && new_member.registered" tooltip="Add to Team">
+                      <button type="submit" class="btn btn-mini btn-block btn-success"><i class="icon-plus icon-white"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
           <div ng-show="add_member_error.message">
             <alert type="add_member_error.type" close="add_member_error.message = null">{{add_member_error.message}}</alert>
           </div>
