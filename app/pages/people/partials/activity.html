@@ -16,6 +16,10 @@
       Joined the team <a ng-href="teams/{{action.slug}}">{{action.name}}</a>
     </td>
 
+    <td ng-show="action.type == 'Collected'">
+      Collected bounty on <a ng-href="issues/{{action.bounty_claim.issue.frontend_path}}">{{action.bounty_claim.issue.title}}</a>
+    </td>
+
     <td class="muted">{{ action.sort_date | date:'medium' }}</td>
   </tr>
 
@@ -23,6 +27,6 @@
     <td>
       Joined the Bountysource family
     </td>
-    <td class="muted">{{ action.created_at | date:'medium' }}</td>
+    <td class="muted">{{ person.created_at | date:'medium' }}</td>
   </tr>
 </table>
