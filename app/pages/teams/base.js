@@ -6,7 +6,11 @@ angular.module('app')
 
     $scope.team_promise = $scope.team = $api.team_get($routeParams.id).then(function(team) {
       $pageTitle.set(team.name, "Teams");
+      team = $scope.process_owned_unowned_trackers(team);
+      return team;
+    });
 
+    $scope.process_owned_unowned_trackers = function(team) {
       team.owned_trackers = [];
       team.unowned_trackers = [];
 
@@ -17,9 +21,8 @@ angular.module('app')
         // push to owned_trackers or unowned_trackers
         (team.trackers[i].$owned ? team.owned_trackers : team.unowned_trackers).push(team.trackers[i]);
       }
-
       return team;
-    });
+    };
 
     $scope.set_team = function(team) {
       $scope.team = team;
