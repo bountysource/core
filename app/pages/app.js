@@ -8,7 +8,7 @@ if (document.location.host === 'www.bountysource.com') {
 
 angular.module('app.services', []);
 
-angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies', 'colorpicker.module', 'app.services'])
+angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookies', 'colorpicker.module', 'app.services', 'ui.scrollfix'])
   .config(function ($routeProvider, $locationProvider, $httpProvider, $provide) {
 
     //  NOTE: uncomment to test hashbang # mode
