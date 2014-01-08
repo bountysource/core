@@ -9,6 +9,8 @@ angular.module('app')
         title: 'Teams'
       });
   })
-  .controller('TeamsIndexController', function ($scope, $location, $api) {
+  .controller('TeamsIndexController', function ($scope, $location, $api, $pageTitle) {
+    $pageTitle.set("Teams");
+
     $scope.teams = $api.list_teams();
   });

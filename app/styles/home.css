@@ -9,7 +9,7 @@
   box-shadow: 0 0 5px #000;
 }
 .homepage #top .outer {
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.7);
   padding: 20px 0 20px 0;
 }
 
@@ -25,10 +25,10 @@
 }
 
 /* backer/developer box (background and text) */
-.homepage #top h1 { text-align: center; padding: 0; margin: 10px 0 0 0; font-size: 34px; line-height: 40px; color: #fff; }
+.homepage #top h1 { text-align: center; padding: 0; margin: 10px 0 0 0; font-size: 50px; line-height: 50px; color: #fff; }
 .homepage #top h2 { padding: 0 0 0px 0; margin: 20px 0 20px; font-size: 24px; font-weight: normal; color: #fff; }
 @media (min-width: 980px) and (max-width: 1199px) {
-  .homepage #top h1 { font-size: 30px; line-height: 30px; }
+  .homepage #top h1 { font-size: 45px; line-height: 45px; }
   .homepage #top h2 { font-size: 22px; margin: 10px 0 10px; }
   .well { min-height: 290px; max-height: 290px;}
   .search-query { width: 150px; }
@@ -36,10 +36,25 @@
   .button2 {margin-top: 40px; }
 }
 @media (min-width: 768px) and (max-width: 979px) {
+  .homepage #top h1 { font-size: 42px; line-height: 42px; }
+  .homepage #top h2 { font-size: 20px; line-height: 20px }
   .well { min-height: 320px; max-heigth: 320px; }
   .search-query { width: 100px; }
   .button1 {margin-top: 40px; }
   .button2 {margin-top: 20px; }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+  .homepage #top h1 { font-size: 38px; line-height: 44px; white-space: pre-line; }
+  .homepage #top h2 { font-size: 20px; line-height: 26px; }
+  .well { min-height: 320px; max-heigth: 320px; }
+  .search-query { width: 100px; }
+  .button1 {margin-top: 40px; }
+  .button2 {margin-top: 20px; }
+}
+
+@media (max-width: 480px) {
+  .homepage #top h1 { font-size: 32px; line-height: 36px; white-space: pre-line; }
+  .homepage #top h2 { font-size: 20px; line-height: 26px; }
 }
 
 .homepage #top .team-signup-card { color: white; text-align: center; padding: 10px; background: rgba(0, 0, 0, 0.5); border-radius: 10px; }

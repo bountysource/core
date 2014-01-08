@@ -68,7 +68,11 @@ angular.module('app').
   }).filter('pluralize', function() {
     // add 's' to string if num is not 1
     return function(s,num) {
-      return s + (num !== 1 ? 's' : '');
+      if (s[s.length - 1] === 'y') {
+        return s.slice(0, s.length-1) + (num !== 1 ? 'ies' : 'y');
+      } else {
+        return s + (num !== 1 ? 's' : '');
+      }
     };
   }).filter('fundraiser_status', function() {
     return function(fundraiser) {
@@ -132,7 +136,7 @@ angular.module('app').
     };
   }).filter('slug', function() {
     return function(val) {
-      return (val||"").toLowerCase().replace(/[ ]+/g,'-').replace(/[,.]/g,'').replace(/-(inc|llc)$/,'').replace(/[^a-z1-9-_]/g,'');
+      return (val||"").toLowerCase().replace(/[ ]+/g,'-').replace(/[,.]/g,'').replace(/-(inc|llc)$/,'').replace(/[^a-z0-9-_]/g,'');
     };
   }).filter('pluck', function() {
     return function(input, field) {
@@ -187,6 +191,16 @@ angular.module('app').
         replace(/%24/g, '$').
         replace(/%2C/gi, ',').
         replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
+    };
+  }).filter('shuffle', function() {
+    return function(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+      return array;
     };
   });
 

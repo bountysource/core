@@ -32,13 +32,13 @@
               <label class="control-label">From</label>
               <div class="controls">
                 <label class="radio" style="margin-left: 5px;">
-                  <input type="radio" ng-model="pay_in.payment_method" value="google" selected/>
+                  <input type="radio" ng-model="pay_in.checkout_method" value="google" selected/>
                   <img src="images/google-wallet.png">
                   Google Wallet
                 </label>
 
                 <label class="radio" style="margin-left: 5px;">
-                  <input type="radio" ng-model="pay_in.payment_method" value="paypal" />
+                  <input type="radio" ng-model="pay_in.checkout_method" value="paypal" />
                   <img src="images/paypal.png">
                   PayPal
                 </label>
@@ -52,6 +52,20 @@
                   <span class="add-on">$</span>
                   <input type="number" min="5" step="0.01" name="amount" placeholder="Amount to add" ng-model="pay_in.amount" autofocus />
                 </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">Bountysource Fee</label>
+              <div class="controls">
+                <div style="line-height: 30px;"><b>{{pay_in.fee | currency}}</b></div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">Total</label>
+              <div class="controls">
+                <div style="line-height: 30px;"><strong>{{pay_in.total | currency}}</strong></div>
               </div>
             </div>
 

@@ -10,7 +10,9 @@ angular.module('app')
         title: 'Create New Team'
       });
   })
-  .controller('NewTeamController', function ($scope, $location, $api, $filter, $routeParams) {
+  .controller('NewTeamController', function ($scope, $location, $api, $filter, $routeParams, $pageTitle) {
+    $pageTitle.set("Teams", "New");
+
     $scope.team_options = [
       { param: "project", label: "Open Source Project", value: "Team::Project" },
       { param: "startup", label: "Startup", value: "Team::Startup" },

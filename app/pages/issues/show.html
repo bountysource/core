@@ -1,48 +1,52 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/trackers">Projects</a><span class="divider">»</span></li>
-  <li><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
-  <li><a ng-href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
-</ul>
+<div ng-controller="IssueShow">
+  <div ng-include="'pages/issues/partials/breadcrumb.html'"></div>
 
-<div class="row-fluid" ng-show="issue">
-  <div id="title" class="span9">
-    <div ng-include="'pages/issues/partials/header.html'"></div>
-    <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
-  </div>
-  <div id="bounty" class="span3">
-    <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
-    <div ng-include="'pages/issues/partials/claim_info_box.html'"></div>
-  </div>
-  <div id="tabs" class="span9">
-    <table class="table table-striped" style="table-layout:fixed">
-      <tbody>
+  <div class="row-fluid" ng-show="issue">
+    <div class="span9">
+      <div ng-include="'pages/issues/partials/header.html'"></div>
+      <div ng-include="'pages/issues/partials/developer_goals_notification.html'"></div>
+      <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+
+      <table class="table table-striped" style="table-layout:fixed">
+        <tbody>
         <tr class="no-stripe">
           <td ng-class="{imagerow: issue.author_image_url, noimagerow: !issue.author_image_url}"><img ng-show="issue.author_image_url" ng-src="{{issue.author_image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px" /></td>
           <td style="overflow-x:auto" >
             <p class="muted">{{issue.author_name}} opened this issue on {{issue.created_at | date}}</p>
             <target-blank model="issue">
-              <div ng-bind-html="issue.body_html"></div>
+              <div ng-show="issue.$body_ctype == 'html'" ng-bind-html="issue.body_html"></div>
+              <div ng-show="issue.$body_ctype == 'text'" style="white-space: pre-wrap;">{{issue.body_html}}</div>
             </target-blank>
             <p class="muted">
               <a ng-href="{{issue.url}}" target="_blank">View original issue &raquo;</a>
             </p>
+
           </td>
         </tr>
         <tr class="no-stripe">
           <td colspan="2" ng-show="issue.comments.length > 0"><h4>Comments ({{issue.comments.length}})</h4></td>
           <td colspan="2" ng-show="issue.comments.length == 0"><h4>No comments.</h4></td>
         </tr>
+
         <tr ng-repeat="comment in issue.comments | orderBy:['+created_at']">
           <td><img ng-show="comment.author_image_url" ng-src="{{comment.author_image_url}}" class="thumbnail" style="width: 50px; height: 50px; max-width: 50px" /></td>
           <td style="overflow-x:auto">
             <p class="muted">{{comment.author_name}} on {{comment.created_at | date}}</p>
             <target-blank model="issue">
-              <div ng-bind-html="comment.body_html"></div>
+              <div ng-show="issue.$comment_ctype == 'html'" ng-bind-html="comment.body_html"></div>
+              <div ng-show="issue.$comment_ctype == 'text'" style="white-space: pre-wrap;">{{comment.body_html}}</div>
             </target-blank>
           </td>
         </tr>
         </tbody>
-    </table>
+      </table>
+    </div>
+
+    <div class="span3">
+      <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
+      <div ng-include="'pages/issues/partials/solutions_box.html'" ng-show="issue.can_add_bounty"></div>
+      <div ng-include="'pages/issues/partials/developer_goal_box.html'" ng-show="issue.can_add_bounty"></div>
+      <div ng-include="'pages/issues/partials/claim_info_box.html'" ng-hide="issue.can_add_bounty"></div>
+    </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
   <li><a href="/">Home</a><span class="divider">»</span></li>
   <li><a href="/teams">Teams</a><span class="divider">»</span></li>
   <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a><span class="divider">»</span></li>
-  <li><a>Settings</a></li>
+  <li><a ng-href="/teams/{{team.slug}}/activities">Activities</a></li>
 </ul>
 
 <div ng-show="team" ng-controller="TeamActivityController">

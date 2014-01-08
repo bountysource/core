@@ -60,6 +60,17 @@
               <div>{{event.description}}</div>
             </div>
           </div>
+          <div ng-switch-when="BountyClaimEvent::BackerAccepted">
+            <div ng-show="event.description"><!-- event only appears if there is a description present -->
+              <div class="span1">
+                <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
+              </div>
+              <div class="span11">
+                <div class="text-success">Accepted by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="muted">{{event.created_at | date:'medium'}}</small></div>
+                <div>{{event.description}}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -38,12 +38,16 @@
   </div>
 </div>
 
-<div class="text-center" collapse="!search_query_submitted || !search_pending">
+<div class="text-center" collapse="!search_query_submitted || !search_pending || processing_async">
   <p class="lead">Searching for '{{search_query}}'...</p>
   <progress value="100" class="progress-striped active"></progress>
 </div>
 
-<div class="row-fluid" collapse="!search_query_submitted || search_pending">
+<div collapse="!processing_async">
+  <loading-bar>Setting up {{tracker.name}} for the first time...</loading-bar>
+</div>
+
+<div class="row-fluid" collapse="!search_query_submitted || search_pending || processing_async">
   <div class="span3">
     <div collapse="search_pending">
       <div class="well">

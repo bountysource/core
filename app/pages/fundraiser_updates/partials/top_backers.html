@@ -4,13 +4,13 @@
     <tr ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse | limitTo:3">
       <!--Profile picture. No link if anon-->
       <td style="width: 50px">
-        <a class="thumbnail" ng-show="pledge.person" ng-href="/people/{{pledge.person.slug}}"><img style="width: 50px; max-width: 50px; height: 50px" ng-src="{{ pledge.person.image_url }}" /></a>
-        <img class="thumbnail" ng-hide="pledge.person" style="width: 50px; max-width: 50px; height: 50px" src="images/anon.jpg" />
+        <a class="thumbnail" ng-show="pledge.owner" ng-href="/people/{{pledge.owner.slug}}"><img style="width: 50px; max-width: 50px; height: 50px" ng-src="{{ pledge.owner.image_url }}" /></a>
+        <img class="thumbnail" ng-hide="pledge.owner" style="width: 50px; max-width: 50px; height: 50px" src="images/anon.jpg" />
       </td>
 
       <td>
-        <a ng-show="pledge.person" ng-href="/people/{{ pledge.person.slug }}">{{ pledge.person.display_name }}</a>
-        <div ng-hide="pledge.person" class="muted">Anonymous</div>
+        <a ng-show="pledge.owner" ng-href="/people/{{ pledge.owner.slug }}">{{ pledge.owner.display_name }}</a>
+        <div ng-hide="pledge.owner" class="muted">Anonymous</div>
         <div><b>{{ pledge.amount | dollars }}</b></div>
       </td>
     </tr>

@@ -21,7 +21,7 @@
     "grunt-karma": "~0.6.2",
     "grunt-open": "~0.2.0",
     "grunt-md5": "~0.1.11",
-    "grunt-cloudfiles": "~0.0.4",
+    "grunt-s3": "~0.2.0-alpha.3",
     "matchdep": "~0.1.1",
     "grunt-ngmin": "~0.0.2",
     "grunt-angular-templates": "~0.3.10",

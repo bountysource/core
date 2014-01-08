@@ -1,106 +1,156 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/trackers">Projects</a><span class="divider">»</span></li>
-  <li><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
-  <li><a ng-href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
-</ul>
+<div ng-controller="CreateBountyController">
+  <div ng-include="'pages/issues/partials/breadcrumb.html'"></div>
 
-<div class="row-fluid" ng-show="issue" ng-controller="CreateBountyController">
-  <div class="span12">
-    <div ng-include="'pages/issues/partials/header.html'"></div>
-    <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+  <div class="row-fluid" ng-show="issue" ng-controller="CreateBountyController">
+    <div class="span12">
+      <div ng-include="'pages/issues/partials/header.html'"></div>
+      <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
 
-    <div ng-show="error">
-      <alert type="'error'" close="error = null">{{error}}</alert>
-    </div>
+      <loading-bar ng-show="processing_payment">Processing payment...</loading-bar>
 
-    <form name="form" class="form-horizontal" ng-submit="create_payment()">
-      <div class="control-group">
-        <label class="control-label">Payment Method:</label>
-        <div class="controls">
-          <!-- Google Wallet -->
-          <label class="radio">
-            <input type="radio" ng-model="bounty.payment_method" value="google" />
-            <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
-            <span>Google Wallet</span>
-          </label>
+      <div ng-show="alert.message">
+        <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
+      </div>
 
-          <!-- PayPal -->
-          <label class="radio">
-            <input type="radio" ng-model="bounty.payment_method" value="paypal" />
-            <favicon domain="https://www.paypal.com/"></favicon>
-            <span>PayPal</span>
-          </label>
+      <div ng-hide="processing_payment">
+        <div ng-show="error">
+          <alert type="'error'" close="error = null">{{error}}</alert>
+        </div>
 
-          <!-- Personal account -->
-          <div ng-show="current_person && current_person.account.balance > 0">
-            <label class="radio">
-              <input type="radio" ng-model="bounty.payment_method" value="personal" />
-              <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
-              <span>{{current_person.display_name}} <strong>{{ current_person.account.balance | currency }}</strong></span>
-            </label>
-          </div>
+        <form name="form" class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label">Payment Method:</label>
+            <div class="controls">
+              <!-- Google Wallet -->
+              <label class="radio">
+                <input type="radio" ng-model="bounty.checkout_method" value="google" />
+                <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
+                <span>Google Wallet</span>
+              </label>
 
-          <!-- Team accounts -->
-          <div ng-show="teams.length > 0">
-            <label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="radio">
-              <input type="radio" ng-model="bounty.payment_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0" ng-change="select_team(team)" />
-              <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
+              <!-- PayPal -->
+              <label class="radio">
+                <input type="radio" ng-model="bounty.checkout_method" value="paypal" />
+                <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
+                <span>PayPal</span>
+              </label>
+
+              <!-- Personal account -->
+              <div ng-show="current_person && current_person.account.balance > 0">
+                <label class="radio">
+                  <input type="radio" ng-model="bounty.checkout_method" value="personal" />
+                  <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
+                  <span>{{current_person.display_name}} <strong>{{ current_person.account.balance | dollars }}</strong></span>
+                </label>
+              </div>
+
+              <!-- Team accounts -->
+              <div ng-show="teams.length > 0">
+                <label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="radio">
+                  <input type="radio" ng-model="bounty.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0" ng-change="select_team(team)" />
+                  <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
               <span ng-class="{ 'muted': (!team.is_developer || team.account_balance <= 0) }">
                 {{team.name}}
                 <strong ng-show="team.is_developer">{{ team.account_balance | dollars }}</strong>
                 <strong ng-hide="team.is_developer">$0</strong>
                 <span ng-show="team.is_admin && team.account_balance < 100 && team.type != 'Team::Enterprise'">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
               </span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label for="amount" class="control-label">Bounty Amount:</label>
-        <div class="controls">
-          <div class="input-prepend">
-            <span class="add-on">$</span>
-            <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="Bounty amount" />
-          </div>
-        </div>
-      </div>
-
-      <div collapse="!show_fee">
-        <div class="control-group">
-          <label class="control-label">Bountysource Fee:</label>
-          <div class="controls">
-            <div style="line-height: 30px;"><strong>{{bounty.fee | currency}}</strong></div>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Total:</label>
-          <div class="controls">
-            <div class="input-prepend">
-              <span class="add-on">$</span>
-              <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" />
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <label class="checkbox">
-            <input type="checkbox" ng-model="bounty.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && bounty.anonymous" />
-            <span ng-class="{ muted: !can_make_anonymous }">Post anonymously</span>
-            <small class="text-info" ng-show="!can_make_anonymous">* Team bounties cannot be anonymous</small>
-          </label>
-        </div>
-      </div>
+          <div class="control-group">
+            <label for="amount" class="control-label">Bounty Amount:</label>
+            <div class="controls">
+              <div class="input-prepend">
+                <span class="add-on">$</span>
+                <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="Bounty amount" required />
+              </div>
+            </div>
+          </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <button type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">Create {{bounty.amount || 0 | dollars}} Bounty</button>
-        </div>
+          <div>
+            <div class="control-group">
+              <label class="control-label">
+                <div>Bounty Expiration:</div>
+                <div><small class="muted"><em>Optional</em></small></div>
+              </label>
+              <span ng-switch="expiration">
+                <div class="controls" ng-switch-when="0" ng-include="'pages/issues/partials/options/expiration_up.html'"></div>
+                <div class="controls" ng-switch-when="1" ng-include="'pages/issues/partials/options/expiration_down.html'"></div>
+              </span>
+            </div>
+
+            <div collapse="!bounty.bounty_expiration || bounty.bounty_expiration == 'never'">
+              <div class="control-group">
+                <div class="controls">
+                  <h5>When the bounty expires...</h5>
+                  <div ab-randomize ng-include="'pages/issues/partials/options/upon_expiration.html'" onload="broadcastLoad()"></div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="control-group">
+              <label class="control-label">
+                <div>Promotion:</div>
+                <div><small class="muted"><em>Optional</em></small></div>
+              </label>
+              <div class="controls">
+                <div ab-randomize ng-include="'pages/issues/partials/options/promotion.html'" onload="broadcastLoad()"></div>
+                <div collapse="!bounty.promotion">
+                  <a class="btn btn-small" ng-click="bounty.promotion = undefined">
+                    <i class="icon-remove"></i>
+                    No promotion
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div collapse="!show_fee">
+            <div class="control-group">
+              <label class="control-label">Bountysource Fee:</label>
+              <div class="controls">
+                <div style="line-height: 30px;"><strong>{{bounty.fee | currency}}</strong></div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">Total:</label>
+              <div class="controls">
+                <div class="input-prepend">
+                  <span class="add-on">$</span>
+                  <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" required />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="bounty.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && bounty.anonymous" />
+                <span ng-class="{ muted: !can_make_anonymous }">Post anonymously</span>
+                <small class="text-info" ng-show="!can_make_anonymous">* Team bounties cannot be anonymous</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="controls">
+              <button ng-click="create_payment()" ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
+                <span >Post {{bounty.amount || 0 | dollars}} Bounty</span>
+              </button>
+
+              <button type="submit" ng-click="create_payment()" ng-show="previous_bounty_total > 0" class="btn btn-large btn-primary" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
+                <span>Increase Bounty by {{bounty.amount | dollars}}</span>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>

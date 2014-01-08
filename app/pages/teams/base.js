@@ -1,8 +1,16 @@
 'use strict';
 
 angular.module('app')
-  .controller('BaseTeamController', function($scope, $location, $routeParams, $api) {
-    $scope.team = $api.team_get($routeParams.id).then(function(team) {
+  .controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle) {
+    $pageTitle.set("Teams");
+
+    $scope.team_promise = $scope.team = $api.team_get($routeParams.id).then(function(team) {
+      $pageTitle.set(team.name, "Teams");
+      team = $scope.process_owned_unowned_trackers(team);
+      return team;
+    });
+
+    $scope.process_owned_unowned_trackers = function(team) {
       team.owned_trackers = [];
       team.unowned_trackers = [];
 
@@ -13,9 +21,8 @@ angular.module('app')
         // push to owned_trackers or unowned_trackers
         (team.trackers[i].$owned ? team.owned_trackers : team.unowned_trackers).push(team.trackers[i]);
       }
-
       return team;
-    });
+    };
 
     $scope.set_team = function(team) {
       $scope.team = team;
@@ -29,6 +36,8 @@ angular.module('app')
       else if (tab === 'settings' && (/^\/teams\/[^\/]+\/settings$/).test($location.path())) { return true; }
       else if (tab === 'account' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
       else if (tab === 'projects' && (/^\/teams\/[^\/]+\/projects+$/).test($location.path())) { return true; }
+      else if (tab === 'bounties' && (/^\/teams\/[^\/]+\/bounties$/).test($location.path())) { return true; }
+      else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
     };
 
     $scope.members = $api.team_members_get($routeParams.id).then(function(members) {

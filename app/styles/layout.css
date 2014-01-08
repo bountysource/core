@@ -74,3 +74,5 @@ footer a, footer { color: #bbb; }
     margin-top: 10px;
   }
 }
+
+table.table-no-head tr:first-of-type td { border-top: 0; }

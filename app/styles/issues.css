@@ -1,3 +1,19 @@
+.label-warning[href], .badge-warning[href] {
+  background-color: #F89406;
+}
+
+.label-info[href], .badge-info[href] {
+  background-color: #3A87AD;
+}
+
+.label-success[href], .badge-success[href] {
+  background-color: #468847;
+}
+
+.label-important[href], .badge-important[href] {
+  background-color: #B94A48;
+}
+
 table#bounties-table tr td {
   vertical-align: middle;
 }
@@ -49,96 +65,14 @@ td.noimagerow {
   display: none;
 }
 
+.issue-goals.progress {
+  margin-bottom: 10px;
+}
+
 /* receipt */
 input#bounty-share-url {
   cursor: pointer;
   width: 75%;
   text-align: center;
   margin-top: 15px;
-}
-@media (min-width: 1200px) {
-	#bounty > a.btn.btn-primary {
-		width: 20%;
-		margin-left: 1px;
-		margin-bottom: 10px;
-		margin-right: 1px;
-	}
-	#bounty > .form-control {
-		width: 60%;
-	}
-	#title {
-		margin-left: 0px;
-	}
-	#bounty {
-		right: 0px;
-		width: 270px;
-	}
-	#tabs {
-		position: absolute;
-		margin-top: 130px;
-		margin-left: 0px;
-		width: 870px;
-	}
-}
-@media (min-width: 980px) and (max-width: 1199px) {
-	#bounty > a.btn.btn-primary {
-		width: 30%;
-		margin-left: 1px;
-		margin-bottom: 10px;
-		margin-right: 1px;
-	}
-	#bounty > .form-control {
-		width: 85%;
-	}
-	#title {
-		margin-left: 0px;
-	}
-	#bounty {
-		position: inherit;
-		right: 0px;
-		width: 220px;
-	}
-	#tabs {
-		position: absolute;
-		margin-top: 125px;
-		margin-left: 0px;
-		width: 700px;
-	}
-}
-@media (min-width: 768px) and (max-width: 979px) {
-	#bounty > a.btn.btn-primary {
-		width: 80%;
-		margin-left: 0px;
-		margin-bottom: 3px;
-		margin-right: 0px;
-	}
-	#bounty > .form-control {
-		width: 90%;
-	}
-	#title {
-		margin-left: 0px;
-	}
-	#bounty {
-		position: inherit;
-		right: 0px;
-		width: 166px;
-	}
-	#tabs {
-		position: absolute;
-		margin-top: 135px;
-		margin-left: 0px;
-		width: 538px;
-	}
-}
-@media (max-width: 767px) {
-	#bounty > a.btn.btn-primary {
-		width: 40px;
-		margin-left: 0px;
-		margin-bottom: 3px;
-		margin-right: 0px;
-	}
-	#bounty > .form-control {
-		width: 191px;
-		margin-top: 8px;
-	}
 }

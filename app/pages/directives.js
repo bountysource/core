@@ -191,14 +191,13 @@ angular.module('app').
                 throw("Model is missing owner.type attribute");
               } else if (model.owner.type === "Person") {
                 element.attr("href", "/people/"+model.owner.slug);
-              } else if (model.owner.type === "Team") {
+              } else if ((/^Team/).test(model.owner.type)) {
                 element.attr("href", "/teams/"+model.owner.slug);
               } else {
                 throw("Unexpected owner " + model.owner.type);
               }
             }
           } catch(e) {
-            console.log("ownerProfileLink: ", e);
           }
         });
       }
@@ -208,14 +207,17 @@ angular.module('app').
     return {
       restrict: "AC",
       require: "ngModel",
-      link: function(scope, element, attr, ctrl) {
-        ctrl.$parsers.unshift(function(viewValue) {
+      link: function(scope, element, attrs, ctrl) {
+        var slugify = function(viewValue) {
           var slugifiedViewValue = $filter('slug')(viewValue);
-          if (viewValue !== slugifiedViewValue) {
+          if (slugifiedViewValue !== viewValue) {
             ctrl.$setViewValue(slugifiedViewValue);
             ctrl.$render();
           }
-        });
+          return slugifiedViewValue;
+        };
+        ctrl.$parsers.push(slugify);
+        slugify(scope[attrs.ngModel]); // initial value
       }
     };
   }]).
@@ -262,6 +264,23 @@ angular.module('app').
               }, 250);
             });
           }
+        });
+      }
+    };
+  }]).directive('abRandomize', ['$rootScope', '$compile', function ($rootScope, $compile) {
+    return {
+      restrict: "AC",
+      link: function (scope, element, attrs) {
+        $rootScope.$on("$load_expiration_options", function () {
+          var radio_array = element[0].children;
+          var children_array = [];
+          for (var i = 0; i < radio_array.length; i++) {
+            children_array.push(radio_array[i]);
+          }
+          children_array = children_array.sort(function() {return 0.5 - Math.random();});
+          element.children().remove();
+          element.append(children_array);
+          $compile(element.contents())(scope);
         });
       }
     };

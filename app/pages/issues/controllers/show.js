@@ -5,11 +5,11 @@ angular.module('app')
     $routeProvider
       .when('/issues/:id', {
         templateUrl: 'pages/issues/show.html',
-        controller: 'IssueShow'
+        controller: 'IssuesBaseController'
       });
   })
 
-  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $payment, $api, $pageTitle) {
+  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $api, $pageTitle) {
     // alert above the issue title about bounty status
     $scope.bounty_alert = {
       type: 'warning',
@@ -19,6 +19,14 @@ angular.module('app')
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       $pageTitle.set(issue.title, issue.tracker.name);
+
+      // depending on the tracker, issue/comment bodies will either be html or text.
+      issue.$comment_ctype = "html";
+      issue.$body_ctype = "html";
+      if (issue.type === "Bugzilla::Issue") {
+        issue.$comment_ctype = "text";
+        issue.$body_ctype = "text";
+      }
 
       // set bounty info message data
       if (issue.bounty_claims.length === 0) {

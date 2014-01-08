@@ -22,7 +22,7 @@ angular.module('app')
       $pageTitle.set(team.name, 'Teams');
 
       // Set payment method on params so that team is the selected payment method on Bounty page
-      $scope.create_bounty_params.payment_method = "team/"+team.id;
+      $scope.create_bounty_params.checkout_method = "team/"+team.id;
 
       return team;
     });
@@ -32,7 +32,6 @@ angular.module('app')
 
       if ((query_url || "").length > 0) {
         $api.search(query_url).then(function (response) {
-          console.log(response);
           if (response.redirect_to) {
             var url = response.redirect_to;
 

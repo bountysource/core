@@ -19,7 +19,7 @@ angular.module('app')
     };
   })
 
-  .controller('SearchController', function ($scope, $location, $routeParams, $api) {
+  .controller('SearchController', function ($scope, $location, $routeParams, $api, $window) {
     $scope.search_query = $routeParams.query;
     $scope.search_query_submitted = (angular.isDefined($scope.search_query) && $scope.search_query.length > 0);
     $scope.search_pending = $scope.search_query_submitted;
@@ -43,6 +43,22 @@ angular.module('app')
           } else if (response.create_issue) {
             // oh no, nothing was found! redirect to page to create issue for arbitrary URL
             $location.path("/issues/new").search({ url: $scope.search_query }).replace();
+          } else if (response.async) {
+            // If we just created this Tracker model, an asynchronous job syncs the Issues.
+            // Continuously poll until the job is finished running.
+            if (response.tracker) {
+              $scope.tracker = response.tracker;
+              $scope.processing_async = true;
+
+              var interval = $window.setInterval(function() {
+                $api.job_finished(response.job_id).then(function(finished) {
+                  if (finished) {
+                    $window.clearInterval(interval);
+                    $location.url("/trackers/"+response.tracker.slug).replace();
+                  }
+                });
+              }, 2000);
+            }
           } else {
             // just render normal search results, returned by the API as
             // response.trackers and response.issues

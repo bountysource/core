@@ -1,14 +1,10 @@
-<div>
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a><span class="divider">»</span></li>
-    <li><a href="/trackers">Projects</a><span class="divider">»</span></li>
-    <li><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name || 'Loading...'}}</a><span class="divider">»</span></li>
-    <li><a ng-href="/issues/{{issue.slug}}">{{issue.title ||'Loading...'}}</a></li>
-  </ul>
-
+<div ng-controller="IssueBountiesController">
+  <div ng-include="'pages/issues/partials/breadcrumb.html'"></div>
+  
   <div class="row-fluid" ng-show="issue">
     <div class="span9">
       <div ng-include="'pages/issues/partials/header.html'"></div>
+      <div ng-include="'pages/issues/partials/developer_goals_notification.html'"></div>
       <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
 
       <div class="alert alert-info" ng-hide="issue.bounties.length > 0">
@@ -28,7 +24,9 @@
           <tbody>
           <tr ng-repeat="bounty in issue.bounties | orderBy:sort_column:sort_reverse">
             <td>
-              <img ng-show="bounty.person" class="thumbnail" ng-src="{{ bounty.person.image_url }}" />
+              <div ng-show="bounty.person">
+                <a owner-href="bounty.person"><img class="thumbnail" ng-src="{{ bounty.person.image_url }}" /></a>
+              </div>
               <img ng-hide="bounty.person" class="thumbnail" src="images/anon.jpg" />
             </td>
             <td>
@@ -49,7 +47,9 @@
 
     <div class="span3">
       <div ng-include="'pages/issues/partials/bounty_box.html'"></div>
-      <div ng-include="'pages/issues/partials/claim_info_box.html'"></div>
+      <div ng-include="'pages/issues/partials/solutions_box.html'" ng-show="issue.can_add_bounty"></div>
+      <div ng-include="'pages/issues/partials/developer_goal_box.html'" ng-show="issue.can_add_bounty"></div>
+      <div ng-include="'pages/issues/partials/claim_info_box.html'" ng-hide="issue.can_add_bounty"></div>
     </div>
   </div>
 </div>

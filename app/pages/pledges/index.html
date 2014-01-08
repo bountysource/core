@@ -18,6 +18,8 @@
       <div class="span9">
         <div class="alert alert-info" ng-show="pledges.length <= 0">No pledges have been made. <a ng-href="/fundraisers/{{fundraiser.slug}}/pledge">Why don't you make the first pledge?</a></div>
 
+        <loading-bar ng-hide="pledges">Loading...</loading-bar>
+
         <table ng-show="pledges && pledges.length > 0" class="table table-striped pledges-table">
           <thead>
           <tr>
@@ -45,7 +47,7 @@
             </td>
 
             <td>
-              <div>{{ pledge.amount | currency }}</div>
+              <div>{{ pledge.amount | dollars }}</div>
             </td>
 
             <td>

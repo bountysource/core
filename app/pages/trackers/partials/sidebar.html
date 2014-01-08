@@ -1,0 +1,61 @@
+<div class="well text-center">
+  <div><img ng-src="{{tracker.large_image_url}}" /></div>
+  <br />
+  <button class="btn btn-block" ng-click="tracker.follow()">
+        <span ng-show="tracker.followed">
+          <i class="icon-star"></i>
+          Following this project
+        </span>
+        <span ng-hide="tracker.followed">
+          <i class="icon-star-empty"></i>
+          Follow this project
+        </span>
+  </button>
+
+  <!-- Such not DRY, but oh well. TODO: Pull into a directive or partial or something -->
+  <a ng-href="{{tracker.url}}" target="_blank" class="btn btn-block">
+    <div ng-switch="tracker.tracker_type | lowercase">
+      <div ng-switch-when="github::repository">
+        <img src="/images/favicon-github.png" />
+        View on GitHub
+      </div>
+      <div ng-switch-when="jira::tracker">
+        <img src="/images/favicon-jira.png" />
+        View on Jira
+      </div>
+      <div ng-switch-when="bitbucket::tracker">
+        <img src="/images/favicon-bitbucket.png" />
+        View on BitBucket
+      </div>
+      <div ng-switch-when="launchpad::tracker">
+        <img src="/images/favicon-launchpad.png" />
+        View on Launchpad
+      </div>
+      <div ng-switch-when="sourceforge::tracker">
+        <img src="/images/favicon-sourceforge.png" />
+        View on SourceForge
+      </div>
+      <div ng-switch-when="sourceforgenative::tracker">
+        <img src="/images/favicon-sourceforge.png" />
+        View on SourceForge
+      </div>
+      <div ng-switch-when="trac::tracker">
+        <img src="/images/favicon-trac.png" />
+        View on Trac
+      </div>
+      <div ng-switch-when="pivotal::tracker">
+        <img src="/images/favicon-pivotal.png" />
+        View on Pivotal
+      </div>
+      <div ng-switch-when="bugzilla::tracker">
+        <img src="/images/favicon-bugzilla.png" />
+        View on Bugzilla
+      </div>
+      <div ng-switch-default>
+        <i class="icon-globe"></i>
+        View Repository
+      </div>
+    </div>
+  </a>
+  <a ng-href="/trackers/{{ tracker.slug }}/edit" class="btn btn-block"><i class="icon-pencil"></i> Edit this Tracker</a>
+</div>
