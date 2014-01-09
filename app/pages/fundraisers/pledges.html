@@ -41,8 +41,8 @@
             </td>
 
             <td>
-              <owner-profile-link model="pledge">{{pledge.person.display_name}}</owner-profile-link>
-              <div ng-hide="pledge.person" class="muted">Anonymous</div>
+              <a ng-show="pledge.owner" owner-href="pledge.owner">{{pledge.owner.display_name}}</a>
+              <div ng-hide="pledge.owner" class="muted">Anonymous</div>
             </td>
 
             <td>
