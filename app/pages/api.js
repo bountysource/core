@@ -297,6 +297,9 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/"+id+"/overview");
     };
 
+    this.tracker_get_activity = function(id) {
+      return this.call("/trackers/"+id+"/activity");
+
     this.tracker_get = function(id) {
       return this.call("/trackers/"+id);
     };

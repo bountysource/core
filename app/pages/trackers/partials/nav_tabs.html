@@ -1,3 +1,3 @@
-<ul class="nav nav-tabs">
-  <li class='active'><a ng-href="/trackers/{{tracker.slug}}" data-toggle="tab">Issues</a></li>
+<ul class="nav nav-tabs" ng-controller="TrackerNavTabsController">
+  <li ng-repeat="tab in tabs" ng-class="{active: is_active(tab.url) }"><a ng-href="{{tab.url}}">{{tab.name}}</a></li>
 </ul>
