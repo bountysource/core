@@ -37,12 +37,6 @@ angular.module('app')
       }
     });
 
-    $scope.pledges = $api.fundraiser_pledges_get($routeParams.id).then(function(pledges) {
-      // need to turn amounts into float so that it's sortable
-      for (var i in pledges) { pledges[i].amount = parseFloat(pledges[i].amount); }
-      return pledges;
-    });
-
     $scope.pledge = {
       amount: parseInt($routeParams.amount, 10)
     };
