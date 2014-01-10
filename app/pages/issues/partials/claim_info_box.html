@@ -9,7 +9,7 @@
 <div ng-controller="BountyClaimsController" ng-show="issue.winning_bounty_claim || issue.bounty_total > 0 && (!issue.can_add_bounty || issue.generic)" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-error': ((!issue.winning_bounty_claim && issue.bounty_claims.length > 1) || issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected), 'alert alert-block alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 0) }">
   <!-- A claim was accepted, yay! -->
   <div ng-show="issue.winning_bounty_claim">
-    <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
+    <h2 style="margin: 0;">{{issue.winning_bounty_claim.amount | dollars}}</h2>
     <h4 style="margin: 0;">Bounty</h4>
     <br />
     <h4 style="margin: 0;">Awarded to:</h4>
