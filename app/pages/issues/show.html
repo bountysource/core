@@ -10,9 +10,16 @@
       <table class="table table-striped" style="table-layout:fixed">
         <tbody>
         <tr class="no-stripe">
-          <td ng-class="{imagerow: issue.author_image_url, noimagerow: !issue.author_image_url}"><img ng-show="issue.author_image_url" ng-src="{{issue.author_image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px" /></td>
+          <td class="imagerow">
+            <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}"><img ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"/></a>
+            <img ng-hide="issue.author.slug" ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"/>
+          </td>
           <td style="overflow-x:auto" >
-            <p class="muted">{{issue.author_name}} opened this issue on {{issue.created_at | date}}</p>
+            <p class="muted">
+              <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}">{{issue.author.display_name}}</a>
+              <span ng-hide="issue.author.slug">{{issue.author.display_name}}</span>
+              opened this issue on {{issue.created_at | date}}
+            </p>
             <target-blank model="issue">
               <div ng-show="issue.$body_ctype == 'html'" ng-bind-html="issue.body_html"></div>
               <div ng-show="issue.$body_ctype == 'text'" style="white-space: pre-wrap;">{{issue.body_html}}</div>
@@ -29,9 +36,16 @@
         </tr>
 
         <tr ng-repeat="comment in issue.comments | orderBy:['+created_at']">
-          <td><img ng-show="comment.author_image_url" ng-src="{{comment.author_image_url}}" class="thumbnail" style="width: 50px; height: 50px; max-width: 50px" /></td>
+          <td>
+            <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}"><img ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"/></a>
+            <img ng-hide="comment.author.slug" ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"/>
+          </td>
           <td style="overflow-x:auto">
-            <p class="muted">{{comment.author_name}} on {{comment.created_at | date}}</p>
+            <p class="muted">
+              <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}">{{comment.author.display_name}}</a>
+              <span ng-hide="comment.author.slug">{{comment.author.display_name}}</span>
+              on {{comment.created_at | date}}
+            </p>
             <target-blank model="issue">
               <div ng-show="issue.$comment_ctype == 'html'" ng-bind-html="comment.body_html"></div>
               <div ng-show="issue.$comment_ctype == 'text'" style="white-space: pre-wrap;">{{comment.body_html}}</div>

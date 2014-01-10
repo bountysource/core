@@ -57,10 +57,6 @@ td.imagerow {
   width: 60px;
 }
 
-td.noimagerow {
-  width: 0px;
-}
-
 .ng-binding ul > br {
   display: none;
 }
