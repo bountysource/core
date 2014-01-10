@@ -293,10 +293,6 @@ angular.module('api.bountysource',[]).
       return this.call("/trackers/cards", function(r) { return r.data.featured_trackers.concat(r.data.all_trackers); });
     };
 
-    this.tracker_overview = function(id) {
-      return this.call("/trackers/"+id+"/overview");
-    };
-
     this.tracker_get = function(id) {
       return this.call("/trackers/"+id);
     };
