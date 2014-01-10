@@ -9,11 +9,10 @@ angular.module('app')
         resolve: $person
       });
   })
-  .controller('TransactionShowController', function ($scope, $routeParams, $api) {
+  .controller('TransactionShowController', function ($scope, $routeParams, $api, $filter, $window, $twttr) {
     $scope.is_receipt = parseInt($routeParams.receipt, 10) === 1;
 
     $scope.transaction_promise = $api.call("/transactions/"+$routeParams.id).then(function(transaction) {
-      console.log(transaction);
 
       // Collect all Fundraisers and Trackers from the array of items on the transaction
       $scope.trackers = [];
@@ -26,9 +25,57 @@ angular.module('app')
         }
       }
 
+      // TODO Make this share functionality a module that can take any object + url
+      ///////// Share button logic /////////
+      var item = transaction.items[0];
+
+      //if item has fundraiser key, its a pledge
+      if ('fundraiser' in item) {
+        setShareUrls(item, item.fundraiser, "fundraiser")
+      //if item has issue key, its a bounty
+      } else if ('issue' in item) {
+        setShareUrls(item, item.issue, "issue")
+      }
+
       $scope.transaction = transaction;
       return transaction;
     });
+    
+    function setShareUrls (item, parent, item_type) {
+
+      //set the tweet text based upon the item type
+      if (item_type === "fundraiser") {
+        var tweet_text = "I just pledged "+$filter('dollars')(item.amount)+" to "+parent.title+"!";
+      } else {
+        var tweet_text = "I just posted a "+$filter('dollars')(item.amount)+" bounty on Bountysource!";
+      }
+      $scope.tweet_text = encodeURIComponent(tweet_text);
+
+      var tweet_url = "https://www.bountysource.com"+parent.frontend_path;
+      $scope.tweet_url = encodeURIComponent(tweet_url);
+
+      var google_url = "https://www.bountysource.com"+parent.frontend_path;
+      $scope.google_url = "https://plus.google.com/share?url="+ encodeURIComponent(google_url);
+
+      var facebook_url = "https://www.bountysource.com"+parent.frontend_path;
+      $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
+    };
+
+    // allows share windows to open
+    $scope.openFacebook = function (url) {
+      var left = screen.width/2 - 300;
+      var top = screen.height/2 - 300;
+      $window.open(url, "Facebook", 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600,top='+top+', left='+left);
+      return false;
+    };
+
+    $scope.openGooglePlus = function (url) {
+      var left = screen.width/2 - 300;
+      var top = screen.height/2 - 300;
+      $window.open(url, "Google+", 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600,top='+top+', left='+left);
+      return false;
+    };
+
 
     // Watch for trackers collected form Transaction items.
     // Generate list of related issues.
