@@ -43,7 +43,7 @@ angular.module('app')
       first_name: $routeParams.first_name,
       last_name: $routeParams.last_name,
       display_name: $routeParams.display_name,
-      avatar_url: $routeParams.avatar_url,
+      image_url: $routeParams.image_url,
       terms: false
     };
 

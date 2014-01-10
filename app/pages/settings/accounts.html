@@ -43,7 +43,7 @@
   <div class="control-group">
     <label class="control-label" for="inputDisplayName">Github:</label>
     <div class="controls link-with-avatar" ng-show="current_person.github_account">
-      <img ng-src="{{current_person.github_account.avatar_url}}" style="width: 25px; height: 25px" />
+      <img ng-src="{{current_person.github_account.image_url}}" style="width: 25px; height: 25px" />
       {{ current_person.github_account.login }}
     </div>
     <div class="controls link-with-text" ng-hide="current_person.github_account">
@@ -54,7 +54,7 @@
   <div class="control-group">
     <label class="control-label" for="inputDisplayName">Twitter:</label>
     <div class="controls link-with-avatar" ng-show="current_person.twitter_account">
-      <img ng-src="{{current_person.twitter_account.avatar_url}}" style="width: 25px; height: 25px" />
+      <img ng-src="{{current_person.twitter_account.image_url}}" style="width: 25px; height: 25px" />
       {{ current_person.twitter_account.login }}
     </div>
     <div class="controls link-with-text" ng-hide="current_person.twitter_account">
@@ -65,7 +65,7 @@
   <div class="control-group">
     <label class="control-label" for="inputDisplayName">Facebook:</label>
     <div class="controls link-with-avatar" ng-show="current_person.facebook_account">
-      <img ng-src="{{current_person.facebook_account.avatar_url}}" style="width: 25px; height: 25px" />
+      <img ng-src="{{current_person.facebook_account.image_url}}" style="width: 25px; height: 25px" />
       {{ current_person.facebook_account.login }}
     </div>
     <div class="controls link-with-text" ng-hide="current_person.facebook_account">

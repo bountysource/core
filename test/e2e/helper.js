@@ -275,7 +275,7 @@ var RESPONSE_MOCK = {
                         "id": 4885,
                         "uid": 1088926,
                         "login": "themanliest",
-                        "avatar_url": "https://2.gravatar.com/avatar/7507f125df56868f753571aadf69c734?d=https%3A%2F%2Fidenticons.github.com%2Ff3a6208a7bbf2c3b97281bd3e6d90233.png",
+                        "image_url": "https://2.gravatar.com/avatar/7507f125df56868f753571aadf69c734?d=https%3A%2F%2Fidenticons.github.com%2Ff3a6208a7bbf2c3b97281bd3e6d90233.png",
                         "followers": 21,
                         "following": 21
                     },

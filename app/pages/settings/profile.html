@@ -36,18 +36,18 @@
       </label>
 
       <label class="radio setings_profile_pic" ng-show="current_person.github_account">
-        <input type="radio" ng-model="profile_input.radio" value="{{current_person.github_account.avatar_url}}">
-        <img src="{{current_person.github_account.avatar_url}}" tooltip="GitHub" />
+        <input type="radio" ng-model="profile_input.radio" value="{{current_person.github_account.image_url}}">
+        <img src="{{current_person.github_account.image_url}}" tooltip="GitHub" />
       </label>
 
       <label class="radio setings_profile_pic" ng-show="current_person.twitter_account">
         <input type="radio" ng-model="profile_input.radio" value="twitter:{{current_person.twitter_account.login}}">
-        <img src="{{current_person.twitter_account.avatar_url}}" tooltip="Twitter" />
+        <img src="{{current_person.twitter_account.image_url}}" tooltip="Twitter" />
       </label>
 
       <label class="radio setings_profile_pic" ng-show="current_person.facebook_account">
         <input type="radio" ng-model="profile_input.radio" value="facebook:{{current_person.facebook_account.login || current_person.facebook_account.uid}}" style="margin-top: 18px">
-        <img src="{{current_person.facebook_account.avatar_url}}" tooltip="Facebook" />
+        <img src="{{current_person.facebook_account.image_url}}" tooltip="Facebook" />
       </label>
 
       <br/>
