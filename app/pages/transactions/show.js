@@ -31,23 +31,24 @@ angular.module('app')
 
       //if item has fundraiser key, its a pledge
       if ('fundraiser' in item) {
-        setShareUrls(item, item.fundraiser, "fundraiser")
+        setShareUrls(item, item.fundraiser, "fundraiser");
       //if item has issue key, its a bounty
       } else if ('issue' in item) {
-        setShareUrls(item, item.issue, "issue")
+        setShareUrls(item, item.issue, "issue");
       }
 
       $scope.transaction = transaction;
       return transaction;
     });
-    
+
     function setShareUrls (item, parent, item_type) {
 
       //set the tweet text based upon the item type
+      var tweet_text;
       if (item_type === "fundraiser") {
-        var tweet_text = "I just pledged "+$filter('dollars')(item.amount)+" to "+parent.title+"!";
+        tweet_text = "I just pledged "+$filter('dollars')(item.amount)+" to "+parent.title+"!";
       } else {
-        var tweet_text = "I just posted a "+$filter('dollars')(item.amount)+" bounty on Bountysource!";
+        tweet_text = "I just posted a "+$filter('dollars')(item.amount)+" bounty on Bountysource!";
       }
       $scope.tweet_text = encodeURIComponent(tweet_text);
 
@@ -59,7 +60,7 @@ angular.module('app')
 
       var facebook_url = "https://www.bountysource.com"+parent.frontend_path;
       $scope.facebook_url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(facebook_url);
-    };
+    }
 
     // allows share windows to open
     $scope.openFacebook = function (url) {
