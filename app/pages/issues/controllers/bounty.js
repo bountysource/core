@@ -15,6 +15,12 @@ angular.module('app')
       return cart;
     });
 
+    // Follow the project if the checkbox is the checked
+    $scope.follow = function() {
+      if($scope.following)
+        $api.tracker_follow($scope.issue.$$v.tracker.id);
+    }
+
     $scope.bounty = {
       amount: parseInt($routeParams.amount || 15, 10),
       anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
