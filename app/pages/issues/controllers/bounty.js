@@ -40,6 +40,7 @@ angular.module('app')
     $scope.expiration = Math.floor(Math.random()*2);
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
+      $scope.tracker_id = issue.tracker.id;
       $scope.create_payment = function() {
         var attrs = angular.copy($scope.bounty);
         delete attrs.fee;
@@ -82,6 +83,11 @@ angular.module('app')
             $location.url("/signin");
           }
         });
+
+        // Follow the project if the checkbox is the checked
+        if($scope.following) {
+          $api.tracker_follow($scope.tracker_id);
+        }
       };
 
       return issue;
