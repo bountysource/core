@@ -1,4 +1,4 @@
-<div ng-controller="CreateBountyController" style="border:2px solid red">
+<div ng-controller="CreateBountyController">
   <div ng-include="'pages/issues/partials/breadcrumb.html'"></div>
 
   <div class="row-fluid" ng-show="issue" ng-controller="CreateBountyController">
@@ -155,7 +155,7 @@
             <div class="controls">
               <label class="checkbox">
                 <input type="checkbox" ng-model="following" ng-checked="issue.tracker.followed" />
-                <span>Follow project ?</span>
+                <span>Follow {{issue.tracker.name}} ?</span>
               </label>
             </div>
           </div>
