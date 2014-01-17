@@ -4,3 +4,7 @@
 <div ng-show="fundraiser.owner && fundraiser.published && !fundraiser.in_progress" class="alert alert-info text-center">
   All money raised is now on your Bountysource account. You can request a cash-out <a href="/activity/transactions">here</a>.
 </div>
+
+<div ng-show="fundraiser.published && !fundraiser.in_progress && linked_tracker" class="alert alert-info text-center">
+  <a ng-href="{{ linked_tracker.frontend_path }}">This fundraiser has ended, but you can still contribute toward its development. Post a bounty on open issues or earn some bounties yourself.</a>
+</div>
