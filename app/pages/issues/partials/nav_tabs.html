@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs" ng-controller="IssueNavTabsController">
   <li ng-class="active_tab('overview')"><a ng-href="/issues/{{issue.slug}}">Overview</a></li>
   <li ng-class="active_tab('bounties')"><a ng-href="/issues/{{issue.slug}}/bounties">
-    Bounties
+    Backers
     <span class="badge badge-info" ng-show="issue.bounties.length > 0">{{issue.bounties.length}}</span>
   </a></li>
   <li ng-class="active_tab('claims')" ng-show="issue.bounty_total > 0 && (!issue.can_add_bounty || issue.generic)"><a ng-href="/issues/{{issue.slug}}/claims">
@@ -9,7 +9,7 @@
     <span class="badge badge-info" ng-show="issue.bounty_claims.length > 0">{{issue.bounty_claims.length}}</span>
   </a></li>
   <li ng-class="active_tab('bounty')" ng-show="issue.can_add_bounty"><a ng-href="/issues/{{issue.slug}}/bounty">
-    Place Bounty
+    Post a Bounty
     <span class="badge badge-info" ng-show="issue.bounty_claims.length > 0">{{issue.bounty_claims.length}}</span>
   </a></li>
 </ul>
