@@ -21,7 +21,9 @@ angular.module('app')
       } else {
         $pageTitle.set(fundraiser.title, 'Fundraisers');
 
-        $scope.linked_tracker = fundraiser.trackers[0];
+        if (fundraiser.trackers) {
+          $scope.linked_tracker = fundraiser.trackers[0];
+        }
 
         $scope.sanitized_description = "";
         if (fundraiser.description_html) {
