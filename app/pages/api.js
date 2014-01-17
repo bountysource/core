@@ -531,7 +531,9 @@ angular.module('api.bountysource',[]).
     };
 
     this.team_invite_create = function(team_id, data) {
-      return this.call("/teams/"+team_id+"/invites", "POST", data);
+      return this.call("/teams/"+team_id+"/invites", "POST", data, function (response) {
+        return response;
+      });
     };
 
     this.team_invites_get = function(team_id) {

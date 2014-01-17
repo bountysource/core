@@ -79,10 +79,8 @@ angular.module('app')
 
       $scope.add_member = function() {
         $scope.add_member_error.message = "";
-
         var request_data = angular.copy($scope.new_member);
         delete request_data.registered;
-
         $api.team_member_add($routeParams.id, request_data).then(function(new_member) {
           // make sure this person is not already a member (the API call is idempotent, no worries)
           for (var i=0; i<members.length; i++) {
@@ -106,13 +104,17 @@ angular.module('app')
       };
     });
 
-    $scope.new_member = {
-      email: "",
-      public: true,
-      admin: false,
-      developer: true,
-      registered: false
+    $scope.reset_member_form = function() {
+      $scope.new_member = {
+        email: "",
+        public: true,
+        admin: false,
+        developer: true,
+        registered: false
+      };
     };
+
+    $scope.reset_member_form();
 
     $scope.checked_emails = {};
 
@@ -149,16 +151,23 @@ angular.module('app')
         if ($scope.new_member.registered) {
           // if the email is already registered with a bountysource account, just add them to the team
           $scope.add_member();
-
         } else {
           // email not registered with bountysource, send invite email
           var request_data = angular.copy($scope.new_member);
           delete request_data.error;
           delete request_data.registered;
           $api.team_invite_create($routeParams.id, request_data).then(function(new_invite) {
-            invites.push(new_invite);
+            if (new_invite.meta.success) {
+              invites.push(new_invite.data);
+            } else if (new_invite.meta.status === 422) {
+              $scope.add_member_error = {
+                message: request_data.email + " has already been sent an invitation!",
+                type: "info"
+              };
+            }
           });
         }
+        $scope.reset_member_form();
       };
 
       return invites;
