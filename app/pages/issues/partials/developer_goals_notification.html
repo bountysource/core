@@ -41,7 +41,7 @@
           </td>
           <td style="width: 40%">
             <div class="issue-goals progress progress-striped" style="margin: 0;">
-              <div class="bar bar-success" style="width: {{ 100*issue.bounty_total/developer_goal.amount | at_least:15 | at_most:100 | percent }};">
+              <div class="bar bar-success" style="width: {{ 100*issue.bounty_total/developer_goal.amount | at_least:15 | at_most:100 | number:0 }}%;">
                 <span>{{issue.bounty_total/developer_goal.amount | percent}}</span>
               </div>
             </div>
