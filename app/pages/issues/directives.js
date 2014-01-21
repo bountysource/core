@@ -58,6 +58,9 @@ angular.module('app').
         } else {
           scope.issue_sort = { "column": "participants_count", "desc": true };
         }
+        scope.issue_sorter = function(obj) {
+          return obj[scope.issue_sort.column] || 0;
+        };
         scope.update_sort = function(obj, column) {
           if (obj.column === column) {
             obj.desc = !obj.desc;
