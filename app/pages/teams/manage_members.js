@@ -27,7 +27,7 @@ angular.module('app')
 
       $scope.member_changed = function(member) {
         var master = angular.copy(member.$master);
-        delete master.$master;
+        delete master.$master;  
         delete master.$dirty;
         member.$dirty = !angular.equals(member, master);
       };
@@ -40,27 +40,64 @@ angular.module('app')
         member.$dirty = false;
       };
 
+      // logic to process attribute updates and update UI. Used for budget updates and team role updates.
+      function process_update (member, payload, type) {
+        type === 'budget' ? member.$budget_saving = true : member.$saving = true;
+        $api.team_member_update($routeParams.id, member.id, payload).then(function(response) {
+          type === 'budget' ? member.$budget_saving = false : member.$saving = false;
+          if ('error' in response) {
+            delete member.$saved_at;
+            $scope.cancel_member_changes(member);
+            type === 'budget' ? member.$budget_update_error = response.error : member.$update_error = response.error;
+          } else {
+            delete member.$update_error;
+            type === 'budget' ? member.$budget_saved_at = new Date() : member.$saved_at = new Date();
+            member.new_budget = false;
+            //hacky way to update balance after succesfully reloading of budget
+            if (type === 'budget') {
+              member.balance = response.balance;
+              member.budget = response.budget;
+            }
+            member.$master = angular.copy(member);
+            member.$dirty = false;
+          }
+        });
+      }
+
       $scope.update_member = function(member) {
         var payload = {
           admin: member.is_admin,
           developer: member.is_developer,
           public: member.is_public
         };
-
-        member.$master = angular.copy(member);
-        member.$dirty = false;
-
         if (member.id === $scope.current_person.id) {
           $scope.is_admin   = member.is_admin;
           $scope.is_developer = member.is_developer;
           $scope.is_public  = member.is_public;
         }
+        process_update(member, payload, 'privileges');
+      };
 
-        member.$saving = true;
-        $api.team_member_update($routeParams.id, member.id, payload).then(function() {
-          member.$saving = false;
-          member.$saved_at = new Date();
-        });
+      $scope.update_budget = function (member) {
+        var payload = {
+          budget: member.budget
+        };
+        process_update(member, payload, 'budget');
+      };
+
+      $scope.delete_budget = function (member) {
+        var payload = {
+          budget: null
+        };
+        process_update(member, payload, 'budget');
+      };
+
+      $scope.creating_new_budget = function (member) {
+        if (member.budget == member.$master.budget || member.budget === 0) {
+          member.new_budget = false;
+        } else if (member.budget > 0) {
+          member.new_budget = true;
+        }
       };
 
       $scope.remove_member = function(member) {
@@ -103,6 +140,7 @@ angular.module('app')
         });
       };
     });
+
 
     $scope.reset_member_form = function() {
       $scope.new_member = {

@@ -32,9 +32,13 @@
       </div>
 
       <!-- Account Balance -->
-      <div class="text-center" ng-show="is_developer || is_admin">
+      <div class="text-center" ng-show="is_admin || !has_remaining_balance">
         <h4>Team Account Balance</h4>
         <strong>{{team.account_balance | currency}}</strong>
+      </div>
+      <div class="text-center" ng-show="is_developer && has_remaining_balance">
+        <h4>Remaining Balance</h4>
+        <strong>{{has_remaining_balance | currency}}</strong>
       </div>
     </div>
   </div>

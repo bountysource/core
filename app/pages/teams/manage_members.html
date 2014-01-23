@@ -17,76 +17,132 @@
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
       <div class="row-fluid">
-        <div class="span8">
+        <div class="span12">
           <h3 style="margin-bottom: 0;">Members</h3>
           <p>Members of your team. You can change the permissions for your team members.</p>
           <table class="table members table-hover table-striped" ng-show="members.length > 0">
             <thead>
-            <tr>
-              <th style="width: 30%;">Username</th>
-              <th style="width: 10%; text-align: center;">Public</th>
-              <th style="width: 10%; text-align: center;">Developer</th>
-              <th style="width: 10%; text-align: center;">Admin</th>
-              <th style="width: 10%; text-align: center;"></th>
-            </tr>
+              <tr>
+                <th style="width: 30%;">Username</th>
+                <th style="width: 20%; text-align: center;">Public <i class="icon-question-sign" tooltip="Publicly displayed as a member of TestTeam on the members tab."></i></th>
+                <th style="width: 20%; text-align: center;">Developer <i class="icon-question-sign" tooltip="Authorized to spend money from the TestTeam account. Can change team settings (name, logo, projects used, etc)."></i></th>
+                <th style="width: 20%; text-align: center;">Admin <i class="icon-question-sign" tooltip="Can add/remove projects and members to the team, as well as assign roles to members."></i></th>
+                <th style="width: 10%; text-align: center;"></th>
+              </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="member in members | orderBy:'+added_at'" ng-class="{ 'info': (member.$dirty) }">
-              <td>
-                <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
-                <div ng-show="member.$saving">
-                  <small class="text-info"><i>Saving changes...</i></small>
-                </div>
-                <div ng-show="!member.$saving && member.$saved_at">
-                  <small class="muted text-success">Saved {{member.$saved_at | date:'medium'}}</small>
-                </div>
-              </td>
-              <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_public" ng-change="member_changed(member)" ng-disabled="member.$saving" />
-              </td>
-              <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_developer" ng-change="member_changed(member)" ng-disabled="member.$saving" />
-              </td>
-              <td style="text-align: center;">
-                <input type="checkbox" ng-model="member.is_admin" ng-change="member_changed(member)" ng-disabled="member.$saving || (is_admin && current_person.id == member.id)" />
-              </td>
-              <td style="text-align: center;">
-                <div collapse="member.$dirty">
-                  <button ng-click="remove_member(member)" class="btn btn-mini btn-block btn-danger" ng-disabled="member.id == current_person.id"><i class="icon-trash icon-white"></i></button>
-                </div>
-                <div collapse="!member.$dirty">
-                  <button ng-click="update_member(member)" class="btn btn-mini btn-primary" ><i class="icon-ok icon-white"></i></button>
-                  <button ng-click="cancel_member_changes(member)" class="btn btn-mini" ><i class="icon-remove"></i></button>
-                </div>
-              </td>
-            </tr>
+              <tr ng-repeat="member in members | orderBy:'+added_at'" ng-class="{ 'info': (member.$dirty) }">
+                <td>
+                  <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
+                  <div ng-show="member.$saving">
+                    <small class="text-info"><i>Saving changes...</i></small>
+                  </div>
+                  <div ng-show="!member.$saving && member.$saved_at">
+                    <small class="muted text-success">Saved {{member.$saved_at | date:'short'}}</small>
+                  </div>
+                  <div ng-show="!member.$saving && member.$update_error">
+                    <small class="muted text-error">{{ member.$update_error }}</small>
+                  </div>
+                </td>
+                <td style="text-align: center;">
+                  <input type="checkbox" ng-model="member.is_public" ng-change="member_changed(member)" ng-disabled="member.$saving" />
+                </td>
+                <td style="text-align: center;">
+                  <input type="checkbox" ng-model="member.is_developer" ng-change="member_changed(member)" ng-disabled="member.$saving" />
+                </td>
+                <td style="text-align: center;">
+                  <input type="checkbox" ng-model="member.is_admin" ng-change="member_changed(member)" ng-disabled="member.$saving || (is_admin && current_person.id == member.id)" />
+                </td>
+                <td style="text-align: center;">
+                  <div collapse="member.$dirty">
+                    <button ng-click="remove_member(member)" class="btn btn-mini btn-block btn-danger" ng-disabled="member.id == current_person.id"><i class="icon-trash icon-white"></i> Remove</button>
+                  </div>
+                  <div collapse="!member.$dirty">
+                    <button ng-click="update_member(member)" class="btn btn-mini btn-primary" ><i class="icon-ok icon-white"></i></button>
+                    <button ng-click="cancel_member_changes(member)" class="btn btn-mini" ><i class="icon-remove"></i></button>
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
+
+          <div ng-show="team.type == 'Team::Enterprise'">
+            <h3 style="margin-bottom: 0;">Spending Limits</h3>
+            <p>You can limit how much each team member can spend.</p>
+            <table class="table members table-hover" ng-show="members.length > 0">
+            <thead>
+              <tr>
+                <th style="width: 30%;">Username</th>
+                <th style="width: 35%; text-align: center;">Set Spending Limit</th>
+                <th style="width: 15%; text-align: center;">Available</th>
+                <th style="width: 10%; text-align: center;"></th>
+                <th style="width: 10%; text-align: center;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="member in members | orderBy:'+added_at'">
+                <td class="center-height">
+                  <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
+                  <div ng-show="member.$budget_saving">
+                    <small class="text-info"><i>Saving changes...</i></small>
+                  </div>
+                  <div ng-show="!member.$budget_saving && member.$budget_saved_at">
+                    <small class="muted text-success">Saved {{member.$budget_saved_at | date:'short'}}</small>
+                  </div>
+                  <div ng-show="!member.$budget_saving && member.$budget_update_error">
+                    <small class="muted text-error">{{ member.$budget_update_error }}</small>
+                  </div>
+                </td>
+                <td style="text-align: center;" class="center-height">
+                  <div class="input-prepend input-append" style="margin-bottom: 0px;">
+                    <span class="add-on">$</span>
+                    <input class="span6" type="number" ng-model="member.budget" ng-disabled="!member.is_developer" ng-change="creating_new_budget(member)"/>
+                    <span class="add-on">.00</span>
+                  </div>
+                </td>
+                <td style="text-align: center;" class="center-height">
+                  <span ng-show="member.balance != null">{{ member.balance | dollars }}</span>
+                  <span ng-show="!member.$master.is_developer">Can't spend</span>
+                  <span ng-show="member.$master.budget == null && member.$master.is_developer">No Limit</span>
+                </td>
+                <td class="center-height">
+                  <span ng-show="member.$master.budget"><button class="btn btn-success btn-block btn-mini" ng-disabled="member.$master.balance == member.$master.budget" ng-click="update_budget(member)"><i class="icon-repeat icon-white"></i> Reload</button></span>
+                </td>
+                <td class="center-height">
+                  <span ng-show="member.$master.budget > 0 && !member.new_budget"><button class="btn btn-danger btn-block btn-mini" ng-click="delete_budget(member)"><i class="icon-trash icon-white"></i> Remove</button></span>
+                  <span ng-show="member.new_budget"><button class="btn btn-primary btn-block btn-mini" ng-click="update_budget(member)"><i class="icon-ok icon-white"></i> Save</button></span> 
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          </div>
           <div id="pending-members" collapse="!pending_invites || pending_invites.length <= 0">
             <h3 style="margin-bottom: 0;">Pending Members</h3>
             <table class="table table-hover table-striped">
               <thead>
-              <tr>
-                <th style="width: 30%;">Email</th>
-                <th style="width: 10%; text-align: center;">Public</th>
-                <th style="width: 10%; text-align: center;">Developer</th>
-                <th style="width: 10%; text-align: center;">Admin</th>
-                <th style="width: 10%; text-align: center;"></th>
-              </tr>
+                <tr>
+                  <th style="width: 30%;">Email</th>
+                  <th style="width: 10%; text-align: center;">Public</th>
+                  <th style="width: 10%; text-align: center;">Developer</th>
+                  <th style="width: 10%; text-align: center;">Admin</th>
+                  <th style="width: 10%; text-align: center;"></th>
+                </tr>
               </thead>
               <tbody>
-              <tr ng-repeat="invite in pending_invites | orderBy:'+created_at'">
-                <td>
-                  <div><strong>{{invite.email}}</strong></div>
-                  <small class="muted">Invite sent {{invite.created_at | date:'medium'}}</small>
-                </td>
+                <tr ng-repeat="invite in pending_invites | orderBy:'+created_at'">
+                  <td>
+                    <div><strong>{{invite.email}}</strong></div>
+                    <small class="muted">Invite sent {{invite.created_at | date:'medium'}}</small>
+                  </td>
 
-                <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.public" disabled /></td>
-                <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.developer" disabled /></td>
-                <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.admin" disabled /></td>
+                  <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.public" disabled /></td>
+                  <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.developer" disabled /></td>
+                  <td style="text-align: center; cursor: default;"><input type="checkbox" ng-checked="invite.admin" disabled /></td>
 
-                <td style="text-align: center;"><button ng-click="team_invite_reject(invite)" class="btn btn-mini btn-block" tooltip="Cancel Invite"><i class="icon-remove"></i></button></td>
-              </tr>
+                  <td style="text-align: center;"><button ng-click="team_invite_reject(invite)" class="btn btn-mini btn-block" tooltip="Cancel Invite"><i class="icon-remove"></i></button></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -126,16 +182,6 @@
           </form>
           <div ng-show="add_member_error.message">
             <alert type="add_member_error.type" close="add_member_error.message = null">{{add_member_error.message}}</alert>
-          </div>
-        </div>
-        <div class="span4">
-          <div class="well">
-            <h4>Public</h4>
-            <p>Publicly displayed as a member of {{team.name}} on the <a ng-href="/teams/{{team.slug}}/members">members</a> tab.</p>
-            <h4>Developer</h4>
-            <p>Authorized to <strong>spend</strong> money from the {{team.name}} account. Can change team settings (name, logo, projects used, etc).</p>
-            <h4>Admin</h4>
-            <p>Can <strong>add/remove projects and members</strong> to the team, as well as <strong>assign roles</strong> to members.</p>
           </div>
         </div>
       </div>

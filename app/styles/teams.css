@@ -1,2 +1,3 @@
 li.member-thumbnail { text-align: center; }
 li.member-thumbnail .member-thumbnail-actions { text-align: right; }
+td.center-height { vertical-align: middle;}

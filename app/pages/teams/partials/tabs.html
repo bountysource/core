@@ -12,7 +12,7 @@
   <li ng-show="members.length > 0" ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">
     Members
   </a></li>
-  <li ng-class="{ active: active_tab('activity') }"><a ng-href="/teams/{{team.slug}}/activity">
+  <li ng-hide="true" ng-class="{ active: active_tab('activity') }"><a ng-href="/teams/{{team.slug}}/activity">
     Activity
   </a></li>
   <li ng-show="team.open_bounties_amount > 0" ng-class="{ active: active_tab('bounties') }"><a ng-href="/teams/{{team.slug}}/bounties">

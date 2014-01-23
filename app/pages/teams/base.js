@@ -49,6 +49,7 @@ angular.module('app')
               $scope.is_admin   = members[i].is_admin;
               $scope.is_developer = members[i].is_developer;
               $scope.is_public  = members[i].is_public;
+              $scope.has_remaining_balance = members[i].balance;
               break;
             }
           }
