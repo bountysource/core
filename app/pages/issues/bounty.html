@@ -47,11 +47,11 @@
               <!-- Team accounts -->
               <div ng-show="teams.length > 0">
                 <label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="radio">
-                  <input type="radio" ng-model="bounty.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0 || team.member_balance <= 0" ng-change="select_team(team)" />
+                  <input type="radio" ng-model="bounty.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0 || team.member_balance == 0" ng-change="select_team(team)" />
                   <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
               <span ng-class="{ 'muted': (!team.is_developer || team.account_balance <= 0) }">
                 {{team.name}}
-                <strong ng-show="team.is_developer && (team.member_balance != nil && team.account_balance < team.member_balance )">{{ team.account_balance | dollars }}</strong>
+                <strong ng-show="team.is_developer && (team.member_balance == null || team.account_balance < team.member_balance)">{{ team.account_balance | dollars }}</strong>
                 <strong ng-show="team.is_developer && team.account_balance > team.member_balance && team.member_balance != nil">{{ team.member_balance | dollars }}</strong>
                 <strong ng-hide="team.is_developer">$0</strong>
                 <span ng-show="team.is_admin && team.account_balance < 100 && team.type != 'Team::Enterprise'">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
