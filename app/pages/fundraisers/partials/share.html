@@ -4,5 +4,18 @@
 <br />
 <br />
 <p class="muted">Embed Fundraiser on your webpage:</p>
-<input select-on-click class="span12" type="text" value="<iframe src='https://api.bountysource.com/user/fundraisers/{{fundraiser.id}}/embed' style='width: 238px; height: 402px; overflow: hidden; border: 0px;'></iframe>" readonly/>
+<div class="input-prepend">
+  <span class="add-on"><a href="#" data-toggle="tooltip" title="copy to clipboard"><i class="icon-share"></i></a></span>
+  <input select-on-click class="span12" type="text" value="<iframe src='https://api.bountysource.com/user/fundraisers/{{fundraiser.id}}/embed' style='width: 238px; height: 402px; overflow: hidden; border: 0px;'></iframe>" readonly/>
 </div>
+
+</div>
+<script type="text/javascript" src="clipboardAssets/jquery.zclip.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("a[title&='clipboard']").zclip({
+			path: "clipboardAssets/ZeroClipboard.swf",
+			copy: function(){return $("input[value$='</iframe>']").val();}
+		});
+	});
+</script>
