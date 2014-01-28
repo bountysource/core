@@ -1,3 +1,14 @@
 li.member-thumbnail { text-align: center; }
 li.member-thumbnail .member-thumbnail-actions { text-align: right; }
 td.center-height { vertical-align: middle;}
+td.teams-activity-cell {
+  text-overflow: ellipsis;
+  max-width: 869px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+}
+
+td.teams-date-cell {
+  width: 20%;
+}
