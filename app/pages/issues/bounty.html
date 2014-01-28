@@ -17,7 +17,7 @@
           <alert type="'error'" close="error = null">{{error}}</alert>
         </div>
 
-        <form name="form" class="form-horizontal" ng-submit="follow()">
+        <form name="form" class="form-horizontal">
           <div class="control-group">
             <label class="control-label">Payment Method:</label>
             <div class="controls">
@@ -153,13 +153,12 @@
 
           <div class="control-group">
             <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="following" ng-checked="issue.tracker.followed" />
+              <label class="checkbox" ng-show="!issue.tracker.followed">
+                <input type="checkbox" ng-model="following"/>
                 <span>Follow {{issue.tracker.name}} ?</span>
               </label>
             </div>
           </div>
-
         </form>
       </div>
     </div>
