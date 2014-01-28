@@ -72,3 +72,8 @@ input#bounty-share-url {
   text-align: center;
   margin-top: 15px;
 }
+
+td img.issue-table-tracker-img {
+  max-height:20px;
+  max-width:20px;
+}
