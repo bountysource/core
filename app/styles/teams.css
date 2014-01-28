@@ -12,3 +12,8 @@ td.teams-activity-cell {
 td.teams-date-cell {
   width: 20%;
 }
+
+a.team-member-card {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

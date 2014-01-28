@@ -16,7 +16,7 @@
 
       <ul class="thumbnails">
         <li class="span2 member-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
-          <a ng-href="/people/{{member.slug}}" class="thumbnail">
+          <a ng-href="/people/{{member.slug}}" class="thumbnail team-member-card">
             <img ng-src="{{member.medium_image_url}}" />
             {{member.display_name}}
           </a>
