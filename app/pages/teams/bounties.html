@@ -24,7 +24,7 @@
 
       <div ng-show="bounties_resolved">
         <div ng-show="open_bounties.length > 0">
-          <h4>Bounty Summary</h4>
+          <h3 class="no-margin">Bounty Summary</h3>
           <table class="table table-condensed table-striped">
             <thead>
               <tr>
@@ -49,7 +49,7 @@
               </tr>
             </tbody>
           </table>
-          <h4>Bounties</h4>
+          <h3 class="no-margin">Open Bounties</h3>
           <table class="table table-condensed table-striped">
             <thead>
               <tr>
@@ -80,7 +80,7 @@
           </table>
         </div>
         <div ng-show="claimed_bounties.length > 0">
-          <h3 style="margin: 0;">Claimed Bounties</h3>
+          <h3 class="no-margin">Claimed Bounties</h3>
           <p>Bounties posted by {{team.name}} that have been claimed by developers.</p>
           <table class="table table-condensed table-striped">
             <thead>
@@ -97,7 +97,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="bounty in claimed_bounties | orderBy:claimed_sort.column:claimed_sort.desc">
-                <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{bounty.issue.tracker.name}}</a></td>
+                <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img"></img>  {{bounty.issue.tracker.name}}</a></td>
                 <td>
                   <a ng-href="/issues/{{bounty.issue.slug}}">
                     <i ng-show="bounty.issue.bounty_total >= 1000" class="icon-fire"></i>

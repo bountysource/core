@@ -17,3 +17,7 @@ a.team-member-card {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+h3.no-margin {
+  margin: 0px;
+}
