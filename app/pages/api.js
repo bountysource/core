@@ -259,6 +259,12 @@ angular.module('api.bountysource',[]).
       });
     };
 
+    this.cancel_all_notifications = function (email) {
+      return this.call("/notifications/cancel_all", 'POST', { email: email }, function (response) {
+        return response.meta.success;
+      });
+    };
+
     this.change_password = function(data) {
       return this.call("/user/change_password", "POST", data);
     };
