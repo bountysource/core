@@ -1,9 +1,8 @@
 <div ng-hide="approved">
   <div class="hero-unit text-center">
-    <h2>Unsubscribe</h2>
-    <p class="lead">Unsubscribe <strong>{{email}}</strong> from all Bountysource emails?</p>
+    <p class="lead">Block <strong>{{email}}</strong> from future Bountysource emails?</p>
     <a style="width: 110px;" href="/" class="btn btn-large btn-danger">Cancel</a>
-    <button style="width: 150px;" ng-click="unsubscribe()" class="btn btn-large btn-success">Unsubscribe</button>
+    <button style="width: 150px;" ng-click="unsubscribe()" class="btn btn-large btn-success">Remove</button>
   </div>
 </div>
 <div ng-show="approved">
@@ -11,14 +10,12 @@
 
   <div class="hero-unit" ng-hide="processing">
     <div class="text-center">
-      <h2>Unsubscribed</h2>
+      <h2>Removed</h2>
 
       <!-- This should never happen, but just in case... -->
       <div ng-hide="success">
         <p class="lead text-error">Oh no! Something went wrong, please contact <a nref="email:support@bountysource.com">support@bountysource.com</a>.</p>
       </div>
-
-      <a href="/" class="btn btn-large btn-primary">Continue to Bountysource</a>
     </div>
   </div>
 </div>
