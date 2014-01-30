@@ -831,7 +831,7 @@ angular.module('api.bountysource',[]).
       var port = $location.port();
 
       var redirect_params = {
-        provide: provider,
+        provider: provider,
         follow_tracker_ids: (options.follow_tracker_ids || []).join(',')
       };
 
