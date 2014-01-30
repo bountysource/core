@@ -19,7 +19,7 @@
           <div>
             <span><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name | truncate:14 }}</a></span>
           </div>
-          <div ng-switch="solution.status">
+          <div ng-switch="solution.status.type">
             <span ng-switch-when="SolutionEvent::Started" class="label label-info">Started Solution</span>
             <span ng-switch-when="SolutionEvent::CheckIn" class="label label-info">Checked In</span>
             <span ng-switch-when="SolutionEvent::Stopped" class="label label-important">Stopped Working</span>

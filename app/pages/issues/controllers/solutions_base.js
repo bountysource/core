@@ -13,7 +13,8 @@ angular.module('app')
       $scope.solutions = $api.solutions_get(issue.id).then(function(solutions) {
         // Get the lastest event and set as the Solution status
         for (var i=0; i<solutions.length; i++) {
-          solutions[i].status = solutions[i].solution_events[0].type;
+          // api call will return array from newest to oldest
+          solutions[i].status = solutions[i].solution_events[0];
         }
         return solutions;
       });
@@ -99,6 +100,18 @@ angular.module('app')
     $scope.set_status_for_solution = function(solution) {
       if (solution && solution.solution_events) {
         $scope.status = $filter('orderBy')(solution.solution_events, ["-created_at"])[0];
+        //update corresponding object in $scope.solutions array to show correct solution status
+        $scope.solutions.then(function (new_solutions_array) {
+          for (var i = 0; i < new_solutions_array.length; i++) {
+            if(new_solutions_array[i].id == solution.id) {
+              for(var n in solution) {
+                new_solutions_array[i][n] = solution[n];
+              }
+              new_solutions_array[i].status = solution.solution_events[0];
+              break;
+            }
+          };
+        });
       }
     };
   });
