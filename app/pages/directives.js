@@ -286,30 +286,30 @@ angular.module('app').
       }
     };
   }]).
-  directive('trackerSigninModal', ['$routeParams', '$window', '$location', '$api', function($routeParams, $window, $location, $api) {
+  directive('trackerSigninModal', ['$rootScope', '$routeParams', '$window', '$location', '$api', function($rootScope, $routeParams, $window, $location, $api) {
     return {
       restrict: 'E',
       templateUrl: 'pages/templates/trackerSigninModal.html',
       scope: {
         tracker: '='
       },
-      link: function(scope, element, attrs, controller) {
-        scope.$$showModal = $window.parseInt($routeParams.signin, 10) === 1;
+      link: function(scope) {
+        $rootScope.$watch('current_person', function(person) {
+          scope.$$showModal = ($window.parseInt($routeParams.signin, 10) === 1) && person === false;
 
-        scope.openModal = function() {
-          scope.$$showModal = true;
-        };
+          scope.openModal = function() {
+            scope.$$showModal = true;
+          };
 
-        scope.closeModal = function() {
-          scope.$$showModal = false;
-        };
+          scope.closeModal = function() {
+            scope.$$showModal = false;
+          };
 
-        scope.signin = function() {
-          $api.set_post_auth_url($location.path());
-          $window.location = $api.signin_url_for('github', { follow_tracker_ids: [scope.tracker.id] });
-        };
-
-        console.log('trackerSigninModal', $routeParams);
+          scope.signin = function() {
+            $api.set_post_auth_url($location.path());
+            $window.location = $api.signin_url_for('github', { follow_tracker_ids: [scope.tracker.id] });
+          };
+        });
       }
     };
   }]);

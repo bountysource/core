@@ -80,6 +80,15 @@ angular.module('app')
       }
     };
 
+    $scope.follow_trackers_from_route_params = function() {
+      if ($routeParams.follow_tracker_ids) {
+        var tracker_ids = $routeParams.follow_tracker_ids.split(',');
+        for (var i=0; i<tracker_ids.length; i++) {
+          $api.tracker_follow(tracker_ids[i]);
+        }
+      }
+    };
+
     // form submit
     $scope.signin = function() {
       if ($scope.signin_or_signup !== 'pending') {
@@ -89,6 +98,9 @@ angular.module('app')
           if (response.error) {
             $scope.error = response.error;
           } else {
+            // Hack: Follow Trackers whose IDs are appended to the redirect URL.
+            $scope.follow_trackers_from_route_params();
+
             $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
           }
         });
@@ -103,6 +115,9 @@ angular.module('app')
           if (response.error) {
             $scope.error = response.error;
           } else {
+            // Hack: Follow Trackers whose IDs are appended to the redirect URL.
+            $scope.follow_trackers_from_route_params();
+
             $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
           }
         });

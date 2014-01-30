@@ -72,17 +72,6 @@ angular.module('app')
       show_issue_number: $location.search().show_issue_number || false
     };
 
-    $scope.$watch('issue_filter_options', function(filters) {
-      var key, value;
-      for (key in filters) {
-        value = filters[key];
-        if (value === null || value === false || value === "bounty_total") {
-          delete filters[key];
-        }
-      }
-      $location.search(filters).replace();
-    }, angular.noop, true);
-
     $scope.update_filter_options = function() {
       $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min) || null;
       $scope.issue_filter_options.bounty_max = parseFloat($scope.issue_filter_options.bounty_max) || null;
