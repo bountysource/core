@@ -309,6 +309,18 @@ angular.module('app').
             $api.set_post_auth_url($location.path());
             $window.location = $api.signin_url_for('github', { follow_tracker_ids: [scope.tracker.id] });
           };
+
+          scope.spliceParamFromRouteParams = function() {
+            var params = angular.copy($location.search());
+            for (var k in params) {
+              if (k === 'signin') {
+                delete params[k];
+              }
+            }
+            $location.search(params);
+          };
+
+          scope.spliceParamFromRouteParams();
         });
       }
     };
