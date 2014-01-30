@@ -830,8 +830,17 @@ angular.module('api.bountysource',[]).
       var host = $location.host();
       var port = $location.port();
 
-      options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?provider='+provider;
-      if ($api.get_access_token()) { options.access_token = $api.get_access_token(); }
+      var redirect_params = {
+        provide: provider,
+        follow_tracker_ids: (options.follow_tracker_ids || []).join(',')
+      };
+
+      options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?' + $api.toKeyValue(redirect_params);
+
+      if ($api.get_access_token()) {
+        options.access_token = $api.get_access_token();
+      }
+
       return $rootScope.api_host.replace(/\/$/,'') + '/auth/' + provider + '?' + $api.toKeyValue(options);
     };
 

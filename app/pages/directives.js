@@ -267,7 +267,8 @@ angular.module('app').
         });
       }
     };
-  }]).directive('abRandomize', ['$rootScope', '$compile', function ($rootScope, $compile) {
+  }]).
+  directive('abRandomize', ['$rootScope', '$compile', function ($rootScope, $compile) {
     return {
       restrict: "AC",
       link: function (scope, element, attrs) {
@@ -282,6 +283,33 @@ angular.module('app').
           element.append(children_array);
           $compile(element.contents())(scope);
         });
+      }
+    };
+  }]).
+  directive('trackerSigninModal', ['$routeParams', '$window', '$location', '$api', function($routeParams, $window, $location, $api) {
+    return {
+      restrict: 'E',
+      templateUrl: 'pages/templates/trackerSigninModal.html',
+      scope: {
+        tracker: '='
+      },
+      link: function(scope, element, attrs, controller) {
+        scope.$$showModal = $window.parseInt($routeParams.signin, 10) === 1;
+
+        scope.openModal = function() {
+          scope.$$showModal = true;
+        };
+
+        scope.closeModal = function() {
+          scope.$$showModal = false;
+        };
+
+        scope.signin = function() {
+          $api.set_post_auth_url($location.path());
+          $window.location = $api.signin_url_for('github', { follow_tracker_ids: [scope.tracker.id] });
+        };
+
+        console.log('trackerSigninModal', $routeParams);
       }
     };
   }]);

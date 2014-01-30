@@ -10,16 +10,14 @@ angular.module('app')
       });
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
-    $scope.tracker = $api.tracker_get($routeParams.id).then(function(tracker) {
+    $api.tracker_get($routeParams.id).then(function(tracker) {
       // Edge case: GitHub repo changes owner, and we create a new Tracker model.
       // If the requested tracker model has a redirect to another, change the URL to that tracker.
       if (($routeParams.id || '').split('-')[0] !== tracker.id) {
-        $location.url("/trackers/"+tracker.slug).replace();
+        $location.path("/trackers/"+tracker.slug).replace();
       }
 
       $pageTitle.set(tracker.name, 'Projects');
-
-      $scope.init_tags(tracker);
 
       // follow and unfollow API method wrappers
       tracker.follow = function() {
@@ -35,34 +33,10 @@ angular.module('app')
         }
       };
 
-      // model to create a new tag
-      tracker.new_tag = { name: null };
-
-      // method to create new tags
-      tracker.create_tag = function() {
-        if (!$scope.current_person) { return $api.require_signin(); }
-        $api.tracker_tags_create(tracker.id, tracker.new_tag.name).then(function(new_tag_relation) {
-          // only push it if it doesn't exist
-          var push_it_real_good = true;
-          for (var i=0; i<tracker.tags.length; i++) {
-            if (tracker.tags[i].id === new_tag_relation.id) {
-              push_it_real_good = false;
-            }
-          }
-          if (push_it_real_good) {
-            $scope.init_tag(tracker, new_tag_relation);
-            tracker.tags.push(new_tag_relation);
-          }
-
-          // null out the model
-          tracker.new_tag.name = null;
-        });
-      };
-
       // Load issues for tracker. If the tracker was just created (has not been synced yet),
       // throw in a timeout to allow time for issues to be added
       $timeout(function() {
-        $scope.issues = $api.tracker_issues_get($routeParams.id).then(function(issues) {
+        $api.tracker_issues_get($routeParams.id).then(function(issues) {
           $scope.issues_resolved = true;
           $scope.open_bounties = 0; //frontend count of unclaimed bounties
           for (var i=0; i<issues.length; i++) {
@@ -75,30 +49,31 @@ angular.module('app')
             issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
             issues[i].comment_count = issues[i].comment_count || 0;
           }
+          $scope.issues = issues;
           return issues;
         });
       }, tracker.synced_at ? 0 : 2500);
 
+      $scope.tracker = tracker;
       return tracker;
     });
 
     $scope.issue_filter_options = {
-      text:          $location.search().text                    || null,
-      bounty_min:    $location.search().bounty_min              || null,
-      bounty_max:    $location.search().bounty_max              || null,
+      text: $location.search().text || null,
+      bounty_min: $location.search().bounty_min || null,
+      bounty_max: $location.search().bounty_max || null,
       only_valuable: $location.search().only_valuable || false,
-      hide_closed:   $location.search().hide_closed   || false,
-      hide_open:     $location.search().hide_open     || false,
+      hide_closed: $location.search().hide_closed || false,
+      hide_open: $location.search().hide_open || false,
       show_paid_out: $location.search().show_paid_out || false,
-      sort:          $location.search().sort || "bounty_total",
-      sort_asc:      $location.search().sort_asc || false,
+      sort: $location.search().sort || "bounty_total",
+      sort_asc: $location.search().sort_asc || false,
       show_issue_id: $location.search().show_issue_id || false,
       show_issue_number: $location.search().show_issue_number || false
     };
 
     $scope.$watch('issue_filter_options', function(filters) {
       var key, value;
-      // remove falsy values
       for (key in filters) {
         value = filters[key];
         if (value === null || value === false || value === "bounty_total") {
@@ -106,7 +81,7 @@ angular.module('app')
         }
       }
       $location.search(filters).replace();
-    }, true);
+    }, angular.noop, true);
 
     $scope.update_filter_options = function() {
       $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min) || null;
@@ -157,36 +132,6 @@ angular.module('app')
         $scope.issue_filter_options.sort_asc = false;
         $scope.issue_filter_options.sort = col;
       }
-    };
-
-    $scope.init_tags = function(tracker) {
-      for (var i in tracker.tags) { $scope.init_tag(tracker, tracker.tags[i]); }
-    };
-
-    $scope.init_tag = function(tracker, tag_relation) {
-      tag_relation.upvote = function() {
-        if (!$scope.current_person) { return $api.require_signin(); }
-        $api.tracker_tags_upvote(tracker.id, tag_relation.tag.name).then(function(updated_tag_relation) {
-          update_tracker_relation(tracker, updated_tag_relation);
-        });
-      };
-
-      tag_relation.downvote = function() {
-        if (!$scope.current_person) { return $api.require_signin(); }
-        $api.tracker_tags_downvote(tracker.id, tag_relation.tag.name).then(function(updated_tag_relation) {
-          update_tracker_relation(tracker, updated_tag_relation);
-        });
-      };
-
-      var update_tracker_relation = function(tracker, updated_relation) {
-        // find the tracker relation on the tracker array, then update it's attributes
-        for (var i=0; i<tracker.tags.length; i++) {
-          if (tracker.tags[i].id === updated_relation.id) {
-            for (var k in updated_relation) { tracker.tags[i][k] = updated_relation[k]; }
-            break;
-          }
-        }
-      };
     };
 
     // override the filter and sort settings to only show open bounties

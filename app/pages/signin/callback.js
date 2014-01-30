@@ -13,6 +13,15 @@ angular.module('app')
         if (response === false) {
           $scope.error = "ERROR: Unexpected linked account response.";
         } else {
+
+          // Hack: Follow Trackers whose IDs are appended to the signin redirect URL.
+          if ($routeParams.follow_tracker_ids) {
+            var tracker_ids = $routeParams.follow_tracker_ids.split(',');
+            for (var i=0; i<tracker_ids.length; i++) {
+              $api.tracker_follow(tracker_ids[i]);
+            }
+          }
+
           $window._gaq.push(['_trackEvent', 'Signin', 'Success-3rdParty-Auth']);
         }
       });
@@ -27,34 +36,3 @@ angular.module('app')
       $scope.error = "ERROR: Unknown status.";
     }
   });
-
-
-// SCRATCHPAD: don't require a view
-//angular.module('app')
-//  .config(function ($routeProvider) {
-//    $routeProvider
-//      .when('/signin/callback', {
-//        redirectTo: $injector.invoke(function (route, path, params, $scope, $api) {
-//          console.log($.api);
-//          console.log("OH HAI", params, $scope, $api);
-//
-//          //console.log($scope, $routeParams);
-//          return '/????';
-////
-////          $scope.providers = [
-////            { id: 'github', name: 'GitHub', image_url: 'images/favicon-github.png' },
-////            { id: 'twitter', name: 'Twitter', image_url: 'images/favicon-twitter.png' },
-////            { id: 'facebook', name: 'Facebook', image_url: 'images/favicon-facebook.png' }
-////          ];
-////
-////          $scope.submit = function() {
-////            $api.signin($scope.email, $scope.password);
-////          };
-////
-////          $scope.signin_url_for = $api.signin_url_for;
-////          $scope.signout = $api.signout;
-//        }
-//      });
-//  });
-//
-//
