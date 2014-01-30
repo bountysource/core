@@ -59,10 +59,15 @@ angular.module('app')
 
       var owner_map = [], owner;
       for (var i=0; i<trackers.length; i++) {
-        owner = trackers[i].full_name.split('/')[0];
-        owner_map[owner] = owner_map[owner] || [];
-        trackers[i].owner = owner;
-        owner_map[owner].push(trackers[i]);
+        // This shouldn't be necessary, but sometimes Trackers were being added with no full_name.
+        // This has been addressed in the API going forward, but I am leaving this block in just in case
+        // this pops up again.
+        if (trackers[i].full_name) {
+          owner = trackers[i].full_name.split('/')[0];
+          owner_map[owner] = owner_map[owner] || [];
+          trackers[i].owner = owner;
+          owner_map[owner].push(trackers[i]);
+        }
       }
       // turn object into array so that it can be sorted
       var owner_trackers = [];
