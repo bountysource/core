@@ -13,7 +13,7 @@ angular.module('app')
       $scope.solutions = $api.solutions_get(issue.id).then(function(solutions) {
         // Get the lastest event and set as the Solution status
         for (var i=0; i<solutions.length; i++) {
-          solutions[i].status = solutions[i].solution_events[solutions[i].solution_events.length - 1];
+          solutions[i].status = solutions[i].solution_events[0].type;
         }
         return solutions;
       });

@@ -13,6 +13,7 @@ angular.module('app')
 
     $scope.$on('developerGoalCreateReceived', function(event, new_developer_goal) {
       $scope.my_developer_goal = new_developer_goal;
+      $scope.my_developer_goal.$master = angular.copy(new_developer_goal);
       $scope.developer_goals.then(function(developer_goals) {
         new_developer_goal.person = $scope.current_person;
         developer_goals.push(new_developer_goal);
@@ -25,6 +26,8 @@ angular.module('app')
       for (var k in updated_developer_goal) {
         $scope.my_developer_goal[k] = updated_developer_goal[k];
       }
+
+      $scope.my_developer_goal.$master = angular.copy(updated_developer_goal);
 
       // reload developer goals
       $scope.initialize_developer_goals();
@@ -64,6 +67,7 @@ angular.module('app')
             for (var i=0; i<developer_goals.length; i++) {
               if (developer_goals[i].person.id === current_person.id) {
                 $scope.my_developer_goal = developer_goals[i];
+                $scope.my_developer_goal.$master = angular.copy(developer_goals[i]);
                 break;
               }
             }
