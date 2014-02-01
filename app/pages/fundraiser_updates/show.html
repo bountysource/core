@@ -18,7 +18,7 @@
   <div class="span9">
     <div class="row-fluid">
       <div class="span9">
-        <div ng-show="update" ng-controller="FundraisersController">
+        <div ng-show="update" ng-controller="FundraiserController">
           <div ng-show="!update.published_at" class="alert alert-info"><strong>Note:</strong> This update has not been published. When you're ready, click the 'Publish' button below!</div>
           <h2 ng-show="!update.published_at"><span class="text-info">#{{ fundraiser.updates.length }}</span> {{ update.title || 'Untitled' }}</h2>
           <h2 ng-show="update.published_at"><span class="text-success">#{{ update.number }}</span> {{ update.title }}</h2>
@@ -40,7 +40,7 @@
               </button>
             </div>
           </div>
-          <div ng-bind-html="update.body_html" class="well"></div>
+          <div ng-bind-html="update.body_html"></div>
         </div>
       </div>
       <div class="span3">

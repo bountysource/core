@@ -1,4 +1,4 @@
-<div ng-controller="FundraisersController">
+<div ng-controller="FundraiserShowController">
   <ul class="breadcrumb">
     <li><a href="/">Home</a><span class="divider">»</span></li>
     <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
@@ -42,7 +42,7 @@
               <hr>
             </div>
 
-            <div ng-bind-html-unsafe="sanitized_description"></div>
+            <div ng-bind-html="sanitized_description"></div>
           </div>
 
           <div class="span3">

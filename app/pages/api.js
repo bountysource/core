@@ -195,7 +195,7 @@ angular.module('api.bountysource',[]).
       });
     };
 
-    this.fundraiser_info_get = function(id) {
+    this.fundraiser_reward_info_get = function(id) {
       return this.call("/user/fundraisers/"+id+"/info", function(res) {
         if (res.meta.success) {
           res.data.funding_percentage = Math.round((res.data.total_pledged / res.data.funding_goal) * 100);
