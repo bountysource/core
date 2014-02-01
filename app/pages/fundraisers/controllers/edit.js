@@ -5,7 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/fundraisers/:id/edit', {
         templateUrl: 'pages/fundraisers/edit.html',
-        controller: 'FundraiserEditController',
+        controller: 'FundraiserController',
         resolve: $person
       });
   })
@@ -26,11 +26,11 @@ angular.module('app')
       return teams;
     });
 
-    $scope.fundraiser = $api.fundraiser_get($routeParams.id).then(function(response) {
+    $scope.fundraiser_get_promise.then(function(fundraiser) {
       // cache the fundraiser. angular.copy does a deep copy, FYI
       // if you don't create a copy, these are both bound to the input
 
-      var fundraiser = angular.copy(response);
+      var fundraiser = angular.copy(fundraiser);
       if (fundraiser.team) {
         fundraiser.team_id = fundraiser.team.id;
       }
@@ -42,8 +42,8 @@ angular.module('app')
       delete $scope.changes.image_url;
 
       // also cache rewards
-      $scope.master_rewards = angular.copy(response.rewards);
-      return response;
+      $scope.master_rewards = angular.copy(fundraiser.rewards);
+      return fundraiser;
     });
 
     $scope.cancel = function() { $location.url("/fundraisers/"+$scope.master.slug); };
@@ -59,13 +59,11 @@ angular.module('app')
         }
       });
     };
-  })
 
-  .controller('RewardsController', function($scope, $api) {
     $scope.new_reward = {};
 
     $scope.create_reward = function(fundraiser) {
-      $api.reward_create(fundraiser.id, $scope.new_reward, function(response) {
+      $api.reward_create($routeParams.id, $scope.new_reward, function(response) {
 
         if (response.meta.success) {
           // reset the new_reward model
@@ -79,8 +77,8 @@ angular.module('app')
       });
     };
 
-    $scope.update_reward = function(fundraiser, reward) {
-      $api.reward_update(fundraiser.id, reward.id, reward, function(response) {
+    $scope.update_reward = function(reward) {
+      $api.reward_update($routeParams.id, reward.id, reward, function(response) {
         if (response.meta.success) {
           for (var i=0; i<$scope.rewards.length; i++) {
             if ($scope.rewards[i].id === reward.id) {
@@ -111,8 +109,8 @@ angular.module('app')
       }
     };
 
-    $scope.destroy_reward = function(fundraiser, reward) {
-      $api.reward_destroy(fundraiser.id, reward.id, function(response) {
+    $scope.destroy_reward = function(reward) {
+      $api.reward_destroy($routeParams.id, reward.id, function(response) {
         if (response.meta.success) {
           // traverse the cached rewards, and remove this one
           for (var i=0; i<fundraiser.rewards.length; i++) {
@@ -124,4 +122,5 @@ angular.module('app')
         }
       });
     };
+
   });

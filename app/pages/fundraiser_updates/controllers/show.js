@@ -3,26 +3,25 @@
 angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/fundraisers/:fundraiser_id/updates/:id', {
+      .when('/fundraisers/:id/updates/:update_id', {
         templateUrl: 'pages/fundraiser_updates/show.html',
-        controller: 'FundraiserUpdatesShow'
+        controller: 'FundraiserController'
       });
   })
 
-  .controller('FundraiserUpdatesShow', function ($scope, $routeParams, $location, $api) {
-    $api.fundraiser_update_get($routeParams.fundraiser_id, $routeParams.id).then(function(fundraiser) {
-      $scope.fundraiser = fundraiser;
+  .controller('FundraiserUpdateController', function ($scope, $routeParams, $location, $api) {
+    $api.fundraiser_update_get($routeParams.id, $routeParams.update_id).then(function(fundraiser) {
       $scope.update = fundraiser.update;
       return fundraiser;
     });
 
     $scope.publish = function() {
-      $api.fundraiser_update_publish($routeParams.fundraiser_id, $routeParams.id, function(response) {
+      $api.fundraiser_update_publish($routeParams.id, $routeParams.update_id, function(response) {
         if (response.meta.success) {
           // update the... update
           $scope.update = angular.copy(response.data.update);
 
-          $location.url("/fundraisers/"+$routeParams.fundraiser_id+"/updates/"+$routeParams.id);
+          $location.url("/fundraisers/"+$routeParams.id+"/updates/"+$routeParams.update_id);
         } else {
           $scope.error = response.data.error;
         }
@@ -31,9 +30,9 @@ angular.module('app')
     };
 
     $scope.destroy = function() {
-      $api.fundraiser_update_destroy($routeParams.fundraiser_id, $routeParams.id, function(response) {
+      $api.fundraiser_update_destroy($routeParams.id, $routeParams.update_id, function(response) {
         if (response.meta.success) {
-          $location.url("/fundraisers/"+$routeParams.fundraiser_id+"/updates");
+          $location.url("/fundraisers/"+$routeParams.id+"/updates");
         } else {
           $scope.error = response.data.error;
         }
