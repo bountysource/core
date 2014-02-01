@@ -24,4 +24,17 @@
       </div>
     </li>
   </ul>
+  <br>
+  <h4 style="margin: 0 0 5px 0;">
+    <ng-pluralize count="issue.bounty_claims[0].responses.length"
+                   when="{'0': '',
+                          '1': 'Comment:',
+                          'other': 'Comments:'}">
+
+    </ng-pluralize>
+  </h4>
+  <p ng-repeat="response in issue.bounty_claims[0].responses | emptyFilter">
+    {{ response.description }}<br>
+    -<a ng-href="{{response.person.frontend_path}}">{{ response.person.display_name }}</a>
+  </p>
 </div>
