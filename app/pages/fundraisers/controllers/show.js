@@ -5,18 +5,13 @@ angular.module('app')
     $routeProvider
       .when('/fundraisers/:id', {
         templateUrl: 'pages/fundraisers/show.html',
-        controller: 'FundraiserShowController'
+        controller: 'FundraiserController'
       });
   })
 
   .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
-    $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
-      $scope.fundraiser = fundraiser;
-      return fundraiser;
-    });
-
     // $sanitize but allow iframes (i.e. youtube videos)
-    $scope.fundraiser_get($routeParams.id).then(function(fundraiser) {
+    $scope.fundraiser_get_promise.then(function(fundraiser) {
       if (fundraiser.error) {
         // API returns error if you are not authorized to view it (it hasn't been published)
         // Just redirect to the index page
@@ -41,6 +36,9 @@ angular.module('app')
           }
           $scope.sanitized_description = html;
         }
+
+        $scope.fundraiser = fundraiser;
+        return fundraiser;
       }
     });
 

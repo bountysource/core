@@ -5,24 +5,25 @@ angular.module('app')
     $routeProvider
       .when('/fundraisers/:id/rewards', {
         templateUrl: 'pages/fundraisers/rewards.html',
-        controller: 'FundraiserRewardsInfoController'
+        controller: 'FundraiserController'
       });
   })
 
-  .controller('FundraiserRewardsInfoController', function ($scope, $routeParams, $location, $api) {
-    $api.fundraiser_info_get($routeParams.id).then(function(fundraiser) {
-      $scope.rewards = fundraiser.rewards;
-      $scope.fundraiser = fundraiser;
-
+  .controller('FundraiserRewardInfoController', function ($scope, $routeParams, $location, $api) {
+    $api.fundraiser_reward_info_get($routeParams.id).then(function(rewards) {
       // initially open all of the tabs
-      angular.forEach($scope.rewards, function(r) { r.$is_open = true; });
-
-      return fundraiser;
+      for (var i=0; i<rewards.length; i++) {
+        rewards[i].$is_open = true;
+      }
+      $scope.rewards = rewards;
+      return rewards;
     });
 
     $scope.expand_all = true;
     $scope.toggle_expand_all = function() {
       $scope.expand_all = !$scope.expand_all;
-      for (var i=0; i<$scope.rewards.length; i++) { $scope.rewards[i].$is_open = $scope.expand_all; }
+      for (var i=0; i<$scope.rewards.length; i++) {
+        $scope.rewards[i].$is_open = $scope.expand_all;
+      }
     };
   });
