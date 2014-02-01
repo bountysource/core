@@ -1,54 +1,56 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
-  <li><a ng-href="/fundraisers/{{fundraiser.id}}">{{fundraiser.title ||'Loading...'}}</a><span class="divider">»</span></li>
-  <li><a ng-href="/fundraisers/{{fundraiser.id}}/updates">Updates</a><span class="divider">»</span></li>
-  <li ng-show="update"><a ng-href="/fundraisers/{{fundraiser.id}}/updates/{{update.id}}">Update #{{update.number}}</a></li>
-  <li ng-hide="update"><a ng-href="/fundraisers/{{fundraiser.id}}/updates/{{update.id}}">Loading...</a></li>
-</ul>
+<div ng-controller="FundraiserUpdateController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider">»</span></li>
+    <li><a href="/fundraisers">Fundraisers</a><span class="divider">»</span></li>
+    <li><a ng-href="/fundraisers/{{fundraiser.id}}">{{fundraiser.title ||'Loading...'}}</a><span class="divider">»</span></li>
+    <li><a ng-href="/fundraisers/{{fundraiser.id}}/updates">Updates</a><span class="divider">»</span></li>
+    <li ng-show="update"><a ng-href="/fundraisers/{{fundraiser.id}}/updates/{{update.id}}">Update #{{update.number}}</a></li>
+    <li ng-hide="update"><a ng-href="/fundraisers/{{fundraiser.id}}/updates/{{update.id}}">Loading...</a></li>
+  </ul>
 
-<div ng-include="'pages/fundraisers/partials/header.html'"></div>
-<div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
+  <div ng-include="'pages/fundraisers/partials/header.html'"></div>
+  <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
 
-<div class="row-fluid" ng-show="fundraiser">
-  <div class="span3">
-    <div ng-include="'pages/fundraisers/partials/left_column.html'"></div>
-  </div>
+  <div class="row-fluid" ng-show="fundraiser">
+    <div class="span3">
+      <div ng-include="'pages/fundraisers/partials/left_column.html'"></div>
+    </div>
 
-  <div class="span9">
-    <div class="row-fluid">
-      <div class="span9">
-        <div ng-show="update" ng-controller="FundraiserController">
-          <div ng-show="!update.published_at" class="alert alert-info"><strong>Note:</strong> This update has not been published. When you're ready, click the 'Publish' button below!</div>
-          <h2 ng-show="!update.published_at"><span class="text-info">#{{ fundraiser.updates.length }}</span> {{ update.title || 'Untitled' }}</h2>
-          <h2 ng-show="update.published_at"><span class="text-success">#{{ update.number }}</span> {{ update.title }}</h2>
-          <div class="update-header-options">
-            <span ng-show="!update.published_at" class="update-date muted">Last modified {{ update.updated_at | date }}</span>
-            <span ng-show="update.published_at" class="update-date muted">Published {{update.published_at | date}}</span>
-            <div ng-hide="update.published_at" class="update-options">
-              <a class="btn" ng-href="/fundraisers/{{fundraiser.slug}}/updates/{{update.id}}/edit">
-                <i class="icon-pencil"></i>
-                Edit
-              </a>
-              <button ng-click="publish()" class="btn btn-success">
-                <i class="icon-globe icon-white"></i>
-                Publish
-              </button>
-              <button ng-click="destroy()" class="btn btn-danger">
-                <i class="icon icon-trash icon-white"></i>
-                Delete
-              </button>
+    <div class="span9">
+      <div class="row-fluid">
+        <div class="span9">
+          <div ng-show="update">
+            <div ng-show="!update.published_at" class="alert alert-info"><strong>Note:</strong> This update has not been published. When you're ready, click the 'Publish' button below!</div>
+            <h2 ng-show="!update.published_at"><span class="text-info">#{{ fundraiser.updates.length }}</span> {{ update.title || 'Untitled' }}</h2>
+            <h2 ng-show="update.published_at"><span class="text-success">#{{ update.number }}</span> {{ update.title }}</h2>
+            <div class="update-header-options">
+              <span ng-show="!update.published_at" class="update-date muted">Last modified {{ update.updated_at | date }}</span>
+              <span ng-show="update.published_at" class="update-date muted">Published {{update.published_at | date}}</span>
+              <div ng-hide="update.published_at" class="update-options">
+                <a class="btn" ng-href="/fundraisers/{{fundraiser.slug}}/updates/{{update.id}}/edit">
+                  <i class="icon-pencil"></i>
+                  Edit
+                </a>
+                <button ng-click="publish()" class="btn btn-success">
+                  <i class="icon-globe icon-white"></i>
+                  Publish
+                </button>
+                <button ng-click="destroy()" class="btn btn-danger">
+                  <i class="icon icon-trash icon-white"></i>
+                  Delete
+                </button>
+              </div>
             </div>
+            <div ng-bind-html="update.body_html"></div>
           </div>
-          <div ng-bind-html="update.body_html"></div>
         </div>
-      </div>
-      <div class="span3">
-        <div ng-include="'pages/fundraiser_updates/partials/top_backers.html'"></div>
+        <div class="span3">
+          <div ng-include="'pages/fundraiser_updates/partials/top_backers.html'"></div>
 
-        <div ng-show="fundraiser.rewards.length > 0">
-          <h3>Rewards</h3>
-          <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+          <div ng-show="fundraiser.rewards.length > 0">
+            <h3>Rewards</h3>
+            <div ng-include="'pages/fundraisers/partials/rewards.html'"></div>
+          </div>
         </div>
       </div>
     </div>

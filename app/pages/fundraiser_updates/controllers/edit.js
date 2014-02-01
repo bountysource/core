@@ -3,23 +3,23 @@
 angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/fundraisers/:fundraiser_id/updates/:id/edit', {
+      .when('/fundraisers/:id/updates/:update_id/edit', {
         templateUrl: 'pages/fundraiser_updates/edit.html',
-        controller: 'FundraiserEditUpdateController'
+        controller: 'FundraiserController'
       });
   })
 
   .controller('FundraiserEditUpdateController', function ($scope, $routeParams, $location, $api) {
     $scope.changes = {};
 
-    $api.fundraiser_update_get($routeParams.fundraiser_id, $routeParams.id).then(function(fundraiser) {
+    $api.fundraiser_update_get($routeParams.id, $routeParams.update_id).then(function(fundraiser) {
       $scope.update = fundraiser.update;
       $scope.changes = $scope.update;
       return fundraiser;
     });
 
     $scope.save = function() {
-      $api.fundraiser_update_edit($routeParams.fundraiser_id, $routeParams.id, $scope.changes, function(response) {
+      $api.fundraiser_update_edit($routeParams.id, $routeParams.update_id, $scope.changes, function(response) {
         if (response.meta.success) {
           $scope.back();
         } else {
@@ -29,6 +29,6 @@ angular.module('app')
     };
 
     $scope.back = function() {
-      $location.url("/fundraisers/"+$routeParams.fundraiser_id+"/updates/"+$routeParams.id);
+      $location.url("/fundraisers/"+$routeParams.id+"/updates/"+$routeParams.update_id);
     };
   });
