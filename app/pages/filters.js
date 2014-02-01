@@ -204,4 +204,14 @@ angular.module('app').
     };
   });
 
-
+  // .filter('emptyComment', function() {
+  //   return function(array) {
+  //     var arrayToReturn = [];
+  //     for (var i = 0; i < array.length, i++) {
+  //       if (array[i].description != '') {
+  //         arrayToReturn.push(array[i]);
+  //       }
+  //     }
+  //     return arrayToReturn;
+  //   };
+  // });
