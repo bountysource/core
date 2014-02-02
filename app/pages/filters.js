@@ -202,7 +202,25 @@ angular.module('app').
       }
       return array;
     };
+  }).filter('emptyFilter', function() {
+    return function(array) {
+      var returnArray = [];
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].description != null) {
+          returnArray.push(array[i]);
+        };
+      };
+      return returnArray;
+    };
   });
+
+  // .filter('jeefilter', function() {
+  //   return function(input) {
+  //     if (input != '') {
+  //       return input;
+  //     };
+  //   };
+  // });
 
   // .filter('emptyComment', function() {
   //   return function(array) {
