@@ -310,7 +310,7 @@ angular.module('app').
             $window.location = $api.signin_url_for('github', { follow_tracker_ids: [scope.tracker.id] });
           };
 
-          scope.spliceParamFromRouteParams = function() {
+          scope.spliceParamFromSearch = function() {
             var params = angular.copy($location.search());
             for (var k in params) {
               if (k === 'signin') {
@@ -320,8 +320,41 @@ angular.module('app').
             $location.search(params);
           };
 
-          scope.spliceParamFromRouteParams();
+          scope.spliceParamFromSearch();
         });
+      }
+    };
+  }]).
+  directive('trackerPluginAuthorizeModal', ['$routeParams', '$window', '$location', '$api', function($routeParams, $window, $location, $api) {
+    return {
+      templateUrl: 'pages/templates/trackerPluginAuthorizeModal.html',
+      scope: 'isolated',
+      link: function(scope) {
+        scope.paramName = 'authorize';
+
+        scope.$$showModal = $window.parseInt($routeParams[scope.paramName], 10) === 1;
+
+        scope.closeModal = function() {
+          scope.$$showModal = false;
+        };
+
+        scope.spliceParamFromSearch = function() {
+          var params = angular.copy($location.search());
+          for (var k in params) {
+            if (k === scope.paramName) {
+              delete params[k];
+            }
+          }
+          $location.search(params);
+        };
+
+        scope.spliceParamFromSearch();
+
+        // Save the current URL and go through GitHub oauth to collect the public_repo permission.
+        scope.performOauthDance = function() {
+          $api.set_post_auth_url($location.url());
+          $window.location = $api.signin_url_for('github', { scope: 'public_repo' });
+        }
       }
     };
   }]);

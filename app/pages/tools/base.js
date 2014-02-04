@@ -2,6 +2,11 @@
 
 angular.module('app')
   .controller('BaseToolsController', function ($scope, $routeParams, $window, $location, $api) {
+    // Render a re-authorize link in the presence of the glorious authorize parameter.
+    if (parseInt($routeParams.reauthorize, 10) === 1) {
+      $scope.reAuthorize = true;
+    }
+
     $scope.active_tab = function(tab) {
       if (tab === 'all' && /^\/tools$/i.test($location.path())) { return 'active'; }
       else if (tab === 'installed' && /^\/tools\/installed$/i.test($location.path())) { return 'active'; }

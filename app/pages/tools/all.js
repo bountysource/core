@@ -6,6 +6,7 @@ angular.module('app')
       .when('/tools', {
         templateUrl: 'pages/tools/all.html',
         controller: 'BaseToolsController',
+        reloadOnSearch: false,
         resolve: angular.extend($person, {
           // hacky way to require that the person has enabled public_repo before loading.
           permissions: function($rootScope) {
