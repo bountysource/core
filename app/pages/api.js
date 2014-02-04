@@ -642,15 +642,19 @@ angular.module('api.bountysource',[]).
       return deferred.promise;
     };
 
-    this.start_solution = function(issue_id) {
-      return this.call("/issues/"+issue_id+"/solution", "POST", function(response) {
+    this.start_solution = function(issue_id, data) {
+      return this.call("/issues/"+issue_id+"/solution", "POST", data, function(response) {
         $api.require_signin();
         return response.data;
       });
     };
 
-    this.restart_solution = function (issue_id) {
-      return this.call("/issues/"+issue_id+"/solution/start_work", "POST");
+    this.update_solution = function (issue_id, data) {
+      return this.call("issues/"+issue_id+"/solution", "PUT", data);
+    };
+
+    this.restart_solution = function (issue_id, data) {
+      return this.call("/issues/"+issue_id+"/solution/start_work", "POST", data);
     };
 
     this.stop_solution = function(issue_id) {

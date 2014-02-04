@@ -1,8 +1,15 @@
 'use strict';
 
 angular.module('app')
-  .controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter, $q) {
+  .controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter, $q, $window) {
+    $scope.foo = "bar";
     $scope.initializing = true;
+
+    // by default, hide the solution form
+    $scope.show_solution_form = false;
+
+    // by default, hide the solution edit form
+    $scope.show_solution_edit_form = false;
 
     $scope.my_solution = undefined;
     $scope.bounty_total = 0;
@@ -24,33 +31,78 @@ angular.module('app')
         $scope.initializing = false;
 
         $scope.set_status_for_solution(my_solution);
+        $scope.solution_form = {
+          completion_date: $filter('date')(my_solution.completion_date, 'M-d-y'),
+          url: my_solution.url,
+          note: my_solution.note
+        };
 
         return my_solution;
       });
 
-      // Decalre that the logged in person is working on a solution
       $scope.start_solution = function () {
-        $api.start_solution(issue.id).then(function(new_solution) {
-          $scope.$emit('solutionCreatePushed', new_solution);
-        });
+        var parsed_time = moment($scope.solution_form.completion_date, "M-D-YYYY");
+        if (!parsed_time.isValid()) {
+          $scope.error = "Invalid date. Please use mm/dd/yyyy";
+        } else if ( parsed_time.isBefore(moment()) ) {
+          $scope.error = "You can't use dates in the past.";
+        } else {
+          $scope.solution_form.completion_date = parsed_time;
+          $api.start_solution(issue.id, $scope.solution_form).then(function(new_solution) {
+            $scope.$emit('solutionCreatePushed', new_solution);
+            $scope.show_solution_form = false;
+          });
+        }
       };
 
-      // Restart a solution that the logged in user said they stopped working on
-      $scope.restart_solution = function () {
-        $scope.my_solution.then(function() {
-          $api.restart_solution(issue.id).then(function(updated_solution) {
+      $scope.update_solution = function () {
+        var parsed_time = moment($scope.solution_form.completion_date, "M-D-YYYY");
+        if (!parsed_time.isValid()) {
+          $scope.error = "Invalid date. Please use mm/dd/yyyy";
+        } else if ( parsed_time.isBefore(moment()) ) {
+          $scope.error = "You can't use dates in the past.";
+        } else {
+          $scope.solution_form.completion_date = parsed_time;
+          $api.update_solution(issue.id, $scope.solution_form).then(function(updated_solution) {
+            $scope.show_solution_edit_form = false;
             $scope.$emit('solutionUpdatePushed', updated_solution);
           });
-        });
+        }
+      };
+
+      $scope.restart_solution = function () {
+        var parsed_time = moment($scope.solution_form.completion_date, "M-D-YYYY");
+        if (!parsed_time.isValid()) {
+          $scope.error = "Invalid date. Please use mm/dd/yyyy";
+        } else if ( parsed_time.isBefore(moment()) ) {
+          $scope.error = "You can't use dates in the past.";
+        } else {
+          $scope.solution_form.completion_date = parsed_time;
+          $api.restart_solution(issue.id, $scope.solution_form).then(function(updated_solution) {
+            $scope.show_solution_edit_form = false;
+            $scope.$emit('solutionUpdatePushed', updated_solution);
+          });
+        }
+      };
+
+      $scope.toggle_solution_edit_form = function () {
+        $scope.show_solution_edit_form = !$scope.show_solution_edit_form;
+      };
+
+      $scope.toggle_solution_form = function () {
+        $scope.show_solution_form = !$scope.show_solution_form;
       };
 
       // Stop working on a solution that the logged in user started
       $scope.stop_solution = function () {
-        $scope.my_solution.then(function() {
-          $api.stop_solution(issue.id).then(function(updated_solution) {
-            $scope.$emit('solutionUpdatePushed', updated_solution);
+        if ($window.confirm("Are you sure you want to notify the backers that you have stopped work?")) {
+          $scope.my_solution.then(function() {
+            $api.stop_solution(issue.id).then(function(updated_solution) {
+              $scope.show_solution_edit_form = false;
+              $scope.$emit('solutionUpdatePushed', updated_solution);
+            });
           });
-        });
+        }
       };
 
       // Declare that the logged in person is continuing to work on their solution
@@ -110,7 +162,7 @@ angular.module('app')
               new_solutions_array[i].status = solution.solution_events[0];
               break;
             }
-          };
+          }
         });
       }
     };

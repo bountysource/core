@@ -27,7 +27,18 @@
             <span ng-switch-when="SolutionEvent::Completed" class="label label-success">Finished</span>
             <span ng-switch-default></span>
           </div>
-          <div class="muted">{{ solution.status.created_at | date }}</div>
+          <span collapse="!solution.show_details">
+            <a ng-click="solution.show_details = !solution.show_details"><span ng-hide="solution.show_details">View More</span><span ng-show="solution.show_details">Hide</span></a>
+          </span>
+          <div collapse="!solution.show_details">
+            <div><small><strong>Started on:</strong></small></div>
+            <div>{{ solution.status.created_at | date }}</div>
+            <div><small><strong>Expected Completion:</strong></small> </div>
+            <div><span ng-show="solution.completion_date">{{ solution.completion_date | date }}</span><span ng-show="!solution.completion_date">No Date</span></div>
+            <div><small><strong>Note:</strong></small></div>
+            <div><span ng-show="solution.note">{{ solution.note }}</span><span ng-show="!solution.note">No note</span></div>
+            <div ng-show="solution.url"><a ng-href="{{ solution.url }}">View Code »</a></div>
+          </div>
         </td>
       </tr>
     </table>

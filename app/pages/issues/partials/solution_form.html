@@ -1,0 +1,84 @@
+<div>
+  <div class="row-fluid" collapse="!show_solution_form">
+    <div class="span8">
+      <div class="alert alert-error" ng-show="error">{{ error }}</div>
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label"><strong>Notes</strong></label>
+          <div class="controls">
+            <textarea ng-model="solution_form.note" rows="6" class="span12" placeholder="Tell the backers how you're going to tackle this issue!"></textarea>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label"><strong>Code URL</strong></label>
+          <div class="controls">
+            <input ng-model="solution_form.url" type="text" class="span12" placeholder="https://github.com/you/solution"></input>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label"><strong>When will you be done?</strong></label>
+          <div class="controls">
+            <input type="text" ng-model="solution_form.completion_date" class="span12" placeholder="mm/dd/yyyy"></input>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="controls pull-right">
+            <button type="submit" class="btn btn-primary" ng-click="start_solution()">Start Work</button>
+            <button class="btn">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="span4 well">
+      <h4 class="text-center">Instructions</h4>
+      <ol>
+        <li>To keep backers and other developers in the loop, please fill out as much information as possible.</li>
+        <li>Now that you're ready to solve the issue, you should update everyone on the <a ng-href="{{issue.url}}">original issue tracker</a>.</li>
+        <li>Get the <a ng-href="{{ issue.tracker.url }}">code!</a></li>
+        <li>Good luck! Now get coding!</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row-fluid" collapse="!show_solution_edit_form">
+    <div class="span12">
+      <div class="alert alert-error" ng-show="error">{{ error }}</div>
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label"><strong>Notes</strong></label>
+          <div class="controls">
+            <textarea ng-model="solution_form.note" rows="6" class="span12" placeholder="Tell the backers how you're going to tackle this issue!"></textarea>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label"><strong>Code URL</strong></label>
+          <div class="controls">
+            <input ng-model="solution_form.url" type="text" class="span12" placeholder="https://github.com/you/solution"></input>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label"><strong>When will you be done?</strong></label>
+          <div class="controls">
+            <input type="text" ng-model="solution_form.completion_date" class="span12" placeholder="mm/dd/yyyy"></input>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="controls pull-right">
+            <div ng-show="status.type != 'SolutionEvent::Stopped'">
+              <button type="submit" class="btn btn-primary" ng-click="update_solution()">Update</button>
+              <button class="btn btn-danger" ng-click="stop_solution()">Remove</button>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="restart_solution()" ng-show="status.type == 'SolutionEvent::Stopped'">Restart</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
