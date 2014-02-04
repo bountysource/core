@@ -19,7 +19,7 @@ angular.module('app')
 
     $scope.issue = $api.issue_get($routeParams.id).then(function(issue) {
       $pageTitle.set(issue.title, issue.tracker.name);
-      console.log(issue.bounty_claims);
+
       // depending on the tracker, issue/comment bodies will either be html or text.
       issue.$comment_ctype = "html";
       issue.$body_ctype = "html";
