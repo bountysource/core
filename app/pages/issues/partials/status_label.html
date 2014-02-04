@@ -1,3 +1,3 @@
 <span ng-show="!issue.generic && issue.can_add_bounty" class="label label-success">Open</span>
 <span ng-hide="issue.generic || issue.can_add_bounty" class="label label-important">Closed</span>
-<span ng-show="issue.winning_bounty_claim" class="label label-success">Paid Out!</span>
+<span ng-show="issue.winning_bounty_claim || issue.paid_out" class="label label-success">Paid Out!</span>
