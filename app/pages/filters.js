@@ -205,7 +205,7 @@ angular.module('app').
   }).filter('emptyFilter', function() {
     return function(array) {
       var returnArray = [];
-      for (var i = 0; i < array.length; i++) {
+      for (var i = 0, j = array.length; i < j; i++) {
         if (array[i].description != null) {
           returnArray.push(array[i]);
         };
@@ -213,23 +213,3 @@ angular.module('app').
       return returnArray;
     };
   });
-
-  // .filter('jeefilter', function() {
-  //   return function(input) {
-  //     if (input != '') {
-  //       return input;
-  //     };
-  //   };
-  // });
-
-  // .filter('emptyComment', function() {
-  //   return function(array) {
-  //     var arrayToReturn = [];
-  //     for (var i = 0; i < array.length, i++) {
-  //       if (array[i].description != '') {
-  //         arrayToReturn.push(array[i]);
-  //       }
-  //     }
-  //     return arrayToReturn;
-  //   };
-  // });
