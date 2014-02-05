@@ -1,5 +1,13 @@
 <div class="row-fluid">
-  <!--<h4 style="margin: 0 0 5px 0;">{{issue.bounties.length | number}} {{ 'Backer' | pluralize:issue.bounties.length }}</h4>-->
+  <h4 style="margin: 0 0 5px 0;">
+    <ng-pluralize count="issue.bounties.length"
+                   when="{'1': 'Backer:',
+                          '2': 'Backers:',
+                          '3': 'Backers:',
+                          '4': 'Backers:',
+                          'other': 'Top Backers:'}">
+    </ng-pluralize>
+  </h4>
   <ul class="inline" style="margin-bottom: 0;">
     <li ng-repeat="bounty in issue.bounties.slice(0, 5) | orderBy:['-amount']">
 
@@ -16,4 +24,17 @@
       </div>
     </li>
   </ul>
+  <br>
+  <h4 style="margin: 0 0 5px 0;">
+    <ng-pluralize count="issue.bounty_claims[0].responses.length"
+                   when="{'0': '',
+                          '1': 'Comment:',
+                          'other': 'Comments:'}">
+
+    </ng-pluralize>
+  </h4>
+  <p ng-repeat="response in issue.bounty_claims[0].responses | emptyFilter">
+    {{ response.description }}<br>
+    -<a ng-href="{{response.person.frontend_path}}">{{ response.person.display_name }}</a>
+  </p>
 </div>
