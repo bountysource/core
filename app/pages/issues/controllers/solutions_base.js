@@ -41,10 +41,10 @@ angular.module('app')
       });
 
       $scope.start_solution = function () {
-        var parsed_time = moment($scope.solution_form.completion_date, "M-D-YYYY");
+        var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
         if (!parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
-        } else if ( parsed_time.isBefore(moment()) ) {
+        } else if ( parsed_time.isBefore($window.moment()) ) {
           $scope.error = "You can't use dates in the past.";
         } else {
           $scope.solution_form.completion_date = parsed_time;
@@ -56,10 +56,10 @@ angular.module('app')
       };
 
       $scope.update_solution = function () {
-        var parsed_time = moment($scope.solution_form.completion_date, "M-D-YYYY");
+        var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
         if (!parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
-        } else if ( parsed_time.isBefore(moment()) ) {
+        } else if ( parsed_time.isBefore($window.moment()) ) {
           $scope.error = "You can't use dates in the past.";
         } else {
           $scope.solution_form.completion_date = parsed_time;
@@ -71,10 +71,10 @@ angular.module('app')
       };
 
       $scope.restart_solution = function () {
-        var parsed_time = moment($scope.solution_form.completion_date, "M-D-YYYY");
+        var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
         if (!parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
-        } else if ( parsed_time.isBefore(moment()) ) {
+        } else if ( parsed_time.isBefore($window.moment()) ) {
           $scope.error = "You can't use dates in the past.";
         } else {
           $scope.solution_form.completion_date = parsed_time;
@@ -155,7 +155,7 @@ angular.module('app')
         //update corresponding object in $scope.solutions array to show correct solution status
         $scope.solutions.then(function (new_solutions_array) {
           for (var i = 0; i < new_solutions_array.length; i++) {
-            if(new_solutions_array[i].id == solution.id) {
+            if(new_solutions_array[i].id === solution.id) {
               for(var n in solution) {
                 new_solutions_array[i][n] = solution[n];
               }

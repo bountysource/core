@@ -354,7 +354,7 @@ angular.module('app').
         scope.performOauthDance = function() {
           $api.set_post_auth_url($location.url());
           $window.location = $api.signin_url_for('github', { scope: 'public_repo' });
-        }
+        };
       }
     };
   }]);

@@ -71,7 +71,7 @@ angular.module('app')
       for (var i=0; i<bounties.length; i++) {
         var bounty = bounties[i];
         bounty.amount = parseInt(bounty.amount, 10);
-        total_spent += bounty.amount
+        total_spent += bounty.amount;
         if (bounty.issue.paid_out) {
           claimed_bounties.push(bounty);
           total_paid_out += bounty.amount;
@@ -89,7 +89,7 @@ angular.module('app')
           $scope.stats.push($scope.stats_map[key]);
         }
       }
-      
+
       $scope.claimed_bounties = claimed_bounties;
       $scope.open_bounties = open_bounties;
       $scope.total_paid_out = total_paid_out;

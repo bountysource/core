@@ -27,7 +27,7 @@ angular.module('app')
 
       $scope.member_changed = function(member) {
         var master = angular.copy(member.$master);
-        delete master.$master;  
+        delete master.$master;
         delete master.$dirty;
         member.$dirty = !angular.equals(member, master);
       };
@@ -93,7 +93,7 @@ angular.module('app')
       };
 
       $scope.creating_new_budget = function (member) {
-        if (member.budget == member.$master.budget || member.budget === 0) {
+        if (member.budget === member.$master.budget || member.budget === 0) {
           member.new_budget = false;
         } else if (member.budget > 0) {
           member.new_budget = true;
