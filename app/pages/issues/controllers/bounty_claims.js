@@ -166,9 +166,11 @@ angular.module('app')
     $scope.$update_my_response = function(bounty_claim) {
       bounty_claim.$my_response = bounty_claim.$my_response || null;
       for (var i=0; $scope.current_person && i<bounty_claim.responses.length; i++) {
-        if (bounty_claim.responses[i].person.id === $scope.current_person.id) {
-          bounty_claim.$my_response = bounty_claim.responses[i].value;
-          break;
+        if(bounty_claim.responses[i].person) {
+          if (bounty_claim.responses[i].person.id === $scope.current_person.id) {
+            bounty_claim.$my_response = bounty_claim.responses[i].value;
+            break;
+          }
         }
       }
     };

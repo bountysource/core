@@ -35,6 +35,7 @@
   </h4>
   <p ng-repeat="response in issue.bounty_claims[0].responses | emptyFilter">
     {{ response.description }}<br>
-    -<a ng-href="{{response.person.frontend_path}}">{{ response.person.display_name }}</a>
+    <span ng-show="response.person.display_name">-<a ng-href="{{response.person.frontend_path}}">{{ response.person.display_name }}</a></span>
+    <span ng-show="!response.person.display_name">-Anonymous</span>
   </p>
 </div>
