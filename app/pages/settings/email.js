@@ -18,6 +18,7 @@ angular.module('app')
         $scope.form_data.email = person.email;
         $scope.form_data.weekly_newsletter = !person.exclude_from_newsletter;
         $scope.form_data.receive_developer_alerts = person.receive_developer_alerts;
+        $scope.form_data.receive_fundraiser_emails = person.receive_fundraiser_emails;
       }
     });
 
@@ -27,7 +28,8 @@ angular.module('app')
       var payload = {
         email: $scope.form_data.email,
         exclude_from_newsletter: !$scope.form_data.weekly_newsletter,
-        receive_developer_alerts: $scope.form_data.receive_developer_alerts
+        receive_developer_alerts: $scope.form_data.receive_developer_alerts,
+        receive_fundraiser_emails: $scope.form_data.receive_fundraiser_emails
       };
 
       $api.person_update(payload).then(function(updated_person) {
