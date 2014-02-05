@@ -205,11 +205,11 @@ angular.module('app').
   }).filter('emptyFilter', function() {
     return function(array) {
       var returnArray = [];
-      for (var i = 0, j = array.length; i < j; i++) {
-        if (array[i].description != null) {
-          returnArray.push(array[i]);
-        };
-      };
+      angular.forEach(array, function (item) {
+        if (item.description !== null) {
+          returnArray.push(item);
+        }
+      });
       return returnArray;
     };
   });
