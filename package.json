@@ -16,7 +16,7 @@
     "grunt-contrib-htmlmin": "~0.1.1",
     "grunt-contrib-imagemin": "~0.1.2",
     "grunt-contrib-watch": "~0.4.4",
-    "grunt-bower-requirejs": "~0.4.1",
+    "grunt-bower-requirejs": "~0.8.4",
     "grunt-usemin": "~0.1.10",
     "grunt-karma": "~0.6.2",
     "grunt-open": "~0.2.0",
