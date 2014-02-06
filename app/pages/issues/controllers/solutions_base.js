@@ -7,7 +7,7 @@ angular.module('app')
 
     // initialize form from params
     $scope.show_solution_form = false || $routeParams.show_new_solution_form;
-    var completion_date = $routeParams.completion_date ? $window.moment($routeParams.completion_date).format("M-D-YYYY") : null
+    var completion_date = $routeParams.completion_date ? $window.moment($routeParams.completion_date).format("M-D-YYYY") : null;
     $scope.solution_form = {
       url: $routeParams.code_url,
       note: $routeParams.note,
