@@ -48,7 +48,7 @@ angular.module('app')
 
       $scope.start_solution = function () {
         var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-        parsed_time = parsed_time ? parsed_time : ""; 
+        parsed_time = parsed_time ? parsed_time : "";
         if (parsed_time !== "" && !parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
         } else if ( parsed_time !== "" && parsed_time.isBefore($window.moment()) ) {
@@ -64,7 +64,7 @@ angular.module('app')
 
       $scope.update_solution = function () {
         var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-        parsed_time = parsed_time ? parsed_time : ""; 
+        parsed_time = parsed_time ? parsed_time : "";
         if (parsed_time !== "" && !parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
         } else if (parsed_time !== "" && parsed_time.isBefore($window.moment()) ) {
