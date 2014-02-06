@@ -7,15 +7,12 @@ angular.module('app')
 
     // initialize form from params
     $scope.show_solution_form = false || $routeParams.show_new_solution_form;
-    var completion_date = $routeParams.completion_date ? $window.moment($routeParams.completion_date).format("M-D-YYYY") : null;
+    var completion_date = $routeParams.completion_date ? $window.moment($routeParams.completion_date).format("M-D-YYYY") : "";
     $scope.solution_form = {
-      url: $routeParams.code_url,
-      note: $routeParams.note,
-      completion_date: completion_date
+      url: $routeParams.code_url || "",
+      note: $routeParams.note || "",
+      completion_date: completion_date || ""
     };
-
-    // by default, hide the solution edit form
-    $scope.show_solution_edit_form = false || $routeParams.show_solution_edit_form;
 
     $scope.my_solution = undefined;
     $scope.bounty_total = 0;
@@ -43,15 +40,18 @@ angular.module('app')
             url: my_solution.url,
             note: my_solution.note
           };
+          // by default, hide the solution edit form
+          $scope.show_solution_edit_form = false || $routeParams.show_solution_edit_form;
         }
         return my_solution;
       });
 
       $scope.start_solution = function () {
         var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-        if (!parsed_time.isValid()) {
+        parsed_time = parsed_time ? parsed_time : ""; 
+        if (parsed_time !== "" && !parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
-        } else if ( parsed_time.isBefore($window.moment()) ) {
+        } else if ( parsed_time !== "" && parsed_time.isBefore($window.moment()) ) {
           $scope.error = "You can't use dates in the past.";
         } else {
           $scope.solution_form.completion_date = parsed_time;
@@ -64,9 +64,10 @@ angular.module('app')
 
       $scope.update_solution = function () {
         var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-        if (parsed_time !== null && !parsed_time.isValid()) {
+        parsed_time = parsed_time ? parsed_time : ""; 
+        if (parsed_time !== "" && !parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
-        } else if (parsed_time !== null && parsed_time.isBefore($window.moment()) ) {
+        } else if (parsed_time !== "" && parsed_time.isBefore($window.moment()) ) {
           $scope.error = "You can't use dates in the past.";
         } else {
           $scope.solution_form.completion_date = parsed_time;
@@ -79,9 +80,9 @@ angular.module('app')
 
       $scope.restart_solution = function () {
         var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-        if (!parsed_time.isValid()) {
+        if (parsed_time !== "" && !parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
-        } else if ( parsed_time.isBefore($window.moment()) ) {
+        } else if (parsed_time !== "" && parsed_time.isBefore($window.moment())) {
           $scope.error = "You can't use dates in the past.";
         } else {
           $scope.solution_form.completion_date = parsed_time;

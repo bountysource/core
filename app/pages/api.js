@@ -650,6 +650,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.update_solution = function (issue_id, data) {
+      console.log(data);
       return this.call("issues/"+issue_id+"/solution", "PUT", data);
     };
 
