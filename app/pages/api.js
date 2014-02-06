@@ -644,7 +644,7 @@ angular.module('api.bountysource',[]).
 
     this.start_solution = function(issue_id, data) {
       return this.call("/issues/"+issue_id+"/solution", "POST", data, function(response) {
-        $api.require_signin();
+        $api.require_signin($location.path(), { show_new_solution_form: true, code_url: data.url, completion_date: data.completion_date, note: data.note });
         return response.data;
       });
     };
