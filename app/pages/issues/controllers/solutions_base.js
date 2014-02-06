@@ -15,7 +15,7 @@ angular.module('app')
     };
 
     // by default, hide the solution edit form
-    $scope.show_solution_edit_form = false;
+    $scope.show_solution_edit_form = false || $routeParams.show_solution_edit_form;
 
     $scope.my_solution = undefined;
     $scope.bounty_total = 0;
@@ -64,9 +64,9 @@ angular.module('app')
 
       $scope.update_solution = function () {
         var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-        if (!parsed_time.isValid()) {
+        if (parsed_time !== null && !parsed_time.isValid()) {
           $scope.error = "Invalid date. Please use mm/dd/yyyy";
-        } else if ( parsed_time.isBefore($window.moment()) ) {
+        } else if (parsed_time !== null && parsed_time.isBefore($window.moment()) ) {
           $scope.error = "You can't use dates in the past.";
         } else {
           $scope.solution_form.completion_date = parsed_time;

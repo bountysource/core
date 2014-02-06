@@ -40,7 +40,6 @@
   <link rel="stylesheet" href="styles/teams.css">
   <link rel="stylesheet" href="styles/tools.css">
   <link rel="stylesheet" href="styles/trackers.css">
-  <link rel="stylesheet" href="styles/zenbox.css">
   <!-- endbuild -->
 </head>
 <body ng-app="app" ng-controller="MainController">
@@ -70,7 +69,6 @@
 <script src="components/momentjs/moment.js"></script>
 <script src="components/angular-ui-utils/modules/scrollfix/scrollfix.js"></script>
 <script src="components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
-<script src="components/zendesk/zenbox.js"></script>
 <!-- endbuild -->
 <script>window.Moment = window.moment;</script>
 
@@ -176,5 +174,10 @@
     <!-- html_src end -->
 <!-- endbuild -->
 
+<!-- adds support for zendesk / started moving these assets locally to components/zendesk -->
+    <script type="text/javascript" src="//assets.zendesk.com/external/zenbox/v2.6/zenbox.js"></script>
+    <style type="text/css" media="screen, projection">
+      @import url(//assets.zendesk.com/external/zenbox/v2.6/zenbox.css);
+    </style>
 </body>
 </html>
