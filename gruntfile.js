@@ -14,18 +14,6 @@ module.exports = function (grunt) {
       options: {
         livereload: true
       },
-//      coffee: {
-//        files: ['app/pages/**/*.coffee'],
-//        tasks: ['coffee:dist']
-//      },
-//      coffeeTest: {
-//        files: ['test/spec/**/*.coffee'],
-//        tasks: ['coffee:test']
-//      },
-//      compass: {
-//        files: ['app/styles/**/*.{scss,sass}'],
-//        tasks: ['compass']
-//      },
       jshint: {
         files: ['gruntfile.js', 'app/pages/**/*.js', 'test/**/*.js'],
         tasks: ['jshint']
@@ -128,43 +116,6 @@ module.exports = function (grunt) {
         configFile: 'karma-e2e.conf.js'
       },
     },
-//    coffee: {
-//      dist: {
-//        files: [{
-//          expand: true,
-//          cwd: 'app/pages',
-//          src: '**/*.coffee',
-//          dest: '.tmp/pages',
-//          ext: '.js'
-//        }]
-//      },
-//      test: {
-//        files: [{
-//          expand: true,
-//          cwd: 'test/spec',
-//          src: '**/*.coffee',
-//          dest: '.tmp/spec',
-//          ext: '.js'
-//        }]
-//      }
-//    },
-//    compass: {
-//      options: {
-//        sassDir: 'app/styles',
-//        cssDir: '.tmp/styles',
-//        imagesDir: 'app/images',
-//        javascriptsDir: 'app/pages',
-//        fontsDir: 'app/styles/fonts',
-//        importPath: 'app/components',
-//        relativeAssets: true
-//      },
-//      dist: {},
-//      server: {
-//        options: {
-//          debugInfo: true
-//        }
-//      }
-//    },
     html_src: {
       dist: {
         files: {
@@ -211,8 +162,9 @@ module.exports = function (grunt) {
       },
       templates: {
         options: {
-          // NOTE: this saves 20kb or so but we rely on whitespace in some places to add horizontal spacing between elements
-          //collapseWhitespace: true
+          // NOTE: this saves 20kb or so but we rely on whitespace in
+          // some places to add horizontal spacing between elements
+          // collapseWhitespace: true
         },
         files: [{
           expand: true,
@@ -328,35 +280,6 @@ module.exports = function (grunt) {
       }
     }
   });
-
-
-//    'coffee:dist',
-//    'compass:server',
-//    'coffee',
-//    'compass',
-//    'coffee',
-//    'compass',
-//    'coffee',
-//    'compass',
-//    'coffee',
-//    'compass:dist',
-//    'connect:test',
-
-
-//  grunt.registerTask('test-unit', [
-//    'clean:server',
-//    'connect:test',
-//    'jshint',
-//    'karma'
-//  ]);
-//  grunt.registerTask('test-e2e', [
-//    'clean:server',
-//    'connect:e2e',
-//    'karma:e2e'
-//  ]);
-/////////////////////////////////////
-
-
 
   grunt.registerTask('server', [
     'clean:server',

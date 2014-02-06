@@ -251,8 +251,8 @@ describe('All the wonderful routes we have', function() {
 
     it('should map routes for backers', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/:id/backers'].controller).toBe('FundraiserPledgeController');
-        expect($route.routes['/fundraisers/:id/backers'].templateUrl).toEqual('pages/pledges/index.html');
+        expect($route.routes['/fundraisers/:id/backers'].controller).toBe('FundraiserShowController');
+        expect($route.routes['/fundraisers/:id/backers'].templateUrl).toEqual('pages/fundraisers/pledges.html');
       });
     });
   });

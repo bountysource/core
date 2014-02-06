@@ -5,7 +5,7 @@ node_js:
 
 before_script:
   - npm install --quiet -g grunt-cli
-  - npm install --quiet -g bower@1.2.7
+  - npm install --quiet -g bower
   - bower install
   - sleep 1 # let server start
 

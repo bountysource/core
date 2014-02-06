@@ -42,16 +42,16 @@ angular.module('app')
 
       // logic to process attribute updates and update UI. Used for budget updates and team role updates.
       function process_update (member, payload, type) {
-        type === 'budget' ? member.$budget_saving = true : member.$saving = true;
+        member[type === 'budget' ? '$budget_saving' : '$saving'] = true;
         $api.team_member_update($routeParams.id, member.id, payload).then(function(response) {
-          type === 'budget' ? member.$budget_saving = false : member.$saving = false;
+          member[type === 'budget' ? '$budget_saving' : '$saving'] = false;
           if ('error' in response) {
             delete member.$saved_at;
             $scope.cancel_member_changes(member);
-            type === 'budget' ? member.$budget_update_error = response.error : member.$update_error = response.error;
+            member[type === 'budget' ? '$budget_update_error' : '$update_error'] = response.error;
           } else {
             delete member.$update_error;
-            type === 'budget' ? member.$budget_saved_at = new Date() : member.$saved_at = new Date();
+            member[type === 'budget' ? '$budget_saved_at' : '$saved_at'] = new Date();
             member.new_budget = false;
             //hacky way to update balance after succesfully reloading of budget
             if (type === 'budget') {
