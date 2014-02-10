@@ -53,9 +53,10 @@
           <table class="table table-condensed table-striped">
             <thead>
               <tr>
-                <th style="width: 30%;"><a ng-click="update_sort(open_sort, 'issue.tracker.name')">Project</a></th>
-                <th style="width: 30%;">Issue</th>
-                <th style="width: 30%;"><a ng-click="update_sort(open_sort, 'created_at')">Posted</a></th>
+                <th style="width: 25%;"><a ng-click="update_sort(open_sort, 'issue.tracker.name')">Project</a></th>
+                <th style="width: 40%;">Issue</th>
+                <th style="width: 15%;">Posted By</th>
+                <th style="text-align: center; width: 10%;"><a ng-click="update_sort(open_sort, 'created_at')" tooltip="Posted"><i class="icon-time"></i></a></th>
                 <th style="text-align: center; cursor: pointer; width: 10%;">
                   <a ng-click="update_sort(open_sort, 'amount')">
                     <div tooltip="Bounty Amount"><strong>$</strong></div>
@@ -73,7 +74,8 @@
                     <span ng-show="!bounty.issue.can_add_bounty && !bounty.issue.paid_out" class="label label-warning">closed</span>
                   </a>
                 </td>
-                <td>{{bounty.created_at | date:'medium'}}</td>
+                <td>Name here</td>
+                <td style="text-align: center"><a class="label label-info">{{bounty.created_at | time_ago_short}}</a></td>
                 <td style="text-align:center;"><strong>{{bounty.amount | dollars}}</strong></td>
               </tr>
             </tbody>
