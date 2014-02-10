@@ -96,7 +96,6 @@ angular.module('app')
       $scope.total_spent = total_spent;
       $scope.total_open = total_open;
       $scope.bounties_resolved = true;
-      console.log(open_bounties);
     });
 
   });
