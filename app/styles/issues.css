@@ -57,12 +57,20 @@ td.imagerow {
   width: 60px;
 }
 
+.table-progress {
+  margin-bottom: 0px;
+}
+
 .ng-binding ul > br {
   display: none;
 }
 
 .issue-goals.progress {
   margin-bottom: 10px;
+}
+
+.issue-table .project-icon {
+  text-align: center;
 }
 
 /* receipt */

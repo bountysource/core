@@ -49,72 +49,84 @@
               </tr>
             </tbody>
           </table>
-          <h3 class="no-margin">Open Bounties</h3>
-          <table class="table table-condensed table-striped">
-            <thead>
-              <tr>
-                <th style="width: 30%;"><a ng-click="update_sort(open_sort, 'issue.tracker.name')">Project</a></th>
-                <th style="width: 30%;">Issue</th>
-                <th style="width: 30%;"><a ng-click="update_sort(open_sort, 'created_at')">Posted</a></th>
-                <th style="text-align: center; cursor: pointer; width: 10%;">
-                  <a ng-click="update_sort(open_sort, 'amount')">
-                    <div tooltip="Bounty Amount"><strong>$</strong></div>
-                  </a>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="bounty in open_bounties | orderBy:open_sort.column:open_sort.desc">
-                <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img"></img>  {{bounty.issue.tracker.name}}</a></td>
-                <td>
-                  <a ng-href="/issues/{{bounty.issue.slug}}">
-                    <i ng-show="bounty.issue.bounty_total >= 1000" class="icon-fire"></i>
-                    {{bounty.issue.title}}
-                    <span ng-show="!bounty.issue.can_add_bounty && !bounty.issue.paid_out" class="label label-warning">closed</span>
-                  </a>
-                </td>
-                <td>{{bounty.created_at | date:'medium'}}</td>
-                <td style="text-align:center;"><strong>{{bounty.amount | dollars}}</strong></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div ng-show="claimed_bounties.length > 0">
-          <h3 class="no-margin">Claimed Bounties</h3>
-          <p>Bounties posted by {{team.name}} that have been claimed by developers.</p>
-          <table class="table table-condensed table-striped">
-            <thead>
-              <tr>
-                <th style="width: 30%;"><a ng-click="update_sort(claimed_sort, 'issue.tracker.name')">Project</a></th>
-                <th style="width: 30%;">Issue</th>
-                <th style="width: 30%;"><a ng-click="update_sort(claimed_sort, 'issue.paid_at')">Paid Out</a></th>
-                <th style="text-align: center; cursor: pointer; width: 10%;">
-                  <a ng-click="update_sort(claimed_sort, 'amount')">
-                    <div tooltip="Bounty Amount"><strong>$</strong></div>
-                  </a>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="bounty in claimed_bounties | orderBy:claimed_sort.column:claimed_sort.desc">
-                <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img"></img>  {{bounty.issue.tracker.name}}</a></td>
-                <td>
-                  <a ng-href="/issues/{{bounty.issue.slug}}">
-                    <i ng-show="bounty.issue.bounty_total >= 1000" class="icon-fire"></i>
-                    {{bounty.issue.title}}
-                  </a>
-                </td>
-                <td>{{bounty.issue.paid_at | date:'medium'}}</td>
-                <td style="text-align: center;"><strong>{{bounty.amount | dollars}}</strong></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div ng-show="!claimed_bounties && !open_bounties">
-          <h4>There are no bounties associated with this team</h4>
         </div>
       </div>
-
+      <div>
+        <h3 class="no-margin">Open Bounties</h3>
+        <table class="table table-condensed table-striped table-hover issue-table">
+          <thead>
+            <tr>
+              <th style="width: 5%;"></th>
+              <th style="width: 55%;">Issue</th>
+              <th style="width: 35%;"><a <a ng-click="update_sort(open_sort, 'progress_sum')">Progress</a></th>
+              <th style="width: 5%;"></th>
+              <th style="text-align: center; cursor: pointer; width: 10%;">
+                <a ng-click="update_sort(open_sort, 'amount')">
+                  <div tooltip="Bounty Amount"><strong>$</strong></div>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="bounty in open_bounties | orderBy:open_sort.column:open_sort.desc">
+              <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"></img></a></td>
+              <td>
+                <a ng-href="/issues/{{bounty.issue.slug}}">
+                  <i ng-show="bounty.issue.bounty_total >= 1000" class="icon-fire"></i>
+                  {{bounty.issue.title}}
+                  <span ng-show="!bounty.issue.can_add_bounty && !bounty.issue.paid_out" class="label label-warning">closed</span>
+                </a>
+              </td>
+              <td style="vertical-align: middle;">
+                <a ng-href="/issues/{{bounty.issue.slug}}">
+                  <div class="progress table-progress" html="true" popover="{{ bounty.status }}" popover-title="{{ bounty.title }}" popover-trigger="mouseenter" style="cursor: pointer;">
+                    <div class="bar" style="width: {{ bounty.progress_sum | at_least:15 | at_most:100 | number:0 }}%; vertical-align: middle;">
+                      {{ bounty.progress_sum }}%
+                    </div>
+                  </div>
+                </a>
+              </td>
+              <td style="text-align: center;">
+              </td>
+              <td style="text-align:center;"><strong>{{bounty.amount | dollars}}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div ng-show="claimed_bounties.length > 0">
+        <h3 class="no-margin">Claimed Bounties</h3>
+        <p>Bounties posted by {{team.name}} that have been claimed by developers.</p>
+        <table class="table table-condensed table-striped">
+          <thead>
+            <tr>
+              <th style="width: 30%;"><a ng-click="update_sort(claimed_sort, 'issue.tracker.name')">Project</a></th>
+              <th style="width: 30%;">Issue</th>
+              <th style="width: 30%;"><a ng-click="update_sort(claimed_sort, 'issue.paid_at')">Paid Out</a></th>
+              <th style="text-align: center; cursor: pointer; width: 10%;">
+                <a ng-click="update_sort(claimed_sort, 'amount')">
+                  <div tooltip="Bounty Amount"><strong>$</strong></div>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="bounty in claimed_bounties | orderBy:claimed_sort.column:claimed_sort.desc">
+              <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img"></img>  {{bounty.issue.tracker.name}}</a></td>
+              <td>
+                <a ng-href="/issues/{{bounty.issue.slug}}">
+                  <i ng-show="bounty.issue.bounty_total >= 1000" class="icon-fire"></i>
+                  {{bounty.issue.title}}
+                </a>
+              </td>
+              <td>{{bounty.issue.paid_at | date:'medium'}}</td>
+              <td style="text-align: center;"><strong>{{bounty.amount | dollars}}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div ng-show="!claimed_bounties && !open_bounties">
+        <h4>There are no bounties associated with this team</h4>
+      </div>
     </div>
   </div>
 </div>
