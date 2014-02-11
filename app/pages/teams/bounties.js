@@ -117,6 +117,7 @@ angular.module('app')
           }
           break;
         case "solutions":
+          // only resonds with active solutions
           if(issue.solutions.length > 0) {
             bounty.status += "A solution is in progress. ";
           }
