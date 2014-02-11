@@ -155,7 +155,7 @@
         <td ng-show="issue_filter_options.show_issue_number">{{issue.number}}</td>
         <td>
           <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
-            <i ng-show="issue.has_solution" class="icon-briefcase" tooltip="A developer has started on a solution"></i>
+            <i ng-show="issue.has_active_solution" class="icon-briefcase" tooltip="A developer is working on a solution"></i>
             {{issue.title}}
             <span ng-show="issue.paid_out" class="label label-info">paid out</span>
             <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
