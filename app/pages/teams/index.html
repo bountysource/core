@@ -17,7 +17,7 @@
     </ul>
 
     <ul class="thumbnails">
-      <li class="span2" ng-repeat="team in teams | filter:{ featured: true }">
+      <li class="span2" ng-repeat="team in teams">
         <a href="/teams/{{team.slug}}" class="thumbnail text-center">
           <img src="{{team.medium_image_url}}" /><br/>
           {{team.name}}

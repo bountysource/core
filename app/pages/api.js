@@ -484,6 +484,10 @@ angular.module('api.bountysource',[]).
       return this.call("/teams", "GET");
     };
 
+    this.featured_teams = function() {
+      return this.call("/teams", "GET", { filter: 'featured' });
+    };
+
     this.team_get = function(id) {
       return this.call("/teams/"+id);
     };
