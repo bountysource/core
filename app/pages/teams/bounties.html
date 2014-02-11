@@ -51,7 +51,7 @@
           </table>
         </div>
       </div>
-      <div>
+      <div ng-show="open_bounties">
         <h3 class="no-margin">Open Bounties</h3>
         <table class="table table-condensed table-striped table-hover issue-table">
           <thead>
@@ -124,7 +124,7 @@
           </tbody>
         </table>
       </div>
-      <div ng-show="!claimed_bounties && !open_bounties">
+      <div ng-show="!claimed_bounties && !open_bounties && bounties_resolved">
         <h4>There are no bounties associated with this team</h4>
       </div>
     </div>
