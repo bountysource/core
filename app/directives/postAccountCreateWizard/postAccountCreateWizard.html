@@ -1,0 +1,23 @@
+<div modal="$$showModal && myLanguagesResolved && followedTrackersResolved && myTrackersResolved">
+  <div class="modal-header">
+    <h4>{{$$currentPage.title || $$pageDefaults.title}}</h4>
+    <p ng-show="$$currentPage.subtitle">{{$$currentPage.subtitle}}</p>
+  </div>
+  <div class="modal-body">
+    <ng-include src="$$currentPage.templateUrl"></ng-include>
+  </div>
+  <div class="modal-footer">
+    <div>
+      <button class="btn btn-link pull-left" ng-click="notInterested()">Not interested</button>
+      <button class="btn btn-link pull-left" ng-click="closeModal()">Complete later</button>
+    </div>
+
+    <div ng-show="$$currentPageIndex == 0">
+      <button class="btn btn-default" ng-click="nextPage()">Edit Profile</button>
+      <button class="btn btn-primary" ng-click="completeProfile()">Sign me up!</button>
+    </div>
+
+    <button class="btn btn-primary" ng-click="previousPage()" ng-show="$$currentPageIndex > 1">Previous</button>
+    <button class="btn btn-primary" ng-click="nextPage()" ng-show="$$currentPageIndex > 0">Next</button>
+  </div>
+</div>

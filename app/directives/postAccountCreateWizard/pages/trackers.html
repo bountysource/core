@@ -1,0 +1,40 @@
+<div style="min-height: 200px;">
+  <table class="table table-striped table-no-head">
+    <tr>
+      <div>
+        <form class="form" name="addTrackerForm">
+          <div class="row-fluid">
+            <div class="span12">
+              <input
+                name="input"
+                type="text"
+                class="search-query span12"
+                placeholder="Search for projects to follow"
+                ng-model="$parent.newFollowedTracker"
+                typeahead="tracker as tracker.name for tracker in trackerSearchTypeahead($viewValue)"
+                typeahead-editable="false"
+                />
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <br/>
+
+      <div ng-show="followedTrackers.length > 0" class="text-right">
+        <a ng-click="removeAllFollowedTrackers()">Remove All</a>
+      </div>
+
+      <br />
+    </tr>
+
+    <tr ng-repeat="tracker in followedTrackers | orderBy:'-name'">
+      <td>
+        <span>{{tracker.name}}</span>
+        <div class="pull-right">
+          <a ng-click="removeFollowedTracker(tracker)">Remove</a>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

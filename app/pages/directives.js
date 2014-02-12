@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').
+angular.module('app.directives').
   directive('ngFocus', ['$parse', function($parse) {
     return function(scope, element, attr) {
       var fn = $parse(attr.ngFocus);
@@ -294,6 +294,8 @@ angular.module('app').
         tracker: '='
       },
       link: function(scope) {
+        scope.paramName = 'signin';
+
         $rootScope.$watch('current_person', function(person) {
           scope.$$showModal = ($window.parseInt($routeParams.signin, 10) === 1) && person === false;
 
@@ -310,17 +312,7 @@ angular.module('app').
             $window.location = $api.signin_url_for('github', { follow_tracker_ids: [scope.tracker.id] });
           };
 
-          scope.spliceParamFromSearch = function() {
-            var params = angular.copy($location.search());
-            for (var k in params) {
-              if (k === 'signin') {
-                delete params[k];
-              }
-            }
-            $location.search(params);
-          };
-
-          scope.spliceParamFromSearch();
+          $location.search(scope.paramName, null);
         });
       }
     };
@@ -338,17 +330,7 @@ angular.module('app').
           scope.$$showModal = false;
         };
 
-        scope.spliceParamFromSearch = function() {
-          var params = angular.copy($location.search());
-          for (var k in params) {
-            if (k === scope.paramName) {
-              delete params[k];
-            }
-          }
-          $location.search(params);
-        };
-
-        scope.spliceParamFromSearch();
+        $location.search(scope.paramName, null);
 
         // Save the current URL and go through GitHub oauth to collect the public_repo permission.
         scope.performOauthDance = function() {

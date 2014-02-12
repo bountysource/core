@@ -444,6 +444,21 @@ angular.module('api.bountysource',[]).
       return this.call("/languages");
     };
 
+    this.my_languages_get = function() {
+      return this.call('/my_languages');
+    };
+
+    this.my_languages_set = function(language_ids) {
+      if (!angular.isArray(language_ids)) {
+        language_ids = [language_ids];
+      }
+      return this.call('/my_languages', 'POST', { language_ids: language_ids.join(',') });
+    };
+
+    this.followed_trackers = function() {
+      return this.call('/trackers/followed');
+    };
+
     this.tracker_relations_get = function() {
       return this.call("/project_relations");
     };
@@ -612,6 +627,9 @@ angular.module('api.bountysource',[]).
       return this.call("/people/"+person_id+"/teams");
     };
 
+    this.followed_trackers = function() {
+      return this.call('/trackers/followed');
+    };
 
     this.trackers_get = function() {
       return this.call("/projects");
@@ -734,6 +752,10 @@ angular.module('api.bountysource',[]).
     };
 
     this.set_post_auth_url = function(url, params) {
+      // Add boolean to show account complete modal after signin.
+      params = params || {};
+      params = angular.extend(params, { show_profile_modal: 1 });
+
       $cookieStore.put('postauth_url', $api.pathMerge(url, params));
     };
 

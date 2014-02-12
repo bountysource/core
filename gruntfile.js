@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         tasks: ['jshint']
       },
       html_src: {
-        files: ['gruntfile.js', 'app/pages/**/*.js', 'app/index.html'],
+        files: ['gruntfile.js', 'app/pages/**/*.js', 'app/index.html', 'app/directives/**/*.js'],
         tasks: ['html_src']
       },
       livereload: {
@@ -27,6 +27,7 @@ module.exports = function (grunt) {
           'app/**/*.html',
           '{.tmp,app}/styles/**/*.css',
           '{.tmp,app}/pages/**/*.js',
+          '{.tmp,app}/directives/**/*.js',
           'app/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         tasks: []//['jshint']
@@ -95,7 +96,7 @@ module.exports = function (grunt) {
       },
       dist_assets: ['dist/assets', 'dist/compiled'],
       server: '.tmp',
-      templates: ['dist/templates.js', 'dist/pages']
+      templates: ['dist/templates.js', 'dist/pages', 'dist/directives']
     },
     jshint: {
       options: {
@@ -105,6 +106,7 @@ module.exports = function (grunt) {
       all: [
         'gruntfile.js',
         'app/pages/**/*.js',
+        'app/directives/**/*.js',
         'test/**/*.js'
       ]
     },
@@ -114,12 +116,12 @@ module.exports = function (grunt) {
       },
       e2e: {
         configFile: 'karma-e2e.conf.js'
-      },
+      }
     },
     html_src: {
       dist: {
         files: {
-          'app/index.html': ['app/pages/app.js','app/pages/**/*.js']
+          'app/index.html': ['app/pages/app.js','app/pages/**/*.js','app/directives/**/*.js']
         }
       }
     },
@@ -169,7 +171,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'app',
-          src: ['pages/**/*.html'],
+          src: ['pages/**/*.html', 'directives/**/*.html'],
           dest: 'dist'
         }]
       }
@@ -180,7 +182,7 @@ module.exports = function (grunt) {
           concat: 'dist/assets/app.js',
           base: 'dist'
         },
-        src: 'dist/pages/**/*.html',
+        src: ['dist/pages/**/*.html','dist/directives/**/*.html'],
         dest: 'dist/templates.js'
       }
     },
