@@ -34,7 +34,7 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
         // displaying the modal.
         if (routeParamValue && scope.testRoute()) {
           var currentPersonListener = scope.$watch('current_person', function(person) {
-            if (person && !person.profile_completed && person.github_account) {
+            if (person && !person.profile_completed) {
               scope.$$showModal = true;
               $location.search(scope.paramName, null);
 
@@ -106,7 +106,7 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
       // Remove person from developer alert emails, close modal.
       scope.notInterested = function() {
         $api.person_update({ receive_developer_alerts: false, profile_completed: true });
-        scope.byeForever();
+        scope.closeModal();
       };
 
       // Mark the person's profile as completed. Ensure that they receive developer alert emails.
