@@ -15,6 +15,9 @@ angular.module('app')
       return cart;
     });
 
+    // set follow tracker to true by default
+    $scope.following = true;
+
     $scope.bounty = {
       amount: parseInt($routeParams.amount || 15, 10),
       anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
