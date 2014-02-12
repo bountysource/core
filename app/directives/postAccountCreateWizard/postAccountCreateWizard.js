@@ -21,12 +21,18 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
       scope.myLanguages = [];
 
       var routeChangeListener = scope.$on('$routeChangeSuccess', function() {
+        // Don't include this directive in the test environment, it breaks everything.
+        // Unregister the route change listener.
+        if ($api.environment.test()) {
+          return routeChangeListener();
+        }
+
         // Parse route param (it should be set to 1) to show/hide modal.
         var routeParamValue = $window.parseInt($routeParams[scope.paramName], 10) === 1;
 
         // Listen for person if the routeParam is present, and this is not a blacklisted route for
         // displaying the modal.
-        if (routeParamValue) {
+        if (routeParamValue && scope.testRoute()) {
           var currentPersonListener = scope.$watch('current_person', function(person) {
             if (person && !person.profile_completed && person.github_account) {
               scope.$$showModal = true;
@@ -35,6 +41,15 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
               // Unregister listeners
               currentPersonListener();
               routeChangeListener();
+
+              // Load all languages
+              $api.languages_get().then(function(languages) {
+                // Sort by weight
+                scope.languages = languages.sort(function(a,b) {
+                  return (a.weight > b.weight ? -1 : (a.weight === b.weight ? 0 : 1));
+                });
+                return scope.languages;
+              });
 
               // Get the authenticated person's languages, add them to the languages array once allLanguages loads.
               $api.my_languages_get(person.id).then(function(languages) {
@@ -138,16 +153,6 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
         scope.$$currentPageIndex = index;
         scope.$$currentPage = scope.$$pages[index];
       };
-
-      // Load all languages
-      $api.languages_get().then(function(languages) {
-        // Sort by weight
-        scope.languages = languages.sort(function(a,b) {
-          return (a.weight > b.weight ? -1 : (a.weight === b.weight ? 0 : 1));
-        });
-
-        return scope.languages;
-      });
 
       scope.addLanguage = function(language) {
         for (var i=0; i<scope.myLanguages.length; i++) {

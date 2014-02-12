@@ -26,10 +26,22 @@ angular.module('api.bountysource',[]).
       $window.location.reload();
     };
 
-    //set flag for test environment. see call() to view implementation. hardcoded--revisit later.
-    if (window.location.host === "localhost:8081") {
-      $rootScope.__test__ = true;
-    }
+    this.environment = {
+      test: function() {
+        return $window.location.host === "localhost:8081";
+      },
+      development: function() {
+        return $window.location.host === "localhost:9000";
+      },
+      staging: function() {
+        return $window.location.host === "staging.bountysource.com";
+      },
+      production: function() {
+        return $window.location.host === "www.bountysource.com";
+      }
+    };
+
+    $rootScope.__test__ = this.environment.test();
 
     this.$shift_mock_response = function() {
       var count = parseInt(window.localStorage.getItem('stubsCount'), 10);
