@@ -159,6 +159,15 @@
               </button>
             </div>
           </div>
+
+          <div class="control-group">
+            <div class="controls">
+              <label class="checkbox" ng-show="!issue.tracker.followed">
+                <input type="checkbox" ng-model="following"/>
+                <span>Follow {{issue.tracker.name}} ?</span>
+              </label>
+            </div>
+          </div>
         </form>
       </div>
     </div>
