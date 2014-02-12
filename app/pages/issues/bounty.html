@@ -141,15 +141,6 @@
 
           <div class="control-group">
             <div class="controls">
-              <label class="checkbox" ng-show="!issue.tracker.followed">
-                <input type="checkbox" ng-model="following"/>
-                <span>Follow {{issue.tracker.name}}?</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <div class="controls">
               <button ng-click="create_payment()" ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid">
                 <span >Post {{bounty.amount || 0 | dollars}} Bounty</span>
               </button>
@@ -157,6 +148,14 @@
               <button type="submit" ng-click="create_payment()" ng-show="previous_bounty_total > 0" class="btn btn-large btn-primary" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
                 <span>Increase Bounty by {{bounty.amount | dollars}}</span>
               </button>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <label class="checkbox" ng-show="!issue.tracker.followed">
+                <input type="checkbox" ng-model="following"/>
+                <span>Follow {{issue.tracker.name}}?</span>
+              </label>
             </div>
           </div>
         </form>
