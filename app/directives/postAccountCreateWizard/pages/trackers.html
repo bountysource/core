@@ -28,9 +28,9 @@
       <br />
     </tr>
 
-    <tr ng-repeat="tracker in followedTrackers | orderBy:'-name'">
+    <tr ng-repeat="tracker in followedTrackers | orderBy:'+name'">
       <td>
-        <span>{{tracker.name}}</span>
+        <span>{{(tracker.full_name || tracker.name)}}</span>
         <div class="pull-right">
           <a ng-click="removeFollowedTracker(tracker)">Remove</a>
         </div>
