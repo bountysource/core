@@ -79,7 +79,7 @@
               <td><i>No projects found</i></td>
             </tr>
             <tr ng-repeat="tracker in results.trackers | filter:filter_search_results ">
-              <td><a ng-href="/trackers/{{tracker.slug}}"><span class="label label-success" ng-show="tracker.bounty_total > 0">{{tracker.bounty_total | dollars}}</span> {{tracker.name}}</a></td>
+              <td><a ng-href="/trackers/{{tracker.slug}}"><span class="label label-success" ng-show="tracker.bounty_total > 0">{{tracker.bounty_total | dollars}}</span>  <img ng-src="{{tracker.image_url }}" class="issue-table-tracker-img"></img>  {{tracker.name}}</a></td>
             </tr>
             </tbody>
           </table>
