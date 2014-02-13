@@ -7,6 +7,7 @@ if (document.location.host === 'www.bountysource.com') {
 }
 
 angular.module('app.services', []);
+angular.module('app.directives', []);
 
 angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngRoute', 'ngSanitize', 'ngCookies', 'colorpicker.module', 'app.services', 'app.directives'])
   .config(function ($routeProvider, $locationProvider, $httpProvider, $provide) {
