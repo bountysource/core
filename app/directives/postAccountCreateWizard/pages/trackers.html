@@ -19,6 +19,18 @@
         </form>
       </div>
 
+      <!-- Top projects -->
+      <div style="text-align: center;">
+        <h5>Top Projects</h5>
+        <ul class="inline" style="padding: 0 15px;">
+          <li ng-repeat="tracker in topTrackers | orderBy:'-rank'" tooltip="{{tracker.name}}">
+            <a class="thumbnail" ng-click="addTracker(tracker)">
+              <img ng-src="{{tracker.image_url}}" style="width: 32px; height: 32px;" />
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <br/>
 
       <div ng-show="followedTrackers.length > 0" class="text-right">
@@ -30,6 +42,9 @@
 
     <tr ng-repeat="tracker in followedTrackers | orderBy:'+name'">
       <td>
+        <span style="padding-right: 5px;">
+          <img class="img-rounded pull-left" ng-src="{{tracker.image_url}}" style="width: 20px; height: 20px;" />
+        </span>
         <span>{{(tracker.full_name || tracker.name)}}</span>
         <div class="pull-right">
           <a ng-click="removeFollowedTracker(tracker)">Remove</a>

@@ -58,6 +58,16 @@ angular.module('api.bountysource',[]).
       }
     };
 
+    this.$$maxPerPage = 250;
+    this.$$perPage = undefined;
+
+    this.perPage = function(value) {
+      if (value < 0) { value = 0; }
+      if (value > this.$$maxPerPage) { value = this.$$maxPerPage; }
+      this.$$perPage = value;
+      return this;
+    };
+
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
       //if we are in the test environment, call the mocked $api.call() otherwise, use the prod call()
@@ -97,7 +107,17 @@ angular.module('api.bountysource',[]).
         if ($api.get_access_token()) {
           params.access_token = $api.get_access_token();
         }
-        params.per_page = params.per_page || 250;
+
+        // Pull off perPage if it was set. Otherwise... default everything to 250 because we are lazy right now.
+        // Query string parameter takes precedence over this value
+        if (this.$$perPage) {
+          params.per_page = this.$$perPage;
+        } else {
+          params.per_page = params.per_page || 250;
+        }
+
+        // Reset temporary perPage holder
+        this.$$perPage = undefined;
 
         // deferred JSONP call with a promise
         var deferred = $q.defer();
@@ -645,6 +665,10 @@ angular.module('api.bountysource',[]).
 
     this.trackers_get = function() {
       return this.call("/projects");
+    };
+
+    this.top_trackers_get = function() {
+      return this.call("/trackers", "GET", { filter: "top" });
     };
 
     this.claim_tracker = function(id, owner_id, owner_type) {

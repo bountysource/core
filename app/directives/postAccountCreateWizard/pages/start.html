@@ -6,12 +6,12 @@
       <h5>Follow these projects</h5>
       <em class="muted" ng-hide="followedTrackers.length > 0">No projects followed</em>
       <ul ng-show="followedTrackers.length > 0">
-        <li ng-repeat="tracker in followedTrackers | orderBy:'-watchers' | limitTo:10">
+        <li ng-repeat="tracker in followedTrackers | orderBy:'-watchers' | limitTo:5">
           <span>{{tracker.full_name}}</span>
         </li>
 
-        <li ng-show="followedTrackers.length > 10">
-          <em>...and {{followedTrackers.length - 10 | number}} more</em>
+        <li ng-show="followedTrackers.length > 5">
+          <em>...and {{followedTrackers.length - 5 | number}} more</em>
         </li>
       </ul>
     </div>
@@ -19,19 +19,24 @@
       <h5>Languages I know</h5>
       <em class="muted" ng-hide="myLanguages.length > 0">No languages added</em>
       <ul ng-show="myLanguages.length > 0">
-        <li ng-repeat="language in myLanguages | orderBy:'-weight' | limitTo:10">
+        <li ng-repeat="language in myLanguages | orderBy:'-weight' | limitTo:5">
           <span>{{language.name}}</span>
         </li>
 
-        <li ng-show="myLanguages.length > 10">
-          <em>...and {{myLanguages.length - 10 | number}} more</em>
+        <li ng-show="myLanguages.length > 5">
+          <em>...and {{myLanguages.length - 5 | number}} more</em>
         </li>
       </ul>
     </div>
   </div>
 
-  <div ng-hide="followedTrackers.length > 0 && myLanguages.length > 0">
+  <div ng-show="followedTrackers.length <= 0 && myLanguages.length <= 0">
     <p>Select your favorite projects and preferred programming languages on the next page to receive bounty alerts.</p>
+  </div>
+
+  <div class="visible-phone">
+    <button class="btn btn-link pull-left" ng-click="notInterested()">Not interested</button>
+    <button class="btn btn-link pull-left" ng-click="closeModal()">Complete later</button>
   </div>
 
 </div>

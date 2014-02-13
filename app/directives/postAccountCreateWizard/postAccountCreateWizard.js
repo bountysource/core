@@ -83,6 +83,12 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
                 }
                 $api.my_languages_set(languageIds);
               };
+
+              // Get top ranked trackers to show on tracker follow page
+              $api.perPage(15).top_trackers_get().then(function(trackers) {
+                scope.topTrackers = angular.copy(trackers);
+                return scope.topTrackers;
+              });
             }
           });
         }

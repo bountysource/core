@@ -1,0 +1,25 @@
+<div>
+  <div class="hidden-phone">
+    <button class="btn btn-link pull-left" ng-click="notInterested()">Not interested</button>
+    <button class="btn btn-link pull-left" ng-click="closeModal()">Complete later</button>
+  </div>
+
+  <!-- First page, show edit and accept buttons if you have languages or projects -->
+  <div ng-show="$$currentPageIndex == 0 && (myLanguages.length > 0 || followedTrackers.length > 0)">
+    <button class="btn btn-default" ng-click="nextPage()">Edit</button>
+    <button class="btn btn-success" ng-click="completeProfile()">Accept</button>
+  </div>
+
+  <!-- First page, only show continue button because you have no languages or trackers -->
+  <div ng-show="$$currentPageIndex == 0 && myLanguages.length <= 0 && followedTrackers.length <= 0">
+    <button class="btn btn-primary" ng-click="nextPage()">Continue</button>
+  </div>
+
+  <div ng-show="$$currentPageIndex > 0">
+    <button class="btn btn-primary" ng-click="previousPage()" ng-show="$$currentPageIndex > 1">Back</button>
+    <button class="btn btn-primary" ng-click="nextPage()" ng-show="$$currentPageIndex != ($$pages.length - 1)">Next</button>
+
+    <!-- Show finish button when on the final page -->
+    <button class="btn btn-success" ng-click="closeModal()" ng-show="$$currentPageIndex == ($$pages.length - 1)">Finish</button>
+  </div>
+</div>
