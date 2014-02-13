@@ -33,10 +33,12 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
         // Listen for person if the routeParam is present, and this is not a blacklisted route for
         // displaying the modal.
         if (routeParamValue && scope.testRoute()) {
+          // Strip the param off now
+          $location.search(scope.paramName, null);
+
           var currentPersonListener = scope.$watch('current_person', function(person) {
             if (person && !person.profile_completed) {
               scope.$$showModal = true;
-              $location.search(scope.paramName, null);
 
               // Unregister listeners
               currentPersonListener();
