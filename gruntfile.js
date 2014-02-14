@@ -275,11 +275,6 @@ module.exports = function (grunt) {
           dest: ''
         }]
       }
-    },
-    coveralls: {
-      options: {
-        coverage_dir: 'coverage/'
-      }
     }
   });
 
@@ -318,8 +313,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test:travis', [
     'test:unit',
-    'test:e2e',
-    'coveralls'
+    'test:e2e'
   ]);
 
   grunt.registerTask('build', [
