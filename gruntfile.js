@@ -15,11 +15,24 @@ module.exports = function (grunt) {
         livereload: true
       },
       jshint: {
-        files: ['gruntfile.js', 'app/pages/**/*.js', 'test/**/*.js'],
+        files: [
+          'gruntfile.js',
+          'test/**/*.js',
+          'app/pages/**/*.js',
+          'app/common/**/*.js',
+          'app/common/directives/**/.js'
+        ],
         tasks: ['jshint']
       },
       html_src: {
-        files: ['gruntfile.js', 'app/pages/**/*.js', 'app/index.html', 'app/directives/**/*.js'],
+        files: [
+          'app.js',
+          'gruntfile.js',
+          'app/index.html',
+          'app/pages/**/*.js',
+          'app/common/**/*.js',
+          'app/common/directives/**/.js'
+        ],
         tasks: ['html_src']
       },
       livereload: {
@@ -27,10 +40,11 @@ module.exports = function (grunt) {
           'app/**/*.html',
           '{.tmp,app}/styles/**/*.css',
           '{.tmp,app}/pages/**/*.js',
-          '{.tmp,app}/directives/**/*.js',
+          '{.tmp,app}/common/**/*.js',
+          '{.tmp,app}/common/directives/**/*.js',
           'app/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ],
-        tasks: []//['jshint']
+        tasks: []
       }
     },
     connect: {
@@ -94,9 +108,14 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      dist_assets: ['dist/assets', 'dist/compiled'],
+      dist_assets: [
+        'dist/assets',
+        'dist/compiled'
+      ],
       server: '.tmp',
-      templates: ['dist/templates.js', 'dist/pages', 'dist/directives']
+      templates: [
+        'dist/templates.js'
+      ]
     },
     jshint: {
       options: {
@@ -105,9 +124,10 @@ module.exports = function (grunt) {
 
       all: [
         'gruntfile.js',
+        'test/**/*.js',
         'app/pages/**/*.js',
-        'app/directives/**/*.js',
-        'test/**/*.js'
+        'app/common/**/*.js',
+        'app/common/directives/**/.js'
       ]
     },
     karma: {
@@ -121,7 +141,12 @@ module.exports = function (grunt) {
     html_src: {
       dist: {
         files: {
-          'app/index.html': ['app/pages/app.js','app/pages/**/*.js','app/directives/**/*.js']
+          'app/index.html': [
+            'app/pages/*.js',
+            'app/pages/**/*.js',
+            'app/common/**/*.js',
+            'app/common/directives/**/.js'
+          ]
         }
       }
     },
@@ -132,8 +157,12 @@ module.exports = function (grunt) {
       }
     },
     usemin: {
-      html: ['dist/*.html'],
-      css: ['dist/assets/**/*.css'],
+      html: [
+        'dist/*.html'
+      ],
+      css: [
+        'dist/assets/**/*.css'
+      ],
       options: {
         dirs: ['dist']
       }
@@ -171,7 +200,11 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'app',
-          src: ['pages/**/*.html', 'directives/**/*.html'],
+          src: [
+            'pages/**/*.js',
+            'common/**/*.js',
+            'common/directives/**/.js'
+          ],
           dest: 'dist'
         }]
       }
@@ -182,7 +215,11 @@ module.exports = function (grunt) {
           concat: 'dist/assets/app.js',
           base: 'dist'
         },
-        src: ['dist/pages/**/*.html','dist/directives/**/*.html'],
+        src: [
+          'dist/pages/**/*.js',
+          'dist/common/**/*.js',
+          'dist/common/directives/**/.js'
+        ],
         dest: 'dist/templates.js'
       }
     },

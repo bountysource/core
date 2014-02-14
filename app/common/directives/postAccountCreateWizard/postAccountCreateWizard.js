@@ -3,7 +3,7 @@
 angular.module('app.directives').directive('postAccountCreateWizard', ['$location', '$routeParams', '$window', '$q', '$api', function($location, $routeParams, $window, $q, $api) {
   return {
     scope: true,
-    templateUrl: 'common/directives/postAccountCreateWizard/postAccountCreateWizard.html',
+    templateUrl: 'common/directives/postAccountCreateWizard/templates/postAccountCreateWizard.html',
     link: function(scope) {
       scope.paramName = 'show_profile_modal';
 
@@ -147,17 +147,17 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
       scope.$$pages = [
         {
           nextButtonText: 'Change Profile »',
-          templateUrl: 'common/directives/postAccountCreateWizard/templates/pages/start.html'
+          templateUrl: 'common/directives/postAccountCreateWizard/templates/start.html'
         },
         {
           title: 'Step 1 of 2: Follow projects to receive bounty alerts',
           subtitle: 'Follow projects to receive email updates when bounties are posted.',
-          templateUrl: 'common/directives/postAccountCreateWizard/templates/pages/trackers.html'
+          templateUrl: 'common/directives/postAccountCreateWizard/templates/trackers.html'
         },
         {
           title: 'Step 2 of 2: Add languages that you know',
           subtitle: 'Add languages to find bounties catered to your skillset.',
-          templateUrl: 'common/directives/postAccountCreateWizard/templates/pages/languages.html'
+          templateUrl: 'common/directives/postAccountCreateWizard/templates/languages.html'
         }
       ];
 
