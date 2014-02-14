@@ -28,7 +28,7 @@
 
           <div ng-show="current_saved_search_tab && tab_results_resolved">
             <div ng-show="current_saved_search_tab.issues.length > 0">
-              <issues-list issues="current_saved_search_tab.issues"></issues-list>
+              <issue-list issues="current_saved_search_tab.issues"></issue-list>
             </div>
             <div ng-hide="current_saved_search_tab.issues.length > 0">
               <pre>No Results Found</pre>
