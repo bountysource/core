@@ -282,7 +282,8 @@ angular.module('app')
       $scope.submit_query();
     } else {
       $scope.loading_featured_issues = true;
-      $scope.featured_issues = $api.issues_featured({ limit: 5 }).then(function(response) {
+      $api.issues_featured({ limit: 5 }).then(function(response) {
+        $scope.featured_issues = response;
         $scope.loading_featured_issues = false;
         return response;
       });

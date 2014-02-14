@@ -132,7 +132,8 @@ angular.module('app')
       $scope.issue_filter_options = { show_paid_out: true, sort: 'bounty_total' };
     };
 
-    $scope.tracker_stats = $api.tracker_stats($routeParams.id).then(function(tracker_stats) {
+    $scope.tracker_stats_promise = $api.tracker_stats($routeParams.id).then(function(tracker_stats) {
+      $scope.tracker_stats = tracker_stats;
       return tracker_stats;
     });
 

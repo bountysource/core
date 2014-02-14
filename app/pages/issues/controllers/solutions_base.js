@@ -19,17 +19,19 @@ angular.module('app')
     $api.issue_get($routeParams.id).then(function(issue) {
       $scope.bounty_total = parseInt(issue.bounty_total, 10);
 
-      $api.solutions_get(issue.id).then(function(solutions) {
+      $scope.solutions_promise = $api.solutions_get(issue.id).then(function(solutions) {
         // Get the lastest event and set as the Solution status
         for (var i=0; i<solutions.length; i++) {
           // api call will return array from newest to oldest
           solutions[i].status = solutions[i].solution_events[0];
         }
+
+        $scope.solutions = solutions;
         return solutions;
       });
 
       // If the person is logged in, attempt to find their developer goal
-      $scope.my_solution = $api.solution_get(issue.id).then(function(my_solution) {
+      $scope.my_solution_promise = $api.solution_get(issue.id).then(function(my_solution) {
         $scope.initializing = false;
         if(!my_solution.error) {
 
@@ -42,6 +44,7 @@ angular.module('app')
           // by default, hide the solution edit form
           $scope.show_solution_edit_form = $routeParams.show_solution_edit_form;
         }
+        $scope.my_solution = my_solution;
         return my_solution;
       });
 
@@ -107,7 +110,7 @@ angular.module('app')
       // Stop working on a solution that the logged in user started
       $scope.stop_solution = function () {
         if ($window.confirm("Are you sure you want to notify the backers that you have stopped work?")) {
-          $scope.my_solution.then(function() {
+          $scope.my_solution_promise.then(function() {
             $api.stop_solution(issue.id).then(function(updated_solution) {
               $scope.show_solution_edit_form = false;
               $scope.$emit('solutionUpdatePushed', updated_solution);
@@ -118,7 +121,7 @@ angular.module('app')
 
       // Declare that the logged in person is continuing to work on their solution
       $scope.checkin_solution = function () {
-        $scope.my_solution.then(function() {
+        $scope.my_solution_promise.then(function() {
           $api.checkin_solution(issue.id).then(function(updated_solution) {
             $scope.$emit('solutionUpdatePushed', updated_solution);
           });
@@ -127,7 +130,7 @@ angular.module('app')
 
       // Declare that the logged in person is finished working on their solution
       $scope.complete_solution = function () {
-        $scope.my_solution.then(function() {
+        $scope.my_solution_promise.then(function() {
           $api.complete_solution(issue.id).then(function(updated_solution) {
             $scope.$emit('solutionUpdatePushed', updated_solution);
           });
@@ -141,7 +144,7 @@ angular.module('app')
       var deferred = $q.defer();
       deferred.resolve(new_solution);
       $scope.my_solution = deferred.promise;
-      $scope.solutions.then(function(solutions) {
+      $scope.solutions_promise.then(function(solutions) {
         var solution = angular.copy(new_solution);
         solution.status = solution.solution_events[solution.solution_events.length - 1];
         solutions.push(solution);
@@ -163,8 +166,8 @@ angular.module('app')
     $scope.set_status_for_solution = function(solution) {
       if (solution && solution.solution_events) {
         $scope.status = $filter('orderBy')(solution.solution_events, ["-created_at"])[0];
-        //update corresponding object in $scope.solutions array to show correct solution status
-        $scope.solutions.then(function (new_solutions_array) {
+        //update corresponding object in $scope.solutions_promise array to show correct solution status
+        $scope.solutions_promise.then(function (new_solutions_array) {
           for (var i = 0; i < new_solutions_array.length; i++) {
             if(new_solutions_array[i].id === solution.id) {
               for(var n in solution) {

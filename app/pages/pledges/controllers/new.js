@@ -110,7 +110,10 @@ angular.module('app')
     // if logged in, populate teams accounts!
     $scope.$watch("current_person", function(person) {
       if (person) {
-        $scope.teams = $api.person_teams(person.id);
+        $scope.teams_promise = $api.person_teams(person.id).then(function (response) {
+          $scope.teams = response;
+          return response;
+        });
       }
     });
 
