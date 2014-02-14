@@ -70,6 +70,8 @@ angular.module('api.bountysource',[]).
 
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
+      var ver = { Accept:  'application/vnd.bountysource+json; version=1' };
+
       //if we are in the test environment, call the mocked $api.call() otherwise, use the prod call()
       if ($rootScope.__test__) {
         var mockArgs = Array.prototype.slice.call(arguments);
@@ -152,16 +154,16 @@ angular.module('api.bountysource',[]).
             deferred.resolve(callback(parsed_response));
           };
           // make actual HTTP call with promise
-          if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
-          else if (method === 'HEAD') { $http.head(url, { params: params }).success(cors_callback); }
-          else if (method === 'DELETE') { $http.delete(url, { params: params }).success(cors_callback); }
-          else if (method === 'POST') { $http.post(url, params, {}).success(cors_callback); }
-          else if (method === 'PUT') { $http.put(url, params, {}).success(cors_callback); }
+          if (method === 'GET') { $http.get(url, { params: params, headers: ver }).success(cors_callback); }
+          else if (method === 'HEAD') { $http.head(url, { params: params, headers: ver }).success(cors_callback); }
+          else if (method === 'DELETE') { $http.delete(url, { params: params, headers: ver }).success(cors_callback); }
+          else if (method === 'POST') { $http.post(url, params, {headers: ver}).success(cors_callback); }
+          else if (method === 'PUT') { $http.put(url, params, {headers: ver}).success(cors_callback); }
 
         } else {
           params._method = method;
           params.callback = 'JSON_CALLBACK';
-          $http.jsonp(url, { params: params }).success(function(response) {
+          $http.jsonp( url, { params: params, headers: ver }).success(function(response) {
             deferred.resolve(callback(response));
           });
         }
