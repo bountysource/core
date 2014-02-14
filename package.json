@@ -26,7 +26,7 @@
     "matchdep": "~0.1.1",
     "grunt-ngmin": "~0.0.2",
     "grunt-angular-templates": "~0.3.10",
-    "connect-modrewrite": "~0.2.1"
+    "connect-modrewrite": "~0.2.1",
     "karma-coverage": "~0.1.0",
     "karma-ng-scenario": "~0.1.0"
   },
