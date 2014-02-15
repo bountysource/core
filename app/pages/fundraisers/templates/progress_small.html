@@ -1,0 +1,40 @@
+<div class="row-fluid">
+  <div class="span12" class="text-center">
+    <div>
+      <div class="row-fluid">
+        <div class="span6">
+          <h3 style="margin-bottom:0"><strong>{{ fundraiser.total_pledged | dollars }}</strong></h3>
+          <span>of <strong>{{ fundraiser.funding_goal | dollars }}</strong></span>
+        </div>
+
+        <div class="span6" style="text-align: center;">
+          <div ng-show="fundraiser.published && fundraiser.in_progress">
+            <div ng-show="fundraiser.$days_left > 0">
+              <h3 style="margin-bottom:0"><strong>{{ fundraiser.$days_left | number }}</strong></h3>
+              <ng-pluralize count="fundraiser.$days_left" when="{ 'one': 'day', 'other': 'days' }"></ng-pluralize>
+            </div>
+            <div ng-show="fundraiser.$days_left <= 0">
+              <div ng-show="fundraiser.$hours_left > 0">
+                <h3 style="margin-bottom:0"><strong>{{ fundraiser.$hours_left | number }}</strong></h3>
+                <ng-pluralize count="fundraiser.$hours_left" when="{ 'one': 'hour', 'other': 'hours' }"></ng-pluralize>
+              </div>
+              <div ng-show="fundraiser.$hours_left <= 0">
+                <h3 style="margin-bottom:0"><strong>{{ fundraiser.$minutes_left || 1 | number }}</strong></h3>
+                <ng-pluralize count="fundraiser.$minutes_left" when="{ 'one': 'minute', 'other': 'minutes' }"></ng-pluralize>
+              </div>
+            </div>
+          </div>
+
+          <div ng-show="fundraiser.published && !fundraiser.in_progress">
+            <h3 style="margin-bottom:0"><strong>Complete</strong></h3>
+            <span>{{fundraiser.ends_at | date}}</span>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="progress progress-striped">
+        <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | atLeast:15 | atMost:100 | number:0 }}%;">{{ 100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+      </div>
+    </div>
+  </div>
+</div>

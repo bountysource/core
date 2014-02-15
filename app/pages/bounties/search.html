@@ -119,7 +119,7 @@
 
         <td style="text-align: center">
           <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info"> <!--tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom"-->
-            {{issue.created_at | time_ago_short }}
+            {{issue.created_at | timeAgoShort }}
           </a>
         </td>
       </tr>
@@ -173,7 +173,7 @@
 
           <td style="text-align: center">
             <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info"> <!--tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom"-->
-              {{issue.created_at | time_ago_short }}
+              {{issue.created_at | timeAgoShort }}
             </a>
           </td>
         </tr>

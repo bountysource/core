@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider, personResolver) {
     $routeProvider
       .when('/transactions/:id', {
         templateUrl: 'pages/transactions/show.html',
         controller: 'TransactionShowController',
-        resolve: $person
+        resolve: {
+          person: personResolver
+        }
       });
   })
   .controller('TransactionShowController', function ($scope, $routeParams, $api, $filter, $window, $twttr) {

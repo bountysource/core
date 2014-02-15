@@ -5,15 +5,15 @@
   <li><a href="/tools">Tools</a></li>
 </ul>
 
-<ng-include src="'pages/tools/partials/header.html'"></ng-include>
-<ng-include src="'pages/tools/partials/tabs.html'"></ng-include>
+<ng-include src="'pages/tools/templates/header.html'"></ng-include>
+<ng-include src="'pages/tools/templates/tabs.html'"></ng-include>
 
 <div class="row-fluid">
   <div class="span5">
     <loading-bar ng-show="loading_trackers">Loading your projects...</loading-bar>
 
     <div ng-hide="loading_trackers">
-      <ng-include src="'pages/tools/partials/trackers.html'"></ng-include>
+      <ng-include src="'pages/tools/templates/trackers.html'"></ng-include>
     </div>
   </div>
 
@@ -23,10 +23,10 @@
     </div>
 
     <div collapse="!current_tracker">
-      <ng-include src="'pages/tools/partials/plugin_settings.html'"></ng-include>
+      <ng-include src="'pages/tools/templates/plugin_settings.html'"></ng-include>
       <br />
     </div>
 
-    <ng-include src="'pages/tools/partials/info.html'"></ng-include>
+    <ng-include src="'pages/tools/templates/info.html'"></ng-include>
   </div>
 </div>

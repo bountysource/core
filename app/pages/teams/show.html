@@ -6,11 +6,11 @@
 
 <div class="row-fluid" ng-show="team">
   <div class="span3">
-    <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+    <ng-include src="'pages/teams/templates/infobox.html'"></ng-include>
   </div>
   <div class="span9" ng-controller="TeamHomeController">
-    <ng-include src="'pages/teams/partials/header.html'"></ng-include>
-    <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
+    <ng-include src="'pages/teams/templates/header.html'"></ng-include>
+    <ng-include src="'pages/teams/templates/tabs.html'"></ng-include>
 
     <div ng-show="funds_added">
       <alert type="'success'" close="funds_added = null">Successfully added <strong>{{funds_added | dollars}}</strong>
@@ -44,7 +44,7 @@
     <!-- Developer view. Can only add projects and place bounties -->
     <div class="row-fluid" ng-show="!is_admin && is_developer">
       <div class="span6">
-        <ng-include src="'pages/teams/partials/post_bounty_box.html'"></ng-include>
+        <ng-include src="'pages/teams/templates/post_bounty_box.html'"></ng-include>
       </div>
 
       <div class="span3">
@@ -81,7 +81,7 @@
     <!-- Admin view. Can do all of the things! -->
     <div class="row-fluid" ng-show="is_admin">
       <div class="span6">
-        <ng-include src="'pages/teams/partials/post_bounty_box.html'"></ng-include>
+        <ng-include src="'pages/teams/templates/post_bounty_box.html'"></ng-include>
       </div>
 
       <div class="span3 well" style="min-height:280px;">

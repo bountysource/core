@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider, personResolver) {
     $routeProvider
       .when('/activity', {
         templateUrl: 'pages/activity/timeline.html',
         controller: 'Activity',
-        resolve: $person
+        resolve: {
+          person: personResolver
+        }
       });
   })
   .controller('Activity', function($scope, $routeParams, $api, $pageTitle) {

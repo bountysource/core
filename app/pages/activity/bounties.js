@@ -1,14 +1,17 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider, personResolver) {
     $routeProvider
       .when('/activity/bounties', {
         templateUrl: 'pages/activity/bounties.html',
         controller: 'BountyActivity',
-        resolve: $person
+        resolve: {
+          person: personResolver
+        }
       });
   })
+
   .controller('BountyActivity', function($scope, $routeParams, $api, $pageTitle) {
     $pageTitle.set('Bounties', 'Activity');
 

@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider, personResolver) {
     $routeProvider
       .when('/teams/:id/settings', {
         templateUrl: 'pages/teams/settings.html',
         controller: 'BaseTeamController',
-        resolve: $person
+        resolve: {
+          person: personResolver
+        }
       });
   })
   .controller('EditTeamController', function ($scope, $routeParams, $location, $api) {

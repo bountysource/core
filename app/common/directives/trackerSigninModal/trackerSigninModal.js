@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.directives').directive('trackerSigninModal', ['$rootScope', '$routeParams', '$window', '$location', '$api', function($rootScope, $routeParams, $window, $location, $api) {
+angular.module('bountysource.directives').directive('trackerSigninModal', ['$rootScope', '$routeParams', '$window', '$location', '$api', function($rootScope, $routeParams, $window, $location, $api) {
   return {
     restrict: 'E',
     templateUrl: 'common/directives/trackerSigninModal/templates/trackerSigninModal.html',

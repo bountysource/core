@@ -5,7 +5,7 @@
 
   <div class="text-center hero-unit">
     <h2>Authorize Bountysource</h2>
-    <p class="lead">Link your Bountysource account with {{provider | from_snake_case | title}}, allowing for jolly cooperation!</p>
+    <p class="lead">Link your Bountysource account with {{provider | fromSnakeCase | title}}, allowing for jolly cooperation!</p>
     <button ng-click="accept()" class="btn btn-large btn-success" style="width: 150px;">Accept</button>
     <button ng-click="reject()" class="btn btn-large btn-danger" style="width: 150px;">Reject</button>
   </div>
@@ -20,6 +20,6 @@
 <div ng-show="redirecting" class="text-center">
   <div class="text-center hero-unit">
     <h2>Great Success!</h2>
-    <p class="lead">Redirecting to {{provider | from_snake_case | title}}...</p>
+    <p class="lead">Redirecting to {{provider | fromSnakeCase | title}}...</p>
   </div>
 </div>

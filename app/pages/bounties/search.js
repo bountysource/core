@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider) {
     $routeProvider
       .when('/bounties/search', {
         templateUrl: 'pages/bounties/search.html',

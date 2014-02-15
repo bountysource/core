@@ -20,7 +20,7 @@ module.exports = function (grunt) {
           'test/**/*.js',
           'app/pages/**/*.js',
           'app/common/**/*.js',
-          'app/common/directives/**/.js'
+          'app/common/**/**/.js'
         ],
         tasks: ['jshint']
       },
@@ -31,17 +31,18 @@ module.exports = function (grunt) {
           'app/index.html',
           'app/pages/**/*.js',
           'app/common/**/*.js',
-          'app/common/directives/**/.js'
+          'app/common/**/**/.js'
         ],
         tasks: ['html_src']
       },
       livereload: {
         files: [
           'app/**/*.html',
+          'app/pages/**/templates/*.html',
           '{.tmp,app}/styles/**/*.css',
           '{.tmp,app}/pages/**/*.js',
           '{.tmp,app}/common/**/*.js',
-          '{.tmp,app}/common/directives/**/*.js',
+          '{.tmp,app}/common/**/**/*.js',
           'app/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         tasks: []
@@ -127,7 +128,7 @@ module.exports = function (grunt) {
         'test/**/*.js',
         'app/pages/**/*.js',
         'app/common/**/*.js',
-        'app/common/directives/**/.js'
+        'app/common/**/**/.js'
       ]
     },
     karma: {
@@ -145,7 +146,7 @@ module.exports = function (grunt) {
             'app/pages/*.js',
             'app/pages/**/*.js',
             'app/common/**/*.js',
-            'app/common/directives/**/.js'
+            'app/common/**/**/.js'
           ]
         }
       }
@@ -203,7 +204,7 @@ module.exports = function (grunt) {
           src: [
             'pages/**/*.js',
             'common/**/*.js',
-            'common/directives/**/.js'
+            'common/**/**/.js'
           ],
           dest: 'dist'
         }]
@@ -218,7 +219,7 @@ module.exports = function (grunt) {
         src: [
           'dist/pages/**/*.js',
           'dist/common/**/*.js',
-          'dist/common/directives/**/.js'
+          'dist/common/**/**/.js'
         ],
         dest: 'dist/templates.js'
       }

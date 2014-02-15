@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.directives').directive('postAccountCreateWizard', ['$location', '$routeParams', '$window', '$q', '$api', function($location, $routeParams, $window, $q, $api) {
+angular.module('bountysource.directives').directive('postAccountCreateWizard', ['$location', '$routeParams', '$window', '$q', '$api', function($location, $routeParams, $window, $q, $api) {
   return {
     scope: true,
     templateUrl: 'common/directives/postAccountCreateWizard/templates/postAccountCreateWizard.html',

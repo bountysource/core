@@ -8,11 +8,11 @@
 <div ng-show="team" ng-controller="TeamActivityController">
   <div class="row-fluid">
     <div class="span3">
-      <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+      <ng-include src="'pages/teams/templates/infobox.html'"></ng-include>
     </div>
     <div class="span9">
-      <ng-include src="'pages/teams/partials/header.html'"></ng-include>
-      <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
+      <ng-include src="'pages/teams/templates/header.html'"></ng-include>
+      <ng-include src="'pages/teams/templates/tabs.html'"></ng-include>
       <table class="table table-striped" style="table-layout: fixed">
         <tbody ng-switch="activity.type">
         <tr ng-repeat="activity in activities | orderBy:'-created_at'">

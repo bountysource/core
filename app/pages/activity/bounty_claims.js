@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider, personResolver) {
     $routeProvider
       .when('/activity/claims', {
         templateUrl: 'pages/activity/bounty_claims.html',
         controller: 'BountyClaimActivity',
-        resolve: $person
+        resolve: {
+          person: personResolver
+        }
       });
   })
   .controller('BountyClaimActivity', function($scope, $routeParams, $api, $pageTitle) {

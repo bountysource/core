@@ -8,11 +8,11 @@
 <div ng-show="team" ng-controller="TeamIssuesController">
   <div class="row-fluid">
     <div class="span3">
-      <ng-include src="'pages/teams/partials/infobox.html'"></ng-include>
+      <ng-include src="'pages/teams/templates/infobox.html'"></ng-include>
     </div>
     <div class="span9">
-      <ng-include src="'pages/teams/partials/header.html'"></ng-include>
-      <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
+      <ng-include src="'pages/teams/templates/header.html'"></ng-include>
+      <ng-include src="'pages/teams/templates/tabs.html'"></ng-include>
 
       <!-- Loading message... -->
       <div collapse="issues_resolved" class="text-center">
@@ -48,7 +48,7 @@
                 </td>
                 <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"><i class="icon-thumbs-up icon-white"></i> {{issue.thumbs_up_count | number}}</a></td>
                 <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"><i class="icon-user icon-white"></i> {{issue.participants_count | number}}</a></td>
-                <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">{{issue.created_at | time_ago_short}}</a></td>
+                <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">{{issue.created_at | timeAgoShort}}</a></td>
               </tr>
             </tbody>
           </table>

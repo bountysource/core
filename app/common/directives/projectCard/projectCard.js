@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.directives').directive('projectCard', [function() {
+angular.module('bountysource.directives').directive('projectCard', [function() {
   return {
     restrict: "E",
     scope: {

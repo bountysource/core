@@ -1,0 +1,11 @@
+<div ng-include="'pages/fundraisers/templates/manage.html'"></div>
+
+<div class="well text-center" style="max-height:none;">
+  <a ng-href="/fundraisers/{{fundraiser.slug}}"><img ng-src="{{fundraiser.large_image_url}}" /></a>
+  <div ng-include="'pages/fundraisers/templates/progress_small.html'"></div>
+  <div ng-include="'pages/fundraisers/templates/pledge_button.html'"></div>
+  <div ng-include="'pages/fundraisers/templates/flex_funding.html'"></div>
+</div>
+
+<div ng-include="'pages/fundraisers/templates/about_me.html'"></div>
+<div ng-include="'pages/fundraisers/templates/share.html'"></div>

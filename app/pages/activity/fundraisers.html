@@ -22,6 +22,6 @@
     <td><a ng-href="/fundraisers/{{fundraiser.slug}}">{{ fundraiser.title }}</a></td>
     <td>{{ fundraiser.funding_goal | dollars }}</td>
     <td>{{ (fundraiser.total_pledged / fundraiser.funding_goal) | percent }}</td>
-    <td ng-class="{ 'text-info': ((fundraiser | fundraiser_status) == 'draft'), 'text-success': ((fundraiser | fundraiser_status) == 'completed') }">{{ fundraiser | fundraiser_status }}</td>
+    <td ng-class="{ 'text-info': ((fundraiser | fundraiserStatus) == 'draft'), 'text-success': ((fundraiser | fundraiserStatus) == 'completed') }">{{ fundraiser | fundraiserStatus }}</td>
   </tr>
 </table>

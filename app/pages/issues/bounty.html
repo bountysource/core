@@ -1,10 +1,10 @@
 <div ng-controller="CreateBountyController">
-  <div ng-include="'pages/issues/partials/breadcrumb.html'"></div>
+  <div ng-include="'pages/issues/templates/breadcrumb.html'"></div>
 
   <div class="row-fluid" ng-show="issue" ng-controller="CreateBountyController">
     <div class="span12">
-      <div ng-include="'pages/issues/partials/header.html'"></div>
-      <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
+      <div ng-include="'pages/issues/templates/header.html'"></div>
+      <div ng-include="'pages/issues/templates/nav_tabs.html'"></div>
 
       <loading-bar ng-show="processing_payment">Processing payment...</loading-bar>
 
@@ -78,8 +78,8 @@
                 <div><small class="muted"><em>Optional</em></small></div>
               </label>
               <span ng-switch="expiration">
-                <div class="controls" ng-switch-when="0" ng-include="'pages/issues/partials/options/expiration_up.html'"></div>
-                <div class="controls" ng-switch-when="1" ng-include="'pages/issues/partials/options/expiration_down.html'"></div>
+                <div class="controls" ng-switch-when="0" ng-include="'pages/issues/templates/options/expiration_up.html'"></div>
+                <div class="controls" ng-switch-when="1" ng-include="'pages/issues/templates/options/expiration_down.html'"></div>
               </span>
             </div>
 
@@ -87,7 +87,7 @@
               <div class="control-group">
                 <div class="controls">
                   <h5>When the bounty expires...</h5>
-                  <div ab-randomize ng-include="'pages/issues/partials/options/upon_expiration.html'" onload="broadcastLoad()"></div>
+                  <div ab-randomize ng-include="'pages/issues/templates/options/upon_expiration.html'" onload="broadcastLoad()"></div>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@
                 <div><small class="muted"><em>Optional</em></small></div>
               </label>
               <div class="controls">
-                <div ab-randomize ng-include="'pages/issues/partials/options/promotion.html'" onload="broadcastLoad()"></div>
+                <div ab-randomize ng-include="'pages/issues/templates/options/promotion.html'" onload="broadcastLoad()"></div>
                 <div collapse="!bounty.promotion">
                   <a class="btn btn-small" ng-click="bounty.promotion = undefined">
                     <i class="icon-remove"></i>

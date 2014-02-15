@@ -1,12 +1,14 @@
 "use strict";
 
 angular.module('app')
-  .config(function($routeProvider, $person) {
+  .config(function($routeProvider, personResolver) {
     $routeProvider
       .when("/auth/:provider/confirm", {
         templateUrl: "pages/auth/auth.html",
         controller: "AuthConfirmController",
-        resolve: $person
+        resolve: {
+          person: personResolver
+        }
       });
   })
   .controller("AuthConfirmController", function($scope, $routeParams, $window, $location, $api) {

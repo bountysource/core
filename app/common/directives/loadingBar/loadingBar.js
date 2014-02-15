@@ -1,6 +1,6 @@
 'user strict';
 
-angular.module('app.directives').directive('loadingBar', [function() {
+angular.module('bountysource.directives').directive('loadingBar', [function() {
   return {
     restrict: "E",
     replace: true,

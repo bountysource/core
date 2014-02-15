@@ -1,20 +1,21 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider, personResolver) {
     $routeProvider
       .when('/tools/installed', {
         templateUrl: 'pages/tools/installed.html',
         controller: 'BaseToolsController',
         reloadOnSearch: false,
-        resolve: angular.extend($person, {
-          // hacky way to require that the person has enabled public_repo before loading.
+
+        resolve: {
+          person: personResolver,
           permissions: function($rootScope) {
             $rootScope.$watch('current_person', function(person) {
               $rootScope.__can_use_plugin__ = person && person.github_account && person.github_account.permissions.indexOf("public_repo") >= 0;
             });
           }
-        })
+        }
       });
   }).
   controller("InstalledPluginsController", function($scope, $api) {

@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider, personResolver) {
     $routeProvider
       .when('/activity/transactions', {
         templateUrl: 'pages/activity/transactions.html',
         controller: 'TransactionActivity',
-        resolve: $person
+        resolve: {
+          person: personResolver
+        }
       });
   })
   .controller('TransactionActivity', function($scope, $routeParams, $api) {

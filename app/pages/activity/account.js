@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('app')
-  .config(function ($routeProvider, $person) {
+  .config(function ($routeProvider, personResolver) {
     $routeProvider
       .when('/activity/account', {
         templateUrl: 'pages/activity/account.html',
-        resolve: $person
+        resolve: {
+          person: personResolver
+        }
       });
   });
 
