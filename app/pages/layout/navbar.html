@@ -60,7 +60,7 @@
         </li>
 
         <!-- Sign in dropdown if not logged in -->
-        <li class="dropdown" ng-controller="Signin" ng-if="!current_person">
+        <li class="dropdown" ng-controller="SigninController" ng-if="!current_person">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In <b class="caret"></b></a>
           <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
             <li role="presentation" class="dropdown-header">Login using:</li>
