@@ -1,9 +1,6 @@
 'use strict';
 
 angular.module('app.controllers').controller('SigninCallbackController', function($scope, $api, $routeParams, $location, $window) {
-
-  $window.alert('guy fieri');
-
   if ($routeParams.status === 'linked') {
     $api.signin_with_access_token($routeParams.access_token).then(function(response) {
       if (response === false) {
