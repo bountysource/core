@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.directives').directive('issuesList', function() {
+angular.module('bountysource.directives').directive('issuesList', function() {
   return {
     restrict: "E",
     templateUrl: "pages/issues/partials/issues_list.html",
