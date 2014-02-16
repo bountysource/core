@@ -7,7 +7,7 @@
     <div class="control-group">
       <label class="control-label" for="inputEmail">Use a Service:</label>
       <div class="controls">
-        <ul ng-controller="Signin">
+        <ul ng-controller="SigninController">
           <li ng-repeat="provider in providers" class="provider-link">
             <a gaq-track-click ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="signin-{{provider.id}}" ng-click="save_route()">
               <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>

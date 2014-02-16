@@ -14,7 +14,7 @@
           <li><a href="/enterprise" id="navbar-teams">Enterprise</a></li>
           <!--<li ng-class="{'dropdown': true, 'dropup': true, 'active': chatroom.show}"><a ng-click="chatroom.toggle()" id="navbar-chatroom">Chatroom <b class="caret"></b></a></li>-->
 
-          <li class="dropdown" ng-controller="Signin">
+          <li class="dropdown" ng-controller="SigninController">
             <a href="/signin" class="dropdown-toggle" data-toggle="dropdown" ng-hide="!!current_person" id="navbar-signin">Sign In<b class="caret"></b></a>
             <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
               <li style="padding-left: 10px;">Using:</li>

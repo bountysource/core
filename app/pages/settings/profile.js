@@ -1,53 +1,41 @@
 'use strict';
 
-angular.module('app')
-  .config(function ($routeProvider, personResolver) {
-    $routeProvider
-      .when('/settings', {
-        templateUrl: 'pages/settings/profile.html',
-        controller: 'Settings',
-        resolve: {
-          person: personResolver
-        }
-      });
-  })
-  .controller('Settings', function($scope, $routeParams, $api) {
-    $scope.form_data = {
-      first_name: $scope.current_person.first_name,
-      last_name: $scope.current_person.last_name,
-      display_name: $scope.current_person.display_name,
-      bio: $scope.current_person.bio,
-      location: $scope.current_person.location,
-      company: $scope.current_person.company,
-      url: $scope.current_person.url,
-      public_email: $scope.current_person.public_email,
-      image_url: $scope.current_person.image_url
-    };
+angular.module('app.controllers').controller('Settings', ['$scope', '$routeParams', '$api', function($scope, $routeParams, $api) {
+  $scope.form_data = {
+    first_name: $scope.current_person.first_name,
+    last_name: $scope.current_person.last_name,
+    display_name: $scope.current_person.display_name,
+    bio: $scope.current_person.bio,
+    location: $scope.current_person.location,
+    company: $scope.current_person.company,
+    url: $scope.current_person.url,
+    public_email: $scope.current_person.public_email,
+    image_url: $scope.current_person.image_url
+  };
 
-    // profile pictures
-    $scope.profile_input = {
-      radio: $scope.form_data.image_url
-    };
+  // profile pictures
+  $scope.profile_input = {
+    radio: $scope.form_data.image_url
+  };
 
-    $scope.save = function() {
-      $scope.error = null;
+  $scope.save = function() {
+    $scope.error = null;
 
-      if ($scope.profile_input.radio === 'custom') {
-        $scope.form_data.image_url = $scope.profile_input.text;
+    if ($scope.profile_input.radio === 'custom') {
+      $scope.form_data.image_url = $scope.profile_input.text;
+    } else {
+      $scope.form_data.image_url = $scope.profile_input.radio;
+    }
+
+    $api.person_update($scope.form_data).then(function(updated_person) {
+      if (updated_person.error) {
+        $scope.error = updated_person.error;
       } else {
-        $scope.form_data.image_url = $scope.profile_input.radio;
+        $scope.success = 'Settings have been saved.';
+
+        // Update cached person
+        $api.set_current_person(updated_person);
       }
-
-      $api.person_update($scope.form_data).then(function(updated_person) {
-        if (updated_person.error) {
-          $scope.error = updated_person.error;
-        } else {
-          $scope.success = 'Settings have been saved.';
-
-          // Update cached person
-          $api.set_current_person(updated_person);
-        }
-      });
-    };
-  });
-
+    });
+  };
+}]);

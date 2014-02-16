@@ -1,9 +1,7 @@
 'use strict';
 
-angular.module('app').controller('TrackerNavTabsController', function ($scope, $routeParams, $api) {
-    $scope.active_tab = function() {
-      // todo
-      console.log($routeParams, $api);
-    };
-  });
-
+angular.module('app.controllers').controller('TrackerNavTabsController', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+  $scope.active_tab = function() {
+    console.log($routeParams, $api);
+  };
+}]);

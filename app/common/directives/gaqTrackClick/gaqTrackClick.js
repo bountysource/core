@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 angular.module('bountysource.directives').directive('gaqTrackClick', ['$timeout', '$window', function($timeout, $window) {
   return {

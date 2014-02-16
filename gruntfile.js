@@ -19,6 +19,7 @@ module.exports = function (grunt) {
           'gruntfile.js',
           'test/**/*.js',
           'app/pages/**/*.js',
+          'app/common/*.js',
           'app/common/**/*.js',
           'app/common/**/**/.js'
         ],
@@ -30,6 +31,7 @@ module.exports = function (grunt) {
           'gruntfile.js',
           'app/index.html',
           'app/pages/**/*.js',
+          'app/common/*.js',
           'app/common/**/*.js',
           'app/common/**/**/.js'
         ],
@@ -41,6 +43,7 @@ module.exports = function (grunt) {
           'app/pages/**/templates/*.html',
           '{.tmp,app}/styles/**/*.css',
           '{.tmp,app}/pages/**/*.js',
+          '{.tmp,app}/common/*.js',
           '{.tmp,app}/common/**/*.js',
           '{.tmp,app}/common/**/**/*.js',
           'app/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
@@ -127,6 +130,7 @@ module.exports = function (grunt) {
         'gruntfile.js',
         'test/**/*.js',
         'app/pages/**/*.js',
+        'app/common/*.js',
         'app/common/**/*.js',
         'app/common/**/**/.js'
       ]
@@ -145,6 +149,7 @@ module.exports = function (grunt) {
           'app/index.html': [
             'app/pages/*.js',
             'app/pages/**/*.js',
+            'app/common/*.js',
             'app/common/**/*.js',
             'app/common/**/**/.js'
           ]
@@ -203,6 +208,7 @@ module.exports = function (grunt) {
           cwd: 'app',
           src: [
             'pages/**/*.js',
+            'common/*.js',
             'common/**/*.js',
             'common/**/**/.js'
           ],
@@ -218,6 +224,7 @@ module.exports = function (grunt) {
         },
         src: [
           'dist/pages/**/*.js',
+          'dist/common/*.js',
           'dist/common/**/*.js',
           'dist/common/**/**/.js'
         ],

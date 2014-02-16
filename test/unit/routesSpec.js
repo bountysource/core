@@ -292,7 +292,7 @@ describe('All the wonderful routes we have', function() {
   describe('Signin', function() {
     it('should map routes for callback', function() {
       inject(function($route) {
-        expect($route.routes['/signin/callback'].controller).toBe('SigninCallback');
+        expect($route.routes['/signin/callback'].controller).toBe('SigninCallbackController');
         expect($route.routes['/signin/callback'].template).toEqual('{{ error || "Redirecting..." }}');
       });
     });
@@ -306,7 +306,7 @@ describe('All the wonderful routes we have', function() {
 
     it('should map routes for signin', function() {
       inject(function($route) {
-        expect($route.routes['/signin'].controller).toBe('Signin');
+        expect($route.routes['/signin'].controller).toBe('SigninController');
         expect($route.routes['/signin'].templateUrl).toEqual('pages/signin/signin.html');
       });
     });

@@ -12,14 +12,15 @@ angular.module('bountysource.filters', []);
 angular.module('bountysource.constants', []);
 angular.module('bountysource', ['bountysource.services', 'bountysource.directives', 'bountysource.filters', 'bountysource.constants']);
 
-angular.module('app', ['ui.bootstrap', 'ngRoute', 'ngSanitize', 'ngCookies', 'colorpicker.module', 'bountysource']);
+angular.module('app.routes', ['ngRoute', 'bountysource.constants']);
+angular.module('app.controllers', ['bountysource']);
+angular.module('app', ['ngSanitize', 'ngCookies', 'colorpicker.module', 'ui.bootstrap', 'app.routes', 'app.controllers']);
 
-angular.module('app').config(function ($routeProvider, $locationProvider, $httpProvider, $provide) {
+angular.module('app').config(['$locationProvider', '$httpProvider', '$provide', function ($locationProvider, $httpProvider, $provide) {
   //  NOTE: uncomment to test hashbang # mode
   //  $provide.decorator('$sniffer', function($delegate) { $delegate.history = false; return $delegate; });
 
   $locationProvider.html5Mode(true);
-  $routeProvider.otherwise({ templateUrl: 'pages/layout/not_found.html' });
 
   // HACK: transform old-style #urls into new style #/urls
   if ((window.location.hash||'').match(/^#[^/]/)) {
@@ -30,9 +31,9 @@ angular.module('app').config(function ($routeProvider, $locationProvider, $httpP
   $provide.decorator('$sniffer', function($delegate) { $delegate.cors = true; return $delegate; });
   // HACK: angular 1.0 adds this bad header... not needed in 1.1 per https://github.com/angular/angular.js/pull/1454
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-});
+}]);
 
-angular.module('app').run(function($api) {
+angular.module('app').run(['$api', function($api) {
   // load person from initial cookies
   $api.load_current_person_from_cookies();
-});
+}]);

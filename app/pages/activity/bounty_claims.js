@@ -1,31 +1,19 @@
 'use strict';
 
-angular.module('app')
-  .config(function ($routeProvider, personResolver) {
-    $routeProvider
-      .when('/activity/claims', {
-        templateUrl: 'pages/activity/bounty_claims.html',
-        controller: 'BountyClaimActivity',
-        resolve: {
-          person: personResolver
-        }
-      });
-  })
-  .controller('BountyClaimActivity', function($scope, $routeParams, $api, $pageTitle) {
-    $pageTitle.set('Bounty Claims', 'Activity');
+angular.module('app.controllers').controller('BountyClaimActivity', ['$scope', '$routeParams', '$api', '$pageTitle', function($scope, $routeParams, $api, $pageTitle) {
+  $pageTitle.set('Bounty Claims', 'Activity');
 
-    $api.bounty_claims_activity().then(function(bounty_claims) {
-      // set status of claims
-      for (var i=0; i<bounty_claims.length; i++) {
-        bounty_claims[i].$status = "submitted";
-        if (bounty_claims[i].rejected) { bounty_claims[i].$status = "rejected"; }
-        else if (bounty_claims[i].disputed) { bounty_claims[i].$status = "disputed"; }
-        else if (bounty_claims[i].collected) { bounty_claims[i].$status = "accepted"; }
-      }
+  $api.bounty_claims_activity().then(function(bounty_claims) {
+    // set status of claims
+    for (var i=0; i<bounty_claims.length; i++) {
+      bounty_claims[i].$status = "submitted";
+      if (bounty_claims[i].rejected) { bounty_claims[i].$status = "rejected"; }
+      else if (bounty_claims[i].disputed) { bounty_claims[i].$status = "disputed"; }
+      else if (bounty_claims[i].collected) { bounty_claims[i].$status = "accepted"; }
+    }
 
-      $scope.bounty_claims = bounty_claims;
+    $scope.bounty_claims = bounty_claims;
 
-      return bounty_claims;
-    });
+    return bounty_claims;
   });
-
+}]);

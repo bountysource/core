@@ -6,15 +6,15 @@
     <li><a>Make Pledge</a></li>
   </ul>
 
-  <div ng-include="'pages/fundraisers/partials/header.html'"></div>
-  <div ng-include="'pages/fundraisers/partials/nav_tabs.html'"></div>
+  <div ng-include="'pages/fundraisers/templates/header.html'"></div>
+  <div ng-include="'pages/fundraisers/templates/nav_tabs.html'"></div>
 
   <loading-bar ng-show="processing_payment">Processing payment...</loading-bar>
 
   <div ng-hide="processing_payment">
     <div class="row-fluid" ng-show="fundraiser">
       <div class="span3">
-        <div ng-include="'pages/fundraisers/partials/left_column.html'"></div>
+        <div ng-include="'pages/fundraisers/templates/left_column.html'"></div>
       </div>
 
       <div class="span9">
