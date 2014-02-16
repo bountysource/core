@@ -1,25 +1,20 @@
 {
   "name": "bountysource",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "dependencies": {
-    "angular": "=1.2.13",
-    "json3": "~3.2.4",
-    "es5-shim": "~2.0.8",
-    "angular-resource": "~1.0.8",
-    "angular-bootstrap": "~0.3.0",
-    "angular-sanitize": "~1.0.8",
-    "angular-cookies": "~1.0.8",
-    "angular-route": "~1.2.3",
-    "bootstrap": "~2.3.2",
-    "momentjs": "~2.1.0",
-    "angular-bootstrap-colorpicker": "~2.0.2",
-    "angular-ui-utils": "~0.0.4"
+    "angular": "~1.2.13",
+    "es5-shim": "~2.3.0",
+    "angular-bootstrap": "~0.10.0",
+    "angular-route": "~1.2.13",
+    "bootstrap": "~3.1.1",
+    "momentjs": "~2.5.1",
+    "angular-bootstrap-colorpicker": "~3.0.5",
+    "angular-sanitize": "~1.2.13",
+    "angular-cookies": "~1.2.13",
+    "angular-resource": "~1.2.13"
   },
   "devDependencies": {
-    "angular-mocks": "~1.0.7",
-    "angular-scenario": "~1.0.7"
-  },
-  "resolutions": {
-    "angular": "1.2.3"
+    "angular-mocks": "~1.2.13",
+    "angular-scenario": "~1.2.13"
   }
 }

@@ -7,38 +7,38 @@ describe('All the wonderful routes we have', function() {
   describe('About', function() {
     it('should map routes for faq', function() {
       inject(function($route) {
-        expect($route.routes['/faq'].controller).toBe('Static');
+        expect($route.routes['/faq'].controller).toBe('StaticPageController');
         expect($route.routes['/faq'].templateUrl).toEqual('pages/about/faq.html');
       });
     });
 
     it('should map routes for fees', function() {
       inject(function($route) {
-        expect($route.routes['/fees'].controller).toBe('Static');
+        expect($route.routes['/fees'].controller).toBe('StaticPageController');
         expect($route.routes['/fees'].templateUrl).toEqual('pages/about/fees.html');
       });
     });
     it('shiould map routes for jobs', function() {
       inject(function($route) {
-        expect($route.routes['/jobs'].controller).toBe('Static');
+        expect($route.routes['/jobs'].controller).toBe('StaticPageController');
         expect($route.routes['/jobs'].templateUrl).toEqual('pages/about/jobs.html');
       });
     });
     it('should map routes for learn', function() {
       inject(function($route) {
-        expect($route.routes['/learn'].controller).toBe('Static');
+        expect($route.routes['/learn'].controller).toBe('StaticPageController');
         expect($route.routes['/learn'].templateUrl).toEqual('pages/about/learn.html');
       });
     });
     it('should map routes for privacy', function() {
       inject(function($route) {
-        expect($route.routes['/privacy'].controller).toBe('Static');
+        expect($route.routes['/privacy'].controller).toBe('StaticPageController');
         expect($route.routes['/privacy'].templateUrl).toEqual('pages/about/privacy_policy.html');
       });
     });
     it('should map routes for terms', function() {
       inject(function($route) {
-        expect($route.routes['/terms'].controller).toBe('Static');
+        expect($route.routes['/terms'].controller).toBe('StaticPageController');
         expect($route.routes['/terms'].templateUrl).toEqual('pages/about/terms.html');
       });
     });

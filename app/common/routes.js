@@ -17,37 +17,37 @@ angular.module('app.routes').config(function ($routeProvider, personResolver) {
 
   $routeProvider.when('/faq', angular.extend({
     templateUrl: 'pages/about/faq.html',
-    controller: 'Static',
+    controller: 'StaticPageController',
     title: 'Frequently Asked Questions'
   }, defaultRouteOptions));
 
   $routeProvider.when('/fees', angular.extend({
     templateUrl: 'pages/about/fees.html',
-    controller: 'Static',
+    controller: 'StaticPageController',
     title: 'Pricing'
   }, defaultRouteOptions));
 
   $routeProvider.when('/jobs', angular.extend({
     templateUrl: 'pages/about/jobs.html',
-    controller: 'Static',
+    controller: 'StaticPageController',
     title: 'Jobs'
   }, defaultRouteOptions));
 
   $routeProvider.when('/learn', angular.extend({
     templateUrl: 'pages/about/learn.html',
-    controller: 'Static',
+    controller: 'StaticPageController',
     title: 'Learn'
   }, defaultRouteOptions));
 
   $routeProvider.when('/privacy', angular.extend({
     templateUrl: 'pages/about/privacy_policy.html',
-    controller: 'Static',
+    controller: 'StaticPageController',
     title: 'Privacy Policy'
   }, defaultRouteOptions));
 
   $routeProvider.when('/terms', angular.extend({
     templateUrl: 'pages/about/terms.html',
-    controller: 'Static',
+    controller: 'StaticPageController',
     title: 'Terms of Service'
   }, defaultRouteOptions));
 
