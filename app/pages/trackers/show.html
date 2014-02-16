@@ -218,7 +218,7 @@
           <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"
              ng-show="issue.thumbs_up_count > 0">
             <!-- TODO (PERF ISSUE):  tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom"-->
-            <i class="icon-thumbs-up icon-white"></i>
+            <i class="icon-thumbs-up"></i>
             {{issue.thumbs_up_count | number}}
           </a>
         </td>
@@ -226,7 +226,7 @@
           <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"
              ng-show="issue.participants_count > 1">
             <!--  TODO (PERF ISSUE):  tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom"-->
-            <i class="icon-user icon-white"></i>
+            <i class="icon-user"></i>
             {{issue.participants_count | number}}
           </a>
         </td>

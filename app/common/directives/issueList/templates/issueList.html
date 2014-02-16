@@ -20,8 +20,8 @@
         {{issue.bounty_total | dollars:{space:true} }}
       </a>
     </td>
-    <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"><i class="icon-thumbs-up icon-white"></i> {{issue.thumbs_up_count | number}}</a></td>
-    <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"><i class="icon-user icon-white"></i> {{issue.participants_count | number}}</a></td>
+    <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"><i class="icon-thumbs-up"></i> {{issue.thumbs_up_count | number}}</a></td>
+    <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"><i class="icon-user"></i> {{issue.participants_count | number}}</a></td>
     <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">{{issue.created_at | timeAgoShort}}</a></td>
   </tr>
   </tbody>

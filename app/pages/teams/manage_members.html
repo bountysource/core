@@ -55,10 +55,10 @@
               </td>
               <td style="text-align: center;">
                 <div collapse="member.$dirty">
-                  <button ng-click="remove_member(member)" class="btn btn-block btn-danger btn-xs" ng-disabled="member.id == current_person.id"><i class="icon-trash icon-white"></i> Remove</button>
+                  <button ng-click="remove_member(member)" class="btn btn-block btn-danger btn-xs" ng-disabled="member.id == current_person.id"><i class="icon-trash"></i> Remove</button>
                 </div>
                 <div collapse="!member.$dirty">
-                  <button ng-click="update_member(member)" class="btn btn-primary btn-xs"><i class="icon-ok icon-white"></i></button>
+                  <button ng-click="update_member(member)" class="btn btn-primary btn-xs"><i class="icon-ok"></i></button>
                   <button ng-click="cancel_member_changes(member)" class="btn btn-default btn-xs"><i class="icon-remove"></i></button>
                 </div>
               </td>
@@ -106,11 +106,11 @@
                   <span ng-show="member.$master.budget == null && member.$master.is_developer">No Limit</span>
                 </td>
                 <td class="center-height">
-                  <span ng-show="member.$master.budget"><button class="btn btn-success btn-block btn-xs" ng-disabled="member.$master.balance == member.$master.budget" ng-click="update_budget(member)"><i class="icon-repeat icon-white"></i> Reload</button></span>
+                  <span ng-show="member.$master.budget"><button class="btn btn-success btn-block btn-xs" ng-disabled="member.$master.balance == member.$master.budget" ng-click="update_budget(member)"><i class="icon-repeat"></i> Reload</button></span>
                 </td>
                 <td class="center-height">
-                  <span ng-show="member.$master.budget > 0 && !member.new_budget"><button class="btn btn-danger btn-block btn-xs" ng-click="delete_budget(member)"><i class="icon-trash icon-white"></i> Remove</button></span>
-                  <span ng-show="member.new_budget"><button class="btn btn-primary btn-block btn-xs" ng-click="update_budget(member)"><i class="icon-ok icon-white"></i> Save</button></span>
+                  <span ng-show="member.$master.budget > 0 && !member.new_budget"><button class="btn btn-danger btn-block btn-xs" ng-click="delete_budget(member)"><i class="icon-trash"></i> Remove</button></span>
+                  <span ng-show="member.new_budget"><button class="btn btn-primary btn-block btn-xs" ng-click="update_budget(member)"><i class="icon-ok"></i> Save</button></span>
                 </td>
               </tr>
               </tbody>
@@ -170,10 +170,10 @@
 
                 <td style="text-align: center;">
                   <div ng-show="new_member.email && !new_member.registered" tooltip="Send Invite">
-                    <button type="submit" class="btn btn-block btn-primary btn-xs"><i class="icon-envelope icon-white"></i></button>
+                    <button type="submit" class="btn btn-block btn-primary btn-xs"><i class="icon-envelope"></i></button>
                   </div>
                   <div ng-show="new_member.email && new_member.registered" tooltip="Add to Team">
-                    <button type="submit" class="btn btn-block btn-success btn-xs"><i class="icon-plus icon-white"></i></button>
+                    <button type="submit" class="btn btn-block btn-success btn-xs"><i class="icon-plus"></i></button>
                   </div>
                 </td>
               </tr>
