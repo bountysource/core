@@ -1,14 +1,14 @@
 <div ng-hide="approved">
-  <div class="hero-unit text-center">
+  <div class="text-center jumbotron">
     <p class="lead">Block <strong>{{email}}</strong> from future Bountysource emails?</p>
-    <a style="width: 110px;" href="/" class="btn btn-large btn-danger">Cancel</a>
-    <button style="width: 150px;" ng-click="unsubscribe()" class="btn btn-large btn-success">Remove</button>
+    <a style="width: 110px;" href="/" class="btn btn-danger btn-lg">Cancel</a>
+    <button style="width: 150px;" ng-click="unsubscribe()" class="btn btn-success btn-lg">Remove</button>
   </div>
 </div>
 <div ng-show="approved">
   <loading-bar ng-show="processing">Just a moment please...</loading-bar>
 
-  <div class="hero-unit" ng-hide="processing">
+  <div class="jumbotron" ng-hide="processing">
     <div class="text-center">
       <h2>Removed</h2>
 

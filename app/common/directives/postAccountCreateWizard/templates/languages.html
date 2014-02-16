@@ -1,39 +1,36 @@
 <div style="min-height: 200px;">
+  <div>
+    <form class="form"></form>
+    <div class="row">
+      <div class="col-sm-12 col-lg-12">
+        <input type="text" class="search-query span12" placeholder="Search for languages that you know"
+               ng-model="$parent.newLanguage"
+               typeahead="language as language.name for language in languages | filter:$viewValue"
+               typeahead-editable="false">
+      </div>
+    </div>
+
+  </div>
+  <br>
+
+  <div ng-show="myLanguages.length &gt; 0" class="text-right">
+    <a ng-click="removeAllLanguages()">Remove All</a>
+  </div>
+  <br>
   <table class="table table-striped table-no-head">
+    <tbody>
     <tr>
-      <div>
-        <form class="form">
-          <div class="row-fluid">
-            <div class="span12">
-              <input
-                type="text"
-                class="search-query span12"
-                placeholder="Search for languages that you know"
-                ng-model="$parent.newLanguage"
-                typeahead="language as language.name for language in languages | filter:$viewValue"
-                typeahead-editable="false"
-                />
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <br />
-
-      <div ng-show="myLanguages.length > 0" class="text-right">
-        <a ng-click="removeAllLanguages()">Remove All</a>
-      </div>
-
-      <br />
     </tr>
 
     <tr ng-repeat="language in myLanguages | orderBy:'name'">
       <td>
         <span>{{language.name}}</span>
+
         <div class="pull-right">
           <a ng-click="removeLanguage(language)">Remove</a>
         </div>
       </td>
     </tr>
+    </tbody>
   </table>
 </div>

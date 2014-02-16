@@ -1,8 +1,8 @@
 <div>
   <div class="well text-center">
-    <div><img ng-src="{{team.large_image_url}}" style="width: 100%;"/></div>
-    <br />
-    <div><a class="btn btn-block" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a></div>
+    <div><img ng-src="{{team.large_image_url}}" style="width: 100%;"></div>
+    <br>
+    <div><a class="btn btn-block btn-default" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a></div>
   </div>
 
   <div ng-show="is_member">
@@ -13,22 +13,22 @@
 
       <!-- Permissions -->
       <div>
-        <label class="checkbox" ng-show="is_public">
+        <div class="checkbox"><label class="" ng-show="is_public">
           <span>membership publicized</span>
-          <input type="checkbox" style="cursor: default;" disabled checked />
-        </label>
-        <label class="checkbox" ng-show="is_admin || is_developer">
+          <input type="checkbox" style="cursor: default;" disabled="" checked="">
+        </label></div>
+        <div class="checkbox"><label class="" ng-show="is_admin || is_developer">
           <span>can change team settings</span>
-          <input type="checkbox" style="cursor: default;" disabled checked />
-        </label>
-        <label class="checkbox" ng-show="is_admin || is_developer">
+          <input type="checkbox" style="cursor: default;" disabled="" checked="">
+        </label></div>
+        <div class="checkbox"><label class="" ng-show="is_admin || is_developer">
           <span>can manage team projects</span>
-          <input type="checkbox" style="cursor: default;" disabled checked />
-        </label>
-        <label class="checkbox" ng-show="is_admin">
+          <input type="checkbox" style="cursor: default;" disabled="" checked="">
+        </label></div>
+        <div class="checkbox"><label class="" ng-show="is_admin">
           <span>can manage team members</span>
-          <input type="checkbox" style="cursor: default;" disabled checked />
-        </label>
+          <input type="checkbox" style="cursor: default;" disabled="" checked="">
+        </label></div>
       </div>
 
       <!-- Account Balance -->
@@ -36,22 +36,22 @@
         <h4>Team Account Balance</h4>
         <strong>{{team.account_balance | currency}}</strong>
       </div>
-      <div class="text-center" ng-show="is_developer && has_remaining_balance != null">
+      <div class="text-center" ng-show="is_developer &amp;&amp; has_remaining_balance != null">
         <h4>Remaining Balance</h4>
         <strong>{{has_remaining_balance | currency}}</strong>
       </div>
     </div>
   </div>
 
-  <div ng-show="team.open_bounties_amount > 0">
-    <div class="well well-small">
-      <div class="row-fluid">
-        <div class="text-center span6">
+  <div ng-show="team.open_bounties_amount &gt; 0">
+    <div class="well well-sm">
+      <div class="row">
+        <div class="text-center col-sm-6 col-md-6">
           <a ng-href="teams/{{team.slug}}/bounties"><h3 style="margin: 0; line-height:35px" class="text-center">{{team.open_bounties_amount | dollars}}</h3></a>
           <div>in open bounties</div>
         </div>
 
-        <div class="text-center span6">
+        <div class="text-center col-sm-6 col-md-6">
           <a ng-href="teams/{{team.slug}}/bounties"><h3 style="margin:0; line-height:35px;" class="text-center">{{team.open_issues_count}}</h3></a>
           <div>open issues</div>
         </div>

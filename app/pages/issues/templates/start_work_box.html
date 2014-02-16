@@ -1,13 +1,13 @@
 <div ng-controller="SolutionsBaseController" ng-show="issue.can_add_bounty">
-  <div class="row-fluid">
-    <div class="well span12">
-      <div class="span6" style="padding-right:15px;" ng-hide="initializing">
+  <div class="row">
+    <div class="well col-sm-12 col-md-12">
+      <div class="col-sm-6 col-md-6" style="padding-right:15px;" ng-hide="initializing">
         <div ng-switch="status.type">
           <div ng-switch-when="SolutionEvent::Started">
 
-            <div class="row-fluid">
-              <div class="span6 text-center"><h4>I'm solving this!</h4></div>
-              <div class="span6"><button class="btn btn-block btn-large btn-primary" style="vertical-align: middle;" ng-click="toggle_solution_edit_form()"><span ng-show="!show_solution_edit_form">Edit Details</span><span ng-show="show_solution_edit_form">Hide Details</span></button></div>
+            <div class="row">
+              <div class="text-center col-sm-6 col-md-6"><h4>I'm solving this!</h4></div>
+              <div class="col-sm-6 col-md-6"><button class="btn btn-block btn-primary btn-lg" style="vertical-align: middle;" ng-click="toggle_solution_edit_form()"><span ng-show="!show_solution_edit_form">Edit Details</span><span ng-show="show_solution_edit_form">Hide Details</span></button></div>
             </div>
           </div>
 
@@ -34,63 +34,63 @@
           </div>
 
           <div ng-switch-when="SolutionEvent::Stopped">
-            <div class="row-fluid">
-              <div class="span6 text-center"><h4>I can solve this!</h4></div>
-              <div class="span6"><button class="btn btn-success btn-block btn-large" style="vertical-align: middle;" ng-click="toggle_solution_edit_form()">Get Started</button></div>
+            <div class="row">
+              <div class="text-center col-sm-6 col-md-6"><h4>I can solve this!</h4></div>
+              <div class="col-sm-6 col-md-6"><button class="btn btn-success btn-block btn-lg" style="vertical-align: middle;" ng-click="toggle_solution_edit_form()">Get Started</button></div>
             </div>
           </div>
 
-          <div ng-switch-default>
-            <div class="row-fluid">
-              <div class="span6 text-center"><h4>I can solve this:</h4></div>
-              <div class="span6"><button class="btn btn-success btn-block btn-large" style="vertical-align: middle;" ng-click="toggle_solution_form()">Get Started</button></div>
+          <div ng-switch-default="">
+            <div class="row">
+              <div class="text-center col-sm-6 col-md-6"><h4>I can solve this:</h4></div>
+              <div class="col-sm-6 col-md-6"><button class="btn btn-success btn-block btn-lg" style="vertical-align: middle;" ng-click="toggle_solution_form()">Get Started</button></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="span6">
+      <div class="col-sm-6 col-md-6">
         <div ng-controller="DeveloperGoalsBaseController" style="border-left: 1px solid #ddd;" collapse="initializing">
           <!-- You have set a goal -->
           <div ng-show="my_developer_goal">
             <div>
               <form ng-submit="update_developer_goal(my_developer_goal.amount)" style="margin: 0;" class="form-inline" name="form">
-                <div class="row-fluid">
-                  <div class="span4 text-center">
+                <div class="row">
+                  <div class="text-center col-sm-4 col-md-4">
                     <h4>My goal:</h4>
                   </div>
-                  <div class="span3">
+                  <div class="col-sm-3 col-md-3">
                     <div class="input-prepend" style="margin-bottom: 0px;">
                       <span class="add-on" style="padding-top: 11px; padding-bottom: 11px;">$</span>
-                      <input name="amount" type="number" style="height: 44px;" class="span9" min="{{issue.bounty_total + 1}}" step="1" ng-model="my_developer_goal.amount" ng-value="my_developer_goal.amount" required />
+                      <input name="amount" type="number" style="height: 44px;" class="span9 form-control" min="{{issue.bounty_total + 1}}" step="1" ng-model="my_developer_goal.amount" ng-value="my_developer_goal.amount" required="">
                     </div>
                   </div>
 
-                  <div class="span5 pull-right">
-                    <button type="submit" class="btn btn-primary btn-large" ng-disabled="my_developer_goal.$master.amount == my_developer_goal.amount || my_developer_goal.amount <= issue.bounty_total || my_developer_goal.amount < 5">Update</button>
-                    <button class="btn btn-danger btn-large" ng-click="delete_developer_goal()"><i class="icon-trash icon-white"></i></button>
+                  <div class="pull-right col-sm-5 col-md-5">
+                    <button type="submit" class="btn btn-primary btn-lg" ng-disabled="my_developer_goal.$master.amount == my_developer_goal.amount || my_developer_goal.amount &lt;= issue.bounty_total || my_developer_goal.amount &lt; 5">Update</button>
+                    <button class="btn btn-danger btn-lg" ng-click="delete_developer_goal()"><i class="icon-trash icon-white"></i></button>
                   </div>
                 </div>
               </form>
             </div>
-          </div>  
+          </div>
 
           <!-- You have not set a goal -->
           <div ng-hide="my_developer_goal">
             <div>
               <form ng-submit="create_developer_goal()" style="margin: 0;" class="form">
-                <div class="row-fluid">
-                  <div class="span5 text-center">
+                <div class="row">
+                  <div class="text-center col-sm-5 col-md-5">
                     <h4>I'd solve this for:</h4>
                   </div>
-                  <div class="span3">
+                  <div class="col-sm-3 col-md-3">
                     <div class="input-prepend" style="margin-bottom: 0px;">
                       <span class="add-on" style="padding-top: 11px; padding-bottom: 11px;">$</span>
-                      <input type="number" min="{{issue.bounty_total + 1}}" step="1" class="span9" style="height: 44px;" ng-model="new_developer_goal.amount" placeholder="{{issue.bounty_total + 100}}" required />
+                      <input type="number" min="{{issue.bounty_total + 1}}" step="1" class="span9 form-control" style="height: 44px;" ng-model="new_developer_goal.amount" placeholder="{{issue.bounty_total + 100}}" required="">
                     </div>
                   </div>
 
-                  <div class="span4">
-                    <button type="submit" class="btn btn-primary btn-block btn-large" ng-disabled="new_developer_goal.amount <= issue.bounty_total || new_developer_goal.amount < 5">Set Goal</button>
+                  <div class="col-sm-4 col-md-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="new_developer_goal.amount &lt;= issue.bounty_total || new_developer_goal.amount &lt; 5">Set Goal</button>
                   </div>
                 </div>
               </form>

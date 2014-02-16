@@ -1,61 +1,61 @@
 <ul class="breadcrumb">
-  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/">Home</a></li>
   <li><a>Add Issue by URL</a></li>
 </ul>
 
-<div class="row-fluid">
-  <div class="span9">
+<div class="row">
+  <div class="col-sm-9 col-md-9">
     <div ng-show="error">
       <alert type="'error'" close="error = null">{{error}}</alert>
     </div>
 
     <form class="form-horizontal" name="form">
-      <div class="control-group">
+      <div class="form-group">
         <label class="control-label" for="issue_url">Issue URL</label>
         <div class="controls">
-          <input type="url" id="issue_url" ng-model="new_issue.issue_url" class="span12" placeholder="https://trac.someproject.com/ticket/123" required />
+          <input type="url" id="issue_url" ng-model="new_issue.issue_url" class="span12 form-control" placeholder="https://trac.someproject.com/ticket/123" required="">
         </div>
       </div>
 
-      <div class="control-group">
+      <div class="form-group">
         <label class="control-label" for="title">Issue Title</label>
         <div class="controls">
-          <input type="text" id="title" ng-model="new_issue.title" class="span12" placeholder="Title of the issue" required />
+          <input type="text" id="title" ng-model="new_issue.title" class="span12 form-control" placeholder="Title of the issue" required="">
         </div>
       </div>
 
-      <div class="control-group">
+      <div class="form-group">
         <label class="control-label" for="number">Issue Number</label>
         <div class="controls">
-          <input type="text" id="number" ng-model="new_issue.number" class="span4" placeholder="Issue number" />
+          <input type="text" id="number" ng-model="new_issue.number" class="span4 form-control" placeholder="Issue number">
         </div>
       </div>
 
-      <br />
+      <br>
 
-      <div class="control-group">
+      <div class="form-group">
         <label class="control-label" for="project_name">Project Name</label>
         <div class="controls">
-          <input type="text" id="project_name" ng-model="new_issue.project_name" class="span12" placeholder="Name of the project" required />
+          <input type="text" id="project_name" ng-model="new_issue.project_name" class="span12 form-control" placeholder="Name of the project" required="">
         </div>
       </div>
 
-      <div class="control-group">
+      <div class="form-group">
         <label class="control-label" for="project_url">Project Tracker URL</label>
         <div class="controls">
-          <input type="url" id="project_url" ng-model="new_issue.project_url" class="span12" placeholder="https://trac.someproject.com/" required />
+          <input type="url" id="project_url" ng-model="new_issue.project_url" class="span12 form-control" placeholder="https://trac.someproject.com/" required="">
         </div>
       </div>
 
-      <div class="control-group">
+      <div class="form-group">
         <div class="controls">
-          <button type="submit" class="btn btn-large btn-primary" ng-click="create_issue()" ng-disabled="form.$invalid">Add Issue</button>
+          <button type="submit" class="btn btn-primary btn-lg" ng-click="create_issue()" ng-disabled="form.$invalid">Add Issue</button>
         </div>
       </div>
     </form>
   </div>
 
-  <div class="span3">
+  <div class="col-sm-3 col-md-3">
     <div class="well">
       <h3 style="margin-top: 0;">Add New Issue</h3>
       <p>You are adding a new issue to Bountysource, did you try <a ng-href="/search">searching for this issue</a> already?</p>

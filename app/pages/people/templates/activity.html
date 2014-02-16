@@ -1,11 +1,15 @@
 <table id="person-timeline-table" class="table table-striped">
+  <tbody>
   <tr ng-repeat="action in timeline | orderBy:'-sort_date'">
     <td ng-show="action.type == 'Pledge'">
-      Pledged <strong>{{ action.amount | dollars }}</strong> to <a ng-href="/fundraisers/{{ action.fundraiser.slug }}">{{action.fundraiser.title}}</a> <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
+      Pledged <strong>{{ action.amount | dollars }}</strong> to <a ng-href="/fundraisers/{{ action.fundraiser.slug }}">{{action.fundraiser.title}}</a>
+      <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
     </td>
 
     <td ng-show="action.type == 'Bounty'">
-      Placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">an issue</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
+      Placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">an
+      issue</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span
+      ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
     </td>
 
     <td ng-show="action.type == 'Fundraiser'">
@@ -17,16 +21,18 @@
     </td>
 
     <td ng-show="action.type == 'Collected'">
-      Collected bounty on <a ng-href="{{action.bounty_claim.issue.frontend_path}}">{{action.bounty_claim.issue.title}}</a>
+      Collected bounty on <a
+      ng-href="{{action.bounty_claim.issue.frontend_path}}">{{action.bounty_claim.issue.title}}</a>
     </td>
 
-    <td class="muted">{{ action.sort_date | date:'medium' }}</td>
+    <td class="text-muted">{{ action.sort_date | date:'medium' }}</td>
   </tr>
 
   <tr>
     <td>
       Joined the Bountysource family
     </td>
-    <td class="muted">{{ person.created_at | date:'medium' }}</td>
+    <td class="text-muted">{{ person.created_at | date:'medium' }}</td>
   </tr>
+  </tbody>
 </table>

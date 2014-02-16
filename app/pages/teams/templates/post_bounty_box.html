@@ -3,26 +3,26 @@
   <p>Paste the URL to an issue and enter an amount.</p>
 
   <form class="form-horizontal" style="margin: 30px 0 0 0;">
-    <div class="control-group">
+    <div class="form-group">
       <label class="control-label" style="width:inherit">URL:</label>
 
       <div class="controls" style="margin-left:70px">
-        <input ng-model="search_query" type="text" class="span12" placeholder="https://github.com/.../issues/123" />
+        <input ng-model="search_query" type="text" class="span12 form-control" placeholder="https://github.com/.../issues/123">
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
       <label class="control-label" style="width:inherit">Amount:</label>
 
       <div class="controls" style="margin-left:70px">
         <div class="input-prepend">
           <span class="add-on">$</span>
-          <input ng-model="bounty_amount" type="number" class="span6" placeholder="30.00" />
+          <input ng-model="bounty_amount" type="number" class="span6 form-control" placeholder="30.00">
         </div>
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
       <div class="controls" style="margin-left:70px;">
         <button ng-click="submit_search(search_query, bounty_amount)" class="btn btn-primary">Post Bounty
         </button>

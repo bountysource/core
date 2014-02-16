@@ -1,13 +1,13 @@
-<div ng-controller="TrackerLeaderboardController" ng-show="backers.length > 0" class="well" style="padding-top:0px; padding-bottom:0px">
+<div ng-controller="TrackerLeaderboardController" ng-show="backers.length &gt; 0" class="well" style="padding-top:0px; padding-bottom:0px">
   <h3 class="text-center"><ng-pluralize count="backers.length" when="{'1': 'Top Backer', 'other':'Top Backers'}"></ng-pluralize></h3>
   <table class="table top-backers-table">
-    <tr ng-repeat="backer in backers | orderBy:'-total_backed'| limitTo:3">
+    <tbody><tr ng-repeat="backer in backers | orderBy:'-total_backed'| limitTo:3">
       <!--Profile picture. No link if anon-->
       <td style="width: 50px">
         <div>
           <div>
             <a owner-href="backer" class="thumbnail">
-              <img style="width: 50px; max-width: 50px; height: 50px" ng-src="{{backer.image_url}}" />
+              <img style="width: 50px; max-width: 50px; height: 50px" ng-src="{{backer.image_url}}">
             </a>
           </div>
         </div>
@@ -22,5 +22,5 @@
         <div><strong>{{ backer.total_backed | dollars }}</strong></div>
       </td>
     </tr>
-  </table>
+    </tbody></table>
 </div>

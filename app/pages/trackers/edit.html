@@ -1,7 +1,7 @@
-<ul class="breadcrumb" >
-  <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/trackers">Projects</a><span class="divider">»</span></li>
-  <li><a ng-href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a><span class="divider">»</span></li>
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/trackers">Projects</a></li>
+  <li><a ng-href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a></li>
   <li><a ng-href="/trackers/{{ tracker.slug }}/edit">Edit</a></li>
 </ul>
 
@@ -16,11 +16,11 @@
 </div>
 
 <div ng-show="tracker">
-  <div class="row-fluid">
-    <div class="span3">
+  <div class="row">
+    <div class="col-sm-3 col-md-3">
       <ng-include src="'pages/trackers/templates/sidebar.html'"></ng-include>
     </div>
-    <div class="span9">
+    <div class="col-sm-9 col-md-9">
       <div ng-show="alert.message">
         <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
       </div>
@@ -31,75 +31,45 @@
 
       <div ng-hide="saving">
         <form class="form-horizontal" name="form" ng-submit="save()">
-          <div class="control-group">
+          <div class="form-group">
             <label class="control-label" for="inputName">Name:</label>
             <div class="controls">
-              <input type="text" id="inputName" placeholder="Name of the project" ng-model="form_data.name" class="input span12" required />
+              <input type="text" id="inputName" placeholder="Name of the project" ng-model="form_data.name" class="input span12 form-control" required="">
             </div>
           </div>
 
-          <div class="control-group">
+          <div class="form-group">
             <label class="control-label" for="inputDescription">Description:</label>
             <div class="controls">
               <textarea type="text" class="span12" rows="4" id="inputDescription" placeholder="Description for the project" ng-model="form_data.description"></textarea>
             </div>
           </div>
 
-          <div class="control-group">
+          <div class="form-group">
             <label class="control-label" for="inputName">Image:</label>
             <div class="controls">
-              <input type="text" ng-model="form_data.image_url" placeholder="Image URL or Gravatar Email" class="input span12"/>
+              <input type="text" ng-model="form_data.image_url" placeholder="Image URL or Gravatar Email" class="input span12 form-control">
             </div>
           </div>
 
-          <div class="control-group">
+          <div class="form-group">
             <label class="control-label" for="inputName">Homepage:</label>
             <div class="controls">
-              <input type="url" id="inputName" placeholder="Homepage for this project" ng-model="form_data.homepage" class="input span12" />
+              <input type="url" id="inputName" placeholder="Homepage for this project" ng-model="form_data.homepage" class="input span12 form-control">
             </div>
           </div>
 
-          <div class="control-group">
+          <div class="form-group">
             <label class="control-label" for="inputName">Repository URL:</label>
             <div class="controls">
-              <input type="text" id="inputName" placeholder="Code Repo URL" ng-model="form_data.repo_url" class="input span12"/>
+              <input type="text" id="inputName" placeholder="Code Repo URL" ng-model="form_data.repo_url" class="input span12 form-control">
             </div>
           </div>
 
-          <!--<div class="control-group">-->
-            <!--<label class="control-label" for="inputName">Languages:</label>-->
-            <!--<div class="controls">-->
-              <!--<div class="row-fluid">-->
-                <!--<div class="span6">-->
-                  <!--<div>-->
-                    <!--<input-->
-                      <!--type="text"-->
-                      <!--class="input span12"-->
-                      <!--placeholder="Add a language"-->
-                      <!--ng-model="selected_language"-->
-                      <!--typeahead="language as language.name for language in languages | filter:$viewValue | limitTo: 8"-->
-                      <!--typeahead-editable="false"-->
-                      <!--autocomplete="off"-->
-                      <!--/>-->
-                  <!--</div>-->
-                  <!--<br />-->
-                  <!--<table id="tracker-edit-language-table" class="table table-condensed table-striped" style="margin-left:0">-->
-                    <!--<tbody>-->
-                    <!--<tr ng-repeat="language in form_data.languages">-->
-                      <!--<td style="width: 85%;"><strong>{{ language.name }}</strong></td>-->
-                      <!--<td style="width: 15%;"><button class="btn btn-mini btn-danger btn-block" ng-click="remove_language(language)"><i class="icon-white icon-remove"></i></button></td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                  <!--</table>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <div class="control-group">
+          <div class="form-group">
             <div class="controls">
-              <button type="submit" class="btn btn-large btn-primary" ng-disabled="form.$invalid || !unsaved_changes()">Save Changes</button>
-              <a class="btn btn-large" ng-click="cancel()">Cancel</a>
+              <button type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid || !unsaved_changes()">Save Changes</button>
+              <a class="btn btn-default btn-lg" ng-click="cancel()">Cancel</a>
             </div>
           </div>
         </form>

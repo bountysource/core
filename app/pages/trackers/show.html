@@ -1,40 +1,57 @@
-<ul class="breadcrumb" >
-  <li><a href="/">Home</a><span class="divider">»</span></li>
-  <li><a href="/trackers">Projects</a><span class="divider">»</span></li>
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/trackers">Projects</a></li>
   <li><a ng-href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a></li>
 </ul>
 
 <tracker-signin-modal tracker="tracker"></tracker-signin-modal>
 
-<div class="row-fluid" ng-show="tracker">
-  <div class="span3">
+<div class="row" ng-show="tracker">
+  <div class="col-sm-3 col-md-3">
     <ng-include src="'pages/trackers/templates/sidebar.html'"></ng-include>
 
-    <div class="well well-small" ng-show="tracker.bounty_total > 0 || tracker.tracker_type == 'Github::Repository'">
-      <div collapse="!open_bounties || open_bounties <= 0">
-        <a ng-click="show_bounties()"><h3 class="text-center">{{ open_bounties }} <ng-pluralize count="open_bounties" when="{'1':'Open Bounty', 'other':'Open Bounties'}"></ng-pluralize></h3></a>
+    <div class="well well-sm" ng-show="tracker.bounty_total &gt; 0 || tracker.tracker_type == 'Github::Repository'">
+      <div collapse="!open_bounties || open_bounties &lt;= 0">
+        <a ng-click="show_bounties()">
+          <h3 class="text-center">{{ open_bounties }}
+            <ng-pluralize count="open_bounties" when="{'1':'Open Bounty', 'other':'Open Bounties'}"></ng-pluralize>
+          </h3>
+        </a>
       </div>
 
-      <div class="row-fluid">
-        <div class="text-center" ng-class="{span6: tracker_stats.collected_total > 0, span12: tracker_stats.collected_total == 0}"ng-show="tracker.bounty_total > 0">
-          <a ng-click="show_bounties()"><h3 style="margin: 0; line-height:35px" class="text-center">{{tracker.bounty_total | dollars}}</h3></a>
+      <div class="row">
+        <div class="text-center"
+             ng-class="{span6: tracker_stats.collected_total &gt; 0, span12: tracker_stats.collected_total == 0}"
+             ng-show="tracker.bounty_total &gt; 0">
+          <a ng-click="show_bounties()"><h3 style="margin: 0; line-height:35px" class="text-center">
+            {{tracker.bounty_total | dollars}}</h3></a>
+
           <div>in bounties</div>
         </div>
 
-        <div class="text-center span6" ng-show="tracker_stats.collected_total > 0">
-          <a ng-click="show_claimed_bounties()"><h3 style="margin:0; line-height:35px;" class="text-center">{{tracker_stats.collected_total | dollars}}</h3></a>
+        <div class="text-center col-sm-6 col-md-6" ng-show="tracker_stats.collected_total &gt; 0">
+          <a ng-click="show_claimed_bounties()"><h3 style="margin:0; line-height:35px;" class="text-center">
+            {{tracker_stats.collected_total | dollars}}</h3></a>
+
           <div>claimed</div>
         </div>
       </div>
       <br ng-hide="tracker.bounty_total == 0">
-      <div class="row-fluid" ng-show="tracker.tracker_type == 'Github::Repository'">
-        <div class="span6 text-center">
+
+      <div class="row" ng-show="tracker.tracker_type == 'Github::Repository'">
+        <div class="text-center col-sm-6 col-md-6">
           <h3 style="margin: 0; line-height:35px;">{{tracker.forks || 0 | number}}</h3>
-          <div><ng-pluralize count="tracker.forks.length" when="{ 'one': 'fork', 'other': 'forks' }"></ng-pluralize></div>
+
+          <div>
+            <ng-pluralize count="tracker.forks.length" when="{ 'one': 'fork', 'other': 'forks' }"></ng-pluralize>
+          </div>
         </div>
-        <div class="span6 text-center">
+        <div class="text-center col-sm-6 col-md-6">
           <h3 style="margin: 0; line-height:35px;">{{tracker.watchers || 0 | number}}</h3>
-          <div><ng-pluralize count="tracker.watchers" when="{ 'one': 'watcher', 'other': 'watchers' }"></ng-pluralize></div>
+
+          <div>
+            <ng-pluralize count="tracker.watchers" when="{ 'one': 'watcher', 'other': 'watchers' }"></ng-pluralize>
+          </div>
         </div>
       </div>
     </div>
@@ -42,55 +59,64 @@
     <div ng-include="'pages/trackers/templates/top_backers.html'"></div>
   </div>
 
-  <div class="span9">
+  <div class="col-sm-9 col-md-9">
     <h1>{{tracker.name}}</h1>
+
     <p class="lead">{{tracker.description}}</p>
 
     <!-- Add horizontal line when when no issues -->
-    <div ng-hide="issues.length > 0">
-      <hr />
+    <div ng-hide="issues.length &gt; 0">
+      <hr>
     </div>
 
     <!--Issue filter box-->
-    <div collapse="issues.length <= 0">
-      <div class="well well-small">
-        <div class="row-fluid">
-          <div class="span6">
-            <input type="text" class="span12" min="0" placeholder="Search issues" ng-model="issue_filter_options.text" ng-change="update_filter_options()" />
+    <div collapse="issues.length &lt;= 0">
+      <div class="well well-sm">
+        <div class="row">
+          <div class="col-sm-6 col-md-6">
+            <input type="text" class="span12 form-control" min="0" placeholder="Search issues"
+                   ng-model="issue_filter_options.text" ng-change="update_filter_options()">
           </div>
 
-          <div class="span6">
+          <div class="col-sm-6 col-md-6">
             <div style="display:inline-block;vertical-align:middle">Bounty Range: $</div>
-            <input type="number" class="span4" min="1" placeholder="50" ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()" style="margin-bottom:0;display:inline-block;vertical-align:middle" tooltip="Minimum bounty amount" tooltip-placement="bottom" tooltip-trigger="focus" />
-            <div style="display:inline-block;vertical-align:middle"> - </div>
-            <input type="number" class="span4" min="1" placeholder="Infinity" ng-model="issue_filter_options.bounty_max" ng-change="update_filter_options()" style="margin-bottom:0;display:inline-block;vertical-align:middle" tooltip="Maximum bounty amount" tooltip-placement="bottom" tooltip-trigger="focus" />
+            <input type="number" class="span4 form-control" min="1" placeholder="50"
+                   ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()"
+                   style="margin-bottom:0;display:inline-block;vertical-align:middle" tooltip="Minimum bounty amount"
+                   tooltip-placement="bottom" tooltip-trigger="focus">
+
+            <div style="display:inline-block;vertical-align:middle"> -</div>
+            <input type="number" class="span4 form-control" min="1" placeholder="Infinity"
+                   ng-model="issue_filter_options.bounty_max" ng-change="update_filter_options()"
+                   style="margin-bottom:0;display:inline-block;vertical-align:middle" tooltip="Maximum bounty amount"
+                   tooltip-placement="bottom" tooltip-trigger="focus">
           </div>
         </div>
 
-        <ul class="inline" style="margin-bottom: 0;">
+        <ul class="list-inline" style="margin-bottom: 0;">
           <li>
-            <label class="checkbox">
-              <input type="checkbox" ng-model="issue_filter_options.only_valuable" />
+            <div class="checkbox"><label class="">
+              <input type="checkbox" ng-model="issue_filter_options.only_valuable">
               Has active bounties
-            </label>
+            </label></div>
           </li>
           <li>
-            <label class="checkbox">
-              <input type="checkbox" ng-model="issue_filter_options.hide_open" />
+            <div class="checkbox"><label class="">
+              <input type="checkbox" ng-model="issue_filter_options.hide_open">
               Hide open issues
-            </label>
+            </label></div>
           </li>
           <li>
-            <label class="checkbox">
-              <input type="checkbox" ng-model="issue_filter_options.hide_closed" />
+            <div class="checkbox"><label class="">
+              <input type="checkbox" ng-model="issue_filter_options.hide_closed">
               Hide closed issues
-            </label>
+            </label></div>
           </li>
           <li>
-            <label class="checkbox">
-              <input type="checkbox" ng-model="issue_filter_options.show_paid_out" />
+            <div class="checkbox"><label class="">
+              <input type="checkbox" ng-model="issue_filter_options.show_paid_out">
               Only show paid out issues
-            </label>
+            </label></div>
           </li>
         </ul>
       </div>
@@ -98,10 +124,11 @@
 
     <!-- Loading message... -->
     <div collapse="issues_resolved" class="text-center">
-      <hr />
+      <hr>
       <p class="lead">Loading issues...</p>
+
       <div class="progress progress-striped active">
-        <div class="bar" style="width: 100%;"></div>
+        <div class="progress-bar" style="width: 100%;"></div>
       </div>
     </div>
 
@@ -109,79 +136,103 @@
     <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
 
     <!--Table of issues-->
-    <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length > 0">
+    <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length &gt; 0">
       <thead ng-switch="tracker.tracker_type | lowercase">
-        <tr ng-switch-when="jira::tracker">
-          <th ng-show="issue_filter_options.show_issue_id">ID</th>
-          <th ng-show="issue_filter_options.show_issue_number">#</th>
-          <th class="span9">Title</th>
-          <th><a style="color: black;" ng-click="change_order_col('priority')">Priority</a></th>
-          <th><a style="color: black;"></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
-          <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
-          <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Watchers"><i class="icon-user"></i></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i class="icon-time"></i></a></th>
-        </tr>
-        <tr ng-switch-when="bugzilla::tracker">
-          <th ng-show="issue_filter_options.show_issue_id">ID</th>
-          <th ng-show="issue_filter_options.show_issue_number">#</th>
-          <th class="span9">Title</th>
-          <th><a style="color: black;" ng-click="change_order_col('priority')">Priority</a></th>
-          <th><a style="color: black;" ng-click="change_order_col('severity')">Severity</a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Watchers"><i class="icon-user"></i></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i class="icon-time"></i></a></th>
-        </tr>
-        <tr ng-switch-default>
-          <th ng-show="issue_filter_options.show_issue_id">ID</th>
-          <th ng-show="issue_filter_options.show_issue_number">#</th>
-          <th class="span9">Title</th>
-          <th></th>
-          <th></th>
+      <tr ng-switch-when="jira::tracker">
+        <th ng-show="issue_filter_options.show_issue_id">ID</th>
+        <th ng-show="issue_filter_options.show_issue_number">#</th>
+        <th class="span9">Title</th>
+        <th><a style="color: black;" ng-click="change_order_col('priority')">Priority</a></th>
+        <th><a style="color: black;"></a></th>
+        <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span
+          style="color: black">$</span></a></th>
+        <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
+        <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"
+                                          tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a>
+        </th>
+        <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Watchers"><i
+          class="icon-user"></i></a></th>
+        <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i
+          class="icon-time"></i></a></th>
+      </tr>
+      <tr ng-switch-when="bugzilla::tracker">
+        <th ng-show="issue_filter_options.show_issue_id">ID</th>
+        <th ng-show="issue_filter_options.show_issue_number">#</th>
+        <th class="span9">Title</th>
+        <th><a style="color: black;" ng-click="change_order_col('priority')">Priority</a></th>
+        <th><a style="color: black;" ng-click="change_order_col('severity')">Severity</a></th>
+        <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span
+          style="color: black">$</span></a></th>
+        <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"
+                                          tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a>
+        </th>
+        <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Watchers"><i
+          class="icon-user"></i></a></th>
+        <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i
+          class="icon-time"></i></a></th>
+      </tr>
+      <tr ng-switch-default="">
+        <th ng-show="issue_filter_options.show_issue_id">ID</th>
+        <th ng-show="issue_filter_options.show_issue_number">#</th>
+        <th class="span9">Title</th>
+        <th></th>
+        <th></th>
 
-          <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
-          <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
-          <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')" tooltip="+1 and Thumbsup total"><i class="icon-thumbs-up"></i></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Participants"><i class="icon-user"></i></a></th>
-          <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i class="icon-time"></i></a></th>
-        </tr>
+        <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span
+          style="color: black">$</span></a></th>
+        <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
+        <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"
+                                          tooltip="+1 and Thumbsup total"><i class="icon-thumbs-up"></i></a></th>
+        <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Participants"><i
+          class="icon-user"></i></a></th>
+        <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i
+          class="icon-time"></i></a></th>
+      </tr>
       </thead>
 
       <tbody>
-      <tr ng-repeat="issue in issues | filter:issue_filter | orderBy:issue_filter_options.sort:!issue_filter_options.sort_asc" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
+      <tr
+        ng-repeat="issue in issues | filter:issue_filter | orderBy:issue_filter_options.sort:!issue_filter_options.sort_asc"
+        ng-class="{ success: (issue.bounty_total &gt; 0), warning: (!issue.can_add_bounty) }">
         <td ng-show="issue_filter_options.show_issue_id">{{issue.id}}</td>
         <td ng-show="issue_filter_options.show_issue_number">{{issue.number}}</td>
         <td>
-          <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
-            <i ng-show="issue.has_active_solution" class="icon-briefcase" tooltip="A developer is working on a solution"></i>
+          <a ng-href="/issues/{{issue.slug}}"
+             ng-class="{ 'text-success': (issue.bounty_total &gt; 0), 'text-warning': (!issue.can_add_bounty) }">
+            <i ng-show="issue.has_active_solution" class="icon-briefcase"
+               tooltip="A developer is working on a solution"></i>
             {{issue.title}}
             <span ng-show="issue.paid_out" class="label label-info">paid out</span>
-            <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
+            <span ng-show="!issue.can_add_bounty &amp;&amp; !issue.paid_out" class="label label-warning">closed</span>
           </a>
         </td>
         <td>{{issue.priority}}</td>
         <td><span>{{issue.severity}}</span></td>
         <td style="text-align: center">
-          <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
+          <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total &gt; 0" class="label label-success">
+            <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
             {{issue.bounty_total | dollars:{space:true} }}
           </a>
         </td>
         <td style="text-align: center">
-          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning" ng-show="issue.thumbs_up_count > 0"> <!-- TODO (PERF ISSUE):  tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom"-->
+          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"
+             ng-show="issue.thumbs_up_count &gt; 0">
+            <!-- TODO (PERF ISSUE):  tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom"-->
             <i class="icon-thumbs-up icon-white"></i>
             {{issue.thumbs_up_count | number}}
           </a>
         </td>
         <td style="text-align: center">
-          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important" ng-show="issue.participants_count > 1"> <!--  TODO (PERF ISSUE):  tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom"-->
+          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"
+             ng-show="issue.participants_count &gt; 1">
+            <!--  TODO (PERF ISSUE):  tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom"-->
             <i class="icon-user icon-white"></i>
             {{issue.participants_count | number}}
           </a>
         </td>
         <td style="text-align: center">
-          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info"> <!--tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom"-->
+          <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">
+            <!--tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom"-->
             {{issue.created_at | timeAgoShort }}
           </a>
         </td>

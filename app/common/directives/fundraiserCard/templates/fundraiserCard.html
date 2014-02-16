@@ -1,19 +1,19 @@
 <div class="card fundraiser">
   <a ng-href="/fundraisers/{{fundraiser.slug}}" class="link">{{fundraiser.title}}</a>
-  <div class="row-fluid">
-    <div class="span3">
+  <div class="row">
+    <div class="col-sm-3 col-md-3">
       <a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-img-{{fundraiser.id}}" style="display: block; width: 75px; height: 75px; background-repeat: no-repeat; background-size: 95% auto; background-position: center center; background-image: url({{fundraiser.image_url}})">
       </a>
     </div>
 
-    <div class="span9" style="white-space: nowrap; text-overflow: ellipsis;  overflow: hidden;">
-      <strong><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-title-{{fundraiser.id}}" >{{fundraiser.title|truncate:44-fundraiser.person.display_name.length}}</a></strong>
-      <small class="muted">by <a ng-href="/people/{{fundraiser.person.slug}}" id="home-fr-person-{{fundraiser.id}}">{{fundraiser.person.display_name}}</a></small>
-      <br />
-      <small class="muted">{{fundraiser.short_description | truncate:70}}</small>
-      <br />
+    <div class="col-sm-9 col-md-9" style="white-space: nowrap; text-overflow: ellipsis;  overflow: hidden;">
+      <strong><a ng-href="/fundraisers/{{fundraiser.slug}}" id="home-fr-title-{{fundraiser.id}}">{{fundraiser.title|truncate:44-fundraiser.person.display_name.length}}</a></strong>
+      <small class="text-muted">by <a ng-href="/people/{{fundraiser.person.slug}}" id="home-fr-person-{{fundraiser.id}}">{{fundraiser.person.display_name}}</a></small>
+      <br>
+      <small class="text-muted">{{fundraiser.short_description | truncate:70}}</small>
+      <br>
       <div class="progress progress-striped" style="margin: 0; width: 60%; display: inline-block; vertical-align: middle;">
-        <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | atLeast:15 | atMost:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+        <div class="progress-bar progress-bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | atLeast:15 | atMost:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
       </div>
       <div class="text-success" style="display: inline-block; vertical-align: middle;"><small><strong>{{fundraiser.total_pledged | dollars}}</strong> of <strong>{{fundraiser.funding_goal | dollars}}</strong> pledged</small></div>
     </div>

@@ -9,24 +9,28 @@ module.exports = function(config) {
     files: [
       'app/components/angular/angular.js',
       'app/components/angular-*/angular-*.js',
-      'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'app/components/angular-bootstrap-colorpicker/js/*.js',
-      'app/components/momentjs/moment.js',
-      'app/pages/app.js',
-      'app/pages/**/**/*.js',
+
+      'app/pages/*.js',
+      'app/pages/**/*.js',
+
+      'app/common/*.js',
+      'app/common/**/*.js',
+      'app/common/**/**/*.js',
+
       'test/unit/**/*.js',
       'test/mock/*.js'
     ],
 
     // list of files to exclude
-    exclude: ['app/components/angular-scenario/angular-scenario.js'],
+    exclude: [
+      'app/components/angular-scenario/angular-scenario.js'
+    ],
 
-    // frameworks, weeeeeee
     frameworks: ['jasmine'],
 
     // test results reporter to use
     // possible values: dots || progress || growl
-    reporters: ['dots', 'coverage'],
+    reporters: ['dots'],
 
     // web server port
     port: 8080,
@@ -42,7 +46,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
     // Start these browsers, currently available:
     // - Chrome
@@ -61,21 +65,20 @@ module.exports = function(config) {
     // if true, it capture browsers, run tests and exit
     singleRun: true,
 
-    // All things code coverage related
-    preprocessors: {
-      "**/app/pages/**/*.js": "coverage"
-    },
-
-    coverageReporter: {
-      type: "lcov",
-      dir: "coverage/"
-    },
+//    // All things code coverage related
+//    preprocessors: {
+//      "**/app/pages/**/*.js": "coverage"
+//    },
+//
+//    coverageReporter: {
+//      type: "lcov",
+//      dir: "coverage/"
+//    },
 
     plugins: [
       'karma-coverage',
       'karma-jasmine',
-      'karma-phantomjs-launcher',
-      'karma-chrome-launcher'
+      'karma-phantomjs-launcher'
     ]
   });
 };

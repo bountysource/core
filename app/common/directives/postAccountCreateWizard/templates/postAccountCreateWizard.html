@@ -1,14 +1,14 @@
-<div modal="$$showModal && myLanguagesResolved && followedTrackersResolved && myTrackersResolved">
+<div modal="$$showModal &amp;&amp; myLanguagesResolved &amp;&amp; followedTrackersResolved &amp;&amp; myTrackersResolved">
   <div class="modal-header">
     <h4>{{$$currentPage.title || $$pageDefaults.title}}</h4>
-    <p class="hidden-phone" ng-show="$$currentPage.subtitle">{{$$currentPage.subtitle}}</p>
+    <p class="hidden-sm" ng-show="$$currentPage.subtitle">{{$$currentPage.subtitle}}</p>
   </div>
 
-  <div class="hidden-phone modal-body">
+  <div class="modal-body hidden-sm">
     <ng-include src="$$currentPage.templateUrl"></ng-include>
   </div>
 
-  <div class="visible-phone modal-body" style="max-height: 250px;">
+  <div class="modal-body visible-sm" style="max-height: 250px;">
     <ng-include src="$$currentPage.templateUrl"></ng-include>
   </div>
 

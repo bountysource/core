@@ -1,15 +1,15 @@
-<div tracker-plugin-authorize-modal></div>
+<div tracker-plugin-authorize-modal=""></div>
 
 <ul class="breadcrumb">
-  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/">Home</a></li>
   <li><a href="/tools">Tools</a></li>
 </ul>
 
 <ng-include src="'pages/tools/templates/header.html'"></ng-include>
 <ng-include src="'pages/tools/templates/tabs.html'"></ng-include>
 
-<div class="row-fluid" ng-controller="InstalledPluginsController">
-  <div class="span5">
+<div class="row" ng-controller="InstalledPluginsController">
+  <div class="col-sm-5 col-md-5">
     <loading-bar ng-show="loading_trackers">Loading your projects...</loading-bar>
 
     <div ng-hide="loading_trackers">
@@ -17,14 +17,14 @@
     </div>
   </div>
 
-  <div class="span7">
+  <div class="col-sm-7 col-md-7">
     <div ng-show="plugin_alert.text">
-      <alert type="plugin_alert.type" close = "plugin_alert.text = null">{{plugin_alert.text}}</alert>
+      <alert type="plugin_alert.type" close="plugin_alert.text = null">{{plugin_alert.text}}</alert>
     </div>
 
     <div collapse="!current_tracker">
       <ng-include src="'pages/tools/templates/plugin_settings.html'"></ng-include>
-      <br />
+      <br>
     </div>
 
     <ng-include src="'pages/tools/templates/info.html'"></ng-include>

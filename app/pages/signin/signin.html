@@ -1,15 +1,15 @@
-<form class="form-horizontal form-signin" name="form" novalidate ng-autofill-aware>
+<form class="form-horizontal form-signin" name="form" novalidate="" ng-autofill-aware="">
   <h2>Sign in or create an account</h2>
 
   <div ng-hide="provider">
     <p>The easiest way is to use an account you already have.</p>
 
-    <div class="control-group">
+    <div class="form-group">
       <label class="control-label" for="inputEmail">Use a Service:</label>
       <div class="controls">
         <ul ng-controller="SigninController">
           <li ng-repeat="provider in providers" class="provider-link">
-            <a gaq-track-click ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="signin-{{provider.id}}" ng-click="save_route()">
+            <a gaq-track-click="" ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="signin-{{provider.id}}" ng-click="save_route()">
               <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
             </a>
           </li>
@@ -20,60 +20,59 @@
     <p>Otherwise, enter an email address and password to continue. If you do not already have an account, you will be prompted to create one.</p>
   </div>
 
-  <div ng-show="provider" ng-switch on="signin_or_signup">
+  <div ng-show="provider" ng-switch="" on="signin_or_signup">
     <p ng-switch-when="signin">Enter your password to link with your existing Bountysource account.</p>
     <p ng-switch-when="signup">Complete the fields below to sign up for Bountysource.</p>
-    <p ng-switch-default>Please enter your email address to continue.</p>
+    <p ng-switch-default="">Please enter your email address to continue.</p>
   </div>
 
-  <input type="hidden" ng-model="form_data.account_link_id" />
+  <input type="hidden" ng-model="form_data.account_link_id" class="form-control">
 
-  <div class="alert alert-error" ng-show="error">{{error}}</div>
+  <div class="alert alert-error alert-warning" ng-show="error">{{error}}</div>
 
-  <div class="control-group" ng-class="{ error: (show_validations && form.email.$invalid) || (form.email.$error.email), success: (signin_or_signup == 'signin' || signin_or_signup == 'signup'), warning: signin_or_signup == 'pending' }">
+  <div class="form-group" ng-class="{ error: (show_validations &amp;&amp; form.email.$invalid) || (form.email.$error.email), success: (signin_or_signup == 'signin' || signin_or_signup == 'signup'), warning: signin_or_signup == 'pending' }">
     <label class="control-label" for="inputEmail">Email Address:</label>
     <div class="controls">
-      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" autofocus
-       ng-change="email_changing()" ng-blur="email_changed()" required />
-      <span class="help-inline" ng-show="signin_or_signup=='signin'"><small>Found!</small></span>
-      <span class="help-inline" ng-show="signin_or_signup=='signup'"><small>Available!</small></span>
+      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" autofocus="" ng-change="email_changing()" ng-blur="email_changed()" required="" class="form-control">
+      <span class="help-block" ng-show="signin_or_signup=='signin'"><small>Found!</small></span>
+      <span class="help-block" ng-show="signin_or_signup=='signup'"><small>Available!</small></span>
     </div>
   </div>
 
-  <div class="control-group" ng-hide="provider && (signin_or_signup!='signin')" ng-class="{ error: (show_validations && form.password.$invalid) || (form.password.$error.pattern || form.password.$error.minlength) }">
+  <div class="form-group" ng-hide="provider &amp;&amp; (signin_or_signup!='signin')" ng-class="{ error: (show_validations &amp;&amp; form.password.$invalid) || (form.password.$error.pattern || form.password.$error.minlength) }">
     <label class="control-label" for="inputPassword">Password:</label>
     <div class="controls" ng-class="{ 'hide-tooltip': signin_or_signup=='signin' }">
-      <input type="password" name="password" id="inputPassword" placeholder="abcd1234" ng-model="form_data.password" class="input-medium" ng-minlength="8" ng-pattern="/[a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]/" required tooltip="Letter, number and 8+ characters." tooltip-placement="right" tooltip-trigger="focus" />
-      <span class="help-inline" ng-show="signin_or_signup=='signin'"><small><a ng-click="forgot_password()">Forgot?</a></small></span>
+      <input type="password" name="password" id="inputPassword" placeholder="abcd1234" ng-model="form_data.password" class="input-medium form-control" ng-minlength="8" ng-pattern="/[a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]/" required="" tooltip="Letter, number and 8+ characters." tooltip-placement="right" tooltip-trigger="focus">
+      <span class="help-block" ng-show="signin_or_signup=='signin'"><small><a ng-click="forgot_password()">Forgot?</a></small></span>
     </div>
   </div>
 
-  <div class="control-group" ng-show="signin_or_signup=='signup'">
+  <div class="form-group" ng-show="signin_or_signup=='signup'">
     <label class="control-label" for="inputFirstName">First and Last Name:</label>
     <div class="controls">
-      <input type="text" id="inputFirstName" placeholder="John" ng-model="form_data.first_name" class="input-small" />
-      <input type="text" placeholder="Doe" ng-model="form_data.last_name" class="input-small" />
+      <input type="text" id="inputFirstName" placeholder="John" ng-model="form_data.first_name" class="input-small form-control">
+      <input type="text" placeholder="Doe" ng-model="form_data.last_name" class="input-small form-control">
     </div>
   </div>
 
-  <div class="control-group" ng-show="signin_or_signup=='signup'">
+  <div class="form-group" ng-show="signin_or_signup=='signup'">
     <label class="control-label" for="inputDisplayName">Display Name:</label>
     <div class="controls">
-      <input type="text" id="inputDisplayName" placeholder="johnny5" ng-model="form_data.display_name" class="input-medium" />
-      <img ng-src="{{form_data.image_url}}" style="width: 30px; height: 30px" ng-show="form_data.image_url" />
+      <input type="text" id="inputDisplayName" placeholder="johnny5" ng-model="form_data.display_name" class="input-medium form-control">
+      <img ng-src="{{form_data.image_url}}" style="width: 30px; height: 30px" ng-show="form_data.image_url">
     </div>
   </div>
 
-  <div class="control-group" ng-show="signin_or_signup=='signup'">
+  <div class="form-group" ng-show="signin_or_signup=='signup'">
     <label class="control-label" for="inputTerms">Legal:</label>
     <div class="controls">
-      <label class="checkbox">
-        <input type="checkbox" id="inputTerms" ng-model="form_data.terms" /> I agree to the <a href="/terms" target="_blank">Terms of Services</a>.
-      </label>
+      <div class="checkbox"><label class="">
+        <input type="checkbox" id="inputTerms" ng-model="form_data.terms"> I agree to the <a href="/terms" target="_blank">Terms of Services</a>.
+      </label></div>
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="form-group">
     <div class="controls">
       <button type="submit" class="btn btn-success" ng-click="signin()" ng-show="signin_or_signup!='signup'">Sign In</button>
       <button type="submit" class="btn btn-success" ng-click="signup()" ng-show="signin_or_signup=='signup'">Sign Up</button>

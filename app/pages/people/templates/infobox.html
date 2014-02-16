@@ -1,38 +1,38 @@
 <div id="infobox-wrapper">
   <div class="well">
-    <div><img ng-src="{{person.large_image_url}}" /></div>
+    <div><img ng-src="{{person.large_image_url}}"></div>
 
     <div ng-show="person.url || person.public_email">
-      <br />
-      <a ng-show="person.url" class="btn btn-block" ng-href="{{person.url}}"><i class="icon-globe"></i> {{person.url | cleanUrl | truncate:25}}</a>
-      <a ng-show="person.public_email" class="btn btn-block" ng-href="mailto:{{person.public_email}}"><i class="icon-envelope"></i> {{person.public_email | truncate:25}}</a>
+      <br>
+      <a ng-show="person.url" class="btn btn-block btn-default" ng-href="{{person.url}}"><i class="icon-globe"></i> {{person.url | cleanUrl | truncate:25}}</a>
+      <a ng-show="person.public_email" class="btn btn-block btn-default" ng-href="mailto:{{person.public_email}}"><i class="icon-envelope"></i> {{person.public_email | truncate:25}}</a>
     </div>
   </div>
 
-  <div ng-show="person.company || person.location || person.github_account || person.twitter_account || person.facebook_account || teams.length > 0" class="well">
-    <div class="row-fluid" ng-show="person.company">
-      <div class="span4 text-right">
+  <div ng-show="person.company || person.location || person.github_account || person.twitter_account || person.facebook_account || teams.length &gt; 0" class="well">
+    <div class="row" ng-show="person.company">
+      <div class="text-right col-sm-4 col-md-4">
         <strong>Company</strong>
       </div>
-      <div class="span7 offset1">
+      <div class="col-lg-offset-1 col-sm-7 col-md-7">
         {{person.company}}
       </div>
     </div>
 
-    <div class="row-fluid" ng-show="person.location">
-      <div class="span4 text-right">
+    <div class="row" ng-show="person.location">
+      <div class="text-right col-sm-4 col-md-4">
         <strong>Location</strong>
       </div>
-      <div class="span7 offset1">
+      <div class="col-lg-offset-1 col-sm-7 col-md-7">
         {{person.location}}
       </div>
     </div>
 
-    <div class="row-fluid" ng-show="person.github_account || person.twitter_account || person.facebook_account">
-      <div class="span4 text-right">
+    <div class="row" ng-show="person.github_account || person.twitter_account || person.facebook_account">
+      <div class="text-right col-sm-4 col-md-4">
         <strong>Linked Accounts</strong>
       </div>
-      <div class="span7 offset1">
+      <div class="col-lg-offset-1 col-sm-7 col-md-7">
         <ul style="margin: 0;">
           <li class="provider-link" ng-show="person.github_account">
             <a ng-href="http://github.com/{{person.github_account.login}}" target="_blank"><img src="images/favicon-github.png"> <span>{{person.github_account.login}}</span></a>
@@ -51,18 +51,18 @@
     </div>
 
     <!-- Hacky. add line break only if linked accounts shown -->
-    <div ng-show="teams.length > 0 && (person.github_account || person.twitter_account || person.facebook_account)">
-      <br />
+    <div ng-show="teams.length &gt; 0 &amp;&amp; (person.github_account || person.twitter_account || person.facebook_account)">
+      <br>
     </div>
 
-    <div class="row-fluid" ng-show="teams.length > 0">
-      <div class="span4 text-right">
+    <div class="row" ng-show="teams.length &gt; 0">
+      <div class="text-right col-sm-4 col-md-4">
         <strong>Teams</strong>
       </div>
-      <div class="span7 offset1">
+      <div class="col-lg-offset-1 col-sm-7 col-md-7">
         <ul style="margin: 0;">
           <li class="provider-link" ng-repeat="team in teams | orderBy:'-added_at'">
-            <a ng-href="/teams/{{team.slug}}"><img ng-src="{{team.image_url}}" style="width: 16px; height: 16px;" /> {{team.name}}</a>
+            <a ng-href="/teams/{{team.slug}}"><img ng-src="{{team.image_url}}" style="width: 16px; height: 16px;"> {{team.name}}</a>
           </li>
         </ul>
       </div>

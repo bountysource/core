@@ -6,16 +6,16 @@
   <li ng-show="is_admin || is_developer" ng-class="{ active: active_tab('projects') }"><a ng-href="/teams/{{team.slug}}/projects">
     Projects
   </a></li>
-  <li ng-show="team.trackers.length > 0" ng-class="{ active: active_tab('issues') }"><a ng-href="/teams/{{team.slug}}/issues">
+  <li ng-show="team.trackers.length &gt; 0" ng-class="{ active: active_tab('issues') }"><a ng-href="/teams/{{team.slug}}/issues">
     Suggested Issues
   </a></li>
-  <li ng-show="members.length > 0" ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">
+  <li ng-show="members.length &gt; 0" ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">
     Members
   </a></li>
   <li ng-hide="true" ng-class="{ active: active_tab('activity') }"><a ng-href="/teams/{{team.slug}}/activity">
     Activity
   </a></li>
-  <li ng-show="team.open_bounties_amount + team.closed_bounties_amount > 0" ng-class="{ active: active_tab('bounties') }"><a ng-href="/teams/{{team.slug}}/bounties">
+  <li ng-show="team.open_bounties_amount + team.closed_bounties_amount &gt; 0" ng-class="{ active: active_tab('bounties') }"><a ng-href="/teams/{{team.slug}}/bounties">
     Bounties
   </a></li>
   <li ng-show="is_admin" ng-class="{ active: active_tab('manage_members') }"><a ng-href="/teams/{{team.slug}}/members/manage">
