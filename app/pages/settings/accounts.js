@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('AccountSettings', ['$scope', '$api', '$location', function($scope, $api, $location) {
+angular.module('app.controllers').controller('AccountSettings', function($scope, $api, $location) {
   $scope.set_post_auth_url = function() {
     $api.set_post_auth_url($location.url());
   };
@@ -32,4 +32,4 @@ angular.module('app.controllers').controller('AccountSettings', ['$scope', '$api
       $scope.info = response.message;
     });
   };
-}]);
+});

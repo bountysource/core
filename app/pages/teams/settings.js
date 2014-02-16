@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('EditTeamController', ['$scope', '$routeParams', '$location', '$api', function ($scope, $routeParams, $location, $api) {
+angular.module('app.controllers').controller('EditTeamController', function ($scope, $routeParams, $location, $api) {
   //hide the type option if on settings page
   $scope.settings_page = true;
 
@@ -26,4 +26,4 @@ angular.module('app.controllers').controller('EditTeamController', ['$scope', '$
       });
     };
   });
-}]);
+});

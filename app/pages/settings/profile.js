@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('Settings', ['$scope', '$routeParams', '$api', function($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('Settings', function($scope, $routeParams, $api) {
   $scope.form_data = {
     first_name: $scope.current_person.first_name,
     last_name: $scope.current_person.last_name,
@@ -38,4 +38,4 @@ angular.module('app.controllers').controller('Settings', ['$scope', '$routeParam
       }
     });
   };
-}]);
+});

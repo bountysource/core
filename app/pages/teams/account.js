@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TeamAccountController', ['$scope', '$routeParams', '$location', '$cart', function ($scope, $routeParams, $location, $cart) {
+angular.module('app.controllers').controller('TeamAccountController', function ($scope, $routeParams, $location, $cart) {
   $scope.cart_promise = $cart.load().then(function(cart) {
     $scope.cart = cart;
     return cart;
@@ -60,4 +60,4 @@ angular.module('app.controllers').controller('TeamAccountController', ['$scope',
       });
     }
   };
-}]);
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('ngBlur', ['$parse', function($parse) {
+angular.module('bountysource.directives').directive('ngBlur', function($parse) {
   return function(scope, element, attr) {
     var fn = $parse(attr.ngBlur);
     element.bind('blur', function(event) {
@@ -9,4 +9,4 @@ angular.module('bountysource.directives').directive('ngBlur', ['$parse', functio
       });
     });
   };
-}]);
+});

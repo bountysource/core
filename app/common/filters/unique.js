@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('unique', [function() {
+angular.module('bountysource.filters').filter('unique', function() {
   return function(input) {
     var retval = [];
     for (var i=0; i < input.length; i++) {
@@ -10,4 +10,4 @@ angular.module('bountysource.filters').filter('unique', [function() {
     }
     return retval;
   };
-}]);
+});

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.controllers').controller("AuthConfirmController", ['$scope', '$routeParams', '$window', '$location', '$api', function($scope, $routeParams, $window, $location, $api) {
+angular.module('app.controllers').controller("AuthConfirmController", function($scope, $routeParams, $window, $location, $api) {
   $scope.provider = $routeParams.provider;
 
   $scope.accept = function() {
@@ -30,4 +30,4 @@ angular.module('app.controllers').controller("AuthConfirmController", ['$scope',
       $location.url("/");
     }
   };
-}]);
+});

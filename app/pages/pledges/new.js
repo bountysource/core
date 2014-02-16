@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraiserPledgeCreateController', ['$scope', '$routeParams', '$window', '$location', '$api', '$cart', function ($scope, $routeParams, $window, $location, $api, $cart) {
+angular.module('app.controllers').controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $window, $location, $api, $cart) {
   $scope.cart_promise = $cart.load().then(function(cart) {
     $scope.cart = cart;
     return cart;
@@ -118,4 +118,4 @@ angular.module('app.controllers').controller('FundraiserPledgeCreateController',
       $scope.can_make_anonymous = true;
     }
   });
-}]);
+});

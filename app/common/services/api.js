@@ -76,7 +76,7 @@ angular.module('bountysource.services').service('$api', function($http, $q, $coo
         path: mockArgs.shift(),
         method: typeof(mockArgs[0]) === 'string' ? mockArgs.shift() : 'GET',
         params: typeof(mockArgs[0]) === 'object' ? mockArgs.shift() : {},
-        callback: typeof(mockArgs[0]) === 'function' ? mockArgs.shift() : function(response) { return response.data;}
+        callback: typeof(mockArgs[0]) === 'function' ? mockArgs.shift() : function(response) { return response.data; }
       };
 
       console.log("------------------------");

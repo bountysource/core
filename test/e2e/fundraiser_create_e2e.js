@@ -18,7 +18,7 @@ describe('Scenario: Creating A Fundraiser --', function () {
       browser().navigateTo('/signin');
       cookies().clear("v2_access_token");
       // for the $person resolve to require auth on a page
-      // go look at $api.load_current_person_from_cookies in $api.js:431
+      // go look at $api.load_current_person_from_cookies in api.js:431
 
       fill_form(MOCK.valid_user);
       blurEmailField();

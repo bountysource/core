@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('emptyFilter', [function() {
+angular.module('bountysource.filters').filter('emptyFilter', function() {
   return function(array) {
     var returnArray = [];
     angular.forEach(array, function (item) {
@@ -10,4 +10,4 @@ angular.module('bountysource.filters').filter('emptyFilter', [function() {
     });
     return returnArray;
   };
-}]);
+});

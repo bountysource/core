@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraiserCreateController', ['$scope', '$routeParams', '$location', '$api', function($scope, $routeParams, $location, $api) {
+angular.module('app.controllers').controller('FundraiserCreateController', function($scope, $routeParams, $location, $api) {
   $scope.fundraiser = {
     funding_goal: 25000,
     description: "",
@@ -22,4 +22,4 @@ angular.module('app.controllers').controller('FundraiserCreateController', ['$sc
       }
     });
   };
-}]);
+});

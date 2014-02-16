@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('ngFocus', ['$parse', function($parse) {
+angular.module('bountysource.directives').directive('ngFocus', function($parse) {
   return function(scope, element, attr) {
     var fn = $parse(attr.ngFocus);
     element.bind('focus', function(event) {
@@ -9,4 +9,4 @@ angular.module('bountysource.directives').directive('ngFocus', ['$parse', functi
       });
     });
   };
-}]);
+});

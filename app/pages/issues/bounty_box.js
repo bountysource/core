@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('BountyBoxController', ['$scope', '$routeParams', '$window', '$location', function ($scope, $routeParams, $window, $location) {
+angular.module('app.controllers').controller('BountyBoxController', function ($scope, $routeParams, $window, $location) {
   $scope.bounty = {
     amount: parseInt($routeParams.amount, 10)
   };
@@ -11,4 +11,4 @@ angular.module('app.controllers').controller('BountyBoxController', ['$scope', '
       $location.path("/issues/"+$routeParams.id+"/bounty").search({ amount: amount });
     }
   };
-}]);
+});

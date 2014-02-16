@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('gaqTrackClick', ['$timeout', '$window', function($timeout, $window) {
+angular.module('bountysource.directives').directive('gaqTrackClick', function($timeout, $window) {
   return {
     restrict: "AC",
     link: function(scope, element, attrs) {
@@ -22,4 +22,4 @@ angular.module('bountysource.directives').directive('gaqTrackClick', ['$timeout'
       });
     }
   };
-}]);
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('inputSlug', ['$filter', function($filter) {
+angular.module('bountysource.directives').directive('inputSlug', function($filter) {
   return {
     restrict: "AC",
     require: "ngModel",
@@ -17,4 +17,4 @@ angular.module('bountysource.directives').directive('inputSlug', ['$filter', fun
       slugify(scope[attrs.ngModel]); // initial value
     }
   };
-}]);
+});

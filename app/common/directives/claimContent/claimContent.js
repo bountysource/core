@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('claimContent', [function() {
+angular.module('bountysource.directives').directive('claimContent', function() {
   return {
     restrict: "E",
     scope: {
@@ -10,4 +10,4 @@ angular.module('bountysource.directives').directive('claimContent', [function() 
     templateUrl: "common/directives/claimContent/templates/claimContent.html",
     replace: true
   };
-}]);
+});

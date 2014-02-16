@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('IssueCreateController', ['$scope', '$location', '$api', '$pageTitle', function ($scope, $location, $api, $pageTitle) {
+angular.module('app.controllers').controller('IssueCreateController', function ($scope, $location, $api, $pageTitle) {
   $pageTitle.set('Add Issue');
 
   $scope.new_issue = {};
@@ -19,4 +19,4 @@ angular.module('app.controllers').controller('IssueCreateController', ['$scope',
       }
     });
   };
-}]);
+});

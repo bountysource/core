@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('Reset', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('Reset', function ($scope, $routeParams, $api) {
   $scope.form_data = {
     email: $routeParams.email,
     code: $routeParams.code
@@ -20,4 +20,4 @@ angular.module('app.controllers').controller('Reset', ['$scope', '$routeParams',
       });
     }
   };
-}]);
+});

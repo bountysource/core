@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('app.controllers').controller('NavbarSearchController', ['$scope', '$location', function ($scope, $location) {
+angular.module('app.controllers').controller('NavbarSearchController', function ($scope, $location) {
   $scope.search_query = null;
   $scope.submit_search = function() {
     if ($scope.search_query && $scope.search_query.length > 0) {
       $location.path("/search").search({ query: $scope.search_query });
     }
   };
-}]);
+});
 
-angular.module('app.controllers').controller('SearchController', ['$scope', '$location', '$routeParams', '$api', '$window', function ($scope, $location, $routeParams, $api, $window) {
+angular.module('app.controllers').controller('SearchController', function ($scope, $location, $routeParams, $api, $window) {
   $scope.search_query = $routeParams.query;
   $scope.search_query_submitted = (angular.isDefined($scope.search_query) && $scope.search_query.length > 0);
   $scope.search_pending = $scope.search_query_submitted;
@@ -77,4 +77,4 @@ angular.module('app.controllers').controller('SearchController', ['$scope', '$lo
     // (though that won't happen with the current API response)
     return true;
   };
-}]);
+});

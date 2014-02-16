@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('title', [function() {
+angular.module('bountysource.filters').filter('title', function() {
   // Capitalize all words
   return function(s) {
     var parts = s.split(" ");
@@ -8,4 +8,4 @@ angular.module('bountysource.filters').filter('title', [function() {
     for (var i=0; i<parts.length; i++) { new_parts.push(parts[i][0].toUpperCase() + parts[i].slice(1)); }
     return new_parts.join(" ");
   };
-}]);
+});

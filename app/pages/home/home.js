@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('HomeCtrl', ['$scope', '$window', '$api', function ($scope, $window, $api) {
+angular.module('app.controllers').controller('HomeCtrl', function ($scope, $window, $api) {
   $api.fundraiser_cards().then(function(fundraisers) {
     $scope.fundraisers = fundraisers;
     return fundraisers;
@@ -18,4 +18,4 @@ angular.module('app.controllers').controller('HomeCtrl', ['$scope', '$window', '
     }
     return trackers;
   });
-}]);
+});

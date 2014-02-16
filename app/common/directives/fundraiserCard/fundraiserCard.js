@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('fundraiserCard', [function() {
+angular.module('bountysource.directives').directive('fundraiserCard', function() {
   return {
     restrict: "E",
     scope: {
@@ -8,4 +8,4 @@ angular.module('bountysource.directives').directive('fundraiserCard', [function(
     },
     templateUrl: "common/directives/fundraiserCard/templates/fundraiserCard.html"
   };
-}]);
+});

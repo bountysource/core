@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('teamTrackerThumbnails', [function() {
+angular.module('bountysource.directives').directive('teamTrackerThumbnails', function() {
   return {
     restrict: "E",
     templateUrl: 'common/directives/teamTrackerThumbnails/templates/teamTrackerThumbnails.html',
@@ -8,4 +8,4 @@ angular.module('bountysource.directives').directive('teamTrackerThumbnails', [fu
       trackers: "="
     }
   };
-}]);
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TeamIssuesController', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('TeamIssuesController', function ($scope, $routeParams, $api) {
   $scope.issues_resolved = false;
 
   $scope.issue_sort = {
@@ -27,4 +27,4 @@ angular.module('app.controllers').controller('TeamIssuesController', ['$scope', 
     $scope.issues = issues;
     $scope.issues_resolved = true;
   });
-}]);
+});

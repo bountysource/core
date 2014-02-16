@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('IssuesBaseController', ['$scope', function ($scope) {
+angular.module('app.controllers').controller('IssuesBaseController', function ($scope) {
   // Listen for developer goal create/updates. Broadcast update to all Controller instances.
   $scope.$on('developerGoalCreatePushed', function(event, new_developer_goal) {
     $scope.$broadcast('developerGoalCreateReceived', new_developer_goal);
@@ -22,4 +22,4 @@ angular.module('app.controllers').controller('IssuesBaseController', ['$scope', 
   $scope.$on('solutionUpdatePushed', function(event, updated_solution) {
     $scope.$broadcast('solutionUpdateReceived', updated_solution);
   });
-}]);
+});

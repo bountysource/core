@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('NotificationsController', ['$scope', '$routeParams', '$api', '$pageTitle', function($scope, $routeParams, $api, $pageTitle) {
+angular.module('app.controllers').controller('NotificationsController', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set("Unsubscribe from Bountysource Emails");
 
   $scope.email = $routeParams.email;
@@ -16,4 +16,4 @@ angular.module('app.controllers').controller('NotificationsController', ['$scope
       return success;
     });
   };
-}]);
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TrackersIndex', ['$scope', '$api', function ($scope, $api) {
+angular.module('app.controllers').controller('TrackersIndex', function ($scope, $api) {
   $scope.per_page = 50;
 
   $scope.projects_promise = $api.call("/trackers", "GET", { per_page: $scope.per_page }, function(response) {
@@ -29,4 +29,4 @@ angular.module('app.controllers').controller('TrackersIndex', ['$scope', '$api',
       return response.data;
     });
   };
-}]);
+});

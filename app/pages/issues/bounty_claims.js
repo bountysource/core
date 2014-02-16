@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('BountyClaimsController', ['$scope', '$routeParams', '$location', '$window', '$api', function ($scope, $routeParams, $location, $window, $api) {
+angular.module('app.controllers').controller('BountyClaimsController', function ($scope, $routeParams, $location, $window, $api) {
   $scope.new_bounty_claim = {
     code_url: $routeParams.code_url || "",
     description: $routeParams.description || ""
@@ -177,4 +177,4 @@ angular.module('app.controllers').controller('BountyClaimsController', ['$scope'
       $location.url("/signin");
     }
   };
-}]);
+});

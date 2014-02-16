@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('issueList', [function() {
+angular.module('bountysource.directives').directive('issueList', function() {
   return {
     restrict: "E",
     templateUrl: "common/directives/issueList/templates/issueList.html",
@@ -48,4 +48,4 @@ angular.module('bountysource.directives').directive('issueList', [function() {
       });
     }
   };
-}]);
+});

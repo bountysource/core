@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TeamBountiesController', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('TeamBountiesController', function ($scope, $routeParams, $api) {
   $scope.bounties_resolved = false;
 
   $scope.summary_sort = {
@@ -156,4 +156,4 @@ angular.module('app.controllers').controller('TeamBountiesController', ['$scope'
     bounty.progress_sum = final_progress || 20;
     return bounty;
   }
-}]);
+});

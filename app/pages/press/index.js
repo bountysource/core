@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('PressController', ['$scope', function($scope) {
+angular.module('app.controllers').controller('PressController', function($scope) {
   $scope.articles = [
     { date: '1/22/14', source: 'The Wall Street Journal', title: 'New Use for Bitcoin: Compensation for Open-Source Software Development', href: 'http://blogs.wsj.com/venturecapital/2014/01/22/new-use-for-bitcoin-compensation-for-open-source-software-development', author: 'Yuliya Chernova' },
     { date: '9/17/13', source: 'Opensource.com', title: 'Bountysource CEO talks open source crowdfunding and bounties for developers', href: 'http://opensource.com/business/13/9/bountysource-CEO-interview', author: 'Ginny Skalski' },
@@ -22,4 +22,4 @@ angular.module('app.controllers').controller('PressController', ['$scope', funct
     { date: '7/16/13', source: 'i4U', title: 'Bountysource Raises $1.1 Million for the First Crowdfunding Platform for Open-Source Software Projects', href: 'http://www.i4u.com/2013/07/google-inc/platform-software-crowdfunding-first-raises-million-11-bountysource-pr' },
     { date: '7/16/13', source: 'Congoo', title: 'Bountysource Raises $1.1 Million for the First Crowdfunding Platform for Open-Source Software Projects', href: 'http://www.congoo.com/news/2013July16/Bountysource-Raises-Million-Crowdfunding-Platform' }
   ];
-}]);
+});

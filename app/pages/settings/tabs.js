@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('SettingsTabs', ['$scope', '$location', function($scope, $location) {
+angular.module('app.controllers').controller('SettingsTabs', function($scope, $location) {
   $scope.tabs = [
     { name: 'Profile', url: '/settings' },
     { name: 'Accounts', url: '/settings/accounts' },
@@ -9,4 +9,4 @@ angular.module('app.controllers').controller('SettingsTabs', ['$scope', '$locati
   $scope.is_active = function(url) {
     return url === $location.path();
   };
-}]);
+});

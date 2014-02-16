@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('pluck', [function() {
+angular.module('bountysource.filters').filter('pluck', function() {
   return function(input, field) {
     // console.log(arguments);
     var retval = [];
@@ -9,4 +9,4 @@ angular.module('bountysource.filters').filter('pluck', [function() {
     }
     return retval;
   };
-}]);
+});

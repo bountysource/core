@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('abRandomize', ['$rootScope', '$compile', function ($rootScope, $compile) {
+angular.module('bountysource.directives').directive('abRandomize', function ($rootScope, $compile) {
   return {
     restrict: "AC",
     link: function (scope, element, attrs) {
@@ -17,4 +17,4 @@ angular.module('bountysource.directives').directive('abRandomize', ['$rootScope'
       });
     }
   };
-}]);
+});

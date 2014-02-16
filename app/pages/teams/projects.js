@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TeamTrackersController', ['$scope', '$routeParams', '$api', '$pageTitle', '$location', function ($scope, $routeParams, $api, $pageTitle, $location) {
+angular.module('app.controllers').controller('TeamTrackersController', function ($scope, $routeParams, $api, $pageTitle, $location) {
   $scope.projects = [];
 
   $scope.team_promise.then(function (team) {
@@ -91,4 +91,4 @@ angular.module('app.controllers').controller('TeamTrackersController', ['$scope'
 
     return team;
   });
-}]);
+});

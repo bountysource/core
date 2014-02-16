@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('ActivityTabs', ['$scope', '$location', function($scope, $location) {
+angular.module('app.controllers').controller('ActivityTabs', function($scope, $location) {
   $scope.tabs = [
     { name: 'Timeline', url: '/activity' },
     { name: 'Bounties', url: '/activity/bounties' },
@@ -13,4 +13,4 @@ angular.module('app.controllers').controller('ActivityTabs', ['$scope', '$locati
   $scope.is_active = function(url) {
     return url === $location.path();
   };
-}]);
+});

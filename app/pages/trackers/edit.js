@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TrackersEditController', ['$scope', '$api', '$routeParams', '$pageTitle', '$location', '$window', function ($scope, $api, $routeParams, $pageTitle, $location, $window) {
+angular.module('app.controllers').controller('TrackersEditController', function ($scope, $api, $routeParams, $pageTitle, $location, $window) {
   $api.tracker_get($routeParams.id).then(function (tracker) {
     $scope.form_data = {
       name: tracker.name,
@@ -128,4 +128,4 @@ angular.module('app.controllers').controller('TrackersEditController', ['$scope'
       }
     }
   };
-}]);
+});

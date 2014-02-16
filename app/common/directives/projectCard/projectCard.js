@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('projectCard', [function() {
+angular.module('bountysource.directives').directive('projectCard', function() {
   return {
     restrict: "E",
     scope: {
@@ -8,4 +8,4 @@ angular.module('bountysource.directives').directive('projectCard', [function() {
     },
     templateUrl: "common/directives/projectCard/templates/projectCard.html"
   };
-}]);
+});

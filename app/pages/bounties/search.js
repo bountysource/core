@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('BountiesSearchController', ['$scope', '$routeParams', '$location', '$api', '$filter', function($scope, $routeParams, $location, $api, $filter) {
+angular.module('app.controllers').controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter) {
   $scope.reset_form_data = function() {
     $scope.form_data = {
       direction: "desc",
@@ -277,4 +277,4 @@ angular.module('app.controllers').controller('BountiesSearchController', ['$scop
       return response;
     });
   }
-}]);
+});

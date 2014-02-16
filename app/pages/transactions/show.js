@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TransactionShowController', ['$scope', '$routeParams', '$api', '$filter', '$window', function ($scope, $routeParams, $api, $filter, $window) {
+angular.module('app.controllers').controller('TransactionShowController', function ($scope, $routeParams, $api, $filter, $window) {
   $scope.is_receipt = parseInt($routeParams.receipt, 10) === 1;
 
   $scope.transaction_promise = $api.call("/transactions/"+$routeParams.id).then(function(transaction) {
@@ -85,4 +85,4 @@ angular.module('app.controllers').controller('TransactionShowController', ['$sco
       // TODO recommended fundraisers?
     }
   });
-}]);
+});

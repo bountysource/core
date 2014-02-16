@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('PledgeActivity', ['$scope', '$routeParams', '$api', '$pageTitle', function($scope, $routeParams, $api, $pageTitle) {
+angular.module('app.controllers').controller('PledgeActivity', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set('Pledges', 'Activity');
 
   $api.call("/user/pledges").then(function(pledges) {
@@ -65,4 +65,4 @@ angular.module('app.controllers').controller('PledgeActivity', ['$scope', '$rout
     pledge.$show_survey = $scope.requires_action(pledge);
     if (pledge.$show_survey) { pledge.survey_response = pledge.survey_response || ""; }
   };
-}]);
+});

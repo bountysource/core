@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('issueStatusLabel', [function() {
+angular.module('bountysource.directives').directive('issueStatusLabel', function() {
   return {
     restrict: "E",
     scope: {
@@ -8,4 +8,4 @@ angular.module('bountysource.directives').directive('issueStatusLabel', [functio
     },
     templateUrl: "common/directives/issueStatusLabel/templates/issueStatusLabel.html"
   };
-}]);
+});

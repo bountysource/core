@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('ngClickRequireAuth', ['$parse', '$api', function($parse, $api) {
+angular.module('bountysource.directives').directive('ngClickRequireAuth', function($parse, $api) {
   return {
     restrict: "A",
     link: function(scope, element, attr) {
@@ -20,4 +20,4 @@ angular.module('bountysource.directives').directive('ngClickRequireAuth', ['$par
       });
     }
   };
-}]);
+});

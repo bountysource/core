@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('SettingsEmail', ['$scope', '$routeParams', '$api', function($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('SettingsEmail', function($scope, $routeParams, $api) {
   $scope.form_data = {};
 
   $scope.$watch('current_person', function(person) {
@@ -33,4 +33,4 @@ angular.module('app.controllers').controller('SettingsEmail', ['$scope', '$route
       }
     });
   };
-}]);
+});

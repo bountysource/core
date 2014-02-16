@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('SigninCallbackController', ['$scope', '$api', '$routeParams', '$location', '$window', function($scope, $api, $routeParams, $location, $window) {
+angular.module('app.controllers').controller('SigninCallbackController', function($scope, $api, $routeParams, $location, $window) {
 
   $window.alert('guy fieri');
 
@@ -31,4 +31,4 @@ angular.module('app.controllers').controller('SigninCallbackController', ['$scop
   } else {
     $scope.error = "ERROR: Unknown status.";
   }
-}]);
+});

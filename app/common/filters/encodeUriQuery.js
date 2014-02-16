@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('encodeUriQuery', [function() {
+angular.module('bountysource.filters').filter('encodeUriQuery', function() {
   return function(val, pctEncodeSpaces) {
     return encodeURIComponent(val).
       replace(/%40/gi, '@').
@@ -9,4 +9,4 @@ angular.module('bountysource.filters').filter('encodeUriQuery', [function() {
       replace(/%2C/gi, ',').
       replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
   };
-}]);
+});

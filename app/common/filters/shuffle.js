@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('shuffle', [function() {
+angular.module('bountysource.filters').filter('shuffle', function() {
   return function(array) {
     for (var i = array.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
@@ -10,5 +10,5 @@ angular.module('bountysource.filters').filter('shuffle', [function() {
     }
     return array;
   };
-}]);
+});
 

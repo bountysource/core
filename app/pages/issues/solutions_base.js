@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('SolutionsBaseController', ['$rootScope', '$scope', '$api', '$filter', '$q', '$routeParams', '$window', function ($rootScope, $scope, $api, $filter, $q, $routeParams, $window) {
+angular.module('app.controllers').controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter, $q, $routeParams, $window) {
   $scope.initializing = true;
 
   // initialize form from params
@@ -179,4 +179,4 @@ angular.module('app.controllers').controller('SolutionsBaseController', ['$rootS
       });
     }
   };
-}]);
+});

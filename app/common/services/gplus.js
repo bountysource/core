@@ -1,17 +1,15 @@
 'use strict';
 
-angular.module('bountysource.services').service('$twttr', ['$window', function ($window) {
-  // Twitter script
-  if (angular.isUndefined($window.twttr)) {
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-      if (!d.getElementById(id)) {
-        js = d.createElement(s);
-        js.id = id;
-        js.src = p + "://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }
-    })(document, "script", "twitter-wjs");
+angular.module('bountysource.services').service('$gplus', function ($window) {
+  if (angular.isUndefined($window.gapi)) {
+    (function () {
+      var po = document.createElement('script');
+      po.type = 'text/javascript';
+      po.async = true;
+      po.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(po, s);
+    })();
   }
   var that = this;
   this.$$queue = [];
@@ -24,16 +22,16 @@ angular.module('bountysource.services').service('$twttr', ['$window', function (
   };
   // stub widgets with method to enqueue requests while
   // the sdk loads
-  this.widgets = {
-    load: this.$$enqueue('widgets', 'load')
+  this.plusone = {
+    go: this.$$enqueue('plusone', 'go')
   };
   // poll until twitter sdk loaded
   var poll = $window.setInterval(function () {
-    if (angular.isDefined($window.twttr)) {
+    if (angular.isDefined($window.gapi)) {
       clearInterval(poll);
       // when twitter loads, copy all of it's attributes to this service
-      for (var k in $window.twttr) {
-        that[k] = angular.copy($window.twttr[k]);
+      for (var k in $window.gapi) {
+        that[k] = $window.gapi[k];
       }
       // pop off queued sdk invocations
       while (that.$$queue.length > 0) {
@@ -46,4 +44,4 @@ angular.module('bountysource.services').service('$twttr', ['$window', function (
       }
     }
   }, 5);
-}]);
+});

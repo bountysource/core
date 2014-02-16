@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraiserShowController', ['$scope', '$routeParams', '$location', '$window', '$api', '$sanitize', '$pageTitle', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
+angular.module('app.controllers').controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
   // $sanitize but allow iframes (i.e. youtube videos)
   $scope.fundraiser_get_promise.then(function(fundraiser) {
     if (fundraiser.error) {
@@ -58,4 +58,4 @@ angular.module('app.controllers').controller('FundraiserShowController', ['$scop
       return response.data;
     });
   };
-}]);
+});

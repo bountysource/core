@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TeamHomeController', ['$route', '$scope', '$routeParams', '$api', '$pageTitle', '$location', function ($route, $scope, $routeParams, $api, $pageTitle, $location) {
+angular.module('app.controllers').controller('TeamHomeController', function ($route, $scope, $routeParams, $api, $pageTitle, $location) {
   $scope.create_bounty_params = {};
 
   // pick off query string to show amount added to account
@@ -41,4 +41,4 @@ angular.module('app.controllers').controller('TeamHomeController', ['$route', '$
       });
     }
   };
-}]);
+});

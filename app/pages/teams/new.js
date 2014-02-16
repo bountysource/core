@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('NewTeamController', ['$scope', '$location', '$api', '$filter', '$routeParams', '$pageTitle', function ($scope, $location, $api, $filter, $routeParams, $pageTitle) {
+angular.module('app.controllers').controller('NewTeamController', function ($scope, $location, $api, $filter, $routeParams, $pageTitle) {
   $pageTitle.set("Teams", "New");
 
   $scope.team_options = [
@@ -42,4 +42,4 @@ angular.module('app.controllers').controller('NewTeamController', ['$scope', '$l
       }
     });
   };
-}]);
+});

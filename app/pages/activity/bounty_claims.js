@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('BountyClaimActivity', ['$scope', '$routeParams', '$api', '$pageTitle', function($scope, $routeParams, $api, $pageTitle) {
+angular.module('app.controllers').controller('BountyClaimActivity', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set('Bounty Claims', 'Activity');
 
   $api.bounty_claims_activity().then(function(bounty_claims) {
@@ -16,4 +16,4 @@ angular.module('app.controllers').controller('BountyClaimActivity', ['$scope', '
 
     return bounty_claims;
   });
-}]);
+});

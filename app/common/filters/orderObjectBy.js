@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('orderObjectBy', [function() {
+angular.module('bountysource.filters').filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];
     angular.forEach(items, function(item) {
@@ -20,4 +20,4 @@ angular.module('bountysource.filters').filter('orderObjectBy', [function() {
     }
     return filtered;
   };
-}]);
+});

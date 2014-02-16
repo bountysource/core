@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TeamActivityController', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('TeamActivityController', function ($scope, $routeParams, $api) {
   $api.team_activity($routeParams.id).then(function(activity) {
     var activities = [];
     var i;
@@ -10,4 +10,4 @@ angular.module('app.controllers').controller('TeamActivityController', ['$scope'
     $scope.activities = activities;
     return activities;
   });
-}]);
+});

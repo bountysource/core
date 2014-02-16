@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('favicon', [function() {
+angular.module('bountysource.directives').directive('favicon', function() {
   return {
     restrict: "E",
     replace: true,
@@ -9,4 +9,4 @@ angular.module('bountysource.directives').directive('favicon', [function() {
       domain: "@"
     }
   };
-}]);
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('backerThumbnails', [function() {
+angular.module('bountysource.directives').directive('backerThumbnails', function() {
   return {
     restrict: "E",
     scope: {
@@ -9,4 +9,4 @@ angular.module('bountysource.directives').directive('backerThumbnails', [functio
     templateUrl: "common/directives/backerThumbnails/templates/backerThumbnails.html",
     replace: true
   };
-}]);
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('trackerPluginAuthorizeModal', ['$routeParams', '$window', '$location', '$api', function($routeParams, $window, $location, $api) {
+angular.module('bountysource.directives').directive('trackerPluginAuthorizeModal', function($routeParams, $window, $location, $api) {
   return {
     templateUrl: 'common/directives/trackerPluginAuthorizeModal/templates/trackerPluginAuthorizeModal.html',
     scope: true,
@@ -22,4 +22,4 @@ angular.module('bountysource.directives').directive('trackerPluginAuthorizeModal
       };
     }
   };
-}]);
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraiserLeaderboardController', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('FundraiserLeaderboardController', function ($scope, $routeParams, $api) {
   $api.call("/user/fundraisers/"+$routeParams.id+"/top_backers", { per_page: 3 }, function(response) {
     if (response.meta.success) {
       var pledges = response.data;
@@ -13,4 +13,4 @@ angular.module('app.controllers').controller('FundraiserLeaderboardController', 
       return pledges;
     }
   });
-}]);
+});

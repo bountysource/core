@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.services').service('$pageTitle', ['$window', function($window) {
+angular.module('bountysource.services').service('$pageTitle', function($window) {
   this.set = function() {
     var value = arguments.length > 0 ? Array.prototype.slice.call(arguments,0) : arguments[0];
     var parts;
@@ -16,4 +16,4 @@ angular.module('bountysource.services').service('$pageTitle', ['$window', functi
     }
     $window.document.title = parts.join(' - ');
   };
-}]);
+});

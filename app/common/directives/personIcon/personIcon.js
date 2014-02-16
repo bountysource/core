@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('personIcon', [function() {
+angular.module('bountysource.directives').directive('personIcon', function() {
   return {
     restrict: "E",
     scope: {
@@ -11,4 +11,4 @@ angular.module('bountysource.directives').directive('personIcon', [function() {
     templateUrl: "common/directives/personIcon/templates/personIcon.html",
     replace: true
   };
-}]);
+});

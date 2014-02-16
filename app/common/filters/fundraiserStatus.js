@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('fundraiserStatus', [function() {
+angular.module('bountysource.filters').filter('fundraiserStatus', function() {
   return function(fundraiser) {
     if (!fundraiser) { return ""; }
     if (!fundraiser.published) { return "draft"; }
@@ -8,4 +8,4 @@ angular.module('bountysource.filters').filter('fundraiserStatus', [function() {
     else if (!fundraiser.in_progress) { return "completed"; }
     else { return ""; }
   };
-}]);
+});

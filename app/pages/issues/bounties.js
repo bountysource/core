@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('IssueBountiesController', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('IssueBountiesController', function ($scope, $routeParams, $api) {
   $api.issue_get($routeParams.id).then(function(issue) {
     $scope.issue = issue;
     return issue;
@@ -16,4 +16,4 @@ angular.module('app.controllers').controller('IssueBountiesController', ['$scope
       $scope.sort_column = col;
     }
   };
-}]);
+});

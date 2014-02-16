@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('requireGithubAuth', ["$api", "$window", "$location", function($api, $window, $location) {
+angular.module('bountysource.directives').directive('requireGithubAuth', function($api, $window, $location) {
   // TODO support more than 1 scope
   return {
     restrict: "AC",
@@ -26,4 +26,4 @@ angular.module('bountysource.directives').directive('requireGithubAuth', ["$api"
       });
     }
   };
-}]);
+});

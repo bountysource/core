@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('PeopleShow', ['$scope', '$routeParams', '$api', '$pageTitle', '$location', function ($scope, $routeParams, $api, $pageTitle, $location) {
+angular.module('app.controllers').controller('PeopleShow', function ($scope, $routeParams, $api, $pageTitle, $location) {
   if ((/^18483-/).test($routeParams.id)) {
     $location.url("/teams/bountysource").replace();
   }
@@ -23,4 +23,4 @@ angular.module('app.controllers').controller('PeopleShow', ['$scope', '$routePar
     $scope.teams = teams;
     return teams;
   });
-}]);
+});

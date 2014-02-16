@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('CreateBountyController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', '$api', '$filter', '$cart', function ($scope, $rootScope, $routeParams, $window, $location, $api, $filter, $cart) {
+angular.module('app.controllers').controller('CreateBountyController', function ($scope, $rootScope, $routeParams, $window, $location, $api, $filter, $cart) {
   $scope.cart_promise = $cart.load().then(function(cart) {
     $scope.cart = cart;
     return cart;
@@ -224,4 +224,4 @@ angular.module('app.controllers').controller('CreateBountyController', ['$scope'
       $scope.update_bounty_total();
     }
   };
-}]);
+});

@@ -5,7 +5,7 @@
 *
 * TODO: Make a better way to require auth on pages?
 * */
-angular.module('bountysource.constants').constant('personResolver', ['$q', '$rootScope', '$location', '$api', function($q, $rootScope, $location, $api) {
+angular.module('bountysource.constants').constant('personResolver', function($q, $rootScope, $location, $api) {
   var deferred = $q.defer();
 
   var success = function() {
@@ -36,4 +36,4 @@ angular.module('bountysource.constants').constant('personResolver', ['$q', '$roo
   }
 
   return deferred.promise;
-}]);
+});

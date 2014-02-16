@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('CartController', ['$scope', '$cart', function($scope, $cart) {
+angular.module('app.controllers').controller('CartController', function($scope, $cart) {
   $cart.load().then(function(cart) {
     console.log(cart);
 
@@ -26,4 +26,4 @@ angular.module('app.controllers').controller('CartController', ['$scope', '$cart
   $scope.update_item = function(item) {};
 
   $scope.cancel_item_changes = function(item) {};
-}]);
+});

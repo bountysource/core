@@ -4,7 +4,7 @@ var defaultRouteOptions = {
   reloadOnSearch: false
 };
 
-angular.module('app.routes').config(['$routeProvider', 'personResolver', function ($routeProvider, personResolver) {
+angular.module('app.routes').config(function ($routeProvider, personResolver) {
   $routeProvider.when('/', angular.extend({
     templateUrl: 'pages/home/home.html',
     controller: 'HomeCtrl',
@@ -423,12 +423,4 @@ angular.module('app.routes').config(['$routeProvider', 'personResolver', functio
   $routeProvider.otherwise({
     templateUrl: 'pages/layout/not_found.html'
   });
-}]);
-
-angular.module('app.routes').run(['$route', function($route) {
-
-  window.$route = $route;
-  console.log($route);
-
-
-}]);
+});

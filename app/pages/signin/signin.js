@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('SigninController', ['$scope', '$routeParams', '$api', '$location', '$window', function ($scope, $routeParams, $api, $location, $window) {
+angular.module('app.controllers').controller('SigninController', function ($scope, $routeParams, $api, $location, $window) {
   // Redirect user to homepage if already logged in.
   // Need to wait to see if current_person is explicitly set to false.
   $scope.teams = [];
@@ -120,4 +120,4 @@ angular.module('app.controllers').controller('SigninController', ['$scope', '$ro
       $scope.error = response.message;
     });
   };
-}]);
+});

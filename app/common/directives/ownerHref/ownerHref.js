@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('ownerHref', [function() {
+angular.module('bountysource.directives').directive('ownerHref', function() {
   return {
     restrict: "AC",
     link: function(scope, element, attr) {
@@ -15,4 +15,4 @@ angular.module('bountysource.directives').directive('ownerHref', [function() {
       });
     }
   };
-}]);
+});

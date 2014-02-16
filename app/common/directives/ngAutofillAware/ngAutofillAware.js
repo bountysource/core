@@ -4,7 +4,7 @@
 *  Adding ng-autofill-aware to a <form> forces it to emit 'input' events on a variety of events
 *  typically triggered by autofills by the browser or password managers.
 * */
-angular.module('bountysource.directives').directive('ngAutofillAware', [function() {
+angular.module('bountysource.directives').directive('ngAutofillAware', function() {
   return function(scope, element) {
     // listen for pertinent events to trigger input on form element
     // use timeout to ensure val is populated before triggering 'input'
@@ -17,4 +17,4 @@ angular.module('bountysource.directives').directive('ngAutofillAware', [function
       element.find('input').triggerHandler('input');
     });
   };
-}]);
+});

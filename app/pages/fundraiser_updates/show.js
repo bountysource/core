@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraiserUpdateController', ['$scope', '$routeParams', '$location', '$api', function ($scope, $routeParams, $location, $api) {
+angular.module('app.controllers').controller('FundraiserUpdateController', function ($scope, $routeParams, $location, $api) {
   $api.fundraiser_update_get($routeParams.id, $routeParams.update_id).then(function(fundraiser) {
     $scope.update = fundraiser.update;
     return fundraiser;
@@ -29,4 +29,4 @@ angular.module('app.controllers').controller('FundraiserUpdateController', ['$sc
       }
     });
   };
-}]);
+});

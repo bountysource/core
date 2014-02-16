@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraisersIndex', ['$scope', '$location', '$api', function ($scope, $location, $api) {
+angular.module('app.controllers').controller('FundraisersIndex', function ($scope, $location, $api) {
   $scope.type = 'current';
   if ($location.path() === '/fundraisers/completed') {
     $scope.type = 'completed';
@@ -69,4 +69,4 @@ angular.module('app.controllers').controller('FundraisersIndex', ['$scope', '$lo
     }
     $scope.order_by = order;
   };
-}]);
+});

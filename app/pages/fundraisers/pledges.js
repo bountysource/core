@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraiserPledgesController', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('FundraiserPledgesController', function ($scope, $routeParams, $api) {
   $api.fundraiser_pledges_get($routeParams.id).then(function(pledges) {
     // need to turn amounts into float so that it's sortable
     for (var i in pledges) { pledges[i].amount = parseFloat(pledges[i].amount); }
@@ -19,4 +19,4 @@ angular.module('app.controllers').controller('FundraiserPledgesController', ['$s
       $scope.sort_column = col;
     }
   };
-}]);
+});

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('BaseToolsController', ['$scope', '$routeParams', '$window', '$location', '$api', function ($scope, $routeParams, $window, $location, $api) {
+angular.module('app.controllers').controller('BaseToolsController', function ($scope, $routeParams, $window, $location, $api) {
   // Render a re-authorize link in the presence of the glorious authorize parameter.
   if (parseInt($routeParams.reauthorize, 10) === 1) {
     $scope.reAuthorize = true;
@@ -200,4 +200,4 @@ angular.module('app.controllers').controller('BaseToolsController', ['$scope', '
     $scope.plugins = plugins;
     return plugins;
   });
-}]);
+});

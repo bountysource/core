@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraiserController', ['$scope', '$routeParams', '$filter', '$api', function($scope, $routeParams, $filter, $api) {
+angular.module('app.controllers').controller('FundraiserController', function($scope, $routeParams, $filter, $api) {
   $scope.fundraiser_get_promise = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
     $scope.can_manage = fundraiser.person && $scope.current_person && fundraiser.person.id === $scope.current_person.id;
     $scope.publishable = fundraiser.title && fundraiser.short_description && fundraiser.funding_goal && fundraiser.description;
@@ -14,4 +14,4 @@ angular.module('app.controllers').controller('FundraiserController', ['$scope', 
     $scope.fundraiser = fundraiser;
     return fundraiser;
   });
-}]);
+});

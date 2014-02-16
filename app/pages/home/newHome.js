@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('newHomeCtrl', ['$scope', '$window', '$api', function ($scope, $window, $api) {
+angular.module('app.controllers').controller('newHomeCtrl', function ($scope, $window, $api) {
   $scope.tabs_resolved = false;
 
   $scope.set_current_saved_search_tab = function(selected_tab) {
@@ -67,4 +67,4 @@ angular.module('app.controllers').controller('newHomeCtrl', ['$scope', '$window'
     $scope.set_current_saved_search_tab(new_tab);
   };
 
-}]);
+});

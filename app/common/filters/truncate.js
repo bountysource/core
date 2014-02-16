@@ -7,7 +7,7 @@
  * $scope.text = "Apples are delicious"
  * <span>{{ text | truncate:12 }}</span> ==> <span>Apples ar...</span>
 * */
-angular.module('bountysource.filters').filter('truncate', [function() {
+angular.module('bountysource.filters').filter('truncate', function() {
   return function(s, size, replacement) {
     size = size || 50;
     replacement = replacement || "...";
@@ -16,4 +16,4 @@ angular.module('bountysource.filters').filter('truncate', [function() {
     }
     return s.slice(0,size+replacement.length) + replacement;
   };
-}]);
+});

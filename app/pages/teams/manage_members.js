@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('ManageTeamMembersController', ['$scope', '$routeParams', '$location', '$api', '$window', function($scope, $routeParams, $location, $api, $window) {
+angular.module('app.controllers').controller('ManageTeamMembersController', function($scope, $routeParams, $location, $api, $window) {
   $scope.$watch('is_admin', function(value) {
     if (value === false) {
       $location.path("/teams/"+$routeParams.id).replace();
@@ -202,4 +202,4 @@ angular.module('app.controllers').controller('ManageTeamMembersController', ['$s
     $scope.pending_invites = invites;
     return invites;
   });
-}]);
+});

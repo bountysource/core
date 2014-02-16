@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('FundraiserEditController', ['$scope', '$routeParams', '$location', '$api', function($scope, $routeParams, $location, $api) {
+angular.module('app.controllers').controller('FundraiserEditController', function($scope, $routeParams, $location, $api) {
   // initialize fundraiser data and changes
   $scope.master = {};
   $scope.changes = {};
@@ -117,4 +117,4 @@ angular.module('app.controllers').controller('FundraiserEditController', ['$scop
     });
   };
 
-}]);
+});

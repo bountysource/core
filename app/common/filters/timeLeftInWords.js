@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('timeLeftInWords', [function() {
+angular.module('bountysource.filters').filter('timeLeftInWords', function() {
   return function(date) {
     var now = new Moment();
     var ends = new Moment(date);
@@ -26,4 +26,4 @@ angular.module('bountysource.filters').filter('timeLeftInWords', [function() {
     if (time_left !== 1) { time_left_unit += "s"; }
     return time_left + " " + time_left_unit;
   };
-}]);
+});

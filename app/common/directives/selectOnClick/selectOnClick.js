@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('selectOnClick', [function () {
+angular.module('bountysource.directives').directive('selectOnClick', function () {
   return {
     restrict: "A",
     link: function (scope, element) {
@@ -9,4 +9,4 @@ angular.module('bountysource.directives').directive('selectOnClick', [function (
       });
     }
   };
-}]);
+});

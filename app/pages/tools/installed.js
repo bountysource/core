@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller("InstalledPluginsController", ['$scope', function($scope) {
+angular.module('app.controllers').controller("InstalledPluginsController", function($scope) {
   // Nested callbacks to filter out trackers that don't have a plugin
   $scope.plugins_promise.then(function(plugins) {
     var all_trackers_map = {}, tracker_name;
@@ -30,4 +30,4 @@ angular.module('app.controllers').controller("InstalledPluginsController", ['$sc
   });
 
   $scope.hide_installed_button = true;
-}]);
+});

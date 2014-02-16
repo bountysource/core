@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.filters').filter('timeAgoShort', [function() {
+angular.module('bountysource.filters').filter('timeAgoShort', function() {
   return function(date, options) {
     options = options || {};
     var now = new Moment();
@@ -26,4 +26,4 @@ angular.module('bountysource.filters').filter('timeAgoShort', [function() {
     }
     return time_left + ' ' + time_left_unit;
   };
-}]);
+});

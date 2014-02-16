@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('targetBlank', [function() {
+angular.module('bountysource.directives').directive('targetBlank', function() {
   return {
     restrict: "E",
     link: function($scope, element) {
@@ -14,4 +14,4 @@ angular.module('bountysource.directives').directive('targetBlank', [function() {
       });
     }
   };
-}]);
+});

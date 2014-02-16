@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TrackerLeaderboardController', ['$scope', '$routeParams', '$api', function ($scope, $routeParams, $api) {
+angular.module('app.controllers').controller('TrackerLeaderboardController', function ($scope, $routeParams, $api) {
   $api.tracker_top_backers($routeParams.id, {limit: 3}).then(function (response) {
     if (response.meta.success) {
       var backers = response.data.top_backers;
@@ -10,4 +10,4 @@ angular.module('app.controllers').controller('TrackerLeaderboardController', ['$
       $scope.backers = backers;
     }
   });
-}]);
+});

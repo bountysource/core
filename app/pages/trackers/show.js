@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('TrackerShow', ['$scope', '$routeParams', '$location', '$api', '$pageTitle', '$timeout', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
+angular.module('app.controllers').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
   $api.tracker_get($routeParams.id).then(function(tracker) {
     // Edge case: GitHub repo changes owner, and we create a new Tracker model.
     // If the requested tracker model has a redirect to another, change the URL to that tracker.
@@ -130,4 +130,4 @@ angular.module('app.controllers').controller('TrackerShow', ['$scope', '$routePa
 
   $scope.update_filter_options();
   //populate bindings with bounty_min, bounty_max
-}]);
+});

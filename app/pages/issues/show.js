@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('IssueShow', ['$scope', '$routeParams', '$window', '$location', '$api', '$pageTitle', function ($scope, $routeParams, $window, $location, $api, $pageTitle) {
+angular.module('app.controllers').controller('IssueShow', function ($scope, $routeParams, $window, $location, $api, $pageTitle) {
   // alert above the issue title about bounty status
   $scope.bounty_alert = {
     type: 'warning',
@@ -46,4 +46,4 @@ angular.module('app.controllers').controller('IssueShow', ['$scope', '$routePara
     $scope.issue = issue;
     return issue;
   });
-}]);
+});

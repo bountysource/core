@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('BountyActivity', ['$scope', '$routeParams', '$api', '$pageTitle', function($scope, $routeParams, $api, $pageTitle) {
+angular.module('app.controllers').controller('BountyActivity', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set('Bounties', 'Activity');
 
   $api.call("/user/bounties").then(function(bounties) {
@@ -13,4 +13,4 @@ angular.module('app.controllers').controller('BountyActivity', ['$scope', '$rout
       bounty.anonymous = !bounty.anonymous;
     });
   };
-}]);
+});

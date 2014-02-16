@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('integerOnly', [function() {
+angular.module('bountysource.directives').directive('integerOnly', function() {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
@@ -17,4 +17,4 @@ angular.module('bountysource.directives').directive('integerOnly', [function() {
       });
     }
   };
-}]);
+});

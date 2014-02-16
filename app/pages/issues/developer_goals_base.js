@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('DeveloperGoalsBaseController', ['$scope', '$api', '$filter', '$location', '$routeParams', function ($scope, $api, $filter, $location, $routeParams) {
+angular.module('app.controllers').controller('DeveloperGoalsBaseController', function ($scope, $api, $filter, $location, $routeParams) {
   $scope.developer_goals = [];
   $scope.new_developer_goal = { amount: undefined };
   $scope.my_developer_goal = undefined;
@@ -134,4 +134,4 @@ angular.module('app.controllers').controller('DeveloperGoalsBaseController', ['$
       return issue;
     });
   };
-}]);
+});

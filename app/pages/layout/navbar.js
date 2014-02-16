@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('Navbar', ['$scope', '$api', function ($scope, $api) {
+angular.module('app.controllers').controller('Navbar', function ($scope, $api) {
   $scope.setEnv = $api.setEnvironment;
 
   $scope.set_access_token = {
@@ -14,15 +14,15 @@ angular.module('app.controllers').controller('Navbar', ['$scope', '$api', functi
       this.close();
     }
   };
-}]);
+});
 
-angular.module('app.controllers').controller('AlertNotificationBar', ['$scope', '$location', function ($scope, $location) {
+angular.module('app.controllers').controller('AlertNotificationBar', function ($scope, $location) {
   $scope.$on('$routeChangeSuccess', function() {
     $scope.show_alert_notification_bar = !$location.path().match(/^(\/|\/fundraisers\/.*)$/);
   });
-}]);
+});
 
-angular.module('app.controllers').controller('NavbarLinkedAccountSignin', ['$scope', '$location', '$api', function($scope, $location, $api) {
+angular.module('app.controllers').controller('NavbarLinkedAccountSignin', function($scope, $location, $api) {
   $scope.save_route = function() {
     $api.set_post_auth_url($location.url());
   };
@@ -31,4 +31,4 @@ angular.module('app.controllers').controller('NavbarLinkedAccountSignin', ['$sco
     $scope.save_route();
     $location.url("/signin");
   };
-}]);
+});
