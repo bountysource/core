@@ -40,32 +40,32 @@
   <!-- Show events -->
   <div ng-show="claim.events.length > 0" class="bounty-claim-events-table">
     <div ng-repeat="event in claim.events | orderBy:['+created_at']" class="bounty-claim-events-row">
-      <div class="row-fluid">
+      <div class="row">
         <div ng-switch="event.type">
           <div ng-switch-when="BountyClaimEvent::BackerDisputed">
-            <div class="span1">
+            <div class="col-lg-1 col-md-1 col-sm-1">
               <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
             </div>
-            <div class="span11">
+            <div class="col-lg-11 col-md-11 col-sm-11">
               <div class="text-error">Rejected by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="muted">{{event.created_at | date:'medium'}}</small></div>
               <div>{{event.description}}</div>
             </div>
           </div>
           <div ng-switch-when="BountyClaimEvent::BackerDisputeResolved">
-            <div class="span1">
+            <div class="col-lg-1 col-md-1 col-sm-1">
               <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
             </div>
-            <div class="span11">
+            <div class="col-lg-11 col-md-11 col-sm-11">
               <div class="text-success">Dispute from <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> resolved <small class="muted">{{event.created_at | date:'medium'}}</small></div>
               <div>{{event.description}}</div>
             </div>
           </div>
           <div ng-switch-when="BountyClaimEvent::BackerAccepted">
             <div ng-show="event.description"><!-- event only appears if there is a description present -->
-              <div class="span1">
+              <div class="col-lg-1 col-md-1 col-sm-1">
                 <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
               </div>
-              <div class="span11">
+              <div class="col-lg-11 col-md-11 col-sm-11">
                 <div class="text-success">Accepted by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="muted">{{event.created_at | date:'medium'}}</small></div>
                 <div>{{event.description}}</div>
               </div>
