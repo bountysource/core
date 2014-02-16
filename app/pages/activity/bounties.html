@@ -19,7 +19,7 @@
       <th style="width: 50px;">Owner</th>
       <th>
         Anonymous
-        <a popover-title="Anonymous Bounties" popover="If you want to hide your identity on a bounty, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="icon-question-sign"></i></a>
+        <a popover-title="Anonymous Bounties" popover="If you want to hide your identity on a bounty, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="glyphicon glyphicon-question-sign"></i></a>
       </th>
     </tr>
   </thead>
@@ -52,17 +52,17 @@
 
     <td ng-show="bounty.anonymous && bounty.owner_type != 'Team'">
       <button class="btn btn-block active btn-default btn-sm" ng-click="toggle_anonymous(bounty)">
-        <i class="icon-eye-close"></i>
+        <i class="glypicon glyphicon-eye-close"></i>
         Anonymized
       </button>
     </td>
     <td ng-hide="bounty.anonymous">
       <button class="btn btn-block btn-success btn-sm" ng-click="toggle_anonymous(bounty)" ng-hide="bounty.owner_type == 'Team'">
-        <i class="icon-eye-open"></i>
+        <i class="glypicon glyphicon-eye-open"></i>
         Publicized
       </button>
       <button class="btn btn-block btn-success disabled btn-sm" ng-show="bounty.owner_type == 'Team'" tooltip="Team bounties cannot be anonymous">
-        <i class="icon-eye-open"></i>
+        <i class="glypicon glyphicon-eye-open"></i>
         Publicized
       </button>
     </td>

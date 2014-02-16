@@ -16,7 +16,7 @@
               <a ng-click="set_current_saved_search_tab(tab)">{{tab.name}}</a>
               <i ng-click="remove_tab(tab)" class="close" ng-hide="true" style="position:absolute;top:0;right:0;padding-right:3px;">×</i>
             </li>
-            <li ng-show="false" ng-class="{active: active_tab('search') }"><a ng-click="set_search_tab()"><i class="icon-plus"></i></a></li>
+            <li ng-show="false" ng-class="{active: active_tab('search') }"><a ng-click="set_search_tab()"><i class="glypicon glyphicon-plus"></i></a></li>
           </ul>
 
           <div ng-hide="tab_results_resolved" class="text-center">
@@ -48,7 +48,7 @@
                 <div class="filter-box">
                   <span class="badge search-filter" ng-repeat="language in languages_selected">
                     <button type="button" class="close" ng-click="remove_language(language)">
-                      <i class="icon-remove"></i>
+                      <i class="glypicon glyphicon-remove"></i>
                     </button>
                     <span>{{language.name}}</span>
                   </span>
@@ -60,7 +60,7 @@
                 <div class="project-box">
                  <span class="badge search-filter" ng-repeat="tracker in trackers_selected">
                    <button type="button" class="close" ng-click="remove_tracker(tracker)">
-                     <i class="icon-remove"></i>
+                     <i class="glypicon glyphicon-remove"></i>
                    </button>
                    {{tracker.name}}
                  </span>

@@ -2,11 +2,11 @@
   <div class="container">
     <div class="container">
       <div class="navbar-header"><a class="navbar-brand" href="/" id="navbar-logo"><strong>Bountysource</strong><img src="/images/Bountysource-green.png" style="width: 100px; height: 30px"></a></div>
-      <button type="button" class="btn btn-navbar btn-default" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      <button type="button" class="btn navbar-btn btn-default" ng-click="isCollapsed = !isCollapsed"><span class="glypicon glyphicon-bar"></span><span class="glypicon glyphicon-bar"></span><span class="glypicon glyphicon-bar"></span></button>
 
       <div class="navbar-collapse" collapse="!isCollapsed">
         <form class="navbar-form" ng-controller="NavbarSearchController" ng-submit="submit_search()">
-          <div class="icon-search"></div>
+          <div class="glypicon glyphicon-search"></div>
           <input type="text" class="search-query form-control" ng-model="search_query" placeholder="Issue URL, Project, Language, etc.">
         </form>
         <ul class="nav pull-right navbar-nav">
@@ -37,7 +37,7 @@
 
             <ul class="dropdown-menu" ng-show="!!current_person">
               <li class="dropdown-submenu"><a href="/activity" id="navbar-user-activity">
-                <i class="icon-bullhorn"></i>
+                <i class="glypicon glyphicon-bullhorn"></i>
                 Activity
               </a>
                 <ul class="dropdown-menu">
@@ -50,16 +50,16 @@
                 </ul>
               </li>
               <li><a ng-href="/people/{{current_person.slug}}" id="navbar-user-profile">
-                <i class="icon-user"></i>
+                <i class="glypicon glyphicon-user"></i>
                 Profile
               </a></li>
               <li><a href="/tools">
-                <i class="icon-wrench"></i>
+                <i class="glypicon glyphicon-wrench"></i>
                 Tools
               </a></li>
               <li ng-show="teams.length > 0" class="dropdown-submenu">
                 <a href="/teams" id="navbar-user-teams">
-                  <i class="icon-globe"></i>
+                  <i class="glypicon glyphicon-globe"></i>
                   Teams
                 </a>
                 <ul class="dropdown-menu">
@@ -70,7 +70,7 @@
               </li>
               <li class="dropdown-submenu">
                 <a href="/settings" id="navbar-user-settings">
-                  <i class="icon-cog"></i>
+                  <i class="glypicon glyphicon-cog"></i>
                   Settings
                 </a>
                 <ul class="dropdown-menu">
@@ -80,13 +80,13 @@
                 </ul>
               </li>
               <li ng-show="current_person.account.balance > 0"><a ng-href="/activity/account" id="navbar-user-profile">
-                <i class="icon-gift"></i>
+                <i class="glypicon glyphicon-gift"></i>
                 Balance ({{current_person.account.balance | currency}})
               </a></li>
 
               <li class="divider"></li>
               <li><a href="/signin" ng-click="signout()" id="navbar-user-signout">
-                <i class="icon-off"></i>
+                <i class="glypicon glyphicon-off"></i>
                 Sign Out
               </a></li>
             </ul>

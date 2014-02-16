@@ -28,15 +28,15 @@
               <span ng-show="update.published_at" class="update-date text-muted">Published {{update.published_at | date}}</span>
               <div ng-hide="update.published_at" class="update-options">
                 <a class="btn btn-default" ng-href="/fundraisers/{{fundraiser.slug}}/updates/{{update.id}}/edit">
-                  <i class="icon-pencil"></i>
+                  <i class="glypicon glyphicon-pencil"></i>
                   Edit
                 </a>
                 <button ng-click="publish()" class="btn btn-success">
-                  <i class="icon-globe"></i>
+                  <i class="glypicon glyphicon-globe"></i>
                   Publish
                 </button>
                 <button ng-click="destroy()" class="btn btn-danger">
-                  <i class="icon icon-trash"></i>
+                  <i class="glypicon glyphicon-trash"></i>
                   Delete
                 </button>
               </div>

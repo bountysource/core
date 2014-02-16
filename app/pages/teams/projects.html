@@ -28,7 +28,7 @@
             <ul class="thumbnails team-tracker-thumbnails">
               <li ng-repeat="tracker in team.trackers | filter: trackerOwner()" class="span2">
                 <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="unclaim_tracker(tracker)">
-                  <i class="icon-remove"></i>
+                  <i class="glypicon glyphicon-remove"></i>
                 </button>
                 <a class="thumbnail text-center" ng-href="/trackers/{{tracker.slug}}">
                   <img ng-src="{{tracker.medium_image_url}}">
@@ -64,7 +64,7 @@
 
       <ul class="thumbnails team-tracker-thumbnails">
         <li ng-repeat="tracker in team.trackers | filter:trackerUsed()" class="span2">
-          <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="remove_tracker(tracker)"><i class="icon-remove"></i></button>
+          <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="remove_tracker(tracker)"><i class="glypicon glyphicon-remove"></i></button>
           <a class="thumbnail text-center" ng-href="/trackers/{{tracker.slug}}">
             <img ng-src="{{tracker.medium_image_url}}">
             <span>{{tracker.name}}</span>

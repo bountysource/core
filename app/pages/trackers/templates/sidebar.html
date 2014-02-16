@@ -3,11 +3,11 @@
   <br>
   <button class="btn btn-block btn-default" ng-click="tracker.follow()">
         <span ng-show="tracker.followed">
-          <i class="icon-star"></i>
+          <i class="glypicon glyphicon-star"></i>
           Following this project
         </span>
         <span ng-hide="tracker.followed">
-          <i class="icon-star-empty"></i>
+          <i class="glypicon glyphicon-star-empty"></i>
           Follow this project
         </span>
   </button>
@@ -52,10 +52,10 @@
         View on Bugzilla
       </div>
       <div ng-switch-default="">
-        <i class="icon-globe"></i>
+        <i class="glypicon glyphicon-globe"></i>
         View Repository
       </div>
     </div>
   </a>
-  <a ng-href="/trackers/{{ tracker.slug }}/edit" class="btn btn-block btn-default"><i class="icon-pencil"></i> Edit this Tracker</a>
+  <a ng-href="/trackers/{{ tracker.slug }}/edit" class="btn btn-block btn-default"><i class="glypicon glyphicon-pencil"></i> Edit this Tracker</a>
 </div>

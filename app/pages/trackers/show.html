@@ -148,12 +148,12 @@
           style="color: black">$</span></a></th>
         <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
         <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"
-                                          tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a>
+                                          tooltip="Votes and '+1' comments total"><i class="glypicon glyphicon-thumbs-up"></i></a>
         </th>
         <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Watchers"><i
-          class="icon-user"></i></a></th>
+          class="glypicon glyphicon-user"></i></a></th>
         <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i
-          class="icon-time"></i></a></th>
+          class="glypicon glyphicon-time"></i></a></th>
       </tr>
       <tr ng-switch-when="bugzilla::tracker">
         <th ng-show="issue_filter_options.show_issue_id">ID</th>
@@ -164,12 +164,12 @@
         <th style="text-align: center"><a ng-click="change_order_col('bounty_total')" tooltip="Bounty total"><span
           style="color: black">$</span></a></th>
         <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"
-                                          tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a>
+                                          tooltip="Votes and '+1' comments total"><i class="glypicon glyphicon-thumbs-up"></i></a>
         </th>
         <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Watchers"><i
-          class="icon-user"></i></a></th>
+          class="glypicon glyphicon-user"></i></a></th>
         <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i
-          class="icon-time"></i></a></th>
+          class="glypicon glyphicon-time"></i></a></th>
       </tr>
       <tr ng-switch-default="">
         <th ng-show="issue_filter_options.show_issue_id">ID</th>
@@ -182,11 +182,11 @@
           style="color: black">$</span></a></th>
         <!--<th style="text-align: center"><a ng-click="change_order_col('comment_count')"><i class="icon-comment"></i></a></th>-->
         <th style="text-align: center"><a ng-click="change_order_col('thumbs_up_count')"
-                                          tooltip="+1 and Thumbsup total"><i class="icon-thumbs-up"></i></a></th>
+                                          tooltip="+1 and Thumbsup total"><i class="glypicon glyphicon-thumbs-up"></i></a></th>
         <th style="text-align: center"><a ng-click="change_order_col('participants_count')" tooltip="Participants"><i
-          class="icon-user"></i></a></th>
+          class="glypicon glyphicon-user"></i></a></th>
         <th style="text-align: center"><a ng-click="change_order_col('created_at')" tooltip="Age of Issue"><i
-          class="icon-time"></i></a></th>
+          class="glypicon glyphicon-time"></i></a></th>
       </tr>
       </thead>
 
@@ -199,7 +199,7 @@
         <td>
           <a ng-href="/issues/{{issue.slug}}"
              ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
-            <i ng-show="issue.has_active_solution" class="icon-briefcase"
+            <i ng-show="issue.has_active_solution" class="glypicon glyphicon-briefcase"
                tooltip="A developer is working on a solution"></i>
             {{issue.title}}
             <span ng-show="issue.paid_out" class="label label-info">paid out</span>
@@ -218,7 +218,7 @@
           <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"
              ng-show="issue.thumbs_up_count > 0">
             <!-- TODO (PERF ISSUE):  tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom"-->
-            <i class="icon-thumbs-up"></i>
+            <i class="glypicon glyphicon-thumbs-up"></i>
             {{issue.thumbs_up_count | number}}
           </a>
         </td>
@@ -226,7 +226,7 @@
           <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"
              ng-show="issue.participants_count > 1">
             <!--  TODO (PERF ISSUE):  tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom"-->
-            <i class="icon-user"></i>
+            <i class="glypicon glyphicon-user"></i>
             {{issue.participants_count | number}}
           </a>
         </td>

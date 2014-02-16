@@ -30,12 +30,12 @@
       <div class="col-sm-3 col-md-3"><strong><h4>Anonymous:<a style="margin-bottom:0px"
                                                               popover-title="Anonymous Pledges"
                                                               popover="If you want to hide your identity on a pledge, make it anonymous. You can change this at anytime."
-                                                              popover-trigger="click"><i class="icon-question-sign"></i></a>
+                                                              popover-trigger="click"><i class="glypicon glyphicon-question-sign"></i></a>
       </h4></strong></div>
       <div class="col-lg-offset-3">
           <span ng-show="pledge.anonymous">
             <button class="btn active btn-default btn-sm" style="margin-top:8px;" ng-click="toggle_anonymous(pledge)">
-              <i class="icon-eye-close"></i>
+              <i class="glypicon glyphicon-eye-close"></i>
               Anonymized
             </button>
           </span>
@@ -43,12 +43,12 @@
           <span ng-hide="pledge.anonymous">
             <button class="btn btn-success btn-sm" style="margin-top:8px;" ng-click="toggle_anonymous(pledge)"
                     ng-hide="pledge.owner_type == 'Team'">
-              <i class="icon-eye-open"></i>
+              <i class="glypicon glyphicon-eye-open"></i>
               Publicized
             </button>
             <button class="btn btn-success disabled btn-sm" style="margin-top:8px;"
                     ng-show="pledge.owner_type == 'Team'" tooltip="Team pledges cannot be anonymous">
-              <i class="icon-eye-open"></i>
+              <i class="glypicon glyphicon-eye-open"></i>
               Publicized
             </button>
           </span></div>

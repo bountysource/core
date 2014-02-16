@@ -19,15 +19,15 @@
     Bounties
   </a></li>
   <li ng-show="is_admin" ng-class="{ active: active_tab('manage_members') }"><a ng-href="/teams/{{team.slug}}/members/manage">
-    <i class="icon-lock"></i>
+    <i class="glypicon glyphicon-lock"></i>
     Manage Members
   </a></li>
   <li ng-show="is_admin || is_developer" ng-class="{ active: active_tab('settings') }"><a ng-href="/teams/{{team.slug}}/settings">
-    <i class="icon-lock"></i>
+    <i class="glypicon glyphicon-lock"></i>
     Settings
   </a></li>
   <li ng-show="is_admin" ng-class="{ active: active_tab('account') }"><a ng-href="/teams/{{team.slug}}/account">
-    <i class="icon-lock"></i>
+    <i class="glypicon glyphicon-lock"></i>
     Add Funds
   </a></li>
 </ul>
