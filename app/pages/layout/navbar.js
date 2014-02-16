@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('Navbar', function ($scope, $api) {
+angular.module('app.controllers').controller('NavbarController', function ($scope, $api) {
   $scope.setEnv = $api.setEnvironment;
 
   $scope.set_access_token = {
@@ -13,6 +13,10 @@ angular.module('app.controllers').controller('Navbar', function ($scope, $api) {
       $api.load_current_person_from_cookies();
       this.close();
     }
+  };
+
+  $scope.signout = function() {
+    $api.signout();
   };
 });
 

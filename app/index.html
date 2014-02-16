@@ -44,15 +44,17 @@
 <body ng-app="app" ng-controller="MainController">
 
 <div id="wrap">
-  <div id="main" class="clear-top">
-    <div ng:include src="'pages/layout/navbar.html'"></div>
-    <div post-account-create-wizard></div>
-    <div ng-class="{ 'container': !no_container }" ng-view></div>
-  </div>
+  <ng-include src="'pages/layout/navbar.html'"></ng-include>
+
+  <!-- Omnipresent account creation modal -->
+  <div post-account-create-wizard></div>
+
+  <div ng-class="{ 'container': !no_container }" ng-view></div>
 </div>
 
-<!--<div ng:include src="'pages/layout/chatroom.html'"></div>-->
-<div ng:include src="'pages/layout/footer.html'"></div>
+<div id="footer">
+  <ng-include src="'pages/layout/footer.html'"></ng-include>
+</div>
 
 <!--[if lt IE 9]>
 <script src="components/es5-shim/es5-shim.js"></script>

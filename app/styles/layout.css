@@ -1,78 +1,57 @@
-html, body { height: 100%; margin: 0; padding: 0; }
-a{ cursor: pointer; }
-
-/* bug in bootstrap... dropup is black but should be gray unless active */
-.dropup .caret { border-bottom-color: #777; }
-
-/* navbar */
-.navbar { border-top: 4px solid #129e5e; }
-.navbar .brand { margin: 6px 15px 3px 5px; padding: 0; }
-.navbar .brand strong { display: none }
-.navbar-search { position: relative; }
-.navbar-search .search-query { padding-left: 29px; }
-.navbar-search .icon-search { position: absolute; top: 7px; left: 11px; }
-@media (max-width: 979px) { .navbar-search .icon-search { top: 17px; left: 26px; } }
-/*@media (max-width: 979px) {*/
-  /*.navbar-search .icon-search { top: 17px; left: 27px; }*/
-  /*#main { border-top: 0px; }*/
-/*}*/
-
-/* footer */
-footer {
-  position: relative;
-  margin-top: -206px; /* negative value of footer height */
-  clear:both;
-  padding-top: 30px;
-  background-color: #333;
-  height: 200px;
-  border-top: 4px solid #129e5e;
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
 }
-footer ul { margin: 0; list-style: none; }
-footer a, footer { color: #bbb; }
-#main { border-bottom: 240px solid transparent; }
 
-/* space for navbar and footer */
+/* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;
-}
-#main {
-  overflow:auto;
-  border-top: 45px solid transparent;
-}
-@media (max-width: 979px) {
-  #main { border-top: 0; }
-  footer { height: auto; }
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
 }
 
+/* Set the fixed height of the footer here */
+#footer {
+  padding-top: 30px;
+  background-color: #333;
+  border-top: 4px solid #129e5e;
+  color: #bbb;
+  margin-top: 30px;
+}
+
+/* @screen-xs */
 @media (max-width: 767px) {
-  .container { margin: 0 10px; }
-}
-
-.show-global-banner { display: block !important; }
-
-.navbar-fixed-top { margin: 0; }
-
-#main > .container { border-top: 25px solid transparent; }
-
-
-/* https://github.com/twitter/bootstrap/issues/3494 */
-.row-fluid ul.thumbnails li.span12 + li { margin-left : 0px; clear: left; }
-.row-fluid ul.thumbnails li.span6:nth-child(2n + 3) { margin-left : 0px; clear: left; }
-.row-fluid ul.thumbnails li.span4:nth-child(3n + 4) { margin-left : 0px; clear: left; }
-.row-fluid ul.thumbnails li.span3:nth-child(4n + 5) { margin-left : 0px; clear: left; }
-.row-fluid ul.thumbnails li.span2:nth-child(6n + 7) { margin-left : 0px; clear: left; }
-
-
-/* Fix for this bootstrap issue: https://github.com/twbs/bootstrap/pull/9167 */
-@media (max-width: 767px) {
-  .row-fluid .controls-row [class*="span"] + [class*="span"] {
-    margin-left: 0;
-    /* 
-    The margin-top is unrelated to the bootstrap issue.
-    I just think it looks nicer.
-    */
-    margin-top: 10px;
+  #footer {
+    height: 600px;
   }
 }
 
-table.table-no-head tr:first-of-type td { border-top: 0; }
+/* @screen-sm */
+@media (min-width: 768px) and (max-width: 991px) {
+  #footer {
+    height: 320px;
+  }
+}
+
+/* @screen-md */
+@media (min-width: 992px) and (max-width: 1199px) {
+  #footer {
+    height: 230px;
+    padding-left: 30px;
+  }
+}
+
+/* @screen-lg */
+@media (min-width: 1200px) {
+  #footer {
+    height: 200px;
+  }
+}
+
+/* Top Backers Table */
+.top-backers-table > .row { marghin-bottom: 15px; }
+.top-backers-table > .row:last-of-type { margin-bottom: 0 !important; }
