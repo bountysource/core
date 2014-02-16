@@ -46,7 +46,7 @@
             <div class="controls">
               <div class="checkbox"><label class="" ng-repeat="reward in pledge.fundraiser.rewards" ng-show="pledge.amount >= reward.amount">
                 <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-click="select_reward(pledge, reward)" ng-disabled="pledge.amount < reward.amount">
-                <div ng-class="{ 'muted': (pledge.amount < reward.amount && reward.amount > 0) }">
+                <div ng-class="{ 'text-muted': (pledge.amount < reward.amount && reward.amount > 0) }">
                   <span ng-show="reward.amount == 0">No Reward</span>
                   <span ng-show="reward.amount > 0">{{reward.amount | dollars}} Reward tier</span>
                 </div>
@@ -103,7 +103,7 @@
     </td>
 
     <td ng-show="pledge.anonymous">
-      <button class="btn btn-block active btn-default btn-sm" ng-click="toggle_anonymous(pledge)">
+      <button class="btn btn-default btn-sm btn-block active" ng-click="toggle_anonymous(pledge)">
         <i class="glypicon glyphicon-eye-close"></i>
         Anonymized
       </button>

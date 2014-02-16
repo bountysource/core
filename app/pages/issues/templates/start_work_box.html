@@ -59,8 +59,8 @@
                     <h4>My goal:</h4>
                   </div>
                   <div class="col-sm-3 col-md-3">
-                    <div class="input-prepend" style="margin-bottom: 0px;">
-                      <span class="add-on" style="padding-top: 11px; padding-bottom: 11px;">$</span>
+                    <div class="input-group" style="margin-bottom: 0px;">
+                      <span class="input-group-addon" style="padding-top: 11px; padding-bottom: 11px;">$</span>
                       <input name="amount" type="number" style="height: 44px;" class="span9 form-control" min="{{issue.bounty_total + 1}}" step="1" ng-model="my_developer_goal.amount" ng-value="my_developer_goal.amount" required="">
                     </div>
                   </div>
@@ -83,8 +83,8 @@
                     <h4>I'd solve this for:</h4>
                   </div>
                   <div class="col-sm-3 col-md-3">
-                    <div class="input-prepend" style="margin-bottom: 0px;">
-                      <span class="add-on" style="padding-top: 11px; padding-bottom: 11px;">$</span>
+                    <div class="input-group" style="margin-bottom: 0px;">
+                      <span class="input-group-addon" style="padding-top: 11px; padding-bottom: 11px;">$</span>
                       <input type="number" min="{{issue.bounty_total + 1}}" step="1" class="span9 form-control" style="height: 44px;" ng-model="new_developer_goal.amount" placeholder="{{issue.bounty_total + 100}}" required="">
                     </div>
                   </div>

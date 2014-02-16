@@ -81,8 +81,8 @@
             <accordion-group heading="${{reward.amount | number:0}} Reward" is-open="reward.$is_open">
               <div style="text-align: center;">
                 <!--Reward amount-->
-                <div class="input-prepend" style="margin-bottom:0">
-                  <span class="add-on">$</span>
+                <div class="input-group" style="margin-bottom:0">
+                  <span class="input-group-addon">$</span>
                   <input type="number" ng-model="reward.amount" min="5" required="" placeholder="Minimum Pledge Amount" ng-disabled="fundraiser.published" class="form-control">
                 </div>
 
@@ -131,8 +131,8 @@
 
             <div style="text-align: center;">
               <!--Reward amount-->
-              <div class="input-prepend" style="margin-bottom:0">
-                <span class="add-on">$</span>
+              <div class="input-group" style="margin-bottom:0">
+                <span class="input-group-addon">$</span>
                 <input type="number" name="amount" ng-model="new_reward.amount" min="5" required="" placeholder="Minimum Pledge Amount" class="form-control">
               </div>
 

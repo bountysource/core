@@ -5,7 +5,7 @@
     </div>
     <div style="display: inline-block; vertical-align: top;">
       <!-- Tile of claim, with state badge and submitted date -->
-      <div ng-class="{ 'text-success': (claim.collected), 'text-error': (claim.disputed || claim.rejected) }">
+      <div ng-class="{ 'text-success': (claim.collected), 'text-danger': (claim.disputed || claim.rejected) }">
         <!-- Title for claims from other developers -->
         <h4 ng-show="!issue.my_bounty_claim || claim.id != issue.my_bounty_claim.id" style="margin: 0;">
           Claim by <a ng-href="/people/{{claim.person.slug}}">{{claim.person.display_name}}</a>
@@ -25,7 +25,7 @@
       </div>
 
       <!-- Submitted at date -->
-      <div class="muted">submitted {{claim.created_at | date}}</div>
+      <div class="text-muted">submitted {{claim.created_at | date}}</div>
 
       <!-- Vote count -->
       <div ng-hide="claim.collected">Votes: <strong class="text-success">{{claim.accept_count | number}}</strong> of <strong>{{claim.backers_count | number}}</strong></div>
@@ -47,7 +47,7 @@
               <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
             </div>
             <div class="col-lg-11 col-md-11 col-sm-11">
-              <div class="text-error">Rejected by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="muted">{{event.created_at | date:'medium'}}</small></div>
+              <div class="text-danger">Rejected by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="text-muted">{{event.created_at | date:'medium'}}</small></div>
               <div>{{event.description}}</div>
             </div>
           </div>
@@ -56,7 +56,7 @@
               <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
             </div>
             <div class="col-lg-11 col-md-11 col-sm-11">
-              <div class="text-success">Dispute from <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> resolved <small class="muted">{{event.created_at | date:'medium'}}</small></div>
+              <div class="text-success">Dispute from <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> resolved <small class="text-muted">{{event.created_at | date:'medium'}}</small></div>
               <div>{{event.description}}</div>
             </div>
           </div>
@@ -66,7 +66,7 @@
                 <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
               </div>
               <div class="col-lg-11 col-md-11 col-sm-11">
-                <div class="text-success">Accepted by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="muted">{{event.created_at | date:'medium'}}</small></div>
+                <div class="text-success">Accepted by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="text-muted">{{event.created_at | date:'medium'}}</small></div>
                 <div>{{event.description}}</div>
               </div>
             </div>

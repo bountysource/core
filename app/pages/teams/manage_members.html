@@ -41,7 +41,7 @@
                   <small class="text-success text-muted">Saved {{member.$saved_at | date:'short'}}</small>
                 </div>
                 <div ng-show="!member.$saving && member.$update_error">
-                  <small class="text-error text-muted">{{ member.$update_error }}</small>
+                  <small class="text-danger text-muted">{{ member.$update_error }}</small>
                 </div>
               </td>
               <td style="text-align: center;">
@@ -90,14 +90,14 @@
                     <small class="text-success text-muted">Saved {{member.$budget_saved_at | date:'short'}}</small>
                   </div>
                   <div ng-show="!member.$budget_saving && member.$budget_update_error">
-                    <small class="text-error text-muted">{{ member.$budget_update_error }}</small>
+                    <small class="text-danger text-muted">{{ member.$budget_update_error }}</small>
                   </div>
                 </td>
                 <td style="text-align: center;" class="center-height">
-                  <div class="input-prepend input-append" style="margin-bottom: 0px;">
-                    <span class="add-on">$</span>
+                  <div class="input-group input-append" style="margin-bottom: 0px;">
+                    <span class="input-group-addon">$</span>
                     <input class="span6 form-control" type="number" ng-model="member.budget" ng-disabled="!member.is_developer" ng-change="creating_new_budget(member)">
-                    <span class="add-on">.00</span>
+                    <span class="input-group-addon">.00</span>
                   </div>
                 </td>
                 <td style="text-align: center;" class="center-height">
@@ -161,7 +161,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr ng-class="{ success: new_member.registered, info: (new_member.email && !new_member.registered) }">
+              <tr ng-class="{ 'success': (new_member.registered), 'info': (new_member.email && !new_member.registered) }">
                 <td><input style="margin-bottom: 0;" type="email" name="email" class="span12 form-control" ng-model="new_member.email" ng-change="validate_new_member_email()" placeholder="Email address"></td>
 
                 <td style="text-align: center;"><input type="checkbox" ng-model="new_member.public"></td>

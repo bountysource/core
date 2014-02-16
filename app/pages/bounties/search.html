@@ -33,15 +33,15 @@
       <div class="row">
         <div class="col-sm-6 col-md-6">
           <label>Min Amount:</label>
-          <div class="input-prepend">
-            <span class="add-on">$</span>
-            <input type="number" class="span8 form-control" min="0" step="any" ng-model="form_data.min">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="number" class="form-control" min="0" step="any" ng-model="form_data.min">
           </div>
         </div>
         <div class="col-sm-6 col-md-6">
           <label>Max Amount:</label>
-          <div class="input-prepend">
-            <span class="add-on">$</span>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
             <input type="number" class="span8 form-control" min="1" step="any" ng-model="form_data.max">
           </div>
         </div>
@@ -113,7 +113,7 @@
   <loading-bar ng-show="loading_search_results">Searching...</loading-bar>
 
   <div ng-show="!loading_search_results">
-    <div ng-show="issues_count == 0" class="alert alert-error alert-warning">No results found.</div>
+    <div ng-show="issues_count == 0" class="alert alert-danger">No results found.</div>
 
     <div ng-show="search_results.length > 0">
       <h3>Search Results</h3>

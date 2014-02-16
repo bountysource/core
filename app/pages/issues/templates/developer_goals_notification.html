@@ -31,7 +31,7 @@
         </thead>
 
         <tbody>
-          <tr ng-repeat="developer_goal in developer_goals | orderBy:['+amount']" ng-class="{ success: (issue.bounty_total >= developer_goal.amount) }">
+          <tr ng-repeat="developer_goal in developer_goals | orderBy:['+amount']" ng-class="{ 'success': (issue.bounty_total >= developer_goal.amount) }">
             <td>
               <a owner-href="developer_goal.person">{{developer_goal.person.display_name | truncate:20 }}</a>
             </td>

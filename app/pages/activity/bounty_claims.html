@@ -19,7 +19,7 @@
 
   <tr ng-repeat="claim in bounty_claims">
     <td><a ng-href="/issues/{{claim.issue.slug}}/claims">{{ claim.issue.title }}</a></td>
-    <td ng-class="{ 'text-success': (claim.collected), 'text-error': (claim.disputed || claim.rejected), 'text-info': (!claim.disputed && !claim.collected && !claim.rejected) }">{{ claim.$status | title }}</td>
+    <td ng-class="{ 'text-success': (claim.collected), 'text-danger': (claim.disputed || claim.rejected), 'text-info': (!claim.disputed && !claim.collected && !claim.rejected) }">{{ claim.$status | title }}</td>
     <td>{{ claim.created_at | date }}</td>
   </tr>
 </tbody></table>

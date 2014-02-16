@@ -79,7 +79,7 @@
       <div ng-show="!issue.winning_bounty_claim && can_respond_to_claims" class="row" ng-repeat="claim in issue.bounty_claims | orderBy:['-collected', '-created_at']" style="margin-bottom: 25px;">
         <!-- Accept/Reject buttons -->
         <div class="text-center col-sm-3 col-md-3">
-          <div style="padding: 15px;" ng-class="{ 'alert alert-info': (claim.$my_response == null), 'alert alert-success': (claim.$my_response == true), 'alert alert-error': (claim.$my_response == false && claim.$my_response != null) }">
+          <div style="padding: 15px;" ng-class="{ 'alert alert-info': (claim.$my_response == null), 'alert alert-success': (claim.$my_response == true), 'alert alert-danger': (claim.$my_response == false && claim.$my_response != null) }">
             <!-- You accepted this claim -->
             <div ng-show="claim.$my_response == true">
               <h4 style="margin-bottom: 10px;">Claim Accepted</h4>
@@ -99,7 +99,7 @@
             <div ng-show="claim.$my_response == null">
               <h4 style="margin-bottom: 10px;">Response Needed</h4>
               <p><strong class="text-success">Accept</strong> this claim to expedite payout.</p>
-              <p><strong class="text-error">Reject</strong> this claim if it does not resolve the issue.</p>
+              <p><strong class="text-danger">Reject</strong> this claim if it does not resolve the issue.</p>
               <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_accept_form) }" ng-click="show_claim_form('accept')"><i class="glypicon glyphicon-thumbs-up"></i> Accept</button>
               <button class="btn btn-block btn-danger" ng-class="{ active: (claim.showing_dispute_form) }" ng-click="show_claim_form('dispute')"><i class="glypicon glyphicon-thumbs-down"></i> Reject</button>
             </div>
