@@ -1,28 +1,114 @@
-<table class="table table-condensed table-striped" ng-show="issues.length &gt; 0">
+<table class="table table-condensed table-striped" ng-show="issues.length > 0">
   <thead>
   <tr>
-    <th></th>
-    <th><a ng-show="has_column('tracker')" ng-click="update_sort(issue_sort, 'tracker.name')">Project</a></th>
-    <th><a ng-click="update_sort(issue_sort, 'title')">Name</a></th>
-    <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
-    <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
-    <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'participants_count')" tooltip="Watchers"><i class="icon-user"></i></a></th>
-    <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'created_at')" tooltip="Age of Issue"><i class="icon-time"></i></a></th>
+    <!-- Tracker header spans 2 columns if showing the image -->
+    <th ng-if="$showTrackerImage" ng-class="{ 'active': ($orderData.column === 'tracker.name') }" colspan="2">
+      <a href ng-click="$changeSortOrder('tracker.name')" style="color: black; text-decoration: none;">
+        <span>Project</span>
+        <span ng-show="$orderData.column === 'tracker.name'">
+          <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        </span>
+      </a>
+    </th>
+    <th ng-if="!$showTrackerImage && $showTrackerName" ng-class="{ 'active': ($orderData.column === 'tracker.name') }">
+      <a href style="color: black" ng-click="$changeSortOrder('tracker.name')" style="color: black; text-decoration: none;">
+        <span>Project</span>
+        <span ng-show="$orderData.column === 'tracker.name'">
+          <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        </span>
+      </a>
+    </th>
+    <!-- end tracker header -->
+
+    <th ng-if="$showIssueTitle" ng-class="{ 'active': ($orderData.column === 'title') }">
+      <a href style="color: black" ng-click="$changeSortOrder('title')" style="color: black; text-decoration: none;">
+        <span>Title</span>
+        <span ng-show="$orderData.column === 'title'">
+          <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        </span>
+      </a>
+    </th>
+
+    <th ng-if="$showBountyTotal" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'bounty_total') }">
+      <a href ng-click="$changeSortOrder('bounty_total')" tooltip="Bounty total" style="color: black; text-decoration: none;">
+        <span style="color: black">$</span>
+        <span ng-show="$orderData.column === 'bounty_total'">
+          <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        </span>
+      </a>
+    </th>
+
+    <th ng-if="$showThumbsUpCount" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'thumbs_up_count') }">
+      <a href ng-click="$changeSortOrder('thumbs_up_count')" tooltip="Votes and '+1' comments total" style="color: black; text-decoration: none;">
+        <i style="color: black" class="glyphicon glyphicon-thumbs-up"></i>
+        <span ng-show="$orderData.column === 'thumbs_up_count'">
+          <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        </span>
+      </a>
+    </th>
+
+    <th ng-if="$showParticipantsCount" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'participants_count') }">
+      <a href ng-click="$changeSortOrder('participants_count')" tooltip="Watchers" style="color: black; text-decoration: none;">
+        <i style="color: black" class="glyphicon glyphicon-user"></i>
+        <span ng-show="$orderData.column === 'participants_count'">
+          <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        </span>
+      </a>
+    </th>
+
+    <th ng-if="$showIssueAge" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'created_at') }">
+      <a href ng-click="$changeSortOrder('created_at')" tooltip="Age of Issue" style="color: black; text-decoration: none;">
+        <i class="glyphicon glyphicon-time"></i>
+        <span ng-show="$orderData.column === 'created_at'">
+          <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        </span>
+      </a>
+    </th>
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="issue in issues | orderBy:issue_sorter:issue_sort.desc">
-    <td><a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}"><img src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;"></a></td>
-    <td><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a></td>
-    <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
-    <td style="text-align: center">
-      <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total &gt; 0" class="label label-success">
+  <tr ng-repeat="issue in issues | orderBy:$orderData.column:$orderData.reverse">
+    <td ng-if="$showTrackerImage">
+      <a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}">
+        <img src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;"/>
+      </a>
+    </td>
+    <td ng-if="$showTrackerName">
+      <a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a>
+    </td>
+    <td ng-if="$showIssueTitle">
+      <a ng-href="/issues/{{issue.slug}}">
+        <i class="glyphicon glyphicon-fire text-danger" ng-if="issue.bounty_total >= 1000"></i>
+        {{issue.title}}
+      </a>
+    </td>
+    <td ng-if="$showBountyTotal" style="text-align: center">
+      <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
         {{issue.bounty_total | dollars:{space:true} }}
       </a>
     </td>
-    <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"><i class="icon-thumbs-up"></i> {{issue.thumbs_up_count | number}}</a></td>
-    <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"><i class="icon-user"></i> {{issue.participants_count | number}}</a></td>
-    <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">{{issue.created_at | timeAgoShort}}</a></td>
+    <td ng-if="$showThumbsUpCount" style="text-align:center;">
+      <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning">
+        <i class="glyphicon glyphicon-thumbs-up "></i> {{issue.thumbs_up_count | number}}
+      </a>
+    </td>
+    <td ng-if="$showParticipantsCount" style="text-align:center;">
+      <a ng-href="/issues/{{issue.slug}}/comments" class="label label-danger">
+        <i class="glyphicon glyphicon-user "></i> {{issue.participants_count | number}}
+      </a>
+    </td>
+    <td ng-if="$showIssueAge" style="text-align:center;">
+      <a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">
+        {{issue.created_at | timeAgoShort}}
+      </a>
+    </td>
   </tr>
   </tbody>
 </table>

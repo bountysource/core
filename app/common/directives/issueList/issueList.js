@@ -1,51 +1,53 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('issueList', function() {
+angular.module('app.directives').directive('issuesList', function() {
   return {
     restrict: "E",
-    templateUrl: "common/directives/issueList/templates/issueList.html",
+    templateUrl: "pages/issues/partials/issues_list.html",
     replace: true,
     scope: {
       issues: "=",
-      options: "="
+
+      // Optional columns to include
+      include: "="
     },
-    link: function(scope, element, attributes) {
-      if (scope.options && scope.options.sort && scope.options.desc) {
-        scope.issue_sort = { "column": scope.options.sort, "desc": scope.options.desc };
-      } else if (scope.options && scope.options.sort) {
-        scope.issue_sort = { "column": scope.options.sort, "desc": true };
-      } else {
-        scope.issue_sort = { "column": "participants_count", "desc": true };
+    link: function(scope) {
+      // Default sort order to participant count descending.
+      scope.$orderData = {
+        column: "participants_count",
+        reverse: true
+      };
+
+      /*
+       * Change the sort order of the table.
+       * Change direction if already sorting by column.
+       * NOTE: Can only sort by one column at a time for now.
+       * */
+      scope.$changeSortOrder = function(column) {
+        if (scope.$orderData.column === column) {
+          scope.$orderData.reverse = !scope.$orderData.reverse;
+        } else {
+          scope.$orderData.column = column;
+          scope.$orderData.reverse = true;
+        }
+      };
+
+      scope.$showTrackerImage = false;
+      scope.$showTrackerName = false;
+      scope.$showIssueTitle = true;
+      scope.$showBountyTotal = false;
+      scope.$showThumbsUpCount = false;
+      scope.$showParticipantsCount = false;
+      scope.$showIssueAge = false;
+
+      if (angular.isArray(scope.include)) {
+        scope.$showTrackerImage = scope.include.indexOf('trackerImage') >= 0 || false;
+        scope.$showTrackerName = scope.include.indexOf('trackerName') >= 0 || false;
+        scope.$showBountyTotal = scope.include.indexOf('bountyTotal') >= 0 || false;
+        scope.$showThumbsUpCount = scope.include.indexOf('thumbsUpCount') >= 0 || false;
+        scope.$showParticipantsCount = scope.include.indexOf('participantsCount') >= 0 || false;
+        scope.$showIssueAge = scope.include.indexOf('issueAge') >= 0 || false;
       }
-      scope.issue_sorter = function(obj) {
-        return obj[scope.issue_sort.column] || 0;
-      };
-      scope.update_sort = function(obj, column) {
-        if (obj.column === column) {
-          obj.desc = !obj.desc;
-        } else {
-          obj.column = column;
-          obj.desc = true;
-        }
-      };
-      scope.column = {};
-      scope.has_column = function(col_name) {
-        if (scope.column[col_name]) {
-          return true;
-        } else {
-          return false;
-        }
-      };
-      scope.$watch('issues', function() {
-        if (scope.issues && scope.issues.length > 0) {
-          scope.column = {};
-          for (var i=0; i<scope.issues.length; i++) {
-            for (var key in scope.issues[i]) {
-              scope.column[key] = true;
-            }
-          }
-        }
-      });
     }
   };
 });
