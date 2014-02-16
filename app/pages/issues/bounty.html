@@ -78,8 +78,12 @@
                 <div><small class="muted"><em>Optional</em></small></div>
               </label>
               <span ng-switch="expiration">
-                <div class="controls" ng-switch-when="0" ng-include="'pages/issues/templates/options/expiration_up.html'"></div>
-                <div class="controls" ng-switch-when="1" ng-include="'pages/issues/templates/options/expiration_down.html'"></div>
+                <div class="controls" ng-switch-when="0">
+                  <ng-include src="'pages/issues/templates/options/expiration_up.html'"></ng-include>
+                </div>
+                <div class="controls" ng-switch-when="1">
+                  <ng-include src="'pages/issues/templates/options/expiration_down.html'"></ng-include>
+                </div>
               </span>
             </div>
 
