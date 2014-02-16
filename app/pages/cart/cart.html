@@ -17,7 +17,7 @@
           {{item.amount | dollars}}
         </div>
         <div ng-show="item.$edit_mode">
-          <input type="number" min="5" ng-model="item.$changes.amount" placeholder="100" style="margin-bottom: 0; width: 90%;" />
+          <input type="number" min="5" ng-model="item.$changes.amount" placeholder="100" style="margin-bottom: 0; width: 90%;" class="form-control">
         </div>
       </td>
       <td ng-switch="item.type">
@@ -31,22 +31,22 @@
       <td>{{item.added_at | date:'medium'}}</td>
       <td>
         <div collapse="item.$edit_mode">
-          <div class="row-fluid">
-            <div class="span6">
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
               <button tooltip="Remove" ng-click="remove_item(item)" class="btn btn-block btn-danger"><i class="icon-white icon-trash"></i></button>
             </div>
-            <div class="span6">
+            <div class="col-sm-6 col-md-6">
               <button tooltip="Edit" ng-click="toggle_edit_mode(item)" class="btn btn-block btn-primary" ng-class="{ active: item.$edit_mode }"><i class="icon-white icon-cog"></i></button>
             </div>
           </div>
         </div>
         <div collapse="!item.$edit_mode">
-          <div class="row-fluid">
-            <div class="span6">
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
               <button tooltip="Save Changes" ng-click="update_item(item)" class="btn btn-block btn-danger"><i class="icon-white icon-ok-sign"></i></button>
             </div>
-            <div class="span6">
-              <button tooltip="Cancel Changes" ng-click="cancel_item_changes(item)" class="btn btn-block" ng-class="{ active: item.$edit_mode }"><i class="icon-remove"></i></button>
+            <div class="col-sm-6 col-md-6">
+              <button tooltip="Cancel Changes" ng-click="cancel_item_changes(item)" class="btn btn-block btn-default" ng-class="{ active: item.$edit_mode }"><i class="icon-remove"></i></button>
             </div>
           </div>
         </div>

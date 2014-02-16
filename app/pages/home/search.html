@@ -1,5 +1,5 @@
 <ul class="breadcrumb">
-  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/">Home</a></li>
   <li><a>Search</a></li>
 </ul>
 
@@ -7,11 +7,11 @@
 <!--<hr />-->
 
 <div ng-hide="search_query_submitted">
-  <div class="row-fluid" style="margin-top: 40px;">
-    <div class="span8 offset2">
+  <div class="row" style="margin-top: 40px;">
+    <div class="col-lg-offset-2 col-sm-8 col-md-8">
       <form ng-submit="submit_search()" class="form-inline">
-        <input style="height: 45px; padding: 0 10px;" type="text" class="span10" ng-model="search_query" placeholder="Search all projects and issues" autofocus />
-        <button type="submit" class="btn btn-primary btn-large" ng-disabled="!search_query"><i class="icon-search icon-white"></i> Search</button>
+        <input style="height: 45px; padding: 0 10px;" type="text" class="span10 form-control" ng-model="search_query" placeholder="Search all projects and issues" autofocus="">
+        <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!search_query"><i class="icon-search icon-white"></i> Search</button>
       </form>
 
       <p>You can search for projects and issues by entering:</p>
@@ -47,59 +47,59 @@
   <loading-bar>Setting up {{tracker.name}} for the first time...</loading-bar>
 </div>
 
-<div class="row-fluid" collapse="!search_query_submitted || search_pending || processing_async">
-  <div class="span3">
+<div class="row" collapse="!search_query_submitted || search_pending || processing_async">
+  <div class="col-sm-3 col-md-3">
     <div collapse="search_pending">
       <div class="well">
-        <input style="margin: 0;" type="text" class="span12" ng-model="search_filter" placeholder="Filter search results..." />
+        <input style="margin: 0;" type="text" class="span12 form-control" ng-model="search_filter" placeholder="Filter search results...">
       </div>
     </div>
 
     <div collapse="search_pending">
       <div class="well text-center">
         <div><strong>Can't find your issue?</strong></div>
-        <br />
-        <a class="btn btn-block" href="/issues/new">Add an Issue</a>
+        <br>
+        <a class="btn btn-block btn-default" href="/issues/new">Add an Issue</a>
       </div>
     </div>
   </div>
-  <div class="span9">
+  <div class="col-sm-9 col-md-9">
     <div>
-      <div class="row-fluid">
-        <div class="span6">
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
           <table class="table table-striped table-hover">
             <thead>
-            <tr>
-              <th>Projects <span class="label label-info">{{results.trackers_total | number}}</span></th>
-            </tr>
+              <tr>
+                <th>Projects <span class="label label-info">{{results.trackers_total | number}}</span></th>
+              </tr>
             </thead>
 
             <tbody>
-            <tr ng-show="results.trackers.length == 0" class="text-info">
-              <td><i>No projects found</i></td>
-            </tr>
-            <tr ng-repeat="tracker in results.trackers | filter:filter_search_results ">
-              <td><a ng-href="/trackers/{{tracker.slug}}"><span class="label label-success" ng-show="tracker.bounty_total > 0">{{tracker.bounty_total | dollars}}</span> {{tracker.name}}</a></td>
-            </tr>
+              <tr ng-show="results.trackers.length == 0" class="text-info">
+                <td><i>No projects found</i></td>
+              </tr>
+              <tr ng-repeat="tracker in results.trackers | filter:filter_search_results ">
+                <td><a ng-href="/trackers/{{tracker.slug}}"><span class="label label-success" ng-show="tracker.bounty_total &gt; 0">{{tracker.bounty_total | dollars}}</span> {{tracker.name}}</a></td>
+              </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="span6">
+        <div class="col-sm-6 col-md-6">
           <table class="table table-striped table-hover">
             <thead>
-            <tr>
-              <th>Issues <span class="label label-info">{{results.issues_total | number}}</span></th>
-            </tr>
+              <tr>
+                <th>Issues <span class="label label-info">{{results.issues_total | number}}</span></th>
+              </tr>
             </thead>
 
             <tbody>
-            <tr ng-show="results.issues.length == 0" class="text-info">
-              <td><i>No issues found</i></td>
-            </tr>
-            <tr ng-repeat="issue in results.issues | filter:filter_search_results ">
-              <td><a ng-href="/issues/{{issue.slug}}"><span class="label label-success" ng-show="issue.bounty_total > 0">{{issue.bounty_total | dollars}}</span> {{issue.title}}</a></td>
-            </tr>
+              <tr ng-show="results.issues.length == 0" class="text-info">
+                <td><i>No issues found</i></td>
+              </tr>
+              <tr ng-repeat="issue in results.issues | filter:filter_search_results ">
+                <td><a ng-href="/issues/{{issue.slug}}"><span class="label label-success" ng-show="issue.bounty_total &gt; 0">{{issue.bounty_total | dollars}}</span> {{issue.title}}</a></td>
+              </tr>
             </tbody>
           </table>
         </div>

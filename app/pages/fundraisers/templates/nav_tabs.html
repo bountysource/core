@@ -1,16 +1,16 @@
 <ul class="nav nav-tabs" ng-controller="FundraiserNavTabsController">
   <li ng-class="active_tab('overview')"><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
-  <li ng-class="active_tab('updates')" ng-show="fundraiser.published && fundraiser.updates"><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">
+  <li ng-class="active_tab('updates')" ng-show="fundraiser.published &amp;&amp; fundraiser.updates"><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">
     Updates
-    <span ng-show="fundraiser.updates.length > 0" class="badge badge-info">{{fundraiser.updates.length | number:0}}</span>
+    <span ng-show="fundraiser.updates.length &gt; 0" class="badge badge-info">{{fundraiser.updates.length | number:0}}</span>
   </a></li>
   <li ng-class="active_tab('backers')" ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/backers">
     Backers
-    <span ng-show="fundraiser.pledge_count > 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
+    <span ng-show="fundraiser.pledge_count &gt; 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
   </a></li>
-  <li ng-class="active_tab('rewards')" ng-show="fundraiser.can_manage && fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
+  <li ng-class="active_tab('rewards')" ng-show="fundraiser.can_manage &amp;&amp; fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
     <i class="icon-lock"></i>
     Reward Stats
   </a></li>
-  <li ng-class="active_tab('pledge_now')" ng-show="fundraiser.published && fundraiser.in_progress"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a></li>
+  <li ng-class="active_tab('pledge_now')" ng-show="fundraiser.published &amp;&amp; fundraiser.in_progress"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a></li>
 </ul>

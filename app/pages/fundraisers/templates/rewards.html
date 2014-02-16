@@ -1,20 +1,20 @@
 <table class="table table-striped table-bordered">
-  <tr ng-repeat="reward in fundraiser.rewards" ng-class="reward.sold_out && 'warning'">
+  <tbody><tr ng-repeat="reward in fundraiser.rewards" ng-class="reward.sold_out &amp;&amp; 'warning'">
     <td>
       <p style="white-space: pre-wrap;">{{ reward.description }}</p>
 
-      <p class="muted text-center">
+      <p class="text-center text-muted">
         <em ng-show="reward.limited_to">{{ reward.claimed | number }} of {{ reward.limited_to | number }} claimed</em>
         <em ng-hide="reward.limited_to">{{ reward.claimed | number }} claimed</em>
       </p>
 
       <div style="text-align: center;">
-        <a ng-show="fundraiser.in_progress && !reward.sold_out && !fundraiser.published" class="btn btn-large btn-info" disabled>{{ reward.amount | dollars }}</a>
-        <a ng-show="fundraiser.in_progress && !reward.sold_out && fundraiser.published" ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amount={{reward.amount}}" class="btn btn-large btn-success">{{ reward.amount | dollars }}</a>
-        <a ng-show="!fundraiser.in_progress && fundraiser.published" class="btn btn-large btn-success" style="cursor: not-allowed;" disabled>{{ reward.amount | dollars }}</a>
+        <a ng-show="fundraiser.in_progress &amp;&amp; !reward.sold_out &amp;&amp; !fundraiser.published" class="btn btn-info btn-lg" disabled="">{{ reward.amount | dollars }}</a>
+        <a ng-show="fundraiser.in_progress &amp;&amp; !reward.sold_out &amp;&amp; fundraiser.published" ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amp;amount={{reward.amount}}" class="btn btn-success btn-lg">{{ reward.amount | dollars }}</a>
+        <a ng-show="!fundraiser.in_progress &amp;&amp; fundraiser.published" class="btn btn-success btn-lg" style="cursor: not-allowed;" disabled="">{{ reward.amount | dollars }}</a>
 
-        <a ng-show="fundraiser.in_progress && reward.sold_out" class="btn btn-large" disabled>Sold Out</a>
+        <a ng-show="fundraiser.in_progress &amp;&amp; reward.sold_out" class="btn btn-default btn-lg" disabled="">Sold Out</a>
       </div>
     </td>
   </tr>
-</table>
+</tbody></table>

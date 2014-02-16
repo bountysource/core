@@ -1,12 +1,12 @@
-<div class="well bounty-buttons" ng-show="issue.can_add_bounty && !issue.winning_bounty_claim" ng-controller="BountyBoxController">
+<div class="well bounty-buttons" ng-show="issue.can_add_bounty &amp;&amp; !issue.winning_bounty_claim" ng-controller="BountyBoxController">
   <div style="text-align: center;">
     <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
-    <strong>Bounty <span ng-show="issue.bounties.length > 0">from {{issue.bounties.length | number}} <ng-pluralize count="issue.bounties.length" when="{ 'one': 'backer', 'other': 'backers' }"></ng-pluralize></span></strong>
+    <strong>Bounty <span ng-show="issue.bounties.length &gt; 0">from {{issue.bounties.length | number}} <ng-pluralize count="issue.bounties.length" when="{ 'one': 'backer', 'other': 'backers' }"></ng-pluralize></span></strong>
   </div>
 
-  <br />
+  <br>
   <backer-thumbnails style="text-align: center;" issue="issue"></backer-thumbnails>
-  <br />
+  <br>
 
   <div>
     <form style="margin-bottom: 0;" ng-submit="place_bounty_redirect()">
@@ -24,8 +24,8 @@
 
       <div class="controls controls-row">
         <a class="span4 btn btn-primary btn-block" ng-click="place_bounty_redirect(1000)">$1000</a>
-        <input style="margin-bottom: 0;" integer-only type="number" min="5" ng-model="bounty.amount" class="span8 input-small" placeholder="Other amount" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus"/>
-        <input style="display:none;" type="submit" id="custom-amount-submit" />
+        <input style="margin-bottom: 0;" integer-only="" type="number" min="5" ng-model="bounty.amount" class="span8 input-small form-control" placeholder="Other amount" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus">
+        <input style="display:none;" type="submit" id="custom-amount-submit" class="form-control">
       </div>
     </form>
   </div>

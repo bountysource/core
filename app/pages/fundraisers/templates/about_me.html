@@ -2,9 +2,9 @@
   <div ng-show="fundraiser.team">
     <h3 style="margin-top: 0;">By <a ng-href="/teams/{{fundraiser.team.slug}}">{{ fundraiser.team.name }}</a></h3>
 
-    <ul class="inline">
+    <ul class="list-inline">
       <li ng-repeat="person in fundraiser.team.members">
-        <a owner-href="person"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}" /></a>
+        <a owner-href="person"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
       </li>
     </ul>
   </div>
@@ -15,6 +15,6 @@
     <p style="white-space: pre-wrap; overflow-x: auto;">{{ fundraiser.person.bio }}</p>
   </div>
 
-  <a ng-href="{{fundraiser.homepage_url}}" target="_blank" class="btn btn-block" ng-show="fundraiser.homepage_url"><i class="icon-home"></i> Project Homepage</a>
-  <a ng-href="{{fundraiser.repo_url}}" target="_blank" class="btn btn-block" ng-show="fundraiser.repo_url && fundraiser.homepage_url != fundraiser.repo_url"><i class="icon-globe"></i> Project Repository</a>
+  <a ng-href="{{fundraiser.homepage_url}}" target="_blank" class="btn btn-block btn-default" ng-show="fundraiser.homepage_url"><i class="icon-home"></i> Project Homepage</a>
+  <a ng-href="{{fundraiser.repo_url}}" target="_blank" class="btn btn-block btn-default" ng-show="fundraiser.repo_url &amp;&amp; fundraiser.homepage_url != fundraiser.repo_url"><i class="icon-globe"></i> Project Repository</a>
 </div>
