@@ -72,9 +72,9 @@
             <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"></a></td>
             <td>
               <a ng-href="/issues/{{bounty.issue.slug}}">
-                <i ng-show="bounty.issue.bounty_total &gt;= 1000" class="icon-fire"></i>
+                <i ng-show="bounty.issue.bounty_total >= 1000" class="icon-fire"></i>
                 {{bounty.issue.title}}
-                <span ng-show="!bounty.issue.can_add_bounty &amp;&amp; !bounty.issue.paid_out" class="label label-warning">closed</span>
+                <span ng-show="!bounty.issue.can_add_bounty && !bounty.issue.paid_out" class="label label-warning">closed</span>
               </a>
             </td>
             <td style="vertical-align: middle;">
@@ -93,7 +93,7 @@
           </tbody>
         </table>
       </div>
-      <div ng-show="claimed_bounties.length &gt; 0">
+      <div ng-show="claimed_bounties.length > 0">
         <h3 class="no-margin">Claimed Bounties</h3>
         <p>Bounties posted by {{team.name}} that have been claimed by developers.</p>
         <table class="table table-condensed table-striped">
@@ -114,7 +114,7 @@
             <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img">  {{bounty.issue.tracker.name}}</a></td>
             <td>
               <a ng-href="/issues/{{bounty.issue.slug}}">
-                <i ng-show="bounty.issue.bounty_total &gt;= 1000" class="icon-fire"></i>
+                <i ng-show="bounty.issue.bounty_total >= 1000" class="icon-fire"></i>
                 {{bounty.issue.title}}
               </a>
             </td>
@@ -124,7 +124,7 @@
           </tbody>
         </table>
       </div>
-      <div ng-show="!claimed_bounties &amp;&amp; !open_bounties &amp;&amp; bounties_resolved">
+      <div ng-show="!claimed_bounties && !open_bounties && bounties_resolved">
         <h4>There are no bounties associated with this team</h4>
       </div>
     </div>

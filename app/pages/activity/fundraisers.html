@@ -6,11 +6,11 @@
 
 <ng-include src="'pages/activity/tabs.html'"></ng-include>
 <div class="alert alert-info">
-  <a ng-show="fundraisers.length &lt;= 0" href="/fundraisers/new">Get started on your first fundraiser today!</a>
-  <a ng-show="fundraisers.length &gt; 0" href="/fundraisers/new">Get started on another fundraiser today!</a>
+  <a ng-show="fundraisers.length <= 0" href="/fundraisers/new">Get started on your first fundraiser today!</a>
+  <a ng-show="fundraisers.length > 0" href="/fundraisers/new">Get started on another fundraiser today!</a>
 </div>
 
-<table class="table table-striped" ng-show="fundraisers.length &gt; 0">
+<table class="table table-striped" ng-show="fundraisers.length > 0">
   <tbody><tr>
     <th>Title</th>
     <th>Goal</th>

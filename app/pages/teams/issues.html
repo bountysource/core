@@ -23,7 +23,7 @@
       </div>
 
       <div ng-show="issues_resolved">
-        <div ng-show="issues.length &gt; 0">
+        <div ng-show="issues.length > 0">
           <table class="table table-condensed table-striped">
             <thead>
             <tr>
@@ -42,7 +42,7 @@
               <td><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a></td>
               <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
               <td style="text-align: center">
-                <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total &gt; 0" class="label label-success">
+                <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
                   {{issue.bounty_total | dollars:{space:true} }}
                 </a>
               </td>
@@ -53,7 +53,7 @@
             </tbody>
           </table>
         </div>
-        <div ng-hide="issues.length &gt; 0">
+        <div ng-hide="issues.length > 0">
           <h4 class="alert alert-info">There are no issues associated with this team</h4>
         </div>
       </div>

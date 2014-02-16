@@ -25,14 +25,14 @@
       <td class="text-muted hidden-sm">{{project.description}}</td>
       <td></td>
       <td style="text-align: center;">
-        <div ng-show="project.bounty_total &gt; 0"><strong>{{project.bounty_total | dollars}}</strong></div>
-        <div ng-show="project.bounty_total &lt;= 0"><a class="btn btn-default" ng-href="/trackers/{{project.slug}}">Add a Bounty</a></div>
+        <div ng-show="project.bounty_total > 0"><strong>{{project.bounty_total | dollars}}</strong></div>
+        <div ng-show="project.bounty_total <= 0"><a class="btn btn-default" ng-href="/trackers/{{project.slug}}">Add a Bounty</a></div>
       </td>
     </tr>
     </tbody>
   </table>
 </div>
 
-<div ng-show="$pagination &amp;&amp; projects &amp;&amp; projects.length &gt; 0" style="text-align: center;">
+<div ng-show="$pagination && projects && projects.length > 0" style="text-align: center;">
   <pagination on-select-page="change_page(page)" max-size="15" boundary-links="true" num-pages="$pagination.pages" current-page="$pagination.page" class="pagination"></pagination>
 </div>

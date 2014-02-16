@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div ng-show="person.company || person.location || person.github_account || person.twitter_account || person.facebook_account || teams.length &gt; 0" class="well">
+  <div ng-show="person.company || person.location || person.github_account || person.twitter_account || person.facebook_account || teams.length > 0" class="well">
     <div class="row" ng-show="person.company">
       <div class="text-right col-sm-4 col-md-4">
         <strong>Company</strong>
@@ -51,11 +51,11 @@
     </div>
 
     <!-- Hacky. add line break only if linked accounts shown -->
-    <div ng-show="teams.length &gt; 0 &amp;&amp; (person.github_account || person.twitter_account || person.facebook_account)">
+    <div ng-show="teams.length > 0 && (person.github_account || person.twitter_account || person.facebook_account)">
       <br>
     </div>
 
-    <div class="row" ng-show="teams.length &gt; 0">
+    <div class="row" ng-show="teams.length > 0">
       <div class="text-right col-sm-4 col-md-4">
         <strong>Teams</strong>
       </div>

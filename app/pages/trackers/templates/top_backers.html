@@ -1,4 +1,4 @@
-<div ng-controller="TrackerLeaderboardController" ng-show="backers.length &gt; 0" class="well" style="padding-top:0px; padding-bottom:0px">
+<div ng-controller="TrackerLeaderboardController" ng-show="backers.length > 0" class="well" style="padding-top:0px; padding-bottom:0px">
   <h3 class="text-center"><ng-pluralize count="backers.length" when="{'1': 'Top Backer', 'other':'Top Backers'}"></ng-pluralize></h3>
   <table class="table top-backers-table">
     <tbody><tr ng-repeat="backer in backers | orderBy:'-total_backed'| limitTo:3">

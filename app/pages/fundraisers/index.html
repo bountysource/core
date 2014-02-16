@@ -9,7 +9,7 @@
   <li ng-class="active_tab('current')"><a href="/fundraisers">Current</a></li>
   <li ng-class="active_tab('completed')"><a href="/fundraisers/completed">Completed</a></li>
 </ul>
-<table class="table table-striped" ng-hide="!selected_fundraisers || (selected_fundraisers | filter:filter_method).length &lt;= 0">
+<table class="table table-striped" ng-hide="!selected_fundraisers || (selected_fundraisers | filter:filter_method).length <= 0">
   <thead>
     <tr>
       <th style="width: 75px;" class="hidden-sm"></th>

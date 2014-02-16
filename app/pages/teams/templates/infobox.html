@@ -36,14 +36,14 @@
         <h4>Team Account Balance</h4>
         <strong>{{team.account_balance | currency}}</strong>
       </div>
-      <div class="text-center" ng-show="is_developer &amp;&amp; has_remaining_balance != null">
+      <div class="text-center" ng-show="is_developer && has_remaining_balance != null">
         <h4>Remaining Balance</h4>
         <strong>{{has_remaining_balance | currency}}</strong>
       </div>
     </div>
   </div>
 
-  <div ng-show="team.open_bounties_amount &gt; 0">
+  <div ng-show="team.open_bounties_amount > 0">
     <div class="well well-sm">
       <div class="row">
         <div class="text-center col-sm-6 col-md-6">

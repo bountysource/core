@@ -36,7 +36,7 @@
               </label></div>
 
               <!-- Personal account -->
-              <div ng-show="current_person &amp;&amp; current_person.account.balance &gt; 0">
+              <div ng-show="current_person && current_person.account.balance > 0">
                 <div class="checkbox"><label class="">
                   <input type="radio" ng-model="bounty.checkout_method" value="personal">
                   <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
@@ -45,16 +45,16 @@
               </div>
 
               <!-- Team accounts -->
-              <div ng-show="teams.length &gt; 0">
+              <div ng-show="teams.length > 0">
                 <div class="checkbox"><label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="">
-                  <input type="radio" ng-model="bounty.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance &lt;= 0 || team.member_balance == 0" ng-change="select_team(team)">
+                  <input type="radio" ng-model="bounty.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0 || team.member_balance == 0" ng-change="select_team(team)">
                   <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
-              <span ng-class="{ 'muted': (!team.is_developer || team.account_balance &lt;= 0) }">
+              <span ng-class="{ 'muted': (!team.is_developer || team.account_balance <= 0) }">
                 {{team.name}}
-                <strong ng-show="team.is_developer &amp;&amp; (team.member_balance == null || team.account_balance &lt; team.member_balance)">{{ team.account_balance | dollars }}</strong>
-                <strong ng-show="team.is_developer &amp;&amp; team.account_balance &gt; team.member_balance &amp;&amp; team.member_balance != nil">{{ team.member_balance | dollars }}</strong>
+                <strong ng-show="team.is_developer && (team.member_balance == null || team.account_balance < team.member_balance)">{{ team.account_balance | dollars }}</strong>
+                <strong ng-show="team.is_developer && team.account_balance > team.member_balance && team.member_balance != nil">{{ team.member_balance | dollars }}</strong>
                 <strong ng-hide="team.is_developer">$0</strong>
-                <span ng-show="team.is_admin &amp;&amp; team.account_balance &lt; 100 &amp;&amp; team.type != 'Team::Enterprise'">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
+                <span ng-show="team.is_admin && team.account_balance < 100 && team.type != 'Team::Enterprise'">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
               </span>
                 </label></div>
               </div>
@@ -135,7 +135,7 @@
           <div class="form-group">
             <div class="controls">
               <div class="checkbox"><label class="">
-                <input type="checkbox" ng-model="bounty.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous &amp;&amp; bounty.anonymous">
+                <input type="checkbox" ng-model="bounty.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && bounty.anonymous">
                 <span ng-class="{ muted: !can_make_anonymous }">Post anonymously</span>
                 <small class="text-info" ng-show="!can_make_anonymous">* Team bounties cannot be anonymous</small>
               </label></div>
@@ -144,11 +144,11 @@
 
           <div class="form-group">
             <div class="controls">
-              <button ng-click="create_payment()" ng-hide="previous_bounty_total &gt; 0" type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid">
+              <button ng-click="create_payment()" ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid">
                 <span>Post {{bounty.amount || 0 | dollars}} Bounty</span>
               </button>
 
-              <button type="submit" ng-click="create_payment()" ng-show="previous_bounty_total &gt; 0" class="btn btn-primary btn-lg" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
+              <button type="submit" ng-click="create_payment()" ng-show="previous_bounty_total > 0" class="btn btn-primary btn-lg" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
                 <span>Increase Bounty by {{bounty.amount | dollars}}</span>
               </button>
             </div>

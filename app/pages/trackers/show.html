@@ -10,8 +10,8 @@
   <div class="col-sm-3 col-md-3">
     <ng-include src="'pages/trackers/templates/sidebar.html'"></ng-include>
 
-    <div class="well well-sm" ng-show="tracker.bounty_total &gt; 0 || tracker.tracker_type == 'Github::Repository'">
-      <div collapse="!open_bounties || open_bounties &lt;= 0">
+    <div class="well well-sm" ng-show="tracker.bounty_total > 0 || tracker.tracker_type == 'Github::Repository'">
+      <div collapse="!open_bounties || open_bounties <= 0">
         <a ng-click="show_bounties()">
           <h3 class="text-center">{{ open_bounties }}
             <ng-pluralize count="open_bounties" when="{'1':'Open Bounty', 'other':'Open Bounties'}"></ng-pluralize>
@@ -21,15 +21,15 @@
 
       <div class="row">
         <div class="text-center"
-             ng-class="{span6: tracker_stats.collected_total &gt; 0, span12: tracker_stats.collected_total == 0}"
-             ng-show="tracker.bounty_total &gt; 0">
+             ng-class="{span6: tracker_stats.collected_total > 0, span12: tracker_stats.collected_total == 0}"
+             ng-show="tracker.bounty_total > 0">
           <a ng-click="show_bounties()"><h3 style="margin: 0; line-height:35px" class="text-center">
             {{tracker.bounty_total | dollars}}</h3></a>
 
           <div>in bounties</div>
         </div>
 
-        <div class="text-center col-sm-6 col-md-6" ng-show="tracker_stats.collected_total &gt; 0">
+        <div class="text-center col-sm-6 col-md-6" ng-show="tracker_stats.collected_total > 0">
           <a ng-click="show_claimed_bounties()"><h3 style="margin:0; line-height:35px;" class="text-center">
             {{tracker_stats.collected_total | dollars}}</h3></a>
 
@@ -65,12 +65,12 @@
     <p class="lead">{{tracker.description}}</p>
 
     <!-- Add horizontal line when when no issues -->
-    <div ng-hide="issues.length &gt; 0">
+    <div ng-hide="issues.length > 0">
       <hr>
     </div>
 
     <!--Issue filter box-->
-    <div collapse="issues.length &lt;= 0">
+    <div collapse="issues.length <= 0">
       <div class="well well-sm">
         <div class="row">
           <div class="col-sm-6 col-md-6">
@@ -136,7 +136,7 @@
     <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
 
     <!--Table of issues-->
-    <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length &gt; 0">
+    <table class="table table-condensed table-striped" ng-show="(issues | filter:issue_filter).length > 0">
       <thead ng-switch="tracker.tracker_type | lowercase">
       <tr ng-switch-when="jira::tracker">
         <th ng-show="issue_filter_options.show_issue_id">ID</th>
@@ -193,30 +193,30 @@
       <tbody>
       <tr
         ng-repeat="issue in issues | filter:issue_filter | orderBy:issue_filter_options.sort:!issue_filter_options.sort_asc"
-        ng-class="{ success: (issue.bounty_total &gt; 0), warning: (!issue.can_add_bounty) }">
+        ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
         <td ng-show="issue_filter_options.show_issue_id">{{issue.id}}</td>
         <td ng-show="issue_filter_options.show_issue_number">{{issue.number}}</td>
         <td>
           <a ng-href="/issues/{{issue.slug}}"
-             ng-class="{ 'text-success': (issue.bounty_total &gt; 0), 'text-warning': (!issue.can_add_bounty) }">
+             ng-class="{ 'text-success': (issue.bounty_total > 0), 'text-warning': (!issue.can_add_bounty) }">
             <i ng-show="issue.has_active_solution" class="icon-briefcase"
                tooltip="A developer is working on a solution"></i>
             {{issue.title}}
             <span ng-show="issue.paid_out" class="label label-info">paid out</span>
-            <span ng-show="!issue.can_add_bounty &amp;&amp; !issue.paid_out" class="label label-warning">closed</span>
+            <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
           </a>
         </td>
         <td>{{issue.priority}}</td>
         <td><span>{{issue.severity}}</span></td>
         <td style="text-align: center">
-          <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total &gt; 0" class="label label-success">
+          <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
             <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
             {{issue.bounty_total | dollars:{space:true} }}
           </a>
         </td>
         <td style="text-align: center">
           <a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"
-             ng-show="issue.thumbs_up_count &gt; 0">
+             ng-show="issue.thumbs_up_count > 0">
             <!-- TODO (PERF ISSUE):  tooltip="{{issue.thumbs_up_count | number}} Thumbs Up" tooltip-placement="bottom"-->
             <i class="icon-thumbs-up icon-white"></i>
             {{issue.thumbs_up_count | number}}
@@ -224,7 +224,7 @@
         </td>
         <td style="text-align: center">
           <a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"
-             ng-show="issue.participants_count &gt; 1">
+             ng-show="issue.participants_count > 1">
             <!--  TODO (PERF ISSUE):  tooltip="{{issue.participants_count | number}} Participants" tooltip-placement="bottom"-->
             <i class="icon-user icon-white"></i>
             {{issue.participants_count | number}}

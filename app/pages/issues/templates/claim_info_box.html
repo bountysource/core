@@ -1,12 +1,12 @@
 <!-- If the issue is still open, and not generic, then show info about claims -->
-<div class="text-center" ng-show="issue.can_add_bounty &amp;&amp; !issue.generic &amp;&amp; issue.bounty_total &gt; 0">
+<div class="text-center" ng-show="issue.can_add_bounty && !issue.generic && issue.bounty_total > 0">
   <h4>Claim the bounty</h4>
   <!--<p>When the issue is closed, the bounty can be claimed.</p>-->
   <p>You can only claim this bounty once the issue has been closed.</p>
   <p>Please work with the development team on <a ng-href="{{issue.url}}" target="_blank">the original issue tracker</a> to get it to the closed state.</p>
 </div>
 
-<div ng-controller="BountyClaimsController" ng-show="issue.winning_bounty_claim || issue.bounty_total &gt; 0 &amp;&amp; (!issue.can_add_bounty || issue.generic)" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-error': ((!issue.winning_bounty_claim &amp;&amp; issue.bounty_claims.length &gt; 1) || issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected), 'alert alert-block alert-info': (!issue.winning_bounty_claim &amp;&amp; issue.bounty_claims.length == 1 &amp;&amp; !issue.bounty_claims[0].disputed &amp;&amp; !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length &lt;= 0) }">
+<div ng-controller="BountyClaimsController" ng-show="issue.winning_bounty_claim || issue.bounty_total > 0 && (!issue.can_add_bounty || issue.generic)" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-error': ((!issue.winning_bounty_claim && issue.bounty_claims.length > 1) || issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected), 'alert alert-block alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 0) }">
   <!-- A claim was accepted, yay! -->
   <div ng-show="issue.winning_bounty_claim">
     <h2 style="margin: 0;">{{issue.winning_bounty_claim.amount | dollars}}</h2>
@@ -29,21 +29,21 @@
   </div>
 
   <!-- Bounty is available! Provide link to claim submit form -->
-  <div ng-show="issue.bounty_claims.length &lt;= 0">
+  <div ng-show="issue.bounty_claims.length <= 0">
     <h3 ng-hide="issue.generic">Claim Bounty</h3>
     <h3 ng-show="issue.generic" style="margin-top: 0px;">Claim Bounty</h3>
     <p>Did you resolve this issue? <a ng-href="/issues/{{issue.slug}}/claims">Claim the {{issue.bounty_total | dollars}} bounty!</a></p>
   </div>
 
   <!-- Bounty Claims -->
-  <div class="row" ng-show="issue.bounty_claims.length &gt; 0">
+  <div class="row" ng-show="issue.bounty_claims.length > 0">
     <!-- When there is one claim, say that a claim is in progress -->
-    <div ng-show="!issue.winning_bounty_claim &amp;&amp; issue.bounty_claims.length == 1">
+    <div ng-show="!issue.winning_bounty_claim && issue.bounty_claims.length == 1">
       <br>
 
       <!-- Title for claim. It's good, rejected, or disputed -->
       <h4 ng-hide="issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Pending</h4>
-      <h4 ng-show="issue.bounty_claims[0].disputed &amp;&amp; !issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Disputed</h4>
+      <h4 ng-show="issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Disputed</h4>
       <h4 ng-show="issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Rejected</h4>
 
       <div ng-init="show_more_info = false">
@@ -59,8 +59,8 @@
       <div collapse="!show_more_info" class="text-center">
         <br>
         <p>
-          <span ng-show="issue.bounty_claims[0].accept_count &gt; 0"><strong>{{issue.bounty_claims[0].accept_count | number}}</strong> of <strong>{{issue.bounty_claims[0].backers_count | number}}</strong></span>
-          <span ng-show="issue.bounty_claims[0].accept_count &lt;= 0"><strong>No</strong></span>
+          <span ng-show="issue.bounty_claims[0].accept_count > 0"><strong>{{issue.bounty_claims[0].accept_count | number}}</strong> of <strong>{{issue.bounty_claims[0].backers_count | number}}</strong></span>
+          <span ng-show="issue.bounty_claims[0].accept_count <= 0"><strong>No</strong></span>
           <ng-pluralize count="issue.bounty_claims[0].accept_count" when="{'0': 'backers have voted in favor of this claim.', '1': 'backers has voted in favor of this claim.', 'other': 'backers have voted in favor of this claim.'}"></ng-pluralize>
         </p>
         <p>Automatically accepted in
@@ -71,7 +71,7 @@
     </div>
 
     <!-- If more than one claim, say that the bounty is contested -->
-    <div ng-show="!issue.winning_bounty_claim &amp;&amp; issue.bounty_claims.length &gt; 1">
+    <div ng-show="!issue.winning_bounty_claim && issue.bounty_claims.length > 1">
       <br>
       <h4 style="margin-bottom: 5px;">Bounty Contested!</h4>
       <ul class="list-inline" style="margin-bottom: 0;">

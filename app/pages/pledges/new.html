@@ -58,7 +58,7 @@
                   </label></div>
 
                   <!-- Personal account -->
-                  <div ng-show="current_person &amp;&amp; current_person.account.balance &gt; 0">
+                  <div ng-show="current_person && current_person.account.balance > 0">
                     <div class="checkbox"><label class="">
                       <input type="radio" ng-model="pledge.checkout_method" value="personal">
                       <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
@@ -67,15 +67,15 @@
                   </div>
 
                   <!-- Team accounts -->
-                  <div ng-show="teams.length &gt; 0">
+                  <div ng-show="teams.length > 0">
                     <div class="checkbox"><label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="">
-                      <input type="radio" ng-model="pledge.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance &lt;= 0">
+                      <input type="radio" ng-model="pledge.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0">
                       <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
-                    <span ng-class="{ 'muted': (!team.is_developer || team.account_balance &lt;= 0) }">
+                    <span ng-class="{ 'muted': (!team.is_developer || team.account_balance <= 0) }">
                       {{team.name}}
                       <strong ng-show="team.is_developer">{{ team.account_balance | dollars }}</strong>
                       <strong ng-hide="team.is_developer">$0</strong>
-                      <span ng-show="team.is_admin &amp;&amp; team.account_balance &lt; 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
+                      <span ng-show="team.is_admin && team.account_balance < 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
                     </span>
                     </label></div>
                   </div>
@@ -85,14 +85,14 @@
               <div class="form-group">
                 <div class="controls">
                   <div class="checkbox"><label class="">
-                    <input type="checkbox" ng-model="pledge.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous &amp;&amp; pledge.anonymous">
+                    <input type="checkbox" ng-model="pledge.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && pledge.anonymous">
                     <span ng-class="{ muted: !can_make_anonymous }">Post anonymously</span>
                     <small class="text-info" ng-show="!can_make_anonymous">* Team pledges cannot be anonymous</small>
                   </label></div>
                 </div>
               </div>
 
-              <div class="form-group" ng-show="fundraiser.rewards.length &gt; 0">
+              <div class="form-group" ng-show="fundraiser.rewards.length > 0">
                 <label class="control-label">Choose a Reward</label>
 
                 <div class="controls">
@@ -113,13 +113,13 @@
 
               <div class="form-group">
                 <div class="controls">
-                  <button class="btn btn-default btn-lg" ng-show="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details &amp;&amp; !pledge.survey_response)" popover-placement="right" popover-trigger="mouseenter" popover="You need to provide the above information to receive this reward.">Make Pledge</button>
-                  <button ng-click="create_payment()" class="btn btn-success btn-lg" ng-hide="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details &amp;&amp; !pledge.survey_response)">Make Pledge</button>
+                  <button class="btn btn-default btn-lg" ng-show="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)" popover-placement="right" popover-trigger="mouseenter" popover="You need to provide the above information to receive this reward.">Make Pledge</button>
+                  <button ng-click="create_payment()" class="btn btn-success btn-lg" ng-hide="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)">Make Pledge</button>
                 </div>
               </div>
             </div>
 
-            <div class="col-sm-6 col-md-6" ng-show="fundraiser.rewards.length &gt; 0">
+            <div class="col-sm-6 col-md-6" ng-show="fundraiser.rewards.length > 0">
               <div ng-show="selected_reward.fulfillment_details">
                 <div class="alert alert-warning" ng-show="selected_reward.fulfillment_details" style="padding: 15px;">
                   <div>

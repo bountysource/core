@@ -26,11 +26,11 @@
             </div>
           </div>
 
-          <div ng-show="current_saved_search_tab &amp;&amp; tab_results_resolved">
-            <div ng-show="current_saved_search_tab.issues.length &gt; 0">
+          <div ng-show="current_saved_search_tab && tab_results_resolved">
+            <div ng-show="current_saved_search_tab.issues.length > 0">
               <issue-list issues="current_saved_search_tab.issues"></issue-list>
             </div>
-            <div ng-hide="current_saved_search_tab.issues.length &gt; 0">
+            <div ng-hide="current_saved_search_tab.issues.length > 0">
               <pre>No Results Found</pre>
             </div>
           </div>

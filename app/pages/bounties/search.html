@@ -21,7 +21,7 @@
       <label>Language:</label>
       <input name="input" type="text" class="search span12 form-control" placeholder="Search for languages" ng-model="languages_input" typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8" typeahead-editable="false" autocomplete="off">
 
-      <div class="filter-box" collapse="languages_loaded.length &lt;= 0">
+      <div class="filter-box" collapse="languages_loaded.length <= 0">
         <span class="badge search-filter" ng-repeat="language in languages_loaded">
           <button type="button" class="close" ng-click="remove_language(language)">
             <i class="icon-remove icon-white"></i>
@@ -49,7 +49,7 @@
       <label>Limit to projects:</label>
       <input name="input" type="text" class="search span12 form-control" placeholder="Search in projects" ng-model="trackers_input" typeahead="tracker as tracker.name for tracker in do_tracker_typeahead($viewValue)" typeahead-editable="false">
 
-      <div class="project-box" collapse="trackers_loaded &lt;= 0">
+      <div class="project-box" collapse="trackers_loaded <= 0">
         <span class="badge search-filter" ng-repeat="tracker in trackers_loaded">
           <button type="button" class="close" ng-click="remove_tracker(tracker)">
             <i class="icon-remove icon-white"></i>
@@ -67,7 +67,7 @@
   <loading-bar ng-show="loading_featured_issues">Loading featured issues...</loading-bar>
 
   <!-- Featured Issues Table -->
-  <div ng-show="featured_issues.length &gt; 0">
+  <div ng-show="featured_issues.length > 0">
     <h3>Featured Issues</h3>
     <table class="table table-striped table-condensed table-hover">
       <thead>
@@ -89,13 +89,13 @@
           </td>
           <td>
             <a ng-href="/issues/{{issue.slug}}">
-              <i ng-show="issue.bounty_total &gt;= 1000" class="icon-fire"></i>
+              <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
               {{issue.title}}
             </a>
           </td>
 
           <td style="text-align: center">
-            <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total &gt; 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
+            <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
               {{issue.bounty_total | dollars:{space:true} }}
             </a>
           </td>
@@ -115,7 +115,7 @@
   <div ng-show="!loading_search_results">
     <div ng-show="issues_count == 0" class="alert alert-error alert-warning">No results found.</div>
 
-    <div ng-show="search_results.length &gt; 0">
+    <div ng-show="search_results.length > 0">
       <h3>Search Results</h3>
       <div>
         <em>Found <strong>{{issues_count | number}}</strong> issues</em>
@@ -135,21 +135,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="issue in search_results" ng-class="{ success: (issue.bounty_total &gt; 0), warning: (!issue.can_add_bounty) }">
+          <tr ng-repeat="issue in search_results" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
             <td>
-              <a ng-href="/trackers/{{ issue.tracker.slug }}" ng-class="{ 'text-success': (issue.bounty_total &gt; 0)}">{{issue.tracker.name}}</a>
+              <a ng-href="/trackers/{{ issue.tracker.slug }}" ng-class="{ 'text-success': (issue.bounty_total > 0)}">{{issue.tracker.name}}</a>
             </td>
             <td>
-              <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total &gt; 0)}">
-                <i ng-show="issue.bounty_total &gt;= 1000" class="icon-fire"></i>
+              <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0)}">
+                <i ng-show="issue.bounty_total >= 1000" class="icon-fire"></i>
                 {{issue.title}}
                 <span ng-show="issue.paid_out" class="label label-info">paid out</span>
-                <span ng-show="!issue.can_add_bounty &amp;&amp; !issue.paid_out" class="label label-warning">closed</span>
+                <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
               </a>
             </td>
 
             <td style="text-align: center">
-              <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total &gt; 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
+              <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
                 {{issue.bounty_total | dollars:{space:true} }}
               </a>
             </td>
@@ -164,7 +164,7 @@
       </table>
     </div>
 
-    <div ng-show="issues_count &gt; 50">
+    <div ng-show="issues_count > 50">
       <pagination total-items="issues_count" current-page="form_data.page" max-size="maxSize" num-pages="pageCount" items-per-page="perPage" on-select-page="updatePage(page)"></pagination>
     </div>
   </div>

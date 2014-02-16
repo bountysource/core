@@ -5,13 +5,13 @@
   </div>
 
   <!-- First page, show edit and accept buttons if you have languages or projects -->
-  <div ng-show="$$currentPageIndex == 0 &amp;&amp; (myLanguages.length &gt; 0 || followedTrackers.length &gt; 0)">
+  <div ng-show="$$currentPageIndex == 0 && (myLanguages.length &gt; 0 || followedTrackers.length &gt; 0)">
     <button class="btn btn-default" ng-click="nextPage()">Edit</button>
     <button class="btn btn-success" ng-click="completeProfile()">Accept</button>
   </div>
 
   <!-- First page, only show continue button because you have no languages or trackers -->
-  <div ng-show="$$currentPageIndex == 0 &amp;&amp; myLanguages.length &lt;= 0 &amp;&amp; followedTrackers.length &lt;= 0">
+  <div ng-show="$$currentPageIndex == 0 && myLanguages.length &lt;= 0 && followedTrackers.length &lt;= 0">
     <button class="btn btn-primary" ng-click="nextPage()">Continue</button>
   </div>
 

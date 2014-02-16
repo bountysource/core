@@ -9,11 +9,11 @@
 <loading-bar ng-hide="resolved">Loading transactions...</loading-bar>
 
 <div ng-show="resolved">
-  <div ng-show="transactions.length &lt;= 0">
+  <div ng-show="transactions.length <= 0">
     <div class="alert alert-info">No transactions created.</div>
   </div>
 
-  <div ng-show="transactions.length &gt; 0">
+  <div ng-show="transactions.length > 0">
     <table class="table table-striped">
       <thead>
         <tr>

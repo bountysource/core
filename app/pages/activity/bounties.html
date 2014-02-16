@@ -9,7 +9,7 @@
   Need something fixed? <a href="/search">Search for issues</a> and post a bounty!
 </div>
 
-<table class="table table-striped" ng-show="bounties.length &gt; 0">
+<table class="table table-striped" ng-show="bounties.length > 0">
   <thead>
     <tr>
       <th>Tracker</th>
@@ -50,7 +50,7 @@
       </div>
     </td>
 
-    <td ng-show="bounty.anonymous &amp;&amp; bounty.owner_type != 'Team'">
+    <td ng-show="bounty.anonymous && bounty.owner_type != 'Team'">
       <button class="btn btn-block active btn-default btn-sm" ng-click="toggle_anonymous(bounty)">
         <i class="icon-eye-close"></i>
         Anonymized

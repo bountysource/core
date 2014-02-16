@@ -26,7 +26,7 @@
 
         <accordion close-others="false">
           <div ng-repeat="reward in rewards | orderBy:'amount'">
-            <div ng-show="reward.amount &lt;= 0">
+            <div ng-show="reward.amount <= 0">
               <accordion-group heading="No Reward" is-open="reward.$is_open">
               <div class="row">
                 <div class="col-sm-3 col-md-3">
@@ -40,9 +40,9 @@
                 </div>
 
                 <div class="col-sm-9 col-md-9">
-                  <div ng-show="reward.pledges.length &lt;= 0" class="alert alert-info" style="margin: 0;">This reward has not been claimed by a backer.</div>
+                  <div ng-show="reward.pledges.length <= 0" class="alert alert-info" style="margin: 0;">This reward has not been claimed by a backer.</div>
 
-                  <table ng-show="reward.pledges.length &gt; 0" class="table table-bordered table-striped pledges-table">
+                  <table ng-show="reward.pledges.length > 0" class="table table-bordered table-striped pledges-table">
                     <thead>
                       <tr>
                         <th>Backer</th>
@@ -66,7 +66,7 @@
             </accordion-group>
           </div>
 
-          <div ng-show="reward.amount &gt; 0">
+          <div ng-show="reward.amount > 0">
             <accordion-group is-open="reward.$is_open">
             <accordion-heading>
             ${{reward.amount | number:0}} Reward
@@ -92,9 +92,9 @@
             </div>
 
             <div class="col-sm-9 col-md-9">
-              <div ng-show="reward.pledges.length &lt;= 0" class="alert alert-info" style="margin: 0;">This reward has not been claimed by a backer.</div>
+              <div ng-show="reward.pledges.length <= 0" class="alert alert-info" style="margin: 0;">This reward has not been claimed by a backer.</div>
 
-              <table ng-show="reward.pledges.length &gt; 0" class="table table-bordered table-striped pledges-table">
+              <table ng-show="reward.pledges.length > 0" class="table table-bordered table-striped pledges-table">
                 <thead>
                   <tr>
                     <th>Backer</th>
@@ -112,7 +112,7 @@
                     <td>{{ pledge.amount | currency }}</td>
                     <td>{{ pledge.created_at | date:'medium' }}</td>
                     <td ng-show="reward.fulfillment_details">
-                      <div ng-class="{ error: (reward.fulfillment_details &amp;&amp; !pledge.survey_response) }" style="white-space: pre-wrap">{{pledge.survey_response}}</div>
+                      <div ng-class="{ error: (reward.fulfillment_details && !pledge.survey_response) }" style="white-space: pre-wrap">{{pledge.survey_response}}</div>
                     </td>
                   </tr>
                 </tbody>

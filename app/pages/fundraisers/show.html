@@ -17,7 +17,7 @@
       <div class="col-sm-9 col-md-9">
         <div class="row">
           <div class="col-sm-9 col-md-9">
-            <div ng-show="fundraiser.updates.length &gt; 0">
+            <div ng-show="fundraiser.updates.length > 0">
               <div class="page-">
                 <h3>Updates</h3>
               </div>
@@ -48,7 +48,7 @@
           <div class="col-sm-3 col-md-3">
             <div ng-include="'pages/fundraisers/templates/top_backers.html'"></div>
 
-            <div class="bounty-buttons" ng-show="fundraiser.published &amp;&amp; fundraiser.in_progress">
+            <div class="bounty-buttons" ng-show="fundraiser.published && fundraiser.in_progress">
               <h3>Pledge Now</h3>
 
               <form ng-submit="pledge_redirect()">
@@ -72,7 +72,7 @@
               </form>
             </div>
 
-            <div ng-show="fundraiser.rewards.length &gt; 0">
+            <div ng-show="fundraiser.rewards.length > 0">
               <h3>Rewards</h3>
               <div ng-include="'pages/fundraisers/templates/rewards.html'"></div>
             </div>

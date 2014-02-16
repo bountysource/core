@@ -30,7 +30,7 @@
 
   <div class="alert alert-error alert-warning" ng-show="error">{{error}}</div>
 
-  <div class="form-group" ng-class="{ error: (show_validations &amp;&amp; form.email.$invalid) || (form.email.$error.email), success: (signin_or_signup == 'signin' || signin_or_signup == 'signup'), warning: signin_or_signup == 'pending' }">
+  <div class="form-group" ng-class="{ error: (show_validations && form.email.$invalid) || (form.email.$error.email), success: (signin_or_signup == 'signin' || signin_or_signup == 'signup'), warning: signin_or_signup == 'pending' }">
     <label class="control-label" for="inputEmail">Email Address:</label>
     <div class="controls">
       <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" autofocus="" ng-change="email_changing()" ng-blur="email_changed()" required="" class="form-control">
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="form-group" ng-hide="provider &amp;&amp; (signin_or_signup!='signin')" ng-class="{ error: (show_validations &amp;&amp; form.password.$invalid) || (form.password.$error.pattern || form.password.$error.minlength) }">
+  <div class="form-group" ng-hide="provider && (signin_or_signup!='signin')" ng-class="{ error: (show_validations && form.password.$invalid) || (form.password.$error.pattern || form.password.$error.minlength) }">
     <label class="control-label" for="inputPassword">Password:</label>
     <div class="controls" ng-class="{ 'hide-tooltip': signin_or_signup=='signin' }">
       <input type="password" name="password" id="inputPassword" placeholder="abcd1234" ng-model="form_data.password" class="input-medium form-control" ng-minlength="8" ng-pattern="/[a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]/" required="" tooltip="Letter, number and 8+ characters." tooltip-placement="right" tooltip-trigger="focus">

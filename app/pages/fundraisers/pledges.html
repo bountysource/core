@@ -16,11 +16,11 @@
       </div>
 
       <div class="col-sm-9 col-md-9">
-        <div class="alert alert-info" ng-show="pledges.length &lt;= 0">No pledges have been made. <a ng-href="/fundraisers/{{fundraiser.slug}}/pledge">Why don't you make the first pledge?</a></div>
+        <div class="alert alert-info" ng-show="pledges.length <= 0">No pledges have been made. <a ng-href="/fundraisers/{{fundraiser.slug}}/pledge">Why don't you make the first pledge?</a></div>
 
         <loading-bar ng-hide="pledges">Loading...</loading-bar>
 
-        <table ng-show="pledges &amp;&amp; pledges.length &gt; 0" class="table table-striped pledges-table">
+        <table ng-show="pledges && pledges.length > 0" class="table table-striped pledges-table">
           <thead>
             <tr>
               <th><a ng-click="sort_by('person.display_name')">Backer</a></th>

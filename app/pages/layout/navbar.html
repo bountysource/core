@@ -57,7 +57,7 @@
                 <i class="icon-wrench"></i>
                 Tools
               </a></li>
-              <li ng-show="teams.length &gt; 0" class="dropdown-submenu">
+              <li ng-show="teams.length > 0" class="dropdown-submenu">
                 <a href="/teams" id="navbar-user-teams">
                   <i class="icon-globe"></i>
                   Teams
@@ -79,7 +79,7 @@
                   <li><a href="/settings/email">Email</a></li>
                 </ul>
               </li>
-              <li ng-show="current_person.account.balance &gt; 0"><a ng-href="/activity/account" id="navbar-user-profile">
+              <li ng-show="current_person.account.balance > 0"><a ng-href="/activity/account" id="navbar-user-profile">
                 <i class="icon-gift"></i>
                 Balance ({{current_person.account.balance | currency}})
               </a></li>

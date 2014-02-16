@@ -24,11 +24,11 @@
             <button ng-controller="FundraiserUpdatesController" ng-click="create_update()" class="btn btn-primary btn-lg">New Update</button>
           </div>
 
-          <div class="alert alert-info" ng-show="updates.length &lt;= 0">
+          <div class="alert alert-info" ng-show="updates.length <= 0">
             No updates have been published.
           </div>
 
-          <table class="table table-striped table-bordered table-hover update_table" ng-show="updates.length &gt; 0">
+          <table class="table table-striped table-bordered table-hover update_table" ng-show="updates.length > 0">
             <!--Published updates row-->
             <thead>
               <tr><th><strong>Title</strong></th><th><strong>Published On</strong></th></tr>
@@ -54,7 +54,7 @@
         <div class="col-sm-3 col-md-3">
           <div ng-include="'pages/fundraisers/templates/top_backers.html'"></div>
 
-          <div ng-show="fundraiser.rewards.length &gt; 0">
+          <div ng-show="fundraiser.rewards.length > 0">
             <h3>Rewards</h3>
             <div ng-include="'pages/fundraisers/templates/rewards.html'"></div>
           </div>

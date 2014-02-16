@@ -1,7 +1,7 @@
-<div class="well bounty-buttons" ng-show="issue.can_add_bounty &amp;&amp; !issue.winning_bounty_claim" ng-controller="BountyBoxController">
+<div class="well bounty-buttons" ng-show="issue.can_add_bounty && !issue.winning_bounty_claim" ng-controller="BountyBoxController">
   <div style="text-align: center;">
     <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
-    <strong>Bounty <span ng-show="issue.bounties.length &gt; 0">from {{issue.bounties.length | number}} <ng-pluralize count="issue.bounties.length" when="{ 'one': 'backer', 'other': 'backers' }"></ng-pluralize></span></strong>
+    <strong>Bounty <span ng-show="issue.bounties.length > 0">from {{issue.bounties.length | number}} <ng-pluralize count="issue.bounties.length" when="{ 'one': 'backer', 'other': 'backers' }"></ng-pluralize></span></strong>
   </div>
 
   <br>

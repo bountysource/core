@@ -7,11 +7,11 @@
       <div ng-include="'pages/issues/templates/developer_goals_notification.html'"></div>
       <div ng-include="'pages/issues/templates/nav_tabs.html'"></div>
 
-      <div class="alert alert-info" ng-hide="issue.bounties.length &gt; 0">
+      <div class="alert alert-info" ng-hide="issue.bounties.length > 0">
         No bounties have been placed.
       </div>
 
-      <div ng-show="issue.bounties.length &gt; 0">
+      <div ng-show="issue.bounties.length > 0">
         <table id="bounties-table" class="table table-striped">
           <thead>
           <tr>

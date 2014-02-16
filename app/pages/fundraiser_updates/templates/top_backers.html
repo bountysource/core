@@ -1,4 +1,4 @@
-<div ng-controller="FundraiserLeaderboardUpdateController" ng-show="pledges &amp;&amp; pledges.length &gt; 0">
+<div ng-controller="FundraiserLeaderboardUpdateController" ng-show="pledges && pledges.length > 0">
   <h3>Top Backers</h3>
   <table class="table top-backers-table">
     <tbody><tr ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse | limitTo:3">

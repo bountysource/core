@@ -6,11 +6,11 @@
 
 <ng-include src="'pages/activity/tabs.html'"></ng-include>
 
-<div ng-show="(pledges | filter:'$show_survey').length &gt; 0">
+<div ng-show="(pledges | filter:'$show_survey').length > 0">
   <div class="alert alert-warning"><strong>Hey!</strong> The creator of one of the fundraisers that you backed needs information from you.</div>
 </div>
 
-<div ng-show="pledges.length &lt;= 0" class="alert alert-info">
+<div ng-show="pledges.length <= 0" class="alert alert-info">
   You haven't made any pledges yet! Checkout our <a href="/fundraisers">list of fundraisers</a>.
 </div>
 
@@ -18,7 +18,7 @@
   <alert type="alert.type" close="alert=null">{{alert.message}}</alert>
 </div>
 
-<table class="table table-striped" ng-show="pledges.length &gt; 0">
+<table class="table table-striped" ng-show="pledges.length > 0">
   <thead>
   <tr>
     <th style="width: 50%;">Fundraiser</th>
@@ -44,11 +44,11 @@
           <div class="form-group">
             <label class="control-label">Reward:</label>
             <div class="controls">
-              <div class="checkbox"><label class="" ng-repeat="reward in pledge.fundraiser.rewards" ng-show="pledge.amount &gt;= reward.amount">
-                <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-click="select_reward(pledge, reward)" ng-disabled="pledge.amount &lt; reward.amount">
-                <div ng-class="{ 'muted': (pledge.amount &lt; reward.amount &amp;&amp; reward.amount &gt; 0) }">
+              <div class="checkbox"><label class="" ng-repeat="reward in pledge.fundraiser.rewards" ng-show="pledge.amount >= reward.amount">
+                <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-click="select_reward(pledge, reward)" ng-disabled="pledge.amount < reward.amount">
+                <div ng-class="{ 'muted': (pledge.amount < reward.amount && reward.amount > 0) }">
                   <span ng-show="reward.amount == 0">No Reward</span>
-                  <span ng-show="reward.amount &gt; 0">{{reward.amount | dollars}} Reward tier</span>
+                  <span ng-show="reward.amount > 0">{{reward.amount | dollars}} Reward tier</span>
                 </div>
                 <div style="padding-left: 15px;">
                   <small class="text-info">{{reward.description}}</small>
@@ -121,7 +121,7 @@
     </td>
 
     <td>
-      <button ng-show="pledge.fundraiser.rewards.length &gt; 1 &amp;&amp; pledge.amount &gt;= (pledge.fundraiser.rewards | orderBy:['amount'])[1].amount" class="btn btn-primary btn-sm" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Reward</button>
+      <button ng-show="pledge.fundraiser.rewards.length > 1 && pledge.amount >= (pledge.fundraiser.rewards | orderBy:['amount'])[1].amount" class="btn btn-primary btn-sm" ng-click="pledge.$show_survey = !pledge.$show_survey" ng-class="{ 'active': pledge.$show_survey }">Reward</button>
     </td>
   </tr><tr>
   </tr></tbody>
