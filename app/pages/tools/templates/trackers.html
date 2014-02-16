@@ -1,6 +1,8 @@
 <accordion ng-repeat="owner_trackers in all_trackers" close-others="oneAtATime">
   <accordion-group is-open="trackers_count < 25">
-    <accordion-heading>{{owner_trackers[0]}} <small class="muted"><strong>{{owner_trackers[1].length | number}} {{"project" | pluralize:owner_trackers[1].length}}</strong></small></accordion-heading>
+    <accordion-heading>
+      {{owner_trackers[0]}} <small class="muted"><strong>{{owner_trackers[1].length | number}} <ng-pluralize count="owner_trackers[1].length" when="{ 'one': 'project', 'other': 'projects' }"></ng-pluralize></strong></small>
+    </accordion-heading>
     <table class="table table-projects">
       <tbody>
       <tr ng-repeat="tracker in owner_trackers[1]" ng-class="{ 'info': (current_tracker && tracker.id == current_tracker.id) }" ng-click="expand_tracker(tracker)">

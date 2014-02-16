@@ -5,14 +5,16 @@
       <div>When the bounty reaches this goal, <a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name | truncate:20 }}</a> will be notified.</div>
 
       <div ng-show="developer_goals.length == 2"><small>1 other developer has set a bounty goal. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
-      <div ng-show="developer_goals.length > 2"><small>{{developer_goals.length - 1 | number}} other {{"developer" | pluralize:(developer_goals.length - 1)}} have set bounty goals. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
+      <div ng-show="developer_goals.length > 2">
+        <small>{{developer_goals.length - 1 | number}} other <ng-pluralize count="developer_goals.length" when="{ 'one': 'developer has set a bounty goal', 'other': 'developers have set bounty goals' }"></ng-pluralize>. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small>
+      </div>
     </div>
 
     <div style="text-align: center;" ng-show="issue.bounty_total >= next_developer_goal.amount">
       <h3 style="margin: 0;"><a owner-href="next_developer_goal.person">{{next_developer_goal.person.display_name | truncate:20 }}</a>'s bounty goal has been met!</h3>
 
       <div ng-show="developer_goals.length == 2"><small>1 other developer has set a bounty goal. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
-      <div ng-show="developer_goals.length > 2"><small>{{developer_goals.length - 1 | number}} other {{"developer" | pluralize:(developer_goals.length - 1)}} have set bounty goals. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
+      <div ng-show="developer_goals.length > 2"><small>{{developer_goals.length - 1 | number}} other <ng-pluralize count="developer_goals.length" when="{ 'one': 'developer has set a bounty goal', 'other': 'developers have set bounty goals' }"></ng-pluralize>. <a ng-click="show_other_developer_goals = !show_other_developer_goals">View all</a></small></div>
     </div>
 
     <br />
