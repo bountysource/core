@@ -1,24 +1,30 @@
 <div ng-controller="FundraiserLeaderboardController" ng-show="pledges && pledges.length > 0">
-  <h3>Top Backers</h3>
-  <table class="table top-backers-table">
-    <tbody><tr ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse | limitTo:3">
-      <!--Profile picture. No link if anon-->
-      <td style="width: 50px">
-        <div ng-show="pledge.owner">
-          <owner-profile-link model="pledge" class="thumbnail">
-          <img style="width: 50px; max-width: 50px; height: 50px" ng-src="{{pledge.owner.image_url}}">
-        </owner-profile-link>
-      </div>
-      <img class="thumbnail" ng-hide="pledge.owner" style="width: 50px; max-width: 50px; height: 50px" src="images/anon.jpg">
-    </td>
+  <div class="panel panel-primary">
+    <div class="panel-heading text-center">
+      <h4 class="panel-title">Top Backers</h4>
+    </div>
 
-    <td>
-      <div ng-show="pledge.owner">
-        <owner-profile-link model="pledge">{{pledge.owner.display_name}}</owner-profile-link>
+    <div class="panel-body">
+      <div class="row" ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse | limitTo:3">
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+          <a ng-if="pledge.owner" owner-href="pledge.owner" class="thumbnail">
+            <img class="img-responsive" ng-src="{{pledge.owner.large_image_url}}" />
+          </a>
+
+          <div ng-if="!pledge.owner">
+            <img class="img-responsive thumbnail" src="images/anon.jpg">
+          </div>
+        </div>
+
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+          <div ng-if="pledge.owner">
+            <owner-profile-link model="pledge">{{pledge.owner.display_name}}</owner-profile-link>
+          </div>
+          <div ng-if="!pledge.owner" class="text-muted">Anonymous</div>
+
+          <div><b>{{ pledge.amount | dollars }}</b></div>
+        </div>
       </div>
-      <div ng-hide="pledge.owner" class="text-muted">Anonymous</div>
-      <div><b>{{ pledge.amount | dollars }}</b></div>
-    </td>
-  </tr>
-</tbody></table>
+    </div>
+  </div>
 </div>

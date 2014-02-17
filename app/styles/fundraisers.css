@@ -38,22 +38,6 @@ table.update_table th:nth-child(2) {
   width: 30%;
 }
 
-#flex-box {
-  margin: 15px 10px 0;
-  padding: 0;
-  border-top: 2px solid #e5e5e5;
-}
-
-#flex-box h5 {
-  margin: 10px 0 0;
-  padding: 0px;
-}
-
-#flex-box p {
-  font-size: 11px;
-  line-height: 12px;
-  margin-bottom: 0px;
-}
 /* receipts */
 ul.fundraiser-highlight > li > div{
   margin-right: 2%;

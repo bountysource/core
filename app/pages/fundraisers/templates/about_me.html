@@ -1,20 +1,27 @@
-<div class="well text-center">
-  <div ng-show="fundraiser.team">
-    <h3 style="margin-top: 0;">By <a ng-href="/teams/{{fundraiser.team.slug}}">{{ fundraiser.team.name }}</a></h3>
-
-    <ul class="list-inline">
-      <li ng-repeat="person in fundraiser.team.members">
-        <a owner-href="person"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-      </li>
-    </ul>
+<div class="panel panel-default text-center">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      By
+      <span ng-show="fundraiser.team">{{fundraiser.team.name}}</span>
+      <span ng-hide="fundraiser.team">{{fundraiser.person.display_name}}</span>
+    </h4>
   </div>
 
-  <div ng-hide="fundraiser.team">
-    <a ng-href="/people/{{fundraiser.person.slug}}"><img ng-src="{{fundraiser.person.large_image_url}}"></a>
-    <h3 style="margin-top: 0;">By <a ng-href="/people/{{fundraiser.person.slug}}">{{ fundraiser.person.display_name }}</a></h3>
-    <p style="white-space: pre-wrap; overflow-x: auto;">{{ fundraiser.person.bio }}</p>
-  </div>
+  <div class="panel-body">
+    <div ng-show="fundraiser.team">
+      <div class="row" style="text-align: center;">
+        <div ng-repeat="person in fundraiser.team.members" class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
+          <a owner-href="person" class="thumbnail" tooltip="{{person.display_name}}">
+            <img class="img-responsive img-rounded" ng-src="{{person.large_image_url}}" />
+          </a>
+        </div>
+      </div>
+    </div>
 
-  <a ng-href="{{fundraiser.homepage_url}}" target="_blank" class="btn btn-block btn-default" ng-show="fundraiser.homepage_url"><i class="glypicon glyphicon-home"></i> Project Homepage</a>
-  <a ng-href="{{fundraiser.repo_url}}" target="_blank" class="btn btn-block btn-default" ng-show="fundraiser.repo_url && fundraiser.homepage_url != fundraiser.repo_url"><i class="glypicon glyphicon-globe"></i> Project Repository</a>
+    <div ng-hide="fundraiser.team">
+      <a ng-href="/people/{{fundraiser.person.slug}}">
+        <img class="img-responsive img-rounded" ng-src="{{fundraiser.person.large_image_url}}">
+      </a>
+    </div>
+  </div>
 </div>
