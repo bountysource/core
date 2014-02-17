@@ -4,8 +4,6 @@
   <li><a ng-href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a></li>
 </ul>
 
-<tracker-signin-modal tracker="tracker"></tracker-signin-modal>
-
 <div class="row" ng-show="tracker">
   <div class="col-sm-3 col-md-3">
     <ng-include src="'pages/trackers/templates/sidebar.html'"></ng-include>

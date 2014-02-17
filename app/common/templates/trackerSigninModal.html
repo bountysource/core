@@ -1,0 +1,18 @@
+<div modal="$$showModal && tracker">
+  <div class="modal-header">
+    <h4>Sign up for alerts on {{tracker.name}} <img class="pull-left" style="width: 30px; height: 30px; margin-right: 10px;" ng-src="{{tracker.image_url}}" /></h4>
+  </div>
+  <div class="modal-body">
+    <div style="text-align: center;">
+      <p><strong>{{tracker.bounty_total | dollars}} in open bounties</strong></p>
+      <p>Receive email alerts when bounties are posted on {{tracker.name}}.</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" ng-click="closeModal()">Skip</button>
+    <a class="btn btn-primary" ng-click="signin()">
+      <img src="images/favicon-github-white.png" class="pull-left" />
+      <span style="margin-left: 5px;">Sign in via GitHub</span>
+    </a>
+  </div>
+</div>

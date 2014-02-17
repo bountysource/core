@@ -45,10 +45,6 @@
 
 <div id="wrap">
   <ng-include src="'pages/layout/navbar.html'"></ng-include>
-
-  <!-- Omnipresent account creation modal -->
-  <div post-account-create-wizard></div>
-
   <div ng-class="{ 'container': !no_container }" ng-view></div>
 </div>
 
@@ -151,7 +147,10 @@
     <script src="pages/trackers/show.js" type="text/javascript"></script>
     <script src="pages/trackers/top_backers.js" type="text/javascript"></script>
     <script src="pages/transactions/show.js" type="text/javascript"></script>
+    <script src="common/profileCompleteModal.js" type="text/javascript"></script>
     <script src="common/routes.js" type="text/javascript"></script>
+    <script src="common/trackerPluginAuthorizeModal.js" type="text/javascript"></script>
+    <script src="common/trackerSigninModal.js" type="text/javascript"></script>
     <script src="common/constants/personResolver.js" type="text/javascript"></script>
     <script src="common/directives/abRandomize/abRandomize.js" type="text/javascript"></script>
     <script src="common/directives/backerThumbnails/backerThumbnails.js" type="text/javascript"></script>
@@ -170,7 +169,6 @@
     <script src="common/directives/ngFocus/ngFocus.js" type="text/javascript"></script>
     <script src="common/directives/ownerHref/ownerHref.js" type="text/javascript"></script>
     <script src="common/directives/personIcon/personIcon.js" type="text/javascript"></script>
-    <script src="common/directives/postAccountCreateWizard/postAccountCreateWizard.js" type="text/javascript"></script>
     <script src="common/directives/projectCard/projectCard.js" type="text/javascript"></script>
     <script src="common/directives/requireGithubAuth/requireGithubAuth.js" type="text/javascript"></script>
     <script src="common/directives/requireGplus/requireGplus.js" type="text/javascript"></script>
@@ -178,8 +176,6 @@
     <script src="common/directives/selectOnClick/selectOnClick.js" type="text/javascript"></script>
     <script src="common/directives/targetBlank/targetBlank.js" type="text/javascript"></script>
     <script src="common/directives/teamTrackerThumbnails/teamTrackerThumbnails.js" type="text/javascript"></script>
-    <script src="common/directives/trackerPluginAuthorizeModal/trackerPluginAuthorizeModal.js" type="text/javascript"></script>
-    <script src="common/directives/trackerSigninModal/trackerSigninModal.js" type="text/javascript"></script>
     <script src="common/filters/atLeast.js" type="text/javascript"></script>
     <script src="common/filters/atMost.js" type="text/javascript"></script>
     <script src="common/filters/cleanUrl.js" type="text/javascript"></script>

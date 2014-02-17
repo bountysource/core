@@ -1,0 +1,142 @@
+<div>
+  <div class="modal-header">
+    <h4>{{$currentPage.title || $pageDefaults.title}}</h4>
+    <p class="hidden-sm" ng-show="$currentPage.subtitle">{{$currentPage.subtitle}}</p>
+  </div>
+
+  <div class="modal-body">
+    <div ng-show="$currentPage.id === 'start'">
+      <!-- Shown if you have followed trackers or languages -->
+      <div class="row" ng-show="followedTrackers.length > 0 || myLanguages.length > 0">
+        <div class="col-sm-6 col-md-6">
+          <h5>Follow these projects</h5>
+          <em class="text-muted" ng-hide="followedTrackers.length > 0">No projects followed</em>
+          <ul ng-show="followedTrackers.length > 0">
+            <li ng-repeat="tracker in followedTrackers | orderBy:'-watchers' | limitTo:5">
+              <span>{{tracker.full_name}}</span>
+            </li>
+
+            <li ng-show="followedTrackers.length > 5">
+              <em>...and {{followedTrackers.length - 5 | number}} more</em>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-md-6">
+          <h5>Languages I know</h5>
+          <em class="text-muted" ng-hide="myLanguages.length > 0">No languages added</em>
+          <ul ng-show="myLanguages.length > 0">
+            <li ng-repeat="language in myLanguages | orderBy:'-weight' | limitTo:5">
+              <span>{{language.name}}</span>
+            </li>
+
+            <li ng-show="myLanguages.length > 5">
+              <em>...and {{myLanguages.length - 5 | number}} more</em>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div ng-show="followedTrackers.length <= 0 && myLanguages.length <= 0">
+        <p>Select your favorite projects and preferred programming languages on the next page to receive bounty alerts.</p>
+      </div>
+
+      <div class="visible-sm">
+        <button class="btn btn-link pull-left" ng-click="notInterested()">Not interested</button>
+        <button class="btn btn-link pull-left" ng-click="closeModal()">Complete later</button>
+      </div>
+    </div>
+
+    <div ng-show="$currentPage.id === 'trackers'">
+      <div style="min-height: 200px;">
+        <div>
+          <form class="form" name="addTrackerForm"></form>
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <input name="input" type="text" class="search-query span12 form-control"
+                     placeholder="Search for projects to follow" ng-model="$parent.newFollowedTracker"
+                     typeahead="tracker as tracker.name for tracker in trackerSearchTypeahead($viewValue)"
+                     typeahead-editable="false">
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align: center;">
+          <h5>Top Projects</h5>
+          <ul class="list-inline" style="padding: 0 15px;">
+            <li ng-repeat="tracker in topTrackers | orderBy:'-rank'" tooltip="{{tracker.name}}">
+              <a class="thumbnail" ng-click="addTracker(tracker)">
+                <img ng-src="{{tracker.image_url}}" style="width: 32px; height: 32px;">
+              </a>
+            </li>
+          </ul>
+        </div>
+        <br>
+
+        <div ng-show="followedTrackers.length > 0" class="text-right">
+          <a ng-click="removeAllFollowedTrackers()">Remove All</a>
+        </div>
+        <br>
+        <table class="table table-striped table-no-head">
+          <tbody>
+          <tr ng-repeat="tracker in followedTrackers | orderBy:'+name'">
+            <td>
+              <span style="padding-right: 5px;">
+                <img class="img-rounded pull-left" ng-src="{{tracker.image_url}}" style="width: 20px; height: 20px;">
+              </span>
+              <span>{{(tracker.full_name || tracker.name)}}</span>
+              <div class="pull-right">
+                <a ng-click="removeFollowedTracker(tracker)">Remove</a>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div ng-show="$currentPage.id === 'languages'">
+      <div style="min-height: 200px;">
+        <div>
+          <form class="form" name="form"></form>
+          <div class="row">
+            <div class="col-sm-12 col-lg-12">
+              <input type="text" class="search-query form-control" name="input" placeholder="Search for languages that you know"
+                     ng-model="newLanguage"
+                     typeahead="language as language.name for language in languages | filter:$viewValue"
+                     typeahead-editable="false"
+                     typeahead-on-select="languageSelected(newLanguage)">
+            </div>
+          </div>
+
+        </div>
+        <br>
+
+        <div ng-show="myLanguages.length > 0" class="text-right">
+          <a ng-click="removeAllLanguages()">Remove All</a>
+        </div>
+        <br>
+        <table class="table table-striped table-no-head">
+          <tbody>
+          <tr>
+          </tr>
+
+          <tr ng-repeat="language in myLanguages | orderBy:'name'">
+            <td>
+              <span>{{language.name}}</span>
+
+              <div class="pull-right">
+                <a ng-click="removeLanguage(language)">Remove</a>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <ng-include src="'common/templates/profileCompleteModal/progressionButtons.html'"></ng-include>
+  </div>
+</div>
