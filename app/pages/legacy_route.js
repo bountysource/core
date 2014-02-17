@@ -5,150 +5,150 @@ angular.module('app.legacyRoutes', ['ngRoute'])
     $routeProvider
       .when('/about', {
         redirectTo: "/learn",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account', {
         redirectTo: "/settings",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/forgot_password', {
         redirectTo: "/signin/reset",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/change_password', {
         redirectTo: "/settings/accounts",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/projects', {
         redirectTo: "/tools",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/tools', {
         redirectTo: "/tools",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/users/:id', {
         redirectTo: function(param) { return "/people/"+param.id; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/trackers/:id/issues', {
         redirectTo: function(param) { return "/trackers/"+param.id; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/issues/:issue_id/bounties/:id/receipt', {
         redirectTo: function() { return "/activity/bounties"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/issues/:issue_id/solutions/:id/disputes/create', {
         redirectTo: function(param) { return "/issues/"+param.issue_id+"/solutions"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/issues/:issue_id/solutions/:id/disputes', {
         redirectTo: function(param) { return "/issues/"+param.issue_id+"/solutions"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/issues/:issue_id/comments', {
         redirectTo: function(param) { return "/issues/"+param.issue_id; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/solutions', {
         redirectTo: "/activity/solutions",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/solutions/:id', {
         redirectTo: function() { return "/activity/solutions"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/contributions', {
         redirectTo: "/activity",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/termsofservice', {
         redirectTo: "/terms",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/privacypolicy', {
         redirectTo: "/privacy",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/fundraisers/:id/edit/basic-info', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/fundraisers/:id/edit/description', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/fundraisers/:id/edit/description', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/fundraisers/:id/edit/rewards', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/fundraisers/:id/edit/funding', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/fundraisers/:id/edit/duration', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/fundraisers', {
         redirectTo: "/activity/fundraisers",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/create_fundraiser', {
         redirectTo: "/fundraisers/new",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/fundraisers/:fundraiser_id/pledges/:id', {
         redirectTo: function() { return "/activity/pledges"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/fundraisers/:id/info', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/rewards"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/undefined', {
         redirectTo: "/",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/fundraisers/:id/basic_info', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/fundraisers/:id/description', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/fundraisers/:id/rewards', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/fundraisers/:id/funding', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/account/fundraisers/:id/duration', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/bounties', {
         redirectTo: "/bounties/search",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/create_account', {
         redirectTo: "/signin",
-        controller: 'Static'
+        controller: 'StaticPageController'
       })
       .when('/activity/solutions', {
         redirectTo: "/activity/claims",
-        controller: 'Static'
+        controller: 'StaticPageController'
       }).when('/fundraisers/:id/pledges', {
         redirectTo: function(param) { return "/fundraisers/"+param.id+"/backers"; },
-        controller: 'Static'
+        controller: 'StaticPageController'
       }).when('/issues/:issue_id/solutions', {
         redirectTo: function(params) { return "/issues/"+params.issue_id+"/claims"; }
       });

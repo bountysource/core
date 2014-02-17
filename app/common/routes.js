@@ -126,7 +126,7 @@ angular.module('app.routes').config(function ($routeProvider, personResolver) {
 
   $routeProvider.when('/enterprise', angular.extend({
     templateUrl: 'pages/enterprise/index.html',
-    controller: 'Static'
+    controller: 'StaticPageController'
   }, defaultRouteOptions));
 
   $routeProvider.when('/fundraisers/:id/updates/:update_id/edit', angular.extend({
