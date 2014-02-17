@@ -74,7 +74,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="issue in issues | orderBy:$orderData.column:$orderData.reverse">
+  <tr ng-repeat="issue in issues | orderBy:$orderData.column:$orderData.reverse | filter: $filterData">
     <td ng-if="$showTrackerImage">
       <a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}">
         <img src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;"/>
@@ -88,6 +88,8 @@
         <i class="glyphicon glyphicon-fire text-danger" ng-if="issue.bounty_total >= 1000"></i>
         {{issue.title}}
       </a>
+      <span ng-show="issue.paid_out" class="label label-primary">paid out</span>
+      <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
     </td>
     <td ng-if="$showBountyTotal" style="text-align: center">
       <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">

@@ -1,15 +1,16 @@
 'use strict';
 
-angular.module('bountysource.directives').directive('issuesList', function() {
+angular.module('bountysource.directives').directive('issueList', function() {
   return {
     restrict: "E",
-    templateUrl: "pages/issues/partials/issues_list.html",
+    templateUrl: "common/directives/issueList/templates/issueList.html",
     replace: true,
     scope: {
       issues: "=",
 
       // Optional columns to include
-      include: "="
+      include: "=",
+      filter: "="
     },
     link: function(scope) {
       // Default sort order to participant count descending.
@@ -17,6 +18,9 @@ angular.module('bountysource.directives').directive('issuesList', function() {
         column: "participants_count",
         reverse: true
       };
+
+      // Set filter data
+      scope.$filterData = scope.filter;
 
       /*
        * Change the sort order of the table.

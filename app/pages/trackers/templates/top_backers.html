@@ -1,26 +1,30 @@
-<div ng-controller="TrackerLeaderboardController" ng-show="backers.length > 0" class="well" style="padding-top:0px; padding-bottom:0px">
-  <h3 class="text-center"><ng-pluralize count="backers.length" when="{'1': 'Top Backer', 'other':'Top Backers'}"></ng-pluralize></h3>
-  <table class="table top-backers-table">
-    <tbody><tr ng-repeat="backer in backers | orderBy:'-total_backed'| limitTo:3">
-      <!--Profile picture. No link if anon-->
-      <td style="width: 50px">
-        <div>
+<div ng-controller="TrackerLeaderboardController" ng-show="backers.length > 0" class="panel panel-primary" style="padding-top:0px; padding-bottom:0px">
+  <div class="panel-heading">
+    <h3 class="panel-title text-center"><ng-pluralize count="backers.length" when="{'1': 'Top Backer', 'other':'Top Backers'}"></ng-pluralize></h3>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr ng-repeat="backer in backers | orderBy:'-total_backed'| limitTo:3">
+        <!--Profile picture. No link if anon-->
+        <td style="width: 30%">
           <div>
-            <a owner-href="backer" class="thumbnail">
-              <img style="width: 50px; max-width: 50px; height: 50px" ng-src="{{backer.image_url}}">
+            <div>
+              <a owner-href="backer" class="thumbnail">
+                <img class="img-responsive" ng-src="{{backer.image_url}}">
+              </a>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div>
+            <a owner-href="backer">
+              <span>{{backer.display_name}}</span>
             </a>
           </div>
-        </div>
-      </td>
-
-      <td>
-        <div>
-          <a owner-href="backer">
-            <span>{{backer.display_name}}</span>
-          </a>
-        </div>
-        <div><strong>{{ backer.total_backed | dollars }}</strong></div>
-      </td>
-    </tr>
-    </tbody></table>
+          <div><strong>{{ backer.total_backed | dollars }}</strong></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
