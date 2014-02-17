@@ -259,7 +259,7 @@ angular.module('app.directives').directive('postAccountCreateWizard', ['$locatio
         }
         $api.tracker_unfollow(tracker.id);
 
-        $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'unfollow_tracker/' + tracker.id]);
+        $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'unfollow_tracker', tracker.id]);
       };
 
       scope.removeAllFollowedTrackers = function() {
