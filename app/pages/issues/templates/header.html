@@ -1,10 +1,10 @@
 <div>
   <div class="hidden-sm">
     <div class="row">
-      <div class="col-sm-1 col-md-1">
-        <a ng-href="/trackers/{{issue.tracker.slug}}"><img ng-src="{{issue.tracker.image_url}}" class="thumbnail"></a>
+      <div class="col-sm-2 col-md-2">
+        <a ng-href="/trackers/{{issue.tracker.slug}}"><img ng-src="{{issue.tracker.image_url}}" class="img-responsive thumbnail"></a>
       </div>
-      <div class="col-sm-11 col-md-11">
+      <div class="col-sm-10 col-md-10">
         <h4 style="margin-top: 0;">{{ issue.title || 'Loading...' }}</h4>
         <issue-status-label issue="issue"></issue-status-label>
       </div>
