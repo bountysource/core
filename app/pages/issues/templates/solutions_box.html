@@ -1,15 +1,16 @@
-<div ng-controller="SolutionsBaseController" class="well" ng-show="solutions.length > 0">
+<div ng-controller="SolutionsBaseController" class="panel panel-default" ng-show="solutions.length > 0">
+  <div class="panel-heading">
+    <h4 class="text-center panel-title" style="margin-top: 0;"><ng-pluralize count="solutions.length" when="{'one': '1 Developer Working', 'other': '{} Developers Working'}"></ng-pluralize></h4>
+  </div>
   <div style="padding-top: 0px; padding-bottom: 0px;">
-    <!-- <h4 class="text-center">Recent Developer Work</h4> -->
-    <h4 class="text-center" style="margin-top: 0;"><ng-pluralize count="solutions.length" when="{'one': '1 Developer Working', 'other': '{} Developers Working'}"></ng-pluralize></h4>
     <table class="table top-backers-table" style="margin-bottom:10px; word-wrap: break-word; table-layout:fixed;">
       <tbody><tr ng-repeat="solution in solutions | orderBy:'-status.created_at'| limitTo:4">
         <!--Profile picture. No link if anon-->
-        <td style="width:55px">
+        <td style="width:30%">
           <div>
             <div>
-              <a class="thumbnail">
-                <img style="width: 50px; height: 50px" ng-src="{{solution.person.image_url}}">
+              <a class="thumbnail" ng-href="/people/{{solution.person.slug}}">
+                <img ng-src="{{solution.person.image_url}}" class="img-responsive">
               </a>
             </div>
           </div>
@@ -20,16 +21,14 @@
             <span><a ng-href="/people/{{solution.person.slug}}">{{solution.person.display_name | truncate:14 }}</a></span>
           </div>
           <div ng-switch="solution.status.type">
-            <span ng-switch-when="SolutionEvent::Started" class="label label-info">Started Solution</span>
-            <span ng-switch-when="SolutionEvent::CheckIn" class="label label-info">Checked In</span>
-            <span ng-switch-when="SolutionEvent::Stopped" class="label label-important">Stopped Working</span>
+            <span ng-switch-when="SolutionEvent::Started" class="label label-primary">Started Solution</span>
+            <span ng-switch-when="SolutionEvent::CheckIn" class="label label-primary">Checked In</span>
+            <span ng-switch-when="SolutionEvent::Stopped" class="label label-danger">Stopped Working</span>
             <span ng-switch-when="SolutionEvent::Idle" class="label label-warning">Went Idle</span>
             <span ng-switch-when="SolutionEvent::Completed" class="label label-success">Finished</span>
             <span ng-switch-default=""></span>
           </div>
-          <span collapse="!solution.show_details">
-            <a ng-click="solution.show_details = !solution.show_details"><span ng-hide="solution.show_details">View More</span><span ng-show="solution.show_details">Hide</span></a>
-          </span>
+          <a ng-click="solution.show_details = !solution.show_details"><span ng-hide="solution.show_details">View More</span><span ng-show="solution.show_details">Hide</span></a>
           <div collapse="!solution.show_details">
             <div><small><strong>Started on:</strong></small></div>
             <div>{{ solution.status.created_at | date }}</div>
