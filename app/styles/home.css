@@ -30,7 +30,7 @@
 @media (min-width: 980px) and (max-width: 1199px) {
   .homepage #top h1 { font-size: 45px; line-height: 45px; }
   .homepage #top h2 { font-size: 22px; margin: 10px 0 10px; }
-  .well { min-height: 290px; max-height: 290px;}
+  .well { min-height: 290px; max-height: 350px;}
   .search-query { width: 150px; }
   .button1 {margin-top: 20px; }
   .button2 {margin-top: 40px; }
