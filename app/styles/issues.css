@@ -47,7 +47,7 @@ li.task-list-item-checked br {
   display: none;
 }
 
-.bounty-buttons .btn { margin-top: 0; }
+div.bounty-buttons { padding: 2%; }
 .bounty-buttons .controls { margin-top: 10px; }
 .bounty-buttons .controls:first-of-type { margin-top: 0; }
 
