@@ -80,3 +80,15 @@ div.update-header-options > div.update-options {
 
 .table-fundraiser-issues .goal-met td:first-child a { text-decoration:line-through; }
 .table-fundraiser-issues .goal-met td:first-child:before { content: '✓ '; color: green; font-weight: bold; text-decoration: none !important; }
+
+@media (min-width: 980px) and (max-width: 1199px) {
+  div.well.text-center div h3 {
+    font-size: 1.4em;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  div.well.text-center div h3 {
+    font-size: 1em;
+  }
+}
