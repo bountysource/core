@@ -92,3 +92,7 @@ div.update-header-options > div.update-options {
     font-size: 1em;
   }
 }
+
+div.well.ng-binding p a {
+  word-wrap: break-word;
+}
