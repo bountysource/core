@@ -29,12 +29,12 @@ angular.module('app')
     $scope.query = {};
 
     $scope.toggle_advanced_search = function () {
-      $scope.show_advanced_search = !$scope.show_advanced_search
+      $scope.show_advanced_search = !$scope.show_advanced_search;
       // when hiding the advanced_search, clear those fields
       if (!$scope.show_advanced_search) {
-        delete $scope.search_parameters.query
-        delete $scope.search_parameters.created_at
-        delete $scope.search_parameters.active_since
+        delete $scope.search_parameters.query;
+        delete $scope.search_parameters.created_at;
+        delete $scope.search_parameters.active_since;
       }
     };
 
@@ -50,7 +50,7 @@ angular.module('app')
         $scope.search_parameters.direction = "desc"; //assume that if you are changing the order you want desc already
       }
       $scope.search_parameters.order = column;
-      $scope.get_team_issues(page)
+      $scope.get_team_issues(page);
     };
 
     $scope.get_team_issues = function (page, per_page) {
@@ -59,9 +59,7 @@ angular.module('app')
 
       $scope.search_parameters.per_page = per_page || 25;
       $scope.search_parameters.page = page || 1;
-      console.log($scope.search_parameters);
       $api.team_issues($routeParams.id, $scope.search_parameters).then(function(search_data) {
-        console.log(search_data); 
         updateIssues(search_data);
       });
 
