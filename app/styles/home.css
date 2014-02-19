@@ -30,7 +30,7 @@
 @media (min-width: 980px) and (max-width: 1199px) {
   .homepage #top h1 { font-size: 45px; line-height: 45px; }
   .homepage #top h2 { font-size: 22px; margin: 10px 0 10px; }
-  .well { min-height: 290px; max-height: 290px;}
+ /* .well { min-height: 290px; max-height: 290px;}*/
   .search-query { width: 150px; }
   .button1 {margin-top: 20px; }
   .button2 {margin-top: 40px; }
@@ -38,7 +38,7 @@
 @media (min-width: 768px) and (max-width: 979px) {
   .homepage #top h1 { font-size: 42px; line-height: 42px; }
   .homepage #top h2 { font-size: 20px; line-height: 20px }
-  .well { min-height: 320px; max-height: 320px; }
+ /* .well { min-height: 320px; max-height: 320px; }*/
   .search-query { width: 100px; }
   .button1 {margin-top: 40px; }
   .button2 {margin-top: 20px; }
@@ -46,7 +46,7 @@
 @media (min-width: 481px) and (max-width: 767px) {
   .homepage #top h1 { font-size: 38px; line-height: 44px; white-space: pre-line; }
   .homepage #top h2 { font-size: 20px; line-height: 26px; }
-  .well { min-height: 320px; max-height: 320px; }
+ /* .well { min-height: 320px; max-height: 320px; }*/
   .search-query { width: 100px; }
   .button1 {margin-top: 40px; }
   .button2 {margin-top: 20px; }
@@ -112,3 +112,7 @@
   a[id^="home-tr-img-"] { margin-left: 25px; }
   a[id^="home-fr-img-"] { margin-left: 25px; }
 }
+/*
+
+
+*/

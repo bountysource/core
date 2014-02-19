@@ -14,6 +14,59 @@
       <ng-include src="'pages/teams/partials/header.html'"></ng-include>
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
+
+      <div>
+        <div class="row-fluid well">
+          <div class="span4">
+            <form class="form-inline no-margin" style="text-align: center; vertical-align: middle">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="search_parameters.show_team_issues" ng-change="get_team_issues()"></input>
+                Team Issues <i class="icon-question-sign" tooltip="Show issues for projects managed by your organization"></i>
+              </label>
+            </form>
+          </div>
+          <div class="span4">
+            <form class="form-inline no-margin" style="text-align: center; vertical-align: middle">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="search_parameters.show_related_issues" ng-change="get_team_issues()"></input>
+                Related Issues <i class="icon-question-sign" tooltip="Show issues for projects your organization uses"></i>
+              </label>
+            </form></div>
+          <div class="span4">
+            <a ng-click="toggle_advanced_search()" class="btn btn-link">
+              <span ng-show="show_advanced_search">« Hide Advanced Search</span>
+              <span ng-show="!show_advanced_search">Advanced Search »</span>
+            </a>
+          </div>
+        </div>
+        <div collapse="!show_advanced_search">
+          <form class="form-horizontal">
+            <div class="control-group">
+              <div class="control-label">Contains</div>
+              <div class="controls">
+                <input class="span8" type="text" ng-model="search_parameters.query" placeholder="Phrase in issue body or title"></input>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="control-label">Created After</div>
+              <div class="controls"><input type="text" ng-model="search_parameters.created_at" placeholder="mm/dd/yyyy"></input></div>
+            </div>
+
+            <div class="control-group">
+              <div class="control-label">Active Since</div>
+              <div class="controls"><input type="text" ng-model="search_parameters.last_event_created_at" placeholder="mm/dd/yyyy"></input></div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+                <button class="btn btn-primary" ng-click="get_team_issues()">Search</button>
+                <button class="btn" ng-click="toggle_advanced_search()">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
       <!-- Loading message... -->
       <div collapse="issues_resolved" class="text-center">
         <p class="lead">Loading issues...</p>
@@ -24,23 +77,24 @@
 
       <div ng-show="issues_resolved">
         <div ng-show="issues.length > 0">
-          <table class="table table-condensed table-striped">
+          <p><span class="label label-success">{{ issues_count }}</span> <strong>Issues Found</strong></p>
+          <table class="table table-condensed table-striped" style="table-layout: fixed">
             <thead>
               <tr>
-                <th></th>
-                <th><a ng-click="update_sort(issue_sort, 'tracker.name')">Project</a></th>
-                <th><a ng-click="update_sort(issue_sort, 'title')">Name</a></th>
-                <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
-                <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
-                <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'participants_count')" tooltip="Watchers"><i class="icon-user"></i></a></th>
-                <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'created_at')" tooltip="Age of Issue"><i class="icon-time"></i></a></th>
+                <th style="width:5%"></th>
+                <th style="width:20%"><a ng-click="update_sort('tracker.name')">Project</a></th>
+                <th style="width: 55%;"><a ng-click="update_sort('title')">Name</a></th>
+                <th style="width: 5%; text-align:center;"><a ng-click="update_sort('bounty_total', search_parameters.page)" tooltip="Bounty total"><span style="width: 5%; color: black">$</span></a></th>
+                <th style="width: 5%; text-align:center;"><a ng-click="update_sort('thumbs_up_count', search_parameters.page)" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
+                <th style="width: 5%; text-align:center;"><a ng-click="update_sort('participants_count', search_parameters.page)" tooltip="Watchers"><i class="icon-user"></i></a></th>
+                <th style="width: 5%; text-align:center;"><a ng-click="update_sort('remote_created_at', search_parameters.page)" tooltip="Age of Issue"><i class="icon-time"></i></a></th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="issue in issues | orderBy:issue_sort.column:issue_sort.desc">
+              <tr ng-repeat="issue in issues">
                 <td><a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}"><img src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;" /></a></td>
                 <td><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a></td>
-                <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
+                <td style="overflow: hidden; text-overflow: ellipsis"><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
                 <td style="text-align: center">
                   <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
                     {{issue.bounty_total | dollars:{space:true} }}
@@ -52,6 +106,9 @@
               </tr>
             </tbody>
           </table>
+        </div>
+        <div ng-show="issues_count > search_parameters.per_page">
+          <pagination total-items="issues_count" current-page="search_parameters.page" max-size="maxPaginationSize" num-pages="pageCount" on-select-page="get_team_issues(page)"></pagination>
         </div>
         <div ng-hide="issues.length > 0">
           <h4 class="alert alert-info">There are no issues associated with this team</h4>
