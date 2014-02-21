@@ -17,12 +17,7 @@ angular.module('app')
       show_team_issues: true,
       show_related_issues: false,
       direction: "desc",
-      order: "weight"
-    };
-
-    $scope.issue_sort = {
-      column: "participants_count",
-      desc: true
+      order: "rank"
     };
 
     // query object
@@ -60,6 +55,7 @@ angular.module('app')
       $scope.search_parameters.per_page = per_page || 25;
       $scope.search_parameters.page = page || 1;
       $api.team_issues($routeParams.id, $scope.search_parameters).then(function(search_data) {
+        console.log(search_data);
         updateIssues(search_data);
       });
 
