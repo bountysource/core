@@ -15,7 +15,7 @@ angular.module('app')
     $scope.show_advanced_search = false;
     $scope.search_parameters = {
       show_team_issues: true,
-      show_related_issues: false,
+      show_related_issues: true,
       direction: "desc",
       order: "rank"
     };
