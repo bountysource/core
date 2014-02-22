@@ -77,13 +77,13 @@
 
       <div ng-show="issues_resolved">
         <div ng-show="issues.length > 0">
-          <p><span class="label label-success">{{ issues_count }}</span> <strong>Issues Found</strong></p>
+          <p><span class="label label-success">{{ issues_count }}</span> <strong>Suggested Issues</strong></p>
           <table class="table table-condensed table-striped" style="table-layout: fixed">
             <thead>
               <tr>
                 <th style="width:5%"></th>
                 <th style="width:20%"><a ng-click="update_sort('tracker.name')">Project</a></th>
-                <th style="width: 51%;"><a ng-click="update_sort('title')">Name</a></th>
+                <th style="width: 51%;"><a ng-click="update_sort('title')">Issue Title</a></th>
                 <th style="width: 6%; text-align:center;"><a ng-click="update_sort('bounty_total', search_parameters.page)" tooltip="Bounty total"><span style="width: 5%; color: black">$</span></a></th>
                 <th style="width: 6%; text-align:center;"><a ng-click="update_sort('thumbs_up_count', search_parameters.page)" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
                 <th style="width: 6%; text-align:center;"><a ng-click="update_sort('participants_count', search_parameters.page)" tooltip="Watchers"><i class="icon-user"></i></a></th>
