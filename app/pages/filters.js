@@ -49,7 +49,19 @@ angular.module('app').
       new_url = new_url.replace(/\/$/, '');
       return new_url;
     };
-  }).filter('from_snake_case', function() {
+  }).filter('url', function () {
+    return function (string) {
+      var url = string;
+      if (url.match(/https?:\/\//)) {
+        // do nothing. already has http(s)
+      } else {
+        url = "https://" + url
+      }
+
+      return url
+    }
+  })
+  .filter('from_snake_case', function() {
     // Convert snakecase to words
     return function(s) {
       var parts = s.replace(/[_-]/g, " ").split(" ");

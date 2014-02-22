@@ -2,7 +2,7 @@
   <div class="well text-center">
     <div><img ng-src="{{team.large_image_url}}" style="width: 100%;"/></div>
     <br />
-    <div><a class="btn btn-block" ng-href="{{team.url}}" target="_blank"><i class="icon-globe"></i> Homepage</a></div>
+    <div><a class="btn btn-block" ng-href="{{ team.url | url }}" target="_blank"><i class="icon-globe"></i> Homepage</a></div>
   </div>
 
   <div ng-show="is_member">
