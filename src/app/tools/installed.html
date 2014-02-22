@@ -1,0 +1,30 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/tools">Tools</a></li>
+</ul>
+
+<ng-include src="'app/tools/templates/header.html'"></ng-include>
+<ng-include src="'app/tools/templates/tabs.html'"></ng-include>
+
+<div class="row" ng-controller="InstalledPluginsController">
+  <div class="col-sm-5 col-md-5">
+    <loading-bar ng-show="loading_trackers">Loading your projects...</loading-bar>
+
+    <div ng-hide="loading_trackers">
+      <ng-include src="'app/tools/templates/trackers.html'"></ng-include>
+    </div>
+  </div>
+
+  <div class="col-sm-7 col-md-7">
+    <div ng-show="plugin_alert.text">
+      <alert type="plugin_alert.type" close="plugin_alert.text = null">{{plugin_alert.text}}</alert>
+    </div>
+
+    <div collapse="!current_tracker">
+      <ng-include src="'app/tools/templates/plugin_settings.html'"></ng-include>
+      <br>
+    </div>
+
+    <ng-include src="'app/tools/templates/info.html'"></ng-include>
+  </div>
+</div>

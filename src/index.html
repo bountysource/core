@@ -1,0 +1,214 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Bountysource</title>
+  <base href="/"/>
+  <meta name="viewport" content="width=device-width">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <!-- build:css images/bootstrap.css -->
+  <link rel="stylesheet" href="../vendor/bootstrap/dist/css/bootstrap.css">
+  <!-- endbuild -->
+
+  <!-- build:css images/colorpicker.css -->
+  <link rel="stylesheet" href="../vendor/angular-bootstrap-colorpicker/css/colorpicker.css">
+  <!-- endbuild -->
+
+  <!-- build:css images/app.css -->
+  <link rel="stylesheet" href="less/about.css">
+  <link rel="stylesheet" href="less/chatroom.css">
+  <link rel="stylesheet" href="less/companies.css">
+  <link rel="stylesheet" href="less/fundraisers.css">
+  <link rel="stylesheet" href="less/home.css">
+  <link rel="stylesheet" href="less/issues.css">
+  <link rel="stylesheet" href="less/layout.css">
+  <link rel="stylesheet" href="less/learn.css">
+  <link rel="stylesheet" href="less/people.css">
+  <link rel="stylesheet" href="less/signin.css">
+  <link rel="stylesheet" href="less/search.css">
+  <link rel="stylesheet" href="less/settings.css">
+  <link rel="stylesheet" href="less/bounty_claims.css">
+  <link rel="stylesheet" href="less/teams.css">
+  <link rel="stylesheet" href="less/tools.css">
+  <link rel="stylesheet" href="less/trackers.css">
+  <!-- endbuild -->
+</head>
+<body ng-app="app" ng-controller="MainController">
+
+<div id="wrap">
+  <ng-include src="'app/layout/navbar.html'"></ng-include>
+  <div ng-class="{ 'container': !no_container }" ng-view></div>
+</div>
+
+<div id="footer">
+  <ng-include src="'app/layout/footer.html'"></ng-include>
+</div>
+
+<!--[if lt IE 9]>
+<script src="vendor/es5-shim/es5-shim.js"></script>
+<![endif]-->
+
+<!-- build:js images/components.js -->
+<!-- angular components -->
+<script src="vendor/angular/angular.js"></script>
+<script src="vendor/angular-route/angular-route.js"></script>
+<script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="vendor/angular-resource/angular-resource.js"></script>
+<script src="vendor/angular-cookies/angular-cookies.js"></script>
+<script src="vendor/angular-sanitize/angular-sanitize.js"></script>
+<script src="vendor/momentjs/moment.js"></script>
+<script src="vendor/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+<!-- endbuild -->
+<script>window.Moment = window.moment;</script>
+
+<!-- build:js images/app.js -->
+<!-- html_src start -->
+    <script src="app/app.js" type="text/javascript"></script>
+    <script src="app/about/static.js" type="text/javascript"></script>
+    <script src="app/activity/bounties.js" type="text/javascript"></script>
+    <script src="app/activity/bounty_claims.js" type="text/javascript"></script>
+    <script src="app/activity/fundraisers.js" type="text/javascript"></script>
+    <script src="app/activity/pledges.js" type="text/javascript"></script>
+    <script src="app/activity/tabs.js" type="text/javascript"></script>
+    <script src="app/activity/timeline.js" type="text/javascript"></script>
+    <script src="app/activity/transactions.js" type="text/javascript"></script>
+    <script src="app/auth/auth.js" type="text/javascript"></script>
+    <script src="app/bounties/search.js" type="text/javascript"></script>
+    <script src="app/cart/cart.js" type="text/javascript"></script>
+    <script src="app/fundraiser_updates/edit.js" type="text/javascript"></script>
+    <script src="app/fundraiser_updates/show.js" type="text/javascript"></script>
+    <script src="app/fundraiser_updates/top_backers.js" type="text/javascript"></script>
+    <script src="app/fundraisers/base.js" type="text/javascript"></script>
+    <script src="app/fundraisers/create.js" type="text/javascript"></script>
+    <script src="app/fundraisers/edit.js" type="text/javascript"></script>
+    <script src="app/fundraisers/index.js" type="text/javascript"></script>
+    <script src="app/fundraisers/leaderboard.js" type="text/javascript"></script>
+    <script src="app/fundraisers/nav_tabs.js" type="text/javascript"></script>
+    <script src="app/fundraisers/pledge.js" type="text/javascript"></script>
+    <script src="app/fundraisers/pledges.js" type="text/javascript"></script>
+    <script src="app/fundraisers/rewards.js" type="text/javascript"></script>
+    <script src="app/fundraisers/show.js" type="text/javascript"></script>
+    <script src="app/fundraisers/updates.js" type="text/javascript"></script>
+    <script src="app/google_analytics.js" type="text/javascript"></script>
+    <script src="app/google_wallet.js" type="text/javascript"></script>
+    <script src="app/home/home.js" type="text/javascript"></script>
+    <script src="app/home/newHome.js" type="text/javascript"></script>
+    <script src="app/home/search.js" type="text/javascript"></script>
+    <script src="app/issues/bounties.js" type="text/javascript"></script>
+    <script src="app/issues/bounty.js" type="text/javascript"></script>
+    <script src="app/issues/bounty_box.js" type="text/javascript"></script>
+    <script src="app/issues/bounty_claims.js" type="text/javascript"></script>
+    <script src="app/issues/developer_goals_base.js" type="text/javascript"></script>
+    <script src="app/issues/issues_base.js" type="text/javascript"></script>
+    <script src="app/issues/nav_tabs.js" type="text/javascript"></script>
+    <script src="app/issues/new.js" type="text/javascript"></script>
+    <script src="app/issues/show.js" type="text/javascript"></script>
+    <script src="app/issues/solutions_base.js" type="text/javascript"></script>
+    <script src="app/layout/navbar.js" type="text/javascript"></script>
+    <script src="app/legacy_route.js" type="text/javascript"></script>
+    <script src="app/livereload.js" type="text/javascript"></script>
+    <script src="app/main.js" type="text/javascript"></script>
+    <script src="app/notifications/cancel_all.js" type="text/javascript"></script>
+    <script src="app/notifications/unsubscribe.js" type="text/javascript"></script>
+    <script src="app/people/activity.js" type="text/javascript"></script>
+    <script src="app/press/index.js" type="text/javascript"></script>
+    <script src="app/settings/accounts.js" type="text/javascript"></script>
+    <script src="app/settings/email.js" type="text/javascript"></script>
+    <script src="app/settings/profile.js" type="text/javascript"></script>
+    <script src="app/settings/tabs.js" type="text/javascript"></script>
+    <script src="app/signin/callback.js" type="text/javascript"></script>
+    <script src="app/signin/reset.js" type="text/javascript"></script>
+    <script src="app/signin/signin.js" type="text/javascript"></script>
+    <script src="app/teams/account.js" type="text/javascript"></script>
+    <script src="app/teams/activity.js" type="text/javascript"></script>
+    <script src="app/teams/base.js" type="text/javascript"></script>
+    <script src="app/teams/bounties.js" type="text/javascript"></script>
+    <script src="app/teams/index.js" type="text/javascript"></script>
+    <script src="app/teams/issues.js" type="text/javascript"></script>
+    <script src="app/teams/join.js" type="text/javascript"></script>
+    <script src="app/teams/manage_members.js" type="text/javascript"></script>
+    <script src="app/teams/new.js" type="text/javascript"></script>
+    <script src="app/teams/projects.js" type="text/javascript"></script>
+    <script src="app/teams/settings.js" type="text/javascript"></script>
+    <script src="app/teams/show.js" type="text/javascript"></script>
+    <script src="app/tools/base.js" type="text/javascript"></script>
+    <script src="app/tools/installed.js" type="text/javascript"></script>
+    <script src="app/trackers/edit.js" type="text/javascript"></script>
+    <script src="app/trackers/index.js" type="text/javascript"></script>
+    <script src="app/trackers/nav_tabs.js" type="text/javascript"></script>
+    <script src="app/trackers/show.js" type="text/javascript"></script>
+    <script src="app/trackers/top_backers.js" type="text/javascript"></script>
+    <script src="app/transactions/show.js" type="text/javascript"></script>
+    <script src="common/constants/personResolver.js" type="text/javascript"></script>
+    <script src="common/directives/abRandomize/abRandomize.js" type="text/javascript"></script>
+    <script src="common/directives/backerThumbnails/backerThumbnails.js" type="text/javascript"></script>
+    <script src="common/directives/claimContent/claimContent.js" type="text/javascript"></script>
+    <script src="common/directives/favicon/favicon.js" type="text/javascript"></script>
+    <script src="common/directives/fundraiserCard/fundraiserCard.js" type="text/javascript"></script>
+    <script src="common/directives/gaqTrackClick/gaqTrackClick.js" type="text/javascript"></script>
+    <script src="common/directives/inputSlug/inputSlug.js" type="text/javascript"></script>
+    <script src="common/directives/integerOnly/integerOnly.js" type="text/javascript"></script>
+    <script src="common/directives/issueList/issueList.js" type="text/javascript"></script>
+    <script src="common/directives/issueStatusLabel/issueStatusLabel.js" type="text/javascript"></script>
+    <script src="common/directives/loadingBar/loadingBar.js" type="text/javascript"></script>
+    <script src="common/directives/ngAutofillAware/ngAutofillAware.js" type="text/javascript"></script>
+    <script src="common/directives/ngBlur/ngBlur.js" type="text/javascript"></script>
+    <script src="common/directives/ngClickRequireAuth/ngClickRequireAuth.js" type="text/javascript"></script>
+    <script src="common/directives/ngFocus/ngFocus.js" type="text/javascript"></script>
+    <script src="common/directives/ownerHref/ownerHref.js" type="text/javascript"></script>
+    <script src="common/directives/personIcon/personIcon.js" type="text/javascript"></script>
+    <script src="common/directives/projectCard/projectCard.js" type="text/javascript"></script>
+    <script src="common/directives/requireGithubAuth/requireGithubAuth.js" type="text/javascript"></script>
+    <script src="common/directives/requireGplus/requireGplus.js" type="text/javascript"></script>
+    <script src="common/directives/requireTwitter/requireTwitter.js" type="text/javascript"></script>
+    <script src="common/directives/selectOnClick/selectOnClick.js" type="text/javascript"></script>
+    <script src="common/directives/targetBlank/targetBlank.js" type="text/javascript"></script>
+    <script src="common/directives/teamTrackerThumbnails/teamTrackerThumbnails.js" type="text/javascript"></script>
+    <script src="common/filters/atLeast.js" type="text/javascript"></script>
+    <script src="common/filters/atMost.js" type="text/javascript"></script>
+    <script src="common/filters/cleanUrl.js" type="text/javascript"></script>
+    <script src="common/filters/dollars.js" type="text/javascript"></script>
+    <script src="common/filters/emptyFilter.js" type="text/javascript"></script>
+    <script src="common/filters/encodeUriQuery.js" type="text/javascript"></script>
+    <script src="common/filters/fromSnakeCase.js" type="text/javascript"></script>
+    <script src="common/filters/fundraiserStatus.js" type="text/javascript"></script>
+    <script src="common/filters/hex.js" type="text/javascript"></script>
+    <script src="common/filters/orderObjectBy.js" type="text/javascript"></script>
+    <script src="common/filters/percent.js" type="text/javascript"></script>
+    <script src="common/filters/pluck.js" type="text/javascript"></script>
+    <script src="common/filters/round.js" type="text/javascript"></script>
+    <script src="common/filters/shuffle.js" type="text/javascript"></script>
+    <script src="common/filters/slice.js" type="text/javascript"></script>
+    <script src="common/filters/slug.js" type="text/javascript"></script>
+    <script src="common/filters/timeAgoShort.js" type="text/javascript"></script>
+    <script src="common/filters/timeLeftInWords.js" type="text/javascript"></script>
+    <script src="common/filters/title.js" type="text/javascript"></script>
+    <script src="common/filters/truncate.js" type="text/javascript"></script>
+    <script src="common/filters/unique.js" type="text/javascript"></script>
+    <script src="common/profileCompleteModal.js" type="text/javascript"></script>
+    <script src="common/routes.js" type="text/javascript"></script>
+    <script src="common/services/api.js" type="text/javascript"></script>
+    <script src="common/services/cart.js" type="text/javascript"></script>
+    <script src="common/services/gplus.js" type="text/javascript"></script>
+    <script src="common/services/pageTitle.js" type="text/javascript"></script>
+    <script src="common/services/twttr.js" type="text/javascript"></script>
+    <script src="common/trackerPluginAuthorizeModal.js" type="text/javascript"></script>
+    <script src="common/trackerSigninModal.js" type="text/javascript"></script>
+    <!-- html_src end -->
+<!-- endbuild -->
+
+<!-- adds support for zendesk / started moving these images locally to components/zendesk -->
+    <script type="text/javascript" src="//assets.zendesk.com/external/zenbox/v2.6/zenbox.js"></script>
+    <style type="text/css" media="screen, projection">
+      @import url(//assets.zendesk.com/external/zenbox/v2.6/zenbox.css);
+    </style>
+</body>
+</html>

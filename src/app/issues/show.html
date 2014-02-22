@@ -1,0 +1,66 @@
+<div ng-controller="IssueShow">
+  <div ng-include="'app/issues/templates/breadcrumb.html'"></div>
+
+  <div class="row" ng-show="issue">
+    <div class="col-sm-9 col-md-9">
+      <div ng-include="'app/issues/templates/header.html'"></div>
+      <div ng-include="'app/issues/templates/start_work_box.html'"></div>
+      <div ng-include="'app/issues/templates/developer_goals_notification.html'"></div>
+      <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
+
+      <table class="table table-striped" style="table-layout:fixed">
+        <tbody>
+        <tr class="no-stripe">
+          <td class="imagerow">
+            <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}"><img ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"></a>
+            <img ng-hide="issue.author.slug" ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
+          </td>
+          <td style="overflow-x:auto">
+            <p class="text-muted">
+              <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}">{{issue.author.display_name}}</a>
+              <span ng-hide="issue.author.slug">{{issue.author.display_name}}</span>
+              opened this issue on {{issue.created_at | date}}
+            </p>
+            <target-blank model="issue">
+              <div ng-show="issue.$body_ctype == 'html'" ng-bind-html="issue.body_html"></div>
+              <div ng-show="issue.$body_ctype == 'text'" style="white-space: pre-wrap;">{{issue.body_html}}</div>
+            </target-blank>
+            <p class="text-muted">
+              <a ng-href="{{issue.url}}" target="_blank">View original issue »</a>
+            </p>
+
+          </td>
+        </tr>
+        <tr class="no-stripe">
+          <td colspan="2" ng-show="issue.comments.length > 0"><h4>Comments ({{issue.comments.length}})</h4></td>
+          <td colspan="2" ng-show="issue.comments.length == 0"><h4>No comments.</h4></td>
+        </tr>
+
+        <tr ng-repeat="comment in issue.comments | orderBy:['+created_at']">
+          <td>
+            <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}"><img ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"></a>
+            <img ng-hide="comment.author.slug" ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
+          </td>
+          <td style="overflow-x:auto">
+            <p class="text-muted">
+              <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}">{{comment.author.display_name}}</a>
+              <span ng-hide="comment.author.slug">{{comment.author.display_name}}</span>
+              on {{comment.created_at | date}}
+            </p>
+            <target-blank model="issue">
+              <div ng-show="issue.$comment_ctype == 'html'" ng-bind-html="comment.body_html"></div>
+              <div ng-show="issue.$comment_ctype == 'text'" style="white-space: pre-wrap;">{{comment.body_html}}</div>
+            </target-blank>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-sm-3 col-md-3">
+      <div ng-include="'app/issues/templates/bounty_box.html'"></div>
+      <div ng-include="'app/issues/templates/solutions_box.html'" ng-show="issue.can_add_bounty"></div>
+      <div ng-include="'app/issues/templates/claim_info_box.html'" ng-hide="issue.can_add_bounty"></div>
+    </div>
+  </div>
+</div>

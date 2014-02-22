@@ -1,0 +1,22 @@
+<div ng-include="'app/fundraisers/templates/manage.html'"></div>
+
+<div class="panel panel-default" style="max-height: none;">
+  <div class="panel-body">
+    <a ng-href="/fundraisers/{{fundraiser.slug}}">
+      <img ng-src="{{fundraiser.large_image_url}}" class="img-responsive">
+    </a>
+
+    <div ng-include="'app/fundraisers/templates/progress_small.html'"></div>
+
+    <div ng-include="'app/fundraisers/templates/pledge_button.html'"></div>
+  </div>
+
+  <div class="panel-footer">
+    <small><strong>Flexible Funding:</strong></small>
+    <small ng-show="fundraiser.in_progress">This campaign will receive all funds raised even if it does not reach its goal.</small>
+    <small ng-hide="fundraiser.in_progress">This fundraiser has completed and will receive all funds raised.</small>
+  </div>
+</div>
+
+<div ng-include="'app/fundraisers/templates/about_me.html'"></div>
+<div ng-include="'app/fundraisers/templates/share.html'"></div>

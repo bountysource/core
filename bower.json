@@ -2,19 +2,19 @@
   "name": "bountysource",
   "version": "0.2.0",
   "dependencies": {
-    "angular": "~1.2.13",
-    "es5-shim": "~2.3.0",
-    "angular-bootstrap": "~0.10.0",
-    "angular-route": "~1.2.13",
-    "bootstrap": "~3.1.1",
-    "momentjs": "~2.5.1",
+    "angular": "=1.2.13",
+    "angular-bootstrap": "=0.10.0",
+    "angular-route": "=1.2.13",
+    "angular-sanitize": "=1.2.13",
+    "angular-cookies": "=1.2.13",
+    "angular-resource": "=1.2.13",
     "angular-bootstrap-colorpicker": "~3.0.5",
-    "angular-sanitize": "~1.2.13",
-    "angular-cookies": "~1.2.13",
-    "angular-resource": "~1.2.13"
+    "es5-shim": "~2.3.0",
+    "bootstrap": "=3.1.1",
+    "momentjs": "~2.5.1"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.13",
-    "angular-scenario": "~1.2.13"
+    "angular-mocks": "=1.2.13",
+    "angular-scenario": "=1.2.13"
   }
 }

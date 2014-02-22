@@ -1,0 +1,62 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/activity">Activity</a></li>
+  <li><a href="/activity/transactions">Transactions</a></li>
+  <li><a>
+    <span ng-hide="transaction">Loading...</span>
+    <span ng-show="transaction">Order #{{transaction.number}}</span>
+  </a></li>
+</ul>
+
+<div>
+  <loading-bar ng-hide="transaction">Loading transaction...</loading-bar>
+
+  <div ng-show="transaction">
+    <div ng-show="is_receipt">
+      <div class="page-header">
+        <h2>Receipt for Order #{{transaction.number}}</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-8 col-md-8">
+        <table class="table table-striped table-no-head">
+          <tbody>
+          <tr ng-repeat="item in transaction.items">
+            <td ng-switch="item.type">
+              <div ng-switch-when="Pledge">
+                <span><strong>{{item.amount | dollars}}</strong> Pledge on <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a></span>
+              </div>
+
+              <div ng-switch-when="Bounty">
+                <span><strong>{{item.amount | dollars}}</strong> Bounty on <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></span>
+              </div>
+
+              <div ng-switch-when="TeamPayin">
+                <span><strong>{{item.amount | dollars}}</strong> added to <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a> account</span>
+              </div>
+            </td>
+            <td class="span1"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-4 col-md-4">
+        <div>
+          <div>Total: <strong>{{transaction.gross | currency}}</strong></div>
+          <div ng-show="transaction.fees > 0">Fee: <strong>{{transaction.fee | currency}}</strong></div>
+          <div>Order placed: <strong>{{transaction.created_at | date:'medium'}}</strong></div>
+          <div>
+            <span>Payment Method:</span>
+            <strong ng-hide="transaction.checkout_method.owner">{{transaction.checkout_method.display_name}}</strong>
+            <a ng-show="transaction.checkout_method.owner" owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2 class="text-center">Spread the word!</h2>
+    <div ng-include="" src="'app/transactions/share.html'">
+
+    </div>
+  </div>
+</div>

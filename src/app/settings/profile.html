@@ -1,0 +1,100 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/settings">Settings</a></li>
+  <li><a href="/settings">Profile</a></li>
+</ul>
+
+<h1>Settings</h1>
+<ng-include src="'app/settings/tabs.html'"></ng-include>
+
+<form class="form-horizontal" name="form" novalidate="">
+  <div class="alert alert-danger alert-danger" ng-show="error">{{error}}</div>
+  <div class="alert alert-success" ng-show="success">{{success}}</div>
+
+  <div class="form-group">
+    <label class="control-label" for="inputFirstName">First and Last Name:</label>
+    <div class="controls">
+      <input type="text" id="inputFirstName" placeholder="John" ng-model="form_data.first_name" class="input-small form-control">
+      <input type="text" placeholder="Doe" ng-model="form_data.last_name" class="input-small form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="inputDisplayName">Display Name:</label>
+    <div class="controls">
+      <input type="text" id="inputDisplayName" placeholder="johnny5" ng-model="form_data.display_name" class="input-medium form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Picture:</label>
+
+    <div class="controls">
+      <div class="checkbox"><label class="setings_profile_pic">
+        <input type="radio" ng-model="profile_input.radio" value="{{current_person.image_url}}">
+        <img src="{{form_data.image_url}}" tooltip="Current">
+      </label></div>
+
+      <div class="checkbox"><label class="setings_profile_pic" ng-show="current_person.github_account">
+        <input type="radio" ng-model="profile_input.radio" value="{{current_person.github_account.image_url}}">
+        <img src="{{current_person.github_account.image_url}}" tooltip="GitHub">
+      </label></div>
+
+      <div class="checkbox"><label class="setings_profile_pic" ng-show="current_person.twitter_account">
+        <input type="radio" ng-model="profile_input.radio" value="twitter:{{current_person.twitter_account.login}}">
+        <img src="{{current_person.twitter_account.image_url}}" tooltip="Twitter">
+      </label></div>
+
+      <div class="checkbox"><label class="setings_profile_pic" ng-show="current_person.facebook_account">
+        <input type="radio" ng-model="profile_input.radio" value="facebook:{{current_person.facebook_account.login || current_person.facebook_account.uid}}" style="margin-top: 18px">
+        <img src="{{current_person.facebook_account.image_url}}" tooltip="Facebook">
+      </label></div>
+
+      <br>
+      <input type="radio" ng-model="profile_input.radio" value="custom">
+      <input type="text" ng-model="profile_input.text" ng-change="profile_input.radio='custom'" placeholder="Image URL or Gravatar Email" class="form-control">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label" for="inputLocation">Location:</label>
+    <div class="controls">
+      <input type="text" id="inputLocation" name="location" placeholder="San Francisco, CA" ng-model="form_data.location" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="inputCompany">Company:</label>
+    <div class="controls">
+      <input type="text" id="inputCompany" name="company" placeholder="Dunder Mifflin" ng-model="form_data.company" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="inputUrl">Website:</label>
+    <div class="controls">
+      <input type="text" id="inputUrl" name="url" placeholder="http://awesome.site/" ng-model="form_data.url" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="inputPublicEmail">Public Email Address:</label>
+    <div class="controls">
+      <input type="text" id="inputPublicEmail" name="email" placeholder="john@doe.com" ng-model="form_data.public_email" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="inputBio">Bio:</label>
+    <div class="controls">
+      <textarea rows="3" id="inputBio" name="bio" placeholder="Once upon a time..." ng-model="form_data.bio"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success" ng-click="save()">Save</button>
+    </div>
+  </div>
+</form>

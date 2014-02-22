@@ -1,4 +1,5 @@
 'use strict';
+
 var modRewrite = require('connect-modrewrite');
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
@@ -10,33 +11,37 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     aws: (function() { try { return grunt.file.readYAML('../../config/aws-s3.yml'); } catch(e) { return {}; }})(),
+
+    dist: 'distdir',
+
+    gruntfile: 'gruntfile.js',
+
+    src: {
+      js: ['src/app/app.js', 'src/**/*.js', '!src/vendor/**'],
+      jsTpl: {
+        app: ['src/app/**/*.html'],
+        common: ['src/common/**/*.html']
+      },
+      specs: ['test/**/*.spec.js'],
+      scenarios: ['test/**/*.scenario.js'],
+      html: ['src/index.html'],
+      less: ['src/less/stylesheet.less'], // recess:build doesn't accept ** in its file patterns
+      lessWatch: ['src/less/**/*.less']
+    },
+
+    assets: {
+      images: ['src/images/**'],
+      favicon: ['src/favicon'],
+      robots: ['src/robots.txt']
+    },
+
     watch: {
-      options: {
-        livereload: true
+      options: { livereload: true },
+      all: {
+        files: ['<%= src.js %>', '<%= src.jsTpl.app %>', '<%= src.jsTpl.common %>', '<%= src.specs %>', '<%= src.scenarios %>'],
+        tasks: ['jshint', 'html_src']
       },
-      jshint: {
-        files: [
-          'gruntfile.js',
-          'test/**/*.js',
-          'app/pages/**/*.js',
-          'app/common/*.js',
-          'app/common/**/*.js',
-          'app/common/**/**/.js'
-        ],
-        tasks: ['jshint']
-      },
-      html_src: {
-        files: [
-          'app.js',
-          'gruntfile.js',
-          'app/index.html',
-          'app/pages/**/*.js',
-          'app/common/*.js',
-          'app/common/**/*.js',
-          'app/common/**/**/.js'
-        ],
-        tasks: ['html_src']
-      },
+
       livereload: {
         files: [
           'app/**/*.html',
@@ -51,6 +56,7 @@ module.exports = function (grunt) {
         tasks: []
       }
     },
+
     connect: {
       app: {
         options: {
@@ -60,7 +66,7 @@ module.exports = function (grunt) {
             return [
               modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\.swf|\\.txt)$ /index.html']),
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'app')
+              mountFolder(connect, 'src')
             ];
           }
         }
@@ -93,6 +99,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     open: {
       app: {
         url: 'http://localhost:<%= connect.app.options.port %>'
@@ -101,6 +108,7 @@ module.exports = function (grunt) {
         url: 'http://localhost:<%= connect.app.options.port %>/test.html'
       }
     },
+
     clean: {
       dist: {
         files: [{
@@ -113,7 +121,7 @@ module.exports = function (grunt) {
         }]
       },
       dist_assets: [
-        'dist/assets',
+        'dist/images',
         'dist/compiled'
       ],
       server: '.tmp',
@@ -121,79 +129,61 @@ module.exports = function (grunt) {
         'dist/templates.js'
       ]
     },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
 
-      all: [
-        'gruntfile.js',
-        'test/**/*.js',
-        'app/pages/**/*.js',
-        'app/common/*.js',
-        'app/common/**/*.js',
-        'app/common/**/**/.js'
-      ]
+    jshint: {
+      options: { jshintrc: '.jshintrc' },
+      all: ['<%= gruntfile %>', '<%= src.js %>', '<%= src.specs %>', '<%= src.scenarios %>']
     },
+
     karma: {
-      unit: {
-        configFile: 'karma-unit.conf.js'
+      unit: { configFile: 'test/config/unit.js'
       },
-      e2e: {
-        configFile: 'karma-e2e.conf.js'
-      }
+      e2e: { configFile: 'test/config/e2e.js' }
     },
+
     html_src: {
       dist: {
         files: {
-          'app/index.html': [
-            'app/pages/*.js',
-            'app/pages/**/*.js',
-            'app/common/*.js',
-            'app/common/**/*.js',
-            'app/common/**/**/.js'
-          ]
+          'src/index.html': ['<%= src.js %>']
         }
       }
     },
+
     useminPrepare: {
-      html: 'app/index.html',
+      html: ['<%= src.html %>'],
       options: {
-        dest: 'dist'
+        dest: ['<%= distdir %>']
       }
     },
+
     usemin: {
       html: [
         'dist/*.html'
       ],
       css: [
-        'dist/assets/**/*.css'
+        'dist/images/**/*.css'
       ],
       options: {
-        dirs: ['dist']
+        dirs: ['<%= distdir %>']
       }
     },
+
     imagemin: {
       dist: {
         files: [{
           expand: true,
-          cwd: 'app/images',
+          cwd: 'src/images/img',
           src: '*.{png,jpg,jpeg,gif}',
-          dest: 'dist/assets'
-        },{
-          expand: true,
-          cwd: 'app/components/bootstrap/docs/assets/img',
-          src: 'glyph*.png',
-          dest: 'dist/assets'
+          dest: 'dist/images'
         }]
       }
     },
+
     htmlmin: {
       index: {
         files: [{
           expand: true,
-          cwd: 'app',
-          src: ['*.html'],
+          src: ['<%= src.tpl.app %>', '<%= src.tpl.common %>'],
           dest: 'dist'
         }]
       },
@@ -205,21 +195,16 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'app',
-          src: [
-            'pages/**/*.js',
-            'common/*.js',
-            'common/**/*.js',
-            'common/**/**/.js'
-          ],
+          src: ['<%= src.js %>'],
           dest: 'dist'
         }]
       }
     },
+
     ngtemplates: {
       app: {
         options: {
-          concat: 'dist/assets/app.js',
+          concat: 'dist/images/app.js',
           base: 'dist'
         },
         src: [
@@ -231,21 +216,24 @@ module.exports = function (grunt) {
         dest: 'dist/templates.js'
       }
     },
+
     ngmin: {
       dist: {
         files: [{
           expand: true,
-          cwd: 'dist/assets',
+          cwd: 'dist/images',
           src: '*.js',
-          dest: 'dist/assets'
+          dest: 'dist/images'
         }]
       }
     },
+
     uglify: {
       options: {
         mangle: false
       }
     },
+
     copy: {
       dist: {
         files: [{
@@ -253,13 +241,11 @@ module.exports = function (grunt) {
           dot: true,
           cwd: 'app',
           dest: 'dist',
-          src: [
-            'favicon.ico',
-            'robots.txt'
-          ]
+          src: ['<%= images.favicon %>', '<%= images.robots %>']
         }]
       }
     },
+
     md5: {
       options: {
         encoding: null,
@@ -267,7 +253,7 @@ module.exports = function (grunt) {
         keepExtension: true,
         afterEach: function(changes) {
           var hash_map = grunt.config('md5_hash') || {};
-          hash_map[changes.oldPath.replace('dist/assets/','')] = changes.newPath.split('/').pop();
+          hash_map[changes.oldPath.replace('dist/images/','')] = changes.newPath.split('/').pop();
           hash_map['compiled/' + changes.newPath.split('/').pop()] = changes.newPath.split('/').pop();
           grunt.config('md5_hash', hash_map);
         }
@@ -275,25 +261,26 @@ module.exports = function (grunt) {
 
       binary: {
         files: {
-          'dist/compiled/': ['dist/assets/*.{png,jpg,jpeg,gif,woff}']
+          'dist/compiled/': ['dist/images/*.{png,jpg,jpeg,gif,woff}']
         }
       },
 
       css_js: {
         files: {
-          'dist/compiled/': ['dist/assets/*.{css,js}']
+          'dist/compiled/': ['dist/images/*.{css,js}']
         }
       }
     },
+
     md5_path: {
       css_js_local: {
         options: { base_url: '/compiled/' },
-        src: ['dist/assets/*.css', 'dist/assets/*.js']
+        src: ['dist/images/*.css', 'dist/images/*.js']
       },
 
       css_js_cdn: {
         options: { base_url: '<%= aws.base_url %>' },
-        src: ['dist/assets/*.css', 'dist/assets/*.js']
+        src: ['dist/images/*.css', 'dist/images/*.js']
       },
 
       html_cdn: {
@@ -301,6 +288,7 @@ module.exports = function (grunt) {
         src: 'dist/*.html'
       }
     },
+
     s3: {
       prod: {
         options: {
@@ -321,14 +309,11 @@ module.exports = function (grunt) {
         }]
       }
     },
-    coveralls: {
-      options: {
-        coverage_dir: 'coverage/'
-      }
-    },
+
     protractor: {
+      config: 'test/config/protractor.js',
       options: {
-        configFile: "protractor.conf.js", // Default config file
+        configFile: '<%= protractor.config %>', // Default config file
         keepAlive: true, // If false, the grunt process stops when the test fails.
         noColor: false, // If true, protractor will not use colors in its output.
         args: {
@@ -337,7 +322,7 @@ module.exports = function (grunt) {
       },
       e2e: {
         options: {
-          configFile: "protractor.conf.js", // Target-specific config file
+          configFile: '<%= protractor.config %>', // Target-specific config file
           args: {} // Target-specific arguments
         }
       }
@@ -413,7 +398,7 @@ module.exports = function (grunt) {
     'md5:css_js',        // create md5 copies of css/js in dist/compiled
     'md5_path:html_cdn', // update root HTML with CDN'd css/js
     's3:prod',           // copy all of compiled/ up to CDN
-    'clean:dist_assets'  // clean up assets now that they're all up on CDN
+    'clean:dist_assets'  // clean up images now that they're all up on CDN
   ]);
 
 

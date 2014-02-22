@@ -1,0 +1,88 @@
+.label-warning[href], .badge-warning[href] {
+  background-color: #F89406;
+}
+
+.label-info[href], .badge-info[href] {
+  background-color: #3A87AD;
+}
+
+.label-success[href], .badge-success[href] {
+  background-color: #468847;
+}
+
+.label-important[href], .badge-important[href] {
+  background-color: #B94A48;
+}
+
+table#bounties-table tr td {
+  vertical-align: middle;
+}
+table#bounties-table tr td:nth-child(1) { width: 60px; }
+table#bounties-table tr td img.thumbnail {
+  width: 50px;
+  height: 50px;
+}
+
+table#solutions-table tr td {
+  vertical-align: middle;
+}
+table#solutions-table tr td img.thumbnail {
+  width: 130px;
+  height: 130px;
+}
+
+li.task-list-item {
+  list-style: square outside url(images/checkbox.png);
+}
+
+li.task-list-item-checked {
+  list-style: square outside url(images/checkbox_checked.png);
+}
+
+li.task-list-item br {
+  display: none;
+}
+
+li.task-list-item-checked br {
+  display: none;
+}
+
+div.bounty-buttons { padding: 2%; }
+div.bounty-button-panel {padding-left: 10px; padding-right: 10px;}
+.bounty-buttons .controls { margin-top: 10px; }
+.bounty-buttons .controls:first-of-type { margin-top: 0; }
+
+.no-stripe td { border-top: 0; background-color: transparent !important; }
+
+td.imagerow {
+  width: 60px;
+}
+
+.table-progress {
+  margin-bottom: 0px;
+}
+
+.ng-binding ul > br {
+  display: none;
+}
+
+.issue-goals.progress {
+  margin-bottom: 10px;
+}
+
+.issue-table .project-icon {
+  text-align: center;
+}
+
+/* receipt */
+input#bounty-share-url {
+  cursor: pointer;
+  width: 75%;
+  text-align: center;
+  margin-top: 15px;
+}
+
+td img.issue-table-tracker-img {
+  max-height:20px;
+  max-width:20px;
+}

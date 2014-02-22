@@ -1,7 +1,7 @@
 node_modules
 .tmp
 .sass-cache
-app/components
+app/vendor
 .DS_Store
 *.log
 .idea

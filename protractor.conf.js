@@ -66,7 +66,7 @@ exports.config = {
 
   // ----- More information for your tests ----
   //
-  // A base URL for your application under test. Calls to protractor.get()
+  // A base URL for your application under test_old. Calls to protractor.get()
   // with relative paths will be prepended with this.
   baseUrl: 'http://localhost:9001',
 
@@ -86,8 +86,8 @@ exports.config = {
   },
 
   // The params object will be passed directly to the protractor instance,
-  // and can be accessed from your test. It is an arbitrary object and can
-  // contain anything you may need in your test.
+  // and can be accessed from your test_old. It is an arbitrary object and can
+  // contain anything you may need in your test_old.
   // This can be changed via the command line as:
   //   --params.login.user 'Joe'
   params: {
@@ -109,7 +109,7 @@ exports.config = {
     showColors: true,
     // If true, include stack traces in failures.
     includeStackTrace: true,
-    // Default time to wait in ms before a test fails.
+    // Default time to wait in ms before a test_old fails.
     defaultTimeoutInterval: 30000
   }
 };

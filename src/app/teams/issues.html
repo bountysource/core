@@ -1,0 +1,63 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/teams">Teams</a></li>
+  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
+  <li><a ng-href="/teams/{{team.slug}}/issues">Issues</a></li>
+</ul>
+
+<div ng-show="team" ng-controller="TeamIssuesController">
+  <div class="row">
+    <div class="col-sm-3 col-md-3">
+      <ng-include src="'app/teams/templates/infobox.html'"></ng-include>
+    </div>
+    <div class="col-sm-9 col-md-9">
+      <ng-include src="'app/teams/templates/header.html'"></ng-include>
+      <ng-include src="'app/teams/templates/tabs.html'"></ng-include>
+
+      <!-- Loading message... -->
+      <div collapse="issues_resolved" class="text-center">
+        <p class="lead">Loading issues...</p>
+        <div class="progress progress-striped active">
+          <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <div ng-show="issues_resolved">
+        <div ng-show="issues.length > 0">
+          <table class="table table-condensed table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th><a ng-click="update_sort(issue_sort, 'tracker.name')">Project</a></th>
+              <th><a ng-click="update_sort(issue_sort, 'title')">Name</a></th>
+              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
+              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="glypicon glyphicon-thumbs-up"></i></a></th>
+              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'participants_count')" tooltip="Watchers"><i class="glypicon glyphicon-user"></i></a></th>
+              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'created_at')" tooltip="Age of Issue"><i class="glypicon glyphicon-time"></i></a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="issue in issues | orderBy:issue_sort.column:issue_sort.desc">
+              <td><a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}"><img src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;"></a></td>
+              <td><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a></td>
+              <td><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
+              <td style="text-align: center">
+                <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
+                  {{issue.bounty_total | dollars:{space:true} }}
+                </a>
+              </td>
+              <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"><i class="glypicon glyphicon-thumbs-up"></i> {{issue.thumbs_up_count | number}}</a></td>
+              <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"><i class="glypicon glyphicon-user"></i> {{issue.participants_count | number}}</a></td>
+              <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">{{issue.created_at | timeAgoShort}}</a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-hide="issues.length > 0">
+          <h4 class="alert alert-info">There are no issues associated with this team</h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

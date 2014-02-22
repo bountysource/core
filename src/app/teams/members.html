@@ -1,0 +1,27 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/teams">Teams</a></li>
+  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
+  <li><a>Members</a></li>
+</ul>
+
+<div ng-show="team">
+  <div class="row">
+    <div class="col-sm-3 col-md-3">
+      <ng-include src="'app/teams/templates/infobox.html'"></ng-include>
+    </div>
+    <div class="col-sm-9 col-md-9">
+      <ng-include src="'app/teams/templates/header.html'"></ng-include>
+      <ng-include src="'app/teams/templates/tabs.html'"></ng-include>
+
+      <ul class="thumbnails">
+        <li class="span2 member-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
+          <a ng-href="/people/{{member.slug}}" class="thumbnail team-member-card">
+            <img ng-src="{{member.medium_image_url}}">
+            {{member.display_name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

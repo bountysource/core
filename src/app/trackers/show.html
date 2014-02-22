@@ -1,0 +1,148 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/trackers">Projects</a></li>
+  <li><a ng-href="/trackers/{{tracker.slug}}">{{ tracker.name ||'Loading...' }}</a></li>
+</ul>
+
+<div class="row" ng-show="tracker">
+  <div class="col-sm-3 col-md-3">
+    <ng-include src="'app/trackers/templates/sidebar.html'"></ng-include>
+
+    <div class="panel panel-default" ng-show="tracker.bounty_total > 0 || tracker.tracker_type == 'Github::Repository'">
+      <div class="panel-heading text-center"><h3 class="panel-title">Stats</h3></div>
+      <div class="panel-body">
+        <div collapse="!open_bounties || open_bounties <= 0">
+          <a ng-click="show_bounties()">
+            <h3 class="text-center">{{ open_bounties }}
+              <ng-pluralize count="open_bounties" when="{'1':'Open Bounty', 'other':'Open Bounties'}"></ng-pluralize>
+            </h3>
+          </a>
+        </div>
+
+        <div class="row">
+          <div class="text-center"
+          ng-class="{span6: tracker_stats.collected_total > 0, span12: tracker_stats.collected_total == 0}"
+          ng-show="tracker.bounty_total > 0">
+          <a ng-click="show_bounties()"><h3 style="margin: 0; line-height:35px" class="text-center">
+            {{tracker.bounty_total | dollars}}</h3></a>
+
+            <div>in bounties</div>
+          </div>
+
+          <div class="text-center col-sm-6 col-md-6" ng-show="tracker_stats.collected_total > 0">
+            <a ng-click="show_claimed_bounties()"><h3 style="margin:0; line-height:35px;" class="text-center">
+              {{tracker_stats.collected_total | dollars}}</h3></a>
+
+              <div>claimed</div>
+            </div>
+          </div>
+          <br ng-hide="tracker.bounty_total == 0">
+
+          <div class="row" ng-show="tracker.tracker_type == 'Github::Repository'">
+            <div class="text-center col-sm-6 col-md-6">
+              <h3 style="margin: 0; line-height:35px;">{{tracker.forks || 0 | number}}</h3>
+
+              <div>
+                <ng-pluralize count="tracker.forks" when="{ 'one': 'fork', 'other': 'forks' }"></ng-pluralize>
+              </div>
+            </div>
+            <div class="text-center col-sm-6 col-md-6">
+              <h3 style="margin: 0; line-height:35px;">{{tracker.watchers || 0 | number}}</h3>
+
+              <div>
+                <ng-pluralize count="tracker.watchers" when="{ 'one': 'watcher', 'other': 'watchers' }"></ng-pluralize>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-include="'app/trackers/templates/top_backers.html'"></div>
+    </div>
+
+    <div class="col-sm-9 col-md-9">
+      <h1>{{tracker.name}}</h1>
+
+      <p class="lead">{{tracker.description}}</p>
+
+      <!-- Add horizontal line when when no issues -->
+      <div ng-hide="issues.length > 0">
+        <hr>
+      </div>
+
+      <!--Issue filter box-->
+      <div collapse="issues.length <= 0">
+        <div class="well">
+          <div class="row">
+            <div class="col-sm-5 col-md-5">
+              <input type="text" class="span12 form-control" min="0" placeholder="Search issues"
+              ng-model="issue_filter_options.text" ng-change="update_filter_options()">
+            </div>
+
+            <div class="col-sm-7 col-md-7">
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="control-label col-md-4">Bounty Range:</label>
+                  <div class="col-md-3">
+                    <input type="number" class="form-control" min="1" placeholder="50"
+                    ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()"
+                    tooltip="Minimum bounty amount" tooltip-placement="bottom" tooltip-trigger="focus">
+                  </div>
+                  <div class="control-label col-md-1">- </div>
+                  <div class="col-md-3">
+                    <input type="number" class="form-control" min="1" placeholder="Infinity"
+                    ng-model="issue_filter_options.bounty_max" ng-change="update_filter_options()"
+                    tooltip="Maximum bounty amount" tooltip-placement="bottom" tooltip-trigger="focus">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <ul class="list-inline" style="margin-bottom: 0;">
+            <li>
+              <div class="checkbox"><label class="">
+                <input type="checkbox" ng-model="issue_filter_options.only_valuable">
+                Has active bounties
+              </label></div>
+            </li>
+            <li>
+              <div class="checkbox"><label class="">
+                <input type="checkbox" ng-model="issue_filter_options.hide_open">
+                Hide open issues
+              </label></div>
+            </li>
+            <li>
+              <div class="checkbox"><label class="">
+                <input type="checkbox" ng-model="issue_filter_options.hide_closed">
+                Hide closed issues
+              </label></div>
+            </li>
+            <li>
+              <div class="checkbox"><label class="">
+                <input type="checkbox" ng-model="issue_filter_options.show_paid_out">
+                Only show paid out issues
+              </label></div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Loading message... -->
+      <div collapse="issues_resolved" class="text-center">
+        <hr>
+        <p class="lead">Loading issues...</p>
+
+        <div class="progress progress-striped active">
+          <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+      </div>
+
+
+      <!-- No issues shown message -->
+      <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
+
+      <!--Table of issues-->
+      <issue-list issues="issues" include="['bountyTotal', 'thumbsUpCount', 'participantsCount', 'issueAge']" filter="issue_filter"></issue-list>
+    </div>
+  </div>

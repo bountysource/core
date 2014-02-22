@@ -1,0 +1,48 @@
+<div class="container">
+  <!-- @screen-md and @screen-lg -->
+  <div class="row visible-md visible-lg">
+    <div class="col-md-3">
+      <ng-include src="'app/layout/templates/footerPullRequests.html'"></ng-include>
+    </div>
+    <div class="col-md-3">
+      <ng-include src="'app/layout/templates/footerCompany.html'"></ng-include>
+    </div>
+    <div class="col-md-3">
+      <ng-include src="'app/layout/templates/footerContactUs.html'"></ng-include>
+    </div>
+    <div class="col-md-3">
+      <ng-include src="'app/layout/templates/footerLegal.html'"></ng-include>
+    </div>
+  </div>
+
+  <!-- @screen-sm -->
+  <div class="row visible-sm text-center">
+    <div class="row">
+      <div class="col-sm-6">
+        <ng-include src="'app/layout/templates/footerPullRequests.html'"></ng-include>
+      </div>
+      <div class="col-sm-6">
+        <ng-include src="'app/layout/templates/footerCompany.html'"></ng-include>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <ng-include src="'app/layout/templates/footerContactUs.html'"></ng-include>
+      </div>
+      <div class="col-sm-6">
+        <ng-include src="'app/layout/templates/footerLegal.html'"></ng-include>
+      </div>
+    </div>
+  </div>
+
+  <!-- @screen-xs -->
+  <div class="visible-xs text-center">
+    <ng-include src="'app/layout/templates/footerPullRequests.html'"></ng-include>
+    <br />
+    <ng-include src="'app/layout/templates/footerCompany.html'"></ng-include>
+    <br />
+    <ng-include src="'app/layout/templates/footerContactUs.html'"></ng-include>
+    <br />
+    <ng-include src="'app/layout/templates/footerLegal.html'"></ng-include>
+  </div>
+</div>
