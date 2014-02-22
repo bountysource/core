@@ -1,6 +1,15 @@
 {
-  "name": "bountysource",
-  "version": "0.0.0",
+  "author": "Bountysource",
+  "name": "bountysource-frontend",
+  "homepage": "https://www.bountysource.com",
+  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bountysource/frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bountysource/frontend/issues"
+  },
   "dependencies": {},
   "devDependencies": {
     "bower": "~1.2.8",
@@ -36,6 +45,6 @@
     "chromedriver": "~2.6.0"
   },
   "engines": {
-    "node": ">=0.10.25"
+    "node": ">=0.8.4"
   }
 }
