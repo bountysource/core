@@ -16,6 +16,10 @@ module.exports = function (grunt) {
 
     gruntfile: 'gruntfile.js',
 
+    favicon: 'src/favicon.ico',
+
+    robots: 'src/robots.txt',
+
     src: {
       js: ['src/app/app.js', 'src/**/*.js', '!src/vendor/**'],
       jsTpl: {
@@ -150,9 +154,9 @@ module.exports = function (grunt) {
     },
 
     useminPrepare: {
-      html: ['<%= src.html %>'],
+      html: '<%= src.html %>',
       options: {
-        dest: ['<%= distdir %>']
+        dest: '<%= distdir %>'
       }
     },
 
@@ -183,7 +187,7 @@ module.exports = function (grunt) {
       index: {
         files: [{
           expand: true,
-          src: ['<%= src.tpl.app %>', '<%= src.tpl.common %>'],
+          src: ['<%= src.jsTpl.app %>', '<%= src.jsTpl.common %>'],
           dest: 'dist'
         }]
       },
@@ -241,7 +245,7 @@ module.exports = function (grunt) {
           dot: true,
           cwd: 'app',
           dest: 'dist',
-          src: ['<%= images.favicon %>', '<%= images.robots %>']
+          src: ['<%= favicon %>', '<%= robots %>']
         }]
       }
     },
