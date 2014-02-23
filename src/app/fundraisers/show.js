@@ -37,15 +37,6 @@ angular.module('app').controller('FundraiserShowController', function ($scope, $
     amount: parseInt($routeParams.amount, 10)
   };
 
-  $scope.pledge_redirect = function(amount) {
-    $scope.fundraiser_get($routeParams.id).then(function(fundraiser) {
-      amount = amount || $scope.pledge.amount;
-      if (angular.isNumber(amount) && fundraiser.published) {
-        $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
-      }
-    });
-  };
-
   $scope.publish = function(fundraiser) {
     $api.fundraiser_publish(fundraiser.id, function(response) {
       if (response.meta.success) {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('FundraiserController', function($scope, $routeParams, $filter, $api) {
+angular.module('app').controller('FundraiserController', function($scope, $routeParams, $filter, $location, $api) {
   $scope.fundraiser_get_promise = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
     $scope.can_manage = fundraiser.person && $scope.current_person && fundraiser.person.id === $scope.current_person.id;
     $scope.publishable = fundraiser.title && fundraiser.short_description && fundraiser.funding_goal && fundraiser.description;
@@ -14,4 +14,16 @@ angular.module('app').controller('FundraiserController', function($scope, $route
     $scope.fundraiser = fundraiser;
     return fundraiser;
   });
+
+  // Go to the Pledge page for the fundraiser with the given amount
+  $scope.pledgeRedirect = function(fundraiser, amount) {
+    console.log('pledgeRedirect', fundraiser, amount);
+
+    $scope.fundraiser_get_promise.then(function(fundraiser) {
+      amount = amount || $scope.pledge.amount;
+      if (angular.isNumber(amount) && fundraiser.published) {
+        $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
+      }
+    });
+  };
 });
