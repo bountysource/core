@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('loadingBar', function() {
+angular.module('directives').directive('loadingBar', function() {
   return {
     restrict: "E",
     replace: true,

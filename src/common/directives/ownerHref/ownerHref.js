@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('ownerHref', function() {
+angular.module('directives').directive('ownerHref', function() {
   return {
     restrict: "AC",
     link: function(scope, element, attr) {

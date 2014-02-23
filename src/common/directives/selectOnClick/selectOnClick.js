@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('selectOnClick', function () {
+angular.module('directives').directive('selectOnClick', function () {
   return {
     restrict: "A",
     link: function (scope, element) {

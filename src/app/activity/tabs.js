@@ -4,7 +4,7 @@ angular.module('app').controller('ActivityTabs', function($scope, $location) {
   $scope.tabs = [
     { name: 'Timeline', url: '/activity' },
     { name: 'Bounties', url: '/activity/bounties' },
-    { name: 'Fundraisers', url: '/activity/fundraisers' },
+    { name: 'Fundraisers', url: '/activity/fundraiser' },
     { name: 'Pledges', url: '/activity/pledges' },
     { name: 'Bounty Claims', url: '/activity/claims' },
     { name: 'Account', url: '/activity/account' },

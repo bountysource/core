@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('abRandomize', function ($rootScope, $compile) {
+angular.module('directives').directive('abRandomize', function ($rootScope, $compile) {
   return {
     restrict: "AC",
     link: function (scope, element, attrs) {

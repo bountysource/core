@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('pluck', function() {
+angular.module('filters').filter('pluck', function() {
   return function(input, field) {
     // console.log(arguments);
     var retval = [];

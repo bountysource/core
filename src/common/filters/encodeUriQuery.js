@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('encodeUriQuery', function() {
+angular.module('filters').filter('encodeUriQuery', function() {
   return function(val, pctEncodeSpaces) {
     return encodeURIComponent(val).
       replace(/%40/gi, '@').

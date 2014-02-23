@@ -6,12 +6,12 @@
   </ul>
 
   <div ng-show="fundraiser">
-    <div ng-include="'app/fundraisers/templates/header.html'"></div>
-    <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div>
+    <div ng-include="'app/fundraiser/templates/header.html'"></div>
+    <div ng-include="'app/fundraiser/templates/nav_tabs.html'"></div>
 
     <div class="row">
       <div class="col-sm-3 col-md-3">
-        <div ng-include="'app/fundraisers/templates/left_column.html'"></div>
+        <div ng-include="'app/fundraiser/templates/left_column.html'"></div>
       </div>
 
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -45,14 +45,14 @@
 
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <div ng-show="fundraiser.published && fundraiser.in_progress">
-          <ng-include src="'app/fundraisers/templates/pledgeButtons.html'"></ng-include>
+          <ng-include src="'app/fundraiser/templates/pledgeButtons.html'"></ng-include>
         </div>
 
-        <div ng-include="'app/fundraisers/templates/top_backers.html'"></div>
+        <div ng-include="'app/fundraiser/templates/top_backers.html'"></div>
 
         <div ng-show="fundraiser.rewards.length > 0">
           <h3>Rewards</h3>
-          <div ng-include="'app/fundraisers/templates/rewards.html'"></div>
+          <div ng-include="'app/fundraiser/templates/rewards.html'"></div>
         </div>
       </div>
     </div>

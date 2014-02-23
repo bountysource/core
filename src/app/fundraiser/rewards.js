@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('FundraiserRewardInfoController', function ($scope, $routeParams, $location, $api) {
+angular.module('fundraiser').controller('FundraiserRewardInfoController', function ($scope, $routeParams, $location, $api) {
   $api.fundraiser_reward_info_get($routeParams.id).then(function(rewards) {
     // initially open all of the tabs
     for (var i=0; i<rewards.length; i++) {

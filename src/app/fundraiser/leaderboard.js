@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('app').controller('FundraiserLeaderboardController', function ($scope, $routeParams, $api) {
-  $api.call("/user/fundraisers/"+$routeParams.id+"/top_backers", { per_page: 3 }, function(response) {
+angular.module('fundraiser').controller('FundraiserLeaderboardController', function ($scope, $routeParams, $api) {
+  $api.call("/user/fundraiser/"+$routeParams.id+"/top_backers", { per_page: 3 }, function(response) {
     if (response.meta.success) {
       var pledges = response.data;
 

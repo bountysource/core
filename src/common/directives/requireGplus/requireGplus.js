@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('requireGplus', function($gplus) {
+angular.module('directives').directive('requireGplus', function($gplus) {
   return {
     restrict: "A",
     scope: "isolate",

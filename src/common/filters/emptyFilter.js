@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('emptyFilter', function() {
+angular.module('filters').filter('emptyFilter', function() {
   return function(array) {
     var returnArray = [];
     angular.forEach(array, function (item) {

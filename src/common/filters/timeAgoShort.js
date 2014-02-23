@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('timeAgoShort', function() {
+angular.module('filters').filter('timeAgoShort', function() {
   return function(date, options) {
     options = options || {};
     var now = new Moment();

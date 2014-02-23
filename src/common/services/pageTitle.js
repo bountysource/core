@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').service('$pageTitle', function($window) {
+angular.module('services').service('$pageTitle', function($window) {
   this.set = function() {
     var value = arguments.length > 0 ? Array.prototype.slice.call(arguments,0) : arguments[0];
     var parts;

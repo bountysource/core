@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('fromSnakeCase', function() {
+angular.module('filters').filter('fromSnakeCase', function() {
   // Convert snakecase to words
   return function(s) {
     var parts = s.replace(/[_-]/g, " ").split(" ");

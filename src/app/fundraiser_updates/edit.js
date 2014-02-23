@@ -20,6 +20,6 @@ angular.module('app').controller('FundraiserEditUpdateController', function ($sc
   };
 
   $scope.back = function() {
-    $location.url("/fundraisers/"+$routeParams.id+"/updates/"+$routeParams.update_id);
+    $location.url("/fundraiser/"+$routeParams.id+"/updates/"+$routeParams.update_id);
   };
 });

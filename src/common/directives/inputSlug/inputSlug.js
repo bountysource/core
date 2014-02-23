@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('inputSlug', function($filter) {
+angular.module('directives').directive('inputSlug', function($filter) {
   return {
     restrict: "AC",
     require: "ngModel",

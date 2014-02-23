@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('targetBlank', function() {
+angular.module('directives').directive('targetBlank', function() {
   return {
     restrict: "E",
     link: function($scope, element) {

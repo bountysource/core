@@ -7,7 +7,7 @@
  * $scope.text = "Apples are delicious"
  * <span>{{ text | truncate:12 }}</span> ==> <span>Apples ar...</span>
 * */
-angular.module('app').filter('truncate', function() {
+angular.module('filters').filter('truncate', function() {
   return function(s, size, replacement) {
     size = size || 50;
     replacement = replacement || "...";

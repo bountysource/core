@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('backerThumbnails', function() {
+angular.module('directives').directive('backerThumbnails', function() {
   return {
     restrict: "E",
     scope: {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('fundraiserStatus', function() {
+angular.module('filters').filter('fundraiserStatus', function() {
   return function(fundraiser) {
     if (!fundraiser) { return ""; }
     if (!fundraiser.published) { return "draft"; }

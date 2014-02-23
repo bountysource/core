@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('gaqTrackClick', function($timeout, $window) {
+angular.module('directives').directive('gaqTrackClick', function($timeout, $window) {
   return {
     restrict: "AC",
     link: function(scope, element, attrs) {

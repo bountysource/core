@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('personIcon', function() {
+angular.module('directives').directive('personIcon', function() {
   return {
     restrict: "E",
     scope: {

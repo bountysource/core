@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').service('$gplus', function ($window) {
+angular.module('services').service('$gplus', function ($window) {
   if (angular.isUndefined($window.gapi)) {
     (function () {
       var po = document.createElement('script');

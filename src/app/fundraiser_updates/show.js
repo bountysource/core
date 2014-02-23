@@ -12,7 +12,7 @@ angular.module('app').controller('FundraiserUpdateController', function ($scope,
         // update the... update
         $scope.update = angular.copy(response.data.update);
 
-        $location.url("/fundraisers/"+$routeParams.id+"/updates/"+$routeParams.update_id);
+        $location.url("/fundraiser/"+$routeParams.id+"/updates/"+$routeParams.update_id);
       } else {
         $scope.error = response.data.error;
       }
@@ -23,7 +23,7 @@ angular.module('app').controller('FundraiserUpdateController', function ($scope,
   $scope.destroy = function() {
     $api.fundraiser_update_destroy($routeParams.id, $routeParams.update_id, function(response) {
       if (response.meta.success) {
-        $location.url("/fundraisers/"+$routeParams.id+"/updates");
+        $location.url("/fundraiser/"+$routeParams.id+"/updates");
       } else {
         $scope.error = response.data.error;
       }

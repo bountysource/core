@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('claimContent', function() {
+angular.module('directives').directive('claimContent', function() {
   return {
     restrict: "E",
     scope: {

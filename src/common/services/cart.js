@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').service('$cart', function($rootScope, $api, $q, $cookieStore, $window) {
+angular.module('services').service('$cart', function($rootScope, $api, $q, $cookieStore, $window) {
 
   /*
    * Represents item in cart. Bounty, Pledge, etc.

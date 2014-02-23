@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('integerOnly', function() {
+angular.module('directives').directive('integerOnly', function() {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {

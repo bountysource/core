@@ -59,10 +59,10 @@ describe('All the wonderful routes we have', function() {
       });
     });
 
-    it('should map routes for fundraisers', function() {
+    it('should map routes for fundraiser', function() {
       inject(function($route) {
-        expect($route.routes['/activity/fundraisers'].controller).toBe('FundraiserActivity');
-        expect($route.routes['/activity/fundraisers'].templateUrl).toEqual('app/activity/fundraisers.html');
+        expect($route.routes['/activity/fundraiser'].controller).toBe('FundraiserActivity');
+        expect($route.routes['/activity/fundraiser'].templateUrl).toEqual('app/activity/fundraiser.html');
       });
     });
 
@@ -108,15 +108,15 @@ describe('All the wonderful routes we have', function() {
   describe('Fundraiser_updates', function() {
     it('should map routes for edit', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/:fundraiser_id/updates/:id/edit'].controller).toBe('FundraiserEditUpdateController');
-        expect($route.routes['/fundraisers/:fundraiser_id/updates/:id/edit'].templateUrl).toEqual('app/fundraiser_updates/edit.html');
+        expect($route.routes['/fundraiser/:fundraiser_id/updates/:id/edit'].controller).toBe('FundraiserEditUpdateController');
+        expect($route.routes['/fundraiser/:fundraiser_id/updates/:id/edit'].templateUrl).toEqual('app/fundraiser_updates/edit.html');
       });
     });
 
     it('should map routes for show', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/:fundraiser_id/updates/:id'].controller).toBe('FundraiserUpdatesShow');
-        expect($route.routes['/fundraisers/:fundraiser_id/updates/:id'].templateUrl).toEqual('app/fundraiser_updates/show.html');
+        expect($route.routes['/fundraiser/:fundraiser_id/updates/:id'].controller).toBe('FundraiserUpdatesShow');
+        expect($route.routes['/fundraiser/:fundraiser_id/updates/:id'].templateUrl).toEqual('app/fundraiser_updates/show.html');
       });
     });
   });
@@ -124,50 +124,50 @@ describe('All the wonderful routes we have', function() {
   describe('Fundraisers', function() {
     it('should map routes for fundraiser creation', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/new'].controller).toBe('FundraiserCreateController');
-        expect($route.routes['/fundraisers/new'].templateUrl).toEqual('app/fundraisers/create.html');
+        expect($route.routes['/fundraiser/new'].controller).toBe('FundraiserCreateController');
+        expect($route.routes['/fundraiser/new'].templateUrl).toEqual('app/fundraiser/create.html');
       });
     });
 
     it('should map routes for fundraiser edit', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/:id/edit'].controller).toBe('FundraiserEditController');
-        expect($route.routes['/fundraisers/:id/edit'].templateUrl).toEqual('app/fundraisers/edit.html');
+        expect($route.routes['/fundraiser/:id/edit'].controller).toBe('FundraiserEditController');
+        expect($route.routes['/fundraiser/:id/edit'].templateUrl).toEqual('app/fundraiser/edit.html');
       });
     });
 
     it('should map routes for just fundraiser', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers'].controller).toBe('FundraisersIndex');
-        expect($route.routes['/fundraisers'].templateUrl).toEqual('app/fundraisers/index.html');
+        expect($route.routes['/fundraiser'].controller).toBe('FundraiserIndexController');
+        expect($route.routes['/fundraiser'].templateUrl).toEqual('app/fundraiser/index.html');
       });
     });
 
     it('should map routes for a complete fundraiser', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/completed'].controller).toBe('FundraisersIndex');
-        expect($route.routes['/fundraisers/completed'].templateUrl).toEqual('app/fundraisers/index.html');
+        expect($route.routes['/fundraiser/completed'].controller).toBe('FundraiserIndexController');
+        expect($route.routes['/fundraiser/completed'].templateUrl).toEqual('app/fundraiser/index.html');
       });
     });
 
     it('should map routes for rewards', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/:id/rewards'].controller).toBe('FundraiserRewardsInfoController');
-        expect($route.routes['/fundraisers/:id/rewards'].templateUrl).toEqual('app/fundraisers/rewards.html');
+        expect($route.routes['/fundraiser/:id/rewards'].controller).toBe('FundraiserRewardsInfoController');
+        expect($route.routes['/fundraiser/:id/rewards'].templateUrl).toEqual('app/fundraiser/rewards.html');
       });
     });
 
     it('should map routes for show', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/:id'].controller).toBe('FundraiserShowController');
-        expect($route.routes['/fundraisers/:id'].templateUrl).toEqual('app/fundraisers/show.html');
+        expect($route.routes['/fundraiser/:id'].controller).toBe('FundraiserShowController');
+        expect($route.routes['/fundraiser/:id'].templateUrl).toEqual('app/fundraiser/show.html');
       });
     });
 
     it('should map routes for updates to fundraiser', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/:id/updates'].controller).toBe('FundraiserUpdatesController');
-        expect($route.routes['/fundraisers/:id/updates'].templateUrl).toEqual('app/fundraisers/updates.html');
+        expect($route.routes['/fundraiser/:id/updates'].controller).toBe('FundraiserUpdatesController');
+        expect($route.routes['/fundraiser/:id/updates'].templateUrl).toEqual('app/fundraiser/updates.html');
       });
     });
   });
@@ -251,8 +251,8 @@ describe('All the wonderful routes we have', function() {
 
     it('should map routes for backers', function() {
       inject(function($route) {
-        expect($route.routes['/fundraisers/:id/backers'].controller).toBe('FundraiserShowController');
-        expect($route.routes['/fundraisers/:id/backers'].templateUrl).toEqual('app/fundraisers/pledges.html');
+        expect($route.routes['/fundraiser/:id/backers'].controller).toBe('FundraiserShowController');
+        expect($route.routes['/fundraiser/:id/backers'].templateUrl).toEqual('app/fundraiser/pledges.html');
       });
     });
   });

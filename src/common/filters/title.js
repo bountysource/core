@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('title', function() {
+angular.module('filters').filter('title', function() {
   // Capitalize all words
   return function(s) {
     var parts = s.split(" ");

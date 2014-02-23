@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('issueStatusLabel', function() {
+angular.module('directives').directive('issueStatusLabel', function() {
   return {
     restrict: "E",
     scope: {

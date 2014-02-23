@@ -82,7 +82,7 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
   // Generate list of related issues.
   $scope.$watch('fundraisers', function(fundraisers) {
     if (angular.isDefined(fundraisers) && fundraisers.length > 0) {
-      // TODO recommended fundraisers?
+      // TODO recommended fundraiser?
     }
   });
 });

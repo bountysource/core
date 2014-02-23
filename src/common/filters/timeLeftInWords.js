@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('timeLeftInWords', function() {
+angular.module('filters').filter('timeLeftInWords', function() {
   return function(date) {
     var now = new Moment();
     var ends = new Moment(date);

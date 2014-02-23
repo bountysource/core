@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter, $log) {
+angular.module('services').service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter, $log) {
   var $api = this; // hack to store self reference
   this.access_token_cookie_name = 'v2_access_token';
 
@@ -169,11 +169,11 @@ angular.module('app').service('$api', function($http, $q, $cookieStore, $rootSco
   };
 
   this.fundraiser_cards = function() {
-    return this.call("/fundraisers/cards", function(r) { return r.data.in_progress.concat(r.data.completed); });
+    return this.call("/fundraiser/cards", function(r) { return r.data.in_progress.concat(r.data.completed); });
   };
 
   this.fundraiser_get = function(id) {
-    return this.call("/user/fundraisers/"+id, function(res) {
+    return this.call("/user/fundraiser/"+id, function(res) {
       // hacky way to add calculated funding percentage to data.
       // TODO proper Models
       if (res.meta.success) {
@@ -195,7 +195,7 @@ angular.module('app').service('$api', function($http, $q, $cookieStore, $rootSco
   };
 
   this.fundraiser_reward_info_get = function(id) {
-    return this.call("/user/fundraisers/"+id+"/info", function(res) {
+    return this.call("/user/fundraiser/"+id+"/info", function(res) {
       if (res.meta.success) {
         res.data.funding_percentage = Math.round((res.data.total_pledged / res.data.funding_goal) * 100);
         res.data.can_manage = $rootScope.current_person && ($rootScope.current_person.admin || res.data.person.id === $rootScope.current_person.id);
@@ -205,15 +205,15 @@ angular.module('app').service('$api', function($http, $q, $cookieStore, $rootSco
   };
 
   this.fundraiser_update = function(id, data) {
-    return this.call("/user/fundraisers/"+id, "PUT", data);
+    return this.call("/user/fundraiser/"+id, "PUT", data);
   };
 
   this.fundraiser_create = function(data, callback) {
-    return this.call("/user/fundraisers", "POST", data, callback);
+    return this.call("/user/fundraiser", "POST", data, callback);
   };
 
   this.fundraiser_pledges_get = function(id) {
-    return this.call("/user/fundraisers/"+id+"/pledges").then(function(pledges) {
+    return this.call("/user/fundraiser/"+id+"/pledges").then(function(pledges) {
       for (var i=0; i<pledges.length; i++) {
         // TODO actually use owner, not this person legacy hack
         pledges[i].person = pledges[i].owner;
@@ -224,43 +224,43 @@ angular.module('app').service('$api', function($http, $q, $cookieStore, $rootSco
   };
 
   this.fundraiser_publish = function(id, callback) {
-    return this.call("/user/fundraisers/"+id+"/publish", "POST", callback);
+    return this.call("/user/fundraiser/"+id+"/publish", "POST", callback);
   };
 
   this.fundraiser_update_get = function(fundraiser_id, id, callback) {
-    return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id, callback);
+    return this.call("/user/fundraiser/"+fundraiser_id+"/updates/"+id, callback);
   };
 
   this.fundraiser_update_create = function(fundraiser_id, data, callback) {
-    return this.call("/user/fundraisers/"+fundraiser_id+"/updates", "POST", data, callback);
+    return this.call("/user/fundraiser/"+fundraiser_id+"/updates", "POST", data, callback);
   };
 
   this.fundraiser_update_edit = function(fundraiser_id, id, data, callback) {
-    return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id, "PUT", data, callback);
+    return this.call("/user/fundraiser/"+fundraiser_id+"/updates/"+id, "PUT", data, callback);
   };
 
   this.fundraiser_update_destroy = function(fundraiser_id, id, callback) {
-    return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id, "DELETE", callback);
+    return this.call("/user/fundraiser/"+fundraiser_id+"/updates/"+id, "DELETE", callback);
   };
 
   this.fundraiser_update_publish = function(fundraiser_id, id, callback) {
-    return this.call("/user/fundraisers/"+fundraiser_id+"/updates/"+id+"/publish", "POST", callback);
+    return this.call("/user/fundraiser/"+fundraiser_id+"/updates/"+id+"/publish", "POST", callback);
   };
 
   this.fundraisers_get = function() {
-    return this.call("/fundraisers");
+    return this.call("/fundraiser");
   };
 
   this.reward_create = function(fundraiser_id, data, callback) {
-    this.call("/user/fundraisers/"+fundraiser_id+"/rewards", "POST", data, callback);
+    this.call("/user/fundraiser/"+fundraiser_id+"/rewards", "POST", data, callback);
   };
 
   this.reward_update = function(fundraiser_id, id, data, callback) {
-    this.call("/user/fundraisers/"+fundraiser_id+"/rewards/"+id, "PUT", data, callback);
+    this.call("/user/fundraiser/"+fundraiser_id+"/rewards/"+id, "PUT", data, callback);
   };
 
   this.reward_destroy = function(fundraiser_id, id, callback) {
-    this.call("/user/fundraisers/"+fundraiser_id+"/rewards/"+id, "DELETE", callback);
+    this.call("/user/fundraiser/"+fundraiser_id+"/rewards/"+id, "DELETE", callback);
   };
 
   this.people_recent = function() {
@@ -447,7 +447,7 @@ angular.module('app').service('$api', function($http, $q, $cookieStore, $rootSco
   };
 
   this.fundraiser_activity = function() {
-    return this.call('/user/fundraisers');
+    return this.call('/user/fundraiser');
   };
 
   this.bounty_claims_activity = function() {

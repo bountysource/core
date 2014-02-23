@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('issueList', function() {
+angular.module('directives').directive('issueList', function() {
   return {
     restrict: "E",
     templateUrl: "common/directives/issueList/templates/issueList.html",

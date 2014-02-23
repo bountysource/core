@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('teamTrackerThumbnails', function() {
+angular.module('directives').directive('teamTrackerThumbnails', function() {
   return {
     restrict: "E",
     templateUrl: 'common/directives/teamTrackerThumbnails/templates/teamTrackerThumbnails.html',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('requireTwitter', function($twttr) {
+angular.module('directives').directive('requireTwitter', function($twttr) {
   return {
     restrict: "A",
     scope: "isolate",

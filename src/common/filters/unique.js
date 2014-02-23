@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('unique', function() {
+angular.module('filters').filter('unique', function() {
   return function(input) {
     var retval = [];
     for (var i=0; i < input.length; i++) {

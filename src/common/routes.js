@@ -1,10 +1,6 @@
 'use strict';
 
-var defaultRouteOptions = {
-  reloadOnSearch: false
-};
-
-angular.module('app').config(function ($routeProvider, personResolver) {
+angular.module('app').config(function ($routeProvider, defaultRouteOptions, personResolver) {
   $routeProvider.when('/', angular.extend({
     templateUrl: 'app/home/home.html',
     controller: 'HomeCtrl',
@@ -74,8 +70,8 @@ angular.module('app').config(function ($routeProvider, personResolver) {
     }
   }, defaultRouteOptions));
 
-  $routeProvider.when('/activity/fundraisers', angular.extend({
-    templateUrl: 'app/activity/fundraisers.html',
+  $routeProvider.when('/activity/fundraiser', angular.extend({
+    templateUrl: 'app/activity/fundraiser.html',
     controller: 'FundraiserActivity',
     resolve: {
       person: personResolver
@@ -129,64 +125,6 @@ angular.module('app').config(function ($routeProvider, personResolver) {
     controller: 'StaticPageController'
   }, defaultRouteOptions));
 
-  $routeProvider.when('/fundraisers/:id/updates/:update_id/edit', angular.extend({
-    templateUrl: 'app/fundraiser_updates/edit.html',
-    controller: 'FundraiserController'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/:id/updates/:update_id', angular.extend({
-    templateUrl: 'app/fundraiser_updates/show.html',
-    controller: 'FundraiserController'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/new', angular.extend({
-    templateUrl: 'app/fundraisers/create.html',
-    controller: 'FundraiserCreateController',
-    resolve: {
-      person: personResolver
-    }
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/:id/edit', angular.extend({
-    templateUrl: 'app/fundraisers/edit.html',
-    controller: 'FundraiserController',
-    resolve: {
-      person: personResolver
-    }
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers', angular.extend({
-    templateUrl: 'app/fundraisers/index.html',
-    controller: 'FundraisersIndex',
-    title: 'Fundraisers'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/completed', angular.extend({
-    templateUrl: 'app/fundraisers/index.html',
-    controller: 'FundraisersIndex',
-    title: 'Fundraisers'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/:id/backers', angular.extend({
-    templateUrl: 'app/fundraisers/pledges.html',
-    controller: 'FundraiserController'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/:id/rewards', angular.extend({
-    templateUrl: 'app/fundraisers/rewards.html',
-    controller: 'FundraiserController'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/:id', angular.extend({
-    templateUrl: 'app/fundraisers/show.html',
-    controller: 'FundraiserController'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/:id/updates', angular.extend({
-    templateUrl: 'app/fundraisers/updates.html',
-    controller: 'FundraiserUpdatesController'
-  }, defaultRouteOptions));
-
   $routeProvider.when('/issues', angular.extend({
     templateUrl: 'app/home/newHome.html',
     controller: 'newHomeCtrl'
@@ -236,11 +174,6 @@ angular.module('app').config(function ($routeProvider, personResolver) {
   $routeProvider.when('/people/:id', angular.extend({
     templateUrl: 'app/people/activity.html',
     controller: 'PeopleShow'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/fundraisers/:id/pledge', angular.extend({
-    templateUrl: 'app/fundraisers/pledge.html',
-    controller: 'FundraiserPledgeCreateController'
   }, defaultRouteOptions));
 
   $routeProvider.when('/press', angular.extend({

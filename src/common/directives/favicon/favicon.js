@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('favicon', function() {
+angular.module('directives').directive('favicon', function() {
   return {
     restrict: "E",
     replace: true,

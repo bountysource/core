@@ -1,16 +1,17 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a></li>
-  <li><a>Fundraisers</a></li>
-</ul>
-<div class="alert alert-info">
-  Have an idea or project that needs funding? <a href="/fundraisers/new">Create your own fundraiser!</a>
-</div>
-<ul class="nav nav-tabs">
-  <li ng-class="active_tab('current')"><a href="/fundraisers">Current</a></li>
-  <li ng-class="active_tab('completed')"><a href="/fundraisers/completed">Completed</a></li>
-</ul>
-<table class="table table-striped" ng-hide="!selected_fundraisers || (selected_fundraisers | filter:filter_method).length <= 0">
-  <thead>
+<div class="FundraiserIndexController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a>Fundraisers</a></li>
+  </ul>
+  <div class="alert alert-info">
+    Have an idea or project that needs funding? <a href="/fundraisers/new">Create your own fundraiser!</a>
+  </div>
+  <ul class="nav nav-tabs">
+    <li ng-class="active_tab('current')"><a href="/fundraisers">Current</a></li>
+    <li ng-class="active_tab('completed')"><a href="/fundraisers/completed">Completed</a></li>
+  </ul>
+  <table class="table table-striped" ng-hide="!selected_fundraisers || (selected_fundraisers | filter:filter_method).length <= 0">
+    <thead>
     <tr>
       <th style="width: 75px;" class="hidden-sm"></th>
       <th><a ng-click="change_order('title')">Title</a></th>
@@ -19,8 +20,8 @@
       <th><a ng-click="change_order('total_pledged')">Pledged</a></th>
       <th><a ng-click="change_order('days_remaining')">Time Left</a></th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr ng-repeat="fundraiser in selected_fundraisers | filter:filter_method | orderBy:order_by:order_reverse">
       <td class="hidden-sm">
         <a class="thumbnail" ng-href="/fundraisers/{{fundraiser.slug}}">
@@ -39,5 +40,6 @@
         <small ng-hide="fundraiser.in_progress">Completed {{fundraiser.ends_at | date}}</small>
       </td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

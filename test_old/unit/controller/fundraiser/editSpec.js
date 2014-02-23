@@ -12,7 +12,7 @@ describe('FundraiserEditController', function() {
     $httpBackend.when('GET', 'https://staging-api.bountysource.com/people/4/teams?callback=CORS&per_page=250')
     .respond( function() { return [200, "CORS(" + JSON.stringify(teamJSON) + ")"];} );
 
-    $httpBackend.when('GET', 'https://staging-api.bountysource.com/user/fundraisers/101?callback=CORS&per_page=250')
+    $httpBackend.when('GET', 'https://staging-api.bountysource.com/user/fundraiser/101?callback=CORS&per_page=250')
     .respond( function() { return [200, "CORS(" + JSON.stringify(fundraiserJSON) + ")"];} );
 
     $rootScope = $injector.get('$rootScope');
@@ -66,26 +66,26 @@ describe('FundraiserEditController', function() {
     $httpBackend.flush();
 
     $rootScope.cancel();
-    expect($location.url()).toEqual('/fundraisers/479-read-books-get-literate');
+    expect($location.url()).toEqual('/fundraiser/479-read-books-get-literate');
   });
 
   it('should set the proper location on a save', function() {
     var controller = createController();
     $httpBackend.flush();
 
-    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraisers/101')
+    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraiser/101')
     .respond(function() { return [200, 'CORS({"data": {"slug": "asdfasdf"}, "meta": {"success": true}})']; });
     $rootScope.save();
     $httpBackend.flush();
 
-    expect($location.url()).toEqual('/fundraisers/479-read-books-get-literate');
+    expect($location.url()).toEqual('/fundraiser/479-read-books-get-literate');
   });
 
   it('should set an error on failure of update', function() {
     var controller = createController();
     $httpBackend.flush();
 
-    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraisers/101')
+    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraiser/101')
     .respond(function() { return [200, 'CORS({"data": {"error": "Uh Oh, there was an error"}, "meta": {"success": false}})']; });
     $rootScope.save();
     $httpBackend.flush();
@@ -108,7 +108,7 @@ describe('FundraiserEditController', function() {
       "fulfillment_details": "home address"
     };
 
-    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraisers/479/rewards')
+    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraiser/479/rewards')
     .respond(function() { return [200, 'CORS({"data": {"fake_reward": "this is a fake reward"}, "meta": {"success": true}})']; });
 
     // passing in master so I don't need to create another fundraiser object
@@ -123,7 +123,7 @@ describe('FundraiserEditController', function() {
     var reward_ctrl = createRewardController();
     $httpBackend.flush();
 
-    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraisers/479/rewards')
+    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraiser/479/rewards')
     .respond(function() { return [200, 'CORS({"data": {"error": "Uh Oh, there was an error"}, "meta": {"success": false}})']; });
 
     // passing in master so I don't need to create another fundraiser object
@@ -158,7 +158,7 @@ describe('FundraiserEditController', function() {
       "fulfillment_details": "home address"
     }];
 
-    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraisers/479/rewards/10001')
+    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraiser/479/rewards/10001')
     .respond(function() { return [200, 'CORS({"data": {"amount": 100}, "meta": {"success": true}})']; });
 
     // passing in master so I don't need to create another fundraiser object
@@ -195,7 +195,7 @@ describe('FundraiserEditController', function() {
       "fulfillment_details": "home address"
     }];
 
-    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraisers/479/rewards/10001')
+    $httpBackend.expect('PUT', 'https://staging-api.bountysource.com/user/fundraiser/479/rewards/10001')
     .respond(function() { return [200, 'CORS({"data": {"error": "Darn, something went wrong"}, "meta": {"success": false}})']; });
 
     // passing in master so I don't need to create another fundraiser object
@@ -242,7 +242,7 @@ describe('FundraiserEditController', function() {
     var reward_ctrl = createRewardController();
     $httpBackend.flush();
 
-    $httpBackend.expect('DELETE', 'https://staging-api.bountysource.com/user/fundraisers/479/rewards/876?callback=CORS&per_page=250')
+    $httpBackend.expect('DELETE', 'https://staging-api.bountysource.com/user/fundraiser/479/rewards/876?callback=CORS&per_page=250')
     .respond(function() { return [200, 'CORS({"data": {}, "meta": {"success": true}})']; });
 
     // passing in master so I don't need to create another fundraiser object

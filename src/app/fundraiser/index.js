@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('app').controller('FundraisersIndex', function ($scope, $location, $api) {
+angular.module('fundraiser').controller('FundraiserIndexController', function ($scope, $location, $api) {
   $scope.type = 'current';
-  if ($location.path() === '/fundraisers/completed') {
+  if ($location.path() === '/fundraiser/completed') {
     $scope.type = 'completed';
   }
   $scope.current = [];
@@ -24,7 +24,7 @@ angular.module('app').controller('FundraisersIndex', function ($scope, $location
     // turn total_pledged into a number
     fundraiser.total_pledged = parseFloat(fundraiser.total_pledged);
 
-    // push into either current or completed fundraisers arrays
+    // push into either current or completed fundraiser arrays
     if (fundraiser.in_progress) {
       $scope.current.push(fundraiser);
     } else if (fundraiser.total_pledged >= fundraiser.funding_goal) {
@@ -52,7 +52,7 @@ angular.module('app').controller('FundraisersIndex', function ($scope, $location
   };
 
   $scope.filter_method = function(fundraiser) {
-    // filter fundraisers by text
+    // filter fundraiser by text
     if ($scope.filter_options.text.length > 0) {
       var regexp = new RegExp(".*?"+$scope.filter_options.text+".*?", "i");
       return regexp.test(fundraiser.title) || regexp.test(fundraiser.short_description);

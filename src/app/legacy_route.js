@@ -71,68 +71,68 @@ angular.module('app.legacyRoutes', ['ngRoute'])
         redirectTo: "/privacy",
         controller: 'StaticPageController'
       })
-      .when('/fundraisers/:id/edit/basic-info', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/fundraiser/:id/edit/basic-info', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/fundraisers/:id/edit/description', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/fundraiser/:id/edit/description', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/fundraisers/:id/edit/description', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/fundraiser/:id/edit/description', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/fundraisers/:id/edit/rewards', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/fundraiser/:id/edit/rewards', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/fundraisers/:id/edit/funding', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/fundraiser/:id/edit/funding', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/fundraisers/:id/edit/duration', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/fundraiser/:id/edit/duration', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/account/fundraisers', {
-        redirectTo: "/activity/fundraisers",
+      .when('/account/fundraiser', {
+        redirectTo: "/activity/fundraiser",
         controller: 'StaticPageController'
       })
       .when('/account/create_fundraiser', {
-        redirectTo: "/fundraisers/new",
+        redirectTo: "/fundraiser/new",
         controller: 'StaticPageController'
       })
-      .when('/fundraisers/:fundraiser_id/pledges/:id', {
+      .when('/fundraiser/:fundraiser_id/pledges/:id', {
         redirectTo: function() { return "/activity/pledges"; },
         controller: 'StaticPageController'
       })
-      .when('/fundraisers/:id/info', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/rewards"; },
+      .when('/fundraiser/:id/info', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/rewards"; },
         controller: 'StaticPageController'
       })
       .when('/undefined', {
         redirectTo: "/",
         controller: 'StaticPageController'
       })
-      .when('/account/fundraisers/:id/basic_info', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/account/fundraiser/:id/basic_info', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/account/fundraisers/:id/description', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/account/fundraiser/:id/description', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/account/fundraisers/:id/rewards', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/account/fundraiser/:id/rewards', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/account/fundraisers/:id/funding', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/account/fundraiser/:id/funding', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
-      .when('/account/fundraisers/:id/duration', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/edit"; },
+      .when('/account/fundraiser/:id/duration', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/edit"; },
         controller: 'StaticPageController'
       })
       .when('/bounties', {
@@ -146,8 +146,8 @@ angular.module('app.legacyRoutes', ['ngRoute'])
       .when('/activity/solutions', {
         redirectTo: "/activity/claims",
         controller: 'StaticPageController'
-      }).when('/fundraisers/:id/pledges', {
-        redirectTo: function(param) { return "/fundraisers/"+param.id+"/backers"; },
+      }).when('/fundraiser/:id/pledges', {
+        redirectTo: function(param) { return "/fundraiser/"+param.id+"/backers"; },
         controller: 'StaticPageController'
       }).when('/issues/:issue_id/solutions', {
         redirectTo: function(params) { return "/issues/"+params.issue_id+"/claims"; }

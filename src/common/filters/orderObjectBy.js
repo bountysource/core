@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('orderObjectBy', function() {
+angular.module('filters').filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];
     angular.forEach(items, function(item) {

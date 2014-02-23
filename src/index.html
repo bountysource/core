@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="less/trackers.css">
   <!-- endbuild -->
 </head>
-<body ng-app="app" ng-controller="MainController">
+<body ng-app="app" ng-controller="AppController">
 
 <div id="wrap">
   <ng-include src="'app/layout/navbar.html'"></ng-include>
@@ -83,20 +83,20 @@
     <script src="app/auth/auth.js" type="text/javascript"></script>
     <script src="app/bounties/search.js" type="text/javascript"></script>
     <script src="app/cart/cart.js" type="text/javascript"></script>
+    <script src="app/fundraiser/create.js" type="text/javascript"></script>
+    <script src="app/fundraiser/edit.js" type="text/javascript"></script>
+    <script src="app/fundraiser/fundraiser.js" type="text/javascript"></script>
+    <script src="app/fundraiser/index.js" type="text/javascript"></script>
+    <script src="app/fundraiser/leaderboard.js" type="text/javascript"></script>
+    <script src="app/fundraiser/nav_tabs.js" type="text/javascript"></script>
+    <script src="app/fundraiser/pledge.js" type="text/javascript"></script>
+    <script src="app/fundraiser/pledges.js" type="text/javascript"></script>
+    <script src="app/fundraiser/rewards.js" type="text/javascript"></script>
+    <script src="app/fundraiser/show.js" type="text/javascript"></script>
+    <script src="app/fundraiser/updates.js" type="text/javascript"></script>
     <script src="app/fundraiser_updates/edit.js" type="text/javascript"></script>
     <script src="app/fundraiser_updates/show.js" type="text/javascript"></script>
     <script src="app/fundraiser_updates/top_backers.js" type="text/javascript"></script>
-    <script src="app/fundraisers/base.js" type="text/javascript"></script>
-    <script src="app/fundraisers/create.js" type="text/javascript"></script>
-    <script src="app/fundraisers/edit.js" type="text/javascript"></script>
-    <script src="app/fundraisers/index.js" type="text/javascript"></script>
-    <script src="app/fundraisers/leaderboard.js" type="text/javascript"></script>
-    <script src="app/fundraisers/nav_tabs.js" type="text/javascript"></script>
-    <script src="app/fundraisers/pledge.js" type="text/javascript"></script>
-    <script src="app/fundraisers/pledges.js" type="text/javascript"></script>
-    <script src="app/fundraisers/rewards.js" type="text/javascript"></script>
-    <script src="app/fundraisers/show.js" type="text/javascript"></script>
-    <script src="app/fundraisers/updates.js" type="text/javascript"></script>
     <script src="app/google_analytics.js" type="text/javascript"></script>
     <script src="app/google_wallet.js" type="text/javascript"></script>
     <script src="app/home/home.js" type="text/javascript"></script>
@@ -115,7 +115,6 @@
     <script src="app/layout/navbar.js" type="text/javascript"></script>
     <script src="app/legacy_route.js" type="text/javascript"></script>
     <script src="app/livereload.js" type="text/javascript"></script>
-    <script src="app/main.js" type="text/javascript"></script>
     <script src="app/notifications/cancel_all.js" type="text/javascript"></script>
     <script src="app/notifications/unsubscribe.js" type="text/javascript"></script>
     <script src="app/people/activity.js" type="text/javascript"></script>
@@ -147,6 +146,7 @@
     <script src="app/trackers/show.js" type="text/javascript"></script>
     <script src="app/trackers/top_backers.js" type="text/javascript"></script>
     <script src="app/transactions/show.js" type="text/javascript"></script>
+    <script src="common/constants/defaultRouteOptions.js" type="text/javascript"></script>
     <script src="common/constants/personResolver.js" type="text/javascript"></script>
     <script src="common/directives/abRandomize/abRandomize.js" type="text/javascript"></script>
     <script src="common/directives/backerThumbnails/backerThumbnails.js" type="text/javascript"></script>

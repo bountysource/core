@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('projectCard', function() {
+angular.module('directives').directive('projectCard', function() {
   return {
     restrict: "E",
     scope: {

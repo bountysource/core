@@ -5,7 +5,7 @@
 *
 * TODO: Make a better way to require auth on pages?
 * */
-angular.module('app').constant('personResolver', function($q, $rootScope, $location, $api) {
+angular.module('constants').constant('personResolver', function($q, $rootScope, $location, $api) {
   var deferred = $q.defer();
 
   var success = function() {

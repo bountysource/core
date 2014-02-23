@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').filter('atMost', function() {
+angular.module('filters').filter('atMost', function() {
   return function (input, other) {
     return (input < other) ? input : other;
   };

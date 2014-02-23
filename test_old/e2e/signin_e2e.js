@@ -97,11 +97,11 @@
 //      it("service provider login should be successful", function() {
 //        Mock.pushScenario("/trackers/cards", "GET", "success");
 //        Mock.pushScenario("/user/interesting", "GET", "success");
-//        Mock.pushScenario("/fundraisers/cards", "GET", "success");
+//        Mock.pushScenario("/fundraiser/cards", "GET", "success");
 //        Mock.pushScenario("/people/count", "GET", "success");
 //        Mock.pushScenario("/user", "GET", "success-github-auth");
 //        Mock.pushScenario("/user", "GET", "success-github-auth");
-//        Mock.pushScenario("/fundraisers/cards", "GET", "success");
+//        Mock.pushScenario("/fundraiser/cards", "GET", "success");
 //        Mock.pushScenario("/people/:id/teams", "GET", "success");
 //        Mock.pushScenario("/people/count", "GET", "success");
 //        Mock.pushScenario("/user", "GET", "success-github-auth");
@@ -118,7 +118,7 @@
 //      it("should create an account with service provider login", function() {
 //        Mock.pushScenario("/trackers/cards", "GET", "success");
 //        Mock.pushScenario("/user/interesting", "GET", "success");
-//        Mock.pushScenario("/fundraisers/cards", "GET", "success");
+//        Mock.pushScenario("/fundraiser/cards", "GET", "success");
 //        Mock.pushScenario("/people/count", "GET", "success");
 //
 //        Mock.pushScenario("/user", "GET", "success-github-auth");
@@ -143,14 +143,14 @@
 //      it("should log in on page load", function() {
 //        Mock.pushScenario("/trackers/cards", "GET", "success");
 //        Mock.pushScenario("/user/interesting", "GET", "success");
-//        Mock.pushScenario("/fundraisers/cards", "GET", "success");
+//        Mock.pushScenario("/fundraiser/cards", "GET", "success");
 //        Mock.pushScenario("/people/:id/teams", "GET", "success");
 //        Mock.pushScenario("/people/count", "GET", "success");
 //        Mock.pushScenario("/user", "GET", "success-github-auth");
 //
 //        Mock.pushScenario("/trackers/cards", "GET", "success");
 //        Mock.pushScenario("/user/interesting", "GET", "success");
-//        Mock.pushScenario("/fundraisers/cards", "GET", "success");
+//        Mock.pushScenario("/fundraiser/cards", "GET", "success");
 //        Mock.pushScenario("/people/:id/teams", "GET", "success");
 //        Mock.pushScenario("/people/count", "GET", "success");
 //        Mock.pushScenario("/user", "GET", "success-github-auth");
@@ -192,7 +192,7 @@
 //
 //    Mock.pushScenario("/trackers/cards", "GET", "success");
 //    Mock.pushScenario("/user/interesting", "GET", "success");
-//    Mock.pushScenario("/fundraisers/cards", "GET", "success");
+//    Mock.pushScenario("/fundraiser/cards", "GET", "success");
 //    Mock.pushScenario("/people/count", "GET", "success");
 //
 //    Mock.pushScenario("/user/login", "POST", "login-success-email-auth");
@@ -249,10 +249,10 @@
 //
 //describe("Scenario: Signin redirect from pledge creation page --", function() {
 //  it("sets up a BountySource account with service provider auth", function() {
-//    //GET request for "/fundraisers/455-edutrac" occurs twice with each page load
+//    //GET request for "/fundraiser/455-edutrac" occurs twice with each page load
 //
 //
-//    Mock.pushScenario("/user/fundraisers/:id", "GET", "success-update");
+//    Mock.pushScenario("/user/fundraiser/:id", "GET", "success-update");
 //    Mock.pushScenario("/people/:id/teams", "GET", "success");
 //    Mock.pushScenario("/people/:id/teams", "GET", "success");
 //    Mock.pushScenario("/people/:id/teams", "GET", "success");
@@ -261,11 +261,11 @@
 //
 //    Mock.pushScenario("/user/login", "POST", "email-address-available");
 //    Mock.pushScenario("/payments", "POST", "missing-access-token");
-//    Mock.pushScenario("/fundraisers/:id", "GET", "success");
+//    Mock.pushScenario("/fundraiser/:id", "GET", "success");
 //    Mock.pushScenario("/user/contributions", "GET", "missing-access-token");
-//    Mock.pushScenario("/fundraisers/:id", "GET", "success");
+//    Mock.pushScenario("/fundraiser/:id", "GET", "success");
 //
-//    browser().navigateTo('/fundraisers/451-fake-fundraiser/pledge');
+//    browser().navigateTo('/fundraiser/451-fake-fundraiser/pledge');
 //    using('form[name=pledge_form]').element("input[value='829']").click();
 //    input('pledge.survey_response').enter('here is your required text, good sir!');
 //    expect(input('pledge.amount').val()).toEqual('200');
@@ -279,7 +279,7 @@
 //    expect(using('form[name=form]').element(".btn:visible").text()).toEqual("Sign Up");
 //    using('form[name=form]').element(".btn:visible").click();
 //
-//    expect(browser().location().path()).toEqual('/fundraisers/451-fake-fundraiser/pledge');
+//    expect(browser().location().path()).toEqual('/fundraiser/451-fake-fundraiser/pledge');
 //    expect(input('pledge.amount').val()).toEqual('200');
 //    // FAILING expect(input('pledge.survey_response').val()).toEqual('here is your required text, good sir!');
 //    expect(element("a#navbar-user").text()).toContain("TheManliest");
@@ -287,20 +287,20 @@
 //  });
 //
 //  it("logs into BountySource account with service provider auth", function() {
-//    //GET request for "/fundraisers/455-edutrac" occurs twice with each page load
+//    //GET request for "/fundraiser/455-edutrac" occurs twice with each page load
 //
 //    Mock.pushScenario("/people/:id/teams", "GET", "success");
-//    Mock.pushScenario("/fundraisers/:id", "GET", "success");
-//    Mock.pushScenario("/fundraisers/:id", "GET", "success");
+//    Mock.pushScenario("/fundraiser/:id", "GET", "success");
+//    Mock.pushScenario("/fundraiser/:id", "GET", "success");
 //
 //    Mock.pushScenario("/user", "GET", "success-github-auth");
 //
 //    Mock.pushScenario("/payments", "POST", "missing-access-token");
-//    Mock.pushScenario("/fundraisers/:id", "GET", "success");
+//    Mock.pushScenario("/fundraiser/:id", "GET", "success");
 //    Mock.pushScenario("/user/contributions", "GET", "missing-access-token");
-//    Mock.pushScenario("/fundraisers/:id", "GET", "success");
+//    Mock.pushScenario("/fundraiser/:id", "GET", "success");
 //
-//    browser().navigateTo('/fundraisers/451-fake-fundraiser/pledge');
+//    browser().navigateTo('/fundraiser/451-fake-fundraiser/pledge');
 //    using('form[name=pledge_form]').element("input[value='829']").click();
 //    input('pledge.survey_response').enter('here is your required text, good sir!');
 //    expect(input('pledge.amount').val()).toEqual('200');
@@ -308,7 +308,7 @@
 //    expect(browser().location().path()).toEqual('/signin');
 //    browser().navigateTo('/signin/callback?provider=github&access_token=20117.1379028878.167f0b872b1c1d6f4763e1e78aea6e2fe7e9aa27&status=linked');
 //
-//    expect(browser().location().path()).toEqual('/fundraisers/451-fake-fundraiser/pledge');
+//    expect(browser().location().path()).toEqual('/fundraiser/451-fake-fundraiser/pledge');
 //    expect(input('pledge.amount').val()).toEqual('200');
 //    // FAILING expect(input('pledge.survey_response').val()).toEqual('here is your required text, good sir!');
 //    expect(element("a#navbar-user").text()).toContain("TheManliest");
