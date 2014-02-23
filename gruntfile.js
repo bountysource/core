@@ -12,7 +12,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     aws: (function() { try { return grunt.file.readYAML('../../config/aws-s3.yml'); } catch(e) { return {}; }})(),
 
-    dist: 'distdir',
+    distdir: 'dist',
 
     gruntfile: 'gruntfile.js',
 
@@ -31,12 +31,6 @@ module.exports = function (grunt) {
       html: ['src/index.html'],
       less: ['src/less/stylesheet.less'], // recess:build doesn't accept ** in its file patterns
       lessWatch: ['src/less/**/*.less']
-    },
-
-    assets: {
-      images: ['src/images/**'],
-      favicon: ['src/favicon'],
-      robots: ['src/robots.txt']
     },
 
     watch: {
@@ -124,10 +118,7 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      dist_assets: [
-        'dist/images',
-        'dist/compiled'
-      ],
+      dist_assets: ['dist/assets', 'dist/compiled'],
       server: '.tmp',
       templates: [
         'dist/templates.js'
@@ -140,8 +131,7 @@ module.exports = function (grunt) {
     },
 
     karma: {
-      unit: { configFile: 'test/config/unit.js'
-      },
+      unit: { configFile: 'test/config/unit.js' },
       e2e: { configFile: 'test/config/e2e.js' }
     },
 
@@ -161,12 +151,8 @@ module.exports = function (grunt) {
     },
 
     usemin: {
-      html: [
-        'dist/*.html'
-      ],
-      css: [
-        'dist/images/**/*.css'
-      ],
+      html: ['dist/*.html'],
+      css: ['dist/assets/**/*.css'],
       options: {
         dirs: ['<%= distdir %>']
       }
@@ -176,9 +162,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'src/images/img',
+          cwd: 'src/images',
           src: '*.{png,jpg,jpeg,gif}',
-          dest: 'dist/images'
+          dest: 'dist/assets'
         }]
       }
     },
@@ -187,7 +173,8 @@ module.exports = function (grunt) {
       index: {
         files: [{
           expand: true,
-          src: ['<%= src.jsTpl.app %>', '<%= src.jsTpl.common %>'],
+          cwd: 'src',
+          src: ['*.html'],
           dest: 'dist'
         }]
       },
@@ -199,7 +186,7 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          src: ['<%= src.js %>'],
+          src: ['<%= src.jsTpl.app %>', '<%= src.jsTpl.common %>'],
           dest: 'dist'
         }]
       }
@@ -207,16 +194,8 @@ module.exports = function (grunt) {
 
     ngtemplates: {
       app: {
-        options: {
-          concat: 'dist/images/app.js',
-          base: 'dist'
-        },
-        src: [
-          'dist/pages/**/*.js',
-          'dist/common/*.js',
-          'dist/common/**/*.js',
-          'dist/common/**/**/.js'
-        ],
+        options: { htmlmin: '<%= htmlmin.templates %>' },
+        src: ['dist/src/app/**/*.html', 'dist/src/common/**/*.html'],
         dest: 'dist/templates.js'
       }
     },
@@ -225,17 +204,16 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'dist/images',
+          cwd: 'dist/assets',
           src: '*.js',
-          dest: 'dist/images'
+          dest: 'dist/assets'
         }]
       }
     },
 
     uglify: {
-      options: {
-        mangle: false
-      }
+      options: { mangle: false },
+
     },
 
     copy: {
@@ -243,9 +221,9 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: 'app',
+          cwd: 'src',
           dest: 'dist',
-          src: ['<%= favicon %>', '<%= robots %>']
+          src: ['favicon.ico', 'robots.txt']
         }]
       }
     },
@@ -257,7 +235,7 @@ module.exports = function (grunt) {
         keepExtension: true,
         afterEach: function(changes) {
           var hash_map = grunt.config('md5_hash') || {};
-          hash_map[changes.oldPath.replace('dist/images/','')] = changes.newPath.split('/').pop();
+          hash_map[changes.oldPath.replace('dist/assets/','')] = changes.newPath.split('/').pop();
           hash_map['compiled/' + changes.newPath.split('/').pop()] = changes.newPath.split('/').pop();
           grunt.config('md5_hash', hash_map);
         }
@@ -265,13 +243,13 @@ module.exports = function (grunt) {
 
       binary: {
         files: {
-          'dist/compiled/': ['dist/images/*.{png,jpg,jpeg,gif,woff}']
+          'dist/compiled/': ['dist/assets/*.{png,jpg,jpeg,gif,woff}']
         }
       },
 
       css_js: {
         files: {
-          'dist/compiled/': ['dist/images/*.{css,js}']
+          'dist/compiled/': ['dist/assets/*.{css,js}']
         }
       }
     },
@@ -279,12 +257,12 @@ module.exports = function (grunt) {
     md5_path: {
       css_js_local: {
         options: { base_url: '/compiled/' },
-        src: ['dist/images/*.css', 'dist/images/*.js']
+        src: ['dist/assets/*.css', 'dist/assets/*.js']
       },
 
       css_js_cdn: {
         options: { base_url: '<%= aws.base_url %>' },
-        src: ['dist/images/*.css', 'dist/images/*.js']
+        src: ['dist/assets/*.css', 'dist/assets/*.js']
       },
 
       html_cdn: {

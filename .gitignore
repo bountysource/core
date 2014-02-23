@@ -1,9 +1,10 @@
 node_modules
 .tmp
 .sass-cache
-app/vendor
+src/vendor/
 .DS_Store
 *.log
 .idea
 dist/
 *coverage/
+app/
