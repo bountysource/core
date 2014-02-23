@@ -37,7 +37,7 @@ module.exports = function (grunt) {
       options: { livereload: true },
       all: {
         files: ['<%= src.js %>', '<%= src.jsTpl.app %>', '<%= src.jsTpl.common %>', '<%= src.specs %>', '<%= src.scenarios %>'],
-        tasks: ['jshint', 'html_src']
+        tasks: ['html_src'] // 'jshint'
       },
 
       livereload: {
@@ -212,8 +212,7 @@ module.exports = function (grunt) {
     },
 
     uglify: {
-      options: { mangle: false },
-
+      options: { mangle: false }
     },
 
     copy: {

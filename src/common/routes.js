@@ -239,7 +239,7 @@ angular.module('app').config(function ($routeProvider, personResolver) {
   }, defaultRouteOptions));
 
   $routeProvider.when('/fundraisers/:id/pledge', angular.extend({
-    templateUrl: 'app/fudnraisers/pledge.html',
+    templateUrl: 'app/fundraisers/pledge.html',
     controller: 'FundraiserPledgeCreateController'
   }, defaultRouteOptions));
 
