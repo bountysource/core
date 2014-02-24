@@ -59,6 +59,7 @@ angular.module('app')
           });
         } else {
           $scope.issues = [];
+          $scope.pagination = false;
           updateIssues($scope.issues);
         }
       });
@@ -84,7 +85,7 @@ angular.module('app')
     }
 
     function updateIssues (issues_data) {
-      $scope.pagination = issues_data.meta.pagination;
+      if (issues_data.meta) { $scope.pagination = issues_data.meta.pagination; }
       $scope.issues = issues_data.data;
       $scope.issues_resolved = true;
     }
