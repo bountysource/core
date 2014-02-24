@@ -104,18 +104,18 @@ describe("Scenario: Using Team Account --", function() {
 
     Mock.pushScenario("/payments", "POST", "success");
 
-    Mock.pushScenario("/user/fundraiser/:id", "GET", "success");
+    Mock.pushScenario("/user/fundraisers/:id", "GET", "success");
     Mock.pushScenario("/people/:id/teams", "GET", "success");
-    Mock.pushScenario("/user/fundraiser/:id", "GET", "success");
+    Mock.pushScenario("/user/fundraisers/:id", "GET", "success");
     Mock.pushScenario("/people/:id/teams", "GET", "success");
     Mock.pushScenario("/user", "GET", "success-email-auth");
-    browser().navigateTo('/fundraiser/'+MOCK.fundraiser.id+'/pledge');
+    browser().navigateTo('/fundraisers/'+MOCK.fundraiser.id+'/pledge');
     var radioButton = ["input[value='team/", MOCK.valid_team.id, "']"].join("");
     element(radioButton).click();
     expect(element("button[ng-click='create_payment()']:visible").count()).toBe(1);
     element("button[ng-click='create_payment()']:visible").click(); //this click action isn't taking place, set spec to pending for now
     expect(browser().location().path()).toEqual('/activity/pledges');
-    var fundraiserPath = "a[ng-href='/fundraiser/"+MOCK.fundraiser.slug+"']";
+    var fundraiserPath = "a[ng-href='/fundraisers/"+MOCK.fundraiser.slug+"']";
     expect(element(fundraiserPath).count()).toEqual(1);
   });
 

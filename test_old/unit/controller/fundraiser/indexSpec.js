@@ -8,7 +8,7 @@ describe('FundraiserIndexController', function() {
   beforeEach(inject(function($injector, defaultJSON, $http) {
     $location = $injector.get('$location');
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.when('GET', 'https://staging-api.bountysource.com/fundraiser?callback=CORS&per_page=250').respond( function() { return [200, "CORS(" + JSON.stringify(defaultJSON) + ")"];} );
+    $httpBackend.when('GET', 'https://staging-api.bountysource.com/fundraisers?callback=CORS&per_page=250').respond( function() { return [200, "CORS(" + JSON.stringify(defaultJSON) + ")"];} );
 
     $rootScope = $injector.get('$rootScope');
 
@@ -26,21 +26,21 @@ describe('FundraiserIndexController', function() {
   });
 
   it ('should switch type to completed based on location', function() {
-    $location.path('/fundraiser/completed');
+    $location.path('/fundraisers/completed');
     var controller = createController();
     $httpBackend.flush();
 
     expect($rootScope.type).toBe('completed');
   });
 
-  it('should return a list of completed fundraiser', function() {
+  it('should return a list of completed fundraisers', function() {
     var controller = createController();
     $httpBackend.flush();
 
     expect($rootScope.completed.length).toBeGreaterThan(0);
   });
 
-  it('should return a list of current fundraiser', function() {
+  it('should return a list of current fundraisers', function() {
     var controller = createController();
     $httpBackend.flush();
 

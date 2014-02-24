@@ -26,7 +26,7 @@ describe('FundraiserCreateController', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('has initial fundraiser defined in the scope', function() {
+  it('has initial fundraisers defined in the scope', function() {
     var controller = createController();
     var tempFund =  {
       funding_goal: 25000,
@@ -42,18 +42,18 @@ describe('FundraiserCreateController', function() {
     var controller = createController();
     $httpBackend.flush();
 
-    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraiser').respond(function() { return [200, 'CORS({"data": {"slug": "asdfasdf"}, "meta": {"success": true}})']; });
+    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraisers').respond(function() { return [200, 'CORS({"data": {"slug": "asdfasdf"}, "meta": {"success": true}})']; });
     $rootScope.create();
     $httpBackend.flush();
 
-    expect($location.url()).toEqual('/fundraiser/asdfasdf/edit');
+    expect($location.url()).toEqual('/fundraisers/asdfasdf/edit');
   });
 
   it('sets error scope if the request was not successful', function() {
     var controller = createController();
     $httpBackend.flush();
 
-    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraiser').respond(function() { return [200, 'CORS({"data": {"error": "There was an error"}, "meta": {"success": false}})']; });
+    $httpBackend.expect('POST', 'https://staging-api.bountysource.com/user/fundraisers').respond(function() { return [200, 'CORS({"data": {"error": "There was an error"}, "meta": {"success": false}})']; });
     $rootScope.create();
     $httpBackend.flush();
 

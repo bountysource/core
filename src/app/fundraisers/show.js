@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('fundraiser').controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
+angular.module('fundraisers').controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
   // $sanitize but allow iframes (i.e. youtube videos)
   $scope.fundraiserPromise.then(function(fundraiser) {
     if (fundraiser.error) {
       // API returns error if you are not authorized to view it (it hasn't been published)
       // Just redirect to the index page
-      $location.url('/fundraiser').replace();
+      $location.url('/fundraisers').replace();
     } else {
       $pageTitle.set(fundraiser.title, 'Fundraisers');
 
@@ -40,8 +40,8 @@ angular.module('fundraiser').controller('FundraiserShowController', function ($s
   $scope.publish = function(fundraiser) {
     $api.fundraiser_publish(fundraiser.id, function(response) {
       if (response.meta.success) {
-        // TODO I do not know why this doesn't work: $location.url("/fundraiser/"+fundraiser.slug).replace();
-        $window.location = "/fundraiser/"+fundraiser.slug;
+        // TODO I do not know why this doesn't work: $location.url("/fundraisers/"+fundraisers.slug).replace();
+        $window.location = "/fundraisers/"+fundraiser.slug;
       } else {
         $scope.error = "ERROR: " + response.data.error;
       }

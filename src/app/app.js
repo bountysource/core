@@ -12,7 +12,7 @@ angular.module('directives', []);
 angular.module('services', []);
 angular.module('bountysource', ['constants', 'services', 'directives', 'filters']);
 
-angular.module('fundraiser', ['bountysource']);
+angular.module('fundraisers', ['bountysource']);
 
 angular.module('app', [
   'ngRoute',
@@ -20,7 +20,7 @@ angular.module('app', [
   'ngCookies',
   'ui.bootstrap',
   'colorpicker.module',
-  'fundraiser'
+  'fundraisers'
 ]);
 
 angular.module('app')

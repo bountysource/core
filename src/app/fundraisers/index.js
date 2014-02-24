@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('fundraiser').controller('FundraiserIndexController', function ($scope, $location, $api) {
+angular.module('fundraisers').controller('FundraiserIndexController', function ($scope, $location, $api) {
   $scope.type = 'current';
-  if ($location.path() === '/fundraiser/completed') {
+  if ($location.path() === '/fundraisers/completed') {
     $scope.type = 'completed';
   }
   $scope.current = [];
@@ -18,13 +18,13 @@ angular.module('fundraiser').controller('FundraiserIndexController', function ($
   });
 
   $scope.$init_fundraiser = function(fundraiser) {
-    // add percentage to fundraiser
+    // add percentage to fundraisers
     fundraiser.$percentage = (fundraiser.total_pledged / fundraiser.funding_goal) * 100;
 
     // turn total_pledged into a number
     fundraiser.total_pledged = parseFloat(fundraiser.total_pledged);
 
-    // push into either current or completed fundraiser arrays
+    // push into either current or completed fundraisers arrays
     if (fundraiser.in_progress) {
       $scope.current.push(fundraiser);
     } else if (fundraiser.total_pledged >= fundraiser.funding_goal) {
@@ -52,7 +52,7 @@ angular.module('fundraiser').controller('FundraiserIndexController', function ($
   };
 
   $scope.filter_method = function(fundraiser) {
-    // filter fundraiser by text
+    // filter fundraisers by text
     if ($scope.filter_options.text.length > 0) {
       var regexp = new RegExp(".*?"+$scope.filter_options.text+".*?", "i");
       return regexp.test(fundraiser.title) || regexp.test(fundraiser.short_description);

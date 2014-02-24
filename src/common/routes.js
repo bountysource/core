@@ -70,8 +70,8 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     }
   }, defaultRouteOptions));
 
-  $routeProvider.when('/activity/fundraiser', angular.extend({
-    templateUrl: 'app/activity/fundraiser.html',
+  $routeProvider.when('/activity/fundraisers', angular.extend({
+    templateUrl: 'app/activity/fundraisers.html',
     controller: 'FundraiserActivity',
     resolve: {
       person: personResolver

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fundraiser').controller('FundraiserCreateController', function($scope, $routeParams, $location, $api) {
+angular.module('fundraisers').controller('FundraiserCreateController', function($scope, $routeParams, $location, $api) {
   $scope.fundraiser = {
     funding_goal: 25000,
     description: "",
@@ -16,7 +16,7 @@ angular.module('fundraiser').controller('FundraiserCreateController', function($
   $scope.create = function() {
     $api.fundraiser_create($scope.fundraiser, function(response) {
       if (response.meta.success) {
-        $location.url("/fundraiser/"+response.data.slug+"/edit");
+        $location.url("/fundraisers/"+response.data.slug+"/edit");
       } else {
         $scope.error = response.data.error;
       }

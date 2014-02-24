@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fundraiser').controller('FundraiserEditController', function($scope, $routeParams, $location, $api) {
-  // initialize fundraiser data and changes
+angular.module('fundraisers').controller('FundraiserEditController', function($scope, $routeParams, $location, $api) {
+  // initialize fundraisers data and changes
   $scope.master = {};
   $scope.changes = {};
   $scope.rewards = [];
@@ -17,7 +17,7 @@ angular.module('fundraiser').controller('FundraiserEditController', function($sc
   });
 
   $scope.fundraiserPromise.then(function(fundraiser) {
-    // cache the fundraiser. angular.copy does a deep copy, FYI
+    // cache the fundraisers. angular.copy does a deep copy, FYI
     // if you don't create a copy, these are both bound to the input
     fundraiser = angular.copy(fundraiser);
 
@@ -36,7 +36,7 @@ angular.module('fundraiser').controller('FundraiserEditController', function($sc
     return fundraiser;
   });
 
-  $scope.cancel = function() { $location.url("/fundraiser/"+$scope.master.slug); };
+  $scope.cancel = function() { $location.url("/fundraisers/"+$scope.master.slug); };
 
   $scope.save = function() {
     $api.fundraiser_update($routeParams.id, $scope.changes).then(function(response) {
@@ -45,7 +45,7 @@ angular.module('fundraiser').controller('FundraiserEditController', function($sc
 
         // TODO replace master reward with the current one
       } else {
-        $location.path("/fundraiser/"+$scope.master.slug);
+        $location.path("/fundraisers/"+$scope.master.slug);
       }
     });
   };

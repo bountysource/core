@@ -20,7 +20,7 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
     ///////// Share button logic /////////
     var item = transaction.items[0];
 
-    //if item has fundraiser key, its a pledge
+    //if item has fundraisers key, its a pledge
     if ('fundraiser' in item) {
       setShareUrls(item, item.fundraiser, "fundraiser");
     //if item has issue key, its a bounty
@@ -82,7 +82,7 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
   // Generate list of related issues.
   $scope.$watch('fundraisers', function(fundraisers) {
     if (angular.isDefined(fundraisers) && fundraisers.length > 0) {
-      // TODO recommended fundraiser?
+      // TODO recommended fundraisers?
     }
   });
 });

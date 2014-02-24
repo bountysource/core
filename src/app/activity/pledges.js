@@ -5,7 +5,7 @@ angular.module('app').controller('PledgeActivity', function($scope, $routeParams
 
   $api.call("/user/pledges").then(function(pledges) {
     for (var i=0; i<pledges.length; i++) {
-      // Get the zero reward and put it on fundraiser
+      // Get the zero reward and put it on fundraisers
       for (var j=0; j<pledges[i].fundraiser.rewards.length; j++) {
         if (pledges[i].fundraiser.rewards[j].amount === 0) {
           pledges[i].fundraiser.zero_reward = pledges[i].fundraiser.rewards[j];

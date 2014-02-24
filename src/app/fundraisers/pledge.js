@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fundraiser').controller('FundraiserPledgeController', function ($scope, $routeParams, $window, $location, $api, $cart) {
+angular.module('fundraisers').controller('FundraiserPledgeController', function ($scope, $routeParams, $window, $location, $api, $cart) {
   $scope.cart_promise = $cart.load().then(function(cart) {
     $scope.cart = cart;
     return cart;
@@ -17,8 +17,8 @@ angular.module('fundraiser').controller('FundraiserPledgeController', function (
   $scope.fundraiser_hide_pledge_button = true;
 
   $scope.fundraiserPromise.then(function(fundraiser) {
-    // add the base item number, with just fundraiser id
-    $scope.pledge.base_item_number = 'fundraiser/'+fundraiser.id;
+    // add the base item number, with just fundraisers id
+    $scope.pledge.base_item_number = 'fundraisers/'+fundraiser.id;
     $scope.pledge.item_number = $scope.pledge.base_item_number;
 
     if ($scope.pledge.reward_id) {

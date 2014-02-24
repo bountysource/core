@@ -1,60 +1,60 @@
 'use strict';
 
-angular.module('fundraiser')
+angular.module('fundraisers')
   .config(function($routeProvider, defaultRouteOptions, personResolver) {
     var routeOptions = angular.copy(defaultRouteOptions);
 
-    $routeProvider.when('/fundraiser', angular.extend({
-      templateUrl: 'app/fundraiser/index.html'
+    $routeProvider.when('/fundraisers', angular.extend({
+      templateUrl: 'app/fundraisers/index.html'
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/completed', angular.extend({
-      templateUrl: 'app/fundraiser/index.html'
+    $routeProvider.when('/fundraisers/completed', angular.extend({
+      templateUrl: 'app/fundraisers/index.html'
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/new', angular.extend({
-      templateUrl: 'app/fundraiser/create.html',
+    $routeProvider.when('/fundraisers/new', angular.extend({
+      templateUrl: 'app/fundraisers/create.html',
       resolve: { person: personResolver }
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id', angular.extend({
-      templateUrl: 'app/fundraiser/show.html',
+      templateUrl: 'app/fundraisers/show.html',
       controller: 'FundraiserController'
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/:id/updates/:update_id/edit', angular.extend({
+    $routeProvider.when('/fundraisers/:id/updates/:update_id/edit', angular.extend({
       templateUrl: 'app/fundraiser_updates/edit.html',
       controller: 'FundraiserController'
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/:id/updates/:update_id', angular.extend({
+    $routeProvider.when('/fundraisers/:id/updates/:update_id', angular.extend({
       templateUrl: 'app/fundraiser_updates/show.html',
       controller: 'FundraiserController'
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/:id/edit', angular.extend({
-      templateUrl: 'app/fundraiser/edit.html',
+    $routeProvider.when('/fundraisers/:id/edit', angular.extend({
+      templateUrl: 'app/fundraisers/edit.html',
       controller: 'FundraiserController',
       resolve: { person: personResolver }
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/:id/backers', angular.extend({
-      templateUrl: 'app/fundraiser/pledges.html',
+    $routeProvider.when('/fundraisers/:id/backers', angular.extend({
+      templateUrl: 'app/fundraisers/pledges.html',
       controller: 'FundraiserController'
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/:id/rewards', angular.extend({
-      templateUrl: 'app/fundraiser/rewards.html',
+    $routeProvider.when('/fundraisers/:id/rewards', angular.extend({
+      templateUrl: 'app/fundraisers/rewards.html',
       controller: 'FundraiserController'
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/:id', angular.extend({
-      templateUrl: 'app/fundraiser/show.html',
+    $routeProvider.when('/fundraisers/:id', angular.extend({
+      templateUrl: 'app/fundraisers/show.html',
       controller: 'FundraiserController'
     }, routeOptions));
 
-    $routeProvider.when('/fundraiser/:id/updates', angular.extend({
-      templateUrl: 'app/fundraiser/updates.html',
+    $routeProvider.when('/fundraisers/:id/updates', angular.extend({
+      templateUrl: 'app/fundraisers/updates.html',
       controller: 'FundraiserController'
     }, routeOptions));
   })
@@ -70,20 +70,18 @@ angular.module('fundraiser')
       };
       $scope.twitterShareURL = "https://platform.twitter.com/widgets/tweet_button.html?" + $api.toKeyValue($scope.twitterShareUrlParams);
 
-      console.log(fundraiser);
-
       $scope.fundraiser = fundraiser;
       return fundraiser;
     });
 
-    // Go to the Pledge page for the fundraiser with the given amount
+    // Go to the Pledge page for the fundraisers with the given amount
     $scope.pledgeRedirect = function(fundraiser, amount) {
       console.log('pledgeRedirect', fundraiser, amount);
 
       $scope.fundraiserPromise.then(function(fundraiser) {
         amount = amount || $scope.pledge.amount;
         if (angular.isNumber(amount) && fundraiser.published) {
-          $location.path("/fundraiser/"+$routeParams.id+"/pledge").search({ amount: amount });
+          $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
         }
       });
     };

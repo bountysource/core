@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fundraiser').controller('FundraiserUpdatesController', function ($scope, $routeParams, $location, $api) {
+angular.module('fundraisers').controller('FundraiserUpdatesController', function ($scope, $routeParams, $location, $api) {
   $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
     $scope.fundraiser = fundraiser;
     $scope.updates = fundraiser.updates;
@@ -12,7 +12,7 @@ angular.module('fundraiser').controller('FundraiserUpdatesController', function 
       if (response.meta.success) {
         var fundraiser = response.data;
         var update = response.data.update;
-        $location.url("/fundraiser/"+fundraiser.slug+"/updates/"+update.id+"/edit");
+        $location.url("/fundraisers/"+fundraiser.slug+"/updates/"+update.id+"/edit");
       } else {
         $scope.error = response.data.error;
       }

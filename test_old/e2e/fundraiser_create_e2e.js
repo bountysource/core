@@ -27,14 +27,14 @@ describe('Scenario: Creating A Fundraiser --', function () {
       using('form[name=form]').element(".btn:visible").click();
     });
 
-    it("should allow signed in user to view the fundraiser form", function () {
+    it("should allow signed in user to view the fundraisers form", function () {
       Mock.pushScenario("/people/:id/teams", "GET", "success");
       Mock.pushScenario("/user", "GET", "success-email-auth");
-      Mock.pushScenario("/fundraiser/cards", "GET", "success");
+      Mock.pushScenario("/fundraisers/cards", "GET", "success");
 
-      browser().navigateTo("/fundraiser/new");
+      browser().navigateTo("/fundraisers/new");
       //load current person from cookies
-      expect(browser().location().path()).toBe("/fundraiser/new");
+      expect(browser().location().path()).toBe("/fundraisers/new");
     });
 
     it("should not find something that I made up", function () {
@@ -104,7 +104,7 @@ describe('Scenario: Creating A Fundraiser --', function () {
       expect(element('input:checked').count()).toBe(expected_checks);
     });
 
-    it("should enable create fundraiser button when all fields are filled", function () {
+    it("should enable create fundraisers button when all fields are filled", function () {
       input('fundraiser.title').enter(MOCK.fundraiser.title);
       input('fundraiser.description').enter(MOCK.fundraiser.description);
       input('fundraiser.short_description').enter(MOCK.fundraiser.short_description);
@@ -114,13 +114,13 @@ describe('Scenario: Creating A Fundraiser --', function () {
 
   });
 
-  describe("Submitting a fundraiser", function() {
+  describe("Submitting a fundraisers", function() {
 
-    describe("Creating the fundraiser", function() {
-      it("should allow signed in user to create a fundraiser", function() {
-        Mock.pushScenario("/user/fundraiser/:id", "GET", "success");
+    describe("Creating the fundraisers", function() {
+      it("should allow signed in user to create a fundraisers", function() {
+        Mock.pushScenario("/user/fundraisers/:id", "GET", "success");
         Mock.pushScenario("/people/:id/teams", "GET", "success");
-        Mock.pushScenario("/user/fundraiser", "POST", "success");
+        Mock.pushScenario("/user/fundraisers", "POST", "success");
 
         input('fundraiser.title').enter(MOCK.fundraiser.title);
         input('fundraiser.short_description').enter(MOCK.fundraiser.short_description);
@@ -133,13 +133,13 @@ describe('Scenario: Creating A Fundraiser --', function () {
       });
 
       it("should take user to Edit page upon creation", function() {
-        Mock.pushScenario("/user/fundraiser/:id", "GET", "success");
-        expect(browser().location().path()).toBe("/fundraiser/451-fake-fundraiser/edit");
+        Mock.pushScenario("/user/fundraisers/:id", "GET", "success");
+        expect(browser().location().path()).toBe("/fundraisers/451-fake-fundraisers/edit");
       });
 
     });
 
-    describe("Edit Page for new fundraiser", function() {
+    describe("Edit Page for new fundraisers", function() {
 
       describe("Basic elements", function() {
 
@@ -160,7 +160,7 @@ describe('Scenario: Creating A Fundraiser --', function () {
         });
 
         it("should initially have a disabled 'Add Reward' Button", function() {
-          expect(element("button[ng-click='create_reward(fundraiser)']:disabled").count()).toBe(1);
+          expect(element("button[ng-click='create_reward(fundraisers)']:disabled").count()).toBe(1);
         });
 
         it("should have an input for minimum pledge amount", function() {
@@ -181,58 +181,58 @@ describe('Scenario: Creating A Fundraiser --', function () {
 
         it("after input should have an enabled 'Add Reward' Button", function() {
           findAndFillFields("new_reward", MOCK.new_reward);
-          expect(element("button[ng-click='create_reward(fundraiser)']:enabled").count()).toBe(1);
+          expect(element("button[ng-click='create_reward(fundraisers)']:enabled").count()).toBe(1);
         });
 
         it("should allow the submission of a new reward", function() {
-          Mock.pushScenario("/user/fundraiser/:id/rewards", "POST", "success");
-          element("button[ng-click='create_reward(fundraiser)']:enabled").click();
+          Mock.pushScenario("/user/fundraisers/:id/rewards", "POST", "success");
+          element("button[ng-click='create_reward(fundraisers)']:enabled").click();
           expect(element("div[heading='$25 Reward']").count()).toBe(1);
         });
 
         it("should allow the edit-awards drop-down", function() {
           expect(element("a:contains('$25 Reward')").count()).toBe(1);
           element("a:contains('$25 Reward')").click();
-          expect(element("button[ng-click='update_reward(fundraiser, reward)']").count()).toBe(1);
+          expect(element("button[ng-click='update_reward(fundraisers, reward)']").count()).toBe(1);
           expect(element("button[ng-click='cancel_reward_changes(reward)']").count()).toBe(1);
-          expect(element("button[ng-click='destroy_reward(fundraiser, reward)']").count()).toBe(1);
+          expect(element("button[ng-click='destroy_reward(fundraisers, reward)']").count()).toBe(1);
         });
 
       });
 
     });
 
-    describe("Saving new fundraiser", function() {
+    describe("Saving new fundraisers", function() {
 
-      it("should allow the saving of a newly created fundraiser", function() {
-        Mock.pushScenario("/user/fundraiser/:id", "GET", "success");
-        Mock.pushScenario("/user/fundraiser/:id/pledges", "GET", "success");
+      it("should allow the saving of a newly created fundraisers", function() {
+        Mock.pushScenario("/user/fundraisers/:id", "GET", "success");
+        Mock.pushScenario("/user/fundraisers/:id/pledges", "GET", "success");
 
-        Mock.pushScenario("/user/fundraiser/:id/pledges", "GET", "success");
-        Mock.pushScenario("/user/fundraiser/:id", "GET", "success");
-        Mock.pushScenario("/user/fundraiser/:id", "PUT", "success");
+        Mock.pushScenario("/user/fundraisers/:id/pledges", "GET", "success");
+        Mock.pushScenario("/user/fundraisers/:id", "GET", "success");
+        Mock.pushScenario("/user/fundraisers/:id", "PUT", "success");
         element("button[ng-click='save()']").click();
-        expect(browser().location().path()).toBe("/fundraiser/451-fake-fundraiser");
+        expect(browser().location().path()).toBe("/fundraisers/451-fake-fundraisers");
       });
 
       it("should show the new/publish page", function() {
-        expect(element("a[ng-show='fundraiser.published && fundraiser.in_progress && !fundraiser_hide_pledge_button']").css("display")).toBe("none");
-        expect(element("a[ng-show='!fundraiser.published']").css("display")).toBe("block");
+        expect(element("a[ng-show='fundraisers.published && fundraisers.in_progress && !fundraiser_hide_pledge_button']").css("display")).toBe("none");
+        expect(element("a[ng-show='!fundraisers.published']").css("display")).toBe("block");
         expect(element("a:contains('Edit Fundraiser')").count()).toBe(1);
-        expect(element("button[ng-click='publish(fundraiser)']").count()).toBe(1);
+        expect(element("button[ng-click='publish(fundraisers)']").count()).toBe(1);
       });
 
-      it("should publish a fundraiser", function() {
-        Mock.pushScenario("/user/fundraiser/:id", "GET", "success-update");
-        Mock.pushScenario("/user/fundraiser/:id/pledges", "GET", "success");
-        Mock.pushScenario("/user/fundraiser/:id/pledges", "GET", "success");
-        Mock.pushScenario("/user/fundraiser/:id", "GET", "success-update");
+      it("should publish a fundraisers", function() {
+        Mock.pushScenario("/user/fundraisers/:id", "GET", "success-update");
+        Mock.pushScenario("/user/fundraisers/:id/pledges", "GET", "success");
+        Mock.pushScenario("/user/fundraisers/:id/pledges", "GET", "success");
+        Mock.pushScenario("/user/fundraisers/:id", "GET", "success-update");
         Mock.pushScenario("/people/:id/teams", "GET", "success");
         Mock.pushScenario("/user", "GET", "success-email-auth");
-        Mock.pushScenario("/user/fundraiser/:id/publish", "POST", "success");
-        element("button[ng-click='publish(fundraiser)']").click();
+        Mock.pushScenario("/user/fundraisers/:id/publish", "POST", "success");
+        element("button[ng-click='publish(fundraisers)']").click();
         sleep(1); //allow time for the page to load
-        expect(browser().location().path()).toEqual("/fundraiser/451-fake-fundraiser");
+        expect(browser().location().path()).toEqual("/fundraisers/451-fake-fundraisers");
         expect(element("button[ng-click='create_update()']").count()).toBe(1);
       });
 
