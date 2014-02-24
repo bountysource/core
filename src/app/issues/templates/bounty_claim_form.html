@@ -1,0 +1,26 @@
+ <div class="jumbotron">
+  <h2 style="margin-top: 0;">Claim the Bounty!</h2>
+  <form class="form-horizontal" name="form_data" ng-submit="bounty_claim_submit()">
+    <p>
+      If your claim goes undisputed for two weeks, you will be awarded the {{issue.bounty_total | dollars}} bounty.
+      If your solution is unanimously accepted by the backers of the issue, you will instead be awarded the bounty immediately.
+    </p>
+    <div class="form-group">
+      <label class="control-label col-md-2" for="code_url">Code URL</label>
+      <div class="col-md-10">
+        <input class="form-control" id="code_url" name="code_url" type="url" ng-model="new_bounty_claim.code_url" placeholder="The URL to your solution. For example, a pull request on GitHub">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-2" for="description">Description</label>
+      <div class="col-md-10">
+        <textarea class="form-control" id="description" name="description" ng-model="new_bounty_claim.description" rows="3" placeholder="A description of how you resolved the issue."></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <button type="submit" class="btn btn-primary" ng-disabled="!new_bounty_claim.code_url && !new_bounty_claim.description">Claim the Bounty</button>
+      </div>
+    </div>
+  </form>
+</div>

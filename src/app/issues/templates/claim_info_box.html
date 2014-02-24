@@ -6,7 +6,8 @@
   <p>Please work with the development team on <a ng-href="{{issue.url}}" target="_blank">the original issue tracker</a> to get it to the closed state.</p>
 </div>
 
-<div ng-controller="BountyClaimsController" ng-show="issue.winning_bounty_claim || issue.bounty_total > 0 && (!issue.can_add_bounty || issue.generic)" style="text-align: center; padding: 15px;" ng-class="{ 'alert alert-block alert-success': (issue.winning_bounty_claim), 'alert alert-block alert-danger': ((!issue.winning_bounty_claim && issue.bounty_claims.length > 1) || issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected), 'alert alert-block alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 0) }">
+<div ng-controller="BountyClaimsController" ng-show="issue.winning_bounty_claim || issue.bounty_total > 0 && (!issue.can_add_bounty || issue.generic)" style="text-align: center; padding: 15px;" 
+     ng-class="{ 'alert alert-success': (issue.winning_bounty_claim), 'alert alert-danger': ((!issue.winning_bounty_claim && issue.bounty_claims.length > 1) || issue.bounty_claims[0].disputed || issue.bounty_claims[0].rejected), 'alert alert-info': (!issue.winning_bounty_claim && issue.bounty_claims.length == 1 && !issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected), 'well': (issue.bounty_claims.length <= 0) }">
   <!-- A claim was accepted, yay! -->
   <div ng-show="issue.winning_bounty_claim">
     <h2 style="margin: 0;">{{issue.winning_bounty_claim.amount | dollars}}</h2>
@@ -36,7 +37,7 @@
   </div>
 
   <!-- Bounty Claims -->
-  <div class="row" ng-show="issue.bounty_claims.length > 0">
+  <div ng-show="issue.bounty_claims.length > 0">
     <!-- When there is one claim, say that a claim is in progress -->
     <div ng-show="!issue.winning_bounty_claim && issue.bounty_claims.length == 1">
       <br>
@@ -46,11 +47,11 @@
       <h4 ng-show="issue.bounty_claims[0].disputed && !issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Disputed</h4>
       <h4 ng-show="issue.bounty_claims[0].rejected" style="margin-bottom: 5px;">Bounty Claim Rejected</h4>
 
-      <div ng-init="show_more_info = false">
-        <div style="display: inline-block; vertical-align: middle;">
-          <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}"><img class="thumbnail" style="width: 35px; height: 35px; display: inline-block;" ng-src="{{issue.bounty_claims[0].person.image_url}}"></a>
+      <div class="row" ng-init="show_more_info = false">
+        <div class="col-md-offset-2 col-md-3" style="padding-right: 0px;">
+          <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}"><img class="thumbnail img-responsive" ng-src="{{issue.bounty_claims[0].person.image_url}}"></a>
         </div>
-        <div style="margin-left: 10px; text-align: left; display: inline-block; vertical-align: middle;">
+        <div class="col-md-7" style="padding-left: 0px;">
           by <a ng-href="/people/{{issue.bounty_claims[0].person.slug}}">{{issue.bounty_claims[0].person.display_name}}</a>
           <br>
           <small>(<a ng-click="show_more_info = !show_more_info">more info</a>)</small>

@@ -43,8 +43,8 @@
       <div class="row">
         <div ng-switch="event.type">
           <div ng-switch-when="BountyClaimEvent::BackerDisputed">
-            <div class="col-lg-1 col-md-1 col-sm-1">
-              <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
+            <div class="col-lg-1 col-md-1 col-sm-1" style="padding-right: 0px;">
+              <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail img-responsive" ng-src="{{event.person.image_url}}" /></a>
             </div>
             <div class="col-lg-11 col-md-11 col-sm-11">
               <div class="text-danger">Rejected by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="text-muted">{{event.created_at | date:'medium'}}</small></div>
@@ -52,8 +52,8 @@
             </div>
           </div>
           <div ng-switch-when="BountyClaimEvent::BackerDisputeResolved">
-            <div class="col-lg-1 col-md-1 col-sm-1">
-              <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
+            <div class="col-lg-1 col-md-1 col-sm-1" style="padding-right: 0px;">
+              <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail img-responsive" ng-src="{{event.person.image_url}}" /></a>
             </div>
             <div class="col-lg-11 col-md-11 col-sm-11">
               <div class="text-success">Dispute from <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> resolved <small class="text-muted">{{event.created_at | date:'medium'}}</small></div>
@@ -62,8 +62,8 @@
           </div>
           <div ng-switch-when="BountyClaimEvent::BackerAccepted">
             <div ng-show="event.description"><!-- event only appears if there is a description present -->
-              <div class="col-lg-1 col-md-1 col-sm-1">
-                <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail" ng-src="{{event.person.image_url}}" /></a>
+              <div class="col-lg-1 col-md-1 col-sm-1" style="padding-right: 0px;">
+                <a ng-href="/people/{{event.person.slug}}"><img class="thumbnail img-responsive" ng-src="{{event.person.image_url}}" /></a>
               </div>
               <div class="col-lg-11 col-md-11 col-sm-11">
                 <div class="text-success">Accepted by <a ng-href="/people/{{event.person.slug}}">{{event.person.display_name}}</a> <small class="text-muted">{{event.created_at | date:'medium'}}</small></div>

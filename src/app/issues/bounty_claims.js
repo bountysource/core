@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('BountyClaimsController', function ($scope, $routeParams, $location, $window, $api) {
+angular.module('app').controller('BountyClaimsController', function ($scope, $route, $routeParams, $location, $window, $api) {
   $scope.new_bounty_claim = {
     code_url: $routeParams.code_url || "",
     description: $routeParams.description || ""
@@ -43,8 +43,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
           if (!bounty_claim.error) {
             // push new bounty claim into table
             issue.bounty_claims.push(bounty_claim);
-
-            $location.url("/issues/"+issue.slug+"/solutions");
+            $route.reload() //hacky temporary solution
           }
         });
       }
@@ -59,7 +58,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
     $scope.$update_percentage(bounty_claim);
     $scope.$update_my_response(bounty_claim);
 
-    $scope.show_claim_form = function(name) {
+    bounty_claim.show_claim_form = function(name) {
       switch(name) {
       case "accept":
         if (bounty_claim.showing_accept_form) {
@@ -106,6 +105,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
     // model for a new dispute
     bounty_claim.new_dispute = { description: "" };
     bounty_claim.submit_reject = function() {
+      // TODO: render error when submitting empty description. currently just fails w/o notification.
       $api.bounty_claim_reject(bounty_claim.id, bounty_claim.new_dispute.description).then(function(updates) {
         bounty_claim.showing_dispute_form = false;
         $scope.$update_bounty_claim(bounty_claim, updates);

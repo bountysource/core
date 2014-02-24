@@ -8,60 +8,14 @@
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
 
       <!-- Massive form for a new claim if there aren't any yet -->
-      <div class="jumbotron" ng-show="issue.bounty_claims.length <= 0">
-        <h2 style="margin-top: 0;">Claim the Bounty!</h2>
-        <form class="form-horizontal" name="form_data" ng-submit="bounty_claim_submit()">
-          <p>
-            If your claim goes undisputed for two weeks, you will be awarded the {{issue.bounty_total | dollars}} bounty.
-            If your solution is unanimously accepted by the backers of the issue, you will instead be awarded the bounty immediately.
-          </p>
-          <div class="form-group">
-            <label class="control-label" for="code_url">Code URL</label>
-            <div class="controls">
-              <input class="span12 form-control" id="code_url" name="code_url" type="url" ng-model="new_bounty_claim.code_url" placeholder="The URL to your solution. For example, a pull request on GitHub">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label" for="description">Description</label>
-            <div class="controls">
-              <textarea class="span12" id="description" name="description" ng-model="new_bounty_claim.description" rows="3" placeholder="A description of how you resolved the issue."></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="controls">
-              <button type="submit" class="btn btn-primary" ng-disabled="!new_bounty_claim.code_url && !new_bounty_claim.description">Claim the Bounty</button>
-            </div>
-          </div>
-        </form>
+      <div ng-show="issue.bounty_claims.length <= 0">
+        <div ng-include="'app/issues/templates/bounty_claim_form.html'"></div>
       </div>
 
       <!-- Submit bounty claim form -->
       <div collapse="!show_new_claim_form">
-        <div class="well" ng-hide="issue.my_bounty_claim || issue.winning_bounty_claim">
-          <form class="form-horizontal" name="form_data" ng-submit="bounty_claim_submit()">
-            <p>
-              If your claim goes undisputed for two weeks, you will be awarded the {{issue.bounty_total | dollars}} bounty.
-              If your solution is unanimously accepted by the backers of the issue, you will instead be awarded the bounty immediately.
-            </p>
-            <div class="form-group">
-              <label class="control-label" for="code_url">Code URL</label>
-              <div class="controls">
-                <input class="span12 form-control" id="code_url" name="code_url" type="url" ng-model="new_bounty_claim.code_url" placeholder="The URL to your solution. For example, a pull request on GitHub">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="description">Description</label>
-              <div class="controls">
-                <textarea class="span12" id="description" name="description" ng-model="new_bounty_claim.description" rows="3" placeholder="A description of how you resolved the issue."></textarea>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="controls">
-                <button type="submit" class="btn btn-primary" ng-disabled="!new_bounty_claim.code_url && !new_bounty_claim.description">Claim the Bounty</button>
-                <button type="submit" class="btn btn-default" ng-click="show_new_claim_form = false">Cancel</button>
-              </div>
-            </div>
-          </form>
+        <div ng-hide="issue.my_bounty_claim || issue.winning_bounty_claim">
+          <div ng-include="'app/issues/templates/bounty_claim_form.html'"></div>
         </div>
       </div>
 
@@ -92,7 +46,7 @@
               <h4 style="margin-bottom: 10px;">Claim Rejected</h4>
               <p>You <strong>rejected</strong> this claim.</p>
               <p><a ng-href="/people/{{claim.person.slug}}">{{claim.person.display_name}}</a> cannot claim the bounty unless you <strong>resolve your dispute</strong>.</p>
-              <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_resolve_form) }" ng-click="show_claim_form('resolve')"><i class="glypicon glyphicon-thumbs-up"></i> Resolve Dispute</button>
+              <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_resolve_form) }" ng-click="claim.show_claim_form('resolve')"><i class="glypicon glyphicon-thumbs-up"></i> Resolve Dispute</button>
             </div>
 
             <!-- You have not voted on this claim -->
@@ -100,8 +54,8 @@
               <h4 style="margin-bottom: 10px;">Response Needed</h4>
               <p><strong class="text-success">Accept</strong> this claim to expedite payout.</p>
               <p><strong class="text-danger">Reject</strong> this claim if it does not resolve the issue.</p>
-              <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_accept_form) }" ng-click="show_claim_form('accept')"><i class="glypicon glyphicon-thumbs-up"></i> Accept</button>
-              <button class="btn btn-block btn-danger" ng-class="{ active: (claim.showing_dispute_form) }" ng-click="show_claim_form('dispute')"><i class="glypicon glyphicon-thumbs-down"></i> Reject</button>
+              <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_accept_form) }" ng-click="claim.show_claim_form('accept')"><i class="glypicon glyphicon-thumbs-up"></i> Accept</button>
+              <button class="btn btn-block btn-danger" ng-class="{ active: (claim.showing_dispute_form) }" ng-click="claim.show_claim_form('dispute')"><i class="glypicon glyphicon-thumbs-down"></i> Reject</button>
             </div>
           </div>
         </div>
@@ -134,11 +88,15 @@
           <!-- Accept solution form -->
           <div collapse="!claim.showing_accept_form">
             <div class="alert alert-success">
-              <p>You are accepting {{claim.person.display_name}}'s solution as the winner of the {{issue.bounty_total | dollars}} bounty. Have anything to say to them?</p>
               <form style="margin-bottom: 0">
-                <textarea ng-model="claim.new_accept.description" style="width: 100%;" rows="3" placeholder="You did a great job {{claim.person.display_name}}, thanks for the fix!"></textarea>
-                <button class="btn btn-success" ng-click="claim.accept()"><i class="glypicon glyphicon-thumbs-up"></i> Accept</button>
-                <button class="btn btn-default" ng-click="claim.showing_accept_form = false">Cancel</button>
+                <div class="form-group">
+                  <label class="control-label">You are accepting {{claim.person.display_name}}'s solution as the winner of the {{issue.bounty_total | dollars}} bounty. Have anything to say to them?</label>
+                  <textarea ng-model="claim.new_accept.description" class="form-control" rows="3" placeholder="You did a great job {{claim.person.display_name}}, thanks for the fix!"></textarea>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-success" ng-click="claim.accept()"><i class="glypicon glyphicon-thumbs-up"></i> Accept</button>
+                  <button class="btn btn-default" ng-click="claim.showing_accept_form = false">Cancel</button>
+                </div>
               </form>
             </div>
           </div>
