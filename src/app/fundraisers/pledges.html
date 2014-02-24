@@ -11,11 +11,7 @@
     <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div>
 
     <div class="row">
-      <div class="col-sm-3 col-md-3">
-        <div ng-include="'app/fundraisers/templates/leftColumn.html'"></div>
-      </div>
-
-      <div class="col-sm-9 col-md-9">
+      <div class="col-lg-9 col-md-9 col-sm-8">
         <div class="alert alert-info" ng-show="pledges.length <= 0">No pledges have been made. <a ng-href="/fundraisers/{{fundraiser.slug}}/pledge">Why don't you make the first pledge?</a></div>
 
         <loading-bar ng-hide="pledges">Loading...</loading-bar>
@@ -54,6 +50,10 @@
             </td>
           </tr>
         </tbody></table>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-4">
+        <fundraiser-side-bar fundraiser="fundraiser"></fundraiser-side-bar>
       </div>
     </div>
   </form>

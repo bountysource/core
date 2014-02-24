@@ -11,11 +11,7 @@
     <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div>
 
     <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-        <div ng-include="'app/fundraisers/templates/leftColumn.html'"></div>
-      </div>
-
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <div class="col-lg-9 col-md-9 col-sm-8">
         <div ng-show="can_manage" class="jumbotron">
           <h2>Updates</h2>
           <p>Publish updates about your fundraiser. Published updates are emailed to the backers of your fundraiser.</p>
@@ -50,8 +46,8 @@
         </table>
       </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-        <div ng-include="'app/fundraisers/templates/rightColumn.html'"></div>
+      <div class="col-lg-3 col-md-3 col-sm-4">
+        <fundraiser-side-bar fundraiser="fundraiser"></fundraiser-side-bar>
       </div>
     </div>
   </form>

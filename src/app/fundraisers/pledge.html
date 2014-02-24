@@ -13,11 +13,7 @@
 
   <div ng-hide="processing_payment">
     <div class="row" ng-show="fundraiser">
-      <div class="col-sm-3 col-md-3">
-        <div ng-include="'app/fundraisers/templates/leftColumn.html'"></div>
-      </div>
-
-      <div class="col-sm-9 col-md-9">
+      <div class="col-lg-9 col-md-9 col-sm-8">
         <div ng-show="alert.message">
           <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
         </div>
@@ -152,6 +148,10 @@
             </div>
           </div>
         </form>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-4">
+        <fundraiser-side-bar fundraiser="fundraiser" options="{ pledgeButtons: false, rewards: false }"></fundraiser-side-bar>
       </div>
     </div>
   </div>

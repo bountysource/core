@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('directives').directive('fundraiserTweetButton', function() {
+angular.module('directives').directive('fundraiserTweetButton', function($filter, $api) {
   return {
-    templateUrl: 'common/directives/templates/fundraiserTweetButton.html',
+    restrict: 'E',
+    templateUrl: 'common/directives/fundraiserTweetButton/templates/fundraiserTweetButton.html',
     replace: true,
     scope: {
       fundraiser: '='
