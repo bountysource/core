@@ -52,7 +52,7 @@ angular.module('app').
   }).filter('url', function () {
     return function (string) {
       var url = string;
-      if (url.match(/https?:\/\//)) {
+      if (url && url.match(/https?:\/\//)) {
         // do nothing. already has http(s)
       } else {
         url = "https://" + url

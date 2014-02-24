@@ -68,6 +68,12 @@ angular.module('api.bountysource',[]).
       return this;
     };
 
+    this.page = function (value) {
+      if (value < 0) { value = 0; }
+      this.$$page = value;
+      return this;
+    };
+
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
       //if we are in the test environment, call the mocked $api.call() otherwise, use the prod call()
@@ -114,6 +120,12 @@ angular.module('api.bountysource',[]).
           params.per_page = this.$$perPage;
         } else {
           params.per_page = params.per_page || 250;
+        }
+
+        if (this.$$page) {
+          params.page = this.$$page;
+        } else {
+          params.page = params.page || 1;
         }
 
         // Reset temporary perPage holder
@@ -543,8 +555,10 @@ angular.module('api.bountysource',[]).
       return this.call("/teams/"+id, "PUT", form_data);
     };
 
-    this.team_issues = function(team_id, search_parameters) {
-      return this.call("/teams/" + team_id + "/issues", "GET", search_parameters);
+    this.team_issues = function(search_parameters) {
+      return this.call("/doge_issues", "GET", search_parameters, function (response) {
+        return response;
+      });
     };
 
     this.team_tracker_add = function(id, tracker_id) {
