@@ -55,11 +55,11 @@ angular.module('app').
       if (url && url.match(/https?:\/\//)) {
         // do nothing. already has http(s)
       } else {
-        url = "https://" + url
+        url = "https://" + url;
       }
 
-      return url
-    }
+      return url;
+    };
   })
   .filter('from_snake_case', function() {
     // Convert snakecase to words

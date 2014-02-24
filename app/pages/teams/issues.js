@@ -69,13 +69,13 @@ angular.module('app')
       // 1. Return ONLY issues owned by the team (owner_id + owner_type)
       // 2. Return ONLY those issues NOT owned by the team (owner)
       // 3. Return all issues associated with the team (combination of 1 + 2)
-      var params = { order_by: 'IssueRank::TeamRank', team_id: team.id }
+      var params = { order_by: 'IssueRank::TeamRank', team_id: team.id };
       if ($scope.search_parameters.show_team_issues && $scope.search_parameters.show_related_issues) {
         return params;
       } else if ($scope.search_parameters.show_team_issues) {
-        return angular.extend({ tracker_owner_id: team.id, tracker_owner_type: team.type }, params)
+        return angular.extend({ tracker_owner_id: team.id, tracker_owner_type: team.type }, params);
       } else if ($scope.search_parameters.show_related_issues) {
-        return angular.extend({ tracker_owner_id: "!"+team.id, tracker_owner_type: "!"+team.type }, params)
+        return angular.extend({ tracker_owner_id: "!"+team.id, tracker_owner_type: "!"+team.type }, params);
       } else {
         return false;
         // need to return empty list of isssues
