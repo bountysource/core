@@ -1,5 +1,0 @@
-<div>
-  <a ng-show="!fundraiser.published" disabled="" class="btn btn-block btn-default btn-lg">Pledge Now</a>
-  <a ng-show="fundraiser.published && !fundraiser.in_progress" disabled="" class="btn btn-block btn-default btn-lg">Completed {{fundraiser.ends_at | date}}</a>
-  <a ng-show="fundraiser.published && fundraiser.in_progress && !fundraiser_hide_pledge_button" ng-href="/fundraisers/{{ fundraiser.slug }}/pledge" class="btn btn-success btn-block btn-lg">Pledge Now</a>
-</div>

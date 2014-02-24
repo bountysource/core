@@ -11,54 +11,47 @@
     <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div>
 
     <div class="row">
-
-      <div class="col-sm-3 col-md-3">
-        <div ng-include="'app/fundraisers/templates/left_column.html'"></div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div ng-include="'app/fundraisers/templates/leftColumn.html'"></div>
       </div>
 
-      <div class="col-sm-9 col-md-9">
-        <div class="col-sm-9 col-md-9">
-          <div ng-show="can_manage" class="jumbotron">
-            <h2>Updates</h2>
-            <p>Publish updates about your fundraiser. Published updates are emailed to the backers of your fundraiser.</p>
-            <button ng-controller="FundraiserUpdatesController" ng-click="create_update()" class="btn btn-primary btn-lg">New Update</button>
-          </div>
-
-          <div class="alert alert-info" ng-show="updates.length <= 0">
-            No updates have been published.
-          </div>
-
-          <table class="table table-striped table-bordered table-hover update_table" ng-show="updates.length > 0">
-            <!--Published updates row-->
-            <thead>
-              <tr><th><strong>Title</strong></th><th><strong>Published On</strong></th></tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="update in updates">
-                <td>
-                  <a ng-show="update.published_at" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title }}</a>
-
-                  <div ng-hide="update.published_at">
-                    <a class="label label-info" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">Draft</a>
-                    <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title || 'Untitled' }}</a>
-                  </div>
-                </td>
-                <td>
-                  <div ng-show="update.published_at" class="text-muted">{{ update.published_at | date }}</div>
-                  <div ng-hide="update.published_at" class="text-muted">Last modified {{ update.published_at | date }}</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div ng-show="can_manage" class="jumbotron">
+          <h2>Updates</h2>
+          <p>Publish updates about your fundraiser. Published updates are emailed to the backers of your fundraiser.</p>
+          <button ng-controller="FundraiserUpdatesController" ng-click="create_update()" class="btn btn-primary btn-lg">New Update</button>
         </div>
-        <div class="col-sm-3 col-md-3">
-          <div ng-include="'app/fundraisers/templates/top_backers.html'"></div>
 
-          <div ng-show="fundraiser.rewards.length > 0">
-            <h3>Rewards</h3>
-            <div ng-include="'app/fundraisers/templates/rewards.html'"></div>
-          </div>
+        <div class="alert alert-info" ng-show="updates.length <= 0">
+          No updates have been published.
         </div>
+
+        <table class="table table-striped table-bordered table-hover update_table" ng-show="updates.length > 0">
+          <!--Published updates row-->
+          <thead>
+            <tr><th><strong>Title</strong></th><th><strong>Published On</strong></th></tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="update in updates">
+              <td>
+                <a ng-show="update.published_at" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title }}</a>
+
+                <div ng-hide="update.published_at">
+                  <a class="label label-info" ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">Draft</a>
+                  <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">{{ update.title || 'Untitled' }}</a>
+                </div>
+              </td>
+              <td>
+                <div ng-show="update.published_at" class="text-muted">{{ update.published_at | date }}</div>
+                <div ng-hide="update.published_at" class="text-muted">Last modified {{ update.published_at | date }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div ng-include="'app/fundraisers/templates/rightColumn.html'"></div>
       </div>
     </div>
   </form>
