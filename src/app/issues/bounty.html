@@ -19,8 +19,8 @@
 
         <form name="form" class="form-horizontal">
           <div class="form-group">
-            <label class="control-label">Payment Method:</label>
-            <div class="controls">
+            <label class="control-label col-md-2">Payment Method:</label>
+            <div class="col-md-10">
               <!-- Google Wallet -->
               <div class="checkbox"><label class="">
                 <input type="radio" ng-model="bounty.checkout_method" value="google">
@@ -62,8 +62,8 @@
           </div>
 
           <div class="form-group">
-            <label for="amount" class="control-label">Bounty Amount:</label>
-            <div class="controls">
+            <label for="amount" class="control-label col-md-2">Bounty Amount:</label>
+            <div class="col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">$</span>
                 <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="Bounty amount" required="" class="form-control">
@@ -73,15 +73,15 @@
 
           <div>
             <div class="form-group">
-              <label class="control-label">
+              <label class="control-label col-md-2">
                 <div>Bounty Expiration:</div>
                 <div><small class="text-muted"><em>Optional</em></small></div>
               </label>
               <span ng-switch="expiration">
-                <div class="controls" ng-switch-when="0">
+                <div class="col-md-10" ng-switch-when="0">
                   <ng-include src="'app/issues/templates/options/expiration_up.html'"></ng-include>
                 </div>
-                <div class="controls" ng-switch-when="1">
+                <div class="col-md-10" ng-switch-when="1">
                   <ng-include src="'app/issues/templates/options/expiration_down.html'"></ng-include>
                 </div>
               </span>
@@ -89,7 +89,7 @@
 
             <div collapse="!bounty.bounty_expiration || bounty.bounty_expiration == 'never'">
               <div class="form-group">
-                <div class="controls">
+                <div class="col-md-offset-2 col-md-10">
                   <h5>When the bounty expires...</h5>
                   <div ab-randomize="" ng-include="'app/issues/templates/options/upon_expiration.html'" onload="broadcastLoad()"></div>
                 </div>
@@ -97,11 +97,11 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label">
+              <label class="control-label col-md-2">
                 <div>Promotion:</div>
                 <div><small class="text-muted"><em>Optional</em></small></div>
               </label>
-              <div class="controls">
+              <div class="col-md-10">
                 <div ab-randomize="" ng-include="'app/issues/templates/options/promotion.html'" onload="broadcastLoad()"></div>
                 <div collapse="!bounty.promotion">
                   <a class="btn btn-default btn-sm" ng-click="bounty.promotion = undefined">
@@ -115,15 +115,15 @@
 
           <div collapse="!show_fee">
             <div class="form-group">
-              <label class="control-label">Bountysource Fee:</label>
-              <div class="controls">
+              <label class="control-label col-md-2">Bountysource Fee:</label>
+              <div class="col-md-10">
                 <div style="line-height: 30px;"><strong>{{bounty.fee | currency}}</strong></div>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Total:</label>
-              <div class="controls">
+              <label class="control-label col-md-2">Total:</label>
+              <div class="col-md-3">
                 <div class="input-group">
                   <span class="input-group-addon">$</span>
                   <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" required="" class="form-control">
@@ -133,17 +133,17 @@
           </div>
 
           <div class="form-group">
-            <div class="controls">
+            <div class="col-md-offset-2 col-md-10">
               <div class="checkbox"><label class="">
                 <input type="checkbox" ng-model="bounty.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && bounty.anonymous">
-                <span ng-class="{ text-muted: !can_make_anonymous }">Post anonymously</span>
+                <span ng-class="{ 'text-muted': !can_make_anonymous }">Post anonymously</span>
                 <small class="text-info" ng-show="!can_make_anonymous">* Team bounties cannot be anonymous</small>
               </label></div>
             </div>
           </div>
 
           <div class="form-group">
-            <div class="controls">
+            <div class="col-md-offset-2 col-md-10">
               <button ng-click="create_payment()" ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid">
                 <span>Post {{bounty.amount || 0 | dollars}} Bounty</span>
               </button>
@@ -154,7 +154,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="controls">
+            <div class="col-md-offset-2">
               <div class="checkbox"><label class="" ng-show="!issue.tracker.followed">
                 <input type="checkbox" ng-model="following">
                 <span>Follow {{issue.tracker.name}}?</span>
