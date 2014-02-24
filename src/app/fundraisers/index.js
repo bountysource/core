@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('fundraisers').controller('FundraiserIndexController', function ($scope, $location, $api) {
+angular.module('fundraisers').controller('FundraiserIndexController', function($scope, $location, $api) {
   $scope.type = 'current';
   if ($location.path() === '/fundraisers/completed') {
     $scope.type = 'completed';
   }
   $scope.current = [];
   $scope.completed = [];
+
   $api.fundraisers_get().then(function(fundraisers) {
     for (var i=0; i<fundraisers.length; i++) {
       $scope.$init_fundraiser(fundraisers[i]);

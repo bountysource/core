@@ -32,21 +32,4 @@ angular.module('fundraisers').controller('FundraiserShowController', function ($
       return fundraiser;
     }
   });
-
-  $scope.pledge = {
-    amount: parseInt($routeParams.amount, 10)
-  };
-
-  $scope.publish = function(fundraiser) {
-    $api.fundraiser_publish(fundraiser.id, function(response) {
-      if (response.meta.success) {
-        // TODO I do not know why this doesn't work: $location.url("/fundraisers/"+fundraisers.slug).replace();
-        $window.location = "/fundraisers/"+fundraiser.slug;
-      } else {
-        $scope.error = "ERROR: " + response.data.error;
-      }
-
-      return response.data;
-    });
-  };
 });
