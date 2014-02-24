@@ -15,7 +15,7 @@ angular.module('fundraisers')
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/new', angular.extend({
-      templateUrl: 'app/fundraisers/create.html',
+      templateUrl: 'app/fundraisers/new.html',
       controller: 'FundraiserCreateController',
       resolve: { person: personResolver }
     }, routeOptions));

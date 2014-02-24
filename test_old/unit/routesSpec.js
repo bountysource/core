@@ -125,7 +125,7 @@ describe('All the wonderful routes we have', function() {
     it('should map routes for fundraisers creation', function() {
       inject(function($route) {
         expect($route.routes['/fundraisers/new'].controller).toBe('FundraiserCreateController');
-        expect($route.routes['/fundraisers/new'].templateUrl).toEqual('app/fundraisers/create.html');
+        expect($route.routes['/fundraisers/new'].templateUrl).toEqual('app/fundraisers/new.html');
       });
     });
 

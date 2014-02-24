@@ -2,11 +2,20 @@
 
 angular.module('fundraisers').controller('FundraiserCreateController', function($scope, $routeParams, $location, $api) {
   $scope.fundraiser = {
+    total_pledged: 0,
     funding_goal: 25000,
     description: "",
     short_description: "",
-    team_id: null
+    team_id: null,
+    $days_left: 30
   };
+
+  // Watch current person to add author to fundraiser side bar
+  $scope.$watch('current_person', function(person) {
+    if (person) {
+      $scope.fundraiser.person = angular.copy(person);
+    }
+  });
 
   $api.person_teams($scope.current_person.id).then(function(teams) {
     $scope.teams = teams;
