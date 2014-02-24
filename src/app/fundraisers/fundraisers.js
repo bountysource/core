@@ -88,18 +88,4 @@ angular.module('fundraisers')
         }
       });
     };
-
-    // Action for the publish button shown to fundraiser owner on all pages
-    $scope.publishFundraiser = function(fundraiser) {
-      $api.fundraiser_publish(fundraiser.id, function(response) {
-        if (response.meta.success) {
-          // TODO I do not know why this doesn't work: $location.url("/fundraisers/"+fundraisers.slug).replace();
-          $window.location = "/fundraisers/"+fundraiser.slug;
-        } else {
-          $scope.error = "ERROR: " + response.data.error;
-        }
-
-        return response.data;
-      });
-    };
   });

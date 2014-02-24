@@ -10,7 +10,8 @@ angular.module('constants', []);
 angular.module('filters', []);
 angular.module('directives', []);
 angular.module('services', []);
-angular.module('bountysource', ['constants', 'services', 'directives', 'filters']);
+angular.module('factories', []);
+angular.module('bountysource', ['constants', 'services', 'directives', 'filters', 'factories']);
 
 angular.module('fundraisers', ['bountysource']);
 
