@@ -10,7 +10,7 @@
 * rewards - show the rewards
 * shareButtons - show the share buttons. such social
 * */
-angular.module('directives').directive('fundraiserSideBar', function() {
+angular.module('directives').directive('fundraiserSideBar', function($api) {
   return {
     restrict: 'EAC',
     templateUrl: 'common/directives/fundraiserSideBar/templates/fundraiserSideBar.html',
@@ -33,6 +33,16 @@ angular.module('directives').directive('fundraiserSideBar', function() {
       if (angular.isObject(scope.options)) {
         angular.extend(scope.$options, scope.options);
       }
+
+      // Watch Fundraiser object for Team. Fetch members if they are not present on the object.
+      scope.$watch('fundraiser.team', function(team) {
+        if (team && !team.members) {
+          $api.team_members_get(team.slug).then(function(members) {
+            scope.fundraiser.team.members = angular.copy(members);
+            return members;
+          });
+        }
+      });
     }
   };
 });

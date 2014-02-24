@@ -23,7 +23,15 @@ angular.module('fundraisers').controller('FundraiserCreateController', function(
   });
 
   $scope.create = function() {
-    $api.fundraiser_create($scope.fundraiser, function(response) {
+    var payload = angular.copy($scope.fundraiser);
+
+    // Replace Team object with Team id as team_id
+    if (payload.team) {
+      payload.team_id = payload.team.id;
+      delete payload.team;
+    }
+
+    $api.fundraiser_create(payload, function(response) {
       if (response.meta.success) {
         $location.url("/fundraisers/"+response.data.slug+"/edit");
       } else {
