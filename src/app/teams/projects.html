@@ -25,8 +25,8 @@
             <loading-bar ng-show="working">Searching</loading-bar>
           </div>
           <div>
-            <ul class="thumbnails team-tracker-thumbnails">
-              <li ng-repeat="tracker in team.trackers | filter: trackerOwner()" class="span2">
+            <ul class="thumbnails list-unstyled team-tracker-thumbnails">
+              <li ng-repeat="tracker in team.trackers | filter: trackerOwner()" class="col-md-2">
                 <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="unclaim_tracker(tracker)">
                   <i class="glypicon glyphicon-remove"></i>
                 </button>
@@ -62,8 +62,8 @@
         <div class="alert alert-info">{{team.name}} has not added any projects to their profile.</div>
       </div>
 
-      <ul class="thumbnails team-tracker-thumbnails">
-        <li ng-repeat="tracker in team.trackers | filter:trackerUsed()" class="span2">
+      <ul class="thumbnails team-tracker-thumbnails list-unstyled">
+        <li ng-repeat="tracker in team.trackers | filter:trackerUsed()" class="col-md-2">
           <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="remove_tracker(tracker)"><i class="glypicon glyphicon-remove"></i></button>
           <a class="thumbnail text-center" ng-href="/trackers/{{tracker.slug}}">
             <img ng-src="{{tracker.medium_image_url}}">
