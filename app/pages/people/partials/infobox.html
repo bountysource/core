@@ -35,13 +35,13 @@
       <div class="span7 offset1">
         <ul style="margin: 0;">
           <li class="provider-link" ng-show="person.github_account">
-            <a ng-href="http://github.com/{{person.github_account.login}}" target="_blank"><img src="images/favicon-github.png"> <span>{{person.github_account.login}}</span></a>
+            <a ng-href="http://github.com/{{person.github_account.login}}" target="_blank"><img src="images/favicon-github.png"> <span>{{person.github_account.display_name}}</span></a>
           </li>
           <li class="provider-link" ng-show="person.twitter_account">
-            <a ng-href="http://twitter.com/{{person.twitter_account.login}}"><img src="images/favicon-twitter.png"> <span>{{person.twitter_account.login}}</span></a>
+            <a ng-href="http://twitter.com/{{person.twitter_account.login}}"><img src="images/favicon-twitter.png"> <span>{{person.twitter_account.display_name}}</span></a>
           </li>
           <li class="provider-link" ng-show="person.facebook_account">
-            <a ng-href="http://facebook.com/profile.php?id={{person.facebook_account.uid}}"><img src="images/favicon-facebook.png"> <span>{{person.facebook_account.login}}</span></a>
+            <a ng-href="http://facebook.com/profile.php?id={{person.facebook_account.uid}}"><img src="images/favicon-facebook.png"> <span>{{person.facebook_account.display_name}}</span></a>
           </li>
           <!--<li class="provider-link" ng-show="person.gittip_account">-->
           <!--<a href="http://gittip.com/"><img src="images/favicon-gittip.png"> <span>{{person.gittip_account.login}}</span></a>-->
