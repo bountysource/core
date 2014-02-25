@@ -34,7 +34,7 @@ module.exports = function (grunt) {
     },
 
     watch: {
-      options: { livereload: false },
+      options: { livereload: true },
       all: {
         files: ['<%= src.js %>', '<%= src.jsTpl.app %>', '<%= src.jsTpl.common %>', '<%= src.specs %>', '<%= src.scenarios %>'],
         tasks: ['html_src'] // 'jshint'
