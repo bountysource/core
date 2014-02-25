@@ -102,7 +102,7 @@
       <tbody>
       <tr ng-repeat="issue in featured_issues">
         <td>
-          <a ng-href="/trackers/{{ issue.tracker.slug }}">{{issue.tracker.name}}</a>
+          <a ng-href="/trackers/{{ issue.tracker.slug }}"><img ng-src="{{issue.tracker.image_url }}" class="issue-table-tracker-img"></img>  {{issue.tracker.name}}</a>
         </td>
         <td>
           <a ng-href="/issues/{{issue.slug}}">
@@ -154,7 +154,7 @@
         <tbody>
         <tr ng-repeat="issue in search_results" ng-class="{ success: (issue.bounty_total > 0), warning: (!issue.can_add_bounty) }">
           <td>
-            <a ng-href="/trackers/{{ issue.tracker.slug }}" ng-class="{ 'text-success': (issue.bounty_total > 0)}">{{issue.tracker.name}}</a>
+            <a ng-href="/trackers/{{ issue.tracker.slug }}" ng-class="{ 'text-success': (issue.bounty_total > 0)}"><img ng-src="{{issue.tracker.image_url }}" class="issue-table-tracker-img"></img>  {{issue.tracker.name}}</a>
           </td>
           <td>
             <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0)}">
