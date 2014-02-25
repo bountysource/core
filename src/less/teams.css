@@ -1,6 +1,6 @@
 li.member-thumbnail { text-align: center; }
 li.member-thumbnail .member-thumbnail-actions { text-align: right; }
-td.center-height { vertical-align: middle;}
+.table td.center-height { vertical-align: middle;}
 td.teams-activity-cell {
   text-overflow: ellipsis;
   max-width: 869px;
@@ -20,4 +20,15 @@ a.team-member-card {
 
 h3.no-margin {
   margin: 0px;
+}
+
+.team-tracker-thumbnails {
+  padding-top: 0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.team-tracker-caption {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

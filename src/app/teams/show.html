@@ -48,33 +48,11 @@
       </div>
 
       <div class="col-sm-3 col-md-3">
-        <div class="well" style="min-height: 240px;">
-          <div style="min-height: 180px;">
-            <h4>Add Projects</h4>
-            <ul>
-              <li>Highlight your team's own projects.</li>
-              <li>Keep track of the open-source projects your team uses</li>
-            </ul>
-          </div>
-          <div style="text-align: center;">
-            <a ng-href="/teams/{{team.slug}}/projects" class="btn btn-primary">Add Projects</a>
-          </div>
-        </div>
+        <ng-include src="'app/teams/templates/goto_projects_box.html'"></ng-include>
       </div>
 
       <div class="col-sm-3 col-md-3">
-        <div class="well" style="min-height: 240px;">
-          <div style="min-height: 180px;">
-            <h4>Change Settings</h4>
-            <ul>
-              <li>Update team name, logo, and homepage</li>
-              <li>Set a custom Bio for your team</li>
-            </ul>
-          </div>
-          <div style="text-align: center;">
-            <a ng-href="/teams/{{team.slug}}/settings" class="btn btn-primary">Change Settings</a>
-          </div>
-        </div>
+        <ng-include src="'app/teams/templates/goto_settings_box.html'"></ng-include>
       </div>
     </div>
 
@@ -84,30 +62,12 @@
         <ng-include src="'app/teams/templates/post_bounty_box.html'"></ng-include>
       </div>
 
-      <div class="well col-sm-3 col-md-3" style="min-height:280px;">
-        <div style="min-height:75%">
-          <h4>Invite Members</h4>
-          <ul>
-            <li>Add members and send email invites</li>
-            <li>Assign roles to members</li>
-            <li>Show off your team</li>
-          </ul>
-        </div>
-        <div style="text-align:center;"><a ng-href="/teams/{{ team.slug }}/members/manage" class="btn btn-primary">Invite
-          Members</a></div>
+      <div class="col-sm-3 col-md-3">
+        <ng-include src="'app/teams/templates/goto_invite_members.html'"></ng-include>
       </div>
 
-      <div class="well col-sm-3 col-md-3" style="min-height:280px;" ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
-        <div style="min-height:75%">
-          <h4>Add Funds</h4>
-          <ul>
-            <li>Create a shared team balance</li>
-            <li>Fund with Paypal or Google Wallet</li>
-            <li> Post bounties & pledge to fundraisers</li>
-          </ul>
-        </div>
-        <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/account" class="btn btn-primary">Add
-          Funds</a></div>
+      <div class="col-sm-3 col-md-3" ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
+        <ng-include src="'app/teams/templates/goto_add_funds.html'"></ng-include>
       </div>
 
       <div class="well col-sm-3 col-md-3" style="min-height:280px;" ng-show="team.type == 'Team::Project'">
