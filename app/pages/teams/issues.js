@@ -5,17 +5,18 @@ angular.module('app')
   $routeProvider
   .when('/teams/:id/issues', {
     templateUrl: 'pages/teams/issues.html',
-    controller: 'BaseTeamController'
+    controller: 'BaseTeamController',
+    reloadOnSearch: false
   });
 })
-.controller('TeamIssuesController', function ($scope, $routeParams, $api) {
+.controller('TeamIssuesController', function ($scope, $routeParams, $api, $location, $window) {
     // render defaults
     $scope.maxPaginationSize = 15; // how many pages to show in the pagination bar
     $scope.issues_resolved = false;
     $scope.show_advanced_search = false;
     $scope.search_parameters = {
-      show_team_issues: true,
-      show_related_issues: true,
+      show_team_issues: parseParams($routeParams.show_team_issues),
+      show_related_issues: parseParams($routeParams.show_related_issues),
       direction: "desc",
       order: "rank"
     };
@@ -81,16 +82,36 @@ angular.module('app')
         return false;
         // need to return empty list of isssues
       }
-
     }
 
     function updateIssues (issues_data) {
       if (issues_data.meta) { $scope.pagination = issues_data.meta.pagination; }
       $scope.issues = issues_data.data;
       $scope.issues_resolved = true;
+
+      var new_params = angular.extend($routeParams, {
+        show_team_issues: ($scope.search_parameters.show_team_issues) ? 1 : 0,
+        show_related_issues: ($scope.search_parameters.show_related_issues) ? 1 : 0
+      });
+      if ($scope.pagination){
+        angular.extend(new_params, {page: $scope.pagination.page})
+      }
+      delete new_params.id;
+      $location.search(new_params);
+    }
+
+    function parseParams (param) {
+      if($window.parseInt(param, 10).toString() === "NaN") {
+        return true;
+      } else if ($window.parseInt(param, 10) == 1) {
+        return true;
+      } else if ($window.parseInt(param, 10) == 0) {
+        return false;
+      }
     }
 
     // load team issues when the page is first loaded
-    $scope.get_team_issues(1, 25);
+
+    $scope.get_team_issues($window.parseInt($routeParams.page, 10) || 1, 25);
 
   });

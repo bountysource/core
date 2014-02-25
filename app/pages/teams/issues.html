@@ -15,9 +15,9 @@
       <ng-include src="'pages/teams/partials/tabs.html'"></ng-include>
 
 
-      <div>
-        <div class="row-fluid well" style='padding-top: 10px; padding-bottom: 0px;'>
-          <span class="span6">
+      <div class="row-fluid">
+        <div class="row-fluid">
+          <span class="span3 pull-left">
             <form class="form-inline no-margin" style="text-align: center; vertical-align: middle">
               <label class="checkbox">
                 <input type="checkbox" ng-model="search_parameters.show_team_issues" ng-change="get_team_issues()"></input>
@@ -25,7 +25,7 @@
               </label>
             </form>
           </span>
-          <span class="span6">
+          <span class="span3">
             <form class="form-inline no-margin" style="text-align: center; vertical-align: middle">
               <label class="checkbox">
                 <input type="checkbox" ng-model="search_parameters.show_related_issues" ng-change="get_team_issues()"></input>
@@ -33,6 +33,10 @@
               </label>
             </form>
           </span>
+          <span>
+            <p class="pull-right"><span class="label label-success">{{ pagination.items || issues.length | number }}</span> <strong>Suggested Issues</strong></p>
+          </span>
+
 <!--           <span class="span4">
             <a ng-click="toggle_advanced_search()">
               <span ng-show="show_advanced_search">« Hide Advanced Search</span>
@@ -78,7 +82,6 @@
 
       <div ng-show="issues_resolved">
         <div ng-show="issues.length > 0">
-          <p><span class="label label-success">{{ pagination.items || issues.length | number }}</span> <strong>Suggested Issues</strong></p>
           <table class="table table-condensed table-striped" style="table-layout: fixed">
             <thead>
               <tr>
