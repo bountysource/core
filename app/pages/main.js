@@ -1,10 +1,18 @@
 'use strict';
 
 angular.module('app')
-.controller('MainController', function ($scope, $location, $rootScope, $window, $pageTitle) {
+.controller('MainController', function ($scope, $location, $rootScope, $window, $pageTitle, $twttr) {
   $rootScope.$on('$viewContentLoaded', function() {
     $scope.no_container = $location.path() === '/';
   });
+
+    $scope.show_twitter_banner = function () {
+      if ($location.path() === "/") {
+        return false;
+      } else {
+        return true
+      }
+    };
 
   // change page title on change route
   $rootScope.$on('$routeChangeStart', function (event, current) {
