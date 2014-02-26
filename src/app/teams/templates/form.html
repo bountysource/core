@@ -1,35 +1,38 @@
 <div class="form-group">
-  <label class="control-label" for="name">Name:</label>
-  <div class="controls">
+  <label class="control-label col-md-2" for="name">Name:</label>
+  <div class="col-md-10">
     <input id="name" type="text" class="input-medium form-control" ng-model="form_data.name" placeholder="Bountysource Inc.">
   </div>
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="slug">Custom URL:</label>
-  <div class="controls">
-    <span class="text-muted">bountysource.com/teams/</span> <input id="slug" type="text" ng-model="form_data.slug" input-slug="" class="form-control">
+  <label class="control-label col-md-2" for="slug">Custom URL:</label>
+  <div class="col-md-10">
+    <div class="input-group">
+      <span class="input-group-addon">bountysource.com/teams/</span>
+      <input id="slug" type="text" ng-model="form_data.slug" input-slug="" class="form-control">
+    </div>
   </div>
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="image_url">Logo URL:</label>
-  <div class="controls">
+  <label class="control-label col-md-2" for="image_url">Logo URL:</label>
+  <div class="col-md-10">
     <!--<img ng-src="{{team.image_url}}" style="width: 50px; height: 50px" />-->
-    <input id="image_url" type="text" ng-model="form_data.image_url" class="input-xlarge form-control" placeholder="https://www.bountysource.com/logo.png">
+    <input id="image_url" type="text" ng-model="form_data.image_url" class="form-control" placeholder="https://www.bountysource.com/logo.png">
   </div>
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="url">Homepage:</label>
-  <div class="controls">
+  <label class="control-label col-md-2" for="url">Homepage:</label>
+  <div class="col-md-10">
     <input id="url" type="url" ng-model="form_data.url" class="input-large form-control" placeholder="https://www.bountysource.com/">
   </div>
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="bio">Bio:</label>
-  <div class="controls">
-    <textarea class="span9" id="bio" ng-model="form_data.bio" rows="5" placeholder="Bountysource is the funding platform for open-source software."></textarea>
+  <label class="control-label col-md-2" for="bio">Bio:</label>
+  <div class="col-md-10">
+    <textarea class="form-control" id="bio" ng-model="form_data.bio" rows="5" placeholder="Bountysource is the funding platform for open-source software."></textarea>
   </div>
 </div>

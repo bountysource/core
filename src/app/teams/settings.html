@@ -1,126 +1,32 @@
 <ul class="breadcrumb">
-  <li><a href="/">Home</a></li>
-  <li><a href="/teams">Teams</a></li>
-  <li><a>{{team.name || 'Loading...'}}</a></li>
+  <li><a href="/">Home</a><span class="divider">»</span></li>
+  <li><a href="/teams">Teams</a><span class="divider">»</span></li>
+  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a><span class="divider">»</span></li>
+  <li><a>Settings</a></li>
 </ul>
 
-<div class="row" ng-show="team">
-  <div class="col-sm-3 col-md-3">
-    <ng-include src="'app/teams/templates/infobox.html'"></ng-include>
-  </div>
-  <div class="col-sm-9 col-md-9" ng-controller="TeamHomeController">
-    <ng-include src="'app/teams/templates/header.html'"></ng-include>
-    <ng-include src="'app/teams/templates/tabs.html'"></ng-include>
-
-    <div ng-show="funds_added">
-      <alert type="'success'" close="funds_added = null">Successfully added <strong>{{funds_added | dollars}}</strong>
-        to <strong>{{team.name}}'s</strong> balance. Current balance of <strong>{{team.account_balance |
-          dollars}}</strong> is available to spend immediately.
-      </alert>
+<div ng-show="team">
+  <div class="row">
+    <div class="col-md-3">
+      <ng-include src="'app/teams/templates/infobox.html'"></ng-include>
     </div>
+    <div class="col-md-9">
+      <ng-include src="'app/teams/templates/header.html'"></ng-include>
+      <ng-include src="'app/teams/templates/tabs.html'"></ng-include>
 
-    <!-- Not a member, or just a public member. Do nothing but show the projects used -->
-    <div ng-show="!is_member || !(is_admin || is_developer)">
-
-      <!-- If you don't own any projects, no title -->
-      <div ng-show="team.owned_trackers.length <= 0">
-        <team-tracker-thumbnails trackers="team.trackers"></team-tracker-thumbnails>
-      </div>
-
-      <!-- If you own projects, split them apart and add titles -->
-      <div ng-show="team.owned_trackers.length > 0">
-        <div ng-show="team.owned_trackers.length > 0">
-          <h3>{{team.name}}'s Projects</h3>
-          <team-tracker-thumbnails trackers="team.owned_trackers"></team-tracker-thumbnails>
+      <form class="form-horizontal" ng-submit="create_team()" ng-controller="EditTeamController">
+        <div ng-show="alert.text">
+          <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
         </div>
 
-        <div ng-show="team.unowned_trackers.length > 0">
-          <h3>Projects Used by {{team.name}}</h3>
-          <team-tracker-thumbnails trackers="team.unowned_trackers"></team-tracker-thumbnails>
-        </div>
-      </div>
-    </div>
+        <ng-include src="'app/teams/templates/form.html'"></ng-include>
 
-    <!-- Developer view. Can only add projects and place bounties -->
-    <div class="row" ng-show="!is_admin && is_developer">
-      <div class="col-sm-6 col-md-6">
-        <ng-include src="'app/teams/templates/post_bounty_box.html'"></ng-include>
-      </div>
-
-      <div class="col-sm-3 col-md-3">
-        <div class="well" style="min-height: 240px;">
-          <div style="min-height: 180px;">
-            <h4>Add Projects</h4>
-            <ul>
-              <li>Highlight your team's own projects.</li>
-              <li>Keep track of the open-source projects your team uses</li>
-            </ul>
-          </div>
-          <div style="text-align: center;">
-            <a ng-href="/teams/{{team.slug}}/projects" class="btn btn-primary">Add Projects</a>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <submit type="submit" ng-click="save_team()" class="btn btn-large btn-primary">Update</submit>
           </div>
         </div>
-      </div>
-
-      <div class="col-sm-3 col-md-3">
-        <div class="well" style="min-height: 240px;">
-          <div style="min-height: 180px;">
-            <h4>Change Settings</h4>
-            <ul>
-              <li>Update team name, logo, and homepage</li>
-              <li>Set a custom Bio for your team</li>
-            </ul>
-          </div>
-          <div style="text-align: center;">
-            <a ng-href="/teams/{{team.slug}}/settings" class="btn btn-primary">Change Settings</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Admin view. Can do all of the things! -->
-    <div class="row" ng-show="is_admin">
-      <div class="col-sm-6 col-md-6">
-        <ng-include src="'app/teams/templates/post_bounty_box.html'"></ng-include>
-      </div>
-
-      <div class="well col-sm-3 col-md-3" style="min-height:280px;">
-        <div style="min-height:75%">
-          <h4>Invite Members</h4>
-          <ul>
-            <li>Add members and send email invites</li>
-            <li>Assign roles to members</li>
-            <li>Show off your team</li>
-          </ul>
-        </div>
-        <div style="text-align:center;"><a ng-href="/teams/{{ team.slug }}/members/manage" class="btn btn-primary">Invite
-          Members</a></div>
-      </div>
-
-      <div class="well col-sm-3 col-md-3" style="min-height:280px;" ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
-        <div style="min-height:75%">
-          <h4>Add Funds</h4>
-          <ul>
-            <li>Create a shared team balance</li>
-            <li>Fund with Paypal or Google Wallet</li>
-            <li> Post bounties & pledge to fundraisers</li>
-          </ul>
-        </div>
-        <div style="text-align:center"><a ng-href="/teams/{{ team.slug }}/account" class="btn btn-primary">Add
-          Funds</a></div>
-      </div>
-
-      <div class="well col-sm-3 col-md-3" style="min-height:280px;" ng-show="team.type == 'Team::Project'">
-        <div style="min-height:75%">
-          <h4>Install Plugin</h4>
-          <ul>
-            <li>Add/update bounty total in Issue title</li>
-            <li>Add bounty information to the issue body</li>
-            <li>Apply label to all issues with a bounty</li>
-          </ul>
-        </div>
-        <div style="text-align:center"><a ng-href="/tools" class="btn btn-primary">Install Plugin</a></div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
