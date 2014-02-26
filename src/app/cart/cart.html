@@ -33,20 +33,20 @@
         <div collapse="item.$edit_mode">
           <div class="row">
             <div class="col-sm-6 col-md-6">
-              <button tooltip="Remove" ng-click="remove_item(item)" class="btn btn-block btn-danger"><i class="glypicon glyphicon-trash"></i></button>
+              <button tooltip="Remove" ng-click="remove_item(item)" class="btn btn-block btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
             </div>
             <div class="col-sm-6 col-md-6">
-              <button tooltip="Edit" ng-click="toggle_edit_mode(item)" class="btn btn-block btn-primary" ng-class="{ active: item.$edit_mode }"><i class="glypicon glyphicon-cog"></i></button>
+              <button tooltip="Edit" ng-click="toggle_edit_mode(item)" class="btn btn-block btn-primary" ng-class="{ active: item.$edit_mode }"><i class="glyphicon glyphicon-cog"></i></button>
             </div>
           </div>
         </div>
         <div collapse="!item.$edit_mode">
           <div class="row">
             <div class="col-sm-6 col-md-6">
-              <button tooltip="Save Changes" ng-click="update_item(item)" class="btn btn-block btn-danger"><i class="glypicon glyphicon-ok-sign"></i></button>
+              <button tooltip="Save Changes" ng-click="update_item(item)" class="btn btn-block btn-danger"><i class="glyphicon glyphicon-ok-sign"></i></button>
             </div>
             <div class="col-sm-6 col-md-6">
-              <button tooltip="Cancel Changes" ng-click="cancel_item_changes(item)" class="btn btn-block btn-default" ng-class="{ active: item.$edit_mode }"><i class="glypicon glyphicon-remove"></i></button>
+              <button tooltip="Cancel Changes" ng-click="cancel_item_changes(item)" class="btn btn-block btn-default" ng-class="{ active: item.$edit_mode }"><i class="glyphicon glyphicon-remove"></i></button>
             </div>
           </div>
         </div>

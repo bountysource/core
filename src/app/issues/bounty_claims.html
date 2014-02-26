@@ -46,7 +46,7 @@
               <h4 style="margin-bottom: 10px;">Claim Rejected</h4>
               <p>You <strong>rejected</strong> this claim.</p>
               <p><a ng-href="/people/{{claim.person.slug}}">{{claim.person.display_name}}</a> cannot claim the bounty unless you <strong>resolve your dispute</strong>.</p>
-              <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_resolve_form) }" ng-click="claim.show_claim_form('resolve')"><i class="glypicon glyphicon-thumbs-up"></i> Resolve Dispute</button>
+              <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_resolve_form) }" ng-click="claim.show_claim_form('resolve')"><i class="glyphicon glyphicon-thumbs-up"></i> Resolve Dispute</button>
             </div>
 
             <!-- You have not voted on this claim -->
@@ -54,8 +54,8 @@
               <h4 style="margin-bottom: 10px;">Response Needed</h4>
               <p><strong class="text-success">Accept</strong> this claim to expedite payout.</p>
               <p><strong class="text-danger">Reject</strong> this claim if it does not resolve the issue.</p>
-              <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_accept_form) }" ng-click="claim.show_claim_form('accept')"><i class="glypicon glyphicon-thumbs-up"></i> Accept</button>
-              <button class="btn btn-block btn-danger" ng-class="{ active: (claim.showing_dispute_form) }" ng-click="claim.show_claim_form('dispute')"><i class="glypicon glyphicon-thumbs-down"></i> Reject</button>
+              <button class="btn btn-block btn-success" ng-class="{ active: (claim.showing_accept_form) }" ng-click="claim.show_claim_form('accept')"><i class="glyphicon glyphicon-thumbs-up"></i> Accept</button>
+              <button class="btn btn-block btn-danger" ng-class="{ active: (claim.showing_dispute_form) }" ng-click="claim.show_claim_form('dispute')"><i class="glyphicon glyphicon-thumbs-down"></i> Reject</button>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
               <p>Why are you rejecting this claim?</p>
               <form style="margin-bottom: 0">
                 <textarea ng-model="claim.new_dispute.description" style="width: 100%;" rows="3" placeholder="Another developer deserves this bounty."></textarea>
-                <button class="btn btn-danger" ng-click="claim.submit_reject()"><i class="glypicon glyphicon-thumbs-down"></i> Reject claim</button>
+                <button class="btn btn-danger" ng-click="claim.submit_reject()"><i class="glyphicon glyphicon-thumbs-down"></i> Reject claim</button>
                 <button class="btn btn-default" ng-click="claim.showing_dispute_form = false">Cancel</button>
               </form>
             </div>
@@ -79,7 +79,7 @@
               <p>How was your dispute resolved?</p>
               <form style="margin-bottom: 0">
                 <textarea ng-model="claim.new_resolve.description" style="width: 100%;" rows="3" placeholder="{{claim.person.display_name}} addressed my concerns, thanks!"></textarea>
-                <button class="btn btn-success" ng-click="claim.resolve()"><i class="glypicon glyphicon-thumbs-up"></i> Resolve Dispute</button>
+                <button class="btn btn-success" ng-click="claim.resolve()"><i class="glyphicon glyphicon-thumbs-up"></i> Resolve Dispute</button>
                 <button class="btn btn-default" ng-click="claim.showing_resolve_form = false">Cancel</button>
               </form>
             </div>
@@ -94,7 +94,7 @@
                   <textarea ng-model="claim.new_accept.description" class="form-control" rows="3" placeholder="You did a great job {{claim.person.display_name}}, thanks for the fix!"></textarea>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-success" ng-click="claim.accept()"><i class="glypicon glyphicon-thumbs-up"></i> Accept</button>
+                  <button class="btn btn-success" ng-click="claim.accept()"><i class="glyphicon glyphicon-thumbs-up"></i> Accept</button>
                   <button class="btn btn-default" ng-click="claim.showing_accept_form = false">Cancel</button>
                 </div>
               </form>

@@ -31,9 +31,9 @@
               <th><a ng-click="update_sort(issue_sort, 'tracker.name')">Project</a></th>
               <th><a ng-click="update_sort(issue_sort, 'title')">Name</a></th>
               <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'bounty_total')" tooltip="Bounty total"><span style="color: black">$</span></a></th>
-              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="glypicon glyphicon-thumbs-up"></i></a></th>
-              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'participants_count')" tooltip="Watchers"><i class="glypicon glyphicon-user"></i></a></th>
-              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'created_at')" tooltip="Age of Issue"><i class="glypicon glyphicon-time"></i></a></th>
+              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'thumbs_up_count')" tooltip="Votes and '+1' comments total"><i class="glyphicon glyphicon-thumbs-up"></i></a></th>
+              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'participants_count')" tooltip="Watchers"><i class="glyphicon glyphicon-user"></i></a></th>
+              <th style="text-align:center;"><a ng-click="update_sort(issue_sort, 'created_at')" tooltip="Age of Issue"><i class="glyphicon glyphicon-time"></i></a></th>
             </tr>
             </thead>
             <tbody>
@@ -46,8 +46,8 @@
                   {{issue.bounty_total | dollars:{space:true} }}
                 </a>
               </td>
-              <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"><i class="glypicon glyphicon-thumbs-up"></i> {{issue.thumbs_up_count | number}}</a></td>
-              <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"><i class="glypicon glyphicon-user"></i> {{issue.participants_count | number}}</a></td>
+              <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"><i class="glyphicon glyphicon-thumbs-up"></i> {{issue.thumbs_up_count | number}}</a></td>
+              <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"><i class="glyphicon glyphicon-user"></i> {{issue.participants_count | number}}</a></td>
               <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">{{issue.created_at | timeAgoShort}}</a></td>
             </tr>
             </tbody>

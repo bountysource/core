@@ -24,7 +24,7 @@
       <div class="filter-box" collapse="languages_loaded.length <= 0">
         <span class="badge search-filter" ng-repeat="language in languages_loaded">
           <button type="button" class="close" ng-click="remove_language(language)">
-            <i class="glypicon glyphicon-remove"></i>
+            <i class="glyphicon glyphicon-remove"></i>
           </button>
           <span>{{language.name}}</span>
         </span>
@@ -52,7 +52,7 @@
       <div class="project-box" collapse="trackers_loaded <= 0">
         <span class="badge search-filter" ng-repeat="tracker in trackers_loaded">
           <button type="button" class="close" ng-click="remove_tracker(tracker)">
-            <i class="glypicon glyphicon-remove"></i>
+            <i class="glyphicon glyphicon-remove"></i>
           </button>
           {{tracker.name}}
         </span>
@@ -78,7 +78,7 @@
             <a tooltip="Bounty total"><span style="color: black">$</span></a>
           </th>
           <th style="text-align: center">
-            <a tooltip="Age of Issue"><i class="glypicon glyphicon-time"></i></a>
+            <a tooltip="Age of Issue"><i class="glyphicon glyphicon-time"></i></a>
           </th>
         </tr>
       </thead>
@@ -89,7 +89,7 @@
           </td>
           <td>
             <a ng-href="/issues/{{issue.slug}}">
-              <i ng-show="issue.bounty_total >= 1000" class="glypicon glyphicon-fire"></i>
+              <i ng-show="issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
               {{issue.title}}
             </a>
           </td>
@@ -130,7 +130,7 @@
               <a ng-click="change_order_col('bounty_total', form_data.page)" tooltip="Bounty total"><span style="color: black">$</span></a>
             </th>
             <th style="text-align: center">
-              <a ng-click="change_order_col('remote_created_at', form_data.page)" tooltip="Age of Issue"><i class="glypicon glyphicon-time"></i></a>
+              <a ng-click="change_order_col('remote_created_at', form_data.page)" tooltip="Age of Issue"><i class="glyphicon glyphicon-time"></i></a>
             </th>
           </tr>
         </thead>
@@ -141,7 +141,7 @@
             </td>
             <td>
               <a ng-href="/issues/{{issue.slug}}" ng-class="{ 'text-success': (issue.bounty_total > 0)}">
-                <i ng-show="issue.bounty_total >= 1000" class="glypicon glyphicon-fire"></i>
+                <i ng-show="issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
                 {{issue.title}}
                 <span ng-show="issue.paid_out" class="label label-info">paid out</span>
                 <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>

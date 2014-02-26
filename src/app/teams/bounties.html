@@ -72,7 +72,7 @@
             <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"></a></td>
             <td>
               <a ng-href="/issues/{{bounty.issue.slug}}">
-                <i ng-show="bounty.issue.bounty_total >= 1000" class="glypicon glyphicon-fire"></i>
+                <i ng-show="bounty.issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
                 {{bounty.issue.title}}
                 <span ng-show="!bounty.issue.can_add_bounty && !bounty.issue.paid_out" class="label label-warning">closed</span>
               </a>
@@ -114,7 +114,7 @@
             <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img">  {{bounty.issue.tracker.name}}</a></td>
             <td>
               <a ng-href="/issues/{{bounty.issue.slug}}">
-                <i ng-show="bounty.issue.bounty_total >= 1000" class="glypicon glyphicon-fire"></i>
+                <i ng-show="bounty.issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
                 {{bounty.issue.title}}
               </a>
             </td>

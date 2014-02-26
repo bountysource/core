@@ -52,17 +52,17 @@
 
     <td ng-show="bounty.anonymous && bounty.owner_type != 'Team'">
       <button class="btn btn-block active btn-default btn-sm" ng-click="toggle_anonymous(bounty)">
-        <i class="glypicon glyphicon-eye-close"></i>
+        <i class="glyphicon glyphicon-eye-close"></i>
         Anonymized
       </button>
     </td>
     <td ng-hide="bounty.anonymous">
       <button class="btn btn-block btn-success btn-sm" ng-click="toggle_anonymous(bounty)" ng-hide="bounty.owner_type == 'Team'">
-        <i class="glypicon glyphicon-eye-open"></i>
+        <i class="glyphicon glyphicon-eye-open"></i>
         Publicized
       </button>
       <button class="btn btn-block btn-success disabled btn-sm" ng-show="bounty.owner_type == 'Team'" tooltip="Team bounties cannot be anonymous">
-        <i class="glypicon glyphicon-eye-open"></i>
+        <i class="glyphicon glyphicon-eye-open"></i>
         Publicized
       </button>
     </td>

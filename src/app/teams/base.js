@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle) {
+angular.module('app').controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle, $route) {
   $pageTitle.set("Teams");
 
   $scope.team_promise = $api.team_get($routeParams.id).then(function(team) {
