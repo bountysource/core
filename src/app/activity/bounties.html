@@ -26,37 +26,37 @@
 
   <tbody>
     <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
-      <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
-      <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
+      <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
+      <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
         <span ng-show="bounty.status == 'refunded'" class="label label-warning">Refunded</span>
         <span ng-hide="bounty.status == 'refunded'">
           <issue-status-label issue="bounty.issue"></issue-status-label>
         </span>
       </a></td>
-      <td><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.amount | dollars }}</a></td>
-      <td>{{ bounty.created_at | date }}</td>
-      <td>
+      <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.amount | dollars }}</a></td>
+      <td class="center-height">{{ bounty.created_at | date }}</td>
+      <td class="center-height">
         <div ng-show="bounty.owner">
-          <div class="thumbnail" tooltip="{{bounty.owner.display_name}}" tooltip-placement="left">
+          <div class="img-thumbnail" tooltip="{{bounty.owner.display_name}}" tooltip-placement="left">
             <owner-profile-link model="bounty">
-            <img ng-src="{{bounty.owner.image_url}}">
-          </owner-profile-link>
+              <img class="img-responsive" ng-src="{{bounty.owner.image_url}}">
+            </owner-profile-link>
         </div>
       </div>
       <div ng-hide="bounty.owner">
-        <div class="thumbnail" tooltip="Anonymous" tooltip-placement="left">
-          <img src="images/anon.jpg">
+        <div class="img-thumbnail" tooltip="Anonymous" tooltip-placement="left">
+          <img class="img-responsive" src="images/anon.jpg">
         </div>
       </div>
     </td>
 
-    <td ng-show="bounty.anonymous && bounty.owner_type != 'Team'">
+    <td class="center-height" ng-show="bounty.anonymous && bounty.owner_type != 'Team'">
       <button class="btn btn-block active btn-default btn-sm" ng-click="toggle_anonymous(bounty)">
         <i class="glyphicon glyphicon-eye-close"></i>
         Anonymized
       </button>
     </td>
-    <td ng-hide="bounty.anonymous">
+    <td class="center-height" ng-hide="bounty.anonymous">
       <button class="btn btn-block btn-success btn-sm" ng-click="toggle_anonymous(bounty)" ng-hide="bounty.owner_type == 'Team'">
         <i class="glyphicon glyphicon-eye-open"></i>
         Publicized

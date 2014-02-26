@@ -1,6 +1,6 @@
 <div id="infobox-wrapper">
   <div class="well">
-    <div><img ng-src="{{person.large_image_url}}"></div>
+    <div><img class="img-responsive img-rounded" ng-src="{{person.large_image_url}}"></div>
 
     <div ng-show="person.url || person.public_email">
       <br>
@@ -11,26 +11,26 @@
 
   <div ng-show="person.company || person.location || person.github_account || person.twitter_account || person.facebook_account || teams.length > 0" class="well">
     <div class="row" ng-show="person.company">
-      <div class="text-right col-sm-4 col-md-4">
+      <div class="col-sm-4 col-md-4 text-right">
         <strong>Company</strong>
       </div>
-      <div class="col-lg-offset-1 col-sm-7 col-md-7">
-        {{person.company}}
+      <div class="col-sm-7 col-md-7">
+        <p class="text-left">{{person.company}}</p>
       </div>
     </div>
 
     <div class="row" ng-show="person.location">
-      <div class="text-right col-sm-4 col-md-4">
+      <div class="col-sm-4 col-md-4 text-right">
         <strong>Location</strong>
       </div>
-      <div class="col-lg-offset-1 col-sm-7 col-md-7">
-        {{person.location}}
+      <div class="col-sm-7 col-md-7">
+        <p class="text-left">{{person.location}}</p>
       </div>
     </div>
 
     <div class="row" ng-show="person.github_account || person.twitter_account || person.facebook_account">
-      <div class="text-right col-sm-4 col-md-4">
-        <strong>Linked Accounts</strong>
+      <div class="col-sm-4 col-md-4">
+        <strong class="text-right">Linked Accounts</strong>
       </div>
       <div class="col-lg-offset-1 col-sm-7 col-md-7">
         <ul style="margin: 0;">
