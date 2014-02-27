@@ -3,7 +3,7 @@
 angular.module('app').controller('SigninController', function ($scope, $routeParams, $api, $location, $window) {
   // Redirect user to homepage if already logged in.
   // Need to wait to see if current_person is explicitly set to false.
-  $scope.teams = [];
+  // TODO: This isn't settings teams. Show the sub-menu isn't showing up.
   $scope.$watch('current_person', function(current_person) {
     if (current_person) {
       $api.person_teams(current_person.id).then(function(teams) {
