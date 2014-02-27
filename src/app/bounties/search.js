@@ -68,15 +68,16 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   };
 
   $scope.trackers_to_load_from_params = [];
-  $scope.languages_loaded = [];
   $scope.trackers_loaded = [];
+
+  $scope.languages_to_load_from_params = [];
+  $scope.languages_loaded = [];
 
   $scope.languages_promise = $api.languages_get().then(function(languages) {
     languages.sort(function(a,b) {
       return (a.weight > b.weight ? -1 : (a.weight === b.weight ? 0 : 1));
     });
 
-    $scope.all_languages = languages;
 
     $scope.$watch('languages_to_load_from_params', function(newValue, oldValue, scope) {
       if (scope.languages_to_load_from_params && $scope.languages_to_load_from_params.length > 0) {
@@ -108,19 +109,15 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
       }
     });
 
-    $scope.languages_selected = function (language) {
-
-    };
-
-    $scope.languages = languages;
+    $scope.all_languages = languages;
     return languages;
   });
 
   //removes languages from selected_languages array
   $scope.remove_language = function(language) {
-    for (var i = 0; i < $scope.languages_selected.length; i++) {
-      if (language.id === $scope.languages_selected[i].id) {
-        $scope.languages_selected.splice(i, 1);
+    for (var i = 0; i < $scope.languages_loaded.length; i++) {
+      if (language.id === $scope.languages_loaded[i].id) {
+        $scope.languages_loaded.splice(i, 1);
         break;
       }
       for (var e=0;e<$scope.form_data.languages.length;e++) {
@@ -177,9 +174,10 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
 
     $scope.form_data.per_page = 50;
     $scope.form_data.page = page || 1;
-
+    ///////////// NEED TO FIX ARRAYED PARAMS FOR LANGUAGE AND TRACKER IDS /////////////
+    // https://github.com/angular/angular.js/commit/807394095b991357225a03d5fed81fea5c9a1abe
     var form_data_for_url = clean_object($scope.form_data);
-    $location.search(form_data_for_url);
+    // $location.search(form_data_for_url);
     $scope.featured_issues = []; // removes featured issues from view
     $api.bounty_search($scope.form_data).then(function(response) {
       $scope.search_results = response.issues;

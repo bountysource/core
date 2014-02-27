@@ -5,6 +5,7 @@
 
 <div class="row">
   <div class="well bounty-search-well col-sm-3 col-md-3">
+    {{form_data}}
     <div>
      <form ng-submit="submit_query()" class="form">
       <div class="form-group">
@@ -25,10 +26,10 @@
 
       <div class="form-group">
         <label>Language:</label>
-        <input name="input" type="text" class="form-control" placeholder="Search for languages" 
-               ng-model="languages_input" 
+        <input name="input" type="text" class="form-control" placeholder="Search for languages"
+               ng-model="languages_input"
                typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8"
-               typeahead-editable="false" 
+               typeahead-editable="false"
                autocomplete="off"
         >
       </div>
