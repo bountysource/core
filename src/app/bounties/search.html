@@ -25,7 +25,12 @@
 
       <div class="form-group">
         <label>Language:</label>
-        <input name="input" type="text" class="form-control" placeholder="Search for languages" ng-model="languages_input" typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8" typeahead-editable="false" autocomplete="off">
+        <input name="input" type="text" class="form-control" placeholder="Search for languages" 
+               ng-model="languages_input" 
+               typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8"
+               typeahead-editable="false" 
+               autocomplete="off"
+        >
       </div>
 
 

@@ -68,12 +68,15 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   };
 
   $scope.trackers_to_load_from_params = [];
+  $scope.languages_loaded = [];
   $scope.trackers_loaded = [];
 
   $scope.languages_promise = $api.languages_get().then(function(languages) {
     languages.sort(function(a,b) {
       return (a.weight > b.weight ? -1 : (a.weight === b.weight ? 0 : 1));
     });
+
+    $scope.all_languages = languages;
 
     $scope.$watch('languages_to_load_from_params', function(newValue, oldValue, scope) {
       if (scope.languages_to_load_from_params && $scope.languages_to_load_from_params.length > 0) {
@@ -104,6 +107,10 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
         }
       }
     });
+
+    $scope.languages_selected = function (language) {
+
+    };
 
     $scope.languages = languages;
     return languages;
