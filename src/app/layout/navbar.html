@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <!-- Search input -->
       <div class="col-md-4 col-sm-4">
-        <form class="navbar-form" role="search">
+        <form class="navbar-form" role="search" ng-controller="NavbarSearchController" ng-submit="submit_search()">
           <div class="input-group">
             <input type="text" class="form-control" ng-model="search_query" placeholder="Issue URL, Project, Language, etc." />
             <div class="input-group-btn">

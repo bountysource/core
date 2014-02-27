@@ -28,6 +28,7 @@ angular.module('app').controller('Settings', function($scope, $routeParams, $api
     }
 
     $api.person_update($scope.form_data).then(function(updated_person) {
+      console.log(updated_person);
       if (updated_person.error) {
         $scope.error = updated_person.error;
       } else {
