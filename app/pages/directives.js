@@ -245,7 +245,7 @@ angular.module('app.directives').
       scope: {
         percent: "="
       },
-      template: '<span><i class="icon-signal" ng-show="percent >= 70"></i><i class="icon-signal" style="width: 11px; margin-right:3px" ng-show="percent >= 40 && percent < 70"></i><i class="icon-signal" style="width: 8px; margin-right:6px" ng-show="percent >= 20 && percent < 40"></i><i class="icon-signal" style="width: 5px; margin-right:9px" ng-show="percent < 20"></i></span>'
+      template: '<span><i class="icon-signal" style="opacity: 0.2"></i><i class="icon-signal" style="margin-left: -14px" ng-show="percent >= 70"></i><i class="icon-signal" style="width: 11px; margin-right:3px; margin-left: -14px" ng-show="percent >= 40 && percent < 70"></i><i class="icon-signal" style="width: 8px; margin-right:6px; margin-left: -14px" ng-show="percent >= 20 && percent < 40"></i><i class="icon-signal" style="width: 5px; margin-right:9px; margin-left: -14px" ng-show="percent < 20"></i></span>'
     };
   }).
   directive('loadingBar', function() {
