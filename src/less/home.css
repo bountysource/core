@@ -2,7 +2,7 @@
 
 .homepage section#top {
   /* credit goes to: http://www.flickr.com/photos/wikimediail/8810765530 */
-  background: url(images/top_background.jpg) center center no-repeat;
+  background: url(../images/top_background.jpg) center center no-repeat;
   background-size: cover;
   text-align: center;
   border: 0;
