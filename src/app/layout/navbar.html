@@ -1,12 +1,13 @@
 <div class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavbarController">
   <div class="container">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       <a class="navbar-brand" href="/" style="padding-top: 10px; padding-bottom: 10px;">
         <img src="images/Bountysource-green.png" style="max-height: 45px; max-width: 120px;"/>
       </a>
     </div>
 
-    <div class="collapse navbar-collapse" id="navbar-collapse">
+    <div class="collapse navbar-collapse" collapse="!isCollapsed">
       <!-- Search input -->
       <div class="col-md-4 col-sm-4">
         <form class="navbar-form" role="search" ng-controller="NavbarSearchController" ng-submit="submit_search()">
