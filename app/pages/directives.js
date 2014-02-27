@@ -237,6 +237,17 @@ angular.module('app.directives').
       }
     };
   }).
+  directive('signalIcon', function() {
+    return {
+      restrict: "E",
+      replace: true,
+      transclude: true,
+      scope: {
+        percent: "="
+      },
+      template: '<span><i class="icon-signal" ng-show="percent >= 70"></i><i class="icon-signal" style="width: 11px; margin-right:3px" ng-show="percent >= 40 && percent < 70"></i><i class="icon-signal" style="width: 8px; margin-right:6px" ng-show="percent >= 20 && percent < 40"></i><i class="icon-signal" style="width: 5px; margin-right:9px" ng-show="percent < 20"></i></span>'
+    };
+  }).
   directive('loadingBar', function() {
     return {
       restrict: "E",
