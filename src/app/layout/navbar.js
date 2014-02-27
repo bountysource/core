@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('NavbarController', function ($scope, $api) {
+angular.module('app').controller('NavbarController', function ($scope, $api, $modal) {
   $scope.setEnv = $api.setEnvironment;
 
   $scope.set_access_token = {
