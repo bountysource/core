@@ -6,20 +6,28 @@
 <div class="row">
   <div class="well bounty-search-well col-sm-3 col-md-3">
     <div>
-     <form ng-submit="submit_query()">
-      <input type="text" placeholder="Enter search terms here" ng-model="form_data.search" class="span12 form-control">
-      <label>Sort by:</label>
-      <select ng-model="form_data.order" ng-options="option.value as option.label for option in sort_options"></select>
+     <form ng-submit="submit_query()" class="form">
+      <div class="form-group">
+        <input type="text" placeholder="Enter search terms here" ng-model="form_data.search" class="form-control">
+      </div>
 
-      <div class="sort-by-box">
+      <div class="form-group">
+        <label class="label-control">Sort by:</label>
+        <select class="form-control" ng-model="form_data.order" ng-options="option.value as option.label for option in sort_options"></select>
+      </div>
+
+      <div class="form-group">
         <div class="btn-group">
-          <button class="btn btn-primary" btn-radio="'asc'" type="button" ng-model="form_data.direction">{{update_direction(form_data.order).asc}}</button>
-          <button class="btn btn-primary" btn-radio="'desc'" type="button" ng-model="form_data.direction">{{update_direction(form_data.order).desc}}</button>
+          <button class="btn btn-success" btn-radio="'asc'" type="button" ng-model="form_data.direction">{{update_direction(form_data.order).asc}}</button>
+          <button class="btn btn-success" btn-radio="'desc'" type="button" ng-model="form_data.direction">{{update_direction(form_data.order).desc}}</button>
         </div>
       </div>
 
-      <label>Language:</label>
-      <input name="input" type="text" class="search span12 form-control" placeholder="Search for languages" ng-model="languages_input" typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8" typeahead-editable="false" autocomplete="off">
+      <div class="form-group">
+        <label>Language:</label>
+        <input name="input" type="text" class="form-control" placeholder="Search for languages" ng-model="languages_input" typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8" typeahead-editable="false" autocomplete="off">
+      </div>
+
 
       <div class="filter-box" collapse="languages_loaded.length <= 0">
         <span class="badge search-filter" ng-repeat="language in languages_loaded">
@@ -30,15 +38,15 @@
         </span>
       </div>
 
-      <div class="row">
-        <div class="col-sm-6 col-md-6">
+      <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-6">
           <label>Min Amount:</label>
           <div class="input-group">
             <span class="input-group-addon">$</span>
             <input type="number" class="form-control" min="0" step="any" ng-model="form_data.min">
           </div>
         </div>
-        <div class="col-sm-6 col-md-6">
+        <div class="col-xs-12 col-sm-12 col-md-6">
           <label>Max Amount:</label>
           <div class="input-group">
             <span class="input-group-addon">$</span>
@@ -46,8 +54,11 @@
           </div>
         </div>
       </div>
-      <label>Limit to projects:</label>
-      <input name="input" type="text" class="search span12 form-control" placeholder="Search in projects" ng-model="trackers_input" typeahead="tracker as tracker.name for tracker in do_tracker_typeahead($viewValue)" typeahead-editable="false">
+
+      <div class="form-group">
+        <label class="label-control">Limit to projects:</label>
+        <input name="input" type="text" class="search form-control" placeholder="Search in projects" ng-model="trackers_input" typeahead="tracker as tracker.name for tracker in do_tracker_typeahead($viewValue)" typeahead-editable="false">
+      </div>
 
       <div class="project-box" collapse="trackers_loaded <= 0">
         <span class="badge search-filter" ng-repeat="tracker in trackers_loaded">
@@ -58,8 +69,9 @@
         </span>
       </div>
 
-      <button class="btn btn-primary btn-block" type="submit">Search</button>
-
+      <div class="form-group">
+        <button class="btn btn-success btn-block btn-lg" type="submit">Search</button>
+      </div>
     </form>
   </div>
 </div>
