@@ -14,12 +14,12 @@ angular.module('fundraisers').controller('FundraiserCreateController', function(
   $scope.$watch('current_person', function(person) {
     if (person) {
       $scope.fundraiser.person = angular.copy(person);
-    }
-  });
 
-  $api.person_teams($scope.current_person.id).then(function(teams) {
-    $scope.teams = teams;
-    return teams;
+      $api.person_teams(person.id).then(function(teams) {
+        $scope.teams = teams;
+        return teams;
+      });
+    }
   });
 
   $scope.create = function() {

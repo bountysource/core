@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('services').service('$fundraiser', function() {
+angular.module('services').service('$fundraiser', function($api) {
+  // Store a self reference
+  this.self = this;
+
   // Publish a Fundraiser draft.
   this.publish = function(fundraiser) {
     $api.fundraiser_publish(fundraiser.id, function(response) {

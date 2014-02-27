@@ -12,55 +12,8 @@
         <alert type="'error'" close="error = null">{{ error }}</alert>
       </div>
 
-      <!--Edit Title and Short Description-->
-      <input id="fundraiser-title" class="span12 form-control" type="text" autofocus="true" name="title" ng-model="changes.title" placeholder="The title of your fundraiser">
-      <textarea class="span12 lead" rows="2" name="description" ng-model="changes.short_description" placeholder="Briefly describe your fundraiser"></textarea>
-
-      <ng-form class="form-horizontal" name="urls">
-        <div class="form-group">
-          <label class="control-label" for="funding-goal">Funding Goal</label>
-          <div class="controls">
-            <input class="span8 form-control" id="funding-goal" type="number" min="5" ng-disabled="fundraiser.published" ng-model="changes.funding_goal" placeholder="Funding goal">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label" for="repo-url">Image URL</label>
-          <div class="controls">
-            <img src="{{master.image_url}}" style="width:50px; height:50px">
-            <input class="span7 form-control" id="repo-url" type="text" ng-model="changes.image_url" placeholder="https://cdn.awesome.com/abc123">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label" for="homepage-url">Homepage</label>
-          <div class="controls">
-            <input class="span8 form-control" id="homepage-url" type="url" ng-model="changes.homepage_url" placeholder="https://www.bountysource.com">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label" for="repo-url">Repository</label>
-          <div class="controls">
-            <input class="span8 form-control" id="repo-url" type="url" ng-model="changes.repo_url" placeholder="https://github.com/bountysource/frontend">
-          </div>
-        </div>
-
-        <div class="form-group" ng-show="teams.length > 0">
-          <label class="control-label" for="repo-url">Team</label>
-          <div class="controls">
-            <select ng-options="team.id as team.name for team in teams" ng-model="changes.team_id">
-              <option value="">No Team</option>
-            </select>
-          </div>
-        </div>
-      </ng-form>
-
-      <!--Edit main Description-->
-      <div class="alert alert-info">
-        <strong>Protip:</strong> You can format your description using <a href="https://help.github.com/articles/github-flavored-markdown" target="_blank">GitHub Flavored Markdown</a>.
-      </div>
-      <textarea id="fundraiser-description" class="span12" rows="15" ng-model="changes.description" placeholder="A description of your goal for this fundraiser. You can use GitHub flavored markdown here."></textarea>
+      <pre>changes.title: {{changes.title | json}}</pre>
+      <fundraiser-edit-form ng-model="changes"></fundraiser-edit-form>
     </div>
 
     <div class="col-sm-3 col-md-3">
