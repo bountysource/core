@@ -5,7 +5,6 @@
 
 <div class="row">
   <div class="well bounty-search-well col-sm-3 col-md-3">
-    {{form_data}}
     <div>
      <form ng-submit="submit_query()" class="form">
       <div class="form-group">
@@ -183,7 +182,7 @@
     </div>
 
     <div ng-show="issues_count > 50">
-      <pagination total-items="issues_count" current-page="form_data.page" max-size="maxSize" num-pages="pageCount" items-per-page="perPage" on-select-page="updatePage(page)"></pagination>
+      <pagination total-items="issues_count" page="form_data.page" max-size="maxSize" num-pages="pageCount" items-per-page="perPage" on-select-page="updatePage(page)"></pagination>
     </div>
   </div>
 </div>

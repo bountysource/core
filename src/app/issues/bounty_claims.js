@@ -43,7 +43,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
           if (!bounty_claim.error) {
             // push new bounty claim into table
             issue.bounty_claims.push(bounty_claim);
-            $route.reload() //hacky temporary solution
+            $route.reload(); //hacky temporary solution
           }
         });
       }

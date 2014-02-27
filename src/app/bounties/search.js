@@ -174,12 +174,10 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
 
     $scope.form_data.per_page = 50;
     $scope.form_data.page = page || 1;
-    ///////////// NEED TO FIX ARRAYED PARAMS FOR LANGUAGE AND TRACKER IDS /////////////
-    // https://github.com/angular/angular.js/commit/807394095b991357225a03d5fed81fea5c9a1abe
-    var form_data_for_url = clean_object($scope.form_data);
-    // $location.search(form_data_for_url);
+    var cleaned_form_data = clean_object($scope.form_data);
+    $location.search(cleaned_form_data);
     $scope.featured_issues = []; // removes featured issues from view
-    $api.bounty_search($scope.form_data).then(function(response) {
+    $api.bounty_search(cleaned_form_data).then(function(response) {
       $scope.search_results = response.issues;
       $scope.issues_count = response.issues_total;
       $scope.perPage = 50;
@@ -199,6 +197,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
       if (!value) { // null or undefined ng-model values
         continue;
       }
+
       var value_typeof = typeof value;
       switch(value_typeof) {
       case 'string':
@@ -207,6 +206,12 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
         }
         break;
       case 'object':
+        // case to handle arrays
+        if (angular.isArray(value)) {
+          result[key] = value.toString();
+          break;
+        }
+
         if (typeof value.length !== 'undefined') { // needed to prevent a value.length of zero from evaluating to false
           if (value.length > 0) {
             result[key] = value;

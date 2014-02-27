@@ -27,5 +27,5 @@ angular.module('directives').directive('fundraiserTweetButton', function($filter
         }
       });
     }
-  }
+  };
 });
