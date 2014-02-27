@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('factories').factory('Fundraiser', function() {
+angular.module('services').service('$fundraiser', function() {
   // Publish a Fundraiser draft.
-  this.publishFundraiser = function(fundraiser) {
+  this.publish = function(fundraiser) {
     $api.fundraiser_publish(fundraiser.id, function(response) {
       if (response.meta.success) {
         // TODO I do not know why this doesn't work: $location.url("/fundraisers/"+fundraisers.slug).replace();

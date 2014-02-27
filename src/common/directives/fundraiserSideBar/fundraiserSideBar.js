@@ -10,7 +10,7 @@
 * rewards - show the rewards
 * shareButtons - show the share buttons. such social
 * */
-angular.module('directives').directive('fundraiserSideBar', function($api, $fundraisers) {
+angular.module('directives').directive('fundraiserSideBar', function($api, $fundraiser) {
   return {
     restrict: 'EAC',
     templateUrl: 'common/directives/fundraiserSideBar/templates/fundraiserSideBar.html',
@@ -20,10 +20,7 @@ angular.module('directives').directive('fundraiserSideBar', function($api, $fund
     },
     replace: true,
     link: function(scope) {
-      // extend helper methods from the $fundraisers service
-      angular.extend($fundraisers, scope);
-
-      console.log('scope', scope);
+      scope.publishFundraiser = $fundraiser.publish;
 
       scope.$options = {
         pledgeButtons: true,
