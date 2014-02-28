@@ -42,14 +42,14 @@
         <br>
         <form class="form-horizontal" name="form">
           <div class="form-group">
-            <label class="control-label">Reward:</label>
-            <div class="controls">
+            <label class="control-label col-md-3">Reward:</label>
+            <div class="col-md-9">
               <div class="checkbox"><label class="" ng-repeat="reward in pledge.fundraiser.rewards" ng-show="pledge.amount >= reward.amount">
                 <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-click="select_reward(pledge, reward)" ng-disabled="pledge.amount < reward.amount">
-                <div ng-class="{ 'text-muted': (pledge.amount < reward.amount && reward.amount > 0) }">
+                <span ng-class="{ 'text-muted': (pledge.amount < reward.amount && reward.amount > 0) }">
                   <span ng-show="reward.amount == 0">No Reward</span>
                   <span ng-show="reward.amount > 0">{{reward.amount | dollars}} Reward tier</span>
-                </div>
+                </span>
                 <div style="padding-left: 15px;">
                   <small class="text-info">{{reward.description}}</small>
                 </div>
@@ -59,22 +59,22 @@
 
           <div ng-show="pledge.reward.fulfillment_details">
             <div class="text-warning form-group">
-              <label class="control-label">Required Information:</label>
-              <div class="controls">
+              <label class="control-label col-md-3">Required Information:</label>
+              <div class="col-md-9">
                 <p style="white-space: pre-wrap; padding-top: 5px;">{{pledge.reward.fulfillment_details}}</p>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="control-label">Your Response:</label>
-              <div class="controls">
-                <textarea style="width: 360px;" rows="4" ng-model="pledge.survey_response" placeholder="Your response"></textarea>
+              <label class="control-label col-md-3">Your Response:</label>
+              <div class="col-md-9">
+                <textarea style="width: 360px;" class="form-control" rows="4" ng-model="pledge.survey_response" placeholder="Your response"></textarea>
               </div>
             </div>
           </div>
 
           <div class="form-group">
-            <div class="controls">
+            <div class="col-md-offset-3 col-md-9">
               <button type="submit" class="btn btn-primary" ng-click="update_pledge(pledge)" ng-disabled="form.$pristine">Save Changes</button>
               <button class="btn btn-default" ng-click="pledge.$show_survey = false">Close</button>
             </div>
