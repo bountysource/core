@@ -12,8 +12,10 @@
   3. item.image_url
 
   /// Arguments ///
-  array   => An array of objects that have image_url attributes.
-  per_row => Number of thumbnail links per row.
+  array       => An array of objects that have image_url attributes.
+  per-row     => Number of thumbnail links per row.
+  object-type => Specifies the object type to enable conditional rendering logic
+                 for hrefs, display_names, etc.
 */
 
 angular.module('directives').directive('thumbnailLinks', function () {
@@ -22,11 +24,11 @@ angular.module('directives').directive('thumbnailLinks', function () {
     templateUrl: 'common/directives/thumbnailLinks/templates/thumbnailLinks.html',
     scope: {
       array: '=',
-      perRow: '='
+      perRow: '=',
+      objectType: '='
     },
     replace: true,
     link: function (scope) {
-
       scope.$watch('array', function (array) {
         console.log("array", array);
         if(array == undefined) {return};
