@@ -11,8 +11,6 @@
       <div ng-show="error">
         <alert type="'error'" close="error = null">{{ error }}</alert>
       </div>
-
-      <pre>changes.title: {{changes.title | json}}</pre>
       <fundraiser-edit-form fundraiser="changes" master="master"></fundraiser-edit-form>
     </div>
 
