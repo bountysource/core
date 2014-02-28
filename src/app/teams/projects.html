@@ -30,19 +30,6 @@
         </div>
         <div class="row">
           <thumbnail-links array="team.owned_trackers" per-row="6" object-type="'team-project'" dismiss-action="unclaim_tracker(tracker)"></thumbnail-links>
-<!--           <ul class="list-unstyled">
-            <li ng-repeat="tracker in team.owned_trackers" class="col-md-2">
-              <div class="thumbnail team-tracker-thumbnails">
-                <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="unclaim_tracker(tracker)">
-                  &times;
-                </button>
-                <a class="text-center" ng-href="/trackers/{{tracker.slug}}">
-                  <img class="img-repsonsive img-rounded" ng-src="{{tracker.medium_image_url}}">
-                  <span class="center-block team-tracker-caption">{{tracker.name}}</span>
-                </a>
-              </div>
-            </li>
-          </ul> -->
         </div>
       </div>
 
@@ -72,17 +59,6 @@
 
       <div class="row">
           <thumbnail-links array="team.unowned_trackers" per-row="6" object-type="'team-project'" dismiss-action="remove_tracker(tracker)"></thumbnail-links>
-<!--         <ul class="list-unstyled">
-          <li ng-repeat="tracker in team.trackers | filter:trackerUsed()" class="col-md-2">
-            <div class="thumbnail team-tracker-thumbnails">
-              <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="remove_tracker(tracker)">&times;</button>
-              <a class="text-center" ng-href="/trackers/{{tracker.slug}}">
-                <img class="img-responsive img-rounded" ng-src="{{tracker.medium_image_url}}">
-                <span class="center-block team-tracker-caption">{{tracker.name}}</span>
-              </a>
-            </div>
-          </li>
-        </ul> -->
       </div>
 
     </div>

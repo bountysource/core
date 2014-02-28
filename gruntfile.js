@@ -62,7 +62,7 @@ module.exports = function (grunt) {
           hostname: '*',
           middleware: function (connect) {
             return [
-              modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\.swf|\\.txt)$ /index.html']),
+              modRewrite(['!\\.(html|png|jpg|gif|jpeg|ico|js|css|eot|ttf|svg|woff|swf|txt)$ /index.html']),
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'src')
             ];
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
           hostname: '*',
           middleware: function (connect) {
             return [
-              modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\.swf|\\.txt)$ /index.html']),
+              modRewrite(['!\\\.(html|png|jpg|gif|jpeg|ico|js|css|eot|ttf|svg|woff|swf|txt)$ /index.html']),
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'app'),
               mountFolder(connect, 'test/e2e')
@@ -90,7 +90,7 @@ module.exports = function (grunt) {
           hostname: '*',
           middleware: function (connect) {
             return [
-              modRewrite(['!(\\.html|\\.png|\\.jpg|\\.gif|\\.jpeg|\\.ico|\\.js|\\.css|\\.swf|\\.txt)$ /index.html']),
+              modRewrite(['!\\.(html|png|jpg|gif|jpeg|ico|js|css|eot|ttf|svg|woff|swf|txt)$ /index.html']),
               mountFolder(connect, 'dist')
             ];
           }
