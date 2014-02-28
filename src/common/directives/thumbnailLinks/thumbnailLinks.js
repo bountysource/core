@@ -14,7 +14,7 @@
   /// Arguments ///
   array       => An array of objects that have image_url attributes.
   per-row     => Number of thumbnail links per row.
-  object-type => Specifies the object type to enable conditional rendering logic
+  object-type => Specifies the object type ('team', 'tracker', 'team-project') to enable conditional rendering logic
                  for hrefs, display_names, etc.
 */
 
@@ -25,13 +25,18 @@ angular.module('directives').directive('thumbnailLinks', function () {
     scope: {
       array: '=',
       perRow: '=',
-      objectType: '='
+      objectType: '=',
+      dismissAction: '&'
     },
     replace: true,
     link: function (scope) {
       scope.$watch('array', function (array) {
-        console.log("array", array);
+        // guard clause to prevent calls to empty array
         if(array == undefined) {return};
+
+        //defaults
+        scope.perRow = scope.perRow || 6;
+        scope.objectType = scope.objectType || 'tracker';
 
         scope.range = function() {
           var range = [];

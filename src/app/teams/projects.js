@@ -4,6 +4,7 @@ angular.module('app').controller('TeamTrackersController', function ($scope, $ro
   $scope.projects = [];
 
   $scope.team_promise.then(function (team) {
+    console.log("first team load", team);
     if (team.error) {
       $location.path('/teams');
     }
@@ -15,8 +16,12 @@ angular.module('app').controller('TeamTrackersController', function ($scope, $ro
           for (var i = 0; i < results.length; i++) {
             if (newValue === results[i].id) {
               if (type === "project_owner_search") {
+                // set to null to cancel recurring API calls
+                scope.project_owner_search = null;
                 scope.own_project(newValue);
               } else {
+                // set to null to cancel recurring API calls
+                scope.project_owner_search = null;
                 scope.add_project(newValue);
               }
               break;
@@ -32,7 +37,7 @@ angular.module('app').controller('TeamTrackersController', function ($scope, $ro
       if (typeof(project_search) === "number") {
         $api.team_tracker_add(team.slug, project_search).then(function (updated_team) {
           $scope.set_team(updated_team);
-          team.trackers = updated_team.trackers;
+          $scope.team = $scope.process_owned_unowned_trackers(updated_team);
         });
         $scope.project_search = null;
 
@@ -41,29 +46,18 @@ angular.module('app').controller('TeamTrackersController', function ($scope, $ro
       }
     };
 
-    $scope.own_project = function (project_search) {
-      if (typeof(project_search) === "number") {
-        $api.claim_tracker(project_search, team.id, "Team").then(function (updated_team) {
-          $scope.set_team(updated_team);
-          team.trackers = updated_team.trackers;
-          team = $scope.process_owned_unowned_trackers(team);
-          $scope.project_owner_search = null;
-        });
-      } else if (project_search && project_search.length > 0) {
-        // ????
-      }
-    };
-
     $scope.remove_tracker = function (tracker) {
       // remove the tracker from array immediately
-      for (var i = 0; i < team.trackers.length; i++) {
-        if (team.trackers[i].id === tracker.id) {
-          team.trackers.splice(i, 1);
+      for (var i = 0; i < team.unowned_trackers.length; i++) {
+        if (team.unowned_trackers[i].id === tracker.id) {
+          team.unowned_trackers.splice(i, 1);
           break;
         }
       }
       // actually remove the project!
-      $api.team_tracker_remove(team.slug, tracker.id);
+      $api.team_tracker_remove(team.slug, tracker.id).then(function (updated_team) {
+        $scope.team = $scope.process_owned_unowned_trackers(updated_team);
+      });
 
       //also remove as owner if you remove tracker from used-projects
       if (tracker.owner && tracker.owner.id === team.id) {
@@ -71,9 +65,29 @@ angular.module('app').controller('TeamTrackersController', function ($scope, $ro
       }
     };
 
+    $scope.own_project = function (project_search) {
+      if (typeof(project_search) === "number") {
+        $api.claim_tracker(project_search, team.id, "Team").then(function (updated_team) {
+          $scope.team = $scope.process_owned_unowned_trackers(updated_team);
+        });
+      } else if (project_search && project_search.length > 0) {
+        // ????
+      }
+    };
+
     $scope.unclaim_tracker = function (tracker) {
+      // remove the tracker from array immediately
+      for (var i = 0; i < team.owned_trackers.length; i++) {
+        if (team.owned_trackers[i].id === tracker.id) {
+          team.owned_trackers.splice(i, 1);
+          break;
+        }
+      }
       tracker.owner = null;
-      $api.unclaim_tracker(tracker.id, team.id, "Team");
+      $api.unclaim_tracker(tracker.id, team.id, "Team").then(function (updated_team) {
+        $scope.set_team(updated_team);
+        $scope.team = $scope.process_owned_unowned_trackers(updated_team);
+      });
     };
 
     $scope.trackerOwner = function () {

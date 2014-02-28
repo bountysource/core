@@ -29,8 +29,9 @@
           <loading-bar ng-show="working">Searching</loading-bar>
         </div>
         <div class="row">
-          <ul class="list-unstyled">
-            <li ng-repeat="tracker in team.trackers | filter: trackerOwner()" class="col-md-2">
+          <thumbnail-links array="team.owned_trackers" per-row="6" object-type="'team-project'" dismiss-action="unclaim_tracker(tracker)"></thumbnail-links>
+<!--           <ul class="list-unstyled">
+            <li ng-repeat="tracker in team.owned_trackers" class="col-md-2">
               <div class="thumbnail team-tracker-thumbnails">
                 <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="unclaim_tracker(tracker)">
                   &times;
@@ -41,7 +42,7 @@
                 </a>
               </div>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
 
@@ -70,7 +71,8 @@
       </div>
 
       <div class="row">
-        <ul class="list-unstyled">
+          <thumbnail-links array="team.unowned_trackers" per-row="6" object-type="'team-project'" dismiss-action="remove_tracker(tracker)"></thumbnail-links>
+<!--         <ul class="list-unstyled">
           <li ng-repeat="tracker in team.trackers | filter:trackerUsed()" class="col-md-2">
             <div class="thumbnail team-tracker-thumbnails">
               <button type="button" ng-show="is_admin || is_developer" class="close" ng-click="remove_tracker(tracker)">&times;</button>
@@ -80,7 +82,7 @@
               </a>
             </div>
           </li>
-        </ul>
+        </ul> -->
       </div>
 
     </div>

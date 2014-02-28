@@ -11,6 +11,16 @@
           <img class="img-responsive img-rounded" ng-src="{{item.image_url}}"><br>
           {{item.name}}
         </a>
+
+        <div ng-if="objectType =='team-project'" class="thumbnail text-center">
+          <button type="button"  class="close" ng-click="dismissAction({tracker: item})">
+            &times;
+          </button>
+          <a ng-href="{{ item.frontend_path }}">
+            <img class="img-responsive img-rounded" ng-src="{{ item.image_url }}"></img>
+            {{ item.name }}
+          </a>
+        </div>
     </div>
   </div>
 </div>
