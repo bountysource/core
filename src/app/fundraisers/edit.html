@@ -49,10 +49,14 @@
               <br>
 
               <!--Reward description-->
-              <textarea class="span12" rows="5" ng-model="reward.description" required="" placeholder="A description of this reward." ng-disabled="fundraiser.published"></textarea>
+              <div class="form-group">
+                <textarea class="form-control" rows="5" ng-model="reward.description" required="" placeholder="A description of this reward." ng-disabled="fundraiser.published"></textarea>
+              </div>
 
               <!--Fulfillment Details-->
-              <textarea class="span12" rows="5" ng-model="reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
+              <div class="form-group">
+                <textarea class="form-control" rows="5" ng-model="reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
+              </div>
 
               <div class="row">
                 <div class="col-sm-6 col-md-6">
@@ -99,10 +103,14 @@
             <br>
 
             <!--Reward description-->
-            <textarea class="span12" rows="5" ng-model="new_reward.description" required="" placeholder="A description of this reward."></textarea>
+            <div class="form-group">
+              <textarea class="form-control" rows="5" ng-model="new_reward.description" required="" placeholder="A description of this reward."></textarea>
+            </div>
 
             <!--Fulfillment Details-->
-            <textarea class="span12" rows="5" ng-model="new_reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
+            <div class="form-group">
+              <textarea class="form-control" rows="5" ng-model="new_reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
+            </div>
 
             <!--Add that bad boy!-->
             <button ng-disabled="!new_reward.amount || !new_reward.description" ng-click="create_reward(fundraiser)" class="btn btn-success btn-block">Add Reward</button>

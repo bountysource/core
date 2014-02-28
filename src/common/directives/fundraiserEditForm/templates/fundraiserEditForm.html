@@ -12,7 +12,7 @@
     <div class="form-group">
       <label class="col-sm-2" for="funding-goal">Funding Goal</label>
       <div class="col-sm-10">
-        <input class="form-control" id="funding-goal" type="number" ng-model="fundraiser.funding_goal" placeholder="Funding goal">
+        <input class="form-control" id="funding-goal" type="number" ng-disabled="master.published" ng-model="fundraiser.funding_goal" placeholder="Funding goal">
       </div>
     </div>
 

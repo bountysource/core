@@ -13,7 +13,7 @@
 
   <div ng-hide="processing_payment">
     <div class="row" ng-show="fundraiser">
-      <div class="col-lg-9 col-md-9 col-sm-8">
+      <div class="col-lg-9 col-md-9 col-sm-9">
         <div ng-show="alert.message">
           <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
         </div>
@@ -26,9 +26,9 @@
               </div>
 
               <div class="form-group">
-                <label class="control-label" for="amount">Pledge Amount</label>
+                <label class="control-label col-md-5" for="amount">Pledge Amount</label>
 
-                <div class="controls">
+                <div class="col-md-7">
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
                     <input type="number" min="5" step="0.01" name="amount" id="amount" ng-model="pledge.amount" placeholder="Pledge amount" class="form-control">
@@ -37,17 +37,17 @@
               </div>
 
               <div class="form-group">
-                <label class="control-label">Payment Method:</label>
-                <div class="controls">
+                <label class="control-label col-md-5">Payment Method:</label>
+                <div class="col-md-7">
                   <!-- Google Wallet -->
-                  <div class="checkbox"><label class="">
+                  <div class="checkbox" style="padding-left:0px;"><label class="">
                     <input type="radio" ng-model="pledge.checkout_method" value="google">
                     <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
                     <span>Google Wallet</span>
                   </label></div>
 
                   <!-- PayPal -->
-                  <div class="checkbox"><label class="">
+                  <div class="checkbox" style="padding-left:0px;"><label class="">
                     <input type="radio" ng-model="pledge.checkout_method" value="paypal">
                     <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
                     <span>PayPal</span>
@@ -55,7 +55,7 @@
 
                   <!-- Personal account -->
                   <div ng-show="current_person && current_person.account.balance > 0">
-                    <div class="checkbox"><label class="">
+                    <div class="checkbox" style="padding-left:0px;"><label class="">
                       <input type="radio" ng-model="pledge.checkout_method" value="personal">
                       <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
                       <span>{{current_person.display_name}} <strong>{{ current_person.account.balance | currency }}</strong></span>
@@ -64,7 +64,7 @@
 
                   <!-- Team accounts -->
                   <div ng-show="teams.length > 0">
-                    <div class="checkbox"><label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="">
+                    <div class="checkbox" style="padding-left:0px;"><label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="">
                       <input type="radio" ng-model="pledge.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0">
                       <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
                     <span ng-class="{ 'text-muted': (!team.is_developer || team.account_balance <= 0) }">
@@ -79,37 +79,39 @@
               </div>
 
               <div class="form-group">
-                <div class="controls">
-                  <div class="checkbox"><label class="">
-                    <input type="checkbox" ng-model="pledge.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && pledge.anonymous">
-                    <span ng-class="{ 'text-muted': !can_make_anonymous }">Post anonymously</span>
-                    <small class="text-info" ng-show="!can_make_anonymous">* Team pledges cannot be anonymous</small>
-                  </label></div>
+                <div class="col-md-offset-5 col-md-7">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="pledge.anonymous" ng-disabled="!can_make_anonymous" ng-checked="can_make_anonymous && pledge.anonymous">
+                      <span ng-class="{ 'text-muted': !can_make_anonymous }">Post anonymously</span>
+                      <small class="text-info" ng-show="!can_make_anonymous">* Team pledges cannot be anonymous</small>
+                    </label>
+                  </div>
                 </div>
               </div>
 
               <div class="form-group" ng-show="fundraiser.rewards.length > 0">
-                <label class="control-label">Choose a Reward</label>
+                <label class="control-label col-md-5">Choose a Reward</label>
 
-                <div class="controls">
-                  <div class="checkbox"><label class="">
+                <div class="col-md-7">
+                  <div class="checkbox" style="padding-left:0px;"><label class="">
                     <input type="radio" ng-model="pledge.reward_id" value="0" ng-change="set_reward(0)">
-                    <div>No Reward</div>
+                    <span>No Reward</span>
                   </label></div>
 
-                  <div class="checkbox"><label class="" ng-repeat="reward in fundraiser.rewards">
+                  <div class="checkbox" ng-repeat="reward in fundraiser.rewards" style="padding-left:0px;"><label class="">
                     <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-change="set_reward(reward)" ng-disabled="reward.sold_out">
-                    <div ng-class="{ 'text-muted': reward.sold_out }">
+                    <span ng-class="{ 'text-muted': reward.sold_out }">
                       {{reward.amount | dollars}} Reward tier
                       <span ng-show="reward.sold_out" class="label label-warning">Sold out</span>
-                    </div>
+                    </span>
                   </label></div>
                 </div>
               </div>
 
               <div class="form-group">
-                <div class="controls">
-                  <button class="btn btn-default btn-lg" ng-show="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)" popover-placement="right" popover-trigger="mouseenter" popover="You need to provide the above information to receive this reward.">Make Pledge</button>
+                <div class="col-md-offset-5 col-md-7">
+                  <button class="btn btn-default btn-success btn-lg" disabled="true" ng-show="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)" popover-placement="right" popover-trigger="mouseenter" popover="You need to provide the above information to receive this reward.">Make Pledge</button>
                   <button ng-click="create_payment()" class="btn btn-success btn-lg" ng-hide="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)">Make Pledge</button>
                 </div>
               </div>
@@ -121,7 +123,7 @@
                   <div>
                     <h4>
                       Reward Survey
-                      <span class="pull-right label label-important">required</span>
+                      <span class="pull-right label label-danger">required</span>
                     </h4>
                   </div>
                   <br>
@@ -130,7 +132,7 @@
                   </div>
                   <br>
                   <div>
-                    <textarea class="span12" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required=""></textarea>
+                    <textarea class="form-control" ng-model="pledge.survey_response" rows="4" placeholder="Provide the required information from above." required=""></textarea>
                   </div>
                   <div style="margin: 10px 0 0 10px;">
                     <small><i>* You can edit your response later if you need to.</i></small>
