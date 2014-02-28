@@ -22,6 +22,10 @@ module.exports = function (grunt) {
 
     src: {
       js: ['src/app/app.js', 'src/**/*.js', '!src/vendor/**'],
+      jsTplRelative: {
+        app: ['app/**/*.html'],
+        common: ['common/**/*.html']
+      },
       jsTpl: {
         app: ['src/app/**/*.html'],
         common: ['src/common/**/*.html']
@@ -186,7 +190,8 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          src: ['<%= src.jsTpl.app %>', '<%= src.jsTpl.common %>'],
+          cwd: 'src',
+          src: ['<%= src.jsTplRelative.app %>', '<%= src.jsTplRelative.common %>'],
           dest: 'dist'
         }]
       }
