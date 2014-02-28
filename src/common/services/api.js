@@ -455,7 +455,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
   };
 
   this.transaction_activity = function() {
-    return this.call('/user/transactions');
+    return this.call('/transactions');
   };
 
   this.search = function(query) {
