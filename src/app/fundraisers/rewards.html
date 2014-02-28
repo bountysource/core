@@ -10,10 +10,6 @@
   <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div>
 
   <div class="row" ng-show="fundraiser">
-    <div class="col-sm-3 col-md-3">
-      <div ng-include="'app/fundraisers/templates/leftColumn.html'"></div>
-    </div>
-
     <div class="col-sm-9 col-md-9">
       <loading-bar ng-hide="rewards">Loading rewards...</loading-bar>
 
@@ -24,7 +20,7 @@
 
         <accordion close-others="false">
           <div ng-repeat="reward in rewards | orderBy:'amount'">
-            <div ng-show="reward.amount <= 0">
+            <div ng-if="reward.amount <= 0">
               <accordion-group heading="No Reward" is-open="reward.$is_open">
                 <div class="row">
                   <div class="col-sm-3 col-md-3">
@@ -68,7 +64,7 @@
               </accordion-group>
             </div>
 
-            <div ng-show="reward.amount > 0">
+            <div ng-if="reward.amount > 0">
               <accordion-group is-open="reward.$is_open">
                 <accordion-heading>
                   ${{reward.amount | number:0}} Reward
@@ -138,5 +134,9 @@
         </accordion>
       </div>
     </div>
+    <div class="col-lg-3 col-md-3 col-sm-4">
+      <fundraiser-side-bar fundraiser="fundraiser" options="{ pledgeButtons: false, rewards: false }"></fundraiser-side-bar>
+    </div>
+
   </div>
 </div>
