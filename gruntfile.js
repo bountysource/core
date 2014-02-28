@@ -122,7 +122,7 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      dist_assets: ['dist/assets', 'dist/compiled'],
+      dist_assets: ['dist/assets', 'dist/compiled', 'dist/app', 'dist/common'],
       server: '.tmp',
       templates: [
         'dist/templates.js'
@@ -229,6 +229,15 @@ module.exports = function (grunt) {
           dest: 'dist',
           src: ['favicon.ico', 'robots.txt']
         }]
+      },
+      glyphicons: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: 'src/vendor/bootstrap/dist/fonts',
+          dest: 'dist/assets',
+          src: ['glyph*']
+        }]
       }
     },
 
@@ -247,7 +256,7 @@ module.exports = function (grunt) {
 
       binary: {
         files: {
-          'dist/compiled/': ['dist/assets/*.{png,jpg,jpeg,gif,woff}']
+          'dist/compiled/': ['dist/assets/*.{png,jpg,jpeg,gif,woff,eot,ttf,svg}']
         }
       },
 
