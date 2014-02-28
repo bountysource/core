@@ -16,14 +16,7 @@
       <li><a href="/teams/new">Create</a></li>
     </ul>
 
-    <ul class="list-unstyled">
-      <li class="col-md-2" ng-repeat="team in teams">
-        <a href="/teams/{{team.slug}}" class="thumbnail text-center">
-          <img class="img-responsive img-rounded" src="{{team.medium_image_url}}"><br>
-          {{team.name}}
-        </a>
-      </li>
-    </ul>
+    <thumbnail-links array="teams" per-row="6"></thumbnail-links>
   </div>
 
   <div class="col-sm-3 col-md-3" ng-include="'app/teams/templates/index-side.html'"></div>
