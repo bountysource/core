@@ -32,7 +32,7 @@ angular.module('directives').directive('thumbnailLinks', function () {
     link: function (scope) {
       scope.$watch('array', function (array) {
         // guard clause to prevent calls to empty array
-        if(array == undefined) {return};
+        if(array === undefined) {return;}
 
         //defaults
         scope.perRow = scope.perRow || 6;
@@ -45,7 +45,7 @@ angular.module('directives').directive('thumbnailLinks', function () {
           }
           return range;
         };
-      })
+      });
 
     }
 

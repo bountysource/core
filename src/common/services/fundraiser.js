@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('services').service('$fundraiser', function($api) {
+angular.module('services').service('$fundraiser', function($api, $location, $window, $routeParams, $scope) {
   // Store a self reference
   this.self = this;
 
