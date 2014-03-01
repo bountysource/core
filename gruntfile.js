@@ -22,10 +22,6 @@ module.exports = function (grunt) {
 
     src: {
       js: ['src/app/app.js', 'src/**/*.js', '!src/vendor/**'],
-      jsTplRelative: {
-        app: ['app/**/*.html'],
-        common: ['common/**/*.html']
-      },
       jsTpl: {
         app: ['src/app/**/*.html'],
         common: ['src/common/**/*.html']
@@ -122,7 +118,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      dist_assets: ['dist/assets', 'dist/compiled', 'dist/app', 'dist/common'],
+      dist_assets: ['dist/assets', 'dist/compiled'],
+      temp_assets: ['dist/app', 'dist/common'],
       server: '.tmp',
       templates: [
         'dist/templates.js'
@@ -191,7 +188,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'src',
-          src: ['<%= src.jsTplRelative.app %>', '<%= src.jsTplRelative.common %>'],
+          src: ['app/**/*.html', 'common/**/*.html'],
           dest: 'dist'
         }]
       }
@@ -199,8 +196,11 @@ module.exports = function (grunt) {
 
     ngtemplates: {
       app: {
-        options: { htmlmin: '<%= htmlmin.templates %>' },
-        src: ['dist/src/app/**/*.html', 'dist/src/common/**/*.html'],
+        options: { 
+          concat: 'dist/assets/app.js',
+          base: 'dist'
+        },
+        src: ['dist/app/**/*.html', 'dist/common/**/*.html'],
         dest: 'dist/templates.js'
       }
     },
@@ -234,7 +234,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: 'src/vendor/bootstrap/dist/fonts',
+          cwd: 'src/vendor/bootstrap/fonts',
           dest: 'dist/assets',
           src: ['glyph*']
         }]
@@ -385,7 +385,8 @@ module.exports = function (grunt) {
     'uglify',            // compress JS files
     'cssmin',            // compress CSS files
     'md5:binary',        // create md5-named copies of binary files (images, fonts, etc)
-    'md5_path:css_js_local' // update css/js files with better paths
+    'md5_path:css_js_local', // update css/js files with better paths
+    'clean:temp_assets'  // clean up images now that they're all up on CDN
   ]);
 
   grunt.registerTask('deploy', [
