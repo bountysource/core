@@ -1,3 +1,23 @@
 table#tracker-edit-language-table tr:first-of-type > td {
   border-top: 0;
 }
+
+.thumbnail.no-margin {
+  margin: 0px;
+}
+
+.list-inline.narrow {
+  height: 20px;
+}
+
+.form-group.narrow {
+  margin-bottom: 0px;
+}
+
+h1,h3.narrow {
+  margin-top:0px;
+}
+
+a:hover {
+  cursor: pointer;
+};

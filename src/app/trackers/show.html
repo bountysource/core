@@ -13,7 +13,7 @@
       <div class="panel-body">
         <div collapse="!open_bounties || open_bounties <= 0">
           <a ng-click="show_bounties()">
-            <h3 class="text-center">{{ open_bounties }}
+            <h3 class="text-center narrow">{{ open_bounties }}
               <ng-pluralize count="open_bounties" when="{'1':'Open Bounty', 'other':'Open Bounties'}"></ng-pluralize>
             </h3>
           </a>
@@ -36,7 +36,6 @@
               <div>claimed</div>
             </div>
           </div>
-          <br ng-hide="tracker.bounty_total == 0">
 
           <div class="row" ng-show="tracker.tracker_type == 'Github::Repository'">
             <div class="text-center col-sm-6 col-md-6">
@@ -81,7 +80,7 @@
 
             <div class="col-sm-7 col-md-7">
               <form class="form-horizontal" role="form">
-                <div class="form-group">
+                <div class="form-group narrow">
                   <label class="control-label col-md-4">Bounty Range:</label>
                   <div class="col-md-3">
                     <input type="number" class="form-control" min="1" placeholder="50"
@@ -98,7 +97,7 @@
               </form>
             </div>
           </div>
-          <ul class="list-inline" style="margin-bottom: 0;">
+          <ul class="list-inline narrow" style="margin-bottom: 0;">
             <li>
               <div class="checkbox"><label class="">
                 <input type="checkbox" ng-model="issue_filter_options.only_valuable">

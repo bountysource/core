@@ -6,10 +6,10 @@
     <tbody>
       <tr ng-repeat="backer in backers | orderBy:'-total_backed'| limitTo:3">
         <!--Profile picture. No link if anon-->
-        <td style="width: 30%">
+        <td class="col-md-4">
           <div>
             <div>
-              <a owner-href="backer" class="thumbnail">
+              <a owner-href="backer" class="thumbnail no-margin">
                 <img class="img-responsive" ng-src="{{backer.image_url}}">
               </a>
             </div>
