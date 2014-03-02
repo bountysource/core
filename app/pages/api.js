@@ -120,7 +120,6 @@ angular.module('api.bountysource',[]).
       issues: function(params) {
         return this.call({
           url: '/issues',
-          verbose: true,
           params: params || {}
         });
       }
