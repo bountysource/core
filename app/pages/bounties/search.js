@@ -59,7 +59,11 @@ angular.module('app')
       return { asc: asc_string, desc: desc_string };
     };
 
-    $api.issues_featured().then(function(issues) {
+    $api.v2.issues({
+      featured: true,
+      per_page: 5
+    }).then(function(response) {
+      var issues = response.data;
       $scope.featured_issues = $filter('shuffle')(issues).slice(0,5);
     });
 

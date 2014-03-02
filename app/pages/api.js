@@ -74,6 +74,60 @@ angular.module('api.bountysource',[]).
       return this;
     };
 
+    // TODO: Reference to RAML referenced here?
+    this.v2 = {
+
+      // params = {
+      //   method
+      //   url  (this function will prepend hostname)
+      //   params
+      //   headers
+      //   ... and more, see http://code.angularjs.org/1.0.8/docs/api/ng.$http
+      // }
+      call: function(options) {
+        options = options || {};
+
+        options.headers = options.headers || {};
+        options.headers['Accept'] = options.headers['Accept'] || 'application/vnd.bountysource+json; version=2';
+        options.method = options.method || 'GET';
+
+        var path = (options.url || '').replace(/^\/+/,'');
+        options.url = $rootScope.api_host + path;
+
+        if (options.verbose) {
+          $log.info('------ API Request ' + (new Date()).getTime() + ' ------');
+          $log.info('Path:', path);
+          $log.info('Headers:', options.headers);
+          $log.info('Params:', options.params);
+          $log.info('----------------------------');
+        }
+
+        return $http(options).then(function(response) {
+          if (options.verbose) {
+            $log.info('------ API Response ' + (new Date()).getTime()) + ' ------';
+            $log.info('Status:', response.status);
+            $log.info('Data:', response.data);
+            $log.info('Headers:', response.headers());
+            $log.info('----------------------------');
+          }
+          return response;
+        });
+      },
+
+      /*
+       * Fetch a collection of issues.
+       * */
+      issues: function(params) {
+        return this.call({
+          url: '/issues',
+          verbose: true,
+          params: params || {}
+        });
+      }
+
+    };
+
+
     // call(url, 'POST', { foo: bar }, optional_callback)
     this.call = function() {
       //if we are in the test environment, call the mocked $api.call() otherwise, use the prod call()
@@ -366,7 +420,19 @@ angular.module('api.bountysource',[]).
     };
 
     this.tracker_issues_get = function(id) {
-      return this.call("/projects/"+id+"/issues");
+      // return this.call("/projects/"+id+"/issues");
+
+      return this.callv2({
+        url: '/issues',
+        tracker_id: id,
+        per_page: 50
+      }).then(function(response) {
+
+        console.log(response);
+
+        return [];
+
+      });
     };
 
     this.issues_featured = function() {
