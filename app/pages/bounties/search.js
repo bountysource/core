@@ -61,6 +61,7 @@ angular.module('app')
 
     $api.v2.issues({
       featured: true,
+      include_tracker: true,
       per_page: 5
     }).then(function(response) {
       var issues = response.data;
