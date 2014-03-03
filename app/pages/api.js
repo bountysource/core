@@ -419,19 +419,20 @@ angular.module('api.bountysource',[]).
     };
 
     this.tracker_issues_get = function(id) {
-      // return this.call("/projects/"+id+"/issues");
+      return this.call("/projects/"+id+"/issues");
 
-      return this.callv2({
-        url: '/issues',
-        tracker_id: id,
-        per_page: 50
-      }).then(function(response) {
+//      return this.callv2({
+//        url: '/issues',
+//        tracker_id: id,
+//        per_page: 50
+//      }).then(function(response) {
+//
+//        console.log(response);
+//
+//        return [];
+//
+//      });
 
-        console.log(response);
-
-        return [];
-
-      });
     };
 
     this.issues_featured = function() {
