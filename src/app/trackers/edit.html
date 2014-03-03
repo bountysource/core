@@ -30,47 +30,37 @@
       </div>
 
       <div ng-hide="saving">
-        <form class="form-horizontal" name="form" ng-submit="save()">
+        <form class="form" name="form" ng-submit="save()">
           <div class="form-group">
-            <label class="control-label" for="inputName">Name:</label>
-            <div class="controls">
-              <input type="text" id="inputName" placeholder="Name of the project" ng-model="form_data.name" class="input span12 form-control" required="">
-            </div>
+            <label for="inputName">Name:</label>
+            <input type="text" id="inputName" placeholder="Name of the project" ng-model="form_data.name" class="input span12 form-control" required="">
           </div>
 
           <div class="form-group">
-            <label class="control-label" for="inputDescription">Description:</label>
-            <div class="controls">
-              <textarea type="text" class="span12" rows="4" id="inputDescription" placeholder="Description for the project" ng-model="form_data.description"></textarea>
-            </div>
+            <label for="inputDescription">Description:</label>
+            <textarea type="text" class="form-control" rows="5s876" id="inputDescription" placeholder="Description for the project" ng-model="form_data.description"></textarea>
           </div>
 
           <div class="form-group">
-            <label class="control-label" for="inputName">Image:</label>
-            <div class="controls">
-              <input type="text" ng-model="form_data.image_url" placeholder="Image URL or Gravatar Email" class="input span12 form-control">
-            </div>
+            <label for="inputName">Image:</label>
+            <input type="text" ng-model="form_data.image_url" placeholder="Image URL or Gravatar Email" class="input span12 form-control">
           </div>
 
           <div class="form-group">
-            <label class="control-label" for="inputName">Homepage:</label>
+            <label for="inputName">Homepage:</label>
             <div class="controls">
               <input type="url" id="inputName" placeholder="Homepage for this project" ng-model="form_data.homepage" class="input span12 form-control">
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label" for="inputName">Repository URL:</label>
-            <div class="controls">
-              <input type="text" id="inputName" placeholder="Code Repo URL" ng-model="form_data.repo_url" class="input span12 form-control">
-            </div>
+            <label for="inputName">Repository URL:</label>
+            <input type="text" id="inputName" placeholder="Code Repo URL" ng-model="form_data.repo_url" class="input span12 form-control">
           </div>
 
           <div class="form-group">
-            <div class="controls">
-              <button type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid || !unsaved_changes()">Save Changes</button>
-              <a class="btn btn-default btn-lg" ng-click="cancel()">Cancel</a>
-            </div>
+            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid || !unsaved_changes()">Save Changes</button>
+            <a class="btn btn-default btn-lg" ng-click="cancel()">Cancel</a>
           </div>
         </form>
       </div>

@@ -142,6 +142,6 @@
       <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
 
       <!--Table of issues-->
-      <issue-list issues="issues" include="['bountyTotal', 'thumbsUpCount', 'participantsCount', 'issueAge']" filter="issue_filter"></issue-list>
+      <issue-list issues="issues" include="['bountyTotal', 'thumbsUpCount', 'participantsCount', 'issueAge']" default-order="{column: 'bounty_total', reverse: true}" filter="issue_filter"></issue-list>
     </div>
   </div>

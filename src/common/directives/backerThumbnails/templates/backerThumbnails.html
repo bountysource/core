@@ -25,13 +25,13 @@
   </ul>
   <br>
   <h4 style="margin: 0 0 5px 0;">
-    <ng-pluralize count="issue.bounty_claims[0].responses.length" when="{'0': '',
+    <ng-pluralize ng-if="issue.winning_bounty_claim.responses[0].description" 
+                  count="issue.winning_bounty_claim.responses.length" when="{'0': '',
                           '1': 'Comment:',
                           'other': 'Comments:'}">
-
     </ng-pluralize>
   </h4>
-  <p ng-repeat="response in issue.bounty_claims[0].responses | emptyFilter">
+  <p ng-repeat="response in issue.winning_bounty_claim.responses | emptyFilter">
     {{ response.description }}<br>
     <span ng-show="response.person.display_name">-<a ng-href="{{response.person.frontend_path}}">{{ response.person.display_name }}</a></span>
     <span ng-show="!response.person.display_name">-Anonymous</span>

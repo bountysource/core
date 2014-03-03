@@ -28,6 +28,7 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
     // throw in a timeout to allow time for issues to be added
     $timeout(function() {
       $api.tracker_issues_get($routeParams.id).then(function(issues) {
+        console.log(issues);
         $scope.issues_resolved = true;
         $scope.open_bounties = 0; //frontend count of unclaimed bounties
         for (var i=0; i<issues.length; i++) {

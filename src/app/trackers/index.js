@@ -19,7 +19,6 @@ angular.module('app').controller('TrackersIndex', function ($scope, $api) {
   };
 
   $scope.change_page = function(page) {
-    console.log(page);
     $scope.projects = [];
     $scope.projects_promise = $api.call("/trackers", "GET", { per_page: 50, page: page }, function(response) {
       $scope.$pagination = response.meta.pagination;

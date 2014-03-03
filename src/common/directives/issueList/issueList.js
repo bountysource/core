@@ -9,14 +9,15 @@ angular.module('directives').directive('issueList', function() {
       issues: "=",
 
       // Optional columns to include
-      include: "=",
-      filter: "="
+      include:       "=",
+      filter:        "=",
+      defaultOrder: "="
     },
     link: function(scope) {
       // Default sort order to participant count descending.
       scope.$orderData = {
-        column: "participants_count",
-        reverse: true
+        column: scope.defaultOrder.column || "participants_count",
+        reverse: scope.defaultOrder.reverse ||  true
       };
 
       // Set filter data

@@ -50,14 +50,14 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
     $scope.start_solution = function () {
       // TODO: refactor all of these into one function. They all handle the same case.
       var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-      parsed_time = parsed_time ? parsed_time : "";
-      if (parsed_time !== "" && !parsed_time.isValid()) {
+      if (!parsed_time.parsingFlags().nullInput && !parsed_time.isValid()) {
         $scope.error = "Invalid date. Please use mm/dd/yyyy";
-      } else if ( parsed_time !== "" && parsed_time.isBefore($window.moment()) ) {
+      } else if ( !parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment()) ) {
         $scope.error = "You can't use dates in the past.";
       } else {
-        $scope.solution_form.completion_date = parsed_time;
-        $api.start_solution(issue.id, $scope.solution_form).then(function(new_solution) {
+        var data_payload = angular.copy($scope.solution_form)
+        data_payload.completion_date = parsed_time.isValid() ? parsed_time : "";
+        $api.start_solution(issue.id, data_payload).then(function(new_solution) {
           $scope.$emit('solutionCreatePushed', new_solution);
           $scope.show_solution_form = false;
         });
@@ -67,14 +67,14 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
     $scope.update_solution = function () {
       // TODO: refactor all of these into one function. They all handle the same case.
       var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-      parsed_time = parsed_time ? parsed_time : "";
-      if (parsed_time !== "" && !parsed_time.isValid()) {
+      if (!parsed_time.parsingFlags().nullInput && !parsed_time.isValid()) {
         $scope.error = "Invalid date. Please use mm/dd/yyyy";
-      } else if (parsed_time !== "" && parsed_time.isBefore($window.moment()) ) {
+      } else if (!parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment()) ) {
         $scope.error = "You can't use dates in the past.";
       } else {
-        $scope.solution_form.completion_date = parsed_time;
-        $api.update_solution(issue.id, $scope.solution_form).then(function(updated_solution) {
+        var data_payload = angular.copy($scope.solution_form)
+        data_payload.completion_date = parsed_time.isValid() ? parsed_time : "";
+        $api.update_solution(issue.id, data_payload).then(function(updated_solution) {
           $scope.show_solution_edit_form = false;
           $scope.$emit('solutionUpdatePushed', updated_solution);
         });
@@ -84,14 +84,14 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
     $scope.restart_solution = function () {
       // TODO: refactor all of these into one function. They all handle the same case.
       var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
-      parsed_time = parsed_time ? parsed_time : "";
-      if (parsed_time !== "" && !parsed_time.isValid()) {
+      if (!parsed_time.parsingFlags().nullInput && !parsed_time.isValid()) {
         $scope.error = "Invalid date. Please use mm/dd/yyyy";
-      } else if (parsed_time !== "" && parsed_time.isBefore($window.moment())) {
+      } else if (!parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment())) {
         $scope.error = "You can't use dates in the past.";
       } else {
-        $scope.solution_form.completion_date = parsed_time;
-        $api.restart_solution(issue.id, $scope.solution_form).then(function(updated_solution) {
+        var data_payload = angular.copy($scope.solution_form)
+        data_payload.completion_date = parsed_time.isValid() ? parsed_time : "";
+        $api.restart_solution(issue.id, data_payload).then(function(updated_solution) {
           $scope.show_solution_edit_form = false;
           $scope.$emit('solutionUpdatePushed', updated_solution);
         });
