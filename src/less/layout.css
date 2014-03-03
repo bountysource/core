@@ -55,3 +55,37 @@ body {
 /* Top Backers Table */
 .top-backers-table > .row { marghin-bottom: 15px; }
 .top-backers-table > .row:last-of-type { margin-bottom: 0 !important; }
+
+.thumbnail.no-margin {
+  margin: 0px;
+}
+
+.list-inline.narrow {
+  height: 20px;
+}
+
+.form-group.narrow {
+  margin-bottom: 0px;
+}
+
+h1,h3.narrow {
+  margin-top:0px;
+}
+
+a:hover {
+  cursor: pointer;
+};
+
+.breadcrumb {
+  margin-top: 10px;
+}
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
+.table-middle {
+  vertical-align: middle;
+}
+
+.table td.center-height { vertical-align: middle;}
