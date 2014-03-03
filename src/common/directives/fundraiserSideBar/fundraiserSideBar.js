@@ -10,7 +10,7 @@
 * rewards - show the rewards
 * shareButtons - show the share buttons. such social
 * */
-angular.module('directives').directive('fundraiserSideBar', function($api, $fundraiser) {
+angular.module('directives').directive('fundraiserSideBar', function($api, $location) {
   return {
     restrict: 'EAC',
     templateUrl: 'common/directives/fundraiserSideBar/templates/fundraiserSideBar.html',
@@ -20,8 +20,6 @@ angular.module('directives').directive('fundraiserSideBar', function($api, $fund
     },
     replace: true,
     link: function(scope) {
-      scope.publishFundraiser = $fundraiser.publish;
-
       scope.$options = {
         pledgeButtons: true,
         topBackers: true,
@@ -45,6 +43,27 @@ angular.module('directives').directive('fundraiserSideBar', function($api, $fund
           });
         }
       });
+
+      // Publish a fundraiser
+      scope.publishFundraiser = function(fundraiser) {
+        return $api.fundraiser_publish(fundraiser.id, function(response) {
+          if (response.meta.success) {
+            $location.url("/fundraisers/"+fundraiser.slug);
+          } else {
+            $scope.error = "ERROR: " + response.data.error;
+          }
+          return response.data;
+        });
+      };
+
+      // Go to the Pledge page for the fundraiser and prefill the amount with the given value.
+      scope.pledgeRedirect = function(fundraiser, amount) {
+        console.log('pledgeRedirect', fundraiser, amount);
+
+        if (angular.isNumber(amount) && fundraiser.published) {
+          $location.path("/fundraisers/"+fundraiser.id+"/pledge").search({ amount: amount });
+        }
+      };
     }
   };
 });
