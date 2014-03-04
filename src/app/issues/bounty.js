@@ -53,10 +53,14 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
             var successCallback = function(response) {
               console.log('Checkout success!', response);
             };
+
             var errorCallback = function(response) {
+              response = response || {};
+
+              $scope.processing_payment = false;
+
               if (response.data && response.data.error) {
-                $scope.processing_payment = false;
-                $scope.alert = { message: response.data.error, type: 'error' };
+                $scope.alert = { message: response.data.error, type: 'danger' };
               }
             };
 
