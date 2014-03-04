@@ -1,30 +1,5 @@
 <div>
   <div class="row" collapse="!show_solution_form">
-    <div class="col-sm-8 col-md-8">
-      <div class="alert alert-danger alert-danger" ng-show="error">{{ error }}</div>
-      <form class="form">
-        <div class="form-group">
-          <label class="control-label"><strong>Notes</strong></label>
-          <textarea ng-model="solution_form.note" rows="6" class="form-control" placeholder="Tell the backers how you're going to tackle this issue!"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label"><strong>Code URL</strong></label>
-          <input ng-model="solution_form.url" type="text" class="form-control" placeholder="https://github.com/you/solution">
-        </div>
-
-        <div class="form-group">
-          <label class="control-label"><strong>When will you be done?</strong></label>
-          <input type="text" ng-model="solution_form.completion_date" class="form-control" placeholder="mm/dd/yyyy">
-        </div>
-
-        <div class="form-group pull-right">
-          <button type="submit" class="btn btn-primary" ng-click="start_solution()">Start Work</button>
-          <button class="btn btn-default" ng-click="toggle_solution_form()">Cancel</button>
-        </div>
-      </form>
-    </div>
-
     <div class="col-sm-4 col-md-4">
       <div class="panel panel-primary">
         <div class="panel-heading"><h4 class="text-center panel-title">Instructions</h4></div>
@@ -37,6 +12,41 @@
           </ol>
         </div>
       </div>
+    </div>
+
+    <div class="col-sm-8 col-md-8">
+      <div class="alert alert-danger alert-danger" ng-show="error">{{ error }}</div>
+      <form class="form">
+        <div class="form-group">
+          <label class="control-label"><strong>Notes</strong></label>
+          <textarea ng-model="solution_form.note" rows="6" class="form-control" placeholder="Tell the backers how you're going to tackle this issue!"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label"><strong>Code URL</strong></label>
+          <input ng-model="solution_form.url" type="text" class="form-control" placeholder="https://github.com/you/solution">
+        </div>
+        <div class="form-group">
+          <label class="control-label"><strong>When will you be done?</strong></label>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <input type="text" ng-model="solution_form.completion_date" class="form-control" placeholder="mm/dd/yyyy"
+                is-open="$parent.datepicker_open" datepicker-popup="M/d/yyyy" min="minDate"
+                show-weeks="false" >
+                <span class="input-group-btn">
+                  <button class="btn btn-default" ng-click="show_datepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" ng-click="start_solution()">Start Work</button>
+          <button class="btn btn-default" ng-click="toggle_solution_form()">Cancel</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -62,9 +72,23 @@
 
       <div class="form-group">
         <label class="control-label col-md-2"><strong>When will you be done?</strong></label>
-        <div class="col-md-10">
-          <input type="text" ng-model="solution_form.completion_date" class="form-control" placeholder="mm/dd/yyyy">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group">
+              <input type="text" ng-model="solution_form.completion_date" class="form-control" placeholder="mm/dd/yyyy"
+                     is-open="$parent.datepicker_edit_open" 
+                     datepicker-popup="M/d/yyyy" 
+                     min="minDate"
+                     show-weeks="false">
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="show_edit_datepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </div>
         </div>
+<!--         <div class="col-md-6">
+          <input type="text" ng-model="solution_form.completion_date" class="form-control" placeholder="mm/dd/yyyy">
+        </div> -->
       </div>
 
       <div class="form-group">

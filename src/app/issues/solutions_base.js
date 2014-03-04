@@ -7,13 +7,28 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
   $scope.show_solution_form = false || $routeParams.show_new_solution_form;
   var completion_date = $routeParams.completion_date ? $window.moment($routeParams.completion_date).format("M-D-YYYY") : null;
   $scope.solution_form = {
-    url: $routeParams.code_url,
-    note: $routeParams.note,
+    url: $routeParams.code_url || "",
+    note: $routeParams.note || "",
     completion_date: completion_date
   };
 
   $scope.my_solution = undefined;
   $scope.bounty_total = 0;
+
+  // DatePicker Behavior //
+  $scope.show_datepicker = function ($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.datepicker_open = !$scope.datepicker_open;
+  };
+
+  $scope.show_edit_datepicker = function ($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.datepicker_edit_open = !$scope.datepicker_edit_open;
+  };
+
+  $scope.minDate = $window.moment();
 
   $api.issue_get($routeParams.id).then(function(issue) {
     $scope.bounty_total = parseInt(issue.bounty_total, 10);
@@ -49,7 +64,7 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
 
     $scope.start_solution = function () {
       // TODO: refactor all of these into one function. They all handle the same case.
-      var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
+      var parsed_time = $window.moment($scope.solution_form.completion_date);
       if (!parsed_time.parsingFlags().nullInput && !parsed_time.isValid()) {
         $scope.error = "Invalid date. Please use mm/dd/yyyy";
       } else if ( !parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment()) ) {
@@ -66,7 +81,7 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
 
     $scope.update_solution = function () {
       // TODO: refactor all of these into one function. They all handle the same case.
-      var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
+      var parsed_time = $window.moment($scope.solution_form.completion_date);
       if (!parsed_time.parsingFlags().nullInput && !parsed_time.isValid()) {
         $scope.error = "Invalid date. Please use mm/dd/yyyy";
       } else if (!parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment()) ) {
@@ -83,7 +98,7 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
 
     $scope.restart_solution = function () {
       // TODO: refactor all of these into one function. They all handle the same case.
-      var parsed_time = $window.moment($scope.solution_form.completion_date, "M-D-YYYY");
+      var parsed_time = $window.moment($scope.solution_form.completion_date);
       if (!parsed_time.parsingFlags().nullInput && !parsed_time.isValid()) {
         $scope.error = "Invalid date. Please use mm/dd/yyyy";
       } else if (!parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment())) {
