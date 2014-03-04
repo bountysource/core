@@ -44,7 +44,7 @@ angular.module('app').controller('TrackersEditController', function ($scope, $ap
 
     $api.update_tracker($routeParams.id, payload).then(function(response) {
       if (!response.meta.success) {
-        $scope.alert = { message: response.data.error, type: 'error' };
+        $scope.alert = { message: response.data.error, type: 'danger' };
       } else {
         $scope.saving = false;
 

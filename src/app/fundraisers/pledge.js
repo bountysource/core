@@ -53,7 +53,7 @@ angular.module('fundraisers').controller('FundraiserPledgeController', function 
           };
           var errorCallback = function(response) {
             $scope.processing_payment = false;
-            $scope.alert = { message: response.data.error, type: 'error' };
+            $scope.alert = { message: response.data.error, type: 'danger' };
           };
 
           // wow, so spaghetti

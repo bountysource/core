@@ -17,7 +17,7 @@ angular.module('app').controller('EditTeamController', function ($scope, $routeP
     $scope.save_team = function() {
       $api.team_update(team.slug, $scope.form_data).then(function(updated_team) {
         if (updated_team.error) {
-          $scope.alert = { text: updated_team.error, type: "error" };
+          $scope.alert = { text: updated_team.error, type: "danger" };
         } else {
           $scope.alert = { text: "Team updated!", type: "success" };
           for (var k in updated_team) { team[k] = updated_team[k]; }

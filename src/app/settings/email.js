@@ -29,7 +29,7 @@ angular.module('app').controller('SettingsEmail', function($scope, $routeParams,
         // Update cached person
         $api.set_current_person(updated_person);
       } else {
-        $scope.alert = { type: 'error', message: 'Unable to update email settings' };
+        $scope.alert = { type: 'danger', message: 'Unable to update email settings' };
       }
     });
   };

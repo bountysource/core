@@ -9,14 +9,16 @@
   <div class="row" ng-show="fundraiser">
     <div class="col-sm-9 col-md-9">
       <div ng-show="error">
-        <alert type="'error'" close="error = null">{{ error }}</alert>
+        <alert type="'danger'" close="error = null">{{ error }}</alert>
       </div>
       <fundraiser-edit-form fundraiser="changes" master="master"></fundraiser-edit-form>
     </div>
 
     <div class="col-sm-3 col-md-3">
       <div ng-show="unsaved_changes()">
-        <alert class="alert alert-warning"><strong>Hey! You have unsaved changes!</strong> Don't forget to <a ng-click="save()">save your changes</a> when you are done.</alert>
+        <alert type="'warning'">
+          <strong>Hey! You have unsaved changes!</strong> Don't forget to <a ng-click="save()">save your changes</a> when you are done.
+        </alert>
       </div>
 
       <div class="well well-lg">
@@ -81,7 +83,7 @@
 
           <accordion-group id="dat" heading="Add new reward" is-open="true">
             <div ng-show="reward_error">
-              <alert type="'error'" close="reward_error = null">{{reward_error}}</alert>
+              <alert type="'danger'" close="reward_error = null">{{reward_error}}</alert>
             </div>
 
             <div style="text-align: center;">
