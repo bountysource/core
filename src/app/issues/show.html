@@ -9,32 +9,34 @@
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
 
       <table class="table table-striped" style="table-layout:fixed">
-        <tbody>
-        <tr class="no-stripe">
-          <td class="imagerow">
-            <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}"><img ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"></a>
-            <img ng-hide="issue.author.slug" ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
-          </td>
-          <td style="overflow-x:auto">
-            <p class="text-muted">
-              <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}">{{issue.author.display_name}}</a>
-              <span ng-hide="issue.author.slug">{{issue.author.display_name}}</span>
-              opened this issue on {{issue.created_at | date}}
-            </p>
-            <target-blank model="issue">
-              <div ng-show="issue.$body_ctype == 'html'" ng-bind-html="issue.body_html"></div>
-              <div ng-show="issue.$body_ctype == 'text'" style="white-space: pre-wrap;">{{issue.body_html}}</div>
-            </target-blank>
-            <p class="text-muted">
-              <a ng-href="{{issue.url}}" target="_blank">View original issue »</a>
-            </p>
+        <thead>
+          <tr class="no-stripe">
+            <td class="imagerow">
+              <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}"><img ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"></a>
+              <img ng-hide="issue.author.slug" ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
+            </td>
+            <td style="overflow-x:auto">
+              <p class="text-muted">
+                <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}">{{issue.author.display_name}}</a>
+                <span ng-hide="issue.author.slug">{{issue.author.display_name}}</span>
+                opened this issue on {{issue.created_at | date}}
+              </p>
+              <target-blank model="issue">
+                <div ng-show="issue.$body_ctype == 'html'" ng-bind-html="issue.body_html"></div>
+                <div ng-show="issue.$body_ctype == 'text'" style="white-space: pre-wrap;">{{issue.body_html}}</div>
+              </target-blank>
+              <p class="text-muted">
+                <a ng-href="{{issue.url}}" target="_blank">View original issue »</a>
+              </p>
 
-          </td>
-        </tr>
-        <tr class="no-stripe">
-          <td colspan="2" ng-show="issue.comments.length > 0"><h4>Comments ({{issue.comments.length}})</h4></td>
-          <td colspan="2" ng-show="issue.comments.length == 0"><h4>No comments.</h4></td>
-        </tr>
+            </td>
+          </tr>
+          <tr class="no-stripe">
+            <td colspan="2" ng-show="issue.comments.length > 0"><h4>Comments ({{issue.comments.length}})</h4></td>
+            <td colspan="2" ng-show="issue.comments.length == 0"><h4>No comments.</h4></td>
+          </tr>
+        </thead>
+        <tbody>
 
         <tr ng-repeat="comment in issue.comments | orderBy:['+created_at']">
           <td>

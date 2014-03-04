@@ -3,12 +3,12 @@
     <div class="col-md-{{12/perRow}} col-sm-{{12/perRow}}" ng-repeat="item in array.slice(i, i + perRow)">
         <!-- Teams -->
         <a ng-if="objectType == 'team'" ng-href="/teams/{{item.slug}}" class="text-center thumbnail">
-          <img class="img-responsive img-rounded" ng-src="{{item.image_url}}"><br>
+          <img class="img-responsive img-rounded" ng-src="{{item.image_url}}">
           {{item.name}}
         </a>
         <!-- Trackers -->
         <a ng-if="objectType == 'tracker'" ng-href="{{item.frontend_path}}" class="text-center thumbnail">
-          <img class="img-responsive img-rounded" ng-src="{{item.image_url}}"><br>
+          <img class="img-responsive img-rounded" ng-src="{{item.image_url}}">
           {{item.name}}
         </a>
 
