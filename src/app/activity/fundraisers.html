@@ -11,12 +11,15 @@
 </div>
 
 <table class="table table-striped" ng-show="fundraisers.length > 0">
-  <tbody><tr>
-    <th>Title</th>
-    <th>Goal</th>
-    <th>Progress</th>
-    <th>Status</th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Goal</th>
+      <th>Progress</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
 
   <tr ng-repeat="fundraiser in fundraisers">
     <td><a ng-href="/fundraisers/{{fundraiser.slug}}">{{ fundraiser.title }}</a></td>

@@ -25,9 +25,9 @@
           <tr ng-repeat="bounty in issue.bounties | orderBy:sort_column:sort_reverse">
             <td>
               <div ng-show="bounty.person">
-                <a owner-href="bounty.person"><img class="thumbnail" ng-src="{{ bounty.person.image_url }}"></a>
+                <a owner-href="bounty.person"><img class="thumbnail no-margin" ng-src="{{ bounty.person.image_url }}"></a>
               </div>
-              <img ng-hide="bounty.person" class="thumbnail" src="images/anon.jpg">
+              <img ng-hide="bounty.person" class="thumbnail no-margin" src="images/anon.jpg">
             </td>
             <td>
               <a owner-href="bounty.owner">{{bounty.owner.display_name}}</a>
