@@ -10,7 +10,7 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
   $scope.following = true;
 
   $scope.bounty = {
-    amount: parseInt($routeParams.amount || 15, 10),
+    amount: parseInt($routeParams.amount, 10),
     anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
     checkout_method: $routeParams.checkout_method || 'google',
     bounty_expiration: $routeParams.bounty_expiration || '',
@@ -20,7 +20,7 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
     // only used to alter the displayed amount,
     // not actually sent in the payment process request.
     fee: 0,
-    total: parseInt($routeParams.amount || 0, 10)
+    total: parseInt($routeParams.amount, 10)
   };
 
   //Logic to show bounty_options template

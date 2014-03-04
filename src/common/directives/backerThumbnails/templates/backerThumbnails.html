@@ -1,6 +1,8 @@
 <div class="row">
   <h4 style="margin: 0 0 5px 0;">
-    <ng-pluralize count="issue.bounties.length" when="{'1': 'Backer:',
+    <ng-pluralize count="issue.bounties.length" when="{
+                          '0': '',
+                          '1': 'Backer:',
                           '2': 'Backers:',
                           '3': 'Backers:',
                           '4': 'Backers:',
@@ -23,7 +25,7 @@
       </div>
     </li>
   </ul>
-  <br>
+
   <h4 style="margin: 0 0 5px 0;">
     <ng-pluralize ng-if="issue.winning_bounty_claim.responses[0].description" 
                   count="issue.winning_bounty_claim.responses.length" when="{'0': '',

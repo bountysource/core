@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs" ng-controller="IssueNavTabsController">
   <li ng-class="active_tab('overview')"><a ng-href="/issues/{{issue.slug}}">Overview</a></li>
-  <li ng-class="active_tab('bounties')"><a ng-href="/issues/{{issue.slug}}/bounties">
+  <li ng-show="issue.bounties.length > 0" ng-class="active_tab('bounties')"><a ng-href="/issues/{{issue.slug}}/bounties">
     Backers
     <span class="badge badge-info" ng-show="issue.bounties.length > 0">{{issue.bounties.length}}</span>
   </a></li>
