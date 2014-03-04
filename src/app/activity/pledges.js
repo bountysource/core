@@ -42,8 +42,6 @@ angular.module('app').controller('PledgeActivity', function($scope, $routeParams
   };
 
   $scope.update_pledge = function(pledge) {
-    $scope.alert = null;
-
     var payload = {
       reward_id: pledge.reward_id,
       survey_response: pledge.survey_response
