@@ -24,7 +24,17 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li class="visible-lg visible-md"><a href="http://blog.bountysource.com" target="_blank">Blog</a></li>
-        <li class="visible-lg visible-md"><a href="/teams">Teams</a></li>
+        <li class="visible-lg visible-md" ng-if="!current_person"><a href="/teams">Teams</a></li>
+
+        <li class="dropdown" ng-if="current_person">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li role="presentation" class="dropdown-header">Your Teams</li>
+            <li ng-repeat="team in teams"><a ng-href="teams/{{ team.slug }}"><img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url }}"></img><span>  {{ team.name }}</span></a></li>
+            <li class="divider"></li>
+            <li><a href="/teams"><i class="glyphicon glyphicon-th-list"></i> See All Teams</a></li>
+          </ul>
+        </li>
         <li class="visible-lg visible-md"><a href="/enterprise" >Enterprise</a></li>
 
         <!-- User dropdown if logged in -->
@@ -35,21 +45,9 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li role="presentation" class="dropdown-header"><i class="glyphicon glyphicon-bullhorn"></i> Activity</li>
-            <li><a href="activity">Timeline</a></li>
-            <li><a href="activity/bounties">Bounties</a></li>
-            <li><a href="activity/pledges">Pledges</a></li>
-            <li><a href="activity/fundraisers">Fundraisers</a></li>
-            <li><a href="activity/claims">Bounty Claims</a></li>
-            <li><a href="activity/transactions">Transactions</a></li>
-            <li role="presentation" class="divider"></li>
-
-            <!-- Teams submenu -->
-            <li ng-if="teams">
-              OK WORK
-            </li>
-
+            <li><a href="/activity"><i class="glyphicon glyphicon-bullhorn"></i> Activity</a></li>
             <li><a owner-href="current_person"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+            <li><a href="/tools"><i class="glyphicon glyphicon-wrench"></i> Tools</a></li>
             <li><a href="activity/account"><i class="glyphicon glyphicon-gift"></i> Balance <span class="label label-primary">{{current_person.account.balance | currency}}</span></a></li>
             <li role="presentation" class="divider"></li>
 

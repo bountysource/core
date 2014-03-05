@@ -31,3 +31,7 @@ h3.no-margin {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+ul.list.narrow-padding {
+  padding-left: 20px;
+}

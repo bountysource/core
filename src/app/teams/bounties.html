@@ -56,8 +56,8 @@
         <table class="table table-condensed table-striped table-hover issue-table">
           <thead>
           <tr>
-            <th style="width: 5%;"></th>
-            <th style="width: 55%;">Issue</th>
+            <th style="width: 4%;"></th>
+            <th style="width: 56%;">Issue</th>
             <th style="width: 35%;"><a ng-click="update_sort(open_sort, 'progress_sum')">Progress</a></th>
             <th style="width: 5%;"></th>
             <th style="text-align: center; cursor: pointer; width: 10%;">
@@ -69,15 +69,15 @@
           </thead>
           <tbody>
           <tr ng-repeat="bounty in open_bounties | orderBy:open_sort.column:open_sort.desc">
-            <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"></a></td>
-            <td>
+            <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-responsive" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"></a></td>
+            <td class="center-height">
               <a ng-href="/issues/{{bounty.issue.slug}}">
                 <i ng-show="bounty.issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
                 {{bounty.issue.title}}
                 <span ng-show="!bounty.issue.can_add_bounty && !bounty.issue.paid_out" class="label label-warning">closed</span>
               </a>
             </td>
-            <td style="vertical-align: middle;">
+            <td class="center-height" style="vertical-align: middle;">
               <a ng-href="/issues/{{bounty.issue.slug}}">
                 <div class="progress table-progress" html="true" popover="{{ bounty.status }}" popover-title="{{ bounty.title }}" popover-trigger="mouseenter" style="cursor: pointer;">
                   <div class="progress-bar" style="width: {{ bounty.progress_sum | atLeast:15 | atMost:100 | number:0 }}%; vertical-align: middle;">
@@ -86,9 +86,9 @@
                 </div>
               </a>
             </td>
-            <td style="text-align: center;">
+            <td class="center-height" style="text-align: center;">
             </td>
-            <td style="text-align:center;"><strong>{{bounty.amount | dollars}}</strong></td>
+            <td class="center-height" style="text-align:center;"><strong>{{bounty.amount | dollars}}</strong></td>
           </tr>
           </tbody>
         </table>
@@ -99,8 +99,8 @@
         <table class="table table-condensed table-striped">
           <thead>
           <tr>
-            <th style="width: 30%;"><a ng-click="update_sort(claimed_sort, 'issue.tracker.name')">Project</a></th>
-            <th style="width: 30%;">Issue</th>
+            <th style="width: 4%;"></th>
+            <th style="width: 66%;">Issue</th>
             <th style="width: 30%;"><a ng-click="update_sort(claimed_sort, 'issue.paid_at')">Paid Out</a></th>
             <th style="text-align: center; cursor: pointer; width: 10%;">
               <a ng-click="update_sort(claimed_sort, 'amount')">
@@ -111,15 +111,15 @@
           </thead>
           <tbody>
           <tr ng-repeat="bounty in claimed_bounties | orderBy:claimed_sort.column:claimed_sort.desc">
-            <td><a ng-href="/trackers/{{bounty.issue.tracker.slug}}"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="issue-table-tracker-img">  {{bounty.issue.tracker.name}}</a></td>
-            <td>
+            <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-responsive"></a></td>
+            <td class="center-height">
               <a ng-href="/issues/{{bounty.issue.slug}}">
                 <i ng-show="bounty.issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
                 {{bounty.issue.title}}
               </a>
             </td>
-            <td>{{bounty.issue.paid_at | date:'medium'}}</td>
-            <td style="text-align: center;"><strong>{{bounty.amount | dollars}}</strong></td>
+            <td class="center-height">{{bounty.issue.paid_at | date:'medium'}}</td>
+            <td class="center-height" style="text-align: center;"><strong>{{bounty.amount | dollars}}</strong></td>
           </tr>
           </tbody>
         </table>

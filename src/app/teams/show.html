@@ -73,16 +73,8 @@
         <ng-include src="'app/teams/templates/goto_add_funds.html'"></ng-include>
       </div>
 
-      <div class="well col-sm-3 col-md-3" style="min-height:280px;" ng-show="team.type == 'Team::Project'">
-        <div style="min-height:75%">
-          <h4>Install Plugin</h4>
-          <ul>
-            <li>Add/update bounty total in Issue title</li>
-            <li>Add bounty information to the issue body</li>
-            <li>Apply label to all issues with a bounty</li>
-          </ul>
-        </div>
-        <div style="text-align:center"><a ng-href="/tools" class="btn btn-primary">Install Plugin</a></div>
+      <div class="col-sm-3 col-md-3" ng-show="team.type == 'Team::Project'">
+        <ng-include src="'app/teams/templates/goto_plugin_install.html'"></ng-include>
       </div>
     </div>
   </div>

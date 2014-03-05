@@ -12,6 +12,7 @@
 <table class="table table-striped" ng-show="bounties.length > 0">
   <thead>
     <tr>
+      <th style="width: 4%"></th>
       <th>Tracker</th>
       <th>Issue</th>
       <th>Amount</th>
@@ -26,6 +27,11 @@
 
   <tbody>
     <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
+      <td class="center-height">
+        <a ng-href="/trackers/{{bounty.issue.tracker.slug}}">
+          <img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-responsive" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left">
+        </a>
+      </td>
       <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
       <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
         <span ng-show="bounty.status == 'refunded'" class="label label-warning">Refunded</span>
@@ -36,18 +42,14 @@
       <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.amount | dollars }}</a></td>
       <td class="center-height">{{ bounty.created_at | date }}</td>
       <td class="center-height">
-        <div ng-show="bounty.owner">
-          <div class="img-thumbnail" tooltip="{{bounty.owner.display_name}}" tooltip-placement="left">
-            <owner-profile-link model="bounty">
-              <img class="img-responsive" ng-src="{{bounty.owner.image_url}}">
-            </owner-profile-link>
+        <div ng-show="bounty.owner" class="thumbnail no-margin" tooltip="{{bounty.owner.display_name}}" tooltip-placement="left">
+          <owner-profile-link model="bounty">
+            <img class="img-responsive" ng-src="{{bounty.owner.image_url}}">
+          </owner-profile-link>
         </div>
-      </div>
-      <div ng-hide="bounty.owner">
-        <div class="img-thumbnail" tooltip="Anonymous" tooltip-placement="left">
+        <div ng-hide="bounty.owner" class="thumbnail no-margin" tooltip="Anonymous" tooltip-placement="left">
           <img class="img-responsive" src="images/anon.jpg">
         </div>
-      </div>
     </td>
 
     <td class="center-height" ng-show="bounty.anonymous && bounty.owner_type != 'Team'">

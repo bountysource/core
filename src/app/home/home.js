@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('app').controller('HomeCtrl', function ($scope, $window, $api) {
+
   $api.fundraiser_cards().then(function(fundraisers) {
     $scope.fundraisers = fundraisers;
     return fundraisers;

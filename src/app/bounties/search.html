@@ -100,7 +100,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="issue in featured_issues">
+        <tr ng-repeat="issue in featured_issues | orderBy:'-bounty_total'">
           <td>
             <a ng-href="/trackers/{{ issue.tracker.slug }}">{{issue.tracker.name}}</a>
           </td>

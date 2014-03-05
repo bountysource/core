@@ -97,32 +97,40 @@
               </form>
             </div>
           </div>
-          <ul class="list-inline narrow" style="margin-bottom: 0;">
-            <li>
-              <div class="checkbox"><label class="">
-                <input type="checkbox" ng-model="issue_filter_options.only_valuable">
-                Has active bounties
-              </label></div>
-            </li>
-            <li>
-              <div class="checkbox"><label class="">
-                <input type="checkbox" ng-model="issue_filter_options.hide_open">
-                Hide open issues
-              </label></div>
-            </li>
-            <li>
-              <div class="checkbox"><label class="">
-                <input type="checkbox" ng-model="issue_filter_options.hide_closed">
-                Hide closed issues
-              </label></div>
-            </li>
-            <li>
-              <div class="checkbox"><label class="">
-                <input type="checkbox" ng-model="issue_filter_options.show_paid_out">
-                Only show paid out issues
-              </label></div>
-            </li>
-          </ul>
+          <div class="row">
+            <div class="col-md-6 col-xs-12">
+              <ul class="list-inline narrow" style="margin-bottom: 0;">
+                <li>
+                  <div class="checkbox"><label class="">
+                    <input type="checkbox" ng-model="issue_filter_options.only_valuable">
+                    Has active bounties
+                  </label></div>
+                </li>
+                <li>
+                  <div class="checkbox"><label class="">
+                    <input type="checkbox" ng-model="issue_filter_options.hide_open">
+                    Hide open issues
+                  </label></div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <ul class="list-inline narrow" style="margin-bottom: 0;">
+                <li>
+                  <div class="checkbox"><label class="">
+                    <input type="checkbox" ng-model="issue_filter_options.hide_closed">
+                    Hide closed issues
+                  </label></div>
+                </li>
+                <li>
+                  <div class="checkbox"><label class="">
+                    <input type="checkbox" ng-model="issue_filter_options.show_paid_out">
+                    Only show paid out issues
+                  </label></div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -142,6 +150,8 @@
       <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
 
       <!--Table of issues-->
-      <issue-list issues="issues" include="['bountyTotal', 'thumbsUpCount', 'participantsCount', 'issueAge']" default-order="{column: 'bounty_total', reverse: true}" filter="issue_filter"></issue-list>
+      <div ng-show="(issues | filter:issue_filter).length > 0">
+        <issue-list issues="issues" include="['bountyTotal', 'thumbsUpCount', 'participantsCount', 'issueAge']" default-order="{column: 'bounty_total', reverse: true}" filter="issue_filter"></issue-list>
+      </div>
     </div>
   </div>
