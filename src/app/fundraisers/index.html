@@ -27,7 +27,7 @@
     <tbody>
     <tr ng-repeat="fundraiser in selected_fundraisers | filter:filter_method | orderBy:order_by:order_reverse">
       <td class="hidden-sm">
-        <a class="thumbnail" ng-href="/fundraisers/{{fundraiser.slug}}">
+        <a class="thumbnail" ng-href="/fundraisers/{{fundraiser.slug}}" style="margin-bottom: 0;">
           <img ng-src="{{fundraiser.image_url || '/src/assets/img/bountysource-grey.png'}}" style="width: 100%;">
         </a>
       </td>

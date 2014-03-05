@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('fundraisers').controller('FundraiserUpdatesController', function ($scope, $routeParams, $location, $api) {
-  $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
-    $scope.fundraiser = fundraiser;
-    $scope.updates = fundraiser.updates;
-    return fundraiser;
+  $scope.fundraiserPromise.then(function(fundraiser) {
+    $api.v2.fundraiserUpdates({ fundraiser_id: fundraiser.id }).then(function(response) {
+      $scope.updates = angular.copy(response.data);
+      return $scope.updates;
+    });
   });
 
   $scope.create_update = function() {

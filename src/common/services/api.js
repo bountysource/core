@@ -67,6 +67,69 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     return this;
   };
 
+  // Screw it, pasting this in from master.
+  // TODO: Reference to RAML referenced here?
+  this.v2 = {
+
+    // params = {
+    //   method
+    //   url  (this function will prepend hostname)
+    //   params
+    //   headers
+    //   ... and more, see http://code.angularjs.org/1.0.8/docs/api/ng.$http
+    // }
+    call: function(options) {
+      options = options || {};
+
+      options.headers = options.headers || {};
+      options.headers['Accept'] = options.headers['Accept'] || 'application/vnd.bountysource+json; version=2';
+      options.method = options.method || 'GET';
+
+      var path = (options.url || '').replace(/^\/+/,'');
+      options.url = $rootScope.api_host + path;
+
+      if (options.verbose) {
+        $log.info('------ API Request ' + (new Date()).getTime() + ' ------');
+        $log.info('Path:', path);
+        $log.info('Headers:', options.headers);
+        $log.info('Params:', options.params);
+        $log.info('----------------------------');
+      }
+
+      return $http(options).then(function(response) {
+        if (options.verbose) {
+          $log.info('------ API Response ' + (new Date()).getTime()) + ' ------';
+          $log.info('Status:', response.status);
+          $log.info('Data:', response.data);
+          $log.info('Headers:', response.headers());
+          $log.info('----------------------------');
+        }
+        return response;
+      });
+    },
+
+    /*
+     * Fetch a collection of issues.
+     * */
+    issues: function(params) {
+      return this.call({
+        url: '/issues',
+        params: params || {}
+      });
+    },
+
+    /*
+    * Fetch published updates to fundraisers.
+    * */
+    fundraiserUpdates: function(params) {
+      return this.call({
+        url: '/fundraiser_updates',
+        params: params || {}
+      });
+    }
+
+  };
+
   // call(url, 'POST', { foo: bar }, optional_callback)
   this.call = function() {
     //if we are in the test_old environment, call the mocked $api.call() otherwise, use the prod call()
