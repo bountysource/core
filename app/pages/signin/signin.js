@@ -115,7 +115,6 @@ angular.module('app')
         var payload = angular.copy($scope.form_data);
 
         // Wait for Mixpanel, then append the distict_id to form_data params
-        // Identify with Mixpanel
         $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
           payload.mixpanel_id = mixpanel.cookie.props.distinct_id;
         });

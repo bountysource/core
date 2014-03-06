@@ -42,7 +42,7 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
       if (person) {
         // Identify with Mixpanel
         $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
-          mixpanel.identify(person.email);
+          mixpanel.identify(person.id);
         });
         currentPersonWatcher();
       }
