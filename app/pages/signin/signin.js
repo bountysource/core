@@ -111,12 +111,22 @@ angular.module('app')
       if ($scope.signin_or_signup !== 'pending') {
         $scope.show_validations = true;
         $scope.error = null;
-        $api.signup($scope.form_data).then(function(response) {
+
+        var payload = angular.copy($scope.form_data);
+
+        // Wait for Mixpanel, then append the distict_id to form_data params
+        // Identify with Mixpanel
+        $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
+          payload.mixpanel_id = mixpanel.cookie.props.distinct_id;
+        });
+
+        $api.signup(payload).then(function(response) {
           if (response.error) {
             $scope.error = response.error;
           } else {
-            // Hack: Follow Trackers whose IDs are appended to the redirect URL.
+            // Hack: Follow Trackers whose IDs are appen  ded to the redirect URL.
             $scope.follow_trackers_from_route_params();
+
             // $analytics.eventTrack("Sign-Up", { provider: "email" });
             $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
           }
