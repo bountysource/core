@@ -9,7 +9,7 @@ angular.module('app')
         title: 'Sign in'
       });
   })
-  .controller('Signin', function ($scope, $routeParams, $api, $location, $window) {
+  .controller('Signin', function ($scope, $routeParams, $api, $location, $window, $analytics) {
     // Redirect user to homepage if already logged in.
     // Need to wait to see if current_person is explicitly set to false.
     $scope.teams = [];
@@ -117,7 +117,7 @@ angular.module('app')
           } else {
             // Hack: Follow Trackers whose IDs are appended to the redirect URL.
             $scope.follow_trackers_from_route_params();
-
+            // $analytics.eventTrack("Sign-Up", { provider: "email" });
             $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
           }
         });
