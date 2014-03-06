@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
+angular.module('app').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout, $cookies) {
   $api.tracker_get($routeParams.id).then(function(tracker) {
     // Edge case: GitHub repo changes owner, and we create a new Tracker model.
     // If the requested tracker model has a redirect to another, change the URL to that tracker.
@@ -15,7 +15,10 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
 
     // follow and unfollow API method wrappers
     tracker.follow = function() {
-      if (!$scope.current_person) { return $api.require_signin(); }
+      if (!$scope.current_person) { 
+        $cookies.tracker_follow = $routeParams.id;
+        return $api.require_signin(); 
+      }
 
       if (tracker.followed) {
         // assume API call success, update the button state (tracker.followed)
@@ -26,6 +29,11 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
         $api.tracker_follow($routeParams.id);
       }
     };
+    // if cookie is set, call tracker.follow() when page is loaded
+    if ($cookies.tracker_follow === $routeParams.id) {
+       $cookies.tracker_follow = undefined;
+       tracker.follow();
+    }
 
     $scope.getIssues = function (page) {
       $api.v2.issues({
