@@ -126,7 +126,7 @@ angular.module('app')
             // Hack: Follow Trackers whose IDs are appen  ded to the redirect URL.
             $scope.follow_trackers_from_route_params();
 
-            // $analytics.eventTrack("Sign-Up", { provider: "email" });
+            $analytics.eventTrack("Sign-Up", { provider: $routeParams.provider || 'email' });
             $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
           }
         });
