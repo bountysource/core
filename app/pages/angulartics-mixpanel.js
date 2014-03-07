@@ -25,7 +25,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.issueView = function(id, options) {
     options = options || {};
-    var payload = this._buildPayload(angular.extend({ id: id }, options));
+    var payload = this._buildPayload(angular.extend({ id: this._unparameterizeId(id) }, options));
     $analytics.eventTrack('Issue View', payload);
   };
 
@@ -34,8 +34,17 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.fundraiserView = function(id, options) {
     options = options || {};
-    var payload = this._buildPayload(angular.extend({ id: id }, options));
+    var payload = this._buildPayload(angular.extend({ id: this._unparameterizeId(id) }, options));
     $analytics.eventTrack('Fundraiser View', payload);
+  };
+
+  /*
+   * Track Fundraiser pledge page view
+   * */
+  this.pledgeView = function(id, options) {
+    options = options || {};
+    var payload = this._buildPayload(angular.extend({ id: this._unparameterizeId(id) }, options));
+    $analytics.eventTrack('Pledge View', payload);
   };
 
   /*
@@ -43,7 +52,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
   * */
   this.trackerView = function(id, options) {
     options = options || {};
-    var payload = this._buildPayload(angular.extend({ id: id }, options));
+    var payload = this._buildPayload(angular.extend({ id: this._unparameterizeId(id) }, options));
     $analytics.eventTrack('Tracker View', payload);
   };
 
@@ -75,15 +84,15 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
     return payload;
   };
 
-
-  this.plegeCreate = function (options) {
-    options = options || {};
-    var payload = angular.extend({ type: 'Personal Balance'}, options);
-    $analytics.eventTrack('Pledge Create', payload);
+  /*
+  * Turn a parameterized id into an integer
+  * */
+  this._unparameterizeId = function(parameterized_id) {
+    var id = ((parameterized_id || '').match(/^(\d+)(?:\-[a-z0-9\-_]*)?/i) || [])[1];
+    return $window.parseInt(id, 10);
   };
 
 });
-
 
 /*
 * Fire Mixpanel events based on route
@@ -95,28 +104,36 @@ angular.module('app')
       var path = $location.path();
 
       /*
-       * Issue show page views
+       * Issue View
        * */
-      if (/^\/issues.+/.test(path)) {
+      if (/^\/issues\/[^\/]+$/.test(path)) {
         mixpanelEvent.issueView(currentRoute.params.id);
       }
 
       /*
-      * Fundraiser show page views
+      * Fundraiser View
       * */
-      else if (/^\/fundraisers.+/.test(path)) {
+      else if (/^\/fundraisers\/[^\/]+$/.test(path)) {
         mixpanelEvent.fundraiserView(currentRoute.params.id);
       }
 
       /*
-      * Tracker show page view
+      * Fundraiser Pledge View
       * */
-      else if (/^\/trackers.+/.test(path)) {
+      else if (/^\/fundraisers\/[^\/]+\/pledge$/.test(path)) {
+        mixpanelEvent.pledgeView(currentRoute.params.id);
+      }
+
+      /*
+      * Tracker View
+      * */
+      else if (/^\/trackers\/[^\/]+$/.test(path)) {
         mixpanelEvent.trackerView(currentRoute.params.id);
       }
 
       /*
-      * Track generic page view if none of the above
+      * Page View
+      * This is the catch-all event if the path does not have its own view event.
       * */
       else {
         mixpanelEvent.pageView();
