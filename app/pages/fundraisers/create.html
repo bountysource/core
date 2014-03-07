@@ -13,7 +13,8 @@
     <div class="span9">
       <!--Edit Title and Short Description-->
       <input id="fundraiser-title" class="span12" type="text" autofocus="true" name="title" ng-model="fundraiser.title" placeholder="The title of your fundraiser" />
-      <textarea class="span12 lead" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
+      <label>Remaining Characters: <div class="label label-info">{{ remaining_characters }}</div></label>
+      <textarea class="span12 lead" rows="2" name="description" maxlength="140" ng-change="charactersLeft(fundraiser.short_description)" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
 
       <ng-form class="form-horizontal" name="urls">
         <div class="control-group">

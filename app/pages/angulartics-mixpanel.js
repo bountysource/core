@@ -9,7 +9,7 @@ angular.module('angulartics.mixpanel', ['angulartics'])
     });
   }]);
 
-angular.module('app').service('mixpanelEvent', function($location, $analytics) {
+angular.module('app').service('mixpanelEvent', function($location, $analytics, $window) {
 
   /*
   * Generic page view. Sends path and any search params from $location

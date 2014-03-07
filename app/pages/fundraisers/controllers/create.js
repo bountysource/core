@@ -29,4 +29,9 @@ angular.module('app')
         }
       });
     };
+
+    $scope.remaining_characters = 140;
+    $scope.charactersLeft = function (description) {
+      $scope.remaining_characters = 140 - description.length;
+    };
   });
