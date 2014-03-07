@@ -2,14 +2,6 @@
 
 angular.module('angulartics.mixpanel', ['angulartics'])
   .config(['$analyticsProvider', function ($analyticsProvider) {
-
-//    Disabling global page tracking for now
-//    angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
-//      $analyticsProvider.registerPageTrack(function (path) {
-//        mixpanel.track( "Page Viewed", { "page": path } );
-//      });
-//    });
-
     angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
       $analyticsProvider.registerEventTrack(function (action, properties) {
         mixpanel.track(action, properties);
@@ -17,7 +9,15 @@ angular.module('angulartics.mixpanel', ['angulartics'])
     });
   }]);
 
-angular.module('app').service('mixpanelEvent', function($analytics) {
+angular.module('app').service('mixpanelEvent', function($location, $analytics) {
+
+  /*
+  * Generic page view. Sends path and any search params from $location
+  * */
+  this.pageView = function() {
+    var payload = angular.extend($location.search(), { path: $location.path() });
+    $analytics.eventTrack('Page View', payload);
+  };
 
   /*
    * Track Issue view
@@ -44,7 +44,7 @@ angular.module('app').service('mixpanelEvent', function($analytics) {
     options = options || {};
     var payload = angular.extend(options, { id: id });
     $analytics.eventTrack('Tracker View', payload);
-  }
+  };
 
   /*
    * Start the Bounty placement process.
@@ -86,15 +86,22 @@ angular.module('app')
       /*
       * Fundraiser show page views
       * */
-      if (/^\/fundraisers.+/.test(path)) {
+      else if (/^\/fundraisers.+/.test(path)) {
         mixpanelEvent.fundraiserView(currentRoute.params.id);
       }
 
       /*
       * Tracker show page view
       * */
-      if (/^\/trackers.+/.test(path)) {
+      else if (/^\/trackers.+/.test(path)) {
         mixpanelEvent.trackerView(currentRoute.params.id);
+      }
+
+      /*
+      * Track generic page view if none of the above
+      * */
+      else {
+        mixpanelEvent.pageView();
       }
 
     });
