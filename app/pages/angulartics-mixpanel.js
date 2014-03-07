@@ -14,8 +14,9 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
   /*
   * Generic page view. Sends path and any search params from $location
   * */
-  this.pageView = function() {
-    var payload = angular.extend($location.search(), { path: $location.path() });
+  this.pageView = function(options) {
+    options = options || {};
+    var payload = this._buildPayload(options);
     $analytics.eventTrack('Page View', payload);
   };
 
@@ -24,7 +25,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.issueView = function(id, options) {
     options = options || {};
-    var payload = angular.extend(options, { id: id });
+    var payload = this._buildPayload(angular.extend(options, { id: id }));
     $analytics.eventTrack('Issue View', payload);
   };
 
@@ -33,7 +34,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.fundraiserView = function(id, options) {
     options = options || {};
-    var payload = angular.extend(options, { id: id });
+    var payload = this._buildPayload(angular.extend(options, { id: id }));
     $analytics.eventTrack('Fundraiser View', payload);
   };
 
@@ -42,7 +43,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
   * */
   this.trackerView = function(id, options) {
     options = options || {};
-    var payload = angular.extend(options, { id: id });
+    var payload = this._buildPayload(angular.extend(options, { id: id }));
     $analytics.eventTrack('Tracker View', payload);
   };
 
@@ -51,7 +52,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.bountyStart = function(options) {
     options = options || {};
-    var payload = angular.extend(options, { type: '$direct' });
+    var payload = this._buildPayload(angular.extend(options, { type: '$direct' }));
     $analytics.eventTrack('Bounty Start', payload);
   };
 
@@ -60,12 +61,21 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.pledgeStart = function(options) {
     options = options || {};
-    var payload = angular.extend(options, { type: '$direct' });
+    var payload = this._buildPayload(angular.extend(options, { type: '$direct' }));
     $analytics.eventTrack('Pledge Start', payload);
   };
 
-});
+  /*
+  * Build payload to send to Mixpanel.
+  * Adds page param to all events with the current path.
+  * */
+  this._buildPayload = function(options) {
+    options = options || {};
+    var payload = angular.extend(options, { page: $location.path() });
+    return payload;
+  };
 
+});
 
 /*
 * Fire Mixpanel events based on route
