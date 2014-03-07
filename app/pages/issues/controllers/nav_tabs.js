@@ -10,5 +10,5 @@ angular.module('app').controller('IssueNavTabsController', function ($scope, $lo
 
   $scope.bountyTabClicked = function() {
     mixpanelEvent.bountyStart({ type: 'tab' });
-  }
+  };
 });

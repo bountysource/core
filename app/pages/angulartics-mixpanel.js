@@ -78,7 +78,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
 
   this.plegeCreate = function (options) {
     options = options || {};
-    var payload = angular.extend({ type: 'Personal Balance'}, options)
+    var payload = angular.extend({ type: 'Personal Balance'}, options);
     $analytics.eventTrack('Pledge Create', payload);
   };
 
