@@ -7,7 +7,7 @@ angular.module('app')
         controller: 'SigninCallback',
         template: '{{ error || "Redirecting..." }}'
       });
-  }).controller('SigninCallback', function($scope, $api, $routeParams, $location, $window) {
+  }).controller('SigninCallback', function($scope, $api, $routeParams, $location, $window, $analytics) {
     if ($routeParams.status === 'linked') {
       $api.signin_with_access_token($routeParams.access_token).then(function(response) {
         if (response === false) {
@@ -21,7 +21,7 @@ angular.module('app')
               $api.tracker_follow(tracker_ids[i]);
             }
           }
-
+          $analytics.eventTrack("Sign-In", { provider: $routeParams.provider });
           $window._gaq.push(['_trackEvent', 'Signin', 'Success-3rdParty-Auth']);
         }
       });

@@ -100,7 +100,7 @@ angular.module('app')
           } else {
             // Hack: Follow Trackers whose IDs are appended to the redirect URL.
             $scope.follow_trackers_from_route_params();
-
+            $analytics.eventTrack("Sign-In", { provider: 'email'} );
             $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
           }
         });

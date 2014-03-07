@@ -94,7 +94,7 @@ angular.module('app')
         show_related_issues: ($scope.search_parameters.show_related_issues) ? 1 : 0
       });
       if ($scope.pagination){
-        angular.extend(new_params, {page: $scope.pagination.page})
+        angular.extend(new_params, {page: $scope.pagination.page});
       }
       delete new_params.id;
       $location.search(new_params);
@@ -103,9 +103,9 @@ angular.module('app')
     function parseParams (param) {
       if($window.parseInt(param, 10).toString() === "NaN") {
         return true;
-      } else if ($window.parseInt(param, 10) == 1) {
+      } else if ($window.parseInt(param, 10) === 1) {
         return true;
-      } else if ($window.parseInt(param, 10) == 0) {
+      } else if ($window.parseInt(param, 10) === 0) {
         return false;
       }
     }
