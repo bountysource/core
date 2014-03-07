@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $window, $location, $api, $cart) {
+  .controller('FundraiserPledgeCreateController', function ($scope, $routeParams, $window, $location, $api, $cart, mixpanelEvent) {
     $scope.cart_promise = $cart.load().then(function(cart) {
       $scope.cart = cart;
       return cart;

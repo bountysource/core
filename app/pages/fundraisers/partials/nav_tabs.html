@@ -12,5 +12,7 @@
     <i class="icon-lock"></i>
     Reward Stats
   </a></li>
-  <li ng-class="active_tab('pledge_now')" ng-show="fundraiser.published && fundraiser.in_progress"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a></li>
+  <li ng-class="active_tab('pledge_now')" ng-show="fundraiser.published && fundraiser.in_progress">
+    <a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge" analytics-on analytics-event="Pledge Start" analytics-type="Tab">Pledge Now</a>
+  </li>
 </ul>

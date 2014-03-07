@@ -9,7 +9,7 @@ angular.module('app')
       });
   })
 
-  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
+  .controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle, mixpanelEvent) {
     $scope.fundraiser = $api.fundraiser_get($routeParams.id);
 
     // $sanitize but allow iframes (i.e. youtube videos)
@@ -45,10 +45,17 @@ angular.module('app')
       amount: parseInt($routeParams.amount, 10)
     };
 
-    $scope.pledge_redirect = function(amount) {
+    $scope.pledge_redirect = function($event, amount) {
       $scope.fundraiser.then(function(fundraiser) {
         amount = amount || $scope.pledge.amount;
         if (angular.isNumber(amount) && fundraiser.published) {
+          var type;
+          if($event.type == "submit") {
+            type = 'custom';
+          } else if ($event.type == "click") {
+            type = "obama-button"
+          }
+          mixpanelEvent.pledgeStart({amount: amount, type: type});
           $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
         }
       });
