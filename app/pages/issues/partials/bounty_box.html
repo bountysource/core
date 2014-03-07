@@ -9,24 +9,26 @@
   <br />
 
   <div>
-    <form style="margin-bottom: 0;" ng-submit="place_bounty_redirect()">
-      <div class="controls controls-row">
-        <a ng-click="place_bounty_redirect(15)" class="span4 btn btn-primary btn-block">$15</a>
-        <a ng-click="place_bounty_redirect(35)" class="span4 btn btn-primary btn-block">$35</a>
-        <a ng-click="place_bounty_redirect(50)" class="span4 btn btn-primary btn-block">$50</a>
-      </div>
+    <div class="controls controls-row">
+      <a ng-click="place_bounty_redirect(15)" class="span4 btn btn-primary btn-block">$15</a>
+      <a ng-click="place_bounty_redirect(35)" class="span4 btn btn-primary btn-block">$35</a>
+      <a ng-click="place_bounty_redirect(50)" class="span4 btn btn-primary btn-block">$50</a>
+    </div>
 
-      <div class="controls controls-row">
-        <a ng-click="place_bounty_redirect(100)" class="span4 btn btn-primary btn-block">$100</a>
-        <a ng-click="place_bounty_redirect(250)" class="span4 btn btn-primary btn-block">$250</a>
-        <a ng-click="place_bounty_redirect(500)" class="span4 btn btn-primary btn-block">$500</a>
-      </div>
+    <div class="controls controls-row">
+      <a ng-click="place_bounty_redirect(100)" class="span4 btn btn-primary btn-block">$100</a>
+      <a ng-click="place_bounty_redirect(250)" class="span4 btn btn-primary btn-block">$250</a>
+      <a ng-click="place_bounty_redirect(500)" class="span4 btn btn-primary btn-block">$500</a>
+    </div>
 
-      <div class="controls controls-row">
-        <a class="span4 btn btn-primary btn-block" ng-click="place_bounty_redirect(1000)">$1000</a>
-        <input style="margin-bottom: 0;" integer-only type="number" min="5" ng-model="bounty.amount" class="span8 input-small" placeholder="Other amount" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus"/>
+    <div class="controls controls-row">
+      <a class="span4 btn btn-primary btn-block" ng-click="place_bounty_redirect(1000)">$1000</a>
+
+
+      <form ng-submit="custom_bounty_redirect()">
+        <input style="margin-bottom: 0;" type="number" min="5" ng-model="bounty.amount" class="span8 input-small" placeholder="Other amount" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus" integer-only />
         <input style="display:none;" type="submit" id="custom-amount-submit" />
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

@@ -16,5 +16,12 @@ angular.module('app')
         $location.path("/issues/"+$routeParams.id+"/bounty").search({ amount: amount });
       }
     };
-  });
 
+    $scope.custom_bounty_redirect = function() {
+      mixpanelEvent.bountyStart({ type: 'custom', amount: $scope.bounty.amount });
+
+      if (angular.isNumber($scope.bounty.amount)) {
+        $location.path("/issues/"+$routeParams.id+"/bounty").search({ amount: $scope.bounty.amount });
+      }
+    };
+  });

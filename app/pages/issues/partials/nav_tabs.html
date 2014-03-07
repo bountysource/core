@@ -8,8 +8,10 @@
     Claims
     <span class="badge badge-info" ng-show="issue.bounty_claims.length > 0">{{issue.bounty_claims.length}}</span>
   </a></li>
-  <li ng-class="active_tab('bounty')" ng-show="issue.can_add_bounty"><a ng-href="/issues/{{issue.slug}}/bounty">
-    Post a Bounty
-    <span class="badge badge-info" ng-show="issue.bounty_claims.length > 0">{{issue.bounty_claims.length}}</span>
-  </a></li>
+  <li ng-class="active_tab('bounty')" ng-show="issue.can_add_bounty" ng-click="bountyTabClicked()">
+    <a ng-href="/issues/{{issue.slug}}/bounty">
+      Post a Bounty
+      <span class="badge badge-info" ng-show="issue.bounty_claims.length > 0">{{issue.bounty_claims.length}}</span>
+    </a>
+  </li>
 </ul>

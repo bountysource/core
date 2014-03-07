@@ -25,7 +25,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.issueView = function(id, options) {
     options = options || {};
-    var payload = this._buildPayload(angular.extend(options, { id: id }));
+    var payload = this._buildPayload(angular.extend({ id: id }, options));
     $analytics.eventTrack('Issue View', payload);
   };
 
@@ -34,7 +34,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.fundraiserView = function(id, options) {
     options = options || {};
-    var payload = this._buildPayload(angular.extend(options, { id: id }));
+    var payload = this._buildPayload(angular.extend({ id: id }, options));
     $analytics.eventTrack('Fundraiser View', payload);
   };
 
@@ -43,7 +43,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
   * */
   this.trackerView = function(id, options) {
     options = options || {};
-    var payload = this._buildPayload(angular.extend(options, { id: id }));
+    var payload = this._buildPayload(angular.extend({ id: id }, options));
     $analytics.eventTrack('Tracker View', payload);
   };
 
@@ -52,7 +52,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.bountyStart = function(options) {
     options = options || {};
-    var payload = this._buildPayload(angular.extend(options, { type: '$direct' }));
+    var payload = this._buildPayload(angular.extend({ type: '$direct' }, options));
     $analytics.eventTrack('Bounty Start', payload);
   };
 
@@ -61,7 +61,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
    * */
   this.pledgeStart = function(options) {
     options = options || {};
-    var payload = this._buildPayload(angular.extend(options, { type: '$direct' }));
+    var payload = this._buildPayload(angular.extend({ type: '$direct' }, options));
     $analytics.eventTrack('Pledge Start', payload);
   };
 
@@ -71,7 +71,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
   * */
   this._buildPayload = function(options) {
     options = options || {};
-    var payload = angular.extend(options, { page: $location.path() });
+    var payload = angular.extend({ page: $location.path() }, options);
     return payload;
   };
 
