@@ -6,7 +6,8 @@ angular.module('app')
   .when('/teams/:id/issues', {
     templateUrl: 'pages/teams/issues.html',
     controller: 'BaseTeamController',
-    reloadOnSearch: false
+    reloadOnSearch: false,
+    trackEvent: 'View Team Issues'
   });
 })
 .controller('TeamIssuesController', function ($scope, $routeParams, $api, $location, $window) {

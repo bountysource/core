@@ -7,7 +7,8 @@ angular.module('app')
         templateUrl: 'pages/settings/email.html',
         controller: 'SettingsEmail',
         resolve: $person,
-        title: 'Email'
+        title: 'Email',
+        trackEvent: 'View Account Settings Email'
       });
   })
   .controller('SettingsEmail', function($scope, $routeParams, $api) {

@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/fundraisers/:id/backers', {
         templateUrl: 'pages/fundraisers/pledges.html',
-        controller: 'FundraiserShowController'
+        controller: 'FundraiserShowController',
+        trackEvent: 'View Fundraiser Pledges'
       });
   })
 

@@ -6,7 +6,8 @@ angular.module('app')
       .when('/fundraisers/:id/edit', {
         templateUrl: 'pages/fundraisers/edit.html',
         controller: 'FundraiserEditController',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View Fundraiser Edit'
       });
   })
 

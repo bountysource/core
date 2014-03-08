@@ -10,7 +10,8 @@ angular.module('app')
           count: function($rootScope, $api) {
             $rootScope.people_count = $api.people_count();
           }
-        }
+        },
+        trackEvent: 'View Homepage'
       });
   })
   .controller('HomeCtrl', function ($scope, $window, $api) {

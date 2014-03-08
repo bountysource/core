@@ -6,7 +6,8 @@ angular.module('app')
       .when('/signin', {
         templateUrl: 'pages/signin/signin.html',
         controller: 'Signin',
-        title: 'Sign in'
+        title: 'Sign in',
+        trackEvent: 'View Signin'
       });
   })
   .controller('Signin', function ($scope, $routeParams, $api, $location, $window, $analytics) {

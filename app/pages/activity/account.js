@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/activity/account', {
         templateUrl: 'pages/activity/account.html',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View My Account'
       });
   });
 

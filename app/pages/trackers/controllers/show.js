@@ -6,7 +6,8 @@ angular.module('app')
       .when('/trackers/:id', {
         templateUrl: 'pages/trackers/show.html',
         controller: 'TrackerShow',
-        reloadOnSearch: false
+        reloadOnSearch: false,
+        trackEvent: 'View Tracker'
       });
   })
   .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {

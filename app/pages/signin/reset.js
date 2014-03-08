@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/signin/reset', {
         templateUrl: 'pages/signin/reset.html',
-        controller: 'Reset'
+        controller: 'Reset',
+        trackEvent: 'View Signin Reset'
       });
   })
   .controller('Reset', function ($scope, $routeParams, $api) {

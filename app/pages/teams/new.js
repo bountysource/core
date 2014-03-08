@@ -7,7 +7,8 @@ angular.module('app')
         templateUrl: 'pages/teams/new.html',
         controller: 'NewTeamController',
         resolve: $person,
-        title: 'Create New Team'
+        title: 'Create New Team',
+        trackEvent: 'View Team Create'
       });
   })
   .controller('NewTeamController', function ($scope, $location, $api, $filter, $routeParams, $pageTitle) {

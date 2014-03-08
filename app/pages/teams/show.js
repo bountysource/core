@@ -6,7 +6,8 @@ angular.module('app')
     .when('/teams/:id', {
       templateUrl: 'pages/teams/show.html',
       controller: 'BaseTeamController',
-      reloadOnSearch: false
+      reloadOnSearch: false,
+      trackEvent: 'View Team'
     });
   })
   .controller('TeamHomeController', function ($route, $scope, $routeParams, $api, $pageTitle, $location) {

@@ -6,7 +6,8 @@ angular.module('app')
       .when('/activity', {
         templateUrl: 'pages/activity/timeline.html',
         controller: 'Activity',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View My Timeline'
       });
   })
   .controller('Activity', function($scope, $routeParams, $api, $pageTitle) {

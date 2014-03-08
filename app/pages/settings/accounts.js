@@ -7,7 +7,8 @@ angular.module('app')
         templateUrl: 'pages/settings/accounts.html',
         controller: 'AccountSettings',
         resolve: $person,
-        title: 'Accounts'
+        title: 'Accounts',
+        trackEvent: 'View Account Settings'
       });
   })
   .controller('AccountSettings', function($scope, $api, $location) {

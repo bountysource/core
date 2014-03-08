@@ -6,7 +6,8 @@ angular.module('app')
       .when("/auth/:provider/confirm", {
         templateUrl: "pages/auth/auth.html",
         controller: "AuthConfirmController",
-        resolve: $person
+        resolve: $person,
+        trackEvent: false
       });
   })
   .controller("AuthConfirmController", function($scope, $routeParams, $window, $location, $api) {

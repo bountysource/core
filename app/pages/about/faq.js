@@ -6,6 +6,7 @@ angular.module('app')
       .when('/faq', {
         templateUrl: 'pages/about/faq.html',
         controller: 'Static',
-        title: 'Frequently Asked Questions'
+        title: 'Frequently Asked Questions',
+        trackEvent: 'View FAQ'
       });
   });

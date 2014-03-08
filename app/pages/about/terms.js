@@ -6,6 +6,7 @@ angular.module('app')
       .when('/terms', {
         templateUrl: 'pages/about/terms.html',
         controller: 'Static',
-        title: 'Terms of Service'
+        title: 'Terms of Service',
+        trackEvent: 'View Terms'
       });
   });

@@ -6,7 +6,8 @@ angular.module('app')
       .when('/teams/:id/members/manage', {
         templateUrl: 'pages/teams/manage_members.html',
         controller: 'BaseTeamController',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View Team Members Manage'
       });
   })
   .controller('ManageTeamMembersController', function($scope, $routeParams, $location, $api, $window) {

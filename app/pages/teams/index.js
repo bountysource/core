@@ -6,7 +6,8 @@ angular.module('app')
       .when('/teams', {
         templateUrl: 'pages/teams/index.html',
         controller: 'TeamsIndexController',
-        title: 'Teams'
+        title: 'Teams',
+        trackEvent: 'View Team Index'
       });
   })
   .controller('TeamsIndexController', function ($scope, $location, $api, $pageTitle) {

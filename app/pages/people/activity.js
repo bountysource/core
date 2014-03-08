@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/people/:id', {
         templateUrl: 'pages/people/activity.html',
-        controller: 'PeopleShow'
+        controller: 'PeopleShow',
+        trackEvent: 'View Person'
       });
   })
   .controller('PeopleShow', function ($scope, $routeParams, $api, $pageTitle, $location) {

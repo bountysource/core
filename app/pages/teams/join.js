@@ -6,7 +6,8 @@ angular.module('app')
       .when('/teams/:id/join', {
         templateUrl: 'pages/teams/join.html',
         controller: 'BaseTeamController',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View Team Join'
       });
   })
   .controller('JoinTeamController', function ($scope, $routeParams, $location, $api) {

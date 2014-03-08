@@ -7,7 +7,8 @@ angular.module('app')
         templateUrl: 'pages/trackers/edit.html',
         controller: 'TrackersEditController',
         title: 'Projects',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View Tracker Edit'
       });
   })
   .controller('TrackersEditController', function ($scope, $api, $routeParams, $pageTitle, $location, $window) {

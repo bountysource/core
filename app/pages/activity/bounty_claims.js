@@ -6,7 +6,8 @@ angular.module('app')
       .when('/activity/claims', {
         templateUrl: 'pages/activity/bounty_claims.html',
         controller: 'BountyClaimActivity',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View My Claims'
       });
   })
   .controller('BountyClaimActivity', function($scope, $routeParams, $api, $pageTitle) {

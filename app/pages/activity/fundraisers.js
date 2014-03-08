@@ -6,7 +6,8 @@ angular.module('app')
       .when('/activity/fundraisers', {
         templateUrl: 'pages/activity/fundraisers.html',
         controller: 'FundraiserActivity',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View My Fundraisers'
       });
   })
   .controller('FundraiserActivity', function($scope, $routeParams, $api, $pageTitle) {

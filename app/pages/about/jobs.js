@@ -6,6 +6,7 @@ angular.module('app')
       .when('/jobs', {
         templateUrl: 'pages/about/jobs.html',
         controller: 'Static',
-        title: 'Jobs'
+        title: 'Jobs',
+        trackEvent: 'View Jobs'
       });
   });

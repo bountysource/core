@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/fundraisers/:id/pledge', {
         templateUrl: 'pages/pledges/new.html',
-        controller: 'FundraiserPledgeCreateController'
+        controller: 'FundraiserPledgeCreateController',
+        trackEvent: 'View Fundraiser Pledge'
       });
   })
 

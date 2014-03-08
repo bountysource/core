@@ -6,7 +6,8 @@ angular.module('app')
       .when('/transactions/:id', {
         templateUrl: 'pages/transactions/show.html',
         controller: 'TransactionShowController',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View Transaction'
       });
   })
   .controller('TransactionShowController', function ($scope, $routeParams, $api, $filter, $window, $twttr) {

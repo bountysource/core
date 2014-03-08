@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/signin/callback', {
         controller: 'SigninCallback',
-        template: '{{ error || "Redirecting..." }}'
+        template: '{{ error || "Redirecting..." }}',
+        trackEvent: false
       });
   }).controller('SigninCallback', function($scope, $api, $routeParams, $location, $window, $analytics) {
     if ($routeParams.status === 'linked') {

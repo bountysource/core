@@ -6,6 +6,7 @@ angular.module('app')
       .when('/learn', {
         templateUrl: 'pages/about/learn.html',
         controller: 'Static',
-        title: 'Learn'
+        title: 'Learn',
+        trackEvent: 'View Learn'
       });
   });

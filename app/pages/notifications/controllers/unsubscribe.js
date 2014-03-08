@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/notifications/unsubscribe', {
         templateUrl: 'pages/notifications/unsubscribe.html',
-        controller: 'NotificationsController'
+        controller: 'NotificationsController',
+        trackEvent: 'View Notifications Unsubscribe'
       });
   }).controller('NotificationsController', function($scope, $routeParams, $api, $pageTitle) {
     $pageTitle.set("Unsubscribe from Bountysource Emails");

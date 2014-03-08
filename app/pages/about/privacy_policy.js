@@ -6,6 +6,7 @@ angular.module('app')
       .when('/privacy', {
         templateUrl: 'pages/about/privacy_policy.html',
         controller: 'Static',
-        title: 'Privacy Policy'
+        title: 'Privacy Policy',
+        trackEvent: 'View Privacy'
       });
   });

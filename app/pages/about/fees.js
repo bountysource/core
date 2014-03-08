@@ -6,6 +6,7 @@ angular.module('app')
       .when('/fees', {
         templateUrl: 'pages/about/fees.html',
         controller: 'Static',
-        title: 'Pricing'
+        title: 'Pricing',
+        trackEvent: 'View Pricing'
       });
   });

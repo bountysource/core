@@ -6,7 +6,8 @@ angular.module('app')
       .when('/trackers', {
         templateUrl: 'pages/trackers/index.html',
         controller: 'TrackersIndex',
-        title: 'Projects'
+        title: 'Projects',
+        trackEvent: 'View Trackers'
       });
   })
   .controller('TrackersIndex', function ($scope, $api) {

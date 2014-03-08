@@ -6,7 +6,8 @@ angular.module('app')
       .when('/teams/:id/settings', {
         templateUrl: 'pages/teams/settings.html',
         controller: 'BaseTeamController',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View Team Settings'
       });
   })
   .controller('EditTeamController', function ($scope, $routeParams, $location, $api) {

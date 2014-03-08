@@ -6,7 +6,8 @@ angular.module('app')
       .when('/fundraisers/new', {
         templateUrl: 'pages/fundraisers/create.html',
         controller: 'FundraiserCreateController',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View Fundraiser Create'
       });
   })
 

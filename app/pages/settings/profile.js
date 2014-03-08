@@ -8,7 +8,8 @@ angular.module('app')
         templateUrl: 'pages/settings/profile.html',
         controller: 'Settings',
         resolve: $person,
-        title: 'Profile'
+        title: 'Profile',
+        trackEvent: 'View Account Settings Profile'
       });
   })
   .controller('Settings', function($scope, $routeParams, $api) {

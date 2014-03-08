@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/teams/:id/projects', {
         templateUrl: 'pages/teams/projects.html',
-        controller: 'BaseTeamController'
+        controller: 'BaseTeamController',
+        trackEvent: 'View Team Projects'
       });
   })
   .controller('TeamTrackersController', function ($scope, $routeParams, $api, $pageTitle, $location) {

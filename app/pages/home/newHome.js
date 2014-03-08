@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/issues', {
         templateUrl: 'pages/home/newHome.html',
-        controller: 'newHomeCtrl'
+        controller: 'newHomeCtrl',
+        trackEvent: 'View Issue Index'
       });
   })
   .controller('newHomeCtrl', function ($scope, $window, $api) {

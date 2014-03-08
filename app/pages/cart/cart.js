@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/cart', {
         templateUrl: 'pages/cart/cart.html',
-        controller: 'CartController'
+        controller: 'CartController',
+        trackEvent: 'View Cart'
       });
   })
 

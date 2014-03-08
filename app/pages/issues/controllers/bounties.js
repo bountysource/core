@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/issues/:id/bounties', {
         templateUrl: 'pages/issues/bounties.html',
-        controller: 'IssuesBaseController'
+        controller: 'IssuesBaseController',
+        trackEvent: 'View Issue Bounty Index'
       });
   })
 

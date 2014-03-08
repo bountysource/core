@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/issues/:id', {
         templateUrl: 'pages/issues/show.html',
-        controller: 'IssuesBaseController'
+        controller: 'IssuesBaseController',
+        trackEvent: 'View Issue'
       });
   })
 

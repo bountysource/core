@@ -6,7 +6,8 @@ angular.module('app')
       .when('/search', {
         templateUrl: 'pages/home/search.html',
         controller: 'SearchController',
-        title: 'Search'
+        title: 'Search',
+        trackEvent: 'View Search'
       });
   })
 

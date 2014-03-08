@@ -6,7 +6,8 @@ angular.module('app')
       .when('/bounties/search', {
         templateUrl: 'pages/bounties/search.html',
         controller: 'BountiesSearchController',
-        reloadOnSearch: false
+        reloadOnSearch: false,
+        trackEvent: 'View Bounties Search'
       });
   })
 

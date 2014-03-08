@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/teams/:id/bounties', {
         templateUrl: 'pages/teams/bounties.html',
-        controller: 'BaseTeamController'
+        controller: 'BaseTeamController',
+        trackEvent: 'View Team Bounties'
       });
   })
   .controller('TeamBountiesController', function ($scope, $routeParams, $api) {

@@ -6,12 +6,14 @@ angular.module('app')
       .when('/fundraisers', {
         templateUrl: 'pages/fundraisers/index.html',
         controller: 'FundraisersIndex',
-        title: 'Fundraisers'
+        title: 'Fundraisers',
+        trackEvent: 'View Fundraisers'
       })
       .when('/fundraisers/completed', {
         templateUrl: 'pages/fundraisers/index.html',
         controller: 'FundraisersIndex',
-        title: 'Fundraisers'
+        title: 'Fundraisers',
+        trackEvent: 'View Fundraisers Completed'
       });
   })
   .controller('FundraisersIndex', function ($scope, $location, $api) {

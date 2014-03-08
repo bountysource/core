@@ -14,7 +14,8 @@ angular.module('app')
               $rootScope.__can_use_plugin__ = person && person.github_account && person.github_account.permissions.indexOf("public_repo") >= 0;
             });
           }
-        })
+        }),
+        trackEvent: 'View Tools Installed'
       });
   }).
   controller("InstalledPluginsController", function($scope, $api) {

@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/press', {
         templateUrl: 'pages/press/index.html',
-        controller: 'PressController'
+        controller: 'PressController',
+        trackEvent: 'View Press'
       });
   }).controller('PressController', function($scope) {
 

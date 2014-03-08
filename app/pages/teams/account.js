@@ -6,7 +6,8 @@ angular.module('app')
       .when('/teams/:id/account', {
         templateUrl: 'pages/teams/account.html',
         controller: 'BaseTeamController',
-        resolve: $person
+        resolve: $person,
+        trackEvent: 'View Team Account'
       });
   })
   .controller('TeamAccountController', function ($scope, $routeParams, $location, $cart) {

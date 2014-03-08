@@ -5,6 +5,7 @@ angular.module('app')
     $routeProvider
       .when('/teams/:id/members', {
         templateUrl: 'pages/teams/members.html',
-        controller: 'BaseTeamController'
+        controller: 'BaseTeamController',
+        trackEvent: 'View Team Members'
       });
   });
