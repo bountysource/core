@@ -11,6 +11,16 @@ angular.module('app')
     });
   })
   .controller('TeamIssuesController', function ($scope, $routeParams, $api, $location, $window) {
+    var parseParams = function(param) {
+      if($window.parseInt(param, 10).toString() === "NaN") {
+        return true;
+      } else if ($window.parseInt(param, 10) === 1) {
+        return true;
+      } else if ($window.parseInt(param, 10) === 0) {
+        return false;
+      }
+    };
+
     // render defaults
     $scope.maxPaginationSize = 15; // how many pages to show in the pagination bar
     $scope.issues_resolved = false;
@@ -99,16 +109,6 @@ angular.module('app')
       }
       delete new_params.id;
       $location.search(new_params);
-    }
-
-    function parseParams (param) {
-      if($window.parseInt(param, 10).toString() === "NaN") {
-        return true;
-      } else if ($window.parseInt(param, 10) === 1) {
-        return true;
-      } else if ($window.parseInt(param, 10) === 0) {
-        return false;
-      }
     }
 
     // load team issues when the page is first loaded

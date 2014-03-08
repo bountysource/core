@@ -2,14 +2,14 @@
 
 angular.module('angulartics.mixpanel', ['angulartics'])
   .config(['$analyticsProvider', function ($analyticsProvider) {
-    angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
+    window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
       $analyticsProvider.registerEventTrack(function (action, properties) {
         mixpanel.track(action, properties);
       });
     });
   }]);
 
-angular.module('app').service('mixpanelEvent', function($location, $analytics, $window) {
+angular.module('app').service('mixpanelEvent', function($location, $analytics) {
 
   /*
    * Wrapper for analytics.eventTrack that adds in "page"
