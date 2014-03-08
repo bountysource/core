@@ -39,11 +39,11 @@ angular.module('app')
   .run(function($rootScope, $location, mixpanelEvent) {
 
     $rootScope.$on('$routeChangeSuccess', function(routeChangeEvent, currentRoute) {
-      if (currentRoute.$$route.trackEvent === false) {
-        return;
+      if (!currentRoute.$$route) {
+        mixpanelEvent.track(($location.path() === '/legacy' ? 'View Legacy' : 'View Not Found'), currentRoute.params);
+      } else if (currentRoute.$$route.trackEvent !== false) {
+        mixpanelEvent.track(currentRoute.$$route.trackEvent || 'View Other', currentRoute.params);
       }
-
-      mixpanelEvent.track(currentRoute.$$route.trackEvent || 'View Other', currentRoute.params);
     });
 
   });
