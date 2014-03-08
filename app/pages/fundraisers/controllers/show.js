@@ -51,10 +51,10 @@ angular.module('app')
         amount = amount || $scope.pledge.amount;
         if (angular.isNumber(amount) && fundraiser.published) {
           var type;
-          if($event.type == "submit") {
+          if($event.type === "submit") {
             type = 'custom';
-          } else if ($event.type == "click") {
-            type = "obama-button"
+          } else if ($event.type === "click") {
+            type = "buttons";
           }
           mixpanelEvent.pledgeStart({amount: amount, type: type});
           $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });

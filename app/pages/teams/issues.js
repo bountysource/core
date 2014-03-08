@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('app')
-.config(function ($routeProvider) {
-  $routeProvider
-  .when('/teams/:id/issues', {
-    templateUrl: 'pages/teams/issues.html',
-    controller: 'BaseTeamController',
-    reloadOnSearch: false,
-    trackEvent: 'View Team Issues'
-  });
-})
-.controller('TeamIssuesController', function ($scope, $routeParams, $api, $location, $window) {
+  .config(function ($routeProvider) {
+    $routeProvider
+    .when('/teams/:id/issues', {
+      templateUrl: 'pages/teams/issues.html',
+      controller: 'BaseTeamController',
+      reloadOnSearch: false,
+      trackEvent: 'View Team Issues'
+    });
+  })
+  .controller('TeamIssuesController', function ($scope, $routeParams, $api, $location, $window) {
     // render defaults
     $scope.maxPaginationSize = 15; // how many pages to show in the pagination bar
     $scope.issues_resolved = false;

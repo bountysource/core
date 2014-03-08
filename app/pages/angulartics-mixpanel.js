@@ -30,14 +30,6 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics, $
     this.track('Start Pledge', angular.extend({ type: '$direct' }, options||{}));
   };
 
-  /*
-  * Turn a parameterized id into an integer
-  * */
-  this._unparameterizeId = function(parameterized_id) {
-    var id = ((parameterized_id || '').match(/^(\d+)(?:\-[a-z0-9\-_]*)?/i) || [])[1];
-    return $window.parseInt(id, 10);
-  };
-
 });
 
 /*
@@ -51,7 +43,6 @@ angular.module('app')
         return;
       }
 
-      var path = $location.path();
       mixpanelEvent.track(currentRoute.$$route.trackEvent || 'View Other', currentRoute.params);
     });
 

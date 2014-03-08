@@ -88,7 +88,7 @@ angular.module('api.bountysource',[]).
         options = options || {};
 
         options.headers = options.headers || {};
-        options.headers['Accept'] = options.headers['Accept'] || 'application/vnd.bountysource+json; version=2';
+        options.headers.Accept = options.headers.Accept || 'application/vnd.bountysource+json; version=2';
         options.method = options.method || 'GET';
 
         var path = (options.url || '').replace(/^\/+/,'');
@@ -104,7 +104,7 @@ angular.module('api.bountysource',[]).
 
         return $http(options).then(function(response) {
           if (options.verbose) {
-            $log.info('------ API Response ' + (new Date()).getTime()) + ' ------';
+            $log.info('------ API Response ' + (new Date()).getTime() + ' ------');
             $log.info('Status:', response.status);
             $log.info('Data:', response.data);
             $log.info('Headers:', response.headers());

@@ -6,13 +6,13 @@ angular.module('app')
     $scope.no_container = $location.path() === '/';
   });
 
-    $scope.show_twitter_banner = function () {
-      if ($location.path() === "/") {
-        return false;
-      } else {
-        return true;
-      }
-    };
+  $scope.show_twitter_banner = function () {
+    if ($location.path() === "/") {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   // change page title on change route
   $rootScope.$on('$routeChangeStart', function (event, current) {
