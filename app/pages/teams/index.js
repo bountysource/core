@@ -7,7 +7,7 @@ angular.module('app')
         templateUrl: 'pages/teams/index.html',
         controller: 'TeamsIndexController',
         title: 'Teams',
-        trackEvent: 'View Team Index'
+        trackEvent: 'View Teams'
       });
   })
   .controller('TeamsIndexController', function ($scope, $location, $api, $pageTitle) {

@@ -6,7 +6,7 @@ angular.module('app')
       .when('/issues/:id/bounties', {
         templateUrl: 'pages/issues/bounties.html',
         controller: 'IssuesBaseController',
-        trackEvent: 'View Issue Bounty Index'
+        trackEvent: 'View Issue Bounties'
       });
   })
 
