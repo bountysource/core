@@ -10,7 +10,7 @@ angular.module('app')
         trackEvent: 'View Tracker'
       });
   })
-  .controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout) {
+  .controller('TrackerShow', function ($scope, $cookies, $routeParams, $location, $api, $pageTitle, $timeout) {
     $api.tracker_get($routeParams.id).then(function(tracker) {
       // Edge case: GitHub repo changes owner, and we create a new Tracker model.
       // If the requested tracker model has a redirect to another, change the URL to that tracker.
@@ -22,7 +22,10 @@ angular.module('app')
 
       // follow and unfollow API method wrappers
       tracker.follow = function() {
-        if (!$scope.current_person) { return $api.require_signin(); }
+        if (!$scope.current_person) { 
+          $cookies.tracker_follow = $routeParams.id;
+          return $api.require_signin(); 
+        }
 
         if (tracker.followed) {
           // assume API call success, update the button state (tracker.followed)
@@ -33,6 +36,11 @@ angular.module('app')
           $api.tracker_follow($routeParams.id);
         }
       };
+
+      if ($cookies.tracker_follow === $routeParams.id) {
+        $cookies.tracker_follow = undefined;
+        tracker.follow();
+      }
 
       // Load issues for tracker. If the tracker was just created (has not been synced yet),
       // throw in a timeout to allow time for issues to be added
