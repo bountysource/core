@@ -94,6 +94,21 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics, $
     this.track('Complete Solution', angular.extend({ issue_id: issue_id }, options||{}));
   };
 
+  // User sets a bounty goal on an Issue
+  this.setBountyGoal = function(amount, issue_id, options) {
+    this.track('Set Bounty Goal', angular.extend({ amount: amount, issue_id: issue_id }, options||{}));
+  };
+
+  // User changes their bounty goal on an Issue
+  this.updateBountyGoal = function(new_amount, issue_id, options) {
+    this.track('Update Bounty Goal', angular.extend({ amount: new_amount, issue_id: issue_id }, options||{}));
+  };
+
+  // User removes their bounty goal on an Issue
+  this.removeBountyGoal = function(issue_id, options) {
+    this.track('Remove Bounty Goal', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+  
   this.signIn = function (options) {
     this.track("Sign-In", angular.extend({ type: '$direct' }, options||{}));
   };

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('DeveloperGoalsBaseController', function ($scope, $api, $filter, $location) {
+  .controller('DeveloperGoalsBaseController', function ($scope, $api, $filter, $location, mixpanelEvent) {
     $scope.developer_goals = [];
     $scope.new_developer_goal = { amount: undefined };
     $scope.my_developer_goal = undefined;
@@ -82,12 +82,16 @@ angular.module('app')
       $scope.create_developer_goal = function() {
         $api.create_developer_goal(issue.id, $scope.new_developer_goal).then(function(new_developer_goal) {
           $scope.$emit('developerGoalCreatePushed', new_developer_goal);
+
+          mixpanelEvent.setBountyGoal($scope.new_developer_goal.amount, issue.id);
         });
       };
 
       $scope.update_developer_goal = function() {
         $api.update_developer_goal(issue.id, $scope.my_developer_goal).then(function(updated_developer_goal) {
           $scope.$emit('developerGoalUpdatePushed', updated_developer_goal);
+
+          mixpanelEvent.updateBountyGoal(updated_developer_goal.amount, issue.id);
         });
       };
 
@@ -97,6 +101,8 @@ angular.module('app')
           $scope.updated_developer_goal = undefined;
           $scope.my_developer_goal = undefined;
           $scope.new_developer_goal = undefined;
+
+          mixpanelEvent.removeBountyGoal(issue.id);
         });
       };
 
