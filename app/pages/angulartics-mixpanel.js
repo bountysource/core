@@ -20,7 +20,6 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics, $
     if (this._debug) {
       $log.info('--- mixpanelEvent ---');
       $log.info('name:', event_name);
-      $log.info('options:', options);
       $log.info('payload:', payload);
       $log.info('---------------------');
 
@@ -115,6 +114,27 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics, $
 
   this.signUp = function (options) {
     this.track("Sign-Up", angular.extend({ type: '$direct' }, options||{}));
+  };
+
+  // User interacts with something to start a BountyClaim.
+  // If no `type` is set on `options`, defaults to `$direct`
+  this.startBountyClaim = function(issue_id, options) {
+    this.track('Start Bounty Claim', angular.extend({ issue_id: issue_id, type: '$direct' }, options||{}));
+  };
+
+  // User submits a BountyClaim
+  this.submitBountyClaim = function(issue_id, options) {
+    this.track('Submit Bounty Claim', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // Backer votes to accept BountyClaim
+  this.voteAcceptBountyClaim = function(bounty_claim_id, issue_id, options) {
+    this.track('Vote Accept Bounty Claim', angular.extend({ bounty_claim_id: bounty_claim_id, issue_id: issue_id }, options||{}));
+  };
+
+  // Backer votes to reject BountyClaim
+  this.voteRejectBountyClaim = function(bounty_claim_id, issue_id, options) {
+    this.track('Vote Reject Bounty Claim', angular.extend({ bounty_claim_id: bounty_claim_id, issue_id: issue_id }, options||{}));
   };
 
 });

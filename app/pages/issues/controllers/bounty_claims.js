@@ -9,7 +9,7 @@ angular.module('app')
         trackEvent: 'View Issue Claims'
       });
   })
-  .controller('BountyClaimsController', function ($scope, $routeParams, $location, $window, $api) {
+  .controller('BountyClaimsController', function ($scope, $routeParams, $location, $window, $api, mixpanelEvent) {
     $scope.new_bounty_claim = {
       code_url: $routeParams.code_url || "",
       description: $routeParams.description || ""
@@ -54,6 +54,8 @@ angular.module('app')
               issue.bounty_claims.push(bounty_claim);
 
               $location.url("/issues/"+issue.slug+"/solutions");
+
+              mixpanelEvent.submitBountyClaim(issue.id);
             }
           });
         }
@@ -108,6 +110,8 @@ angular.module('app')
       bounty_claim.accept = function() {
         $api.bounty_claim_accept(bounty_claim.id, bounty_claim.new_accept.description).then(function(updates) {
           $scope.$update_bounty_claim(bounty_claim, updates);
+
+          mixpanelEvent.voteAcceptBountyClaim(bounty_claim.id, $routeParams.id);
         });
       };
 
@@ -117,6 +121,8 @@ angular.module('app')
         $api.bounty_claim_reject(bounty_claim.id, bounty_claim.new_dispute.description).then(function(updates) {
           bounty_claim.showing_dispute_form = false;
           $scope.$update_bounty_claim(bounty_claim, updates);
+
+          mixpanelEvent.voteRejectBountyClaim(bounty_claim.id, $routeParams.id);
         });
       };
 
@@ -176,13 +182,17 @@ angular.module('app')
       }
     };
 
-    $scope.goto_claim_bounty = function() {
+    // Redirect to the BountyClaims tab, prompts the user to login if they are not logged in yet.
+    // Optionally, provide a type for tracking where this redirect was invoked, for analytics stuffs.
+    $scope.redirectToBountyClaimTab = function(type) {
+      mixpanelEvent.startBountyClaim($routeParams.id, { type: type || '$direct' });
+
       if ($scope.current_person) {
-        $location.path("issues/"+$routeParams.id+"/claims").search({ show_new_claim_form: 1 });
+        $location.path('issues/' + $routeParams.id + '/claims');
       } else {
         // save route, get auth, redirect
-        $api.set_post_auth_url("/claims", { show_new_claim_form: true });
-        $location.url("/signin");
+        $api.set_post_auth_url('issues/' + $routeParams.id + '/claims');
+        $location.url('/signin');
       }
     };
   });
