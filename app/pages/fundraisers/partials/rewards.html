@@ -12,12 +12,8 @@
         <a ng-show="fundraiser.in_progress && !reward.sold_out && !fundraiser.published" class="btn btn-large btn-info" disabled>{{ reward.amount | dollars }}</a>
         <a ng-show="fundraiser.in_progress && !reward.sold_out && fundraiser.published"
            ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amount={{reward.amount}}"
+           ng-click="rewardClicked(reward)"
            class="btn btn-large btn-success"
-           analytics-on
-           analytics-event="Pledge Start"
-           analytics-type="Reward"
-           analytics-amount="{{ reward.amount }}"
-           analytics-id="{{ reward.id }}"
            >
            {{ reward.amount | dollars }}
         </a>

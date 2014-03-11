@@ -10,7 +10,7 @@ angular.module('app')
         trackEvent: 'View Signin'
       });
   })
-  .controller('Signin', function ($scope, $routeParams, $api, $location, $window, $analytics) {
+  .controller('Signin', function ($scope, $routeParams, $api, $location, $window, $analytics, mixpanelEvent) {
     // Redirect user to homepage if already logged in.
     // Need to wait to see if current_person is explicitly set to false.
     $scope.teams = [];
@@ -101,7 +101,7 @@ angular.module('app')
           } else {
             // Hack: Follow Trackers whose IDs are appended to the redirect URL.
             $scope.follow_trackers_from_route_params();
-            $analytics.eventTrack("Sign-In", { provider: 'email'} );
+            mixpanelEvent.signIn({ provider: 'email' });
             $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
           }
         });
@@ -126,8 +126,7 @@ angular.module('app')
           } else {
             // Hack: Follow Trackers whose IDs are appen  ded to the redirect URL.
             $scope.follow_trackers_from_route_params();
-
-            $analytics.eventTrack("Sign-Up", { provider: $routeParams.provider || 'email' });
+            mixpanelEvent.signUp({ provider: $routeParams.provider || 'email' });
             $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
           }
         });

@@ -13,6 +13,6 @@
     Reward Stats
   </a></li>
   <li ng-class="active_tab('pledge_now')" ng-show="fundraiser.published && fundraiser.in_progress">
-    <a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge" analytics-on analytics-event="Pledge Start" analytics-type="Tab">Pledge Now</a>
+    <a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge" ng-click="tabClicked()">Pledge Now</a>
   </li>
 </ul>

@@ -74,4 +74,22 @@ angular.module('app')
         return response.data;
       });
     };
+
+    $scope.rewardClicked = function (reward) {
+      mixpanelEvent.pledgeStart(
+        {
+          amount: reward.amount,
+          id:     reward.id,
+          type:   "reward"
+        }
+      );
+    };
+
+    $scope.bigPledgeClicked = function () {
+      mixpanelEvent.pledgeStart(
+        {
+          type: "bigbutton"
+        }
+      );
+    };
   });

@@ -30,10 +30,18 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
     this.track('Start Pledge', angular.extend({ type: '$direct' }, options||{}));
   };
 
+  this.signIn = function (options) {
+    this.track("Sign-In", angular.extend({ type: '$direct' }, options||{}));
+  };
+
+  this.signUp = function (options) {
+    this.track("Sign-Up", angular.extend({ type: '$direct' }, options||{}));
+  };
+
 });
 
 /*
-* Fire Mixpanel events based on route
+* Fire Mixpanel events based on routea
 * */
 angular.module('app')
   .run(function($rootScope, $location, mixpanelEvent) {
