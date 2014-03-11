@@ -9,25 +9,89 @@ angular.module('angulartics.mixpanel', ['angulartics'])
     });
   }]);
 
-angular.module('app').service('mixpanelEvent', function($location, $analytics) {
+angular.module('app').service('mixpanelEvent', function($location, $analytics, $log) {
 
-  /*
-   * Wrapper for analytics.eventTrack that adds in "page"
-   * */
+  this._debug = false;
+
+  // Wrapper for analytics.eventTrack that adds in "page"
   this.track = function(event_name, options) {
     var payload = angular.extend({ page: $location.path() }, options||{});
-    $analytics.eventTrack(event_name, payload);
+
+    if (this._debug) {
+      $log.info('--- mixpanelEvent ---');
+      $log.info('name:', event_name);
+      $log.info('options:', options);
+      $log.info('payload:', payload);
+      $log.info('---------------------');
+
+    } else {
+      $analytics.eventTrack(event_name, payload);
+    }
   };
 
+  // Start the Bounty posting process.
   this.bountyStart = function(options) {
     this.track('Start Bounty', angular.extend({ type: '$direct' }, options||{}));
   };
 
-  /*
-   * Start the Pledge placement process.
-   * */
+  // Start the Pledge placement process.
   this.pledgeStart = function(options) {
     this.track('Start Pledge', angular.extend({ type: '$direct' }, options||{}));
+  };
+
+  // Show the Solution start form
+  this.startSolutionCreate = function(issue_id, options) {
+    this.track('Start Solution Create', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // Hide the Solution start form
+  this.hideSolutionCreate = function(issue_id, options) {
+    this.track('Hide Solution Create', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // Submit the Solution form
+  this.submitSolutionCreate = function(issue_id, options) {
+    this.track('Submit Solution Create', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // Show the Solution edit form
+  this.startSolutionEdit = function(issue_id, options) {
+    this.track('Start Solution Edit', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // Show the Solution edit form
+  this.hideSolutionEdit = function(issue_id, options) {
+    this.track('Hide Solution Edit', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // Submit changes on the Solution edit form
+  this.submitSolutionEdit = function(issue_id, options) {
+    this.track('Submit Solution Edit', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // Prompt is shown to confirm delete of Solution
+  this.deleteSolutionPrompt = function(issue_id, options) {
+    this.track('Stop Solution Prompt', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // User confirmed that they want to delete their Solution
+  this.deleteSolutionConfirm = function(issue_id, options) {
+    this.track('Stop Solution Confirm', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // User cancelled out of deleting their solution
+  this.deleteSolutionClose = function(issue_id, options) {
+    this.track('Stop Solution Confirm', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // User declares that they are still actively working on their Solution
+  this.checkinSolution = function(issue_id, options) {
+    this.track('Checkin Solution', angular.extend({ issue_id: issue_id }, options||{}));
+  };
+
+  // User declares that they havefinished their Solution
+  this.completeSolution = function(issue_id, options) {
+    this.track('Complete Solution', angular.extend({ issue_id: issue_id }, options||{}));
   };
 
   this.signIn = function (options) {
@@ -41,7 +105,7 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics) {
 });
 
 /*
-* Fire Mixpanel events based on routea
+* Fire Mixpanel events based on route
 * */
 angular.module('app')
   .run(function($rootScope, $location, mixpanelEvent) {
