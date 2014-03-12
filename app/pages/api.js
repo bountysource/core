@@ -851,16 +851,22 @@ angular.module('api.bountysource',[]).
       });
     };
 
-    this.set_current_person = function(obj) {
-      if (obj && obj.error) {
+    this.set_current_person = function(person) {
+      if (person && person.error) {
         // don't do anything
-      } else if (obj) {
-        // FIXME: special case when updating set_current_person with a newer version of the same object but it's missing an access_token
-        if (obj && $rootScope.current_person && (obj.id === $rootScope.current_person.id) && !obj.access_token && $rootScope.current_person.access_token) {
-          obj.access_token = $rootScope.current_person.access_token;
+      } else if (person) {
+        // FIXME: special case when updating set_current_person with a newer version of the same personect but it's missing an access_token
+        if (person && $rootScope.current_person && (person.id === $rootScope.current_person.id) && !person.access_token && $rootScope.current_person.access_token) {
+          person.access_token = $rootScope.current_person.access_token;
         }
-        $rootScope.current_person = obj;
+
+        $rootScope.current_person = angular.copy(person);
         $api.set_access_token($rootScope.current_person.access_token);
+
+        // Identify with Mixpanel HERE
+        $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
+          mixpanel.identify(person.id);
+        });
       } else {
         $rootScope.current_person = false;
         $api.set_access_token(null);
@@ -983,6 +989,11 @@ angular.module('api.bountysource',[]).
       };
 
       options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?' + $api.toKeyValue(redirect_params);
+
+      // Wait for Mixpanel, then append the distict_id to form_data params
+      $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
+        options.mixpanel_id = mixpanel.cookie.props.distinct_id;
+      });
 
       if ($api.get_access_token()) {
         options.access_token = $api.get_access_token();

@@ -37,14 +37,4 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
   .run(function($api, $window, $rootScope) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
-
-    var currentPersonWatcher = $rootScope.$watch('current_person', function(person) {
-      if (person) {
-        // Identify with Mixpanel
-        $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
-          mixpanel.identify(person.id);
-        });
-        currentPersonWatcher();
-      }
-    });
   });
