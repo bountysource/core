@@ -61,8 +61,13 @@ angular.module('app')
             $scope.$emit('solutionCreatePushed', new_solution);
             $scope.show_solution_form = false;
 
-            // Track Solution submit event in Mixpanel
-            mixpanelEvent.submitSolutionCreate($routeParams.id);
+            // Track Solution submit event in Mixpanel.
+            // Only if the user is logged in
+            $scope.$watch('current_person', function(person) {
+              if (person) {
+                mixpanelEvent.submitSolutionCreate($routeParams.id);
+              }
+            });
           });
         }
       };
