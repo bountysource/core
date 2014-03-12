@@ -90,12 +90,17 @@ angular.module('app')
       }
     };
 
-    // form submit
+     // form submit
     $scope.signin = function() {
       if ($scope.signin_or_signup !== 'pending') {
         $scope.show_validations = true;
         $scope.error = null;
-        $api.signin($scope.form_data).then(function(response) {
+         // Wait for Mixpanel, then append the distict_id to form_data params
+        var payload = angular.copy($scope.form_data);
+        $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
+          payload.mixpanel_id = mixpanel.cookie.props.distinct_id;
+        });
+        $api.signin(payload).then(function(response) {
           if (response.error) {
             $scope.error = response.error;
           } else {
