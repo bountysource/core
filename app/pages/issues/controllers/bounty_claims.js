@@ -135,6 +135,8 @@ angular.module('app')
         if (bounty_claim.$my_response === false) {
           $api.bounty_claim_resolve(bounty_claim.id, bounty_claim.new_resolve.description).then(function(updated_bounty_claim) {
             $scope.$update_bounty_claim(bounty_claim, updated_bounty_claim);
+
+            mixpanelEvent.voteAcceptBountyClaim(bounty_claim.id, $routeParams.id);
           });
         }
       };
