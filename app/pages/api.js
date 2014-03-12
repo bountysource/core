@@ -842,7 +842,7 @@ angular.module('api.bountysource',[]).
     // these should probably go in an "AuthenticationController" or something more angular
 
     this.signin = function(form_data) {
-      return this.call("/user/login", "POST", { email: form_data.email, password: form_data.password, account_link_id: form_data.account_link_id }, function(response) {
+      return this.call("/user/login", "POST", { email: form_data.email, password: form_data.password, account_link_id: form_data.account_link_id, mixpanel_id: form_data.mixpanel_id }, function(response) {
         if (response.meta.status === 200) {
           // NOTE: /user/login doesn't return the same as /user... so to be safe we make another api call
           $api.signin_with_access_token(response.data.access_token);
