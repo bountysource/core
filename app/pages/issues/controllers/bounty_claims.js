@@ -47,8 +47,6 @@ angular.module('app')
           $location.url("/signin");
         } else if ($scope.new_bounty_claim.code_url || $scope.new_bounty_claim.description) {
           $api.bounty_claim_create(issue.id, $scope.new_bounty_claim).then(function(bounty_claim) {
-            console.log('bounty_claim create', bounty_claim);
-
             if (!bounty_claim.error) {
               // push new bounty claim into table
               issue.bounty_claims.push(bounty_claim);

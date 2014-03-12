@@ -7,34 +7,6 @@
       <div ng-include="'pages/issues/partials/developer_goals_notification.html'"></div>
       <div ng-include="'pages/issues/partials/nav_tabs.html'"></div>
 
-      <!-- Massive form for a new claim if there aren't any yet -->
-      <div class="hero-unit" ng-show="issue.bounty_claims.length <= 0">
-        <h2 style="margin-top: 0;">Claim the Bounty!</h2>
-        <form class="form-horizontal" name="form_data" ng-submit="bounty_claim_submit()">
-          <p>
-            If your claim goes undisputed for two weeks, you will be awarded the {{issue.bounty_total | dollars}} bounty.
-            If your solution is unanimously accepted by the backers of the issue, you will instead be awarded the bounty immediately.
-          </p>
-          <div class="control-group">
-            <label class="control-label" for="code_url">Code URL</label>
-            <div class="controls">
-              <input class="span12" id="code_url" name="code_url" type="url" ng-model="new_bounty_claim.code_url" placeholder="The URL to your solution. For example, a pull request on GitHub" />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="description">Description</label>
-            <div class="controls">
-              <textarea class="span12" id="description" name="description" ng-model="new_bounty_claim.description" rows="3" placeholder="A description of how you resolved the issue."></textarea>
-            </div>
-          </div>
-          <div class="control-group">
-            <div class="controls">
-              <button type="submit" class="btn btn-primary" ng-disabled="!new_bounty_claim.code_url && !new_bounty_claim.description">Claim the Bounty</button>
-            </div>
-          </div>
-        </form>
-      </div>
-
       <!-- Submit bounty claim form -->
       <div collapse="issue.my_bounty_claim">
         <div class="well" ng-hide="issue.my_bounty_claim || issue.winning_bounty_claim">
