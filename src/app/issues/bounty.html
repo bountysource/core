@@ -21,43 +21,7 @@
           <div class="form-group">
             <label class="control-label col-md-2">Payment Method:</label>
             <div class="col-md-10">
-              <!-- Google Wallet -->
-              <div class="checkbox" style="padding-left: 0px;"><label class="">
-                <input type="radio" ng-model="bounty.checkout_method" value="google">
-                <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
-                <span>Google Wallet</span>
-              </label></div>
-
-              <!-- PayPal -->
-              <div class="checkbox" style="padding-left: 0px;"><label class="">
-                <input type="radio" ng-model="bounty.checkout_method" value="paypal">
-                <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
-                <span>PayPal</span>
-              </label></div>
-
-              <!-- Personal account -->
-              <div ng-show="current_person && current_person.account.balance > 0">
-                <div class="checkbox" style="padding-left: 0px;"><label class="">
-                  <input type="radio" ng-model="bounty.checkout_method" value="personal">
-                  <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}">
-                  <span>{{current_person.display_name}} <strong>{{ current_person.account.balance | dollars }}</strong></span>
-                </label></div>
-              </div>
-
-              <!-- Team accounts -->
-              <div ng-show="teams.length > 0">
-                <div class="checkbox" style="padding-left: 0px;"><label ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" class="">
-                  <input type="radio" ng-model="bounty.checkout_method" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0 || team.member_balance == 0" ng-change="select_team(team)">
-                  <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}">
-              <span ng-class="{ 'text-muted': (!team.is_developer || team.account_balance <= 0) }">
-                {{team.name}}
-                <strong ng-show="team.is_developer && (team.member_balance == null || team.account_balance < team.member_balance)">{{ team.account_balance | dollars }}</strong>
-                <strong ng-show="team.is_developer && team.account_balance > team.member_balance && team.member_balance != nil">{{ team.member_balance | dollars }}</strong>
-                <strong ng-hide="team.is_developer">$0</strong>
-                <span ng-show="team.is_admin && team.account_balance < 100 && team.type != 'Team::Enterprise'">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
-              </span>
-                </label></div>
-              </div>
+              <checkout-method-radios value="pledge.checkout_method" person="current_person"></checkout-method-radios>
             </div>
           </div>
 
