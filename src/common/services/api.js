@@ -82,7 +82,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       options = options || {};
 
       options.headers = options.headers || {};
-      options.headers['Accept'] = options.headers['Accept'] || 'application/vnd.bountysource+json; version=2';
+      options.headers.Accept = options.headers.Accept || 'application/vnd.bountysource+json; version=2';
       options.method = options.method || 'GET';
 
       var path = (options.url || '').replace(/^\/+/,'');
@@ -98,7 +98,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
 
       return $http(options).then(function(response) {
         if (options.verbose) {
-          $log.info('------ API Response ' + (new Date()).getTime()) + ' ------';
+          $log.info('------ API Response ' + (new Date()).getTime() + ' ------');
           $log.info('Status:', response.status);
           $log.info('Data:', response.data);
           $log.info('Headers:', response.headers());
@@ -823,7 +823,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
   // these should probably go in an "AuthenticationController" or something more angular
 
   this.signin = function(form_data) {
-    return this.call("/user/login", "POST", { email: form_data.email, password: form_data.password, account_link_id: form_data.account_link_id }, function(response) {
+    return this.call("/user/login", "POST", { email: form_data.email, password: form_data.password, account_link_id: form_data.account_link_id, mixpanel_id: form_data.mixpanel_id }, function(response) {
       if (response.meta.status === 200) {
         // NOTE: /user/login doesn't return the same as /user... so to be safe we make another api call
         $api.signin_with_access_token(response.data.access_token);
@@ -832,16 +832,22 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     });
   };
 
-  this.set_current_person = function(obj) {
-    if (obj && obj.error) {
+  this.set_current_person = function(person) {
+    if (person && person.error) {
       // don't do anything
-    } else if (obj) {
-      // FIXME: special case when updating set_current_person with a newer version of the same object but it's missing an access_token
-      if (obj && $rootScope.current_person && (obj.id === $rootScope.current_person.id) && !obj.access_token && $rootScope.current_person.access_token) {
-        obj.access_token = $rootScope.current_person.access_token;
+    } else if (person) {
+      // FIXME: special case when updating set_current_person with a newer version of the same personect but it's missing an access_token
+      if (person && $rootScope.current_person && (person.id === $rootScope.current_person.id) && !person.access_token && $rootScope.current_person.access_token) {
+        person.access_token = $rootScope.current_person.access_token;
       }
-      $rootScope.current_person = obj;
+
+      $rootScope.current_person = angular.copy(person);
       $api.set_access_token($rootScope.current_person.access_token);
+
+      // Identify with Mixpanel HERE
+      $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
+        mixpanel.identify(person.id);
+      });
     } else {
       $rootScope.current_person = false;
       $api.set_access_token(null);
@@ -964,6 +970,11 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     };
 
     options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?' + $api.toKeyValue(redirect_params);
+
+    // Wait for Mixpanel, then append the distict_id to form_data params
+    $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
+      options.mixpanel_id = mixpanel.cookie.props.distinct_id;
+    });
 
     if ($api.get_access_token()) {
       options.access_token = $api.get_access_token();

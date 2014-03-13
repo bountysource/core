@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssuesBaseController', function ($scope) {
+angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, mixpanelEvent) {
   // Listen for developer goal create/updates. Broadcast update to all Controller instances.
   $scope.$on('developerGoalCreatePushed', function(event, new_developer_goal) {
     $scope.$broadcast('developerGoalCreateReceived', new_developer_goal);
@@ -22,4 +22,12 @@ angular.module('app').controller('IssuesBaseController', function ($scope) {
   $scope.$on('solutionUpdatePushed', function(event, updated_solution) {
     $scope.$broadcast('solutionUpdateReceived', updated_solution);
   });
+
+  $scope.bountyTabClicked = function() {
+    mixpanelEvent.bountyStart({ type: 'tab' });
+  };
+
+  $scope.bountyClaimTabClicked = function() {
+    mixpanelEvent.startBountyClaim($routeParams.id, { type: 'tab' });
+  };
 });

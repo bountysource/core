@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('app').controller('NavbarController', function ($scope, $api, $modal) {
-  
   $scope.$watch('current_person', function(current_person) {
     if (current_person) {
       $api.person_teams(current_person.id).then(function(teams) {

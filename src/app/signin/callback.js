@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('SigninCallbackController', function($scope, $api, $routeParams, $location, $window) {
+angular.module('app').controller('SigninCallbackController', function($scope, $api, $routeParams, $location, $window, mixpanelEvent) {
   if ($routeParams.status === 'linked') {
     $api.signin_with_access_token($routeParams.access_token).then(function(response) {
       if (response === false) {
@@ -15,6 +15,7 @@ angular.module('app').controller('SigninCallbackController', function($scope, $a
           }
         }
 
+        mixpanelEvent.signIn({ provider: $routeParams.provider });
         $window._gaq.push(['_trackEvent', 'Signin', 'Success-3rdParty-Auth']);
       }
     });

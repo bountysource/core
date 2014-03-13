@@ -33,7 +33,7 @@
   <div ng-show="issue.bounty_claims.length <= 0">
     <h3 ng-hide="issue.generic">Claim Bounty</h3>
     <h3 ng-show="issue.generic" style="margin-top: 0px;">Claim Bounty</h3>
-    <p>Did you resolve this issue? <a ng-href="/issues/{{issue.slug}}/claims">Claim the {{issue.bounty_total | dollars}} bounty!</a></p>
+    <p>Did you resolve this issue? <a ng-click="redirectToBountyClaimTab('sidebar')">Claim the {{issue.bounty_total | dollars}} bounty!</a></p>
   </div>
 
   <!-- Bounty Claims -->
@@ -90,7 +90,7 @@
 
       <div ng-hide="issue.my_bounty_claim">
         <h4 style="margin-bottom: 5px;">Claim Bounty</h4>
-        <p>Did you resolve this issue? <a ng-click="goto_claim_bounty()" ng-click-require-auth="">Claim the {{issue.bounty_total | dollars}} bounty!</a></p>
+        <p>Did you resolve this issue? <a ng-click="redirectToBountyClaimTab('sidebar')" ng-click-require-auth>Claim the {{issue.bounty_total | dollars}} bounty!</a></p>
       </div>
     </div>
   </div>

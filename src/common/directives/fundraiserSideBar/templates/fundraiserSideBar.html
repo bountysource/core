@@ -121,7 +121,7 @@
         <h4 class="panel-title text-center">Rewards</h4>
       </div>
       <table class="table table-striped table-bordered">
-        <tbody><tr ng-repeat="reward in fundraiser.rewards" ng-class="{ 'warning': reward.sold_out }">
+        <tr ng-repeat="reward in fundraiser.rewards" ng-class="{ 'warning': reward.sold_out }">
           <td>
             <p style="white-space: pre-wrap;">{{ reward.description }}</p>
 
@@ -131,15 +131,20 @@
             </p>
 
             <div style="text-align: center;">
-              <a ng-show="fundraiser.in_progress && !reward.sold_out && !fundraiser.published" class="btn btn-info btn-lg" disabled="">{{ reward.amount | dollars }}</a>
-              <a ng-show="fundraiser.in_progress && !reward.sold_out && fundraiser.published" ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amount={{reward.amount}}" class="btn btn-success btn-lg">{{ reward.amount | dollars }}</a>
-              <a ng-show="!fundraiser.in_progress && fundraiser.published" class="btn btn-success btn-lg" style="cursor: not-allowed;" disabled="">{{ reward.amount | dollars }}</a>
+              <!-- Fundraiser in progress, reward not sold out, fundraiser not published -->
+              <a ng-show="fundraiser.in_progress && !reward.sold_out && !fundraiser.published" class="btn btn-info btn-lg" disabled>{{ reward.amount | dollars }}</a>
 
-              <a ng-show="fundraiser.in_progress && reward.sold_out" class="btn btn-default btn-lg" disabled="">Sold Out</a>
+              <!-- Fundraiser in progress, reward not sold out, and fundraiser published -->
+              <a ng-show="fundraiser.in_progress && !reward.sold_out && fundraiser.published" ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amount={{reward.amount}}" class="btn btn-success btn-lg" ng-click="rewardClicked(reward)">{{ reward.amount | dollars }}</a>
+
+              <!-- Fundraiser not in progress, and is published -->
+              <a ng-show="!fundraiser.in_progress && fundraiser.published" class="btn btn-success btn-lg" style="cursor: not-allowed;" disabled>{{ reward.amount | dollars }}</a>
+
+              <!-- Fundraiser in progress, reward sold out -->
+              <a ng-show="fundraiser.in_progress && reward.sold_out" class="btn btn-default btn-lg" disabled>Sold Out</a>
             </div>
           </td>
         </tr>
-        </tbody>
       </table>
     </div>
   </div>

@@ -13,6 +13,8 @@
       <i class="glyphicon glyphicon-lock"></i>
       Reward Stats
     </a></li>
-    <li ng-class="active_tab('pledge_now')" ng-show="fundraiser.published && fundraiser.in_progress"><a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a></li>
+    <li ng-class="active_tab('pledge_now')" ng-show="fundraiser.published && fundraiser.in_progress" ng-click="tabClicked()">
+      <a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a>
+    </li>
   </ul>
 </div>

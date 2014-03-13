@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter, $q, $routeParams, $window) {
+angular.module('app').controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter, $q, $routeParams, $window, mixpanelEvent) {
   $scope.initializing = true;
 
   // initialize form from params
@@ -70,11 +70,19 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
       } else if ( !parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment()) ) {
         $scope.error = "You can't use dates in the past.";
       } else {
-        var data_payload = angular.copy($scope.solution_form)
+        var data_payload = angular.copy($scope.solution_form);
         data_payload.completion_date = parsed_time.isValid() ? parsed_time : "";
         $api.start_solution(issue.id, data_payload).then(function(new_solution) {
           $scope.$emit('solutionCreatePushed', new_solution);
           $scope.show_solution_form = false;
+
+          // Track Solution submit event in Mixpanel.
+          // Only if the user is logged in
+          $scope.$watch('current_person', function(person) {
+            if (person) {
+              mixpanelEvent.submitSolutionCreate($routeParams.id);
+            }
+          });
         });
       }
     };
@@ -87,11 +95,14 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
       } else if (!parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment()) ) {
         $scope.error = "You can't use dates in the past.";
       } else {
-        var data_payload = angular.copy($scope.solution_form)
+        var data_payload = angular.copy($scope.solution_form);
         data_payload.completion_date = parsed_time.isValid() ? parsed_time : "";
         $api.update_solution(issue.id, data_payload).then(function(updated_solution) {
           $scope.show_solution_edit_form = false;
           $scope.$emit('solutionUpdatePushed', updated_solution);
+
+          // Track Solution submit event in Mixpanel
+          mixpanelEvent.submitSolutionEdit($routeParams.id);
         });
       }
     };
@@ -104,7 +115,7 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
       } else if (!parsed_time.parsingFlags().nullInput && parsed_time.isBefore($window.moment())) {
         $scope.error = "You can't use dates in the past.";
       } else {
-        var data_payload = angular.copy($scope.solution_form)
+        var data_payload = angular.copy($scope.solution_form);
         data_payload.completion_date = parsed_time.isValid() ? parsed_time : "";
         $api.restart_solution(issue.id, data_payload).then(function(updated_solution) {
           $scope.show_solution_edit_form = false;
@@ -115,21 +126,41 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
 
     $scope.toggle_solution_edit_form = function () {
       $scope.show_solution_edit_form = !$scope.show_solution_edit_form;
+
+      // Track Solution start in Mixpanel
+      if ($scope.show_solution_edit_form) {
+        mixpanelEvent.startSolutionEdit($routeParams.id);
+      } else {
+        mixpanelEvent.hideSolutionEdit($routeParams.id);
+      }
     };
 
     $scope.toggle_solution_form = function () {
       $scope.show_solution_form = !$scope.show_solution_form;
+
+      // Track Solution start in Mixpanel
+      if ($scope.show_solution_form) {
+        mixpanelEvent.startSolutionCreate($routeParams.id);
+      } else {
+        mixpanelEvent.hideSolutionCreate($routeParams.id);
+      }
     };
 
     // Stop working on a solution that the logged in user started
     $scope.stop_solution = function () {
+      mixpanelEvent.deleteSolutionPrompt($routeParams.id);
+
       if ($window.confirm("Are you sure you want to notify the backers that you have stopped work?")) {
         $scope.my_solution_promise.then(function() {
           $api.stop_solution(issue.id).then(function(updated_solution) {
             $scope.show_solution_edit_form = false;
             $scope.$emit('solutionUpdatePushed', updated_solution);
+
+            mixpanelEvent.deleteSolutionConfirm($routeParams.id);
           });
         });
+      } else {
+        mixpanelEvent.deleteSolutionClose($routeParams.id);
       }
     };
 
@@ -138,6 +169,8 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
       $scope.my_solution_promise.then(function() {
         $api.checkin_solution(issue.id).then(function(updated_solution) {
           $scope.$emit('solutionUpdatePushed', updated_solution);
+
+          mixpanelEvent.checkinSolution($routeParams.id);
         });
       });
     };
@@ -147,6 +180,8 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
       $scope.my_solution_promise.then(function() {
         $api.complete_solution(issue.id).then(function(updated_solution) {
           $scope.$emit('solutionUpdatePushed', updated_solution);
+
+          mixpanelEvent.completeSolution($routeParams.id);
         });
       });
     };

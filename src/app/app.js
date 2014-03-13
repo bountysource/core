@@ -21,7 +21,9 @@ angular.module('app', [
   'ngCookies',
   'ui.bootstrap',
   'colorpicker.module',
-  'fundraisers'
+  'fundraisers',
+  'angulartics',
+  'angulartics.mixpanel'
 ]);
 
 angular.module('app')
@@ -71,6 +73,10 @@ angular.module('app')
         });
       }
     }
+  })
+
+  .config(function($analyticsProvider) {
+    $analyticsProvider.firstPageview(false);
   })
 
   .run(function($api) {

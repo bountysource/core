@@ -196,7 +196,7 @@ module.exports = function (grunt) {
 
     ngtemplates: {
       app: {
-        options: { 
+        options: {
           concat: 'dist/assets/app.js',
           base: 'dist'
         },

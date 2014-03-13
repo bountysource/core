@@ -52,7 +52,7 @@
           <!-- You have set a goal -->
           <div ng-show="my_developer_goal">
             <div>
-              <form ng-submit="update_developer_goal(my_developer_goal.amount)" style="margin: 0;" class="form-inline" name="form">
+              <form style="margin: 0;" class="form-inline" name="form">
                 <div class="row">
                   <div class="text-center col-sm-3 col-md-3">
                     <h4>My goal:</h4>
@@ -65,7 +65,7 @@
                   </div>
 
                   <div class="pull-right col-sm-5 col-md-5">
-                    <button type="submit" class="btn btn-primary btn-lg" ng-disabled="my_developer_goal.$master.amount == my_developer_goal.amount || my_developer_goal.amount <= issue.bounty_total || my_developer_goal.amount < 5">Update</button>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="update_developer_goal(my_developer_goal.amount)" ng-disabled="my_developer_goal.$master.amount == my_developer_goal.amount || my_developer_goal.amount <= issue.bounty_total || my_developer_goal.amount < 5">Update</button>
                     <button class="btn btn-danger btn-lg" ng-click="delete_developer_goal()"><span class="glyphicon glyphicon-trash"></span></button>
                   </div>
                 </div>

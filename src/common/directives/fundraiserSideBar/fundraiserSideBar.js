@@ -10,7 +10,7 @@
 * rewards - show the rewards
 * shareButtons - show the share buttons. such social
 * */
-angular.module('directives').directive('fundraiserSideBar', function($api, $location) {
+angular.module('directives').directive('fundraiserSideBar', function($api, $location, mixpanelEvent) {
   return {
     restrict: 'EAC',
     templateUrl: 'common/directives/fundraiserSideBar/templates/fundraiserSideBar.html',
@@ -50,7 +50,7 @@ angular.module('directives').directive('fundraiserSideBar', function($api, $loca
           if (response.meta.success) {
             $location.url("/fundraisers/"+fundraiser.slug);
           } else {
-            $scope.error = "ERROR: " + response.data.error;
+            scope.error = "ERROR: " + response.data.error;
           }
           return response.data;
         });
@@ -63,6 +63,17 @@ angular.module('directives').directive('fundraiserSideBar', function($api, $loca
         if (angular.isNumber(amount) && fundraiser.published) {
           $location.path("/fundraisers/"+fundraiser.id+"/pledge").search({ amount: amount });
         }
+      };
+
+      // Track reward click in Mixpanel
+      scope.rewardClicked = function(reward) {
+        mixpanelEvent.pledgeStart(
+          {
+            amount: reward.amount,
+            id:     reward.id,
+            type:   "reward"
+          }
+        );
       };
     }
   };

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('SigninController', function ($scope, $routeParams, $api, $location, $window) {
+angular.module('app').controller('SigninController', function ($scope, $routeParams, $api, $location, $window, mixpanelEvent) {
   // Redirect user to homepage if already logged in.
   // Need to wait to see if current_person is explicitly set to false.
   // TODO: This isn't settings teams. Show the sub-menu isn't showing up.
@@ -85,15 +85,23 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
     if ($scope.signin_or_signup !== 'pending') {
       $scope.show_validations = true;
       $scope.error = null;
-      $api.signin($scope.form_data).then(function(response) {
-        if (response.error) {
-          $scope.error = response.error;
-        } else {
-          // Hack: Follow Trackers whose IDs are appended to the redirect URL.
-          $scope.follow_trackers_from_route_params();
 
-          $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
-        }
+      $window.angulartics.waitForVendorApi('mixpanel', 100, function (mixpanel) {
+        var payload = angular.copy($scope.form_data);
+
+        payload.mixpanel_id = mixpanel.cookie.props.distinct_id;
+
+        $api.signin(payload).then(function(response) {
+          if (response.error) {
+            $scope.error = response.error;
+          } else {
+            // Hack: Follow Trackers whose IDs are appended to the redirect URL.
+            $scope.follow_trackers_from_route_params();
+
+            mixpanelEvent.signIn({ provider: 'email' });
+            $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
+          }
+        });
       });
     }
   };
@@ -102,15 +110,24 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
     if ($scope.signin_or_signup !== 'pending') {
       $scope.show_validations = true;
       $scope.error = null;
-      $api.signup($scope.form_data).then(function(response) {
-        if (response.error) {
-          $scope.error = response.error;
-        } else {
-          // Hack: Follow Trackers whose IDs are appended to the redirect URL.
-          $scope.follow_trackers_from_route_params();
 
-          $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
-        }
+      // Wait for Mixpanel, then append the distict_id to form_data params
+      $window.angulartics.waitForVendorApi('mixpanel', 100, function (mixpanel) {
+        var payload = angular.copy($scope.form_data);
+
+        payload.mixpanel_id = mixpanel.cookie.props.distinct_id;
+
+        $api.signup(payload).then(function(response) {
+          if (response.error) {
+            $scope.error = response.error;
+          } else {
+            // Hack: Follow Trackers whose IDs are appended to the redirect URL.
+            $scope.follow_trackers_from_route_params();
+
+            mixpanelEvent.signUp({ provider: $routeParams.provider || 'email' });
+            $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
+          }
+        });
       });
     }
   };

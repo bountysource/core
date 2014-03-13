@@ -13,22 +13,30 @@
 
       <!-- Permissions -->
       <div>
-        <div class="checkbox"><label class="" ng-show="is_public">
-          <span>membership publicized</span>
-          <input type="checkbox" style="cursor: default;" disabled="" checked="">
-        </label></div>
-        <div class="checkbox"><label class="" ng-show="is_admin || is_developer">
-          <span>can change team settings</span>
-          <input type="checkbox" style="cursor: default;" disabled="" checked="">
-        </label></div>
-        <div class="checkbox"><label class="" ng-show="is_admin || is_developer">
-          <span>can manage team projects</span>
-          <input type="checkbox" style="cursor: default;" disabled="" checked="">
-        </label></div>
-        <div class="checkbox"><label class="" ng-show="is_admin">
-          <span>can manage team members</span>
-          <input type="checkbox" style="cursor: default;" disabled="" checked="">
-        </label></div>
+        <div class="checkbox">
+          <label ng-show="is_public">
+            <span>membership publicized</span>
+            <input type="checkbox" style="cursor: default;" disabled="" checked="">
+          </label>
+        </div>
+        <div class="checkbox">
+          <label ng-show="is_admin || is_developer">
+            <span>can change team settings</span>
+            <input type="checkbox" style="cursor: default;" disabled="" checked="">
+          </label>
+        </div>
+        <div class="checkbox">
+          <label ng-show="is_admin || is_developer">
+            <span>can manage team projects</span>
+            <input type="checkbox" style="cursor: default;" disabled="" checked="">
+          </label>
+        </div>
+        <div class="checkbox">
+          <label ng-show="is_admin">
+            <span>can manage team members</span>
+            <input type="checkbox" style="cursor: default;" disabled="" checked="">
+          </label>
+        </div>
       </div>
 
       <!-- Account Balance -->

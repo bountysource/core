@@ -7,13 +7,8 @@
       <div ng-include="'app/issues/templates/developer_goals_notification.html'"></div>
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
 
-      <!-- Massive form for a new claim if there aren't any yet -->
-      <div ng-show="issue.bounty_claims.length <= 0">
-        <div ng-include="'app/issues/templates/bounty_claim_form.html'"></div>
-      </div>
-
-      <!-- Submit bounty claim form -->
-      <div collapse="!show_new_claim_form">
+      <!-- Submit bounty claim form. Hide if you already submitted a claim. -->
+      <div ng-hide="issue.my_bounty_claim">
         <div ng-hide="issue.my_bounty_claim || issue.winning_bounty_claim">
           <div ng-include="'app/issues/templates/bounty_claim_form.html'"></div>
         </div>
