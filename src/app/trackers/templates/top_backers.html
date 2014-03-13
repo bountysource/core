@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <h3 class="panel-title text-center"><ng-pluralize count="backers.length" when="{'1': 'Top Backer', 'other':'Top Backers (all time)'}"></ng-pluralize></h3>
   </div>
-  <table class="table">
+  <table class="table" style="table-layout: fixed;">
     <tbody>
       <tr ng-repeat="backer in backers | orderBy:'-total_backed'| limitTo:3">
         <!--Profile picture. No link if anon-->
@@ -16,7 +16,7 @@
           </div>
         </td>
 
-        <td>
+        <td class="col-md-8">
           <div>
             <a owner-href="backer">
               <span>{{backer.display_name}}</span>
