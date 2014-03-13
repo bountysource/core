@@ -67,19 +67,13 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     return this;
   };
 
-  // Screw it, pasting this in from master.
-  // TODO: Reference to RAML referenced here?
+  // temporary housing for V2 api routes
   this.v2 = {
 
-    // params = {
-    //   method
-    //   url  (this function will prepend hostname)
-    //   params
-    //   headers
-    //   ... and more, see http://code.angularjs.org/1.0.8/docs/api/ng.$http
-    // }
     call: function(options) {
       options = options || {};
+
+      options.verbose = false;
 
       options.headers = options.headers || {};
       options.headers.Accept = options.headers.Accept || 'application/vnd.bountysource+json; version=2';
@@ -87,6 +81,12 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
 
       var path = (options.url || '').replace(/^\/+/,'');
       options.url = $rootScope.api_host + path;
+
+      // Append access token to params if present.
+      // If params already has access_token set, that value takes precedence.
+      if ($rootScope.current_person !== false) {
+        options.params.access_token = options.params.access_token || $rootScope.current_person.access_token;
+      }
 
       if (options.verbose) {
         $log.info('------ API Request ' + (new Date()).getTime() + ' ------');
@@ -108,9 +108,6 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       });
     },
 
-    /*
-     * Fetch a collection of issues.
-     * */
     issues: function(params) {
       return this.call({
         url: '/issues',
@@ -125,13 +122,29 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       });
     },
 
-    /*
-    * Fetch published updates to fundraisers.
-    * */
+    issue: function(id, options) {},
+
     fundraiserUpdates: function(params) {
       return this.call({
         url: '/fundraiser_updates',
         params: params || {}
+      });
+    },
+
+    fundraiserUpdate: function(id, params) {
+      return this.call({
+        url: '/fundraiser_updates/' + id,
+        params: params || {}
+      });
+    },
+
+    createFundraiserUpdate: function(fundraiser_id, params) {
+      params = angular.extend({ fundraiser_id: fundraiser_id }, params||{});
+
+      return this.call({
+        url: '/fundraiser_updates',
+        method: 'POST',
+        params: params
       });
     }
 

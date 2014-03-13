@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h3>New Update</h3>
+  <p>Update the world about the progress of your fundraiser. Those who have already pledged will receive an email with your update.</p>
+</div>
+
+<div class="modal-body">
+  <div ng-show="alert.message">
+    <alert type="alert.type" close="alert = undefined">{{alert.message}}</alert>
+  </div>
+
+  <form name="form">
+    <input class="form-control" ng-model="newUpdate.title" placeholder="Title of update" ng-change="saveUpdateToCookie()" required />
+    <br />
+    <textarea class="form-control" rows="15" ng-model="newUpdate.body" placeholder="Update content" ng-change="saveUpdateToCookie()" required></textarea>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="discard()">Discard</button>
+  <button class="btn btn-default" ng-click="close()">Close</button>
+  <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="publishUpdate()">Publish Update</button>
+</div>

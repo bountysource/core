@@ -11,20 +11,33 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
 
   $scope.setEnv = $api.setEnvironment;
 
-  $scope.set_access_token = {
-    show_modal: false,
-    new_token: $api.get_access_token(),
-    open: function() { this.show_modal = true; },
-    close: function() { this.show_modal = false; },
-    save: function() {
-      $api.set_access_token(this.new_token);
-      $api.load_current_person_from_cookies();
-      this.close();
-    }
-  };
-
   $scope.signout = function() {
     $api.signout();
+  };
+
+  $scope.openDevToolsModal = function() {
+    $modal.open({
+      templateUrl: 'app/layout/templates/devToolsModal.html',
+      controller: function($scope, $api, $modalInstance) {
+
+        $scope.data = {
+          access_token: $api.get_access_token()
+        };
+
+        // Apply changes
+        $scope.apply = function() {
+          $api.set_access_token($scope.data.access_token);
+          $api.load_current_person_from_cookies();
+
+          this.close();
+        };
+
+        $scope.close = function() {
+          $modalInstance.close();
+        };
+
+      }
+    });
   };
 });
 

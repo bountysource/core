@@ -2,7 +2,10 @@
 
 angular.module('fundraisers').controller('FundraiserUpdatesController', function ($scope, $routeParams, $location, $api) {
   $scope.fundraiserPromise.then(function(fundraiser) {
-    $api.v2.fundraiserUpdates({ fundraiser_id: fundraiser.id }).then(function(response) {
+    $api.v2.fundraiserUpdates({
+      fundraiser_id: fundraiser.id,
+      include_body: true
+    }).then(function(response) {
       $scope.updates = angular.copy(response.data);
       return $scope.updates;
     });

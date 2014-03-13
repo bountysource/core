@@ -28,18 +28,6 @@ angular.module('fundraisers')
       trackEvent: 'View Fundraiser'
     }, routeOptions));
 
-    $routeProvider.when('/fundraisers/:id/updates/:update_id/edit', angular.extend({
-      templateUrl: 'app/fundraiser_updates/edit.html',
-      controller: 'FundraiserController',
-      trackEvent: 'View Fundraiser Update Edit'
-    }, routeOptions));
-
-    $routeProvider.when('/fundraisers/:id/updates/:update_id', angular.extend({
-      templateUrl: 'app/fundraiser_updates/show.html',
-      controller: 'FundraiserController',
-      trackEvent: 'View Fundraiser Update'
-    }, routeOptions));
-
     $routeProvider.when('/fundraisers/:id/edit', angular.extend({
       templateUrl: 'app/fundraisers/edit.html',
       controller: 'FundraiserController',
@@ -65,6 +53,12 @@ angular.module('fundraisers')
       trackEvent: 'View Fundraiser Updates'
     }, routeOptions));
 
+    $routeProvider.when('/fundraisers/:id/updates/:update_id', angular.extend({
+      templateUrl: 'app/fundraisers/update.html',
+      controller: 'FundraiserController',
+      trackEvent: 'View Fundraiser Update'
+    }, routeOptions));
+
     $routeProvider.when('/fundraisers/:id/pledge', angular.extend({
       templateUrl: 'app/fundraisers/pledge.html',
       controller: 'FundraiserController',
@@ -72,7 +66,7 @@ angular.module('fundraisers')
     }, routeOptions));
   })
 
-  .controller('FundraiserController', function($scope, $routeParams, $filter, $location, $api) {
+  .controller('FundraiserController', function($scope, $routeParams, $filter, $location, $api, $modal) {
     $scope.fundraiserPromise = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
       $scope.fundraiser = angular.copy(fundraiser);
 
@@ -90,6 +84,27 @@ angular.module('fundraisers')
         amount = amount || $scope.pledge.amount;
         if (angular.isNumber(amount) && fundraiser.published) {
           $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
+        }
+      });
+    };
+
+    // Display an update in a modal
+    $scope.showUpdateModal = function(update) {
+      console.log('showUpdateModal', update);
+
+      $modal.open({
+        templateUrl: 'app/fundraisers/templates/showUpdateModal.html',
+        controller: function($scope, $api, $modalInstance) {
+
+          // Need to make request for individual update to get the body
+          $api.v2.fundraiserUpdate(update.id).then(function(response) {
+            $scope.update = angular.copy(response.data);
+          });
+
+          $scope.close = function() {
+            $modalInstance.dismiss();
+          };
+
         }
       });
     };
