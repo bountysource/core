@@ -1,12 +1,13 @@
-<div ng-controller="FundraiserUpdatesController">
+<div ng-controller="FundraiserUpdateController">
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/fundraisers">Fundraisers</a></li>
-    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a></li>
-    <li><a>Updates</a></li>
+    <li><a ng-href="/fundraisers/{{fundraiser.id}}">{{ fundraiser.title || 'Loading...' }}</a></li>
+    <li><a ng-href="/fundraisers/{{fundraiser.id}}/updates">Updates</a></li>
+    <li><a>{{ update.title || 'Loading...' }}</a></li>
   </ul>
 
-  <div class="form" ng-show="fundraiser">
+  <div class="form" ng-show="update">
     <div ng-include="'app/fundraisers/templates/header.html'"></div>
     <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div>
 
@@ -16,18 +17,13 @@
           No updates have been published.
         </div>
 
-        <!-- List published updates -->
-        <div ng-repeat="update in updates">
+        <div>
           <h2>{{update.title}}</h2>
           <div class="text-info">
             <span>Published {{update.published_at | date}}</span>
           </div>
           <hr />
           <div style="white-space: pre-wrap;">{{update.body}}</div>
-          <div ng-if="$index != updates.length">
-            <br />
-            <br />
-          </div>
         </div>
       </div>
 

@@ -1,0 +1,14 @@
+<div>
+  <div class="modal-header">
+    <h3>{{update.title}}</h3>
+    <small class="text-muted">Published {{update.published_at | date}}</small>
+  </div>
+
+  <div class="modal-body">
+    <div style="white-space: pre-wrap;">{{update.body}}</div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-warning" ng-click="close()">Close</button>
+  </div>
+</div>
