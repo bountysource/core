@@ -9,11 +9,7 @@
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
 
       <!-- Issue body is first comment -->
-      <issue-comments comments="[]"></issue-comments>
-
-      <h2>Comments {{comments.count | number}}</h2>
-
-      <issue-comments comments="issue.comments"></issue-comments>
+      <issue-comments comments="issue.comments" issue="issue"></issue-comments>
     </div>
 
     <div class="col-sm-4 col-md-3">

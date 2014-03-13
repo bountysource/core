@@ -46,4 +46,13 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
     $scope.issue = issue;
     return issue;
   });
+
+  // $api.v2.comments({
+  //   issue_id: $routeParams.id,
+  //   include_author: true,
+  //   include_body_html: true
+  // }).then(function (response) {
+  //   console.log("V2 response", response.data);
+  //   $scope.comments = response.data;
+  // });
 });

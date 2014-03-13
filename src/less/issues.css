@@ -52,7 +52,7 @@ div.bounty-button-panel {padding-left: 10px; padding-right: 10px;}
 .bounty-buttons .controls { margin-top: 10px; }
 .bounty-buttons .controls:first-of-type { margin-top: 0; }
 
-.no-stripe td { border-top: 0; background-color: transparent !important; }
+.no-stripe td { border: 0 !important; background-color: transparent !important; }
 
 td.imagerow {
   width: 60px;

@@ -118,6 +118,13 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       });
     },
 
+    comments: function (params) {
+      return this.call({
+        url: '/comments',
+        params: params || {}
+      });
+    },
+
     /*
     * Fetch published updates to fundraisers.
     * */
