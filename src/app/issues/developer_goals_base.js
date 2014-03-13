@@ -13,7 +13,7 @@ angular.module('app').controller('DeveloperGoalsBaseController', function ($scop
   $scope.$on('developerGoalCreateReceived', function(event, new_developer_goal) {
     $scope.my_developer_goal = new_developer_goal;
     $scope.my_developer_goal.$master = angular.copy(new_developer_goal);
-    $scope.developer_goals.then(function(developer_goals) {
+    $scope.developer_goals_promise.then(function(developer_goals) {
       new_developer_goal.person = $scope.current_person;
       developer_goals.push(new_developer_goal);
       $scope.next_developer_goal = $filter('orderBy')(developer_goals, ["-amount"])[0];
@@ -35,7 +35,7 @@ angular.module('app').controller('DeveloperGoalsBaseController', function ($scop
   });
 
   $scope.$on('developerGoalDeleteReceived', function(event, deleted_developer_goal) {
-    $scope.developer_goals.then(function(developer_goals) {
+    $scope.developer_goals_promise.then(function(developer_goals) {
       for (var i in developer_goals) {
         if (deleted_developer_goal.id === developer_goals[i].id) {
           developer_goals.splice(i,1);
@@ -110,7 +110,7 @@ angular.module('app').controller('DeveloperGoalsBaseController', function ($scop
 
   $scope.initialize_developer_goals = function() {
     $api.issue_get($routeParams.id).then(function(issue) {
-      $api.get_developer_goals(issue.id).then(function(developer_goals) {
+      $scope.developer_goals_promise = $api.get_developer_goals(issue.id).then(function(developer_goals) {
         // Collect developer goals that have not yet been met
         $scope.unmet_developer_goals = [];
         for (var i=0; i<developer_goals.length; i++) {
