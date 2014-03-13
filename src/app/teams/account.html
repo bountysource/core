@@ -31,17 +31,7 @@
             <div class="form-group">
               <label class="control-label col-md-4">From</label>
               <div class="col-md-8">
-                <div class="radio"><label class="" style="margin-left: 5px;">
-                  <input type="radio" ng-model="pay_in.checkout_method" value="google" selected="">
-                  <img src="images/google-wallet.png">
-                  Google Wallet
-                </label></div>
-
-                <div class="radio"><label class="" style="margin-left: 5px;">
-                  <input type="radio" ng-model="pay_in.checkout_method" value="paypal">
-                  <img src="images/paypal.png">
-                  PayPal
-                </label></div>
+                <checkout-method-radios value="pay_in.checkout_method"></checkout-method-radios>
               </div>
             </div>
 
