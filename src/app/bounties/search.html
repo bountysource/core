@@ -30,6 +30,7 @@
                typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8"
                typeahead-editable="false"
                autocomplete="off"
+               typeahead-wait-ms="150"
         >
       </div>
 
@@ -37,7 +38,7 @@
       <div class="filter-box" collapse="languages_loaded.length <= 0">
         <span class="badge search-filter" ng-repeat="language in languages_loaded">
           <button type="button" class="close" ng-click="remove_language(language)">
-            <i class="glyphicon glyphicon-remove"></i>
+            &times;
           </button>
           <span>{{language.name}}</span>
         </span>
@@ -62,13 +63,18 @@
 
       <div class="form-group">
         <label class="label-control">Limit to projects:</label>
-        <input name="input" type="text" class="search form-control" placeholder="Search in projects" ng-model="trackers_input" typeahead="tracker as tracker.name for tracker in do_tracker_typeahead($viewValue)" typeahead-editable="false">
+        <input name="input" type="text" class="search form-control" placeholder="Search in projects" 
+               ng-model="trackers_input" 
+               typeahead="tracker as tracker.name for tracker in do_tracker_typeahead($viewValue)"
+               typeahead-editable="false"
+               autocomplete="off"
+               typeahead-wait-ms="150">
       </div>
 
       <div class="project-box" collapse="trackers_loaded <= 0">
         <span class="badge search-filter" ng-repeat="tracker in trackers_loaded">
           <button type="button" class="close" ng-click="remove_tracker(tracker)">
-            <i class="glyphicon glyphicon-remove"></i>
+            &times;
           </button>
           {{tracker.name}}
         </span>
