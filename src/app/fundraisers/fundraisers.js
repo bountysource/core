@@ -6,63 +6,69 @@ angular.module('fundraisers')
 
     $routeProvider.when('/fundraisers', angular.extend({
       templateUrl: 'app/fundraisers/index.html',
-      controller: 'FundraiserIndexController'
+      controller: 'FundraiserIndexController',
+      trackEvent: 'View Fundraisers'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/completed', angular.extend({
       templateUrl: 'app/fundraisers/index.html',
-      controller: 'FundraiserIndexController'
+      controller: 'FundraiserIndexController',
+      trackEvent: 'View Fundraisers Completed'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/new', angular.extend({
       templateUrl: 'app/fundraisers/new.html',
-      controller: 'FundraiserCreateController'
+      controller: 'FundraiserCreateController',
+      trackEvent: 'View Fundraiser Create'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id', angular.extend({
       templateUrl: 'app/fundraisers/show.html',
-      controller: 'FundraiserController'
+      controller: 'FundraiserController',
+      trackEvent: 'View Fundraiser'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id/updates/:update_id/edit', angular.extend({
       templateUrl: 'app/fundraiser_updates/edit.html',
-      controller: 'FundraiserController'
+      controller: 'FundraiserController',
+      trackEvent: 'View Fundraiser Update Edit'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id/updates/:update_id', angular.extend({
       templateUrl: 'app/fundraiser_updates/show.html',
-      controller: 'FundraiserController'
+      controller: 'FundraiserController',
+      trackEvent: 'View Fundraiser Update'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id/edit', angular.extend({
       templateUrl: 'app/fundraisers/edit.html',
       controller: 'FundraiserController',
-      resolve: { person: personResolver }
+      resolve: { person: personResolver },
+      trackEvent: 'View Fundraiser Edit'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id/backers', angular.extend({
       templateUrl: 'app/fundraisers/pledges.html',
-      controller: 'FundraiserController'
+      controller: 'FundraiserController',
+      trackEvent: 'View Fundraiser Pledges'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id/rewards', angular.extend({
       templateUrl: 'app/fundraisers/rewards.html',
-      controller: 'FundraiserController'
-    }, routeOptions));
-
-    $routeProvider.when('/fundraisers/:id', angular.extend({
-      templateUrl: 'app/fundraisers/show.html',
-      controller: 'FundraiserController'
+      controller: 'FundraiserController',
+      trackEvent: 'View Fundraiser Rewards'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id/updates', angular.extend({
       templateUrl: 'app/fundraisers/updates.html',
-      controller: 'FundraiserController'
+      controller: 'FundraiserController',
+      trackEvent: 'View Fundraiser Updates'
     }, routeOptions));
 
     $routeProvider.when('/fundraisers/:id/pledge', angular.extend({
       templateUrl: 'app/fundraisers/pledge.html',
-      controller: 'FundraiserController'
+      controller: 'FundraiserController',
+      trackEvent: 'View Fundraiser Pledge'
     }, routeOptions));
   })
 
