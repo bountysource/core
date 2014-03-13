@@ -31,26 +31,33 @@
     <!-- Total pledged-->
     <h2>{{fundraiser.total_pledged | dollars}} <small class="muted">of {{fundraiser.funding_goal | dollars}}</small></h2>
 
-    <!-- Days/Hours/Minutes left -->
-    <div ng-show="fundraiser.$days_left > 0">
-      <h2 style="margin-bottom:0">
-        {{ fundraiser.$days_left | number }}
-        <small class="muted"><ng-pluralize count="fundraiser.$days_left" when="{ 'one': 'day', 'other': 'days' }"></ng-pluralize> left</small>
-      </h2>
+    <!-- Days/Hours/Minutes left if in progress -->
+    <div ng-if="fundraiser.in_progress">
+      <div ng-show="fundraiser.$days_left > 0">
+        <h2 style="margin-bottom:0">
+          {{ fundraiser.$days_left | number }}
+          <small class="muted"><ng-pluralize count="fundraiser.$days_left" when="{ 'one': 'day', 'other': 'days' }"></ng-pluralize> left</small>
+        </h2>
+      </div>
+      <div ng-show="fundraiser.$days_left <= 0">
+        <div ng-show="fundraiser.$hours_left > 0">
+          <h2 style="margin-bottom:0">
+            {{ fundraiser.$hours_left | number }}
+            <small class="muted"><ng-pluralize count="fundraiser.$hours_left" when="{ 'one': 'hour', 'other': 'hours' }"></ng-pluralize> left</small>
+          </h2>
+        </div>
+        <div ng-show="fundraiser.$hours_left <= 0">
+          <h2 style="margin-bottom:0">
+            {{ fundraiser.$minutes_left | atLeast:1 | number }}
+            <small class="muted"><ng-pluralize count="fundraiser.$hours_left" when="{ 'one': 'minute', 'other': 'minutes' }"></ng-pluralize> left</small>
+          </h2>
+        </div>
+      </div>
     </div>
-    <div ng-show="fundraiser.$days_left <= 0">
-      <div ng-show="fundraiser.$hours_left > 0">
-        <h2 style="margin-bottom:0">
-          {{ fundraiser.$hours_left | number }}
-          <small class="muted"><ng-pluralize count="fundraiser.$hours_left" when="{ 'one': 'hour', 'other': 'hours' }"></ng-pluralize> left</small>
-        </h2>
-      </div>
-      <div ng-show="fundraiser.$hours_left <= 0">
-        <h2 style="margin-bottom:0">
-          {{ fundraiser.$minutes_left || 1 | number }}
-          <small class="muted"><ng-pluralize count="fundraiser.$hours_left" when="{ 'one': 'minute', 'other': 'minutes' }"></ng-pluralize> left</small>
-        </h2>
-      </div>
+
+    <!-- Completed text if fundraiser ended -->
+    <div ng-if="fundraiser.published && !fundraiser.in_progress">
+      <h3>Completed <small>{{fundraiser.ends_at | date}}</small></h3>
     </div>
   </div>
 
