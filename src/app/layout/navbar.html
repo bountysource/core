@@ -95,20 +95,7 @@
             <li><a href="" ng-click="setEnv('prod')">production</a></li>
             <li class="divider"></li>
             <li>
-              <a href="" ng-click="set_access_token.open()">set access token</a>
-              <div modal="set_access_token.show_modal" close="set_access_token.close()">
-                <div class="modal-header">
-                  <h2>Set access token</h2>
-                </div>
-                <div class="modal-body">
-                  <form ng-submit="set_access_token.save()">
-                    <input ng-model="set_access_token.new_token" autofocus style="width: 98%;" type="text" placeholder="Super secret access token goes here..." />
-                    <br />
-                    <button type="submit" class="btn btn-primary">Steal Identity</button>
-                    <button class="btn btn-default" ng-click="set_access_token.close()">Cancel</button>
-                  </form>
-                </div>
-              </div>
+              <a href="" ng-click="openDevToolsModal()">dev tools</a>
             </li>
           </ul>
         </li>
