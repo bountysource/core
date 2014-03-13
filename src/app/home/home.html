@@ -11,12 +11,16 @@
               <div class="team-signup-card" ng-controller="NavbarSearchController">
                 <h3 class="text-center white-text">Post a Bounty</h3>
                 <h4>Paste issue URL or search by keyword.</h4>
-                <form class="form-inline" ng-submit="submit_search()">
-                  <div class="input-append">
-                    <input type="text" class="search-query form-control" ng-model="search_query" placeholder="https://github.com/.../issues/123">
-                    <button type="submit" class="btn btn-success">Search</button>
-                  </div>
-                </form>
+                <div class="col-md-12 col-lg-12">
+                  <form class="form-inline" ng-submit="submit_search()">
+                    <div class="input-group">
+                      <input type="text" class="search-query form-control" ng-model="search_query" placeholder="https://github.com/.../issues/123">
+                      <div class="input-group-btn">
+                        <button type="submit" class="btn btn-success">Search</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
 
@@ -109,14 +113,14 @@
             <!-- Mobile/Tablet view -->
             <ul class="list-inline visible-sm visible-md">
               <li ng-repeat="person in people.new.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.created_at | date}}">
-                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
               </li>
             </ul>
 
             <!-- Desktop view -->
             <ul class="list-inline visible-lg">
               <li ng-repeat="person in people.new.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.created_at | date}}">
-                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
               </li>
             </ul>
           </div>
@@ -126,14 +130,14 @@
             <!-- Mobile/Tablet view -->
             <ul class="list-inline visible-sm visible-md">
               <li ng-repeat="person in people.developers.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.followers | number}} followers">
-                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
               </li>
             </ul>
 
             <!-- Desktop view -->
             <ul class="list-inline visible-lg">
               <li ng-repeat="person in people.developers.top.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.followers | number}} followers">
-                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
               </li>
             </ul>
           </div>
@@ -144,14 +148,14 @@
             <!-- Mobile/Tablet view -->
             <ul class="list-inline visible-sm visible-md">
               <li ng-repeat="person in people.backers.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.total_backed | dollars}} backed">
-                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
               </li>
             </ul>
 
             <!-- Desktop view -->
             <ul class="list-inline visible-lg">
               <li ng-repeat="person in people.backers.top.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.total_backed | dollars}} backed">
-                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
               </li>
             </ul>
           </div>
@@ -161,14 +165,14 @@
             <!-- Mobile/Tablet view -->
             <ul class="list-inline visible-sm visible-md">
               <li ng-repeat="person in people.earners.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.total_earned | dollars}} earned">
-                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
               </li>
             </ul>
 
             <!-- Desktop view -->
             <ul class="list-inline visible-lg">
               <li ng-repeat="person in people.earners.top.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.total_earned | dollars}} earned">
-                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
               </li>
             </ul>
           </div>
