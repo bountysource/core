@@ -28,6 +28,7 @@
     "grunt-contrib-watch": "~0.4.4",
     "grunt-bower-requirejs": "~0.8.4",
     "grunt-usemin": "~0.1.10",
+    "karma": "~0.10.0",
     "grunt-karma": "~0.6.2",
     "grunt-open": "~0.2.0",
     "grunt-md5": "~0.1.11",
