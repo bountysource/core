@@ -28,9 +28,7 @@
           </form>
           <loading-bar ng-show="working">Searching</loading-bar>
         </div>
-        <div class="row">
-          <thumbnail-links array="team.owned_trackers" per-row="6" object-type="'team-project'" dismiss-action="unclaim_tracker(tracker)"></thumbnail-links>
-        </div>
+        <thumbnail-links array="team.owned_trackers" per-row="6" object-type="'team-project'" dismiss-action="unclaim_tracker(tracker)"></thumbnail-links>
       </div>
 
       <div ng-show="is_admin || is_developer">
@@ -57,9 +55,7 @@
         <div class="alert alert-info">{{team.name}} has not added any projects to their profile.</div>
       </div>
 
-      <div class="row">
-          <thumbnail-links array="team.unowned_trackers" per-row="6" object-type="'team-project'" dismiss-action="remove_tracker(tracker)"></thumbnail-links>
-      </div>
+      <thumbnail-links array="team.unowned_trackers" per-row="6" object-type="'team-project'" dismiss-action="remove_tracker(tracker)"></thumbnail-links>
 
     </div>
   </div>
