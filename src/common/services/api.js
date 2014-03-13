@@ -980,7 +980,9 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
 
     // Wait for Mixpanel, then append the distict_id to form_data params
     $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
-      options.mixpanel_id = mixpanel.cookie.props.distinct_id;
+      if (mixpanel.cookie) {
+        options.mixpanel_id = mixpanel.cookie.props.distinct_id;
+      };
     });
 
     if ($api.get_access_token()) {
