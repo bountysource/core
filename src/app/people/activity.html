@@ -25,14 +25,14 @@
           </tr>
 
           <!-- Location -->
-          <tr ng-if="person.location">
-            <th>Location</th>
+          <tr ng-if="person.location" class="no-stripe">
+            <td><strong>Location</strong></td>
             <td>{{person.location}}</td>
           </tr>
 
           <!-- Linked Accounts -->
-          <tr ng-if="person.github_account || person.twitter_account || person.facebook_account || person.gittip_account">
-            <th>Accounts</th>
+          <tr ng-if="person.github_account || person.twitter_account || person.facebook_account || person.gittip_account" class="no-stripe">
+            <td><strong></strong>Accounts</td>
             <td>
               <ul class="list-unstyled">
                 <li ng-show="person.github_account">
@@ -49,8 +49,8 @@
           </tr>
 
           <!-- Teams -->
-          <tr ng-if="teams.length > 0">
-            <th>Teams</th>
+          <tr ng-if="teams.length > 0" class="no-stripe">
+            <td><strong>Teams</strong></td>
             <td>
               <ul class="list-unstyled">
                 <li class="provider-link" ng-repeat="team in teams | orderBy:'-added_at'">
@@ -61,8 +61,8 @@
           </tr>
 
           <!-- Joined at date -->
-          <tr>
-            <th>Joined</th>
+          <tr class="no-stripe">
+            <td><strong>Joined</strong></td>
             <td>{{person.created_at | date}}</td>
           </tr>
         </table>
