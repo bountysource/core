@@ -91,7 +91,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       // Append access token to params if present.
       // If params already has access_token set, that value takes precedence.
       if ($rootScope.current_person !== false) {
-        options.params.access_token = options.params.access_token || $rootScope.current_person.access_token;
+        options.params.access_token = options.params.access_token || $api.get_access_token();
       }
 
       if (options.verbose) {

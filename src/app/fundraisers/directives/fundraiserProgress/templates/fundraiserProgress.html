@@ -52,7 +52,7 @@
       </div>
 
       <!-- Big-ass pledge button -->
-      <button class="btn btn-success btn-block btn-lg" ng-click="bigPledgeButtonClicked()">Pledge Now</button>
+      <button class="btn btn-success btn-block btn-lg" ng-click="bigPledgeButtonClicked()" ng-disabled="!fundraiser.in_progress">Pledge Now</button>
     </div>
   </div>
 

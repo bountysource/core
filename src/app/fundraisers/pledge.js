@@ -17,6 +17,10 @@ angular.module('fundraisers').controller('FundraiserPledgeController', function 
   $scope.fundraiser_hide_pledge_button = true;
 
   $scope.fundraiserPromise.then(function(fundraiser) {
+    if (fundraiser.published && !fundraiser.in_progress) {
+      $location.url("/fundraisers/" + fundraiser.slug);
+    }
+
     // add the base item number, with just fundraisers id
     $scope.pledge.base_item_number = 'fundraisers/'+fundraiser.id;
     $scope.pledge.item_number = $scope.pledge.base_item_number;
