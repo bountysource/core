@@ -48,10 +48,10 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     return { asc: asc_string, desc: desc_string };
   };
 
-  $api.issues_featured().then(function(issues) {
-    $scope.featured_issues = $filter('shuffle')(issues).slice(0,5);
-    return issues;
-  });
+  // $api.issues_featured().then(function(issues) {
+  //   $scope.featured_issues = $filter('shuffle')(issues).slice(0,5);
+  //   return issues;
+  // });
 
   //toggles column order and submits query
   $scope.change_order_col = function(col, page) {
@@ -281,8 +281,9 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     $scope.submit_query();
   } else {
     $scope.loading_featured_issues = true;
-    $api.issues_featured({ limit: 5 }).then(function(response) {
-      $scope.featured_issues = response;
+    $scope.submit_query();
+    $api.issues_featured().then(function(response) {
+      $scope.featured_issues = $filter('shuffle')(response).slice(0,5);
       $scope.loading_featured_issues = false;
       return response;
     });
