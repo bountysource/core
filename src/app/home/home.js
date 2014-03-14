@@ -17,6 +17,7 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api) {
     for (var i=0; i<trackers.length; i++) {
       trackers[i].bounty_total = parseFloat(trackers[i].bounty_total);
     }
+
     return trackers;
   });
 });
