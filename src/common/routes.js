@@ -7,7 +7,9 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Homepage',
     resolve: {
       count: function($rootScope, $api) {
-        $rootScope.people_count = $api.people_count();
+        $api.people_count().then(function(count) {
+          $rootScope.people_count = count;
+        });
       }
     }
   }, defaultRouteOptions));

@@ -14,12 +14,10 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-  <!-- build:css assets/bootstrap.css -->
+  <!-- build:css assets/vendor.css -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
-  <!-- endbuild -->
-
-  <!-- build:css assets/colorpicker.css -->
   <link rel="stylesheet" href="vendor/angular-bootstrap-colorpicker/css/colorpicker.css">
+  <link rel="stylesheet" href="lib/zenbox-2.6.css">
   <!-- endbuild -->
 
   <!-- build:css assets/app.css -->
@@ -72,12 +70,7 @@
   <ng-include src="'app/layout/footer.html'"></ng-include>
 </div>
 
-<!--[if lt IE 9]>
-<script src="vendor/es5-shim/es5-shim.js"></script>
-<![endif]-->
-
-<!-- build:js assets/components.js -->
-<!-- angular components -->
+<!-- build:js assets/vendor.js -->
 <script src="vendor/angular/angular.js"></script>
 <script src="vendor/angular-route/angular-route.js"></script>
 <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -87,6 +80,7 @@
 <script src="vendor/momentjs/moment.js"></script>
 <script src="vendor/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
 <script src="vendor/angulartics/src/angulartics.js"></script>
+<script src="lib/zenbox-2.6.js"></script>
 <!-- endbuild -->
 <script>window.Moment = window.moment;</script>
 
@@ -239,10 +233,5 @@
     <!-- html_src end -->
 <!-- endbuild -->
 
-<!-- adds support for zendesk / started moving these images locally to components/zendesk -->
-    <script type="text/javascript" src="//assets.zendesk.com/external/zenbox/v2.6/zenbox.js"></script>
-    <style type="text/css" media="screen, projection">
-      @import url(//assets.zendesk.com/external/zenbox/v2.6/zenbox.css);
-    </style>
 </body>
 </html>
