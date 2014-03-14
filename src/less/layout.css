@@ -89,3 +89,5 @@ a:hover {
 .table td.center-height { vertical-align: middle;}
 
 .img-responsive { width: 100%;}
+
+.markdown img { max-width: 100%; }

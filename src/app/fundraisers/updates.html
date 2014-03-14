@@ -27,7 +27,7 @@
             <span>Published {{update.published_at | date}}</span>
           </div>
           <hr />
-          <div ng-bind-html="update.body_html"></div>
+          <div class="markdown" ng-bind-html="update.body_html"></div>
           <div ng-if="$index != updates.length">
             <br />
             <br />
