@@ -14,10 +14,15 @@ angular.module('fundraisers').controller('FundraiserCreateController', function(
   $scope.$watch('current_person', function(person) {
     if (person) {
       $scope.fundraiser.person = angular.copy(person);
+    }
+  });
 
-      $api.person_teams(person.id).then(function(teams) {
-        $scope.teams = teams;
-        return teams;
+  // Watch Fundraiser object for Team. Fetch members if they are not present on the object.
+  $scope.$watch('fundraiser.team', function(team) {
+    if (team && !team.members) {
+      $api.team_members_get(team.slug).then(function(members) {
+        $scope.fundraiser.team.members = angular.copy(members);
+        return members;
       });
     }
   });

@@ -139,11 +139,27 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     },
 
     createFundraiserUpdate: function(fundraiser_id, params) {
-      params = angular.extend({ fundraiser_id: fundraiser_id }, params||{});
+      params = angular.extend({ fundraiser_id: fundraiser_id }, params || {});
 
       return this.call({
         url: '/fundraiser_updates',
         method: 'POST',
+        params: params
+      });
+    },
+
+    pledges: function(params) {
+      return this.call({
+        url: '/pledges',
+        params: params || {}
+      });
+    },
+
+    fundraiserRewards: function(fundraiser_id, params) {
+      params = angular.extend({ fundraiser_id: fundraiser_id }, params || {});
+
+      return this.call({
+        url: '/fundraiser_rewards',
         params: params
       });
     }
