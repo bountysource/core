@@ -1,8 +1,10 @@
 <div>
-  <table class="table table-striped">
+  <table class="table table-striped" style="table-layout: fixed">
     <tr class="no-stripe">
       <td class="imagerow">
-        <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}"><img ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"></a>
+        <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}">
+          <img ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
+        </a>
         <img ng-hide="issue.author.slug" ng-src="{{issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
       </td>
       <td style="overflow-x:auto">
@@ -30,7 +32,9 @@
 
     <tr ng-repeat="comment in comments | orderBy:['+created_at']">
       <td>
-        <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}"><img ng-src="{{comment.author.image_url}}" class="thumbnail no-margin" style="max-width: 50px"></a>
+        <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}">
+          <img ng-src="{{comment.author.image_url}}" class="thumbnail no-margin" style="max-width: 50px">
+        </a>
         <img ng-hide="comment.author.slug" ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
       </td>
       <td style="overflow-x:auto">

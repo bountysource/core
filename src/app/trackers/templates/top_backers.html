@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <h3 class="panel-title text-center"><ng-pluralize count="backers.length" when="{'1': 'Top Backer', 'other':'Top Backers (all time)'}"></ng-pluralize></h3>
   </div>
-  <table class="table" style="table-layout: fixed;">
+  <table class="table">
     <tbody>
       <tr ng-repeat="backer in backers | orderBy:'-total_backed'| limitTo:3">
         <!--Profile picture. No link if anon-->
