@@ -4,7 +4,7 @@ angular.module('fundraisers').controller('FundraiserUpdateController', function 
   $scope.fundraiserPromise.then(function() {
 
     $api.v2.fundraiserUpdate($routeParams.update_id, {
-      include_body: true
+      include_body_html: true
     }).then(function(response) {
       $scope.update = angular.copy(response.data);
       return $scope.updates;
