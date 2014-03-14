@@ -55,7 +55,6 @@ angular.module('app').controller('TeamIssuesController', function ($scope, $rout
       var dogeParams = buildSearchParameters(team);
       if (dogeParams) {
         $api.page(page).perPage(per_page || 25).team_issues(dogeParams).then(function(issues_response) {
-          console.log(issues_response);
           updateIssues(issues_response);
         });
       } else {
