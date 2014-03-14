@@ -1,4 +1,7 @@
-<div class="panel panel-default bounty-button-panel" ng-show="issue.can_add_bounty && !issue.winning_bounty_claim" ng-controller="BountyBoxController">
+<div class="panel panel-primary" ng-show="issue.can_add_bounty && !issue.winning_bounty_claim" ng-controller="BountyBoxController">
+  <div class="panel-heading">
+    <h3 class="panel-title text-center">Bounties</h3>
+  </div>
   <div class="panel-body">
     <div style="text-align: center;">
       <h2 style="margin: 0;">{{issue.bounty_total | dollars}}</h2>
@@ -25,8 +28,11 @@
         <div class="row">
           <div class="col-md-4 bounty-buttons"><a class="btn btn-primary btn-block" ng-click="place_bounty_redirect(1000)">$1000</a></div>
           <div class="col-md-8 bounty-buttons">
-            <input style="margin-bottom: 0;" integer-only="" type="number" min="5" ng-model="bounty.amount" class="form-control" placeholder="Other amount" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus">
-            <input style="display:none;" type="submit" id="custom-amount-submit" class="form-control">
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input style="margin-bottom: 0;" integer-only="" type="number" min="5" ng-model="bounty.amount" class="form-control" placeholder="Other" tooltip="$5 minimum bounty" tooltip-placement="bottom" toolip-trigger="focus">
+              <input style="display:none;" type="submit" id="custom-amount-submit" class="form-control">
+            </div>
           </div>
         </div>
       </form>
