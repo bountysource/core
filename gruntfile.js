@@ -358,9 +358,10 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test:travis', [
-    'test:unit',
-    'test:e2e',
-    'coveralls'
+    'jshint'
+//    'test:unit',
+//    'test:e2e',
+//    'coveralls'
   ]);
 
   grunt.registerTask('build', [

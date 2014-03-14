@@ -9,7 +9,7 @@ before_script:
   - bower install
   - sleep 1 # let server start
 
-script: grunt test_old:travis
+script: grunt test:travis
 
 notifications:
   email:

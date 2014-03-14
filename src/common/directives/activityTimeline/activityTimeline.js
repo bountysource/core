@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('directives').directive('activityTimeline', function () {
   return {
     restrict: 'EA',
@@ -5,5 +7,5 @@ angular.module('directives').directive('activityTimeline', function () {
     scope: {
       timeline: "="
     }
-  }
+  };
 });

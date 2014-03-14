@@ -53,7 +53,7 @@ angular.module('fundraisers').directive('fundraiserManageButtons', function($loc
               if ($window.confirm("Discard update?")) {
                 $cookieStore.remove($scope.cookieName);
                 $scope.close();
-              };
+              }
             };
 
             $scope.publishUpdate = function() {

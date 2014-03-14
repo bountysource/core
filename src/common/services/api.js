@@ -1025,7 +1025,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
       if (mixpanel.cookie) {
         options.mixpanel_id = mixpanel.cookie.props.distinct_id;
-      };
+      }
     });
 
     if ($api.get_access_token()) {
