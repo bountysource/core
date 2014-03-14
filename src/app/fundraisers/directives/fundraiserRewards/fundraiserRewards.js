@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fundraisers').directive('fundraiserRewards', function($api) {
+angular.module('fundraisers').directive('fundraiserRewards', function($api, mixpanelEvent) {
   return {
     restrict: 'EAC',
     templateUrl: 'app/fundraisers/directives/fundraiserRewards/templates/fundraiserRewards.html',
@@ -15,6 +15,15 @@ angular.module('fundraisers').directive('fundraiserRewards', function($api) {
           });
         }
       });
+      scope.rewardClicked = function (reward) {
+        mixpanelEvent.pledgeStart(
+          {
+            amount: reward.amount,
+            id:     reward.id,
+            type:   "reward"
+          }
+        );
+      };
     }
   };
 });

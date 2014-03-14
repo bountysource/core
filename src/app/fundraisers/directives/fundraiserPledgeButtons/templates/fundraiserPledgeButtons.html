@@ -1,19 +1,4 @@
-<!-- Custom pledge amount input -->
-<script type="text/ng-template" id="inputForm.html">
-  <ng-form name="form" ng-submit="pledgeRedirect(fundraiser, form.input)">
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-      <div class="hidden-xs">
-        <input type="number" name="input" class="form-control" min="5" ng-model="pledge.amount" placeholder="Other" tooltip="$5 minimum pledge" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
-      </div>
-      <div class="visible-xs">
-        <input type="number" name="input" class="form-control" min="5" ng-model="pledge.amount" tooltip="$5 minimum pledge" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
-      </div>
-    </div>
-  </ng-form>
-</script>
-
-<div class="panel panel-default bounty-button-panel" ng-if="fundraiser.published && fundraiser.in_progress">
+<div class="panel panel-default bounty-button-panel" ng-if="fundraiser.published && fundraiser.in_progress">=
   <div class="panel-body">
     <div class="row ">
       <div class="col-md-4 bounty-buttons">
@@ -48,7 +33,12 @@
         <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 100)">$100</button>
       </div>
       <div class="col-md-8 bounty-buttons">
-        <ng-include src="'inputForm.html'"></ng-include>
+        <form name="form" ng-submit="customPledgeRedirect(fundraiser, $parent.amount)">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="number" name="input" class="form-control" min="5" ng-model="$parent.amount" placeholder="Other" tooltip="$5 minimum pledge" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
+          </div>
+        </form>
       </div>
     </div>
   </div>
