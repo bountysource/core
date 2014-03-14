@@ -38,7 +38,7 @@
         <button ng-click="create()" ng-disabled="!fundraiser.title || !fundraiser.short_description || !fundraiser.description || !fundraiser.funding_goal || urls.$invalid" class="btn btn-block btn-success btn-lg">Create Fundraiser</button>
       </div>
 
-      <fundraiser-side-bar fundraiser="fundraiser" options="{ pledgeButtons: false, shareButtons: false }"></fundraiser-side-bar>
+      <fundraiser-author fundraiser="fundraiser"></fundraiser-author>
     </div>
   </div>
 </div>

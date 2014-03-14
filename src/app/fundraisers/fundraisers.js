@@ -19,6 +19,7 @@ angular.module('fundraisers')
     $routeProvider.when('/fundraisers/new', angular.extend({
       templateUrl: 'app/fundraisers/new.html',
       controller: 'FundraiserCreateController',
+      resolve: { person: personResolver },
       trackEvent: 'View Fundraiser Create'
     }, routeOptions));
 
@@ -70,23 +71,12 @@ angular.module('fundraisers')
     $scope.fundraiserPromise = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
       $scope.fundraiser = angular.copy(fundraiser);
 
+      // Not sure if these are used anywhere else besides fundraiserManageButtons, leave for now.
       $scope.can_manage = $scope.fundraiser.person && $scope.current_person && $scope.fundraiser.person.id === $scope.current_person.id;
       $scope.publishable = $scope.fundraiser.title && fundraiser.short_description && $scope.fundraiser.funding_goal && fundraiser.description;
 
       return $scope.fundraiser;
     });
-
-    // Go to the Pledge page for the fundraisers with the given amount
-    $scope.pledgeRedirect = function(fundraiser, amount) {
-      console.log('pledgeRedirect', fundraiser, amount);
-
-      $scope.fundraiserPromise.then(function(fundraiser) {
-        amount = amount || $scope.pledge.amount;
-        if (angular.isNumber(amount) && fundraiser.published) {
-          $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
-        }
-      });
-    };
 
     // Display an update in a modal
     $scope.showUpdateModal = function(update) {

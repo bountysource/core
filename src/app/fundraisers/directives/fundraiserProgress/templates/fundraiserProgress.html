@@ -1,0 +1,70 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <!-- Large Fundraiser image -->
+    <div>
+      <img class="img-responsive" ng-src="{{fundraiser.large_image_url || fundraiser.image_url}}" />
+    </div>
+
+    <!-- Money raised and time left -->
+    <div>
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <h3 style="margin-bottom:0"><strong>{{ fundraiser.total_pledged | dollars }}</strong></h3>
+          <span>of <strong>{{ fundraiser.funding_goal | dollars }}</strong></span>
+        </div>
+
+        <div class="col-sm-6 col-md-6" style="text-align: center;">
+
+          <!-- Show time left if Fundraiser is published and in progress
+            If a new Fundraiser, just hack the time left to 30 days. -->
+          <div ng-show="!fundraiser.id || fundraiser.published && fundraiser.in_progress">
+            <div ng-show="fundraiser.$days_left > 0">
+              <h3 style="margin-bottom:0"><strong>{{ fundraiser.$days_left | number }}</strong></h3>
+              <ng-pluralize count="fundraiser.$days_left" when="{ 'one': 'day', 'other': 'days' }"></ng-pluralize>
+            </div>
+
+            <div ng-show="fundraiser.$days_left <= 0">
+              <div ng-show="fundraiser.$hours_left > 0">
+                <h3 style="margin-bottom:0"><strong>{{ fundraiser.$hours_left | number }}</strong></h3>
+                <ng-pluralize count="fundraiser.$hours_left" when="{ 'one': 'hour', 'other': 'hours' }"></ng-pluralize>
+              </div>
+
+              <div ng-show="fundraiser.$hours_left <= 0">
+                <h3 style="margin-bottom:0"><strong>{{ fundraiser.$minutes_left | atLeast:0 | number }}</strong></h3>
+                <ng-pluralize count="fundraiser.$minutes_left" when="{ 'one': 'minute', 'other': 'minutes' }"></ng-pluralize>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fundraiser completed, show a Completed message instead -->
+          <div ng-show="fundraiser.published && !fundraiser.in_progress">
+            <h3 style="margin-bottom:0"><strong>Complete</strong></h3>
+            <span>{{fundraiser.ends_at | date}}</span>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <!-- Progress Bar -->
+      <div class="progress progress-striped">
+        <div class="progress-bar progress-bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | atLeast:15 | atMost:100 | number:0 }}%;">{{ 100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+      </div>
+
+      <!-- Big-ass pledge button -->
+      <button class="btn btn-success btn-block btn-lg" ng-click="bigPledgeButtonClicked()">Pledge Now</button>
+    </div>
+  </div>
+
+  <div class="panel-footer">
+
+    <!-- Flex funding message -->
+    <div class="text-left" ng-show="fundraiser.published">
+      <small>
+        <strong>Flexible Funding: </strong>
+        <span ng-show="fundraiser.in_progress">This campaign will receive all funds raised even if it does not reach its goal.</span>
+        <span ng-hide="fundraiser.in_progress">This fundraiser has completed and will receive all funds raised.</span>
+      </small>
+    </div>
+  </div>
+</div>

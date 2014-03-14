@@ -1,10 +1,7 @@
 <div>
-  <div class="row">
-    <div class="col-md-1" ng-if="fundraiser.image_url"><img class="img-rounded img-responsive" ng-src="{{ fundraiser.image_url }}"></img></div>
-    <div class="col-md-11 text-left">
-      <h1 style="margin-top:0px;">{{ fundraiser.title || 'Loading...' }}</h1>
-      <p class="lead text-left" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
-    </div>
+  <div class="text-center">
+    <h1 style="margin-top:0px;">{{ fundraiser.title || 'Loading...' }}</h1>
+    <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
   </div>
 
   <div ng-show="fundraiser.owner && fundraiser.published && !fundraiser.in_progress" class="alert alert-info text-center">
