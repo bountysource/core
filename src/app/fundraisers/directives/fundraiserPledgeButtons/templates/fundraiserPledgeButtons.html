@@ -37,10 +37,10 @@
         <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 100)">$100</button>
       </div>
       <div class="col-md-8 bounty-buttons">
-        <form name="form" ng-submit="customPledgeRedirect(fundraiser, $parent.amount)">
+        <form name="form" ng-submit="customPledgeRedirect(fundraiser, form.input.$modelValue)">
           <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input type="number" name="input" class="form-control" min="5" ng-model="$parent.amount" placeholder="Other" tooltip="$5 minimum pledge" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
+            <input type="number" name="input" class="form-control" min="5" ng-model="pledge_input" placeholder="Other" tooltip="$5 minimum pledge" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
           </div>
         </form>
       </div>
