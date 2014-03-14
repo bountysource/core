@@ -54,15 +54,13 @@ angular.module('app').controller('TeamIssuesController', function ($scope, $rout
     $scope.team_promise.then(function (team) {
       var dogeParams = buildSearchParameters(team);
       if (dogeParams) {
-        console.log("page", page);
-        console.log("perpage", per_page);
-        console.log("doge params", dogeParams);
         $api.page(page).perPage(per_page || 25).team_issues(dogeParams).then(function(issues_response) {
+          console.log(issues_response);
           updateIssues(issues_response);
         });
       } else {
         $scope.issues = [];
-        $scope.pagination = false;
+        $scope.pagination_object = false;
         updateIssues($scope.issues);
       }
     });
@@ -70,7 +68,7 @@ angular.module('app').controller('TeamIssuesController', function ($scope, $rout
 
   function buildSearchParameters (team) {
     // build parameters for these cases:
-    // 1. Return ONLY issues owned by the team (owner_id + owner_type)
+    // 1. Return ONLY issues owned by the team (owner_id + owner_type)s
     // 2. Return ONLY those issues NOT owned by the team (owner)
     // 3. Return all issues associated with the team (combination of 1 + 2)
     var params = { order_by: 'IssueRank::TeamRank', team_id: team.id };
@@ -87,8 +85,7 @@ angular.module('app').controller('TeamIssuesController', function ($scope, $rout
   }
 
   function updateIssues (issues_data) {
-    console.log("data", issues_data);
-    if (issues_data.meta) { $scope.pagination = issues_data.meta.pagination; }
+    if (issues_data.meta) { $scope.pagination_object = issues_data.meta.pagination; }
     $scope.issues = issues_data.data;
     $scope.issues_resolved = true;
 
@@ -96,9 +93,8 @@ angular.module('app').controller('TeamIssuesController', function ($scope, $rout
       show_team_issues: ($scope.search_parameters.show_team_issues) ? 1 : 0,
       show_related_issues: ($scope.search_parameters.show_related_issues) ? 1 : 0
     });
-    if ($scope.pagination){
-      angular.extend(new_params, {page: $scope.pagination.page});
-      console.log("other pagination", $scope.pagination);
+    if ($scope.pagination_object){
+      angular.extend(new_params, {page: $scope.pagination_object.page});
     }
     delete new_params.id;
     $location.search(new_params);

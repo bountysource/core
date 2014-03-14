@@ -107,9 +107,8 @@
             </tbody>
           </table>
         </div>
-        <div ng-show="pagination">
-          <p>Pagination: {{ pagination }}</p>
-          <pagination total-items="pagination.items" page="pagination.page" num-pages="pagination.pages" on-select-page="get_team_issues(page)"></pagination>
+        <div ng-show="pagination_object.items >= 25">
+          <pagination total-items="pagination_object.items" page="pagination_object.page" items-per-page="25" num-pages="pagination_object.pages" on-select-page="get_team_issues(page)"></pagination>
         </div>
         <div ng-hide="issues.length > 0">
           <h4 class="alert alert-info">There are no issues associated with this team</h4>
