@@ -10,13 +10,13 @@
     <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div>
 
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-md-3">
         <fundraiser-progress fundraiser="fundraiser"></fundraiser-progress>
         <fundraiser-author fundraiser="fundraiser"></fundraiser-author>
         <fundraiser-share fundraiser="fundraiser"></fundraiser-share>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-md-6">
         <div ng-show="fundraiser.updates.length > 0">
           <div class="panel panel-default">
             <div class="panel-heading">Updates</div>
@@ -42,7 +42,7 @@
         <div ng-bind-html="sanitized_description"></div>
       </div>
 
-      <div class="col-lg-3">
+      <div class="col-md-3">
         <fundraiser-manage-buttons fundraiser="fundraiser"></fundraiser-manage-buttons>
         <fundraiser-top-backers fundraiser="fundraiser"></fundraiser-top-backers>
         <fundraiser-pledge-buttons fundraiser="fundraiser"></fundraiser-pledge-buttons>
