@@ -67,6 +67,12 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     return this;
   };
 
+  this.page = function (value) {
+    if (value < 0) { value = 0; }
+    this.$$page = value;
+    return this;
+  };
+
   // temporary housing for V2 api routes
   this.v2 = {
 
@@ -196,6 +202,12 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         params.per_page = this.$$perPage;
       } else {
         params.per_page = params.per_page || 250;
+      }
+
+      if (this.$$page) {
+        params.page = this.$$page;
+      } else {
+        params.page = params.page || 1;
       }
 
       // Reset temporary perPage holder
@@ -625,8 +637,10 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     return this.call("/teams/"+id, "PUT", form_data);
   };
 
-  this.team_issues = function(team_id) {
-    return this.call("/teams/" + team_id + "/issues");
+  this.team_issues = function(search_parameters) {
+    return this.call("/doge_issues", "GET", search_parameters, function (response) {
+      return response;
+    });
   };
 
   this.team_tracker_add = function(id, tracker_id) {
