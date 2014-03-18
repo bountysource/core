@@ -12,7 +12,7 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
   $scope.setEnv = function(value) {
     $cookieStore.put('api_environment', value);
     $window.location.reload();
-  }
+  };
 
   $scope.signout = function() {
     $api.signout();
