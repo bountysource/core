@@ -9,7 +9,7 @@ angular.module('directives').directive('gaqTrackClick', function($timeout, $wind
       });
       var gaqArgsWatcher = scope.$watch(attrs.gaqArgs, function(gaqArgs) {
         gaqArgsWatcher();
-        if (gaqArgs) {
+        if (gaqArgs && angular.isDefined($window._gaq)) {
           element.bind('click', function(){
             gaqArgs.push(attrs.href);
             $window._gaq.push(gaqArgs);
