@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('BountyClaimsController', function ($scope, $route, $routeParams, $location, $window, $api, mixpanelEvent) {
+angular.module('app').controller('BountyClaimsController', function ($scope, $route, $routeParams, $location, $window, $api, $analytics) {
   $scope.new_bounty_claim = {
     code_url: $routeParams.code_url || "",
     description: $routeParams.description || ""
@@ -43,7 +43,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
             issue.bounty_claims.push(bounty_claim);
             $route.reload(); //hacky temporary solution
 
-            mixpanelEvent.submitBountyClaim(issue.id);
+            $analytics.submitBountyClaim(issue.id);
           }
         });
       }
@@ -100,7 +100,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
       $api.bounty_claim_accept(bounty_claim.id, bounty_claim.new_accept.description).then(function(updates) {
         $scope.$update_bounty_claim(bounty_claim, updates);
 
-        mixpanelEvent.voteAcceptBountyClaim(bounty_claim.id, $routeParams.id);
+        $analytics.voteAcceptBountyClaim(bounty_claim.id, $routeParams.id);
       });
     };
 
@@ -112,7 +112,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
         bounty_claim.showing_dispute_form = false;
         $scope.$update_bounty_claim(bounty_claim, updates);
 
-        mixpanelEvent.voteRejectBountyClaim(bounty_claim.id, $routeParams.id);
+        $analytics.voteRejectBountyClaim(bounty_claim.id, $routeParams.id);
       });
     };
 
@@ -126,7 +126,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
         $api.bounty_claim_resolve(bounty_claim.id, bounty_claim.new_resolve.description).then(function(updated_bounty_claim) {
           $scope.$update_bounty_claim(bounty_claim, updated_bounty_claim);
 
-          mixpanelEvent.voteAcceptBountyClaim(bounty_claim.id, $routeParams.id);
+          $analytics.voteAcceptBountyClaim(bounty_claim.id, $routeParams.id);
         });
       }
     };
@@ -177,7 +177,7 @@ angular.module('app').controller('BountyClaimsController', function ($scope, $ro
   // Redirect to the BountyClaims tab, prompts the user to login if they are not logged in yet.
   // Optionally, provide a type for tracking where this redirect was invoked, for analytics stuffs.
   $scope.redirectToBountyClaimTab = function(type) {
-    mixpanelEvent.startBountyClaim($routeParams.id, { type: type || '$direct' });
+    $analytics.startBountyClaim($routeParams.id, { type: type || '$direct' });
 
     if ($scope.current_person) {
       $location.path('issues/' + $routeParams.id + '/claims');

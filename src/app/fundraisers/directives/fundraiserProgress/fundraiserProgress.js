@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fundraisers').directive('fundraiserProgress', function($location, mixpanelEvent) {
+angular.module('fundraisers').directive('fundraiserProgress', function($location, $analytics) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -13,7 +13,7 @@ angular.module('fundraisers').directive('fundraiserProgress', function($location
 
         scope.$watch('fundraiser', function(fundraiser) {
           if (fundraiser) {
-            mixpanelEvent.pledgeStart({ type: 'bigbutton' });
+            $analytics.pledgeStart({ type: 'bigbutton' });
             $location.url('/fundraisers/' + fundraiser.slug + '/pledge');
           }
         });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('FundraiserNavTabsController', function ($scope, $location, mixpanelEvent) {
+angular.module('app').controller('FundraiserNavTabsController', function ($scope, $location, $analytics) {
   $scope.active_tab = function(name) {
     if (name === 'overview' && (/^\/fundraisers\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
     if (name === 'updates' && (/^\/fundraisers\/[a-z-_0-9]+\/updates(?:\/\d+)?$/i).test($location.path())) { return "active"; }
@@ -10,6 +10,6 @@ angular.module('app').controller('FundraiserNavTabsController', function ($scope
   };
 
   $scope.tabClicked = function () {
-    mixpanelEvent.pledgeStart({ type: "tab" });
+    $analytics.pledgeStart({ type: "tab" });
   };
 });

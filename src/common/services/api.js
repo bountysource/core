@@ -1,61 +1,24 @@
 'use strict';
 
-angular.module('services').service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter, $log) {
+angular.module('services').service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter, $log, $analytics) {
   var $api = this; // hack to store self reference
   this.access_token_cookie_name = 'v2_access_token';
 
-  // set environment
-  $rootScope.environment = window.BS_ENV;
-  if ($location.host().match(/localhost|v2\.pagekite|.*\.local/)) {
-    $rootScope.can_switch_environments = true;
-    $rootScope.environment = $cookieStore.get('environment') || $rootScope.environment;
+  // set api_host based on environment
+  if ($window.BS_CONFIG.environment === 'development') {
+    $rootScope.api_endpoint = $cookieStore.get('api_environment') || 'staging';
+
+    if ($rootScope.api_endpoint === 'development') {
+      $rootScope.api_host = "http://localhost:5000/";
+    } else if ($rootScope.api_endpoint === 'staging') {
+      $rootScope.api_host = "https://staging-api.bountysource.com/";
+    } else if ($rootScope.api_endpoint === 'production') {
+      $rootScope.api_host = "https://api.bountysource.com/";
+    }
+  } else {
+    $rootScope.api_host = $window.BS_CONFIG.api_host;
   }
 
-  // set API host based on environment
-  if ($rootScope.environment === 'dev') {
-    $rootScope.api_host = "http://localhost:5000/";
-  } else if ($rootScope.environment === 'staging') {
-    $rootScope.api_host = "https://staging-api.bountysource.com/";
-  } else if ($rootScope.environment === 'prod') {
-    $rootScope.api_host = "https://api.bountysource.com/";
-  }
-
-  this.setEnvironment = function(env) {
-    $cookieStore.put('environment', env);
-    $window.location.reload();
-  };
-
-  this.environment = {
-    test: function() {
-      return $window.location.host === "localhost:8081";
-    },
-    development: function() {
-      return $window.location.host === "localhost:9000";
-    },
-    staging: function() {
-      return $window.location.host === "staging.bountysource.com";
-    },
-    production: function() {
-      return $window.location.host === "www.bountysource.com";
-    }
-  };
-
-  $rootScope.__test__ = this.environment.test();
-
-  this.$shift_mock_response = function() {
-    var count = parseInt(window.localStorage.getItem('stubsCount'), 10);
-    if (count > 0) {
-      // decrement count
-      window.localStorage.setItem('stubsCount', count - 1);
-      var responseInfo = window.localStorage.getItem('responseInfo'+count);
-      if (responseInfo) {
-        console.log("MOCK RESPONSE INFO ****"+responseInfo+"****");
-      }
-      return JSON.parse(localStorage.getItem('response'+count));
-    } else {
-      throw("Nothing left :/");
-    }
-  };
 
   this.$$maxPerPage = 250;
   this.$$perPage = undefined;
@@ -174,109 +137,83 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
 
   // call(url, 'POST', { foo: bar }, optional_callback)
   this.call = function() {
-    //if we are in the test_old environment, call the mocked $api.call() otherwise, use the prod call()
-    if ($rootScope.__test__) {
-      var mockArgs = Array.prototype.slice.call(arguments);
-      var request = {
-        path: mockArgs.shift(),
-        method: typeof(mockArgs[0]) === 'string' ? mockArgs.shift() : 'GET',
-        params: typeof(mockArgs[0]) === 'object' ? mockArgs.shift() : {},
-        callback: typeof(mockArgs[0]) === 'function' ? mockArgs.shift() : function(response) { return response.data; }
+    // parse arguments
+    var args = Array.prototype.slice.call(arguments);
+    var url = $rootScope.api_host + args.shift().replace(/^\//,'');
+    var method = typeof(args[0]) === 'string' ? args.shift() : 'GET';
+    var params = typeof(args[0]) === 'object' ? args.shift() : {};
+    var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
+
+    // merge in params
+    params = angular.copy(params);
+    if ($api.get_access_token()) {
+      params.access_token = $api.get_access_token();
+    }
+
+    // Pull off perPage if it was set. Otherwise... default everything to 250 because we are lazy right now.
+    // Query string parameter takes precedence over this value
+    if (this.$$perPage) {
+      params.per_page = this.$$perPage;
+    } else {
+      params.per_page = params.per_page || 250;
+    }
+
+    if (this.$$page) {
+      params.page = this.$$page;
+    } else {
+      params.page = params.page || 1;
+    }
+
+    // Reset temporary perPage holder
+    this.$$perPage = undefined;
+
+    // deferred JSONP call with a promise
+    var deferred = $q.defer();
+    if ($sniffer.cors) {
+
+      // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
+      params.callback = 'CORS';
+      var cors_callback = function(response) {
+        response = response.replace(/^CORS\(/,'').replace(/\)$/,'');
+
+        var parsed_response = JSON.parse(response);
+
+        if (parsed_response.meta) {
+          // Handle 500 server errors, log request and response data
+          if (parsed_response.meta.status === 500) {
+            // obfuscate sensitive data
+            var logged_params = angular.copy(params);
+            if (logged_params.access_token) { logged_params.access_token = "..."; }
+            if (logged_params.password) { logged_params.password = "..."; }
+            if (logged_params.oauth_token) { logged_params.oauth_token = "..."; }
+
+            $log.warn("API Error");
+            $log.info(" * Request", method, url);
+            $log.info(" * Request Params", logged_params);
+            $log.info(" * Response:", angular.copy(parsed_response));
+          } else if (parsed_response.meta.status === 302) {
+            $log.info("Redirecting to ", parsed_response.data.url);
+            $window.location = parsed_response.data.url;
+          }
+        }
+
+        deferred.resolve(callback(parsed_response));
       };
-
-      console.log("------------------------");
-      console.log("Request", JSON.stringify(request));
-      console.log("PARAMS", JSON.stringify(request.params));
-      var mock_response = this.$shift_mock_response();
-
-      console.log("Mock response:", JSON.stringify(mock_response));
-      console.log("------------------------");
-      // request.callback(mock_response);
-
-      var mockDeferred = $q.defer();
-      mockDeferred.resolve(request.callback(mock_response));
-      return mockDeferred.promise;
+      // make actual HTTP call with promise
+      if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
+      else if (method === 'HEAD') { $http.head(url, { params: params }).success(cors_callback); }
+      else if (method === 'DELETE') { $http.delete(url, { params: params }).success(cors_callback); }
+      else if (method === 'POST') { $http.post(url, params, {}).success(cors_callback); }
+      else if (method === 'PUT') { $http.put(url, params, {}).success(cors_callback); }
 
     } else {
-
-      // parse arguments
-      var args = Array.prototype.slice.call(arguments);
-      var url = $rootScope.api_host + args.shift().replace(/^\//,'');
-      var method = typeof(args[0]) === 'string' ? args.shift() : 'GET';
-      var params = typeof(args[0]) === 'object' ? args.shift() : {};
-      var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
-
-      // merge in params
-      params = angular.copy(params);
-      if ($api.get_access_token()) {
-        params.access_token = $api.get_access_token();
-      }
-
-      // Pull off perPage if it was set. Otherwise... default everything to 250 because we are lazy right now.
-      // Query string parameter takes precedence over this value
-      if (this.$$perPage) {
-        params.per_page = this.$$perPage;
-      } else {
-        params.per_page = params.per_page || 250;
-      }
-
-      if (this.$$page) {
-        params.page = this.$$page;
-      } else {
-        params.page = params.page || 1;
-      }
-
-      // Reset temporary perPage holder
-      this.$$perPage = undefined;
-
-      // deferred JSONP call with a promise
-      var deferred = $q.defer();
-      if ($sniffer.cors) {
-
-        // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
-        params.callback = 'CORS';
-        var cors_callback = function(response) {
-          response = response.replace(/^CORS\(/,'').replace(/\)$/,'');
-
-          var parsed_response = JSON.parse(response);
-
-          if (parsed_response.meta) {
-            // Handle 500 server errors, log request and response data
-            if (parsed_response.meta.status === 500) {
-              // obfuscate sensitive data
-              var logged_params = angular.copy(params);
-              if (logged_params.access_token) { logged_params.access_token = "..."; }
-              if (logged_params.password) { logged_params.password = "..."; }
-              if (logged_params.oauth_token) { logged_params.oauth_token = "..."; }
-
-              $log.warn("API Error");
-              $log.info(" * Request", method, url);
-              $log.info(" * Request Params", logged_params);
-              $log.info(" * Response:", angular.copy(parsed_response));
-            } else if (parsed_response.meta.status === 302) {
-              $log.info("Redirecting to ", parsed_response.data.url);
-              $window.location = parsed_response.data.url;
-            }
-          }
-
-          deferred.resolve(callback(parsed_response));
-        };
-        // make actual HTTP call with promise
-        if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
-        else if (method === 'HEAD') { $http.head(url, { params: params }).success(cors_callback); }
-        else if (method === 'DELETE') { $http.delete(url, { params: params }).success(cors_callback); }
-        else if (method === 'POST') { $http.post(url, params, {}).success(cors_callback); }
-        else if (method === 'PUT') { $http.put(url, params, {}).success(cors_callback); }
-
-      } else {
-        params._method = method;
-        params.callback = 'JSON_CALLBACK';
-        $http.jsonp(url, { params: params }).success(function(response) {
-          deferred.resolve(callback(response));
-        });
-      }
-      return deferred.promise;
+      params._method = method;
+      params.callback = 'JSON_CALLBACK';
+      $http.jsonp(url, { params: params }).success(function(response) {
+        deferred.resolve(callback(response));
+      });
     }
+    return deferred.promise;
   };
 
   this.fundraiser_cards = function() {
@@ -895,9 +832,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       $api.set_access_token($rootScope.current_person.access_token);
 
       // Identify with Mixpanel HERE
-      $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
-        mixpanel.identify(person.id);
-      });
+      $analytics.mixpanel.identify(person.id);
     } else {
       $rootScope.current_person = false;
       $api.set_access_token(null);
@@ -1021,12 +956,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
 
     options.redirect_url = protocol + '://' + host + (port === DEFAULT_PORTS[protocol] ? '' : ':'+port ) + '/signin/callback?' + $api.toKeyValue(redirect_params);
 
-    // Wait for Mixpanel, then append the distict_id to form_data params
-    $window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
-      if (mixpanel.cookie) {
-        options.mixpanel_id = mixpanel.cookie.props.distinct_id;
-      }
-    });
+    options.mixpanel_id = $analytics.mixpanel_distinct_id();
 
     if ($api.get_access_token()) {
       options.access_token = $api.get_access_token();

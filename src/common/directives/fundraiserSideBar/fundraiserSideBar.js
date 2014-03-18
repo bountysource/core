@@ -10,7 +10,7 @@
 * rewards - show the rewards
 * shareButtons - show the share buttons. such social
 * */
-angular.module('directives').directive('fundraiserSideBar', function($api, $location, $modal, mixpanelEvent) {
+angular.module('directives').directive('fundraiserSideBar', function($api, $location, $modal, $analytics) {
   return {
     restrict: 'EAC',
     templateUrl: 'common/directives/fundraiserSideBar/templates/fundraiserSideBar.html',
@@ -67,7 +67,7 @@ angular.module('directives').directive('fundraiserSideBar', function($api, $loca
 
       // Track reward click in Mixpanel
       scope.rewardClicked = function(reward) {
-        mixpanelEvent.pledgeStart(
+        $analytics.pledgeStart(
           {
             amount: reward.amount,
             id:     reward.id,

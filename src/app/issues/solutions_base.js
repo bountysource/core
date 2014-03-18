@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter, $q, $routeParams, $window, mixpanelEvent) {
+angular.module('app').controller('SolutionsBaseController', function ($rootScope, $scope, $api, $filter, $q, $routeParams, $window, $analytics) {
   $scope.initializing = true;
 
   // initialize form from params
@@ -80,7 +80,7 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
           // Only if the user is logged in
           $scope.$watch('current_person', function(person) {
             if (person) {
-              mixpanelEvent.submitSolutionCreate($routeParams.id);
+              $analytics.submitSolutionCreate($routeParams.id);
             }
           });
         });
@@ -102,7 +102,7 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
           $scope.$emit('solutionUpdatePushed', updated_solution);
 
           // Track Solution submit event in Mixpanel
-          mixpanelEvent.submitSolutionEdit($routeParams.id);
+          $analytics.submitSolutionEdit($routeParams.id);
         });
       }
     };
@@ -129,9 +129,9 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
 
       // Track Solution start in Mixpanel
       if ($scope.show_solution_edit_form) {
-        mixpanelEvent.startSolutionEdit($routeParams.id);
+        $analytics.startSolutionEdit($routeParams.id);
       } else {
-        mixpanelEvent.hideSolutionEdit($routeParams.id);
+        $analytics.hideSolutionEdit($routeParams.id);
       }
     };
 
@@ -140,15 +140,15 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
 
       // Track Solution start in Mixpanel
       if ($scope.show_solution_form) {
-        mixpanelEvent.startSolutionCreate($routeParams.id);
+        $analytics.startSolutionCreate($routeParams.id);
       } else {
-        mixpanelEvent.hideSolutionCreate($routeParams.id);
+        $analytics.hideSolutionCreate($routeParams.id);
       }
     };
 
     // Stop working on a solution that the logged in user started
     $scope.stop_solution = function () {
-      mixpanelEvent.deleteSolutionPrompt($routeParams.id);
+      $analytics.deleteSolutionPrompt($routeParams.id);
 
       if ($window.confirm("Are you sure you want to notify the backers that you have stopped work?")) {
         $scope.my_solution_promise.then(function() {
@@ -156,11 +156,11 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
             $scope.show_solution_edit_form = false;
             $scope.$emit('solutionUpdatePushed', updated_solution);
 
-            mixpanelEvent.deleteSolutionConfirm($routeParams.id);
+            $analytics.deleteSolutionConfirm($routeParams.id);
           });
         });
       } else {
-        mixpanelEvent.deleteSolutionClose($routeParams.id);
+        $analytics.deleteSolutionClose($routeParams.id);
       }
     };
 
@@ -170,7 +170,7 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
         $api.checkin_solution(issue.id).then(function(updated_solution) {
           $scope.$emit('solutionUpdatePushed', updated_solution);
 
-          mixpanelEvent.checkinSolution($routeParams.id);
+          $analytics.checkinSolution($routeParams.id);
         });
       });
     };
@@ -181,7 +181,7 @@ angular.module('app').controller('SolutionsBaseController', function ($rootScope
         $api.complete_solution(issue.id).then(function(updated_solution) {
           $scope.$emit('solutionUpdatePushed', updated_solution);
 
-          mixpanelEvent.completeSolution($routeParams.id);
+          $analytics.completeSolution($routeParams.id);
         });
       });
     };

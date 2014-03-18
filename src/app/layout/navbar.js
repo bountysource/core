@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('NavbarController', function ($scope, $api, $modal) {
+angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieStore) {
   $scope.$watch('current_person', function(current_person) {
     if (current_person) {
       $api.person_teams(current_person.id).then(function(teams) {
@@ -9,7 +9,10 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
     }
   });
 
-  $scope.setEnv = $api.setEnvironment;
+  $scope.setEnv = function(value) {
+    $cookieStore.put('api_environment', value);
+    $window.location.reload();
+  }
 
   $scope.signout = function() {
     $api.signout();

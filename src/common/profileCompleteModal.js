@@ -253,12 +253,6 @@ angular.module('app').run(function($rootScope, $routeParams, $window, $location,
   };
 
   var routeChangeListener = $rootScope.$on('$routeChangeSuccess', function() {
-    // Don't include this directive in the test_old environment, it breaks everything.
-    // Immediately unregister the route change listener.
-    if ($api.environment.test()) {
-      return routeChangeListener();
-    }
-
     if (testRoute() && testRouteParam()) {
       // Strip param from query string
       $location.search(paramKeyName, null);

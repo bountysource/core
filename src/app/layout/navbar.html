@@ -82,16 +82,16 @@
         </li>
 
         <!-- Development tools. Environment changer and access token changer. -->
-        <li class="dropdown" ng-if="can_switch_environments">
+        <li class="dropdown" ng-if="api_endpoint">
           <a ng-href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="label label-danger">{{environment}}</span>
+            <span class="label label-danger">{{api_endpoint}}</span>
             <b class="caret"></b>
           </a>
 
           <ul class="dropdown-menu" ng-controller="NavbarController">
-            <li><a href="" ng-click="setEnv('dev')">development</a></li>
+            <li><a href="" ng-click="setEnv('development')">development</a></li>
             <li><a href="" ng-click="setEnv('staging')">staging</a></li>
-            <li><a href="" ng-click="setEnv('prod')">production</a></li>
+            <li><a href="" ng-click="setEnv('production')">production</a></li>
             <li class="divider"></li>
             <li>
               <a href="" ng-click="openDevToolsModal()">dev tools</a>

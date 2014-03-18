@@ -1,9 +1,29 @@
 'use strict';
 
 if (document.location.host === 'www.bountysource.com') {
-  window.BS_ENV = 'prod';
+  window.BS_CONFIG = {
+    environment: 'production',
+    api_url: 'https://api.bountysource.com/',
+    mixpanel: 'f9b55dbcc390114a4ed685391a7563e0',
+    google_analytics: 'UA-36879724-1',
+    google_wallet_url: 'https://wallet.google.com/inapp/lib/buy.js'
+  };
+} else if (document.location.host === 'staging.bountysource.com') {
+  window.BS_CONFIG = {
+    environment: 'staging',
+    api_url: 'https://staging-api.bountysource.com/',
+    mixpanel: 'd385359c475583c9a8315cf0c2e0b197',
+    google_analytics: 'UA-36879724-2',
+    google_wallet_url: 'https://sandbox.google.com/checkout/inapp/lib/buy.js'
+  };
 } else {
-  window.BS_ENV = 'staging';
+  window.BS_CONFIG = {
+    environment: 'development',
+    mixpanel: 'b48006f9db0a9702dad8c366eae96e40',
+    api_url: '',
+    google_analytics: 'UA-36879724-2',
+    google_wallet_url: 'https://sandbox.google.com/checkout/inapp/lib/buy.js'
+  };
 }
 
 angular.module('constants', []);
@@ -21,9 +41,7 @@ angular.module('app', [
   'ngCookies',
   'ui.bootstrap',
   'colorpicker.module',
-  'fundraisers',
-  'angulartics',
-  'angulartics.mixpanel'
+  'fundraisers'
 ]);
 
 angular.module('app')
@@ -73,10 +91,6 @@ angular.module('app')
         });
       }
     }
-  })
-
-  .config(function($analyticsProvider) {
-    $analyticsProvider.firstPageview(false);
   })
 
   .run(function($api) {

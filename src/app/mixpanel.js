@@ -1,30 +1,37 @@
 'use strict';
 
-angular.module('angulartics.mixpanel', ['angulartics'])
-  .config(['$analyticsProvider', function ($analyticsProvider) {
-    window.angulartics.waitForVendorApi('mixpanel', 500, function (mixpanel) {
-      $analyticsProvider.registerEventTrack(function (action, properties) {
-        mixpanel.track(action, properties);
-      });
-    });
-  }]);
+// mixpanel snippet minus the part that injects a script tag since we're hosting that now
+(function(c,a){window.mixpanel=a;var b,d,h,e;a._i=[];a.init=function(b,c,f){function d(a,b){
+var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(
+  Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?g=a[f]=[]:
+f="mixpanel";g.people=g.people||[];h=['disable','track','track_pageview','track_links',
+'track_forms','register','register_once','unregister','identify','alias','name_tag','set_config',
+'people.set','people.set_once','people.increment','people.track_charge','people.append'];
+for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.2;})(document,window.mixpanel||[]);
+mixpanel.init(window.BS_CONFIG.mixpanel);
 
-angular.module('app').service('mixpanelEvent', function($location, $analytics, $log) {
 
+angular.module('app').service('$analytics', function($location, $log, $window) {
   this._debug = false;
+
+  this.mixpanel = $window.mixpanel;
+
+  this.mixpanel_distinct_id = function() {
+    return $window.mixpanel.cookie.props.distinct_id;
+  };
 
   // Wrapper for analytics.eventTrack that adds in "page"
   this.track = function(event_name, options) {
     var payload = angular.extend({ page: $location.path() }, options||{});
 
     if (this._debug) {
-      $log.info('--- mixpanelEvent ---');
+      $log.info('--- $analytics ---');
       $log.info('name:', event_name);
       $log.info('payload:', payload);
       $log.info('---------------------');
 
     } else {
-      $analytics.eventTrack(event_name, payload);
+      $window.mixpanel.track(event_name, payload);
     }
   };
 
@@ -143,14 +150,12 @@ angular.module('app').service('mixpanelEvent', function($location, $analytics, $
 * Fire Mixpanel events based on route
 * */
 angular.module('app')
-  .run(function($rootScope, $location, mixpanelEvent) {
-
+  .run(function($rootScope, $location, $analytics) {
     $rootScope.$on('$routeChangeSuccess', function(routeChangeEvent, currentRoute) {
       if (!currentRoute.$$route) {
-        mixpanelEvent.track(($location.path() === '/legacy' ? 'View Legacy' : 'View Not Found'), currentRoute.params);
+        $analytics.track(($location.path() === '/legacy' ? 'View Legacy' : 'View Not Found'), currentRoute.params);
       } else if (currentRoute.$$route.trackEvent !== false) {
-        mixpanelEvent.track(currentRoute.$$route.trackEvent || 'View Other', currentRoute.params);
+        $analytics.track(currentRoute.$$route.trackEvent || 'View Other', currentRoute.params);
       }
     });
-
   });

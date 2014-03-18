@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fundraisers').directive('fundraiserPledgeButtons', function($location, $routeParams, mixpanelEvent) {
+angular.module('fundraisers').directive('fundraiserPledgeButtons', function($location, $routeParams, $analytics) {
   return {
     restrict: 'EAC',
     templateUrl: 'app/fundraisers/directives/fundraiserPledgeButtons/templates/fundraiserPledgeButtons.html',
@@ -13,7 +13,7 @@ angular.module('fundraisers').directive('fundraiserPledgeButtons', function($loc
         if (angular.isNumber(amount) && fundraiser.published) {
           $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
 
-          mixpanelEvent.pledgeStart({ amount: amount, type: 'buttons' });
+          $analytics.pledgeStart({ amount: amount, type: 'buttons' });
         }
       };
 
@@ -22,7 +22,7 @@ angular.module('fundraisers').directive('fundraiserPledgeButtons', function($loc
         if (angular.isNumber(amount) && fundraiser.published) {
           $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
 
-          mixpanelEvent.pledgeStart({ amount: amount, type: 'custom' });
+          $analytics.pledgeStart({ amount: amount, type: 'custom' });
         }
       };
     }

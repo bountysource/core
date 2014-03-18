@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fundraisers').directive('fundraiserRewards', function($api, mixpanelEvent) {
+angular.module('fundraisers').directive('fundraiserRewards', function($api, $analytics) {
   return {
     restrict: 'EAC',
     templateUrl: 'app/fundraisers/directives/fundraiserRewards/templates/fundraiserRewards.html',
@@ -16,7 +16,7 @@ angular.module('fundraisers').directive('fundraiserRewards', function($api, mixp
         }
       });
       scope.rewardClicked = function (reward) {
-        mixpanelEvent.pledgeStart(
+        $analytics.pledgeStart(
           {
             amount: reward.amount,
             id:     reward.id,
