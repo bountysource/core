@@ -70,16 +70,12 @@ var ProfileCompleteModalInstanceController = function($scope, $location, $routeP
 
   $scope.completeLater = function() {
     $scope.closeModal();
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'complete_later']);
   };
 
   // Remove person from developer alert emails, close modal.
   $scope.notInterested = function() {
     $api.person_update({ receive_developer_alerts: false, profile_completed: true });
     $scope.closeModal();
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'not_interested']);
   };
 
   // Mark the person's profile as completed. Ensure that they receive developer alert emails.
@@ -87,8 +83,6 @@ var ProfileCompleteModalInstanceController = function($scope, $location, $routeP
   $scope.completeProfile = function() {
     $api.person_update({ receive_developer_alerts: true, profile_completed: true });
     $scope.closeModal();
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'accept']);
   };
 
   $scope.$currentPageIndex = 0;
@@ -144,8 +138,6 @@ var ProfileCompleteModalInstanceController = function($scope, $location, $routeP
     }
     $scope.myLanguages.push(angular.copy(language));
     $scope.updateLanguages();
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'add_language/', language.id]);
   };
 
   $scope.removeLanguage = function(language) {
@@ -156,15 +148,11 @@ var ProfileCompleteModalInstanceController = function($scope, $location, $routeP
       }
     }
     $scope.updateLanguages();
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'remove_language/', language.id]);
   };
 
   $scope.removeAllLanguages = function() {
     $scope.myLanguages = [];
     $scope.updateLanguages();
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'remove_all_languages']);
   };
 
   $scope.newFollowedTracker = undefined;
@@ -187,8 +175,6 @@ var ProfileCompleteModalInstanceController = function($scope, $location, $routeP
     }
     $api.tracker_follow(tracker.id);
     $scope.followedTrackers.push(tracker);
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'follow_tracker', tracker.id]);
   };
 
   // Add tracker to followed list, unless already present.
@@ -206,8 +192,6 @@ var ProfileCompleteModalInstanceController = function($scope, $location, $routeP
       }
     }
     $api.tracker_unfollow(tracker.id);
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'unfollow_tracker/' + tracker.id]);
   };
 
   $scope.removeAllFollowedTrackers = function() {
@@ -215,8 +199,6 @@ var ProfileCompleteModalInstanceController = function($scope, $location, $routeP
       $api.tracker_unfollow($scope.followedTrackers[i].id);
     }
     $scope.followedTrackers = [];
-
-    $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'unfollow_all_trackers']);
   };
 
   $scope.$watch('newFollowedTracker', function(tracker) {
@@ -264,8 +246,6 @@ angular.module('app').run(function($rootScope, $routeParams, $window, $location,
             controller: ProfileCompleteModalInstanceController,
             backdrop: true
           });
-
-          $window._gaq.push(['_trackEvent', 'ProfileCompleteModal' , 'show']);
 
           // Unregister the route change and person listeners.
           currentPersonListener();

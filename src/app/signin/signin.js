@@ -97,7 +97,6 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
           $scope.follow_trackers_from_route_params();
 
           $analytics.signIn({ provider: 'email' });
-          $window._gaq.push(['_trackEvent', 'Signin-Form' , 'Successful-Submit']);
         }
       });
     }
@@ -119,7 +118,6 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
           $scope.follow_trackers_from_route_params();
 
           $analytics.signUp({ provider: $routeParams.provider || 'email' });
-          $window._gaq.push(['_trackEvent', 'Signup-Form' , 'Successful-Submit']);
         }
       });
     }

@@ -16,7 +16,6 @@ angular.module('app').controller('SigninCallbackController', function($scope, $a
         }
 
         $analytics.signIn({ provider: $routeParams.provider });
-        $window._gaq.push(['_trackEvent', 'Signin', 'Success-3rdParty-Auth']);
       }
     });
   } else if ($routeParams.status === 'error_needs_account') {
