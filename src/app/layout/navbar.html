@@ -68,7 +68,7 @@
 
             <li ng-repeat="provider in providers" role="signin">
               <!-- Link with Google Analytics event tracking -->
-              <a gaq-track-click ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="navbar-provider-{{provider.id}}" ng-click="save_route()">
+              <a ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="navbar-provider-{{provider.id}}" ng-click="save_route()">
                 <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
               </a>
             </li>

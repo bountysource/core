@@ -11,7 +11,7 @@
           <div class="col-md-7 col-sm-7">
             <ul ng-controller="SigninController" class="list-unstyled">
               <li ng-repeat="provider in providers" class="provider-link">
-                <a gaq-track-click="" ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="signin-{{provider.id}}" ng-click="save_route()">
+                <a ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="signin-{{provider.id}}" ng-click="save_route()">
                   <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
                 </a>
               </li>
