@@ -4,26 +4,12 @@
       <h4 class="panel-title">Top Backers</h4>
     </div>
 
-    <div class="panel-body">
-      <div class="row" ng-repeat="pledge in pledges">
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-          <a ng-if="pledge.owner" owner-href="pledge.owner" class="thumbnail">
-            <img class="img-responsive" ng-src="{{pledge.owner.image_url_medium}}" />
-          </a>
-
-          <div ng-if="!pledge.owner">
-            <img class="img-responsive thumbnail" src="images/anon.jpg">
-          </div>
-        </div>
-
-        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-          <div ng-if="pledge.owner">
-            <owner-profile-link model="pledge">{{pledge.owner.display_name}}</owner-profile-link>
-          </div>
-          <div ng-if="!pledge.owner" class="text-muted">Anonymous</div>
-
-          <div><b>{{ pledge.amount | dollars }}</b></div>
-        </div>
+    <ul class="top-backers">
+      <li class="row" ng-repeat="pledge in pledges">
+        <a owner-href="pledge.owner">
+          <img ng-if="pledge.owner" ng-src="{{pledge.owner.image_url_medium}}"  tooltip="{{pledge.owner.display_name}} - {{ pledge.amount | dollars }}" tooltip-placement="left" />
+          <img ng-if="!pledge.owner" src="images/anon.jpg" tooltip="Anonymous - {{ pledge.amount | dollars }}" tooltip-placement="left" />
+        </a>
       </div>
     </div>
   </div>

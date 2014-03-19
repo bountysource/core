@@ -11,7 +11,7 @@ angular.module('fundraisers').directive('fundraiserTopBackers', function($api) {
         if (fundraiser) {
           $api.v2.pledges({
             fundraiser_id: scope.fundraiser.id,
-            per_page: 3,
+            per_page: 10,
             order: 'amount',
             include_owner: true
           }).then(function(response) {
