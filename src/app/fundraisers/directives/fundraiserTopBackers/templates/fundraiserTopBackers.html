@@ -10,7 +10,7 @@
           <img ng-if="pledge.owner" ng-src="{{pledge.owner.image_url_medium}}"  tooltip="{{pledge.owner.display_name}} - {{ pledge.amount | dollars }}" tooltip-placement="left" />
           <img ng-if="!pledge.owner" src="images/anon.jpg" tooltip="Anonymous - {{ pledge.amount | dollars }}" tooltip-placement="left" />
         </a>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>
