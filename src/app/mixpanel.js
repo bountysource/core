@@ -19,7 +19,7 @@ angular.module('app').service('$analytics', function($location, $log, $window) {
   this.mixpanel = $window.mixpanel;
 
   this.mixpanel_distinct_id = function() {
-    return $window.mixpanel.cookie.props.distinct_id;
+    return $window.mixpanel.get_property('distinct_id');
   };
 
   // Wrapper for analytics.eventTrack that adds in "page"
