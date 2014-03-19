@@ -6,38 +6,28 @@
     <li><a>Updates</a></li>
   </ul>
 
+  <fundraiser-template fundraiser="fundraiser" options="{}">
+    <div class="alert alert-info" ng-show="updates.length <= 0">
+      No updates have been published.
+    </div>
+
+    <!-- List published updates -->
+    <div ng-repeat="update in updates">
+      <h2>{{update.title}}</h2>
+      <div class="text-info">
+        <span>Published {{update.published_at | date}}</span>
+      </div>
+      <hr />
+      <div class="markdown" ng-bind-html="update.body_html"></div>
+      <div ng-if="$index != updates.length">
+        <br />
+        <br />
+      </div>
+    </div>
+  </fundraiser-template>
+
   <div class="form" ng-show="fundraiser">
     <div ng-include="'app/fundraisers/templates/header.html'"></div>
     <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div>
-
-    <div class="row">
-      <div class="col-md-3">
-        <ng-include src="'app/fundraisers/templates/leftColumn.html'"></ng-include>
-      </div>
-
-      <div class="col-md-6">
-        <div class="alert alert-info" ng-show="updates.length <= 0">
-          No updates have been published.
-        </div>
-
-        <!-- List published updates -->
-        <div ng-repeat="update in updates">
-          <h2>{{update.title}}</h2>
-          <div class="text-info">
-            <span>Published {{update.published_at | date}}</span>
-          </div>
-          <hr />
-          <div class="markdown" ng-bind-html="update.body_html"></div>
-          <div ng-if="$index != updates.length">
-            <br />
-            <br />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <ng-include src="'app/fundraisers/templates/rightColumn.html'"></ng-include>
-      </div>
-    </div>
   </div>
 </div>

@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     robots: 'src/robots.txt',
 
     src: {
-      js: ['src/app/app.js', 'src/**/*.js', '!src/vendor/**', '!src/lib/**'],
+      js: ['src/app/app.js', 'src/app/mixpanel.js', 'src/**/*.js', '!src/vendor/**', '!src/lib/**'],
       jsTpl: {
         app: ['src/app/**/*.html'],
         common: ['src/common/**/*.html']

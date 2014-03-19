@@ -91,3 +91,7 @@ a:hover {
 .img-responsive { width: 100%;}
 
 .markdown img { max-width: 100%; }
+
+.row-condensed *[class^="col-"] { padding: 0 5px; }
+.row-condensed *[class^="col-"]:first-of-type { padding-left: 10px !important; }
+.row-condensed *[class^="col-"]:last-of-type { padding-right: 10px !important; }
