@@ -6,7 +6,7 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
     restrict: 'EAC',
     replace: false,
     transclude: true,
-    templateUrl: 'app/fundraisers/directives/fundraiserTemplate/templates/fundraiserTemplate.html',
+    templateUrl: 'common/directives/fundraiserTemplate/templates/fundraiserTemplate.html',
     scope: {
       options: '=',
       fundraiser: '='
@@ -16,6 +16,8 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
       scope.defaultOptions = {
         showLeftColumn: true,
         showRightColumn: true,
+        showTitle: true,
+        showNavTabs: true,
         showProgress: true,
         showAuthor: true,
         showShareButtons: true,
@@ -69,7 +71,7 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
 
       scope.$watch('fundraiser', function(fundraiser) {
         $rootScope.$watch('current_person', function(person) {
-          if (fundraiser && person) {
+          if (fundraiser && fundraiser.person && person) {
             scope.can_manage = fundraiser.person.id === person.id;
             scope.publishable = fundraiser.title && fundraiser.short_description && fundraiser.funding_goal && fundraiser.description;
           }

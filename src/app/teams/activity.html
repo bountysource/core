@@ -1,33 +1,26 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a></li>
-  <li><a href="/teams">Teams</a></li>
-  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
-  <li><a ng-href="/teams/{{team.slug}}/activities">Activities</a></li>
-</ul>
+<div ng-controller="TeamActivityController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/teams">Teams</a></li>
+    <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
+    <li><a ng-href="/teams/{{team.slug}}/activities">Activities</a></li>
+  </ul>
 
-<div ng-show="team" ng-controller="TeamActivityController">
-  <div class="row">
-    <div class="col-sm-3 col-md-3">
-      <ng-include src="'app/teams/templates/infobox.html'"></ng-include>
-    </div>
-    <div class="col-sm-9 col-md-9">
-      <ng-include src="'app/teams/templates/header.html'"></ng-include>
-      <ng-include src="'app/teams/templates/tabs.html'"></ng-include>
-      <table class="table table-striped" style="table-layout: fixed">
-        <tbody ng-switch="activity.type">
-        <tr ng-repeat="activity in activities | orderBy:'-created_at'">
+  <div team-template team="team">
+    <table class="table table-striped" style="table-layout: fixed">
+      <tbody ng-switch="activity.type">
+      <tr ng-repeat="activity in activities | orderBy:'-created_at'">
 
-          <td class="teams-activity-cell" ng-show="activity.type == 'Bounty'"><strong>{{activity.amount | dollars}}</strong> bounty placed on <a ng-href="issues/{{activity.issue.slug}}">{{activity.issue.title}}</a></td>
-          <td class="teams-date-cell" ng-show="activity.type == 'Bounty'"><small class="text-muted">{{activity.created_at | date:'medium'}}</small></td>
+        <td class="teams-activity-cell" ng-show="activity.type == 'Bounty'"><strong>{{activity.amount | dollars}}</strong> bounty placed on <a ng-href="issues/{{activity.issue.slug}}">{{activity.issue.title}}</a></td>
+        <td class="teams-date-cell" ng-show="activity.type == 'Bounty'"><small class="text-muted">{{activity.created_at | date:'medium'}}</small></td>
 
-          <td class="teams-activity-cell" ng-show="activity.type == 'Pledge'"><strong>{{activity.amount | dollars}}</strong> pledge made to <a ng-href="fundraisers/{{activity.fundraiser.slug}}">{{activity.fundraiser.title}}</a></td>
-          <td class="teams-date-cell" ng-show="activity.type == 'Pledge'"><small class="text-muted">{{activity.created_at | date:'medium'}}</small></td>
+        <td class="teams-activity-cell" ng-show="activity.type == 'Pledge'"><strong>{{activity.amount | dollars}}</strong> pledge made to <a ng-href="fundraisers/{{activity.fundraiser.slug}}">{{activity.fundraiser.title}}</a></td>
+        <td class="teams-date-cell" ng-show="activity.type == 'Pledge'"><small class="text-muted">{{activity.created_at | date:'medium'}}</small></td>
 
-          <td class="teams-activity-cell" ng-show="activity.type == 'Person'"><a ng-href="people/{{activity.slug}}">{{activity.display_name}}</a> was added to the team</td>
-          <td class="teams-date-cell" ng-show="activity.type == 'Person'"><small class="text-muted">{{activity.created_at | date:'medium'}}</small></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+        <td class="teams-activity-cell" ng-show="activity.type == 'Person'"><a ng-href="people/{{activity.slug}}">{{activity.display_name}}</a> was added to the team</td>
+        <td class="teams-date-cell" ng-show="activity.type == 'Person'"><small class="text-muted">{{activity.created_at | date:'medium'}}</small></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

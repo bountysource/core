@@ -1,17 +1,11 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a></li>
-  <li><a href="/teams">Teams</a></li>
-  <li><a>{{team.name || 'Loading...'}}</a></li>
-</ul>
+<div ng-controller="TeamHomeController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/teams">Teams</a></li>
+    <li><a>{{team.name || 'Loading...'}}</a></li>
+  </ul>
 
-<div class="row" ng-show="team">
-  <div class="col-sm-3 col-md-3">
-    <ng-include src="'app/teams/templates/infobox.html'"></ng-include>
-  </div>
-  <div class="col-sm-9 col-md-9" ng-controller="TeamHomeController">
-    <ng-include src="'app/teams/templates/header.html'"></ng-include>
-    <ng-include src="'app/teams/templates/tabs.html'"></ng-include>
-
+  <div team-template team="team">
     <div ng-show="funds_added">
       <alert type="'success'" close="funds_added = null">Successfully added <strong>{{funds_added | dollars}}</strong>
         to <strong>{{team.name}}'s</strong> balance. Current balance of <strong>{{team.account_balance |

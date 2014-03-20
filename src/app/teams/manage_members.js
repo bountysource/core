@@ -10,6 +10,8 @@ angular.module('app').controller('ManageTeamMembersController', function($scope,
   $scope.add_member_error = {};
 
   $scope.members_promise.then(function(members) {
+    if (!members) { return; }
+
     // initialize master
     for (var i=0; i<members.length; i++) {
       members[i].$master = angular.copy(members[i]);

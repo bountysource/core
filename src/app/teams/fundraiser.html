@@ -1,0 +1,8 @@
+<div ng-controller="TeamFundraiserController">
+  <div team-template team="team">
+    <div fundraiser-template fundraiser="activeFundraiser" options="{ showLeftColumn: false, showTopBackers: false, showTitle: false, showNavTabs: false }">
+      <div class="markdow" ng-bind-html="activeFundraiser.description_html"></div>
+    </div>
+  </div>
+</div>
+

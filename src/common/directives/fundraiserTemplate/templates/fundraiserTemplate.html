@@ -1,6 +1,6 @@
 <div>
   <!-- Header -->
-  <div>
+  <div ng-if="_options.showHeader">
     <div class="text-center">
       <h1 style="margin-top:0px;font-weight:bold;">{{ fundraiser.title || 'Loading...' }}</h1>
       <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
@@ -16,7 +16,7 @@
   </div>
 
   <!-- Nav tabs -->
-  <div>
+  <div ng-if="_options.showNavTabs">
     <ul class="nav nav-tabs">
       <li ng-class="activeNavTab('overview')"><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
       <li ng-class="activeNavTab('updates')" ng-show="fundraiser.published && fundraiser.updates"><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">

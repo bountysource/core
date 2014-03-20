@@ -313,6 +313,12 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Team'
   }, defaultRouteOptions));
 
+  $routeProvider.when('/teams/:id/fundraiser', angular.extend({
+    templateUrl: 'app/teams/fundraiser.html',
+    controller: 'BaseTeamController',
+    trackEvent: 'View Team Fundraiser'
+  }, defaultRouteOptions));
+
   $routeProvider.when('/tools', angular.extend({
     templateUrl: 'app/tools/all.html',
     controller: 'BaseToolsController',

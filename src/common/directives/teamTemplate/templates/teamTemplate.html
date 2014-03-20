@@ -1,0 +1,104 @@
+<div>
+
+  <loading-bar ng-if="!team">Loading Team...</loading-bar>
+
+  <div class="row" ng-if="team">
+    <!-- LEFT COLUMN -->
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+      <!-- Team Info -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <img ng-src="{{team.large_image_url}}" class="img-responsive">
+        </div>
+      </div>
+
+      <!-- Top Backers -->
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <strong>Top Backers</strong>
+        </div>
+
+        <ul class="top-backers">
+          <li class="row" ng-repeat="backer in backers">
+            <a owner-href="backer">
+              <img ng-if="backer" ng-src="{{backer.image_url_medium}}"  tooltip="{{backer.display_name}} - {{backer.amount | dollars}}" tooltip-placement="left" />
+              <img ng-if="!backer" src="images/anon.jpg" tooltip="Anonymous - {{backer.amount | dollars}}" tooltip-placement="left" />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Share Buttons -->
+    </div>
+
+    <!-- MAIN COLUMN -->
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+      <!-- Header -->
+
+      <div ng-if="_options.showTitle">
+        <h2 style="margin-top: 0;">{{team.name}}</h2>
+        <p class="lead" ng-show="team.bio">{{team.bio}}</p>
+      </div>
+
+      <!-- Nav Tabs -->
+      <div ng-if="_options.showNavTabs">
+        <ul class="nav nav-tabs">
+          <li ng-class="{ active: activeNavTab('home') }" ng-if="is_admin || is_developer">
+            <a ng-href="/teams/{{ team.slug }}">Home</a>
+          </li>
+
+          <li ng-class="{ active: activeNavTab('fundraiser') }">
+            <a ng-href="/teams/{{team.slug}}/fundraiser">Fundraiser</a>
+          </li>
+
+          <!--<li ng-show="is_admin || is_developer" ng-class="{ active: activeNavTab('projects') }">-->
+            <!--<a ng-href="/teams/{{team.slug}}/projects">Projects</a>-->
+          <!--</li>-->
+
+          <li ng-show="team.linked_account" ng-class="{ active: activeNavTab('issues') }">
+            <a ng-href="/teams/{{team.slug}}/issues">Suggested Issues</a>
+          </li>
+
+          <li ng-show="members.length > 0" ng-class="{ active: activeNavTab('members') }">
+            <a ng-href="/teams/{{team.slug}}/members">Members</a>
+          </li>
+
+          <li ng-hide="true" ng-class="{ active: activeNavTab('activity') }">
+            <a ng-href="/teams/{{team.slug}}/activity">Activity</a>
+          </li>
+
+          <li ng-show="team.open_bounties_amount + team.closed_bounties_amount > 0" ng-class="{ active: activeNavTab('bounties') }">
+            <a ng-href="/teams/{{team.slug}}/bounties">Bounties</a>
+          </li>
+
+          <li class="Dropdown" ng-class="{ active: activeNavTab('manage') }">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="glyphicon glyphicon-lock"></i>
+              Manage
+              <b class="caret"></b>
+            </a>
+
+            <ul class="dropdown-menu">
+              <li ng-show="is_admin">
+                <a ng-href="/teams/{{team.slug}}/members/manage">Members</a>
+              </li>
+
+              <li ng-show="is_admin || is_developer">
+                <a ng-href="/teams/{{team.slug}}/settings">Settings</a>
+              </li>
+
+              <li ng-show="is_admin">
+                <a ng-href="/teams/{{team.slug}}/account">Add Funds</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Content! -->
+      <div ng-transclude></div>
+    </div>
+  </div>
+
+</div>

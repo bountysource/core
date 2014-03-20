@@ -131,6 +131,20 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         url: '/fundraiser_rewards',
         params: params
       });
+    },
+
+    backers: function(params) {
+      return this.call({
+        url: '/backers',
+        params: params || {}
+      });
+    },
+
+    fundraisers: function(params) {
+      return this.call({
+        url: '/fundraisers',
+        params: params || {}
+      });
     }
 
   };

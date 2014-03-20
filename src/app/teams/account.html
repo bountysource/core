@@ -1,77 +1,69 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a></li>
-  <li><a href="/teams">Teams</a></li>
-  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
-  <li><a>Settings</a></li>
-</ul>
+<div ng-controller="TeamAccountController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/teams">Teams</a></li>
+    <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
+    <li><a>Settings</a></li>
+  </ul>
 
-<div ng-show="team" ng-controller="TeamAccountController">
-  <div class="row">
-    <div class="col-sm-3 col-md-3">
-      <ng-include src="'app/teams/templates/infobox.html'"></ng-include>
-    </div>
-    <div class="col-sm-9 col-md-9">
-      <ng-include src="'app/teams/templates/header.html'"></ng-include>
-      <ng-include src="'app/teams/templates/tabs.html'"></ng-include>
-
-      <div class="row">
-        <div class="col-sm-7 col-md-7">
-          <div ng-show="error">
-            <div class="alert alert-danger alert-danger">{{error}}</div>
-          </div>
-
-          <form ng-submit="create_payment()" name="form_data" class="form-horizontal">
-            <div class="form-group">
-              <label class="control-label col-md-4">Current Balance</label>
-              <div class="col-md-8">
-                <strong style="line-height: 30px;">{{team.account_balance | dollars}}</strong>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-4">From</label>
-              <div class="col-md-8">
-                <checkout-method-radios value="pay_in.checkout_method"></checkout-method-radios>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-4">Amount</label>
-              <div class="col-md-8">
-                <div class="input-group">
-                  <span class="input-group-addon">$</span>
-                  <input type="number" min="5" step="0.01" name="amount" placeholder="Amount to add" ng-model="pay_in.amount" autofocus="" class="form-control">
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-4">Bountysource Fee</label>
-              <div class="col-md-8">
-                <div style="line-height: 30px;"><b>{{pay_in.fee | currency}}</b></div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-4">Total</label>
-              <div class="col-md-8">
-                <div style="line-height: 30px;"><strong>{{pay_in.total | currency}}</strong></div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-md-offset-4 col-md-8">
-                <button type="submit" class="btn btn-primary" ng-disabled="!pay_in.amount || form_data.amount.$invalid">Add Funds</button>
-              </div>
-            </div>
-          </form>
+  <div team-template team="team">
+    <div class="row">
+      <div class="col-sm-7 col-md-7">
+        <div ng-show="error">
+          <div class="alert alert-danger alert-danger">{{error}}</div>
         </div>
 
-        <div class="col-sm-5 col-md-5">
-          <div class="well">
-            <h4 style="margin-top: 0;">Team Account</h4>
-            <p>This account is shared by the <strong>developers</strong> of the team to create <strong>bounties</strong> and <strong>pledges</strong>.</p>
+        <form ng-submit="create_payment()" name="form_data" class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-md-4">Current Balance</label>
+            <div class="col-md-8">
+              <strong style="line-height: 30px;">{{team.account_balance | dollars}}</strong>
+            </div>
           </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4">From</label>
+            <div class="col-md-8">
+              <checkout-method-radios value="pay_in.checkout_method"></checkout-method-radios>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4">Amount</label>
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="number" min="5" step="0.01" name="amount" placeholder="Amount to add" ng-model="pay_in.amount" autofocus="" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4">Bountysource Fee</label>
+            <div class="col-md-8">
+              <div style="line-height: 30px;"><b>{{pay_in.fee | currency}}</b></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-4">Total</label>
+            <div class="col-md-8">
+              <div style="line-height: 30px;"><strong>{{pay_in.total | currency}}</strong></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+              <button type="submit" class="btn btn-primary" ng-disabled="!pay_in.amount || form_data.amount.$invalid">Add Funds</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-sm-5 col-md-5">
+        <div class="well">
+          <h4 style="margin-top: 0;">Team Account</h4>
+          <p>This account is shared by the <strong>developers</strong> of the team to create <strong>bounties</strong> and <strong>pledges</strong>.</p>
         </div>
       </div>
     </div>

@@ -1,32 +1,24 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a><span class="divider"></span></li>
-  <li><a href="/teams">Teams</a><span class="divider"></span></li>
-  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a><span class="divider"></span></li>
-  <li><a>Settings</a></li>
-</ul>
+<div ng-controller="EditTeamController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a><span class="divider"></span></li>
+    <li><a href="/teams">Teams</a><span class="divider"></span></li>
+    <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a><span class="divider"></span></li>
+    <li><a>Settings</a></li>
+  </ul>
 
-<div ng-show="team">
-  <div class="row">
-    <div class="col-md-3">
-      <ng-include src="'app/teams/templates/infobox.html'"></ng-include>
-    </div>
-    <div class="col-md-9">
-      <ng-include src="'app/teams/templates/header.html'"></ng-include>
-      <ng-include src="'app/teams/templates/tabs.html'"></ng-include>
+  <div team-template team="team">
+    <form class="form-horizontal" ng-submit="create_team()" ng-controller="EditTeamController">
+      <div ng-show="alert.text">
+        <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
+      </div>
 
-      <form class="form-horizontal" ng-submit="create_team()" ng-controller="EditTeamController">
-        <div ng-show="alert.text">
-          <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
+      <ng-include src="'app/teams/templates/form.html'"></ng-include>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <submit type="submit" ng-click="save_team()" class="btn btn-large btn-primary">Update</submit>
         </div>
-
-        <ng-include src="'app/teams/templates/form.html'"></ng-include>
-
-        <div class="form-group">
-          <div class="col-md-offset-2 col-md-10">
-            <submit type="submit" ng-click="save_team()" class="btn btn-large btn-primary">Update</submit>
-          </div>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>

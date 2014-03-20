@@ -30,23 +30,16 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
     $scope.team = team;
   };
 
-  $scope.active_tab = function(tab) {
-    if (tab === 'home' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
-    else if (tab === 'members' && (/^\/teams\/[^\/]+\/members$/).test($location.path())) { return true; }
-    else if (tab === 'activity' && (/^\/teams\/[^\/]+\/activity$/).test($location.path())) { return true; }
-    else if (tab === 'manage_members' && (/^\/teams\/[^\/]+\/members\/manage$/).test($location.path())) { return true; }
-    else if (tab === 'settings' && (/^\/teams\/[^\/]+\/settings$/).test($location.path())) { return true; }
-    else if (tab === 'account' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
-    else if (tab === 'projects' && (/^\/teams\/[^\/]+\/projects+$/).test($location.path())) { return true; }
-    else if (tab === 'bounties' && (/^\/teams\/[^\/]+\/bounties$/).test($location.path())) { return true; }
-    else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
-  };
+  /*****************************
+   * Team Members
+   * */
 
   $scope.members_promise = $api.team_members_get($routeParams.id).then(function(members) {
+
     $scope.$watch('current_person', function(person) {
       if (person) {
         for (var i=0; i<members.length; i++) {
-          if (members[i].id === $scope.current_person.id) {
+          if (members[i].id === person.id) {
             $scope.is_member  = true;
             $scope.is_admin   = members[i].is_admin;
             $scope.is_developer = members[i].is_developer;
@@ -71,7 +64,7 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
       }
     });
 
-    $scope.members = members;
-    return members;
+    $scope.members = angular.copy(members);
   });
+
 });

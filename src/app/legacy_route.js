@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.legacyRoutes', ['ngRoute'])
+angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/about', {
