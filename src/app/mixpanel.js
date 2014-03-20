@@ -156,7 +156,7 @@ angular.module('app')
     $rootScope.$on('$routeChangeSuccess', function(routeChangeEvent, currentRoute) {
       if (!currentRoute.$$route) {
         $analytics.track(($location.path() === '/legacy' ? 'View Legacy' : 'View Not Found'), currentRoute.params);
-      } else if (currentRoute.$$route.trackEvent !== false) {
+      } else if ((currentRoute.$$route.trackEvent !== false) && (!currentRoute.$$route.redirectTo)) {
         $analytics.track(currentRoute.$$route.trackEvent || 'View Other', currentRoute.params);
       }
     });
