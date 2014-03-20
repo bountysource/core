@@ -34,6 +34,7 @@ angular.module('factories', []);
 angular.module('bountysource', ['constants', 'services', 'directives', 'filters', 'factories']);
 
 angular.module('fundraisers', ['bountysource']);
+angular.module('teams', ['bountysource']);
 
 angular.module('app', [
   'ngRoute',
@@ -41,7 +42,8 @@ angular.module('app', [
   'ngCookies',
   'ui.bootstrap',
   'colorpicker.module',
-  'fundraisers'
+  'fundraisers',
+  'teams'
 ]);
 
 angular.module('app')

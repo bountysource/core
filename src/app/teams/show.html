@@ -5,7 +5,7 @@
     <li><a>{{team.name || 'Loading...'}}</a></li>
   </ul>
 
-  <div team-template team="team">
+  <div team-view team="team">
     <div ng-show="funds_added">
       <alert type="'success'" close="funds_added = null">Successfully added <strong>{{funds_added | dollars}}</strong>
         to <strong>{{team.name}}'s</strong> balance. Current balance of <strong>{{team.account_balance |

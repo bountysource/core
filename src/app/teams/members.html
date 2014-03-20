@@ -6,7 +6,7 @@
     <li><a>Members</a></li>
   </ul>
 
-  <div team-template team="team">
+  <div team-view team="team">
     <ul class="thumbnails list-unstyled">
       <li class="col-md-2 member-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
         <a ng-href="/people/{{member.slug}}" class="thumbnail team-member-card">

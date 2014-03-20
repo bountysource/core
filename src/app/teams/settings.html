@@ -6,7 +6,7 @@
     <li><a>Settings</a></li>
   </ul>
 
-  <div team-template team="team">
+  <div team-view team="team">
     <form class="form-horizontal" ng-submit="create_team()" ng-controller="EditTeamController">
       <div ng-show="alert.text">
         <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>

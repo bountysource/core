@@ -6,7 +6,7 @@
     <li><a ng-href="/teams/{{team.slug}}/activities">Activities</a></li>
   </ul>
 
-  <div team-template team="team">
+  <div team-view team="team">
     <table class="table table-striped" style="table-layout: fixed">
       <tbody ng-switch="activity.type">
       <tr ng-repeat="activity in activities | orderBy:'-created_at'">

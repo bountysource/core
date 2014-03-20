@@ -4,12 +4,47 @@
 
   <div class="row" ng-if="team">
     <!-- LEFT COLUMN -->
-    <div class="col-lg-3 col-md-4 col-sm-4">
+    <div class="col-lg-3 col-md-3 col-sm-3">
 
-      <!-- Team Info -->
+      <!-- Team Info. Includes active Fundraiser progress if there is one running -->
       <div class="panel panel-default">
         <div class="panel-body">
           <img ng-src="{{team.large_image_url}}" class="img-responsive">
+
+          <!-- Show active Fundraiser progress if applicable -->
+          <div ng-if="activeFundraiser">
+            <br />
+
+            <!-- Time left, total pledged -->
+            <div class="row">
+              <div class="col-lg-6 col-md-6 text-center">
+                <h3 style="margin: 0;">{{activeFundraiser.total_pledged | dollars}}</h3>
+                <small class="text-muted">of <strong>{{activeFundraiser.funding_goal | dollars}}</strong></small>
+              </div>
+
+              <div class="col-lg-6 col-md-6 text-center">
+                <h3 style="margin: 0;"><time-difference end="activeFundraiser.ends_at"></time-difference></h3>
+                <small class="text-muted">remaining</small>
+              </div>
+            </div>
+
+            <br />
+
+            <!-- Progress bar for percentage of goal met -->
+            <progressbar type="success" class="progress-striped" animate="false" value="activeFundraiser.percentageOfGoalMet | atLeast:15 | atMost:100">{{activeFundraiser.percentageOfGoalMet | number:0}}%</progressbar>
+
+            <!-- Big ol' pledge button -->
+            <button class="btn btn-success btn-block btn-lg" ng-click="bigPledgeButtonClicked()">Pledge Now</button>
+          </div>
+        </div>
+
+        <!-- Flex funding in panel footer if there is an active Fundraiser -->
+        <div class="panel-footer" ng-if="activeFundraiser">
+          <small>
+            <strong>Flexible Funding: </strong>
+            <span ng-show="activeFundraiser.in_progress">This campaign will receive all funds raised even if it does not reach its goal.</span>
+            <span ng-hide="activeFundraiser.in_progress">This fundraiser has completed and will receive all funds raised.</span>
+          </small>
         </div>
       </div>
 
@@ -33,7 +68,7 @@
     </div>
 
     <!-- MAIN COLUMN -->
-    <div class="col-lg-9 col-md-8 col-sm-8">
+    <div class="col-lg-9 col-md-9 col-sm-9">
       <!-- Header -->
 
       <div ng-if="_options.showTitle">
@@ -48,13 +83,9 @@
             <a ng-href="/teams/{{ team.slug }}">Home</a>
           </li>
 
-          <li ng-class="{ active: activeNavTab('fundraiser') }">
+          <li ng-class="{ active: activeNavTab('fundraiser') }" ng-if="activeFundraiser">
             <a ng-href="/teams/{{team.slug}}/fundraiser">Fundraiser</a>
           </li>
-
-          <!--<li ng-show="is_admin || is_developer" ng-class="{ active: activeNavTab('projects') }">-->
-            <!--<a ng-href="/teams/{{team.slug}}/projects">Projects</a>-->
-          <!--</li>-->
 
           <li ng-show="team.linked_account" ng-class="{ active: activeNavTab('issues') }">
             <a ng-href="/teams/{{team.slug}}/issues">Suggested Issues</a>
@@ -72,7 +103,7 @@
             <a ng-href="/teams/{{team.slug}}/bounties">Bounties</a>
           </li>
 
-          <li class="Dropdown" ng-class="{ active: activeNavTab('manage') }">
+          <li class="Dropdown" ng-class="{ active: activeNavTab('manage') }" ng-if="is_admin || is_developer">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="glyphicon glyphicon-lock"></i>
               Manage

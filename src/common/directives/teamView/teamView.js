@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('directives').directive('teamTemplate', function($rootScope, $location, $routeParams, $api) {
+angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics) {
   return {
     restrict: 'EAC',
     replace: true,
     transclude: true,
-    templateUrl: 'common/directives/teamTemplate/templates/teamTemplate.html',
+    templateUrl: 'common/directives/teamView/templates/teamView.html',
     link: function(scope) {
 
       // TODO bring back options hash
@@ -60,17 +60,43 @@ angular.module('directives').directive('teamTemplate', function($rootScope, $loc
           $api.v2.fundraisers({
             team_id: team.id,
             include_description_html: true,
-            in_progress: true
+            in_progress: true,
+            include_rewards: true
           }).then(function(response) {
             scope.fundraisers = angular.copy(response.data);
-            scope.activeFundraiser = scope.fundraisers[0];
+
+            // Explicitly set activeFundraiser to false to let the rest of the app know that
+            // it was checked for, but not present. A value of undefined means that is still resolving fundraisers.
+            scope.activeFundraiser = scope.fundraisers[0] || false;
 
             if (scope.activeFundraiser) {
+              // Calculate percentage of goal met
               scope.activeFundraiser.percentageOfGoalMet = 100 * scope.activeFundraiser.total_pledged / scope.activeFundraiser.funding_goal;
+
+              // Fetch fundraiser rewards
+              $api.v2.fundraiserRewards(scope.activeFundraiser.id, {
+                order: '-amount'
+              }).then(function(response) {
+                scope.rewards = angular.copy(response.data);
+              });
             }
           });
         }
       });
+
+      /*****************************
+       * Pledge Buttons
+       * */
+
+      scope.pledgeRedirect = function(amount) {
+        amount = amount || 15;
+        $location.url('/teams/' + scope.team.slug + '/fundraiser/').search({ page: 'pledge', amount: amount });
+      };
+
+      scope.bigPledgeButtonClicked = function() {
+        $analytics.pledgeStart({ type: 'bigbutton' });
+        scope.pledgeRedirect();
+      };
 
     }
   };
