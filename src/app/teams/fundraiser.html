@@ -1,5 +1,38 @@
 <div ng-controller="TeamFundraiserController">
   <div team-template team="team">
+    <!-- Fundraiser Progress -->
+    <div class="panel panel-success" ng-if="activeFundraiser">
+      <div class="panel-heading text-center">
+        <span>Fundraiser Progress</span>
+      </div>
+
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 text-center">
+            <h3 style="margin: 0;"><strong>{{ 2 | number }}</strong></h3>
+            <span><ng-pluralize count="2" when="{ 'one': 'day', 'other': 'days' }"></ng-pluralize> left</span>
+          </div>
+
+          <div class="col-lg-4 col-md-4 text-center">
+            <h3 style="margin: 0;"><strong>{{ activeFundraiser.total_pledged | dollars }}</strong></h3>
+            <span>of <strong>{{ activeFundraiser.funding_goal | dollars }}</strong> raised</span>
+          </div>
+
+          <div class="col-lg-4 col-md-4 text-center">
+            <h3 style="margin: 0;"><strong>{{ 562 | number }}</strong></h3>
+            <span>pledges made</span>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="progress progress-striped" style="margin-bottom: 0;">
+          <div class="progress-bar progress-bar-success" style="width: {{activeFundraiser.percentageOfGoalMet | atLeast:15 | atMost:100 | number:0 }}%;">{{ activeFundraiser.percentageOfGoalMet | number:0 }}%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fundraiser View -->
     <div fundraiser-template fundraiser="activeFundraiser" options="{ showLeftColumn: false, showTopBackers: false, showTitle: false, showNavTabs: false }">
       <div class="markdow" ng-bind-html="activeFundraiser.description_html"></div>
     </div>

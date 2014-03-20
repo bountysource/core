@@ -64,6 +64,10 @@ angular.module('directives').directive('teamTemplate', function($rootScope, $loc
           }).then(function(response) {
             scope.fundraisers = angular.copy(response.data);
             scope.activeFundraiser = scope.fundraisers[0];
+
+            if (scope.activeFundraiser) {
+              scope.activeFundraiser.percentageOfGoalMet = 100 * scope.activeFundraiser.total_pledged / scope.activeFundraiser.funding_goal;
+            }
           });
         }
       });
