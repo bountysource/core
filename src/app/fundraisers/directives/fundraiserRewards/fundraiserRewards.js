@@ -11,7 +11,7 @@ angular.module('fundraisers').directive('fundraiserRewards', function($api, $ana
           $api.v2.fundraiserRewards(fundraiser.id, {
             order: '-amount'
           }).then(function(response) {
-            scope.rewards = angular.copy(response.data.slice(1,-1));
+            scope.rewards = angular.copy(response.data.slice(1));
           });
         }
       });
