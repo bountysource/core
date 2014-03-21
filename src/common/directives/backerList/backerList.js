@@ -13,17 +13,17 @@ angular.module('directives').directive('backerList', function() {
       };
 
       var rawOrderValue = function(value) {
-        if (/^[\-\+]/.test(value))
+        if (/^[\-\+]/.test(value)) {
           return value.slice(1);
-        else
-          return value;
+        }
+        return value;
       };
 
       var invertOrder = function(value) {
-        if (/^[\+]/.test(value))
+        if (/^[\+]/.test(value)) {
           return '-' + rawOrderValue(value);
-        else
-          return '+' + rawOrderValue(value);
+        }
+        return '+' + rawOrderValue(value);
       };
 
       scope.changeOrder = function(value) {

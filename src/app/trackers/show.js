@@ -68,30 +68,30 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
     // Load issues for tracker. If the tracker was just created (has not been synced yet),
     // throw in a timeout to allow time for issues to be added
     $timeout(function() {
-      $scope.getIssues()
-      }, tracker.synced_at ? 0 : 2500);
+      $scope.getIssues();
+    }, tracker.synced_at ? 0 : 2500);
 
     $scope.tracker = tracker;
     return tracker;
   });
   
   //set the serach parameters
-   $scope.setSearchParameters = function (params) {
+  $scope.setSearchParameters = function (params) {
     $scope.order = params.order;
     $scope.getIssues($scope.page);
   };
 
   // pagination settings
   function setPagination (pagination_data) {
-    $scope.page = pagination_data.page
+    $scope.page = pagination_data.page;
     $scope.total_items = parseInt(pagination_data.total_items, 10);
     $scope.maxSize = 10;
     $scope.per_page = pagination_data.per_page;
-  };
+  }
 
   // toggle advanced search collapse
   $scope.toggle_advanced_search = function () {
-    $scope.show_advanced_search = !$scope.show_advanced_search
+    $scope.show_advanced_search = !$scope.show_advanced_search;
   };
 
   // create the params for the issue status button-group filter
@@ -103,13 +103,13 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
     } else {
       return null;
     }
-  };
+  }
 
   function createPaidStatusParam (issue_status) {
     if (issue_status === "paid_out") {
-      return true
+      return true;
     } else {
       return null;
     }
-  };
+  }
 });

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module("app").controller('TeamIssuesController', function ($scope, $api) {
 
   $scope.team_promise.then(function (team) {
@@ -71,7 +73,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
 
   // toggle advanced search collapse
   $scope.toggle_advanced_search = function () {
-    $scope.show_advanced_search = !$scope.show_advanced_search
+    $scope.show_advanced_search = !$scope.show_advanced_search;
   };
 
   // get tracker_ids for tracker_filtering
@@ -99,7 +101,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
 
   function createPaidStatusParam (issue_status) {
     if (issue_status === "paid_out") {
-      return true
+      return true;
     } else {
       return null;
     }
