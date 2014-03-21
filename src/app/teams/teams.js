@@ -54,6 +54,12 @@ angular.module('teams')
       trackEvent: 'View Team Create'
     }, defaultRouteOptions));
 
+    $routeProvider.when('/teams/:id/projects/manage', angular.extend({
+      templateUrl: 'app/teams/manage_projects.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Team Manage Projects'
+    }, defaultRouteOptions));
+
     $routeProvider.when('/teams/:id/projects', angular.extend({
       templateUrl: 'app/teams/projects.html',
       controller: 'BaseTeamController',
@@ -93,6 +99,12 @@ angular.module('teams')
 
     $routeProvider.when('/teams/:id/issues', angular.extend({
       templateUrl: 'app/teams/issues.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Team Issues'
+    }, defaultRouteOptions));
+
+    $routeProvider.when('/teams/:id/updates', angular.extend({
+      templateUrl: 'app/teams/updates.html',
       controller: 'BaseTeamController',
       trackEvent: 'View Team Issues'
     }, defaultRouteOptions));

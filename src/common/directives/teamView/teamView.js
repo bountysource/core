@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics) {
+angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics, $modal) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -30,11 +30,12 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         else if (tab === 'bounties' && (/^\/teams\/[^\/]+\/bounties$/).test($location.path())) { return true; }
         else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
         else if (tab === 'backers' && (/^\/teams\/[^\/]+\/backers$/).test($location.path())) { return true; }
+        else if (tab === 'updates' && (/^\/teams\/[^\/]+\/updates$/).test($location.path())) { return true; }
 
         else if (tab === 'manage' && (/^\/teams\/[^\/]+\/members\/manage$/).test($location.path())) { return true; }
         else if (tab === 'manage' && (/^\/teams\/[^\/]+\/settings$/).test($location.path())) { return true; }
         else if (tab === 'manage' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
-        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/projects/).test($location.path())) { return true; }
+        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/projects\/manage$/).test($location.path())) { return true; }
 
         else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
         else if (tab === 'suggested_issues' && (/^\/teams\/[^\/]+\/suggested_issues$/).test($location.path())) { return true; }
@@ -67,6 +68,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
           $api.v2.fundraisers({
             team_id: team.id,
             include_description_html: true,
+            include_owner: true,
             in_progress: true,
             include_rewards: true
           }).then(function(response) {
@@ -77,6 +79,14 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             scope.activeFundraiser = scope.fundraisers[0] || false;
 
             if (scope.activeFundraiser) {
+              // Is the authenticated user the owner of the Fundraiser?
+              scope.canManageActiveFundraiser = false;
+              $rootScope.$watch('current_person', function(person) {
+                if (person) {
+                  scope.canManageActiveFundraiser = (scope.activeFundraiser.owner.id === person.id);
+                }
+              });
+
               // Calculate percentage of goal met
               scope.activeFundraiser.percentageOfGoalMet = 100 * scope.activeFundraiser.total_pledged / scope.activeFundraiser.funding_goal;
 
@@ -139,6 +149,70 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         }
       });
 
+      /*****************************
+       * New Update (if owner of active fundraiser)
+       * */
+
+      scope.showNewUpdateModal = function() {
+        var parentScope = scope;
+
+        scope.$watch('activeFundraiser', function(fundraiser) {
+          $modal.open({
+            templateUrl: 'app/fundraisers/templates/newUpdateModal.html',
+            backdrop: true,
+            controller: function($scope, $window, $cookieStore, $api, $modalInstance) {
+              $scope.fundraiser = angular.copy(parentScope.fundraiser);
+
+              $scope.cookieName = 'fr' + fundraiser.id + 'newUpdate';
+
+              $scope.newUpdate = {
+                title: ($cookieStore.get($scope.cookieName) || {}).title,
+                body: ($cookieStore.get($scope.cookieName) || {}).body
+              };
+
+              $scope.close = function() {
+                $modalInstance.dismiss();
+              };
+
+              $scope.discard = function() {
+                if ($window.confirm("Discard update?")) {
+                  $cookieStore.remove($scope.cookieName);
+                  $scope.close();
+                }
+              };
+
+              $scope.publishUpdate = function() {
+                if ($window.confirm("Publish update?")) {
+                  var payload = angular.copy($scope.newUpdate);
+
+                  $api.v2.createFundraiserUpdate(fundraiser.id, payload).then(function(response) {
+                    if (response.status === 201) {
+                      // Append to `fundraiser.updates` if present on parentScope
+                      if (parentScope.fundraiser && parentScope.fundraiser.updates) {
+                        parentScope.fundraiser.updates.push(angular.copy(response.data));
+                      }
+
+                      // Append to `updates` if present on parentScope
+                      if (parentScope.updates) {
+                        parentScope.updates.push(angular.copy(response.data));
+                      }
+
+                      $cookieStore.remove($scope.cookieName);
+                      $modalInstance.close();
+                    } else {
+                      $scope.alert = { type: 'danger', message: response.data.error };
+                    }
+                  });
+                }
+              };
+
+              $scope.saveUpdateToCookie = function() {
+                $cookieStore.put($scope.cookieName, $scope.newUpdate);
+              };
+            }
+          });
+        });
+      };
     }
   };
 });

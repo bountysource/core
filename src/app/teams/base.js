@@ -39,13 +39,6 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
       $scope.is_admin   = $scope.is_admin || false;
       $scope.is_developer = $scope.is_developer || false;
       $scope.is_public  = $scope.is_public || false;
-
-      // a little hacky: If you lack the permissions, or are not logged in on /projects, redirect to /
-      if (!($scope.is_admin || $scope.is_developer) || person === false) {
-        if ((/^\/teams\/[^\/]+\/projects$/).test($location.path())) {
-          $location.path("/teams/"+$routeParams.id).replace();
-        }
-      }
     });
 
     $scope.members = angular.copy(members);

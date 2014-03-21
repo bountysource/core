@@ -1,26 +1,27 @@
 <div>
   <div class="row" ng-repeat="i in range()">
     <div class="col-md-{{12/perRow}} col-sm-{{12/perRow}}" ng-repeat="item in array.slice(i, i + perRow)">
-        <!-- Teams -->
-        <a ng-if="objectType == 'team'" ng-href="/teams/{{item.slug}}" class="text-center thumbnail">
-          <img class="img-responsive img-rounded" ng-src="{{item.image_url}}">
-          {{item.name}}
-        </a>
-        <!-- Trackers -->
-        <a ng-if="objectType == 'tracker'" ng-href="{{item.frontend_path}}" class="text-center thumbnail">
-          <img class="img-responsive img-rounded" ng-src="{{item.image_url}}">
-          {{item.name}}
-        </a>
+      <!-- Teams -->
+      <a ng-if="objectType == 'team'" ng-href="/teams/{{item.slug}}" class="text-center thumbnail">
+        <img class="img-responsive img-rounded" ng-src="{{item.image_url}}">
+        {{item.name}}
+      </a>
 
-        <div ng-if="objectType =='team-project'" class="thumbnail text-center">
-          <button type="button"  class="close" ng-click="dismissAction({tracker: item})">
-            &times;
-          </button>
-          <a ng-href="{{ item.frontend_path }}">
-            <img class="img-responsive img-rounded" ng-src="{{ item.image_url }}"></img>
-            {{ item.name }}
-          </a>
-        </div>
+      <!-- Trackers -->
+      <a ng-if="objectType == 'tracker'" ng-href="{{item.frontend_path}}" class="text-center thumbnail">
+        <img class="img-responsive img-rounded" ng-src="{{item.image_url}}">
+        {{item.name}}
+      </a>
+
+      <div ng-if="objectType =='team-project'" class="thumbnail text-center">
+        <button type="button"  class="close" ng-click="dismissAction({tracker: item})" ng-if="dismissAction">
+          &times;
+        </button>
+        <a ng-href="{{ item.frontend_path }}">
+          <img class="img-responsive img-rounded" ng-src="{{ item.image_url }}"></img>
+          {{ item.name }}
+        </a>
+      </div>
     </div>
   </div>
 </div>

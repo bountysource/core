@@ -18,6 +18,31 @@
         </div>
 
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <!-- Fuck -->
+          <div class="panel panel-info" ng-if="can_manage">
+            <div class="panel-heading text-center">Manage Fundraiser</div>
+
+            <div class="panel-body">
+              <!-- New Update button -->
+              <button class="btn btn-block btn-info btn-lg" ng-click="showNewUpdateModal()" ng-show="fundraiser.published && fundraiser.in_progress">
+                <i class="glyphicon glyphicon-pencil"></i>
+                <span>Update</span>
+              </button>
+
+              <!-- Edit button -->
+              <a class="btn btn-block btn-info btn-lg" ng-href="/fundraisers/{{fundraiser.slug}}/edit" ng-show="!fundraiser.published">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span>Edit</span>
+              </a>
+
+              <!-- Publish button -->
+              <button class="btn btn-block btn-info btn-lg" ng-click="publishFundraiser(fundraiser)" ng-disabled="!fundraiser.publishable" ng-show="!fundraiser.published">
+                <i class="glyphicon glyphicon-globe"></i>
+                <span>Publish</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Pledge Buttons -->
           <div>
             <div class="panel panel-primary" ng-if="activeFundraiser.published && activeFundraiser.in_progress" ng-if="activeFundraiser.published && activeFundraiser.in_progress">
