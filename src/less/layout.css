@@ -86,7 +86,7 @@ a:hover {
   margin-bottom: 15px;
 }
 
-.table td.center-height { vertical-align: middle;}
+
 
 .img-responsive { width: 100%;}
 
@@ -98,3 +98,8 @@ a:hover {
 
 .panel-heading.narrow { padding-top: 0px; padding-bottom: 0px;}
 .panel.no-margin { margin-bottom: 0px;}
+
+.table td.center-height { vertical-align: middle; }
+
+/* Center all td in a table, yay */
+.table.table-centered tr > td { vertical-align: middle; }
