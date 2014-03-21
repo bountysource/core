@@ -3,6 +3,7 @@
 angular.module('fundraisers').controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
   // $sanitize but allow iframes (i.e. youtube videos)
   $scope.fundraiserPromise.then(function(fundraiser) {
+
     if (fundraiser.error) {
       // API returns error if you are not authorized to view it (it hasn't been published)
       // Just redirect to the index page

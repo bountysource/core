@@ -69,6 +69,7 @@ angular.module('fundraisers')
 
   .controller('FundraiserController', function($scope, $routeParams, $filter, $location, $api, $modal) {
     $scope.fundraiserPromise = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
+      if (fundraiser.team) { teamRedirect(fundraiser.team) };
       $scope.fundraiser = angular.copy(fundraiser);
 
       // Not sure if these are used anywhere else besides fundraiserManageButtons, leave for now.
@@ -77,6 +78,28 @@ angular.module('fundraisers')
 
       return $scope.fundraiser;
     });
+
+    function teamRedirect (team) {
+      var path = $location.path();
+      var slug = team.slug;
+      switch(true) {
+      case (/\/fundraisers\/[a-z-_0-9]+$/).test(path):
+        $location.path("/teams/"+slug+"/fundraiser")
+        break;
+
+      case (/\/fundraisers\/[a-z-_0-9]+\/updates$/).test(path):
+        $location.path("/teams/"+slug+"/updates")
+        break;
+
+      case (/\/fundraisers\/[a-z-_0-9]+\/backers$/).test(path):
+        $location.path("/teams/"+slug+"/backers")
+        break;
+
+      case (/\/fundraisers\/[a-z-_0-9]+\/pledge$/).test(path):
+        $location.url("/teams/"+slug+"/fundraiser?page=pledge")
+        break;
+      }
+    };
 
     // Display an update in a modal
     $scope.showUpdateModal = function(update) {

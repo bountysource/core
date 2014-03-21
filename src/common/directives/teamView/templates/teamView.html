@@ -54,8 +54,8 @@
         <ul class="top-backers">
           <li class="row" ng-repeat="backer in topBackers">
             <a owner-href="backer">
-              <img ng-if="backer" ng-src="{{backer.image_url_medium}}"  tooltip="{{backer.display_name}} - {{backer.amount | dollars}}" tooltip-placement="left" />
-              <img ng-if="!backer" src="images/anon.jpg" tooltip="Anonymous - {{backer.amount | dollars}}" tooltip-placement="left" />
+              <img ng-if="backer" ng-src="{{backer.image_url_medium}}"  tooltip="{{backer.display_name}} - {{backer.amount | dollars}}" tooltip-placement="bottom" />
+              <img ng-if="!backer" src="images/anon.jpg" tooltip="Anonymous - {{backer.amount | dollars}}" tooltip-placement="bottom" />
             </a>
           </li>
         </ul>
