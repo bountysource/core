@@ -23,14 +23,18 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       scope.activeNavTab = function(tab) {
         if (tab === 'home' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
         else if (tab === 'fundraiser' && (/^\/teams\/[^\/]+\/fundraisers?$/).test($location.path())) { return true; }
+        else if (tab === 'fundraiser' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
+
         else if (tab === 'members' && (/^\/teams\/[^\/]+\/members$/).test($location.path())) { return true; }
         else if (tab === 'activity' && (/^\/teams\/[^\/]+\/activity$/).test($location.path())) { return true; }
-        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/members\/manage$/).test($location.path())) { return true; }
-        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/settings$/).test($location.path())) { return true; }
-        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
         else if (tab === 'projects' && (/^\/teams\/[^\/]+\/projects+$/).test($location.path())) { return true; }
         else if (tab === 'bounties' && (/^\/teams\/[^\/]+\/bounties$/).test($location.path())) { return true; }
         else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
+        else if (tab === 'backers' && (/^\/teams\/[^\/]+\/backers$/).test($location.path())) { return true; }
+
+        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/members\/manage$/).test($location.path())) { return true; }
+        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/settings$/).test($location.path())) { return true; }
+        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
       };
 
       /*****************************
@@ -45,7 +49,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             per_page: 10,
             order: '+amount'
           }).then(function(response) {
-            scope.backers = angular.copy(response.data);
+            scope.topBackers = angular.copy(response.data);
           });
         }
       });
@@ -97,6 +101,21 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         $analytics.pledgeStart({ type: 'bigbutton' });
         scope.pledgeRedirect();
       };
+
+      /*****************************
+       * Team Backers (All of em)
+       * */
+
+      scope.$watch('team', function(team) {
+        if (team) {
+          $api.v2.backers({
+            team_id: team.id,
+            order: '+amount'
+          }).then(function(response) {
+            scope.backers = angular.copy(response.data);
+          });
+        }
+      });
 
     }
   };

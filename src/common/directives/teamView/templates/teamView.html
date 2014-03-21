@@ -55,7 +55,7 @@
         </div>
 
         <ul class="top-backers">
-          <li class="row" ng-repeat="backer in backers">
+          <li class="row" ng-repeat="backer in topBackers">
             <a owner-href="backer">
               <img ng-if="backer" ng-src="{{backer.image_url_medium}}"  tooltip="{{backer.display_name}} - {{backer.amount | dollars}}" tooltip-placement="left" />
               <img ng-if="!backer" src="images/anon.jpg" tooltip="Anonymous - {{backer.amount | dollars}}" tooltip-placement="left" />
@@ -79,12 +79,12 @@
       <!-- Nav Tabs -->
       <div ng-if="_options.showNavTabs">
         <ul class="nav nav-tabs">
-          <li ng-class="{ active: activeNavTab('home') }" ng-if="is_admin || is_developer">
-            <a ng-href="/teams/{{ team.slug }}">Home</a>
-          </li>
+          <!--<li ng-class="{ active: activeNavTab('home') }" ng-if="is_admin || is_developer">-->
+            <!--<a ng-href="/teams/{{ team.slug }}">Home</a>-->
+          <!--</li>-->
 
           <li ng-class="{ active: activeNavTab('fundraiser') }" ng-if="activeFundraiser">
-            <a ng-href="/teams/{{team.slug}}/fundraiser">Fundraiser</a>
+            <a ng-href="/teams/{{team.slug}}">Fundraiser</a>
           </li>
 
           <li ng-show="team.linked_account" ng-class="{ active: activeNavTab('issues') }">
@@ -103,6 +103,10 @@
             <a ng-href="/teams/{{team.slug}}/bounties">Bounties</a>
           </li>
 
+          <li ng-show="backers.length > 0" ng-class="{ active: activeNavTab('backers') }">
+            <a ng-href="/teams/{{team.slug}}/backers">Backers</a>
+          </li>
+
           <li class="Dropdown" ng-class="{ active: activeNavTab('manage') }" ng-if="is_admin || is_developer">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="glyphicon glyphicon-lock"></i>
@@ -113,6 +117,10 @@
             <ul class="dropdown-menu">
               <li ng-show="is_admin">
                 <a ng-href="/teams/{{team.slug}}/members/manage">Members</a>
+              </li>
+
+              <li ng-show="is_admin || is_developer">
+                <a ng-href="/teams/{{team.slug}}/projects">Projects</a>
               </li>
 
               <li ng-show="is_admin || is_developer">

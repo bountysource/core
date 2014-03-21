@@ -1,30 +1,15 @@
 'use strict';
 
-angular.module('app').controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle, $route) {
+angular.module('app').controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle, $rootScope) {
   $pageTitle.set("Teams");
 
   $scope.team_promise = $api.team_get($routeParams.id).then(function(team) {
     $pageTitle.set(team.name, "Teams");
-    team = $scope.process_owned_unowned_trackers(team);
 
-    $scope.team = team;
-    return team;
+    $scope.team = angular.copy(team);
+
+    return $scope.team;
   });
-
-  $scope.process_owned_unowned_trackers = function(team) {
-    team.owned_trackers = [];
-    team.unowned_trackers = [];
-
-    // set owned flag for all trackers
-    for (var i=0; i<team.trackers.length; i++) {
-      team.trackers[i].$owned = team.trackers[i].owner && (/^Team(?:::.*)*$/).test(team.trackers[i].owner.type) && team.trackers[i].owner.id === team.id;
-
-      // push to owned_trackers or unowned_trackers
-      (team.trackers[i].$owned ? team.owned_trackers : team.unowned_trackers).push(team.trackers[i]);
-    }
-
-    return team;
-  };
 
   $scope.set_team = function(team) {
     $scope.team = team;
@@ -66,5 +51,47 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
 
     $scope.members = angular.copy(members);
   });
+
+
+  $scope.isTeamMember = function(team, person) {
+    for (var i=0; $scope.members && i<$scope.members.length; i++) {
+      if ($scope.members[i].id === person.id) {
+        return true;
+        break;
+      }
+    }
+    return false;
+  };
+
+  $scope.isTeamAdmin = function(team, person) {
+    for (var i=0; $scope.members && i<$scope.members.length; i++) {
+      if ($scope.members[i].id === person.id) {
+        return $scope.members[i].is_admin;
+        break;
+      }
+    }
+    return false;
+  };
+
+  $scope.isTeamDeveloper = function(team, person) {
+    for (var i=0; $scope.members && i<$scope.members.length; i++) {
+      if ($scope.members[i].id === person.id) {
+        return true;
+        return $scope.members[i].is_developer;
+        break;
+      }
+    }
+    return false;
+  };
+
+  $scope.isPublicTeamMember = function(team, person) {
+    for (var i=0; $scope.members && i<$scope.members.length; i++) {
+      if ($scope.members[i].id === person.id) {
+        return $scope.members[i].is_public;
+        break;
+      }
+    }
+    return false;
+  };
 
 });
