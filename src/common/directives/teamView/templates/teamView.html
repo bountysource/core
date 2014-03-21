@@ -1,7 +1,4 @@
 <div>
-
-  <loading-bar ng-if="!team">Loading Team...</loading-bar>
-
   <div class="row" ng-if="team">
     <!-- LEFT COLUMN -->
     <div class="col-lg-3 col-md-3 col-sm-3">
@@ -79,12 +76,12 @@
       <!-- Nav Tabs -->
       <div ng-if="_options.showNavTabs">
         <ul class="nav nav-tabs">
-          <!--<li ng-class="{ active: activeNavTab('home') }" ng-if="is_admin || is_developer">-->
-            <!--<a ng-href="/teams/{{ team.slug }}">Home</a>-->
-          <!--</li>-->
+          <li ng-class="{ active: activeNavTab('home') }" ng-if="is_admin || is_developer">
+            <a ng-href="/teams/{{ team.slug }}">Home</a>
+          </li>
 
           <li ng-class="{ active: activeNavTab('fundraiser') }" ng-if="activeFundraiser">
-            <a ng-href="/teams/{{team.slug}}">Fundraiser</a>
+            <a ng-href="/teams/{{team.slug}}/fundraiser">Fundraiser</a>
           </li>
 
           <li ng-class="{ active: activeNavTab('issues') }">
@@ -143,7 +140,8 @@
       </div>
 
       <!-- Content! -->
-      <div ng-transclude></div>
+      <div ng-transclude>
+      </div>
     </div>
   </div>
 

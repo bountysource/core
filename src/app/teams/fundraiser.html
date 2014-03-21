@@ -8,8 +8,7 @@
 
   <div team-view team="team">
     <!-- Fundraiser View -->
-    <div ng-show="activePage()">
-
+    <div ng-show="activePage()" ng-if="activeFundraiser">
       <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
           <div fundraiser-template fundraiser="activeFundraiser"

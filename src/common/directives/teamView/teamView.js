@@ -23,7 +23,6 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       scope.activeNavTab = function(tab) {
         if (tab === 'home' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
         else if (tab === 'fundraiser' && (/^\/teams\/[^\/]+\/fundraisers?$/).test($location.path())) { return true; }
-        else if (tab === 'fundraiser' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
 
         else if (tab === 'members' && (/^\/teams\/[^\/]+\/members$/).test($location.path())) { return true; }
         else if (tab === 'activity' && (/^\/teams\/[^\/]+\/activity$/).test($location.path())) { return true; }
@@ -35,6 +34,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         else if (tab === 'manage' && (/^\/teams\/[^\/]+\/members\/manage$/).test($location.path())) { return true; }
         else if (tab === 'manage' && (/^\/teams\/[^\/]+\/settings$/).test($location.path())) { return true; }
         else if (tab === 'manage' && (/^\/teams\/[^\/]+\/account$/).test($location.path())) { return true; }
+        else if (tab === 'manage' && (/^\/teams\/[^\/]+\/projects/).test($location.path())) { return true; }
 
         else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
         else if (tab === 'suggested_issues' && (/^\/teams\/[^\/]+\/suggested_issues$/).test($location.path())) { return true; }
@@ -86,6 +86,13 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
               }).then(function(response) {
                 scope.rewards = angular.copy(response.data);
               });
+
+              // Super lame hack to go to active fundraiser tab if trying to access root and not an admin
+              if (/^\/teams\/[^\/]+$/.test($location.path())) {
+                if (!scope.is_admin || !scope.is_developer) {
+                  $location.url('/teams/' + $routeParams.id + '/fundraiser');
+                }
+              }
             }
           });
         }

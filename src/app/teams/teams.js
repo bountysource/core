@@ -68,7 +68,7 @@ angular.module('teams')
     }, defaultRouteOptions));
 
     $routeProvider.when('/teams/:id', angular.extend({
-      templateUrl: 'app/teams/fundraiser.html',
+      templateUrl: 'app/teams/show.html',
       controller: 'BaseTeamController',
       trackEvent: 'View Team'
     }, defaultRouteOptions));
