@@ -23,7 +23,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
         bounty_max: $scope.bounty_max,
         order: $scope.order || "+bounty",
         page: page || 1,
-        per_page: $scope.per_page || 30,
+        per_page: $scope.per_page || 30
       }).then(function (response) {
         $scope.issues = response.data;
 
@@ -63,11 +63,11 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
 
   // pagination settings
   function setPagination (pagination_data) {
-    $scope.page = pagination_data.page
+    $scope.page = pagination_data.page;
     $scope.total_items = parseInt(pagination_data.total_items, 10);
     $scope.maxSize = 10;
     $scope.per_page = pagination_data.per_page;
-  };
+  }
 
   // toggle advanced search collapse
   $scope.toggle_advanced_search = function () {
@@ -82,9 +82,9 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
       if ($scope.selected_trackers[tracker_ids[i]]) {
         processed_tracker_ids.push(tracker_ids[i]);
       }
-    };
+    }
     return processed_tracker_ids;
-  };
+  }
 
   // create the params for the issue status button-group filter
   function createIssueStatusParam (issue_status) {
@@ -95,7 +95,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
     } else {
       return null;
     }
-  };
+  }
 
   function createPaidStatusParam (issue_status) {
     if (issue_status === "paid_out") {
@@ -103,6 +103,6 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
     } else {
       return null;
     }
-  };
+  }
 
 });

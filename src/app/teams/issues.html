@@ -11,7 +11,7 @@
     <div class="well well-sm">
       <div class="row">
         <div class="col-xs-8 col-sm-8 col-md-8">
-          <form class="form" ng-submit="getIssues(1)">
+          <form class="form" ng-submit="$parent.$parent.getIssues(1)">
             <div class="form-group" ng-class="{'narrow': !show_advanced_search}">
               <div class="input-group">
                 <input type="text" class="form-control" ng-model="search" placeholder="Search issues"></input>
@@ -32,28 +32,28 @@
       </div>
       <div class="row" ng-show="show_advanced_search">
         <div class="col-xs-4 col-sm-4 col-md-4 text-center">
-          <form class="form-inline" ng-submit="getIssues(page)">
+          <form class="form-inline" ng-submit="$parent.$parent.getIssues(page)">
             <div class="form-group" ng-class="{'has-error': show_bounty_error}">
               <div class="input-group" style="width: 110px;">
                 <span class="input-group-addon">$</span>
-                <input type="number" class="form-control" ng-model="bounty_min" min="1" placeholder="50"></input>
+                <input type="number" class="form-control" ng-model="$parent.$parent.bounty_min" min="1" placeholder="50"></input>
               </div>
             </div> -
             <div class="form-group" ng-class="{'has-error': show_bounty_error}">
               <div class="input-group" style="width: 110px">
                 <span class="input-group-addon">$</span>
-                <input type="number" class="form-control" ng-model="bounty_max" min="1" placeholder="1000"></input>
+                <input type="number" class="form-control" ng-model="$parent.$parent.bounty_max" min="1" placeholder="1000"></input>
               </div>
             </div>
-            <input type="submit" style="visibility: hidden;"></input>
+            <input type="submit" style="visibility: hidden;" />
           </form>
-          <div class="alert alert-danger text-center" ng-show="show_bounty_error" style="margin-bottom:0px; padding-top: 5px; padding-bottom: 5px;">Invalid Range</div>
+          <div class="alert alert-danger text-center" ng-show="show_bounty_error" style="margin-bottom: 0px; padding-top: 5px; padding-bottom: 5px;">Invalid Range</div>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 text-center">
           <div class="btn-group" style="display: inline-block">
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'open'}" ng-model="issueStatus" btn-radio="'open'" ng-change="getIssues(page)">Open</button>
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'closed'}" ng-model="issueStatus" btn-radio="'closed'" ng-change="getIssues(page)">Closed</button>
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'paid_out'}" ng-model="issueStatus" btn-radio="'paid_out'" ng-change="getIssues(page)">Paid Out</button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'open'}" ng-model="$parent.$parent.issueStatus" btn-radio="'open'" ng-change="$parent.$parent.getIssues(page)">Open</button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'closed'}" ng-model="$parent.$parent.issueStatus" btn-radio="'closed'" ng-change="$parent.$parent.getIssues(page)">Closed</button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'paid_out'}" ng-model="$parent.$parent.issueStatus" btn-radio="'paid_out'" ng-change="$parent.$parent.getIssues(page)">Paid Out</button>
           </div>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4">
@@ -65,7 +65,7 @@
                 <tr ng-repeat="tracker in trackers">
                   <td >
                     <label style="cursor: pointer;">
-                      <input type="checkbox" ng-model="selected_trackers[tracker.id]" ng-change="getIssues(page)"></input>
+                      <input type="checkbox" ng-model="$parent.$parent.selected_trackers[tracker.id]" ng-change="$parent.$parent.getIssues(page)"></input>
                       <span>{{ tracker.display_name }}</span>
                     </label>
                   </td>
