@@ -106,14 +106,15 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       };
 
       /*****************************
-       * Team Backers (All of em)
+       * All Team Backers
        * */
 
       scope.$watch('team', function(team) {
         if (team) {
           $api.v2.backers({
             team_id: team.id,
-            order: '+amount'
+            order: '+amount',
+            per_page: 100
           }).then(function(response) {
             scope.backers = angular.copy(response.data);
           });

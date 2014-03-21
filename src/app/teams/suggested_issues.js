@@ -78,18 +78,22 @@ angular.module('app').controller('SuggestedTeamIssuesController', function ($sco
 
   function updateIssues(issues_data) {
     if (issues_data.meta) {
-      $scope.pagination_object = issues_data.meta.pagination;
+      $scope.pagination_object = angular.copy(issues_data.meta.pagination);
     }
-    $scope.issues = issues_data.data;
+    $scope.issues = angular.copy(issues_data.data);
     $scope.issues_resolved = true;
+
     var new_params = angular.extend($routeParams, {
       show_team_issues:    ($scope.search_parameters.show_team_issues) ? 1 : 0,
       show_related_issues: ($scope.search_parameters.show_related_issues) ? 1 : 0
     });
+
     if ($scope.pagination_object) {
-      angular.extend(new_params, {page: $scope.pagination_object.page});
+      // angular.extend(new_params, { page: $scope.pagination_object.page });
     }
+
     delete new_params.id;
+
     $location.search(new_params);
   }
 
