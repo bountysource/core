@@ -97,12 +97,23 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       scope.pledgeRedirect = function(amount) {
         amount = amount || 15;
-        $location.url('/teams/' + scope.team.slug + '/fundraiser/').search({ page: 'pledge', amount: amount });
+        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge', amount: amount });
+        $analytics.pledgeStart({ amount: amount, type: 'buttons' });
+      };
+
+      scope.pledgeWithRewardRedirect = function(reward) {
+        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge', amount: reward.amount });
+        $analytics.pledgeStart({ amount: reward.amount, type: 'reward' });
       };
 
       scope.bigPledgeButtonClicked = function() {
+        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge' });
         $analytics.pledgeStart({ type: 'bigbutton' });
-        scope.pledgeRedirect();
+      };
+
+      scope.customPledgeRedirect = function(amount) {
+        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge', amount: amount });
+        $analytics.pledgeStart({ amount: amount, type: 'custom' });
       };
 
       /*****************************
