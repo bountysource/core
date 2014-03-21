@@ -91,6 +91,11 @@ angular.module('fundraisers')
         $location.path("/teams/"+slug+"/updates")
         break;
 
+      case (/\/fundraisers\/[a-z-_0-9]+\/updates\/([0-9]+)$/).test(path):
+        var match = path.match(/\/fundraisers\/[a-z-_0-9]+\/updates\/([0-9]+)$/);
+        $location.path("/teams/"+slug+"/updates/"+match[1])
+        break;
+
       case (/\/fundraisers\/[a-z-_0-9]+\/backers$/).test(path):
         $location.path("/teams/"+slug+"/backers")
         break;
