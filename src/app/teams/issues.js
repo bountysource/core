@@ -1,98 +1,108 @@
-'use strict';
-angular.module('app').controller('TeamIssuesController', function ($scope, $routeParams, $api, $window, $location) {
-  var parseParams = function (param) {
-    if ($window.parseInt(param, 10).toString() === "NaN") {
-      return true;
-    } else if ($window.parseInt(param, 10) === 1) {
-      return true;
-    } else if ($window.parseInt(param, 10) === 0) {
-      return false;
-    }
-  };
-  // render defaults
-  $scope.maxPaginationSize = 15; // how many pages to show in the pagination bar
-  $scope.issues_resolved = false;
-  $scope.show_advanced_search = false;
-  $scope.search_parameters = {
-    show_team_issues:    parseParams($routeParams.show_team_issues),
-    show_related_issues: parseParams($routeParams.show_related_issues),
-    direction:           "desc",
-    order:               "rank"
-  };
-  // query object
-  $scope.query = {};
-  $scope.toggle_advanced_search = function () {
-    $scope.show_advanced_search = !$scope.show_advanced_search;
-    // when hiding the advanced_search, clear those fields
-    if (!$scope.show_advanced_search) {
-      delete $scope.search_parameters.query;
-      delete $scope.search_parameters.created_at;
-      delete $scope.search_parameters.active_since;
-    }
-  };
-  $scope.update_sort = function (column, page) {
-    if ($scope.search_parameters.order === column) {
-      // if its the same column, simply reverse the direction
-      if ($scope.search_parameters.direction === 'asc') {
-        $scope.search_parameters.direction = 'desc';
-      } else {
-        $scope.search_parameters.direction = 'asc';
+angular.module("app").controller('TeamIssuesController', function ($scope, $api) {
+
+  $scope.team_promise.then(function (team) {
+
+    $scope.getIssues = function (page) {
+
+      if($scope.bounty_max < $scope.bounty_min) {
+        $scope.show_bounty_error = true;
+        return;
       }
-    } else {
-      $scope.search_parameters.direction = "desc"; //assume that if you are changing the order you want desc already
-    }
-    $scope.search_parameters.order = column;
-    $scope.get_team_issues(page);
-  };
-  $scope.get_team_issues = function (page, per_page) {
-    $scope.team_promise.then(function (team) {
-      var dogeParams = buildSearchParameters(team);
-      if (dogeParams) {
-        $api.page(page).perPage(per_page || 25).team_issues(dogeParams).then(function (issues_response) {
-          updateIssues(issues_response);
+
+      $scope.show_bounty_error = false;
+      var selected_tracker_ids = getTrackerIds();
+      $api.v2.issues({
+        search: $scope.search || null,
+        tracker_owner_type: team.type,
+        tracker_owner_id: team.id,
+        include_tracker: true,
+        tracker_id: selected_tracker_ids.toString() || null,
+        can_add_bounty: createIssueStatusParam($scope.issueStatus),
+        paid_out: createPaidStatusParam($scope.issueStatus),
+        bounty_min: $scope.bounty_min,
+        bounty_max: $scope.bounty_max,
+        order: $scope.order || "+bounty",
+        page: page || 1,
+        per_page: $scope.per_page || 30,
+      }).then(function (response) {
+        $scope.issues = response.data;
+
+        setPagination({
+          total_pages: response.headers()['total-pages'],
+          total_items: response.headers()['total-items'],
+          page: response.config.params.page,
+          per_page: response.config.params.per_page
         });
-      } else {
-        $scope.issues = [];
-        $scope.pagination_object = false;
-        updateIssues($scope.issues);
-      }
-    });
+      });
+    };
+
+    $scope.getTrackers = function (team) {
+      $api.v2.trackers({
+        tracker_owner_id: team.id,
+        tracker_owner_type: team.type
+      }).then(function (response) {
+        $scope.trackers = response.data;
+      });
+    };
+
+    $scope.getTrackers(team);
+
+    $scope.getIssues();
+  });
+
+  // initialize selected_trackers object
+  $scope.selected_trackers = {};
+
+  // initialize issue-status filter button group
+  $scope.issueStatus = "open";
+
+  $scope.setSearchParameters = function (params) {
+    $scope.order = params.order;
+    $scope.getIssues($scope.page);
   };
-  function buildSearchParameters(team) {
-    // build parameters for these cases:
-    // 1. Return ONLY issues owned by the team (owner_id + owner_type)s
-    // 2. Return ONLY those issues NOT owned by the team (owner)
-    // 3. Return all issues associated with the team (combination of 1 + 2)
-    var params = { order_by: 'IssueRank::TeamRank', team_id: team.id };
-    if ($scope.search_parameters.show_team_issues && $scope.search_parameters.show_related_issues) {
-      return params;
-    } else if ($scope.search_parameters.show_team_issues) {
-      return angular.extend({ tracker_owner_id: team.id, tracker_owner_type: team.type }, params);
-    } else if ($scope.search_parameters.show_related_issues) {
-      return angular.extend({ tracker_owner_id: "!" + team.id, tracker_owner_type: "!" + team.type }, params);
-    } else {
+
+  // pagination settings
+  function setPagination (pagination_data) {
+    $scope.page = pagination_data.page
+    $scope.total_items = parseInt(pagination_data.total_items, 10);
+    $scope.maxSize = 10;
+    $scope.per_page = pagination_data.per_page;
+  };
+
+  // toggle advanced search collapse
+  $scope.toggle_advanced_search = function () {
+    $scope.show_advanced_search = !$scope.show_advanced_search
+  };
+
+  // get tracker_ids for tracker_filtering
+  function getTrackerIds () {
+    var processed_tracker_ids = [];
+    var tracker_ids = Object.keys($scope.selected_trackers);
+    for (var i = 0; i < tracker_ids.length; i++) {
+      if ($scope.selected_trackers[tracker_ids[i]]) {
+        processed_tracker_ids.push(tracker_ids[i]);
+      }
+    };
+    return processed_tracker_ids;
+  };
+
+  // create the params for the issue status button-group filter
+  function createIssueStatusParam (issue_status) {
+    if (issue_status === 'open') {
+      return true;
+    } else if (issue_status === 'closed') {
       return false;
-      // need to return empty list of isssues
+    } else {
+      return null;
     }
-  }
+  };
 
-  function updateIssues(issues_data) {
-    if (issues_data.meta) {
-      $scope.pagination_object = issues_data.meta.pagination;
+  function createPaidStatusParam (issue_status) {
+    if (issue_status === "paid_out") {
+      return true
+    } else {
+      return null;
     }
-    $scope.issues = issues_data.data;
-    $scope.issues_resolved = true;
-    var new_params = angular.extend($routeParams, {
-      show_team_issues:    ($scope.search_parameters.show_team_issues) ? 1 : 0,
-      show_related_issues: ($scope.search_parameters.show_related_issues) ? 1 : 0
-    });
-    if ($scope.pagination_object) {
-      angular.extend(new_params, {page: $scope.pagination_object.page});
-    }
-    delete new_params.id;
-    $location.search(new_params);
-  }
+  };
 
-  // load team issues when the page is first loaded
-  $scope.get_team_issues($window.parseInt($routeParams.page, 10) || 1, 25);
 });

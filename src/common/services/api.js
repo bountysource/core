@@ -93,6 +93,13 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
 
     issue: function(id, options) {},
 
+    trackers: function (params) {
+      return this.call({
+        url: '/trackers',
+        params: params || {}
+      });
+    },
+
     fundraiserUpdates: function(params) {
       return this.call({
         url: '/fundraiser_updates',

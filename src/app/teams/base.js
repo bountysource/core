@@ -20,7 +20,6 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
    * */
 
   $scope.members_promise = $api.team_members_get($routeParams.id).then(function(members) {
-
     $scope.$watch('current_person', function(person) {
       if (person) {
         for (var i=0; i<members.length; i++) {
@@ -50,48 +49,6 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
     });
 
     $scope.members = angular.copy(members);
+    return $scope.members;
   });
-
-
-  $scope.isTeamMember = function(team, person) {
-    for (var i=0; $scope.members && i<$scope.members.length; i++) {
-      if ($scope.members[i].id === person.id) {
-        return true;
-        break;
-      }
-    }
-    return false;
-  };
-
-  $scope.isTeamAdmin = function(team, person) {
-    for (var i=0; $scope.members && i<$scope.members.length; i++) {
-      if ($scope.members[i].id === person.id) {
-        return $scope.members[i].is_admin;
-        break;
-      }
-    }
-    return false;
-  };
-
-  $scope.isTeamDeveloper = function(team, person) {
-    for (var i=0; $scope.members && i<$scope.members.length; i++) {
-      if ($scope.members[i].id === person.id) {
-        return true;
-        return $scope.members[i].is_developer;
-        break;
-      }
-    }
-    return false;
-  };
-
-  $scope.isPublicTeamMember = function(team, person) {
-    for (var i=0; $scope.members && i<$scope.members.length; i++) {
-      if ($scope.members[i].id === person.id) {
-        return $scope.members[i].is_public;
-        break;
-      }
-    }
-    return false;
-  };
-
 });

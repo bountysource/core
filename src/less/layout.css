@@ -94,4 +94,7 @@ a:hover {
 
 .row-condensed *[class^="col-"] { padding: 0 5px; }
 .row-condensed *[class^="col-"]:first-of-type { padding-left: 10px !important; }
-.row-condensed *[class^="col-"]:last-of-type { padding-right: 10px !important; }
+.row-condensed *[class^="col-"]:last-of-type { padding-right: 10px !important; }.markdown img { max-width: 100%; }
+
+.panel-heading.narrow { padding-top: 0px; padding-bottom: 0px;}
+.panel.no-margin { margin-bottom: 0px;}

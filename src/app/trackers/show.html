@@ -56,102 +56,97 @@
         </div>
       </div>
 
-      <div ng-include="'app/trackers/templates/top_backers.html'"></div>
-    </div>
-
-    <div class="col-sm-9 col-md-9">
-      <h1>{{tracker.name}}</h1>
-
-      <p class="lead">{{tracker.description}}</p>
-
-      <!-- Add horizontal line when when no issues -->
-      <div ng-hide="issues.length > 0">
-        <hr>
-      </div>
-
-      <!--Issue filter box-->
-      <div collapse="issues.length <= 0">
-        <div class="well">
-          <div class="row">
-            <div class="col-sm-5 col-md-5">
-              <input type="text" class="span12 form-control" min="0" placeholder="Search issues"
-              ng-model="issue_filter_options.text" ng-change="update_filter_options()">
-            </div>
-
-            <div class="col-sm-7 col-md-7">
-              <form class="form-horizontal" role="form">
-                <div class="form-group narrow">
-                  <label class="control-label col-md-4">Bounty Range:</label>
-                  <div class="col-md-3">
-                    <input type="number" class="form-control" min="1" placeholder="50"
-                    ng-model="issue_filter_options.bounty_min" ng-change="update_filter_options()"
-                    tooltip="Minimum bounty amount" tooltip-placement="bottom" tooltip-trigger="focus">
-                  </div>
-                  <div class="control-label col-md-1">- </div>
-                  <div class="col-md-3">
-                    <input type="number" class="form-control" min="1" placeholder="Infinity"
-                    ng-model="issue_filter_options.bounty_max" ng-change="update_filter_options()"
-                    tooltip="Maximum bounty amount" tooltip-placement="bottom" tooltip-trigger="focus">
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 col-xs-12">
-              <ul class="list-inline narrow" style="margin-bottom: 0;">
-                <li>
-                  <div class="checkbox"><label class="">
-                    <input type="checkbox" ng-model="issue_filter_options.only_valuable">
-                    Has active bounties
-                  </label></div>
-                </li>
-                <li>
-                  <div class="checkbox"><label class="">
-                    <input type="checkbox" ng-model="issue_filter_options.hide_open">
-                    Hide open issues
-                  </label></div>
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-6 col-xs-12">
-              <ul class="list-inline narrow" style="margin-bottom: 0;">
-                <li>
-                  <div class="checkbox"><label class="">
-                    <input type="checkbox" ng-model="issue_filter_options.hide_closed">
-                    Hide closed issues
-                  </label></div>
-                </li>
-                <li>
-                  <div class="checkbox"><label class="">
-                    <input type="checkbox" ng-model="issue_filter_options.show_paid_out">
-                    Only show paid out issues
-                  </label></div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Loading message... -->
-      <div collapse="issues_resolved" class="text-center">
-        <hr>
-        <p class="lead">Loading issues...</p>
-
-        <div class="progress progress-striped active">
-          <div class="progress-bar" style="width: 100%;"></div>
-        </div>
-      </div>
-
-
-      <!-- No issues shown message -->
-      <div ng-show="(issues | filter:issue_filter).length == 0" class="alert alert-info">No issues found :(</div>
-
-      <!--Table of issues-->
-      <div ng-show="(issues | filter:issue_filter).length > 0">
-        <issue-list issues="issues" include="['bountyTotal', 'thumbsUpCount', 'participantsCount', 'issueAge']" default-order="{column: 'bounty_total', reverse: true}" filter="issue_filter"></issue-list>
-      </div>
-    </div>
+    <div ng-include="'app/trackers/templates/top_backers.html'"></div>
   </div>
+
+  <div class="col-sm-9 col-md-9">
+    <h1>{{tracker.name}}</h1>
+
+    <p class="lead">{{tracker.description}}</p>
+
+    <!-- Add horizontal line when when no issues -->
+    <div ng-hide="issues.length > 0">
+      <hr>
+    </div>
+
+    <!--Issue filter box-->
+    <div class="well well-sm">
+      <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8">
+          <form class="form" ng-submit="getIssues(1)">
+            <div class="form-group" ng-class="{'narrow': !show_advanced_search}">
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="search" placeholder="Search issues"></input>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary">Search</button>
+                </span>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+          <button class="btn btn-default btn-block" ng-click="toggle_advanced_search()">Advanced Search 
+            <i ng-show="!show_advanced_search" class="glyphicon glyphicon-chevron-down"></i>
+            <i ng-show="show_advanced_search" class="glyphicon glyphicon-chevron-up"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row" ng-show="show_advanced_search">
+        <div class="col-xs-4 col-sm-4 col-md-4 text-center">
+          <form class="form-inline" ng-submit="getIssues(page)">
+            <div class="form-group" ng-class="{'has-error': show_bounty_error}">
+              <div class="input-group" style="width: 110px;">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" ng-model="bounty_min" min="1" placeholder="50"></input>
+              </div>
+            </div> -
+            <div class="form-group" ng-class="{'has-error': show_bounty_error}">
+              <div class="input-group" style="width: 110px">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" ng-model="bounty_max" min="1" placeholder="1000"></input>
+              </div>
+            </div>
+            <input type="submit" style="visibility: hidden;"></input>
+          </form>
+          <div class="alert alert-danger text-center" ng-show="show_bounty_error" style="margin-bottom:0px; padding-top: 5px; padding-bottom: 5px;">Invalid Range</div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 text-center">
+          <div class="btn-group" style="display: inline-block">
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'open'}" ng-model="issueStatus" btn-radio="'open'" ng-change="getIssues(page)">Open</button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'closed'}" ng-model="issueStatus" btn-radio="'closed'" ng-change="getIssues(page)">Closed</button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'paid_out'}" ng-model="issueStatus" btn-radio="'paid_out'" ng-change="getIssues(page)">Paid Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading message... -->
+    <loading-bar collapse="issues">Loading issues...</loading-bar>
+
+    <!-- Issue Count Label -->
+    <span class="label label-primary" ng-show="total_items">{{ total_items | number }} Issues</span>
+
+    <!-- No issues shown message -->
+    <div ng-show="issues.length == 0" class="alert alert-info">No issues found :(</div>
+
+    <!--Table of issues-->
+    <issue-list 
+      issues="issues"
+      include="['bountyTotal', 'thumbsUpCount', 'participantsCount', 'issueAge']"
+      set-params="setSearchParameters(params)">
+    </issue-list>
+
+    <!-- Pagination -->
+    <pagination 
+      ng-show="total_items > 30"
+      on-select-page="getIssues(page)"
+      page="page"
+      items-per-page="per_page"
+      max-size="10"
+      total-items="total_items"
+      rotate="false"
+      boundary-links="true">
+    </pagination>
+  </div>
+</div>

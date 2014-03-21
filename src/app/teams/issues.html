@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="TeamIssuesController">
   <ul class="breadcrumb">
     <li><a href="/">Home</a><span class="divider"></span></li>
     <li><a href="/teams">Teams</a><span class="divider"></span></li>
@@ -7,102 +7,101 @@
   </ul>
 
   <div team-view team="team">
-    <div class="row">
-      <span class="col-md-3 col-sm-3 pull-left">
-        <form class="form-inline no-margin" style="text-align: center; vertical-align: middle">
-          <label class="checkbox">
-            <input type="checkbox" ng-model="search_parameters.show_team_issues"
-                   ng-change="get_team_issues()"></input>
-            Team Issues <i class="glyphicon glyphicon-question-sign"
-                           tooltip="Show issues for projects owned by your organization"></i>
-          </label>
-        </form>
-      </span>
-      <span class="col-md-3 col-sm-3">
-        <form class="form-inline no-margin" style="text-align: center; vertical-align: middle">
-          <label class="checkbox">
-            <input type="checkbox" ng-model="search_parameters.show_related_issues"
-                   ng-change="get_team_issues()"></input>
-            Related Issues <i class="glyphicon glyphicon-question-sign"
-                              tooltip="Show issues for projects your organization uses"></i>
-          </label>
-        </form>
-      </span>
-      <span>
-        <p class="pull-right" ng-show="pagination.items"><span class="label label-primary">{{ pagination.items || issues.length | number }}</span>
-          <strong>Suggested Issues</strong></p>
-      </span>
+    <!--Issue filter box-->
+    <div class="well well-sm">
+      <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8">
+          <form class="form" ng-submit="getIssues(1)">
+            <div class="form-group" ng-class="{'narrow': !show_advanced_search}">
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="search" placeholder="Search issues"></input>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary">Search</button>
+                </span>
+              </div>
+            </div>
+          </form>
 
-      <div collapse="!show_advanced_search">
-        <form class="form-horizontal">
-          <div class="control-group">
-            <div class="control-label">Contains</div>
-            <div class="controls">
-              <input class="span8" type="text" ng-model="search_parameters.query"
-                     placeholder="Phrase in issue body or title"></input>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+          <button class="btn btn-default btn-block" ng-click="toggle_advanced_search()">Advanced Search
+            <i ng-show="!show_advanced_search" class="glyphicon glyphicon-chevron-down"></i>
+            <i ng-show="show_advanced_search" class="glyphicon glyphicon-chevron-up"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row" ng-show="show_advanced_search">
+        <div class="col-xs-4 col-sm-4 col-md-4 text-center">
+          <form class="form-inline" ng-submit="getIssues(page)">
+            <div class="form-group" ng-class="{'has-error': show_bounty_error}">
+              <div class="input-group" style="width: 110px;">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" ng-model="bounty_min" min="1" placeholder="50"></input>
+              </div>
+            </div> -
+            <div class="form-group" ng-class="{'has-error': show_bounty_error}">
+              <div class="input-group" style="width: 110px">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" ng-model="bounty_max" min="1" placeholder="1000"></input>
+              </div>
+            </div>
+            <input type="submit" style="visibility: hidden;"></input>
+          </form>
+          <div class="alert alert-danger text-center" ng-show="show_bounty_error" style="margin-bottom:0px; padding-top: 5px; padding-bottom: 5px;">Invalid Range</div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 text-center">
+          <div class="btn-group" style="display: inline-block">
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'open'}" ng-model="issueStatus" btn-radio="'open'" ng-change="getIssues(page)">Open</button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'closed'}" ng-model="issueStatus" btn-radio="'closed'" ng-change="getIssues(page)">Closed</button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'paid_out'}" ng-model="issueStatus" btn-radio="'paid_out'" ng-change="getIssues(page)">Paid Out</button>
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+          <div class="panel panel-primary no-margin">
+            <div class="panel-heading text-center narrow">Project Filter</div>
+            <div ng-show="trackers" style="max-height: 100px; overflow:auto;">
+              <table ng-show="trackers" class="table table-condensed" style="margin-bottom:0px;">
+                <tbody>
+                <tr ng-repeat="tracker in trackers">
+                  <td >
+                    <label style="cursor: pointer;">
+                      <input type="checkbox" ng-model="selected_trackers[tracker.id]" ng-change="getIssues(page)"></input>
+                      <span>{{ tracker.display_name }}</span>
+                    </label>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-
-          <div class="control-group">
-            <div class="control-label">Created After</div>
-            <div class="controls"><input type="text" ng-model="search_parameters.created_at"
-                                         placeholder="mm/dd/yyyy"></input></div>
-          </div>
-
-          <div class="control-group">
-            <div class="control-label">Active Since</div>
-            <div class="controls"><input type="text" ng-model="search_parameters.last_event_created_at"
-                                         placeholder="mm/dd/yyyy"></input></div>
-          </div>
-
-          <div class="control-group">
-            <div class="controls">
-              <button class="btn btn-primary" ng-click="get_team_issues()">Search</button>
-              <button class="btn" ng-click="toggle_advanced_search()">Cancel</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
 
-    <!-- Loading message... -->
-    <div collapse="issues_resolved" class="text-center">
-      <loading-bar>Loading issues...</loading-bar>
-    </div>
+    <loading-bar collapse="issues">Loading issues...</loading-bar>
 
-    <div ng-show="issues_resolved">
-      <div ng-show="issues.length > 0">
-        <table class="table table-condensed table-striped" style="table-layout: fixed">
-          <thead>
-          <tr>
-            <th style="width: 5%;"></th>
-            <th style="width: 25%;">Project</th>
-            <th style="width: 60%;">Issue Title</th>
-            <th style="width: 10%" class="text-center">Rank</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr ng-repeat="issue in issues">
-            <td><a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}"><img
-              src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;" /></a></td>
-            <td><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a></td>
-            <td style="overflow: hidden; text-overflow: ellipsis"><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a>
-            </td>
-            <td class="text-center">
-              <signal-icon percent="issue.relevance"></signal-icon>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <!-- Issue Count Label -->
+    <span class="label label-primary" ng-show="total_items">{{ total_items | number }} Issues</span>
 
-      <div ng-show="pagination_object.items >= 25">
-        <pagination total-items="pagination_object.items" page="pagination_object.page" items-per-page="25"
-                    num-pages="pagination_object.pages" on-select-page="get_team_issues(page)"></pagination>
-      </div>
-      <div ng-hide="issues.length > 0">
-        <h4 class="alert alert-info">There are no issues associated with this team</h4>
-      </div>
-    </div>
+    <!-- No issues shown message -->
+    <h3 class="text-center" ng-show="issues.length == 0">No issues</h3>
+
+    <!-- Table of Issues -->
+    <issue-list
+      issues="issues"
+      include="['bountyTotal', 'issueTitle', 'thumbsUpCount', 'participantsCount', 'issueAge', 'trackerImage']"
+      set-params="setSearchParameters(params)">
+    </issue-list>
+
+    <!-- Pagination -->
+    <pagination ng-show="total_items > 30"
+                on-select-page="getIssues(page)"
+                page="page"
+                items-per-page="per_page"
+                max-size="10"
+                total-items="total_items"
+                rotate="false"
+                boundary-links="true">
+    </pagination>
   </div>
 </div>

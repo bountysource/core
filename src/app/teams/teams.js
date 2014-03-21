@@ -27,12 +27,6 @@ angular.module('teams')
       trackEvent: 'View Teams'
     }, defaultRouteOptions));
 
-    $routeProvider.when('/teams/:id/issues', angular.extend({
-      templateUrl: 'app/teams/issues.html',
-      controller: 'BaseTeamController',
-      trackEvent: 'View Team Issues'
-    }, defaultRouteOptions));
-
     $routeProvider.when('/teams/:id/join', angular.extend({
       templateUrl: 'app/teams/join.html',
       controller: 'BaseTeamController',
@@ -91,4 +85,15 @@ angular.module('teams')
       trackEvent: 'View Team Backers'
     }, defaultRouteOptions));
 
+    $routeProvider.when('/teams/:id/suggested_issues', angular.extend({
+      templateUrl: 'app/teams/suggested_issues.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Team Suggested Issues'
+    }, defaultRouteOptions));
+
+    $routeProvider.when('/teams/:id/issues', angular.extend({
+      templateUrl: 'app/teams/issues.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Team Issues'
+    }, defaultRouteOptions));
   });

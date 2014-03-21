@@ -10,6 +10,9 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
 
     $pageTitle.set(tracker.name, 'Projects');
 
+    // initialize issue-status filter button group
+    $scope.issueStatus = "open";
+
     // follow and unfollow API method wrappers
     tracker.follow = function() {
       if (!$scope.current_person) { return $api.require_signin(); }
@@ -24,110 +27,89 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
       }
     };
 
+    $scope.getIssues = function (page) {
+      $api.v2.issues({
+        search: $scope.search || null,
+        tracker_id: tracker.id,
+        can_add_bounty: createIssueStatusParam($scope.issueStatus),
+        paid_out: createPaidStatusParam($scope.issueStatus),
+        bounty_min: $scope.bounty_min,
+        bounty_max: $scope.bounty_max,
+        order: $scope.order || "+bounty",
+        page: page || 1,
+        per_page: $scope.per_page || 30,
+      }).then(function (response) {
+        var issues = response.data;
+        $scope.issues_resolved = true;
+        $scope.open_bounties = $scope.open_bounties || 0; //frontend count of unclaimed bounties
+        if (!$scope.open_bounties) {
+          for (var i=0; i<issues.length; i++) {
+            issues[i].bounty_total = parseFloat(issues[i].bounty_total);
+            if (issues[i].bounty_total > 0 && !issues[i].paid_out) {
+              $scope.open_bounties++;
+            }
+            // sorting doesn't like nulls.. this is a quick hack
+            issues[i].participants_count = issues[i].participants_count || 0;
+            issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
+            issues[i].comment_count = issues[i].comment_count || 0;
+          }
+        }
+        $scope.issues = issues;
+        setPagination({
+          total_pages: response.headers()['total-pages'],
+          total_items: response.headers()['total-items'],
+          page: response.config.params.page,
+          per_page: response.config.params.per_page
+        });
+        return issues;
+      });
+    };
+
     // Load issues for tracker. If the tracker was just created (has not been synced yet),
     // throw in a timeout to allow time for issues to be added
     $timeout(function() {
-      $api.tracker_issues_get($routeParams.id).then(function(issues) {
-        $scope.issues_resolved = true;
-        $scope.open_bounties = 0; //frontend count of unclaimed bounties
-        for (var i=0; i<issues.length; i++) {
-          issues[i].bounty_total = parseFloat(issues[i].bounty_total);
-          if (issues[i].bounty_total > 0 && !issues[i].paid_out) {
-            $scope.open_bounties++;
-          }
-          // sorting doesn't like nulls.. this is a quick hack
-          issues[i].participants_count = issues[i].participants_count || 0;
-          issues[i].thumbs_up_count = issues[i].thumbs_up_count || 0;
-          issues[i].comment_count = issues[i].comment_count || 0;
-        }
-        $scope.issues = issues;
-        return issues;
-      });
-    }, tracker.synced_at ? 0 : 2500);
+      $scope.getIssues()
+      }, tracker.synced_at ? 0 : 2500);
 
     $scope.tracker = tracker;
     return tracker;
   });
-
-  $scope.issue_filter_options = {
-    text: $location.search().text || null,
-    bounty_min: $location.search().bounty_min || null,
-    bounty_max: $location.search().bounty_max || null,
-    only_valuable: $location.search().only_valuable || false,
-    hide_closed: $location.search().hide_closed || false,
-    hide_open: $location.search().hide_open || false,
-    show_paid_out: $location.search().show_paid_out || false,
-    sort: $location.search().sort || "bounty_total",
-    sort_asc: $location.search().sort_asc || false,
-    show_issue_id: $location.search().show_issue_id || false,
-    show_issue_number: $location.search().show_issue_number || false
+  
+  //set the serach parameters
+   $scope.setSearchParameters = function (params) {
+    $scope.order = params.order;
+    $scope.getIssues($scope.page);
   };
 
-  $scope.update_filter_options = function() {
-    $scope.issue_filter_options.bounty_min = parseFloat($scope.issue_filter_options.bounty_min) || null;
-    $scope.issue_filter_options.bounty_max = parseFloat($scope.issue_filter_options.bounty_max) || null;
+  // pagination settings
+  function setPagination (pagination_data) {
+    $scope.page = pagination_data.page
+    $scope.total_items = parseInt(pagination_data.total_items, 10);
+    $scope.maxSize = 10;
+    $scope.per_page = pagination_data.per_page;
   };
 
-  $scope.issue_filter = function(issue) {
-    var bounty_total = parseFloat(issue.bounty_total);
-    var bounty_min = parseFloat($scope.issue_filter_options.bounty_min);
-    var bounty_max = parseFloat($scope.issue_filter_options.bounty_max);
-
-    if ($scope.issue_filter_options.show_paid_out ) {
-      return issue.paid_out;
-    }
-    if (!$scope.issue_filter_options.show_paid_out && issue.paid_out) {
-      return false;
-    }
-    if (!isNaN(bounty_min) && bounty_total < bounty_min) {
-      return false;
-    }
-    if (!isNaN(bounty_max) && bounty_total > bounty_max) {
-      return false;
-    }
-    if ($scope.issue_filter_options.only_valuable && bounty_total <= 0) {
-      return false;
-    }
-    if ($scope.issue_filter_options.hide_closed && $scope.issue_filter_options.hide_open) {
-      return false;
-    }
-    if ($scope.issue_filter_options.hide_closed) {
-      return issue.can_add_bounty;
-    }
-    if ($scope.issue_filter_options.hide_open && !issue.paid_out) {
-      return !issue.can_add_bounty;
-    }
-    if ($scope.issue_filter_options.text) {
-      var regexp = new RegExp(".*?"+$scope.issue_filter_options.text+".*?", "i");
-      return regexp.test(issue.title) || (issue.number && issue.number.toString() === $scope.issue_filter_options.text) ;
-    }
-
-    return true;
+  // toggle advanced search collapse
+  $scope.toggle_advanced_search = function () {
+    $scope.show_advanced_search = !$scope.show_advanced_search
   };
 
-  $scope.change_order_col = function(col) {
-    if ($scope.issue_filter_options.sort === col) {
-      $scope.issue_filter_options.sort_asc = !$scope.issue_filter_options.sort_asc;
+  // create the params for the issue status button-group filter
+  function createIssueStatusParam (issue_status) {
+    if (issue_status === 'open') {
+      return true;
+    } else if (issue_status === 'closed') {
+      return false;
     } else {
-      $scope.issue_filter_options.sort_asc = false;
-      $scope.issue_filter_options.sort = col;
+      return null;
     }
   };
 
-  // override the filter and sort settings to only show open bounties
-  $scope.show_bounties = function() {
-    $scope.issue_filter_options = { only_valuable: true, sort: 'bounty_total' };
+  function createPaidStatusParam (issue_status) {
+    if (issue_status === "paid_out") {
+      return true
+    } else {
+      return null;
+    }
   };
-
-  $scope.show_claimed_bounties = function() {
-    $scope.issue_filter_options = { show_paid_out: true, sort: 'bounty_total' };
-  };
-
-  $scope.tracker_stats_promise = $api.tracker_stats($routeParams.id).then(function(tracker_stats) {
-    $scope.tracker_stats = tracker_stats;
-    return tracker_stats;
-  });
-
-  $scope.update_filter_options();
-  //populate bindings with bounty_min, bounty_max
 });

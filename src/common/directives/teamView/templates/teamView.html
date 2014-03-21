@@ -87,8 +87,15 @@
             <a ng-href="/teams/{{team.slug}}">Fundraiser</a>
           </li>
 
-          <li ng-show="team.linked_account" ng-class="{ active: activeNavTab('issues') }">
-            <a ng-href="/teams/{{team.slug}}/issues">Suggested Issues</a>
+          <li ng-class="{ active: activeNavTab('issues') }">
+            <a ng-href="/teams/{{ team.slug }}/issues">
+              Issues
+            </a>
+          </li>
+          <li ng-show="team.linked_account" ng-class="{ active: activeNavTab('suggested_issues') }">
+            <a ng-href="/teams/{{team.slug}}/suggested_issues">
+              Suggested Issues
+            </a>
           </li>
 
           <li ng-show="members.length > 0" ng-class="{ active: activeNavTab('members') }">

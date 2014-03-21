@@ -10,18 +10,14 @@ angular.module('directives').directive('issueList', function() {
 
       // Optional columns to include
       include:       "=",
-      filter:        "=",
-      defaultOrder: "="
+      setParams: "&"
     },
     link: function(scope) {
       // Default sort order to participant count descending.
       scope.$orderData = {
-        column: scope.defaultOrder.column || "participants_count",
-        reverse: scope.defaultOrder.reverse ||  true
+        column: "participants_count",
+        reverse: true
       };
-
-      // Set filter data
-      scope.$filterData = scope.filter;
 
       /*
        * Change the sort order of the table.
@@ -35,6 +31,9 @@ angular.module('directives').directive('issueList', function() {
           scope.$orderData.column = column;
           scope.$orderData.reverse = true;
         }
+        var order = (scope.$orderData.reverse ? "-" : "+") + scope.$orderData.column;
+        var parameters = {order: order};
+        scope.setParams({params: parameters});
       };
 
       scope.$showTrackerImage = false;
