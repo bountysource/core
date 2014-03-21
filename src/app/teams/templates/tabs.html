@@ -6,7 +6,12 @@
   <li ng-show="is_admin || is_developer" ng-class="{ active: active_tab('projects') }"><a ng-href="/teams/{{team.slug}}/projects">
     Projects
   </a></li>
-  <li ng-show="team.linked_account" ng-class="{ active: active_tab('issues') }"><a ng-href="/teams/{{team.slug}}/issues">
+  <li ng-class="{ active: active_tab('issues') }">
+    <a ng-href="/teams/{{ team.slug }}/issues">
+      Issues
+    </a>
+  </li>
+  <li ng-show="team.linked_account" ng-class="{ active: active_tab('suggested_issues') }"><a ng-href="/teams/{{team.slug}}/suggested_issues">
     Suggested Issues
   </a></li>
   <li ng-show="members.length > 0" ng-class="{ active: active_tab('members') }"><a ng-href="/teams/{{team.slug}}/members">

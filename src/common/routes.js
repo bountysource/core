@@ -261,11 +261,17 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Teams'
   }, defaultRouteOptions));
 
-  $routeProvider.when('/teams/:id/issues', angular.extend({
-    templateUrl: 'app/teams/issues.html',
+  $routeProvider.when('/teams/:id/suggested_issues', angular.extend({
+    templateUrl: 'app/teams/suggested_issues.html',
     controller: 'BaseTeamController',
     trackEvent: 'View Team Issues'
   }, defaultRouteOptions));
+
+  $routeProvider.when('/teams/:id/issues', angular.extend({
+    templateUrl: 'app/teams/issues.html',
+    controller: 'BaseTeamController',
+    trackEvent: false // if turns out this is a separate view, add event tracking
+    }, defaultRouteOptions));
 
   $routeProvider.when('/teams/:id/join', angular.extend({
     templateUrl: 'app/teams/join.html',

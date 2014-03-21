@@ -91,3 +91,6 @@ a:hover {
 .img-responsive { width: 100%;}
 
 .markdown img { max-width: 100%; }
+
+.panel-heading.narrow { padding-top: 0px; padding-bottom: 0px;}
+.panel.no-margin { margin-bottom: 0px;}

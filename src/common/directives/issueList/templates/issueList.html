@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <!-- Tracker header spans 2 columns if showing the image -->
-    <th ng-if="$showTrackerImage" ng-class="{ 'active': ($orderData.column === 'tracker.name') }" colspan="2">
+    <th ng-if="$showTrackerImage" ng-class="{ 'active': ($orderData.column === 'tracker.name') }">
       <a href ng-click="$changeSortOrder('tracker.name')" style="color: black; text-decoration: none;">
         <span>Project</span>
         <span ng-show="$orderData.column === 'tracker.name'">
@@ -33,9 +33,9 @@
     </th>
 
     <th ng-if="$showBountyTotal" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'bounty_total') }">
-      <a href ng-click="$changeSortOrder('bounty_total')" tooltip="Bounty total" style="color: black; text-decoration: none;">
+      <a href ng-click="$changeSortOrder('bounty')" tooltip="Bounty total" style="color: black; text-decoration: none;">
         <span style="color: black">$</span>
-        <span ng-show="$orderData.column === 'bounty_total'">
+        <span ng-show="$orderData.column === 'bounty'">
           <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
           <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
         </span>
@@ -43,9 +43,9 @@
     </th>
 
     <th ng-if="$showThumbsUpCount" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'thumbs_up_count') }">
-      <a href ng-click="$changeSortOrder('thumbs_up_count')" tooltip="Votes and '+1' comments total" style="color: black; text-decoration: none;">
+      <a href ng-click="$changeSortOrder('thumbs')" tooltip="Votes and '+1' comments total" style="color: black; text-decoration: none;">
         <i style="color: black" class="glyphicon glyphicon-thumbs-up"></i>
-        <span ng-show="$orderData.column === 'thumbs_up_count'">
+        <span ng-show="$orderData.column === 'thumbs'">
           <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
           <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
         </span>
@@ -53,9 +53,9 @@
     </th>
 
     <th ng-if="$showParticipantsCount" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'participants_count') }">
-      <a href ng-click="$changeSortOrder('participants_count')" tooltip="Watchers" style="color: black; text-decoration: none;">
+      <a href ng-click="$changeSortOrder('participants')" tooltip="Watchers" style="color: black; text-decoration: none;">
         <i style="color: black" class="glyphicon glyphicon-user"></i>
-        <span ng-show="$orderData.column === 'participants_count'">
+        <span ng-show="$orderData.column === 'participants'">
           <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
           <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
         </span>
@@ -63,9 +63,9 @@
     </th>
 
     <th ng-if="$showIssueAge" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'created_at') }">
-      <a href ng-click="$changeSortOrder('created_at')" tooltip="Age of Issue" style="color: black; text-decoration: none;">
+      <a href ng-click="$changeSortOrder('created')" tooltip="Age of Issue" style="color: black; text-decoration: none;">
         <i class="glyphicon glyphicon-time"></i>
-        <span ng-show="$orderData.column === 'created_at'">
+        <span ng-show="$orderData.column === 'created'">
           <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
           <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
         </span>
@@ -74,10 +74,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="issue in issues | orderBy:$orderData.column:$orderData.reverse | filter: $filterData">
+  <tr ng-repeat="issue in issues">
     <td ng-if="$showTrackerImage">
       <a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}">
-        <img src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;"/>
+        <img src="{{issue.tracker.image_url_small}}" style="max-height:20px;max-width:20px;"/>
       </a>
     </td>
     <td ng-if="$showTrackerName">

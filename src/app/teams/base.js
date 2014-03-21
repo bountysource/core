@@ -40,6 +40,7 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
     else if (tab === 'projects' && (/^\/teams\/[^\/]+\/projects+$/).test($location.path())) { return true; }
     else if (tab === 'bounties' && (/^\/teams\/[^\/]+\/bounties$/).test($location.path())) { return true; }
     else if (tab === 'issues' && (/^\/teams\/[^\/]+\/issues$/).test($location.path())) { return true; }
+    else if (tab === 'suggested_issues' && (/^\/teams\/[^\/]+\/suggested_issues$/).test($location.path())) { return true; }
   };
 
   $scope.members_promise = $api.team_members_get($routeParams.id).then(function(members) {
