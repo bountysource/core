@@ -106,6 +106,12 @@ angular.module('teams')
     $routeProvider.when('/teams/:id/updates', angular.extend({
       templateUrl: 'app/teams/updates.html',
       controller: 'BaseTeamController',
-      trackEvent: 'View Team Issues'
+      trackEvent: 'View Team Updates'
+    }, defaultRouteOptions));
+
+    $routeProvider.when('/teams/:id/updates/:update_id', angular.extend({
+      templateUrl: 'app/teams/update.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Team Update'
     }, defaultRouteOptions));
   });

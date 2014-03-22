@@ -1,0 +1,26 @@
+<div ng-controller="TeamUpdateController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/teams">Teams</a></li>
+    <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
+    <li><a>Fundraiser</a></li>
+  </ul>
+
+  <div team-view team="team">
+    <div ng-if="canManageActiveFundraiser">
+      <button class="btn btn-info" ng-click="showNewUpdateModal()">
+        <i class="glyphicon glyphicon-edit"></i>
+        New Update
+      </button>
+    </div>
+
+    <div>
+      <h2>{{update.title}}</h2>
+      <div class="text-info">
+        <span>Published {{update.published_at | date}}</span>
+      </div>
+      <hr />
+      <div class="markdown" ng-bind-html="update.body_html"></div>
+    </div>
+  </div>
+</div>
