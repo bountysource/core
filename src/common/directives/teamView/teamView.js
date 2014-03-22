@@ -77,7 +77,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             // Explicitly set activeFundraiser to false to let the rest of the app know that
             // it was checked for, but not present. A value of undefined means that is still resolving fundraisers.
             scope.activeFundraiser = scope.fundraisers[0] || false;
-
+            console.log("fundraiser active", scope.activeFundraiser);
             if (scope.activeFundraiser) {
               // Is the authenticated user the owner of the Fundraiser?
               scope.canManageActiveFundraiser = false;
@@ -99,8 +99,14 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
               // Super lame hack to go to active fundraiser tab if trying to access root and not an admin
               if (/^\/teams\/[^\/]+$/.test($location.path())) {
-                if (!scope.is_admin || !scope.is_developer) {
+                if (!scope.is_admin && !scope.is_developer && !scope.is_member) {
                   $location.url('/teams/' + $routeParams.id + '/fundraiser');
+                }
+              }
+            } else {
+              if (/^\/teams\/[^\/]+$/.test($location.path())) {
+                if (!scope.is_admin && !scope.is_developer && !scope.is_member) {
+                  $location.url('/teams/' + $routeParams.id + '/issues');
                 }
               }
             }
