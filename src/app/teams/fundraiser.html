@@ -133,8 +133,9 @@
             </div>
           </div>
 
-          <!-- Rewards -->
-          <div class="panel panel-default">
+          <!-- Rewards.
+            Show if there is more than one, because a $0 reward is always present. -->
+          <div class="panel panel-default" ng-if="rewards.length > 1">
             <div class="panel-heading">
               <h4 class="panel-title text-center">Rewards</h4>
             </div>

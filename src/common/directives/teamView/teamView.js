@@ -69,7 +69,6 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             team_id: team.id,
             include_description_html: true,
             include_owner: true,
-            in_progress: true,
             include_rewards: true
           }).then(function(response) {
             scope.fundraisers = angular.copy(response.data);
@@ -77,7 +76,6 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             // Explicitly set activeFundraiser to false to let the rest of the app know that
             // it was checked for, but not present. A value of undefined means that is still resolving fundraisers.
             scope.activeFundraiser = scope.fundraisers[0] || false;
-            console.log("fundraiser active", scope.activeFundraiser);
             if (scope.activeFundraiser) {
               // Is the authenticated user the owner of the Fundraiser?
               scope.canManageActiveFundraiser = false;

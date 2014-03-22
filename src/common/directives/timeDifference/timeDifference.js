@@ -21,13 +21,13 @@ angular.module('directives').directive('timeDifference', function() {
         scope.word = "day";
       } else if (hours_left > 0) {
         scope.units = hours_left;
-        scope.word = "hour";
+        scope.word = "hr";
       } else if (minutes_left > 0) {
         scope.units = minutes_left;
-        scope.word = "minute";
+        scope.word = "min";
       } else {
         scope.units = Math.max(seconds_left, 0);
-        scope.word = "second";
+        scope.word = "sec";
       }
     }
   };

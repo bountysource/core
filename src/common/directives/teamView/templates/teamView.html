@@ -30,8 +30,10 @@
             <!-- Progress bar for percentage of goal met -->
             <progressbar type="success" class="progress-striped" animate="false" value="activeFundraiser.percentageOfGoalMet | atLeast:15 | atMost:100">{{activeFundraiser.percentageOfGoalMet | number:0}}%</progressbar>
 
-            <!-- Big ol' pledge button -->
-            <button class="btn btn-success btn-block btn-lg" ng-click="bigPledgeButtonClicked()">Pledge Now</button>
+            <!-- Big ol' pledge button. Hidden if fundraiser has completed -->
+            <div ng-if="activeFundraiser.published && activeFundraiser.in_progress">
+              <button class="btn btn-success btn-block btn-lg" ng-click="bigPledgeButtonClicked()">Pledge Now</button>
+            </div>
           </div>
         </div>
 

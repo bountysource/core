@@ -30,21 +30,9 @@ angular.module('app')
     $scope.$watch('activeFundraiser', function(fundraiser) {
       if (fundraiser === false) {
 
-        $location.url('/teams/' + $routeParams.id + '/members');
+        $location.url('/teams/' + $routeParams.id);
 
       } else if (fundraiser) {
-        if (fundraiser.published && !fundraiser.in_progress) {
-          $location.url("/fundraisers/" + fundraiser.slug);
-        }
-
-        // add the base item number, with just fundraisers id
-        $scope.pledge.base_item_number = 'fundraisers/'+fundraiser.id;
-        $scope.pledge.item_number = $scope.pledge.base_item_number;
-
-        if ($scope.pledge.reward_id) {
-          $scope.pledge.item_number += "/" + $scope.pledge.reward_id;
-        }
-
         // select reward to have the object cached. handled after this by set_reward(reward)
         $scope.selected_reward = null;
         for (var i=0; $scope.pledge.reward_id && i<fundraiser.rewards.length; i++) {
