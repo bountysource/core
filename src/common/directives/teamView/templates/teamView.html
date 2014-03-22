@@ -75,7 +75,6 @@
 
       <!-- Nav Tabs -->
       <div ng-if="_options.showNavTabs">
-
         <!-- If Active Fundraiser -->
         <ul class="nav nav-tabs" ng-if="activeFundraiser">
           <li ng-class="{ active: activeNavTab('home') }" ng-if="is_admin || is_developer">
@@ -131,7 +130,7 @@
               </li>
 
               <li ng-show="is_admin || is_developer">
-                <a ng-href="/teams/{{team.slug}}/projects">Projects</a>
+                <a ng-href="/teams/{{team.slug}}/projects/manage">Projects</a>
               </li>
 
               <li ng-show="is_admin || is_developer">
@@ -200,7 +199,7 @@
               </li>
 
               <li ng-show="is_admin || is_developer">
-                <a ng-href="/teams/{{team.slug}}/projects">Projects</a>
+                <a ng-href="/teams/{{team.slug}}/projects/manage">Projects</a>
               </li>
 
               <li ng-show="is_admin || is_developer">
