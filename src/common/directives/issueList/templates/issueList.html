@@ -1,5 +1,5 @@
-<table class="table table-condensed table-striped" ng-show="issues.length > 0">
-  <thead>
+<table class="table table-condensed table-striped table-no-border-top" ng-show="issues.length > 0" style="margin: 0;">
+  <thead ng-if="!hideHeaderRow">
   <tr>
     <!-- Tracker header spans 2 columns if showing the image -->
     <th ng-if="$showTrackerImage" ng-class="{ 'active': ($orderData.column === 'tracker.name') }">

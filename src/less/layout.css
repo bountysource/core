@@ -104,3 +104,8 @@ a:hover {
 
 /* Center all td in a table, yay */
 .table.table-centered tr > td { vertical-align: middle; }
+
+.table.table-no-border-top tr:first-of-type td {
+  border: 0 !important;
+  background-color: transparent !important;
+}

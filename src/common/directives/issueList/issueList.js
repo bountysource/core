@@ -11,7 +11,9 @@ angular.module('directives').directive('issueList', function() {
       include:       "=",
       setParams: "&"
     },
-    link: function(scope) {
+    link: function(scope, element, attrs) {
+      scope.hideHeaderRow = Object.keys(attrs).indexOf('hideHeaderRow') >= 0;
+
       // Default sort order to participant count descending.
       scope.$orderData = {
         column: "participants_count",
