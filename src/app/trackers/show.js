@@ -37,7 +37,7 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
         bounty_max: $scope.bounty_max,
         order: $scope.order || "+bounty",
         page: page || 1,
-        per_page: $scope.per_page || 30,
+        per_page: $scope.per_page || 30
       }).then(function (response) {
         var issues = response.data;
         $scope.issues_resolved = true;
@@ -74,7 +74,7 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
     $scope.tracker = tracker;
     return tracker;
   });
-  
+
   //set the serach parameters
   $scope.setSearchParameters = function (params) {
     $scope.order = params.order;

@@ -70,7 +70,7 @@ angular.module('fundraisers')
   .controller('FundraiserController', function($scope, $routeParams, $filter, $location, $api, $modal) {
     $scope.fundraiserPromise = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
       if (fundraiser.team && fundraiser.published) {
-        teamRedirect(fundraiser.team)
+        teamRedirect(fundraiser.team);
       }
 
       $scope.fundraiser = angular.copy(fundraiser);
