@@ -14,7 +14,7 @@
           <form class="form" ng-submit="$parent.$parent.getIssues(1)">
             <div class="form-group" ng-class="{'narrow': !show_advanced_search}">
               <div class="input-group">
-                <input type="text" class="form-control" ng-model="search" placeholder="Search issues"></input>
+                <input type="text" class="form-control" ng-model="$parent.$parent.search" placeholder="Search issues"></input>
                 <span class="input-group-btn">
                   <button class="btn btn-primary">Search</button>
                 </span>

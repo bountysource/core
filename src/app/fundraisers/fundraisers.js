@@ -69,7 +69,10 @@ angular.module('fundraisers')
 
   .controller('FundraiserController', function($scope, $routeParams, $filter, $location, $api, $modal) {
     $scope.fundraiserPromise = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
-      if (fundraiser.team) { teamRedirect(fundraiser.team) };
+      if (fundraiser.team && fundraiser.published) {
+        teamRedirect(fundraiser.team);
+      }
+
       $scope.fundraiser = angular.copy(fundraiser);
 
       // Not sure if these are used anywhere else besides fundraiserManageButtons, leave for now.
@@ -84,27 +87,27 @@ angular.module('fundraisers')
       var slug = team.slug;
       switch(true) {
       case (/\/fundraisers\/[a-z-_0-9]+$/).test(path):
-        $location.path("/teams/"+slug+"/fundraiser")
+        $location.path("/teams/"+slug+"/fundraiser");
         break;
 
       case (/\/fundraisers\/[a-z-_0-9]+\/updates$/).test(path):
-        $location.path("/teams/"+slug+"/updates")
+        $location.path("/teams/"+slug+"/updates");
         break;
 
       case (/\/fundraisers\/[a-z-_0-9]+\/updates\/([0-9]+)$/).test(path):
         var match = path.match(/\/fundraisers\/[a-z-_0-9]+\/updates\/([0-9]+)$/);
-        $location.path("/teams/"+slug+"/updates/"+match[1])
+        $location.path("/teams/"+slug+"/updates/"+match[1]);
         break;
 
       case (/\/fundraisers\/[a-z-_0-9]+\/backers$/).test(path):
-        $location.path("/teams/"+slug+"/backers")
+        $location.path("/teams/"+slug+"/backers");
         break;
 
       case (/\/fundraisers\/[a-z-_0-9]+\/pledge$/).test(path):
-        $location.url("/teams/"+slug+"/fundraiser?page=pledge")
+        $location.url("/teams/"+slug+"/fundraiser?page=pledge");
         break;
       }
-    };
+    }
 
     // Display an update in a modal
     $scope.showUpdateModal = function(update) {
