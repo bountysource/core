@@ -79,7 +79,7 @@
       <div ng-if="_options.showNavTabs">
         <!-- If Active Fundraiser -->
         <ul class="nav nav-tabs" ng-if="activeFundraiser">
-          <li ng-class="{ active: activeNavTab('home') }" ng-if="is_admin || is_developer">
+          <li ng-class="{ active: activeNavTab('home') }">
             <a ng-href="/teams/{{ team.slug }}">Home</a>
           </li>
 

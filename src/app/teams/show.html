@@ -13,8 +13,28 @@
       </alert>
     </div>
 
+    <!-- Public View -->
+    <div class="row" ng-if="!is_member">
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="text-center panel-title"><a ng-href="/teams/{{ team.slug }}/issues">Top 5 Issues</a></h3>
+          </div>
+          <issue-list issues="issues" include="['bountyTotal', 'issueTitle', 'thumbsUpCount', 'participantsCount']"></issue-list>
+        </div>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3 class="text-center panel-title">Members</h3></div>
+          <div class="panel-body">
+            <thumbnail-links array="members" per-row="3" object-type="'team_member'"></thumbnail-links>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Developer view. Can only add projects and place bounties -->
-    <div class="row" ng-show="!is_admin && is_developer">
+    <div class="row" ng-if="!is_admin && is_developer">
       <div class="col-sm-6 col-md-6">
         <ng-include src="'app/teams/templates/post_bounty_box.html'"></ng-include>
       </div>
@@ -29,7 +49,7 @@
     </div>
 
     <!-- Admin view. Can do all of the things! -->
-    <div class="row" ng-show="is_admin">
+    <div class="row" ng-if="is_admin">
       <div class="col-sm-6 col-md-6">
         <ng-include src="'app/teams/templates/post_bounty_box.html'"></ng-include>
       </div>
@@ -38,11 +58,11 @@
         <ng-include src="'app/teams/templates/goto_invite_members.html'"></ng-include>
       </div>
 
-      <div class="col-sm-3 col-md-3" ng-show="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
+      <div class="col-sm-3 col-md-3" ng-if="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
         <ng-include src="'app/teams/templates/goto_add_funds.html'"></ng-include>
       </div>
 
-      <div class="col-sm-3 col-md-3" ng-show="team.type == 'Team::Project'">
+      <div class="col-sm-3 col-md-3" ng-if="team.type == 'Team::Project'">
         <ng-include src="'app/teams/templates/goto_plugin_install.html'"></ng-include>
       </div>
     </div>

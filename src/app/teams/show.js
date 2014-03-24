@@ -15,6 +15,20 @@ angular.module('app').controller('TeamHomeController', function ($route, $scope,
     // Set payment method on params so that team is the selected payment method on Bounty page
     $scope.create_bounty_params.checkout_method = "team/"+team.id;
 
+    // Get top issues for the team
+    $api.v2.issues({
+      tracker_owner_type: team.type,
+      tracker_owner_id: team.id,
+      include_tracker: true,
+      can_add_bounty: true,
+      paid_out: false,
+      order: "+bounty",
+      page: 1,
+      per_page: 5
+    }).then(function (response) {
+      $scope.issues = response.data;
+    });
+
     return team;
   });
 

@@ -59,7 +59,6 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
       $scope.is_developer = $scope.is_developer || false;
       $scope.is_public  = $scope.is_public || false;
     });
-
     $scope.members = angular.copy(members);
     return $scope.members;
   });
