@@ -82,6 +82,9 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
       scope.publishFundraiser = function(fundraiser) {
         return $api.fundraiser_publish(fundraiser.id, function(response) {
           if (response.meta.success) {
+            // replace cached copy of fundraiser with the now published one
+            scope.fundraiser = angular.copy(response.data);
+
             $location.url("/fundraisers/"+fundraiser.slug);
           } else {
             scope.error = "ERROR: " + response.data.error;

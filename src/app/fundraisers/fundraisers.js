@@ -70,7 +70,7 @@ angular.module('fundraisers')
   .controller('FundraiserController', function($scope, $routeParams, $filter, $location, $api, $modal) {
     $scope.fundraiserPromise = $api.fundraiser_get($routeParams.id).then(function(fundraiser) {
       if (fundraiser.team && fundraiser.published) {
-        teamRedirect(fundraiser.team);
+        teamRedirect(fundraiser.team)
       }
 
       $scope.fundraiser = angular.copy(fundraiser);
@@ -87,24 +87,24 @@ angular.module('fundraisers')
       var slug = team.slug;
       switch(true) {
       case (/\/fundraisers\/[a-z-_0-9]+$/).test(path):
-        $location.path("/teams/"+slug+"/fundraiser");
+        $location.path("/teams/"+slug+"/fundraiser").replace();
         break;
 
       case (/\/fundraisers\/[a-z-_0-9]+\/updates$/).test(path):
-        $location.path("/teams/"+slug+"/updates");
+        $location.path("/teams/"+slug+"/updates").replace();
         break;
 
       case (/\/fundraisers\/[a-z-_0-9]+\/updates\/([0-9]+)$/).test(path):
         var match = path.match(/\/fundraisers\/[a-z-_0-9]+\/updates\/([0-9]+)$/);
-        $location.path("/teams/"+slug+"/updates/"+match[1]);
+        $location.path("/teams/"+slug+"/updates/"+match[1]).replace();
         break;
 
       case (/\/fundraisers\/[a-z-_0-9]+\/backers$/).test(path):
-        $location.path("/teams/"+slug+"/backers");
+        $location.path("/teams/"+slug+"/backers").replace();
         break;
 
       case (/\/fundraisers\/[a-z-_0-9]+\/pledge$/).test(path):
-        $location.url("/teams/"+slug+"/fundraiser?page=pledge");
+        $location.url("/teams/"+slug+"/fundraiser?page=pledge").replace();
         break;
       }
     }

@@ -98,13 +98,13 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
               // Super lame hack to go to active fundraiser tab if trying to access root and not an admin
               if (/^\/teams\/[^\/]+$/.test($location.path())) {
                 if (!scope.is_admin && !scope.is_developer && !scope.is_member) {
-                  $location.url('/teams/' + $routeParams.id + '/fundraiser');
+                  $location.url('/teams/' + $routeParams.id + '/fundraiser').replace();
                 }
               }
             } else {
               if (/^\/teams\/[^\/]+$/.test($location.path())) {
                 if (!scope.is_admin && !scope.is_developer && !scope.is_member) {
-                  $location.url('/teams/' + $routeParams.id + '/issues');
+                  $location.url('/teams/' + $routeParams.id + '/issues').replace();
                 }
               }
             }
