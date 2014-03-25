@@ -16,7 +16,8 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q
     featured: true,
     order: '+bounty',
     has_bounties: true,
-    include_description: true
+    include_description: true,
+    per_page: 5
   }).then(function(response) {
     $scope.topTrackers = angular.copy(response.data);
   });
