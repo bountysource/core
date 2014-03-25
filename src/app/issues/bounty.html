@@ -112,7 +112,7 @@
                 <span>Post {{bounty.amount || 0 | dollars}} Bounty</span>
               </button>
 
-              <button type="submit" ng-click="create_payment()" ng-show="previous_bounty_total > 0" class="btn btn-primary btn-lg" ng-disabled="form.$invalid" tooltip="You previous posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
+              <button type="submit" ng-click="create_payment()" ng-show="previous_bounty_total > 0" class="btn btn-primary btn-lg" ng-disabled="form.$invalid" tooltip="You previously posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
                 <span>Increase Bounty by {{bounty.amount | dollars}}</span>
               </button>
             </div>
