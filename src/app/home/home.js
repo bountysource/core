@@ -13,7 +13,6 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q
 
   // Top Issue Trackers
   $api.v2.trackers({
-    featured: true,
     order: '+bounty',
     has_bounties: true,
     include_description: true,
