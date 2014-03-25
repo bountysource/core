@@ -32,9 +32,15 @@
                 <span class="input-group-addon">$</span>
                 <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="15" required="" class="form-control">
               </div>
-            </div>
-          </div>
 
+
+            </div>
+
+          </div>
+          <div ng-show="previous_bounty_total > 0" class="alert alert-info">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            The bounty will increase to : {{bounty.amount + previous_bounty_total | dollars}}
+          </div>
           <div>
             <div class="form-group">
               <label class="control-label col-md-2">
