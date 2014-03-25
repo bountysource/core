@@ -18,10 +18,10 @@
         <div class="col-md-6 col-sm-6">
           <a ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:6" ng-href="/fundraisers/{{fundraiser.slug}}">
             <div class="row homepage-card">
-              <div class="col-md-3 col-xs-2">
+              <div class="col-md-3 col-xs-3">
                 <img class="img-responsive" ng-src="{{fundraiser.large_image_url}}" />
               </div>
-              <div class="col-md-9 col-xs-10">
+              <div class="col-md-9 col-xs-9">
                 <h4>{{fundraiser.title}}</h4>
                 <p class="text-muted">{{fundraiser.short_description}}</p>
                 <p class="raised">{{fundraiser.total_pledged | dollars}} raised</p>
@@ -40,10 +40,10 @@
         <div class="col-md-6 col-sm-6">
           <a ng-repeat="tracker in trackers.slice(0,5) | orderBy:'-bounty_total'" ng-href="/trackers/{{tracker.slug}}">
             <div class="row homepage-card">
-              <div class="col-md-3 col-xs-2">
+              <div class="col-md-3 col-xs-3">
                 <img class="img-responsive" ng-src="{{tracker.large_image_url}}" />
               </div>
-              <div class="col-md-9 col-xs-10">
+              <div class="col-md-9 col-xs-9">
                 <h4>{{tracker.name}}</h4>
                 <p class="text-muted">{{tracker.description}}</p>
                 <p class="raised">{{tracker.bounty_total | dollars}} in bounties</p>
