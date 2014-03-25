@@ -64,37 +64,3 @@ div.update-header-options > div.update-options {
 
 .table-fundraiser-issues .goal-met td:first-child a { text-decoration:line-through; }
 .table-fundraiser-issues .goal-met td:first-child:before { content: '✓ '; color: green; font-weight: bold; text-decoration: none !important; }
-
-/* golden ratio grid */
-.top-backers { margin: 0; padding: 0; height: 161%; line-height: 1px; margin-bottom: -1px; }
-.top-backers li { list-style: none; margin: 0; padding: 0; float: left; }
-.top-backers img { width: 100%; height: 100%; }
-.top-backers a { line-height: 1px; }
-.top-backers:before, .top-backers:after { content: " "; display: table; }  /* clearfix */
-.top-backers:after { clear: both; } /* clearfix *
-
-/* percentage generators in ruby
-x = 1.61803398875
-x1 = 1/x      # 0.6180339887498547 %
-x2 = 1 - x1   # 0.3819660112501453 %
-n1 = 100
-n2 = 100*x1
-n3 = 100*x2
-n4 = n3*x1
-n5 = n3*x2
-n6 = n5*x1
-n7 = n5*x2
-n8 = n7*x1
-n9 = n7*x2
-n10= n9*x1
-*/
-.top-backers li:nth-child(1) { width: 100%; }
-.top-backers li:nth-child(2) { width: 61.80339887498547%; }
-.top-backers li:nth-child(3) { width: 38.19660112501453%; }
-.top-backers li:nth-child(4) { width: 23.60679774997992%; }
-.top-backers li:nth-child(5) { width: 14.589803375034613%; }
-.top-backers li:nth-child(6) { width: 9.016994374948734%; }
-.top-backers li:nth-child(7) { width: 5.572809000085878%; }
-.top-backers li:nth-child(8) { width: 3.4441853748641647%; }
-.top-backers li:nth-child(9) { width: 2.1286236252217137%; }
-.top-backers li:nth-child(10){ width: 1.3155617496429515%; }

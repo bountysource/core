@@ -65,10 +65,6 @@ angular.module('app')
   })
 
   .controller('AppController', function ($scope, $location, $rootScope, $window, $pageTitle) {
-    $rootScope.$on('$viewContentLoaded', function() {
-      $scope.no_container = $location.path() === '/';
-    });
-
     // change page title on change route
     $rootScope.$on('$routeChangeStart', function (event, current) {
       if (!current.$$route) {

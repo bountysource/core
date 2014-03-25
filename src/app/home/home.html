@@ -1,204 +1,144 @@
-<div class="homepage">
-  <section id="top" style="margin-top: -20px;home">
-    <div class="outer">
-      <div class="container">
-        <h1>Get bugs fixed.
-          Get features added.</h1>
-          <span><h2>Accelerate open-source development with our community of {{people_count.total | number}} members.</h2></span>
+<div>
+  <div class="text-center" style="margin: 10px 0 40px 0;">
+    <h1><strong>Get bugs fixed. Get features added.</strong></h1>
+    <h2>Accelerate open-source development with our community of {{people_count.total | number}} members.</h2>
+  </div>
 
-          <div class="row">
-            <div class="col-lg-offset-2 col-sm-4 col-md-4">
-              <div class="team-signup-card" ng-controller="NavbarSearchController">
-                <h3 class="text-center white-text">Post a Bounty</h3>
-                <h4>Paste issue URL or search by keyword.</h4>
-                <div class="col-md-12 col-lg-12">
-                  <form class="form-inline" ng-submit="submit_search()">
-                    <div class="input-group">
-                      <input type="text" class="search-query form-control" ng-model="search_query" placeholder="https://github.com/.../issues/123">
-                      <div class="input-group-btn">
-                        <button type="submit" class="btn btn-success">Search</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-8 col-sm-9">
+      <ul class="nav nav-tabs">
+        <li class="active"><a>Top Projects</a></li>
+        <li><a ng-href="/bounties/search">Bounty Search</a></li>
+      </ul>
+
+      <div class="row">
+        <!-- Top Fundraisers -->
+        <div class="col-md-6 col-sm-6">
+          <a ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:6" ng-href="/fundraisers/{{fundraiser.slug}}">
+            <div class="row homepage-card">
+              <div class="col-md-3 col-xs-2">
+                <img class="img-responsive" ng-src="{{fundraiser.large_image_url}}" />
+              </div>
+              <div class="col-md-9 col-xs-10">
+                <h4>{{fundraiser.title}}</h4>
+                <p class="text-muted">{{fundraiser.short_description}}</p>
+                <p class="raised">{{fundraiser.total_pledged | dollars}} raised</p>
               </div>
             </div>
 
-            <div class="col-sm-4 col-md-4">
-              <div class="team-signup-card">
-                <h3 class="text-center white-text">Claim a Bounty</h3>
-                <h4>Earn cash by solving open-source issues.</h4>
-                <!--<ol>-->
-                <!--<li>Find bounties.</li>-->
-                <!--<li>Submit code to project.</li>-->
-                <!--<li>Claim bounties.</li>-->
-                <!--</ol>-->
-                <form class="form-inline">
-                  <a ng-href="/bounties/search" class="btn btn-success">Find Bounties</a>
-                </form>
+            <br ng-if="!$last" />
+          </a>
+
+          <div class="text-center">
+            <button class="btn btn-link" href="/fundraisers">View more fundraisers »</button>
+          </div>
+        </div>
+
+        <!-- Top Trackers -->
+        <div class="col-md-6 col-sm-6">
+          <a ng-repeat="tracker in trackers.slice(0,5) | orderBy:'-bounty_total'" ng-href="/trackers/{{tracker.slug}}">
+            <div class="row homepage-card">
+              <div class="col-md-3 col-xs-2">
+                <img class="img-responsive" ng-src="{{tracker.large_image_url}}" />
+              </div>
+              <div class="col-md-9 col-xs-10">
+                <h4>{{tracker.name}}</h4>
+                <p class="text-muted">{{tracker.description}}</p>
+                <p class="raised">{{tracker.bounty_total | dollars}} in bounties</p>
               </div>
             </div>
+
+            <br ng-if="!$last" />
+          </a>
+
+          <div class="text-center">
+            <button class="btn btn-link" href="/trackers">View more projects »</button>
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="teams">
-      <div class="container">
-        <div class="team-signup row">
-          <div class="col-sm-4 col-md-4">
-            <div class="team-signup-card panel panel-success">
-              <div class="panel-heading" style="color: black;">
-                <h3 class="text-center panel-title">Projects</h3>
-              </div>
-
-              <div class="panel-body">
-                <h5 class="text-center">For open-source projects looking to grow their community.</h5>
-                <ul>
-                  <li>Crowdfund bounties on top issues.</li>
-                  <li>Create fundraisers and get your bugs to zero.</li>
-                  <li>Project tools to encourage contributions.</li>
-                </ul>
-                <div style="text-align: center"><a ng-href="/teams/new?type=project" class="btn btn-success btn-lg">Create Team</a></div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-sm-4 col-md-4">
-            <div class="team-signup-card panel panel-success">
-              <div class="panel-heading">
-                <h3 class="panel-title text-center" style="color: black;">Startups</h3>
-              </div>
-              <div class="panel-body">
-                <h5 class="text-center">Help your small engineering team stay focused on internal priorities.</h5>
-                <ul>
-                  <li>Set up a team bounty budget.</li>
-                  <li>Post bounties on projects you use.</li>
-                  <li>Reduce development costs with crowdfunding.</li>
-                </ul>
-                <div style="text-align: center"><a ng-href="/teams/new?type=startup" class="btn btn-success button2 btn-lg">Get Started Now</a></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-4 col-md-4">
-            <div class="team-signup-card panel panel-success" style="min-height: 260px;">
-              <div class="panel-heading">
-                <h3 class="text-center panel-title" style="color: black;">Enterprise</h3>
-              </div>
-
-              <div class="panel-body">
-                <h5 class="text-center">Direct open-source communities toward problems you need solved.</h5>
-                <ul>
-                  <li>Account manager to help you get started.</li>
-                  <li>Monthly invoicing and activity reports.</li>
-                  <li>Global payment processing to developers.</li>
-                  <br />
-                </ul>
-                <div style="text-align: center"><a ng-href="/enterprise" class="btn btn-success button3 btn-lg">Learn More</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="users">
-      <div class="container" ng-show="people">
-        <div class="row">
-          <div class="col-sm-6 col-md-6">
-            <h3 class="text-center">New Members</h3>
-
-            <!-- Mobile/Tablet view -->
-            <ul class="list-inline visible-sm visible-xs">
-              <li ng-repeat="person in people.new.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.created_at | date}}">
-                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-              </li>
-            </ul>
-
-            <!-- Desktop view -->
-            <ul class="list-inline visible-md visible-lg">
-              <li ng-repeat="person in people.new.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.created_at | date}}">
-                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm-6 col-md-6">
-            <h3 class="text-center">Top Developers</h3>
-
-            <!-- Mobile/Tablet view -->
-            <ul class="list-inline visible-sm visible-xs">
-              <li ng-repeat="person in people.developers.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.followers | number}} followers">
-                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-              </li>
-            </ul>
-
-            <!-- Desktop view -->
-            <ul class="list-inline visible-md visible-lg">
-              <li ng-repeat="person in people.developers.top.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.followers | number}} followers">
-                <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6 col-md-6">
-            <h3 class="text-center">Top Backers</h3>
-            <!-- Mobile/Tablet view -->
-            <ul class="list-inline visible-sm visible-xs">
-              <li ng-repeat="person in people.backers.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.total_backed | dollars}} backed">
-                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-              </li>
-            </ul>
-
-            <!-- Desktop view -->
-            <ul class="list-inline visible-md visible-lg">
-              <li ng-repeat="person in people.backers.top.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.total_backed | dollars}} backed">
-                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm-6 col-md-6">
-            <h3 class="text-center">Top Earners</h3>
-
-            <!-- Mobile/Tablet view -->
-            <ul class="list-inline visible-sm visible-xs">
-              <li ng-repeat="person in people.earners.top.slice(0,5)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.total_earned | dollars}} earned">
-                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-              </li>
-            </ul>
-
-            <!-- Desktop view -->
-            <ul class="list-inline visible-md visible-lg">
-              <li ng-repeat="person in people.earners.top.slice(0,7)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.total_earned | dollars}} earned">
-                <a owner-href="person" id="home-earn-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="fundraisers">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6 col-md-6">
-            <h3 class="text-center">Top Projects</h3>
-            <project-card ng-repeat="project in trackers | orderBy:'-bounty_total' | slice:0:6" project="project"></project-card>
-            <div class="text-center" style="margin-top: 15px;">
-              <a href="/trackers" id="home-projects">View more projects »</a>
-            </div>
-          </div>
-
-          <div class="col-sm-6 col-md-6">
-            <h3 class="text-center">Top Fundraisers</h3>
-            <fundraiser-card ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:6" fundraiser="fundraiser"></fundraiser-card>
-            <div class="text-center" style="margin: 15px 0;">
-              <a href="/fundraisers" id="home-fundraisers">View more fundraisers »</a>
-            </div>
-          </div>
-        </div>
-      </div></section>
     </div>
-    \
+
+    <div class="col-md-4 col-sm-3">
+      <!-- Post a bounty search form -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="text-center panel-title">Post a Bounty</h3>
+        </div>
+
+        <div class="panel-body text-center">
+          <p>Paste issue URL or search by keyword.</p>
+
+          <form class="form-inline" ng-submit="submit_search()">
+            <div class="input-group">
+              <input type="text" class="search-query form-control" ng-model="search_query" placeholder="https://github.com/.../issues/123">
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Top backers, fibonizzle -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="text-center panel-title">Top Backers</h3>
+        </div>
+
+        <ul class="top-backers">
+          <li ng-repeat="person in people.backers.top.slice(0,5)">
+            <a owner-href="person">
+              <img ng-if="person" ng-src="{{person.large_image_url}}"  tooltip="{{person.display_name}}" tooltip-placement="bottom" />
+              <img ng-if="!person" src="images/anon.jpg" tooltip="Anonymous - {{person.amount | dollars}}" tooltip-placement="bottom" />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- New Users, Top Developers -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="text-center panel-title">Members</h3>
+        </div>
+
+        <div class="panel-body text-center">
+          <ul class="list-inline">
+            <li ng-repeat="person in people.new.slice(0,6)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.created_at | date}}">
+              <a owner-href="person" id="home-dev-{{person.id}}">
+                <img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}">
+              </a>
+            </li>
+          </ul>
+
+          <ul class="list-inline" style="margin-bottom: 0;">
+            <li ng-repeat="person in people.developers.top.slice(0,6)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.followers | number}} followers">
+              <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Create a Team -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="text-center panel-title">Create a Team</h3>
+        </div>
+
+        <div class="panel-body">
+          <h5 class="text-center">Grow and organize your open-source community or engineering team.</h5>
+          <ul>
+            <li>Crowdfund bounties on top issues.</li>
+            <li>Project tools to encourage contributions.</li>
+            <li>Set up a team bounty budget.</li>
+          </ul>
+
+          <div style="text-align: center">
+            <a ng-href="/teams/new" class="btn btn-success">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
