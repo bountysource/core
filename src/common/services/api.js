@@ -154,6 +154,13 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       });
     },
 
+    peopleTrackers: function(params) {
+      return this.call({
+        url: '/people/trackers',
+        params: params || {}
+      });
+    },
+
     people: function(params) {
       return this.call({
         url: '/people',

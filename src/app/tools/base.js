@@ -57,7 +57,11 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
     });
   };
 
-  $scope.trackers_promise = $api.trackers_get().then(function(trackers) {
+  $api.v2.peopleTrackers({
+    include_description: true
+  }).then(function(response) {
+    var trackers = angular.copy(response.data);
+
     $scope.trackers_count = trackers.length;
     $scope.loading_trackers = false;
 
