@@ -16,10 +16,10 @@
       <div class="row">
         <!-- Top Fundraisers -->
         <div class="col-md-6 col-sm-6">
-          <a ng-repeat="fundraiser in fundraisers | orderBy:'-created_at' | slice:0:6" ng-href="/fundraisers/{{fundraiser.slug}}">
+          <a ng-repeat="fundraiser in topFundraisers" ng-href="/fundraisers/{{fundraiser.slug}}">
             <div class="row homepage-card">
               <div class="col-md-3 col-xs-3">
-                <img class="img-responsive" ng-src="{{fundraiser.large_image_url}}" />
+                <img class="img-responsive" ng-src="{{fundraiser.image_url_medium}}" />
               </div>
               <div class="col-md-9 col-xs-9">
                 <h4>{{fundraiser.title}}</h4>
@@ -38,13 +38,13 @@
 
         <!-- Top Trackers -->
         <div class="col-md-6 col-sm-6">
-          <a ng-repeat="tracker in trackers.slice(0,5) | orderBy:'-bounty_total'" ng-href="/trackers/{{tracker.slug}}">
+          <a ng-repeat="tracker in topTrackers" ng-href="/trackers/{{tracker.slug}}">
             <div class="row homepage-card">
               <div class="col-md-3 col-xs-3">
-                <img class="img-responsive" ng-src="{{tracker.large_image_url}}" />
+                <img class="img-responsive" ng-src="{{tracker.image_url_medium}}" />
               </div>
               <div class="col-md-9 col-xs-9">
-                <h4>{{tracker.name}}</h4>
+                <h4>{{tracker.display_name}}</h4>
                 <p class="text-muted">{{tracker.description}}</p>
                 <p class="raised">{{tracker.bounty_total | dollars}} in bounties</p>
               </div>
@@ -104,16 +104,16 @@
 
         <div class="panel-body text-center">
           <ul class="list-inline">
-            <li ng-repeat="person in people.new.slice(0,6)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.created_at | date}}">
+            <li ng-repeat="person in newestMembers" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.created_at | date}}">
               <a owner-href="person" id="home-dev-{{person.id}}">
-                <img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}">
+                <img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url_small}}">
               </a>
             </li>
           </ul>
 
           <ul class="list-inline" style="margin-bottom: 0;">
-            <li ng-repeat="person in people.developers.top.slice(0,6)" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.followers | number}} followers">
-              <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url}}"></a>
+            <li ng-repeat="person in popularMembers" tooltip-placement="bottom" tooltip="{{person.display_name}} -- {{person.followers | number}} followers">
+              <a owner-href="person" id="home-dev-{{person.id}}"><img class="thumbnail no-margin" style="width: 45px; height: 45px;" ng-src="{{person.image_url_small}}"></a>
             </li>
           </ul>
         </div>

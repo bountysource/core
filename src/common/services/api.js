@@ -152,6 +152,13 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         url: '/fundraisers',
         params: params || {}
       });
+    },
+
+    people: function(params) {
+      return this.call({
+        url: '/people',
+        params: params || {}
+      });
     }
 
   };

@@ -1,30 +1,27 @@
 'use strict';
 
-angular.module('app').controller('HomeCtrl', function ($scope, $window, $api) {
+angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q) {
 
+  // Top Fundraisers
   $api.v2.fundraisers({
     featured: true,
     order: 'pledge_total',
     per_page: 5
   }).then(function(response) {
-    $scope.fundraisers = angular.copy(response.data);
-
-    // Calculate percentage of goal met
-    for (var i=0; i<$scope.fundraisers.length; i++) {
-      $scope.fundraisers[i].percentageOfGoalMet = 100 * $scope.fundraisers[i].total_pledged / $scope.fundraisers[i].funding_goal;
-    }
+    $scope.topFundraisers = angular.copy(response.data);
   });
 
-//  $api.fundraiser_cards().then(function(fundraisers) {
-//    $scope.fundraisers = fundraisers;
-//    return fundraisers;
-//  });
-
-  $api.people_interesting().then(function(people) {
-    $scope.people = people;
-    return people;
+  // Top Issue Trackers
+  $api.v2.trackers({
+    featured: true,
+    order: '+bounty',
+    has_bounties: true,
+    include_description: true
+  }).then(function(response) {
+    $scope.topTrackers = angular.copy(response.data);
   });
 
+  // Top Backers
   $api.v2.backers({
     order: '+amount',
     per_page: 10
@@ -32,12 +29,20 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api) {
     $scope.topBackers = angular.copy(response.data);
   });
 
-  $api.project_cards().then(function(trackers) {
-    $scope.trackers = trackers;
-    for (var i=0; i<trackers.length; i++) {
-      trackers[i].bounty_total = parseFloat(trackers[i].bounty_total);
-    }
-
-    return trackers;
+  // Newest members
+  $api.v2.people({
+    per_page: 6,
+    order: '+created_at'
+  }).then(function(response) {
+    $scope.newestMembers = angular.copy(response.data);
   });
+
+  // Members with the most followers
+  $api.v2.people({
+    per_page: 6,
+    order: '+followers'
+  }).then(function(response) {
+    $scope.popularMembers = angular.copy(response.data);
+  });
+
 });
