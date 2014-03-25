@@ -19,19 +19,15 @@
 
                 <div class="panel-body">
                   <div class="row">
-                    <div class="col-lg-6 col-md-6 text-center" style="vertical-align: middle;">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center" style="vertical-align: middle;">
                       <!-- Progress bar for percentage of goal met -->
-                      <progressbar style="margin-bottom: 0px; margin-top: 5px;" type="success" class="progress-striped" animate="false" value="activeFundraiser.percentageOfGoalMet | atLeast:15 | atMost:100">{{activeFundraiser.percentageOfGoalMet | number:0}}%</progressbar>
+                      <progressbar style="margin-bottom: 5px; margin-top:5px;" type="success" class="progress-striped" animate="false" value="activeFundraiser.percentageOfGoalMet | atLeast:15 | atMost:100">{{activeFundraiser.percentageOfGoalMet | number:0}}%</progressbar>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 text-center" style="vertical-align: middle;">
-                      <span>
-                        <small class="text-muted">Raised</small>
-                      </span>
-                      <h3 style="margin: 0; display: inline-block">
-                        {{activeFundraiser.total_pledged | dollars}}
-                      </h3>
-                      <small class="text-muted">of <strong>{{activeFundraiser.funding_goal | dollars}}</strong> goal</small>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center" style="vertical-align: middle;">
+                      <h4 style="margin: 5px 0px; display: inline-block">
+                        Raised {{activeFundraiser.total_pledged | dollars}} of {{activeFundraiser.funding_goal | dollars}} goal
+                      </h4>
                     </div>
 
                   </div>

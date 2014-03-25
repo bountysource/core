@@ -112,7 +112,7 @@
             <a ng-href="/teams/{{team.slug}}/bounties">Bounties</a>
           </li>
 
-          <li ng-class="{ active: activeNavTab('updates') }" ng-if="activeFundraiser">
+          <li ng-class="{ active: activeNavTab('updates') }">
             <a ng-href="/teams/{{team.slug}}/updates">Updates</a>
           </li>
 
@@ -185,10 +185,13 @@
           <li ng-class="{ active: activeNavTab('fundraiser') }" ng-if="activeFundraiser">
             <a ng-href="/teams/{{team.slug}}/fundraiser">Fundraiser</a>
           </li>
+          <!-- Don't render updates tab if no active fundraiser. 
+          May be able to send out updates independent of fundraiser.
+           -->
 
-          <li ng-class="{ active: activeNavTab('updates') }">
+<!--           <li ng-class="{ active: activeNavTab('updates') }">
             <a ng-href="/teams/{{team.slug}}/updates">Updates</a>
-          </li>
+          </li> -->
 
           <li ng-class="{ active: activeNavTab('projects') }">
             <a ng-href="/teams/{{team.slug}}/projects">Projects</a>
