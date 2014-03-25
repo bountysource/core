@@ -88,10 +88,9 @@
         </div>
 
         <ul class="top-backers">
-          <li ng-repeat="person in people.backers.top.slice(0,5)">
+          <li ng-repeat="person in topBackers">
             <a owner-href="person">
-              <img ng-if="person" ng-src="{{person.large_image_url}}"  tooltip="{{person.display_name}}" tooltip-placement="bottom" />
-              <img ng-if="!person" src="images/anon.jpg" tooltip="Anonymous - {{person.amount | dollars}}" tooltip-placement="bottom" />
+              <img ng-src="{{person.image_url_large}}" tooltip="{{person.display_name}} - {{person.amount | dollars}}" tooltip-placement="bottom" />
             </a>
           </li>
         </ul>

@@ -25,6 +25,13 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api) {
     return people;
   });
 
+  $api.v2.backers({
+    order: '+amount',
+    per_page: 10
+  }).then(function(response) {
+    $scope.topBackers = angular.copy(response.data);
+  });
+
   $api.project_cards().then(function(trackers) {
     $scope.trackers = trackers;
     for (var i=0; i<trackers.length; i++) {
