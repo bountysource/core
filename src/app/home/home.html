@@ -70,7 +70,7 @@
         <div class="panel-body text-center">
           <p>Paste issue URL or search by keyword.</p>
 
-          <form class="form-inline" ng-submit="submit_search()">
+          <form class="form-inline" ng-submit="submit_search()" ng-controller="NavbarSearchController">
             <div class="input-group">
               <input type="text" class="search-query form-control" ng-model="search_query" placeholder="https://github.com/.../issues/123">
               <div class="input-group-btn">
