@@ -51,10 +51,10 @@
         <thead>
         <tr>
           <th style="width: 4%;"></th>
-          <th style="width: 56%;">Issue</th>
+          <th style="width: 51%;">Issue</th>
           <th style="width: 35%;"><a ng-click="update_sort(open_sort, 'progress_sum')">Progress</a></th>
-          <th style="width: 5%;"></th>
-          <th style="text-align: center; cursor: pointer; width: 10%;">
+          <th style="text-align: center; width: 5%;"><a ng-click="update_sort(open_sort, 'created_at')" tooltip="Posted"><i class="glyphicon glyphicon-time"></i></a></th>
+          <th style="text-align: center; width: 5%;">
             <a ng-click="update_sort(open_sort, 'amount')">
               <div tooltip="Bounty Amount"><strong>$</strong></div>
             </a>
@@ -71,7 +71,7 @@
               <span ng-show="!bounty.issue.can_add_bounty && !bounty.issue.paid_out" class="label label-warning">closed</span>
             </a>
           </td>
-          <td class="center-height" style="vertical-align: middle;">
+          <td class="center-height">
             <a ng-href="/issues/{{bounty.issue.slug}}">
               <div class="progress table-progress" html="true" popover="{{ bounty.status }}" popover-title="{{ bounty.title }}" popover-trigger="mouseenter" style="cursor: pointer;">
                 <div class="progress-bar" style="width: {{ bounty.progress_sum | atLeast:15 | atMost:100 | number:0 }}%; vertical-align: middle;">
@@ -80,9 +80,8 @@
               </div>
             </a>
           </td>
-          <td class="center-height" style="text-align: center;">
-          </td>
-          <td class="center-height" style="text-align:center;"><strong>{{bounty.amount | dollars}}</strong></td>
+          <td class="center-height"><a class="label label-primary">{{bounty.created_at | timeAgoShort}}</a></td>
+          <td class="center-height"><strong>{{bounty.amount | dollars}}</strong></td>
         </tr>
         </tbody>
       </table>
