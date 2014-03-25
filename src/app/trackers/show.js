@@ -15,9 +15,9 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
 
     // follow and unfollow API method wrappers
     tracker.follow = function() {
-      if (!$scope.current_person) { 
+      if (!$scope.current_person) {
         $cookies.tracker_follow = $routeParams.id;
-        return $api.require_signin(); 
+        return $api.require_signin();
       }
 
       if (tracker.followed) {
@@ -31,8 +31,8 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
     };
     // if cookie is set, call tracker.follow() when page is loaded
     if ($cookies.tracker_follow === $routeParams.id) {
-       $cookies.tracker_follow = undefined;
-       tracker.follow();
+      $cookies.tracker_follow = undefined;
+      tracker.follow();
     }
 
     $scope.getIssues = function (page) {
