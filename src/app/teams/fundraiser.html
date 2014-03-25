@@ -11,6 +11,34 @@
     <div ng-show="activePage()" ng-if="activeFundraiser">
       <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+          <div ng-if="!activeFundraiser.in_progress">
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="text-center panel-title">This fundraiser ended on {{ activeFundraiser.ends_at | date:'longDate' }}</h3>
+                </div>
+
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 text-center" style="vertical-align: middle;">
+                      <!-- Progress bar for percentage of goal met -->
+                      <progressbar style="margin-bottom: 0px; margin-top: 5px;" type="success" class="progress-striped" animate="false" value="activeFundraiser.percentageOfGoalMet | atLeast:15 | atMost:100">{{activeFundraiser.percentageOfGoalMet | number:0}}%</progressbar>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 text-center" style="vertical-align: middle;">
+                      <span>
+                        <small class="text-muted">Raised</small>
+                      </span>
+                      <h3 style="margin: 0; display: inline-block">
+                        {{activeFundraiser.total_pledged | dollars}}
+                      </h3>
+                      <small class="text-muted">of <strong>{{activeFundraiser.funding_goal | dollars}}</strong> goal</small>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+          </div>
           <div fundraiser-template fundraiser="activeFundraiser"
                options="{ showLeftColumn: false, showRightColumn: false, showTitle: false, showNavTabs: false }">
             <div class="markdow" ng-bind-html="activeFundraiser.description_html"></div>

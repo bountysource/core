@@ -77,11 +77,11 @@
   <tr ng-repeat="issue in issues">
     <td ng-if="$showTrackerImage">
       <a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}">
-        <img src="{{issue.tracker.image_url_small}}" style="max-height:20px;max-width:20px;"/>
+        <img src="{{issue.tracker.image_url_small}}" style="max-height:20px;max-width:20px;" tooltip="{{ issue.tracker.display_name }}" tooltip-placement="left"/>
       </a>
     </td>
     <td ng-if="$showTrackerName">
-      <a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a>
+      <a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.display_name}}</a>
     </td>
     <td ng-if="$showIssueTitle">
       <a ng-href="/issues/{{issue.slug}}">

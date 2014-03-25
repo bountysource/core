@@ -1,4 +1,13 @@
 <div>
+  <div class="row" ng-if="error">
+    <div class="col-xs-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <h4 class="text-center alert alert-danger">No team found.</h4>
+      <div class="well">
+        <p>Is your team missing?  Don't fret... adding one is super easy!</p>
+        <p class="text-center"><a href="/teams/new" class="btn btn-primary">Create New Team</a></p>
+      </div>
+    </div>
+  </div>
   <div class="row" ng-if="team">
     <!-- LEFT COLUMN -->
     <div class="col-lg-3 col-md-3 col-sm-3">
@@ -9,7 +18,7 @@
           <img ng-src="{{team.large_image_url}}" class="img-responsive">
 
           <!-- Show active Fundraiser progress if applicable -->
-          <div ng-if="activeFundraiser">
+          <div ng-if="activeFundraiser.in_progress">
             <br />
 
             <!-- Time left, total pledged -->
@@ -38,7 +47,7 @@
         </div>
 
         <!-- Flex funding in panel footer if there is an active Fundraiser -->
-        <div class="panel-footer" ng-if="activeFundraiser">
+        <div class="panel-footer" ng-if="activeFundraiser.in_progress">
           <small>
             <strong>Flexible Funding: </strong>
             <span ng-show="activeFundraiser.in_progress">This campaign will receive all funds raised even if it does not reach its goal.</span>
@@ -103,7 +112,7 @@
             <a ng-href="/teams/{{team.slug}}/bounties">Bounties</a>
           </li>
 
-          <li ng-class="{ active: activeNavTab('updates') }">
+          <li ng-class="{ active: activeNavTab('updates') }" ng-if="activeFundraiser">
             <a ng-href="/teams/{{team.slug}}/updates">Updates</a>
           </li>
 

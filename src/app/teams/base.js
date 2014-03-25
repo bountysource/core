@@ -4,10 +4,13 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
   $pageTitle.set("Teams");
 
   $scope.team_promise = $api.team_get($routeParams.id).then(function(team) {
-    $pageTitle.set(team.name, "Teams");
-
-    $scope.team = angular.copy(team);
-    $scope.setRelatedTrackers($scope.team);
+    if(team.error) {
+      $scope.error = team.error;
+    } else {
+      $pageTitle.set(team.name, "Teams");
+      $scope.team = angular.copy(team);
+      $scope.setRelatedTrackers($scope.team);
+    }
 
     return $scope.team;
   });

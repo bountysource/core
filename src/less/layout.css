@@ -70,7 +70,7 @@ body {
   margin-bottom: 0px;
 }
 
-h1,h3.narrow {
+h1,h3,h4,h5,h6.narrow {
   margin-top:0px;
 }
 
@@ -154,3 +154,4 @@ n10= n9*x1
 .top-backers li:nth-child(8) { width: 2.1286236252217137%; }
 .top-backers li:nth-child(9) { width: 1.3155617496429515%; }
 .top-backers li:nth-child(10){ width: 0.8130618755787621%; }
+

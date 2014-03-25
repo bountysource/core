@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/teams">Teams</a></li>
-    <li><a>{{team.name || 'Loading...'}}</a></li>
+    <li ng-if="!error"><a>{{team.name || 'Loading...'}}</a></li>
   </ul>
 
   <div team-view team="team">
@@ -11,28 +11,6 @@
         to <strong>{{team.name}}'s</strong> balance. Current balance of <strong>{{team.account_balance |
           dollars}}</strong> is available to spend immediately.
       </alert>
-    </div>
-
-    <!-- Public View -->
-    <div class="row" ng-if="!is_member">
-      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="text-center panel-title"><a ng-href="/teams/{{ team.slug }}/issues">Top 5 Issues</a></h3>
-          </div>
-          <h4 class="text-center" ng-if="issues.length == 0">No Issues</h4>
-          <issue-list issues="issues" include="['bountyTotal', 'issueTitle', 'thumbsUpCount', 'participantsCount']" hide-header-row></issue-list>
-        </div>
-      </div>
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <div class="panel panel-default">
-          <div class="panel-heading"><h3 class="text-center panel-title">Members</h3></div>
-          <div class="panel-body">
-            <h4 class="text-center" ng-if="members.length == 0">No Members</h4>
-            <thumbnail-links array="members" per-row="3" object-type="'team_member'"></thumbnail-links>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Developer view. Can only add projects and place bounties -->
@@ -68,5 +46,28 @@
         <ng-include src="'app/teams/templates/goto_plugin_install.html'"></ng-include>
       </div>
     </div>
+
+    <!-- Public View -->
+    <div class="row">
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="text-center panel-title"><a ng-href="/teams/{{ team.slug }}/issues">Top 5 Issues</a></h3>
+          </div>
+          <h4 class="text-center" ng-if="issues.length == 0">No Issues</h4>
+          <issue-list issues="issues" include="['bountyTotal', 'issueTitle', 'thumbsUpCount', 'participantsCount']" hide-header-row></issue-list>
+        </div>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3 class="text-center panel-title">Members</h3></div>
+          <div class="panel-body">
+            <h4 class="text-center" ng-if="members.length == 0">No Members</h4>
+            <thumbnail-links array="members" per-row="3" object-type="'team_member'"></thumbnail-links>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

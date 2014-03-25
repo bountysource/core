@@ -27,6 +27,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
         page: page || 1,
         per_page: $scope.per_page || 30
       }).then(function (response) {
+        console.log("issues", response.data);
         $scope.issues = angular.copy(response.data);
 
         setPagination({

@@ -1,3 +1,10 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/teams">Teams</a></li>
+  <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
+  <li><a ng-href="/teams/{{team.slug}}/backers">Backers</a></li>
+</ul>
+
 <div team-view team="team">
   <div backer-list backers="backers"></div>
 </div>

@@ -1,5 +1,12 @@
 <div ng-controller="TeamProjectsController">
 
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/teams">Teams</a></li>
+    <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
+    <li><a ng-href="/teams/{{team.slug}}/projects">Projects</a></li>
+  </ul>
+
   <div team-view team="team">
     <!--<pre>ownedTrackers: {{ownedTrackers | json}}</pre>-->
     <!--<pre>usedTrackers: {{usedTrackers | json}}</pre>-->
