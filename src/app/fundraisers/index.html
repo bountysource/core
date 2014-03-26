@@ -39,7 +39,7 @@
       <td>{{fundraiser.funding_goal | dollars}}</td>
       <td>{{fundraiser.total_pledged | dollars}}</td>
       <td>
-        <span ng-show="fundraiser.in_progress">{{fundraiser.ends_at | timeLeftInWords}}</span>
+        <span title="{{fundraiser.ends_at | date}}" ng-show="fundraiser.in_progress">{{fundraiser.ends_at | timeLeftInWords}}</span>
         <small ng-hide="fundraiser.in_progress">Completed {{fundraiser.ends_at | date}}</small>
       </td>
     </tr>
