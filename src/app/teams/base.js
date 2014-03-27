@@ -4,8 +4,8 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
   $pageTitle.set("Teams");
 
   $scope.team_promise = $api.v2.team($routeParams.id).then(function(response) {
-    if(team.error) {
-      $scope.error = team.error;
+    if (!response.success) {
+      $scope.error = response.data;
     } else {
       $scope.team = angular.copy(response.data);
       $pageTitle.set($scope.team.name, "Teams");

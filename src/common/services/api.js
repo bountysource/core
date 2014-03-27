@@ -65,7 +65,10 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         $log.info('----------------------------');
       }
 
-      return $http(options).then(function(response) {
+      // same callback used for both success/error
+      var callback = function(response) {
+        response.success = (response.status >= 200 && response.status < 400);
+
         if (options.verbose) {
           $log.info('------ API Response ' + (new Date()).getTime() + ' ------');
           $log.info('Status:', response.status);
@@ -74,7 +77,8 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
           $log.info('----------------------------');
         }
         return response;
-      });
+      };
+      return $http(options).then(callback, callback);
     },
 
     issues: function(params) {
