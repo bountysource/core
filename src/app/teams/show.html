@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/teams">Teams</a></li>
-    <li ng-if="!error"><a>{{team.name || 'Loading...'}}</a></li>
+    <li ng-href="/teams/{{team.slug}}" ng-if="!error"><a>{{team.name || 'Loading...'}}</a></li>
   </ul>
 
   <div team-view team="team">
@@ -68,6 +68,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

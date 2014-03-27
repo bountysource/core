@@ -3,30 +3,34 @@
 angular.module('app').controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle, $rootScope) {
   $pageTitle.set("Teams");
 
-  $scope.team_promise = $api.team_get($routeParams.id).then(function(team) {
+  $scope.team_promise = $api.v2.team($routeParams.id).then(function(response) {
     if(team.error) {
       $scope.error = team.error;
     } else {
-      $pageTitle.set(team.name, "Teams");
-      $scope.team = angular.copy(team);
-      $scope.setRelatedTrackers($scope.team);
+      $scope.team = angular.copy(response.data);
+      $pageTitle.set($scope.team.name, "Teams");
+
+      $api.v2.trackers({ team_id: $scope.team.id, include_owner: true }).then(function(response) {
+        $scope.setRelatedTrackers($scope.team, response.data);
+      });
     }
 
     return $scope.team;
   });
 
-  $scope.setRelatedTrackers = function(team) {
+  $scope.setRelatedTrackers = function(team, trackers) {
+    console.log(trackers);
     $scope.ownedTrackers = [];
     $scope.usedTrackers = [];
 
     // set owned flag for all trackers
-    for (var i=0; i<team.trackers.length; i++) {
-      team.trackers[i].$owned = team.trackers[i].owner && (/^Team(?:::.*)*$/).test(team.trackers[i].owner.type) && team.trackers[i].owner.id === team.id;
+    for (var i=0; i<trackers.length; i++) {
+      trackers[i].$owned = trackers[i].owner && (/^Team(?:::.*)*$/).test(trackers[i].owner.type) && trackers[i].owner.id === team.id;
 
-      if (team.trackers[i].$owned) {
-        $scope.ownedTrackers.push( angular.copy(team.trackers[i]) );
+      if (trackers[i].$owned) {
+        $scope.ownedTrackers.push( angular.copy(trackers[i]) );
       } else {
-        $scope.usedTrackers.push( angular.copy(team.trackers[i]) );
+        $scope.usedTrackers.push( angular.copy(trackers[i]) );
       }
     }
 

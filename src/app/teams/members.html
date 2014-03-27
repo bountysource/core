@@ -3,7 +3,7 @@
     <li><a href="/">Home</a></li>
     <li><a href="/teams">Teams</a></li>
     <li><a ng-href="/teams/{{team.slug}}">{{team.name || 'Loading...'}}</a></li>
-    <li><a>Members</a></li>
+    <li><a ng-href="/teams/{{team.slug}}/members">Members</a></li>
   </ul>
 
   <div team-view team="team">

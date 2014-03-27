@@ -84,6 +84,20 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       });
     },
 
+    team: function(slug, params) {
+      return this.call({
+        url: '/teams/'+slug,
+        params: params || {}
+      });
+    },
+
+    teams: function(params) {
+      return this.call({
+        url: '/teams',
+        params: params || {}
+      });
+    },
+
     comments: function (params) {
       return this.call({
         url: '/comments',
