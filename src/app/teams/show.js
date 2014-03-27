@@ -32,6 +32,18 @@ angular.module('app').controller('TeamHomeController', function ($route, $scope,
       $pageTitle.set("Team not found");
     }
 
+
+    $scope.$watch('activeFundraiser', function(fundraiser) {
+      if (fundraiser) {
+        $api.v2.fundraiserUpdates({
+          fundraiser_id: fundraiser.id
+        }).then(function(response) {
+          $scope.updates = angular.copy(response.data);
+          return $scope.updates;
+        });
+      }
+    });
+
     return team;
   });
 
