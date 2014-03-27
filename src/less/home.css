@@ -10,3 +10,31 @@
 .homepage-card img { margin-top: 10px; }
 
 .homepage-card .raised { text-decoration: none; color: black; }
+
+
+
+
+.homepage .tagline { text-align: center; margin: 10px 0 40px 0; }
+.homepage .tagline h1 { font-weight: bold; }
+
+@media (max-width: 767px) { /* @screen-xs */
+  .homepage h1 { font-size: 30px; white-space: pre-line; margin: 0 }
+  .homepage h2 { font-size: 20px; font-weight: normal; }
+  .homepage .tagline { margin: 0 }
+}
+
+@media (min-width: 768px) and (max-width: 991px) { /* @screen-sm */
+  .homepage h1 { font-size: 38px; }
+  .homepage h2 { font-size: 19px; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) { /* @screen-md */
+  .homepage h1 { font-size: 46px; }
+  .homepage h2 { font-size: 25px; }
+}
+
+@media (min-width: 1200px) { /* @screen-lg */
+  .homepage h1 { font-size: 50px; }
+  .homepage h2 { font-size: 30px; }
+}
+
