@@ -45,7 +45,8 @@ angular.module('app', [
   'colorpicker.module',
   'activity',
   'fundraisers',
-  'teams'
+  'teams',
+  'ui.scrollfix'
 ]);
 
 angular.module('app')
