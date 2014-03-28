@@ -43,7 +43,8 @@ angular.module('app', [
   'ui.bootstrap',
   'colorpicker.module',
   'fundraisers',
-  'teams'
+  'teams',
+  'ui.scrollfix'
 ]);
 
 angular.module('app')
