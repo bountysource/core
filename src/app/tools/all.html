@@ -20,7 +20,7 @@
       <alert type="plugin_alert.type" close="plugin_alert.text = null">{{plugin_alert.text}}</alert>
     </div>
 
-    <div collapse="!current_tracker">
+    <div collapse="get_selected_trackers() === 0">
       <ng-include src="'app/tools/templates/plugin_settings.html'"></ng-include>
       <br>
     </div>
