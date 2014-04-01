@@ -5,7 +5,7 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
 
   $scope.team_promise = $api.v2.team($routeParams.id).then(function(response) {
     if (!response.success) {
-      $scope.error = response.data;
+      $scope.no_team_error = response.data.error;
     } else {
       $scope.team = angular.copy(response.data);
       $pageTitle.set($scope.team.name, "Teams");
@@ -19,7 +19,6 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
   });
 
   $scope.setRelatedTrackers = function(team, trackers) {
-    console.log(trackers);
     $scope.ownedTrackers = [];
     $scope.usedTrackers = [];
 
@@ -36,7 +35,7 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
 
     return team;
   };
-
+ 
   $scope.set_team = function(team) {
     $scope.team = team;
   };

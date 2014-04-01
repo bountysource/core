@@ -6,14 +6,14 @@ angular.module('app').controller('TeamAccountController', function ($scope, $rou
     return cart;
   });
 
-  $scope.$watch('is_admin', function(value) {
-    if (value === false) {
-      $location.path("/teams/"+$routeParams.id).replace();
-    }
-  });
+  // $scope.$watch('is_admin', function(value) {
+  //   if (value === false) {
+  //     $location.path("/teams/"+$routeParams.id).replace();
+  //   }
+  // });
 
   $scope.pay_in = {
-    amount: 0,
+    amount: $routeParams.amount || 0,
     checkout_method: 'google',
 
     // only used to alter the displayed amount,
@@ -52,8 +52,12 @@ angular.module('app').controller('TeamAccountController', function ($scope, $rou
           };
 
           cart.clear().then(function() {
-            cart.add_team_payin($scope.pay_in.amount, team).then(function(item) {
-              cart.checkout($scope.pay_in.checkout_method).then(successCallback, errorCallback);
+            cart.add_team_payin($scope.pay_in.amount, team).then(function(response) {
+              if(!response.error) {
+                cart.checkout($scope.pay_in.checkout_method).then(successCallback, errorCallback);
+              } else {
+                $scope.error = response.error;
+              }
             });
           });
         });

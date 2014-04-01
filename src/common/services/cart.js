@@ -139,6 +139,10 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
       this._require_person().then(function(person) {
         if (person) {
           that.api.add_item(item.class, item.amount, item.attributes).then(function(updated_cart) {
+            // if the add_item call failed, return an error
+            if (updated_cart.error) {
+              return deferred.resolve(updated_cart);
+            }
             deferred.resolve(item);
           });
         } else {

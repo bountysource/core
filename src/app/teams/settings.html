@@ -7,7 +7,7 @@
   </ul>
 
   <div team-view team="team">
-    <form class="form-horizontal" ng-submit="create_team()" ng-controller="EditTeamController">
+    <form class="form-horizontal" ng-submit="save_team()" ng-controller="EditTeamController">
       <div ng-show="alert.text">
         <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
       </div>
