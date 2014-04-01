@@ -27,7 +27,6 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
         page: page || 1,
         per_page: $scope.per_page || 30
       }).then(function (response) {
-        console.log("issues", response.data);
         $scope.issues = angular.copy(response.data);
 
         setPagination({
@@ -41,8 +40,8 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
 
     $scope.getTrackers = function (team) {
       $api.v2.trackers({
-        tracker_owner_id: team.id,
-        tracker_owner_type: team.type
+        owner_id: team.id,
+        owner_type: team.type
       }).then(function (response) {
         $scope.trackers = response.data;
       });
