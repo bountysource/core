@@ -116,7 +116,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
           params.amount = amount;
         }
         $location.url('/teams/'+scope.team.slug+'/account').search(params);
-        // place Mixpanel tracking here
+        $analytics.teamPayinStart({ amount: amount, type: 'buttons'});
       };
 
       scope.pledgeWithRewardRedirect = function(reward) {
@@ -131,7 +131,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       scope.customPayinRedirect = function (amount) {
         $location.url('/teams/'+scope.team.slug+'/account').search({ amount: amount });
-        // place Mixpanel tracking
+        $analytics.teamPayinStart({ amount: amount, type: 'custom'});
       };
 
       scope.customPledgeRedirect = function(amount) {

@@ -35,6 +35,10 @@ angular.module('app')
       this.track('Start Pledge', angular.extend({ type: '$direct' }, options||{}));
     };
 
+    this.teamPayinStart = function (options) {
+      this.track('Start Team Payin', angular.extend({ type: '$direct'}, options || {} ));
+    };
+
     // Show the Solution start form
     this.startSolutionCreate = function(issue_id, options) {
       this.track('Start Solution Create', angular.extend({ issue_id: issue_id }, options||{}));
