@@ -80,6 +80,7 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
         this._require_person().then(function(person) {
           if (person) {
             that.api.checkout(checkout_method).then(function(response) {
+
               if (!response.meta.success) {
                 deferred.reject(response);
 

@@ -41,11 +41,13 @@ angular.module('app').controller('TeamAccountController', function ($scope, $rou
 
           var errorCallback = function(response) {
             console.log('Payment error', response);
-
             $scope.processing_payment = false;
 
             if (response.data && response.data.error) {
               $scope.error = response.data.error;
+            //hacky grossness. Payment redirect probably shoudln't return 302
+            } else if (response.meta.status === 302) {
+              // don't assign scope.error
             } else {
               $scope.error = "Something went wrong. Please try again, or contact support@bountysource if you see the error again.";
             }

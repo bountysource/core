@@ -29,11 +29,12 @@
   <!-- Team accounts -->
   <div class="radio" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']">
     <label>
-      <input type="radio" ng-model="$parent.value" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0" />
+      <input type="radio" ng-model="$parent.value" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0 || onTeamPage(team)"/>
       <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}" />
 
-      <span ng-class="{ 'text-muted': (!team.is_developer || team.account_balance <= 0) }"></span>
-      <span>{{team.name}}</span>
+      <span ng-class="{ 'text-muted': (!team.is_developer || team.account_balance <= 0 || onTeamPage(team)) }">
+        {{team.name}}
+      </span>
       <strong ng-show="team.is_developer">{{team.account_balance | dollars}}</strong>
       <strong ng-hide="team.is_developer">$0</strong>
       <span ng-show="team.is_admin && team.account_balance < 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
