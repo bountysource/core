@@ -5,7 +5,6 @@ angular.module('teams')
     $routeProvider.when('/teams/:id/account', angular.extend({
       templateUrl: 'app/teams/account.html',
       controller: 'BaseTeamController',
-      resolve: { person: personResolver },
       trackEvent: 'View Team Account'
     }, defaultRouteOptions));
 
