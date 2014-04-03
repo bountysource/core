@@ -113,4 +113,10 @@ angular.module('teams')
       controller: 'BaseTeamController',
       trackEvent: 'View Team Update'
     }, defaultRouteOptions));
+
+    $routeProvider.when('/teams/:id/rewards', angular.extend({
+      templateUrl: 'app/teams/rewards.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Team Rewards'
+    }, defaultRouteOptions));
   });
