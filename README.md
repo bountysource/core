@@ -28,9 +28,10 @@ Fork our repository on GitHub, clone it locally, install components and modules,
 git clone git@github.com:YOUR_GITHUB_LOGIN/frontend.git bountysource
 cd bountysource
 sudo npm install -g bower grunt-cli    # recommended
-npm install    # installs required node.js modules into node_modules/*
-bower install  # installs web components into app/components/*
-grunt server   # runs grunt server on http://localhost:9000/
+npm install       # installs required node.js modules into node_modules/*
+bower install     # installs web components into app/components/*
+grunt server      # runs grunt server on http://localhost:9000/
+grunt test:travis # checks if your changed didn't break anything
 ```
 
 ## Staging vs. Production
