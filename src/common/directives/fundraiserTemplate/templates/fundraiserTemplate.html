@@ -383,7 +383,7 @@
                 <a ng-show="fundraiser.in_progress && reward.sold_out" class="btn btn-default btn-lg" disabled>Sold Out</a>
 
                 <!-- Fundraiser not published -->
-                <button ng-show="!activeFundraiser.published" class="btn btn-success btn-lg" style="cursor: not-allowed;" disabled>{{reward.amount | dollars}}</button>
+                <button ng-show="!fundraiser.published" class="btn btn-success btn-lg" style="cursor: not-allowed;" disabled>{{reward.amount | dollars}}</button>
               </div>
             </td>
           </tr>
