@@ -8,14 +8,16 @@ angular.module('fundraisers').controller('FundraiserRewardInfoController', funct
       rewards[i].$is_open = true;
     }
     $scope.rewards = rewards;
+
+    $scope.toggle_expand_all = function() {
+      $scope.expand_all = !$scope.expand_all;
+      for (var i=0; i<rewards.length; i++) {
+        rewards[i].$is_open = $scope.expand_all;
+      }
+    };
+
     return rewards;
   });
 
   $scope.expand_all = true;
-  $scope.toggle_expand_all = function() {
-    $scope.expand_all = !$scope.expand_all;
-    for (var i=0; i<$scope.rewards.length; i++) {
-      $scope.rewards[i].$is_open = $scope.expand_all;
-    }
-  };
 });
