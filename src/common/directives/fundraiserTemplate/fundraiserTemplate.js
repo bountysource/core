@@ -208,7 +208,7 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
           $api.v2.fundraiserRewards(fundraiser.id, {
             order: '-amount'
           }).then(function(response) {
-            scope.rewards = angular.copy(response.data.slice(1,-1));
+            scope.rewards = angular.copy(response.data.slice(1));
           });
         }
       });
