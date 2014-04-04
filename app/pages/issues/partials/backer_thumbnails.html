@@ -7,9 +7,9 @@
                           '4': 'Backers:',
                           'other': 'Top Backers:'}">
     </ng-pluralize>
-  </h4>
+  </h4> 
   <ul class="inline" style="margin-bottom: 0;">
-    <li ng-repeat="bounty in issue.bounties.slice(0, 5) | orderBy:['-amount']">
+    <li ng-repeat="bounty in issue.bounties | orderBy:['-amount'] | limitTo: 5">
 
       <div ng-show="bounty.owner" tooltip="{{bounty.amount | dollars}} - {{bounty.owner.display_name}}">
         <owner-profile-link model="bounty" class="thumbnail">
