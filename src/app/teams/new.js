@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('app').controller('NewTeamController', function ($scope, $location, $api, $filter, $routeParams, $pageTitle) {
+  console.log($routeParams.creating_fundraiser);
   $pageTitle.set("Teams", "New");
 
   $scope.team_options = [
@@ -37,6 +38,8 @@ angular.module('app').controller('NewTeamController', function ($scope, $locatio
 
       if (team.error) {
         $scope.error = team.error;
+      } else if ($routeParams.creating_fundraiser) {
+        $location.url("/fundraisers/new");
       } else {
         $location.url("/teams/"+team.slug);
       }

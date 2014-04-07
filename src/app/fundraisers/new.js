@@ -14,6 +14,10 @@ angular.module('fundraisers').controller('FundraiserCreateController', function(
   $scope.$watch('current_person', function(person) {
     if (person) {
       $scope.fundraiser.person = angular.copy(person);
+      // Get person's teams
+      $api.person_teams_get(person.id).then(function(teams) {
+        $scope.teams = angular.copy(teams);
+      });
     }
   });
 
@@ -27,14 +31,12 @@ angular.module('fundraisers').controller('FundraiserCreateController', function(
     }
   });
 
+  $scope.redirectTeamCreate = function () {
+    $location.path("/teams/new").search({creating_fundraiser: true});
+  };
+
   $scope.create = function() {
     var payload = angular.copy($scope.fundraiser);
-
-    // Replace Team object with Team id as team_id
-    if (payload.team) {
-      payload.team_id = payload.team.id;
-      delete payload.team;
-    }
 
     $api.fundraiser_create(payload, function(response) {
       if (response.meta.success) {
