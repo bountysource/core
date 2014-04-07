@@ -8,6 +8,11 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
       $scope.no_team_error = response.data.error;
     } else {
       $scope.team = angular.copy(response.data);
+
+      // turn stringified integer values back into integer
+      $scope.team.open_bounties_amount = parseInt($scope.team.open_bounties_amount, 10)
+      $scope.team.closed_bounties_amount = parseInt($scope.team.closed_bounties_amount, 10)
+
       $pageTitle.set($scope.team.name, "Teams");
 
       $api.v2.trackers({ team_id: $scope.team.id, include_owner: true }).then(function(response) {
