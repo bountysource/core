@@ -4,11 +4,11 @@
     <h2 style="font-size: 50px;" class="text-muted">Get bugs fixed. Get features added.</h2>
   </div>
   <br />
+
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8" style="font-size: 25px;">
       <div class="panel panel-default">
-
-
+        <div class="text-center panel-heading">Featured Issues</div>
         <div style="font-size: 25px;">
           <issue-list issues="event.issues" include="['trackerImage', 'trackerName', 'bountyTotal']" hide-header-row hide-solution-active-icon></issue-list>
         </div>
@@ -18,8 +18,9 @@
     </div>
 
     <!-- Top backers -->
-    <div class="col-md-offset-1 col-md-3">
+    <div class="col-md-offset-1 col-md-3" style="font-size: 25px;">
       <div class="panel panel-default">
+        <div class="text-center panel-heading">Backers</div>
         <ul class="top-backers-vertical">
           <li class="row" ng-repeat="backer in topBackers">
             <a owner-href="backer">
