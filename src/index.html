@@ -44,7 +44,9 @@
 <body ng-app="app" ng-controller="AppController">
 
 <div id="wrap">
-  <ng-include src="'app/layout/navbar.html'"></ng-include>
+  <div id="navbar">
+    <ng-include src="'app/layout/navbar.html'"></ng-include>
+  </div>
   <div class="container" ng-view></div>
 </div>
 
@@ -79,6 +81,11 @@
     <script src="app/auth/auth.js" type="text/javascript"></script>
     <script src="app/bounties/search.js" type="text/javascript"></script>
     <script src="app/cart/cart.js" type="text/javascript"></script>
+    <script src="app/events/edit.js" type="text/javascript"></script>
+    <script src="app/events/events.js" type="text/javascript"></script>
+    <script src="app/events/index.js" type="text/javascript"></script>
+    <script src="app/events/new.js" type="text/javascript"></script>
+    <script src="app/events/show.js" type="text/javascript"></script>
     <script src="app/fundraisers/edit.js" type="text/javascript"></script>
     <script src="app/fundraisers/fundraisers.js" type="text/javascript"></script>
     <script src="app/fundraisers/index.js" type="text/javascript"></script>

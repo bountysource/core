@@ -184,6 +184,36 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         url: '/people',
         params: params || {}
       });
+    },
+
+    events: function(params) {
+      return this.call({
+        url: '/events',
+        params: params || {}
+      });
+    },
+
+    event: function(slug, params) {
+      return this.call({
+        url: '/events/'+slug,
+        params: params || {}
+      });
+    },
+
+    createEvent: function(params) {
+      return this.call({
+        url: '/events',
+        method: 'POST',
+        params: params || {}
+      });
+    },
+
+    updateEvent: function(slug, params) {
+      return this.call({
+        url: '/events/'+slug,
+        method: 'PUT',
+        params: params || {}
+      });
     }
 
   };
