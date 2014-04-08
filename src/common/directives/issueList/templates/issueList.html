@@ -85,7 +85,9 @@
     </td>
     <td ng-if="$showIssueTitle">
       <a ng-href="/issues/{{issue.slug}}">
-        <i class="glyphicon glyphicon-briefcase text-success" ng-if="issue.has_active_solution" tooltip="A developer is working on a solution"></i>
+        <div ng-if="!hideSolutionActiveIcon">
+          <i class="glyphicon glyphicon-briefcase text-success" ng-if="issue.has_active_solution" tooltip="A developer is working on a solution"></i>
+        </div>
         {{issue.title}}
       </a>
       <span ng-show="issue.paid_out" class="label label-primary">paid out</span>

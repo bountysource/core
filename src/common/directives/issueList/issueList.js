@@ -13,6 +13,7 @@ angular.module('directives').directive('issueList', function() {
     },
     link: function(scope, element, attrs) {
       scope.hideHeaderRow = Object.keys(attrs).indexOf('hideHeaderRow') >= 0;
+      scope.hideSolutionActiveIcon = Object.keys(attrs).indexOf('hideSolutionActiveIcon') >= 0;
 
       // Default sort order to participant count descending.
       scope.$orderData = {
@@ -52,6 +53,7 @@ angular.module('directives').directive('issueList', function() {
         scope.$showThumbsUpCount = scope.include.indexOf('thumbsUpCount') >= 0 || false;
         scope.$showParticipantsCount = scope.include.indexOf('participantsCount') >= 0 || false;
         scope.$showIssueAge = scope.include.indexOf('issueAge') >= 0 || false;
+        scope.$showIssueSolutionActiveIcon = scope.include.indexOf('issueAge') >= 0 || false;
       }
     }
   };

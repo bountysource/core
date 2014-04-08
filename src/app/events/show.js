@@ -37,9 +37,20 @@ angular.module('app').controller('EventShowController', function($scope, $routeP
 
   $api.v2.backers({
     order: '+amount',
-    per_page: 10
+    per_page: 20
   }).then(function(response) {
-    $scope.topBackers = angular.copy(response.data);
+    var excludedBackerIds = [
+      22070,  // medovina,
+      1,      // Bountysource team
+      17827   // adrianroe
+    ];
+
+    $scope.topBackers = [];
+    for (var i=0; $scope.topBackers.length < 8 && i<response.data.length; i++) {
+      if (excludedBackerIds.indexOf(response.data[i].id) < 0) {
+        $scope.topBackers.push(angular.copy(response.data[i]));
+      }
+    }
   });
 
 });
