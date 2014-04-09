@@ -17,6 +17,22 @@
       <div class="row">
         <!-- Top Fundraisers -->
         <div class="col-md-6 col-sm-6">
+          <a ng-repeat="team in topTeams" ng-href="/teams/{{team.slug}}">
+            <div class="row homepage-card">
+              <div class="col-md-3 col-xs-3">
+                <img class="img-responsive" ng-src="{{team.image_url}}" />
+              </div>
+              <div class="col-md-9 col-xs-9">
+                <h4>{{team.name}}</h4>
+                <p class="text-muted">{{team.bio}}</p>
+                <p class="raised">{{team.open_bounties_amount | dollars}} active bounties</p>
+              </div>
+            </div>
+
+            <br ng-if="!$last" />
+          </a>
+
+
           <a ng-repeat="fundraiser in topFundraisers" ng-href="/fundraisers/{{fundraiser.slug}}">
             <div class="row homepage-card">
               <div class="col-md-3 col-xs-3">

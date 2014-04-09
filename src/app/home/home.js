@@ -6,9 +6,17 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q
   $api.v2.fundraisers({
     featured: true,
     order: 'pledge_total',
-    per_page: 5
+    per_page: 4
   }).then(function(response) {
     $scope.topFundraisers = angular.copy(response.data);
+  });
+
+  // Top Fundraisers
+  $api.v2.teams({
+    homepage_featured: true,
+    per_page: 1
+  }).then(function(response) {
+    $scope.topTeams = angular.copy(response.data);
   });
 
   // Top Issue Trackers
