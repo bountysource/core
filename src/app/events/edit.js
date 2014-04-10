@@ -4,6 +4,7 @@ angular.module('app').controller('EditEventController', function($scope, $routeP
 
   $api.v2.event($routeParams.slug).then(function(response) {
     $scope.event = angular.copy(response.data);
+    $scope.event.issue_ids = $scope.event.issue_ids.join(',');
   });
 
   $scope.updateEvent = function() {
