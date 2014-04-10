@@ -1,26 +1,25 @@
 <div style="margin-top: 35px;">
   <div class="text-center">
     <h1 style="font-size: 70px;">{{event.title}}</h1>
-    <h2 style="font-size: 50px;" class="text-muted">Get bugs fixed. Get features added.</h2>
+    <h2 style="font-size: 40px;">Cash for code. Because $1 is better than a +1.</h2>
   </div>
   <br />
 
   <div class="row">
-    <div class="col-md-8" style="font-size: 25px;">
+    <div class="col-md-9" style="font-size: 25px;">
       <div class="panel panel-default">
-        <div class="text-center panel-heading">Featured Issues</div>
+        <div class="text-center panel-heading">Active Bounties</div>
         <div style="font-size: 25px;">
           <issue-list issues="event.issues" include="['trackerImage', 'trackerName', 'bountyTotal']" hide-header-row hide-solution-active-icon></issue-list>
         </div>
       </div>
-      <br />
       <h2 class="text-center" style="font-size: 70px;">{{event.url}}</h2>
     </div>
 
     <!-- Top backers -->
-    <div class="col-md-offset-1 col-md-3" style="font-size: 25px;">
+    <div class="col-md-3" style="font-size: 25px;">
       <div class="panel panel-default">
-        <div class="text-center panel-heading">Backers</div>
+        <div class="text-center panel-heading">Top Backers</div>
         <ul class="top-backers-vertical">
           <li class="row" ng-repeat="backer in topBackers">
             <a owner-href="backer">
