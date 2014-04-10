@@ -5,6 +5,7 @@ angular.module('app').controller('NewEventController', function($scope, $locatio
   $scope.newEvent = {
     slug: undefined,
     title: undefined,
+    subtitle: undefined,
     url: undefined,
     issue_ids: undefined
   };
