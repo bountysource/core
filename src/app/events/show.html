@@ -1,7 +1,8 @@
-<div style="margin-top: 35px;">
+<div>
   <div class="text-center">
-    <h1 style="font-size: 70px;">{{event.title}}</h1>
-    <h2 style="font-size: 40px;">{{event.subtitle}}</h2>
+    <h1 style="font-size: 60px; margin: 0 0 15px 0">{{event.title}}</h1>
+    <h2 style="font-size: 40px; margin: 0 0 10px 0;">{{event.subtitle}}</h2>
+    <h2 class="text-center" style="font-size: 50px; margin: 0;"><a>{{event.url}}</a></h2>
   </div>
   <br />
 
@@ -13,7 +14,6 @@
           <issue-list issues="event.issues" include="['trackerImage', 'trackerName', 'bountyTotal']" hide-header-row hide-solution-active-icon></issue-list>
         </div>
       </div>
-      <h2 class="text-center" style="font-size: 70px;">{{event.url}}</h2>
     </div>
 
     <!-- Top backers -->
