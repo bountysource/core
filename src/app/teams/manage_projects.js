@@ -1,6 +1,12 @@
 'use strict';
 
 angular.module('app').controller('TeamManageProjectsController', function ($scope, $routeParams, $api, $pageTitle, $location) {
+  // not a member, you can't see this
+  $scope.$watch('is_member', function (is_member) {
+    if(is_member === false) {
+      $location.url("/teams/"+$routeParams.id).replace();
+    }
+  });
   $scope.projects = [];
 
   $scope.team_promise.then(function (team) {

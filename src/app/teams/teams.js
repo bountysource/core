@@ -56,7 +56,8 @@ angular.module('teams')
     $routeProvider.when('/teams/:id/projects/manage', angular.extend({
       templateUrl: 'app/teams/manage_projects.html',
       controller: 'BaseTeamController',
-      trackEvent: 'View Team Manage Projects'
+      trackEvent: 'View Team Manage Projects',
+      resolve: { person: personResolver }
     }, defaultRouteOptions));
 
     $routeProvider.when('/teams/:id/projects', angular.extend({
