@@ -42,8 +42,11 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
     return team;
   };
  
-  $scope.set_team = function(team) {
-    $scope.team = team;
+  $scope.set_team = function(new_team) {
+    // Support v1/v2 response for team attributes; Add v1 attributes on original v2 team object
+    for (var k in new_team) {
+      $scope.team[k] = new_team[k];
+    }
   };
 
   /*****************************
