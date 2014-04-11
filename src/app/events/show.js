@@ -34,7 +34,7 @@ angular.module('app').controller('EventShowController', function($scope, $routeP
   }).then(function(response) {
     $scope.event = angular.copy(response.data);
     for (var i=0; i < $scope.event.issues.length; i++) {
-      $scope.event.issues[i].title = $scope.event.issues[i].title.replace(/ \[\$[0-9,]+]$/,'')
+      $scope.event.issues[i].title = $scope.event.issues[i].title.replace(/ \[\$[0-9,]+]$/,'');
     }
   });
 

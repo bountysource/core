@@ -28,7 +28,7 @@ angular.module('app').controller('TeamManageProjectsController', function ($scop
       if (typeof(project_search) === "number") {
         $api.team_tracker_add(team.slug, project_search).then(function (updated_team) {
           $scope.set_team(updated_team);
-          $scope.setRelatedTrackers(updated_team);
+          $scope.setRelatedTrackers(updated_team, updated_team.trackers);
         });
         $scope.project_search = null;
 
@@ -47,7 +47,7 @@ angular.module('app').controller('TeamManageProjectsController', function ($scop
       }
       // actually remove the project!
       $api.team_tracker_remove(team.slug, tracker.id).then(function (updated_team) {
-        $scope.setRelatedTrackers(updated_team);
+        $scope.setRelatedTrackers(updated_team, updated_team.trackers);
       });
 
       //also remove as owner if you remove tracker from used-projects
@@ -59,7 +59,7 @@ angular.module('app').controller('TeamManageProjectsController', function ($scop
     $scope.own_project = function (project_search) {
       if (typeof(project_search) === "number") {
         $api.claim_tracker(project_search, team.id, "Team").then(function (updated_team) {
-          $scope.setRelatedTrackers(updated_team);
+          $scope.setRelatedTrackers(updated_team, updated_team.trackers);
         });
       } else if (project_search && project_search.length > 0) {
         // ????
@@ -77,8 +77,9 @@ angular.module('app').controller('TeamManageProjectsController', function ($scop
 
       tracker.owner = null;
       $api.unclaim_tracker(tracker.id, team.id, "Team").then(function (updated_team) {
+        console.log("v1 team", updated_team);
         $scope.set_team(updated_team);
-        $scope.setRelatedTrackers(updated_team);
+        $scope.setRelatedTrackers(updated_team, updated_team.trackers);
       });
     };
 

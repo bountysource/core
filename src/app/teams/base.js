@@ -16,6 +16,7 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
       $pageTitle.set($scope.team.name, "Teams");
 
       $api.v2.trackers({ team_id: $scope.team.id, include_owner: true }).then(function(response) {
+        console.log("trackers from base.js", response);
         $scope.setRelatedTrackers($scope.team, response.data);
       });
     }

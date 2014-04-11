@@ -14,17 +14,17 @@
 
       <!-- Trackers -->
       <a ng-if="objectType == 'tracker'" ng-href="{{item.frontend_path || '/trackers/'+item.slug}}" class="text-center thumbnail">
-        <img class="img-responsive img-rounded" ng-src="{{item.image_url||item.image_url_medium}}">
-        {{item.name || item.display_name}}
+        <img class="img-responsive img-rounded" ng-src="{{ item.image_url_medium || item.image_url }}">
+        {{ item.display_name || item.name }}
       </a>
 
       <div ng-if="objectType =='team-project'" class="thumbnail text-center">
         <button type="button"  class="close" ng-click="dismissAction({tracker: item})" ng-if="dismissAction">
           &times;
         </button>
-        <a ng-href="{{ item.frontend_path }}">
-          <img class="img-responsive img-rounded" ng-src="{{ item.image_url }}"></img>
-          {{ item.name }}
+        <a ng-href="{{ item.frontend_path || '/trackers/'+item.slug }}">
+          <img class="img-responsive img-rounded" ng-src="{{ item.image_url_medium || item.image_url }}"></img>
+          {{ item.name || item.display_name }}
         </a>
       </div>
     </div>
