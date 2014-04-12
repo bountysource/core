@@ -5,7 +5,8 @@ angular.module('app')
     $routeProvider
       .when('/issues/:id', {
         templateUrl: 'pages/issues/show.html',
-        controller: 'IssuesBaseController'
+        controller: 'IssuesBaseController',
+        reloadOnSearch: false
       });
   })
 
@@ -55,4 +56,3 @@ angular.module('app')
       return issue;
     });
   });
-

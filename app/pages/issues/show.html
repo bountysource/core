@@ -41,11 +41,12 @@
             <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}"><img ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"/></a>
             <img ng-hide="comment.author.slug" ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"/>
           </td>
-          <td style="overflow-x:auto">
-            <p class="muted">
+          <td style="overflow-x:auto;">
+            <p class="muted" id="{{comment.created_at.slice(0,19)}}">
               <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}">{{comment.author.display_name}}</a>
               <span ng-hide="comment.author.slug">{{comment.author.display_name}}</span>
-              on {{comment.created_at | date}}
+              on
+              <a href="#{{comment.created_at.slice(0,19)}}">{{comment.created_at | date}}</a>
             </p>
             <target-blank model="issue">
               <div ng-show="issue.$comment_ctype == 'html'" ng-bind-html="comment.body_html"></div>

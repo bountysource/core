@@ -85,3 +85,12 @@ td img.issue-table-tracker-img {
   max-height:20px;
   max-width:20px;
 }
+
+/*anchor hash linking*/
+.muted:before { 
+  display: block; 
+  content: " "; 
+  margin-top: -52px; 
+  height: 52px; 
+  visibility: hidden; 
+}
