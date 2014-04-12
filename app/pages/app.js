@@ -19,9 +19,11 @@ angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCook
     $routeProvider.otherwise({ templateUrl: 'pages/layout/not_found.html' });
 
     // HACK: transform old-style #urls into new style #/urls
+    /*
     if ((window.location.hash||'').match(/^#[^/]/)) {
       window.location.hash = '#/' + window.location.hash.replace(/^#/,'');
     }
+    */
 
     // CORS support
     $provide.decorator('$sniffer', function($delegate) { $delegate.cors = true; return $delegate; });

@@ -10,7 +10,7 @@ angular.module('app')
       });
   })
 
-  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $api, $pageTitle) {
+  .controller('IssueShow', function ($scope, $routeParams, $window, $location, $api, $pageTitle, $anchorScroll) {
     // alert above the issue title about bounty status
     $scope.bounty_alert = {
       type: 'warning',
@@ -54,5 +54,9 @@ angular.module('app')
       }
 
       return issue;
+    });
+
+    $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+      $anchorScroll();
     });
   });

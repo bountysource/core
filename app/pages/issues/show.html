@@ -36,7 +36,7 @@
           <td colspan="2" ng-show="issue.comments.length == 0"><h4>No comments.</h4></td>
         </tr>
 
-        <tr ng-repeat="comment in issue.comments | orderBy:['+created_at']">
+        <tr ng-repeat="comment in issue.comments | orderBy:['+created_at']" on-finish-render>
           <td>
             <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}"><img ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"/></a>
             <img ng-hide="comment.author.slug" ng-src="{{comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px"/>

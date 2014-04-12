@@ -90,7 +90,7 @@ td img.issue-table-tracker-img {
 .muted:before { 
   display: block; 
   content: " "; 
-  margin-top: -52px; 
-  height: 52px; 
+  margin-top: -55px; 
+  height: 55px; 
   visibility: hidden; 
 }
