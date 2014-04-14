@@ -1,0 +1,5 @@
+<select
+  ng-options="address.id as [address.address1, address.city, address.state].join(', ') for address in addressManagerInstance.addresses"
+  >
+  <option value="" disabled>Select an address</option>
+</select>

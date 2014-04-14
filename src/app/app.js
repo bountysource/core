@@ -33,6 +33,7 @@ angular.module('services', []);
 angular.module('factories', []);
 angular.module('bountysource', ['constants', 'services', 'directives', 'filters', 'factories']);
 
+angular.module('activity', ['bountysource']);
 angular.module('fundraisers', ['bountysource']);
 angular.module('teams', ['bountysource']);
 
@@ -42,6 +43,7 @@ angular.module('app', [
   'ngCookies',
   'ui.bootstrap',
   'colorpicker.module',
+  'activity',
   'fundraisers',
   'teams'
 ]);

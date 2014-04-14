@@ -1,0 +1,101 @@
+<div>
+  <div class="modal-header">Manage addresses</div>
+
+  <div class="modal-body" ng-if="addresses.length <= 0">
+    <em>You don't have any addresses.</em>
+  </div>
+
+  <table class="table table-striped table-no-border-top" style="margin-bottom: 0;">
+    <tr ng-repeat="address in addresses">
+      <td ng-if="!address._changes">
+        <div formatted-address address="address"></div>
+        <div>
+          <button class="btn btn-sm btn-link" ng-click="enableEdit($index)"><i class="glyphicon glyphicon-edit"></i> Edit</button>
+          <button class="btn btn-sm btn-link" ng-click="delete($index)"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+        </div>
+      </td>
+
+      <!-- Edit form -->
+      <td ng-if="address._changes">
+        <ng-form class="form-horizontal" name="addressForm">
+          <!-- Name -->
+          <div class="form-group">
+            <label for="newAddressFullName" class="col-sm-3 control-label">Full Name</label>
+            <div class="col-sm-8">
+              <input id="newAddressFullName" type="text" ng-model="address._changes.name" class="form-control" placeholder="Full Name" required />
+            </div>
+          </div>
+
+          <!-- Address 1 -->
+          <div class="form-group">
+            <label for="newAddressAddress1" class="col-sm-3 control-label">Address</label>
+            <div class="col-sm-8">
+              <input id="newAddressAddress1" type="text" ng-model="address._changes.address1" class="form-control" placeholder="Address" required />
+            </div>
+          </div>
+
+          <!-- Address2 -->
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-8">
+              <input type="text" ng-model="address._changes.address2" class="form-control" placeholder="More Address" />
+            </div>
+          </div>
+
+          <!-- City -->
+          <div class="form-group">
+            <label for="newAddressCity" class="col-sm-3 control-label">City</label>
+            <div class="col-sm-8">
+              <input id="newAddressCity" type="text" ng-model="address._changes.city" class="form-control" placeholder="City" required />
+            </div>
+          </div>
+
+          <!-- State -->
+          <div class="form-group">
+            <label for="newAddressState" class="col-sm-3 control-label">State</label>
+            <div class="col-sm-8">
+              <input id="newAddressState" type="text" class="form-control" placeholder="State" required
+                     ng-model="address._changes.state"
+                     typeahead="state.name for state in usStates | filter:$viewValue"
+                />
+            </div>
+          </div>
+
+          <!-- Postal Code -->
+          <div class="form-group">
+            <label for="newAddressPostalCode" class="col-sm-3 control-label">Postal Code</label>
+            <div class="col-sm-8">
+              <input id="newAddressPostalCode" type="text" ng-model="address._changes.postal_code" class="form-control" placeholder="Postal Code" required />
+            </div>
+          </div>
+
+          <!-- Country -->
+          <div class="form-group">
+            <label for="newAddressCountry" class="col-sm-3 control-label">Country</label>
+            <div class="col-sm-8">
+              <select
+                id="newAddressCountry"
+                class="form-control"
+                ng-model="address._changes.country"
+                ng-options="country.code as country.name for country in countries"
+                required
+                >
+              </select>
+            </div>
+          </div>
+
+          <!-- Buttons! -->
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-8">
+              <button class="btn btn-sm btn-default" ng-click="saveChanges($index)"><i class="glyphicon glyphicon-save"></i> Save</button>
+              <button class="btn btn-sm btn-warning" ng-click="cancelEdit($index)">Cancel</button>
+            </div>
+          </div>
+        </ng-form>
+      </td>
+    </tr>
+  </table>
+
+  <div class="modal-footer" style="margin: 0;">
+    <button class="btn btn-default" ng-click="close()">Close</button>
+  </div>
+</div>

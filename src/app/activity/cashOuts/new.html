@@ -1,0 +1,145 @@
+<div>
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/activity">Activity</a></li>
+    <li><a href="/activity/account">Account</a></li>
+  </ul>
+
+  <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <ng-include src="'app/activity/templates/transactionNavPills.html'"></ng-include>
+    </div>
+
+    <div class="col-sm-9">
+      <ng-form class="form-horizontal" name="cashOutForm">
+        <!-- Alert, error messages -->
+        <div ng-if="alert.message">
+          <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
+        </div>
+
+        <!-- Amount -->
+        <div class="form-group">
+          <label for="amount" class="col-sm-2 control-label">Amount:</label>
+          <div class="col-md-2 col-sm-3">
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input id="amount" type="number" ng-model="cashOut.amount" min="0" max="{{current_person.account.balance}}" step="0.01" class="form-control" placeholder="Amount" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Payout Method -->
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Payout Method:</label>
+          <div class="col-sm-10">
+            <!-- Paypal -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="cashOut.type" ng-value="'paypal'" required /> PayPal
+              </label>
+            </div>
+
+            <!-- Bitcoin -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="cashOut.type" ng-value="'bitcoin'" required /> Bitcoin
+              </label>
+            </div>
+
+            <!-- Check -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="cashOut.type" ng-value="'check'" required /> Check
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extra info needed based on checkout method selected. Paypal/bitcoin addressManager, or mailing addressManager -->
+        <div ng-switch on="cashOut.type" collapse="!cashOut.type">
+          <!-- Paypal. Need paypal email addressManager -->
+          <div class="form-group" ng-switch-when="paypal">
+            <label class="col-sm-2 control-label">PayPal Address:</label>
+            <div class="col-sm-4">
+              <input type="email" class="form-control" ng-model="$parent.cashOut.paypal_address" placeholder="PayPal Address" required />
+            </div>
+          </div>
+
+          <!-- Bitcoin -->
+          <div class="form-group" ng-switch-when="bitcoin">
+            <label class="col-sm-2 control-label">Bitcoin Address:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" ng-model="$parent.cashOut.bitcoin_address" placeholder="Bitcoin Address" required />
+            </div>
+          </div>
+
+          <!-- Check -->
+          <div class="form-group" ng-switch-when="check">
+            <label class="col-sm-2 control-label">Mailing Address:</label>
+
+            <div class="col-sm-5">
+              <address-select
+                class="form-control"
+                address-manager-instance="addressManager"
+                ng-model="cashOut.mailing_address_id"
+                required
+                >
+              </address-select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Physical Address -->
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Address</label>
+
+          <div class="col-sm-5">
+            <address-select
+              class="form-control"
+              address-manager-instance="addressManager"
+              ng-model="cashOut.address_id"
+              required
+              >
+            </address-select>
+          </div>
+
+          <button class="btn btn-link" ng-click="addressManager.openCreateModal()"><i class="glyphicon glyphicon-new-window"></i> New</button>
+          <button class="btn btn-link" ng-click="addressManager.openManageModal()"><i class="glyphicon glyphicon-edit"></i> Manage</button>
+        </div>
+
+        <!-- If addressManager US, ask if person is US citizen -->
+        <div class="form-group" ng-if="cashOut.address && cashOut.address.country !== 'US'">
+          <div class="col-sm-offset-2 col-sm-10">
+            <p>Are you a United States citizen?</p>
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="cashOut.us_citizen" ng-value="true" required /> Yes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="cashOut.us_citizen" ng-value="false" required /> No
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit buttons -->
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-ng-disabled="cashOutForm.$invalid"
+              data-ng-click="createCashOut()"
+              >
+              Submit
+            </button>
+          </div>
+        </div>
+      </ng-form>
+    </div>
+  </div>
+</div>

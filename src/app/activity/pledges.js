@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('PledgeActivity', function($scope, $routeParams, $api, $pageTitle) {
+angular.module('activity').controller('PledgesController', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set('Pledges', 'Activity');
 
   $api.call("/user/pledges").then(function(pledges) {

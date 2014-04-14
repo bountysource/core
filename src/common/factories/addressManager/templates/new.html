@@ -1,0 +1,77 @@
+<div>
+  <div class="modal-header">New Address</div>
+
+  <div class="modal-body">
+    <form class="form-horizontal" name="form">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="newAddressFullName" class="col-sm-2 control-label">Full Name</label>
+        <div class="col-sm-6">
+          <input id="newAddressFullName" type="text" ng-model="address.name" class="form-control" placeholder="Full Name" required />
+        </div>
+      </div>
+
+      <!-- Address 1 -->
+      <div class="form-group">
+        <label for="newAddressAddress1" class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-10">
+          <input id="newAddressAddress1" type="text" ng-model="address.address1" class="form-control" placeholder="Address" required />
+        </div>
+      </div>
+
+      <!-- Address2 -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="text" ng-model="address.address2" class="form-control" placeholder="More Address" />
+        </div>
+      </div>
+
+      <!-- City -->
+      <div class="form-group">
+        <label for="newAddressCity" class="col-sm-2 control-label">City</label>
+        <div class="col-sm-8">
+          <input id="newAddressCity" type="text" ng-model="address.city" class="form-control" placeholder="City" required />
+        </div>
+      </div>
+
+      <!-- State -->
+      <div class="form-group">
+        <label for="newAddressState" class="col-sm-2 control-label">State</label>
+        <div class="col-sm-8">
+          <input id="newAddressState" type="text" class="form-control" placeholder="State" required
+                 ng-model="address.state"
+                 typeahead="state.name for state in usStates | filter:$viewValue"
+            />
+        </div>
+      </div>
+
+      <!-- Postal Code -->
+      <div class="form-group">
+        <label for="newAddressPostalCode" class="col-sm-2 control-label">Postal Code</label>
+        <div class="col-sm-4">
+          <input id="newAddressPostalCode" type="text" ng-model="address.postal_code" class="form-control" placeholder="Postal Code" required />
+        </div>
+      </div>
+
+      <!-- Country -->
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="newAddressCountry" class="col-sm-2 control-label">Country</label>
+        <div class="col-sm-8">
+          <select
+            id="newAddressCountry"
+            class="form-control"
+            ng-model="address.country"
+            ng-options="country.code as country.name for country in countries"
+            required
+            >
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer" style="margin-top: 0;">
+    <button class="btn btn-default" ng-click="close()">Cancel</button>
+    <button class="btn btn-primary" ng-click="createAddress(address)" ng-disabled="form.$invalid">Save</button>
+  </div>
+</div>

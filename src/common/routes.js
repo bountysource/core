@@ -56,54 +56,6 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Terms'
   }, defaultRouteOptions));
 
-  $routeProvider.when('/activity/account', angular.extend({
-    templateUrl: 'app/activity/account.html',
-    resolve: { person: personResolver },
-    trackEvent: 'View My Account'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/activity/bounties', angular.extend({
-    templateUrl: 'app/activity/bounties.html',
-    controller: 'BountyActivity',
-    resolve: { person: personResolver },
-    trackEvent: 'View My Bounties'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/activity/claims', angular.extend({
-    templateUrl: 'app/activity/bounty_claims.html',
-    controller: 'BountyClaimActivity',
-    resolve: { person: personResolver },
-    trackEvent: 'View My Claims'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/activity/fundraisers', angular.extend({
-    templateUrl: 'app/activity/fundraisers.html',
-    controller: 'FundraiserActivity',
-    resolve: { person: personResolver },
-    trackEvent: 'View My Fundraisers'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/activity/pledges', angular.extend({
-    templateUrl: 'app/activity/pledges.html',
-    controller: 'PledgeActivity',
-    resolve: { person: personResolver },
-    trackEvent: 'View My Pledges'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/activity', angular.extend({
-    templateUrl: 'app/activity/timeline.html',
-    controller: 'Activity',
-    resolve: { person: personResolver },
-    trackEvent: 'View My Timeline'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/activity/transactions', angular.extend({
-    templateUrl: 'app/activity/transactions.html',
-    controller: 'TransactionActivity',
-    resolve: { person: personResolver },
-    trackEvent: 'View My Transactions'
-  }, defaultRouteOptions));
-
   $routeProvider.when('/auth/:provider/confirm', angular.extend({
     templateUrl: "app/auth/auth.html",
     controller: "AuthConfirmController",

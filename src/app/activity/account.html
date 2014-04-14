@@ -1,23 +1,21 @@
-<ul class="breadcrumb">
-  <li><a href="/">Home</a></li>
-  <li><a href="/activity">Activity</a></li>
-  <li><a href="/activity/account">Account</a></li>
-</ul>
-
-<ng-include src="'app/activity/tabs.html'"></ng-include>
-
-<h3>Account Balance</h3>
-<p>Your current Bountysource balance is <b>{{current_person.account.balance | currency}}</b>.</p>
-
-<div ng-show="current_person.account.balance > 0">
-  To cash out your balance, please send an email to <a href="mailto:support@bountysource.com">support@bountysource.com</a>. Include the amount you wish to cash out, desired payout method, and any information required for us to process your request. We can cash out via:
-  <ul>
-    <li>Paypal</li>
-    <li>Google Wallet</li>
-    <li>Physical Check (include mailing address)</li>
-    <li>Bank Wire (include bank information, may incur additional fees)</li>
-    <li>Coming Soon: Automatic ACH Bank Deposit</li>
+<div>
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/activity">Activity</a></li>
+    <li><a href="/activity/account">Account</a></li>
   </ul>
 
-  Emails must be sent from an account that's associated with your Bountysource account.
+  <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <ng-include src="'app/activity/templates/transactionNavPills.html'"></ng-include>
+    </div>
+
+    <div class="col-sm-9">
+      <p>You currently have an account balance of <strong>{{current_person.account.balance | currency}}</strong>.</p>
+      <p>Cash out requests will be processed within two business days.</p>
+      <p>If you have any questions please contact <a href="mailto:support@bountysource.com" target="_blank">support@bountysource.com</a>.</p>
+    </div>
+  </div>
 </div>

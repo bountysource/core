@@ -1,0 +1,56 @@
+<div>
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/activity">Activity</a></li>
+    <li><a href="/activity/account">Account</a></li>
+  </ul>
+
+  <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <ng-include src="'app/activity/templates/transactionNavPills.html'"></ng-include>
+    </div>
+
+    <div class="col-sm-9">
+      <!-- Render message if person has no cash outs -->
+      <div ng-if="cashOuts.length <= 0">
+        <p><em>You have no pending cash outs.</em></p>
+      </div>
+
+      <table class="table table-striped" ng-if="cashOuts.length > 0">
+        <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Submitted</th>
+          <th>Status</th>
+          <th>Payment Method</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="cashOut in cashOuts">
+          <td>{{cashOut.amount | currency}}</td>
+          <td>{{cashOut.created_at | date}}</td>
+
+          <!-- Status -->
+          <td>
+            <!-- Pending -->
+            <div ng-if="!cashOut.sent_at">
+              <strong class="text-info">Pending</strong>
+            </div>
+
+            <!-- Accepted -->
+            <div ng-if="cashOut.sent_at">
+              <strong class="text-success">Sent {{cashOut.sent_at | date}}</strong>
+            </div>
+          </td>
+
+          <!-- Payment Method -->
+          <td>{{cashOut.type | title}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

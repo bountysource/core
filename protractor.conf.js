@@ -39,7 +39,7 @@ exports.config = {
   sauceUser: null,
   sauceKey: null,
 
-  // The address of a running selenium server. If specified, Protractor will
+  // The addressManager of a running selenium server. If specified, Protractor will
   // connect to an already running instance of selenium. This usually looks like
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
