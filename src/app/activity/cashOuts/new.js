@@ -64,7 +64,7 @@ angular.module('activity').
 
       // Do not post the US citizen response when not necessary
       if (payload.address.country === 'US') {
-        delete payload.us_citizen
+        delete payload.us_citizen;
       }
 
       $api.v2.createCashOut($scope.cashOut).then(function(response) {
