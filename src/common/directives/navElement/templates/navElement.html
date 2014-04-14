@@ -1,3 +1,4 @@
-<li ng-class="{ active: navElement.active() }" ng-show="navElement._show">
-  <a ng-href="{{navElement.href()}}">{{navElement.name}}</a>
+<li ng-class="{ active: navElement.active(), disabled: (!navElement._show) }">
+  <a ng-if="navElement._show" ng-href="{{navElement.href()}}">{{navElement.name}}</a>
+  <a ng-if="!navElement._show" style="cursor: default;">{{navElement.name}}</a>
 </li>

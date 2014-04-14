@@ -63,7 +63,7 @@ angular.module('activity').
       var payload = angular.copy($scope.cashOut);
 
       // Do not post the US citizen response when not necessary
-      if (payload.address.country === 'US') {
+      if (payload.address && payload.address.country === 'US') {
         delete payload.us_citizen;
       }
 
