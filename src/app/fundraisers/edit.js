@@ -96,17 +96,13 @@ angular.module('fundraisers').controller('FundraiserEditController', function($s
     });
   };
 
-  $scope.update_reward = function(reward) {
+  $scope.update_reward = function(reward, fundraiser) {
     $api.reward_update($routeParams.fundraiser_id, reward.id, reward, function(response) {
       if (response.meta.success) {
-        for (var i=0; i<$scope.rewards.length; i++) {
-          if ($scope.rewards[i].id === reward.id) {
-            // copy attributes from current reward to master
-            for (var k in $scope.rewards[i]) {
-              $scope.master_rewards[i][k] = $scope.rewards[i][k];
-            }
-            $scope.rewards[i].$is_open = false;
-            return;
+        for (var i=0; i<fundraiser.rewards.length; i++) {
+          if (fundraiser.rewards[i].id === response.data.id) {
+            fundraiser.rewards[i] = angular.copy(response.data);
+            fundraiser.rewards[i].$is_open = false;
           }
         }
       } else {
@@ -115,14 +111,14 @@ angular.module('fundraisers').controller('FundraiserEditController', function($s
     });
   };
 
-  $scope.cancel_reward_changes = function(reward) {
+  $scope.cancel_reward_changes = function(reward, fundraiser) {
     for (var i=0; i<$scope.master_rewards.length; i++) {
       if ($scope.master_rewards[i].id === reward.id) {
         // copy attributes from master reward to this one
         for (var k in $scope.master_rewards[i]) {
-          $scope.rewards[i][k] = $scope.master_rewards[i][k];
+          fundraiser.rewards[i][k] = $scope.master_rewards[i][k];
         }
-        $scope.rewards[i].$is_open = false;
+        fundraiser.rewards[i].$is_open = false;
         return;
       }
     }

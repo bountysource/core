@@ -24,7 +24,7 @@
           <li>A sticker or t-shirt</li>
         </ul>
         <accordion close-others="false">
-          <div ng-repeat="reward in fundraiser.rewards | orderBy:'amount'">
+          <div ng-repeat="reward in fundraiser.rewards| orderBy:'amount'">
             <accordion-group heading="${{reward.amount | number:0}} Reward" is-open="reward.$is_open">
               <div style="text-align: center;">
                 <!--Reward amount-->
@@ -55,13 +55,13 @@
               <div class="row">
                 <div class="col-sm-6 col-md-6">
                   <!--Add that bad boy!-->
-                  <button ng-click="update_reward(reward)" class="btn btn-primary btn-block">
+                  <button ng-click="update_reward(reward, fundraiser)" class="btn btn-primary btn-block">
                     Save
                   </button>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <!--Add that bad boy!-->
-                  <button ng-click="cancel_reward_changes(reward)" class="btn btn-block btn-default" tooltip="Cancel" tooltip-placement="top" tooltip-trigger="mouseenter">
+                  <button ng-click="cancel_reward_changes(reward, fundraiser)" class="btn btn-block btn-default" tooltip="Cancel" tooltip-placement="top" tooltip-trigger="mouseenter">
                     <i class="glyphicon glyphicon-remove"></i>
                   </button>
                 </div>
@@ -126,7 +126,7 @@
         </div>
 
         <div class="well well-lg">
-          <button ng-click="save()" ng-disabled="!unsaved_changes()" class="btn btn-primary btn-block btn-lg">Save & Preview</button>
+          <button ng-click="save()" class="btn btn-primary btn-block btn-lg">Save & Preview</button>
           <button ng-click="cancel()" class="btn btn-block btn-default btn-lg">Cancel</button>
         </div>
 
@@ -165,13 +165,13 @@
                 <div class="row">
                   <div class="col-sm-6 col-md-6">
                     <!--Add that bad boy!-->
-                    <button ng-click="update_reward(reward)" class="btn btn-primary btn-block">
+                    <button ng-click="update_reward(reward, fundraiser)" class="btn btn-primary btn-block">
                       Save
                     </button>
                   </div>
                   <div class="col-sm-6 col-md-6">
                     <!--Add that bad boy!-->
-                    <button ng-click="cancel_reward_changes(reward)" class="btn btn-block btn-default" tooltip="Cancel" tooltip-placement="top" tooltip-trigger="mouseenter">
+                    <button ng-click="cancel_reward_changes(reward, fundraiser)" class="btn btn-block btn-default" tooltip="Cancel" tooltip-placement="top" tooltip-trigger="mouseenter">
                       <i class="glyphicon glyphicon-remove"></i>
                     </button>
                   </div>
