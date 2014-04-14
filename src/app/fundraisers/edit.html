@@ -6,29 +6,23 @@
     <li><a>Edit</a></li>
   </ul>
 
-  <div class="row" ng-show="fundraiser">
-    <div class="col-sm-9 col-md-9">
-      <div ng-show="error">
-        <alert type="'danger'" close="error = null">{{ error }}</alert>
-      </div>
-      <fundraiser-edit-form fundraiser="changes" master="master"></fundraiser-edit-form>
-    </div>
-
-    <div class="col-sm-3 col-md-3">
-      <div ng-show="unsaved_changes()">
-        <alert type="'warning'">
-          <strong>Hey! You have unsaved changes!</strong> Don't forget to <a ng-click="save()">save your changes</a> when you are done.
-        </alert>
+  <div team-view team="team">
+    <div class="row" ng-show="fundraiser">
+      <div ng-if="!rewards_edit" class="col-sm-9 col-md-9">
+        <div ng-show="error">
+          <alert type="'danger'" close="error = null">{{ error }}</alert>
+        </div>
+        <fundraiser-edit-form fundraiser="changes" master="master" team="team"></fundraiser-edit-form>
       </div>
 
-      <div class="well well-lg">
-        <button ng-click="save()" class="btn btn-primary btn-block btn-lg">Save</button>
-        <button ng-click="cancel()" class="btn btn-block btn-default btn-lg">Cancel</button>
-      </div>
-
-      <div>
-        <h3>Rewards</h3>
-
+      <div ng-if="rewards_edit" class="col-sm-6 col-md-6">
+        <h3 class="narrow text-center">Add Rewards</h3>
+        <p>Rewards are a great way to motivate Backers to contribute. Some common reward ideas are:</p>
+        <ul>
+          <li>Add your name to the backers.md</li>
+          <li>Your Logo and link on our website</li>
+          <li>A sticker or t-shirt</li>
+        </ul>
         <accordion close-others="false">
           <div ng-repeat="reward in fundraiser.rewards | orderBy:'amount'">
             <accordion-group heading="${{reward.amount | number:0}} Reward" is-open="reward.$is_open">
@@ -36,7 +30,7 @@
                 <!--Reward amount-->
                 <div class="input-group" style="margin-bottom:0">
                   <span class="input-group-addon">$</span>
-                  <input type="number" ng-model="reward.amount" min="5" required="" placeholder="Minimum Pledge Amount" ng-disabled="fundraiser.published" class="form-control">
+                  <input type="number" ng-model="reward.amount" min="5" required="" placeholder="Price" ng-disabled="fundraiser.published" class="form-control">
                 </div>
 
                 <!--Reward quantity-->
@@ -65,17 +59,17 @@
                     Save
                   </button>
                 </div>
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-6 col-md-6">
                   <!--Add that bad boy!-->
                   <button ng-click="cancel_reward_changes(reward)" class="btn btn-block btn-default" tooltip="Cancel" tooltip-placement="top" tooltip-trigger="mouseenter">
                     <i class="glyphicon glyphicon-remove"></i>
                   </button>
                 </div>
-                <div class="col-sm-3 col-md-3">
+                <div class="col-xs-12">
                   <!--Destroy button-->
-                  <button ng-disabled="fundraiser.published" ng-click="destroy_reward(reward)" class="btn btn-block btn-default" tooltip="Delete" tooltip-placement="top" tooltip-trigger="mouseenter">
-                    <i class="glyphicon glyphicon-trash"></i>
-                  </button>
+                  <a ng-disabled="fundraiser.published" ng-click="destroy_reward(reward)" class="btn btn-block btn-default btn-link">
+                    Delete Reward
+                  </a>
                 </div>
               </div>
             </accordion-group>
@@ -90,7 +84,7 @@
               <!--Reward amount-->
               <div class="input-group" style="margin-bottom:0">
                 <span class="input-group-addon">$</span>
-                <input type="number" name="amount" ng-model="new_reward.amount" min="5" required="" placeholder="Minimum Pledge Amount" class="form-control">
+                <input type="number" name="amount" ng-model="new_reward.amount" min="5" required="" placeholder="Price" class="form-control">
               </div>
 
               <!--Reward quantity-->
@@ -116,6 +110,117 @@
             <button ng-disabled="!new_reward.amount || !new_reward.description" ng-click="create_reward(fundraiser)" class="btn btn-success btn-block">Add Reward</button>
           </accordion-group>
         </accordion>
+      </div>
+
+      <div ng-if="rewards_edit" class="col-sm-6 col-md-6">
+        <h3 class="narrow text-center">Finished with rewards?</h3>
+        <p>Did you know that Bountysource can handle all merchandise fulfillment for you? Contact us if you’d like us to work with you to get stickers, shirts, and more printed and shipped!</p>
+        <a ng-href="/teams/{{ team.slug }}/fundraisers/{{ fundraiser.slug }}" class="btn btn-primary btn-block btn-lg">View your Fundraiser draft!</a>
+      </div>
+
+      <div ng-if="!rewards_edit" class="col-sm-3 col-md-3">
+        <div ng-show="unsaved_changes()">
+          <alert type="'warning'">
+            <strong>Hey! You have unsaved changes!</strong> Don't forget to <a ng-click="save()">save your changes</a> when you are done.
+          </alert>
+        </div>
+
+        <div class="well well-lg">
+          <button ng-click="save()" ng-disabled="!unsaved_changes()" class="btn btn-primary btn-block btn-lg">Save & Preview</button>
+          <button ng-click="cancel()" class="btn btn-block btn-default btn-lg">Cancel</button>
+        </div>
+
+        <div>
+          <h3>Rewards</h3>
+
+          <accordion close-others="false">
+            <div ng-repeat="reward in fundraiser.rewards | orderBy:'amount'">
+              <accordion-group heading="${{reward.amount | number:0}} Reward" is-open="reward.$is_open">
+                <div style="text-align: center;">
+                  <!--Reward amount-->
+                  <div class="input-group" style="margin-bottom:0">
+                    <span class="input-group-addon">$</span>
+                    <input type="number" ng-model="reward.amount" min="5" required="" placeholder="Price" ng-disabled="fundraiser.published" class="form-control">
+                  </div>
+
+                  <!--Reward quantity-->
+                  <div style="margin-top: 5px;">
+                    <div style="vertical-align: middle; display: inline-block;">0 of </div>
+                    <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" placeholder="∞" type="number" min="0" ng-model="reward.limited_to" ng-disabled="fundraiser.published" tooltip="Leave empty for no limit" tooltip-placement="bottom" tooltip-trigger="focus" class="form-control">
+                    <div style="vertical-align: middle; display: inline-block;"> claimed</div>
+                  </div>
+                </div>
+                <br>
+
+                <!--Reward description-->
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" ng-model="reward.description" required="" placeholder="A description of this reward." ng-disabled="fundraiser.published"></textarea>
+                </div>
+
+                <!--Fulfillment Details-->
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" ng-model="reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 col-md-6">
+                    <!--Add that bad boy!-->
+                    <button ng-click="update_reward(reward)" class="btn btn-primary btn-block">
+                      Save
+                    </button>
+                  </div>
+                  <div class="col-sm-6 col-md-6">
+                    <!--Add that bad boy!-->
+                    <button ng-click="cancel_reward_changes(reward)" class="btn btn-block btn-default" tooltip="Cancel" tooltip-placement="top" tooltip-trigger="mouseenter">
+                      <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                  </div>
+                  <div class="col-xs-12">
+                    <!--Destroy button-->
+                    <a ng-disabled="fundraiser.published" ng-click="destroy_reward(reward)" class="btn btn-block btn-default btn-link">
+                      Delete Reward
+                    </a>
+                  </div>
+                </div>
+              </accordion-group>
+            </div>
+
+            <accordion-group id="dat" heading="Add new reward" is-open="true">
+              <div ng-show="reward_error">
+                <alert type="'danger'" close="reward_error = null">{{reward_error}}</alert>
+              </div>
+
+              <div style="text-align: center;">
+                <!--Reward amount-->
+                <div class="input-group" style="margin-bottom:0">
+                  <span class="input-group-addon">$</span>
+                  <input type="number" name="amount" ng-model="new_reward.amount" min="5" required="" placeholder="Price" class="form-control">
+                </div>
+
+                <!--Reward quantity-->
+                <div style="margin-top: 5px;">
+                  <div style="vertical-align: middle; display: inline-block;">0 of </div>
+                  <input style="vertical-align: middle; display: inline-block; width: 70px; margin: 0;" placeholder="∞" type="number" min="0" ng-model="new_reward.limited_to" tooltip="Leave empty for no limit" tooltip-placement="bottom" tooltip-trigger="focus" class="form-control">
+                  <div style="vertical-align: middle; display: inline-block;"> claimed</div>
+                </div>
+              </div>
+              <br>
+
+              <!--Reward description-->
+              <div class="form-group">
+                <textarea class="form-control" rows="5" ng-model="new_reward.description" required="" placeholder="A description of this reward."></textarea>
+              </div>
+
+              <!--Fulfillment Details-->
+              <div class="form-group">
+                <textarea class="form-control" rows="5" ng-model="new_reward.fulfillment_details" placeholder="Request additional information from backers to fulfill this reward. For example, you may need to ask for a shirt size, mailing address, etc."></textarea>
+              </div>
+
+              <!--Add that bad boy!-->
+              <button ng-disabled="!new_reward.amount || !new_reward.description" ng-click="create_reward(fundraiser)" class="btn btn-success btn-block">Add Reward</button>
+            </accordion-group>
+          </accordion>
+        </div>
       </div>
     </div>
   </div>

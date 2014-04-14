@@ -7,18 +7,6 @@
   </ul>
 
   <div team-view team="team">
-    <form class="form-horizontal" ng-submit="save_team()" ng-controller="EditTeamController">
-      <div ng-show="alert.text">
-        <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
-      </div>
-
-      <ng-include src="'app/teams/templates/form.html'"></ng-include>
-
-      <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-          <submit type="submit" ng-click="save_team()" class="btn btn-large btn-primary">Update</submit>
-        </div>
-      </div>
-    </form>
+    <team-form team="team" options="{ editForm: true }"></team-form>
   </div>
 </div>

@@ -22,7 +22,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       scope.activeNavTab = function(tab) {
         if (tab === 'home' && (/^\/teams\/[^\/]+$/).test($location.path())) { return true; }
-        else if (tab === 'fundraiser' && (/^\/teams\/[^\/]+\/fundraisers?$/).test($location.path())) { return true; }
+        else if (tab === 'fundraiser' && (/^\/teams\/[^\/]+\/fundraiser$/).test($location.path())) { return true; }
 
         else if (tab === 'members' && (/^\/teams\/[^\/]+\/members$/).test($location.path())) { return true; }
         else if (tab === 'activity' && (/^\/teams\/[^\/]+\/activity$/).test($location.path())) { return true; }
@@ -71,12 +71,10 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             include_owner: true,
             include_rewards: true
           }).then(function(response) {
-            
             scope.fundraisers = angular.copy(response.data);
-
             // Explicitly set activeFundraiser to false to let the rest of the app know that
             // it was checked for, but not present. A value of undefined means that is still resolving fundraisers.
-            scope.activeFundraiser = scope.fundraisers[0] || false;
+            scope.activeFundraiser = findActiveFundraiser(scope.fundraisers);
             if (scope.activeFundraiser) {
               // Is the authenticated user the owner of the Fundraiser?
               scope.canManageActiveFundraiser = false;
@@ -99,6 +97,34 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
           });
         }
       });
+      
+      // return either an active & published fundraiser or return the most recent completed fundraiser
+      function findActiveFundraiser (fundraisers) {
+        var completed_fundraisers = [];
+        var active_fundraisers = [];
+        var draft_fundraisers = [];
+
+        // split fundraisers up into groups
+        for (var i = 0; i < fundraisers.length; i++) {
+          if(fundraisers[i].published && fundraisers[i].in_progress) {
+            active_fundraisers.push(fundraisers[i]);
+          } else if (fundraisers[i].published && !fundraisers[i].in_progress) {
+            completed_fundraisers.push(fundraisers[i]);
+          } else {
+            draft_fundraisers.push(fundraisers[i]);
+          }
+        }
+
+        // return active fundraiser if one exists. There should only ever be one active fundraiser
+        if (active_fundraisers.length > 0) {
+          return active_fundraisers[0];
+        } else if (completed_fundraisers.length > 0) {
+          // get most recent completed fundraiser
+          return completed_fundraisers[completed_fundraisers.length - 1];
+        } else {
+          return false;
+        }
+      }
 
       /*****************************
        * Pledge Buttons

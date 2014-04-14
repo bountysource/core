@@ -1,0 +1,32 @@
+<div ng-controller="FundraiserManageController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/teams">Teams</a></li>
+    <li><a ng-href="/teams/{{team.id}}">{{ team.name || 'Loading...' }}</a></li>
+    <li><a>Fundraisers</a></li>
+  </ul>
+  <div team-view team="team">
+    <div ng-show="fundraisers.length == 0" class="alert alert-info text-center"><a ng-href="teams/{{ team.slug }}/fundraisers/new">You do not have any fundraisers. Create one now!</a></div>
+    <div ng-show="fundraisers.length > 0">
+      <a ng-if="is_admin" ng-href="teams/{{ team.slug }}/fundraisers/new" class="btn btn-primary btn-lg">Create Fundraiser</a>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Goal</th>
+            <th>Progress</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="fundraiser in fundraisers">
+            <td><a ng-href="/teams/{{ team.slug }}/fundraisers/{{fundraiser.slug}}">{{ fundraiser.title }}</a></td>
+            <td>{{ fundraiser.funding_goal | dollars }}</td>
+            <td>{{ (fundraiser.total_pledged / fundraiser.funding_goal) | percent }}</td>
+            <td ng-class="{ 'text-info': ((fundraiser | fundraiserStatus) == 'draft'), 'text-success': ((fundraiser | fundraiserStatus) == 'completed') }">{{ fundraiser | fundraiserStatus }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -13,7 +13,6 @@ angular.module('fundraisers').controller('FundraiserIndexController', function($
       $scope.$init_fundraiser(fundraisers[i]);
     }
     $scope.select_fundraisers($scope.type);
-
     $scope.all = fundraisers;
     return fundraisers;
   });

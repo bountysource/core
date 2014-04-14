@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('TeamFundraiserController', function($scope, $location, $cart, $routeParams, $api) {
-
+  .controller('TeamFundraiserController', function($scope, $location, $cart, $routeParams, $route, $api) {
     // Change page content based on query param
     $scope._page = $location.search().page;
 
@@ -17,19 +16,22 @@ angular.module('app')
       return cart;
     });
 
-    $scope.pledge = {
-      amount: parseInt($routeParams.amount, 10) || 100,
-      anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
-      checkout_method: $routeParams.checkout_method || "google",
-      survey_response: $routeParams.survey_response || "",
-      reward_id: parseInt($routeParams.reward_id, 10) || 0
-    };
+    // Watching a string didn't work here. Watch the route params and update pledge fields accordingly
+    $scope.$watch(function () {return $location.search();}, function (newParams) {
+      $scope.pledge = {
+        amount: parseInt(newParams.amount, 10) || angular.noop,
+        anonymous: (parseInt(newParams.anonymous, 10) === 1) || false,
+        checkout_method: newParams.checkout_method || "google",
+        survey_response: newParams.survey_response || "",
+        reward_id: parseInt(newParams.reward_id, 10) || 0
+      };
+    });
+
 
     $scope.fundraiser_hide_pledge_button = true;
 
     $scope.$watch('activeFundraiser', function(fundraiser) {
       if (fundraiser === false) {
-
         $location.url('/teams/' + $routeParams.id);
 
       } else if (fundraiser) {

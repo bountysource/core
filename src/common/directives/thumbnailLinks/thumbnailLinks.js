@@ -14,7 +14,7 @@
   /// Arguments ///
   array       => An array of objects that have image_url attributes.
   per-row     => Number of thumbnail links per row.
-  object-type => Specifies the object type ('team', 'tracker', 'team-project') to enable conditional rendering logic
+  object-type => Specifies the object type ('team', 'tracker', 'team-project', 'team-fundraiser-create') to enable conditional rendering logic
                  for hrefs, display_names, etc.
 */
 

@@ -85,6 +85,30 @@ angular.module('teams')
       trackEvent: 'View Fundraiser'
     }, defaultRouteOptions));
 
+    $routeProvider.when('/teams/:id/fundraisers', angular.extend({
+      templateUrl: 'app/fundraisers/manage.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Fundraisers Index'
+    }, defaultRouteOptions));
+
+    $routeProvider.when('/teams/:id/fundraisers/new', angular.extend({
+      templateUrl: 'app/fundraisers/new.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Fundraiser New'
+    }, defaultRouteOptions));
+
+    $routeProvider.when('/teams/:id/fundraisers/:fundraiser_id/edit', angular.extend({
+      templateUrl: 'app/fundraisers/edit.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Fundraiser Edit'
+    }, defaultRouteOptions));
+
+    $routeProvider.when('/teams/:id/fundraisers/:fundraiser_id', angular.extend({
+      templateUrl: 'app/fundraisers/show.html',
+      controller: 'BaseTeamController',
+      trackEvent: 'View Fundraiser New'
+    }, defaultRouteOptions));
+
     $routeProvider.when('/teams/:id/backers', angular.extend({
       templateUrl: 'app/teams/backers.html',
       controller: 'BaseTeamController',

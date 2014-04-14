@@ -6,7 +6,8 @@ angular.module('directives').directive('fundraiserEditForm', function($rootScope
     templateUrl: 'common/directives/fundraiserEditForm/templates/fundraiserEditForm.html',
     scope: {
       fundraiser: "=",
-      master: "="
+      master: "=",
+      team: "="
     },
     link: function(scope) {
       $rootScope.$watch('current_person', function(person) {

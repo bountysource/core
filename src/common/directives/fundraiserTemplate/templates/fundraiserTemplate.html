@@ -1,19 +1,24 @@
 <div>
-  <!-- Header -->
-  <div ng-if="_options.showTitle">
-    <div class="text-center">
-      <h1 style="margin-top:0px;font-weight:bold;">{{ fundraiser.title || 'Loading...' }}</h1>
-      <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
-    </div>
+  <!-- Error  -->
+  <div ng-show="error" class="alert alert-danger text-center">{{ error }}</div>
 
-    <div ng-show="fundraiser.owner && fundraiser.published && !fundraiser.in_progress" class="alert alert-info text-center">
-      All money raised is now on your Bountysource account. You can request a cash-out <a href="/activity/transactions">here</a>.
-    </div>
+  <!-- Header Template-->
+  <script type="text/ng-template" id="header_template.html">
+    <div ng-if="_options.showTitle">
+      <div class="text-center">
+        <h1 style="margin-top:0px;font-weight:bold;">{{ fundraiser.title || 'Loading...' }}</h1>
+        <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
+      </div>
 
-    <div ng-show="fundraiser.published && !fundraiser.in_progress && linked_tracker" class="alert alert-info text-center">
-      <a ng-href="{{ linked_tracker.frontend_path }}">This fundraiser has ended, but you can still contribute toward its development. Post a bounty on open issues or earn some bounties yourself.</a>
+      <div ng-show="fundraiser.owner && fundraiser.published && !fundraiser.in_progress" class="alert alert-info text-center">
+        All money raised is now on your Bountysource account. You can request a cash-out <a href="/activity/transactions">here</a>.
+      </div>
+
+      <div ng-show="fundraiser.published && !fundraiser.in_progress && linked_tracker" class="alert alert-info text-center">
+        <a ng-href="{{ linked_tracker.frontend_path }}">This fundraiser has ended, but you can still contribute toward its development. Post a bounty on open issues or earn some bounties yourself.</a>
+      </div>
     </div>
-  </div>
+  </script>
 
   <!-- Nav tabs -->
   <div ng-if="_options.showNavTabs">
@@ -196,9 +201,18 @@
     </div>
 
     <!-- Main Content! -->
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-show="_options.showLeftColumn && _options.showRightColumn" ng-transclude></div>
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" ng-show="(!_options.showLeftColumn && _options.showRightColumn) || (_options.showLeftColumn && !_options.showRightColumn)" ng-transclude></div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="!_options.showLeftColumn && !_options.showRightColumn" ng-transclude></div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-show="_options.showLeftColumn && _options.showRightColumn">
+      <div ng-include="'header_template.html'"></div>
+      <div ng-transclude></div>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" ng-show="(!_options.showLeftColumn && _options.showRightColumn) || (_options.showLeftColumn && !_options.showRightColumn)">
+      <div ng-include="'header_template.html'"></div>
+      <div ng-transclude></div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="!_options.showLeftColumn && !_options.showRightColumn">
+      <div ng-include="'header_template.html'"></div>
+      <div ng-transclude></div>
+    </div>
 
     <!-- RIGHT COLUMN -->
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-if="_options.showRightColumn">
@@ -208,19 +222,19 @@
 
         <div class="panel-body">
           <!-- New Update button -->
-          <button class="btn btn-block btn-info btn-lg" ng-click="showNewUpdateModal()" ng-show="fundraiser.published && fundraiser.in_progress">
+          <button class="btn btn-block btn-primary btn-lg" ng-click="showNewUpdateModal()" ng-show="fundraiser.published && fundraiser.in_progress">
             <i class="glyphicon glyphicon-pencil"></i>
             <span>Update</span>
           </button>
 
           <!-- Edit button -->
-          <a class="btn btn-block btn-info btn-lg" ng-href="/fundraisers/{{fundraiser.slug}}/edit" ng-show="!fundraiser.published">
+          <a class="btn btn-block btn-primary btn-lg" ng-href="/teams/{{ fundraiser.team.slug }}/fundraisers/{{fundraiser.slug}}/edit">
             <i class="glyphicon glyphicon-edit"></i>
             <span>Edit</span>
           </a>
 
           <!-- Publish button -->
-          <button class="btn btn-block btn-info btn-lg" ng-click="publishFundraiser(fundraiser)" ng-disabled="!fundraiser.publishable" ng-show="!fundraiser.published">
+          <button class="btn btn-block btn-primary btn-lg" ng-click="publishFundraiser(fundraiser)" ng-disabled="!fundraiser.publishable" ng-show="!fundraiser.published">
             <i class="glyphicon glyphicon-globe"></i>
             <span>Publish</span>
           </button>

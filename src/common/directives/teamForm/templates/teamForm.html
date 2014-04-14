@@ -1,0 +1,69 @@
+<form class="form-horizontal" ng-submit="create_team(form_data)">
+  <!-- Alerts and Progerss Bars -->
+  <div class="alert alert-danger alert-danger" ng-show="error">{{error}}</div>
+  <div ng-if="_options.editForm" ng-show="alert.text">
+    <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
+  </div>
+  <div ng-if="!_options.editForm" collapse="!creating_team">
+    <loading-bar>Creating {{form_data.name || "team"}}...</loading-bar>
+  </div>
+
+  <!-- FORM INPUTS -->
+  <div class="form-group">
+    <label class="control-label col-md-2" for="name">Name:</label>
+    <div class="col-md-3">
+      <input id="name" type="text" class="input-medium form-control" ng-model="form_data.name" placeholder="Bountysource Inc.">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2" for="slug">Custom URL:</label>
+    <div class="col-md-5">
+      <div class="input-group">
+        <span class="input-group-addon">bountysource.com/teams/</span>
+        <input id="slug" type="text" ng-model="form_data.slug" input-slug="" class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2" for="image_url">Logo URL:</label>
+    <div class="col-md-4">
+      <!--<img ng-src="{{team.image_url}}" style="width: 50px; height: 50px" />-->
+      <input id="image_url" type="text" ng-model="form_data.image_url" class="form-control" placeholder="https://www.bountysource.com/logo.png">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2" for="url">Homepage:</label>
+    <div class="col-md-4">
+      <input id="url" type="url" ng-model="form_data.url" class="input-large form-control" placeholder="https://www.bountysource.com/">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2" for="bio">Bio:</label>
+    <div class="col-md-7">
+      <textarea class="form-control" id="bio" ng-model="form_data.bio" rows="5" placeholder="Bountysource is the funding platform for open-source software."></textarea>
+    </div>
+  </div>
+
+  <div ng-show="_options.editForm" class="form-group">
+    <label class="control-label col-xs-4 col-sm-2 col-md-2">Funding:</label>
+    <div class="col-md-5">
+      <div class="checkbox">
+        <label>
+          Accept public contributions to your team?
+          <input type="checkbox" ng-model="form_data.accepts_public_payins"></input>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-8">
+      <submit ng-if="_options.editForm" type="submit" ng-click="update_team(form_data)" class="btn btn-primary btn-lg">Update</submit>
+      <submit ng-if="!_options.editForm" type="submit" ng-click="create_team(form_data)" class="btn btn-primary btn-lg">Continue</submit>
+    </div>
+  </div>
+</form>

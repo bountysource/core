@@ -3,7 +3,19 @@
     <div class="col-md-{{12/perRow}} col-sm-{{12/perRow}}" ng-repeat="item in array.slice(i, i + perRow)">
       <!-- Teams -->
       <a ng-if="objectType == 'team'" ng-href="/teams/{{item.slug}}" class="text-center thumbnail">
-        <img class="img-responsive img-rounded" ng-src="{{item.image_url}}">
+        <img class="img-responsive img-rounded" ng-src="{{item.large_image_url}}">
+        {{item.name}}
+      </a>
+
+      <!-- First TeamFundraiserCreate Card - Dummy Card for Creates -->
+      <a ng-if="objectType == 'team-fundraiser-create' && item.dummy" ng-href="/teams/new?creating_fundraiser" class="text-center thumbnail">
+        <img class="img-responsive" src="/images/bountysource-grey.png"></img>
+        Create a new team!
+      </a>
+
+      <!-- Team Fudraiser Create -->
+      <a ng-if="objectType == 'team-fundraiser-create' && !item.dummy" ng-href="/teams/{{item.slug}}/fundraisers/new" class="text-center thumbnail">
+        <img class="img-responsive img-rounded" ng-src="{{item.large_image_url}}">
         {{item.name}}
       </a>
 

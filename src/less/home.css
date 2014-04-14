@@ -7,6 +7,18 @@
   display: block;
 }
 
+.team-card {
+  padding: 7px;
+}
+
+.team-card:hover {
+  box-shadow: 0 0 8px #ddd;
+  -webkit-box-shadow: 0 0 8px #ddd;
+  -moz-box-shadow: 0 0 8px #ddd;
+  display: block;
+  cursor: pointer;
+}
+
 .homepage-card img { margin-top: 10px; }
 
 .homepage-card .raised { text-decoration: none; color: black; }

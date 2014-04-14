@@ -14,20 +14,6 @@
   <li class="active"><a href="/teams/new">Create</a></li>
 </ul>
 
-<div collapse="!creating_team">
-  <loading-bar>Creating {{form_data.name || "team"}}...</loading-bar>
-</div>
-
 <div collapse="creating_team">
-  <form class="form-horizontal" ng-submit="create_team()">
-    <div class="alert alert-danger alert-danger" ng-show="error">{{error}}</div>
-
-    <ng-include src="'app/teams/templates/form.html'"></ng-include>
-
-    <div class="form-group">
-      <div class="col-md-offset-2 col-md-8">
-        <submit type="submit" ng-click="create_team()" class="btn btn-primary btn-lg">Continue</submit>
-      </div>
-    </div>
-  </form>
+  <team-form></team-form>
 </div>

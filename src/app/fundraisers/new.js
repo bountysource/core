@@ -17,6 +17,13 @@ angular.module('fundraisers').controller('FundraiserCreateController', function(
       // Get person's teams
       $api.person_teams_get(person.id).then(function(teams) {
         $scope.teams = angular.copy(teams);
+
+        //enter blank placeholder for team/new card only if they already have teams
+        if($scope.teams.length > 0) {
+          $scope.teams.unshift({ dummy: true});
+        } else {
+          $location.search({creating_fundraiser: true});
+        }
       });
     }
   });
@@ -31,19 +38,21 @@ angular.module('fundraisers').controller('FundraiserCreateController', function(
     }
   });
 
-  $scope.redirectTeamCreate = function () {
-    $location.path("/teams/new").search({creating_fundraiser: true});
-  };
-
-  $scope.create = function() {
-    var payload = angular.copy($scope.fundraiser);
-
-    $api.fundraiser_create(payload, function(response) {
-      if (response.meta.success) {
-        $location.url("/fundraisers/"+response.data.slug+"/edit");
-      } else {
-        $scope.error = response.data.error;
-      }
-    });
-  };
+  $scope.$watch('team_promise', function (team_promise) {
+    if(team_promise) {
+      $scope.team_promise.then(function (team) {
+        $scope.create = function() {
+          var payload = angular.copy($scope.fundraiser);
+          payload.team_id = team.id;
+          $api.fundraiser_create(payload, function(response) {
+            if (response.meta.success) {
+              $location.url("/teams/"+response.data.team.slug+"/fundraisers/"+response.data.slug+"/edit").search( { rewards_edit: true } );
+            } else {
+              $scope.error = response.data.error;
+            }
+          });
+        };
+      });
+    }
+  });
 });

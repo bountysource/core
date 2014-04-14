@@ -85,6 +85,7 @@ angular.module('fundraisers')
     function teamRedirect (team) {
       var path = $location.path();
       var slug = team.slug;
+
       switch(true) {
       case (/\/fundraisers\/[a-z-_0-9]+$/).test(path):
         $location.path("/teams/"+slug+"/fundraiser").replace();
@@ -111,7 +112,6 @@ angular.module('fundraisers')
 
     // Display an update in a modal
     $scope.showUpdateModal = function(update) {
-      console.log('showUpdateModal', update);
 
       $modal.open({
         templateUrl: 'app/fundraisers/templates/showUpdateModal.html',

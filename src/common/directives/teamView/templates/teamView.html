@@ -225,12 +225,10 @@
             </a>
 
             <ul class="dropdown-menu">
-              <li ng-show="activeFundraiser && is_admin">
-                <a ng-href="/fundraisers/{{activeFundraiser.id}}/edit">Edit Fundraiser</a>
-              </li>
+              <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> General</li>
 
-              <li ng-show="activeFundraiser && is_admin">
-                <a ng-href="/teams/{{ team.slug }}/rewards">Rewards</a>
+              <li ng-show="is_admin">
+                <a ng-href="/teams/{{team.slug}}/account">Add Funds</a>
               </li>
 
               <li ng-show="is_admin">
@@ -245,8 +243,20 @@
                 <a ng-href="/teams/{{team.slug}}/settings">Settings</a>
               </li>
 
-              <li ng-show="is_admin">
-                <a ng-href="/teams/{{team.slug}}/account">Add Funds</a>
+              <li class="dropdown-header">
+                <i class="glyphicon glyphicon-gift"> Fundraiser</i>
+              </li>
+
+              <li ng-show="fundraisers.length == 0 && is_admin">
+                <a ng-href="/teams/{{ team.slug }}/fundraisers/new">Create Fundraiser</a>
+              </li>
+
+              <li ng-show="is_admin && fundraisers.length > 0">
+                <a ng-href="teams/{{ team.slug }}/fundraisers">Manage Fundraisers</a>
+              </li>
+
+              <li ng-show="activeFundraiser && is_admin">
+                <a ng-href="/teams/{{ team.slug }}/rewards">Rewards</a>
               </li>
             </ul>
           </li>

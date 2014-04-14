@@ -27,13 +27,17 @@
     <tbody>
     <tr ng-repeat="fundraiser in selected_fundraisers | filter:filter_method | orderBy:order_by:order_reverse">
       <td class="hidden-sm">
-        <a class="thumbnail" ng-href="/fundraisers/{{fundraiser.slug}}" style="margin-bottom: 0;">
+        <a ng-if="!fundraiser.team" class="thumbnail" ng-href="/fundraisers/{{fundraiser.slug}}" style="margin-bottom: 0;">
+          <img ng-src="{{fundraiser.image_url || '/src/assets/img/bountysource-grey.png'}}" style="width: 100%;">
+        </a>
+        <a ng-if="fundraiser.team" class="thumbnail" ng-href="/teams/{{ fundraiser.team.slug }}/fundraiser" style="margin-bottom: 0;">
           <img ng-src="{{fundraiser.image_url || '/src/assets/img/bountysource-grey.png'}}" style="width: 100%;">
         </a>
       </td>
       <td>
         <img class="pull-left visible-sm" style="width: 20px; height:20px; margin-right:10px" src="{{fundraiser.image_url}}">
-        <a ng-href="/fundraisers/{{fundraiser.slug}}"><span ng-show="fundraiser.featured" class="label label-info">Featured!</span> {{fundraiser.title}}</a>
+        <a ng-if="!fundraiser.team" ng-href="/fundraisers/{{fundraiser.slug}}"><span ng-show="fundraiser.featured" class="label label-info">Featured!</span> {{fundraiser.title}}</a>
+        <a ng-if="fundraiser.team" ng-href="/teams/{{ fundraiser.team.slug }}/fundraiser"><span ng-show="fundraiser.featured" class="label label-info">Featured!</span> {{fundraiser.title}}</a> 
       </td>
       <td class="text-muted hidden-sm">{{fundraiser.short_description}}</td>
       <td>{{fundraiser.funding_goal | dollars}}</td>

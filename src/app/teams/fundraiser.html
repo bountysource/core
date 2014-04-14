@@ -36,7 +36,7 @@
               </div>
           </div>
           <div fundraiser-template fundraiser="activeFundraiser"
-               options="{ showLeftColumn: false, showRightColumn: false, showTitle: false, showNavTabs: false }">
+               options="{ showLeftColumn: false, showRightColumn: false, showTitle: true, showNavTabs: false }">
             <div class="markdown" ng-bind-html="activeFundraiser.description_html"></div>
           </div>
         </div>
@@ -60,7 +60,7 @@
               </a>
 
               <!-- Publish button -->
-              <button class="btn btn-block btn-info btn-lg" ng-click="publishFundraiser(fundraiser)" ng-disabled="!fundraiser.publishable" ng-show="!fundraiser.published">
+              <button class="btn btn-block btn-info btn-lgq" ng-click="publishFundraiser(fundraiser)" ng-disabled="!fundraiser.publishable" ng-show="!fundraiser.published">
                 <i class="glyphicon glyphicon-globe"></i>
                 <span>Publish</span>
               </button>
@@ -69,7 +69,7 @@
 
           <!-- Pledge Buttons -->
           <div>
-            <div class="panel panel-primary" ng-if="activeFundraiser.published && activeFundraiser.in_progress" ng-if="activeFundraiser.published && activeFundraiser.in_progress">
+            <div class="panel panel-primary" ng-if="activeFundraiser.published && activeFundraiser.in_progress">
               <div class="panel-heading">
                 <h3 class="panel-title text-center">Pledge Now</h3>
               </div>

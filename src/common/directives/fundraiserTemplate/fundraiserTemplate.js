@@ -87,7 +87,7 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
 
             $location.url("/fundraisers/"+fundraiser.slug);
           } else {
-            scope.error = "ERROR: " + response.data.error;
+            scope.error = response.data.error.join(", ");
           }
           return response.data;
         });

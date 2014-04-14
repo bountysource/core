@@ -5,51 +5,60 @@
     <li><a>New Fundraiser</a></li>
   </ul>
 
-  <alert ng-show="error" type="'danger'" close="error = null">{{error}}</alert>
+  <div ng-if="team" team-view>
+    <alert ng-show="error" type="'danger'" close="error = null">{{error}}</alert>
 
-  <div class="row">
-    <div ng-show="teams.length == 0" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="alert alert-danger text-center">
-        <h4>Fundraisers must be created by a team. Please create one now to continue!</h4>
-        <a ng-click="redirectTeamCreate()" class="btn btn-primary btn-lg">Get Started!</a>
-      </div>
-    </div>
-
-    <div ng-show="teams.length > 0" class="col-sm-9 col-md-9">
-      <fundraiser-edit-form fundraiser="fundraiser"></fundraiser-edit-form>
-    </div>
-
-    <div class="col-sm-3 col-md-3" ng-show="teams.length > 0">
-      <div class="well well-lg">
-        <!--Outline required inputs-->
-        <h4 style="margin-top: 0;">Required Steps</h4>
-        <div class="checkbox"><label class="" style="cursor: default;">
-          <input type="checkbox" ng-checked="!!fundraiser.title" disabled="" style="cursor: default;">
-          <small ng-class="{ 'text-success': !!fundraiser.title }">Add a title</small>
-        </label></div>
-        <div class="checkbox"><label class="" style="cursor: default;">
-          <input type="checkbox" ng-checked="!!fundraiser.short_description" disabled="" style="cursor: default;">
-          <small ng-class="{ 'text-success': !!fundraiser.short_description }">Add a short description</small>
-        </label></div>
-        <div class="checkbox"><label class="" style="cursor: default;">
-          <input type="checkbox" ng-checked="!!fundraiser.funding_goal" disabled="" style="cursor: default;">
-          <small ng-class="{ 'text-success': !!fundraiser.funding_goal }">Set your funding goal</small>
-        </label></div>
-         <div class="checkbox"><label class="" style="cursor: default;">
-          <input type="checkbox" ng-checked="!!fundraiser.team_id" disabled="" style="cursor: default;">
-          <small ng-class="{ 'text-success': !!fundraiser.team_id }">Add a team</small>
-        </label></div>
-        <div class="checkbox"><label class="" style="cursor: default;">
-          <input type="checkbox" ng-checked="!!fundraiser.description" disabled="" style="cursor: default;">
-          <small ng-class="{ 'text-success': !!fundraiser.description }">Add a description</small>
-        </label></div>
-        <br>
-
-        <!--Big Create Fundraiser button-->
-        <button ng-click="create()" ng-disabled="!fundraiser.title || !fundraiser.short_description || !fundraiser.description || !fundraiser.funding_goal || !fundraiser.team_id || urls.$invalid" class="btn btn-block btn-success btn-lg">Create Fundraiser</button>
+    <div class="row">
+      <div ng-show="teams.length > 0" class="col-sm-9 col-md-9">
+        <fundraiser-edit-form fundraiser="fundraiser" team="team"></fundraiser-edit-form>
       </div>
 
-      <fundraiser-author fundraiser="fundraiser"></fundraiser-author>
+      <div class="col-sm-3 col-md-3" ng-show="teams.length > 0">
+        <div class="well well-lg">
+          <!--Outline required inputs-->
+          <h4 style="margin-top: 0;">Required Steps</h4>
+          <div class="checkbox"><label class="" style="cursor: default;">
+            <input type="checkbox" ng-checked="!!fundraiser.title" disabled="" style="cursor: default;">
+            <small ng-class="{ 'text-success': !!fundraiser.title }">Add a title</small>
+          </label></div>
+          <div class="checkbox"><label class="" style="cursor: default;">
+            <input type="checkbox" ng-checked="!!fundraiser.short_description" disabled="" style="cursor: default;">
+            <small ng-class="{ 'text-success': !!fundraiser.short_description }">Add a short description</small>
+          </label></div>
+          <div class="checkbox"><label class="" style="cursor: default;">
+            <input type="checkbox" ng-checked="!!fundraiser.funding_goal" disabled="" style="cursor: default;">
+            <small ng-class="{ 'text-success': !!fundraiser.funding_goal }">Set your funding goal</small>
+          </label></div>
+          <div class="checkbox"><label class="" style="cursor: default;">
+            <input type="checkbox" ng-checked="!!fundraiser.description" disabled="" style="cursor: default;">
+            <small ng-class="{ 'text-success': !!fundraiser.description }">Add a description</small>
+          </label></div>
+          <br>
+
+          <!--Big Create Fundraiser button-->
+          <button ng-click="create()" ng-disabled="!fundraiser.title || !fundraiser.short_description || !fundraiser.description || !fundraiser.funding_goal || urls.$invalid" class="btn btn-block btn-success">Save & Continue</button>
+        </div>
+
+        <fundraiser-author fundraiser="fundraiser"></fundraiser-author>
+      </div>
     </div>
   </div>
+
+  <div ng-if="!team" class="row">
+    <p class="text-center lead">Fundraisers are created on behalf of teams.</p>
+    <!-- Person has teams associated with them -->
+    <div ng-if="teams.length > 0" class="col-xs-offset-2 col-xs-8">
+      <div class="text-center">
+        <h3>Select a team or create a new one!</h3>
+        <thumbnail-links array="teams" per-row="3" object-type="'team-fundraiser-create'"></thumbnail-links>
+      </div>
+    </div>
+
+    <!-- Person has no teams -->
+    <div ng-if="teams.length == 0" class="col-xs-offset-2 col-xs-8">
+      <h3 class="text-center">Build a team for your fundraiser!</h3>
+      <team-form></team-form>
+    </div>
+  </div>
+
 </div>
