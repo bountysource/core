@@ -10,6 +10,7 @@ angular.module('directives').directive('addressForm', function($api, countries, 
     link: function($scope) {
       $scope.countries = countries;
       $scope.usStates = usStates;
+      $scope.uniqueId = (new Date()).getTime();
     }
   };
 

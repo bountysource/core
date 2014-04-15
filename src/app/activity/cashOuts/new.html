@@ -19,90 +19,6 @@
           <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
         </div>
 
-        <!-- Amount -->
-        <div class="form-group">
-          <label for="amount" class="col-sm-3 control-label">Amount:</label>
-          <div class="col-sm-4">
-            <div class="input-group" tooltip="Account balance: {{current_person.account.balance | currency}}" tooltip-placement="bottom">
-              <span class="input-group-addon">$</span>
-              <input id="amount" type="number" ng-model="cashOut.amount" min="0" max="{{current_person.account.balance}}" step="0.01" class="form-control" placeholder="Amount" required />
-            </div>
-          </div>
-        </div>
-
-        <!-- Payout Method -->
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Payout Method:</label>
-          <div class="col-sm-9">
-            <!-- Paypal -->
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="cashOut.type" ng-value="'paypal'" /> PayPal
-              </label>
-            </div>
-
-            <!-- Bitcoin -->
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="cashOut.type" ng-value="'bitcoin'" /> Bitcoin
-              </label>
-            </div>
-
-            <!-- Check -->
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="cashOut.type" ng-value="'check'" /> Check
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- Paypal. Need paypal email addressManager -->
-        <div class="form-group" ng-if="cashOut.type === 'paypal'">
-          <label class="col-sm-3 control-label">PayPal Address:</label>
-          <div class="col-sm-4">
-            <input type="email" class="form-control" ng-model="$parent.cashOut.paypal_address" placeholder="PayPal Address"  />
-          </div>
-        </div>
-
-        <!-- Bitcoin. Need wallet address -->
-        <div class="form-group" ng-if="cashOut.type === 'bitcoin'">
-          <label class="col-sm-3 control-label">Bitcoin Address:</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" ng-model="$parent.cashOut.bitcoin_address" placeholder="Bitcoin Address"  />
-          </div>
-        </div>
-
-        <!-- Check. Need mailing address -->
-        <div class="form-group" ng-if="cashOut.type === 'check'">
-          <label class="col-sm-3 control-label">Mailing Address:</label>
-
-          <div class="col-sm-9">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="cashOut.usePermanentAddressAsMailing" /> Same as permanent address.
-              </label>
-            </div>
-
-            <div ng-show="!cashOut.usePermanentAddressAsMailing">
-              <div ng-if="addressManager.addresses.length > 0">
-                <br />
-                <address-select
-                  class="form-control"
-                  address-manager-instance="addressManager"
-                  ng-model="cashOut.mailing_address"
-                  name="mailingAddressSelect"
-                  >
-                </address-select>
-              </div>
-
-              <br />
-
-              <address-form address="cashOut.mailing_address"></address-form>
-            </div>
-          </div>
-        </div>
-
         <!-- Permanent address, select existing -->
         <div class="form-group" ng-if="addressManager.addresses.length > 0">
           <label class="col-sm-3 control-label" ng-if="addressManager.addresses.length > 0">Permanent Address:</label>
@@ -127,14 +43,69 @@
         <!-- Permanent address create form -->
         <div class="form-group" ng-if="toggleNewPermanentAddress">
           <div class="col-sm-offset-3 col-sm-9">
-            <div ng-if="">
-              <h4>Permanent Address</h4>
-              <p>Your permanent address is required to assess US tax obligations.</p>
-              <p>If you do have US tax obligations and earn over $600 a year, this is where we will send your 1099 at the end of the year.</p>
-              <hr />
+            <p>Your permanent address is required to assess US tax obligations.</p>
+            <p>If you do have US tax obligations and earn over $600 a year, this is where we will send your 1099 at the end of the year.</p>
+            <address-form address="cashOut.address"></address-form>
+          </div>
+        </div>
+
+        <!-- Payout Method -->
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Payout Method:</label>
+          <div class="col-sm-9">
+            <!-- Paypal -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="cashOut.type" ng-value="'paypal'" /> PayPal
+              </label>
             </div>
 
-            <address-form address="cashOut.address"></address-form>
+            <div ng-if="cashOut.type === 'paypal'" style="margin: 10px 0;">
+              <input type="email" class="form-control" ng-model="$parent.cashOut.paypal_address" placeholder="PayPal Address"  />
+            </div>
+
+            <!-- Bitcoin -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="cashOut.type" ng-value="'bitcoin'" /> Bitcoin
+              </label>
+            </div>
+
+            <div ng-if="cashOut.type === 'bitcoin'" style="margin: 10px 0;">
+              <input type="text" class="form-control" ng-model="$parent.cashOut.bitcoin_address" placeholder="Bitcoin Address"  />
+            </div>
+
+            <!-- Check -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="cashOut.type" ng-value="'check'" /> Check
+              </label>
+            </div>
+
+            <div ng-if="cashOut.type === 'check'">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="cashOut.usePermanentAddressAsMailing" /> Send to my permanent address
+                </label>
+              </div>
+
+              <div ng-show="!cashOut.usePermanentAddressAsMailing">
+                <div ng-if="addressManager.addresses.length > 0">
+                  <br />
+                  <address-select
+                    class="form-control"
+                    address-manager-instance="addressManager"
+                    ng-model="cashOut.mailing_address"
+                    name="mailingAddressSelect"
+                    >
+                  </address-select>
+                </div>
+
+                <br />
+
+                <address-form address="cashOut.mailing_address"></address-form>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -151,6 +122,17 @@
               <label>
                 <input type="radio" ng-model="cashOut.us_citizen" ng-value="false" /> No
               </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amount -->
+        <div class="form-group">
+          <label for="amount" class="col-sm-3 control-label">Amount:</label>
+          <div class="col-sm-4">
+            <div class="input-group" tooltip="Account balance: {{current_person.account.balance | currency}}" tooltip-placement="bottom">
+              <span class="input-group-addon">$</span>
+              <input id="amount" type="number" ng-model="cashOut.amount" min="0" max="{{current_person.account.balance}}" step="0.01" class="form-control" placeholder="Amount" required />
             </div>
           </div>
         </div>

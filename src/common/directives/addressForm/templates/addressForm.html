@@ -1,41 +1,41 @@
 <ng-form class="form-horizontal" name="form">
   <!-- Name -->
   <div class="form-group">
-    <label for="newAddressFullName" class="col-sm-3 control-label">Full Name:</label>
+    <label for="newAddressFullName{{uniqueId}}" class="col-sm-3 control-label"><strong>Full Name:</strong></label>
     <div class="col-sm-6">
-      <input id="newAddressFullName" type="text" ng-model="address.name" class="form-control" required />
+      <input id="newAddressFullName{{uniqueId}}" type="text" ng-model="address.name" class="form-control" required />
     </div>
   </div>
 
   <!-- Address 1 -->
   <div class="form-group">
-    <label for="newAddressAddress1" class="col-sm-3 control-label">Address Line 1:</label>
+    <label for="newAddressAddress1{{uniqueId}}" class="col-sm-3 control-label"><storng>Address Line 1:</storng></label>
     <div class="col-sm-9">
-      <input id="newAddressAddress1" type="text" ng-model="address.address1" class="form-control" required />
+      <input id="newAddressAddress1{{uniqueId}}" type="text" ng-model="address.address1" class="form-control" required />
     </div>
   </div>
 
   <!-- Address2 -->
   <div class="form-group">
-    <label for="newAddressAddress2" class="col-sm-3 control-label">Address Line 2:</label>
+    <label for="newAddressAddress2{{uniqueId}}" class="col-sm-3 control-label"><strong>Address Line 2:</strong></label>
     <div class="col-sm-9">
-      <input id="newAddressAddress2" type="text" ng-model="address.address2" class="form-control" />
+      <input id="newAddressAddress2{{uniqueId}}" type="text" ng-model="address.address2" class="form-control" />
     </div>
   </div>
 
   <!-- City -->
   <div class="form-group">
-    <label for="newAddressCity" class="col-sm-3 control-label">City:</label>
+    <label for="newAddressCity{{uniqueId}}" class="col-sm-3 control-label"><strong>City:</strong></label>
     <div class="col-sm-6">
-      <input id="newAddressCity" type="text" ng-model="address.city" class="form-control" required />
+      <input id="newAddressCity{{uniqueId}}" type="text" ng-model="address.city" class="form-control" required />
     </div>
   </div>
 
   <!-- State -->
   <div class="form-group">
-    <label for="newAddressState" class="col-sm-3 control-label">State/Province/Region:</label>
+    <label for="newAddressState{{uniqueId}}" class="col-sm-3 control-label"><strong>State/Province/Region:</strong></label>
     <div class="col-sm-6">
-      <input id="newAddressState" type="text" class="form-control" required
+      <input id="newAddressState{{uniqueId}}" type="text" class="form-control" required
              ng-model="address.state"
              typeahead="state.name for state in usStates | filter:$viewValue"
         />
@@ -44,18 +44,18 @@
 
   <!-- ZIP -->
   <div class="form-group">
-    <label for="newAddressPostalCode" class="col-sm-3 control-label">ZIP:</label>
+    <label for="newAddressPostalCode{{uniqueId}}" class="col-sm-3 control-label"><strong>ZIP:</strong></label>
     <div class="col-sm-4">
-      <input id="newAddressPostalCode" type="text" ng-model="address.postal_code" class="form-control" required />
+      <input id="newAddressPostalCode{{uniqueId}}" type="text" ng-model="address.postal_code" class="form-control" required />
     </div>
   </div>
 
   <!-- Country -->
   <div class="form-group" style="margin-bottom: 0;">
-    <label for="newAddressCountry" class="col-sm-3 control-label">Country:</label>
+    <label for="newAddressCountry{{uniqueId}}" class="col-sm-3 control-label"><strong>Country:</strong></label>
     <div class="col-sm-6">
       <select
-        id="newAddressCountry"
+        id="newAddressCountry{{uniqueId}}"
         class="form-control"
         ng-model="address.country"
         ng-options="country.code as country.name for country in countries"
