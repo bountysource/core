@@ -84,8 +84,10 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
           if (response.meta.success) {
             // replace cached copy of fundraiser with the now published one
             scope.fundraiser = angular.copy(response.data);
-
-            $location.url("/fundraisers/"+fundraiser.slug);
+            // Mixpanel track publish event
+            $analytics.publishFundraiser(fundraiser.team.id, fundraiser.id)
+            $location.url("teams/"+fundraiser.team.slug+"/fundraiser");
+            // $location.url("/fundraisers/"+fundraiser.slug);
           } else {
             scope.error = response.data.error.join(", ");
           }

@@ -151,6 +151,10 @@ angular.module('app')
       this.track("Create Fundraiser", angular.extend( {team_id: team_id}, options || {}));
     };
 
+    this.publishFundraiser = function (team_id, fundraiser_id, options) {
+      this.track("Publish Fundraiser", angular.extend( {team_id: team_id, fundraiser_id: fundraiser_id}, options || {}));
+    };
+
   })
 
   // Fire Mixpanel events based on route
