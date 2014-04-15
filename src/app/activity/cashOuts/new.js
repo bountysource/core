@@ -1,21 +1,18 @@
 'use strict';
 
 angular.module('activity').
-  controller('NewCashOutController', function($scope, $api, $window, $location, AddressManager, countries, usStates) {
+  controller('NewCashOutController', function($scope, $api, $window, $location, $q, AddressManager, countries, usStates) {
 
     $scope.cashOut = {
-      type: undefined,
+      type: 'paypal',
       amount: undefined,
       paypal_address: undefined,
       bitcoin_address: undefined,
-      address_id: undefined,
-      mailing_address_id: undefined,
+      address: undefined,
+      mailing_address: undefined,
       us_citizen: undefined,
       usePermanentAddressAsMailing: true
     };
-
-    $scope.newPermanentAddress = undefined;
-    $scope.newMailingAddress = undefined;
 
     // Set default to amount to current account balance
     $scope.$watch('current_person', function(person) {
@@ -36,27 +33,6 @@ angular.module('activity').
       return angular.copy(response.data);
     }));
 
-    // Initialize value of address selects if undefined
-    $scope.$on($scope.addressManager.addressAddedEvent, function(event, address) {
-      if (angular.isUndefined($scope.cashOut.address)) {
-        $scope.cashOut.address = address;
-      }
-      if (angular.isUndefined($scope.cashOut.address)) {
-        $scope.cashOut.mailing_address = address;
-      }
-    });
-
-    // Remove address values from selects where the removed address is the value.
-    $scope.$on($scope.addressManager.addressRemovedEvent, function(event, address) {
-      if (angular.isDefined($scope.cashOut.address) && address === $scope.cashOut.address) {
-        $scope.cashOut.address = undefined;
-      }
-
-      if (angular.isDefined($scope.cashOut.mailing_address) && address === $scope.cashOut.mailing_address) {
-        $scope.cashOut.mailing_address = undefined;
-      }
-    });
-
     $scope.toggleNewPermanentAddress = false;
 
     // Watch new address toggle.
@@ -65,6 +41,7 @@ angular.module('activity').
     $scope.$watch('toggleNewPermanentAddress', function(value) {
       if (value === true) {
         $scope.cashOut.address = {};
+        delete $scope.cashOut.address;
       } else if (value === false) {
         $scope.cashOut.address = angular.copy($scope.addressManager.addresses[0]);
       }
@@ -72,39 +49,47 @@ angular.module('activity').
 
     $scope.createCashOut = function() {
       // Create permanent address if missing
-      if ($scope.cashOut.address && !$scope.cashOut.address.id) {
-        $scope.addressManager.create($scope.cashOut.address).then(function(response) {
-          $scope.cashOut.address = angular.copy(response.data);
-        });
+      var permanentAddressDeferred = $q.defer(),
+          permanentAddressPromise = permanentAddressDeferred.promise;
+      if ($scope.cashOut.address) {
+        if ($scope.cashOut.address.id) {
+          permanentAddressDeferred.resolve();
+        } else {
+          $scope.addressManager.create($scope.cashOut.address).then(function(response) {
+            $scope.cashOut.address = angular.copy(response.data);
+            permanentAddressDeferred.resolve();
+          });
+        }
       }
 
       // Create mailing address if missing
-      if ($scope.cashOut.address && !$scope.cashOut.address.id) {
-        $scope.addressManager.create($scope.cashOut.address).then(function(response) {
-          $scope.cashOut.mailing_address = angular.copy(response.data);
-        });
+      var mailingAddressDeferred = $q.defer(),
+          mailingAddressPromise = mailingAddressDeferred.promise;
+      if ($scope.cashOut.mailing_address) {
+        if ($scope.cashOut.mailing_address.id) {
+          mailingAddressDeferred.resolve();
+        } else {
+          $scope.addressManager.create($scope.cashOut.mailing_address).then(function(response) {
+            $scope.cashOut.mailing_address = angular.copy(response.data);
+            mailingAddressDeferred.resolve();
+          });
+        }
       }
 
-      // Register a listener on the payload. Once all addresses have been created and added,
-      // send the CashOut create request. This is all some hacky bullshit.
-      var cashOutCreateListener = $scope.$watch('cashOut', function(cashOut) {
-        if (cashOut && cashOut.address.id && cashOut.mailing_address.id) {
-          cashOutCreateListener();
+      permanentAddressPromise.then(mailingAddressPromise).then(function() {
+        var payload = angular.copy($scope.cashOut);
 
-          var payload = angular.copy($scope.cashOut);
-
-          // Add address IDs, remove address objects
+        if (payload && payload.address) {
+          // add permanent address id
           payload.address_id = payload.address.id;
-          payload.mailing_address_id = payload.mailing_address.id;
           delete payload.address;
-          delete payload.mailing_address;
 
-          // Do not post the US citizen response when not necessary
-          if (payload.address && payload.address.country === 'US') {
-            delete payload.us_citizen;
+          // Add mailing address id if applicable
+          if (payload.mailing_address) {
+            payload.mailing_address_id = payload.mailing_address.id;
+            delete payload.mailing_address;
           }
 
-          // If mailing address is to be the permanent address, copy the id.
           if (payload.usePermanentAddressAsMailing) {
             payload.mailing_address_id = payload.address_id;
           }
@@ -124,7 +109,7 @@ angular.module('activity').
             }
           });
         }
-      }, true);
+      });
     };
 
   });
