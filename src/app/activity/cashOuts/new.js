@@ -30,10 +30,9 @@ angular.module('activity').
     // Create intance of AddressManager. Created this so that mailing_address and address
     // could easily share the same array of addresses.
     $scope.addressManager = new AddressManager($api.v2.addresses().then(function(response) {
+      $scope.toggleNewPermanentAddress = response.data.length === 0;
       return angular.copy(response.data);
     }));
-
-    $scope.toggleNewPermanentAddress = false;
 
     // Watch new address toggle.
     // When true, set address to null, and reinitialize with empty object.
