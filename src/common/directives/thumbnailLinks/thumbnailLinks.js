@@ -18,7 +18,7 @@
                  for hrefs, display_names, etc.
 */
 
-angular.module('directives').directive('thumbnailLinks', function () {
+angular.module('directives').directive('thumbnailLinks', function ($analytics, $location) {
   return {
     restrict: 'EA',
     templateUrl: 'common/directives/thumbnailLinks/templates/thumbnailLinks.html',
@@ -46,6 +46,14 @@ angular.module('directives').directive('thumbnailLinks', function () {
           return range;
         };
       });
+
+      scope.teamRedirect = function (team) {
+        // mixpanel track event
+        $analytics.startFundraiserDraft(team.id, { type: "existing_team"});
+
+        // take browser to correct location
+        $location.path("/teams/"+team.slug+"/fundraisers/new");
+      };
 
     }
 

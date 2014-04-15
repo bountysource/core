@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fundraisers').controller('FundraiserCreateController', function($scope, $routeParams, $location, $api) {
+angular.module('fundraisers').controller('FundraiserCreateController', function($scope, $routeParams, $location, $api, $analytics) {
   $scope.fundraiser = {
     total_pledged: 0,
     funding_goal: 25000,
@@ -46,6 +46,8 @@ angular.module('fundraisers').controller('FundraiserCreateController', function(
           payload.team_id = team.id;
           $api.fundraiser_create(payload, function(response) {
             if (response.meta.success) {
+              // Mixpanel track event
+              $analytics.createFundraiser(response.data.team.id);
               $location.url("/teams/"+response.data.team.slug+"/fundraisers/"+response.data.slug+"/edit").search( { rewards_edit: true } );
             } else {
               $scope.error = response.data.error;

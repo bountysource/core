@@ -248,7 +248,7 @@
               </li>
 
               <li ng-show="fundraisers.length == 0 && is_admin">
-                <a ng-href="/teams/{{ team.slug }}/fundraisers/new">Create Fundraiser</a>
+                <a ng-click="fundraiserCreateRedirect(team)">Create Fundraiser</a>
               </li>
 
               <li ng-show="is_admin && fundraisers.length > 0">

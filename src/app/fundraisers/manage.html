@@ -8,7 +8,7 @@
   <div team-view team="team">
     <div ng-show="fundraisers.length == 0" class="alert alert-info text-center"><a ng-href="teams/{{ team.slug }}/fundraisers/new">You do not have any fundraisers. Create one now!</a></div>
     <div ng-show="fundraisers.length > 0">
-      <a ng-if="is_admin" ng-href="teams/{{ team.slug }}/fundraisers/new" class="btn btn-primary btn-lg">Create Fundraiser</a>
+      <a ng-if="is_admin" ng-click="fundraiserCreateRedirect(team)" class="btn btn-primary btn-lg">Create Fundraiser</a>
       <table class="table table-striped">
         <thead>
           <tr>

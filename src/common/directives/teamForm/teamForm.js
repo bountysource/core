@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('directives').directive('teamForm', function ($api, $routeParams, $location, $filter) {
+angular.module('directives').directive('teamForm', function ($analytics, $api, $routeParams, $location, $filter) {
   return {
     restrict: 'EA',
     templateUrl: 'common/directives/teamForm/templates/teamForm.html',
@@ -58,6 +58,8 @@ angular.module('directives').directive('teamForm', function ($api, $routeParams,
           if (team.error) {
             scope.error = team.error;
           } else if ($routeParams.creating_fundraiser) {
+            // mixpanel track event
+            $analytics.startFundraiserDraft(team.id, { type: "new_team"});
             $location.url("/teams/"+team.slug+"/fundraisers/new");
           } else {
             $location.url("/teams/"+team.slug);

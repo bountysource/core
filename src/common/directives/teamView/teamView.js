@@ -165,6 +165,13 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         $analytics.pledgeStart({ amount: amount, type: 'custom' });
       };
 
+      // Track Create Fundraiser Click
+      scope.fundraiserCreateRedirect = function (team) {
+         // mixpanel track event
+        $analytics.startFundraiserDraft(team.id, { type: "admin_dropdown"});
+        $location.path("teams/"+team.slug+"/fundraisers/new");
+      };
+
       /*****************************
        * All Team Backers
        * */

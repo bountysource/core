@@ -14,7 +14,7 @@
       </a>
 
       <!-- Team Fudraiser Create -->
-      <a ng-if="objectType == 'team-fundraiser-create' && !item.dummy" ng-href="/teams/{{item.slug}}/fundraisers/new" class="text-center thumbnail">
+      <a ng-if="objectType == 'team-fundraiser-create' && !item.dummy" ng-click="teamRedirect(item)" class="text-center thumbnail">
         <img class="img-responsive img-rounded" ng-src="{{item.large_image_url}}">
         {{item.name}}
       </a>
