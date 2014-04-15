@@ -15,7 +15,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
       var selected_tracker_ids = getTrackerIds();
       $api.v2.issues({
         search: $scope.search || null,
-        tracker_owner_type: team.type,
+        tracker_owner_type: "Team",
         tracker_owner_id: team.id,
         include_tracker: true,
         tracker_id: selected_tracker_ids.toString() || null,
