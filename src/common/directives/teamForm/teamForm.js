@@ -44,7 +44,7 @@ angular.module('directives').directive('teamForm', function ($analytics, $api, $
       });
 
       scope.$watch('form_data.name', function() {
-        scope.form_data.slug = $filter('slug')(scope.form_data.name);
+        scope.form_data.slug = $filter('slug')(scope.form_data.name).replace(/-(inc|llc)$/,'');
       });
 
       scope.create_team = function (form_data) {
