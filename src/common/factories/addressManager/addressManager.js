@@ -8,7 +8,6 @@ angular.module('factories').factory('AddressManager', function($api, $modal, $wi
     this.addressAddedEvent = [this._uniqueId, 'addressAdded'].join(':');
     this.addressRemovedEvent = [this._uniqueId, 'addressRemoved'].join(':');
 
-    this.addresses = [];
     var self = this;
 
     if (angular.isArray(addresses)) {
@@ -28,7 +27,7 @@ angular.module('factories').factory('AddressManager', function($api, $modal, $wi
     // Create address.
     // Returns promise of self
     this.create = function(payload) {
-      var payload = angular.copy(payload);
+      payload = angular.copy(payload);
       return $api.v2.createAddress(payload).then(function(response) {
         self.addresses.unshift(angular.copy(response.data));
         $rootScope.$broadcast(self.addressAddedEvent, self.addresses[0]);
@@ -39,23 +38,14 @@ angular.module('factories').factory('AddressManager', function($api, $modal, $wi
 
     // Update address at index
     // Returns promise of self
-    this.update = function(index) {
-      return $api.v2.updateAddress(self.addresses[index].id, payload).then(function(response) {
-        self.addresses[index] = angular.copy(response.data);
-
-        return response;
-      });
+    this.update = function(address, payload) {
+     // TODO
     };
 
     // Remove address at index
     // Returns promise of self
     this.delete = function(index) {
-      return $api.v2.deleteAddress(self.addresses[index].id).then(function(response) {
-        $rootScope.$broadcast(self.addressRemovedEvent, self.addresses[index]);
-        self.addresses.splice(index,1);
-
-        return response;
-      });
+      // TODO
     };
 
   };

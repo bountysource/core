@@ -1,0 +1,66 @@
+<div ng-controller="NewCashOutConfirmationController">
+
+  <ng-include src="'app/activity/cashOuts/new/progressPills.html'"></ng-include>
+
+  <ng-form class="form-horizontal" name="confirmationForm">
+    <!-- Permanent Address -->
+    <div class="form-group">
+      <label class="control-label col-sm-3">Permanent Address:</label>
+      <div class="col-sm-9">
+        <div class="form-control-static">
+          <formatted-address address="cashOut.address"></formatted-address>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mailing address -->
+    <div class="form-group">
+      <label class="control-label col-sm-3">Mailing Address:</label>
+      <div class="col-sm-9">
+        <p class="form-control-static" ng-if="cashOut.address.id === cashOut.mailing_address.id"><em>Same as permanent address</em></p>
+
+        <div ng-if="cashOut.address.id !== cashOut.mailing_address.id">
+          <div class="form-control-static">
+            <formatted-address address="cashOut.mailing_address"></formatted-address>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="form-group" ng-switch on="cashOut.type">
+      <div ng-switch-when="paypal">
+        <label class="control-label col-sm-3">PayPal Email:</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{cashOut.paypal_address}}</p>
+        </div>
+      </div>
+
+      <div ng-switch-when="bitcoin">
+        <label class="control-label col-sm-3">Bitcoin Address:</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{cashOut.bitcoin_address}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amount -->
+    <div class="form-group">
+      <label class="control-label col-sm-3">Amount:</label>
+
+      <div class="col-sm-4">
+        <div class="input-group" tooltip="Account balance: {{current_person.account.balance | currency}}">
+          <span class="input-group-addon">$</span>
+          <input type="number" class="form-control" step="0.01" min="1" max="{{current_person.account.balance}}" ng-model="$parent.cashOut.amount" required autoselect />
+        </div>
+      </div>
+    </div>
+  </ng-form>
+
+  <br />
+
+  <button class="btn btn-default" ng-click="$parent.previousPage()"><i class="glyphicon glyphicon-chevron-left"></i> Previous</button>
+  <button class="btn btn-primary" ng-click="createCashOut()" ng-disabled="confirmationForm.$invalid">
+    Request Cash Out <i class="glyphicon glyphicon-new-window"></i>
+  </button>
+</div>

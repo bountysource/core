@@ -1,0 +1,61 @@
+<div ng-controller="NewCashOutPermanentAddressController">
+
+  <ng-include src="'app/activity/cashOuts/new/progressPills.html'"></ng-include>
+
+  <p>Your permanent address is required to assess US tax obligations.</p>
+  <p>If you do have US tax obligations and earn over $600 a year, this is where we will send your 1099 at the end of the year.</p>
+
+  <!-- Alert, error messages -->
+  <div ng-show="alert.message">
+    <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
+  </div>
+
+  <!-- Show address select and new address toggle if user has addresses -->
+  <div ng-show="addressManager.addresses.length > 0">
+    <address-select
+      class="form-control"
+      address-manager-instance="addressManager"
+      ng-model="cashOut.address"
+      ng-disabled="toggleNewAddress">
+    </address-select>
+
+    <div class="checkbox" ng-show="addressManager.addresses.length > 0">
+      <label>
+        <input type="checkbox" ng-model="toggleNewAddress" /> New address
+      </label>
+    </div>
+  </div>
+
+  <!-- Show new address form if new address box checked, or if the user has no addresses -->
+  <div ng-show="addressManager.addresses.length <= 0 || toggleNewAddress">
+    <ng-form class="form-horizontal" name="newAddressForm">
+      <address-form-input-groups form="newAddressForm" address="newAddress"></address-form-input-groups>
+    </ng-form>
+
+    <br />
+
+    <div class="col-sm-offset-3 col-sm-9" ng-if="newAddress.country !== undefined && newAddress.country !== 'US'" class="form-group">
+      <strong>Are you a United States citizen?</strong>
+      <div class="radio">
+        <label>
+          <input type="radio" ng-model="$parent.cashOut.us_citizen" ng-value="true" required /> Yes
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" ng-model="$parent.cashOut.us_citizen" ng-value="false" /> No
+        </label>
+      </div>
+    </div>
+
+    <br />
+  </div>
+
+  <!-- Next step button -->
+  <button
+    class="btn btn-default"
+    ng-disabled="toggleNewAddress ? newAddressForm.$invalid : !cashOut.address"
+    ng-click="nextStep()">
+    Next <i class="glyphicon glyphicon-chevron-right"></i>
+  </button>
+</div>

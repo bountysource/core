@@ -1,0 +1,51 @@
+<div ng-controller="NewCashOutMailingAddressController">
+
+  <ng-include src="'app/activity/cashOuts/new/progressPills.html'"></ng-include>
+
+  <p>A mailing address is required if you receive payment via check.</p>
+
+  <div ng-if="alert.message">
+    <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
+  </div>
+
+  <div class="checkbox" ng-show="addressManager.addresses.length > 0">
+    <label>
+      <input type="checkbox" ng-model="usePermanentAddress" /> Use permanent address
+    </label>
+  </div>
+
+  <div class="col-sm-offset-1">
+    <div ng-show="!usePermanentAddress">
+      <address-select
+        class="form-control"
+        address-manager-instance="addressManager"
+        ng-model="cashOut.mailing_address"
+        ng-disabled="toggleNewMailingAddress">
+      </address-select>
+
+      <div class="checkbox" ng-show="addressManager.addresses.length > 0">
+        <label>
+          <input type="checkbox" ng-model="toggleNewMailingAddress" /> New address
+        </label>
+      </div>
+
+      <!-- Show new address form if new address box checked -->
+      <div ng-show="toggleNewMailingAddress">
+        <ng-form class="form-horizontal" name="newMailingAddressForm">
+          <address-form-input-groups form="newMailingAddressForm" address="newMailingAddress"></address-form-input-groups>
+        </ng-form>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <button class="btn btn-default" ng-click="$parent.previousPage()"><i class="glyphicon glyphicon-chevron-left"></i> Previous</button>
+
+  <!-- Next step button -->
+  <button class="btn btn-default"
+          ng-disabled="usePermanentAddress ? false : (toggleNewMailingAddress ? newMailingAddressForm.$invalid : !cashOut.mailing_address)"
+          ng-click="nextStep()">
+          Next <i class="glyphicon glyphicon-chevron-right"></i>
+  </button>
+</div>
