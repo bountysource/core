@@ -38,12 +38,8 @@
         <ng-include src="'app/teams/templates/goto_invite_members.html'"></ng-include>
       </div>
 
-      <div class="col-sm-3 col-md-3" ng-if="team.type == 'Team::Startup' || team.type == 'Team::Enterprise'">
+      <div class="col-sm-3 col-md-3">
         <ng-include src="'app/teams/templates/goto_add_funds.html'"></ng-include>
-      </div>
-
-      <div class="col-sm-3 col-md-3" ng-if="team.type == 'Team::Project'">
-        <ng-include src="'app/teams/templates/goto_plugin_install.html'"></ng-include>
       </div>
     </div>
 

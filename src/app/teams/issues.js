@@ -41,7 +41,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
     $scope.getTrackers = function (team) {
       $api.v2.trackers({
         owner_id: team.id,
-        owner_type: team.type
+        owner_type: "Team"
       }).then(function (response) {
         $scope.trackers = response.data;
       });

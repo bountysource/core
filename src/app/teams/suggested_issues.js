@@ -67,9 +67,9 @@ angular.module('app').controller('SuggestedTeamIssuesController', function ($sco
     if ($scope.search_parameters.show_team_issues && $scope.search_parameters.show_related_issues) {
       return params;
     } else if ($scope.search_parameters.show_team_issues) {
-      return angular.extend({ tracker_owner_id: team.id, tracker_owner_type: team.type }, params);
+      return angular.extend({ tracker_owner_id: team.id, tracker_owner_type: "Team" }, params);
     } else if ($scope.search_parameters.show_related_issues) {
-      return angular.extend({ tracker_owner_id: "!" + team.id, tracker_owner_type: "!" + team.type }, params);
+      return angular.extend({ tracker_owner_id: "!" + team.id, tracker_owner_type: "!" + "Team" }, params);
     } else {
       return false;
       // need to return empty list of isssues

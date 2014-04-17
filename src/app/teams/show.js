@@ -16,7 +16,7 @@ angular.module('app').controller('TeamHomeController', function ($route, $scope,
 
       // Get top issues for the team
       $api.v2.issues({
-        tracker_owner_type: team.type,
+        tracker_owner_type: "Team",
         tracker_owner_id: team.id,
         include_tracker: true,
         can_add_bounty: true,
