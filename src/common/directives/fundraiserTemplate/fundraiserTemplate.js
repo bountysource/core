@@ -71,6 +71,8 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
 
       scope.$watch('fundraiser', function(fundraiser) {
         $rootScope.$watch('current_person', function(person) {
+          //isolated scope. Need to define current_person
+          scope.current_person = person;
           if (fundraiser && fundraiser.person && person) {
             scope.can_manage = fundraiser.person.id === person.id;
             scope.publishable = fundraiser.title && fundraiser.short_description && fundraiser.funding_goal && fundraiser.description;
