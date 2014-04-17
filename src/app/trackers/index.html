@@ -3,7 +3,7 @@
   <li><a>Projects</a></li>
 </ul>
 
-<div ng-show="projects">
+<div ng-show="trackers.length > 0">
   <table class="table table-striped">
     <thead>
     <tr>
@@ -14,30 +14,37 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="project in projects | filter:filter_method | orderBy:['-bounty_total', '-comment_count']">
+    <tr ng-repeat="tracker in trackers">
       <td class="hidden-sm center-height">
-        <a class="thumbnail no-margin" ng-href="/trackers/{{project.slug}}">
-          <img class="img-responsive" ng-src="{{project.image_url || '/src/assets/img/bountysource-grey.png'}}" style="width: 100%;">
+        <a class="thumbnail no-margin" ng-href="/trackers/{{tracker.slug}}">
+          <img class="img-responsive" ng-src="{{tracker.image_url_small}}" style="width: 100%;" />
         </a>
       </td>
-      <td class="center-height"><img class="pull-left visible-sm" style="width: 20px; height:20px; margin-right:10px" src="{{project.image_url}}"><a ng-href="/trackers/{{project.slug}}">{{project.name}}</a></td>
-      <td class="text-muted hidden-sm center-height">{{project.description}}</td>
+
+      <td class="center-height">
+        <img class="pull-left visible-sm" style="width: 20px; height:20px; margin-right:10px" ng-src="{{tracker.image_url_small}}" />
+        <a ng-href="/trackers/{{tracker.slug}}">{{tracker.display_name}}</a>
+      </td>
+
+      <td class="text-muted hidden-sm center-height">{{tracker.description}}</td>
+
       <td class="center-height" style="text-align: center;">
-        <div ng-show="project.bounty_total > 0"><strong>{{project.bounty_total | dollars}}</strong></div>
-        <div ng-show="project.bounty_total <= 0"><a class="btn btn-default" ng-href="/trackers/{{project.slug}}">Add a Bounty</a></div>
+        <div ng-show="tracker.bounty_total > 0"><strong>{{tracker.bounty_total | dollars}}</strong></div>
+        <div ng-show="tracker.bounty_total <= 0"><a class="btn btn-default" ng-href="/trackers/{{tracker.slug}}">Add a Bounty</a></div>
       </td>
     </tr>
     </tbody>
   </table>
 </div>
-<div ng-show="$pagination && projects && projects.length > 0" style="text-align: center;">
-  <pagination on-select-page="change_page(page)" 
-              total-items="$pagination.items"
-              items-per-page="$pagination.per_page"
+
+<div ng-show="pagination && trackers.length > 0" style="text-align: center;">
+  <pagination on-select-page="setPage(page)"
+              total-items="pagination.totalItems"
+              items-per-page="pagination.perPage"
+              num-pages="pagination.totalPages"
+              page="pagination.page"
               max-size="5"
               boundary-links="true"
-              num-pages="$pagination.pages"
-              rotate="true"
-              page="$pagination.page">
+              rotate="true">
   </pagination>
 </div>

@@ -1,32 +1,35 @@
 'use strict';
 
-angular.module('app').controller('TrackersIndex', function ($scope, $api) {
-  $scope.per_page = 50;
+angular.module('app').controller('TrackersIndex', function ($scope, $api, $window, Pagination) {
 
-  $scope.projects_promise = $api.call("/trackers", "GET", { per_page: $scope.per_page }, function(response) {
-    // set pagination data
-    $scope.$pagination = response.meta.pagination;
-    for (var i=0; i<response.data.length; i++) {
-      $scope.$init_project(response.data[i]);
-    }
-    $scope.projects = response.data;
-    return response.data;
-  });
-
-  $scope.$init_project = function(project) {
-    // turn bounty total into float
-    project.bounty_total = parseFloat(project.bounty_total);
-  };
-
-  $scope.change_page = function(page) {
-    $scope.projects = [];
-    $scope.projects_promise = $api.call("/trackers", "GET", { per_page: 50, page: page }, function(response) {
-      $scope.$pagination = response.meta.pagination;
-      for (var i=0; i<response.data.length; i++) {
-        $scope.$init_project(response.data[i]);
+  $scope.getTrackers = function(params) {
+    return $api.v2.trackers(params || {}).then(function(response) {
+      if (response.success) {
+        $scope.pagination = new Pagination(response);
+        $scope.trackers = angular.copy(response.data);
       }
-      $scope.projects = response.data;
-      return response.data;
     });
   };
+
+  $scope.setPage = function(page) {
+    $scope.projects = [];
+    return $scope.getTrackers({
+      include_description: true,
+      order: '+bounty',
+      page: page
+    }).then(function(response) {
+      // Scroll to the top of the page once new items are loaded
+      $window.scrollTo(0,0);
+
+      return response;
+    });
+  };
+
+  // Load initial trackers
+  $scope.getTrackers({
+    include_description: true,
+    order: '+bounty',
+    page: 1,
+    per_page: 30
+  });
 });
