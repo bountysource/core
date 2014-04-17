@@ -51,4 +51,16 @@ angular.module('activity').controller('NewCashOutPermanentAddressController', fu
     }
   };
 
+  $scope.showUSCitizenPrompt = function() {
+    if ($scope.toggleNewAddress) {
+      return angular.isDefined($scope.newAddress) &&
+        $scope.newAddress.country !== 'US';
+
+    } else {
+      return angular.isDefined($scope.cashOut) &&
+        angular.isDefined($scope.cashOut.address) &&
+        $scope.cashOut.address.country !== 'US';
+    }
+  };
+
 });
