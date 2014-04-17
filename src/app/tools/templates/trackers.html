@@ -1,6 +1,7 @@
 <accordion ng-repeat="owner_trackers in all_trackers" close-others="oneAtATime">
   <accordion-group is-open="trackers_count < 25">
     <accordion-heading>
+      <input type="checkbox" ng-model="check_all" ng-click="checkboxClick(check_all, $event)">
       {{owner_trackers[0]}} <small class="text-muted"><strong>{{owner_trackers[1].length | number}} <ng-pluralize count="owner_trackers[1].length" when="{ 'one': 'project', 'other': 'projects' }"></ng-pluralize></strong></small>
     </accordion-heading>
     <table class="table table-projects">
@@ -11,7 +12,10 @@
             Installed
           </span>
         </td>
-        <td><a ng-click="expand_tracker(tracker)">{{tracker.full_name}}</a></td>
+        <td>
+          <input type="checkbox" ng-model="tracker.selected">
+          <a ng-click="expand_tracker(tracker)">{{tracker.full_name}}</a>
+        </td>
       </tr>
       </tbody>
     </table>
