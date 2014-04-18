@@ -71,8 +71,6 @@ angular.module('activity').
     $scope.createMailingAddress = function() {
       var deferred = $q.defer();
 
-      debugger
-
       // Just move on if a check
       if ($scope.cashOut.type !== 'check') {
         deferred.resolve();
@@ -123,8 +121,6 @@ angular.module('activity').
             // Remove paypal/bitcoin if wrong type of cash out
             if (payload.type !== 'paypal') { delete payload.paypal_address; }
             if (payload.type !== 'bitcoin') { delete payload.bitcoin_address; }
-
-            debugger
 
             $api.v2.createCashOut(payload).then(function(response) {
               if (response.success) {
