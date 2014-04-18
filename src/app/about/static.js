@@ -2,12 +2,10 @@
 
 angular.module('app').controller('StaticPageController', function ($scope, $location, $anchorScroll, $routeParams) {
   // Inherit this for static pages that need deep-linking of hash fragments!
-
-  var hash = $location.hash();
-
-  if (hash.length > 0) {
-    $location.hash(hash.replace(/^\/+/, '')); $anchorScroll();
-  }
-
-  return true;
+    
+    // Register as a callback on routeChangeSuccess, because app.js has a listener that takes the user to the top of the page
+    var routeListener = $scope.$on('$routeChangeSuccess', function() {
+      $anchorScroll();
+      routeListener();
+    });
 });
