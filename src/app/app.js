@@ -45,7 +45,8 @@ angular.module('app', [
   'colorpicker.module',
   'activity',
   'fundraisers',
-  'teams'
+  'teams',
+  'ui.scrollfix'
 ]);
 
 angular.module('app')
@@ -53,12 +54,8 @@ angular.module('app')
     //  NOTE: uncomment to test_old hashbang # mode
     //  $provide.decorator('$sniffer', function($delegate) { $delegate.history = false; return $delegate; });
 
+    // html5mode should handle old '#' style routes
     $locationProvider.html5Mode(true);
-
-    // HACK: transform old-style #urls into new style #/urls
-    if ((window.location.hash||'').match(/^#[^/]/)) {
-      window.location.hash = '#/' + window.location.hash.replace(/^#/,'');
-    }
 
     // CORS support
     $provide.decorator('$sniffer', function($delegate) { $delegate.cors = true; return $delegate; });
@@ -93,13 +90,13 @@ angular.module('app')
     }
   })
 
-  .run(function($rootScope, $window, $api) {
+  .run(function($rootScope, $anchorScroll, $api, $window) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
-
     // Scroll to top on route change... for some reason this isn't happening automatically.
     // Something else may be causing this issue, but this works for now
-    $rootScope.$on('$routeChangeSuccess', function() {
+    var routeListener = $rootScope.$on('$routeChangeSuccess', function() {
       $window.scrollTo(0,0);
+      routeListener();
     });
   });
