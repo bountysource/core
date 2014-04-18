@@ -87,12 +87,15 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Issues'
   }, defaultRouteOptions));
 
-  $routeProvider.when('/search', angular.extend({
-    templateUrl: 'app/home/search.html',
-    controller: 'SearchController',
-    title: 'Search',
-    trackEvent: 'View Search'
-  }, defaultRouteOptions));
+  $routeProvider.when('/search',
+    {
+      templateUrl: 'app/home/search.html',
+      controller: 'SearchController',
+      title: 'Search',
+      trackEvent: 'View Search',
+      reloadOnSearch: true
+    }
+  );
 
   $routeProvider.when('/issues/:id/bounties', angular.extend({
     templateUrl: 'app/issues/bounties.html',
