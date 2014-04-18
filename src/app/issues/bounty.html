@@ -77,25 +77,6 @@
             </div>
           </div>
 
-          <div collapse="!show_fee">
-            <div class="form-group">
-              <label class="control-label col-md-2">Bountysource Fee:</label>
-              <div class="col-md-10">
-                <div style="line-height: 30px;"><strong>{{bounty.fee | currency}}</strong></div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-2">Total:</label>
-              <div class="col-md-3">
-                <div class="input-group">
-                  <span class="input-group-addon">$</span>
-                  <input id="total" type="number" step="0.01" ng-change="update_bounty_amount()" ng-model="bounty.total" placeholder="Bounty total" required="" class="form-control">
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
               <div class="checkbox"><label class="">

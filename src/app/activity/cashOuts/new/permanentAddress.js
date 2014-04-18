@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('activity').controller('NewCashOutPermanentAddressController', function($scope, $api) {
+angular.module('activity').controller('NewCashOutPermanentAddressController', function($scope) {
 
   $scope.addressManager = $scope.$parent.addressManager;
 
@@ -48,18 +48,6 @@ angular.module('activity').controller('NewCashOutPermanentAddressController', fu
       // also set mailing_address
       $scope.$parent.cashOut.mailing_address = angular.copy($scope.$parent.cashOut.address);
       $scope.$parent.nextStep();
-    }
-  };
-
-  $scope.showUSCitizenPrompt = function() {
-    if ($scope.toggleNewAddress) {
-      return angular.isDefined($scope.newAddress) &&
-        $scope.newAddress.country !== 'US';
-
-    } else {
-      return angular.isDefined($scope.cashOut) &&
-        angular.isDefined($scope.cashOut.address) &&
-        $scope.cashOut.address.country !== 'US';
     }
   };
 

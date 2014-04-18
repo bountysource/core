@@ -267,6 +267,13 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         method: 'POST',
         params: params || {}
       });
+    },
+
+    account: function(params) {
+      return this.call({
+        url: '/account',
+        params: params || {}
+      });
     }
 
   };

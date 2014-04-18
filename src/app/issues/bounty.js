@@ -38,14 +38,13 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
 
     $scope.create_payment = function() {
       var attrs = angular.copy($scope.bounty);
-      delete attrs.fee;
 
       $scope.$watch('current_person', function(person) {
         if (person) {
           $scope.cart_promise.then(function(cart) {
             $scope.processing_payment = true;
 
-            // remove checkout method and fees
+            // remove checkout method
             var checkout_method = attrs.checkout_method;
             delete attrs.checkout_method;
 
@@ -122,36 +121,11 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
   };
 
   $scope.can_make_anonymous = true;
-  $scope.has_fee = true;
-  $scope.show_fee = false;
 
   $scope.$watch("bounty.checkout_method", function(checkout_method) {
     if (checkout_method) {
-
-      if ((/^team\/\d+$/).test(checkout_method)) {
-        $scope.has_fee = false;
-        $scope.show_fee = false;
-      } else if (checkout_method === "personal") {
-        $scope.has_fee = false;
-        $scope.show_fee = false;
-      } else {
-        $scope.has_fee = true;
-        $scope.show_fee = true;
-      }
-
       // Cannot make anon if payment method is a team
       $scope.can_make_anonymous = !(/^team\/\d+$/).test(checkout_method);
-    }
-  });
-
-  // when fee changes, so does the total
-  $scope.$watch("has_fee", function(has_fee) {
-    if (has_fee === true) {
-      $scope.bounty.fee = $scope.bounty.total * 0.10;
-      $scope.bounty.total += $scope.bounty.fee;
-    } else if (has_fee === false) {
-      $scope.bounty.total -= $scope.bounty.fee;
-      $scope.bounty.fee = 0;
     }
   });
 
@@ -191,41 +165,5 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
       result = true;
     }
     return result;
-  };
-
-  $scope.update_bounty_amount = function() {
-    var total = $scope.bounty.total;
-    if (angular.isNumber(total)) {
-      var fee = (total * 0.1) / 1.1;
-      fee = Number($filter('number')(fee, 2).replace(/[^0-9|\.]/g, ''));
-      var amount = total / 1.1;
-      amount = Number($filter('number')(amount, 2).replace(/[^0-9|\.]/g, ''));
-      $scope.bounty.fee = $scope.has_fee ? fee : 0;
-      $scope.bounty.amount = $scope.has_fee ? amount : total;
-    } else {
-      $scope.bounty.amount = 0;
-      $scope.bounty.fee = 0;
-    }
-  };
-
-  $scope.update_bounty_total = function() {
-    var amount = $scope.bounty.amount;
-    if (angular.isNumber(amount)) {
-      var fee = amount * 0.10;
-      fee = Number($filter('number')(fee, 2).replace(/[^0-9|\.]/g, ''));
-      amount = Number($filter('number')(amount, 2).replace(/[^0-9|\.]/g, ''));
-      $scope.bounty.fee = $scope.has_fee ? fee : 0;
-      $scope.bounty.total = $scope.has_fee ? Number($filter('number')(amount + fee, 2).replace(/[^0-9|\.]/g, '')) : amount;
-    } else {
-      $scope.bounty.total = 0;
-      $scope.bounty.fee = 0;
-    }
-  };
-
-  $scope.set_bounty_amount = function(new_amount) {
-    if (new_amount > $scope.bounty.amount) {
-      $scope.bounty.amount = new_amount;
-      $scope.update_bounty_total();
-    }
   };
 });

@@ -15,51 +15,18 @@ angular.module('activity').controller('NewCashOutMailingAddressController', func
     us_citizen: undefined
   };
 
-  $scope.usePermanentAddress = true;
   $scope.toggleNewMailingAddress = false;
 
-  $scope.$watch('usePermanentAddress', function(value) {
+  $scope.$watch('usePermanentAddressAsMailing', function(value) {
     if (value === false) {
       $scope.$parent.cashOut.mailing_address = undefined;
-    } else if (value === true) {
-
     }
   });
 
-  $scope.$watch('toggleNewMailingAddress', function(value) {
+  $scope.$watch('usePermanentAddressAsMailing', function(value) {
     if (value === true) {
       $scope.$parent.cashOut.mailing_address = undefined;
     }
   });
-
-  $scope.nextStep = function() {
-    // Just copy permanent address if checked
-    if ($scope.usePermanentAddress) {
-      $scope.$parent.cashOut.mailing_address = angular.copy($scope.$parent.cashOut.address);
-      $scope.$parent.nextStep();
-
-    // Otherwise, if set by select
-    } else if ($scope.$parent.cashOut.mailing_address) {
-      $scope.$parent.nextStep();
-
-    // Otherwise, create new mailing address
-    } else if ($scope.toggleNewMailingAddress) {
-      var payload = angular.copy($scope.newMailingAddress);
-
-      $scope.addressManager.create(payload).then(function(response) {
-        console.log('createMailingAddress', response);
-
-        if (response.success) {
-          $scope.$parent.cashOut.mailing_address = angular.copy(response.data);
-          $scope.$parent.nextStep();
-        } else {
-          $scope.alert = {
-            message: response.data.error,
-            type: 'danger'
-          };
-        }
-      });
-    }
-  };
 
 });
