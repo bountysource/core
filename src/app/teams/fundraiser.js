@@ -20,7 +20,7 @@ angular.module('app')
     // Watching a string didn't work here. Watch the route params and update pledge fields accordingly
     $scope.$watch(function () {return $location.search();}, function (newParams) {
       $scope.pledge = {
-        amount: parseInt(newParams.amount, 10) || angular.noop,
+        amount: $currency.amountParamsParser(newParams.amount) || angular.noop,
         anonymous: (parseInt(newParams.anonymous, 10) === 1) || false,
         checkout_method: newParams.checkout_method || ($currency.isBTC() && 'coinbase'),
         survey_response: newParams.survey_response || "",

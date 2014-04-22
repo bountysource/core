@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('app').controller('TeamAccountController', function ($scope, $routeParams, $location, $cart, $api) {
+angular.module('app').controller('TeamAccountController', function ($scope, $routeParams, $location, $cart, $api, $currency) {
   $scope.cart_promise = $cart.load().then(function(cart) {
     $scope.cart = cart;
     return cart;
   });
 
   $scope.pay_in = {
-    amount: parseInt($routeParams.amount,10) || 0,
-    checkout_method: 'google',
+    amount: $currency.amountParamsParser($routeParams.amount) || 0,
+    checkout_method: $currency.isUSD() ? 'google' : 'coinbase',
 
     // only used to alter the displayed amount,
     // not actually sent in the payment process request.

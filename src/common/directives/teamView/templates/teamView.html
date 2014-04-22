@@ -115,7 +115,7 @@
                   <form name="form" ng-submit="customPayinRedirect(form.input.$modelValue)" class="form-inline">
                     <div class="input-group">
                       <span class="input-group-addon"><currency-unit></currency-unit></span>
-                      <input type="number" name="input" class="form-control" ng-model="pledge_input" placeholder="Other" tooltip="{{5 | dollars}} minimum" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
+                      <input type="number" name="input" min="0" step="any" class="form-control" ng-model="pledge_input" placeholder="Other" tooltip="{{5 | dollars}} minimum" tooltip-placement="bottom" toolip-trigger="focus">
                     </div>
                   </form>
                 </div>

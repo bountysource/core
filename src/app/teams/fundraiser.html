@@ -213,7 +213,7 @@
                 <div class="form-group" ng-show="payment_error">
                   <alert type="'danger'" close="payment_error = null">{{payment_error}}</alert>
                 </div>
-
+                <pre>{{ pledge | json }}</pre>
                 <!-- Pledge amount input -->
                 <div class="form-group">
                   <label class="control-label col-md-5" for="amount">Pledge Amount</label>

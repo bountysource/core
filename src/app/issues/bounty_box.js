@@ -1,11 +1,18 @@
 'use strict';
-angular.module('app').controller('BountyBoxController', function ($scope, $routeParams, $window, $location, $analytics) {
+angular.module('app').controller('BountyBoxController', function ($scope, $routeParams, $window, $location, $analytics, $currency) {
   $scope.bounty = {
     amount: parseInt($routeParams.amount, 10)
   };
 
+  function convertCurrency (amount) {
+    if (amount && $currency.isBTC()) {
+      amount = $currency.usdToBtc(amount);
+    }
+    return amount;
+  }
+
   $scope.place_bounty_redirect = function (amount) {
-    amount = amount || $scope.bounty.amount;
+    amount = convertCurrency(amount) || $scope.bounty.amount;
     // Track bounty start event in Mixpanel
     $analytics.bountyStart({ type: 'buttons', amount: amount });
     if (angular.isNumber(amount)) {

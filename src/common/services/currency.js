@@ -62,6 +62,16 @@ angular.module('services').service('$currency', function ($cookieStore, $window,
     return this.setCurrency('BTC');
   };
 
+  this.amountParamsParser = function (amount) {
+    var parsedAmount
+    if (this.isUSD()) {
+      parsedAmount = parseInt(amount, 10);
+    } else if (this.isBTC()) {
+      parsedAmount = parseFloat(amount);
+    }
+    return parsedAmount;
+  };
+
   // Load value from cookies, or set to USD
   this.value = this.getValueFromCookie() || 'USD';
 

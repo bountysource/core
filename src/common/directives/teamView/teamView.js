@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics, $modal) {
+angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics, $modal, $currency) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -129,17 +129,24 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       /*****************************
        * Pledge Buttons
        * */
+      function convertCurrency (amount) {
+        if (amount && $currency.isBTC()) {
+          amount = $currency.usdToBtc(amount);
+        }
+        return amount;
+      }
 
       scope.pledgeRedirect = function(amount) {
-        amount = amount || 15;
-        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge', amount: amount });
+        // parse amount into BTC, if user is in BTC mode
+        var converted_amount = convertCurrency(amount) || 15;
+        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge', amount: converted_amount });
         $analytics.pledgeStart({ amount: amount, type: 'buttons' });
       };
 
       scope.payinRedirect = function (amount) {
         var params = {};
         if(amount) {
-          params.amount = amount;
+          params.amount = convertCurrency(amount);
         }
         $location.url('/teams/'+scope.team.slug+'/account').search(params);
         $analytics.teamPayinStart({ amount: amount, type: 'buttons'});

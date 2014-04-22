@@ -30,7 +30,7 @@
           <div class="col-md-8 bounty-buttons">
             <div class="input-group">
               <span class="input-group-addon"><currency-unit></currency-unit></span>
-              <input style="margin-bottom: 0;" integer-only="" type="number" min="0" ng-model="bounty.amount" class="form-control" placeholder="Other" tooltip="{{5 | dollars}} minimum bounty" tooltip-placement="bottom" toolip-trigger="focus">
+              <input style="margin-bottom: 0;" type="number" min="0" step="any" ng-model="bounty.amount" class="form-control" placeholder="Other" tooltip="{{5 | dollars}} minimum bounty" tooltip-placement="bottom" toolip-trigger="focus">
               <input style="display:none;" type="submit" id="custom-amount-submit" class="form-control">
             </div>
           </div>

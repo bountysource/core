@@ -10,7 +10,13 @@ angular.module('directives').directive("bitcoinInput", function ($currency) {
     },
     link: function (scope) {
       scope.$currency = $currency;
-      scope.display_value = angular.copy(scope.amount);
+
+      var watcher = scope.$watch('amount', function (newValue) {
+        if (newValue > 0) {
+          scope.display_value = angular.copy(scope.amount);
+          watcher();
+        }
+      });
 
       scope.$watch("display_value", function (new_value) {
         if (new_value) {

@@ -12,9 +12,9 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
   $scope.following = true;
 
   $scope.bounty = {
-    amount: parseInt($routeParams.amount, 10) || null,
+    amount: $currency.amountParamsParser($routeParams.amount) || null,
     anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
-    checkout_method: $routeParams.checkout_method,
+    checkout_method: $currency.isBTC() ? 'coinbase' : $routeParams.checkout_method,
     bounty_expiration: $routeParams.bounty_expiration || '',
     upon_expiration: $routeParams.upon_expiration || '',
     promotion: $routeParams.promotion || '',
