@@ -8,6 +8,12 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
     state: "available"
   };
 
+  $api.v2.comments({
+    issue_id: $routeParams.id
+  }).then(function (response) {
+    $scope.comments = angular.copy(response.data);
+  });
+
   $api.issue_get($routeParams.id).then(function(issue) {
     $pageTitle.set(issue.title, issue.tracker.name);
 
