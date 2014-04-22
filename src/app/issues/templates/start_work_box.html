@@ -84,7 +84,7 @@
                   <div class="col-sm-4 col-md-4" style="padding-left: 0px;">
                     <div class="input-group input-group-lg" style="margin-bottom: 0px;">
                       <span class="input-group-addon">$</span>
-                      <input type="number" min="{{issue.bounty_total + 1}}" step="1" class="form-control" ng-model="new_developer_goal.amount" placeholder="{{issue.bounty_total + 100}}" required="" style="padding-left: 10px;">
+                      <input type="number" min="{{ bounty_total + 1 }}" step="1" class="form-control" ng-model="new_developer_goal.amount" placeholder="{{ bounty_total + 100 }}" required="" style="padding-left: 10px;">
                     </div>
                   </div>
 
