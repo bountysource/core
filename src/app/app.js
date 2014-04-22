@@ -90,13 +90,16 @@ angular.module('app')
     }
   })
 
-  .run(function($rootScope, $anchorScroll, $api, $window) {
+  .run(function($rootScope, $window, $api, $currency) {
+    // Load currency value from cookies
+    $currency.initialize();
+
     // load person from initial cookies
     $api.load_current_person_from_cookies();
+
     // Scroll to top on route change... for some reason this isn't happening automatically.
     // Something else may be causing this issue, but this works for now
-    var routeListener = $rootScope.$on('$routeChangeSuccess', function() {
+    $rootScope.$on('$routeChangeSuccess', function() {
       $window.scrollTo(0,0);
-      routeListener();
     });
   });

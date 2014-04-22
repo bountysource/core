@@ -1,6 +1,6 @@
 <ng-form>
   <!-- Google Wallet -->
-  <div class="radio">
+  <div class="radio" ng-show="$currency.isUSD()">
     <label>
       <input type="radio" ng-model="value" value="google">
       <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
@@ -8,8 +8,17 @@
     </label>
   </div>
 
-  <!-- PayPal -->
+  <!-- Coinbase! -->
   <div class="radio">
+    <label>
+      <input type="radio" ng-model="value" value="coinbase">
+      <favicon style="width: 16px; height: 16px;" domain="http://coinbase.com/"></favicon>
+      <span>Coinbase</span>
+    </label>
+  </div>
+
+  <!-- PayPal -->
+  <div class="radio" ng-show="$currency.isUSD()">
     <label>
       <input type="radio" ng-model="value" value="paypal">
       <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
@@ -18,16 +27,16 @@
   </div>
 
   <!-- Personal Account -->
-  <div class="radio" ng-show="person.account.balance > 0">
+  <div class="radio" ng-show="$currency.isUSD() && person.account.balance > 0">
     <label>
       <input type="radio" ng-model="value" value="personal">
       <img style="width: 16px; height: 16px;" ng-src="{{person.image_url}}" />
-      <span>{{person.display_name}} <strong>{{person.account.balance | currency}}</strong></span>
+      <span>{{person.display_name}} <strong>{{person.account.balance | dollars}}</strong></span>
     </label>
   </div>
 
   <!-- Team accounts -->
-  <div class="radio" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']">
+  <div class="radio" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" ng-show="$currency.isUSD()">
     <label>
       <input type="radio" ng-model="$parent.value" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0 || onTeamPage(team)"/>
       <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}" />
@@ -36,7 +45,7 @@
         {{team.name}}
       </span>
       <strong ng-show="team.is_developer">{{team.account_balance | dollars}}</strong>
-      <strong ng-hide="team.is_developer">$0</strong>
+      <strong ng-hide="team.is_developer">{{0 | dollars}}</strong>
       <span ng-show="team.is_admin && team.account_balance < 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
     </label>
   </div>

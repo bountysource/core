@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('app')
-  .controller('TeamFundraiserController', function($scope, $location, $cart, $routeParams, $route, $api) {
+  .controller('TeamFundraiserController', function($scope, $location, $cart, $routeParams, $route, $api, $currency) {
+    $scope.$currency = $currency;
     // Change page content based on query param
     $scope._page = $location.search().page;
 
@@ -21,9 +22,9 @@ angular.module('app')
       $scope.pledge = {
         amount: parseInt(newParams.amount, 10) || angular.noop,
         anonymous: (parseInt(newParams.anonymous, 10) === 1) || false,
-        checkout_method: newParams.checkout_method || "google",
+        checkout_method: newParams.checkout_method || ($currency.isBTC() && 'coinbase'),
         survey_response: newParams.survey_response || "",
-        reward_id: parseInt(newParams.reward_id, 10) || 0
+        reward_id: parseInt(newParams.reward_id, 10) || null
       };
     });
 

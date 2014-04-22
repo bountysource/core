@@ -43,9 +43,14 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
       return this.call("/cart/export", "POST", cart.items);
     };
 
-    this.checkout = function(checkout_method) {
+    this.checkout = function(checkout_method, options) {
       var deferred = $q.defer();
-      this.call("/cart/checkout", "POST", { checkout_method: checkout_method }, function(response) {
+
+      options = angular.extend({
+        checkout_method: checkout_method
+      }, options);
+
+      this.call("/cart/checkout", "POST", options, function(response) {
         deferred.resolve(response);
       });
       return deferred.promise;
@@ -70,22 +75,29 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
      *   redirect_url - if checkout method requires redirect, this is where to redirect to for third-party checkout.
      *
      * */
-    this.checkout = function(checkout_method) {
+    this.checkout = function(checkout_method, options) {
       var deferred = $q.defer();
       var that = this;
+
+      // Default current URL redirect to if checkout is canceled.
+      options = angular.extend({
+        cancel_url: $window.location.href
+      }, options);
 
       if (this.items.length <= 0) {
         deferred.reject();
       } else {
         this._require_person().then(function(person) {
           if (person) {
-            that.api.checkout(checkout_method).then(function(response) {
-
+            that.api.checkout(checkout_method, options).then(function(response) {
               if (!response.meta.success) {
                 deferred.reject(response);
 
               } else if (checkout_method === 'paypal') {
                 // redirect to the provided checkout URL for cart
+                $window.location = response.data.checkout_url;
+
+              } else if (checkout_method === 'coinbase') {
                 $window.location = response.data.checkout_url;
 
               } else if (checkout_method === 'google') {

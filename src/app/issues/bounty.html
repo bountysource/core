@@ -1,7 +1,7 @@
 <div ng-controller="CreateBountyController">
   <div ng-include="'app/issues/templates/breadcrumb.html'"></div>
 
-  <div class="row" ng-show="issue" ng-controller="CreateBountyController">
+  <div class="row" ng-show="issue">
     <div class="col-sm-12 col-md-12">
       <div ng-include="'app/issues/templates/header.html'"></div>
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
@@ -27,11 +27,14 @@
 
           <div class="form-group">
             <label for="amount" class="control-label col-md-2">Bounty Amount:</label>
-            <div class="col-md-3">
+            <div class="col-md-3" ng-if="$currency.isUSD()">
               <div class="input-group">
                 <span class="input-group-addon">$</span>
                 <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="15" required="" class="form-control">
               </div>
+            </div>
+            <div class="col-md-3" ng-if="$currency.isBTC()">
+              <bitcoin-input amount="bounty.amount"></bitcoin-input>
             </div>
           </div>
 

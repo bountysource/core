@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('app').controller('CreateBountyController', function ($scope, $rootScope, $routeParams, $window, $location, $api, $filter, $cart) {
+angular.module('app').controller('CreateBountyController', function ($scope, $rootScope, $routeParams, $window, $location, $api, $filter, $cart, $currency) {
+  $scope.$currency = $currency;
+
   $scope.cart_promise = $cart.load().then(function(cart) {
     $scope.cart = cart;
     return cart;
@@ -10,9 +12,9 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
   $scope.following = true;
 
   $scope.bounty = {
-    amount: parseInt($routeParams.amount, 10),
+    amount: parseInt($routeParams.amount, 10) || null,
     anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
-    checkout_method: $routeParams.checkout_method || 'google',
+    checkout_method: $routeParams.checkout_method,
     bounty_expiration: $routeParams.bounty_expiration || '',
     upon_expiration: $routeParams.upon_expiration || '',
     promotion: $routeParams.promotion || '',

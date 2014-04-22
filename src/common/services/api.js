@@ -19,7 +19,6 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     $rootScope.api_host = $window.BS_CONFIG.api_host;
   }
 
-
   this.$$maxPerPage = 250;
   this.$$perPage = undefined;
 
@@ -272,6 +271,13 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     account: function(params) {
       return this.call({
         url: '/account',
+        params: params || {}
+      });
+    },
+
+    currencies: function (params) {
+      return this.call({
+        url: '/currencies',
         params: params || {}
       });
     }
@@ -1125,4 +1131,5 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       $location.url("/signin");
     }
   };
+
 });

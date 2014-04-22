@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('directives').directive('checkoutMethodRadios', function($api, $location) {
+angular.module('directives').directive('checkoutMethodRadios', function($api, $location, $currency) {
   return {
     restrict: 'EAC',
     templateUrl: 'common/directives/checkoutMethodRadios/templates/checkoutMethodRadios.html',
@@ -10,6 +10,8 @@ angular.module('directives').directive('checkoutMethodRadios', function($api, $l
       person: '='
     },
     link: function(scope) {
+      scope.$currency = $currency;
+
       // Fetch teams for person to load Team accounts
       scope.$watch('person', function(person) {
         if (person) {

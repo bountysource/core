@@ -246,7 +246,7 @@
           <form name="form" ng-submit="customPledgeRedirect(fundraiser, form.input.$modelValue)" class="form-inline">
             <div class="input-group">
               <span class="input-group-addon">$</span>
-              <input type="number" name="input" class="form-control" min="5" ng-model="pledge_input" placeholder="Other" tooltip="$5 minimum pledge" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
+              <input type="number" name="input" class="form-control" min="5" ng-model="pledge_input" placeholder="Other" tooltip="{{5 | dollars}} minimum pledge" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
             </div>
           </form>
         </script>
@@ -262,31 +262,31 @@
             <div class="visible-lg visible-md">
               <div class="row row-condensed">
                 <div class="col-lg-4 col-md-4">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 15)">$15</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 15)">{{15 | dollars}}</button>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 35)">$35</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 35)">{{35 | dollars}}</button>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 50)">$50</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 50)">{{50 | dollars}}</button>
                 </div>
               </div>
               <br />
               <div class="row row-condensed">
                 <div class="col-lg-4 col-md-4">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 100)">$100</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 100)">{{100 | dollars}}</button>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 250)">$250</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 250)">{{250 | dollars}}</button>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 500)">$500</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 500)">{{500 | dollars}}</button>
                 </div>
               </div>
               <br />
               <div class="row row-condensed">
                 <div class="col-md-4">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 100)">$100</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 1000)">{{1000 | dollars}}</button>
                 </div>
                 <div class="col-md-8">
                   <ng-include src="'customForm.html'"></ng-include>
@@ -298,28 +298,28 @@
             <div class="visible-sm visible-xs">
               <div class="row row-condensed">
                 <div class="col-sm-6 col-xs-6 ">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 15)">$15</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 15)">{{15 | dollars}}</button>
                 </div>
                 <div class="col-sm-6 col-xs-6 ">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 35)">$35</button>
-                </div>
-              </div>
-              <br />
-              <div class="row row-condensed">
-                <div class="col-sm-6 col-xs-6 ">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 50)">$50</button>
-                </div>
-                <div class="col-sm-6 col-xs-6 ">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 100)">$100</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 35)">{{15 | dollars}}</button>
                 </div>
               </div>
               <br />
               <div class="row row-condensed">
                 <div class="col-sm-6 col-xs-6 ">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 500)">$500</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 50)">{{50 | dollars}}</button>
                 </div>
                 <div class="col-sm-6 col-xs-6 ">
-                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 1000)">$1000</button>
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 100)">{{100 | dollars}}</button>
+                </div>
+              </div>
+              <br />
+              <div class="row row-condensed">
+                <div class="col-sm-6 col-xs-6 ">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 500)">{{500 | dollars}}</button>
+                </div>
+                <div class="col-sm-6 col-xs-6 ">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 1000)">{{1000 | dollars}}</button>
                 </div>
               </div>
               <br />

@@ -23,6 +23,31 @@
       </div>
 
       <ul class="nav navbar-nav navbar-right">
+        <li tooltip-placement="bottom" popover-trigger="mouseover" tooltip="Bountysource now supports Bitcoin! Select your currency preference.">
+          <a style="padding-right: 5px; padding-left: 5px;">
+            <i class="glyphicon glyphicon-question-sign"></i>
+          </a>
+        </li>
+
+        <!-- Currency switcher -->
+        <li class="dropdown visible-lg visible-md">
+          <form class="navbar-form" style="padding-left: 5px;">
+            <div class="btn-group">
+              <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span ng-if="$currency.isUSD()">USD ($)</span>
+                <span ng-if="$currency.isBTC()">BTC (฿)</span>
+                <b class="caret"></b>
+              </button>
+
+              <ul class="dropdown-menu">
+                <li role="presentation" class="dropdown-header">Currency Preference:</li>
+                <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
+                <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
+              </ul>
+            </div>
+          </form>
+        </li>
+
         <li class="visible-lg visible-md"><a href="/fees">Pricing</a></li>
 
         <li class="visible-lg visible-md" ng-if="!current_person"><a href="/teams">Teams</a></li>

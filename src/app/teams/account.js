@@ -7,7 +7,7 @@ angular.module('app').controller('TeamAccountController', function ($scope, $rou
   });
 
   $scope.pay_in = {
-    amount: $routeParams.amount || 0,
+    amount: parseInt($routeParams.amount,10) || 0,
     checkout_method: 'google',
 
     // only used to alter the displayed amount,
