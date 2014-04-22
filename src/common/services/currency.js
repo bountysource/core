@@ -1,20 +1,32 @@
 'use strict';
 
-angular.module('services').service('$currency', function ($cookieStore, $window, $log, $api) {
-
-  this._currencies = ['USD', 'BTC'];
-  this._cookieName = 'currencySwitcherValue';
-  this.btcToUsdRate = undefined;
-
-  this.value = undefined;
+angular.module('services').service('$currency', function ($cookieStore, $window, $log, $api, $analytics) {
 
   var self = this;
 
+  this._currencies = ['USD', 'BTC'];
+  this._cookieName = 'currencySwitcherValue';
+
+  // Get BTC price
+  this.btcToUsdRate = undefined;
+  $api.v2.currencies().then(function(response) {
+    if (response.success) {
+      self.btcToUsdRate = response.data.bitcoin;
+    } else {
+      $log.error('Failed to get currency values');
+    }
+  });
+
   this.setCurrency = function(value) {
     if (this._currencies.indexOf(value) >= 0) {
-      this.value = value;
-      this.writeValueToCookie();
-      $log.info('Currency changed to', this.value);
+      // Iff value actually changed
+      if (value !== this.value) {
+        this.value = value;
+        this.writeValueToCookie();
+
+        $analytics.changeCurrency(this.value);
+        $log.info('Currency changed to', this.value);
+      }
     }
   };
 
@@ -34,19 +46,6 @@ angular.module('services').service('$currency', function ($cookieStore, $window,
     return value * this.btcToUsdRate;
   };
 
-  this.initialize = function () {
-    // Load value from cookies, or set to USD
-    this.setCurrency(this.getValueFromCookie() || 'USD');
-
-    $api.v2.currencies().then(function(response) {
-      if (response.success) {
-        self.btcToUsdRate = response.data.bitcoin;
-      } else {
-        $log.error('Failed to get currency values');
-      }
-    });
-  };
-
   this.isUSD = function () {
     return this.value === 'USD';
   };
@@ -63,5 +62,7 @@ angular.module('services').service('$currency', function ($cookieStore, $window,
     return this.setCurrency('BTC');
   };
 
+  // Load value from cookies, or set to USD
+  this.value = this.getValueFromCookie() || 'USD';
 
 });

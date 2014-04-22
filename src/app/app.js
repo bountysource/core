@@ -91,9 +91,6 @@ angular.module('app')
   })
 
   .run(function($rootScope, $window, $api, $currency) {
-    // Load currency value from cookies
-    $currency.initialize();
-
     // load person from initial cookies
     $api.load_current_person_from_cookies();
 

@@ -155,6 +155,10 @@ angular.module('app')
       this.track("Publish Fundraiser", angular.extend( {team_id: team_id, fundraiser_id: fundraiser_id}, options || {}));
     };
 
+    this.changeCurrency = function (value, options) {
+      this.track("Change Currency", angular.extend({ value: value }, options || {}));
+    };
+
   })
 
   // Fire Mixpanel events based on route
