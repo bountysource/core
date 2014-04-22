@@ -108,7 +108,12 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
       });
     },
 
-    issue: function(id, options) {},
+    issue: function(id, params) {
+      return this.call({
+        url: '/issues/'+id,
+        params: params || {}
+      });
+    },
 
     trackers: function (params) {
       return this.call({

@@ -31,7 +31,8 @@ angular.module('filters', []);
 angular.module('directives', []);
 angular.module('services', []);
 angular.module('factories', []);
-angular.module('bountysource', ['constants', 'services', 'directives', 'filters', 'factories']);
+angular.module('resources', []);
+angular.module('bountysource', ['constants', 'services', 'directives', 'filters', 'factories', 'resources']);
 
 angular.module('activity', ['bountysource']);
 angular.module('fundraisers', ['bountysource']);
@@ -41,6 +42,7 @@ angular.module('app', [
   'ngRoute',
   'ngSanitize',
   'ngCookies',
+  'ngResource',
   'ui.bootstrap',
   'colorpicker.module',
   'activity',
