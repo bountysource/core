@@ -37,6 +37,20 @@
           </ul>
         </li>
 
+        <!-- Currency switcher -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span ng-if="$currency.isUSD()">Currency: $</span>
+            <span ng-if="$currency.isBTC()">Currency: ฿</span>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li role="presentation" class="dropdown-header">Currency Preference:</li>
+            <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
+            <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
+          </ul>
+        </li>
+
         <!-- User dropdown if logged in -->
         <li class="dropdown" ng-if="current_person">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -58,20 +72,6 @@
             <li role="presentation" class="divider"></li>
 
             <li><a href="#" ng-click="signout()"><i class="glyphicon glyphicon-off"></i> Sign Out</a></li>
-          </ul>
-        </li>
-
-        <!-- Currency switcher -->
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span ng-if="$currency.isUSD()">Currency: $</span>
-            <span ng-if="$currency.isBTC()">Currency: ฿</span>
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li role="presentation" class="dropdown-header">Currency Preference:</li>
-            <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
-            <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
           </ul>
         </li>
 
