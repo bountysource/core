@@ -92,11 +92,11 @@
           <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
               <button ng-click="create_payment()" ng-hide="previous_bounty_total > 0" type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid">
-                <span>Post {{bounty.amount || 0 | dollars:bounty.currency:bounty.currency }} Bounty</span>
+                <span>Post {{bounty.amount || 0 | dollars:{actualCurrency: bounty.currency, displayCurrency: bounty.currency} }} Bounty</span>
               </button>
 
               <button type="submit" ng-click="create_payment()" ng-show="previous_bounty_total > 0" class="btn btn-primary btn-lg" ng-disabled="form.$invalid" tooltip="You previously posted a {{previous_bounty_total | dollars}} Bounty" tooltip-placement="right">
-                <span>Increase Bounty by {{bounty.amount || 0 | dollars:bounty.currency:bounty.currency }}</span>
+                <span>Increase Bounty by {{bounty.amount || 0 | dollars:{actualCurrency: bounty.currency, displayCurrency: bounty.currency} }}</span>
               </button>
             </div>
           </div>

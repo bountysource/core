@@ -6,10 +6,10 @@
 * @param actualCurrency the currency of value. if not the same as displayCurrency, then convert amount.
 * */
 angular.module('filters').filter('dollars', function($filter, $api, $currency) {
-  return function(value, actualCurrency, displayCurrency) {
-    displayCurrency = displayCurrency || $currency.value;
-    actualCurrency = actualCurrency || 'USD';
-
+  return function(value, options) {
+    options = options || {};
+    var displayCurrency = options.displayCurrency || $currency.value;
+    var actualCurrency = options.actualCurrency || 'USD';
     var unit = $filter('currencyUnit')(value, displayCurrency);
 
     // Convert amount if display and actual currencies do not match
@@ -20,7 +20,7 @@ angular.module('filters').filter('dollars', function($filter, $api, $currency) {
     }
 
     if (displayCurrency === 'USD') {
-      return unit + $filter('number')(value, 0);
+      return unit + (options.space ? " " : "") + $filter('number')(value, 0);
 
     } else if (displayCurrency === 'BTC') {
       if (value <= 0.001 && value > 0.000001) {
@@ -28,8 +28,7 @@ angular.module('filters').filter('dollars', function($filter, $api, $currency) {
       } else if (value <= 0.000001) {
         value *= 1000000; // uBTC
       }
-
-      return unit + $filter('number')(value, 3);
+      return unit + (options.space ? " " : "") + $filter('number')(value, 3);
     }
   };
 });

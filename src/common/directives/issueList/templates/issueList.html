@@ -95,7 +95,7 @@
     </td>
     <td ng-if="$showBountyTotal" style="text-align: center">
       <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
-        {{issue.bounty_total | dollars:{space:true} }}
+        {{issue.bounty_total | dollars:{space: true} }}
       </a>
     </td>
     <td ng-if="$showThumbsUpCount" style="text-align:center;">
