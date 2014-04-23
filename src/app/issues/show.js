@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssueShow', function ($scope, $routeParams, $window, $location, $pageTitle, Comments, Issue, Bounties) {
+angular.module('app').controller('IssueShow', function ($scope, $routeParams, $window, $location, $pageTitle, $anchorScroll, Comments, Issue, Bounties) {
 
   // alert above the issue title about bounty status
   $scope.bounty_alert = {
@@ -35,5 +35,10 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
     issue_id: $routeParams.id,
     include_author: true
   });
+
+  // Scroll to linked comment after render finishes
+  $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+      $anchorScroll();
+    });
 
 });
