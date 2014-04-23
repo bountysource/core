@@ -23,45 +23,6 @@
       </div>
 
       <ul class="nav navbar-nav navbar-right">
-        <!-- Currency switcher info on hover. Hide on mobile -->
-        <li tooltip-placement="bottom" popover-trigger="mouseover" tooltip="Bountysource now supports Bitcoin! Select your currency preference." class="visible-lg visible-md">
-          <a style="padding-right: 5px; padding-left: 5px;" class="text-info">
-            <i class="glyphicon glyphicon-question-sign"></i>
-          </a>
-        </li>
-
-        <!-- Currency switcher -->
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span ng-if="$currency.isUSD()">USD ($)</span>
-            <span ng-if="$currency.isBTC()">BTC (฿)</span>
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li role="presentation" class="dropdown-header">Currency Preference:</li>
-            <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
-            <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
-          </ul>
-        </li>
-
-        <!--<li class="dropdown">-->
-          <!--<form class="navbar-form" style="padding-left: 5px;">-->
-            <!--<div class="btn-group">-->
-              <!--<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
-                <!--<span ng-if="$currency.isUSD()">USD ($)</span>-->
-                <!--<span ng-if="$currency.isBTC()">BTC (฿)</span>-->
-                <!--<b class="caret"></b>-->
-              <!--</button>-->
-
-              <!--<ul class="dropdown-menu">-->
-                <!--<li role="presentation" class="dropdown-header">Currency Preference:</li>-->
-                <!--<li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>-->
-                <!--<li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>-->
-              <!--</ul>-->
-            <!--</div>-->
-          <!--</form>-->
-        <!--</li>-->
-
         <li class="visible-lg visible-md"><a href="/fees">Pricing</a></li>
 
         <li class="visible-lg visible-md" ng-if="!current_person"><a href="/teams">Teams</a></li>
@@ -97,6 +58,20 @@
             <li role="presentation" class="divider"></li>
 
             <li><a href="#" ng-click="signout()"><i class="glyphicon glyphicon-off"></i> Sign Out</a></li>
+          </ul>
+        </li>
+
+        <!-- Currency switcher -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span ng-if="$currency.isUSD()">Currency: $</span>
+            <span ng-if="$currency.isBTC()">Currency: ฿</span>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li role="presentation" class="dropdown-header">Currency Preference:</li>
+            <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
+            <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
           </ul>
         </li>
 
