@@ -14,7 +14,7 @@
 
       <div ng-show="bounty.owner" tooltip="{{bounty.amount | dollars}} - {{bounty.owner.display_name}}">
         <owner-profile-link model="bounty" class="thumbnail">
-          <img style="width: 25px; height: 25px;" ng-src="{{bounty.owner.image_url}}">
+          <img style="width: 25px; height: 25px;" ng-src="{{bounty.owner.image_url || bounty.owner.image_url_small }}">
         </owner-profile-link>
       </div>
 

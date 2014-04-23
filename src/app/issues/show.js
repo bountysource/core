@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssueShow', function ($scope, $routeParams, $window, $location, $pageTitle, Comments, Issue) {
+angular.module('app').controller('IssueShow', function ($scope, $routeParams, $window, $location, $pageTitle, Comments, Issue, Bounties) {
 
   // alert above the issue title about bounty status
   $scope.bounty_alert = {
@@ -9,6 +9,7 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
     state: "available"
   };
 
+  // Load issue object
   $scope.issue = Issue.get({
     id: $routeParams.id,
     include_body_html: true,
@@ -16,6 +17,18 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
     include_tracker: true
   }, function (issue) {
     $pageTitle.set(issue.title, issue.tracker.name);
+  });
+
+  // Load issue bounties
+  $scope.bounties = Bounties.get({
+    issue_id: $routeParams.id,
+    include_owner: true,
+    order: '+amount'
+  }, function (bounties) {
+    console.log("bounties", bounties);
+    $scope.issue.$promise.then(function (issue) {
+      issue.bounties = bounties;
+    })
   });
 
   // Load issue comments
