@@ -21,13 +21,13 @@ angular.module('app')
     $scope.$watch(function () {return $location.search();}, function (newParams) {
       $scope.pledge = {
         amount: $currency.amountParamsParser(newParams.amount) || angular.noop,
+        currency: $routeParams.currency || $currency.value,
         anonymous: (parseInt(newParams.anonymous, 10) === 1) || false,
         checkout_method: newParams.checkout_method || ($currency.isBTC() && 'coinbase'),
         survey_response: newParams.survey_response || "",
         reward_id: parseInt(newParams.reward_id, 10) || null
       };
     });
-
 
     $scope.fundraiser_hide_pledge_button = true;
 
@@ -70,8 +70,8 @@ angular.module('app')
               // wow, so spaghetti
               $scope.cart_promise.then(function(cart) {
                 cart.clear().then(function() {
-                  cart.add_pledge($scope.pledge.amount, fundraiser, attrs).then(function() {
-                    cart.checkout(checkout_method).then(successCallback, errorCallback);
+                  cart.add_pledge($scope.pledge.amount, $scope.pledge.currency, fundraiser, attrs).then(function() {
+                    cart.checkout(checkout_method, $scope.pledge.currency).then(successCallback, errorCallback);
                   });
                 });
                 return cart;

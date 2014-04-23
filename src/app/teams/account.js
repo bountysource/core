@@ -8,6 +8,7 @@ angular.module('app').controller('TeamAccountController', function ($scope, $rou
 
   $scope.pay_in = {
     amount: $currency.amountParamsParser($routeParams.amount) || 0,
+    currency: $routeParams.currency || $currency.value,
     checkout_method: $currency.isUSD() ? 'google' : 'coinbase',
 
     // only used to alter the displayed amount,
@@ -50,9 +51,11 @@ angular.module('app').controller('TeamAccountController', function ($scope, $rou
               };
 
               cart.clear().then(function() {
-                cart.add_team_payin($scope.pay_in.amount, team).then(function(response) {
+                var payload = angular.copy($scope.pay_in);
+
+                cart.add_team_payin($scope.pay_in.amount, $scope.pay_in.currency, team, payload).then(function(response) {
                   if(!response.error) {
-                    cart.checkout($scope.pay_in.checkout_method).then(successCallback, errorCallback);
+                    cart.checkout($scope.pay_in.checkout_method, $scope.pay_in.currency).then(successCallback, errorCallback);
                   } else {
                     $scope.error = response.error;
                   }

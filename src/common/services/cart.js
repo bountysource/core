@@ -5,9 +5,10 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
   /*
    * Represents item in cart. Bounty, Pledge, etc.
    * */
-  var Item = function(type, amount, attributes) {
+  var Item = function(type, amount, currency, attributes) {
     this.class = type;
     this.amount = amount;
+    this.currency = currency;
     this.attributes = attributes || {};
   };
 
@@ -18,11 +19,12 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
       return this.call("/cart");
     };
 
-    this.add_item = function(type, amount, attributes) {
+    this.add_item = function(type, amount, currency, attributes) {
       var payload = attributes;
       payload.item_type = type;
       payload.amount = amount;
-      return this.call("/cart/add_item", "POST", attributes);
+      payload.currency = currency;
+      return this.call("/cart/add_item", "POST", payload);
     };
 
     this.remove_item = function(index) {
@@ -43,11 +45,12 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
       return this.call("/cart/export", "POST", cart.items);
     };
 
-    this.checkout = function(checkout_method, options) {
+    this.checkout = function(checkout_method, currency, options) {
       var deferred = $q.defer();
 
       options = angular.extend({
-        checkout_method: checkout_method
+        checkout_method: checkout_method,
+        currency: currency
       }, options);
 
       this.call("/cart/checkout", "POST", options, function(response) {
@@ -75,7 +78,7 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
      *   redirect_url - if checkout method requires redirect, this is where to redirect to for third-party checkout.
      *
      * */
-    this.checkout = function(checkout_method, options) {
+    this.checkout = function(checkout_method, currency, options) {
       var deferred = $q.defer();
       var that = this;
 
@@ -89,7 +92,7 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
       } else {
         this._require_person().then(function(person) {
           if (person) {
-            that.api.checkout(checkout_method, options).then(function(response) {
+            that.api.checkout(checkout_method, currency, options).then(function(response) {
               if (!response.meta.success) {
                 deferred.reject(response);
 
@@ -139,19 +142,19 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
      * @param attributes - optional attributes for the item.
      * @return promise of the new Item
      * */
-    this.add_item = function(type, amount, attributes) {
+    this.add_item = function(type, amount, currency, attributes) {
       attributes = attributes || {};
 
       var deferred = $q.defer();
       var that = this;
 
-      var item = new Item(type, amount, attributes);
+      var item = new Item(type, amount, currency, attributes);
       this.items.push(item);
 
       // Add item to server-side cart if logged in.
       this._require_person().then(function(person) {
         if (person) {
-          that.api.add_item(item.class, item.amount, item.attributes).then(function(updated_cart) {
+          that.api.add_item(item.class, item.amount, item.currency, item.attributes).then(function(updated_cart) {
             // if the add_item call failed, return an error
             if (updated_cart.error) {
               return deferred.resolve(updated_cart);
@@ -170,28 +173,28 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
      * Helper method to add a pledge to the cart.
      * @return promise of pledge Item
      * */
-    this.add_pledge = function(amount, fundraiser, attributes) {
+    this.add_pledge = function(amount, currency, fundraiser, attributes) {
       attributes = attributes || {};
       attributes.fundraiser_id = fundraiser.id;
-      return this.add_item('Pledge', amount, attributes);
+      return this.add_item('Pledge', amount, currency, attributes);
     };
 
     /*
      * Helper method to add a bounty to the cart.
      * */
-    this.add_bounty = function(amount, issue, attributes) {
+    this.add_bounty = function(amount, currency, issue, attributes) {
       attributes = attributes || {};
       attributes.issue_id = issue.id;
-      return this.add_item('Bounty', amount, attributes);
+      return this.add_item('Bounty', amount, currency, attributes);
     };
 
     /*
      * Helper method to add a payin for Team account.
      * */
-    this.add_team_payin = function(amount, team, attributes) {
+    this.add_team_payin = function(amount, currency, team, attributes) {
       attributes = attributes || {};
       attributes.team_id = team.id;
-      return this.add_item('TeamPayin', amount, attributes);
+      return this.add_item('TeamPayin', amount, currency, attributes);
     };
 
     /*
