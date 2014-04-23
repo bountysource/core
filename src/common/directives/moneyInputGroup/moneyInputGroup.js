@@ -25,6 +25,6 @@ angular.module('directives').directive('moneyInputGroup', function ($currency) {
       });
 
     }
-  }
+  };
 
 });
