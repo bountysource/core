@@ -68,7 +68,7 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
 
             // wow, so spaghetti
             cart.clear().then(function() {
-              cart.add_bounty($scope.bounty.amount, issue, attrs).then(function() {
+              cart.add_bounty($scope.bounty.amount, $scope.bounty.currency, issue, attrs).then(function() {
                 cart.checkout(checkout_method, $scope.bounty.currency).then(successCallback, errorCallback);
               });
             });

@@ -70,7 +70,7 @@ angular.module('app')
               // wow, so spaghetti
               $scope.cart_promise.then(function(cart) {
                 cart.clear().then(function() {
-                  cart.add_pledge($scope.pledge.amount, fundraiser, attrs).then(function() {
+                  cart.add_pledge($scope.pledge.amount, $scope.pledge.currency, fundraiser, attrs).then(function() {
                     cart.checkout(checkout_method, $scope.pledge.currency).then(successCallback, errorCallback);
                   });
                 });
