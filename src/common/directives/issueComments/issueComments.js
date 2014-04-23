@@ -35,6 +35,6 @@ angular.module('directives').directive('issueComments', function() {
       }
       
     }
-  }
+  };
 });
 
