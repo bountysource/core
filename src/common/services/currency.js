@@ -51,12 +51,12 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     return value * this.btcToUsdRate;
   };
 
-  this.isUSD = function () {
-    return this.value === 'USD';
+  this.isUSD = function (value) {
+    return (angular.isDefined(value) ? value : this.value) === 'USD';
   };
 
-  this.isBTC = function () {
-    return this.value === 'BTC';
+  this.isBTC = function (value) {
+    return (angular.isDefined(value) ? value : this.value) === 'BTC';
   };
 
   this.setUSD = function () {

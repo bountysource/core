@@ -10,6 +10,7 @@ angular.module('directives').directive('moneyInputGroup', function ($currency) {
     link: function(scope) {
 
       scope.$currency = $currency;
+
       scope.currency = scope.currency || $currency.value;
 
       scope.setCurrencyUSD = function () { scope.currency = 'USD'; };

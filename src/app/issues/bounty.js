@@ -68,8 +68,13 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
 
             // wow, so spaghetti
             cart.clear().then(function() {
-              cart.add_bounty($scope.bounty.amount, $scope.bounty.currency, issue, attrs).then(function() {
-                cart.checkout(checkout_method, $scope.bounty.currency).then(successCallback, errorCallback);
+              cart.add_bounty($scope.bounty.amount, $scope.bounty.currency, issue, attrs).then(function(response) {
+                if (response.error) {
+                  // super lame way to render error here.
+                  errorCallback({ data: { error: response.error } });
+                } else {
+                  cart.checkout(checkout_method, $scope.bounty.currency).then(successCallback, errorCallback);
+                }
               });
             });
 
@@ -138,7 +143,7 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
     'tweet': true
   };
 
-  $scope.$watch("bounty.amount", function(amount) {
+  $scope.$watch('bounty.amount', function(amount) {
     for (var key in $scope.promotion_disabled) {
       $scope.promotion_disabled[key] = $scope.update_promotion_disabled(key);
       if (key === $scope.bounty.promotion && $scope.promotion_disabled[key]) {
@@ -149,16 +154,23 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
 
   $scope.update_promotion_disabled = function(promotion) {
     var result;
+
     if ($scope.bounty.amount) {
+      // Convert to USD if currency is BTC
+      var amount = $scope.bounty.amount;
+      if ($currency.isBTC($scope.bounty.currency)) {
+        amount = $currency.btcToUsd(amount);
+      }
+
       switch(promotion) {
       case 'newsletter':
-        result = $scope.bounty.amount < 150 ? true : false;
+        result = amount < 150;
         break;
       case 'tweet':
-        result = $scope.bounty.amount < 150 ? true : false;
+        result = amount < 150;
         break;
       case 'feature':
-        result = $scope.bounty.amount < 50 ? true : false;
+        result = amount < 50;
         break;
       default:
         result = true;

@@ -17,9 +17,8 @@
           <alert type="'danger'" close="error = null">{{error}}</alert>
         </div>
 
-        <form name="form" class="form-horizontal">
-
-          <!-- Checkout method raios -->
+        <form name="newBountyForm" class="form-horizontal">
+          <!-- Checkout method radios -->
           <div class="form-group">
             <label class="control-label col-md-2">Payment Method:</label>
             <div class="col-md-10">
@@ -31,8 +30,12 @@
           <div class="form-group">
             <label class="control-label col-md-2">Bounty Amount:</label>
             <div class="col-md-3">
-              <money-input-group currency="bounty.currency">
-                <input type="number" class="form-control" ng-model="bounty.amount" placeholder="15" />
+              <money-input-group currency="bounty.currency" ng-class="{ 'has-error': newBountyForm.amountInput.$invalid }">
+                <input type="number"
+                       name="amountInput"
+                       class="form-control"
+                       placeholder="15"
+                       ng-model="bounty.amount" />
               </money-input-group>
             </div>
           </div>
