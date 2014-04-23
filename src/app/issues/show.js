@@ -25,10 +25,9 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
     include_owner: true,
     order: '+amount'
   }, function (bounties) {
-    console.log("bounties", bounties);
     $scope.issue.$promise.then(function (issue) {
       issue.bounties = bounties;
-    })
+    });
   });
 
   // Load issue comments
