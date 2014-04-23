@@ -13,6 +13,7 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
 
   $scope.bounty = {
     amount: $currency.amountParamsParser($routeParams.amount) || null,
+    currency: $routeParams.currency || $currency.value,
     anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,
     checkout_method: $currency.isBTC() ? 'coinbase' : $routeParams.checkout_method,
     bounty_expiration: $routeParams.bounty_expiration || '',
@@ -68,7 +69,7 @@ angular.module('app').controller('CreateBountyController', function ($scope, $ro
             // wow, so spaghetti
             cart.clear().then(function() {
               cart.add_bounty($scope.bounty.amount, issue, attrs).then(function() {
-                cart.checkout(checkout_method).then(successCallback, errorCallback);
+                cart.checkout(checkout_method, $scope.bounty.currency).then(successCallback, errorCallback);
               });
             });
 

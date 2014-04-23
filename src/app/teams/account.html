@@ -26,11 +26,9 @@
           <div class="form-group">
             <label class="control-label col-md-4">Amount</label>
             <div class="col-md-4">
-              <div class="input-group">
-                <!-- <span class="input-group-addon"><currency-unit></currency-unit></span> -->
-                <bitcoin-input amount="pay_in.amount"></bitcoin-input>
-                <!-- <input type="number" step="0.01" min="0" name="amount" placeholder="15" ng-model="pay_in.amount" autofocus="" class="form-control"> -->
-              </div>
+              <money-input-group currency="pay_in.currency">
+                <input id="amount" name="amount" type="number" class="form-control" ng-model="pay_in.amount" placeholder="15" />
+              </money-input-group>
             </div>
           </div>
 
@@ -40,21 +38,6 @@
               <checkout-method-radios value="pay_in.checkout_method" person="current_person"></checkout-method-radios>
             </div>
           </div>
-
-
-<!--           <div class="form-group">
-            <label class="control-label col-md-4">Bountysource Fee</label>
-            <div class="col-md-8">
-              <div style="line-height: 30px;"><b>{{pay_in.fee | currency}}</b></div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-md-4">Total</label>
-            <div class="col-md-8">
-              <div style="line-height: 30px;"><strong>{{pay_in.total | currency}}</strong></div>
-            </div>
-          </div> -->
 
           <div class="form-group">
             <div class="col-md-offset-4 col-md-8">

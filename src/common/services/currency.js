@@ -1,11 +1,13 @@
 'use strict';
 
-angular.module('services').service('$currency', function ($cookieStore, $window, $log, $api, $analytics) {
+angular.module('services').service('$currency', function ($rootScope, $cookieStore, $window, $log, $api, $analytics) {
 
   var self = this;
 
   this._currencies = ['USD', 'BTC'];
   this._cookieName = 'currencySwitcherValue';
+
+  this.currencyChangedEventName = 'currencyChangedEvent';
 
   // Get BTC price
   this.btcToUsdRate = undefined;
@@ -23,6 +25,9 @@ angular.module('services').service('$currency', function ($cookieStore, $window,
       if (value !== this.value) {
         this.value = value;
         this.writeValueToCookie();
+
+        // Fire event down from the heavens
+        $rootScope.$broadcast(this.currencyChangedEventName, this.value);
 
         $analytics.changeCurrency(this.value);
         $log.info('Currency changed to', this.value);

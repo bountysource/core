@@ -219,14 +219,9 @@
                   <label class="control-label col-md-5" for="amount">Pledge Amount</label>
 
                   <div class="col-md-7">
-                    <div class="input-group" ng-if="$currency.isUSD()">
-                      <span class="input-group-addon">$</span>
-                      <input type="number" min="5" step="0.01" name="amount" id="amount" ng-model="pledge.amount"
-                             placeholder="Pledge amount" class="form-control">
-                    </div>
-                    <div class="input-group" ng-if="$currency.isBTC()">
-                      <bitcoin-input amount="pledge.amount"></bitcoin-input>
-                    </div>
+                    <money-input-group currency="pledge.currency">
+                      <input id="amount" name="amount" type="number" class="form-control" ng-model="pledge.amount" placeholder="15" />
+                    </money-input-group>
                   </div>
                 </div>
 

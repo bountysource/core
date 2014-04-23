@@ -43,11 +43,12 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
       return this.call("/cart/export", "POST", cart.items);
     };
 
-    this.checkout = function(checkout_method, options) {
+    this.checkout = function(checkout_method, currency, options) {
       var deferred = $q.defer();
 
       options = angular.extend({
-        checkout_method: checkout_method
+        checkout_method: checkout_method,
+        currency: currency
       }, options);
 
       this.call("/cart/checkout", "POST", options, function(response) {
@@ -75,7 +76,7 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
      *   redirect_url - if checkout method requires redirect, this is where to redirect to for third-party checkout.
      *
      * */
-    this.checkout = function(checkout_method, options) {
+    this.checkout = function(checkout_method, currency, options) {
       var deferred = $q.defer();
       var that = this;
 
@@ -89,7 +90,7 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
       } else {
         this._require_person().then(function(person) {
           if (person) {
-            that.api.checkout(checkout_method, options).then(function(response) {
+            that.api.checkout(checkout_method, currency, options).then(function(response) {
               if (!response.meta.success) {
                 deferred.reject(response);
 

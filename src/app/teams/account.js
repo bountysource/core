@@ -52,7 +52,7 @@ angular.module('app').controller('TeamAccountController', function ($scope, $rou
               cart.clear().then(function() {
                 cart.add_team_payin($scope.pay_in.amount, team).then(function(response) {
                   if(!response.error) {
-                    cart.checkout($scope.pay_in.checkout_method).then(successCallback, errorCallback);
+                    cart.checkout($scope.pay_in.checkout_method, $scope.pay_in.currency).then(successCallback, errorCallback);
                   } else {
                     $scope.error = response.error;
                   }

@@ -18,6 +18,8 @@
         </div>
 
         <form name="form" class="form-horizontal">
+
+          <!-- Checkout method raios -->
           <div class="form-group">
             <label class="control-label col-md-2">Payment Method:</label>
             <div class="col-md-10">
@@ -25,16 +27,13 @@
             </div>
           </div>
 
+          <!-- Bounty amount input-->
           <div class="form-group">
-            <label for="amount" class="control-label col-md-2">Bounty Amount:</label>
-            <div class="col-md-3" ng-if="$currency.isUSD()">
-              <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input id="amount" type="number" step="0.01" ng-change="update_bounty_total()" ng-model="bounty.amount" placeholder="15" required="" class="form-control">
-              </div>
-            </div>
-            <div class="col-md-3" ng-if="$currency.isBTC()">
-              <bitcoin-input amount="bounty.amount"></bitcoin-input>
+            <label class="control-label col-md-2">Bounty Amount:</label>
+            <div class="col-md-3">
+              <money-input-group currency="bounty.currency">
+                <input type="number" class="form-control" ng-model="bounty.amount" placeholder="15" />
+              </money-input-group>
             </div>
           </div>
 
