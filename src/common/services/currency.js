@@ -63,7 +63,7 @@ angular.module('services').service('$currency', function ($cookieStore, $window,
   };
 
   this.amountParamsParser = function (amount) {
-    var parsedAmount
+    var parsedAmount;
     if (this.isUSD()) {
       parsedAmount = parseInt(amount, 10);
     } else if (this.isBTC()) {
