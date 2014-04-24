@@ -59,20 +59,18 @@
                   </div>
                   <div class="col-sm-4 col-md-4" style="padding-right: 0px; padding-left: 0px;">
                     <div class="input-group input-group-lg" style="margin-bottom: 0px;">
-                      <span class="input-group-addon">$</span>
-                      <input name="amount" type="number" class="form-control" min="{{issue.bounty_total + 1}}" step="1" ng-model="my_developer_goal.amount" ng-value="my_developer_goal.amount" required="">
+                      <span class="input-group-addon"><currency-unit></currency-unit></span>
+                      <input name="amount" type="number" class="form-control" step="any" ng-model="my_developer_goal.amount" ng-value="my_developer_goal.amount" required="">
                     </div>
                   </div>
-
                   <div class="pull-right col-sm-5 col-md-5">
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="update_developer_goal(my_developer_goal.amount)" ng-disabled="my_developer_goal.$master.amount == my_developer_goal.amount || my_developer_goal.amount <= issue.bounty_total || my_developer_goal.amount < 5">Update</button>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="update_developer_goal(my_developer_goal.amount)">Update</button>
                     <button class="btn btn-danger btn-lg" ng-click="delete_developer_goal()"><span class="glyphicon glyphicon-trash"></span></button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-
           <!-- You have not set a goal -->
           <div ng-hide="my_developer_goal">
             <div>
@@ -83,13 +81,13 @@
                   </div>
                   <div class="col-sm-4 col-md-4" style="padding-left: 0px;">
                     <div class="input-group input-group-lg" style="margin-bottom: 0px;">
-                      <span class="input-group-addon">$</span>
-                      <input type="number" min="{{ bounty_total + 1 }}" step="1" class="form-control" ng-model="new_developer_goal.amount" placeholder="{{ bounty_total + 100 }}" required="" style="padding-left: 10px;">
+                      <span class="input-group-addon"><currency-unit></currency-unit></span>
+                      <input type="number" min="0" step="any" class="form-control" ng-model="new_developer_goal.amount" placeholder="{{ bounty_total + 100 }}" required="" style="padding-left: 10px;">
                     </div>
                   </div>
 
                   <div class="col-sm-3 col-md-3">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="new_developer_goal.amount <= issue.bounty_total || new_developer_goal.amount < 5">Set Goal</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="(new_developer_goal.amount | dollars:{displayCurrency: 'BTC', actualCurrency: 'BTC'}) <= (issue.bounty_total | dollars)">Set Goal</button>
                   </div>
                 </div>
               </form>

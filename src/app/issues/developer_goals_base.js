@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('DeveloperGoalsBaseController', function ($scope, $api, $filter, $location, $routeParams, $analytics) {
+angular.module('app').controller('DeveloperGoalsBaseController', function ($scope, $api, $filter, $location, $routeParams, $analytics, $currency) {
   $scope.developer_goals = [];
   $scope.new_developer_goal = { amount: undefined };
   $scope.my_developer_goal = undefined;
@@ -9,6 +9,13 @@ angular.module('app').controller('DeveloperGoalsBaseController', function ($scop
   $scope.bounty_amount = 0;
 
   $scope.initializing_my_developer_goal = false;
+
+  function convertToUsdIfNecessary (goal) {
+    if ($currency.isBTC()) {
+      goal.amount = $currency.usdToBtc(goal.amount);
+    }
+    return goal;
+  }
 
   $scope.$on('developerGoalCreateReceived', function(event, new_developer_goal) {
     $scope.my_developer_goal = new_developer_goal;
@@ -66,6 +73,7 @@ angular.module('app').controller('DeveloperGoalsBaseController', function ($scop
           for (var i=0; i<developer_goals.length; i++) {
             if (developer_goals[i].person.id === current_person.id) {
               $scope.my_developer_goal = developer_goals[i];
+              $scope.my_developer_goal = convertToUsdIfNecessary($scope.my_developer_goal);
               $scope.my_developer_goal.$master = angular.copy(developer_goals[i]);
               break;
             }
@@ -79,7 +87,9 @@ angular.module('app').controller('DeveloperGoalsBaseController', function ($scop
     });
 
     $scope.create_developer_goal = function() {
-      $api.create_developer_goal(issue.id, $scope.new_developer_goal).then(function(new_developer_goal) {
+      var payload = angular.extend($scope.new_developer_goal, { currency: $currency.value });
+      $api.create_developer_goal(issue.id, payload).then(function(new_developer_goal) {
+        new_developer_goal = convertToUsdIfNecessary(new_developer_goal);
         $scope.$emit('developerGoalCreatePushed', new_developer_goal);
 
         $analytics.setBountyGoal($scope.new_developer_goal.amount, issue.id);
@@ -87,7 +97,9 @@ angular.module('app').controller('DeveloperGoalsBaseController', function ($scop
     };
 
     $scope.update_developer_goal = function() {
-      $api.update_developer_goal(issue.id, $scope.my_developer_goal).then(function(updated_developer_goal) {
+      var payload = angular.extend($scope.my_developer_goal, { currency: $currency.value });
+      $api.update_developer_goal(issue.id, payload).then(function(updated_developer_goal) {
+        updated_developer_goal = convertToUsdIfNecessary(updated_developer_goal);
         $scope.$emit('developerGoalUpdatePushed', updated_developer_goal);
 
         $analytics.updateBountyGoal(updated_developer_goal.amount, issue.id);

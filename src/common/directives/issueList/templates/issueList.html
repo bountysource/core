@@ -34,7 +34,7 @@
 
     <th ng-if="$showBountyTotal" style="text-align:center;" ng-class="{ 'active': ($orderData.column === 'bounty_total') }">
       <a href ng-click="$changeSortOrder('bounty')" tooltip="Bounty total" style="color: black; text-decoration: none;">
-        <span style="color: black">$</span>
+        <currency-unit></currency-unit>
         <span ng-show="$orderData.column === 'bounty'">
           <span ng-show="$orderData.reverse"><i class="glyphicon glyphicon-chevron-up"></i></span>
           <span ng-hide="$orderData.reverse"><i class="glyphicon glyphicon-chevron-down"></i></span>
