@@ -86,6 +86,10 @@ a:hover {
   margin-bottom: 15px;
 }
 
+.image_body_html img {
+  width: 100%;
+}
+
 
 
 .img-responsive { width: 100%;}
