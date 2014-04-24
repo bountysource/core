@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('BaseToolsController', function ($scope, $routeParams, $window, $location, $api) {
+angular.module('app').controller('BaseToolsController', function ($scope, $routeParams, $window, $location, $api, $analytics) {
   // Render a re-authorize link in the presence of the glorious authorize parameter.
   if (parseInt($routeParams.reauthorize, 10) === 1) {
     $scope.reAuthorize = true;
@@ -179,6 +179,7 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
 
     $scope.create_plugin = function() {
       if ($scope.current_tracker) {
+        $analytics.startPluginInstall({type: "Github", tracker_id: $scope.current_tracker.id});
         $scope.plugin_loading = "Installing plugin...";
 
         if (!$scope.__can_use_plugin__) {
@@ -191,6 +192,7 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
             if (plugin.error) {
               $scope.plugin_alert.text = plugin.error;
             } else {
+              $analytics.completePluginInstall({type: "Github", tracker_id: $scope.current_tracker.id});
               $scope.current_tracker.$plugin_installed = true;
               $scope.expand_tracker($scope.current_tracker);
               plugins.push(plugin);
