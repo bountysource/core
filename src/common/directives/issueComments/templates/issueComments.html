@@ -2,7 +2,7 @@
   <table class="table table-striped" style="table-layout: fixed">
     <tr class="no-stripe">
       <td class="imagerow">
-        <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}">
+        <a ng-show="issue.author.slug" owner-href="issue.author">
           <img ng-src="{{issue.author.image_url_small || issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
         </a>
         <img ng-hide="issue.author.slug" ng-src="{{issue.author.image_url_small || issue.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
@@ -10,7 +10,7 @@
 
       <td style="overflow-x:auto">
         <p class="text-muted">
-          <a ng-show="issue.author.slug" ng-href="people/{{issue.author.slug}}">{{issue.author.display_name}}</a>
+          <a ng-show="issue.author.slug" owner-href="issue.author">{{issue.author.display_name}}</a>
           <span ng-hide="issue.author.slug">{{issue.author.display_name}}</span>
           <span>opened this issue on {{issue.created_at | date}}</span>
         </p>
@@ -34,7 +34,7 @@
 
     <tr ng-repeat="comment in comments | orderBy:['+created_at']">
       <td>
-        <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}">
+        <a ng-show="comment.author.slug" owner-href="issue.author">
           <img ng-src="{{comment.author.image_url_small || comment.author.image_url}}" class="thumbnail no-margin" style="max-width: 50px">
         </a>
         <img ng-hide="comment.author.slug" ng-src="{{comment.author.image_url_small || comment.author.image_url}}" class="thumbnail" style="width:50px; height:50px; max-width: 50px">
@@ -42,7 +42,7 @@
 
       <td style="overflow-x:auto">
         <p class="text-muted">
-          <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}">{{comment.author.display_name}}</a>
+          <a ng-show="comment.author.slug" owner-href="issue.author">{{comment.author.display_name}}</a>
           <span ng-hide="comment.author.slug">{{comment.author.display_name}}</span>
           on {{comment.created_at | date}}
         </p>
