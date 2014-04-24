@@ -48,7 +48,7 @@
         </p>
 
         <target-blank model="issue">
-          <div ng-show="_ctype == 'html'" ng-bind-html="comment.body_html"></div>
+          <div ng-show="_ctype == 'html'" ng-bind-html="comment.body_html" class="image_body_html"></div>
           <div ng-show="_ctype == 'text'" style="white-space: pre-wrap;">{{comment.body_html}}</div>
         </target-blank>
       </td>
