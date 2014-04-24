@@ -17,7 +17,7 @@ angular.module('directives').directive('issueList', function() {
 
       // Default sort order to participant count descending.
       scope.$orderData = {
-        column: "participants_count",
+        column: "",
         reverse: true
       };
 
