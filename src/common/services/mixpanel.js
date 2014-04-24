@@ -159,6 +159,15 @@ angular.module('app')
       this.track("Change Currency", angular.extend({ value: value }, options || {}));
     };
 
+    // Plugin Tracking - Plugin Start Install, Plugin Finish Install
+    this.startPluginInstall = function (options) {
+      this.track("Plugin Start Install", options || {});
+    };
+
+    this.completePluginInstall = function (options) {
+      this.track("Plugin Complete Install", options || {});
+    };
+
   })
 
   // Fire Mixpanel events based on route
