@@ -45,7 +45,7 @@
           <a ng-show="comment.author.slug" ng-href="people/{{comment.author.slug}}">{{comment.author.display_name}}</a>
           <span ng-hide="comment.author.slug">{{comment.author.display_name}}</span>
           on
-          <a href="#{{comment.created_at.slice(0,19)}}">{{comment.created_at | date}}</a>
+          <a ng-href="/issues/{{ issue.slug }}#{{comment.created_at.slice(0,19)}}">{{comment.created_at | date}}</a>
         </p>
 
         <target-blank model="issue">
