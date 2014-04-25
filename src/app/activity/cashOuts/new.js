@@ -39,8 +39,7 @@ angular.module('activity').
       }
     }));
 
-    // TODO change to real timestamp
-    $scope.feeChangeEnactedAt = new Date();
+    $scope.feeChangeEnactedAt = new Date('2014-04-18T18:51:03+00:00');
 
     // Create permanent address if necessary. Return promise for chaining on cash out create.
     $scope.createPermanentAddress = function() {
