@@ -1,0 +1,12 @@
+<select class="form-control" ng-model="item.owner">
+
+  <!-- Anonymous -->
+  <option value="">Anonymous</option>
+
+  <!-- Current user -->
+  <option ng-if="current_person" value="current_person">{{current_person.display_name}}</option>
+
+  <!-- Teams -->
+  <option ng-repeat="team in teams" value="team">{{team.display_name}}</option>
+
+</select>

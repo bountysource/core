@@ -1,29 +1,27 @@
 'use strict';
 
-angular.module('app').controller('CartController', function($scope, $cart) {
-  $cart.load().then(function(cart) {
-    console.log(cart);
+angular.module('app').controller('ShoppingCartController', function($scope, $api, ShoppingCart) {
 
-    $scope.cart = cart;
+  // Load shopping cart
+  $scope.cart = ShoppingCart.get();
+
+  // Load the current person's teams
+  $api.person_teams_get().then(function (teams) {
+    $scope.teams = angular.copy(teams);
   });
 
-//  $scope.cart = $api.get_cart().then(function(cart) {
-//    console.log(cart);
-//
-//    for (var i=0; i<cart.items.length; i++) {
-//      cart.items[i].$changes = {};
-//    }
-//
-//    return cart;
-//  });
+  $scope.checkoutMethod = undefined;
 
-  $scope.toggle_edit_mode = function(item) {
-    item.$edit_mode = !item.$edit_mode;
+  $scope.isPledge = function (item) {
+    return angular.isObject(item) && item.type === 'Pledge';
   };
 
-  $scope.remove_item = function(item) {};
+  $scope.isBounty = function (item) {
+    return angular.isObject(item) && item.type === 'Pledge';
+  };
 
-  $scope.update_item = function(item) {};
+  $scope.isTeamPayin = function (item) {
+    return angular.isObject(item) && item.type === 'TeamPayin';
+  };
 
-  $scope.cancel_item_changes = function(item) {};
 });

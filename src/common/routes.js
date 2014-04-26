@@ -71,7 +71,7 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
 
   $routeProvider.when('/cart', angular.extend({
     templateUrl: 'app/cart/cart.html',
-    controller: 'CartController',
+    controller: 'ShoppingCartController',
     trackEvent: 'View Cart'
   }, defaultRouteOptions));
 

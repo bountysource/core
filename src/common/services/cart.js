@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('services').service('$cart', function($rootScope, $api, $q, $cookieStore, $window) {
+angular.module('services').service('$cart', function($rootScope, $api, $q, $cookieStore, $window, ShoppingCart) {
 
   /*
    * Represents item in cart. Bounty, Pledge, etc.
@@ -12,53 +12,53 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
     this.attributes = attributes || {};
   };
 
-  var API = function() {
-    this.call = $api.call;
-
-    this.get = function() {
-      return this.call("/cart");
-    };
-
-    this.add_item = function(type, amount, currency, attributes) {
-      var payload = attributes;
-      payload.item_type = type;
-      payload.amount = amount;
-      payload.currency = currency;
-      return this.call("/cart/add_item", "POST", payload);
-    };
-
-    this.remove_item = function(index) {
-      return this.call("/cart/remove_item", "DELETE", { index: index });
-    };
-
-    this.update_item = function(index, data) {
-      var payload = data;
-      payload.index = index;
-      return this.call("/cart/update_item", "PUT", payload);
-    };
-
-    this.clear = function() {
-      return this.call("/cart", "DELETE");
-    };
-
-    this.export = function(cart) {
-      return this.call("/cart/export", "POST", cart.items);
-    };
-
-    this.checkout = function(checkout_method, currency, options) {
-      var deferred = $q.defer();
-
-      options = angular.extend({
-        checkout_method: checkout_method,
-        currency: currency
-      }, options);
-
-      this.call("/cart/checkout", "POST", options, function(response) {
-        deferred.resolve(response);
-      });
-      return deferred.promise;
-    };
-  };
+//  var API = function() {
+//    this.call = $api.call;
+//
+//    this.get = function() {
+//      return this.call("/cart");
+//    };
+//
+//    this.add_item = function(type, amount, currency, attributes) {
+//      var payload = attributes;
+//      payload.item_type = type;
+//      payload.amount = amount;
+//      payload.currency = currency;
+//      return this.call("/cart/add_item", "POST", payload);
+//    };
+//
+//    this.remove_item = function(index) {
+//      return this.call("/cart/remove_item", "DELETE", { index: index });
+//    };
+//
+//    this.update_item = function(index, data) {
+//      var payload = data;
+//      payload.index = index;
+//      return this.call("/cart/update_item", "PUT", payload);
+//    };
+//
+//    this.clear = function() {
+//      return this.call("/cart", "DELETE");
+//    };
+//
+//    this.export = function(cart) {
+//      return this.call("/cart/export", "POST", cart.items);
+//    };
+//
+//    this.checkout = function(checkout_method, currency, options) {
+//      var deferred = $q.defer();
+//
+//      options = angular.extend({
+//        checkout_method: checkout_method,
+//        currency: currency
+//      }, options);
+//
+//      this.call("/cart/checkout", "POST", options, function(response) {
+//        deferred.resolve(response);
+//      });
+//      return deferred.promise;
+//    };
+//  };
 
   /*
    * NOTE: Use $cart.load() to get a Cart object in your controllers.
@@ -290,33 +290,6 @@ angular.module('services').service('$cart', function($rootScope, $api, $q, $cook
           deferred.resolve(this);
         }
       });
-
-      return deferred.promise;
-    };
-
-    /*
-     * Export local cart to server.
-     * NOTE: client-side changes always overwrite server-side attributes.
-     *
-     * @return promise of updated self.
-     * */
-    this._export = function() {
-      var deferred = $q.defer();
-      var that = this;
-
-      if (this.items.length <= 0) {
-        deferred.resolve(this);
-      } else {
-        this._require_person().then(function(person) {
-          if (person) {
-            that.api.export().then(function(updated_cart) {
-              deferred.resolve(updated_cart);
-            });
-          } else {
-            deferred.reject();
-          }
-        });
-      }
 
       return deferred.promise;
     };

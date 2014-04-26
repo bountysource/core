@@ -1,57 +1,145 @@
-<div ng-controller="CartController">
-  <h1>Cart</h1>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th style="width: 15%;">Amount</th>
-      <th>Item</th>
-      <th>Added</th>
-      <th style="width: 100px;"></th>
-    </tr>
-    </thead>
+<div ng-controller="ShoppingCartController">
+  <div class="row">
+    <div class="col-md-9">
+      <table class="table">
+        <tbody>
+        <tr ng-repeat="item in cart.items">
 
-    <tbody>
-    <tr ng-repeat="item in cart.items | orderBy:['-added_at']">
-      <td>
-        <div ng-hide="item.$edit_mode">
-          {{item.amount | dollars}}
-        </div>
-        <div ng-show="item.$edit_mode">
-          <input type="number" min="5" ng-model="item.$changes.amount" placeholder="100" style="margin-bottom: 0; width: 90%;" class="form-control">
-        </div>
-      </td>
-      <td ng-switch="item.type">
-        <div ng-switch-when="Bounty">
-          <span>Bounty on <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></span>
-        </div>
-        <div ng-switch-when="Pledge">
-          <span>Pledge to <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a></span>
-        </div>
-      </td>
-      <td>{{item.added_at | date:'medium'}}</td>
-      <td>
-        <div collapse="item.$edit_mode">
-          <div class="row">
-            <div class="col-sm-6 col-md-6">
-              <button tooltip="Remove" ng-click="remove_item(item)" class="btn btn-block btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+          <!-- Image -->
+          <td class="col-md-1" ng-switch on="item.type">
+
+            <!-- Pledge -->
+            <a class="thumbnail" ng-href="/fundraisers/{{item.fundraiser.slug}}" ng-switch-when="Pledge">
+              <img class="img-responsive" ng-src="{{item.fundraiser.image_url_medium}}" />
+            </a>
+
+            <!-- Bounty -->
+            <a class="thumbnail" ng-href="/issues/{{item.issue.slug}}" ng-switch-when="Bounty">
+              <img class="img-responsive" ng-src="{{item.issue.tracker.image_url_medium}}" />
+            </a>
+
+            <!-- TeamPayin -->
+            <a class="thumbnail" ng-href="/teams/{{item.team.slug}}" ng-switch-when="TeamPayin">
+              <img class="img-responsive" ng-src="{{item.team.image_url_medium}}" />
+            </a>
+
+          </td>
+
+          <!-- Item details -->
+          <td class="col-md-9" ng-switch on="item.type">
+
+            <!-- Pledge -->
+            <div ng-switch-when="Pledge">
+              <h4 style="margin-top: 0;">Pledge to "<a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a>"</h4>
+
+              <ng-form class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-md-2">Display As:</label>
+
+                  <div class="col-md-4">
+                    <ng-include src="'app/cart/templates/ownerSelect.html'"></ng-include>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-2">Reward:</label>
+                  <div class="col-md-10">
+                    <select ng-model="item.reward" class="form-control">
+                      <option value="">No reward</option>
+                      <option ng-repeat="reward in item.fundraiser.rewards" value="reward">{{reward.amount | dollars}}: {{reward.description}}</option>
+                    </select>
+                  </div>
+                </div>
+              </ng-form>
             </div>
-            <div class="col-sm-6 col-md-6">
-              <button tooltip="Edit" ng-click="toggle_edit_mode(item)" class="btn btn-block btn-primary" ng-class="{ active: item.$edit_mode }"><i class="glyphicon glyphicon-cog"></i></button>
+
+            <!-- Bounty -->
+            <div ng-switch-when="Bounty">
+              <h4 style="margin-top: 0;">Bounty for "<a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a>"</h4>
+
+              <ng-form class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-md-2">Display As:</label>
+
+                  <div class="col-md-4">
+                    <ng-include src="'app/cart/templates/ownerSelect.html'"></ng-include>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-2">Expire:</label>
+
+                  <div class="col-md-3">
+                    <select class="form-control" ng-model="item.bounty_expiration">
+                      <option value="">Never</option>
+                      <option value="6">6 Months</option>
+                      <option value="3">3 Months</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-7" ng-if="">
+                    <select class="form-control" ng-model="item.upon_expiration">
+                      <option value="1">Fuck shit stack shit stack shit stack shit stack shit stack</option>
+                      <option value="2">Fuck shit stack shit stack shit stack shit stack shit stack</option>
+                      <option value="3">Fuck shit stack shit stack shit stack shit stack shit stack</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="item.tweet" />
+                        Tweet from @Bountysource for {{ 20 | dollars }}?
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </ng-form>
             </div>
+
+            <!-- TeamPayin -->
+            <div ng-switch-when="TeamPayin">
+
+            </div>
+          </td>
+
+          <!-- Amount -->
+          <td class="col-md-2 text-right" ng-switch on="item.type">
+
+            <div class="input-group">
+              <money-input-group currency="item.currency">
+                <input type="number" class="form-control" ng-model="item.amount" />
+              </money-input-group>
+            </div>
+
+            <!-- Delete button -->
+            <button class="btn btn-link">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Checkout button -->
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <div>
+            <button class="btn btn-block btn-lg btn-primary">Fuck yeah <i class="glyphicon glyphicon-chevron-right"></i></button>
           </div>
+
+          <br />
+
+          <ng-form>
+            <strong>Checkout Method:</strong>
+            <checkout-method-radios value="checkoutMethod" person="current_person"></checkout-method-radios>
+          </ng-form>
         </div>
-        <div collapse="!item.$edit_mode">
-          <div class="row">
-            <div class="col-sm-6 col-md-6">
-              <button tooltip="Save Changes" ng-click="update_item(item)" class="btn btn-block btn-danger"><i class="glyphicon glyphicon-ok-sign"></i></button>
-            </div>
-            <div class="col-sm-6 col-md-6">
-              <button tooltip="Cancel Changes" ng-click="cancel_item_changes(item)" class="btn btn-block btn-default" ng-class="{ active: item.$edit_mode }"><i class="glyphicon glyphicon-remove"></i></button>
-            </div>
-          </div>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      </div>
+    </div>
+  </div>
+
+  <pre>{{cart | json}}</pre>
 </div>
