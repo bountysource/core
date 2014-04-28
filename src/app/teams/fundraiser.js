@@ -3,6 +3,7 @@
 angular.module('app')
   .controller('TeamFundraiserController', function($scope, $location, $cart, $routeParams, $route, $api, $currency) {
     $scope.$currency = $currency;
+
     // Change page content based on query param
     $scope._page = $location.search().page;
 
@@ -12,18 +13,12 @@ angular.module('app')
       return page === ($location.search().page || '').toLowerCase();
     };
 
-    $scope.cart_promise = $cart.load().then(function(cart) {
-      $scope.cart = cart;
-      return cart;
-    });
-
     // Watching a string didn't work here. Watch the route params and update pledge fields accordingly
     $scope.$watch(function () {return $location.search();}, function (newParams) {
       $scope.pledge = {
         amount: $currency.amountParamsParser(newParams.amount) || angular.noop,
         currency: $routeParams.currency || $currency.value,
         anonymous: (parseInt(newParams.anonymous, 10) === 1) || false,
-        checkout_method: newParams.checkout_method || ($currency.isBTC() && 'coinbase'),
         survey_response: newParams.survey_response || "",
         reward_id: parseInt(newParams.reward_id, 10) || null
       };
@@ -38,6 +33,7 @@ angular.module('app')
       } else if (fundraiser) {
         // select reward to have the object cached. handled after this by set_reward(reward)
         $scope.selected_reward = null;
+
         for (var i=0; $scope.pledge.reward_id && i<fundraiser.rewards.length; i++) {
           if (fundraiser.rewards[i].id === $scope.pledge.reward_id) {
             $scope.selected_reward = fundraiser.rewards[i];
@@ -45,50 +41,12 @@ angular.module('app')
           }
         }
 
-        // build the create payment method
-        $scope.create_payment = function() {
-          // request payload
-          var attrs = angular.copy($scope.pledge);
+        // Add item to cart, awesome
+        $scope.addToCart = function () {
+          var payload = angular.copy($scope.pledge);
+          payload.fundraiser_id = fundraiser.id;
 
-          $scope.$watch('current_person', function(person) {
-            if (person) {
-              $scope.processing_payment = true;
-
-              // remove checkout method from payload
-              var checkout_method = attrs.checkout_method;
-              delete attrs.checkout_method;
-
-              // callbacks for cart checkout
-              var successCallback = function(response) {
-                console.log('Checkout success!', response);
-              };
-              var errorCallback = function(response) {
-                $scope.processing_payment = false;
-                $scope.alert = { message: response.data.error, type: 'danger' };
-              };
-
-              // wow, so spaghetti
-              $scope.cart_promise.then(function(cart) {
-                cart.clear().then(function() {
-                  cart.add_pledge($scope.pledge.amount, $scope.pledge.currency, fundraiser, attrs).then(function() {
-                    cart.checkout(checkout_method, $scope.pledge.currency).then(successCallback, errorCallback);
-                  });
-                });
-                return cart;
-              });
-            } else if (person === false) {
-              // turn anon bool into 1 or 0
-              var anon = (attrs.anonymous === true ? 1 : 0);
-              attrs.anonymous = anon;
-
-              // Send to pledge page
-              attrs.page = 'pledge';
-
-              // save route, redirect to login
-              $api.set_post_auth_url($location.path(), attrs);
-              $location.url("/signin");
-            }
-          });
+          $cart.addPledge(payload);
         };
       }
     });
@@ -110,17 +68,8 @@ angular.module('app')
       }
     };
 
-    // if logged in, populate teams accounts!
-    $scope.$watch("current_person", function(person) {
-      if (person) {
-        $scope.teams_promise = $api.person_teams(person.id).then(function (response) {
-          $scope.teams = response;
-          return response;
-        });
-      }
-    });
-
     $scope.can_make_anonymous = true;
+
     // watch payment method for team account.
     // if it is, disable the anonymous checkbox
     $scope.$watch("pledge.checkout_method", function(checkout_method) {
