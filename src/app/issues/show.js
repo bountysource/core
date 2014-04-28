@@ -38,7 +38,7 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
 
   // Scroll to linked comment after render finishes
   $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
-      $anchorScroll();
-    });
+    $anchorScroll();
+  });
 
 });
