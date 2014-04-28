@@ -10,6 +10,10 @@ angular.module('filters').filter('currencyUnit', function ($filter) {
       } else {
         return 'μBTC ';
       }
+    } else if (currency === 'XRP') {
+      return 'XRP';   // 'Ʀ';
+    } else if (currency === 'MSC') {
+      return 'MSC';
     } else if (currency === 'USD') {
       return '$';
     }
