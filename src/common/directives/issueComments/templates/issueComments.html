@@ -32,7 +32,7 @@
       </td>
     </tr>
 
-    <tr ng-repeat="comment in comments | orderBy:['+created_at']" on-finish-render>
+    <tr ng-repeat="comment in comments | orderBy:['+created_at']" on-finish-render="callScroll()">
       <td>
         <a ng-show="comment.author.slug" owner-href="comment.author">
           <img ng-src="{{comment.author.image_url_small || comment.author.image_url}}" class="thumbnail no-margin" style="max-width: 50px">
