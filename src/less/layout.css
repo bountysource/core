@@ -76,7 +76,11 @@ body {
 
 a:hover {
   cursor: pointer;
-};
+}
+
+.unstyled-anchor {
+  cursor: default !important;
+}
 
 .breadcrumb {
   margin-top: 10px;
