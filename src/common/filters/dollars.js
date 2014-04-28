@@ -16,6 +16,10 @@ angular.module('filters').filter('dollars', function($filter, $api, $currency) {
     if (displayCurrency !== actualCurrency) {
       if (actualCurrency === 'USD' && displayCurrency === 'BTC') {
         value = $currency.usdToBtc(value);
+      } else if (actualCurrency === 'USD' && displayCurrency === 'XRP') {
+        value = $currency.usdToXrp(value);
+      } else if (actualCurrency === 'USD' && displayCurrency === 'MSC') {
+        value = $currency.usdToMsc(value);
       }
     }
 
@@ -29,6 +33,11 @@ angular.module('filters').filter('dollars', function($filter, $api, $currency) {
         value *= 1000000; // uBTC
       }
       return unit + (options.space ? " " : "") + $filter('number')(value, 3);
+    } else if (displayCurrency === 'XRP') {
+      value /= 1000;
+      return $filter('number')(value, 1) + ' kXRP';
+    } else if (displayCurrency === 'MSC') {
+      return $filter('number')(value, 1) + ' MSC';
     }
   };
 });
