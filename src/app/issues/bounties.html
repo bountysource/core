@@ -24,14 +24,14 @@
           <tbody>
           <tr ng-repeat="bounty in issue.bounties | orderBy:sort_column:sort_reverse">
             <td>
-              <div ng-show="bounty.person">
-                <a owner-href="bounty.person"><img class="thumbnail no-margin" ng-src="{{ bounty.person.image_url }}"></a>
+              <div ng-show="bounty.owner">
+                <a owner-href="bounty.owner"><img class="thumbnail no-margin" ng-src="{{ bounty.owner.image_url_small }}"></a>
               </div>
-              <img ng-hide="bounty.person" class="thumbnail no-margin" src="images/anon.jpg">
+              <img ng-hide="bounty.owner" class="thumbnail no-margin" src="images/anon.jpg">
             </td>
             <td>
               <a owner-href="bounty.owner">{{bounty.owner.display_name}}</a>
-              <div ng-hide="bounty.person">Anonymous</div>
+              <div ng-hide="bounty.owner">Anonymous</div>
             </td>
             <td>
               <div><strong>{{ bounty.amount | dollars }}</strong></div>
