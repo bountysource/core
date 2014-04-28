@@ -12,6 +12,8 @@ angular.module('directives').directive('ownerHref', function() {
             element.attr("href", "/teams/"+owner.slug);
           } else if ((/^(?:repository|tracker)(?:::[a-z]+)*$/i).test(owner.type)) {
             element.attr("href", "/trackers/"+owner.id);
+          } else {
+            element.addClass("unstyled-anchor");
           }
         }
       });
