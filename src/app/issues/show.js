@@ -35,10 +35,4 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
     issue_id: $routeParams.id,
     include_author: true
   });
-
-  // Scroll to linked comment after render finishes
-  $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
-    $anchorScroll();
-  });
-
 });
