@@ -38,7 +38,7 @@ angular.module('resources').factory('Bounties', function ($rootScope, $resource)
       method: 'GET',
       isArray: true,
       headers: { 'Accept': 'application/vnd.bountysource+json; version=2' },
-      interceptor: {  
+      interceptor: {
         response: function (response) {
           return filterUniqueBackers(response);
         },
