@@ -1,6 +1,18 @@
 'use strict';
 
-angular.module("app").controller('TeamIssuesController', function ($scope, $api) {
+angular.module("app").controller('TeamIssuesController', function ($scope, $api, $routeParams, $location) {
+  // page initializers
+  // initialize selected_trackers object
+  $scope.selected_trackers = initializeTrackersFromParams($routeParams) || {};
+
+  function initializeTrackersFromParams (params) {
+    var tracker_id_array = params.tracker_ids.split(",");
+    var new_selected_trackers = {};
+    for (var i = 0; i < tracker_id_array.length; i++) {
+      new_selected_trackers[tracker_id_array[i]] = true;
+    };
+    return new_selected_trackers;
+  }
 
   $scope.team_promise.then(function (team) {
 
@@ -52,9 +64,6 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
     $scope.getIssues();
   });
 
-  // initialize selected_trackers object
-  $scope.selected_trackers = {};
-
   // initialize issue-status filter button group
   $scope.issueStatus = "open";
 
@@ -85,7 +94,14 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api)
         processed_tracker_ids.push(tracker_ids[i]);
       }
     }
+
+    // update routeParams based on selected trackers
+    updateRouteParams({"tracker_ids": processed_tracker_ids.join(",")});
     return processed_tracker_ids;
+  }
+
+  function updateRouteParams (options) {
+    $location.search(options);
   }
 
   // create the params for the issue status button-group filter

@@ -28,6 +28,7 @@ angular.module('app').controller('TrackersIndex', function ($scope, $api, $windo
   // Load initial trackers
   $scope.getTrackers({
     include_description: true,
+    include_owner: true,
     order: '+bounty',
     page: 1,
     per_page: 30
