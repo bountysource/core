@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q) {
+angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q, Tracker) {
 
   // Top Fundraisers
   $api.v2.fundraisers({
@@ -24,9 +24,14 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q
     order: '+bounty',
     has_bounties: true,
     include_description: true,
+    include_owner: true,
     per_page: 5
   }).then(function(response) {
-    $scope.topTrackers = angular.copy(response.data);
+    $scope.topTrackers = [];
+    for (var i = 0; i < response.data.length; i++) {
+      $scope.topTrackers.push(new Tracker(response.data[i]));
+    };
+    $scope.topTrackers;
   });
 
   // Top Backers

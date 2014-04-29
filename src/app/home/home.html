@@ -55,7 +55,7 @@
 
         <!-- Top Trackers -->
         <div class="col-md-6 col-sm-6">
-          <a ng-repeat="tracker in topTrackers" ng-href="/trackers/{{tracker.slug}}">
+          <a ng-repeat="tracker in topTrackers" ng-href="{{ tracker.url([tracker.id]) }}">
             <div class="row homepage-card">
               <div class="col-md-3 col-xs-3">
                 <img class="img-responsive" ng-src="{{tracker.image_url_medium}}" />
