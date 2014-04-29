@@ -8,7 +8,7 @@
 angular.module('filters').filter('dollars', function($filter, $api, $currency, $location) {
 
   function pageChecker (page) {
-    var match = (/bounty/).test(page) || (/fundraiser\?page=pledge/).test(page) || (/^\/teams\/[a-z-_0-9]+\/account/).test(page);
+    var match = (/^\/issues\/[a-z-_0-9]+\/bounty/).test(page) || (/fundraiser\?page=pledge/).test(page) || (/^\/teams\/[a-z-_0-9]+\/account/).test(page);
     return match;
   }
 
