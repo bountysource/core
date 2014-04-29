@@ -1,6 +1,6 @@
 <ng-form>
   <!-- Google Wallet -->
-  <div class="radio" ng-show="$currency.isUSD()">
+  <div class="radio" ng-show="$currency.isUSD() || !$currency.isBTC()">
     <label>
       <input type="radio" ng-model="value" value="google">
       <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
@@ -18,7 +18,7 @@
   </div>
 
   <!-- PayPal -->
-  <div class="radio" ng-show="$currency.isUSD()">
+  <div class="radio" ng-show="$currency.isUSD() || !$currency.isBTC()">
     <label>
       <input type="radio" ng-model="value" value="paypal">
       <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
@@ -27,7 +27,7 @@
   </div>
 
   <!-- Personal Account -->
-  <div class="radio" ng-show="$currency.isUSD() && person.account.balance > 0">
+  <div class="radio" ng-show="$currency.isUSD() || !$currency.isBTC() && person.account.balance > 0">
     <label>
       <input type="radio" ng-model="value" value="personal">
       <img style="width: 16px; height: 16px;" ng-src="{{person.image_url}}" />
@@ -36,7 +36,7 @@
   </div>
 
   <!-- Team accounts -->
-  <div class="radio" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" ng-show="$currency.isUSD()">
+  <div class="radio" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" ng-show="$currency.isUSD() || !$currency.isBTC()">
     <label>
       <input type="radio" ng-model="$parent.value" value="team/{{team.id}}" ng-disabled="!team.is_developer || team.account_balance <= 0 || onTeamPage(team)"/>
       <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}" />
