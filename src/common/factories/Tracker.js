@@ -7,14 +7,14 @@ angular.module('factories').factory('Tracker', function () {
     var tracker_module = {
       url: function (tracker_ids) {
         if (this.owner && this.owner.type === "Team") {
-          var tracker_id_params = tracker_ids.join(",")
+          var tracker_id_params = tracker_ids.join(",");
           return "/teams/"+this.owner.slug+"/issues?tracker_ids="+tracker_id_params;
         } else {
           return "/trackers/"+this.slug;
         }
       }
     };
-    return angular.extend(tracker, tracker_module)
+    return angular.extend(tracker, tracker_module);
   };
 
 });

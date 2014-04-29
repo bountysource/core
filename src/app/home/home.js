@@ -30,8 +30,8 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q
     $scope.topTrackers = [];
     for (var i = 0; i < response.data.length; i++) {
       $scope.topTrackers.push(new Tracker(response.data[i]));
-    };
-    $scope.topTrackers;
+    }
+    return $scope.topTrackers;
   });
 
   // Top Backers

@@ -3,16 +3,16 @@
 angular.module("app").controller('TeamIssuesController', function ($scope, $api, $routeParams, $location) {
   // page initializers
   // initialize selected_trackers object
-  $scope.selected_trackers = initializeTrackersFromParams($routeParams) || {};
-
   function initializeTrackersFromParams (params) {
     var tracker_id_array = params.tracker_ids.split(",");
     var new_selected_trackers = {};
     for (var i = 0; i < tracker_id_array.length; i++) {
       new_selected_trackers[tracker_id_array[i]] = true;
-    };
+    }
     return new_selected_trackers;
   }
+
+  $scope.selected_trackers = initializeTrackersFromParams($routeParams) || {};
 
   $scope.team_promise.then(function (team) {
 
