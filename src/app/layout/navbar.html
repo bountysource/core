@@ -51,7 +51,12 @@
           </ul>
         </li>
 
-        <li><a href="/cart"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+        <li ng-if="!cart.isEmpty()">
+          <a href="/cart">
+            <i class="glyphicon glyphicon-shopping-cart"></i>
+            <span class="label label-info">{{cart.items.length | number:0}}</span>
+          </a>
+        </li>
 
         <!-- User dropdown if logged in -->
         <li class="dropdown" ng-if="current_person">

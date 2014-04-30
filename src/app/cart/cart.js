@@ -1,25 +1,45 @@
 'use strict';
 
-angular.module('app').controller('ShoppingCartController', function($scope, $window, $api, $cart, $log, ShoppingCart, ShoppingCartItem) {
-
-  window.ShoppingCartItem = ShoppingCartItem;
+angular.module('app').controller('ShoppingCartController', function($scope, $routeParams, $window, $api, $cart, $log, $filter, $currency, ShoppingCart, ShoppingCartItem) {
 
   // Load shopping cart
-  $scope.cart = ShoppingCart.get();
+  $cart.getInstance().then(function (cart) {
+    $scope.cart = cart;
+  });
 
   $scope.$watch('cart', function (cart) {
     if (angular.isObject(cart)) {
       for (var i=0; $scope.cart.items && i<$scope.cart.items.length; i++) {
-        // Stupid hack: item amounts to float
+        // Stupid: item amounts to float
         $scope.cart.items[i].amount = $window.parseFloat($scope.cart.items[i].amount);
 
         // Initialize total
         $scope.cart.items[i].total = $scope.calculateItemTotal($scope.cart.items[i]);
+
+        // For bounties, initialize the tweet boolean from promotion column.
+        if ($scope.isBounty(cart.items[i]) && angular.isUndefined(cart.items[i].tweet)) {
+          cart.items[i].tweet = cart.items[i].promotion === 'tweet';
+        }
       }
     }
   }, true);
 
+  $scope.checkoutPayload = {
+    checkout_method: $routeParams.checkout_method || 'google'
+  };
+
   $scope.checkoutMethod = undefined;
+
+  $scope.bountyExpirationOptions = [
+    { value: null, description: 'Never' },
+    { value: 3, description: '3 Months (' + $filter('dollars')(250) + ' minimum)' },
+    { value: 6, description: '6 Months (' + $filter('dollars')(100) + ' minimum)' }
+  ];
+
+  $scope.bountyUponExpirationOptions = [
+    { value: 'refund', description: 'Refund to my Bountysource account' },
+    { value: 'donate to project', description: 'Donate to project' }
+  ];
 
   // Load the current Person and their teams
   $scope.$watch('current_person', function (person) {
@@ -44,21 +64,34 @@ angular.module('app').controller('ShoppingCartController', function($scope, $win
 
   $scope.updateItem = function (index) {
     var payload = $scope.getBaseItemAttributes($scope.cart.items[index]);
-    return ShoppingCartItem.update({ index: index }, payload);
+    return ShoppingCartItem.update({
+      uid: $scope.cart.getUid(),
+      index: index
+    }, payload);
   };
 
   $scope.removeItem = function (index) {
     if ($window.confirm('Are you for real?')) {
-      ShoppingCartItem.delete({ index: index });
+      ShoppingCartItem.delete({
+        uid: $scope.cart.getUid(),
+        index: index
+      });
       $scope.cart.items.splice(index,1);
     }
   };
 
   $scope.checkout = function () {
-    console.log('Checkout!');
+    $scope.$watch('current_person', function (person) {
+      if (angular.isObject(person)) {
+
+      } else if (person === false) {
+        $api.set_post_auth_url($location.path(), $scope.checkoutPayload);
+      }
+    });
   };
 
   $scope.setOwner = function (index, type, owner) {
+    var uid = $scope.cart.getUid();
     switch (type) {
       case ('anonymous'):
         $scope.cart.items[index].owner = {
@@ -66,6 +99,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $win
           image_url: 'images/anon.jpg'
         };
         ShoppingCartItem.update({ index: index }, {
+          uid: uid,
           owner_id: null,
           owner_type: null,
           anonymous: true
@@ -75,6 +109,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $win
       case ('person'):
         $scope.cart.items[index].owner = angular.copy(owner);
         ShoppingCartItem.update({ index: index }, {
+          uid: uid,
           owner_id: owner.id,
           owner_type: 'Person',
           anonymous: false
@@ -84,6 +119,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $win
       case ('team'):
         $scope.cart.items[index].owner = angular.copy(owner);
         ShoppingCartItem.update({ index: index }, {
+          uid: uid,
           owner_id: owner.id,
           owner_type: 'Team',
           anonymous: false
@@ -93,10 +129,6 @@ angular.module('app').controller('ShoppingCartController', function($scope, $win
       default:
         $log.error('Unexpected owner:', type, owner);
     }
-
-    console.log(index, owner);
-
-    // ShoppingCartItem.update({ index: index })
   };
 
   $scope.getBaseItemAttributes = function(item) {
@@ -110,7 +142,59 @@ angular.module('app').controller('ShoppingCartController', function($scope, $win
     // Remove owner, it is set independently
     delete attributes.owner;
 
+    // Bounty tweet option
+    if (attributes.tweet === true) {
+      attributes.promotion = 'tweet';
+    } else if (attributes.tweet === false) {
+      attributes.promotion = null;
+    }
+
     return attributes;
+  };
+
+  $scope.rewardChanged = function (index) {
+    var item = $scope.cart.items[index];
+
+    // Find reward from select value (reward id)
+    for (var i=0; item && i<item.fundraiser.rewards.length; i++) {
+      if (item.fundraiser.rewards[i].id === item.reward_id) {
+
+        // Set reward object on item
+        $scope.cart.items[index].reward = angular.copy(item.fundraiser.rewards[i]);
+
+        // Set Pledge amount to reward amount if necessary
+        if (item.amount < item.fundraiser.rewards[i].amount) {
+          $scope.cart.items[index].amount = item.fundraiser.rewards[i].amount;
+        }
+
+        // Update item in cart
+        $scope.updateItem(index);
+      }
+    }
+  };
+
+  $scope.bountyExpirationChanged = function (index) {
+    var item = $scope.cart.items[index];
+
+    switch (item.bounty_expiration) {
+      case (3):
+        if (item.amount < 250) {
+          $scope.cart.items[index].amount = 250;
+        }
+        break;
+
+      case (6):
+        if (item.amount < 100) {
+          $scope.cart.items[index].amount = 100;
+        }
+        break;
+
+      default:
+
+        break;
+    }
+
+    $scope.updateItem(index);
   };
 
   $scope.calculateItemTotal = function (item) {
@@ -127,8 +211,6 @@ angular.module('app').controller('ShoppingCartController', function($scope, $win
           total += 20;
         }
 
-        switch (item.bounty_expiration)
-
         break;
 
       case ('TeamPayin'):
@@ -138,13 +220,64 @@ angular.module('app').controller('ShoppingCartController', function($scope, $win
     return total;
   };
 
-
   $scope.calculateCartTotal = function () {
     var total = 0.0;
-    for (var i=0; $scope.cart.items && i<$scope.cart.items.length; i++) {
+    for (var i=0; $scope.cart && $scope.cart.items && i<$scope.cart.items.length; i++) {
       total += $scope.cart.items[i].total;
     }
     return total;
+  };
+
+  // Is the item valid?
+  $scope.itemValid = function (item) {
+    // If the item has not loaded yet, fake as valid
+    if (angular.isUndefined(item)) { return true; }
+
+    switch (item.type) {
+      case ('Pledge'):
+        // Reward amount minimum
+        var reward;
+        for (var i=0; i<item.fundraiser.rewards.length; i++) {
+          reward = item.fundraiser.rewards[i];
+          if (reward.id === item.reward_id && item.amount < reward.amount) {
+            return false;
+          }
+        }
+        return true;
+
+      case ('Bounty'):
+        switch (item.bounty_expiration) {
+          case (3):
+            if (item.amount < 250) { return false; }
+            break;
+
+          case (6):
+            if (item.amount < 100) { return false; }
+            break;
+        }
+
+      case ('TeamPayin'):
+        return true;
+
+      default:
+        return false;
+    }
+  };
+
+  // Are all of the items valid?
+  $scope.itemsValid = function () {
+    for (var i=0; i<$scope.cart.items.length; i++) {
+      if (!$scope.itemValid($scope.cart.items[i])) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  // Can the cart be checked out?
+  $scope.canCheckout = function () {
+    // return angular.isDefined($scope.checkout_method) &&
+    return $scope.checkoutPayload.checkout_method && $scope.itemsValid();
   };
 
 });

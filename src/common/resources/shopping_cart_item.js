@@ -6,6 +6,11 @@ angular.module('resources').factory('ShoppingCartItem', function ($rootScope, $r
     update: {
       method: 'PATCH',
       headers: { 'Accept': 'application/vnd.bountysource+json; version=2' }
+    },
+
+    delete: {
+      method: 'DELETE',
+      headers: { 'Accept': 'application/vnd.bountysource+json; version=2' }
     }
   });
 

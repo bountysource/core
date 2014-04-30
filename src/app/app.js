@@ -92,7 +92,7 @@ angular.module('app')
     }
   })
 
-  .run(function($rootScope, $window, $api, $currency) {
+  .run(function($rootScope, $window, $api, $currency, $cart, ShoppingCart) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
 
@@ -100,5 +100,14 @@ angular.module('app')
     // Something else may be causing this issue, but this works for now
     $rootScope.$on('$routeChangeSuccess', function() {
       $window.scrollTo(0,0);
+    });
+
+    // Load shopping cart and provide via $rootScope
+    $cart.getInstance().then(function (cart) {
+      // Try to claim the shopping cart loaded from uid on cookie
+      $cart.claim({
+        uid: cart.getUid(),
+        access_token: $api.get_access_token()
+      });
     });
   });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics, $modal, $currency) {
+angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics, $modal, $currency, $cart) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -136,11 +136,26 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         return amount;
       }
 
-      scope.pledgeRedirect = function(amount) {
+      scope.pledgeRedirect = function(amount, reward_id) {
         // parse amount into BTC, if user is in BTC mode
         var converted_amount = convertCurrency(amount) || 15;
-        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge', amount: converted_amount });
+
         $analytics.pledgeStart({ amount: amount, type: 'buttons' });
+
+        scope.$watch('activeFundraiser', function (fundraiser) {
+          if (angular.isObject(fundraiser)) {
+            if (fundraiser) {
+              return $cart.addPledge({
+                amount: amount,
+                currency: $currency.value,
+                fundraiser_id: fundraiser.id,
+                reward_id: reward_id
+              }).$promise.then(function () {
+                  $location.url('/cart');
+                });
+            }
+          }
+        });
       };
 
       scope.payinRedirect = function (amount) {
@@ -148,28 +163,40 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         if(amount) {
           params.amount = convertCurrency(amount);
         }
-        $location.url('/teams/'+scope.team.slug+'/account').search(params);
+
         $analytics.teamPayinStart({ amount: amount, type: 'buttons'});
+
+        scope.$watch('team', function (team) {
+          if (angular.isObject(team)) {
+            return $cart.addTeamPayin({
+              amount: amount,
+              currency: $currency.value,
+              team_id: team.id
+            }).$promise.then(function () {
+                $location.url('/cart');
+              });
+          }
+        });
       };
 
       scope.pledgeWithRewardRedirect = function(reward) {
-        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge', amount: reward.amount });
         $analytics.pledgeStart({ amount: reward.amount, type: 'reward' });
+        scope.pledgeRedirect(reward.amount, reward.id);
       };
 
       scope.bigPledgeButtonClicked = function() {
-        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge' });
         $analytics.pledgeStart({ type: 'bigbutton' });
+        scope.pledgeRedirect(null);
       };
 
       scope.customPayinRedirect = function (amount) {
-        $location.url('/teams/'+scope.team.slug+'/account').search({ amount: amount });
         $analytics.teamPayinStart({ amount: amount, type: 'custom'});
+        scope.pledgeRedirect(amount);
       };
 
       scope.customPledgeRedirect = function(amount) {
-        $location.url('/teams/' + scope.team.slug + '/fundraiser').search({ page: 'pledge', amount: amount });
         $analytics.pledgeStart({ amount: amount, type: 'custom' });
+        scope.pledgeRedirect(amount);
       };
 
       // Track Create Fundraiser Click
