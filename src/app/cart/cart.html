@@ -1,4 +1,4 @@
-<div ng-controller="ShoppingCartController">
+<div>
 
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
@@ -118,7 +118,7 @@
                     <div class="checkbox">
                       <label>
                         <input type="checkbox" ng-model="item.tweet" ng-change="updateItem($index)" />
-                        <small>Tweet from @Bountysource (+{{ 20 | dollars }})?</small>
+                        <small>Tweet from @Bountysource <strong>(+$20)</strong>?</small>
                       </label>
                     </div>
                   </div>
@@ -149,7 +149,7 @@
                     <p class="form-control-static text-warning">{{item.reward.fulfillment_details}}</p>
                   </div>
 
-                  <!-- Surevey response -->
+                  <!-- Survey response -->
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Details:</small></label>
                     <div class="col-md-9 col-sm-8 col-xs-7">
@@ -163,11 +163,18 @@
 
           <!-- Amount, delete button -->
           <td class="col-md-3 col-sm-4 col-xs-4">
-            <money-input-group small="true" currency="item.currency" ng-class="{ 'has-error': !itemValid(item) }">
-              <input class="form-control input-sm"
+
+            <div class="input-group">
+              <span class="input-group-addon">
+                <currency-unit></currency-unit>
+              </span>
+              <input type="number"
+                     step="any"
+                     class="form-control input-sm"
                      ng-model="item.amount"
+                     ng-blur="updateItem($index)"
                      required />
-            </money-input-group>
+            </div>
 
             <div class="text-right">
               <button class="btn btn-link" ng-click="removeItem($index)">Delete</button>
@@ -178,7 +185,7 @@
         <tr>
           <td colspan="3" class="text-right">
             <div>
-              <h4>Total: {{calculateCartTotal() | dollars}}</h4>
+              <h4>Total: <currency-unit></currency-unit>{{ calculateCartTotal() || 0 }}</h4>
             </div>
           </td>
         </tr>

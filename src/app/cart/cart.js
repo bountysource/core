@@ -1,9 +1,16 @@
 'use strict';
 
-angular.module('app').controller('ShoppingCartController', function($scope, $routeParams, $window, $api, $cart, $log, $filter, $currency, ShoppingCart, ShoppingCartItem) {
+angular.module('app').controller('ShoppingCartController', function($scope, $routeParams, $window, $location, $api, $cart, $log, $filter, $currency, $timeout, ShoppingCart, ShoppingCartItem) {
 
   // Load shopping cart
   $cart.getInstance().then(function (cart) {
+
+    $timeout(function () {
+      for (var i=0; i<cart.items.length; i++) {
+        cart.items[i].amount = $currency.convert(cart.items[i].amount, $currency.value, cart.items[i].currency);
+      }
+    }, 0);
+
     $scope.cart = cart;
   });
 
@@ -11,7 +18,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
     if (angular.isObject(cart)) {
       for (var i=0; $scope.cart.items && i<$scope.cart.items.length; i++) {
         // Stupid: item amounts to float
-        $scope.cart.items[i].amount = $window.parseFloat($scope.cart.items[i].amount);
+        $scope.cart.items[i].amount = $window.parseFloat($scope.cart.items[i].amount) || null;
 
         // Initialize total
         $scope.cart.items[i].total = $scope.calculateItemTotal($scope.cart.items[i]);
@@ -25,15 +32,16 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
   }, true);
 
   $scope.checkoutPayload = {
-    checkout_method: $routeParams.checkout_method || 'google'
+    checkout_method: $routeParams.checkout_method || 'google',
+    currency: $routeParams.currency || $currency.value
   };
 
   $scope.checkoutMethod = undefined;
 
   $scope.bountyExpirationOptions = [
     { value: null, description: 'Never' },
-    { value: 3, description: '3 Months (' + $filter('dollars')(250) + ' minimum)' },
-    { value: 6, description: '6 Months (' + $filter('dollars')(100) + ' minimum)' }
+    { value: 3, description: '3 Months ($250 minimum)' },
+    { value: 6, description: '6 Months ($100 minimum)' }
   ];
 
   $scope.bountyUponExpirationOptions = [
@@ -64,6 +72,10 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
 
   $scope.updateItem = function (index) {
     var payload = $scope.getBaseItemAttributes($scope.cart.items[index]);
+
+    // Add currency from global value
+    payload.currency = $currency.value;
+
     return ShoppingCartItem.update({
       uid: $scope.cart.getUid(),
       index: index
@@ -84,8 +96,11 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
     $scope.$watch('current_person', function (person) {
       if (angular.isObject(person)) {
 
+        $cart.checkout($scope.checkoutPayload)
+
       } else if (person === false) {
         $api.set_post_auth_url($location.path(), $scope.checkoutPayload);
+        $location.url('/signin');
       }
     });
   };
@@ -174,18 +189,20 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
   };
 
   $scope.bountyExpirationChanged = function (index) {
-    var item = $scope.cart.items[index];
+    var min, item = $scope.cart.items[index];
 
     switch (item.bounty_expiration) {
       case (3):
-        if (item.amount < 250) {
-          $scope.cart.items[index].amount = 250;
+        min = $currency.convert(250, $currency.value, 'USD');
+        if (item.amount < min) {
+          $scope.cart.items[index].amount = min;
         }
         break;
 
       case (6):
-        if (item.amount < 100) {
-          $scope.cart.items[index].amount = 100;
+        min = $currency.convert(100, $currency.value, 'USD');
+        if (item.amount < min) {
+          $scope.cart.items[index].amount = min;
         }
         break;
 
@@ -208,7 +225,8 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
         total += parseFloat(item.amount);
 
         if (item.tweet === true) {
-          total += 20;
+          // total += $currency.convert(20, $currency.value);
+          total += $currency.convert(20, $currency.value, 'USD');
         }
 
         break;
@@ -232,6 +250,9 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
   $scope.itemValid = function (item) {
     // If the item has not loaded yet, fake as valid
     if (angular.isUndefined(item)) { return true; }
+
+    // Amount is just *not there*
+    if (angular.isUndefined(item.amount) || item.amount === null) { return false; }
 
     switch (item.type) {
       case ('Pledge'):
@@ -266,7 +287,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
 
   // Are all of the items valid?
   $scope.itemsValid = function () {
-    for (var i=0; i<$scope.cart.items.length; i++) {
+    for (var i=0; $scope.cart && $scope.cart.items && i<$scope.cart.items.length; i++) {
       if (!$scope.itemValid($scope.cart.items[i])) {
         return false;
       }

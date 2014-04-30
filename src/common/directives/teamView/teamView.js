@@ -129,23 +129,15 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       /*****************************
        * Pledge Buttons
        * */
-      function convertCurrency (amount) {
-        if (amount && $currency.isBTC()) {
-          amount = $currency.usdToBtc(amount);
-        }
-        return amount;
-      }
-
       scope.pledgeRedirect = function(amount, reward_id) {
-        // parse amount into BTC, if user is in BTC mode
-        var converted_amount = convertCurrency(amount) || 15;
-
         $analytics.pledgeStart({ amount: amount, type: 'buttons' });
 
         scope.$watch('activeFundraiser', function (fundraiser) {
           if (angular.isObject(fundraiser)) {
             if (fundraiser) {
               return $cart.addPledge({
+
+                // Sent as USD
                 amount: amount,
                 currency: $currency.value,
                 fundraiser_id: fundraiser.id,
@@ -159,11 +151,6 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       };
 
       scope.payinRedirect = function (amount) {
-        var params = {};
-        if(amount) {
-          params.amount = convertCurrency(amount);
-        }
-
         $analytics.teamPayinStart({ amount: amount, type: 'buttons'});
 
         scope.$watch('team', function (team) {
@@ -181,11 +168,14 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       scope.pledgeWithRewardRedirect = function(reward) {
         $analytics.pledgeStart({ amount: reward.amount, type: 'reward' });
-        scope.pledgeRedirect(reward.amount, reward.id);
+        scope.pledgeRedirect($currency.convert(reward.amount, $currency.value, 'USD'), reward.id);
       };
 
       scope.bigPledgeButtonClicked = function() {
         $analytics.pledgeStart({ type: 'bigbutton' });
+
+        // Amount required, send with the default amount
+        // for the current currency value.
         scope.pledgeRedirect(null);
       };
 

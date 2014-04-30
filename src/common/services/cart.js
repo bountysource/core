@@ -7,8 +7,6 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
 
   var self = this;
 
-  $window.cart = this;
-
   this.isEmpty = function () {
     return this.items.length <= 0;
   };
@@ -86,6 +84,6 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
       }
     });
     return deferred.promise;
-  }
+  };
 
 });
