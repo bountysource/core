@@ -2,6 +2,7 @@
 
 angular.module('app').controller('PressController', function($scope) {
   $scope.articles = [
+    { date: '4/29/14', source: 'CoinDesk', title: 'Bountysource Now Lets You Fund Open-Source Projects with Bitcoin', href: 'http://www.coindesk.com/bountysource-now-lets-fund-open-source-projects-bitcoin/', author: 'Kadhim Shubber' },
     { date: '1/22/14', source: 'The Wall Street Journal', title: 'New Use for Bitcoin: Compensation for Open-Source Software Development', href: 'http://blogs.wsj.com/venturecapital/2014/01/22/new-use-for-bitcoin-compensation-for-open-source-software-development', author: 'Yuliya Chernova' },
     { date: '9/17/13', source: 'Opensource.com', title: 'Bountysource CEO talks open source crowdfunding and bounties for developers', href: 'http://opensource.com/business/13/9/bountysource-CEO-interview', author: 'Ginny Skalski' },
     { date: '8/1/13', source: "NetworkWorld's Linux Tycoon", title: 'Open source gets its own crowd-funding site, with bounties included', author: 'Bryan Lunduke', href: 'http://www.networkworld.com/community/node/83569' },
