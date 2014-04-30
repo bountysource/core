@@ -91,7 +91,7 @@ a:hover {
 }
 
 .image_body_html img {
-  width: 100%;
+  max-width: 100%;
 }
 
 
