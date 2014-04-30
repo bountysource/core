@@ -1,8 +1,8 @@
 <div class="input-group">
   <!-- If in USD mode, do not show currency dropdown. -->
-  <span class="input-group-addon" ng-if="$currency.isUSD() || !$currency.isBTC()">$</span>
+  <span class="input-group-addon" ng-if="$currency.isUSD()">$</span>
 
-  <div class="input-group-btn" ng-if="$currency.isBTC()">
+  <div class="input-group-btn" ng-if="!$currency.isUSD()">
     <button class="btn btn-default dropdown-toggle" href="#">
       <span ng-if="$parent.currency === 'USD'">$</span>
       <span ng-if="$parent.currency === 'BTC'">฿</span>
