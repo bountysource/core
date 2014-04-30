@@ -51,7 +51,7 @@ angular.module('filters').filter('dollars', function($filter, $api, $currency, $
         value /= 1000;
         return $filter('number')(value, 0) + 'k XRP';
       } else {
-        return $filter('number')(value, 0) + ' XRP';
+        return $filter('number')(value, 0) + ' XRP';        
       }
     } else if (displayCurrency === 'MSC') {
       return $filter('number')(value, 1) + ' MSC';
