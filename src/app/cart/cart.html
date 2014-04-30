@@ -14,7 +14,7 @@
           <!-- Item image -->
           <td class="col-md-1 col-sm-1 hidden-xs">
             <!-- Bounty -->
-            <a ng-if="isBounty(item)" ng-href="/issues/{{item.issue.tracker.slug}}">
+            <a ng-if="isBounty(item)" ng-href="/trackers/{{item.issue.tracker.slug}}">
               <img class="img-responsive" ng-src="{{item.issue.tracker.image_url_medium}}" />
             </a>
 
@@ -34,7 +34,7 @@
 
             <!-- Title -->
             <div>
-              <a ng-if="isBounty(item)" ng-href="/issues/{{item.issue.tracker.slug}}"><h4 style="margin-top: 0;">Bounty for "{{item.issue.title}}"</h4></a>
+              <a ng-if="isBounty(item)" ng-href="/issues/{{item.issue.slug}}"><h4 style="margin-top: 0;">Bounty for "{{item.issue.title}}"</h4></a>
               <a ng-if="isPledge(item)" ng-href="/fundraisers/{{item.fundraiser.slug}}"><h4 style="margin-top: 0;">Pledge to "{{item.fundraiser.title}}"</h4></a>
               <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}"><h4 style="margin-top: 0;">Pledge to "{{item.team.name}}"</h4></a>
             </div>
