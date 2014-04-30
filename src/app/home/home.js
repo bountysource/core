@@ -20,18 +20,14 @@ angular.module('app').controller('HomeCtrl', function ($scope, $window, $api, $q
   });
 
   // Top Issue Trackers
-  $api.v2.trackers({
+  Tracker.query({
     order: '+bounty',
     has_bounties: true,
     include_description: true,
     include_owner: true,
     per_page: 5
-  }).then(function(response) {
-    $scope.topTrackers = [];
-    for (var i = 0; i < response.data.length; i++) {
-      $scope.topTrackers.push(new Tracker(response.data[i]));
-    }
-    return $scope.topTrackers;
+  }, function (response) {
+    $scope.topTrackers = response;
   });
 
   // Top Backers
