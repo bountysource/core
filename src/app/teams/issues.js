@@ -4,14 +4,12 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
   // page initializers
   // initialize selected_trackers object
   function initializeTrackersFromParams (params) {
-    if(params.tracker_ids) {
-      var tracker_id_array = params.tracker_ids.split(",");
-      var new_selected_trackers = {};
-      for (var i = 0; i < tracker_id_array.length; i++) {
-        new_selected_trackers[tracker_id_array[i]] = true;
-      }
-      return new_selected_trackers;
+    var tracker_id_array = params.tracker_ids.split(",");
+    var new_selected_trackers = {};
+    for (var i = 0; i < tracker_id_array.length; i++) {
+      new_selected_trackers[tracker_id_array[i]] = true;
     }
+    return new_selected_trackers;
   }
 
   $scope.selected_trackers = initializeTrackersFromParams($routeParams) || {};
@@ -98,10 +96,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
     }
 
     // update routeParams based on selected trackers
-    if(processed_tracker_ids.length > 0) {
-      updateRouteParams({"tracker_ids": processed_tracker_ids.join(",")});
-    }
-
+    updateRouteParams({"tracker_ids": processed_tracker_ids.join(",")});
     return processed_tracker_ids;
   }
 
