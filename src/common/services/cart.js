@@ -2,6 +2,7 @@
 
 angular.module('services').service('$cart', function ($rootScope, $window, $q, $cookieStore, $log, $currency, $api, ShoppingCart, ShoppingCartItems) {
 
+  this._resolved = false;
   this._cookieName = 'shoppingCartUid';
   this.items = [];
 
@@ -11,13 +12,24 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
     return this.items.length <= 0;
   };
 
+  /*
+  * Add item to cart.
+  * @return - promise of item add
+  * */
   this.addItem = function (itemType, amount, currency, attributes) {
-    var payload = angular.extend(attributes, {
-      item_type: itemType,
-      amount: amount,
-      currency: currency
+    var deferred = $q.defer();
+    this.findOrCreateCart().then(function (cart) {
+      if (angular.isObject(cart)) {
+        var payload = angular.extend(attributes, {
+          item_type: itemType,
+          amount: amount,
+          currency: currency
+        });
+        var response = ShoppingCartItems.create({ uid: self.getUid() }, payload);
+        deferred.resolve(response);
+      }
     });
-    return ShoppingCartItems.create({ uid: this.getUid() }, payload);
+    return deferred.promise;
   };
 
   this.addPledge = function (pledge) {
@@ -43,21 +55,50 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
   * Create a new cart if the user does not have a cart token stored locally.
   * */
   this.getInstance = function () {
+    return this.findOrCreateCart();
+  };
+
+  /*
+  * Find or create cart from server.
+  * */
+  this.findOrCreateCart = function () {
     var deferred = $q.defer();
     var uid = this.getUid();
-    if (uid) {
-      ShoppingCart.get({ uid: uid }, function (cart) {
+
+    // Cart already loaded from server
+    if (this._resolved) {
+      deferred.resolve(self);
+
+      // There is a UID cookie, but cart has not been loaded.
+      // Load cart from server.
+    } else if (angular.isDefined(uid)) {
+      ShoppingCart.get({ uid: uid }).$promise.then(function (cart) {
+        self._resolved = true;
         self.items = angular.copy(cart.items);
         deferred.resolve(self);
-        $log.info('Loaded cart from server', cart);
       });
     } else {
-      ShoppingCart.create(function (cart) {
-        self.setUid(cart.uid);
-        deferred.resolve(self);
-        $log.info('Created new cart', cart);
+      // If logged in, check to see if person has a cart
+      $rootScope.$watch('current_person', function (person) {
+        if (angular.isObject(person)) {
+          // Get cart from server. copy items
+          ShoppingCart.get({ access_token: $api.get_access_token() }).$promise.then(function (cart) {
+            self._resolved = true;
+            self.setUid(cart.uid);
+            self.items = angular.copy(cart.items);
+            deferred.resolve(self);
+          });
+        } else if (person === false) {
+          // Just create a cart and store dat UID
+          ShoppingCart.create().$promise.then(function (cart) {
+            self._resolved = true;
+            self.setUid(cart.uid);
+            deferred.resolve(self);
+          });
+        }
       });
     }
+
     return deferred.promise;
   };
 
@@ -84,6 +125,21 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
       }
     });
     return deferred.promise;
+  };
+
+  /*
+  * Checkout for cart. Action depends on checkout method.
+  * - Google Wallet: Show checkout modal
+  * - Paypal: Redirect to checkout page
+  * - Coinbase: Redirect to checkout page
+  * - Personal: Redirect to receipt page on success
+  * - Team: Redirect to receipt page on success
+  *
+  * @param uid - uid for the shopping cart on server
+  * @param checkout_method - the method to checkout with
+  * */
+  this.checkout = function (uid, checkout_method) {
+    ShoppingCart.checkout();
   };
 
 });

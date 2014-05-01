@@ -13,12 +13,14 @@ angular.module('directives').directive('currencyInput', function ($rootScope, $c
     link: function (scope) {
 
       var setDisplay = function () {
-        scope.displayValue = $currency.convert(scope.currencyAmount, $currency.value, scope.currencyIso);
+        scope.displayValue = $currency.convert(scope.currencyAmount, scope.currencyIso || $currency.value, $currency.value);
       };
 
       scope.updateModel = function () {
         scope.currencyAmount = scope.displayValue;
-        scope.currencyIso = $currency.value;
+        if (scope.currencyIso) {
+          scope.currencyIso = $currency.value;
+        }
       };
 
       // Initailize display amount

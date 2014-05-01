@@ -7,8 +7,12 @@ angular.module('app').controller('BountyBoxController', function ($scope, $route
 
   function addBountyToCart(amount, currency) {
     currency = currency || $currency.value;
+
+    // Button values are hardocded with USD. Conver if needed
+    var converted = $currency.convert(amount, 'USD', $currency.value);
+
     return $cart.addBounty({
-      amount: amount,
+      amount: converted,
       currency: currency,
       issue_id: $routeParams.id
     });
@@ -18,7 +22,7 @@ angular.module('app').controller('BountyBoxController', function ($scope, $route
     // Track bounty start event in Mixpanel
     $analytics.bountyStart({ type: 'buttons', amount: amount });
 
-    addBountyToCart(amount).$promise.then(function () {
+    addBountyToCart(amount).then(function () {
       $location.url("/cart");
     });
   };
@@ -26,7 +30,7 @@ angular.module('app').controller('BountyBoxController', function ($scope, $route
   $scope.custom_bounty_redirect = function () {
     $analytics.bountyStart({ type: 'custom', amount: $scope.bounty.amount });
 
-    addBountyToCart($scope.bounty.amount).$promise.then(function () {
+    addBountyToCart($scope.bounty.amount).then(function () {
       $location.url("/cart");
     });
   };

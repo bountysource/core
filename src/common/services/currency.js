@@ -78,33 +78,24 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
    * @param toCurrency - the currency to convert to. defaults to this.value
    * @params fromCurrency - the currency of amount. defaults to USD
    * */
-  this.convert = function (amount, toCurrency, fromCurrency) {
+  this.convert = function (amount, fromCurrency, toCurrency) {
+    var new_amount;
     toCurrency = toCurrency || 'USD';
     fromCurrency = fromCurrency || this.value;
 
-    if (this.isUSD(fromCurrency)) {
-      switch (toCurrency.toUpperCase()) {
-        // USD to USD
-        case ('USD'):
-          return amount;
+    if (fromCurrency == toCurrency) {
+      new_amount = amount;
 
-        // USD to BTC
-        case ('BTC'):
-          return amount / this.btcToUsdRate;
-      }
+    // USD to BTC
+    } else if (this.isUSD(fromCurrency) && this.isBTC(toCurrency)){
+      new_amount = amount / this.btcToUsdRate;
+
+    // BTC to USD
+    } else if (this.isBTC(fromCurrency) && this.isUSD(toCurrency)){
+      new_amount = amount * this.btcToUsdRate;
     }
 
-    if (this.isBTC(fromCurrency)) {
-      switch (toCurrency.toUpperCase()) {
-        // BTC to USD
-        case ('USD'):
-          return amount * this.btcToUsdRate;
-
-        // BTC to BTC ?!?!?
-        case ('BTC'):
-          return amount;
-      }
-    }
+    return new_amount;
   };
 
   this.usdToBtc = function (value) {
@@ -116,45 +107,19 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
   };
 
   /*
-   * What is the minimum amount accepted for the given currency?
-   * If no currency is provided, uses the current default (this.value)
-   * */
-  this.minAmount = function (currency) {
-    currency = currency || this.value;
-
-    switch (currency.toUpperCase()) {
-      case ('USD'):
-        return 5.0;
-        break;
-
-      case ('BTC'):
-        return this.usdToBtc(5.0);
-        break;
-
-      default:
-        $log.error('Invalid currency');
-    }
-  };
-
-  /*
-  * The value of 1 cent in the given currency.
-  * If no currency is provided, uses the current default (this.value)
+  * What is the precision for the current currency?
   * */
-  this.cent = function (currency) {
-    currency = currency || this.value;
-
-    switch (currency.toUpperCase()) {
+  this.precision = function (options) {
+    options = options || {};
+    switch (this.value) {
       case ('USD'):
-        return 0.01;
+        return options['USD'] || 0;
         break;
 
       case ('BTC'):
-        return 0.00000001;
+        return options['BTC'] || 3;
         break;
-
-      default:
-        $log.error('Invalid currency');
     }
-  };
+  }
 
 });

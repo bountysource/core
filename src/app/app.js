@@ -101,13 +101,4 @@ angular.module('app')
     $rootScope.$on('$routeChangeSuccess', function() {
       $window.scrollTo(0,0);
     });
-
-    // Load shopping cart and provide via $rootScope
-    $cart.getInstance().then(function (cart) {
-      // Try to claim the shopping cart loaded from uid on cookie
-      $cart.claim({
-        uid: cart.getUid(),
-        access_token: $api.get_access_token()
-      });
-    });
   });

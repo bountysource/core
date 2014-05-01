@@ -118,7 +118,7 @@
                     <div class="checkbox">
                       <label>
                         <input type="checkbox" ng-model="item.tweet" ng-change="updateItem($index)" />
-                        <small>Tweet from @Bountysource <strong>(+$20)</strong>?</small>
+                        <small>Tweet from @Bountysource <strong>(+{{20|dollars}})</strong>?</small>
                       </label>
                     </div>
                   </div>
@@ -179,7 +179,7 @@
         <tr>
           <td colspan="3" class="text-right">
             <div>
-              <h4>Total: <currency-unit></currency-unit>{{ calculateCartTotal() || 0 }}</h4>
+              <h4>Total: {{ calculateCartTotal() || 0 | dollars:{ precision: {'USD': 2} } }}</h4>
             </div>
           </td>
         </tr>

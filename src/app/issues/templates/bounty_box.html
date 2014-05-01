@@ -28,9 +28,16 @@
         <div class="row">
           <div class="col-md-4 bounty-buttons"><a class="btn btn-primary btn-block" ng-click="place_bounty_redirect(1000)">{{1000 | dollars}}</a></div>
           <div class="col-md-8 bounty-buttons">
-            <div class="input-group">
+            <div class="input-group" tooltip-placement="bottom" toolip-trigger="focus" tooltip="{{5 | dollars}} minimum bounty">
               <span class="input-group-addon"><currency-unit></currency-unit></span>
-              <input style="margin-bottom: 0;" type="number" min="0" step="any" ng-model="bounty.amount" class="form-control" placeholder="Other" tooltip="{{5 | dollars}} minimum bounty" tooltip-placement="bottom" toolip-trigger="focus">
+              <input style="margin-bottom: 0;"
+                     type="number"
+                     min="0"
+                     step="any"
+                     class="form-control"
+                     placeholder="Other"
+                     currency-amount="bounty.amount"
+                     currency-input>
               <input style="display:none;" type="submit" id="custom-amount-submit" class="form-control">
             </div>
           </div>

@@ -183,14 +183,14 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
 
     switch (item.bounty_expiration) {
       case (3):
-        min = $currency.convert(250, $currency.value, 'USD');
+        min = $currency.convert(250, 'USD', $currency.value);
         if (item.amount < min) {
           $scope.cart.items[index].amount = min;
         }
         break;
 
       case (6):
-        min = $currency.convert(100, $currency.value, 'USD');
+        min = $currency.convert(100, 'USD', $currency.value);
         if (item.amount < min) {
           $scope.cart.items[index].amount = min;
         }
@@ -205,27 +205,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
   };
 
   $scope.calculateItemTotal = function (item) {
-    var total = 0.0;
-    switch (item.type) {
-      case ('Pledge'):
-        total += parseFloat(item.amount);
-        break;
-
-      case ('Bounty'):
-        total += parseFloat(item.amount);
-
-        if (item.tweet === true) {
-          // total += $currency.convert(20, $currency.value);
-          total += $currency.convert(20, $currency.value, 'USD');
-        }
-
-        break;
-
-      case ('TeamPayin'):
-        total += parseFloat(item.amount);
-        break;
-    }
-    return total;
+    return $currency.convert(parseFloat(item.amount), item.currency, 'USD') + (item.tweet === true ? 20 : 0);
   };
 
   $scope.calculateCartTotal = function () {
@@ -233,7 +213,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
     for (var i=0; $scope.cart && $scope.cart.items && i<$scope.cart.items.length; i++) {
       total += $scope.cart.items[i].total;
     }
-    return total;
+    return total; // always in USD
   };
 
   // Is the item valid?

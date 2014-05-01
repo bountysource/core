@@ -168,7 +168,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       scope.pledgeWithRewardRedirect = function(reward) {
         $analytics.pledgeStart({ amount: reward.amount, type: 'reward' });
-        scope.pledgeRedirect($currency.convert(reward.amount, $currency.value, 'USD'), reward.id);
+        scope.pledgeRedirect($currency.convert(reward.amount, 'USD', $currency.value), reward.id);
       };
 
       scope.bigPledgeButtonClicked = function() {
