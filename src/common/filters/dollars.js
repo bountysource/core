@@ -3,7 +3,7 @@
 /*
 * Show currency value with correct unit.
 * */
-angular.module('filters').filter('dollars', function($filter, $api, $currency) {
+angular.module('filters').filter('dollars', function($filter, $api, $currency, $window) {
   return function(value, options) {
     options = options || {};
 
