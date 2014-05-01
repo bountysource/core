@@ -163,17 +163,11 @@
 
           <!-- Amount, delete button -->
           <td class="col-md-3 col-sm-4 col-xs-4">
-
             <div class="input-group">
               <span class="input-group-addon">
                 <currency-unit></currency-unit>
               </span>
-              <input type="number"
-                     step="any"
-                     class="form-control input-sm"
-                     ng-model="item.amount"
-                     ng-blur="updateItem($index)"
-                     required />
+              <input class="form-control input-sm" ng-blur="updateItem($index)" currency-amount="item.amount" currency-iso="item.currency" currency-input required />
             </div>
 
             <div class="text-right">

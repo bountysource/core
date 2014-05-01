@@ -4,13 +4,6 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
 
   // Load shopping cart
   $cart.getInstance().then(function (cart) {
-
-    $timeout(function () {
-      for (var i=0; i<cart.items.length; i++) {
-        cart.items[i].amount = $currency.convert(cart.items[i].amount, $currency.value, cart.items[i].currency);
-      }
-    }, 0);
-
     $scope.cart = cart;
   });
 
@@ -73,9 +66,6 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
   $scope.updateItem = function (index) {
     var payload = $scope.getBaseItemAttributes($scope.cart.items[index]);
 
-    // Add currency from global value
-    payload.currency = $currency.value;
-
     return ShoppingCartItem.update({
       uid: $scope.cart.getUid(),
       index: index
@@ -96,7 +86,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
     $scope.$watch('current_person', function (person) {
       if (angular.isObject(person)) {
 
-        $cart.checkout($scope.checkoutPayload)
+        $scope.cart.checkout($scope.checkoutPayload)
 
       } else if (person === false) {
         $api.set_post_auth_url($location.path(), $scope.checkoutPayload);
