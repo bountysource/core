@@ -15,9 +15,18 @@ angular.module('resources').factory('ShoppingCart', function ($rootScope, $resou
 
   angular.extend(ShoppingCart, {
     claim: function () {
-      return $resource($rootScope.api_host + 'cart/claim', null, {
+      return $resource($rootScope.api_host + 'cart/claim', { access_token: $api.get_access_token() }, {
         claim: {
           method: 'POST',
+          headers: { 'Accept': 'application/vnd.bountysource+json; version=2' }
+        }
+      }).claim.apply(undefined, arguments);
+    },
+
+    checkout: function () {
+      return $resource($rootScope.api_host + 'cart/checkout', { access_token: $api.get_access_token() }, {
+        claim: {
+          method: 'GET',
           headers: { 'Accept': 'application/vnd.bountysource+json; version=2' }
         }
       }).claim.apply(undefined, arguments);

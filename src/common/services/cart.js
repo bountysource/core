@@ -25,8 +25,11 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
           amount: amount,
           currency: currency
         });
-        var response = ShoppingCartItems.create({ uid: self.getUid() }, payload);
-        deferred.resolve(response);
+
+        ShoppingCartItems.create({ uid: self.getUid() }, payload, function (item) {
+          self.items.unshift(angular.copy(item));
+          deferred.resolve(item);
+        });
       }
     });
     return deferred.promise;
@@ -74,6 +77,13 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
     } else if (angular.isDefined(uid)) {
       ShoppingCart.get({ uid: uid }).$promise.then(function (cart) {
         self._resolved = true;
+
+        // PLEASE Don't blindly remove this.
+        // If the cart was associated with a person, the UID of the cart
+        // the person already had will be returned. Update the cookie because
+        // the old cart was just deleted.
+        self.setUid(cart.uid);
+
         self.items = angular.copy(cart.items);
         deferred.resolve(self);
       });
@@ -82,7 +92,10 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
       $rootScope.$watch('current_person', function (person) {
         if (angular.isObject(person)) {
           // Get cart from server. copy items
-          ShoppingCart.get({ access_token: $api.get_access_token() }).$promise.then(function (cart) {
+          ShoppingCart.get({
+            access_token: $api.get_access_token(),
+            uid: uid
+          }).$promise.then(function (cart) {
             self._resolved = true;
             self.setUid(cart.uid);
             self.items = angular.copy(cart.items);
@@ -128,18 +141,21 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
   };
 
   /*
-  * Checkout for cart. Action depends on checkout method.
+  * Checkout for cart. Result depends on checkout_method.
   * - Google Wallet: Show checkout modal
   * - Paypal: Redirect to checkout page
   * - Coinbase: Redirect to checkout page
   * - Personal: Redirect to receipt page on success
   * - Team: Redirect to receipt page on success
   *
-  * @param uid - uid for the shopping cart on server
   * @param checkout_method - the method to checkout with
   * */
-  this.checkout = function (uid, checkout_method) {
-    ShoppingCart.checkout();
+  this.checkout = function (checkoutMethod) {
+    return ShoppingCart.checkout({
+      uid: this.getUid(),
+      checkout_method: checkoutMethod,
+      currency: $currency.value
+    });
   };
 
 });
