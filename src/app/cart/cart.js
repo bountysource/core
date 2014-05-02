@@ -5,6 +5,15 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
   // Load shopping cart
   $cart.getInstance().then(function (cart) {
     $scope.cart = cart;
+
+    // Initialize reward selects after initial digest
+    $timeout(function () {
+      for (var i=0; i<$scope.cart.items.length; i++) {
+        if ($scope.isPledge($scope.cart.items[i])) {
+          $scope.rewardChanged(i);
+        }
+      }
+    }, 0);
   });
 
   $scope.$watch('cart', function (cart) {
