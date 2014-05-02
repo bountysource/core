@@ -136,15 +136,13 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
           if (angular.isObject(fundraiser)) {
             if (fundraiser) {
               return $cart.addPledge({
-
-                // Sent as USD
                 amount: amount,
                 currency: $currency.value,
                 fundraiser_id: fundraiser.id,
                 reward_id: reward_id
-              }).$promise.then(function () {
-                  $location.url('/cart');
-                });
+              }).then(function () {
+                $location.url('/cart');
+              });
             }
           }
         });
@@ -159,16 +157,18 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
               amount: amount,
               currency: $currency.value,
               team_id: team.id
-            }).$promise.then(function () {
-                $location.url('/cart');
-              });
+            }).then(function () {
+              $location.url('/cart');
+            });
           }
         });
       };
 
       scope.pledgeWithRewardRedirect = function(reward) {
         $analytics.pledgeStart({ amount: reward.amount, type: 'reward' });
-        scope.pledgeRedirect($currency.convert(reward.amount, 'USD', $currency.value), reward.id);
+
+        var amount = $currency.convert(reward.amount, 'USD', $currency.value);
+        scope.pledgeRedirect(amount, reward.id);
       };
 
       scope.bigPledgeButtonClicked = function() {

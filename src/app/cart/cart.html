@@ -2,7 +2,7 @@
 
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li><a>Checkout</a></li>
+    <li><a>Shopping Cart</a></li>
   </ul>
 
   <div class="row">
@@ -149,16 +149,12 @@
 
                 <!-- Reward survey response -->
                 <div ng-if="item.reward.fulfillment_details">
-
-                  <!-- Fulfillment details -->
                   <div class="form-group">
-                    <p class="form-control-static text-warning">{{item.reward.fulfillment_details}}</p>
-                  </div>
-
-                  <!-- Survey response -->
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Details:</small></label>
+                    <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Reward Details:</small></label>
                     <div class="col-md-9 col-sm-8 col-xs-7">
+                      <!-- Fulfillment details -->
+                      <p class="form-control-static text-warning">{{item.reward.fulfillment_details}}</p>
+
                       <textarea class="form-control" ng-model="item.survey_response" rows="3" ng-blur="updateItem($index)"></textarea>
                     </div>
                   </div>
@@ -169,11 +165,13 @@
 
           <!-- Amount, delete button -->
           <td class="col-md-3 col-sm-4 col-xs-4">
-            <div class="input-group">
+            <div class="form-group" ng-class="{ 'has-error': !itemValid(item) }">
+              <div class="input-group">
               <span class="input-group-addon">
                 <currency-unit></currency-unit>
               </span>
-              <input class="form-control input-sm" ng-blur="updateItem($index)" currency-amount="item.amount" currency-iso="item.currency" currency-input required />
+                <input class="form-control input-sm" ng-blur="updateItem($index)" currency-amount="item.amount" currency-iso="item.currency" currency-input required />
+              </div>
             </div>
 
             <div class="text-right">
@@ -199,6 +197,7 @@
         <div class="panel-heading text-center">Total ({{cart.items.length | number}} <ng-pluralize count="cart.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ calculateCartTotal() || 0 | dollars:{ precision: {'USD': 2} } }}</div>
 
         <div class="panel-body">
+          <div>Select Payment Method:</div>
           <checkout-method-radios value="checkoutPayload.checkout_method" person="current_person"></checkout-method-radios>
         </div>
 
