@@ -134,13 +134,6 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
     // Remove owner, it is set independently
     delete attributes.owner;
 
-    // Bounty tweet option
-    if (attributes.tweet === true) {
-      attributes.promotion = 'tweet';
-    } else if (attributes.tweet === false) {
-      attributes.promotion = null;
-    }
-
     return attributes;
   };
 
@@ -181,10 +174,6 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
         if (item.amount < min) {
           $scope.cart.items[index].amount = min;
         }
-        break;
-
-      default:
-
         break;
     }
 

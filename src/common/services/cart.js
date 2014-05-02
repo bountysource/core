@@ -9,7 +9,7 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
   var self = this;
 
   this.isEmpty = function () {
-    return this.items.length <= 0;
+    return !angular.isArray(this.items) || this.items.length <= 0;
   };
 
   /*
@@ -18,19 +18,20 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
   * */
   this.addItem = function (itemType, amount, currency, attributes) {
     var deferred = $q.defer();
-    this.findOrCreateCart().then(function (cart) {
-      if (angular.isObject(cart)) {
-        var payload = angular.extend(attributes, {
-          item_type: itemType,
-          amount: amount,
-          currency: currency
-        });
+    this.findOrCreateCart().then(function () {
+      var payload = angular.extend(attributes, {
+        item_type: itemType,
+        amount: amount,
+        currency: currency
+      });
 
-        ShoppingCartItems.create({ uid: self.getUid() }, payload, function (item) {
-          self.items.unshift(angular.copy(item));
-          deferred.resolve(item);
-        });
-      }
+      ShoppingCartItems.create({ uid: self.getUid() }, payload, function (item) {
+        // Add currency to item
+        item.currency = $currency.value;
+
+        self.items.unshift(angular.copy(item));
+        deferred.resolve(item);
+      });
     });
     return deferred.promise;
   };

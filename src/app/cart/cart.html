@@ -6,8 +6,14 @@
   </ul>
 
   <div class="row">
-    <div class="col-md-9 col-sm-8" ng-hide="cart.isEmpty()">
-      <table class="table">
+    <div class="col-md-9 col-sm-8">
+      <div class="jumbotron" ng-if="cart.isEmpty()">
+        <h1>SUCH LARGE</h1>
+        <p>so text</p>
+        <p class="pull-right">much filler</p>
+      </div>
+
+      <table class="table" ng-if="!cart.isEmpty()">
         <tbody>
         <tr ng-repeat="item in cart.items">
 
