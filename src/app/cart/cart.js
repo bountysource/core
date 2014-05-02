@@ -307,4 +307,13 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     return deferred.promise;
   };
 
+  // Fetch teams for person to load Team account checkout method radios
+  $scope.$watch('current_person', function(person) {
+    if (angular.isObject(person)) {
+      $api.person_teams_get(person.id).then(function(teams) {
+        $scope.teams = angular.copy(teams);
+      });
+    }
+  });
+
 });

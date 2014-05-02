@@ -215,7 +215,58 @@
 
         <div class="panel-body">
           <div>Select Payment Method:</div>
-          <checkout-method-radios value="checkoutPayload.checkout_method" person="current_person"></checkout-method-radios>
+          <ng-form>
+            <!-- Google Wallet -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="checkoutPayload.checkout_method" value="google">
+                <favicon style="width: 16px; height: 16px;" domain="http://www.google.com/wallet/"></favicon>
+                <span>Google Wallet</span>
+              </label>
+            </div>
+
+            <!-- Coinbase! -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="checkoutPayload.checkout_method" value="coinbase">
+                <favicon style="width: 16px; height: 16px;" domain="https://bitcoin.org/en/"></favicon>
+                <span>Bitcoin</span>
+              </label>
+            </div>
+
+            <!-- PayPal -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="checkoutPayload.checkout_method" value="paypal">
+                <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
+                <span>PayPal</span>
+              </label>
+            </div>
+
+            <!-- Personal Account -->
+            <div class="radio" ng-if="current_person.account.balance > 0">
+              <label>
+                <input type="radio" ng-model="checkoutPayload.checkout_method" value="personal" ng-disabled="current_person.account.balance < calculateCartTotal()">
+                <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}" />
+
+                <span ng-class="{ 'text-muted': current_person.account.balance < calculateCartTotal() }">{{current_person.display_name}} <strong>{{current_person.account.balance | dollars}}</strong></span>
+              </label>
+            </div>
+
+            <!-- Team accounts -->
+            <div class="radio" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']">
+              <label>
+                <input type="radio" ng-model="$parent.checkoutPayload.checkout_method" value="team/{{team.id}}" ng-disabled="team.account_balance < calculateCartTotal() || !team.is_developer || team.account_balance <= 0 || onTeamPage(team)"/>
+                <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}" />
+
+                <span ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal() || !team.is_developer || team.account_balance <= 0 || onTeamPage(team)) }">{{team.name}}</span>
+
+                <strong ng-show="team.is_developer" ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal()) }">{{team.account_balance | dollars}}</strong>
+                <strong ng-hide="team.is_developer" ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal()) }">{{0 | dollars}}</strong>
+                <span ng-show="team.is_admin && team.account_balance < 100">(<a ng-href="/teams/{{team.slug}}/account">add funds</a>)</span>
+              </label>
+            </div>
+          </ng-form>
         </div>
 
         <div class="panel-footer">
