@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ShoppingCartController', function($scope, $routeParams, $window, $location, $api, $cart, $log, $filter, $currency, $timeout, $q, ShoppingCart, ShoppingCartItem) {
+angular.module('app').controller('ShoppingCartController', function($rootScope, $scope, $routeParams, $window, $location, $api, $cart, $log, $filter, $currency, $timeout, $q, ShoppingCart, ShoppingCartItem) {
 
   // Load shopping cart
   $cart.getInstance().then(function (cart) {
