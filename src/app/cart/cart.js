@@ -156,11 +156,6 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
         // Set reward object on item
         $scope.cart.items[index].reward = angular.copy(item.fundraiser.rewards[i]);
 
-        // Set Pledge amount to reward amount if necessary
-        if (item.amount < item.fundraiser.rewards[i].amount) {
-          $scope.cart.items[index].amount = item.fundraiser.rewards[i].amount;
-        }
-
         // Update item in cart
         $scope.updateItem(index);
       }
@@ -197,6 +192,10 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
       default:
         return true;
     }
+  };
+
+  $scope.pledgeRewardValid = function (item) {
+    return item.amount >= item.reward.amount;
   };
 
   // Is the item valid?

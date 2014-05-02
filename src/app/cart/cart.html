@@ -141,7 +141,7 @@
               <div ng-if="isPledge(item)">
 
                 <!-- Reward select -->
-                <div class="form-group">
+                <div class="form-group" ng-class="{ 'has-error': (item.reward && !pledgeRewardValid(item)) }">
                   <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Reward:</small></label>
                   <div class="col-md-7 col-sm-6 col-xs-7">
                     <select class="form-control input-sm"
@@ -150,6 +150,10 @@
                             ng-options="reward.id as (reward.amount | dollars) + ' - ' + reward.description for reward in item.fundraiser.rewards">
                       <option value="" disabled>Select a reward</option>
                     </select>
+
+                    <div ng-if="item.reward && !pledgeRewardValid(item)">
+                      <p class="form-control-static text-danger">Must pledge at least {{item.reward.amount | dollars}} for this reward.</p>
+                    </div>
                   </div>
                 </div>
 
