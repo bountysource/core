@@ -196,7 +196,7 @@
     <!-- Checkout button -->
     <div class="col-md-3 col-sm-4">
       <div class="panel panel-success">
-        <div class="panel-heading text-center">Payment Method</div>
+        <div class="panel-heading text-center">Total ({{cart.items.length | number}} <ng-pluralize count="cart.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ calculateCartTotal() || 0 | dollars:{ precision: {'USD': 2} } }}</div>
 
         <div class="panel-body">
           <checkout-method-radios value="checkoutPayload.checkout_method" person="current_person"></checkout-method-radios>

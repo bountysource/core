@@ -51,10 +51,10 @@
           </ul>
         </li>
 
-        <li ng-if="!cart.isEmpty()">
+        <li ng-if="!$cart.isEmpty()">
           <a href="/cart">
             <i class="glyphicon glyphicon-shopping-cart"></i>
-            <span class="label label-info">{{cart.items.length | number:0}}</span>
+            <span class="label label-info">{{$cart.items.length | number:0}}</span>
           </a>
         </li>
 
