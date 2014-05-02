@@ -168,24 +168,6 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
   };
 
   $scope.bountyExpirationChanged = function (index) {
-    var min, item = $scope.cart.items[index];
-
-    switch (item.bounty_expiration) {
-      case (3):
-        min = $currency.convert(250, 'USD', $currency.value);
-        if (item.amount < min) {
-          $scope.cart.items[index].amount = min;
-        }
-        break;
-
-      case (6):
-        min = $currency.convert(100, 'USD', $currency.value);
-        if (item.amount < min) {
-          $scope.cart.items[index].amount = min;
-        }
-        break;
-    }
-
     $scope.updateItem(index);
   };
 
@@ -201,6 +183,22 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
     return total; // always in USD
   };
 
+  $scope.bountyExpirationValid = function (item) {
+    var minAmount;
+    switch (item.bounty_expiration) {
+      case (3):
+        minAmount = $currency.convert(250, 'USD', $currency.value);
+        return item.amount >= minAmount;
+
+      case (6):
+        minAmount = $currency.convert(100, 'USD', $currency.value);
+        return item.amount >= minAmount;
+
+      default:
+        return true;
+    }
+  };
+
   // Is the item valid?
   $scope.itemValid = function (item) {
     // If the item has not loaded yet, fake as valid
@@ -213,6 +211,7 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
       case ('Pledge'):
         // Reward amount minimum
         var reward;
+        // Ensure that item amount is at least reward amount
         for (var i=0; i<item.fundraiser.rewards.length; i++) {
           reward = item.fundraiser.rewards[i];
           if (reward.id === item.reward_id && item.amount < reward.amount) {

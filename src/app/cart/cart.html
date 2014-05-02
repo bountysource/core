@@ -45,7 +45,7 @@
               <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}"><h4 style="margin-top: 0;">Pledge to "{{item.team.name}}"</h4></a>
             </div>
 
-            <ng-form class="form-horizontal">
+            <ng-form class="form-horizontal" name="cartForm">
 
               <!-- Owner select -->
               <div class="form-group">
@@ -91,25 +91,31 @@
               <!-- Bounty -->
               <div ng-if="isBounty(item)">
                 <!-- Expires -->
-                <div class="form-group">
+                <div class="form-group" ng-class="{ 'has-error': !bountyExpirationValid(item) }">
                   <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Expires:</small></label>
 
                   <div class="col-md-4 col-sm-8 col-xs-7">
                     <select class="form-control input-sm"
+                            name="expireSelect"
                             ng-model="item.bounty_expiration"
-                            ng-change="$parent.bountyExpirationChanged($index)"
+                            ng-change="$parent.updateItem($index)"
                             ng-options="option.value as option.description for option in bountyExpirationOptions">
                       <option value="" disabled>Select an option</option>
                     </select>
+
+                    <div ng-if="!bountyExpirationValid(item)">
+                      <p class="form-control-static text-danger">Bounty amount too low for selected expiration option</p>
+                    </div>
                   </div>
                 </div>
 
                 <!-- After expiration select -->
-                <div class="form-group" ng-if="item.bounty_expiration && item.bounty_expiration !== 'never'">
+                <div class="form-group" ng-if="item.bounty_expiration && item.bounty_expiration !== 'never'" ng-class="{ 'has-error': cartForm.expireSelect.$invalid }">
                   <label class="col-md-3 col-sm-4 col-xs-5 control-label"><small>Upon Expiration:</small></label>
 
                   <div class="col-md-9 col-sm-8 col-xs-7">
                     <select class="form-control input-sm"
+                            name="uponExpireSelect"
                             ng-model="item.upon_expiration"
                             ng-change="updateItem($index)"
                             ng-options="option.value as option.description for option in bountyUponExpirationOptions">
@@ -149,14 +155,20 @@
 
                 <!-- Reward survey response -->
                 <div ng-if="item.reward.fulfillment_details">
-                  <div class="form-group">
+                  <div class="form-group" ng-class="{ 'has-error': cartForm.surveyResponse.$invalid }">
                     <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Reward Details:</small></label>
                     <div class="col-md-9 col-sm-8 col-xs-7">
                       <!-- Fulfillment details -->
                       <p class="form-control-static text-warning">{{item.reward.fulfillment_details}}</p>
                       <br />
-
-                      <textarea class="form-control" ng-model="item.survey_response" rows="3" ng-blur="updateItem($index)"></textarea>
+                      <textarea class="form-control"
+                                name="surveyResponse"
+                                rows="3"
+                                placeholder="Provide your response here"
+                                ng-model="item.survey_response"
+                                ng-blur="updateItem($index)"
+                                required>
+                      </textarea>
                     </div>
                   </div>
                 </div>
