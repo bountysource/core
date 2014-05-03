@@ -40,11 +40,25 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
 
   $scope.checkoutMethod = undefined;
 
-  $scope.bountyExpirationOptions = [
-    { value: null, description: 'Never' },
-    { value: 3, description: '3 Months ($250 minimum)' },
-    { value: 6, description: '6 Months ($100 minimum)' }
-  ];
+  var watchCurrency = function () {return $currency.value}
+
+  // needs to be a $watch currency can be switched at any time (while on or off this page)
+  $scope.$watch(watchCurrency, function (newValue, oldValue) {
+    var three_month_value, six_month_value;
+    // can't filter until $currency.btcToUsdRate is set
+    // service is a singleton, but if refresh page, needs to load rate first
+    $currency.ratePromise.then(function (rate) {
+      three_month_value = $filter('dollars')(100);
+      six_month_value = $filter('dollars')(250);
+      // actually set bounty expiration options
+      $scope.bountyExpirationOptions = [
+        { value: null, description: 'Never' },
+        { value: 3, description: '3 Months ('+six_month_value+' minimum)' },
+        { value: 6, description: '6 Months ('+three_month_value+' minimum)' }
+      ];
+    });
+  });
+
 
   $scope.bountyUponExpirationOptions = [
     { value: 'refund', description: 'Refund to my Bountysource account' },
@@ -182,12 +196,14 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
     var minAmount;
     switch (item.bounty_expiration) {
       case (3):
+        console.log("item amount", $currency.convert(item.amount, item.currency, $currency.value));
         minAmount = $currency.convert(250, 'USD', $currency.value);
-        return item.amount >= minAmount;
+        console.log("min amount", minAmount);
+        return $currency.convert(item.amount, item.currency, $currency.value) >= minAmount;
 
       case (6):
         minAmount = $currency.convert(100, 'USD', $currency.value);
-        return item.amount >= minAmount;
+        return $currency.convert(item.amount, item.currency, $currency.value) >= minAmount;
 
       default:
         return true;
@@ -222,11 +238,11 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
       case ('Bounty'):
         switch (item.bounty_expiration) {
           case (3):
-            if (item.amount < 250) { return false; }
+            if ($currency.convert(item.amount, item.currency, $currency.value) < $currency.convert(250, 'USD', $currency.value)) { return false; }
             break;
 
           case (6):
-            if (item.amount < 100) { return false; }
+            if ($currency.convert(item.amount, item.currency, $currency.value) < $currency.convert(100, 'USD', $currency.value)) { return false; }
             break;
         }
 

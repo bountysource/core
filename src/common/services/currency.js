@@ -11,12 +11,13 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
 
   // Get BTC price
   this.btcToUsdRate = undefined;
-  $api.v2.currencies().then(function(response) {
+  this.ratePromise = $api.v2.currencies().then(function(response) {
     if (response.success) {
       self.btcToUsdRate = response.data.bitcoin;
     } else {
       $log.error('Failed to get currency values');
     }
+    return response.data.bitcoin;
   });
 
   this.setCurrency = function(value) {

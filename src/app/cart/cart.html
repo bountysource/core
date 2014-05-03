@@ -182,6 +182,8 @@
 
           <!-- Amount, delete button -->
           <td class="col-md-3 col-sm-4 col-xs-4">
+            <pre>Item Amount: {{ item.amount }}</pre>
+            <pre>Item Currency: {{ item.currency }}</pre>
             <div class="form-group" ng-class="{ 'has-error': !itemValid(item) }">
               <div class="input-group">
               <span class="input-group-addon">
