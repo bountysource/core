@@ -2,7 +2,6 @@
 
 angular.module('services').service('$cart', function ($rootScope, $window, $q, $cookieStore, $log, $currency, $api, ShoppingCart, ShoppingCartItems) {
 
-  this._resolved = false;
   this._cookieName = 'shoppingCartUid';
   this.items = [];
 
@@ -69,49 +68,20 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
     var deferred = $q.defer();
     var uid = this.getUid();
 
-    // Cart already loaded from server
-    if (this._resolved) {
+    ShoppingCart.get({
+      access_token: $api.get_access_token(),
+      uid: uid
+    }, function (cartResource) {
+      self._resolved = true;
+      self.items = angular.copy(cartResource.items);
+
+      // If the cart was associated with a person, the UID of the cart
+      // the person already had will be returned. Update the cookie because
+      // the old cart was just deleted.
+      self.setUid(cartResource.uid);
+
       deferred.resolve(self);
-
-      // There is a UID cookie, but cart has not been loaded.
-      // Load cart from server.
-    } else if (angular.isDefined(uid)) {
-      ShoppingCart.get({ uid: uid }).$promise.then(function (cart) {
-        self._resolved = true;
-
-        // PLEASE Don't blindly remove this.
-        // If the cart was associated with a person, the UID of the cart
-        // the person already had will be returned. Update the cookie because
-        // the old cart was just deleted.
-        self.setUid(cart.uid);
-
-        self.items = angular.copy(cart.items);
-        deferred.resolve(self);
-      });
-    } else {
-      // If logged in, check to see if person has a cart
-      $rootScope.$watch('current_person', function (person) {
-        if (angular.isObject(person)) {
-          // Get cart from server. copy items
-          ShoppingCart.get({
-            access_token: $api.get_access_token(),
-            uid: uid
-          }).$promise.then(function (cart) {
-            self._resolved = true;
-            self.setUid(cart.uid);
-            self.items = angular.copy(cart.items);
-            deferred.resolve(self);
-          });
-        } else if (person === false) {
-          // Just create a cart and store dat UID
-          ShoppingCart.create().$promise.then(function (cart) {
-            self._resolved = true;
-            self.setUid(cart.uid);
-            deferred.resolve(self);
-          });
-        }
-      });
-    }
+    });
 
     return deferred.promise;
   };
@@ -122,23 +92,6 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
 
   this.setUid = function (uid) {
     return $cookieStore.put(this._cookieName, uid);
-  };
-
-  // Claim the shopping cart loaded from uid on cookie
-  this.claim = function (params) {
-    var deferred = $q.defer();
-    var personWatcher = $rootScope.$watch('current_person', function (person) {
-      if (angular.isObject(person)) {
-        ShoppingCart.claim(params, function () {
-          $log.info('Claimed shopping cart', self);
-          personWatcher();
-          deferred.resolve(self);
-        });
-      } else if (person === false) {
-        personWatcher();
-      }
-    });
-    return deferred.promise;
   };
 
   /*

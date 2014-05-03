@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('ShoppingCartController', function($scope, $routeParams, $window, $location, $api, $cart, $log, $filter, $currency, $timeout, $q, ShoppingCart, ShoppingCartItem) {
+angular.module('app').controller('ShoppingCartController', function($rootScope, $scope, $routeParams, $window, $location, $api, $cart, $log, $filter, $currency, $timeout, $q, ShoppingCart, ShoppingCartItem) {
 
   // Load shopping cart
   $cart.getInstance().then(function (cart) {
@@ -322,5 +322,14 @@ angular.module('app').controller('ShoppingCartController', function($scope, $rou
 
     return deferred.promise;
   };
+
+  // Fetch teams for person to load Team account checkout method radios
+  $scope.$watch('current_person', function(person) {
+    if (angular.isObject(person)) {
+      $api.person_teams_get(person.id).then(function(teams) {
+        $scope.teams = angular.copy(teams);
+      });
+    }
+  });
 
 });
