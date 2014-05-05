@@ -71,17 +71,17 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
     ShoppingCart.get({
       access_token: $api.get_access_token(),
       uid: uid
-    }, function (cartResource) {
-      self._resolved = true;
-      self.items = angular.copy(cartResource.items);
+    }).$promise.then(function (cartResource) {
+        self._resolved = true;
+        self.items = angular.copy(cartResource.items);
 
-      // If the cart was associated with a person, the UID of the cart
-      // the person already had will be returned. Update the cookie because
-      // the old cart was just deleted.
-      self.setUid(cartResource.uid);
+        // If the cart was associated with a person, the UID of the cart
+        // the person already had will be returned. Update the cookie because
+        // the old cart was just deleted.
+        self.setUid(cartResource.uid);
 
-      deferred.resolve(self);
-    });
+        deferred.resolve(self);
+      });
 
     return deferred.promise;
   };
