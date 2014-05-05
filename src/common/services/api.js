@@ -9,8 +9,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     $rootScope.api_endpoint = $cookieStore.get('api_environment') || 'staging';
 
     if ($rootScope.api_endpoint === 'development') {
-      // $rootScope.api_host = "http://localhost:5000/";
-      $rootScope.api_host = "http://cory.local:5000/";
+      $rootScope.api_host = "http://localhost:5000/";
     } else if ($rootScope.api_endpoint === 'staging') {
       $rootScope.api_host = "https://staging-api.bountysource.com/";
     } else if ($rootScope.api_endpoint === 'production') {
