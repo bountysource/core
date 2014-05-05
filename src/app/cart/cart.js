@@ -40,7 +40,9 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
 
   $scope.checkoutMethod = undefined;
 
-  var watchCurrency = function () {return $currency.value}
+  var watchCurrency = function () {
+    return $currency.value;
+  };
 
   // needs to be a $watch currency can be switched at any time (while on or off this page)
   $scope.$watch(watchCurrency, function (newValue, oldValue) {
@@ -236,15 +238,19 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
         return true;
 
       case ('Bounty'):
+        var min, amount = $currency.convert(item.amount, item.currency, $currency.value);
         switch (item.bounty_expiration) {
           case (3):
-            if ($currency.convert(item.amount, item.currency, $currency.value) < $currency.convert(250, 'USD', $currency.value)) { return false; }
+            min = $currency.convert(250, 'USD', $currency.value);
+            if (amount < min) { return false; }
             break;
 
           case (6):
-            if ($currency.convert(item.amount, item.currency, $currency.value) < $currency.convert(100, 'USD', $currency.value)) { return false; }
+            min = $currency.convert(100, 'USD', $currency.value);
+            if (amount < min) { return false; }
             break;
         }
+        break;
 
       case ('TeamPayin'):
         return true;
