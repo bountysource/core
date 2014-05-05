@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('services').service('$currency', function ($rootScope, $cookieStore, $window, $log, $api, $analytics) {
+angular.module('services').service('$currency', function ($rootScope, $cookieStore, $window, $log, $api, $analytics, $q) {
 
   var self = this;
 
@@ -8,6 +8,9 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
   this._cookieName = 'currencySwitcherValue';
 
   this.currencyChangedEventName = 'currencyChangedEvent';
+
+  var onLoadDeferred = $q.defer();
+  this.onLoadPromise = onLoadDeferred.promise;
 
   // Get BTC price
   this.btcToUsdRate = undefined;
@@ -18,7 +21,9 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
       self.btcToUsdRate = response.data.bitcoin;
       self.mscToUsdRate = response.data.mastercoin;
       self.xrpToUsdRate = response.data.ripple;
+      onLoadDeferred.resolve(self);
     } else {
+      onLoadDeferred.reject();
       $log.error('Failed to get currency values');
     }
   });

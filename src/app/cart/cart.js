@@ -49,7 +49,7 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     var three_month_value, six_month_value;
     // can't filter until $currency.btcToUsdRate is set
     // service is a singleton, but if refresh page, needs to load rate first
-    $currency.ratePromise.then(function (rate) {
+    $currency.onLoadPromise.then(function () {
       three_month_value = $filter('dollars')(100);
       six_month_value = $filter('dollars')(250);
       // actually set bounty expiration options
@@ -60,7 +60,6 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
       ];
     });
   });
-
 
   $scope.bountyUponExpirationOptions = [
     { value: 'refund', description: 'Refund to my Bountysource account' },
@@ -198,9 +197,7 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     var minAmount;
     switch (item.bounty_expiration) {
       case (3):
-        console.log("item amount", $currency.convert(item.amount, item.currency, $currency.value));
         minAmount = $currency.convert(250, 'USD', $currency.value);
-        console.log("min amount", minAmount);
         return $currency.convert(item.amount, item.currency, $currency.value) >= minAmount;
 
       case (6):
@@ -224,40 +221,36 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     // Amount is just *not there*
     if (angular.isUndefined(item.amount) || item.amount === null) { return false; }
 
-    switch (item.type) {
-      case ('Pledge'):
-        // Reward amount minimum
-        var reward;
-        // Ensure that item amount is at least reward amount
-        for (var i=0; i<item.fundraiser.rewards.length; i++) {
-          reward = item.fundraiser.rewards[i];
-          if (reward.id === item.reward_id && item.amount < reward.amount) {
-            return false;
-          }
+    if ($scope.isPledge(item)) {
+      // Ensure that item amount is at least reward amount
+      var reward;
+      for (var i=0; i<item.fundraiser.rewards.length; i++) {
+        reward = item.fundraiser.rewards[i];
+        if (reward.id === item.reward_id && item.amount < reward.amount) {
+          return false;
         }
-        return true;
+      }
 
-      case ('Bounty'):
-        var min, amount = $currency.convert(item.amount, item.currency, $currency.value);
-        switch (item.bounty_expiration) {
-          case (3):
-            min = $currency.convert(250, 'USD', $currency.value);
-            if (amount < min) { return false; }
-            break;
+    } else if ($scope.isBounty(item)) {
+      // Ensure that bounty amount at least expiration option amount, if selected
+      var min, amount = $currency.convert(item.amount, item.currency, $currency.value);
+      if (item.bounty_expiration === 3) {
+        min = $currency.convert(250, 'USD', $currency.value);
+        return amount >= min;
+      } else if (item.bounty_expiration === 6) {
+        min = $currency.convert(100, 'USD', $currency.value);
+        return amount >= min;
+      }
 
-          case (6):
-            min = $currency.convert(100, 'USD', $currency.value);
-            if (amount < min) { return false; }
-            break;
-        }
-        break;
+    } else if ($scope.isTeamPayin(item)) {
+      return true;
 
-      case ('TeamPayin'):
-        return true;
-
-      default:
-        return false;
+    } else {
+      return false;
     }
+
+    // if you made it here, you're valid!
+    return true;
   };
 
   // Are all of the items valid?
