@@ -189,15 +189,39 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
 
   /*
   * What is the precision for the current currency?
+  *
+  * @param currencyIso - the currency ISO to return precision for. Defaults to $currency.value
+  * @overrides - Manually change the precision of a currency ISO. Ex. { 'USD': 2, 'BTC': 8 }
   * */
-  this.precision = function (options) {
-    options = options || {};
+  this.precision = function (currencyIso, overrides) {
+    currencyIso = currencyIso || this.value;
+    overrides = overrides || {};
     switch (this.value) {
       case ('USD'):
-        return options.USD || 0;
+        return overrides.USD || 0;
 
       case ('BTC'):
-        return options.BTC || 3;
+        return overrides.BTC || 3;
+    }
+  };
+
+  /*
+  * Convert amount to string. Precision is based on the currency ISO
+  *
+  * @param amount - the currency Number, you silly goose
+  * @param currencyIso - the currency ISO of amount. Defaults to $currency.value
+  * */
+  this.toString = function (amount, currencyIso) {
+    currencyIso = currencyIso || this.value;
+    switch (currencyIso) {
+      case ('USD'):
+        break;
+      case ('BTC'):
+        break;
+      case ('MSC'):
+        break;
+      case ('XRP'):
+        break;
     }
   };
 

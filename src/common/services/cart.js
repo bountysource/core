@@ -20,7 +20,7 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
     this.find().then(function () {
       var payload = angular.extend(attributes, {
         item_type: itemType,
-        amount: amount,
+        amount: $window.parseFloat(amount),
         currency: currency
       });
 

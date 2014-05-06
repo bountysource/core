@@ -87,13 +87,23 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     return angular.isObject(item) && item.type === 'TeamPayin';
   };
 
+  $scope.reloadItems = function () {
+    $cart.find().then(function (cart) {
+      $scope.cart.items = angular.copy(cart.items);
+    });
+  };
+
   $scope.updateItem = function (index) {
     var payload = $scope.getBaseItemAttributes($scope.cart.items[index]);
 
+    // Override currency ISO with the current value
+    payload.currency = $currency.value;
+
+    // Create item, then reload shopping cart
     return ShoppingCartItem.update({
       uid: $scope.cart.getUid(),
       index: index
-    }, payload);
+    }, payload, $scope.reloadItems);
   };
 
   $scope.removeItem = function (index) {
