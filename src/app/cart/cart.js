@@ -97,7 +97,7 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
   };
 
   $scope.removeItem = function (index) {
-    if ($window.confirm('Are you for real?')) {
+    if ($window.confirm('Remove this item from your cart?')) {
       ShoppingCartItem.delete({
         uid: $scope.cart.getUid(),
         index: index
