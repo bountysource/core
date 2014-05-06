@@ -115,25 +115,49 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     } else if (this.isUSD(fromCurrency) && this.isBTC(toCurrency)){
       new_amount = amount / this.btcToUsdRate;
 
-    // BTC to USD
-    } else if (this.isBTC(fromCurrency) && this.isUSD(toCurrency)){
-      new_amount = amount * this.btcToUsdRate;
-
     // USD to MSC
     } else if (this.isUSD(fromCurrency) && this.isMSC(toCurrency)) {
       new_amount = amount / this.mscToUsdRate;
-
-    // MSC to USD
-    } else if (this.isMSC(fromCurrency) && this.isUSD(toCurrency)) {
-      new_amount = amount * this.mscToUsdRate;
 
     // USD to XRP
     } else if (this.isUSD(fromCurrency) && this.isXRP(toCurrency)) {
       new_amount = amount / this.xrpToUsdRate;
 
+    // BTC to USD
+    } else if (this.isBTC(fromCurrency) && this.isUSD(toCurrency)){
+      new_amount = amount * this.btcToUsdRate;
+
+    // BTC to MSC
+    } else if (this.isBTC(fromCurrency) && this.isMSC(toCurrency)){
+      new_amount = this.convert(amount, 'BTC', 'USD') * this.mscToUsdRate;
+
+    // BTC to XRP
+    } else if (this.isBTC(fromCurrency) && this.isXRP(toCurrency)){
+      new_amount = this.convert(amount, 'BTC', 'USD') * this.xrpToUsdRate;
+
+    // MSC to USD
+    } else if (this.isMSC(fromCurrency) && this.isUSD(toCurrency)) {
+      new_amount = amount * this.mscToUsdRate;
+
+    // MSC to BTC
+    } else if (this.isMSC(fromCurrency) && this.isBTC(toCurrency)) {
+      new_amount = this.convert(amount, 'MSC', 'USD') * this.btcToUsdRate;
+
+    // MSC to XRP
+    } else if (this.isMSC(fromCurrency) && this.isXRP(toCurrency)) {
+      new_amount = this.convert(amount, 'MSC', 'USD') * this.xrpToUsdRate;
+
     // XRP to USD
     } else if (this.isXRP(fromCurrency) && this.isUSD(toCurrency)) {
       new_amount = amount * this.xrpToUsdRate;
+
+    // XRP to BTC
+    } else if (this.isXRP(fromCurrency) && this.isBTC(toCurrency)) {
+      new_amount = this.convert(amount, 'XRP', 'USD') * this.btcToUsdRate;
+
+    // XRP to MSC
+    } else if (this.isXRP(fromCurrency) && this.isMSC(toCurrency)) {
+      new_amount = this.convert(amount, 'XRP', 'USD') * this.mscToUsdRate;
     }
 
     return new_amount;
