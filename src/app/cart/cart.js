@@ -272,47 +272,64 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
   $scope.checkout = function () {
     var deferred = $q.defer();
 
+    function successCallback (response, checkoutMethod) {
+      // Redirect to PayPal checkout page
+      if (checkoutMethod === 'paypal') {
+        deferred.resolve();
+        $window.location = response.checkout_url;
+
+      // Show Google Wallet checkout modal
+      } else if (checkoutMethod === 'google') {
+        // a JWT is returned, trigger Google Wallet buy
+        $window.google.payments.inapp.buy({
+          jwt: response.jwt,
+
+          success: function(result) {
+            deferred.resolve();
+            var query = $api.toKeyValue({
+              access_token: $api.get_access_token(),
+              order_id: result.response.orderId
+            });
+            deferred.resolve(true);
+            $window.location = $rootScope.api_host + "payments/google/success?" + query;
+          },
+
+          failure: function() {
+            deferred.reject(response);
+          }
+        });
+
+      // Redirect to Coinbase checkout page
+      } else if (checkoutMethod === 'coinbase') {
+        deferred.resolve();
+        $window.location = response.checkout_url;
+
+      // Team or Person account, redirect to receipt page!
+      } else {
+        deferred.resolve();
+        $window.location = response.receipt_url;
+      }
+    }
+
+    function errorCallback (response) {
+      $scope.alert = { type: 'danger', message: response.data.error };
+    }
+
     $scope.$watch('current_person', function (person) {
       if (angular.isObject(person)) {
         var checkoutMethod = $scope.checkoutPayload.checkout_method;
-        $scope.cart.checkout(checkoutMethod).$promise.then(function (response) {
-          // Redirect to PayPal checkout page
-          if (checkoutMethod === 'paypal') {
-            deferred.resolve();
-            $window.location = response.checkout_url;
-
-          // Show Google Wallet checkout modal
-          } else if (checkoutMethod === 'google') {
-            // a JWT is returned, trigger Google Wallet buy
-            $window.google.payments.inapp.buy({
-              jwt: response.jwt,
-
-              success: function(result) {
-                deferred.resolve();
-                var query = $api.toKeyValue({
-                  access_token: $api.get_access_token(),
-                  order_id: result.response.orderId
-                });
-                deferred.resolve(true);
-                $window.location = $rootScope.api_host + "payments/google/success?" + query;
-              },
-
-              failure: function() {
-                deferred.reject(response);
-              }
-            });
-
-          // Redirect to Coinbase checkout page
-          } else if (checkoutMethod === 'coinbase') {
-            deferred.resolve();
-            $window.location = response.checkout_url;
-
-          // Team or Person account, redirect to receipt page!
-          } else {
-            deferred.resolve();
-            $window.location = response.receipt_url;
-          }
+        ShoppingCart.checkout({
+          uid: $scope.cart.getUid(),
+          checkout_method: checkoutMethod,
+          currency: $currency.value
+        }, function (response) {
+          // If checkout is successful, clear the UID cookie so that the new cart takes over
+          $scope.cart.setUid(null);
+          successCallback(response, checkoutMethod);
+        }, function (response) {
+          errorCallback(response);
         });
+        // $scope.cart.checkout(checkoutMethod, successCallback, errorCallback);
       } else if (person === false) {
         $api.set_post_auth_url($location.path(), $scope.checkoutPayload);
         $location.url('/signin');

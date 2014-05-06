@@ -12,6 +12,10 @@
         <p>Browse <a href="/trackers">projects</a> or <a href="/fundraisers">fundraisers</a> to add items to your shopping cart.</p>
       </div>
 
+      <div ng-if="alert.message">
+        <alert type="alert.type" close="alert.message = null">{{ alert.message }}</alert>
+      </div>
+
       <table class="table" ng-if="!cart.isEmpty()">
         <tbody>
         <tr ng-repeat="item in cart.items">

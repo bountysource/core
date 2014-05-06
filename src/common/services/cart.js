@@ -102,15 +102,5 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
   *
   * @param checkout_method - the method to checkout with
   * */
-  this.checkout = function (checkoutMethod) {
-    return ShoppingCart.checkout({
-      uid: this.getUid(),
-      checkout_method: checkoutMethod,
-      currency: $currency.value
-    }, function () {
-      // If checkout is successful, clear the UID cookie so that the new cart takes over
-      self.setUid(null);
-    });
-  };
 
 });
