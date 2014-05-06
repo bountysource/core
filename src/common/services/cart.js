@@ -107,6 +107,9 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
       uid: this.getUid(),
       checkout_method: checkoutMethod,
       currency: $currency.value
+    }, function () {
+      // If checkout is successful, clear the UID cookie so that the new cart takes over
+      self.setUid(null);
     });
   };
 
