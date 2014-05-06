@@ -14,7 +14,7 @@ angular.module('filters').filter('dollars', function($filter, $api, $currency) {
 
     value = $currency.convert(value, 'USD', $currency.value);
     var unit = $filter('currencyUnit')(value, $currency.value);
-    var precision = $currency.precision(options.precision || {});
+    var precision = $currency.precision($currency.value, options.precision || {});
 
     return unit + (options.space ? ' ' : '') + $filter('number')(value, precision);
   };
