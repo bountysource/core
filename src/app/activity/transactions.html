@@ -29,7 +29,7 @@
           </thead>
           <tbody>
           <tr ng-repeat="transaction in transactions">
-            <td><a ng-href="/transactions/{{transaction.id}}">Order #{{transaction.number}}</a></td>
+            <td><a ng-href="/transactions/{{transaction.id}}">Order #{{transaction.id}}</a></td>
             <td>{{transaction.created_at | date:'medium'}}</td>
             <td>
               <div ng-hide="transaction.checkout_method.owner">
