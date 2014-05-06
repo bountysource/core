@@ -3,7 +3,7 @@
 angular.module('app').controller('ShoppingCartController', function($rootScope, $scope, $routeParams, $window, $location, $api, $cart, $log, $filter, $currency, $timeout, $q, ShoppingCart, ShoppingCartItem) {
 
   // Load shopping cart
-  $cart.getInstance().then(function (cart) {
+  $cart.find().then(function (cart) {
     $scope.cart = cart;
 
     // Initialize reward selects after initial digest

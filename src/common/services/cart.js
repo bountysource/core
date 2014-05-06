@@ -17,7 +17,7 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
   * */
   this.addItem = function (itemType, amount, currency, attributes) {
     var deferred = $q.defer();
-    this.findOrCreateCart().then(function () {
+    this.find().then(function () {
       var payload = angular.extend(attributes, {
         item_type: itemType,
         amount: amount,
@@ -54,34 +54,32 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
   };
 
   /*
-  * Return promise of shopping cart instance.
-  * Create a new cart if the user does not have a cart token stored locally.
-  * */
-  this.getInstance = function () {
-    return this.findOrCreateCart();
-  };
-
-  /*
   * Find or create cart from server.
+  *
+  * @param autocreate - create a ShoppingCart on the server if not found. defaults to true
+  * @return - promise of cart
   * */
-  this.findOrCreateCart = function () {
+  this.find = function (autocreate) {
+    // Default autocreate to true if not specified
+    autocreate = angular.isUndefined(autocreate) || autocreate;
+
     var deferred = $q.defer();
     var uid = this.getUid();
 
     ShoppingCart.get({
-      access_token: $api.get_access_token(),
-      uid: uid
-    }).$promise.then(function (cartResource) {
-        self._resolved = true;
-        self.items = angular.copy(cartResource.items);
+      access_token: $api.get_access_token() || null,
+      uid: uid || null,
+      autocreate: autocreate
+    }, function (cartResource) {
+      self.items = angular.copy(cartResource.items);
 
-        // If the cart was associated with a person, the UID of the cart
-        // the person already had will be returned. Update the cookie because
-        // the old cart was just deleted.
-        self.setUid(cartResource.uid);
+      // If the cart was associated with a person, the UID of the cart
+      // the person already had will be returned. Update the cookie because
+      // the old cart was just deleted.
+      self.setUid(cartResource.uid);
 
-        deferred.resolve(self);
-      });
+      deferred.resolve(self);
+    });
 
     return deferred.promise;
   };

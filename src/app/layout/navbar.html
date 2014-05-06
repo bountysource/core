@@ -56,10 +56,10 @@
           </ul>
         </li>
 
-        <li ng-if="!$cart.isEmpty()">
+        <li ng-if="cart && !cart.isEmpty()">
           <a href="/cart">
             <i class="glyphicon glyphicon-shopping-cart"></i>
-            <span class="label label-info">{{$cart.items.length | number:0}}</span>
+            <span class="label label-info">{{cart.items.length | number:0}}</span>
           </a>
         </li>
 
@@ -115,7 +115,7 @@
             <b class="caret"></b>
           </a>
 
-          <ul class="dropdown-menu" ng-controller="NavbarController">
+          <ul class="dropdown-menu">
             <li><a href="" ng-click="setEnv('development')">development</a></li>
             <li><a href="" ng-click="setEnv('staging')">staging</a></li>
             <li><a href="" ng-click="setEnv('production')">production</a></li>

@@ -2,7 +2,9 @@
 
 angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieStore, $currency, $cart) {
 
-  $scope.$cart = $cart;
+  $cart.find(false).then(function (cart) {
+    $scope.cart = cart;
+  });
 
   $scope.$watch('current_person', function(current_person) {
     if (current_person) {
