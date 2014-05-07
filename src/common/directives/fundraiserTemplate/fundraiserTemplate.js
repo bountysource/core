@@ -159,33 +159,6 @@ angular.module('directives').directive('fundraiserTemplate', function($rootScope
 
 
       /*****************************************
-      * Pledge buttons
-      * */
-
-      scope.amount = undefined;
-
-      // Go to the Pledge page for the fundraisers with the given amount
-      scope.pledgeRedirect = function(fundraiser, amount) {
-        amount = amount || scope.amount;
-        if (angular.isNumber(amount) && fundraiser.published) {
-          $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
-
-          $analytics.pledgeStart({ amount: amount, type: 'buttons' });
-        }
-      };
-
-
-      scope.customPledgeRedirect = function(fundraiser, amount) {
-        amount = amount || scope.amount;
-        if (angular.isNumber(amount) && fundraiser.published) {
-          $location.path("/fundraisers/"+$routeParams.id+"/pledge").search({ amount: amount });
-
-          $analytics.pledgeStart({ amount: amount, type: 'custom' });
-        }
-      };
-
-
-      /*****************************************
       * Top backers
       * */
 

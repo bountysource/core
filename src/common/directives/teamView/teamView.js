@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics, $modal, $currency, $cart) {
+angular.module('directives').directive('teamView', function($rootScope, $location, $routeParams, $api, $analytics, $modal, $currency, $cart, $window) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -129,14 +129,18 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       /*****************************
        * Pledge Buttons
        * */
+
       scope.pledgeRedirect = function(amount, reward_id) {
         $analytics.pledgeStart({ amount: amount, type: 'buttons' });
+
+        // Button values are hardocded with USD. Conver if needed
+        var converted = $currency.convert($window.parseFloat(amount), 'USD', $currency.value);
 
         scope.$watch('activeFundraiser', function (fundraiser) {
           if (angular.isObject(fundraiser)) {
             if (fundraiser) {
               return $cart.addPledge({
-                amount: amount,
+                amount: converted,
                 currency: $currency.value,
                 fundraiser_id: fundraiser.id,
                 reward_id: reward_id
@@ -151,10 +155,13 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       scope.payinRedirect = function (amount) {
         $analytics.teamPayinStart({ amount: amount, type: 'buttons'});
 
+        // Button values are hardocded with USD. Conver if needed
+        var converted = $currency.convert($window.parseFloat(amount), 'USD', $currency.value);
+
         scope.$watch('team', function (team) {
           if (angular.isObject(team)) {
             return $cart.addTeamPayin({
-              amount: amount,
+              amount: converted,
               currency: $currency.value,
               team_id: team.id
             }).then(function () {
@@ -166,9 +173,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       scope.pledgeWithRewardRedirect = function(reward) {
         $analytics.pledgeStart({ amount: reward.amount, type: 'reward' });
-
-        var amount = $currency.convert(reward.amount, 'USD', $currency.value);
-        scope.pledgeRedirect(amount, reward.id);
+        scope.pledgeRedirect(reward.amount, reward.id);
       };
 
       scope.bigPledgeButtonClicked = function() {
