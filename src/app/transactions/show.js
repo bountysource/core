@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('app').controller('TransactionShowController', function ($scope, $routeParams, $api, $filter, $window) {
+angular.module('app').controller('TransactionShowController', function ($scope, $routeParams, $api, $filter, $window, $twttr) {
   $scope.is_receipt = parseInt($routeParams.receipt, 10) === 1;
 
   $scope.transaction_promise = $api.call("/transactions/"+$routeParams.id).then(function(transaction) {
-
     // Collect all Fundraisers and Trackers from the array of items on the transaction
     $scope.trackers = [];
     $scope.fundraisers = [];
@@ -31,6 +30,18 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
     $scope.transaction = transaction;
     return transaction;
   });
+
+  $scope.isPledge = function (item) {
+    return angular.isObject(item) && item.type === 'Pledge';
+  };
+
+  $scope.isBounty = function (item) {
+    return angular.isObject(item) && item.type === 'Bounty';
+  };
+
+  $scope.isTeamPayin = function (item) {
+    return angular.isObject(item) && item.type === 'TeamPayin';
+  };
 
   function setShareUrls (item, parent, item_type) {
 
