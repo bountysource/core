@@ -99,16 +99,20 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
   * @param index - the index of the item in the cart to send updates for
   * */
   $scope.updateItem = function (index) {
+    var item = $scope.cart.items[index];
     var payload = $scope.getBaseItemAttributes($scope.cart.items[index]);
 
     // Override currency ISO with the current value
     payload.currency = $currency.value;
 
     // Create item, then reload shopping cart
-    return ShoppingCartItem.update({
+    if ($scope.itemValid(item)) {
+      ShoppingCartItem.update({
         uid: $scope.cart.getUid(),
         index: index
-    }, payload, $scope.reloadItems);
+      }, payload);
+
+    }
   };
 
   $scope.removeItem = function (index) {
@@ -197,7 +201,7 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
   };
 
   $scope.calculateItemTotal = function (item) {
-    return $currency.convert(parseFloat(item.amount), item.currency, 'USD') + (item.tweet === true ? 20 : 0);
+    return $currency.convert(parseFloat(item.amount) || 0, item.currency, 'USD') + (item.tweet === true ? 20 : 0);
   };
 
   $scope.calculateCartTotal = function () {
