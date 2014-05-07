@@ -4,7 +4,6 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
   $scope.is_receipt = parseInt($routeParams.receipt, 10) === 1;
 
   $scope.transaction_promise = $api.call("/transactions/"+$routeParams.id).then(function(transaction) {
-    console.log("transaction", transaction);
     // Collect all Fundraisers and Trackers from the array of items on the transaction
     $scope.trackers = [];
     $scope.fundraisers = [];
