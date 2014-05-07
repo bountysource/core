@@ -241,7 +241,7 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     if (angular.isUndefined(item.amount) || item.amount === null) { return false; }
 
     // Amount is too small
-    if ($currency.convert(item.amount, item.currency, 'USD') < 5) { return false }
+    if ($currency.convert(item.amount, item.currency, 'USD') < 5) { return false; }
 
     if ($scope.isPledge(item)) {
       // Ensure that item amount is at least reward amount
