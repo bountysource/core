@@ -56,7 +56,12 @@
 
                 <div class="col-md-9 col-sm-8 col-xs-7">
                   <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <img style="height: 17px; width: 17px; display: inline;" ng-src="{{item.owner.image_url_small || item.owner.image_url || 'images/anon.jpg'}}" />
+                    <!-- Owner image -->
+                    <img ng-show="item.owner" style="height: 17px; width: 17px; display: inline;" ng-src="{{item.owner.image_url_small || item.owner.image_url}}" />
+
+                    <!-- Owner image if owner is missing -->
+                    <img ng-hide="item.owner" style="height: 17px; width: 17px; display: inline;" src="images/anon.jpg" />
+
                     <span>{{item.owner.display_name || item.owner.name || 'Anonymous'}}</span>
                     <span class="caret"></span>
                   </button>
@@ -185,11 +190,14 @@
 
           <!-- Amount, delete button -->
           <td class="col-md-3 col-sm-4 col-xs-4">
+
+            <pre>{{item.currency}} {{item.amount}}</pre>
+
             <div class="form-group" ng-class="{ 'has-error': !itemValid(item) }">
-              <div class="input-group">
-              <span class="input-group-addon">
-                <currency-unit></currency-unit>
-              </span>
+              <div class="input-group" tooltip-placement="bottom" tooltip="{{5 | dollars}} minimum">
+                <span class="input-group-addon">
+                  <currency-unit></currency-unit>
+                </span>
                 <input class="form-control input-sm" ng-blur="updateItem($index)" currency-amount="item.amount" currency-iso="item.currency" currency-input required />
               </div>
             </div>

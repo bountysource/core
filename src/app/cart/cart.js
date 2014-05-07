@@ -93,6 +93,11 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     });
   };
 
+  /*
+  * Update the cart item on the server with the local attributes.
+  *
+  * @param index - the index of the item in the cart to send updates for
+  * */
   $scope.updateItem = function (index) {
     var payload = $scope.getBaseItemAttributes($scope.cart.items[index]);
 
@@ -101,8 +106,8 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
 
     // Create item, then reload shopping cart
     return ShoppingCartItem.update({
-      uid: $scope.cart.getUid(),
-      index: index
+        uid: $scope.cart.getUid(),
+        index: index
     }, payload, $scope.reloadItems);
   };
 
@@ -230,6 +235,9 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
 
     // Amount is just *not there*
     if (angular.isUndefined(item.amount) || item.amount === null) { return false; }
+
+    // Amount is too small
+    if ($currency.convert(item.amount, item.currency, 'USD') < 5) { return false }
 
     if ($scope.isPledge(item)) {
       // Ensure that item amount is at least reward amount
