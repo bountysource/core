@@ -245,12 +245,11 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
 
     if ($scope.isPledge(item)) {
       // Ensure that item amount is at least reward amount
-      var reward;
+      var reward, rewardAmount;
       for (var i=0; i<item.fundraiser.rewards.length; i++) {
         reward = item.fundraiser.rewards[i];
-        if (reward.id === item.reward_id && item.amount < reward.amount) {
-          return false;
-        }
+        rewardAmount = $currency.convert(reward.amount, 'USD', $currency.value);
+        if (reward.id === item.reward_id && item.amount < rewardAmount) { return false; }
       }
 
     } else if ($scope.isBounty(item)) {
