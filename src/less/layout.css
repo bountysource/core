@@ -94,7 +94,9 @@ a:hover {
   max-width: 100%;
 }
 
-
+input[type="text"]:disabled.white-input  {
+  background-color: white;
+}
 
 .img-responsive { width: 100%;}
 
