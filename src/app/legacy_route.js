@@ -41,5 +41,5 @@ angular.module('app')
       .when('/activity/solutions', { redirectTo: "/activity/claims" })
       .when('/fundraisers/:id/pledges', { redirectTo: function(param) { return "/fundraisers/"+param.id+"/backers"; } })
       .when('/issues/:issue_id/solutions', { redirectTo: function(params) { return "/issues/"+params.issue_id+"/claims"; } })
-    ;
+      .when('/issues/:issue_id/bounty', { redirectTo: function (params) { return "/issues/"+params.issue_id; } });
   });

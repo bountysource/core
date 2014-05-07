@@ -103,12 +103,6 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Issue Bounties'
   }, defaultRouteOptions));
 
-  $routeProvider.when('/issues/:id/bounty', angular.extend({
-    templateUrl: 'app/issues/bounty.html',
-    controller: 'IssuesBaseController',
-    trackEvent: 'View Bounty Create'
-  }, defaultRouteOptions));
-
   $routeProvider.when('/issues/:id/claims', angular.extend({
     templateUrl: 'app/issues/bounty_claims.html',
     controller: 'IssuesBaseController',
