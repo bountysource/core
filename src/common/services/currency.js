@@ -112,7 +112,7 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
    * @params fromCurrency - the currency of amount. defaults to USD
    * */
   this.convert = function (amount, fromCurrency, toCurrency) {
-    var new_amount;
+    var new_amount, usd;
     toCurrency = toCurrency || 'USD';
     fromCurrency = fromCurrency || this.value;
 
@@ -149,11 +149,13 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
 
     // MSC to BTC
     } else if (this.isMSC(fromCurrency) && this.isBTC(toCurrency)) {
-      new_amount = this.convert(amount, 'MSC', 'USD') * this.btcToUsdRate;
+      usd = this.convert(amount, 'MSC', 'USD');
+      new_amount = this.convert(usd, 'USD', 'BTC');
 
     // MSC to XRP
     } else if (this.isMSC(fromCurrency) && this.isXRP(toCurrency)) {
-      new_amount = this.convert(amount, 'MSC', 'USD') * this.xrpToUsdRate;
+      usd = this.convert(amount, 'MSC', 'USD');
+      new_amount = this.convert(usd, 'USD', 'XRP');
 
     // XRP to USD
     } else if (this.isXRP(fromCurrency) && this.isUSD(toCurrency)) {
@@ -161,11 +163,13 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
 
     // XRP to BTC
     } else if (this.isXRP(fromCurrency) && this.isBTC(toCurrency)) {
-      new_amount = this.convert(amount, 'XRP', 'USD') * this.btcToUsdRate;
+      usd = this.convert(amount, 'XRP', 'USD');
+      new_amount = this.convert(usd, 'USD', 'BTC');
 
     // XRP to MSC
     } else if (this.isXRP(fromCurrency) && this.isMSC(toCurrency)) {
-      new_amount = this.convert(amount, 'XRP', 'USD') * this.mscToUsdRate;
+      usd = this.convert(amount, 'XRP', 'USD');
+      new_amount = this.convert(usd, 'USD', 'MSC');
     }
 
     return new_amount;
