@@ -156,7 +156,7 @@
                   <span class="input-group-addon">
                     <currency-unit></currency-unit>
                   </span>
-                  <input type="text" class="form-control white-input" ng-value="item.amount | dollars" disabled></input>
+                  <input type="text" class="form-control white-input" ng-value="item.amount | dollars:{hide_unit: true}" disabled></input>
                 </div>
               </div>
             </td>
@@ -167,10 +167,7 @@
       <div class="col-xs-3">
         <div class="panel panel-success">
           <div class="panel-heading text-center">
-            Total (
-            {{ transaction.items.length | number }}
-            <ng-pluralize count="transaction.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>
-            ): {{ transaction.gross || 0 | dollars:{ precision: {'USD': 2} } }}
+            Total ({{ transaction.items.length | number }}<ng-pluralize count="transaction.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ transaction.gross || 0 | dollars:{ precision: {'USD': 2} } }}
           </div>
           <div class="panel-body">
             <div>
@@ -178,7 +175,7 @@
               <span ng-if="transaction.checkout_method.owner">
                 <img style="max-width:18px; max-height:18px" ng-src="{{ transaction.checkout_method.owner.image_url }}"></img>
               </span>
-              <strong ng-hide="transaction.checkout_method.owner">{{transaction.checkout_method.display_name}}</strong>
+              <p ng-hide="transaction.checkout_method.owner">{{transaction.checkout_method.display_name}}</p>
               <a ng-show="transaction.checkout_method.owner" owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
             </div>
           </div>
