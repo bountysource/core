@@ -10,10 +10,6 @@
   "bugs": {
     "url": "https://github.com/bountysource/frontend/issues"
   },
-  "scripts": {
-    "start": "node app.js",
-    "test": "./node_modules/protractor/bin/protractor test/protractor.js"
-  },
   "dependencies": {},
   "devDependencies": {
     "bower": "~1.3.2",
@@ -44,9 +40,9 @@
     "grunt-karma-coveralls": "~2.0.2",
     "karma-coverage": "~0.1.0",
     "karma-ng-scenario": "~0.1.0",
-    "protractor": "~0.22.0",
+    "protractor": "~0.14.0",
     "grunt-protractor-runner": "~0.2.0",
-    "selenium-server-standalone": "~2.20.0",
+    "selenium": "~2.20.0",
     "chromedriver": "~2.6.0"
   },
   "engines": {
