@@ -156,7 +156,7 @@
                   <span class="input-group-addon">
                     <currency-unit></currency-unit>
                   </span>
-                  <input type="text" class="form-control white-input" ng-value="item.amount | dollars:{hide_unit: true}" disabled></input>
+                  <input type="text" class="form-control white-input" ng-value="item.amount | dollars:{ unit: false}" disabled></input>
                 </div>
               </div>
             </td>
@@ -185,6 +185,5 @@
         </div>
       </div>
     </div>
-    <!-- <div ng-include="'app/transactions/share.html'"></div> -->
   </div>
 </div>
