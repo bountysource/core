@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/bountysource/frontend.png?label=ready&title=Ready)](https://waffle.io/bountysource/frontend)
 # Bountysource
 [![Visit our IRC channel](https://kiwiirc.com/buttons/irc.freenode.net/Bountysource.png)](https://kiwiirc.com/client/irc.freenode.net/?nick=Bountyuser|?#Bountysource)
 
@@ -17,7 +16,8 @@ Our frontend is built using:
 - jshint (javascript syntax checking)
 - karma (testing)
 
-Please use our [issue tracker](https://github.com/bountysource/frontend/issues) to report any bugs or request new features.  Or, if you're a developer, send us a pull request!
+Please use our [issue tracker](https://github.com/bountysource/frontend/issues) to report any bugs or request new features.  Or, if you're a developer, send us a pull request!  
+We use [Waffle.io](https://waffle.io/bountysource/frontend) to track our Github Issues. [![Stories in Ready](https://badge.waffle.io/bountysource/frontend.png?label=ready&title=Ready)](https://waffle.io/bountysource/frontend)
 
 # We :heart: Pull Requests!
 Seriously, we really do.  It doesn't matter whether you're fixing a typo or overhauling a major area of the code base.  You will be showered in :thumbsup: :thumbsup: :thumbsup:
