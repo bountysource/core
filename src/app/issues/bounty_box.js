@@ -1,29 +1,38 @@
 'use strict';
-angular.module('app').controller('BountyBoxController', function ($scope, $routeParams, $window, $location, $analytics, $currency) {
+angular.module('app').controller('BountyBoxController', function ($scope, $routeParams, $window, $location, $analytics, $currency, $cart) {
+
   $scope.bounty = {
-    amount: parseInt($routeParams.amount, 10)
+    amount: parseInt($routeParams.amount, 10) || null
   };
 
-  function convertCurrency (amount) {
-    if (amount && $currency.isBTC()) {
-      amount = $currency.usdToBtc(amount);
-    }
-    return amount;
+  function addBountyToCart(amount, currency) {
+    currency = currency || $currency.value;
+
+    // Button values are hardocded with USD. Conver if needed
+    var converted = $currency.convert(amount, 'USD', $currency.value);
+
+    return $cart.addBounty({
+      amount: converted,
+      currency: currency,
+      issue_id: $routeParams.id
+    });
   }
 
   $scope.place_bounty_redirect = function (amount) {
-    amount = convertCurrency(amount) || $scope.bounty.amount;
     // Track bounty start event in Mixpanel
     $analytics.bountyStart({ type: 'buttons', amount: amount });
-    if (angular.isNumber(amount)) {
-      $location.path("/issues/" + $routeParams.id + "/bounty").search({ amount: amount });
-    }
+
+    addBountyToCart(amount).then(function () {
+      $location.url("/cart");
+    });
   };
 
   $scope.custom_bounty_redirect = function () {
     $analytics.bountyStart({ type: 'custom', amount: $scope.bounty.amount });
-    if (angular.isNumber($scope.bounty.amount)) {
-      $location.path("/issues/" + $routeParams.id + "/bounty").search({ amount: $scope.bounty.amount });
-    }
+
+    addBountyToCart($scope.bounty.amount).then(function () {
+      $location.url("/cart");
+    });
   };
+
 });

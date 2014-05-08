@@ -42,7 +42,6 @@
         </div>
 
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <!-- Fuck -->
           <div class="panel panel-info" ng-if="can_manage">
             <div class="panel-heading text-center">Manage Fundraiser</div>
 
@@ -224,16 +223,6 @@
                   </div>
                 </div>
 
-                <!-- Checkout method radios -->
-                <div class="form-group">
-                  <label class="control-label col-md-5">Payment Method:</label>
-
-                  <div class="col-md-7">
-                    <checkout-method-radios value="pledge.checkout_method"
-                                            person="current_person"></checkout-method-radios>
-                  </div>
-                </div>
-
                 <!-- Anonymous checkbox -->
                 <div class="form-group">
                   <div class="col-md-offset-5 col-md-7">
@@ -274,15 +263,7 @@
                 <!-- Make pledge button -->
                 <div class="form-group">
                   <div class="col-md-offset-5 col-md-7">
-                    <button class="btn btn-default btn-success btn-lg" disabled="true"
-                            ng-show="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)"
-                            popover-placement="right" popover-trigger="mouseenter"
-                            popover="You need to provide the above information to receive this reward.">Make Pledge
-                    </button>
-                    <button ng-click="create_payment()" class="btn btn-success btn-lg"
-                            ng-hide="!pledge.amount || !pledge.checkout_method || (selected_reward.fulfillment_details && !pledge.survey_response)">
-                      Make Pledge
-                    </button>
+                    <button ng-click="addToCart()" class="btn btn-success">Make Pledge</button>
                   </div>
                 </div>
               </div>

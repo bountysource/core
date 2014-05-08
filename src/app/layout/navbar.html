@@ -49,10 +49,18 @@
           <ul class="dropdown-menu">
             <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
             <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
-            <!--<li role="presentation" class="dropdown-header">Experimental:</li>-->
-            <!--<li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>-->
-            <!--<li><a ng-click="$currency.setXRP()">Ripple (XRP)</a></li>-->
+
+            <li role="presentation" class="dropdown-header">Experimental:</li>
+            <li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>
+            <li><a ng-click="$currency.setXRP()">Ripple (XRP)</a></li>
           </ul>
+        </li>
+
+        <li ng-if="cart && !cart.isEmpty()">
+          <a href="/cart">
+            <i class="glyphicon glyphicon-shopping-cart"></i>
+            <span class="label label-info">{{cart.items.length | number:0}}</span>
+          </a>
         </li>
 
         <!-- User dropdown if logged in -->

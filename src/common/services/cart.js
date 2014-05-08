@@ -1,373 +1,106 @@
 'use strict';
 
-angular.module('services').service('$cart', function($rootScope, $api, $q, $cookieStore, $window) {
+angular.module('services').service('$cart', function ($rootScope, $window, $q, $cookieStore, $log, $currency, $api, ShoppingCart, ShoppingCartItems) {
 
-  /*
-   * Represents item in cart. Bounty, Pledge, etc.
-   * */
-  var Item = function(type, amount, currency, attributes) {
-    this.class = type;
-    this.amount = amount;
-    this.currency = currency;
-    this.attributes = attributes || {};
-  };
+  this._cookieName = 'shoppingCartUid';
+  this.items = [];
 
-  var API = function() {
-    this.call = $api.call;
+  var self = this;
 
-    this.get = function() {
-      return this.call("/cart");
-    };
-
-    this.add_item = function(type, amount, currency, attributes) {
-      var payload = attributes;
-      payload.item_type = type;
-      payload.amount = amount;
-      payload.currency = currency;
-      return this.call("/cart/add_item", "POST", payload);
-    };
-
-    this.remove_item = function(index) {
-      return this.call("/cart/remove_item", "DELETE", { index: index });
-    };
-
-    this.update_item = function(index, data) {
-      var payload = data;
-      payload.index = index;
-      return this.call("/cart/update_item", "PUT", payload);
-    };
-
-    this.clear = function() {
-      return this.call("/cart", "DELETE");
-    };
-
-    this.export = function(cart) {
-      return this.call("/cart/export", "POST", cart.items);
-    };
-
-    this.checkout = function(checkout_method, currency, options) {
-      var deferred = $q.defer();
-
-      options = angular.extend({
-        checkout_method: checkout_method,
-        currency: currency
-      }, options);
-
-      this.call("/cart/checkout", "POST", options, function(response) {
-        deferred.resolve(response);
-      });
-      return deferred.promise;
-    };
+  this.isEmpty = function () {
+    return !angular.isArray(this.items) || this.items.length <= 0;
   };
 
   /*
-   * NOTE: Use $cart.load() to get a Cart object in your controllers.
-   * */
-  var Cart = function(items) {
-    this.items = items || [];
-    this.api = new API();
-
-    /*
-     * Request checkout using a specific payment method.
-     * Depending on the payment method, a third-party redirect may be necessary.
-     * Requires items to be in the cart.
-     *
-     * @param checkout_method - the name of the checkout method to use
-     *
-     * Checkout data has the following attributes:
-     *   redirect_url - if checkout method requires redirect, this is where to redirect to for third-party checkout.
-     *
-     * */
-    this.checkout = function(checkout_method, currency, options) {
-      var deferred = $q.defer();
-      var that = this;
-
-      // Default current URL redirect to if checkout is canceled.
-      options = angular.extend({
-        cancel_url: $window.location.href
-      }, options);
-
-      if (this.items.length <= 0) {
-        deferred.reject();
-      } else {
-        this._require_person().then(function(person) {
-          if (person) {
-            that.api.checkout(checkout_method, currency, options).then(function(response) {
-              if (!response.meta.success) {
-                deferred.reject(response);
-
-              } else if (checkout_method === 'paypal') {
-                // redirect to the provided checkout URL for cart
-                $window.location = response.data.checkout_url;
-
-              } else if (checkout_method === 'coinbase') {
-                $window.location = response.data.checkout_url;
-
-              } else if (checkout_method === 'google') {
-                // a JWT is returned, trigger Google Wallet buy
-                $window.google.payments.inapp.buy({
-                  jwt: response.data.jwt,
-
-                  success: function(result) {
-                    var query = $api.toKeyValue({
-                      access_token: $api.get_access_token(),
-                      order_id: result.response.orderId
-                    });
-                    deferred.resolve(true);
-                    $window.location = $rootScope.api_host + "payments/google/success?" + query;
-                  },
-
-                  failure: function() {
-                    deferred.reject(response);
-                  }
-                });
-              } else {
-                deferred.resolve(response);
-              }
-            });
-          } else {
-            deferred.reject();
-          }
-        });
-      }
-
-      return deferred.promise;
-    };
-
-    /*
-     * Add item to the cart.
-     *
-     * @param type - the type of item. "Pledge" "Bounty" etc.
-     * @param price - the price of item.
-     * @param attributes - optional attributes for the item.
-     * @return promise of the new Item
-     * */
-    this.add_item = function(type, amount, currency, attributes) {
-      attributes = attributes || {};
-
-      var deferred = $q.defer();
-      var that = this;
-
-      var item = new Item(type, amount, currency, attributes);
-      this.items.push(item);
-
-      // Add item to server-side cart if logged in.
-      this._require_person().then(function(person) {
-        if (person) {
-          that.api.add_item(item.class, item.amount, item.currency, item.attributes).then(function(updated_cart) {
-            // if the add_item call failed, return an error
-            if (updated_cart.error) {
-              return deferred.resolve(updated_cart);
-            }
-            deferred.resolve(item);
-          });
-        } else {
-          deferred.resolve(item);
-        }
-      });
-
-      return deferred.promise;
-    };
-
-    /*
-     * Helper method to add a pledge to the cart.
-     * @return promise of pledge Item
-     * */
-    this.add_pledge = function(amount, currency, fundraiser, attributes) {
-      attributes = attributes || {};
-      attributes.fundraiser_id = fundraiser.id;
-      return this.add_item('Pledge', amount, currency, attributes);
-    };
-
-    /*
-     * Helper method to add a bounty to the cart.
-     * */
-    this.add_bounty = function(amount, currency, issue, attributes) {
-      attributes = attributes || {};
-      attributes.issue_id = issue.id;
-      return this.add_item('Bounty', amount, currency, attributes);
-    };
-
-    /*
-     * Helper method to add a payin for Team account.
-     * */
-    this.add_team_payin = function(amount, currency, team, attributes) {
-      attributes = attributes || {};
-      attributes.team_id = team.id;
-      return this.add_item('TeamPayin', amount, currency, attributes);
-    };
-
-    /*
-     * Remove item from the cart.
-     *
-     * @param index - the location of the item to remove.
-     * @return promise of the removed Item
-     * */
-    this.remove_item = function(index) {
-      var deferred = $q.defer();
-      var that = this;
-
-      // Remove item from local cart
-      var removed_item;
-      for (var i=0; i<this.items.length; i++) {
-        if (this.items.index === index) {
-          removed_item = angular.copy(this.items[i]);
-          this.items.splice(i,1);
-          break;
-        }
-      }
-
-      // Remove cart on server
-      this._require_person().then(function(person) {
-        if (person) {
-          that.api.remove_item(index).then(function(updated_cart) {
-            deferred.resolve(removed_item);
-          });
-        } else {
-          deferred.resolve(removed_item);
-        }
-      });
-
-      return deferred.promise;
-    };
-
-    /*
-     * Update item in the cart with new attributes.
-     * Pushes updates to server-side cart
-     *
-     * @param index - the location of the item to update.
-     * @param attributes - the changes to apply to the item.
-     * @return self
-     * */
-    this.update_item = function(index, attributes) {
-      var deferred = $q.defer();
-      var that = this;
-
-      // Update local version of item
-      var updated_item;
-      for (var i=0; i<this.items.length; i++) {
-        if (this.items[i].index === index) {
-          for (var k in attributes) {
-            this.items[i][k] = attributes[k];
-          }
-          updated_item = this.items[i];
-          break;
-        }
-      }
-
-      // Update item on server
-      this._require_person().then(function(person) {
-        if (person) {
-          that.api.update_item(index, updated_item.attributes).then(function(updated_cart) {
-            deferred.resolve(updated_item);
-          });
-        } else {
-          deferred.resolve(updated_item);
-        }
-      });
-
-      return deferred.promise;
-    };
-
-    /*
-     * Clear the cart of all items.
-     * Pushes updates to server-side cart
-     *
-     * @return promise of self
-     * */
-    this.clear = function() {
-      var deferred = $q.defer();
-      var that = this;
-
-      this.items = [];
-
-      this._require_person().then(function(person) {
-        if (person) {
-          that.api.clear().then(function(updated_cart) {
-            deferred.resolve(this);
-          });
-        } else if (person === false) {
-          deferred.resolve(this);
-        }
-      });
-
-      return deferred.promise;
-    };
-
-    /*
-     * Export local cart to server.
-     * NOTE: client-side changes always overwrite server-side attributes.
-     *
-     * @return promise of updated self.
-     * */
-    this._export = function() {
-      var deferred = $q.defer();
-      var that = this;
-
-      if (this.items.length <= 0) {
-        deferred.resolve(this);
-      } else {
-        this._require_person().then(function(person) {
-          if (person) {
-            that.api.export().then(function(updated_cart) {
-              deferred.resolve(updated_cart);
-            });
-          } else {
-            deferred.reject();
-          }
-        });
-      }
-
-      return deferred.promise;
-    };
-
-    /*
-     * Helper method to require authenticated person.
-     *
-     * @return promise of authenticated person
-     * */
-    this._require_person = function() {
-      var deferred = $q.defer();
-
-      $rootScope.$watch('current_person', function(person) {
-        if (person) {
-          deferred.resolve(person);
-        } else if (person === false) {
-          deferred.resolve(false);
-        }
-      });
-
-      return deferred.promise;
-    };
-  };
-
-  /*
-   * Load shopping cart. If you're authenticated, load from server.
-   * Otherwise, load client-side cart from cookie.
-   *
-   * @return promise of the cart object.
-   * */
-  this.load = function() {
+  * Add item to cart.
+  * @return - promise of item add
+  * */
+  this.addItem = function (itemType, amount, currency, attributes) {
     var deferred = $q.defer();
-    var cart = new Cart();
-    deferred.resolve(cart);
-    return deferred.promise;
+    this.find().then(function () {
+      var payload = angular.extend(attributes, {
+        item_type: itemType,
+        amount: $window.parseFloat(amount),
+        currency: currency
+      });
 
-//    // If logged in, get cart from server, after exporting local cart
-//    $rootScope.$watch('current_person', function(person) {
-//      var local_cart = $cookieStore.get('cart') || new Cart();
-//
-//      if (person) {
-//        local_cart._export().then(function(updated_cart) {
-//          var local_cart = new Cart(updated_cart);
-//          $cookieStore.put('cart', local_cart);
-//          deferred.resolve(local_cart);
-//        });
-//      } else if (person === false) {
-//
-//        deferred.resolve(local_cart);
-//      }
-//    });
+      ShoppingCartItems.create({ uid: self.getUid() }, payload, function (item) {
+        // Add currency to item
+        item.currency = $currency.value;
+
+        self.items.unshift(angular.copy(item));
+        deferred.resolve(item);
+      });
+    });
+    return deferred.promise;
   };
+
+  this.addPledge = function (pledge) {
+    var amount = $window.parseFloat(pledge.amount);
+    var currency = pledge.currency;
+    return this.addItem('pledge', amount, currency, pledge);
+  };
+
+  this.addBounty = function (bounty) {
+    var amount = $window.parseFloat(bounty.amount);
+    var currency = bounty.currency;
+    return this.addItem('bounty', amount, currency, bounty);
+  };
+
+  this.addTeamPayin = function (team_payin) {
+    var amount = $window.parseFloat(team_payin.amount);
+    var currency = team_payin.currency;
+    return this.addItem('team_payin', amount, currency, team_payin);
+  };
+
+  /*
+  * Find or create cart from server.
+  *
+  * @param autocreate - create a ShoppingCart on the server if not found. defaults to true
+  * @return - promise of cart
+  * */
+  this.find = function (autocreate) {
+    // Default autocreate to true if not specified
+    autocreate = angular.isUndefined(autocreate) || autocreate;
+
+    var deferred = $q.defer();
+    var uid = this.getUid();
+
+    ShoppingCart.get({
+      access_token: $api.get_access_token() || null,
+      uid: uid || null,
+      autocreate: autocreate
+    }, function (cartResource) {
+      self.items = angular.copy(cartResource.items);
+
+      // If the cart was associated with a person, the UID of the cart
+      // the person already had will be returned. Update the cookie because
+      // the old cart was just deleted.
+      self.setUid(cartResource.uid);
+
+      deferred.resolve(self);
+    });
+
+    return deferred.promise;
+  };
+
+  this.getUid = function () {
+    return $cookieStore.get(this._cookieName);
+  };
+
+  this.setUid = function (uid) {
+    return $cookieStore.put(this._cookieName, uid);
+  };
+
+  /*
+  * Checkout for cart. Result depends on checkout_method.
+  * - Google Wallet: Show checkout modal
+  * - Paypal: Redirect to checkout page
+  * - Coinbase: Redirect to checkout page
+  * - Personal: Redirect to receipt page on success
+  * - Team: Redirect to receipt page on success
+  *
+  * @param checkout_method - the method to checkout with
+  * */
 
 });

@@ -1,6 +1,11 @@
 'use strict';
 
-angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieStore, $currency) {
+angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieStore, $currency, $cart) {
+
+  $cart.find(false).then(function (cart) {
+    $scope.cart = cart;
+  });
+
   $scope.$watch('current_person', function(current_person) {
     if (current_person) {
       $api.person_teams(current_person.id).then(function(teams) {

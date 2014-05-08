@@ -285,6 +285,14 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         url: '/currencies',
         params: params || {}
       });
+    },
+    
+    linkShoppingCart: function (uid, params) {
+      return this.call({
+        url: '/cart/link',
+        method: 'POST',
+        params: params || {}
+      });
     }
 
   };

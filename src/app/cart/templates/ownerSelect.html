@@ -1,0 +1,35 @@
+<div>
+  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <img style="height: 18px; width: 18px; display: inline;" ng-src="{{item.owner.image_url_small || item.owner.image_url || 'images/anon.jpg'}}" />
+    <span>{{item.owner.display_name || item.owner.name || 'Anonymous'}}</span>
+    <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu">
+    <!-- Current person, if logged in -->
+    <li ng-if="current_person">
+      <a ng-click="setOwner($index, 'person', current_person)">
+        <img ng-src="{{current_person.image_url_small || current_person.image_url}}" style="height: 18px; width: 18px; display: inline;" />
+        {{current_person.display_name}}
+      </a>
+    </li>
+
+    <!-- Anonymous -->
+    <li>
+      <a ng-click="setOwner($index, 'anonymous')">
+        <img src="images/anon.jpg" style="height: 18px; width: 18px; display: inline;" />
+        Anonymous
+      </a>
+    </li>
+
+    <!-- Teams -->
+    <li ng-if="teams.length > 0" class="divider"></li>
+    <li ng-if="teams.length > 0" class="dropdown-header">Your Teams</li>
+    <li>
+      <a ng-repeat="team in teams" ng-click="setOwner($parent.$index, 'team', team)">
+        <img ng-src="{{team.image_url_small || team.image_url}}" style="height: 18px; width: 18px; display: inline;" />
+        {{team.name}}
+      </a>
+    </li>
+  </ul>
+</div>

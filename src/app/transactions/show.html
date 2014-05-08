@@ -4,7 +4,7 @@
   <li><a href="/activity/transactions">Transactions</a></li>
   <li><a>
     <span ng-hide="transaction">Loading...</span>
-    <span ng-show="transaction">Order #{{transaction.number}}</span>
+    <span ng-show="transaction">Order #{{transaction.id}}</span>
   </a></li>
 </ul>
 
@@ -13,50 +13,181 @@
 
   <div ng-show="transaction">
     <div ng-show="is_receipt">
-      <div class="page-header">
-        <h2>Receipt for Order #{{transaction.number}}</h2>
+      <div>
+        <h2>Receipt for Order #{{transaction.id}}</h2>
+      </div>
+    </div>
+
+    <div ng-show="!is_receipt">
+      <div>
+        <h2>Order #{{ transaction.id }}</h2>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-sm-8 col-md-8">
-        <table class="table table-striped table-no-head">
+      <div class="col-xs-9">
+        <!-- Header on receipt page -->
+        <!-- Transction show page -->
+        <table class="table">
           <tbody>
           <tr ng-repeat="item in transaction.items">
-            <td ng-switch="item.type">
+            <td ng-switch="item.type" class="col-md-1 col-sm-1 hidden-xs">
+              <!-- Bounty -->
+              <a ng-if="isBounty(item)" ng-href="/trackers/{{item.issue.tracker.slug}}">
+                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.issue.tracker.medium_image_url}}" />
+              </a>
+
+              <!-- Pledge -->
+              <a ng-if="isPledge(item)" ng-href="/fundraisers/{{item.fundraiser.slug}}">
+                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.fundraiser.medium_image_url}}" />
+              </a>
+
+              <!-- TeamPayin -->
+              <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}">
+                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.team.medium_image_url}}" />
+              </a>
+            </td>
+
+            <td ng-switch="item.type" class="col-xs-12 col-md-9">
               <div ng-switch-when="Pledge">
-                <span><strong>{{item.amount | dollars}}</strong> Pledge on <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a></span>
+                <h4>Pledge to <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a></h4>
+
+                <div class="row">
+                  <div class="col-xs-4 text-right">
+                    <strong>Display as:</strong>
+                  </div>
+
+                  <div class="col-xs-8">
+                    <p ng-if="item.anonymous"><img src="images/anon.jpg" style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
+                    <p ng-if="!item.anonymous"><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
+                  </div>
+                  <!-- Reward Details -->
+                  <div class="col-xs-4 text-right">
+                    <strong>Reward Description:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <p>{{ item.reward.description }}</p>
+                  </div>
+
+                  <!-- Reward Response -->
+                  <div ng-if="item.survey_response">
+                    <div class="col-xs-4 text-right">
+                      <strong>Reward Response:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <p>{{ item.survey_response }}</p>
+                    </div>
+                  </div>
+
+                  <!-- Share Buttons -->
+                  <div class="col-xs-4 text-right">
+                    <strong>Share This:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <share-button item="item"></share-button>
+                  </div>
+                </div>
               </div>
 
               <div ng-switch-when="Bounty">
-                <span><strong>{{item.amount | dollars}}</strong> Bounty on <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></span>
+                <h4>Bounty for <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></h4>
+                <div class="row">
+                  <!-- Bounty Details -->
+                  <div class="col-xs-4 text-right">
+                    <strong>Display as:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <p ng-if="item.anonymous"><img src="images/anon.jpg" style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
+                    <p ng-if="!item.anonymous"><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
+                  </div>
+
+                  <!-- Expiration Options -->
+                  <div class="col-xs-4 text-right">
+                    <strong>Expire:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <p ng-if="item.bounty_expiration">{{ item.bounty_expiration | number }} months</p>
+                    <p ng-if="!item.bounty_expiration">Never</p>
+                  </div>
+
+                  <!-- Promotion Options -->
+                  <div class="col-xs-4 text-right">
+                    <strong>Promotion:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <p ng-if="item.promotion">Tweet from @Bountysource</p>
+                    <p ng-if="!item.promotion">No Promotion</p>
+                  </div>
+
+                  <!-- Share Buttons -->
+                  <div class="col-xs-4 text-right">
+                    <strong>Share This:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <share-button item="item"></share-button>
+                  </div>
+                </div>
               </div>
 
               <div ng-switch-when="TeamPayin">
-                <span><strong>{{item.amount | dollars}}</strong> added to <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a> account</span>
+                <h4>Pledge to <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a> account </h4>
+                <div class="row">
+                  <div class="col-xs-4 text-right">
+                    <strong>Display as:</strong>
+                  </div>
+
+                  <div class="col-xs-8">
+                    <p><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
+                  </div>
+
+                  <div class="col-xs-4 text-right">
+                    <strong>Share This:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <share-button item="item"></share-button>
+                  </div>
+                </div>
               </div>
             </td>
-            <td class="span1"></td>
+
+            <td class="col-sm-2">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <currency-unit></currency-unit>
+                  </span>
+                  <input type="text" class="form-control white-input" ng-value="item.amount | dollars" disabled></input>
+                </div>
+              </div>
+            </td>
           </tr>
           </tbody>
         </table>
       </div>
-      <div class="col-sm-4 col-md-4">
-        <div>
-          <div>Total: <strong>{{transaction.gross | currency}}</strong></div>
-          <div ng-show="transaction.fees > 0">Fee: <strong>{{transaction.fee | currency}}</strong></div>
-          <div>Order placed: <strong>{{transaction.created_at | date:'medium'}}</strong></div>
-          <div>
-            <span>Payment Method:</span>
-            <strong ng-hide="transaction.checkout_method.owner">{{transaction.checkout_method.display_name}}</strong>
-            <a ng-show="transaction.checkout_method.owner" owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
+      <div class="col-xs-3">
+        <div class="panel panel-success">
+          <div class="panel-heading text-center">
+            Total (
+            {{ transaction.items.length | number }}
+            <ng-pluralize count="transaction.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>
+            ): {{ transaction.gross || 0 | dollars:{ precision: {'USD': 2} } }}
+          </div>
+          <div class="panel-body">
+            <div>
+              <div><strong>Payment Method:</strong></div>
+              <span ng-if="transaction.checkout_method.owner">
+                <img style="max-width:18px; max-height:18px" ng-src="{{ transaction.checkout_method.owner.image_url }}"></img>
+              </span>
+              <strong ng-hide="transaction.checkout_method.owner">{{transaction.checkout_method.display_name}}</strong>
+              <a ng-show="transaction.checkout_method.owner" owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
+            </div>
+          </div>
+          <div class="panel-footer text-center">
+            <div>Order placed: <strong>{{transaction.created_at | date:'mediumDate'}}</strong></div>
           </div>
         </div>
       </div>
     </div>
-    <h2 class="text-center">Spread the word!</h2>
-    <div ng-include="" src="'app/transactions/share.html'">
-
-    </div>
+    <!-- <div ng-include="'app/transactions/share.html'"></div> -->
   </div>
 </div>

@@ -92,7 +92,7 @@ angular.module('app')
     }
   })
 
-  .run(function($rootScope, $window, $api, $currency) {
+  .run(function($rootScope, $window, $api, $currency, $cart, ShoppingCart) {
     // load person from initial cookies
     $api.load_current_person_from_cookies();
 

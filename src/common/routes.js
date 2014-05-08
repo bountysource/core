@@ -71,7 +71,7 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
 
   $routeProvider.when('/cart', angular.extend({
     templateUrl: 'app/cart/cart.html',
-    controller: 'CartController',
+    controller: 'ShoppingCartController',
     trackEvent: 'View Cart'
   }, defaultRouteOptions));
 
@@ -101,12 +101,6 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     templateUrl: 'app/issues/bounties.html',
     controller: 'IssuesBaseController',
     trackEvent: 'View Issue Bounties'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/issues/:id/bounty', angular.extend({
-    templateUrl: 'app/issues/bounty.html',
-    controller: 'IssuesBaseController',
-    trackEvent: 'View Bounty Create'
   }, defaultRouteOptions));
 
   $routeProvider.when('/issues/:id/claims', angular.extend({

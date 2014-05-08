@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('services').service('$currency', function ($rootScope, $cookieStore, $window, $log, $api, $analytics) {
+angular.module('services').service('$currency', function ($rootScope, $cookieStore, $window, $log, $api, $analytics, $q) {
 
   var self = this;
 
@@ -8,6 +8,9 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
   this._cookieName = 'currencySwitcherValue';
 
   this.currencyChangedEventName = 'currencyChangedEvent';
+
+  var onLoadDeferred = $q.defer();
+  this.onLoadPromise = onLoadDeferred.promise;
 
   // Get BTC price
   this.btcToUsdRate = undefined;
@@ -18,7 +21,9 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
       self.btcToUsdRate = response.data.bitcoin;
       self.mscToUsdRate = response.data.mastercoin;
       self.xrpToUsdRate = response.data.ripple;
+      onLoadDeferred.resolve(self);
     } else {
+      onLoadDeferred.reject();
       $log.error('Failed to get currency values');
     }
   });
@@ -53,22 +58,6 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
 
   this.btcToUsd = function (value) {
     return value * this.btcToUsdRate;
-  };
-
-  this.usdToXrp = function (value) {
-    return value / this.xrpToUsdRate;
-  };
-
-  this.xrpToUsd = function (value) {
-    return value * this.xrpToUsdRate;
-  };
-
-  this.usdToMsc = function (value) {
-    return value / this.mscToUsdRate;
-  };
-
-  this.mscToUsd = function (value) {
-    return value * this.mscToUsdRate;
   };
 
   this.isUSD = function (value) {
@@ -115,5 +104,114 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
 
   // Load value from cookies, or set to USD
   this.value = this.getValueFromCookie() || 'USD';
+
+  /*
+   * Convert amount USD to the provided currency
+   * @param amount - the amount being converted
+   * @param toCurrency - the currency to convert to. defaults to this.value
+   * @params fromCurrency - the currency of amount. defaults to USD
+   * */
+  this.convert = function (amount, fromCurrency, toCurrency) {
+    var new_amount;
+    toCurrency = toCurrency || 'USD';
+    fromCurrency = fromCurrency || this.value;
+
+    if (fromCurrency === toCurrency) {
+      new_amount = amount;
+
+    // USD to BTC
+    } else if (this.isUSD(fromCurrency) && this.isBTC(toCurrency)){
+      new_amount = amount / this.btcToUsdRate;
+
+    // USD to MSC
+    } else if (this.isUSD(fromCurrency) && this.isMSC(toCurrency)) {
+      new_amount = amount / this.mscToUsdRate;
+
+    // USD to XRP
+    } else if (this.isUSD(fromCurrency) && this.isXRP(toCurrency)) {
+      new_amount = amount / this.xrpToUsdRate;
+
+    // BTC to USD
+    } else if (this.isBTC(fromCurrency) && this.isUSD(toCurrency)){
+      new_amount = amount * this.btcToUsdRate;
+
+    // BTC to MSC
+    } else if (this.isBTC(fromCurrency) && this.isMSC(toCurrency)){
+      new_amount = this.convert(amount, 'BTC', 'USD') * this.mscToUsdRate;
+
+    // BTC to XRP
+    } else if (this.isBTC(fromCurrency) && this.isXRP(toCurrency)){
+      new_amount = this.convert(amount, 'BTC', 'USD') * this.xrpToUsdRate;
+
+    // MSC to USD
+    } else if (this.isMSC(fromCurrency) && this.isUSD(toCurrency)) {
+      new_amount = amount * this.mscToUsdRate;
+
+    // MSC to BTC
+    } else if (this.isMSC(fromCurrency) && this.isBTC(toCurrency)) {
+      new_amount = this.convert(amount, 'MSC', 'USD') * this.btcToUsdRate;
+
+    // MSC to XRP
+    } else if (this.isMSC(fromCurrency) && this.isXRP(toCurrency)) {
+      new_amount = this.convert(amount, 'MSC', 'USD') * this.xrpToUsdRate;
+
+    // XRP to USD
+    } else if (this.isXRP(fromCurrency) && this.isUSD(toCurrency)) {
+      new_amount = amount * this.xrpToUsdRate;
+
+    // XRP to BTC
+    } else if (this.isXRP(fromCurrency) && this.isBTC(toCurrency)) {
+      new_amount = this.convert(amount, 'XRP', 'USD') * this.btcToUsdRate;
+
+    // XRP to MSC
+    } else if (this.isXRP(fromCurrency) && this.isMSC(toCurrency)) {
+      new_amount = this.convert(amount, 'XRP', 'USD') * this.mscToUsdRate;
+    }
+
+    return new_amount;
+  };
+
+  this.usdToBtc = function (value) {
+    return this.convert(value, 'USD', 'BTC');
+  };
+
+  this.btcToUsd = function (value) {
+    return this.convert(value, 'BTC', 'USD');
+  };
+
+  this.usdToXrp = function (value) {
+    return this.convert(value, 'USD', 'XRP');
+  };
+
+  this.xrpToUsd = function (value) {
+    return this.convert(value, 'XRP', 'USD');
+  };
+
+  this.usdToMsc = function (value) {
+    return this.convert(value, 'USD', 'MSC');
+  };
+
+  this.mscToUsd = function (value) {
+    return this.convert(value, 'MSC', 'USD');
+  };
+
+  /*
+  * What is the precision for the current currency?
+  *
+  * @param currencyIso - the currency ISO to return precision for. Defaults to $currency.value
+  * @overrides - Manually change the precision of a currency ISO. Ex. { 'USD': 2, 'BTC': 8 }
+  * */
+  this.precision = function (currencyIso, overrides) {
+    currencyIso = currencyIso || this.value;
+    overrides = overrides || {};
+    switch (this.value) {
+      case ('USD'):
+        return overrides.USD || 0;
+
+      case ('BTC'):
+        return overrides.BTC || 3;
+    }
+  };
+
 
 });
