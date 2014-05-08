@@ -186,7 +186,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       scope.customPayinRedirect = function (amount) {
         $analytics.teamPayinStart({ amount: amount, type: 'custom'});
-        scope.pledgeRedirect(amount);
+        scope.payinRedirect(amount);
       };
 
       scope.customPledgeRedirect = function(amount) {
