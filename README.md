@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/bountysource/frontend.png?label=ready&title=Ready)](https://waffle.io/bountysource/frontend)
 # Bountysource
 [![Visit our IRC channel](https://kiwiirc.com/buttons/irc.freenode.net/Bountysource.png)](https://kiwiirc.com/client/irc.freenode.net/?nick=Bountyuser|?#Bountysource)
 
