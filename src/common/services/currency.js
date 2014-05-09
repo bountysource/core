@@ -217,5 +217,14 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     }
   };
 
+  /*
+  * Does the currency have a symbol? For example, the symbol for USD is $.
+  *
+  * @return - true if currency has a symbol. otherwise, false.
+  * */
+  this.hasSymbol = function (currencyIso) {
+    currencyIso = currencyIso || this.value;
+    return this.isUSD(currencyIso) || this.isBTC(currencyIso);
+  };
 
 });

@@ -23,8 +23,6 @@
       </div>
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="visible-lg visible-md"><a href="/fees">Pricing</a></li>
-
         <li class="visible-lg visible-md" ng-if="!current_person"><a href="/teams">Teams</a></li>
 
         <li class="dropdown" ng-if="current_person">
@@ -40,19 +38,21 @@
         <!-- Currency switcher -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span ng-if="$currency.isUSD()">Currency: $</span>
-            <span ng-if="$currency.isBTC()">Currency: ฿</span>
-            <span ng-if="$currency.isMSC()">Currency: MSC</span>
-            <span ng-if="$currency.isXRP()">Currency: XRP</span>
+            <span ng-if="$currency.isUSD()">Pricing: $</span>
+            <span ng-if="$currency.isBTC()">Pricing: ฿</span>
+            <span ng-if="$currency.isMSC()">Pricing: MSC</span>
+            <span ng-if="$currency.isXRP()">Pricing: XRP</span>
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
+            <li><a href="/fees">Fees</a></li>
+
+            <li role="presentation" class="dropdown-header">Choose currency:</li>
             <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
             <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
+            <li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>
 
-            <!-- TODO unhide experimental currencies -->
-            <!--<li role="presentation" class="dropdown-header">Experimental:</li>-->
-            <!--<li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>-->
+            <!-- TODO unhide Ripple -->
             <!--<li><a ng-click="$currency.setXRP()">Ripple (XRP)</a></li>-->
           </ul>
         </li>
