@@ -13,8 +13,9 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
       } else if (transaction.items[i].fundraiser) {
         $scope.fundraisers.push(transaction.items[i].fundraiser);
       }
+      // coerce bounty_expiration into integer because it returns nil, "never" ,'3', '6'
+      transaction.items[i].bounty_expiration = parseExpiration(transaction.items[i].bounty_expiration);
     }
-
     // TODO Make this share functionality a module that can take any object + url
     ///////// Share button logic /////////
     var item = transaction.items[0];
@@ -30,6 +31,20 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
     $scope.transaction = transaction;
     return transaction;
   });
+
+  function parseExpiration (expiration_value) {
+    var result;
+
+    if(angular.isUndefined(expiration_value)) {
+      result = 0;
+    } else if (expiration_value === 'never') {
+      result = 0;
+    } else {
+      result = parseInt(expiration_value, 10);
+    }
+
+    return result;
+  }
 
   $scope.isPledge = function (item) {
     return angular.isObject(item) && item.type === 'Pledge';
