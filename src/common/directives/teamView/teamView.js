@@ -126,21 +126,50 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         }
       }
 
-      /*****************************
-       * Pledge Buttons
-       * */
+      // *************************
+      // Team Payin Button Actions
+      // *************************
 
-      scope.pledgeRedirect = function(amount, reward_id) {
-        $analytics.pledgeStart({ amount: amount, type: 'buttons' });
+      function addTeamPayin (amount) {
+        // generic function to add team_paying
+        // specific uses of this function should already convert the value if necessary
+        scope.$watch('team', function (team) {
+          if (angular.isObject(team)) {
+            return $cart.addTeamPayin({
+              amount: amount,
+              currency: $currency.value,
+              team_id: team.id
+            }).then(function () {
+              $location.url('/cart');
+            });
+          }
+        });
+      }
 
+      scope.payinRedirect = function (amount) {
+        $analytics.teamPayinStart({ amount: amount, type: 'buttons'});
         // Button values are hardocded with USD. Conver if needed
         var converted = $currency.convert($window.parseFloat(amount), 'USD', $currency.value);
+        addTeamPayin(converted);
+      };
 
+      scope.customPayinRedirect = function (amount) {
+        $analytics.teamPayinStart({ amount: amount, type: 'custom'});
+        // add to cart and redirect to the cart page
+        addTeamPayin(amount);
+      };
+
+
+      // **************************
+      // Pledge Buttons
+      // **************************
+
+      function addPledge (amount, reward_id) {
         scope.$watch('activeFundraiser', function (fundraiser) {
           if (angular.isObject(fundraiser)) {
             if (fundraiser) {
               return $cart.addPledge({
-                amount: converted,
+                amount: amount,
                 currency: $currency.value,
                 fundraiser_id: fundraiser.id,
                 reward_id: reward_id
@@ -150,25 +179,17 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             }
           }
         });
-      };
+      }
 
-      scope.payinRedirect = function (amount) {
-        $analytics.teamPayinStart({ amount: amount, type: 'buttons'});
+      scope.pledgeRedirect = function(amount, reward_id) {
+        // track event
+        $analytics.pledgeStart({ amount: amount, type: 'buttons' });
 
         // Button values are hardocded with USD. Conver if needed
         var converted = $currency.convert($window.parseFloat(amount), 'USD', $currency.value);
 
-        scope.$watch('team', function (team) {
-          if (angular.isObject(team)) {
-            return $cart.addTeamPayin({
-              amount: converted,
-              currency: $currency.value,
-              team_id: team.id
-            }).then(function () {
-              $location.url('/cart');
-            });
-          }
-        });
+        // Add pledge and redirect to cart
+        addPledge(converted, reward_id);
       };
 
       scope.pledgeWithRewardRedirect = function(reward) {
@@ -184,14 +205,10 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         scope.pledgeRedirect(null);
       };
 
-      scope.customPayinRedirect = function (amount) {
-        $analytics.teamPayinStart({ amount: amount, type: 'custom'});
-        scope.payinRedirect(amount);
-      };
 
       scope.customPledgeRedirect = function(amount) {
         $analytics.pledgeStart({ amount: amount, type: 'custom' });
-        scope.pledgeRedirect(amount);
+        addPledge(amount);
       };
 
       // Track Create Fundraiser Click
@@ -203,7 +220,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       /*****************************
        * All Team Backers
-       * */
+       * 
 
       scope.$watch('team', function(team) {
         if (team) {
