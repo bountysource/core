@@ -20,7 +20,7 @@ angular.module('filters').filter('dollars', function($filter, $api, $currency) {
     // If displaying short form, hide unit if required of the currency.
     // TODO clean up a kind of a dirty conditional
     if (displayShortForm) {
-      if ($currency.isMSC() || $currency.isXRP()) {
+      if (!$currency.hasSymbol($currency.value)) {
         showUnit = false;
       }
     }
