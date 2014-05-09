@@ -164,17 +164,12 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       // Pledge Buttons
       // **************************
 
-      scope.pledgeRedirect = function(amount, reward_id) {
-        $analytics.pledgeStart({ amount: amount, type: 'buttons' });
-
-        // Button values are hardocded with USD. Conver if needed
-        var converted = $currency.convert($window.parseFloat(amount), 'USD', $currency.value);
-
+      function addPledge (amount, reward_id) {
         scope.$watch('activeFundraiser', function (fundraiser) {
           if (angular.isObject(fundraiser)) {
             if (fundraiser) {
               return $cart.addPledge({
-                amount: converted,
+                amount: amount,
                 currency: $currency.value,
                 fundraiser_id: fundraiser.id,
                 reward_id: reward_id
@@ -184,6 +179,17 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             }
           }
         });
+      }
+
+      scope.pledgeRedirect = function(amount, reward_id) {
+        // track event
+        $analytics.pledgeStart({ amount: amount, type: 'buttons' });
+
+        // Button values are hardocded with USD. Conver if needed
+        var converted = $currency.convert($window.parseFloat(amount), 'USD', $currency.value);
+
+        // Add pledge and redirect to cart
+        addPledge(converted, reward_id);
       };
 
       scope.pledgeWithRewardRedirect = function(reward) {
@@ -202,7 +208,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       scope.customPledgeRedirect = function(amount) {
         $analytics.pledgeStart({ amount: amount, type: 'custom' });
-        scope.pledgeRedirect(amount);
+        addPledge(amount);
       };
 
       // Track Create Fundraiser Click
