@@ -107,7 +107,7 @@
                   </div>
                   <div class="col-xs-8">
                     <p ng-if="item.bounty_expiration > 0">{{ item.bounty_expiration | number }} months</p>
-                    <p ng-if="item.bounty_expiration == 'never'">Never</p>
+                    <p ng-if="item.bounty_expiration === 'never'">Never</p>
                     <p ng-if="!item.bounty_expiration">Never</p>
                   </div>
 
