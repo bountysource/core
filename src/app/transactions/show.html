@@ -150,15 +150,8 @@
               </div>
             </td>
 
-            <td class="col-sm-2">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <currency-unit></currency-unit>
-                  </span>
-                  <input type="text" class="form-control white-input" ng-value="item.amount | dollars:{ unit: false}" disabled></input>
-                </div>
-              </div>
+            <td class="col-sm-2 text-right">
+              <strong><h4>{{ item.amount | dollars }}</h4></strong>
             </td>
           </tr>
           </tbody>
