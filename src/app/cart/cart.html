@@ -16,7 +16,7 @@
         <alert type="alert.type" close="alert.message = null">{{ alert.message }}</alert>
       </div>
 
-      <table class="table" ng-if="!cart.isEmpty()">
+      <table class="table" ng-if="cart && !cart.isEmpty()">
         <tbody>
         <tr ng-repeat="item in cart.items">
 
@@ -217,7 +217,7 @@
     </div>
 
     <!-- Checkout button -->
-    <div class="col-md-3 col-sm-4">
+    <div class="col-md-3 col-sm-4" ng-hide="!cart || cart.isEmpty()">
       <div class="panel panel-success">
         <div class="panel-heading text-center">Total ({{cart.items.length | number}} <ng-pluralize count="cart.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ calculateCartTotal() || 0 | dollars:{ precision: {'USD': 2} } }}</div>
 
