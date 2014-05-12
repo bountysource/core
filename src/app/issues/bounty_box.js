@@ -12,7 +12,7 @@ angular.module('app').controller('BountyBoxController', function ($scope, $route
       issue_id: $routeParams.id
     }).then(function () {
       $location.url("/cart");
-    });;
+    });
   }
 
   $scope.place_bounty_redirect = function (amount) {
