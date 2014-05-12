@@ -159,6 +159,11 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
         addTeamPayin(amount);
       };
 
+      scope.adminPayinRedirect = function (amount) {
+        $analytics.teamPayinStart({ type: 'admin' });
+        addTeamPayin(amount || null);
+      }
+
 
       // **************************
       // Pledge Buttons
