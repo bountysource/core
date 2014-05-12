@@ -162,7 +162,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       scope.adminPayinRedirect = function (amount) {
         $analytics.teamPayinStart({ type: 'admin' });
         addTeamPayin(amount || 0);
-      }
+      };
 
 
       // **************************
