@@ -191,7 +191,7 @@
               <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> General</li>
 
               <li ng-show="is_admin">
-                <a ng-href="/teams/{{team.slug}}/account">Add Funds</a>
+                <a ng-click="adminPayinRedirect()">Add Funds</a>
               </li>
 
               <li ng-show="is_admin">
