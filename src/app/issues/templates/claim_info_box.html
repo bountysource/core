@@ -13,8 +13,11 @@
     <h2 style="margin: 0;">{{issue.winning_bounty_claim.amount | dollars}}</h2>
     <h4 style="margin: 0;">Bounty</h4>
     <br>
+
     <h4 style="margin: 0;">Awarded to:</h4>
-    <person-icon format="vertical" person="issue.winning_bounty_claim.person" size="60px"></person-icon>
+    <div ng-repeat="claim in issue.bounty_claims | filter:{ collected: true }">
+      <person-icon format="vertical" person="claim.person" size="60px"></person-icon>
+    </div>
     <br>
     <backer-thumbnails issue="issue"></backer-thumbnails>
   </div>
