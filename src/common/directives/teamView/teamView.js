@@ -225,7 +225,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
 
       /*****************************
        * All Team Backers
-       **/
+       * 
 
       scope.$watch('team', function(team) {
         if (team) {
