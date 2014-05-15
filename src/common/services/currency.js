@@ -227,7 +227,7 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
   * */
   this.hasSymbol = function (currencyIso) {
     currencyIso = currencyIso || this.value;
-    return this.isUSD(currencyIso) || this.isBTC(currencyIso) || this.isXRP(currencyIso);
+    return this.isUSD(currencyIso) || this.isBTC(currencyIso);
   };
 
 });
