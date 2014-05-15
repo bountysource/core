@@ -126,6 +126,18 @@
       </div>
 
       <!-- Share Buttons -->
+      <div>
+        <h5>Share this:</h5>
+        <div ng-controller="TeamBadgeController">
+          <a ng-click="showBadgeModal()">
+            <team-badge id="team.id" type="bounties"></team-badge>
+          </a>
+
+          <a ng-click="showBadgeModal()">
+            <team-badge id="team.id" type="raised"></team-badge>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- MAIN COLUMN -->

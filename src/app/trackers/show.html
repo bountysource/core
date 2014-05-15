@@ -21,10 +21,10 @@
 
         <div class="row">
           <div class="text-center"
-          ng-class="{span6: tracker_stats.collected_total > 0, span12: tracker_stats.collected_total == 0}"
-          ng-show="tracker.bounty_total > 0">
-          <a ng-click="show_bounties()"><h3 style="margin: 0; line-height:35px" class="text-center">
-            {{tracker.bounty_total | dollars}}</h3></a>
+               ng-class="{span6: tracker_stats.collected_total > 0, span12: tracker_stats.collected_total == 0}"
+               ng-show="tracker.bounty_total > 0">
+            <a ng-click="show_bounties()"><h3 style="margin: 0; line-height:35px" class="text-center">
+              {{tracker.bounty_total | dollars}}</h3></a>
 
             <div>in bounties</div>
           </div>
@@ -33,28 +33,28 @@
             <a ng-click="show_claimed_bounties()"><h3 style="margin:0; line-height:35px;" class="text-center">
               {{tracker_stats.collected_total | dollars}}</h3></a>
 
-              <div>claimed</div>
+            <div>claimed</div>
+          </div>
+        </div>
+
+        <div class="row" ng-show="tracker.tracker_type == 'Github::Repository'">
+          <div class="text-center col-sm-6 col-md-6">
+            <h3 style="margin: 0; line-height:35px;">{{tracker.forks || 0 | number}}</h3>
+
+            <div>
+              <ng-pluralize count="tracker.forks" when="{ 'one': 'fork', 'other': 'forks' }"></ng-pluralize>
             </div>
           </div>
+          <div class="text-center col-sm-6 col-md-6">
+            <h3 style="margin: 0; line-height:35px;">{{tracker.watchers || 0 | number}}</h3>
 
-          <div class="row" ng-show="tracker.tracker_type == 'Github::Repository'">
-            <div class="text-center col-sm-6 col-md-6">
-              <h3 style="margin: 0; line-height:35px;">{{tracker.forks || 0 | number}}</h3>
-
-              <div>
-                <ng-pluralize count="tracker.forks" when="{ 'one': 'fork', 'other': 'forks' }"></ng-pluralize>
-              </div>
-            </div>
-            <div class="text-center col-sm-6 col-md-6">
-              <h3 style="margin: 0; line-height:35px;">{{tracker.watchers || 0 | number}}</h3>
-
-              <div>
-                <ng-pluralize count="tracker.watchers" when="{ 'one': 'watcher', 'other': 'watchers' }"></ng-pluralize>
-              </div>
+            <div>
+              <ng-pluralize count="tracker.watchers" when="{ 'one': 'watcher', 'other': 'watchers' }"></ng-pluralize>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
     <div ng-include="'app/trackers/templates/top_backers.html'"></div>
   </div>
@@ -86,7 +86,7 @@
 
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4">
-          <button class="btn btn-default btn-block" ng-click="toggle_advanced_search()">Advanced Search 
+          <button class="btn btn-default btn-block" ng-click="toggle_advanced_search()">Advanced Search
             <i ng-show="!show_advanced_search" class="glyphicon glyphicon-chevron-down"></i>
             <i ng-show="show_advanced_search" class="glyphicon glyphicon-chevron-up"></i>
           </button>
@@ -100,7 +100,8 @@
                 <span class="input-group-addon">$</span>
                 <input type="number" class="form-control" ng-model="bounty_min" min="1" placeholder="50"></input>
               </div>
-            </div> -
+            </div>
+            -
             <div class="form-group" ng-class="{'has-error': show_bounty_error}">
               <div class="input-group" style="width: 110px">
                 <span class="input-group-addon">$</span>
@@ -109,13 +110,21 @@
             </div>
             <input type="submit" style="visibility: hidden;"></input>
           </form>
-          <div class="alert alert-danger text-center" ng-show="show_bounty_error" style="margin-bottom:0px; padding-top: 5px; padding-bottom: 5px;">Invalid Range</div>
+          <div class="alert alert-danger text-center" ng-show="show_bounty_error"
+               style="margin-bottom:0px; padding-top: 5px; padding-bottom: 5px;">Invalid Range
+          </div>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 text-center">
           <div class="btn-group" style="display: inline-block">
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'open'}" ng-model="issueStatus" btn-radio="'open'" ng-change="getIssues(page)">Open</button>
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'closed'}" ng-model="issueStatus" btn-radio="'closed'" ng-change="getIssues(page)">Closed</button>
-            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'paid_out'}" ng-model="issueStatus" btn-radio="'paid_out'" ng-change="getIssues(page)">Paid Out</button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'open'}"
+                    ng-model="issueStatus" btn-radio="'open'" ng-change="getIssues(page)">Open
+            </button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'closed'}"
+                    ng-model="issueStatus" btn-radio="'closed'" ng-change="getIssues(page)">Closed
+            </button>
+            <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'paid_out'}"
+                    ng-model="issueStatus" btn-radio="'paid_out'" ng-change="getIssues(page)">Paid Out
+            </button>
           </div>
         </div>
       </div>
@@ -131,14 +140,14 @@
     <div ng-show="issues.length == 0" class="alert alert-info">No issues found :(</div>
 
     <!--Table of issues-->
-    <issue-list 
+    <issue-list
       issues="issues"
       include="['bountyTotal', 'thumbsUpCount', 'participantsCount', 'issueAge']"
       set-params="setSearchParameters(params)">
     </issue-list>
 
     <!-- Pagination -->
-    <pagination 
+    <pagination
       ng-show="total_items > 30"
       on-select-page="getIssues(page)"
       page="page"
