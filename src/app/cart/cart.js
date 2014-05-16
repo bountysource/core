@@ -345,7 +345,7 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
           currency: $currency.value
         }, function (response) {
           // If checkout is successful, clear the UID cookie so that the new cart takes over
-          $scope.cart.setUid(null);
+          // $scope.cart.setUid(null);
           successCallback(response, checkoutMethod);
         }, function (response) {
           errorCallback(response);
