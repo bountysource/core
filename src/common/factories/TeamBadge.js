@@ -13,7 +13,7 @@ angular.module('factories').factory('TeamBadge', function ($rootScope, $window, 
   };
 
   TeamBadge.prototype.imageUrl = function () {
-    return $rootScope.api_host + 'badge/team?' + $api.toKeyValue({ id: this.team.id, type: this.type });
+    return $rootScope.api_host + 'badge/team?' + $api.toKeyValue({ team_id: this.team.id, style: this.type });
   };
 
   TeamBadge.prototype.utmParams = function () {

@@ -15,7 +15,7 @@ angular.module('factories').factory('IssueBadge', function ($rootScope, $window,
   };
 
   IssueBadge.prototype.imageUrl = function () {
-    return $rootScope.api_host + 'badge/issue?' + $api.toKeyValue({ id: this.issue.id });
+    return $rootScope.api_host + 'badge/issue?' + $api.toKeyValue({ issue_id: this.issue.id });
   };
 
   IssueBadge.prototype.utmParams = function () {

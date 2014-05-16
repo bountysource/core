@@ -9,10 +9,6 @@ angular.module('factories').factory('TeamBadgeRaised', function ($rootScope, $wi
     TeamBadge.apply(this, arguments);
   };
 
-  TeamBadge.prototype.imageUrl = function () {
-    return $rootScope.api_host + 'badge/team?' + $api.toKeyValue({ id: this.team.id, type: this.type });
-  };
-
   TeamBadgeRaised.prototype = new TeamBadge();
 
   return TeamBadgeRaised;
