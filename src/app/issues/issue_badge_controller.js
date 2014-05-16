@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssueBadgeController', function ($rootScope, $scope, $modal, $window) {
+angular.module('app').controller('IssueBadgeController', function ($rootScope, $scope, $modal) {
 
   var $parentScope = $scope;
 
@@ -11,7 +11,7 @@ angular.module('app').controller('IssueBadgeController', function ($rootScope, $
         $scope.issueBadge = $parentScope.issueBadge;
         $scope.close = $modalInstance.dismiss;
       }
-    })
+    });
   };
 
 });
