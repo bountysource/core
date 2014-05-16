@@ -15,10 +15,9 @@
 
           <!-- Badge -->
           <li ng-controller="IssueBadgeController">
-            <div style="cursor: pointer;" ng-click="showBadgeModal()">
-              <small>Share:</small>
-              <issue-badge id="issue.id"></issue-badge>
-            </div>
+            <a ng-click="showBadgeModal()">
+              <img ng-src="{{issueBadge.imageUrl()}}" />
+            </a>
           </li>
         </ul>
       </div>

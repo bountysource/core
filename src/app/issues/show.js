@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssueShow', function ($scope, $routeParams, $window, $location, $pageTitle, $anchorScroll, Comments, Issue, Bounties) {
+angular.module('app').controller('IssueShow', function ($scope, $routeParams, $window, $location, $pageTitle, $anchorScroll, Comments, Issue, Bounties, IssueBadge) {
 
   // alert above the issue title about bounty status
   $scope.bounty_alert = {
@@ -17,6 +17,9 @@ angular.module('app').controller('IssueShow', function ($scope, $routeParams, $w
     include_tracker: true
   }, function (issue) {
     $pageTitle.set(issue.title, issue.tracker.name);
+
+    // Create issue badge!
+    $scope.issueBadge = new IssueBadge(issue);
   });
 
   // Load issue bounties
