@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('factories').factory('TeamBadgeBountiesReceived', function (TeamBadge) {
+angular.module('factories').factory('TeamBadgeBountiesReceived', function ($window, TeamBadge) {
 
   var TeamBadgeBountiesReceived = function () {
     this.type = 'bounties_received';
@@ -9,6 +9,10 @@ angular.module('factories').factory('TeamBadgeBountiesReceived', function (TeamB
   };
 
   TeamBadgeBountiesReceived.prototype = new TeamBadge();
+
+  TeamBadgeBountiesReceived.prototype.baseFrontendUrl = function () {
+    return $window.location.protocol + '//' + $window.location.host + '/teams/' + this.team.slug + '/issues';
+  };
 
   TeamBadgeBountiesReceived.prototype.description = function () {
     return 'Bounties on projects owned by ' + this.team.name;
