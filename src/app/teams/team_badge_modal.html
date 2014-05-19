@@ -4,10 +4,10 @@
       <ng-form class="form-horizontal">
         <div class="form-group">
           <div class="col-md-offset-2 col-md-10">
-            <p class="form-control-static">
+            <p class="form-control-static">{{badge.description()}}:</p>
+            <div class="form-control-static">
               <img ng-src="{{badge.imageUrl()}}" />
-            </p>
-            <p class="form-control-static">{{badge.description}}</p>
+            </div>
           </div>
         </div>
 
