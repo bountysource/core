@@ -4,7 +4,6 @@ angular.module('factories').factory('TeamBadgeRaised', function ($rootScope, $wi
 
   var TeamBadgeRaised = function () {
     this.type = 'raised';
-    this.utmCampaignName = 'TEAM_BADGE_2';
     TeamBadge.apply(this, arguments);
   };
 
