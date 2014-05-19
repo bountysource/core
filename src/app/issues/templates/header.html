@@ -6,7 +6,21 @@
       </div>
       <div class="col-sm-11 col-md-11">
         <h4 style="margin-top: 0;">{{ issue.title || 'Loading...' }}</h4>
-        <issue-status-label issue="issue"></issue-status-label>
+
+        <ul class="list-inline">
+          <!-- Issue status -->
+          <li>
+            <issue-status-label issue="issue"></issue-status-label>
+          </li>
+
+          <!-- Badge -->
+          <li ng-controller="IssueBadgeController">
+            <small>Share:</small>
+            <a ng-click="showBadgeModal()">
+              <img ng-src="{{issueBadge.imageUrl()}}" />
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

@@ -1,0 +1,48 @@
+<div>
+  <div class="modal-body">
+    <div ng-repeat="badge in badges">
+      <ng-form class="form-horizontal">
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <p class="form-control-static">{{badge.description()}}:</p>
+            <div class="form-control-static">
+              <img ng-src="{{badge.imageUrl()}}" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-2">URL</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control input-sm" ng-value="badge.imageUrl()" style="cursor: pointer;" readonly select-on-click />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-2">HTML</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control input-sm" ng-value="badge.html()" style="cursor: pointer;" readonly select-on-click />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-2">Markdown</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control input-sm" ng-value="badge.markdown()" style="cursor: pointer;" readonly select-on-click />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-2">BBCode</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control input-sm" ng-value="badge.bbcode()" style="cursor: pointer;" readonly select-on-click />
+          </div>
+        </div>
+      </ng-form>
+    </div>
+  </div>
+
+  <div class="modal-footer" style="margin-top: 0;">
+    <button class="btn btn-default" ng-click="close()">Close</button>
+  </div>
+</div>
