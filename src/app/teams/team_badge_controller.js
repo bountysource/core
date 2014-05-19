@@ -4,7 +4,7 @@ angular.module('teams').controller('TeamBadgeController', function ($rootScope, 
 
   var $parentScope = $scope;
 
-  $scope.badgeBountiesPosted = new TeamBadgeBountiesPosted($scope.team);
+  $scope.badgeBountiesReceived = new TeamBadgeBountiesReceived($scope.team);
 
   $scope.showBadgeModal = function () {
     $modal.open({
