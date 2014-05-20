@@ -61,6 +61,42 @@
                 </div>
               </div>
 
+              <!-- Ripple -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <div class="col-sm-12">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" ng-model="cashOut.type" ng-value="'ripple'" /> Ripple
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" ng-if="cashOut.type === 'ripple'" ng-class="{ 'has-error': paymentMethodForm.rippleAddress.$invalid }">
+                <label class="control-label col-sm-3">Ripple Address:</label>
+                <div class="col-sm-9">
+                  <input type="text" name="rippleAddress" class="form-control" ng-model="cashOut.ripple_address" required autocomplete />
+                </div>
+              </div>
+
+              <!-- Mastercoin -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <div class="col-sm-12">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" ng-model="cashOut.type" ng-value="'mastercoin'" /> Mastercoin
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" ng-if="cashOut.type === 'mastercoin'" ng-class="{ 'has-error': paymentMethodForm.mastercoinAddress.$invalid }">
+                <label class="control-label col-sm-3">Mastercoin Address:</label>
+                <div class="col-sm-9">
+                  <input type="text" name="mastercoinAddress" class="form-control" ng-model="cashOut.mastercoin_address" required autocomplete />
+                </div>
+              </div>
+
               <!-- Check -->
               <div class="form-group" style="margin-bottom: 0;">
                 <div class="col-sm-12">
