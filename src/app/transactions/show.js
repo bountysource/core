@@ -34,7 +34,7 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
 
   function parseExpiration (expiration_value) {
     var result;
-    if(expiration_value === null) {
+    if(angular.isUndefined(expiration_value) ||expiration_value === null) {
       result = 0;
     } else if (expiration_value === 'never') {
       result = 0;
