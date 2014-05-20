@@ -6,7 +6,7 @@ angular.module('resources').factory('Tracker', function ($rootScope, $resource) 
     query: {
       method: 'GET',
       isArray: true,
-      headers: { 'Accept': 'application/vnd.bountysource+json; version=2' },
+      headers: { 'Accept': 'application/vnd.bountysource+json; version=2' }
     }
   });
 
