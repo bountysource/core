@@ -115,8 +115,8 @@
                     <strong>Promotion:</strong>
                   </div>
                   <div class="col-xs-8">
-                    <p ng-if="item.promotion">Tweet from @Bountysource</p>
-                    <p ng-if="!item.promotion">No Promotion</p>
+                    <p ng-if="item.promotion || item.tweet">Tweet from @Bountysource</p>
+                    <p ng-if="!item.promotion && !item.tweet">No Promotion</p>
                   </div>
 
                   <!-- Share Buttons -->
