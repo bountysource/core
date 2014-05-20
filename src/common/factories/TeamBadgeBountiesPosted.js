@@ -4,6 +4,7 @@ angular.module('factories').factory('TeamBadgeBountiesPosted', function ($window
 
   var TeamBadgeBountiesPosted = function () {
     this.type = 'bounties_posted';
+    this.utmCampaignName = 'TEAM_BADGE_1';
     TeamBadge.apply(this, arguments);
   };
 

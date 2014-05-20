@@ -17,7 +17,7 @@ angular.module('factories').factory('TeamBadge', function ($rootScope, $window, 
   };
 
   TeamBadge.prototype.utmParams = function () {
-    return { utm_source: this.team.name, utm_medium: 'shield', utm_campaign: this.type };
+    return { utm_source: this.team.name, utm_medium: 'shield', utm_campaign: this.utmCampaignName };
   };
 
   return TeamBadge;
