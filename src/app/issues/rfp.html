@@ -1,0 +1,27 @@
+<div ng-controller="IssueRequestForProposalsController">
+  <div ng-include="'app/issues/templates/breadcrumb.html'"></div>
+  <div class="row" ng-show="issue">
+    <div class="col-sm-8 col-md-9">
+      <div ng-include="'app/issues/templates/header.html'"></div>
+      <!--<div ng-include="'app/issues/templates/start_work_box.html'"></div>-->
+      <!--<div ng-include="'app/issues/templates/developer_goals_notification.html'"></div>-->
+      <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
+
+      <!-- New RFP if authenticated -->
+      <div ng-if="canCreateRfp(current_person) && !requestForProposal.id">
+        <ng-include src="'app/issues/templates/new_rfp_form.html'"></ng-include>
+      </div>
+
+      <!-- Show request for proposals -->
+      <div ng-if="!canCreateRfp(current_person) && requestForProposal">
+        <ng-include></ng-include>
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-3">
+      <div ng-include="'app/issues/templates/bounty_box.html'"></div>
+      <div ng-include="'app/issues/templates/solutions_box.html'" ng-show="issue.can_add_bounty"></div>
+      <div ng-include="'app/issues/templates/claim_info_box.html'" ng-hide="issue.can_add_bounty"></div>
+    </div>
+  </div>
+</div>
