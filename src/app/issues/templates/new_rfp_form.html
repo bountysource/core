@@ -27,26 +27,19 @@
     <label class="control-label col-md-3">Needed by:</label>
 
     <div class="col-md-3">
-      <div class="input-group">
-        <input name="dueDate" class="form-control"
-               ng-model="requestForProposal.due_date"
-               datepicker-popup
-               min-date="new Date()"
-               is-open="dueDatePickerOpened" />
-        <div class="input-group-btn">
-          <button class="btn btn-default" ng-click="showDueDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-        </div>
-      </div>
+      <input name="dueDate" class="form-control" placeholder="Due date"
+             ng-model="requestForProposal.due_date"
+             datepicker-popup />
     </div>
   </div>
 
-  <!-- Bio: it's like a resume for the person broadcasting the RFP -->
+  <!-- Additional notes about the issue from the team -->
   <div class="form-group">
     <label class="control-label col-md-3">Additional notes:</label>
 
     <div class="col-md-9">
-      <textarea class="form-control" rows="5"
-                placeholder="Optionally provide additional details needed for resolving this issue"></textarea>
+      <textarea class="form-control" rows="5" ng-model="requestForProposal.notes"
+                placeholder="Optionally provide additional details needed for solving this issue"></textarea>
     </div>
   </div>
 
