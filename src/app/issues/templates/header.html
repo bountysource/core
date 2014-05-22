@@ -1,4 +1,5 @@
 <div>
+
   <div class="hidden-sm">
     <div class="row">
       <div class="col-sm-1 col-md-1" style="padding-right:0px;">
@@ -24,8 +25,16 @@
       </div>
     </div>
   </div>
+
   <div class="visible-sm">
     <h4 style="margin-top: 0;">{{ issue.title || 'Loading...' }} <issue-status-label issue="issue"></issue-status-label></h4>
   </div>
-  <br>
+
+  <br />
+
+  <!-- Start work box-->
+  <div ng-include="'app/issues/templates/start_work_box.html'"></div>
+
+  <!-- Developer goals notification box -->
+  <div ng-include="'app/issues/templates/developer_goals_notification.html'"></div>
 </div>
