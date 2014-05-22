@@ -1,4 +1,4 @@
-'use strcit';
+'use strict';
 
 angular.module('factories').factory('Person', function ($rootScope, $resource) {
 
