@@ -3,18 +3,19 @@
   <div class="row" ng-show="issue">
     <div class="col-sm-8 col-md-9">
       <div ng-include="'app/issues/templates/header.html'"></div>
-      <!--<div ng-include="'app/issues/templates/start_work_box.html'"></div>-->
-      <!--<div ng-include="'app/issues/templates/developer_goals_notification.html'"></div>-->
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
 
-      <!-- New RFP if authenticated -->
-      <div ng-if="canCreateRfp(current_person) && !requestForProposal.id">
-        <ng-include src="'app/issues/templates/new_rfp_form.html'"></ng-include>
-      </div>
+      <!-- Hide everything until RFP is resolved -->
+      <div ng-show="resolved">
+        <!-- New RFP if authenticated -->
+        <div ng-if="!requestForProposal.id">
+          <ng-include src="'app/issues/templates/new_rfp_form.html'"></ng-include>
+        </div>
 
-      <!-- Show request for proposals -->
-      <div ng-if="!canCreateRfp(current_person) && requestForProposal">
-        <ng-include></ng-include>
+        <!-- Show request for proposals -->
+        <div ng-if="requestForProposal.id && requestForProposal.$resolved">
+          <ng-include src="'app/issues/templates/rfp.html'"></ng-include>
+        </div>
       </div>
     </div>
 
