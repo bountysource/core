@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('factories').factory('Team', function ($rootScope) {
+angular.module('factories').factory('Team', function ($rootScope, $resource) {
 
   var defaultHeaders = { 'Accept': 'application/vnd.bountysource+json; version=2' };
 
