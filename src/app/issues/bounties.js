@@ -1,27 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssueBountiesController', function ($scope, $routeParams, $api, Issue, Bounties, $pageTitle) {
-  // Load issue object
-  $scope.issue = Issue.get({
-    id: $routeParams.id,
-    include_body_html: true,
-    include_author: true,
-    include_tracker: true
-  }, function (issue) {
-    $pageTitle.set(issue.title, issue.tracker.name);
-  });
-
-  // Load issue bounties
-  $scope.bounties = Bounties.get({
-    issue_id: $routeParams.id,
-    include_owner: true,
-    order: '+amount'
-  }, function (bounties) {
-    $scope.issue.$promise.then(function (issue) {
-      issue.bounties = bounties;
-    });
-  });
-
+angular.module('app').controller('IssueBountiesController', function ($scope) {
   $scope.sort_column = 'amount';
   $scope.sort_reverse = true;
   $scope.sort_by = function(col) {

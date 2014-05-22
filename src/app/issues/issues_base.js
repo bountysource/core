@@ -1,6 +1,31 @@
 'use strict';
 
-angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics) {
+angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics, $pageTitle, Issue, IssueBadge, Bounties) {
+
+  // Load issue object
+  $scope.issue = Issue.get({
+    id: $routeParams.id,
+    include_body_html: true,
+    include_author: true,
+    include_tracker: true
+  }, function (issue) {
+    $pageTitle.set(issue.title, issue.tracker.name);
+
+    // Create issue badge!
+    $scope.issueBadge = new IssueBadge(issue);
+  });
+
+  // Load issue bounties
+  $scope.bounties = Bounties.get({
+    issue_id: $routeParams.id,
+    include_owner: true,
+    order: '+amount'
+  }, function (bounties) {
+    $scope.issue.$promise.then(function (issue) {
+      issue.bounties = bounties;
+    });
+  });
+
   // Listen for developer goal create/updates. Broadcast update to all Controller instances.
   $scope.$on('developerGoalCreatePushed', function(event, new_developer_goal) {
     $scope.$broadcast('developerGoalCreateReceived', new_developer_goal);
