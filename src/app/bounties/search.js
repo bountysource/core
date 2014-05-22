@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter) {
+angular.module('app').controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter, $anchorScroll) {
   $scope.reset_form_data = function() {
     $scope.form_data = {
       direction: "desc",
@@ -184,6 +184,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
       $scope.maxSize = 10;
       $scope.pageCount = Math.ceil($scope.issues_count / $scope.perPage);
       $scope.loading_search_results = false;
+      $anchorScroll();
     });
   };
 
