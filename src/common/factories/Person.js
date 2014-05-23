@@ -8,20 +8,6 @@ angular.module('factories').factory('Person', function ($rootScope, $resource) {
     get: { method: 'GET', headers: defaultHeaders }
   });
 
-  /*
-  * Can the Person create an RFP on the issue?
-  * */
-  Person.prototype.canCreateRfp = function (issue) {
-
-    // TODO check permission:
-    // 1. Team has RFP enabled
-    // 2. Person is a member of the team
-    // 3. [Person is an admin of the team ?]
-
-    return true;
-
-  };
-
   return Person;
 
 });

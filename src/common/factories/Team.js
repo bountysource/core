@@ -4,7 +4,7 @@ angular.module('factories').factory('Team', function ($rootScope, $resource) {
 
   var defaultHeaders = { 'Accept': 'application/vnd.bountysource+json; version=2' };
 
-  var Team = $resource($rootScope.api_host + 'teams/:id/:action', { id: '@id' }, {
+  var Team = $resource($rootScope.api_host + 'teams/:slug/:action', { slug: '@slug' }, {
     get: { method: 'GET', headers: defaultHeaders },
     query: { method: 'GET', headers: defaultHeaders, isArray: true }
   });

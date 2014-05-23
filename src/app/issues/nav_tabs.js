@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app').controller('IssueNavTabsController', function ($scope, $location) {
+angular.module('app').controller('IssueNavTabsController', function ($scope, $location, Team) {
   $scope.active_tab = function(name) {
     if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
     if (name === 'bounties' && (/^\/issues\/[a-z-_0-9]+\/bounties$/).test($location.path())) { return "active"; }
@@ -9,7 +9,6 @@ angular.module('app').controller('IssueNavTabsController', function ($scope, $lo
   };
 
   $scope.showRfpCreateTab = function () {
-    return angular.isObject($scope.current_person) &&
-      $scope.current_person.canCreateRfp($scope.issue);
+    return $scope.rfpEnabled; // defined in issues_base.js
   };
 });
