@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics, $pageTitle, Issue, IssueBadge, Bounties) {
+angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics, $pageTitle, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team) {
 
   // Load issue object
   $scope.issue = Issue.get({
@@ -24,6 +24,24 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     $scope.issue.$promise.then(function (issue) {
       issue.bounties = bounties;
     });
+  });
+
+  // Load Tracker owner to check if it's a team that has RFP enabled.
+  // Assign $scope.rfpEnabled for checks errwhere.
+  // TODO This realllllyyyyyyy wants to be cached. All of this shit does. It's not even funny.
+  $scope.issue.$promise.then(function (issue) {
+    $scope.tracker = Tracker.get({
+      id: issue.tracker.id,
+      include_owner: true
+    }, function (tracker) {
+      var team = new Team(tracker.owner);
+      $scope.rfpEnabled = team.rfpEnabled();
+    });
+  });
+
+  $scope.requestForProposal = RequestForProposal.get({
+    issue_id: $routeParams.id,
+    include_team: true
   });
 
   // Listen for developer goal create/updates. Broadcast update to all Controller instances.
