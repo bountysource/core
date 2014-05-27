@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('app').controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle, $rootScope) {
+angular.module('app').controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle, Team) {
   $pageTitle.set("Teams");
 
   $scope.team_promise = $api.v2.team($routeParams.id).then(function(response) {
     if (!response.success) {
       $scope.no_team_error = response.data.error;
     } else {
-      $scope.team = angular.copy(response.data);
+      $scope.team = new Team(angular.copy(response.data));
 
       // Parse ints back into strings
       $scope.team.open_bounties_amount = parseInt($scope.team.open_bounties_amount, 10);
