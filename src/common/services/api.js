@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('services').service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter, $log, $analytics) {
+angular.module('services').service('$api', function($http, $q, $cookieStore, $rootScope, $location, $window, $sniffer, $filter, $log, $analytics, Person) {
   var $api = this; // hack to store self reference
   this.access_token_cookie_name = 'v2_access_token';
 
@@ -1069,7 +1069,9 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         if (response.meta.status === 200) {
           console.log("access token still valid");
           response.data.access_token = access_token; // FIXME: why doesn't /user include an access token when it's you?
-          $api.set_current_person(response.data);
+
+          var person = new Person(response.data);
+          $api.set_current_person(person);
         } else {
           console.log("access token expired. signing out.");
           $api.set_current_person();

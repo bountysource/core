@@ -1,13 +1,22 @@
 <ul class="nav nav-tabs" ng-controller="IssueNavTabsController">
   <li ng-class="active_tab('overview')"><a ng-href="/issues/{{issue.slug}}">Overview</a></li>
+
   <li ng-show="issue.bounties.length > 0" ng-class="active_tab('bounties')"><a ng-href="/issues/{{issue.slug}}/bounties">
     Backers
     <span class="badge badge-info" ng-show="issue.bounties.length > 0">{{issue.bounties.length}}</span>
   </a></li>
+
   <li ng-class="active_tab('claims')" ng-show="issue.bounty_total > 0 && (!issue.can_add_bounty || issue.generic)" ng-click="bountyClaimTabClicked()">
     <a ng-href="/issues/{{issue.slug}}/claims">
       Claims
       <span class="badge badge-info" ng-show="issue.bounty_claims.length > 0">{{issue.bounty_claims.length}}</span>
+    </a>
+  </li>
+
+  <!-- Create RFPs -->
+  <li ng-class="active_tab('rfp')" ng-if="showRfpCreateTab()">
+    <a ng-href="/issues/{{issue.slug}}/rfp">
+      Proposals
     </a>
   </li>
 </ul>
