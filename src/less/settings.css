@@ -7,3 +7,8 @@
 {
 	padding-top: 4px;
 }
+
+.no-padding
+{
+  padding: 0px;
+}
