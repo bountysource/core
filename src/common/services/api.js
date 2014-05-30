@@ -297,7 +297,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
 
     unsubscribe: function(params) {
       return this.call({
-        url: "/notifications", 
+        url: "/notifications",
         method: 'PUT',
         params: params || {}
       });

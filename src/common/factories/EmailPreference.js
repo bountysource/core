@@ -1,4 +1,4 @@
-'use strict;'
+'use strict';
 
 angular.module('factories').factory('EmailPreference', function ($rootScope, $resource, $api) {
   var defaultHeaders = { 'Accept': 'application/vnd.bountysource+json; version=2' };
