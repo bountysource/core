@@ -12,6 +12,19 @@
     <!-- LEFT COLUMN -->
     <div class="col-lg-3 col-md-3 col-sm-3">
 
+      <!-- Admin Only -->
+      <div ng-if="current_person.admin">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">Admin</div>
+          <div class="panel-body">
+            <button class="btn btn-default btn-small btn-block" ng-click="team.toggleRfpEnabled()">
+              <span ng-if="!team.rfp_enabled">Enable RFP</span>
+              <span ng-if="team.rfp_enabled">Disable RFP</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Team Info. Includes active Fundraiser progress if there is one running -->
       <div class="panel panel-default">
         <div class="panel-body">
