@@ -17,16 +17,6 @@ angular.module('factories').factory('Team', function ($rootScope, $resource, $ap
     return !!this.rfp_enabled;
   };
 
-  /**
-   * Toggle the RFP feature for this team. Requires user to be a Bountysource admin
-   * */
-  Team.prototype.toggleRfpEnabled = function () {
-    return this.$update({
-      access_token: $api.get_access_token(),
-      rfp_enabled: !this.rfpEnabled()
-    });
-  };
-
   return Team;
 
 });
