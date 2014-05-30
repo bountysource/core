@@ -30,14 +30,32 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
   // Assign $scope.rfpEnabled for checks errwhere.
   // TODO This realllllyyyyyyy wants to be cached. All of this shit does. It's not even funny.
   $scope.issue.$promise.then(function (issue) {
-    $scope.tracker = Tracker.get({
+    Tracker.get({
       id: issue.tracker.id,
       include_owner: true
-    }, function (tracker) {
+    }).$promise.then(function (tracker) {
+      $scope.tracker = tracker;
       var team = new Team(tracker.owner);
       $scope.rfpEnabled = team.rfpEnabled();
+      $scope.$watch('current_person', getTeams);
     });
   });
+
+  // verify if user is a part of the team that manages this issue.
+  // for now. can't take it anymore
+  var getTeams = function (person) {
+    if(angular.isObject(person)) {
+      $api.person_teams(person.id).then(function(teams) {
+        // set current persons teams
+        for (var i = 0; i < teams.length; i++) {
+          if(teams[i].id === $scope.tracker.owner.id) {
+            $scope.canManageIssue = true;
+            break;
+          }
+        };
+      });
+    }
+  };
 
   $scope.requestForProposal = RequestForProposal.get({
     issue_id: $routeParams.id,

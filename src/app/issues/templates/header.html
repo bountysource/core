@@ -32,9 +32,17 @@
 
   <br />
 
+  <div ng-if="canManageIssue" class="well row">
+    <div class="col-xs-12 col-sm-8 text-center ">
+      <h4>Hire a developer to close this issue.</h4>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <a ng-href="/issues/{{ issue.slug }}/rfp" class="btn btn-block btn-lg btn-success">Request Proposals!</a>
+    </div>
+  </div>
   <!-- Start work box-->
-  <div ng-include="'app/issues/templates/start_work_box.html'"></div>
+  <div  ng-if="!canManageIssue" ng-include="'app/issues/templates/start_work_box.html'"></div>
 
   <!-- Developer goals notification box -->
-  <div ng-include="'app/issues/templates/developer_goals_notification.html'"></div>
+  <div  ng-if="!canManageIssue" ng-include="'app/issues/templates/developer_goals_notification.html'"></div>
 </div>

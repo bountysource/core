@@ -998,7 +998,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         person.access_token = $rootScope.current_person.access_token;
       }
 
-      $rootScope.current_person = angular.copy(person);
+      $rootScope.current_person = new Person(angular.copy(person));
       $api.set_access_token($rootScope.current_person.access_token);
 
       // Identify with Mixpanel HERE
