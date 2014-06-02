@@ -1,13 +1,15 @@
 'use strict';
 
-angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics, $pageTitle, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team) {
+angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics, $pageTitle, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team, $api) {
+  $scope.canManageIssue = false;
 
   // Load issue object
   $scope.issue = Issue.get({
     id: $routeParams.id,
     include_body_html: true,
     include_author: true,
-    include_tracker: true
+    include_tracker: true,
+    include_owner: true
   }, function (issue) {
     $pageTitle.set(issue.title, issue.tracker.name);
 
@@ -30,15 +32,9 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
   // Assign $scope.rfpEnabled for checks errwhere.
   // TODO This realllllyyyyyyy wants to be cached. All of this shit does. It's not even funny.
   $scope.issue.$promise.then(function (issue) {
-    Tracker.get({
-      id: issue.tracker.id,
-      include_owner: true
-    }).$promise.then(function (tracker) {
-      $scope.tracker = tracker;
-      var team = new Team(tracker.owner);
-      $scope.rfpEnabled = team.rfpEnabled();
-      $scope.$watch('current_person', getTeams);
-    });
+    var team = new Team(issue.owner);
+    $scope.rfpEnabled = team.rfpEnabled();
+    $scope.$watch('current_person', getTeams);
   });
 
   // verify if user is a part of the team that manages this issue.
@@ -48,7 +44,7 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
       $api.person_teams(person.id).then(function(teams) {
         // set current persons teams
         for (var i = 0; i < teams.length; i++) {
-          if(teams[i].id === $scope.tracker.owner.id) {
+          if(teams[i].id === $scope.issue.owner.id) {
             $scope.canManageIssue = true;
             break;
           }
@@ -60,6 +56,10 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
   $scope.requestForProposal = RequestForProposal.get({
     issue_id: $routeParams.id,
     include_team: true
+  }, function (response) {
+    debugger;
+  }, function (response) {
+    debugger;
   });
 
   // Listen for developer goal create/updates. Broadcast update to all Controller instances.

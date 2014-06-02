@@ -31,8 +31,8 @@
   </div>
 
   <br />
-
-  <div ng-if="canManageIssue" class="well row">
+  <!-- Create RFP box -->
+  <div ng-if="canManageIssue && !requestForProposal" class="well row">
     <div class="col-xs-12 col-sm-8 text-center ">
       <h4>Hire a developer to close this issue.</h4>
     </div>
@@ -40,8 +40,20 @@
       <a ng-href="/issues/{{ issue.slug }}/rfp" class="btn btn-block btn-lg btn-success">Request Proposals!</a>
     </div>
   </div>
+
+  <!-- Create Proposal Box -->
+  <div ng-if="!canManageIssue && requestForProposal" class="well row">
+    <div class="col-xs-12 col-sm-8 text-center ">
+      <h4>{{ requestForProposal.team.name }} is hiring a developer to close this issue.</h4>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <a ng-href="/issues/{{ issue.slug }}/proposals" class="btn btn-block btn-lg btn-success">Submit a Proposal!</a>
+    </div>
+  </div>
+  <pre>can manage issue: {{ canManageIssue }}</pre>
+  <pre>request for Prop: {{ requestForProposal.$resolved }}</pre>
   <!-- Start work box-->
-  <div  ng-if="!canManageIssue" ng-include="'app/issues/templates/start_work_box.html'"></div>
+  <div  ng-if="!canManageIssue && !requestForProposal" ng-include="'app/issues/templates/start_work_box.html'"></div>
 
   <!-- Developer goals notification box -->
   <div  ng-if="!canManageIssue" ng-include="'app/issues/templates/developer_goals_notification.html'"></div>
