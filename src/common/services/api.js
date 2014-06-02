@@ -293,6 +293,14 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         method: 'POST',
         params: params || {}
       });
+    },
+
+    unsubscribe: function(params) {
+      return this.call({
+        url: "/notifications",
+        method: 'PUT',
+        params: params || {}
+      });
     }
 
   };
