@@ -129,9 +129,16 @@
       <div>
         <h5>Share this:</h5>
         <div ng-controller="TeamBadgeController">
-          <a ng-click="showBadgeModal()">
-            <img ng-src="{{badgeBountiesReceived.imageUrl()}}" />
-          </a>
+          <span ng-if="fundraisers.length > 0 ">
+            <a ng-click="showBadgeModal()">
+            <img ng-src="{{badgeFundingTotal.imageUrl()}}" />
+            </a>
+          </span>
+          <span ng-if="fundraisers.length == 0">    
+            <a ng-click="showBadgeModal()">
+              <img ng-src="{{badgeBountiesTotal.imageUrl()}}" />
+            </a>
+          </span>  
         </div>
       </div>
     </div>
