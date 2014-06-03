@@ -1,4 +1,4 @@
-<div ng-controller="IssueRequestForProposalsController">
+<div ng-controller="IssueProposalsController">
   <div ng-include="'app/issues/templates/breadcrumb.html'"></div>
   <div class="row" ng-show="issue">
     <div class="col-sm-8 col-md-9">
@@ -6,8 +6,8 @@
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
 
       <!-- Hide everything until RFP is resolved -->
-      <div ng-show="resolved">
-        <!-- New RFP if authenticated -->
+      <div ng-show="requestForProposal.$resolved">
+        <!-- RFP Create form if authenticated -->
         <div ng-if="!requestForProposal.id">
           <ng-include src="'app/issues/templates/new_rfp_form.html'"></ng-include>
         </div>
@@ -15,6 +15,7 @@
         <!-- Show request for proposals -->
         <div ng-if="requestForProposal.id && requestForProposal.$resolved">
           <ng-include src="'app/issues/templates/rfp.html'"></ng-include>
+          <ng-include src="'app/issues/templates/new_proposal_form.html'"></ng-include>
         </div>
       </div>
     </div>
