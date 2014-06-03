@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $window, $analytics, $pageTitle, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team, Proposal) {
+angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics, $pageTitle, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team) {
 
   // Load issue object
   $scope.issue = Issue.get({
@@ -43,34 +43,6 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     issue_id: $routeParams.id,
     include_team: true
   });
-
-  // Default to a new instance of Proposal.
-  // After loading all Proposals below, overwrite this with the current_user's proposal.
-  $scope.myProposal = new Proposal({ issue_id: $routeParams.id, amount: 150 });
-
-  $scope.proposals = Proposal.query({
-    issue_id: $routeParams.id
-  }, function (proposals) {
-
-    // Find proposal created by current_user
-    // If person logged in, replace new instance with already created Proposal.
-    $scope.$watch('current_person', function (person) {
-      if (angular.isObject(person)) {
-        for (var i=0; i<proposals.length; i++) {
-          if (proposals[i].person_id === person.id) {
-            $scope.myProposal = new Proposal(proposals[i]);
-            break;
-          }
-        }
-      }
-    });
-  });
-
-  $scope.saveProposal = function () {
-    if ($window.confirm("Are you sure?")) {
-      $scope.myProposal.$save();
-    }
-  };
 
   // Listen for developer goal create/updates. Broadcast update to all Controller instances.
   $scope.$on('developerGoalCreatePushed', function(event, new_developer_goal) {
