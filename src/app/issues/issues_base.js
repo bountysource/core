@@ -39,10 +39,8 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     });
   });
 
-  $scope.requestForProposal = RequestForProposal.get({
-    issue_id: $routeParams.id,
-    include_team: true
-  });
+  $scope.requestForProposal = new RequestForProposal({ issue_id: $routeParams.id });
+  $scope.requestForProposal.$get({ include_team: true });
 
   // Default to a new instance of Proposal.
   // After loading all Proposals below, overwrite this with the current_user's proposal.
@@ -51,14 +49,13 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
   $scope.proposals = Proposal.query({
     issue_id: $routeParams.id
   }, function (proposals) {
-
     // Find proposal created by current_user
     // If person logged in, replace new instance with already created Proposal.
     $scope.$watch('current_person', function (person) {
       if (angular.isObject(person)) {
         for (var i=0; i<proposals.length; i++) {
           if (proposals[i].person_id === person.id) {
-            $scope.myProposal = new Proposal(proposals[i]);
+            $scope.myProposal = new Proposal(angular.extend(proposals[i], { issue_id: $routeParams.id }));
             break;
           }
         }
@@ -66,9 +63,24 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     });
   });
 
+  $scope.saveRequestForProposal = function () {
+    if ($window.confirm("Are you sure?")) {
+      $scope.requestForProposal.$save(function () {
+        $scope.requestForProposal = new RequestForProposal({ issue_id: $routeParams.id });
+        $scope.requestForProposal.$get({ include_team: true });
+      });
+    }
+  };
+
   $scope.saveProposal = function () {
     if ($window.confirm("Are you sure?")) {
       $scope.myProposal.$save();
+    }
+  };
+
+  $scope.deleteProposal = function () {
+    if ($window.confirm("Are you sure?")) {
+      $scope.myProposal.$delete();
     }
   };
 
