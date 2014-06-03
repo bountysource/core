@@ -57,6 +57,13 @@
     </div>
 
     <div ng-include="'app/trackers/templates/top_backers.html'"></div>
+
+    <!--     Tracker Badge  -->  
+    <div ng-controller="TrackerBadgeController">
+      <a ng-click="showBadgeModal()">
+        <img ng-src="{{trackerBadge.imageUrl()}}">
+      </a>
+    </div>
   </div>
 
   <div class="col-sm-9 col-md-9">
