@@ -56,10 +56,10 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
   $scope.requestForProposal = RequestForProposal.get({
     issue_id: $routeParams.id,
     include_team: true
-  }, function (response) {
-    debugger;
-  }, function (response) {
-    debugger;
+  }, function (requestForProposal) {
+    return requestForProposal;
+  }, function (errorResponse) {
+    $scope.requestForProposal = errorResponse.data;
   });
 
   // Listen for developer goal create/updates. Broadcast update to all Controller instances.
