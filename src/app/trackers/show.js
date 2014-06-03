@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout, $cookies) {
+angular.module('app').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout, $cookies, $anchorScroll) {
   $api.tracker_get($routeParams.id).then(function(tracker) {
     // Edge case: GitHub repo changes owner, and we create a new Tracker model.
     // If the requested tracker model has a redirect to another, change the URL to that tracker.
@@ -69,6 +69,7 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
           page: response.config.params.page,
           per_page: response.config.params.per_page
         });
+        $anchorScroll();
         return issues;
       });
     };

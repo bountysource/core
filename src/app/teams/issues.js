@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("app").controller('TeamIssuesController', function ($scope, $api, $routeParams, $location) {
+angular.module("app").controller('TeamIssuesController', function ($scope, $api, $routeParams, $location, $anchorScroll) {
   // page initializers
   // initialize selected_trackers object
   function initializeTrackersFromParams (params) {
@@ -49,6 +49,8 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
           page: response.config.params.page,
           per_page: response.config.params.per_page
         });
+
+        $anchorScroll();
       });
     };
 
