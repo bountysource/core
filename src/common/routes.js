@@ -121,10 +121,10 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Issue'
   }, defaultRouteOptions));
 
-  $routeProvider.when('/issues/:id/proposals', angular.extend({
-    templateUrl: 'app/issues/proposals.html',
+  $routeProvider.when('/issues/:id/rfp', angular.extend({
+    templateUrl: 'app/issues/rfp.html',
     controller: 'IssuesBaseController',
-    trackEvent: 'View Issue Proposals'
+    trackEvent: 'View Issue RFP Create'
   }, defaultRouteOptions));
 
   $routeProvider.when('/notifications/cancel_all', angular.extend({
