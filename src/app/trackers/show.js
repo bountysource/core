@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout, $cookies, TrackerBadge) {
+
+angular.module('app').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout, $cookies, $anchorScroll, TrackerBadge) {
   $api.tracker_get($routeParams.id).then(function(tracker) {
     $scope.trackerBadge = new TrackerBadge(tracker);
     // Edge case: GitHub repo changes owner, and we create a new Tracker model.
