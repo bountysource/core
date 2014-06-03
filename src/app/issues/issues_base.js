@@ -44,7 +44,7 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
 
   // Default to a new instance of Proposal.
   // After loading all Proposals below, overwrite this with the current_user's proposal.
-  $scope.myProposal = new Proposal({ issue_id: $routeParams.id, amount: 150 });
+  $scope.myProposal = new Proposal({ issue_id: $routeParams.id });
 
   $scope.proposals = Proposal.query({
     issue_id: $routeParams.id
@@ -74,13 +74,17 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
 
   $scope.saveProposal = function () {
     if ($window.confirm("Are you sure?")) {
-      $scope.myProposal.$save();
+      $scope.myProposal.$save(function (proposal) {
+        $scope.myProposal = new Proposal(angular.extend(proposal, { issue_id: $routeParams.id }));
+      });
     }
   };
 
   $scope.deleteProposal = function () {
     if ($window.confirm("Are you sure?")) {
-      $scope.myProposal.$delete();
+      $scope.myProposal.$delete(function () {
+        $scope.myProposal = new Proposal({ issue_id: $routeParams.id });
+      });
     }
   };
 
