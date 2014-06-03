@@ -10,7 +10,7 @@
     <div ng-if="requestForProposalError" class="well">
       <div class="row">
         <div class="col-xs-12 col-sm-8 text-center ">
-          <h4>Find a developer to solve this issue</h4>
+          <h4>Find a developer to solve this issue.</h4>
         </div>
         <div class="col-xs-12 col-sm-4">
           <!-- Redirect to toggle rfp_enabled if not enabled? -->
@@ -32,7 +32,7 @@
     <div ng-if="!requestForProposalError && proposals.length > 0" class="well">
       <div class="row">
         <div class="col-xs-12 col-sm-8 text-center">
-          <h4>You have pending Proposals for this issue</h4>
+          <h4>You have pending Proposals for this issue.</h4>
         </div>
         <div class="col-xs-12 col-sm-4">
           <a ng-href="/issues/{{ issue.slug }}/proposals" class="btn btn-block btn-lg btn-success">Respond Now</a>
