@@ -124,6 +124,7 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
   $routeProvider.when('/issues/:id/proposals', angular.extend({
     templateUrl: 'app/issues/proposals.html',
     controller: 'IssuesBaseController',
+    resolve: { person: personResolver },
     trackEvent: 'View Issue Proposals'
   }, defaultRouteOptions));
 
