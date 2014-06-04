@@ -15,7 +15,7 @@
 
   <!-- Create RFPs -->
   <li ng-class="active_tab('proposals')" ng-if="showProposalsTab()">
-    <a ng-href="/issues/{{issue.slug}}/proposals">
+    <a ng-href="/issues/{{issue.slug}}/proposals" ng-click-require-auth>
       Proposals
     </a>
   </li>
