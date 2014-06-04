@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics, $pageTitle, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team, Proposal, $api, $window) {
-  $scope.canManageIssue = null;
+angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $window, $analytics, $pageTitle, $api, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team, Proposal) {
 
+  // Explicitly set to null until resolved with a boolean value
+  $scope.canManageIssue = null;
+  
   // Load issue object
   $scope.issue = Issue.get({
     id: $routeParams.id,
@@ -17,17 +19,6 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     $scope.issueBadge = new IssueBadge(issue);
   });
 
-  // Probably bad design if i need to do this... Refactor
-  var resolvedRenderable = function () {
-    return ($scope.canManageIssue !== null) && $scope.requestForProposal.$resolved;
-  };
-  // Used to render the call-to-action box only when important variables have been populated
-  $scope.$watch(resolvedRenderable, function (result) {
-    if (result) {
-      $scope.resolved = true;
-    }
-  });
-
   // Load issue bounties
   $scope.bounties = Bounties.get({
     issue_id: $routeParams.id,
@@ -39,45 +30,41 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     });
   });
 
-  // verify if user is a part of the team that manages this issue.
-  // for now. can't take it anymore
-  var getTeams = function (person) {
-    if(angular.isObject(person)) {
-      $api.person_teams(person.id).then(function(teams) {
-        // set current persons teams
-        for (var i = 0; i < teams.length; i++) {
-          if(teams[i].id === $scope.issue.owner.id) {
-            $scope.canManageIssue = true;
-            return $scope.canManageIssue;
-          }
-        }
-        // if it goes through entire loop and doesn't find the team
-        $scope.canManageIssue = false;
-      });
-    }
-  };
-
   // Load Tracker owner to check if it's a team that has RFP enabled.
   // Assign $scope.rfpEnabled for checks errwhere.
   // TODO This realllllyyyyyyy wants to be cached. All of this shit does. It's not even funny.
   $scope.issue.$promise.then(function (issue) {
     var team = new Team(issue.owner);
     $scope.rfpEnabled = team.rfpEnabled();
-    $scope.$watch('current_person', getTeams);
+
+    // verify if user is a part of the team that manages this issue.
+    // for now. can't take it anymore
+    $scope.$watch('current_person', function (person) {
+      if (angular.isObject(person)) {
+        $api.person_teams(person.id).then(function(teams) {
+          // set current persons teams
+          for (var i = 0; i < teams.length; i++) {
+            if(teams[i].id === $scope.issue.owner.id) {
+              $scope.canManageIssue = true;
+              return $scope.canManageIssue;
+            }
+          }
+
+          // if it goes through entire loop and doesn't find the team
+          $scope.canManageIssue = false;
+        });
+      } else if (person === false) {
+        $scope.canManageIssue = false;
+      }
+    });
   });
 
-  $scope.requestForProposal = RequestForProposal.get({
-    issue_id: $routeParams.id,
-    include_team: true
-  }, function (requestForProposal) {
-    return requestForProposal;
-  }, function (errorResponse) {
-    $scope.requestForProposalError = errorResponse.data;
-  });
+  $scope.requestForProposal = new RequestForProposal({ issue_id: $routeParams.id });
+  $scope.requestForProposal.$get({ include_team: true });
 
   // Default to a new instance of Proposal.
   // After loading all Proposals below, overwrite this with the current_user's proposal.
-  $scope.myProposal = new Proposal({ issue_id: $routeParams.id, amount: 150 });
+  $scope.myProposal = new Proposal({ issue_id: $routeParams.id });
 
   $scope.proposals = Proposal.query({
     issue_id: $routeParams.id
@@ -88,7 +75,7 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
       if (angular.isObject(person)) {
         for (var i=0; i<proposals.length; i++) {
           if (proposals[i].person_id === person.id) {
-            $scope.myProposal = new Proposal(proposals[i]);
+            $scope.myProposal = new Proposal(angular.extend(proposals[i], { issue_id: $routeParams.id }));
             break;
           }
         }
@@ -96,9 +83,28 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     });
   });
 
+  $scope.saveRequestForProposal = function () {
+    if ($window.confirm("Are you sure?")) {
+      $scope.requestForProposal.$save(function () {
+        $scope.requestForProposal = new RequestForProposal({ issue_id: $routeParams.id });
+        $scope.requestForProposal.$get({ include_team: true });
+      });
+    }
+  };
+
   $scope.saveProposal = function () {
     if ($window.confirm("Are you sure?")) {
-      $scope.myProposal.$save();
+      $scope.myProposal.$save(function (proposal) {
+        $scope.myProposal = new Proposal(angular.extend(proposal, { issue_id: $routeParams.id }));
+      });
+    }
+  };
+
+  $scope.deleteProposal = function () {
+    if ($window.confirm("Are you sure?")) {
+      $scope.myProposal.$delete(function () {
+        $scope.myProposal = new Proposal({ issue_id: $routeParams.id });
+      });
     }
   };
 

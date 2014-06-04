@@ -1,30 +1,30 @@
 <div ng-if="resolved">
   <!-- Team Members -->
   <div ng-if="canManageIssue">
-   <!-- No RFP -->
-    <div ng-if="requestForProposalError" class="well">
+    <!-- No RFP -->
+    <div ng-if="!requestForProposalExists()" class="well">
       <div class="row">
         <div class="col-xs-12 col-sm-8 text-center ">
           <h4>Find a developer to solve this issue.</h4>
         </div>
         <div class="col-xs-12 col-sm-4">
           <!-- Redirect to toggle rfp_enabled if not enabled? -->
-          <a ng-href="/issues/{{ issue.slug }}/rfp" class="btn btn-block btn-lg btn-success">Request Proposals!</a>
+          <a ng-href="/issues/{{ issue.slug }}/proposals" class="btn btn-block btn-lg btn-success">Request Proposals!</a>
         </div>
       </div>
     </div>
 
     <!-- Team Member: RFP already created and no proposals -->
-    <div ng-if="!requestForProposalError && proposals.length <= 0" class="well">
+    <div ng-if="requestForProposalExists() && proposals.length <= 0" class="well">
       <div class="row">
         <div class="col-xs-12 text-center">
           <h4>No proposals have been submitted.</h4>
         </div>
       </div>
     </div>
-    
+
     <!-- Team Member: RFP & proposals created -->
-    <div ng-if="!requestForProposalError && proposals.length > 0" class="well">
+    <div ng-if="requestForProposalExists() && proposals.length > 0" class="well">
       <div class="row">
         <div class="col-xs-12 col-sm-8 text-center">
           <h4>You have pending Proposals for this issue.</h4>
@@ -38,32 +38,38 @@
 
   <!-- Public -->
   <div ng-if="!canManageIssue">
-    <!-- RFP but no Proposal -->
-    <div ng-if="!requestForProposalError && !myProposal.saved()" class="well">
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 text-center ">
-          <h4>{{ requestForProposal.team.name }} is looking for a developer to take on this issue.</h4>
+    <!-- RFP exists -->
+    <div ng-if="requestForProposalExists()">
+      <!-- RFP but no Proposal -->
+      <div ng-if="!myProposal.saved()" class="well">
+        <div class="row">
+          <div class="col-xs-12 col-sm-8 text-center ">
+            <h4>{{ requestForProposal.team.name }} is looking for a developer to take on this issue.</h4>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <a ng-href="/issues/{{ issue.slug }}/proposals" class="btn btn-block btn-lg btn-success">Submit a Proposal!</a>
+          </div>
         </div>
-        <div class="col-xs-12 col-sm-4">
-          <a ng-href="/issues/{{ issue.slug }}/proposals" class="btn btn-block btn-lg btn-success">Submit a Proposal!</a>
+      </div>
+
+      <!-- Public: RFP and has a proposal -->
+      <div ng-if="myProposal.saved()" class="well">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h4>Your proposal has been submitted and is pending review.</h4>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Public: RFP and has a proposal -->
-    <div ng-if="!requestForProposalError && myProposal.saved()" class="well">
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <h4>Your proposal has been submitted and is pending review.</h4>
-        </div>
-      </div>
+    <!-- RFP does not exist -->
+    <div ng-if="!requestForProposalExists()">
+      <!-- Public: No RFP/no proposal -->
+      <!-- Start work box-->
+      <div ng-include="'app/issues/templates/start_work_box.html'"></div>
+
+      <!-- Developer goals notification box -->
+      <div ng-include="'app/issues/templates/developer_goals_notification.html'"></div>
     </div>
   </div>
-
-  <!-- Public: No RFP/no proposal -->
-  <!-- Start work box-->
-  <div ng-if="!canManageIssue && requestForProposalError" ng-include="'app/issues/templates/start_work_box.html'"></div>
-
-  <!-- Developer goals notification box -->
-  <div ng-if="!canManageIssue && requestForProposalError" ng-include="'app/issues/templates/developer_goals_notification.html'"></div>
 </div>
