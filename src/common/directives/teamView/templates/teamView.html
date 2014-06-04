@@ -125,14 +125,21 @@
         </div>
       </div>
 
-      <!-- Share Buttons -->
+      <!-- Embed Fundraiser Card -->
+      <div ng-if="activeFundraiser">
+        <h5>Embed this fundraiser:</h5>
+        <input type="text" class="form-control input-sm" value="<iframe src='https://api.bountysource.com/user/fundraisers/{{activeFundraiser.id}}/embed' style='width: 238px; height: 402px; overflow: hidden; border: 0px;'></iframe>" style="cursor: pointer;" readonly select-on-click />
+      </div>
+
+      <!-- Share Badge -->
       <div>
         <h5>Share this:</h5>
-        <div ng-controller="TeamBadgeController">
-          <a ng-click="showBadgeModal()">
-            <img ng-src="{{badgeBountiesReceived.imageUrl()}}" />
-          </a>
-        </div>
+          <div ng-controller="TeamBadgeController">
+            <a ng-click="showBadgeModal()">
+              <img ng-src="{{badgeBountiesReceived.imageUrl()}}" />
+            </a>
+          </div>
+          <br>      
       </div>
     </div>
 
