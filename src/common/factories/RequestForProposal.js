@@ -22,5 +22,16 @@ angular.module('factories').factory('RequestForProposal', function ($rootScope, 
     return !!this.id;
   };
 
+  /**
+   * A Request for Proposal is blank if the all of the visible attributes are nil.
+   *
+   * @return {boolean} true if all visible attributes null
+   * */
+  RequestForProposal.prototype.blank = function () {
+    return this.budget === null &&
+      this.due_date === null &&
+      this.notes === null;
+  };
+
   return RequestForProposal;
 });
