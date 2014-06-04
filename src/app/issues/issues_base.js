@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $analytics, $pageTitle, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team) {
+angular.module('app').controller('IssuesBaseController', function ($scope, $routeParams, $window, $analytics, $pageTitle, Issue, Tracker, IssueBadge, Bounties, RequestForProposal, Team, Proposal) {
 
   // Load issue object
   $scope.issue = Issue.get({
@@ -39,10 +39,54 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     });
   });
 
-  $scope.requestForProposal = RequestForProposal.get({
-    issue_id: $routeParams.id,
-    include_team: true
+  $scope.requestForProposal = new RequestForProposal({ issue_id: $routeParams.id });
+  $scope.requestForProposal.$get({ include_team: true });
+
+  // Default to a new instance of Proposal.
+  // After loading all Proposals below, overwrite this with the current_user's proposal.
+  $scope.myProposal = new Proposal({ issue_id: $routeParams.id });
+
+  $scope.proposals = Proposal.query({
+    issue_id: $routeParams.id
+  }, function (proposals) {
+    // Find proposal created by current_user
+    // If person logged in, replace new instance with already created Proposal.
+    $scope.$watch('current_person', function (person) {
+      if (angular.isObject(person)) {
+        for (var i=0; i<proposals.length; i++) {
+          if (proposals[i].person_id === person.id) {
+            $scope.myProposal = new Proposal(angular.extend(proposals[i], { issue_id: $routeParams.id }));
+            break;
+          }
+        }
+      }
+    });
   });
+
+  $scope.saveRequestForProposal = function () {
+    if ($window.confirm("Are you sure?")) {
+      $scope.requestForProposal.$save(function () {
+        $scope.requestForProposal = new RequestForProposal({ issue_id: $routeParams.id });
+        $scope.requestForProposal.$get({ include_team: true });
+      });
+    }
+  };
+
+  $scope.saveProposal = function () {
+    if ($window.confirm("Are you sure?")) {
+      $scope.myProposal.$save(function (proposal) {
+        $scope.myProposal = new Proposal(angular.extend(proposal, { issue_id: $routeParams.id }));
+      });
+    }
+  };
+
+  $scope.deleteProposal = function () {
+    if ($window.confirm("Are you sure?")) {
+      $scope.myProposal.$delete(function () {
+        $scope.myProposal = new Proposal({ issue_id: $routeParams.id });
+      });
+    }
+  };
 
   // Listen for developer goal create/updates. Broadcast update to all Controller instances.
   $scope.$on('developerGoalCreatePushed', function(event, new_developer_goal) {
