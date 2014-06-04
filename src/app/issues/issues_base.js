@@ -19,11 +19,11 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
 
   // Probably bad design if i need to do this... Refactor
   var resolvedRenderable = function () {
-    return ($scope.canManageIssue !== null) + $scope.requestForProposal.$resolved;
+    return ($scope.canManageIssue !== null) && $scope.requestForProposal.$resolved;
   };
   // Used to render the call-to-action box only when important variables have been populated
   $scope.$watch(resolvedRenderable, function (result) {
-    if (result === 2) {
+    if (result) {
       $scope.resolved = true;
     }
   });
@@ -39,15 +39,6 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
     });
   });
 
-  // Load Tracker owner to check if it's a team that has RFP enabled.
-  // Assign $scope.rfpEnabled for checks errwhere.
-  // TODO This realllllyyyyyyy wants to be cached. All of this shit does. It's not even funny.
-  $scope.issue.$promise.then(function (issue) {
-    var team = new Team(issue.owner);
-    $scope.rfpEnabled = team.rfpEnabled();
-    $scope.$watch('current_person', getTeams);
-  });
-
   // verify if user is a part of the team that manages this issue.
   // for now. can't take it anymore
   var getTeams = function (person) {
@@ -57,14 +48,23 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
         for (var i = 0; i < teams.length; i++) {
           if(teams[i].id === $scope.issue.owner.id) {
             $scope.canManageIssue = true;
-            break;
+            return $scope.canManageIssue;
           }
         }
         // if it goes through entire loop and doesn't find the team
-        $scope.canManageIssue = $scope.canManageIssue || false;
+        $scope.canManageIssue = false;
       });
     }
   };
+
+  // Load Tracker owner to check if it's a team that has RFP enabled.
+  // Assign $scope.rfpEnabled for checks errwhere.
+  // TODO This realllllyyyyyyy wants to be cached. All of this shit does. It's not even funny.
+  $scope.issue.$promise.then(function (issue) {
+    var team = new Team(issue.owner);
+    $scope.rfpEnabled = team.rfpEnabled();
+    $scope.$watch('current_person', getTeams);
+  });
 
   $scope.requestForProposal = RequestForProposal.get({
     issue_id: $routeParams.id,
