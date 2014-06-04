@@ -3,8 +3,16 @@
 angular.module('teams').controller('TeamBadgeController', function ($rootScope, $scope, $modal, TeamBadgeBountiesPosted, TeamBadgeBountiesReceived, TeamBadgeRaised) {
 
   var $parentScope = $scope;
-
-  $scope.badgeBountiesReceived = new TeamBadgeBountiesReceived($scope.team);
+  
+  $scope.$watch('fundraisers', function (fundraisers) {
+    if (angular.isArray(fundraisers)) {
+      if ($scope.fundraisers.length > 0) {
+        $scope.badge = new TeamBadgeRaised($scope.team);
+      } else {
+        $scope.badge = new TeamBadgeBountiesReceived($scope.team);
+      }
+    }
+  });
 
   $scope.showBadgeModal = function () {
     $modal.open({
