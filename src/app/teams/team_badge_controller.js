@@ -7,9 +7,9 @@ angular.module('teams').controller('TeamBadgeController', function ($rootScope, 
   $scope.$watch('fundraisers', function (fundraisers) {
     if (angular.isArray(fundraisers)) {
       if ($scope.fundraisers.length > 0) {
-      $scope.badge = new TeamBadgeRaised($scope.team);
+        $scope.badge = new TeamBadgeRaised($scope.team);
       } else {
-      $scope.badge = new TeamBadgeBountiesReceived($scope.team);  
+        $scope.badge = new TeamBadgeBountiesReceived($scope.team);
       }
     }
   });
