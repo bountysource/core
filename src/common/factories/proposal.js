@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+ * Possible states for a proposal:
+ * - pending
+ * - pending_acceptance
+ * - rejected
+ * - accepted
+ * */
 angular.module('factories').factory('Proposal', function ($rootScope, $resource, $api) {
 
   var defaultHeaders = { Accept: 'application/vnd.bountysource+json; version=2' };
@@ -15,7 +22,7 @@ angular.module('factories').factory('Proposal', function ($rootScope, $resource,
    * Is this a saved record?
    *
    * TODO move this to a prototype method on our own resource factory.
-   * TODO TODO create our own own resource factory.
+   * TODO TODO create our own resource factory.
    *
    * @return {boolean} is the record saved
    * */

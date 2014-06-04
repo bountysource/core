@@ -14,8 +14,15 @@
 
         <!-- Show request for proposals if RFP exists -->
         <div ng-if="requestForProposal.saved()">
-          <ng-include src="'app/issues/templates/rfp.html'"></ng-include>
-          <ng-include src="'app/issues/templates/proposal_form.html'"></ng-include>
+          <!-- Show proposal if saved -->
+          <div ng-if="myProposal.saved()">
+            <ng-include src="'app/issues/templates/proposal.html'"></ng-include>
+          </div>
+
+          <!-- Create proposal create form if proposal not saved -->
+          <div ng-if="!myProposal.saved()">
+            <ng-include src="'app/issues/templates/proposal_form.html'"></ng-include>
+          </div>
         </div>
       </div>
     </div>

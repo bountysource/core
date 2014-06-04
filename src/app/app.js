@@ -44,6 +44,7 @@ angular.module('app', [
   'ngCookies',
   'ngResource',
   'ui.bootstrap',
+  'ui.inflector',
   'colorpicker.module',
   'activity',
   'fundraisers',

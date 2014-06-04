@@ -1,85 +1,53 @@
 <ng-form name="proposalCreateForm" class="form-horizontal">
+  <div class="form-group">
+    <div class="col-md-offset-3 col-md-9">
+      <p class="form-control-static">
+        <strong>{{requestForProposal.team.name}}</strong>
+        is seeking developers to solve this issue.
+        <!-- TODO: more text for the paragraph above from @rappo -->
+      </p>
+      <p class="form-control-static" ng-if="requestForProposal.budget">Budget: {{requestForProposal.budget | dollars}}</p>
+      <p class="form-control-static" ng-if="requestForProposal.due_date">Needed by: {{requestForProposal.due_date | date}}</p>
+      <p class="form-control-static" ng-if="requestForProposal.notes" style="white-space: pre-wrap;">Notes: {{requestForProposal.notes}}</p>
+    </div>
+  </div>
+
+
   <!-- Proposal amount -->
   <div class="form-group" ng-class="{ 'has-error': proposalCreateForm.amount.$invalid }">
     <label class="control-label col-md-3">Cost:</label>
     <div class="col-md-3">
-      <!-- New record -->
-      <div ng-if="!myProposal.saved()">
-        <div class="input-group">
-          <span class="input-group-addon"><currency-unit></currency-unit></span>
-          <input name="amount" type="number" class="form-control" ng-model="myProposal.amount" placeholder="Amount" required />
-        </div>
-      </div>
-
-      <!-- Saved -->
-      <div ng-if="myProposal.saved()">
-        <p class="form-control-static">{{myProposal.amount | dollars}}</p>
+      <div class="input-group">
+        <span class="input-group-addon"><currency-unit></currency-unit></span>
+        <input name="amount" type="number" class="form-control" ng-model="myProposal.amount" placeholder="Amount" required />
       </div>
     </div>
   </div>
 
   <!-- Proposal delivery date -->
-  <!-- Hide if proposal saved and the attribute is nil -->
-  <div class="form-group" ng-hide="myProposal.saved() && !myProposal.completed_by">
+  <div class="form-group">
     <label class="control-label col-md-3">Completed by:</label>
     <div class="col-md-3">
-      <!-- New record -->
-      <div ng-if="!myProposal.saved()">
-        <input name="dueDate" class="form-control" placeholder="Set a date"
-               ng-model="myProposal.completed_by"
-               datepicker-popup />
-      </div>
-
-      <!-- Saved -->
-      <div ng-if="myProposal.saved()">
-        <p class="form-control-static">{{myProposal.completed_by | date}}</p>
-      </div>
+      <input name="dueDate" class="form-control" placeholder="Set a date"
+             ng-model="myProposal.completed_by"
+             datepicker-popup />
     </div>
   </div>
 
   <!-- Bio - explain why you are qualified -->
-  <!-- Hide if proposal saved and the attribute is nil -->
-  <div class="form-group" ng-hide="myProposal.saved() && !myProposal.bio">
+  <div class="form-group">
     <label class="control-label col-md-3">Notes:</label>
     <div class="col-md-6">
-      <!-- New record -->
-      <div ng-if="!myProposal.saved()">
-        <textarea name="dueDate" class="form-control" rows="5" ng-model="myProposal.bio"
-                  placeholder="Provide details on why {{requestForProposal.team.name}} should select you. Prior history with the project, type of work, etc.">
-        </textarea>
-      </div>
-
-      <!-- Saved -->
-      <div ng-if="myProposal.saved()">
-        <p class="form-control-static" style="white-space: pre-wrap;">{{myProposal.bio}}</p>
-      </div>
+      <textarea name="dueDate" class="form-control" rows="5" ng-model="myProposal.bio"
+                placeholder="Provide details on why {{requestForProposal.team.name}} should select you. Prior history with the project, type of work, etc.">
+      </textarea>
     </div>
   </div>
 
-  <!-- Terms agreement checkbox -->
-  <!-- TODO figure out if we even need this from? @rappo halp -->
-  <!--<div class="form-group">-->
-    <!--<div class="col-md-offset-3 col-md-9">-->
-      <!--<div class="checkbox">-->
-        <!--<label>-->
-          <!--<input type="checkbox" ng-model="proposal.agree_to_terms" required />-->
-          <!--By submitting a proposal you agree to <a>these RFP terms</a>-->
-        <!--</label>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
-  <!-- Submit new proposal button. Only show if current_user has not yet created a Proposal -->
-  <div class="form-group" ng-if="!myProposal.saved()">
+  <!-- Submit new proposal button -->
+  <div class="form-group">
     <div class="col-md-offset-3 col-md-9">
       <button type="submit" class="btn btn-primary" ng-disabled="proposalCreateForm.$invalid" ng-click-require-auth="saveProposal()">Submit Proposal</button>
-    </div>
-  </div>
-
-  <!-- Delete proposal button. Only show if current_user has a Proposal -->
-  <div class="form-group" ng-if="myProposal.saved()">
-    <div class="col-md-offset-3 col-md-9">
-      <button type="submit" class="btn btn-danger" ng-click="deleteProposal()">Delete Proposal</button>
     </div>
   </div>
 </ng-form>
