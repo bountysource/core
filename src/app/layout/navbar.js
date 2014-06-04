@@ -6,6 +6,7 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
     $scope.cart = cart;
   });
 
+  // Load person's teams for dropdown. Assign the teams to the current_person
   $scope.$watch('current_person', function(current_person) {
     if (current_person) {
       $api.person_teams(current_person.id).then(function(teams) {
