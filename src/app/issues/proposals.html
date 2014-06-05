@@ -5,23 +5,46 @@
       <div ng-include="'app/issues/templates/header.html'"></div>
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
 
+      <pre>canManageIssue: {{canManageIssue+''}}</pre>
+      <pre>proposals: {{proposals | json}}</pre>
+
       <!-- Hide everything until RFP is resolved -->
       <div ng-show="requestForProposal.$resolved">
         <!-- RFP Create form if authenticated -->
-        <div ng-if="!requestForProposal.saved()">
+        <div ng-if="!requestForProposal.saved() && canManageIssue">
           <ng-include src="'app/issues/templates/rfp_form.html'"></ng-include>
         </div>
 
         <!-- Show request for proposals if RFP exists -->
         <div ng-if="requestForProposal.saved()">
-          <!-- Show proposal if saved -->
-          <div ng-if="myProposal.saved()">
-            <ng-include src="'app/issues/templates/proposal.html'"></ng-include>
+          <!-- Team member view: show index of submitted Proposals -->
+          <div ng-if="canManageIssue">
+            <p>
+              {{proposals.length | number}} <ng-pluralize count="proposals.length" when="{ 'one': 'developer has', 'other': 'developers have' }"></ng-pluralize>
+              responded to your request.
+            </p>
+            <br />
+            <p><strong>Budget:</strong> {{requestForProposal.budget | dollars}}</p>
+            <p><strong>Completed by:</strong> {{requestForProposal.due_date | date}}</p>
+            <p><strong>Additional notes:</strong></p>
+            <p style="white-space: pre-wrap;">"{{requestForProposal.notes}}"</p>
+
+            <br />
+
+            <ng-include src="'app/issues/templates/proposals_table.html'"></ng-include>
           </div>
 
-          <!-- Create proposal create form if proposal not saved -->
-          <div ng-if="!myProposal.saved()">
-            <ng-include src="'app/issues/templates/proposal_form.html'"></ng-include>
+          <!-- Public view: show proposal or proposal create form -->
+          <div ng-if="!canManageIssue">
+            <!-- Show proposal if saved -->
+            <div ng-if="myProposal.saved()">
+              <ng-include src="'app/issues/templates/proposal.html'"></ng-include>
+            </div>
+
+            <!-- Create proposal create form if proposal not saved -->
+            <div ng-if="!myProposal.saved()">
+              <ng-include src="'app/issues/templates/proposal_form.html'"></ng-include>
+            </div>
           </div>
         </div>
       </div>
