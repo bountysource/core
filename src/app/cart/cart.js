@@ -4,7 +4,6 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
 
   // Load shopping cart
   $cart.find().then(function (cart) {
-    console.log('dat car', cart);
     $scope.cart = cart;
 
     // Initialize reward selects after initial digest
