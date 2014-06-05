@@ -5,9 +5,6 @@
       <div ng-include="'app/issues/templates/header.html'"></div>
       <div ng-include="'app/issues/templates/nav_tabs.html'"></div>
 
-      <pre>canManageIssue: {{canManageIssue+''}}</pre>
-      <pre>proposals: {{proposals | json}}</pre>
-
       <!-- Hide everything until RFP is resolved -->
       <div ng-show="requestForProposal.$resolved">
         <!-- RFP Create form if authenticated -->

@@ -4,7 +4,7 @@
     <th>Developer</th>
     <th>Completion Date</th>
     <th>Bid</th>
-    <th>Notes</th>
+    <th class="hidden-xs">Notes</th>
     <th></th>
   </tr>
   </thead>
@@ -14,17 +14,21 @@
       <a owner-href="proposal.person">{{proposal.person.display_name}}</a>
     </td>
     <td>
-      <div ng-if="proposal.completed_by">{{proposal.completed_by | date}}</div>
-      <div ng-if="!proposal.completed_by"><em>Not specified</em></div>
+      {{proposal.completed_by ? (proposal.completed_by | date) : "n/a"}}
     </td>
     <td>
       {{proposal.amount | dollars}}
     </td>
-    <td>
-      <div ng-if="proposal.notes">
-        <p style="white-space: pre-wrap;">{{proposal.notes}}</p>
+    <td class="hidden-xs">
+      <!-- Small view-->
+      <div class="visible-sm">
+        <p class="text-overflow-ellipse" style="width: 150px;">{{proposal.bio || "n/a"}}</p>
       </div>
-      <div ng-if="!proposal.notes"><em>Not specified</em></div>
+
+      <!-- Other view -->
+      <div class="hidden-sm">
+        <p class="text-overflow-ellipse" style="width: 250px;">{{proposal.bio || "n/a"}}</p>
+      </div>
     </td>
     <td ng-switch="proposal.state">
       <div ng-switch-when="pending">
