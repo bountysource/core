@@ -4,6 +4,7 @@
  * Possible states for a proposal:
  * - pending
  * - pending_acceptance
+ * - pending_rejection
  * - rejected
  * - accepted
  * */
@@ -15,7 +16,9 @@ angular.module('factories').factory('Proposal', function ($rootScope, $resource,
   var Proposal = $resource($rootScope.api_host + 'issues/:issue_id/proposals/:id/:action', { issue_id: '@issue_id', id: '@id', access_token: accessToken }, {
     query: { method: 'GET', isArray: true, headers: defaultHeaders },
     save: { method: 'POST', headers: defaultHeaders },
-    delete: { method: 'DELETE', headers: defaultHeaders }
+    delete: { method: 'DELETE', headers: defaultHeaders },
+    accept: { method: 'POST', params: { action: 'accept' }, headers: defaultHeaders },
+    reject: { method: 'POST', params: { action: 'reject' }, headers: defaultHeaders }
   });
 
   /**
