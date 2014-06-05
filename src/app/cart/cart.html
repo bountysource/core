@@ -36,6 +36,11 @@
             <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}">
               <img class="img-responsive" ng-src="{{item.team.image_url_medium}}" />
             </a>
+
+            <!-- Proposal -->
+            <a ng-if="isProposal(item)" ng-href="/issues/{{item.issue.slug}}">
+              <img ng-src="{{ item.issue.tracker.image_url_medium }}" class="img-responsive" />
+            </a>
           </td>
 
           <!-- Item attributes -->
@@ -46,12 +51,13 @@
               <a ng-if="isBounty(item)" ng-href="/issues/{{item.issue.slug}}"><h4 style="margin-top: 0;">Bounty for "{{item.issue.title}}"</h4></a>
               <a ng-if="isPledge(item)" ng-href="/fundraisers/{{item.fundraiser.slug}}"><h4 style="margin-top: 0;">Pledge to "{{item.fundraiser.title}}"</h4></a>
               <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}"><h4 style="margin-top: 0;">Pledge to "{{item.team.name}}"</h4></a>
+              <a ng-if="isProposal(item)" ng-href="/issues/{{item.issue.slug}}"><h4 style="margin-top: 0;">Proposal for "{{ item.issue.title }}"</h4></a>
             </div>
 
             <ng-form class="form-horizontal" name="cartForm">
 
               <!-- Owner select -->
-              <div class="form-group">
+              <div ng-if="!isProposal(item)" class="form-group">
                 <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Display As:</small></label>
 
                 <div class="col-md-9 col-sm-8 col-xs-7">
@@ -96,6 +102,32 @@
                 </div>
               </div>
 
+              <!-- Proposal -->
+              <div ng-if="isProposal(item)">
+                <!-- Developer -->
+                <div class="form-group">
+                  <label class="control-label col-xs-5 col-sm-4 col-md-3"><small>Developer:</small></label>
+                  <div class="col-xs-7 col-sm-8 col-md-9">
+                    <p class="form-control-static">
+                      <a ng-href="people/{{ item.person.slug }}">{{ item.person.display_name }}</a>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Estimated Completion -->
+                <div class="form-group">
+                  <label class="control-label col-xs-5 col-sm-4 col-md-3"><small>Completed By:</small></label>
+                  <div class="col-xs-7 col-sm-8 col-md-9">
+                    <p class="form-control-static">{{ item.completed_by | date:'mediumDate' }}</p>
+                  </div>
+                </div>
+
+                <!-- Abstract -->
+                <div class="form-group">
+                  <label class="control-label col-xs-5 col-sm-4 col-md-3"><small>Notes:</small></label>
+                  <div class="col-xs-7 col-sm-8 col-md-9"><p class="form-control-static">{{ item.bio }}</p></div>
+                </div>
+              </div>
               <!-- Bounty -->
               <div ng-if="isBounty(item)">
                 <!-- Expires -->
@@ -190,12 +222,15 @@
 
           <!-- Amount, delete button -->
           <td class="col-md-3 col-sm-4 col-xs-4">
-            <div class="form-group" ng-class="{ 'has-error': !itemValid(item) }">
-              <div class="input-group" tooltip-placement="bottom" tooltip="{{5 | dollars}} minimum">
+            <div class="form-group" ng-class="{ 'has-error': !itemValid(item) }" >
+              <div class="input-group" tooltip-placement="bottom" tooltip="{{5 | dollars}} minimum" ng-if="!isProposal(item)">
                 <span class="input-group-addon">
                   <currency-unit></currency-unit>
                 </span>
                 <input class="form-control input-sm" ng-blur="updateItem($index)" currency-amount="item.amount" currency-iso="item.currency" currency-input required />
+              </div>
+              <div ng-if="isProposal(item)" class="text-right" style="padding-right: 20px;">
+                <p class="form-control-static"><strong>{{ item.amount | dollars }}</strong></p>
               </div>
             </div>
 

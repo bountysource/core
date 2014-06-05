@@ -4,6 +4,7 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
 
   // Load shopping cart
   $cart.find().then(function (cart) {
+    console.log('dat car', cart);
     $scope.cart = cart;
 
     // Initialize reward selects after initial digest
@@ -85,6 +86,10 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
 
   $scope.isTeamPayin = function (item) {
     return angular.isObject(item) && item.type === 'TeamPayin';
+  };
+
+  $scope.isProposal = function (item) {
+    return angular.isObject(item) && item.type === 'Proposal';
   };
 
   $scope.reloadItems = function () {
@@ -266,6 +271,8 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     } else if ($scope.isTeamPayin(item)) {
       return true;
 
+    } else if ($scope.isProposal(item)) {
+      return true;
     } else {
       return false;
     }
