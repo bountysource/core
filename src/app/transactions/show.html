@@ -46,6 +46,11 @@
               <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}">
                 <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.team.medium_image_url}}" />
               </a>
+
+              <!-- Proposal -->
+              <a ng-if="isProposal(item)" ng-href="/issues/{{ item.issue.slug }}">
+                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.issue.tracker.medium_image_url}}" />
+              </a>
             </td>
 
             <td ng-switch="item.type" class="col-xs-12 col-md-9">
@@ -80,6 +85,40 @@
                   </div>
 
                   <!-- Share Buttons -->
+                  <div class="col-xs-4 text-right">
+                    <strong>Share This:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <share-button item="item"></share-button>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-switch-when="Proposal">
+                <h4>Accepted Proposal for <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></h4>
+                <div class="row">
+                  <div class="col-xs-4 text-right">
+                    <strong>Developer:</strong>
+                  </div>
+                  <div class="col-xs-8"><p><a ng-href="/people/{{ item.person.slug }}">{{ item.person.display_name }}</a></p></div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-4 text-right">
+                    <strong>Expected Completion:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <p>{{ item.completed_by | date:'shortDate' }}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-4 text-right">
+                    <strong>Notes:</strong>
+                  </div>
+                  <div class="col-xs-8">
+                    <p>{{ item.bio }}</p>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-xs-4 text-right">
                     <strong>Share This:</strong>
                   </div>
