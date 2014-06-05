@@ -87,6 +87,10 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     return angular.isObject(item) && item.type === 'TeamPayin';
   };
 
+  $scope.isProposal = function (item) {
+    return angular.isObject(item) && item.type === 'Proposal';
+  };
+
   $scope.reloadItems = function () {
     $cart.find().then(function (cart) {
       $scope.cart.items = angular.copy(cart.items);
@@ -266,6 +270,8 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
     } else if ($scope.isTeamPayin(item)) {
       return true;
 
+    } else if ($scope.isProposal(item)) {
+      return true;
     } else {
       return false;
     }
