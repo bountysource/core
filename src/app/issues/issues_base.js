@@ -67,7 +67,8 @@ angular.module('app').controller('IssuesBaseController', function ($scope, $rout
   $scope.myProposal = new Proposal({ issue_id: $routeParams.id });
 
   $scope.proposals = Proposal.query({
-    issue_id: $routeParams.id
+    issue_id: $routeParams.id,
+    include_person: true
   }, function (proposals) {
     // Find proposal created by current_user
     // If person logged in, replace new instance with already created Proposal.
