@@ -45,6 +45,9 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
     return result;
   }
 
+  // This type check also occurs in cart/cart.js
+  // Todo: Make resource-factories for each one. They can all inherit
+  // from a 'Purchaseable' class that has a method to encapsulate this logic.
   $scope.isPledge = function (item) {
     return angular.isObject(item) && item.type === 'Pledge';
   };
@@ -55,6 +58,10 @@ angular.module('app').controller('TransactionShowController', function ($scope, 
 
   $scope.isTeamPayin = function (item) {
     return angular.isObject(item) && item.type === 'TeamPayin';
+  };
+
+  $scope.isProposal = function (item) {
+    return angular.isObject(item) && item.type === 'Proposal';
   };
 
   function setShareUrls (item, parent, item_type) {
