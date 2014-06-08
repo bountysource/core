@@ -33,29 +33,37 @@
 
     <div class="col-md-6">
       
-      <div class="checkbox no-padding"><label class="setings_profile_pic">
-        <input type="radio" ng-model="profile_input.radio" value="{{current_person.image_url}}">
-        <img src="{{form_data.image_url}}" tooltip="Current">
-      </label></div>
+      <div class="radio no-padding">
+        <label class="setings_profile_pic">
+          <input type="radio" name="profile_input" ng-model="profile_input.radio" ng-value="form_data.image_url">
+          <img src="{{form_data.image_url}}" tooltip="Current">
+        </label>
+      </div>
       
-      <div class="checkbox no-padding" ng-show="current_person.github_account"><label class="setings_profile_pic">
-        <input type="radio" ng-model="profile_input.radio" value="{{current_person.github_account.image_url}}">
-        <img src="{{current_person.github_account.image_url}}" tooltip="GitHub">
-      </label></div>
+      <div class="radio no-padding" ng-show="current_person.github_account">
+        <label class="setings_profile_pic">
+          <input type="radio" name="profile_input" ng-model="profile_input.radio" ng-value="current_person.github_account.image_url">
+          <img src="{{current_person.github_account.image_url}}" tooltip="GitHub">
+        </label>
+      </div>
 
-      <div class="checkbox no-padding" ng-show="current_person.twitter_account"><label class="setings_profile_pic">
-        <input type="radio" ng-model="profile_input.radio" value="twitter:{{current_person.twitter_account.login}}">
-        <img src="{{current_person.twitter_account.image_url}}" tooltip="Twitter">
-      </label></div>
+      <div class="radio no-padding" ng-show="current_person.twitter_account">
+        <label class="setings_profile_pic">
+          <input type="radio" name="profile_input" ng-model="profile_input.radio" ng-value="current_person.twitter_account.image_url">
+          <img src="{{current_person.twitter_account.image_url}}" tooltip="Twitter">
+        </label>
+      </div>
 
-      <div class="checkbox no-padding" ng-show="current_person.facebook_account"><label class="setings_profile_pic">
-        <input type="radio" ng-model="profile_input.radio" value="facebook:{{current_person.facebook_account.login || current_person.facebook_account.uid}}" style="margin-top: 18px">
-        <img src="{{current_person.facebook_account.image_url}}" tooltip="Facebook">
-      </label></div>
+      <div class="radio no-padding" ng-show="current_person.facebook_account">
+        <label class="setings_profile_pic">
+          <input type="radio" name="profile_input" ng-model="profile_input.radio" ng-value="current_person.facebook_account.login || current_person.facebook_account.uid" style="margin-top: 18px">
+          <img src="{{current_person.facebook_account.image_url}}" tooltip="Facebook">
+        </label>  
+      </div>
 
       <div class="input-group">
         <span class="input-group-addon">
-          <input type="radio" ng-model="profile_input.radio" value="custom">
+          <input type="radio" name="profile_input" ng-model="profile_input.radio" value="custom">
         </span>
           <input type="text" ng-model="profile_input.text" ng-change="profile_input.radio='custom'" placeholder="Image URL or Gravatar Email" class="form-control">    
       </div>
