@@ -1,0 +1,73 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Developer</th>
+    <th>Completion Date</th>
+    <th>Bid</th>
+    <th class="hidden-xs">Bio</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="proposal in proposals">
+    <!-- Person -->
+    <td><a owner-href="proposal.person">{{proposal.person.display_name}}</a></td>
+
+    <!-- Completed by date -->
+    <td>{{proposal.completed_by ? (proposal.completed_by | date) : "n/a"}}</td>
+
+    <!-- Amount -->
+    <td>{{proposal.amount | dollars}}</td>
+
+    <!-- Bio -->
+    <td class="hidden-xs">
+      <a ng-click="showProposalModal(proposal)">
+        <!-- Small view-->
+        <div class="visible-sm">
+          <p class="text-overflow-ellipse" style="width: 150px;">{{proposal.bio || "Not specified"}}</p>
+        </div>
+
+        <!-- Other view -->
+        <div class="hidden-sm">
+          <p class="text-overflow-ellipse" style="width: 250px;">{{proposal.bio || "Not specified"}}</p>
+        </div>
+      </a>
+    </td>
+
+    <!-- State -->
+    <td ng-switch="proposal.state">
+      <div ng-switch-when="pending">
+        <!-- Accept/Reject buttons -->
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-sm btn-block btn-success" ng-click="acceptProposal(proposal)">Accept</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-sm btn-block btn-danger" ng-click="rejectProposal(proposal)">Reject</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team member started to accept this proposal. -->
+      <div ng-switch-when="pending_acceptance">
+        <p class="text-success text-center"><strong><em>Accepted, pending checkout</em></strong></p>
+      </div>
+
+      <!-- Team member started to accept another proposal. -->
+      <div ng-switch-when="pending_rejection">
+        <!-- Nothing to see here, folks -->
+      </div>
+
+      <!-- Team member finished selecting another proposal. -->
+      <div ng-switch-when="rejected">
+        <p class="text-danger text-center"><strong><em>Rejected</em></strong></p>
+      </div>
+
+      <!-- Team member accepted this proposal! Hell yeah! -->
+      <div ng-switch-when="accepted">
+        <p class="text-success text-center"><strong><em>Accepted!</em></strong></p>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
