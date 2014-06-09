@@ -5,9 +5,9 @@ angular.module('directives').directive('backerList', function() {
   return {
     restrict: 'EAC',
     templateUrl: 'common/directives/backerList/templates/backerList.html',
-    scope: { 
-      backers: '=', 
-      orderModel: '=' 
+    scope: {
+      backers: '=',
+      orderModel: '='
     },
 
     link: function(scope) {
@@ -19,7 +19,8 @@ angular.module('directives').directive('backerList', function() {
       scope._options = angular.extend(scope.defaultOptions, scope.options||{});
 
       scope.pagination = {
-        perPage: 30
+        perPage: 30,
+        page: 1
       };
 
       scope.$watch('backers', function(backers) {
@@ -27,10 +28,6 @@ angular.module('directives').directive('backerList', function() {
           scope.pagination.totalItems = backers.length;
         }
       });
-
-      scope.pageChanged = function(page) {
-        console.log('pageChanged: ', page);
-      };
 
       var rawOrderValue = function(value) {
         if (/^[\-\+]/.test(value)) {

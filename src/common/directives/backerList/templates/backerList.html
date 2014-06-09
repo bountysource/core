@@ -18,7 +18,7 @@
     </thead>
 
     <tbody>
-    <tr ng-repeat="backer in backers">
+    <tr ng-repeat="backer in backers | slice: ((pagination.page - 1) * pagination.perPage): (pagination.page * pagination.perPage)">
       <!-- Backer Avatar -->
       <td>
         <a owner-href="backer">
@@ -41,13 +41,12 @@
 
   </table>
 
-  <!-- Pagination Links http://angular-ui.github.io/bootstrap/#/pagination -->
   <pagination ng-if="_options.showPaginationButtons" 
     ng-show="pagination.totalItems > 30"
-    page="pagination.currentPage"
+    page="pagination.page"
     total-items="pagination.totalItems || 100"
     items-per-page="pagination.perPage || 30"
     rotate="true"
-    on-select-page="pageChanged(page)"
+    on-select-page="pagination.page = page"
     boundary-links="true"></pagination>
 </div>
