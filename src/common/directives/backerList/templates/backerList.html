@@ -42,11 +42,12 @@
   </table>
 
   <!-- Pagination Links http://angular-ui.github.io/bootstrap/#/pagination -->
-  <!--<pagination ng-if="_options.showPaginationButtons"-->
-    <!--page="pagination.currentPage"-->
-    <!--total-items="pagination.totalItems || 100"-->
-    <!--items-per-page="pagination.perPage || 30"-->
-    <!--rotate="true"-->
-    <!--on-select-page="pageChanged(page)"-->
-    <!--boundary-links="true"></pagination>-->
+  <pagination ng-if="_options.showPaginationButtons" 
+    ng-show="pagination.totalItems > 30"
+    page="pagination.currentPage"
+    total-items="pagination.totalItems || 100"
+    items-per-page="pagination.perPage || 30"
+    rotate="true"
+    on-select-page="pageChanged(page)"
+    boundary-links="true"></pagination>
 </div>

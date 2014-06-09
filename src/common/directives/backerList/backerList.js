@@ -5,11 +5,31 @@ angular.module('directives').directive('backerList', function() {
   return {
     restrict: 'EAC',
     templateUrl: 'common/directives/backerList/templates/backerList.html',
-    scope: { backers: '=', orderModel: '=' },
+    scope: { 
+      backers: '=', 
+      orderModel: '=' 
+    },
+
     link: function(scope) {
 
+      scope.defaultOptions = {
+        showPaginationButtons: true
+      };
+
+      scope._options = angular.extend(scope.defaultOptions, scope.options||{});
+
+      scope.pagination = {
+        perPage: 30
+      };
+
+      scope.$watch('backers', function(backers) {
+        if (backers) {
+          scope.pagination.totalItems = backers.length;
+        }
+      });
+
       scope.pageChanged = function(page) {
-        console.log('pageChanged', page);
+        console.log('pageChanged: ', page);
       };
 
       var rawOrderValue = function(value) {
