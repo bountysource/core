@@ -370,7 +370,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         deferred.resolve(callback(parsed_response));
       };
       // make actual HTTP call with promise
-      var headers = {}
+      var headers = {};
       headers.Accept = 'application/vnd.bountysource+json; version=1';
 
       if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
