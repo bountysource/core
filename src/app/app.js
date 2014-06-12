@@ -3,7 +3,7 @@
 if (document.location.host === 'www.bountysource.com') {
   window.BS_CONFIG = {
     environment: 'production',
-    api_host: 'https://api.bountysource.com/',
+    api_host: 'https://www.bountysource.com/',
     mixpanel: 'f9b55dbcc390114a4ed685391a7563e0',
     google_analytics: 'UA-36879724-1',
     google_wallet_url: 'https://wallet.google.com/inapp/lib/buy.js'
@@ -11,7 +11,7 @@ if (document.location.host === 'www.bountysource.com') {
 } else if (document.location.host === 'staging.bountysource.com') {
   window.BS_CONFIG = {
     environment: 'staging',
-    api_host: 'https://staging-api.bountysource.com/',
+    api_host: 'https://staging.bountysource.com/',
     mixpanel: 'd385359c475583c9a8315cf0c2e0b197',
     google_analytics: 'UA-36879724-2',
     google_wallet_url: 'https://sandbox.google.com/checkout/inapp/lib/buy.js'
