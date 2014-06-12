@@ -11,9 +11,9 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     if ($rootScope.api_endpoint === 'development') {
       $rootScope.api_host = "http://localhost:5000/";
     } else if ($rootScope.api_endpoint === 'staging') {
-      $rootScope.api_host = "https://staging-api.bountysource.com/";
+      $rootScope.api_host = "https://staging.bountysource.com/";
     } else if ($rootScope.api_endpoint === 'production') {
-      $rootScope.api_host = "https://api.bountysource.com/";
+      $rootScope.api_host = "https://www.bountysource.com/";
     }
   } else {
     $rootScope.api_host = $window.BS_CONFIG.api_host;
