@@ -1,5 +1,5 @@
 # Bountysource
-[![Visit our IRC channel](https://kiwiirc.com/buttons/irc.freenode.net/Bountysource.png)](https://kiwiirc.com/client/irc.freenode.net/?nick=Bountyuser|?#Bountysource)
+[![Visit our IRC channel](https://kiwiirc.com/buttons/chat.freenode.net/Bountysource.png)](https://kiwiirc.com/client/chat.freenode.net:+6697/?nick=Bountyuser|?#Bountysource)
 
 
 [![Bountysource](https://www.bountysource.com/badge/team?team_id=1&style=bounties_posted)](https://www.bountysource.com/teams/bountysource/bounties?utm_source=Bountysource&utm_medium=shield&utm_campaign=bounties_posted)
