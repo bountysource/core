@@ -9,15 +9,19 @@ angular.module('directives').directive('shareButton', function ($location, $anal
       item: '='
     },
     link: function (scope, element, attrs) {
+      // Todo: Extract this horrible-ness into each factory/resource model
       scope.$watch('item', function (item, oldValue) {
         if(item) {
           var tweet_text, unprocessed_tweet_text, parent;
           if ('fundraiser' in item) {
             parent = item.fundraiser;
             unprocessed_tweet_text = "I just pledged "+$filter('dollars')(item.amount)+" to "+parent.title+"!";
-          } else if ('issue' in item) {
+          } else if ('issue' in item && item.type === 'Bounty') {
             parent = item.issue;
             unprocessed_tweet_text = "I just posted a "+$filter('dollars')(item.amount)+" bounty on Bountysource!";
+          } else if (item.type === 'Proposal') {
+            parent = item.issue;
+            unprocessed_tweet_text = "I just accepted a proposal from " + item.person.display_name + "!";
           } else {
             parent = item.team;
             unprocessed_tweet_text = "I just pledged "+$filter('dollars')(item.amount)+" to "+parent.name+"!";
