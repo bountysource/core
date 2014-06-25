@@ -2,14 +2,8 @@
 
 angular.module('filters').filter('currencyUnit', function ($filter) {
   return function (value, currency) {
-    if (currency === 'BTC') {
-      if (value <= 0 || value > 0.001) {
-        return '฿';
-      } else if (value <= 0.001 && value > 0.000001) {
-        return 'mBTC ';
-      } else {
-        return 'μBTC ';
-      }
+    if (currency === 'uBTC') {
+      return 'μBTC ';
     } else if (currency === 'XRP') {
       return 'XRP';
     } else if (currency === 'MSC') {
