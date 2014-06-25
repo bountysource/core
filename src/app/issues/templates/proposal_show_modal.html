@@ -1,0 +1,15 @@
+<div>
+  <div class="modal-header">
+    <h5>Proposal from <a owner-href="proposal.person">{{proposal.person.display_name}}</a></h5>
+  </div>
+
+  <div class="modal-body">
+    <p ng-if="proposal.amount"><strong>Budget:</strong> {{proposal.amount | dollars}}</p>
+    <p ng-if="proposal.completed_by"><strong>Completed by:</strong> {{proposal.completed_by | date}}</p>
+    <p ng-if="proposal.bio" style="white-space: pre-wrap;">{{proposal.bio}}</p>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-default" ng-click="close()">Close</button>
+  </div>
+</div>

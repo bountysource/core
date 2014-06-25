@@ -11,9 +11,9 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
     if ($rootScope.api_endpoint === 'development') {
       $rootScope.api_host = "http://localhost:5000/";
     } else if ($rootScope.api_endpoint === 'staging') {
-      $rootScope.api_host = "https://staging-api.bountysource.com/";
+      $rootScope.api_host = "https://staging.bountysource.com/";
     } else if ($rootScope.api_endpoint === 'production') {
-      $rootScope.api_host = "https://api.bountysource.com/";
+      $rootScope.api_host = "https://www.bountysource.com/";
     }
   } else {
     $rootScope.api_host = $window.BS_CONFIG.api_host;
@@ -286,7 +286,7 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         params: params || {}
       });
     },
-    
+
     linkShoppingCart: function (uid, params) {
       return this.call({
         url: '/cart/link',
@@ -370,11 +370,14 @@ angular.module('services').service('$api', function($http, $q, $cookieStore, $ro
         deferred.resolve(callback(parsed_response));
       };
       // make actual HTTP call with promise
-      if (method === 'GET') { $http.get(url, { params: params }).success(cors_callback); }
-      else if (method === 'HEAD') { $http.head(url, { params: params }).success(cors_callback); }
-      else if (method === 'DELETE') { $http.delete(url, { params: params }).success(cors_callback); }
-      else if (method === 'POST') { $http.post(url, params, {}).success(cors_callback); }
-      else if (method === 'PUT') { $http.put(url, params, {}).success(cors_callback); }
+      var headers = {};
+      headers.Accept = 'application/vnd.bountysource+json; version=1';
+
+      if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
+      else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback); }
+      else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback); }
+      else if (method === 'POST') { $http.post(url, params, {headers: headers}).success(cors_callback); }
+      else if (method === 'PUT') { $http.put(url, params, {headers: headers}).success(cors_callback); }
 
     } else {
       params._method = method;
