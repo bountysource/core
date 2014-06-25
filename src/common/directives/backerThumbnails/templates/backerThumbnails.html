@@ -11,13 +11,13 @@
   </h4>
   <ul class="list-inline" style="margin-bottom: 0;">
     <li ng-repeat="bounty in issue.bounties | orderBy:['-amount'] | limitTo: 5">
-
       <div ng-show="bounty.owner" tooltip="{{bounty.amount | dollars}} - {{bounty.owner.display_name}}">
-        <owner-profile-link model="bounty" class="thumbnail">
-          <img style="width: 25px; height: 25px;" ng-src="{{bounty.owner.image_url || bounty.owner.image_url_small }}">
-        </owner-profile-link>
+        <a ng-href="/people/{{bounty.owner.slug}}">
+          <owner-profile-link model="bounty" class="thumbnail">
+            <img style="width: 25px; height: 25px;" ng-src="{{bounty.owner.image_url || bounty.owner.image_url_small }}" ng-src="{{bounty.owner.image_url}}">
+          </owner-profile-link>
+        </a>
       </div>
-
       <div ng-hide="bounty.owner" tooltip="{{bounty.amount | dollars}} - Anonymous">
         <owner-profile-link model="bounty" class="thumbnail">
           <img style="width: 25px; height: 25px;" src="images/anon.jpg">
@@ -35,7 +35,7 @@
   </h4>
   <p ng-repeat="response in issue.winning_bounty_claim.responses | emptyFilter">
     {{ response.description }}<br>
-    <span ng-show="response.person.display_name">-<a ng-href="{{response.person.frontend_path}}">{{ response.person.display_name }}</a></span>
+    <span ng-show="response.person.display_name">-<a ng-href="/people/{{response.person.slug}}">{{ response.person.display_name }}</a></span>
     <span ng-show="!response.person.display_name">-Anonymous</span>
   </p>
 </div>
