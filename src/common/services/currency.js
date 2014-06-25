@@ -4,7 +4,7 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
 
   var self = this;
 
-  this._currencies = ['USD', 'BTC', 'MSC', 'XRP'];
+  this._currencies = ['USD', 'BTC', 'MSC', 'XRP', 'UBTC'];
   this._cookieName = 'currencySwitcherValue';
 
   this.currencyChangedEventName = 'currencyChangedEvent';
@@ -19,6 +19,7 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
   $api.v2.currencies().then(function(response) {
     if (response.success) {
       self.btcToUsdRate = response.data.bitcoin;
+      self.ubtcToUsdRate = response.data.bitcoin / 1000000;
       self.mscToUsdRate = response.data.mastercoin;
       self.xrpToUsdRate = response.data.ripple;
       onLoadDeferred.resolve(self);
@@ -67,6 +68,10 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
   this.isBTC = function (value) {
     return (angular.isDefined(value) ? value : this.value) === 'BTC';
   };
+  
+  this.isUBTC = function (value) {
+    return (angular.isDefined(value) ? value : this.value) === 'UBTC';
+  };
 
   this.isXRP = function (value) {
     return (angular.isDefined(value) ? value : this.value) === 'XRP';
@@ -84,6 +89,10 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     return this.setCurrency('BTC');
   };
 
+  this.setUBTC = function () {
+    return this.setCurrency('UBTC');
+  };
+  
   this.setXRP = function () {
     return this.setCurrency('XRP');
   };
@@ -96,7 +105,7 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     var parsedAmount;
     if (this.isUSD()) {
       parsedAmount = parseInt(amount, 10);
-    } else if (this.isBTC() || this.isXRP() || this.isMSC()) {
+    } else if (this.isBTC() || this.isUBTC() || this.isXRP() || this.isMSC()) {
       parsedAmount = parseFloat(amount);
     }
     return parsedAmount;
@@ -122,6 +131,10 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     // USD to BTC
     } else if (this.isUSD(fromCurrency) && this.isBTC(toCurrency)){
       new_amount = amount / this.btcToUsdRate;
+      
+    // USD to uBTC
+    } else if (this.isUSD(fromCurrency) && this.isUBTC(toCurrency)){
+      new_amount = amount / this.ubtcToUsdRate;
 
     // USD to MSC
     } else if (this.isUSD(fromCurrency) && this.isMSC(toCurrency)) {
@@ -134,6 +147,10 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     // BTC to USD
     } else if (this.isBTC(fromCurrency) && this.isUSD(toCurrency)){
       new_amount = amount * this.btcToUsdRate;
+      
+    // BTC to UBTC
+    } else if (this.isBTC(fromCurrency) && this.isUBCT(toCurrency)){
+      new_amount = amount * 1000000;
 
     // BTC to MSC
     } else if (this.isBTC(fromCurrency) && this.isMSC(toCurrency)){
@@ -143,6 +160,22 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     } else if (this.isBTC(fromCurrency) && this.isXRP(toCurrency)){
       new_amount = this.convert(amount, 'BTC', 'USD') * this.xrpToUsdRate;
 
+    // UBTC to USD
+    } else if (this.isUBTC(fromCurrency) && this.isUSD(toCurrency)){
+      new_amount = amount * this.ubtcToUsdRate;
+      
+    // UBTC to BTC
+    } else if (this.isUBTC(fromCurrency) && this.isUBCT(toCurrency)){
+      new_amount = amount / 1000000;
+
+    // UBTC to MSC
+    } else if (this.isUBTC(fromCurrency) && this.isMSC(toCurrency)){
+      new_amount = this.convert(amount, 'UBTC', 'USD') * this.mscToUsdRate;
+
+    // UBTC to XRP
+    } else if (this.isUBTC(fromCurrency) && this.isXRP(toCurrency)){
+      new_amount = this.convert(amount, 'UBTC', 'USD') * this.xrpToUsdRate;
+            
     // MSC to USD
     } else if (this.isMSC(fromCurrency) && this.isUSD(toCurrency)) {
       new_amount = amount * this.mscToUsdRate;
@@ -151,7 +184,12 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     } else if (this.isMSC(fromCurrency) && this.isBTC(toCurrency)) {
       usd = this.convert(amount, 'MSC', 'USD');
       new_amount = this.convert(usd, 'USD', 'BTC');
-
+      
+    // MSC to UBTC
+    } else if (this.isMSC(fromCurrency) && this.isBTC(toCurrency)) {
+      usd = this.convert(amount, 'MSC', 'USD');
+      new_amount = this.convert(usd, 'USD', 'UBTC');
+      
     // MSC to XRP
     } else if (this.isMSC(fromCurrency) && this.isXRP(toCurrency)) {
       usd = this.convert(amount, 'MSC', 'USD');
@@ -165,6 +203,11 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
     } else if (this.isXRP(fromCurrency) && this.isBTC(toCurrency)) {
       usd = this.convert(amount, 'XRP', 'USD');
       new_amount = this.convert(usd, 'USD', 'BTC');
+      
+    // XRP to UBTC
+    } else if (this.isXRP(fromCurrency) && this.isBTC(toCurrency)) {
+      usd = this.convert(amount, 'XRP', 'USD');
+      new_amount = this.convert(usd, 'USD', 'UBTC');
 
     // XRP to MSC
     } else if (this.isXRP(fromCurrency) && this.isMSC(toCurrency)) {
@@ -178,11 +221,15 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
   this.usdToBtc = function (value) {
     return this.convert(value, 'USD', 'BTC');
   };
-
+  
   this.btcToUsd = function (value) {
     return this.convert(value, 'BTC', 'USD');
   };
-
+  
+  this.usdToUBtc = function (value) {
+    return this.convert(value, 'USD', 'UBTC');
+  };
+  
   this.usdToXrp = function (value) {
     return this.convert(value, 'USD', 'XRP');
   };
@@ -214,7 +261,10 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
 
       case ('BTC'):
         return overrides.BTC || 3;
-
+        
+      case ('UBTC'):
+        return overrides.UBTC || 2;
+        
       case ('XRP'):
         return overrides.XRP || 0;
     }
@@ -227,7 +277,7 @@ angular.module('services').service('$currency', function ($rootScope, $cookieSto
   * */
   this.hasSymbol = function (currencyIso) {
     currencyIso = currencyIso || this.value;
-    return this.isUSD(currencyIso) || this.isBTC(currencyIso);
+    return this.isUSD(currencyIso) || this.isBTC(currencyIso) || this.isUBTC(currencyIso);
   };
 
 });

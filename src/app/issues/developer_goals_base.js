@@ -14,6 +14,9 @@ angular.module('app').controller('DeveloperGoalsBaseController', function ($scop
     if ($currency.isBTC()) {
       goal.amount = $currency.usdToBtc(goal.amount);
     }
+    else if ($currency.isUBTC()) {
+      goal.amount = $currency.usdToUBtc(goal.amount);
+    }
     return goal;
   }
 
