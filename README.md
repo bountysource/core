@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.org/bountysource/frontend.png?branch=master)](https://travis-ci.org/bountysource/frontend)
 [![Coverage Status](https://coveralls.io/repos/bountysource/frontend/badge.png)](https://coveralls.io/r/bountysource/frontend)
 
-This repository contains the javascripts, stylesheets and images that power www.bountysource.com.  
+This repository contains the javascripts, stylesheets and images that power www.bountysource.com.
 
 Our frontend is built using:
 
@@ -17,7 +17,7 @@ Our frontend is built using:
 - jshint (javascript syntax checking)
 - karma (testing)
 
-Please use our [issue tracker](https://github.com/bountysource/frontend/issues) to report any bugs or request new features.  Or, if you're a developer, send us a pull request!  
+Please use our [issue tracker](https://github.com/bountysource/frontend/issues) to report any bugs or request new features.  Or, if you're a developer, send us a pull request!
 We use [Waffle.io](https://waffle.io/bountysource/frontend) to track our GitHub Issues. [![Stories in Ready](https://badge.waffle.io/bountysource/frontend.png?label=ready&title=Ready)](https://waffle.io/bountysource/frontend)
 
 # We :heart: Pull Requests!
@@ -33,7 +33,7 @@ sudo npm install -g bower grunt-cli    # recommended
 npm install       # installs required node.js modules into node_modules/*
 bower install     # installs web components into app/components/*
 grunt server      # runs grunt server on http://localhost:9000/
-grunt test:travis # checks if your changed didn't break anything
+grunt test:travis # checks if your changes didn't break anything
 ```
 
 ## Staging vs. Production

@@ -21,8 +21,8 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View FAQ'
   }, defaultRouteOptions));
 
-  $routeProvider.when('/fees', angular.extend({
-    templateUrl: 'app/about/fees.html',
+  $routeProvider.when('/pricing', angular.extend({
+    templateUrl: 'app/about/pricing.html',
     controller: 'StaticPageController',
     title: 'Pricing',
     trackEvent: 'View Pricing'
