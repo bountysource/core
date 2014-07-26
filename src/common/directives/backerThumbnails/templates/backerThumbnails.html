@@ -14,7 +14,9 @@
 
       <div ng-show="bounty.owner" tooltip="{{bounty.amount | dollars}} - {{bounty.owner.display_name}}">
         <owner-profile-link model="bounty" class="thumbnail">
-          <img style="width: 25px; height: 25px;" ng-src="{{bounty.owner.image_url || bounty.owner.image_url_small }}">
+          <a owner-href="bounty.owner">
+            <img style="width: 25px; height: 25px;" ng-src="{{bounty.owner.image_url || bounty.owner.image_url_small }}">
+          </a>
         </owner-profile-link>
       </div>
 
@@ -35,7 +37,7 @@
   </h4>
   <p ng-repeat="response in issue.winning_bounty_claim.responses | emptyFilter">
     {{ response.description }}<br>
-    <span ng-show="response.person.display_name">-<a ng-href="{{response.person.frontend_path}}">{{ response.person.display_name }}</a></span>
+    <span ng-show="response.person.display_name">-<a ng-href="/people/{{response.person.id}}">{{ response.person.display_name }}</a></span>
     <span ng-show="!response.person.display_name">-Anonymous</span>
   </p>
 </div>
