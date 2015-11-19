@@ -1,0 +1,574 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://dev.clojure.org/jira/browse/CLJS-868
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Nov 2015 19:37:28 GMT
+      X-Arequestid:
+      - 817x68572x1
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=1FDAFBB651814A94A221D7770A864B50; Path=/jira
+      - atlassian.xsrf.token=BTMM-1VOF-2I2F-TOTY|4e51871ac5f7c44923a675a1039d8f1713a07943|lout;
+        Path=/jira
+      X-Seraph-Loginreason:
+      - OUT
+      X-Ausername:
+      - anonymous
+      X-Asessionid:
+      - 1p9usvj
+      Content-Type:
+      - text/html;charset=UTF-8
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "\n\n\n\n<!DOCTYPE html>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<html>\n<head>\n
+        \   <title>[#CLJS-868] no arity warnings on recursive calls - Clojure JIRA
+        </title>\n\n    <meta content=\"general\" name=\"decorator\" />\n    <link
+        rel=\"index\" href=\"/jira/secure/IssueNavigator.jspa\" />\n    <meta http-equiv=\"Content-Type\"
+        content=\"text/html; charset=UTF-8\" />\n    <meta http-equiv=\"Pragma\" content=\"no-cache\"
+        />\n    <meta http-equiv=\"Expires\" content=\"-1\" />\n    \n\n    \n<meta
+        id=\"atlassian-token\" name=\"atlassian-token\" content=\"BTMM-1VOF-2I2F-TOTY|4e51871ac5f7c44923a675a1039d8f1713a07943|lout\">\n\n\n
+        \   <link rel=\"shortcut icon\" href=\"/jira/s/en_US9yuwnb/649/7/_/favicon.ico\">\n
+        \   <link rel=\"icon\" type=\"image/png\" href=\"/jira/s/en_US9yuwnb/649/7/_/images/icons/favicon.png\">\n\n
+        \   \n    <script type=\"text/javascript\">var contextPath = '/jira';</script>\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css\"
+        media=\"all\">\n<!--[if lt IE 9]>\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9\"
+        media=\"all\">\n<![endif]-->\n<!--[if IE 9]>\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=IE+9\"
+        media=\"all\">\n<![endif]-->\n<!--[if lte IE 9]>\n<link type=\"text/css\"
+        rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9\"
+        media=\"all\">\n<![endif]-->\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:jquery-fancybox/jira.webresources:jquery-fancybox.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:autocomplete/jira.webresources:autocomplete.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0.6/_/download/batch/com.atlassian.plugin.atlassian-feedback-plugin:feedback/com.atlassian.plugin.atlassian-feedback-plugin:feedback.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:global-static/jira.webresources:global-static.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:global-static/jira.webresources:global-static.css?media=print\"
+        media=\"print\">\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/js/batch.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:jquery-fancybox/jira.webresources:jquery-fancybox.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:calendar/jira.webresources:calendar.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:viewissue/jira.webresources:viewissue.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:autocomplete/jira.webresources:autocomplete.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:jira-fields/jira.webresources:jira-fields.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:calendar-en/jira.webresources:calendar-en.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/5.7/_/download/batch/com.pyxis.greenhopper.jira:gh-globalkeyboardshortcuts/com.pyxis.greenhopper.jira:gh-globalkeyboardshortcuts.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0.6/_/download/batch/com.atlassian.plugin.atlassian-feedback-plugin:feedback/com.atlassian.plugin.atlassian-feedback-plugin:feedback.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-soy-plugin:soy-deps/com.atlassian.jira.jira-soy-plugin:soy-deps.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch.js\"
+        ></script>\n\n    \n        <script type=\"text/javascript\" src=\"/jira/rest/api/1.0/shortcuts/649/3ecb86259f9e1f12acf9a8b0846e962e/shortcuts.js?context=issueaction&amp;context=issuenavigation\"></script>\n
+        \   \n    <link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        href=\"/jira/osd.jsp\" title=\"Clojure JIRA\"/>\n</head>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<body
+        id=\"jira\" class=\"nl type-ab stalker sn\">\n\n\n\n\n\n\n\n\n\n\n<div id=\"header\">\n
+        \   <div id=\"header-top\">\n        <a id=\"logo\" href=\"/jira/secure/Dashboard.jspa\">\n
+        \                       <img class=\"logo\" src=\"/jira/s/en_US9yuwnb/649/7/_/jira-logo-scaled.png\"
+        width=\"48\" height=\"47\" border=\"0\" alt=\"Clojure JIRA\" />\n                    </a>\n
+        \               <form id=\"quicksearch\" action=\"/jira/secure/QuickSearch.jspa\"
+        method=\"post\" class=\"dont-default-focus\">\n            <div>\n                <label
+        for=\"quickSearchInput\" title=\"Go directly to an issue by typing a valid
+        issue key, or run a free-text search.\" class=\"overlabel\">Quick Search</label>\n
+        \               <input id=\"quickSearchInput\" class=\"quickSearchInput\"
+        type=\"text\" size=\"25\" title=\"Go directly to an issue by typing a valid
+        issue key, or run a free-text search.\" name=\"searchString\" accessKey=\"q\"
+        />\n                <input type=\"submit\" class=\"hidden\" name=\"quicksearch\"/>\n
+        \           </div>\n        </form>\n                        \n        <div
+        id=\"header-details-user\" class=\"aui-dd-parent header-link-container\">\n
+        \        <a class=\"lnk\" rel=\"nofollow\" href=\"/jira/login.jsp?os_destination=%2Fbrowse%2FCLJS-868\">Log
+        In</a>\n        <span class=\"drop-wrap\">\n        <a class=\"drop aui-dd-link\"\n
+        \                       href=\"#\"><span>Access more options</span>\n        </a>\n
+        \   </span>\n    <div id=\"user-options-list\" class=\"aui-list hidden\">\n
+        \                                                               <ul id=\"jira-help\"
+        class=\"aui-list-section  aui-first     aui-last  \">\n                                            <li
+        class=\"aui-list-item\"><a  id=\"view_help\"   class=\"aui-list-item-link
+        \"  title=\"Goto the online documentation for JIRA\" href=\"http://docs.atlassian.com/jira/docs-044/JIRA+Documentation\">Online
+        Help</a></li>\n                                            <li class=\"aui-list-item\"><a
+        \ id=\"keyshortscuthelp\"   class=\"aui-list-item-link \"  title=\"Get more
+        information about JIRA's Keyboard Shortcuts\" href=\"/jira/secure/ViewKeyboardShortcuts!default.jspa\">Keyboard
+        Shortcuts</a></li>\n                                            <li class=\"aui-list-item\"><a
+        \ id=\"view_about\"   class=\"aui-list-item-link \"  title=\"Get more information
+        about JIRA\" href=\"http://www.atlassian.com/software/jira\">About JIRA</a></li>\n
+        \                                           <li class=\"aui-list-item\"><a
+        \ id=\"view_credits\"   class=\"aui-list-item-link \"  title=\"See who did
+        what\" href=\"/jira/secure/JiraCreditsPage!default.jspa\">JIRA Credits</a></li>\n
+        \                                   </ul>\n                        </div>\n</div>\n\n
+        \       \n    </div>\n    <div id=\"header-bottom\">\n                <div
+        id=\"menu\">\n            \n                                    \n            \n<ul
+        id=\"main-nav\" class=\"menu-bar standard-menu-bar\">\n                        <li
+        class=\"aui-dd-parent lazy  \">\n                    <a class=\"lnk\"\n                href=\"/jira/secure/Dashboard.jspa\"\n
+        \                id=\"home_link\"                 accessKey=\"h\"                 title=\"View
+        your current Dashboard\"                >Dashboards</a>\n\n                    <span
+        class=\"drop-wrap\">\n            <a class=\"drop aui-dd-link\"\n                                    id=\"home_link_drop\"\n
+        \                   rel=\"home_link\"\n                    accessKey=\"d\"\n
+        \                   title=\"Access more options (Ctrl+Alt+d)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+d)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent lazy  \">\n                    <a class=\"lnk\"\n                href=\"/jira/browse/CLJS\"\n
+        \                id=\"browse_link\"                 accessKey=\"b\"                 title=\"Browse
+        currently active project 'ClojureScript'\"                >Projects</a>\n\n
+        \                   <span class=\"drop-wrap\">\n            <a class=\"drop
+        aui-dd-link\"\n                                    id=\"browse_link_drop\"\n
+        \                   rel=\"browse_link\"\n                    accessKey=\"p\"\n
+        \                   title=\"Access more options (Ctrl+Alt+p)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+p)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent lazy  selected  \">\n                    <a class=\"lnk\"\n
+        \               href=\"/jira/secure/IssueNavigator.jspa\"\n                 id=\"find_link\"
+        \                accessKey=\"f\"                 title=\"View your current
+        filter\"                >Issues</a>\n\n                    <span class=\"drop-wrap\">\n
+        \           <a class=\"drop aui-dd-link\"\n                                    id=\"find_link_drop\"\n
+        \                   rel=\"find_link\"\n                    accessKey=\"i\"\n
+        \                   title=\"Access more options (Ctrl+Alt+i)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+i)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent nonlazy  \">\n                    <a class=\"lnk\"\n
+        \               href=\"/jira/secure/GreenHopper.jspa\"\n                 id=\"greenhopper_menu\"
+        \                                title=\"Manage your project with GreenHopper\"
+        \               >Agile</a>\n\n                                                                                                            <span
+        class=\"drop-wrap\">\n                            <a class=\"drop aui-dd-link\"\n
+        \                                                                   id=\"greenhopper_menu_drop\"\n
+        \                                   accessKey=\"g\"\n                                    rel=\"greenhopper_menu\"\n
+        \                                   title=\"Access more options (Ctrl+Alt+g)\"\n
+        \                                                               href=\"#\"><span>Access
+        more options</span></a></span>\n                            <div class=\"aui-list
+        hidden\">\n                                                \n                            <ul
+        id=\"greenhopper_menu_dropdown\" class=\"aui-list-section aui-first   aui-last
+        \ \">\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"planningboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/VersionBoard.jspa\">Planning
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"taskboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/TaskBoard.jspa\">Task
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"chartboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/ChartBoard.jspa\">Chart
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"releasedboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/ArchiveChartBoard.jspa\">Released
+        Board</a></li>\n                                                            </ul>\n
+        \                                                   </div>\n                            </li>\n
+        \   </ul>\n\n            \n                    </div>\n    </div>\n</div>\n\n\n\n\n\n\n\n\n\n\n<fieldset
+        class=\"hidden parameters\">\n    <input type=\"hidden\" title=\"ajaxTimeout\"
+        value=\"The call to the JIRA server did not complete within the timeout period.
+        \ We are unsure of the result of this operation.\">\n    <input type=\"hidden\"
+        title=\"ajaxUnauthorised\" value=\"You are not authorized to perform this
+        operation.  Please try to <a href='/jira/login.jsp?os_destination=%2Fbrowse%2FCLJS-868'>log
+        in</a> or <a href='/jira/secure/Signup!default.jspa'>sign up</a> for an account.\">\n
+        \   <input type=\"hidden\" title=\"ajaxUnauthorisedAlert\" value=\"You are
+        not authorized to perform this operation.  Please log in.\">\n    <input type=\"hidden\"
+        title=\"baseURL\" value=\"http://dev.clojure.org:80/jira\">\n    <input type=\"hidden\"
+        title=\"ajaxCommsError\" value=\"The JIRA server could not be contacted.  This
+        may be a temporary glitch or the server may be down.\">\n    <input type=\"hidden\"
+        title=\"ajaxServerError\" value=\"The JIRA server was contacted but has returned
+        an error response. We are unsure of the result of this operation.\">\n    <input
+        type=\"hidden\" title=\"ajaxErrorCloseDialog\" value=\"Close this dialog and
+        press refresh in your browser\">\n    <input type=\"hidden\" title=\"ajaxErrorDialogHeading\"
+        value=\"Communications Breakdown\">\n\n    <input type=\"hidden\" title=\"dirtyMessage\"
+        value=\"You have entered new data on this page. If you navigate away from
+        this page without first saving your data, the changes will be lost.\">\n    <input
+        type=\"hidden\" title=\"dirtyDialogMessage\" value=\"You have entered new
+        data in this dialog. If you navigate away from this dialog without first saving
+        your data, the changes will be lost. Click cancel to return to the dialog.\">\n
+        \   <input type=\"hidden\" title=\"keyType\" value=\"Type\">\n    <input type=\"hidden\"
+        title=\"keyThen\" value=\"then\">\n    <input type=\"hidden\" title=\"dblClickToExpand\"
+        value=\"Double click to expand\">\n    <input type=\"hidden\" title=\"actions\"
+        value=\"Actions\">\n    <input type=\"hidden\" title=\"removeItem\" value=\"Remove\">\n
+        \   <input type=\"hidden\" title=\"workflow\" value=\"Workflow\">\n    <input
+        type=\"hidden\" title=\"labelNew\" value=\"New Label\">\n    <input type=\"hidden\"
+        title=\"enterIssueKey\" value=\"Enter issue key\">\n    <input type=\"hidden\"
+        title=\"issueActionsHint\" value=\"Begin typing for available operations or
+        press down to see all\">\n    <input type=\"hidden\" title=\"closelink\" value=\"Close\">\n
+        \   <input type=\"hidden\" title=\"dotOperations\" value=\"Operations\">\n
+        \   <input type=\"hidden\" title=\"dotLoading\" value=\"Loading...\">\n    <input
+        type=\"hidden\" title=\"frotherSuggestions\" value=\"Suggestions\">\n    <input
+        type=\"hidden\" title=\"frotherNomatches\" value=\"No Matches\">\n    <input
+        type=\"hidden\" title=\"multiselectVersionsError\" value=\"{0} is not a valid
+        version.\">\n    <input type=\"hidden\" title=\"multiselectComponentsError\"
+        value=\"{0} is not a valid component.\">\n    <input type=\"hidden\" title=\"multiselectGenericError\"
+        value=\"The value {0} is invalid.\">\n</fieldset>\n\n\n\n\n\n\n\n<fieldset
+        class=\"hidden parameters\">\n    <input type=\"hidden\" id=\"viewMoreMsg\"
+        value=\"Click to view {0} more\">\n    <input type=\"hidden\" id=\"hideMsg\"
+        value=\"Hide\" >\n    <input type=\"hidden\" id=\"error-401\" value=\"Cannot
+        perform this operation. You are not logged in.\" >\n    <input type=\"hidden\"
+        id=\"issueOpTitleUnvote\" value=\"Remove vote for this issue\" >\n    <input
+        type=\"hidden\" id=\"issueOpTitleVote\" value=\"Vote for this issue\" >\n
+        \   <input type=\"hidden\" id=\"issueOpTitleWatch\" value=\"Start watching
+        this issue\" >\n    <input type=\"hidden\" id=\"issueOpTitleUnwatch\" value=\"Stop
+        watching this issue\" >\n    <input type=\"hidden\" id=\"issueOpUnvote\" value=\"Remove
+        Vote\" >\n    <input type=\"hidden\" id=\"issueOpVote\" value=\"Add Vote\"
+        >\n    <input type=\"hidden\" id=\"issueOpWatch\" value=\"Watch Issue\" >\n
+        \   <input type=\"hidden\" id=\"issueOpUnwatch\" value=\"Stop Watching\" >\n
+        \   <input type=\"hidden\" id=\"i18nVote\" value=\"Vote\" >\n    <input type=\"hidden\"
+        id=\"i18nVoted\" value=\"Voted\" >\n    <input type=\"hidden\" id=\"i18nWatch\"
+        value=\"Watch\" >\n    <input type=\"hidden\" id=\"i18nWatching\" value=\"Watching\"
+        >\n</fieldset>\n\n<div id=\"stalker\"  class=\"stalker\">\n    <div class=\"item-header\">\n
+        \   \n        \n\n\n\n\n\n\n\n\n\n\n\n\n<h1 class=\"item-name avatar\" style=\"background-image:url(/jira/secure/projectavatar?pid=10040&amp;avatarId=10011&amp;size=large)\">\n
+        \       \n            <img id=\"project-avatar\" alt=\"\" class=\"project-avatar-48\"
+        height=\"48\" src=\"/jira/secure/projectavatar?pid=10040&amp;avatarId=10011&amp;size=large\"
+        width=\"48\" />\n        \n        <span>ClojureScript</span>\n</h1>\n\n\n<ul
+        class=\"breadcrumbs\">\n    <li><a id=\"project-name-val\" href=\"/jira/browse/CLJS\">ClojureScript</a></li>\n
+        \   \n    <li><a id=\"key-val\" rel=\"17585\" href=\"/jira/browse/CLJS-868\">CLJS-868</a></li>\n</ul>\n\n<h2
+        id=\"issue_header_summary\" class=\"item-summary\"><a href=\"/jira/browse/CLJS-868\">no
+        arity warnings on recursive calls</a></h2>\n\n    \n    </div>\n    \n\n\n\n\n
+        \   <div class=\"command-bar\">\n        <div class=\"ops-cont\">\n            <div
+        class=\"ops-menus\">\n                \n                \n                    <ul
+        id=\"opsbar-login\" class=\"first ops\">\n                        <li id=\"ops-login\"
+        class=\"last\">\n                            <a id=\"ops-login-lnk\" class=\"button
+        first last\" href=\"/jira/login.jsp?os_destination=%2Fbrowse%2FCLJS-868\">Log
+        In</a>\n                        </li>\n                    </ul>\n                \n
+        \               \n                    \n                        \n                    \n
+        \               \n                    \n                        \n                    \n
+        \               \n                \n                    \n                        <ul
+        class=\"ops\" id=\"view-drop\">\n                            <li>\n                                <div
+        class=\"aui-dd-parent\">\n                                    <a href=\"#\"
+        title=\"View this issue in another format\" class=\"drop lnk aui-dd-link standard
+        icon-views\"><span>Views</span></a>\n                                        <div
+        class=\"aui-list hidden\">\n                                        <ul class=\"aui-first
+        aui-last aui-list-section\">\n                                            \n
+        \                                               <li class=\"aui-list-item\">\n
+        \                                                   <a class=\"aui-list-item-link\"
+        rel=\"nofollow\" href=\"/jira/si/jira.issueviews:issue-xml/CLJS-868/CLJS-868.xml\">XML</a>\n
+        \                                               </li>\n                                            \n
+        \                                               <li class=\"aui-list-item\">\n
+        \                                                   <a class=\"aui-list-item-link\"
+        rel=\"nofollow\" href=\"/jira/si/jira.issueviews:issue-word/CLJS-868/CLJS-868.doc\">Word</a>\n
+        \                                               </li>\n                                            \n
+        \                                               <li class=\"aui-list-item\">\n
+        \                                                   <a class=\"aui-list-item-link\"
+        rel=\"nofollow\" href=\"/jira/si/jira.issueviews:issue-html/CLJS-868/CLJS-868.html\">Printable</a>\n
+        \                                               </li>\n                                            \n
+        \                                       </ul>\n                                    </div>\n
+        \                               </div>\n                            </li>\n
+        \                       </ul>\n                    \n                \n            </div>\n
+        \       </div>\n    </div>          \n\n\n    <div class=\"btm\"></div>\n</div>\n<div
+        id=\"main-content\">\n    <div class=\"active-area\">\n        <div class=\"column\"
+        id=\"primary\">\n            <div class=\"content\">\n                \n                \n
+        \               \n                \n\n                    <div id=\"details-module\"
+        class=\"module toggle-wrap\">\n                        <div class=\"mod-header\">\n
+        \                           <h3 class=\"toggle-title\">Details</h3>\n                        </div>\n
+        \                       <div class=\"mod-content\">\n                            <ul
+        id=\"issuedetails\" class=\"property-list two-cols\">\n    <li class=\"item\">\n
+        \       <div class=\"wrap\">\n            <strong class=\"name\">Type:</strong>\n
+        \           <span id=\"type-val\" class=\"value\">\n                                                        <img
+        alt=\"Defect\" height=\"16\" src=\"/jira/images/icons/bug.gif\" title=\"Defect
+        - A problem which impairs or prevents the functions of the product.\" width=\"16\"
+        />\n             Defect\n            </span>\n        </div>\n    </li>\n
+        \   <li class=\"item item-right\">\n        <div class=\"wrap\">\n            <strong
+        class=\"name\">Status:</strong>\n            <span id=\"status-val\" class=\"value\">\n
+        \                                                       <img alt=\"Open\"
+        height=\"16\" src=\"/jira/images/icons/status_open.gif\" title=\"Open - The
+        issue is open and ready for the assignee to start work on it.\" width=\"16\"
+        />\n             Open\n            </span>\n                    </div>\n    </li>\n
+        \           <li class=\"item\">\n            <div class=\"wrap\">\n                <strong
+        class=\"name\">Priority:</strong>\n                <span id=\"priority-val\"
+        class=\"value\">\n                                                                <img
+        alt=\"Major\" height=\"16\" src=\"/jira/images/icons/priority_major.gif\"
+        title=\"Major - Ignore these names and assume only relative priority\" width=\"16\"
+        />\n             Major\n                </span>\n            </div>\n        </li>\n
+        \                               <li class=\"item item-right\">\n            <div
+        class=\"wrap\">\n                <strong class=\"name\">Resolution:</strong>\n
+        \               <span id=\"resolution-val\" class=\"value unresolved\" >\n
+        \                                   Unresolved\n                                </span>\n
+        \           </div>\n        </li>\n                <li class=\"item\">\n            <div
+        class=\"wrap\">\n                <strong class=\"name\">Affects Version/s:</strong>\n
+        \               <span id=\"versions-val\" class=\"value\">\n                                            <span
+        class=\"shorten\" id=\"versions-field\">\n                                                            <span
+        title=\"1.7.145 \">1.7.145</span>                                                    </span>\n
+        \                                   </span>\n            </div>\n        </li>\n
+        \               <li class=\"item item-right\">\n            <div class=\"wrap\">\n
+        \               <strong class=\"name\">Fix Version/s:</strong>\n                <span
+        id=\"fixfor-val\" class=\"value\">\n                                            <span
+        class=\"shorten\" id=\"fixVersions-field\">\n                                                            <a
+        href=\"/jira/browse/CLJS/fixforversion/10653\" title=\"Next \">Next</a>                                                    </span>\n
+        \                                   </span>\n            </div>\n        </li>\n
+        \               <li class=\"item\">\n            <div class=\"wrap\">\n                <strong
+        class=\"name\">Component/s:</strong>\n                <span id=\"components-val\"
+        class=\"value\">\n                                            None\n                                    </span>\n
+        \           </div>\n        </li>\n                    <li class=\"item full-width\">\n
+        \           <div class=\"wrap\" id=\"wrap-labels\">\n                <strong
+        class=\"name\">Labels:</strong>\n                    <div class=\"labels-wrap
+        value\">\n            <span class=\"labels\" id=\"labels-17585-value\">None</span>\n
+        \               </div>\n            </div>\n        </li>\n        </ul>\n\n\n
+        \                           \n                        </div>\n                    </div>\n\n
+        \                   \n\n\n\n\n<div id=\"descriptionmodule\" class=\"module
+        toggle-wrap\">\n    <div class=\"mod-header\">\n        <h3 class=\"toggle-title\">Description</h3>\n
+        \   </div>\n    <div id=\"issue-description\" class=\"mod-content\">\n        <p>If
+        a function recursively invokes itself within its own body the invoke will
+        not be checked for arity mismatch.</p>\n    </div>\n</div>\n\n\n\n\n\n                    \n
+        \                       \n\n\n\n\n\n\n\t<div id=\"attachmentmodule\" class=\"module
+        toggle-wrap\">\n\t\t<div class=\"mod-header\">\n            <ul class=\"ops\">\n
+        \           \n                <li class=\"drop\" id=\"attachment-sorting-options\">\n
+        \                   <div class=\"aui-dd-parent\">\n                        <a
+        href=\"#\" id=\"attachment-sort-key-list\" class=\"icon drop-menu aui-dropdown-trigger\"
+        title=\"More Options\"><span>More Options</span></a>\n                        <div
+        class=\"aui-dropdown-content aui-list aui-list-checked\">\n                            <ul
+        class=\"aui-list-section\">\n                                <li class=\"aui-list-item
+        \ aui-checked\">\n                                    <a id=\"attachment-sort-key-name\"
+        class=\"aui-list-item-link\" rel=\"nofollow\"\n                                       href=\"/jira/browse/CLJS-868?attachmentSortBy=fileName#attachmentmodule\"\n
+        \                                      title=\"Sort By Name\">\n                                        Sort
+        By Name\n                                    </a>\n                                </li>\n
+        \                               <li class=\"aui-list-item\">\n                                    <a
+        id=\"attachment-sort-key-date\" class=\"aui-list-item-link\" rel=\"nofollow\"\n
+        \                                      href=\"/jira/browse/CLJS-868?attachmentSortBy=dateTime#attachmentmodule\"\n
+        \                                      title=\"Sort By Date\">\n                                        Sort
+        By Date\n                                    </a>\n                                </li>\n
+        \                           </ul>\n                            <ul class=\"aui-list-section
+        \" id=\"attachment-sort-direction-list\">\n                                <li
+        class=\"aui-list-item aui-checked\">\n                                    <a
+        id=\"attachment-sort-direction-asc\" class=\"aui-list-item-link\" rel=\"nofollow\"\n
+        \                                      href=\"/jira/browse/CLJS-868?attachmentOrder=asc#attachmentmodule\"\n
+        \                                      title=\"Ascending\">\n                                        Ascending\n
+        \                                   </a>\n                                </li>\n
+        \                               <li class=\"aui-list-item\">\n                                    <a
+        id=\"attachment-sort-direction-desc\" class=\"aui-list-item-link\" rel=\"nofollow\"\n
+        \                                      href=\"/jira/browse/CLJS-868?attachmentOrder=desc#attachmentmodule\"\n
+        \                                      title=\"Descending\">\n                                        Descending\n
+        \                                   </a>\n                                </li>\n
+        \                           </ul>\n                            \n                                <ul
+        class=\"aui-list-section aui-last\">\n                                    \n
+        \                                       <li class=\"aui-list-item\">\n                                            <a
+        id=\"aszip\" href=\"/jira/secure/attachmentzip/17585.zip\"\n                                               class=\"aui-list-item-link\"
+        title=\"Download all attachments as a ZIP file\">\n                                                Download
+        All\n                                            </a>\n                                        </li>\n
+        \                                   \n                                    \n
+        \                               </ul>\n                            \n                        </div>\n
+        \                   </div>\n                </li>\n            </ul>\n            <h3
+        class=\"toggle-title\">Attachments</h3>\n        </div>\n        <div class=\"mod-content\">\n
+        \       \n            <ol id=\"file_attachments\" class=\"item-attachments\">\n
+        \           \n                \n                \n\n                <li class=\"attachment-content
+        \">\n                    \n                    \n                        <div
+        class=\"attachment-thumb\">\n                            <a href=\"/jira/secure/attachment/15271/cljs_868_14_Nov_2015.md\">\n
+        \                               \n\n    \n    \n        <img src=\"/jira/images/icons/attach/file.gif\"
+        height=\"16\" width=\"16\" border=\"0\" alt=\"File\">\n    \n\n\n                            </a>\n
+        \                       </div>\n                        <dl>\n                            \n
+        \                   <dt class=\"attachment-title\">\n                        <a
+        href=\"/jira/secure/attachment/15271/cljs_868_14_Nov_2015.md\"\n                           title=\"Latest
+        14/Nov/15 7:47 PM - Samuel Miller\">cljs_868_14_Nov_2015.md\n                        </a>\n
+        \                   </dt>\n                    <dd class=\"attachment-date\">\n
+        \                       14/Nov/15 7:47 PM</dd>\n                    <dd class=\"attachment-size\">\n
+        \                       3 kB</dd>\n                    <dd class=\"attachment-author\">\n
+        \                       Samuel Miller\n                    </dd>\n                \n
+        \                       </dl>\n                    \n                </li>\n
+        \           \n                \n                \n\n                <li class=\"attachment-content
+        \">\n                    \n                    \n                        <div
+        class=\"attachment-thumb\">\n                            <a href=\"/jira/secure/attachment/15272/cljs_868_14_Nov_2015.patch\">\n
+        \                               \n\n    \n        <img src=\"/jira/images/icons/attach/text.gif\"
+        height=\"16\" width=\"16\"\n             border=\"0\" alt=\"Text File\">        \n
+        \       \n    \n\n\n                            </a>\n                        </div>\n
+        \                       <dl>\n                            \n                    <dt
+        class=\"attachment-title\">\n                        <a href=\"/jira/secure/attachment/15272/cljs_868_14_Nov_2015.patch\"\n
+        \                          title=\"Latest 16/Nov/15 10:58 PM - Samuel Miller\">cljs_868_14_Nov_2015.patch\n
+        \                       </a>\n                    </dt>\n                    <dd
+        class=\"attachment-date\">\n                        16/Nov/15 10:58 PM</dd>\n
+        \                   <dd class=\"attachment-size\">\n                        3
+        kB</dd>\n                    <dd class=\"attachment-author\">\n                        Samuel
+        Miller\n                    </dd>\n                \n                        </dl>\n
+        \                   \n                </li>\n            \n            </ol>\n
+        \   \n        \n\n        \n        </div>\n    </div>\n\n    \n\n\n                    \n
+        \               \n                \n                    <div class='module
+        toggle-wrap' id='activitymodule'><div id='activitymodule_heading' class='mod-header'><h3
+        class='toggle-title'>Activity</h3></div><div class='mod-content'>    <div
+        class=\"tabwrap tabs2\">\n                    <div class=\"sortwrap\">\n                                    <a
+        class=\"icon icon-sort-down\" rel=\"nofollow\" href=\"/jira/browse/CLJS-868?actionOrder=desc#issue-tabs\"
+        title=\"Ascending order - Click to sort in descending order\"><span>Ascending
+        order - Click to sort in descending order</span></a>\n                            </div>\n
+        \               <ul id=\"issue-tabs\" class=\"tabs horizontal\">\n                                    <li><a
+        id=\"all-tabpanel\" href=\"/jira/browse/CLJS-868?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel#issue-tabs\"><strong>All</strong></a></li>\n
+        \                                               <li id=\"comment-tabpanel\"
+        class=\"active\"><strong>Comments</strong></li>\n                                                <li><a
+        id=\"changehistory-tabpanel\" href=\"/jira/browse/CLJS-868?page=com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel#issue-tabs\"><strong>History</strong></a></li>\n
+        \                                               <li><a id=\"activity-stream-issue-tab\"
+        href=\"/jira/browse/CLJS-868?page=com.atlassian.streams.streams-jira-plugin:activity-stream-issue-tab#issue-tabs\"><strong>Activity</strong></a></li>\n
+        \                           </ul>\n    </div>\n    <div class=\"issuePanelContainer\"
+        id=\"issue_actions_container\">\n                        <div id=\"comment-40822\"
+        class=\"issue-data-block activity-comment twixi-block expanded\">\n    <div
+        class=\"twixi-wrap verbose actionContainer\">\n        <a href=\"#\" class=\"twixi\"><span
+        class=\"icon twixi-opened\"><span>Hide</span></span></a>\n        <div class=\"action-links\">\n
+        \           <a href=\"/jira/browse/CLJS-868?focusedCommentId=40822&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-40822\"
+        title=\"A permanent link to this comment.\" class=\"icon icon-perma\"><span>Permalink</span></a>\n
+        \                               </div>\n        <div class=\"action-details\">\n
+        \   \n    \n    \n                \n\n    <a class=\"user-hover user-avatar\"
+        rel=\"kamn\" style=\"background-image:url(/jira/secure/useravatar?size=small&amp;avatarId=10142);\"
+        \ id=\"commentauthor_40822_verbose\" href=\"/jira/secure/ViewProfile.jspa?name=kamn\">Samuel
+        Miller</a>\n added a comment  - <span class='commentdate_40822_verbose subText'><span
+        class='date user-tz' title='10/Aug/15 10:06 PM'><time datetime='2015-08-10T22:06-0500'>10/Aug/15
+        10:06 PM</time></span></span>  </div>\n        <div class=\"action-body flooded\"><p>Took
+        some time to look at this issue. Originally thought \"Do what loop/recur does\"
+        but that does not take into account multi-arity. It seems like maybe the best
+        option is to somehow use the second pass of the analyze(analyze-fn-methods-pass2).
+        The entire information about the function is present and the warning section
+        of the code gets triggered but because of no-warn is ignored. Any other ideas
+        for a solution to this?</p> </div>\n    </div>\n    <div class=\"twixi-wrap
+        concise actionContainer\">\n        <a href=\"#\" class=\"twixi\"><span class=\"icon
+        twixi-closed\"><span>Show</span></span></a>\n        <div class=\"action-details
+        flooded\">\n            \n    \n    \n    \n                \n\n    <a class=\"user-hover
+        user-avatar\" rel=\"kamn\" style=\"background-image:url(/jira/secure/useravatar?size=small&amp;avatarId=10142);\"
+        \ id=\"commentauthor_40822_concise\" href=\"/jira/secure/ViewProfile.jspa?name=kamn\">Samuel
+        Miller</a>\n added a comment  - <span class='commentdate_40822_concise subText'><span
+        class='date user-tz' title='10/Aug/15 10:06 PM'><time datetime='2015-08-10T22:06-0500'>10/Aug/15
+        10:06 PM</time></span></span>               Took some time to look at this
+        issue. Originally thought \"Do what loop/recur does\" but that does not take
+        into account multi-arity. It seems like maybe the best option is to somehow
+        use the second pass of the analyze(analyze-fn-methods-pass2). The entire information
+        about the function is present and the warning section of the code gets triggered
+        but because of no-warn is ignored. Any other ideas for a solution to this?
+        \        </div>\n    </div>\n</div>\n                     <div id=\"comment-41638\"
+        class=\"issue-data-block activity-comment twixi-block expanded\">\n    <div
+        class=\"twixi-wrap verbose actionContainer\">\n        <a href=\"#\" class=\"twixi\"><span
+        class=\"icon twixi-opened\"><span>Hide</span></span></a>\n        <div class=\"action-links\">\n
+        \           <a href=\"/jira/browse/CLJS-868?focusedCommentId=41638&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-41638\"
+        title=\"A permanent link to this comment.\" class=\"icon icon-perma\"><span>Permalink</span></a>\n
+        \                               </div>\n        <div class=\"action-details\">\n
+        \   \n    \n    \n                \n\n    <a class=\"user-hover user-avatar\"
+        rel=\"kamn\" style=\"background-image:url(/jira/secure/useravatar?size=small&amp;avatarId=10142);\"
+        \ id=\"commentauthor_41638_verbose\" href=\"/jira/secure/ViewProfile.jspa?name=kamn\">Samuel
+        Miller</a>\n added a comment  - <span class='commentdate_41638_verbose subText'><span
+        class='date user-tz' title='14/Nov/15 7:47 PM'><time datetime='2015-11-14T19:47-0600'>14/Nov/15
+        7:47 PM</time></span></span>  </div>\n        <div class=\"action-body flooded\"><p>So
+        I am looking for feed back on this patch and I will try to explain the reasoning
+        for each section.</p>\n\n<p>The issue is that a function only knows about
+        it's arity after it has been parsed once.<br/>\nSo we need to check arity
+        issues on the second pass</p>\n\n<p>First off, added two new variables.<br/>\n-<b>activate-second-pass-warnings</b>:Boolean
+        Basically if you want to have second-pass warnings turned on<br/>\n-<b>second-pass-cljs-warnings</b>:Set
+        Right now we only have :fn-arity but I figure might as well make it generic.</p>\n\n<p>So
+        first up if the modifications to the analyze-fn-methods-pass2 function.<br/>\nInstead
+        of using no-warn marco here we have some new functionality.<br/>\nThe goal
+        is to turn everything off except the second-pass warnings</p>\n\n<p>So if
+        <b>activate-second-pass-warnings</b> is false just use no-warn else it will
+        use the new section of code.</p>\n\n<p>The default-warning-handler was also
+        modified. After checking if a warning is on, it checks if the warning is a
+        second-pass warning and<br/>\nif that warning can now be activated. If <b>activate-second-pass-warnings</b>
+        is false AND a warning is still on that implies it is a second pass warning<br/>\nin
+        the second pass so we activate it.</p>\n\n<p>Also I tried to keep all modifications
+        in cljs.analyzer.</p>\n\n<p>Originally I had the <b>cljs-warnings</b> :fn-arity
+        to false and it would only be turned on in the second pass.<br/>\nHowever
+        the repl section just sets everything to true (and turns off select parts
+        like ns errors).<br/>\nSo I decided to not touch those sections and instead
+        keep how other files interface with the analyzer the same.</p> </div>\n    </div>\n
+        \   <div class=\"twixi-wrap concise actionContainer\">\n        <a href=\"#\"
+        class=\"twixi\"><span class=\"icon twixi-closed\"><span>Show</span></span></a>\n
+        \       <div class=\"action-details flooded\">\n            \n    \n    \n
+        \   \n                \n\n    <a class=\"user-hover user-avatar\" rel=\"kamn\"
+        style=\"background-image:url(/jira/secure/useravatar?size=small&amp;avatarId=10142);\"
+        \ id=\"commentauthor_41638_concise\" href=\"/jira/secure/ViewProfile.jspa?name=kamn\">Samuel
+        Miller</a>\n added a comment  - <span class='commentdate_41638_concise subText'><span
+        class='date user-tz' title='14/Nov/15 7:47 PM'><time datetime='2015-11-14T19:47-0600'>14/Nov/15
+        7:47 PM</time></span></span>               So I am looking for feed back on
+        this patch and I will try to explain the reasoning for each section.\n\nThe
+        issue is that a function only knows about it's arity after it has been parsed
+        once.\nSo we need to check arity issues on the second pass\n\nFirst off, added
+        two new variables.\n-<b>activate-second-pass-warnings</b>:Boolean Basically
+        if you want to have second-pass warnings turned on\n-<b>second-pass-cljs-warnings</b>:Set
+        Right now we only have :fn-arity but I figure might as well make it generic.\n\nSo
+        first up if the modifications to the analyze-fn-methods-pass2 function.\nInstead
+        of using no-warn marco here we have some new functionality.\nThe goal is to
+        turn everything off except the second-pass warnings\n\nSo if <b>activate-second-pass-warnings</b>
+        is false just use no-warn else it will use the new section of code.\n\nThe
+        default-warning-handler was also modified. After checking if a warning is
+        on, it checks if the warning is a second-pass warning and\nif that warning
+        can now be activated. If <b>activate-second-pass-warnings</b> is false AND
+        a warning is still on that implies it is a second pass warning\nin the second
+        pass so we activate it.\n\nAlso I tried to keep all modifications in cljs.analyzer.\n\nOriginally
+        I had the <b>cljs-warnings</b> :fn-arity to false and it would only be turned
+        on in the second pass.\nHowever the repl section just sets everything to true
+        (and turns off select parts like ns errors).\nSo I decided to not touch those
+        sections and instead keep how other files interface with the analyzer the
+        same.         </div>\n    </div>\n</div>\n                     <div id=\"comment-41643\"
+        class=\"issue-data-block activity-comment twixi-block expanded\">\n    <div
+        class=\"twixi-wrap verbose actionContainer\">\n        <a href=\"#\" class=\"twixi\"><span
+        class=\"icon twixi-opened\"><span>Hide</span></span></a>\n        <div class=\"action-links\">\n
+        \           <a href=\"/jira/browse/CLJS-868?focusedCommentId=41643&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-41643\"
+        title=\"A permanent link to this comment.\" class=\"icon icon-perma\"><span>Permalink</span></a>\n
+        \                               </div>\n        <div class=\"action-details\">\n
+        \   \n    \n    \n                \n\n    <a class=\"user-hover user-avatar\"
+        rel=\"kamn\" style=\"background-image:url(/jira/secure/useravatar?size=small&amp;avatarId=10142);\"
+        \ id=\"commentauthor_41643_verbose\" href=\"/jira/secure/ViewProfile.jspa?name=kamn\">Samuel
+        Miller</a>\n added a comment  - <span class='commentdate_41643_verbose subText'><span
+        class='date user-tz' title='16/Nov/15 10:58 PM'><time datetime='2015-11-16T22:58-0600'>16/Nov/15
+        10:58 PM</time></span></span>  </div>\n        <div class=\"action-body flooded\"><p>Just
+        realized that I have the patch marked as .md instead of .patch <img class=\"emoticon\"
+        src=\"/jira/images/icons/emoticons/tongue.gif\" height=\"20\" width=\"20\"
+        align=\"absmiddle\" alt=\"\" border=\"0\"/></p> </div>\n    </div>\n    <div
+        class=\"twixi-wrap concise actionContainer\">\n        <a href=\"#\" class=\"twixi\"><span
+        class=\"icon twixi-closed\"><span>Show</span></span></a>\n        <div class=\"action-details
+        flooded\">\n            \n    \n    \n    \n                \n\n    <a class=\"user-hover
+        user-avatar\" rel=\"kamn\" style=\"background-image:url(/jira/secure/useravatar?size=small&amp;avatarId=10142);\"
+        \ id=\"commentauthor_41643_concise\" href=\"/jira/secure/ViewProfile.jspa?name=kamn\">Samuel
+        Miller</a>\n added a comment  - <span class='commentdate_41643_concise subText'><span
+        class='date user-tz' title='16/Nov/15 10:58 PM'><time datetime='2015-11-16T22:58-0600'>16/Nov/15
+        10:58 PM</time></span></span>               Just realized that I have the
+        patch marked as .md instead of .patch <img class=\"emoticon\" src=\"/jira/images/icons/emoticons/tongue.gif\"
+        height=\"20\" width=\"20\" align=\"absmiddle\" alt=\"\" border=\"0\"/>         </div>\n
+        \   </div>\n</div>\n                 </div>\n</div></div>\n                \n\n
+        \           </div>\n        </div>\n\n        <div class=\"column\" id=\"secondary\">\n
+        \           <div class=\"content\">\n                \n                    <div
+        class='module toggle-wrap' id='peoplemodule'><div id='peoplemodule_heading'
+        class='mod-header'><h3 class='toggle-title'>People</h3></div><div class='mod-content'><ul
+        class=\"item-details\" id=\"peopledetails\">\n    <li class=\"people-details\">\n
+        \               <dl>\n            <dt>Assignee:</dt>\n            <dd id=\"assignee-val\">\n
+        \               Unassigned\n            </dd>\n        </dl>\n                        <dl>\n
+        \           <dt>Reporter:</dt>\n            <dd id=\"reporter-val\">\n                        <a
+        class=\"user-hover\" rel=\"dnolen\" id=\"issue_summary_reporter_dnolen\" href=\"/jira/secure/ViewProfile.jspa?name=dnolen\">David
+        Nolen</a>\n            </dd>\n        </dl>\n                    </li>\n</ul>\n<div
+        id=\"votes-val\">\n                <span id=\"vote-label\" title=\"You have
+        to be logged in to vote for an issue.\"><span class=\"icon icon-vote-disabled\"></span><span
+        class=\"action-text\">Vote</span></span>\n    \n                (<span id=\"vote-data\">0</span>)\n
+        \   </div>\n<div id=\"watchers-val\">\n            <span id=\"watch-label\"
+        title=\"You have to be logged in to watch an issue.\"><span class=\"icon icon-watch-disabled\"></span>Watch</span>\n
+        \   \n        \n            (<span id=\"watcher-data\">2</span>)\n    </div>\n</div></div><div
+        class='module toggle-wrap' id='datesmodule'><div id='datesmodule_heading'
+        class='mod-header'><h3 class='toggle-title'>Dates</h3></div><div class='mod-content'><ul
+        class=\"item-details\">\n    <li>\n            <dl class=\"dates\">\n            <dt>Created:</dt>\n
+        \           <dd id=\"create-date\" class=\"date user-tz\"  title=\"03/Oct/14
+        7:36 AM\" >\n                        <time datetime=\"2014-10-03T07:36-0500\">03/Oct/14
+        7:36 AM</time></dd>                     </dd>\n        </dl>\n            <dl
+        class=\"dates\">\n            <dt>Updated:</dt>\n            <dd id=\"updated-date\"
+        class=\"date user-tz\"  title=\"16/Nov/15 10:58 PM\" >\n                        <time
+        datetime=\"2015-11-16T22:58-0600\">Monday 10:58 PM</time></dd>                     </dd>\n
+        \       </dl>\n        </li>\n</ul>\n</div></div>\n                \n\n            </div>\n
+        \       </div>\n        \n            \n                \n            \n        \n\n
+        \   </div>\n</div>\n\n\n\n\n\n\n\n\n\n\n<div class=\"footer\">\n<div class=\"poweredbymessage\">\n
+        \       <a href=\"http://www.atlassian.com/software/jira\" class=\"smalltext\">Atlassian
+        JIRA</a>\n        <span id=\"footer-build-information\"  style=\"color: #666666;\"
+        >(v4.4#649-r158309)</span>\n        | <a href=\"http://support.atlassian.com/secure/CreateIssue.jspa?issuetype=1&amp;pid=10000\">Report
+        a problem</a>\n    </div>\n            <div class=\"licensemessage\">\n                    Powered
+        by a free Atlassian <a href='http://www.atlassian.com/software/jira'>JIRA</a>
+        open source license for Clojure. Try JIRA - <a href='http://www.atlassian.com/software/jira'>bug
+        tracking software</a> for <i>your</i> team.\n\n                </div>\n    </div>\n\n<form
+        id=\"jira_request_timing_info\" class=\"dont-default-focus\" >\n\t<fieldset
+        class=\"parameters hidden\">\n\t\t<input type=\"hidden\" title=\"jira.request.start.millis\"
+        value=\"1447961848114\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
+        value=\"43\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"817x68572x1\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.time\" value=\"-\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.in.mins\" value=\"-\"
+        />\n\t\t<input id=\"jiraConcurrentRequests\" type=\"hidden\" name=\"jira.request.concurrent.requests\"
+        value=\"1\" />\n\t</fieldset>\n</form>\n<!--\n\t                 REQUEST ID
+        : 817x68572x1\n\t          REQUEST TIMESTAMP : [19/Nov/2015:13:37:28 -0600]\n\t
+        \              REQUEST TIME : 0.0430\n\t                 ASESSIONID : 1p9usvj\n\t
+        \       CONCURRENT REQUESTS : 1\n-->\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 19:37:28 GMT
+recorded_with: VCR 2.9.3

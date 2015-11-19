@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe "live_sync" do
 
+  # use VCR to record live responses
+  around(:each) do |example|
+    name = example.metadata[:full_description].split(/\s+/, 2).join("/").underscore.gsub(/[^\w\/]+/, "_")
+    VCR.use_cassette(name) { example.call }
+  end
+
   describe "Issue#remote_sync" do
     let(:action) do
       lambda {
@@ -363,36 +369,23 @@ describe "live_sync" do
     ############### JIRA ###############
 
 
-    it "http://dev.clojure.org/jira/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('http://dev.clojure.org/jira/')
-      info[:tracker_name].should eq('??')
-    end
-
     it "http://dev.clojure.org/jira/browse/CLJS" do
       info[:issue_class].should be_nil
       info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('http://dev.clojure.org/jira/')
-      info[:tracker_name].should eq('Clojure')
-    end
-
-    it "http://dev.clojure.org/jira/browse/CLJ" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('http://dev.clojure.org/jira/')
-      info[:tracker_name].should eq('ClojureScript')
+      info[:tracker_url].should eq('http://dev.clojure.org/jira/browse/CLJS')
+      info[:tracker_name].should eq('CLJS')
     end
 
     it "http://dev.clojure.org/jira/browse/CLJS-868" do
       info[:issue_class].should eq(Jira::Issue)
       info[:issue_url].should eq('http://dev.clojure.org/jira/browse/CLJS-868')
+      info[:issue_title].should eq('no arity warnings on recursive calls')
       info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('http://dev.clojure.org/jira/')
-      info[:tracker_name].should eq('Clojure JIRA')
+      info[:tracker_url].should eq('http://dev.clojure.org/jira/browse/CLJS')
+      info[:tracker_name].should eq('CLJS')
     end
 
-    it "https://bukkit.atlassian.net/" do
+    it "https://bukkit.atlassian.net/projects/BUKKIT/summary" do
       info[:issue_class].should be_nil
       info[:tracker_class].should eq(Jira::Tracker)
       info[:tracker_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT')
@@ -402,6 +395,16 @@ describe "live_sync" do
     it "https://bukkit.atlassian.net/browse/BUKKIT-3846" do
       info[:issue_class].should eq(Jira::Issue)
       info[:issue_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT-3846')
+      info[:issue_title].should eq('FurnaceRecipe overwrites vanilla result experience')
+      info[:tracker_class].should eq(Jira::Tracker)
+      info[:tracker_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT')
+      info[:tracker_name].should eq('BUKKIT')
+    end
+
+    it "https://bukkit.atlassian.net/projects/BUKKIT/issues/BUKKIT-5574" do
+      info[:issue_class].should eq(Jira::Issue)
+      info[:issue_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT-5574')
+      info[:issue_title].should eq('Fatal failure by spawning')
       info[:tracker_class].should eq(Jira::Tracker)
       info[:tracker_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT')
       info[:tracker_name].should eq('BUKKIT')

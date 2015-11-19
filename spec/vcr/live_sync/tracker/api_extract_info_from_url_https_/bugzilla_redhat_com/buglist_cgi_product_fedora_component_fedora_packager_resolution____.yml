@@ -1,0 +1,599 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bugzilla.redhat.com/buglist.cgi?component=fedora-packager&product=Fedora&resolution=---
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Nov 2015 19:37:42 GMT
+      Server:
+      - Apache
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Content-Disposition:
+      - inline; filename="bugs-2015-11-19.html"
+      X-Content-Type-Options:
+      - nosniff
+      Vary:
+      - Accept-Encoding,User-Agent
+      Content-Type:
+      - text/html; charset=UTF-8
+      Set-Cookie:
+      - BUGLIST=1024796-1111398-1126918-1130191-1203252-1212419-1213068-1213075-1218046-1228929-1249302-1250838-1259889-1266739-517834-627987-657627-700744-714726-1183212;
+        domain=bugzilla.redhat.com; path=/; expires=Fri, 01-Jan-2038 00:00:00 GMT
+      - Bugzilla_login_request_cookie=UXNldYcHOo; domain=bugzilla.redhat.com; path=/;
+        HttpOnly
+      - LASTORDER=bug_status%2Cpriority%2Cassigned_to%2Cbug_id; domain=bugzilla.redhat.com;
+        path=/; expires=Fri, 01-Jan-2038 00:00:00 GMT
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n
+        \                     \"http://www.w3.org/TR/html4/loose.dtd\">\n<html lang=\"en\">\n
+        \ <head><script type=\"text/javascript\" src=\"extensions/BayotBase/web/js/jquery-1.7.1.min.js\"></script>\n\n
+        \   <!--script type=\"text/javascript\" src=\"extensions/BayotBase/web/js/es5-shim.min.js?1447136797\"></script-->\n\n<!--script
+        type=\"text/javascript\" src=\"page.cgi?1447958622&amp;id=bayotbase/fielddefs.js\"></script-->\n<script
+        type=\"text/javascript\">var BB_FIELDS = {};</script>\n\n<script type=\"text/javascript\"
+        src=\"extensions/BayotBase/web/js/jquery-ui-1.8.18.custom.min.js?1447136797\"></script>\n<script
+        type=\"text/javascript\" src=\"extensions/BayotBase/web/js/jquery.cookie.js?1447136797\"></script>\n<script
+        type=\"text/javascript\" src=\"extensions/BayotBase/web/js/jquery.jsonrpc.js?1447136797\"></script>\n<script
+        type=\"text/javascript\" src=\"extensions/BayotBase/web/js/Base.js?1447136797\"></script>\n<script
+        type=\"text/javascript\" src=\"extensions/BayotBase/web/js/bayot.util.js?1447136797\"></script>\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"extensions/BayotBase/web/css/jquery-ui-1.8.18.custom.css?1447136797\">\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"extensions/BayotBase/web/css/base.css?1447136797\">\n\n<!--script
+        type=\"text/javascript\">var BB_CONFIG = ([ bb_config FILTER none ]);</script-->\n<script
+        type=\"text/javascript\">var BB_CONFIG = [];</script><link type=\"text/css\"
+        rel=\"stylesheet\" href=\"extensions/FontAwesome/web/css/font-awesome.min.css?1447136797\"><script
+        type=\"text/javascript\" src=\"extensions/SelectizeJS/web/js/standalone/selectize.js?1447379143\"></script>\n<script
+        type=\"text/javascript\" src=\"extensions/SelectizeJS/web/js/SelectizeJS.js?1447379143\"></script>\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"extensions/SelectizeJS/web/css/selectize.bootstrap3.css?1447136797\">\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"extensions/SelectizeJS/web/css/SelectizeJS.css?1447379143\">\n
+        \   <title>Bug List</title>\n    <meta http-equiv=\"Content-Type\" content=\"text/html;
+        charset=utf-8\">  \n    <meta name=\"verify-v1\" content=\"1hLjVPyIYh2cX7CL+s5A0k6pKt2FRq7/FSQ/cqGi9J8=\">\n
+        \   <meta name=\"y_key\" content=\"1cdf458efae704ba\">\n\n      <meta http-equiv=\"Content-Type\"
+        content=\"text/html; charset=UTF-8\">\n\n\n<link rel=\"Top\" href=\"https://bugzilla.redhat.com/\">\n\n\n\n
+        \   \n    <link href=\"skins/standard/global.css?1447136797\"\n          rel=\"alternate
+        stylesheet\" \n          title=\"Classic\"><link href=\"js/yui/assets/skins/sam/autocomplete.css?1447136797\"
+        rel=\"stylesheet\"\n        type=\"text/css\" ><link href=\"js/yui/assets/skins/sam/calendar.css?1447136797\"
+        rel=\"stylesheet\"\n        type=\"text/css\" ><link href=\"skins/standard/global.css?1447136797\"
+        rel=\"stylesheet\"\n        type=\"text/css\" ><link href=\"skins/standard/buglist.css?1447136797\"
+        rel=\"stylesheet\"\n        type=\"text/css\" ><link href=\"extensions/VCS/web/style.css?1447136797\"
+        rel=\"stylesheet\"\n        type=\"text/css\" ><!--[if lte IE 7]>\n      \n\n\n
+        \ <link href=\"skins/standard/IE-fixes.css?1447136797\" rel=\"stylesheet\"\n
+        \       type=\"text/css\" >\n<![endif]-->\n\n    <link href=\"skins/contrib/RedHat/global.css?1447136797\"
+        rel=\"stylesheet\"\n        type=\"text/css\" title=\"RedHat\"><link href=\"skins/contrib/RedHat/buglist.css?1447136797\"
+        rel=\"stylesheet\"\n        type=\"text/css\" title=\"RedHat\">\n\n    \n\n
+        \   \n\n    \n<script type=\"text/javascript\" src=\"js/yui/yahoo-dom-event/yahoo-dom-event.js?1447136797\"></script><script
+        type=\"text/javascript\" src=\"js/yui/cookie/cookie-min.js?1447136797\"></script><script
+        type=\"text/javascript\" src=\"js/yui/datasource/datasource-min.js?1447136797\"></script><script
+        type=\"text/javascript\" src=\"js/yui/connection/connection-min.js?1447136797\"></script><script
+        type=\"text/javascript\" src=\"js/yui/json/json-min.js?1447136797\"></script><script
+        type=\"text/javascript\" src=\"js/yui/autocomplete/autocomplete-min.js?1447136797\"></script><script
+        type=\"text/javascript\" src=\"js/yui/calendar/calendar-min.js?1447136797\"></script><script
+        type=\"text/javascript\" src=\"js/global.js?1447136797\"></script>\n\n    \n
+        \   <script src=\"js/cookies.js\" type=\"text/javascript\" language=\"JavaScript\"></script>\n
+        \   \n\n    <script type=\"text/javascript\">\n    <!--\n        YAHOO.namespace('bugzilla');\n
+        \       YAHOO.util.Event.addListener = function (el, sType, fn, obj, overrideContext)
+        {\n               if ( (\"onpagehide\" in window || YAHOO.env.ua.gecko) &&
+        sType === \"unload\") { sType = \"pagehide\"; };\n               var capture
+        = ((sType == \"focusin\" || sType == \"focusout\") && !YAHOO.env.ua.ie) ?
+        true : false;\n               return this._addListener(el, this._getType(sType),
+        fn, obj, overrideContext, capture);\n         };\n        if ( \"onpagehide\"
+        in window || YAHOO.env.ua.gecko) {\n            YAHOO.util.Event._simpleRemove(window,
+        \"unload\", \n                                           YAHOO.util.Event._unload);\n
+        \       }\n        \n        function unhide_language_selector() { \n            YAHOO.util.Dom.removeClass(\n
+        \               'lang_links_container', 'bz_default_hidden'\n            );
+        \n        } \n        YAHOO.util.Event.onDOMReady(unhide_language_selector);\n\n
+        \       \n        var BUGZILLA = {\n            param: {\n                cookiepath:
+        '\\/',\n                maxusermatches: 1000\n            },\n            constant:
+        {\n                COMMENT_COLS: 80\n            },\n            string: {\n
+        \               \n\n                attach_desc_required:\n                    'You
+        must enter a Description for this attachment.',\n                component_required:\n
+        \                   'You must select a Component for this bug.',\n                description_required:\n
+        \                   'You must enter a Description for this bug.',\n                short_desc_required:\n
+        \                   'You must enter a Summary for this bug.',\n                version_required:\n
+        \                   'You must select a Version for this bug.'\n            }\n
+        \       };\n\n\n    if (history && history.replaceState) {\n      history.replaceState(null,
+        \"Bug List\",\n                           \"buglist.cgi?component=fedora-packager&product=Fedora&resolution=---\");\n
+        \     document.title = \"Bug List\";\n    }\n    // -->\n    </script>\n<script
+        type=\"text/javascript\" src=\"js/util.js?1447136797\"></script><script type=\"text/javascript\"
+        src=\"js/field.js?1447136797\"></script><script type=\"text/javascript\" src=\"js/TUI.js?1447136797\"></script>\n\n
+        \   \n    <script type=\"text/javascript\">\n      var server_url = 'https://bugzilla.redhat.com/jsonrpc.cgi';\n
+        \   </script>\n\n    \n       <link rel=\"alternate\" \n             type=\"application/atom+xml\"
+        title=\"Atom feed\" \n             href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;title=Bug
+        List&amp;ctype=atom\">\n\n    \n    <link rel=\"search\" type=\"application/opensearchdescription+xml\"\n
+        \                      title=\"Red Hat Bugzilla\" href=\"./search_plugin.cgi\">\n
+        \   <link rel=\"shortcut icon\" href=\"images/favicon.ico\" >\n  </head>\n\n\n\n
+        \ <body \n        class=\"bugzilla-redhat-com yui-skin-sam\">\n\n\n\n<div
+        id=\"header\">\n<div id=\"banner\">\n  </div>\n\n<table border=\"0\" cellspacing=\"0\"
+        cellpadding=\"0\" id=\"titles\">\n<tr>\n    <td id=\"title\">\n      <p>Red
+        Hat Bugzilla &ndash; Bug List</p>\n    </td>\n\n\n</tr>\n</table>\n\n<table
+        id=\"lang_links_container\" cellpadding=\"0\" cellspacing=\"0\"\n       class=\"bz_default_hidden\"><tr><td>\n</td></tr></table>\n<ul
+        class=\"links\">\n  <li><a href=\"./\">Home</a></li>\n  <li><span class=\"separator\">|
+        </span><a href=\"enter_bug.cgi\">New</a></li>\n  <li><span class=\"separator\">|
+        </span><a href=\"query.cgi\">Search</a></li>\n\n\n  <li class=\"form\">\n
+        \   <span class=\"separator\">| </span>\n    <form action=\"buglist.cgi\"
+        method=\"get\"\n        onsubmit=\"if (this.quicksearch.value == '')\n                  {
+        alert('Please enter one or more search terms first.');\n                    return
+        false; } return true;\">\n    <input type=\"hidden\" id=\"no_redirect_top\"
+        name=\"no_redirect\" value=\"0\">\n    <script type=\"text/javascript\">\n
+        \     if (history && history.replaceState) {\n        var no_redirect = document.getElementById(\"no_redirect_top\");\n
+        \       no_redirect.value = 1;\n      }\n    </script>\n    <input class=\"txt\"
+        type=\"text\" id=\"quicksearch_top\" name=\"quicksearch\" \n           title=\"Quick
+        Search\" value=\"\"\n           onkeydown=\"this.style.width = Math.min(Math.max(((this.value.length
+        + 1) * 7),150),500) + 'px'\"; >\n    <input class=\"btn\" type=\"submit\"
+        value=\"Search\" \n           id=\"find_top\"></form>\n  <a href=\"page.cgi?id=quicksearch.html\"
+        title=\"Quicksearch Help\">[?]</a></li>\n\n  <li><span class=\"separator\">|
+        </span><a href=\"report.cgi\">Reports</a></li>\n\n  <li>\n      <span class=\"separator\">|
+        </span>\n        <a href=\"request.cgi\">Requests</a></li>\n\n  <li>\n        <span
+        class=\"separator\">| </span>\n        <a href=\"/docs/en/html/query.html#list\"
+        target=\"_blank\">Help</a>\n      </li>\n    \n      <li id=\"new_account_container_top\">\n
+        \       <span class=\"separator\">| </span>\n        <a href=\"createaccount.cgi\">New&nbsp;Account</a>\n
+        \     </li>\n\n    <li id=\"mini_login_container_top\">\n  <span class=\"separator\">|
+        </span>\n  <a id=\"login_link_top\" href=\"buglist.cgi?product=Fedora&amp;component=fedora-packager&amp;resolution=---&amp;GoAheadAndLogIn=1\"\n
+        \    onclick=\"return show_mini_login_form('_top')\">Log In</a>\n\n  \n  <form
+        action=\"buglist.cgi?product=Fedora&amp;component=fedora-packager&amp;resolution=---\"
+        method=\"POST\" \n        class=\"mini_login bz_default_hidden\"\n        id=\"mini_login_top\"\n
+        \       onsubmit=\"return check_mini_login_fields( '_top' );\"\n  >\n    <input
+        id=\"Bugzilla_login_top\" \n           class=\"bz_login\"\n           name=\"Bugzilla_login\"\n
+        \          title=\"Login\"\n           onfocus=\"mini_login_on_focus('_top')\"\n
+        \   >\n    <input class=\"bz_password\" \n           id=\"Bugzilla_password_top\"
+        \n           name=\"Bugzilla_password\"\n           type=\"password\"\n           title=\"Password\"\n
+        \   >\n    <input class=\"bz_password bz_default_hidden bz_mini_login_help\"
+        type=\"text\" \n           id=\"Bugzilla_password_dummy_top\" value=\"password\"\n
+        \          title=\"Password\"\n           onfocus=\"mini_login_on_focus('_top')\"\n
+        \   >\n    <input type=\"hidden\" name=\"Bugzilla_login_token\"\n           value=\"\">\n
+        \   <input type=\"submit\" name=\"GoAheadAndLogIn\" value=\"Log in\"\n            id=\"log_in_top\">\n
+        \   <script type=\"text/javascript\">\n      mini_login_constants = {\n          \"login\"
+        : \"login\",\n          \"warning\" : \"You must set the login and password
+        before logging in.\"\n      };\n      \n      if (YAHOO.env.ua.gecko || YAHOO.env.ua.ie
+        || YAHOO.env.ua.opera) {\n          YAHOO.util.Event.onDOMReady(function()
+        {\n              init_mini_login_form('_top');\n          });\n      }\n      else
+        {\n          YAHOO.util.Event.on(window, 'load', function () {\n              window.setTimeout(function()
+        {\n                  init_mini_login_form('_top');\n              }, 200);\n
+        \         });\n    }\n    </script>\n    <a href=\"#\" onclick=\"return hide_mini_login_form('_top')\">[x]</a>\n
+        \ </form>\n</li>\n<li id=\"forgot_container_top\">\n  <span class=\"separator\">|
+        </span>\n  <a id=\"forgot_link_top\" href=\"buglist.cgi?product=Fedora&amp;component=fedora-packager&amp;resolution=---&amp;GoAheadAndLogIn=1#forgot\"\n
+        \    onclick=\"return show_forgot_form('_top')\">Forgot Password</a>\n  <form
+        action=\"token.cgi\" method=\"post\" id=\"forgot_form_top\"\n        class=\"mini_forgot
+        bz_default_hidden\">\n    <label for=\"login_top\">Login:</label>\n    <input
+        type=\"text\" name=\"loginname\" size=\"20\" id=\"login_top\">\n    <input
+        id=\"forgot_button_top\" value=\"Reset Password\" \n           type=\"submit\">\n
+        \   <input type=\"hidden\" name=\"a\" value=\"reqpw\">\n    <input type=\"hidden\"
+        id=\"token_top\" name=\"token\" value=\"1447961863-P_SvfE6_kysABcJxl8CjKbAW8DJNlJG56Xr7PsEEaEk\">\n
+        \   <a href=\"#\" onclick=\"return hide_forgot_form('_top')\">[x]</a>\n  </form>\n</li>\n
+        \ \n  \n</ul>\n</div> \n\n<div id=\"bugzilla-body\">\n\n<div class=\"bz_query_head\">\n
+        \ <span class=\"bz_query_timestamp\">Thu Nov 19 2015 14:37:43 EST<br>\n  </span>\n\n\n\n</div>\n\n\n<a
+        id=\"search_description_controller\" class=\"bz_default_hidden\"\n   href=\"javascript:TUI_toggle_class('search_description')\">Hide
+        Search Description</a>\n\n<script type=\"text/javascript\">\n  TUI_alternates['search_description']
+        = 'Show Search Description';\n  YAHOO.util.Dom.removeClass('search_description_controller',
+        \n                             'bz_default_hidden');\n</script>\n\n<ul class=\"search_description\">\n
+        \ <li>\n    <strong>Resolution:</strong>\n      ---\n  </li>\n  <li>\n    <strong>Component:</strong>\n
+        \     fedora-packager\n  </li>\n  <li>\n    <strong>Product:</strong>\n      Fedora\n
+        \ </li>\n</ul>\n\n<hr>\n\n\n\n\n<span class=\"bz_result_count\">20 bugs found.\n
+        \ </span>\n\n\n\n\n\n\n\n\n\n<table class=\"bz_buglist\" id=\"buglist_table\"
+        cellspacing=\"0\" cellpadding=\"4\" width=\"100%\">\n    <colgroup>\n      <col
+        class=\"bz_id_column\">\n      <col class=\"bz_product_column\">\n      <col
+        class=\"bz_component_column\">\n      <col class=\"bz_assigned_to_column\">\n
+        \     <col class=\"bz_bug_status_column\">\n      <col class=\"bz_resolution_column\">\n
+        \     <col class=\"bz_short_desc_column\">\n      <col class=\"bz_changeddate_column\">\n
+        \   </colgroup>\n\n    <thead>\n    <tr class=\"bz_buglist_header bz_first_buglist_header\"
+        align=\"left\">\n      <th colspan=\"1\" class=\"first-child\">\n        <a
+        href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=bug_id%20DESC&amp;query_based_on=\">ID<span
+        class=\"bz_sort_order_secondary\">&#x25B2;</span></a>\n      </th>\n\n<th
+        colspan=\"1\">\n    <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=product%2Cbug_status%2Cpriority%2Cassigned_to%2Cbug_id&amp;query_based_on=\">Product</a>\n
+        \ </th><th colspan=\"1\">\n    <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=component%2Cbug_status%2Cpriority%2Cassigned_to%2Cbug_id&amp;query_based_on=\">Component</a>\n
+        \ </th><th colspan=\"1\">\n    <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=assigned_to%20DESC%2Cbug_status%2Cpriority%2Cbug_id&amp;query_based_on=\">Assignee<span
+        class=\"bz_sort_order_secondary\">&#x25B2;</span></a>\n  </th><th colspan=\"1\">\n
+        \   <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=bug_status%20DESC%2Cpriority%2Cassigned_to%2Cbug_id&amp;query_based_on=\">Status<span
+        class=\"bz_sort_order_primary\">&#x25B2;</span></a>\n  </th><th colspan=\"1\">\n
+        \   <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=resolution%2Cbug_status%2Cpriority%2Cassigned_to%2Cbug_id&amp;query_based_on=\">Resolution</a>\n
+        \ </th><th colspan=\"1\">\n    <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=short_desc%2Cbug_status%2Cpriority%2Cassigned_to%2Cbug_id&amp;query_based_on=\">Summary</a>\n
+        \ </th><th colspan=\"1\">\n    <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=changeddate%2Cbug_status%2Cpriority%2Cassigned_to%2Cbug_id&amp;query_based_on=\">Changed</a>\n
+        \ </th>\n\n\n    </tr>\n    </thead>\n\n\n  <tr id=\"b1024796\" class=\"bz_bugitem\n
+        \            bz_severity_unspecified             bz_priority_unspecified             bz_status_NEW
+        \                                                   bz_row_odd             \">\n\n
+        \   <td class=\"first-child bz_id_column\">\n      <a name=\"b1024796\"\n
+        \        href=\"show_bug.cgi?id=1024796\">1024796</a>\n      <span style=\"display:
+        none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1024796\">fedora-packager: Use Python 3
+        instead of Python 2        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2015-08-14\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b1111398\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1111398\"\n         href=\"show_bug.cgi?id=1111398\">1111398</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1111398\">fedoradev-pkgowners does not work
+        with new pkgdb        </a>\n\n    </td>\n    <td style=\"white-space: nowrap\"\n
+        \       class=\"bz_changeddate_column\">2015-03-03\n    </td>\n\n  </tr>\n\n\n\n
+        \ <tr id=\"b1126918\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1126918\"\n         href=\"show_bug.cgi?id=1126918\">1126918</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1126918\">fedora-cert: traceback when trying
+        to re-new expired cert and using wrong FAS password        </a>\n\n    </td>\n
+        \   <td style=\"white-space: nowrap\"\n        class=\"bz_changeddate_column\">2015-06-01\n
+        \   </td>\n\n  </tr>\n\n\n\n  <tr id=\"b1130191\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1130191\"\n         href=\"show_bug.cgi?id=1130191\">1130191</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1130191\">[abrt] fedora-cert: proxyclient.py:473:send_request:AuthError:
+        Unable to log into server.  Invalid authentication tokens.  Send new username
+        and password        </a>\n\n    </td>\n    <td style=\"white-space: nowrap\"\n
+        \       class=\"bz_changeddate_column\">2015-03-03\n    </td>\n\n  </tr>\n\n\n\n
+        \ <tr id=\"b1203252\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1203252\"\n         href=\"show_bug.cgi?id=1203252\">1203252</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1203252\">[abrt] fedora-packager: baseclient.py:356:send_request:AuthError:
+        Auth was requested but no way to perform auth was given.  Please set username
+        and password or session_id before calling this function with auth=True        </a>\n\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_changeddate_column\">2015-11-04\n
+        \   </td>\n\n  </tr>\n\n\n\n  <tr id=\"b1212419\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1212419\"\n         href=\"show_bug.cgi?id=1212419\">1212419</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1212419\">[abrt] fedora-packager: proxyclient.py:450:send_request:ServerError:
+        ServerError(https://admin.fedoraproject.org/accounts/user/dogencert, -1, Request
+        timed out after 120.0 seconds)        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2015-11-04\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b1213068\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1213068\"\n         href=\"show_bug.cgi?id=1213068\">1213068</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1213068\">fedora-cert: ImportError: No module
+        named fedora.client.fas2        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2015-05-19\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b1213075\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1213075\"\n         href=\"show_bug.cgi?id=1213075\">1213075</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1213075\">fedora-hosted: ImportError: No
+        module named offtrac        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2015-05-19\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b1218046\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1218046\"\n         href=\"show_bug.cgi?id=1218046\">1218046</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1218046\">[abrt] fedora-cert: proxyclient.py:490:send_request:AuthError:
+        Unable to log into server.  Invalid authentication tokens.  Send new username
+        and password        </a>\n\n    </td>\n    <td style=\"white-space: nowrap\"\n
+        \       class=\"bz_changeddate_column\">2015-10-09\n    </td>\n\n  </tr>\n\n\n\n
+        \ <tr id=\"b1228929\" class=\"bz_bugitem\n             bz_severity_high             bz_priority_unspecified
+        \            bz_status_NEW                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1228929\"\n         href=\"show_bug.cgi?id=1228929\">1228929</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1228929\">fedora-burn-yubikey fails - doesn't
+        recognize root        </a>\n\n    </td>\n    <td style=\"white-space: nowrap\"\n
+        \       class=\"bz_changeddate_column\">2015-06-06\n    </td>\n\n  </tr>\n\n\n\n
+        \ <tr id=\"b1249302\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1249302\"\n         href=\"show_bug.cgi?id=1249302\">1249302</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1249302\">[abrt] fedora-cert: __init__.py:15:&lt;module&gt;:ImportError:
+        No module named fedora.client.fas2        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2015-08-01\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b1250838\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1250838\"\n         href=\"show_bug.cgi?id=1250838\">1250838</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1250838\">fedora-packager-setup does not
+        run        </a>\n\n    </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_changeddate_column\">2015-08-06\n
+        \   </td>\n\n  </tr>\n\n\n\n  <tr id=\"b1259889\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1259889\"\n         href=\"show_bug.cgi?id=1259889\">1259889</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1259889\">[abrt] fedora-cert: proxyclient.py:522:send_request:ServerError:
+        ServerError(https://admin.fedoraproject.org/accounts/user/dogencert, 200,
+        Error returned from json module while processing https://admin.fedoraproject.org/accounts/user/dogencert:
+        ...        </a>\n\n    </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_changeddate_column\">2015-09-03\n
+        \   </td>\n\n  </tr>\n\n\n\n  <tr id=\"b1266739\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_NEW                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1266739\"\n         href=\"show_bug.cgi?id=1266739\">1266739</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1266739\">fedora-cert is missing dependencies
+        \       </a>\n\n    </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_changeddate_column\">2015-11-08\n
+        \   </td>\n\n  </tr>\n\n\n\n  <tr id=\"b517834\" class=\"bz_bugitem\n             bz_severity_medium
+        \            bz_priority_low             bz_status_NEW                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b517834\"\n         href=\"show_bug.cgi?id=517834\">517834</a>\n      <span
+        style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=517834\">RFE: add &quot;fedora-file-bug
+        &lt;package&gt;&quot; script        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2009-08-17\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b627987\" class=\"bz_bugitem\n             bz_severity_medium
+        \            bz_priority_low             bz_status_NEW                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b627987\"\n         href=\"show_bug.cgi?id=627987\">627987</a>\n      <span
+        style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=627987\">fedpkg new-sources does not remove
+        old tar from .gitignore        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2015-07-15\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b657627\" class=\"bz_bugitem\n             bz_severity_low
+        \            bz_priority_low             bz_status_NEW                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b657627\"\n         href=\"show_bug.cgi?id=657627\">657627</a>\n      <span
+        style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">NEW\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=657627\">RFE: add a merge command/flag to
+        fedpkg        </a>\n\n    </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_changeddate_column\">2013-03-08\n
+        \   </td>\n\n  </tr>\n\n\n\n  <tr id=\"b700744\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_ASSIGNED                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b700744\"\n         href=\"show_bug.cgi?id=700744\">700744</a>\n      <span
+        style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">ASSIGNED\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=700744\">in new branch of git is not possible
+        upload source file        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2013-03-08\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b714726\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_ASSIGNED                                                    bz_row_odd
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b714726\"\n         href=\"show_bug.cgi?id=714726\">714726</a>\n      <span
+        style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">ASSIGNED\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=714726\">change --root option to --mock-config
+        to fedpkg mockbuild        </a>\n\n    </td>\n    <td style=\"white-space:
+        nowrap\"\n        class=\"bz_changeddate_column\">2013-05-22\n    </td>\n\n
+        \ </tr>\n\n\n\n  <tr id=\"b1183212\" class=\"bz_bugitem\n             bz_severity_unspecified
+        \            bz_priority_unspecified             bz_status_ASSIGNED                                                    bz_row_even
+        \            \">\n\n    <td class=\"first-child bz_id_column\">\n      <a
+        name=\"b1183212\"\n         href=\"show_bug.cgi?id=1183212\">1183212</a>\n
+        \     <span style=\"display: none\"></span>\n    </td>\n\n    <td \n        class=\"bz_product_column\">Fedora\n
+        \   </td>\n    <td \n        class=\"bz_component_column\">fedora-packager\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_assigned_to_column\">\n\n
+        \       <span title=\"Dennis Gilmore\">\nDennis Gilmore\n        </span>\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_bug_status_column\">ASSIGNED\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_resolution_column\">\n\n
+        \       <span title=\"\">\n\n        </span>\n    </td>\n    <td \n        class=\"bz_short_desc_column\">\n
+        \       <a href=\"show_bug.cgi?id=1183212\">Unable to create an account        </a>\n\n
+        \   </td>\n    <td style=\"white-space: nowrap\"\n        class=\"bz_changeddate_column\">2015-11-04\n
+        \   </td>\n\n  </tr>\n\n\n\n</table>\n\n\n\n\n<span class=\"bz_result_count\">20
+        bugs found.\n  </span>\n\n\n<br>\n\n\n\n\n\n\n\n\n\n\n<table>\n  <tr>\n      <td
+        valign=\"middle\" class=\"bz_query_buttons\">\n        <form method=\"post\"
+        action=\"show_bug.cgi\">\n          <input type=\"hidden\" name=\"id\" value=\"1024796,1111398,1126918,1130191,1203252,1212419,1213068,1213075,1218046,1228929,1249302,1250838,1259889,1266739,517834,627987,657627,700744,714726,1183212\">\n
+        \         <input type=\"hidden\" name=\"format\" value=\"multiple\">\n          <input
+        type=\"submit\" id=\"long_format\" value=\"Long Format\">\n        </form>\n
+        \       <form method=\"post\" action=\"show_bug.cgi\">\n            <input
+        type=\"hidden\" name=\"ctype\" value=\"xml\">\n            <input type=\"hidden\"
+        name=\"id\" value=\"1024796\">\n            <input type=\"hidden\" name=\"id\"
+        value=\"1111398\">\n            <input type=\"hidden\" name=\"id\" value=\"1126918\">\n
+        \           <input type=\"hidden\" name=\"id\" value=\"1130191\">\n            <input
+        type=\"hidden\" name=\"id\" value=\"1203252\">\n            <input type=\"hidden\"
+        name=\"id\" value=\"1212419\">\n            <input type=\"hidden\" name=\"id\"
+        value=\"1213068\">\n            <input type=\"hidden\" name=\"id\" value=\"1213075\">\n
+        \           <input type=\"hidden\" name=\"id\" value=\"1218046\">\n            <input
+        type=\"hidden\" name=\"id\" value=\"1228929\">\n            <input type=\"hidden\"
+        name=\"id\" value=\"1249302\">\n            <input type=\"hidden\" name=\"id\"
+        value=\"1250838\">\n            <input type=\"hidden\" name=\"id\" value=\"1259889\">\n
+        \           <input type=\"hidden\" name=\"id\" value=\"1266739\">\n            <input
+        type=\"hidden\" name=\"id\" value=\"517834\">\n            <input type=\"hidden\"
+        name=\"id\" value=\"627987\">\n            <input type=\"hidden\" name=\"id\"
+        value=\"657627\">\n            <input type=\"hidden\" name=\"id\" value=\"700744\">\n
+        \           <input type=\"hidden\" name=\"id\" value=\"714726\">\n            <input
+        type=\"hidden\" name=\"id\" value=\"1183212\">\n            <input type=\"hidden\"
+        name=\"excludefield\" value=\"attachmentdata\">\n            <input type=\"submit\"
+        value=\"XML\" id=\"xml\">\n        </form>\n\n      </td>\n      \n      <td>&nbsp;</td>\n
+        \     \n      <td valign=\"middle\" class=\"bz_query_links\">\n        <a
+        href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;ctype=csv&amp;human=1\">CSV</a>
+        |\n        <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;title=Bug
+        List&amp;ctype=atom\">Feed</a> |\n        <a href=\"buglist.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;ctype=ics\">iCalendar</a>
+        |\n        <a href=\"colchange.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;query_based_on=\">Change&nbsp;Columns</a>
+        |\n\n\n\n        \n      </td>\n    \n    <td valign=\"middle\" class=\"bz_query_edit\">\n
+        \     <a href=\"query.cgi?component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---\">Edit&nbsp;Search</a>\n
+        \   </td>\n      \n      <td>&nbsp;</td>\n      \n      <td valign=\"middle\"
+        class=\"bz_query_remember\">\n        <form method=\"get\" action=\"buglist.cgi\">\n
+        \         <input type=\"submit\" id=\"remember\" value=\"Remember search\">
+        as \n          <input type=\"hidden\" name=\"newquery\" \n                 value=\"component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=bug_status%2Cpriority%2Cassigned_to%2Cbug_id\">\n
+        \         <input type=\"hidden\" name=\"cmdtype\" value=\"doit\">\n          <input
+        type=\"hidden\" name=\"remtype\" value=\"asnamed\">\n          <input type=\"hidden\"
+        name=\"token\" value=\"1447961863-VoQrlW4G1hZauzAtqAHzX2mIhoONHjybMV7FT06lcVA\">\n
+        \         <input type=\"text\" id=\"save_newqueryname\" name=\"newqueryname\"
+        size=\"20\"\n                 title=\"New query name\" value=\"\"> \n        </form>
+        \n      </td>  \n  </tr>\n</table>\n\n  <p class=\"bz_query_single_product\"><a
+        href=\"enter_bug.cgi?product=Fedora&amp;component=fedora-packager\">File\n
+        \   a new bug\n     in the\n       \"fedora-packager\" component of the\n
+        \    \"Fedora\" product</a>\n  </p>\n\n\n\n\n</div>\n\n\n\n<div id=\"footer\">\n
+        \ <div class=\"intro\"></div>\n\n\n\n\n<ul id=\"useful-links\">\n  <li id=\"links-actions\"><ul
+        class=\"links\">\n  <li><a href=\"./\">Home</a></li>\n  <li><span class=\"separator\">|
+        </span><a href=\"enter_bug.cgi\">New</a></li>\n  <li><span class=\"separator\">|
+        </span><a href=\"query.cgi\">Search</a></li>\n\n\n  <li class=\"form\">\n
+        \   <span class=\"separator\">| </span>\n    <form action=\"buglist.cgi\"
+        method=\"get\"\n        onsubmit=\"if (this.quicksearch.value == '')\n                  {
+        alert('Please enter one or more search terms first.');\n                    return
+        false; } return true;\">\n    <input type=\"hidden\" id=\"no_redirect_bottom\"
+        name=\"no_redirect\" value=\"0\">\n    <script type=\"text/javascript\">\n
+        \     if (history && history.replaceState) {\n        var no_redirect = document.getElementById(\"no_redirect_bottom\");\n
+        \       no_redirect.value = 1;\n      }\n    </script>\n    <input class=\"txt\"
+        type=\"text\" id=\"quicksearch_bottom\" name=\"quicksearch\" \n           title=\"Quick
+        Search\" value=\"\"\n           onkeydown=\"this.style.width = Math.min(Math.max(((this.value.length
+        + 1) * 7),150),500) + 'px'\"; >\n    <input class=\"btn\" type=\"submit\"
+        value=\"Search\" \n           id=\"find_bottom\"></form>\n  <a href=\"page.cgi?id=quicksearch.html\"
+        title=\"Quicksearch Help\">[?]</a></li>\n\n  <li><span class=\"separator\">|
+        </span><a href=\"report.cgi\">Reports</a></li>\n\n  <li>\n      <span class=\"separator\">|
+        </span>\n        <a href=\"request.cgi\">Requests</a></li>\n\n  <li>\n        <span
+        class=\"separator\">| </span>\n        <a href=\"/docs/en/html/query.html#list\"
+        target=\"_blank\">Help</a>\n      </li>\n    \n      <li id=\"new_account_container_bottom\">\n
+        \       <span class=\"separator\">| </span>\n        <a href=\"createaccount.cgi\">New&nbsp;Account</a>\n
+        \     </li>\n\n    <li id=\"mini_login_container_bottom\">\n  <span class=\"separator\">|
+        </span>\n  <a id=\"login_link_bottom\" href=\"buglist.cgi?product=Fedora&amp;component=fedora-packager&amp;resolution=---&amp;GoAheadAndLogIn=1\"\n
+        \    onclick=\"return show_mini_login_form('_bottom')\">Log In</a>\n\n  \n
+        \ <form action=\"buglist.cgi?product=Fedora&amp;component=fedora-packager&amp;resolution=---\"
+        method=\"POST\" \n        class=\"mini_login bz_default_hidden\"\n        id=\"mini_login_bottom\"\n
+        \       onsubmit=\"return check_mini_login_fields( '_bottom' );\"\n  >\n    <input
+        id=\"Bugzilla_login_bottom\" \n           class=\"bz_login\"\n           name=\"Bugzilla_login\"\n
+        \          title=\"Login\"\n           onfocus=\"mini_login_on_focus('_bottom')\"\n
+        \   >\n    <input class=\"bz_password\" \n           id=\"Bugzilla_password_bottom\"
+        \n           name=\"Bugzilla_password\"\n           type=\"password\"\n           title=\"Password\"\n
+        \   >\n    <input class=\"bz_password bz_default_hidden bz_mini_login_help\"
+        type=\"text\" \n           id=\"Bugzilla_password_dummy_bottom\" value=\"password\"\n
+        \          title=\"Password\"\n           onfocus=\"mini_login_on_focus('_bottom')\"\n
+        \   >\n    <input type=\"hidden\" name=\"Bugzilla_login_token\"\n           value=\"\">\n
+        \   <input type=\"submit\" name=\"GoAheadAndLogIn\" value=\"Log in\"\n            id=\"log_in_bottom\">\n
+        \   <script type=\"text/javascript\">\n      mini_login_constants = {\n          \"login\"
+        : \"login\",\n          \"warning\" : \"You must set the login and password
+        before logging in.\"\n      };\n      \n      if (YAHOO.env.ua.gecko || YAHOO.env.ua.ie
+        || YAHOO.env.ua.opera) {\n          YAHOO.util.Event.onDOMReady(function()
+        {\n              init_mini_login_form('_bottom');\n          });\n      }\n
+        \     else {\n          YAHOO.util.Event.on(window, 'load', function () {\n
+        \             window.setTimeout(function() {\n                  init_mini_login_form('_bottom');\n
+        \             }, 200);\n          });\n    }\n    </script>\n    <a href=\"#\"
+        onclick=\"return hide_mini_login_form('_bottom')\">[x]</a>\n  </form>\n</li>\n<li
+        id=\"forgot_container_bottom\">\n  <span class=\"separator\">| </span>\n  <a
+        id=\"forgot_link_bottom\" href=\"buglist.cgi?product=Fedora&amp;component=fedora-packager&amp;resolution=---&amp;GoAheadAndLogIn=1#forgot\"\n
+        \    onclick=\"return show_forgot_form('_bottom')\">Forgot Password</a>\n
+        \ <form action=\"token.cgi\" method=\"post\" id=\"forgot_form_bottom\"\n        class=\"mini_forgot
+        bz_default_hidden\">\n    <label for=\"login_bottom\">Login:</label>\n    <input
+        type=\"text\" name=\"loginname\" size=\"20\" id=\"login_bottom\">\n    <input
+        id=\"forgot_button_bottom\" value=\"Reset Password\" \n           type=\"submit\">\n
+        \   <input type=\"hidden\" name=\"a\" value=\"reqpw\">\n    <input type=\"hidden\"
+        id=\"token_bottom\" name=\"token\" value=\"1447961863-P_SvfE6_kysABcJxl8CjKbAW8DJNlJG56Xr7PsEEaEk\">\n
+        \   <a href=\"#\" onclick=\"return hide_forgot_form('_bottom')\">[x]</a>\n
+        \ </form>\n</li>\n  \n  <li><span class=\"separator\">| </span><a href=\"/enter_bug.cgi?product=Bugzilla&amp;version=4.4\">Report
+        Bugzilla Bug</a></li>\n  \n</ul>\n  </li>\n\n  \n    \n\n\n  \n</ul>\n\n  <div
+        class=\"outro\"><div align=\"left\">\n  <ul class=\"useful-links\">\n    <li
+        class=\"links-actions\">\n      <a href=\"page.cgi?id=terms-conditions.html\"
+        >Legal</a>\n    </li>\n  </ul>\n</div></div>\n</div>\n\n\n</body>\n</html>"
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 19:37:43 GMT
+recorded_with: VCR 2.9.3

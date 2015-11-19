@@ -13,6 +13,12 @@
 require 'spec_helper'
 
 describe PaymentMethod do
+
+  before do
+    # stup out paypal API to always return a success
+    allow(PaymentMethod::PaypalReferenceTransaction).to receive(:api) { |params| params.merge('PAYMENTSTATUS' => 'Completed') }
+  end
+
   describe '.create_all_pending_invoices!' do
     it "should do nothing if there aren't any new invoices" do
       expect_any_instance_of(PaymentMethod).to receive(:create_pending_invoices!).never
@@ -131,7 +137,7 @@ describe PaymentMethod do
     end
 
     it "should combine two support levels into one order" do
-      support_level2 = create(:support_level, payment_method: support_level.payment_method)
+      support_level2 = create(:support_level, payment_method: support_level.payment_method, person: support_level.person)
       expect(support_level.amount.to_i).to be(10)
       expect(support_level2.amount.to_i).to be(10)
       expect { PaymentMethod.create_and_settle_all_pending_invoices! }.to change{ShoppingCart.count}.by(1)

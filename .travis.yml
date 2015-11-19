@@ -1,0 +1,14 @@
+language: ruby
+sudo: false
+cache: bundler
+rvm:
+  - 2.1.2
+env:
+  global:
+    - DATABASE_URL=postgres://postgres@localhost/bountysource_test
+addons:
+  postgresql: "9.4"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database bountysource_test;' -U postgres

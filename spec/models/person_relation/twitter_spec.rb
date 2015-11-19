@@ -19,6 +19,10 @@
 require 'spec_helper'
 
 describe PersonRelation::Twitter do
+  before(:each) do
+    stub_request(:any, /api.twitter.com/).to_return(status: 200, body: "{}", headers: {})
+  end
+
   let!(:person) { create(:person) }
   let!(:target_person) { create(:person) }
   let(:person_relation_twitter) { create(:person_relation_twitter, person: person, target_person: target_person) }
