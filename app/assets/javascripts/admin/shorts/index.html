@@ -1,0 +1,26 @@
+<h1>Shorts</h1>
+
+<form ng-submit="create_short()" class="form-horizontal">
+  <div class="alert alert-error" ng-show="error">{{error}}</div>
+  bnty.co/<input type="text" placeholder="slug" ng-model="new_short.slug" /> &raquo;
+  <input type="text" placeholder="http://destination/?utm=123" ng-model="new_short.destination" />
+  <button class="btn">create</button>
+</form>
+
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Slug</th>
+    <th>Destination</th>
+    <th>Actions</th>
+  </tr>
+  <tr ng-hide="shorts">
+    <td colspan="4">Loading...</td>
+  </tr>
+  <tr ng-repeat="short in shorts" ng-show="shorts">
+    <td>{{short.id}}</td>
+    <td>{{short.slug}}</td>
+    <td>{{short.destination}}</td>
+    <td></td>
+  </tr>
+</table>

@@ -1,0 +1,44 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="!working">Such loading wow...</loading-bar>
+
+    <div>
+      <h3 style="margin-top:0px;">Pledges</h3>
+      <p style="margin-top:5px;" ng-show="totalItems">Total Issues: {{totalItems | number}}</p>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>
+              <a ng-click="applySort(currentPage, amount)">{{ amount.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[amount.col] && order_hash[amount.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[amount.col] && order_hash[amount.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>
+              <a ng-click="applySort(currentPage, created)">{{ created.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[created.col] && order_hash[created.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[created.col] && order_hash[created.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>Backer</th>
+            <th>Fundraiser</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="pledge in pledges">
+            <td><a ng-href="/admin/pledges/{{ pledge.id }}">{{ pledge.id }}</a></td>
+            <td>{{ pledge.amount | currency}}</td>
+            <td>{{ pledge.created_at | date:'short' }}</td>
+            <td><a ng-href="/admin/people/{{ pledge.person.id}}">{{ pledge.person.display_name }}</a></td>
+            <td><a ng-href="/admin/fundraisers/{{ pledge.fundraiser.id }}">{{ pledge.fundraiser.title }}</a></td>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

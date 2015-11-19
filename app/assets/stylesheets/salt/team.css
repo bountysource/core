@@ -1,0 +1,18 @@
+#share-button-hover { opacity: 0.6; transition: opacity .075s ease-in-out; }
+#share-button-hover:hover { opacity: 1.0; }
+
+.row-display-as a { position: relative; display: block; }
+.row-display-as a .checked { display: none; position: absolute; left: 5px; top: 5px; font-size: 24px; color: #30AD23; }
+.row-display-as a.active .checked { display: inline; }
+
+.reward-list a { display: block; color: #333; padding: 5px 15px; }
+.reward-list a h4, .reward-list a div { margin: 10px 0; }
+.reward-list a:hover { background: #5cb85c; border-radius: 5px; color: white; text-decoration: none; }
+.reward-list a:hover small { color: white; }
+
+.team-monthly-goals .surpassed { color: #bbb; }
+
+.team_header_title { font-size:60px; color: white; margin-top: 0; font-family: 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif; line-height: 70px }
+.team_header_title a { color: white; }
+.team_header_title a:hover, .team_header_title a:active, .team_header_title a:visited, .team_header_title a:link { text-decoration: none; }
+.team_header_title img { width: 70px; height: 70px; vertical-align: top; }

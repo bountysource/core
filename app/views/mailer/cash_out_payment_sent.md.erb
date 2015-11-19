@@ -1,0 +1,3 @@
+Hi <%= @person.display_name %>,
+
+Your cash out request has just been processed and <%=number_to_currency(@cash_out.final_payment_amount)%> was sent via <%=@cash_out.class.name.split('::').last%>. If you have any questions or concerns you may reply to this email.

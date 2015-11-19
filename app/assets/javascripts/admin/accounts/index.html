@@ -1,0 +1,42 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="accounts">Such loading wow...</loading-bar>
+
+    <h3 style="margin-top:0px;">Accounts</h3>
+    <hr></hr>
+    <h3>Standalone</h3>
+    <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+      <thead>
+        <tr><th>ID</th><th>Type</th></tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="special_account in special_accounts">
+          <td>{{ special_account.id }}</td>
+          <td><a ng-href="/admin/accounts/{{ special_account.id }}">{{ special_account.type }}</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <h3 style="margin-top:0px;">Item</h3>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px; table-layout:fixed; width:100%;">
+        <thead>
+          <th>Type</th>
+          <th>Count</th>
+          <th>Combined Balance</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in accounts.item">
+            <td>{{item.type}}</td>
+            <td>{{item.count}}</td>
+            <td>{{item.balance | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

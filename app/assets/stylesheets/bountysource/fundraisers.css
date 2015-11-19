@@ -1,0 +1,66 @@
+table.pledges-table { margin: 0; }
+
+table.pledges-table tr td {
+  vertical-align: middle;
+}
+
+table.pledges-table tr td img.thumbnail {
+  width: 50px;
+  height: 50px;
+}
+
+#fundraiser-title h1 {
+  font-size: 30px;
+}
+#fundraiser-title  {
+  height: 50px;
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.fundraiser-image {
+  height: 200px;
+  background-position: center center;
+  background-size: 275px auto;
+  background-repeat: no-repeat;
+}
+
+#pledge-input {
+  height: 60px;
+  font-size: 35px;
+  font-weight: 200;
+  line-height: 40px;
+}
+
+table.top-backers-table td { border-top: 0; }
+
+table.update_table th:nth-child(2) {
+  width: 30%;
+}
+
+/* receipts */
+ul.fundraiser-highlight > li > div{
+  margin-right: 2%;
+}
+
+/* updates header */
+div.update-header-options {
+  position: relative;
+  min-height: 30px;
+}
+
+div.update-header-options > * {
+  position: absolute;
+  bottom: 4px;
+}
+
+div.update-header-options > span.update-date {
+  left: 0px;
+}
+
+div.update-header-options > div.update-options {
+  right: 0px;
+}
+
+.table-fundraiser-issues .goal-met td:first-child a { text-decoration:line-through; }
+.table-fundraiser-issues .goal-met td:first-child:before { content: '✓ '; color: green; font-weight: bold; text-decoration: none !important; }

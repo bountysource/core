@@ -1,0 +1,20 @@
+Hi <%= @person.first_name %>,
+
+Oh no! We've encountered a billing error:
+
+Method: <%=@payment_notification.payment_method.description%>
+Error: <%=@payment_notification.error_message%>
+
+Details:
+<% @shopping_cart.items.select { |s| s['item_type'] == 'support_level_payment' }.each do |split| %>
+  <% support_level = @shopping_cart.person.support_levels.where(id: split['support_level_id']).first! %>
+  Team: <%=support_level.team.name%> (https://salt.bountysource.com/teams/<%=support_level.team.slug%>)
+  Period: <%=Date.parse(split['period_starts_at']).strftime("%b %e, %Y")%> - <%=Date.parse(split['period_ends_at']).strftime("%b %e, %Y")%>
+  Display: <%=support_level.owner ? support_level.owner.display_name : 'Anonymous' %>
+  Reward: <%=support_level.reward.title if support_level.reward%>
+  Amount: $<%=sprintf("%0.02f", split['amount'].to_f)%>
+<% end %>
+Total: $<%=sprintf("%0.02f", @shopping_cart.calculate_gross_money)%>
+
+Please update your payment details by visiting: https://salt.bountysource.com/
+If you have any questions or concerns, please email: support@bountysource.com

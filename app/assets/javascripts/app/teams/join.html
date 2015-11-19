@@ -1,0 +1,13 @@
+<div ng-controller="JoinTeamController">
+  <div team-view team="team">
+    <div class="well well-lg" style="text-align: center;">
+      <h1 style="margin-top: 0;">Join <a ng-href="teams/{{team.slug}}">{{team.name}}</a>?</h1>
+      <p class="lead">By accepting this invitation, you can use Bountysource on behalf of {{team.name}}.</p>
+
+      <form name="form" class="form-inline" ng-submit="accept()" style="margin-bottom: 0;">
+        <!--<input type="text" class="span6" ng-model="token" placeholder="Invite token" required />-->
+        <button type="submit" class="btn btn-primary btn-lg" ng-disabled="form.$invalid">Accept Invitation</button>
+      </form>
+    </div>
+  </div>
+</div>

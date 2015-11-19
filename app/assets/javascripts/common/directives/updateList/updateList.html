@@ -1,0 +1,5 @@
+<ul>
+  <li ng-repeat="update in updates">
+    <a href="/teams/{{team.slug}}/updates">{{update.title}}</a> <span class="label label-info">{{update.published_at | timeAgoShort}}</span>
+  </li>
+</ul>

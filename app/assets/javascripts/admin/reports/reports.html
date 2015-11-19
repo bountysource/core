@@ -1,0 +1,92 @@
+<div>
+  <div class="page-header">
+    <h1>Developer Liability Reports</h1>
+    <ng-form class="form form-inline">
+      <select ng-model="selectedMonth" ng-options="month.name for month in months"></select>
+      <button class="btn btn-primary" ng-click="buildReports()">Build Reports</button>
+    </ng-form>
+  </div>
+
+  <!-- <ul class="nav nav-tabs">
+    <li ng-class="{ active: testActiveTab('paypal') }"><a ng-click="setActiveTab('paypal')">Paypal</a></li>
+    <li ng-class="{ active: testActiveTab('google') }"><a ng-click="setActiveTab('google')">Google Wallet</a></li>
+    <li ng-class="{ active: testActiveTab('bofa') }"><a ng-click="setActiveTab('bofa')">Bank of America</a></li>
+    <li ng-class="{ active: testActiveTab('internal') }"><a ng-click="setActiveTab('internal')">Internal / Adjustment</a></li>
+    <li ng-class="{ active: testActiveTab('accounts') }"><a ng-click="setActiveTab('accounts')">Accounts</a></li>
+  </ul>
+ -->
+  <div ng-switch="activeTab">
+    <div ng-switch-when="paypal">
+      <escrow-report month="selectedMonth" report="paypalEscrowReport"></escrow-report>
+    </div>
+
+    <div ng-switch-when="google">
+      <escrow-report month="selectedMonth" report="googleWalletEscrowReport"></escrow-report>
+    </div>
+
+    <div ng-switch-when="bofa">
+      <escrow-report month="selectedMonth" report="bankOfAmericaEscrowReport"></escrow-report>
+    </div>
+
+    <div ng-switch-when="internal">
+      <liability-report month="selectedMonth" report="internalReport"></liability-report>
+    </div>
+
+    <div ng-switch-when="accounts">
+
+
+      <h3>Bountysource Accounts</h3>
+      <table class="table table-striped table-condensed table-hover">
+        <thead>
+        <tr>
+          <th>Type</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Diff</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="account_type in all_account_balances | filter:!isLiabilityAccount">
+          <td>{{account_type.type}}</td>
+          <td>{{account_type.start_balance | currency}}</td>
+          <td>{{account_type.end_balance | currency}}</td>
+          <td>{{(account_type.end_balance - account_type.start_balance) | currency}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b>{{sum_accounts_liability_start | currency}}</b></td>
+          <td><b>{{sum_accounts_liability_end | currency}}</b></td>
+          <td><b>{{(sum_accounts_liability_end-sum_accounts_liability_start) | currency}}</b></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h3>Liability Accounts</h3>
+      <table class="table table-striped table-condensed table-hover" class="span6">
+        <thead>
+        <tr>
+          <th>Type</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Diff</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="account_type in all_account_balances | filter:isLiabilityAccount">
+          <td>{{account_type.type}}</td>
+          <td>{{account_type.start_balance | currency}}</td>
+          <td>{{account_type.end_balance | currency}}</td>
+          <td>{{(account_type.end_balance - account_type.start_balance) | currency}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><b>{{sum_accounts_bs_start | currency}}</b></td>
+          <td><b>{{sum_accounts_bs_end | currency}}</b></td>
+          <td><b>{{(sum_accounts_bs_end - sum_accounts_bs_start) | currency}}</b></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

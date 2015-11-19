@@ -1,0 +1,79 @@
+<div class="homepage">
+  <section>
+    <div class="row" style="padding-top:5px;">
+      <div class="col-sm-12 col-md-12">
+        <!-- Loading message... -->
+        <div ng-hide="tabs_resolved" class="text-center">
+          <p class="lead">Loading tabs...</p>
+          <div class="progress progress-striped active">
+            <div class="progress-bar" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <div ng-show="tabs_resolved">
+          <ul class="nav nav-tabs">
+            <li style="position:relative;" ng-repeat="tab in tabs_collection" ng-class="{active: active_tab(tab) }">
+              <a ng-click="set_current_saved_search_tab(tab)">{{tab.name}}</a>
+              <i ng-click="remove_tab(tab)" class="close" ng-hide="true" style="position:absolute;top:0;right:0;padding-right:3px;">×</i>
+            </li>
+            <li ng-show="false" ng-class="{active: active_tab('search') }"><a ng-click="set_search_tab()"><i class="glyphicon glyphicon-plus"></i></a></li>
+          </ul>
+
+          <div ng-hide="tab_results_resolved" class="text-center">
+            <p class="lead">Loading saved search...</p>
+            <div class="progress progress-striped active">
+              <div class="progress-bar" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <div ng-show="current_saved_search_tab && tab_results_resolved">
+            <div ng-show="current_saved_search_tab.issues.length > 0">
+              <issue-list issues="current_saved_search_tab.issues"></issue-list>
+            </div>
+            <div ng-hide="current_saved_search_tab.issues.length > 0">
+              <pre>No Results Found</pre>
+            </div>
+          </div>
+
+          <div class="row" ng-controller="BountiesSearchController" ng-show="!current_saved_search_tab">
+            <div class="well bounty-search-well col-sm-3 col-md-3">
+              <div>
+               <form ng-submit="submit_saved_search(form_data)">
+                <input type="text" placeholder="Save Search As" ng-model="form_data.name" class="span12 form-control">
+                <input type="text" placeholder="Enter search terms here" ng-model="form_data.search" class="span12 form-control">
+
+                <label>Language:</label>
+                <input name="input" type="text" class="search span12 form-control" placeholder="Search for languages" ng-model="selected_language" typeahead="language as language.name for language in languages | filter:$viewValue | limitTo: 8" typeahead-editable="false" autocomplete="off">
+
+                <div class="filter-box">
+                  <span class="badge search-filter" ng-repeat="language in languages_selected">
+                    <button type="button" class="close" ng-click="remove_language(language)">
+                      <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                    <span>{{language.name}}</span>
+                  </span>
+                </div>
+
+                <label>Limit to projects:</label>
+                <input name="input" type="text" class="search span12 form-control" placeholder="Search in projects" ng-model="selected_tracker" typeahead="tracker as tracker.name for tracker in doTypeahead($viewValue)" typeahead-editable="false">
+
+                <div class="project-box">
+                 <span class="badge search-filter" ng-repeat="tracker in trackers_selected">
+                   <button type="button" class="close" ng-click="remove_tracker(tracker)">
+                     <i class="glyphicon glyphicon-remove"></i>
+                   </button>
+                   {{tracker.name}}
+                 </span>
+               </div>
+
+               <button class="btn btn-primary btn-block" type="submit">Search</button>
+
+             </form>
+           </div>
+         </div>
+       </div>
+
+     </div>
+   </div>
+ </div></section>
+</div>

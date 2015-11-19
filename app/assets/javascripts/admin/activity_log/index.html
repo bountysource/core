@@ -1,0 +1,34 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="activity_logs">Such loading wow...</loading-bar>
+
+    <div>
+      <h3 style="margin-top:0px;">Activity Log</h3>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Event Type</th>
+            <th>Person_ID</th>
+            <th>Tracker_ID</th>
+            <th>Issue_ID</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="activity in activity_logs">
+            <td style="word-wrap: break-word;">{{ activity.id }}</td>
+            <td style="word-wrap: break-word;">{{ activity.name }}</td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{activity.person_id}}">{{ activity.person_id }}</a> (<a ng-href="/people/{{activity.person_id}}" target="_blank">prod</a>)</td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/trackers/{{activity.tracker_id}}">{{ activity.tracker_id }}</a> (<a ng-href="/trackers/{{activity.tracker_id}}" target="_blank">prod</a>)</td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/issues/{{activity.issue_id}}">{{ activity.issue_id }}</a> (<a ng-href="/issues/{{activity.issue_id}}" target="_blank">prod</a>)</td>
+            <td style="word-wrap: break-word;">{{ activity.created_at | date:'short' }}</td>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

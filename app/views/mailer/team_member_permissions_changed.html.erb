@@ -1,0 +1,10 @@
+<p>Hi <%= @person.display_name %>,</p>
+
+<p>
+  <a href="<%= "#{Api::Application.config.www_url}people/#{@admin.to_param}" %>"><%= @admin.display_name %></a> changed the permissions for <a href="<%= "#{Api::Application.config.www_url}people/#{@member_relation.person.to_param}" %>"><%= @member_relation.person.display_name %></a>:
+  <ul>
+    <li>Developer privileges <strong><%= @member_relation.developer ? "enabled" : "disabled" %></strong>.</li>
+    <li>Public visibility <strong><%= @member_relation.public ? "enabled" : "disabled" %></strong>.</li>
+    <li>Admin access <strong><%= @member_relation.admin ? "enabled" : "disabled" %></strong>.</li>
+  </ul>
+</p>

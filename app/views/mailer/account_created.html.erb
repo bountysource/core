@@ -1,0 +1,22 @@
+<p>Hi <%= @person.first_name %>,</p>
+
+<p>Welcome to Bountysource, the marketplace for continuous funding of open-source software. We're thrilled to have you on board!</p>
+
+<p>There is a lot you can do on the site, so we want to point you toward a few good places to start:</p>
+
+<% if @show_github_plugin_block %>
+  <h3>Install the GitHub plugin</h3>
+  <p>If you're looking for a way to start promoting bounties within your community, this is it. Our <a href="<%= "#{Api::Application.config.www_url}tools?utm_source=welcome&utm_medium=email&utm_campaign=plugin" %>">plugin for GitHub</a> automatically updates your issues with bounty details.</p>
+<% end %>
+
+<h3>Grow your project</h3>
+<p>When you <a href="<%= "#{Api::Application.config.www_url}teams/new?utm_source=welcome&utm_medium=email&utm_campaign=createteam" %>">create a Team</a>, you can streamline all fundraising efforts by having them in one place -- bounties, fundraisers, and project donations are all centered around Teams.</p>
+
+<h3>Earn money while improving open-source</h3>
+<p>Use our <a href="<%= "#{Api::Application.config.www_url}bounties/search?utm_source=welcome&utm_medium=email&utm_campaign=bountysearch" %>">Bounty Search</a> to discover active bounties. You can filter by project, language, bounty amount, and more.</p>
+
+<h3>Have an issue you want to see solved?</h3>
+<p>Paste the issue URL (e.g. "https://github.com/owner/project/issues/123") into our search and post a bounty on it.</p>
+
+<h3>Support</h3>
+<p>Join us on IRC (#Bountysource on Freenode), check out our <a href="<%= "#{Api::Application.config.www_url}faq?utm_source=welcome&utm_medium=email&utm_campaign=faq" %>">FAQs</a>, or reply to this email. We're here to help!</p>

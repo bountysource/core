@@ -1,0 +1,92 @@
+<div class="container">
+  <ng-include src="'salt/teams/_tabs.html'"></ng-include>
+
+  <div class="row">
+    <div class="col-md-9">
+
+      <h3 class="hidden-md	hidden-lg">Project Description</h3>
+
+      <!-- default content -->
+      <div ng-hide="markdown_preview || youtube_video_url || (team.support_offering && team.support_offering.rewards.length>0)" style="font-size: 17px">
+        <h3>Welcome to the crowdfunding page for {{team.name}}</h3>
+        <p>Contributions will go into the team’s account and can be used for bounties immediately, or withdrawn by the team as needed. If you enjoy {{team.name}}'s work and want to show your support every dollar helps!</p>
+
+        <div ng-show="team.bio || team.url">
+          <h3>More Information</h3>
+          <p ng-show="team.bio">{{team.bio}}</p>
+          <p ng-show="team.url">URL: <a ng-href="{{team.url}}">{{team.url}}</a></p>
+        </div>
+      </div>
+
+      <div>
+        <div ng-show="youtube_video_url">
+          <!-- <h3>Overview Video</h3> -->
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe ng-src="{{youtube_video_url}}"></iframe>
+          </div>
+        </div>
+
+        <target-blank model="markdown_preview">
+          <div style="font-size: 17px" btf-markdown="markdown_preview" class="markdown markdown-small-headers"></div>
+        </target-blank>
+
+        <div ng-show="team.support_offering.rewards.length > 0">
+          <h3>Rewards</h3>
+          <div class="well" >
+            <div class="reward-list" style="font-size: 17px">
+              <a ng-repeat="reward in team.support_offering.rewards | orderBy:'amount'" ui-sref="root.checkout.amount({ team: team.slug, reward_id: reward.id })">
+                <div>
+                  <h4>
+                    {{reward.amount|dollars}} - {{reward.title}}
+                    <small ng-show="reward.active_support_levels_count>0">({{reward.active_support_levels_count}} active)</small>
+                  </h4>
+
+                  <p>{{reward.description}}</p>
+                </div>
+              </a>
+            </div>
+
+            <div class="text-muted" style="margin-top: 15px;" ng-show="team.support_offering.extra.rewards_fine_print">
+              <target-blank model="team.support_offering.extra.rewards_fine_print">
+                <span class="glyphicon glyphicon-info-sign pull-left" style="padding:2px 5px 0 0"></span> <em btf-markdown="team.support_offering.extra.rewards_fine_print"></em>
+              </target-blank>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+      <h3 ng-show="(members | filter:{ is_public: true }).length > 0">Team Members</h3>
+      <div class="row">
+        <div class="col-md-6 col-sm-2 col-xs-4" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
+          <span class="thumbnail text-center" tooltip="{{member.display_name}}" tooltip-placement="bottom">
+            <img ng-src="{{member.medium_image_url}}">
+            <div style="overflow: hidden; text-overflow: ellipsis; white-space:nowrap">{{member.display_name}}</div>
+          </span>
+        </div>
+      </div>
+
+      <div ng-show="team.support_offering.goals.length > 0" class="team-monthly-goals">
+        <h3>Monthly Goals</h3>
+        <div ng-repeat="goal in team.support_offering.goals | orderBy:'amount'" style="overflow: hidden" ng-class="{ surpassed: goal.amount <= team.monthly_contributions_sum }">
+          <h4>
+            <span class="glyphicon glyphicon-ok" style="color:#3db92a; margin-right: 6px" ng-show="goal.amount <= team.monthly_contributions_sum"></span>
+            {{goal.title}}
+            <small>{{goal.amount | dollars}}</small>
+          </h4>
+          <p>{{goal.description}}</p>
+        </div>
+
+        <div class="text-muted" style="margin-top: 15px;" ng-show="team.support_offering.extra.goals_fine_print">
+          <target-blank model="team.support_offering.extra.goals_fine_print">
+            <span class="glyphicon glyphicon-info-sign pull-left" style="padding:2px 5px 0 0"></span> <em btf-markdown="team.support_offering.extra.goals_fine_print"></em>
+          </target-blank>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

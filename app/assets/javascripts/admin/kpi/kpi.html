@@ -1,0 +1,113 @@
+<div class="row-fluid">
+
+  <loading-bar ng-hide="stats">Such loading wow...</loading-bar>
+  
+  <div class="span12" ng-controller="KpiCtrl">
+    <h3 style="margin-top:0px; border:0px; padding-top:0px">Kolorful Perfect Insanity</h3>
+
+    <div class="btn-group" style="margin-bottom: 10px;">
+      <button class="btn btn-primary" ng-model="radioModel" btn-radio="'Daily'" ng-click="durationFilter('Daily')">Daily</button>
+      <button class="btn btn-primary" ng-model="radioModel" btn-radio="'Weekly'" ng-click="durationFilter('Weekly')">Weekly</button>
+      <button class="btn btn-primary" ng-model="radioModel" btn-radio="'Monthly'" ng-click="durationFilter('Monthly')">Monthly</button>
+    </div>
+    <div ng-show="radioModel == 'Daily'">
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr class="no-stripe">
+            <th>Metric</th>
+            <th>Rolling 24hr</th>
+            <!--<th>Today</th>-->
+            <th ng-repeat="date in last_six_days">{{date}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(key,value) in stats.daily_stats">
+            <td>{{key}}</td>
+
+            <td ng-class="red_or_green(value,0,2)">
+              <span ng-show="monetary(key)">{{value[0] | dollars}}</span>
+              <span ng-show="!monetary(key)">{{value[0]}}</span>
+            </td>
+
+            <td ng-repeat="x in [2,3,4,5,6,7]" ng-class="red_or_green(value,x,x+1)">
+              <span ng-show="monetary(key)">{{value[x] | dollars}}</span>
+              <span ng-show="!monetary(key)">{{value[x]}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div ng-show="radioModel == 'Weekly'">
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr class="no-stripe">
+            <th>Metric</th>
+            <th>Rolling 7d</th>
+            <!--<th>This Week</th>-->
+            <th>1 week ago</th>
+            <th>2 weeks ago</th>
+            <th>3 weeks ago</th>
+            <th>4 weeks ago</th>
+            <th>5 weeks ago</th>
+            <th>6 weeks ago</th>
+            <th>7 weeks ago</th>
+            <th>8 weeks ago</th>
+            <th>9 weeks ago</th>
+            <th>10 weeks ago</th>
+            <th>11 weeks ago</th>
+            <th>12 weeks ago</th>
+            <th>13 weeks ago</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="(key,value) in stats.weekly_stats">
+            <td>{{key}}</td>
+
+            <td ng-class="red_or_green(value,0,2)">
+              <span ng-show="monetary(key)">{{value[0] | dollars}}</span>
+              <span ng-show="!monetary(key)">{{value[0]}}</span>
+            </td>
+
+            <td ng-repeat="x in [2,3,4,5,6,7,8,9,10,11,12,13,14]" ng-class="red_or_green(value,x,x+1)">
+              <span ng-show="monetary(key)">{{value[x] | dollars}}</span>
+              <span ng-show="!monetary(key)">{{value[x]}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div ng-show="radioModel == 'Monthly'">
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr class="no-stripe">
+            <th>Metric</th>
+            <th>Rolling 30d</th>
+            <th ng-repeat="month in last_twelve_months">{{month}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="(key,value) in stats.monthly_stats">
+            <td>{{key}}</td>
+            <td ng-class="red_or_green(value,0,2)">
+              <span ng-show="monetary(key)">{{value[0] | dollars}}</span>
+              <span ng-show="!monetary(key)">{{value[0]}}</span>
+            </td>
+
+            <td ng-repeat="x in [1,2,3,4,5,6,7,8,9,10,11,12,13]" ng-class="red_or_green(value,x,x+1)">
+              <span ng-show="monetary(key)">{{value[x] | dollars}}</span>
+              <span ng-show="!monetary(key)">{{value[x]}}</span>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+</div>

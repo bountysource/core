@@ -1,0 +1,7 @@
+Hi <%= @person.display_name %>,
+
+The bounty on "<%= @bounty.issue.title %>" has increased to <%= number_to_dollars(@bounty.issue.bounty_total) %>: <%= @bounty.owner_display_name capitalize: true %> increased the bounty by <%= number_to_dollars(@bounty.amount) %>. The bounty will be awarded to the developer who successfully closes out this issue.
+
+Is the bounty too low? Set a bounty goal to give the community a funding target!
+
+View the issue, increase the bounty, or set a bounty goal here: <%= "#{Api::Application.config.www_url}issues/#{@bounty.issue.to_param}" %>

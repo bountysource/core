@@ -1,0 +1,43 @@
+<div>
+  <div class="modal-header">
+    <h5>Proposal from <a owner-href="proposal.person">{{proposal.person.display_name}}</a></h5>
+  </div>
+
+  <div class="modal-body">
+    <form>
+      <!-- Cost -->
+      <div class="form-group" ng-if="proposal.amount">
+        <label>Cost:</label>
+        <div>{{proposal.amount | dollars}}</div>
+      </div>
+
+      <!-- Completed by -->
+      <div class="form-group" ng-if="proposal.completed_by">
+        <label>Completed by:</label>
+        <div>{{proposal.completed_by | date}}</div>
+      </div>  
+
+      <!-- Developer notes -->
+      <div class="form-group" ng-if="proposal.bio">
+        <label>Developer Notes:</label>
+        <div style="white-space: pre-wrap;">{{proposal.bio}}</div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label class="control-label">Optional Note:</label>
+        <textarea ng-if="proposal.isPending()" class="form-control" rows="3" ng-model="proposal.team_notes" placeholder="Let the developer know any additional information, or just give them some encouragement!" autofocus></textarea>
+        <p ng-if="!proposal.isPending()" class="form-control-static">{{ proposal.team_notes }}</p>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer" ng-if="proposal.isPending()">
+    <button class="btn btn-success pull-left" ng-click="accept()">Accept</button>
+    <button class="btn btn-danger pull-left" ng-click="reject()">Reject</button>
+    <button class="btn btn-default" ng-click="close()">Cancel</button>
+  </div>
+
+  <div class="modal-footer" ng-if="!proposal.isPending()">
+    <button class="btn btn-default" ng-click="close()">Close</button>
+  </div>
+</div>

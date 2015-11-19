@@ -1,0 +1,14 @@
+<label class="radio">
+  <input type="radio" ng-model="bounty.upon_expiration" value="donate to community fund" />
+  <span>Donate to Bountysource Community Fund</span>
+</label>
+
+<label class="radio">
+  <input type="radio" ng-model="bounty.upon_expiration" value="donate to project" />
+  <span>Donate to {{ issue.tracker.name }}</span>
+</label>
+
+<label class="radio">
+  <input type="radio" ng-model="bounty.upon_expiration" value="refund" />
+  <span>Refund the bounty to me</span>
+</label>

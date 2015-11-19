@@ -1,0 +1,30 @@
+<p>Hi <%= @person.display_name %>,</p>
+
+<p>
+  <a href="<%= "#{Api::Application.config.api_url}people/#{@proposal.person.to_param}" %>"><%= @proposal.person.display_name %></a>
+  has submitted a proposal to solve
+  <a href="<%= "#{Api::Application.config.api_url}issues/#{@proposal.issue.to_param}" %>"><%= @proposal.issue.title %></a>
+  in
+  <a href="<%= "#{Api::Application.config.api_url}trackers/#{@proposal.issue.tracker.to_param}" %>"><%= @proposal.issue.tracker.name %></a>.
+</p>
+
+<p>The proposal was submitted with the following information:</p>
+
+<ul>
+  <li>Cost: <%= number_to_currency(@proposal.amount) %></li>
+
+  <% if @proposal.completed_by %>
+    <li>Estimated Completion Date: <%= @proposal.completed_by.strftime('%a, %d %b %Y') %></li>
+  <% end %>
+
+  <% if @proposal.bio %>
+    <li>
+      <div>Additional Notes:</div>
+      <div style="white-space: pre-wrap;"><%= @proposal.bio %></div>
+    </li>
+  <% end %>
+</ul>
+
+<p>
+  <a href="<%= "#{Api::Application.config.api_url}issues/#{@proposal.issue.to_param}/proposals" %>">Accept or Reject this proposal</a>
+</p>

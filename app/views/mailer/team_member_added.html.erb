@@ -1,0 +1,5 @@
+<p>Hi <%= @person.display_name %>,</p>
+
+<p>
+  <a href="<%= "#{Api::Application.config.www_url}people/#{@invitee.to_param}" %>"><%= @invitee.display_name %></a> was just added to the <a href="<%= "#{Api::Application.config.www_url}teams/#{@team.to_param}" %>"><%= @team.name %></a> team on Bountysource.
+</p>

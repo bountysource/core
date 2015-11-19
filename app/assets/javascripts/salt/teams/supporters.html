@@ -1,0 +1,27 @@
+<ng-include src="'salt/teams/_support_header.html'"></ng-include>
+
+<div class="container">
+  <ng-include src="'salt/teams/_tabs.html'"></ng-include>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Supporter</th>
+        <th>This Month</th>
+        <th>All Time</th>
+        <th class="hidden-xs">Since</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="supporter in supporters">
+        <td style="line-height: 32px">
+          <img class="img-rounded" ng-src="{{supporter.image_url_large}}" style="max-width:32px; max-height: 32px"/>
+          {{supporter.display_name}}
+        </td>
+        <td>{{supporter.monthly_amount | dollars}}</td>
+        <td>{{supporter.alltime_amount | dollars}}</td>
+        <td class="hidden-xs">{{supporter.created_at | date}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

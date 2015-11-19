@@ -1,0 +1,10 @@
+Web: https://www.bountysource.com/
+Email: support@bountysource.com
+Twitter: https://twitter.com/Bountysource
+Facebook: https://www.facebook.com/Bountysource
+Mail: Bountysource Inc., 548 Market St. #40189, San Francisco, CA 94104-5401
+<% if @unsubscribe_type %>
+Unsubscribe: <%= "#{Api::Application.config.www_url}notifications/unsubscribe?#{{email: @person.email, type: @unsubscribe_type}.to_param}" %>
+<% elsif @unsubscribe_link %>
+Unsubscribe: <%=@unsubscribe_link%>
+<% end %>

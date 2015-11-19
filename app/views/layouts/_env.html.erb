@@ -1,0 +1,16 @@
+<script type="text/javascript">
+  window.BS_ENV = {
+    cookie_name_access_token: '<%=ENV['COOKIE_NAME_ACCESS_TOKEN']%>',
+    cookie_name_shopping_cart: '<%=ENV['COOKIE_NAME_SHOPPING_CART']%>',
+    api_host: '<%=Api::Application.config.api_url%>',
+    salt_host: '<%=Api::Application.config.salt_url%>',
+    www_host: '<%=Api::Application.config.www_url%>',
+    mixpanel: '<%=Api::Application.config.mixpanel_token%>',
+    mixpanel_config: { 'api_host': '<%=Api::Application.config.api_url%>'.replace(/\/$/,'') },
+    google_analytics: '<%=ENV['GOOGLE_ANALYTICS_SITE']%>',
+    stripe_key: '<%=ENV['STRIPE_PUBLIC_KEY']%>',
+    stripe_image: 'https://s3.amazonaws.com/stripe-uploads/acct_15jcQ4LM04M7PZLcmerchant-icon-1427143578024-Bountysource-square-100.png',
+    bountysource_grey_image: '<%=asset_path("bountysource-grey.png")%>',
+    bountysource_anon_image: '<%=asset_path("anon.jpg")%>'
+  };
+</script>

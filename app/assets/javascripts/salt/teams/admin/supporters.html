@@ -1,0 +1,27 @@
+<h2>Supporters (1-{{supporters_for_team.length}})</h2>
+
+<table class="table table-compressed">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Created</th>
+      <th>Amount</th>
+      <th>Owner</th>
+      <th>Reward</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="support_level in supporters_for_team | filter:{status:'!canceled'} | orderBy:['status','-amount']" ng-class="{ success: support_level.status==='active', warning: support_level.status==='pending', danger: support_level.status==='unpaid', active: support_level.status==='canceled' }">
+      <td>{{support_level.status}}</td>
+      <td>{{support_level.created_at | date}}</td>
+      <td>{{support_level.amount | dollars}}</td>
+      <td>
+        <img ng-src="{{support_level.owner.image_url_small}}" style="width:16px; height:16px" />
+        <a ng-href="https://www.bountysource.com/people/{{support_level.owner.slug}}" ng-show="support_level.owner.type=='Person'">{{support_level.owner.display_name}}</a>
+        <a ng-href="https://www.bountysource.com/teams/{{support_level.owner.slug}}" ng-show="support_level.owner.type=='Team'">{{support_level.owner.display_name}}</a>
+        <span ng-show="['Person','Team'].indexOf(support_level.owner.type) == -1">{{support_level.owner.display_name}}</span>
+      </td>
+      <td>{{support_level.reward.title}}</td>
+    </tr>
+  </tbody>
+</table>

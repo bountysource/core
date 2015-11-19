@@ -1,0 +1,18 @@
+Hi <%= @person.display_name %>,
+
+<%= @proposal.person.display_name %> has submitted a proposal to solve "<%= @proposal.issue.title %>" in <%= @proposal.issue.tracker.name %>.
+
+The proposal was submitted with the following information:
+
+Cost: <%= number_to_currency(@proposal.amount) %>
+
+<% if @proposal.completed_by %>
+Estimated Completion Date: <%= @proposal.completed_by.strftime('%a, %d %b %Y') %>
+<% end %>
+
+<% if @proposal.bio %>
+Additional Notes:
+<%= @proposal.bio %>
+<% end %>
+
+Accept or Reject this proposal: <%= "#{Api::Application.config.api_url}issues/#{@proposal.issue.to_param}/proposals" %>

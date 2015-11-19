@@ -1,0 +1,7 @@
+Dear <%= @person.display_name %>,
+
+A fundraiser that you recently backed, <%= @fundraiser.title %>, has just completed!
+
+You selected the following reward: "<%= @reward.description %>"
+
+The fundraiser creator requires more information from you in order to fulfill the reward. Please complete this survey to receive your reward: <%= "#{Api::Application.config.www_url}activity/pledges" %>

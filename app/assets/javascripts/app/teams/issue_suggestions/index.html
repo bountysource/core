@@ -1,0 +1,40 @@
+<team-view team="team" ng-controller="TeamIssueSuggestionsController" ng-if="team">
+  <h1>Suggested Issues</h1>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Person</th>
+        <th>Issue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="suggestion in issue_suggestions | orderBy:'-created_at'" ng-class="{ success: suggestion.thanked_at, danger: suggestion.rejected_at }">
+        <td nowrap="nowrap">{{suggestion.created_at | date}}</td>
+        <td nowrap="nowrap">
+          <span ng-show="!suggestion.rejected_at && !suggestion.thanked_at">Pending</span>
+          <span ng-show="suggestion.rejected_at">Rejected</span>
+          <span ng-show="suggestion.thanked_at && !suggestion.thanked_reward">Thanked</span>
+          <span ng-show="suggestion.thanked_at && suggestion.thanked_reward">{{suggestion.thanked_reward | dollars}} Reward</span>
+        </td>
+        <td nowrap="nowrap">
+          <a owner-href="suggestion.person">
+            <img ng-src="{{suggestion.person.image_url_small}}" style="width: 16px; height: 16px" />
+            {{suggestion.person.display_name}}
+          </a>
+        </td>
+        <td>
+          <a ng-href="/teams/{{suggestion.issue.team.slug}}" ng-if="suggestion.issue.team.id">
+            <img ng-src="{{suggestion.issue.team.image_url_small}}" style="width: 16px; height: 16px" />
+            {{suggestion.issue.team.name}}
+          </a>
+          <a ng-href="/trackers/{{suggestion.issue.tracker.id}}" ng-if="!suggestion.issue.team.id">{{suggestion.issue.tracker.display_name}}</a>
+          &raquo;
+          <a ng-href="/issues/{{suggestion.issue.slug}}">{{suggestion.issue.title}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</team-view>

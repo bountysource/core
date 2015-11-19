@@ -1,0 +1,27 @@
+<div class="panel panel-default text-center">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      By
+      <span ng-show="fundraiser.team">{{fundraiser.team.name}}</span>
+      <span ng-hide="fundraiser.team">{{fundraiser.person.display_name}}</span>
+    </h4>
+  </div>
+
+  <div class="panel-body">
+    <div ng-show="fundraiser.team">
+      <div class="row" style="text-align: center;">
+        <div ng-repeat="person in fundraiser.team.members" class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
+          <a owner-href="person" class="thumbnail" tooltip="{{person.display_name}}">
+            <img class="img-responsive img-rounded" ng-src="{{person.large_image_url}}" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div ng-hide="fundraiser.team">
+      <a ng-href="/people/{{fundraiser.person.slug}}">
+        <img class="img-responsive img-rounded" ng-src="{{fundraiser.person.large_image_url}}">
+      </a>
+    </div>
+  </div>
+</div>

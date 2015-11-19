@@ -1,0 +1,28 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/activity">Activity</a></li>
+  <li><a href="/activity/solutions">Bounty Claims</a></li>
+</ul>
+
+<ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+<div class="alert alert-info" ng-show="bounty_claims.length <= 0">
+  You have not claimed any bounties. <a href="/search">Find an issue that you have resolved to claim the bounty!</a>
+</div>
+
+<table class="table table-striped" ng-show="bounty_claims.length > 0">
+  <thead>
+    <tr>
+      <th>Issue</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <tr ng-repeat="claim in bounty_claims">
+    <td><a ng-href="/issues/{{claim.issue.slug}}/claims">{{ claim.issue.title }}</a></td>
+    <td ng-class="{ 'text-success': (claim.collected), 'text-danger': (claim.disputed || claim.rejected), 'text-info': (!claim.disputed && !claim.collected && !claim.rejected) }">{{ claim.$status | title }}</td>
+    <td>{{ claim.created_at | date }}</td>
+  </tr>
+</tbody></table>

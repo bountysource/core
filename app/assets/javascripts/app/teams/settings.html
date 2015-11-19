@@ -1,0 +1,40 @@
+<div ng-controller="EditTeamController">
+  <div team-view team="team">
+    <div class="alert alert-warning" ng-hide="is_admin||is_developer">
+      <h4 style="margin: 0 0 8px 0">This team is maintained by the community.</h4>
+      <div ng-hide="claimThisTeamForm">
+        This team has no members and the data below can be edited by any user.<br/>
+        If you are a core member of this team please <a ng-click="claimThisTeamForm=true">Claim This Team</a>.
+      </div>
+
+      <div ng-show="claimThisTeamForm && !teamClaimed">
+        <p>All Team Claims will be processed within 2 business days. Your team credentials will be verified. Please ensure your <a href="/settings/accounts">GitHub account is linked</a> to Bountysource and you are a public member of the GitHub organization (if applicable).</p>
+
+        <p>The following information will be sent to Bountysource staff:</p>
+        <ul>
+          <li>User: {{current_person.display_name}} (ID: {{current_person.id}})</li>
+          <li>Email: {{current_person.email}}</li>
+          <li>Team: {{team.name}}</li>
+        </ul>
+
+        <form ng-submit="claimThisTeam()" ng-hide="teamClaimed">
+          <div class="form-group">
+            <label for="formNotes" class="control-label">Additional comments (optional):</label>
+            <textarea class="form-control" id="formNotes" ng-model="form_data.notes"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-default">Claim This Team</button>
+          </div>
+        </form>
+
+      </div>
+
+      <div ng-show="teamClaimed">
+        Your claim has been submitted!
+      </div>
+
+    </div>
+
+    <team-form team="team" options="{ editForm: true }"></team-form>
+  </div>
+</div>

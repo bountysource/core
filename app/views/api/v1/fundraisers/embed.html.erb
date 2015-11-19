@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <style>
+    body { margin: 0; }
+    body, input, textarea, select, td, th { font: 15px "StoneSans", "Helvetica Neue", Arial, sans-serif; color: #333; line-height: 18px; }
+
+    /*************************
+      All cards
+    *************************/
+    .card {
+      text-align: left;
+      display: inline-block;
+      vertical-align: top;
+      color: black;
+      background: white;
+      border: 1px solid #D5D5D5;
+      height: 400px;
+      width: 236px;
+      white-space: normal;
+
+      -webkit-transition: ease-in-out 100ms;
+      -moz-transition:    ease-in-out 100ms;
+      -o-transition:      ease-in-out 100ms;
+      transition:         ease-in-out 100ms;
+    }
+    a.card { text-decoration: none; }
+    .card-row-wrapper {
+      margin: auto;
+    }
+    .card:hover {
+      background: #F3FFF2;
+    }
+
+
+
+    /*************************
+      Card Rows
+    *************************/
+    #homepage #card-rows-container > *.card-row-wrapper {
+      margin-bottom: 10px;
+    }
+    #homepage #card-rows-container > *.card-row-wrapper:last-of-type {
+      margin-bottom: 0;
+    }
+    .card-row {
+      padding: 5px;
+      overflow: hidden;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.29);
+      border: 1px solid #D1D1D1;
+      box-shadow: 0 0 5px #ccc8be;
+    }
+    .card-row .card {
+      margin-right: 10px;
+    }
+    .card-row .card:last-of-type {
+      margin-right: 0;
+    }
+
+      /* when transitioning, hide all cards first */
+    .card-row.transition .card {
+      opacity: 0;
+    }
+
+      /*************************
+        Fundraiser cards
+      *************************/
+    .card.fundraiser {}
+    .card.fundraiser > * {
+      margin-bottom: 5px;
+    }
+    .card.fundraiser > *:last-of-type {
+      margin-bottom: 0;
+    }
+
+      /*
+        Fundraiser card image
+      */
+    .card.fundraiser .fundraiser-image {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% auto;
+      background-color: #EEE;
+      border-bottom: 1px solid #D5D5D5;
+      height: 150px;
+    }
+
+      /*
+        Fundraiser card title and description
+      */
+    .card.fundraiser .fundraiser-text {
+      margin: 10px;
+      white-space: normal;
+      height: 150px
+    }
+    .card.fundraiser .fundraiser-text > * { margin-bottom: 5px; }
+    .card.fundraiser .fundraiser-text > *:last-of-type { margin-bottom: 0; }
+    .card.fundraiser .fundraiser-text .fundraiser-title {
+      font-size: 18px;
+      color: #70C770;
+      line-height: 20px;
+    }
+    .card.fundraiser .fundraiser-text .fundraiser-author {
+      font-size: 14px;
+      color: gray;
+    }
+    .card.fundraiser .fundraiser-text .fundraiser-description {
+      font-size: 12px;
+    }
+
+      /*
+        Fundraiser card stats and percentage complete
+      */
+    .card.fundraiser .fundraiser-stats {
+      font-size: 12px;
+      color: gray;
+      padding: 0 10px;
+      height: 37px;
+    }
+
+    .card.fundraiser .fundraiser-stats .fundraiser-data {
+      font-size: 14px;
+    }
+    .card.fundraiser .fundraiser-stats .fundraiser-data > * {
+      display: block;
+    }
+
+      /* days left, money raised, etc. */
+    .card.fundraiser .fundraiser-stats .fundraiser-data {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: left;
+    }
+    .card.fundraiser .fundraiser-stats .fundraiser-data > * > * {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+    .card.fundraiser .fundraiser-stats .fundraiser-data > * > *:nth-child(1) {
+      font-size: 18px;
+      color: #70C770;
+    }
+    .card.fundraiser .fundraiser-stats .fundraiser-data > * > *:nth-child(2) {
+      margin-right: 0;
+      font-size: 12px;
+    }
+      /* change colors when fundraiser is closed */
+    .card.fundraiser .fundraiser-stats .fundraiser-data > *.closed > *:nth-child(1) {
+      font-size: 18px;
+      color: #DD6454;
+    }
+    .card.fundraiser .fundraiser-stats .fundraiser-data > *.closed > *:nth-child(2) {
+      margin-right: 0;
+      font-size: 12px;
+    }
+
+      /*
+        Fundraiser card progress bar
+      */
+    .card.fundraiser .fundraiser-progress-bar-outer {
+      border-top: 1px solid #D5D5D5;
+      background: #e3e3e3;
+      height: 36px;
+      overflow: hidden;
+    }
+    .card.fundraiser .fundraiser-progress-bar-inner {
+      display: inline-block;
+      vertical-align: middle;
+      background: #77E077;
+      height: 36px;
+    }
+      /* percentage, in/out of percentage bar */
+    .card.fundraiser .fundraiser-percentage {
+      font-size:  16px;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 10px;
+    }
+    .card.fundraiser .fundraiser-percentage.lt-50 {
+      color: #929292;
+    }
+    .card.fundraiser .fundraiser-percentage.gteq-50 {
+      color: #D8FCC7;
+      float: right;
+      position: relative;
+      top: 10px;
+    }
+      /* when funded, the message rendered into the progress bar inner div, and above image */
+    .card.fundraiser .fundraiser-image .funded-message {
+      text-align: center;
+      padding: 15px 0;
+      font-size: 25px;
+      color: #E7FFDD;
+      background: rgba(119, 224, 119, 0.50);
+      text-shadow: 0 0 15px #46CC46;
+    }
+    .card.fundraiser .fundraiser-ended-at-message {
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px;
+      color: #929292;
+    }
+  </style>
+</head>
+
+<body>
+<a class="card fundraiser" href="<%= @fundraiser.frontend_url %>" target="_blank">
+  <div class="fundraiser-image" style="background-image: url(<%= @fundraiser.image_url %>);">
+    <% if @fundraiser.completed? and @fundraiser.funded? %>
+      <div class="funded-message">Completed!</div>
+    <% end %>
+  </div>
+  <div class="fundraiser-text">
+    <div class="fundraiser-title"><%= @fundraiser.title %></div>
+    <div class="fundraiser-author">by <%= @fundraiser.person.display_name %></div>
+    <div class="fundraiser-description"><%= @fundraiser.short_description %></div>
+
+    <% unless @fundraiser.completed? %>
+      <div style="text-align: center; margin-top: 20px"><img src="https://cloudinary-a.akamaihd.net/bountysource/image/upload/zzumd5zt0ihuxm8vthoz.png" /></div>
+    <% end %>
+  </div>
+  <div class="fundraiser-stats">
+    <div class="fundraiser-data">
+      <div>
+        <div><%= number_to_currency(@fundraiser.total_pledged).gsub('.00','')%></div>
+        <div>pledged of <%= number_to_currency(@fundraiser.funding_goal).gsub('.00','')%></div>
+      </div>
+      <div>
+        <span><%= @funding_percentage %>%</span>
+        <span>funded</span>
+      </div>
+    </div>
+  </div>
+  <div class="fundraiser-progress-bar-outer">
+    <% if @fundraiser.completed? %>
+      <div class="fundraiser-ended-at-message">Completed <%= @fundraiser.ends_at.strftime("%B %d, %Y") %> </div>
+    <% end %>
+  </div>
+</a>
+</body>
+</html>

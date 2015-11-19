@@ -1,0 +1,10 @@
+<%="#{@header_markdown}\n\n" if @header_markdown %>
+<%= yield %>
+
+Thanks,
+
+<% if @team_thanks %><%=@team_thanks%><% else %>[The Bountysource Team](mailto:support@bountysource.com)<% end %>
+
+
+---
+*`[ <%if @unsubscribe_link%>`[`Unsubscribe`](<%=@unsubscribe_link%>)` - <%end%>Bountysource Inc., 548 Market St. #40189, San Francisco, CA 94104-5401 ]`*

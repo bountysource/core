@@ -1,0 +1,41 @@
+<loading-bar ng-show="working">Fetching bounties...</loading-bar>
+
+<div class="row-fluid" ng-hide="working">
+  <div class="span12">
+    <div>
+      <h3 style="margin-top:0px;">Unacknowledged Bounties</h3>
+      <p class="lead">Bounties that require attention from us.</p>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Amount</th>
+          <th>Backer</th>
+          <th>Created</th>
+          <th>Issue</th>
+          <th style="text-align: center;">Expiration</th>
+          <th style="text-align: center;">After Expiration</th>
+          <th style="text-align: center;">Promotion Method</th>
+          <th style="text-align: center;">Acknowledged</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="bounty in bounties">
+          <td style="word-wrap: break-word;"><a ng-href="/admin/bounties/{{bounty.id}}">{{bounty.id}}</a></td>
+          <td style="word-wrap: break-word;">{{bounty.amount | dollars}}</td>
+          <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{bounty.person.id}}">{{bounty.person.display_name}}</a></td>
+          <td style="word-wrap: break-word;">{{bounty.created_at | date:'short'}}</td>
+          <td style="word-wrap: break-word;"><a ng-href="/admin/issues/{{bounty.issue.id}}">{{bounty.issue.title}}</a> - <a ng-href="{{bounty.issue.url}}" target="_blank">[External Issue]</a></td>
+
+          <td style="text-align: center;">{{bounty.bounty_expiration}}</td>
+          <td style="text-align: center;">{{bounty.upon_expiration}}</td>
+          <td style="text-align: center;">{{bounty.promotion}}</td>
+          <td style="text-align: center;">
+            <input type="checkbox" ng-model="bounty.$acknowledged" ng-change="toggle_acknowledged(bounty)" />
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

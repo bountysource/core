@@ -1,0 +1,38 @@
+<div>
+  <h1>Bounty Searches</h1>
+
+  <loading-bar ng-hide="searches">Loading bounty searches...</loading-bar>
+
+  <div ng-show="searches">
+    <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Search Term</th>
+        <th>Languages</th>
+        <th>Trackers</th>
+        <th>Min $</th>
+        <th>Max $</th>
+        <th>Order</th>
+        <th>Submitted At</th>
+        <th>Person</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="search in searches | orderBy:['-created_at']">
+        <td>{{search.params.search}}</td>
+        <td><pre>{{search.params.languages}}</pre></td>
+        <td><pre>{{search.params.trackers}}</pre></td>
+        <td>{{search.params.min | dollars}}</td>
+        <td>{{search.params.max | dollars}}</td>
+        <td><code>{{search.params.order}} {{search.params.direction}}</code></td>
+        <td>{{search.created_at | date:'medium'}}</td>
+        <td>
+          <a ng-show="search.person" ng-href="/admin/people/{{search.person.id}}">{{search.person.display_name}}</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

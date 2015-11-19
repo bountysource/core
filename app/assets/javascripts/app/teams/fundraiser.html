@@ -1,0 +1,303 @@
+<div ng-controller="TeamFundraiserController">
+  <div team-view team="team">
+    <!-- Fundraiser View -->
+    <div ng-show="activePage()" ng-if="activeFundraiser">
+      <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+          <div ng-if="!activeFundraiser.in_progress">
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="text-center panel-title">This fundraiser ended on {{ activeFundraiser.ends_at | date:'longDate' }}</h3>
+                </div>
+
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center" style="vertical-align: middle;">
+                      <!-- Progress bar for percentage of goal met -->
+                      <progressbar style="margin-bottom: 5px; margin-top:5px;" type="success" class="progress-striped" animate="false" value="activeFundraiser.percentageOfGoalMet | atLeast:15 | atMost:100">{{activeFundraiser.percentageOfGoalMet | number:0}}%</progressbar>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center" style="vertical-align: middle;">
+                      <h4 style="margin: 5px 0px; display: inline-block">
+                        Raised {{activeFundraiser.total_pledged | dollars}} of {{activeFundraiser.funding_goal | dollars}} goal
+                      </h4>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+          </div>
+          <div fundraiser-template fundraiser="activeFundraiser"
+               options="{ showLeftColumn: false, showRightColumn: false, showTitle: true, showNavTabs: false }">
+            <div class="markdown" ng-bind-html="activeFundraiser.description_html"></div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <div class="panel panel-info" ng-if="can_manage">
+            <div class="panel-heading text-center">Manage Fundraiser</div>
+
+            <div class="panel-body">
+
+              <!-- Edit button -->
+              <a class="btn btn-block btn-info btn-lg" ng-href="/fundraisers/{{fundraiser.slug}}/edit" ng-show="!fundraiser.published">
+                <i class="glyphicon glyphicon-edit"></i>
+                <span>Edit</span>
+              </a>
+
+              <!-- Publish button -->
+              <button class="btn btn-block btn-info btn-lgq" ng-click="publishFundraiser(fundraiser)" ng-disabled="!fundraiser.publishable" ng-show="!fundraiser.published">
+                <i class="glyphicon glyphicon-globe"></i>
+                <span>Publish</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pledge Buttons -->
+          <div>
+            <div class="panel panel-primary" ng-if="activeFundraiser.published && activeFundraiser.in_progress">
+              <div class="panel-heading">
+                <h3 class="panel-title text-center">Pledge Now</h3>
+              </div>
+
+              <div class="panel-body">
+
+                <!-- Large, Medium -->
+                <div class="visible-lg visible-md">
+                  <div class="row row-condensed">
+                    <div class="col-lg-4 col-md-4">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(15)">{{ 15 | dollars:{ short: true } }}</button>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(35)">{{ 35 | dollars:{ short: true } }}</button>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(50)">{{ 50 | dollars:{ short: true } }}</button>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row row-condensed">
+                    <div class="col-lg-4 col-md-4">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(100)">{{ 100 | dollars:{ short: true } }}</button>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(250)">{{ 250 | dollars:{ short: true } }}</button>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(500)">{{ 500 | dollars:{ short: true } }}</button>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row row-condensed">
+                    <div class="col-md-4">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(1000)">{{ 1000 | dollars:{ short: true } }}</button>
+                    </div>
+                    <div class="col-md-8">
+                      <form name="form" ng-submit="customPledgeRedirect(form.input.$modelValue)" class="form-inline">
+                        <div class="input-group">
+                          <span class="input-group-addon"><currency-unit></currency-unit></span>
+                          <input type="number" name="input" class="form-control" step="any" min="0" ng-model="pledge_input" placeholder="Other" tooltip="{{5 | dollars}} minimum pledge" tooltip-placement="bottom" toolip-trigger="focus">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Small, Extra Small -->
+                <div class="visible-sm visible-xs">
+                  <div class="row row-condensed">
+                    <div class="col-sm-6 col-xs-6 ">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(15)">{{ 15 | dollars:{ short: true } }}</button>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 ">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(35)">{{ 35 | dollars:{ short: true } }}</button>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row row-condensed">
+                    <div class="col-sm-6 col-xs-6 ">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(50)">{{ 50 | dollars:{ short: true } }}</button>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 ">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(100)">{{ 100 | dollars:{ short: true } }}</button>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row row-condensed">
+                    <div class="col-sm-6 col-xs-6 ">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(500)">{{ 500 | dollars:{ short: true } }}</button>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 ">
+                      <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(1000)">{{ 1000 | dollars:{ short: true } }}</button>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row row-condensed">
+                    <div class="col-sm-12 col-xs-12">
+                      <ng-include class="bounty-buttons" src="'customForm.html'"></ng-include>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Rewards.
+            Show if there is more than one, because a $0 reward is always present. -->
+          <div class="panel panel-default" ng-if="rewards.length > 1">
+            <div class="panel-heading">
+              <h4 class="panel-title text-center">Rewards</h4>
+            </div>
+
+            <table class="table table-striped table-bordered">
+              <tr ng-repeat="reward in rewards.slice(1)" ng-class="{ 'warning': reward.sold_out }">
+                <td>
+                  <p style="white-space: pre-wrap;">{{ reward.description }}</p>
+
+                  <p class="text-center text-muted">
+                    <em ng-show="reward.limited_to">{{ reward.claimed | number }} of {{ reward.limited_to | number }} claimed</em>
+                    <em ng-hide="reward.limited_to">{{ reward.claimed | number }} claimed</em>
+                  </p>
+
+                  <div style="text-align: center;">
+                    <!-- Fundraiser in progress, reward not sold out, fundraiser not published -->
+                    <button ng-show="activeFundraiser.in_progress && !reward.sold_out && !activeFundraiser.published" class="btn btn-info btn-lg" disabled>{{reward.amount | dollars}}</button>
+
+                    <!-- Fundraiser in progress, reward not sold out, and fundraiser published -->
+                    <button ng-show="activeFundraiser.in_progress && !reward.sold_out && activeFundraiser.published" class="btn btn-success btn-lg" ng-click="pledgeWithRewardRedirect(reward)">{{reward.amount | dollars}}</button>
+
+                    <!-- Fundraiser not in progress, and is published -->
+                    <button ng-show="!activeFundraiser.in_progress && activeFundraiser.published" class="btn btn-success btn-lg" style="cursor: not-allowed;" disabled>{{reward.amount | dollars}}</button>
+
+                    <!-- Fundraiser in progress, reward sold out -->
+                    <button ng-show="activeFundraiser.in_progress && reward.sold_out" class="btn btn-default btn-lg" disabled>Sold Out</button>
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fundraiser Pledge View -->
+    <div ng-show="activePage('pledge')">
+      <div fundraiser-template fundraiser="activeFundraiser" options="{ showLeftColumn: false, showRightColumn: false, showTitle: false, showNavTabs: false }">
+
+        <loading-bar ng-show="processing_payment">Processing payment...</loading-bar>
+
+        <div ng-hide="processing_payment">
+          <div ng-show="alert.message">
+            <alert type="alert.type" close="alert.message = undefined">{{alert.message}}</alert>
+          </div>
+
+          <form class="form-horizontal" name="pledge_form">
+            <div class="row">
+              <div class="col-sm-6 col-md-6">
+                <div class="form-group" ng-show="payment_error">
+                  <alert type="'danger'" close="payment_error = null">{{payment_error}}</alert>
+                </div>
+                <!-- Pledge amount input -->
+                <div class="form-group">
+                  <label class="control-label col-md-5" for="amount">Pledge Amount</label>
+
+                  <div class="col-md-7">
+                    <money-input-group currency="pledge.currency">
+                      <input id="amount" name="amount" type="number" class="form-control" ng-model="pledge.amount" placeholder="15" />
+                    </money-input-group>
+                  </div>
+                </div>
+
+                <!-- Anonymous checkbox -->
+                <div class="form-group">
+                  <div class="col-md-offset-5 col-md-7">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="pledge.anonymous" ng-disabled="!can_make_anonymous"
+                               ng-checked="can_make_anonymous && pledge.anonymous">
+                        <span ng-class="{ 'text-muted': !can_make_anonymous }">Post anonymously</span>
+                        <small class="text-info" ng-show="!can_make_anonymous">* Team pledges cannot be anonymous
+                        </small>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Reward radios -->
+                <div class="form-group" ng-show="activeFundraiser.rewards.length > 0">
+                  <label class="control-label col-md-5">Choose a Reward</label>
+
+                  <div class="col-md-7">
+                    <div class="checkbox" style="padding-left:0px;"><label class="">
+                      <input type="radio" ng-model="pledge.reward_id" value="0" ng-click="set_reward(0)">
+                      <span>No Reward</span>
+                    </label></div>
+
+                    <div class="checkbox" ng-repeat="reward in activeFundraiser.rewards.slice(1)" style="padding-left:0px;">
+                      <label class="">
+                        <input type="radio" ng-model="pledge.reward_id" value="{{reward.id}}" ng-click="set_reward(reward)" ng-disabled="reward.sold_out">
+                        <span ng-class="{ 'text-muted': reward.sold_out }">
+                          {{reward.amount | dollars}} Reward tier
+                          <span ng-show="reward.sold_out" class="label label-warning">Sold out</span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Make pledge button -->
+                <div class="form-group">
+                  <div class="col-md-offset-5 col-md-7">
+                    <button ng-click="addToCart()" class="btn btn-success">Make Pledge</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reward survey form, shown for applicable rewards -->
+              <div class="col-sm-6 col-md-6" ng-show="activeFundraiser.rewards.length > 0">
+                <div ng-show="selected_reward.fulfillment_details">
+                  <div class="alert alert-warning" ng-show="selected_reward.fulfillment_details" style="padding: 15px;">
+                    <div>
+                      <h4>
+                        Reward Survey
+                        <span class="pull-right label label-danger">required</span>
+                      </h4>
+                    </div>
+                    <br>
+
+                    <div>
+                      <strong style="white-space: pre-wrap;">{{ selected_reward.fulfillment_details }}</strong>
+                    </div>
+                    <br>
+
+                    <div>
+                      <textarea class="form-control" ng-model="pledge.survey_response" rows="4"
+                                placeholder="Provide the required information from above." required=""></textarea>
+                    </div>
+                    <div style="margin: 10px 0 0 10px;">
+                      <small><i>* You can edit your response later if you need to.</i></small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="alert alert-info" style="padding: 15px;">
+                  <strong ng-show="selected_reward">Selected Reward: ${{ selected_reward.amount | number:0 }}</strong>
+                  <strong ng-hide="selected_reward">Selected Reward: None</strong>
+
+                  <p ng-show="selected_reward" style="white-space: pre-wrap;">{{ selected_reward.description }}</p>
+
+                  <p ng-hide="selected_reward" style="white-space: pre-wrap;">I just want to help out</p>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

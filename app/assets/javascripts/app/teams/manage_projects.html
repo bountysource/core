@@ -1,0 +1,68 @@
+<div ng-controller="TeamManageProjectsController">
+  <div team-view team="team">
+    <div>
+      <h3 ng-show="is_member">{{team.name}}'s Issue Trackers</h3>
+
+      <div class="well" ng-show="is_admin || is_developer">
+        <form class="form-inline" name="search_owner_form" ng-submit="$parent.own_project(project_owner_search)" style="margin-bottom:0px;">
+          <div class="form-group">
+            <label>Add an issue tracker that your team manages:</label>
+            <input name="input" type="text"
+                   class="form-control"
+                   style="width: 300px;"
+                   placeholder="Search for projects"
+                   ng-model="claimTrackerValue"
+                   typeahead-wait-ms="100"
+                   typeahead="project as project.name for project in doTypeahead($viewValue)"
+                   typeahead-on-select="claimTracker(claimTrackerValue)"
+                   typeahead-editable="true">
+          </div>
+        </form>
+        <loading-bar ng-show="working">Searching</loading-bar>
+      </div>
+
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>Issue Tracker</th>
+          <th class="text-center">Open Issues</th>
+          <th class="text-center">Bounties</th>
+          <th>Actions</th>
+        </tr>
+        <tr ng-repeat="tracker in ownedTrackers">
+          <td><img ng-src="{{tracker.image_url_small}}" style="width:50px; height: 50px; border-radius:5px" /></td>
+          <td><a ng-herf="{{tracker.remote_url" target="_blank"><span class="glyphicon glyphicon-new-window"></span> {{tracker.remote_url}}</a></td>
+          <td class="text-center">{{tracker.open_issues}}</td>
+          <td class="text-center">{{tracker.bounty_total | dollars}}</td>
+          <td><button class="btn btn-sm btn-danger" ng-click="unclaim_tracker(tracker)">Remove</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div ng-hide="team.trackers.length > 0 || (is_admin || is_developer)">
+      <div class="alert alert-info">{{team.name}} has not added any projects to their profile.</div>
+    </div>
+
+
+    <div ng-show="is_admin">
+      <h3>Teams Included in {{team.name}}'s Activity Feed</h3>
+      <div class="well">
+        <form class="form-inline" name="search_form" style="margin-bottom:0px">
+          <label>Include this team's activity as your own:</label>
+          <input type="text"
+                 class="form-control"
+                 style="width: 300px;"
+                 placeholder="Start typing"
+                 ng-model="team_inclusions.model"
+                 typeahead="tag.name for tag in team_inclusions.typeahead($viewValue)"
+                 typeahead-on-select="team_inclusions.add($item)"
+                 typeahead-template-url="common/directives/teamView/tag_autocomplete.html"
+          />
+        </form>
+        <loading-bar ng-show="add_working">Searching</loading-bar>
+      </div>
+      <thumbnail-links array="team_inclusions.teams" per-row="6" object-type="'team-with-dismiss'" dismiss-action="team_inclusions.remove(team)"></thumbnail-links>
+    </div>
+
+  </div>
+</div>

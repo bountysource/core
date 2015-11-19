@@ -1,0 +1,59 @@
+<div>
+  <h1>Requests for Proposals</h1>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>State</th>
+      <th>Team</th>
+      <th>Issue</th>
+      <th>Budget</th>
+      <th>Due Date</th>
+      <th>Abstract</th>
+      <th>Created</th>
+      <th>Proposlals</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="rfp in rfps">
+      <td>{{rfp.id}}</td>
+      <td>{{rfp.state}}</td>
+      <td>{{rfp.team.name}}</td>
+      <td>{{rfp.issue.title}}</td>
+      <td>{{rfp.budget | currency}}</td>
+      <td>{{rfp.due_date | date}}</td>
+      <td>{{rfp.abstract}}</td>
+      <td>{{rfp.created_at | date}}</td>
+      <td>
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>State</th>
+            <th>Person</th>
+            <th>Cost</th>
+            <th>Completed By</th>
+            <th>Dev Notes</th>
+            <th>Team Notes</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr ng-repeat="proposal in rfp.proposals">
+            <td>{{proposal.id}}</td>
+            <td>{{proposal.state}}</td>
+            <td>{{proposal.person.display_name}}</td>
+            <td>{{proposal.amount | currency}}</td>
+            <td>{{proposal.completed_by | date}}</td>
+            <td>{{proposal.bio}}</td>
+            <td>{{proposal.team_notes}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

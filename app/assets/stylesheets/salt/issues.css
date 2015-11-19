@@ -1,0 +1,21 @@
+
+
+.kanban-body #footer { display: none; }
+.kanban-body #wrap { height: 100%; margin: 0; padding: 0; }
+.kanban-body #container-div { height: 100%; padding-top: 55px; margin-top: -55px; }
+
+.kanban-wrapper { overflow-x: auto; background: #777; box-shadow: inset 0px 7px 3px -3px rgba(0, 0, 0, 0.15); padding: 20px 5px; height: 100%; }
+.kanban { display: flex; flex-wrap: nowrap; align-items: flex-start; height: 100%; }
+.kanban .kanban-column { padding: 0 5px; width:300px; flex: none; height: 100%; margin-top: -30px; padding-top: 30px }
+.kanban .panel-heading { border-top-right-radius:6px; border-top-left-radius:6px }
+.kanban .panel-body { overflow-y: auto; max-height: 100%; border-bottom-right-radius:6px; border-bottom-left-radius:6px; padding: 8px 8px 0 8px; }
+.kanban .panel-primary .panel-body { background: #d9edf7; border-bottom: 8px solid #d9edf7; }
+.kanban .panel-green .panel-body { background: #dff0d8; border-bottom: 8px solid #dff0d8; }
+.kanban .panel-red .panel-body { background: #f2dede; border-bottom: 8px solid #f2dede; }
+
+.kanban .kanban-card { border: 1px solid #ccc; border-radius: 5px; margin-bottom: 8px; background: white; padding: 10px; }
+.kanban .kanban-card:last-child { margin-bottom: 0; }
+.kanban .kanban-card h4 { margin: 0 0 12px; font-size: 15px; }
+.kanban .kanban-card a { color: #333; }
+.kanban .kanban-card h4 img { width: 16px; height: 16px; margin-right: 3px; border-radius: 3px; vertical-align: bottom; }
+.kanban .kanban-card .label { margin-right: 5px; }

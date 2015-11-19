@@ -1,0 +1,10 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+  You've just created a $<%= @bounty.amount.round %> bounty on <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty.issue.to_param}" %>" target='_blank'><%= @bounty.issue.title %></a>. Thanks for the support, now go spread the word!
+</p>
+<p>
+  If you have any questions, please check out our <a href="<%= "#{Api::Application.config.www_url}faq" %>" target='_blank' style="color: #888">FAQs</a> or contact us at any of the ways below.
+</p>

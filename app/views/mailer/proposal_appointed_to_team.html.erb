@@ -1,0 +1,3 @@
+<p>Hi <%= @person.display_name %>,</p>
+<p>A proposal was accepted for <a href="<%= "#{Api::Application.config.api_url}issues/#{@proposal.issue.to_param}" %>"></a> <%= @proposal.issue.title %>.</p>
+<p><a href="<%= "#{Api::Application.config.api_url}issues/#{@proposal.issue.to_param}/proposals" %>">View proposals for this issue</a></p>

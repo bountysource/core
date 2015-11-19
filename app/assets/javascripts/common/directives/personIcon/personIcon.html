@@ -1,0 +1,18 @@
+<div ng-switch="format">
+  <div ng-switch-when="vertical" style="text-align: center;">
+    <div>
+      <a ng-href="/people/{{person.slug}}"><img class="img-rounded" style="width: {{ size || '35px' }}; height: {{ size || '35px' }}; display: inline-block;" ng-src="{{person.image_url}}"></a>
+    </div>
+    <div>
+      <a ng-href="/people/{{person.slug}}">{{person.display_name}}</a>
+    </div>
+  </div>
+  <div ng-switch-default="" style="display: inline-block; vertical-align: middle;">
+    <div style="display: inline-block; vertical-align: middle;">
+      <a ng-href="/people/{{person.slug}}"><img class="img-rounded" style="width: {{ size || '35px' }}; height: {{ size || '35px' }}; display: inline-block;" ng-src="{{person.image_url}}"></a>
+    </div>
+    <div style="display: inline-block; vertical-align: middle;">
+      <a ng-href="/people/{{person.slug}}">{{person.display_name}}</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.navbar { transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); }
+
+
+.homepage .team-header h1, .homepage .team-header h2 { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
+.homepage .team-header h1 { text-align: center; margin: 20px 0 20px 0; font-weight: bold; }
+.homepage .team-header h2 { text-align: center; margin: 20px 0 40px 0; font-weight: normal; }
+.homepage .team-header h4 { font-size:16px; margin:10px 0 20px; text-align: center; }
+
+
+
+@media (max-width: 767px) { /* @screen-xs */
+  .homepage .team-header h1 { font-size: 30px; }
+  .homepage .team-header h2 { font-size: 24px; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) { /* @screen-sm */
+  .homepage .team-header h1 { font-size: 40px; }
+  .homepage .team-header h2 { font-size: 32px; }
+}
+
+@media (min-width: 992px) { /* @screen-md @screen-lg*/
+  .homepage .team-header h1 { font-size: 50px; }
+  .homepage .team-header h2 { font-size: 34px; }
+}

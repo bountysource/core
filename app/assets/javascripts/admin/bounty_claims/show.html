@@ -1,0 +1,57 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="claim">Such loading wow...</loading-bar>
+    <div class="row-fluid">
+      <div class="span12" style="border: 1px solid #ddd; border-radius: 10px; padding:15px; margin-bottom:15px;">
+        <span class="alert alert-success span12" ng-show="error">{{ error }}</span>
+        <div class="alert alert-success" ng-show="claim.paid_out" style="margin-bottom:0px;"><i class='icon-warning-sign'></i> Paid out!</div>
+        <h3>Bounty Claim #{{claim.id}}</h3>
+        <form name="form">
+          <div class="control-group">
+            <div class="control-label">Code URL</div>
+            <div class="controls"><input class="span12" type="text" ng-model="form_data.code_url"></input></div>
+          </div>
+          <div class="control-group">
+            <div class="control-label">Description</div>
+            <div class="controls"><textarea class="span12" type="text" ng-model="form_data.description" rows="8"></textarea></div>
+          </div>
+          <div class="control-group">
+            <label class="checkbox">
+              <input type="checkbox" ng-model="form_data.disputed">Disputed</input>
+            </label>
+          </div>
+          <div class="control-group">
+            <label class="checkbox">
+              <input type="checkbox" ng-model="form_data.rejected">Rejected</input>
+            </label>
+          </div>
+          <button class="btn pull-right" ng-click="resetPage()">Cancel</button>
+          <button class="btn btn-primary pull-right" ng-click="updateClaim(claim, form_data)" style="margin-right: 10px;">Update</button>
+        </form>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span12" style="border: 1px solid #ddd; border-radius: 10px; padding:15px;">
+          <h4>Description</h4>
+          <p>{{ claim.description }}</p>
+          <h4>Claim Submitted</h4>
+          <p>{{ claim.created_at | date:'medium' }}</p>
+          <div ng-show="accepted_at">
+            <h4>Backer Accepted</h4>
+            <p>{{ accepted_at | date:'medium' }}</p>
+          </div>
+          <h4>Issue</h4>
+          <p><a ng-href="/admin{{ claim.issue.frontend_path }}">{{ claim.issue.title }}</a></p>
+          <p><a ng-href="/issues/{{ claim.issue.slug }}" target="_blank">[View on Production]</a></p>
+          <h4>Code</h4>
+          <a ng-href="{{ claim.code_url }}" target="_blank">{{ claim.code_url }}</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

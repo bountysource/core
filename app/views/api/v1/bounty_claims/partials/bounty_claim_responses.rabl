@@ -1,0 +1,1 @@
+child(:bounty_claim_responses => :responses) { extends "api/v1/bounty_claim_responses/index" }

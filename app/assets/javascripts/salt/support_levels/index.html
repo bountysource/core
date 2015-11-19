@@ -1,0 +1,32 @@
+<table class="table table-compact table-hover">
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Created</th>
+      <th>Display As</th>
+      <th>Reward</th>
+      <th>Payment Method</th>
+      <!-- <th>Last Billed</th>
+      <th>Next Billed</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="support_level in support_levels | orderBy:['status','-created_at']" ui-sref="root.support_levels.show(support_level)" style="cursor:pointer" ng-class="{ success: support_level.status==='active', warning: support_level.status==='pending', danger: support_level.status==='unpaid', active: support_level.status==='canceled' }">
+      <td>
+        <img ng-src="{{support_level.team.image_url_small}}" style="width: 16px; height: 16px" />
+        {{support_level.team.display_name}}
+      </td>
+      <td>{{support_level.amount | dollars}}</td>
+      <td>{{support_level.status}}</td>
+      <td>{{support_level.created_at | date}}</td>
+      <td>
+        <img ng-src="{{support_level.owner.image_url_large}}" style="width: 16px; height: 16px" />
+        {{support_level.owner.display_name}}
+      </td>
+      <td>{{support_level.reward ? support_level.reward.title : "No Reward"}}</td>
+      <td>{{support_level.payment_method.description}}</td>
+    </tr>
+  </tbody>
+</table>

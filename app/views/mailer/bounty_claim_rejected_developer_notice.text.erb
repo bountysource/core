@@ -1,0 +1,7 @@
+Hi <%= @person.first_name %>,
+
+Your claim on "<%= @bounty_claim.issue.title %>" has been rejected.
+
+<%= @response.person.display_name %> rejected the claim with the following reason: <%= @response.description %>
+
+If you have any questions, please email us at support@bountysource.com.

@@ -1,0 +1,17 @@
+<table class="table timeline">
+  <tr ng-repeat="update in team_updates">
+    <td class="big-icon">
+      <img ng-src="{{update.team.image_url_small}}" class="img-responsive img-rounded" style="width:50px;height:50px"/>
+    </td>
+    <td>
+      <div style="font-size: 19px"><a ng-href="/teams/{{update.team.slug}}/updates/{{update.slug}}">{{update.title}}</a></div>
+      <div>{{update.body_truncated}}</div>
+
+      <div class="secondary-text">
+        <a ng-href="/teams/{{update.team.slug}}"><img ng-src="{{update.team.image_url_small}}" style="width:16px;height:16px;margin-right:4px" />{{update.team.name}}</a>
+        <span tooltip="{{event.published_at | date}}" tooltip-placement="right">{{update.published_at | date }}</span>
+      </div>
+
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,5 @@
+Hi <%= @person.display_name %>,
+
+<%= @solution.person.display_name %> has stopped working on their solution to "<%= @solution.issue.title %>".
+
+You could try increasing the bounty to entice more developers! <%= "#{Api::Application.config.www_url}issues/#{@solution.issue.to_param}/bounty" %>

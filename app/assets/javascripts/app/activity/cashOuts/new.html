@@ -1,0 +1,278 @@
+<div>
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/activity">Activity</a></li>
+    <li><a href="/activity/account">Account</a></li>
+  </ul>
+
+  <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+  <div ng-show="sources.length == 0">
+    <div class="alert alert-danger">
+      <h3 style="margin-top: 0">Invalid Cash Out Request</h3>
+      <p>You do not have any eligible cash outs. If you think this is a mistake, please email <a href="mailto:support@bountysource.com">support@bountysource.com</a></p>
+    </div>
+  </div>
+  <div ng-show="sources.length > 0">
+
+    <!-- Cash out alerts -->
+    <div ng-if="cashOutAlert.message">
+      <alert type="cashOutAlert.type">{{cashOutAlert.message}}</alert>
+    </div>
+
+    <ng-form class="form-horizontal" name="cashOutForm">
+      <div class="form-group">
+        <label class="control-label col-sm-3">Source</label>
+        <div class="col-sm-9">
+          <div class="radio" ng-repeat="source in sources">
+            <label>
+              <input type="radio" ng-model="cashOut.source" ng-value="'{{source.id}}'" required />
+              <img style="width: 16px; height: 16px;" ng-src="{{source.image_url}}" />
+              <strong>{{source.balance | currency}}</strong>
+              - {{source.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amount -->
+      <div class="form-group" ng-class="{ 'has-error': amountsForm.amount.$invalid }" ng-show="cashOut.source">
+        <label class="control-label col-sm-3">Cash Out Amount</label>
+
+        <div class="col-sm-3">
+          <ng-form name="amountsForm">
+            <div class="input-group" tooltip="Account balance: {{source_map[cashOut.source].balance | currency}}">
+              <span class="input-group-addon">$</span>
+              <input type="number" name="amount" class="form-control" step="0.01" min="0" max="{{source_map[cashOut.source].balance}}" ng-model="$parent.cashOut.amount" required autoselect />
+            </div>
+          </ng-form>
+        </div>
+      </div>
+
+      <!-- Fee, fee adjustment, total -->
+      <div ng-if="amountsForm.amount.$valid">
+        <!-- Cash out fee -->
+        <div class="form-group" ng-if="fee > 0">
+          <label class="control-label col-sm-3">Bountysource Fee</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{fee * -1 | currency}}</p>
+          </div>
+        </div>
+
+        <!-- Total received -->
+        <div class="form-group" ng-if="fee > 0">
+          <label class="control-label col-sm-3">Total</label>
+          <div class="col-sm-9">
+            <p class="form-control-static"><strong>{{cashOut.amount - fee | currency}}</strong></p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Permanent address -->
+      <div ng-controller="NewCashOutPermanentAddressController">
+        <div class="form-group">
+          <label class="control-label col-sm-3">Permanent Address</label>
+
+          <div class="col-sm-9">
+            <!-- Error messages -->
+            <div ng-show="$parent.permanentAddressAlert.message">
+              <alert type="$parent.permanentAddressAlert.type">{{$parent.permanentAddressAlert.message}}</alert>
+            </div>
+
+            <div class="form-control-static">
+              <p>Your permanent address is required to assess US tax obligations.</p>
+              <p>If you do have US tax obligations and earn over {{600 | dollars}} a year, this is where we will send your 1099 at the end of the year.</p>
+            </div>
+
+            <!-- Show address select and new address toggle if user has addresses -->
+            <div ng-if="addressManager.addresses.length > 0">
+              <address-select
+                class="form-control"
+                address-manager-instance="addressManager"
+                ng-model="cashOut.address"
+                ng-disabled="toggleNewAddress"
+                ng-required="!toggleNewAddress">
+              </address-select>
+
+              <div class="checkbox" ng-show="addressManager.addresses.length > 0">
+                <label>
+                  <input type="checkbox" ng-model="$parent.toggleNewAddress" /> New address
+                </label>
+              </div>
+            </div>
+
+            <!-- Show new address form if new address box checked, or if the user has no addresses -->
+            <div ng-if="addressManager.addresses.length <= 0 || toggleNewAddress">
+              <ng-form class="form-horizontal" name="newAddressForm">
+                <address-form-input-groups form="newAddressForm" address="cashOut.newAddress"></address-form-input-groups>
+              </ng-form>
+            </div>
+
+            <!-- US citizen prompt -->
+            <div ng-if="(toggleNewAddress || addressManager.addresses.length <= 0) ? (cashOut.newAddress.country !== undefined && cashOut.newAddress.country !== 'US') : (cashOut.address.country !== undefined && cashOut.address.country !== 'US')">
+              <br />
+
+              <div class="form-group">
+                <!-- US citizen question radios -->
+                <ng-form name="usCitizenForm">
+                  <div class="col-sm-offset-3 col-sm-9">
+                    <strong>Are you a United States citizen?</strong>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" ng-model="cashOut.us_citizen" ng-value="true" required /> Yes
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" ng-model="cashOut.us_citizen" ng-value="false" /> No
+                      </label>
+                    </div>
+                  </div>
+                </ng-form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment method -->
+      <div class="form-group" ng-controller="NewCashOutPaymentMethodController">
+        <label class="control-label col-sm-3">Payment Method</label>
+        <div class="col-sm-9">
+
+          <ng-form class="form-horizontal" name="paymentMethodForm">
+            <!-- Paypal -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <div class="col-sm-12">
+                <div class="radio">
+                  <label>
+                    <input type="radio" ng-model="cashOut.type" ng-value="'paypal'" required /> PayPal
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bitcoin -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <div class="col-sm-12">
+                <div class="radio">
+                  <label>
+                    <input type="radio" ng-model="cashOut.type" ng-value="'bitcoin'" /> Bitcoin
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ripple -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <div class="col-sm-12">
+                <div class="radio">
+                  <label>
+                    <input type="radio" ng-model="cashOut.type" ng-value="'ripple'" /> Ripple
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Check -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <div class="col-sm-12">
+                <div class="radio">
+                  <label>
+                    <input type="radio" ng-model="cashOut.type" ng-value="'check'" /> Check
+                  </label>
+                </div>
+              </div>
+            </div>
+          </ng-form>
+
+        </div>
+      </div>
+
+      <!-- Paypal Address -->
+      <div class="form-group" ng-if="cashOut.type === 'paypal'" ng-class="{ 'has-error': paymentMethodForm.paypalEmail.$invalid }">
+        <label class="control-label col-sm-3">Paypal Email:</label>
+        <div class="col-sm-9">
+          <input type="email" name="paypalEmail" class="form-control" ng-model="cashOut.paypal_address" required autocomplete />
+        </div>
+      </div>
+
+      <!-- Bitcoin Address -->
+      <div class="form-group" ng-if="cashOut.type === 'bitcoin'" ng-class="{ 'has-error': paymentMethodForm.bitcoinAddress.$invalid }">
+        <label class="control-label col-sm-3">Bitcoin Address:</label>
+        <div class="col-sm-9">
+          <input type="text" name="bitcoinAddress" class="form-control" ng-model="cashOut.bitcoin_address" required autocomplete />
+        </div>
+      </div>
+
+
+      <!-- Ripple Address -->
+      <div class="form-group" ng-if="cashOut.type === 'ripple'" ng-class="{ 'has-error': paymentMethodForm.rippleAddress.$invalid }">
+        <label class="control-label col-sm-3">Ripple Address:</label>
+        <div class="col-sm-9">
+          <input type="text" name="rippleAddress" class="form-control" ng-model="cashOut.ripple_address" required autocomplete />
+        </div>
+      </div>
+
+      <!-- Mailing address, if check -->
+      <div ng-if="cashOut.type === 'check'" ng-controller="NewCashOutMailingAddressController">
+        <div class="form-group">
+          <label class="control-label col-sm-3">Mailing Address</label>
+          <div class="col-sm-9">
+            <!-- Error messages -->
+            <div ng-show="$parent.permanentAddressAlert.message">
+              <alert type="$parent.permanentAddressAlert.type">{{$parent.permanentAddressAlert.message}}</alert>
+            </div>
+
+            <p class="form-control-static">A mailing address is required if you receive payment via check.</p>
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="$parent.$parent.usePermanentAddressAsMailing" /> Use permanent address
+              </label>
+            </div>
+
+            <div ng-if="!$parent.$parent.usePermanentAddressAsMailing">
+              <br />
+
+              <div ng-if="addressManager.addresses.length > 0">
+                <address-select
+                  class="form-control"
+                  address-manager-instance="addressManager"
+                  ng-model="cashOut.mailing_address"
+                  ng-disabled="toggleNewMailingAddress"
+                  ng-required="!toggleNewMailingAddress">
+                </address-select>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-model="$parent.toggleNewMailingAddress" /> New address
+                  </label>
+                </div>
+              </div>
+
+              <!-- Show new address form if new address box checked -->
+              <div ng-if="addressManager.addresses.length <= 0 || toggleNewMailingAddress">
+                <br />
+
+                <ng-form class="form-horizontal" name="newMailingAddressForm">
+                  <address-form-input-groups form="newMailingAddressForm" address="cashOut.newMailingAddress"></address-form-input-groups>
+                </ng-form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit cash out request button -->
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button class="btn btn-primary" ng-disabled="cashOutForm.$invalid" ng-click="createCashOut()">
+            Request Cash Out
+          </button>
+        </div>
+      </div>
+    </ng-form>
+  </div>
+</div>

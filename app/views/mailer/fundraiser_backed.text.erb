@@ -1,0 +1,5 @@
+Dear <%= @person.display_name %>,
+
+<%= @pledge.owner_display_name capitalize: true %> just made a $<%= @pledge.amount.round %> pledge to <%= @pledge.fundraiser.title %>
+
+Want to check in on your fundraiser? View all of the pledges: <%= @pledge.fundraiser.frontend_info_url %>

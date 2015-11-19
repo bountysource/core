@@ -1,0 +1,47 @@
+<div class="kanban-wrapper">
+  <div class="container-fluid" ng-show="issues.length==0" style="padding-top:50px">
+    <div class="alert alert-danger">
+      Sorry, no issues were found!
+    </div>
+  </div>
+
+  <div class="kanban">
+    <div ng-repeat="column in workflow_states" ng-show="(issues | filter:{workflow_state:column.state}).length>0" class="kanban-column" ng-class="column.panel_class">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{column.title}}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="kanban-card" ng-repeat="issue in issues | filter:{workflow_state:column.state} | orderBy:column.orderBy ">
+
+          <h4 class="break-words">
+            <!--team-->
+            <a ng-href="https://www.bountysource.com/teams/{{issue.team.slug}}" ng-if="issue.team.id"><img ng-src="{{issue.team.image_url_small}}" />{{issue.team.name}}</a>
+
+            <!--tracker-->
+            <a ng-href="https://www.bountysource.com/trackers/{{issue.tracker.slug}}" ng-if="!issue.team.id"><img ng-src="{{issue.tracker.image_url_small}}" />{{issue.tracker.display_name}}</a>
+
+            &raquo;
+            <a ng-href="https://www.bountysource.com/issues/{{issue.slug}}">{{issue.title}}</a>
+
+          </h4>
+
+          <!-- bounty -->
+          <div style="float: right">
+            <thumbs-up-box issue="issue" thumbs-up-size="small"></thumbs-up-box>
+          </div>
+
+          <span class="label label-success" ng-show="issue.bounty_total > 0">
+            {{issue.bounty_total | dollars:{space: true} }}
+          </span>
+
+          <span class="label label-subtle" ng-show="issue.state">
+            {{issue.state}}
+          </span>
+
+          <div style="clear: both"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

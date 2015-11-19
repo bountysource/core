@@ -1,0 +1,32 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="follows">Such loading wow...</loading-bar>
+
+    <div>
+      <h3 style="margin-top:0px;">Follows</h3>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Person</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="follow in follows">
+            <td style="word-wrap: break-word;"><a ng-href="{{ follow.item.frontend_url }}" target="_blank">{{follow.item_type}} ({{ follow.item.id }})</a></td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{ follow.person.id }}">{{ follow.person.display_name }}</a></td>
+            <td style="word-wrap: break-word;">{{ follow.created_at | date:'short' }}</td>
+            <td style="word-wrap: break-word;">{{ follow.updated_at | date:'short' }}</td>
+            <td style="word-wrap: break-word;"><i class="icon-ok" ng-show="follow.active"></i></td>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

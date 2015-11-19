@@ -1,0 +1,9 @@
+<h1>News Coverage and Press</h1>
+
+<dl ng-repeat="date in (articles | pluck:'date' | unique)">
+  <dt style="font-weight: normal; font-style: italic">{{date}}</dt>
+  <dd ng-repeat="article in articles | filter:{date:date}">
+    <a href="{{article.href}}" target="_blank">{{article.title}}</a> on <b>{{article.source}}</b>
+    <span ng-show="article.author">by {{article.author}}</span>
+  </dd>
+</dl>

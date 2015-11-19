@@ -1,0 +1,65 @@
+<div class="row-fluid">
+  
+  <div class="span12">
+    <loading-bar ng-hide="!working">Such loading wow...</loading-bar>
+
+    <div>
+      <h3 style="margin-top:0px;">Fundraisers</h3>
+      <p style="margin-top:5px;" ng-show="totalItems">Total Issues: {{totalItems | number}}</p>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>
+              <a ng-click="applySort(currentPage, date)">{{ date.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[date.col] && order_hash[date.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[date.col] && order_hash[date.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>Author</th>
+            <th>Title</th>
+            <th>
+              <a ng-click="applySort(currentPage, funding)">{{ funding.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[funding.col] && order_hash[funding.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[funding.col] && order_hash[funding.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>
+              <a ng-click="applySort(currentPage, funding_goal)">{{ funding_goal.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[funding_goal.col] && order_hash[funding_goal.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[funding_goal.col] && order_hash[funding_goal.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>
+              <a ng-click="applySort(currentPage, featured)">{{ featured.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[featured.col] && order_hash[featured.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[featured.col] && order_hash[featured.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>
+              <a ng-click="applySort(currentPage, published)">{{ published.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[published.col] && order_hash[published.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[published.col] && order_hash[published.col] == 'desc'"></icon>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="fundraiser in fundraisers" ng-class="{success: fundraiser.featured, warning: fundraiser.published && !fundraiser.featured}">
+            <td>{{ fundraiser.id }}</td>
+            <td>{{fundraiser.created_at | date:'short'}}</td>
+            <td><a ng-href="/admin/people/{{ fundraiser.person.id }}">{{ fundraiser.person.display_name }}</a></td>
+            <td><a ng-href="/admin/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title }}</a></td>
+            <td>{{ fundraiser.total_pledged | dollars }}</td>
+            <td><strong>{{ fundraiser.funding_goal | dollars }}</strong></td>
+            <td><i class="icon-ok" ng-show="fundraiser.featured"></i></td>
+            <td><i class="icon-ok" ng-show="fundraiser.published"></i></td>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

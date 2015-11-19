@@ -1,0 +1,6 @@
+table.table-projects { margin-bottom: 0; }
+table.table-projects tr:first-of-type td { border-top: 0; }
+.notification-box {
+	padding: 30px 20px 60px;
+	margin-top: 6px;
+}

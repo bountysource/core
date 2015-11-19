@@ -1,0 +1,78 @@
+<div>
+  <table class="table timeline table-fixed">
+    <tr ng-repeat="event in events" ng-class="{featured: event.bounty.featured}">
+
+      <td class="big-icon">
+        <profile-pic ng-hide="noActorImage" owner="event.actor"></profile-pic>
+        <profile-pic ng-show="noActorImage" owner="event.team || event.tracker"></profile-pic>
+      </td>
+
+      <td class="bounty-description">
+
+        <div class="{{primaryClass}}" ng-if="event.event==='bounty_claimed'">
+          <profile-name owner="event.actor"></profile-name>
+          submitted a claim<span ng-if="event.issue"> for <a ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}} ({{event.issue.bounty_total | dollars}})</a></span><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="{{primaryClass}}" ng-if="event.event==='bounty_collected'">
+          <profile-name owner="event.actor"></profile-name>
+          was awarded the bounty<span ng-if="event.issue"> on <a ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}} ({{event.issue.bounty_total | dollars}})</a></span><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="{{primaryClass}}" ng-if="event.event==='bounty_created'">
+          <profile-name owner="event.actor"></profile-name>
+          posted a {{event.bounty.amount | dollars}} bounty<span ng-if="event.issue"> to <a ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}} ({{event.issue.bounty_total | dollars}})</a></span><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="{{primaryClass}}" ng-if="event.event==='solution_started'">
+          <profile-name owner="event.actor"></profile-name>
+          started a solution<span ng-if="event.issue"> on <a ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}} ({{event.issue.bounty_total | dollars}})</a></span><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="{{primaryClass}}" ng-if="event.event==='team_payin_created'">
+          <profile-name owner="event.actor"></profile-name>
+          contributed {{event.team_payin.amount | dollars}} to
+          <a ng-href="/teams/{{event.team.slug}}" ng-if="event.team">{{event.team.display_name}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="{{primaryClass}}" ng-if="event.event==='support_level_created'">
+          <profile-name owner="event.actor"></profile-name>
+          contributed {{event.support_level.amount | dollars}}/month to
+          <a ng-href="/teams/{{event.team.slug}}" ng-if="event.team">{{event.team.display_name}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="{{primaryClass}}" ng-if="event.event==='pledge_created'">
+          <profile-name owner="event.actor"></profile-name>
+          pledged {{event.pledge.amount | dollars}} to
+          <a ng-href="/teams/{{event.team.slug}}/fundraiser">{{event.fundraiser.title}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="{{primaryClass}}" ng-if="event.event==='issue_created'">
+          <profile-name owner="event.actor"></profile-name>
+          created <span ng-hide="event.issue">this issue</span><a ng-show="event.issue" ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.<br/>
+        </div>
+
+        <div class="{{primaryClass}}" ng-if="event.event==='issue_comment_created'">
+          <profile-name owner="event.actor"></profile-name>
+          commented on <span ng-hide="event.issue">this issue</span><a ng-show="event.issue" ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.<br/>
+        </div>
+
+        <target-blank model="event">
+          <div ng-if="event.body_html" ng-bind-html="event.body_html | trusted_html" class="timeline-body-html" style="width: 100%; overflow: auto"></div>
+        </target-blank>
+
+        <div class="secondary-text" ng-if="event.tracker || event.team || !dateInPrimary">
+          <a ng-href="/trackers/{{event.tracker.slug}}" ng-if="event.tracker && !event.team"><img ng-hide="noActorImage" ng-src="{{event.tracker.image_url_small}}" />{{event.tracker.display_name}}</a>
+          <a ng-href="/teams/{{event.team.slug}}" ng-if="event.team"><img ng-hide="noActorImage" ng-src="{{event.team.image_url_small}}" />{{event.team.display_name}}</a>
+          <span ng-if="!dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right">{{event.timestamp | timeDiff }} ago</span>
+          <span class="label label-success" ng-if="event.bounty.featured">Featured</span>
+        </div>
+
+        <div ng-if="event.event==='issue_created' && issue">
+          <p><share-badge badge-type="issue" badge-object="issue"></share-badge></p>
+        </div>
+      </td>
+
+    </tr>
+  </table>
+</div>

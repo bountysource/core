@@ -1,0 +1,7 @@
+Hi <%= @person.first_name %>,
+
+You have successfully submitted your claim on "<%= @bounty_claim.issue.title %>".
+
+The $<%= @bounty_claim.issue.bounty_total.round %> bounty will be paid out if all backers of the issue accept your claim. If no action is taken, the bounty will be paid out after two weeks.
+
+You can view the claim here: <%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}" %>

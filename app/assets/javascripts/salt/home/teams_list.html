@@ -1,0 +1,33 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="2">Team</th>
+      <!-- <th style="text-align: center">Supporters</th> -->
+      <th style="text-align: center">Earnings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="team in teams" ng-if="state.params.tag || state.params.search || state.params.newest || team.monthly_contributions_sum>0 || team.previous_month_contributions_sum>0">
+      <td style="vertical-align: top"><a ui-sref="root.teams.show(team)"><img ng-src="{{team.image_url_medium || team.image_url}}" class="img-rounded img-salt-homepage-logo" /></a></td>
+      <td style="vertical-align: middle">
+        <div style="font-size: 22px;"><a ui-sref="root.teams.show(team)">{{team.name}}</a></div>
+        <div style="font-size: 16px;">{{team.bio}}</div>
+      </td>
+      <!-- <td style="vertical-align: middle; white-space:nowrap; text-align: center">
+        <div style="font-size: 20px;">{{team.monthly_contributions_count}}</div>
+        <div style="color: #888; font-size:14px">&nbsp;</div>
+      </td> -->
+      <td style="vertical-align: middle; white-space:nowrap; text-align: center">
+        <div ng-show="team.monthly_contributions_sum >= team.previous_month_contributions_sum">
+          <div style="font-size: 20px;">{{team.monthly_contributions_sum | dollars}}</div>
+          <div style="color: #888; font-size:14px">this month</div>
+        </div>
+        <div ng-hide="team.monthly_contributions_sum >= team.previous_month_contributions_sum">
+          <div style="font-size: 20px;">{{team.previous_month_contributions_sum | dollars}}</div>
+          <div style="color: #888; font-size:14px">last month</div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="alert alert-info" ng-hide="teams.length > 0">Sorry, no teams were found.</div>

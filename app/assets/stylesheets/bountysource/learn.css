@@ -1,0 +1,23 @@
+.big-circle-number {
+  display: block;
+  background: #2ecc71;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 50px;
+  float: left;
+  margin-right: 10px;
+}
+.learn h3 { line-height: 50px; margin-top: 30px; }
+
+
+.learn .subtext { margin-left: 70px; }
+
+/*.learn h1 { text-align: center; }*/
+
+.learn .span4 { border-right: 1px solid #ccc; }
+/*.learn .btn { float: right; }*/

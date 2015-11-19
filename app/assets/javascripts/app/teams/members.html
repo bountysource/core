@@ -1,0 +1,12 @@
+<div>
+  <div team-view team="team">
+    <ul class="thumbnails list-unstyled">
+      <li class="col-md-2 member-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
+        <a ng-href="/people/{{member.slug}}" class="thumbnail team-member-card">
+          <img ng-src="{{member.medium_image_url}}">
+          {{member.display_name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

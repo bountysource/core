@@ -1,0 +1,1 @@
+json.partial! 'base', cart: @cart

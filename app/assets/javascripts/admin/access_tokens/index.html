@@ -1,0 +1,34 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="access_tokens">Such loading wow...</loading-bar>
+    <div>
+      <h3 style="margin-top:0px;">Active Users</h3>
+      <p style="margin-top:5px;" ng-show="totalItems">Total Users: {{totalItems}}</p>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+        <tr>
+          <th>Created At</th>
+          <th>Signed Up</th>
+          <th>Person</th>
+          <th>Remote IP</th>
+          <th>Browser</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="access_token in access_tokens">
+          <td style="word-wrap: break-word;">{{access_token.created_at | date:'short'}}</td>
+          <td style="word-wrap: break-word;">{{time_ago(access_token.created_at, access_token.person.created_at)}}</td>
+          <td style="word-wrap: break-word;"><a href="/admin/people/{{access_token.person.id}}">{{access_token.person.display_name}}</a></td>
+          <td style="word-wrap: break-word;">{{access_token.remote_ip}}</td>
+          <td style="word-wrap: break-word;">{{access_token.user_agent}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+</div>

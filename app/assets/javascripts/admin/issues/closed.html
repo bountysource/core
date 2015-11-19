@@ -1,0 +1,34 @@
+<div class="row-fluid">  
+  <div class="span12">
+    <h3 style="margin-top:0px;">Issues</h3>
+    <div ng-include="'admin/issues/partials/nav_tabs.html'"></div>
+    <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th ng-click="column = 'bounty_total'; reverse=!reverse"><a>Bounty Total <span class="icon-chevron-up" ng-show="reverse == true && column == 'bounty_total'"></span><span class="icon-chevron-down" ng-show="reverse == false && column == 'bounty_total'"></span></a></th>
+          <th>Project</th>
+          <th>Title</th>
+          <th ng-click="column = 'earliest_bounty_created_at'; reverse=!reverse"><a>Age of First Bounty <span class="icon-chevron-up" ng-show="reverse == true && column == 'earliest_bounty_created_at'"></span><span class="icon-chevron-down" ng-show="reverse == false && column == 'earliest_bounty_created_at'"></span></a></th>
+          <th>Remote Created At</th>
+          <th>Has Claim?</th>
+          <th>Can Add Bounty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="issue in issues | orderBy:column:reverse" ng-class="{success: issue.has_claim}">
+          <td style="word-wrap: break-word;"><a ng-href="/admin/issues/{{issue.id}}">{{issue.id}}</a></td>
+          <td style="word-wrap: break-word;">{{issue.bounty_total | currency}}</td>
+          <td style="word-wrap: break-word;"><a ng-href="/admin/trackers/{{ issue.tracker.id }}">{{ issue.tracker.name }}</a></td>
+          <td style="word-wrap: break-word;"><a ng-href="{{ issue.frontend_path }}" target="_blank">{{issue.title}}</a></td>
+          <td style="word-wrap: break-word;">{{ issue.earliest_bounty_created_at | date:'short' }}</td>
+          <td style="word-wrap: break-word;">{{ issue.created_at | date:'short' }}</td>
+          <td style="word-wrap: break-word;"><i class="icon-ok" ng-show="issue.has_claim"></i><i class="icon-remove" ng-show="!issue.has_claim"></i></td>
+          <td><i class="icon-ok" ng-show="issue.can_add_bounty"></i><i class="icon-remove" ng-show="!issue.can_add_bounty"></i></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <loading-bar ng-show="working">Such loading wow...</loading-bar>
+  </div>
+</div>

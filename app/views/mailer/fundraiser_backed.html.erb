@@ -1,0 +1,5 @@
+<p>Dear <%= @person.display_name %>,</p>
+
+<p><%= @pledge.owner_display_name capitalize: true %> just made a $<%= @pledge.amount.round %> pledge to <%= @pledge.fundraiser.title %></p>
+
+<p>Want to check in on your fundraiser? <a href='<%= @fundraiser.frontend_info_url %>' target='_blank'>View all of the pledges</a>.</p>

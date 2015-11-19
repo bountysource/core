@@ -1,0 +1,29 @@
+<table class="table table-striped">
+  <tr ng-repeat="action in timeline | orderBy:'-sort_date'">
+    <td ng-if="action.type == 'Pledge'">
+      Pledged <strong>{{ action.amount | dollars }}</strong> to <a ng-href="/fundraisers/{{ action.fundraiser.slug }}">{{action.fundraiser.title}}</a>
+      <span ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
+    </td>
+
+    <td ng-if="action.type == 'Bounty'">
+      Placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">an
+      issue</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span
+      ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
+    </td>
+
+    <td ng-if="action.type == 'Fundraiser'">
+      Created the fundraiser <a ng-href="fundraisers/{{action.slug}}">{{action.title}}</a>
+    </td>
+
+    <td ng-if="action.type == 'Team'">
+      Joined the team <a ng-href="teams/{{action.slug}}">{{action.name}}</a>
+    </td>
+
+    <td ng-if="action.type == 'Collected'">
+      Collected bounty on <a
+      ng-href="{{action.bounty_claim.issue.frontend_path}}">{{action.bounty_claim.issue.title}}</a>
+    </td>
+
+    <td class="text-muted">{{ action.sort_date | date:'medium' }}</td>
+  </tr>
+</table>

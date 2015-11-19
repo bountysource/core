@@ -1,0 +1,138 @@
+<div class="homepage">
+
+  <div class="team-header" style="padding: 25px 0 15px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+
+          <h1>Support for Open-Source Software</h1>
+          <h2>A community with {{people_count.total | number}} members.</h2>
+
+          <div class="row">
+            <!-- Post -->
+            <div class="col-sm-4">
+              <div class="panel panel-success panel-bold panel-no-border">
+                <div class="panel-heading">
+                  <h3 class="text-center panel-title">Post</h3>
+                </div>
+
+                <div class="panel-body text-center">
+                  <h4>Paste any URL to post a bounty.</h4>
+
+                  <form class="form-inline" ng-submit="submit_search()" ng-controller="NavbarSearchController">
+                    <div class="input-group">
+                      <input type="text" class="search-query form-control" ng-model="form_data.url" placeholder="http://github.com/.../issues/123">
+                      <div class="input-group-btn">
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Post</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Create a Team -->
+            <div class="col-sm-4">
+              <div class="panel panel-primary panel-bold panel-no-border">
+                <div class="panel-heading">
+                  <h3 class="text-center panel-title">Team</h3>
+                </div>
+
+                <div class="panel-body">
+                  <h4>Manage every aspect of your team.</h4>
+
+                  <div style="text-align: center">
+                    <a ng-href="/teams/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hunt -->
+            <div class="col-sm-4">
+              <div class="panel panel-danger panel-bold panel-no-border">
+                <div class="panel-heading">
+                  <h3 class="text-center panel-title">Hunt</h3>
+                </div>
+
+                <div class="panel-body">
+                  <h4>Earn money contributing to OSS.</h4>
+
+                  <div style="text-align: center">
+                    <a ng-href="/bounties/search" class="btn btn-danger"><span class="glyphicon glyphicon-search"></span> Find Bounties</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BACKERS -->
+  <div ng-show="featuredTeams.length > 0" class="featured-header">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-10 col-lg-offset-1">
+            <h3>Featured Teams:</h3>
+            <a ng-href="/teams/{{team.slug}}" ng-repeat="team in featuredTeams | limitTo:10 ">
+              <img ng-src="{{team.image_url_small}}" tooltip="{{team.name}}" tooltip-placement="bottom" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container container_top_margin">
+    <div class="row">
+      <div class="col-lg-offset-1 col-lg-10">
+
+        <div class="row">
+          <div class="col-md-8 col-sm-9">
+            <!-- current home page -->
+            <ul class="nav nav-tabs">
+            <li class="active"><a href="/">Activity</a></li>
+            <li><a ng-href="/teams">Teams</a></li>
+            </ul>
+            <timeline events="events"></timeline>
+          </div>
+
+          <div class="col-md-4 col-sm-3">
+
+            <div ng-show="bounty_hunters.length>0">
+              <h3 style="margin-bottom: 0">Bounty Hunters</h3>
+              <div style="margin-bottom: 10px">
+                <small>
+                  <a ng-click="bounty_hunters = bounty_hunters_alltime" ng-hide="bounty_hunters == bounty_hunters_alltime">All</a>
+                  <b ng-show="bounty_hunters == bounty_hunters_alltime">All</b>
+                  |
+                  <a ng-click="bounty_hunters = bounty_hunters_month" ng-hide="bounty_hunters == bounty_hunters_month">90 Days</a>
+                  <b ng-show="bounty_hunters == bounty_hunters_month">90 Days</b>
+                </small>
+              </div>
+            </div>
+
+            <div ng-repeat="person in bounty_hunters">
+              <a ng-href="/people/{{person.slug}}" style="float: left"><img ng-src="{{person.image_url_small}}" style="width:50px; height: 50px; border-radius: 5px; margin-right:10px; margin-bottom: 10px"/></a>
+              <a ng-href="/people/{{person.slug}}" style="font-size: 16px; font-weight: bold">{{person.display_name}}</a>
+              <br/>
+              <div ng-show="person.bounty_claim_total>0">{{person.bounty_claim_total | dollars}}</a>
+              <div style="clear:left"></div>
+<!--
+            {{bounty_hunters_alltime}}
+
+            {{bounty_hunters_month}} -->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

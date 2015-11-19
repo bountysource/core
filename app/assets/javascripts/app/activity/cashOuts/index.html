@@ -1,0 +1,60 @@
+<div>
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/activity">Activity</a></li>
+    <li><a href="/activity/account">Account</a></li>
+  </ul>
+
+  <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+  <div class="alert alert-info">
+    <p>Cash out requests are processed every Friday. Requests must be submitted by end of Thursday each week.</p>
+    <p>If you have any questions please contact <a href="mailto:support@bountysource.com" target="_blank">support@bountysource.com</a>.</p>
+
+    <p><a class="btn btn-primary" ng-href="/activity/cash_outs/new">Request Cash Out</a></p>
+  </div>
+
+  <!-- Render message if person has no cash outs -->
+  <div ng-if="cashOuts.length <= 0">
+    <p><em>You have no pending cash outs.</em></p>
+  </div>
+
+  <table class="table table-striped" ng-if="cashOuts.length > 0">
+    <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Submitted</th>
+      <th>Status</th>
+      <th>Payment Method</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="cashOut in cashOuts">
+      <td>{{cashOut.amount | currency}}</td>
+      <td>{{cashOut.created_at | date}}</td>
+
+      <!-- Status -->
+      <td>
+        <!-- Pending -->
+        <div ng-if="!cashOut.sent_at">
+          <strong class="text-info">Pending</strong>
+        </div>
+
+        <!-- Accepted -->
+        <div ng-if="cashOut.sent_at && !cashOut.is_refund">
+          <strong class="text-success">Sent {{cashOut.sent_at | date}}</strong>
+        </div>
+
+        <!-- Refunded -->
+        <div ng-if="cashOut.sent_at && cashOut.is_refund">
+          <strong class="text-success">Refunded {{cashOut.sent_at | date}}</strong>
+        </div>
+      </td>
+
+      <!-- Payment Method -->
+      <td>{{cashOut.type | title}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

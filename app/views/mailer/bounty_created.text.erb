@@ -1,0 +1,7 @@
+Hi <%= @person.first_name %>,
+
+You've just created a $<%= @bounty.amount.round %> bounty on <%= @bounty.issue.title %>. Thanks for the support, now go spread the word!
+
+You can view the issue here: <%= "#{Api::Application.config.www_url}issues/#{@bounty.issue.to_param}" %>
+
+If you have any questions, please check out our FAQs (<%= Api::Application.config.www_url %>#faq) or contact us at any of the ways below.

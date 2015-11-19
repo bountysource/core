@@ -1,0 +1,105 @@
+<div ng-controller="SuggestedTeamIssuesController">
+  <div team-view team="team">
+    <div class="row">
+        <span class="col-md-3 col-sm-3 pull-left">
+          <form class="form-inline no-margin" style="text-align: center; vertical-align: middle">
+            <label class="checkbox">
+              <input type="checkbox" ng-model="search_parameters.show_team_issues" ng-change="get_team_issues()"></input>
+              Team Issues <i class="glyphicon glyphicon-question-sign" tooltip="Show issues for projects owned by your organization"></i>
+            </label>
+          </form>
+        </span>
+        <span class="col-md-3 col-sm-3">
+          <form class="form-inline no-margin" style="text-align: center; vertical-align: middle">
+            <label class="checkbox">
+              <input type="checkbox" ng-model="search_parameters.show_related_issues" ng-change="get_team_issues()"></input>
+              Related Issues <i class="glyphicon glyphicon-question-sign" tooltip="Show issues for projects your organization uses"></i>
+            </label>
+          </form>
+        </span>
+        <span>
+          <p class="pull-right" ng-show="pagination.items"><span class="label label-primary">{{ pagination.items || issues.length | number }}</span> <strong>Suggested Issues</strong></p>
+        </span>
+
+      <!--           <span class="span4">
+                  <a ng-click="toggle_advanced_search()">
+                    <span ng-show="show_advanced_search">« Hide Advanced Search</span>
+                    <span ng-show="!show_advanced_search">Advanced Search »</span>
+                  </a>
+                </span> -->
+      <div collapse="!show_advanced_search">
+        <form class="form-horizontal">
+          <div class="control-group">
+            <div class="control-label">Contains</div>
+            <div class="controls">
+              <input class="span8" type="text" ng-model="search_parameters.query" placeholder="Phrase in issue body or title"></input>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-label">Created After</div>
+            <div class="controls"><input type="text" ng-model="search_parameters.created_at" placeholder="mm/dd/yyyy"></input></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-label">Active Since</div>
+            <div class="controls"><input type="text" ng-model="search_parameters.last_event_created_at" placeholder="mm/dd/yyyy"></input></div>
+          </div>
+
+          <div class="control-group">
+            <div class="controls">
+              <button class="btn btn-primary" ng-click="get_team_issues()">Search</button>
+              <button class="btn" ng-click="toggle_advanced_search()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Loading message... -->
+    <div collapse="issues_resolved" class="text-center">
+      <loading-bar>Loading issues...</loading-bar>
+    </div>
+
+    <div ng-show="issues_resolved">
+      <div ng-show="issues.length > 0">
+        <table class="table table-condensed table-striped" style="table-layout: fixed">
+          <thead>
+          <tr>
+            <th style="width: 5%;"></th>
+            <th style="width: 25%;">Project</th>
+            <th style="width: 60%;">Issue Title</th>
+            <th style="width: 10%" class="text-center">Rank</th>
+            <!--                <th style="width: 6%; text-align:center;"><a ng-click="update_sort('bounty_total', search_parameters.page)" tooltip="Bounty total"><span style="width: 5%; color: black">$</span></a></th>
+                           <th style="width: 6%; text-align:center;"><a ng-click="update_sort('thumbs_up_count', search_parameters.page)" tooltip="Votes and '+1' comments total"><i class="icon-thumbs-up"></i></a></th>
+                           <th style="width: 6%; text-align:center;"><a ng-click="update_sort('participants_count', search_parameters.page)" tooltip="Watchers"><i class="icon-user"></i></a></th>
+                           <th style="width: 6%; text-align:center;"><a ng-click="update_sort('remote_created_at', search_parameters.page)" tooltip="Age of Issue"><i class="icon-time"></i></a></th> -->
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="issue in issues">
+            <td><a style="display:block;" ng-href="/trackers/{{issue.tracker.slug}}"><img ng-src="{{issue.tracker.image_url}}" style="max-height:20px;max-width:20px;" /></a></td>
+            <td><a ng-href="/trackers/{{issue.tracker.slug}}">{{issue.tracker.name}}</a></td>
+            <td style="overflow: hidden; text-overflow: ellipsis"><a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a></td>
+            <td class="text-center"><signal-icon percent="issue.relevance"></signal-icon></td>
+            <!--                 <td style="text-align: center">
+                              <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
+                                {{issue.bounty_total | dollars:{space:true} }}
+                              </a>
+                            </td>
+                            <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-warning"><i class="icon-thumbs-up icon-white"></i> {{issue.thumbs_up_count | number}}</a></td>
+                            <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-important"><i class="icon-user icon-white"></i> {{issue.participants_count | number}}</a></td>
+                            <td style="text-align:center;"><a ng-href="/issues/{{issue.slug}}/comments" class="label label-info">{{issue.created_at | time_ago_short}}</a></td> -->
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div ng-show="$parent.$parent.pagination_object.items >= 25">
+        <pagination total-items="pagination_object.items" page="pagination_object.page" items-per-page="25" num-pages="$parent.$parent.pagination_object.pages" on-select-page="get_team_issues(page)"></pagination>
+      </div>
+      <div ng-hide="issues.length > 0">
+        <h4 class="alert alert-info">There are no issues associated with this team</h4>
+      </div>
+    </div>
+  </div>
+</div>

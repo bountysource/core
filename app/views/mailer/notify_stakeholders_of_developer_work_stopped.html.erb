@@ -1,0 +1,5 @@
+<p>Hi <%= @person.display_name %>,</p>
+
+<p><a href="<%= "#{Api::Application.config.www_url}people/#{@solution.person.to_param}" %>"><%= @solution.person.display_name %></a> has stopped working on their solution to "<a href="<%= "#{Api::Application.config.www_url}issues/#{@solution.issue.to_param}" %>"><%= @solution.issue.title %></a>".</p>
+
+<p>You could try <a href="<%= "#{Api::Application.config.www_url}issues/#{@solution.issue.to_param}/bounty" %>">increasing the bounty</a> to entice more developers!</p>

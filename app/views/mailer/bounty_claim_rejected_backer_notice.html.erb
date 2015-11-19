@@ -1,0 +1,13 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+  A claim by <%= @bounty_claim.person.display_name %> for <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}" %>"><%= @bounty_claim.issue.title %></a> has been rejected. The $<%= @bounty_claim.issue.bounty_total.round %> bounty has not been paid out.
+</p>
+<p>
+  <a href="<%= Api::Application.config.www_url %>people/<%= @response.person.to_param %>"><%= @response.person.display_name %></a> rejected the claim with the following reason: <%= @response.description %>
+</p>
+<p>
+  If you have any questions, please <a href="mailto:support@bountysource.com">email us</a>.
+</p>

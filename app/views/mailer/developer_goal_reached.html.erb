@@ -1,0 +1,5 @@
+<p>Hi <%= @person.display_name %>,</p>
+
+<p>The <%= number_to_dollars(@developer_goal.amount) %> goal you placed on "<a href="<%= "#{Api::Application.config.www_url}issues/#{@developer_goal.issue.to_param}" %>"><%= @developer_goal.issue.title %></a>" has bee met! The current bounty is <%= number_to_dollars(@developer_goal.issue.bounty_total) %>.</p>
+
+<p>Now that your goal has been met, please let the Backers know you're working on it by clicking "Start Work" here: <%= "#{Api::Application.config.www_url}issues/#{@developer_goal.issue.to_param}" %></p>

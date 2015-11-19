@@ -1,0 +1,3 @@
+json.image_url_small item.image_url
+json.image_url_medium item.medium_image_url
+json.image_url_large item.large_image_url

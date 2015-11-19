@@ -1,0 +1,19 @@
+<ul class="nav nav-tabs" ng-controller="IssueNavTabsController">
+  
+  <li ng-class="active_tab('unpaid')">
+    <a ng-href="/admin/issues/unpaid">Unpaid <span class="label label-info">{{ closed | number}}</span></a>
+  </li>  
+
+  <li ng-class="active_tab('open')">
+    <a ng-href="/admin/issues/open">Open <span class="label label-info">{{ open | number}}</span></a>
+  </li>
+
+  <li ng-class="active_tab('paid_out')">
+    <a ng-href="/admin/issues/paid_out">Paid Out <span class="label label-info">{{ paid_out | number}}</span></a>
+  </li>
+  
+  <li ng-class="active_tab('all')">
+    <a ng-href="/admin/issues">All</a>
+  </li>
+
+</ul>

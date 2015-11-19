@@ -1,0 +1,45 @@
+.alert.alert-success.hidden-xs{ "ng-show"=>"recommendation", "style"=>"padding: 10px" }
+
+  %table{ "style"=>"margin: 0 auto", "ng-if"=>"recommendation.type==='comment_created' || recommendation.type==='issue_created'" }
+    %tr
+      %td{ "style"=>"padding: 0; vertical-align: middle" }
+        %img.img-rounded{ "ng-src"=>"{{recommendation.tracker.image_url_small}}", "style"=>"width:34px; height:34px; margin-right: 10px" }
+
+        / preload next image so it pops right in
+        %img{ "style"=>"display:none", "ng-src"=>"{{next_recommendation.tracker.image_url_small}}" }
+
+      %td{ "style"=>"vertical-align: middle; padding: 0" }
+        %div
+          %span{ "ng-if"=>"recommendation.type==='comment_created'" } You commented in
+          %span{ "ng-if"=>"recommendation.type==='issue_created'" } You opened
+
+          =succeed '.' do
+            %a{ "ng-href"=>"/issues/{{recommendation.issue.slug}}", "ng-click"=>"recbox.record('issue_clicked')" } {{recommendation.issue.title}}
+
+            on
+            %a{ "ng-href"=>"/trackers/{{recommendation.tracker.slug}}", "ng-click"=>"recbox.record('tracker_clicked')" } {{recommendation.tracker.display_name}}
+
+          %span.label.label-success
+            {{ recommendation.created_at | timeDiff }} ago
+          / for some reason, this label is wrapping... but appending an &nbsp; fixes it... but why!?
+          &nbsp;
+
+      %td{ "style"=>"vertical-align: middle; padding: 0; white-space: nowrap" }
+        %div{ "style"=>"margin-left:10px" }
+          .btn-group
+            %button.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", "ng-click"=>"recbox.record('bounty_button_clicked')" }
+              Post a Bounty
+              %span.caret
+            %ul.dropdown-menu{:role => "menu"}
+              %li
+                %a{ "ng-click" => "recbox.add_bounty_to_cart(5)" } {{ 5 | dollars:{ short: true } }}
+              %li
+                %a{ "ng-click" => "recbox.add_bounty_to_cart(20)" } {{ 20 | dollars:{ short: true } }}
+              %li
+                %a{ "ng-click" => "recbox.add_bounty_to_cart(100)" } {{ 100 | dollars:{ short: true } }}
+              %li
+                %a{ "ng-click" => "recbox.add_bounty_to_cart(250)" } {{ 250 | dollars:{ short: true } }}
+              %li
+                %a{ "ng-click" => "recbox.add_bounty_to_cart()" } Custom
+
+          %a.btn.btn-default{ "ng-click" => "recbox.skip()" } No Thanks

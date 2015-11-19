@@ -1,0 +1,11 @@
+<p>
+  You have been invited to join the team <a href="<%= "#{Api::Application.config.www_url}teams/#{@invite.team.to_param}" %>"><%= @invite.team.name %></a>.
+</p>
+
+<p>
+  To accept the invitation, visit the following link: <a href="<%= @invite.url %>"><%= @invite.url %></a>
+</p>
+
+<p>
+  If you do not yet have a Bountysource account, you will need to create one before being added to the team.
+</p>

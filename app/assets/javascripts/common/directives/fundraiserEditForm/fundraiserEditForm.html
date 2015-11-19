@@ -1,0 +1,26 @@
+<div>
+  <!-- Title -->
+  <input id="fundraiser-title" class="form-control" type="text" autofocus="true" name="title" ng-model="fundraiser.title" placeholder="The title of your fundraiser">
+
+  <br />
+
+  <!-- Short description -->
+  <textarea class="form-control lead" rows="2" name="description" ng-model="fundraiser.short_description" placeholder="Briefly describe your fundraiser"></textarea>
+
+  <ng-form name="form-horizontal" class="form-horizontal">
+    <!-- Funding Goal -->
+    <div class="form-group">
+      <label class="col-sm-2" for="funding-goal">Funding Goal</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="funding-goal" type="number" ng-disabled="master.published" ng-model="fundraiser.funding_goal" placeholder="Funding goal">
+      </div>
+    </div>
+  </ng-form>
+
+  <!--Edit main Description-->
+  <div class="alert alert-info">
+    <strong>Protip:</strong> You can format your description using <a href="https://help.github.com/articles/github-flavored-markdown" target="_blank">GitHub Flavored Markdown</a>.
+  </div>
+
+  <textarea id="fundraiser-description" class="form-control" rows="15" ng-model="fundraiser.description" placeholder="A description of your goal with this fundraiser."></textarea>
+</div>

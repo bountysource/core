@@ -1,0 +1,30 @@
+<div ng-show="bounty_claims.length == 0" class="alert alert-info">There are currently no claims in the dispute period.</div>
+<table ng-show="bounty_claims.length > 0" class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Issue</th>
+      <th>Person</th>
+      <th><a ng-click="col = 'created_at'; reverse = !reverse">Submitted</a></th>
+      <th>In Dispute Period</th>
+      <th>Dispute Period Ends At</th>
+      <th>Accepted</th>
+      <th>Disputed</th>
+      <th>Rejected</th>
+      <th>Contested</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="claim in bounty_claims | filter:tabFilter | orderBy:col:reverse" ng-class="{success: claim.collected, warning: claim.disputed || claim.rejected}">
+      <td style="word-wrap: break-word;"><a ng-href="/admin/claim/{{claim.id}}">{{claim.id}}</a></td>
+      <td style="word-wrap: break-word;"><a ng-href="/admin/issues/{{ claim.issue.id }}">{{claim.issue.title}}</a></td>
+      <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{ claim.person.id }}">{{ claim.person.display_name }}</a></td>
+      <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{ claim.person.id }}">{{ claim.created_at | date:'short' }}</a></td>
+      <td><i class="icon-ok" ng-show="claim.in_dispute_period"></i></td>
+      <td>{{ claim.dispute_period_ends_at | date:'short'}}</td>
+      <td><i class="icon-ok" ng-show="claim.collected"></i></td>
+      <td><i class="icon-ok" ng-show="claim.disputed"></i></td>
+      <td><i class="icon-ok" ng-show="claim.rejected"></i></td>
+      <td><i class="icon-ok" ng-show="claim.contested"></i></td>
+    </tbody>
+  </table>

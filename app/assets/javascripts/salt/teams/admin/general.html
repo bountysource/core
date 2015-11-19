@@ -1,0 +1,65 @@
+<h2>Basic Fields (required)</h2>
+
+<form name="form" ng-submit="submit_form()">
+  <div class="form-group">
+    <label for="subtitle">Subtitle</label>
+    <input type="text" class="form-control" id="subtitle" ng-model="form_data.subtitle" placeholder="Ten words or less that describe your mission." />
+  </div>
+  <div class="form-group">
+    <label for="youtube_video_url">Youtube URL</label>
+    <input type="text" class="form-control" id="youtube_video_url" ng-model="form_data.youtube_video_url" placeholder="https://www.youtube.com/watch?..." />
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-6">
+        <label for="body_markdown">Body (markdown)</label>
+        <textarea msd-elastic class="form-control" id="body_markdown" ng-model="form_data.body_markdown" placeholder="Markdown"></textarea>
+      </div>
+      <div class="col-md-6">
+        <label>Body Preview</label>
+        <target-blank model="markdown_preview">
+          <div btf-markdown="markdown_preview" class="well markdown"></div>
+        </target-blank>
+      </div>
+    </div>
+  </div>
+
+  <h2>Advanced Fields (optional)</h2>
+
+  <div class="form-group">
+    <label for="hackernews_share_text">Share Text: HackerNews</label>
+    <input type="text" class="form-control" id="hackernews_share_text" ng-model="form_data.extra.hackernews_share_text" placeholder="Support {{team.name}}: {{form_data.subtitle}}" />
+  </div>
+
+  <div class="form-group">
+    <label for="twitter_share_text">Share Text: Twitter</label>
+    <input type="text" class="form-control" id="twitter_share_text" ng-model="form_data.extra.twitter_share_text" placeholder="Support {{team.name}}: {{form_data.subtitle}}" />
+  </div>
+
+  <div class="form-group">
+    <label for="reddit_share_text">Share Text: Reddit</label>
+    <input type="text" class="form-control" id="reddit_share_text" ng-model="form_data.extra.reddit_share_text" placeholder="Support {{team.name}}: {{form_data.subtitle}}" />
+  </div>
+
+  <!-- <div class="form-group">
+    <label for="googleplus_share_text">Share Text: Google+ (optional)</label>
+    <input type="text" class="form-control" id="googleplus_share_text" ng-model="form_data.extra.googleplus_share_text" placeholder="Support {{team.name}}: {{form_data.subtitle}}" />
+  </div>
+
+  <div class="form-group">
+    <label for="facebook_share_text">Share Text: Facebook (optional)</label>
+    <input type="text" class="form-control" id="facebook_share_text" ng-model="form_data.extra.facebook_share_text" placeholder="Support {{team.name}}: {{form_data.subtitle}}" />
+  </div> -->
+
+  <div class="form-group">
+    <label for="goals_fine_print">Fine Print: Goals</label>
+    <input type="text" class="form-control" id="goals_fine_print" ng-model="form_data.extra.goals_fine_print" placeholder="A sentence or two that explain any caveats about goals." />
+  </div>
+
+  <div class="form-group">
+    <label for="rewards_fine_print">Fine Print: Rewards</label>
+    <input type="text" class="form-control" id="rewards_fine_print" ng-model="form_data.extra.rewards_fine_print" placeholder="A sentence or two that explain any caveats about rewards." />
+  </div>
+
+  <button type="submit" class="btn btn-primary" ng-disabled="form.$pristine || saving_form"><span ng-show="saving_form">Saving...</span><span ng-hide="saving_form">Save</span></button>
+</form>

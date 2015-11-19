@@ -1,0 +1,5 @@
+Hi <%= @person.display_name %>,
+
+<%= @invitee.display_name %> was just added to the <%= @team.name %> team on Bountysource.
+
+You can view the team members here: <%= "#{Api::Application.config.www_url}teams/#{@team.to_param}/members" %>

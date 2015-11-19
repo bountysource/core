@@ -1,0 +1,9 @@
+<ul ng-show="tracker_plugins_count > 0" class="nav nav-tabs">
+  <li ng-class="active_tab('all')"><a href="/tools">All <span class="badge badge-info" ng-show="trackers_count > 0">{{trackers_count}}</span></a></li>
+  <li ng-class="active_tab('installed')"><a href="/tools/installed">Installed <span class="badge badge-info" ng-show="tracker_plugins_count > 0">{{tracker_plugins_count}}</span></a></li>
+</ul>
+
+<div class="alert alert-danger text-center" ng-show="(tracker_plugins_count > 0 && !__can_use_plugin__) || reAuthorize">
+  You must reauthorize your GitHub account to continue. &nbsp;
+  <button class="btn btn-success" ng-click="reauthorize()">Re-Authorize</button>
+</div>

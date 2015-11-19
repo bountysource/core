@@ -1,0 +1,2 @@
+attribute :issues_total
+attribute :trackers_total

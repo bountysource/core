@@ -1,0 +1,4 @@
+.company-tracker-thumbnails li { position: relative; }
+.company-tracker-thumbnails li .close { position: absolute; right: 2px; top: -5px; display: none; opacity: 0.4; }
+.company-tracker-thumbnails li:hover .close { display: block; }
+.company-tracker-thumbnails li:hover .close:hover { opacity: 0.9; }

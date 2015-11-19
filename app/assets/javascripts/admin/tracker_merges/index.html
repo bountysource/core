@@ -1,0 +1,83 @@
+<div>
+  <div class="page-header">
+    <h1>Tracker Merges</h1>
+    <p class="lead">Please don't spam the sync and merge buttons.</p>
+
+    <div>
+      <button class="btn" ng-click="refresh()">Refresh Data</button>
+      <button class="btn btn-warning" ng-click="sync_tracker_merges()" ng-disabled="sync_submitted">Find Merges</button>
+      <em class="text-success" style="padding-left: 10px;" ng-show="sync_submitted">Sync request submitted {{sync_submitted | date:'medium'}}</em>
+    </div>
+  </div>
+
+  <loading-bar ng-hide="tracker_merges">Loading Tracker Merges...</loading-bar>
+
+  <div ng-show="tracker_merges">
+    <div class="well">
+      <label class="checkbox">
+        <input type="checkbox" ng-model="show_merged_trackers" />
+        Show merges that have already been run
+      </label>
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th style="width: 25%;">Old Tracker</th>
+        <th style="width: 25%;">New Tracker</th>
+        <th style="width: 15%;">Created</th>
+        <th style="width: 15%;">Run</th>
+        <th style="width: 5%">ID</th>
+        <th style="width: 15%; text-align: center;"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr ng-repeat="tracker_merge in tracker_merges" orderBy="[-run_at, -created_at]" ng-show="!tracker_merge.run_at || show_merged_trackers" ng-class="{ 'info': tracker_merge.run_at }">
+        <td>
+          <div>
+            <a ng-href="/admin/trackers/{{tracker_merge.old_tracker.slug}}">{{tracker_merge.old_tracker.name}}</a>
+            <button class="btn btn-mini" ng-click="sync_tracker(tracker_merge.old_tracker)">Sync</button>
+            <small ng-show="tracker_merge.old_tracker.$sync_in_progress"><em>Sync in progress...</em></small>
+          </div>
+          <br />
+          <div>
+            <div><code>bounty_total: {{tracker_merge.old_tracker.bounty_total | dollars}}</code></div>
+            <div><code>open_issues: {{tracker_merge.old_tracker.open_issues | number}}</code></div>
+            <div><code>closed_issues: {{tracker_merge.old_tracker.closed_issues | number}}</code></div>
+            <div><code>full_name: {{tracker_merge.old_tracker.full_name}}</code></div>
+            <div><code>url: {{tracker_merge.old_tracker.url}}</code></div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <a ng-href="/admin/trackers/{{tracker_merge.new_tracker.slug}}">{{tracker_merge.new_tracker.name}}</a>
+            <button class="btn btn-mini" ng-click="sync_tracker(tracker_merge.new_tracker)">Sync</button>
+            <small ng-show="tracker_merge.new_tracker.$sync_in_progress"><em>Sync in progress...</em></small>
+          </div>
+          <br />
+          <div>
+            <div><code>bounty_total: {{tracker_merge.new_tracker.bounty_total}}</code></div>
+            <div><code>open_issues: {{tracker_merge.new_tracker.open_issues | number}}</code></div>
+            <div><code>closed_issues: {{tracker_merge.new_tracker.closed_issues | number}}</code></div>
+            <div><code>full_name: {{tracker_merge.new_tracker.full_name}}</code></div>
+            <div><code>url: {{tracker_merge.new_tracker.url}}</code></div>
+          </div>
+        </td>
+        <td>{{tracker_merge.created_at | date:'medium'}}</td>
+        <td>
+          <span ng-hide="tracker_merge.run_at"><em>Merge has not been run</em></span>
+          <span ng-show="tracker_merge.run_at">{{tracker_merge.run_at | date:'medium'}}</span>
+        </td>
+        <td>{{tracker_merge.id}}</td>
+        <td>
+          <div ng-hide="tracker_merge.run_at">
+            <button class="btn btn-warning btn-large btn-block" ng-click="run_tracker_merge(tracker_merge)" ng-disabled="tracker_merge.run_at">Merge Trackers</button>
+            <button class="btn btn-large btn-block btn-danger" ng-click="destroy_tracker_merge(tracker_merge)">Eviscerate</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

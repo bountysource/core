@@ -1,0 +1,13 @@
+Great news, <%= @person.first_name %>!
+
+<% if @thanked_reward %>
+  <%=@issue_suggestion.team.name%> has thanked you for submitting an issue to them and rewarded you with $<%=@thanked_reward.to_i%>.
+<% else %>
+  <%=@issue_suggestion.team.name%> has thanked you for submitting an issue to them.
+<% end %>
+<br/>
+<br/>
+Issue: <a href="https://www.bountysource.com/issues/<%=@issue_suggestion.issue.to_param%>"><%=@issue_suggestion.issue.sanitized_title%></a><br/>
+Project Name: <%=@issue_suggestion.issue.team ? @issue_suggestion.issue.team.name : @issue_suggestion.issue.tracker.display_name %><br/>
+
+View more details <a href="https://www.bountysource.com/issues/<%=@issue_suggestion.issue.to_param%>">from the issue details page</a>.<br/>

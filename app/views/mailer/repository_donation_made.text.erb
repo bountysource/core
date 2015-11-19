@@ -1,0 +1,10 @@
+Repository Donation Made
+========================
+
+Hi <%= @person.first_name %>,
+
+You've just donated <%= @amount.display_whole_amount %> to <%= @repo.name %>.
+
+<%= @repo.name %> committers will be able to use your donation to create bounties on issues within their own project. You can keep track of newly-created bounties here: <%= @repo.frontend_url %>.
+
+If you have any questions, please check out our FAQs (<%= Api::Application.config.www_url %>#faq) or contact us at any of the ways below.

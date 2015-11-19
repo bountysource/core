@@ -1,0 +1,133 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="fundraiser">Such loading wow...</loading-bar>
+    <div class="alert alert-info" ng-show="error">{{ error }}</div>
+    <div class="row-fluid">
+      <div class="span7" style="border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom:15px;">
+        <h3>{{ fundraiser.title }}</h3>
+        <img class="thumbnail" style="width: 100px; height: 100px; margin-bottom:15px; margin-left:20px;" ng-src="{{fundraiser.image_url}}"></img>
+        <ul class="unstyled" style="margin-left:20px;">
+          <li><strong>Author: </strong><a ng-href="/admin/people/{{ fundraiser.person.id }}">{{ fundraiser.person.display_name }}</a></li>
+          <li><strong>Featured: </strong>{{ fundraiser.featured }}</li>
+          <li><strong>Published: </strong>{{ fundraiser.published }}</li>
+          <li><strong>Created: </strong>{{ fundraiser.created_at | date:'medium'}}</li>
+          <li><strong>Last Updated: </strong>{{ fundraiser.updated_at | date:'medium'}}</li>
+          <li><strong>Account: </strong><a ng-href="/admin/accounts/{{ fundraiser.account.id }}">{{ fundraiser.account.id}} ({{ fundraiser.account.type }}) {{ fundraiser.account.balance | dollars }}</a></li>
+        </ul>
+      </div>
+      <div class="span5" style="border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom:15px;">
+        <h3>Settings</h3>
+        <form name="form" style="margin-left:20px;">
+          <label class="checkbox">
+            <input type="checkbox" ng-model="form_data.published">Published</input>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" ng-model="form_data.featured">Featured</input>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" ng-model="form_data.hidden">Hidden</input>
+          </label>
+        <div style="margin-top:20px;">
+          <button class="btn btn-primary" ng-click="updateFundraiser(fundraiser, form_data)" style="margin-right: 5px;">Update</button>
+          <button class="btn" ng-click="resetPage()" style="margin-right: 5px;">Cancel</button>
+          <button class="btn btn-danger" ng-click="deleteFundraiser(fundraiser)">Delete</button>
+        </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span12 admin-box">
+        <h3>Associated Trackers</h3>
+        <table class="table table-narrow" ng-show="trackers.length > 0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>URL</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="tracker in trackers">
+              <td>{{ tracker.id }}</td>
+              <td>{{ tracker.name }}</td>
+              <td>{{ tracker.url }}</td>
+              <td><button class="btn btn-danger" ng-click="removeTracker(tracker.id)">Remove Tracker <span><i class="icon-white-trash"></i></span></button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <form class="form-inline">
+          <img ng-show="working" src="<%= asset_path('ajax-loader.gif') %>"></img>
+          <div class="alert alert-error" ng-show="errors">{{ errors }}</div>
+          <input type="text" ng-model="new_tracker_id" placeholder="Enter a tracker id"></input>
+          <button class="btn btn-primary" ng-click="addTracker()">Add Tracker</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span12 admin-box">
+        <h3>Funding</h3>
+        <div class="span12">
+          <div><strong>{{ fundraiser.total_pledged | dollars }}</strong> of <strong>{{ fundraiser.funding_goal | dollars }}</strong></div>
+          <br>
+          <div class="progress progress-striped" style="margin: 0; width: 60%; display: inline-block; vertical-align: middle;">
+            <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | at_least:15 | at_most:100 | number:0 }}%;">{{100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+          </div>
+        </div>
+        <div ng-show="fundraiser.payout_method">Payout Method: {{ fundraiser.payout_method }}</div>
+        <div style="margin-top:15px;">
+          <h3>Short Description</h3>
+          <p style="margin-left:20px;">{{ fundraiser.short_description }}</p>
+        </div>
+        <h3>About Me</h3>
+        <p style="margin-left:20px">{{ fundraiser.about_me }}</p>
+        <h3>Description</h3>
+        <div ng-bind-html="fundraiser.description_html" style="margin-left:20px;"></div>
+        <h3>Rewards</h3>
+        <hr>
+        <div ng-repeat="reward in fundraiser.rewards">
+          <div>
+            <div><h3><strong>Amount: </strong>{{ reward.amount | dollars }}</h3></div>
+            <div style="width: 200px; display:inline-block"><strong>Claimed: </strong>{{ reward.claimed }}</div>
+            <div style="width: 200px; display:inline-block"><strong>Limited to: </strong>{{ reward.limited_to || "none" }}</div>
+          </div>
+          <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+            <div><strong>Reward Description: </strong>{{ reward.description }}</div>
+            <div><strong>Fullfillment Details: </strong>{{ reward.fulfillment_details }}</div>
+            <caption style="margin-bottom: 5px;"><h4>Backers</h4></caption>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Survey Response</th>
+                <th>Pledged At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="pledge in reward.pledges">
+                <td>{{pledge.id}}</td>
+                <td style="word-wrap: break-word;"><a owner-href="pledge.owner">{{ pledge.owner.display_name }}</a></td>
+                <td style="word-wrap: break-word;">{{ pledge.amount | dollars }}</td>
+                <td style="white-space: pre-wrap">{{ pledge.survey_response }}</td>
+                <td>{{ pledge.created_at | date:'short' }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+</div>

@@ -1,0 +1,15 @@
+<ng-include src="'salt/teams/_support_header_title.html'"></ng-include>
+
+<div class="container">
+  <ng-include src="'salt/teams/_tabs.html'"></ng-include>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <ul class="nav nav-pills nav-stacked" ng-include="'salt/teams/admin/_tabs.html'">
+      </ul>
+    </div>
+    <div class="col-sm-10">
+      <ui-view/>
+    </div>
+  </div>
+</div>

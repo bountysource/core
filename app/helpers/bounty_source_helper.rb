@@ -1,0 +1,2 @@
+module BountySourceHelper
+end

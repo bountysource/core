@@ -1,0 +1,28 @@
+<h2>Community Updates</h2>
+
+<div class="alert alert-info">
+  <p>We recommend sending an update once a month. Include any accomplishments from the previous month as well as goals for the coming month.</p>
+  <p><button class="btn btn-primary" ui-sref="root.teams.admin.updates.new({ slug: team.slug })">Email Your Community</button></p>
+</div>
+
+<table ng-show="updates.length > 0" class="table">
+  <thead>
+    <tr>
+      <th>Published</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="update in updates">
+    <tr>
+      <td>
+        <span ng-show="update.published_at">{{update.published_at | date }}</span>
+        <span ng-hide="update.published_at">Draft</span>
+      </td>
+      <td>
+        <span ng-show="update.number">#{{update.number}}: </span>
+        <a ng-show="update.published_at" ui-sref="root.teams.updates.show({ team: team.slug, number: update.slug })">{{update.title}}</a>
+        <a ng-hide="update.published_at" ui-sref="root.teams.admin.updates.new({ team: team.slug, id: update.id })">{{update.title || "(untitled)"}}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

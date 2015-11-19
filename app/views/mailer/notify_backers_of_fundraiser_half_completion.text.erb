@@ -1,0 +1,7 @@
+Dear <%= @person.display_name %>,
+
+A fundraiser you backed, <%= @fundraiser.title %>, is now 50% funded.
+
+Help the fundraiser get to 100% by <%= @fundraiser.ends_at.strftime("%B %d, %Y") %>, keep spreading the word!
+
+<%= @fundraiser.frontend_url %>

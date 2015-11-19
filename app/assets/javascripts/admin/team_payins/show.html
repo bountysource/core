@@ -1,0 +1,5 @@
+<h1>Team Payin #{{team_payin.id}}</h1>
+<div ng-include="'admin/team_payins/index.html'"></div>
+
+
+<button class="btn btn-danger" ng-click="refund()" ng-hide="!team_payin.id || team_payin.refunded_at">Refund</button>

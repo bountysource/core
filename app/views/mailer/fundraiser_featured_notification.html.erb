@@ -1,0 +1,3 @@
+<p>Dear <%= @person.display_name %>,</p>
+
+<p>Your fundraiser, <a href="<%= @fundraiser.frontend_url %>"><%= @fundraiser.title %></a>, is now featured on our <a href="<%= Api::Application.config.www_url %>">home page</a>. Cheers!</p>

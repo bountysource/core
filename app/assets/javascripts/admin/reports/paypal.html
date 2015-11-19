@@ -1,0 +1,159 @@
+<div ng:include src="'admin/reports/partials/header.html'"></div>
+<div>
+  <div>
+    <form class="form-inline" ng-submit="generate_report()" name="form">
+      <input type="date" ng-model="startDate" required autofocus="true" />
+      <span style="margin: 0 10px;">-</span>
+      <input type="date" ng-model="endDate" required />
+      <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">Build Report</button>
+    </form>
+  </div>
+
+  <br />
+
+  <tabset ng-show="!loading_transactions && !loading_start_balance && !loading_end_balance">
+    <tab heading="Report">
+      <loading-bar ng-show="loading_transactions || loading_start_balance || loading_end_balance">Generating Report...</loading-bar>
+
+      <div ng-show="!loading_transactions && !loading_start_balance && !loading_end_balance">
+        <div class="row-fluid">
+          <div class="span6 offset2">
+            <table class="table table-striped table-bordered table-hover">
+              <thead>
+              <tr>
+                <td colspan="2" style="text-align: center;">
+                  <strong>PayPal Report</strong>
+                  <div>{{startDate}} <strong>-</strong> {{endDate}}</div>
+                </td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="row in report_rows">
+                <td style="text-align: right;" class="span4">
+                  <span>{{row.name}}</span>
+                </td>
+                <td style="text-align: left;" class="span8">
+                  <span>{{row.value}}</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </tab>
+
+    <tab heading="Transactions">
+      <loading-bar ng-show="loading_transactions">Loading transactions...</loading-bar>
+
+      <div ng-show="!loading_transactions && transactions">
+        <div class="well">
+          <div class="row-fluid">
+            <div class="span3">
+              <div>
+                <div>Gross: <strong>{{totals.gross | currency}}</strong></div>
+                <div>Processing Fee: <strong>{{totals.processing_fee | currency}}</strong></div>
+                <div>Bountysource Fee: <strong>{{totals.bountysource_fee | currency}}</strong></div>
+                <div>Liability: <strong>{{totals.liability   | currency}}</strong></div>
+                <div>
+                  <button class="btn btn-default btn-small" ng-click="update_totals()">Update</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="span5">
+              <div>
+                <input class="span12" type="text" ng-model="transaction_filters.description" placeholder="Filter transactions by Description" />
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="transaction_filters.show_incomplete" />
+                  <span>Show incomplete Transactions <code>transaction.gross <= 0</code></span>
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="transaction_filters.show_complete" />
+                  <span>Show complete Transactions <code>transaction.gross > 0</code></span>
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="transaction_filters.show_splits" />
+                  <span>Show splits</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="span4">
+              <div>
+                <div><strong>{{(transactions | filter:transactionFilter).length | number}}</strong> Transactions shown</div>
+                <div><strong>{{(transactions | filter:{$selected: true}).length | number}}</strong> Transactions selected</div>
+                <div ng-show="(transactions | filter:transactionFilter | filter:{$selected: true}).length > 0">
+                  <button class="btn btn-danger" ng-click="delete_selected_transactions()">Delete All</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="!loading_transactions && (transactions | filter:transactionFilter).length <= 0">
+        <alert type="info">No transactions found for date range.</alert>
+      </div>
+
+      <div ng-show="!loading_transactions && (transactions | filter:transactionFilter).length > 0">
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+          <tr>
+            <th>
+              <input type="checkbox" ng-click="toggle_select_all_transactions()" ng-model="toggle_select_all_transactions_value" />
+            </th>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Gross</th>
+            <th>Processing</th>
+            <th>Fee</th>
+            <th>Liability</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="transaction in transactions | orderBy:['+created_at'] | filter:transactionFilter" ng-class="{ 'warning': !(transaction.gross > 0 || transaction.fee > 0 || transaction.processing_fee > 0) }">
+            <td>
+              <input type="checkbox" ng-model="transaction.$selected" />
+            </td>
+            <td>
+              <a ng-href="/admin/transactions/{{transaction.id}}">{{transaction.id}}</a>
+            </td>
+            <td>
+              <span ng-show="transaction.type">{{transaction.type}}</span>
+              <small ng-hide="transaction.type" class="muted text-muted"><em>none</em></small>
+            </td>
+            <td>{{transaction.created_at | date:'medium'}}</td>
+            <td>
+              <div ng-show="transaction.description">
+                <div><a ng-href="/admin/transactions/{{transaction.id}}">{{transaction.description}}</a></div>
+                <br ng-show="transaction_filters.show_splits" />
+              </div>
+              <table class="table table-bordered" ng-show="transaction_filters.show_splits">
+                <tr ng-repeat="split in transaction.splits">
+                  <td>
+                    <span>{{split.amount | currency}}</span>
+                  </td>
+                  <td>
+                    <a ng-href="/admin/accounts/{{split.account.id}}">{{split.account.type}}</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>{{transaction.gross | currency}}</td>
+            <td>{{transaction.processing_fee | currency}}</td>
+            <td>{{transaction.fee | currency}}</td>
+            <td>{{transaction.liability | currency}}</td>
+            <td>
+              <a ng-href="/admin/transactions/{{transaction.id}}/edit" target="_blank" class="btn btn-mini">Edit</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </tab>
+  </tabset>
+</div>

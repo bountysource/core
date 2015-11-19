@@ -1,0 +1,74 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="tracker">Such loading wow...</loading-bar>
+    <div class="row-fluid">
+      <div class="span6 admin-box">
+        <div class="row-fluid">
+          <div class="span9">
+            <img class="thumbnail" ng-src="{{ tracker.image_url }}" style="height:50px; width:50px; display:inline"></img>
+            <h3 style="display:inline">Tracker #{{tracker.id}}</h3>
+          </div>
+
+          <div class="span3">
+            <div>
+              <button ng-click="fullSync(tracker.id)" style="margin-top:15px; display:inline" class="btn btn-block btn-success">Initiate Full Sync</button>
+              <p style="margin-top:15px;">NOTE: Can take 5-10 minutes to complete!</p>
+            </div>
+          </div>
+
+        </div>
+        <form name="form">
+          <div class="control-group">
+            <div class="control-label">Name</div>
+            <div class="controls"><input class="span12" type="text" ng-model="form_data.name"></input></div>
+          </div>
+          <div class="control-group">
+            <div class="control-label">Image URL</div>
+            <div class="controls"><input class="span12" type="text" ng-model="form_data.image_url" placeholder="URL, twitter:bountysource, facebook:bountysource, gravatar email"></input></div>
+          </div>
+          <div class="control-group">
+            <div class="control-label">Tracker URL</div>
+            <div class="controls"><input class="span12" type="text" ng-model="form_data.url"></input></div>
+          </div>
+          <div class="control-group">
+            <div class="control-label">Description</div>
+            <div class="controls"><textarea class="span12" type="text" ng-model="form_data.description" rows="8"></textarea></div>
+          </div>
+          <div class="control-group">
+            <div class="control-label">Repository URL</div>
+            <div class="controls"><input class="span12" type="text" ng-model="form_data.repo_url" rows="8"></input></div>
+          </div>
+          <div class="control-group">
+            <div class="control-label">Homepage</div>
+            <div class="controls"><input class="span12" type="text" ng-model="form_data.homepage" rows="8"></input></div>
+          </div>
+
+          <div class="alert alert-success" ng-show="notice">{{ notice }}!</div>
+
+          <div class="control-group">
+            <div class="controls">
+              <button class="btn btn-primary pull-left" ng-click="updateTracker(tracker)" style="margin-right: 10px;">Update</button>
+              <button class="btn pull-left" ng-click="resetPage()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="span6">
+        <div class="admin-box">
+          <h3>Team</h3>
+          <div ng-if="tracker.team">
+            Current:
+            <a ng-href="/admin/teams/{{tracker.team.slug}}">{{tracker.team.name}}</a><br/>
+          </div>
+          <div>
+            <a ng-click="convertToTeam()" class="btn btn-primary">Create Team From This Tracker</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

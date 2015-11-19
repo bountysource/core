@@ -1,0 +1,34 @@
+<form class="form-horizontal form-signin" name="form" novalidate="">
+  <h2>Reset your password</h2>
+  <p>Enter your email address to have a confirmation</p>
+
+  <div class="alert alert-danger alert-danger" ng-show="error">{{error}}</div>
+
+  <div class="form-group" ng-class="{ error: (show_validations && form.email.$invalid) || (form.email.$error.email) }">
+    <label class="control-label" for="inputEmail">Email Address:</label>
+    <div class="controls">
+      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" required="" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group" ng-class="{ error: (show_validations && form.code.$invalid) }">
+    <label class="control-label" for="inputCode">Reset Code:</label>
+    <div class="controls">
+      <input type="text" name="code" id="inputCode" placeholder="abcd1234" ng-model="form_data.code" class="input-medium form-control" required="">
+    </div>
+  </div>
+
+  <div class="form-group" ng-class="{ error: (show_validations && form.new_password.$invalid) || (form.new_password.$error.pattern || form.new_password.$error.minlength) }">
+    <label class="control-label" for="inputPassword">New Password:</label>
+    <div class="controls">
+      <input type="password" name="new_password" id="inputPassword" placeholder="abcd1234" ng-model="form_data.new_password" class="input-medium form-control" required="" tooltip="Letter, number and 8+ characters." tooltip-placement="right" tooltip-trigger="focus">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success" ng-click="reset_password()">Reset Password</button>
+    </div>
+  </div>
+
+</form>

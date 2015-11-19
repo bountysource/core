@@ -1,0 +1,25 @@
+<% if @issue %>
+  <% content_for :head do %>
+
+    <meta name="description" content="<%=h @issue.title %>" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Bountysource" />
+    <meta name="twitter:title" content="<%= title_helper(@issue) %>" />
+    <meta name="twitter:description" content="<%=h @issue.title %>" />
+    <meta name="twitter:image:src" content="<%=@issue.tracker.large_image_url%>" />
+
+    <meta property="og:title" content="<%= title_helper(@issue) %>" />
+    <meta property="og:image" content="<%=@issue.tracker.large_image_url%>" />
+    <meta property="og:url" content="<%=@issue.frontend_url%>" />
+    <meta property="og:description" content="<%=h @issue.tracker.name%>" />
+    <meta property="og:site_name" content="Bountysource" />
+  <% end %>
+
+  <% content_for :body do %>
+    <div style="display:none">
+      <h1><%=@issue.title%></h1>
+      <h2><%=sanitize(raw(@issue.body))%></h2>
+    </div>
+  <% end %>
+<% end %>

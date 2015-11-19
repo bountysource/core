@@ -1,0 +1,48 @@
+<div ng-controller="FundraiserPledgesController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/fundraisers">Fundraisers</a></li>
+    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a></li>
+    <li><a>Backers</a></li>
+  </ul>
+
+  <fundraiser-template fundraiser="fundraiser" options="{ showTopBackers: false }">
+    <div class="alert alert-info" ng-show="pledges.length <= 0">No pledges have been made. <a ng-href="/fundraisers/{{fundraiser.slug}}/pledge">Why don't you make the first pledge?</a></div>
+
+    <loading-bar ng-hide="pledges">Loading...</loading-bar>
+
+    <table ng-show="pledges && pledges.length > 0" class="table table-striped pledges-table">
+      <tr>
+        <th><a ng-click="sort_by('person.display_name')">Backer</a></th>
+        <th></th>
+        <th><a ng-click="sort_by('amount')">Amount</a></th>
+        <th><a ng-click="sort_by('created_at')">Date</a></th>
+      </tr>
+
+      <tr ng-repeat="pledge in pledges | orderBy:sort_column:sort_reverse">
+        <!--Profile picture. No link if anon-->
+        <td style="width:70px">
+          <div ng-show="pledge.owner">
+            <a owner-href="pledge.owner">
+              <img class="thumbnail" ng-src="{{ pledge.owner.image_url }}">
+            </a>
+          </div>
+          <img ng-hide="pledge.owner" class="thumbnail" src='<%= asset_path("anon.jpg") %>'>
+        </td>
+
+        <td>
+          <a ng-show="pledge.owner" owner-href="pledge.owner">{{pledge.owner.display_name}}</a>
+          <div ng-hide="pledge.owner" class="text-muted">Anonymous</div>
+        </td>
+
+        <td>
+          <div>{{ pledge.amount | dollars }}</div>
+        </td>
+
+        <td>
+          <div class="text-muted">{{ pledge.created_at | date }}</div>
+        </td>
+      </tr>
+    </table>
+  </fundraiser-template>
+</div>

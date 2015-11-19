@@ -1,0 +1,34 @@
+table#bounties-table tr td {
+  vertical-align: middle;
+}
+table#bounties-table tr td:nth-child(1) { width: 60px; }
+table#bounties-table tr td img.thumbnail {
+  width: 50px;
+  height: 50px;
+}
+
+table#solutions-table tr td {
+  vertical-align: middle;
+}
+table#solutions-table tr td img.thumbnail {
+  width: 130px;
+  height: 130px;
+}
+
+.bounty-buttons .btn { margin-top: 0; }
+.bounty-buttons .controls { margin-top: 10px; }
+.bounty-buttons .controls:first-of-type { margin-top: 0; }
+
+.no-stripe td { border-top: 0; background-color: transparent !important; }
+
+td.imagerow {
+  width: 60px;
+}
+
+td.noimagerow {
+  width: 0px;
+}
+/*
+.ng-binding li {
+	line-height: 0px;
+}*/

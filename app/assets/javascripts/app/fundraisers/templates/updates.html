@@ -1,0 +1,23 @@
+<div class="alert alert-info" ng-hide="fundraiser.updates.length > 0">
+  No updates have been published.
+</div>
+
+<table ng-show="fundraiser.updates.length > 0" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Update</th>
+      <th>Published</th>
+    </tr>
+  </thead>
+
+  <tbody><tr ng-repeat="update in fundraiser.updates">
+    <td>
+      <a ng-href="/fundraisers/{{ fundraiser.slug }}/updates/{{ update.id }}">
+        #{{ update.number }} {{ update.title }}
+      </a>
+    </td>
+    <td>
+      <div class="text-muted">{{ update.published_at | date }}</div>
+    </td>
+  </tr>
+</tbody></table>

@@ -1,0 +1,11 @@
+<p>Hi <%= @person.display_name %>,</p>
+
+<p>
+  <% if @person == @admin %>You<% else %><a href="<% "#{Api::Application.config.www_url}people/#{@admin.to_param}" %>"><%= @admin.display_name %></a><% end %>
+  credited the <a href="<% "#{Api::Application.config.www_url}teams/#{@team.to_param}" %>"><%= @team.name %></a> account with <strong><%= number_to_currency(@amount, unit: "$", precision: 0) %></strong>.
+  The current balance of <strong><%= number_to_currency(@team.account_balance, unit: "$", precision: 0) %></strong> is available to spend immediately.
+</p>
+
+<p>
+  View your <a href="<%= "#{Api::Application.config.www_url}teams/#{@team.to_param}" %>">team profile page</a> or <a href="<%= "#{Api::Application.config.www_url}trackers" %>">browse projects</a>.
+</p>

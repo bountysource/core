@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-sm-6">
+    <table class="table timeline">
+      <tr ng-repeat="event in events" ng-class="{featured: event.bounty.featured}">
+
+        <td class="big-icon">
+          <img ng-src="{{event.actor.image_url_small}}" class="img-responsive img-rounded"/>
+        </td>
+
+        <td class="bounty-description">
+
+          <div ng-if="event.event==='team_payin_created'">
+            {{event.actor.display_name}}
+            contributed {{event.team_payin.amount | dollars}} to
+            <a ng-href="/teams/{{event.team.slug}}">{{event.team.display_name}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | date }}</span>.
+          </div>
+
+          <div ng-if="event.event==='pledge_created'">
+            {{event.actor.display_name}}
+            pledged {{event.pledge.amount | dollars}} to
+            <a ng-href="/teams/{{event.team.slug}}">{{event.team.display_name}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | date }}</span>.
+          </div>
+
+          <div ng-if="event.event==='support_level_created'">
+            {{event.actor.display_name}}
+            contributed {{event.support_level.amount | dollars}}/month to
+            <a ng-href="/teams/{{event.team.slug}}">{{event.team.display_name}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | date }}</span>.
+          </div>
+
+          <target-blank model="event">
+            <div ng-if="event.body_html" ng-bind-html="event.body_html | trusted_html" class="timeline-body-html" style="width: 100%; overflow: auto"></div>
+          </target-blank>
+
+          <div class="secondary-text" ng-if="event.tracker || event.team || !dateInPrimary">
+            <a ng-href="/teams/{{event.team.slug}}" ng-if="event.team"><img ng-src="{{event.team.image_url_small}}" style="width:16px;height:16px;margin-right:4px" />{{event.team.display_name}}</a>
+            <span tooltip="{{event.timestamp | date}}" tooltip-placement="right">{{event.timestamp | date }}</span>
+            <span class="label label-success" ng-if="event.bounty.featured">Featured</span>
+          </div>
+
+          <div ng-if="event.event==='issue_created' && issue">
+            <p><share-badge badge-type="issue" badge-object="issue"></share-badge></p>
+          </div>
+        </td>
+
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-sm-6" ng-show='show_charts'>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default" ng-class="{'active': time_period === 'daily'}" ng-click="viewCharts('daily', hide_current_period)">Daily</button>
+      <button type="button" class="btn btn-default" ng-class="{'active': time_period === 'weekly'}" ng-click="viewCharts('weekly', hide_current_period)">Weekly</button>
+      <button type="button" class="btn btn-default" ng-class="{'active': time_period === 'monthly'}" ng-click="viewCharts('monthly', hide_current_period)">Monthly</button>
+      <button type="button" class="btn btn-default" ng-class="{'active': time_period === 'quarterly'}" ng-click="viewCharts('quarterly', hide_current_period)">Quarterly</button>
+    </div>
+
+    <label><input type="checkbox" ng-model="hide_current_period" ng-click="viewCharts(time_period, !hide_current_period)" /> Show Current Period</label>
+
+    <div id="chart_donations_sum_summary" style="width: 100%; height:300px"></div>
+    <div id="chart_donations_count_summary" style="width: 100%; height:300px"></div>
+  </div>
+</div>

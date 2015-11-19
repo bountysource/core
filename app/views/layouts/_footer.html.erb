@@ -1,0 +1,16 @@
+<div style="color: #888 !important">
+  <a href="https://www.bountysource.com/" style="color: #888 !important">www.bountysource.com</a> (Web)<br/>
+  <a href="mailto:support@bountysource.com" style="color: #888 !important">support@bountysource.com</a> (Email)<br/>
+  <a href="irc://irc.freenode.net/bountysource" style="color: #888 !important">#Bountysource</a> (IRC)<br/>
+  <a href="https://twitter.com/Bountysource" style="color: #888 !important">@Bountysource</a> (Twitter)<br/>
+  <a href="https://www.facebook.com/Bountysource" style="color: #888 !important">Bountysource</a> (Facebook)<br/>
+  Bountysource Inc., 548 Market St. #40189, San Francisco, CA 94104-5401  (Mail)
+
+  <% if @unsubscribe_type %>
+    <br/><br/>
+    <a href="<%= "#{Api::Application.config.www_url}notifications/unsubscribe?#{{email: @person.email, type: @unsubscribe_type}.to_param}" %>" style="color: #888 !important">Unsubscribe</a>
+  <% elsif @unsubscribe_link %>
+    <br/><br/>
+    <a href="<%=@unsubscribe_link%>" style="color: #888 !important">Unsubscribe</a>
+  <% end %>
+</div>

@@ -1,0 +1,16 @@
+<p>Dear <%= @person.display_name %>,</p>
+
+<p>A fundraiser that you recently backed, <a href="<%= @fundraiser.frontend_url %>"><%= @fundraiser.title %></a>, has just reached its funding goal!</p>
+
+<p>Congratulations on contributing to its success!</p>
+
+<% if @fundraiser.days_remaining >= 2 %>
+  <p>There are still <%= @fundraiser.days_remaining %> days left in the fundraiser. Get your friends to pledge by sharing the fundraiser: <%= @fundraiser.frontend_url %></p>
+  
+<% else %>
+
+<p>There are less than 2 days left to pledge to the fundraiser. Keep spreading the word: <%= @fundraiser.frontend_url %></p>
+  
+<% end %>
+
+<p>Now that you know how successful a fundraiser can be, why not <a href ="<%= "#{Api::Application.config.www_url}#account/create_fundraiser" %>">create your own?</a></p>

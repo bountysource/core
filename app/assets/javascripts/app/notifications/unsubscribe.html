@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="well">
+      <h2 style="margin-top:0">Unsubscribe</h2>
+
+      <div ng-show="loading">
+        <loading-bar>Just a moment please...</loading-bar>
+      </div>
+
+      <div ng-show="error">
+        <p class="lead text-danger">Oh no! Something went wrong, please contact <a nref="email:support@bountysource.com">support@bountysource.com</a>.</p>
+      </div>
+
+      <form class="form" ng-hide="error || approved || loading">
+
+        <div ng-show="type.indexOf('bounty_alerts_tracker_') >= 0">
+          <p class="lead">Are you sure you want to unsubscribe from Bounty Alerts for "{{tracker.full_name}}"?</p>
+        </div>
+
+        <div ng-show="type === 'bounty_alerts'">
+          <p class="lead">Are you sure you want to unsubscribe from Bounty Alerts for all teams?</p>
+        </div>
+
+        <div ng-show="type.indexOf('team_updates_') >= 0">
+          <p class="lead">Are you sure you want to unsubscribe from {{team.name}} Team Updates?</p>
+        </div>
+
+        <div ng-show="type === 'team_updates'">
+          <p class="lead">Are you sure you want to unsubscribe from Team Updates from all teams?</p>
+        </div>
+
+        <div ng-show="type.indexOf('bounty_alerts') == -1 && type.indexOf('team_updates') == -1">
+          <p class="lead">Are you sure you want to unsubscribe from {{type}} emails?</p>
+        </div>
+
+        <button ng-click="unsubscribe(type)" class="btn btn-success btn-lg">Unsubscribe</button>
+        <a ng-href="https://salt.bountysource.com/" class="btn btn-default btn-lg">Cancel</a>
+      </form>
+
+      <div ng-show="approved">
+        <p class="lead">You are now unsubscribed.</p>
+
+        <div style="margin-bottom:30px">
+          <a href="https://salt.bountysource.com/" class="btn btn-primary btn-lg">Continue to Bountysource</a>
+        </div>
+
+        <div ng-show="type != 'all'">
+          <i>
+            You can also
+            <span ng-show="type.indexOf('bounty_alerts_tracker_') >= 0"><a ng-href="/notifications/unsubscribe?email={{email}}&type=bounty_alerts">unsubscribe from all bounty alerts</a> or </span>
+            <span ng-show="type.indexOf('team_updates_') >= 0"><a ng-href="/notifications/unsubscribe?email={{email}}&type=team_updates">unsubscribe from all team updates</a> or </span>
+            <a ng-href="/notifications/unsubscribe?email={{email}}&type=all">unsubscribe from all emails</a>.
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

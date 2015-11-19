@@ -1,0 +1,16 @@
+Dear <%= @person.display_name %>,
+
+A fundraiser that you recently backed, <%= @fundraiser.title %>, has just reached its funding goal!
+
+Congratulations on contributing to its success!
+<% if @fundraiser.days_remaining >= 2 %>
+
+There are still <%= @fundraiser.days_remaining %> days left in the fundraiser. Get your friends to pledge by sharing the fundraiser: <%= @fundraiser.frontend_url %>
+
+<% else %>
+
+There are less than 2 days left to pledge to the fundraiser. Keep spreading the word: <%= @fundraiser.frontend_url %>
+
+<% end %>
+
+Now that you know how successful a fundraiser can be, why not create your own? Simply log in and click "Create Fundraiser" from the user menu.

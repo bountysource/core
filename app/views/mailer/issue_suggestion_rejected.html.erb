@@ -1,0 +1,12 @@
+Hi <%= @person.first_name %>,<br/>
+<br/>
+Unfortunately <%=@issue_suggestion.team.name%> has rejected the issue you nominated for a bounty.<br/>
+<br/>
+Issue: <a href="https://www.bountysource.com/issues/<%=@issue_suggestion.issue.to_param%>"><%=@issue_suggestion.issue.sanitized_title%></a><br/>
+Project Name: <%=@issue_suggestion.issue.team ? @issue_suggestion.issue.team.name : @issue_suggestion.issue.tracker.display_name %><br/>
+<% unless @issue_suggestion.rejection_reason.blank? %>
+<%=@issue_suggestion.team.name%> provided this comment:<br/>
+<%=@issue_suggestion.rejection_reason%><br/>
+<% end %>
+<br/>
+View more details <a href="https://www.bountysource.com/issues/<%=@issue_suggestion.issue.to_param%>">from the issue details page</a>.<br/>

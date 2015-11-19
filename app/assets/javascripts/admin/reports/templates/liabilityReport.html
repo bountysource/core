@@ -1,0 +1,59 @@
+<div class="row-fluid">
+  <div class="span5">
+    <table class="table table-striped table-bordered">
+      <tr><th colspan="2">Start Liability</th></tr>
+
+      <tr ng-repeat="account in report.accounts">
+        <td>{{account.type}}</td>
+        <td>{{account.balance | currency}}</td>
+      </tr>
+
+      <tr>
+        <th>Total</th>
+        <th>{{report.start_liability | currency}}</th>
+      </tr>
+
+      <tr><td colspan="2"></td></tr>
+      <tr><th colspan="2">Orders</th></tr>
+
+      <tr>
+        <td>PayPal</td>
+        <td>{{report.paypal_orders | currency}}</td>
+      </tr>
+
+      <tr>
+        <td>Google Wallet</td>
+        <td>{{report.google_wallet_orders | currency}}</td>
+      </tr>
+
+      <tr>
+        <td>Bank of America</td>
+        <td>{{report.bank_of_america_orders | currency}}</td>
+      </tr>
+
+      <tr><th colspan="2">Cash Outs</th></tr>
+
+      <tr>
+        <td>PayPal</td>
+        <td>{{report.paypal_cash_outs | currency}}</td>
+      </tr>
+
+      <tr>
+        <td>Google Wallet</td>
+        <td>{{report.google_wallet_cash_outs | currency}}</td>
+      </tr>
+
+      <tr>
+        <td>Bank of America</td>
+        <td>{{report.bank_of_america_cash_outs | currency}}</td>
+      </tr>
+
+      <tr><td colspan="2"></td></tr>
+
+      <tr>
+        <td style="width:30%">End Liability</td>
+        <td>{{report.end_liability | currency}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

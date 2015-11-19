@@ -1,0 +1,43 @@
+<div class="row-fluid">
+  
+  <div class="span12">
+    <loading-bar ng-hide="!working">Such loading wow...</loading-bar>
+
+    <div>
+      <h3 style="margin-top:0px;">Solutions</h3>
+      <p style="margin-top:5px;">Total Solutions: {{ solutions.length | number}}</p>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th><a ng-click="update_sort('id')">ID</a></th>
+            <th><a ng-click="update_sort('created_at')">Created On</a></th>
+            <th>Event Type / Event Date</th>
+            <th>Issue</th>
+            <th>Person</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="solution in solutions | orderBy:sort.col:sort.reverse">
+            <td>{{ solution.id }}</td>
+            <td>{{ solution.created_at | date:'short' }}</td>
+            <td>
+              <table>
+                <tbody>
+                  <tr ng-repeat="event in solution.solution_events">
+                    <td>{{ event.type }}</td>
+                    <td>{{ event.created_at | date:'short' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td><a ng-href="/admin/issues/{{ solution.issue.id }}">{{ solution.issue.title }}</a></td>
+            <td><a ng-href="/admin/people/{{ solution.person.id }}">{{ solution.person.display_name }}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

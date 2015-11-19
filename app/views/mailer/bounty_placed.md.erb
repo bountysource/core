@@ -1,0 +1,7 @@
+Hi <%= @person.display_name %>,
+
+A bounty has just been posted on a project you follow, <%= @bounty.issue.tracker.name %>: <%= number_to_dollars(@bounty.amount) %> on <%= @bounty.issue.title %> by <%= @bounty.owner_display_name %>.
+
+The bounty will be awarded to the developer who successfully closes out this issue.
+
+You can view the issue and increase the bounty at <%= "#{Api::Application.config.www_url}issues/#{@bounty.issue.to_param}" %>

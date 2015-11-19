@@ -1,0 +1,149 @@
+<div ng-controller="FundraiserRewardInfoController">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/fundraisers">Fundraisers</a></li>
+    <li><a ng-href="/fundraisers/{{ fundraiser.id }}">{{ fundraiser.title || 'Loading...' }}</a></li>
+    <li><a>Rewards</a></li>
+  </ul>
+
+<!--   <div ng-include="'app/fundraisers/templates/header.html'"></div>
+  <div ng-include="'app/fundraisers/templates/nav_tabs.html'"></div> -->
+
+  <fundraiser-template fundraiser="fundraiser" options="{showLeftColumn: false, showRightColumn: false}">
+    <div class="row" ng-show="fundraiser">
+      <div class="col-md-3">
+        <ng-include src="'app/fundraisers/templates/leftColumn.html'"></ng-include>
+      </div>
+
+      <div class="col-md-6">
+        <loading-bar ng-hide="rewards">Loading rewards...</loading-bar>
+
+        <div ng-show="rewards">
+          <button ng-show="expand_all" class="btn btn-default" ng-click="toggle_expand_all()">Collapse All</button>
+          <button ng-hide="expand_all" class="btn btn-default" ng-click="toggle_expand_all()">Expand All</button>
+          <br><br>
+
+          <accordion close-others="false">
+            <div ng-repeat="reward in rewards | orderBy:'amount'">
+              <div ng-if="reward.amount <= 0">
+                <accordion-group heading="No Reward" is-open="reward.$is_open">
+                  <div class="row">
+                    <div class="col-sm-3 col-md-3">
+                      <dl>
+                        <dt>Stats</dt>
+                        <dd>{{reward.pledges.length| number}} claimed</dd>
+                        <br>
+                        <dt>Description</dt>
+                        <dd><i>No reward selected</i></dd>
+                      </dl>
+                    </div>
+
+                    <div class="col-sm-9 col-md-9">
+                      <div ng-show="reward.pledges.length <= 0" class="alert alert-info" style="margin: 0;">This reward
+                        has not been claimed by a backer.
+                      </div>
+
+                      <table ng-show="reward.pledges.length > 0" class="table table-bordered table-striped pledges-table">
+                        <thead>
+                        <tr>
+                          <th>Backer</th>
+                          <th>Amount</th>
+                          <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="pledge in reward.pledges">
+                          <td>
+                            <a ng-show="pledge.owner" ng-href="/people/{{ pledge.owner.slug }}">{{
+                              pledge.owner.display_name }}</a>
+
+                            <div ng-hide="pledge.owner" class="text-muted">Anonymous</div>
+                          </td>
+                          <td>{{ pledge.amount | currency }}</td>
+                          <td>{{ pledge.created_at | date:'medium' }}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </accordion-group>
+              </div>
+
+              <div ng-if="reward.amount > 0">
+                <accordion-group is-open="reward.$is_open">
+                  <accordion-heading>
+                    ${{reward.amount | number:0}} Reward
+                    <small ng-show="reward.limited_to" class="text-muted">{{reward.pledges.length| number}} of
+                      {{reward.limited_to | number}} claimed
+                    </small>
+                    <small ng-hide="reward.limited_to" class="text-muted">{{reward.pledges.length| number}} claimed
+                    </small>
+                  </accordion-heading>
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-3">
+                      <dl>
+                        <dt>Stats</dt>
+                        <dd ng-show="reward.limited_to">{{reward.pledges.length| number}} of {{reward.limited_to |
+                          number}} claimed
+                        </dd>
+                        <dd ng-hide="reward.limited_to">{{reward.pledges.length| number}} claimed</dd>
+                        <br>
+                        <dt>Description</dt>
+                        <dd style="white-space: pre-wrap;">{{reward.description}}</dd>
+                        <div ng-show="reward.fulfillment_details">
+                          <br>
+                          <dt>Fulfillment Details</dt>
+                          <dd style="white-space: pre-wrap;">{{reward.fulfillment_details}}</dd>
+                        </div>
+                      </dl>
+                    </div>
+
+                    <div class="col-sm-9 col-md-9">
+                      <div ng-show="reward.pledges.length <= 0" class="alert alert-info" style="margin: 0;">This reward
+                        has not been claimed by a backer.
+                      </div>
+
+                      <table ng-show="reward.pledges.length > 0" class="table table-bordered table-striped pledges-table">
+                        <thead>
+                        <tr>
+                          <th>Backer</th>
+                          <th>Amount</th>
+                          <th>Date</th>
+                          <th ng-show="reward.fulfillment_details">Survey Response</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="pledge in reward.pledges">
+                          <td>
+                            <a ng-show="pledge.owner" ng-href="/people/{{ pledge.owner.slug }}">{{
+                              pledge.owner.display_name }}</a>
+
+                            <div ng-hide="pledge.owner" class="text-muted">Anonymous</div>
+                          </td>
+                          <td>{{ pledge.amount | currency }}</td>
+                          <td>{{ pledge.created_at | date:'medium' }}</td>
+                          <td ng-show="reward.fulfillment_details">
+                            <div ng-class="{ error: (reward.fulfillment_details && !pledge.survey_response) }"
+                                 style="white-space: pre-wrap">{{pledge.survey_response}}
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </accordion-group>
+              </div>
+            </div>
+          </accordion>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <ng-include src="'app/fundraisers/templates/rightColumn.html'"></ng-include>
+      </div>
+
+    </div>
+  </fundraiser-template>
+</div>

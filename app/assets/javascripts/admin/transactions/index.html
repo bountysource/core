@@ -1,0 +1,42 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="!working">Such loading wow...</loading-bar>
+
+    <div ng-show="!working">
+      <h3 style="margin-top:0px;">Transactions</h3>
+      <a href="/admin/transactions/unaudited"><button class="btn btn-danger">Unaudited</button></a>
+      <a href='/admin/transactions/new'><button class="btn btn-success">New</button></a>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>
+              <a ng-click="applySort(currentPage, date)">{{ date.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[date.col] && order_hash[date.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[date.col] && order_hash[date.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Audited</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="transaction in transactions" ng-class="{warning: !transaction.audited}">
+            <td><a ng-href="/admin/transactions/{{ transaction.id }}">{{ transaction.id }}</a></td>
+            <td>{{ transaction.created_at | date:'short' }}</td>
+            <td>{{ amount(transaction) | currency }}</td>
+            <td>{{ transaction.type }}</td>
+            <td><a ng-href="/admin/transactions/{{ transaction.id }}">{{ transaction.description }}</a></td>
+            <td><i class='icon-ok' ng-show="transaction.audited"></i><i class="icon-remove" ng-show="!transaction.audited"></i></td>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

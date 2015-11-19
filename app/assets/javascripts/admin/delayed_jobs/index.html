@@ -1,0 +1,104 @@
+<div class="row-fluid">
+  <div class="span12">
+    <loading-bar collapse="jobs">Fetching jobs...</loading-bar>
+
+
+    <style>
+      .error-row { color: red }
+    </style>
+    <strong>Summary</strong><br/>
+    <table class="table table-striped table-bordered" ng-show="overall_stats">
+      <thead>
+      <tr>
+        <th>Object Type</th>
+        <th>Count</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr ng-repeat="stat in overall_stats" ng-class="{ 'error-row': stat.attempted=='t' }">
+        <td>{{stat.object_type.replace('!ruby/','')}}.{{stat.method_name.substring(1)}}</td>
+        <td>{{stat.count}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div collapse="!jobs">
+      <div>
+        <strong>Active Jobs: <span class="badge badge-success">{{new_jobs.length | number}}</span></strong>
+        <p>Jobs that are waiting to be run for the first time.</p>
+        <div class="alert alert-info" ng-hide="new_jobs">There are no active jobs.</div>
+        <table class="table table-striped table-bordered" ng-show="new_jobs">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Object</th>
+            <th>Method</th>
+            <th>Locked</th>
+            <th>Enqueued</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr ng-repeat="job in new_jobs">
+            <td>{{job.id}}</td>
+            <td>
+              <a ng-click="show_job_modal(job)"><{{job.handler.object_type}} id: {{job.handler.object_id}}></a>
+
+              <div modal="job.$show_modal">
+                <ng-include src="'admin/delayed_jobs/partials/job_modal.html'"></ng-include>
+              </div>
+            </td>
+            <td>:{{job.handler.method_name}}</td>
+            <th>
+              <div>Locked At: {{job.locked_at | date:'medium'}}</div>
+              <div>Time Elapsed: {{job.$minutes_locked | number}} {{"minute" | pluralize:job.$minutes_locked}}</div>
+            </th>
+            <td>{{job.created_at | date:'medium'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <strong>Failed Jobs: <span class="badge badge-warning">{{failed_jobs.length | number}}</span></strong>
+        <p>Jobs that ran once and are waiting to be retried.</p>
+        <div class="alert alert-info" ng-hide="failed_jobs">There are no failed jobs on the queue. Good work!</div>
+        <table class="table table-striped table-bordered" ng-show="failed_jobs">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Object</th>
+            <th>Method</th>
+            <th>Attempts</th>
+            <th>Run</th>
+            <th>Enqueued</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr ng-repeat="job in failed_jobs">
+            <td>{{job.id}}</td>
+            <td>
+              <a ng-click="show_job_modal(job)"><{{job.handler.object_type}} id: {{job.handler.object_id}}></a>
+
+              <div modal="job.$show_modal">
+                <ng-include src="'admin/delayed_jobs/partials/job_modal.html'"></ng-include>
+              </div>
+            </td>
+            <td>:{{job.handler.method_name}}</td>
+            <td>{{job.attempts | number}}</td>
+            <td>{{job.run_at | date:'medium'}}</td>
+            <td>{{job.created_at | date:'medium'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modals for jobs table -->
+<div>
+
+</div>

@@ -1,0 +1,9 @@
+attribute :id
+attribute :type
+attribute :balance
+attribute :currency
+attribute :name
+attribute :created_at
+attribute :updated_at
+attribute :owner_id
+attribute :owner_type

@@ -1,0 +1,72 @@
+<div>
+  <!-- Name -->
+  <div class="form-group" ng-class="{ 'has-error': (form.fullName.$invalid) }">
+    <label for="newAddressFullName{{uniqueId}}" class="col-sm-3 control-label"><strong>Full Name:</strong></label>
+    <div class="col-sm-6">
+      <input id="newAddressFullName{{uniqueId}}" name="fullName" type="text" ng-model="address.name" class="form-control" required />
+    </div>
+  </div>
+
+  <!-- Address 1 -->
+  <div class="form-group" ng-class="{ 'has-error': (form.address1.$invalid) }">
+    <label for="newAddressAddress1{{uniqueId}}" class="col-sm-3 control-label"><storng>Address Line 1:</storng></label>
+    <div class="col-sm-9">
+      <input id="newAddressAddress1{{uniqueId}}" name="address1" type="text" ng-model="address.address1" class="form-control" required />
+    </div>
+  </div>
+
+  <!-- Address2 -->
+  <div class="form-group" ng-class="{ 'has-error': (form.address2.$invalid) }">
+    <label for="newAddressAddress2{{uniqueId}}" class="col-sm-3 control-label"><strong>Address Line 2:</strong></label>
+    <div class="col-sm-9">
+      <input id="newAddressAddress2{{uniqueId}}" name="address2" type="text" ng-model="address.address2" class="form-control" />
+    </div>
+  </div>
+
+  <!-- City -->
+  <div class="form-group" ng-class="{ 'has-error': (form.city.$invalid) }">
+    <label for="newAddressCity{{uniqueId}}" class="col-sm-3 control-label"><strong>City:</strong></label>
+    <div class="col-sm-6">
+      <input id="newAddressCity{{uniqueId}}" name="city" type="text" ng-model="address.city" class="form-control" required />
+    </div>
+  </div>
+
+  <!-- State -->
+  <div class="form-group" ng-class="{ 'has-error': (form.state.$invalid) }">
+    <label for="newAddressState{{uniqueId}}" class="col-sm-3 control-label"><strong>State/Province/Region:</strong></label>
+    <div class="col-sm-6">
+      <!-- US states typeahead -->
+      <input id="newAddressState{{uniqueId}}"
+             name="state"
+             type="text"
+             class="form-control"
+             ng-model="address.state"
+             typeahead="state.name for state in usStates | filter:$viewValue"
+      />
+    </div>
+  </div>
+
+  <!-- ZIP -->
+  <div class="form-group" ng-class="{ 'has-error': (form.postalCode.$invalid) }">
+    <label for="newAddressPostalCode{{uniqueId}}" class="col-sm-3 control-label"><strong>ZIP:</strong></label>
+    <div class="col-sm-4">
+      <input id="newAddressPostalCode{{uniqueId}}" name="postalCode" type="text" ng-model="address.postal_code" class="form-control" required />
+    </div>
+  </div>
+
+  <!-- Country -->
+  <div class="form-group" style="margin-bottom: 0;" ng-class="{ 'has-error': (form.country.$invalid) }">
+    <label for="newAddressCountry{{uniqueId}}" class="col-sm-3 control-label"><strong>Country:</strong></label>
+    <div class="col-sm-6">
+      <select
+        id="newAddressCountry{{uniqueId}}"
+        class="form-control"
+        ng-model="address.country"
+        ng-options="country.code as country.name for country in countries"
+        required
+        name="country">
+        <option value="">Select a Country</option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div>
+  <div class="page-header">
+    <h1>Ca$h Out</h1>
+    <p class="lead">Cash rules everything around me</p>
+  </div>
+
+  <ng-form class="form form-horizontal" name="form">
+    <div class="control-group">
+      <label class="control-label" for="amount">
+        <div>Amount:</div>
+      </label>
+      <div class="controls">
+        <div class="input-prepend">
+          <span class="add-on">$</span>
+          <input id="amount" type="number" class="input-small" min="1" step="0.01" ng-model="form_data.amount" placeholder="Amount" required autofocus="true" />
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="payment-source">
+        <div>Payment Source:</div>
+        <small class="muted">The Person or Team whose account you are cashing out.</small>
+      </label>
+      <div class="controls">
+        <input id="payment-source" type="number" class="input-small" min="1" step="1" ng-model="form_data.payment_source.id" placeholder="ID" required />
+        <select ng-model="form_data.payment_source.type" ng-options="payment_source_type for payment_source_type in payment_source_types" required></select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="payment-method">
+        <div>Payment Method:</div>
+        <small class="muted">How we are sending the money.</small>
+      </label>
+      <div class="controls">
+        <select id="payment-method" ng-model="form_data.payment_method" ng-options="payment_method.type for payment_method in payment_methods" required></select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="items">
+        <div>Items:</div>
+        <small class="muted">Optional list of items being cashed out. These will be added to <code>description</code>.</small>
+      </label>
+      <div class="controls">
+        <div class="row-fluid" ng-show="form_data.items.length > 0">
+          <div class="span4">
+            <table class="table table-striped table-bordered">
+              <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="item in form_data.items">
+                <td>{{item.id}}</td>
+                <td>{{item.type}}</td>
+                <td>
+                  <button class="btn btn-block btn-danger" ng-click="removeItem(item)"><i class="icon-white icon-remove"></i></button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <ng-form class="form form-inline" name="new_item_form">
+            <input id="items" type="number" class="input-small" min="1" step="1" ng-model="new_item.id" placeholder="Item ID" />
+            <select ng-model="new_item.type" ng-options="item_type for item_type in item_types"></select>
+            <button class="btn btn-default" ng-click="addNewItem()" ng-disabled="new_item_form.$invalid"><i class="icon-plus-sign"></i> Add</button>
+          </ng-form>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Transaction Type:</label>
+      <div class="controls">
+        <input type="text" class="span3" ng-model="form_data.payment_method.transaction_type" disabled />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Description:</label>
+      <div class="controls">
+        <input type="text" class="span5" ng-model="form_data.description" disabled />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <button class="btn btn-large btn-primary" ng-click="createTransaction()" ng-disabled="form.$invalid">T R A N S A C T</button>
+      </div>
+    </div>
+  </ng-form>
+</div>

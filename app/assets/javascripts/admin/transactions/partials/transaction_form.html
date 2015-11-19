@@ -1,0 +1,87 @@
+<div class="span12" style="border: 1px solid #ddd; border-radius: 10px; padding:15px; margin-top: 15px;">
+  <form name="form" class="form-horizontal">
+    <div ng-show="error" class="alert alert-error">{{ error }}</div>
+    <div class="control-group">
+      <label class="control-label" for="inputDescription">Description</label>
+      <div class="controls">
+        <input type="text" placeholder="Description" id="inputDescription" class="span11" ng-model="form_data.description"></input>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputDate">Created At</label>
+      <div class="controls">
+        <input type="text" placeholder="Date and time for transaction" id="inputDate" class="span11" ng-model="form_data.created_at"></input>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inputDate">Type</label>
+      <div class="controls">
+        <select ng-model="form_data.type">
+          <option value="">None</option>
+          <option disabled>----------------</option>
+          <option ng-repeat="type in transaction_types" name="{{type}}" ng-selected="transaction.type == type">{{type}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="control-label"><label class="checkbox">Audited</label></div>
+      <div class="controls">
+        <input type="checkbox" ng-model="form_data.audited"></input>
+      </div>
+    </div>
+
+    <div class="control-group" hidden>
+      <label class="control-label"></label>
+      <div class="controls">
+        <input type="text" value="{{ transaction.id }}" ng-model="form_data.id"></input>
+      </div>
+    </div>
+
+    <h5>Splits:</h5>
+    <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Amount</th>
+          <th>Account</th>
+          <th>Item</th>
+          <th>Created</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="split in form_data.splits">
+          <td ng-model="form_data.splits[$index].id">{{ split.id }}</td>
+          <td><input type="text" placeholder="Monetary value" ng-model="form_data.splits[$index].amount"></input></td>
+          <td>
+            <input type="text" ng-model="form_data.splits[$index].account_id" class="span3"></input>
+            <select ng-model="form_data.splits[$index].account_id">
+              <option disabled='true'>-------- generic --------</option>
+              <option ng-repeat="option in generic" value="" ng-selected="split.account.type == option">{{ option }}</option>
+              <option disabled='true'>-------- special --------</option>
+              <option ng-repeat="option in special" value="{{ option.id }}" ng-selected="split.account_id == option.id">{{ option.type }}<span ng-show="option.name.length > 0"> - {{ option.name }}</span></option>
+            </select>
+          </td>
+          <td>
+            <select ng-model="form_data.splits[$index].item_type">
+              <option value="">None</option>
+              <option disabled>----------------</option>
+              <option ng-repeat="item in item_types" ng-selected="split.item_type == item">{{ item }}</option>
+            </select>
+            <input type="text" ng-model="form_data.splits[$index].item_id"></input>
+          </td>
+          <td></td>
+          <td><button class="btn btn-danger" ng-click="removeSplit($index)">Delete</button></td>
+        </tbody>
+      </table>
+      <div style="margin-bottom:20px;"><button class="btn btn-success" ng-click="addSplit()"><i class="icon-plus icon-white"></i> Add Split</button></div>
+      <div><button class="btn btn-primary btn-large" ng-click="createTransaction(form_data)" ng-show="action == 'create'">Create Transaction</button></div>
+      <div><button class="btn btn-primary btn-large" ng-click="updateTransaction(form_data)" ng-show="action == 'edit'">Update Transaction</button></div>
+
+    </form>
+  </div>
+</div>
+

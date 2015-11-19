@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title" style="font-size: 24px; text-align: center">Sign Up</h1>
+      </div>
+      <div class="panel-body">
+        <div ng-hide="signup_data">
+          <ng-include src="'salt/session/_buttons.html'"></ng-include>
+        </div>
+
+
+        <form ng-submit="signup()" novalidate>
+          <div class="form-group" ng-show="signup_data">
+            <div class="form-control-static text-center">
+              <img ng-src="{{signup_data.image_url}}" style="max-width: 64px; max-height: 64px" /><br/>
+              {{signup_data.display_name}}
+            </div>
+          </div>
+
+          <div class="alert alert-danger" ng-show="error">{{error}}</div>
+
+          <div class="form-group" ng-hide="signup_data">
+            <input type="text" class="form-control" name="full_name" ng-model="form_data.full_name" required placeholder="Full Name"/>
+          </div>
+          <div class="form-group" ng-hide="signup_data">
+            <input type="text" class="form-control" name="company" ng-model="form_data.company" required placeholder="Company (optional)"/>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="email" ng-model="form_data.email" placeholder="Email Address"/>
+          </div>
+          <div class="form-group" ng-hide="signup_data">
+            <input type="password" class="form-control" name="password" ng-model="form_data.password" placeholder="Password"/>
+          </div>
+          <button type="submit" class="btn btn-success btn-block btn-lg"><span ng-show="signup_data">Complete </span>Sign Up</button>
+        </form>
+      </div>
+
+      <div class="panel-footer" style="font-size: 90%; text-align: center">
+        Already have an account? <a ui-sref="root.session.login">Log In</a><br/>
+        By signing up, you agree to our <a href="https://www.bountysource.com/terms" target="_blank">Terms of Service</a>.
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.search-bullets > li { line-height: 45px; }
+.search-bullets > li > ul > li { line-height: 25px; }
+.badge.search-filter {
+  line-height: 20px;
+  margin: 2px;
+}
+.badge.search-filter button {
+  padding: 2px 0px 0px 2px;
+  line-height: 12px;
+}
+div.filter-box {
+  padding-bottom: 8px;
+}
+
+li.tracker-box {
+  margin-right: 25px;
+}
+.project-box {
+  margin-bottom: 10px;
+}
+
+.bounty-search-well {
+  padding-bottom: 4px;
+}
+
+.sort-by-box {
+  margin-bottom: 10px;
+}
+
+.results-info {
+  margin-bottom: 5px;
+}

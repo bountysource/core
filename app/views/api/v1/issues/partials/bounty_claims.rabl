@@ -1,0 +1,1 @@
+child(:bounty_claims) { extends "api/v1/bounty_claims/index" }

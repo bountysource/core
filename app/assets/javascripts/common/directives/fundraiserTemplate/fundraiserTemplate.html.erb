@@ -1,0 +1,362 @@
+<div>
+  <!-- Error  -->
+  <div ng-show="error" class="alert alert-danger text-center">{{ error }}</div>
+
+  <!-- Header Template-->
+  <script type="text/ng-template" id="header_template.html">
+    <div ng-if="_options.showTitle">
+      <div class="text-center">
+        <h1 style="margin-top:0px;font-weight:bold;">{{ fundraiser.title || 'Loading...' }}</h1>
+        <p class="lead" ng-show="fundraiser">{{ fundraiser.short_description }}</p>
+      </div>
+      <div ng-show="(fundraiser.owner.id == current_person.id) && fundraiser.published && !fundraiser.in_progress" class="alert alert-info text-center">
+        All money raised is now on your Bountysource account. You can request a cash-out <a href="/activity/cash_outs">here</a>.
+      </div>
+
+      <div ng-show="fundraiser.published && !fundraiser.in_progress && linked_tracker" class="alert alert-info text-center">
+        <a ng-href="{{ linked_tracker.frontend_path }}">This fundraiser has ended, but you can still contribute toward its development. Post a bounty on open issues or earn some bounties yourself.</a>
+      </div>
+    </div>
+  </script>
+
+  <!-- Nav tabs -->
+  <div ng-if="_options.showNavTabs">
+    <ul class="nav nav-tabs">
+      <li ng-class="activeNavTab('overview')"><a ng-href="/fundraisers/{{ fundraiser.slug }}">Overview</a></li>
+      <li ng-class="activeNavTab('updates')" ng-show="fundraiser.published && fundraiser.updates"><a ng-href="/fundraisers/{{ fundraiser.slug }}/updates">
+        Updates
+        <span ng-show="fundraiser.updates.length > 0" class="badge badge-info">{{fundraiser.updates.length | number:0}}</span>
+      </a></li>
+      <li ng-class="activeNavTab('backers')" ng-show="fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/backers">
+        Backers
+        <span ng-show="fundraiser.pledge_count > 0" class="badge badge-info">{{fundraiser.pledge_count | number:0}}</span>
+      </a></li>
+      <li ng-class="activeNavTab('rewards')" ng-show="fundraiser.can_manage && fundraiser.published"><a ng-href="/fundraisers/{{ fundraiser.slug }}/rewards">
+        <i class="glyphicon glyphicon-lock"></i>
+        Reward Stats
+      </a></li>
+      <li ng-class="activeNavTab('pledge_now')" ng-show="fundraiser.published && fundraiser.in_progress" ng-click="navTabClicked()">
+        <a ng-href="/fundraisers/{{ fundraiser.slug }}/pledge">Pledge Now</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row" ng-show="fundraiser">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-if="_options.showLeftColumn">
+
+      <!-- Fundraiser Progress -->
+      <div ng-if="_options.showProgress">
+        <!-- Template: Show time left if Fundraiser is published and in progress If a new Fundraiser, just hack the time left to 30 days. -->
+        <script type="text/ng-template" id="timeLeft.html">
+          <div ng-show="!fundraiser.id || fundraiser.published && fundraiser.in_progress">
+            <div ng-show="fundraiser.$days_left > 0">
+              <h3 title="{{ fundraiser.ends_at | date }}" style="margin-bottom:0"><strong>{{ fundraiser.$days_left | number }}</strong></h3>
+              <ng-pluralize count="fundraiser.$days_left" when="{ 'one': 'day', 'other': 'days' }"></ng-pluralize>
+            </div>
+
+            <div ng-show="fundraiser.$days_left <= 0">
+              <div ng-show="fundraiser.$hours_left > 0">
+                <h3 title="{{ fundraiser.ends_at | date }}" style="margin-bottom:0"><strong>{{ fundraiser.$hours_left | number }}</strong></h3>
+                <ng-pluralize count="fundraiser.$hours_left" when="{ 'one': 'hour', 'other': 'hours' }"></ng-pluralize>
+              </div>
+
+              <div ng-show="fundraiser.$hours_left <= 0">
+                <h3 title="{{ fundraiser.ends_at | date }}" style="margin-bottom:0"><strong>{{ fundraiser.$minutes_left | atLeast:0 | number }}</strong></h3>
+                <ng-pluralize count="fundraiser.$minutes_left" when="{ 'one': 'minute', 'other': 'minutes' }"></ng-pluralize>
+              </div>
+            </div>
+          </div>
+        </script>
+
+        <!-- Template: Total money pledged to Fundraiser so far -->
+        <script type="text/ng-template" id="totalPledged.html">
+          <h3 style="margin-bottom:0"><strong>{{ fundraiser.total_pledged | dollars }}</strong></h3>
+          <span>of <strong>{{ fundraiser.funding_goal | dollars }}</strong></span>
+        </script>
+
+        <!-- Visible panel -->
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <!-- Large Fundraiser image -->
+            <div>
+              <img class="img-responsive" ng-src="{{fundraiser.large_image_url || fundraiser.image_url}}" />
+            </div>
+
+            <!-- Money raised and time left -->
+            <div>
+              <!-- Visible: Large, Medium - horizontally aligned money raised and time remaining -->
+              <div class="row visible-lg visible-md">
+                <div class="col-sm-6 col-md-6">
+                  <ng-include src="'totalPledged.html'"></ng-include>
+                </div>
+
+
+                <div class="col-lg-6 col-md-6" style="text-align: center;">
+                  <!-- Show time left if Fundraiser is published and in progress
+                    If a new Fundraiser, just hack the time left to 30 days. -->
+                  <div ng-show="!fundraiser.id || fundraiser.published && fundraiser.in_progress">
+                    <div ng-show="fundraiser.$days_left > 0">
+                        <h3 title="{{ fundraiser.ends_at | date }}" style="margin-bottom:0"><strong>{{ fundraiser.$days_left | number }}</strong></h3>
+                      <ng-pluralize count="fundraiser.$days_left" when="{ 'one': 'day', 'other': 'days' }"></ng-pluralize>
+                    </div>
+
+                    <div ng-show="fundraiser.$days_left <= 0">
+                      <div ng-show="fundraiser.$hours_left > 0">
+                        <h3 title="{{ fundraiser.ends_at | date }}" style="margin-bottom:0"><strong>{{ fundraiser.$hours_left | number }}</strong></h3>
+                        <ng-pluralize count="fundraiser.$hours_left" when="{ 'one': 'hour', 'other': 'hours' }"></ng-pluralize>
+                      </div>
+
+                      <div ng-show="fundraiser.$hours_left <= 0">
+                        <h3 title="{{ fundraiser.ends_at | date }}" style="margin-bottom:0"><strong>{{ fundraiser.$minutes_left | atLeast:0 | number }}</strong></h3>
+                        <ng-pluralize count="fundraiser.$minutes_left" when="{ 'one': 'minute', 'other': 'minutes' }"></ng-pluralize>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Fundraiser completed, show a Completed message instead -->
+                  <div ng-show="fundraiser.published && !fundraiser.in_progress">
+                    <h3 style="margin-bottom:0"><strong>Complete</strong></h3>
+                    <span>{{fundraiser.ends_at | date}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Visible: Small, Extra Small - vertically stacked money raised and time remaining -->
+              <div class="visible-sm visible-xs text-center">
+                <ng-include src="'totalPledged.html'"></ng-include>
+                <br />
+                <ng-include src="'timeLeft.html'"></ng-include>
+              </div>
+
+              <br />
+
+              <!-- Progress Bar -->
+              <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-success" style="width: {{100*fundraiser.total_pledged/fundraiser.funding_goal | atLeast:15 | atMost:100 | number:0 }}%;">{{ 100*fundraiser.total_pledged/fundraiser.funding_goal | number:0 }}%</div>
+              </div>
+
+              <!-- Big-ass pledge button -->
+              <button class="btn btn-success btn-block btn-lg" ng-click="bigPledgeButtonClicked()" ng-disabled="!fundraiser.in_progress">Pledge Now</button>
+            </div>
+          </div>
+
+          <div class="panel-footer">
+
+            <!-- Flex funding message -->
+            <div class="text-left" ng-show="fundraiser.published">
+              <small>
+                <strong>Flexible Funding: </strong>
+                <span ng-show="fundraiser.in_progress">This campaign will receive all funds raised even if it does not reach its goal.</span>
+                <span ng-hide="fundraiser.in_progress">This fundraiser has completed and will receive all funds raised.</span>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Author panel. Shows Team members if the Fundraiser is owned by a Team -->
+      <div class="panel panel-default text-center" ng-if="_options.showAuthor">
+        <div class="panel-body">
+          <div ng-show="fundraiser.team">
+            <div class="row" style="text-align: center;">
+              <div ng-repeat="person in fundraiser.team.members" class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
+                <a owner-href="person" class="thumbnail" tooltip="{{person.display_name}}">
+                  <img class="img-responsive img-rounded" ng-src="{{person.large_image_url}}" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div ng-hide="fundraiser.team">
+            <a ng-href="/people/{{fundraiser.person.slug}}">
+              <img class="img-responsive img-rounded" ng-src="{{fundraiser.person.large_image_url}}">
+            </a>
+          </div>
+        </div>
+
+        <div class="panel-footer">
+          <h4 class="panel-title">
+            By
+            <span ng-show="fundraiser.team">{{fundraiser.team.name}}</span>
+            <span ng-hide="fundraiser.team">{{fundraiser.person.display_name}}</span>
+          </h4>
+        </div>
+      </div>
+
+      <!-- Share buttons -->
+      <div class="panel panel-default" ng-if="_options.showShareButtons">
+        <div class="panel-body">
+          <!--<fundraiser-tweet-button fundraiser="fundraiser"></fundraiser-tweet-button>-->
+          <div class="g-plusone" data-size="medium" data-annotation="bubble" require-gplus></div>
+          <br />
+          <br />
+
+          <div class="text-center">
+            <small class="text-muted">Embed Fundraiser on your webpage:</small>
+          </div>
+          <input class="input-sm form-control" type="text" value="<iframe src='https://api.bountysource.com/user/fundraisers/{{fundraiser.id}}/embed' style='width: 238px; height: 402px; overflow: hidden; border: 0px;'></iframe>" readonly select-on-click>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content! -->
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-show="_options.showLeftColumn && _options.showRightColumn">
+      <div ng-include="'header_template.html'"></div>
+      <div ng-transclude></div>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" ng-show="(!_options.showLeftColumn && _options.showRightColumn) || (_options.showLeftColumn && !_options.showRightColumn)">
+      <div ng-include="'header_template.html'"></div>
+      <div ng-transclude></div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="!_options.showLeftColumn && !_options.showRightColumn">
+      <div ng-include="'header_template.html'"></div>
+      <div ng-transclude></div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-if="_options.showRightColumn">
+      <!-- Manage buttons -->
+      <div class="panel panel-info" ng-if="_options.showManageButtons && can_manage">
+        <div class="panel-heading text-center">Manage Fundraiser</div>
+
+        <div class="panel-body">
+          <!-- Edit button -->
+          <a class="btn btn-block btn-primary btn-lg" ng-href="/teams/{{ fundraiser.team.slug }}/fundraisers/{{fundraiser.slug}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+            <span>Edit</span>
+          </a>
+
+          <!-- Publish button -->
+          <button class="btn btn-block btn-primary btn-lg" ng-click="publishFundraiser(fundraiser)" ng-disabled="!fundraiser.publishable" ng-show="!fundraiser.published">
+            <i class="glyphicon glyphicon-globe"></i>
+            <span>Publish</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pledge buttons -->
+      <div ng-if="_options.showPledgeButtons">
+        <script type="text/ng-template" id="customForm.html">
+          <form name="form" ng-submit="customPledgeRedirect(fundraiser, form.input.$modelValue)" class="form-inline">
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input type="number" name="input" class="form-control" min="5" ng-model="pledge_input" placeholder="Other" tooltip="{{5 | dollars}} minimum pledge" tooltip-placement="bottom" toolip-trigger="focus" integer-only>
+            </div>
+          </form>
+        </script>
+
+        <div class="panel panel-primary" ng-if="fundraiser.published && fundraiser.in_progress">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center">Pledge Now</h3>
+          </div>
+
+          <div class="panel-body">
+            <div>
+              <div class="row row-condensed">
+                <div class="col-lg-4 col-md-4">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 15)">{{15 | dollars:{ short: true } }}</button>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 35)">{{35 | dollars:{ short: true } }}</button>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 50)">{{50 | dollars:{ short: true } }}</button>
+                </div>
+              </div>
+              <br />
+              <div class="row row-condensed">
+                <div class="col-lg-4 col-md-4">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 100)">{{100 | dollars:{ short: true } }}</button>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 250)">{{250 | dollars:{ short: true } }}</button>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 500)">{{500 | dollars:{ short: true } }}</button>
+                </div>
+              </div>
+              <br />
+              <div class="row row-condensed">
+                <div class="col-md-4">
+                  <button class="btn btn-primary btn-block" ng-click="pledgeRedirect(fundraiser, 1000)">{{1000 | dollars:{ short: true } }}</button>
+                </div>
+                <div class="col-md-8">
+                  <ng-include src="'customForm.html'"></ng-include>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Backers -->
+      <div ng-if="_options.showTopBackers && pledges.length > 0">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+            <h4 class="panel-title">Top Backers</h4>
+          </div>
+
+          <div class="panel-body">
+            <div class="row" ng-repeat="pledge in pledges">
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <a ng-if="pledge.owner" owner-href="pledge.owner" class="thumbnail">
+                  <img class="img-responsive" ng-src="{{pledge.owner.image_url_medium}}" />
+                </a>
+
+                <div ng-if="!pledge.owner">
+                  <img class="img-responsive thumbnail" src='<%= asset_path("anon.jpg") %>'>
+                </div>
+              </div>
+
+              <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div ng-if="pledge.owner">
+                  <a owner-href= model="pledge.owner">{{pledge.owner.display_name}}</owner-profile-link>
+                </div>
+                <div ng-if="!pledge.owner" class="text-muted">Anonymous</div>
+
+                <div><b>{{ pledge.amount | dollars:{ short: true }  }}</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rewards -->
+      <div class="panel panel-default" ng-if="_options.showRewards && rewards.length > 0">
+        <div class="panel-heading">
+          <h4 class="panel-title text-center">Rewards</h4>
+        </div>
+
+        <table class="table table-striped table-bordered">
+          <tr ng-repeat="reward in rewards" ng-class="{ 'warning': reward.sold_out }">
+            <td>
+              <p style="white-space: pre-wrap;">{{ reward.description }}</p>
+
+              <p class="text-center text-muted">
+                <em ng-show="reward.limited_to">{{ reward.claimed | number }} of {{ reward.limited_to | number }} claimed</em>
+                <em ng-hide="reward.limited_to">{{ reward.claimed | number }} claimed</em>
+              </p>
+
+              <div style="text-align: center;">
+                <!-- Fundraiser in progress, reward not sold out, fundraiser not published -->
+                <a ng-show="fundraiser.in_progress && !reward.sold_out && !fundraiser.published" class="btn btn-info btn-lg" disabled>{{ reward.amount | dollars }}</a>
+
+                <!-- Fundraiser in progress, reward not sold out, and fundraiser published -->
+                <a ng-show="fundraiser.in_progress && !reward.sold_out && fundraiser.published" ng-href="/fundraisers/{{fundraiser.slug}}/pledge?reward_id={{reward.id}}&amount={{reward.amount}}" class="btn btn-success btn-lg" ng-click="rewardClicked(reward)">{{ reward.amount | dollars }}</a>
+
+                <!-- Fundraiser not in progress, and is published -->
+                <a ng-show="!fundraiser.in_progress && fundraiser.published" class="btn btn-success btn-lg" style="cursor: not-allowed;" disabled>{{ reward.amount | dollars }}</a>
+
+                <!-- Fundraiser in progress, reward sold out -->
+                <a ng-show="fundraiser.in_progress && reward.sold_out" class="btn btn-default btn-lg" disabled>Sold Out</a>
+
+                <!-- Fundraiser not published -->
+                <button ng-show="!fundraiser.published" class="btn btn-success btn-lg" style="cursor: not-allowed;" disabled>{{reward.amount | dollars}}</button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

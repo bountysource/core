@@ -1,0 +1,27 @@
+<table class="table table-condensed table-striped table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Created</th>
+      <th>Refunded</th>
+      <th>Amount</th>
+      <th>Team</th>
+      <th>Person</th>
+      <th>Display As</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="team_payin in team_payins">
+      <td><a ng-href="/admin/team_payins/{{team_payin.id}}">{{team_payin.id}}</a></td>
+      <td>{{team_payin.created_at | date:'short'}}</td>
+      <td>{{team_payin.refunded_at | date:'short'}}</td>
+      <td>{{team_payin.amount | currency}}</td>
+      <td><a ng-href="/admin/teams/{{team_payin.team.slug}}">{{team_payin.team.name}}</a></td>
+      <td><a ng-href="/admin/people/{{team_payin.person.slug}}">{{team_payin.person.display_name}}</a></td>
+      <td>
+        <a ng-href="/admin/people/{{team_payin.owner.slug}}" ng-show="team_payin.owner.type == 'Person'">{{team_payin.owner.display_name}}</a>
+        <a ng-href="/admin/teams/{{team_payin.owner.slug}}" ng-show="team_payin.owner.type == 'Team'">{{team_payin.owner.display_name}}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

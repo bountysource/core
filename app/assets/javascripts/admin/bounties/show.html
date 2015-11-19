@@ -1,0 +1,80 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="bounty">Such loading wow...</loading-bar>
+    <div class="row-fluid">
+      <div class="span12" style="border: 1px solid #ddd; border-radius: 10px; padding:15px;">
+        <h3>Bounty #{{bounty.id}}</h3>
+        <img class="thumbnail" style="width: 100px; height: 100px;" ng-src="{{bounty.person.image_url}}"></img>
+        <ul class="unstyled" style="margin-top:25px;">
+          <li><strong>Person:  </strong><a ng-href="/admin/people/{{bounty.person.id}}">{{bounty.person.display_name}}</a></li>
+          <li><strong>Amount:  </strong>{{ bounty.amount | currency }}</li>
+          <li><strong>Created:  </strong>{{ bounty.created_at | date:'longDate' }}</li>
+          <li><strong>Expires:  </strong>{{ bounty.expires_at }}</li>
+          <li><strong>Status:  </strong>{{ bounty.status }}</li>
+          <li><strong>Issue:  </strong><a ng-href="/admin/issues/{{ bounty.issue.id }}">{{ bounty.issue.title }}</a></li>
+          <li><strong>Tracker:  </strong><a ng-href="/admin/trackers/{{ bounty.repository.id }}">{{ bounty.repository.name }}</a></li>
+        </ul>
+
+        <h4>Options</h4>
+        <div><strong>Expires:  </strong>{{bounty.bounty_expiration}}</div>
+        <div><strong>Upon Expiration:  </strong>{{bounty.upon_expiration}}</div>
+        <div><strong>Promotion:  </strong>{{bounty.promotion}}</div>
+
+
+        <h4>Actions</h4>
+        <button class="btn btn-success" ng-click="refund(bounty.id)" ng-show="bounty.status=='active'">Refund</button>
+        &nbsp; &nbsp;
+        <button class="btn btn-success" ng-click="set_featured(bounty.id, true)" ng-show="!bounty.featured">Feature</button>
+        <button class="btn btn-success" ng-click="set_featured(bounty.id, false)" ng-show="bounty.featured">Unfeature</button>
+        &nbsp; &nbsp;
+
+        <div style="display: inline-block">
+          <form class="form-inline" ng-submit="update_owner()">
+            <select ng-model="form_owner.owner_type" style="width: 120px">
+              <option ng-selected="form_owner.owner_type == 'Anonymous'" value="Anonymous">Anonymous</option>
+              <option ng-selected="form_owner.owner_type == 'Person'" value="Person">Person</option>
+              <option ng-selected="form_owner.owner_type == 'Team'" value="Team">Team</option>
+            </select>
+
+            <input type="text" ng-model="form_owner.owner_id" style="width: 70px" ng-hide="form_owner.owner_type == 'Anonymous'" />
+
+            <button class="btn btn-success">Set Owner</button>
+          </form>
+        </div>
+
+        <div>
+          <h3>Splits</h3>
+          <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Created</th>
+                <th>Amount</th>
+                <th>Transaction</th>
+                <th>Item</th>
+                <th>Audited</th>
+                <th>Memo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="split in splits">
+                <td>{{ split.id }}</td>
+                <td>{{ split.created_at | utc }}</td>
+                <td>{{ split.amount | currency }}</td>
+                <td><a ng-href="/admin/transactions/{{ split.transaction.id }}">{{ split.transaction.description }}</a></td>
+                <td><a ng-href="{{itemLink(split)}}">{{ split.item_type }} #{{ split.item_id }}</a></td>
+                <td><i class="icon-ok" ng-show="audited(split)"></i><i class="icon-remove" ng-show="!audited(split)"></i></td>
+                <td>{{ memo(split) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,30 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/activity">Activity</a></li>
+  <li><a href="/activity/fundraisers">Fundraisers</a></li>
+</ul>
+
+<ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+<div class="alert alert-info">
+  <a ng-show="fundraisers.length <= 0" href="/fundraisers/new">Get started on your first fundraiser today!</a>
+  <a ng-show="fundraisers.length > 0" href="/fundraisers/new">Get started on another fundraiser today!</a>
+</div>
+
+<table class="table table-striped" ng-show="fundraisers.length > 0">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Goal</th>
+      <th>Progress</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <tr ng-repeat="fundraiser in fundraisers">
+    <td><a ng-href="/fundraisers/{{fundraiser.slug}}">{{ fundraiser.title }}</a></td>
+    <td>{{ fundraiser.funding_goal | dollars }}</td>
+    <td>{{ (fundraiser.total_pledged / fundraiser.funding_goal) | percent }}</td>
+    <td ng-class="{ 'text-info': ((fundraiser | fundraiserStatus) == 'draft'), 'text-success': ((fundraiser | fundraiserStatus) == 'completed') }">{{ fundraiser | fundraiserStatus }}</td>
+  </tr>
+</tbody></table>

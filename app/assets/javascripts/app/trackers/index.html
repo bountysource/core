@@ -1,0 +1,50 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a>Projects</a></li>
+</ul>
+
+<div ng-show="trackers.length > 0">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th style="width: 50px;" class="hidden-sm"></th>
+      <th class="span4">Name</th>
+      <th class="span6 hidden-sm">Description</th>
+      <th class="span2" style="text-align: center;">Bounty <span class="hidden-sm">Total</span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="tracker in trackers">
+      <td class="hidden-sm center-height">
+        <a class="thumbnail no-margin" ng-href="/trackers/{{tracker.slug}}">
+          <img class="img-responsive" ng-src="{{tracker.image_url_small}}" style="width: 100%;" />
+        </a>
+      </td>
+
+      <td class="center-height">
+        <img class="pull-left visible-sm" style="width: 20px; height:20px; margin-right:10px" ng-src="{{tracker.image_url_small}}" />
+        <a ng-href="/trackers/{{tracker.slug}}">{{tracker.display_name}}</a>
+      </td>
+
+      <td class="text-muted hidden-sm center-height">{{tracker.description}}</td>
+
+      <td class="center-height" style="text-align: center;">
+        <div ng-show="tracker.bounty_total > 0"><strong>{{tracker.bounty_total | dollars}}</strong></div>
+        <div ng-show="tracker.bounty_total <= 0"><a class="btn btn-default" ng-href="/trackers/{{tracker.slug}}">Add a Bounty</a></div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div ng-show="pagination && trackers.length > 0" style="text-align: center;">
+  <pagination on-select-page="setPage(page)"
+              total-items="pagination.totalItems"
+              items-per-page="pagination.perPage"
+              num-pages="pagination.totalPages"
+              page="pagination.page"
+              max-size="5"
+              boundary-links="true"
+              rotate="true">
+  </pagination>
+</div>

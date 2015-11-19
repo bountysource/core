@@ -1,0 +1,34 @@
+<div>
+  <div class="text-center">
+    <h1 style="font-size: 60px; margin: 0 0 15px 0">{{event.title}}</h1>
+    <h2 style="font-size: 40px; margin: 0 0 10px 0;">{{event.subtitle}}</h2>
+    <h2 class="text-center" style="font-size: 50px; margin: 0;"><a>{{event.url}}</a></h2>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-9" style="font-size: 25px;">
+      <div class="panel panel-default">
+        <div class="text-center panel-heading">Active Bounties</div>
+        <div style="font-size: 25px;">
+          <issue-list issues="event.issues" include="['trackerImage', 'trackerName', 'bountyTotal']" hide-header-row hide-solution-active-icon></issue-list>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top backers -->
+    <div class="col-md-3" style="font-size: 25px;">
+      <div class="panel panel-default">
+        <div class="text-center panel-heading">Top Backers</div>
+        <ul class="top-backers-vertical">
+          <li class="row" ng-repeat="backer in topBackers">
+            <a owner-href="backer">
+              <img ng-if="backer" ng-src="{{backer.image_url_medium}}"  tooltip="{{backer.display_name}} - {{backer.amount | dollars}}" tooltip-placement="bottom" />
+              <img ng-if="!backer" src='<%= asset_path("anon.jpg") %>' tooltip="Anonymous - {{backer.amount | dollars}}" tooltip-placement="bottom" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

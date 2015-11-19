@@ -1,0 +1,14 @@
+Congratulations <%= @person.display_name %>, your proposal has been accepted!
+
+
+<%= @proposal.managing_team.name %> has accepted your proposal to solve "<%= @proposal.issue.title %>" in <%= @proposal.tracker.name %>. 
+The issue has been funded with the agreed-upon price of <%= number_to_dollars(@proposal.amount) %> and will be paid out after the issue is closed and verified by the backer.
+
+Review proposal details and get started:
+<%= "#{Api::Application.config.www_url}issues/#{@proposal.issue.to_param}/proposals" %>
+
+<% if @proposal.team_notes.present? %>
+<%= @proposal.managing_team.name %> left the following comment for you:
+
+<%= @proposal.team_notes %>
+<% end %>

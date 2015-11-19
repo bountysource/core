@@ -1,0 +1,10 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <button class="btn btn-large btn-success" ng-click="syncNewsletters()" disabled>Sync Newsletters!</button>
+    <div style="margin-top:20px;"><strong>Current disabled. Bug Cory.</strong></div>
+    <div ng-show="syncing" style="padding-top:20px;"><img ng-src='<%= asset_path("ajax-loader.gif") %>'></img> Syncing...</div>
+  </div>
+
+
+</div>

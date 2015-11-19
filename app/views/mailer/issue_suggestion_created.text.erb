@@ -1,0 +1,12 @@
+Hi <%= @person.first_name %>,
+
+<%=@issue_suggestion.person.display_name%> has just suggested an issue to <%=@issue_suggestion.team.name%> for bounty consideration:
+
+Issue: [<%=@issue_suggestion.issue.sanitized_title%>](https://www.bountysource.com/issues/<%=@issue_suggestion.issue.to_param%>)
+Project Name: <%=@issue_suggestion.issue.team ? @issue_suggestion.issue.team.name : @issue_suggestion.issue.tracker.display_name %>
+<% unless @issue_suggestion.description.blank? %>
+<%=@issue_suggestion.person.display_name%> provided this comment:
+<%=@issue_suggestion.description%>
+<% end %>
+
+You can review the issue and respond to the request [from the issue details page](https://www.bountysource.com/issues/<%=@issue_suggestion.issue.to_param%>).

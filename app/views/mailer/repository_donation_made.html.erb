@@ -1,0 +1,15 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+  You've just donated <%= @amount.display_whole_amount %> to <%= @repo.name %>.
+</p>
+
+<p>
+  <%= @repo.name%> committers will be able to use your donation to create bounties on issues within their own project. You can keep track of newly-created bounties <a href="<%= @repo.frontend_url %>" style="color: #888">here</a>.
+</p>
+
+<p>
+  If you have any questions, please check out our <a href="<%= Api::Application.config.www_url %>#faq" style="color: #888">FAQs</a> or contact us at any of the ways below.
+</p>

@@ -1,0 +1,7 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+  A claim by <%= @bounty_claim.person.display_name %> has been accepted for <%= issue_link(@bounty_claim.issue) %>. The <%= number_to_dollars(@bounty_claim.amount) %> bounty has been paid out.
+</p>

@@ -1,0 +1,53 @@
+<dib>
+  <h1>New Event</h1>
+
+  <form ng-submit="createEvent()" class="form-horizontal">
+    <!-- Slug -->
+    <div class="form-group">
+      <label for="slug" class="control-label col-md-2">Slug</label>
+      <div class="col-md-2">
+        <input id="slug" class="form-control" ng-model="newEvent.slug" placeholder="Slug" input-slug />
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title" class="control-label col-md-2">Title</label>
+      <div class="col-md-6">
+        <input id="title" class="form-control" ng-model="newEvent.title" placeholder="Title" />
+      </div>
+    </div>
+
+    <!-- Subtitle -->
+    <div class="form-group">
+      <label for="subtitle" class="control-label col-md-2">Subtitle</label>
+      <div class="col-md-6">
+        <input id="subtitle" class="form-control" ng-model="newEvent.subtitle" placeholder="Subtitle" />
+      </div>
+    </div>
+
+    <!-- URL -->
+    <div class="form-group">
+      <label for="url" class="control-label col-md-2">URL</label>
+      <div class="col-md-6">
+        <input id="url" class="form-control" ng-model="newEvent.url" placeholder="URL" />
+      </div>
+    </div>
+
+    <!-- Issue IDs -->
+    <div class="form-group">
+      <label for="issueids" class="control-label col-md-2">Issue IDs</label>
+      <div class="col-md-6">
+        <input id="issueids" class="form-control" ng-model="newEvent.issue_ids" placeholder="Issue IDs" />
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </form>
+
+</dib>

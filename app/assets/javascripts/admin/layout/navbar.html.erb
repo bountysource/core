@@ -1,0 +1,40 @@
+<div class="navbar navbar-fixed-top no-print">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      <a class="brand" href="/admin" id="navbar-logo"><strong>Bountysource</strong><img src="<%= asset_path('Bountysource-green.png') %>" style="width: 100px; height: 30px" /></a>
+      <form class="navbar-search" ng-controller="NavbarSearchController" ng-submit="submit_search()">
+        <div class="icon-search"></div>
+        <input type="text" class="search-query" ng-model="search_query" placeholder="Person, Fundraiser, etc.">
+      </form>
+
+<!--       <div class="progress progress-striped" style="margin: 0; width: 40%; display: inline; vertical-align: middle;">
+        <div class="bar bar-success" style="width: {{100*fundraiser.total_pledged/50000 | at_least:15 | at_most:100 | number:0 }}%; margin-top:10px; margin-left:20px">{{100*fundraiser.total_pledged/50000 | number:0 }}%</div>
+      </div> -->
+
+      <div class="nav-collapse" collapse="!isCollapsed">
+        <ul class="nav pull-right" ng-controller="Navbar">
+          <li ng-show="current_person">
+            <a href="/admin/delayed_jobs"><strong>Jobs: <span class="text-success" tooltip="Processing" tooltip-placement="bottom">{{jobs_info.locked_jobs+'' | number}}</span> / <span class="text-warning" tooltip="Queued" tooltip-placement="bottom">{{jobs_info.new_jobs+'' | number}}</span> / <span class="text-error" tooltip="Failed" tooltip-placement="bottom">{{jobs_info.failed_jobs+'' | number}}</span></strong></a>
+          </li>
+
+          <li ng-show="current_person">
+            <a class=""btn ng-click="refresh_jobs_info()">Refresh Jobs</a>
+          </li>
+
+          <li ng-show="current_person">
+            <a href="/admin/login" ng-click="signout()" id="navbar-user-signout">
+                <i class="icon-off"></i>
+                Sign Out
+            </a>
+          </li>
+
+          <li ng-show="!current_person">
+            <a ng-href="/admin/login">Sign In</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

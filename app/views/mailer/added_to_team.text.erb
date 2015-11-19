@@ -1,0 +1,10 @@
+Hi <%= @person.display_name %>,
+
+You have been added as a member of the <%= @team.name %> team (<%= "#{Api::Application.config.www_url}teams/#{@team.to_param}" %>) on Bountysource.
+
+As a member of the <%= @team.name %> team, you may be able to take part in a number of activities, according to the permissions that have been set, such as:
+- Public - Publicly displayed as a member of <%= @team.name %>.
+- Developer - Can spend funds that are in the team account.
+- Admin - Can add/remove projects and members to the team profile. Can add funds to the team account.
+
+By default, you have the public permission enabled.

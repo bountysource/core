@@ -1,0 +1,5 @@
+<div>
+  <span>{{units | number}}</span>
+  <ng-pluralize count="units" when="{ 'one': '{{word}}', 'other': '{{word}}s' }"></ng-pluralize>
+  <span ng-transclude></span>
+</div>

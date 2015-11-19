@@ -1,0 +1,50 @@
+<form name="createForm" class="form-horizontal" ng-submit="saveRequestForProposal()">
+  <div class="form-group">
+    <div class="col-md-offset-1 col-md-6">
+      <p class="form-control-static">You are able to request proposals from developers to solve this issue. All fields are optional, but the more information you can provide the better.</p>
+    </div>
+  </div>
+
+  <!-- Budget -->
+  <div class="form-group" ng-class="{ 'has-error': createForm.budget.$invalid }">
+    <label class="control-label col-md-3">Estimated budget:</label>
+
+    <div class="col-md-3">
+      <div class="input-group">
+        <span class="input-group-addon"><currency-unit></currency-unit></span>
+        <input name="budget" type="number" class="form-control"
+               ng-model="requestForProposal.budget"
+               min="0"
+               step="any"
+               placeholder="Budget" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Needed by -->
+  <div class="form-group">
+    <label class="control-label col-md-3">Needed by:</label>
+
+    <div class="col-md-3">
+      <input name="dueDate" class="form-control" placeholder="YYYY-MM-DD"
+             ng-model="requestForProposal.due_date"
+             datepicker-popup />
+    </div>
+  </div>
+
+  <!-- Additional notes about the issue from the team -->
+  <div class="form-group">
+    <label class="control-label col-md-3">Additional notes:</label>
+
+    <div class="col-md-9">
+      <textarea class="form-control" rows="5" ng-model="requestForProposal.abstract"
+                placeholder="Please provide any details needed for solving this issue."></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-3 col-md-3">
+      <button type="submit" class="btn btn-primary" ng-disabled="createForm.$invalid">Request Proposals</button>
+    </div>
+  </div>
+</form>

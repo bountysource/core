@@ -1,0 +1,7 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+  You pledged <a href="<%= @pledge.frontend_url %>"><%= number_to_currency @pledge.amount, unit: '$' %></a> to <a href='<%= @pledge.fundraiser.frontend_url %>' target='_blank'><%= @pledge.fundraiser.title %></a>. Thank you for your support, spread the word!
+</p>

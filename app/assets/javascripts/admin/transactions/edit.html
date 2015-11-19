@@ -1,0 +1,11 @@
+<div class="row-fluid">
+  <div class="span12">
+    <loading-bar ng-hide="!working">Such loading wow...</loading-bar>
+    <div>
+      <h3 style="margin-top:0px;">Transactions - {{ transaction.id || "New" }}</h3>
+      <a href="/admin/transactions/unaudited"><button class="btn">Unaudited</button></a>
+      <a href='/admin/transactions'><button class="btn">All Transactions</button></a>
+      <div ng-include="'admin/transactions/partials/transaction_form.html'" class='row-fluid'></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th ng-click="column = 'bounty_total'; reverse=!reverse"><a>Bounty Total <span class="icon-chevron-up" ng-show="reverse == true && column == 'bounty_total'"></span><span class="icon-chevron-down" ng-show="reverse == false && column == 'bounty_total'"></span></a></th>
+      <th>Project</th>
+      <th>Title</th>
+      <th ng-click="column = 'earliest_bounty_created_at'; reverse=!reverse"><a>Age of First Bounty <span class="icon-chevron-up" ng-show="reverse == true && column == 'earliest_bounty_created_at'"></span><span class="icon-chevron-down" ng-show="reverse == false && column == 'earliest_bounty_created_at'"></span></a></th>
+      <th>Remote Created At</th>
+      <th ng-show="show_paid_out">Date Paid Out</th>
+      <th ng-show="show_has_claim_tab"></th>
+      <th>Can Add Bounty</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="issue in issues | orderBy:column:reverse" ng-class="{success: issue.paid_out, error: issue.paid_out && issue.can_add_bounty, warning: !issue.can_add_bounty && !issue.paid_out}">
+      <td style="word-wrap: break-word;"><a ng-href="/admin/issues/{{issue.id}}">{{issue.id}}</a></td>
+      <td style="word-wrap: break-word;">{{issue.bounty_total | currency}}</td>
+      <td style="word-wrap: break-word;"><a ng-href="/admin/trackers/{{ issue.tracker.id }}">{{ issue.tracker.name }}</a></td>
+      <td style="word-wrap: break-word;"><a ng-href="{{ issue.frontend_path }}" target="_blank">{{issue.title}}</a></td>
+      <td style="word-wrap: break-word;">{{ issue.earliest_bounty_created_at | date:'short' }}</td>
+      <td style="word-wrap: break-word;">{{ issue.created_at | date:'short' }}</td>
+      <td ng-show="show_paid_out" style="word-wrap: break-word;">{{ issue.date_paid_out | date:'short' }}</td>
+      <td><i class="icon-ok" ng-show="issue.can_add_bounty"></i><i class="icon-remove" ng-show="!issue.can_add_bounty"></i></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,28 @@
+<% if @fundraiser.try(:published?) %>
+  <% content_for :head do %>
+    <meta name="description" content="<%=h @fundraiser.short_description%>" />
+
+    <meta name="twitter:card" content="product" />
+    <meta name="twitter:site" content="@Bountysource" />
+    <meta name="twitter:title" content="<%='Fundraiser for ' unless @fundraiser.title =~ /fundraiser/i %><%=h @fundraiser.title%> by <%=h(@fundraiser.team ? @fundraiser.team.name : @fundraiser.person.display_name)%>" />
+    <meta name="twitter:description" content="<%=h @fundraiser.short_description%>" />
+    <meta name="twitter:image:src" content="<%=@fundraiser.large_image_url%>" />
+    <meta name="twitter:data1" content="<%=number_to_currency(@fundraiser.total_pledged, precision: 0)%>" />
+    <meta name="twitter:label1" content="RAISED" />
+    <meta name="twitter:data2" content="<%=number_to_currency(@fundraiser.funding_goal, precision: 0)%>" />
+    <meta name="twitter:label2" content="GOAL" />
+    <meta property="og:title" content="<%='Fundraiser for ' unless @fundraiser.title =~ /fundraiser/i %><%=h @fundraiser.title%> by <%=h(@fundraiser.team ? @fundraiser.team.name : @fundraiser.person.display_name)%>" />
+    <meta property="og:image" content="<%=@fundraiser.large_image_url%>" />
+    <meta property="og:url" content="<%=@fundraiser.frontend_url%>" />
+    <meta property="og:description" content="<%=h @fundraiser.short_description%>" />
+    <meta property="og:site_name" content="Bountysource" />
+  <% end %>
+
+  <% content_for :body do %>
+    <div style="display:none">
+      <h1><%=@fundraiser.title%></h1>
+      <h2><%=@fundraiser.short_description%></h2>
+      <%=sanitize(raw(@fundraiser.description_to_html))%>
+    </div>
+  <% end %>
+<% end %>

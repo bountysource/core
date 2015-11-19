@@ -1,0 +1,8 @@
+Hi <%= @person.display_name %>,
+
+<% if @person == @admin %>You<% else %><%= @admin.display_name %><% end %>
+credited the <%= @team.name %> account with <strong><%= number_to_currency(@amount, unit: "$", precision: 0) %></strong>.
+The current balance of <strong><%= number_to_currency(@amount, unit: "$", precision: 0) %></strong> is available to spend immediately.
+
+View your team profile page: <%= "#{Api::Application.config.www_url}teams/#{@team.to_param}" %>
+Browse projects: <%= "#{Api::Application.config.www_url}trackers" %>

@@ -1,0 +1,65 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <h3 style="margin-top:0px;">Tracker Plugins</h3>
+
+    <loading-bar collapse="plugins">Loading plugins...</loading-bar>
+
+    <div collapse="!plugins">
+      <pagination direction-links="false" boundary-links="true" current-page="$pagination.current_page" max-size="20" num-pages="$pagination.num_pages" items-per-page="$pagination.items_per_page" on-select-page="$pagination.set_page(page)" rotate="true"></pagination>
+
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tracker</th>
+            <th>Person</th>
+            <th>Watchers</th>
+            <th>Forks</th>
+            <th>Installed</th>
+            <th>Updated</th>
+            <th>Synced</th>
+            <th>Locked</th>
+            <th style="text-align: center;">Title</th>
+            <th style="text-align: center;">Body</th>
+            <th style="text-align: center;">Label</th>
+            <th style="text-align: center;">Locked</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="plugin in plugins | orderBy:['-locked_at', '-created_at']" ng-class="{ 'warning': plugin.locked_at }">
+            <td>{{plugin.id}}</td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/trackers/{{plugin.tracker.id}}">{{plugin.tracker.name}}</a></td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{ plugin.person.id }}">{{ plugin.person.display_name }}</a></td>
+            <td style="word-wrap: break-word;">{{ plugin.tracker.watchers | number }}</td>
+            <td style="word-wrap: break-word;">{{ plugin.tracker.forks | number }}</td>
+            <td style="word-wrap: break-word;">{{ plugin.created_at | date:'short' }}</td>
+            <td style="word-wrap: break-word;">{{ plugin.updated_at | date:'short' }}</td>
+            <td style="word-wrap: break-word;">{{ plugin.synced_at | date:'short' }}</td>
+            <td style="word-wrap: break-word;">
+              <div ng-show="plugin.locked_at">
+                {{ plugin.locked_at | date:'short' }}<br/>
+                <span tooltip="{{plugin.last_error}}" tooltip-placement="bottom">{{ plugin.last_error | truncate:100 }}</span>
+
+              </td>
+            <td style="text-align: center;">
+              <input type="checkbox" ng-model="plugin.modify_title" />
+            </td>
+            <td style="text-align: center;">
+              <input type="checkbox" ng-model="plugin.modify_body" />
+            </td>
+            <td style="text-align: center;">
+              <input type="checkbox" ng-model="plugin.add_label" />
+            </td>
+            <td style="text-align: center;">
+              <input type="checkbox" ng-model="plugin.locked" />
+            </td>
+            <td style="text-align: center">
+              <a ng-click="update_plugin(plugin)">Save</a>
+            </td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

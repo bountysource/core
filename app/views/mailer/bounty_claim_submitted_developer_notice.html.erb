@@ -1,0 +1,11 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+  You have successfully submitted your claim on <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}" %>"><%= @bounty_claim.issue.title %></a>.
+</p>
+
+<p>  
+  The $<%= @bounty_claim.issue.bounty_total.round %> bounty will be paid out if all backers of the issue accept your claim. If no action is taken, the bounty will be paid out after two weeks.
+</p>

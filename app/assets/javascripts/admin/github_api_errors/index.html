@@ -1,0 +1,54 @@
+<h1>Github API Errors</h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Request</th>
+    <th>Response</th>
+    <th style="width: 180px;">Logged At</th>
+    <th style="text-align: center;">Audited</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr ng-repeat="error in errors">
+    <td>
+      <div>
+        <h5>Path</h5>
+        <h5><code>{{(error.request.type || "GET").toUpperCase()}} {{error.request.path}}</code></h5>
+      </div>
+      <div>
+        <h5>Parameters</h5>
+        <ul>
+          <li ng-repeat="(k,v) in error.request.params"><code>{{k}}: {{v}}</code></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Headers</h5>
+        <ul>
+          <li ng-repeat="(k,v) in error.request.headers"><code>{{k}}: {{v}}</code></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Body</h5>
+        <pre>{{error.request.body}}</pre>
+      </div>
+    </td>
+
+    <td>
+      <div>
+        <h5>Headers</h5>
+        <ul>
+          <li ng-repeat="(k,v) in error.response.headers"><code>{{k}}: {{v}}</code></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Body</h5>
+        <pre>{{error.response.body}}</pre>
+      </div>
+    </td>
+
+    <td>{{error.created_at | date:'medium'}}</td>
+    <td style="text-align: center;"><input type="checkbox" ng-value="error.audited" ng-click="toggle_error_audited(error)" /></td>
+  </tr>
+  </tbody>
+</table>

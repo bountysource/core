@@ -1,0 +1,5 @@
+Hi <%= @person.first_name %>,
+
+Your response is needed on a pending bounty claim by <%= @bounty_claim.person.display_name %>. The claim was submitted on <%= @bounty_claim.created_at.to_date %> for "<%= @bounty_claim.issue.title %>". If no action is taken, the bounty will be paid out on <%= (@bounty_claim.created_at + Api::Application.config.dispute_period_length).to_date %>.
+To view the claim and cast your vote, please visit this link: <%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}/claims" %>
+

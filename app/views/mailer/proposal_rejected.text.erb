@@ -1,0 +1,23 @@
+Sorry <%= @person.display_name %>, but your proposal has been rejected.
+
+<% if @proposal.request_for_proposal.pending? %>
+<%= @proposal.managing_team.name %> has rejected your proposal to solve "<%= @proposal.issue.title %>" in <%= @proposal.tracker.name %>.
+<% else %>
+<%= @proposal.managing_team.name %> has accepted another proposal to solve "<%= @proposal.issue.title %>" in <%= @proposal.tracker.name %>.
+<% end %>
+
+<% if @proposal.team_notes.present? %>
+  <%= @proposal.managing_team.name %> left the following comment for you:
+
+  "<%= @proposal.team_notes %>"
+<% end %>
+
+Don’t give up yet!
+
+<% if @proposal.request_for_proposal.pending? %>
+Re-submit your proposal:
+<%= "#{Api::Application.config.www_url}issues/#{@proposal.issue.to_param}/proposals" %>
+<% else %>
+Browse <%= @proposal.managing_team.name %>'s issues
+<%= "#{Api::Application.config.www_url}teams/#{@proposal.managing_team.slug}/issues" %>
+<% end %>

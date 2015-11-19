@@ -1,0 +1,16 @@
+<p>Hi <%= @person.display_name %>,</p>
+
+<p>You have received an invite request for <%= @team.name %> on Bountysource from:</p>
+
+<ul>
+  <li>Name: <%= @invitee.display_name %></li>
+  <li>Bountysource Profile: https://www.bountysource.com/people/<%=@invitee.id%></li>
+  <% if @invitee.github_account %><li>GitHub Profile: https://github.com/<%=@invitee.github_account.login%></li><% end %>
+</ul>
+
+<p>If you recognize this person and want to add them to <%=@team.name%>, use the "Add Member" form:</p>
+
+<ul>
+  <li>PersonID: <%=@invitee.id%></li>
+  <li>URL: <%= "#{Api::Application.config.www_url}teams/#{@team.to_param}/members/manage" %></li>
+</ul>

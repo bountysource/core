@@ -1,0 +1,58 @@
+<div>
+  <div class="page-header">
+    <h1>Bank Transfer</h1>
+    <p class="lead">Money in da bank</p>
+  </div>
+
+  <ng-form class="form form-horizontal" name="form">
+    <div class="control-group">
+      <label class="control-label" for="amount">
+        <div>Amount:</div>
+      </label>
+      <div class="controls">
+        <div class="input-prepend">
+          <span class="add-on">$</span>
+          <input id="amount" type="number" class="input-small" min="1" step="0.01" ng-model="form_data.amount" placeholder="Amount" required autofocus="true" />
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="from_account">
+        <div>From:</div>
+      </label>
+      <div class="controls">
+        <select id="from_account" ng-model="form_data.from_account" ng-options="account.type for account in accounts" required></select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="to_account">
+        <div>To:</div>
+      </label>
+      <div class="controls">
+        <select id="to_account" ng-model="form_data.to_account" ng-options="account.type for account in accounts" required></select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Transaction Type:</label>
+      <div class="controls">
+        <input type="text" class="span3" ng-model="form_data.transaction_type" disabled />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Description:</label>
+      <div class="controls">
+        <input type="text" class="span6" ng-model="form_data.description" disabled />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <button class="btn btn-large btn-primary" ng-click="createTransaction()" ng-disabled="form.$invalid">T R A N S A C T</button>
+      </div>
+    </div>
+  </ng-form>
+</div>

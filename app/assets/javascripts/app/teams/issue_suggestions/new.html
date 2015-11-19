@@ -1,0 +1,58 @@
+<team-view team="team" ng-controller="IssueSuggestionsNewController" ng-if="team">
+
+  <target-blank model="team.new_issue_suggestion_markdown">
+    <div ng-show="team.new_issue_suggestion_markdown" class="markdown markdown-small-headers" btf-markdown="team.new_issue_suggestion_markdown"></div>
+  </div>
+
+  <div ng-hide="team.new_issue_suggestion_markdown">
+    <h2>Suggest an Issue</h2>
+    <p>Found an issue that {{team.name}} should know about? Use this form to submit the issue to us. If it meets our criteria, we will place a Bounty on it and let you know. Thanks!</p>
+  </div>
+
+  <form ng-submit="submit_form()" ng-hide="success" class="form-horizontal">
+    <div class="alert alert-danger" ng-show="errors">{{errors}}</div>
+    <div class="form-group">
+      <label for="url" class="col-sm-2 control-label">URL</label>
+      <div class="col-sm-10">
+        <input ng-model="form_data.url" class="form-control" id="url" placeholder="URL of an issue on Github, Bugzilla, etc">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description" class="col-sm-2 control-label">Notes</label>
+      <div class="col-sm-10">
+        <textarea ng-model="form_data.description" class="form-control" id="description" placeholder="Why is this issue relevant to {{team.name}}?" rows="4"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="url" class="col-sm-2 control-label">Hunters</label>
+      <div class="col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="form_data.can_solve"> I can solve this issue.
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" ng-show="form_data.can_solve">
+      <label for="url" class="col-sm-2 control-label">Suggest Bounty</label>
+      <div class="col-sm-2">
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <input ng-model="form_data.suggested_bounty_amount" class="form-control" id="url">
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <span class="help-block">How high would the Bounty need to be for you to solve this issue?</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+
+  <div ng-show="success">
+    <div class="alert alert-success">Your suggestion has been submitted to {{team.name}}! <a ng-click="suggest_new_issue()">Suggest another issue</a>.</div>
+  </div>
+</team-view>

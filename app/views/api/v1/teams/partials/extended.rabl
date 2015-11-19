@@ -1,0 +1,5 @@
+attribute :bio
+attribute :homepage_markdown
+attribute :new_issue_suggestion_markdown
+attribute :bounty_search_markdown
+attribute :resources_markdown

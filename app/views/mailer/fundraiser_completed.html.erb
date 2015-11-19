@@ -1,0 +1,15 @@
+<p>Dear <%= @person.display_name %>,</p>
+
+<% if !@fundraiser.in_progress? && @fundraiser.funded? %>
+    <p>A fundraiser that you backed, <a href="<%= @fundraiser.frontend_url %>"><%= @fundraiser.title %></a>, has just completed and earned <strong>$<%= @fundraiser.total_pledged.round %></strong>. This is $<%= (@fundraiser.total_pledged - @fundraiser.funding_goal).round %> (<%= (((@fundraiser.total_pledged - @fundraiser.funding_goal) / @fundraiser.funding_goal) * 100).to_i %>%) over its original goal of $<%= @fundraiser.funding_goal.round %>.</p>
+    
+    <p>Thank you for your support and congratulations on being a contributing factor to its success!</p>
+
+    <p>Now that you know how successful a fundraiser can be, why not <a href ="<%= "#{Api::Application.config.www_url}#account/create_fundraiser" %>">create your own?</a></p>
+    
+<% else %>
+    <p>A fundraiser that you backed, <a href="<%= @fundraiser.frontend_url %>"><%= @fundraiser.title %></a>, has just completed and earned a total of <strong>$<%= @fundraiser.total_pledged.round %></strong>.</p>
+    
+    <p>Thank you for your contribution. If you have a project that needs support, why not <a href ="<%= "#{Api::Application.config.www_url}#account/create_fundraiser" %>">create a fundraiser</a>?</p>
+    
+<% end %>

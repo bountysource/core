@@ -1,0 +1,60 @@
+<div>
+  <ng-form class="form-horizontal">
+    <!-- User has submitted a proposal message -->
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-9">
+        <div class="form-control-static">
+          <p><strong>You have submitted a proposal to solve this issue!</strong></p>
+          <p>Your proposal is <strong><em>{{ myProposal.state | proposalStatus }}</em></strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Proposal amount. Will always be present -->
+    <div class="form-group" ng-class="{ 'has-error': proposalCreateForm.amount.$invalid }">
+      <label class="control-label col-md-3">Cost:</label>
+      <div class="col-md-3">
+        <p class="form-control-static">{{myProposal.amount | dollars}}</p>
+      </div>
+    </div>
+
+    <!-- Proposal delivery date -->
+    <!-- Hide if the attribute is nil -->
+    <div class="form-group" ng-hide="!myProposal.completed_by">
+      <label class="control-label col-md-3">Completed by:</label>
+      <div class="col-md-3">
+        <p class="form-control-static">{{myProposal.completed_by | date}}</p>
+      </div>
+    </div>
+
+    <!-- Bio - explain why you are qualified -->
+    <!-- Hide if the attribute is nil -->
+    <div class="form-group" ng-hide="!myProposal.bio">
+      <label class="control-label col-md-3">Notes:</label>
+      <div class="col-md-6">
+        <p class="form-control-static" style="white-space: pre-wrap;">{{myProposal.bio}}</p>
+      </div>
+    </div>
+
+    <!-- Revoke proposal button -->
+    <div class="form-group" ng-show="myProposal.canBeRevoked()">
+      <div class="col-md-offset-3 col-md-9">
+        <button type="submit" class="btn btn-danger" ng-click="deleteProposal()">Revoke Proposal</button>
+      </div>
+    </div>
+
+    <!-- Show the original request for proposals unless all of its visible attributes are null -->
+    <div class="form-group" ng-if="!requestForProposal.blank()">
+      <br />
+
+      <div class="col-md-offset-3 col-md-9">
+        <div class="form-control-static">
+          <p><strong>{{requestForProposal.team.name}}'s original proposal request:</strong></p>
+          <p ng-if="requestForProposal.budget">Budget: {{requestForProposal.budget | dollars}}</p>
+          <p ng-if="requestForProposal.due_date">Needed by: {{requestForProposal.due_date | date}}</p>
+          <p ng-if="requestForProposal.abstract" style="white-space: pre-wrap;">Notes: {{requestForProposal.abstract}}</p>
+        </div>
+      </div>
+    </div>
+  </ng-form>
+</div>

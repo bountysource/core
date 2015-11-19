@@ -1,0 +1,97 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Submitted</th>
+    <th ng-hide="_options.markAsSentButton">Sent</th>
+    <!-- <th>Amount</th>
+    <th>Fee</th>
+    <th>Fee Adjustment</th> -->
+    <th>Team</th>
+    <th>Cash Out Total</th>
+    <th>Year To Date</th>
+    <th>Person</th>
+    <th>Physical Address</th>
+    <th>Payment Address</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr ng-repeat="cashOut in cashOuts">
+    <td>{{cashOut.id}}</td>
+    <td>{{cashOut.created_at | date:'medium'}}</td>
+    <td ng-hide="_options.markAsSentButton">
+      <span ng-show="cashOut.sent_at">{{cashOut.sent_at | date:'medium'}}</span>
+      <span class="label label-warning" ng-show="cashOut.is_refund">refund</refund>
+    </td>
+    <!-- <td>{{cashOut.amount | currency}}</td>
+    <td>{{cashOut.fee | currency}}</td>
+    <td>{{cashOut.fee_adjustment | currency}}</td> -->
+    <td>
+      <div ng-show="cashOut.account_owner.type=='Person'">n/a</div>
+      <div ng-show="cashOut.account_owner.type=='Team'"><a ng-href="/admin/teams/{{cashOut.account_owner.slug}}">{{cashOut.account_owner.display_name}}</a></div>
+    </td>
+    <td>{{parseFloat(cashOut.amount) - parseFloat(cashOut.fee||0) + parseFloat(cashOut.fee_adjustment || 0) | currency}}</td>
+
+    <td>
+      <div ng-repeat="(year,amount) in cashOut.yearly_cash_out_totals">
+        <b>{{year}}</b><br/>
+        {{amount | currency}}
+      </div>
+    </td>
+
+    <td>
+      <a owner-href="cashOut.person">{{cashOut.person.display_name}}</a><br/>
+      {{cashOut.person.email}}
+    </td>
+
+    <!-- Physical address -->
+    <td>
+      <div>{{cashOut.address.name}}</div>
+      <div>{{cashOut.address.address1}}</div>
+      <div>{{cashOut.address.address2}}</div>
+      <div>{{cashOut.address.address3}}</div>
+      <div>{{cashOut.address.city}}, {{cashOut.address.state}} {{cashOut.address.postal_code}}</div>
+      <div>{{cashOut.address.country}}</div>
+    </td>
+
+    <!-- Payment address -->
+    <td>
+      <strong>Type:</strong> {{cashOut.type}}<br/>
+
+      <div ng-show="cashOut.mailing_address">
+        <div><strong>Mailing Address:</strong></div>
+        <div>{{cashOut.mailing_address.name}}</div>
+        <div>{{cashOut.mailing_address.address1}}</div>
+        <div>{{cashOut.mailing_address.address2}}</div>
+        <div>{{cashOut.mailing_address.address3}}</div>
+        <div>{{cashOut.mailing_address.city}}, {{cashOut.mailing_address.state}} {{cashOut.mailing_address.postal_code}}</div>
+        <div>{{cashOut.address.country}}</div>
+      </div>
+
+      <div ng-show="cashOut.paypal_address">
+        <strong>Paypal:</strong><br/> {{cashOut.paypal_address}}
+      </div>
+
+      <div ng-show="cashOut.bitcoin_address">
+        <strong>Bitcoin:</strong><br/> {{cashOut.bitcoin_address}}
+      </div>
+
+      <div ng-show="cashOut.ripple_address">
+        <strong>Ripple:</strong><br/> {{cashOut.ripple_address}}
+      </div>
+
+      <div ng-show="cashOut.mastercoin_address">
+        <strong>Mastercoin:</strong><br/> {{cashOut.mastercoin_address}}
+      </div>
+
+    </td>
+
+    <td>
+      <button class="btn btn-sm btn-primary" ng-click="markAsSent($index)" ng-show="_options.markAsSentButton">Mark as Sent</button>
+      <button class="btn btn-sm btn-danger" ng-click="markAsRefund($index)" ng-show="_options.markAsSentButton">Refund</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

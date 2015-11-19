@@ -1,0 +1,149 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="person">Such loading wow...</loading-bar>
+    <div class="row-fluid">
+      <div class="span9" style="border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom:15px;">
+        <h3>{{person.display_name}}</h3>
+        <img class="thumbnail" style="width: 100px; height: 100px;" ng-src="{{person.image_url}}"></img>
+        <ul class="unstyled" style="margin-top:25px;">
+          <li ng-show="person.github_account"><strong>GitHub: </strong><a ng-href="https://github.com/{{person.github_account.login}}" target="_blank">{{person.github_account.login}}</a></li>
+          <li><strong>Login Email: </strong><a ng-href="mailto:{{person.email}}">{{person.email}}</a></li>
+          <li><strong>Public email: </strong>  <a ng-href="mailto:{{person.public_email}}">{{person.public_email}}</a></li>
+          <li><strong>Account balance:  </strong><a ng-href="/admin/accounts/{{person.account.id}}">{{person.account.balance | dollars}}</a></li>
+          <li><strong>Sign Up Date:  </strong>{{person.created_at | date:'longDate'}}</li>
+          <li><strong>Last Seen:  </strong>{{person.last_seen_at | date:'medium'}}</li>
+        </ul>
+        <div ng-show="success" class="alert alert-success">Person information successfully updated!</div>
+        <div ng-show="error" class="alert alert-error">{{ error }}</div>
+      </div>
+
+      <div class="span3">
+
+        <div style="border: 1px solid #ddd; border-radius: 10px;">
+          <h4 class="text-center">Gift Money to User</h4>
+          <div class="alert alert-error text-center" ng-show="error">{{error}}</div>
+          <div class="alert alert-success text-center" ng-show="success_message">{{ success_message }}</div>
+          <form class="form-horizontal">
+            <div class="control-group">
+              <div class="controls input-prepend input-append" style="margin-left:35px;">
+                <span class="add-on">$</span>
+                <input class="input-small" type="number" id="inputMoney" ng-model="giftValue" placeholder="10"/>
+                <spsan class="add-on">.00</spsan>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls" style="margin-left:64px;">
+                <button class="btn btn-primary" ng-click="giftMoney(giftValue, person)">Gift Money</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div style="border: 1px solid #ddd; border-radius: 10px; margin-top: 10px">
+          <h4 class="text-center">Delete Account</h4>
+          <div class="alert alert-error text-center" ng-show="error">{{error}}</div>
+          <div class="alert alert-success text-center" ng-show="success_message">{{ success_message }}</div>
+          <p>This
+             sets profile attributes to null or "[deleted]",
+             email changed to null-(person_id)@bountysource.com,
+             anonymizes bounties and pledges (but not team payins),
+             deletes solutions, developer goals, shopping_cart, access_tokens, saved_search_tabs, addresses, linked_accounts, etc.
+          </p>
+          <div class="alert alert-danger" ng-show="deleting_in_progress">Deleteing in progress.<br/> Please wait and page will refresh.</div>
+          <form class="form-horizontal">
+            <div class="control-group">
+              <div class="controls" style="margin-left:64px;">
+                <button class="btn btn-danger" ng-click="deleteAccount(person)">Delete Account</button>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+
+<h3>Bounties</h3>
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Issue</th>
+      <th>Repository</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="bounty in person.bounties">
+      <td style="word-wrap: break-word;">{{bounty.id}}</td>
+      <td style="word-wrap: break-word;"><a ng-href="/admin/issues/{{bounty.issue.id}}">{{bounty.issue.title}}</a></td>
+      <td style="word-wrap: break-word;"><a ng-href="{{bounty.repository.url}}" target="_blank">{{bounty.repository.full_name}}</a></td>
+      <td style="word-wrap: break-word;">{{bounty.amount | dollars}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Team Payins</h3>
+<div ng-include="'admin/team_payins/index.html'"></div>
+
+<h3>Fundraisers</h3>
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Featured</th>
+      <th>Published</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="fundraiser in person.fundraisers">
+      <td><a ng-href="/admin/fundraisers/{{fundraiser.id}}">{{fundraiser.title}}</a></td>
+      <td>{{fundraiser.featured}}</td>
+      <td>{{fundraiser.published}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>Teams</h3>
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Created</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="team in teams">
+      <td style="word-wrap: break-word;">{{team.id}}</td>
+      <td style="word-wrap: break-word;">{{team.created_at}}</td>
+      <td style="word-wrap: break-word;"><a ng-href="/admin/teams/{{team.slug}}">{{team.name}}</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Tags</h3>
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+  <thead>
+    <tr>
+      <th>Child</th>
+      <th>Parent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="tag_relation in tag_votes">
+      <td ng-show="tag_relation.child.type=='Team'"><a ng-href="/admin/teams/{{tag_relation.child.slug}}"><img ng-src="{{tag_relation.child.image_url}}" style="width:16px; height:16px" /> {{tag_relation.child.name}}</a></td>
+      <td ng-hide="tag_relation.child.type=='Team'"><a ng-href="/admin/tags/{{tag_relation.child.id}}">{{tag_relation.child.name}}</a></td>
+
+      <td ng-show="tag_relation.parent.type=='Team'"><a ng-href="/admin/teams/{{tag_relation.parent.slug}}"><img ng-src="{{tag_relation.parent.image_url}}" style="width:16px; height:16px" /> {{tag_relation.parent.name}}</a></td>
+      <td ng-hide="tag_relation.parent.type=='Team'"><a ng-href="/admin/tags/{{tag_relation.parent.id}}">{{tag_relation.parent.name}}</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>Events</h3>
+<div ng-include="'admin/events/_table.html'"></div>

@@ -1,0 +1,45 @@
+Hi <%= @person.first_name %>,
+
+Thank you for supporting open-source software!
+
+Invoice
+=======
+Number: <%=@shopping_cart.id%>
+Date: <%=@shopping_cart.created_at.strftime("%b %e, %Y")%>
+
+From:
+Bountysource Inc.
+548 Market St, #40189
+San Francisco, CA  94104-5401
+support@bountysource.com
+
+Bill To:
+<%=@shopping_cart.person.display_name%>
+<%=@shopping_cart.person.email%>
+
+Details:
+<% @transaction.splits.select { |s| s.item.try(:is_a?, SupportLevelPayment) }.each do |split| -%>
+  Team: <%=split.item.support_level.team.name%> (https://salt.bountysource.com/teams/<%=split.item.support_level.team.slug%>)
+  Period: <%=split.item.period_starts_at.strftime("%b %e, %Y")%> - <%=split.item.period_ends_at.strftime("%b %e, %Y")%>
+  Display: <%=split.item.support_level.owner ? split.item.support_level.owner.display_name : 'Anonymous' %>
+  Reward: <%=split.item.support_level.reward.title if split.item.support_level.reward%>
+  Amount: $<%=sprintf("%0.02f", split.amount)%>
+<% end %>
+Total: $<%=sprintf("%0.02f", @shopping_cart.calculate_gross_money)%>
+
+
+Payment Details
+---------------
+<% if @payment_notification -%>
+<% if @payment_notification.amount < @shopping_cart.calculate_gross_money%>Previous Credit: $<%=sprintf("%0.02f", @shopping_cart.calculate_gross_money - @payment_notification.amount)%><% end -%>
+Method: <%=@payment_notification.payment_method.description%>
+Amount: $<%=sprintf("%0.02f", @payment_notification.amount)%> <% if @shopping_cart.payment_method.account_balance > 0 %>(minimum charge)<% end %>
+<% else -%>
+Method: Account Credit
+Amount: $<%=sprintf("%0.02f", @shopping_cart.calculate_gross_money)%>
+<% end -%>
+<% if @shopping_cart.payment_method.account_balance > 0 -%>
+Account Credit: $<%=sprintf("%0.02f", @shopping_cart.payment_method.account_balance)%> (will be applied towards your next invoice)
+<% end -%>
+
+If you have any questions or concerns, please email support@bountysource.com.

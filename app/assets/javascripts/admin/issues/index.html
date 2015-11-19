@@ -1,0 +1,47 @@
+<div class="row-fluid">
+  
+  <div class="span12">
+    <loading-bar ng-hide="!working">Such loading wow...</loading-bar>
+      <h3 style="margin-top:0px;">Issues</h3>
+      <div ng-include="'admin/issues/partials/nav_tabs.html'"></div>
+    <div>
+      <a href="/admin/issues-requiring-attention"><button class="btn btn-danger" style="margin-bottom: 5px;">Needing Attention</button></a>
+      <p style="margin-top:5px;" ng-show="totalItems">Total Issues: {{totalItems | number}}</p>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>
+              <a ng-click="applySort(currentPage, bounty_total)">{{ bounty_total.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[bounty_total.col] && order_hash[bounty_total.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[bounty_total.col] && order_hash[bounty_total.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>Title</th>
+            <th>Paid Out</th>
+            <th>
+              <a ng-click="applySort(currentPage, accepted_at)">{{ accepted_at.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[accepted_at.col] && order_hash[accepted_at.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[accepted_at.col] && order_hash[accepted_at.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>Can Add Bounty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="issue in issues" ng-class="{success: issue.paid_out, error: issue.paid_out && issue.can_add_bounty, warning: !issue.can_add_bounty && !issue.paid_out}">
+            <td style="word-wrap: break-word;"><a ng-href="/admin/issues/{{issue.id}}">{{issue.id}}</a></td>
+            <td style="word-wrap: break-word;">{{issue.bounty_total | currency}}</td>
+            <td style="word-wrap: break-word;">{{issue.title}}</td>
+            <td style="word-wrap: break-word;"><i class="icon-ok" ng-show="issue.paid_out"></i><i class="icon-remove" ng-show="!issue.paid_out"></i></a></td>
+            <td style="word-wrap: break-word;">{{ issue.accepted_solution.accepted_at }}</td>
+            <td><i class="icon-ok" ng-show="issue.can_add_bounty"></i><i class="icon-remove" ng-show="!issue.can_add_bounty"></i></td>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

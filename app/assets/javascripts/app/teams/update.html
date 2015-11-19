@@ -1,0 +1,14 @@
+<div ng-controller="TeamUpdateController">
+  <div team-view team="team">
+    <div>
+      <h2>{{update.title}}</h2>
+      <div class="text-info">
+        <span>Published {{update.published_at | date}}</span>
+      </div>
+      <hr />
+      <div class="markdown markdown-small-headers">
+        <div btf-markdown="update.body"></div>
+      </div>
+    </div>
+  </div>
+</div>

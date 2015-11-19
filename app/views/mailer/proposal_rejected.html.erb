@@ -1,0 +1,28 @@
+<p>Sorry <%= @person.display_name %>, but your proposal has been rejected.</p>
+
+<% if @proposal.request_for_proposal.pending? %>
+  <p><%= @proposal.managing_team.name %> has rejected your proposal to solve "<%= @proposal.issue.title %>" in <%= @proposal.tracker.name %>.</p>
+<% else %>
+  <p><%= @proposal.managing_team.name %> has accepted another proposal to solve "<%= @proposal.issue.title %>" in <%= @proposal.tracker.name %>.</p>
+<% end %>
+
+<% if @proposal.team_notes.present? %>
+  <p><%= @proposal.managing_team.name %> left the following comment for you:</p>
+  <p style="white-space: pre-wrap;">"<%= @proposal.team_notes %>"</p>
+<% end %>
+
+<p>Don’t give up yet!</p>
+
+<% if @proposal.request_for_proposal.pending? %>
+  <p>
+    <a href="<%= "#{Api::Application.config.www_url}issues/#{@proposal.issue.to_param}/proposals" %>" target='_blank'>
+      Re-submit your proposal
+    </a>
+  </p>
+<% else %>
+  <p>
+    <a href="<%= "#{Api::Application.config.www_url}teams/#{@proposal.managing_team.slug}/issues" %>" target='_blank'>
+      Browse <%= @proposal.managing_team.name %>'s issues
+    </a>
+  </p>
+<% end %>

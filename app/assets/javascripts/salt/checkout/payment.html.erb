@@ -1,0 +1,46 @@
+<ng-include src="'salt/teams/_support_header_title.html'"></ng-include>
+
+<div class="container">
+  <h1>Payment <small>(Step 3 of 3)</small></h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="alert alert-info">
+        <form ng-submit="submit_form()">
+          <div class="alert alert-danger" ng-show="error">{{error}}</div>
+          <div class="form-group">
+            <div class="radio" ng-repeat="payment_method in payment_methods">
+              <label>
+                <input type="radio" name="payment_method" ng-model="form_data.payment_method" ng-value="payment_method.id" />
+                {{payment_method.description}}
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="payment_method" ng-model="form_data.payment_method" value="paypal" />
+                New Paypal Account
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="payment_method" ng-model="form_data.payment_method" value="stripe" />
+                New Credit Card
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!form_data.payment_method || form_data.$processing">
+              <span ng-show="!form_data.$processing && !support_level">Confirm Payment</span>
+              <span ng-show="!form_data.$processing && support_level">Save Changes</span>
+              <span ng-show="form_data.$processing">Processing...</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <ng-include src="'salt/checkout/_amount.html'"></ng-include>
+      <ng-include src="'salt/checkout/_display.html'"></ng-include>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,245 @@
+<div class="row-fluid" ng-show="team.id">
+  <div class="span4">
+    <div class="admin-box">
+      <h3>
+        <img ng-src="{{team.image_url}}" stlye="width: 50px; height: 50px" />
+        {{team.name}}
+      </h3>
+
+      <form>
+        <div class="control-group">
+          <label class="control-label">ID</label>
+          <div class="controls">{{team.id}}</div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Account</label>
+          <div class="controls">
+            <span ng-hide="team.account.id">(no account)</span>
+            <a ng-show="team.account.id" ng-href="/admin/accounts/{{team.account.id}}"> #{{team.account.id}}: {{team.account.balance | dollars}}</a>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Name</label>
+          <div class="controls"><input class="span12" type="text" ng-model="form_data.name" /></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Slug</label>
+          <div class="controls">
+            <div><input class="span12" type="text" ng-model="form_data.slug" /></div>
+            <div ng-show="conflicting_team.slug" style="margin-top:5px">
+              CONFLICT: <a href="/admin/teams/{{conflicting_team.slug}}">{{conflicting_team.name}}</a>
+              <a ng-click="mergeConflictedTeam()" class="btn btn-primary btn-small">Merge</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Image</label>
+          <div class="controls"><input class="span12" type="text" ng-model="form_data.image_url" /></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Bio</label>
+          <div class="controls"><textarea class="span12" type="text" ng-model="form_data.bio"></textarea></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Homepage Markdown</label>
+          <div class="controls"><textarea class="span12" type="text" ng-model="form_data.homepage_markdown"></textarea></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Bounty Search Markdown</label>
+          <div class="controls"><textarea class="span12" type="text" ng-model="form_data.bounty_search_markdown"></textarea></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Resources Markdown</label>
+          <div class="controls"><textarea class="span12" type="text" ng-model="form_data.resources_markdown"></textarea></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Issue Suggestion Markdown</label>
+          <div class="controls"><textarea class="span12" type="text" ng-model="form_data.new_issue_suggestion_markdown"></textarea></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">URL</label>
+          <div class="controls"><input class="span12" type="text" ng-model="form_data.url" /></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Linked Github</label>
+          <div class="controls"><input class="span12" type="text" ng-model="form_data.linked_account_login" /></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Homepage Feature Order (1 or more)</label>
+          <div class="controls"><input class="span12" type="text" ng-model="form_data.homepage_featured" /></div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Options</label>
+          <div class="controls">
+            <label class="checkbox">
+              <input type="checkbox" ng-model="form_data.accepts_public_payins" /> Allow Team Donations
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" ng-model="form_data.accepts_issue_suggestions" /> Allow Issue Suggestions
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" ng-model="form_data.bounties_disabled" /> Disable Bounties
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" ng-model="form_data.featured" /> Featured
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" ng-model="form_data.can_email_stargazers" /> Can Email Github Stargazers
+            </label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="controls">
+            <button class="btn btn-primary pull-left" ng-click="updateTeamAttributes()" style="margin-right: 10px;">Update</button>
+          </div>
+        </div>
+        <br/>
+
+      </form>
+
+      <button class="btn btn-danger" ng-click="deleteTeam()" style="margin-right: 10px;">Delete Team</button>
+
+      <div ng-show="update_message" class="alert alert-warning">{{update_message}}</div>
+
+    </div>
+
+    <div class="admin-box">
+      <h3>Tagged With</h3>
+      <table class="table">
+        <tr>
+          <th>tag</th>
+          <th>votes</th>
+        </tr>
+        <tr ng-repeat="tag_relation in parent_tag_relations">
+          <td ng-show="tag_relation.type=='Team'"><a ng-href="/admin/teams/{{tag_relation.slug}}"><img ng-src="{{tag_relation.image_url}}" style="width:16px; height:16px" /> {{tag_relation.name}}</a></td>
+          <td ng-hide="tag_relation.type=='Team'"><a ng-href="/admin/tags/{{tag_relation.id}}">{{tag_relation.name}}</a></td>
+          <td>{{tag_relation.votes}}</td>
+        </tr>
+      </table>
+
+      <h3>Tagged By</h3>
+      <table class="table">
+        <tr>
+          <th>tag</th>
+          <th>votes</th>
+        </tr>
+        <tr ng-repeat="tag_relation in child_tag_relations">
+          <td ng-show="tag_relation.type=='Team'"><a ng-href="/admin/teams/{{tag_relation.slug}}"><img ng-src="{{tag_relation.image_url}}" style="width:16px; height:16px" /> {{tag_relation.name}}</a></td>
+          <td ng-hide="tag_relation.type=='Team'"><a ng-href="/admin/tags/{{tag_relation.id}}">{{tag_relation.name}}</a></td>
+          <td>{{tag_relation.votes}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="admin-box">
+      <h3>Team Activity Inclusions</h3>
+      <table class="table">
+        <tr>
+          <th>team</th>
+          <th>action</th>
+        </tr>
+        <tr ng-repeat="team in team_inclusions.current">
+          <td><a ng-href="/admin/teams/{{team.slug}}"><img ng-src="{{team.image_url_small}}" style="width:16px; height:16px" /> {{team.name}}</a></td>
+          <td><a ng-click="team_inclusions.remove(team)">remove</a></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <form ng-submit="team_inclusions.add()">
+              <input type="text" placeholder="team slug" ng-model="team_inclusions.model" />
+              <button class="btn btn-primary btn-sm" type="submit">add</button>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="span8">
+
+    <div class="admin-box">
+      <h3>Members</h3>
+      <table class="table">
+        <tr>
+          <th>name</th>
+          <th>member</th>
+          <th>admin</th>
+          <th>developer</th>
+          <th>public</th>
+          <th>budget</th>
+          <th>actions</th>
+        </tr>
+        <tr ng-repeat="member in team.members">
+          <td>
+            <img ng-src="{{member.image_url}}" style="width: 16px; height: 16px"/>
+            <a ng-href="/admin/people/{{member.slug}}">{{member.display_name}}</a>
+          </td>
+          <td>member: <a ng-click="setPermission(member.id, 'member', !member.is_member)">{{member.is_member}}</a></td>
+          <td>admin: <a ng-click="setPermission(member.id, 'admin', !member.is_admin)">{{member.is_admin}}</a></td>
+          <td>developer: <a ng-click="setPermission(member.id, 'developer', !member.is_developer)">{{member.is_developer}}</a></td>
+          <td>public:  <a ng-click="setPermission(member.id, 'public', !member.is_public)">{{member.is_public}}</a></td>
+          <td>{{member.has_budget}} {{member.budget}}</td>
+          <td>
+            <a ng-click="removeMember(member.id)">delete</a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7">
+            <input ng-model="add_person_id" type="text" placeholder="add person id (e.g. 123)" />
+            <button class="btn" ng-click="addMember()">add</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="admin-box">
+      <h3>Trackers</h3>
+      <table class="table">
+        <tr>
+          <th>tracker</th>
+          <th>owner</th>
+          <th>actions</th>
+        </tr>
+        <tr ng-repeat="tracker in team.trackers">
+          <td>
+            <img ng-src="{{tracker.image_url}}" style="width: 16px; height: 16px"/>
+            <a ng-href="/admin/trackers/{{tracker.slug}}">{{tracker.name}}</a>
+          </td>
+          <td>
+            <span ng-show="tracker.team && (tracker.team.id == team.id)">is owner</span>
+            <a ng-href="/admin/teams/{{tracker.team.id}}" ng-show="tracker.team && (tracker.team.id != team.id)"><img ng-src="{{tracker.team.image_url}}" style="width:16px; height: 16px"/> {{tracker.team.display_name}}</a>
+          </td>
+          <td>
+            <a ng-click="removeTeamTracker(tracker.id)">delete</a>
+            |
+            <a ng-click="removeOwnership(tracker.id)" ng-show="tracker.owner.type == 'Team' && tracker.owner.id == team.id">remove ownership</a>
+            <a ng-click="takeOwnership(tracker.id)" ng-show="tracker.owner == null">take ownership</a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <input ng-model="add_tracker_ids" type="text" placeholder="add tracker ids (e.g. 1,2,3)" />
+            <button class="btn" ng-click="addTrackers()">add</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>Team Payins</h3>
+    <div ng-include="'admin/team_payins/index.html'"></div>
+
+  </div>
+</div>

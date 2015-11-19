@@ -1,0 +1,63 @@
+<div class="row-fluid">
+  
+  <div class="span12">
+    <loading-bar ng-hide="celebrities">Such loading wow...</loading-bar>
+    <div>
+      <h3 style="margin-top:0px;">Celebrities</h3>
+      <small><strong>Note:  </strong>Each page loads 250 users. Loading pages will take a few seconds.</small>
+      <p style="margin-top:5px;" ng-show="totalItems">Total Celebs: {{totalItems}}</p>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>
+              <a ng-click="applySort(currentPage, date)">{{ date.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[date.col] && order_hash[date.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[date.col] && order_hash[date.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>
+              <a ng-click="applySort(currentPage, last_seen)">{{ last_seen.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[last_seen.col] && order_hash[last_seen.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[last_seen.col] && order_hash[last_seen.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>Name</th>
+            <th>Display Name</th>
+            <th>GitHub User</th>
+            <th>
+              <a ng-click="applySort(currentPage, github_followers)">{{ github_followers.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[github_followers.col] && order_hash[github_followers.col] == 'desc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[github_followers.col] && order_hash[github_followers.col] == 'asc'"></icon>
+              </a>
+            </th>
+            <th>Twitter User</th>
+            <th>
+              <a ng-click="applySort(currentPage, twitter_followers)">{{ twitter_followers.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[twitter_followers.col] && order_hash[twitter_followers.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[twitter_followers.col] && order_hash[twitter_followers.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="celebrity in celebrities">
+            <td style="word-wrap: break-word;">{{celebrity.created_at    | date:'short'}}</td>
+            <td style="word-wrap: break-word;">{{celebrity.last_seen_at | date:'short'}}</td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{celebrity.id}}">{{fullName(celebrity)}}</a></td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{celebrity.id}}">{{celebrity.display_name}}</a></td>
+            <td style="word-wrap: break-word;"><a ng-href="https://github.com/{{celebrity.github_account.login}}" target="_blank">{{celebrity.github_account.login}}</a></td>
+            <td style="word-wrap: break-word;">{{celebrity.github_account.followers}}</td>
+            <td style="word-wrap: break-word;"><a ng-href="https://twitter.com/{{celebrity.twitter_account.login}}" target="_blank">{{celebrity.twitter_account.login}}</a></td>
+            <td style="word-wrap: break-word;">{{celebrity.twitter_account.followers}}</td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{celebrity.id}}">{{celebrity.email}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

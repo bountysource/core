@@ -1,0 +1,58 @@
+<div class="well well-lg" style="height: 100%">
+  <a ng-click="collapse_tracker()" class="pull-right"><i class="glyphicon glyphicon-remove"></i></a>
+  <div class="page-header" style="margin-top: 0;">
+    <h3 style="margin: 0;">{{current_tracker.full_name}}</h3>
+    <p style="word-wrap: break-word;">{{current_tracker.description}}</p>
+  </div>
+
+  <div>
+    <loading-bar ng-show="plugin_loading">{{plugin_loading}}</loading-bar>
+
+    <div ng-hide="plugin_loading">
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <strong>Issue Text</strong>
+          <small>
+            <p>Choose what Bountysource is allowed to modify.</p>
+          </small>
+
+          <ng-form class="form-horizontal">
+            <div class="checkbox"><label class="">
+              <input type="checkbox" ng-checked="current_plugin.modify_title" ng-model="current_plugin.modify_title">
+              Modify issue titles
+            </label></div>
+
+            <div class="checkbox"><label class="">
+              <input type="checkbox" ng-checked="current_plugin.modify_body" ng-model="current_plugin.modify_body">
+              Modify issue bodies
+            </label></div>
+          </ng-form>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+          <strong>Label</strong>
+          <div class="checkbox"><label class="" style="margin-bottom: 5px;">
+            <input type="checkbox" ng-checked="current_plugin.add_label" ng-model="current_plugin.add_label">
+            Add <span class="label label-default" style="background-color: {{current_plugin.label_color}};">{{current_plugin.label_name}}</span> label to issues with bounty
+          </label></div>
+          <div class="row">
+            <div class="col-sm-8 col-md-8">
+              <input class="span12 form-control" type="text" ng-model="current_plugin.label_name" placeholder="Label name" ng-disabled="!current_plugin.add_label">
+            </div>
+            <div class="col-sm-4 col-md-4">
+              <input type="text" class="span12 form-control" colorpicker="hex" placeholder="#129e5e" ng-model="current_plugin.label_color" ng-disabled="!current_plugin.add_label">
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <!-- Modify existing plugin, show save button. Otherwise, show install button -->
+        <button ng-show="current_tracker.$plugin_installed" class="btn btn-primary" ng-disabled="!plugin_changed(current_plugin)" ng-click="update_plugin(current_plugin)">Save</button>
+        <button ng-hide="current_tracker.$plugin_installed" class="btn btn-success" ng-click="create_plugin()">Install</button>
+
+        <button class="btn btn-danger" ng-click="" ng-hide="true">Uninstall</button>
+      </div>
+    </div>
+  </div>
+</div>

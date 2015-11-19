@@ -1,0 +1,3 @@
+#loading-bar { position: fixed; top: 0; left: 0; z-index: 10002; height: 4px; background: #fff; width: 100%; }
+#loading-bar .bar { height: 4px; margin-right: 1000px solid #f0f; position: relative; }
+#loading-bar .peg { display: none }

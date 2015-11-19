@@ -1,0 +1,4 @@
+--color
+--profile
+--require rails_helper
+--format documentation

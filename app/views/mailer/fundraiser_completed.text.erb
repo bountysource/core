@@ -1,0 +1,17 @@
+Dear <%= @person.display_name %>,
+
+<% if !@fundraiser.in_progress? && @fundraiser.funded? %>
+    A fundraiser that you backed, <%= @fundraiser.title %>, has just completed and earned $<%= @fundraiser.total_pledged.round %>. This is $<%= (@fundraiser.total_pledged - @fundraiser.funding_goal).round %> (<%= (((@fundraiser.total_pledged - @fundraiser.funding_goal) / @fundraiser.funding_goal) * 100).to_i %>%) over its original goal of $<%= @fundraiser.funding_goal.round %>.
+    
+    Thank you for your support and congratulations on being a contributing factor to its success!
+
+    Now that you know how successful a fundraiser can be, why not create your own? <%= "#{Api::Application.config.www_url}account/create_fundraiser" %>
+    
+<% else %>
+    A fundraiser that you backed, <%= @fundraiser.title %>, has just completed and earned a total of $<%= @fundraiser.total_pledged.round %>.
+    
+    Thank you for your contribution. If you have a project that needs support, why not create a fundraiser? <%= "#{Api::Application.config.www_url}account/create_fundraiser" %>
+    
+<% end %>
+
+View fundraiser: <%= @fundraiser.frontend_url %>

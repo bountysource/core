@@ -1,0 +1,9 @@
+attribute :id
+attribute :modify_title
+attribute :modify_body
+attribute :modify_all
+attribute :add_label
+attribute :label_name
+attribute :label_color
+attribute :created_at
+attribute :updated_at

@@ -1,0 +1,56 @@
+<div style="background:#444; padding: 0 0 10px; text-align: center">
+  <div class="container">
+    <h2 style="color: white; font-size: 24px; margin-top: 0; font-family: 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;">{{team.support_offering.subtitle}}</h2>
+
+    <div class="row" style="margin-top: 30px; margin-bottom: 20px">
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="well" style="margin-bottom: 0">
+
+          <div class="progress" style="margin-bottom: 4px" ng-show="(progress_green_percent + progress_yellow_percent) > 0" tooltip="{{team.support_level_sum|dollars}} in monthly contributions and {{(team.monthly_contributions_sum-team.support_level_sum)|dollars}} in one-time contributions." tooltip-position="bottom">
+            <div class="progress-bar progress-bar-success" role="progressbar" style="width: {{progress_green_percent}}%">
+              <span class="progress-full-text">{{progress_text}}% <span ng-show="progress_next_goal">of {{progress_next_goal | dollars}} goal</span></span>
+            </div>
+            <div class="progress-bar progress-bar-warning" role="progressbar" style="width: {{progress_yellow_percent}}%">
+            </div>
+
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{100-progress_green_percent-progress_yellow_percent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{100-progress_green_percent-progress_yellow_percent}}%; background: #aaa">
+            </div>
+          </div>
+
+          <div class="text-center" style="font-size:18px">
+            <span style="font-size: 28px">{{team.monthly_contributions_sum | dollars}}</span>
+            this month from
+            <span style="font-size: 28px">{{team.monthly_contributions_count}}</span>
+            supporters
+          </div>
+
+          <div style="text-align: center; margin-top: 10px">
+            <a class="btn btn-success btn-lg" ui-sref="root.checkout.amount({ team: team.slug })">Support This Project</a>
+          </div>
+
+          <div ng-show="support_levels_count === 1" style="margin-top: 10px">
+            <a ui-sref="root.support_levels.show(first_active_support_level)" >You are currently contributing {{support_levels_total | dollars}}/month.</a>
+          </div>
+          <div ng-show="support_levels_count > 1" style="margin-top: 10px">
+            <a ui-sref="root.settings.support_levels" >You have multiple contributions totaling {{support_levels_total | dollars}}/month.</a>
+          </div>
+
+        </div>
+        <div style="background: #ccc; margin: 0 30px; border-radius: 0 0 5px 5px; padding: 5px; box-shadow: inset 0 20px 20px -20px rgba(0,0,0,0.8)" id="share-button-hover" >
+          Share:
+          &nbsp;
+          <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{(team.support_offering.extra.twitter_share_text || default_share_title)|encodeURIComponent}}%20{{share_url|encodeURIComponent}}">Twitter</a>
+          <!-- &nbsp;
+          <a target="_blank" ng-href="https://news.ycombinator.com/submitlink?u={{share_url|encodeURIComponent}}&amp;t={{(team.support_offering.extra.hackernews_share_text || default_share_title) | encodeURIComponent}}">HackerNews</a> -->
+          &nbsp;
+          <a target="_blank" ng-href="http://www.reddit.com/submit?url={{share_url|encodeURIComponent}}&amp;title={{(team.support_offering.extra.reddit_share_text || default_share_title)|encodeURIComponent}}">Reddit</a>
+          &nbsp;
+          <a target="_blank" ng-href="https://plus.google.com/share?url={{share_url|encodeURIComponent}}">Google+</a>
+          &nbsp;
+          <a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{share_url|encodeURIComponent}}">Facebook</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

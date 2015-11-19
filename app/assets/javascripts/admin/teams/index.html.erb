@@ -1,0 +1,37 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <div>
+      <h3 style="margin-top:0px;">Teams</h3>
+      <p style="margin-top:5px;" ng-show="totalItems">Teams: {{totalItems | number}}</p>
+      <pagination direction-links="false" boundary-links="true" current-page="currentPage" max-size="maxSize" num-pages="pageCount" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;" ng-show="teams">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th><a ng-click="applySort(currentPage, activity_total)">Activity</a></th>
+            <th><a ng-click="applySort(currentPage, account_splits_total)">Balance</a></th>
+            <th><a ng-click="applySort(currentPage, member_relations_count)">Members</a></th>
+            <th><a ng-click="applySort(currentPage, tag_relations_count)">Tags</a></th>
+            <th><a ng-click="applySort(currentPage, featured)">Featured</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="team in teams" ng-class="{ error: (team.account_splits_total > 0 && team.member_relations_count==0) }">
+            <td>{{ team.id }}</td>
+            <td><a ng-href="/admin/teams/{{team.id}}">{{ team.name }}</a> (<a ng-href="https://www.bountysource.com/teams/{{ team.slug }}" target="_blank">frontend</a>)</td>
+            <td>{{ team.activity_total | dollars }}</td>
+            <td>{{ team.account_splits_total | dollars }}</td>
+            <td>{{ team.member_relations_count }}</td>
+            <td>{{ team.tag_relations_count }}</td>
+            <td>
+              <input type="checkbox" ng-model="team.featured" ng-change="updateFeaturedAttribute(team)"></input>
+              <span ng-show="working(team)"><img style="height:12px; width:12px; margin-left:2px;" ng-src='<%= asset_path("ajax-loader.gif") %>'></img></span>
+              <span ng-show="alert(team)" style="margin-left:2px;" class="label label-success">Done!</span>
+            </td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

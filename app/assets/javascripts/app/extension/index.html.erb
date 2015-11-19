@@ -1,0 +1,98 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/extension">Browser Extension</a></li>
+</ul>
+
+<div ng-show="extension_installed!==null">
+
+  <!-- <h1>BANNER</h1>
+  <div ng-show="extension_installed===false" class="alert alert-success">
+    <div class="row">
+      <div class="col-sm-3">
+        <img class="img-responsive img-rounded" src="<%=asset_path('extension1.png')%>"/>
+      </div>
+      <div class="col-sm-6">
+        <h4>Save for Later</h4>
+        <ul>
+          <li> Save issues for later, come back and comment or bounty</li>
+        </ul>
+        <h4>:thumbsup: button everywhere</h4>
+        <ul>
+          <li>+1 / :thumbsup: an issue without annoying everyone</li>
+          <li>:thumbsup: counts on issues to see community needs</li>
+          <li>Works with GitHub, Bugzilla, and LaunchPad. More coming soon!</li>
+        </ul>
+        <h4>Open-Source</h4>
+      </div>
+      <div class="col-sm-3">
+        <div style="margin-top: 70px" class="text-center">
+          <button class="btn btn-success btn-lg" ng-click="install_extension()">Install Browser Extension</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="alert alert-success">
+    <div class="text-center">
+      <h1 style="margin-top:0px; font-size: 26px">Bountysource Browser Extension</h1>
+      <h2 style="margin: 10px 0 15px; line-height: 30px; font-size: 18px">Universal "Thumbs Up" button for every issue tracker.</h2>
+
+      <div ng-show="can_install_extension" style="margin-bottom:15px">
+
+        <div ng-show="extension_installed===false">
+          <button ng-show="can_install_extension==='chrome'" class="btn btn-success btn-lg" ng-click="install_chrome_extension()">Install Chrome Extension</button>
+          <a ng-show="can_install_extension==='firefox'" href="https://addons.mozilla.org/en-US/firefox/addon/bountysource/" class="btn btn-success btn-lg" target="_blank">Install Firefox Extension</a>
+        </div>
+
+        <div ng-show="extension_installed===true">
+          <button class="btn btn-success btn-lg" ng-disabled="true"><span class="glyphicon glyphicon-ok" style='margin-right:15px'></span>Browser Extension Installed</button>
+
+          <span ng-show="!current_person" style="padding-left: 10px">
+            <button class="btn btn-primary btn-lg" ng-click="signin_with_github()"><img src="<%=asset_path('github-white-24.png')%>" style="margin-right:9px;"/>Link with GitHub</button>
+          </span>
+        </div>
+      </div>
+
+      <iframe width="600" height="264" src="//www.youtube.com/embed/JzNjRVpGu-A?rel=0&amp;controls=0&amp;showinfo=0&amp;loop=1&amp;autoplay=1" frameborder="0" allowfullscreen></iframe>
+
+      <div ng-hide="can_install_extension">
+        <h2 style="margin: 20px 0 25px; line-height: 30px; font-size: 18px">Unfortunately your browser isn't yet supported.</h2>
+        <a href="https://github.com/bountysource/browser-extension/issues" target="_blank" class="btn btn-primary btn-lg"><img src="<%=asset_path('github-white-24.png')%>" style="margin-right:9px;" />Create Issue on GitHub</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="well">
+        <h4>Reduce comment spam, gain insight.</h4>
+        <ul>
+          <li>View +1 count on every issue and add a +1 without a needless comment.</li>
+          <li>Automatically hide "+1" comment.</li>
+        </ul>
+
+        <h4>Works with any issue tracker.</h4>
+        <ul>
+          <li>Full support for GitHub, LaunchPad, and any Bugzilla tracker.</li>
+          <li>Support for more trackers coming soon!</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="well">
+        <h4>View the Source Code</h4>
+        You can submit pull requests and <a href="https://github.com/bountysource/browser-plugin" target="_blank">view source on GitHub</a>.
+        Earn bounties and <a href="https://github.com/bountysource/browser-plugin/issues" target="_blank">view feature requests</a>.
+
+        <h4>Browser Permissions and Privacy</h4>
+        <p>
+          We need "access all websites data" permission because some issue trackers like Bugzilla can exist on any domain.
+          If you have concerns, please view our <a href="/terms" target="_blank">Terms</a> or email <a href="mailto:support@bountysource.com">support@bountysource.com</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+</div>

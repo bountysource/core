@@ -1,0 +1,8 @@
+<div ng-show="top_supporters.length > 0" class="featured-header">
+  <div class="container">
+    <h3>Top Supporters This Month:</h3>
+    <a ng-href="/teams/{{team.slug}}/supporters" ng-repeat="supporter in top_supporters | limitTo:10">
+      <img ng-src="{{supporter.image_url_small}}"  tooltip="{{supporter.display_name}} {{supporter.monthly_amount | dollars}}" tooltip-placement="bottom" />
+    </a>
+  </div>
+</div>

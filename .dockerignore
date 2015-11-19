@@ -1,0 +1,11 @@
+.git*
+.idea*
+db/*.sqlite3
+db/*.sqlite3-journal
+log/*
+tmp/*
+.DS_Store
+
+Dockerfile
+.dockerignore
+docker-compose.yml

@@ -1,0 +1,15 @@
+<p>Congratulations <%= @person.display_name %>, your proposal has been accepted!</p>
+
+<p>
+  <%= @proposal.managing_team.name %> has accepted your proposal to solve "<%= @proposal.issue.title %>" in <%= @proposal.tracker.name %>. 
+  The issue has been funded with the agreed-upon price of <%= number_to_dollars(@proposal.amount) %> and will be paid out after the issue is closed and verified by the backer.
+</p>
+
+<p>
+  <a href="<%= "#{Api::Application.config.www_url}issues/#{@proposal.issue.to_param}/proposals" %>" target='_blank'>Review proposal details and get started!</a>
+</p>
+
+<% if @proposal.team_notes.present? %>
+  <p><%= @proposal.managing_team.name %> left the following comment for you:</p>
+  <p style="white-space: pre-wrap;"><%= @proposal.team_notes %></p>
+<% end %>

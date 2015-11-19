@@ -1,0 +1,30 @@
+<accordion ng-repeat="owner_trackers in all_trackers" close-others="oneAtATime">
+  <accordion-group is-open="trackers_count < 25">
+    <accordion-heading>
+      {{owner_trackers[0]}} <small class="text-muted"><strong>{{owner_trackers[1].length | number}} <ng-pluralize count="owner_trackers[1].length" when="{ 'one': 'project', 'other': 'projects' }"></ng-pluralize></strong></small>
+    </accordion-heading>
+    <table class="table table-projects">
+      <tbody>
+      <tr ng-repeat="tracker in owner_trackers[1]" ng-class="{ 'info': (current_tracker && tracker.id == current_tracker.id) }" ng-click="expand_tracker(tracker)">
+        <td style="width: 5%;">
+          <span class="label label-success" ng-show="plugin_installed(tracker) || tracker.$plugin_installed">
+            Installed
+          </span>
+        </td>
+        <td><a ng-click="expand_tracker(tracker)">{{tracker.full_name}}</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </accordion-group>
+</accordion>
+<div class="alert alert-info notification-box" ng-show="trackers_count == 0 && github_associated">
+  <h3>No projects found.</h3>
+  Sorry, there are no projects associated with your Github account.
+  <br>
+</div>
+<div class="alert alert-warning notification-box" ng-hide="github_associated">
+  <h3>No projects found.</h3>
+  No GitHub account associated with this Bountysource account.
+  <br>
+  <a ng-click="github_auth()">Link your GitHub account now!</a>
+</div>

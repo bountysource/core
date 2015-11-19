@@ -1,0 +1,5 @@
+Hi <%= @person.display_name %>,
+
+<%= @developer_goal.person.display_name %> has placed a <%= number_to_dollars(@developer_goal.amount) %> goal on an issue that you backed, "<%= @developer_goal.issue.title %>".
+
+Spread the word or increase your contribution to help reach <%= @developer_goal.person.display_name %>'s goal: <%= "#{Api::Application.config.www_url}issues/#{@developer_goal.issue.to_param}" %>

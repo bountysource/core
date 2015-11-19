@@ -1,0 +1,64 @@
+<div class="row-fluid">
+  
+  <div class="span12" ng-controller="Search">
+    <loading-bar ng-hide="all_searches">Such loading wow...</loading-bar>
+    <h3 style="margin-top:0px;">Popular Queries</h3>
+    <p>The most searched for terms.</p>
+    <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+      <thead>
+        <tr><th>Hits</th><th>Query</th></tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="search in popular_searches">
+          <td>{{search[1]}}</td>
+          <td>{{search[0]}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <h3 style="margin-top:0px;">All Queries</h3>
+      <p>What people have been searching for.</p>
+      <ul ng-show="all_searches" class="inline unstyled">
+        <li><strong>Total Queries:</strong> {{totalItems}}</li>
+        <li><strong>Page Count:</strong> {{pageCount}}</li>
+        <li><strong>Items Per Page:</strong> {{itemsPerPage}}</li>
+      </ul>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px; table-layout:fixed; width:100%;">
+        <thead>
+          <tr>
+            <th style="width:75%;">
+              <a ng-click="applySort(currentPage, query)">{{ query.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[query.col] && order_hash[query.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[query.col] && order_hash[query.col] == 'desc'"></icon>
+              </a>
+            </th>
+            <th style="width:15%">
+              <a ng-click="applySort(currentPage, searched_on)">{{ searched_on.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[searched_on.col] && order_hash[searched_on.col] == 'desc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[searched_on.col] && order_hash[searched_on.col] == 'asc'"></icon>
+              </a>
+            </th>
+            <th style="width:10%">
+              <a ng-click="applySort(curretPage, person)">{{ person.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[person.col] && order_hash[person.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[person.col] && order_hash[person.col] == 'desc'"></icon>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="search in all_searches">
+            <td style='word-wrap: break-word;'>{{search.query}}</td>
+            <td style='word-wrap: break-word;'>{{search.created_at | date:'short'}}</td>
+            <td style='word-wrap: break-word;'>{{search.person.display_name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

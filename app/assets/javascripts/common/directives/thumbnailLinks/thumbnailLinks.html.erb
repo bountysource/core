@@ -1,0 +1,56 @@
+<div>
+  <div class="row" ng-repeat="i in range()" ng-if="!initialRows || (i/perRow < initialRows)">
+    <div class="col-md-{{12/perRow}} col-sm-{{12/perRow}}" ng-repeat="item in array.slice(i, i + perRow)">
+      <!-- Teams -->
+      <div ng-if="['team','team-with-dismiss'].indexOf(objectType) >= 0" class="text-center thumbnail">
+        <button type="button"  class="close" ng-click="dismissAction({team: item})" ng-if="objectType == 'team-with-dismiss'">
+          &times;
+        </button>
+        <a ng-href="/teams/{{item.slug}}">
+          <img class="img-responsive img-rounded" ng-src="{{item.large_image_url || item.image_url_large}}">
+          <div style="text-overflow:ellipsis; white-space: nowrap; overflow: hidden">{{item.name}}</div>
+        </a>
+      </div>
+
+      <!-- First TeamFundraiserCreate Card - Dummy Card for Creates -->
+      <a ng-if="objectType == 'team-fundraiser-create' && item.dummy" ng-href="/teams/new?creating_fundraiser" class="text-center thumbnail">
+        <img class="img-responsive" src="<%= asset_path('bountysource-grey.png') %>"></img>
+        Create a new team!
+      </a>
+
+      <!-- Team Fudraiser Create -->
+      <a ng-if="objectType == 'team-fundraiser-create' && !item.dummy" ng-click="teamRedirect(item)" class="text-center thumbnail">
+        <img class="img-responsive img-rounded" ng-src="{{item.large_image_url}}">
+        {{item.name}}
+      </a>
+
+      <!-- Team Members -->
+      <a ng-if="objectType == 'team_member'" ng-href="/people/{{item.slug}}" class="text-center thumbnail">
+        <img class="img-responsive" ng-src="{{item.medium_image_url}}" tooltip="{{item.display_name}}" tooltip-placement="top">
+      </a>
+
+      <!-- Trackers -->
+      <a ng-if="objectType == 'tracker' && item.team && item.team.slug" ng-href="{{'/teams/'+item.team.slug+'/issues?tracker_ids='+item.id}}" class="text-center thumbnail">
+        <img class="img-responsive img-rounded" ng-src="{{ item.image_url_medium || item.image_url }}">
+        <div style="text-overflow:ellipsis; white-space: nowrap; overflow: hidden">{{ item.display_name || item.name }}</div>
+      </a>
+      <a ng-if="objectType == 'tracker' && !(item.team && item.team.slug)" ng-href="{{item.frontend_path || '/trackers/'+item.slug}}" class="text-center thumbnail">
+        <img class="img-responsive img-rounded" ng-src="{{ item.image_url_medium || item.image_url }}">
+        <div style="text-overflow:ellipsis; white-space: nowrap; overflow: hidden">{{ item.display_name || item.name }}</div>
+      </a>
+
+      <div ng-if="objectType =='team-project'" class="thumbnail text-center">
+        <button type="button"  class="close" ng-click="dismissAction({tracker: item})" ng-if="dismissAction">
+          &times;
+        </button>
+        <a ng-href="{{ item.frontend_path || '/trackers/'+item.slug }}">
+          <img class="img-responsive img-rounded" ng-src="{{ item.image_url_medium || item.image_url }}"></img>
+          {{ item.name || item.display_name }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="initialRows && (initialRows*perRow < array.length)" style="text-align: right"><a ng-click="initialRows=null">See {{ array.length - (initialRows||0)*perRow }} More &raquo;</a></div>
+
+</div>

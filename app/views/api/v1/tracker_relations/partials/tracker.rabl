@@ -1,0 +1,1 @@
+child(:tracker => :tracker) { extends "api/v1/trackers/partials/base" }

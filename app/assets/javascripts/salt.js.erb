@@ -1,0 +1,12 @@
+//= require angular-rails-templates
+//= require "./salt/app.js"
+//= require_tree "./lib"
+//= require_tree "./salt"
+
+
+/// NOTE: if we want /:team_slug URLs, we have to load those routes LAST.
+///       we could move the $stateProvider definitions into a default_routes.rb
+///       that's loaded last as well as the otherwise('/') route.
+///= stub "./salt/teams/show.js"
+///= require_tree "./salt"
+///= include "./salt/teams/show.js"

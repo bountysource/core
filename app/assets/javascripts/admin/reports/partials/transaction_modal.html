@@ -1,0 +1,49 @@
+<div>
+  <div class="modal-header">
+    <h4>Transaction({{transaction.id}})</h4>
+  </div>
+
+  <div class="modal-body">
+    <loading-bar ng-show="transaction.$loading_full_transaction">Loading Transaction...</loading-bar>
+    <div>
+      <ul class="unstyled" style="margin-top:25px;">
+        <li><strong>Description:  </strong>{{ transaction.description }}</li>
+        <li><strong>Created At:  </strong>{{ transaction.created_at | date: 'medium' }}</li>
+        <li><strong>Audited:  </strong><span ng-show="transaction.audited">Yes</span><span ng-show="!transaction.audited">No</span></li>
+      </ul>
+
+      <div>
+        <h3>Splits</h3>
+        <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Account</th>
+            <th>Item</th>
+            <th>Memo</th>
+            <th>Created</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="split in transaction.splits">
+            <td>{{ split.id }}</td>
+            <td>{{ split.amount | currency }}</td>
+            <td><a ng-href="/admin/accounts/{{ split.account.id }}" ng-show="split.account">{{ accountLink(split.account) }}</a></td>
+            <td><a ng-href="{{itemLink(split)}}" ng-show="split.item_type">{{ split.item_type }} #{{ split.item_id }}</a><span ng-show="!split.item_type">(none)</span></td>
+            <td>{{ split.memo}}</td>
+            <td>{{ split.created_at | date:'short' }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <a ng-href="/admin/transactions/{{ transaction.id }}/edit" target="_blank"><button class="btn btn-primary">Edit Transaction</button></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="save_transaction(transaction)">Save</button>
+    <button class="btn btn-danger" ng-click="delete_transaction(transaction)">Delete</button>
+    <button class="btn" ng-click="close_transaction_modal(transaction)">Close</button>
+  </div>
+</div>

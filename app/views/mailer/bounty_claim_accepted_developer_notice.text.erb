@@ -1,0 +1,15 @@
+Hi <%= @person.first_name %>,
+
+Your claim on "<%= @bounty_claim.issue.title %>" has been accepted. Congratulations!
+<% if @responses.length > 0 %>
+
+  Messages from backers:
+<% end %>
+<% @responses.each do |response| %>
+
+  "<%= response.description %>" - <%= response.person.display_name %>
+<% end %>
+
+The <%= number_to_dollars(@bounty_claim.amount) %> bounty has been paid out to your Bountysource account. To request a cash out, please click here: <%= Api::Application.config.www_url %>activity/cash_outs/new.
+
+Time to show off! Now that you've collected a bounty, we'd like to offer you a Bountysource sticker to display proudly. Reply to this email with your full name and mailing address (non-US addresses are good, too!) and we'll send one to you right away!

@@ -1,0 +1,5 @@
+<p>Dear <%= @person.display_name %>,</p>
+
+<p>A fundraiser you backed, <a href="<%= @fundraiser.frontend_url %>"><%= @fundraiser.title %></a>, is now 50% funded.</p>
+
+<p>Help the fundraiser get to 100% by <%= @fundraiser.ends_at.strftime("%B %d, %Y") %>, keep spreading the word!</p>

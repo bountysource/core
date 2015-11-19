@@ -1,0 +1,93 @@
+<h2>Rewards</h2>
+
+<div class="row">
+  <div class="col-md-6">
+    <div ng-repeat="reward in rewards | orderBy:'amount'" class="alert alert-info">
+      <form name="form" ng-submit="save_reward(reward)">
+        <div ng-hide="rewards.currently_editing===reward" class="reward-edit-wrapper">
+          <a class="btn btn-primary pull-right" ng-click="start_editing(reward, form)">Edit</a>
+          <h3 style="margin-top: 0">
+            {{reward.amount | dollars}} - {{reward.title}}
+            <small>({{reward.active_support_levels_count}} active)</small>
+          </h3>
+          <div>{{reward.description}}</div>
+        </div>
+
+        <div ng-show="rewards.currently_editing===reward">
+
+          <div ng-show="reward.active_support_levels_count===0">
+            <div class="form-group">
+              <label for="subtitle">Amount</label>
+              <div class="input-group col-xs-6 col-md-7 col-lg-6">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control" id="amount" ng-model="edit_form_data.amount" placeholder="500, 1000, etc." />
+                <span class="input-group-addon">per month</span>
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="subtitle">Title</label>
+              <input type="text" class="form-control" id="amount" ng-model="edit_form_data.title" placeholder="Two or three words" />
+            </div>
+            <div class="form-group">
+              <label for="subtitle">Description</label>
+              <textarea msd-elastic class="form-control" id="body_markdown" ng-model="edit_form_data.description" placeholder="Description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-disabled="form.$pristine || saving_edit_form"><span ng-show="saving_form">Saving...</span><span ng-hide="saving_form">Save</span></button>
+            <a ng-click="cancel_editing(reward)" class="btn btn-default">Cancel</a>
+            <a ng-click="delete_reward(reward)" class="btn btn-danger" ng-disabled="deleting_form"><span ng-show="deleting_form">Deleting...</span><span ng-hide="deleting_form">Delete</span></a>
+          </div>
+
+          <div ng-show="reward.active_support_levels_count>0">
+            <h3 style="margin-top: 0">
+              {{reward.amount | dollars}} - {{reward.title}}
+              <small>({{reward.active_support_levels_count}} active)</small>
+            </h3>
+            <p>NOTE: This reward is currently in use and can't be modified.</p>
+            <a ng-click="cancel_editing(reward)" class="btn btn-default">Cancel</a>
+            <a ng-click="delete_reward(reward)" class="btn btn-danger" ng-disabled="deleting_form"><span ng-show="deleting_form">Deleting...</span><span ng-hide="deleting_form">Delete</span></a>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <form name="form" ng-submit="create_reward()" class="alert alert-success" ng-hide="rewards.currently_editing">
+      <div class="form-group">
+        <label for="subtitle">Amount</label>
+        <div class="input-group col-xs-6 col-md-7 col-lg-6">
+          <span class="input-group-addon">$</span>
+          <input type="text" class="form-control" id="amount" ng-model="create_form_data.amount" placeholder="500" />
+          <span class="input-group-addon">per month</span>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label for="subtitle">Title</label>
+        <input type="text" class="form-control" id="amount" ng-model="create_form_data.title" placeholder="Two or three words" />
+      </div>
+      <div class="form-group">
+        <label for="subtitle">Description</label>
+        <textarea msd-elastic class="form-control" id="body_markdown" ng-model="create_form_data.description" placeholder="Description"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" ng-disabled="form.$pristine || saving_create_form"><span ng-show="saving_form">Saving...</span><span ng-hide="saving_form">Create New reward</span></button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div class="well">
+      <h3>Examples</h3>
+      <h4>$5 - Name in Backers.md</h4>
+      We will add your name and URL to our Backers.md
+
+      <h4>$50 - Name in Readme.md</h4>
+      We will add your name and URL to our Readme.md
+
+      <h4>$100 - Name and Small Logo on website</h4>
+      We will add your name and small logo to our website. Email us at my@email.com to get setup. (Note: be specific about regarding size and placement)
+
+      <h4>$250 - Name and Large Logo on website</h4>
+      We will add your name and large logo to our website. Email us at my@email.com to get setup. (Note: be specific logo regarding size and placement)
+
+    </div>
+  </div>
+</div>

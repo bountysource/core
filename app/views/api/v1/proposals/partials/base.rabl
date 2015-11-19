@@ -1,0 +1,9 @@
+attribute :id
+attribute :amount
+attribute :estimated_work
+attribute :completed_by
+attribute :abstract
+attribute :bio
+attribute :state
+attribute :created_at
+attribute :updated_at

@@ -1,0 +1,11 @@
+<h1>Issues</h1>
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="/issues/thumbs">Thumbs</a></li>
+</ul>
+
+<issue-list
+  issues="issues"
+  include="['bountyTotal', 'issueTitle', 'thumbsUpCount', 'participantsCount', 'issueAge', 'team']"
+  set-params="setSearchParameters(params)">
+</issue-list>

@@ -1,0 +1,6 @@
+.markdown img { max-width: 100%; }
+.markdown h1:first-child, .markdown h2:first-child, .markdown h3:first-child, .markdown h4:first-child { margin-top: 0; }
+.markdown-small-headers h1 { font-size: 24px; }
+.markdown-small-headers h2 { font-size: 20px; }
+.markdown-small-headers h3 { font-size: 16px; }
+.markdown-small-headers h4 { font-size: 14px; }

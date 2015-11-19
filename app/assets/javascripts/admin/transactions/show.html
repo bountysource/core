@@ -1,0 +1,48 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <loading-bar ng-hide="transaction">Such loading wow...</loading-bar>
+    <div class="row-fluid" ng-show="transaction">
+      <div class="span12" style="border: 1px solid #ddd; border-radius: 10px; padding:15px;">
+        <h3>{{transaction.type || 'Transaction'}} #{{transaction.id}}</h3>
+        <ul class="unstyled" style="margin-top:25px;">
+          <li><strong>Description:  </strong>{{ transaction.description }}</li>
+          <li><strong>Created At:  </strong>{{ transaction.created_at | date: 'medium' }}</li>
+          <li><strong>Audited:  </strong><span ng-show="transaction.audited">Yes</span><span ng-show="!transaction.audited">No</span></li>
+        </ul>
+
+        <div>
+          <h3>Splits</h3>
+          <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Account</th>
+                <th>Item</th>
+                <th>Memo</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="split in transaction.splits">
+                <td>{{ split.id }}</td>
+                <td>{{ split.amount | currency }}</td>
+                <td><a ng-href="/admin/accounts/{{ split.account.id }}" ng-show="split.account">{{ accountLink(split.account) }}</a></td>
+                <td><a ng-href="{{itemLink(split)}}" ng-show="split.item_type">{{ split.item_type }} #{{ split.item_id }}</a><span ng-show="!split.item_type">(none)</span></td>
+                <td>{{ split.memo}}</td>
+                <td>{{ split.created_at | date:'short' }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <a ng-href="/admin/transactions/{{ transaction.id }}/edit"><button class="btn btn-primary">Edit Transaction</button></a>
+          <button ng-click="confirmDelete()" class="btn btn-danger">Delete Transaction</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

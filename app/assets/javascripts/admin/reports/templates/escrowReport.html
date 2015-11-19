@@ -1,0 +1,142 @@
+<div class="row-fluid">
+  <div class="span8">
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th style="width:30%">Start Balance</th>
+        <th>{{report.start_balance | currency}}</th>
+      </tr>
+
+      <tr><td colspan="2"></td></tr>
+
+      <tr><th colspan="2">Sales</th></tr>
+
+      <tr>
+        <td style="width:30%">Bounties</td>
+        <td>{{report.bounty_sales | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Pledges</td>
+        <td>{{report.pledge_sales | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Team Payins</td>
+        <td>{{report.team_sales | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Merchandise</td>
+        <td>{{report.merch_sales | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Refunds</td>
+        <td>{{report.refunds | currency}}</td>
+      </tr>
+
+      <tr>
+        <th style="width:30%">Total</th>
+        <th>{{report.bounty_sales + report.pledge_sales + report.merch_sales + report.refunds + report.team_sales | currency}}</th>
+      </tr>
+
+      <tr><td colspan="2"></td></tr>
+
+      <tr><th colspan="2">Liability</th></tr>
+
+      <tr>
+        <td style="width:30%">Bounties</td>
+        <td>{{report.bounty_liability | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Pledges</td>
+        <td>{{report.pledge_liability | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Team Payins</td>
+        <td>{{report.team_liability | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Cash Outs</td>
+        <td>{{report.cash_out_liability | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Refunds</td>
+        <td>{{report.refund_liability | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Trackers</td>
+        <td>{{report.tracker_liability | currency}}</td>
+      </tr>
+
+      <tr>
+        <th>Total</th>
+        <th>{{report.bounty_liability + report.pledge_liability + report.team_liability + report.cash_out_liability + report.refund_liability + report.tracker_liability | currency}}</th>
+      </tr>
+
+      <tr><td colspan="2"></td></tr>
+
+      <tr>
+        <td style="width:30%">Processing Fees</td>
+        <td>{{report.processing_fees | currency}}</td>
+      </tr>
+
+      <tr>
+        <td style="width:30%">Refunded Fees</td>
+        <td>{{report.refunded_fees | currency}}</td>
+      </tr>
+
+      <tr>
+        <th style="width:30%">Gross Fees</th>
+        <th>{{report.processing_fees + report.refunded_fees | currency}}</th>
+      </tr>
+
+      <tr><td colspan="2"></td></tr>
+
+      <tr>
+        <th style="width:30%">Bank Transfers</th>
+        <th>{{report.transfers | currency}}</th>
+      </tr>
+
+      <tr><td colspan="2"></td></tr>
+
+      <tr>
+        <th style="width:30%">Cash Outs</th>
+        <th>{{report.cash_outs | currency}}</th>
+      </tr>
+
+      <tr><td colspan="2"></td></tr>
+
+      <tr>
+        <th style="width:30%">End Balance</th>
+        <th>{{report.end_balance | currency}}</th>
+      </tr>
+    </table>
+
+    <table class="table table-striped table-bordered table-condensed" ng-show="report.splits">
+      <tr>
+        <th>Created</th>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Amount</th>
+      </tr>
+      <tr ng-repeat="split in report.splits" ng-class="{ 'error': (!split.transaction.audited) }">
+        <td>{{split.created_at | date}}</td>
+        <td><a ng-href="/admin/transactions/{{split.transaction.id}}" target="_blank">{{split.id}}</a></td>
+        <td><a ng-href="/admin/transactions/{{split.transaction.id}}" target="_blank">{{split.transaction.type}}({{split.transaction.id}})</a></td>
+        <td><a ng-href="/admin/transactions/{{split.transaction.id}}" target="_blank">{{split.transaction.description}}</a></td>
+        <td>{{split.amount | currency}}</td>
+      </tr>
+      <tr>
+        <th colspan="4" style="text-align: right;">Total</th>
+        <th>{{report.splitsTotal() | currency}}</th>
+      </tr>
+    </table>
+  </div>
+</div>

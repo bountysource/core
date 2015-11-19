@@ -1,0 +1,42 @@
+<div class="row-fluid">
+
+  <div class="span12">
+    <div>
+      <h3 style="margin-top:0px;">Trackers</h3>
+      <p style="margin-top:5px;" ng-show="totalItems">Total Trackers: {{totalItems}}</p>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;" ng-hide="working">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Bounty Total</th>
+            <th>Watchers</th>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Team slug</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="tracker in trackers">
+            <td style="word-wrap: break-word;"><a ng-href="/admin/trackers/{{ tracker.id }}">{{tracker.id}}</a></td>
+            <td style="word-wrap: break-word;">{{ tracker.bounty_total | dollars }}</td>
+            <td style="word-wrap: break-word;">{{ tracker.watchers }}</td>
+            <td style="word-wrap: break-word;">
+              <a ng-href="/admin/trackers/{{ tracker.id }}">{{ tracker.name }}</a>
+              --
+              <a ng-href="{{ tracker.frontend_url }}" target="_blank">frontend</a>
+              --
+              <a ng-href="{{ tracker.url }}" target="_blank">tracker</a>
+            </td>
+            <td><a href="/teams/{{tracker.team.slug}}" target="_blank">{{ tracker.team.name}}</a> </td>
+            <td><a href="/admin/teams/{{tracker.team.slug}}">{{ tracker.team.slug}}</a> </td>
+            <td>{{ tracker.tracker_type }}</td>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

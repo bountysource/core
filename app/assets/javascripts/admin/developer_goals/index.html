@@ -1,0 +1,33 @@
+<div class="row-fluid">
+  
+  <div class="span12">
+    <loading-bar ng-hide="!working">Such loading wow...</loading-bar>
+
+    <div>
+      <h3 style="margin-top:0px;">Developer Goals</h3>
+      <p style="margin-top:5px;">Total Goals: {{ developer_goals.length | number}}</p>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Created On</th>
+            <th>Amount</th>
+            <th>Issue</th>
+            <th>Person</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="goal in developer_goals">
+            <td>{{ goal.id }}</td>
+            <td>{{ goal.created_at | date:'short' }}</td>
+            <td>{{ goal.amount | dollars }}</td>
+            <td><a ng-href="/admin/issues/{{ goal.issue.id }}">{{ goal.issue.title }}</a></td>
+            <td><a ng-href="/admin/people/{{ goal.person.id }}">{{ goal.person.display_name }}</a></td>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+
+</div>

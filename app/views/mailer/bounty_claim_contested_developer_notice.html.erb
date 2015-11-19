@@ -1,0 +1,11 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+  Another developer has submitted a claim for <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}" %>"><%= @bounty_claim.issue.title %></a>.
+</p>
+
+<p>  
+  The $<%= @bounty_claim.issue.bounty_total.round %> bounty will be paid out to the developer whose claim is accepted by all of the backers. If you have any questions, please <a href="mailto:support@bountysource.com">email us</a>.
+</p>

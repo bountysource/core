@@ -1,0 +1,52 @@
+<div>
+  <table class="table table-striped table-centered">
+    <thead>
+    <tr>
+      <th>
+        <!--<a ng-click="changeOrder('display_name')">Backer</a>-->
+        <span>Backer</span>
+      </th>
+      <th>
+        <!--<a ng-click="changeOrder('amount')">Amount</a>-->
+        <span>Amount</span>
+      </th>
+      <th>
+        <!--<a ng-click="changeOrder('created_at')">Date</a>-->
+        <span>Date</span>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="backer in backers">
+      <!-- Backer Avatar -->
+      <td>
+        <a owner-href="backer">
+          <img class="img-responsive img-thumbnail" style="width: 50px;" ng-src="{{backer.image_url_medium}}">
+        </a>
+        <a owner-href="backer" style="margin-left: 5px;">{{backer.display_name}}</a>
+      </td>
+
+      <!-- Total Amount Backed -->
+      <td>
+        <span>{{backer.amount | dollars}}</span>
+      </td>
+
+      <!-- Last Activity Date -->
+      <td>
+        <span class="text-muted">{{backer.last_activity_at | date:'mediumDate' }}</span>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+
+  <!-- Pagination Links http://angular-ui.github.io/bootstrap/#/pagination -->
+  <!--<pagination ng-if="_options.showPaginationButtons"-->
+    <!--page="pagination.currentPage"-->
+    <!--total-items="pagination.totalItems || 100"-->
+    <!--items-per-page="pagination.perPage || 30"-->
+    <!--rotate="true"-->
+    <!--on-select-page="pageChanged(page)"-->
+    <!--boundary-links="true"></pagination>-->
+</div>

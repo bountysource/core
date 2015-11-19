@@ -1,0 +1,1 @@
+json.array! @collection, partial: 'api/v2/trackers/base', as: :item

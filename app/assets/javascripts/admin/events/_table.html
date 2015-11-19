@@ -1,0 +1,23 @@
+<table class="table table-condensed table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Created</th>
+      <th>Person</th>
+      <th>Event</th>
+      <th>Page</th>
+      <th>Payload</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="event in events">
+      <td>{{event.created_at | date:'medium'}}</td>
+      <td>
+        <div ng-show="event.person.id"><a href="/admin/people/{{event.person.id}}">{{event.person.display_name}}</a></div>
+        <div ng-hide="event.person.id">{{event.distinct_id}}</div>
+      </td>
+      <td>{{event.event}}</td>
+      <td>{{event.payload.properties.page}}</td>
+      <td><a ng-hide="event.show_payload" ng-click="event.show_payload=true">show</a><div ng-show="event.show_payload">{{event.payload.properties}}</div></td>
+    </tr>
+  </tbody>
+</table>

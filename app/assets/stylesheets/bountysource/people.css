@@ -1,0 +1,23 @@
+table#person-timeline-table tr td {
+  vertical-align: middle;
+}
+
+table#person-timeline-table tr td img.thumbnail {
+  width: 30px;
+  height: 30px;
+}
+
+#infobox-wrapper ul { list-style: none; margin-left: 10px; }
+
+label.setings_profile_pic { display: inline-block; padding-right: 30px }
+label.setings_profile_pic input { margin-top: 18px }
+label.setings_profile_pic img { width: 50px; height: 50px; }
+
+table#table-profile tr td:first-of-type {
+  text-align: right;
+  font-weight: bold;
+}
+
+table#table-profile tr:first-of-type {
+  border-top: 0;
+}

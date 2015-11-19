@@ -1,0 +1,12 @@
+%div{ "ng-show"=>"issue.id" }
+  %team-view
+
+    .alert.alert-warning{ "ng-show" => "issue.can_add_bounty && issue.team.bounties_disabled" }
+      %div{"style"=>"text-align: center; font-size: 18px"}
+        Bounties for this issue have been disabled by the team.
+
+    %div{ "ng-show" => "!issue.team.bounties_disabled" }
+      %div{ "ng-include" => "'app/issues/_show_backer_box.html'" }
+      %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
+
+    %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }

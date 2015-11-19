@@ -1,0 +1,99 @@
+<!-- <div class="row">
+  <div class="col-md-3">
+    <h1>Summary</h1>
+    <ul>
+      <li>Total of X users</li>
+      <li>Total of Y teams</li>
+      <li>Total of $Z spent</li>
+      <li>Total of $Z earned</li>
+    </ul>
+  </div>
+
+  <div class="col-md-9"> -->
+
+<div ng-show="all_charts.length > 0">
+  <div class="btn-group">
+    <button type="button" class="btn btn-default" ng-class="{'active': time_period === 'daily'}" ng-click="viewCharts('daily', hide_current_period)">Daily</button>
+    <button type="button" class="btn btn-default" ng-class="{'active': time_period === 'weekly'}" ng-click="viewCharts('weekly', hide_current_period)">Weekly</button>
+    <button type="button" class="btn btn-default" ng-class="{'active': time_period === 'monthly'}" ng-click="viewCharts('monthly', hide_current_period)">Monthly</button>
+    <button type="button" class="btn btn-default" ng-class="{'active': time_period === 'quarterly'}" ng-click="viewCharts('quarterly', hide_current_period)">Quarterly</button>
+  </div>
+
+  <label><input type="checkbox" ng-model="hide_current_period" ng-click="viewCharts(time_period, !hide_current_period)" /> Hide Current Period</label>
+
+  <h1>Primary KPIs</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Active Users</h4>
+      <div id="chart_active_users" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Active Teams</h4>
+      <div id="chart_active_teams" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Donations ($)</h4>
+      <div id="chart_donations_sum_summary" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Donations (#)</h4>
+      <div id="chart_donations_count_summary" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Bounties ($)</h4>
+      <div id="chart_bounties_sum_summary" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Bounties (#)</h4>
+      <div id="chart_bounties_count_summary" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Issue Actions</h4>
+      <div id="chart_issue_actions" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Team Actions</h4>
+      <div id="chart_team_actions" style="width: 100%; height:300px"></div>
+    </div>
+  </div>
+
+
+  <h1>Secondary KPIs</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Spent Detail</h4>
+      <div id="chart_spent_detail" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Earned Detail</h4>
+      <div id="chart_earned_detail" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Spenders</h4>
+      <div id="chart_spenders" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Earners</h4>
+      <div id="chart_earners" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Posted Bounties</h4>
+      <div id="chart_posted_bounties" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Awarded Bounties</h4>
+      <div id="chart_awarded_bounties" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Number of Bounties</h4>
+      <div id="chart_bounties_count" style="width: 100%; height:300px"></div>
+    </div>
+    <div class="col-md-6">
+      <h4>Engagements</h4>
+      <div id="chart_engagements" style="width: 100%; height:300px"></div>
+    </div>
+  </div>
+</div>
+
+  <!-- </div>
+</div> -->

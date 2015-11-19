@@ -1,0 +1,8 @@
+Hi <%= @person.display_name %>,
+
+Your permissions for <%= @team.name %> have been modified by <%= @admin.display_name %>:
+- Developer privileges <%= @member_relation.developer ? "enabled" : "disabled" %>.
+- Public visibility <%= @member_relation.public ? "enabled" : "disabled" %>.
+- Admin access <%= @member_relation.admin ? "enabled" : "disabled" %>.
+
+You can view the team here: <%= "#{Api::Application.config.www_url}teams/#{@team.to_param}" %>

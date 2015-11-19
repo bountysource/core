@@ -1,0 +1,4 @@
+%a
+  %img{ "ng-src"=>"{{match.model.image_url}}", "style"=>"width: 16px; height:16px", "ng-if"=>"match.model.type==='Team'" }
+  %span.glyphicon.glyphicon-tag{ "ng-if"=>"match.model.type==='Tag'" }
+  %span{ "bind-html-unsafe"=>"match.label | encodeEntities | typeaheadHighlight:query" }

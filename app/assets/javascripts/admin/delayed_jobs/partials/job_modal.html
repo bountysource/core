@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4>Delayed::Job ({{job.id}})</h4>
+</div>
+
+<div class="modal-body">
+  <loading-bar collapse="!job.$performing">Performing job...</loading-bar>
+
+  <ul>
+    <li>Attempts: <strong>{{job.attempts}}</strong></li>
+    <li>Last Run: <strong>{{job.run_at | date:'medium'}}</strong></li>
+    <li>Enqueued: <strong>{{job.created_at | date:'medium'}}</strong></li>
+  </ul>
+
+  <br />
+
+  <!-- Object Details -->
+  <h4><{{job.handler.object_type}} id: {{job.handler.object_id}}></h4>
+  <pre>{{job.handler.object_attributes}}</pre>
+
+  <br />
+
+  <!-- Method -->
+  <h4>Method: :{{job.handler.method_name}}</h4>
+  <h5>Payload</h5>
+  <ol>
+    <li ng-repeat="arg in job.handler.args"><pre>{{arg}}</pre></li>
+  </ol>
+
+  <br />
+
+  <!-- Backtrace -->
+  <h4>Backtrace</h4>
+  <pre>{{job.last_error}}</pre>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="perform_job(job)">Perform</button>
+  <button class="btn btn-danger" ng-click="delete_job(job)">Delete</button>
+  <button class="btn" ng-click="close_job_modal(job)">Close</button>
+</div>

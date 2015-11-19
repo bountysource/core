@@ -1,0 +1,9 @@
+<span>
+  <button class="btn btn-default btn-sm" ng-click="openFacebook(item)"><img style="width:16px; height:16px" src='<%= asset_path("facebook_share_32.png") %>'><strong style="margin-left:10px">Facebook</strong></button>
+
+  <a ng-href="https://www.twitter.com/intent/tweet?text={{ tweet_text }}&url={{ tweet_url }}" target="_blank" style="text-decoration:none;">
+    <button class="btn btn-default btn-sm"><img style="width:16px; height:16px" src='<%= asset_path("bird_blue_32.png") %>'><strong style="margin-left:10px">Tweet</strong></button>
+  </a>
+
+  <button class="btn btn-default btn-sm" ng-click="openGooglePlus(item)"><img style="width:16px; height:16px" src='<%= asset_path("gplus-32.png") %>'><strong style="margin-left:10px">Google+</strong></button>
+</span>

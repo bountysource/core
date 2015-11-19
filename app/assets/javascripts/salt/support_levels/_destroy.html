@@ -1,0 +1,19 @@
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-3">
+      <img ng-src="{{team.image_url_medium}}" class="img-responsive" />
+    </div>
+    <div class="col-md-9">
+      <h4>Cancel your support of {{ team.name }}?</h4>
+      <p>
+        {{ support_level.amount | dollars }}/month<br/>
+        <em>{{ support_level.payment_method.description}}</em>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="dismiss()">Don't Cancel</button>
+  <button class="btn btn-default" ng-click="edit_support()">Edit Details</button>
+  <button class="btn btn-danger" ng-click="cancel_support()">Yes, Cancel Support</button>
+</div>

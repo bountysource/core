@@ -1,0 +1,25 @@
+<div ng-hide="redirecting || pending_connect">
+  <div ng-show="error">
+    <alert type="'danger'" close="error = null">{{error}}</alert>
+  </div>
+
+  <div class="text-center jumbotron">
+    <h2>Authorize Bountysource</h2>
+    <p class="lead">Link your Bountysource account with {{provider | fromSnakeCase | title}}, allowing for jolly cooperation!</p>
+    <button ng-click="accept()" class="btn btn-success btn-lg" style="width: 150px;">Accept</button>
+    <button ng-click="reject()" class="btn btn-danger btn-lg" style="width: 150px;">Reject</button>
+  </div>
+</div>
+
+<div ng-show="!redirecting && pending_connect" class="text-center">
+  <p class="lead">Connecting accounts...</p>
+  <p>Please entertain yourself by staring at the loading bar below.</p>
+  <loading-bar></loading-bar>
+</div>
+
+<div ng-show="redirecting" class="text-center">
+  <div class="text-center jumbotron">
+    <h2>Great Success!</h2>
+    <p class="lead">Redirecting to {{provider | fromSnakeCase | title}}...</p>
+  </div>
+</div>

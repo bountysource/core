@@ -1,0 +1,22 @@
+Account Created
+===============
+
+Hi <%= @person.first_name %>,
+
+Welcome to Bountysource, the marketplace for continuous funding of open-source software. We're thrilled to have you on board!
+
+There is a lot you can do on the site, so we want to point you toward a few good places to start:
+
+<% if @show_github_plugin_block %>
+
+Install the GitHub plugin: If you're looking for a way to start promoting bounties within your community, this is it. Our plugin for GitHub (<%= Api::Application.config.www_url %>tools) automatically updates your issues with bounty details.
+
+<% end %>
+
+Grow your project: When you create a Team (<%= Api::Application.config.www_url %>teams/new), you can streamline all fundraising efforts by having them in one place -- bounties, fundraisers, project donations are all centered around Teams.
+
+Earn money while improving open-source: Use our Bounty Search (<%= Api::Application.config.www_url %>bounties/search) to discover active bounties. You can filter by project, language, bounty amount, and more.
+
+Have an issue you want to see solved? Paste the issue URL (e.g. "https://github.com/owner/project/issues/123") into our search and post a bounty on it.
+
+Support: Join us on IRC (#Bountysource on Freenode), check out our FAQs (<%= Api::Application.config.www_url %>faq), or reply to this email. We're here to help!
