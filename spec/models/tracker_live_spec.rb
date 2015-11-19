@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe "live_sync" do
 
+  # use VCR to record live responses
+  around(:each) do |example|
+    name = example.metadata[:full_description].split(/\s+/, 2).join("/").underscore.gsub(/[^\w\/]+/, "_")
+    VCR.use_cassette(name) { example.call }
+  end
+
   describe "Issue#remote_sync" do
     let(:action) do
       lambda {
@@ -362,13 +368,6 @@ describe "live_sync" do
 
     ############### JIRA ###############
 
-
-    it "http://dev.clojure.org/jira/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('http://dev.clojure.org/jira/')
-      info[:tracker_name].should eq('??')
-    end
 
     it "http://dev.clojure.org/jira/browse/CLJS" do
       info[:issue_class].should be_nil
