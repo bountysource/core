@@ -18,7 +18,7 @@ http_interactions:
       Server:
       - nginx/0.7.65
       Date:
-      - Thu, 19 Nov 2015 04:05:59 GMT
+      - Thu, 19 Nov 2015 19:37:14 GMT
       Content-Type:
       - text/html;charset=utf-8
       Connection:
@@ -28,8 +28,8 @@ http_interactions:
       Content-Length:
       - '11260'
       Set-Cookie:
-      - trac_form_token=4467cf110442c7cc8f9449dd; Path=/
-      - trac_session=9a09ca1f103e22b0730c5b6a; expires=Wed, 17-Feb-2016 04:05:59 GMT;
+      - trac_form_token=0b7114964eb70987d9457199; Path=/
+      - trac_session=017a0c5618d829d816d025ce; expires=Wed, 17-Feb-2016 19:37:14 GMT;
         Path=/
     body:
       encoding: ASCII-8BIT
@@ -286,5 +286,5 @@ http_interactions:
         JylbMF0pLmFwcGVuZENoaWxkKGdhKTt9KSgpOwoJPC9zY3JpcHQ+CjwvYm9k
         eT4KPC9odG1sPg==
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:05:59 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:14 GMT
 recorded_with: VCR 2.9.3

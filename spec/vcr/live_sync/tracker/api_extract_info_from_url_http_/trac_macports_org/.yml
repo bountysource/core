@@ -16,7 +16,7 @@ http_interactions:
       message: Ok
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:04:55 GMT
+      - Thu, 19 Nov 2015 19:36:09 GMT
       Server:
       - Apache/2.2
       Cache-Control:
@@ -26,8 +26,8 @@ http_interactions:
       Content-Length:
       - '13141'
       Set-Cookie:
-      - trac_form_token=8e39955a34ec4ac653bb9174; Path=/
-      - trac_session=8b2fb388b66aff7a8d349dd6; expires=Wed, 17-Feb-2016 04:04:56 GMT;
+      - trac_form_token=0bdf481dc8f4f5ffd3e939c4; Path=/
+      - trac_session=f3a09d60d25b9806ecc09250; expires=Wed, 17-Feb-2016 19:36:09 GMT;
         Path=/
       Access-Control-Allow-Origin:
       - "*"
@@ -332,5 +332,5 @@ http_interactions:
         anMvbWFpbi5qcyI+PC9zY3JpcHQ+CiA8L2Rpdj4KIDwvYm9keT4KPC9odG1s
         Pg==
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:00 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:16 GMT
 recorded_with: VCR 2.9.3

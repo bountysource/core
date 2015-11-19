@@ -16,7 +16,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:03:02 GMT
+      - Thu, 19 Nov 2015 19:33:11 GMT
       Server:
       - zope.server.http (HTTP)
       X-Powered-By:
@@ -36,13 +36,13 @@ http_interactions:
       Content-Type:
       - text/html;charset=utf-8
       Age:
-      - '4'
+      - '5'
       X-Cache:
-      - HIT from nutmeg.canonical.com
+      - HIT from banana.canonical.com
       X-Cache-Lookup:
-      - HIT from nutmeg.canonical.com:3128
+      - HIT from banana.canonical.com:3128
       Via:
-      - 1.0 nutmeg.canonical.com:3128 (squid/2.7.STABLE7)
+      - 1.0 banana.canonical.com:3128 (squid/2.7.STABLE7)
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -1720,8 +1720,8 @@ http_interactions:
         dCBuYW1lOiBidWdzCiAgICBQYWdlIHR5cGU6IG1haW5fc2lkZQogICAgSGFz
         IGdsb2JhbCBzZWFyY2g6IFRydWUKICAgIEhhcyBhcHBsaWNhdGlvbiB0YWJz
         OiBUcnVlCiAgICBIYXMgc2lkZSBwb3J0bGV0czogVHJ1ZQoKICAgIEF0IGxl
-        YXN0IDYyIHF1ZXJpZXMvZXh0ZXJuYWwgYWN0aW9ucyBpc3N1ZWQgaW4gMC44
-        NiBzZWNvbmRzCgogICAgRmVhdHVyZXM6IHsnYXBwLm1haW5zaXRlX29ubHku
+        YXN0IDYyIHF1ZXJpZXMvZXh0ZXJuYWwgYWN0aW9ucyBpc3N1ZWQgaW4gMC45
+        OSBzZWNvbmRzCgogICAgRmVhdHVyZXM6IHsnYXBwLm1haW5zaXRlX29ubHku
         Y2Fub25pY2FsX3VybCc6IE5vbmUsICdiYXNlbGF5b3V0LmNhcmVlcnNfbGlu
         ay5kaXNhYmxlZCc6IE5vbmUsICdidWdzLmFmZmVjdGVkX2NvdW50X2luY2x1
         ZGVzX2R1cGVzLmRpc2FibGVkJzogTm9uZSwgJ2hhcmRfdGltZW91dCc6IHUn
@@ -1729,5 +1729,5 @@ http_interactions:
         c2lvbic6IE5vbmUsICd2aXNpYmxlX3JlbmRlcl90aW1lJzogTm9uZX0KCiAg
         ICByMTc4NTAKCiAgICAtLT4KCjwvaHRtbD4KCg==
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:07 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:17 GMT
 recorded_with: VCR 2.9.3

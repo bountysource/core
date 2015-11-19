@@ -16,7 +16,7 @@ http_interactions:
       message: Ok
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:05:57 GMT
+      - Thu, 19 Nov 2015 19:37:11 GMT
       Server:
       - Apache/2.2.3 (CentOS)
       Cache-Control:
@@ -24,8 +24,8 @@ http_interactions:
       Expires:
       - Fri, 01 Jan 1999 00:00:00 GMT
       Set-Cookie:
-      - trac_form_token=b9a42b489208cf5dfe3a2d96; httponly; Path=/
-      - trac_session=39a6bd380a53ff02991e6f68; expires=Wed, 17-Feb-2016 04:05:57 GMT;
+      - trac_form_token=486c8f2eaf83a3e1937873af; httponly; Path=/
+      - trac_session=682871e3229660abd6122906; expires=Wed, 17-Feb-2016 19:37:11 GMT;
         httponly; Path=/
       Strict-Transport-Security:
       - max-age=2628000
@@ -201,5 +201,5 @@ http_interactions:
         IDwvdWw+CiAgICA8L2Rpdj4KICAgIDwvZGl2PgoJCQk8L2Rpdj4KCQk8L2Rp
         dj4KCTwvZGl2PgogIDwvYm9keT4KPC9odG1sPg==
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:05:57 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:11 GMT
 recorded_with: VCR 2.9.3

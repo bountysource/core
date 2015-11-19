@@ -16,7 +16,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:04:50 GMT
+      - Thu, 19 Nov 2015 19:36:28 GMT
       Server:
       - zope.server.http (HTTP)
       X-Powered-By:
@@ -35,14 +35,12 @@ http_interactions:
       - SAMEORIGIN
       Content-Type:
       - text/html;charset=utf-8
-      Age:
-      - '30'
       X-Cache:
-      - HIT from nutmeg.canonical.com
+      - MISS from banana.canonical.com
       X-Cache-Lookup:
-      - HIT from nutmeg.canonical.com:3128
+      - MISS from banana.canonical.com:3128
       Via:
-      - 1.0 nutmeg.canonical.com:3128 (squid/2.7.STABLE7)
+      - 1.0 banana.canonical.com:3128 (squid/2.7.STABLE7)
     body:
       encoding: UTF-8
       string: "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"\n
@@ -2164,12 +2162,12 @@ http_interactions:
         \   \n  \n\n    \n  </body>\n\n\n  <!--\n    Facet name: bugs\n    Page type:
         main_side\n    Has global search: True\n    Has application tabs: True\n    Has
         side portlets: True\n\n    At least 37 queries/external actions issued in
-        1.27 seconds\n\n    Features: {'app.mainsite_only.canonical_url': None, 'js.yui_version':
+        0.86 seconds\n\n    Features: {'app.mainsite_only.canonical_url': None, 'js.yui_version':
         None, 'hard_timeout': u'5000', 'profiling.enabled': None, 'visible_render_time':
         None, 'baselayout.careers_link.disabled': None, 'ajax.batch_navigator.enabled':
         None, 'bugs.dynamic_bug_listings.pre_fetch': None}\n\n    r17850\n\n    -->\n\n</html>\n\n"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:05:23 GMT
+  recorded_at: Thu, 19 Nov 2015 19:36:31 GMT
 - request:
     method: get
     uri: https://bugs.launchpad.net/gwibber/+bugs?field.status:list%5B0%5D=NEW&field.status:list%5B1%5D=CONFIRMED&field.status:list%5B2%5D=INPROGRESS&limit=75&order=-important&start=75
@@ -2186,7 +2184,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:04:56 GMT
+      - Thu, 19 Nov 2015 19:36:13 GMT
       Server:
       - zope.server.http (HTTP)
       X-Powered-By:
@@ -2206,7 +2204,7 @@ http_interactions:
       Content-Type:
       - text/html;charset=utf-8
       Age:
-      - '28'
+      - '19'
       X-Cache:
       - HIT from nutmeg.canonical.com
       X-Cache-Lookup:
@@ -4193,13 +4191,13 @@ http_interactions:
         \"Unknown\"]};</script>\n\n    \n  \n\n    \n  </body>\n\n\n  <!--\n    Facet
         name: bugs\n    Page type: main_side\n    Has global search: True\n    Has
         application tabs: True\n    Has side portlets: True\n\n    At least 36 queries/external
-        actions issued in 0.58 seconds\n\n    Features: {'app.mainsite_only.canonical_url':
+        actions issued in 0.63 seconds\n\n    Features: {'app.mainsite_only.canonical_url':
         None, 'js.yui_version': None, 'hard_timeout': u'5000', 'profiling.enabled':
         None, 'visible_render_time': None, 'baselayout.careers_link.disabled': None,
         'ajax.batch_navigator.enabled': None, 'bugs.dynamic_bug_listings.pre_fetch':
         None}\n\n    r17850\n\n    -->\n\n</html>\n\n"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:05:26 GMT
+  recorded_at: Thu, 19 Nov 2015 19:36:35 GMT
 - request:
     method: get
     uri: https://bugs.launchpad.net/gwibber/+bugs?field.status:list%5B0%5D=NEW&field.status:list%5B1%5D=CONFIRMED&field.status:list%5B2%5D=INPROGRESS&limit=75&order=-important&start=150
@@ -4216,7 +4214,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:05:00 GMT
+      - Thu, 19 Nov 2015 19:36:37 GMT
       Server:
       - zope.server.http (HTTP)
       X-Powered-By:
@@ -4235,14 +4233,12 @@ http_interactions:
       - SAMEORIGIN
       Content-Type:
       - text/html;charset=utf-8
-      Age:
-      - '27'
       X-Cache:
-      - HIT from nutmeg.canonical.com
+      - MISS from banana.canonical.com
       X-Cache-Lookup:
-      - HIT from nutmeg.canonical.com:3128
+      - MISS from banana.canonical.com:3128
       Via:
-      - 1.0 nutmeg.canonical.com:3128 (squid/2.7.STABLE7)
+      - 1.0 banana.canonical.com:3128 (squid/2.7.STABLE7)
     body:
       encoding: UTF-8
       string: "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"\n
@@ -6258,13 +6254,13 @@ http_interactions:
         \"Unknown\"]};</script>\n\n    \n  \n\n    \n  </body>\n\n\n  <!--\n    Facet
         name: bugs\n    Page type: main_side\n    Has global search: True\n    Has
         application tabs: True\n    Has side portlets: True\n\n    At least 37 queries/external
-        actions issued in 1.03 seconds\n\n    Features: {'app.mainsite_only.canonical_url':
+        actions issued in 0.62 seconds\n\n    Features: {'app.mainsite_only.canonical_url':
         None, 'js.yui_version': None, 'hard_timeout': u'5000', 'profiling.enabled':
         None, 'visible_render_time': None, 'baselayout.careers_link.disabled': None,
         'ajax.batch_navigator.enabled': None, 'bugs.dynamic_bug_listings.pre_fetch':
         None}\n\n    r17850\n\n    -->\n\n</html>\n\n"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:05:29 GMT
+  recorded_at: Thu, 19 Nov 2015 19:36:39 GMT
 - request:
     method: get
     uri: https://bugs.launchpad.net/gwibber/+bugs?field.status:list%5B0%5D=NEW&field.status:list%5B1%5D=CONFIRMED&field.status:list%5B2%5D=INPROGRESS&limit=75&order=-important&start=225
@@ -6281,7 +6277,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:05:10 GMT
+      - Thu, 19 Nov 2015 19:36:21 GMT
       Server:
       - zope.server.http (HTTP)
       X-Powered-By:
@@ -6301,13 +6297,13 @@ http_interactions:
       Content-Type:
       - text/html;charset=utf-8
       Age:
-      - '21'
+      - '19'
       X-Cache:
-      - HIT from nutmeg.canonical.com
+      - HIT from banana.canonical.com
       X-Cache-Lookup:
-      - HIT from nutmeg.canonical.com:3128
+      - HIT from banana.canonical.com:3128
       Via:
-      - 1.0 nutmeg.canonical.com:3128 (squid/2.7.STABLE7)
+      - 1.0 banana.canonical.com:3128 (squid/2.7.STABLE7)
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -9952,7 +9948,7 @@ http_interactions:
         CiAgICBIYXMgZ2xvYmFsIHNlYXJjaDogVHJ1ZQogICAgSGFzIGFwcGxpY2F0
         aW9uIHRhYnM6IFRydWUKICAgIEhhcyBzaWRlIHBvcnRsZXRzOiBUcnVlCgog
         ICAgQXQgbGVhc3QgMzcgcXVlcmllcy9leHRlcm5hbCBhY3Rpb25zIGlzc3Vl
-        ZCBpbiAxLjM0IHNlY29uZHMKCiAgICBGZWF0dXJlczogeydhcHAubWFpbnNp
+        ZCBpbiAxLjUwIHNlY29uZHMKCiAgICBGZWF0dXJlczogeydhcHAubWFpbnNp
         dGVfb25seS5jYW5vbmljYWxfdXJsJzogTm9uZSwgJ2pzLnl1aV92ZXJzaW9u
         JzogTm9uZSwgJ2hhcmRfdGltZW91dCc6IHUnNTAwMCcsICdwcm9maWxpbmcu
         ZW5hYmxlZCc6IE5vbmUsICd2aXNpYmxlX3JlbmRlcl90aW1lJzogTm9uZSwg
@@ -9961,7 +9957,7 @@ http_interactions:
         bWljX2J1Z19saXN0aW5ncy5wcmVfZmV0Y2gnOiBOb25lfQoKICAgIHIxNzg1
         MAoKICAgIC0tPgoKPC9odG1sPgoK
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:05:37 GMT
+  recorded_at: Thu, 19 Nov 2015 19:36:41 GMT
 - request:
     method: get
     uri: https://bugs.launchpad.net/gwibber/+bugs?field.status:list%5B0%5D=NEW&field.status:list%5B1%5D=CONFIRMED&field.status:list%5B2%5D=INPROGRESS&limit=75&order=-important&start=300
@@ -9978,7 +9974,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:05:17 GMT
+      - Thu, 19 Nov 2015 19:36:42 GMT
       Server:
       - zope.server.http (HTTP)
       X-Powered-By:
@@ -9997,14 +9993,12 @@ http_interactions:
       - SAMEORIGIN
       Content-Type:
       - text/html;charset=utf-8
-      Age:
-      - '22'
       X-Cache:
-      - HIT from nutmeg.canonical.com
+      - MISS from banana.canonical.com
       X-Cache-Lookup:
-      - HIT from nutmeg.canonical.com:3128
+      - MISS from banana.canonical.com:3128
       Via:
-      - 1.0 nutmeg.canonical.com:3128 (squid/2.7.STABLE7)
+      - 1.0 banana.canonical.com:3128 (squid/2.7.STABLE7)
     body:
       encoding: UTF-8
       string: "<!DOCTYPE html>\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"\n
@@ -10521,7 +10515,7 @@ http_interactions:
         \"tags\": [], \"bug_url\": \"https://bugs.launchpad.net/gwibber/+bug/1391203\"},
         {\"bugtarget\": \"Gwibber\", \"status\": \"New\", \"bugtarget_css\": \"sprite
         product\", \"reporter\": \"dimitris\", \"importance\": \"Undecided\", \"age\":
-        \"235 days old\", \"title\": \"Can't see Facebook account\", \"bug_heat_html\":
+        \"236 days old\", \"title\": \"Can't see Facebook account\", \"bug_heat_html\":
         \"\\u003cspan class=\\\"sprite flame\\\"\\u003e6\\u003c/span\\u003e\", \"importance_class\":
         \"importanceUNDECIDED\", \"assignee\": null, \"has_tags\": false, \"badges\":
         \"\", \"information_type\": \"Public\", \"id\": 1437620, \"last_updated\":
@@ -10602,11 +10596,11 @@ http_interactions:
         \"Unknown\"]};</script>\n\n    \n  \n\n    \n  </body>\n\n\n  <!--\n    Facet
         name: bugs\n    Page type: main_side\n    Has global search: True\n    Has
         application tabs: True\n    Has side portlets: True\n\n    At least 35 queries/external
-        actions issued in 0.51 seconds\n\n    Features: {'app.mainsite_only.canonical_url':
+        actions issued in 0.40 seconds\n\n    Features: {'app.mainsite_only.canonical_url':
         None, 'js.yui_version': None, 'hard_timeout': u'5000', 'profiling.enabled':
         None, 'visible_render_time': None, 'baselayout.careers_link.disabled': None,
         'ajax.batch_navigator.enabled': None, 'bugs.dynamic_bug_listings.pre_fetch':
         None}\n\n    r17850\n\n    -->\n\n</html>\n\n"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:05:40 GMT
+  recorded_at: Thu, 19 Nov 2015 19:36:43 GMT
 recorded_with: VCR 2.9.3

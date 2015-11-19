@@ -16,7 +16,7 @@ http_interactions:
       message: Moved Permanently
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:02:54 GMT
+      - Thu, 19 Nov 2015 19:32:57 GMT
       Server:
       - Apache/2.2.22 (Ubuntu)
       Location:
@@ -40,7 +40,7 @@ http_interactions:
         <address>Apache/2.2.22 (Ubuntu) Server at d.puremagic.com Port 443</address>
         </body></html>
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:02:54 GMT
+  recorded_at: Thu, 19 Nov 2015 19:32:57 GMT
 - request:
     method: get
     uri: https://issues.dlang.org/show_bug.cgi?id=314
@@ -57,7 +57,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:02:54 GMT
+      - Thu, 19 Nov 2015 19:32:58 GMT
       Server:
       - Apache/2.2.31 (Amazon)
       X-Xss-Protection:
@@ -297,8 +297,8 @@ http_interactions:
         X3RvcCIgdmFsdWU9IlJlc2V0IFBhc3N3b3JkIiAKICAgICAgICAgICB0eXBl
         PSJzdWJtaXQiPgogICAgPGlucHV0IHR5cGU9ImhpZGRlbiIgbmFtZT0iYSIg
         dmFsdWU9InJlcXB3Ij4KICAgIDxpbnB1dCB0eXBlPSJoaWRkZW4iIGlkPSJ0
-        b2tlbl90b3AiIG5hbWU9InRva2VuIiB2YWx1ZT0iMTQ0NzkwNTc3NC05VUJl
-        bzVmZHQxN0hGZmg3YlM2RWxaRmRJTG9Dd1lRVUxwR1RnYjJrZzhZIj4KICAg
+        b2tlbl90b3AiIG5hbWU9InRva2VuIiB2YWx1ZT0iMTQ0Nzk2MTU3OC1RMVlG
+        WWJnaDV1aWZzNHJLNHNZYVlyUzFKQnljQTNKRlc5YzR3OFZxd2c4Ij4KICAg
         IDxhIGhyZWY9IiMiIG9uY2xpY2s9InJldHVybiBoaWRlX2ZvcmdvdF9mb3Jt
         KCdfdG9wJykiPlt4XTwvYT4KICA8L2Zvcm0+CjwvbGk+CjwvdWw+CjwvZGl2
         PiAKCjxkaXYgaWQ9ImJ1Z3ppbGxhLWJvZHkiPgoKPGRpdiBjbGFzcz0ibmF2
@@ -316,8 +316,8 @@ http_interactions:
         OjU5Ij4KICA8aW5wdXQgdHlwZT0iaGlkZGVuIiBuYW1lPSJsb25nZGVzY2xl
         bmd0aCIgdmFsdWU9IjUxIj4KICA8aW5wdXQgdHlwZT0iaGlkZGVuIiBuYW1l
         PSJpZCIgdmFsdWU9IjMxNCI+CiAgPGlucHV0IHR5cGU9ImhpZGRlbiIgbmFt
-        ZT0idG9rZW4iIHZhbHVlPSIxNDQ3OTA1Nzc0LXU5WjRkcTkxcVlxU0xzOHFu
-        d3FMZjVmSWhqVFY0M05yX21ZdlE4TzBycUkiPgo8ZGl2IGNsYXNzPSJiel9h
+        ZT0idG9rZW4iIHZhbHVlPSIxNDQ3OTYxNTc4LVByYXh0UzhZSnB3TWVZVzVm
+        ZTZCeDZpVTlNSWp5cjNQMDdCbDNqRFVzWjQiPgo8ZGl2IGNsYXNzPSJiel9h
         bGlhc19zaG9ydF9kZXNjX2NvbnRhaW5lciBlZGl0X2Zvcm0iPgogICAgIDxh
         IGhyZWY9InNob3dfYnVnLmNnaT9pZD0zMTQiPjxiPklzc3VlJm5ic3A7MzE0
         PC9iPjwvYT4gLTxzcGFuIGlkPSJzdW1tYXJ5X2FsaWFzX2NvbnRhaW5lciIg
@@ -1941,14 +1941,14 @@ http_interactions:
         ZCIgCiAgICAgICAgICAgdHlwZT0ic3VibWl0Ij4KICAgIDxpbnB1dCB0eXBl
         PSJoaWRkZW4iIG5hbWU9ImEiIHZhbHVlPSJyZXFwdyI+CiAgICA8aW5wdXQg
         dHlwZT0iaGlkZGVuIiBpZD0idG9rZW5fYm90dG9tIiBuYW1lPSJ0b2tlbiIg
-        dmFsdWU9IjE0NDc5MDU3NzUtLXZDbk05TWYtWnA2blM4WDdJdWhuRjIwdTEy
-        YjZGVnE3a0Zmekk3U1o4byI+CiAgICA8YSBocmVmPSIjIiBvbmNsaWNrPSJy
+        dmFsdWU9IjE0NDc5NjE1NzgtUTFZRlliZ2g1dWlmczRySzRzWWFZclMxSkJ5
+        Y0EzSkZXOWM0dzhWcXdnOCI+CiAgICA8YSBocmVmPSIjIiBvbmNsaWNrPSJy
         ZXR1cm4gaGlkZV9mb3Jnb3RfZm9ybSgnX2JvdHRvbScpIj5beF08L2E+CiAg
         PC9mb3JtPgo8L2xpPgo8L3VsPgogIDwvbGk+CgogIAogICAgCgoKICAKPC91
         bD4KCiAgPGRpdiBjbGFzcz0ib3V0cm8iPjwvZGl2Pgo8L2Rpdj4KCgo8L2Jv
         ZHk+CjwvaHRtbD4=
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:02:55 GMT
+  recorded_at: Thu, 19 Nov 2015 19:32:59 GMT
 - request:
     method: get
     uri: https://issues.dlang.org/show_bug.cgi?ctype=xml&id=314
@@ -1965,7 +1965,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:02:55 GMT
+      - Thu, 19 Nov 2015 19:32:59 GMT
       Server:
       - Apache/2.2.31 (Amazon)
       X-Xss-Protection:
@@ -2397,5 +2397,5 @@ http_interactions:
         encoding=\"base64\">ZGlmZiAtciA3ZTBhNzY2ZmVmNDcgLXIgZTgzYmE0YWU0ODc4IGRtZC9kc3ltYm9sLmMKLS0tIGEv\nZG1kL2RzeW1ib2wuYwlXZWQgT2N0IDAxIDE5OjE1OjE3IDIwMDggKzAyMDAKKysrIGIvZG1kL2Rz\neW1ib2wuYwlXZWQgT2N0IDAxIDE5OjE2OjEwIDIwMDggKzAyMDAKQEAgLTY0Niw2ICs2NDYsMTEg\nQEAKIAogICAgIC8vIExvb2sgaW4gc3ltYm9scyBkZWNsYXJlZCBpbiB0aGlzIG1vZHVsZQogICAg\nIERzeW1ib2wgKnMgPSBzeW10YWIgPyBzeW10YWItPmxvb2t1cChpZGVudCkgOiBOVUxMOworCisg\nICAgLy8gaGlkZSBwcml2YXRlIG5vbmxvY2FsIHN5bWJvbHMKKyAgICBpZiAoZmxhZ3MgJiAxICYm\nIHMgJiYgcy0+cHJvdCgpID09IFBST1Rwcml2YXRlKQorCXMgPSBOVUxMOworCiAgICAgaWYgKHMp\nCiAgICAgewogCS8vcHJpbnRmKCJcdHMgPSAnJXMuJXMnXG4iLHRvQ2hhcnMoKSxzLT50b0NoYXJz\nKCkpOwpkaWZmIC1yIDdlMGE3NjZmZWY0NyAtciBlODNiYTRhZTQ4NzggZG1kL2ltcG9ydC5jCi0t\nLSBhL2RtZC9pbXBvcnQuYwlXZWQgT2N0IDAxIDE5OjE1OjE3IDIwMDggKzAyMDAKKysrIGIvZG1k\nL2ltcG9ydC5jCVdlZCBPY3QgMDEgMTk6MTY6MTAgMjAwOCArMDIwMApAQCAtMzMsNiArMzMsNyBA\nQAogICAgIHRoaXMtPmlkID0gaWQ7DQogICAgIHRoaXMtPmFsaWFzSWQgPSBhbGlhc0lkOw0KICAg\nICB0aGlzLT5pc3N0YXRpYyA9IGlzc3RhdGljOw0KKyAgICBwcm90ZWN0aW9uID0gUFJPVHVuZGVm\naW5lZDsNCiAgICAgcGtnID0gTlVMTDsNCiAgICAgbW9kID0gTlVMTDsNCiANCkBAIC02MCw2ICs2\nMSwxMCBAQAogICAgIHJldHVybiBpc3N0YXRpYyA/IChjaGFyICopInN0YXRpYyBpbXBvcnQiIDog\nKGNoYXIgKikiaW1wb3J0IjsNCiB9DQogDQorZW51bSBQUk9UIEltcG9ydDo6cHJvdCgpDQorew0K\nKyAgICByZXR1cm4gcHJvdGVjdGlvbjsNCit9DQogDQogRHN5bWJvbCAqSW1wb3J0OjpzeW50YXhD\nb3B5KERzeW1ib2wgKnMpDQogew0KQEAgLTEzMSwxNCArMTM2LDE1IEBACiAJfQ0KICNlbmRpZg0K\nIA0KKwkvKiBEZWZhdWx0IHRvIHByaXZhdGUgaW1wb3J0aW5nDQorCSAqLw0KKwlwcm90ZWN0aW9u\nID0gc2MtPnByb3RlY3Rpb247DQorCWlmICghc2MtPmV4cGxpY2l0UHJvdGVjdGlvbikNCisJICAg\nIHByb3RlY3Rpb24gPSBQUk9UcHJpdmF0ZTsNCisNCiAJaWYgKCFpc3N0YXRpYyAmJiAhYWxpYXNJ\nZCAmJiAhbmFtZXMuZGltKQ0KIAl7DQotCSAgICAvKiBEZWZhdWx0IHRvIHByaXZhdGUgaW1wb3J0\naW5nDQotCSAgICAgKi8NCi0JICAgIGVudW0gUFJPVCBwcm90ID0gc2MtPnByb3RlY3Rpb247DQot\nCSAgICBpZiAoIXNjLT5leHBsaWNpdFByb3RlY3Rpb24pDQotCQlwcm90ID0gUFJPVHByaXZhdGU7\nDQotCSAgICBzYy0+c2NvcGVzeW0tPmltcG9ydFNjb3BlKG1vZCwgcHJvdCk7DQorCSAgICBzYy0+\nc2NvcGVzeW0tPmltcG9ydFNjb3BlKG1vZCwgcHJvdGVjdGlvbik7DQogCX0NCiANCiAJLy8gTW9k\ndWxlcyBuZWVkIGEgbGlzdCBvZiBlYWNoIGltcG9ydGVkIG1vZHVsZQ0KQEAgLTE0OSwxMyArMTU1\nLDE0IEBACiANCiAJc2MgPSBzYy0+cHVzaChtb2QpOw0KIAlmb3IgKHNpemVfdCBpID0gMDsgaSA8\nIGFsaWFzZGVjbHMuZGltOyBpKyspDQotCXsgICBEc3ltYm9sICpzID0gKERzeW1ib2wgKilhbGlh\nc2RlY2xzLmRhdGFbaV07DQorCXsgICBBbGlhc0RlY2xhcmF0aW9uICphZCA9IChBbGlhc0RlY2xh\ncmF0aW9uICopYWxpYXNkZWNscy5kYXRhW2ldOw0KIA0KIAkgICAgLy9wcmludGYoIlx0SW1wb3J0\nIGFsaWFzIHNlbWFudGljKCclcycpXG4iLCBzLT50b0NoYXJzKCkpOw0KIAkgICAgaWYgKCFtb2Qt\nPnNlYXJjaChsb2MsIChJZGVudGlmaWVyICopbmFtZXMuZGF0YVtpXSwgMCkpDQogCQllcnJvcigi\nJXMgbm90IGZvdW5kIiwgKChJZGVudGlmaWVyICopbmFtZXMuZGF0YVtpXSktPnRvQ2hhcnMoKSk7\nDQogDQotCSAgICBzLT5zZW1hbnRpYyhzYyk7DQorCSAgICBhZC0+c2VtYW50aWMoc2MpOw0KKwkg\nICAgYWQtPnByb3RlY3Rpb24gPSBwcm90ZWN0aW9uOw0KIAl9DQogCXNjID0gc2MtPnBvcCgpOw0K\nICAgICB9DQpkaWZmIC1yIDdlMGE3NjZmZWY0NyAtciBlODNiYTRhZTQ4NzggZG1kL2ltcG9ydC5o\nCi0tLSBhL2RtZC9pbXBvcnQuaAlXZWQgT2N0IDAxIDE5OjE1OjE3IDIwMDggKzAyMDAKKysrIGIv\nZG1kL2ltcG9ydC5oCVdlZCBPY3QgMDEgMTk6MTY6MTAgMjAwOCArMDIwMApAQCAtMzQsNiArMzQs\nNyBAQAogICAgIElkZW50aWZpZXIgKmlkOwkJLy8gbW9kdWxlIElkZW50aWZpZXINCiAgICAgSWRl\nbnRpZmllciAqYWxpYXNJZDsNCiAgICAgaW50IGlzc3RhdGljOwkJLy8gIT0wIGlmIHN0YXRpYyBp\nbXBvcnQNCisgICAgZW51bSBQUk9UIHByb3RlY3Rpb247DQogDQogICAgIC8vIFBhaXJzIG9mIGFs\naWFzPW5hbWUgdG8gYmluZCBpbnRvIGN1cnJlbnQgbmFtZXNwYWNlDQogICAgIEFycmF5IG5hbWVz\nOw0KQEAgLTQ5LDYgKzUwLDcgQEAKICAgICB2b2lkIGFkZEFsaWFzKElkZW50aWZpZXIgKm5hbWUs\nIElkZW50aWZpZXIgKmFsaWFzKTsNCiANCiAgICAgY29uc3QgY2hhciAqa2luZCgpOw0KKyAgICBl\nbnVtIFBST1QgcHJvdCgpOw0KICAgICBEc3ltYm9sICpzeW50YXhDb3B5KERzeW1ib2wgKnMpOwkv\nLyBjb3B5IG9ubHkgc3ludGF4IHRyZWVzDQogICAgIHZvaWQgbG9hZChTY29wZSAqc2MpOw0KICAg\nICB2b2lkIHNlbWFudGljKFNjb3BlICpzYyk7DQo=\n</data>\n\n
         \         </attachment>\n      \n\n    </bug>\n\n</bugzilla>"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:02:55 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:00 GMT
 recorded_with: VCR 2.9.3

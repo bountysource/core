@@ -18,7 +18,7 @@ http_interactions:
       Server:
       - nginx/0.7.65
       Date:
-      - Thu, 19 Nov 2015 04:06:00 GMT
+      - Thu, 19 Nov 2015 19:37:15 GMT
       Content-Type:
       - text/html;charset=utf-8
       Connection:
@@ -28,8 +28,8 @@ http_interactions:
       Content-Length:
       - '23072'
       Set-Cookie:
-      - trac_form_token=9a8585f407d5b94efbe024f3; Path=/
-      - trac_session=c761afc2312b232dc2ebb5f6; expires=Wed, 17-Feb-2016 04:06:00 GMT;
+      - trac_form_token=5295546886f858a156006310; Path=/
+      - trac_session=0da61db767b50c7d68ecf100; expires=Wed, 17-Feb-2016 19:37:15 GMT;
         Path=/
     body:
       encoding: ASCII-8BIT
@@ -42,7 +42,7 @@ http_interactions:
         PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD1V
         VEYtOCIgLz4KICAgIDxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4K
         ICAgICAgdmFyIGF1dG9fcHJldmlld190aW1lb3V0PTIuMDsKICAgICAgdmFy
-        IGZvcm1fdG9rZW49IjlhODU4NWY0MDdkNWI5NGVmYmUwMjRmMyI7CiAgICA8
+        IGZvcm1fdG9rZW49IjUyOTU1NDY4ODZmODU4YTE1NjAwNjMxMCI7CiAgICA8
         L3NjcmlwdD4KICAgIDxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0IiBz
         cmM9Ii9jaHJvbWUvY29tbW9uL2pzL2pxdWVyeS5qcyI+PC9zY3JpcHQ+PHNj
         cmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiIHNyYz0iL2Nocm9tZS9jb21t
@@ -548,5 +548,5 @@ http_interactions:
         bGVtZW50c0J5VGFnTmFtZSgnYm9keScpWzBdKS5hcHBlbmRDaGlsZChnYSk7
         fSkoKTsKCTwvc2NyaXB0Pgo8L2JvZHk+CjwvaHRtbD4=
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:00 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:15 GMT
 recorded_with: VCR 2.9.3

@@ -21,19 +21,19 @@ http_interactions:
       Status:
       - 200 OK
       Date:
-      - Thu, 19 Nov 2015 04:06:17 GMT
+      - Thu, 19 Nov 2015 19:37:50 GMT
       X-Request-Id:
-      - 66b6ef25b8c0285d86316e8e4c023d4c
+      - fad88e1130c8b7d3037bc780d787d2a7
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
       - '"6ce7d306a82e7068dd6e6a42713ae3f3"'
       X-Runtime:
-      - '0.088784'
+      - '0.139549'
       X-Rack-Cache:
       - miss
       Set-Cookie:
-      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTI0MTY1ODQzODgwZTEzODQ2N2Y5MDZjNGExOTQ2MmU3BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNROscgHZ4HBkKOg1uYW5vX251bWkBxDoNbmFub19kZW5pBjoNc3VibWljcm8iBxlgOgtvZmZzZXRpADoJem9uZUkiCFVUQwY7AEZJIhBfY3NyZl90b2tlbgY7AEZJIjF1ZHBDVjRxVzhqamlaY2lxdFRIVU9ZTnA0bmdpYjJhbDFGMEZnODFwUzRzPQY7AEY%3D--fc2a7b519318e1f8fa78b46cd11ce1b4377e375f;
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTRmNWZmNDU0YzYzMmVlNTEzM2UxODU5NzllNTBlMzljBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNU%2BscgOmpJZcKOg1uYW5vX251bWk9Og1uYW5vX2RlbmkGOg1zdWJtaWNybyIHBWA6C29mZnNldGkAOgl6b25lSSIIVVRDBjsARkkiEF9jc3JmX3Rva2VuBjsARkkiMVQyTDh1Zkd4ZWFrNjlMRmdEdnlsRWNraml0c3YzL3Mrc2xLMU1UM2dLV0E9BjsARg%3D%3D--3db7c2f0c551e9228ab2d68ecbd39d9d714a34dd;
         path=/; secure; HttpOnly
       X-Powered-By:
       - Phusion Passenger Enterprise
@@ -97,7 +97,7 @@ http_interactions:
         \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/04/04
         08:40:56 UTC</created_at>\n    </comment>\n  </comments>\n</story>\n"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:17 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:50 GMT
 - request:
     method: get
     uri: https://www.pivotaltracker.com/services/v4/projects/367813
@@ -119,19 +119,19 @@ http_interactions:
       Status:
       - 200 OK
       Date:
-      - Thu, 19 Nov 2015 04:06:18 GMT
+      - Thu, 19 Nov 2015 19:37:50 GMT
       X-Request-Id:
-      - 7b2a43a1d73e4e7d41deeded349ac3b4
+      - 2cde3f9ee2061708b640191fd3fed93f
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
       - '"99e8bea6f53ef827cd79e7e5ff9a4354"'
       X-Runtime:
-      - '0.049121'
+      - '0.052748'
       X-Rack-Cache:
       - miss
       Set-Cookie:
-      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWUxY2MwNjQ1MTVhNmQyMTE2ZTI3ZTQzOGNkZjNjZmQ1BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNROscgAkBIRkKOg1uYW5vX251bWkC%2FQE6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdQkDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBGSSIQX2NzcmZfdG9rZW4GOwBGSSIxTzZxY0duWSs5eFduMFZYS3hnWDl6Nkk1V3U5NWk1Wkc2eis3QXNFOG5Hdz0GOwBG--2ab7faee3e68dfbd9b5e3aa789b516d89536baf5;
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTQ0MzAxNTcyNDE0ZmRhY2Q2MWQ1YTk3MjE4ZWYzMGU4BjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNU%2BscgD0pLJcKOg1uYW5vX251bWkCMwI6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdWMDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBGSSIQX2NzcmZfdG9rZW4GOwBGSSIxRXBoMmlaSXdNSW8yK3pKNktDTlJNc2h6dXRzeUpnRGQxOVk3cUZBajU1cz0GOwBG--075a215325664028688f0e935cef9cff60341cca;
         path=/; secure; HttpOnly
       X-Powered-By:
       - Phusion Passenger Enterprise
@@ -782,5 +782,5 @@ http_interactions:
           </integrations>
         </project>
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:18 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:50 GMT
 recorded_with: VCR 2.9.3

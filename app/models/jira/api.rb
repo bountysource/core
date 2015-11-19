@@ -7,9 +7,22 @@ class Jira::API
   def self.extract_info_from_url(url, html)
     return nil unless html =~ /body id="jira"/
 
+    # JIRA has a new dynamically loaded issue dashboard... resort to old-school
+    if url.match(/^(.*?)\/projects\/[^\/]+\/issues\/([^\/]+?-\d+)/)
+      url = "#{$1}/browse/#{$2}"
+      html = HTTParty.get(url, timeout: 5, headers: { 'User-Agent' => Api::Application.config.chrome_user_agent }, verify: false).body
+    elsif url.match(/^(.*?)\/projects\/([^\/]+)/)
+      url = "#{$1}/browse/#{$2}"
+      html = HTTParty.get(url, timeout: 5, headers: { 'User-Agent' => Api::Application.config.chrome_user_agent }, verify: false).body
+    end
+
     if matches = url.match(/^(.*?\/browse\/)(.+?)-(\d+)$/)
       doc = Nokogiri::HTML(html)
-      issue_title = doc.css('h1').text
+      issue_title = [
+        doc.css('#summary-val').text,
+        doc.css('#issue_header_summary').text
+      ].reject { |t| t.blank? }.first
+
       {
         issue_url: "#{$1}#{$2}-#{$3}",
         issue_number: $3.to_i,
@@ -19,7 +32,7 @@ class Jira::API
         tracker_name: $2,
         tracker_class: Jira::Tracker
       }
-    elsif url.match(/^(.*?\/browse\/)([^-\/]+)$/)
+    elsif url.match(/^(.*?\/browse\/)([^-\/]+)(?:\/|$)/)
       {
         tracker_url: "#{$1}#{$2}",
         tracker_name: $2,

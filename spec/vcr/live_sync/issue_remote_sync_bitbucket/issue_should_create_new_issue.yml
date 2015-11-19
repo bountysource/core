@@ -18,7 +18,7 @@ http_interactions:
       Server:
       - nginx/1.6.2
       Date:
-      - Thu, 19 Nov 2015 04:03:07 GMT
+      - Thu, 19 Nov 2015 19:33:18 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -28,13 +28,13 @@ http_interactions:
       X-Accepted-Oauth-Scopes:
       - issue
       X-Render-Time:
-      - '0.106394052505'
+      - '0.101901054382'
       Etag:
-      - '"68564db0168733b1c0de6493f58ea3a3"'
+      - '"487ee9c6534454dc1098d3bc0e32cf5e"'
       X-Request-Count:
-      - '173'
+      - '140'
       X-Served-By:
-      - app19
+      - app22
       Vary:
       - Authorization, Cookie
       X-Static-Version:
@@ -59,16 +59,16 @@ http_interactions:
         {"kind": "enhancement", "version": null, "component": "SSH", "milestone":
         null}, "content": "There is no way to add ssh keys generated using \"ssh-keygen
         -t ed25519\" command in \"SSH keys\" section.", "comment_count": 18, "local_id":
-        10983, "follower_count": 49, "utc_created_on": "2015-02-11 17:43:58+00:00",
+        10983, "follower_count": 50, "utc_created_on": "2015-02-11 17:43:58+00:00",
         "resource_uri": "/1.0/repositories/site/master/issues/10983", "is_spam": false}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:07 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:18 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905787&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=92f823116d91505bb82ce4543e323304a7e8376d&api_key=test
+      string: timestamp=1447961598&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=c5eb97bcff975e580628411f4b6cdcd652a04f90&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -90,7 +90,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:08 GMT
+      - Thu, 19 Nov 2015 19:33:19 GMT
       Server:
       - cloudinary
       Status:
@@ -98,7 +98,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 3b0f8c9b58cd64d0
+      - d17c66aa3a94038d
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -109,13 +109,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:08 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:19 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905788&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=89b50f22e2e8bf6cf1936df63a357630187c4639&api_key=test
+      string: timestamp=1447961599&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=3984ec5feb73c08e905e70e8d092c2e81bfd3c08&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -137,7 +137,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:09 GMT
+      - Thu, 19 Nov 2015 19:33:20 GMT
       Server:
       - cloudinary
       Status:
@@ -145,18 +145,18 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 8224328ad2c11dea
+      - 9f84fa6cab92e857
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:09 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:20 GMT
 - request:
     method: get
     uri: https://api.bitbucket.org/1.0/repositories/site/master/issues/10983/comments
@@ -172,7 +172,7 @@ http_interactions:
       Server:
       - nginx/1.6.2
       Date:
-      - Thu, 19 Nov 2015 04:03:09 GMT
+      - Thu, 19 Nov 2015 19:33:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -180,15 +180,15 @@ http_interactions:
       Connection:
       - keep-alive
       Etag:
-      - '"b447202ad943f87e03df117d4dc5ce0a"'
+      - '"f3b14a1e2cf8b6c8d30a33c6ff0b8888"'
       X-Accepted-Oauth-Scopes:
       - issue
       X-Render-Time:
-      - '0.155045986176'
+      - '0.100134134293'
       X-Request-Count:
-      - '466'
+      - '471'
       X-Served-By:
-      - app18
+      - app17
       Vary:
       - Authorization, Cookie
       X-Static-Version:
@@ -333,7 +333,7 @@ http_interactions:
         bmFtZSI6ICJZdXpoYW5pbm92IiwgImRpc3BsYXlfbmFtZSI6ICJBbnRvbiBZ
         dXpoYW5pbm92IiwgImlzX3N0YWZmIjogZmFsc2UsICJhdmF0YXIiOiAiaHR0
         cHM6Ly9iaXRidWNrZXQub3JnL2FjY291bnQvY2l0cmluL2F2YXRhci8zMi8/
-        dHM9MTQ0NTI0NDI4NyIsICJyZXNvdXJjZV91cmkiOiAiLzEuMC91c2Vycy9j
+        dHM9MTQ0NzkzNDk5MyIsICJyZXNvdXJjZV91cmkiOiAiLzEuMC91c2Vycy9j
         aXRyaW4iLCAiaXNfdGVhbSI6IGZhbHNlfSwgImNvbW1lbnRfaWQiOiAxOTgz
         OTY1MCwgInV0Y191cGRhdGVkX29uIjogIjIwMTUtMDctMDYgMTE6MTI6MDgr
         MDA6MDAiLCAiY29udmVydF9tYXJrdXAiOiBmYWxzZSwgInV0Y19jcmVhdGVk
@@ -412,13 +412,13 @@ http_interactions:
         cmVhdGVkX29uIjogIjIwMTUtMDItMTIgMDg6NTA6NDErMDA6MDAiLCAiaXNf
         c3BhbSI6IGZhbHNlfV0=
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:09 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:21 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905789&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkofalt-invenshure%2Favatar%2F32%2F%3Fts%3D0&signature=4b5c7d5b1fe4506c365f4364d37358ed0f0ae1d5&api_key=test
+      string: timestamp=1447961601&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkofalt-invenshure%2Favatar%2F32%2F%3Fts%3D0&signature=2c26ede3823ed0d0d3634d937c5a2ae91133da5d&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -440,7 +440,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:10 GMT
+      - Thu, 19 Nov 2015 19:33:23 GMT
       Server:
       - cloudinary
       Status:
@@ -448,7 +448,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 4d47f1a942f9ff92
+      - 66b2aff0abb9838c
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -459,13 +459,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:10 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:23 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905790&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FErwane%2Favatar%2F32%2F%3Fts%3D1446042358&signature=1bfe3381021fb6b992b1929da851bcea237e2165&api_key=test
+      string: timestamp=1447961603&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FErwane%2Favatar%2F32%2F%3Fts%3D1446042358&signature=3ddc9049fd0d0593c198782609df8f1f57ca563d&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -487,7 +487,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:10 GMT
+      - Thu, 19 Nov 2015 19:33:23 GMT
       Server:
       - cloudinary
       Status:
@@ -495,7 +495,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 5b5174568abac21b
+      - f75ae0d9eeb2dffd
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -506,13 +506,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:10 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:23 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905790&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FUr0s%2Favatar%2F32%2F%3Fts%3D1447733289&signature=1bfe3381021fb6b992b1929da851bcea237e2165&api_key=test
+      string: timestamp=1447961603&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FUr0s%2Favatar%2F32%2F%3Fts%3D1447733289&signature=3ddc9049fd0d0593c198782609df8f1f57ca563d&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -534,7 +534,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:11 GMT
+      - Thu, 19 Nov 2015 19:33:24 GMT
       Server:
       - cloudinary
       Status:
@@ -542,7 +542,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 5f17dbe5b19a24ac
+      - 25b1d5ba2e3e9ded
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Transfer-Encoding:
@@ -553,13 +553,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:11 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:24 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905791&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fnickfrostatx%2Favatar%2F32%2F%3Fts%3D1446144536&signature=d12a9caa7b98617d4a5595876d3042e731b32730&api_key=test
+      string: timestamp=1447961604&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fnickfrostatx%2Favatar%2F32%2F%3Fts%3D1446144536&signature=c2e553f077d146beb8f815fee585f1ef5dd3c639&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -581,7 +581,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:11 GMT
+      - Thu, 19 Nov 2015 19:33:25 GMT
       Server:
       - cloudinary
       Status:
@@ -589,7 +589,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 4e63bb5c6aa0b26e
+      - 88881e7080f0f11f
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -600,13 +600,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:11 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:25 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905791&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Frmoriz%2Favatar%2F32%2F%3Fts%3D1445872982&signature=d12a9caa7b98617d4a5595876d3042e731b32730&api_key=test
+      string: timestamp=1447961605&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Frmoriz%2Favatar%2F32%2F%3Fts%3D1445872982&signature=47a09a0a6a1f9f44b959b9544469587ae4441d37&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -628,7 +628,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:12 GMT
+      - Thu, 19 Nov 2015 19:33:26 GMT
       Server:
       - cloudinary
       Status:
@@ -636,24 +636,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - f300c842168a7cbc
+      - 0ca3c2858dd73927
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '46'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:12 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:26 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905792&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsianlerk%2Favatar%2F32%2F%3Fts%3D0&signature=559d950f03b32f87dbfbedefac8f6009348a681e&api_key=test
+      string: timestamp=1447961606&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsianlerk%2Favatar%2F32%2F%3Fts%3D0&signature=15c44939424b20d05b98f851b27d5809d7d6d4c9&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -675,7 +675,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:13 GMT
+      - Thu, 19 Nov 2015 19:33:26 GMT
       Server:
       - cloudinary
       Status:
@@ -683,7 +683,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 2aced5311d7b5e2b
+      - 68ce990ca8abe571
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -694,13 +694,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:13 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:26 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905793&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Flink0%2Favatar%2F32%2F%3Fts%3D1447665265&signature=b6956fca0e5225746141a518ae6a8df2c4fb3858&api_key=test
+      string: timestamp=1447961606&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Flink0%2Favatar%2F32%2F%3Fts%3D1447665265&signature=15c44939424b20d05b98f851b27d5809d7d6d4c9&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -722,7 +722,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:13 GMT
+      - Thu, 19 Nov 2015 19:33:27 GMT
       Server:
       - cloudinary
       Status:
@@ -730,7 +730,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - ff167544684b25ad
+      - 327f826209e812f4
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -741,13 +741,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:13 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:27 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905793&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FPainted-Fox%2Favatar%2F32%2F%3Fts%3D1441999730&signature=b6956fca0e5225746141a518ae6a8df2c4fb3858&api_key=test
+      string: timestamp=1447961607&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FPainted-Fox%2Favatar%2F32%2F%3Fts%3D1441999730&signature=91d537f9393bc71353f7ecea2a7ea3292c1bb30c&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -769,7 +769,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:14 GMT
+      - Thu, 19 Nov 2015 19:33:28 GMT
       Server:
       - cloudinary
       Status:
@@ -777,7 +777,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 9d2cf8e7918ba092
+      - 0a978910439c362c
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -788,13 +788,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:14 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:28 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905794&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkawazzz%2Favatar%2F32%2F%3Fts%3D1447571211&signature=42bbd60e644653f91a03177a700299ac2e32d01e&api_key=test
+      string: timestamp=1447961608&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkawazzz%2Favatar%2F32%2F%3Fts%3D1447571211&signature=a72e6424ddc40fb2060cc77eff839c6a3b52c802&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -816,7 +816,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:14 GMT
+      - Thu, 19 Nov 2015 19:33:29 GMT
       Server:
       - cloudinary
       Status:
@@ -824,7 +824,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - e49e8313fa64be9c
+      - 4d0b4654d78f1bff
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -835,13 +835,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:14 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:29 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905794&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fyan12125%2Favatar%2F32%2F%3Fts%3D0&signature=42bbd60e644653f91a03177a700299ac2e32d01e&api_key=test
+      string: timestamp=1447961609&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fyan12125%2Favatar%2F32%2F%3Fts%3D0&signature=e01ec3b612554c6bfd5962c61513bca956309499&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -863,7 +863,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:15 GMT
+      - Thu, 19 Nov 2015 19:33:30 GMT
       Server:
       - cloudinary
       Status:
@@ -871,7 +871,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 463a7214b37bdfa2
+      - bf76bf3a2503b50c
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -882,13 +882,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:15 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:30 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905795&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fcitrin%2Favatar%2F32%2F%3Fts%3D1445244287&signature=fea94b97c175ddc64e4b829cbec445c951653350&api_key=test
+      string: timestamp=1447961610&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fcitrin%2Favatar%2F32%2F%3Fts%3D1447934993&signature=a8052d65c5e00d81885390541c1e9c563c1d1870&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -910,7 +910,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:15 GMT
+      - Thu, 19 Nov 2015 19:33:31 GMT
       Server:
       - cloudinary
       Status:
@@ -918,54 +918,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 45d327867962600c
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:15 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447905795&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=fea94b97c175ddc64e4b829cbec445c951653350&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 04:03:16 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 1090eb5e39a57c37
+      - 5e653597197a5c77
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Transfer-Encoding:
@@ -976,13 +929,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:16 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:30 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905796&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjyowell%2Favatar%2F32%2F%3Fts%3D1447880536&signature=49cf4dca78d4c2cb3fdf8a3b5b89f28472a483a8&api_key=test
+      string: timestamp=1447961610&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=a8052d65c5e00d81885390541c1e9c563c1d1870&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1004,7 +957,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:16 GMT
+      - Thu, 19 Nov 2015 19:33:31 GMT
       Server:
       - cloudinary
       Status:
@@ -1012,7 +965,54 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - e41b6e5fd0262aa7
+      - 01e7a9c64df699e7
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"cloud_name is disabled"}}'
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 19:33:31 GMT
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/test/image/upload
+    body:
+      encoding: US-ASCII
+      string: timestamp=1447961611&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjyowell%2Favatar%2F32%2F%3Fts%3D1447880536&signature=d95a8d51d7a9705284144dde16ee08dc127fa4a7&api_key=test
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - cld-ruby-1.0.72
+      Content-Length:
+      - '200'
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 19 Nov 2015 19:33:32 GMT
+      Server:
+      - cloudinary
+      Status:
+      - 401 Unauthorized
+      X-Cld-Error:
+      - cloud_name is disabled
+      X-Request-Id:
+      - cefed860225999e3
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1023,13 +1023,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:16 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:32 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905796&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjredmond%2Favatar%2F32%2F%3Fts%3D1447880679&signature=49cf4dca78d4c2cb3fdf8a3b5b89f28472a483a8&api_key=test
+      string: timestamp=1447961612&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjredmond%2Favatar%2F32%2F%3Fts%3D1447880679&signature=14618249810eef61a3d0c64db87f3b5fdc5d39e7&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1051,7 +1051,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:17 GMT
+      - Thu, 19 Nov 2015 19:33:33 GMT
       Server:
       - cloudinary
       Status:
@@ -1059,24 +1059,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - de96b867fc26d7f8
+      - b6714520e07596c4
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '46'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:17 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:33 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905797&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=2eb3e0ebc009cf3a99e0cc5cf7b341704a1cc873&api_key=test
+      string: timestamp=1447961613&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=32f901850ab49bab923d7c4e65e3b7f980b86003&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1098,7 +1098,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:17 GMT
+      - Thu, 19 Nov 2015 19:33:33 GMT
       Server:
       - cloudinary
       Status:
@@ -1106,24 +1106,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - b45fb8173221551f
+      - 9ef35841f308a9b3
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:17 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:33 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905797&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjgarcia4%2Favatar%2F32%2F%3Fts%3D1436543752&signature=2eb3e0ebc009cf3a99e0cc5cf7b341704a1cc873&api_key=test
+      string: timestamp=1447961613&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjgarcia4%2Favatar%2F32%2F%3Fts%3D1436543752&signature=32f901850ab49bab923d7c4e65e3b7f980b86003&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1145,7 +1145,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:18 GMT
+      - Thu, 19 Nov 2015 19:33:34 GMT
       Server:
       - cloudinary
       Status:
@@ -1153,24 +1153,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - e7cc566f95b4fc96
+      - 288924fcd10990e1
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '46'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:18 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:34 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905798&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fskunkwerks%2Favatar%2F32%2F%3Fts%3D1434719463&signature=cf0269b82f79d74ac8895ebc725d0f34a5eabefa&api_key=test
+      string: timestamp=1447961614&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fskunkwerks%2Favatar%2F32%2F%3Fts%3D1434719463&signature=79d05099904af45009a827fb5d47c056a65a586f&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1192,7 +1192,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:19 GMT
+      - Thu, 19 Nov 2015 19:33:36 GMT
       Server:
       - cloudinary
       Status:
@@ -1200,24 +1200,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 895d27fb8f44e228
+      - 728e505f56aa9ffd
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '46'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:19 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:36 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905799&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkofalt-invenshure%2Favatar%2F32%2F%3Fts%3D0&signature=62602225af8b8f56d43f8880f1687ddad4f3ab7a&api_key=test
+      string: timestamp=1447961616&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkofalt-invenshure%2Favatar%2F32%2F%3Fts%3D0&signature=948c1ed27a4f706ede4fb1196369a424e2d2810b&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1239,7 +1239,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:19 GMT
+      - Thu, 19 Nov 2015 19:33:36 GMT
       Server:
       - cloudinary
       Status:
@@ -1247,24 +1247,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 11237587774dd4d7
+      - cdc1268e3c9f2f0d
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '46'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:19 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:36 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905799&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FErwane%2Favatar%2F32%2F%3Fts%3D1446042358&signature=62602225af8b8f56d43f8880f1687ddad4f3ab7a&api_key=test
+      string: timestamp=1447961616&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FErwane%2Favatar%2F32%2F%3Fts%3D1446042358&signature=948c1ed27a4f706ede4fb1196369a424e2d2810b&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1286,7 +1286,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:20 GMT
+      - Thu, 19 Nov 2015 19:33:37 GMT
       Server:
       - cloudinary
       Status:
@@ -1294,7 +1294,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 6d3385d032eaf032
+      - 87562c03e89bbf35
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1305,13 +1305,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:20 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:37 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905800&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FUr0s%2Favatar%2F32%2F%3Fts%3D1447733289&signature=641ea3b0bf2542b405cf7c17d85ba00718aa8eea&api_key=test
+      string: timestamp=1447961617&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FUr0s%2Favatar%2F32%2F%3Fts%3D1447733289&signature=6555c6703d5d6248803173b4061982ceaca38306&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1333,7 +1333,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:20 GMT
+      - Thu, 19 Nov 2015 19:33:38 GMT
       Server:
       - cloudinary
       Status:
@@ -1341,7 +1341,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - f469aa0ddd0b8d32
+      - 0ffeeff16efea809
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1352,13 +1352,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:20 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:38 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905800&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fnickfrostatx%2Favatar%2F32%2F%3Fts%3D1446144536&signature=641ea3b0bf2542b405cf7c17d85ba00718aa8eea&api_key=test
+      string: timestamp=1447961618&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fnickfrostatx%2Favatar%2F32%2F%3Fts%3D1446144536&signature=602709a41a01175d6d3f6dcf8d59add8b0138c21&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1380,7 +1380,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:21 GMT
+      - Thu, 19 Nov 2015 19:33:39 GMT
       Server:
       - cloudinary
       Status:
@@ -1388,24 +1388,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 67699492df50d7d5
+      - 056df5a030d5e3bf
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:21 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:39 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905801&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Frmoriz%2Favatar%2F32%2F%3Fts%3D1445872982&signature=63bd89603bfd997e22c8427e1377bbf52667abc7&api_key=test
+      string: timestamp=1447961619&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Frmoriz%2Favatar%2F32%2F%3Fts%3D1445872982&signature=22dce0d09d54710262fc14442c6c6f20cfb6d7de&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1427,7 +1427,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:21 GMT
+      - Thu, 19 Nov 2015 19:33:40 GMT
       Server:
       - cloudinary
       Status:
@@ -1435,24 +1435,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - e149df5a9c805ea3
+      - fe03c612fd94b841
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:21 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:39 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905801&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsianlerk%2Favatar%2F32%2F%3Fts%3D0&signature=63bd89603bfd997e22c8427e1377bbf52667abc7&api_key=test
+      string: timestamp=1447961619&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsianlerk%2Favatar%2F32%2F%3Fts%3D0&signature=22dce0d09d54710262fc14442c6c6f20cfb6d7de&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1474,7 +1474,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:22 GMT
+      - Thu, 19 Nov 2015 19:33:40 GMT
       Server:
       - cloudinary
       Status:
@@ -1482,7 +1482,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - bc3456c4bbe804df
+      - 9a3189920f4cb6bc
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1493,13 +1493,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:22 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:40 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905802&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Flink0%2Favatar%2F32%2F%3Fts%3D1447665265&signature=02e6032977ffb6cab8f69d4ea3e2722f11b1f24b&api_key=test
+      string: timestamp=1447961620&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Flink0%2Favatar%2F32%2F%3Fts%3D1447665265&signature=c8e2bd15e48f91767f736843964fc2ba71ddc354&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1521,7 +1521,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:22 GMT
+      - Thu, 19 Nov 2015 19:33:42 GMT
       Server:
       - cloudinary
       Status:
@@ -1529,7 +1529,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 055f9c99fb79e05c
+      - 7861ecd16d666203
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1540,13 +1540,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:22 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:42 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905802&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FPainted-Fox%2Favatar%2F32%2F%3Fts%3D1441999730&signature=02e6032977ffb6cab8f69d4ea3e2722f11b1f24b&api_key=test
+      string: timestamp=1447961622&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FPainted-Fox%2Favatar%2F32%2F%3Fts%3D1441999730&signature=3d7a37c2471c7c150f1765622430ffb7a78ff7ba&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1568,7 +1568,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:23 GMT
+      - Thu, 19 Nov 2015 19:33:43 GMT
       Server:
       - cloudinary
       Status:
@@ -1576,7 +1576,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 261c68ae91b1b8f5
+      - 8e02eb99ab216733
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1587,13 +1587,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:23 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:43 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905803&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkawazzz%2Favatar%2F32%2F%3Fts%3D1447571211&signature=2fd739935cec3571273fddac4bd313c99024dd76&api_key=test
+      string: timestamp=1447961623&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkawazzz%2Favatar%2F32%2F%3Fts%3D1447571211&signature=13a48659f884f9dacf51b1945a4f25cd9d7d22be&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1615,7 +1615,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:23 GMT
+      - Thu, 19 Nov 2015 19:33:44 GMT
       Server:
       - cloudinary
       Status:
@@ -1623,7 +1623,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - bc2ca8eb4d736e43
+      - 2fc6db81d1f210c9
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Transfer-Encoding:
@@ -1634,13 +1634,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:23 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:44 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905803&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fyan12125%2Favatar%2F32%2F%3Fts%3D0&signature=2fd739935cec3571273fddac4bd313c99024dd76&api_key=test
+      string: timestamp=1447961624&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fyan12125%2Favatar%2F32%2F%3Fts%3D0&signature=43ed6ade027b3df3821c37f2c3688bd1ed46505a&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1662,7 +1662,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:24 GMT
+      - Thu, 19 Nov 2015 19:33:45 GMT
       Server:
       - cloudinary
       Status:
@@ -1670,7 +1670,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 76b0af8ea0f6b460
+      - a9d541600c290691
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1681,13 +1681,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:24 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:45 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905804&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fcitrin%2Favatar%2F32%2F%3Fts%3D1445244287&signature=a1d01d7461bffabc674df0296338a085a7ff2bfd&api_key=test
+      string: timestamp=1447961625&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fcitrin%2Favatar%2F32%2F%3Fts%3D1447934993&signature=251b1f76c7dd1a1ad3e667e1c6884e8394096187&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1709,7 +1709,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:24 GMT
+      - Thu, 19 Nov 2015 19:33:46 GMT
       Server:
       - cloudinary
       Status:
@@ -1717,7 +1717,54 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 51708ee70af598f1
+      - f68ef7ffe4eaa9d4
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"cloud_name is disabled"}}'
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 19:33:46 GMT
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/test/image/upload
+    body:
+      encoding: US-ASCII
+      string: timestamp=1447961626&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=c5fcddf7ec2a845767f901c255d145df1b77d9b1&api_key=test
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - cld-ruby-1.0.72
+      Content-Length:
+      - '200'
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 19 Nov 2015 19:33:48 GMT
+      Server:
+      - cloudinary
+      Status:
+      - 401 Unauthorized
+      X-Cld-Error:
+      - cloud_name is disabled
+      X-Request-Id:
+      - ed9e3ce09b8394d5
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1728,13 +1775,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:25 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:48 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905805&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=9fc153ef34b458669e12cdd8fab893313f73b669&api_key=test
+      string: timestamp=1447961628&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjyowell%2Favatar%2F32%2F%3Fts%3D1447880536&signature=43d6712f6c09f75eace6313bb2f9bfd26215ee61&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1756,7 +1803,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:25 GMT
+      - Thu, 19 Nov 2015 19:33:49 GMT
       Server:
       - cloudinary
       Status:
@@ -1764,71 +1811,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - bb3c061157547c2b
+      - a9711ac87dfd9f83
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:25 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447905805&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjyowell%2Favatar%2F32%2F%3Fts%3D1447880536&signature=9fc153ef34b458669e12cdd8fab893313f73b669&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
       Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 04:03:26 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 7f56c1819d2f1e27
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
+      - '46'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:26 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:49 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905806&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjredmond%2Favatar%2F32%2F%3Fts%3D1447880679&signature=ea01906fa16ae0aa1188a5620cc4c272fff3a77c&api_key=test
+      string: timestamp=1447961629&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjredmond%2Favatar%2F32%2F%3Fts%3D1447880679&signature=005f045fdb3c06e5f2f76338132b1dab3e73a14a&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1850,7 +1850,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:26 GMT
+      - Thu, 19 Nov 2015 19:33:49 GMT
       Server:
       - cloudinary
       Status:
@@ -1858,24 +1858,24 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - e81b0c13f63fe251
+      - c29ee0474964805e
       X-Ua-Compatible:
       - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:26 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:49 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905806&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=ea01906fa16ae0aa1188a5620cc4c272fff3a77c&api_key=test
+      string: timestamp=1447961629&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=005f045fdb3c06e5f2f76338132b1dab3e73a14a&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1897,7 +1897,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:27 GMT
+      - Thu, 19 Nov 2015 19:33:50 GMT
       Server:
       - cloudinary
       Status:
@@ -1905,7 +1905,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 3de9447c0494e23f
+      - b2791d8a35c9be22
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -1916,13 +1916,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:27 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:50 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905807&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjgarcia4%2Favatar%2F32%2F%3Fts%3D1436543752&signature=05ea6b46ce61fd6c52dbc87abddea9b0cba3747d&api_key=test
+      string: timestamp=1447961630&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjgarcia4%2Favatar%2F32%2F%3Fts%3D1436543752&signature=94daacf06cc35768fc6ab0c93ddf5b54aafddc1d&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1944,7 +1944,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:27 GMT
+      - Thu, 19 Nov 2015 19:33:51 GMT
       Server:
       - cloudinary
       Status:
@@ -1952,7 +1952,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - 9d9c405b1ad7557d
+      - 9d246149301a31fe
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Transfer-Encoding:
@@ -1963,13 +1963,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:27 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:51 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905807&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fskunkwerks%2Favatar%2F32%2F%3Fts%3D1434719463&signature=05ea6b46ce61fd6c52dbc87abddea9b0cba3747d&api_key=test
+      string: timestamp=1447961631&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fskunkwerks%2Favatar%2F32%2F%3Fts%3D1434719463&signature=62aadd0f20164b00b65352361d33e1d617af3cdd&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -1991,7 +1991,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:28 GMT
+      - Thu, 19 Nov 2015 19:33:51 GMT
       Server:
       - cloudinary
       Status:
@@ -1999,54 +1999,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - e184c5eca7694379
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:28 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447905808&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=12274a690f7a3176c165c3be4bec998f94c4dab4&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '190'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 04:03:28 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 4858bdf7bd8e403c
+      - dea9820866667715
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Content-Length:
@@ -2057,13 +2010,13 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:28 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:51 GMT
 - request:
     method: post
     uri: https://api.cloudinary.com/v1_1/test/image/upload
     body:
       encoding: US-ASCII
-      string: timestamp=1447905808&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=12274a690f7a3176c165c3be4bec998f94c4dab4&api_key=test
+      string: timestamp=1447961631&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=62aadd0f20164b00b65352361d33e1d617af3cdd&api_key=test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -2085,7 +2038,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 19 Nov 2015 04:03:29 GMT
+      - Thu, 19 Nov 2015 19:33:52 GMT
       Server:
       - cloudinary
       Status:
@@ -2093,7 +2046,7 @@ http_interactions:
       X-Cld-Error:
       - cloud_name is disabled
       X-Request-Id:
-      - b72e78857ebfa0a5
+      - 0f39719c40fd51fd
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Transfer-Encoding:
@@ -2104,5 +2057,52 @@ http_interactions:
       encoding: UTF-8
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:03:29 GMT
+  recorded_at: Thu, 19 Nov 2015 19:33:52 GMT
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/test/image/upload
+    body:
+      encoding: US-ASCII
+      string: timestamp=1447961632&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=68c35bb01c3bf06fb0a33c7805bab2cb72659411&api_key=test
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - cld-ruby-1.0.72
+      Content-Length:
+      - '190'
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 19 Nov 2015 19:33:53 GMT
+      Server:
+      - cloudinary
+      Status:
+      - 401 Unauthorized
+      X-Cld-Error:
+      - cloud_name is disabled
+      X-Request-Id:
+      - f8d7a536da169082
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '46'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"cloud_name is disabled"}}'
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 19:33:53 GMT
 recorded_with: VCR 2.9.3

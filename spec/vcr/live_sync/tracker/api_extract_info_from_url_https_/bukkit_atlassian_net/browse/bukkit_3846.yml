@@ -18,7 +18,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 19 Nov 2015 04:06:08 GMT
+      - Thu, 19 Nov 2015 19:37:31 GMT
       Content-Type:
       - text/html;charset=UTF-8
       Transfer-Encoding:
@@ -28,7 +28,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Arequestid:
-      - 246x27011x1
+      - 1177x33076x1
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Pragma:
@@ -42,8 +42,8 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Set-Cookie:
-      - JSESSIONID=DFDDD7E94084A1D2FCF81915CCE654EF; Path=/; Secure; HttpOnly
-      - atlassian.xsrf.token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout;
+      - JSESSIONID=C099B2177CA826742E035FD083154629; Path=/; Secure; HttpOnly
+      - atlassian.xsrf.token=BO29-YFDD-42VF-3M5C|ba41acea480916d9c753a6e31f8f779bda0f1a74|lout;
         Path=/; Secure
       Strict-Transport-Security:
       - max-age=315360000;includeSubDomains
@@ -82,7 +82,7 @@ http_interactions:
         = window._AP || {};\n    \n        window._AP.dialogOptions = {\n                            };\n\n
         \   window._AP.inlineDialogOptions = {\n                            };\n</script>\n\n<script
         type=\"text/javascript\">var AJS=AJS||{};AJS.debug=true;</script>\n\n\n    \n<meta
-        id=\"atlassian-token\" name=\"atlassian-token\" content=\"BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout\">\n\n\n\n<link
+        id=\"atlassian-token\" name=\"atlassian-token\" content=\"BO29-YFDD-42VF-3M5C|ba41acea480916d9c753a6e31f8f779bda0f1a74|lout\">\n\n\n\n<link
         rel=\"shortcut icon\" href=\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/_/favicon.ico\">\n\n\n
         \   \n\n\n<!--[if IE]><![endif]-->\n<script type=\"text/javascript\">var contextPath
         = '';</script>\n<script>\nwindow.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-admin-helper-plugin:permissions-provider.permissions-data\"]=\"[{\\\"permissions\\\":[{\\\"name\\\":\\\"Administer
@@ -231,7 +231,7 @@ http_interactions:
         \                                   <a id=\"assign-issue\" class=\"issueaction-assign-issue\"
         href=\"/secure/AssignIssue!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"assign-to-me\" class=\"issueaction-assign-to-me
-        hide-from-opsbar\" href=\"/secure/AssignIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;&returnUrl=/secure/issues\"></a>\n
+        hide-from-opsbar\" href=\"/secure/AssignIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|ba41acea480916d9c753a6e31f8f779bda0f1a74|lout&amp;id={0}&amp;&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"comment-issue\" class=\"issueaction-comment-issue
         add-issue-comment\" href=\"/secure/AddComment!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"add-hours-on-issue\" class=\"conjoined
@@ -264,15 +264,15 @@ http_interactions:
         id=\"com.gliffy.integration.jira:add-gliffy-diagram-license-purchase\" class=\"\"
         href=\"https://bukkit.atlassian.net/plugins/servlet/upm#manage/com.gliffy.integration.jira&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"toggle-vote-issue\" class=\"issueaction-vote-issue\"
-        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;vote=vote&returnUrl=/secure/issues\"></a>\n
+        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|ba41acea480916d9c753a6e31f8f779bda0f1a74|lout&amp;id={0}&amp;vote=vote&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"toggle-vote-issue\" class=\"issueaction-unvote-issue\"
-        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;vote=unvote&returnUrl=/secure/issues\"></a>\n
+        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|ba41acea480916d9c753a6e31f8f779bda0f1a74|lout&amp;id={0}&amp;vote=unvote&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"view-voters\" class=\"issueaction-view-voters\"
         href=\"/secure/ViewVoters!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"toggle-watch-issue\" class=\"issueaction-watch-issue\"
-        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;watch=watch&returnUrl=/secure/issues\"></a>\n
+        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|ba41acea480916d9c753a6e31f8f779bda0f1a74|lout&amp;id={0}&amp;watch=watch&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"toggle-watch-issue\" class=\"issueaction-unwatch-issue\"
-        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;watch=unwatch&returnUrl=/secure/issues\"></a>\n
+        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|ba41acea480916d9c753a6e31f8f779bda0f1a74|lout&amp;id={0}&amp;watch=unwatch&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"manage-watchers\" class=\"issueaction-manage-watchers\"
         href=\"/secure/ManageWatchers!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
         \                                   <a id=\"create-subtask\" class=\"issueaction-create-subtask\"
@@ -682,18 +682,18 @@ http_interactions:
         s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga,
         s);\n    })();\n</script>\n\n<form id=\"jira_request_timing_info\" class=\"dont-default-focus\"
         >\n\t<fieldset class=\"parameters hidden\">\n\t\t<input type=\"hidden\" title=\"jira.request.start.millis\"
-        value=\"1447905968757\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
-        value=\"177\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"246x27011x1\"
+        value=\"1447961851286\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
+        value=\"186\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"1177x33076x1\"
         />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.time\" value=\"-\"
         />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.in.mins\" value=\"-\"
         />\n\t\t<input id=\"jiraConcurrentRequests\" type=\"hidden\" name=\"jira.request.concurrent.requests\"
-        value=\"1\" />\n\t\t<input type=\"hidden\" title=\"db.reads.time.in.ms\" value=\"15\"
-        />\n\t\t<input type=\"hidden\" title=\"db.conns.time.in.ms\" value=\"19\"
-        />\n\t</fieldset>\n</form>\n<!--\n\t                 REQUEST ID : 246x27011x1\n\t
-        \         REQUEST TIMESTAMP : [19/Nov/2015:04:06:08 +0000]\n\t               REQUEST
-        TIME : 0.1770\n\t                 ASESSIONID : -\n\t        CONCURRENT REQUESTS
-        : 1\n\n\t                      db.reads : name=db.reads; inv=28; ms=15; cpu=0;
-        rss=0;\n\t                      db.conns : name=db.conns; inv=29; ms=19; cpu=0;
+        value=\"1\" />\n\t\t<input type=\"hidden\" title=\"db.reads.time.in.ms\" value=\"13\"
+        />\n\t\t<input type=\"hidden\" title=\"db.conns.time.in.ms\" value=\"15\"
+        />\n\t</fieldset>\n</form>\n<!--\n\t                 REQUEST ID : 1177x33076x1\n\t
+        \         REQUEST TIMESTAMP : [19/Nov/2015:19:37:31 +0000]\n\t               REQUEST
+        TIME : 0.1860\n\t                 ASESSIONID : -\n\t        CONCURRENT REQUESTS
+        : 1\n\n\t                      db.reads : name=db.reads; inv=28; ms=13; cpu=0;
+        rss=0;\n\t                      db.conns : name=db.conns; inv=29; ms=15; cpu=0;
         rss=0;\n-->\n    <div id=\"footer-logo\"><a href=\"http://www.atlassian.com/\">Atlassian</a></div>\n</section>\n\n\n\n\n\n\n\n\n\n<fieldset
         class=\"hidden parameters\">\n    <input type=\"hidden\" title=\"loggedInUser\"
         value=\"\">\n    <input type=\"hidden\" title=\"ajaxTimeout\" value=\"The
@@ -732,5 +732,5 @@ http_interactions:
         is not a valid component.\">\n    <input type=\"hidden\" title=\"multiselectGenericError\"
         value=\"The value {0} is invalid.\">\n</fieldset>\n\n    </footer>\n</div>\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:08 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:31 GMT
 recorded_with: VCR 2.9.3

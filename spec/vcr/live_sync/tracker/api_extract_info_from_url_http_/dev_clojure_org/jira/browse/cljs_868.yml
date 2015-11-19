@@ -16,9 +16,9 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:06:07 GMT
+      - Thu, 19 Nov 2015 19:37:28 GMT
       X-Arequestid:
-      - 1326x41724x1
+      - 817x68572x1
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Pragma:
@@ -26,15 +26,15 @@ http_interactions:
       Expires:
       - Thu, 01 Jan 1970 00:00:00 GMT
       Set-Cookie:
-      - JSESSIONID=B1122203BAEE38DE9148BB6DE403FF1E; Path=/jira
-      - atlassian.xsrf.token=BTMM-1VOF-2I2F-TOTY|11a150360fc16af1eec40be5aad6cb0be1c3b5cf|lout;
+      - JSESSIONID=1FDAFBB651814A94A221D7770A864B50; Path=/jira
+      - atlassian.xsrf.token=BTMM-1VOF-2I2F-TOTY|4e51871ac5f7c44923a675a1039d8f1713a07943|lout;
         Path=/jira
       X-Seraph-Loginreason:
       - OUT
       X-Ausername:
       - anonymous
       X-Asessionid:
-      - 1anfkjq
+      - 1p9usvj
       Content-Type:
       - text/html;charset=UTF-8
       Vary:
@@ -51,7 +51,7 @@ http_interactions:
         rel=\"index\" href=\"/jira/secure/IssueNavigator.jspa\" />\n    <meta http-equiv=\"Content-Type\"
         content=\"text/html; charset=UTF-8\" />\n    <meta http-equiv=\"Pragma\" content=\"no-cache\"
         />\n    <meta http-equiv=\"Expires\" content=\"-1\" />\n    \n\n    \n<meta
-        id=\"atlassian-token\" name=\"atlassian-token\" content=\"BTMM-1VOF-2I2F-TOTY|11a150360fc16af1eec40be5aad6cb0be1c3b5cf|lout\">\n\n\n
+        id=\"atlassian-token\" name=\"atlassian-token\" content=\"BTMM-1VOF-2I2F-TOTY|4e51871ac5f7c44923a675a1039d8f1713a07943|lout\">\n\n\n
         \   <link rel=\"shortcut icon\" href=\"/jira/s/en_US9yuwnb/649/7/_/favicon.ico\">\n
         \   <link rel=\"icon\" type=\"image/png\" href=\"/jira/s/en_US9yuwnb/649/7/_/images/icons/favicon.png\">\n\n
         \   \n    <script type=\"text/javascript\">var contextPath = '/jira';</script>\n<link
@@ -560,15 +560,15 @@ http_interactions:
         tracking software</a> for <i>your</i> team.\n\n                </div>\n    </div>\n\n<form
         id=\"jira_request_timing_info\" class=\"dont-default-focus\" >\n\t<fieldset
         class=\"parameters hidden\">\n\t\t<input type=\"hidden\" title=\"jira.request.start.millis\"
-        value=\"1447905967797\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
-        value=\"30\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"1326x41724x1\"
+        value=\"1447961848114\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
+        value=\"43\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"817x68572x1\"
         />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.time\" value=\"-\"
         />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.in.mins\" value=\"-\"
         />\n\t\t<input id=\"jiraConcurrentRequests\" type=\"hidden\" name=\"jira.request.concurrent.requests\"
         value=\"1\" />\n\t</fieldset>\n</form>\n<!--\n\t                 REQUEST ID
-        : 1326x41724x1\n\t          REQUEST TIMESTAMP : [18/Nov/2015:22:06:07 -0600]\n\t
-        \              REQUEST TIME : 0.0300\n\t                 ASESSIONID : 1anfkjq\n\t
+        : 817x68572x1\n\t          REQUEST TIMESTAMP : [19/Nov/2015:13:37:28 -0600]\n\t
+        \              REQUEST TIME : 0.0430\n\t                 ASESSIONID : 1p9usvj\n\t
         \       CONCURRENT REQUESTS : 1\n-->\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:07 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:28 GMT
 recorded_with: VCR 2.9.3

@@ -16,7 +16,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:06:08 GMT
+      - Thu, 19 Nov 2015 19:37:38 GMT
       Server:
       - Apache/2.2.15 (Red Hat)
       X-Xss-Protection:
@@ -26,7 +26,7 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Set-Cookie:
-      - Bugzilla_login_request_cookie=cG6O62NAGQ; path=/; secure; HttpOnly
+      - Bugzilla_login_request_cookie=50JVsy7iqr; path=/; secure; HttpOnly
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       Access-Control-Allow-Origin:
@@ -266,8 +266,8 @@ http_interactions:
         ICAgICAgIHR5cGU9InN1Ym1pdCI+CiAgICA8aW5wdXQgdHlwZT0iaGlkZGVu
         IiBuYW1lPSJhIiB2YWx1ZT0icmVxcHciPgogICAgPGlucHV0IHR5cGU9Imhp
         ZGRlbiIgaWQ9InRva2VuX3RvcCIgbmFtZT0idG9rZW4iIHZhbHVlPSIxNDQ3
-        OTA1OTY4LVdWXzJlX3B1elRiVl9TVWloeC14RFV5cW1TZW84bUhhMlZZUzEy
-        WWF6RXciPgogICAgPGEgaHJlZj0iIyIgb25jbGljaz0icmV0dXJuIGhpZGVf
+        OTYxODU4LUxhM3FMQUpwUUpYa3dWV1UxcjNpSF85RVpsWE9CSDFHT29ZeE5R
+        NEdwcVkiPgogICAgPGEgaHJlZj0iIyIgb25jbGljaz0icmV0dXJuIGhpZGVf
         Zm9yZ290X2Zvcm0oJ190b3AnKSI+W3hdPC9hPgogIDwvZm9ybT4KPC9saT4K
         PC91bD4KPC9kaXY+IAoKPGRpdiBpZD0iYnVnemlsbGEtYm9keSI+CgoKPHNj
         cmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPgo8IS0tCgovLy0tPgo8L3Nj
@@ -277,8 +277,8 @@ http_interactions:
         MDE0LTA0LTMwIDExOjIyOjM2Ij4KICA8aW5wdXQgdHlwZT0iaGlkZGVuIiBu
         YW1lPSJsb25nZGVzY2xlbmd0aCIgdmFsdWU9IjIiPgogIDxpbnB1dCB0eXBl
         PSJoaWRkZW4iIG5hbWU9ImlkIiB2YWx1ZT0iMzgwNjEyIj4KICA8aW5wdXQg
-        dHlwZT0iaGlkZGVuIiBuYW1lPSJ0b2tlbiIgdmFsdWU9IjE0NDc5MDU5Njgt
-        UDB1THpfMW9wcElReElVenBET3ZUTGVPYkRXVVNoZ0pmbEZOOUdLSXZjayI+
+        dHlwZT0iaGlkZGVuIiBuYW1lPSJ0b2tlbiIgdmFsdWU9IjE0NDc5NjE4NTgt
+        X2d1aGN2Q1NDTXdBVVAyaXNXVjVHQ1VySzl1TldrVWhjV3V0OUN6dTNzOCI+
         CjxkaXYgY2xhc3M9ImJ6X2FsaWFzX3Nob3J0X2Rlc2NfY29udGFpbmVyIGVk
         aXRfZm9ybSI+CiAgICAgPGEgaHJlZj0ic2hvd19idWcuY2dpP2lkPTM4MDYx
         MiI+PGI+QnVnJm5ic3A7MzgwNjEyPC9iPjwvYT4gLTxzcGFuIGlkPSJzdW1t
@@ -748,12 +748,12 @@ http_interactions:
         c3dvcmQiIAogICAgICAgICAgIHR5cGU9InN1Ym1pdCI+CiAgICA8aW5wdXQg
         dHlwZT0iaGlkZGVuIiBuYW1lPSJhIiB2YWx1ZT0icmVxcHciPgogICAgPGlu
         cHV0IHR5cGU9ImhpZGRlbiIgaWQ9InRva2VuX2JvdHRvbSIgbmFtZT0idG9r
-        ZW4iIHZhbHVlPSIxNDQ3OTA1OTY4LVdWXzJlX3B1elRiVl9TVWloeC14RFV5
-        cW1TZW84bUhhMlZZUzEyWWF6RXciPgogICAgPGEgaHJlZj0iIyIgb25jbGlj
+        ZW4iIHZhbHVlPSIxNDQ3OTYxODU4LUxhM3FMQUpwUUpYa3dWV1UxcjNpSF85
+        RVpsWE9CSDFHT29ZeE5RNEdwcVkiPgogICAgPGEgaHJlZj0iIyIgb25jbGlj
         az0icmV0dXJuIGhpZGVfZm9yZ290X2Zvcm0oJ19ib3R0b20nKSI+W3hdPC9h
         PgogIDwvZm9ybT4KPC9saT4KPC91bD4KICA8L2xpPgoKICAKICAgIAoKCiAg
         CjwvdWw+CgogIDxkaXYgY2xhc3M9Im91dHJvIj48L2Rpdj4KPC9kaXY+CgoK
         PC9ib2R5Pgo8L2h0bWw+
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:11 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:42 GMT
 recorded_with: VCR 2.9.3

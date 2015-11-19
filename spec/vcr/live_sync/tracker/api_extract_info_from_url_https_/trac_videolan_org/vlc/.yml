@@ -18,7 +18,7 @@ http_interactions:
       Server:
       - nginx/1.9.7
       Date:
-      - Thu, 19 Nov 2015 04:06:05 GMT
+      - Thu, 19 Nov 2015 19:37:25 GMT
       Content-Type:
       - text/html;charset=utf-8
       Content-Length:
@@ -30,8 +30,8 @@ http_interactions:
       Expires:
       - Fri, 01 Jan 1999 00:00:00 GMT
       Set-Cookie:
-      - trac_form_token=0a7ea676942227bf65998a16; httponly; Path=/vlc
-      - trac_session=7f7abfeff0edd274ce6c0dab; expires=Wed, 17 Feb 2016 04:06:05 GMT;
+      - trac_form_token=54aa9e6782f6f0a08d6c59a9; httponly; Path=/vlc
+      - trac_session=9fe7923aa626ea8b3a5e10df; expires=Wed, 17 Feb 2016 19:37:25 GMT;
         httponly; Path=/vlc
       Vary:
       - Accept-Encoding
@@ -254,5 +254,5 @@ http_interactions:
         b2Z0d2FyZTwvYT4uPC9wPgogICAgICA8cCBjbGFzcz0icmlnaHQiPlZpZGVv
         TEFOPC9wPgogICAgPC9kaXY+CiAgPC9ib2R5Pgo8L2h0bWw+
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:05 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:25 GMT
 recorded_with: VCR 2.9.3

@@ -18,12 +18,12 @@ http_interactions:
       Server:
       - TwistedWeb/11.1.0
       Date:
-      - Thu, 19 Nov 2015 04:06:00 GMT
+      - Thu, 19 Nov 2015 19:37:16 GMT
       Content-Length:
       - '24712'
       Set-Cookie:
-      - trac_form_token=d83b17d663b343340803ddbd; httponly; Path=/trac
-      - trac_session=39dc7db67d2486f012446152; expires=Wed, 17-Feb-2016 04:06:01 GMT;
+      - trac_form_token=d2559883534115a441c02a99; httponly; Path=/trac
+      - trac_session=14a2088f156467058fa7f413; expires=Wed, 17-Feb-2016 19:37:16 GMT;
         httponly; Path=/trac
       Expires:
       - Fri, 01 Jan 1999 00:00:00 GMT
@@ -585,5 +585,5 @@ http_interactions:
         IDxwPjwvcD4KICAgICAgICA8L2Rpdj4KICAgIDwvZGl2PgogIDwvYm9keT4K
         PC9odG1sPg==
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:01 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:17 GMT
 recorded_with: VCR 2.9.3

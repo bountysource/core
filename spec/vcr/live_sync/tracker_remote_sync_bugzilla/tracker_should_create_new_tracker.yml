@@ -16,7 +16,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:04:18 GMT
+      - Thu, 19 Nov 2015 19:35:25 GMT
       Server:
       - Apache
       X-Xss-Protection:
@@ -30,10 +30,10 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Set-Cookie:
-      - Bugzilla_login_request_cookie=3t6WpTWqsZ; path=/; secure; HttpOnly
-      - github_secret=uYdtxlBBBQdmOJ6R; path=/; secure; HttpOnly
+      - Bugzilla_login_request_cookie=RNXsInS5xw; path=/; secure; HttpOnly
+      - github_secret=wUP96cIgDlOw99E4; path=/; secure; HttpOnly
       X-Backend-Server:
-      - web3.bugs.scl3.mozilla.com
+      - web4.bugs.scl3.mozilla.com
       Transfer-Encoding:
       - chunked
       Content-Type:
@@ -386,5 +386,5 @@ http_interactions:
         c3M6OkNhbGxNZXRob2RdIHdpdGgganMgZGVidWdnZXIgKGUuZy4gZmlyZWJ1
         ZykiLCIyMDEyLTA5LTA0IDA3OjU4OjQ1Ig==
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:04:20 GMT
+  recorded_at: Thu, 19 Nov 2015 19:35:27 GMT
 recorded_with: VCR 2.9.3

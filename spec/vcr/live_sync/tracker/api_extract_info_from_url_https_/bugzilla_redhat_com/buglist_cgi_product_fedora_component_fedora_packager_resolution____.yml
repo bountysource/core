@@ -16,7 +16,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:06:11 GMT
+      - Thu, 19 Nov 2015 19:37:42 GMT
       Server:
       - Apache
       X-Xss-Protection:
@@ -24,7 +24,7 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Content-Disposition:
-      - inline; filename="bugs-2015-11-18.html"
+      - inline; filename="bugs-2015-11-19.html"
       X-Content-Type-Options:
       - nosniff
       Vary:
@@ -34,7 +34,7 @@ http_interactions:
       Set-Cookie:
       - BUGLIST=1024796-1111398-1126918-1130191-1203252-1212419-1213068-1213075-1218046-1228929-1249302-1250838-1259889-1266739-517834-627987-657627-700744-714726-1183212;
         domain=bugzilla.redhat.com; path=/; expires=Fri, 01-Jan-2038 00:00:00 GMT
-      - Bugzilla_login_request_cookie=YXZmPkO7xR; domain=bugzilla.redhat.com; path=/;
+      - Bugzilla_login_request_cookie=UXNldYcHOo; domain=bugzilla.redhat.com; path=/;
         HttpOnly
       - LASTORDER=bug_status%2Cpriority%2Cassigned_to%2Cbug_id; domain=bugzilla.redhat.com;
         path=/; expires=Fri, 01-Jan-2038 00:00:00 GMT
@@ -48,7 +48,7 @@ http_interactions:
         \                     \"http://www.w3.org/TR/html4/loose.dtd\">\n<html lang=\"en\">\n
         \ <head><script type=\"text/javascript\" src=\"extensions/BayotBase/web/js/jquery-1.7.1.min.js\"></script>\n\n
         \   <!--script type=\"text/javascript\" src=\"extensions/BayotBase/web/js/es5-shim.min.js?1447136797\"></script-->\n\n<!--script
-        type=\"text/javascript\" src=\"page.cgi?1447899472&amp;id=bayotbase/fielddefs.js\"></script-->\n<script
+        type=\"text/javascript\" src=\"page.cgi?1447958622&amp;id=bayotbase/fielddefs.js\"></script-->\n<script
         type=\"text/javascript\">var BB_FIELDS = {};</script>\n\n<script type=\"text/javascript\"
         src=\"extensions/BayotBase/web/js/jquery-ui-1.8.18.custom.min.js?1447136797\"></script>\n<script
         type=\"text/javascript\" src=\"extensions/BayotBase/web/js/jquery.cookie.js?1447136797\"></script>\n<script
@@ -176,10 +176,10 @@ http_interactions:
         type=\"text\" name=\"loginname\" size=\"20\" id=\"login_top\">\n    <input
         id=\"forgot_button_top\" value=\"Reset Password\" \n           type=\"submit\">\n
         \   <input type=\"hidden\" name=\"a\" value=\"reqpw\">\n    <input type=\"hidden\"
-        id=\"token_top\" name=\"token\" value=\"1447905972-KXvE84Sok1BUApjF8Z9nLW2JABoFTYMrt2g0rGF_JNk\">\n
+        id=\"token_top\" name=\"token\" value=\"1447961863-P_SvfE6_kysABcJxl8CjKbAW8DJNlJG56Xr7PsEEaEk\">\n
         \   <a href=\"#\" onclick=\"return hide_forgot_form('_top')\">[x]</a>\n  </form>\n</li>\n
         \ \n  \n</ul>\n</div> \n\n<div id=\"bugzilla-body\">\n\n<div class=\"bz_query_head\">\n
-        \ <span class=\"bz_query_timestamp\">Wed Nov 18 2015 23:06:12 EST<br>\n  </span>\n\n\n\n</div>\n\n\n<a
+        \ <span class=\"bz_query_timestamp\">Thu Nov 19 2015 14:37:43 EST<br>\n  </span>\n\n\n\n</div>\n\n\n<a
         id=\"search_description_controller\" class=\"bz_default_hidden\"\n   href=\"javascript:TUI_toggle_class('search_description')\">Hide
         Search Description</a>\n\n<script type=\"text/javascript\">\n  TUI_alternates['search_description']
         = 'Show Search Description';\n  YAHOO.util.Dom.removeClass('search_description_controller',
@@ -527,7 +527,7 @@ http_interactions:
         as \n          <input type=\"hidden\" name=\"newquery\" \n                 value=\"component=fedora-packager&amp;product=Fedora&amp;query_format=advanced&amp;resolution=---&amp;order=bug_status%2Cpriority%2Cassigned_to%2Cbug_id\">\n
         \         <input type=\"hidden\" name=\"cmdtype\" value=\"doit\">\n          <input
         type=\"hidden\" name=\"remtype\" value=\"asnamed\">\n          <input type=\"hidden\"
-        name=\"token\" value=\"1447905972-J5CL5gV7qOMRrRgcS_Wyzz44lukX9kwmlPkqpe6ZExY\">\n
+        name=\"token\" value=\"1447961863-VoQrlW4G1hZauzAtqAHzX2mIhoONHjybMV7FT06lcVA\">\n
         \         <input type=\"text\" id=\"save_newqueryname\" name=\"newqueryname\"
         size=\"20\"\n                 title=\"New query name\" value=\"\"> \n        </form>
         \n      </td>  \n  </tr>\n</table>\n\n  <p class=\"bz_query_single_product\"><a
@@ -587,7 +587,7 @@ http_interactions:
         type=\"text\" name=\"loginname\" size=\"20\" id=\"login_bottom\">\n    <input
         id=\"forgot_button_bottom\" value=\"Reset Password\" \n           type=\"submit\">\n
         \   <input type=\"hidden\" name=\"a\" value=\"reqpw\">\n    <input type=\"hidden\"
-        id=\"token_bottom\" name=\"token\" value=\"1447905972-KXvE84Sok1BUApjF8Z9nLW2JABoFTYMrt2g0rGF_JNk\">\n
+        id=\"token_bottom\" name=\"token\" value=\"1447961863-P_SvfE6_kysABcJxl8CjKbAW8DJNlJG56Xr7PsEEaEk\">\n
         \   <a href=\"#\" onclick=\"return hide_forgot_form('_bottom')\">[x]</a>\n
         \ </form>\n</li>\n  \n  <li><span class=\"separator\">| </span><a href=\"/enter_bug.cgi?product=Bugzilla&amp;version=4.4\">Report
         Bugzilla Bug</a></li>\n  \n</ul>\n  </li>\n\n  \n    \n\n\n  \n</ul>\n\n  <div
@@ -595,5 +595,5 @@ http_interactions:
         class=\"links-actions\">\n      <a href=\"page.cgi?id=terms-conditions.html\"
         >Legal</a>\n    </li>\n  </ul>\n</div></div>\n</div>\n\n\n</body>\n</html>"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:12 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:43 GMT
 recorded_with: VCR 2.9.3

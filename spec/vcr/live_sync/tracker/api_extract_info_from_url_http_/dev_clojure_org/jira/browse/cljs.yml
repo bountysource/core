@@ -16,9 +16,9 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Nov 2015 04:06:07 GMT
+      - Thu, 19 Nov 2015 19:37:27 GMT
       X-Arequestid:
-      - 1326x41722x1
+      - 817x68571x1
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Pragma:
@@ -26,15 +26,15 @@ http_interactions:
       Expires:
       - Thu, 01 Jan 1970 00:00:00 GMT
       Set-Cookie:
-      - JSESSIONID=10A4EB4F7B9A3A9F9342659C2E5F67FA; Path=/jira
-      - atlassian.xsrf.token=BTMM-1VOF-2I2F-TOTY|5ea5ced019cb5b57951ae04c67bbe5137a896d6c|lout;
+      - JSESSIONID=24940D260464F7F95ED8988F2FF1403E; Path=/jira
+      - atlassian.xsrf.token=BTMM-1VOF-2I2F-TOTY|2ae71e5a8093705b69cdbae9eeb5486c2738c7c1|lout;
         Path=/jira
       X-Seraph-Loginreason:
       - OUT
       X-Ausername:
       - anonymous
       X-Asessionid:
-      - cvtlbg
+      - koxp0h
       Content-Type:
       - text/html;charset=UTF-8
       Vary:
@@ -50,7 +50,7 @@ http_interactions:
         content=\"general\" />\n    <meta http-equiv=\"Content-Type\" content=\"text/html;
         charset=UTF-8\" />\n    <meta http-equiv=\"Pragma\" content=\"no-cache\" />\n
         \   <meta http-equiv=\"Expires\" content=\"-1\" />\n    \n\n    \n<meta id=\"atlassian-token\"
-        name=\"atlassian-token\" content=\"BTMM-1VOF-2I2F-TOTY|5ea5ced019cb5b57951ae04c67bbe5137a896d6c|lout\">\n\n\n
+        name=\"atlassian-token\" content=\"BTMM-1VOF-2I2F-TOTY|2ae71e5a8093705b69cdbae9eeb5486c2738c7c1|lout\">\n\n\n
         \   <link rel=\"shortcut icon\" href=\"/jira/s/en_US9yuwnb/649/7/_/favicon.ico\">\n
         \   <link rel=\"icon\" type=\"image/png\" href=\"/jira/s/en_US9yuwnb/649/7/_/images/icons/favicon.png\">\n\n
         \   \n    <script type=\"text/javascript\">var contextPath = '/jira';</script>\n<link
@@ -328,129 +328,133 @@ http_interactions:
         seq</span>\n        </li>\n            </ul>\n</div></div><div class=\"module\"
         id=\"fragcreatedvsresolved\"><div class=\"mod-header\">\n    <h3>Issues: 30
         Day Summary</h3>\n</div>\n<div class=\"mod-content\">\n    <div class=\"fullyCentered\">\n
-        \                                   <map id=\"chart-K3F4J\" name=\"chart-K3F4J\">\n<area
+        \                                   <map id=\"chart-j2IUf\" name=\"chart-j2IUf\">\n<area
         shape=\"poly\" coords=\"364,120,363,123,361,123,359,123,358,120,359,118,361,117,363,118,364,120,364,120\"
         title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"353,120,352,123,350,123,348,123,347,120,348,118,350,117,352,118,353,120,353,120\"
+        coords=\"353,120,353,123,350,123,348,123,347,120,348,118,350,117,353,118,353,120,353,120\"
         title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"342,120,341,123,339,123,337,123,336,120,337,118,339,117,341,118,342,120,342,120\"
+        coords=\"343,120,342,123,340,123,338,123,337,120,338,118,340,117,342,118,343,120,343,120\"
         title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"331,120,330,123,328,123,326,123,325,120,326,118,328,117,330,118,331,120,331,120\"
+        coords=\"332,120,331,123,329,123,327,123,326,120,327,118,329,117,331,118,332,120,332,120\"
         title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"320,127,319,129,317,130,315,129,314,127,315,125,317,124,319,125,320,127,320,127\"
+        coords=\"322,120,321,123,319,123,316,123,316,120,316,118,319,117,321,118,322,120,322,120\"
+        title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"311,127,310,129,308,130,306,129,305,127,306,125,308,124,310,125,311,127,311,127\"
         title=\"Created 14 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"309,127,308,129,306,130,304,129,303,127,304,125,306,124,308,125,309,127,309,127\"
+        coords=\"300,127,299,129,297,130,295,129,294,127,295,125,297,124,299,125,300,127,300,127\"
         title=\"Created 14 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"298,127,297,129,295,130,293,129,292,127,293,125,295,124,297,125,298,127,298,127\"
+        coords=\"290,127,289,129,287,130,285,129,284,127,285,125,287,124,289,125,290,127,290,127\"
         title=\"Created 14 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"287,127,286,129,284,130,282,129,281,127,282,125,284,124,286,125,287,127,287,127\"
+        coords=\"279,127,278,129,276,130,274,129,273,127,274,125,276,124,278,125,279,127,279,127\"
         title=\"Created 14 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"276,127,275,129,273,130,271,129,270,127,271,125,273,124,275,125,276,127,276,127\"
+        coords=\"268,127,268,129,265,130,263,129,262,127,263,125,265,124,268,125,268,127,268,127\"
         title=\"Created 14 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"265,141,264,143,262,144,260,143,259,141,260,139,262,138,264,139,265,141,265,141\"
+        coords=\"258,141,257,143,255,144,253,143,252,141,253,139,255,138,257,139,258,141,258,141\"
         title=\"Created 12 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"254,155,253,157,251,158,249,157,248,155,249,153,251,152,253,153,254,155,254,155\"
+        coords=\"247,155,246,157,244,158,242,157,241,155,242,153,244,152,246,153,247,155,247,155\"
         title=\"Created 10 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"243,155,242,157,240,158,238,157,237,155,238,153,240,152,242,153,243,155,243,155\"
+        coords=\"237,155,236,157,234,158,231,157,231,155,231,153,234,152,236,153,237,155,237,155\"
         title=\"Created 10 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"232,155,231,157,229,158,227,157,226,155,227,153,229,152,231,153,232,155,232,155\"
+        coords=\"226,155,225,157,223,158,221,157,220,155,221,153,223,152,225,153,226,155,226,155\"
         title=\"Created 10 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"221,155,220,157,218,158,216,157,215,155,216,153,218,152,220,153,221,155,221,155\"
+        coords=\"215,155,214,157,212,158,210,157,209,155,210,153,212,152,214,153,215,155,215,155\"
         title=\"Created 10 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"210,162,209,164,207,165,205,164,204,162,205,160,207,159,209,160,210,162,210,162\"
+        coords=\"205,162,204,164,202,165,200,164,199,162,200,160,202,159,204,160,205,162,205,162\"
         title=\"Created 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"199,175,198,178,196,178,194,178,193,175,194,173,196,172,198,173,199,175,199,175\"
+        coords=\"194,175,193,178,191,178,189,178,188,175,189,173,191,172,193,173,194,175,194,175\"
         title=\"Created 7 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"188,182,187,184,185,185,183,184,182,182,183,180,185,179,187,180,188,182,188,182\"
+        coords=\"183,182,183,184,180,185,178,184,177,182,178,180,180,179,183,180,183,182,183,182\"
         title=\"Created 6 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"177,196,176,198,174,199,172,198,171,196,172,194,174,193,176,194,177,196,177,196\"
+        coords=\"172,196,172,198,169,199,167,198,166,196,167,194,169,193,172,194,172,196,172,196\"
         title=\"Created 4 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"166,196,165,198,163,199,161,198,160,196,161,194,163,193,165,194,166,196,166,196\"
+        coords=\"162,196,161,198,159,199,157,198,156,196,157,194,159,193,161,194,162,196,162,196\"
         title=\"Created 4 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"155,196,154,198,152,199,150,198,149,196,150,194,152,193,154,194,155,196,155,196\"
+        coords=\"151,196,150,198,148,199,146,198,145,196,146,194,148,193,150,194,151,196,151,196\"
         title=\"Created 4 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"144,196,143,198,141,199,139,198,138,196,139,194,141,193,143,194,144,196,144,196\"
+        coords=\"141,196,140,198,138,199,135,198,135,196,135,194,138,193,140,194,141,196,141,196\"
         title=\"Created 4 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"133,203,132,205,130,206,128,205,127,203,128,201,130,200,132,201,133,203,133,203\"
+        coords=\"130,203,129,205,127,206,125,205,124,203,125,201,127,200,129,201,130,203,130,203\"
         title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"122,203,121,205,119,206,117,205,116,203,117,201,119,200,121,201,122,203,122,203\"
+        coords=\"119,203,118,205,116,206,114,205,113,203,114,201,116,200,118,201,119,203,119,203\"
         title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"111,203,110,205,108,206,106,205,105,203,106,201,108,200,110,201,111,203,111,203\"
+        coords=\"109,203,108,205,106,206,104,205,103,203,104,201,106,200,108,201,109,203,109,203\"
         title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"100,203,99,205,97,206,95,205,94,203,95,201,97,200,99,201,100,203,100,203\"
+        coords=\"98,203,97,205,95,206,93,205,92,203,93,201,95,200,97,201,98,203,98,203\"
         title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"89,203,88,205,86,206,84,205,83,203,84,201,86,200,88,201,89,203,89,203\"
+        coords=\"87,203,87,205,84,206,82,205,81,203,82,201,84,200,87,201,87,203,87,203\"
         title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"78,203,77,205,75,206,73,205,72,203,73,201,75,200,77,201,78,203,78,203\"
+        coords=\"77,203,76,205,74,206,72,205,71,203,72,201,74,200,76,201,77,203,77,203\"
         title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"67,203,66,205,64,206,62,205,61,203,62,201,64,200,66,201,67,203,67,203\"
+        coords=\"66,203,65,205,63,206,61,205,60,203,61,201,63,200,65,201,66,203,66,203\"
         title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"56,203,55,205,53,206,51,205,50,203,51,201,53,200,55,201,56,203,56,203\"
+        coords=\"56,203,55,205,53,206,50,205,50,203,50,201,53,200,55,201,56,203,56,203\"
         title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
         coords=\"45,217,44,219,42,220,40,219,39,217,40,215,42,214,44,215,45,217,45,217\"
         title=\"Created 1 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
         coords=\"364,17,363,20,361,20,359,20,358,17,359,15,361,14,363,15,364,17,364,17\"
         title=\"Resolved 30 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"353,17,352,20,350,20,348,20,347,17,348,15,350,14,352,15,353,17,353,17\"
+        coords=\"353,17,353,20,350,20,348,20,347,17,348,15,350,14,353,15,353,17,353,17\"
         title=\"Resolved 30 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"342,17,341,20,339,20,337,20,336,17,337,15,339,14,341,15,342,17,342,17\"
+        coords=\"343,17,342,20,340,20,338,20,337,17,338,15,340,14,342,15,343,17,343,17\"
         title=\"Resolved 30 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"331,17,330,20,328,20,326,20,325,17,326,15,328,14,330,15,331,17,331,17\"
+        coords=\"332,17,331,20,329,20,327,20,326,17,327,15,329,14,331,15,332,17,332,17\"
         title=\"Resolved 30 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"320,17,319,20,317,20,315,20,314,17,315,15,317,14,319,15,320,17,320,17\"
+        coords=\"322,17,321,20,319,20,316,20,316,17,316,15,319,14,321,15,322,17,322,17\"
         title=\"Resolved 30 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"309,24,308,26,306,27,304,26,303,24,304,22,306,21,308,22,309,24,309,24\"
+        coords=\"311,17,310,20,308,20,306,20,305,17,306,15,308,14,310,15,311,17,311,17\"
+        title=\"Resolved 30 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"300,24,299,26,297,27,295,26,294,24,295,22,297,21,299,22,300,24,300,24\"
         title=\"Resolved 29 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"298,24,297,26,295,27,293,26,292,24,293,22,295,21,297,22,298,24,298,24\"
+        coords=\"290,24,289,26,287,27,285,26,284,24,285,22,287,21,289,22,290,24,290,24\"
         title=\"Resolved 29 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"287,24,286,26,284,27,282,26,281,24,282,22,284,21,286,22,287,24,287,24\"
+        coords=\"279,24,278,26,276,27,274,26,273,24,274,22,276,21,278,22,279,24,279,24\"
         title=\"Resolved 29 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"276,31,275,33,273,34,271,33,270,31,271,29,273,28,275,29,276,31,276,31\"
+        coords=\"268,31,268,33,265,34,263,33,262,31,263,29,265,28,268,29,268,31,268,31\"
         title=\"Resolved 28 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"265,162,264,164,262,165,260,164,259,162,260,160,262,159,264,160,265,162,265,162\"
+        coords=\"258,162,257,164,255,165,253,164,252,162,253,160,255,159,257,160,258,162,258,162\"
         title=\"Resolved 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"254,169,253,171,251,172,249,171,248,169,249,166,251,166,253,166,254,169,254,169\"
+        coords=\"247,169,246,171,244,172,242,171,241,169,242,166,244,166,246,166,247,169,247,169\"
         title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"243,169,242,171,240,172,238,171,237,169,238,166,240,166,242,166,243,169,243,169\"
+        coords=\"237,169,236,171,234,172,231,171,231,169,231,166,234,166,236,166,237,169,237,169\"
         title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"232,169,231,171,229,172,227,171,226,169,227,166,229,166,231,166,232,169,232,169\"
+        coords=\"226,169,225,171,223,172,221,171,220,169,221,166,223,166,225,166,226,169,226,169\"
         title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"221,169,220,171,218,172,216,171,215,169,216,166,218,166,220,166,221,169,221,169\"
+        coords=\"215,169,214,171,212,172,210,171,209,169,210,166,212,166,214,166,215,169,215,169\"
         title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"210,169,209,171,207,172,205,171,204,169,205,166,207,166,209,166,210,169,210,169\"
+        coords=\"205,169,204,171,202,172,200,171,199,169,200,166,202,166,204,166,205,169,205,169\"
         title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"199,175,198,178,196,178,194,178,193,175,194,173,196,172,198,173,199,175,199,175\"
+        coords=\"194,175,193,178,191,178,189,178,188,175,189,173,191,172,193,173,194,175,194,175\"
         title=\"Resolved 7 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"188,196,187,198,185,199,183,198,182,196,183,194,185,193,187,194,188,196,188,196\"
+        coords=\"183,196,183,198,180,199,178,198,177,196,178,194,180,193,183,194,183,196,183,196\"
         title=\"Resolved 4 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"177,196,176,198,174,199,172,198,171,196,172,194,174,193,176,194,177,196,177,196\"
+        coords=\"172,196,172,198,169,199,167,198,166,196,167,194,169,193,172,194,172,196,172,196\"
         title=\"Resolved 4 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"166,196,165,198,163,199,161,198,160,196,161,194,163,193,165,194,166,196,166,196\"
+        coords=\"162,196,161,198,159,199,157,198,156,196,157,194,159,193,161,194,162,196,162,196\"
         title=\"Resolved 4 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"155,203,154,205,152,206,150,205,149,203,150,201,152,200,154,201,155,203,155,203\"
+        coords=\"151,203,150,205,148,206,146,205,145,203,146,201,148,200,150,201,151,203,151,203\"
         title=\"Resolved 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"144,203,143,205,141,206,139,205,138,203,139,201,141,200,143,201,144,203,144,203\"
+        coords=\"141,203,140,205,138,206,135,205,135,203,135,201,138,200,140,201,141,203,141,203\"
         title=\"Resolved 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"133,203,132,205,130,206,128,205,127,203,128,201,130,200,132,201,133,203,133,203\"
+        coords=\"130,203,129,205,127,206,125,205,124,203,125,201,127,200,129,201,130,203,130,203\"
         title=\"Resolved 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"122,203,121,205,119,206,117,205,116,203,117,201,119,200,121,201,122,203,122,203\"
+        coords=\"119,203,118,205,116,206,114,205,113,203,114,201,116,200,118,201,119,203,119,203\"
         title=\"Resolved 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"111,203,110,205,108,206,106,205,105,203,106,201,108,200,110,201,111,203,111,203\"
+        coords=\"109,203,108,205,106,206,104,205,103,203,104,201,106,200,108,201,109,203,109,203\"
         title=\"Resolved 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"100,203,99,205,97,206,95,205,94,203,95,201,97,200,99,201,100,203,100,203\"
+        coords=\"98,203,97,205,95,206,93,205,92,203,93,201,95,200,97,201,98,203,98,203\"
         title=\"Resolved 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"89,203,88,205,86,206,84,205,83,203,84,201,86,200,88,201,89,203,89,203\"
+        coords=\"87,203,87,205,84,206,82,205,81,203,82,201,84,200,87,201,87,203,87,203\"
         title=\"Resolved 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"78,203,77,205,75,206,73,205,72,203,73,201,75,200,77,201,78,203,78,203\"
+        coords=\"77,203,76,205,74,206,72,205,71,203,72,201,74,200,76,201,77,203,77,203\"
         title=\"Resolved 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"67,217,66,219,64,220,62,219,61,217,62,215,64,214,66,215,67,217,67,217\"
+        coords=\"66,217,65,219,63,220,61,219,60,217,61,215,63,214,65,215,66,217,66,217\"
         title=\"Resolved 1 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
-        coords=\"56,217,55,219,53,220,51,219,50,217,51,215,53,214,55,215,56,217,56,217\"
+        coords=\"56,217,55,219,53,220,50,219,50,217,50,215,53,214,55,215,56,217,56,217\"
         title=\"Resolved 1 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
         coords=\"45,217,44,219,42,220,40,219,39,217,40,215,42,214,44,215,45,217,45,217\"
         title=\"Resolved 1 issues\" alt=\"\" nohref=\"nohref\"/>\n</map>\n                        <img
-        src='/jira/charts?filename=jfreechart-onetime-8063443279335851800.png' border='0'
-        \ usemap=\"\\#chart-K3F4J\"  width=\"380\" height=\"250\" />\n            <br/>\n
+        src='/jira/charts?filename=jfreechart-onetime-1309359300407721561.png' border='0'
+        \ usemap=\"\\#chart-j2IUf\"  width=\"380\" height=\"250\" />\n            <br/>\n
         \           Issues: <b><span style='color:#c00;'>15</span></b> created and
         <b><span style='color:#3c3;'>30</span></b> resolved\n            <br/>\n            </div>\n</div></div><div
         class=\"module\" id=\"fragrecentissues\"><div class=\"mod-header\">\n    <ul
@@ -503,8 +507,8 @@ http_interactions:
         \       </li>\n                </ul>\n</div>\n</div><div class=\"module\"
         id=\"fragactivitystream\"><div class=\"mod-header\">\n    <h3>Activity Stream</h3>\n</div>\n<div
         class=\"mod-content\">\n    <div class=\"activitystream-container\">\n        <iframe
-        id=\"gadget-1\" name=\"gadget-1\" class=\"gadget\" src=\"http://dev.clojure.org/jira/plugins/servlet/gadgets/ifr?container=atlassian&amp;mid=1&amp;country=US&amp;lang=en&amp;view=default&amp;view-params=%7B%22writable%22%3A%22false%22%7D&amp;st=atlassian%3AhgSihvilGbY7XQ0GKcS9EiNydSAwRYXPJENI3QSgUwcCZzZdMhKU9q%2BkA%2FmlWikRoBDz3L3CvtLtCMKXMVRkgThmvrClKNvAECr75nXcxXfinawKBCkYnz%2BRdoaIOSv5qB6nWubrcgQGu0X0pq1Tp2d2V61i7PsDQuPBxIY3ZNcQBnOfJVzTFoRY6MQUx0Fig0hogpnKJelcZ7M4IipQ6XLPwehBgv%2FbHGmluzQSMIttzM%2BFdePpOmlfx4ynFy7ljyNEZA%3D%3D&amp;up_isConfigured=true&amp;up_isReallyConfigured=false&amp;up_title=Activity+Stream&amp;up_titleRequired=false&amp;up_numofentries=10&amp;up_refresh=false&amp;up_rules=&amp;up_renderingContext=&amp;up_keys=CLJS&amp;up_itemKeys=&amp;up_username=&amp;url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.streams.streams-jira-plugin%2Fgadgets%2Factivitystream-gadget.xml&amp;libs=auth-refresh#rpctoken=132034093\"
-        frameborder=\"0\" scrolling=\"no\"  height=\"100\"><a href=\"http://dev.clojure.org/jira/plugins/servlet/gadgets/ifr?container=atlassian&amp;mid=1&amp;country=US&amp;lang=en&amp;view=default&amp;view-params=%7B%22writable%22%3A%22false%22%7D&amp;st=atlassian%3AhgSihvilGbY7XQ0GKcS9EiNydSAwRYXPJENI3QSgUwcCZzZdMhKU9q%2BkA%2FmlWikRoBDz3L3CvtLtCMKXMVRkgThmvrClKNvAECr75nXcxXfinawKBCkYnz%2BRdoaIOSv5qB6nWubrcgQGu0X0pq1Tp2d2V61i7PsDQuPBxIY3ZNcQBnOfJVzTFoRY6MQUx0Fig0hogpnKJelcZ7M4IipQ6XLPwehBgv%2FbHGmluzQSMIttzM%2BFdePpOmlfx4ynFy7ljyNEZA%3D%3D&amp;up_isConfigured=true&amp;up_isReallyConfigured=false&amp;up_title=Activity+Stream&amp;up_titleRequired=false&amp;up_numofentries=10&amp;up_refresh=false&amp;up_rules=&amp;up_renderingContext=&amp;up_keys=CLJS&amp;up_itemKeys=&amp;up_username=&amp;url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.streams.streams-jira-plugin%2Fgadgets%2Factivitystream-gadget.xml&amp;libs=auth-refresh#rpctoken=132034093\">Activity
+        id=\"gadget-1\" name=\"gadget-1\" class=\"gadget\" src=\"http://dev.clojure.org/jira/plugins/servlet/gadgets/ifr?container=atlassian&amp;mid=1&amp;country=US&amp;lang=en&amp;view=default&amp;view-params=%7B%22writable%22%3A%22false%22%7D&amp;st=atlassian%3Akkal%2BYwyts1jKeQG2xwtAOkufxalyl6BSUC5Hj%2BZhZCjdawKUwjMQZCbOJpjSGcGIZtcNJnFajA7qNH%2FcTcWpzRySMsPK5SQSX0oA9jMBDaT4ULRnJ1MXFgDHqsG%2BSCgGnOPtFvyUPnZsXHUP7eSh69F3NgecyqniTgQfyNMoGTkdBWcgejYhospjdEqw1hDiE7UOE96JKDG4oFqG%2B1Jcl1y59nLapIyRyCC0%2BPWTTITXnyfsspun0TuoRMaRN1CdM4nqA%3D%3D&amp;up_isConfigured=true&amp;up_isReallyConfigured=false&amp;up_title=Activity+Stream&amp;up_titleRequired=false&amp;up_numofentries=10&amp;up_refresh=false&amp;up_rules=&amp;up_renderingContext=&amp;up_keys=CLJS&amp;up_itemKeys=&amp;up_username=&amp;url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.streams.streams-jira-plugin%2Fgadgets%2Factivitystream-gadget.xml&amp;libs=auth-refresh#rpctoken=599098713\"
+        frameborder=\"0\" scrolling=\"no\"  height=\"100\"><a href=\"http://dev.clojure.org/jira/plugins/servlet/gadgets/ifr?container=atlassian&amp;mid=1&amp;country=US&amp;lang=en&amp;view=default&amp;view-params=%7B%22writable%22%3A%22false%22%7D&amp;st=atlassian%3Akkal%2BYwyts1jKeQG2xwtAOkufxalyl6BSUC5Hj%2BZhZCjdawKUwjMQZCbOJpjSGcGIZtcNJnFajA7qNH%2FcTcWpzRySMsPK5SQSX0oA9jMBDaT4ULRnJ1MXFgDHqsG%2BSCgGnOPtFvyUPnZsXHUP7eSh69F3NgecyqniTgQfyNMoGTkdBWcgejYhospjdEqw1hDiE7UOE96JKDG4oFqG%2B1Jcl1y59nLapIyRyCC0%2BPWTTITXnyfsspun0TuoRMaRN1CdM4nqA%3D%3D&amp;up_isConfigured=true&amp;up_isReallyConfigured=false&amp;up_title=Activity+Stream&amp;up_titleRequired=false&amp;up_numofentries=10&amp;up_refresh=false&amp;up_rules=&amp;up_renderingContext=&amp;up_keys=CLJS&amp;up_itemKeys=&amp;up_username=&amp;url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.streams.streams-jira-plugin%2Fgadgets%2Factivitystream-gadget.xml&amp;libs=auth-refresh#rpctoken=599098713\">Activity
         Stream</a></iframe>\n    </div>\n</div>\n</div></div></div>\n    </div>\n</div>\n\n\n\n\n\n\n\n\n\n\n<div
         class=\"footer\">\n<div class=\"poweredbymessage\">\n        <a href=\"http://www.atlassian.com/software/jira\"
         class=\"smalltext\">Atlassian JIRA</a>\n        <span id=\"footer-build-information\"
@@ -515,15 +519,15 @@ http_interactions:
         tracking software</a> for <i>your</i> team.\n\n                </div>\n    </div>\n\n<form
         id=\"jira_request_timing_info\" class=\"dont-default-focus\" >\n\t<fieldset
         class=\"parameters hidden\">\n\t\t<input type=\"hidden\" title=\"jira.request.start.millis\"
-        value=\"1447905967368\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
-        value=\"58\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"1326x41722x1\"
+        value=\"1447961847669\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
+        value=\"59\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"817x68571x1\"
         />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.time\" value=\"-\"
         />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.in.mins\" value=\"-\"
         />\n\t\t<input id=\"jiraConcurrentRequests\" type=\"hidden\" name=\"jira.request.concurrent.requests\"
         value=\"1\" />\n\t</fieldset>\n</form>\n<!--\n\t                 REQUEST ID
-        : 1326x41722x1\n\t          REQUEST TIMESTAMP : [18/Nov/2015:22:06:07 -0600]\n\t
-        \              REQUEST TIME : 0.0580\n\t                 ASESSIONID : cvtlbg\n\t
+        : 817x68571x1\n\t          REQUEST TIMESTAMP : [19/Nov/2015:13:37:27 -0600]\n\t
+        \              REQUEST TIME : 0.0590\n\t                 ASESSIONID : koxp0h\n\t
         \       CONCURRENT REQUESTS : 1\n-->\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Thu, 19 Nov 2015 04:06:07 GMT
+  recorded_at: Thu, 19 Nov 2015 19:37:28 GMT
 recorded_with: VCR 2.9.3
