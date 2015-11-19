@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('FundraiserPledgesController', function ($scope, $routeParams, $api) {
   $api.fundraiser_pledges_get($routeParams.id).then(function(pledges) {
     // need to turn amounts into float so that it's sortable

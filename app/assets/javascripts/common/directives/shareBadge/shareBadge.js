@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('shareBadge', function ($api, $modal, IssueBadge) {
   return {
     restrict: "E",

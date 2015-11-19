@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('bountysource').provider('CurrentPersonResolver', function () {
   this.$get = function ($q, $rootScope) {
     return function () {

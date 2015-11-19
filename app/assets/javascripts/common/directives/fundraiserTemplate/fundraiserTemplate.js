@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('fundraiserTemplate', function($rootScope, $location, $routeParams, $modal, $api, $analytics, $cart) {
 
   return {

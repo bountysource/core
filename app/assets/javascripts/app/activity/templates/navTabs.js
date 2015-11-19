@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('activity').controller('ActivityNavTabsController', function($scope, NavTab) {
 
   $scope.navElements = [

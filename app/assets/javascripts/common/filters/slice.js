@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('slice', function() {
   return function(a,start,end) {
     if (!a) { return []; }

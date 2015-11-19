@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers')
   .config(function($routeProvider, defaultRouteOptions, personResolver) {
     var routeOptions = angular.copy(defaultRouteOptions);

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('EditTeamController', function ($scope, $routeParams, $location, Team) {
 
   $scope.form_data = {};

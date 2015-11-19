@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('teamForm', function ($analytics, $api, $routeParams, $location, $filter, $window) {
   return {
     restrict: 'EA',

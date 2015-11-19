@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('AddressManager', function($api, $modal, $window, $rootScope, $log) {
   return function(addresses) {
 

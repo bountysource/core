@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('TrackerBadgeController', function ($rootScope, $scope, $modal) {
 
   var $parentScope = $scope;

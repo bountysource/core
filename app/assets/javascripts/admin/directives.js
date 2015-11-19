@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').
   directive('ngFocus', ['$parse', function($parse) {
     return function(scope, element, attr) {

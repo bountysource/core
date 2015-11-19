@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function ($routeProvider) {
   $routeProvider.when('/admin/tags/:id', {
     templateUrl: 'admin/tags/show.html',

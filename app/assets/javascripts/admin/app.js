@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app', ['ui.bootstrap', 'api.bountysource', 'ngSanitize', 'ngCookieJar', 'templates'])
   .config(function ($routeProvider, $locationProvider, $httpProvider, $provide) {
 

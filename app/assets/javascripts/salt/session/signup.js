@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.session.signup', {
     url: "/signup?access_token&status&reset_mixpanel_id&first_name&last_name&email&account_link_id&image_url&display_name&email_is_registered",

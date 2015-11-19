@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('IssueBackersController', function ($scope, $routeParams, $pageTitle, Issue, Bounties) {
 
   // load core issue object

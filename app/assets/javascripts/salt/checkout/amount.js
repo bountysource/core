@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.checkout.amount', {
     url: "/checkout/amount?team&amount&display_as&reward_id&support_level_id&frequency",

@@ -1,5 +1,3 @@
-"use strict";
-
 angular.module('resources').factory('Tracker', function ($rootScope, $resource, $api) {
 
   var Tracker = $resource($rootScope.api_host + 'trackers/:id', { id: '@id' }, {

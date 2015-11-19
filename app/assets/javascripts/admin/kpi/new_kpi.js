@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function ($routeProvider) {
   $routeProvider.when('/admin/new_kpi', {
     templateUrl: 'admin/kpi/new_kpi.html',

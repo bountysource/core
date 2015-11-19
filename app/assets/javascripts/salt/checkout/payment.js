@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.checkout.payment', {
     parent: 'root.checkout.authed',

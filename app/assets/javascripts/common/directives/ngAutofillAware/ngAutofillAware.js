@@ -1,5 +1,3 @@
-'use strict';
-
 /*
 *  Adding ng-autofill-aware to a <form> forces it to emit 'input' events on a variety of events
 *  typically triggered by autofills by the browser or password managers.

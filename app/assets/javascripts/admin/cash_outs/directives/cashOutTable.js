@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').directive('cashOutTable', function($api, $window) {
 
   return {

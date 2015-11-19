@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.home.teams', {
     templateUrl: "salt/home/teams.html",

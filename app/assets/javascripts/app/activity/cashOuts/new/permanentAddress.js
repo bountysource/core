@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('activity').controller('NewCashOutPermanentAddressController', function($scope) {
 
   $scope.addressManager = $scope.$parent.addressManager;

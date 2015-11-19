@@ -186,6 +186,10 @@ GEM
       multi_json (~> 1.2)
     joiner (0.2.0)
       activerecord (>= 3.1.0, < 4.1.0)
+    jshint (1.4.0)
+      execjs (>= 1.4.0)
+      multi_json (~> 1.0)
+      therubyracer (~> 0.12.1)
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
@@ -386,6 +390,7 @@ DEPENDENCIES
   htmlentities
   httparty
   jbuilder
+  jshint
   json (= 1.8.1)
   jwt (= 0.1.11)
   launchy

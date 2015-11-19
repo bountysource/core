@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('TeamUpdateNewController', function ($scope, $routeParams, $location, $api, $timeout) {
 
   $scope.form_data = {};

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('currencyInput', function ($rootScope, $currency, $timeout) {
 
   return {

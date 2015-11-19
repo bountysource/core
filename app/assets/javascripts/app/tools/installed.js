@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller("InstalledPluginsController", function($scope) {
   // Nested callbacks to filter out trackers that don't have a plugin
   $scope.plugins_promise.then(function(plugins) {

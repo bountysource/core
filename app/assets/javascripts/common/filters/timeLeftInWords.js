@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('timeLeftInWords', function() {
   return function(date) {
     var now = moment();

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('onFinishRender', function($timeout) {
   return {
     restrict: "A",

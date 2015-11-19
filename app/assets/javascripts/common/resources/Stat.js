@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('resources').factory('Stat', function ($rootScope, $resource, $api) {
 
   return $resource($rootScope.api_host + 'stats/:id', { id: '@id' }, {

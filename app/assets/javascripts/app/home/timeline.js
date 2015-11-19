@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('HomeTimelineCtrl', function ($scope, $api, $location, Timeline) {
   $scope.events = Timeline.query({ per_page: 30, include_featured_bounties: true, bounties_only: true });
 

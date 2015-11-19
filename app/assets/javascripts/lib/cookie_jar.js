@@ -3,8 +3,7 @@
 // - renamed to $cookieJar
 // - added secure: 'auto' (based on $location.protocol)
 (function() {
-  'use strict';
-  angular.module('ngCookieJar', []).provider('$cookieJar', function() {
+    angular.module('ngCookieJar', []).provider('$cookieJar', function() {
     var UNDEFINED = (function(undefined) { return undefined; })(),
         EXPIRES = 'expires',
         PATH = 'path',

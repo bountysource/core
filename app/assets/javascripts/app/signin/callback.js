@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('SigninCallbackController', function($scope, $api, $routeParams, $location, $window, $analytics) {
   if ($routeParams.status === 'linked') {
     if ($routeParams.reset_mixpanel_id) {

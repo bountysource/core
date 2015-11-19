@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('FundraiserCreateController', function($scope, $routeParams, $location, $api, $analytics) {
   $scope.fundraiser = {
     total_pledged: 0,

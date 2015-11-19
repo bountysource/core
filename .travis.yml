@@ -3,7 +3,17 @@ sudo: false
 cache: bundler
 rvm:
   - 2.1.2
+script:
+  - bundle exec rake spec:prepare
+  - echo $SCRIPT_CMD
+  - $SCRIPT_CMD
 env:
+  matrix:
+    # travis-ci.org supports concurrency of 5, beyond that and they queue
+    - SCRIPT_CMD="bundle exec rspec --pattern spec/{models}{,/**}/*_spec.rb"
+    - SCRIPT_CMD="bundle exec rspec --pattern spec/{trackers}{,/**}/*_spec.rb"
+    - SCRIPT_CMD="bundle exec rspec --pattern spec/{controllers,features,helpers,mailers,routing}{,/**}/*_spec.rb"
+    - SCRIPT_CMD="bundle exec rake jshint"
   global:
     - DATABASE_URL=postgres://postgres@localhost/bountysource_test
 addons:
@@ -12,3 +22,6 @@ services:
   - postgresql
 before_script:
   - psql -c 'create database bountysource_test;' -U postgres
+branches:
+  only:
+    - master

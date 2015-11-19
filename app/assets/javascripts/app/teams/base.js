@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('BaseTeamController', function($scope, $location, $routeParams, $api, $pageTitle, Team, Tracker) {
   $scope.team_promise = $api.v2.team($routeParams.id).then(function(response) {
     if (!response.success) {

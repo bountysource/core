@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Possible states for a proposal:
  * - pending

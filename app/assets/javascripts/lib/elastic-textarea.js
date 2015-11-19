@@ -14,9 +14,7 @@ angular.module('monospaced.elastic', [])
   .directive('msdElastic', [
     '$timeout', '$window', 'msdElasticConfig',
     function($timeout, $window, config) {
-      'use strict';
-
-      return {
+            return {
         require: 'ngModel',
         restrict: 'A, C',
         link: function(scope, element, attrs, ngModel) {

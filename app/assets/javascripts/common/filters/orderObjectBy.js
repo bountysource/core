@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];

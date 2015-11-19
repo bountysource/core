@@ -1,4 +1,3 @@
-'use strict';
 angular.module('directives').directive('nameForExternalLink', function() {
   return {
     restrict: "E",

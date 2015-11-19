@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('ngClickRequireAuth', function($parse, $api) {
   return {
     restrict: "A",

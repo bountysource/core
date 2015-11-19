@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('claimContent', function() {
   return {
     restrict: "E",

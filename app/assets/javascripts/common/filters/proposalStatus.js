@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('proposalStatus', function () {
   return function (status) {
     var filteredText;

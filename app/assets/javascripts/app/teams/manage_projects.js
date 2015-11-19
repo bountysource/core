@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('TeamManageProjectsController', function ($scope, $routeParams, $api, $pageTitle, $location, Team, Tracker, Tag) {
   // not a member, you can't see this
   $scope.$watch('is_member', function (is_member) {

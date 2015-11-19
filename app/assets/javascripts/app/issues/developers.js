@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('IssueDevelopersController', function ($scope, $pageTitle, $api, $route, $routeParams, $location, $window, $analytics, $filter, $currency, $cart, $q, Issue, BountyClaim, Solution, DeveloperGoal, Bounties) {
 
   // shortcut

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('HomeSearchController', function ($scope, $state, $api) {
   $scope.search_typeahead = {
     query: null,

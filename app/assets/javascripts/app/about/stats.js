@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('StatsPageController', function ($scope, $window, $location, $routeParams, $filter, $timeout, Stat) {
 
   // rebuild charts on window resize

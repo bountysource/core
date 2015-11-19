@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('timeline', function ($window) {
   return {
     restrict: 'E',

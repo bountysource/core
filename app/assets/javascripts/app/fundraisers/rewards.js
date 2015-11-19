@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('FundraiserRewardInfoController', function ($scope, $routeParams, $location, $api) {
   $api.fundraiser_reward_info_get($routeParams.id).then(function(response) {
     var rewards = response.rewards;

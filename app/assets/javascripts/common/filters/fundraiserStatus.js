@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('fundraiserStatus', function() {
   return function(fundraiser) {
     if (!fundraiser) { return ""; }

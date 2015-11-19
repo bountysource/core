@@ -1,5 +1,3 @@
-'use strict';
-
 // dependencies
 angular.module('app',[
   'templates',

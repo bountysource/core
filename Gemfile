@@ -114,6 +114,7 @@ group :test do
   gem 'webmock'
   gem 'timecop'
   gem 'dotenv-rails'
+  gem 'jshint'
 end
 
 gem 'haml'

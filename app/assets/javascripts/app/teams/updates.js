@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('TeamUpdatesController', function ($scope, $routeParams, $location, $api) {
 
   $api.v2.teamUpdates({

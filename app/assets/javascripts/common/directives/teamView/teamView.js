@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('teamView', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $currency, $cart, $window, Tag) {
   return {
     restrict: 'EAC',

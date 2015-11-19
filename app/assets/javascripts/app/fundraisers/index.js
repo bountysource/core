@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('FundraiserIndexController', function($scope, $location, $api) {
   $scope.type = 'current';
   if ($location.path() === '/fundraisers/completed') {

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('formattedAddress', function() {
   return {
     restrict: 'EAC',

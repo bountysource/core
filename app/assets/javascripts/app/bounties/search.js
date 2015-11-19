@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter, $anchorScroll) {
   $scope.reset_form_data = function() {
     $scope.form_data = {

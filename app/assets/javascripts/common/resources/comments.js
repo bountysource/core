@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('resources').factory('Comments', function ($rootScope, $resource, $api) {
 
   return $resource($rootScope.api_host + '/comments', null, {

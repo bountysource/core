@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('services').service('$currency', function ($rootScope, $cookieJar, $window, $log, $api, $analytics, $q) {
 
   var self = this;

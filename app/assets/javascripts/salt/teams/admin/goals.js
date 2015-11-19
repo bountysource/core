@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.teams.admin.goals', {
     url: "/teams/{slug}/admin/goals",

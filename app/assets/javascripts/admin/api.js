@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('api.bountysource',[]).
   service('$api', function($http, $q, $cookieJar, $rootScope, $location, $window, $sniffer, $log) {
     var $api = this; // hack to store self reference

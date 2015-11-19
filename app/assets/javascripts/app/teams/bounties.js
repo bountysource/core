@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('TeamBountiesController', function ($scope, $routeParams, $api, $pageTitle) {
 
   $scope.$watch('team', function(team) {

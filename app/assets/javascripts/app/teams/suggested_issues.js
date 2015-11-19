@@ -1,4 +1,3 @@
-'use strict';
 angular.module('app').controller('SuggestedTeamIssuesController', function ($scope, $routeParams, $api, $window, $location) {
   var parseParams = function (param) {
     if ($window.parseInt(param, 10).toString() === "NaN") {

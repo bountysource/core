@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('Pagination', function () {
 
   return function(apiResponse) {

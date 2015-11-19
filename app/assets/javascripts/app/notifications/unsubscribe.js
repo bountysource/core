@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('NotificationsController', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set("Unsubscribe from Bountysource Emails");
 

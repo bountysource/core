@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('ManageTeamMembersController', function($scope, $routeParams, $route, $location, $api, $window) {
   $scope.$watch('is_admin', function(value) {
     if (value === false) {

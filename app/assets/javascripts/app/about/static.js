@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('StaticPageController', function ($scope, $location, $anchorScroll, $routeParams) {
   // Inherit this for static pages that need deep-linking of hash fragments!
     

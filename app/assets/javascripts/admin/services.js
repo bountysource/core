@@ -1,4 +1,3 @@
-'use strict';
 angular.module('app')
 .service('$pageTitle', function ($window) {
   this.set = function() {

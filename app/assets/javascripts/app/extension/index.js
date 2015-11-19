@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('ExtensionIndexController', function ($scope, $window, $api) {
 
   if ($window.chrome && $window.chrome.webstore) {

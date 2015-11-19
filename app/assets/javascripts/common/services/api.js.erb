@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('services').config(function($httpProvider) {
   // hacky but seems to work.... add auth headers dynamically when NEEDS_V2_HEADERS is set
   $httpProvider.interceptors.push(function($cookieJar) {

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('teams')
   .config(function($routeProvider, defaultRouteOptions, personResolver) {
     $routeProvider.when('/teams/:id/bounties', angular.extend({

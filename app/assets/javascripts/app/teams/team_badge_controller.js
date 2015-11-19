@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('teams').controller('TeamBadgeController', function ($rootScope, $scope, $modal, TeamBadgeBountiesPosted, TeamBadgeBountiesReceived, TeamBadgeRaised) {
 
   var $parentScope = $scope;

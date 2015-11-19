@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('EventShowController', function($scope, $routeParams, $document, $rootScope, $interval, $api) {
 
   // Kill the Zendesk thing when it pops up

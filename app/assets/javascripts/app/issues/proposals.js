@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app')
   .controller('IssueProposalsController', function ($scope, $window, $routeParams, $modal, $cart, $location, Proposal) {
     $scope.showDueDatePicker = function($event) {

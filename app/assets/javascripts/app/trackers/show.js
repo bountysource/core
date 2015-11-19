@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout, $cookieJar, $anchorScroll, TrackerBadge, Tracker) {
 
   $scope.tracker = Tracker.get({ id: $routeParams.id, include_team: true }, function(tracker) {

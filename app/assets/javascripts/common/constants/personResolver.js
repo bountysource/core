@@ -1,5 +1,3 @@
-'use strict';
-
 /*
 * This returns a promise and is meant to block rotues via "resolve: $person". it redirects to /signin if need be.
 *

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('fundraiserTweetButton', function($filter, $api) {
   return {
     restrict: 'E',

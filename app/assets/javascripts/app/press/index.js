@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('PressController', function($scope) {
   $scope.articles = [
     { date: '8/13/14', source: 'The American Genius', title: 'Finally a crowdfunding platform for open source software', href: 'http://agbeat.com/finance/finally-crowdfunding-platform-open-source-software/' },

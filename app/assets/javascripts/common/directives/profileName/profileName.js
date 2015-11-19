@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('profileName', function ($api) {
   return {
     restrict: "E",

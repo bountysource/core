@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('activity').controller('FundraisersController', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set('Fundraisers', 'Activity');
 

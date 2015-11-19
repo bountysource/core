@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('hex', function() {
   return function(input) {
     if (input) {

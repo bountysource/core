@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('NavbarSearchController', function ($scope, $location, $route, Tag) {
   $scope.search_typeahead = {
     query: null,

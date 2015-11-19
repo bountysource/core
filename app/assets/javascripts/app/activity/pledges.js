@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('activity').controller('PledgesController', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set('Pledges', 'Activity');
 

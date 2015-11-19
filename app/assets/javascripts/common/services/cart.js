@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('services').service('$cart', function ($rootScope, $window, $q, $cookieJar, $log, $currency, $api, ShoppingCart, ShoppingCartItems) {
 
   this._cookieName = window.BS_ENV.cookie_name_shopping_cart;

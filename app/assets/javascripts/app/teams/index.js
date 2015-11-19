@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('TeamsIndexController', function ($scope, $location, $routeParams, $anchorScroll, $api, $pageTitle, Team, Tag) {
   $pageTitle.set("Teams");
 

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('activity').controller('TimelineController', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set('Timeline', 'Activity');
 

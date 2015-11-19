@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app')
   .controller('Navbar', function ($location, $scope, $api) {
 

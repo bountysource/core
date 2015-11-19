@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function ($routeProvider, personResolver) {
   $routeProvider.when('/teams/:id/issue_suggestions', angular.extend({
     templateUrl: 'app/teams/issue_suggestions/index.html',

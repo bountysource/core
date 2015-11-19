@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.teams.updates.show', {
     url: "/teams/{slug}/updates/{number}?id",

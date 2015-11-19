@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('AccountSettings', function($scope, $api, $location, $window, Person) {
   $scope.set_post_auth_url = function() {
     $api.set_post_auth_url($location.url());

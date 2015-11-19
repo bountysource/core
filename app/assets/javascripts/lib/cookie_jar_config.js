@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($cookieJarProvider) {
   $cookieJarProvider.setDefaultOptions({
     path: '/',

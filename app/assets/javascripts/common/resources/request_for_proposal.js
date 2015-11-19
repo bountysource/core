@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('RequestForProposal', function ($rootScope, $resource, $api) {
 
   var RequestForProposal = $resource($rootScope.api_host + 'issues/:issue_id/request_for_proposals/:id', { issue_id: '@issue_id', id: '@id' }, {

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('selectOnClick', function () {
   return {
     restrict: "A",
