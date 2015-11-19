@@ -1,5 +1,4 @@
-[![Bountysource](https://www.bountysource.com/badge/team?team_id=1&style=bounties_posted)](https://www.bountysource.com/teams/bountysource/bounties?utm_source=Bountysource&utm_medium=shield&utm_campaign=bounties_posted)
-[![Build Status](https://travis-ci.org/bountysource/core.svg?branch=master)](https://travis-ci.org/bountysource/core)
+[![Bountysource](https://www.bountysource.com/badge/team?team_id=1&style=bounties_posted)](https://www.bountysource.com/teams/bountysource/bounties?utm_source=Bountysource&utm_medium=shield&utm_campaign=bounties_posted) [![Build Status](https://travis-ci.org/bountysource/core.svg?branch=master)](https://travis-ci.org/bountysource/core)
 
 # Bountysource Developer Resources
 
