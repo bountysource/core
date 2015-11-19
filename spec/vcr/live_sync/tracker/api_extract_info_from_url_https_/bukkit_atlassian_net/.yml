@@ -1,0 +1,447 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bukkit.atlassian.net/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 19 Nov 2015 04:06:08 GMT
+      Content-Type:
+      - text/html;charset=UTF-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Arequestid:
+      - 246x27008x1
+      X-Asen:
+      - SEN-2159363
+      X-Ausername:
+      - anonymous
+      X-Atenant-Id:
+      - bukkit.atlassian.net
+      X-Content-Type-Options:
+      - nosniff
+      Location:
+      - https://bukkit.atlassian.net/secure/MyJiraHome.jspa
+      Set-Cookie:
+      - atlassian.xsrf.token=BO29-YFDD-42VF-3M5C|4ed79d49d656c1b8eb85bfb7414bfef803a5bc50|lout;
+        Path=/; Secure
+      Strict-Transport-Security:
+      - max-age=315360000;includeSubDomains
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:06:08 GMT
+- request:
+    method: get
+    uri: https://bukkit.atlassian.net/secure/MyJiraHome.jspa
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+      Cookie:
+      - atlassian.xsrf.token=BO29-YFDD-42VF-3M5C|4ed79d49d656c1b8eb85bfb7414bfef803a5bc50|lout
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 19 Nov 2015 04:06:08 GMT
+      Content-Type:
+      - text/html;charset=UTF-8
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Arequestid:
+      - 246x27009x1
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Asen:
+      - SEN-2159363
+      X-Ausername:
+      - anonymous
+      X-Atenant-Id:
+      - bukkit.atlassian.net
+      X-Content-Type-Options:
+      - nosniff
+      Location:
+      - https://bukkit.atlassian.net/secure/Dashboard.jspa
+      Set-Cookie:
+      - JSESSIONID=EE079A88B1020B11396055CE271421B3; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000;includeSubDomains
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:06:08 GMT
+- request:
+    method: get
+    uri: https://bukkit.atlassian.net/secure/Dashboard.jspa
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+      Cookie:
+      - atlassian.xsrf.token=BO29-YFDD-42VF-3M5C|4ed79d49d656c1b8eb85bfb7414bfef803a5bc50|lout;
+        JSESSIONID=EE079A88B1020B11396055CE271421B3; HttpOnly=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 19 Nov 2015 04:06:08 GMT
+      Content-Type:
+      - text/html;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Arequestid:
+      - 246x27010x1
+      X-Asessionid:
+      - 1sr7ra3
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Asen:
+      - SEN-2159363
+      X-Seraph-Loginreason:
+      - OUT
+      X-Ausername:
+      - anonymous
+      X-Atenant-Id:
+      - bukkit.atlassian.net
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=315360000;includeSubDomains
+    body:
+      encoding: UTF-8
+      string: "\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    \n\n\n\n\n\n\n<meta
+        charset=\"utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/>\n<meta
+        name=\"application-name\" content=\"JIRA\" data-name=\"jira\" data-version=\"7.0.0-OD-08-005\"><meta
+        name=\"ajs-dev-mode\" content=\"false\">\n<meta name=\"ajs-context-path\"
+        content=\"\">\n<meta name=\"ajs-version-number\" content=\"7.0.0-OD-08-005\">\n<meta
+        name=\"ajs-build-number\" content=\"70107\">\n<meta name=\"ajs-is-beta\" content=\"false\">\n<meta
+        name=\"ajs-is-rc\" content=\"false\">\n<meta name=\"ajs-is-snapshot\" content=\"false\">\n<meta
+        name=\"ajs-is-milestone\" content=\"false\">\n<meta name=\"ajs-remote-user\"
+        content=\"\">\n<meta name=\"ajs-remote-user-fullname\" content=\"\">\n<meta
+        name=\"ajs-user-locale\" content=\"en_US\">\n<meta name=\"ajs-user-locale-group-separator\"
+        content=\",\">\n<meta name=\"ajs-app-title\" content=\"Bukkit Issue Tracker\">\n<meta
+        name=\"ajs-keyboard-shortcuts-enabled\" content=\"true\">\n<meta name=\"ajs-keyboard-accesskey-modifier\"
+        content=\"Ctrl+Alt\">\n<meta name=\"ajs-enabled-dark-features\" content=\"[&quot;jira.plugin.devstatus.automatic.transitioning&quot;,&quot;ka.AJAX_PREFETCH&quot;,&quot;heatmapper.disabled&quot;,&quot;jira.plugin.devstatus.phasefour.enabled&quot;,&quot;rotp.admin.shortcuts&quot;,&quot;com.atlassian.jira.projects.issuenavigator.cachefix&quot;,&quot;jira.plugin.devstatus.phasetwo&quot;,&quot;jira.frother.reporter.field&quot;,&quot;com.atlassian.jira.jira-feedback-plugin&quot;,&quot;atlassian.rest.xsrf.legacy.enabled&quot;,&quot;jira.plugin.devstatus.bamboo.enabled&quot;,&quot;jira.administration.workflow.validation&quot;,&quot;ondemand.language.beta&quot;,&quot;jira.site.darkfeature.admin&quot;,&quot;atlassian.connect.dhe.disabled.awl-gebsun.rhcloud.com&quot;,&quot;jira.issue.status.lozenge&quot;,&quot;unified.usermanagement&quot;,&quot;com.atlassian.jira.projects.issuenavigator&quot;,&quot;com.atlassian.jira.config.PDL&quot;,&quot;jira.plugin.devstatus.phasetwo.enabled&quot;,&quot;jira.plugin.fisheye.tab.enabled&quot;,&quot;com.atlassian.jira.projects.issue.summary.vignettes&quot;,&quot;atlassian.aui.raphael.disabled&quot;,&quot;com.atlassian.jira.config.CoreFeatures.PERMISSIONS_MANAGED_BY_UM&quot;,&quot;jira.user.darkfeature.admin&quot;,&quot;app-switcher.new&quot;,&quot;frother.assignee.field&quot;,&quot;casper.WORKFLOW_TAB&quot;,&quot;jira.projectconfig.issuetypes.sidebar&quot;,&quot;APDEX-517.warmhardcoded&quot;,&quot;com.atlassian.jira.config.CoreFeatures.ON_DEMAND&quot;,&quot;jira.search.kickass&quot;,&quot;jira.plugin.projects.version.tab.feedback.banner&quot;,&quot;rotp.project.create&quot;,&quot;atlassian.connect.dhe.disabled.aip-flyingagile.rhcloud.com&quot;,&quot;com.atlassian.plugins.issuenav.SEND_HEAD_EARLY&quot;,&quot;jira.baseurl.cdn.enabled&quot;,&quot;fusion.bitbucket.rebrand&quot;,&quot;ka.STABLE_SEARCH&quot;,&quot;ka.SEPARATE_VIEWISSUE&quot;,&quot;jira.bamboo.legacy.force&quot;,&quot;jira.plugin.devstatus.background.refresh.enabled&quot;,&quot;com.atlassian.jira.config.CoreFeatures.LICENSE_ROLES_ENABLED&quot;,&quot;casper.VIEW_ISSUE&quot;,&quot;ka.AJAX_VIEW_ISSUE&quot;]\">\n<meta
+        name=\"ajs-date-relativize\" content=\"true\">\n<meta name=\"ajs-date-time\"
+        content=\"h:mm a\">\n<meta name=\"ajs-date-day\" content=\"EEEE h:mm a\">\n<meta
+        name=\"ajs-date-dmy\" content=\"dd/MMM/yy\">\n<meta name=\"ajs-date-complete\"
+        content=\"dd/MMM/yy h:mm a\">\n<meta name=\"ajs-in-admin-mode\" content=\"false\">\n<meta
+        name=\"ajs-is-sysadmin\" content=\"false\">\n<meta name=\"ajs-is-admin\" content=\"false\">\n<meta
+        name=\"ajs-outgoing-mail-enabled\" content=\"true\">\n<script>\n    window._AP
+        = window._AP || {};\n    \n        window._AP.dialogOptions = {\n                            };\n\n
+        \   window._AP.inlineDialogOptions = {\n                            };\n</script>\n\n<script
+        type=\"text/javascript\">var AJS=AJS||{};AJS.debug=true;</script>\n\n\n    \n<meta
+        id=\"atlassian-token\" name=\"atlassian-token\" content=\"BO29-YFDD-42VF-3M5C|4ed79d49d656c1b8eb85bfb7414bfef803a5bc50|lout\">\n\n\n\n<link
+        rel=\"shortcut icon\" href=\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/_/favicon.ico\">\n\n\n
+        \   \n\n\n<!--[if IE]><![endif]-->\n<script type=\"text/javascript\">var contextPath
+        = '';</script>\n<script>\nwindow.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-admin-helper-plugin:permissions-provider.permissions-data\"]=\"[{\\\"permissions\\\":[{\\\"name\\\":\\\"Administer
+        Projects\\\",\\\"key\\\":\\\"ADMINISTER_PROJECTS\\\"},{\\\"name\\\":\\\"Browse
+        Projects\\\",\\\"key\\\":\\\"BROWSE_PROJECTS\\\"},{\\\"name\\\":\\\"View Development
+        Tools\\\",\\\"key\\\":\\\"VIEW_DEV_TOOLS\\\"},{\\\"name\\\":\\\"View Read-Only
+        Workflow\\\",\\\"key\\\":\\\"VIEW_READONLY_WORKFLOW\\\"}],\\\"name\\\":\\\"Project
+        Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Assignable User\\\",\\\"key\\\":\\\"ASSIGNABLE_USER\\\"},{\\\"name\\\":\\\"Assign
+        Issues\\\",\\\"key\\\":\\\"ASSIGN_ISSUES\\\"},{\\\"name\\\":\\\"Close Issues\\\",\\\"key\\\":\\\"CLOSE_ISSUES\\\"},{\\\"name\\\":\\\"Create
+        Issues\\\",\\\"key\\\":\\\"CREATE_ISSUES\\\"},{\\\"name\\\":\\\"Delete Issues\\\",\\\"key\\\":\\\"DELETE_ISSUES\\\"},{\\\"name\\\":\\\"Edit
+        Issues\\\",\\\"key\\\":\\\"EDIT_ISSUES\\\"},{\\\"name\\\":\\\"Link Issues\\\",\\\"key\\\":\\\"LINK_ISSUES\\\"},{\\\"name\\\":\\\"Modify
+        Reporter\\\",\\\"key\\\":\\\"MODIFY_REPORTER\\\"},{\\\"name\\\":\\\"Move Issues\\\",\\\"key\\\":\\\"MOVE_ISSUES\\\"},{\\\"name\\\":\\\"Resolve
+        Issues\\\",\\\"key\\\":\\\"RESOLVE_ISSUES\\\"},{\\\"name\\\":\\\"Schedule
+        Issues\\\",\\\"key\\\":\\\"SCHEDULE_ISSUES\\\"},{\\\"name\\\":\\\"Set Issue
+        Security\\\",\\\"key\\\":\\\"SET_ISSUE_SECURITY\\\"},{\\\"name\\\":\\\"Transition
+        Issues\\\",\\\"key\\\":\\\"TRANSITION_ISSUES\\\"}],\\\"name\\\":\\\"Issue
+        Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Manage Watchers\\\",\\\"key\\\":\\\"MANAGE_WATCHERS\\\"},{\\\"name\\\":\\\"View
+        Voters and Watchers\\\",\\\"key\\\":\\\"VIEW_VOTERS_AND_WATCHERS\\\"}],\\\"name\\\":\\\"Voters
+        & Watchers Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Add Comments\\\",\\\"key\\\":\\\"ADD_COMMENTS\\\"},{\\\"name\\\":\\\"Delete
+        All Comments\\\",\\\"key\\\":\\\"DELETE_ALL_COMMENTS\\\"},{\\\"name\\\":\\\"Delete
+        Own Comments\\\",\\\"key\\\":\\\"DELETE_OWN_COMMENTS\\\"},{\\\"name\\\":\\\"Edit
+        All Comments\\\",\\\"key\\\":\\\"EDIT_ALL_COMMENTS\\\"},{\\\"name\\\":\\\"Edit
+        Own Comments\\\",\\\"key\\\":\\\"EDIT_OWN_COMMENTS\\\"}],\\\"name\\\":\\\"Comments
+        Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Create Attachments\\\",\\\"key\\\":\\\"CREATE_ATTACHMENTS\\\"},{\\\"name\\\":\\\"Delete
+        All Attachments\\\",\\\"key\\\":\\\"DELETE_ALL_ATTACHMENTS\\\"},{\\\"name\\\":\\\"Delete
+        Own Attachments\\\",\\\"key\\\":\\\"DELETE_OWN_ATTACHMENTS\\\"}],\\\"name\\\":\\\"Attachments
+        Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Delete All Worklogs\\\",\\\"key\\\":\\\"DELETE_ALL_WORKLOGS\\\"},{\\\"name\\\":\\\"Delete
+        Own Worklogs\\\",\\\"key\\\":\\\"DELETE_OWN_WORKLOGS\\\"},{\\\"name\\\":\\\"Edit
+        All Worklogs\\\",\\\"key\\\":\\\"EDIT_ALL_WORKLOGS\\\"},{\\\"name\\\":\\\"Edit
+        Own Worklogs\\\",\\\"key\\\":\\\"EDIT_OWN_WORKLOGS\\\"},{\\\"name\\\":\\\"Work
+        On Issues\\\",\\\"key\\\":\\\"WORK_ON_ISSUES\\\"}],\\\"name\\\":\\\"Time Tracking
+        Permissions\\\"},{\\\"permissions\\\":[],\\\"name\\\":\\\"admin.permission.group.time.tracking.other\\\"}]\";\nWRM._unparsedData[\"com.atlassian.jira.jira-header-plugin:newsletter-signup-tip.newsletterSignup\"]=\"{\\\"formUrl\\\":\\\"https://www.atlassian.com/apis/exact-target/{0}/subscribe?mailingListId=1239131\\\",\\\"showNewsletterTip\\\":false}\";\nWRM._unparsedData[\"jira.webresources:user-message-flags.adminLockout\"]=\"{}\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-dnd-attachment-plugin:jira-html5-attach-images-resources.resource-uris\"]=\"{\\\"deployJava.html\\\":\\\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/4.2.0/_/download/resources/com.atlassian.jira.plugins.jira-dnd-attachment-plugin:jira-html5-attach-images-resources/deployJava.html\\\",\\\"clipboard.jar\\\":\\\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/4.2.0/_/download/resources/com.atlassian.jira.plugins.jira-dnd-attachment-plugin:jira-html5-attach-images-resources/clipboard.jar\\\",\\\"clipboard-legacy.jar\\\":\\\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/4.2.0/_/download/resources/com.atlassian.jira.plugins.jira-dnd-attachment-plugin:jira-html5-attach-images-resources/clipboard-legacy.jar\\\"}\";\nWRM._unparsedData[\"com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path\"]=\"\\\"\\\"\";\nWRM._unparsedData[\"com.atlassian.jira.ext.calendar:tipDataProvider.tip\"]=\"{\\\"suppressTip\\\":false}\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-admin-helper-plugin:notification-event-provider.notification-event-data\"]=\"[{\\\"id\\\":1,\\\"name\\\":\\\"Issue
+        Created\\\",\\\"isDefault\\\":true},{\\\"id\\\":2,\\\"name\\\":\\\"Issue Updated\\\"},{\\\"id\\\":3,\\\"name\\\":\\\"Issue
+        Assigned\\\"},{\\\"id\\\":4,\\\"name\\\":\\\"Issue Resolved\\\"},{\\\"id\\\":5,\\\"name\\\":\\\"Issue
+        Closed\\\"},{\\\"id\\\":6,\\\"name\\\":\\\"Issue Commented\\\"},{\\\"id\\\":14,\\\"name\\\":\\\"Issue
+        Comment Edited\\\"},{\\\"id\\\":17,\\\"name\\\":\\\"Issue Comment Deleted\\\"},{\\\"id\\\":7,\\\"name\\\":\\\"Issue
+        Reopened\\\"},{\\\"id\\\":8,\\\"name\\\":\\\"Issue Deleted\\\"},{\\\"id\\\":9,\\\"name\\\":\\\"Issue
+        Moved\\\"},{\\\"id\\\":10,\\\"name\\\":\\\"Work Logged On Issue\\\"},{\\\"id\\\":11,\\\"name\\\":\\\"Work
+        Started On Issue\\\"},{\\\"id\\\":12,\\\"name\\\":\\\"Work Stopped On Issue\\\"},{\\\"id\\\":15,\\\"name\\\":\\\"Issue
+        Worklog Updated\\\"},{\\\"id\\\":16,\\\"name\\\":\\\"Issue Worklog Deleted\\\"},{\\\"id\\\":13,\\\"name\\\":\\\"Generic
+        Event\\\"}]\";\nWRM._unparsedData[\"com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy\"]=\"true\";\nWRM._unparsedData[\"com.atlassian.pocketknife.featureflags-plugin:pocketknife-feature-flags.feature-flag-data\"]=\"{\\\"enabled-feature-keys\\\":[\\\"jira.plugin.devstatus.automatic.transitioning\\\",\\\"ka.AJAX_PREFETCH\\\",\\\"heatmapper.disabled\\\",\\\"jira.plugin.devstatus.phasefour.enabled\\\",\\\"rotp.admin.shortcuts\\\",\\\"com.atlassian.jira.projects.issuenavigator.cachefix\\\",\\\"jira.plugin.devstatus.phasetwo\\\",\\\"jira.frother.reporter.field\\\",\\\"com.atlassian.jira.jira-feedback-plugin\\\",\\\"atlassian.rest.xsrf.legacy.enabled\\\",\\\"jira.plugin.devstatus.bamboo.enabled\\\",\\\"jira.administration.workflow.validation\\\",\\\"ondemand.language.beta\\\",\\\"jira.site.darkfeature.admin\\\",\\\"atlassian.connect.dhe.disabled.awl-gebsun.rhcloud.com\\\",\\\"jira.issue.status.lozenge\\\",\\\"unified.usermanagement\\\",\\\"com.atlassian.jira.projects.issuenavigator\\\",\\\"com.atlassian.jira.config.PDL\\\",\\\"jira.plugin.devstatus.phasetwo.enabled\\\",\\\"jira.plugin.fisheye.tab.enabled\\\",\\\"com.atlassian.jira.projects.issue.summary.vignettes\\\",\\\"atlassian.aui.raphael.disabled\\\",\\\"com.atlassian.jira.config.CoreFeatures.PERMISSIONS_MANAGED_BY_UM\\\",\\\"jira.user.darkfeature.admin\\\",\\\"app-switcher.new\\\",\\\"frother.assignee.field\\\",\\\"casper.WORKFLOW_TAB\\\",\\\"jira.projectconfig.issuetypes.sidebar\\\",\\\"APDEX-517.warmhardcoded\\\",\\\"com.atlassian.jira.config.CoreFeatures.ON_DEMAND\\\",\\\"jira.search.kickass\\\",\\\"jira.plugin.projects.version.tab.feedback.banner\\\",\\\"rotp.project.create\\\",\\\"atlassian.connect.dhe.disabled.aip-flyingagile.rhcloud.com\\\",\\\"com.atlassian.plugins.issuenav.SEND_HEAD_EARLY\\\",\\\"jira.baseurl.cdn.enabled\\\",\\\"fusion.bitbucket.rebrand\\\",\\\"ka.STABLE_SEARCH\\\",\\\"ka.SEPARATE_VIEWISSUE\\\",\\\"jira.bamboo.legacy.force\\\",\\\"jira.plugin.devstatus.background.refresh.enabled\\\",\\\"com.atlassian.jira.config.CoreFeatures.LICENSE_ROLES_ENABLED\\\",\\\"casper.VIEW_ISSUE\\\",\\\"ka.AJAX_VIEW_ISSUE\\\"],\\\"feature-flag-states\\\":{\\\"sd.confluence.kb.od.oneclick\\\":true,\\\"sd.shared.portals.kb.search\\\":true,\\\"sd.reporter.internal.comments.async.upgrade\\\":true,\\\"sd.automation.if.issue.link.type.phase2\\\":true,\\\"sd.experimental.customer.satisfaction\\\":false,\\\"sd.experimental.portal.search.algorithm\\\":true,\\\"sd.advance.portal.branding.portal.content\\\":false,\\\"sd.reduce.notifications.to.cc.list\\\":true,\\\"sd.request.type.search.advance\\\":false,\\\"sd.kb.viewed.report\\\":true,\\\"sd.agent.invite.customers\\\":true,\\\"sd.shared.portals.redo\\\":true,\\\"sd.agent.onboarding\\\":true,\\\"sd.people.total.count\\\":false,\\\"sd.req.participants.portal\\\":true,\\\"sd.agent.queue.update\\\":true,\\\"sd.agent.signature\\\":false,\\\"sd.sla.threshold.events\\\":true,\\\"jira.unified.attachments.m2\\\":true,\\\"sd.updated.all.portal.failure.messages\\\":true,\\\"sd.email.notification.plain.text\\\":true,\\\"sd.portal.logo.default\\\":true,\\\"sd.request.participants.upgrade\\\":true,\\\"sd.jira.automation.event\\\":false,\\\"jira.attachment.merge\\\":true,\\\"sd.pre.populated.comment\\\":true,\\\"sd.email.conversational.notification\\\":true,\\\"sd.portal.drag.drop\\\":true,\\\"sd.request.type.automation.set\\\":false,\\\"sd.test.feature.flag.x\\\":true,\\\"sd.test.feature.flag.y\\\":false,\\\"sd.automation.workaround.jira.cached.index.issue\\\":true,\\\"sd.skate.upgrade\\\":true,\\\"sd.confluence.kb.visitors\\\":true,\\\"sd.automation.issue.linked.phase1\\\":true,\\\"sd.confluence.anonymous.permission.fix\\\":true,\\\"sd.experimental.itil.sd.configuration\\\":false,\\\"sd.better.logo.uploader\\\":true,\\\"sd.global.portal.rt.search\\\":true,\\\"sd.shared.portals.kb.like\\\":true,\\\"sd.advance.portal.branding\\\":true,\\\"sd.channel.issue.properties.async.upgrade\\\":true,\\\"sd.request.participants\\\":true,\\\"sd.automation.then.linked.issue.comment.phase3\\\":true,\\\"sd.req.participants.email\\\":true,\\\"sd.email.notification.quoted.reply.stripping\\\":true,\\\"sd.no.schedule.async.upgrade.tasks\\\":false,\\\"sd.service.request.feedback\\\":true,\\\"sd.lightweight.login.experiment\\\":false,\\\"sd.lightweight.login.override\\\":false,\\\"jira.unified.attachments\\\":true,\\\"sd.agent.queue.dynamic.update\\\":true,\\\"sd.convenient.problem.creation\\\":false,\\\"sd.admin.permission.migration.complete\\\":false,\\\"sd.unlicensed.kb.async.upgrade\\\":true,\\\"sd.global.portal.search.atlassian.only.tracking\\\":false,\\\"sd.email.platform.integration\\\":true}}\";\nWRM._unparsedData[\"com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern\"]=\"\\\"(?:(?:/s/.*?/_)?/download|//d1ixbz5qgnvms3\\\\\\\\.cloudfront\\\\\\\\.net/bukkit\\\\\\\\.atlassian\\\\\\\\.net(?:/s/.*?/_)?/download)\\\"\";\nWRM._unparsedData[\"jira.webresources:avatar-picker.data\"]=\"{\\\"isEnabled\\\":false,\\\"url\\\":\\\"/plugins/servlet/redirectToProfile?target=edit-avatar\\\"}\";\nWRM._unparsedData[\"com.atlassian.plugins.helptips.jira-help-tips:common.JiraHelpTipData\"]=\"{\\\"anonymous\\\":true}\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-dnd-attachment-plugin:drag-and-drop-attachment-javascript.upload-limit\"]=\"\\\"10485760\\\"\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-dnd-attachment-plugin:drag-and-drop-attachment-javascript.thumbnail-mime-types\"]=\"\\\"image/vnd.wap.wbmp,image/png,image/x-png,image/jpeg,image/bmp,image/gif\\\"\";\nWRM._unparsedData[\"com.atlassian.jira.jira-header-plugin:dismissedFlags.flags\"]=\"{\\\"dismissed\\\":[]}\";\nWRM._unparsedData[\"com.atlassian.plugins.browser.metrics.browser-metrics-plugin:api.feature-data-provider\"]=\"true\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-common.applinks-context\"]=\"{\\\"hostApplication\\\":{\\\"id\\\":\\\"92b5d2f2-18c6-38e0-b1b3-0db0a6d65e58\\\",\\\"type\\\":\\\"jira\\\"}}\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-common.applinks-features\"]=\"{\\\"BITBUCKET_REBRAND\\\":true,\\\"V3_UI_OPT_IN\\\":false,\\\"V3_UI\\\":false}\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-common.applinks-discovered-features\"]=\"[]\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-util-js.applinks-context\"]=\"{\\\"hostApplication\\\":{\\\"id\\\":\\\"92b5d2f2-18c6-38e0-b1b3-0db0a6d65e58\\\",\\\"type\\\":\\\"jira\\\"}}\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-util-js.applinks-features\"]=\"{\\\"BITBUCKET_REBRAND\\\":true,\\\"V3_UI_OPT_IN\\\":false,\\\"V3_UI\\\":false}\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-util-js.applinks-discovered-features\"]=\"[]\";\nWRM._unparsedData[\"jira.webresources:dateFormatProvider.dateFormat\"]=\"{\\\"meridiem\\\":[\\\"AM\\\",\\\"PM\\\"],\\\"eras\\\":[\\\"BC\\\",\\\"AD\\\"],\\\"months\\\":[\\\"January\\\",\\\"February\\\",\\\"March\\\",\\\"April\\\",\\\"May\\\",\\\"June\\\",\\\"July\\\",\\\"August\\\",\\\"September\\\",\\\"October\\\",\\\"November\\\",\\\"December\\\"],\\\"monthsShort\\\":[\\\"Jan\\\",\\\"Feb\\\",\\\"Mar\\\",\\\"Apr\\\",\\\"May\\\",\\\"Jun\\\",\\\"Jul\\\",\\\"Aug\\\",\\\"Sep\\\",\\\"Oct\\\",\\\"Nov\\\",\\\"Dec\\\"],\\\"weekdaysShort\\\":[\\\"Sun\\\",\\\"Mon\\\",\\\"Tue\\\",\\\"Wed\\\",\\\"Thu\\\",\\\"Fri\\\",\\\"Sat\\\"],\\\"weekdays\\\":[\\\"Sunday\\\",\\\"Monday\\\",\\\"Tuesday\\\",\\\"Wednesday\\\",\\\"Thursday\\\",\\\"Friday\\\",\\\"Saturday\\\"]}\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-browser-metrics:browser-metrics-integration.scm-commit-id\"]=\"\\\"5fb2f7e0c016d05ff672e1e32fcd963de6cf92ae\\\"\";\nWRM._unparsedData[\"dashboardInfoMessage\"]=\"\\\"\\\"\";\nWRM._unparsedData[\"dashboardInstallMessage\"]=\"null\";\n</script>\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/a6773808ea481fabec5dbcf5392aa065-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/eac70973585e66a695b783e49957cce5/_/download/contextbatch/css/_super/batch.css?relative-url=true\"
+        media=\"all\">\n<!--[if lte IE 9]>\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/09409cc065aea597e74ea6a3e0a89e19-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/eac70973585e66a695b783e49957cce5/_/download/contextbatch/css/_super/batch.css?conditionalComment=lte+IE+9&amp;relative-url=true\"
+        \ media=\"all\">\n<![endif]-->\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/47edd121ce27b62c02cc12e36bff31a8-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/8c8990b0abf6c0bc29d65e43d1d94b85/_/download/contextbatch/css/atl.dashboard,jira.dashboard,atl.general,atl.global,jira.global,jira.general,-_super/batch.css?agile_global_admin_condition=true&amp;jag=true&amp;relative-url=true\"
+        media=\"all\">\n<!--[if IE]>\n<link type=\"text/css\" rel=\"stylesheet\" href=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/8c8990b0abf6c0bc29d65e43d1d94b85/_/download/contextbatch/css/atl.dashboard,jira.dashboard,atl.general,atl.global,jira.global,jira.general,-_super/batch.css?ieonly=true&amp;relative-url=true\"
+        \ media=\"all\">\n<![endif]-->\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/aa0d02b17b692d635084c3315e502e3b-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/eac70973585e66a695b783e49957cce5/_/download/contextbatch/js/_super/batch.js?atlassian.aui.raphael.disabled=true&amp;locale=en-US\"
+        ></script>\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/355d372a7c8016dddc94d6d983ad5123-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/8c8990b0abf6c0bc29d65e43d1d94b85/_/download/contextbatch/js/atl.dashboard,jira.dashboard,atl.general,atl.global,jira.global,jira.general,-_super/batch.js?agile_global_admin_condition=true&amp;jag=true&amp;locale=en-US\"
+        ></script>\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/8c8990b0abf6c0bc29d65e43d1d94b85/_/download/contextbatch/js/atl.dashboard,jira.dashboard,atl.general,atl.global,jira.global,jira.general,-_super/batch.js?content-type=text%2Fjavascript%3B+charset%3DUTF-8\"
+        ></script>\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/1.0/_/download/batch/jira.webresources:calendar-en/jira.webresources:calendar-en.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/1.0/_/download/batch/jira.webresources:calendar-localisation-moment/jira.webresources:calendar-localisation-moment.js\"
+        ></script>\n\n<script type=\"text/javascript\" src=\"/rest/api/1.0/shortcuts/70107/c77e8f3311fac1cbc68e25a886619a7d/shortcuts.js\"></script>\n\n\n\n
+        \   \n    \n\n    \n\n\n\n\n\n\n\n<title>System Dashboard - Bukkit Issue Tracker</title>\n<link
+        rel=\"search\" type=\"application/opensearchdescription+xml\" href=\"/osd.jsp\"
+        title=\"System Dashboard - Bukkit Issue Tracker\"/>\n\n\n</head>\n\n\n\n\n\n<body
+        id=\"jira\" class=\"aui-layout aui-theme-default page-type-dashboard\" data-version=\"7.0.0-OD-08-005\">\n<div
+        id=\"page\">\n    <header id=\"header\" role=\"banner\">\n        \n\n\n\n\n\n\n<script>\n
+        \   AJS.$(function () {\n        var licenseBanner = require(\"jira/license-banner\");\n
+        \       licenseBanner.showLicenseBanner(\"\");\n        licenseBanner.showLicenseFlag(\"\");\n
+        \   });\n</script>\n\n\n\n        \n\n\n\n\n        \n\n\n    <dl id=\"bonfire-build-info\"
+        style=\"display:none;\">\n        <dt data-bonfire-var=\"bonfire-buildVersion\"
+        data-bonfire-value=\"2.9.7.0034\"></dt>\n        <dt data-bonfire-var=\"bonfire-buildDate\"
+        data-bonfire-value=\"2015-10-26T00:00:00.000Z\"></dt>\n        <dt data-bonfire-var=\"bonfire-buildNumber\"
+        data-bonfire-value=\"\"></dt>\n        <dt data-bonfire-var=\"bonfire-licenseStatus\"
+        data-bonfire-value=\"unactivated\"></dt>\n    </dl>\n    \n        \n    <nav
+        class=\"aui-header aui-dropdown2-trigger-group\" role=\"navigation\"><div
+        class=\"aui-header-inner\"><div class=\"aui-header-before\"><a class=\" aui-dropdown2-trigger
+        app-switcher-trigger\" aria-owns=\"app-switcher\" aria-controls=\"app-switcher\"
+        aria-haspopup=\"true\" data-aui-trigger href=\"#app-switcher\"><span class=\"aui-icon
+        aui-icon-small aui-iconfont-appswitcher\">Linked Applications</span></a><div
+        id=\"app-switcher\" class=\"aui-dropdown2 aui-style-default\"><div class=\"app-switcher-loading\">Loading&hellip;</div></div><script>\n
+        \           (function (NL) {\n                var initialise = function ()
+        {\n                    // For some milestones of AUI, the atlassian soy namespace
+        was renamed to aui. Handle that here by ensuring that window.atlassian is
+        defined.\n                    window.atlassian = window.atlassian || window.aui;\n
+        \                   new NL.AppSwitcher({\n                        dropdownContents:
+        '#app-switcher'\n                    });\n                };\n                if
+        (NL.AppSwitcher) {\n                    initialise();\n                } else
+        {\n                    NL.onInit = initialise;\n                }\n            }(window.NL
+        = (window.NL || {})));\n            window.NL.environment = {isUserAdmin:
+        false, isAppSuggestionAvailable: false, isSiteAdminUser: false};</script></div><div
+        class=\"aui-header-primary\"><h1 id=\"logo\" class=\"aui-header-logo aui-header-logo-custom\"><a
+        href=\"https://bukkit.atlassian.net/secure/MyJiraHome.jspa\"><img src=\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/_/jira-logo-scaled.png\"
+        alt=\"Bukkit Issue Tracker\" /></a></h1><ul class='aui-nav'>\n\n\n\n\n<li><a
+        class=\"aui-nav-link aui-dropdown2-ajax aui-dropdown2-trigger \"href=\"/secure/Dashboard.jspa\"
+        id=\"home_link\"  accessKey=\"d\"  title=\"View and manage your dashboards\"
+        \ aria-haspopup=\"true\" aria-owns=\"home_link-content\">Dashboards</a><div
+        id=\"home_link-content\" class=\"aui-dropdown2 aui-style-default\" data-aui-dropdown2-ajax-key=\"home_link\"></div></li><li><a
+        class=\"aui-nav-link aui-dropdown2-ajax aui-dropdown2-trigger \"href=\"/secure/BrowseProjects.jspa\"
+        id=\"browse_link\"  accessKey=\"p\"  title=\"View recent projects and browse
+        a list of projects\"  aria-haspopup=\"true\" aria-owns=\"browse_link-content\">Projects</a><div
+        id=\"browse_link-content\" class=\"aui-dropdown2 aui-style-default\" data-aui-dropdown2-ajax-key=\"browse_link\"></div></li><li><a
+        class=\"aui-nav-link aui-dropdown2-ajax aui-dropdown2-trigger \"href=\"/issues/\"
+        id=\"find_link\"  accessKey=\"i\"  title=\"Search for issues and view recent
+        issues\"  aria-haspopup=\"true\" aria-owns=\"find_link-content\">Issues</a><div
+        id=\"find_link-content\" class=\"aui-dropdown2 aui-style-default\" data-aui-dropdown2-ajax-key=\"find_link\"></div></li>\n</ul></div><div
+        class=\"aui-header-secondary\"><ul class='aui-nav'><li>\n    <form action=\"/secure/QuickSearch.jspa\"
+        method=\"get\" id=\"quicksearch\" class=\"aui-quicksearch dont-default-focus
+        ajs-dirty-warning-exempt\">\n        <input id=\"quickSearchInput\" class=\"search\"
+        type=\"text\" title=\"Search\" placeholder=\"Search\" name=\"searchString\"
+        accessKey=\"q\" />\n        <input type=\"submit\" class=\"hidden\" value=\"Search\">\n
+        \   </form>\n</li>\n\n\n\n    <li id=\"system-help-menu\">\n        <a class=\"aui-nav-link
+        aui-dropdown2-trigger\" id=\"help_menu\" aria-haspopup=\"true\" aria-owns=\"system-help-menu-content\"
+        href=\"https://confluence.atlassian.com/display/JIRACORECLOUD/\"  target=\"$textUtils.htmlEncode($rootHelpMenuItem.params.target)\"
+        \ title=\"Help\"><span class=\"aui-icon aui-icon-small aui-iconfont-help\">Help</span></a>\n
+        \       <div id=\"system-help-menu-content\" class=\"aui-dropdown2 aui-style-default\">\n
+        \                           <div class=\"aui-dropdown2-section\">\n                                                                <ul
+        id=\"jira-help\" class=\"aui-list-truncate\">\n                                                            <li>\n
+        \                                   <a id=\"view_core_help\" class=\"aui-nav-link
+        \" title=\"Go to the online documentation for JIRA Core\" href=\"https://confluence.atlassian.com/display/JIRACORECLOUD/\"
+        \ target=\"_blank\" >JIRA Core help</a>\n                                </li>\n
+        \                                                           <li>\n                                    <a
+        id=\"keyshortscuthelp\" class=\"aui-nav-link \" title=\"Get more information
+        about JIRA's Keyboard Shortcuts\" href=\"/secure/ViewKeyboardShortcuts!default.jspa\"
+        \ target=\"_blank\" >Keyboard Shortcuts</a>\n                                </li>\n
+        \                                                           <li>\n                                    <a
+        id=\"view_about\" class=\"aui-nav-link \" title=\"Get more information about
+        JIRA\" href=\"/secure/AboutPage.jspa\" >About JIRA</a>\n                                </li>\n
+        \                                                           <li>\n                                    <a
+        id=\"tempo_core_help\" class=\"aui-nav-link \" title=\"Goto the online documentation
+        for Tempo\" href=\"http://tempoplugin.com/support\" target=\"_blank\" >Tempo
+        Help</a>\n                                </li>\n                                                    </ul>\n
+        \                                   </div>\n                    </div>\n    </li>\n\n\n\n\n\n\n\n\n\n<li
+        id=\"user-options\">\n            <a class=\"aui-nav-link login-link\" href=\"/login.jsp?os_destination=%2Fsecure%2FDashboard.jspa\">Log
+        In</a>\n                <div id=\"user-options-content\" class=\"aui-dropdown2
+        aui-style-default\">\n                            <div class=\"aui-dropdown2-section\">\n
+        \                                                       </div>\n                    </div>\n
+        \   </li>\n</ul></div></div><!-- .aui-header-inner--></nav><!-- .aui-header
+        -->\n    </header>\n    \n\n\n\n    <section id=\"content\" role=\"main\">\n\n
+        \   \n\n\n\n\n\n\n\n\n\n\n\n\n\n<script type=\"text/javascript\" charset=\"utf-8\">\n
+        \       AG.DashboardManager.setup({\n            params: {\n                \"editLayout\"
+        : \"Choose dashboard layout\",\n                \"move\" : \"move\",\n                \"layoutAction\"
+        : \"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/layout\",\n
+        \               \"preferences\" : \"Preferences\",\n                \"all\"
+        : \"All\",\n                \"edit\" : \"Edit\",\n                \"remove\"
+        : \"Delete\",\n                \"removing\" : \"Removing...\",\n                \"adding\"
+        : \"Adding...\",\n                \"gadget\" : \"gadget?\",\n                \"add\"
+        : \"Add\",\n                \"save\" : \"Save\",\n                \"cancel\"
+        : \"Cancel\",\n                \"close\" : \"Close\",\n                \"expand\"
+        : \"Expand\",\n                \"minimize\" : \"Minimize\",\n                \"canAddExternalGadgetsToDirectory\"
+        : \"false\",\n                \"writable\" : false,\n                \"maxGadgets\"
+        : \"20\",\n                \"dashboardUrl\" : \"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\",\n
+        \               \"dashboardDirectoryResourceUrl\" : \"https:\\/\\/bukkit.atlassian.net\\/rest\\/config\\/1.0\\/directory\",\n
+        \               \"dashboardResourceUrl\" : \"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\",\n
+        \               \"dashboardDirectoryUrl\" : \"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/\\/directory\\/10000\",\n
+        \               \"dashboardDirectoryBaseUrl\" : \"https:\\/\\/bukkit.atlassian.net\\/\",\n
+        \               \"dashboardDiagnosticsUrl\" : \"\\/plugins\\/servlet\\/gadgets\\/dashboard-diagnostics\",\n
+        \               \"color1\" : \"Color 1\",\n                \"color2\" : \"Color
+        2\",\n                \"color3\" : \"Color 3\",\n                \"color4\"
+        : \"Color 4\",\n                \"color5\" : \"Color 5\",\n                \"color6\"
+        : \"Color 6\",\n                \"color7\" : \"Color 7\",\n                \"color8\"
+        : \"Color 8\",\n                \"errorGadgetUrl\" : \"https:\\/\\/bukkit.atlassian.net\\/plugins\\/servlet\\/gadgets\\/error\\/spec-not-found\",\n
+        \               \"securityTokensUrl\" : \"https:\\/\\/bukkit.atlassian.net\\/plugins\\/servlet\\/gadgets\\/security-tokens\",\n
+        \               \"gadgetDirectoryAdminUrl\" : \"https:\\/\\/bukkit.atlassian.net\\/plugins\\/servlet\\/gadgets\\/admin\"\n
+        \           },\n            menu: {items: [\n                                                                    {\n
+        \                       id: \"dashboard-tools-dropdown\",\n                        trigger:
+        {\n                            text: \"Tools\",\n                            styleClass:
+        \"aui-dd-link lnk icon-tools\"\n                        },\n                        useTemplate:
+        \"dropdown\",\n                        list: {\n                            items:
+        [\n                                                                                                        {\n
+        \                                                                               styleClass:
+        \"dropdown-item groupmarker\",\n                                                                                link:
+        {\n                                                                                        id:
+        \"wallboard_link\",\n                                                                                                                                    styleClass:
+        \"item-link groupmarker\",\n                                                                                        href:
+        \"https:\\/\\/bukkit.atlassian.net\\/plugins\\/servlet\\/Wallboard\\/?dashboardId=10000\",\n
+        \                                           text: \"View as Wallboard\"\n
+        \                                       }\n                                    }\n
+        \                                                           ]\n                        }\n
+        \                   },\n                                {\n                    styleClass:
+        \"hidden\",\n                    link: {\n                        id: \"disabled-menu-link\",\n
+        \                       styleClass: \"lnk icon-restore minimize\",\n                        href:
+        \"#\",\n                        text: \"Restore\"\n                    }\n
+        \               }\n            ]},\n            layouts: [\n                                                                                                                                        {\"layout\":\"AAA\",\"id\":\"10000\",\"title\":\"System
+        Dashboard\",\"gadgets\":[{\"hasNonHiddenUserPrefs\":false,\"color\":\"color2\",\"column\":0,\"colorUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/11000\\/color\",\"title\":\"Introduction\",\"userPrefs\":{\"action\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/11000\\/prefs\",\"fields\":[]},\"loaded\":true,\"gadgetUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/11000\",\"width\":0,\"context\":{\"dashboardItem\":{\"properties\":{},\"id\":\"11000\"},\"view\":{\"viewType\":{\"name\":\"default\",\"aliases\":[\"DEFAULT\",\"DASHBOARD\",\"profile\",\"home\"],\"canonicalName\":\"default\"}},\"dashboard\":{\"id\":\"10000\"}},\"isMaximizable\":true,\"id\":\"11000\",\"configurable\":false,\"height\":0,\"inlineHtml\":\"\\u003cdiv
+        class=\\\"g-intro\\\">\\u003cp>\\u003cb>Welcome to Bukkit\\'s issue tracker!\\u003c\\/b>\\u003c\\/p>\\n\\n\\n\\u003cp>You
+        can: \\u003ca href=\\\"https:\\/\\/bukkit.atlassian.net\\/secure\\/CreateIssue.jspa?pid=10102\\\"
+        class=\\\"external-link\\\" rel=\\\"nofollow\\\">report an issue with Bukkit\\u003c\\/a>
+        or \\u003ca href=\\\"https:\\/\\/bukkit.atlassian.net\\/secure\\/IssueNavigator.jspa?mode=hide&amp;requestId=10004\\\"
+        class=\\\"external-link\\\" rel=\\\"nofollow\\\">browse current Bukkit issues\\u003c\\/a>.\\u003c\\/p>\\u003c\\/div>\"},{\"hasNonHiddenUserPrefs\":false,\"color\":\"color1\",\"column\":0,\"colorUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10001\\/color\",\"title\":\"Activity
+        Stream\",\"userPrefs\":{\"action\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10001\\/prefs\",\"fields\":[{\"displayName\":\"isConfigured\",\"name\":\"isConfigured\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"titleRequired\",\"name\":\"titleRequired\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"numofentries\",\"name\":\"numofentries\",\"type\":\"hidden\",\"value\":\"5\",\"required\":false},{\"displayName\":\"keys\",\"name\":\"keys\",\"type\":\"hidden\",\"value\":\"\",\"required\":false},{\"displayName\":\"refresh\",\"name\":\"refresh\",\"type\":\"hidden\",\"value\":\"15\",\"required\":false},{\"displayName\":\"rules\",\"name\":\"rules\",\"type\":\"hidden\",\"value\":\"%7B%22rules%22%3A%5B%5D%7D\",\"required\":false},{\"displayName\":\"isReallyConfigured\",\"name\":\"isReallyConfigured\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"itemKeys\",\"name\":\"itemKeys\",\"type\":\"hidden\",\"value\":\"\",\"required\":false},{\"displayName\":\"title\",\"name\":\"title\",\"type\":\"hidden\",\"value\":\"JIRA\",\"required\":false},{\"displayName\":\"renderingContext\",\"name\":\"renderingContext\",\"type\":\"hidden\",\"value\":\"\",\"required\":false},{\"displayName\":\"username\",\"name\":\"username\",\"type\":\"hidden\",\"value\":\"\",\"required\":false},{\"displayName\":\"maxProviderLabelCharacters\",\"name\":\"maxProviderLabelCharacters\",\"type\":\"hidden\",\"value\":\"50\",\"required\":false}]},\"loaded\":true,\"gadgetUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10001\",\"renderedGadgetUrl\":\"https:\\/\\/bukkit.atlassian.net\\/plugins\\/servlet\\/gadgets\\/ifr?container=atlassian&mid=10001&country=US&lang=en&view=default&view-params=%7B%22writable%22%3A%22false%22%7D&st=atlassian%3AunXrZQSkNrdZYhdCBR%2BLrWcJmxOHzyoGKdFFlip2qkIrLNB0uOvWwQfXaWWIZ20tpVAw3K4ddRbN8%2FurdWhhLsQNPkuP0FQ9YZDxy4mi1qQGeUmUj4VOFvtfwUjjd1P1qhDfM8S0Teiouw9eQjNSNNBOC6HvZwokNYZBQmeMBYikACA1lDo0hvNT3sDl9QNjxY5Xm8Bf3Ddl3EFc9jLeyFYVYEa9NeWPZAsBdacAM6y5lpqfT29I36t4n%2F1k6GNC7Fui65m%2FklKeEgJZbdxcasCMTWoogr8LYzcl1mye9L7aErll&up_isConfigured=true&up_isReallyConfigured=true&up_title=JIRA&up_titleRequired=true&up_numofentries=5&up_refresh=15&up_maxProviderLabelCharacters=50&up_rules=%257B%2522rules%2522%253A%255B%255D%257D&up_renderingContext=&up_keys=&up_itemKeys=&up_username=&url=https%3A%2F%2Fbukkit.atlassian.net%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.streams.streams-jira-plugin%3Aactivitystream-gadget%2Fgadgets%2Factivitystream-gadget.xml&libs=auth-refresh\",\"context\":{\"dashboardItem\":{\"properties\":{\"isConfigured\":\"true\",\"keys\":\"\",\"refresh\":\"15\",\"rules\":\"%7B%22rules%22%3A%5B%5D%7D\",\"isReallyConfigured\":\"true\",\"itemKeys\":\"\",\"title\":\"JIRA\",\"titleRequired\":\"true\",\"numofentries\":\"5\",\"maxProviderLabelCharacters\":\"50\",\"renderingContext\":\"\",\"username\":\"\"},\"id\":\"10001\"},\"view\":{\"viewType\":{\"name\":\"default\",\"aliases\":[\"DEFAULT\",\"DASHBOARD\",\"profile\",\"home\"],\"canonicalName\":\"default\"}},\"dashboard\":{\"id\":\"10000\"}},\"isMaximizable\":true,\"id\":\"10001\",\"gadgetSpecUrl\":\"rest\\/gadgets\\/1.0\\/g\\/com.atlassian.streams.streams-jira-plugin:activitystream-gadget\\/gadgets\\/activitystream-gadget.xml\",\"height\":100},{\"hasNonHiddenUserPrefs\":false,\"color\":\"color8\",\"column\":1,\"colorUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10110\\/color\",\"amdModule\":\"jira-dashboard-items\\/createdvsresolved\",\"title\":\"Created
+        vs. Resolved Chart\",\"userPrefs\":{\"action\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10110\\/prefs\",\"fields\":[{\"displayName\":\"isConfigured\",\"name\":\"isConfigured\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"versionLabel\",\"name\":\"versionLabel\",\"type\":\"hidden\",\"value\":\"major\",\"required\":false},{\"displayName\":\"isPopup\",\"name\":\"isPopup\",\"type\":\"hidden\",\"value\":\"false\",\"required\":false},{\"displayName\":\"isCumulative\",\"name\":\"isCumulative\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"periodName\",\"name\":\"periodName\",\"type\":\"hidden\",\"value\":\"daily\",\"required\":false},{\"displayName\":\"refresh\",\"name\":\"refresh\",\"type\":\"hidden\",\"value\":\"15\",\"required\":false},{\"displayName\":\"showUnresolvedTrend\",\"name\":\"showUnresolvedTrend\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"daysprevious\",\"name\":\"daysprevious\",\"type\":\"hidden\",\"value\":\"30\",\"required\":false},{\"displayName\":\"projectOrFilterId\",\"name\":\"projectOrFilterId\",\"type\":\"hidden\",\"value\":\"filter-10201\",\"required\":false}]},\"loaded\":true,\"gadgetUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10110\",\"width\":0,\"context\":{\"dashboardItem\":{\"properties\":{\"isConfigured\":\"true\",\"versionLabel\":\"major\",\"isPopup\":\"false\",\"isCumulative\":\"true\",\"periodName\":\"daily\",\"refresh\":\"15\",\"showUnresolvedTrend\":\"true\",\"daysprevious\":\"30\",\"projectOrFilterId\":\"filter-10201\"},\"id\":\"10110\"},\"view\":{\"viewType\":{\"name\":\"default\",\"aliases\":[\"DEFAULT\",\"DASHBOARD\",\"profile\",\"home\"],\"canonicalName\":\"default\"}},\"dashboard\":{\"id\":\"10000\"}},\"isMaximizable\":true,\"id\":\"10110\",\"configurable\":true,\"height\":100,\"inlineHtml\":\"\\u003cdiv
+        class=\\'createdvsresolved-gadget\\'>\\u003c\\/div>\"},{\"hasNonHiddenUserPrefs\":false,\"color\":\"color2\",\"column\":1,\"colorUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10109\\/color\",\"amdModule\":\"jira-dashboard-items\\/filter-results\",\"title\":\"Filter
+        Results\",\"userPrefs\":{\"action\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10109\\/prefs\",\"fields\":[{\"displayName\":\"filterId\",\"name\":\"filterId\",\"type\":\"hidden\",\"value\":\"filter-10001\",\"required\":false},{\"displayName\":\"isConfigured\",\"name\":\"isConfigured\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"columnNames\",\"name\":\"columnNames\",\"type\":\"hidden\",\"value\":\"issuekey|summary\",\"required\":false},{\"displayName\":\"isPopup\",\"name\":\"isPopup\",\"type\":\"hidden\",\"value\":\"false\",\"required\":false},{\"displayName\":\"num\",\"name\":\"num\",\"type\":\"hidden\",\"value\":\"10\",\"required\":false},{\"displayName\":\"refresh\",\"name\":\"refresh\",\"type\":\"hidden\",\"value\":\"15\",\"required\":false}]},\"loaded\":true,\"gadgetUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10109\",\"width\":0,\"context\":{\"dashboardItem\":{\"properties\":{\"filterId\":\"filter-10001\",\"isConfigured\":\"true\",\"columnNames\":\"issuekey|summary\",\"isPopup\":\"false\",\"num\":\"10\",\"refresh\":\"15\"},\"id\":\"10109\"},\"view\":{\"viewType\":{\"name\":\"default\",\"aliases\":[\"DEFAULT\",\"DASHBOARD\",\"profile\",\"home\"],\"canonicalName\":\"default\"}},\"dashboard\":{\"id\":\"10000\"}},\"isMaximizable\":true,\"id\":\"10109\",\"configurable\":true,\"height\":100,\"inlineHtml\":\"\"},{\"hasNonHiddenUserPrefs\":false,\"color\":\"color6\",\"column\":1,\"colorUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10112\\/color\",\"amdModule\":\"jira-dashboard-items\\/filter-results\",\"title\":\"Filter
+        Results\",\"userPrefs\":{\"action\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10112\\/prefs\",\"fields\":[{\"displayName\":\"filterId\",\"name\":\"filterId\",\"type\":\"hidden\",\"value\":\"filter-10003\",\"required\":false},{\"displayName\":\"isConfigured\",\"name\":\"isConfigured\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"columnNames\",\"name\":\"columnNames\",\"type\":\"hidden\",\"value\":\"issuekey|summary\",\"required\":false},{\"displayName\":\"isPopup\",\"name\":\"isPopup\",\"type\":\"hidden\",\"value\":\"false\",\"required\":false},{\"displayName\":\"num\",\"name\":\"num\",\"type\":\"hidden\",\"value\":\"10\",\"required\":false},{\"displayName\":\"refresh\",\"name\":\"refresh\",\"type\":\"hidden\",\"value\":\"15\",\"required\":false}]},\"loaded\":true,\"gadgetUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10112\",\"width\":0,\"context\":{\"dashboardItem\":{\"properties\":{\"filterId\":\"filter-10003\",\"isConfigured\":\"true\",\"columnNames\":\"issuekey|summary\",\"isPopup\":\"false\",\"num\":\"10\",\"refresh\":\"15\"},\"id\":\"10112\"},\"view\":{\"viewType\":{\"name\":\"default\",\"aliases\":[\"DEFAULT\",\"DASHBOARD\",\"profile\",\"home\"],\"canonicalName\":\"default\"}},\"dashboard\":{\"id\":\"10000\"}},\"isMaximizable\":true,\"id\":\"10112\",\"configurable\":true,\"height\":100,\"inlineHtml\":\"\"},{\"hasNonHiddenUserPrefs\":false,\"color\":\"color5\",\"column\":2,\"colorUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10111\\/color\",\"amdModule\":\"jira-dashboard-items\\/filter-results\",\"title\":\"Filter
+        Results\",\"userPrefs\":{\"action\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10111\\/prefs\",\"fields\":[{\"displayName\":\"filterId\",\"name\":\"filterId\",\"type\":\"hidden\",\"value\":\"filter-10002\",\"required\":false},{\"displayName\":\"isConfigured\",\"name\":\"isConfigured\",\"type\":\"hidden\",\"value\":\"true\",\"required\":false},{\"displayName\":\"columnNames\",\"name\":\"columnNames\",\"type\":\"hidden\",\"value\":\"--Default--\",\"required\":false},{\"displayName\":\"isPopup\",\"name\":\"isPopup\",\"type\":\"hidden\",\"value\":\"false\",\"required\":false},{\"displayName\":\"num\",\"name\":\"num\",\"type\":\"hidden\",\"value\":\"10\",\"required\":false},{\"displayName\":\"refresh\",\"name\":\"refresh\",\"type\":\"hidden\",\"value\":\"15\",\"required\":false}]},\"loaded\":true,\"gadgetUrl\":\"https:\\/\\/bukkit.atlassian.net\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10111\",\"width\":0,\"context\":{\"dashboardItem\":{\"properties\":{\"filterId\":\"filter-10002\",\"isConfigured\":\"true\",\"columnNames\":\"--Default--\",\"isPopup\":\"false\",\"num\":\"10\",\"refresh\":\"15\"},\"id\":\"10111\"},\"view\":{\"viewType\":{\"name\":\"default\",\"aliases\":[\"DEFAULT\",\"DASHBOARD\",\"profile\",\"home\"],\"canonicalName\":\"default\"}},\"dashboard\":{\"id\":\"10000\"}},\"isMaximizable\":true,\"id\":\"10111\",\"configurable\":true,\"height\":100,\"inlineHtml\":\"\"}],\"writable\":false}\n
+        \                                                                       ]\n
+        \       });\n</script>\n\n<noscript><h1>Warning: either you have javascript
+        disabled or your browser does not support javascript. To work properly, this
+        page requires javascript to be enabled.</h1></noscript>\n<div id=\"diagnostic-warning\"
+        class=\"hidden\"></div>\n<div id=\"dashboard\" class=\"dashboard  initializing\"></div>\n\n<div
+        id=\"i18n-settings\">\n    <input class=\"locale-lang\" type=\"hidden\" value=\"en\">\n
+        \   <input class=\"locale-country\" type=\"hidden\" value=\"US\">\n</div>\n\n\n
+        \   </section>\n    <footer id=\"footer\" role=\"contentinfo\">\n        \n\n<section
+        class=\"footer-body\">\n        <ul class=\"atlassian-footer\">\n            <li><a
+        href=\"http://www.atlassian.com/\">Powered by Atlassian</a><span id=\"studioVersion\"
+        class=\"hidden\">3.1 r</span></li>\n            <li><a href=\"http://www.atlassian.com/hosted/terms.jsp\">Terms
+        of Use</a></li>\n            <li><a href=\"https://answers.atlassian.com/\">Answers</a></li>\n
+        \           <li><a href=\"https://confluence.atlassian.com/x/aJALE\">Maintenance
+        Schedule</a></li>\n        </ul>\n\n\n<script type=\"text/javascript\">\n
+        \   // This is the app specific data that the shared js expects\n    studioData
+        = {\"jiraUrl\" : \"https://bukkit.atlassian.net\"};\n\n        \n    // Google
+        analytics\n    var _gaq = _gaq || [];\n    _gaq.push(['_setAccount', 'UA-6032469-30']);\n
+        \   _gaq.push(['_setDetectTitle', false]); // don't send page titles\n\n    (function
+        () {\n        var filteredUrl = document.location.pathname + document.location.search;\n
+        \       // don't capture page titles in CONF\n        filteredUrl = filteredUrl.replace(/(.*)\\/display\\/.*\\/.*/,\n
+        \               '$1/pages/viewpage.action?pageId=' + (AJS && AJS.Meta && AJS.Meta.get('page-id')
+        || \"*\"));\n        _gaq.push(['_trackPageview', filteredUrl]);\n    })();\n\n
+        \   (function() {\n        var ga = document.createElement('script'); ga.type
+        = 'text/javascript'; ga.async = true;\n        ga.src = ('https:' == document.location.protocol
+        ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';\n        var
+        s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga,
+        s);\n    })();\n</script>\n\n<form id=\"jira_request_timing_info\" class=\"dont-default-focus\"
+        >\n\t<fieldset class=\"parameters hidden\">\n\t\t<input type=\"hidden\" title=\"jira.request.start.millis\"
+        value=\"1447905968337\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
+        value=\"279\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"246x27010x1\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.time\" value=\"1447906028337\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.in.mins\" value=\"0\"
+        />\n\t\t<input id=\"jiraConcurrentRequests\" type=\"hidden\" name=\"jira.request.concurrent.requests\"
+        value=\"1\" />\n\t\t<input type=\"hidden\" title=\"db.reads.time.in.ms\" value=\"2\"
+        />\n\t\t<input type=\"hidden\" title=\"db.conns.time.in.ms\" value=\"3\" />\n\t</fieldset>\n</form>\n<!--\n\t
+        \                REQUEST ID : 246x27010x1\n\t          REQUEST TIMESTAMP :
+        [19/Nov/2015:04:06:08 +0000]\n\t               REQUEST TIME : 0.2790\n\t                 ASESSIONID
+        : 1sr7ra3\n\t        CONCURRENT REQUESTS : 1\n\n\t                      db.reads
+        : name=db.reads; inv=1; ms=2; cpu=0; rss=0;\n\t                      db.conns
+        : name=db.conns; inv=1; ms=3; cpu=0; rss=0;\n-->\n    <div id=\"footer-logo\"><a
+        href=\"http://www.atlassian.com/\">Atlassian</a></div>\n</section>\n\n\n\n\n\n\n\n\n\n<fieldset
+        class=\"hidden parameters\">\n    <input type=\"hidden\" title=\"loggedInUser\"
+        value=\"\">\n    <input type=\"hidden\" title=\"ajaxTimeout\" value=\"The
+        call to the JIRA server did not complete within the timeout period.  We are
+        unsure of the result of this operation.\">\n    <input type=\"hidden\" title=\"JiraVersion\"
+        value=\"7.0.0-OD-08-005\" />\n    <input type=\"hidden\" title=\"ajaxUnauthorised\"
+        value=\"You are not authorized to perform this operation.  Please log in.\">\n
+        \   <input type=\"hidden\" title=\"baseURL\" value=\"https://bukkit.atlassian.net:443\">\n
+        \   <input type=\"hidden\" title=\"ajaxCommsError\" value=\"The JIRA server
+        could not be contacted. This may be a temporary glitch or the server may be
+        down.\">\n    <input type=\"hidden\" title=\"ajaxServerError\" value=\"The
+        JIRA server was contacted but has returned an error response. We are unsure
+        of the result of this operation.\">\n    <input type=\"hidden\" title=\"ajaxErrorCloseDialog\"
+        value=\"Close this dialog and press refresh in your browser\">\n    <input
+        type=\"hidden\" title=\"ajaxErrorDialogHeading\" value=\"Communications Breakdown\">\n\n
+        \   <input type=\"hidden\" title=\"dirtyMessage\" value=\"You have entered
+        new data on this page. If you navigate away from this page without first saving
+        your data, the changes will be lost.\">\n    <input type=\"hidden\" title=\"dirtyDialogMessage\"
+        value=\"You have entered new data in this dialog. If you navigate away from
+        this dialog without first saving your data, the changes will be lost. Click
+        cancel to return to the dialog.\">\n    <input type=\"hidden\" title=\"keyType\"
+        value=\"Type\">\n    <input type=\"hidden\" title=\"keyThen\" value=\"then\">\n
+        \   <input type=\"hidden\" title=\"dblClickToExpand\" value=\"Double click
+        to expand\">\n    <input type=\"hidden\" title=\"actions\" value=\"Actions\">\n
+        \   <input type=\"hidden\" title=\"removeItem\" value=\"Remove\">\n    <input
+        type=\"hidden\" title=\"workflow\" value=\"Workflow\">\n    <input type=\"hidden\"
+        title=\"labelNew\" value=\"New Label\">\n    <input type=\"hidden\" title=\"issueActionsHint\"
+        value=\"Begin typing for available operations or press down to see all\">\n
+        \   <input type=\"hidden\" title=\"closelink\" value=\"Close\">\n    <input
+        type=\"hidden\" title=\"dotOperations\" value=\"Operations\">\n    <input
+        type=\"hidden\" title=\"dotLoading\" value=\"Loading...\">\n    <input type=\"hidden\"
+        title=\"frotherSuggestions\" value=\"Suggestions\">\n    <input type=\"hidden\"
+        title=\"frotherNomatches\" value=\"No Matches\">\n    <input type=\"hidden\"
+        title=\"multiselectVersionsError\" value=\"{0} is not a valid version.\">\n
+        \   <input type=\"hidden\" title=\"multiselectComponentsError\" value=\"{0}
+        is not a valid component.\">\n    <input type=\"hidden\" title=\"multiselectGenericError\"
+        value=\"The value {0} is invalid.\">\n</fieldset>\n\n    </footer>\n</div>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:06:08 GMT
+recorded_with: VCR 2.9.3

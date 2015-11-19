@@ -1,0 +1,519 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://dev.clojure.org/jira/browse/CLJ
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Nov 2015 04:06:07 GMT
+      X-Arequestid:
+      - 1326x41723x1
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=12FFCC6DA94C12FBCAD78E293DC70B76; Path=/jira
+      - atlassian.xsrf.token=BTMM-1VOF-2I2F-TOTY|7fd255f57227416ddc5613fd51117bd8dc027af9|lout;
+        Path=/jira
+      X-Seraph-Loginreason:
+      - OUT
+      X-Ausername:
+      - anonymous
+      X-Asessionid:
+      - vd5cov
+      Content-Type:
+      - text/html;charset=UTF-8
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "\n\n\n\n<!DOCTYPE html>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<html>\n<head>\n
+        \   <title>Clojure - Clojure JIRA </title>\n\n    <meta name=\"decorator\"
+        content=\"general\" />\n    <meta http-equiv=\"Content-Type\" content=\"text/html;
+        charset=UTF-8\" />\n    <meta http-equiv=\"Pragma\" content=\"no-cache\" />\n
+        \   <meta http-equiv=\"Expires\" content=\"-1\" />\n    \n\n    \n<meta id=\"atlassian-token\"
+        name=\"atlassian-token\" content=\"BTMM-1VOF-2I2F-TOTY|7fd255f57227416ddc5613fd51117bd8dc027af9|lout\">\n\n\n
+        \   <link rel=\"shortcut icon\" href=\"/jira/s/en_US9yuwnb/649/7/_/favicon.ico\">\n
+        \   <link rel=\"icon\" type=\"image/png\" href=\"/jira/s/en_US9yuwnb/649/7/_/images/icons/favicon.png\">\n\n
+        \   \n    <script type=\"text/javascript\">var contextPath = '/jira';</script>\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css\"
+        media=\"all\">\n<!--[if lt IE 9]>\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9\"
+        media=\"all\">\n<![endif]-->\n<!--[if IE 9]>\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=IE+9\"
+        media=\"all\">\n<![endif]-->\n<!--[if lte IE 9]>\n<link type=\"text/css\"
+        rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9\"
+        media=\"all\">\n<![endif]-->\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0.6/_/download/batch/com.atlassian.plugin.atlassian-feedback-plugin:feedback/com.atlassian.plugin.atlassian-feedback-plugin:feedback.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:global-static/jira.webresources:global-static.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:global-static/jira.webresources:global-static.css?media=print\"
+        media=\"print\">\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/js/batch.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:ajaxhistory/jira.webresources:ajaxhistory.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.embedded:gadget-core-resources/com.atlassian.gadgets.embedded:gadget-core-resources.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.embedded:gadget-container-resources/com.atlassian.gadgets.embedded:gadget-container-resources.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.embedded:gadget-standalone-resources/com.atlassian.gadgets.embedded:gadget-standalone-resources.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:browseproject/jira.webresources:browseproject.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/5.7/_/download/batch/com.pyxis.greenhopper.jira:gh-globalkeyboardshortcuts/com.pyxis.greenhopper.jira:gh-globalkeyboardshortcuts.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0.6/_/download/batch/com.atlassian.plugin.atlassian-feedback-plugin:feedback/com.atlassian.plugin.atlassian-feedback-plugin:feedback.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-soy-plugin:soy-deps/com.atlassian.jira.jira-soy-plugin:soy-deps.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch.js\"
+        ></script>\n\n    \n        <script type=\"text/javascript\" src=\"/jira/rest/api/1.0/shortcuts/649/3ecb86259f9e1f12acf9a8b0846e962e/shortcuts.js\"></script>\n
+        \   \n    <link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        href=\"/jira/osd.jsp\" title=\"Clojure JIRA\"/>\n</head>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<body
+        id=\"jira\" class=\"nl type-aa\">\n\n\n\n\n\n\n\n\n\n\n<div id=\"header\">\n
+        \   <div id=\"header-top\">\n        <a id=\"logo\" href=\"/jira/secure/Dashboard.jspa\">\n
+        \                       <img class=\"logo\" src=\"/jira/s/en_US9yuwnb/649/7/_/jira-logo-scaled.png\"
+        width=\"48\" height=\"47\" border=\"0\" alt=\"Clojure JIRA\" />\n                    </a>\n
+        \               <form id=\"quicksearch\" action=\"/jira/secure/QuickSearch.jspa\"
+        method=\"post\" class=\"dont-default-focus\">\n            <div>\n                <label
+        for=\"quickSearchInput\" title=\"Go directly to an issue by typing a valid
+        issue key, or run a free-text search.\" class=\"overlabel\">Quick Search</label>\n
+        \               <input id=\"quickSearchInput\" class=\"quickSearchInput\"
+        type=\"text\" size=\"25\" title=\"Go directly to an issue by typing a valid
+        issue key, or run a free-text search.\" name=\"searchString\" accessKey=\"q\"
+        />\n                <input type=\"submit\" class=\"hidden\" name=\"quicksearch\"/>\n
+        \           </div>\n        </form>\n                        \n        <div
+        id=\"header-details-user\" class=\"aui-dd-parent header-link-container\">\n
+        \        <a class=\"lnk\" rel=\"nofollow\" href=\"/jira/login.jsp?os_destination=%2Fbrowse%2FCLJ\">Log
+        In</a>\n        <span class=\"drop-wrap\">\n        <a class=\"drop aui-dd-link\"\n
+        \                       href=\"#\"><span>Access more options</span>\n        </a>\n
+        \   </span>\n    <div id=\"user-options-list\" class=\"aui-list hidden\">\n
+        \                                                               <ul id=\"jira-help\"
+        class=\"aui-list-section  aui-first     aui-last  \">\n                                            <li
+        class=\"aui-list-item\"><a  id=\"view_help\"   class=\"aui-list-item-link
+        \"  title=\"Goto the online documentation for JIRA\" href=\"http://docs.atlassian.com/jira/docs-044/JIRA+Documentation\">Online
+        Help</a></li>\n                                            <li class=\"aui-list-item\"><a
+        \ id=\"keyshortscuthelp\"   class=\"aui-list-item-link \"  title=\"Get more
+        information about JIRA's Keyboard Shortcuts\" href=\"/jira/secure/ViewKeyboardShortcuts!default.jspa\">Keyboard
+        Shortcuts</a></li>\n                                            <li class=\"aui-list-item\"><a
+        \ id=\"view_about\"   class=\"aui-list-item-link \"  title=\"Get more information
+        about JIRA\" href=\"http://www.atlassian.com/software/jira\">About JIRA</a></li>\n
+        \                                           <li class=\"aui-list-item\"><a
+        \ id=\"view_credits\"   class=\"aui-list-item-link \"  title=\"See who did
+        what\" href=\"/jira/secure/JiraCreditsPage!default.jspa\">JIRA Credits</a></li>\n
+        \                                   </ul>\n                        </div>\n</div>\n\n
+        \       \n    </div>\n    <div id=\"header-bottom\">\n                <div
+        id=\"menu\">\n            \n                                    \n            \n<ul
+        id=\"main-nav\" class=\"menu-bar standard-menu-bar\">\n                        <li
+        class=\"aui-dd-parent lazy  \">\n                    <a class=\"lnk\"\n                href=\"/jira/secure/Dashboard.jspa\"\n
+        \                id=\"home_link\"                 accessKey=\"h\"                 title=\"View
+        your current Dashboard\"                >Dashboards</a>\n\n                    <span
+        class=\"drop-wrap\">\n            <a class=\"drop aui-dd-link\"\n                                    id=\"home_link_drop\"\n
+        \                   rel=\"home_link\"\n                    accessKey=\"d\"\n
+        \                   title=\"Access more options (Ctrl+Alt+d)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+d)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent lazy  selected  \">\n                    <a class=\"lnk\"\n
+        \               href=\"/jira/browse/CLJ\"\n                 id=\"browse_link\"
+        \                accessKey=\"b\"                 title=\"Browse currently
+        active project 'Clojure'\"                >Projects</a>\n\n                    <span
+        class=\"drop-wrap\">\n            <a class=\"drop aui-dd-link\"\n                                    id=\"browse_link_drop\"\n
+        \                   rel=\"browse_link\"\n                    accessKey=\"p\"\n
+        \                   title=\"Access more options (Ctrl+Alt+p)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+p)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent lazy  \">\n                    <a class=\"lnk\"\n                href=\"/jira/secure/IssueNavigator.jspa\"\n
+        \                id=\"find_link\"                 accessKey=\"f\"                 title=\"View
+        your current filter\"                >Issues</a>\n\n                    <span
+        class=\"drop-wrap\">\n            <a class=\"drop aui-dd-link\"\n                                    id=\"find_link_drop\"\n
+        \                   rel=\"find_link\"\n                    accessKey=\"i\"\n
+        \                   title=\"Access more options (Ctrl+Alt+i)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+i)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent nonlazy  \">\n                    <a class=\"lnk\"\n
+        \               href=\"/jira/secure/GreenHopper.jspa\"\n                 id=\"greenhopper_menu\"
+        \                                title=\"Manage your project with GreenHopper\"
+        \               >Agile</a>\n\n                                                                                                            <span
+        class=\"drop-wrap\">\n                            <a class=\"drop aui-dd-link\"\n
+        \                                                                   id=\"greenhopper_menu_drop\"\n
+        \                                   accessKey=\"g\"\n                                    rel=\"greenhopper_menu\"\n
+        \                                   title=\"Access more options (Ctrl+Alt+g)\"\n
+        \                                                               href=\"#\"><span>Access
+        more options</span></a></span>\n                            <div class=\"aui-list
+        hidden\">\n                                                \n                            <ul
+        id=\"greenhopper_menu_dropdown\" class=\"aui-list-section aui-first   aui-last
+        \ \">\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"planningboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/VersionBoard.jspa\">Planning
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"taskboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/TaskBoard.jspa\">Task
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"chartboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/ChartBoard.jspa\">Chart
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"releasedboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/ArchiveChartBoard.jspa\">Released
+        Board</a></li>\n                                                            </ul>\n
+        \                                                   </div>\n                            </li>\n
+        \   </ul>\n\n            \n                    </div>\n    </div>\n</div>\n\n\n\n\n\n\n\n\n\n\n<fieldset
+        class=\"hidden parameters\">\n    <input type=\"hidden\" title=\"ajaxTimeout\"
+        value=\"The call to the JIRA server did not complete within the timeout period.
+        \ We are unsure of the result of this operation.\">\n    <input type=\"hidden\"
+        title=\"ajaxUnauthorised\" value=\"You are not authorized to perform this
+        operation.  Please try to <a href='/jira/login.jsp?os_destination=%2Fbrowse%2FCLJ'>log
+        in</a> or <a href='/jira/secure/Signup!default.jspa'>sign up</a> for an account.\">\n
+        \   <input type=\"hidden\" title=\"ajaxUnauthorisedAlert\" value=\"You are
+        not authorized to perform this operation.  Please log in.\">\n    <input type=\"hidden\"
+        title=\"baseURL\" value=\"http://dev.clojure.org:80/jira\">\n    <input type=\"hidden\"
+        title=\"ajaxCommsError\" value=\"The JIRA server could not be contacted.  This
+        may be a temporary glitch or the server may be down.\">\n    <input type=\"hidden\"
+        title=\"ajaxServerError\" value=\"The JIRA server was contacted but has returned
+        an error response. We are unsure of the result of this operation.\">\n    <input
+        type=\"hidden\" title=\"ajaxErrorCloseDialog\" value=\"Close this dialog and
+        press refresh in your browser\">\n    <input type=\"hidden\" title=\"ajaxErrorDialogHeading\"
+        value=\"Communications Breakdown\">\n\n    <input type=\"hidden\" title=\"dirtyMessage\"
+        value=\"You have entered new data on this page. If you navigate away from
+        this page without first saving your data, the changes will be lost.\">\n    <input
+        type=\"hidden\" title=\"dirtyDialogMessage\" value=\"You have entered new
+        data in this dialog. If you navigate away from this dialog without first saving
+        your data, the changes will be lost. Click cancel to return to the dialog.\">\n
+        \   <input type=\"hidden\" title=\"keyType\" value=\"Type\">\n    <input type=\"hidden\"
+        title=\"keyThen\" value=\"then\">\n    <input type=\"hidden\" title=\"dblClickToExpand\"
+        value=\"Double click to expand\">\n    <input type=\"hidden\" title=\"actions\"
+        value=\"Actions\">\n    <input type=\"hidden\" title=\"removeItem\" value=\"Remove\">\n
+        \   <input type=\"hidden\" title=\"workflow\" value=\"Workflow\">\n    <input
+        type=\"hidden\" title=\"labelNew\" value=\"New Label\">\n    <input type=\"hidden\"
+        title=\"enterIssueKey\" value=\"Enter issue key\">\n    <input type=\"hidden\"
+        title=\"issueActionsHint\" value=\"Begin typing for available operations or
+        press down to see all\">\n    <input type=\"hidden\" title=\"closelink\" value=\"Close\">\n
+        \   <input type=\"hidden\" title=\"dotOperations\" value=\"Operations\">\n
+        \   <input type=\"hidden\" title=\"dotLoading\" value=\"Loading...\">\n    <input
+        type=\"hidden\" title=\"frotherSuggestions\" value=\"Suggestions\">\n    <input
+        type=\"hidden\" title=\"frotherNomatches\" value=\"No Matches\">\n    <input
+        type=\"hidden\" title=\"multiselectVersionsError\" value=\"{0} is not a valid
+        version.\">\n    <input type=\"hidden\" title=\"multiselectComponentsError\"
+        value=\"{0} is not a valid component.\">\n    <input type=\"hidden\" title=\"multiselectGenericError\"
+        value=\"The value {0} is invalid.\">\n</fieldset>\n\n\n\n\n\n\n\n<script type=\"text/javascript\">window.dhtmlHistory.create();</script>\n\n<div
+        class=\"item-header\" id=\"content-top\">\n\n\n    \n    <h1 class=\"item-name
+        avatar\">\n    \n        <img id=\"project-avatar\" alt=\"\" class=\"project-avatar-48\"
+        height=\"48\" src=\"/jira/secure/projectavatar?pid=10010&avatarId=10628&size=large\"
+        width=\"48\" />\n    \n        <span>Clojure</span>\n    </h1>\n    <h2 class=\"item-summary\">Clojure</h2>\n</div>\n\n<div
+        id=\"main-content\">\n    <ul class=\"vertical tabs\">\n        \n            <li
+        class=\"active  first\">\n                <a class=\"browse-tab\" id=\"summary-panel-panel\"
+        href=\"/jira/browse/CLJ?selectedTab=com.atlassian.jira.plugin.system.project%3Asummary-panel\"
+        hidefocus><strong>Summary</strong></a>\n            </li>\n        \n            <li
+        class=\" \">\n                <a class=\"browse-tab\" id=\"issues-panel-panel\"
+        href=\"/jira/browse/CLJ?selectedTab=com.atlassian.jira.plugin.system.project%3Aissues-panel\"
+        hidefocus><strong>Issues</strong></a>\n            </li>\n        \n            <li
+        class=\" \">\n                <a class=\"browse-tab\" id=\"roadmap-panel-panel\"
+        href=\"/jira/browse/CLJ?selectedTab=com.atlassian.jira.plugin.system.project%3Aroadmap-panel\"
+        hidefocus><strong>Road Map</strong></a>\n            </li>\n        \n            <li
+        class=\" \">\n                <a class=\"browse-tab\" id=\"greenhopper-project-panel-tab-panel\"
+        href=\"/jira/browse/CLJ?selectedTab=com.pyxis.greenhopper.jira%3Agreenhopper-project-panel-tab\"
+        hidefocus><strong>Agile</strong></a>\n            </li>\n        \n            <li
+        class=\" \">\n                <a class=\"browse-tab\" id=\"changelog-panel-panel\"
+        href=\"/jira/browse/CLJ?selectedTab=com.atlassian.jira.plugin.system.project%3Achangelog-panel\"
+        hidefocus><strong>Change Log</strong></a>\n            </li>\n        \n            <li
+        class=\" \">\n                <a class=\"browse-tab\" id=\"popularissues-panel-panel\"
+        href=\"/jira/browse/CLJ?selectedTab=com.atlassian.jira.plugin.system.project%3Apopularissues-panel\"
+        hidefocus><strong>Popular Issues</strong></a>\n            </li>\n        \n
+        \           <li class=\" \">\n                <a class=\"browse-tab\" id=\"versions-panel-panel\"
+        href=\"/jira/browse/CLJ?selectedTab=com.atlassian.jira.plugin.system.project%3Aversions-panel\"
+        hidefocus><strong>Versions</strong></a>\n            </li>\n        \n            <li
+        class=\" \">\n                <a class=\"browse-tab\" id=\"labels-heatmap-panel-panel\"
+        href=\"/jira/browse/CLJ?selectedTab=com.atlassian.jira.plugin.system.project%3Alabels-heatmap-panel\"
+        hidefocus><strong>Labels</strong></a>\n            </li>\n        \n    </ul>\n
+        \   <div class=\"active-area\" id=\"project-tab\" data-project-key=\"CLJ\">\n
+        \       <h2>Summary</h2>\n<div id=\"quicklinks\">\n<ul class=\"operations\">\n<li
+        class=\"aui-dd-parent\">\n<a href=\"#\" title=\"View available reports\" class=\"lnk
+        aui-dd-link standard icon-reports\" id=\"reports\"><span>Reports</span></a>\n<div
+        class=\"aui-list hidden\">\n    <ul id=\"reports-dropdown\" class=\"aui-list-section
+        aui-last\">\n                <li class=\"aui-list-item\"><a class=\"aui-list-item-link\"
+        href=\"/jira/secure/ConfigureReport!default.jspa?selectedProjectId=10010&reportKey=com.atlassian.jira.plugin.system.reports:singlelevelgroupby\"
+        title=\"This report allows you to display issues grouped by a certain field\">Single
+        Level Group By Report</a></li>\n                <li class=\"aui-list-item\"><a
+        class=\"aui-list-item-link\" href=\"/jira/secure/ConfigureReport!default.jspa?selectedProjectId=10010&reportKey=com.atlassian.jira.plugin.system.reports:createdvsresolved-report\"
+        title=\"A report showing issues created vs. issues resolved.\">Created vs.
+        Resolved Issues Report</a></li>\n                <li class=\"aui-list-item\"><a
+        class=\"aui-list-item-link\" href=\"/jira/secure/ConfigureReport!default.jspa?selectedProjectId=10010&reportKey=com.atlassian.jira.plugin.system.reports:resolutiontime-report\"
+        title=\"A report showing the length of time taken to resolve issues for a
+        project or filter.\">Resolution Time Report</a></li>\n                <li
+        class=\"aui-list-item\"><a class=\"aui-list-item-link\" href=\"/jira/secure/ConfigureReport!default.jspa?selectedProjectId=10010&reportKey=com.atlassian.jira.plugin.system.reports:pie-report\"
+        title=\"A report showing the issues for a project or filter as a pie chart.\">Pie
+        Chart Report</a></li>\n                <li class=\"aui-list-item\"><a class=\"aui-list-item-link\"
+        href=\"/jira/secure/ConfigureReport!default.jspa?selectedProjectId=10010&reportKey=com.atlassian.jira.plugin.system.reports:averageage-report\"
+        title=\"A report showing the average age of unresolved issues for a project
+        or filter.\">Average Age Report</a></li>\n                <li class=\"aui-list-item\"><a
+        class=\"aui-list-item-link\" href=\"/jira/secure/ConfigureReport!default.jspa?selectedProjectId=10010&reportKey=com.atlassian.jira.plugin.system.reports:recentlycreated-report\"
+        title=\"A report showing the number of issues recently created.\">Recently
+        Created Issues Report</a></li>\n                <li class=\"aui-list-item\"><a
+        class=\"aui-list-item-link\" href=\"/jira/secure/ConfigureReport!default.jspa?selectedProjectId=10010&reportKey=com.atlassian.jira.plugin.system.reports:timesince-report\"
+        title=\"A report showing time since a chosen field for each issue for a project
+        or saved filter.\">Time Since Issues Report</a></li>\n            </ul>\n</div></li>\n<li
+        class=\"aui-dd-parent\">\n<a href=\"#\" title=\"View preset filters\" class=\"lnk
+        aui-dd-link standard icon-filters\" id=\"filters\"><span>Filters</span></a>\n<div
+        class=\"aui-list hidden\">\n    <ul id=\"filters-dropdown\" class=\"aui-list-section
+        aui-last\">\n                                <li class=\"aui-list-item\">\n
+        \                                                <a class=\"aui-list-item-link\"
+        id=\"filter_all\" href=\"/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+CLJ\">All</a>\n
+        \                           </li>\n                                            <li
+        class=\"aui-list-item\">\n                                                 <a
+        class=\"aui-list-item-link\" id=\"filter_resolvedrecently\" href=\"/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+CLJ+AND+resolutiondate+%3E%3D-1w+ORDER+BY+updated+DESC\">Resolved
+        recently</a>\n                            </li>\n                                            <li
+        class=\"aui-list-item\">\n                                                 <a
+        class=\"aui-list-item-link\" id=\"filter_outstanding\" href=\"/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+CLJ+AND+resolution+%3D+Unresolved+ORDER+BY+updated+DESC\">Outstanding</a>\n
+        \                           </li>\n                                            <li
+        class=\"aui-list-item\">\n                                                 <a
+        class=\"aui-list-item-link\" id=\"filter_addedrecently\" href=\"/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+CLJ+AND+created%3E%3D-1w+ORDER+BY+created+DESC\">Added
+        recently</a>\n                            </li>\n                                            <li
+        class=\"aui-list-item\">\n                                                 <a
+        class=\"aui-list-item-link\" id=\"filter_unscheduled\" href=\"/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+CLJ+AND+resolution+%3D+Unresolved+AND+fixVersion+is+EMPTY+ORDER+BY+priority+DESC\">Unscheduled</a>\n
+        \                           </li>\n                                            <li
+        class=\"aui-list-item\">\n                                                 <a
+        class=\"aui-list-item-link\" id=\"filter_updatedrecently\" href=\"/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+CLJ+AND+updated%3E%3D-1w+ORDER+BY+updated+DESC\">Updated
+        recently</a>\n                            </li>\n                                            <li
+        class=\"aui-list-item\">\n                                                 <a
+        class=\"aui-list-item-link\" id=\"filter_mostimportant\" href=\"/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&jqlQuery=project+%3D+CLJ+AND+resolution+%3D+Unresolved+ORDER+BY+priority+DESC\">Most
+        important</a>\n                            </li>\n                        </ul>\n</div>\n</li>\n</div><div
+        id=\"primary\" class=\"column\"><div class=\"content\"><div class=\"module\"
+        id=\"fragprojectdescription\"><div class=\"mod-header\">\n    <h3>Description</h3>\n</div>\n<div
+        class=\"mod-content\">\n        <ul class=\"item-details\">\n        <li>\n\n
+        \                    <dl>\n                <dt>URL:</dt>\n                <dd
+        id=\"pd-url\"><a href=\"http://clojure.org\" target=\"_blank\" class=\"description\">http://clojure.org</a></dd>\n
+        \           </dl>\n                    <dl>\n                <dt>Lead:</dt>\n
+        \               <dd >        <a class=\"user-hover\" rel=\"richhickey\" id=\"project_summary_richhickey\"
+        href=\"/jira/secure/ViewProfile.jspa?name=richhickey\">Rich Hickey</a></dd>\n
+        \           </dl>\n            <dl>\n                <dt>Key:</dt>\n                <dd
+        id=\"pd-key\">CLJ</dd>\n            </dl>\n        </li>\n    </ul>\n</div></div><div
+        class=\"module\" id=\"fragdueissues\"><div class=\"mod-header\">\n    <ul
+        class=\"ops\">\n        <li><a id=\"fragdueissues_more\" class=\"icon icon-view\"
+        href=\"/jira/secure/IssueNavigator.jspa?reset=true&jqlQuery=project+%3D+CLJ+AND+resolution+%3D+Unresolved+ORDER+BY+due+ASC%2C+priority+DESC%2C+created+ASC&mode=hide\"
+        title=\"\"><span>More</span></a></li>\n    </ul>\n    <h3>Issues: Due</h3>\n</div>\n<div
+        class=\"mod-content\">\n    <ul class=\"issues\">\n                <li class=\"vevent\">\n
+        \                                   <img alt=\"Defect\" height=\"16\" src=\"/jira/images/icons/bug.gif\"
+        title=\"Defect - A problem which impairs or prevents the functions of the
+        product.\" width=\"16\" />\n                        <a class=\"url issue summary\"
+        href=\"/jira/browse/CLJ-700\">CLJ-700</a>\n            <span class=\"dtstart
+        hidden\">2011-01-01T19-58</span>\n                        <span class=\"dtend
+        hidden\">2015-11-10T08-27</span>\n                        <span class=\"description\">contains?
+        broken for transient collections</span>\n        </li>\n                <li
+        class=\"vevent\">\n                                    <img alt=\"Enhancement\"
+        height=\"16\" src=\"/jira/images/icons/improvement.gif\" title=\"Enhancement
+        - An improvement or enhancement\" width=\"16\" />\n                        <a
+        class=\"url issue summary\" href=\"/jira/browse/CLJ-1107\">CLJ-1107</a>\n
+        \           <span class=\"dtstart hidden\">2012-11-13T13-20</span>\n                        <span
+        class=\"dtend hidden\">2015-02-23T17-52</span>\n                        <span
+        class=\"description\">&#39;get&#39; should throw exception on non-Associative
+        argument</span>\n        </li>\n                <li class=\"vevent\">\n                                    <img
+        alt=\"Defect\" height=\"16\" src=\"/jira/images/icons/bug.gif\" title=\"Defect
+        - A problem which impairs or prevents the functions of the product.\" width=\"16\"
+        />\n                        <a class=\"url issue summary\" href=\"/jira/browse/CLJ-1152\">CLJ-1152</a>\n
+        \           <span class=\"dtstart hidden\">2013-01-30T09-00</span>\n                        <span
+        class=\"dtend hidden\">2015-10-19T20-28</span>\n                        <span
+        class=\"description\">PermGen leak in multimethods and protocol fns when evaled</span>\n
+        \       </li>\n            </ul>\n</div></div><div class=\"module\" id=\"fragcreatedvsresolved\"><div
+        class=\"mod-header\">\n    <h3>Issues: 30 Day Summary</h3>\n</div>\n<div class=\"mod-content\">\n
+        \   <div class=\"fullyCentered\">\n                                    <map
+        id=\"chart-59fgR\" name=\"chart-59fgR\">\n<area shape=\"poly\" coords=\"364,31,363,33,361,34,359,33,358,31,359,29,361,28,363,29,364,31,364,31\"
+        title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"353,31,352,33,350,34,348,33,347,31,348,29,350,28,352,29,353,31,353,31\"
+        title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"342,31,341,33,339,34,337,33,336,31,337,29,339,28,341,29,342,31,342,31\"
+        title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"331,31,330,33,328,34,326,33,325,31,326,29,328,28,330,29,331,31,331,31\"
+        title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"320,31,319,33,317,34,315,33,314,31,315,29,317,28,319,29,320,31,320,31\"
+        title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"309,31,308,33,306,34,304,33,303,31,304,29,306,28,308,29,309,31,309,31\"
+        title=\"Created 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"298,82,297,84,295,85,293,84,292,82,293,80,295,79,297,80,298,82,298,82\"
+        title=\"Created 11 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"287,82,286,84,284,85,282,84,281,82,282,80,284,79,286,80,287,82,287,82\"
+        title=\"Created 11 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"276,95,275,97,273,98,271,97,270,95,271,93,273,92,275,93,276,95,276,95\"
+        title=\"Created 10 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"265,108,264,110,262,111,260,110,259,108,260,106,262,105,264,106,265,108,265,108\"
+        title=\"Created 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"254,108,253,110,251,111,249,110,248,108,249,106,251,105,253,106,254,108,254,108\"
+        title=\"Created 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"243,108,242,110,240,111,238,110,237,108,238,106,240,105,242,106,243,108,243,108\"
+        title=\"Created 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"232,108,231,110,229,111,227,110,226,108,227,106,229,105,231,106,232,108,232,108\"
+        title=\"Created 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"221,121,220,123,218,124,216,123,215,121,216,119,218,118,220,119,221,121,221,121\"
+        title=\"Created 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"210,121,209,123,207,124,205,123,204,121,205,119,207,118,209,119,210,121,210,121\"
+        title=\"Created 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"199,121,198,123,196,124,194,123,193,121,194,119,196,118,198,119,199,121,199,121\"
+        title=\"Created 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"188,121,187,123,185,124,183,123,182,121,183,119,185,118,187,119,188,121,188,121\"
+        title=\"Created 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"177,146,176,149,174,149,172,149,171,146,172,144,174,143,176,144,177,146,177,146\"
+        title=\"Created 6 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"166,146,165,149,163,149,161,149,160,146,161,144,163,143,165,144,166,146,166,146\"
+        title=\"Created 6 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"155,146,154,149,152,149,150,149,149,146,150,144,152,143,154,144,155,146,155,146\"
+        title=\"Created 6 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"144,146,143,149,141,149,139,149,138,146,139,144,141,143,143,144,144,146,144,146\"
+        title=\"Created 6 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"133,159,132,161,130,162,128,161,127,159,128,157,130,156,132,157,133,159,133,159\"
+        title=\"Created 5 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"122,185,121,187,119,188,117,187,116,185,117,183,119,182,121,183,122,185,122,185\"
+        title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"111,185,110,187,108,188,106,187,105,185,106,183,108,182,110,183,111,185,111,185\"
+        title=\"Created 3 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"100,224,99,226,97,227,95,226,94,224,95,221,97,221,99,221,100,224,100,224\"
+        title=\"Created 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"89,224,88,226,86,227,84,226,83,224,84,221,86,221,88,221,89,224,89,224\"
+        title=\"Created 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"78,224,77,226,75,227,73,226,72,224,73,221,75,221,77,221,78,224,78,224\"
+        title=\"Created 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"67,224,66,226,64,227,62,226,61,224,62,221,64,221,66,221,67,224,67,224\"
+        title=\"Created 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"56,224,55,226,53,227,51,226,50,224,51,221,53,221,55,221,56,224,56,224\"
+        title=\"Created 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"45,224,44,226,42,227,40,226,39,224,40,221,42,221,44,221,45,224,45,224\"
+        title=\"Created 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"364,18,363,20,361,21,359,20,358,18,359,16,361,15,363,16,364,18,364,18\"
+        title=\"Resolved 16 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"353,18,352,20,350,21,348,20,347,18,348,16,350,15,352,16,353,18,353,18\"
+        title=\"Resolved 16 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"342,18,341,20,339,21,337,20,336,18,337,16,339,15,341,16,342,18,342,18\"
+        title=\"Resolved 16 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"331,31,330,33,328,34,326,33,325,31,326,29,328,28,330,29,331,31,331,31\"
+        title=\"Resolved 15 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"320,44,319,46,317,47,315,46,314,44,315,41,317,41,319,41,320,44,320,44\"
+        title=\"Resolved 14 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"309,44,308,46,306,47,304,46,303,44,304,41,306,41,308,41,309,44,309,44\"
+        title=\"Resolved 14 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"298,56,297,58,295,59,293,58,292,56,293,54,295,53,297,54,298,56,298,56\"
+        title=\"Resolved 13 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"287,69,286,71,284,72,282,71,281,69,282,67,284,66,286,67,287,69,287,69\"
+        title=\"Resolved 12 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"276,82,275,84,273,85,271,84,270,82,271,80,273,79,275,80,276,82,276,82\"
+        title=\"Resolved 11 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"265,95,264,97,262,98,260,97,259,95,260,93,262,92,264,93,265,95,265,95\"
+        title=\"Resolved 10 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"254,108,253,110,251,111,249,110,248,108,249,106,251,105,253,106,254,108,254,108\"
+        title=\"Resolved 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"243,108,242,110,240,111,238,110,237,108,238,106,240,105,242,106,243,108,243,108\"
+        title=\"Resolved 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"232,108,231,110,229,111,227,110,226,108,227,106,229,105,231,106,232,108,232,108\"
+        title=\"Resolved 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"221,108,220,110,218,111,216,110,215,108,216,106,218,105,220,106,221,108,221,108\"
+        title=\"Resolved 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"210,108,209,110,207,111,205,110,204,108,205,106,207,105,209,106,210,108,210,108\"
+        title=\"Resolved 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"199,108,198,110,196,111,194,110,193,108,194,106,196,105,198,106,199,108,199,108\"
+        title=\"Resolved 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"188,108,187,110,185,111,183,110,182,108,183,106,185,105,187,106,188,108,188,108\"
+        title=\"Resolved 9 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"177,121,176,123,174,124,172,123,171,121,172,119,174,118,176,119,177,121,177,121\"
+        title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"166,121,165,123,163,124,161,123,160,121,161,119,163,118,165,119,166,121,166,121\"
+        title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"155,121,154,123,152,124,150,123,149,121,150,119,152,118,154,119,155,121,155,121\"
+        title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"144,121,143,123,141,124,139,123,138,121,139,119,141,118,143,119,144,121,144,121\"
+        title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"133,121,132,123,130,124,128,123,127,121,128,119,130,118,132,119,133,121,133,121\"
+        title=\"Resolved 8 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"122,134,121,136,119,137,117,136,116,134,117,131,119,131,121,131,122,134,122,134\"
+        title=\"Resolved 7 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"111,211,110,213,108,214,106,213,105,211,106,209,108,208,110,209,111,211,111,211\"
+        title=\"Resolved 1 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"100,224,99,226,97,227,95,226,94,224,95,221,97,221,99,221,100,224,100,224\"
+        title=\"Resolved 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"89,224,88,226,86,227,84,226,83,224,84,221,86,221,88,221,89,224,89,224\"
+        title=\"Resolved 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"78,224,77,226,75,227,73,226,72,224,73,221,75,221,77,221,78,224,78,224\"
+        title=\"Resolved 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"67,224,66,226,64,227,62,226,61,224,62,221,64,221,66,221,67,224,67,224\"
+        title=\"Resolved 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"56,224,55,226,53,227,51,226,50,224,51,221,53,221,55,221,56,224,56,224\"
+        title=\"Resolved 0 issues\" alt=\"\" nohref=\"nohref\"/>\n<area shape=\"poly\"
+        coords=\"45,224,44,226,42,227,40,226,39,224,40,221,42,221,44,221,45,224,45,224\"
+        title=\"Resolved 0 issues\" alt=\"\" nohref=\"nohref\"/>\n</map>\n                        <img
+        src='/jira/charts?filename=jfreechart-onetime-3616601064454044219.png' border='0'
+        \ usemap=\"\\#chart-59fgR\"  width=\"380\" height=\"250\" />\n            <br/>\n
+        \           Issues: <b><span style='color:#c00;'>15</span></b> created and
+        <b><span style='color:#3c3;'>16</span></b> resolved\n            <br/>\n            </div>\n</div></div><div
+        class=\"module\" id=\"fragrecentissues\"><div class=\"mod-header\">\n    <ul
+        class=\"ops\">\n        <li><a id=\"fragrecentissues_more\" class=\"icon icon-view\"
+        href=\"/jira/secure/IssueNavigator.jspa?reset=true&jqlQuery=project+%3D+CLJ+ORDER+BY+updated+DESC%2C+priority+DESC%2C+created+ASC&mode=hide\"
+        title=\"\"><span>More</span></a></li>\n    </ul>\n    <h3>Issues: Updated
+        recently</h3>\n</div>\n<div class=\"mod-content\">\n    <ul class=\"issues\">\n
+        \               <li class=\"vevent\">\n                                    <img
+        alt=\"Defect\" height=\"16\" src=\"/jira/images/icons/bug.gif\" title=\"Defect
+        - A problem which impairs or prevents the functions of the product.\" width=\"16\"
+        />\n                        <a href=\"/jira/browse/CLJ-1744\" class=\"url
+        issue summary\">CLJ-1744</a>\n            <span class=\"dtstart hidden\">2015-06-03T10-16</span>\n
+        \                            <span class=\"date\"><abbr class=\"dtend\" title=\"2015-11-18T07-00\">Today
+        7:00 AM</abbr></span>\n                        <span class=\"description\">Unused
+        destructured local not cleared, causes memory leak</span>\n        </li>\n
+        \               <li class=\"vevent\">\n                                    <img
+        alt=\"Enhancement\" height=\"16\" src=\"/jira/images/icons/improvement.gif\"
+        title=\"Enhancement - An improvement or enhancement\" width=\"16\" />\n                        <a
+        href=\"/jira/browse/CLJ-1849\" class=\"url issue summary\">CLJ-1849</a>\n
+        \           <span class=\"dtstart hidden\">2015-11-13T09-51</span>\n                             <span
+        class=\"date\"><abbr class=\"dtend\" title=\"2015-11-16T07-18\">Last Monday
+        7:18 AM</abbr></span>\n                        <span class=\"description\">Add
+        tests for CLJ-1846 and CLJ-1825</span>\n        </li>\n                <li
+        class=\"vevent\">\n                                    <img alt=\"Defect\"
+        height=\"16\" src=\"/jira/images/icons/bug.gif\" title=\"Defect - A problem
+        which impairs or prevents the functions of the product.\" width=\"16\" />\n
+        \                       <a href=\"/jira/browse/CLJ-1829\" class=\"url issue
+        summary\">CLJ-1829</a>\n            <span class=\"dtstart hidden\">2015-10-16T14-27</span>\n
+        \                            <span class=\"date\"><abbr class=\"dtend\" title=\"2015-11-15T15-33\">Last
+        Sunday 3:33 PM</abbr></span>\n                        <span class=\"description\">VerifyError
+        on Android </span>\n        </li>\n            </ul>\n </div>\n</div></div></div><div
+        id=\"secondary\" class=\"column\"><div class=\"content\"><div class=\"module\"
+        id=\"fragdueversions\"><div class=\"mod-header\">\n    <ul class=\"ops\">\n
+        \       <li><a id=\"fragdueversions_more\" class=\"icon icon-view\" href=\"/jira/browse/CLJ?selectedTab=com.atlassian.jira.plugin.system.project:versions-panel&subset=-1\"
+        title=\"\"><span>More</span></a></li>\n    </ul>\n    <h3>Versions: Due</h3>\n</div>\n<div
+        class=\"mod-content\">\n    <ul class=\"issues\">\n                    <li>\n
+        \                                       <img src=\"/jira/images/icons/box_16.gif\"
+        height=\"16\" width=\"16\" border=\"0\" align=\"absmiddle\" title=\"Unreleased\"
+        alt=\"Unreleased\" />\n                <a href=\"/jira/browse/CLJ/fixforversion/10254\"
+        class=\"version\">Release 1.8</a>\n            <span class=\"date\">&nbsp;</span>\n
+        \       </li>\n                            <li>\n                                        <img
+        src=\"/jira/images/icons/box_16.gif\" height=\"16\" width=\"16\" border=\"0\"
+        align=\"absmiddle\" title=\"Unreleased\" alt=\"Unreleased\" />\n                <a
+        href=\"/jira/browse/CLJ/fixforversion/10750\" class=\"version\">Release 1.9</a>\n
+        \           <span class=\"date\">&nbsp;</span>\n        </li>\n                </ul>\n</div>\n</div><div
+        class=\"module\" id=\"fragactivitystream\"><div class=\"mod-header\">\n    <h3>Activity
+        Stream</h3>\n</div>\n<div class=\"mod-content\">\n    <div class=\"activitystream-container\">\n
+        \       <iframe id=\"gadget-1\" name=\"gadget-1\" class=\"gadget\" src=\"http://dev.clojure.org/jira/plugins/servlet/gadgets/ifr?container=atlassian&amp;mid=1&amp;country=US&amp;lang=en&amp;view=default&amp;view-params=%7B%22writable%22%3A%22false%22%7D&amp;st=atlassian%3A9pwLnDDt9X7R%2FkBq178Nl1KCSfbUAx6ZGJCQSyK3JSvpI%2Fr1HexNliTkaQQOvVTL6oiqmggJMBrzln3ND%2FscdlczK7e9mKdJ%2B3cOoAWvN%2BIgNa6zyXDCThDHyQEi%2BDFyhsVTgH6GreacfXXyBLrFa12jlx%2Bx%2FzQtkTpwB5X3klUP%2BxIOhic4%2F4TLDp9XcTbRstZ6lUp66XWTVoVKaGD3Qkjz6dtHc224CgMCus%2FJGlysM2XjGvfwqb5I8atsU%2B2ZfvGfAg%3D%3D&amp;up_isConfigured=true&amp;up_isReallyConfigured=false&amp;up_title=Activity+Stream&amp;up_titleRequired=false&amp;up_numofentries=10&amp;up_refresh=false&amp;up_rules=&amp;up_renderingContext=&amp;up_keys=CLJ&amp;up_itemKeys=&amp;up_username=&amp;url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.streams.streams-jira-plugin%2Fgadgets%2Factivitystream-gadget.xml&amp;libs=auth-refresh#rpctoken=771863810\"
+        frameborder=\"0\" scrolling=\"no\"  height=\"100\"><a href=\"http://dev.clojure.org/jira/plugins/servlet/gadgets/ifr?container=atlassian&amp;mid=1&amp;country=US&amp;lang=en&amp;view=default&amp;view-params=%7B%22writable%22%3A%22false%22%7D&amp;st=atlassian%3A9pwLnDDt9X7R%2FkBq178Nl1KCSfbUAx6ZGJCQSyK3JSvpI%2Fr1HexNliTkaQQOvVTL6oiqmggJMBrzln3ND%2FscdlczK7e9mKdJ%2B3cOoAWvN%2BIgNa6zyXDCThDHyQEi%2BDFyhsVTgH6GreacfXXyBLrFa12jlx%2Bx%2FzQtkTpwB5X3klUP%2BxIOhic4%2F4TLDp9XcTbRstZ6lUp66XWTVoVKaGD3Qkjz6dtHc224CgMCus%2FJGlysM2XjGvfwqb5I8atsU%2B2ZfvGfAg%3D%3D&amp;up_isConfigured=true&amp;up_isReallyConfigured=false&amp;up_title=Activity+Stream&amp;up_titleRequired=false&amp;up_numofentries=10&amp;up_refresh=false&amp;up_rules=&amp;up_renderingContext=&amp;up_keys=CLJ&amp;up_itemKeys=&amp;up_username=&amp;url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.streams.streams-jira-plugin%2Fgadgets%2Factivitystream-gadget.xml&amp;libs=auth-refresh#rpctoken=771863810\">Activity
+        Stream</a></iframe>\n    </div>\n</div>\n</div></div></div>\n    </div>\n</div>\n\n\n\n\n\n\n\n\n\n\n<div
+        class=\"footer\">\n<div class=\"poweredbymessage\">\n        <a href=\"http://www.atlassian.com/software/jira\"
+        class=\"smalltext\">Atlassian JIRA</a>\n        <span id=\"footer-build-information\"
+        \ style=\"color: #666666;\" >(v4.4#649-r158309)</span>\n        | <a href=\"http://support.atlassian.com/secure/CreateIssue.jspa?issuetype=1&amp;pid=10000\">Report
+        a problem</a>\n    </div>\n            <div class=\"licensemessage\">\n                    Powered
+        by a free Atlassian <a href='http://www.atlassian.com/software/jira'>JIRA</a>
+        open source license for Clojure. Try JIRA - <a href='http://www.atlassian.com/software/jira'>bug
+        tracking software</a> for <i>your</i> team.\n\n                </div>\n    </div>\n\n<form
+        id=\"jira_request_timing_info\" class=\"dont-default-focus\" >\n\t<fieldset
+        class=\"parameters hidden\">\n\t\t<input type=\"hidden\" title=\"jira.request.start.millis\"
+        value=\"1447905967578\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
+        value=\"58\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"1326x41723x1\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.time\" value=\"-\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.in.mins\" value=\"-\"
+        />\n\t\t<input id=\"jiraConcurrentRequests\" type=\"hidden\" name=\"jira.request.concurrent.requests\"
+        value=\"1\" />\n\t</fieldset>\n</form>\n<!--\n\t                 REQUEST ID
+        : 1326x41723x1\n\t          REQUEST TIMESTAMP : [18/Nov/2015:22:06:07 -0600]\n\t
+        \              REQUEST TIME : 0.0580\n\t                 ASESSIONID : vd5cov\n\t
+        \       CONCURRENT REQUESTS : 1\n-->\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:06:07 GMT
+recorded_with: VCR 2.9.3

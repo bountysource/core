@@ -1,0 +1,999 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v4/stories/45939421
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Trackertoken:
+      - 4ef2eedd8f04ecf183f17de68be90a1a
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      Date:
+      - Thu, 19 Nov 2015 04:03:51 GMT
+      X-Request-Id:
+      - 53144ef2a2187295af331a551ff77597
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"6ce7d306a82e7068dd6e6a42713ae3f3"'
+      X-Runtime:
+      - '0.111215'
+      X-Rack-Cache:
+      - miss
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTBiMzUyYjA3ZjVkZDE1NTNhOWE2M2E2Y2U2MWUxMWRjBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNROscgOwuNQ8KOg1uYW5vX251bWkyOg1uYW5vX2RlbmkGOg1zdWJtaWNybyIHBFA6C29mZnNldGkAOgl6b25lSSIIVVRDBjsARkkiEF9jc3JmX3Rva2VuBjsARkkiMTJEQUlXSmVhL3gwTlR2dW1EZHJjOHhpakQwWDg0N2h0dDRsaTdmVmNuZGM9BjsARg%3D%3D--8e10fe884ffd217b42bbd388e59d41bb7baa966a;
+        path=/; secure; HttpOnly
+      X-Powered-By:
+      - Phusion Passenger Enterprise
+      Server:
+      - nginx + Phusion Passenger
+      X-Frame-Options:
+      - DENY
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:01 GMT
+      Cache-Control:
+      - no-store, private, no-cache
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<story>\n  <id type=\"integer\">45939421</id>\n
+        \ <project_id type=\"integer\">367813</project_id>\n  <story_type>feature</story_type>\n
+        \ <url>https://www.pivotaltracker.com/story/show/45939421</url>\n  <estimate
+        type=\"float\">5</estimate>\n  <current_state>accepted</current_state>\n  <description>As
+        a citizen\nI want to be able to sign up for email alerts from Inside Gov which
+        correspond to my exact interests\nSo I find out when things change that affect
+        my job\n\n--\n\n- Using JS's Python app and Govdelivery API, we need the ability
+        to set up govdelivery topics on the fly for any combination of the following
+        filter options from Inside Gov: \n-- content type\n-- topic\n-- org\n-- 'relevant
+        to local gov' flag\n\n- topcis created using the API need to be set to 'unlisted'
+        so they don't get offered to subscribers through the govdelivery subs interface\n\n-
+        other filter options can be put out of scope for now but will probably be
+        added later\n\n- Frontend interface is not part of this story, there's another
+        story for that. </description>\n  <name>Use govdelivery API for topic creation</name>\n
+        \ <requested_by>\n    <person>\n      <id type=\"integer\">539667</id>\n      <name>Neil
+        Williams</name>\n      <initials>NW</initials>\n    </person>\n  </requested_by>\n
+        \ <owned_by>\n    <person>\n      <id type=\"integer\">670453</id>\n      <name>Bradley
+        Wright</name>\n      <initials>Brad</initials>\n    </person>\n  </owned_by>\n
+        \ <created_at type=\"datetime\">2013/03/11 12:53:19 UTC</created_at>\n  <updated_at
+        type=\"datetime\">2013/05/13 15:10:24 UTC</updated_at>\n  <accepted_at type=\"datetime\">2013/04/04
+        08:41:02 UTC</accepted_at>\n  <labels>info4local</labels>\n  <comments type=\"array\">\n
+        \   <comment>\n      <id type=\"integer\">39247393</id>\n      <text>I've
+        started working on this in order to get the import working cleanly.</text>\n
+        \     <author>\n        <person>\n          <id type=\"integer\">670453</id>\n
+        \         <name>Bradley Wright</name>\n          <initials>Brad</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/03/18
+        22:42:26 UTC</created_at>\n    </comment>\n    <comment>\n      <id type=\"integer\">39758491</id>\n
+        \     <text>@brad: pushed my branch here: https://github.com/alphagov/whitehall/tree/info4local-publish-hook</text>\n
+        \     <author>\n        <person>\n          <id type=\"integer\">19663</id>\n
+        \         <name>Matthew Ford</name>\n          <initials>Matt</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/03/26
+        18:02:55 UTC</created_at>\n    </comment>\n    <comment>\n      <id type=\"integer\">40216195</id>\n
+        \     <text>Working on tidying up a couple things that David has pointed out.</text>\n
+        \     <author>\n        <person>\n          <id type=\"integer\">431283</id>\n
+        \         <name>Tekin Suleyman</name>\n          <initials>Tekin</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/04/03
+        13:44:09 UTC</created_at>\n    </comment>\n    <comment>\n      <id type=\"integer\">40283231</id>\n
+        \     <text>Behold: https://admin.govdelivery.com/topics?evo_pwurl=&amp;evo_tc=&amp;evo_tcat=All+Categories&amp;evo_tn=Inside+Gov&amp;evo_tv=2&amp;sortdesc=topicsort-subscribers_count</text>\n
+        \     <author>\n        <person>\n          <id type=\"integer\">670453</id>\n
+        \         <name>Bradley Wright</name>\n          <initials>Brad</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/04/04
+        08:31:57 UTC</created_at>\n    </comment>\n    <comment>\n      <id type=\"integer\">40283573</id>\n
+        \     <text>That's awesome. Titles need to be English, I'll add a separate
+        story for that</text>\n      <author>\n        <person>\n          <id type=\"integer\">539667</id>\n
+        \         <name>Neil Williams</name>\n          <initials>NW</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/04/04
+        08:40:56 UTC</created_at>\n    </comment>\n  </comments>\n</story>\n"
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:03:51 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v4/projects/367813
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Trackertoken:
+      - 4ef2eedd8f04ecf183f17de68be90a1a
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      Date:
+      - Thu, 19 Nov 2015 04:03:52 GMT
+      X-Request-Id:
+      - 11314e3529797b729253d08e4558b5fd
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"99e8bea6f53ef827cd79e7e5ff9a4354"'
+      X-Runtime:
+      - '0.451146'
+      X-Rack-Cache:
+      - miss
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWYwODk4OGI2NWVlNjk3MGRlN2YyYjk2N2NkYTQ2MTNmBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNROscgKXWOg8KOg1uYW5vX251bWkCzwI6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgdxkDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBGSSIQX2NzcmZfdG9rZW4GOwBGSSIxMmFIYzl4ZmZDWFIzMmJXWnNQbG1XYzY0ekxVM1RZa0tmWWowNGxERC9BMD0GOwBG--5d7d5e58026a5cb0b28df282f4c55368090e5590;
+        path=/; secure; HttpOnly
+      X-Powered-By:
+      - Phusion Passenger Enterprise
+      Server:
+      - nginx + Phusion Passenger
+      X-Frame-Options:
+      - DENY
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:01 GMT
+      Cache-Control:
+      - no-store, private, no-cache
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <project>
+          <id type="integer">367813</id>
+          <name>Departments and policy (Dev)</name>
+          <created_at type="datetime">2011/09/11 19:50:57 UTC</created_at>
+          <version>79044</version>
+          <iteration_length type="integer">2</iteration_length>
+          <week_start_day>Wednesday</week_start_day>
+          <point_scale>0,1,2,3,5,8</point_scale>
+          <account>GDS</account>
+          <start_date type="date">2011/09/14</start_date>
+          <first_iteration_start_time type="datetime">2011/09/13 23:00:00 UTC</first_iteration_start_time>
+          <current_iteration_number type="integer">110</current_iteration_number>
+          <enable_tasks type="boolean">true</enable_tasks>
+          <velocity_scheme>Average of 1 iteration</velocity_scheme>
+          <current_velocity type="integer">25</current_velocity>
+          <initial_velocity type="integer">25</initial_velocity>
+          <number_of_done_iterations_to_show type="integer">12</number_of_done_iterations_to_show>
+          <labels>---reviewing the ones below here---,500-error,accessibility,advocate,ago,aug,backend,bis,blocked,bug-squash,by 10 dec,by 10 jan,by 10 nov,by 16 dec,by 17 apr,by 17 jul,by 17 jun,by 17 nov,by 2 dec,by 2 july,by 2 sep,by 20 dec,by 23 apr,by 23 jan,by 25 apr,by 26 jun,by 27 jan,by 29 apr,by 30 apr,by 8 jan,by 9 dec,by 9 jan,by end of january,by feb 3,by jan 6,by mid jan,co,collab,content,custom logos,data cleanup,data import mvp,dcms,dec 7,decc,defra,design,dev to accept,dfid,dh,drop ig name,epic heading - aalb transition,epic heading - iteration,epic heading - not yet mvp,epic heading - someday/not in play,epic: analytics,epic: api,epic: attachments,epic: blogs,epic: collections,epic: contact forms,epic: contacts,epic: content quality,epic: detailed guides,epic: document filters,epic: document formats,epic: embedding,epic: feeds &amp; alerts,epic: html attachments,epic: images,epic: import albs,epic: intuitive publishing,epic: mog changes,epic: multilingual search,epic: official docs,epic: online consultation,epic: orgs,epic: people roles &amp; teams,epic: permissions,epic: process automation,epic: publisher dashboard,epic: search &amp; browse,epic: slug &amp; urls,epic: stabilisation project,epic: stats &amp; data,epic: tech performance,epic: topicality,epic: topics,epic: translation,epic: unpublish &amp; archive,epic: user needs,epic: workflow,epic: worldwide,fatalities,fco,fco history,fco world,feat: basic/mvp,feat: delight/vision,feat: performance/iteration,fix consultations,formats &amp; tools,frontend,g8,get involved section,graham to accept,guidance,hmrc,ho,import-bug,improve how gov works to replace civil service websites,info4local,it56,it56-design,it56-frontend,it57,it57-backend,it57-design,it57-frontend,it59,it59-backend,it59-design,it59-frontend,it60,it60-backend,it60-design,it60-frontend,it61,it61-backend,make topics like orgs,missing assets,mod,moj,needs production access,needs rewriting,needs splitting,needs verifying,ni,nov,obsolete,pen-testing,phe,priority: proactive,priority: reactive,publishing platform,pull-request,rails4,redirect request,report a problem,robin to accept,scope-creep,scotlandoffice,spike,tech debt,timely publishing,ukba,url-chore,wales,wont-fix,world formats,zendesk,zendesk-solved</labels>
+          <allow_attachments type="boolean">true</allow_attachments>
+          <public type="boolean">true</public>
+          <use_https type="boolean">false</use_https>
+          <bugs_and_chores_are_estimatable type="boolean">false</bugs_and_chores_are_estimatable>
+          <memberships type="array">
+            <membership>
+              <id type="integer">1228053</id>
+              <member>
+                <person>
+                  <id type="integer">448581</id>
+                  <name>Peter Herlihy</name>
+                  <initials>Pete</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">1250593</id>
+              <member>
+                <person>
+                  <id type="integer">455929</id>
+                  <name>Jamie Arnold</name>
+                  <initials>JA</initials>
+                </person>
+              </member>
+              <role>Owner</role>
+            </membership>
+            <membership>
+              <id type="integer">1257607</id>
+              <member>
+                <person>
+                  <id type="integer">455927</id>
+                  <name>Dave Mann</name>
+                  <initials>DM</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">1403921</id>
+              <member>
+                <person>
+                  <id type="integer">278807</id>
+                  <name>Ross Ferguson</name>
+                  <initials>RF</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">1550591</id>
+              <member>
+                <person>
+                  <id type="integer">456127</id>
+                  <name>James Stewart</name>
+                  <initials>JS</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">1617325</id>
+              <member>
+                <person>
+                  <id type="integer">459725</id>
+                  <name>James Weiner</name>
+                  <initials>JW</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">1640363</id>
+              <member>
+                <person>
+                  <id type="integer">459727</id>
+                  <name>David Heath</name>
+                  <initials>DGH</initials>
+                </person>
+              </member>
+              <role>Owner</role>
+            </membership>
+            <membership>
+              <id type="integer">1688145</id>
+              <member>
+                <person>
+                  <id type="integer">459733</id>
+                  <name>Dafydd Vaughan</name>
+                  <initials>DV</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">1707651</id>
+              <member>
+                <person>
+                  <id type="integer">594643</id>
+                  <name>Ben Terrett</name>
+                  <initials>BT</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">1751487</id>
+              <member>
+                <person>
+                  <id type="integer">602109</id>
+                  <name>Mark Sheldon</name>
+                  <initials>MS</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">1962783</id>
+              <member>
+                <person>
+                  <id type="integer">594645</id>
+                  <name>Mark Hurrell</name>
+                  <initials>MH</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">1962785</id>
+              <member>
+                <person>
+                  <id type="integer">648941</id>
+                  <name>Russell Thorn</name>
+                  <initials>RT</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2074447</id>
+              <member>
+                <person>
+                  <id type="integer">702213</id>
+                  <name>Edd Sowden</name>
+                  <initials>Edd</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2114983</id>
+              <member>
+                <person>
+                  <id type="integer">670453</id>
+                  <name>Bradley Wright</name>
+                  <initials>Brad</initials>
+                </person>
+              </member>
+              <role>Owner</role>
+            </membership>
+            <membership>
+              <id type="integer">2288739</id>
+              <member>
+                <person>
+                  <id type="integer">763547</id>
+                  <name>Stephen McCarthy</name>
+                  <initials>SM</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2322803</id>
+              <member>
+                <person>
+                  <id type="integer">670817</id>
+                  <name>James Thornett</name>
+                  <initials>JT</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2385799</id>
+              <member>
+                <person>
+                  <id type="integer">675735</id>
+                  <name>Ben Welby</name>
+                  <initials>BW</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2405867</id>
+              <member>
+                <person>
+                  <id type="integer">366627</id>
+                  <name>Chris Parsons</name>
+                  <initials>CP</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2459103</id>
+              <member>
+                <person>
+                  <id type="integer">542327</id>
+                  <name>Peter Jordan</name>
+                  <initials>PJ</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2468889</id>
+              <member>
+                <person>
+                  <id type="integer">816259</id>
+                  <name>Robin Carswell</name>
+                  <initials>RJC</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2522803</id>
+              <member>
+                <person>
+                  <id type="integer">796721</id>
+                  <name>Clare Moss</name>
+                  <initials>CM</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2525495</id>
+              <member>
+                <person>
+                  <id type="integer">604269</id>
+                  <name>Paul Downey</name>
+                  <initials>psd</initials>
+                </person>
+              </member>
+              <role>Owner</role>
+            </membership>
+            <membership>
+              <id type="integer">2603639</id>
+              <member>
+                <person>
+                  <id type="integer">575685</id>
+                  <name>Ashley Stephens</name>
+                  <initials>Ash</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2621271</id>
+              <member>
+                <person>
+                  <id type="integer">115382</id>
+                  <name>Murray Steele</name>
+                  <initials>MS</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2636809</id>
+              <member>
+                <person>
+                  <id type="integer">521489</id>
+                  <name>Ashraf Chohan</name>
+                  <initials>AC</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2720379</id>
+              <member>
+                <person>
+                  <id type="integer">583935</id>
+                  <name>Julian Milne</name>
+                  <initials>JM</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2738219</id>
+              <member>
+                <person>
+                  <id type="integer">798593</id>
+                  <name>Janet Hughes</name>
+                  <initials>JH</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2766895</id>
+              <member>
+                <person>
+                  <id type="integer">7918</id>
+                  <name>James Adam</name>
+                  <initials>JGA</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2766899</id>
+              <member>
+                <person>
+                  <id type="integer">137492</id>
+                  <name>Chris Roos</name>
+                  <initials>CR</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2766901</id>
+              <member>
+                <person>
+                  <id type="integer">56824</id>
+                  <name>James Mead</name>
+                  <initials>JEM</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2766903</id>
+              <member>
+                <person>
+                  <id type="integer">56825</id>
+                  <name>Tom Ward</name>
+                  <initials>Tom</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2792301</id>
+              <member>
+                <person>
+                  <id type="integer">431283</id>
+                  <name>Tekin Suleyman</name>
+                  <initials>Tekin</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2807883</id>
+              <member>
+                <person>
+                  <id type="integer">631089</id>
+                  <name>Alex Tomlins</name>
+                  <initials>AlexT</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2844343</id>
+              <member>
+                <person>
+                  <id type="integer">928277</id>
+                  <name>Angela Haber</name>
+                  <initials>AH</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2880009</id>
+              <member>
+                <person>
+                  <id type="integer">792001</id>
+                  <name>Liz Hitchcock</name>
+                  <initials>LH</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">2889245</id>
+              <member>
+                <person>
+                  <id type="integer">651065</id>
+                  <name>Graham Francis</name>
+                  <initials>GF</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">2932093</id>
+              <member>
+                <person>
+                  <id type="integer">705943</id>
+                  <name>Michael Nottingham</name>
+                  <initials>MN</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">3062507</id>
+              <member>
+                <person>
+                  <id type="integer">539667</id>
+                  <name>Neil Williams</name>
+                  <initials>NW</initials>
+                </person>
+              </member>
+              <role>Owner</role>
+            </membership>
+            <membership>
+              <id type="integer">3134377</id>
+              <member>
+                <person>
+                  <id type="integer">1015035</id>
+                  <name>Stephen Edwards</name>
+                  <initials>SE</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">3203667</id>
+              <member>
+                <person>
+                  <id type="integer">11178</id>
+                  <name>Graham Ashton</name>
+                  <initials>GMA</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">3239477</id>
+              <member>
+                <person>
+                  <id type="integer">908621</id>
+                  <name>Bob Walker</name>
+                  <initials>bob</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3248531</id>
+              <member>
+                <person>
+                  <id type="integer">825095</id>
+                  <name>Jake Benilov</name>
+                  <initials>JB</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3310239</id>
+              <member>
+                <person>
+                  <id type="integer">646197</id>
+                  <name>Alice Newton</name>
+                  <initials>AN</initials>
+                </person>
+              </member>
+              <role>Owner</role>
+            </membership>
+            <membership>
+              <id type="integer">3311533</id>
+              <member>
+                <person>
+                  <id type="integer">1069045</id>
+                  <name>Tim Abell</name>
+                  <initials>TA</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">3311539</id>
+              <member>
+                <person>
+                  <id type="integer">222931</id>
+                  <name>Ben Firshman</name>
+                  <initials>BF</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3311553</id>
+              <member>
+                <person>
+                  <id type="integer">1044515</id>
+                  <name>Elliot Hughes</name>
+                  <initials>EH</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">3371246</id>
+              <member>
+                <person>
+                  <id type="integer">1086674</id>
+                  <name>Stuart Cullum</name>
+                  <initials>SC</initials>
+                </person>
+              </member>
+              <role>Owner</role>
+            </membership>
+            <membership>
+              <id type="integer">3435664</id>
+              <member>
+                <person>
+                  <id type="integer">755341</id>
+                  <name>Will</name>
+                  <initials>Will</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3444354</id>
+              <member>
+                <person>
+                  <id type="integer">1104976</id>
+                  <name>Kiran Patel</name>
+                  <initials>KP</initials>
+                </person>
+              </member>
+              <role>Viewer</role>
+            </membership>
+            <membership>
+              <id type="integer">3456452</id>
+              <member>
+                <person>
+                  <id type="integer">1111110</id>
+                  <name>Elliot Crosby-McCullough</name>
+                  <initials>ECM</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3524830</id>
+              <member>
+                <person>
+                  <id type="integer">132279</id>
+                  <name>Dominic Baggott</name>
+                  <initials>DB</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3594072</id>
+              <member>
+                <person>
+                  <id type="integer">583927</id>
+                  <name>Simon Kaplan</name>
+                  <initials>SK</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3764976</id>
+              <member>
+                <person>
+                  <id type="integer">1199928</id>
+                  <name>John Turnbull</name>
+                  <initials>JohnT</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3852884</id>
+              <member>
+                <person>
+                  <id type="integer">1119624</id>
+                  <name>Richard Joseph</name>
+                  <initials>RJ</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+            <membership>
+              <id type="integer">3936892</id>
+              <member>
+                <person>
+                  <id type="integer">1030431</id>
+                  <name>Nic Devetak</name>
+                  <initials>ND</initials>
+                </person>
+              </member>
+              <role>Member</role>
+            </membership>
+          </memberships>
+          <integrations type="array">
+          </integrations>
+        </project>
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:03:52 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v4/projects/367813/stories/45939421
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Trackertoken:
+      - 4ef2eedd8f04ecf183f17de68be90a1a
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      Date:
+      - Thu, 19 Nov 2015 04:03:52 GMT
+      X-Request-Id:
+      - c4091615b6fede208f47f8762410f801
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"6ce7d306a82e7068dd6e6a42713ae3f3"'
+      X-Runtime:
+      - '0.083146'
+      X-Rack-Cache:
+      - miss
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJWQyYjc4NTQ3M2U3NjMyODdmNGE3NDEwZGRmM2NhZDAwBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNROscgM7lRQ8KOg1uYW5vX251bWkCSwE6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgczEDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwBGSSIQX2NzcmZfdG9rZW4GOwBGSSIxVExEM2xHT1ZDUlNXd0pSVlcrRDVSRFlEeUJMeFptWFZxaDNCZjdvbXlLMD0GOwBG--82aba6feed79780e4eb470431fa2ef46df264841;
+        path=/; secure; HttpOnly
+      X-Powered-By:
+      - Phusion Passenger Enterprise
+      Server:
+      - nginx + Phusion Passenger
+      X-Frame-Options:
+      - DENY
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:01 GMT
+      Cache-Control:
+      - no-store, private, no-cache
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<story>\n  <id type=\"integer\">45939421</id>\n
+        \ <project_id type=\"integer\">367813</project_id>\n  <story_type>feature</story_type>\n
+        \ <url>https://www.pivotaltracker.com/story/show/45939421</url>\n  <estimate
+        type=\"float\">5</estimate>\n  <current_state>accepted</current_state>\n  <description>As
+        a citizen\nI want to be able to sign up for email alerts from Inside Gov which
+        correspond to my exact interests\nSo I find out when things change that affect
+        my job\n\n--\n\n- Using JS's Python app and Govdelivery API, we need the ability
+        to set up govdelivery topics on the fly for any combination of the following
+        filter options from Inside Gov: \n-- content type\n-- topic\n-- org\n-- 'relevant
+        to local gov' flag\n\n- topcis created using the API need to be set to 'unlisted'
+        so they don't get offered to subscribers through the govdelivery subs interface\n\n-
+        other filter options can be put out of scope for now but will probably be
+        added later\n\n- Frontend interface is not part of this story, there's another
+        story for that. </description>\n  <name>Use govdelivery API for topic creation</name>\n
+        \ <requested_by>\n    <person>\n      <id type=\"integer\">539667</id>\n      <name>Neil
+        Williams</name>\n      <initials>NW</initials>\n    </person>\n  </requested_by>\n
+        \ <owned_by>\n    <person>\n      <id type=\"integer\">670453</id>\n      <name>Bradley
+        Wright</name>\n      <initials>Brad</initials>\n    </person>\n  </owned_by>\n
+        \ <created_at type=\"datetime\">2013/03/11 12:53:19 UTC</created_at>\n  <updated_at
+        type=\"datetime\">2013/05/13 15:10:24 UTC</updated_at>\n  <accepted_at type=\"datetime\">2013/04/04
+        08:41:02 UTC</accepted_at>\n  <labels>info4local</labels>\n  <comments type=\"array\">\n
+        \   <comment>\n      <id type=\"integer\">39247393</id>\n      <text>I've
+        started working on this in order to get the import working cleanly.</text>\n
+        \     <author>\n        <person>\n          <id type=\"integer\">670453</id>\n
+        \         <name>Bradley Wright</name>\n          <initials>Brad</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/03/18
+        22:42:26 UTC</created_at>\n    </comment>\n    <comment>\n      <id type=\"integer\">39758491</id>\n
+        \     <text>@brad: pushed my branch here: https://github.com/alphagov/whitehall/tree/info4local-publish-hook</text>\n
+        \     <author>\n        <person>\n          <id type=\"integer\">19663</id>\n
+        \         <name>Matthew Ford</name>\n          <initials>Matt</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/03/26
+        18:02:55 UTC</created_at>\n    </comment>\n    <comment>\n      <id type=\"integer\">40216195</id>\n
+        \     <text>Working on tidying up a couple things that David has pointed out.</text>\n
+        \     <author>\n        <person>\n          <id type=\"integer\">431283</id>\n
+        \         <name>Tekin Suleyman</name>\n          <initials>Tekin</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/04/03
+        13:44:09 UTC</created_at>\n    </comment>\n    <comment>\n      <id type=\"integer\">40283231</id>\n
+        \     <text>Behold: https://admin.govdelivery.com/topics?evo_pwurl=&amp;evo_tc=&amp;evo_tcat=All+Categories&amp;evo_tn=Inside+Gov&amp;evo_tv=2&amp;sortdesc=topicsort-subscribers_count</text>\n
+        \     <author>\n        <person>\n          <id type=\"integer\">670453</id>\n
+        \         <name>Bradley Wright</name>\n          <initials>Brad</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/04/04
+        08:31:57 UTC</created_at>\n    </comment>\n    <comment>\n      <id type=\"integer\">40283573</id>\n
+        \     <text>That's awesome. Titles need to be English, I'll add a separate
+        story for that</text>\n      <author>\n        <person>\n          <id type=\"integer\">539667</id>\n
+        \         <name>Neil Williams</name>\n          <initials>NW</initials>\n
+        \       </person>\n      </author>\n      <created_at type=\"datetime\">2013/04/04
+        08:40:56 UTC</created_at>\n    </comment>\n  </comments>\n</story>\n"
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:03:52 GMT
+- request:
+    method: get
+    uri: https://www.pivotaltracker.com/services/v4/projects/367813/stories/45939421/comments
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Trackertoken:
+      - 4ef2eedd8f04ecf183f17de68be90a1a
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      Date:
+      - Thu, 19 Nov 2015 04:03:52 GMT
+      X-Request-Id:
+      - 20cb5794324faf27656124f0980a6531
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - '"b739053edc40f845a89d7e1404ffee94"'
+      X-Runtime:
+      - '0.076444'
+      X-Rack-Cache:
+      - miss
+      Set-Cookie:
+      - t_session=BAh7CEkiD3Nlc3Npb25faWQGOgZFVEkiJTNhOTZjNGUyZTJiZmJhNmM0Yjc1YjZmYTI0NWQ5NGMyBjsAVEkiD2V4cGlyZXNfYXQGOwBGSXU6CVRpbWUNROscgPUASg8KOg1uYW5vX251bWl0Og1uYW5vX2RlbmkGOg1zdWJtaWNybyIHERA6C29mZnNldGkAOgl6b25lSSIIVVRDBjsARkkiEF9jc3JmX3Rva2VuBjsARkkiMTVoM0hBOXhZTXdOUUNWbytLb25qRzZrbmpTZndMUjVtbmdyazlCVXp3eWM9BjsARg%3D%3D--8495e7748affcda1e503d5dfc28dcc7363f7c833;
+        path=/; secure; HttpOnly
+      X-Powered-By:
+      - Phusion Passenger Enterprise
+      Server:
+      - nginx + Phusion Passenger
+      X-Frame-Options:
+      - DENY
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:01 GMT
+      Cache-Control:
+      - no-store, private, no-cache
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <comments type="array">
+          <comment>
+            <id type="integer">39247393</id>
+            <text>I've started working on this in order to get the import working cleanly.</text>
+            <author>
+              <person>
+                <id type="integer">670453</id>
+                <name>Bradley Wright</name>
+                <initials>Brad</initials>
+              </person>
+            </author>
+            <created_at type="datetime">2013/03/18 22:42:26 UTC</created_at>
+          </comment>
+          <comment>
+            <id type="integer">39758491</id>
+            <text>@brad: pushed my branch here: https://github.com/alphagov/whitehall/tree/info4local-publish-hook</text>
+            <author>
+              <person>
+                <id type="integer">19663</id>
+                <name>Matthew Ford</name>
+                <initials>Matt</initials>
+              </person>
+            </author>
+            <created_at type="datetime">2013/03/26 18:02:55 UTC</created_at>
+          </comment>
+          <comment>
+            <id type="integer">40216195</id>
+            <text>Working on tidying up a couple things that David has pointed out.</text>
+            <author>
+              <person>
+                <id type="integer">431283</id>
+                <name>Tekin Suleyman</name>
+                <initials>Tekin</initials>
+              </person>
+            </author>
+            <created_at type="datetime">2013/04/03 13:44:09 UTC</created_at>
+          </comment>
+          <comment>
+            <id type="integer">40283231</id>
+            <text>Behold: https://admin.govdelivery.com/topics?evo_pwurl=&amp;evo_tc=&amp;evo_tcat=All+Categories&amp;evo_tn=Inside+Gov&amp;evo_tv=2&amp;sortdesc=topicsort-subscribers_count</text>
+            <author>
+              <person>
+                <id type="integer">670453</id>
+                <name>Bradley Wright</name>
+                <initials>Brad</initials>
+              </person>
+            </author>
+            <created_at type="datetime">2013/04/04 08:31:57 UTC</created_at>
+          </comment>
+          <comment>
+            <id type="integer">40283573</id>
+            <text>That's awesome. Titles need to be English, I'll add a separate story for that</text>
+            <author>
+              <person>
+                <id type="integer">539667</id>
+                <name>Neil Williams</name>
+                <initials>NW</initials>
+              </person>
+            </author>
+            <created_at type="datetime">2013/04/04 08:40:56 UTC</created_at>
+          </comment>
+        </comments>
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:03:52 GMT
+recorded_with: VCR 2.9.3

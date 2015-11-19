@@ -1,0 +1,558 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://dev.clojure.org/jira/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 302
+      message: Moved Temporarily
+    headers:
+      Date:
+      - Thu, 19 Nov 2015 04:06:07 GMT
+      X-Arequestid:
+      - 1326x41720x1
+      Set-Cookie:
+      - JSESSIONID=D1C2DDFD35010B5CB4C19B4DACB2A057; Path=/jira
+      - atlassian.xsrf.token=BTMM-1VOF-2I2F-TOTY|68352a348526e2d6cd04a81664e8a64b6746d0d7|lout;
+        Path=/jira
+      X-Seraph-Loginreason:
+      - OUT
+      X-Ausername:
+      - anonymous
+      X-Asessionid:
+      - 1xc2new
+      Location:
+      - http://dev.clojure.org/jira/secure/Dashboard.jspa
+      Content-Type:
+      - text/html;charset=UTF-8
+      Content-Length:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:06:07 GMT
+- request:
+    method: get
+    uri: http://dev.clojure.org/jira/secure/Dashboard.jspa
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+      Cookie:
+      - JSESSIONID=D1C2DDFD35010B5CB4C19B4DACB2A057; atlassian.xsrf.token=BTMM-1VOF-2I2F-TOTY|68352a348526e2d6cd04a81664e8a64b6746d0d7|lout
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Nov 2015 04:06:07 GMT
+      X-Arequestid:
+      - 1326x41721x1
+      X-Asessionid:
+      - 1xc2new
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Seraph-Loginreason:
+      - OUT
+      X-Ausername:
+      - anonymous
+      Content-Type:
+      - text/html;charset=UTF-8
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "\n\n\n\n<!DOCTYPE html>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<html>\n<head>\n
+        \   <title>System Dashboard - Clojure JIRA </title>\n\n    <meta name=\"decorator\"
+        content=\"atl.general\">\n    <meta http-equiv=\"Content-Type\" content=\"text/html;
+        charset=UTF-8\" />\n    <meta http-equiv=\"Pragma\" content=\"no-cache\" />\n
+        \   <meta http-equiv=\"Expires\" content=\"-1\" />\n    \n\n    \n<meta id=\"atlassian-token\"
+        name=\"atlassian-token\" content=\"BTMM-1VOF-2I2F-TOTY|68352a348526e2d6cd04a81664e8a64b6746d0d7|lout\">\n\n\n
+        \   <link rel=\"shortcut icon\" href=\"/jira/s/en_US9yuwnb/649/7/_/favicon.ico\">\n
+        \   <link rel=\"icon\" type=\"image/png\" href=\"/jira/s/en_US9yuwnb/649/7/_/images/icons/favicon.png\">\n\n
+        \   \n    <script type=\"text/javascript\">var contextPath = '/jira';</script>\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css\"
+        media=\"all\">\n<!--[if lt IE 9]>\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9\"
+        media=\"all\">\n<![endif]-->\n<!--[if IE 9]>\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=IE+9\"
+        media=\"all\">\n<![endif]-->\n<!--[if lte IE 9]>\n<link type=\"text/css\"
+        rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9\"
+        media=\"all\">\n<![endif]-->\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.dashboard:dashboard/com.atlassian.gadgets.dashboard:dashboard.css\"
+        media=\"all\">\n<!--[if IE]>\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.dashboard:dashboard/com.atlassian.gadgets.dashboard:dashboard.css?ieonly=true\"
+        media=\"all\">\n<![endif]-->\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.dashboard:gadget-dashboard-resources/com.atlassian.gadgets.dashboard:gadget-dashboard-resources.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0.6/_/download/batch/com.atlassian.plugin.atlassian-feedback-plugin:feedback/com.atlassian.plugin.atlassian-feedback-plugin:feedback.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:global-static/jira.webresources:global-static.css\"
+        media=\"all\">\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/jira/s/en_US9yuwnb/649/7/1.0/_/download/batch/jira.webresources:global-static/jira.webresources:global-static.css?media=print\"
+        media=\"print\">\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1/_/download/superbatch/js/batch.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.dashboard:dashboard/com.atlassian.gadgets.dashboard:dashboard.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.embedded:gadget-core-resources/com.atlassian.gadgets.embedded:gadget-core-resources.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.embedded:gadget-container-resources/com.atlassian.gadgets.embedded:gadget-container-resources.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/3.1.7/_/download/batch/com.atlassian.gadgets.dashboard:gadget-dashboard-resources/com.atlassian.gadgets.dashboard:gadget-dashboard-resources.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/5.7/_/download/batch/com.pyxis.greenhopper.jira:gh-globalkeyboardshortcuts/com.pyxis.greenhopper.jira:gh-globalkeyboardshortcuts.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/1.0.6/_/download/batch/com.atlassian.plugin.atlassian-feedback-plugin:feedback/com.atlassian.plugin.atlassian-feedback-plugin:feedback.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-soy-plugin:soy-deps/com.atlassian.jira.jira-soy-plugin:soy-deps.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"/jira/s/en_US9yuwnb/649/7/4.4/_/download/batch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch/com.atlassian.jira.jira-admin-quicknav-plugin:admin-quicksearch.js\"
+        ></script>\n\n    \n        <script type=\"text/javascript\" src=\"/jira/rest/api/1.0/shortcuts/649/3ecb86259f9e1f12acf9a8b0846e962e/shortcuts.js\"></script>\n
+        \   \n    <link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        href=\"/jira/osd.jsp\" title=\"Clojure JIRA\"/>\n</head>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<body
+        id=\"jira\" class=\"nl \">\n\n\n\n\n\n\n\n\n\n\n<div id=\"header\">\n    <div
+        id=\"header-top\">\n        <a id=\"logo\" href=\"/jira/secure/Dashboard.jspa\">\n
+        \                       <img class=\"logo\" src=\"/jira/s/en_US9yuwnb/649/7/_/jira-logo-scaled.png\"
+        width=\"48\" height=\"47\" border=\"0\" alt=\"Clojure JIRA\" />\n                    </a>\n
+        \               <form id=\"quicksearch\" action=\"/jira/secure/QuickSearch.jspa\"
+        method=\"post\" class=\"dont-default-focus\">\n            <div>\n                <label
+        for=\"quickSearchInput\" title=\"Go directly to an issue by typing a valid
+        issue key, or run a free-text search.\" class=\"overlabel\">Quick Search</label>\n
+        \               <input id=\"quickSearchInput\" class=\"quickSearchInput\"
+        type=\"text\" size=\"25\" title=\"Go directly to an issue by typing a valid
+        issue key, or run a free-text search.\" name=\"searchString\" accessKey=\"q\"
+        />\n                <input type=\"submit\" class=\"hidden\" name=\"quicksearch\"/>\n
+        \           </div>\n        </form>\n                        \n        <div
+        id=\"header-details-user\" class=\"aui-dd-parent header-link-container\">\n
+        \        <a class=\"lnk\" rel=\"nofollow\" href=\"/jira/login.jsp?os_destination=%2Fsecure%2FDashboard.jspa\">Log
+        In</a>\n        <span class=\"drop-wrap\">\n        <a class=\"drop aui-dd-link\"\n
+        \                       href=\"#\"><span>Access more options</span>\n        </a>\n
+        \   </span>\n    <div id=\"user-options-list\" class=\"aui-list hidden\">\n
+        \                                                               <ul id=\"jira-help\"
+        class=\"aui-list-section  aui-first     aui-last  \">\n                                            <li
+        class=\"aui-list-item\"><a  id=\"view_help\"   class=\"aui-list-item-link
+        \"  title=\"Goto the online documentation for JIRA\" href=\"http://docs.atlassian.com/jira/docs-044/JIRA+Documentation\">Online
+        Help</a></li>\n                                            <li class=\"aui-list-item\"><a
+        \ id=\"keyshortscuthelp\"   class=\"aui-list-item-link \"  title=\"Get more
+        information about JIRA's Keyboard Shortcuts\" href=\"/jira/secure/ViewKeyboardShortcuts!default.jspa\">Keyboard
+        Shortcuts</a></li>\n                                            <li class=\"aui-list-item\"><a
+        \ id=\"view_about\"   class=\"aui-list-item-link \"  title=\"Get more information
+        about JIRA\" href=\"http://www.atlassian.com/software/jira\">About JIRA</a></li>\n
+        \                                           <li class=\"aui-list-item\"><a
+        \ id=\"view_credits\"   class=\"aui-list-item-link \"  title=\"See who did
+        what\" href=\"/jira/secure/JiraCreditsPage!default.jspa\">JIRA Credits</a></li>\n
+        \                                   </ul>\n                        </div>\n</div>\n\n
+        \       \n    </div>\n    <div id=\"header-bottom\">\n                <div
+        id=\"menu\">\n            \n                                    \n            \n<ul
+        id=\"main-nav\" class=\"menu-bar standard-menu-bar\">\n                        <li
+        class=\"aui-dd-parent lazy  selected  \">\n                    <a class=\"lnk\"\n
+        \               href=\"/jira/secure/Dashboard.jspa\"\n                 id=\"home_link\"
+        \                accessKey=\"h\"                 title=\"View your current
+        Dashboard\"                >Dashboards</a>\n\n                    <span class=\"drop-wrap\">\n
+        \           <a class=\"drop aui-dd-link\"\n                                    id=\"home_link_drop\"\n
+        \                   rel=\"home_link\"\n                    accessKey=\"d\"\n
+        \                   title=\"Access more options (Ctrl+Alt+d)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+d)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent lazy  \">\n                    <a class=\"lnk\"\n                href=\"/jira/secure/BrowseProjects.jspa\"\n
+        \                id=\"browse_link\"                 accessKey=\"b\"                 title=\"Browse
+        the projects you have permissions to view\"                >Projects</a>\n\n
+        \                   <span class=\"drop-wrap\">\n            <a class=\"drop
+        aui-dd-link\"\n                                    id=\"browse_link_drop\"\n
+        \                   rel=\"browse_link\"\n                    accessKey=\"p\"\n
+        \                   title=\"Access more options (Ctrl+Alt+p)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+p)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent lazy  \">\n                    <a class=\"lnk\"\n                href=\"/jira/secure/IssueNavigator.jspa\"\n
+        \                id=\"find_link\"                 accessKey=\"f\"                 title=\"View
+        your current filter\"                >Issues</a>\n\n                    <span
+        class=\"drop-wrap\">\n            <a class=\"drop aui-dd-link\"\n                                    id=\"find_link_drop\"\n
+        \                   rel=\"find_link\"\n                    accessKey=\"i\"\n
+        \                   title=\"Access more options (Ctrl+Alt+i)\"\n                                href=\"#\"><span>Access
+        more options (Ctrl+Alt+i)</span></a></span>\n                </li>\n                        <li
+        class=\"aui-dd-parent nonlazy  \">\n                    <a class=\"lnk\"\n
+        \               href=\"/jira/secure/GreenHopper.jspa\"\n                 id=\"greenhopper_menu\"
+        \                                title=\"Manage your project with GreenHopper\"
+        \               >Agile</a>\n\n                                                                                                            <span
+        class=\"drop-wrap\">\n                            <a class=\"drop aui-dd-link\"\n
+        \                                                                   id=\"greenhopper_menu_drop\"\n
+        \                                   accessKey=\"g\"\n                                    rel=\"greenhopper_menu\"\n
+        \                                   title=\"Access more options (Ctrl+Alt+g)\"\n
+        \                                                               href=\"#\"><span>Access
+        more options</span></a></span>\n                            <div class=\"aui-list
+        hidden\">\n                                                \n                            <ul
+        id=\"greenhopper_menu_dropdown\" class=\"aui-list-section aui-first   aui-last
+        \ \">\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"planningboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/VersionBoard.jspa\">Planning
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"taskboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/TaskBoard.jspa\">Task
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"chartboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/ChartBoard.jspa\">Chart
+        Board</a></li>\n                                                                    <li
+        class=\"aui-list-item\"><a\n                                         id=\"releasedboard-mlink\"
+        \                                        class=\"aui-list-item-link   \"\n
+        \                                                                                                                       href=\"/jira/secure/ArchiveChartBoard.jspa\">Released
+        Board</a></li>\n                                                            </ul>\n
+        \                                                   </div>\n                            </li>\n
+        \   </ul>\n\n            \n                    </div>\n    </div>\n</div>\n\n\n\n\n\n\n\n\n\n\n<fieldset
+        class=\"hidden parameters\">\n    <input type=\"hidden\" title=\"ajaxTimeout\"
+        value=\"The call to the JIRA server did not complete within the timeout period.
+        \ We are unsure of the result of this operation.\">\n    <input type=\"hidden\"
+        title=\"ajaxUnauthorised\" value=\"You are not authorized to perform this
+        operation.  Please try to <a href='/jira/login.jsp?os_destination=%2Fsecure%2FDashboard.jspa'>log
+        in</a> or <a href='/jira/secure/Signup!default.jspa'>sign up</a> for an account.\">\n
+        \   <input type=\"hidden\" title=\"ajaxUnauthorisedAlert\" value=\"You are
+        not authorized to perform this operation.  Please log in.\">\n    <input type=\"hidden\"
+        title=\"baseURL\" value=\"http://dev.clojure.org:80/jira\">\n    <input type=\"hidden\"
+        title=\"ajaxCommsError\" value=\"The JIRA server could not be contacted.  This
+        may be a temporary glitch or the server may be down.\">\n    <input type=\"hidden\"
+        title=\"ajaxServerError\" value=\"The JIRA server was contacted but has returned
+        an error response. We are unsure of the result of this operation.\">\n    <input
+        type=\"hidden\" title=\"ajaxErrorCloseDialog\" value=\"Close this dialog and
+        press refresh in your browser\">\n    <input type=\"hidden\" title=\"ajaxErrorDialogHeading\"
+        value=\"Communications Breakdown\">\n\n    <input type=\"hidden\" title=\"dirtyMessage\"
+        value=\"You have entered new data on this page. If you navigate away from
+        this page without first saving your data, the changes will be lost.\">\n    <input
+        type=\"hidden\" title=\"dirtyDialogMessage\" value=\"You have entered new
+        data in this dialog. If you navigate away from this dialog without first saving
+        your data, the changes will be lost. Click cancel to return to the dialog.\">\n
+        \   <input type=\"hidden\" title=\"keyType\" value=\"Type\">\n    <input type=\"hidden\"
+        title=\"keyThen\" value=\"then\">\n    <input type=\"hidden\" title=\"dblClickToExpand\"
+        value=\"Double click to expand\">\n    <input type=\"hidden\" title=\"actions\"
+        value=\"Actions\">\n    <input type=\"hidden\" title=\"removeItem\" value=\"Remove\">\n
+        \   <input type=\"hidden\" title=\"workflow\" value=\"Workflow\">\n    <input
+        type=\"hidden\" title=\"labelNew\" value=\"New Label\">\n    <input type=\"hidden\"
+        title=\"enterIssueKey\" value=\"Enter issue key\">\n    <input type=\"hidden\"
+        title=\"issueActionsHint\" value=\"Begin typing for available operations or
+        press down to see all\">\n    <input type=\"hidden\" title=\"closelink\" value=\"Close\">\n
+        \   <input type=\"hidden\" title=\"dotOperations\" value=\"Operations\">\n
+        \   <input type=\"hidden\" title=\"dotLoading\" value=\"Loading...\">\n    <input
+        type=\"hidden\" title=\"frotherSuggestions\" value=\"Suggestions\">\n    <input
+        type=\"hidden\" title=\"frotherNomatches\" value=\"No Matches\">\n    <input
+        type=\"hidden\" title=\"multiselectVersionsError\" value=\"{0} is not a valid
+        version.\">\n    <input type=\"hidden\" title=\"multiselectComponentsError\"
+        value=\"{0} is not a valid component.\">\n    <input type=\"hidden\" title=\"multiselectGenericError\"
+        value=\"The value {0} is invalid.\">\n</fieldset>\n\n\n\n\n\n\n\n<script type=\"text/javascript\">\n
+        \           AJS.$(document).ready(function() {\n                AJS.warnAboutFirebug(AJS.params.firebugWarning);\n\n
+        \               if(AJS.params.showWhitelistUpgradeWarning) {\n                   var
+        message = AJS.format(AJS.params.whitelistUpgradeText, '<a href=\"' + contextPath
+        + '/secure/admin/ConfigureWhitelist!default.jspa?showUpgrade=true\">', '</a>');\n
+        \                   var $warning = AJS.$(\"<div id='applinks-upgrade-warning'
+        class='global-warning'><p>\" + message + \"</p></div>\");\n                        $warning.prependTo(AJS.$(\"body\"));\n
+        \                   }\n            });\n        </script>\n        <fieldset
+        class=\"hidden parameters\">\n            <input type=\"hidden\" id=\"firebugWarning\"
+        value=\"G'day mate! Firebug is known to cause performance problems with the
+        JIRA dashboard. Try <a href='http://confluence.atlassian.com/x/xI72Cw'>disabling</a>
+        it, if things are a bit slow.\">\n            \n        </fieldset>\n        \n
+        \       <div class=\"dashboard-contents\">\n            \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<script
+        type=\"text/javascript\" charset=\"utf-8\">\n        AG.DashboardManager.setup({\n
+        \           params: {\n                \"pipeDelimitedHelp\" : \"(pipe-delimited)\",\n
+        \               \"editLayout\" : \"Choose dashboard layout\",\n                \"move\"
+        : \"move\",\n                \"layoutAction\" : \"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/layout\",\n
+        \               \"staticResourceUrlPrefix\" : \"$js.escape($staticResourceUrlPrefix)\",\n
+        \               \"blankSearchText\" : \"Search\",\n                \"previewButtonLabel\"
+        : \"Name\",\n                \"nextButtonLabel\" : \"Next\",\n                \"backButtonLabel\"
+        : \"Back\",\n                \"finishButtonLabel\" : \"Finished\",\n                \"insertButtonLabel\"
+        : \"Insert\",\n                \"addByUrlButtonLabel\" : \"Add Gadget to Directory\",\n
+        \               \"addGadgetFeedSubscriptionButtonLabel\" : \"Add Subscription\",\n
+        \               \"subscribedGadgetFeedsButtonLabel\" : \"Gadget Subscriptions
+        \",\n                \"gadgetFeedSubscriptions\" : \"Gadget Subscriptions\",\n
+        \               \"defaultErrorMessage\" : \"Please wait while the Gadget Directory
+        initializes.\",\n                \"dashboardErrorDashboardPermissions\" :
+        \"Sorry, you do not have permission to modify this Dashboard.  Your dashboard
+        may be out of sync with the server: please reload the page.\",\n                \"dashboardErrorDirectoryPermissions\"
+        : \"Sorry, you do not have permission to modify the gadget directory.\",\n
+        \               \"dashboardErrorFailedToAddGadget\" : \"Sorry, we were not
+        able to add that gadget to the directory.\",\n                \"dashboardErrorFailedToAddGadgetSubscription\"
+        : \"Sorry, we were not able to add that application\\'s gadgets to the directory.\",\n
+        \               \"dashboardErrorFailedToGetGadgetSubscriptions\" : \"Sorry,
+        we were not able to get the list of gadget subscriptions.\",\n                \"dashboardErrorLoadingFeed\"
+        : \"Unknown error loading feed from {0}.\",\n                \"dashboardErrorFailedToRemoveGadgetSubscription\"
+        : \"Sorry, we were not able to remove that gadget subscription.\",\n                \"directoryGadgetFeedSubscriptionExplanation\"
+        : \"JIRA currently subscribes to gadgets from the following applications.
+        Gadgets published by these applications will appear in JIRA\\'s gadget directory
+        for people to use.\",\n                \"directoryGadgetFeedSubscriptionEmptyExplanation\"
+        : \"JIRA does not currently subscribe to gadgets from any applications.\",\n
+        \               \"confirmRemoveSubscriptionToGadgetFeed\" : \"If you unsubscribe
+        from this gadget feed any gadgets that it contains will no longer be available
+        to users.  In addition, any instances of gadgets that come from this subscription
+        and are on existing dashboards will no longer work.\\n\\nAre you sure you
+        want to unsubscribe from this gadget feed?  \",\n                \"gadgetAddedSuccess\"
+        : \"The gadget was added to your directory.\",\n                \"descriptionNotAvailable\"
+        : \"Description not available\",\n                \"authorUnknown\" : \"Author
+        unknown\",\n                \"gadgetAuthor\" : \"By {0}\",\n                \"urlNotAvailable\"
+        : \"URL not available\",\n                \"addGadgetByUrl\" : \"Add Gadget
+        to Directory\",\n                \"addGadgetFeedSubscription\" : \"Add Subscription\",\n
+        \               \"failedToLoadError\" : \"The Gadget Directory failed to load.\",\n
+        \               \"preferences\" : \"Preferences\",\n                \"all\"
+        : \"All\",\n                \"edit\" : \"Edit\",\n                \"remove\"
+        : \"Delete\",\n                \"removing\" : \"Removing...\",\n                \"adding\"
+        : \"Adding...\",\n                \"addItNow\" : \"Add it Now\",\n                \"gadgetDirectory\"
+        : \"Gadget Directory\",\n                \"changeColumns\" : \"Edit Layout\",\n
+        \               \"dragHere\" : \"Drag your gadgets here or {0}add a new gadget.{1}\",\n
+        \               \"areYouSure\" : \"Are you sure you want to permanently remove
+        the\",\n                \"gadget\" : \"gadget?\",\n                \"add\"
+        : \"Add\",\n                \"save\" : \"Save\",\n                \"cancel\"
+        : \"Cancel\",\n                \"maximize\" : \"Maximize\",\n                \"unmaximize\"
+        : \"Unmaximize\",\n                \"gadgetRemovedSuccess\" : \"The gadget
+        was removed from your directory.\",\n                \"dashboardErrorFailedToInsertGadget\"
+        : \"Sorry, we weren\\'t able to update your Dashboard. Your dashboard may
+        be out of sync with the server: please reload the page.\",\n                \"dashboardErrorTooManyGadgets\"
+        : \"Sorry, you have exceeded the maximum number of gadgets supported by your
+        Dashboard.  You must remove some gadgets before proceeding.\",\n                \"dashboardErrorCouldNotSave\"
+        : \"Sorry, your changes to this Dashboard could not be saved. Your dashboard
+        may be out of sync with the server: please reload the page.\",\n                \"removeGadget\"
+        : \"Are you sure you want to remove this Gadget from the directory? Doing
+        so will also remove it from all users\\' Dashboards.\",\n                \"removeFromDirectory\"
+        : \"Remove\",\n                \"close\" : \"Close\",\n                \"expand\"
+        : \"Expand\",\n                \"minimize\" : \"Minimize\",\n                \"removeFromList\"
+        : \"Remove from list.\",\n                \"dragYourGadgetHere\" : \"Drag
+        your gadget here.\",\n                \"canAddExternalGadgetsToDirectory\"
+        : \"false\",\n                \"writable\" : false,\n                \"maxGadgets\"
+        : \"20\",\n                \"dashboardUrl\" : \"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\",\n
+        \               \"dashboardDirectoryResourceUrl\" : \"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/config\\/1.0\\/directory\",\n
+        \               \"dashboardSubscribedGadgetFeedsUrl\" : \"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/config\\/1.0\\/directory\\/subscribed-gadget-feeds\",\n
+        \               \"dashboardResourceUrl\" : \"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\",\n
+        \               \"dashboardDirectoryUrl\" : \"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/\\/directory\\/10000\",\n
+        \               \"dashboardDirectoryBaseUrl\" : \"http:\\/\\/dev.clojure.org\\/jira\\/\",\n
+        \               \"dashboardDiagnosticsUrl\" : \"\\/jira\\/plugins\\/servlet\\/gadgets\\/dashboard-diagnostics\",\n
+        \               \"color1\" : \"Color 1\",\n                \"color2\" : \"Color
+        2\",\n                \"color3\" : \"Color 3\",\n                \"color4\"
+        : \"Color 4\",\n                \"color5\" : \"Color 5\",\n                \"color6\"
+        : \"Color 6\",\n                \"color7\" : \"Color 7\",\n                \"color8\"
+        : \"Color 8\",\n                \"errorGadgetUrl\" : \"\\/jira\\/s\\/en_US9yuwnb\\/649\\/7\\/3.1.7\\/_\\/download\\/resources\\/com.atlassian.gadgets.dashboard:error-gadget\\/errorGadget.html\",\n
+        \               \"errorGadgetTitle\" : \"Gadget Error\",\n                \"errorGadgetMessage\"
+        : \"Error loading gadget: {0}\",\n                \"restoreFromCanvasMode\"
+        : \"Restore\",\n                \"helpLinkLearnMoreAboutGadgets\" : \"Learn
+        more about gadgets\",\n                \"helpLinkCreateYourOwnGadget\" : \"Create
+        your own gadget\",\n                \"helpLinkLearnMoreAboutGadgetsUrl\" :
+        \"http:\\/\\/docs.atlassian.com\\/atlassian-gadgets\\/docs-030\\/Gadgets+and+Dashboards+User+Guide\",\n
+        \               \"helpLinkPluginHintGadgets\" : \"Get more gadgets\",\n                \"helpLinkPluginHintGadgetsUrl\"
+        : \"http:\\/\\/www.atlassian.com\\/jira-gadget-plugins\",\n                \"showMarketingPluginHints\"
+        : true,\n                \"helpLinkCreateYourOwnGadgetUrl\" : \"http:\\/\\/docs.atlassian.com\\/atlassian-gadgets\\/docs-030\\/Gadgets+and+Dashboards+Development+Hub\",\n
+        \               \"addGadget\" : \"Add Gadget\",\n                \"subscribedFeedDescription\"
+        : \"Gadget specs published by {0}\",\n                \"unsubscribeFromFeed\"
+        : \"Unsubscribe\",\n                \"securityTokensUrl\" : \"http:\\/\\/dev.clojure.org\\/jira\\/plugins\\/servlet\\/gadgets\\/security-tokens\"\n
+        \           },\n            menu: {items: [\n                                                                {\n
+        \                   styleClass: \"hidden\",\n                    link: {\n
+        \                       id: \"disabled-menu-link\",\n                        styleClass:
+        \"lnk icon-restore minimize\",\n                        href: \"#\",\n                        text:
+        \"Restore\"\n                    }\n                }\n            ]},\n            layouts:
+        [\n                                                                                                                                        {\"id\":\"10000\",\"title\":\"System
+        Dashboard\",\"gadgets\":[{\"userPrefs\":{\"action\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10000\\/prefs\",\"fields\":[]},\"gadgetSpecUrl\":\"rest\\/gadgets\\/1.0\\/g\\/com.atlassian.jira.gadgets:introduction-gadget\\/gadgets\\/introduction-gadget.xml\",\"isMaximizable\":false,\"id\":\"10000\",\"loaded\":true,\"title\":\"Introduction\",\"height\":100,\"colorUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10000\\/color\",\"color\":\"color1\",\"gadgetUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10000\",\"column\":0,\"renderedGadgetUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/plugins\\/servlet\\/gadgets\\/ifr?container=atlassian&mid=10000&country=US&lang=en&view=default&view-params=%7B%22writable%22%3A%22false%22%7D&st=atlassian%3AWQeK3Mmkvsma4BH9T%2B9oichdqUdRYsIKyfkPE14DfEPvFyKEzopjNAvCLQtHQPmUC984oOsKrDsLCVaKsDBR%2F5zvcXqAdwDjc64iPcMW%2FFKmvpFzJgjaMHQJhxID4jWFguLl4uwazIRMladsE2f810Knumy1ZoS7ldx4DT4QUodFBKm6E%2BlFx%2B%2BnrL2AcWYOmhKrg%2BQAxfWbK3FVjqI5CzHho6IpbXzKehqDDowHk0Reu4OqbDiEI8DQdhzbQsQsfP4ygmP9s6wQ4mn5tdoLTPLyXhM%3D&url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.jira.gadgets%3Aintroduction-gadget%2Fgadgets%2Fintroduction-gadget.xml&libs=auth-refresh\",\"hasNonHiddenUserPrefs\":false},{\"userPrefs\":{\"action\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10001\\/prefs\",\"fields\":[{\"name\":\"isConfigured\",\"value\":\"true\",\"required\":false,\"displayName\":\"isConfigured\",\"type\":\"hidden\"},{\"name\":\"isReallyConfigured\",\"value\":\"true\",\"required\":false,\"displayName\":\"isReallyConfigured\",\"type\":\"hidden\"},{\"name\":\"title\",\"value\":\"Clojure
+        JIRA\",\"required\":false,\"displayName\":\"title\",\"type\":\"hidden\"},{\"name\":\"titleRequired\",\"value\":\"true\",\"required\":false,\"displayName\":\"titleRequired\",\"type\":\"hidden\"},{\"name\":\"numofentries\",\"value\":\"5\",\"required\":false,\"displayName\":\"numofentries\",\"type\":\"hidden\"},{\"name\":\"refresh\",\"value\":\"false\",\"required\":false,\"displayName\":\"refresh\",\"type\":\"hidden\"},{\"name\":\"rules\",\"value\":\"%7B%22providers%22%3A%5B%7B%22provider%22%3A%22streams%22%2C%22rules%22%3A%5B%5D%7D%5D%7D\",\"required\":false,\"displayName\":\"rules\",\"type\":\"hidden\"},{\"name\":\"renderingContext\",\"value\":\"\",\"required\":false,\"displayName\":\"renderingContext\",\"type\":\"hidden\"},{\"name\":\"keys\",\"value\":\"\",\"required\":false,\"displayName\":\"keys\",\"type\":\"hidden\"},{\"name\":\"itemKeys\",\"value\":\"\",\"required\":false,\"displayName\":\"itemKeys\",\"type\":\"hidden\"},{\"name\":\"username\",\"value\":\"\",\"required\":false,\"displayName\":\"username\",\"type\":\"hidden\"}]},\"gadgetSpecUrl\":\"rest\\/gadgets\\/1.0\\/g\\/com.atlassian.streams.streams-jira-plugin:activitystream-gadget\\/gadgets\\/activitystream-gadget.xml\",\"isMaximizable\":true,\"id\":\"10001\",\"loaded\":true,\"title\":\"Activity
+        Stream\",\"height\":100,\"colorUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10001\\/color\",\"color\":\"color1\",\"gadgetUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/10001\",\"column\":0,\"renderedGadgetUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/plugins\\/servlet\\/gadgets\\/ifr?container=atlassian&mid=10001&country=US&lang=en&view=default&view-params=%7B%22writable%22%3A%22false%22%7D&st=atlassian%3AJVZIkeVYGgXYEeMZLmNXnnJhHiA%2BIZy4UNy1e3C2YN5AibhCIAOS9RMIKe7IXdUe2PK1wm%2Bx4lHMeFCjGSzqsm%2BsDqHT31u0iX4YIx1KIk8JKQ7k3gDuCdHiRCyx0W0SA4q3wKD62VQYQjcyp%2FH9yIXIXMwHmvJjJvTfU9ClM7qB3ixnFloNvyUK1gX5MTFYz3%2FpTURxjnyyfkYOZ6G%2FoxkNEnCF7OM6p083Js0EXUn%2FLRh72YshQgzCorDET%2BPrGPUS%2Fpx1nLuRzwnjaUaaGY5IKEyp9bqBIbcQo3mFqygj6yGa&up_isConfigured=true&up_isReallyConfigured=true&up_title=Clojure+JIRA&up_titleRequired=true&up_numofentries=5&up_refresh=false&up_rules=%257B%2522providers%2522%253A%255B%257B%2522provider%2522%253A%2522streams%2522%252C%2522rules%2522%253A%255B%255D%257D%255D%257D&up_renderingContext=&up_keys=&up_itemKeys=&up_username=&url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.streams.streams-jira-plugin%3Aactivitystream-gadget%2Fgadgets%2Factivitystream-gadget.xml&libs=auth-refresh\",\"hasNonHiddenUserPrefs\":false},{\"userPrefs\":{\"action\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/0\\/prefs\",\"fields\":[{\"name\":\"isPublicMode\",\"value\":\"true\",\"required\":false,\"displayName\":\"isPublicMode\",\"type\":\"hidden\"},{\"name\":\"isElevatedSecurityCheckShown\",\"value\":\"false\",\"required\":false,\"displayName\":\"isElevatedSecurityCheckShown\",\"type\":\"hidden\"},{\"name\":\"loginFailedByPermissions\",\"value\":\"false\",\"required\":false,\"displayName\":\"loginFailedByPermissions\",\"type\":\"hidden\"},{\"name\":\"externalUserManagement\",\"value\":\"false\",\"required\":false,\"displayName\":\"externalUserManagement\",\"type\":\"hidden\"},{\"name\":\"loginSucceeded\",\"value\":\"false\",\"required\":false,\"displayName\":\"loginSucceeded\",\"type\":\"hidden\"},{\"name\":\"allowCookies\",\"value\":\"true\",\"required\":false,\"displayName\":\"allowCookies\",\"type\":\"hidden\"},{\"name\":\"externalPasswordManagement\",\"value\":\"\",\"required\":false,\"displayName\":\"externalPasswordManagement\",\"type\":\"hidden\"},{\"name\":\"captchaFailure\",\"value\":\"false\",\"required\":false,\"displayName\":\"captchaFailure\",\"type\":\"hidden\"}]},\"gadgetSpecUrl\":\"rest\\/gadgets\\/1.0\\/g\\/com.atlassian.jira.gadgets\\/gadgets\\/login.xml\",\"isMaximizable\":false,\"id\":\"0\",\"loaded\":true,\"title\":\"Login\",\"height\":100,\"colorUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/0\\/color\",\"color\":\"color1\",\"gadgetUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/rest\\/dashboards\\/1.0\\/10000\\/gadget\\/0\",\"column\":1,\"renderedGadgetUrl\":\"http:\\/\\/dev.clojure.org\\/jira\\/plugins\\/servlet\\/gadgets\\/ifr?container=atlassian&mid=0&country=US&lang=en&view=default&view-params=%7B%22writable%22%3A%22false%22%7D&st=atlassian%3Ac4KEowsZo7sK5D%2FfKvGdYrJ%2FksGP%2FPAtbhGYgLhKIQIhxAIId0cFbhrmArhc3y8vRjMiI5aXm1OWA4%2BuEIqpLNREcVRHGE%2FclcDTe3N%2BW5zfarhoZDmEncG3xNhYB1OxCo5TUFV7v%2Fk0o7ENQC0OBHQDsSKazEffX%2F0wpM64X62lacbpPo01oygrZ9rJHyBMHKZpDvK3PU6sRuRypTARb3bln%2B0LCkvtJqlkq4GxEOzDHTm0&up_isPublicMode=true&up_isElevatedSecurityCheckShown=false&up_loginFailedByPermissions=false&up_externalUserManagement=false&up_loginSucceeded=false&up_allowCookies=true&up_externalPasswordManagement=&up_captchaFailure=false&url=http%3A%2F%2Fdev.clojure.org%2Fjira%2Frest%2Fgadgets%2F1.0%2Fg%2Fcom.atlassian.jira.gadgets%2Fgadgets%2Flogin.xml&libs=auth-refresh\",\"hasNonHiddenUserPrefs\":false}],\"layout\":\"AA\",\"writable\":false}\n
+        \                                                                       ]\n
+        \       });\n</script>\n\n<script type=\"text/template\" id=\"attr\">\n    <?if
+        top.id ?> id=\"${id}\"<?/if?>\n    <?if top.styleClass ?> class=\"${styleClass}\"<?/if?>\n
+        \   <?if top.href ?> href=\"${href}\"<?/if?>\n    <?if top.value ?> value=\"${value}\"<?/if?>\n
+        \   <?if top.name ?> name=\"up_${name}\"<?/if?>\n    <?if top.selected ?>
+        selected=\"selected\"<?/if?>\n</script>\n\n<script type=\"text/template\"
+        id=\"dropdown\">\n    <% top.styleClass =  top.styleClass ? \"aui-dd-parent
+        \" + top.styleClass : \"aui-dd-parent\"; %>\n    <li ${attr(top)}>\n    <a
+        id=\"${trigger.id}\" class=\"${trigger.styleClass || 'aui-dd-trigger'} standard
+        \" href=\"#\"><span>${trigger.text}</span></a>\n    <ul class=\"aui-dropdown
+        standard hidden\">\n        <?foreach item in list.items?>\n        ${menuItem(item)}\n
+        \       <?/foreach?>\n    </ul>\n    </li>\n</script>\n\n<script type=\"text/template\"
+        id=\"menuItem\">\n    <?if (top.useTemplate === \"dropdown\")?>${dropdown(top)}<?/if?>\n
+        \   <?else?>\n    <li ${attr(top)}>\n    <?if (top.items) ?>\n    <ul>\n        <?foreach
+        subItem in items ?>\n        ${menuItem(subItem)}\n        <?/foreach?>\n
+        \   </ul>\n    <?/if?>\n    <?else?>\n    <a ${attr(link)}>${link.text}</a>\n
+        \   <?/else?>\n    </li>\n    <?/else?>\n</script>\n\n<script type=\"text/template\"
+        id=\"dashboardMenu\">\n    <div id=\"dash-options\">\n        <ul class=\"operations
+        enabled\">\n            <li><div class=\"throbber\" id=\"dash-throbber\">
+        </div></li>\n            <?foreach item in items?>${menuItem(item)}<?/foreach?>\n
+        \       </ul>\n    </div>\n</script>\n\n<script type=\"text/template\" id=\"layoutDialog\">\n
+        \   <div class=\"dialog-components\">\n        <h2 class=\"dialog-title\">${AG.param.get(\"changeColumns\")}</h2>\n
+        \t    <div class=\"dialog-panel-body\">\n            <p><strong>${AG.param.get(\"editLayout\")}</strong></p>\n
+        \           <ul>\n                <?foreach layout in AG.LayoutManager.layouts?>\n
+        \               <li><a href=\"#\" id=\"${AG.LayoutManager.getLayoutAttrName(layout)}\"><strong>${layout}</strong></a></li>\n
+        \               <?/foreach?>\n            </ul>\n        </div>\n        <div
+        class=\"dialog-button-panel\">\n            <a id=\"${closeId}\" href=\"#\">${AG.param.get(\"close\")}</a>\n
+        \       </div>\n    </div>\n</script>\n\n\n\n<!-- Gadget Chrome -->\n<script
+        type=\"text/template\" id=\"gadget\">\n    <div class=\"gadget <?if color
+        ?>${color}<?/if?>\" id=\"gadget-${id}-renderbox\">\n        <div class=\"dashboard-item-frame
+        gadget-container\" id=\"gadget-${id}-chrome\">\n            <div class=\"shadow\"><div
+        class=\"tl\"></div><div class=\"tr\"></div><div class=\"l\"></div><div class=\"r\"></div><div
+        class=\"bl\"></div><div class=\"br\"></div><div class=\"b\"></div></div>\n
+        \           <div class=\"dashboard-item-header\">\n                <h3 id=\"gadget-${id}-title\"
+        class=\"dashboard-item-title\"><?if top.titleUrl ?><a href=\"${titleUrl}\">${title}</a><?/if?><?else?>${title}<?/else?></h3>\n
+        \               <div class=\"gadget-menu\">\n                    <ul>\n                        <?if
+        layout.writable ?>\n                        <li class=\"aui-icon i-move\">${AG.param.get(\"move\")}</li>\n
+        \                       <?/if?>\n\n                        <?if top.isMaximizable
+        ?>\n                        <li>\n                            <a href=\"#\"
+        id=\"gadget-${id}-maximize\" class=\"aui-icon maximize\" title=\"${AG.param.get('maximize')}\">${AG.param.get('maximize')}</a>\n
+        \                       </li>\n                        <?/if?>\n                        ${dropdown(menu)}\n
+        \                   </ul>\n                </div>\n            </div>\n            <div
+        class=\"dashboard-item-content  <?if top.minimized ?> minimization<?/if?>\">\n
+        \               <?if top.userPrefs ?>\n                <form action=\"${userPrefs.action}\"
+        class=\"aui userpref-form hidden\" method=\"post\" id=\"gadget-${id}-edit\">\n
+        \                   <fieldset>\n                        <legend><span class=\"dashboard-item-title\">${title}</span>
+        ${AG.param.get(\"preferences\")}</legend>\n                        <?foreach
+        field in userPrefs.fields?>\n                        <?if field.type === \"hidden\"
+        ?>\n                        <input id=\"gadget-${id}-form-${field.name}-pref\"
+        type=\"hidden\" class=\"hidden\" ${attr(field)} />\n                        <?/if?>\n\n
+        \                       <?elseif field.type === \"list\" ?>\n                        <div
+        id=\"up_${field.name}-container\" class=\"list-container field-group\">\n
+        \                           <label for=\"gadget-${id}-form-${field.name}-pref\">${field.displayName}</label>\n
+        \                           <input id=\"gadget-${id}-form-${field.name}-pref\"
+        type=\"text\" class=\"list text med\" ${attr(field)} />\n                            <?if
+        field.required ?>field.required<?/if?>\n                            <div class=\"description\">${AG.param.get(\"pipeDelimitedHelp\")}</div>\n
+        \                       </div>\n                        <?/elseif?>\n\n                        <?elseif
+        field.type === \"bool\" ?>\n                        <div class=\"checkbox
+        field-group\">\n                            <input type=\"checkbox\" value=\"true\"
+        class=\"bool\" id=\"gadget-${id}-form-${field.name}-pref\" <?if field.value
+        === \"true\" ?>checked<?/if?> ${attr(field)} />\n                            <label
+        for=\"gadget-${id}-form-${field.name}-pref\">${field.displayName} <?if field.required
+        ?>field.required<?/if?></label><br/>\n                        </div>\n                        <?/elseif?>\n\n
+        \                       <?elseif field.type === \"enum\" ?>\n                        <div
+        class=\"field-group\">\n                            <label for=\"gadget-${id}-form-${field.name}-pref\">${field.displayName}
+        <?if field.required ?>field.required<?/if?></label>\n                            <select
+        id=\"gadget-${id}-form-${field.name}-pref\" class=\"enum\" ${attr(field)}>\n
+        \                           <?foreach option in field.options?>\n                            <option
+        class=\"enum\" ${attr(option)}>${option.label}</option>\n                            <?/foreach?>\n
+        \                           </select>\n                        </div>\n                        <?/elseif?>\n\n
+        \                       <?elseif field.type === \"string\" ?>\n                        <div
+        class=\"field-group\">\n                            <label for=\"gadget-${id}-form-${field.name}-pref\">${field.displayName}</label>\n
+        \                           <input id=\"gadget-${id}-form-${field.name}-pref\"
+        type=\"text\" ${attr(field)} class=\"string text\">\n                            <?if
+        field.required ?>field.required<?/if?><br/>\n                        </div>\n
+        \                       <?/elseif?>\n\n                        <?/foreach?>\n
+        \                   </fieldset>\n                    <div class=\"buttons-container
+        submit\">\n                        <input type=\"submit\" class=\"submit\"
+        value=\"${AG.param.get('save')}\" name=\"save\" id=\"gadget-${id}-save\"/>\n
+        \                       <input type=\"reset\" class=\"cancel\" value=\"${AG.param.get('cancel')}\"
+        name=\"reset\" id=\"gadget-${id}-cancel\" class=\"userpref-form-cancel\"/>\n
+        \                   </div>\n                </form>\n                <?/if?>\n
+        \               <iframe id=\"gadget-${id}\" class=\"gadget-iframe\" name=\"gadget-${id}\"
+        src=\"${renderedGadgetUrl}\" height=\"${top.height || 300}\" width=\"100%\"
+        scrolling=\"no\" frameborder=\"no\"></iframe>\n            </div>\n        </div>\n
+        \   </div>\n</script>\n\n<noscript><h1>Warning: either you have javascript
+        disabled or your browser does not support javascript. To work properly, this
+        page requires javascript to be enabled.</h1></noscript>\n<div id=\"diagnostic-warning\"
+        class=\"hidden\"></div>\n<div id=\"dashboard\" class=\"dashboard  initializing\"></div>\n\n<div
+        id=\"i18n-settings\">\n    <input class=\"locale-lang\" type=\"hidden\" value=\"en\">\n
+        \   <input class=\"locale-country\" type=\"hidden\" value=\"US\">\n</div>\n\n<div
+        id=\"macro-browser-templates\" class=\"hidden\">\n        <ol id=\"macro-summaries-template\"
+        class=\"macro-list\"></ol>\n    <ul>\n        <li id=\"macro-summary-template\"
+        class=\"macro-list-item\">\n            <div class=\"add-button\">\n                <input
+        class=\"macro-button-add\" type=\"button\" value=\"Add it Now\"><br/>\n                <input
+        class=\"macro-button-remove\" type=\"button\" value=\"Remove\">\n                <input
+        class=\"macro-hidden-uri\" type=\"hidden\" value=\"\">\n            </div>\n
+        \           <!-- // .add-button -->\n\n            <div class=\"macro-details\">\n
+        \               <h3 class=\"macro-title\"></h3>\n\n                <div class=\"macro-uri-wrapper\"><a
+        href=\"\" class=\"macro-uri\" target=\"_blank\"></a></div>\n                <div
+        class=\"macro-title-uri\"><a href=\"\" class=\"macro-title-uri-link\" target=\"_blank\">Homepage</a></div>\n\n
+        \               <p class=\"macro-author\"></p>\n\n                <p class=\"macro-desc\"></p>\n
+        \           </div>\n        </li>\n    </ul>\n        <div id=\"macro-insert-template\">\n
+        \       <input class=\"macro-name\" type=\"hidden\"/>\n\n        <div class=\"macro-preview-container
+        dialog-panel\">\n            <div class=\"macro-preview\"></div>\n        </div>\n
+        \       <div class=\"macro-input-fields dialog-panel\"></div>\n    </div>\n
+        \   <span id=\"macro-doco-link-template\">\n        <a href=\"#\" class=\"macro-doco-link\">macro.browser.documentation.link</a>\n
+        \   </span>\n\n    <div id=\"macro-freeform-template\" class=\"macro-freeform-div\">\n
+        \       <div class=\"macro-desc\">macro.browser.freeform.desc</div>\n        <div
+        class=\"macro-freeform-input\">\n            {<span class=\"macro-name-display\"></span><input
+        type=\"text\" class=\"macro-text\"/>}\n        </div>\n        <div class=\"macro-example
+        hidden\">\n            <h3>macro.browser.freeform.example.title</h3>\n        </div>\n
+        \       <div class=\"macro-help hidden\">\n            <h3>macro.browser.freeform.desc.title</h3>\n
+        \       </div>\n    </div>\n    <div id=\"macro-param-template\" class=\"macro-param-div\">\n
+        \       <label></label>\n        <input type=\"text\" class=\"text\"/>\n    </div>\n
+        \   <div id=\"macro-param-checkbox-template\" class=\"macro-param-div boolean-param\">\n
+        \       <label></label>\n        <input type=\"checkbox\" value=\"true\"/>\n
+        \   </div>\n    <div id=\"macro-param-select-template\" class=\"macro-param-div\">\n
+        \       <label></label>\n        <select></select>\n    </div>\n    <div id=\"macro-param-desc-template\"
+        class=\"macro-param-desc\"></div>\n    <div id=\"macro-body-template\" class=\"macro-body-div\">\n
+        \       <label>macro.browser.body.label</label>\n        <textarea class=\"monospaceInput
+        textarea\" type=\"text\" rows=\"10\"></textarea>\n    </div>\n\n    <div id=\"add-by-url-template\">\n
+        \       <div class=\"aui\" id=\"add-gadget-by-url\">\n            <div class=\"info\">\n
+        \               <fieldset class=\"inline\">\n                    <div class=\"centered-form\">\n
+        \                       <label for=\"add-gadget-url\">Type or paste the gadget&#39;s
+        URL below.</label><br/>\n                        <div id=\"dir-throbber\"
+        class=\"throbber\">&nbsp;</div>\n                        <input class=\"text\"
+        id=\"add-gadget-url\" type=\"text\" name=\"url\" style=\"width:325px;\">\n
+        \                       <input class=\"button\" id=\"add-gadget-submit\" name=\"add\"
+        type=\"submit\" value=\"Add Gadget\"><br/>\n                    </div>\n                </fieldset>\n
+        \           </div>\n            <div class=\"info nobox\">\n                <p>By
+        adding a gadget to the directory, you are making the gadget available for
+        people to use on their dashboards.</p>\n                <p><b>Only add gadgets
+        that you trust! Gadgets can allow unwanted or malicious code onto your web
+        page.</b></p>\n                <p>You can add gadgets from Atlassian applications
+        such as Confluence, JIRA and others. You can also add gadgets from other websites
+        such as iGoogle. Many public gadgets will work on an Atlassian dashboard.
+        Some gadgets may rely on specific iGoogle features that will not work properly
+        on Atlassian dashboards. In that case, you can simply remove the gadget from
+        the directory or you may not be allowed to add the gadget at all.</p>\n                <p>A
+        gadget&#39;s URL looks something like this: <em>http://example.com/my-gadget-location/my-gadget.xml</em></p>\n
+        \           </div>\n            <br>\n            <p>\n                <a
+        href=\"http://docs.atlassian.com/atlassian-gadgets/docs-030/Adding+a+Gadget+to+the+Directory+of+Available+Gadgets\"
+        target=\"_blank\">Find more gadgets to add.</a> <span style=\"color:#999;\">|</span>
+        You can create your own gadgets! <a href=\"http://docs.atlassian.com/atlassian-gadgets/docs-030/Gadgets+and+Dashboards+Development+Hub\"
+        target=\"_blank\">Learn how.</a>\n            </p>\n        </div>\n        <!--
+        // .aui #add-gadget-by-url -->\n    </div>\n    \n    <div id=\"add-gadget-feed-subscription-template\">\n
+        \       <div class=\"aui\" id=\"add-gadget-feed-subscription\">\n            <div
+        class=\"info\">\n                <fieldset class=\"inline\">\n                    <div
+        class=\"centered-form\">\n                        <label for=\"add-gadget-feed-subscription-url\">Type
+        or paste the base URL of the Atlassian application to subscribe to:  </label><br/>\n
+        \                       <div id=\"add-subscription-throbber\" class=\"throbber\">&nbsp;</div>\n
+        \                       <input class=\"text\" id=\"add-gadget-feed-subscription-url\"
+        type=\"text\" name=\"url\" style=\"width:325px;\">\n                        <input
+        class=\"button\" id=\"add-subscription-submit\" name=\"add\" type=\"submit\"
+        value=\"Add Subscription\"><br/>\n                                                <p>Please
+        note that subscribing to this URL will add it to your instance's whitelist.
+        For more information on how to edit this whitelist please see the <a href=\"http://docs.atlassian.com/atlassian-gadgets/docs-030/Whitelisting+External+Gadgets\"
+        target=\"_blank\">documentation</a>.</p>\n                    </div>\n                </fieldset>\n
+        \           </div>\n            <div class=\"info nobox\">\n                <p>When
+        you subscribe to gadgets from another application, people will be able to
+        use all those gadgets on their dashboards or pages in your application. The
+        gadgets are those provided by the other application or via plugins installed
+        into that application. They do not include external gadgets that the other
+        application has added to its directory. </p>\n                <p><b>Only subscribe
+        to applications that you trust! Gadgets can allow unwanted or malicious code
+        onto your web page.</b></p>\n                <p>You can subscribe to any Atlassian
+        application that publishes its gadgets for other applications to find.</p>\n
+        \               <p>An application&#39;s base URL looks something like this:
+        <em>http://example.com/jira</em></p>\n            </div>\n        </div>\n
+        \   </div>\n    \n    <div id=\"gadget-feed-subscriptions-template\">\n        <div
+        class=\"aui\" id=\"gadget-feed-subscriptions\">\n            <div class=\"info\"
+        id=\"gadget-subscriptions-header\">\n                JIRA does not currently
+        subscribe to gadgets from any applications.\n            </div>\n            <div
+        class=\"info nobox\">\n                <div id=\"gadget-subscriptions-throbber\"
+        class=\"throbber\">&nbsp;</div>\n                <ul></ul>\n            </div>\n
+        \       </div>\n    </div>\n</div>\n\n\n\n\n\n\n\n\n\n\n<div class=\"footer\">\n<div
+        class=\"poweredbymessage\">\n        <a href=\"http://www.atlassian.com/software/jira\"
+        class=\"smalltext\">Atlassian JIRA</a>\n        <span id=\"footer-build-information\"
+        \ style=\"color: #666666;\" >(v4.4#649-r158309)</span>\n        | <a href=\"http://support.atlassian.com/secure/CreateIssue.jspa?issuetype=1&amp;pid=10000\">Report
+        a problem</a>\n    </div>\n            <div class=\"licensemessage\">\n                    Powered
+        by a free Atlassian <a href='http://www.atlassian.com/software/jira'>JIRA</a>
+        open source license for Clojure. Try JIRA - <a href='http://www.atlassian.com/software/jira'>bug
+        tracking software</a> for <i>your</i> team.\n\n                </div>\n    </div>\n\n<form
+        id=\"jira_request_timing_info\" class=\"dont-default-focus\" >\n\t<fieldset
+        class=\"parameters hidden\">\n\t\t<input type=\"hidden\" title=\"jira.request.start.millis\"
+        value=\"1447905967186\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
+        value=\"18\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"1326x41721x1\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.time\" value=\"1447923967056\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.in.mins\" value=\"299\"
+        />\n\t\t<input id=\"jiraConcurrentRequests\" type=\"hidden\" name=\"jira.request.concurrent.requests\"
+        value=\"1\" />\n\t</fieldset>\n</form>\n<!--\n\t                 REQUEST ID
+        : 1326x41721x1\n\t          REQUEST TIMESTAMP : [18/Nov/2015:22:06:07 -0600]\n\t
+        \              REQUEST TIME : 0.0180\n\t                 ASESSIONID : 1xc2new\n\t
+        \       CONCURRENT REQUESTS : 1\n-->\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:06:07 GMT
+recorded_with: VCR 2.9.3

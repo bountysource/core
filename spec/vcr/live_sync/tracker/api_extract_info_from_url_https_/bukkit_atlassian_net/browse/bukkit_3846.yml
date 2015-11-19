@@ -1,0 +1,736 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bukkit.atlassian.net/browse/BUKKIT-3846
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 19 Nov 2015 04:06:08 GMT
+      Content-Type:
+      - text/html;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Arequestid:
+      - 246x27011x1
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Asen:
+      - SEN-2159363
+      X-Ausername:
+      - anonymous
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - JSESSIONID=DFDDD7E94084A1D2FCF81915CCE654EF; Path=/; Secure; HttpOnly
+      - atlassian.xsrf.token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout;
+        Path=/; Secure
+      Strict-Transport-Security:
+      - max-age=315360000;includeSubDomains
+    body:
+      encoding: UTF-8
+      string: "\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    \n\n\n\n\n\n\n<meta
+        charset=\"utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/>\n<meta
+        name=\"application-name\" content=\"JIRA\" data-name=\"jira\" data-version=\"7.0.0-OD-08-005\"><meta
+        name=\"ajs-serverRenderedViewIssue\" content=\"true\">\n<meta name=\"ajs-hasCriteriaAutoUpdate\"
+        content=\"true\">\n<meta name=\"ajs-viewissue-use-history-api\" content=\"false\">\n<meta
+        name=\"ajs-viewissue-max-cache-size\" content=\"\">\n<meta name=\"ajs-autocomplete-enabled\"
+        content=\"true\">\n<meta name=\"ajs-view-issue-trace-key\" content=\"jira.issue.refreshed\">\n<meta
+        name=\"ajs-view-issue-psycho-key\" content=\"jira.psycho.issue.refreshed\">\n<meta
+        name=\"ajs-view-issue-refreshed-cached-key\" content=\"jira.psycho.issue.refreshed.cached\">\n<meta
+        name=\"ajs-return-to-search-trace-key\" content=\"jira.returned.to.search\">\n<meta
+        name=\"ajs-return-to-search-psycho-key\" content=\"jira.psycho.returned.to.search\">\n<meta
+        name=\"ajs-default-avatar-url\" content=\"https://bukkit.atlassian.net/secure/useravatar?size=xsmall&amp;avatarId=10123\">\n<meta
+        name=\"ajs-jira.issues.preferred.layout.key\" content=\"split-view\">\n<meta
+        name=\"ajs-max-recent-searchers\" content=\"10\">\n<meta name=\"ajs-jira-base-url\"
+        content=\"https://bukkit.atlassian.net\">\n<meta name=\"ajs-dev-mode\" content=\"false\">\n<meta
+        name=\"ajs-context-path\" content=\"\">\n<meta name=\"ajs-version-number\"
+        content=\"7.0.0-OD-08-005\">\n<meta name=\"ajs-build-number\" content=\"70107\">\n<meta
+        name=\"ajs-is-beta\" content=\"false\">\n<meta name=\"ajs-is-rc\" content=\"false\">\n<meta
+        name=\"ajs-is-snapshot\" content=\"false\">\n<meta name=\"ajs-is-milestone\"
+        content=\"false\">\n<meta name=\"ajs-remote-user\" content=\"\">\n<meta name=\"ajs-remote-user-fullname\"
+        content=\"\">\n<meta name=\"ajs-user-locale\" content=\"en_US\">\n<meta name=\"ajs-user-locale-group-separator\"
+        content=\",\">\n<meta name=\"ajs-app-title\" content=\"Bukkit Issue Tracker\">\n<meta
+        name=\"ajs-keyboard-shortcuts-enabled\" content=\"true\">\n<meta name=\"ajs-keyboard-accesskey-modifier\"
+        content=\"Ctrl+Alt\">\n<meta name=\"ajs-enabled-dark-features\" content=\"[&quot;jira.plugin.devstatus.automatic.transitioning&quot;,&quot;ka.AJAX_PREFETCH&quot;,&quot;heatmapper.disabled&quot;,&quot;jira.plugin.devstatus.phasefour.enabled&quot;,&quot;rotp.admin.shortcuts&quot;,&quot;com.atlassian.jira.projects.issuenavigator.cachefix&quot;,&quot;jira.plugin.devstatus.phasetwo&quot;,&quot;jira.frother.reporter.field&quot;,&quot;com.atlassian.jira.jira-feedback-plugin&quot;,&quot;atlassian.rest.xsrf.legacy.enabled&quot;,&quot;jira.plugin.devstatus.bamboo.enabled&quot;,&quot;jira.administration.workflow.validation&quot;,&quot;ondemand.language.beta&quot;,&quot;jira.site.darkfeature.admin&quot;,&quot;atlassian.connect.dhe.disabled.awl-gebsun.rhcloud.com&quot;,&quot;jira.issue.status.lozenge&quot;,&quot;unified.usermanagement&quot;,&quot;com.atlassian.jira.projects.issuenavigator&quot;,&quot;com.atlassian.jira.config.PDL&quot;,&quot;jira.plugin.devstatus.phasetwo.enabled&quot;,&quot;jira.plugin.fisheye.tab.enabled&quot;,&quot;com.atlassian.jira.projects.issue.summary.vignettes&quot;,&quot;atlassian.aui.raphael.disabled&quot;,&quot;com.atlassian.jira.config.CoreFeatures.PERMISSIONS_MANAGED_BY_UM&quot;,&quot;jira.user.darkfeature.admin&quot;,&quot;app-switcher.new&quot;,&quot;frother.assignee.field&quot;,&quot;casper.WORKFLOW_TAB&quot;,&quot;jira.projectconfig.issuetypes.sidebar&quot;,&quot;APDEX-517.warmhardcoded&quot;,&quot;com.atlassian.jira.config.CoreFeatures.ON_DEMAND&quot;,&quot;jira.search.kickass&quot;,&quot;jira.plugin.projects.version.tab.feedback.banner&quot;,&quot;rotp.project.create&quot;,&quot;atlassian.connect.dhe.disabled.aip-flyingagile.rhcloud.com&quot;,&quot;com.atlassian.plugins.issuenav.SEND_HEAD_EARLY&quot;,&quot;jira.baseurl.cdn.enabled&quot;,&quot;fusion.bitbucket.rebrand&quot;,&quot;ka.STABLE_SEARCH&quot;,&quot;ka.SEPARATE_VIEWISSUE&quot;,&quot;jira.bamboo.legacy.force&quot;,&quot;jira.plugin.devstatus.background.refresh.enabled&quot;,&quot;com.atlassian.jira.config.CoreFeatures.LICENSE_ROLES_ENABLED&quot;,&quot;casper.VIEW_ISSUE&quot;,&quot;ka.AJAX_VIEW_ISSUE&quot;]\">\n<meta
+        name=\"ajs-date-relativize\" content=\"true\">\n<meta name=\"ajs-date-time\"
+        content=\"h:mm a\">\n<meta name=\"ajs-date-day\" content=\"EEEE h:mm a\">\n<meta
+        name=\"ajs-date-dmy\" content=\"dd/MMM/yy\">\n<meta name=\"ajs-date-complete\"
+        content=\"dd/MMM/yy h:mm a\">\n<meta name=\"ajs-in-admin-mode\" content=\"false\">\n<meta
+        name=\"ajs-is-sysadmin\" content=\"false\">\n<meta name=\"ajs-is-admin\" content=\"false\">\n<meta
+        name=\"ajs-outgoing-mail-enabled\" content=\"true\">\n<script>\n    window._AP
+        = window._AP || {};\n    \n        window._AP.dialogOptions = {\n                            };\n\n
+        \   window._AP.inlineDialogOptions = {\n                            };\n</script>\n\n<script
+        type=\"text/javascript\">var AJS=AJS||{};AJS.debug=true;</script>\n\n\n    \n<meta
+        id=\"atlassian-token\" name=\"atlassian-token\" content=\"BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout\">\n\n\n\n<link
+        rel=\"shortcut icon\" href=\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/_/favicon.ico\">\n\n\n
+        \   \n\n\n<!--[if IE]><![endif]-->\n<script type=\"text/javascript\">var contextPath
+        = '';</script>\n<script>\nwindow.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-admin-helper-plugin:permissions-provider.permissions-data\"]=\"[{\\\"permissions\\\":[{\\\"name\\\":\\\"Administer
+        Projects\\\",\\\"key\\\":\\\"ADMINISTER_PROJECTS\\\"},{\\\"name\\\":\\\"Browse
+        Projects\\\",\\\"key\\\":\\\"BROWSE_PROJECTS\\\"},{\\\"name\\\":\\\"View Development
+        Tools\\\",\\\"key\\\":\\\"VIEW_DEV_TOOLS\\\"},{\\\"name\\\":\\\"View Read-Only
+        Workflow\\\",\\\"key\\\":\\\"VIEW_READONLY_WORKFLOW\\\"}],\\\"name\\\":\\\"Project
+        Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Assignable User\\\",\\\"key\\\":\\\"ASSIGNABLE_USER\\\"},{\\\"name\\\":\\\"Assign
+        Issues\\\",\\\"key\\\":\\\"ASSIGN_ISSUES\\\"},{\\\"name\\\":\\\"Close Issues\\\",\\\"key\\\":\\\"CLOSE_ISSUES\\\"},{\\\"name\\\":\\\"Create
+        Issues\\\",\\\"key\\\":\\\"CREATE_ISSUES\\\"},{\\\"name\\\":\\\"Delete Issues\\\",\\\"key\\\":\\\"DELETE_ISSUES\\\"},{\\\"name\\\":\\\"Edit
+        Issues\\\",\\\"key\\\":\\\"EDIT_ISSUES\\\"},{\\\"name\\\":\\\"Link Issues\\\",\\\"key\\\":\\\"LINK_ISSUES\\\"},{\\\"name\\\":\\\"Modify
+        Reporter\\\",\\\"key\\\":\\\"MODIFY_REPORTER\\\"},{\\\"name\\\":\\\"Move Issues\\\",\\\"key\\\":\\\"MOVE_ISSUES\\\"},{\\\"name\\\":\\\"Resolve
+        Issues\\\",\\\"key\\\":\\\"RESOLVE_ISSUES\\\"},{\\\"name\\\":\\\"Schedule
+        Issues\\\",\\\"key\\\":\\\"SCHEDULE_ISSUES\\\"},{\\\"name\\\":\\\"Set Issue
+        Security\\\",\\\"key\\\":\\\"SET_ISSUE_SECURITY\\\"},{\\\"name\\\":\\\"Transition
+        Issues\\\",\\\"key\\\":\\\"TRANSITION_ISSUES\\\"}],\\\"name\\\":\\\"Issue
+        Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Manage Watchers\\\",\\\"key\\\":\\\"MANAGE_WATCHERS\\\"},{\\\"name\\\":\\\"View
+        Voters and Watchers\\\",\\\"key\\\":\\\"VIEW_VOTERS_AND_WATCHERS\\\"}],\\\"name\\\":\\\"Voters
+        & Watchers Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Add Comments\\\",\\\"key\\\":\\\"ADD_COMMENTS\\\"},{\\\"name\\\":\\\"Delete
+        All Comments\\\",\\\"key\\\":\\\"DELETE_ALL_COMMENTS\\\"},{\\\"name\\\":\\\"Delete
+        Own Comments\\\",\\\"key\\\":\\\"DELETE_OWN_COMMENTS\\\"},{\\\"name\\\":\\\"Edit
+        All Comments\\\",\\\"key\\\":\\\"EDIT_ALL_COMMENTS\\\"},{\\\"name\\\":\\\"Edit
+        Own Comments\\\",\\\"key\\\":\\\"EDIT_OWN_COMMENTS\\\"}],\\\"name\\\":\\\"Comments
+        Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Create Attachments\\\",\\\"key\\\":\\\"CREATE_ATTACHMENTS\\\"},{\\\"name\\\":\\\"Delete
+        All Attachments\\\",\\\"key\\\":\\\"DELETE_ALL_ATTACHMENTS\\\"},{\\\"name\\\":\\\"Delete
+        Own Attachments\\\",\\\"key\\\":\\\"DELETE_OWN_ATTACHMENTS\\\"}],\\\"name\\\":\\\"Attachments
+        Permissions\\\"},{\\\"permissions\\\":[{\\\"name\\\":\\\"Delete All Worklogs\\\",\\\"key\\\":\\\"DELETE_ALL_WORKLOGS\\\"},{\\\"name\\\":\\\"Delete
+        Own Worklogs\\\",\\\"key\\\":\\\"DELETE_OWN_WORKLOGS\\\"},{\\\"name\\\":\\\"Edit
+        All Worklogs\\\",\\\"key\\\":\\\"EDIT_ALL_WORKLOGS\\\"},{\\\"name\\\":\\\"Edit
+        Own Worklogs\\\",\\\"key\\\":\\\"EDIT_OWN_WORKLOGS\\\"},{\\\"name\\\":\\\"Work
+        On Issues\\\",\\\"key\\\":\\\"WORK_ON_ISSUES\\\"}],\\\"name\\\":\\\"Time Tracking
+        Permissions\\\"},{\\\"permissions\\\":[],\\\"name\\\":\\\"admin.permission.group.time.tracking.other\\\"}]\";\nWRM._unparsedData[\"com.atlassian.jira.jira-header-plugin:newsletter-signup-tip.newsletterSignup\"]=\"{\\\"formUrl\\\":\\\"https://www.atlassian.com/apis/exact-target/{0}/subscribe?mailingListId=1239131\\\",\\\"showNewsletterTip\\\":false}\";\nWRM._unparsedData[\"jira.webresources:user-message-flags.adminLockout\"]=\"{}\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-dnd-attachment-plugin:jira-html5-attach-images-resources.resource-uris\"]=\"{\\\"deployJava.html\\\":\\\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/4.2.0/_/download/resources/com.atlassian.jira.plugins.jira-dnd-attachment-plugin:jira-html5-attach-images-resources/deployJava.html\\\",\\\"clipboard.jar\\\":\\\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/4.2.0/_/download/resources/com.atlassian.jira.plugins.jira-dnd-attachment-plugin:jira-html5-attach-images-resources/clipboard.jar\\\",\\\"clipboard-legacy.jar\\\":\\\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/4.2.0/_/download/resources/com.atlassian.jira.plugins.jira-dnd-attachment-plugin:jira-html5-attach-images-resources/clipboard-legacy.jar\\\"}\";\nWRM._unparsedData[\"com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path\"]=\"\\\"\\\"\";\nWRM._unparsedData[\"com.atlassian.jira.ext.calendar:tipDataProvider.tip\"]=\"{\\\"suppressTip\\\":false}\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-admin-helper-plugin:notification-event-provider.notification-event-data\"]=\"[{\\\"id\\\":1,\\\"name\\\":\\\"Issue
+        Created\\\",\\\"isDefault\\\":true},{\\\"id\\\":2,\\\"name\\\":\\\"Issue Updated\\\"},{\\\"id\\\":3,\\\"name\\\":\\\"Issue
+        Assigned\\\"},{\\\"id\\\":4,\\\"name\\\":\\\"Issue Resolved\\\"},{\\\"id\\\":5,\\\"name\\\":\\\"Issue
+        Closed\\\"},{\\\"id\\\":6,\\\"name\\\":\\\"Issue Commented\\\"},{\\\"id\\\":14,\\\"name\\\":\\\"Issue
+        Comment Edited\\\"},{\\\"id\\\":17,\\\"name\\\":\\\"Issue Comment Deleted\\\"},{\\\"id\\\":7,\\\"name\\\":\\\"Issue
+        Reopened\\\"},{\\\"id\\\":8,\\\"name\\\":\\\"Issue Deleted\\\"},{\\\"id\\\":9,\\\"name\\\":\\\"Issue
+        Moved\\\"},{\\\"id\\\":10,\\\"name\\\":\\\"Work Logged On Issue\\\"},{\\\"id\\\":11,\\\"name\\\":\\\"Work
+        Started On Issue\\\"},{\\\"id\\\":12,\\\"name\\\":\\\"Work Stopped On Issue\\\"},{\\\"id\\\":15,\\\"name\\\":\\\"Issue
+        Worklog Updated\\\"},{\\\"id\\\":16,\\\"name\\\":\\\"Issue Worklog Deleted\\\"},{\\\"id\\\":13,\\\"name\\\":\\\"Generic
+        Event\\\"}]\";\nWRM._unparsedData[\"com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy\"]=\"true\";\nWRM._unparsedData[\"com.atlassian.pocketknife.featureflags-plugin:pocketknife-feature-flags.feature-flag-data\"]=\"{\\\"enabled-feature-keys\\\":[\\\"jira.plugin.devstatus.automatic.transitioning\\\",\\\"ka.AJAX_PREFETCH\\\",\\\"heatmapper.disabled\\\",\\\"jira.plugin.devstatus.phasefour.enabled\\\",\\\"rotp.admin.shortcuts\\\",\\\"com.atlassian.jira.projects.issuenavigator.cachefix\\\",\\\"jira.plugin.devstatus.phasetwo\\\",\\\"jira.frother.reporter.field\\\",\\\"com.atlassian.jira.jira-feedback-plugin\\\",\\\"atlassian.rest.xsrf.legacy.enabled\\\",\\\"jira.plugin.devstatus.bamboo.enabled\\\",\\\"jira.administration.workflow.validation\\\",\\\"ondemand.language.beta\\\",\\\"jira.site.darkfeature.admin\\\",\\\"atlassian.connect.dhe.disabled.awl-gebsun.rhcloud.com\\\",\\\"jira.issue.status.lozenge\\\",\\\"unified.usermanagement\\\",\\\"com.atlassian.jira.projects.issuenavigator\\\",\\\"com.atlassian.jira.config.PDL\\\",\\\"jira.plugin.devstatus.phasetwo.enabled\\\",\\\"jira.plugin.fisheye.tab.enabled\\\",\\\"com.atlassian.jira.projects.issue.summary.vignettes\\\",\\\"atlassian.aui.raphael.disabled\\\",\\\"com.atlassian.jira.config.CoreFeatures.PERMISSIONS_MANAGED_BY_UM\\\",\\\"jira.user.darkfeature.admin\\\",\\\"app-switcher.new\\\",\\\"frother.assignee.field\\\",\\\"casper.WORKFLOW_TAB\\\",\\\"jira.projectconfig.issuetypes.sidebar\\\",\\\"APDEX-517.warmhardcoded\\\",\\\"com.atlassian.jira.config.CoreFeatures.ON_DEMAND\\\",\\\"jira.search.kickass\\\",\\\"jira.plugin.projects.version.tab.feedback.banner\\\",\\\"rotp.project.create\\\",\\\"atlassian.connect.dhe.disabled.aip-flyingagile.rhcloud.com\\\",\\\"com.atlassian.plugins.issuenav.SEND_HEAD_EARLY\\\",\\\"jira.baseurl.cdn.enabled\\\",\\\"fusion.bitbucket.rebrand\\\",\\\"ka.STABLE_SEARCH\\\",\\\"ka.SEPARATE_VIEWISSUE\\\",\\\"jira.bamboo.legacy.force\\\",\\\"jira.plugin.devstatus.background.refresh.enabled\\\",\\\"com.atlassian.jira.config.CoreFeatures.LICENSE_ROLES_ENABLED\\\",\\\"casper.VIEW_ISSUE\\\",\\\"ka.AJAX_VIEW_ISSUE\\\"],\\\"feature-flag-states\\\":{\\\"sd.confluence.kb.od.oneclick\\\":true,\\\"sd.shared.portals.kb.search\\\":true,\\\"sd.reporter.internal.comments.async.upgrade\\\":true,\\\"sd.automation.if.issue.link.type.phase2\\\":true,\\\"sd.experimental.customer.satisfaction\\\":false,\\\"sd.experimental.portal.search.algorithm\\\":true,\\\"sd.advance.portal.branding.portal.content\\\":false,\\\"sd.reduce.notifications.to.cc.list\\\":true,\\\"sd.request.type.search.advance\\\":false,\\\"sd.kb.viewed.report\\\":true,\\\"sd.agent.invite.customers\\\":true,\\\"sd.shared.portals.redo\\\":true,\\\"sd.agent.onboarding\\\":true,\\\"sd.people.total.count\\\":false,\\\"sd.req.participants.portal\\\":true,\\\"sd.agent.queue.update\\\":true,\\\"sd.agent.signature\\\":false,\\\"sd.sla.threshold.events\\\":true,\\\"jira.unified.attachments.m2\\\":true,\\\"sd.updated.all.portal.failure.messages\\\":true,\\\"sd.email.notification.plain.text\\\":true,\\\"sd.portal.logo.default\\\":true,\\\"sd.request.participants.upgrade\\\":true,\\\"sd.jira.automation.event\\\":false,\\\"jira.attachment.merge\\\":true,\\\"sd.pre.populated.comment\\\":true,\\\"sd.email.conversational.notification\\\":true,\\\"sd.portal.drag.drop\\\":true,\\\"sd.request.type.automation.set\\\":false,\\\"sd.test.feature.flag.x\\\":true,\\\"sd.test.feature.flag.y\\\":false,\\\"sd.automation.workaround.jira.cached.index.issue\\\":true,\\\"sd.skate.upgrade\\\":true,\\\"sd.confluence.kb.visitors\\\":true,\\\"sd.automation.issue.linked.phase1\\\":true,\\\"sd.confluence.anonymous.permission.fix\\\":true,\\\"sd.experimental.itil.sd.configuration\\\":false,\\\"sd.better.logo.uploader\\\":true,\\\"sd.global.portal.rt.search\\\":true,\\\"sd.shared.portals.kb.like\\\":true,\\\"sd.advance.portal.branding\\\":true,\\\"sd.channel.issue.properties.async.upgrade\\\":true,\\\"sd.request.participants\\\":true,\\\"sd.automation.then.linked.issue.comment.phase3\\\":true,\\\"sd.req.participants.email\\\":true,\\\"sd.email.notification.quoted.reply.stripping\\\":true,\\\"sd.no.schedule.async.upgrade.tasks\\\":false,\\\"sd.service.request.feedback\\\":true,\\\"sd.lightweight.login.experiment\\\":false,\\\"sd.lightweight.login.override\\\":false,\\\"jira.unified.attachments\\\":true,\\\"sd.agent.queue.dynamic.update\\\":true,\\\"sd.convenient.problem.creation\\\":false,\\\"sd.admin.permission.migration.complete\\\":false,\\\"sd.unlicensed.kb.async.upgrade\\\":true,\\\"sd.global.portal.search.atlassian.only.tracking\\\":false,\\\"sd.email.platform.integration\\\":true}}\";\nWRM._unparsedData[\"com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern\"]=\"\\\"(?:(?:/s/.*?/_)?/download|//d1ixbz5qgnvms3\\\\\\\\.cloudfront\\\\\\\\.net/bukkit\\\\\\\\.atlassian\\\\\\\\.net(?:/s/.*?/_)?/download)\\\"\";\nWRM._unparsedData[\"jira.webresources:avatar-picker.data\"]=\"{\\\"isEnabled\\\":false,\\\"url\\\":\\\"/plugins/servlet/redirectToProfile?target=edit-avatar\\\"}\";\nWRM._unparsedData[\"com.atlassian.plugins.helptips.jira-help-tips:common.JiraHelpTipData\"]=\"{\\\"anonymous\\\":true}\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-dnd-attachment-plugin:drag-and-drop-attachment-javascript.upload-limit\"]=\"\\\"10485760\\\"\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-dnd-attachment-plugin:drag-and-drop-attachment-javascript.thumbnail-mime-types\"]=\"\\\"image/vnd.wap.wbmp,image/png,image/x-png,image/jpeg,image/bmp,image/gif\\\"\";\nWRM._unparsedData[\"com.atlassian.jira.jira-header-plugin:dismissedFlags.flags\"]=\"{\\\"dismissed\\\":[]}\";\nWRM._unparsedData[\"com.atlassian.plugins.browser.metrics.browser-metrics-plugin:api.feature-data-provider\"]=\"true\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-common.applinks-context\"]=\"{\\\"hostApplication\\\":{\\\"id\\\":\\\"92b5d2f2-18c6-38e0-b1b3-0db0a6d65e58\\\",\\\"type\\\":\\\"jira\\\"}}\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-common.applinks-features\"]=\"{\\\"BITBUCKET_REBRAND\\\":true,\\\"V3_UI_OPT_IN\\\":false,\\\"V3_UI\\\":false}\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-common.applinks-discovered-features\"]=\"[]\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-util-js.applinks-context\"]=\"{\\\"hostApplication\\\":{\\\"id\\\":\\\"92b5d2f2-18c6-38e0-b1b3-0db0a6d65e58\\\",\\\"type\\\":\\\"jira\\\"}}\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-util-js.applinks-features\"]=\"{\\\"BITBUCKET_REBRAND\\\":true,\\\"V3_UI_OPT_IN\\\":false,\\\"V3_UI\\\":false}\";\nWRM._unparsedData[\"com.atlassian.applinks.applinks-plugin:applinks-util-js.applinks-discovered-features\"]=\"[]\";\nWRM._unparsedData[\"jira.webresources:dateFormatProvider.dateFormat\"]=\"{\\\"meridiem\\\":[\\\"AM\\\",\\\"PM\\\"],\\\"eras\\\":[\\\"BC\\\",\\\"AD\\\"],\\\"months\\\":[\\\"January\\\",\\\"February\\\",\\\"March\\\",\\\"April\\\",\\\"May\\\",\\\"June\\\",\\\"July\\\",\\\"August\\\",\\\"September\\\",\\\"October\\\",\\\"November\\\",\\\"December\\\"],\\\"monthsShort\\\":[\\\"Jan\\\",\\\"Feb\\\",\\\"Mar\\\",\\\"Apr\\\",\\\"May\\\",\\\"Jun\\\",\\\"Jul\\\",\\\"Aug\\\",\\\"Sep\\\",\\\"Oct\\\",\\\"Nov\\\",\\\"Dec\\\"],\\\"weekdaysShort\\\":[\\\"Sun\\\",\\\"Mon\\\",\\\"Tue\\\",\\\"Wed\\\",\\\"Thu\\\",\\\"Fri\\\",\\\"Sat\\\"],\\\"weekdays\\\":[\\\"Sunday\\\",\\\"Monday\\\",\\\"Tuesday\\\",\\\"Wednesday\\\",\\\"Thursday\\\",\\\"Friday\\\",\\\"Saturday\\\"]}\";\nWRM._unparsedData[\"com.atlassian.jira.plugins.jira-browser-metrics:browser-metrics-integration.scm-commit-id\"]=\"\\\"5fb2f7e0c016d05ff672e1e32fcd963de6cf92ae\\\"\";\n</script>\n<link
+        type=\"text/css\" rel=\"stylesheet\" href=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/a6773808ea481fabec5dbcf5392aa065-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/eac70973585e66a695b783e49957cce5/_/download/contextbatch/css/_super/batch.css?relative-url=true\"
+        media=\"all\">\n<!--[if lte IE 9]>\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/09409cc065aea597e74ea6a3e0a89e19-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/eac70973585e66a695b783e49957cce5/_/download/contextbatch/css/_super/batch.css?conditionalComment=lte+IE+9&amp;relative-url=true\"
+        \ media=\"all\">\n<![endif]-->\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/2e8c1a1ff5aed390cd6b5db911cdbbf3-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/ece8470cddb973dbab316e86bcb34d49/_/download/contextbatch/css/jira.view.issue,atl.general,atl.global,jira.global,jira.general,-_super/batch.css?agile_global_admin_condition=true&amp;jag=true&amp;relative-url=true\"
+        media=\"all\">\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/aa0d02b17b692d635084c3315e502e3b-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/eac70973585e66a695b783e49957cce5/_/download/contextbatch/js/_super/batch.js?atlassian.aui.raphael.disabled=true&amp;locale=en-US\"
+        ></script>\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/f91ce4592673f6a076c41d843ffeba29-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/ece8470cddb973dbab316e86bcb34d49/_/download/contextbatch/js/jira.view.issue,atl.general,atl.global,jira.global,jira.general,-_super/batch.js?agile_global_admin_condition=true&amp;jag=true&amp;locale=en-US\"
+        ></script>\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/81fb41f34825b9cc908d854c50fd1fbf-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/7.0.26/_/download/batch/com.atlassian.jira.jira-issue-nav-plugin:viewissue-init/com.atlassian.jira.jira-issue-nav-plugin:viewissue-init.js?locale=en-US\"
+        ></script>\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/1.0/_/download/batch/jira.webresources:calendar-en/jira.webresources:calendar-en.js\"
+        ></script>\n<script type=\"text/javascript\" src=\"//d1ixbz5qgnvms3.cloudfront.net/bukkit.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/1.0/_/download/batch/jira.webresources:calendar-localisation-moment/jira.webresources:calendar-localisation-moment.js\"
+        ></script>\n\n<script type=\"text/javascript\" src=\"/rest/api/1.0/shortcuts/70107/c77e8f3311fac1cbc68e25a886619a7d/shortcuts.js?context=issuenavigation&amp;context=issueaction\"></script>\n\n\n\n
+        \   \n    \n    <meta name=\"decorator\" content=\"atl.general\">\n    <meta
+        id=\"isNavigator\" name=\"isNavigator\" content=\"true\">\n    <meta name=\"ajs-is-inline-edit-enabled\"
+        content=\"true\">\n    <meta name=\"ajs-user.search.mode\" content=\"basic\">\n
+        \   <meta name=\"ajs-issue-search-help-title\" content=\"Searching for issues\">\n
+        \   <meta name=\"ajs-issue-search-help-url\" content=\"https://confluence.atlassian.com/display/JIRACORECLOUD/Searching+for+issues\">\n
+        \   <meta name=\"ajs-advanced-search-help-title\" content=\"Advanced searching\">\n
+        \   <meta name=\"ajs-advanced-search-help-url\" content=\"https://confluence.atlassian.com/display/JIRACORECLOUD/Advanced+searching\">\n
+        \       \n    \n\n\n\n\n\n\n<meta name=\"ajs-can-search-users\" content=\"false\">\n<meta
+        name=\"ajs-can-edit-watchers\" content=\"false\">\n<meta name=\"ajs-default-avatar-url\"
+        content=\"https://bukkit.atlassian.net/secure/useravatar?size=xsmall&amp;avatarId=10123\">\n<meta
+        name=\"ajs-issue-key\" content=\"BUKKIT-3846\">\n<meta name=\"ajs-server-view-issue-is-editable\"
+        content=\"false\">\n\n<title>[BUKKIT-3846] FurnaceRecipe overwrites vanilla
+        result experience - Bukkit Issue Tracker</title>\n<link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        href=\"/osd.jsp\" title=\"[BUKKIT-3846] FurnaceRecipe overwrites vanilla result
+        experience - Bukkit Issue Tracker\"/>\n\n\n</head>\n\n\n\n\n\n<body id=\"jira\"
+        class=\"aui-layout aui-theme-default ka ajax-issue-search-and-view page-type-navigator
+        navigator-issue-only\" data-version=\"7.0.0-OD-08-005\">\n<div id=\"page\">\n
+        \   <header id=\"header\" role=\"banner\">\n        \n\n\n\n\n\n\n<script>\n
+        \   AJS.$(function () {\n        var licenseBanner = require(\"jira/license-banner\");\n
+        \       licenseBanner.showLicenseBanner(\"\");\n        licenseBanner.showLicenseFlag(\"\");\n
+        \   });\n</script>\n\n\n\n        \n\n\n\n\n        \n\n\n    <dl id=\"bonfire-build-info\"
+        style=\"display:none;\">\n        <dt data-bonfire-var=\"bonfire-buildVersion\"
+        data-bonfire-value=\"2.9.7.0034\"></dt>\n        <dt data-bonfire-var=\"bonfire-buildDate\"
+        data-bonfire-value=\"2015-10-26T00:00:00.000Z\"></dt>\n        <dt data-bonfire-var=\"bonfire-buildNumber\"
+        data-bonfire-value=\"\"></dt>\n        <dt data-bonfire-var=\"bonfire-licenseStatus\"
+        data-bonfire-value=\"unactivated\"></dt>\n    </dl>\n    \n        \n    <nav
+        class=\"aui-header aui-dropdown2-trigger-group\" role=\"navigation\"><div
+        class=\"aui-header-inner\"><div class=\"aui-header-before\"><a class=\" aui-dropdown2-trigger
+        app-switcher-trigger\" aria-owns=\"app-switcher\" aria-controls=\"app-switcher\"
+        aria-haspopup=\"true\" data-aui-trigger href=\"#app-switcher\"><span class=\"aui-icon
+        aui-icon-small aui-iconfont-appswitcher\">Linked Applications</span></a><div
+        id=\"app-switcher\" class=\"aui-dropdown2 aui-style-default\"><div class=\"app-switcher-loading\">Loading&hellip;</div></div><script>\n
+        \           (function (NL) {\n                var initialise = function ()
+        {\n                    // For some milestones of AUI, the atlassian soy namespace
+        was renamed to aui. Handle that here by ensuring that window.atlassian is
+        defined.\n                    window.atlassian = window.atlassian || window.aui;\n
+        \                   new NL.AppSwitcher({\n                        dropdownContents:
+        '#app-switcher'\n                    });\n                };\n                if
+        (NL.AppSwitcher) {\n                    initialise();\n                } else
+        {\n                    NL.onInit = initialise;\n                }\n            }(window.NL
+        = (window.NL || {})));\n            window.NL.environment = {isUserAdmin:
+        false, isAppSuggestionAvailable: false, isSiteAdminUser: false};</script></div><div
+        class=\"aui-header-primary\"><h1 id=\"logo\" class=\"aui-header-logo aui-header-logo-custom\"><a
+        href=\"https://bukkit.atlassian.net/secure/MyJiraHome.jspa\"><img src=\"/s/en_UScwmut-ren-on/70107/592de7962551e67c3a73c5f178c2e4eb/_/jira-logo-scaled.png\"
+        alt=\"Bukkit Issue Tracker\" /></a></h1><ul class='aui-nav'>\n\n\n\n\n<li><a
+        class=\"aui-nav-link aui-dropdown2-ajax aui-dropdown2-trigger \"href=\"/secure/Dashboard.jspa\"
+        id=\"home_link\"  accessKey=\"d\"  title=\"View and manage your dashboards\"
+        \ aria-haspopup=\"true\" aria-owns=\"home_link-content\">Dashboards</a><div
+        id=\"home_link-content\" class=\"aui-dropdown2 aui-style-default\" data-aui-dropdown2-ajax-key=\"home_link\"></div></li><li><a
+        class=\"aui-nav-link aui-dropdown2-ajax aui-dropdown2-trigger \"href=\"/browse/BUKKIT\"
+        id=\"browse_link\"  accessKey=\"p\"  title=\"View recent projects and browse
+        a list of projects\"  aria-haspopup=\"true\" aria-owns=\"browse_link-content\">Projects</a><div
+        id=\"browse_link-content\" class=\"aui-dropdown2 aui-style-default\" data-aui-dropdown2-ajax-key=\"browse_link\"></div></li><li><a
+        class=\"aui-nav-link aui-dropdown2-ajax aui-dropdown2-trigger \"href=\"/issues/\"
+        id=\"find_link\"  accessKey=\"i\"  title=\"Search for issues and view recent
+        issues\"  aria-haspopup=\"true\" aria-owns=\"find_link-content\">Issues</a><div
+        id=\"find_link-content\" class=\"aui-dropdown2 aui-style-default\" data-aui-dropdown2-ajax-key=\"find_link\"></div></li>\n</ul></div><div
+        class=\"aui-header-secondary\"><ul class='aui-nav'><li>\n    <form action=\"/secure/QuickSearch.jspa\"
+        method=\"get\" id=\"quicksearch\" class=\"aui-quicksearch dont-default-focus
+        ajs-dirty-warning-exempt\">\n        <input id=\"quickSearchInput\" class=\"search\"
+        type=\"text\" title=\"Search\" placeholder=\"Search\" name=\"searchString\"
+        accessKey=\"q\" />\n        <input type=\"submit\" class=\"hidden\" value=\"Search\">\n
+        \   </form>\n</li>\n\n\n\n    <li id=\"system-help-menu\">\n        <a class=\"aui-nav-link
+        aui-dropdown2-trigger\" id=\"help_menu\" aria-haspopup=\"true\" aria-owns=\"system-help-menu-content\"
+        href=\"https://confluence.atlassian.com/display/JIRACORECLOUD/\"  target=\"$textUtils.htmlEncode($rootHelpMenuItem.params.target)\"
+        \ title=\"Help\"><span class=\"aui-icon aui-icon-small aui-iconfont-help\">Help</span></a>\n
+        \       <div id=\"system-help-menu-content\" class=\"aui-dropdown2 aui-style-default\">\n
+        \                           <div class=\"aui-dropdown2-section\">\n                                                                <ul
+        id=\"jira-help\" class=\"aui-list-truncate\">\n                                                            <li>\n
+        \                                   <a id=\"view_core_help\" class=\"aui-nav-link
+        \" title=\"Go to the online documentation for JIRA Core\" href=\"https://confluence.atlassian.com/display/JIRACORECLOUD/\"
+        \ target=\"_blank\" >JIRA Core help</a>\n                                </li>\n
+        \                                                           <li>\n                                    <a
+        id=\"keyshortscuthelp\" class=\"aui-nav-link \" title=\"Get more information
+        about JIRA's Keyboard Shortcuts\" href=\"/secure/ViewKeyboardShortcuts!default.jspa\"
+        \ target=\"_blank\" >Keyboard Shortcuts</a>\n                                </li>\n
+        \                                                           <li>\n                                    <a
+        id=\"view_about\" class=\"aui-nav-link \" title=\"Get more information about
+        JIRA\" href=\"/secure/AboutPage.jspa\" >About JIRA</a>\n                                </li>\n
+        \                                                           <li>\n                                    <a
+        id=\"tempo_core_help\" class=\"aui-nav-link \" title=\"Goto the online documentation
+        for Tempo\" href=\"http://tempoplugin.com/support\" target=\"_blank\" >Tempo
+        Help</a>\n                                </li>\n                                                    </ul>\n
+        \                                   </div>\n                    </div>\n    </li>\n\n\n\n\n\n\n\n\n\n<li
+        id=\"user-options\">\n            <a class=\"aui-nav-link login-link\" href=\"/login.jsp?os_destination=%2Fbrowse%2FBUKKIT-3846\">Log
+        In</a>\n                <div id=\"user-options-content\" class=\"aui-dropdown2
+        aui-style-default\">\n                            <div class=\"aui-dropdown2-section\">\n
+        \                                                       </div>\n                    </div>\n
+        \   </li>\n</ul></div></div><!-- .aui-header-inner--></nav><!-- .aui-header
+        -->\n    </header>\n    \n\n\n\n    <section id=\"content\" role=\"main\">\n\n
+        \   <div class=\"navigator-container hidden\">\n                                                                                                                                <div
+        class=\"hidden shortcut-links\">\n                                    <a id=\"edit-issue\"
+        class=\"issueaction-edit-issue\" href=\"/secure/EditIssue!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"assign-issue\" class=\"issueaction-assign-issue\"
+        href=\"/secure/AssignIssue!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"assign-to-me\" class=\"issueaction-assign-to-me
+        hide-from-opsbar\" href=\"/secure/AssignIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"comment-issue\" class=\"issueaction-comment-issue
+        add-issue-comment\" href=\"/secure/AddComment!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"add-hours-on-issue\" class=\"conjoined
+        issueaction-tempo-add-hours-on-issue issueaction-tempo-log-work\" href=\"/secure/TempoAddHours!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"log-work\" class=\"issueaction-log-work\"
+        href=\"/secure/CreateWorklog!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"plan-time-on-issue\" class=\"conjoined
+        issueaction-tempo-add-hours-on-issue issueaction-tempo-plan-time\" href=\"/secure/TempoAllocateTime!default.jspa?type=issue&amp;id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"tempo-bar-mlink\" class=\"tempo-bar-start\"
+        href=\"/secure/TempoAddHours!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"view-time-on-issue\" class=\"\"
+        href=\"/secure/TempoIssueBoard!report.jspa?issue=&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"greenhopper-rapidboard-operation\"
+        class=\"issueaction-greenhopper-rapidboard-operation js-rapidboard-operation-issue\"
+        href=\"/secure/GHGoToBoard.jspa?issueId={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"greenhopper-rank-top-operation\"
+        class=\"issueaction-greenhopper-rank-top-operation\" href=\"/secure/RankTop.jspa?issueId={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"greenhopper-rank-bottom-operation\"
+        class=\"issueaction-greenhopper-rank-bottom-operation\" href=\"/secure/RankBottom.jspa?issueId={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"attach-file\" class=\"issueaction-attach-file\"
+        href=\"/secure/AttachFile!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"attach-file\" class=\"unified-attach-file\"
+        href=\"/secure/AttachFile!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"attach-file\" class=\"issueaction-attach-file\"
+        href=\"/secure/AttachFile!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"attach-screenshot-html5\" class=\"issueaction-attach-screenshot-html5\"
+        href=\"/secure/ShowAttachScreenshotFormAction!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"add-gliffy-diagram-link\" class=\"gliffy-add-diagram-link\"
+        href=\"&returnUrl=/secure/issues\"></a>\n                                    <a
+        id=\"com.gliffy.integration.jira:add-gliffy-diagram-license-purchase\" class=\"\"
+        href=\"https://bukkit.atlassian.net/plugins/servlet/upm#manage/com.gliffy.integration.jira&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"toggle-vote-issue\" class=\"issueaction-vote-issue\"
+        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;vote=vote&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"toggle-vote-issue\" class=\"issueaction-unvote-issue\"
+        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;vote=unvote&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"view-voters\" class=\"issueaction-view-voters\"
+        href=\"/secure/ViewVoters!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"toggle-watch-issue\" class=\"issueaction-watch-issue\"
+        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;watch=watch&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"toggle-watch-issue\" class=\"issueaction-unwatch-issue\"
+        href=\"/secure/VoteOrWatchIssue.jspa?atl_token=BO29-YFDD-42VF-3M5C|e7dc4463b6efc661aac96b7a8e3eb739c3e473a8|lout&amp;id={0}&amp;watch=unwatch&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"manage-watchers\" class=\"issueaction-manage-watchers\"
+        href=\"/secure/ManageWatchers!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"create-subtask\" class=\"issueaction-create-subtask\"
+        href=\"/secure/CreateSubTaskIssue!default.jspa?parentIssueId={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"subtask-to-issue\" class=\"issueaction-subtask-to-issue\"
+        href=\"/secure/ConvertSubTask.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"issue-to-subtask\" class=\"issueaction-issue-to-subtask\"
+        href=\"/secure/ConvertIssue.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"cta-create-branch\" class=\"devstatus-cta-link\"
+        href=\"#devstatus.cta.createbranch&returnUrl=/secure/issues\"></a>\n                                    <a
+        id=\"move-issue\" class=\"issueaction-move-issue\" href=\"/secure/MoveIssue!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"move-issue\" class=\"issueaction-move-subtask\"
+        href=\"/secure/MoveSubTaskChooseOperation!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"link-issue\" class=\"issueaction-link-issue\"
+        href=\"/secure/LinkJiraIssue!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"clone-issue\" class=\"issueaction-clone-issue\"
+        href=\"/secure/CloneIssueDetails!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"edit-labels\" class=\"issueaction-edit-labels\"
+        href=\"/secure/EditLabels!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"create-test-session\" class=\"issueaction-create-test-session\"
+        href=\"/secure/CreateSession.jspa?issueId={0}&returnUrl=/secure/issues\"></a>\n
+        \                                   <a id=\"delete-issue\" class=\"issueaction-delete-issue\"
+        href=\"/secure/DeleteIssue!default.jspa?id={0}&returnUrl=/secure/issues\"></a>\n
+        \                           </div>\n        \n        <div id=\"user-parms\"
+        style=\"display:none;\" data-user-parms=\"{&quot;createSharedObjects&quot;:false,&quot;createIssue&quot;:false}\"></div>\n\n
+        \       <div class=\"navigator-sidebar\" id=\"navigator-sidebar\">\n                        <div
+        style=\"width:180px\">\n                                    </div>\n        </div>\n
+        \       <script type=\"text/javascript\">\n            (function() {\n                var
+        navigatorSidebarElement = jQuery(\".navigator-sidebar\");\n                if
+        (JIRA.Issues.FilterPanelModel) {\n                    navigatorSidebarElement.toggleClass(\"collapsed\",
+        !JIRA.Issues.FilterPanelModel.prototype.isExpanded())\n                    if
+        (JIRA.Issues.FilterPanelModel.prototype.isExpanded()) {\n                        navigatorSidebarElement.width(JIRA.Issues.FilterPanelModel.prototype.getWidth());\n
+        \                   }\n                }\n            })();\n        </script>\n
+        \       <div class=\"navigator-body\">\n            <div class=\"contained-content\">\n\n
+        \               <header class=\"saved-search-selector\">\n                    <div
+        class=\"saved-search-operations\">\n                        <ul class=\"operations\">\n\n
+        \                                                       <li class=\"aui-dd-parent\">\n
+        \                               <a href=\"#\" class=\"header-views header-operations
+        aui-dropdown-trigger aui-dd-link standard lnk no-icon\" title=\"Export this
+        filter in another format\" role=\"button\">\n                                    <span
+        class=\"aui-icon aui-icon-small aui-iconfont-export\"></span>\n                                    <span>Export</span>\n
+        \                               </a>\n                            </li>\n
+        \                           <li class=\"aui-dd-parent\">\n                                <a
+        href=\"#\" class=\"header-tools header-operations aui-dropdown-trigger aui-dd-link
+        standard no-icon\" title=\"Select operations that can be completed\" role=\"button\">\n
+        \                                   <span class=\"aui-icon aui-icon-small
+        aui-iconfont-configure\"></span>\n                                    <span>Tools</span>\n
+        \                               </a>\n                            </li>\n\n
+        \                       </ul>\n                        <div class=\"hidden
+        operations-view-data\">\n                            <fieldset class=\"hidden
+        parameters\">\n                            </fieldset>\n                        </div>\n
+        \                   </div>\n                    <span id=\"throbber-space\"
+        class=\"icon throbber\"></span>\n                    <div id=\"search-header-view\">\n
+        \                       <h1 class=\"search-title\"></h1>\n                    </div>\n
+        \               </header>\n                <form class=\"navigator-search\"></form>\n
+        \               <div class=\"navigator-group\">\n                                        <div
+        class=\"results-panel navigator-item\">\n                        <div class=\"navigator-content\"\n
+        \                               data-issue-table-model-state=\"\"\n                                data-session-search-state=\"\"\n
+        \                               data-selected-issue=\"{&quot;id&quot;:17247,&quot;key&quot;:&quot;BUKKIT-3846&quot;}\">\n
+        \                           \n                        </div>\n                    </div>\n
+        \               </div>\n            </div>\n        </div>\n    </div>\n\n
+        \   <div class=\"issue-container \">\n                                    <div
+        id=\"issue-content\" class=\"issue-edit-form\">\n                    <header
+        id=\"stalker\" class=\"issue-header js-stalker\">\n                        <div
+        class=\"issue-header-content\"><header class=\"aui-page-header\"><div class=\"aui-page-header-inner\"><div
+        class=\"aui-page-header-image\"><span id=\"10102\" class=\"aui-avatar aui-avatar-large
+        aui-avatar-project jira-system-avatar\"><span class=\"aui-avatar-inner\"><img
+        id=\"project-avatar\" alt=\"Uploaded image for project: &#39;Bukkit&#39;\"
+        src=\"https://bukkit.atlassian.net/secure/projectavatar?pid=10102&amp;avatarId=10011\"
+        /></span></span></div><!-- .aui-page-header-image --><div class=\"aui-page-header-main\"><ol
+        class=\"aui-nav aui-nav-breadcrumbs\"><li><a id=\"project-name-val\" href=\"/browse/BUKKIT\">Bukkit</a></li><li><a
+        class=\"issue-link\" data-issue-key=\"BUKKIT-3846\" href=\"/browse/BUKKIT-3846\"
+        id=\"key-val\" rel=\"17247\">BUKKIT-3846</a></li></ol><h1 id=\"summary-val\">FurnaceRecipe
+        overwrites vanilla result experience</h1></div><!-- .aui-page-header-main
+        --><div class=\"aui-page-header-actions\"><div id=\"issue-header-pager\"></div></div><!--
+        .aui-page-header-actions --></div><!-- .aui-page-header-inner --></header><!--
+        .aui-page-header --><div class=\"command-bar\"><div class=\"ops-cont\"><div
+        class=\"ops-menus aui-toolbar\"><div class=\"toolbar-split toolbar-split-left\"><ul
+        id=\"opsbar-ops-login-lnk_container\" class=\"toolbar-group pluggable-ops\"><li
+        class=\"toolbar-item\"><a id=\"ops-login-lnk\"title=\"Log In\"class=\"toolbar-trigger\"
+        href=\"/login.jsp?os_destination=%2Fbrowse%2FBUKKIT-3846\"><span class=\"trigger-label\">Log
+        In</span></a></li></ul><ul id=\"opsbar-opsbar-operations\" class=\"toolbar-group
+        pluggable-ops\"></ul><ul id=\"opsbar-opsbar-transitions\" class=\"toolbar-group
+        pluggable-ops\"></ul><ul id=\"opsbar-opsbar-admin\" class=\"toolbar-group
+        pluggable-ops\"></ul></div><div class=\"toolbar-split toolbar-split-right\"><ul
+        id=\"opsbar-jira.issue.tools\" class=\"toolbar-group pluggable-ops\"><li class=\"toolbar-item
+        toolbar-dropdown\"><div><a href=\"#\"  id=\"viewissue-export\"title=\"Export
+        this issue in another format\" data-hide-on-scroll=\".split-view .issue-container\"
+        data-contain-to-window=\"true\" class=\"toolbar-trigger  js-default-dropdown\"
+        ><span class=\"icon icon-default aui-icon aui-icon-small aui-iconfont-export\"></span>
+        <span class=\"dropdown-text\">Export</span><span class=\"icon drop-menu\"></span></a><div
+        class=\"aui-list hidden\"><ul class=\"aui-list-section aui-first aui-last\"><li
+        class=\"aui-list-item\"><a  href=\"/si/jira.issueviews:issue-xml/BUKKIT-3846/BUKKIT-3846.xml\"
+        class=\"aui-list-item-link\"id=\"jira.issueviews:issue-xml\"><span class=\"trigger-label\">XML</span></a></li><li
+        class=\"aui-list-item\"><a  href=\"/si/jira.issueviews:issue-word/BUKKIT-3846/BUKKIT-3846.doc\"
+        class=\"aui-list-item-link\"id=\"jira.issueviews:issue-word\"><span class=\"trigger-label\">Word</span></a></li><li
+        class=\"aui-list-item\"><a  href=\"/si/jira.issueviews:issue-html/BUKKIT-3846/BUKKIT-3846.html\"
+        class=\"aui-list-item-link\"id=\"jira.issueviews:issue-html\"><span class=\"trigger-label\">Printable</span></a></li></ul></div></div></li></ul></div></div></div></div></div>\n
+        \                   </header>\n                    <div class=\"issue-body-content\">\n
+        \                       <div class=\"aui-group issue-body\"><div class=\"aui-item
+        issue-main-column\"><div id=details-module class=\"module toggle-wrap\"><div
+        id=\"details-module_heading\" class=\"mod-header\"><ul class=\"ops\"></ul><h2
+        class=\"toggle-title\">Details</h2></div><div class=\"mod-content\">\n\n\n\n\n<ul
+        id=\"issuedetails\" class=\"property-list two-cols\">\n    <li class=\"item\">\n
+        \       <div class=\"wrap\">\n            <strong class=\"name\">Type:</strong>\n
+        \           <span id=\"type-val\" class=\"value\">\n                                <img
+        \ alt=\"\" height=\"16\" src=\"/secure/viewavatar?size=xsmall&amp;avatarId=19403&amp;avatarType=issuetype\"
+        title=\"Bug - A problem which impairs or prevents the functions of the product.\"
+        width=\"16\" /> Bug\n            </span>\n        </div>\n    </li>\n    <li
+        class=\"item item-right\">\n        <div class=\"wrap\">\n            <strong
+        class=\"name\">Status:</strong>\n            <span id=\"status-val\" class=\"value\">\n
+        \                               <span class=\" jira-issue-status-lozenge aui-lozenge
+        jira-issue-status-lozenge-green jira-issue-status-lozenge-done jira-issue-status-lozenge-max-width-medium\"
+        data-tooltip=\"&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Resolved&lt;/span&gt;&lt;br&gt;&lt;span
+        class=&quot;jira-issue-status-tooltip-desc&quot;&gt;A resolution has been
+        taken, and it is awaiting verification by reporter. From here issues are either
+        reopened, or are closed.&lt;/span&gt;\">Resolved</span>            </span>\n
+        \                   </div>\n    </li>\n                                <li
+        class=\"item item-right\">\n            <div class=\"wrap\">\n                <strong
+        class=\"name\">Resolution:</strong>\n                <span id=\"resolution-val\"
+        class=\"value resolved\" >\n                                     Fixed\n                                </span>\n
+        \           </div>\n        </li>\n                <li class=\"item\">\n            <div
+        class=\"wrap\">\n                <strong class=\"name\">Affects Version/s:</strong>\n
+        \               <span id=\"versions-val\" class=\"value\">\n                                            <span
+        class=\"shorten\" id=\"versions-field\">\n                                                            <span
+        title=\"CraftBukkit 1.4.7-R1.0 CraftBukkit MC 1.4.7 Release 1.0 (RB)\">CraftBukkit
+        1.4.7-R1.0</span>,                                                            <span
+        title=\"Future \">Future</span>                                                    </span>\n
+        \                                   </span>\n            </div>\n        </li>\n
+        \               <li class=\"item item-right\">\n            <div class=\"wrap\">\n
+        \               <strong class=\"name\">Fix Version/s:</strong>\n                <span
+        id=\"fixfor-val\" class=\"value\">\n                                            <span
+        class=\"shorten\" id=\"fixVersions-field\">\n                                                            <a
+        href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+BUKKIT+AND+fixVersion+%3D+%22CraftBukkit+1.7.2-R0.2%22\"
+        title=\"CraftBukkit 1.7.2-R0.2 CraftBukkit MC 1.7.2 Release 0.2 (Beta)\">CraftBukkit
+        1.7.2-R0.2</a>                                                    </span>\n
+        \                                   </span>\n            </div>\n        </li>\n
+        \               <li class=\"item\">\n            <div class=\"wrap\">\n                <strong
+        class=\"name\">Component/s:</strong>\n                <span id=\"components-val\"
+        class=\"value\">\n                                            <span class=\"shorten\"
+        id=\"components-field\">\n                                                            <a
+        href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+BUKKIT+AND+component+%3D+%22Bukkit+API%22\"
+        title=\"Bukkit API \">Bukkit API</a>,                                                            <a
+        href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+BUKKIT+AND+component+%3D+Inventory\"
+        title=\"Inventory \">Inventory</a>,                                                            <a
+        href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+BUKKIT+AND+component+%3D+Plugins\"
+        title=\"Plugins \">Plugins</a>                                                    </span>\n
+        \                                   </span>\n            </div>\n        </li>\n
+        \               <li class=\"item item-right\">\n            <div class=\"wrap\">\n
+        \               <strong class=\"name\">Security Level:</strong>\n                <span
+        id=\"security-val\" class=\"value\">\n                    <span class=\"note\">Public</span>\n
+        \                                           (Viewable by everyone)\n                                    </span>\n
+        \           </div>\n        </li>\n                <li class=\"item full-width\">\n
+        \           <div class=\"wrap\" id=\"wrap-labels\">\n                <strong
+        class=\"name\">Labels:</strong>\n                    <div class=\"labels-wrap
+        value\">\n            <ul class=\"labels\" id=\"labels-17247-value\">\n                                                        <li><a
+        class=\"lozenge\" href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+bug\"
+        title=\"bug\"><span>bug</span></a></li>\n                                                                                    <li><a
+        class=\"lozenge\" href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+bukkit\"
+        title=\"bukkit\"><span>bukkit</span></a></li>\n                                                                                    <li><a
+        class=\"lozenge\" href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+experience\"
+        title=\"experience\"><span>experience</span></a></li>\n                                                                                    <li><a
+        class=\"lozenge\" href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+gameplay\"
+        title=\"gameplay\"><span>gameplay</span></a></li>\n                                                                                    <li><a
+        class=\"lozenge\" href=\"/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+recipes\"
+        title=\"recipes\"><span>recipes</span></a></li>\n                                                    </ul>\n
+        \       </div>\n            </div>\n        </li>\n        </ul>\n\n<div id=\"customfieldmodule\">\n
+        \   <div class=\"aui-tabs horizontal-tabs\" id=\"customfield-tabs\">\n                    <div
+        id=\"customfield-panel-1\" class=\"tabs-pane active-pane\">\n                        <ul
+        class=\"property-list\">\n                                                <li
+        id=\"rowForcustomfield_10300\" class=\"item\">\n                        <div
+        class=\"wrap\">\n                            <strong title=\"Confirmation
+        Status\" class=\"name\">Confirmation Status:</strong>\n                            <div
+        id=\"customfield_10300-val\" class=\"value type-radiobuttons\" data-fieldtype=\"radiobuttons\"
+        data-fieldtypecompletekey=\"com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons\">\n
+        \                                   Confirmed\n\n                            </div>\n
+        \                       </div>\n                    </li>\n                                        </ul>\n
+        \       </div>\n        </div></div>\n</div></div><div id=descriptionmodule
+        class=\"module toggle-wrap\"><div id=\"descriptionmodule_heading\" class=\"mod-header\"><ul
+        class=\"ops\"></ul><h2 class=\"toggle-title\">Description</h2></div><div class=\"mod-content\"><div
+        id=\"description-val\" class=\"field-ignore-highlight\">\n    <div class=\"user-content-block\">\n
+        \                   <p>Creating a FurnaceRecipe with a result that is already
+        in the vanilla furnace recipes as result will overwrite that result's experience
+        making both the vanilla recipe and the custom recipe return less experience.</p>\n\n<p>This
+        problem is present since the addition of experience dropping when smelting
+        in the game.</p>\n\n<p>I've attached a test plugin that adds a recipe to smelt
+        apple making gold_ingot, the plugin doesn't add the recipe until the 'test'
+        command is executed.</p>\n\n<p>Steps to reproduce the problem:</p>\n<ul class=\"alternate\"
+        type=\"square\">\n\t<li>start the server and don't add the recipe yet</li>\n\t<li>in-game
+        smelt gold_ore and take the gold_ingot as soon as it's available</li>\n\t<li>doing
+        that multiple times would make it obvious that you get experience every time
+        you smelt</li>\n\t<li>then install the plugin if not installed and use the
+        'test' command to add a new recipe</li>\n\t<li>now if you're taking gold_ingot
+        from smelting gold_ore (or apples) you'll not get the same experience as before,
+        you'll get it alot less frequently and alot less if you've got more stacked
+        items</li>\n</ul>\n\n\n<p>This can affect gameplay because it basically breaks
+        vanilla behaviour by adding a plugin that only adds extra recipes.</p>\n\n<p>The
+        fix is pretty simple and I'll include it in a PR that I'm working on it because
+        it conflicts with the code from that PR too.</p>\n\n<p>EDIT: PR for this:
+        <a href=\"https://github.com/Bukkit/CraftBukkit/pull/1109\" class=\"external-link\"
+        rel=\"nofollow\">https://github.com/Bukkit/CraftBukkit/pull/1109</a></p>\n
+        \           </div>\n</div>\n</div></div><div id=gliffyViewerPanel class=\"module
+        toggle-wrap\"><div id=\"gliffyViewerPanel_heading\" class=\"mod-header\"><ul
+        class=\"ops\"></ul><h2 class=\"toggle-title\">Gliffy Diagrams</h2></div><div
+        class=\"mod-content\"><div id=\"gliffy-diagrams-panel\">\n\n    <div class=\"gliffy-controls\">\n
+        \       <button aria-owns=\"gliffy-dropdown-content\" aria-haspopup=\"true\"\n
+        \               class=\"gliffy-sort-dropdown aui-button aui-button-subtle
+        aui-dropdown2-trigger\"\n                data-sort=\"name\" data-order=\"ascending\">\n
+        \           Sort\n        </button>\n        <div id=\"gliffy-dropdown-content\"
+        class=\"aui-dropdown2 aui-style-default\" aria-hidden=\"false\"\n             data-dropdown2-alignment=\"left\">\n
+        \           <div class=\"aui-dropdown2-section\">\n                <ul class=\"aui-list-truncate\">\n
+        \                   <li data-sort=\"name\"><a class=\"gliffy-sort aui-dropdown2-checkbox
+        checked\" href=\"#\">Name</a></li>\n                    <li data-sort=\"date\"><a
+        class=\"gliffy-sort aui-dropdown2-checkbox\" href=\"#\">Modify Date</a></li>\n
+        \               </ul>\n            </div>\n            <div class=\"aui-dropdown2-section\">\n
+        \               <ul class=\"aui-list-truncate\">\n                    <li
+        data-order=\"ascending\"><a class=\"gliffy-sort aui-dropdown2-checkbox checked\"
+        href=\"#\">Ascending</a></li>\n                    <li data-order=\"descending\"><a
+        class=\"gliffy-sort aui-dropdown2-checkbox\" href=\"#\">Descending</a></li>\n
+        \               </ul>\n            </div>\n            \n        </div>\n
+        \           </div>\n\n    <script type=\"text/javascript\">\n        (function
+        () {\n            AJS.toInit(function () {\n                var $ = AJS.$;\n
+        \               $(function () {\n                    //GJIRA-246 only\n                    setTimeout(function
+        () {\n                        window.GLIFFY.renderViewerPanel();\n                    },
+        100);\n                });\n            });\n        }());\n    </script>\n\n
+        \   <script type=\"text/javascript\">\n        var GLIFFY = GLIFFY || {};\n
+        \       GLIFFY.jira = GLIFFY.jira || {};\n        GLIFFY.jira.analyticsOff=false;\n
+        \       GLIFFY.jira.licenseType=\"${licenseType}\";\n        GLIFFY.jira.quantityUsers=\"-1\";\n
+        \       GLIFFY.jira.editUrl=\"/secure/GliffyEditor.jspa?issue=BUKKIT-3846\";\n
+        \   </script>\n\n</div>\n</div></div><div id=dnd-metadata class=\"module toggle-wrap\"><div
+        id=\"dnd-metadata_heading\" class=\"mod-header\"><ul class=\"ops\"></ul><h2
+        class=\"toggle-title\">Attachments</h2></div><div class=\"mod-content\"><div
+        id=\"dnd-metadata-webpanel\" data-can-attach=\"false\" data-project-type=\"software\"
+        data-upload-limit=\"10485760\"></div></div></div><div id=attachmentmodule
+        class=\"module toggle-wrap\"><div id=\"attachmentmodule_heading\" class=\"mod-header\"><ul
+        class=\"ops\"><li class=\"drop\"><div class=\"aui-dd-parent\"><a href=\"#\"
+        class=\"icon drop-menu js-default-dropdown\" title=\"Options\"><span>Options</span></a><div
+        class=\"aui-dropdown-content aui-list\"><ul id=\"attachment-sorting-options\"class=\"aui-list-section
+        aui-first\"><li class=\"aui-list-item\"><a id=\"attachment-sort-key-name\"href=\"/browse/BUKKIT-3846?attachmentSortBy=fileName#attachmentmodule\"class=\"aui-list-checked
+        aui-checked aui-list-item-link\"title=\"viewissue.subtasks.tab.show.all.name\"><span>Sort
+        By Name</span></a></li><li class=\"aui-list-item\"><a id=\"attachment-sort-key-date\"href=\"/browse/BUKKIT-3846?attachmentSortBy=dateTime#attachmentmodule\"class=\"aui-list-checked
+        aui-list-item-link\"title=\"Sort By Date\"><span>Sort By Date</span></a></li></ul><ul
+        id=\"attachment-sorting-order-options\"class=\"aui-list-section\"><li class=\"aui-list-item\"><a
+        id=\"attachment-sort-direction-asc\"href=\"/browse/BUKKIT-3846?attachmentOrder=asc#attachmentmodule\"class=\"aui-list-checked
+        aui-checked aui-list-item-link\"title=\"Ascending\"><span>Ascending</span></a></li><li
+        class=\"aui-list-item\"><a id=\"attachment-sort-direction-desc\"href=\"/browse/BUKKIT-3846?attachmentOrder=desc#attachmentmodule\"class=\"aui-list-checked
+        aui-list-item-link\"title=\"Descending\"><span>Descending</span></a></li></ul><ul
+        id=\"attachment-view-mode-options\"class=\"aui-list-section\"><li class=\"aui-list-item\"><a
+        id=\"attachment-view-mode-gallery\"href=\"/browse/BUKKIT-3846?attachmentViewMode=gallery#attachmentmodule\"class=\"aui-list-checked
+        aui-checked aui-list-item-link\"title=\"Thumbnails\"><span>Thumbnails</span></a></li><li
+        class=\"aui-list-item\"><a id=\"attachment-view-mode-list\"href=\"/browse/BUKKIT-3846?attachmentViewMode=list#attachmentmodule\"class=\"aui-list-checked
+        aui-list-item-link\"title=\"List\"><span>List</span></a></li></ul><ul id=\"attachment-manage-options\"class=\"aui-list-section
+        aui-last\"><li class=\"aui-list-item\"><a id=\"aszip\"href=\"/secure/attachmentzip/17247.zip\"class=\"aui-list-checked
+        aui-list-item-link\"title=\"Download all attachments as a ZIP file\"><span>Download
+        All</span></a></li></ul></div></div></li></ul><h2 class=\"toggle-title\">Attachments</h2></div><div
+        class=\"mod-content\"><ol id=\"attachment_thumbnails\" class=\"item-attachments\"
+        data-sort-key=\"fileName\" data-sort-order=\"asc\"><li class=\"attachment-content\"
+        draggable=\"true\" data-downloadurl=\"application/octet-stream:Test.jar:https://bukkit.atlassian.net/secure/attachment/15823/Test.jar\"data-issue-id=\"17247\"data-attachment-type=\"expandable\"><div
+        class=\"attachment-thumb\"><a href=\"/secure/attachment/15823/Test.jar\" title=\"Test.jar
+        - Latest 21/Mar/13 4:29 PM - THDigi\"><span class=\"aui-icon aui-icon-large
+        attachment-thumbnail-icon aui-iconfont-devtools-file\"></span></a></div><dl
+        ><dt><span class=\"blender\"></span><a class=\"attachment-title\" href=\"/secure/attachment/15823/Test.jar\"
+        title=\"Test.jar - Latest 21/Mar/13 4:29 PM - THDigi\">Test.jar</a></dt><dd
+        class=\"attachment-size\">2 kB</dd><dd class=\"attachment-date\"><time class=\"livestamp\"
+        datetime=\"2013-03-21T16:29:42.352Z\">21/Mar/13 4:29 PM</time></dd></dl></li></ol></div></div><div
+        id=activitymodule class=\"module toggle-wrap\"><div id=\"activitymodule_heading\"
+        class=\"mod-header\"><ul class=\"ops\"></ul><h2 class=\"toggle-title\">Activity</h2></div><div
+        class=\"mod-content\">\n\n\n\n\n\n\n\n\n\n\n    <div class=\"tabwrap tabs2\">\n\n
+        \       <ul id=\"issue-tabs\" class=\"tabs horizontal\">\n                                \n
+        \           <li  data-id=\"all-tabpanel\" data-key=\"com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel\"
+        data-label=\"All\" data-href=\"/browse/BUKKIT-3846?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel\">\n
+        \                           <a class=\"ajax-activity-content\" id=\"all-tabpanel\"
+        href=\"/browse/BUKKIT-3846?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel\"><strong>All</strong></a>\n
+        \                       </li>\n                                \n            <li
+        \ class=\"active\" id=\"comment-tabpanel\"  data-id=\"comment-tabpanel\" data-key=\"com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel\"
+        data-label=\"Comments\" data-href=\"/browse/BUKKIT-3846?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel\">\n
+        \                           <strong tabindex=\"0\">Comments</strong>\n                        </li>\n
+        \                               \n            <li  data-id=\"changehistory-tabpanel\"
+        data-key=\"com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel\"
+        data-label=\"History\" data-href=\"/browse/BUKKIT-3846?page=com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel\">\n
+        \                           <a class=\"ajax-activity-content\" id=\"changehistory-tabpanel\"
+        href=\"/browse/BUKKIT-3846?page=com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel\"><strong>History</strong></a>\n
+        \                       </li>\n                                \n            <li
+        \ data-id=\"activity-stream-issue-tab\" data-key=\"com.atlassian.streams.streams-jira-plugin:activity-stream-issue-tab\"
+        data-label=\"Activity\" data-href=\"/browse/BUKKIT-3846?page=com.atlassian.streams.streams-jira-plugin:activity-stream-issue-tab\">\n
+        \                           <a class=\"ajax-activity-content\" id=\"activity-stream-issue-tab\"
+        href=\"/browse/BUKKIT-3846?page=com.atlassian.streams.streams-jira-plugin:activity-stream-issue-tab\"><strong>Activity</strong></a>\n
+        \                       </li>\n                                \n            <li
+        \ data-id=\"transitions-summary-tabpanel\" data-key=\"com.googlecode.jira-suite-utilities:transitions-summary-tabpanel\"
+        data-label=\"Transitions\" data-href=\"/browse/BUKKIT-3846?page=com.googlecode.jira-suite-utilities:transitions-summary-tabpanel\">\n
+        \                           <a class=\"ajax-activity-content\" id=\"transitions-summary-tabpanel\"
+        href=\"/browse/BUKKIT-3846?page=com.googlecode.jira-suite-utilities:transitions-summary-tabpanel\"><strong>Transitions</strong></a>\n
+        \                       </li>\n                </ul>\n\n            </div>\n
+        \   <div class=\"issuePanelWrapper\">\n        <div class=\"issuePanelProgress\"></div>\n
+        \       <div class=\"issuePanelContainer\" id=\"issue_actions_container\">\n
+        \                                   \n\n\n<div id=\"comment-25064\" class=\"issue-data-block
+        activity-comment twixi-block  expanded\">\n    <div class=\"twixi-wrap verbose
+        actionContainer\">\n        <div class=\"action-head\">\n            <a href=\"#\"
+        title=\"Collapse comment\" class=\"twixi\"><span class=\"icon-default aui-icon
+        aui-icon-small aui-iconfont-expanded\"><span>Hide</span></span></a>\n            <div
+        class=\"action-links\">\n                <a href=\"/browse/BUKKIT-3846?focusedCommentId=25064&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-25064\"\n
+        \                  title=\"Right click and copy link for a permanent link
+        to this comment.\" class=\"activitymodule-link issue-comment-action\">\n                    <span
+        class=\"icon-default aui-icon aui-icon-small aui-iconfont-link\">Permalink</span></a>\n
+        \                                           </div>\n            <div class=\"action-details\">
+        \       \n    \n    \n    \n                \n\n    <a class=\"user-hover
+        user-avatar\" rel=\"millerkil\" id=\"commentauthor_25064_verbose\" href=\"/secure/ViewProfile.jspa?name=millerkil\"><span
+        class=\"aui-avatar aui-avatar-xsmall\"><span class=\"aui-avatar-inner\"><img
+        src=\"https://bukkit.atlassian.net/secure/useravatar?size=xsmall&amp;avatarId=10122\"
+        alt=\"millerkil\" /></span></span> Alex</a>\n added a comment  - <span class='commentdate_25064_verbose
+        subText'><span class='date user-tz' title='12/Jun/13 10:46 PM'><time class='livestamp'
+        datetime='2013-06-12T22:46:19+0100'>12/Jun/13 10:46 PM</time></span></span>
+        \ </div>\n        </div>\n        <div class=\"action-body flooded\"><p>Currently
+        have a PR to fix this: <a href=\"https://github.com/Bukkit/CraftBukkit/pull/1173\"
+        class=\"external-link\" rel=\"nofollow\">https://github.com/Bukkit/CraftBukkit/pull/1173</a></p>
+        </div>\n    </div>\n    <div class=\"twixi-wrap concise actionContainer\">\n
+        \       <div class=\"action-head\">\n            <a href=\"#\" title=\"Expand
+        comment\" class=\"twixi\"><span class=\"icon-default aui-icon aui-icon-small
+        aui-iconfont-collapsed\"><span>Show</span></span></a>\n            <div class=\"action-details
+        flooded\">\n                        \n    \n    \n    \n                \n\n
+        \   <a class=\"user-hover user-avatar\" rel=\"millerkil\" id=\"commentauthor_25064_concise\"
+        href=\"/secure/ViewProfile.jspa?name=millerkil\"><span class=\"aui-avatar
+        aui-avatar-xsmall\"><span class=\"aui-avatar-inner\"><img src=\"https://bukkit.atlassian.net/secure/useravatar?size=xsmall&amp;avatarId=10122\"
+        alt=\"millerkil\" /></span></span> Alex</a>\n added a comment  - <span class='commentdate_25064_concise
+        subText'><span class='date user-tz' title='12/Jun/13 10:46 PM'><time class='livestamp'
+        datetime='2013-06-12T22:46:19+0100'>12/Jun/13 10:46 PM</time></span></span>
+        \                   Currently have a PR to fix this:  https://github.com/Bukkit/CraftBukkit/pull/1173
+        \              </div>\n        </div>\n    </div>\n</div>\n                             </div>\n
+        \   </div>\n</div></div></div><div id=\"viewissuesidebar\" class=\"aui-item
+        issue-side-column\"><div id=peoplemodule class=\"module toggle-wrap\"><div
+        id=\"peoplemodule_heading\" class=\"mod-header\"><ul class=\"ops\"></ul><h2
+        class=\"toggle-title\">People</h2></div><div class=\"mod-content\"><ul class=\"item-details\"
+        id=\"peopledetails\">\n    <li class=\"people-details\">\n                <dl>\n
+        \           <dt>Assignee:</dt>\n            <dd>\n                <span id=\"assignee-val\"
+        class=\"view-issue-field\">\n\n    \n\n    <span class=\"aui-avatar aui-avatar-small\"><span
+        class=\"aui-avatar-inner\"><img src=\"https://bukkit.atlassian.net/secure/useravatar?size=small&amp;avatarId=10123\"
+        /></span></span>\n    Unassigned\n</span>\n                            </dd>\n
+        \       </dl>\n                        <dl>\n            <dt>Reporter:</dt>\n
+        \           <dd>\n                <span id=\"reporter-val\" class=\"view-issue-field\">\n\n
+        \           <span class=\"user-hover\" id=\"issue_summary_reporter_digi\"
+        rel=\"digi\">\n            \n\n    <span class=\"aui-avatar aui-avatar-small\"><span
+        class=\"aui-avatar-inner\"><img src=\"https://bukkit.atlassian.net/secure/useravatar?size=small&amp;ownerId=digi&amp;avatarId=15301\"
+        alt=\"digi\" /></span></span>\n            THDigi\n        </span>\n    </span>\n
+        \           </dd>\n        </dl>\n                        <dl>\n            <dt
+        title=\"Participants\">Participants:</dt>\n            <dd><span id=\"customfield_10109-val\"
+        data-name=\"Participants\" data-fieldtype=\"participants\" data-fieldtypecompletekey=\"com.atlassian.jira.toolkit:participants\">
+        \   <div class=\"shorten\" id=\"customfield_10109-field\">\n                    <a
+        class=\"user-hover cf-participant\" rel=\"millerkil\" title=\"Find all issues
+        Alex participated in\" href=\"/secure/IssueNavigator.jspa?reset=true&customfield_10109=millerkil\">Alex</a>,
+        \                    <a class=\"user-hover cf-participant\" rel=\"digi\" title=\"Find
+        all issues THDigi participated in\" href=\"/secure/IssueNavigator.jspa?reset=true&customfield_10109=digi\">THDigi</a>
+        \           </div>\n</span></dd>\n        </dl>\n            </li>\n</ul>\n
+        \   <ul class=\"item-details\">\n        <li>\n                            <dl>\n
+        \                   <dt>Votes:</dt>\n                    <dd>\n                                                                            <span
+        id=\"vote-data\" class=\"aui-badge vote-state-off\">3</span>\n                        \n
+        \                                                                                                       <span
+        id=\"vote-label\" title=\"You have to be logged in to vote for an issue.\">Vote
+        for this issue</span>\n                                            </dd>\n
+        \               </dl>\n                                        <dl>\n                    <dt>Watchers:</dt>\n
+        \                   <dd>\n                                                                        \n
+        \                                                                           <span
+        id=\"watcher-data\" class=\"aui-badge watch-state-off\">3</span>\n                        \n
+        \                                                                               <span
+        id=\"watch-label\" title=\"You have to be logged in to watch an issue.\">Start
+        watching this issue</span>\n                                            </dd>\n
+        \               </dl>\n                    </li>\n    </ul>\n</div></div><div
+        id=datesmodule class=\"module toggle-wrap\"><div id=\"datesmodule_heading\"
+        class=\"mod-header\"><ul class=\"ops\"></ul><h2 class=\"toggle-title\">Dates</h2></div><div
+        class=\"mod-content\"><ul class=\"item-details\">\n    <li>\n            <dl
+        class=\"dates\">\n            <dt>Created:</dt>\n            <dd class=\"date
+        user-tz\"  title=\"21/Mar/13 4:29 PM\" >\n\n                <span data-name=\"Created\"
+        id=\"create-date\"  data-fieldtype=\"datetime\"  >\n                                                                        <time
+        class=\"livestamp\" datetime=\"2013-03-21T16:29:42+0000\">21/Mar/13 4:29 PM</time>
+        \                                                            </span>\n            </dd>\n
+        \       </dl>\n            <dl class=\"dates\">\n            <dt>Updated:</dt>\n
+        \           <dd class=\"date user-tz\"  title=\"21/Dec/13 5:43 AM\" >\n\n
+        \               <span data-name=\"Updated\" id=\"updated-date\"  data-fieldtype=\"datetime\"
+        \ >\n                                                                        <time
+        class=\"livestamp\" datetime=\"2013-12-21T05:43:11+0000\">21/Dec/13 5:43 AM</time>
+        \                                                            </span>\n            </dd>\n
+        \       </dl>\n            <dl class=\"dates\">\n            <dt>Resolved:</dt>\n
+        \           <dd class=\"date user-tz\"  title=\"21/Dec/13 5:43 AM\" >\n\n
+        \               <span data-name=\"Resolved\" id=\"resolved-date\"  data-fieldtype=\"datetime\"
+        \ >\n                                                                        <time
+        class=\"livestamp\" datetime=\"2013-12-21T05:43:11+0000\">21/Dec/13 5:43 AM</time>
+        \                                                            </span>\n            </dd>\n
+        \       </dl>\n        </li>\n</ul>\n</div></div></div></div>\n                    </div>\n
+        \               </div>\n                        </div>\n\n    \n    </section>\n
+        \   <footer id=\"footer\" role=\"contentinfo\">\n        \n\n<section class=\"footer-body\">\n
+        \       <ul class=\"atlassian-footer\">\n            <li><a href=\"http://www.atlassian.com/\">Powered
+        by Atlassian</a><span id=\"studioVersion\" class=\"hidden\">3.1 r</span></li>\n
+        \           <li><a href=\"http://www.atlassian.com/hosted/terms.jsp\">Terms
+        of Use</a></li>\n            <li><a href=\"https://answers.atlassian.com/\">Answers</a></li>\n
+        \           <li><a href=\"https://confluence.atlassian.com/x/aJALE\">Maintenance
+        Schedule</a></li>\n        </ul>\n\n\n<script type=\"text/javascript\">\n
+        \   // This is the app specific data that the shared js expects\n    studioData
+        = {\"jiraUrl\" : \"https://bukkit.atlassian.net\"};\n\n        \n    // Google
+        analytics\n    var _gaq = _gaq || [];\n    _gaq.push(['_setAccount', 'UA-6032469-30']);\n
+        \   _gaq.push(['_setDetectTitle', false]); // don't send page titles\n\n    (function
+        () {\n        var filteredUrl = document.location.pathname + document.location.search;\n
+        \       // don't capture page titles in CONF\n        filteredUrl = filteredUrl.replace(/(.*)\\/display\\/.*\\/.*/,\n
+        \               '$1/pages/viewpage.action?pageId=' + (AJS && AJS.Meta && AJS.Meta.get('page-id')
+        || \"*\"));\n        _gaq.push(['_trackPageview', filteredUrl]);\n    })();\n\n
+        \   (function() {\n        var ga = document.createElement('script'); ga.type
+        = 'text/javascript'; ga.async = true;\n        ga.src = ('https:' == document.location.protocol
+        ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';\n        var
+        s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga,
+        s);\n    })();\n</script>\n\n<form id=\"jira_request_timing_info\" class=\"dont-default-focus\"
+        >\n\t<fieldset class=\"parameters hidden\">\n\t\t<input type=\"hidden\" title=\"jira.request.start.millis\"
+        value=\"1447905968757\" />\n\t\t<input type=\"hidden\" title=\"jira.request.server.time\"
+        value=\"177\" />\n\t\t<input type=\"hidden\" title=\"jira.request.id\" value=\"246x27011x1\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.time\" value=\"-\"
+        />\n\t\t<input type=\"hidden\" title=\"jira.session.expiry.in.mins\" value=\"-\"
+        />\n\t\t<input id=\"jiraConcurrentRequests\" type=\"hidden\" name=\"jira.request.concurrent.requests\"
+        value=\"1\" />\n\t\t<input type=\"hidden\" title=\"db.reads.time.in.ms\" value=\"15\"
+        />\n\t\t<input type=\"hidden\" title=\"db.conns.time.in.ms\" value=\"19\"
+        />\n\t</fieldset>\n</form>\n<!--\n\t                 REQUEST ID : 246x27011x1\n\t
+        \         REQUEST TIMESTAMP : [19/Nov/2015:04:06:08 +0000]\n\t               REQUEST
+        TIME : 0.1770\n\t                 ASESSIONID : -\n\t        CONCURRENT REQUESTS
+        : 1\n\n\t                      db.reads : name=db.reads; inv=28; ms=15; cpu=0;
+        rss=0;\n\t                      db.conns : name=db.conns; inv=29; ms=19; cpu=0;
+        rss=0;\n-->\n    <div id=\"footer-logo\"><a href=\"http://www.atlassian.com/\">Atlassian</a></div>\n</section>\n\n\n\n\n\n\n\n\n\n<fieldset
+        class=\"hidden parameters\">\n    <input type=\"hidden\" title=\"loggedInUser\"
+        value=\"\">\n    <input type=\"hidden\" title=\"ajaxTimeout\" value=\"The
+        call to the JIRA server did not complete within the timeout period.  We are
+        unsure of the result of this operation.\">\n    <input type=\"hidden\" title=\"JiraVersion\"
+        value=\"7.0.0-OD-08-005\" />\n    <input type=\"hidden\" title=\"ajaxUnauthorised\"
+        value=\"You are not authorized to perform this operation.  Please log in.\">\n
+        \   <input type=\"hidden\" title=\"baseURL\" value=\"https://bukkit.atlassian.net:443\">\n
+        \   <input type=\"hidden\" title=\"ajaxCommsError\" value=\"The JIRA server
+        could not be contacted. This may be a temporary glitch or the server may be
+        down.\">\n    <input type=\"hidden\" title=\"ajaxServerError\" value=\"The
+        JIRA server was contacted but has returned an error response. We are unsure
+        of the result of this operation.\">\n    <input type=\"hidden\" title=\"ajaxErrorCloseDialog\"
+        value=\"Close this dialog and press refresh in your browser\">\n    <input
+        type=\"hidden\" title=\"ajaxErrorDialogHeading\" value=\"Communications Breakdown\">\n\n
+        \   <input type=\"hidden\" title=\"dirtyMessage\" value=\"You have entered
+        new data on this page. If you navigate away from this page without first saving
+        your data, the changes will be lost.\">\n    <input type=\"hidden\" title=\"dirtyDialogMessage\"
+        value=\"You have entered new data in this dialog. If you navigate away from
+        this dialog without first saving your data, the changes will be lost. Click
+        cancel to return to the dialog.\">\n    <input type=\"hidden\" title=\"keyType\"
+        value=\"Type\">\n    <input type=\"hidden\" title=\"keyThen\" value=\"then\">\n
+        \   <input type=\"hidden\" title=\"dblClickToExpand\" value=\"Double click
+        to expand\">\n    <input type=\"hidden\" title=\"actions\" value=\"Actions\">\n
+        \   <input type=\"hidden\" title=\"removeItem\" value=\"Remove\">\n    <input
+        type=\"hidden\" title=\"workflow\" value=\"Workflow\">\n    <input type=\"hidden\"
+        title=\"labelNew\" value=\"New Label\">\n    <input type=\"hidden\" title=\"issueActionsHint\"
+        value=\"Begin typing for available operations or press down to see all\">\n
+        \   <input type=\"hidden\" title=\"closelink\" value=\"Close\">\n    <input
+        type=\"hidden\" title=\"dotOperations\" value=\"Operations\">\n    <input
+        type=\"hidden\" title=\"dotLoading\" value=\"Loading...\">\n    <input type=\"hidden\"
+        title=\"frotherSuggestions\" value=\"Suggestions\">\n    <input type=\"hidden\"
+        title=\"frotherNomatches\" value=\"No Matches\">\n    <input type=\"hidden\"
+        title=\"multiselectVersionsError\" value=\"{0} is not a valid version.\">\n
+        \   <input type=\"hidden\" title=\"multiselectComponentsError\" value=\"{0}
+        is not a valid component.\">\n    <input type=\"hidden\" title=\"multiselectGenericError\"
+        value=\"The value {0} is invalid.\">\n</fieldset>\n\n    </footer>\n</div>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:06:08 GMT
+recorded_with: VCR 2.9.3

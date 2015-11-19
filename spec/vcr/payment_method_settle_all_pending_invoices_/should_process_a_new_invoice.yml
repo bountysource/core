@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api-3t.sandbox.paypal.com/nvp?AMT=10.00&DESC=Bountysource&METHOD=DoReferenceTransaction&PAYMENTACTION=Sale&PWD=test&REFERENCEID=B-090886401R781050M&SIGNATURE=test&SOFTDESCRIPTOR=Bountysource&USER=test&VERSION=86
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Nov 2015 04:02:16 GMT
+      Server:
+      - Apache
+      X-Paypal-Operation-Name:
+      - DoReferenceTransaction
+      X-Paypal-Api-Rc:
+      - '10002'
+      Connection:
+      - close
+      Content-Length:
+      - '228'
+      Paypal-Debug-Id:
+      - 7263ab9a4473c
+      Set-Cookie:
+      - X-PP-SILOVER=; Expires=Thu, 01 Jan 1970 00:00:01 GMT
+      - X-PP-SILOVER=name%3DSANDBOX3.API.1%26silo_version%3D880%26app%3Dappdispatcher_apit%26TIME%3D3360247126;
+        domain=.paypal.com; path=/; Secure; HttpOnly
+      Content-Type:
+      - text/plain; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: TIMESTAMP=2015%2d11%2d19T04%3a02%3a16Z&CORRELATIONID=7263ab9a4473c&ACK=Failure&VERSION=86&BUILD=000000&L_ERRORCODE0=10002&L_SHORTMESSAGE0=Security%20error&L_LONGMESSAGE0=Security%20header%20is%20not%20valid&L_SEVERITYCODE0=Error
+    http_version: 
+  recorded_at: Thu, 19 Nov 2015 04:02:16 GMT
+recorded_with: VCR 2.9.3
