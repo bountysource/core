@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module("app").controller('TeamIssuesController', function ($scope, $api, $routeParams, $location, $anchorScroll, feature) {
 
   $scope.issue_grid_view = false;

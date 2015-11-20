@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.home', {
     templateUrl: "salt/home/base.html",

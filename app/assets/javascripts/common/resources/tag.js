@@ -1,5 +1,3 @@
-"use strict";
-
 angular.module('resources').factory('Tag', function ($rootScope, $resource, $api) {
 
   var Tag = $resource($rootScope.api_host + 'tags/:id', { id: '@id' }, {

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('fromSnakeCase', function() {
   // Convert snakecase to words
   return function(s) {

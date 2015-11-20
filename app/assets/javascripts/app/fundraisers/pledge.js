@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('FundraiserPledgeController', function ($scope, $routeParams, $window, $location, $api, $cart) {
   $scope.cart_promise = $cart.load().then(function(cart) {
     $scope.cart = cart;

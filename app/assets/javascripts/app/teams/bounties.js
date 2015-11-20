@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('TeamBountiesController', function ($scope, $routeParams, $api, $pageTitle) {
 
   $scope.$watch('team', function(team) {
@@ -90,12 +88,12 @@ angular.module('app').controller('TeamBountiesController', function ($scope, $ro
       }
     }
     for (var key in $scope.issue_group_hash) {
-      var value = $scope.issue_groups.push($scope.issue_group_hash[key]);
+      $scope.issue_groups.push($scope.issue_group_hash[key]);
     }
 
     //turn stats_map into array so orderBy will work
     $scope.stats = [];
-    for (var key in $scope.stats_map) {
+    for (key in $scope.stats_map) {
       if($scope.stats_map.hasOwnProperty(key)) {
         $scope.stats.push($scope.stats_map[key]);
       }
@@ -110,8 +108,7 @@ angular.module('app').controller('TeamBountiesController', function ($scope, $ro
   });
 
   function setProgressAttributes (bounty) {
-    var value_array = [],
-        key,
+    var key,
         issue = bounty.issue;
 
     if(bounty.amount > 0) {

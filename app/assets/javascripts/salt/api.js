@@ -1,7 +1,5 @@
 // inspired by http://www.objectpartners.com/2014/06/03/extending-angulars-resource-service-for-a-consistent-api/
 
-'use strict';
-
 angular.module('app').factory('$api', function($resource, $http, $location, $auth, $env) {
   var $api = {
 
@@ -72,7 +70,7 @@ angular.module('app').factory('$api', function($resource, $http, $location, $aut
     },
 
     oauth_url: function(provider, options) {
-      return $api.url('/auth/' + provider + '?' + $api.hash_to_params(options))
+      return $api.url('/auth/' + provider + '?' + $api.hash_to_params(options));
     }
   };
   return $api;

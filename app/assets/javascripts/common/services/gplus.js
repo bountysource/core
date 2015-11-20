@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('services').service('$gplus', function ($window) {
   if (angular.isUndefined($window.gapi)) {
     (function () {

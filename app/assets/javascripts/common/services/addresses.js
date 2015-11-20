@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('services').service('$addressManager', function($api) {
 
   var self = this;

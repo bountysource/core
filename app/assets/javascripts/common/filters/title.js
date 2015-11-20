@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('title', function() {
   // Capitalize all words
   return function(s) {

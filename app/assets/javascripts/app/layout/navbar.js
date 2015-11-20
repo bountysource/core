@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieJar, $currency, $cart, Team) {
 
   $cart.find(false).then(function (cart) {

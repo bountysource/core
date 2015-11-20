@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.session.login', {
     url: "/login",
@@ -15,7 +13,7 @@ angular.module('app').config(function($stateProvider) {
         }, function(response) {
           $scope.error = response.data.error;
         });
-      }
+      };
     }
   });
 });

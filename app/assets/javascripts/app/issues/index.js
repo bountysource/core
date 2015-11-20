@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('IssueIndexController', function ($scope, $window, $api) {
   $scope.tabs_resolved = false;
 

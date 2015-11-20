@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function ($routeProvider, defaultRouteOptions, personResolver) {
   $routeProvider.when('/', angular.extend({
     templateUrl: 'app/home/timeline.html',

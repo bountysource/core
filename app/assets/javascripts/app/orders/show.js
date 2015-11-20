@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function ($routeProvider, defaultRouteOptions, personResolver) {
   $routeProvider.when('/orders/:id', angular.extend({
     templateUrl: 'app/orders/show.html',

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('requireGithubAuth', function($api, $window, $location) {
   // TODO support more than 1 scope
   return {

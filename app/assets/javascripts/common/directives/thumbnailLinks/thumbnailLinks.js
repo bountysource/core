@@ -1,5 +1,3 @@
-'use strict';
-
 /*
   /// Purpose ///
   Creates rows of thumbnail links from an array of objects

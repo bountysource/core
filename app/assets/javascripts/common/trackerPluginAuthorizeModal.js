@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').run(function($rootScope, $routeParams, $window, $location, $modal) {
 
   var paramKeyName = 'authorize';

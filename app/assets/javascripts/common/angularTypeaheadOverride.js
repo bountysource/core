@@ -1,5 +1,3 @@
-'use strict';
-
 // COPIED FROM: https://raw.githubusercontent.com/angular-ui/bootstrap/master/src/typeahead/typeahead.js
 // ISSUE: https://github.com/angular-ui/bootstrap/issues/908
 // PULL REQUEST: https://github.com/angular-ui/bootstrap/pull/2916

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').directive('escrowReport', [function() {
   return {
     restrict: 'E',

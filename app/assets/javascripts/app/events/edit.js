@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('EditEventController', function($scope, $routeParams, $location, $api) {
 
   $api.v2.event($routeParams.slug).then(function(response) {

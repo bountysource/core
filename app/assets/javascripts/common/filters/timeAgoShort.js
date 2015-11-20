@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('timeAgoShort', function() {
   return function(date, options) {
     options = options || {};

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('IssueBadge', function ($rootScope, $window, $api, Badge) {
 
   var IssueBadge = function (issue) {

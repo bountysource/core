@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('SettingsTabs', function($scope, $location) {
   $scope.tabs = [
     { name: 'Profile', url: '/settings' },

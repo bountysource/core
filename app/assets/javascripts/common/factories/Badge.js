@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('Badge', function ($api) {
 
   var Badge = function () {};

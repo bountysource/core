@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('ownerHref', function($api) {
   return {
     restrict: "AC",

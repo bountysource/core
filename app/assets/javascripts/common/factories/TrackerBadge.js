@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('TrackerBadge', function ($rootScope, $window, $api, Badge) {
 
   var TrackerBadge = function (tracker) {

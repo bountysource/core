@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('personIcon', function() {
   return {
     restrict: "E",

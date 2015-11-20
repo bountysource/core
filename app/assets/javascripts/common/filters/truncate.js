@@ -1,4 +1,3 @@
-'use strict';
 /*
  * truncate string, add '...' or custom text.
  * note, size is the EXACT length of the string returned,

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('loadingBar', function() {
   return {
     restrict: "E",

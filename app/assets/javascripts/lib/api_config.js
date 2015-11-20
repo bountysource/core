@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').run(function($api) {
 
   $api.add('teams', {

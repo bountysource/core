@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('NewEventController', function($scope, $location, $api) {
 
   $scope.newEvent = {

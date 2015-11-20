@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('abRandomize', function ($rootScope, $compile) {
   return {
     restrict: "AC",

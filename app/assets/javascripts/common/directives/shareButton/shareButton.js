@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('shareButton', function ($location, $analytics, $window, $filter) {
   return {
     restrict: "EA",

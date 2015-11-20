@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('Thumb', function ($rootScope, $resource, $api) {
 
   return $resource($rootScope.api_host + 'thumbs/:id/:action', { id: '@id' }, {

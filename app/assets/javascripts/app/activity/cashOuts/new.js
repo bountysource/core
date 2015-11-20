@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('activity').
   controller('NewCashOutController', function($scope, $api, $window, $location, $q, AddressManager) {
 

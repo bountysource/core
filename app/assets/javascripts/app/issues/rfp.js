@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app')
   .controller('IssueRequestForProposalsController', function ($scope, $routeParams, $window, $api, $log, Issue, RequestForProposal) {
 

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.support_levels.show', {
     url: "/settings/support_levels/:id",

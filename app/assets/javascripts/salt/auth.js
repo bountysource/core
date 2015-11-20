@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   // hacky but convienent place to store this function... person gets resolved in "auth" state
   $stateProvider.personRequired = function($q, $state, $auth, person) {

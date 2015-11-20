@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('inputSlug', function($filter) {
   return {
     restrict: "AC",

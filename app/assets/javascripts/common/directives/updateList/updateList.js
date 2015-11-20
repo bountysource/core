@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('updateList', function() {
   return {
     restrict: "E",

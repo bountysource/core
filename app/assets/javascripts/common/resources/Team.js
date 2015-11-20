@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('Team', function ($rootScope, $resource, $api) {
 
   var Team = $resource($rootScope.api_host + 'teams/:slug/:action', { slug: '@slug' }, {

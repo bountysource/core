@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('services').service('$twttr', function ($window) {
   // Twitter script
   if (angular.isUndefined($window.twttr)) {

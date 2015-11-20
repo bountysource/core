@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('pluck', function() {
   return function(input, field) {
     // console.log(arguments);

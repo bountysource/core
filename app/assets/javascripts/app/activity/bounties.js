@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('activity').controller('BountiesController', function($scope, $routeParams, $api, $pageTitle) {
   $pageTitle.set('Bounties', 'Activity');
 

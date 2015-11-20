@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('activity')
   .config(function($routeProvider, personResolver, defaultRouteOptions) {
 

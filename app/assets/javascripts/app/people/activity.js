@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('PeopleShow', function ($scope, $routeParams, $api, $pageTitle, $location, Timeline) {
   if ((/^18483-/).test($routeParams.id)) {
     $location.url("/teams/bountysource").replace();

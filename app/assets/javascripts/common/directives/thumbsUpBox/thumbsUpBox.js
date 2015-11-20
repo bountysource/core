@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('thumbsUpBox', function ($api, $location, $rootScope, Thumb) {
   return {
     restrict: 'E',

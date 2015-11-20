@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('ShoppingCartController', function($rootScope, $scope, $routeParams, $window, $location, $api, $cart, $log, $filter, $currency, $timeout, $q, ShoppingCart, ShoppingCartItem, $route, $analytics) {
 
   // cheap hack to prevent race condition when updating cart and checking out

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app')
 .config(function ($routeProvider) {
   $routeProvider
@@ -21,7 +19,7 @@ angular.module('app')
       $scope.team_payin = $api.call("/admin/team_payins/" + $routeParams.id, 'PUT', { refunded: true }).then(function(team_payin) {
         $scope.team_payin = team_payin;
         $scope.team_payins = [team_payin];
-      })
+      });
     }
   };
 });

@@ -1,12 +1,10 @@
-'use strict';
-
 angular.module('app').controller('HomeTimelineCtrl', function ($scope, $api, $location, Timeline) {
   $scope.events = Timeline.query({ per_page: 30, include_featured_bounties: true, bounties_only: true });
 
   $scope.form_data = {};
   $scope.submit_search = function() {
     $location.path("/search").search({ query: $scope.form_data.url });
-  }
+  };
 
   // Top Backers
   $api.v2.teams({

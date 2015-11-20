@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('NavTab', function($location, $log) {
 
   return function(name, urls, resolver) {

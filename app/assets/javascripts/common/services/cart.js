@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('services').service('$cart', function ($rootScope, $window, $q, $cookieJar, $log, $currency, $api, ShoppingCart, ShoppingCartItems) {
 
   this._cookieName = window.BS_ENV.cookie_name_shopping_cart;
@@ -97,7 +95,7 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
 
   this.getUid = function () {
     // when API fails, this can sometimes get set to "undefined"
-    if ($cookieJar.get(this._cookieName) == 'undefined') {
+    if ($cookieJar.get(this._cookieName) === 'undefined') {
       $cookieJar.remove(this._cookieName);
     }
 

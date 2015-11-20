@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('TrackersIndex', function ($scope, $api, $window, Pagination) {
 
   $scope.getTrackers = function(params) {

@@ -1,6 +1,4 @@
-// 'use strict';
-
-// angular.module('services').service('$teams', function ($rootScope, $api, $q) {
+// // angular.module('services').service('$teams', function ($rootScope, $api, $q) {
 //   var deferred = $q.defer();
 //   $rootScope.teams = deferred.promise;
 

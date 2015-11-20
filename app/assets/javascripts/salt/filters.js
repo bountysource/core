@@ -1,4 +1,3 @@
-'use strict';
 /*
 * Show currency value with correct unit.
 * */

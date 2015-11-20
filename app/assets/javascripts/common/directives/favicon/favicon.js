@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('favicon', function() {
   return {
     restrict: "E",

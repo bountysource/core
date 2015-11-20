@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').directive('targetBlank', function() {
   return {
     restrict: "E",

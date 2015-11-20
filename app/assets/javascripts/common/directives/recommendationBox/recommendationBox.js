@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('recommendationBox', function ($api, $cart, $location, Recommendation) {
   return {
     restrict: "E",

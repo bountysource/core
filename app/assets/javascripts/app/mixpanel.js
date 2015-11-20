@@ -1,5 +1,3 @@
-'use strict';
-
 // mixpanel snippet minus the part that injects a script tag since we're hosting that now
 /* jshint ignore:start */
 (function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
@@ -15,8 +13,9 @@ angular.module('app').service('$analytics', function($location, $log, $window, $
 
   this.reset_mixpanel_distinct_id = function() {
     // copied from mixpanel.js because it's not exported
+    var UUID;
     /* jshint ignore:start */
-    var UUID = (function(){var T=function(){var d=1*new Date(),i=0;while(d==1*new Date()){i++}return d.toString(16)+i.toString(16)};var R=function(){return Math.random().toString(16).replace('.','')};var UA=function(n){var ua=navigator.userAgent,i,ch,buffer=[],ret=0;function xor(result,byte_array){var j,tmp=0;for(j=0;j<byte_array.length;j++){tmp|=(buffer[j]<<j*8)}return result^tmp}for(i=0;i<ua.length;i++){ch=ua.charCodeAt(i);buffer.unshift(ch&0xFF);if(buffer.length>=4){ret=xor(ret,buffer);buffer=[]}}if(buffer.length>0){ret=xor(ret,buffer)}return ret.toString(16)};return function(){var se=(screen.height*screen.width).toString(16);return(T()+"-"+R()+"-"+UA()+"-"+se+"-"+T())}})();
+    UUID = (function(){var T=function(){var d=1*new Date(),i=0;while(d==1*new Date()){i++}return d.toString(16)+i.toString(16)};var R=function(){return Math.random().toString(16).replace('.','')};var UA=function(n){var ua=navigator.userAgent,i,ch,buffer=[],ret=0;function xor(result,byte_array){var j,tmp=0;for(j=0;j<byte_array.length;j++){tmp|=(buffer[j]<<j*8)}return result^tmp}for(i=0;i<ua.length;i++){ch=ua.charCodeAt(i);buffer.unshift(ch&0xFF);if(buffer.length>=4){ret=xor(ret,buffer);buffer=[]}}if(buffer.length>0){ret=xor(ret,buffer)}return ret.toString(16)};return function(){var se=(screen.height*screen.width).toString(16);return(T()+"-"+R()+"-"+UA()+"-"+se+"-"+T())}})();
     /* jshint ignore:end */
 
     $window.mixpanel.identify(UUID());

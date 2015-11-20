@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * TODO add some unit tests, bro.
  * */

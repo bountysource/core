@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('encodeUriQuery', function() {
   return function(val, pctEncodeSpaces) {
     return encodeURIComponent(val).

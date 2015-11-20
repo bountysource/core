@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app')
 .controller("BountyClaimNavTabs", function ($scope, $location) {
   $scope.tabs = [

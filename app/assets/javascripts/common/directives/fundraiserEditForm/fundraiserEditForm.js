@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('fundraiserEditForm', function($rootScope, $api) {
   return {
     restrict : 'EAC',

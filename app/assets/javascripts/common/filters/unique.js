@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('unique', function() {
   return function(input) {
     var retval = [];

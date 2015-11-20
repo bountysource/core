@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('FundraiserEditController', function($scope, $routeParams, $location, $api, $analytics) {
   // initialize fundraisers data and changes
   $scope.master = {};

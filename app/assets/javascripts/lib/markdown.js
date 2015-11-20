@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-'use strict';
-
 angular.module('btford.markdown', ['ngSanitize']).
   provider('markdownConverter', function () {
     var opts = {};

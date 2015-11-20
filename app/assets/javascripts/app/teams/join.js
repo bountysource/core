@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('JoinTeamController', function ($scope, $routeParams, $location, $api) {
   // redirect if already a member. edge case.
 //  $scope.$watch("is_member", function(val) {

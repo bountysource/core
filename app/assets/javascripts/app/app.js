@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('constants', []);
 angular.module('filters', []);
 angular.module('directives', []);

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('Reset', function ($scope, $routeParams, $api) {
   $scope.form_data = {
     email: $routeParams.email,

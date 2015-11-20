@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('BaseToolsController', function ($scope, $routeParams, $window, $location, $api, $analytics) {
   // Render a re-authorize link in the presence of the glorious authorize parameter.
   if (parseInt($routeParams.reauthorize, 10) === 1) {

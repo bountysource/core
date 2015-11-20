@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app')
   .config(function ($routeProvider) {
     $routeProvider
@@ -127,7 +125,7 @@ angular.module('app')
           alert("All done!");
         });
       }
-    }
+    };
 
     $scope.updateTeamAttributes = function() {
       $scope.update_message = "Updating...";

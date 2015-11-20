@@ -1,4 +1,3 @@
-'use strict';
 angular.module('directives').directive('signalIcon', function() {
   return {
     restrict: "E",

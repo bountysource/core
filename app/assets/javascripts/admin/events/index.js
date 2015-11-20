@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function ($routeProvider) {
   $routeProvider.when('/admin/events', {
     templateUrl: 'admin/events/index.html',

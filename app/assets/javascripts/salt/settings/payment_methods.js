@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.settings.payment_methods', {
     url: "/settings/payment_methods",

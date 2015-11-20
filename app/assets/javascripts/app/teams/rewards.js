@@ -1,5 +1,3 @@
-"use strict";
-
 angular.module('app').controller('TeamRewardsController', function ($scope, $routeParams, $location, $api) {
 
   $scope.$watch('activeFundraiser', function (fundraiser) {

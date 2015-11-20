@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app')
 .config(function ($routeProvider) {
   $routeProvider
@@ -47,7 +45,7 @@ angular.module('app')
   $scope.deleteAccount = function(person) {
     var response = prompt("Type DELETE below if you really want to delete everything for: " + person.display_name);
 
-    if (response == 'DELETE') {
+    if (response === 'DELETE') {
       $scope.deleting_in_progress = true;
       $api.delete_person(person.id).then(function(response) {
         if (response.error) {

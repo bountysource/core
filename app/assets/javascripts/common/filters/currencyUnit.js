@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('currencyUnit', function ($filter) {
   return function (value, currency) {
     if (currency === 'BTC') {

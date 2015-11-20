@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('issueList', function() {
   return {
     restrict: "E",

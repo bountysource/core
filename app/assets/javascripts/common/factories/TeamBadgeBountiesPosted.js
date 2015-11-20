@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('factories').factory('TeamBadgeBountiesPosted', function ($window, TeamBadge) {
 
   var TeamBadgeBountiesPosted = function () {

@@ -1,5 +1,3 @@
-"use strict";
-
 angular.module('app').controller("AuthConfirmController", function($scope, $routeParams, $window, $location, $api) {
   $scope.provider = $routeParams.provider;
 

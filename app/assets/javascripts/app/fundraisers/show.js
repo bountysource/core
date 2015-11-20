@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('fundraisers').controller('FundraiserShowController', function ($scope, $routeParams, $location, $window, $api, $sanitize, $pageTitle) {
 
   if ($routeParams.id === 'crystal-lang') {

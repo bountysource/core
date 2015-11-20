@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('resources').factory('ShoppingCart', function ($rootScope, $resource, $api) {
 
   var ShoppingCart = $resource($rootScope.api_host + 'cart', {}, {

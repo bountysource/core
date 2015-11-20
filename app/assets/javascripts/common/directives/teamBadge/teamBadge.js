@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('directives').directive('teamBadge', function ($rootScope) {
   return {
     restrict: 'EAC',

@@ -1,6 +1,4 @@
-'use strict';
-
-angular.module('directives').directive('onFinishRender', function($timeout) {
+angular.module('directives').directive('onFinishRender', function() {
   return {
     restrict: "A",
     link: function (scope, element, attr) {
@@ -10,4 +8,3 @@ angular.module('directives').directive('onFinishRender', function($timeout) {
     }
   };
 });
-

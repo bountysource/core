@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app').controller('IssueShowController', function ($scope, $routeParams, $window, $location, $pageTitle, $anchorScroll, $cart, $analytics, $currency, Timeline, BountyClaim, Issue) {
   var issue_id = parseInt($routeParams.id);
 

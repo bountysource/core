@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('filters').filter('encodeEntities', function($sanitize) {
   // duplicated from https://github.com/angular/angular.js/blob/master/src/ngSa    console.log(val);
   return function(value) {

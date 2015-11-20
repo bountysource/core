@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('app')
   .controller('MainController', function ($scope, $location, $rootScope, $window, $pageTitle) {
     $rootScope.$on('$viewContentLoaded', function() {
