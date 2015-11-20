@@ -43,8 +43,9 @@ angular.module('app').config(function($stateProvider) {
 
       $scope.submit_form = function() {
         $scope.error = null;
+        var parsed_amount;
         if ($scope.form_data.amount) {
-          var parsed_amount = parseFloat($scope.form_data.amount);
+          parsed_amount = parseFloat($scope.form_data.amount);
           if (!parsed_amount) {
             $scope.error = 'Amount not valid.';
           } else if (parsed_amount < 1.0) {

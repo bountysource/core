@@ -13,7 +13,7 @@ angular.module('app').config(function($stateProvider) {
         }, function(response) {
           $scope.error = response.data.error;
         });
-      }
+      };
     }
   });
 });

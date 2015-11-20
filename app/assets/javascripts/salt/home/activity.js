@@ -40,6 +40,7 @@ angular.module('app').config(function($stateProvider) {
             idx = 3;
           }
 
+          var chart, data, i;
           var labels = $scope.all_charts[idx].labels;
           var series = $scope.all_charts[idx].series;
 
@@ -52,13 +53,13 @@ angular.module('app').config(function($stateProvider) {
           /*
           * Donations ($)
           */
-          var data = new google.visualization.DataTable();
+          data = new google.visualization.DataTable();
           data.addColumn('string', 'Period');
           data.addColumn('number', 'Monthly');
           data.addColumn('number', 'One-Time');
           data.addColumn('number', 'Total');
           data.addColumn({type:'number', role:'tooltip'});
-          for (var i=0; i < labels.length; i++) {
+          for (i=0; i < labels.length; i++) {
             data.addRow([
               labels[i],
               (['monthly','quarterly'].indexOf(time_period)>=0) ? series['support_level_payments_sum'][i] : series['support_level_sum'][i],
@@ -71,7 +72,7 @@ angular.module('app').config(function($stateProvider) {
           dollar_format.format(data, 2);
           dollar_format.format(data, 4);
 
-          var chart = new google.visualization.AreaChart(document.getElementById('chart_donations_sum_summary'));
+          chart = new google.visualization.AreaChart(document.getElementById('chart_donations_sum_summary'));
           chart.draw(data, angular.extend({}, default_options, {
             isStacked: true,
             vAxis: {format:'$###,###,###' },
@@ -83,13 +84,13 @@ angular.module('app').config(function($stateProvider) {
           /*
           * Donations (#)
           */
-          var data = new google.visualization.DataTable();
+          data = new google.visualization.DataTable();
           data.addColumn('string', 'Period');
           data.addColumn('number', 'Monthly');
           data.addColumn('number', 'One-time');
           data.addColumn('number', 'Total');
           data.addColumn({type:'number', role:'tooltip'});
-          for (var i=0; i < labels.length; i++) {
+          for (i=0; i < labels.length; i++) {
             data.addRow([
               labels[i],
               (['monthly','quarterly'].indexOf(time_period)>=0) ? series['support_level_payments_cnt'][i] : series['support_level_cnt'][i],
@@ -102,7 +103,7 @@ angular.module('app').config(function($stateProvider) {
           number_format.format(data, 2);
           number_format.format(data, 4);
 
-          var chart = new google.visualization.AreaChart(document.getElementById('chart_donations_count_summary'));
+          chart = new google.visualization.AreaChart(document.getElementById('chart_donations_count_summary'));
           chart.draw(data, angular.extend({}, default_options, {
             isStacked: true,
             series: {

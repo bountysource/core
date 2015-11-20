@@ -4,7 +4,7 @@ angular.module('app').controller('HomeTimelineCtrl', function ($scope, $api, $lo
   $scope.form_data = {};
   $scope.submit_search = function() {
     $location.path("/search").search({ query: $scope.form_data.url });
-  }
+  };
 
   // Top Backers
   $api.v2.teams({

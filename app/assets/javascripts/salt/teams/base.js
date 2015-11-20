@@ -25,7 +25,7 @@ angular.module('app').config(function($stateProvider) {
 
       // copied to support_levels#show
       $scope.share_url = $state.href('root.teams.show', $scope.team, { absolute: true });
-      $scope.default_share_title = "Support " + $scope.team.name + ": " + (($scope.team.support_offering.subtitle && $scope.team.support_offering.subtitle.length > 0) ? $scope.team.support_offering.subtitle : "Your help is needed!");;
+      $scope.default_share_title = "Support " + $scope.team.name + ": " + (($scope.team.support_offering.subtitle && $scope.team.support_offering.subtitle.length > 0) ? $scope.team.support_offering.subtitle : "Your help is needed!");
 
       // if there are goals, set the
       if (($scope.team.support_offering.goals||[]).length > 0) {

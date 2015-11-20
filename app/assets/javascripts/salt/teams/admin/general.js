@@ -17,9 +17,11 @@ angular.module('app').config(function($stateProvider) {
       };
 
       // update markdown preview after slight delay
-      ($scope.update_preview = function() {
+      $scope.update_preview = function() {
         $scope.markdown_preview = ($scope.form_data.body_markdown||'').replace(/^#/,'###').replace(/\n#/g,'\n###');
-      })();
+      };
+      $scope.update_preview();
+
       $scope.$watch('form_data.body_markdown', function() {
         if ($scope.preview_promise) {
           $timeout.cancel($scope.preview_promise);

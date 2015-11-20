@@ -8,8 +8,8 @@ angular.module('directives').directive('profilePic', function ($api) {
       size: '@',  // small medium large    [default small]
       width: '@'  // 25 50 responsive      [default responsive]
     },
-    link: function (scope, element, attrs) {
-      scope.$watch('owner', function (owner) {
+    link: function (scope) {
+      scope.$watch('owner', function () {
         // resolve owner or default to anonymous
         scope.local_owner = scope.owner || $api.anonymous_owner_hash();
 

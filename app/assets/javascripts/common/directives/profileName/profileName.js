@@ -6,8 +6,8 @@ angular.module('directives').directive('profileName', function ($api) {
     scope: {
       owner: '='
     },
-    link: function (scope, element, attrs) {
-      scope.$watch('owner', function (owner) {
+    link: function (scope) {
+      scope.$watch('owner', function () {
         // resolve owner or default to anonymous
         scope.local_owner = scope.owner || $api.anonymous_owner_hash();
 

@@ -8,7 +8,7 @@ angular.module('app').config(function($stateProvider) {
     },
     resolve: {
       supporters_for_team: function($api, $stateParams) {
-        return $api.support_levels.query({ supporters_for_team: $stateParams.slug }).$promise;;
+        return $api.support_levels.query({ supporters_for_team: $stateParams.slug }).$promise;
       }
     }
   });

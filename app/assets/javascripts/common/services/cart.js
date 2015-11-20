@@ -95,7 +95,7 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
 
   this.getUid = function () {
     // when API fails, this can sometimes get set to "undefined"
-    if ($cookieJar.get(this._cookieName) == 'undefined') {
+    if ($cookieJar.get(this._cookieName) === 'undefined') {
       $cookieJar.remove(this._cookieName);
     }
 

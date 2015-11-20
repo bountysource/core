@@ -1,10 +1,11 @@
 angular.module('fundraisers').controller('TeamUpdateNewController', function ($scope, $routeParams, $location, $api, $timeout) {
 
   $scope.form_data = {};
-
-  ($scope.update_preview = function() {
+  $scope.update_preview = function() {
     $scope.markdown_preview = ($scope.form_data.body||'');
-  })();
+  };
+  $scope.update_preview();
+  
   $scope.$watch('form_data.body', function() {
     if ($scope.preview_promise) {
       $timeout.cancel($scope.preview_promise);

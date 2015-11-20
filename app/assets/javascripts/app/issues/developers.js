@@ -360,7 +360,7 @@ angular.module('app').controller('IssueDevelopersController', function ($scope, 
 
     // helper method for submit()
     update_solution: function() {
-      var parsed_time = $window.moment(developer_form.data.completion_date);
+      // var parsed_time = $window.moment(developer_form.data.completion_date);
 
       var data = { url: developer_form.data.url, completion_date: developer_form.data.completion_date, note: developer_form.data.note };
 

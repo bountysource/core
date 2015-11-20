@@ -29,6 +29,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
       idx = 3;
     }
 
+    var data, chart, i;
     var labels = $scope.all_charts[idx].labels;
     var series = $scope.all_charts[idx].series;
 
@@ -40,14 +41,14 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Donations ($)
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Salt');
     data.addColumn('number', 'Donations');
     data.addColumn('number', 'Pledges');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['support_level_payments_sum'][i],
@@ -62,7 +63,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     dollar_format.format(data, 3);
     dollar_format.format(data, 5);
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_donations_sum_summary'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_donations_sum_summary'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       vAxis: {format:'$###,###,###' },
@@ -74,14 +75,14 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Donations (#)
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Salt');
     data.addColumn('number', 'Donations');
     data.addColumn('number', 'Pledges');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['support_level_payments_cnt'][i],
@@ -96,7 +97,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     number_format.format(data, 3);
     number_format.format(data, 5);
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_donations_count_summary'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_donations_count_summary'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       series: {
@@ -108,11 +109,11 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Bounties ($)
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Posted');
     data.addColumn('number', 'Earned');
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['spent_bounties_sum'][i],
@@ -122,7 +123,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     dollar_format.format(data, 1);
     dollar_format.format(data, 2);
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_bounties_sum_summary'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_bounties_sum_summary'));
     chart.draw(data, angular.extend({}, default_options, {
       vAxis: {format:'$###,###,###' }
     }));
@@ -130,11 +131,11 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Bounties (#)
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Posted');
     data.addColumn('number', 'Earned');
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['bounties_posted_cnt'][i],
@@ -144,7 +145,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     number_format.format(data, 1);
     number_format.format(data, 2);
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_bounties_count_summary'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_bounties_count_summary'));
     chart.draw(data, angular.extend({}, default_options, {
     }));
 
@@ -153,13 +154,13 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
      * Active Users
      */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Returning');
     data.addColumn('number', 'New');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['active_users_cnt'][i] - series['new_users_cnt'][i],
@@ -171,7 +172,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     number_format.format(data, 1);
     number_format.format(data, 2);
     number_format.format(data, 4);
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_active_users'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_active_users'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       series: {
@@ -183,13 +184,13 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
      * Active Teams
      */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Returning');
     data.addColumn('number', 'New');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['active_teams_cnt'][i] - series['new_teams_cnt'][i],
@@ -201,7 +202,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     number_format.format(data, 1);
     number_format.format(data, 2);
     number_format.format(data, 4);
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_active_teams'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_active_teams'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       series: {
@@ -213,7 +214,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Total Earned Detail
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Salt');
     data.addColumn('number', 'Bounties');
@@ -221,7 +222,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     data.addColumn('number', 'Fundraisers');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['support_level_payments_sum'][i],
@@ -238,7 +239,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     dollar_format.format(data, 4);
     dollar_format.format(data, 6);
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_earned_detail'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_earned_detail'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       vAxis: {format:'$###,###,###' },
@@ -250,13 +251,13 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Total Earners
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Teams');
     data.addColumn('number', 'Developers');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['earner_teams_cnt'][i],
@@ -268,7 +269,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     number_format.format(data, 1);
     number_format.format(data, 2);
     number_format.format(data, 4);
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_earners'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_earners'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       series: {
@@ -280,7 +281,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Total Spent Detail
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Salt');
     data.addColumn('number', 'Bounties');
@@ -288,7 +289,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     data.addColumn('number', 'Fundraisers');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['support_level_payments_sum'][i],
@@ -305,7 +306,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     dollar_format.format(data, 4);
     dollar_format.format(data, 6);
 
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_spent_detail'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_spent_detail'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       vAxis: {format:'$###,###,###' },
@@ -318,13 +319,13 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Total Spenders
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Teams');
     data.addColumn('number', 'Developers');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['spender_teams_cnt'][i],
@@ -336,7 +337,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     number_format.format(data, 1);
     number_format.format(data, 2);
     number_format.format(data, 4);
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_spenders'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_spenders'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       series: {
@@ -350,13 +351,13 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Posted Bounties
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Individuals');
     data.addColumn('number', 'Teams');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['bounties_posted_person_sum'][i],
@@ -368,7 +369,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     dollar_format.format(data, 1);
     dollar_format.format(data, 2);
     dollar_format.format(data, 4);
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_posted_bounties'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_posted_bounties'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       vAxis: {format:'$###,###,###' },
@@ -382,18 +383,18 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Awarded Bounties
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Amount');
     // data.addColumn('number', 'Unique');
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['earned_bounties_sum'][i]
       ]);
     }
     dollar_format.format(data, 1);
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_awarded_bounties'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_awarded_bounties'));
     chart.draw(data, angular.extend({}, default_options, {
       vAxes:[
         { format:'$###,###,###', titleTextStyle: {color: '#FF0000'} },
@@ -405,11 +406,11 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Number of Bounties
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Posted');
     data.addColumn('number', 'Awarded');
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['bounties_posted_cnt'][i],
@@ -418,7 +419,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     }
     number_format.format(data, 1);
     number_format.format(data, 2);
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_bounties_count'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_bounties_count'));
     chart.draw(data, angular.extend({}, default_options, {
     }));
 
@@ -426,7 +427,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Issue Actions
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Issue Suggested');
     data.addColumn('number', 'Bounty Posted');
@@ -437,7 +438,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     data.addColumn('number', 'Thumbs');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['issue_suggested_cnt'][i],
@@ -457,7 +458,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
             series['bounty_claim_cnt'][i])
       ]);
     }
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_issue_actions'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_issue_actions'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       series: {
@@ -470,7 +471,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     /*
     * Team Actions
     */
-    var data = new google.visualization.DataTable();
+    data = new google.visualization.DataTable();
     data.addColumn('string', 'Period');
     data.addColumn('number', 'Team Member');
     data.addColumn('number', 'Bounty Hunter');
@@ -479,7 +480,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
     data.addColumn('number', 'Salt');
     data.addColumn('number', 'Total');
     data.addColumn({type:'number', role:'tooltip'});
-    for (var i=0; i < labels.length; i++) {
+    for (i=0; i < labels.length; i++) {
       data.addRow([
         labels[i],
         series['team_member_cnt'][i],
@@ -497,7 +498,7 @@ angular.module('app').controller('StatsPageController', function ($scope, $windo
           )
       ]);
     }
-    var chart = new google.visualization.AreaChart(document.getElementById('chart_team_actions'));
+    chart = new google.visualization.AreaChart(document.getElementById('chart_team_actions'));
     chart.draw(data, angular.extend({}, default_options, {
       isStacked: true,
       series: {

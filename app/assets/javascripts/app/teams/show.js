@@ -47,9 +47,11 @@ angular.module('app').controller('TeamHomeController', function ($route, $scope,
         });
       }
     };
-    ($scope.update_preview = function() {
+    $scope.update_preview = function() {
       $scope.edit_markdown_preview = $scope.form_data.homepage_markdown;
-    })();
+    };
+    $scope.update_preview();
+    
     $scope.$watch('form_data.homepage_markdown', function() {
       if ($scope.preview_promise) {
         $timeout.cancel($scope.preview_promise);
