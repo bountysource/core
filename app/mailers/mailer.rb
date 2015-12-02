@@ -21,7 +21,7 @@ class Mailer < ActionMailer::Base
       categories << 'team_updates' if @unsubscribe_category['team_updates']
       return faux_mailer if Unsubscribe.d?(headers[:to], categories)
 
-      url = "#{config.www_url}notifications/unsubscribe"
+      url = "#{Api::Application.config.www_url}notifications/unsubscribe"
       params = {
         email: @unsubscribe_token,
         type: @unsubscribe_category
