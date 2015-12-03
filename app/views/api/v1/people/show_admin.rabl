@@ -10,4 +10,14 @@ extends "api/v1/people/partials/facebook_account"  if can? :read, @person.facebo
 extends "api/v1/people/partials/gittip_account"    if can? :read, @person.gittip_account
 
 extends "api/v1/people/partials/fundraisers"
-extends "api/v1/people/partials/bounties"
+
+child(:bounties) do
+  extends "api/v1/bounties/partials/base"
+  extends "api/v1/bounties/partials/issue"
+  extends "api/v1/bounties/partials/owner"
+  extends "api/v1/bounties/partials/options"
+  child(:source_account => :account) do
+    extends "api/v1/accounts/partials/base"
+    child({:owner => :owner}, if: lambda { |m| m.owner } ) { extends "api/v1/owners/partials/base" }
+  end
+end

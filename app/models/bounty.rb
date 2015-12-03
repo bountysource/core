@@ -335,6 +335,11 @@ class Bounty < ActiveRecord::Base
     self
   end
 
+  # the internal account used to pay for this bounty
+  def source_account
+    Split.where(item: self).reorder('created_at').first.transaction.splits.where('amount < 0').reorder('amount').first.account
+  end
+
   def move_to_issue(new_issue)
     old_issue = self.issue
 
