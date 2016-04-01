@@ -24,12 +24,14 @@
 #  mastercoin_address         :string(255)
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
+#  blackcoin_address          :string(255)
 #
 # Indexes
 #
 #  index_cash_outs_on_address_id          (address_id)
 #  index_cash_outs_on_amount              (amount)
 #  index_cash_outs_on_bitcoin_address     (bitcoin_address)
+#  index_cash_outs_on_blackcoin_address   (blackcoin_address)
 #  index_cash_outs_on_mailing_address_id  (mailing_address_id)
 #  index_cash_outs_on_paypal_address      (paypal_address)
 #  index_cash_outs_on_person_id           (person_id)

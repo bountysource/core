@@ -45,6 +45,7 @@ class Api::V2::CashOutsController < Api::BaseController
 
     @item.paypal_address = params[:paypal_address]
     @item.bitcoin_address = params[:bitcoin_address]
+    @item.blackcoin_address = params[:blackcoin_address]
     @item.ripple_address = params[:ripple_address]
     @item.mastercoin_address = params[:mastercoin_address]
 

@@ -40,6 +40,8 @@
 #  index_cash_outs_on_us_citizen          (us_citizen)
 #
 
-class CashOut::Mastercoin < CashOut
-  validates :mastercoin_address, presence: true
+require 'spec_helper'
+
+describe CashOut::Blackcoin do
+  it { should validate_presence_of(:blackcoin_address) }
 end

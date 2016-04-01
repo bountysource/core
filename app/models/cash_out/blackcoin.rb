@@ -40,6 +40,8 @@
 #  index_cash_outs_on_us_citizen          (us_citizen)
 #
 
-class CashOut::Mastercoin < CashOut
-  validates :mastercoin_address, presence: true
+class CashOut::Blackcoin < CashOut
+
+  validates :blackcoin_address, presence: true
+
 end

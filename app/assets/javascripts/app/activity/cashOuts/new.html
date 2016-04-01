@@ -164,6 +164,17 @@
               </div>
             </div>
 
+            <!-- Blackcoin -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <div class="col-sm-12">
+                <div class="radio">
+                  <label>
+                    <input type="radio" ng-model="cashOut.type" ng-value="blackcoin'" /> BlackCoin
+                  </label>
+                </div>
+              </div>
+            </div>
+
             <!-- Ripple -->
             <div class="form-group" style="margin-bottom: 0;">
               <div class="col-sm-12">
@@ -206,6 +217,13 @@
         </div>
       </div>
 
+      <!-- Blackcoin Address -->
+      <div class="form-group" ng-if="cashOut.type === 'bitcoin'" ng-class="{ 'has-error': paymentMethodForm.blackcoinAddress.$invalid }">
+        <label class="control-label col-sm-3">BlackCoin Address:</label>
+        <div class="col-sm-9">
+          <input type="text" name="blackcoinAddress" class="form-control" ng-model="cashOut.blackcoin_address" required autocomplete />
+        </div>
+      </div>
 
       <!-- Ripple Address -->
       <div class="form-group" ng-if="cashOut.type === 'ripple'" ng-class="{ 'has-error': paymentMethodForm.rippleAddress.$invalid }">

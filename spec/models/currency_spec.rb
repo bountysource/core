@@ -21,10 +21,23 @@ describe Currency do
   describe 'convert' do
 
     before do
-      Currency.stub(:btc_rate) { 900.0 }
-      Currency.stub(:msc_rate) { 800.0 }
-      Currency.stub(:xrp_rate) { 700.0 }
+      Currency.stub(:rate_to_usd) do |symbol|
+        case symbol
+        when 'BLK'
+          1000.0
+        when 'BTC'
+          900.0
+        when 'MSC'
+          800.0
+        when 'XRP'
+          700.0
+        when 'USD'
+          1
+        end
+      end
     end
+
+    let(:tolerance) { 1.0/10**8 }
 
     it 'should take string and return amount' do
       expect(Currency.convert('123.456789', 'USD', 'BTC')).to be_a Float
@@ -57,59 +70,86 @@ describe Currency do
       end
 
       it 'should convert to BTC' do
-        expect(Currency.convert(amount, from, 'BTC')).to eq (amount / Currency.btc_rate)
+        expect(Currency.convert(amount, from, 'BTC')).to be_within(tolerance).of(amount / Currency.rate_to_usd('BTC'))
+      end
+
+      it 'should convert to BLK' do
+        expect(Currency.convert(amount, from, 'BLK')).to be_within(tolerance).of(amount / Currency.rate_to_usd('BLK'))
       end
 
       it 'should convert to MSC' do
-        expect(Currency.convert(amount, from, 'MSC')).to eq (amount / Currency.msc_rate)
+        expect(Currency.convert(amount, from, 'MSC')).to be_within(tolerance).of(amount / Currency.rate_to_usd('MSC'))
       end
 
       it 'should convert to XRP' do
-        expect(Currency.convert(amount, from, 'XRP')).to eq (amount / Currency.xrp_rate)
+        expect(Currency.convert(amount, from, 'XRP')).to be_within(tolerance).of(amount / Currency.rate_to_usd('XRP'))
       end
     end
 
     describe 'from BTC' do
       let(:amount) { 123 }
       let(:from) { 'BTC' }
-      let(:usd_amount) { 1 }
-
-      before do
-        Currency.stub(:btc_to_usd).and_return(usd_amount)
-      end
 
       it 'should convert to BTC' do
         expect(Currency.convert(amount, from, 'BTC')).to eq amount
       end
 
+      it 'should convert to BLK' do
+        expect(Currency.convert(amount, from, 'BLK')).to be_within(tolerance).of(amount * Currency.rate_to_usd('BTC') / Currency.rate_to_usd('BLK'))
+      end
+
       it 'should convert to USD' do
-        expect(Currency.convert(amount, from, 'USD')).to eq(amount * Currency.btc_rate)
+        expect(Currency.convert(amount, from, 'USD')).to be_within(tolerance).of(amount * Currency.rate_to_usd('BTC'))
       end
 
       it 'should convert to MSC' do
-        expect(Currency.convert(amount, from, 'MSC')).to eq(usd_amount * Currency.msc_rate)
+        expect(Currency.convert(amount, from, 'MSC')).to be_within(tolerance).of(amount * Currency.rate_to_usd('BTC') / Currency.rate_to_usd('MSC'))
       end
 
       it 'should convert to XRP' do
-        expect(Currency.convert(amount, from, 'XRP')).to eq(usd_amount * Currency.xrp_rate)
+        expect(Currency.convert(amount, from, 'XRP')).to be_within(tolerance).of(amount * Currency.rate_to_usd('BTC') / Currency.rate_to_usd('XRP'))
+      end
+    end
+
+    describe 'from BLK' do
+      let(:amount) { 123 }
+      let(:from) { 'BLK' }
+
+      it 'should convert to BTC' do
+        expect(Currency.convert(amount, from, 'BTC')).to be_within(tolerance).of(amount * Currency.rate_to_usd('BLK') / Currency.rate_to_usd('BTC'))
+      end
+
+      it 'should convert to BLK' do
+        expect(Currency.convert(amount, from, 'BLK')).to eq amount
+      end
+
+      it 'should convert to USD' do
+        expect(Currency.convert(amount, from, 'USD')).to be_within(tolerance).of(amount * Currency.rate_to_usd('BLK'))
+      end
+
+      it 'should convert to MSC' do
+        expect(Currency.convert(amount, from, 'MSC')).to be_within(tolerance).of(amount * Currency.rate_to_usd('BLK') / Currency.rate_to_usd('MSC'))
+      end
+
+      it 'should convert to XRP' do
+        expect(Currency.convert(amount, from, 'XRP')).to be_within(tolerance).of(amount * Currency.rate_to_usd('BLK') / Currency.rate_to_usd('XRP'))
       end
     end
 
     describe 'from MSC' do
       let(:amount) { 123 }
       let(:from) { 'MSC' }
-      let(:usd_amount) { 1 }
-
-      before do
-        Currency.stub(:msc_to_usd).and_return(usd_amount)
-      end
 
       it 'should convert to BTC' do
-        expect(Currency.convert(amount, from, 'BTC')).to eq(usd_amount * Currency.btc_rate)
+        expect(Currency.convert(amount, from, 'BTC')).to be_within(tolerance).of(amount * Currency.rate_to_usd('MSC') / Currency.rate_to_usd('BTC'))
+      end
+
+      it 'should convert to BLK' do
+        expect(Currency.convert(amount, from, 'BLK')).to be_within(tolerance).of(amount * Currency.rate_to_usd('MSC') / Currency.rate_to_usd('BLK'))
       end
 
       it 'should convert to USD' do
-        expect(Currency.convert(amount, from, 'USD')).to eq(amount * Currency.msc_rate)
+        expect(Currency.convert(amount, from, 'USD')).to be_within(tolerance).of(amount * Currency.rate_to_usd('MSC'))
       end
 
       it 'should convert to MSC' do
@@ -117,29 +157,28 @@ describe Currency do
       end
 
       it 'should convert to XRP' do
-        expect(Currency.convert(amount, from, 'XRP')).to eq(usd_amount * Currency.xrp_rate)
+        expect(Currency.convert(amount, from, 'XRP')).to be_within(tolerance).of(amount * Currency.rate_to_usd('MSC') / Currency.rate_to_usd('XRP'))
       end
     end
 
     describe 'from XRP' do
       let(:amount) { 123 }
       let(:from) { 'XRP' }
-      let(:usd_amount) { 1 }
-
-      before do
-        Currency.stub(:xrp_to_usd).and_return(usd_amount)
-      end
 
       it 'should convert to BTC' do
-        expect(Currency.convert(amount, from, 'BTC')).to eq(usd_amount * Currency.btc_rate)
+        expect(Currency.convert(amount, from, 'BTC')).to be_within(tolerance).of(amount * Currency.rate_to_usd('XRP') / Currency.rate_to_usd('BTC'))
+      end
+
+      it 'should convert to BLK' do
+        expect(Currency.convert(amount, from, 'BLK')).to be_within(tolerance).of(amount * Currency.rate_to_usd('XRP') / Currency.rate_to_usd('BLK'))
       end
 
       it 'should convert to USD' do
-        expect(Currency.convert(amount, from, 'USD')).to eq(amount * Currency.xrp_rate)
+        expect(Currency.convert(amount, from, 'USD')).to be_within(tolerance).of(amount * Currency.rate_to_usd('XRP'))
       end
 
       it 'should convert to MSC' do
-        expect(Currency.convert(amount, from, 'MSC')).to eq(usd_amount * Currency.msc_rate)
+        expect(Currency.convert(amount, from, 'MSC')).to be_within(tolerance).of(amount * Currency.rate_to_usd('XRP') / Currency.rate_to_usd('MSC'))
       end
 
       it 'should convert to XRP' do
