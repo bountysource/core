@@ -3,7 +3,7 @@ class Api::V0::CashOutsController < Api::V0::BaseController
   include Api::V2::CashOutsHelper
 
   def index
-    @collection = ::CashOut.order('created_at asc')
+    @collection = ::CashOut.includes(:person, :address, :mailing_address, :account => :owner).order('created_at asc')
 
     @include_person = true
     @include_person_email = true
