@@ -1,0 +1,11 @@
+<h1>{{person.display_name}}</h1>
+
+<ul class="nav nav-tabs">
+  <li ng-class="{ 'active': selected_tab == 'info' }"><a ng-href="/admin/people/{{person_id}}">Info</a></li>
+  <li ng-class="{ 'active': selected_tab == 'financial' }"><a ng-href="/admin/people/{{person_id}}/financial">Financial</a></li>
+  <li ng-class="{ 'active': selected_tab == 'salt' }"><a ng-href="/admin/people/{{person_id}}/salt">Salt</a></li>
+  <li ng-class="{ 'active': selected_tab == 'bounties' }"><a ng-href="/admin/people/{{person_id}}/bounties">Bounties</a></li>
+  <li ng-class="{ 'active': selected_tab == 'team_payins' }"><a ng-href="/admin/people/{{person_id}}/team_payins">Team Payins</a></li>
+  <li ng-class="{ 'active': selected_tab == 'events' }"><a ng-href="/admin/people/{{person_id}}/events">Events</a></li>
+  <li ng-class="{ 'active': selected_tab == 'misc' }"><a ng-href="/admin/people/{{person_id}}/misc">Misc</a></li>
+</ul>

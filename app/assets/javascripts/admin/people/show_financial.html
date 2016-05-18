@@ -1,0 +1,28 @@
+<div ng-include="'admin/people/_show_tabs.html'"></div>
+
+
+<h3>Cash Outs</h3>
+Coming soon
+
+
+<h3>Bounty Claims</h3>
+Coming soon
+
+
+<h3>Gift Money to User</h3>
+<div class="alert alert-error" ng-show="error">{{error}}</div>
+<div class="alert alert-success" ng-show="success_message">{{ success_message }}</div>
+<form class="form-horizontal">
+  <div class="control-group">
+    <div class="controls input-prepend input-append" style="margin-left:35px;">
+      <span class="add-on">$</span>
+      <input class="input-small" type="number" id="inputMoney" ng-model="giftValue" placeholder="10"/>
+      <spsan class="add-on">.00</spsan>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls" style="margin-left:64px;">
+      <button class="btn btn-primary" ng-click="giftMoney(giftValue, person)">Gift Money</button>
+    </div>
+  </div>
+</form>

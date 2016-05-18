@@ -1,0 +1,54 @@
+<div ng-include="'admin/people/_show_tabs.html'"></div>
+
+
+<img class="thumbnail" style="width: 100px; height: 100px;" ng-src="{{person.image_url}}"></img>
+<ul class="unstyled" style="margin-top:25px;">
+  <li ng-show="person.github_account"><strong>GitHub: </strong><a ng-href="https://github.com/{{person.github_account.login}}" target="_blank">{{person.github_account.login}}</a></li>
+  <li><strong>Login Email: </strong><a ng-href="mailto:{{person.email}}">{{person.email}}</a></li>
+  <li><strong>Public email: </strong>  <a ng-href="mailto:{{person.public_email}}">{{person.public_email}}</a></li>
+  <li><strong>Account balance:  </strong><a ng-href="/admin/accounts/{{person.account.id}}">{{person.account.balance | dollars}}</a></li>
+  <li><strong>Sign Up Date:  </strong>{{person.created_at | date:'longDate'}}</li>
+  <li><strong>Last Seen:  </strong>{{person.last_seen_at | date:'medium'}}</li>
+</ul>
+<div ng-show="success" class="alert alert-success">Person information successfully updated!</div>
+<div ng-show="error" class="alert alert-error">{{ error }}</div>
+
+
+<h3>Teams</h3>
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Created</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="team in teams">
+      <td style="word-wrap: break-word;">{{team.id}}</td>
+      <td style="word-wrap: break-word;">{{team.created_at}}</td>
+      <td style="word-wrap: break-word;"><a ng-href="/admin/teams/{{team.slug}}">{{team.name}}</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div style="border: 1px solid #ddd; border-radius: 10px; margin-top: 10px">
+  <h4>Delete Account</h4>
+  <div class="alert alert-error" ng-show="error">{{error}}</div>
+  <div class="alert alert-success" ng-show="success_message">{{ success_message }}</div>
+  <p>This
+     sets profile attributes to null or "[deleted]",
+     email changed to null-(person_id)@bountysource.com,
+     anonymizes bounties and pledges (but not team payins),
+     deletes solutions, developer goals, shopping_cart, access_tokens, saved_search_tabs, addresses, linked_accounts, etc.
+  </p>
+  <div class="alert alert-danger" ng-show="deleting_in_progress">Deleteing in progress.<br/> Please wait and page will refresh.</div>
+  <form class="form-horizontal">
+    <div class="control-group">
+      <div class="controls" style="margin-left:64px;">
+        <button class="btn btn-danger" ng-click="deleteAccount(person)">Delete Account</button>
+      </div>
+    </div>
+  </form>
+</div>

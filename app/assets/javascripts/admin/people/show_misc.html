@@ -1,0 +1,39 @@
+<div ng-include="'admin/people/_show_tabs.html'"></div>
+
+
+<h3>Fundraisers</h3>
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px; width:inherit;">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Featured</th>
+      <th>Published</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="fundraiser in person.fundraisers">
+      <td><a ng-href="/admin/fundraisers/{{fundraiser.id}}">{{fundraiser.title}}</a></td>
+      <td>{{fundraiser.featured}}</td>
+      <td>{{fundraiser.published}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Tags</h3>
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px; width:inherit">
+  <thead>
+    <tr>
+      <th>Child</th>
+      <th>Parent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="tag_relation in tag_votes">
+      <td ng-show="tag_relation.child.type=='Team'"><a ng-href="/admin/teams/{{tag_relation.child.slug}}"><img ng-src="{{tag_relation.child.image_url}}" style="width:16px; height:16px" /> {{tag_relation.child.name}}</a></td>
+      <td ng-hide="tag_relation.child.type=='Team'"><a ng-href="/admin/tags/{{tag_relation.child.id}}">{{tag_relation.child.name}}</a></td>
+
+      <td ng-show="tag_relation.parent.type=='Team'"><a ng-href="/admin/teams/{{tag_relation.parent.slug}}"><img ng-src="{{tag_relation.parent.image_url}}" style="width:16px; height:16px" /> {{tag_relation.parent.name}}</a></td>
+      <td ng-hide="tag_relation.parent.type=='Team'"><a ng-href="/admin/tags/{{tag_relation.parent.id}}">{{tag_relation.parent.name}}</a></td>
+    </tr>
+  </tbody>
+</table>
