@@ -182,7 +182,7 @@ body {
 .panel-red > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #d9534f;
 }
-.panel-greeyellow > .panel-footer + .panel-collapse .panel-body {
+.panel-red > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #d9534f;
 }
 
