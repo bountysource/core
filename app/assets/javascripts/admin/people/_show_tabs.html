@@ -1,4 +1,4 @@
-<h1>{{person.display_name}}</h1>
+<h1>{{person.display_name||'Loading...'}}</h1>
 
 <ul class="nav nav-tabs">
   <li ng-class="{ 'active': selected_tab == 'info' }"><a ng-href="/admin/people/{{person_id}}">Info</a></li>
