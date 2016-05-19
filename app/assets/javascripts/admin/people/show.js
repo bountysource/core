@@ -39,6 +39,10 @@ angular.module('app')
     $scope.person_id = $routeParams.id;
     $scope.person = $api.get_person($routeParams.id);
     $scope.selected_tab = 'bounties';
+
+    $api.get_bounties({ person_id: $routeParams.id }).then(function(results) {
+      $scope.bounties = results.data;
+    });
   }});
 
 
@@ -85,6 +89,11 @@ angular.module('app')
     $api.get_tags({ person_id: $routeParams.id }).then(function(response) {
       $scope.tag_votes = response.data;
     });
+
+    $api.get_fundraisers({ person_id: $routeParams.id }).then(function(results) {
+      $scope.fundraisers = results.data;
+    });
+
   }});
 
 

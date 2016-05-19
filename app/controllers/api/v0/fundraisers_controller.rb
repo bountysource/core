@@ -8,8 +8,13 @@ class Api::V0::FundraisersController < Api::V0::BaseController
   end
 
   def index
-    @fundraisers = Fundraiser.includes(:person).order('featured desc, published desc, created_at desc')
-    render "api/v1/fundraisers/index"
+    if params[:person_id]
+      @fundraisers = @person.fundraisers.includes(:person)
+      render "api/v0/fundraisers/index_for_person"
+    else
+      @fundraisers = Fundraiser.includes(:person).order('featured desc, published desc, created_at desc')
+      render "api/v1/fundraisers/index"
+    end
   end
 
   def update

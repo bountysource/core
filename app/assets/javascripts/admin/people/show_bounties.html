@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="bounty in person.bounties | orderBy:'-created_at'">
+    <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
       <td>{{bounty.created_at | date}}</td>
       <td style="word-wrap: break-word;">{{bounty.id}}</td>
       <td style="word-wrap: break-word;"><a ng-href="/admin/issues/{{bounty.issue.id}}">{{bounty.issue.title}}</a></td>

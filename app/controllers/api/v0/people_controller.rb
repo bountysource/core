@@ -11,9 +11,7 @@ class Api::V0::PeopleController < Api::V0::BaseController
 
   def show
     @person = Person.find_by_id(params[:id])
-    @bounties = @person.bounties.includes(:issue => :tracker)
-    @bounty_claims = @person.bounty_claims
-    @fundraisers = @person.fundraisers.includes(:person)
+    # @bounty_claims = @person.bounty_claims
 
     render "api/v1/people/show_admin"
   end

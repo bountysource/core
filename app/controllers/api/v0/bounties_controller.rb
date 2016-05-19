@@ -7,8 +7,13 @@ class Api::V0::BountiesController < Api::V0::BaseController
   end
 
   def index
-    @bounties = Bounty.includes(:person, :issue).order('created_at desc')
-    render "api/v0/bounties/index"
+    if params[:person_id]
+      @bounties = @person.bounties.includes(:issue => :tracker)
+      render "api/v0/bounties/index_for_person"
+    else
+      @bounties = Bounty.includes(:person, :issue).order('created_at desc')
+      render "api/v0/bounties/index"
+    end
   end
 
   def update
