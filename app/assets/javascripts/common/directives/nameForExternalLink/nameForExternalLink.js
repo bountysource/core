@@ -15,7 +15,7 @@ angular.module('directives').directive('nameForExternalLink', function() {
         } else if (scope.objectType.match(/^jira::/i)) {
           scope.text = 'Jira';
         } else if (scope.objectType.match(/^bitbucket::/i)) {
-          scope.text = 'BitBucket';
+          scope.text = 'Bitbucket';
         } else if (scope.objectType.match(/^launchpad::/i)) {
           scope.text = 'Launchpad';
         } else if (scope.objectType.match(/^sourceforge(native)?::/i)) {
