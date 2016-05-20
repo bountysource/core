@@ -8,7 +8,7 @@ class Api::V0::BountiesController < Api::V0::BaseController
 
   def index
     if params[:person_id]
-      @bounties = @person.bounties.includes(:issue => :tracker)
+      @bounties = Person.find(params[:person_id]).bounties.includes(:issue => :tracker)
       render "api/v0/bounties/index_for_person"
     else
       @bounties = Bounty.includes(:person, :issue).order('created_at desc')

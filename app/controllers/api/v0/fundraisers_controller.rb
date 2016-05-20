@@ -9,7 +9,7 @@ class Api::V0::FundraisersController < Api::V0::BaseController
 
   def index
     if params[:person_id]
-      @fundraisers = @person.fundraisers.includes(:person)
+      @fundraisers = Person.find(params[:person_id]).fundraisers.includes(:person)
       render "api/v0/fundraisers/index_for_person"
     else
       @fundraisers = Fundraiser.includes(:person).order('featured desc, published desc, created_at desc')
