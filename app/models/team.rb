@@ -354,6 +354,7 @@ class Team < ActiveRecord::Base
     TeamMemberRelation.where(team_id: self.id).delete_all
     TeamInvite.where(team_id: self.id).delete_all
     TeamTrackerRelation.where(team_id: self.id).delete_all
+    TeamUpdate.where(team_id: self.id).delete_all
     Tracker.where(team_id: self.id).update_all(team_id: nil)
 
 
