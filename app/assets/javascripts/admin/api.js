@@ -804,6 +804,7 @@ angular.module('api.bountysource',[]).
         'Team',
         'CashOut::Paypal',
         'CashOut::Bitcoin',
+        'CashOut::Blackcoin',
         'CashOut::Check'
       ];
     };

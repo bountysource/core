@@ -65,6 +65,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <span ng-if="$currency.isUSD()">$</span>
             <span ng-if="$currency.isBTC()">฿</span>
+            <span ng-if="$currency.isBLK()">BLK</span>
             <span ng-if="$currency.isXRP()">XRP</span>
             <span ng-if="$currency.isMSC()">MSC</span>
             <b class="caret"></b>
@@ -73,6 +74,7 @@
             <li role="presentation" class="dropdown-header">Choose currency:</li>
             <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
             <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
+            <li><a ng-click="$currency.setBLK()">BlackCoin (BLK)</a></li>
             <li><a ng-click="$currency.setXRP()">Ripple (XRP)</a></li>
             <li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>
           </ul>

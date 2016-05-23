@@ -5,8 +5,8 @@ angular.module('filters').filter('dollars', function($filter, $api, $currency) {
   return function(value, options) {
     options = options || {};
 
-    // Force space between unit and value when MSC and XRP
-    if ($currency.isMSC() || $currency.isXRP()) {
+    // Force space between unit and value when BLK, MSC or XRP
+    if ($currency.isBLK() || $currency.isMSC() || $currency.isXRP()) {
       options.space = true;
     }
 

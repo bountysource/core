@@ -73,7 +73,7 @@ angular.module('app').controller('ShoppingCartController', function($rootScope, 
   // needs to be a $watch currency can be switched at any time (while on or off this page)
   $scope.$watch(watchCurrency, function (newValue, oldValue) {
     var three_month_value, six_month_value;
-    // can't filter until $currency.btcToUsdRate is set
+    // can't filter until $currency.toUsdRates is set
     // service is a singleton, but if refresh page, needs to load rate first
     $currency.onLoadPromise.then(function () {
       three_month_value = $filter('dollars')(100);

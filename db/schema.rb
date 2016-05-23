@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 1) do
+ActiveRecord::Schema.define(version: 20160401070557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,11 +180,13 @@ ActiveRecord::Schema.define(version: 1) do
     t.string   "mastercoin_address"
     t.boolean  "is_refund",                  default: false, null: false
     t.integer  "account_id",                                 null: false
+    t.string   "blackcoin_address"
   end
 
   add_index "cash_outs", ["address_id"], name: "index_cash_outs_on_address_id", using: :btree
   add_index "cash_outs", ["amount"], name: "index_cash_outs_on_amount", using: :btree
   add_index "cash_outs", ["bitcoin_address"], name: "index_cash_outs_on_bitcoin_address", using: :btree
+  add_index "cash_outs", ["blackcoin_address"], name: "index_cash_outs_on_blackcoin_address", using: :btree
   add_index "cash_outs", ["mailing_address_id"], name: "index_cash_outs_on_mailing_address_id", using: :btree
   add_index "cash_outs", ["paypal_address"], name: "index_cash_outs_on_paypal_address", using: :btree
   add_index "cash_outs", ["person_id"], name: "index_cash_outs_on_person_id", using: :btree

@@ -24,12 +24,14 @@
 #  mastercoin_address         :string(255)
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
+#  blackcoin_address          :string(255)
 #
 # Indexes
 #
 #  index_cash_outs_on_address_id          (address_id)
 #  index_cash_outs_on_amount              (amount)
 #  index_cash_outs_on_bitcoin_address     (bitcoin_address)
+#  index_cash_outs_on_blackcoin_address   (blackcoin_address)
 #  index_cash_outs_on_mailing_address_id  (mailing_address_id)
 #  index_cash_outs_on_paypal_address      (paypal_address)
 #  index_cash_outs_on_person_id           (person_id)
@@ -146,11 +148,12 @@ class CashOut < ActiveRecord::Base
   # Given a cash out type, create an instance from the correct class
   def self.parse(type, attrs={})
     klass = case type
-    when 'paypal' then CashOut::Paypal
-    when 'bitcoin' then CashOut::Bitcoin
-    when 'check' then CashOut::Check
-    when 'ripple' then CashOut::Ripple
-    when 'mastercoin' then CashOut::Mastercoin
+    when 'paypal' then Paypal
+    when 'bitcoin' then Bitcoin
+    when 'blackcoin' then Blackcoin
+    when 'check' then Check
+    when 'ripple' then Ripple
+    when 'mastercoin' then Mastercoin
     else raise InvalidType
     end
     klass.new(attrs)

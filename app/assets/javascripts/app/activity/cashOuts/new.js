@@ -51,6 +51,7 @@ angular.module('activity').
       amount: undefined,
       paypal_address: undefined,
       bitcoin_address: undefined,
+      blackcoin_address: undefined,
       address: undefined,
       mailing_address: undefined,
       us_citizen: undefined,
@@ -147,9 +148,10 @@ angular.module('activity').
           delete payload.newAddress;
           delete payload.newMailingAddress;
 
-          // Remove paypal/bitcoin if wrong type of cash out
+          // Clear addresses for other types of cash outs
           if (payload.type !== 'paypal') { delete payload.paypal_address; }
           if (payload.type !== 'bitcoin') { delete payload.bitcoin_address; }
+          if (payload.type !== 'blackcoin') { delete payload.blackcoin_address; }
 
           $api.v2.createCashOut(payload).then(function(response) {
             if (response.success) {

@@ -5,6 +5,7 @@ fee
 fee_adjustment
 paypal_address
 bitcoin_address
+blackcoin_address
 ripple_address
 mastercoin_address
 sent_at

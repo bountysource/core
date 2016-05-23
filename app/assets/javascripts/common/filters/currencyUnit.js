@@ -8,6 +8,8 @@ angular.module('filters').filter('currencyUnit', function ($filter) {
       } else {
         return 'μBTC ';
       }
+    } else if (currency === 'BLK') {
+      return 'BLK';
     } else if (currency === 'XRP') {
       return 'XRP';
     } else if (currency === 'MSC') {
