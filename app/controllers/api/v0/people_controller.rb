@@ -19,7 +19,7 @@ class Api::V0::PeopleController < Api::V0::BaseController
   def update
     @person = Person.find_by_id params[:id]
     attrs = params.select { |k,_| Person.accessible_attributes.include? k }
-    @person.update_attributes attrs unless attrs.empty?
+    @person.update_attributes!(attrs) unless attrs.empty?
 
     render "api/v1/people/show_admin"
   end

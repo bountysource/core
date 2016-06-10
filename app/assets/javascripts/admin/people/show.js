@@ -2,10 +2,29 @@ angular.module('app')
 .config(function ($routeProvider) {
 
 
-  $routeProvider.when('/admin/people/:id', { templateUrl: 'admin/people/show_info.html', controller: function ($scope, $route, $api, $routeParams) {
+  $routeProvider.when('/admin/people/:id', { templateUrl: 'admin/people/show_info.html', controller: function ($scope, $route, $api, $window, $routeParams) {
     $scope.person_id = $routeParams.id;
     $scope.person = $api.get_person($routeParams.id);
     $scope.selected_tab = 'info';
+
+    $scope.person.then(function(person) {
+      $scope.person_update_form = {
+        email: person.email,
+        public_email: person.public_email,
+        first_name: person.first_name,
+        last_name: person.last_name,
+        display_name: person.display_name,
+        bio: person.bio,
+        location: person.location,
+        url: person.url,
+        company: person.company
+      };
+      $scope.updatePerson = function() {
+        $api.update_person(person.id, $scope.person_update_form).then(function(response) {
+          $window.location.reload();
+        });
+      };
+    })
 
     $api.get_teams({ person_id: $routeParams.id }).then(function(response) {
       $scope.teams = response.data;

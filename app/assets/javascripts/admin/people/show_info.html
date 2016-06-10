@@ -1,5 +1,6 @@
 <div ng-include="'admin/people/_show_tabs.html'"></div>
 
+<div ng-show="person.id">
 
 <img class="thumbnail" style="width: 100px; height: 100px;" ng-src="{{person.image_url}}"></img>
 <ul class="unstyled" style="margin-top:25px;">
@@ -12,6 +13,22 @@
 </ul>
 <div ng-show="success" class="alert alert-success">Person information successfully updated!</div>
 <div ng-show="error" class="alert alert-error">{{ error }}</div>
+
+<div style="border: 1px solid #ddd; border-radius: 10px; margin-top: 10px">
+  <h3>Profile</h3>
+  <form>
+    Login email:<input type="text" ng-model="person_update_form.email" /><br/>
+    Public email:<input type="text" ng-model="person_update_form.public_email" /><br/>
+    First name:<input type="text" ng-model="person_update_form.first_name" /><br/>
+    Last name:<input type="text" ng-model="person_update_form.last_name" /><br/>
+    Display name:<input type="text" ng-model="person_update_form.display_name" /><br/>
+    Bio:<input type="text" ng-model="person_update_form.bio" /><br/>
+    Location:<input type="text" ng-model="person_update_form.location" /><br/>
+    URL:<input type="text" ng-model="person_update_form.url" /><br/>
+    Company:<input type="text" ng-model="person_update_form.company" /><br/>
+    <button type="submit" class="btn btn-primary" ng-click="updatePerson()">Save</button>
+  </form>
+</div>
 
 
 <h3>Teams</h3>
@@ -51,4 +68,6 @@
       </div>
     </div>
   </form>
+</div>
+
 </div>
