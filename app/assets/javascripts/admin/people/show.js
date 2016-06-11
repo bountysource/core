@@ -24,7 +24,7 @@ angular.module('app')
           $window.location.reload();
         });
       };
-    })
+    });
 
     $api.get_teams({ person_id: $routeParams.id }).then(function(response) {
       $scope.teams = response.data;
