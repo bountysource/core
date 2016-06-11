@@ -206,8 +206,9 @@ class Team < ActiveRecord::Base
 
   def claim_team(member)
     enable_accepts_team_payins_if_team_is_empty
-    relation_for_owner(member).update_attributes!(member: true, developer: true, admin: true, public: true)
-    member.send_email :added_to_team, team: self
+    relation = relation_for_owner(member) || member_relations.new(person: member, owner: member)
+    relation.update_attributes!(member: true, developer: true, admin: true, public: true)
+    member.send_email(:claim_team, team: self)
   end
 
   def person_can_claim?(person)

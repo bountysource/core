@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 1) do
+ActiveRecord::Schema.define(version: 20160611150448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "access_tokens", force: true do |t|
     t.integer  "person_id",  null: false
@@ -1021,6 +1022,17 @@ ActiveRecord::Schema.define(version: 1) do
     t.integer  "person_id",    null: false
     t.integer  "team_id",      null: false
     t.datetime "opted_out_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "team_claims", force: true do |t|
+    t.integer  "person_id",      null: false
+    t.integer  "team_id",        null: false
+    t.text     "claim_notes"
+    t.text     "rejected_notes"
+    t.datetime "accepted_at"
+    t.datetime "rejected_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

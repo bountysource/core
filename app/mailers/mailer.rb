@@ -45,23 +45,6 @@ class Mailer < ActionMailer::Base
     # Todo: Create alert for all admins/devs that a proposal was accepted on an issue?
   end
 
-  def claim_team(options)
-    @person = options.fetch(:person)
-    @team = options.fetch(:team)
-    @notes = options.fetch(:notes)
-
-    headers "X-SMTPAPI" => {
-      filters: {
-        clicktrack: { settings: { enable: 0 } },
-        opentrack: { settings: { enable: 0 } }
-      }
-    }.to_json
-
-    mail(from: %(Bountysource <system@bountysource.com>), to: 'support@bountysource.com', subject: %(Team Claim - #{@team.name} - #{@person.display_name})) do |format|
-      format.html
-    end
-  end
-
   def proposal_created_to_team(options)
     @proposal = options.fetch(:proposal)
     @person = options.fetch(:person)
@@ -455,6 +438,19 @@ class Mailer < ActionMailer::Base
       format.text
       format.html
     end
+  end
+
+  def claim_team(options)
+    @person = options[:person]
+    @team = options[:team]
+    mail(to: @person.email, subject: "You are now the admin of #{@team.name}")
+  end
+
+  def claim_team_rejected(options)
+    @person = options[:person]
+    @team = options[:team]
+    @team_claim = options[:team_claim]
+    mail(to: @person.email, subject: "Your team claim for #{@team.name} was rejected")
   end
 
   def team_member_added(options)

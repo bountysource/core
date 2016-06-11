@@ -1,0 +1,34 @@
+<div>
+  <h1>Team Claims</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Team</th>
+      <th>Team GitHub</th>
+      <th>Person</th>
+      <th>Person GitHub</th>
+      <th>Person Email</th>
+      <th>Notes</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="team_claim in team_claims">
+      <td>{{team_claim.id}}</td>
+      <td><a href="/admin/teams/{{team_claim.team.id}}">{{team_claim.team.name}}</a></td>
+      <td ng-if="team_claim.team.linked_account"><a href="https://github.com/{{team_claim.team.linked_account.display_name}}" target="_blank">{{team_claim.team.linked_account.display_name}}</a></td>
+      <td><a href="/admin/people/{{team_claim.person.id}}">{{team_claim.person.display_name}}</a></td>
+      <td ng-if="team_claim.person.github_account"><a href="https://github.com/{{team_claim.person.github_account.display_name}}" target="_blank">{{team_claim.person.github_account.display_name}}</a></td>
+      <td>{{team_claim.person.email}}</a></td>
+      <td>{{team_claim.claim_notes}}</td>
+
+      <td>
+        <button class="btn btn-sm btn-primary" ng-click="acceptClaim(team_claim)">Accept</button>
+        <button class="btn btn-sm btn-danger" ng-click="rejectClaim(team_claim)">Reject</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

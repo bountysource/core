@@ -111,8 +111,7 @@ class Api::V2::TeamsController < Api::BaseController
         @item.member_requested_invite(current_user)
         render json: { claim: 'pending' }
       else
-        # email bountysource staff
-        Mailer.claim_team(person: current_user, team: @item, notes: params[:notes]).deliver
+        TeamClaim.create!(team: @item, person: current_user, claim_notes: params[:notes])
         render json: { claim: 'pending' }
       end
       return
