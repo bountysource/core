@@ -8,7 +8,9 @@ angular.module('app').config(function($stateProvider) {
     controller: function($scope, $state, $stateParams, $api, $window, $env, payment_methods) {
       $scope.payment_methods = payment_methods;
       $scope.form_data = {
-        payment_method: ($scope.support_level && $scope.support_level.payment_method.id) || ""
+        payment_method: ($scope.support_level && $scope.support_level.payment_method.id) || "",
+        bountysource_team_supported: false,
+        bountysource_team_amount: 5
       };
 
       var support_create_error = function(response) {
@@ -30,6 +32,9 @@ angular.module('app').config(function($stateProvider) {
           reward_id: $stateParams.reward_id,
           id: $stateParams.support_level_id
         };
+        if ($scope.form_data.bountysource_team_supported) {
+          support_level_params.bountysource_team_amount = $scope.form_data.bountysource_team_amount;
+        }
         var create_or_update_support_level = $stateParams.support_level_id ? $api.support_levels.update : $api.support_levels.create;
 
         if ($scope.form_data.payment_method === 'stripe') {

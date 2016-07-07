@@ -17,13 +17,19 @@
         <alert type="alert.type" close="alert.message = null">{{ alert.message }}</alert>
       </div>
 
-      <!--<div class="alert alert-warning" ng-if="cart && !cart.isEmpty()">-->
-        <!--<span style="font-size: 20px; font-weight: bold; margin-right: 10px;">Bountysource needs your support! Please donate:</span>-->
-        <!--<button class="btn btn-success" ng-click="donateToBountysource(5)">$5</button>-->
-        <!--<button class="btn btn-success" ng-click="donateToBountysource(15)">$15</button>-->
-        <!--<button class="btn btn-success" ng-click="donateToBountysource(50)">$50</button>-->
-        <!--<button class="btn btn-success" ng-click="donateToBountysource()">Custom</button>-->
-      <!--</div>-->
+      <div class="panel panel-green panel-green-background ng-scope">
+        <div class="panel-body text-center">
+          <h4>
+            <span style="margin-right:10px">Please also consider a contribution to the <a href="https://salt.bountysource.com/teams/bountysource" target="_blank">Bountysource Team</a>:</span>
+            <span>
+              <a class="btn btn-success ng-binding" ng-click="donateToBountysource(5)">$5</a>
+              <a class="btn btn-success ng-binding" ng-click="donateToBountysource(15)">$15</a>
+              <a class="btn btn-success ng-binding" ng-click="donateToBountysource(50)">$50</a>
+              <a class="btn btn-success ng-binding" ng-click="donateToBountysource()">Other</a>
+            </span>
+          </h4>
+        </div>
+      </div>
 
       <table class="table" ng-if="cart && !cart.isEmpty()">
         <tbody>

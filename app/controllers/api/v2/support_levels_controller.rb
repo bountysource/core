@@ -184,6 +184,20 @@ protected
       # create the support level and render the success
       @item.save!
 
+      # optionally create a bountysource support level
+      if params[:bountysource_team_amount].to_f > 0
+        SupportLevel.create!(
+          person: @item.person,
+          team: Team.where(slug: 'bountysource').first!,
+          amount: params[:bountysource_team_amount],
+          owner: @item.owner,
+          payment_method: @item.payment_method,
+          status: 'pending',
+          last_invoice_starts_at: nil,
+          last_invoice_ends_at: nil
+        )
+      end
+
       # attempt to bill right away
       @item.payment_method.delay.create_and_settle_pending_invoices!
 

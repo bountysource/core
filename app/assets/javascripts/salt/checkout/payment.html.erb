@@ -28,6 +28,13 @@
               </label>
             </div>
           </div>
+
+          <div style="margin: 30px 0 15px" ng-hide="team.slug==='bountysource' || support_level">
+            <b>The Bountysource Team Needs Your Support (optional)</b><br/>
+            <label style="font-weight: normal"><input type="checkbox" ng-model="form_data.bountysource_team_supported" /> Also support <a href="/teams/bountysource" target="_blank">Bountysource Team</a> with a monthly contribution of</label>
+            $<input type="text" style="width:40px; padding: 0 3px" ng-model="form_data.bountysource_team_amount" value="5" ng-change="form_data.bountysource_team_supported=true" />
+          </div>
+
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!form_data.payment_method || form_data.$processing">
               <span ng-show="!form_data.$processing && !support_level">Confirm Payment</span>
