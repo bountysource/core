@@ -37,7 +37,7 @@
               <a ng-repeat="reward in team.support_offering.rewards | orderBy:'amount'" ui-sref="root.checkout.amount({ team: team.slug, reward_id: reward.id })">
                 <div>
                   <h4>
-                    {{reward.amount|dollars}} - {{reward.title}}
+                    {{reward.amount|dollars}} per month - {{reward.title}}
                     <small ng-show="reward.active_support_levels_count>0">({{reward.active_support_levels_count}} active)</small>
                   </h4>
 
