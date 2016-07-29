@@ -116,8 +116,10 @@ class TeamUpdate < ActiveRecord::Base
 
   def send_bountysource_newsletter
     raise "bountysource only" unless team.slug == 'bountysource' && self.published
-    Person.active.find_each do |person|
-      delay(priority: 151).send_one_email(person_id: person.id)
+    people_ids = Person.active.order(:id).pluck(:id)
+    people_ids.each do |person_id|
+      delay(priority: 151).send(:send_one_email, person_id: person_id)
+      puts "#{person_id}"
     end
   end
 
