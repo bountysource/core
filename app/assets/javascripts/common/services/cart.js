@@ -109,7 +109,7 @@ angular.module('services').service('$cart', function ($rootScope, $window, $q, $
   /*
   * Checkout for cart. Result depends on checkout_method.
   * - Google Wallet: Show checkout modal
-  * - Paypal: Redirect to checkout page
+  * - PayPal: Redirect to checkout page
   * - Coinbase: Redirect to checkout page
   * - Personal: Redirect to receipt page on success
   * - Team: Redirect to receipt page on success
