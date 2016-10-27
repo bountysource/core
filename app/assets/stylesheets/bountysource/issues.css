@@ -32,11 +32,11 @@ table#solutions-table tr td img.thumbnail {
 }
 
 li.task-list-item {
-  list-style: square outside url(images/checkbox.png);
+  list-style: square outside url("https://d2bbtvgnhux6eq.cloudfront.net/assets/checkbox.png");
 }
 
 li.task-list-item-checked {
-  list-style: square outside url(images/checkbox_checked.png);
+  list-style: square outside url("https://d2bbtvgnhux6eq.cloudfront.net/assets/checkbox_checked.png");
 }
 
 li.task-list-item br {
