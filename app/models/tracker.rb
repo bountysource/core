@@ -71,6 +71,7 @@ class Tracker < ActiveRecord::Base
     PhpTracker::API
     Savannah::API
     Mantis::API
+    Drupalorg::API
   )
 
   STATIC_SUBCLASSNAMES = %w(
@@ -86,6 +87,7 @@ class Tracker < ActiveRecord::Base
     PhpTracker::Tracker
     Savannah::Tracker
     Mantis::Tracker
+    Drupalorg::Tracker
   )
 
   class RemoteAPI
