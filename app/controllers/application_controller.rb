@@ -17,6 +17,13 @@ class ApplicationController < ActionController::Base
   before_filter :find_person
 
   before_filter do
+    # temporary fix
+    ActiveRecord::Base.connection_pool.connections.map(&:disconnect!)
+    ActiveRecord::Base.connection.disconnect!
+    ActiveRecord::Base.establish_connection
+  end
+
+  before_filter do
     # default per page
     params[:per_page] ||= 50
   end
