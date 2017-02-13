@@ -250,7 +250,7 @@ protected
     else
       plugin_text = nil
     end
-    desired_body = "#{desired_body}\r\n\r\n<bountysource-plugin>\r\n---\r\n#{plugin_text}\r\n</bountysource-plugin>" if plugin_text
+    desired_body = "#{desired_body}\r\n\r\n<bountysource-plugin>\r\n\r\n---\r\n#{plugin_text}\r\n</bountysource-plugin>" if plugin_text
 
     # update API with title and body
     updates = {}
