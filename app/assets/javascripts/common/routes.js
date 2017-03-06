@@ -142,13 +142,6 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Account Settings'
   }, defaultRouteOptions));
 
-  $routeProvider.when('/settings/email', angular.extend({
-    templateUrl: 'app/settings/email.html',
-    controller: 'SettingsEmail',
-    resolve: { person: personResolver },
-    trackEvent: 'View Account Settings Email'
-  }, defaultRouteOptions));
-
   $routeProvider.when('/settings', angular.extend({
     templateUrl: 'app/settings/profile.html',
     controller: 'Settings',
