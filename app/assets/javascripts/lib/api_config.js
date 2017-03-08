@@ -19,7 +19,9 @@ angular.module('app').run(function($api) {
       me: { method: 'GET', url: '/people/me' },
       login: { method: 'POST', url: '/user/login', api_version: 1 },
       create: { method: 'POST', url: '/user', api_version: 1 },
-      unsubscribe: { method: 'POST', url: '/people/unsubscribe' }
+      unsubscribe: { method: 'POST', url: '/people/unsubscribe' },
+      registered: { method: 'GET', url: '/email_registered', api_version: 1},
+      reset_password: { method: 'POST', url: '/user/request_password_reset', api_version: 1 }
     }
   });
 

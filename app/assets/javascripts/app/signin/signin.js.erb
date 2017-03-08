@@ -45,11 +45,11 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
   //   'pending' == user typed email and blurred it
   //   'signin' == email checked and exists
   //   'signup' == email checked and available
+  //   'pwd_reset' == password reset requested
   $scope.signin_or_signup = null;
 
   // don't show initial validations until form has been submitted
   $scope.show_validations = false;
-
 
   $scope.email_changing = function() {
     $scope.signin_or_signup = null;
@@ -122,8 +122,31 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
   };
 
   $scope.forgot_password = function() {
-    $api.request_password_reset({ email: $scope.form_data.email }).then(function(response) {
-      $scope.error = response.message;
+    if(!$scope.form_data.email) {
+      $scope.error = !!$scope.form.email.$viewValue  ? "Email address invalid" : "Email address empty";
+      $scope.signin_or_signup = 'pending';
+      $scope.form.email.$setValidity("ng-invalid-email", false);
+      document.getElementById("inputEmail").focus();
+      return;
+    }
+
+    $scope.email_previous = $scope.form_data.email;
+    $scope.signin_or_signup = 'pwd_reset';
+
+    $api.check_email_address($scope.form_data.email).then(function(response) {
+      $scope.form.$setValidity();
+      if (response.email_is_registered) {
+        $scope.signin_or_signup = 'signin';
+        $api.request_password_reset({ email: $scope.form_data.email }).then(function(response) {
+          $scope.error = response.message;
+        });
+      } else {
+        $scope.signin_or_signup = 'pending';
+        $scope.error=response.error;
+        $scope.form.email.$setValidity("ng-invalid-email", false);
+        document.getElementById("inputEmail").focus();
+      }
     });
   };
+
 });

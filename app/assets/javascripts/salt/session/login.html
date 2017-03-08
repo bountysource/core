@@ -7,11 +7,11 @@
       <div class="panel-body">
         <ng-include src="'salt/session/_buttons.html'"></ng-include>
 
-        <form ng-submit="login()" novalidate>
+        <form ng-submit="login()" name="form" novalidate>
           <div class="alert alert-danger" ng-show="error">{{error}}</div>
 
           <div class="form-group">
-            <input type="text" class="form-control" name="email" ng-model="form_data.email" placeholder="Email Address"/>
+            <input type="email" class="form-control" name="email" ng-model="form_data.email" placeholder="Email Address"/>
           </div>
           <div class="form-group">
             <input type="password" class="form-control" name="password" ng-model="form_data.password" placeholder="Password"/>
@@ -21,7 +21,7 @@
       </div>
 
       <div class="panel-footer" style="font-size: 90%; text-align: center">
-        Need an account? <a ui-sref="root.session.signup">Sign Up</a><br/>
+        Need an account? <a ui-sref="root.session.signup">Sign Up</a> Forgotten password? <a ng-click="reset_password()">Reset</a><br/>
       </div>
     </div>
 
