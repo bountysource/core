@@ -30,6 +30,7 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 #### ...with documentation
 
 * We are signficantly lacking in documentation. Can you write up a first time developers guide?
+ * https://github.com/bountysource/core/issues/1082
 
 ## Developer Resources
 
