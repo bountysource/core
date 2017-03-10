@@ -30,7 +30,7 @@ angular.module('app').config(function($stateProvider) {
 
           $api.people.reset_password({email: $scope.form_data.email}, function(response) {
             $scope.error = response.message;
-          })
+          });
         });
       };
     }
