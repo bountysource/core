@@ -20,9 +20,6 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
     $api.signout();
   };
 
-  // Expose the currency service
-  $scope.$currency = $currency;
-
   $scope.openDevToolsModal = function() {
     $modal.open({
       templateUrl: 'app/layout/templates/devToolsModal.html',
