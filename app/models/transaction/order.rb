@@ -90,7 +90,7 @@ class Transaction::Order < Transaction
 
       # Ensure that the cart has not yet been processed
       # TODO this overlaps a bit with the ::create_from_payment_notification,
-      # which only deals with Paypal at the moment. Google Wallet should
+      # which only deals with PayPal at the moment. Google Wallet should
       # be updated to use PaymentNotification at some point. Perhaps all of this
       # will be replaced with the Checkout class when that is finished:
       # https://github.com/bountysource/api/tree/cory/checkout_cleanup

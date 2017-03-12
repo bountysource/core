@@ -60,7 +60,7 @@ describe PaymentsController do
     # Set post body of request
     request.env['RAW_POST_DATA'] = post_data.to_param
 
-    # Stub Paypal POST back verification response
+    # Stub PayPal POST back verification response
     PaymentNotification::Paypal.any_instance.stub(:post_back) { 'VERIFIED' }
   end
 
