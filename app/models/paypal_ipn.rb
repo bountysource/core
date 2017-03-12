@@ -22,7 +22,7 @@
 #  index_paypal_ipns_on_txn_id        (txn_id)
 #
 
-# Paypal IPN Reference: https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/
+# PayPal IPN Reference: https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/
 class PaypalIpn < ActiveRecord::Base
   attr_accessible :raw_post, :txn_id, :payment_type, :payment_processed_at, :is_return, :processed, :pending
 
@@ -57,7 +57,7 @@ class PaypalIpn < ActiveRecord::Base
         # Safely check to see if a Transaction::Order::Paypal has been created yet.
         #
         # If we receive an IPN for an empty shopping cart, just return successfully.
-        # When Paypal sends us more than one IPN, the first successful one to arrive
+        # When PayPal sends us more than one IPN, the first successful one to arrive
         # will create the Transaction::Order and clear the person's ShoppingCart.
         # Meanwhile, The IPN message has the old ShoppingCart token, which will NOT
         # match against an empty cart when we receive it.
@@ -85,7 +85,7 @@ class PaypalIpn < ActiveRecord::Base
     elsif params['payment_status'] == 'Denied'
       # This happens when a payment is cancelled, paypal sends us an IPN. don't raise.
       #
-      # From Paypal docs:
+      # From PayPal docs:
       # "The payment was denied. This happens only if the payment was previously pending because of
       # one of the reasons listed for the pending_reason variable or the Fraud_Management_Filters_x variable."
 

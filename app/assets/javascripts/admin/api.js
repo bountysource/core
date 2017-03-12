@@ -821,7 +821,7 @@ angular.module('api.bountysource',[]).
         {"id":114777,"type":"Account::ElectronicFrontierFoundation","name":""},
         {"id":114779,"type":"Account::FreeSoftwareFoundation","name":""},
         {"id":284365,"type":"Account::GoogleWallet","name":""},
-        {"id":3,"type":"Account::Paypal","name":"Paypal equity account"},
+        {"id":3,"type":"Account::Paypal","name":"PayPal equity account"},
         {"id":114781,"type":"Account::SoftwarePublicInterest","name":""},
         {"id":284786,"type":"Account::BountySourceFeesTeam","name":""}
       ];
