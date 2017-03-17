@@ -1,0 +1,56 @@
+version: '3'
+volumes:
+  database:
+  app:
+  search_conf:
+services:
+  pgsql:
+    container_name: pgsql
+    image: postgres
+    volumes:
+      - database:/var/lib/postgresql/data
+  sphinx:
+    container_name: sphinx
+    image: leodido/sphinxsearch:2.2.9
+    hostname: sphinx
+    command: searchd.sh
+    links:
+      - pgsql
+    volumes:
+      - app:/app
+      - search_conf:/usr/local/etc/
+  bountysource:
+    container_name: bountysource
+    env_file: .env.dev
+    links:
+      - pgsql
+      - sphinx
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    command: rails s
+    volumes:
+      - app:/app
+  bountysource_test:
+    container_name: bountysource_test
+    image: bountysource
+    env_file: .env.test
+    links:
+      - pgsql
+      - sphinx
+    ports:
+      - "3000:3000"
+    command:
+      - "rake db:drop db:create && "
+      - "bundle exec rake spec:prepare &&"
+      - "bundle exec rspec --pattern spec/{models}{,/**}/*_spec.rb &&"
+      - "rake db:drop db:create && "
+      - "bundle exec rake spec:prepare &&"
+      - "bundle exec rspec --pattern spec/{trackers}{,/**}/*_spec.rb"
+      - "rake db:drop db:create && "
+      - "bundle exec rake spec:prepare &&"
+      - "bundle exec rspec --pattern spec/{controllers,features,helpers,mailers,routing}{,/**}/*_spec.rb"
+      - "bundle exec rake jshint"
+    volumes:
+      - app:/app
