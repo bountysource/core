@@ -16,6 +16,8 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 
 #### ...with code
 
+* Start by reading the [Contributing Guidelines](https://github.com/bountysource/core/blob/master/CONTRIBUTING.md)
+
 * There are a number of high priority issues that would help the core team, such as:
  * [Automatically collect e-signed Tax forms upon cash out request](https://github.com/bountysource/core/issues/1078)
  * [Add "Send via Paypal" button to admin/cash_outs/pending](https://github.com/bountysource/core/issues/1079)
