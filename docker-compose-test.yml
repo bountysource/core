@@ -1,0 +1,19 @@
+version: '3'
+volumes:
+  database:
+services:
+  pgsql:
+    container_name: pgsql
+    image: postgres
+    volumes:
+      - database:/var/lib/postgresql/data
+  bountysource_test:
+    container_name: bountysource_test
+    env_file: .env.test
+    environment:
+      - DATABASE_URL=postgres://postgres@pgsql/bountysource_test 
+    links:
+      - pgsql
+    build:
+      context: .
+    command: bash /app/run-tests.sh
