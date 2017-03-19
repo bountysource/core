@@ -32,25 +32,3 @@ services:
     command: rails s
     volumes:
       - app:/app
-  bountysource_test:
-    container_name: bountysource_test
-    image: bountysource
-    env_file: .env.test
-    links:
-      - pgsql
-      - sphinx
-    ports:
-      - "3000:3000"
-    command:
-      - "rake db:drop db:create && "
-      - "bundle exec rake spec:prepare &&"
-      - "bundle exec rspec --pattern spec/{models}{,/**}/*_spec.rb &&"
-      - "rake db:drop db:create && "
-      - "bundle exec rake spec:prepare &&"
-      - "bundle exec rspec --pattern spec/{trackers}{,/**}/*_spec.rb"
-      - "rake db:drop db:create && "
-      - "bundle exec rake spec:prepare &&"
-      - "bundle exec rspec --pattern spec/{controllers,features,helpers,mailers,routing}{,/**}/*_spec.rb"
-      - "bundle exec rake jshint"
-    volumes:
-      - app:/app

@@ -1,0 +1,35 @@
+version: '3'
+volumes:
+  database:
+  app:
+  search_conf:
+services:
+  setup:
+    image: bountysource
+    env_file: .env.dev
+    command: bash -c "rake db:setup ts:configure && ln -Ts /app/config/development.sphinx.conf /sphinx/sphinx.conf"
+    links:
+      - pgsql
+    volumes:
+      - app:/app
+      - search_conf:/sphinx
+  seed:
+    image: bountysource
+    env_file: .env.dev
+    command: bash -c "rake ts:generate ts:index"
+    links:
+      - pgsql
+      - sphinx
+    volumes:
+      - app:/app
+  test:
+    image: bountysource
+    env_file: .env.test
+    environment:
+      - DATABASE_URL=postgres://postgres@pgsql/bountysource_test
+    command: bash -c "rake db:drop db:create spec:prepare jshint && rspec --exclude-pattern spec/vcr/**/*_spec.rb"
+    links:
+      - pgsql
+      - sphinx
+    volumes:
+      - app:/app
