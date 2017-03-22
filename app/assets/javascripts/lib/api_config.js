@@ -21,7 +21,8 @@ angular.module('app').run(function($api) {
       create: { method: 'POST', url: '/user', api_version: 1 },
       unsubscribe: { method: 'POST', url: '/people/unsubscribe' },
       registered: { method: 'GET', url: '/email_registered', api_version: 1},
-      reset_password: { method: 'POST', url: '/user/request_password_reset', api_version: 1 }
+      request_password_reset: { method: 'POST', url: '/user/request_password_reset', api_version: 1 },
+      reset_password: {method: 'POST', url: '/user/reset_password', api_version: 1 }
     }
   });
 

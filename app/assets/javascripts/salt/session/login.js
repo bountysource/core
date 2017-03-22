@@ -28,7 +28,7 @@ angular.module('app').config(function($stateProvider) {
             return;
           }
 
-          $api.people.reset_password({email: $scope.form_data.email}, function(response) {
+          $api.people.request_password_reset({email: $scope.form_data.email}, function(response) {
             $scope.error = response.message;
           });
         });

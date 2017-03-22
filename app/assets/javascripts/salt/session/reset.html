@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title" style="font-size: 24px; text-align: center">Password reset</h1>
+      </div>
+      <div class="panel-body">
+
+        <form ng-submit="reset()" name="form">
+          <div class="alert alert-danger" ng-show="error">{{error}}</div>
+
+          <div class="form-group" ng-hide="signup_data">
+            <input type="text" class="form-control" name="email" ng-model="form_data.email" required placeholder="Email address "/>
+          </div>
+          <div class="form-group" ng-hide="signup_data">
+            <input type="text" class="form-control" name="code" ng-model="form_data.code" required placeholder="Reset code"/>
+          </div>
+          <div class="form-group" ng-hide="signup_data">
+            <input type="password" class="form-control" name="new_password" ng-model="form_data.new_password" required placeholder="Password"/>
+          </div>
+          <button type="submit" class="btn btn-success btn-block btn-lg"><span ng-show="signup_data">Complete </span>Reset password</button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
