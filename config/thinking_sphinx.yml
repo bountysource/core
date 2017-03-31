@@ -1,6 +1,6 @@
 development:
-
+  address: sphinx
+  mysql41: 9306
 staging:
 
 production:
-
