@@ -247,7 +247,7 @@ class Api::V1::PeopleController < ApplicationController
     require_params(:email)
 
     if (person = Person.find_by_email(params[:email]))
-      if URI(request.referer).host == URI.parse(Api::Application.config.salt_url).host
+      if params[:is_salt]
         site_url = Api::Application.config.salt_url
       else
         site_url = Api::Application.config.www_url
