@@ -19,6 +19,24 @@ describe Api::V1::PeopleController do
     }.should change(person, :paypal_email).to paypal_email
   end
 
+  describe "password reset requests" do
+    let(:Person) { class_double('Person') }
+
+    before do
+      Person.stub(:find_by_email).and_return(person)
+    end
+
+    it "sends pw reset for bountysource by default" do
+      expect(person).to receive(:send_email).with(:reset_password, site_url: Api::Application.config.www_url).once
+      post :request_password_reset, {email: person.email}
+    end
+
+    it "sends pw reset for salt when requested" do
+      expect(person).to receive(:send_email).with(:reset_password, site_url: Api::Application.config.salt_url).once
+      post :request_password_reset, {email: person.email, is_salt: true}
+    end
+  end
+
   describe "access token" do
     let!(:person) { create(:person, email: 'test@test.com',
                            password: 'abcABC123', password_confirmation: 'abcABC123') }
