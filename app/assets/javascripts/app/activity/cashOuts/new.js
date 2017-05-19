@@ -38,9 +38,9 @@ angular.module('activity').
 
     $scope.$watchCollection('[current_person, addressManager.addresses]', function (currColl, prevColl) {
       if(currColl[0] && currColl[1] && currColl[1].length > 0) {
-        $scope.defaultsFromPrevCashout()
+        $scope.defaultsFromPrevCashout();
       }
-    })
+    });
 
     $scope.templates = [
       'app/activity/cashOuts/new/confirmation.html',
@@ -122,12 +122,12 @@ angular.module('activity').
         }
 
         for(var i in $scope.addressManager.addresses) {
-          if($scope.addressManager.addresses[i].id == lastCashOut["address_id"]) {
+          if($scope.addressManager.addresses[i].id === lastCashOut["address_id"]) {
             $scope.cashOut.address = $scope.addressManager.addresses[0];
           }
         }
-      })
-    }
+      });
+    };
 
     $scope.createMailingAddress = function() {
       var deferred = $q.defer();
