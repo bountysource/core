@@ -36,6 +36,12 @@ angular.module('activity').
       }
     });
 
+    $scope.$watchCollection('[current_person, addressManager.addresses]', function (currColl, prevColl) {
+      if(currColl[0] && currColl[1] && currColl[1].length > 0) {
+        $scope.defaultsFromPrevCashout()
+      }
+    })
+
     $scope.templates = [
       'app/activity/cashOuts/new/confirmation.html',
       'app/activity/cashOuts/new/permanentAddress.html',
@@ -97,6 +103,31 @@ angular.module('activity').
       }
       return deferred.promise;
     };
+
+    $scope.defaultsFromPrevCashout = function() {
+      $api.v2.cashOuts().then(function (response) {
+        if (!response.data.length) {
+          return;
+        }
+
+        var lastCashOut = response.data[0];
+
+        $scope.cashOut.type = lastCashOut.type;
+        $scope.cashOut.paypal_address = lastCashOut.paypal_address;
+        $scope.cashOut.bitcoin_address = lastCashOut.bitcoin_address;
+        $scope.cashOut.us_citizen = lastCashOut.us_citizen;
+
+        if(!$scope.addressManager.addresses.length) {
+          return;
+        }
+
+        for(var i in $scope.addressManager.addresses) {
+          if($scope.addressManager.addresses[i].id == lastCashOut["address_id"]) {
+            $scope.cashOut.address = $scope.addressManager.addresses[0];
+          }
+        }
+      })
+    }
 
     $scope.createMailingAddress = function() {
       var deferred = $q.defer();
