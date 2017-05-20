@@ -74,6 +74,8 @@ gem 'angular-rails-templates'
 
 gem 'secure_headers'
 
+gem 'paypal-sdk-rest'
+
 group :development do
   gem 'zeus'
   gem 'foreman'

@@ -42,4 +42,35 @@ class CashOut::Paypal < CashOut
 
   validates :paypal_address, presence: true
 
+  # Send the cash out asyncronously via PayPal's Payout API
+  def send!
+    @payout = Payout.new(
+      {
+        :sender_batch_header => {
+          :sender_batch_id => SecureRandom.hex(8),
+          :email_subject => 'You have a Payout!',
+        },
+        :items => [
+          {
+            :recipient_type => 'EMAIL',
+            :amount => {
+              :value => amount,
+              :currency => 'USD'
+            },
+            :note => 'Thanks!',
+            :receiver => paypal_address,
+            :sender_item_id => id,
+          }
+        ]
+      }
+    )
+
+    begin
+      @payout_batch = @payout.create
+      logger.info "Created Payout with [#{@payout_batch.batch_header.payout_batch_id}]"
+    rescue ResourceNotFound => err
+      logger.error @payout.error.inspect
+    end
+  end
+
 end
