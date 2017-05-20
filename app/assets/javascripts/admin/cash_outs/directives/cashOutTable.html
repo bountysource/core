@@ -89,6 +89,7 @@
     </td>
 
     <td>
+      <button class="btn btn-sm btn-secondary" ng-click="sendViaPaypal($index)" ng-show="_options.markAsSentButton">Send via Paypal</button>
       <button class="btn btn-sm btn-primary" ng-click="markAsSent($index)" ng-show="_options.markAsSentButton">Mark as Sent</button>
       <button class="btn btn-sm btn-danger" ng-click="markAsRefund($index)" ng-show="_options.markAsSentButton">Refund</button>
     </td>

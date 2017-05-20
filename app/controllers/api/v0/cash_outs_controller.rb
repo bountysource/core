@@ -52,6 +52,10 @@ class Api::V0::CashOutsController < Api::V0::BaseController
     elsif !@item.sent? && params.has_key?(:refund)
       @item.update_attributes!(sent_at: DateTime.now, is_refund: true)
       @item.refund!
+    elsif !@item.sent? && params.has_key?(:send)
+      @item.send!
+      @item.release_amount!      
+      @item.update_attributes!(sent_at: DateTime.now)
     end
 
 

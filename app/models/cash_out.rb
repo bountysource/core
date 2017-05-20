@@ -156,6 +156,10 @@ class CashOut < ActiveRecord::Base
     klass.new(attrs)
   end
 
+  def send!
+    raise NotImplementedError, 'Send is not implemented for this cash out method'
+  end
+
 private
 
   def add_serialized_addresses
