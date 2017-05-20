@@ -9,6 +9,8 @@ services:
     image: postgres
     volumes:
       - database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
   sphinx:
     container_name: sphinx
     image: leodido/sphinxsearch:2.2.9
