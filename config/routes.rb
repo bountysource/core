@@ -190,7 +190,11 @@ Api::Application.routes.draw do
 
           resources :tracker_plugins, only: [:show, :index, :create, :update, :delete]
 
-          resources :cash_outs, only: [:index, :show, :update]
+          resources :cash_outs, only: [:index, :show, :update] do
+            collection do
+              post :pay
+            end
+          end
 
           resources :delayed_jobs, only: [:index, :show] do
             collection do

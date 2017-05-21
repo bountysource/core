@@ -6,7 +6,7 @@ angular.module('app')
         controller: "PendingCashOutsController"
       });
   })
-  .controller("PendingCashOutsController", function ($scope, $api) {
+  .controller("PendingCashOutsController", function ($scope, $api, $window) {
 
     $api.call('/admin/cash_outs', {
       sent: false,
@@ -17,5 +17,15 @@ angular.module('app')
     }, function(response) {
       $scope.cashOuts = angular.copy(response.data);
     });
+
+    $scope.sendPayments = function() {
+      if($window.confirm("Are you for real?")) {
+        $api.call('/admin/cash_outs/pay', 'POST', {}, function (res) {
+          // TODO: assign the updated cash_outs to the scope
+          console.log(res.data);
+          console.log(res.meta);
+        });
+      };
+    }
 
   });

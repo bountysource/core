@@ -71,4 +71,10 @@ class Api::V0::CashOutsController < Api::V0::BaseController
     render 'api/v2/cash_outs/show'
   end
 
+  def pay
+    logger.info "Paying all the people!"
+
+    render nothing: true, status: :ok
+  end
+
 end
