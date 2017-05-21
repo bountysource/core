@@ -168,10 +168,7 @@ module Api
       notify_url: "#{config.api_url}payments/paypal_ipn",
       return_url: "#{config.api_url}payments/paypal_return",
       checkout_url: ENV['PAYPAL_SANDBOX']=='true' ? 'https://www.sandbox.paypal.com/' : 'https://www.paypal.com/',
-      api_url: ENV['PAYPAL_SANDBOX']=='true' ? 'https://api-3t.sandbox.paypal.com/nvp' : 'https://api-3t.paypal.com/nvp',
-      client_id: ENV['PAYPAL_CLIENT_ID'],
-      client_secret: ENV['PAYPAL_CLIENT_SECRET'],
-      mode: ENV['PAYPAL_SANDBOX']=='true' ? 'sandbox' : 'live'
+      api_url: ENV['PAYPAL_SANDBOX']=='true' ? 'https://api-3t.sandbox.paypal.com/nvp' : 'https://api-3t.paypal.com/nvp'
     }
 
     # Google Wallet (LEGACY)
