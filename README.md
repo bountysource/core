@@ -38,3 +38,103 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 
 * [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
 * [API Docs](http://bountysource.github.io/)
+
+
+## Self-hosting
+
+For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).
+
+The following was tested on Ubuntu 16.04 LTS. It'll likely will work very similar on other Linux distros.
+
+First tip, don't bother with neither the Docker nor Docker Compose packages that your distro provides (too old, superseded).
+
+Simply install from upstream. To install Docker, do
+
+```console
+curl -sSL https://get.docker.com | sh
+```
+
+To run Docker without superuser rights (`sudo`):
+
+```console
+sudo usermod -aG docker $USER
+```
+
+Then install Python virtualenv:
+
+```console
+sudo apt-get install python-virtualenv
+```
+
+Create a new virtualenv and install Docker Compose into that:
+
+```console
+virtualenv ~/docker-compose
+source ~/docker-compose/bin/activate
+pip install docker-compose
+```
+
+Here are the versions I get:
+
+```console
+(cpy361_6) oberstet@thinkpad-t430s:~/scm/oberstet/bountysource_core$ docker --version
+Docker version 17.05.0-ce, build 89658be
+(cpy361_6) oberstet@thinkpad-t430s:~/scm/oberstet/bountysource_core$ docker-compose --version
+docker-compose version 1.13.0, build 1719ceb
+```
+
+Now pull and build all required Docker images:
+
+```console
+docker-compose -f docker-compose.yml build
+```
+
+Then start the Docker containers relevant for the service:
+
+```console
+docker-compose -f docker-compose.yml up -d
+```
+
+This should start 3 Docker containers (Bountysource, PostgreSQL and Sphinx):
+
+```console
+(cpy361_6) oberstet@thinkpad-t430s:~/scm/oberstet/bountysource_core$ docker ps
+CONTAINER ID        IMAGE                           COMMAND                  CREATED             STATUS              PORTS                    NAMES
+04599623589b        bountysourcecore_bountysource   "rails s"                11 minutes ago      Up 11 minutes       0.0.0.0:3000->3000/tcp   bountysource
+27157a0c1ec0        leodido/sphinxsearch:2.2.9      "searchd.sh"             11 minutes ago      Up 11 minutes       9306/tcp, 9312/tcp       sphinx
+45c0202dd08b        postgres                        "docker-entrypoint..."   11 minutes ago      Up 11 minutes       5432/tcp                 pgsql
+```
+
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
+
+You should see the Bountysource start page, something like [this](http://picpaste.com/pics/Bildschirmfoto_vom_2017-05-18_22-47-40-zHKjmLRL.1495197789.png).
+
+
+### Running the unit tests
+
+To run the unit tests:
+
+```console
+docker-compose -f docker-compose.yml -f tasks.yml up test
+```
+
+You should see something like this in the end:
+
+```console
+(cpy361_6) oberstet@thinkpad-t430s:~/scm/3rdparty/bountysource_core$ docker-compose -f docker-compose.yml -f tasks.yml up test
+Starting pgsql ...
+Starting pgsql ... done
+Starting sphinx ...
+Starting sphinx ... done
+Starting bountysourcecore_test_1 ...
+Starting bountysourcecore_test_1 ... done
+Attaching to bountysourcecore_test_1
+test_1          |
+
+.. lots of output (snipped) ..
+
+test_1          | Finished in 2 minutes 48.5 seconds (files took 7.23 seconds to load)
+test_1          | 1239 examples, 0 failures, 13 pending
+test_1          |
+bountysourcecore_test_1 exited with code 0
+```
