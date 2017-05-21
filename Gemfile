@@ -10,8 +10,6 @@ require 'optparse'
 
 ruby '2.1.2'
 
-gem 'dotenv-rails', groups: [:development, :test]
-
 gem 'rails', '4.0.13'
 gem 'json', '1.8.1'
 gem 'pg', '~> 0.18.1'
@@ -96,6 +94,7 @@ group :development, :test do
   gem 'slack-notifier'
   gem 'git'
   gem 'octokit'
+  gem 'dotenv-rails'
 end
 
 group :test do
@@ -117,7 +116,6 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'timecop'
-  gem 'dotenv-rails'
   gem 'jshint'
 end
 

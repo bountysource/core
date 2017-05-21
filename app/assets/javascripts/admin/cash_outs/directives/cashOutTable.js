@@ -32,13 +32,13 @@ angular.module('app').directive('cashOutTable', function($api, $window) {
         $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { approved: true }, function(response) {
           scope.cashOuts[index] = response.data;
         });
-      }
+      };
 
       scope.unapprove = function(index) {
         $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { approved: false }, function(response) {
           scope.cashOuts[index] = response.data;
         });
-      }
+      };
     }
   };
 

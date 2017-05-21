@@ -29,7 +29,7 @@ angular.module('app')
           }, function (res) {
           $scope.cashOuts = angular.copy(res.data);
         });
-      };
-    }
+      }
+    };
 
   });
