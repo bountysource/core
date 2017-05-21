@@ -44,9 +44,9 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 
 For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).
 
-The following was tested on Ubuntu 16.04 LTS. It'll likely will work very similar on other Linux distros.
+The following was tested on Ubuntu 16.04 LTS. It'll likely work very similar on other Linux distros.
 
-First tip, don't bother with neither the Docker nor Docker Compose packages that your distro provides (too old, superseded).
+First tip, don't bother with the Docker or Docker Compose packages that your distro provides (too old, superseded).
 
 Simply install from upstream. To install Docker, do
 
