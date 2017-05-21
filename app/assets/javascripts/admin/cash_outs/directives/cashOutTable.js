@@ -29,15 +29,15 @@ angular.module('app').directive('cashOutTable', function($api, $window) {
       };
 
       scope.approve = function(index) {
-        if ($window.confirm("Really approve this cash out?")) {
-          $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { approved: true }, function() {});
-        }
+        $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { approved: true }, function(response) {
+          scope.cashOuts[index] = response.data;
+        });
       }
 
       scope.unapprove = function(index) {
-        if ($window.confirm("Really unapprove this cash out?")) {
-          $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { approved: false }, function() {});
-        }
+        $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { approved: false }, function(response) {
+          scope.cashOuts[index] = response.data;
+        });
       }
     }
   };

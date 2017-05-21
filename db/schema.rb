@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611150448) do
+ActiveRecord::Schema.define(version: 20170521104241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 20160611150448) do
     t.string   "mastercoin_address"
     t.boolean  "is_refund",                  default: false, null: false
     t.integer  "account_id",                                 null: false
+    t.datetime "approved_at"
   end
 
   add_index "cash_outs", ["address_id"], name: "index_cash_outs_on_address_id", using: :btree

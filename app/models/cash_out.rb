@@ -44,7 +44,7 @@ class CashOut < ActiveRecord::Base
   class InvalidType < StandardError ; end
 
   attr_accessible :person, :address, :amount, :mailing_address, :bitcoin_address, :remote_ip, :user_agent, :paypal_address,
-                  :us_citizen, :sent_at, :is_refund
+                  :us_citizen, :sent_at, :is_refund, :approved_at
 
   belongs_to :person
   belongs_to :address

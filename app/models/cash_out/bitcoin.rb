@@ -24,6 +24,7 @@
 #  mastercoin_address         :string(255)
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
+#  approved_at                :datetime
 #
 # Indexes
 #

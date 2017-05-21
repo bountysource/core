@@ -12,6 +12,7 @@ is_refund
 us_citizen
 created_at
 updated_at
+approved_at
 ))
 
 json.type item.type_name
