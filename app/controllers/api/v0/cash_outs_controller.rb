@@ -3,6 +3,14 @@ class Api::V0::CashOutsController < Api::V0::BaseController
   include Api::V2::CashOutsHelper
 
   def index
+    check_paypal_batch_status()
+
+    getAll()
+
+    render 'api/v2/cash_outs/index'
+  end
+
+  def getAll
     @collection = ::CashOut.includes(:person, :address, :mailing_address, :account => :owner).order('created_at asc')
 
     @include_person = true
@@ -14,8 +22,6 @@ class Api::V0::CashOutsController < Api::V0::BaseController
 
     @collection = filter!(@collection)
     @collection = order!(@collection)
-
-    render 'api/v2/cash_outs/index'
   end
 
   def show
@@ -77,7 +83,9 @@ class Api::V0::CashOutsController < Api::V0::BaseController
     logger.info "Paying the paypal people!"
     send_paypal!()
 
-    render nothing: true, status: :ok
+    getAll()
+    
+    render 'api/v2/cash_outs/index'
   end
 
 end

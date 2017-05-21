@@ -46,7 +46,7 @@ module Api::V2::CashOutsHelper
       .where('cash_outs.sent_at IS NULL')
 
     # map them to the structure that paypal expects
-    @payouts = collection.map do |cashout|
+    payouts = collection.map do |cashout|
       {
         :recipient_type => 'EMAIL',
         :amount => {
@@ -59,27 +59,54 @@ module Api::V2::CashOutsHelper
       }
     end
 
-    @payout = Payout.new(
+    batch = Payout.new(
       {
         :sender_batch_header => {
-          :sender_batch_id => SecureRandom.hex(8),
-          :email_subject => 'You have a Payout!',
+          :sender_batch_id => SecureRandom.hex(8), # TODO: USE BETTER BATCH ID
+          :email_subject => 'You have a Payout!', # FIXME
         },
-        :items => @payouts
+        :items => payouts
       }
     )
 
     begin
-      @payout_batch = @payout.create
-      @batch_id = @payout_batch.batch_header.payout_batch_id
+      payout_batch = batch.create
+      batch_id = payout_batch.batch_header.payout_batch_id
 
-      logger.info "Created Payout: #{@batch_id}"
+      logger.info "Created Payout: #{batch_id}"
 
-      collection.update_all batch_id: @batch_id
+      collection.update_all batch_id: batch_id
 
-      @payout_batch
+      payout_batch
     rescue ResourceNotFound => err
-      logger.error @payout.error.inspect
+      logger.error payout.error.inspect
     end
   end
+
+  def check_paypal_batch_status()
+    # select items that have been batched but not paid out yet
+    batch_ids = CashOut::Paypal
+      .where('cash_outs.batch_id IS NOT NULL')
+      .where('cash_outs.sent_at IS NULL')
+      .uniq
+      .pluck(:batch_id)
+
+    batch_ids.each do |batch_id|
+      payout_batch = Payout.get batch_id
+
+      items = payout_batch.items.map { |item| item.payout_item.sender_item_id }
+
+      case payout_batch.batch_header.batch_status
+      when 'SUCCESS'
+        ::CashOut
+          .where(id: items)
+          .update_all sent_at: DateTime
+      when 'DENIED'
+        ::CashOut
+          .where(id: items)
+          .update_all batch_id: nil
+      end
+    end
+  end
+
 end
