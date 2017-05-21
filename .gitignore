@@ -41,3 +41,5 @@ node_modules
 compiled_tests/
 
 \.vscode/
+
+\.env
