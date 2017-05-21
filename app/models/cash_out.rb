@@ -13,6 +13,7 @@
 #  user_agent                 :string(255)
 #  amount                     :decimal(, )
 #  sent_at                    :datetime
+#  approved_at                :datetime
 #  us_citizen                 :boolean
 #  created_at                 :datetime
 #  updated_at                 :datetime
@@ -141,6 +142,10 @@ class CashOut < ActiveRecord::Base
 
   def sent?
     sent_at.present?
+  end
+
+  def approved?
+    approved_at.present?
   end
 
   # Given a cash out type, create an instance from the correct class

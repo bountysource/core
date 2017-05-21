@@ -28,11 +28,15 @@ angular.module('app').directive('cashOutTable', function($api, $window) {
         }
       };
 
-      scope.send = function(index) {
-        if ($window.confirm("Really send via " + scope.cashOuts[index].type) + "?") {
-          $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { send: true }, function() {
-            scope.cashOuts.splice(index,1);
-          });
+      scope.approve = function(index) {
+        if ($window.confirm("Really approve this cash out?")) {
+          $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { approved: true }, function() {});
+        }
+      }
+
+      scope.unapprove = function(index) {
+        if ($window.confirm("Really unapprove this cash out?")) {
+          $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { approved: false }, function() {});
         }
       }
     }
