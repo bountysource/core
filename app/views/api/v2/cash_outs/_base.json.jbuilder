@@ -13,6 +13,7 @@ us_citizen
 created_at
 updated_at
 approved_at
+batch_id
 ))
 
 json.type item.type_name

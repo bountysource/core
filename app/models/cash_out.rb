@@ -13,7 +13,6 @@
 #  user_agent                 :string(255)
 #  amount                     :decimal(, )
 #  sent_at                    :datetime
-#  approved_at                :datetime
 #  us_citizen                 :boolean
 #  created_at                 :datetime
 #  updated_at                 :datetime
@@ -25,6 +24,8 @@
 #  mastercoin_address         :string(255)
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
+#  approved_at                :datetime
+#  batch_id                   :string(255)
 #
 # Indexes
 #

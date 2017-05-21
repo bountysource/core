@@ -25,6 +25,7 @@
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
 #  approved_at                :datetime
+#  batch_id                   :string(255)
 #
 # Indexes
 #

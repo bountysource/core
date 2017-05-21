@@ -74,6 +74,9 @@ class Api::V0::CashOutsController < Api::V0::BaseController
   def pay
     logger.info "Paying all the people!"
 
+    logger.info "Paying the paypal people!"
+    send_paypal!()
+
     render nothing: true, status: :ok
   end
 
