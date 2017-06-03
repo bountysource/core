@@ -5,12 +5,12 @@ class Api::V0::CashOutsController < Api::V0::BaseController
   def index
     check_paypal_batch_status()
 
-    getAll()
+    get_all()
 
     render 'api/v2/cash_outs/index'
   end
 
-  def getAll
+  def get_all
     @collection = ::CashOut.includes(:person, :address, :mailing_address, :account => :owner).order('created_at asc')
 
     @include_person = true
