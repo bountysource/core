@@ -46,15 +46,11 @@ module Api::V2::CashOutsHelper
       .where('cash_outs.sent_at IS NULL')
       .where('cash_outs.batch_id IS NULL')
 
-    threads = []
-
     # # Paypal only allows making 500 payouts per request
     # # so we need to iterate through the collection 500 at a time
     collection.find_in_batches(batch_size: 500) do |batch|
-      threads << Thread.new { send_paypal_batch(batch) }
+      send_paypal_batch(batch)
     end
-
-    threads.map(&:join)
   end
 
   def send_paypal_batch(cashouts)
@@ -110,28 +106,22 @@ module Api::V2::CashOutsHelper
       .uniq
       .pluck(:batch_id)
 
-    threads = []    
-
     batch_ids.each do |batch_id|
-      threads << Thread.new do
-        payout_batch = Payout.get batch_id
+      payout_batch = Payout.get batch_id
 
-        items = payout_batch.items.map { |item| item.payout_item.sender_item_id }
+      items = payout_batch.items.map { |item| item.payout_item.sender_item_id }
 
-        case payout_batch.batch_header.batch_status
-        when 'SUCCESS'
-          ::CashOut
-            .where(id: items)
-            .update_all sent_at: DateTime
-        when 'DENIED'
-          ::CashOut
-            .where(id: items)
-            .update_all batch_id: nil
-        end
+      case payout_batch.batch_header.batch_status
+      when 'SUCCESS'
+        ::CashOut
+          .where(id: items)
+          .update_all sent_at: DateTime
+      when 'DENIED'
+        ::CashOut
+          .where(id: items)
+          .update_all batch_id: nil
       end
     end
-
-    threads.map(&:join)    
   end
 
 end
