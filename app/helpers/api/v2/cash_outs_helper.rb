@@ -62,7 +62,7 @@ module Api::V2::CashOutsHelper
           :value => cashout.amount,
           :currency => 'USD'
         },
-        :note => 'Your cash out has been processed. Ref: #{cashout.id}',
+        :note => "Your cash out has been processed. Ref: #{cashout.id}",
         :receiver => cashout.paypal_address,
         :sender_item_id => cashout.id,
       }
@@ -74,7 +74,7 @@ module Api::V2::CashOutsHelper
       {
         :sender_batch_header => {
           :sender_batch_id => batch_id,
-          :email_subject => 'Sending Batch Payment ${SecureRandom.hex(8)}',
+          :email_subject => "Sending Batch Payment #{batch_id}",
         },
         :items => payouts
       }
