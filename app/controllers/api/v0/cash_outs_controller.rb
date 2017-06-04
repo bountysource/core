@@ -60,9 +60,9 @@ class Api::V0::CashOutsController < Api::V0::BaseController
       @item.refund!
     elsif !@item.sent? && params.has_key?(:approved)
       if (params['approved']) 
-        @item.update_attributes!(approved_at: DateTime.now)
+        @item.update_attribute(:approved_at, DateTime.now)
       else
-        @item.update_attributes!(approved_at: nil)
+        @item.update_attribute(:approved_at, nil)
       end
     end
 
