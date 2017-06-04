@@ -113,11 +113,11 @@ module Api::V2::CashOutsHelper
 
       case payout_batch.batch_header.batch_status
       when 'SUCCESS'
-        ::CashOut
+        CashOut::Paypal
           .where(id: items)
-          .update_all sent_at: DateTime
+          .update_all sent_at: DateTime.now
       when 'DENIED'
-        ::CashOut
+        CashOut::Paypal
           .where(id: items)
           .update_all batch_id: nil
       end
