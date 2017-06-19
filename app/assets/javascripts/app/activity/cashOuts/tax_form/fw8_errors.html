@@ -1,0 +1,22 @@
+<span ng-show="activeTaxForm.personal_name.$error.required && (activeTaxForm.personal_name.$dirty || activeTaxForm.$submitted)">Personal name is missing.</span>
+<span ng-show="activeTaxForm.citizen_of.$error.required && (activeTaxForm.citizen_of.$dirty || activeTaxForm.$submitted)">Country of citizenship is missing .</span>
+
+<span ng-show="activeTaxForm.residence_address_1.$error.required && (activeTaxForm.residence_address_1.$dirty || activeTaxForm.$submitted)">Street of residence address is missing.</span>
+<span ng-show="activeTaxForm.residence_address_1.$error.required && (activeTaxForm.residence_address_1.$dirty || activeTaxForm.$submitted)">City of residence address is missing.</span>
+<span ng-show="activeTaxForm.residence_country.$error.required && (activeTaxForm.residence_country.$dirty || activeTaxForm.$submitted)">Country of residence is missing.</span>
+
+<span ng-show="activeTaxForm.mail_address_1.$error.required && (activeTaxForm.mail_address_1.$dirty || activeTaxForm.$submitted)">Street of mailing address is missing.</span>
+<span ng-show="activeTaxForm.mail_address_2.$error.required && (activeTaxForm.mail_address_2.$dirty || activeTaxForm.$submitted)">City of mailing address is missing.</span>
+<span ng-show="activeTaxForm.mail_country.$error.required && (activeTaxForm.mail_country.$dirty || activeTaxForm.$submitted)">Country of mailing address is missing.</span>
+
+<span ng-show="activeTaxForm.foreign_tax_id.$error.required && (activeTaxForm.foreign_tax_id.$dirty || activeTaxForm.$submitted)">Foreign tax ID is required.</span>
+
+<span ng-show="activeTaxForm.date_of_birth.$error.required && (activeTaxForm.date_of_birth.$dirty || activeTaxForm.$submitted)">Date of birth required.</span>
+<span ng-show="activeTaxForm.date_of_birth.$error.date && ((activeTaxForm.date_of_birth.$dirty && activeTaxForm.date_of_birth.blurred) || activeTaxForm.$submitted)">Date of birth is invalid.</span>
+
+<span ng-show="activeTaxForm.signed.$error.required && (activeTaxForm.signed.$dirty || activeTaxForm.$submitted)">Signature is missing.</span>
+
+<span ng-show="activeTaxForm.print_signed.$error.required && (activeTaxForm.signed.$dirty || activeTaxForm.$submitted)">Signature is missing.</span>
+
+<span ng-show="activeTaxForm.dated.$error.required && (activeTaxForm.dated.$dirty || activeTaxForm.$submitted)">Signature date is required.</span>
+<span ng-show="activeTaxForm.dated.$error.dateFormat && ((activeTaxForm.dated.$dirty && activeTaxForm.dated.blurred) || activeTaxForm.$submitted)">Signature date is invalid.</span>

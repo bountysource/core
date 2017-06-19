@@ -748,6 +748,14 @@ angular.module('api.bountysource',[]).
       });
     };
 
+    this.approve_tax_form = function(id, approved, reason, callback) {
+      return this.call("/admin/tax_forms/"+id+"/approve/", "GET", {approved: approved, reason: reason || null}, callback);
+    }
+
+    this.tax_form_pdf_base64 = function(id, callback) {
+      return $api.call('/admin/tax_forms/' + id, 'GET', {}, callback);
+    }
+
     this.get_solutions = function () {
       return this.call("/admin/solutions", function (response) {
         return response;

@@ -1,0 +1,134 @@
+{
+  "0": [
+    {
+      "name": "p1-t1[0]",
+      "id": 231,
+      "key": "personal_name"
+    },
+    {
+      "name": "p1-t2[0]",
+      "id": 232,
+      "key": "citizen_of"
+    },
+    {
+      "name": "p1-t3[0]",
+      "id": 233,
+      "key": "residence_address_1"
+    },
+    {
+      "name": "p1-t4[0]",
+      "id": 234,
+      "key": "residence_address_2"
+    },
+    {
+      "name": "p1-t5[0]",
+      "id": 235,
+      "key": "residence_country"
+    },
+    {
+      "name": "p1-t6[0]",
+      "id": 236,
+      "key": "mail_address_1"
+    },
+    {
+      "name": "p1-t7[0]",
+      "id": 237,
+      "key": "mail_address_2"
+    },
+    {
+      "name": "p1-t8[0]",
+      "id": 238,
+      "key": "mail_country"
+    },
+    {
+      "name": "p1-t9[0]",
+      "id": 239,
+      "key": "us_tax_id"
+    },
+    {
+      "name": "p1-t10[0]",
+      "id": 240,
+      "key": "foreign_tax_id"
+    },
+    {
+      "name": "p1-t11[0]",
+      "id": 241,
+      "key": "ref_num"
+    },
+    {
+      "name": "p1-t12[0]",
+      "id": 242,
+      "key": "date_of_birth"
+    },
+    {
+      "name": "p1-t13[0]",
+      "id": 243,
+      "key": "ptii_country"
+    },
+    {
+      "name": "p1-t16[0]",
+      "id": 244,
+      "key": "ptii_treaty_para"
+    },
+    {
+      "name": "p1-t15[0]",
+      "id": 245,
+      "key": "ptii_withholding"
+    },
+    {
+      "name": "p1-t17[0]",
+      "id": 246,
+      "key": "ptii_income_type"
+    },
+    {
+      "name": "p1-t18[0]",
+      "id": 247,
+      "key": ""
+    },
+    {
+      "name": "p1-t19[0]",
+      "id": 248,
+      "key": "ptii_explain_eligibility_1"
+    },
+    {
+      "name": "p1-t20[0]",
+      "id": 249,
+      "key": "ptii_explain_eligibility_1"
+    },
+    {
+      "name": "p1-t21[0]",
+      "id": 250,
+      "key": "print_signed"
+    },
+    {
+      "name": "p1-t22[0]",
+      "id": 251,
+      "key": "proxy_signers_role"
+    },
+    {
+      "key": "signed",
+      "add": "text",
+      "pos": { "left": 141, "top": 695, "width": 318, "height": 24 },
+      "font": "journal",
+      "fontpath": "journal.ttf",
+      "fontsize": 20,
+      "color": [ 0, 0, 0 ]
+    },
+    {
+      "add": "textfield",
+      "rect": { "left": 470, "top": 709, "height": 9 },
+      "color": [ 0, 0, 0.5 ],
+      "font": "HelveticaLTStd-Bold",
+      "fontsize": 8,
+      "key": "dated"
+    },
+    {
+      "key": "dig_sign",
+      "add": "signature",
+      "font": "Helv",
+      "text": "Digitally signed by\n \n \n \n \nBountysource.com",
+      "gfx": "fill 94 94 94 0.5 M172 140C182.307 132.943 192.462 127.263 200.172 117C222.768 86.9215 205.414 51.2612 175 35.3647C138.125 16.0914 79.8913 16.6012 50.1556 49.0075C46.7223 52.7491 28.6699 84.1571 44.0263 83.8943C51.4662 83.7669 64.3783 62.3829 72 57.9232C100.216 41.4128 181.211 34.0156 186.588 82C190.623 118.004 135.683 110.811 122.942 131.051C118.597 137.954 124.427 144.088 131.001 145.998C147.405 150.764 171.877 152.322 171.918 175C171.973 204.886 121.723 229.805 98.5015 207.322C92.3544 201.371 95.8219 186.528 95.9816 179C96.6537 147.309 112.111 120.969 116.041 91.0009C117.163 82.4454 105.475 79.0698 99.0007 81.0527C89.2775 84.0307 84.1442 96.4786 80.3489 105C69.1375 130.172 66.0247 161.688 66.0002 189C65.9932 196.729 62.9408 212.882 67.2598 219.481C70.888 225.025 83.0177 226.407 89 227.862C110.085 232.988 133.857 236.952 155 230.213C188.481 219.541 218.916 155.763 172 140z ",
+      "rect": { "left": 54, "top": 723, "width": 28, "height": 28 }
+    }
+  ]
+}

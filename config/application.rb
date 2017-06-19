@@ -179,5 +179,20 @@ module Api
 
     # Mixpanel
     config.mixpanel_token = ENV['MIXPANEL_TOKEN']
+
+    config.fillpdf = {
+      script_path: Rails.root.join('lib', 'fill_pdf.rb'),
+      tmp_dir: Rails.root.join('tmp', 'pdf'),
+      pfx_cert: ENV['PFX_CERTIFICATE'],
+      pfx_key: ENV['PFX_KEY']
+    }
+
+    config.remote_store = {
+      type: "s3",
+      aws_region: ENV['AWS_REGION'],
+      aws_key: ENV['AWS_ACCESS_KEY_ID'],
+      aws_secret: ENV['AWS_SECRET_ACCESS_KEY'],
+    }
+
   end
 end

@@ -222,6 +222,12 @@ Api::Application.routes.draw do
 
           resources :splits, only: [:index]
 
+          resources :tax_forms, only: [:show] do
+              member do
+                get :approve
+              end
+          end
+
         end
       end
 
@@ -515,6 +521,8 @@ Api::Application.routes.draw do
               resources :trackers, controller: :people_trackers, only: [:index]
             end
           end
+
+          resources :tax_forms, only: [:index, :create]
         end
       end
     end

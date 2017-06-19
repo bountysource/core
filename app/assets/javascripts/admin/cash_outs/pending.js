@@ -13,9 +13,12 @@ angular.module('app')
       order: '-created',
       include_address: true,
       include_mailing_address: true,
-      include_person: true
+      include_person: true,
+      include_tax_form: true
     }, function(response) {
       $scope.cashOuts = angular.copy(response.data);
     });
+
+
 
   });

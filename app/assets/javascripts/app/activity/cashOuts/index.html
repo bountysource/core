@@ -7,11 +7,22 @@
 
   <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
 
-  <div class="alert alert-info">
+  <div class="alert alert-info" ng-if="!needTaxForm">
     <p>Cash out requests are processed every Friday. Requests must be submitted by end of Thursday each week.</p>
     <p>If you have any questions please contact <a href="mailto:support@bountysource.com" target="_blank">support@bountysource.com</a>.</p>
 
     <p><a class="btn btn-primary" ng-href="/activity/cash_outs/new">Request Cash Out</a></p>
+  </div>
+
+  <div class="alert alert-info" ng-if="needTaxForm">
+    <p ng-if="needTaxForm == 'incomplete'">You have pending cash outs but we have not received a tax form. Your cash out will not be processed until one has been received.</p>
+    <p ng-if="needTaxForm == 'invalid'">You have pending cash outs but the tax form we received was invalid. Your cash out will not be processed until a valid form has been received.</p>
+    <p><a class="btn btn-primary" ng-href="/activity/cash_outs/tax_form">Submit tax form</a></p>
+  </div>
+
+  <div class="alert alert-info" ng-if="taxFormInvalid">
+    
+    <p><a class="btn btn-primary" ng-href="/activity/cash_outs/tax_form">Submit tax form</a></p>
   </div>
 
   <!-- Render message if person has no cash outs -->

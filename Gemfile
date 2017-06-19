@@ -7,6 +7,7 @@ require 'cgi'
 require 'ostruct'
 require 'csv'
 require 'optparse'
+require 'open3'
 
 ruby '2.1.2'
 
@@ -49,6 +50,7 @@ gem 'stripe'
 gem 'maildown'
 
 gem 'htmlentities'
+gem 'aws-sdk', '~> 2'
 
 
 # Unfortunately, the new version of TS does not play nicely with Heroku, see:

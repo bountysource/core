@@ -109,6 +109,7 @@ class Person < ActiveRecord::Base
   has_many :cash_outs
   has_many :proposals
   has_many :thumbs
+  has_one :tax_form
 
   has_many :recommendation_events
 
@@ -120,6 +121,7 @@ class Person < ActiveRecord::Base
   has_many :issue_suggestions
 
   has_many :comments, through: :linked_accounts
+
 
   EMAIL_REGEX = /\A.+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+\z/
 

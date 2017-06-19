@@ -291,6 +291,23 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
+    taxDetails: function(params) {
+      return this.call({
+        url: '/tax_forms',
+        method: 'GET',
+        params: params || {}
+      });
+    },
+
+    submitTaxForm: function(data) {
+      return this.call({
+        url: '/tax_forms',
+        method: 'POST',
+        params: {},
+        data: data
+      });
+    },
+
     account: function(params) {
       return this.call({
         url: '/account',

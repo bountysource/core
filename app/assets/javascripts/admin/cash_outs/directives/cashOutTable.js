@@ -9,7 +9,8 @@ angular.module('app').directive('cashOutTable', function($api, $window) {
       scope.parseFloat = $window.parseFloat;
 
       scope._options = angular.extend({
-        markAsSentButton: true
+        markAsSentButton: true,
+        showTaxForm: true
       }, scope.options() || {});
 
       scope.markAsSent = function(index) {

@@ -7,7 +7,7 @@ angular.module('activity').controller('ActivityNavTabsController', function($sco
     new NavTab('Pledges',       '/activity/pledges'),
     new NavTab('Bounty Claims', '/activity/claims'),
     new NavTab('Orders',        ['/orders', /^\/orders(\/\d+)?$/ ]),
-    new NavTab('Cash Outs',     ['/activity/cash_outs', '/activity/cash_outs/new' ])
+    new NavTab('Cash Outs',     ['/activity/cash_outs', '/activity/cash_outs/new', '/activity/cash_outs/tax_form' ])
   ];
 
 });

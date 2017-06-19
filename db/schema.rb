@@ -1008,6 +1008,17 @@ ActiveRecord::Schema.define(version: 20160611150448) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
+  create_table "tax_forms", force: true do |t|
+    t.integer  "person_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "file_name",                  null: false
+    t.boolean  "approved",   default: false, null: false
+    t.boolean  "checked",    default: false, null: false
+    t.string   "remote_id", 
+    t.string   "reason"
+  end
+
   create_table "team_activity_inclusions", force: true do |t|
     t.integer  "parent_team_id", null: false
     t.integer  "child_team_id",  null: false

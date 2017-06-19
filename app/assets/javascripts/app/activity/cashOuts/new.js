@@ -1,6 +1,5 @@
 angular.module('activity').
-  controller('NewCashOutController', function($scope, $api, $window, $location, $q, AddressManager) {
-
+  controller('NewCashOutController', function($scope, $api, $window, $location, $q, AddressManager, taxFormSvc) {
     $scope.$watch('current_person', function (person) {
       if (person) {
         $api.person_teams(person.id).then(function (teams) {
@@ -72,6 +71,24 @@ angular.module('activity').
       }
     }));
 
+    // Check if tax form needed. if so, cache cashOut details in parent scope and redirect to /activity/cash_outs/tax
+    // once completed the tax form controller redirects to this page the cached details are submitted
+    $scope.validateTaxForm = function() {
+      var deferred = $q.defer();
+
+      $api.v2.taxDetails().then(function(response) {
+        // tax_form_approved === null until set to true/false
+        if(response.data.tax_form_complete && response.data.tax_form_approved !== false) {
+          deferred.resolve();
+        } else {
+          taxFormSvc.init(angular.copy($scope.cashOut), deferred);
+          $location.path('/activity/cash_outs/tax_form');
+        }
+      });
+
+      return deferred.promise;
+    };
+
     // Create permanent address if necessary. Return promise for chaining on cash out create.
     $scope.createPermanentAddress = function() {
       var deferred = $q.defer();
@@ -135,6 +152,7 @@ angular.module('activity').
     $scope.createCashOut = function() {
       return $scope.createPermanentAddress().
         then($scope.createMailingAddress).
+        then($scope.validateTaxForm).
         then(function() {
           var payload = angular.copy($scope.cashOut);
 
@@ -156,7 +174,7 @@ angular.module('activity').
               // Manually reload account balance by fetching current person again
               $api.load_current_person_from_cookies();
 
-              $location.url('/activity/cash_outs');
+              $location.url('/activity/cash_outs')
             } else {
               $scope.cashOutAlert = { type: 'danger', message: response.data.error };
             }
