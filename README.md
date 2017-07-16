@@ -107,7 +107,7 @@ CONTAINER ID        IMAGE                           COMMAND                  CRE
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You should see the Bountysource start page, something like [this](http://picpaste.com/pics/Bildschirmfoto_vom_2017-05-18_22-47-40-zHKjmLRL.1495197789.png).
+You should see the Bountysource start page, something like [this](http://i.imgur.com/iAPoCf4.png).
 
 
 ### Running the unit tests
