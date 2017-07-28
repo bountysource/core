@@ -29,11 +29,6 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
  * [Fee in fees page and TOS do not match.](https://github.com/bountysource/core/issues/994)
  * [Change "Support team" text if you're a supporter](https://github.com/bountysource/core/issues/1002)
 
-#### ...with documentation
-
-* We are signficantly lacking in documentation. Can you write up a first time developers guide?
- * https://github.com/bountysource/core/issues/1082
-
 ## Developer Resources
 
 * [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
