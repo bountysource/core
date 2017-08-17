@@ -148,7 +148,6 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
       return true;
     }
     $scope.plugin_locked = function(plugin){
-      console.log(plugin);
       if(plugin.locked_at && plugin.locked_at !== "" &&
         (typeof plugin.locked === 'undefined' || plugin.locked)/**/){
           return true;
