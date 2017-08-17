@@ -99,6 +99,7 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
   $scope.plugins_promise = $api.tracker_plugins_get().then(function(plugins) {
     // Get the plugin for a tracker, if installed.
     // if not installed, return model for a new plugin
+    console.log(plugins);
     $scope.tracker_plugins_count = plugins.length;
     $scope.get_plugin = function(tracker) {
       if (tracker) {
@@ -139,6 +140,16 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
         return tracker.$plugin_installed;
       }
     };
+
+    $scope.plugin_locked = function(tracker){
+      if(tracker.$plugin_installed){
+        var plugin = $scope.get_plugin(tracker)
+        if(plugin.locked_at && plugin.locked_at !== ""){
+          return true;
+        }
+      }
+      return false;
+    }
 
     $scope.plugin_alert = { text: '', type: 'warning' };
 
