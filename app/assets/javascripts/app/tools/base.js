@@ -141,27 +141,29 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
         return tracker.$plugin_installed;
       }
     };
+    
     $scope.plugin_save_will_unlock = function(plugin){
       if (typeof plugin.locked === 'undefined' || plugin.locked){
         return false;
       }
       return true;
-    }
+    };
+
     $scope.plugin_locked = function(plugin){
       if(plugin.locked_at && plugin.locked_at !== "" &&
         (typeof plugin.locked === 'undefined' || plugin.locked)/**/){
           return true;
       }
       return false;
-    }
+    };
 
     $scope.tracker_locked = function(tracker){
       if(tracker.$plugin_installed){
-        var plugin = $scope.get_plugin(tracker)
+        var plugin = $scope.get_plugin(tracker);
         return $scope.plugin_locked(plugin);
       }
       return false;
-    }
+    };
     
     $scope.plugin_alert = { text: '', type: 'warning' };
 
