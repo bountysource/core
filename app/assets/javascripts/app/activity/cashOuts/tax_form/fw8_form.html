@@ -1,0 +1,107 @@
+<ng-form name="taxForm" ng-controller="Fw8Controller">
+<!-- personal_name -->
+<div ng-class="{ 'has-error': taxForm.personal_name.$invalid && (taxForm.personal_name.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.personal_name" name="personal_name" class="form-control" left="35.5" width="338.5" top="238" height="14" required/>
+</div>
+
+<!-- citizen_of -->
+<div ng-class="{ 'has-error': taxForm.citizen_of.$invalid && (taxForm.citizen_of.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.citizen_of" name="citizen_of" class="form-control" left="374.5" width="202" top="238" height="14" required/>
+</div>
+
+<!-- residence_address_1 -->
+<div ng-class="{ 'has-error': taxForm.residence_address_1.$invalid && (taxForm.residence_address_1.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.residence_address_1" name="residence_address_1" class="form-control" left="35.5" width="541" top="262" height="14" required/>
+</div>
+
+<!-- residence_address_2 -->
+<div ng-class="{ 'has-error': taxForm.residence_address_2.$invalid && (taxForm.residence_address_2.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.residence_address_2" name="residence_address_2" class="form-control" left="35.5" width="403.5" top="286" height="14" required/>
+</div>
+
+<!-- residence_country -->
+<div ng-class="{ 'has-error': taxForm.residence_country.$invalid && (taxForm.residence_country.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.residence_country" name="residence_country" class="form-control" left="439.5" width="137.5" top="286" height="14" required/>
+</div>
+
+<!-- mail_address_1 -->
+<div ng-class="{ 'has-error': taxForm.mail_address_1.$invalid && (taxForm.mail_address_1.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.mail_address_1" name="mail_address_1" class="form-control" left="35.5" width="541" top="310.5" height="14" ng-required="data.mail_address_2 || data.mail_country" />
+</div>
+
+<!-- mail_address_2 -->
+<div ng-class="{ 'has-error': taxForm.mail_address_2.$invalid && (taxForm.mail_address_2.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.mail_address_2" name="mail_address_2" class="form-control"  left="35.5" width="403.5" top="334.5" height="14" ng-required="data.mail_address_1 || data.mail_country" />
+</div>
+
+<!-- mail_country -->
+<div ng-class="{ 'has-error': taxForm.mail_country.$invalid && (taxForm.mail_country.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.mail_country" name="mail_country" class="form-control"  left="439.5" width="137.5" top="334" height="14" ng-required="data.mail_address_1 || data.mail_address_2" />
+</div>
+
+<!-- us_tax_id -->
+<div >
+    <input tax-form-style="formScale" type="text" ng-model="data.us_tax_id" name="us_tax_id" class="form-control" left="35.5" width="338.5" top="358" height="14"/>
+</div>
+
+<!-- foreign_tax_id -->
+<div ng-class="{ 'has-error': taxForm.foreign_tax_id.$invalid && (taxForm.foreign_tax_id.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.foreign_tax_id" name="foreign_tax_id" class="form-control" left="374.5" width="202" top="358" height="14" ng-required="!data.us_tax_id"/>
+</div>
+
+<!-- ref_num -->
+<div>
+    <input tax-form-style="formScale" type="text" ng-model="data.ref_num" name="ref_num" class="form-control" left="35.5" width="230.5" top="383" height="13"/>
+</div>
+
+<!-- date_of_birth -->
+<div ng-class="{ 'has-error': taxForm.date_of_birth.$invalid && ((taxForm.date_of_birth.$dirty && taxForm.date_of_birth.blurred) || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" tax-form-clear-bg="334,374,130,10" tax-form-date="d/m/y" ng-model="data.date_of_birth" name="date_of_birth" placeholder="dd/mm/yyyy" class="form-control" left="266.5" width="108" top="383" height="13" required/>
+</div>
+
+<!-- ptii_country -->
+<div>
+    <input tax-form-style="formScale" type="text" ng-model="data.ptii_country" name="ptii_country" class="form-control" left="238" width="200" top="408" height="12"/>
+</div>
+
+<!-- ptii_treaty_para -->
+<div>
+    <input tax-form-style="formScale" type="text" ng-model="data.ptii_treaty_para" name="ptii_treaty_para" class="form-control" left="65" width="112" top="444" height="12"/>
+</div>
+
+<!-- ptii_withholding -->
+<div>
+    <input tax-form-style="formScale" type="text" ng-model="data.ptii_withholding" name="ptii_withholding" class="form-control" left="352" width="23" top="444" height="12"/>
+</div>
+
+<!-- ptii_income_type -->
+<div>
+    <input tax-form-style="formScale" tax-form-clear-bg type="text" ng-model="data.ptii_income_type" name="ptii_income_type" class="form-control" left="65" width="512" top="456" height="12"/>
+</div>
+
+<!-- ptii_explain_eligibility_1 -->
+<div>
+    <input tax-form-style="formScale" type="text" ng-model="data.ptii_eligibility_1" name="ptii_eligibility_1" class="form-control" left="525" width="52" top="468" height="12"/>
+</div>
+
+<!-- ptii_explain_eligibility_2 -->
+<div>
+    <input tax-form-style="formScale" type="text" ng-model="data.ptii_eligibility_2" name="ptii_eligibility_2" class="form-control" left="65" width="512" top="480" height="12"/>
+</div>
+
+<!-- signed -->
+<div ng-class="{ 'has-error': taxForm.signed.$invalid && (taxForm.signed.$dirty || taxForm.$submitted) }">
+    <input tax-form-style="formScale" type="text" ng-model="data.signed" name="signed" class="form-control signature" left="107" top ="696" width="318" height="24" required autocomplete="false"/>
+</div>
+
+<!-- dated -->
+<div ng-class="{ 'has-error': taxForm.dated.$invalid && ((taxForm.dated.$dirty && taxForm.dated.blurred) || taxForm.$submitted) }">
+    <input tax-form-style="formScale" tax-form-clear-bg="488,722,100,8" tax-form-date="d/m/y" type="text" ng-model="data.dated" name="dated" placeholder="dd/mm/yyyy" class="form-control" left="432" top="700" height="20" width="146" required/>
+</div>
+
+<!-- print_signed -->
+<div>
+    <input tax-form-style="formScale" ng-model="data.print_signed" type="text" disabled name="print_signed" class="form-control fw8-print-sig" left="107" top ="730" width="254" height="14" />
+</div>
+
+</ng-form>

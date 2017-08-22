@@ -1,0 +1,1 @@
+json.partial! 'api/v2/tax_form/base', item: @item

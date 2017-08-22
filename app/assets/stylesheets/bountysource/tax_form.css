@@ -1,0 +1,118 @@
+@font-face {
+    font-family: "Journal";
+    src: url('/assets/journal.ttf');
+}
+
+#tax_form {
+  /*width:948px;*/
+  width:1142px;
+
+}
+
+#tax_form_tabs {
+  margin-bottom: 0px;
+
+}
+
+#tax_form_scrollbox {
+    position:relative;
+    height:571px; 
+    /*width:948px; */
+    width:1142px;
+    overflow:auto; 
+    padding: 0px; 
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top:0px;
+}
+
+form#tax_form input[type="text"] {
+    padding : 0px 8px;
+    font-size : 14px;
+    font-weight:bold;
+    -webkit-border-radius : 0px;
+    -moz-border-radius : 0px;
+    border-radius : 0px;
+}
+
+form#tax_form .requester {
+    background: rgba(172,172,172,0.25);
+    margin: 0px;
+    padding : 0px 5px;
+    font-size : 13px;
+    font-weight:bold;
+    border : 0px;
+    background:#fff;
+    box-shadow: none;
+    border:0px;
+    -webkit-border-radius : 0px;
+    -moz-border-radius : 0px;
+    border-radius : 0px;
+    cursor: text;
+    resize: none;
+}
+
+form#tax_form input[type="radio"] {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+form#tax_form input[type="text"].numeric {
+    font-family: "monospace";
+    font-size:16px;
+    font-weight:bold;
+    padding:0px;
+    -webkit-border-radius : 0px;
+    -moz-border-radius : 0px;
+    border-radius : 0px;
+    border: 0px;
+}
+
+form#tax_form input[type="text"].signature {
+    padding : 0px 6px;
+    font-family: "Journal";
+    font-weight: normal;
+    font-size: 24px;
+    -webkit-border-radius : 0px;
+    -moz-border-radius : 0px;
+    border-radius: 0px;
+}
+
+form#tax_form input[type="text"].fw8-print-sig {
+    cursor: text;
+    font-size : 14px;
+    border: 0px;
+    box-shadow: 0px;
+    font-family: monospace;
+    -webkit-border-radius : 0px;
+    -moz-border-radius : 0px;
+    border-radius : 0px;
+}
+
+form#tax_form input[type="text"] {
+    background: rgba(172,172,172,0.25);
+}
+
+form#tax_form input[type="text"]:focus {
+    background: rgba(172,172,172,0.125);
+}
+
+
+form#tax_form .has-error .ng-invalid {
+    background: rgba(213,172,172,0.25);
+}
+
+form#tax_form .has-error .ng-invalid:focus {
+    background: rgba(213,172,172,0.125);
+}
+
+form#tax_form input:disabled {
+    background:#fff;
+    box-shadow: none;
+    border:0px;
+    -webkit-border-radius : 0px;
+    -moz-border-radius : 0px;
+    border-radius : 0px;
+    cursor: text;
+}

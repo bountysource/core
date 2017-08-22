@@ -50,4 +50,11 @@ angular.module('activity')
       trackEvent: 'View Request Cash Out'
     }, defaultRouteOptions));
 
+    $routeProvider.when('/activity/cash_outs/tax_form', angular.extend({
+      templateUrl: 'app/activity/cashOuts/tax_form.html',
+      controller: 'TaxFormController',
+      resolve: { person: personResolver },
+      trackEvent: 'View Tax Form Request'
+    }, defaultRouteOptions));
+
   });

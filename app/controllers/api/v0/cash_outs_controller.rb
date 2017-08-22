@@ -11,6 +11,7 @@ class Api::V0::CashOutsController < Api::V0::BaseController
     @include_mailing_address = true
     @include_yearly_cash_out_totals = true
     @include_account_owner = true
+    @include_tax_form = params[:include_tax_form].to_bool
 
     @collection = filter!(@collection)
     @collection = order!(@collection)

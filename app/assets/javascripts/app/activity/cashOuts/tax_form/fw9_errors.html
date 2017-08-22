@@ -1,0 +1,22 @@
+<span ng-show="activeTaxForm.personal_name.$error.required && (activeTaxForm.personal_name.$dirty || activeTaxForm.$submitted)">Personal name is missing.</span>
+
+<span ng-show="activeTaxForm.tax_class.$invalid && (activeTaxForm.tax_class.$dirty || activeTaxForm.$submitted)">Please select a tax class.</span>
+
+<span ng-show="activeTaxForm.address_1.$error.required && (activeTaxForm.address_1.$dirty || activeTaxForm.$submitted)">Address is missing.</span>
+<span ng-show="activeTaxForm.address_2.$error.required && (activeTaxForm.address_2.$dirty || activeTaxForm.$submitted)">City/state address is missing.</span>
+
+<span ng-show="activeTaxForm.llc_type.$error.required && (activeTaxForm.llc_type.$dirty || activeTaxForm.$submitted)">LLC tax classification code required.</span>
+<span ng-show="activeTaxForm.llc_type.$error.pattern && (activeTaxForm.llc_type.$dirty || activeTaxForm.$submitted)">LLC tax class must be 'C', 'S' or 'P'</span>  
+<span ng-show="activeTaxForm.other_text.$error.required && (activeTaxForm.other_text.$dirty || activeTaxForm.$submitted)">Description for tax class 'other' cannot be blank</span>  
+
+<span ng-show="activeTaxForm.payee_exemption.$error.pattern && (activeTaxForm.payee_exemption.$dirty || activeTaxForm.$submitted)">Exempt payee code is a number from 1 to 13</span>
+<span ng-show="activeTaxForm.fatca_exemption.$error.pattern && (activeTaxForm.fatca_exemption.$dirty || activeTaxForm.$submitted)">FATCA reporting exemption code is a letter from A to M</span>
+
+<span ng-show="activeTaxForm.signed.$error.required && (activeTaxForm.signed.$dirty || activeTaxForm.$submitted)">Signature is missing.</span>
+
+<span ng-show="activeTaxForm.dated.$error.required && (activeTaxForm.dated.$dirty || activeTaxForm.$submitted)">Date is required.</span>
+<span ng-show="activeTaxForm.dated.$error.dateFormat && ((activeTaxForm.dated.$dirty && activeTaxForm.dated.blurred) || activeTaxForm.$submitted)">This date uses the mm/dd/yyyy format</span>
+
+<span ng-show="(activeTaxForm.ssn.$error.required && activeTaxForm.employee_id.$error.required) && (activeTaxForm.ssn.$dirty || activeTaxForm.employee_id.$dirty || activeTaxForm.$submitted)">Need either an SSN or an employer ID.</span>
+<span ng-show="activeTaxForm.ssn.$error.pattern && ((activeTaxForm.ssn.$dirty && activeTaxForm.ssn.blurred) || activeTaxForm.$submitted)">Need a valid SSN.</span>
+<span ng-show="activeTaxForm.employee_id.$error.pattern && ((activeTaxForm.employee_id.$dirty && activeTaxForm.employee_id.blurred) || activeTaxForm.$submitted) && !activeTaxForm.employee_id.focused">Need a valid employer ID.</span>

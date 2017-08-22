@@ -261,6 +261,34 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def tax_form_received(options)
+    @person = options[:person]
+    attachments['tax-form.pdf'] = File.read(options[:attach_file])
+    mail(to: @person.email, subject: "Tax form received") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def tax_form_approved(options)
+    @person = options[:person]
+    @form = options[:form]
+    mail(to: @person.email, subject: "Tax form approved") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def tax_form_rejected(options)
+    @person = options[:person]
+    @reason = options[:reason]
+    @form = options[:form]
+    mail(to: @person.email, subject: "Tax form rejected") do |format|
+      format.text
+      format.html
+    end
+  end
+
   def team_update_created(options)
     @recipient = options[:person] || options[:linked_account]
     @update = options[:update]

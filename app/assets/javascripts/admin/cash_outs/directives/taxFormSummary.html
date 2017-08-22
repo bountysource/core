@@ -1,0 +1,56 @@
+<div ng-switch on="taxFormAdmin.status[cashOut.tax_form.id]">
+    <div ng-switch-when="approved">Approved</div>
+    <div ng-switch-when="invalid">Rejected</div>
+    <div ng-switch-when="unchecked">
+      <a ng-click="openModal(cashOut.tax_form)" ng-show="!taxFormAdmin.updating[cashOut.tax_form.id]">Form {{ cashOut.tax_form.id }}</a>
+      <div ng-show="taxFormAdmin.updating[cashOut.tax_form.id]" class="progress progress-striped active" value="50">
+          <div class="progress-bar bar" style="width: 100%; height:100%" value="0"></div>
+      </div>
+    </div>
+    <div ng-switch-default="none">None</div>
+    <div ng-switch-default>Hmm</div>
+</div>
+
+
+<div modal="taxForm">
+  <div class="modal-header">
+      <table> 
+          <tr>
+              <th class="span2 text-right">File name:</th> 
+              <td>{{taxForm.file_name}}</td>
+          </tr>
+          <tr>
+              <th class="span2 text-right">Summary:</th> 
+              <td>Tax form {{taxForm.id}} for {{ cashOut.person.display_name }}, email: {{ cashOut.person.email }}, cashout: {{ cashOut.id }}</td>
+          </tr>
+          <tr>
+              <th class="span2 text-right">Cashout address:</th> 
+              <td>
+                  {{cashOut.address.name}}, {{cashOut.address.address1}}, {{cashOut.address.address2}}, 
+                  {{cashOut.address.city}}, {{cashOut.address.state}}, {{cashOut.address.postal_code}}, {{cashOut.address.country}}
+              </td>
+          </tr>
+      </table>
+  </div>
+
+  <div class="modal-body" >
+      <object ng-show="!loadError" tax-form-load-data data="" type="application/pdf" width="100%" height="600"></object>
+      <div ng-show="loadError">{{ loadError }}</div>
+  </div>
+
+  <div class="modal-footer">
+      <div ng-show="!needRejectionReason">
+          <button class="btn btn-primary" ng-click="approve(taxForm)">Approve</button>
+          <button class="btn btn-danger" ng-click="reject(taxForm)">Reject (no email)</button>
+          <button class="btn btn-danger" ng-click="showReason(taxForm)">Reject (with explanation email)</button>
+          <button class="btn" ng-click="closeModal(taxForm.id)">Close</button>
+      </div>
+      <div ng-show="needRejectionReason && focusOnReason()">
+          <form>
+              <input id="rejection_reason" maxchars="256" style="margin-bottom:0; width:25em" type="text" class="form-input" ng-model="rejectionReason" value=""/>
+              <button type="submit" class="btn btn-danger" ng-click="reject(taxForm, rejectionReason)" ng-submit="reject(taxForm, rejectionReason)">Confirm</button>
+              <button type="button" class="btn" ng-click="closeModal(taxForm)">Close</button>
+          </form>
+      </div>
+  </div>
+</div>

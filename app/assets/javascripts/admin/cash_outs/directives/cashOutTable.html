@@ -13,6 +13,7 @@
     <th>Person</th>
     <th>Physical Address</th>
     <th>Payment Address</th>
+    <th ng-show="_options.showTaxForm">Tax form</th>
     <th></th>
   </tr>
   </thead>
@@ -87,7 +88,9 @@
       </div>
 
     </td>
-
+    <td ng-show="_options.showTaxForm">
+      <tax-form-summary/>
+    </td>
     <td>
       <button class="btn btn-sm btn-primary" ng-click="markAsSent($index)" ng-show="_options.markAsSentButton">Mark as Sent</button>
       <button class="btn btn-sm btn-danger" ng-click="markAsRefund($index)" ng-show="_options.markAsSentButton">Refund</button>

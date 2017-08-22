@@ -1,0 +1,49 @@
+<div>
+  
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/activity">Activity</a></li>
+    <li><a href="/activity/account">Account</a></li>
+  </ul>
+
+  <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+  <div class="alert alert-info">
+    <p>Before your cash out request can be processed please choose and complete the right identification form.</p>
+  </div>
+
+  <ul id="tax_form_tabs" class="nav nav-tabs">
+    <li ng-class="{ active: isUsCitizen }">
+      <a class="ng-scope ng-binding" ng-click="isUsCitizen = true">
+      A US citizen
+      </a>
+    </li>
+
+    <li ng-class="{ active: !isUsCitizen }">
+      <a ng-click="isUsCitizen = false">
+      Not a US citizen
+      </a>
+    </li>
+  </ul>
+
+  <form id="tax_form" novalidate>
+    
+    <ng-form>
+      <div id="tax_form_scrollbox" class="form-group">
+        <div tax-form-pdf="pdfUrl" tax-form-pdf-zoom="formZoom" style="position:relative;" >
+          <div ng-include="formTemplate" tax-form-focus></div>
+        </div>
+      </div>
+    </ng-form>
+
+    <div>
+      <div tax-form-messages="activeTaxForm" class="alert alert-danger col-md-11 col-sm-11" >
+        <div ng-include="errorTemplate"> </div>
+      </div>
+      <div style="float:right">
+        <button style="margin-left:15px; margin-right:auto" type="submit" name="submit" class="btn btn-primary" ng-click="submitTaxForm()" ng-disabled="isSubmitting">Submit</button>
+      </div>
+    </div>
+    
+  </form>
+</div>

@@ -49,6 +49,13 @@ else
   json.(item, :mailing_address_id)
 end
 
+if @include_tax_form
+  if item.person.tax_form.present?
+    json.tax_form { json.partial!('api/v2/tax_form/base', item: item.person.tax_form) }
+  else
+    json.tax_form nil
+  end
+end
 
 if @include_yearly_cash_out_totals
   json.yearly_cash_out_totals item.person.yearly_cash_out_totals
