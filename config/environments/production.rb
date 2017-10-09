@@ -30,8 +30,9 @@ Api::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  config.log_level = :info
-  config.log_formatter = Logger::Formatter.new
+  config.log_level = (ENV['LOG_LEVEL'] || 'INFO').downcase.to_sym
+  $stdout.sync = true
+  config.logger = Logger.new(STDOUT)
   config.action_view.logger = nil
 
   # Prepend all log lines with the following tags
