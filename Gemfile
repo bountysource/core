@@ -29,7 +29,7 @@ gem 'github-markdown', :require => 'github/markdown'
 gem 'jwt', '= 0.1.11' # for Google Wallet JWT creation
 gem 'money', '~> 5.1.1' # used to be included through the checkout gem
 
-gem 'newrelic_rpm', '~> 3.8.0.218'
+gem 'newrelic_rpm'
 
 gem 'delayed_job_active_record'
 
