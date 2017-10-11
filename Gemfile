@@ -22,6 +22,7 @@ gem 'protected_attributes' # TODO: switch to strong_parameters
 gem 'rabl'
 gem 'jbuilder'
 gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt', '3.1.10'
 gem 'github-markdown', :require => 'github/markdown'
 
 # Note: version 1.0.0 is totally broken, lock the version in at
