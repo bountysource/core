@@ -75,6 +75,8 @@ class Github::Repository < Tracker
 
   # first time it loads all issues, subsequent times just refreshes the repo itself
   def remote_sync_if_necessary(options={})
+    return if ENV['DISABLE_GITHUB']
+
     if synced_at.nil?
       remote_sync(options)
     elsif synced_at < 15.minutes.ago
@@ -85,6 +87,8 @@ class Github::Repository < Tracker
   end
 
   def remote_sync(options={})
+    return if ENV['DISABLE_GITHUB']
+
     unless deleted_at
       previous_synced_at = options[:force] ? nil : self.synced_at
       update_from_github(options)
