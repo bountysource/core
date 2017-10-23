@@ -73,6 +73,8 @@ class LinkedAccount::Github::User < LinkedAccount::Github
   end
 
   def sync_all_data_if_necessary
+    return if ENV['DISABLE_GITHUB']
+
     if !synced_at || synced_at < 1.day.ago
       update_attributes!(synced_at: Time.now, sync_in_progress: true)
       delay.sync_all_data
@@ -80,6 +82,8 @@ class LinkedAccount::Github::User < LinkedAccount::Github
   end
 
   def sync_all_data
+    return if ENV['DISABLE_GITHUB']
+
     # sync starting
     update_attributes(synced_at: Time.now, sync_in_progress: true)
 

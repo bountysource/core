@@ -11,25 +11,25 @@ shared_examples_for "request tracking" do
     let(:access_token) { "abc" }
 
     before do
-      ::NewRelic::Agent.stub(add_custom_parameters: nil)
+      ::NewRelic::Agent.stub(add_custom_attributes: nil)
     end
 
     describe "should track if" do
       it "the access_token finds a person" do
         Person.stub(:find_by_access_token).with(access_token).and_return(person)
-        expect(NewRelic::Agent).to receive(:add_custom_parameters).with(person_id: person.id).once
+        expect(NewRelic::Agent).to receive(:add_custom_attributes).with(person_id: person.id).once
         get :index, access_token: access_token
         expect(response).to be_success
       end
 
       it "the access_token doesn't find a person" do
         Person.stub(:find_by).with(access_token: access_token).and_return(nil)
-        expect(NewRelic::Agent).to receive(:add_custom_parameters).with(person_id: nil).once
+        expect(NewRelic::Agent).to receive(:add_custom_attributes).with(person_id: nil).once
         get :index, access_token: access_token
       end
 
       it "the access_token isn't present" do
-        expect(NewRelic::Agent).to receive(:add_custom_parameters).with(person_id: nil).once
+        expect(NewRelic::Agent).to receive(:add_custom_attributes).with(person_id: nil).once
         get :index
       end
     end
@@ -54,7 +54,7 @@ shared_examples_for "request tracking" do
     end
 
     it "should load the page even if the method explodes" do
-      ::NewRelic::Agent.stub(:add_custom_parameters).and_raise(StandardError)
+      ::NewRelic::Agent.stub(:add_custom_attributes).and_raise(StandardError)
       get :index
       expect(response).to be_success
     end

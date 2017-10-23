@@ -12,5 +12,5 @@ Delayed::Backend::ActiveRecord::Job.class_eval do
   end
 end
 
-
 Delayed::Worker.default_priority = 50
+Delayed::Worker.max_attempts = 3

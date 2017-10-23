@@ -8,12 +8,12 @@ require 'ostruct'
 require 'csv'
 require 'optparse'
 
-ruby '2.1.2'
+ruby '2.2.8'
 
 gem 'rails', '4.0.13'
-gem 'json', '1.8.1'
+gem 'json', '1.8.2'
 gem 'pg', '~> 0.18.1'
-gem 'mysql2', '0.3.14'
+gem 'mysql2', '0.3.17'
 gem 'puma'
 gem 'rack-timeout'
 gem 'oj'
@@ -22,6 +22,7 @@ gem 'protected_attributes' # TODO: switch to strong_parameters
 gem 'rabl'
 gem 'jbuilder'
 gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt', '3.1.10'
 gem 'github-markdown', :require => 'github/markdown'
 
 # Note: version 1.0.0 is totally broken, lock the version in at
@@ -29,7 +30,7 @@ gem 'github-markdown', :require => 'github/markdown'
 gem 'jwt', '= 0.1.11' # for Google Wallet JWT creation
 gem 'money', '~> 5.1.1' # used to be included through the checkout gem
 
-gem 'newrelic_rpm', '~> 3.8.0.218'
+gem 'newrelic_rpm'
 
 gem 'delayed_job_active_record'
 
@@ -68,7 +69,7 @@ gem 'thinking-sphinx', '~> 3.1.0',
 gem 'flying-sphinx', '~> 1.0.0'
 
 gem 'cloudinary'
-gem 'eventmachine'
+gem 'eventmachine', '1.0.4'
 gem 'em-http-request'
 gem 'angular-rails-templates'
 
@@ -99,7 +100,7 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'curb', require: false #At this stage, we are only using curb in a test
+  # gem 'curb', require: false #At this stage, we are only using curb in a test
   gem 'capybara'
   gem 'thin'
   gem 'poltergeist'
@@ -116,7 +117,8 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'timecop'
-  gem 'jshint'
+  gem 'dotenv-rails'
+  gem 'jshint', '1.5.0'
 end
 
 gem 'haml'

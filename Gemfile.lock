@@ -56,7 +56,7 @@ GEM
       activemodel
       fog (>= 1.8.0)
     aws_cf_signer (0.1.3)
-    bcrypt (3.1.7)
+    bcrypt (3.1.10)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
     better_errors (1.1.0)
@@ -98,7 +98,6 @@ GEM
       mime-types (~> 1.16)
       nokogiri (~> 1.5)
       rails (>= 3, < 5)
-    curb (0.8.5)
     daemons (1.1.9)
     database_cleaner (1.3.0)
     date_validator (0.7.0)
@@ -123,9 +122,9 @@ GEM
     em-socksify (0.3.0)
       eventmachine (>= 1.0.0.beta.4)
     erubis (2.7.0)
-    eventmachine (1.0.3)
+    eventmachine (1.0.4)
     excon (0.36.0)
-    execjs (2.2.0)
+    execjs (2.7.0)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.4.1)
@@ -186,17 +185,17 @@ GEM
       multi_json (~> 1.2)
     joiner (0.2.0)
       activerecord (>= 3.1.0, < 4.1.0)
-    jshint (1.4.0)
+    jshint (1.5.0)
       execjs (>= 1.4.0)
       multi_json (~> 1.0)
       therubyracer (~> 0.12.1)
-    json (1.8.1)
+    json (1.8.2)
     jwt (0.1.11)
       multi_json (>= 1.5)
     kramdown (1.7.0)
     launchy (2.4.2)
       addressable (~> 2.3)
-    libv8 (3.16.14.3)
+    libv8 (3.16.14.19)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     maildown (1.0.2)
@@ -209,15 +208,15 @@ GEM
     minitest (4.7.5)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.11.2)
+    multi_json (1.12.2)
     multi_test (0.1.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.3.14)
+    mysql2 (0.3.17)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
-    newrelic_rpm (3.8.0.218)
+    newrelic_rpm (4.5.0.337)
     ngannotate-rails (0.9.5)
       rails (>= 3.1)
     nokogiri (1.6.6.2)
@@ -275,7 +274,7 @@ GEM
       hashie (~> 1.2.0)
     rdoc (4.1.1)
       json (~> 1.4)
-    ref (1.0.5)
+    ref (2.0.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     riddle (1.5.11)
@@ -332,8 +331,8 @@ GEM
       json (~> 1.8.1)
       mime-types (>= 1.25, < 3.0)
       rest-client (~> 1.4)
-    therubyracer (0.12.1)
-      libv8 (~> 3.16.14.0)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
       ref
     thin (1.6.2)
       daemons (>= 1.0.9)
@@ -368,6 +367,7 @@ DEPENDENCIES
   annotate (~> 2.6.5)
   api-versions
   asset_sync
+  bcrypt (= 3.1.10)
   bcrypt-ruby (~> 3.1.2)
   better_errors
   binding_of_caller
@@ -376,13 +376,12 @@ DEPENDENCIES
   capybara
   cloudinary
   cucumber-rails
-  curb
   database_cleaner
   date_validator
   delayed_job_active_record
   dotenv-rails
   em-http-request
-  eventmachine
+  eventmachine (= 1.0.4)
   execjs
   factory_girl_rails
   flying-sphinx (~> 1.0.0)
@@ -394,14 +393,14 @@ DEPENDENCIES
   htmlentities
   httparty
   jbuilder
-  jshint
-  json (= 1.8.1)
+  jshint (= 1.5.0)
+  json (= 1.8.2)
   jwt (= 0.1.11)
   launchy
   maildown
   money (~> 5.1.1)
-  mysql2 (= 0.3.14)
-  newrelic_rpm (~> 3.8.0.218)
+  mysql2 (= 0.3.17)
+  newrelic_rpm
   ngannotate-rails
   nokogiri
   oauth
@@ -437,7 +436,7 @@ DEPENDENCIES
   zeus
 
 RUBY VERSION
-   ruby 2.1.2p95
+   ruby 2.2.8p477
 
 BUNDLED WITH
-   1.15.0
+   1.15.4
