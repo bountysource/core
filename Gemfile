@@ -86,16 +86,17 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.2.0'
   gem 'pry'
   gem 'byebug'
   gem 'fog'
   gem 'slack-notifier'
   gem 'git'
   gem 'octokit'
+  gem 'dotenv-rails'
 end
 
 group :test do
+  gem 'rspec-rails', '~> 3.2.0'
   gem 'factory_girl_rails'
   # gem 'curb', require: false #At this stage, we are only using curb in a test
   gem 'capybara'
@@ -112,15 +113,14 @@ group :test do
   gem 'selenium-webdriver', '~> 2.42.0'
   gem 'launchy'
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', '1.24.6'
   gem 'timecop'
-  gem 'dotenv-rails'
   gem 'jshint', '1.5.0'
 end
 
 gem 'haml'
 
-group :staging, :production do
+group :production do
   gem 'uglifier'
   gem 'asset_sync'
   gem 'execjs'
