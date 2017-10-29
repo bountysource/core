@@ -122,6 +122,8 @@ class Person < ActiveRecord::Base
 
   has_many :comments, through: :linked_accounts
 
+  belongs_to :quickbooks_vendor
+
   EMAIL_REGEX = /\A.+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+\z/
 
   # all Person objects must have an email address

@@ -51,6 +51,9 @@ class CashOut < ActiveRecord::Base
   belongs_to :mailing_address, class_name: 'Address'
   belongs_to :account
 
+  belongs_to :quickbooks_transaction
+  belongs_to :quickbooks_vendor
+
   validates :type, presence: true
   validates :person, presence: true
   validates :address, presence: true
@@ -96,6 +99,9 @@ class CashOut < ActiveRecord::Base
 
   # Release money from the hold account to the account specified
   def release_amount!
+    quickbooks_find_or_create_vendor
+    quickbooks_create_transaction
+
     hold_account = Account::CashOutHold.instance
     liability_account = Account::Liability.instance
 
@@ -119,6 +125,9 @@ class CashOut < ActiveRecord::Base
 
   # Reject a cash out. moves money from hold back to person
   def refund!
+    quickbooks_find_or_create_vendor
+    quickbooks_create_transaction
+
     from_account = Account::CashOutHold.instance
     to_account = self.account
 
@@ -142,6 +151,29 @@ class CashOut < ActiveRecord::Base
 
   def sent?
     sent_at.present?
+  end
+
+  def is_1099_eligible?
+    us_citizen || address.country == 'US'
+  end
+
+  def quickbooks_find_or_create_vendor
+    if !person.quickbooks_vendor
+      # if they don't have a vendor in quickbooks, create one
+      quickbooks_vendor = QuickbooksVendor.create_from_cash_out!(self)
+      person.update_attribute(:quickbooks_vendor_id, quickbooks_vendor.id)
+    else
+      # if they already have a vendor in quickbooks and they change their address, update quickbooks
+      last_cash_out = person.cash_outs.completed.where.not(id: self.id).order(:sent_at).last
+      if !last_cash_out || address_id != last_cash_out.address_id
+        person.quickbooks_vendor.update_from_cash_out!(self)
+      end
+    end
+  end
+
+  def quickbooks_create_transaction
+    quickbooks_transaction = QuickbooksTransaction.create_from_cash_out!(self)
+    update_attribute(:quickbooks_transaction_id, quickbooks_transaction.id)
   end
 
   # Given a cash out type, create an instance from the correct class
