@@ -46,7 +46,7 @@ class QuickbooksTransaction < QuickbooksBase
       #"PrintStatus" => "NeedToPrint",
       "Line" => [
         {
-          "Amount" => cash_out.amount,
+          "Amount" => cash_out.final_payment_amount,
           "Description" => "Cash out ##{cash_out.id}",
           "DetailType" => "AccountBasedExpenseLineDetail",
           "AccountBasedExpenseLineDetail" => {
