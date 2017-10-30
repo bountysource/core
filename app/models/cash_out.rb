@@ -125,9 +125,6 @@ class CashOut < ActiveRecord::Base
 
   # Reject a cash out. moves money from hold back to person
   def refund!
-    quickbooks_find_or_create_vendor
-    quickbooks_create_transaction
-
     from_account = Account::CashOutHold.instance
     to_account = self.account
 
