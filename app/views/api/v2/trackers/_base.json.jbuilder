@@ -21,6 +21,8 @@ json.slug item.to_param
 json.remote_url item.url
 json.remote_name item.display_name
 
+json.takendown item.takendown?
+
 if @include_tracker_description
   json.description item.description
 end

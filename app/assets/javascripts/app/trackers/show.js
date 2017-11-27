@@ -1,7 +1,7 @@
 angular.module('app').controller('TrackerShow', function ($scope, $routeParams, $location, $api, $pageTitle, $timeout, $cookieJar, $anchorScroll, TrackerBadge, Tracker) {
 
   $scope.tracker = Tracker.get({ id: $routeParams.id, include_team: true }, function(tracker) {
-    if (tracker.team && tracker.team.slug) {
+    if (tracker.team && tracker.team.slug && !tracker.takendown) {
       $location.url("/teams/" + tracker.team.slug + "/issues?tracker_ids=" + tracker.id).replace();
     } else {
       // Load issues for tracker. If the tracker was just created (has not been synced yet),

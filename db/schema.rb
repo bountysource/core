@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025155245) do
+ActiveRecord::Schema.define(version: 20171126185423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1021,6 +1021,12 @@ ActiveRecord::Schema.define(version: 20171025155245) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "takedowns", force: true do |t|
+    t.integer  "linked_account_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "team_activity_inclusions", force: true do |t|
     t.integer  "parent_team_id", null: false

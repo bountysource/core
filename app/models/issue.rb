@@ -314,7 +314,13 @@ class Issue < ActiveRecord::Base
   end
 
   def author_or_dummy_author
-    author || LinkedAccount::Base.new(login: author_name)
+    if takendown?
+      LinkedAccount::Base.new(login: Takedown::DISPLAY_NAME)
+    elsif author.nil?
+      LinkedAccount::Base.new(login: author_name)
+    else
+      author
+    end
   end
 
   def body_html
@@ -412,6 +418,7 @@ class Issue < ActiveRecord::Base
 
   # strip trailing dollar signs and bounty amounts
   def sanitized_title
+    return Takedown::ISSUE_TITLE if takendown?
     TrackerPlugin::GH.title_without_plugin(self) || Issue::UNKNOWN_TITLE
   end
 
@@ -420,10 +427,17 @@ class Issue < ActiveRecord::Base
   end
 
   def sanitized_body_html
+    return Takedown::SANITIZED_HTML if takendown?
     html = GitHub::Markdown.render_gfm(TrackerPlugin::GH.body_without_plugin(self)) if body_markdown
     html = (body||"").gsub(/<p><bountysource-plugin>[\s\S]*?<\/bountysource-plugin><\/p>/, '') unless html
     html = ActionController::Base.helpers.sanitize(html)
     html
+  end
+
+  # has the author issued a takedown for the title/body? comments by others will still appear.
+  # NOTE: this is unrelated to the entire tracker (and all issues) being takendown.
+  def takendown?
+    author_linked_account_id && Takedown.linked_account_id_has_takedown?(author_linked_account_id)
   end
 
   def accepting_proposals?

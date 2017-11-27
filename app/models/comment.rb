@@ -32,6 +32,7 @@ class Comment < ActiveRecord::Base
   validates :issue_id, presence: true
 
   def sanitized_body_html
+    return Takedown::SANITIZED_HTML if takendown?
     html = body_markdown ? GitHub::Markdown.render_gfm(body_markdown) : body_html
     html = ActionController::Base.helpers.sanitize(html)
     html = %(<div style="white-space: pre-wrap;">#{html}</div>) if issue.is_a?(Bugzilla::Issue)
@@ -50,7 +51,17 @@ class Comment < ActiveRecord::Base
   end
 
   def author_or_dummy_author
-    author || LinkedAccount::Base.new(login: author_name)
+    if takendown?
+      LinkedAccount::Base.new(login: Takedown::DISPLAY_NAME)
+    elsif author.nil?
+      LinkedAccount::Base.new(login: author_name)
+    else
+      author
+    end
+  end
+
+  def takendown?
+    author_linked_account_id && Takedown.linked_account_id_has_takedown?(author_linked_account_id)
   end
 
 end

@@ -549,4 +549,7 @@ class Tracker < ActiveRecord::Base
     }
   end
 
+  def takendown?
+    false
+  end
 end
