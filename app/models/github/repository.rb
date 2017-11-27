@@ -610,8 +610,12 @@ class Github::Repository < Tracker
 
   # has the owner of the tracker issued a takedown for all repositories and issues?
   def takendown?
-    owner_linked_account_id = TrackerRelation::Owner.where(tracker_id: self.id).pluck(:linked_account_id).first
-    owner_linked_account_id && Takedown.linked_account_id_has_takedown?(owner_linked_account_id)
+    @owner_linked_account_id ||= TrackerRelation::Owner.where(tracker_id: self.id).pluck(:linked_account_id).first
+    @owner_linked_account_id && Takedown.linked_account_id_has_takedown?(@owner_linked_account_id)
+  end
+
+  def to_param
+    takendown? ? "#{id}-removed" : super
   end
 
 protected
