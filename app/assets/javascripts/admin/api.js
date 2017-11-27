@@ -694,6 +694,14 @@ angular.module('api.bountysource',[]).
       });
     };
 
+    this.get_takedowns = function() {
+      return this.call("/admin/takedowns");
+    };
+
+    this.create_takedown = function(form_data) {
+      return this.call("/admin/takedowns", "POST", form_data);
+    };
+
     this.get_team = function (id) {
       return this.call("/admin/teams/"+id);
     };

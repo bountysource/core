@@ -1,4 +1,4 @@
-%div{ "ng-show"=>"issue.id" }
+%div{ "ng-show"=>"issue.id && (!issue.tracker || !issue.tracker.takendown)" }
   %team-view
 
     .alert.alert-warning{ "ng-show" => "issue.can_add_bounty && issue.team.bounties_disabled" }
@@ -10,3 +10,6 @@
       %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
 
     %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+
+%div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
+  %takedown

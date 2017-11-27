@@ -1,4 +1,4 @@
-<div ng-show="tracker.id && !(tracker.team && tracker.team.slug)">
+<div ng-show="tracker.id && !(tracker.team && tracker.team.slug) && !tracker.takendown">
 
   <div ng-include="'app/trackers/_tracker_header.html'"></div>
 
@@ -112,4 +112,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div ng-show="tracker.id && tracker.takendown">
+  <takedown />
 </div>

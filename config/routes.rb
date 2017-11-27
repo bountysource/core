@@ -100,6 +100,8 @@ Api::Application.routes.draw do
 
           resources :solutions, only: [:index]
 
+          resources :takedowns, only: [:index, :create]
+
           resources :team_claims, only: [:index, :update]
 
           resources :team_payins, only: [:index, :show, :update]
