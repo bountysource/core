@@ -50,7 +50,7 @@ class QuickbooksTransaction < QuickbooksBase
           "Description" => "Cash out ##{cash_out.id}",
           "DetailType" => "AccountBasedExpenseLineDetail",
           "AccountBasedExpenseLineDetail" => {
-            "AccountRef" => { "value" => "95", "name"=>"Unpaid Developer Liability" }
+            "AccountRef" => { "value" => "158", "name"=>"Developer Payments" }
           }
         }
       ]
