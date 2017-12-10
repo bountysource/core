@@ -32,7 +32,7 @@ class Pledge < ActiveRecord::Base
   has_one :account, :through => :fundraiser
   has_one :team, :through => :fundraiser
   has_many :splits, :as => :item
-  has_many :transactions, :through => :splits
+  has_many :txns, :through => :splits
 
   # Helper defined in config/initializers/has_owner.rb
   # Gives access to polymorphic owner, which respects object anonymity on read

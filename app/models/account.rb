@@ -26,7 +26,7 @@ class Account < ActiveRecord::Base
   # NOTE: the presence of an owner is optional
   belongs_to :owner, polymorphic: true, autosave: false
   has_many :splits
-  has_many :transactions, through: :splits
+  has_many :txns, through: :splits
 
   has_many :orders, foreign_key: :checkout_method_id, class_name: "Transaction::Order"
 
@@ -82,7 +82,7 @@ class Account < ActiveRecord::Base
   # was conflicting with default_scope and the associations weren't being loaded, so we
   # use this method instead to be explicit.
   def admin_splits
-    splits.includes(:transaction).limit(1000)
+    splits.includes(:txn).limit(1000)
   end
 
   # transfer money from one account to another
@@ -211,7 +211,7 @@ class Account < ActiveRecord::Base
   def self.transfers(date_range=nil)
     date_range ||= Transaction.order('created_at asc').first.created_at..Transaction.order('created_at desc').first.created_at
     # transaction_ids = Transaction::BankTransfer.where(created_at: date_range).joins(:splits => [:account]).where('accounts.type = ?', name).pluck(:id)
-    Split.joins(:transaction, :account).where(created_at: date_range).where('transactions.type = ? AND splits.account_id = ?', 'Transaction::BankTransfer', instance.id).sum('splits.amount * -1')
+    Split.joins(:txn, :account).where(created_at: date_range).where('transactions.type = ? AND splits.account_id = ?', 'Transaction::BankTransfer', instance.id).sum('splits.amount * -1')
   end
 
   # Calculate the cash out fee.

@@ -15,5 +15,5 @@ class TrackerDonation < ActiveRecord::Base
   belongs_to :tracker
 
   has_many :splits, :as => :item
-  has_many :transactions, :through => :splits
+  has_many :txns, :through => :splits
 end

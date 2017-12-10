@@ -64,9 +64,9 @@ describe Api::V0::TransactionsController do
           )
           assert_response :created
         }.should do
-          change(person.transactions, :count).by 1
-          change(issue.transactions, :count).by 1
-          change(item.transactions, :count).by 1
+          change(person.txns, :count).by 1
+          change(issue.txns, :count).by 1
+          change(item.txns, :count).by 1
           change(Split, :count).by splits_data.count
         end
       end
@@ -85,9 +85,9 @@ describe Api::V0::TransactionsController do
           )
           assert_response :unprocessable_entity
         }.should_not do
-          change(person.transactions, :count)
-          change(issue.transactions, :count)
-          change(item.transactions, :count)
+          change(person.txns, :count)
+          change(issue.txns, :count)
+          change(item.txns, :count)
           change(Split, :count)
         end
       end
@@ -107,9 +107,9 @@ describe Api::V0::TransactionsController do
           )
           assert_response :unprocessable_entity
         }.should_not do
-          change(person.transactions, :count)
-          change(issue.transactions, :count)
-          change(item.transactions, :count)
+          change(person.txns, :count)
+          change(issue.txns, :count)
+          change(item.txns, :count)
           change(Split, :count)
         end
       end
@@ -130,8 +130,8 @@ describe Api::V0::TransactionsController do
           )
           assert_response :created
         }.should do
-          children.each { |child| change(child.transactions, :count).by 1 }
-          change(santa_claus.transactions, :count).by 1
+          children.each { |child| change(child.txns, :count).by 1 }
+          change(santa_claus.txns, :count).by 1
           change(Split, :count).by splits_data.count
         end
       end
