@@ -36,8 +36,8 @@ class Api::V0::CashOutsController < Api::V0::BaseController
 
     # Mark as sent
     if !@item.sent? && params.has_key?(:sent)
-      @item.update_attributes!(sent_at: DateTime.now)
       @item.release_amount!
+      @item.update_attributes!(sent_at: DateTime.now)
       @item.person.send_email(:cash_out_payment_sent, cash_out: @item)
 
       # Send Mixpanel event if cash out marked as sent
