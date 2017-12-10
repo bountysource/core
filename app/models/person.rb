@@ -75,7 +75,6 @@ class Person < ActiveRecord::Base
   has_one :github_account,    class_name: LinkedAccount::Github::User
   has_one :facebook_account,  class_name: LinkedAccount::Facebook
   has_one :twitter_account,   class_name: LinkedAccount::Twitter
-  has_one :gittip_account,    class_name: LinkedAccount::Gittip
 
   has_many :tracker_plugins
   has_many :tracker_relations, through: :linked_accounts

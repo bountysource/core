@@ -5,8 +5,7 @@ class Ability
   LINKED_ACCOUNTS = [
     LinkedAccount::Github::User,
     LinkedAccount::Twitter,
-    LinkedAccount::Facebook,
-    LinkedAccount::Gittip
+    LinkedAccount::Facebook
   ]
 
   ANONYMIZABLE_RECORDS = [

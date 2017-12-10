@@ -111,10 +111,6 @@ module Api
     config.secret_token = ENV['COOKIE_SECRET_TOKEN']
     config.secret_key_base = ENV['COOKIE_SECRET_KEY_BASE']
 
-    # Link to Gittip
-    config.gittip_host = ENV['GITTIP_HOST']
-    config.gittip_secret = ENV['GITTIP_SECRET']
-
     # Gravatar host
     config.gravatar_host = 'https://secure.gravatar.com/'
 

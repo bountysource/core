@@ -54,11 +54,6 @@ class SessionController < ApplicationController
       @linked_account = LinkedAccount::Twitter.find_or_create_via_oauth_token_and_verifier(params[:oauth_token], params[:oauth_verifier])
       @person         = Person.find_by_access_token(state[:access_token])
       @redirect_url   = state[:redirect_url]
-
-    when 'gittip', 'gratipay'
-      @linked_account = LinkedAccount::Gittip.find_by_oauth_token params[:external_access_token]
-      @person         = Person.find_by_access_token(params[:gittip_access_token] || params[:gratipay_access_token])
-      @redirect_url   = params.delete :redirect_url
     end
 
     # run through all of the use cases
@@ -103,105 +98,6 @@ class SessionController < ApplicationController
 
     # tack on params
     redirect_to @redirect_url + (@redirect_url['?'] ? '&' : '?') + opts.to_param
-  end
-
-  def connect
-    require_params :redirect_url, :external_access_token
-
-    case params[:provider]
-    when 'gittip', 'gratipay'
-      if !LinkedAccount::Gittip.access_token_valid?(params[:external_access_token])
-        render json: { error: 'Unauthorized access' }, status: :unauthorized
-      else
-        # find linked account
-        linked_account = LinkedAccount::Gittip.find_via_access_token params[:external_access_token]
-
-        # use cases
-        if @person && linked_account
-          # append access token of BS account to redirect query string
-          uri = URI.parse(params[:redirect_url])
-          redirect_params = Rack::Utils.parse_nested_query(uri.query).with_indifferent_access
-
-          if linked_account.person == @person
-            redirect_params.merge! access_token: linked_account.oauth_token
-
-            # merge person info onto redirect
-            person_attribute_keys = %w(id display_name first_name last_name email image_url)
-            redirect_params.merge! @person.attributes.select { |k,_| person_attribute_keys.include? k.to_s }
-            redirect_params.merge! frontend_url: @person.frontend_url
-          else
-            # logged in, but account is linked with another person. Just return to Gittip account page
-            # with an error message
-
-            redirect_params.merge! error: 'Bountysource account has already been linked.'
-          end
-
-          # put params back on redirect url
-          uri.query = redirect_params.to_param
-
-          # all done, GTFO
-          return redirect_to uri.to_s
-        else
-          # person is not logged in, show account required form
-          # whitelist the payload from Gittip (also removes rails stuff, like :action and :controller)
-          connect_params = LinkedAccount::Gittip.whitelisted_params(params).merge(
-            status: 'error_needs_account'
-          )
-
-          redirect_to "#{Api::Application.config.www_url}#auth/#{params[:provider]}/connect?#{connect_params.to_param}"
-        end
-      end
-    else
-      render json: { error: 'Unsupported provider' }, status: :bad_request
-    end
-  end
-
-  def approve_connect
-    require_params :external_access_token
-
-    case params[:provider]
-    when 'gittip','gratipay'
-      @linked_account = LinkedAccount::Gittip.find_via_access_token params[:external_access_token]
-
-      if @linked_account
-        # if the account has already been linked, cannot link again.
-        if @linked_account.person != @person
-          return render json: { error: 'Account already linked' }, status: :bad_request
-        end
-      else
-        @linked_account = LinkedAccount::Gittip.create_via_access_token(
-          person:       @person,
-          oauth_token:  params[:external_access_token],
-          login:        params[:login],
-          first_name:   params[:first_name],
-          last_name:    params[:last_name],
-          email:        params[:email],
-          image_url:    params[:image_url]
-        )
-
-        unless @linked_account.valid?
-          return render json: { error: 'There was problem linking your account' }, status: :bad_request
-        end
-      end
-
-      # if we got here, an account was successfully linked. append access token to redirect url
-      uri = URI.parse(params[:redirect_url])
-      redirect_params = Rack::Utils.parse_nested_query uri.query
-      redirect_params.merge! access_token: @linked_account.oauth_token
-
-      # merge person info onto redirect
-      person_attribute_keys = %w(id display_name first_name last_name email frontend_url)
-      redirect_params.merge! @person.attributes.select { |k,_| person_attribute_keys.include? k.to_s }
-      redirect_params.merge! frontend_url: @person.frontend_url
-      redirect_params.merge! image_url: @person.image_url
-
-      # rewrite uri params
-      uri.query = redirect_params.to_param
-
-      render json: { redirect_url: uri.to_s }
-    else
-      render json: { error: 'Unsupported provider' }, status: :bad_request
-    end
   end
 
 end
