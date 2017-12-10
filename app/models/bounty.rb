@@ -44,7 +44,7 @@ class Bounty < ActiveRecord::Base
   # TODO: this object shouldn't have an account... rework Transaction.build to use "account: bounty.issue"
   has_one :account, :through => :issue
   has_many :splits, :as => :item
-  has_many :transactions, :through => :splits
+  has_many :txns, :through => :splits
 
   has_one :bounty_claim_response
 
@@ -337,7 +337,7 @@ class Bounty < ActiveRecord::Base
 
   # the internal account used to pay for this bounty
   def source_account
-    Split.where(item: self).reorder('created_at').first.transaction.splits.where('amount < 0').reorder('amount').first.account
+    Split.where(item: self).reorder('created_at').first.txn.splits.where('amount < 0').reorder('amount').first.account
   end
 
   def move_to_issue(new_issue)

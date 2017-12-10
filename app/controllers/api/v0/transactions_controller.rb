@@ -63,7 +63,7 @@ class Api::V0::TransactionsController < Api::V0::BaseController
           splits_after << split
         else
           split = @transaction.splits.build
-          split.transaction = @transaction
+          split.txn = @transaction
           splits_after << split
         end
 

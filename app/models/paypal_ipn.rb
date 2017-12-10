@@ -27,7 +27,7 @@ class PaypalIpn < ActiveRecord::Base
   attr_accessible :raw_post, :txn_id, :payment_type, :payment_processed_at, :is_return, :processed, :pending
 
   has_many :splits, :as => :item
-  has_many :transactions, :through => :splits
+  has_many :txns, :through => :splits
   belongs_to :order, class_name: "Transaction::Order"
 
   class Error < RuntimeError; end

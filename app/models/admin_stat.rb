@@ -123,7 +123,7 @@ class AdminStat < ActiveRecord::Base
       hash[name]['avg_revenue_per_paying_user'] = users.sum { |user| user['amount'].to_f } / user_count rescue 0
 
       # Bounties Paid out
-      hash[name]["dev_earnings_bounty_sum"] = Split.joins(:transaction).
+      hash[name]["dev_earnings_bounty_sum"] = Split.joins(:txn).
         where("transactions.type = 'Transaction::InternalTransfer::BountyClaim'").
         where("splits.created_at>=? AND splits.created_at<=?", start, finish).
         where("splits.amount > 0").
@@ -131,7 +131,7 @@ class AdminStat < ActiveRecord::Base
 
 
       # Pledges Paid out
-      hash[name]["dev_earnings_pledge_sum"] = Split.joins(:transaction, :account).
+      hash[name]["dev_earnings_pledge_sum"] = Split.joins(:txn, :account).
         where("transactions.type = 'Transaction::InternalTransfer::FundraiserCashOut'").
         where("splits.amount>0").
         where("splits.created_at>=? AND splits.created_at<=?", start, finish).
@@ -169,7 +169,7 @@ class AdminStat < ActiveRecord::Base
       hash[name]["cash_outs_sum"] = CashOut.where("sent_at is NOT NULL AND created_at BETWEEN ? AND ?", start, finish).sum(:amount)
 
       # Gross Sales
-      hash[name]["gross_sales_sum"] = Split.joins(:transaction).where("transactions.type IN (?)", ["Transaction::Order::Coinbase", "Transaction::Order::GoogleWallet", "Transaction::Order::Paypal"]).where("splits.created_at>=? AND splits.created_at<=?", start, finish).where("splits.amount > 0").sum("splits.amount")
+      hash[name]["gross_sales_sum"] = Split.joins(:txn).where("transactions.type IN (?)", ["Transaction::Order::Coinbase", "Transaction::Order::GoogleWallet", "Transaction::Order::Paypal"]).where("splits.created_at>=? AND splits.created_at<=?", start, finish).where("splits.amount > 0").sum("splits.amount")
 
       hash[name]["fundraiser_created_cnt"] = Fundraiser.where(created_at: date_range).count
       hash[name]["fundraiser_published_cnt"] = Fundraiser.where(published_at: date_range).count
@@ -233,9 +233,9 @@ class AdminStat < ActiveRecord::Base
         Account::Team
       )
 
-      hash[name]["liability_start_sum"] = Split.joins(:transaction, :account).where('transactions.created_at <= ?', start).where('accounts.type in (?)', liability_accounts).sum(:amount).to_f
-      hash[name]["liability_finish_sum"] = Split.joins(:transaction, :account).where('transactions.created_at <= ?', finish).where('accounts.type in (?)', liability_accounts).sum(:amount).to_f
-      hash[name]["liability_diff_sum"] = Split.joins(:transaction, :account).where('transactions.created_at' => date_range).where('accounts.type in (?)', liability_accounts).sum(:amount).to_f
+      hash[name]["liability_start_sum"] = Split.joins(:txn, :account).where('transactions.created_at <= ?', start).where('accounts.type in (?)', liability_accounts).sum(:amount).to_f
+      hash[name]["liability_finish_sum"] = Split.joins(:txn, :account).where('transactions.created_at <= ?', finish).where('accounts.type in (?)', liability_accounts).sum(:amount).to_f
+      hash[name]["liability_diff_sum"] = Split.joins(:txn, :account).where('transactions.created_at' => date_range).where('accounts.type in (?)', liability_accounts).sum(:amount).to_f
 
       hash
     end
