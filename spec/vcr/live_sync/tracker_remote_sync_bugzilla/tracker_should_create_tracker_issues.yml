@@ -387,4 +387,150 @@ http_interactions:
         ZykiLCIyMDEyLTA5LTA0IDA3OjU4OjQ1Ig==
     http_version: 
   recorded_at: Thu, 19 Nov 2015 19:35:31 GMT
+- request:
+    method: get
+    uri: https://bugzilla.mozilla.org/buglist.cgi?bug_status%5B%5D=ASSIGNED&bug_status%5B%5D=NEW&bug_status%5B%5D=REOPENED&bug_status%5B%5D=SUSPENDED&bug_status%5B%5D=UNCONFIRMED&bug_status%5B%5D=WAITING&ctype=csv&limit=100&order=Importance&product=Core&query_format=advanced&resolution=---
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 10 Dec 2017 19:04:20 GMT
+      Server:
+      - Apache
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Content-Disposition:
+      - attachment; filename="bugs-2017-12-10.csv"
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - Bugzilla_login_request_cookie=wGXRm9vXk8; path=/; secure; HttpOnly
+      - github_secret=1Q466Gm21PQ8yFdC; path=/; secure; HttpOnly
+      X-Backend-Server:
+      - web6.bugs.scl3.mozilla.com
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/csv; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: |-
+        bug_id,"product","component","assigned_to","bug_status","resolution","short_desc","changeddate"
+        246039,"Core","RDF","nobody","NEW"," ---","RDFService.GetDataSource should return up-to-date datasources for http/remote","2007-07-09 12:26:38"
+        391484,"Core","DOM: Events","nobody","NEW"," ---","Mochitest failure on OS X, testFormElementObserver","2011-04-02 01:17:40"
+        569382,"Core","IPC","nobody","REOPENED"," ---","ABORT: file mozilla/ipc/chromium/src/base/lock_impl_posix.cc, line 42 during startup","2011-04-01 17:12:03"
+        756706,"Core","JavaScript Engine","nobody","UNCONFIRMED"," ---","""non-relocatable subtraction expression"" trying to compile js/src/jsapi.cpp on mac os x 10.5.8","2014-07-24 11:07:35"
+        772577,"Core","Graphics","nobody","NEW"," ---","Build failure: error C2065: 'L' : undeclared identifier @ GLLibraryEGL.cpp(105)","2012-07-17 05:59:08"
+        855881,"Core","XPCOM","nobody","NEW"," ---","""Couldn't load XPCOM"" since bug 852950 landing","2017-08-18 07:46:48"
+        863186,"Core","Canvas: WebGL","nobody","NEW"," ---","WebGL crashes Windows nightly with Optimus, NV GPU, and Layers accel","2016-07-29 12:21:31"
+        905592,"Core","Audio/Video: Playback","nobody","NEW"," ---","[Build bustage] /mozilla-central/content/media/directshow/DirectShowUtils.cpp' failed, return code 2","2015-09-20 18:50:10"
+        988594,"Core","Graphics","dmarcos","NEW"," ---","[Camera][Nexus4] Very slow to draw previews when swiping through Preview from Camera","2014-10-23 01:02:42"
+        1003730,"Core","DOM: Workers","amarchesini","NEW"," ---","Close the tab will not kill the worker if there is a console.log() keep printing log to DevTools","2017-11-20 22:59:13"
+        1026327,"Core","Audio/Video: Playback","nobody","NEW"," ---","[B2G][dolphin][V1.4][GECKO][VIDEO]When playing,touch the sceen, but video doesn't response","2015-10-22 21:37:34"
+        1064478,"Core","Graphics","nobody","NEW"," ---","Call glFlush() of WebGL and SkiaGL at correct timing","2014-09-09 08:34:27"
+        1073873,"Core","Graphics","nobody","NEW"," ---","Green screen when trying to use built-in camera with WebRTC on Flatfish","2014-12-26 02:40:27"
+        1107944,"Core","JavaScript Engine","andrew","ASSIGNED"," ---","GLIBC before 2.12 missing pthread_setname_np","2017-11-12 01:17:54"
+        1112945,"Core","JavaScript: GC","terrence.d.cole","NEW"," ---","enable-shared-js builds broken by GCCellPtr being used in XPCOM tests","2015-01-24 19:50:33"
+        1182378,"Core","MFBT","nobody","NEW"," ---","Building with ASan on Mac: Undefined symbol ""___lsan_ignore_object""","2017-09-26 11:16:33"
+        1250400,"Core","JavaScript Engine","nobody","UNCONFIRMED"," ---","ARM/AARCH64: Javascript engine crash","2016-09-22 13:49:03"
+        1256260,"Core","Disability Access APIs","nobody","NEW"," ---","crash in MustBeAccessible","2016-03-28 08:55:12"
+        1317333,"Core","General","nobody","NEW"," ---","Firefox 52-> 53 merge day Aurora Tree Blocking Bugs","2016-11-14 08:10:58"
+        1424531,"Core","Plug-ins","nobody","UNCONFIRMED"," ---","Crash in libflashplayer.so@0x67c406","2017-12-09 12:10:33"
+        85601,"Core","Security","nobody","NEW"," ---","User interface to allow connections to blocked ports","2015-12-27 02:07:19"
+        92506,"Core","Event Handling","nobody","REOPENED"," ---","Link with _blank target can lockup Mozilla","2009-01-28 19:37:15"
+        93149,"Core","Keyboard: Navigation","nobody","NEW"," ---","No way to move focus between plugin and browser from keyboard","2017-08-18 07:41:43"
+        98227,"Core","Editor","brade","NEW"," ---","composer is removing coding for frames when entered manually","2010-02-02 20:17:29"
+        98632,"Core","Editor","nobody","NEW"," ---","bullet after alignment doesn't bring text with it","2007-04-03 11:54:59"
+        110840,"Core","XBL","nobody","NEW"," ---","XBL Scope Seemingly Not There","2010-05-13 10:02:25"
+        115328,"Core","Document Navigation","nobody","NEW"," ---","Save As Web Page Complete saves both scripts and output from scripts, resulting in duplicated content","2017-08-18 07:35:47"
+        128380,"Core","Internationalization","jshin1987","NEW"," ---","Cannot create user profile names in Unicode when using DOS command","2009-08-23 08:28:11"
+        132070,"Core","Internationalization","jshin1987","NEW"," ---","Fail to save an existing Doc erases the data","2008-02-02 23:26:21"
+        133946,"Core","Document Navigation","nobody","NEW"," ---","Form state restoring is not working with framesets on reload [OLD: Form elements are wiped....]","2014-06-12 17:28:16"
+        134470,"Core","Event Handling","blizzard","NEW"," ---","2 or more windows stuck activated as I mouse around to move focus via enter/exit in rh7.1","2014-09-16 04:52:13"
+        136422,"Core","XUL","nobody","NEW"," ---","Don't use ""Sheets"" for all OS-X modal dialogs (Modal dialogs have no title bar on Mac OSX)","2015-02-13 06:27:25"
+        139492,"Core","XUL","nobody","NEW"," ---","Crash [@nsChromeTreeOwner::SetEnabled] continuing from venkman caught exception after closing the window it was debugging","2012-07-05 13:43:13"
+        141983,"Core","Serializers","nobody","REOPENED"," ---","Space added to indented line when sending message","2016-07-06 11:50:07"
+        142555,"Core","DOM: Core & HTML","nobody","NEW"," ---","early cross window javascript function calls fail","2009-08-22 20:50:34"
+        154566,"Core","XUL","timeless","ASSIGNED"," ---","live skin switch  [@nsBox::GetBorder]","2016-07-15 08:57:18"
+        162163,"Core","DOM: Core & HTML","kinmoz","REOPENED"," ---","backout patch, add assertion [was: comma after underline causes the composer to crash]","2013-04-04 13:53:36"
+        162296,"Core","Editor","daniel","ASSIGNED"," ---","[PATCH] pasting to bullet list from exported bookmark file hangs mozilla","2007-04-03 10:51:45"
+        167475,"Core","Document Navigation","timeless","ASSIGNED"," ---","[URL] Disable external and returning no data protocol handlers in all cases, excluding <A HREF=>","2017-11-22 18:04:40"
+        167955,"Core","Internationalization","jshin1987","NEW"," ---","Copy and Paste is not working in user defined-encoding pages!!!","2009-08-23 08:52:58"
+        171766,"Core","Editor","nobody","NEW"," ---","embedding: need a way to give feedback for elements we cant edit","2010-02-02 20:16:01"
+        173578,"Core","Internationalization","smontagu","NEW"," ---","Download Manager: DBCS File/Folder name display in escape","2008-02-11 16:21:54"
+        177819,"Core","DOM: Core & HTML","nobody","NEW"," ---","Error: uncaught exception: [nsIDOMJSWindow.open]","2009-08-22 20:53:50"
+        181456,"Core","Internationalization","smontagu","NEW"," ---","Save As text loses characters outside the page or message encoding","2013-09-24 01:27:45"
+        185945,"Core","DOM: Core & HTML","nobody","NEW"," ---","recursive document.write prevents browser from shutting down completely","2009-08-22 20:54:00"
+        191400,"Core","Drag and Drop","nobody","REOPENED"," ---","returning DRAG_MOVE, not DRAG_NONE, after html drag to browser window","2014-11-24 00:58:34"
+        191603,"Core","Editor","nobody","NEW"," ---","When clicking in a form's textarea/input, the text inside that area is copied to the copy buffer","2007-04-03 12:04:44"
+        194210,"Core","Event Handling","nobody","NEW"," ---","e-mail link causes infinite number of new messages to open (redirect via Location:mailto:)","2016-12-01 00:54:30"
+        213295,"Core","Layout: Block and Inline","nobody","NEW"," ---","To many unclosed option tag's in RTL schema lead to lockup","2010-08-22 15:16:24"
+        221499,"Core","CSS Parsing and Computation","nobody","NEW"," ---","FF10x crash [@0x0 | nsRuleNode::Transition(nsIStyleRule*, unsigned char, unsigned char)] and [@ nsRefPtr<imgRequest>::operator=(imgRequest*) | nsRuleNode::Transition(nsIStyleRule*, unsigned char, unsigned char)]","2016-04-11 13:33:03"
+        233311,"Core","Layout: Tables","nobody","NEW"," ---","Very poor performance while loading MS-Excel Exported page.","2012-05-10 06:09:21"
+        234683,"Core","Internationalization","smontagu","NEW"," ---","Using no value for charset detect slows down Camino by 15%","2010-02-02 20:16:03"
+        237861,"Core","XPCOM","nobody","NEW"," ---","nsMemory::FlushMemory can pass a pointer to garbage memory to memory pressure listeners","2013-09-04 02:25:02"
+        238413,"Core","DOM","caillon","NEW"," ---","element.builder.rebuild() crashes in builds 20040309 and later","2017-08-18 06:58:10"
+        239840,"Core","Layout","nobody","NEW"," ---","hang when many nested <marquee> tags are used. exponential time increase","2012-01-22 13:35:35"
+        244350,"Core","Editor","nobody","NEW"," ---","paste dl tag into li causes Composer to freeze","2007-04-03 11:08:36"
+        245503,"Core","DOM: Core & HTML","timeless","NEW"," ---","setTimeout call fired and crashed when js_GetAtom returned its static dummy atom","2009-08-22 21:05:36"
+        246811,"Core","XUL","jvarga","NEW"," ---","nsRect.h make mozilla crashes","2009-09-13 00:33:30"
+        249805,"Core","XPCOM","nobody","NEW"," ---","XPCOM:EventReceiver appears to hang program and hold dialup component","2015-02-18 21:26:53"
+        250906,"Core","XPCOM","nobody","NEW"," ---","null (%00) in filename fakes extension (ftp, file)","2017-08-18 06:59:18"
+        252526,"Core","Layout: Form Controls","nobody","NEW"," ---","Don't submit form when pressing Return on fileUpload ""Browse..."" button (can cause crash)","2013-05-24 08:53:52"
+        261974,"Core","SVG","nobody","NEW"," ---","Infinite loop in SVG using JavaScript with redraw hangs browser","2014-10-05 06:56:53"
+        262095,"Core","XUL","timeless","NEW"," ---","Crash if View/Messages/All is reenabled after message list was emptied by move message [@ nsTreeSelection::SetCurrentIndex]","2014-03-13 02:15:36"
+        266324,"Core","DOM: Core & HTML","nobody","NEW"," ---","hang if ""window.find()"" is called in a ""while(true)"" loop of a javascript","2009-09-08 20:02:55"
+        270134,"Core","Security: CAPS","dveditz","NEW"," ---","Hang at startup: infinite loop starting at nsScriptSecurityManager::Init()","2011-01-03 03:48:27"
+        271130,"Core","Editor","nobody","NEW"," ---","editting observatoryscope, removing framesets repeatedly finally croaks [@ nsHTMLEditor::GetCSSBackgroundColorState]","2011-06-09 14:58:40"
+        272881,"Core","RDF","nobody","NEW"," ---","some rdf related to evil theme from bug 272807 caused crash [@ LiteralImpl::EqualsNode]","2017-08-18 07:36:18"
+        273981,"Core","XUL","nobody","NEW"," ---","unchecked deref of mContent [@ nsMenuFrame::IsDisabled]","2011-06-09 14:58:40"
+        274595,"Core","DOM: Core & HTML","nobody","NEW"," ---","Too-much-recursion crash on some Macs with <body onload=""onload()""> (stack limit varies?)","2012-12-27 08:57:45"
+        276261,"Core","Widget: Gtk","blizzard","NEW"," ---","Crash: malformed embed causes strange behaviour [@ nsCommonWidget::Show]","2011-06-09 14:58:40"
+        277554,"Core","Security","jstenback+bmo","NEW"," ---","Content can be manipulated by another site with a popup window","2012-05-03 12:39:12"
+        281567,"Core","XUL","timeless","NEW"," ---","[@ nsChromeTreeOwner::SetEnabled]","2011-06-09 14:58:41"
+        282405,"Core","Widget: Gtk","blizzard","NEW"," ---","Crash if window is destroyed while executing onChange [@ g_type_check_instance_is_a]","2011-06-09 14:58:41"
+        282683,"Core","XUL","nobody","NEW"," ---","nsIBoxObject traversal methods suck","2008-07-31 03:17:31"
+        284296,"Core","XML","nobody","NEW"," ---","DOMParser freezes Mozilla if the top element is html:script","2010-12-20 05:10:55"
+        288400,"Core","Internationalization","smontagu","ASSIGNED"," ---","stringbundle can crash if given bad input","2013-04-23 03:47:31"
+        291162,"Core","XPCOM","nobody","NEW"," ---","firefox -register segfaults if $HOME is unset","2012-05-03 12:39:15"
+        298681,"Core","XUL","nobody","NEW"," ---","TB crashed when adding attachments by drag-n-drop [@ nsTreeBodyFrame::HandleEvent(nsPresContext*, nsGUIEvent*, nsEventStatus*)]","2015-10-13 07:25:51"
+        299756,"Core","Layout: HTML Frames","nobody","NEW"," ---","Recursive frames hang Firefox","2015-04-07 15:11:22"
+        304514,"Core","DOM","nobody","NEW"," ---","nsContentIterator::Init(range) doesn't consider Document nodes","2009-08-22 20:12:32"
+        308339,"Core","DOM: Core & HTML","timeless","ASSIGNED"," ---","null principals [@ nsHTMLDocument::GetCookie]","2011-06-09 14:58:42"
+        311578,"Core","XBL","nobody","NEW"," ---","[@ nsXBLContentSink::ConstructHandler]","2011-06-09 14:58:42"
+        319143,"Core","General","nobody","NEW"," ---","large plain text file (150MB) uses all available memory and poor performance until hanging","2016-03-05 14:24:19"
+        320430,"Core","Widget: Win32","nobody","NEW"," ---","Blue Screen triggered under [@ nsNativeThemeWin::DrawWidgetBackground]","2016-07-20 10:53:03"
+        321197,"Core","DOM","nobody","NEW"," ---","crash [@ nsGlobalWindow::ClearAllTimeouts] while closing a window","2012-03-03 23:51:43"
+        321460,"Core","XML","nobody","NEW"," ---","css/xpat driver segmentation fault on startup","2009-08-23 18:16:03"
+        323331,"Core","XUL","nobody","NEW"," ---","nsXBLProtoImpl::CompilePrototypeMembers doesn't NS_ENSURE_TRUE(global, NS_ERROR_OUT_OF_MEMORY) instead it passes it to spider monkey which crashes [@ JS_LookupPropertyWithFlags]","2013-10-24 06:47:12"
+        323394,"Core","Layout: Misc Code","nobody","NEW"," ---","Crash due to too much recursion in frame construction (ffoxdie)","2012-06-15 13:25:57"
+        323540,"Core","Internationalization","smontagu","NEW"," ---","nsCollationUnix::Initialize asserts if passed a locale created via nsLocaleService::NewLocale","2009-08-23 09:12:31"
+        326206,"Core","XML","xml","NEW"," ---","XML parser chokes on extremely long attributes","2012-03-09 11:39:58"
+        333548,"Core","XPCOM","timeless","ASSIGNED"," ---","[@ xp_iconv] if !outputLeft","2011-06-09 14:58:43"
+        334368,"Core","DOM","nobody","NEW"," ---","Creating DOM events after layout shutdown not safe (crashes)","2017-08-18 06:57:44"
+        334744,"Core","XPConnect","nobody","NEW"," ---","XPCCallContext::State HAVE_NAME and HAVE_ARGS ordering confusion","2006-11-03 11:27:14"
+        335123,"Core","DOM: Events","nobody","NEW"," ---","Infinite loop causes all FF windows to hang","2009-08-22 21:18:35"
+        337592,"Core","Security","dveditz","NEW"," ---","hang on exit with 3rd party pkcs module. leaves profile unlocked such that second firefox process is possible.","2014-03-23 08:30:47"
+        339128,"Core","Layout: Tables","mats","NEW"," ---","StirTable meta bug","2016-06-30 09:39:32"
+        340666,"Core","Layout: Text","nobody","NEW"," ---","[@ nsTextFrame::GetContentAndOffsetsForSelection]","2011-06-09 14:58:43"
+        341741,"Core","Editor","nobody","NEW"," ---","Including Elements into DIV while deleting fails in some cases","2012-08-22 06:09:12"
+        345161,"Core","General","nobody","NEW"," ---","JavaScript code creating too many SCRIPT element causes hang","2010-04-22 00:25:19"
+        346014,"Core","XSLT","jonas","NEW"," ---","Firefox crashes when visiting and reloading this page [@ nsDocViewerFocusListener::Blur][@ nsHTMLContainerFrame::CreateViewForFrame ]","2013-02-11 13:38:49"
+    http_version: 
+  recorded_at: Sun, 10 Dec 2017 19:04:23 GMT
 recorded_with: VCR 2.9.3
