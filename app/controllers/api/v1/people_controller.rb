@@ -69,17 +69,6 @@ class Api::V1::PeopleController < ApplicationController
 
       new_relic_data_point "Custom/account/create/#{$1}", 1
 
-      # Gittip
-    when /^(gittip|gratipay):(.*)$/
-      # nothing to do anymore, just kick back to Gittip
-      redirect_to params[:redirect_url] || Api::Application.config.gittip_url
-
-      # create person
-      @person.password = temp_password
-      @person.password_confirmation = temp_password
-
-      new_relic_data_point "Custom/account/create/gittip", 1
-
     else
       # normal use case
       new_relic_data_point "Custom/account/create/email", 1
@@ -155,17 +144,6 @@ class Api::V1::PeopleController < ApplicationController
 
           if !(linked_account = LinkedAccount::Base.find_by_access_token($2))
             render json: { error: "Unable to find #{$1.capitalize} user", email_is_registered: true }, status: :not_found
-          elsif linked_account.person
-            render json: { error: "#{$1.capitalize} account already linked", email_is_registered: true }, status: :not_found
-          else
-            linked_account.link_with_person @person
-            render_login_rabl
-          end
-
-        # Gittip
-        when /^(gittip|gratipay):(.*)$/
-          if !(linked_account = LinkedAccount::Gittip.find_by_oauth_token $2)
-            render json: { error: "Unable to find #{$1.capitalize} account", email_is_registered: true }, status: :not_found
           elsif linked_account.person
             render json: { error: "#{$1.capitalize} account already linked", email_is_registered: true }, status: :not_found
           else
@@ -259,7 +237,7 @@ class Api::V1::PeopleController < ApplicationController
     per_row = 17
     num_rows = 2
 
-    @people = Person.order('created_at desc').includes(:github_account, :twitter_account, :gittip_account).limit(200).first(per_row * num_rows)
+    @people = Person.order('created_at desc').includes(:github_account, :twitter_account).limit(200).first(per_row * num_rows)
     @total_count = Person.count
 
     render "api/v1/people/recent"

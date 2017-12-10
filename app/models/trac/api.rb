@@ -62,12 +62,12 @@ protected
     csv = CSV.parse(response, {headers: true}) do |content|
       result << {
         number: content[0], # Some sites return the csv ID like this "\xEF\xBB\xBFid":"194"
-        title: content['summary'],
-        state: content['status'],
-        priority: content['priority'],
-        milestone: content['milestone'],
-        body: content['description'],
-        can_add_bounty: status_to_can_add_bounty(content['status']),
+        title: content['summary'] || content['Summary'],
+        state: content['status'] || content['Status'],
+        priority: content['priority'] || content['Priority'],
+        milestone: content['milestone'] || content['Milestone'],
+        body: content['description'] || content['Description'],
+        can_add_bounty: status_to_can_add_bounty(content['status'] || content['Status']),
         url: File.join(base_url, "ticket/#{content[0]}")
       }
     end

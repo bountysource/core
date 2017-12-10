@@ -33,11 +33,6 @@ class Api::V1::SearchesController < ApplicationController
     end
   end
 
-  # search landing point from gittip
-  def gittip
-    redirect_to "#{Api::Application.config.www_url}#search?query=#{params[:query]}"
-  end
-
   def bounty_search
     options = {
       search: params[:search],
