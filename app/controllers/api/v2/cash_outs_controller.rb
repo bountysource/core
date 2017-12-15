@@ -20,6 +20,8 @@ class Api::V2::CashOutsController < Api::BaseController
   end
 
   def create
+    raise "Coinbase is disabled" if params[:bitcoin_address] && ENV['COINBASE_DISABLED']
+
     if team_id = params[:source].try(:match, /\Ateam(\d+)\Z/).try(:[], 1)
       account = current_user.team_member_relations.where(admin: true, team_id: team_id).first.try(:team).try(:account)
     else

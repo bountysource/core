@@ -158,7 +158,9 @@
               <div class="col-sm-12">
                 <div class="radio">
                   <label>
-                    <input type="radio" ng-model="cashOut.type" ng-value="'bitcoin'" /> Bitcoin
+                    <input type="radio" ng-model="cashOut.type" ng-value="'bitcoin'" ng-disabled="!BS_ENV.coinbase_enabled" />
+                    <span ng-if="BS_ENV.coinbase_enabled">Bitcoin</span>
+                    <span ng-if="!BS_ENV.coinbase_enabled" style="color: #888">Bitcoin (temporarily disabled)</span>
                   </label>
                 </div>
               </div>

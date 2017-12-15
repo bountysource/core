@@ -291,9 +291,10 @@
             <!-- Coinbase! -->
             <div class="radio">
               <label>
-                <input type="radio" ng-model="checkoutPayload.checkout_method" value="coinbase">
+                <input type="radio" ng-model="checkoutPayload.checkout_method" value="coinbase" ng-disabled="!BS_ENV.coinbase_enabled">
                 <favicon style="width: 16px; height: 16px;" domain="https://bitcoin.org/en/"></favicon>
-                <span>Bitcoin</span>
+                <span ng-if="BS_ENV.coinbase_enabled">Bitcoin</span>
+                <span ng-if="!BS_ENV.coinbase_enabled" style="color: #888">Bitcoin (temporarily disabled)</span>
               </label>
             </div>
 
