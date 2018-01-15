@@ -29,13 +29,56 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
  * [Fee in fees page and TOS do not match.](https://github.com/bountysource/core/issues/994)
  * [Change "Support team" text if you're a supporter](https://github.com/bountysource/core/issues/1002)
 
-## Developer Resources
+# Developer Resources
 
 * [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
 * [API Docs](http://bountysource.github.io/)
 
+## Local Development Environment (OS X)
+```
+# dependencies
+brew install rbenv
+brew install mysql
+brew install postgresql
 
-## Self-hosting
+# checkout latest code
+git clone git@github.com:bountysource/core.git bountysource-core
+cd bountysource-core
+
+# make sure you're running ruby 2.2.8 (if not, mess with rbenv)
+ruby -v
+
+# install Gemfile
+gem install bundler
+bundle install
+
+# setup ENV
+cp .env.dev .env
+rake db:setup
+
+# start server
+./bin/rails s
+open http://localhost:3000/
+```
+
+### Hostnames for local development
+We need different hostnames, so by default we use these:
+* http://localhost:3000/ - bountysource
+* http://127.0.0.1:3000/ - salt
+* http://0.0.0.0:3000/ - api
+
+Alternatively, you can add entries to `/etc/hosts` and change the hostnames in your `.env` file:
+```
+127.0.0.1 www.bountysource.local api.bountysource.local salt.bountysource.local
+```
+
+### Running tests
+```
+RAILS_ENV=test rake db:create
+./bin/rake
+```
+
+## Local Development Environment with Docker (deprecated)
 
 For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).
 

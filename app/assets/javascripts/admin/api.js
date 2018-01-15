@@ -54,14 +54,18 @@ angular.module('api.bountysource',[]).
           }
         };
 
+        var cors_errback = function(response) {
+          alert("Server Error: " + url);
+        };
+
         var headers = {};
         headers.Accept = 'application/vnd.bountysource+json; version=0';
 
-        if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
-        else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback); }
-        else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback); }
-        else if (method === 'POST') { $http.post(url, params, {headers: headers}).success(cors_callback); }
-        else if (method === 'PUT') { $http.put(url, params, {headers: headers}).success(cors_callback); }
+        if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
+        else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
+        else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
+        else if (method === 'POST') { $http.post(url, params, {headers: headers}).success(cors_callback).error(cors_errback); }
+        else if (method === 'PUT') { $http.put(url, params, {headers: headers}).success(cors_callback).error(cors_errback); }
 
       } else {
         params._method = method;
