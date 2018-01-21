@@ -67,7 +67,7 @@ class Search < ActiveRecord::Base
     languages = params[:languages].present? ? params[:languages].split(',') : []
     trackers = params[:trackers].present? ? params[:trackers].split(',') : []
     #build a "with" hash for the filtering options. order hash for sorting options.
-    with_hash = {tracker_ids: trackers, language_ids: languages, :bounty_total => (min..max)}.select {|param, value| value.present?}
+    with_hash = {tracker_ids: trackers, language_ids: languages, :bounty_total => (min..max), :created_at => 2.year.ago..Time.now, :paid_out => false, :can_add_bounty => true}.select {|param, value| value.present?}
 
     #if an order is specified, build the order query. otherwise, pass along an empty string to order
     if order
