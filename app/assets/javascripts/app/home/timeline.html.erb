@@ -1,0 +1,111 @@
+<div class="homepage">
+
+  <div class="container">
+    <div>
+      <%= image_tag 'backgrounds/home-desk.svg', class: 'home-splash-background' %>
+    </div>
+    <div class="row">
+      <div class="col-lg-offset-1 col-lg-10">
+
+        <h1 class="text-center font-weight-regular">Support for Open-Source Software</h1>
+        <h2 class="text-center font-weight-regular mt-0">A community with {{people_count.total | number}} members.</h2>
+
+        <div class="row">
+          <!-- Post -->
+          <div class="col-sm-4 quicklink">
+            <h3 class="quicklink-title">POST</h3>
+
+            <h5 class="quicklink-subtitle">Paste any URL to post a bounty.</h4>
+
+            
+            <form class="form-inline center-block" ng-submit="submit_search()" ng-controller="NavbarSearchController">
+              <div class="input-group">
+                <input type="text" class="search-query form-control" ng-model="form_data.url" placeholder="http://github.com/.../issues/123">
+                <div class="input-group-btn">
+                  <button type="submit" class="btn post-button">Post</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Create a Team -->
+          <div class="col-sm-4 quicklink" >
+            <h3 class="quicklink-title">ADD TEAM</h3>
+
+            <h5 class="quicklink-subtitle">Manage every aspect of your team.</h4>
+
+            <a ng-href="/teams/new" class="btn team-button">+ Add Team</a>
+          </div>
+
+          <!-- Hunt -->
+          <div class="col-sm-4 quicklink">
+            <h3 class="quicklink-title">HUNT</h3>
+
+            <h5 class="quicklink-subtitle">Earn money contributing to OSS.</h4>
+
+            <a ng-href="/bounties/search" class="btn find-bounty-button"><span class="glyphicon glyphicon-search"></span> Find Bounties</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP BACKERS -->
+  <div ng-show="featuredTeams.length > 0" class="featured-header">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-10 col-lg-offset-1">
+            <h3>Featured Teams:</h3>
+            <a ng-href="/teams/{{team.slug}}" ng-repeat="team in featuredTeams | limitTo:10 ">
+              <img ng-src="{{team.image_url_small}}" tooltip="{{team.name}}" tooltip-placement="bottom" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container container_top_margin">
+    <div class="row">
+      <div class="col-md-8 col-sm-9">
+        <!-- current home page -->
+        <ul class="nav nav-tabs">
+        <li class="active"><a href="/">Activity</a></li>
+        <li><a ng-href="/teams">Teams</a></li>
+        </ul>
+        <timeline events="events"></timeline>
+      </div>
+
+      <div class="col-md-4 col-sm-3">
+        <div ng-show="bounty_hunters.length>0">
+          <h3>Bounty Hunters</h3>
+          <div>
+            <ul class="nav nav-tabs">
+              <li ng-class="{active: bounty_hunters == bounty_hunters_alltime }">
+                <a ng-click="bounty_hunters = bounty_hunters_alltime" class="pb-1">
+                  <h5 class="pr-5 m-0">All</h5>
+                </a>
+              </li>
+              <li ng-class="{active: bounty_hunters == bounty_hunters_month }">
+                <a ng-click="bounty_hunters = bounty_hunters_month" class="pb-1">
+                  <h5 class="pr-5 m-0">90 Days</h5>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div ng-repeat="person in bounty_hunters">
+          <a class="ml-3 mr-3" ng-href="/people/{{person.slug}}" style="float: left">
+            <img ng-src="{{person.image_url_small}}" style="width:50px; height: 50px;" class="img-circle"/>
+          </a>
+          <a ng-href="/people/{{person.slug}}" class="bounty-hunter-name">{{person.display_name}}</a>
+          <br/>
+          <div ng-show="person.bounty_claim_total>0">{{person.bounty_claim_total | dollars}}</div>
+          <div style="clear:left"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -42,11 +42,12 @@ ul.list.narrow-padding {
 }
 
 
-.team-header { background: #444; }
+.team-header { background: #FFF; }
 .team-header a { color: white }
-.team-header h1 { font-size: 40px; margin-bottom: 5px; color: white; margin-top: 0; font-family: 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif; }
+.team-header h1 { font-size: 40px; margin-bottom: 5px; color: #485f64; margin-top: 0; font-family: 'Montserrat', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif; }
+
 .team-header h1 a:hover, .team-header h1 a:active, .team-header h1 a:visited, .team-header h1 a:link { text-decoration: none; }
-.team-header h2 { color: white; font-size: 16px; line-height: 20px; margin-top: 0; padding-bottom: 10px; font-family: 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif; }
+.team-header h2 { color: #485f64; font-size: 20px; line-height: 20px; margin-top: 0; padding-bottom: 10px; font-family: 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif; }
 
 .team-header .team-tags { margin-bottom: 10px; }
 .team-header .team-tags a, .team-header .team-tags { color: #aaa; font-size: 12px }

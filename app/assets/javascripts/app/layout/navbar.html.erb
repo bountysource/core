@@ -1,160 +1,176 @@
 <div class="navbar navbar-default navbar-static-top navbar-bountysource" role="navigation" ng-controller="NavbarController">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      <a class="navbar-brand" href="/" style="padding-top: 10px; padding-bottom: 10px;">
-        <img src='<%= asset_path("Bountysource-green.png") %>' style="max-height: 45px; max-width: 120px;"/>
-      </a>
-    </div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 
-    <div class="collapse navbar-collapse" collapse="!isCollapsed">
-      <!-- Search input -->
-      <div class="col-md-4 col-sm-4">
-        <form class="navbar-form" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
-          <div class="input-group">
-            <input type="text" class="form-control" ng-model="search_typeahead.query" placeholder="Issue URL, Project, Language, etc." typeahead="tag.name for tag in search_typeahead.update_results($viewValue)" typeahead-on-select="search_typeahead.selected($item)" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
-            <div class="input-group-btn">
-              <button class="btn btn-default" type="submit">
-                <i class="glyphicon glyphicon-search"></i>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
+          <a class="navbar-brand" href="/" style="padding-top: 10px; padding-bottom: 10px; display:inline-block">
+            <img src='<%= asset_path("BountysourceanimalMain.png") %>' style="max-height: 50px; max-width: 287px;"/>
+          </a>
+        </div>
+      
+      <div class="collapse navbar-collapse" collapse="!isCollapsed">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" target="_blank">How It Works</a>
+            </li>
+            <li class="dropdown">
+              <a href="https://github.com/bountysource/frontend/wiki/Frequently-Asked-Questions" target="_blank">FAQ</a>
+            </li>
+            
+
+            <!-- About -->
+            <!-- <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="https://github.com/bountysource/frontend/wiki/Frequently-Asked-Questions" target="_blank">FAQ</a></li>
+                <li><a href="/fees">Fees</a></li>
+                <li><a href="/press">Press</a></li>
+              </ul>
+            </li> -->
+
+      <!-- Teams -->
+            <li class="visible-lg visible-md" ng-if="!current_person"><a href="/teams">Teams</a></li>
+
+            <li class="dropdown" ng-if="current_person">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li ng-show="(teams | filter:({is_member:true})).length>0" role="presentation" class="dropdown-header">Your Teams</li>
+                <li ng-repeat="team in teams | filter:({is_member:true}) | orderBy:'-activity_total'"><a ng-href="teams/{{ team.slug }}"><img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url_small }}"></img><span>  {{ team.name }}</span></a></li>
+                <li ng-show="(teams | filter:({is_member:false})).length>0" role="presentation" class="dropdown-header">Suggested Teams</li>
+                <li ng-repeat="team in teams | filter:({is_member:false}) | orderBy:'-activity_total' | limitTo:10"><a ng-href="teams/{{ team.slug }}"><img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url_small }}"></img><span>  {{ team.name }}</span></a></li>
+                <li class="divider"></li>
+                <li><a href="/teams/new"><i class="glyphicon glyphicon-plus"></i> Add Team</a></li>
+                <li><a href="/teams"><i class="glyphicon glyphicon-th-list"></i> See All Teams</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a ng-href="{{env.salt_host}}" target="_blank">SALT <span class="label label-danger">new</span></a>
+            </li>
+         
+          </ul>
 
 
-      <ul class="nav navbar-nav navbar-right">
+      
 
 
         <!-- <li class="dropdown">
           <a ng-href="https://kiwiirc.com/client/chat.freenode.net:+6697/?nick={{(current_person ? (current_person.display_name+'-'+current_person.id | slug): 'anonymous-?') }}#bountysource" target="_blank">IRC Chat</a>
         </li> -->
+         <!-- Search input -->
 
-        <li class="dropdown">
-          <a ng-href="{{env.salt_host}}" target="_blank">Salt <span class="label label-danger">new</span></a>
-        </li>
+        <ul class="nav navbar-nav navbar-right">  
+          <li>
+            <form class="navbar-form" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="search_typeahead.query" placeholder="Search" typeahead="tag.name for tag in search_typeahead.update_results($viewValue)" typeahead-on-selectq="search_typeahead.selected($item)" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search aqua-text"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </li>
 
-        <!-- About -->
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="https://github.com/bountysource/frontend/wiki/Frequently-Asked-Questions" target="_blank">FAQ</a></li>
-            <li><a href="/fees">Fees</a></li>
-            <li><a href="/press">Press</a></li>
-          </ul>
-        </li>
+          <!-- Currency switcher -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="aqua-text rectangle" ng-if="$currency.isUSD()">$</span>
+              <span class="aqua-text rectangle" ng-if="$currency.isBTC()">฿</span>
+              <span class="aqua-text rectangle" ng-if="$currency.isXRP()">XRP</span>
+              <span class="aqua-text rectangle" ng-if="$currency.isMSC()">MSC</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li role="presentation" class="dropdown-header">Choose currency:</li>
+              <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
+              <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
+              <li><a ng-click="$currency.setXRP()">Ripple (XRP)</a></li>
+              <li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>
+            </ul>
+          </li>
 
-	<!-- Teams -->
-        <li class="visible-lg visible-md" ng-if="!current_person"><a href="/teams">Teams</a></li>
+          <li ng-if="cart && !cart.isEmpty()">
+            <a href="/cart">
+              <i class="glyphicon glyphicon-shopping-cart"></i>
+              <span class="label label-info">{{cart.items.length | number:0}}</span>
+            </a>
+          </li>
 
-        <li class="dropdown" ng-if="current_person">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li ng-show="(teams | filter:({is_member:true})).length>0" role="presentation" class="dropdown-header">Your Teams</li>
-            <li ng-repeat="team in teams | filter:({is_member:true}) | orderBy:'-activity_total'"><a ng-href="teams/{{ team.slug }}"><img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url_small }}"></img><span>  {{ team.name }}</span></a></li>
-            <li ng-show="(teams | filter:({is_member:false})).length>0" role="presentation" class="dropdown-header">Suggested Teams</li>
-            <li ng-repeat="team in teams | filter:({is_member:false}) | orderBy:'-activity_total' | limitTo:10"><a ng-href="teams/{{ team.slug }}"><img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url_small }}"></img><span>  {{ team.name }}</span></a></li>
-            <li class="divider"></li>
-            <li><a href="/teams/new"><i class="glyphicon glyphicon-plus"></i> Add Team</a></li>
-            <li><a href="/teams"><i class="glyphicon glyphicon-th-list"></i> See All Teams</a></li>
-          </ul>
-        </li>
+          <!-- User dropdown if logged in -->
+          <li class="dropdown" ng-if="current_person">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img class="img-rounded" ng-src="{{current_person.image_url}}" style="height: 20px; width: 20px; margin-top: -2px" />
+              {{current_person.display_name}}
 
-        <!-- Currency switcher -->
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span ng-if="$currency.isUSD()">$</span>
-            <span ng-if="$currency.isBTC()">฿</span>
-            <span ng-if="$currency.isXRP()">XRP</span>
-            <span ng-if="$currency.isMSC()">MSC</span>
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li role="presentation" class="dropdown-header">Choose currency:</li>
-            <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
-            <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
-            <li><a ng-click="$currency.setXRP()">Ripple (XRP)</a></li>
-            <li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>
-          </ul>
-        </li>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/activity"><i class="glyphicon glyphicon-bullhorn"></i> Activity</a></li>
+              <li><a owner-href="current_person"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+              <li><a href="/tools"><i class="glyphicon glyphicon-wrench"></i> Tools</a></li>
+              <li><a href="activity/cash_outs"><i class="glyphicon glyphicon-gift"></i> Cash Out <span class="label label-primary"  ng-show="current_person.account.balance > 0">{{current_person.account.balance | currency}}</span></a></li>
+              <li role="presentation" class="divider"></li>
 
-        <li ng-if="cart && !cart.isEmpty()">
-          <a href="/cart">
-            <i class="glyphicon glyphicon-shopping-cart"></i>
-            <span class="label label-info">{{cart.items.length | number:0}}</span>
-          </a>
-        </li>
+              <li role="presentation" class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> Settings</li>
+              <li><a href="settings">Profile</a></li>
+              <li><a href="settings/accounts">Linked Accounts</a></li>
+              <li role="presentation" class="divider"></li>
 
-        <!-- User dropdown if logged in -->
-        <li class="dropdown" ng-if="current_person">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img class="img-rounded" ng-src="{{current_person.image_url}}" style="height: 20px; width: 20px; margin-top: -2px" />
-            {{current_person.display_name}}
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="/activity"><i class="glyphicon glyphicon-bullhorn"></i> Activity</a></li>
-            <li><a owner-href="current_person"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
-            <li><a href="/tools"><i class="glyphicon glyphicon-wrench"></i> Tools</a></li>
-            <li><a href="activity/cash_outs"><i class="glyphicon glyphicon-gift"></i> Cash Out <span class="label label-primary"  ng-show="current_person.account.balance > 0">{{current_person.account.balance | currency}}</span></a></li>
-            <li role="presentation" class="divider"></li>
+              <li><a href="#" ng-click="signout()"><i class="glyphicon glyphicon-off"></i> Sign Out</a></li>
+            </ul>
+          </li>
 
-            <li role="presentation" class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> Settings</li>
-            <li><a href="settings">Profile</a></li>
-            <li><a href="settings/accounts">Linked Accounts</a></li>
-            <li role="presentation" class="divider"></li>
+          <!-- Sign in dropdown if not logged in -->
+          <li class="dropdown" ng-controller="SigninController" ng-if="!current_person">
 
-            <li><a href="#" ng-click="signout()"><i class="glyphicon glyphicon-off"></i> Sign Out</a></li>
-          </ul>
-        </li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In </a>
 
-        <!-- Sign in dropdown if not logged in -->
-        <li class="dropdown" ng-controller="SigninController" ng-if="!current_person">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In <b class="caret"></b></a>
-          <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
-            <li role="presentation" class="dropdown-header">Login using:</li>
 
-            <li ng-repeat="provider in providers" role="signin">
-              <!-- Link with Google Analytics event tracking -->
-              <a ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="navbar-provider-{{provider.id}}" ng-click="save_route()" target="_self">
-                <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
-              </a>
-            </li>
-            <li>
-              <a href="/signin">
-                <i class="glyphicon glyphicon-envelope"></i>
-                Email Address
-              </a>
-            </li>
-          </ul>
-        </li>
+            <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
+              <li role="presentation" class="dropdown-header">Login using:</li>
 
-        <!-- Development tools. Environment changer and access token changer. -->
-        <li class="dropdown" ng-if="api_endpoint">
-          <a ng-href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="label label-danger">{{api_endpoint}}</span>
-            <b class="caret"></b>
-          </a>
+              <li ng-repeat="provider in providers" role="signin">
+                <!-- Link with Google Analytics event tracking -->
+                <a ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="navbar-provider-{{provider.id}}" ng-click="save_route()" target="_self">
+                  <span><img ng-src="{{provider.image_url}}"></span>
+                </a>
+              </li>
+              <li>
+                <a href="/signin">
+                  <i class="glyphicon glyphicon-envelope"></i>
+                  Email Address
+                </a>
+              </li>
+            </ul>
+          </li>
 
-          <ul class="dropdown-menu" ng-controller="NavbarController">
-            <li><a href="" ng-click="setEnv('development')">development</a></li>
-            <li><a href="" ng-click="setEnv('staging')">staging</a></li>
-            <li><a href="" ng-click="setEnv('production')">production</a></li>
-            <li class="divider"></li>
-            <li>
-              <a href="" ng-click="openDevToolsModal()">dev tools</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+          <!-- Development tools. Environment changer and access token changer. -->
+          <li class="dropdown" ng-if="api_endpoint">
+            <a ng-href="/people/{{person.slug}}" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="label label-danger">{{api_endpoint}}</span>
+              <b class="caret"></b>
+            </a>
+
+            <ul class="dropdown-menu" ng-controller="NavbarController">
+              <li><a href="" ng-click="setEnv('development')">development</a></li>
+              <li><a href="" ng-click="setEnv('staging')">staging</a></li>
+              <li><a href="" ng-click="setEnv('production')">production</a></li>
+              <li class="divider"></li>
+              <li>
+                <a href="" ng-click="openDevToolsModal()">dev tools</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
     </div>
   </div>
 </div>
 
 <div ng-controller="CanyaAnnouncementController">
-  <div style="background: #ec6333; color: white; text-align: center" ng-if="canyaAnnouncementIsVisible">
+  <div style="background: #e5a22d; color: white; text-align: center" ng-if="canyaAnnouncementIsVisible">
     <a href="#" ng-click="hideCanyaAnnouncement()" style="float: right; color: white; font-size: 20px; margin: 10px 20px 0 0">X</a>
-    <div style="font-size: 35px; padding-top: 20px">Major Announcement: CanYa.io acquires Bountysource.com</div>
+    <div style="font-size: 35px; padding-top: 20px">Major Announcement: CanYa.io acquired Bountysource.com</div>
     <div style="font-size: 25px">CanYa - the world's first blockchain-based marketplace of services will now power the new Bountysource.</div>
     <div style="font-size: 25px; padding-bottom: 20px">Learn more:
       <a style="color: white; text-decoration: underline" target="_blank" href="https://blog.canya.com.au/2017/12/20/canya-acquires-majority-stake-in-bountysource-adds-over-46000-users/">Blog Post</a>

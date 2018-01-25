@@ -1,0 +1,12 @@
+.label-featured {
+  background-color: #4edcca;  
+  display: inline;
+  padding: .4em 1.5em .6em 1.5em;
+  font-size: 100%;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 999px;
+}

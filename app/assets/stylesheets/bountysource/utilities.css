@@ -1,0 +1,59 @@
+.font-weight-regular {
+  font-weight: 400;
+}
+
+.pb-1 { padding-bottom: .25rem; }
+.pb-2 { padding-bottom: .5rem; }
+.pb-3 { padding-bottom: 1rem; }
+
+.mr-1 { margin-right: .25rem; }
+.mr-2 { margin-right: .5rem; }
+.mr-3 { margin-right: 1rem; }
+
+.ml-1 { margin-left: .25rem; }
+.ml-2 { margin-left: .5rem; }
+.ml-3 { margin-left: 1rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: .25rem; }
+.mt-2 { margin-top: .5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
+
+/* Images */
+.img-circle {
+  border-radius: 50%
+}
+
+/*TextColor*/
+.text-gunmetal {
+  color: #485f64;
+}
+
+.text-bright-light-blue {
+  color: #33ccff;
+}
+
+
+/*Text Align Media Queries*/
+
+.text-center-xs { text-align: center; }
+.text-xs-left { text-align: left; }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .text-sm-left { text-align: left; }
+  .text-sm-center { text-align: center; }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .text-md-left { text-align: left; }
+  .text-md-center { text-align: center; }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .text-lg-center { text-align: center; }
+}
