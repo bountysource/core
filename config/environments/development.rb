@@ -24,9 +24,9 @@ Api::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # See everything in the log (default is :info)
-  $stdout.sync = true
-  config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger::DEBUG
+  # $stdout.sync = true
+  # config.logger = Logger.new(STDOUT)
+  # config.logger.level = Logger::DEBUG
 
   # Do not compress assets
   config.assets.compress = false

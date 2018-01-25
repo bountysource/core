@@ -1,7 +1,25 @@
 html,
 body {
   height: 100%;
+  font-family: Montserrat;
   /* The html and body elements cannot have any padding or margin. */
+  color: #485f64;
+}
+
+h1, h2 {
+  font-weight: bold;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+h4 {
+  font-weight: 500;
+}
+
+a {
+  color: #33ccff;
 }
 
 /* Wrapper for page content to push down footer */
@@ -17,45 +35,27 @@ body {
 /* Set the fixed height of the footer here */
 #footer {
   padding-top: 30px;
-  background-color: #333;
-  border-top: 4px solid #129e5e;
-  color: #bbb;
+  background-color: #fff;
+  margin-top: 30px;
+  padding-bottom: 54px;
+}
+
+#footer h5 {
+  font-weight: bold;
+}
+
+/* move margin from navbar to container so we can do full-width backgrounds on team bounty programs */
+
+.footer-logo {
+  width: 324px;
   margin-top: 30px;
 }
 
-#footer a { color: #bbb; }
+#footer a { color: #485f64; }
 
-/* move margin from navbar to container so we can do full-width backgrounds on team bounty programs */
-.navbar-bountysource { border-top: 4px solid #129e5e; margin-bottom: 0; }
-.container_top_margin { margin-top: 20px; }
-
-/* @screen-xs */
-@media (max-width: 767px) {
-  #footer {
-    height: 600px;
-  }
-}
-
-/* @screen-sm */
-@media (min-width: 768px) and (max-width: 991px) {
-  #footer {
-    height: 320px;
-  }
-}
-
-/* @screen-md */
-@media (min-width: 992px) and (max-width: 1199px) {
-  #footer {
-    height: 230px;
-    padding-left: 30px;
-  }
-}
-
-/* @screen-lg */
-@media (min-width: 1200px) {
-  #footer {
-    height: 200px;
-  }
+.top-border { 
+  height: 10px;
+  background-image: linear-gradient(to left, #33ccff, #4edcca);
 }
 
 /* Top Backers Table */
@@ -107,35 +107,10 @@ input[type="text"]:disabled.white-input  {
   background-color: white;
 }
 
-.img-responsive { width: 100%;}
-
 .row-condensed *[class^="col-"] { padding: 0 5px; }
 .row-condensed *[class^="col-"]:first-of-type { padding-left: 10px !important; }
 .row-condensed *[class^="col-"]:last-of-type { padding-right: 10px !important; }.markdown img { max-width: 100%; }
 
-.panel-heading.narrow { padding-top: 0px; padding-bottom: 0px;}
-.panel-body.narrow { padding-top: 0px; padding-bottom: 0px; }
-.panel.no-margin { margin-bottom: 0px;}
-
-
-.panel-green {
-  border-color: #129e5e;
-}
-.panel-green > .panel-heading {
-  color: white;
-  background-color: #129e5e;
-  border-color: #129e5e;
-}
-.panel-green > .panel-heading + .panel-collapse .panel-body {
-  border-top-color: #129e5e;
-}
-.panel-green > .panel-footer + .panel-collapse .panel-body {
-  border-bottom-color: #129e5e;
-}
-
-.panel-green-background {
-  background-color: #ecfde4;
-}
 .bounty-hunter-blue-bottom-border {
   border-bottom: 1px solid #428bca;
 }
@@ -203,45 +178,7 @@ n10= n9*x1
 .top-backers li:nth-child(10){ width: 0.8130618755787621%; }
 
 
-.progress {
-  position: relative;
-}
-.progress .progress-full-text {
-  position: absolute;
-  display: block;
-  width: 100%;
-}
 
-
-.panel-no-border { border-width: 0; background: none; }
-.panel-no-border .panel-heading { border-top-right-radius: 6px; border-top-left-radius: 6px; border-bottom: 0; }
-.panel-no-border .panel-body { border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; background: white; }
-.panel-bold.panel-danger { border-color: #d9534f; }
-.panel-bold.panel-danger .panel-heading { background-color: #d9534f; color: white; }
-.panel-bold.panel-success { border-color: #5cb85c; }
-.panel-bold.panel-success .panel-heading { background-color: #5cb85c; color: white; }
-
-
-.featured-header { background:#555; padding: 10px 0 15px; margin-bottom: 10px; color: #ccc; box-shadow: inset 0 8px 8px -8px rgba(0,0,0,0.7), inset 0 -8px 8px -8px rgba(0,0,0,0.7); }
-.featured-header { font-size: 0; }
-.featured-header h3 { font-size: 13px; color: #888; margin: 0 0 4px; font-weight: normal; }
-.featured-header img { border-radius: 6px; }
-/* big screens, 10 across */
-@media (min-width: 768px) {
-  .featured-header img { width:8.5%; margin-left: 1.66666%;  }
-  .featured-header a:nth-of-type(1) img { margin-left: 0%;  }
-}
-/* small screens, two rows of 5 */
-@media (max-width: 768px) {
-  .featured-header img { width:17%; margin-left: 3.5% }
-  .featured-header a:nth-of-type(1) img,
-  .featured-header a:nth-of-type(2) img,
-  .featured-header a:nth-of-type(3) img,
-  .featured-header a:nth-of-type(4) img,
-  .featured-header a:nth-of-type(5) img { margin-bottom: 3.5%; }
-
-  .featured-header a:nth-of-type(1) img, .featured-header a:nth-of-type(6) img { margin-left: 0%;  }
-}
 
 .ellipsis {
   display: block;

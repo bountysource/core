@@ -9,7 +9,7 @@
 
         %div{ "ng-if"=>"is_admin" }
           .inline-form-editor-content{ "ng-show"=>"!form_data.editing_description && team.homepage_markdown" }
-            %a.btn.btn-sm.btn-primary{ "ng-click"=>"form_data.start_editing()", "class"=>"markdown-hover-edit-link" }
+            %a.btn.btn-sm.btn-light-blue{ "ng-click"=>"form_data.start_editing()", "class"=>"markdown-hover-edit-link" }
               %span.glyphicon.glyphicon-cog
               Edit
             %target-blank{ "model"=>"team.homepage_markdown" }
@@ -25,19 +25,19 @@
               .form-group
                 .row
                   %div{ "ng-class"=>"{ 'col-md-12': !markdown_side_by_side, 'col-md-6': markdown_side_by_side }", "style"=>"margin-bottom:10px"}
-                    %label{:for => "body_markdown"} Markdown
+                    %h3{:for => "body_markdown"} Markdown
                     %textarea#body_markdown.form-control{"msd-elastic" => "", "ng-model" => "form_data.homepage_markdown", :placeholder => "Markdown", :style => "min-height:100px"}
                   %div{ "ng-class"=>"{ 'col-md-12': !markdown_side_by_side, 'col-md-6': markdown_side_by_side }"}
                     %a.pull-right{ "ng-click"=> "markdown_side_by_side=!markdown_side_by_side" }
                       %span.glyphicon.glyphicon-resize-small{ "ng-show"=>"!markdown_side_by_side"}
                       %span.glyphicon.glyphicon-resize-full{ "ng-show"=>"markdown_side_by_side"}
 
-                    %label Preview
+                    %h3 Preview
                     %target-blank{:model => "edit_markdown_preview"}
-                      .well.markdown.markdown-small-headers{"btf-markdown" => "edit_markdown_preview", :style => "min-height:100px"}
-                %button.btn.btn-primary{"ng-disabled" => "saving_form", :type => "submit"}
+                      .markdown.markdown-small-headers{"btf-markdown" => "edit_markdown_preview", :style => "min-height:100px"}
+                %button.btn.btn-light-blue.btn-long{"ng-disabled" => "saving_form", :type => "submit"}
                   %span{"ng-show" => "saving_form"} Saving...
-                  %span{"ng-hide" => "saving_form"} Update Description
+                  %span{"ng-hide" => "saving_form"} Update
                 %a.btn.btn-default{"ng-click"=>"form_data.cancel_editing()", "ng-hide"=>"saving_form"} Cancel
 
         -# %h3{ "ng-show"=>"included_teams.length>0"} Related Teams

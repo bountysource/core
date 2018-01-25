@@ -5,10 +5,12 @@
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row">
           <div class="col-xs-3 col-sm-2">
-            <img ng-src="{{(tracker || issue.tracker).image_url_medium}}" class="img-rounded img-responsive" style="background: white" />
+            <img ng-src="{{(tracker || issue.tracker).image_url_medium}}" class="img-circle img-responsive" style="background: white" />
           </div>
           <div class="col-xs-9 col-sm-10">
-            <h1><a ng-href="/trackers/{{issue.tracker.slug}}">{{(tracker || issue.tracker).display_name}}</a></h1>
+            <a ng-href="/trackers/{{issue.tracker.slug}}" class="text-gunmetal">
+              <h1>{{(tracker || issue.tracker).display_name}}</h1>
+            </a>
             <h2>{{(tracker || issue.tracker).description}}</h2>
           </div>
         </div>

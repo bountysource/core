@@ -81,7 +81,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rdoc'
-  gem 'sql-logging'
   gem 'annotate', '~> 2.6.5'
 end
 

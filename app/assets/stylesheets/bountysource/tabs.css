@@ -1,0 +1,37 @@
+.nav-tabs {
+  border: 0;
+}
+
+.nav-tabs > li > a {
+  border: 0;
+  font-size: 16px;
+  text-align: left;
+  border-bottom: 5px solid #33ccff4c;
+  margin-right: 0;
+  color: #485f64;
+}
+
+.nav-tabs > li > a:hover, 
+.nav-tabs > li > a:focus {
+  background-color: #33ccff;
+  border-bottom: 5px solid #33ccff4c;
+}
+
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus {
+  border: 0;
+  border-bottom: 5px solid #33ccff;
+}
+
+.nav-tabs-sm > li > a {
+  font-size: 14px;
+  color: #919d9d;
+}
+
+.nav-tabs-sm > li.active > a, 
+.nav-tabs-sm > li.active > a:hover, 
+.nav-tabs-sm > li.active > a:focus {
+  color: #33ccff;
+  font-weight: 500;
+}

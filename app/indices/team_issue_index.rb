@@ -11,7 +11,7 @@ ThinkingSphinx::Index.define(:issue_rank, :name => "team_issue", :with => :activ
 
   has issue.bounty_total
   has issue.can_add_bounty
-  has issue.tracker.team_id
+  has issue.tracker.team_id, as: :tracker_team_ids
   has issue.participants_count
   has issue.thumbs_up_count
   has issue.remote_created_at

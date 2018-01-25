@@ -1,7 +1,7 @@
 <div ng-controller="TeamIssuesController">
   <div team-view team="team">
     <!--Issue filter box-->
-    <div class="well well-sm">
+    <div class="">
       <div class="row">
         <div class="col-xs-8 col-sm-8 col-md-8">
           <form class="form" ng-submit="$parent.$parent.getIssues(1)">
@@ -9,7 +9,9 @@
               <div class="input-group">
                 <input type="text" class="form-control" ng-model="$parent.$parent.search" placeholder="Search issues"></input>
                 <span class="input-group-btn">
-                  <button class="btn btn-primary">Search</button>
+                  <button class="btn btn-default btn-small-radius bl-0" type="submit">
+                    <i class="glyphicon glyphicon-search text-aqua"></i>
+                  </button>
                 </span>
               </div>
             </div>

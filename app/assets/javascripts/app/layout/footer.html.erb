@@ -1,0 +1,21 @@
+<div class="top-border"></div>
+<div class="container">
+  <div class='text-center text-md-left'>
+    <%= image_tag 'logos/main.svg', class: 'footer-logo', alt: 'footer-logo' %>
+  </div>
+  
+  <div class="row text-center text-md-left mt-5">
+    <div class="col-md-3 col-sm-6 col-xs-12 pb-2">
+      <ng-include src="'app/layout/templates/footerPullRequests.html'"></ng-include>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12 pb-2">
+      <ng-include src="'app/layout/templates/footerCompany.html'"></ng-include>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12 pb-2">
+      <ng-include src="'app/layout/templates/footerContactUs.html'"></ng-include>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12 pb-2">
+      <ng-include src="'app/layout/templates/footerLegal.html'"></ng-include>
+    </div>
+  </div>
+</div>

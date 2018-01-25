@@ -323,8 +323,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sql-logging (3.0.8)
-      rails (> 3.0.0)
     stripe (1.20.3)
       json (~> 1.8.1)
       mime-types (>= 1.25, < 3.0)
@@ -421,7 +419,6 @@ DEPENDENCIES
   selenium-webdriver (~> 2.42.0)
   shoulda-matchers
   slack-notifier
-  sql-logging
   stripe
   therubyracer
   thin
@@ -436,4 +433,4 @@ RUBY VERSION
    ruby 2.2.8p477
 
 BUNDLED WITH
-   1.15.4
+   1.16.1

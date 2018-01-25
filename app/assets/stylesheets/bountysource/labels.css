@@ -1,0 +1,25 @@
+.label {
+  border-radius: 999px;
+}
+
+.label-info {
+  background-color: #33CCFF;
+}
+
+.label-featured {
+  background-color: #4edcca;  
+}
+
+.badge-info {
+  background-color: #33ccff;
+}
+
+.label-long {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+
+.label-lg {
+  font-size: 100%;
+  font-weight: 400;
+}

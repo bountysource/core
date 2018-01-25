@@ -1,10 +1,16 @@
 <div>
   <div team-view team="team">
     <ul class="thumbnails list-unstyled">
-      <li class="col-md-2 member-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
-        <a ng-href="/people/{{member.slug}}" class="thumbnail team-member-card">
-          <img ng-src="{{member.medium_image_url}}">
-          {{member.display_name}}
+      <li class="col-md-3 col-sm-4 col-xs-12 ember-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
+        <a ng-href="/people/{{member.slug}}" class="thumbnail team-member-card text-dark">
+          <div class="row display-flex p-4">
+            <div class="col-xs-4 vertical-align-middle">
+              <img class="img-responsive img-circle" ng-src="{{member.medium_image_url}}">  
+            </div>
+            <div class="col-xs-8 vertical-align-middle">
+              <span class="font-weight-semibold">{{member.display_name}}</span>  
+            </div>
+          </div>
         </a>
       </li>
     </ul>
