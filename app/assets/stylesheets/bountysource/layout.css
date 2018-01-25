@@ -219,7 +219,8 @@ n10= n9*x1
 .panel-bold.panel-danger { border-color: #d9534f; }
 .panel-bold.panel-danger .panel-heading { background-color: #d9534f; color: white; }
 .panel-bold.panel-success { border-color: #5cb85c; }
-.panel-bold.panel-success .panel-heading { background-color: #4a4a4a; color: white; }
+.panel-bold.panel-success .panel-heading { background-color: #485f64; color: white; }
+
 
 
 .featured-header { background:#555; padding: 10px 0 15px; margin-bottom: 10px; color: #ccc; box-shadow: inset 0 8px 8px -8px rgba(0,0,0,0.7), inset 0 -8px 8px -8px rgba(0,0,0,0.7); }
