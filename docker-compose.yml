@@ -1,7 +1,6 @@
 version: '3'
 volumes:
   database:
-  app:
   search_conf:
 services:
   pgsql:
@@ -17,10 +16,11 @@ services:
     links:
       - pgsql
     volumes:
-      - app:/app
+      - .:/app
       - search_conf:/usr/local/etc/
   bountysource:
     container_name: bountysource
+    image: bountysource
     env_file: .env.dev
     links:
       - pgsql
@@ -31,4 +31,4 @@ services:
       - "3000:3000"
     command: rails s
     volumes:
-      - app:/app
+      - .:/app

@@ -1,7 +1,6 @@
 version: '3'
 volumes:
   database:
-  app:
   search_conf:
 services:
   setup:
@@ -11,7 +10,7 @@ services:
     links:
       - pgsql
     volumes:
-      - app:/app
+      - .:/app
       - search_conf:/sphinx
   seed:
     image: bountysource
@@ -21,7 +20,7 @@ services:
       - pgsql
       - sphinx
     volumes:
-      - app:/app
+      - .:/app
   test:
     image: bountysource
     env_file: .env.test
@@ -32,4 +31,4 @@ services:
       - pgsql
       - sphinx
     volumes:
-      - app:/app
+      - .:/app
