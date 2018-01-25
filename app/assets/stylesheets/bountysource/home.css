@@ -6,7 +6,9 @@
 .homepage .team-header h2 { text-align: center; margin: 20px 0 40px 0; font-weight: normal; }
 .homepage .team-header h4 { font-size:16px; margin:10px 0 20px; text-align: center; }
 
-
+.btn-blue {
+	background-color: #33ccff;
+}
 
 @media (max-width: 767px) { /* @screen-xs */
   .homepage .team-header h1 { font-size: 30px; }
