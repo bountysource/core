@@ -8,13 +8,16 @@
 
 .btn-blue {
 	background-color: #33ccff;
+	border-radius: 18px;
 }
 
 .btn-green {
 	background-color: #4edcca;
+	border-radius: 18px;
 }
 .btn-red {
-	background-color: #ff6666
+	background-color: #ff6666;
+	border-radius: 18px;
 }
 
 .aqua-text{
