@@ -17,6 +17,10 @@
 	background-color: #ff6666
 }
 
+.aqua-text{
+	color: #33ccff;
+}
+
 @media (max-width: 767px) { /* @screen-xs */
   .homepage .team-header h1 { font-size: 30px; }
   .homepage .team-header h2 { font-size: 24px; }
