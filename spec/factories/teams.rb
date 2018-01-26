@@ -43,5 +43,9 @@ FactoryGirl.define do
   factory :team do
     sequence(:name) { |n| "Generic Team ##{n}" }
     sequence(:slug) { |n| "team-#{n}" }
+
+    trait :accepts_public_payins do
+      accepts_public_payins true
+    end
   end
 end
