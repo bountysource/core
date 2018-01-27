@@ -20,7 +20,7 @@
 #  index_payment_notifications_on_type      (type)
 #
 
-class PaymentNotification::Paypal < PaymentNotification
+class PaymentNotification::PayPal < PaymentNotification
 
   def params
     @params ||= Rack::Utils.parse_nested_query(raw_post).with_indifferent_access
@@ -80,20 +80,20 @@ class PaymentNotification::Paypal < PaymentNotification
   end
 
   def checkout_method
-    Account::Paypal.instance
+    Account::PayPal.instance
   end
 
   # find or create the order
   def process_order
-    Transaction::Order::Paypal.find_by_id(shopping_cart.order_id) || Transaction::Order::Paypal.create_from_payment_notification(notification_id: self.id)
+    Transaction::Order::PayPal.find_by_id(shopping_cart.order_id) || Transaction::Order::PayPal.create_from_payment_notification(notification_id: self.id)
   end
 
   private
 
-  # POST back to Paypal to protect against spoofing
+  # POST back to PayPal to protect against spoofing
   def post_back(raw_post)
     if Rails.env.test?
-      raise "PaymentNotification::Paypal(#{id}) trying to POST back verify in test. Stub out :post_back to 'VERIFIED' for successful verification"
+      raise "PaymentNotification::PayPal(#{id}) trying to POST back verify in test. Stub out :post_back to 'VERIFIED' for successful verification"
     end
 
     uri = URI.parse(Api::Application.config.paypal[:checkout_url])
