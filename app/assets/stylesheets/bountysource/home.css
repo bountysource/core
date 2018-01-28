@@ -1,28 +1,38 @@
 .navbar { transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); }
 
+.illustration img {
+ 	width: 100%;
+ 	display: block;
+}
 
-.homepage .team-header h1, .homepage .team-header h2 { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
+.homepage .team-header h1, .homepage .team-header h2 { font-family: 'Montserrat', "Helvetica Neue",Helvetica,Arial,sans-serif; }
 .homepage .team-header h1 { text-align: center; margin: 20px 0 20px 0; font-weight: bold; }
 .homepage .team-header h2 { text-align: center; margin: 20px 0 40px 0; font-weight: normal; }
 .homepage .team-header h4 { font-size:16px; margin:10px 0 20px; text-align: center; }
 
-.btn-blue {
-	background-color: #33ccff;
+.btn-post {
+ 	background-image: linear-gradient(to right, #0078bf, #33ccff);
+ 	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
+ 	border-radius: 18px;
+}
+ 
+.input-style {
+	background-color: #b2c1ce;
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
+	border-radius: 18px;
+}
+ 
+.btn-team {
+ 	background-image: linear-gradient(to right, #33ccff, #4edcca);
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
+ 	border-radius: 18px;
+ }
+.btn-bounty {
+	background-image: linear-gradient(to right, #ffc600, #ff6666);
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
 	border-radius: 18px;
 }
 
-.btn-green {
-	background-color: #4edcca;
-	border-radius: 18px;
-}
-.btn-red {
-	background-color: #ff6666;
-	border-radius: 18px;
-}
-
-.aqua-text{
-	color: #33ccff;
-}
 
 @media (max-width: 767px) { /* @screen-xs */
   .homepage .team-header h1 { font-size: 30px; }
@@ -31,10 +41,10 @@
 
 @media (min-width: 768px) and (max-width: 991px) { /* @screen-sm */
   .homepage .team-header h1 { font-size: 40px; }
-  .homepage .team-header h2 { font-size: 32px; }
+  .homepage .team-header h2 { font-size: 20px; }
 }
 
 @media (min-width: 992px) { /* @screen-md @screen-lg*/
-  .homepage .team-header h1 { font-size: 50px; }
-  .homepage .team-header h2 { font-size: 34px; }
+  .homepage .team-header h1 { font-size: 40px; }
+  .homepage .team-header h2 { font-size: 20px; }
 }
