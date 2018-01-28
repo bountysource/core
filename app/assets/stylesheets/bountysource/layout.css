@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  font-family: Montserrat;
   /* The html and body elements cannot have any padding or margin. */
 }
 
