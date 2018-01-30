@@ -118,6 +118,14 @@ input[type="text"]:disabled.white-input  {
 .panel-body.narrow { padding-top: 0px; padding-bottom: 0px; }
 .panel.no-margin { margin-bottom: 0px;}
 
+.panel-title {
+  font-size: 24px;
+}
+.add-team {
+  font-family: Montserrat;
+  letter-spacing: -0.6px;
+  color: #33ccff;
+}
 
 .panel-green {
   border-color: #129e5e;
@@ -220,7 +228,7 @@ n10= n9*x1
 .panel-bold.panel-danger { border-color: #d9534f; }
 .panel-bold.panel-danger .panel-heading { background-color: #d9534f; color: white; }
 .panel-bold.panel-success { border-color: #5cb85c; }
-.panel-bold.panel-success .panel-heading { background-color: #485f64; color: white; }
+.panel-bold.panel-success .panel-heading { background-color: #FFF; color: #33ccff; }
 
 
 
