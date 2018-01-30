@@ -7,6 +7,7 @@
 
 }
 
+
 .logo {
 	flex-basis: 20%;
 }
@@ -68,6 +69,27 @@
 	border-radius: 18px;
 }
 
+<<<<<<< HEAD
+=======
+.aqua-text{
+	color: #33ccff;
+	width: 24px;
+	height: 23px;
+	font-family: Montserrat;
+	font-size: 20px;
+	color: #33ccff;
+
+}
+
+
+
+.rectangle {
+	width: 36px;
+	height: 36px;
+	border-radius: 2px;
+	border: solid 1px #d1d1d1;
+}
+>>>>>>> Remove dropdown icon
 
 @media (max-width: 767px) { /* @screen-xs */
   .homepage .team-header h1 { font-size: 30px; }

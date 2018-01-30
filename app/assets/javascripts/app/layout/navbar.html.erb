@@ -86,8 +86,8 @@
               <span class="aqua-text rectangle" ng-if="$currency.isBTC()">฿</span>
               <span class="aqua-text rectangle" ng-if="$currency.isXRP()">XRP</span>
               <span class="aqua-text rectangle" ng-if="$currency.isMSC()">MSC</span>
-              
             </a>
+
             <ul class="dropdown-menu">
               <li role="presentation" class="dropdown-header">Choose currency:</li>
               <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
@@ -109,7 +109,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img class="img-rounded" ng-src="{{current_person.image_url}}" style="height: 20px; width: 20px; margin-top: -2px" />
               {{current_person.display_name}}
-              
+
             </a>
             <ul class="dropdown-menu">
               <li><a href="/activity"><i class="glyphicon glyphicon-bullhorn"></i> Activity</a></li>
@@ -129,7 +129,9 @@
 
           <!-- Sign in dropdown if not logged in -->
           <li class="dropdown" ng-controller="SigninController" ng-if="!current_person">
+
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In </a>
+
             <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
               <li role="presentation" class="dropdown-header">Login using:</li>
 
