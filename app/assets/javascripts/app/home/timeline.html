@@ -21,9 +21,9 @@
 
                   <form class="form-inline" ng-submit="submit_search()" ng-controller="NavbarSearchController">
                     <div class="input-group">
-                      <input type="text" class="search-query form-control" ng-model="form_data.url" placeholder="http://github.com/.../issues/123">
+                      <input type="text" class="search-query form-control input-style" ng-model="form_data.url" placeholder="http://github.com/.../issues/123">
                       <div class="input-group-btn">
-                        <button type="submit" class="btn btn-blue">Post</button>
+                        <button type="submit" class="btn btn-post">Post</button>
                       </div>
                     </div>
                   </form>
@@ -42,7 +42,7 @@
                   <h4>Manage every of your team.</h4>
 
                   <div style="text-align: center">
-                    <a ng-href="/teams/new" class="btn btn-green"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
+                    <a ng-href="/teams/new" class="btn btn-team"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
                   </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                   <h4>Earn money contributing to OSS.</h4>
 
                   <div style="text-align: center">
-                    <a ng-href="/bounties/search" class="btn btn-red"><span class="glyphicon glyphicon-search"></span> Find Bounties</a>
+                    <a ng-href="/bounties/search" class="btn btn-bounty"><span class="glyphicon glyphicon-search"></span> Find Bounties</a>
                   </div>
                 </div>
               </div>
