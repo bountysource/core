@@ -5,7 +5,7 @@
         <div class="navbar-header logo">
           <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
           <a class="navbar-brand" href="/" style="padding-top: 10px; padding-bottom: 10px;">
-            <img src='<%= asset_path("BountysourceanimalMain.png") %>' style="max-height: 45px; max-width: 120px;"/>
+            <img src='<%= asset_path("BountysourceanimalMain.png") %>' style="height: 61px; width: 287px;"/>
           </a>
         </div>
       <!-- </div> -->
@@ -62,7 +62,7 @@
           <a ng-href="https://kiwiirc.com/client/chat.freenode.net:+6697/?nick={{(current_person ? (current_person.display_name+'-'+current_person.id | slug): 'anonymous-?') }}#bountysource" target="_blank">IRC Chat</a>
         </li> -->
          <!-- Search input -->
-      <div class="searchbar offset-md-2 col-md-4 col-sm-4">
+      <div class="searchbar col-md-4 col-sm-4">
         <form class="navbar-form" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
           <div class="input-group">
             <input type="text" class="form-control" ng-model="search_typeahead.query" placeholder="Search" typeahead="tag.name for tag in search_typeahead.update_results($viewValue)" typeahead-on-selectq="search_typeahead.selected($item)" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
