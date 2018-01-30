@@ -25,12 +25,20 @@
 	justify-content: flex-end;
 }
 
+<<<<<<< HEAD
 .illustration img {
  	width: 100%;
  	display: block;
 }
 
 
+=======
+.background {
+	display: flex;
+	justify-content: center;
+}
+
+>>>>>>> Added background image
 .homepage .team-header h1, .homepage .team-header h2 { font-family: 'Montserrat', "Helvetica Neue",Helvetica,Arial,sans-serif; }
 .homepage .team-header h1 { text-align: center; margin: 20px 0 20px 0; font-weight: bold; }
 .homepage .team-header h2 { text-align: center; margin: 20px 0 40px 0; font-weight: normal; }
