@@ -75,10 +75,11 @@
 
 @media (min-width: 768px) and (max-width: 991px) { /* @screen-sm */
   .homepage .team-header h1 { font-size: 40px; }
-  .homepage .team-header h2 { font-size: 32px; }
+  .homepage .team-header h2 { font-size: 20px; }
 }
 
 @media (min-width: 992px) { /* @screen-md @screen-lg*/
-  .homepage .team-header h1 { font-size: 50px; }
-  .homepage .team-header h2 { font-size: 34px; }
+  .homepage .team-header h1 { font-size: 40px; }
+  .homepage .team-header h2 { font-size: 20px; }
 }
+
