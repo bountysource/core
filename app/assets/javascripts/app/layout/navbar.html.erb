@@ -5,7 +5,7 @@
         <div class="navbar-header logo">
           <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
           <a class="navbar-brand" href="/" style="padding-top: 10px; padding-bottom: 10px;">
-            <img src='<%= asset_path("BountysourceanimalMain.png") %>' style="height: 61px; width: 287px;"/>
+            <img src='<%= asset_path("BountysourceanimalMain.png") %>' style="max-height: 40px; max-width: 250px;"/>
           </a>
         </div>
       <!-- </div> -->
@@ -134,7 +134,7 @@
               <li ng-repeat="provider in providers" role="signin">
                 <!-- Link with Google Analytics event tracking -->
                 <a ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="navbar-provider-{{provider.id}}" ng-click="save_route()" target="_self">
-                  <span><img ng-src="{{provider.image_url}}"> {{provider.name}}</span>
+                  <span><img ng-src="{{provider.image_url}}"></span>
                 </a>
               </li>
               <li>
