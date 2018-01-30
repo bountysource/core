@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	
+
 }
 
 .logo {
@@ -25,11 +25,11 @@
 	justify-content: flex-end;
 }
 
-
 .illustration img {
  	width: 100%;
  	display: block;
 }
+
 
 .homepage .team-header h1, .homepage .team-header h2 { font-family: 'Montserrat', "Helvetica Neue",Helvetica,Arial,sans-serif; }
 .homepage .team-header h1 { text-align: center; margin: 20px 0 20px 0; font-weight: bold; }
@@ -53,6 +53,7 @@
 	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
  	border-radius: 18px;
  }
+
 .btn-bounty {
 	background-image: linear-gradient(to right, #ffc600, #ff6666);
 	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
