@@ -309,17 +309,17 @@ n10= n9*x1
   height: 100%;
 }
 
-.navbar-nav>li>a {
+/*.navbar-nav>li>a {
   padding-top: 27px;
   padding-bottom: 28px;
   font-size: 16px;
-}
+}*/
 
 .navbar-form .input-group-btn {
   width: auto;
 }
 
-.navbar-form {
+/*.navbar-form {
   padding-top: 12px;
   padding-bottom: 13px;
-}
+}*/
