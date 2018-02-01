@@ -27,7 +27,9 @@ body {
 #footer a { color: #bbb; }
 
 /* move margin from navbar to container so we can do full-width backgrounds on team bounty programs */
+
 .navbar-bountysource { margin-bottom: 0; }
+
 
 .navbar-default {
   background-color: #FFF;
