@@ -240,6 +240,16 @@ n10= n9*x1
 @media (min-width: 768px) {
   .featured-header img { width:8.5%; margin-left: 1.66666%;  }
   .featured-header a:nth-of-type(1) img { margin-left: 0%;  }
+  .navbar-nav>li>a {
+    padding-top: 27px;
+    padding-bottom: 28px;
+    font-size: 16px;
+  }
+  .navbar-form {
+    padding-top: 12px;
+    padding-bottom: 13px;
+  }
+
 }
 /* small screens, two rows of 5 */
 @media (max-width: 768px) {
@@ -264,17 +274,17 @@ n10= n9*x1
   height: 100%;
 }
 
-.navbar-nav>li>a {
+/*.navbar-nav>li>a {
   padding-top: 27px;
   padding-bottom: 28px;
   font-size: 16px;
-}
+}*/
 
 .navbar-form .input-group-btn {
   width: auto;
 }
 
-.navbar-form {
+/*.navbar-form {
   padding-top: 12px;
   padding-bottom: 13px;
-}
+}*/
