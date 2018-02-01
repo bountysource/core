@@ -1,9 +1,12 @@
-.navbar { 
+/*.navbar { 
 	transform: translate3d(0,0,0); 
 	-webkit-transform: translate3d(0,0,0); 
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
 
 }
-
+*/
 
 /*.logo {
 	flex-basis: 20%;
@@ -28,10 +31,7 @@
 	display: block;
 }
 
-.background {
-	display: flex;
-	justify-content: center;
-}
+
 
 .homepage .team-header h1, .homepage .team-header h2 { font-family: 'Montserrat', "Helvetica Neue",Helvetica,Arial,sans-serif; }
 .homepage .team-header h1 { text-align: center; margin: 20px 0 20px 0; font-weight: bold; }
