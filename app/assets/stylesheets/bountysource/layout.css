@@ -326,6 +326,11 @@ n10= n9*x1
 .input-group .input-group-btn:last-child>.btn {
   border-radius: 0px;
 }
+
+button.navbar-toggle {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
 /*.navbar-form {
   padding-top: 12px;
   padding-bottom: 13px;
