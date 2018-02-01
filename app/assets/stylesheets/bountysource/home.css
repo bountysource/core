@@ -66,16 +66,6 @@
 
 }
 
-.rectangle {
-	-webkit-appearance: none;
-    -moz-appearance: none;
-    text-indent: 1px;
-    text-overflow: '';
-	width: 36px;
-	height: 36px;
-	border-radius: 2px;
-	border: solid 1px #d1d1d1;
-}
 
 @media (max-width: 767px) { /* @screen-xs */
   .homepage .team-header h1 { font-size: 30px; }

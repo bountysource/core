@@ -250,6 +250,7 @@ n10= n9*x1
     padding-top: 27px;
     padding-bottom: 28px;
     font-size: 16px;
+    font-weight: bold;
   }
   .navbar-form {
     padding-top: 12px;
@@ -306,3 +307,9 @@ button.navbar-toggle {
   padding-top: 12px;
   padding-bottom: 13px;
 }*/
+
+.rectangle {
+  border: solid 1px #d1d1d1;
+  padding: 6px 12px 7px 12px;
+}
+
