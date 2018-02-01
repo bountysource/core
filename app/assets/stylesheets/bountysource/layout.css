@@ -319,6 +319,13 @@ n10= n9*x1
   width: auto;
 }
 
+.input-group .form-control {
+  border-radius: 0px;
+}
+
+.input-group .input-group-btn:last-child>.btn {
+  border-radius: 0px;
+}
 /*.navbar-form {
   padding-top: 12px;
   padding-bottom: 13px;
