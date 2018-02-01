@@ -1,14 +1,11 @@
 .navbar { 
 	transform: translate3d(0,0,0); 
 	-webkit-transform: translate3d(0,0,0); 
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
 
 }
 
 
-.logo {
+/*.logo {
 	flex-basis: 20%;
 }
 
@@ -24,6 +21,11 @@
 .nav-right {
 	flex-basis: 15%;
 	justify-content: flex-end;
+}*/
+
+.illustration img {
+	width: 100%;
+	display: block;
 }
 
 .background {
@@ -61,17 +63,14 @@
 
 .aqua-text{
 	color: #33ccff;
-	width: 24px;
-	height: 23px;
-	font-family: Montserrat;
-	font-size: 20px;
-	color: #33ccff;
 
 }
 
-
-
 .rectangle {
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
 	width: 36px;
 	height: 36px;
 	border-radius: 2px;
