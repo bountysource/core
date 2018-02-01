@@ -1,6 +1,7 @@
 version: '3'
 volumes:
   database:
+  app:
   search_conf:
 services:
   pgsql:
