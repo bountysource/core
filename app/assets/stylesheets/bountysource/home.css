@@ -31,24 +31,6 @@
 	display: block;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-.illustration img {
- 	width: 100%;
- 	display: block;
-}
-
-
-=======
-.background {
-	display: flex;
-	justify-content: center;
-}
-=======
-
->>>>>>> Fixed background image display
-
->>>>>>> Added background image
 .homepage .team-header h1, .homepage .team-header h2 { font-family: 'Montserrat', "Helvetica Neue",Helvetica,Arial,sans-serif; }
 .homepage .team-header h1 { text-align: center; margin: 20px 0 20px 0; font-weight: bold; }
 .homepage .team-header h2 { text-align: center; margin: 20px 0 40px 0; font-weight: normal; }
@@ -78,8 +60,7 @@
 	border-radius: 18px;
 }
 
-<<<<<<< HEAD
-=======
+
 .aqua-text{
 	color: #33ccff;
 
@@ -95,7 +76,7 @@
 	border-radius: 2px;
 	border: solid 1px #d1d1d1;
 }
->>>>>>> Remove dropdown icon
+
 
 @media (max-width: 767px) { /* @screen-xs */
   .homepage .team-header h1 { font-size: 30px; }

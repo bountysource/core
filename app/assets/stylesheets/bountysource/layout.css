@@ -337,3 +337,9 @@ button.navbar-toggle {
   padding-top: 12px;
   padding-bottom: 13px;
 }*/
+
+.rectangle {
+  border: solid 1px #d1d1d1;
+  padding: 6px 12px 7px 12px;
+}
+
