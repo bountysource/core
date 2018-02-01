@@ -1,17 +1,29 @@
 <div class="navbar navbar-default navbar-static-top navbar-bountysource" role="navigation" ng-controller="NavbarController">
   <div class="container">
+<<<<<<< HEAD
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 
 
+=======
+    <!-- <div class="row"> -->
+      <!-- <div class="col-md-2"> -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+>>>>>>> Change navbar spacing
           <a class="navbar-brand" href="/" style="padding-top: 10px; padding-bottom: 10px; display:inline-block">
             <img src='<%= asset_path("BountysourceanimalMain.png") %>' style="max-height: 50px; max-width: 287px;"/>
           </a>
         </div>
       
       <div class="collapse navbar-collapse" collapse="!isCollapsed">
+<<<<<<< HEAD
           <ul class="nav navbar-nav">
 
+=======
+        <!-- <div class="col-md-4"> -->
+        <ul class="nav navbar-nav">
+>>>>>>> Change navbar spacing
             <li class="dropdown">
               <a href="#" target="_blank">How It Works</a>
             </li>
@@ -60,11 +72,20 @@
           <a ng-href="https://kiwiirc.com/client/chat.freenode.net:+6697/?nick={{(current_person ? (current_person.display_name+'-'+current_person.id | slug): 'anonymous-?') }}#bountysource" target="_blank">IRC Chat</a>
         </li> -->
          <!-- Search input -->
+<<<<<<< HEAD
 
 
         
     
         <ul class="nav navbar-nav navbar-right">  
+=======
+      
+        
+      
+      <!-- <div class="col-md-2"> -->
+        <!-- <ul class="nav navbar-nav navbar-right">   -->
+        <ul class="nav navbar-nav navbar-right">
+>>>>>>> Change navbar spacing
           <li>
             <form class="navbar-form" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
               <div class="input-group">
@@ -77,8 +98,11 @@
               </div>
             </form>
           </li>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> Change navbar spacing
           <!-- Currency switcher -->
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -132,6 +156,7 @@
 
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In </a>
 
+
             <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
               <li role="presentation" class="dropdown-header">Login using:</li>
 
@@ -170,6 +195,10 @@
         </ul>
 
     </div>
+<<<<<<< HEAD
+=======
+  <!-- </div> -->
+>>>>>>> Change navbar spacing
   </div>
 </div>
 

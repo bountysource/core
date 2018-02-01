@@ -304,3 +304,22 @@ n10= n9*x1
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.navbar-brand {
+  height: 100%;
+}
+
+.navbar-nav>li>a {
+  padding-top: 27px;
+  padding-bottom: 28px;
+  font-size: 16px;
+}
+
+.navbar-form .input-group-btn {
+  width: auto;
+}
+
+.navbar-form {
+  padding-top: 12px;
+  padding-bottom: 13px;
+}
