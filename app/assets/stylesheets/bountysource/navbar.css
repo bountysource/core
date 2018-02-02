@@ -1,0 +1,65 @@
+.navbar-default { background-color: #fff; }
+.container_top_margin { margin-top: 20px; }
+
+.navbar-bountysource { margin-bottom: 0; }
+
+.navbar-brand {
+  height: 100%;
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  display:inline-block
+}
+
+.navbar-brand img{
+  width: 230px;
+}
+
+.navbar-form {
+  margin: auto;
+}
+
+.navbar-form .input-group-btn {
+  width: auto;
+}
+
+.navbar-form .input-group .form-control {
+  border-radius: 0px;
+}
+
+.navbar-form .input-group .input-group-btn:last-child>.btn {
+  border-radius: 0px;
+}
+
+button.navbar-toggle {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.navbar .rectangle-border {
+  border: solid 1px #d1d1d1;
+  padding: 6px 12px 7px 12px;
+}
+
+.navbar .dollar-icon {
+  padding: 6px 12px 7px 12px;
+}
+
+.navbar-nav>li>a {
+  padding-right: 8px; 
+  padding-left: 8px;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav>li>a {
+    padding-top: 27px;
+    padding-bottom: 28px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .navbar-form {
+    padding-top: 20px;
+    padding-bottom: 21px;
+  }
+}
+

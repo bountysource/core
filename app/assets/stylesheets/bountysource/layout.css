@@ -4,7 +4,7 @@ body {
   font-family: Montserrat;
   /* The html and body elements cannot have any padding or margin. */
   color: #485f64;
-  font-family: Montserrat;
+  font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -30,6 +30,8 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 54px;
 }
 
+/* move margin from navbar to container so we can do full-width backgrounds on team bounty programs */
+
 .footer-logo {
   width: 324px;
   margin-top: 30px;
@@ -40,11 +42,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 10px;
   background-image: linear-gradient(to left, #33ccff, #4edcca);
 }
-
-/* move margin from navbar to container so we can do full-width backgrounds on team bounty programs */
-.navbar-bountysource { border-top: 4px solid #129e5e; margin-bottom: 0; }
-.container_top_margin { margin-top: 20px; }
-
 
 /* Top Backers Table */
 .top-backers-table > .row { margin-bottom: 15px; }
@@ -112,6 +109,7 @@ input[type="text"]:disabled.white-input  {
  font-family: Montserrat;
  letter-spacing: -0.6px;
  color: #33ccff;
+
 }
 
 .panel-green {
@@ -227,16 +225,6 @@ n10= n9*x1
 @media (min-width: 768px) {
   .featured-header img { width:8.5%; margin-left: 1.66666%;  }
   .featured-header a:nth-of-type(1) img { margin-left: 0%;  }
-  .navbar-nav>li>a {
-   padding-top: 27px;
-   padding-bottom: 28px;
-   font-size: 16px;
-   font-weight: bold;
-  }
-  .navbar-form {
-   padding-top: 12px;
-   padding-bottom: 13px;
-  }
 }
 /* small screens, two rows of 5 */
 @media (max-width: 768px) {
@@ -246,7 +234,6 @@ n10= n9*x1
   .featured-header a:nth-of-type(3) img,
   .featured-header a:nth-of-type(4) img,
   .featured-header a:nth-of-type(5) img { margin-bottom: 3.5%; }
-
   .featured-header a:nth-of-type(1) img, .featured-header a:nth-of-type(6) img { margin-left: 0%;  }
 }
 
@@ -255,44 +242,4 @@ n10= n9*x1
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.navbar-brand {
-  height: 100%;
-}
-
-/*.navbar-nav>li>a {
-  padding-top: 27px;
-  padding-bottom: 28px;
-  font-size: 16px;
-}*/
-
-.navbar-form .input-group-btn {
-  width: auto;
-}
-
-.input-group .form-control {
-  border-radius: 0px;
-}
-
-.input-group .input-group-btn:last-child>.btn {
-  border-radius: 0px;
-}
-
-button.navbar-toggle {
-  margin-top: 18px;
-  margin-bottom: 18px;
-}
-/*.navbar-form {
-  padding-top: 12px;
-  padding-bottom: 13px;
-}*/
-
-.rectangle {
-  border: solid 1px #d1d1d1;
-  padding: 6px 12px 7px 12px;
-}
-.aqua-text{
-  color: #33ccff;
-
 }
