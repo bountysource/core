@@ -113,18 +113,18 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In </a>
 
 
-          <ul class="dropdown-menu" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
-            <li role="presentation" class="dropdown-header">Login using:</li>
+          <ul class="dropdown-menu font-weight-regular" ng-hide="!!current_person" ng-controller="NavbarLinkedAccountSignin">
+            <li role="presentation" class="dropdown-header">Login using</li>
 
             <li ng-repeat="provider in providers" role="signin">
               <!-- Link with Google Analytics event tracking -->
               <a ng-href="{{signin_url_for(provider.id)}}" gaq-args="['_trackEvent', 'Navbar-Signin' , 'LinkOut']" id="navbar-provider-{{provider.id}}" ng-click="save_route()" target="_self">
-                <span><img ng-src="{{provider.image_url}}">{{provider.name}}</span>
+                <span><img ng-src="{{provider.image_url}}" class="mr-3">{{provider.name}}</span>
               </a>
             </li>
             <li>
               <a href="/signin">
-                <i class="glyphicon glyphicon-envelope"></i>
+                <i class="glyphicon glyphicon-envelope mr-3"></i>
                 Email Address
               </a>
             </li>

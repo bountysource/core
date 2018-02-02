@@ -41,13 +41,9 @@
 }
 
 /*TextColor*/
-.text-gunmetal {
-  color: #485f64;
-}
-
-.text-aqua {
-  color: #33ccff;
-}
+.text-gunmetal { color: #485f64; }
+.text-dark { color: #4a4a4a; }
+.text-aqua { color: #33ccff; }
 
 
 /*Text Align Media Queries*/

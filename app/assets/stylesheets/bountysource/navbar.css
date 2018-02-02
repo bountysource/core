@@ -30,6 +30,17 @@
   border-radius: 0px;
 }
 
+
+.dropdown-menu li a {
+  font-weight: 400;
+  color: #4a4a4a;
+}
+
+.dropdown-header {
+  font-size: inherit;
+  color: inherit;
+}
+
 button.navbar-toggle {
   margin-top: 18px;
   margin-bottom: 18px;
@@ -45,8 +56,8 @@ button.navbar-toggle {
 }
 
 .navbar-nav>li>a {
-  padding-right: 8px; 
-  padding-left: 8px;
+  padding-right: 10px; 
+  padding-left: 10px;
 }
 
 @media (min-width: 768px) {
