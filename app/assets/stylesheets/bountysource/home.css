@@ -3,12 +3,8 @@
 	-webkit-transform: translate3d(0,0,0); 
 }
 
-
-
-
 .homepage h1 { font-size: 30px; }
 .homepage h2 { font-size: 24px; }
-
 
 .quicklink {
   text-align: center;
@@ -26,7 +22,6 @@
   max-width: 273px;
 }
 
-
 .quicklink input {
   height: 40px;
   box-shadow: 0 2px 3px 0 #00000048;
@@ -37,23 +32,9 @@
 .quicklink .btn {
   border: 0;
   box-shadow: 0 2px 3px 0 #00000048;
-  border-radius: 20px;
   font-size: 18px;
-  color: #fff;
   padding-top: 7px;
   padding-bottom: 8px;
-}
-
-.quicklink .post-button {
-  background-image: linear-gradient(to right, #0078bf, #33ccff);
-}
-
-.quicklink .team-button {
-  background-image: linear-gradient(to right, #33ccff, #4edcca);
-}
-
-.quicklink .find-bounty-button {
-  background-image: linear-gradient(to right, #ffc600, #ff6666);
 }
 
 .quicklink .glyphicon {

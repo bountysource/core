@@ -1,7 +1,8 @@
 %div{"ng-controller" => "IssueDevelopersController" }
 
-  .panel{ "ng-class"=>"{ 'panel-primary': !issue.paid_out, 'panel-green': issue.paid_out }", "ng-show" => "issue.can_add_bounty || (developer_events_loaded && developer_events.length>0) || (issue.bounty_total > 0)" }
-    .panel-heading.text-center{"style"=>"font-size:19px; line-height:14px"} Bounty Hunters
+  .panel.panel-marigold-salmon{"ng-show" => "issue.can_add_bounty || (developer_events_loaded && developer_events.length>0) || (issue.bounty_total > 0)" }
+    .panel-heading.text-center.p-0{"style"=>"font-size:19px; line-height:14px"} 
+      %h3.mt-0.mb-0 Bounty Hunters
 
     -# CONTESTED
     .panel-body.alert-danger{ "ng-if"=>"!issue.paid_out && bounty_claims.length > 1", "style"=>"border-bottom: 1px solid #ebccd1" }
@@ -12,7 +13,7 @@
 
 
     -# HUNTER ACTIONS
-    .panel-body.alert-info{ "ng-show"=>"issue.can_add_bounty || ((issue.bounty_total > 0) && !issue.paid_out)", "ng-class"=>"{ 'bounty-hunter-blue-bottom-border': developer_events.length>0 }" }
+    .panel-body{ "ng-show"=>"issue.can_add_bounty || ((issue.bounty_total > 0) && !issue.paid_out)", "ng-class"=>"{ 'bounty-hunter-blue-bottom-border': developer_events.length>0 }" }
       .alert.alert-danger{"ng-if"=>"developer_form.error"} {{developer_form.error}}
 
       %div{ "ng-hide"=>"developer_form.visible", "ng-switch"=>"developer_form.data.status" }
@@ -20,17 +21,17 @@
         %div{ "ng-switch-when"=>"claim_needed_no_solution" }
           %h4.text-center
             Did you solve this issue?
-            %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
+            %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
 
         %div{ "ng-switch-when"=>"claim_needed_has_solution" }
           %h4.text-center
             You were working on this issue. Did you solve it?
-            %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
+            %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
 
         %div{ "ng-switch-when"=>"claim_submitted" }
           %h4.text-center
             You have submitted a claim.
-            %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit Claim
+            %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit Claim
           %p.text-center
             The bounty will be paid out if all backers accept your claim or if no backers reject your claim by {{my_bounty_claim.dispute_period_ends_at | date:'MMM d, y h:mm a':'UTC' }} (GMT).
 
@@ -44,14 +45,15 @@
 
 
         %div{ "ng-switch-when"=>"no_solution_no_goal" }
-          %h4.text-center
-            Are you a developer who can solve this issue?
-            %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px" } Get Started
+          %div.text-center
+            %h4
+              Are you a developer who can solve this issue?
+            %button.mt-3.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px" } Get Started
 
         %div{"ng-switch-when"=>"has_solution"}
           %h4.text-center
             You have started working on this issue.
-            %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
+            %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
           %p.text-center
             You will be able to claim this bounty as soon as
             %a{"ng-href" => "{{issue.url}}", :target => "_blank"} the original issue
@@ -62,12 +64,12 @@
         %div{"ng-switch-when"=>"has_stopped_solution"}
           %h4.text-center
             You stopped working on this issue.
-            %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
+            %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
 
         %div{"ng-switch-when"=>"has_goal"}
           %h4.text-center
             Your have set a bounty goal of {{my_developer_goal.amount | dollars}}.
-            %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
+            %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
 
 
         -#
@@ -78,7 +80,7 @@
         -#
         -#  %div{"ng-if"=>"developer_form.data.status == 'stopped'"}
         -#    You stopped working on this issue.
-        -#    %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
+        -#    %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
         -#
         -#  %div{"ng-if"=>"!developer_form.data.status && issue.can_add_bounty"}
         -#
@@ -87,7 +89,7 @@
         -#
         -#  %div{"ng-if"=>"!my_bounty_claim && my_solution"}
         -#    You are working on this, did you solve the issue?
-        -#    %button.btn.btn-primary{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} I'm Finished
+        -#    %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} I'm Finished
         -#
         -#  %div{"ng-if"=>"my_bounty_claim"}
         -#    You have claimed!!
@@ -166,7 +168,7 @@
 
         .form-group
           .col-sm-offset-2.col-sm-10
-            %button.btn.btn-primary{ "ng-show"=>"['has_solution','has_goal','has_stopped_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0", "type" => "submit"} Save
+            %button.btn.btn-marigold-salmon{ "ng-show"=>"['has_solution','has_goal','has_stopped_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0", "type" => "submit"} Save
             %a.btn.btn-default{ "ng-click"=>"developer_form.cancel()" } Cancel
 
             %a.btn.btn-danger{ "ng-click" => "developer_form.delete_bounty_claim(my_bounty_claim)", "ng-show" => "developer_form.data.status=='claim_submitted'" }
@@ -409,7 +411,7 @@
                 %a.btn.btn-danger{ "ng-click" => "backer_form.reject_claim(event)", "ng-show" => "event.my_form_data.action==='reject'" }
                   %span.glyphicon.glyphicon-thumbs-down
                   Confirm Reject
-                %a.btn.btn-primary{ "ng-click" => "backer_form.reset_claim(event)", "ng-show" => "event.my_form_data.action==='retract'" }
+                %a.btn.btn-marigold-salmon{ "ng-click" => "backer_form.reset_claim(event)", "ng-show" => "event.my_form_data.action==='retract'" }
                   %span.glyphicon.glyphicon-ban-circle
                   Retract Vote
                 %a.btn.btn-default{ "ng-click" => "backer_form.cancel_response(event)" }

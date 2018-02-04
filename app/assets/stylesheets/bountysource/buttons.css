@@ -1,0 +1,31 @@
+.btn-marigold-salmon {
+  background-image: linear-gradient(to right, #ffc600, #ff6666);
+  border-radius: 999px;
+  color: white;
+}
+
+.btn-cerulean-blue {
+  background-image: linear-gradient(to right, #0078bf, #33ccff);
+  border-radius: 999px;
+}
+
+.btn-blue-aquamarine {
+  background-image: linear-gradient(to right, #33ccff, #4edcca);
+  border-radius: 999px;
+  color: white;
+}
+
+.btn-light-blue {
+  background-color: #33ccff;
+  border-radius: 999px;
+}
+
+.input-group input{
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+}
+/*
+.input-group{
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+}*/

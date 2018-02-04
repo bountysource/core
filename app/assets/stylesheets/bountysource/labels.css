@@ -1,12 +1,21 @@
-.label-featured {
-  background-color: #4edcca;  
-  display: inline;
-  padding: .4em 1.5em .6em 1.5em;
+.label {
   font-size: 100%;
   font-weight: 400;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
   border-radius: 999px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.label-info {
+  background-color: #33CCFF;
+}
+
+.label-featured {
+  background-color: #4edcca;  
+}
+
+.badge-info {
+  background-color: #33ccff;
 }

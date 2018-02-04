@@ -1,0 +1,18 @@
+.progress {
+  position: relative;
+}
+
+.progress .progress-full-text {
+  position: absolute;
+  display: block;
+  width: 100%;
+}
+
+.progress {
+  background-color: #9b9b9b;  
+}
+
+.progress-bar-aquamarine {
+  background-image: linear-gradient(to right, #33ccff, #4edcca);
+  
+}

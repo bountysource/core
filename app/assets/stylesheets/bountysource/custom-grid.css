@@ -1,0 +1,20 @@
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+.row.display-flex > [class*='col-'].vertical-align-middle {
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.spaced-evenly-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
