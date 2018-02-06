@@ -141,6 +141,7 @@ class LinkedAccount::Twitter < LinkedAccount::Base
 protected
 
   def self.oauth_consumer
+    
     OAuth::Consumer.new(
       Api::Application.config.twitter_app[:id],
       Api::Application.config.twitter_app[:secret],
