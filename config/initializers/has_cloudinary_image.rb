@@ -1,6 +1,6 @@
 
 class ActiveRecord::Base
-  CLOUDINARY_BASE_URL = 'https://cloudinary-a.akamaihd.net/bountysource/image/'
+  CLOUDINARY_BASE_URL = ENV['CLOUDINARY_BASE_URL']
 
   def self.has_cloudinary_image
     self.class_eval do
@@ -66,12 +66,12 @@ class ActiveRecord::Base
 
       # return 100px square default image
       def image_url(options={})
-
-        default_image = randomized_image(rand(18))
+        image = cloudinary_id || "upload/#{randomized_image(rand(18))}"
         options = {
           size: 100,
           # default: "upload/noaoqqwxegvmulwus0un.png" # big gray B
-          default: "upload/#{default_image}"
+          # default: "upload/#{default_image}"
+          default: image
         }.merge(options)
 
         container, filename = (cloudinary_id || '').split('/')
