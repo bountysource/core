@@ -298,6 +298,7 @@ angular.module('api.bountysource',[]).
 
       options.redirect_url = window.BS_ENV.www_host + 'signin/callback?provider='+provider;
       if ($cookieJar.getJson($api.access_token_cookie_name)) { options.access_token = $cookieJar.getJson($api.access_token_cookie_name); }
+      
       return window.BS_ENV.api_host + 'auth/' + provider + '?' + $api.toKeyValue(options);
     };
 

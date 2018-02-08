@@ -41,6 +41,7 @@ class SessionController < ApplicationController
     # set @linked_account, @redirect_url, and optionally @person
     case params.try(:[], :provider)
     when 'github'
+      
       @linked_account = LinkedAccount::Github::User.find_or_create_via_oauth_code params[:code]
       @person         = Person.find_by_access_token(state[:access_token])
       @redirect_url   = state[:redirect_url]

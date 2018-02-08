@@ -27,6 +27,7 @@ class ActiveRecord::Base
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
         elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/
           # identicons? quick, assmeble the transformers! er, wait, let's just run!
+          
           self.cloudinary_id = nil
         elsif (matches = input.match(/^#{CLOUDINARY_BASE_URL}([a-z_]+)\/.*?([^\/]+)$/))
           # already a cloudinary image, just extract container and filename
@@ -42,9 +43,11 @@ class ActiveRecord::Base
           end
         elsif input =~ /^twitter:[A-Za-z0-9_]{1,15}$/
           # twitter images allow transparency, so let's use .png for everything
+          
           self.cloudinary_id = "twitter_name/#{input.split(':').last}.png"
         elsif input =~ /^twitter_uid:\d+$/
           # twitter images allow transparency, so let's use .png for everything
+          
           self.cloudinary_id = "twitter/#{input.split(':').last}.png"
         elsif input =~ /^facebook:[A-Za-z0-9.]+$/
           # facebook only allows jpg, so might as well force it
@@ -66,7 +69,9 @@ class ActiveRecord::Base
 
       # return 100px square default image
       def image_url(options={})
+        #Add if else to cater for all situations
         image = cloudinary_id || "upload/#{randomized_image(rand(18))}"
+
         options = {
           size: 100,
           # default: "upload/noaoqqwxegvmulwus0un.png" # big gray B

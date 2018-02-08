@@ -80,6 +80,7 @@ class LinkedAccount::Github < LinkedAccount::Base
       url: '/user',
       params: { access_token: oauth_response.data[:access_token] }
     )
+    
     github_user_data = github_user_response.data
 
     # TODO figure out what causes this instead of raising.
@@ -239,7 +240,7 @@ class LinkedAccount::Github < LinkedAccount::Base
     # Find object
     rails_please_autoload = [LinkedAccount::Github::User, LinkedAccount::Github::Organization]
     obj = options[:obj] || LinkedAccount::Github.where("uid = ?", remote_id)[0] || LinkedAccount::Github.new()
-
+    byebug
     obj.uid = remote_id
     obj.login = github_data['login'] if github_data.has_key?('login')
     obj.email = github_data['email'] if github_data.has_key?('email')

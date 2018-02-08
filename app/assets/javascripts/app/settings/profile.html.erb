@@ -66,6 +66,11 @@
         </span>
           <input type="text" ng-model="profile_input.text" ng-change="profile_input.radio='custom'" placeholder="Image URL or Gravatar Email" class="form-control">
       </div>
+
+      <div ng-repeat="avatar in avatars" class="checkbox no-padding"><label class="setings_profile_pic">
+        <input type="radio" ng-model="profile_input.radio" value="{{ cloudinary_url }}upload/d_{{ avatar }},c_pad,w_100,h_100,b_white/{{ avatar }}">
+        <img ng-src="{{ cloudinary_url }}upload/d_{{ avatar }},c_pad,w_100,h_100,b_white/{{ avatar }}">
+      </label></div>
     </div>
   </div>
 

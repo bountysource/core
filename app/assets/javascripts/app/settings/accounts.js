@@ -4,6 +4,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   };
 
   $scope.github_link = $api.signin_url_for('github');
+  // $scope.github_link = ""
   $scope.twitter_link = $api.signin_url_for('twitter');
   $scope.facebook_link = $api.signin_url_for('facebook');
 
