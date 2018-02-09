@@ -19,6 +19,8 @@ class ActiveRecord::Base
       before_validation do
         input = @image_url
         # return if input.blank?
+
+
         if input.blank?
           image = randomized_image(rand(18))
           self.cloudinary_id = "upload/#{image}"
@@ -28,6 +30,10 @@ class ActiveRecord::Base
         elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/
           # identicons? quick, assmeble the transformers! er, wait, let's just run!
           self.cloudinary_id = nil
+        elsif input =~ /github/
+          Rails.logger.info "CLOUDINARY: Uploading image URL to cloudinary: #{input}"
+            response = Cloudinary::Uploader.upload(input, discard_original_filename: true).with_indifferent_access
+            self.cloudinary_id = "upload/" + response[:url].split('/').last
         elsif (matches = input.match(/^#{CLOUDINARY_BASE_URL}([a-z_]+)\/.*?([^\/]+)$/))
           # already a cloudinary image, just extract container and filename
           self.cloudinary_id = "#{matches[1]}/#{matches[2]}"
@@ -42,9 +48,11 @@ class ActiveRecord::Base
           end
         elsif input =~ /^twitter:[A-Za-z0-9_]{1,15}$/
           # twitter images allow transparency, so let's use .png for everything
+          
           self.cloudinary_id = "twitter_name/#{input.split(':').last}.png"
         elsif input =~ /^twitter_uid:\d+$/
           # twitter images allow transparency, so let's use .png for everything
+          
           self.cloudinary_id = "twitter/#{input.split(':').last}.png"
         elsif input =~ /^facebook:[A-Za-z0-9.]+$/
           # facebook only allows jpg, so might as well force it
