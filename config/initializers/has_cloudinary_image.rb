@@ -48,11 +48,9 @@ class ActiveRecord::Base
           end
         elsif input =~ /^twitter:[A-Za-z0-9_]{1,15}$/
           # twitter images allow transparency, so let's use .png for everything
-          
           self.cloudinary_id = "twitter_name/#{input.split(':').last}.png"
         elsif input =~ /^twitter_uid:\d+$/
-          # twitter images allow transparency, so let's use .png for everything
-          
+          # twitter images allow transparency, so let's use .png for everything     
           self.cloudinary_id = "twitter/#{input.split(':').last}.png"
         elsif input =~ /^facebook:[A-Za-z0-9.]+$/
           # facebook only allows jpg, so might as well force it

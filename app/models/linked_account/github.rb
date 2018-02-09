@@ -234,8 +234,6 @@ class LinkedAccount::Github < LinkedAccount::Base
   end
 
   def self.update_attributes_from_github_data(github_data, options={})
-
-    
     return nil if github_data.blank? || github_data['url'] == "https://api.github.com/users/"
     raise "NO ID #{github_data.inspect}" unless remote_id = github_data['id']
 
@@ -248,7 +246,6 @@ class LinkedAccount::Github < LinkedAccount::Base
     obj.login = github_data['login'] if github_data.has_key?('login')
     obj.email = github_data['email'] if github_data.has_key?('email')
     obj.first_name = github_data['name'] if github_data.has_key?('name')
-    
     obj.image_url = get_cloudinary_id_from_github_data(github_data)
     obj.company = github_data['company'] if github_data.has_key?('company')
     obj.location = github_data['location'] if github_data.has_key?('location')
@@ -360,8 +357,6 @@ protected
 
   def self.get_cloudinary_id_from_github_data(github_data)
     if github_data.has_key?('avatar_url') && github_data['avatar_url'].present?
-
-      # "gravatar:#{github_data['gravatar_id']}"
       "#{github_data['avatar_url']}"
     end
   end
