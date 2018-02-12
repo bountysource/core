@@ -43,8 +43,7 @@ ul.list.narrow-padding {
 
 
 .team-header { 
-  background: #f5f5f5; 
-  box-shadow: 0 2px 11px 0 rgba(0, 0, 0, 0.2);
+  background: #ffffff; 
   margin-bottom: 2px;
 }
 
@@ -54,10 +53,8 @@ ul.list.narrow-padding {
   max-width: 130px;
 }
 
-
-
 .featured-header {
-  background-color: #f5f5f5; 
+  background-color: #ffffff; 
   padding: 12px;
 }
 

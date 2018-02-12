@@ -1,0 +1,20 @@
+.breadcrumb{
+  color: #9F9F9F;
+  background-color: transparent;
+}
+
+.breadcrumb a{
+  color: #9F9F9F;
+}
+
+.breadcrumb>li+li:before {
+  content: ">>";
+  padding: 0 5px;
+  color: #000;
+}
+
+
+
+.breadcrumb > .active > a{
+  color: #2DCAFE;
+}

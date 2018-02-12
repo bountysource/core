@@ -18,3 +18,18 @@
   background-image: linear-gradient(to right, #ffc600, #ff6666);
   color: #fff;
 }
+
+.panel-white {
+  border-color: #fff;  
+  box-shadow: none;
+}
+
+.panel-white > .panel-heading {
+  background-color: #fff; 
+}
+
+.panel-heading > .panel-title {
+  color: #2eb5e1;
+  font-size: 16px;
+  font-weight: 500;
+}

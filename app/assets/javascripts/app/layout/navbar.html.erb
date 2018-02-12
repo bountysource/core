@@ -30,9 +30,14 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li ng-show="(teams | filter:({is_member:true})).length>0" role="presentation" class="dropdown-header">Your Teams</li>
-            <li ng-repeat="team in teams | filter:({is_member:true}) | orderBy:'-activity_total'"><a ng-href="teams/{{ team.slug }}"><img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url_small }}"></img><span>  {{ team.name }}</span></a></li>
+            <li ng-repeat="team in teams | filter:({is_member:true}) | orderBy:'-activity_total'"><a ng-href="teams/{{ team.slug }}">
+              <img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url_small }}"></img>
+              <span class="pr-5">  {{ team.name }}</span></a>
+            </li>
             <li ng-show="(teams | filter:({is_member:false})).length>0" role="presentation" class="dropdown-header">Suggested Teams</li>
-            <li ng-repeat="team in teams | filter:({is_member:false}) | orderBy:'-activity_total' | limitTo:10"><a ng-href="teams/{{ team.slug }}"><img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url_small }}"></img><span>  {{ team.name }}</span></a></li>
+            <li ng-repeat="team in teams | filter:({is_member:false}) | orderBy:'-activity_total' | limitTo:10"><a ng-href="teams/{{ team.slug }}">
+              <img class="img-responsive" style="height: 20px; width: 20px; display: inline;" ng-src="{{ team.image_url_small }}"></img>
+              <span class="pr-5">  {{ team.name }}</span></a></li>
             <li class="divider"></li>
             <li><a href="/teams/new"><i class="glyphicon glyphicon-plus"></i> Add Team</a></li>
             <li><a href="/teams"><i class="glyphicon glyphicon-th-list"></i> See All Teams</a></li>

@@ -9,10 +9,10 @@
 }
 
 .progress {
-  background-color: #9b9b9b;  
+  background-color: transparent;  
+  box-shadow: none;
 }
 
 .progress-bar-aquamarine {
-  background-image: linear-gradient(to right, #33ccff, #4edcca);
-  
+  background-image: linear-gradient(to right, #33ccff, #4edcca); 
 }

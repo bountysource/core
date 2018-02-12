@@ -1,17 +1,21 @@
 .btn-marigold-salmon {
   background-image: linear-gradient(to right, #ffc600, #ff6666);
   border-radius: 999px;
+  border: 0;
   color: white;
 }
 
 .btn-cerulean-blue {
   background-image: linear-gradient(to right, #0078bf, #33ccff);
+  color: white;
   border-radius: 999px;
+  border: 0;
 }
 
 .btn-blue-aquamarine {
   background-image: linear-gradient(to right, #33ccff, #4edcca);
   border-radius: 999px;
+  border: 0;
   color: white;
 }
 
