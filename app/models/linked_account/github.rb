@@ -60,7 +60,6 @@ class LinkedAccount::Github < LinkedAccount::Base
 
   def self.find_or_create_via_oauth_code(code)
     # hit github oauth server to exchange code for access_token
-
     oauth_response = ::Github::API.call(
       url: "/login/oauth/access_token",
       type: 'POST',
@@ -241,7 +240,6 @@ class LinkedAccount::Github < LinkedAccount::Base
     rails_please_autoload = [LinkedAccount::Github::User, LinkedAccount::Github::Organization]
     obj = options[:obj] || LinkedAccount::Github.where("uid = ?", remote_id)[0] || LinkedAccount::Github.new()
 
-    
     obj.uid = remote_id
     obj.login = github_data['login'] if github_data.has_key?('login')
     obj.email = github_data['email'] if github_data.has_key?('email')
