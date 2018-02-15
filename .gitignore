@@ -41,3 +41,4 @@ node_modules
 compiled_tests/
 
 .env
+.env.dev2

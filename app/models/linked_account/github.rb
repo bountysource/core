@@ -347,9 +347,15 @@ class LinkedAccount::Github < LinkedAccount::Base
 
 protected
 
+  # def self.get_cloudinary_id_from_github_data(github_data)
+  #   if github_data.has_key?('gravatar_id') && github_data['gravatar_id'].present?
+  #     "gravatar:#{github_data['gravatar_id']}"
+  #   end
+  # end
+
   def self.get_cloudinary_id_from_github_data(github_data)
-    if github_data.has_key?('gravatar_id') && github_data['gravatar_id'].present?
-      "gravatar:#{github_data['gravatar_id']}"
+    if github_data.has_key?('avatar_url') && github_data['avatar_url'].present?
+      "#{github_data['avatar_url']}"
     end
   end
 
