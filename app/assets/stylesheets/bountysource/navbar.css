@@ -1,7 +1,11 @@
 .navbar-default { background-color: #fff; }
 .container_top_margin { margin-top: 20px; }
 
-.navbar-bountysource { margin-bottom: 0; }
+.navbar-bountysource { 
+  margin-bottom: 0; 
+  box-shadow: 0 2px 15px 0 #0000001f;
+}
+
 
 .navbar-brand {
   height: 100%;

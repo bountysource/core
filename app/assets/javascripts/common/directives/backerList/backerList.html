@@ -21,7 +21,7 @@
     <tbody>
     <tr ng-repeat="backer in backers">
       <!-- Backer Avatar -->
-      <td>
+      <td class="pt-4 pb-4">
         <a owner-href="backer">
           <img class="img-responsive img-circle" style="width: 50px;" ng-src="{{backer.image_url_medium}}">
         </a>
@@ -31,12 +31,12 @@
       </td>
 
       <!-- Total Amount Backed -->
-      <td>
-        <span>{{backer.amount | dollars}}</span>
+      <td style="width: 100px;">
+        <span class="font-weight-medium">{{backer.amount | dollars}}</span>
       </td>
 
       <!-- Last Activity Date -->
-      <td>
+      <td style="width: 100px;">
         <span class="text-muted">{{backer.last_activity_at | date:'mediumDate' }}</span>
       </td>
     </tr>

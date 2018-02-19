@@ -136,7 +136,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="bounty in claimed_bounties | orderBy:claimed_sort.column:claimed_sort.desc">
-              <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-circle" style="width:16px;height:16px"></a></td>
+              <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-circle pt-4 pb-4" style="width:16px;height:16px"></a></td>
               <td class="center-height">
                 <a ng-href="/issues/{{bounty.issue.slug}}" class="text-gunmetal font-weight-semibold">
                   <i ng-show="bounty.issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>

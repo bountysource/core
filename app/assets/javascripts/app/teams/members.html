@@ -1,7 +1,7 @@
 <div>
   <div team-view team="team">
     <ul class="thumbnails list-unstyled">
-      <li class="col-md-3 col-sm-4 col-xs-12 ember-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
+      <li class="col-md-4 col-sm-6 col-xs-12 ember-thumbnail text-center" ng-repeat="member in members | filter:{ is_public: true } | orderBy:'+added_at'">
         <a ng-href="/people/{{member.slug}}" class="thumbnail team-member-card text-dark">
           <div class="row display-flex p-4">
             <div class="col-xs-4 vertical-align-middle">
