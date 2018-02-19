@@ -1,7 +1,7 @@
 %div{"ng-controller" => "IssueDevelopersController" }
   .panel.panel-cool-grey{"ng-show" => "issue.can_add_bounty || (developer_events_loaded && developer_events.length>0) || (issue.bounty_total > 0)" }
     .panel-heading.text-center{"style"=>"font-size:19px; line-height:14px"} 
-      Bounty Hunters
+      %h4.m-0.font-weight-medium Bounty Hunters
 
     -# CONTESTED
     .panel-body.alert-danger{ "ng-if"=>"!issue.paid_out && bounty_claims.length > 1", "style"=>"border-bottom: 1px solid #ebccd1" }
@@ -12,26 +12,26 @@
 
 
     -# HUNTER ACTIONS
-    .panel-body{ "ng-show"=>"issue.can_add_bounty || ((issue.bounty_total > 0) && !issue.paid_out)" }
+    .panel-body.text-center{ "ng-show"=>"issue.can_add_bounty || ((issue.bounty_total > 0) && !issue.paid_out)" }
       .alert.alert-danger{"ng-if"=>"developer_form.error"} {{developer_form.error}}
 
       %div{ "ng-hide"=>"developer_form.visible", "ng-switch"=>"developer_form.data.status" }
 
         %div{ "ng-switch-when"=>"claim_needed_no_solution" }
-          %h4.text-center
+          .font-weight-medium
             Did you solve this issue?
             %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
 
         %div{ "ng-switch-when"=>"claim_needed_has_solution" }
-          %h4.text-center
+          .font-weight-medium
             You were working on this issue. Did you solve it?
             %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
 
         %div{ "ng-switch-when"=>"claim_submitted" }
-          %h4.text-center
+          %h4
             You have submitted a claim.
             %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit Claim
-          %p.text-center
+          %p
             The bounty will be paid out if all backers accept your claim or if no backers reject your claim by {{my_bounty_claim.dispute_period_ends_at | date:'MMM d, y h:mm a':'UTC' }} (GMT).
 
 
@@ -44,16 +44,16 @@
 
 
         %div{ "ng-switch-when"=>"no_solution_no_goal" }
-          %div.text-center
-            %h4
+          %div
+            .font-weight-medium
               Are you a developer who can solve this issue?
             %button.mt-3.btn.btn-long.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px" } Get Started
 
         %div{"ng-switch-when"=>"has_solution"}
-          %h4.text-center
+          .font-weight-medium
             You have started working on this issue.
             %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
-          %p.text-center
+          %p
             You will be able to claim this bounty as soon as
             %a{"ng-href" => "{{issue.url}}", :target => "_blank"} the original issue
             is marked as closed.
@@ -61,12 +61,12 @@
 
 
         %div{"ng-switch-when"=>"has_stopped_solution"}
-          %h4.text-center
+          .font-weight-medium
             You stopped working on this issue.
             %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
 
         %div{"ng-switch-when"=>"has_goal"}
-          %h4.text-center
+          .font-weight-medium
             Your have set a bounty goal of {{my_developer_goal.amount | dollars}}.
             %button.btn.btn-marigold-salmon{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
 
@@ -180,259 +180,262 @@
 
   -# Hunter Activity Table     , "style" => "border-top: 1px solid #428bca"
   %div{"ng-show"=>"developer_events.length>0"}
-    %div.text-center{"ng-repeat" => "event in developer_events | orderBy:['-updated_at']", "ng-class"=>"{ '': event.type=='bounty_claim' && event.collected }"}
+    %h3 Updates
+    %div{"ng-repeat" => "event in developer_events | orderBy:['-updated_at']", "ng-class"=>"{ '': event.type=='bounty_claim' && event.collected }"}
       / 50px profile pic for mobile, 100px for desktop
-      %div.hidden-xs.center-block.hidden-sm{ "style" => "width:75px; vertical-align: top" }
-        %profile-pic{ "owner" => "event.owner" }
-      %div.hidden-md.center-block.hidden-lg{ "style" => "width:50px; vertical-align: top" }
-        %profile-pic{ "owner" => "event.owner" }
-      %div
-        %div{ "ng-if"=>"event.type=='issue_suggestion'"}
-          %h4{ "style" => "margin-top: 0" }
-            %profile-name{ "owner"=>"event.owner" }
-            %span{ "ng-show"=>"!event.thanked_at"} suggested this issue to
-            %span{ "ng-show"=>"event.thanked_at && !event.thanked_reward" } was thanked for suggesting this issue to
-            %span{ "ng-show"=>"event.thanked_at && event.thanked_reward"} was thanked and rewarded {{ event.thanked_reward | dollars}} for suggesting this issue to
-            =succeed '.' do
-              %a{ "ng-href"=>"/teams/{{event.team.slug}}"} {{event.team.display_name}}
-            %small {{event.created_at | timeDiff }} ago
-          %p{ "style"=>"word-wrap:break-word;"} {{event.description}}
-          %p.text-danger{ "ng-show"=>"event.rejected_at" }
-            %span.glyphicon.glyphicon-thumbs-down
-            %span{ "ng-show"=>"event.rejection_reason", "style"=>"word-wrap:break-word;" } Rejected {{event.rejected_at | timeDiff }} ago: {{ event.rejection_reason }}
-            %span{ "ng-hide"=>"event.rejection_reason", "style"=>"word-wrap:break-word;" } Rejected {{event.rejected_at | timeDiff }} ago.
-          %p{ "ng-hide"=>"!event.can_respond || event.show_accept_form || event.show_reject_form"}
-            %a.btn.btn-success{ "ng-click" => "event.show_accept_form=true; event.my_form_data={}" }
-              %span.glyphicon.glyphicon-thumbs-up
-              Thank
-            %a.btn.btn-danger{ "ng-click" => "event.show_reject_form=true; event.my_form_data={}" }
-              %span.glyphicon.glyphicon-thumbs-down
-              Reject
-
-          %form.form-horizontal{ "ng-show"=>"event.show_accept_form", "ng-submit"=>"developer_form.accept_issue_suggestion(event)", "style"=>"margin-top:20px" }
-            .form-group
-              %label.col-sm-2.control-label
-                Reward:
-              .col-sm-3
-                .input-group
-                  .input-group-addon $
-                  %input.form-control{ "type"=>"text", "ng-model"=>"event.my_form_data.thanked_reward" }
-              .col-sm-7.help-block
-                Optionally reward
-                %profile-name{ "owner"=>"event.owner" }
-                for suggesting this issue.
-            .form-group{ "ng-show"=>"issue.can_add_bounty" }
-              %label.col-sm-2.control-label
-                Bounty:
-              .col-sm-3
-                .input-group
-                  .input-group-addon $
-                  %input.form-control{ "type"=>"text", "ng-model"=>"event.my_form_data.bounty_amount" }
-              .col-sm-7.help-block
-                Optionally post a bounty on this issue.
-
-            .form-group
-              .col-sm-offset-2.col-sm-10
-                %button.btn.btn-success
-                  %span{ "ng-show"=>"event.my_form_data.bounty_amount || event.my_form_data.thanked_reward" }
-                    %span.glyphicon.glyphicon-shopping-cart
-                    Continue to Cart
-                  %span{ "ng-hide"=>"event.my_form_data.bounty_amount || event.my_form_data.thanked_reward" }
-                    %span.glyphicon.glyphicon-thumbs-up
-                    Confirm Thanks
-                %a.btn.btn-default{ "ng-click"=>"event.show_accept_form=false" } Cancel
-
-          %form{ "ng-show"=>"event.show_reject_form", "ng-submit"=>"developer_form.reject_issue_suggestion(event)" }
-            .form-group
-              %textarea.form-control{:placeholder => "Why are you rejecting this suggestion? (Optional)", :rows => "4", "ng-model"=>"event.my_form_data.rejection_reason"}
-            .form-group
-              %button.btn.btn-danger
-                %span.glyphicon.glyphicon-thumbs-down
-                Confirm Rejection
-              %a.btn.btn-default{ "ng-click"=>"event.show_reject_form=false" } Cancel
-
-
-
-
-        %div{ "ng-if"=>"event.type=='developer_goal'"}
-          %h5.mt-3{ "style" => "margin-top: 0" }
-            %profile-name{ "owner"=>"event.owner" }
-            set a goal of {{event.amount | dollars}}.
-            %small {{event.updated_at | timeDiff }} ago
-          .issue-goals.progress
-            .progress-bar.progress-bar-cool-grey{:style => "width: {{ 100*issue.bounty_total/event.amount | atLeast:15 | atMost:100 | number:0 }}%;"}
-              %span {{issue.bounty_total/event.amount | percent}}
-          %p
-            %a.btn.btn-light-blue{"ng-if"=>"event.amount > issue.bounty_total", "ng-click" => "backer_form.post_bounty(event.amount-issue.bounty_total)" } Post Bounty
-            %a.btn.btn-light-blue{"ng-if"=>"event.amount <= issue.bounty_total", "ng-click" => "backer_form.post_bounty()" } Increase Bounty
-
-
-
-
-        %div{ "ng-if"=>"event.type=='solution'" }
-          %h5.mt-3{ "style" => "margin-top: 0" }
-
-            %div{ "ng-if"=>"event.status=='started'" }
-              %profile-name{ "owner" => "event.owner" }
-              %span{"ng-if"=>"!event.completion_date"} started working on this issue.
-              %span{"ng-if"=>"event.completion_date"} started working on this issue and expects to finish by {{event.completion_date | date}}.
-
-              %small {{event.updated_at | timeDiff }} ago
-
-            %div{ "ng-if"=>"event.status=='stopped'"}
-              %profile-name{ "owner" => "event.owner" }
-              stopped working on this issue.
-              %small {{event.updated_at | timeDiff }} ago
-
-          %p{ "ng-if"=>"event.note" }
-            %span.text-muted
-              %profile-name{ "owner" => "event.owner" }
-              wrote:
-          %p
-            {{event.note}}
-
-          %p{ "ng-show" => "event.url" }
-            %span{ "ng-if"=>"event.url.indexOf('http://') != 0 && event.url.indexOf('https://') != 0" }
-              Code URL: {{event.url}}
-            %span{ "ng-if" => "event.url.indexOf('http://') == 0 || event.url.indexOf('https://') == 0" }
-              %a.btn.btn-default{ "ng-href" => "{{event.url}}", "target" => "_blank" }
-                %span.glyphicon.glyphicon-new-window
-                View Code
-
-
-
-
-
-
-
-        %div{ "ng-if"=>"event.type=='bounty_claim'"}
-
-          %h5.font-weight-semibold.mt-3.mb-0{ "style" => "margin-top: 0" }
-
-            %span{ "ng-if"=>"issue.paid_out" }
-
-              %span{ "ng-if"=>"event.collected" }
-                %profile-name{ "owner" => "event.owner" }
-                was awarded the
-                %span {{event.amount | dollars}}
-                bounty!
-
-              %span{ "ng-if"=>"!event.collected" }
-                %profile-name{ "owner" => "event.owner" }
-                submitted a claim which wasn't accepted.
-
-
-            %span{ "ng-if"=>"!issue.paid_out" }
-
-              %span{ "ng-if"=>"event.contested" }
-                %profile-name{ "owner" => "event.owner" }
-                submitted a claim which is being contested
-                %span{"ng-if"=>"event.backers_count===1"}
-                  but the backer hasn't responded.
-                %span{"ng-if"=>"event.backers_count>1"}
-                  and {{event.accept_count+event.reject_count}} of {{event.backers_count}} backers have responded.
-
-              %span{ "ng-if"=>"!event.contested && !event.collected && !event.disputed" }
-                %profile-name{ "owner" => "event.owner" }
-                submitted a claim
-                %span{"ng-if"=>"event.backers_count===1"}
-                  but the backer hasn't responded.
-                %span{"ng-if"=>"event.backers_count>1"}
-                  and {{event.accept_count}} of {{event.backers_count}} backers have responded.
-
-              %span{"ng-if"=>"!event.contested && !event.collected && event.disputed" }
-                %profile-name{ "owner" => "event.owner" }
-                submitted a claim which is being disputed.
-
-          %small {{event.created_at | timeDiff }} ago
-
-          %p.text-muted{ "style"=>"font-style: italic;", "ng-if"=>"!issue.paid_out && !event.contested && !event.disputed" }
-            NOTE: This will be paid out if all backers accept this or if no backers reject this by {{event.dispute_period_ends_at | date:'MMM d, y h:mm a':'UTC' }} (GMT).
-
-          %p{ "ng-if"=>"event.description"}
-            %span.text-muted
-              %profile-name{ "owner" => "event.owner" }
-              wrote:
-          %p
-            {{event.description}}
-          %div
-            %span{ "ng-show" => "event.code_url" }
-              %span{ "ng-if"=>"event.code_url.indexOf('http://') != 0 && event.code_url.indexOf('https://') != 0" }
-                Code URL: {{event.code_url}}
-              %span{ "ng-if" => "event.code_url.indexOf('http://') == 0 || event.code_url.indexOf('https://') == 0" }
-                %a.btn.btn-default{ "ng-href" => "{{event.code_url}}", "target" => "_blank" }
-                  %span.glyphicon.glyphicon-new-window
-                  View Code
-
-          %div.alert{ "ng-if"=>"issue.can_respond_to_claims && event.in_dispute_period", "style"=>"margin-top:14px", "ng-class"=>"{'alert-info': event.my_response.value !== false, 'alert-danger': event.my_response.value === false }" }
-
-            %div{ "ng-if"=>"!event.my_form_data" }
-
-              %div{ "ng-if"=>"event.my_response.value!==true && event.my_response.value!==false" }
-                {{current_person.display_name}}, your response is needed:
-                %a.btn.btn-success{ "ng-click" => "backer_form.start_response(event, 'accept')" }
-                  %span.glyphicon.glyphicon-thumbs-up
-                  Accept
-                %a.btn.btn-danger{ "ng-click" => "backer_form.start_response(event, 'reject')" }
-                  %span.glyphicon.glyphicon-thumbs-down
-                  Reject
-
-              %div{ "ng-if"=>"event.my_response.value===true" }
-                You approved this bounty claim {{ event.my_response.updated_at | timeDiff }} ago.
-                %a.btn.btn-default{ "ng-click" => "backer_form.start_response(event, 'retract')" }
-                  Retract Vote
-
-              %div{ "ng-if"=>"event.my_response.value===false" }
-                You rejected this bounty claim {{ event.my_response.updated_at | timeDiff }} ago.
-                %a.btn.btn-success{ "ng-click" => "backer_form.start_response(event, 'resolve')" }
-                  %span.glyphicon.glyphicon-thumbs-up
-                  Accept
-                %a.btn.btn-default{ "ng-click" => "backer_form.start_response(event, 'retract')" }
-                  Retract Vote
-
-
-            %form{ "ng-if"=>"event.my_form_data && event.my_form_data.action" }
-              .form-group
-                %textarea.form-control{:placeholder => "Please leave some feedback for the developer.", :rows => "4", "ng-model"=>"event.my_form_data.description"}
-
-              %a.btn.btn-success{ "ng-click" => "backer_form.accept_claim(event)", "ng-show" => "event.my_form_data.action==='accept'" }
-                %span.glyphicon.glyphicon-thumbs-up
-                Confirm Accept
-              %a.btn.btn-success{ "ng-click" => "backer_form.resolve_claim(event)", "ng-show" => "event.my_form_data.action==='resolve'" }
-                %span.glyphicon.glyphicon-thumbs-up
-                Confirm Accept
-              %a.btn.btn-danger{ "ng-click" => "backer_form.reject_claim(event)", "ng-show" => "event.my_form_data.action==='reject'" }
-                %span.glyphicon.glyphicon-thumbs-down
-                Confirm Reject
-              %a.btn.btn-marigold-salmon{ "ng-click" => "backer_form.reset_claim(event)", "ng-show" => "event.my_form_data.action==='retract'" }
-                %span.glyphicon.glyphicon-ban-circle
-                Retract Vote
-              %a.btn.btn-default{ "ng-click" => "backer_form.cancel_response(event)" }
-                %span.glyphicon.glyphicon-thumbs-up
-                Cancel
-
-
-
-          %div.mt-3
-            %div{ "ng-repeat" => "response in event.responses", "style" => "display: flex; justify-content: center" }
-              %div.vertical-align-middle{ "style" => "width:24px; vertical-align: top; padding-bottom: 5px" }
-                %profile-pic{ "owner" => "response.owner" }
+      %table.table.table-centered
+        %tbody
+          %tr
+            %td{ "style" => "width: 50px;" }
+              %profile-pic{ "owner" => "event.owner"}
+            %td
               %div
-                %div{ "style" => "vertical-align: top; padding-left: 5px"}
-                  %span{ "ng-if"=>"response.description"}
-                    = succeed '' do
-                      %profile-name{ "owner" => "response.owner" }
-                      %span{ "ng-switch"=>"response.value" }
-                        %span.text-success{ "ng-switch-when"=>"true" }> accepted
-                        %span.text-danger{ "ng-switch-when"=>"false" }> rejected
-                        %span.text-muted{ "ng-switch-when"=>"null" }> retracted
-                  %span{ "ng-if"=>"!response.description"}
-                    = succeed '.' do
-                      %profile-name{ "owner" => "response.owner" }
-                      %span{ "ng-switch"=>"response.value" }
-                        %span.text-success{ "ng-switch-when"=>"true" }> accepted
-                        %span.text-danger{ "ng-switch-when"=>"false" }> rejected
-                        %span.text-muted{ "ng-switch-when"=>"null" }> retracted
-                %div
+                %div{ "ng-if"=>"event.type=='issue_suggestion'"}
+                  %h4{ "style" => "margin-top: 0" }
+                    %profile-name{ "owner"=>"event.owner" }
+                    %span{ "ng-show"=>"!event.thanked_at"} suggested this issue to
+                    %span{ "ng-show"=>"event.thanked_at && !event.thanked_reward" } was thanked for suggesting this issue to
+                    %span{ "ng-show"=>"event.thanked_at && event.thanked_reward"} was thanked and rewarded {{ event.thanked_reward | dollars}} for suggesting this issue to
+                    =succeed '.' do
+                      %a{ "ng-href"=>"/teams/{{event.team.slug}}"} {{event.team.display_name}}
+                    %small {{event.created_at | timeDiff }} ago
+                  %p{ "style"=>"word-wrap:break-word;"} {{event.description}}
+                  %p.text-danger{ "ng-show"=>"event.rejected_at" }
+                    %span.glyphicon.glyphicon-thumbs-down
+                    %span{ "ng-show"=>"event.rejection_reason", "style"=>"word-wrap:break-word;" } Rejected {{event.rejected_at | timeDiff }} ago: {{ event.rejection_reason }}
+                    %span{ "ng-hide"=>"event.rejection_reason", "style"=>"word-wrap:break-word;" } Rejected {{event.rejected_at | timeDiff }} ago.
+                  %p{ "ng-hide"=>"!event.can_respond || event.show_accept_form || event.show_reject_form"}
+                    %a.btn.btn-success{ "ng-click" => "event.show_accept_form=true; event.my_form_data={}" }
+                      %span.glyphicon.glyphicon-thumbs-up
+                      Thank
+                    %a.btn.btn-danger{ "ng-click" => "event.show_reject_form=true; event.my_form_data={}" }
+                      %span.glyphicon.glyphicon-thumbs-down
+                      Reject
+
+                  %form.form-horizontal{ "ng-show"=>"event.show_accept_form", "ng-submit"=>"developer_form.accept_issue_suggestion(event)", "style"=>"margin-top:20px" }
+                    .form-group
+                      %label.col-sm-2.control-label
+                        Reward:
+                      .col-sm-3
+                        .input-group
+                          .input-group-addon $
+                          %input.form-control{ "type"=>"text", "ng-model"=>"event.my_form_data.thanked_reward" }
+                      .col-sm-7.help-block
+                        Optionally reward
+                        %profile-name{ "owner"=>"event.owner" }
+                        for suggesting this issue.
+                    .form-group{ "ng-show"=>"issue.can_add_bounty" }
+                      %label.col-sm-2.control-label
+                        Bounty:
+                      .col-sm-3
+                        .input-group
+                          .input-group-addon $
+                          %input.form-control{ "type"=>"text", "ng-model"=>"event.my_form_data.bounty_amount" }
+                      .col-sm-7.help-block
+                        Optionally post a bounty on this issue.
+
+                    .form-group
+                      .col-sm-offset-2.col-sm-10
+                        %button.btn.btn-success
+                          %span{ "ng-show"=>"event.my_form_data.bounty_amount || event.my_form_data.thanked_reward" }
+                            %span.glyphicon.glyphicon-shopping-cart
+                            Continue to Cart
+                          %span{ "ng-hide"=>"event.my_form_data.bounty_amount || event.my_form_data.thanked_reward" }
+                            %span.glyphicon.glyphicon-thumbs-up
+                            Confirm Thanks
+                        %a.btn.btn-default{ "ng-click"=>"event.show_accept_form=false" } Cancel
+
+                  %form{ "ng-show"=>"event.show_reject_form", "ng-submit"=>"developer_form.reject_issue_suggestion(event)" }
+                    .form-group
+                      %textarea.form-control{:placeholder => "Why are you rejecting this suggestion? (Optional)", :rows => "4", "ng-model"=>"event.my_form_data.rejection_reason"}
+                    .form-group
+                      %button.btn.btn-danger
+                        %span.glyphicon.glyphicon-thumbs-down
+                        Confirm Rejection
+                      %a.btn.btn-default{ "ng-click"=>"event.show_reject_form=false" } Cancel
+
+
+
+
+                %div{ "ng-if"=>"event.type=='developer_goal'"}
+                  %h5.mt-3{ "style" => "margin-top: 0" }
+                    %profile-name{ "owner"=>"event.owner" }
+                    set a goal of {{event.amount | dollars}}.
+                    %small {{event.updated_at | timeDiff }} ago
+                  .issue-goals.progress
+                    .progress-bar.progress-bar-cool-grey{:style => "width: {{ 100*issue.bounty_total/event.amount | atLeast:15 | atMost:100 | number:0 }}%;"}
+                      %span {{issue.bounty_total/event.amount | percent}}
                   %p
-                    {{response.description}}
+                    %a.btn.btn-light-blue{"ng-if"=>"event.amount > issue.bounty_total", "ng-click" => "backer_form.post_bounty(event.amount-issue.bounty_total)" } Post Bounty
+                    %a.btn.btn-light-blue{"ng-if"=>"event.amount <= issue.bounty_total", "ng-click" => "backer_form.post_bounty()" } Increase Bounty
+
+
+
+
+                %div{ "ng-if"=>"event.type=='solution'" }
+                  %h5.mt-3{ "style" => "margin-top: 0" }
+
+                    %div{ "ng-if"=>"event.status=='started'" }
+                      %profile-name{ "owner" => "event.owner" }
+                      %span{"ng-if"=>"!event.completion_date"} started working on this issue.
+                      %span{"ng-if"=>"event.completion_date"} started working on this issue and expects to finish by {{event.completion_date | date}}.
+
+                      %small {{event.updated_at | timeDiff }} ago
+
+                    %div{ "ng-if"=>"event.status=='stopped'"}
+                      %profile-name{ "owner" => "event.owner" }
+                      stopped working on this issue.
+                      %small {{event.updated_at | timeDiff }} ago
+
+                  %p{ "ng-if"=>"event.note" }
+                    %span.text-muted
+                      %profile-name{ "owner" => "event.owner" }
+                      wrote:
+                  %p
+                    {{event.note}}
+
+                  %p{ "ng-show" => "event.url" }
+                    %span{ "ng-if"=>"event.url.indexOf('http://') != 0 && event.url.indexOf('https://') != 0" }
+                      Code URL: {{event.url}}
+                    %span{ "ng-if" => "event.url.indexOf('http://') == 0 || event.url.indexOf('https://') == 0" }
+                      %a.btn.btn-gunmetal.btn-small-radius{ "ng-href" => "{{event.url}}", "target" => "_blank" }
+                        %span.glyphicon.glyphicon-new-window
+                        View Code
+
+
+
+
+
+
+
+                %div{ "ng-if"=>"event.type=='bounty_claim'"}
+
+                  %h5.font-weight-semibold.mt-3.mb-0{ "style" => "margin-top: 0" }
+
+                    %span{ "ng-if"=>"issue.paid_out" }
+
+                      %span{ "ng-if"=>"event.collected" }
+                        %profile-name{ "owner" => "event.owner" }
+                        was awarded the
+                        %span {{event.amount | dollars}}
+                        bounty!
+
+                      %span{ "ng-if"=>"!event.collected" }
+                        %profile-name{ "owner" => "event.owner" }
+                        submitted a claim which wasn't accepted.
+
+
+                    %span{ "ng-if"=>"!issue.paid_out" }
+
+                      %span{ "ng-if"=>"event.contested" }
+                        %profile-name{ "owner" => "event.owner" }
+                        submitted a claim which is being contested
+                        %span{"ng-if"=>"event.backers_count===1"}
+                          but the backer hasn't responded.
+                        %span{"ng-if"=>"event.backers_count>1"}
+                          and {{event.accept_count+event.reject_count}} of {{event.backers_count}} backers have responded.
+
+                      %span{ "ng-if"=>"!event.contested && !event.collected && !event.disputed" }
+                        %profile-name{ "owner" => "event.owner" }
+                        submitted a claim
+                        %span{"ng-if"=>"event.backers_count===1"}
+                          but the backer hasn't responded.
+                        %span{"ng-if"=>"event.backers_count>1"}
+                          and {{event.accept_count}} of {{event.backers_count}} backers have responded.
+
+                      %span{"ng-if"=>"!event.contested && !event.collected && event.disputed" }
+                        %profile-name{ "owner" => "event.owner" }
+                        submitted a claim which is being disputed.
+
+                  %small {{event.created_at | timeDiff }} ago
+
+                  %p.text-muted{ "style"=>"font-style: italic;", "ng-if"=>"!issue.paid_out && !event.contested && !event.disputed" }
+                    NOTE: This will be paid out if all backers accept this or if no backers reject this by {{event.dispute_period_ends_at | date:'MMM d, y h:mm a':'UTC' }} (GMT).
+
+                  %p{ "ng-if"=>"event.description"}
+                    %span.text-muted
+                      %profile-name{ "owner" => "event.owner" }
+                      wrote:
+                  %p
+                    {{event.description}}
+                  %div
+                    %span{ "ng-show" => "event.code_url" }
+                      %span{ "ng-if"=>"event.code_url.indexOf('http://') != 0 && event.code_url.indexOf('https://') != 0" }
+                        Code URL: {{event.code_url}}
+                      %span{ "ng-if" => "event.code_url.indexOf('http://') == 0 || event.code_url.indexOf('https://') == 0" }
+                        %a.btn.btn-gunmetal.btn-small-radius{ "ng-href" => "{{event.code_url}}", "target" => "_blank" }
+                          %span.glyphicon.glyphicon-new-window
+                          View Code
+
+                  %div.alert{ "ng-if"=>"issue.can_respond_to_claims && event.in_dispute_period", "style"=>"margin-top:14px", "ng-class"=>"{'alert-info': event.my_response.value !== false, 'alert-danger': event.my_response.value === false }" }
+
+                    %div{ "ng-if"=>"!event.my_form_data" }
+
+                      %div{ "ng-if"=>"event.my_response.value!==true && event.my_response.value!==false" }
+                        {{current_person.display_name}}, your response is needed:
+                        %a.btn.btn-success{ "ng-click" => "backer_form.start_response(event, 'accept')" }
+                          %span.glyphicon.glyphicon-thumbs-up
+                          Accept
+                        %a.btn.btn-danger{ "ng-click" => "backer_form.start_response(event, 'reject')" }
+                          %span.glyphicon.glyphicon-thumbs-down
+                          Reject
+
+                      %div{ "ng-if"=>"event.my_response.value===true" }
+                        You approved this bounty claim {{ event.my_response.updated_at | timeDiff }} ago.
+                        %a.btn.btn-default{ "ng-click" => "backer_form.start_response(event, 'retract')" }
+                          Retract Vote
+
+                      %div{ "ng-if"=>"event.my_response.value===false" }
+                        You rejected this bounty claim {{ event.my_response.updated_at | timeDiff }} ago.
+                        %a.btn.btn-success{ "ng-click" => "backer_form.start_response(event, 'resolve')" }
+                          %span.glyphicon.glyphicon-thumbs-up
+                          Accept
+                        %a.btn.btn-default{ "ng-click" => "backer_form.start_response(event, 'retract')" }
+                          Retract Vote
+
+
+                    %form{ "ng-if"=>"event.my_form_data && event.my_form_data.action" }
+                      .form-group
+                        %textarea.form-control{:placeholder => "Please leave some feedback for the developer.", :rows => "4", "ng-model"=>"event.my_form_data.description"}
+
+                      %a.btn.btn-success{ "ng-click" => "backer_form.accept_claim(event)", "ng-show" => "event.my_form_data.action==='accept'" }
+                        %span.glyphicon.glyphicon-thumbs-up
+                        Confirm Accept
+                      %a.btn.btn-success{ "ng-click" => "backer_form.resolve_claim(event)", "ng-show" => "event.my_form_data.action==='resolve'" }
+                        %span.glyphicon.glyphicon-thumbs-up
+                        Confirm Accept
+                      %a.btn.btn-danger{ "ng-click" => "backer_form.reject_claim(event)", "ng-show" => "event.my_form_data.action==='reject'" }
+                        %span.glyphicon.glyphicon-thumbs-down
+                        Confirm Reject
+                      %a.btn.btn-marigold-salmon{ "ng-click" => "backer_form.reset_claim(event)", "ng-show" => "event.my_form_data.action==='retract'" }
+                        %span.glyphicon.glyphicon-ban-circle
+                        Retract Vote
+                      %a.btn.btn-default{ "ng-click" => "backer_form.cancel_response(event)" }
+                        %span.glyphicon.glyphicon-thumbs-up
+                        Cancel
+
+
+
+                  %div.mt-3
+                    %div{ "ng-repeat" => "response in event.responses", "style" => "display: flex; justify-content: center" }
+                      %div.vertical-align-middle{ "style" => "width:24px; vertical-align: top; padding-bottom: 5px" }
+                        %profile-pic{ "owner" => "response.owner" }
+                      %div
+                        %div{ "style" => "vertical-align: top; padding-left: 5px"}
+                          %span{ "ng-if"=>"response.description"}
+                            = succeed '' do
+                              %profile-name{ "owner" => "response.owner" }
+                              %span{ "ng-switch"=>"response.value" }
+                                %span.text-success{ "ng-switch-when"=>"true" }> accepted
+                                %span.text-danger{ "ng-switch-when"=>"false" }> rejected
+                                %span.text-muted{ "ng-switch-when"=>"null" }> retracted
+                          %span{ "ng-if"=>"!response.description"}
+                            = succeed '.' do
+                              %profile-name{ "owner" => "response.owner" }
+                              %span{ "ng-switch"=>"response.value" }
+                                %span.text-success{ "ng-switch-when"=>"true" }> accepted
+                                %span.text-danger{ "ng-switch-when"=>"false" }> rejected
+                                %span.text-muted{ "ng-switch-when"=>"null" }> retracted
+                        %div
+                          %p
+                            {{response.description}}

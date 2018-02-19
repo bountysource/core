@@ -1,5 +1,7 @@
-.search-bullets > li { line-height: 45px; }
-.search-bullets > li > ul > li { line-height: 25px; }
+.search-bullets ul {
+
+}
+
 .badge.search-filter {
   line-height: 20px;
   margin: 2px;
@@ -19,14 +21,14 @@ li.tracker-box {
   margin-bottom: 10px;
 }
 
-.bounty-search-well {
-  padding-bottom: 4px;
-}
-
 .sort-by-box {
   margin-bottom: 10px;
 }
 
 .results-info {
   margin-bottom: 5px;
+}
+
+form.bounty-search img.advanced-img {
+  height: 50px;
 }

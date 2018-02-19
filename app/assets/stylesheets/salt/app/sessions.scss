@@ -1,0 +1,35 @@
+.form-signup {
+  padding-top: 50px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .signup-button {
+    margin-top: 45px;
+    width: 350px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+}
+
+.form-signup label.control-label {
+  font-weight: 400;
+}
+
+.form-login {
+  padding-top: 50px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .login-button {
+    margin-top: 45px;
+    width: 350px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+}

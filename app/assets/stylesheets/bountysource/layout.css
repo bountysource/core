@@ -22,6 +22,15 @@ a {
   color: #33ccff;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
+a.gunmetal-link {
+  font-weight: 500;
+  color: #485f64;
+}
+
 /* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;
@@ -83,20 +92,10 @@ table.table-fixed { table-layout: fixed; }
   margin-top:0px;
 }
 
-a:hover {
-  cursor: pointer;
-}
+
 
 .unstyled-anchor {
   cursor: default !important;
-}
-
-.breadcrumb {
-  margin-top: 10px;
-}
-
-.nav-tabs {
-  margin-bottom: 15px;
 }
 
 .image_body_html img {
@@ -117,16 +116,6 @@ input[type="text"]:disabled.white-input  {
 
 .row-green {
   background-color: #ecfde4;
-}
-
-.table td.center-height { vertical-align: middle; }
-
-/* Center all td in a table, yay */
-.table.table-centered tr > td { vertical-align: middle; }
-
-.table-no-border td, .table-no-border th, .table.table-no-border-top tr:first-of-type td, .table.table-no-border-top tr:first-of-type th {
-  border: 0 !important;
-  background-color: transparent !important;
 }
 
 .form-without-bottom-margin { margin-bottom: -15px; }

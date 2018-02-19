@@ -1,9 +1,22 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li class="active"><a>Press</a></li>
+</ul>
+
 <h1>News Coverage and Press</h1>
 
-<dl ng-repeat="date in (articles | pluck:'date' | unique)">
-  <dt style="font-weight: normal; font-style: italic">{{date}}</dt>
-  <dd ng-repeat="article in articles | filter:{date:date}">
-    <a href="{{article.href}}" target="_blank">{{article.title}}</a> on <b>{{article.source}}</b>
-    <span ng-show="article.author">by {{article.author}}</span>
-  </dd>
-</dl>
+<table class="table table-centered">
+  <tbody>
+    <tr ng-repeat="article in articles">
+      <td class="p-5 text-muted" ng-class="{'bt-0': $index == 0}">{{article.date}}</td>
+      <td ng-class="{'bt-0': $index == 0}">
+        <a class="black-link" href="{{article.href}}" target="_blank">{{article.title}}</a>
+        <p>
+          on <em>{{article.source}}</em>
+          <span ng-show="article.author">by {{article.author}}</span>
+        </p>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>

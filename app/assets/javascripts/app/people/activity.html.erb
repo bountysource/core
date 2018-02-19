@@ -10,11 +10,11 @@
     <!-- Profile picture, homepage email -->
     <img class="img-responsive img-circle center-block" ng-src="{{person.large_image_url}}" style='max-width: 220px' />
 
-    <a ng-show="person.url" class="btn btn-default center-block mt-3" ng-href="{{person.url}}">
+    <a ng-show="person.url" class="btn btn-default center-block mt-3 border-gunmetal" ng-href="{{person.url}}">
       <i class="glyphicon glyphicon-globe pr-3" style="vertical-align: -2px"></i>
        {{person.url | cleanUrl | truncate:25}}
     </a>
-    <a ng-show="person.public_email" class="btn btn-default center-block mt-3" ng-href="mailto:{{person.public_email}}">
+    <a ng-show="person.public_email" class="btn btn-default center-block mt-3 border-gunmetal" ng-href="mailto:{{person.public_email}}">
       <i class="glyphicon glyphicon-envelope pr-3 style="vertical-align: -2px"></i> 
       {{person.public_email | truncate:25}}
     </a>
@@ -70,7 +70,7 @@
     </table>
 
     <div ng-show="current_person.id == person.id" class="text-center">
-      <a href="/settings" class="btn btn-default">Edit Your Profile</a>
+      <a href="/settings" class="btn btn-default btn-long border-gunmetal">Edit Your Profile</a>
     </div>
   </div>
 

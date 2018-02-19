@@ -11,8 +11,8 @@
         <!-- Loading message... -->
         <div collapse="bounties_resolved" class="text-center">
           <p class="lead">Loading bounties...</p>
-          <div class="progress progress-striped active">
-            <div class="progress-bar" style="width: 100%;"></div>
+          <div class="progress active">
+            <div class="progress-bar progress-bar-aquamarine" style="width: 100%;"></div>
           </div>
         </div>
 
@@ -47,13 +47,13 @@
         </div> -->
 
         <div ng-repeat="issue_group in issue_groups | orderBy:'-bounty_total'">
-          <h3>
-            <img ng-src="{{(issue_group.bounties[0].issue.tracker.team || issue_group.bounties[0].issue.tracker).image_url}}" style="width:32px;height:32px" />
+          <h4>
+            <img ng-src="{{(issue_group.bounties[0].issue.tracker.team || issue_group.bounties[0].issue.tracker).image_url}}" class="img-circle" style="width:32px;height:32px" />
             {{(issue_group.bounties[0].issue.tracker.team||issue_group.bounties[0].issue.tracker).name}}
-            <small>{{issue_group.bounty_total | dollars}}</small>
-          </h3>
+            <span>{{issue_group.bounty_total | dollars}}</span>
+          </h4>
 
-          <table class="table table-condensed table-striped table-hover issue-table">
+          <table class="table table-condensed table-no-separator issue-table">
             <!-- <thead>
             <tr>
               <th style="width: 65%;">Issue</th>
@@ -69,7 +69,7 @@
             <tbody>
             <tr ng-repeat="bounty in issue_group.bounties | orderBy:'-amount'">
               <td class="center-height" style="width:75%">
-                <a ng-href="/issues/{{bounty.issue.slug}}">
+                <a class="text-gunmetal font-weight-bold" ng-href="/issues/{{bounty.issue.slug}}">
                   {{bounty.issue.title}}
                   <span ng-show="!bounty.issue.can_add_bounty && !bounty.issue.paid_out" class="label label-warning">closed</span>
                 </a>
@@ -77,7 +77,7 @@
               <td class="center-height" style="width:15%">
                 <a ng-href="/issues/{{bounty.issue.slug}}">
                   <div class="progress table-progress" html="true" popover="{{ bounty.status }}" popover-title="{{ bounty.title }}" popover-trigger="mouseenter" style="cursor: pointer; height:10px">
-                    <div class="progress-bar" style="width: {{ bounty.progress_sum | atLeast:15 | atMost:100 | number:0 }}%; vertical-align: middle;">
+                    <div class="progress-bar progress-bar-light-blue" style="width: {{ bounty.progress_sum | atLeast:15 | atMost:100 | number:0 }}%; vertical-align: middle;">
                       <!-- {{ bounty.progress_sum }}% -->
                     </div>
                   </div>
@@ -89,50 +89,14 @@
             </tbody>
           </table>
         </div>
-
-        <div ng-show="claimed_bounties.length > 0" style="margin-top:40px">
-          <h3 class="no-margin">Claimed Bounties</h3>
-          <p>Bounties posted by {{team.name}} that have been claimed by developers.</p>
-          <table class="table table-condensed table-striped">
-            <thead>
-            <tr>
-              <th style="width: 4%;"></th>
-              <th style="width: 61%;">Issue</th>
-              <th style="width: 30%;"><a ng-click="update_sort(claimed_sort, 'issue.paid_at')">Paid Out</a></th>
-              <th style="text-align: center; cursor: pointer; width: 10%;">
-                <a ng-click="update_sort(claimed_sort, 'amount')">
-                  <div tooltip="Bounty Amount"><strong>$</strong></div>
-                </a>
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="bounty in claimed_bounties | orderBy:claimed_sort.column:claimed_sort.desc">
-              <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"><img ng-src="{{ bounty.issue.tracker.image_url }}" style="width:16px;height:16px"></a></td>
-              <td class="center-height">
-                <a ng-href="/issues/{{bounty.issue.slug}}">
-                  <i ng-show="bounty.issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
-                  {{bounty.issue.title}}
-                </a>
-              </td>
-              <td class="center-height">{{bounty.issue.paid_at | date:'medium'}}</td>
-              <td class="center-height" style="text-align: center;"><strong>{{bounty.amount | dollars}}</strong></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div ng-show="bounties_resolved && claimed_bounties.length==0 && open_bounties.length==0">
-          <h4>There are no bounties associated with this team</h4>
-        </div>
       </div>
       <div class="col-md-4">
 
-        <div class="panel panel-success panel-bold" ng-hide="team.is_bounty_hunter">
+        <div class="panel panel-marigold-salmon" ng-hide="team.is_bounty_hunter">
           <div class="panel-heading text-center" style="font-size:18px">Bounty Alerts</div>
           <div class="panel-body text-center">
             <p style="font-size: 18px; font-weight: bold">Want to receive email alerts for {{team.name}} bounties?</p>
-            <button type="button" class="btn btn-success" ng-click="bountyHunterOptIn()" ng-hide="team.is_bounty_hunter"><span class="glyphicon glyphicon-star"></span> Become a Bounty Hunter</button>
+            <button type="button" class="btn btn-default-border-salmon pt-3 pb-3" ng-click="bountyHunterOptIn()" ng-hide="team.is_bounty_hunter"><span class="glyphicon glyphicon-star"></span> Become a Bounty Hunter</button>
           </div>
         </div>
 
@@ -143,17 +107,52 @@
           </div>
         </div>
 
-        <div class="panel panel-primary" ng-if="team.accepts_issue_suggestions">
+        <div class="panel panel-cool-grey" ng-if="team.accepts_issue_suggestions">
           <div class="panel-heading text-center" style="font-size:18px">Issue Suggestions</div>
           <div class="panel-body text-center">
             <p style="font-size:18px; font-weight: bold;">Found an issue that {{team.name}} should know about?</p>
-            <div class="text-center"><a ng-href="/teams/{{team.slug}}/issue_suggestions/new" class="btn btn-primary"><span class="glyphicon glyphicon-flag"></span> Suggest an Issue</a></div>
+            <div class="text-center"><a ng-href="/teams/{{team.slug}}/issue_suggestions/new" class="btn btn-light-blue btn-long"><span class="glyphicon glyphicon-flag"></span> Suggest an Issue</a></div>
           </div>
         </div>
 
         <target-blank model="team.resources_markdown">
           <div ng-show="team.resources_markdown" class="markdown markdown-small-headers" btf-markdown="team.resources_markdown"></div>
         </target-blank>
+
+        <div ng-show="claimed_bounties.length > 0" style="margin-top:40px">
+          <h4 class="text-center font-weight-semibold">Claimed Bounties</h4>
+          <table class="table table-condensed table-no-separator">
+            <thead>
+            <tr>
+              <th style="width: 4%;"></th>
+              <th style="width: 61%;">Issues</th>
+              <!-- <th style="width: 30%;"><a ng-click="update_sort(claimed_sort, 'issue.paid_at')">Paid Out</a></th> -->
+              <th style="text-align: center; cursor: pointer; width: 10%;">
+                <a class="text-gunmetal" ng-click="update_sort(claimed_sort, 'amount')">
+                  <div tooltip="Bounty Amount"><strong>$</strong></div>
+                </a>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="bounty in claimed_bounties | orderBy:claimed_sort.column:claimed_sort.desc">
+              <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left"><img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-circle pt-4 pb-4" style="width:16px;height:16px"></a></td>
+              <td class="center-height">
+                <a ng-href="/issues/{{bounty.issue.slug}}" class="text-gunmetal font-weight-semibold">
+                  <i ng-show="bounty.issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
+                  {{bounty.issue.title}}date
+                </a>
+                <p class="m-0 text-muted">{{bounty.issue.paid_at | date:'medium'}}</p>
+              </td>
+              <td class="center-height" style="text-align: center;"><strong>{{bounty.amount | dollars}}</strong></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div ng-show="bounties_resolved && claimed_bounties.length==0 && open_bounties.length==0">
+          <h4>There are no bounties associated with this team</h4>
+        </div>
 
       </div>
     </div>

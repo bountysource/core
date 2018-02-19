@@ -1,0 +1,226 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li class="active"><a href="/bounties/search">Bounty Search</a></li>
+</ul>
+<section class="headers">
+  <h3>Search Results</h3>
+  <div>
+    <p>Browsing <strong>{{issues_count | number}}</strong> bounties</p>
+  </div>  
+</section>
+
+<section id="bounty-search-form">
+  <form ng-submit="submit_query()" class="form bounty-search">
+    <div class="row display-flex vertical-align-middle">
+      <div class="col-xs-8">
+        <div class="form-group m-0">
+          <div class="input-group search-input">
+            <input type="text" placeholder="Enter search terms here" ng-model="form_data.search" class="form-control">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <a ng-click="toggle_advanced_search()">
+          <%= image_tag 'icons/icon_advanced_search.svg', class: 'advanced-img' %>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div ng-show="show_advanced_search">
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+          <div class="form-group">
+            <label class="label-control">Sort by:</label>
+            <select class="form-control" ng-model="form_data.order" ng-options="option.value as option.label for option in sort_options"></select>
+          </div>
+
+          <div class="form-group">
+            <div class="btn-group">
+              <button class="btn" ng-class="(form_data.direction == 'asc') ? 'btn-light-blue' : 'btn-default'" btn-radio="'asc'" type="button" ng-model="form_data.direction">{{update_direction(form_data.order).asc}}</button>
+              <button class="btn" ng-class="(form_data.direction == 'desc') ? 'btn-light-blue' : 'btn-default'" btn-radio="'desc'" type="button" ng-model="form_data.direction">{{update_direction(form_data.order).desc}}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+          <div class="form-group">
+            <label>Language:</label>
+            <input name="input" type="text" class="form-control" placeholder="Search for languages"
+                   ng-model="languages_input"
+                   typeahead="language as language.name for language in all_languages | filter:$viewValue | limitTo: 8"
+                   typeahead-editable="false"
+                   autocomplete="off"
+                   typeahead-wait-ms="150"
+            >
+          </div>
+
+          <div class="filter-box" collapse="languages_loaded.length <= 0">
+            <span class="badge search-filter" ng-repeat="language in languages_loaded">
+              <button type="button" class="close" ng-click="remove_language(language)">
+                &times;
+              </button>
+              <span>{{language.name}}</span>
+            </span>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+          <div class="row form-group">
+            <div class="col-xs-6">
+              <label>Min Amount:</label>
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control bl-0" min="0" step="any" ng-model="form_data.min">
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <label>Max Amount:</label>
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="span8 form-control bl-0" min="1" step="any" ng-model="form_data.max">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+          <div class="form-group">
+            <label class="label-control">Limit to projects:</label>
+            <input name="input" type="text" class="search form-control" placeholder="Search in projects"
+                   ng-model="trackers_input"
+                   typeahead="tracker as tracker.name for tracker in do_tracker_typeahead($viewValue)"
+                   typeahead-editable="false"
+                   autocomplete="off"
+                   typeahead-wait-ms="150">
+          </div>
+
+          <div class="project-box" collapse="trackers_loaded <= 0">
+            <span class="badge search-filter" ng-repeat="tracker in trackers_loaded">
+              <button type="button" class="close" ng-click="remove_tracker(tracker)">
+                &times;
+              </button>
+              {{tracker.name}}
+            </span>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="form-group">
+          <button class="btn btn-light-blue center-block btn-long" type="submit">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+<div class="row">
+  <div class="col-xs-12">
+
+    <!-- Featured Issues Table -->
+    <!-- <loading-bar ng-show="loading_featured_issues">Loading featured issues...</loading-bar>
+    <div ng-show="featured_issues.length > 0">
+      <h3>Featured Issues</h3>
+      <table class="table table-striped table-condensed table-hover">
+        <thead>
+          <tr>
+            <th class="span4">Project</th>
+            <th class="span8">Title</th>
+            <th style="text-align: center">
+              <a tooltip="Bounty total"><span style="color: black">$</span></a>
+            </th>
+            <th style="text-align: center">
+              <a tooltip="Age of Issue"><i class="glyphicon glyphicon-time"></i></a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="issue in featured_issues | orderBy:'-bounty_total'">
+            <td>
+              <a ng-href="/trackers/{{ issue.tracker.slug }}"><img ng-src="{{issue.tracker.image_url }}" class="issue-table-tracker-img"></img>  {{issue.tracker.name}}</a>
+            </td>
+            <td>
+              <a ng-href="/issues/{{issue.slug}}">
+                <i ng-show="issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
+                {{issue.title}}
+              </a>
+            </td>
+
+            <td style="text-align: center">
+              <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
+                {{issue.bounty_total | dollars:{space:true} }}
+              </a>
+            </td>
+
+            <td style="text-align: center">
+              <a ng-href="/issues/{{issue.slug}}" class="label label-info">
+                {{issue.created_at | timeAgoShort }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+    <loading-bar ng-show="loading_search_results">Searching...</loading-bar>
+
+    <div ng-show="!loading_search_results">
+      <div ng-show="issues_count == 0" class="alert alert-salmon">No results found.</div>
+
+      <div ng-show="search_results.length > 0">
+        <br>
+        <table class="table table-condensed table-centered">
+          <thead>
+            <tr style="text-align: center">
+              <th class="span4">Project</th>
+              <th class="span8">Title</th>
+              <th>
+                <a ng-click="change_order_col('bounty_total', form_data.page)" tooltip="Bounty total">
+                  <strong class="text-gunmetal">Money</strong>
+                </a>
+              </th>
+              <th>
+                <a ng-click="change_order_col('remote_created_at', form_data.page)" tooltip="Age of Issue">
+                  <strong class="text-gunmetal">Date</strong>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="issue in search_results">
+              <td class="pt-5 pb-5">
+                <a ng-href="/trackers/{{ issue.tracker.slug }}">
+                  <img ng-src="{{issue.tracker.image_url }}" class="issue-table-tracker-img img-circle"></img>  {{issue.tracker.name}}
+                </a>
+              </td>
+              <td>
+                <a ng-href="/issues/{{issue.slug}}">
+                  <i ng-show="issue.bounty_total >= 1000" class="glyphicon glyphicon-fire"></i>
+                  {{issue.title}}
+                  <span ng-show="issue.paid_out" class="label label-info">paid out</span>
+                  <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-salmon">closed</span>
+                </a>
+              </td>
+
+              <td style="text-align: center">
+                <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="black-link"> <!-- TODO (PERF ISSUE): tooltip="{{issue.bounty_total | dollars}} in Bounties" tooltip-placement="bottom"-->
+                  {{issue.bounty_total | dollars:{space:true} }}
+                </a>
+              </td>
+
+              <td style="text-align: center">
+                <a ng-href="/issues/{{issue.slug}}" class="black-link"> <!--tooltip="Created: {{issue.created_at | date}}" tooltip-placement="bottom"-->
+                  {{issue.created_at | timeAgoShort }}
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div ng-show="issues_count > 50">
+        <pagination total-items="issues_count" page="form_data.page" max-size="maxSize" num-pages="pageCount" items-per-page="perPage" on-select-page="updatePage(page)"></pagination>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+.bountysource-thumbs-box { 
+  position: absolute; 
+  width: 50px; 
+}
+
+.bountysource-thumbs-box .thumb-wrapper { 
+  text-align: center; 
+  border-top-left-radius: 3px; 
+  border-top-right-radius: 3px; 
+  cursor: pointer; 
+  width: 50px; 
+  height: 50px;
+}
+
+.bountysource-thumbs-box .info-wrapper { 
+  background: white; 
+  border-bottom-left-radius: 3px; 
+  border-bottom-right-radius: 3px; 
+  text-align: center; 
+  overflow: hidden; 
+  color: #9b9b9b; 
+  font-family: Monteserrat, Helvetica, arial, freesans, clean, sans-serif; white-space: nowrap; 
+ }
+
+.bountysource-thumbs-box-mini {
+  float: left;
+  white-space: nowrap; 
+  height: 20px; 
+  line-height: 0;  
+}
+
+.bountysource-thumbs-box-mini .thumb-wrapper { 
+  display: inline-block; 
+  display: inline-block; 
+  padding: 0 2px; 
+  cursor: pointer; 
+  background-image: linear-gradient(#fcfcfc, #eee); 
+  width: 24px; 
+  height: 24px; 
+}
+
+.bountysource-thumbs-box-mini .thumb-wrapper:hover { background-image: linear-gradient(#ececec, #ddd); }
+.bountysource-thumbs-box-mini .info-wrapper { display: inline-block; padding: 0 3px; color: #333; font-size: 13px; font-family: Monteserrat, Helvetica, arial, freesans, clean, sans-serif; line-height: 21px; height: 20px; overflow: hidden; vertical-align: top; box-sizing: content-box; }
+
+.bountysource-thumbs-box-mini .thumb-wrapper, 
+.bountysource-thumbs-box-mini .thumb-wrapper:hover { border-color: #bbb; }
+.bountysource-thumbs-box-mini .thumb-wrapper { border-width: 1px 1px 1px 1px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; }
+.bountysource-thumbs-box-mini .info-wrapper { border-width: 1px 1px 1px 0; border-top-right-radius: 2px; border-bottom-right-radius: 2px; }
+
+.bountysource-thumbs-box-mini.thumbs-at-zero .thumb-wrapper { border-top-right-radius: 2px; border-bottom-right-radius: 2px; }
+.bountysource-thumbs-box-mini.thumbs-at-zero .info-wrapper { display: none; }
+
+
+.bountysource-thumbs-box .thumb-wrapper,
+.bountysource-thumbs-box-mini .thumb-wrapper {
+  background-image: image-url("icons/icon_like_unselected.svg");
+  background-size: cover;
+}
+
+.bountysource-thumbs-box .thumb-wrapper:hover,
+.bountysource-thumbs-box.has-thumbed-up .thumb-wrapper,
+.bountysource-thumbs-box-mini .thumb-wrapper:hover,
+.bountysource-thumbs-box-mini.has-thumbed-up .thumb-wrapper {
+  background-image: image-url("icons/icon_like_selected.svg");
+  background-size: cover;
+}
+
+
+.bountysource-thumbs-extension-is-installed .browser-extension-banner { display: none; }
+.browser-extension-banner { background: #dff0d8; border-top: 1px solid #d6e9c6; padding: 4px 0 }

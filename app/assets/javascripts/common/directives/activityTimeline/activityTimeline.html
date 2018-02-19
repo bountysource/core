@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table">
+  <table class="table table-centered">
     <tr ng-repeat="action in timeline | orderBy:'-sort_date'">
       <td ng-if="action.type == 'Pledge'">
         Pledged <strong>{{ action.amount | dollars }}</strong> to <a ng-href="/fundraisers/{{ action.fundraiser.slug }}">{{action.fundraiser.title}}</a>
@@ -25,7 +25,9 @@
         ng-href="{{action.bounty_claim.issue.frontend_path}}">{{action.bounty_claim.issue.title}}</a>
       </td>
 
-      <td class="text-muted">{{ action.sort_date | date:'medium' }}</td>
+      <td ng-if="action.type == 'NilClass'"></td>
+
+      <td class="text-muted pt-3 pb-3">{{ action.sort_date | date:'medium' }}</td>
     </tr>
   </table>
 </div>

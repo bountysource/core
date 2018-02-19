@@ -7,106 +7,123 @@
 <h1>Settings</h1>
 <ng-include src="'app/settings/tabs.html'"></ng-include>
 
-<form class="form-horizontal" name="form" novalidate="">
+<form class="form-horizontal settings-form" name="form" novalidate="">
   <div class="alert alert-danger alert-danger" ng-show="error">{{error}}</div>
   <div class="alert alert-success" ng-show="success">{{success}}</div>
 
   <div class="form-group">
-    <label class="control-label col-md-3" for="inputEmail">Email:</label>
+    <label class="control-label col-md-3" for="inputEmail">Email</label>
     <div class="col-md-4">
-      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" class="input-xlarge form-control" required="">
+      <input type="email" id="inputEmail" name="email" placeholder="john@doe.com" ng-model="form_data.email" class="form-control input-medium" required="">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-3" for="inputFirstName">First and Last Name:</label>
+    <label class="control-label col-md-3" for="inputFirstName">First and Last Name</label>
     <div class="col-md-3">
-      <input type="text" id="inputFirstName" placeholder="John" ng-model="form_data.first_name" class="input-small form-control">
+      <input type="text" id="inputFirstName" placeholder="John" ng-model="form_data.first_name" class="input-medium form-control">
     </div>
     <div class="col-md-3">
-      <input type="text" placeholder="Doe" ng-model="form_data.last_name" class="input-small form-control">
+      <input type="text" placeholder="Doe" ng-model="form_data.last_name" class="input-medium form-control">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-3" for="inputDisplayName">Display Name:</label>
+    <label class="control-label col-md-3" for="inputDisplayName">Display Name</label>
     <div class="col-md-6">
       <input type="text" id="inputDisplayName" placeholder="johnny5" ng-model="form_data.display_name" class="input-medium form-control">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-3">Picture:</label>
+    <label class="control-label col-md-3">Picture</label>
 
     <div class="col-md-6">
-
-      <div class="checkbox no-padding"><label class="setings_profile_pic">
-        <input type="radio" ng-model="profile_input.radio" value="{{current_person.image_url}}">
-        <img ng-src="{{form_data.image_url}}" tooltip="Current">
-      </label></div>
-
-      <div class="checkbox no-padding" ng-show="current_person.github_account"><label class="setings_profile_pic">
-        <input type="radio" ng-model="profile_input.radio" value="{{current_person.github_account.image_url}}">
-        <img ng-src="{{current_person.github_account.image_url}}" tooltip="GitHub">
-      </label></div>
-
-      <div class="checkbox no-padding" ng-show="current_person.twitter_account"><label class="setings_profile_pic">
-        <input type="radio" ng-model="profile_input.radio" value="twitter:{{current_person.twitter_account.login}}">
-        <img ng-src="{{current_person.twitter_account.image_url}}" tooltip="Twitter">
-      </label></div>
-
-      <div class="checkbox no-padding" ng-show="current_person.facebook_account"><label class="setings_profile_pic">
-        <input type="radio" ng-model="profile_input.radio" value="facebook:{{current_person.facebook_account.login || current_person.facebook_account.uid}}" style="margin-top: 18px">
-        <img ng-src="{{current_person.facebook_account.image_url}}" tooltip="Facebook">
-      </label></div>
-
-      <div class="input-group">
-        <span class="input-group-addon">
+      <div class="flex-row">
+        <div>
           <input type="radio" ng-model="profile_input.radio" value="custom">
-        </span>
-          <input type="text" ng-model="profile_input.text" ng-change="profile_input.radio='custom'" placeholder="Image URL or Gravatar Email" class="form-control">
+        </div>
+        <div style="width: 100%;">
+          <input type="text" ng-model="profile_input.text" ng-change="profile_input.radio='custom'" placeholder="Image URL or Gravatar Email" class="form-control input-medium">
+        </div>
+      </div>
+
+      <div class="flex-row mt-3">
+        <div class="row-center">
+          <div>
+            <input type="radio" ng-model="profile_input.radio" value="{{current_person.image_url}}">
+          </div>
+          <div class="column-center">
+            <img ng-src="{{form_data.image_url}}" tooltip="Current" class="img-circle" style="width: 50px; height: 50px">
+          </div>
+        </div>
+
+        <div class="row-center" ng-show="current_person.github_account">
+          <div>
+            <input type="radio" ng-model="profile_input.radio" value="{{current_person.github_account.image_url}}">
+          </div>
+          <div class="column-center">
+            <img ng-src="{{current_person.github_account.image_url}}" tooltip="GitHub" class="img-circle" style="width: 50px; height: 50px">
+          </div>
+        </div>
+
+        <div class="row-center" ng-show="current_person.twitter_account">
+          <div>
+            <input type="radio" ng-model="profile_input.radio" value="{{current_person.twitter_account.login}}">
+          </div>
+          <div class="column-center">
+            <img ng-src="{{current_person.twitter_account.image_url}}" tooltip="Twitter" class="img-circle" style="width: 50px; height: 50px">
+          </div>
+        </div>
+
+        <div class="row-center" ng-show="current_person.facebook_account">
+          <div>
+            <input type="radio" ng-model="profile_input.radio" value="facebook:{{current_person.facebook_account.login || current_person.facebook_account.uid}}">
+          </div>
+          <div class="column-center">
+            <img ng-src="{{current_person.facebook_account.image_url}}" tooltip="Facebook" class="img-circle" style="width: 50px; height: 50px">
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-3" for="inputLocation">Location:</label>
+    <label class="control-label col-md-3" for="inputLocation">Location</label>
     <div class="col-md-6">
-      <input type="text" id="inputLocation" name="location" placeholder="San Francisco, CA" ng-model="form_data.location" class="form-control">
+      <input type="text" id="inputLocation" name="location" placeholder="San Francisco, CA" ng-model="form_data.location" class="form-control input-medium">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-3" for="inputCompany">Company:</label>
+    <label class="control-label col-md-3" for="inputCompany">Company</label>
     <div class="col-md-6">
-      <input type="text" id="inputCompany" name="company" placeholder="Dunder Mifflin" ng-model="form_data.company" class="form-control">
+      <input type="text" id="inputCompany" name="company" placeholder="Dunder Mifflin" ng-model="form_data.company" class="form-control input-medium">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-3" for="inputUrl">Website:</label>
+    <label class="control-label col-md-3" for="inputUrl">Website</label>
     <div class="col-md-6">
-      <input type="text" id="inputUrl" name="url" placeholder="http://awesome.site/" ng-model="form_data.url" class="form-control">
+      <input type="text" id="inputUrl" name="url" placeholder="http://awesome.site/" ng-model="form_data.url" class="form-control input-medium">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-3" for="inputPublicEmail">Public Email Address:</label>
+    <label class="control-label col-md-3" for="inputPublicEmail">Public Email Address</label>
     <div class="col-md-6">
-      <input type="text" id="inputPublicEmail" name="email" placeholder="john@doe.com" ng-model="form_data.public_email" class="form-control">
+      <input type="text" id="inputPublicEmail" name="email" placeholder="john@doe.com" ng-model="form_data.public_email" class="form-control input-medium">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-3" for="inputBio">Bio:</label>
+    <label class="control-label col-md-3" for="inputBio">Bio</label>
     <div class="col-md-6">
-      <textarea rows="3" class="form-control" id="inputBio" name="bio" placeholder="Once upon a time..." ng-model="form_data.bio"></textarea>
+      <textarea rows="3" class="form-control input-medium" id="inputBio" name="bio" placeholder="Once upon a time..." ng-model="form_data.bio"></textarea>
     </div>
   </div>
 
-  <div class="form-group">
-    <div class="col-md-offset-3 col-md-6">
-      <button type="submit" class="btn btn-success btn-lg" ng-click="save()">Save</button>
-    </div>
-  </div>
+
+  <button type="submit" class="btn btn-light-blue btn-long center-block" ng-click="save()">Save</button>
 </form>
+

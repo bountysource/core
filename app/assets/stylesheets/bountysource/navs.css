@@ -1,5 +1,6 @@
 .nav-tabs {
   border: 0;
+  margin-bottom: 15px;
 }
 
 .nav-tabs > li > a {
@@ -8,13 +9,14 @@
   text-align: left;
   border-bottom: 5px solid #33ccff4c;
   margin-right: 0;
-  color: #485f64;
+  color: #919d9d;
 }
 
 .nav-tabs > li > a:hover, 
 .nav-tabs > li > a:focus {
   background-color: #33ccff;
   border-bottom: 5px solid #33ccff4c;
+  color: white;
 }
 
 .nav-tabs > li.active > a, 

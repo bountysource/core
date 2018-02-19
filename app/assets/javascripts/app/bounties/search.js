@@ -229,6 +229,11 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     return result;
   };
 
+  // toggle advanced search collapse
+  $scope.toggle_advanced_search = function () {
+    $scope.show_advanced_search = !$scope.show_advanced_search;
+  };
+
   //updates pagination. resubmits query with new page number.
   $scope.updatePage = function(page) {
     $scope.submit_query(page);

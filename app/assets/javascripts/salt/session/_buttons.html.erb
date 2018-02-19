@@ -1,9 +1,19 @@
-<div class="signin-button-grid" ng-controller="SessionButtons">
-  <button ng-click="link_with_provider('github')" class="btn btn-github btn-block btn-lg"><i class="fa fa-github"></i> GitHub</button>
-  <button ng-click="link_with_provider('twitter')" class="btn btn-twitter btn-block btn-lg"><i class="fa fa-twitter"></i> Twitter</button>
-  <button ng-click="link_with_provider('facebook')" class="btn btn-facebook btn-block btn-lg"><i class="fa fa-facebook"></i> Facebook</button>
+<div class="row signin-button-grid" ng-controller="SessionButtons">
+  <div class="col-xs-4">
+    <button ng-click="link_with_provider('github')" class="btn btn-github btn-block btn-lg">
+      <%= image_tag("icons/icon_github.svg") %>
+    </button>
+  </div>
+  <div class="col-xs-4">
+    <button ng-click="link_with_provider('twitter')" class="btn btn-twitter btn-block btn-lg">
+      <%= image_tag("icons/icon_twitter.svg") %>
+    </button>
+  </div>
+  <div class="col-xs-4">
+    <button ng-click="link_with_provider('facebook')" class="btn btn-facebook btn-block btn-lg">
+      <%= image_tag("icons/icon_facebook.svg") %>
+    </button>
+  </div>
 </div>
 
-<div style="text-align: center; margin: 30px 0; background: #ccc; height: 1px; line-height: 1px">
-  <span style="padding: 0 15px; background: #fff; font-size: 18px">or</span>
-</div>
+<h4 class="text-center mt-5 mb-5">Or</h4>

@@ -1,4 +1,4 @@
-.issue-list .label-warning[href], .issue-list .badge-warning[href] {
+/*.issue-list .label-warning[href], .issue-list .badge-warning[href] {
   background-color: #F89406;
 }
 
@@ -12,7 +12,7 @@
 
 .issue-list .label-important[href], .issue-list .badge-important[href] {
   background-color: #B94A48;
-}
+}*/
 
 table#bounties-table tr td {
   vertical-align: middle;
@@ -90,9 +90,15 @@ td img.issue-table-tracker-img {
 .table-developer-statuses h4 small { white-space: nowrap; }
 
 
-.issue-header h1 { font-size: 24px; margin-top: 0; margin-left: 60px; min-height: 65px; line-height: 30px }
-@media (max-width: 767px) {
-  .issue-header h1 { margin-left: 0; font-size: 20px; }
+
+.issue-header .issue-title { margin-left: 0 }
+@media (min-width: 767px) {
+  .issue-header .issue-title { 
+    margin-top: 0;
+    margin-left: 78px; 
+    min-height: 65px; 
+    line-height: 30px ;
+  }  
 }
 
 .issue-detailed-list { margin-top: 20px; }
@@ -100,5 +106,8 @@ td img.issue-table-tracker-img {
 .issue-detailed-list .issue-details { margin-left: 60px; }
 .issue-detailed-list .issue-details h3 { margin: 0 0; }
 .issue-detailed-list .issue-details .issue-body { max-height: 200px; overflow: hidden; }
-.issue-detailed-list .issue-details .issue-meta img { max-height:16px; max-width:16px; }
-.issue-detailed-list .issue-details .issue-meta { font-style: italic; color: #888; margin: 6px 0 4px 0; }
+.issue-detailed-list .issue-details .issue-meta { color: #919d9d; margin: 6px 0 4px 0; }
+
+.issue-search img.advanced-img {
+  height: 50px;
+}

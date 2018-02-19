@@ -2,15 +2,14 @@
   <!-- TRACKER HEADER -->
   <div ng-include="'app/trackers/_tracker_header.html'" ng-show="issue.tracker && !team.id"></div>
 
-  <div class="top-border"></div>
   <!-- TEAM HEADER -->
   <div class="team-header" ng-show="team.id">
     <div class="container">
-      <div class="row display-flex">
-        <div class="col-xs-3 col-sm-2 vertical-align-middle pt-4 pb-4">
-          <img ng-src="{{team.image_url_medium}}" class="team-display-image" />
+      <div class="row display-flex vertical-align-middle pt-4 pb-4">
+        <div class="col-xs-12 col-sm-2">
+          <img ng-src="{{team.image_url_medium}}" class="team-display-image center-block" />
         </div>
-        <div class="col-xs-9 col-sm-8 vertical-align-middle pt-4 pb-4" ng-class="{ 'col-sm-5': team.accepts_public_payins }">
+        <div class="col-xs-12 col-sm-8 text-center text-sm-left" ng-class="{ 'col-sm-5': team.accepts_public_payins }">
           <!-- team name -->
           <a ng-href="/teams/{{team.slug}}" class="text-gunmetal">
             <h1>{{team.name}}</h1>
@@ -106,42 +105,46 @@
             <thumbs-up-box issue="issue" thumbs-up-size="large"></thumbs-up-box>
           </div>
 
-          <h1>
-            <span ng-if="issue.tracker && team.id">
-              <a ng-href='/trackers/{{issue.tracker.slug}}' ng-if="!team || !team.id" style="color: #333">{{ issue.tracker.display_name }}</a>
-              <a ng-href='/teams/{{team.slug}}/issues?tracker_ids={{issue.tracker.id}}' ng-if="team && team.id" style="color: #333">{{ issue.tracker.display_name }}</a>
-              &raquo;
-            </span>
-            {{ issue.title }}
+          
+          <div class="issue-title">
+            <issue-status-label issue='issue' size='large'></issue-status-label>
+            <h3>
+              <span ng-if="issue.tracker && team.id">
+                <a ng-href='/trackers/{{issue.tracker.slug}}' ng-if="!team || !team.id" class="text-muted">
+                  {{ issue.tracker.display_name }}
+                </a>
+                <a ng-href='/teams/{{team.slug}}/issues?tracker_ids={{issue.tracker.id}}' ng-if="team && team.id" class="text-muted">
+                  {{ issue.tracker.display_name }}
+                </a>
+                &raquo;
+              </span>
+              {{ issue.title }}
+            </h3>
             <div class="font-size-default mt-2">
               <span class="hidden-sm hidden-md hidden-lg ml-3">
                 <thumbs-up-box issue="issue" thumbs-up-size="small"></thumbs-up-box>
               </span>
-              <issue-status-label issue='issue'></issue-status-label>
-              <a class='label label-info' ng-if='issue.bounty_total > 0' ng-href="/issues/{{issue.slug}}/backers">{{ issue.bounty_total | dollars:{space:true} }}</a>
+              <a ng-href='{{issue.url}}' target='_blank' class="btn btn-gunmetal btn-small-radius font-weight-semibold" style='font-size: 12px'>
+                <span class='glyphicon glyphicon-new-window'></span>
+                View in
+                <name-for-external-link object-type='issue.type'></name-for-external-link>
+              </a>
             </div>
-          </h1>
+          </div>
 
-          <ul class='nav nav-tabs nav-tabs-sm'>
+          <ul class='nav nav-tabs nav-tabs-sm mt-5'>
             <li ng-class="active_tab('overview')">
               <a ng-href='/issues/{{issue.slug}}'>Overview</a>
             </li>
             <li ng-class="active_tab('backers')" ng-if='issue.backers_count > 0'>
               <a ng-href='/issues/{{issue.slug}}/backers'>
                 Backers
-                <span class='hidden-xs badge badge-info'>{{issue.backers_count}}</span>
+                <span class='hidden-xs'>({{issue.backers_count}})</span>
               </a>
             </li>
             <li ng-class="active_tab('proposals')" ng-if='rfpAuthorizationResolved && displayRfpTab'>
               <a ng-click-require-auth='' ng-href='/issues/{{issue.slug}}/proposals'>
                 Proposals
-              </a>
-            </li>
-            <li class='hidden-xs'>
-              <a ng-href='{{issue.url}}' target='_blank'>
-                <span class='glyphicon glyphicon-new-window' style='font-size:80%'></span>
-                View on
-                <name-for-external-link object-type='issue.type'></name-for-external-link>
               </a>
             </li>
           </ul>

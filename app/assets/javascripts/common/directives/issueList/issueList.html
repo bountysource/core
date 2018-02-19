@@ -93,11 +93,11 @@
         </span>
         <span style="word-break:break-word;">{{issue.title}}</span>
       </a>
-      <span ng-show="issue.paid_out" class="label label-primary">paid out</span>
+      <span ng-show="issue.paid_out" class="label label-info">paid out</span>
       <span ng-show="!issue.can_add_bounty && !issue.paid_out" class="label label-warning">closed</span>
     </td>
     <td ng-if="$showBountyTotal" style="text-align: center">
-      <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success">
+      <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-info">
         {{issue.bounty_total | dollars:{space: true} }}
       </a>
     </td>

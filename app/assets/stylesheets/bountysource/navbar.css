@@ -1,7 +1,10 @@
 .navbar-default { background-color: #fff; }
 .container_top_margin { margin-top: 20px; }
 
-.navbar-bountysource { margin-bottom: 0; }
+.navbar-bountysource { 
+  margin-bottom: 0; 
+  box-shadow: 0 2px 15px 0 #0000001f;
+}
 
 .navbar-brand {
   height: 100%;
@@ -16,11 +19,12 @@
 
 .navbar-form {
   margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 7.5px;
 }
 
-.navbar-form .input-group-btn {
-  width: auto;
-}
+
 
 .navbar-form .input-group .form-control {
   border-radius: 0px;
@@ -60,6 +64,7 @@ button.navbar-toggle {
   padding-left: 10px;
 }
 
+
 @media (min-width: 768px) {
   .navbar-nav>li>a {
     padding-top: 27px;
@@ -68,9 +73,20 @@ button.navbar-toggle {
     font-weight: bold;
   }
 
+  .navbar-nav>li>.navbar-main-button {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0;
+  }
+
   .navbar-form {
     padding-top: 20px;
     padding-bottom: 21px;
+    margin-bottom: 0px;
+  }
+
+  .navbar-form .input-group-btn {
+    width: auto;
   }
 }
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Combined Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Sign-IN" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-650.000000, -281.000000)">
+        <g id="sign-in-form" transform="translate(432.000000, 192.000000)" fill="#3B5998">
+            <g id="Group-2" transform="translate(78.000000, 89.000000)">
+                <g id="Facebook" transform="translate(140.000000, 0.000000)">
+                    <path d="M35,70 C15.6700338,70 0,54.3299662 0,35 C0,15.6700338 15.6700338,0 35,0 C54.3299662,0 70,15.6700338 70,35 C70,54.3299662 54.3299662,70 35,70 Z M30.1888889,52.0361795 L36.5635556,52.0361795 L36.5635556,34.5266541 L41.3457222,34.5266541 L42.2915,29.0555601 L36.5635556,29.0555601 L36.5635556,25.0910217 C36.5635556,23.8129797 37.3899444,22.4710941 38.571,22.4710941 L41.8263889,22.4710941 L41.8263889,17 L37.8367778,17 L37.8367778,17.0245253 C31.5943333,17.2510926 30.3117778,20.866437 30.2005556,24.6639696 L30.1888889,24.6639696 L30.1888889,29.0555601 L27,29.0555601 L27,34.5266541 L30.1888889,34.5266541 L30.1888889,52.0361795 Z" id="Combined-Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

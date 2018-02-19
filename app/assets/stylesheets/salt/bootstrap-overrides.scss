@@ -1,0 +1,38 @@
+//== Colors
+$gunmetal: #485f64;
+$aquamarine: #4edcca;
+$white: #ffffff;
+$bright-light-blue: #33ccff;
+$salmon: #ff6666;
+$gunmetal: #485f64;
+$warm-grey: #9b9b9b;
+$marigold: #ffc600;
+$cerulean: #0078bf;
+$silver: #bec6c4;
+$cool-grey: #919d9d;
+$soft-pink: #f9a4d8;
+$puerto-rico: #54c1ab;
+$burnt-sienna: #ef6464;
+
+
+
+//** Global text color on `<body>`.
+$text-color:            $gunmetal !default;
+
+//** Global textual link color.
+$link-color:            $bright-light-blue !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($link-color, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+$text-muted: #7f8e91;
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:  "Montserrat", Helvetica, Arial, sans-serif !default;
+
+
+$nav-pills-active-link-hover-bg: $bright-light-blue;

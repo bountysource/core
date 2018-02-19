@@ -1,3 +1,17 @@
 .table>thead>tr>th {
-  border-bottom: 2px solid #d1f1fc;
+  border-bottom: 3px solid #919d9d7f;
+}
+
+.table-no-separator>tbody>tr>td{
+  border: 0px;
+}
+
+.table td.center-height { vertical-align: middle; }
+
+/* Center all td in a table, yay */
+.table.table-centered tr > td { vertical-align: middle; }
+
+.table-no-border td, .table-no-border th, .table.table-no-border-top tr:first-of-type td, .table.table-no-border-top tr:first-of-type th {
+  border: 0 !important;
+  background-color: transparent !important;
 }

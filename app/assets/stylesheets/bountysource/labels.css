@@ -10,6 +10,14 @@
   background-color: #4edcca;  
 }
 
+.label-salmon {
+  background-color: #ff6666;  
+}
+
+.label-aquamarine {
+  background-color: #4edcca;  
+}
+
 .badge-info {
   background-color: #33ccff;
 }
@@ -19,7 +27,18 @@
   padding-right: 1.5em;
 }
 
+.label-padded {
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
 .label-lg {
   font-size: 100%;
   font-weight: 400;
+}
+
+.label-small-radius {
+  border-radius: 4px;
 }
