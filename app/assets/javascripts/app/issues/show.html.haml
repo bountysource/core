@@ -5,14 +5,15 @@
       %div{"style"=>"text-align: center; font-size: 18px"}
         Bounties for this issue have been disabled by the team.
 
-    %div{ "ng-show" => "!issue.team.bounties_disabled" }
-      %div.row.m-0
-        %div.col-xs-12.col-md-6.p-0
+    .row
+      .col-sm-4.col-xs-12.col-sm-push-8
+        %div{ "ng-show" => "!issue.team.bounties_disabled" }
           %div{ "ng-include" => "'app/issues/_show_backer_box.html'" }
-        %div.col-xs-12.col-md-6.p-0
+          
           %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
-
-    %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+      
+      .col-sm-8.col-xs-12.col-sm-pull-4
+        %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
 
 %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
   %takedown

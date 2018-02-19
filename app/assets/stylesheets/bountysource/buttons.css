@@ -1,3 +1,11 @@
+.btn {
+  border-radius: 999px;
+}
+
+.btn-small-radius {
+  border-radius: 4px;
+}
+
 .btn-marigold-salmon {
   background-image: linear-gradient(to right, #ffc600, #ff6666);
   border-radius: 999px;
@@ -22,9 +30,22 @@
 .btn-light-blue {
   background-color: #33ccff;
   border-radius: 999px;
+  color: white;
 }
 
-.input-group input{
+.btn-aquamarine {
+  background-color: #4edcca;
+  border-radius: 999px;
+  color: white;
+}
+
+.btn-cool-grey {
+  background-color: #919d9d;  
+  border-radius: 999px;
+  color: white;
+}
+
+.input-group.border-rounded input{
   border-top-left-radius: 999px;
   border-bottom-left-radius: 999px;
 }
@@ -33,3 +54,8 @@
   border-top-left-radius: 999px;
   border-bottom-left-radius: 999px;
 }*/
+
+.btn-long {
+  padding-right: 3em;
+  padding-left: 3em;
+}

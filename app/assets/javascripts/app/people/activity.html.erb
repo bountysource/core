@@ -8,69 +8,69 @@
   <div class="col-lg-3 col-md-4 col-sm-4 col-sm-offset-0 col-xs-offset-2 col-xs-8">
 
     <!-- Profile picture, homepage email -->
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <img class="img-responsive img-circle" ng-src="{{person.large_image_url}}" />
-      </div>
+    <img class="img-responsive img-circle center-block" ng-src="{{person.large_image_url}}" style='max-width: 220px' />
 
-      <div class="panel-footer">
-        <a ng-show="person.url" class="btn btn-block btn-default" ng-href="{{person.url}}"><i class="glyphicon glyphicon-globe"></i> {{person.url | cleanUrl | truncate:25}}</a>
-        <a ng-show="person.public_email" class="btn btn-block btn-default" ng-href="mailto:{{person.public_email}}"><i class="glyphicon glyphicon-envelope"></i> {{person.public_email | truncate:25}}</a>
+    <a ng-show="person.url" class="btn btn-default center-block mt-3" ng-href="{{person.url}}">
+      <i class="glyphicon glyphicon-globe pr-3" style="vertical-align: -2px"></i>
+       {{person.url | cleanUrl | truncate:25}}
+    </a>
+    <a ng-show="person.public_email" class="btn btn-default center-block mt-3" ng-href="mailto:{{person.public_email}}">
+      <i class="glyphicon glyphicon-envelope pr-3 style="vertical-align: -2px"></i> 
+      {{person.public_email | truncate:25}}
+    </a>
 
-        <table class="table">
-          <!-- Company -->
-          <tr ng-if="person.company" class="no-stripe">
-            <td><strong>Company</strong></td>
-            <td>{{person.company}}</td>
-          </tr>
+    <table class="table mt-3">
+      <!-- Company -->
+      <tr ng-if="person.company" class="no-stripe">
+        <td><strong>Company</strong></td>
+        <td>{{person.company}}</td>
+      </tr>
 
-          <!-- Location -->
-          <tr ng-if="person.location" class="no-stripe">
-            <td><strong>Location</strong></td>
-            <td>{{person.location}}</td>
-          </tr>
+      <!-- Location -->
+      <tr ng-if="person.location" class="no-stripe">
+        <td><strong>Location</strong></td>
+        <td>{{person.location}}</td>
+      </tr>
 
-          <!-- Linked Accounts -->
-          <tr ng-if="person.github_account || person.twitter_account || person.facebook_account" class="no-stripe">
-            <td><strong>Accounts</strong></td>
-            <td>
-              <ul class="list-unstyled">
-                <li ng-show="person.github_account">
-                  <a ng-href="http://github.com/{{person.github_account.display_name}}" target="_blank"><img class="img-circle" src='<%= asset_path("favicon-github.png") %>'> <span>{{person.github_account.display_name}}</span></a>
-                </li>
-                <li ng-show="person.twitter_account">
-                  <a ng-href="http://twitter.com/{{person.twitter_account.display_name}}"><img class="img-circle" src='<%= asset_path("favicon-twitter.png") %>'> <span>{{person.twitter_account.display_name}}</span></a>
-                </li>
-                <li ng-show="person.facebook_account">
-                  <a ng-href="http://facebook.com/profile.php?id={{person.facebook_account.uid}}"><img class="img-circle" src='<%= asset_path("favicon-facebook.png") %>'> <span>{{person.facebook_account.display_name}}</span></a>
-                </li>
-              </ul>
-            </td>
-          </tr>
+      <!-- Linked Accounts -->
+      <tr ng-if="person.github_account || person.twitter_account || person.facebook_account" class="no-stripe">
+        <td><strong>Accounts</strong></td>
+        <td>
+          <ul class="list-unstyled">
+            <li ng-show="person.github_account">
+              <a ng-href="http://github.com/{{person.github_account.display_name}}" target="_blank"><img class="img-circle" src='<%= asset_path("favicon-github.png") %>'> <span>{{person.github_account.display_name}}</span></a>
+            </li>
+            <li ng-show="person.twitter_account">
+              <a ng-href="http://twitter.com/{{person.twitter_account.display_name}}"><img class="img-circle" src='<%= asset_path("favicon-twitter.png") %>'> <span>{{person.twitter_account.display_name}}</span></a>
+            </li>
+            <li ng-show="person.facebook_account">
+              <a ng-href="http://facebook.com/profile.php?id={{person.facebook_account.uid}}"><img class="img-circle" src='<%= asset_path("favicon-facebook.png") %>'> <span>{{person.facebook_account.display_name}}</span></a>
+            </li>
+          </ul>
+        </td>
+      </tr>
 
-          <!-- Teams -->
-          <tr ng-if="teams.length > 0" class="no-stripe">
-            <td><strong>Teams</strong></td>
-            <td>
-              <ul class="list-unstyled">
-                <li class="provider-link" ng-repeat="team in teams | orderBy:'-added_at'">
-                  <a ng-href="/teams/{{team.slug}}"><img class="img-circle" ng-src="{{team.image_url}}" style="width: 16px; height: 16px;"> {{team.name}}</a>
-                </li>
-              </ul>
-            </td>
-          </tr>
+      <!-- Teams -->
+      <tr ng-if="teams.length > 0" class="no-stripe">
+        <td><strong>Teams</strong></td>
+        <td>
+          <ul class="list-unstyled">
+            <li class="provider-link" ng-repeat="team in teams | orderBy:'-added_at'">
+              <a ng-href="/teams/{{team.slug}}"><img class="img-circle" ng-src="{{team.image_url}}" style="width: 16px; height: 16px;"> {{team.name}}</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
 
-          <!-- Joined at date -->
-          <tr class="no-stripe">
-            <td><strong>Joined</strong></td>
-            <td>{{person.created_at | date}}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
+      <!-- Joined at date -->
+      <tr class="no-stripe">
+        <td><strong>Joined</strong></td>
+        <td>{{person.created_at | date}}</td>
+      </tr>
+    </table>
 
     <div ng-show="current_person.id == person.id" class="text-center">
-      <a href="/settings" class="btn btn-cerulean-blue">Edit Your Profile</a>
+      <a href="/settings" class="btn btn-default">Edit Your Profile</a>
     </div>
   </div>
 

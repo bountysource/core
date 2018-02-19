@@ -23,3 +23,15 @@
   border: 0;
   border-bottom: 5px solid #33ccff;
 }
+
+.nav-tabs-sm > li > a {
+  font-size: 14px;
+  color: #919d9d;
+}
+
+.nav-tabs-sm > li.active > a, 
+.nav-tabs-sm > li.active > a:hover, 
+.nav-tabs-sm > li.active > a:focus {
+  color: #33ccff;
+  font-weight: 500;
+}

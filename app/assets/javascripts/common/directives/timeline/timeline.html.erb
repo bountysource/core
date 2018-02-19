@@ -71,7 +71,7 @@
             {{event.team.display_name}}
           </a>
           <span ng-if="!dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right" class="ml-3">{{event.timestamp | timeDiff }} ago</span>
-          <span class="label label-featured pt-1 ml-3" ng-if="event.bounty.featured">Featured</span>
+          <span class="ml-3 label label-long label-lg label-featured" ng-if="event.bounty.featured">Featured</span>
         </div>
 
         <div ng-if="event.event==='issue_created' && issue">

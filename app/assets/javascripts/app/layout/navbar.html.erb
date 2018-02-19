@@ -49,13 +49,13 @@
         </li>
          
       </ul>
-      <ul class="nav navbar-nav navbar-right">  
+      <ul class="nav navbar-nav navbar-right font-weight-regular">  
         <li>
           <form class="navbar-form" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
             <div class="input-group">
-              <input type="text" class="form-control" ng-model="search_typeahead.query" placeholder="Search" typeahead="tag.name for tag in search_typeahead.update_results($viewValue)" typeahead-on-selectq="search_typeahead.selected($item)" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
+              <input type="text" class="form-control br-0" ng-model="search_typeahead.query" placeholder="Search" typeahead="tag.name for tag in search_typeahead.update_results($viewValue)" typeahead-on-selectq="search_typeahead.selected($item)" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
               <div class="input-group-btn">
-                <button class="btn btn-default" type="submit">
+                <button class="btn btn-default bl-0" type="submit">
                   <i class="glyphicon glyphicon-search text-aqua"></i>
                 </button>
               </div>
@@ -65,7 +65,7 @@
 
         <!-- Currency switcher -->
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <a href="#" class="dropdown-toggle font-weight-regular" data-toggle="dropdown">
             <span class="text-aqua rectangle-border" ng-if="$currency.isUSD()">$</span>
             <span class="text-aqua rectangle-border" ng-if="$currency.isBTC()">฿</span>
             <span class="text-aqua rectangle-border" ng-if="$currency.isXRP()">XRP</span>
@@ -81,7 +81,7 @@
         </li>
 
         <li ng-if="cart && !cart.isEmpty()">
-          <a href="/cart">
+          <a href="/cart" class="font-weight-regular">
             <span class="rectangle-border text-aqua">
               <i class="glyphicon glyphicon-shopping-cart"></i>
               {{cart.items.length | number:0}}
@@ -91,12 +91,13 @@
 
         <!-- User dropdown if logged in -->
         <li class="dropdown" ng-if="current_person">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img class="img-rounded" ng-src="{{current_person.image_url}}" style="height: 20px; width: 20px; margin-top: -2px" />
-            {{current_person.display_name}}
-
+          <a href="#" class="navbar-user-dropdown dropdown-toggle" data-toggle="dropdown">
+            <img class="img-circle" ng-src="{{current_person.image_url}}" />
           </a>
           <ul class="dropdown-menu">
+            <li><a class="text-aqua" owner-href="current_person">{{current_person.display_name}}</a></li>
+            <li role="presentation" class="divider"></li>
+            
             <li><a href="/activity"><i class="glyphicon glyphicon-bullhorn"></i> Activity</a></li>
             <li><a owner-href="current_person"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
             <li><a href="/tools"><i class="glyphicon glyphicon-wrench"></i> Tools</a></li>

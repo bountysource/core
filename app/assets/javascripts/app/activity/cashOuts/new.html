@@ -2,13 +2,13 @@
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/activity">Activity</a></li>
-    <li><a href="/activity/account">Account</a></li>
+    <li class="active"><a href="/activity/account">Account</a></li>
   </ul>
 
   <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
 
   <div ng-show="sources.length == 0">
-    <div class="alert alert-danger">
+    <div>
       <h3 style="margin-top: 0">Invalid Cash Out Request</h3>
       <p>You do not have any eligible cash outs. If you think this is a mistake, please email <a href="mailto:support@bountysource.com">support@bountysource.com</a></p>
     </div>

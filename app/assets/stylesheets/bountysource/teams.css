@@ -16,6 +16,8 @@ td.teams-date-cell {
 a.team-member-card {
   overflow: hidden;
   text-overflow: ellipsis;
+  border-radius: 0px;
+  border: solid 1px #919d9d7f;
 }
 
 h3.no-margin {

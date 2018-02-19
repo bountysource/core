@@ -11,30 +11,32 @@
   </div>
 
   <div ng-show="transactions.length > 0">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>Order #</th>
-        <th>Date</th>
-        <th>Payment Method</th>
-        <th>Total</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="transaction in transactions">
-        <td><a ng-href="/orders/{{transaction.shopping_cart_id}}">{{transaction.shopping_cart_id}}</a></td>
-        <td>{{transaction.created_at | date:'medium'}}</td>
-        <td>
-          <div ng-hide="transaction.checkout_method.owner">
-            <span>{{transaction.checkout_method.display_name}}</span>
-          </div>
-          <div ng-show="transaction.checkout_method.owner">
-            <a owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
-          </div>
-        </td>
-        <td>{{transaction.gross | dollars}}</td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Order #</th>
+          <th>Date</th>
+          <th>Payment Method</th>
+          <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="transaction in transactions">
+          <td><a ng-href="/orders/{{transaction.shopping_cart_id}}">{{transaction.shopping_cart_id}}</a></td>
+          <td>{{transaction.created_at | date:'medium'}}</td>
+          <td>
+            <div ng-hide="transaction.checkout_method.owner">
+              <span>{{transaction.checkout_method.display_name}}</span>
+            </div>
+            <div ng-show="transaction.checkout_method.owner">
+              <a owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
+            </div>
+          </td>
+          <td>{{transaction.gross | dollars}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

@@ -1,3 +1,8 @@
+.panel {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 .panel-dark-blue {
   border-color: #485f64;
 }
@@ -11,6 +16,11 @@
 
 .panel-blue-aquamarine > .panel-heading {
   background-image: linear-gradient(to right, #33ccff, #4edcca);
+  color: #fff;
+}
+
+.panel-cool-grey > .panel-heading {
+  background-color: #919d9d;
   color: #fff;
 }
 
@@ -29,7 +39,6 @@
 }
 
 .panel-heading > .panel-title {
-  color: #2eb5e1;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
 }

@@ -12,10 +12,11 @@
 .quicklink .quicklink-title {
   font-size: 24px;
   color: #33ccff;
+  font-weight: bold;
 }
 
 .quicklink .quicklink-subtitle {
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .quicklink form {

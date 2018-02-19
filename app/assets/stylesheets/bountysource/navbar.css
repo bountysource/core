@@ -74,3 +74,11 @@ button.navbar-toggle {
   }
 }
 
+.navbar-nav>li>a.navbar-user-dropdown {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.navbar-user-dropdown img {
+  width: 45px;
+}

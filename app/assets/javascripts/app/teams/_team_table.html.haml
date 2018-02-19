@@ -1,7 +1,7 @@
 %table.table.table-no-border-top
   %tr
-    %th
     %th Name
+    %th 
     %th.text-center Activity
   %tr{ "ng-if"=>"team_self" }
     %td{ "style"=>"width:100px; padding-right:10px" }
@@ -23,5 +23,5 @@
       %h4
         %a{ "ng-href"=>"/teams/{{team.slug}}" } {{team.name}}
       %p {{team.bio|truncate:140}}
-    %td.text-center
+    %td.text-center.font-weight-medium
       {{team.activity_total | dollars}}

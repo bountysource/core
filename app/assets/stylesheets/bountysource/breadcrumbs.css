@@ -1,6 +1,7 @@
 .breadcrumb{
   color: #9F9F9F;
   background-color: transparent;
+  padding-left: 0px;
 }
 
 .breadcrumb a{
@@ -13,8 +14,7 @@
   color: #000;
 }
 
-
-
 .breadcrumb > .active > a{
   color: #2DCAFE;
+  font-weight: 500;
 }

@@ -4,11 +4,22 @@ body {
   font-family: Montserrat;
   /* The html and body elements cannot have any padding or margin. */
   color: #485f64;
-  font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 400;
+h1, h2 {
+  font-weight: bold;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+h4 {
+  font-weight: 500;
+}
+
+a {
+  color: #33ccff;
 }
 
 /* Wrapper for page content to push down footer */
@@ -25,9 +36,12 @@ h1, h2, h3, h4, h5, h6 {
 #footer {
   padding-top: 30px;
   background-color: #fff;
-  color: #9b9b9b;
   margin-top: 30px;
   padding-bottom: 54px;
+}
+
+#footer h5 {
+  font-weight: bold;
 }
 
 /* move margin from navbar to container so we can do full-width backgrounds on team bounty programs */
@@ -37,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 30px;
 }
 
-#footer a { color: #9b9b9b; }
+#footer a { color: #485f64; }
 
 .top-border { 
   height: 10px;

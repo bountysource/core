@@ -4,10 +4,10 @@
       <div class="col-lg-10 col-lg-offset-1">
         <div class="row">
           <div class="col-xs-3 col-sm-2" style="margin-bottom:10px">
-            <img ng-src="<%= asset_path("bountysource-grey.png") %>" class="img-rounded img-responsive" style="background: white" />
+            <img ng-src="<%= asset_path("bountysource-grey.png") %>" class="img-circle img-responsive" style="background: white" />
           </div>
           <div class="col-xs-9" style="margin-bottom:10px">
-            <h1>Add Team</h1>
+            <h1 class="font-weight-medium">Add Team</h1>
             <p>Please add your team(s) to Bountysource.</p>
           </div>
         </div>
@@ -20,62 +20,72 @@
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
       <div ng-show="(teams | filter:({is_member:true})).length > 0">
-        <h2>Your Teams</h2>
-        <div class="alert alert-info">
-          <div class="form-group">
-            <div class="row row-display-as">
-              <div class="col-xs-4 col-sm-2" ng-repeat="team in teams | filter:({is_member:true})">
-                <a class="thumbnail text-center" ng-href="/teams/{{team.slug}}">
-                  <img ng-src="{{team.image_url_medium}}" class="img-responsive" />
-                  <div class="ellipsis">{{team.name}}</div>
-                </a>
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Create New Team</h3>
+            <div>
+              <team-form></team-form>
+            </div>
+          </div>
+            
+          <div class="col-md-4">
+            <h3>Your Teams</h3>
+            <div class="">
+              <div class="form-group">
+                <div class="row row-display-as">
+                  <div class="col-xs-12 col-sm-4 col-md-12" ng-repeat="team in teams | filter:({is_member:true})">
+                    <a ng-href="/teams/{{team.slug}}" class="thumbnail text-dark">
+                      <div class="row display-flex p-4">
+                        <div class="col-xs-4 vertical-align-middle">
+                          <img class="img-responsive img-circle" ng-src="{{team.image_url_medium}}">  
+                        </div>
+                        <div class="col-xs-8 vertical-align-middle">
+                          <span class="font-weight-semibold">{{team.name}}</span>  
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <h3>Suggested Teams</h3>
+            <div class="">
+              <div ng-show="!loading_teams && (teams | filter:({is_member:false})).length === 0">
+                No teams found. If you think your team should be here, please contact <a href="mailto:support@bountysource.com">support@bountysource.com</a>.
+              </div>
+
+              <div ng-show="(teams | filter:({is_member:false})).length > 0">
+                <div class="form-group">
+                  <div class="row row-display-as">
+                    <div class="col-xs-4 col-sm-2" ng-repeat="team in teams | filter:({is_member:false})">
+                      <a class="thumbnail text-center" ng-click="claim_team(team)">
+                        <img ng-src="{{team.image_url_medium}}" class="img-responsive" />
+                        <div class="ellipsis">{{team.name}}</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-show="loading_teams" class="text-center">
+                <br/>
+                <strong>Looking for more teams... this can take up to a minute.</strong>
+                <div style="width:200px; margin: 5px auto;">
+                  <div class="progress progress-striped active"><div class="progress-bar" style="width: 100%"></div></div>
+                </div>
+              </div>
+
+              <div ng-show="!current_person.github_account">
+                <br/>
+                <p>We can provide more suggestions if you link your GitHub Account.</p>
+                <a ng-click="link_with_github()" class="btn btn-light-blue btn-long">Link GitHub Account</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
-      <h2>Suggested Teams</h2>
-      <div class="alert alert-info">
-        <div ng-show="!loading_teams && (teams | filter:({is_member:false})).length === 0">
-          No teams found. If you think your team should be here, please contact <a href="mailto:support@bountysource.com">support@bountysource.com</a>.
-        </div>
-
-        <div ng-show="(teams | filter:({is_member:false})).length > 0">
-          <div class="form-group">
-            <div class="row row-display-as">
-              <div class="col-xs-4 col-sm-2" ng-repeat="team in teams | filter:({is_member:false})">
-                <a class="thumbnail text-center" ng-click="claim_team(team)">
-                  <img ng-src="{{team.image_url_medium}}" class="img-responsive" />
-                  <div class="ellipsis">{{team.name}}</div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div ng-show="loading_teams" class="text-center">
-          <br/>
-          <strong>Looking for more teams... this can take up to a minute.</strong>
-          <div style="width:200px; margin: 5px auto;">
-            <div class="progress progress-striped active"><div class="progress-bar" style="width: 100%"></div></div>
-          </div>
-        </div>
-
-        <div ng-show="!current_person.github_account">
-          <br/>
-          <p>We can provide more suggestions if you link your GitHub Account.</p>
-          <a ng-click="link_with_github()" class="btn btn-primary">Link GitHub Account</a>
-        </div>
-      </div>
-
-
-      <h2>Create New Team</h2>
-      <div class="alert alert-info">
-        <team-form></team-form>
-      </div>
-
     </div>
   </div>
 </div>

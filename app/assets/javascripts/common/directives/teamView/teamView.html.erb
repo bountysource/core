@@ -20,7 +20,7 @@
           <p ng-if="team.bio">{{team.bio}}</p>
 
           <div>
-            <button type="button" class="btn btn-blue-aquamarine p-3 pl-5 pr-5" ng-click="bountyHunterOptIn()" ng-show="!team.bounties_disabled && !team.is_bounty_hunter"><span class="glyphicon glyphicon-star"></span> Become a Bounty Hunter</button>
+            <button type="button" class="btn btn-marigold-salmon p-3 pl-5 pr-5" ng-click="bountyHunterOptIn()" ng-show="!team.bounties_disabled && !team.is_bounty_hunter"><span class="glyphicon glyphicon-star"></span> Become a Bounty Hunter</button>
 
             <span class="dropdown" ng-show="!team.bounties_disabled && team.is_bounty_hunter">
               <button class="btn btn-cerulean-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -39,7 +39,7 @@
 
         <!-- salt campaign -->
         <div class="col-xs-12 col-sm-5 vertical-align-middle pt-4 pb-4" ng-if="team.accepts_public_payins">
-          <div class="panel panel-white">
+          <div class="panel panel-white mb-0">
             <div class="panel-heading">
               <h3 class="text-center panel-title">{{team.name}} needs your support</h3>
             </div>
@@ -47,7 +47,7 @@
             <div class="panel-body text-center">
               <div class="progress" ng-show="team_support_level_progress_bar_amount">
                 <div class="progress-bar progress-bar-aquamarine" role="progressbar" ng-style="{ 'width': team_support_level_progress_bar_amount+ '%' }"">
-                  <span class="progress-full-text text-aqua text-medium">
+                  <span class="progress-full-text text-dark text-medium">
                     {{team_support_level_progress_bar_text}}% 
                     <span class="text-dark">of</span>
                     {{team.support_level_next_goal | dollars}}
@@ -62,7 +62,9 @@
               </div> -->
 
               <div class="text-center mt-3">
-                <a class="btn btn-blue-aquamarine p-3 pl-5 pr-5" style="border-radius: 7px;" ng-href="{{env.salt_host}}checkout/amount?team={{team.slug}}"><span class="glyphicon glyphicon-shopping-cart"></span> Support {{team.name}}</a>
+                <a class="btn btn-cool-grey text-white p-3 pl-5 pr-5" ng-href="{{env.salt_host}}checkout/amount?team={{team.slug}}">
+                  <span class="glyphicon glyphicon-shopping-cart"></span> Support {{team.name}}
+                </a>
               </div>
             </div>
           </div>
@@ -74,7 +76,7 @@
   <!-- TOP BACKERS -->
   <div ng-show="topBackers.length > 0" class="featured-header">
     <div class="container">
-      <h5 class="mt-0">Top Supporters:</h5>
+      <h4 class="mt-0">Top Supporters</h4>
         <a owner-href="backer"  ng-repeat="backer in topBackers | limitTo:10">
           <img ng-src="{{backer.image_url_small}}"  tooltip="{{backer.display_name}} {{backer.amount | dollars}}" tooltip-placement="bottom" class="img-circle img-responsive"/>
         </a>
@@ -120,7 +122,7 @@
             </div>
           </h1>
 
-          <ul class='nav nav-tabs'>
+          <ul class='nav nav-tabs nav-tabs-sm'>
             <li ng-class="active_tab('overview')">
               <a ng-href='/issues/{{issue.slug}}'>Overview</a>
             </li>
@@ -146,7 +148,7 @@
         </div>
 
         <div ng-if="_options.showNavTabs && !issue">
-          <ul class="nav nav-tabs">
+          <ul class="nav nav-tabs nav-tabs-sm">
             <li ng-class="{ active: activeNavTab('home') }">
               <a ng-href="/teams/{{ team.slug }}">Home</a>
             </li>

@@ -14,5 +14,10 @@
 }
 
 .progress-bar-aquamarine {
-  background-image: linear-gradient(to right, #33ccff, #4edcca); 
+  background-color: #4edcca; 
 }
+
+.progress-bar-cool-grey {
+  background-color: #919d9d; 
+}
+
