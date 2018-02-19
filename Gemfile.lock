@@ -65,9 +65,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
-    byebug (3.1.2)
-      columnize (~> 0.8)
-      debugger-linecache (~> 1.2)
+    byebug (10.0.0)
     cancan (1.6.10)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -82,7 +80,6 @@ GEM
       aws_cf_signer
       rest-client
     coderay (1.1.0)
-    columnize (0.8.9)
     cookiejar (0.3.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -103,7 +100,6 @@ GEM
     date_validator (0.7.0)
       activemodel (>= 3)
     debug_inspector (0.0.2)
-    debugger-linecache (1.2.0)
     delayed_job (4.0.1)
       activesupport (>= 3.0, < 4.2)
     delayed_job_active_record (4.0.1)

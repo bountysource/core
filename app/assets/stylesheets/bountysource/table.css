@@ -1,3 +1,7 @@
 .table>thead>tr>th {
-  border-bottom: 2px solid #d1f1fc;
+  border-bottom: 2px solid #919d9d7f;
+}
+
+.table-no-separator>tbody>tr>td{
+  border: 0px;
 }

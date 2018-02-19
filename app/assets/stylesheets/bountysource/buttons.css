@@ -45,6 +45,13 @@
   color: white;
 }
 
+.btn-default-border-salmon {
+  background-color: #ffffff;
+  box-shadow: 0 1px 0 0 #ef6464;
+  border: solid 1px #ff6666;
+  color: #ff6666;
+}
+
 .input-group.border-rounded input{
   border-top-left-radius: 999px;
   border-bottom-left-radius: 999px;
