@@ -36,11 +36,11 @@ class Split < ActiveRecord::Base
   attr_accessible :amount, :status, :account, :currency, :item
 
   belongs_to  :account
-  belongs_to  :transaction
+  belongs_to  :txn, class_name: 'Transaction', foreign_key: :transaction_id
   belongs_to  :item,   polymorphic: true
 
   validates :account,     presence: true
-  validates :transaction, presence: true
+  validates :txn, presence: true
   validates :amount,      presence: true, numericality: true
   validates :dirty,       presence: true, numericality: { greater_than_or_equal_to: 0 }
 

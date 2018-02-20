@@ -76,8 +76,8 @@ describe Transaction do
     end
 
     it "should have relations with all items/accounts in splits" do
-      person.transactions.should include transaction
-      Account::Paypal.instance.transactions.should include transaction
+      person.txns.should include transaction
+      Account::Paypal.instance.txns.should include transaction
     end
 
     it "should have an item" do

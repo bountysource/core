@@ -14,7 +14,7 @@ class GoogleWalletItem < ActiveRecord::Base
   attr_accessible :jwt, :order_id
 
   has_many :splits, as: :item
-  has_many :transactions, through: :splits
+  has_many :txns, through: :splits
 
   def jwt_data
     @jwt_data ||= Account::GoogleWallet.decode_jwt(jwt)

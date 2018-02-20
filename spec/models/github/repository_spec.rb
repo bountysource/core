@@ -84,7 +84,7 @@ describe Github::Repository do
             { amount: 10,   item: repository }
           ])
         end
-      }.should change(repository.transactions, :count).by 1
+      }.should change(repository.txns, :count).by 1
 
       repository.reload.account.should be_an Account::Repository
     end

@@ -567,7 +567,7 @@ describe BountyClaim do
       it "should mark the claim as paid out" do
         expect {
           bounty_claim.accept!(backer)
-        }.to change(issue.transactions, :count).by 1
+        }.to change(issue.txns, :count).by 1
       end
 
       it "should add money to person's account" do

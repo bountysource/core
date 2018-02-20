@@ -10,7 +10,7 @@ require 'optparse'
 
 ruby '2.2.8'
 
-gem 'rails', '4.0.13'
+gem 'rails', '4.1.16'
 gem 'json', '1.8.2'
 gem 'pg', '~> 0.18.1'
 gem 'mysql2', '0.3.17'
@@ -69,6 +69,8 @@ gem 'thinking-sphinx', '~> 3.1.0',
 gem 'flying-sphinx', '~> 1.0.0'
 
 gem 'cloudinary'
+gem 'rest-client', '~> 1.7.3'
+gem 'rubyzip', '~> 1.2.1'
 gem 'eventmachine', '1.0.4'
 gem 'em-http-request'
 gem 'angular-rails-templates'
@@ -96,7 +98,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.2.0'
+  gem 'rspec-rails', '~> 3.5.0'
   gem 'factory_girl_rails'
   # gem 'curb', require: false #At this stage, we are only using curb in a test
   gem 'capybara'

@@ -17,9 +17,9 @@ class ActiveRecord::Base
 
       before_validation do
         input = @image_url
-        return if input.blank?
-
-        if input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
+        if input.blank?
+          nil
+        elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
         elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/
