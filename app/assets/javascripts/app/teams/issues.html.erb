@@ -7,7 +7,7 @@
           <form class="form" ng-submit="$parent.$parent.getIssues(1)">
             <div class="form-group" ng-class="{'narrow': !show_advanced_search}">
               <div class="input-group">
-                <input type="text" class="form-control" ng-model="$parent.$parent.search" placeholder="Search issues"></input>
+                <input type="text" class="form-control input-medium" ng-model="$parent.$parent.search" placeholder="Search issues"></input>
                 <span class="input-group-btn">
                   <button class="btn btn-default btn-small-radius bl-0" type="submit">
                     <i class="glyphicon glyphicon-search text-aqua"></i>
@@ -19,10 +19,9 @@
 
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4">
-          <button class="btn btn-default btn-block" ng-click="toggle_advanced_search()">Advanced Search
-            <i ng-show="!show_advanced_search" class="glyphicon glyphicon-chevron-down"></i>
-            <i ng-show="show_advanced_search" class="glyphicon glyphicon-chevron-up"></i>
-          </button>
+          <a ng-click="toggle_advanced_search()">
+            <%= image_tag 'icons/icon_advanced_search.svg' %>
+          </a>
         </div>
       </div>
       <div class="row" ng-show="show_advanced_search">
@@ -103,14 +102,14 @@
     <!-- Filtering based on request_for_proposal -->
     <h3 ng-if="acceptingProposals == 1 && issues.length > 0" class="text-center">{{ team.name }} is looking for developers to work on these issues</h3>
 
-    <div ng-hide="issue_grid_view" ng-repeat="issue in issues" class="issue-detailed-list">
+    <div ng-hide="issue_grid_view" ng-repeat="issue in issues" class="issue-detailed-list" style="min-height: 90px">
       <div class="thumbs-cell">
-        <div style="min-height:64px"><thumbs-up-box issue="issue" thumbs-up-size="large"></thumbs-up-box></div>
+        <div><thumbs-up-box issue="issue" thumbs-up-size="large"></thumbs-up-box></div>
       </div>
       <div class="issue-details">
         <h3>
           <a ng-href="/issues/{{issue.slug}}">{{issue.title}}</a>
-          <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="label label-success" style="font-size:16px">
+          <a ng-href="/issues/{{issue.slug}}/bounties" ng-show="issue.bounty_total > 0" class="pull-right">
             {{issue.bounty_total | dollars:{space: true} }}
           </a>
         </h3>

@@ -90,7 +90,9 @@ td img.issue-table-tracker-img {
 .table-developer-statuses h4 small { white-space: nowrap; }
 
 
-.issue-header .issue-title { font-size: 24px; margin-top: 0; margin-left: 78px; min-height: 65px; line-height: 30px }
+.issue-header .issue-title { 
+  margin-top: 0;
+  margin-left: 78px; min-height: 65px; line-height: 30px }
 @media (max-width: 767px) {
   .issue-header .issue-title { margin-left: 0; font-size: 20px; }
 }

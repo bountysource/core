@@ -1,6 +1,6 @@
-<span class="font-size-default">
-  <span ng-show="!issue.generic && issue.can_add_bounty" class="label label-info label-padded label-lg">Open</span>
-  <span ng-hide="issue.generic || issue.can_add_bounty" class="label label-salmon label-padded label-lg">Closed</span>
-  <span ng-show="issue.winning_bounty_claim || issue.paid_out" class="label label-info label-padded label-lg">Paid Out</span>
-  <a class='label label-info label-padded label-lg' ng-if='issue.bounty_total > 0' ng-href="/issues/{{issue.slug}}/backers">{{ issue.bounty_total | dollars:{space:true} }}</a>
+<span>
+  <span ng-show="!issue.generic && issue.can_add_bounty" ng-class="{'label-lg': size=='large'}" class="label label-info label-padded">Open</span>
+  <span ng-hide="issue.generic || issue.can_add_bounty" ng-class="{'label-lg': size=='large'}" class="label label-salmon label-padded">Closed</span>
+  <span ng-show="issue.winning_bounty_claim || issue.paid_out" ng-class="{'label-lg': size=='large'}" class="label label-info label-padded">Paid Out</span>
+  <a class='label label-info label-padded' ng-class="{'label-lg': size=='large'}" ng-if='issue.bounty_total > 0' ng-href="/issues/{{issue.slug}}/backers">{{ issue.bounty_total | dollars:{space:true} }}</a>
 </span>

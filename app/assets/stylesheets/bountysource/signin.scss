@@ -1,0 +1,13 @@
+.hide-tooltip .tooltip { display: none !important; }
+
+.form-signin {
+  max-width: 500px;
+  margin-top: 90px;
+  .providers {
+    margin-top: 50px;   
+  }
+
+  label.control-label {
+    font-weight: 500;
+  }
+}
