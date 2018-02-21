@@ -1,19 +1,23 @@
 <div class="homepage">
 
+  <div class="background">  
+
+    <img src='<%= asset_path("Developer-Desk-hero.jpg") %>' style="width: 100%;"/>
+  </div>
   <div class="team-header" style="padding: 25px 0 15px;">
     <div class="container">
       <div class="row">
         <div class="col-lg-offset-1 col-lg-10">
 
           <h1>Support for Open-Source Software</h1>
-          <h2>A community with {{people_count.total | number}} members.</h2>
+          <h2>A community with over {{people_count.total | number}} members.</h2>
 
           <div class="row">
             <!-- Post -->
             <div class="col-sm-4">
               <div class="panel panel-success panel-bold panel-no-border">
-                <div class="panel-heading">
-                  <h3 class="text-center panel-title">Post</h3>
+                <div class="panel-heading add-team">
+                  <h3 class="text-center panel-title">POST</h3>
                 </div>
 
                 <div class="panel-body text-center">
@@ -21,9 +25,9 @@
 
                   <form class="form-inline" ng-submit="submit_search()" ng-controller="NavbarSearchController">
                     <div class="input-group">
-                      <input type="text" class="search-query form-control" ng-model="form_data.url" placeholder="http://github.com/.../issues/123">
+                      <input type="text" class="search-query form-control input-style" ng-model="form_data.url" placeholder="http://github.com/.../issues/123">
                       <div class="input-group-btn">
-                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Post</button>
+                        <button type="submit" class="btn btn-post">Post</button>
                       </div>
                     </div>
                   </form>
@@ -33,16 +37,16 @@
 
             <!-- Create a Team -->
             <div class="col-sm-4">
-              <div class="panel panel-primary panel-bold panel-no-border">
-                <div class="panel-heading">
-                  <h3 class="text-center panel-title">Team</h3>
+              <div class="panel panel-success panel-bold panel-no-border">
+                <div class="panel-heading add-team">
+                  <h3 class="text-center panel-title">ADD TEAM</h3>
                 </div>
 
                 <div class="panel-body">
-                  <h4>Manage every aspect of your team.</h4>
+                  <h4>Manage every of your team.</h4>
 
                   <div style="text-align: center">
-                    <a ng-href="/teams/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
+                    <a ng-href="/teams/new" class="btn btn-team"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
                   </div>
                 </div>
               </div>
@@ -50,16 +54,16 @@
 
             <!-- Hunt -->
             <div class="col-sm-4">
-              <div class="panel panel-danger panel-bold panel-no-border">
-                <div class="panel-heading">
-                  <h3 class="text-center panel-title">Hunt</h3>
+              <div class="panel panel-success panel-bold panel-no-border">
+                <div class="panel-heading add-team">
+                  <h3 class="text-center panel-title">HUNT</h3>
                 </div>
 
                 <div class="panel-body">
                   <h4>Earn money contributing to OSS.</h4>
 
                   <div style="text-align: center">
-                    <a ng-href="/bounties/search" class="btn btn-danger"><span class="glyphicon glyphicon-search"></span> Find Bounties</a>
+                    <a ng-href="/bounties/search" class="btn btn-bounty"><span class="glyphicon glyphicon-search"></span> Find Bounties</a>
                   </div>
                 </div>
               </div>

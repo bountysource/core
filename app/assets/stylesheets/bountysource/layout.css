@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  font-family: Montserrat;
   /* The html and body elements cannot have any padding or margin. */
 }
 
@@ -26,7 +27,14 @@ body {
 #footer a { color: #bbb; }
 
 /* move margin from navbar to container so we can do full-width backgrounds on team bounty programs */
-.navbar-bountysource { border-top: 4px solid #129e5e; margin-bottom: 0; }
+
+.navbar-bountysource { margin-bottom: 0; }
+
+
+.navbar-default {
+  background-color: #FFF;
+}
+
 .container_top_margin { margin-top: 20px; }
 
 /* @screen-xs */
@@ -43,6 +51,36 @@ body {
   }
 }
 
+.navbar-brand {
+  height: 100%;
+}
+
+
+.navbar-form .input-group-btn {
+  width: auto;
+}
+
+.input-group .form-control {
+  border-radius: 0px;
+}
+
+.input-group .input-group-btn:last-child>.btn {
+  border-radius: 0px;
+}
+
+button.navbar-toggle {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.rectangle {
+  border: solid 1px #d1d1d1;
+  padding: 6px 12px 7px 12px;
+}
+.aqua-text{
+  color: #33ccff;
+
+}
 /* @screen-md */
 @media (min-width: 992px) and (max-width: 1199px) {
   #footer {
@@ -117,6 +155,15 @@ input[type="text"]:disabled.white-input  {
 .panel-body.narrow { padding-top: 0px; padding-bottom: 0px; }
 .panel.no-margin { margin-bottom: 0px;}
 
+.panel-title {
+  font-size: 24px;
+}
+.add-team {
+ font-family: Montserrat;
+ letter-spacing: -0.6px;
+ color: #33ccff;
+
+}
 
 .panel-green {
   border-color: #129e5e;
@@ -219,7 +266,8 @@ n10= n9*x1
 .panel-bold.panel-danger { border-color: #d9534f; }
 .panel-bold.panel-danger .panel-heading { background-color: #d9534f; color: white; }
 .panel-bold.panel-success { border-color: #5cb85c; }
-.panel-bold.panel-success .panel-heading { background-color: #5cb85c; color: white; }
+.panel-bold.panel-success .panel-heading { background-color: #FFF; color: #33ccff; }
+
 
 
 .featured-header { background:#555; padding: 10px 0 15px; margin-bottom: 10px; color: #ccc; box-shadow: inset 0 8px 8px -8px rgba(0,0,0,0.7), inset 0 -8px 8px -8px rgba(0,0,0,0.7); }
@@ -230,6 +278,16 @@ n10= n9*x1
 @media (min-width: 768px) {
   .featured-header img { width:8.5%; margin-left: 1.66666%;  }
   .featured-header a:nth-of-type(1) img { margin-left: 0%;  }
+  .navbar-nav>li>a {
+   padding-top: 27px;
+   padding-bottom: 28px;
+   font-size: 16px;
+   font-weight: bold;
+  }
+  .navbar-form {
+   padding-top: 12px;
+   padding-bottom: 13px;
+  }
 }
 /* small screens, two rows of 5 */
 @media (max-width: 768px) {
@@ -248,4 +306,44 @@ n10= n9*x1
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.navbar-brand {
+  height: 100%;
+}
+
+/*.navbar-nav>li>a {
+  padding-top: 27px;
+  padding-bottom: 28px;
+  font-size: 16px;
+}*/
+
+.navbar-form .input-group-btn {
+  width: auto;
+}
+
+.input-group .form-control {
+  border-radius: 0px;
+}
+
+.input-group .input-group-btn:last-child>.btn {
+  border-radius: 0px;
+}
+
+button.navbar-toggle {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+/*.navbar-form {
+  padding-top: 12px;
+  padding-bottom: 13px;
+}*/
+
+.rectangle {
+  border: solid 1px #d1d1d1;
+  padding: 6px 12px 7px 12px;
+}
+.aqua-text{
+  color: #33ccff;
+
 }
