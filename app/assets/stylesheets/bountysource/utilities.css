@@ -4,7 +4,6 @@
 .font-weight-bold    { font-weight: bold; }
 
 
-
 .font-size-default { font-size: 14px !important; }
 
 .p-0 { padding: 0 !important; }
@@ -127,3 +126,8 @@
 @media (min-width: 1200px) {
   .text-lg-center { text-align: center; }
 }
+
+
+
+/*Backgrounds*/
+.background-white { background-color: white; }

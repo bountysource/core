@@ -11,3 +11,12 @@
   text-align: left;
   font-weight: 600;
 }
+
+
+@media (max-width: 768px){
+  .form-inline-xs .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+}

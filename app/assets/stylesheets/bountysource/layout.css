@@ -21,6 +21,10 @@ h4 {
 a {
   color: #33ccff;
 }
+a.black-link {
+  font-weight: 500;
+  color: #485f64;
+}
 
 /* Wrapper for page content to push down footer */
 #wrap {
