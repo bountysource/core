@@ -10,6 +10,10 @@
   background-color: #4edcca;  
 }
 
+.label-salmon {
+  background-color: #ff6666;  
+}
+
 .badge-info {
   background-color: #33ccff;
 }
@@ -17,6 +21,13 @@
 .label-long {
   padding-left: 1.5em;
   padding-right: 1.5em;
+}
+
+.label-padded {
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 .label-lg {

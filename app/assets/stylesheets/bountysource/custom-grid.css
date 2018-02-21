@@ -12,6 +12,10 @@
   flex-direction: column;
 }
 
+.row.display-flex.vertical-align-middle > [class*='col-']{
+  justify-content: center;
+  flex-direction: column;
+}
 
 .spaced-evenly-flex {
   display: flex;

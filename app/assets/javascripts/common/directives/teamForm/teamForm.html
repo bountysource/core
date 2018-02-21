@@ -1,6 +1,6 @@
 <form class="form-horizontal" ng-submit="create_team(form_data)">
   <!-- Alerts and Progerss Bars -->
-  <div class="alert alert-danger alert-danger" ng-show="error">{{error}}</div>
+  <div class="alert alert-salmon" ng-show="error">{{error}}</div>
   <div ng-if="_options.editForm" ng-show="alert.text">
     <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
   </div>
@@ -44,7 +44,7 @@
   <div class="form-group">
     <label class="control-label col-sm-2" for="bio">Bio</label>
     <div class="col-sm-10">
-      <textarea class="form-control p-5" id="bio" ng-model="form_data.bio" rows="5" placeholder="Bountysource is the funding platform for open-source software."></textarea>
+      <textarea class="form-control pl-5 pt-3" id="bio" ng-model="form_data.bio" rows="5" placeholder="Bountysource is the funding platform for open-source software."></textarea>
     </div>
   </div>
 
@@ -75,8 +75,8 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-md-8">
-      <submit ng-if="_options.editForm" type="submit" ng-click="update_team(form_data)" class="btn btn-light-blue btn-long">Update</submit>
-      <submit ng-if="!_options.editForm" type="submit" ng-click="create_team(form_data)" class="btn btn-light-blue btn-long">Continue</submit>
+      <submit ng-if="_options.editForm" type="submit" ng-click="update_team(form_data)" class="btn btn-light-blue btn-long font-weight-semibold">UPDATE</submit>
+      <submit ng-if="!_options.editForm" type="submit" ng-click="create_team(form_data)" class="btn btn-light-blue btn-long font-weight-semibold">CONTINUE</submit>
     </div>
   </div>
 </form>

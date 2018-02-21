@@ -6,3 +6,8 @@
   padding-left: 30px;
   height: 42px;
 }
+
+.form-horizontal .control-label {
+  text-align: left;
+  font-weight: 600;
+}

@@ -3,7 +3,7 @@
 }
 
 .btn-small-radius {
-  border-radius: 4px;
+  border-radius: 4px !important;
 }
 
 .btn-marigold-salmon {
@@ -43,6 +43,18 @@
   background-color: #919d9d;  
   border-radius: 999px;
   color: white;
+}
+
+.btn-gunmetal {
+  background-color: #485f64;  
+  border-radius: 999px;
+  color: white;
+  &:hover{
+    color: white;
+  };
+  &:focus{
+    color: white;
+  }
 }
 
 .btn-default-border-salmon {

@@ -1,4 +1,4 @@
-.bountysource-thumbs-box { position: absolute; width:50px; }
+.bountysource-thumbs-box { float: left; width: 50px; }
 .bountysource-thumbs-box .thumb-wrapper { text-align: center; border: 1px solid #ccc; border-top-left-radius: 3px; border-top-right-radius: 3px; background-image: linear-gradient(#fcfcfc, #eee); cursor: pointer; padding: 4px 0 6px; }
 .bountysource-thumbs-box .thumb-wrapper img { width: 32px; height: 32px; }
 .bountysource-thumbs-box .thumb-wrapper:hover { background-image: linear-gradient(#ececec, #ddd); }

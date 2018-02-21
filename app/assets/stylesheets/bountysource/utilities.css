@@ -80,10 +80,12 @@
 /* Borders */
 .ba { border: 2px solid; }
 
+.bb { border-bottom: 3px solid; }
+
 .br-0 { border-right: 0 !important; }
 .bl-0 { border-left: 0 !important; }
 
-.border-cool-grey { border-color: #919d9d !important; }
+.border-cool-grey { border-color: #919d9d7f !important; }
 .border-bright-light-blue { border-color: #33ccff7f !important; }
 
 /* Images */
@@ -98,6 +100,7 @@
 .text-black { color: #000 !important; }
 .text-white { color: #fff !important; }
 .text-aquamarine { color: #4edcca !important; }
+.text-salmon { color: #ff6666 !important; }
 
 .text-medium { font-weight: 500 !important; }
 .text-regular { font-weight: 400 !important; }
