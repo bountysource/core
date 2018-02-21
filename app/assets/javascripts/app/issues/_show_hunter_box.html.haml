@@ -295,7 +295,7 @@
             %span{ "ng-if"=>"event.url.indexOf('http://') != 0 && event.url.indexOf('https://') != 0" }
               Code URL: {{event.url}}
             %span{ "ng-if" => "event.url.indexOf('http://') == 0 || event.url.indexOf('https://') == 0" }
-              %a.btn.btn-default{ "ng-href" => "{{event.url}}", "target" => "_blank" }
+              %a.btn.btn-gunmetal.btn-small-radius{ "ng-href" => "{{event.url}}", "target" => "_blank" }
                 %span.glyphicon.glyphicon-new-window
                 View Code
 
