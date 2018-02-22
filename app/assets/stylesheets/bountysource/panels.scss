@@ -19,9 +19,11 @@
   color: #fff;
 }
 
-.panel-cool-grey > .panel-heading {
-  background-color: #919d9d;
-  color: #fff;
+.panel-cool-grey {
+  .panel-heading {
+    background-color: #919d9d33;
+    color: #485f64;
+  }
 }
 
 .panel-marigold-salmon > .panel-heading {
