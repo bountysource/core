@@ -51,8 +51,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right font-weight-regular">  
         <li>
-          <form class="navbar-form" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
-            <div class="input-group">
+          <form class="navbar-form row" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
+            <div class="input-group col-xs-12">
               <input type="text" class="form-control br-0" ng-model="search_typeahead.query" placeholder="Search" typeahead="tag.name for tag in search_typeahead.update_results($viewValue)" typeahead-on-selectq="search_typeahead.selected($item)" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
               <div class="input-group-btn">
                 <button class="btn btn-default bl-0" type="submit">
@@ -65,11 +65,11 @@
 
         <!-- Currency switcher -->
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle font-weight-regular" data-toggle="dropdown">
-            <span class="text-aqua rectangle-border" ng-if="$currency.isUSD()">$</span>
-            <span class="text-aqua rectangle-border" ng-if="$currency.isBTC()">฿</span>
-            <span class="text-aqua rectangle-border" ng-if="$currency.isXRP()">XRP</span>
-            <span class="text-aqua rectangle-border" ng-if="$currency.isMSC()">MSC</span>
+          <a href="#" class="dropdown-toggle font-weight-regular navbar-main-button" data-toggle="dropdown">
+            <button class="text-aqua rectangle-border" ng-if="$currency.isUSD()">$</button>
+            <button class="text-aqua rectangle-border" ng-if="$currency.isBTC()">฿</button>
+            <button class="text-aqua rectangle-border" ng-if="$currency.isXRP()">XRP</button>
+            <button class="text-aqua rectangle-border" ng-if="$currency.isMSC()">MSC</button>
           </a>
           <ul class="dropdown-menu">
             <li role="presentation" class="dropdown-header">Choose currency:</li>
@@ -81,11 +81,11 @@
         </li>
 
         <li ng-if="cart && !cart.isEmpty()">
-          <a href="/cart" class="font-weight-regular">
-            <span class="rectangle-border text-aqua">
-              <i class="glyphicon glyphicon-shopping-cart"></i>
+          <a href="/cart" class="font-weight-regular navbar-main-button" >
+            <button class="rectangle-border text-aqua">
+                <i class="glyphicon glyphicon-shopping-cart"></i>
               {{cart.items.length | number:0}}
-            </span>
+            </button>
           </a>
         </li>
 

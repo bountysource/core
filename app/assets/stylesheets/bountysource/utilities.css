@@ -90,6 +90,7 @@
 
 .border-cool-grey { border-color: #919d9d7f !important; }
 .border-bright-light-blue { border-color: #33ccff7f !important; }
+.border-gunmetal { border-color: #485f64 !important; }
 
 /* Images */
 .img-circle { border-radius: 50% }
@@ -127,8 +128,6 @@
 @media (min-width: 1200px) {
   .text-lg-center { text-align: center; }
 }
-
-
 
 /*Backgrounds*/
 .background-white { background-color: white; }

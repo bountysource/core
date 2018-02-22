@@ -104,27 +104,6 @@ td img.issue-table-tracker-img {
 .issue-detailed-list .issue-details .issue-body { max-height: 200px; overflow: hidden; }
 .issue-detailed-list .issue-details .issue-meta { color: #919d9d; margin: 6px 0 4px 0; }
 
-.issue-search input.search-issues {
-  border-right: 0;
-  box-shadow: none
-}
-
-.issue-search input.search-issues:focus + span > button{
-  border-color: #66afe9;
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-}
-
-.issue-search button.search-glyph{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border-left: 0;
-  border-color: #e0e5e7;
-}
-
 .issue-search img.advanced-img {
   height: 50px;
 }
