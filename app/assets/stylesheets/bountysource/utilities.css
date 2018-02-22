@@ -108,9 +108,6 @@
 
 /*Text Align Media Queries*/
 
-.text-center-xs { text-align: center; }
-.text-xs-left { text-align: left; }
-
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .text-sm-left { text-align: left; }
