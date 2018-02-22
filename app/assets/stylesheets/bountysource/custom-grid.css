@@ -17,6 +17,12 @@
   flex-direction: column;
 }
 
+.display-flex.horizontal-align-middle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .spaced-evenly-flex {
   display: flex;
   flex-wrap: wrap;

@@ -81,6 +81,9 @@
 
 .bb { border-bottom: 3px solid; }
 
+.ba-1 { border: 1px solid #ddd; }
+.bb-1 { border-bottom: 1px solid #ddd; }
+
 .bt-0 { border-top: 0 !important; }
 .br-0 { border-right: 0 !important; }
 .bl-0 { border-left: 0 !important; }

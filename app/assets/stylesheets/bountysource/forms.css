@@ -20,3 +20,8 @@
     vertical-align: middle;
   }
 }
+
+
+.input-group-addon {
+  background-color: #fff;
+}
