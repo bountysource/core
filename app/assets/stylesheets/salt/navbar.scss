@@ -1,0 +1,25 @@
+.navbar-default { background-color: #fff; }
+.container_top_margin { margin-top: 20px; }
+
+.navbar-bountysource { 
+  margin-bottom: 0; 
+  box-shadow: 0 2px 15px 0 #0000001f;
+}
+
+
+.navbar-brand {
+  height: 100%;
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  display:inline-block;
+  img {
+    display: inline-block;
+  }
+  span {
+    vertical-align: middle;
+  }
+}
+
+.navbar-brand img{
+  width: 230px;
+}

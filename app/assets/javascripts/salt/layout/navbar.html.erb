@@ -2,9 +2,9 @@
   <div ng-class="{ container: nav_container, 'container-fluid': !nav_container }">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      <a class="navbar-brand" href="/" style="padding-top: 10px; padding-bottom: 10px>
-        <img src='<%= asset_path("Bountysource-green.png") %>' style="max-height: 45px; max-width: 120px; display: inline"/>
-        <span style="font-size: 24px; margin-left: 6px; margin-top:5px; font-weight: 100">(salt)</span>
+      <a class="navbar-brand" href="/">
+        <%= image_tag 'logos/main.svg' %>
+        <span>(<span>SALT</span>)</span>
       </a>
     </div>
 
@@ -46,18 +46,6 @@
           </div>
         </li>
       </ul>
-    </div>
-  </div>
-</div>
-
-<div ng-controller="CanyaAnnouncementController">
-  <div style="background: #ec6333; color: white; text-align: center" ng-if="canyaAnnouncementIsVisible">
-    <a href="#" ng-click="hideCanyaAnnouncement()" style="float: right; color: white; font-size: 20px; margin: 10px 20px 0 0">X</a>
-    <div style="font-size: 35px; padding-top: 20px">Major Announcement: CanYa.io acquires Bountysource.com</div>
-    <div style="font-size: 25px">CanYa - the world's first blockchain-based marketplace of services will now power the new Bountysource.</div>
-    <div style="font-size: 25px; padding-bottom: 20px">Learn more:
-      <a style="color: white; text-decoration: underline" target="_blank" href="https://blog.canya.com.au/2017/12/20/canya-acquires-majority-stake-in-bountysource-adds-over-46000-users/">Blog Post</a>
-      <a style="color: white; text-decoration: underline" target="_blank" href="https://d2bbtvgnhux6eq.cloudfront.net/canya/CanYa+acquires+Bountysource+press+release+20+Dec+17.pdf">Press Release</a>
     </div>
   </div>
 </div>

@@ -14,6 +14,10 @@
   background-color: #ff6666;  
 }
 
+.label-aquamarine {
+  background-color: #4edcca;  
+}
+
 .badge-info {
   background-color: #33ccff;
 }
@@ -33,4 +37,8 @@
 .label-lg {
   font-size: 100%;
   font-weight: 400;
+}
+
+.label-small-radius {
+  border-radius: 4px;
 }

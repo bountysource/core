@@ -45,3 +45,8 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
+.spaced-between-flex {
+  display: flex;
+  justify-content: space-between;
+}

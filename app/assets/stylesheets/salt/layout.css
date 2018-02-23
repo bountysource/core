@@ -35,11 +35,6 @@ body {
 
 #footer a { color: #bbb; }
 
-.navbar-bountysource { border-top: 4px solid #129e5e; margin-bottom: 0; }
-.navbar .btn { margin: 0 5px; }
-.navbar .btn-hover-green { color: #777; }
-.navbar .btn-hover-green:hover { background: #479c48; border-radius: 5px; color: white; text-decoration: none; }
-
 
 .container-bountysource { margin-top: 20px; }
 
