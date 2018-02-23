@@ -20,11 +20,12 @@
 
 .navbar-form {
   margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 7.5px;
 }
 
-.navbar-form .input-group-btn {
-  width: auto;
-}
+
 
 .navbar-form .input-group .form-control {
   border-radius: 0px;
@@ -82,6 +83,11 @@ button.navbar-toggle {
   .navbar-form {
     padding-top: 20px;
     padding-bottom: 21px;
+    margin-bottom: 0px;
+  }
+
+  .navbar-form .input-group-btn {
+    width: auto;
   }
 }
 
