@@ -15,6 +15,7 @@
 .nav-tabs > li > a:focus {
   background-color: #33ccff;
   border-bottom: 5px solid #33ccff4c;
+  color: white;
 }
 
 .nav-tabs > li.active > a, 
