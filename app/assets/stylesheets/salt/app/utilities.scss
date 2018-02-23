@@ -77,8 +77,6 @@
 .mr-4 { margin-right: 1.5rem !important; }
 .mr-5 { margin-right: 3rem !important; }
 
-
-
 /* Images */
 .img-circle { border-radius: 50% }
 .img-responsive { width: 100%;}
@@ -104,4 +102,8 @@
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .text-lg-center { text-align: center; }
+}
+
+.text-gunmetal {
+  color: $gunmetal !important;
 }

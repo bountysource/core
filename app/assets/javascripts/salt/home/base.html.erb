@@ -1,93 +1,69 @@
-<div style="background: #555; text-align: center; padding: 20px 0 20px">
-  <div class="container homepage">
+<section class="container">
+  <%= image_tag 'backgrounds/home-desk.svg', class: 'center-block' %>
+</section>
 
-    <!-- <h1>Salt is a monthly recurring crowdfunding platform to help developers earn a salary from open-source.</h1> -->
-    <h1>Salt is a crowdfunding platform that helps developers earn a monthly salary from open-source software.</h1>
+<section class="container">
+  <h2 class="text-center">SALT</h2>
+  <h4 class="text-center">A crowdfunding platform that helps developers earn a monthly salary from open-source software.</h4>
 
-    <div class="row">
-      <div class="col-md-3">
-        <div class="panel panel-success panel-bold panel-no-border">
-          <div class="panel-heading">
-            <h3 class="text-center panel-title">Want your team on Salt?</h3>
-          </div>
-
-          <div class="panel-body text-center">
-            <p style="margin: 0 0 16px 0">Setup a campaign for your open-source project.</p>
-
-            <div style="margin: 9px">
-              <a href="<%= ENV['BOUNTYSOURCE_WWW_URL'] %>teams/new?salt=true" class="btn btn-success">Sign Up Now</a>
-            </div>
-          </div>
+  <div class="row">
+    <div class="col-sm-3 welcome-card sign-up-card">
+      <h5>Want your team on SALT?</h5>
+      <hr>
+      <p class="text-muted">Setup a campaign for your open-source project.</p>
+      <a href="<%= ENV['BOUNTYSOURCE_WWW_URL'] %>teams/new?salt=true" class="btn btn-puerto-rico btn-rounded btn-lg btn-long mt-3">SIGN UP NOW</a>
+    </div>
+    <div class="col-sm-6 welcome-card activity-card">
+      <h5>Recent Activity</h5>
+      <hr>
+      <div class="row">
+        <div class="col-xs-4">
+          <div style="font-size: 20px;">{{global_summary.current_month_sum | dollars}}</div>
+          <div class="text-muted">paid this month</div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-danger panel-bold panel-no-border">
-          <div class="panel-heading">
-            <h3 class="text-center panel-title">Recent Activity</h3>
-          </div>
 
-          <div class="panel-body text-center">
+        <div class="col-xs-4">
+          <div style="font-size: 20px;">{{global_summary.previous_month_sum | dollars}}</div>
+          <div class="text-muted">paid last month</div>
+        </div>
 
-            <div class="row">
-              <div class="col-xs-4">
-                <div style="font-size: 20px;">{{global_summary.current_month_sum | dollars}}</div>
-                <div style="color: #888; font-size:14px; margin: -4px 0 4px">paid this month</div>
-              </div>
-
-              <div class="col-xs-4">
-                <div style="font-size: 20px;">{{global_summary.previous_month_sum | dollars}}</div>
-                <div style="color: #888; font-size:14px; margin: -4px 0 4px">paid last month</div>
-              </div>
-
-              <div class="col-xs-4">
-                <div style="font-size: 20px;">{{global_summary.total_sum | dollars}}</div>
-                <div style="color: #888; font-size:14px; margin: -4px 0 4px">paid total</div>
-              </div>
-            </div>
-
-            <div class="row" style="padding-bottom: 4px">
-              <div class="col-xs-4">
-                <div style="font-size: 20px;">{{global_summary.current_month_cnt}}</div>
-                <div style="color: #888; font-size:14px; margin: -4px 0 4px">supporters</div>
-              </div>
-
-              <div class="col-xs-4">
-                <div style="font-size: 20px;">{{global_summary.total_teams}}</div>
-                <div style="color: #888; font-size:14px; margin: -4px 0 4px">paid teams</div>
-              </div>
-
-              <div class="col-xs-4">
-                <div style="font-size: 20px;">{{global_summary.salt_teams | number}}</div>
-                <div style="color: #888; font-size:14px; margin: -4px 0 4px">active teams</div>
-              </div>
-            </div>
-
-          </div>
+        <div class="col-xs-4">
+          <div style="font-size: 20px;">{{global_summary.total_sum | dollars}}</div>
+          <div class="text-muted">paid total</div>
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="panel panel-primary panel-bold panel-no-border">
-          <div class="panel-heading">
-            <h3 class="text-center panel-title">Why is it called Salt?</h3>
-          </div>
+      <div class="row mt-4">
+        <div class="col-xs-4">
+          <div style="font-size: 20px;">{{global_summary.current_month_cnt}}</div>
+          <div class="text-muted">supporters</div>
+        </div>
 
-          <div class="panel-body text-center">
-            <p style="margin: 0">The word salary comes from the Latin word salarium, or "salt-money,” a Roman soldier's allowance for the purchase of salt.</p>
-          </div>
+        <div class="col-xs-4">
+          <div style="font-size: 20px;">{{global_summary.total_teams}}</div>
+          <div class="text-muted">paid teams</div>
+        </div>
+
+        <div class="col-xs-4">
+          <div style="font-size: 20px;">{{global_summary.salt_teams | number}}</div>
+          <div class="text-muted">active teams</div>
         </div>
       </div>
-
     </div>
 
+    <div class="col-sm-3 welcome-card why-salt-card">
+      <h5>Why is it called SALT?</h5>
+      <hr>
+      <p class="text-muted pl-4 pr-4">The word salary comes from the Latin word salarium, or "salt-money,” a Roman soldier's allowance for the purchase of salt.</p>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="container" style="padding-top:20px">
-  <ul class="nav nav-tabs" style="margin-bottom: 20px">
+<section class="container mt-6">
+  <ul class="nav nav-tabs">
     <li role="presentation" ng-class="{ active: state.includes('root.home.teams.list') }"><a ui-sref="root.home.teams.list">Teams</a></li>
     <li role="presentation" ng-class="{ active: state.includes('root.home.updates') }"><a ui-sref="root.home.updates">Updates</a></li>
     <li role="presentation" ng-class="{ active: state.includes('root.home.activity') }"><a ui-sref="root.home.activity">Activity</a></li>
   </ul>
   <ui-view/>
-</div>
+</section>

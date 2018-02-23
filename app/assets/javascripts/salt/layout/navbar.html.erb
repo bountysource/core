@@ -11,21 +11,16 @@
     <div class="collapse navbar-collapse" collapse="!isCollapsed">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <div class="navbar-btn">
-            <a class="btn btn-hover-green" ng-href="https://kiwiirc.com/client/chat.freenode.net:+6697/#bountysource" target="_blank"><span class="glyphicon glyphicon-comment"></span> IRC Chat</a>
-          </div>
+          <a ng-href="https://kiwiirc.com/client/chat.freenode.net:+6697/#bountysource" target="_blank">IRC Chat</a>
         </li>
         <li>
-          <div class="navbar-btn">
-            <a class="btn btn-hover-green" href="https://github.com/bountysource/frontend/wiki/Salt-Frequently-Asked-Questions" target="_blank"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a>
-          </div>
+          <a href="https://github.com/bountysource/frontend/wiki/Salt-Frequently-Asked-Questions" target="_blank">FAQ</a>
         </li>
 
         <!-- User dropdown if logged in -->
         <li class="dropdown" ng-show="person.id" dropdown>
           <a href="#" class="dropdown-toggle" dropdown-toggle>
-            <img class="img-rounded" ng-src="{{person.image_url_small}}" style="height: 20px; width: 20px; margin-top: -2px" />
-            {{person.display_name}}
+            <img class="img-circle" ng-src="{{person.image_url_small}}"/>
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -36,14 +31,12 @@
 
         <!-- Sign in dropdown if not logged in -->
         <li ng-hide="person.id" dropdown>
-          <div class="navbar-btn">
-            <a class="btn btn-success" ui-sref="root.session.signup" ui-sref-opts="{ inherit: false }"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
-          </div>
+          <a ui-sref="root.session.signup" ui-sref-opts="{ inherit: false }">
+            <button class="btn btn-light-blue sign-up-button">Sign Up</button>
+          </a>
         </li>
         <li ng-hide="person.id" dropdown>
-          <div class="navbar-btn">
-            <a class="btn btn-hover-green" ui-sref="root.session.login" ui-sref-opts="{ inherit: false }"><span class="glyphicon glyphicon-log-in" style="margin-right:3px"></span> Log In</a>
-          </div>
+          <a ui-sref="root.session.login" ui-sref-opts="{ inherit: false }">Log In</a>
         </li>
       </ul>
     </div>

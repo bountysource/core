@@ -118,16 +118,6 @@ input[type="text"]:disabled.white-input  {
   background-color: #ecfde4;
 }
 
-.table td.center-height { vertical-align: middle; }
-
-/* Center all td in a table, yay */
-.table.table-centered tr > td { vertical-align: middle; }
-
-.table-no-border td, .table-no-border th, .table.table-no-border-top tr:first-of-type td, .table.table-no-border-top tr:first-of-type th {
-  border: 0 !important;
-  background-color: transparent !important;
-}
-
 .form-without-bottom-margin { margin-bottom: -15px; }
 
 

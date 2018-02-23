@@ -12,3 +12,11 @@
   height: 10px;
   background-image: linear-gradient(to left, #33ccff, #4edcca);
 }
+
+a.gunmetal-link {
+  color: $gunmetal;
+  font-weight: 500;
+  &:hover {
+    text-decoration: none;
+  }
+}
