@@ -1,0 +1,69 @@
+.navbar-default { background-color: #fff; }
+.navbar-default .navbar-nav>li>a {
+    color: #485f64;
+}
+.container_top_margin { margin-top: 20px; }
+
+.navbar-bountysource { 
+  margin-bottom: 0; 
+  box-shadow: 0 2px 15px 0 #0000001f;
+  font-weight: 600;
+}
+
+
+.navbar-brand {
+  height: 100%;
+  padding-top: 12px; 
+  padding-bottom: 13px; 
+  display:inline-block;
+  img {
+    display: inline-block;
+  }
+  > span {
+    vertical-align: middle;
+    margin-left: 5px;
+    color: #16b7ec;
+    > span {
+      color: #485f64
+    }
+  }
+}
+
+.navbar-brand img{
+  width: 230px;
+}
+
+
+@media (min-width: $screen-sm-min) {
+  .navbar-nav > li > a {
+    padding-top: 27px;
+    padding-bottom: 28px;
+  } 
+}
+
+
+
+button.sign-up-button {
+  background-image: asset-url('icons/icon_person.svg');
+  background-repeat: no-repeat;
+  background-position: 22px center;
+  padding-left: 42px;
+  padding-right: 22px;
+  border-radius: 999px;
+  margin-top: -7px;
+}
+
+.navbar-toggle {
+  margin-top: 20px;
+}
+
+.navbar .dropdown img {
+  width: 45px;
+}
+
+@media (min-width: $screen-sm-min) {
+  .navbar .dropdown img {
+    margin-top: -12px;
+    margin-bottom: -13px;
+  }
+}

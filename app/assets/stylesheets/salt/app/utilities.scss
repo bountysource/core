@@ -77,39 +77,15 @@
 .mr-4 { margin-right: 1.5rem !important; }
 .mr-5 { margin-right: 3rem !important; }
 
-/* Borders */
-.ba { border: 2px solid; }
 
-.bb { border-bottom: 3px solid; }
-
-.ba-1 { border: 1px solid #ddd; }
-.bb-1 { border-bottom: 1px solid #ddd; }
-
-.bt-0 { border-top: 0 !important; }
-.br-0 { border-right: 0 !important; }
-.bl-0 { border-left: 0 !important; }
-
-.border-cool-grey { border-color: #919d9d7f !important; }
-.border-bright-light-blue { border-color: #33ccff7f !important; }
-.border-gunmetal { border-color: #485f64 !important; }
 
 /* Images */
 .img-circle { border-radius: 50% }
 .img-responsive { width: 100%;}
 
-/*TextColor*/
-.text-gunmetal { color: #485f64 !important; }
-.text-light-blue { color: #55CBF2 !important; }
-.text-dark { color: #4a4a4a !important; }
-.text-aqua { color: #33ccff !important; }
-.text-black { color: #000 !important; }
-.text-white { color: #fff !important; }
-.text-aquamarine { color: #4edcca !important; }
-.text-salmon { color: #ff6666 !important; }
-
-.text-medium { font-weight: 500 !important; }
-.text-regular { font-weight: 400 !important; }
-
+// Buttons
+.btn-rounded { border-radius: 999px; }
+.btn-long { padding-left: 1.5rem; padding-right: 1.5rem; }
 
 /*Text Align Media Queries*/
 
@@ -129,6 +105,3 @@
 @media (min-width: 1200px) {
   .text-lg-center { text-align: center; }
 }
-
-/*Backgrounds*/
-.background-white { background-color: white; }

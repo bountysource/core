@@ -21,7 +21,12 @@ h4 {
 a {
   color: #33ccff;
 }
-a.black-link {
+
+a:hover {
+  cursor: pointer;
+}
+
+a.gunmetal-link {
   font-weight: 500;
   color: #485f64;
 }
@@ -87,20 +92,10 @@ table.table-fixed { table-layout: fixed; }
   margin-top:0px;
 }
 
-a:hover {
-  cursor: pointer;
-}
+
 
 .unstyled-anchor {
   cursor: default !important;
-}
-
-.breadcrumb {
-  margin-top: 10px;
-}
-
-.nav-tabs {
-  margin-bottom: 15px;
 }
 
 .image_body_html img {

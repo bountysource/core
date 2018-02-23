@@ -1,0 +1,3 @@
+.btn-light-blue {
+  @include button-variant(#fff, $bright-light-blue, $bright-light-blue);
+}
