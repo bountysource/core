@@ -1,7 +1,7 @@
-<ul class="nav nav-tabs" style="margin:20px 0 10px">
+<ul class="nav nav-tabs">
   <li role="presentation" ng-class="{active: state.current.name === 'root.teams.show'}"><a ui-sref="root.teams.show(team)">Home</a></li>
-  <li role="presentation" ng-class="{active: state.current.name === 'root.teams.supporters'}" ng-show="team.monthly_contributions_count>0"><a ui-sref="root.teams.supporters(team)">Supporters <span class="badge">{{team.monthly_contributions_count}}</span></a></li>
-  <li role="presentation" ng-class="{active: state.current.name.indexOf('root.teams.updates')===0}" ng-show="team.updates_count>0"><a ui-sref="root.teams.updates.index(team)">Updates <span class="badge">{{team.updates_count}}</span></a></li>
+  <li role="presentation" ng-class="{active: state.current.name === 'root.teams.supporters'}" ng-show="team.monthly_contributions_count>0"><a ui-sref="root.teams.supporters(team)">Supporters ({{team.monthly_contributions_count}})</a></li>
+  <li role="presentation" ng-class="{active: state.current.name.indexOf('root.teams.updates')===0}" ng-show="team.updates_count>0"><a ui-sref="root.teams.updates.index(team)">Updates ({{team.updates_count}})</a></li>
   <li role="presentation" dropdown ng-class="{dropdown: true, active: state.current.name.indexOf('root.teams.admin')===0}" ng-show="team.is_admin">
     <a ui-sref="root.teams.admin.home(team)" class="dropdown-toggle" dropdown-toggle>
       <span class="glyphicon glyphicon-lock"></span> Admin  <span class="caret"></span>

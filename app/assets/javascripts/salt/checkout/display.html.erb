@@ -1,61 +1,58 @@
 <ng-include src="'salt/teams/_support_header_title.html'"></ng-include>
 
 <div class="container">
-  <h1>Display As <small>(Step 2 of 3)</small></h1>
-
-  <div class="row">
-    <div class="col-md-8">
-
-      <div class="alert alert-info">
-        <form ng-submit="submit_form()">
-
-          <div class="form-group">
-            <div class="row row-display-as">
-              <div class="col-xs-4 col-sm-3">
-                <a ng-class="{ 'thumbnail': true, 'text-center': true, 'active': form_data.display_as==='me' }" ng-click="form_data.display_as='me'">
-                  <div class="checked"><span class="glyphicon glyphicon-ok"></span></div>
-                  <img ng-src="{{person.image_url_medium}}" class="img-responsive" />
-                  <div class="ellipsis">{{person.display_name}}</div>
-                </a>
-              </div>
-              <div class="col-xs-4 col-sm-3" ng-repeat="person_team in person_teams">
-                <a ng-class="{ 'thumbnail': true, 'text-center': true, 'active': form_data.display_as==='team'+person_team.id }" ng-click="form_data.display_as='team'+person_team.id">
-                  <div class="checked"><span class="glyphicon glyphicon-ok"></span></div>
-                  <img ng-src="{{person_team.image_url_medium}}" class="img-responsive" />
-                  <div class="ellipsis">{{person_team.name}}</div>
-                </a>
-              </div>
-              <div class="col-xs-4 col-sm-3">
-                <a ng-class="{ 'thumbnail': true, 'text-center': true, 'active': form_data.display_as==='anonymous' }" ng-click="form_data.display_as='anonymous'">
-                  <div class="checked"><span class="glyphicon glyphicon-ok"></span></div>
-                  <img ng-src="<%= asset_path("anon.jpg") %>" class="img-responsive" />
-                  <div class="ellipsis">Anonymous</div>
-                </a>
-              </div>
-
-            </div>
-            <!--
-            <div class="radio">
-              <label>
-                <input type="radio" name="display_as" ng-model="form_data.display_as" value="new_company" />
-                <img ng-src="<%= asset_path("anon.jpg") %>" style="width: 24px; height: 24px" />
-                New Company
-              </label>
-            <div style="margin-left: 50px">
-              <input type="text" class="form-control input-sm" id="formAmount" name="amount" ng-model="form_data.company_name" placeholder="Company Name" />
-              <input type="text" class="form-control input-sm" id="formAmount" name="amount" ng-model="form_data.company_name" placeholder="Company Logo URL (optional)" />
-            </div>
-            -->
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg">Continue</button>
-          </div>
-        </form>
-      </div>
-
-    </div>
-    <div class="col-md-4">
-      <ng-include src="'salt/checkout/_amount.html'"></ng-include>
-    </div>
+  <div class="header">
+    <h3 class="header-underline-emphasize">Display As</h3>
+    <h4 style="display: inline;" class="text-muted">(Step 1 of 3)</h4>
   </div>
+
+  <form ng-submit="submit_form()">
+    <div class="row">
+      <div class="col-md-8">
+        
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <a ng-class="{ 'active': form_data.display_as==='me' }" ng-click="form_data.display_as='me'" class="team-member-card">
+              <div class="row p-4">
+                <div class="col-xs-4">
+                  <img ng-src="{{person.image_url_medium}}" class="img-responsive img-circle" />
+                </div>
+                <div class="col-xs-8">
+                  <div>{{person.display_name}}</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-6 col-xs-12" ng-repeat="person_team in person_teams">
+            <a ng-class="{ 'active': form_data.display_as==='team'+person_team.id }" ng-click="form_data.display_as='team'+person_team.id" class="team-member-card">
+              <div class="row p-4">
+                <div class="col-xs-4">
+                  <img ng-src="{{person_team.image_url_medium}}" class="img-responsive img-circle" />
+                </div>
+                <div class="col-xs-8">
+                  <div>{{person_team.name}}</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <a ng-class="{ 'active': form_data.display_as==='anonymous' }" ng-click="form_data.display_as='anonymous'" class="team-member-card">
+              <div class="row p-4">
+                <div class="col-xs-4">
+                  <img ng-src="<%= asset_path("anon.jpg") %>" class="img-responsive img-circle" />
+                </div>
+                <div class="col-xs-8">
+                  <div class="ellipsis">Anonymous</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <ng-include src="'salt/checkout/_amount.html'"></ng-include>
+        <button type="submit" class="btn btn-light-blue continue-button">Continue</button>
+      </div>
+    </div>
+  </form>
 </div>

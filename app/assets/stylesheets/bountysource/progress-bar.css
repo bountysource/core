@@ -1,0 +1,26 @@
+.progress {
+  position: relative;
+}
+
+.progress .progress-full-text {
+  position: absolute;
+  display: block;
+  width: 100%;
+}
+
+.progress {
+  background-color: transparent;  
+  box-shadow: none;
+}
+
+.progress-bar-aquamarine {
+  background-color: #4edcca; 
+}
+
+.progress-bar-cool-grey {
+  background-color: #919d9d; 
+}
+
+.progress-bar-light-blue {
+  background-color: #33ccff;  
+}

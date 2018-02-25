@@ -1,0 +1,33 @@
+.nav-tabs {
+  border: 0;
+  margin-bottom: 15px;
+}
+
+.nav-tabs > li > a {
+  border: 0;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 5px solid #edf0f0;
+  margin-right: 0;
+  color: #919d9d;
+}
+
+.nav-tabs > li > a:hover, 
+.nav-tabs > li > a:focus {
+  background-color: #33ccff;
+  border-bottom: 5px solid #33ccff4c;
+  color: white;
+}
+
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus {
+  border: 0;
+  font-weight: 600;
+  border-bottom: 5px solid #33ccff;
+}
+
+
+.nav-pills > li > a {
+  color: $gunmetal
+}

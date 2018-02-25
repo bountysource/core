@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-sm-6">
-    <table class="table timeline">
+    <table class="table table-centered table-no-separator mt-5">
       <tr ng-repeat="event in events" ng-class="{featured: event.bounty.featured}">
 
-        <td class="big-icon">
-          <img ng-src="{{event.actor.image_url_small}}" class="img-responsive img-rounded"/>
+        <td>
+          <img ng-src="{{event.actor.image_url_small}}" class="img-rounded img-salt-homepage-logo"/>
         </td>
 
         <td class="bounty-description">

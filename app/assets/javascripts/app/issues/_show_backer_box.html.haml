@@ -1,17 +1,18 @@
-.panel.panel-green.panel-green-background{ "ng-if" => "issue.can_add_bounty && (!issue.team || !issue.team.bounties_disabled)" }
-  .panel-heading.text-center{"style"=>"font-size:18px; line-height:14px"} Backers
+.panel.panel-cool-grey{ "ng-if" => "issue.can_add_bounty && (!issue.team || !issue.team.bounties_disabled)" }
+  .panel-heading.text-center
+    %h4.m-0.font-weight-medium Backers
   .panel-body.text-center
-    %h4
-      %span{style: 'margin-right:10px'} Post a bounty if you want this issue solved:
+    %h4 Post a bounty if you want this issue solved:
 
-      %span
-        %a.btn.btn-success{"ng-click" => "add_bounty_to_cart(15)"} {{ 15 | dollars:{ short: true } }}
-        %a.btn.btn-success{"ng-click" => "add_bounty_to_cart(50)"} {{ 50 | dollars:{ short: true } }}
-        %a.btn.btn-success{"ng-click" => "add_bounty_to_cart(100)"} {{ 100 | dollars:{ short: true } }}
+    %div.spaced-evenly-flex.row
+      %a.btn.btn-aquamarine.btn-small-radius.mt-3{"ng-click" => "add_bounty_to_cart(15)"} {{ 15 | dollars:{ short: true } }}
 
-        %div{ "style"=>"width: 115px; display: inline-block; line-height: 28px; vertical-align: middle"}
-          %form.input-group{ "toolip-trigger"=>"focus", "tooltip"=>"{{5 | dollars}} minimum bounty", "tooltip-placement"=>"bottom", "ng-submit"=>"add_bounty_to_cart()" }
-            %input.form-control{ "currency-amount"=>"post_custom_bounty.amount", "currency-input"=>"", "placeholder"=>"Custom", "type"=>"text" }
-            %span.input-group-btn
-              %button.btn.btn-success{ "type"=>"submit" }
-                %span.glyphicon.glyphicon-ok
+      %a.btn.btn-aquamarine.btn-small-radius.mt-3{"ng-click" => "add_bounty_to_cart(50)"} {{ 50 | dollars:{ short: true } }}
+      %a.btn.btn-aquamarine.btn-small-radius.mt-3{"ng-click" => "add_bounty_to_cart(100)"} {{ 100 | dollars:{ short: true } }}
+    
+      %form.mt-3{ "toolip-trigger"=>"focus", "tooltip"=>"{{5 | dollars}} minimum bounty", "tooltip-placement"=>"bottom", "ng-submit"=>"add_bounty_to_cart()" }
+        %div.input-group{"style" => "width: 150px"}
+          %input.form-control{ "currency-amount"=>"post_custom_bounty.amount", "currency-input"=>"", "placeholder"=>"Custom", "type"=>"text" }
+          %span.input-group-btn
+            %button.btn.btn-aquamarine.btn-small-radius{ "type"=>"submit" }
+              = image_tag 'icons/icon_mail.svg'

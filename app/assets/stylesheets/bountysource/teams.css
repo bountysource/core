@@ -16,6 +16,8 @@ td.teams-date-cell {
 a.team-member-card {
   overflow: hidden;
   text-overflow: ellipsis;
+  border-radius: 0px;
+  border: solid 1px #919d9d7f;
 }
 
 h3.no-margin {
@@ -42,31 +44,38 @@ ul.list.narrow-padding {
 }
 
 
-.team-header { background: #444; }
-.team-header a { color: white }
-.team-header h1 { font-size: 40px; margin-bottom: 5px; color: white; margin-top: 0; font-family: 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif; }
-.team-header h1 a:hover, .team-header h1 a:active, .team-header h1 a:visited, .team-header h1 a:link { text-decoration: none; }
-.team-header h2 { color: white; font-size: 16px; line-height: 20px; margin-top: 0; padding-bottom: 10px; font-family: 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif; }
+.team-header { 
+  background: #ffffff; 
+  margin-bottom: 2px;
+}
 
-.team-header .team-tags { margin-bottom: 10px; }
-.team-header .team-tags a, .team-header .team-tags { color: #aaa; font-size: 12px }
+.team-header .team-display-image { 
+  border-radius: 50%;
+  width: 100%;
+  max-width: 130px;
+}
 
+.featured-header {
+  background-color: #ffffff; 
+  padding: 12px;
+}
 
-/*.table-support th { border-top: 0 !important; text-align: center; }
-.table-support td { text-align: center }
-.table-support th:nth-child(2n), .table-support td:nth-child(2n) { background: #f8f8f8; }
-.table-support td:first-child { text-align: left; }
+.featured-header-icon {
+  background-color: transparent;
+  padding: 0px;
+}
 
+.featured-header img{
+  width: 60px;
+  float: left;
+  margin: 6px;
+}
 
-.supporter-silver, .supporter-gold, .supporter-platinum {  }
-.supporter-silver { color: #C0C0C0; }
-.supporter-gold { color: #FFD700; text-shadow: 0 0 1px #888; }
-.supporter-platinum { color: #e9241d; }
-
-
-.subscription-table label { font-weight: normal; }*/
-
-
+.featured-header-icon img{
+  width: 60px;
+  float: left;
+  margin: 6px;
+}
 
 
 .inline-form-editor-default { color: #ccc; border: 1px dashed #ccc; padding: 1px; cursor:pointer; }
@@ -77,3 +86,5 @@ ul.list.narrow-padding {
 .inline-form-editor h3 { margin-top: 0; }
 .inline-form-editor-content .markdown-hover-edit-link { display: none; }
 .inline-form-editor-content:hover .markdown-hover-edit-link { display:block; float:right; }
+
+

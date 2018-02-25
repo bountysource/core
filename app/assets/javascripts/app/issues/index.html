@@ -5,13 +5,13 @@
         <!-- Loading message... -->
         <div ng-hide="tabs_resolved" class="text-center">
           <p class="lead">Loading tabs...</p>
-          <div class="progress progress-striped active">
-            <div class="progress-bar" style="width: 100%;"></div>
+          <div class="progress active">
+            <div class="progress-bar progress-bar-aquamarine" style="width: 100%;"></div>
           </div>
         </div>
 
         <div ng-show="tabs_resolved">
-          <ul class="nav nav-tabs">
+          <ul class="nav nav-tabs nav-tabs-sm">
             <li style="position:relative;" ng-repeat="tab in tabs_collection" ng-class="{active: active_tab(tab) }">
               <a ng-click="set_current_saved_search_tab(tab)">{{tab.name}}</a>
               <i ng-click="remove_tab(tab)" class="close" ng-hide="true" style="position:absolute;top:0;right:0;padding-right:3px;">×</i>
@@ -21,8 +21,8 @@
 
           <div ng-hide="tab_results_resolved" class="text-center">
             <p class="lead">Loading saved search...</p>
-            <div class="progress progress-striped active">
-              <div class="progress-bar" style="width: 100%;"></div>
+            <div class="progress active">
+              <div class="progress-bar progress-bar-aquamarine" style="width: 100%;"></div>
             </div>
           </div>
 
@@ -31,7 +31,7 @@
               <issue-list issues="current_saved_search_tab.issues"></issue-list>
             </div>
             <div ng-hide="current_saved_search_tab.issues.length > 0">
-              <pre>No Results Found</pre>
+              No Results Found
             </div>
           </div>
 
@@ -66,7 +66,7 @@
                  </span>
                </div>
 
-               <button class="btn btn-primary btn-block" type="submit">Search</button>
+               <button class="btn btn-aquamarine" type="submit">Search</button>
 
              </form>
            </div>

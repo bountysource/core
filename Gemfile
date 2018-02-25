@@ -51,6 +51,10 @@ gem 'maildown'
 
 gem 'htmlentities'
 
+# Frontend
+gem 'sass-rails', '~> 5.0.7'
+gem 'bootstrap-sass'
+
 
 # Unfortunately, the new version of TS does not play nicely with Heroku, see:
 # http://support.flying-sphinx.com/discussions/problems/1177-heroku-error-when-deploying-thinking-sphinx-gem-304-no-such-file-or-directory-tmpbuild_xxxlog
@@ -81,7 +85,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rdoc'
-  gem 'sql-logging'
   gem 'annotate', '~> 2.6.5'
 end
 
@@ -126,5 +129,5 @@ group :production do
   gem 'execjs'
   gem 'therubyracer'
   gem 'ngannotate-rails'
-  gem 'sass-rails', '~> 4.0.0'
+  
 end

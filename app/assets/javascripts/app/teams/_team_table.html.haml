@@ -1,27 +1,29 @@
-%table.table.table-no-border-top
-  %tr
-    %th
-    %th Name
-    %th.text-center Activity
-  %tr{ "ng-if"=>"team_self" }
-    %td{ "style"=>"width:100px; padding-right:10px" }
-      %a{ "ng-href"=>"/teams/{{team_self.slug}}" }
-        %img.img-rounded.img-responsive{ "ng-src"=>"{{team_self.image_url_small}}" }
-    %td
-      %h4
-        %a{ "ng-href"=>"/teams/{{team_self.slug}}" } {{team_self.name}}
-      %p {{team_self.bio|truncate:140}}
-    %td.text-center
-      {{team_self.activity_total | dollars}}
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th 
+      %th.text-center Activity
+  %tbody
+    %tr{ "ng-if"=>"team_self" }
+      %td.pt-4.pb-4{ "style"=>"width:90px; padding-right:10px" }
+        %a{ "ng-href"=>"/teams/{{team_self.slug}}" }
+          %img.img-circle.img-responsive{ "ng-src"=>"{{team_self.image_url_small}}" }
+      %td{"style" => "vertical-align:middle"}
+        %h4
+          %a{ "ng-href"=>"/teams/{{team_self.slug}}" } {{team_self.name}}
+        %p {{team_self.bio|truncate:140}}
+      %td.text-center.font-weight-semibold{"style" => "vertical-align:middle"}
+        {{team_self.activity_total | dollars}}
 
 
-  %tr{ "ng-repeat"=>"team in teams" }
-    %td{ "style"=>"width:100px; padding-right:10px" }
-      %a{ "ng-href"=>"/teams/{{team.slug}}" }
-        %img.img-rounded.img-responsive{ "ng-src"=>"{{team.image_url_small}}" }
-    %td
-      %h4
-        %a{ "ng-href"=>"/teams/{{team.slug}}" } {{team.name}}
-      %p {{team.bio|truncate:140}}
-    %td.text-center
-      {{team.activity_total | dollars}}
+    %tr{ "ng-repeat"=>"team in teams" }
+      %td.pt-4.pb-4{ "style"=>"width:90px; padding-right:10px" }
+        %a{ "ng-href"=>"/teams/{{team.slug}}" }
+          %img.img-circle.img-responsive{ "ng-src"=>"{{team.image_url_small}}" }
+      %td{"style" => "vertical-align:middle"}
+        %h4
+          %a{ "ng-href"=>"/teams/{{team.slug}}" } {{team.name}}
+        %p {{team.bio|truncate:140}}
+      %td.text-center.font-weight-semibold{"style" => "vertical-align:middle"}
+        {{team.activity_total | dollars}}

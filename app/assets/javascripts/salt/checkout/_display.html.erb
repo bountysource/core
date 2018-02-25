@@ -1,21 +1,23 @@
-<div class="well">
-  <a ui-sref="root.checkout.display(state.params)" class="btn btn-default pull-right">Edit</a>
+<div>
+  <a ui-sref="root.checkout.display(state.params)" class="pull-right">
+    <%= image_tag "icons/icon_edit.svg" %>
+  </a>
   <h4>Display As</h4>
   <div ng-show="state.params.display_as === 'anonymous'">
-    <div class="thumbnail" style="max-width: 150px">
-      <img ng-src="<%= asset_path("anon.jpg") %>" class="img-responsive" />
+    <div class="" style="max-width: 150px">
+      <img ng-src="<%= asset_path("anon.jpg") %>" class="img-responsive img-circle" />
       <div class="text-center ellipsis">Anonymous</div>
     </div>
   </div>
   <div ng-show="state.params.display_as === 'me'">
-    <div class="thumbnail" style="max-width: 150px">
-      <img ng-src="{{person.image_url_medium}}" class="img-responsive" />
+    <div class="" style="max-width: 150px">
+      <img ng-src="{{person.image_url_medium}}" class="img-responsive img-circle" />
       <div class="text-center ellipsis">{{person.display_name}}</div>
     </div>
   </div>
   <div ng-repeat="team in person_teams" ng-show="state.params.display_as === 'team'+team.id">
-    <div class="thumbnail" style="max-width: 150px">
-      <img ng-src="{{team.image_url_medium}}" class="img-responsive" />
+    <div class="" style="max-width: 150px">
+      <img ng-src="{{team.image_url_medium}}" class="img-responsive img-circle" />
       <div class="text-center ellipsis">{{team.name}}</div>
     </div>
   </div>

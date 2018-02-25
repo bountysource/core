@@ -1,0 +1,21 @@
+.search-input {
+  border-radius: 4px;
+  padding-left: 14px;
+  height: 42px;
+  background-image: asset-url('icons/icon_search.svg');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.input-medium {
+  padding-left: 30px;
+  height: 42px;
+}
+
+.input-group-addon {
+  background-color: white;
+}
+
+select.frequency-select {
+  height: 42px;
+}

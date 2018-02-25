@@ -61,11 +61,17 @@
           <div ng-if="event.body_html" ng-bind-html="event.body_html | trusted_html" class="timeline-body-html" style="width: 100%; overflow: auto"></div>
         </target-blank>
 
-        <div class="secondary-text" ng-if="event.tracker || event.team || !dateInPrimary">
-          <a ng-href="/trackers/{{event.tracker.slug}}" ng-if="event.tracker && !event.team"><img ng-hide="noActorImage" ng-src="{{event.tracker.image_url_small}}" />{{event.tracker.display_name}}</a>
-          <a ng-href="/teams/{{event.team.slug}}" ng-if="event.team"><img ng-hide="noActorImage" ng-src="{{event.team.image_url_small}}" />{{event.team.display_name}}</a>
-          <span ng-if="!dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right">{{event.timestamp | timeDiff }} ago</span>
-          <span class="label label-success" ng-if="event.bounty.featured">Featured</span>
+        <div class="secondary-text mt-2" ng-if="event.tracker || event.team || !dateInPrimary">
+          <a ng-href="/trackers/{{event.tracker.slug}}" ng-if="event.tracker && !event.team">
+            <img ng-hide="noActorImage" ng-src="{{event.tracker.image_url_small}}" class="img-circle"/>
+            {{event.tracker.display_name}}
+          </a>
+          <a ng-href="/teams/{{event.team.slug}}" ng-if="event.team">
+            <img ng-hide="noActorImage" ng-src="{{event.team.image_url_small}}" class="img-circle"/>
+            {{event.team.display_name}}
+          </a>
+          <span ng-if="!dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right" class="ml-3">{{event.timestamp | timeDiff }} ago</span>
+          <span class="ml-3 label label-long label-lg label-featured" ng-if="event.bounty.featured">Featured</span>
         </div>
 
         <div ng-if="event.event==='issue_created' && issue">

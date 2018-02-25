@@ -1,24 +1,48 @@
-.navbar { transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); }
-
-
-.homepage .team-header h1, .homepage .team-header h2 { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
-.homepage .team-header h1 { text-align: center; margin: 20px 0 20px 0; font-weight: bold; }
-.homepage .team-header h2 { text-align: center; margin: 20px 0 40px 0; font-weight: normal; }
-.homepage .team-header h4 { font-size:16px; margin:10px 0 20px; text-align: center; }
-
-
-
-@media (max-width: 767px) { /* @screen-xs */
-  .homepage .team-header h1 { font-size: 30px; }
-  .homepage .team-header h2 { font-size: 24px; }
+.navbar { 
+	transform: translate3d(0,0,0); 
+	-webkit-transform: translate3d(0,0,0); 
 }
 
-@media (min-width: 768px) and (max-width: 991px) { /* @screen-sm */
-  .homepage .team-header h1 { font-size: 40px; }
-  .homepage .team-header h2 { font-size: 32px; }
+.homepage h1 { font-size: 30px; }
+.homepage h2 { font-size: 24px; }
+
+.quicklink {
+  text-align: center;
+}
+.quicklink .quicklink-title {
+  font-size: 24px;
+  color: #33ccff;
+  font-weight: bold;
 }
 
-@media (min-width: 992px) { /* @screen-md @screen-lg*/
-  .homepage .team-header h1 { font-size: 50px; }
-  .homepage .team-header h2 { font-size: 34px; }
+.quicklink .quicklink-subtitle {
+  margin-bottom: 16px;
+}
+
+.quicklink form {
+  max-width: 273px;
+}
+
+.quicklink input {
+  height: 40px;
+  box-shadow: 0 2px 3px 0 #00000048;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.quicklink .btn {
+  border: 0;
+  box-shadow: 0 2px 3px 0 #00000048;
+  font-size: 18px;
+  padding-top: 7px;
+  padding-bottom: 8px;
+}
+
+.quicklink .glyphicon {
+  top: 3px;
+}
+
+.bounty-hunter-name {
+  font-size: 16px;
+  color: #33ccff;
 }

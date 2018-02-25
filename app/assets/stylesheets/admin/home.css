@@ -15,6 +15,10 @@
 .homepage section#projects {
 }
 
+.illustration img {
+  width: 100%;
+	display: block;
+ }
 /* backer/developer box (background and text) */
 .homepage #top { background-color: rgba(0,0,0,0); color: #fff; border: 0; }
 .homepage #top h1 { text-align: center; padding: 0; margin: 10px 0 0 0; font-size: 34px; line-height: 40px; }
@@ -31,7 +35,7 @@
 
 /* backer/developer box (top developer and backer pics) */
 .homepage .thumbnails li { background: none; overflow: hidden; text-align: center; }
-.homepage .thubmnails li a { border: 0; }
+.homepage .thumbnails li a { border: 0; }
 .homepage .thumbnails li img { display: block; padding-bottom: 0; }
 .homepage .thumbnails li strong { display: block; color: #333; }
 .homepage .home-developers ul.top-pics { height: 75px }
@@ -49,3 +53,41 @@
 .homepage .card a:not(.link) { z-index: 1; position: relative; }
 .homepage .card:hover { box-shadow: 0 0 8px #ddd; -webkit-box-shadow: 0 0 8px #ddd; -moz-box-shadow: 0 0 8px #ddd; }
 .homepage .card.fundraiser:hover { background: #ddd; box-shadow: 0 0 8px #e5e5e5; -webkit-box-shadow: 0 0 8px #e5e5e5; -moz-box-shadow: 0 0 8px #e5e5e5; }
+
+.homepage .team-header h1, .homepage .team-header h2 { font-family: 'Montserrat', "Helvetica Neue",Helvetica,Arial,sans-serif; }
+.homepage .team-header h1 { text-align: center; margin: 20px 0 20px 0; font-weight: bold; }
+.homepage .team-header h2 { text-align: center; margin: 20px 0 40px 0; font-weight: normal; }
+.homepage .team-header h4 { font-size:16px; margin:10px 0 20px; text-align: center; }
+
+.btn-post {
+ 	background-image: linear-gradient(to right, #0078bf, #33ccff);
+ 	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
+ 	border-radius: 18px;
+ }
+ 
+.input-style {
+ 	background-color: #b2c1ce;
+ 	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
+ 	border-radius: 18px;
+ }
+ 
+.btn-team {
+	background-image: linear-gradient(to right, #33ccff, #4edcca);
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
+	border-radius: 18px;
+}
+.btn-bounty {
+	background-image: linear-gradient(to right, #ffc600, #ff6666);
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.28);
+	border-radius: 18px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) { /* @screen-sm */
+	.homepage .team-header h1 { font-size: 40px; }
+	.homepage .team-header h2 { font-size: 20px; }
+}
+
+@media (min-width: 992px) { /* @screen-md @screen-lg*/
+	.homepage .team-header h1 { font-size: 40px; }
+	.homepage .team-header h2 { font-size: 20px; }
+}

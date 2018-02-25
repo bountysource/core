@@ -41,5 +41,4 @@ node_modules
 compiled_tests/
 
 .env
-
 .byebug_history

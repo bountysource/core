@@ -1,18 +1,22 @@
-<ng-include src="'salt/teams/_support_header.html'"></ng-include>
-
 <div class="container">
+  <ng-include src="'salt/teams/_support_header.html'"></ng-include>
   <ng-include src="'salt/teams/_tabs.html'"></ng-include>
 
   <div class="row">
-    <div class="col-sm-9">
-      <h2>{{update.title}}<br/> <small>{{update.published_at | date}} - Update #{{update.number}}</small></h2>
+    <div class="col-sm-8 mt-5">
+      <h3 class="mt-0">{{update.title}}</h3>
+      <p class="text-muted">{{update.published_at | date}} - Update #{{update.number}}</p>
       <div btf-markdown="update.body" class="markdown markdown-small-headers"></div>
     </div>
-    <div class="col-sm-3">
-      <h4>All Updates</h4>
-      <ul class="nav nav-pills nav-stacked">
+    <div class="col-sm-4 text-center mt-5">
+      <h4>Updates</h4>
+      <ul class="nav nav-pills nav-stacked nav-salt-updates">
         <li ng-repeat="update in updates" ng-class="{ active: active_update_number===update.number }">
-          <a ui-sref="root.teams.updates.show({ slug: team.slug, number: update.slug })"><b>{{update.title}}</b><br/> <em><small>{{update.published_at | date}} -- Update #{{update.number}}</small></em></a>
+          <a ui-sref="root.teams.updates.show({ slug: team.slug, number: update.slug })">
+            <span class="update-title">{{update.title}}</span>
+            <br/>
+            <span class="text-muted">{{update.published_at | date}} - Update #{{update.number}}</span>
+          </a>
         </li>
       </ul>
     </div>

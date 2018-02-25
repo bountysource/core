@@ -3,69 +3,69 @@
   <div ng-include="'app/trackers/_tracker_header.html'" ng-show="issue.tracker && !team.id"></div>
 
   <!-- TEAM HEADER -->
-  <div class="team-header" style="padding: 25px 0 15px;" ng-show="team.id">
+  <div class="team-header" ng-show="team.id">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
-          <div class="row">
-            <div class="col-xs-3 col-sm-2" style="margin-bottom:10px">
-              <img ng-src="{{team.image_url_medium}}" class="img-rounded img-responsive" />
+      <div class="row display-flex vertical-align-middle pt-4 pb-4">
+        <div class="col-xs-12 col-sm-2">
+          <img ng-src="{{team.image_url_medium}}" class="team-display-image center-block" />
+        </div>
+        <div class="col-xs-12 col-sm-8 text-center text-sm-left" ng-class="{ 'col-sm-5': team.accepts_public_payins }">
+          <!-- team name -->
+          <a ng-href="/teams/{{team.slug}}" class="text-gunmetal">
+            <h1>{{team.name}}</h1>
+          </a>
+
+          <!-- team bio -->
+          <p ng-if="team.bio">{{team.bio}}</p>
+
+          <div>
+            <button type="button" class="btn btn-marigold-salmon p-3 pl-5 pr-5" ng-click="bountyHunterOptIn()" ng-show="!team.bounties_disabled && !team.is_bounty_hunter"><span class="glyphicon glyphicon-star"></span> Become a Bounty Hunter</button>
+
+            <span class="dropdown" ng-show="!team.bounties_disabled && team.is_bounty_hunter">
+              <button class="btn btn-cerulean-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-ok"></span> You're a Bounty Hunter
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a ng-href="/teams/{{team.slug}}/bounties">View Bounties</a></li>
+                <li ng-if="team.accepts_issue_suggestions"><a ng-href="/teams/{{team.slug}}/issue_suggestions/new">Suggest an Issue</a></li>
+                <li><a ng-click="bountyHunterOptOut()">Unsubscribe from {{team.name}}</a></li>
+              </ul>
+            </span>
+          </div>
+        </div>
+
+
+        <!-- salt campaign -->
+        <div class="col-xs-12 col-sm-5 vertical-align-middle pt-4 pb-4" ng-if="team.accepts_public_payins">
+          <div class="panel panel-white mb-0">
+            <div class="panel-heading">
+              <h3 class="text-center panel-title">{{team.name}} needs your support</h3>
             </div>
-            <div class="col-xs-9" ng-class="{ 'col-sm-5': team.accepts_public_payins }" style="margin-bottom:10px">
-              <!-- team name -->
-              <h1><a ng-href="/teams/{{team.slug}}">{{team.name}}</a></h1>
 
-              <!-- team bio -->
-              <h2 style="margin-bottom: 0">{{team.bio}}</h2>
-
-              <div style="line-height:40px">
-                <button type="button" class="btn btn-success" ng-click="bountyHunterOptIn()" ng-show="!team.bounties_disabled && !team.is_bounty_hunter"><span class="glyphicon glyphicon-star"></span> Become a Bounty Hunter</button>
-
-                <span class="dropdown" ng-show="!team.bounties_disabled && team.is_bounty_hunter">
-                  <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="glyphicon glyphicon-ok"></span> You're a Bounty Hunter
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a ng-href="/teams/{{team.slug}}/bounties">View Bounties</a></li>
-                    <li ng-if="team.accepts_issue_suggestions"><a ng-href="/teams/{{team.slug}}/issue_suggestions/new">Suggest an Issue</a></li>
-                    <li><a ng-click="bountyHunterOptOut()">Unsubscribe from {{team.name}}</a></li>
-                  </ul>
+            <div class="panel-body text-center">
+              <div class="progress" ng-show="team_support_level_progress_bar_amount">
+                <div class="progress-bar progress-bar-aquamarine" role="progressbar" ng-style="{ 'width': team_support_level_progress_bar_amount+ '%' }"">
+                  <span class="progress-full-text text-dark text-medium">
+                    {{team_support_level_progress_bar_text}}% 
+                    <span class="text-dark">of</span>
+                    {{team.support_level_next_goal | dollars}}
+                    <span class="text-dark">goal</span>
+                  </span>
+                </div>
+              </div>
+              <!-- <div class="text-center mt-3 text-aqua">
+                <span>
+                  {{team.monthly_contributions_sum | dollars}} this month from {{team.monthly_contributions_count}} supporters
                 </span>
+              </div> -->
+
+              <div class="text-center mt-3">
+                <a class="btn btn-cool-grey text-white p-3 pl-5 pr-5" ng-href="{{env.salt_host}}checkout/amount?team={{team.slug}}">
+                  <span class="glyphicon glyphicon-shopping-cart"></span> Support {{team.name}}
+                </a>
               </div>
             </div>
-
-
-            <!-- salt campaign -->
-            <div class="col-xs-12 col-sm-5" ng-if="team.accepts_public_payins">
-              <div class="panel panel-primary panel-bold panel-no-border">
-                <div class="panel-heading">
-                  <h3 class="text-center panel-title">{{team.name}} Needs Your Support</h3>
-                </div>
-
-                <div class="panel-body text-center">
-                  <div class="progress" style="margin-bottom: 8px;" ng-show="team_support_level_progress_bar_amount">
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: {{team_support_level_progress_bar_amount}}%">
-                      <span class="progress-full-text">{{team_support_level_progress_bar_text}}% of {{team.support_level_next_goal | dollars}} goal</span>
-                    </div>
-                    <div class="progress-bar" role="progressbar" style="width: {{100-team_support_level_progress_bar_amount}}%; background: #ddd">
-                    </div>
-                  </div>
-                  <div class="text-center" style="font-size:16px">
-                    <span style="font-size: 22px">{{team.monthly_contributions_sum | dollars}}</span>
-                    this month from
-                    <span style="font-size: 22px">{{team.monthly_contributions_count}}</span>
-                    supporters
-                  </div>
-
-                  <div style="text-align: center; margin-top:10px">
-                    <a class="btn btn-primary" ng-href="{{env.salt_host}}checkout/amount?team={{team.slug}}"><span class="glyphicon glyphicon-shopping-cart"></span> Support {{team.name}}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
           </div>
         </div>
       </div>
@@ -75,14 +75,10 @@
   <!-- TOP BACKERS -->
   <div ng-show="topBackers.length > 0" class="featured-header">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-lg-10 col-lg-offset-1">
-          <h3>Top Supporters:</h3>
-          <a owner-href="backer" ng-repeat="backer in topBackers | limitTo:10">
-            <img ng-src="{{backer.image_url_small}}"  tooltip="{{backer.display_name}} {{backer.amount | dollars}}" tooltip-placement="bottom" />
-          </a>
-        </div>
-      </div>
+      <h4 class="mt-0">Top Supporters</h4>
+        <a owner-href="backer"  ng-repeat="backer in topBackers | limitTo:10">
+          <img ng-src="{{backer.image_url_small}}"  tooltip="{{backer.display_name}} {{backer.amount | dollars}}" tooltip-placement="bottom" class="img-circle img-responsive"/>
+        </a>
     </div>
   </div>
 
@@ -100,7 +96,7 @@
     </div>
     <div class="row" ng-if="team || issue">
       <!-- MAIN COLUMN -->
-      <div class="col-lg-10 col-lg-offset-1">
+      <div class="col-xs-12">
         <!-- Header -->
 
         <!-- Nav Tabs -->
@@ -109,30 +105,41 @@
             <thumbs-up-box issue="issue" thumbs-up-size="large"></thumbs-up-box>
           </div>
 
-          <h1>
-            <span ng-if="issue.tracker && team.id">
-              <a ng-href='/trackers/{{issue.tracker.slug}}' ng-if="!team || !team.id" style="color: #333">{{ issue.tracker.display_name }}</a>
-              <a ng-href='/teams/{{team.slug}}/issues?tracker_ids={{issue.tracker.id}}' ng-if="team && team.id" style="color: #333">{{ issue.tracker.display_name }}</a>
-              &raquo;
-            </span>
-            {{ issue.title }}
-            <div>
-              <span class="hidden-sm hidden-md hidden-lg">
+          
+          <div class="issue-title">
+            <issue-status-label issue='issue' size='large'></issue-status-label>
+            <h3>
+              <span ng-if="issue.tracker && team.id">
+                <a ng-href='/trackers/{{issue.tracker.slug}}' ng-if="!team || !team.id" class="text-muted">
+                  {{ issue.tracker.display_name }}
+                </a>
+                <a ng-href='/teams/{{team.slug}}/issues?tracker_ids={{issue.tracker.id}}' ng-if="team && team.id" class="text-muted">
+                  {{ issue.tracker.display_name }}
+                </a>
+                &raquo;
+              </span>
+              {{ issue.title }}
+            </h3>
+            <div class="font-size-default mt-2">
+              <span class="hidden-sm hidden-md hidden-lg ml-3">
                 <thumbs-up-box issue="issue" thumbs-up-size="small"></thumbs-up-box>
               </span>
-              <issue-status-label issue='issue'></issue-status-label>
-              <a class='label label-success' ng-if='issue.bounty_total > 0' ng-href="/issues/{{issue.slug}}/backers">{{ issue.bounty_total | dollars:{space:true} }}</a>
+              <a ng-href='{{issue.url}}' target='_blank' class="btn btn-gunmetal btn-small-radius font-weight-semibold" style='font-size: 12px'>
+                <span class='glyphicon glyphicon-new-window'></span>
+                View in
+                <name-for-external-link object-type='issue.type'></name-for-external-link>
+              </a>
             </div>
-          </h1>
+          </div>
 
-          <ul class='nav nav-tabs'>
+          <ul class='nav nav-tabs nav-tabs-sm mt-5'>
             <li ng-class="active_tab('overview')">
               <a ng-href='/issues/{{issue.slug}}'>Overview</a>
             </li>
             <li ng-class="active_tab('backers')" ng-if='issue.backers_count > 0'>
               <a ng-href='/issues/{{issue.slug}}/backers'>
                 Backers
-                <span class='hidden-xs badge badge-info'>{{issue.backers_count}}</span>
+                <span class='hidden-xs'>({{issue.backers_count}})</span>
               </a>
             </li>
             <li ng-class="active_tab('proposals')" ng-if='rfpAuthorizationResolved && displayRfpTab'>
@@ -140,18 +147,11 @@
                 Proposals
               </a>
             </li>
-            <li class='hidden-xs'>
-              <a ng-href='{{issue.url}}' target='_blank'>
-                <span class='glyphicon glyphicon-new-window' style='font-size:80%'></span>
-                View on
-                <name-for-external-link object-type='issue.type'></name-for-external-link>
-              </a>
-            </li>
           </ul>
         </div>
 
         <div ng-if="_options.showNavTabs && !issue">
-          <ul class="nav nav-tabs">
+          <ul class="nav nav-tabs nav-tabs-sm">
             <li ng-class="{ active: activeNavTab('home') }">
               <a ng-href="/teams/{{ team.slug }}">Home</a>
             </li>
