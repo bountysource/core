@@ -67,3 +67,13 @@ a.support-project-button {
 }
 
 
+.team-member-card{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 0px;
+  border: solid 1px #919d9d7f;
+  &.active {
+    border: solid 1px $bright-light-blue;
+  }
+}

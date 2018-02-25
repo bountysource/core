@@ -1,5 +1,7 @@
-<div class="well">
-  <a ui-sref="root.checkout.amount(state.params)" class="btn btn-default pull-right">Edit</a>
+<div>
+  <a ui-sref="root.checkout.amount(state.params)" class="pull-right">
+    <%= image_tag "icons/icon_edit.svg" %>
+  </a>
 
   <div ng-show="team.support_offering.rewards.length > 0 && state.params.reward_id">
     <h4>Amount</h4>

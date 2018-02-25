@@ -1,17 +1,25 @@
 <ng-include src="'salt/teams/_support_header_title.html'"></ng-include>
 
 <div class="container">
-  <h1>Thank you for your support!</h1>
+  <h3 class="font-weight-regular">Thank you for your support!</h3>
 
   <div class="row">
     <div class="col-md-8">
-      <div class="alert alert-info text-center">
+      <div class="text-center">
         <h4 style="margin-top:30px; margin-bottom: 20px;">Please help us get the word out:</h4>
-        <a class="btn btn-primary btn-lg" target="_blank" ng-href="https://twitter.com/intent/tweet?text={{(team.support_offering.extra.twitter_share_text || default_share_title)|encodeURIComponent}}%20{{share_url|encodeURIComponent}}"><i class="fa fa-twitter"></i> Twitter</a>
+        <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{(team.support_offering.extra.twitter_share_text || default_share_title)|encodeURIComponent}}%20{{share_url|encodeURIComponent}}">
+          <%= image_tag 'icons/icon_twitter_white.svg' %>
+        </a>
         <!-- <a class="btn btn-primary" target="_blank" ng-href="https://news.ycombinator.com/submitlink?u={{share_url|encodeURIComponent}}&amp;t={{(team.support_offering.extra.hackernews_share_text || default_share_title) | encodeURIComponent}}"><i class="fa fa-hacker-news"></i> HackerNews</a> -->
-        <a class="btn btn-primary btn-lg" target="_blank" ng-href="http://www.reddit.com/submit?url={{share_url|encodeURIComponent}}&amp;title={{(team.support_offering.extra.reddit_share_text || default_share_title)|encodeURIComponent}}"><i class="fa fa-reddit"></i> Reddit</a>
-        <a class="btn btn-primary btn-lg" target="_blank" ng-href="https://plus.google.com/share?url={{share_url|encodeURIComponent}}"><i class="fa fa-google-plus"></i> Google+</a>
-        <a class="btn btn-primary btn-lg" target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{share_url|encodeURIComponent}}"><i class="fa fa-facebook"></i> Facebook</a>
+        <a target="_blank" ng-href="http://www.reddit.com/submit?url={{share_url|encodeURIComponent}}&amp;title={{(team.support_offering.extra.reddit_share_text || default_share_title)|encodeURIComponent}}">
+          <%= image_tag 'icons/icon_reddit_white.svg' %>
+        </a>
+        <a target="_blank" ng-href="https://plus.google.com/share?url={{share_url|encodeURIComponent}}">
+          <%= image_tag 'icons/icon_googleplus_white.svg' %>
+        </a>
+        <a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{share_url|encodeURIComponent}}">
+          <%= image_tag 'icons/icon_facebook_white.svg' %>
+        </a>
         <br/>
 
         <h4 style="margin-top:30px; margin-bottom: 10px;">Here is the direct URL for copy-and-paste:</h4>
@@ -33,10 +41,10 @@
         <div>There was a problem with your billing. Please <a ui-sref="root.checkout.amount({ support_level_id: support_level.id })">update your payment method</a> to try again. If you have any questions, please email us at <a href="mailto:support@bountysource.com">support@bountysource.com</a>.</div>
       </div>
 
-      <div class="well">
+      <div class="">
         <div class="btn-group pull-right" dropdown ng-hide="support_level.status==='canceled'">
-          <button type="button" ui-sref="root.checkout.amount({ support_level_id: support_level.id })" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-cog"></span> Edit Support</button>
-          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" dropdown-toggle>
+          <button type="button" ui-sref="root.checkout.amount({ support_level_id: support_level.id })" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-cog"></span> Edit Support</button>
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" dropdown-toggle>
             <span class="caret"></span>
             <span class="sr-only">Toggle Dropdown</span>
           </button>
@@ -55,9 +63,9 @@
         </div>
 
         <h4>Display As</h4>
-        <div class="thumbnail" style="max-width: 150px">
-          <img ng-src="{{support_level.owner.image_url_large}}" class="img-responsive" />
-          <div class="text-center ellipsis">{{support_level.owner.display_name}}</div>
+        <div class="" style="max-width: 150px">
+          <img ng-src="{{support_level.owner.image_url_large}}" class="img-responsive img-circle" />
+          <div class="text-center">{{support_level.owner.display_name}}</div>
         </div>
 
         <div ng-hide="support_level.status==='canceled'">
