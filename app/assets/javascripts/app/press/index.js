@@ -1,5 +1,7 @@
 angular.module('app').controller('PressController', function($scope) {
   $scope.articles = [
+    { date: '12/21/17', source: 'Coin Idol', title: 'The coalition of Bountysource and CanYa creates a new open field for peer-to-peer software bounties', href: 'https://coinidol.com/canya-purchase-open-source-bounty-software-platform-prior-to-ending-its-ico/'},
+    { date: '12/20/17', source: 'Canya.io', title: 'Canya acquires majority stake in bountysource', href: 'https://blog.canya.com/2017/12/20/canya-acquires-majority-stake-in-bountysource-adds-over-46000-users/'},
     { date: '8/13/14', source: 'The American Genius', title: 'Finally a crowdfunding platform for open source software', href: 'http://agbeat.com/finance/finally-crowdfunding-platform-open-source-software/' },
     { date: '6/30/14', source: 'Fast Company', title: 'Is This The Crowdfunding Site App Developers Have Been Wishing For?', href: 'http://www.fastcolabs.com/3032481/is-this-the-crowdfunding-site-app-developers-have-been-wishing-for', author: 'Steven Melendez' },
     { date: '5/5/14', source: 'Bitcoin Magazine', title: 'Funding Software with Bitcoin and Bountysource', href: 'http://bitcoinmagazine.com/12772/funding-software-bitcoin-bountysource/', author: 'Adam Hofman' },
