@@ -1,6 +1,6 @@
 class ActiveRecord::Base
-  CLOUDINARY_BASE_URL = 'https://cloudinary-a.akamaihd.net/bountysource/image/'
-
+  CLOUDINARY_BASE_URL = ENV['CLOUDINARY_BASE_URL']
+  
   def self.has_cloudinary_image
     self.class_eval do
 
@@ -17,9 +17,11 @@ class ActiveRecord::Base
 
       before_validation do
         input = @image_url
-        return if input.blank?
-
-        if input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
+        
+        if input.blank?
+          image = randomized_image(rand(18))
+          self.cloudinary_id = "upload/#{image}"
+        elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
         elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/
@@ -63,6 +65,7 @@ class ActiveRecord::Base
 
       # return 100px square default image
       def image_url(options={})
+        image = cloudinary_id
         options = {
           size: 100,
           default: "upload/noaoqqwxegvmulwus0un.png" # big gray B
@@ -71,6 +74,12 @@ class ActiveRecord::Base
         container, filename = (cloudinary_id || '').split('/')
         container, filename = options[:default].split('/') if container.blank? || filename.blank?
         "#{CLOUDINARY_BASE_URL}#{container}/d_#{options[:default].split('/').last},c_pad,w_#{options[:size]},h_#{options[:size]},b_white/#{filename}"
+      end
+
+      # return a randomized default image
+      def randomized_image(index)
+        avatars = ["somecat_asunu9.png", "snake_u4dgtd.png", "pig_dfcnhd.png", "panther_icp2bi.png", "panda_sdu77u.png", "monkey_bmcetd.png", "lion_wsmfjz.png", "leaf_x9n8db.png", "koala_x1a7sj.png", "grasshopper_xlfeu8.png", "goat_oxsdh2.png", "frog_zzcmuy.png", "fox_byssge.png", "duck_exyai1.png", "cow_ricpqp.png", "chick_aggmvs.png", "bear_uonphf.png", "mouse_lwqixo.png"]
+        avatars[index] 
       end
 
       def medium_image_url
