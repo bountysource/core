@@ -1,6 +1,6 @@
 <form class="form-horizontal" ng-submit="create_team(form_data)">
   <!-- Alerts and Progerss Bars -->
-  <div class="alert alert-danger alert-danger" ng-show="error">{{error}}</div>
+  <div class="alert alert-salmon" ng-show="error">{{error}}</div>
   <div ng-if="_options.editForm" ng-show="alert.text">
     <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
   </div>
@@ -10,46 +10,46 @@
 
   <!-- FORM INPUTS -->
   <div class="form-group">
-    <label class="control-label col-md-2" for="name">Name:</label>
-    <div class="col-md-3">
+    <label class="control-label col-sm-2" for="name">Name</label>
+    <div class="col-sm-10">
       <input id="name" type="text" class="input-medium form-control" ng-model="form_data.name" placeholder="Bountysource Inc." autocomplete="off">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-2" for="slug">Custom URL:</label>
-    <div class="col-md-5">
+    <label class="control-label col-sm-2" for="slug">Custom URL</label>
+    <div class="col-sm-10">
       <div class="input-group">
-        <span class="input-group-addon">bountysource.com/teams/</span>
-        <input id="slug" type="text" ng-model="form_data.slug" input-slug="" class="form-control">
+        <span class="input-group-addon pl-5">bountysource.com/teams/</span>
+        <input id="slug" type="text" ng-model="form_data.slug" input-slug="" class="input-medium form-control">
       </div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-2" for="image_url">Logo URL:</label>
-    <div class="col-md-4">
+    <label class="control-label col-sm-2" for="image_url">Logo URL</label>
+    <div class="col-sm-10">
       <!--<img ng-src="{{team.image_url}}" style="width: 50px; height: 50px" />-->
-      <input id="image_url" type="text" ng-model="form_data.image_url" class="form-control" placeholder="https://www.bountysource.com/logo.png">
+      <input id="image_url" type="text" ng-model="form_data.image_url" class="input-medium form-control" placeholder="https://www.bountysource.com/logo.png">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-2" for="url">Homepage:</label>
-    <div class="col-md-4">
-      <input id="url" type="url" ng-model="form_data.url" class="input-large form-control" placeholder="https://www.bountysource.com/">
+    <label class="control-label col-sm-2" for="url">Homepage</label>
+    <div class="col-sm-10">
+      <input id="url" type="url" ng-model="form_data.url" class="input-medium form-control" placeholder="https://www.bountysource.com/">
     </div>
   </div>
 
   <div class="form-group">
-    <label class="control-label col-md-2" for="bio">Bio:</label>
-    <div class="col-md-7">
-      <textarea class="form-control" id="bio" ng-model="form_data.bio" rows="5" placeholder="Bountysource is the funding platform for open-source software."></textarea>
+    <label class="control-label col-sm-2" for="bio">Bio</label>
+    <div class="col-sm-10">
+      <textarea class="form-control pl-5 pt-3" id="bio" ng-model="form_data.bio" rows="5" placeholder="Bountysource is the funding platform for open-source software."></textarea>
     </div>
   </div>
 
   <div ng-show="_options.editForm && !team.community_can_edit" class="form-group">
-    <label class="control-label col-xs-4 col-sm-2 col-md-2">Funding:</label>
+    <label class="control-label col-xs-4 col-sm-2 col-md-2">Funding</label>
     <div class="col-md-5">
       <div class="checkbox">
         <label>
@@ -61,7 +61,7 @@
   </div>
 
   <div ng-show="_options.editForm && !team.community_can_edit" class="form-group">
-    <label class="control-label col-xs-4 col-sm-2 col-md-2">Issues:</label>
+    <label class="control-label col-xs-4 col-sm-2 col-md-2">Issues</label>
     <div class="col-md-5">
       <div class="checkbox">
         <label>
@@ -74,9 +74,9 @@
 
 
   <div class="form-group">
-    <div class="col-md-offset-2 col-md-8">
-      <submit ng-if="_options.editForm" type="submit" ng-click="update_team(form_data)" class="btn btn-primary btn-lg">Update</submit>
-      <submit ng-if="!_options.editForm" type="submit" ng-click="create_team(form_data)" class="btn btn-primary btn-lg">Continue</submit>
+    <div class="col-sm-offset-2 col-md-8">
+      <submit ng-if="_options.editForm" type="submit" ng-click="update_team(form_data)" class="btn btn-light-blue btn-long font-weight-semibold">UPDATE</submit>
+      <submit ng-if="!_options.editForm" type="submit" ng-click="create_team(form_data)" class="btn btn-light-blue btn-long font-weight-semibold">CONTINUE</submit>
     </div>
   </div>
 </form>

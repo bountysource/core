@@ -241,7 +241,7 @@
         </table>
       </div>
       <div class="col-xs-3">
-        <div class="panel panel-success">
+        <div class="panel panel-cool-grey">
           <div class="panel-heading text-center">
             Total ({{ transaction.items.length | number }}<ng-pluralize count="transaction.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ transaction.gross || 0 | dollars:{ precision: {'USD': 2} } }}
           </div>

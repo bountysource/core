@@ -1,12 +1,13 @@
 .timeline { margin-bottom: 0; }
+.timeline td.bounty-description { padding-left: 7px; }
 .timeline tr:first-child td { border-top: 0 }
 .timeline .primary-text, .activity-feed .primary-text a { font-size: 16px; }
 .timeline .primary-text img { width: 24px; height: 24px; margin-right: 3px; }
 .timeline .secondary-text, .activity-feed .secondary-text a { color: #888; font-size: 13px; }
-.timeline .secondary-text img { width: 16px; height: 16px; margin-right: 2px; vertical-align: top; }
-.timeline .big-icon { width: 55px; padding-left: 5px; padding-right: 0; }
+.timeline .secondary-text img { width: 16px; height: 16px; margin-right: 4px; vertical-align: top; }
+.timeline .big-icon { width: 80px; padding-left: 10px; padding-right: 10px; }
 .timeline .timeline-body-html { margin-top: 10px; }
 .timeline .timeline-body-html img { max-width: 100%; }
 .timeline .timeline-body-html blockquote { font-size: 14px; }
-.timeline .featured { background: #fcf8e3; }
+.timeline .featured { background: #fcf8e3; background-color: rgba(51, 204, 255, 0.1); }
 .timeline .timeline-body-html h1, .timeline .timeline-body-html h2, .timeline .timeline-body-html h3, .timeline .timeline-body-html h4, .timeline .timeline-body-html h5, .timeline .timeline-body-html h6 { font-size: 14px; }

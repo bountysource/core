@@ -1,0 +1,21 @@
+/* Set the fixed height of the footer here */
+#footer {
+  padding-top: 30px;
+  background-color: #fff;
+  margin-top: 30px;
+  padding-bottom: 54px;
+}
+
+#footer h5 {
+  font-weight: bold;
+}
+
+/* move margin from navbar to container so we can do full-width backgrounds on team bounty programs */
+
+.footer-logo {
+  width: 324px;
+  margin-top: 30px;
+}
+
+#footer a { color: #485f64; }
+

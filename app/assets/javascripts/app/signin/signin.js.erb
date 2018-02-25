@@ -18,9 +18,9 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
 
   // these are global... used both on signin page and also in navbar dropdown
   $scope.providers = [
-    { id: 'github', name: 'GitHub', image_url: '<%= asset_path("favicon-github.png") %>' },
-    { id: 'twitter', name: 'Twitter', image_url: '<%= asset_path("favicon-twitter.png") %>' },
-    { id: 'facebook', name: 'Facebook', image_url: '<%= asset_path("favicon-facebook.png") %>' }
+    { id: 'github', name: 'GitHub', image_url: '<%= asset_path("icons/icon_github.svg") %>' },
+    { id: 'twitter', name: 'Twitter', image_url: '<%= asset_path("icons/icon_twitter.svg") %>' },
+    { id: 'facebook', name: 'Facebook', image_url: '<%= asset_path("icons/icon_facebook.svg") %>' }
   ];
   $scope.signin_url_for = $api.signin_url_for;
 

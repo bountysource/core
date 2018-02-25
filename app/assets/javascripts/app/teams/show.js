@@ -1,5 +1,5 @@
 angular.module('app').controller('TeamHomeController', function ($route, $scope, $routeParams, $api, $pageTitle, $filter, $timeout, $window, Timeline, Team) {
-
+  $scope.markdown_side_by_side = true;
   // redirect bountysource www team page to salt
   if ($routeParams.id === 'bountysource') {
     $window.location.replace('https://salt.bountysource.com/teams/bountysource');

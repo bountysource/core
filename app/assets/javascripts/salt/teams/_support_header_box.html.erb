@@ -1,0 +1,55 @@
+<h3 class="font-weight-regular">{{team.support_offering.subtitle}}</h3>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="mt-4">
+      <div class="progress" style="height: 28px" ng-show="(progress_green_percent + progress_yellow_percent) > 0" tooltip="{{team.support_level_sum|dollars}} in monthly contributions and {{(team.monthly_contributions_sum-team.support_level_sum)|dollars}} in one-time contributions." tooltip-position="bottom">
+        <div class="progress-bar progress-bar-gunmetal" role="progressbar" style="width: {{progress_green_percent}}%; padding-top: 3px">
+          <span class="progress-full-text">{{progress_text}}% <span ng-show="progress_next_goal">of {{progress_next_goal | dollars}} goal</span></span>
+        </div>
+        <div class="progress-bar progress-bar-warning" role="progressbar" style="width: {{progress_yellow_percent}}%">
+        </div>
+
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{100-progress_green_percent-progress_yellow_percent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{100-progress_green_percent-progress_yellow_percent}}%; background: #aaa">
+        </div>
+      </div>
+
+      <div class="mt-4" style="font-size:20px">
+        <span class="font-weight-medium">{{team.monthly_contributions_sum | dollars}}</span>
+        this month from
+        <span class="font-weight-medium">{{team.monthly_contributions_count}}</span>
+        supporters
+      </div>
+
+      <div class="mt-5">
+        <a class="btn btn-light-blue support-project-button" ui-sref="root.checkout.amount({ team: team.slug })">Support the Project</a>
+      </div>
+
+      <div ng-show="support_levels_count === 1" style="margin-top: 10px">
+        <a ui-sref="root.support_levels.show(first_active_support_level)" >You are currently contributing {{support_levels_total | dollars}}/month.</a>
+      </div>
+      <div ng-show="support_levels_count > 1" style="margin-top: 10px">
+        <a ui-sref="root.settings.support_levels" >You have multiple contributions totaling {{support_levels_total | dollars}}/month.</a>
+      </div>
+
+    </div>
+    <div class="mt-5">
+      <h3>Share</h3>
+      <div class="share-buttons">
+        <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{(team.support_offering.extra.twitter_share_text || default_share_title)|encodeURIComponent}}%20{{share_url|encodeURIComponent}}">
+          <%= image_tag 'icons/icon_twitter_white.svg' %>
+        </a>
+        <a target="_blank" ng-href="http://www.reddit.com/submit?url={{share_url|encodeURIComponent}}&amp;title={{(team.support_offering.extra.reddit_share_text || default_share_title)|encodeURIComponent}}">
+          <%= image_tag 'icons/icon_reddit_white.svg' %>
+        </a>
+        <a target="_blank" ng-href="https://plus.google.com/share?url={{share_url|encodeURIComponent}}">
+          <%= image_tag 'icons/icon_googleplus_white.svg' %>
+        </a>
+        <a target="_blank" ng-href="https://www.facebook.com/sharer/sharer.php?u={{share_url|encodeURIComponent}}">
+          <%= image_tag 'icons/icon_facebook_white.svg' %>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</div>
