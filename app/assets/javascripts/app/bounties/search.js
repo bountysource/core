@@ -113,8 +113,6 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
 
   //removes languages from selected_languages array
   $scope.remove_language = function(language) {
-    console.log(language)
-    console.log($scope.languages_loaded)
     for (var i = 0; i < $scope.languages_loaded.length; i++) {
       if (language.id === $scope.languages_loaded[i].id) {
         $scope.languages_loaded.splice(i, 1);
