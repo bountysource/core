@@ -69,7 +69,7 @@
 
         <div class="row-center" ng-show="current_person.twitter_account">
           <div>
-            <input type="radio" ng-model="profile_input.radio" value="{{current_person.twitter_account.login}}">
+            <input type="radio" ng-model="profile_input.radio" value="{{current_person.twitter_account.image_url}}">
           </div>
           <div class="column-center">
             <img ng-src="{{current_person.twitter_account.image_url}}" tooltip="Twitter" class="img-circle" style="width: 50px; height: 50px">
