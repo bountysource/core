@@ -19,7 +19,6 @@ angular.module('app').controller('Settings', function($scope, $routeParams, $api
 
   $scope.save = function() {
     $scope.error = null;
-    
     if ($scope.profile_input.radio === 'custom') {
       $scope.form_data.image_url = $scope.profile_input.text;
     } else {

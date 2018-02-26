@@ -19,8 +19,7 @@ class ActiveRecord::Base
         input = @image_url
         
         if input.blank?
-          image = randomized_image(rand(18))
-          self.cloudinary_id = "upload/#{image}"
+          return
         elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
@@ -61,6 +60,11 @@ class ActiveRecord::Base
         else
           errors.add(:image_url, "not recognized: #{input}")
         end
+
+        if self.cloudinary_id.nil?
+          image = randomized_image(rand(18))
+          self.cloudinary_id = "upload/#{image}"
+        end
       end
 
       def has_image?
@@ -69,11 +73,10 @@ class ActiveRecord::Base
 
       # return 100px square default image
       def image_url(options={})
-        image = cloudinary_id || "upload/#{randomized_image(rand(18))}"
+        
         options = {
           size: 100,
-          # default: "upload/noaoqqwxegvmulwus0un.png" # big gray B
-          default: image
+          default: "upload/noaoqqwxegvmulwus0un.png" # big gray B
         }.merge(options)
 
         container, filename = (cloudinary_id || '').split('/')
