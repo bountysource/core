@@ -19,11 +19,14 @@ class ActiveRecord::Base
         input = @image_url
         
         if input.blank?
-          image = randomized_image(rand(18))
-          self.cloudinary_id = "upload/#{image}"
+          return
         elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
+        elsif input =~ /github/
+          Rails.logger.info "CLOUDINARY: Uploading image URL to cloudinary: #{input}"
+          response = Cloudinary::Uploader.upload(input, discard_original_filename: true).with_indifferent_access
+          self.cloudinary_id = "upload/" + response[:url].split('/').last
         elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/
           # identicons? quick, assmeble the transformers! er, wait, let's just run!
           self.cloudinary_id = nil
@@ -57,6 +60,11 @@ class ActiveRecord::Base
         else
           errors.add(:image_url, "not recognized: #{input}")
         end
+
+        if self.cloudinary_id.nil?
+          image = randomized_image(rand(18))
+          self.cloudinary_id = "upload/#{image}"
+        end
       end
 
       def has_image?
@@ -65,7 +73,7 @@ class ActiveRecord::Base
 
       # return 100px square default image
       def image_url(options={})
-        image = cloudinary_id
+        
         options = {
           size: 100,
           default: "upload/noaoqqwxegvmulwus0un.png" # big gray B
