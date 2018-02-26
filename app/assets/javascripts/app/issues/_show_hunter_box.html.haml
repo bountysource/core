@@ -101,7 +101,7 @@
       %form.form-horizontal.form-without-bottom-margin{ "ng-show"=>"developer_form.visible", "ng-submit"=>"developer_form.submit()" }
         .form-group{ "ng-show"=>"['no_solution_no_goal','has_solution','has_stopped_solution','has_goal'].indexOf(developer_form.data.status)>=0"}
           %label.col-sm-2.control-label{:for => "inputEmail3"} Status
-          .col-sm-3
+          .col-sm-12
             -#.btn-group
             -#  %button.btn.btn-default{:type => "button", "ng-click"=>"developer_tools.status='not_interested'", "ng-class"=>"{'btn-primary': developer_tools.status=='not_interested'}" } Not Interested
             -#  %button.btn.btn-default{:type => "button", "ng-click"=>"developer_tools.status='bounty_goal'", "ng-class"=>"{'btn-primary': developer_tools.status=='bounty_goal'}"} Bounty Goal
