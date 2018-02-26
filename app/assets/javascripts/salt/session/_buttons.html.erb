@@ -1,18 +1,18 @@
-<div class="row signin-button-grid" ng-controller="SessionButtons">
+<div class="row signin-button-grid p-5" ng-controller="SessionButtons">
   <div class="col-xs-4">
-    <button ng-click="link_with_provider('github')" class="btn btn-github btn-block btn-lg">
+    <a ng-click="link_with_provider('github')">
       <%= image_tag("icons/icon_github.svg") %>
-    </button>
+    </a>
   </div>
   <div class="col-xs-4">
-    <button ng-click="link_with_provider('twitter')" class="btn btn-twitter btn-block btn-lg">
+    <a ng-click="link_with_provider('twitter')">
       <%= image_tag("icons/icon_twitter.svg") %>
-    </button>
+    </a>
   </div>
   <div class="col-xs-4">
-    <button ng-click="link_with_provider('facebook')" class="btn btn-facebook btn-block btn-lg">
+    <a ng-click="link_with_provider('facebook')">
       <%= image_tag("icons/icon_facebook.svg") %>
-    </button>
+    </a>
   </div>
 </div>
 

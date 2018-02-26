@@ -77,3 +77,11 @@ a.support-project-button {
     border: solid 1px $bright-light-blue;
   }
 }
+
+#admin-navtab {
+  background-image: asset-url('icons/icon_lock.svg');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) calc(50% - 1px);
+  padding-left: 12px;
+  padding-right: 22px;
+}

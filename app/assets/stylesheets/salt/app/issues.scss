@@ -4,7 +4,7 @@
 .kanban-body #wrap { height: 100%; margin: 0; padding: 0; }
 .kanban-body #container-div { height: 100%; padding-top: 55px; margin-top: -55px; }
 
-.kanban-wrapper { overflow-x: auto; background: #777; box-shadow: inset 0px 7px 3px -3px rgba(0, 0, 0, 0.15); padding: 20px 5px; height: 100%; }
+.kanban-wrapper { overflow-x: auto; background: #white; box-shadow: inset 0px 7px 3px -3px rgba(0, 0, 0, 0.15); padding: 20px 5px; height: 100%; }
 .kanban { display: flex; flex-wrap: nowrap; align-items: flex-start; height: 100%; }
 .kanban .kanban-column { padding: 0 5px; width:300px; flex: none; height: 100%; margin-top: -30px; padding-top: 30px }
 .kanban .panel-heading { border-top-right-radius:6px; border-top-left-radius:6px }

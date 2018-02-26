@@ -1,0 +1,79 @@
+<h3>Goals</h3>
+
+<div class="row">
+  <div class="col-md-6">
+    <div ng-repeat="goal in goals | orderBy:'amount'">
+      <form name="form" ng-submit="save_goal(goal)">
+        <div ng-hide="goals.currently_editing===goal" class="goal-edit-wrapper">
+          <a class="pull-right" ng-click="start_editing(goal, form)">
+            <%= image_tag "icons/icon_edit.svg", style: 'width: 14px;' %>
+          </a>
+          <p class="font-weight-medium mb-2">{{goal.amount | dollars}} - {{goal.title}}</p>
+          <p>{{goal.description}}</p>
+        </div>
+
+        <div ng-show="goals.currently_editing===goal">
+          <div class="form-group">
+            <label for="subtitle">Amount</label>
+            <div class="input-group col-xs-6 col-md-7 col-lg-6">
+              <span class="input-group-addon">$</span>
+              <input type="text" class="form-control" id="amount" ng-model="edit_form_data.amount" placeholder="500, 1000, etc." />
+              <span class="input-group-addon">per month</span>
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label for="subtitle">Title</label>
+            <input type="text" class="form-control" id="amount" ng-model="edit_form_data.title" placeholder="Two or three words" />
+          </div>
+          <div class="form-group">
+            <label for="subtitle">Description</label>
+            <textarea msd-elastic class="form-control" id="body_markdown" ng-model="edit_form_data.description" placeholder="Description"></textarea>
+          </div>
+          <button type="submit" class="btn btn-light-blue btn-rounded" ng-disabled="form.$pristine || saving_edit_form"><span ng-show="saving_form">Saving...</span><span ng-hide="saving_form">Save</span></button>
+          <a ng-click="cancel_editing(goal)" class="btn btn-default btn-rounded">Cancel</a>
+          <a ng-click="delete_goal(goal)" class="btn btn-danger btn-rounded" ng-disabled="deleting_form"><span ng-show="deleting_form">Deleting...</span><span ng-hide="deleting_form">Delete</span></a>
+        </div>
+
+      </form>
+    </div>
+
+    <form name="form" ng-submit="create_goal()" class="mt-5" ng-hide="goals.currently_editing">
+      <div class="form-group">
+        <label class="control-label" for="subtitle">Amount</label>
+        <div class="input-group col-xs-6 col-md-7 col-lg-6">
+          <span class="input-group-addon">$</span>
+          <input type="text" class="form-control input-medium" id="amount" ng-model="create_form_data.amount" placeholder="500" />
+          <span class="input-group-addon">per month</span>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="subtitle">Title</label>
+        <input type="text" class="form-control input-medium" id="amount" ng-model="create_form_data.title" placeholder="Two or three words" />
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="subtitle">Description</label>
+        <textarea msd-elastic class="form-control input-medium" id="body_markdown" ng-model="create_form_data.description" placeholder="Description"></textarea>
+      </div>
+      <button type="submit" class="btn btn-light-blue btn-long btn-rounded" ng-disabled="form.$pristine || saving_create_form"><span ng-show="saving_form">Saving...</span><span ng-hide="saving_form">Create New goal</span></button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div class="">
+      <h4>Examples</h4>
+
+      <p class="font-weight-medium mb-2">$100 - Cover hosting expenses</p>
+      <p>This will cover our expenses for hosting our website.</p>
+
+      <p class="font-weight-medium mb-2">$600 - Bounty Budget</p>
+      <p>We can set aside a good chunk of money for Bountysource bounties every month!</p>
+
+      <p class="font-weight-medium mb-2">$2,500 - Below-average Salary</p>
+      <p>At this rate we would be making roughly half the salary of a typical Junior Engineer.</p>
+
+      <p class="font-weight-medium mb-2">$7,000 - Competitive Salary</p>
+      <p>At this rate we will bring in a competitive salary of $84k/yr. Let's do it!</p>
+    </div>
+  </div>
+</div>

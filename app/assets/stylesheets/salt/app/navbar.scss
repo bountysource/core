@@ -30,7 +30,13 @@
 }
 
 .navbar-brand img{
-  width: 230px;
+  width: 200px;
+}
+
+@media (min-width: $screen-sm-min) {
+  .navbar-brand img{
+    width: 230px;
+  }
 }
 
 
