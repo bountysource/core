@@ -92,8 +92,6 @@ class LinkedAccount::Facebook < LinkedAccount::Base
       fields: "id,name,first_name,last_name,picture"
     }
 
-    # user_info = with_https "#{USER_INFO_URL}?access_token=#{oauth_response["access_token"]},fields=id,name,first_name,last_name,picture" do |uri, http|
-
     user_info = with_https "#{USER_INFO_URL}?#{params.to_param}" do |uri, http|
       request = Net::HTTP::Get.new(uri.to_s)
       JSON.parse(http.request(request).body).with_indifferent_access
