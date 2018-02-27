@@ -15,10 +15,15 @@
 
           <h4 class="break-words">
             <!--team-->
-            <a ng-href="https://www.bountysource.com/teams/{{issue.team.slug}}" ng-if="issue.team.id"><img ng-src="{{issue.team.image_url_small}}" />{{issue.team.name}}</a>
+            <a ng-href="https://www.bountysource.com/teams/{{issue.team.slug}}" ng-if="issue.team.id">
+              <img ng-src="{{issue.team.image_url_small}}" class="img-circle" />
+              {{issue.team.name}}
+            </a>
 
             <!--tracker-->
-            <a ng-href="https://www.bountysource.com/trackers/{{issue.tracker.slug}}" ng-if="!issue.team.id"><img ng-src="{{issue.tracker.image_url_small}}" />{{issue.tracker.display_name}}</a>
+            <a ng-href="https://www.bountysource.com/trackers/{{issue.tracker.slug}}" ng-if="!issue.team.id">
+              <img class="img-circle" ng-src="{{issue.tracker.image_url_small}}" />{{issue.tracker.display_name}}
+            </a>
 
             &raquo;
             <a ng-href="https://www.bountysource.com/issues/{{issue.slug}}">{{issue.title}}</a>
