@@ -77,18 +77,7 @@ class LinkedAccount::Facebook < LinkedAccount::Base
     # exchange the code for an access token
     response = HTTParty.get("#{OAUTH_EXCHANGE_URL}?#{params.to_param}")
 
-    
-    # response = with_https "#{OAUTH_EXCHANGE_URL}?#{params.to_param}" do |uri, http|
-    #   request           = Net::HTTP::Get.new(uri.to_s)
-    #   request.add_field "Accept", "application/json"
-    #   http.request      request
-    # end
-
     # raise if access_token fetch fails
-    # unless (200...300).cover? response.code.to_i
-    #   oauth_response = JSON.parse(response.body).with_indifferent_access
-    #   raise OauthError, oauth_response[:error]
-    # end
 
     unless (200...300).cover? response.code.to_i
       oauth_response = response.parsed_response
@@ -96,11 +85,7 @@ class LinkedAccount::Facebook < LinkedAccount::Base
     end
 
     oauth_response = response.parsed_response
-
-    # Facebook Oauth doesn't return the access token in a JSON body,
-    # violating the Oauth specs. Grrr. Parse the query string response.
-    # oauth_response = Rack::Utils.parse_nested_query(response.body).with_indifferent_access
-
+    
     # get user info
 
     user_info = with_https "#{USER_INFO_URL}?access_token=#{oauth_response["access_token"]}" do |uri, http|
