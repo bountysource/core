@@ -659,11 +659,6 @@ class Person < ActiveRecord::Base
     # issues i've commented on via github
     issue_ids += current_user.comments.pluck(:issue_id)
   end
-
-  def randomized_image(index)
-    avatars = ["somecat_asunu9.png", "snake_u4dgtd.png", "pig_dfcnhd.png", "panther_icp2bi.png", "panda_sdu77u.png", "monkey_bmcetd.png", "lion_wsmfjz.png", "leaf_x9n8db.png", "koala_x1a7sj.png", "grasshopper_xlfeu8.png", "goat_oxsdh2.png", "frog_zzcmuy.png", "fox_byssge.png", "duck_exyai1.png", "cow_ricpqp.png", "chick_aggmvs.png", "bear_uonphf.png", "mouse_lwqixo.png"]
-          avatars[index] 
-  end
 protected
 
   def self.hash_access_token(person, time)
