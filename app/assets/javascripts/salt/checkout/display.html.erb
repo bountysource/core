@@ -3,11 +3,11 @@
 <div class="container">
   <div class="header">
     <h3 class="header-underline-emphasize">Display As</h3>
-    <h4 style="display: inline;" class="text-muted">(Step 1 of 3)</h4>
+    <h4 style="display: inline;" class="text-muted">(Step 2 of 3)</h4>
   </div>
 
   <form ng-submit="submit_form()">
-    <div class="row">
+    <div class="row display-flex">
       <div class="col-md-8">
         
         <div class="row">
@@ -51,7 +51,12 @@
       </div>
       <div class="col-md-4">
         <ng-include src="'salt/checkout/_amount.html'"></ng-include>
-        <button type="submit" class="btn btn-light-blue continue-button">Continue</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="submit" class="btn btn-light-blue continue-button pull-right">Continue</button>
       </div>
     </div>
   </form>

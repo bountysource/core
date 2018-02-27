@@ -7,7 +7,7 @@
   </div>
 
   <form ng-submit="submit_form()" class="support-amount-form">
-    <div class="row">
+    <div class="row display-flex">
       <div class="col-md-8">
       
         <div class="alert alert-danger" ng-show="error">{{error}}</div>
@@ -65,14 +65,19 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="mt-5">
+        <div class="card mt-5">
           <h4>Important Billing Details</h4>
           <p>There is a <u>$5 minimum charge</u>. If your monthly support level is less than this, you will receive a credit that will be applied to the next month.</p>
           <p>You will be billed immediately for the current month and then at the end of each month going forward.</p>
           <p>You can cancel at any time.</p>
           <p>We accept PayPal and Credit Cards (VISA, MC, AMEX, and more)</p>
         </div>
-        <button type="submit" class="btn btn-light-blue continue-button" ng-disabled="!form_data.amount && !form_data.reward_id">Continue</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="submit" class="btn btn-light-blue continue-button pull-right" ng-disabled="!form_data.amount && !form_data.reward_id">Continue</button>
       </div>
     </div>
   </form>

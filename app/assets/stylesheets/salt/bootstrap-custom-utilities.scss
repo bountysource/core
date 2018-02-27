@@ -2,10 +2,6 @@
   @include button-variant(#fff, $bright-light-blue, $bright-light-blue);
 }
 
-.btn-puerto-rico {
-  @include button-variant(#fff, $puerto-rico, $puerto-rico);
-}
-
 .progress-bar-gunmetal {
   @include progress-bar-variant($gunmetal);
 }
