@@ -64,6 +64,7 @@ class LinkedAccount::Twitter < LinkedAccount::Base
 
     user_info = JSON.parse(user_info_response.body).with_indifferent_access
 
+    byebug
     # find or create Twitter account
     first_name, last_name = user_info['name'].split(/\s+/)
     linked_account = LinkedAccount::Twitter.find_or_create_by_uid(
