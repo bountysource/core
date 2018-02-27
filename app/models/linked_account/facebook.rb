@@ -73,7 +73,6 @@ class LinkedAccount::Facebook < LinkedAccount::Base
       redirect_uri:   "#{Api::Application.config.api_url}auth/facebook/callback",
       code:           code
     }
-    byebug
 
     # exchange the code for an access token
     response = HTTParty.get("#{OAUTH_EXCHANGE_URL}?#{params.to_param}")
