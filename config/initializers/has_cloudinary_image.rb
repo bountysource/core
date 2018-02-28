@@ -19,7 +19,12 @@ class ActiveRecord::Base
         input = @image_url
         
         if input.blank?
-          return
+          if cloudinary_id.nil?
+            image = randomized_image(rand(18))
+            self.cloudinary_id = "upload/#{image}"
+          else
+            return
+          end
         elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
@@ -60,11 +65,6 @@ class ActiveRecord::Base
         else
           errors.add(:image_url, "not recognized: #{input}")
         end
-
-        if self.cloudinary_id.nil?
-          image = randomized_image(rand(18))
-          self.cloudinary_id = "upload/#{image}"
-        end
       end
 
       def has_image?
@@ -86,7 +86,7 @@ class ActiveRecord::Base
 
       # return a randomized default image
       def randomized_image(index)
-        avatars = ["somecat_asunu9.png", "snake_u4dgtd.png", "pig_dfcnhd.png", "panther_icp2bi.png", "panda_sdu77u.png", "monkey_bmcetd.png", "lion_wsmfjz.png", "leaf_x9n8db.png", "koala_x1a7sj.png", "grasshopper_xlfeu8.png", "goat_oxsdh2.png", "frog_zzcmuy.png", "fox_byssge.png", "duck_exyai1.png", "cow_ricpqp.png", "chick_aggmvs.png", "bear_uonphf.png", "mouse_lwqixo.png"]
+        avatars = ["Bountysource_Animals1_xsnvji.png", "Bountysource_Animals2_fxwiug.png", "Bountysource_Animals3_a9frjr.png", "Bountysource_Animals4_sovwbc.png", "Bountysource_Animals5_imwniv.png", "Bountysource_Animals6_kqeh9m.png", "Bountysource_Animals7_mtr634.png", "Bountysource_Animals8_xevlyu.png", "Bountysource_Animals9_czx74h.png", "Bountysource_Animals10_mjtuws.png", "Bountysource_Animals11_hsamnr.png", "Bountysource_Animals12_mt9ywh.png", "Bountysource_Animals13_edynks.png", "Bountysource_Animals14_bnuacq.png", "Bountysource_Animals15_mdbsxb.png", "Bountysource_Animals16_qlob5k.png", "Bountysource_Animals17_hh0anv.png", "Bountysource_Animals18_yqje9e.png", "Bountysource_Animals19_zafwti.png", "Bountysource_Animals20_rb9i5y.png", "Bountysource_Animals21_ke7cmy.png", "Bountysource_Animals22_s4zuxy.png", "Bountysource_Animals23_azvwug.png", "Bountysource_Animals24_s1h7ax.png", "Bountysource_Animals25_b0xp0r.png", "Bountysource_Animals26_knlvug.png", "Bountysource_Animals27_bjhsl8.png", "Bountysource_Animals28_xmsr5x.png", "Bountysource_Animals29_dcqhig.png", "Bountysource_Animals30_qg3cfm.png", "Bountysource_Animals31_tyt8be.png", "Bountysource_Animals32_kh77zi.png", "Bountysource_Animals33_ch4hs0.png", "Bountysource_Animals34_q3zk2c.png", "Bountysource_Animals35_zl5tae.png", "Bountysource_Animals36_vctv4s.png", "Bountysource_Animals37_sikg8d.png", "Bountysource_Animals38_vwccce.png", "Bountysource_Animals39_qcn9pn.png", "Bountysource_Animals40_lzaxzf.png", "Bountysource_Animals41_p0bqdv.png", "Bountysource_Animals42_tkjsbb.png", "Bountysource_Animals43_s7m0ew.png", "Bountysource_Animals44_xa5xwi.png", "Bountysource_Animals45_ecgl95.png", "Bountysource_Animals46_qe2ye0.png", "Bountysource_Animals47_nvypsc.png", "Bountysource_Animals48_gdsq6s.png", "Bountysource_Animals49_bru8tl.png", "Bountysource_Animals50_vxwrwf.png", "Bountysource_Animals51_byhedz.png", "Bountysource_Animals52_xudczp.png", "Bountysource_Animals53_u6kq6c.png", "Bountysource_Animals54_dothzz.png", "Bountysource_Animals55_vyabeb.png", "Bountysource_Animals56_ktxwet.png", "Bountysource_Animals57_yatmux.png", "Bountysource_Animals58_jhrby2.png", "Bountysource_Animals59_jmxeqg.png", "Bountysource_Animals60_rvpwfe.png", "Bountysource_Animals61_aprjzp.png", "Bountysource_Animals62_hxul6y.png", "Bountysource_Animals63_olgqd6.png", "Bountysource_Animals64_acwwy7.png", "Bountysource_Animals65_g38wlr.png", "Bountysource_Animals66_u8j2j3.png", "Bountysource_Animals67_rzqguf.png", "Bountysource_Animals68_i8kx7y.png", "Bountysource_Animals69_ywrptd.png", "Bountysource_Animals70_t5kjmo.png", "Bountysource_Animals71_wi5cvo.png", "Bountysource_Animals72_jel9in.png", "Bountysource_Animals73_qfzmck.png", "Bountysource_Animals74_zpw0pa.png", "Bountysource_Animals75_a0xqeq.png", "Bountysource_Animals76_g3jfjp.png", "Bountysource_Animals77_gjyiwi.png", "Bountysource_Animals78_hleldd.png", "Bountysource_Animals79_yhuwas.png", "Bountysource_Animals80_vjj88q.png", "Bountysource_Animals81_gydswx.png","Bountysource_Animals82_xinhil.png", "Bountysource_Animals83_ryixly.png", "Bountysource_Animals84_y8fmou.png", "Bountysource_Animals85_aepry9.png", "Bountysource_Animals86_au6xuk.png", "Bountysource_Animals87_vnmrie.png", "Bountysource_Animals88_tvcckn.png", "Bountysource_Animals89_puer8v.png", "Bountysource_Animals90_qlafi0.png", "Bountysource_Animals91_yet95g.png", "Bountysource_Animals92_htl0if.png", "Bountysource_Animals93_ky3nen.png", "Bountysource_Animals94_f7kv4t.png", "Bountysource_Animals95_oicclg.png", "Bountysource_Animals96_rwy9lj.png", "Bountysource_Animals97_iuw00n.png", "Bountysource_Animals98_ot4nxv.png", "Bountysource_Animals99_fzth4k.png", "Bountysource_Animals100_g8py5g.png", "Bountysource_Animals101_nulkio.png", "Bountysource_Animals102_hqrga7.png", "Bountysource_Animals103_lfgw75.png", "Bountysource_Animals104_uyblvi.png", "Bountysource_Animals105_dueqy6.png", "Bountysource_Animals106_irkwuc.png", "Bountysource_Animals107_czlltz.png", "Bountysource_Animals108_mojhfy.png", "Bountysource_Animals109_v8p3nq.png"]
         avatars[index] 
       end
 

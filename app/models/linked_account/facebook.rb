@@ -87,18 +87,20 @@ class LinkedAccount::Facebook < LinkedAccount::Base
     oauth_response = response.parsed_response
     
     # get user info
+    params = {
+      access_token: oauth_response["access_token"],
+      fields: "id,name,first_name,last_name,picture"
+    }
 
-    user_info = with_https "#{USER_INFO_URL}?access_token=#{oauth_response["access_token"]}" do |uri, http|
+    user_info = with_https "#{USER_INFO_URL}?#{params.to_param}" do |uri, http|
       request = Net::HTTP::Get.new(uri.to_s)
       JSON.parse(http.request(request).body).with_indifferent_access
     end
-
     # find or create a facebook linked account
     facebook_account = find_or_create_by_uid(
       uid:        user_info['id'],
       first_name: user_info['first_name'],
       last_name:  user_info['last_name'],
-      login:      user_info['username'],
       email:      user_info['email'],
       image_url: "facebook:#{user_info['username'] || user_info['id']}"
     )
