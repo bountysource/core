@@ -13,5 +13,3 @@ task :replace_avatar => :environment do
   end
   puts "done."
 end
-
-
