@@ -1,0 +1,46 @@
+.panel {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.panel-dark-blue {
+  border-color: #485f64;
+}
+
+.panel-dark-blue > .panel-heading {
+  background-color: #485f64; 
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.panel-blue-aquamarine > .panel-heading {
+  background-image: linear-gradient(to right, #33ccff, #4edcca);
+  color: #fff;
+}
+
+.panel-cool-grey {
+  .panel-heading {
+    background-color: #919d9d33;
+    color: #485f64;
+  }
+}
+
+.panel-marigold-salmon > .panel-heading {
+  background-image: linear-gradient(to right, #ffc600, #ff6666);
+  color: #fff;
+}
+
+.panel-white {
+  border-color: #fff;  
+  box-shadow: none;
+}
+
+.panel-white > .panel-heading {
+  background-color: #fff; 
+}
+
+.panel-heading > .panel-title {
+  font-size: 18px;
+  font-weight: 500;
+}

@@ -16,6 +16,7 @@ attribute :closed_issues
 attribute :is_fork
 attribute :watchers
 attribute :rank
+attribute :takendown? => :takendown
 
 node(:followed) do |tracker|
   @person and @person.followed_trackers.include? tracker

@@ -1,0 +1,17 @@
+.table.table-centered tr > td { 
+  vertical-align: middle; 
+}
+
+.table-no-separator>tbody>tr>td{
+  border: 0px;
+}
+
+.table > thead > tr > th, 
+.table > thead > tr > td{
+  border-bottom: solid 2px #edf0f0;
+}
+
+.table > tbody > tr > th, 
+.table > tbody > tr > td{
+  border-bottom: solid 1px #edf0f0;
+}

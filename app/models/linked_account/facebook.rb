@@ -75,40 +75,38 @@ class LinkedAccount::Facebook < LinkedAccount::Base
     }
 
     # exchange the code for an access token
-    response = with_https "#{OAUTH_EXCHANGE_URL}?#{params.to_param}" do |uri, http|
-      request           = Net::HTTP::Get.new(uri.to_s)
-      request.add_field "Accept", "application/json"
-      http.request      request
-    end
+    response = HTTParty.get("#{OAUTH_EXCHANGE_URL}?#{params.to_param}")
 
     # raise if access_token fetch fails
+
     unless (200...300).cover? response.code.to_i
-      oauth_response = JSON.parse(response.body).with_indifferent_access
+      oauth_response = response.parsed_response
       raise OauthError, oauth_response[:error]
     end
 
-    # Facebook Oauth doesn't return the access token in a JSON body,
-    # violating the Oauth specs. Grrr. Parse the query string response.
-    oauth_response = Rack::Utils.parse_nested_query(response.body).with_indifferent_access
-
+    oauth_response = response.parsed_response
+    
     # get user info
-    user_info = with_https "#{USER_INFO_URL}?access_token=#{oauth_response[:access_token]}" do |uri, http|
+    params = {
+      access_token: oauth_response["access_token"],
+      fields: "id,name,first_name,last_name,picture"
+    }
+
+    user_info = with_https "#{USER_INFO_URL}?#{params.to_param}" do |uri, http|
       request = Net::HTTP::Get.new(uri.to_s)
       JSON.parse(http.request(request).body).with_indifferent_access
     end
-
     # find or create a facebook linked account
     facebook_account = find_or_create_by_uid(
       uid:        user_info['id'],
       first_name: user_info['first_name'],
       last_name:  user_info['last_name'],
-      login:      user_info['username'],
       email:      user_info['email'],
       image_url: "facebook:#{user_info['username'] || user_info['id']}"
     )
 
     # update the facebook user with most recent access token
-    facebook_account.update_attributes oauth_token: oauth_response[:access_token]
+    facebook_account.update_attributes oauth_token: oauth_response["access_token"]
 
     facebook_account
   end

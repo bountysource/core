@@ -1,14 +1,15 @@
 <div ng-controller="TeamUpdateNewController">
   <div team-view team="team">
-    <div class="alert alert-info">NOTE: Publishing an update will send an email to everybody who has created a bounty or donated to your project.</div>
+    <h4>New Updates</h4>
+    <p>Publishing an update will send an email to everybody who has created a bounty or donated to your project.</p>
 
-    <form name="form" ng-submit="submit_form()">
+    <form name="form" class="mt-5" ng-submit="submit_form()">
       <div class="alert alert-danger" ng-show="error">{{error}}</div>
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" ng-model="form_data.title" placeholder="Title (also used for email subject)" />
+            <input type="text" class="form-control input-medium" id="title" ng-model="form_data.title" placeholder="Title (also used for email subject)" />
           </div>
         </div>
       </div>
@@ -16,23 +17,19 @@
         <div class="row">
           <div class="col-md-6">
             <label for="body_markdown">Body (markdown)</label>
-            <textarea msd-elastic class="form-control" id="body_markdown" ng-model="form_data.body" placeholder="Markdown" style="min-height:100px"></textarea>
+            <textarea msd-elastic class="form-control input-medium" id="body_markdown" ng-model="form_data.body" placeholder="Markdown" style="min-height:100px"></textarea>
           </div>
           <div class="col-md-6">
             <label>Body Preview</label>
             <target-blank model="markdown_preview">
               <div btf-markdown="markdown_preview" class="well markdown markdown-small-headers" style="min-height:100px"></div>
             </target-blank>
+
+            <p>WARNING: This will immediately send emails and you cannot edit after clicking publish!</p>
+            <button type="submit" class="btn btn-long btn-light-blue center-block" ng-disabled="!form_data.title || !form_data.body || saving_form"><span ng-show="saving_form">Saving...</span><span ng-hide="saving_form">Publish</span></button>
           </div>
         </div>
       </div>
-
-      <div class="alert alert-danger">
-        <button type="submit" class="btn btn-danger" ng-disabled="!form_data.title || !form_data.body || saving_form" style="margin-right: 20px"><span ng-show="saving_form">Saving...</span><span ng-hide="saving_form">Publish</span></button>
-        WARNING: This will immediately send emails and you cannot edit after clicking publish!
-      </div>
-
-
     </form>
 
   </div>

@@ -2,33 +2,34 @@
 #
 # Table name: people
 #
-#  id                  :integer          not null, primary key
-#  first_name          :string(255)
-#  last_name           :string(255)
-#  display_name        :string(255)
-#  email               :string(255)      not null
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  buyer_id            :string(255)
-#  password_digest     :string(255)
-#  account_completed   :boolean          default(FALSE)
-#  paypal_email        :string(255)
-#  last_seen_at        :datetime
-#  last_bulk_mailed_at :datetime
-#  admin               :boolean          default(FALSE)
-#  bio                 :text
-#  location            :string(255)
-#  url                 :string(255)
-#  company             :string(255)
-#  public_email        :string(255)
-#  accepted_terms_at   :datetime
-#  cloudinary_id       :string(255)
-#  deleted             :boolean          default(FALSE), not null
-#  profile_completed   :boolean          default(FALSE), not null
-#  shopping_cart_id    :integer
-#  stripe_customer_id  :string(255)
-#  suspended_at        :datetime
-#  bounty_hunter       :boolean
+#  id                   :integer          not null, primary key
+#  first_name           :string(255)
+#  last_name            :string(255)
+#  display_name         :string(255)
+#  email                :string(255)      not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  buyer_id             :string(255)
+#  password_digest      :string(255)
+#  account_completed    :boolean          default(FALSE)
+#  paypal_email         :string(255)
+#  last_seen_at         :datetime
+#  last_bulk_mailed_at  :datetime
+#  admin                :boolean          default(FALSE)
+#  bio                  :text
+#  location             :string(255)
+#  url                  :string(255)
+#  company              :string(255)
+#  public_email         :string(255)
+#  accepted_terms_at    :datetime
+#  cloudinary_id        :string(255)
+#  deleted              :boolean          default(FALSE), not null
+#  profile_completed    :boolean          default(FALSE), not null
+#  shopping_cart_id     :integer
+#  stripe_customer_id   :string(255)
+#  suspended_at         :datetime
+#  bounty_hunter        :boolean
+#  quickbooks_vendor_id :integer
 #
 # Indexes
 #
@@ -74,7 +75,6 @@ class Person < ActiveRecord::Base
   has_one :github_account,    class_name: LinkedAccount::Github::User
   has_one :facebook_account,  class_name: LinkedAccount::Facebook
   has_one :twitter_account,   class_name: LinkedAccount::Twitter
-  has_one :gittip_account,    class_name: LinkedAccount::Gittip
 
   has_many :tracker_plugins
   has_many :tracker_relations, through: :linked_accounts
@@ -120,6 +120,8 @@ class Person < ActiveRecord::Base
   has_many :issue_suggestions
 
   has_many :comments, through: :linked_accounts
+
+  belongs_to :quickbooks_vendor
 
   EMAIL_REGEX = /\A.+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+\z/
 

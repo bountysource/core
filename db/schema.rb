@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611150448) do
+ActiveRecord::Schema.define(version: 20171210181208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "access_tokens", force: true do |t|
     t.integer  "person_id",  null: false
@@ -181,6 +180,7 @@ ActiveRecord::Schema.define(version: 20160611150448) do
     t.string   "mastercoin_address"
     t.boolean  "is_refund",                  default: false, null: false
     t.integer  "account_id",                                 null: false
+    t.integer  "quickbooks_transaction_id"
   end
 
   add_index "cash_outs", ["address_id"], name: "index_cash_outs_on_address_id", using: :btree
@@ -360,16 +360,6 @@ ActiveRecord::Schema.define(version: 20160611150448) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "gittip_ipns", force: true do |t|
-    t.string   "txn_id",         null: false
-    t.text     "raw_post",       null: false
-    t.integer  "transaction_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "gittip_ipns", ["txn_id"], name: "index_gittip_ipns_on_txn_id", unique: true, using: :btree
 
   create_table "google_wallet_items", force: true do |t|
     t.string   "order_id",   null: false
@@ -667,16 +657,16 @@ ActiveRecord::Schema.define(version: 20160611150448) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "display_name"
-    t.string   "email",                               null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "email",                                null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "buyer_id"
     t.string   "password_digest"
-    t.boolean  "account_completed",   default: false
+    t.boolean  "account_completed",    default: false
     t.string   "paypal_email"
     t.datetime "last_seen_at"
     t.datetime "last_bulk_mailed_at"
-    t.boolean  "admin",               default: false
+    t.boolean  "admin",                default: false
     t.text     "bio"
     t.string   "location"
     t.string   "url"
@@ -684,12 +674,13 @@ ActiveRecord::Schema.define(version: 20160611150448) do
     t.string   "public_email"
     t.datetime "accepted_terms_at"
     t.string   "cloudinary_id"
-    t.boolean  "deleted",             default: false, null: false
-    t.boolean  "profile_completed",   default: false, null: false
+    t.boolean  "deleted",              default: false, null: false
+    t.boolean  "profile_completed",    default: false, null: false
     t.integer  "shopping_cart_id"
     t.string   "stripe_customer_id"
     t.datetime "suspended_at"
     t.boolean  "bounty_hunter"
+    t.integer  "quickbooks_vendor_id"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true, using: :btree
@@ -770,6 +761,19 @@ ActiveRecord::Schema.define(version: 20160611150448) do
     t.text     "weekly_json",    null: false
     t.text     "monthly_json",   null: false
     t.text     "quarterly_json", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quickbooks_transactions", id: false, force: true do |t|
+    t.integer  "id",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quickbooks_vendors", id: false, force: true do |t|
+    t.integer  "id",         null: false
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1007,6 +1011,12 @@ ActiveRecord::Schema.define(version: 20160611150448) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "takedowns", force: true do |t|
+    t.integer  "linked_account_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "team_activity_inclusions", force: true do |t|
     t.integer  "parent_team_id", null: false

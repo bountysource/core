@@ -1,10 +1,10 @@
 <ul class="breadcrumb">
   <li><a href="/">Home</a></li>
-  <li><a>Projects</a></li>
+  <li class="active"><a>Projects</a></li>
 </ul>
 
-<div ng-show="trackers.length > 0">
-  <table class="table table-striped">
+<div class="table-responsive" ng-show="trackers.length > 0">
+  <table class="table">
     <thead>
     <tr>
       <th style="width: 50px;" class="hidden-sm"></th>
@@ -16,8 +16,8 @@
     <tbody>
     <tr ng-repeat="tracker in trackers">
       <td class="hidden-sm center-height">
-        <a class="thumbnail no-margin" ng-href="/trackers/{{tracker.slug}}">
-          <img class="img-responsive" ng-src="{{tracker.image_url_small}}" style="width: 100%;" />
+        <a class="" ng-href="/trackers/{{tracker.slug}}">
+          <img class="img-responsive img-circle" ng-src="{{tracker.image_url_small}}" style="width: 100%;" />
         </a>
       </td>
 

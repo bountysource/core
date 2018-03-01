@@ -1,4 +1,4 @@
-<h2>Supporters (1-{{supporters_for_team.length}})</h2>
+<h3>Supporters (1-{{supporters_for_team.length}})</h3>
 
 <table class="table table-compressed">
   <thead>
@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="support_level in supporters_for_team | filter:{status:'!canceled'} | orderBy:['status','-amount']" ng-class="{ success: support_level.status==='active', warning: support_level.status==='pending', danger: support_level.status==='unpaid', active: support_level.status==='canceled' }">
+    <tr ng-repeat="support_level in supporters_for_team | filter:{status:'!canceled'} | orderBy:['status','-amount']" ng-class="{ primary: support_level.status==='active', warning: support_level.status==='pending', danger: support_level.status==='unpaid', active: support_level.status==='canceled' }">
       <td>{{support_level.status}}</td>
       <td>{{support_level.created_at | date}}</td>
       <td>{{support_level.amount | dollars}}</td>

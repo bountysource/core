@@ -1,29 +1,44 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h1 class="panel-title" style="font-size: 24px; text-align: center">Log In</h1>
-      </div>
-      <div class="panel-body">
-        <ng-include src="'salt/session/_buttons.html'"></ng-include>
+<div class="row" style="margin-top: 50px;">
+  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+    <h2 class="text-center">LOG IN</h2>
 
-        <form ng-submit="login()" novalidate>
-          <div class="alert alert-danger" ng-show="error">{{error}}</div>
+    <div class="mt-5 center-block" style="max-width: 420px;">
+      <ng-include src="'salt/session/_buttons.html'"></ng-include>
+    </div>
+    <form ng-submit="login()" class="form-login" novalidate>
+      
 
-          <div class="form-group">
-            <input type="text" class="form-control" name="email" ng-model="form_data.email" placeholder="Email Address"/>
+      <div class="alert alert-danger" ng-show="error">{{error}}</div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" for="inputName">E-mail</label>
           </div>
-          <div class="form-group">
-            <input type="password" class="form-control" name="password" ng-model="form_data.password" placeholder="Password"/>
+          <div class="col-sm-8">
+            <input type="text" class="form-control input-medium" name="email" ng-model="form_data.email"/>
           </div>
-          <button type="submit" class="btn btn-success btn-block btn-lg">Log In</button>
-        </form>
+        </div>        
       </div>
 
-      <div class="panel-footer" style="font-size: 90%; text-align: center">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" for="inputName">Password</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="password" class="form-control input-medium" name="password" ng-model="form_data.password"/>
+          </div>
+        </div>  
+        
+      </div>
+
+      <button type="submit" class="btn btn-light-blue login-button center-block">Log In</button>
+
+      <div class="text-center mt-5">
         Need an account? <a ui-sref="root.session.signup">Sign Up</a><br/>
       </div>
-    </div>
-
+    </form>
   </div>
+
 </div>

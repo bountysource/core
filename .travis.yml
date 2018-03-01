@@ -2,9 +2,9 @@ language: ruby
 sudo: false
 cache: bundler
 rvm:
-  - 2.1.2
+  - 2.2.8
 script:
-  - bundle exec rake spec:prepare
+  - ./bin/rake spec:prepare
   - echo $SCRIPT_CMD
   - $SCRIPT_CMD
 env:
@@ -13,7 +13,7 @@ env:
     - SCRIPT_CMD="bundle exec rspec --pattern spec/{models}{,/**}/*_spec.rb"
     - SCRIPT_CMD="bundle exec rspec --pattern spec/{trackers}{,/**}/*_spec.rb"
     - SCRIPT_CMD="bundle exec rspec --pattern spec/{controllers,features,helpers,mailers,routing}{,/**}/*_spec.rb"
-    - SCRIPT_CMD="bundle exec rake jshint"
+    - SCRIPT_CMD="./bin/rake jshint"
   global:
     - DATABASE_URL=postgres://postgres@localhost/bountysource_test
 addons:

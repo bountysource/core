@@ -14,8 +14,12 @@ angular.module('app').directive('cashOutTable', function($api, $window) {
 
       scope.markAsSent = function(index) {
         if ($window.confirm("Are for REAL?")) {
-          $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { sent: true }, function() {
-            scope.cashOuts.splice(index,1);
+          $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { sent: true }, function(response) {
+            if (response.meta.status === 200) {
+              scope.cashOuts.splice(index,1);
+            } else {
+              alert("Error: " + JSON.stringify(response));
+            }
           });
         }
       };

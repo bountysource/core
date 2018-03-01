@@ -9,7 +9,7 @@
 
         %div{ "ng-if"=>"is_admin" }
           .inline-form-editor-content{ "ng-show"=>"!form_data.editing_description && team.homepage_markdown" }
-            %a.btn.btn-sm.btn-primary{ "ng-click"=>"form_data.start_editing()", "class"=>"markdown-hover-edit-link" }
+            %a.btn.btn-sm.btn-light-blue{ "ng-click"=>"form_data.start_editing()", "class"=>"markdown-hover-edit-link" }
               %span.glyphicon.glyphicon-cog
               Edit
             %target-blank{ "model"=>"team.homepage_markdown" }
@@ -25,19 +25,19 @@
               .form-group
                 .row
                   %div{ "ng-class"=>"{ 'col-md-12': !markdown_side_by_side, 'col-md-6': markdown_side_by_side }", "style"=>"margin-bottom:10px"}
-                    %label{:for => "body_markdown"} Markdown
+                    %h3{:for => "body_markdown"} Markdown
                     %textarea#body_markdown.form-control{"msd-elastic" => "", "ng-model" => "form_data.homepage_markdown", :placeholder => "Markdown", :style => "min-height:100px"}
                   %div{ "ng-class"=>"{ 'col-md-12': !markdown_side_by_side, 'col-md-6': markdown_side_by_side }"}
                     %a.pull-right{ "ng-click"=> "markdown_side_by_side=!markdown_side_by_side" }
                       %span.glyphicon.glyphicon-resize-small{ "ng-show"=>"!markdown_side_by_side"}
                       %span.glyphicon.glyphicon-resize-full{ "ng-show"=>"markdown_side_by_side"}
 
-                    %label Preview
+                    %h3 Preview
                     %target-blank{:model => "edit_markdown_preview"}
-                      .well.markdown.markdown-small-headers{"btf-markdown" => "edit_markdown_preview", :style => "min-height:100px"}
-                %button.btn.btn-primary{"ng-disabled" => "saving_form", :type => "submit"}
+                      .markdown.markdown-small-headers{"btf-markdown" => "edit_markdown_preview", :style => "min-height:100px"}
+                %button.btn.btn-light-blue.btn-long{"ng-disabled" => "saving_form", :type => "submit"}
                   %span{"ng-show" => "saving_form"} Saving...
-                  %span{"ng-hide" => "saving_form"} Update Description
+                  %span{"ng-hide" => "saving_form"} Update
                 %a.btn.btn-default{"ng-click"=>"form_data.cancel_editing()", "ng-hide"=>"saving_form"} Cancel
 
         -# %h3{ "ng-show"=>"included_teams.length>0"} Related Teams
@@ -54,7 +54,7 @@
 
       -# only show bounty sidebar if the team has created bounties
       .col-md-3{ "ng-show"=>"show_right_column" }
-        .well.text-center{ "style"=>"padding:5px" }
+        .text-center{ "style"=>"padding:5px" }
           %div{ "style"=>"float: left; padding-top:5px; padding-bottom:5px; width:50%", "ng-if"=>"team.open_bounties_amount>0"}
             %div{ "style"=>"font-size:22px; font-weight: bold" }
               %a{ "ng-href"=>"/teams/{{team.slug}}/bounties", "style"=>"color:#333" } {{team.open_bounties_amount | dollars}}
@@ -79,8 +79,8 @@
           %h3 Bounty Hunters
           %div{ "ng-repeat"=>"person in bounty_hunters_for_team", "ng-show"=>"$index < 5 || show_all_hunters" }
             %a{ "ng-href"=>"/people/{{person.slug}}", "style"=>"float: left" }
-              %img{ "ng-src"=>"{{person.image_url_small}}", "style"=>"width:50px; height: 50px; border-radius: 5px; margin-right:10px; margin-bottom: 10px" }
-            %a{ "ng-href"=>"/people/{{person.slug}}", "style"=>"font-size: 16px; font-weight: bold" } {{person.display_name}}
+              %img.img-responsive.img-circle{ "ng-src"=>"{{person.image_url_small}}", "style"=>"width:50px; height: 50px; margin-right:10px; margin-bottom: 10px" }
+            %a.text-gunmetal.font-weight-semibold{ "ng-href"=>"/people/{{person.slug}}" } {{person.display_name}}
             %br
             %div{ "ng-show"=>"person.bounty_claim_total>0"} {{person.bounty_claim_total | dollars}}
             %div{"style"=>"clear:left"}
@@ -91,10 +91,10 @@
         %div{ "ng-show"=>"bounty_summary.length>0"}
           %h3 Bounties
           %div{ "ng-repeat"=>"summary in bounty_summary", "style"=>"margin-bottom: 15px", "ng-show"=>"$index < 5 || show_all_bounty_summary"}
-            %img{ "ng-src"=>"{{summary.team.image_url_small || summary.tracker.image_url_small}}", "style"=>"width:40px; height:40px; float: left"}
+            %img.img-responsive.img-circle{ "ng-src"=>"{{summary.team.image_url_small || summary.tracker.image_url_small}}", "style"=>"width:40px; height:40px; float: left"}
             %div{ "style"=>"margin-left:50px"}
               %div{ "style"=>"margin:0; font-size: 16px; font-weight: bold" }
-                %a{ "owner-href"=>"summary.team||summary.tracker"} {{summary.team.name || summary.tracker.display_name}}
+                %a.text-gunmetal.font-weight-semibold{ "owner-href"=>"summary.team||summary.tracker"} {{summary.team.name || summary.tracker.display_name}}
               %div{ "ng-show"=>"summary.active>0"} {{summary.active | dollars}} active
               %div{ "ng-show"=>"summary.paid>0"} {{summary.paid | dollars}} paid
               %div{ "style"=>"clear:left"}

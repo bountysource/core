@@ -9,7 +9,7 @@ module Badge
 
     attr_accessor :subject, :status, :color
 
-    def initialize(status, subject: 'bountysource', color: '129e5e')
+    def initialize(status, subject: 'bountysource', color: '33ccff')
       self.subject = subject
       self.status = status
       self.color = color

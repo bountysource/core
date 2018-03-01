@@ -1,92 +1,84 @@
 <ng-include src="'salt/teams/_support_header_title.html'"></ng-include>
 
 <div class="container">
-  <h1>Amount <small>(Step 1 of 3)</small></h1>
-
-  <div class="row">
-    <div class="col-md-8">
-      <div class="alert alert-info">
-        <form ng-submit="submit_form()" class="form-horizontal">
-          <div class="alert alert-danger" ng-show="error">{{error}}</div>
-
-          <div class="form-group form-group-lg">
-            <label for="inputEmail3" class="col-sm-2 control-label">Amount:</label>
-            <div class="col-sm-3">
-              <div class="input-group">
-                <div class="input-group-addon">$</div>
-                <input type="text" class="form-control" id="formAmount" name="amount" ng-model="form_data.amount" placeholder="{{current_reward.amount}}" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group" ng-show="(form_data.amount || current_reward.amount) < 5.00">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="alert alert-warning">
-                <h4>We have a $5 minimum charge.</h4>
-                If your total monthly support level is less than $5, you will receive a credit which will automatically be applied to the next month.
-              </div>
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Frequency:</label>
-            <div class="col-sm-5">
-              <select class="form-control" ng-model="form_data.frequency">
-                <option value="monthly">Every month</option>
-                <option value="once">Just this time</option>
-              </select>
-            </div>
-          </div>
-
-
-          <div class="form-group" ng-show="team.support_offering.rewards.length > 0 && form_data.frequency === 'monthly'">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="margin-top:10px">Reward:</label>
-            <div class="col-sm-10">
-
-              <div class="radio">
-                <label style="margin: 10px 0 0 0">
-                  <input type="radio" name="reward" ng-model="form_data.reward_id" value="0" ng-click="reward_clicked()" />
-                  <h4 style="margin: 0">No Reward</h4>
-                </label>
-              </div>
-              <div class="radio" ng-repeat="reward in team.support_offering.rewards | orderBy:'amount'">
-                <label style="margin: 10px 0 0 0">
-                  <input type="radio" name="reward" ng-model="form_data.reward_id" value="{{reward.id}}" ng-click="reward_clicked(reward)" />
-                  <h4 style="margin: 0">
-                    {{reward.amount|dollars}} per month - {{reward.title}}
-                    <small ng-show="reward.active_support_levels_count>0">({{reward.active_support_levels_count}} active)</small>
-                  </h3>
-                  {{reward.description}}
-                </label>
-              </div>
-
-              <div style="margin-top: 15px;" ng-show="team.support_offering.extra.rewards_fine_print">
-                <target-blank model="team.support_offering.extra.rewards_fine_print">
-                  <span class="glyphicon glyphicon-info-sign pull-left" style="padding:2px 5px 0 0"></span> <em btf-markdown="team.support_offering.extra.rewards_fine_print"></em>
-                </target-blank>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!form_data.amount && !form_data.reward_id">Continue</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="well">
-        <h4>Important Billing Details</h4>
-        <ul>
-          <li>There is a <u>$5 minimum charge</u>. If your monthly support level is less than this, you will receive a credit that will be applied to the next month.</li>
-          <li>You will be billed immediately for the current month and then at the end of each month going forward.</li>
-          <li>You can cancel at any time.</li>
-          <li>We accept PayPal and Credit Cards (VISA, MC, AMEX, and more)</li>
-        </ul>
-      </div>
-    </div>
+  <div class="header">
+    <h3 class="header-underline-emphasize">Amount</h3>
+    <h4 style="display: inline;" class="text-muted">(Step 1 of 3)</h4>
   </div>
+
+  <form ng-submit="submit_form()" class="support-amount-form">
+    <div class="row display-flex">
+      <div class="col-md-8">
+      
+        <div class="alert alert-danger" ng-show="error">{{error}}</div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="control-label mt-4">Amount</label>
+          <div class="input-group mt-3">
+            <div class="input-group-addon">$</div>
+            <input type="text" class="form-control input-medium" id="formAmount" name="amount" ng-model="form_data.amount" placeholder="{{current_reward.amount}}" style="width: 75px;"/>
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="(form_data.amount || current_reward.amount) < 5.00">
+          <div>
+            <div class="alert alert-warning">
+              <h4>We have a $5 minimum charge.</h4>
+              If your total monthly support level is less than $5, you will receive a credit which will automatically be applied to the next month.
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="inputEmail3" class="control-label mt-4">Frequency</label>
+          <select class="form-control frequency-select" ng-model="form_data.frequency" style="max-width: 355px;">
+            <option value="monthly">Every month</option>
+            <option value="once">Just this time</option>
+          </select>
+        </div>
+
+
+        <div class="form-group" ng-show="team.support_offering.rewards.length > 0 && form_data.frequency === 'monthly'">
+          <label for="inputEmail3" class="control-label mt-4">Reward</label>
+
+          <div class="radio">
+            <label>
+              <input type="radio" name="reward" ng-model="form_data.reward_id" value="0" ng-click="reward_clicked()" />
+              <p>No Reward</p>
+            </label>
+          </div>
+          <div class="radio" ng-repeat="reward in team.support_offering.rewards | orderBy:'amount'">
+            <label class="mt-4">
+              <input type="radio" name="reward" ng-model="form_data.reward_id" value="{{reward.id}}" ng-click="reward_clicked(reward)" />
+              <p class="font-weight-medium">{{reward.amount|dollars}} per month - {{reward.title}}</p>
+              <small ng-show="reward.active_support_levels_count>0">({{reward.active_support_levels_count}} active)</small>
+              <p>{{reward.description}}</p>
+            </label>
+          </div>
+
+          <div style="margin-top: 15px;" ng-show="team.support_offering.extra.rewards_fine_print">
+            <target-blank model="team.support_offering.extra.rewards_fine_print">
+              <span class="glyphicon glyphicon-info-sign pull-left" style="padding:2px 5px 0 0"></span> <em btf-markdown="team.support_offering.extra.rewards_fine_print"></em>
+            </target-blank>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mt-5">
+          <h4>Important Billing Details</h4>
+          <p>There is a <u>$5 minimum charge</u>. If your monthly support level is less than this, you will receive a credit that will be applied to the next month.</p>
+          <p>You will be billed immediately for the current month and then at the end of each month going forward.</p>
+          <p>You can cancel at any time.</p>
+          <p>We accept PayPal and Credit Cards (VISA, MC, AMEX, and more)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="submit" class="btn btn-light-blue continue-button pull-right" ng-disabled="!form_data.amount && !form_data.reward_id">Continue</button>
+      </div>
+    </div>
+  </form>
 </div>

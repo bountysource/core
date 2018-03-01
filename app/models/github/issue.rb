@@ -74,6 +74,8 @@ class Github::Issue < ::Issue
 
   # SYNCING INSTANCE METHODS
   def remote_sync_if_necessary(options={})
+    return if ENV['DISABLE_GITHUB']
+
     if synced_at.nil?
       remote_sync(options)
     elsif synced_at < 1.minute.ago
@@ -84,6 +86,8 @@ class Github::Issue < ::Issue
   end
 
   def remote_sync(options={})
+    return if ENV['DISABLE_GITHUB']
+
     unless deleted_at
       previous_synced_at = self.synced_at
       update_from_github(options)

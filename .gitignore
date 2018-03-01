@@ -39,3 +39,6 @@ node_modules
 .ackrc
 .zeus.sock
 compiled_tests/
+
+.env
+.byebug_history

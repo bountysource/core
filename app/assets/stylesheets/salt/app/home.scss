@@ -1,0 +1,44 @@
+.workplace-splash-background {
+  background-image: asset-url('backgrounds/workplace-background.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 150px;
+  background-position: 0px 85px;
+}
+
+
+.welcome-card {
+  margin-top: 24px;
+  text-align: center;
+  h5 {
+    font-size: 16px;
+  }
+  hr {
+    border-top: 5px solid $aquamarine;
+    border-radius: 3px;
+  }
+}
+.activity-card {
+  hr {
+    border-top: 5px solid $salmon;
+    border-radius: 3px;
+  }
+}
+
+.why-salt-card {
+  hr {
+    border-top: 5px solid $bright-light-blue;
+    border-radius: 3px;
+  } 
+}
+
+.img-salt-homepage-logo {
+  width: 24px;
+  height: 24px;
+}
+
+@media (min-width: 768px) {
+  .img-salt-homepage-logo{ 
+    width:100px;
+    height:100px;
+  }
+}

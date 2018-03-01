@@ -1,10 +1,6 @@
-<div style="background:#444; padding: 20px 0 10px; text-align: center">
-  <div class="container">
-    <h1 class="team_header_title">
-      <a ui-sref="root.teams.show(team)">
-        <img ng-src="{{team.image_url_large}}" class="img-rounded" />
-        {{team.name}}
-      </a>
-    </h1>
-  </div>
+<div class="mt-6 text-center">
+  <a ui-sref="root.teams.show(team)" class="gunmetal-link">
+    <img ng-src="{{team.image_url_large}}" class="img-rounded team_header_image" />
+    <h1 class="team_header_title">{{team.name}}</h1>        
+  </a>    
 </div>

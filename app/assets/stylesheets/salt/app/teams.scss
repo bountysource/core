@@ -1,0 +1,87 @@
+.team_header_image {
+  width: 117px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 999px;
+}
+
+.team_header_title {
+  font-weight: 500;
+}
+
+a.support-project-button {
+  font-size: 20px;
+  padding: 12px 70px 12px 70px;
+  border-radius: 999px;
+}
+
+.share-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.share-buttons::before {
+  content: "";
+}
+
+.share-buttons::after {
+  content: "";
+}
+
+.featured-header {
+  background-color: #ffffff; 
+  padding: 12px;
+}
+
+
+.featured-header img{
+  width: 60px;
+  float: left;
+  margin: 6px;
+}
+
+
+.header-underline-emphasize {
+  display: inline-block;
+  padding: 0px 10px 6px 10px;
+  border-bottom: 3px solid #edf0f0;
+}
+
+.nav-salt-updates {
+  > li {
+    > a {
+      border-radius: 0px;
+    }
+  }
+
+  > li.active > a, > li.active > a:hover, > li.active > a:focus {
+    color: #485f64;
+    background-color: #edf0f0;
+
+    .update-title {
+      font-weight: 500;
+    }
+  }
+}
+
+
+.team-member-card{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 0px;
+  border: solid 1px #919d9d7f;
+  &.active {
+    border: solid 1px $bright-light-blue;
+  }
+}
+
+#admin-navtab {
+  background-image: asset-url('icons/icon_lock.svg');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) calc(50% - 1px);
+  padding-left: 12px;
+  padding-right: 22px;
+}

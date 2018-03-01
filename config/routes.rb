@@ -69,8 +69,7 @@ Api::Application.routes.draw do
     # Our own (un)deliciously home-rolled not-omniauth
     scope path: '/auth/:provider', controller: 'session' do
       get '/', to: :login, as: 'login'
-      get :callback, :connect
-      post :approve_connect
+      get :callback
     end
 
     # API is default route... if host matches and either we don't need SSL or we have SSL, then run
@@ -99,6 +98,8 @@ Api::Application.routes.draw do
           resources :developer_goals, only: [:index]
 
           resources :solutions, only: [:index]
+
+          resources :takedowns, only: [:index, :create]
 
           resources :team_claims, only: [:index, :update]
 
@@ -265,7 +266,7 @@ Api::Application.routes.draw do
         end
 
         resource :search do
-          get :typeahead, :gittip, :bounty_search
+          get :typeahead, :bounty_search
         end
 
         match '/tabs', controller: 'saved_search_tabs', action: 'index', via: :get

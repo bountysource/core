@@ -4,24 +4,23 @@
       .alert.alert-info{"ng-hide" => "bounties.length > 0"}
         No bounties have been placed.
       %div{"ng-show" => "bounties.length > 0"}
-        %table#bounties-table.table.table-striped
+        %table#bounties-table.table
           %thead
             %tr
               %th
-                %a{"ng-click" => "sort_by('owner.display_name')"} Backer
+                %a.text-dark{"ng-click" => "sort_by('owner.display_name')"} Backers
               %th
               %th
-                %a{"ng-click" => "sort_by('amount')"} Amount
+                %a.text-dark{"ng-click" => "sort_by('amount')"} Amount
               %th
-                %a{"ng-click" => "sort_by('created_at')"} Date
+                %a.text-dark{"ng-click" => "sort_by('created_at')"} Date
           %tbody
             %tr{"ng-repeat" => "bounty in bounties | orderBy:sort_column:sort_reverse"}
               %td
                 %profile-pic{:owner => "bounty.owner"}
               %td
                 %profile-name{:owner => "bounty.owner"}
-              %td
-                %div
-                  %strong {{ bounty.amount | dollars }}
+              %td.font-weight-medium
+                {{ bounty.amount | dollars }}
               %td
                 .text-muted {{ bounty.created_at | date }}

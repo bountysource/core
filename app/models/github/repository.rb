@@ -75,6 +75,8 @@ class Github::Repository < Tracker
 
   # first time it loads all issues, subsequent times just refreshes the repo itself
   def remote_sync_if_necessary(options={})
+    return if ENV['DISABLE_GITHUB']
+
     if synced_at.nil?
       remote_sync(options)
     elsif synced_at < 15.minutes.ago
@@ -85,6 +87,8 @@ class Github::Repository < Tracker
   end
 
   def remote_sync(options={})
+    return if ENV['DISABLE_GITHUB']
+
     unless deleted_at
       previous_synced_at = options[:force] ? nil : self.synced_at
       update_from_github(options)
@@ -602,6 +606,16 @@ class Github::Repository < Tracker
       obj.save!
     end
 
+  end
+
+  # has the owner of the tracker issued a takedown for all repositories and issues?
+  def takendown?
+    @owner_linked_account_id ||= TrackerRelation::Owner.where(tracker_id: self.id).pluck(:linked_account_id).first
+    @owner_linked_account_id && Takedown.linked_account_id_has_takedown?(@owner_linked_account_id)
+  end
+
+  def to_param
+    takendown? ? "#{id}-removed" : super
   end
 
 protected

@@ -19,28 +19,66 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 * Start by reading our Wiki's [How to Contribute](https://github.com/bountysource/core/wiki/How-to-Contribute)
 
 * There are a number of high priority issues that would help the core team, such as:
- * [Automatically collect e-signed Tax forms upon cash out request](https://github.com/bountysource/core/issues/1078)
- * [Add "Send via Paypal" button to admin/cash_outs/pending](https://github.com/bountysource/core/issues/1079)
- * [Add "Send via Coinbase" button to admin/cash_outs/pending](https://github.com/bountysource/core/issues/1080)
- * ["Add an issue tracker that your team manages" does not do anything](https://github.com/bountysource/core/issues/1023)
+  * [Automatically collect e-signed Tax forms upon cash out request](https://github.com/bountysource/core/issues/1078)
+  * [Add "Send via Paypal" button to admin/cash_outs/pending](https://github.com/bountysource/core/issues/1079)
+  * [Add "Send via Coinbase" button to admin/cash_outs/pending](https://github.com/bountysource/core/issues/1080)
+  * ["Add an issue tracker that your team manages" does not do anything](https://github.com/bountysource/core/issues/1023)
 
 * Looking for some easier tasks to get started?
- * [Improve forgot/reset password usability](https://github.com/bountysource/core/issues/1030)
- * [Fee in fees page and TOS do not match.](https://github.com/bountysource/core/issues/994)
- * [Change "Support team" text if you're a supporter](https://github.com/bountysource/core/issues/1002)
+  * [Improve forgot/reset password usability](https://github.com/bountysource/core/issues/1030)
+  * [Fee in fees page and TOS do not match.](https://github.com/bountysource/core/issues/994)
+  * [Change "Support team" text if you're a supporter](https://github.com/bountysource/core/issues/1002)
 
-#### ...with documentation
-
-* We are signficantly lacking in documentation. Can you write up a first time developers guide?
- * https://github.com/bountysource/core/issues/1082
-
-## Developer Resources
+# Developer Resources
 
 * [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
 * [API Docs](http://bountysource.github.io/)
 
+## Local Development Environment (OS X)
+```
+# dependencies
+brew install rbenv
+brew install mysql
+brew install postgresql
 
-## Self-hosting
+# checkout latest code
+git clone git@github.com:bountysource/core.git bountysource-core
+cd bountysource-core
+
+# make sure you're running ruby 2.2.8 (if not, mess with rbenv)
+ruby -v
+
+# install Gemfile
+gem install bundler
+bundle install
+
+# setup ENV
+cp .env.dev .env
+rake db:setup
+
+# start server
+./bin/rails s
+open http://localhost:3000/
+```
+
+### Hostnames for local development
+We need different hostnames, so by default we use these:
+* http://localhost:3000/ - bountysource
+* http://127.0.0.1:3000/ - salt
+* http://0.0.0.0:3000/ - api
+
+Alternatively, you can add entries to `/etc/hosts` and change the hostnames in your `.env` file:
+```
+127.0.0.1 www.bountysource.local api.bountysource.local salt.bountysource.local
+```
+
+### Running tests
+```
+RAILS_ENV=test rake db:create
+./bin/rake
+```
+
+## Local Development Environment with Docker (deprecated)
 
 For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).
 
@@ -107,7 +145,7 @@ CONTAINER ID        IMAGE                           COMMAND                  CRE
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You should see the Bountysource start page, something like [this](http://picpaste.com/pics/Bildschirmfoto_vom_2017-05-18_22-47-40-zHKjmLRL.1495197789.png).
+You should see the Bountysource start page, something like [this](http://i.imgur.com/iAPoCf4.png).
 
 
 ### Running the unit tests

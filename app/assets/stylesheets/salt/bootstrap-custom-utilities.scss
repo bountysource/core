@@ -1,0 +1,7 @@
+.btn-light-blue {
+  @include button-variant(#fff, $bright-light-blue, $bright-light-blue);
+}
+
+.progress-bar-gunmetal {
+  @include progress-bar-variant($gunmetal);
+}

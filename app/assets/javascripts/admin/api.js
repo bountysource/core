@@ -54,14 +54,18 @@ angular.module('api.bountysource',[]).
           }
         };
 
+        var cors_errback = function(response) {
+          alert("Server Error: " + url);
+        };
+
         var headers = {};
         headers.Accept = 'application/vnd.bountysource+json; version=0';
 
-        if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
-        else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback); }
-        else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback); }
-        else if (method === 'POST') { $http.post(url, params, {headers: headers}).success(cors_callback); }
-        else if (method === 'PUT') { $http.put(url, params, {headers: headers}).success(cors_callback); }
+        if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
+        else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
+        else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
+        else if (method === 'POST') { $http.post(url, params, {headers: headers}).success(cors_callback).error(cors_errback); }
+        else if (method === 'PUT') { $http.put(url, params, {headers: headers}).success(cors_callback).error(cors_errback); }
 
       } else {
         params._method = method;
@@ -692,6 +696,14 @@ angular.module('api.bountysource',[]).
       return this.call("/admin/teams", params, function (response) {
         return response;
       });
+    };
+
+    this.get_takedowns = function() {
+      return this.call("/admin/takedowns");
+    };
+
+    this.create_takedown = function(form_data) {
+      return this.call("/admin/takedowns", "POST", form_data);
     };
 
     this.get_team = function (id) {

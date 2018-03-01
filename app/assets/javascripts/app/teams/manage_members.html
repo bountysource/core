@@ -2,108 +2,112 @@
   <div team-view team="team" ng-show="members">
     <div class="row">
       <div class="col-sm-12 col-md-12">
-        <h3 style="margin-bottom: 0;">Members</h3>
-        <p>Members of your team. You can change the permissions for your team members.</p>
-        <table class="table members table-hover table-striped" ng-show="members.length > 0">
-          <thead>
-          <tr>
-            <th style="width: 30%;">Username</th>
-            <th style="width: 20%; text-align: center;">Public <i class="glyphicon glyphicon-question-sign" tooltip="Publicly displayed as a member of {{team.name}} on the members tab."></i></th>
-            <th style="width: 20%; text-align: center;">Developer <i class="glyphicon glyphicon-question-sign" tooltip="Authorized to spend money from the {{team.name}} account. Can change team settings (name, logo, projects used, etc)."></i></th>
-            <th style="width: 20%; text-align: center;">Admin <i class="glyphicon glyphicon-question-sign" tooltip="Can add/remove projects and members to the team, as well as assign roles to members."></i></th>
-            <th style="width: 10%; text-align: center;"></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr ng-repeat="member in members | orderBy:'+added_at'" ng-class="{ 'info': (member.$dirty) }">
-            <td>
-              <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
-              <div ng-show="member.$saving">
-                <small class="text-info"><i>Saving changes...</i></small>
-              </div>
-              <div ng-show="!member.$saving && member.$saved_at">
-                <small class="text-success text-muted">Saved {{member.$saved_at | date:'short'}}</small>
-              </div>
-              <div ng-show="!member.$saving && member.$update_error">
-                <small class="text-danger text-muted">{{ member.$update_error }}</small>
-              </div>
-            </td>
-            <td style="text-align: center;">
-              <input type="checkbox" ng-model="member.is_public" ng-change="member_changed(member)" ng-disabled="member.$saving">
-            </td>
-            <td style="text-align: center;">
-              <input type="checkbox" ng-model="member.is_developer" ng-change="member_changed(member)" ng-disabled="member.$saving">
-            </td>
-            <td style="text-align: center;">
-              <input type="checkbox" ng-model="member.is_admin" ng-change="member_changed(member)" ng-disabled="member.$saving || (is_admin && current_person.id == member.id)">
-            </td>
-            <td style="text-align: center;">
-              <div collapse="member.$dirty">
-                <button ng-click="remove_member(member)" class="btn btn-block btn-danger btn-xs" ng-disabled="member.id == current_person.id"><i class="glyphicon glyphicon-trash"></i> Remove</button>
-              </div>
-              <div collapse="!member.$dirty">
-                <button ng-click="update_member(member)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
-                <button ng-click="cancel_member_changes(member)" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-
-        <div>
-          <h3 style="margin-bottom: 0;">Spending Limits</h3>
-          <p>You can limit how much each team member can spend.</p>
-          <table class="table members table-hover" ng-show="members.length > 0">
+        <h3>Members</h3>
+        <p >Members of your team. You can change the permissions for your team members.</p>
+        <div class="table-responsive">
+          <table class="table members" ng-show="members.length > 0">
             <thead>
             <tr>
               <th style="width: 30%;">Username</th>
-              <th style="width: 35%; text-align: center;">Set Spending Limit</th>
-              <th style="width: 15%; text-align: center;">Available</th>
-              <th style="width: 10%; text-align: center;"></th>
+              <th style="width: 20%; text-align: center;">Public <i class="glyphicon glyphicon-question-sign" tooltip="Publicly displayed as a member of {{team.name}} on the members tab."></i></th>
+              <th style="width: 20%; text-align: center;">Developer <i class="glyphicon glyphicon-question-sign" tooltip="Authorized to spend money from the {{team.name}} account. Can change team settings (name, logo, projects used, etc)."></i></th>
+              <th style="width: 20%; text-align: center;">Admin <i class="glyphicon glyphicon-question-sign" tooltip="Can add/remove projects and members to the team, as well as assign roles to members."></i></th>
               <th style="width: 10%; text-align: center;"></th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="member in members | orderBy:'+added_at'">
-              <td class="center-height">
+            <tr ng-repeat="member in members | orderBy:'+added_at'" ng-class="{ 'info': (member.$dirty) }">
+              <td>
                 <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
-                <div ng-show="member.$budget_saving">
+                <div ng-show="member.$saving">
                   <small class="text-info"><i>Saving changes...</i></small>
                 </div>
-                <div ng-show="!member.$budget_saving && member.$budget_saved_at">
-                  <small class="text-success text-muted">Saved {{member.$budget_saved_at | date:'short'}}</small>
+                <div ng-show="!member.$saving && member.$saved_at">
+                  <small class="text-success text-muted">Saved {{member.$saved_at | date:'short'}}</small>
                 </div>
-                <div ng-show="!member.$budget_saving && member.$budget_update_error">
-                  <small class="text-danger text-muted">{{ member.$budget_update_error }}</small>
-                </div>
-              </td>
-              <td style="text-align: center;" class="center-height">
-                <div class="input-group input-append" style="margin-bottom: 0px;">
-                  <span class="input-group-addon">$</span>
-                  <input class="span6 form-control" type="number" ng-model="member.budget" ng-disabled="!member.is_developer" ng-change="creating_new_budget(member)">
-                  <span class="input-group-addon">.00</span>
+                <div ng-show="!member.$saving && member.$update_error">
+                  <small class="text-danger text-muted">{{ member.$update_error }}</small>
                 </div>
               </td>
-              <td style="text-align: center;" class="center-height">
-                <span ng-show="member.balance != null">{{ member.balance | dollars }}</span>
-                <span ng-show="!member.$master.is_developer">Can't spend</span>
-                <span ng-show="member.$master.budget == null && member.$master.is_developer">No Limit</span>
+              <td style="text-align: center;">
+                <input type="checkbox" ng-model="member.is_public" ng-change="member_changed(member)" ng-disabled="member.$saving">
               </td>
-              <td class="center-height">
-                <span ng-show="member.$master.budget"><button class="btn btn-success btn-block btn-xs" ng-disabled="member.$master.balance == member.$master.budget" ng-click="update_budget(member)"><i class="glyphicon glyphicon-repeat"></i> Reload</button></span>
+              <td style="text-align: center;">
+                <input type="checkbox" ng-model="member.is_developer" ng-change="member_changed(member)" ng-disabled="member.$saving">
               </td>
-              <td class="center-height">
-                <span ng-show="member.$master.budget > 0 && !member.new_budget"><button class="btn btn-danger btn-block btn-xs" ng-click="delete_budget(member)"><i class="glyphicon glyphicon-trash"></i> Remove</button></span>
-                <span ng-show="member.new_budget"><button class="btn btn-primary btn-block btn-xs" ng-click="update_budget(member)"><i class="glyphicon glyphicon-ok"></i> Save</button></span>
+              <td style="text-align: center;">
+                <input type="checkbox" ng-model="member.is_admin" ng-change="member_changed(member)" ng-disabled="member.$saving || (is_admin && current_person.id == member.id)">
+              </td>
+              <td style="text-align: center;">
+                <div collapse="member.$dirty">
+                  <button ng-click="remove_member(member)" class="btn btn-default btn-xs btn-long" ng-disabled="member.id == current_person.id"><i class="glyphicon glyphicon-trash"></i></button>
+                </div>
+                <div collapse="!member.$dirty">
+                  <button ng-click="update_member(member)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
+                  <button ng-click="cancel_member_changes(member)" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                </div>
               </td>
             </tr>
             </tbody>
           </table>
+        </div>
+
+        <div>
+          <h3>Spending Limits</h3>
+          <p>You can limit how much each team member can spend.</p>
+          <div class="table-responsive">
+            <table class="table members" ng-show="members.length > 0">
+              <thead>
+              <tr>
+                <th style="width: 30%;">Username</th>
+                <th style="width: 35%; text-align: center;">Set Spending Limit</th>
+                <th style="width: 15%; text-align: center;">Available</th>
+                <th style="width: 10%; text-align: center;"></th>
+                <th style="width: 10%; text-align: center;"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="member in members | orderBy:'+added_at'">
+                <td class="center-height">
+                  <a ng-href="/people/{{member.slug}}">{{member.display_name}}</a>
+                  <div ng-show="member.$budget_saving">
+                    <small class="text-info"><i>Saving changes...</i></small>
+                  </div>
+                  <div ng-show="!member.$budget_saving && member.$budget_saved_at">
+                    <small class="text-success text-muted">Saved {{member.$budget_saved_at | date:'short'}}</small>
+                  </div>
+                  <div ng-show="!member.$budget_saving && member.$budget_update_error">
+                    <small class="text-danger text-muted">{{ member.$budget_update_error }}</small>
+                  </div>
+                </td>
+                <td style="text-align: center;" class="center-height">
+                  <div class="input-group input-append" style="margin-bottom: 0px;">
+                    <span class="input-group-addon">$</span>
+                    <input class="span6 form-control" type="number" ng-model="member.budget" ng-disabled="!member.is_developer" ng-change="creating_new_budget(member)">
+                    <span class="input-group-addon">.00</span>
+                  </div>
+                </td>
+                <td style="text-align: center;" class="center-height">
+                  <span ng-show="member.balance != null">{{ member.balance | dollars }}</span>
+                  <span ng-show="!member.$master.is_developer">Can't spend</span>
+                  <span ng-show="member.$master.budget == null && member.$master.is_developer">No Limit</span>
+                </td>
+                <td class="center-height">
+                  <span ng-show="member.$master.budget"><button class="btn btn-success btn-block btn-xs" ng-disabled="member.$master.balance == member.$master.budget" ng-click="update_budget(member)"><i class="glyphicon glyphicon-repeat"></i> Reload</button></span>
+                </td>
+                <td class="center-height">
+                  <span ng-show="member.$master.budget > 0 && !member.new_budget"><button class="btn btn-danger btn-block btn-xs" ng-click="delete_budget(member)"><i class="glyphicon glyphicon-trash"></i> Remove</button></span>
+                  <span ng-show="member.new_budget"><button class="btn btn-primary btn-block btn-xs" ng-click="update_budget(member)"><i class="glyphicon glyphicon-ok"></i> Save</button></span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
 
 
         </div>
         <div id="pending-members" collapse="!pending_invites || pending_invites.length <= 0">
-          <h3 style="margin-bottom: 0;">Pending Members</h3>
+          <h3>Pending Members</h3>
           <table class="table table-hover table-striped">
             <thead>
             <tr>
@@ -131,7 +135,7 @@
           </table>
         </div>
 
-        <h3 style="margin-bottom: 0;">Add Member</h3>
+        <h3>Add Member</h3>
         <p>Enter the email address or PersonID of the person you would like to add to the team. If they do not have an account, they will receive an invitation email.</p>
         <form ng-submit="team_invite_create()">
           <table class="table">

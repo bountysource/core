@@ -1,5 +1,3 @@
 %div{"ng-class" => "{ 'bountysource-thumbs-box-mini': thumbsUpSize==='small', 'bountysource-thumbs-box': thumbsUpSize==='large', 'has-thumbed-up': issue.has_thumbed_up, 'thumbs-at-zero': issue.thumbs_up_count===0 }"}
-  .thumb-wrapper{ "ng-click"=>"thumbClicked()" }>
-    %img{ 'src'=>asset_path('thumbsup-20.png'), 'ng-if'=>"thumbsUpSize==='small'" }/
-    %img{ 'src'=>asset_path('thumbsup-32.png'), 'ng-if'=>"thumbsUpSize==='large'" }/
+  .thumb-wrapper.mr-2{ "ng-click"=>"thumbClicked()" }>
   .info-wrapper {{issue.thumbs_up_count}}

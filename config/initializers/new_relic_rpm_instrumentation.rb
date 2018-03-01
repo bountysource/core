@@ -5,8 +5,8 @@ Object.class_eval do
   # track a single metric.
   # @name the name of the metric, e.g. "Custom/foo/bar"
   # @amount the integer amount of the stat. if provided, should be some sort of count that can be aggregated over time.
-  def new_relic_data_point(name, amount=nil)
-    ::NewRelic::Agent.agent.stats_engine.get_stats_no_scope(name).record_data_point(amount || Time.now.utc.to_f)
+  def new_relic_data_point(name, amount=1)
+    ::NewRelic::Agent.record_metric(name, amount)
   end
 
   # trace the execution time of the block.

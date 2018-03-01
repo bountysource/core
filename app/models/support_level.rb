@@ -49,7 +49,7 @@ class SupportLevel < ActiveRecord::Base
   validates :payment_method, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 1.00, less_than_or_equal_to: 10000 }
 
-  scope :active, lambda { where(status: %w(active pending)) }
+  scope :active, lambda { where(status: %w(active pending)).where("exists(select id from teams where accepts_public_payins=true and id=support_levels.team_id)") }
   scope :unpaid, lambda { where(status: 'unpaid') }
   scope :canceled, lambda { where(status: 'canceled') }
   scope :needs_to_be_invoiced, lambda { |invoicing_period=nil|

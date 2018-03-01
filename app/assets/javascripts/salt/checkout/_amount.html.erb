@@ -1,0 +1,21 @@
+<div class="card">
+  <a ui-sref="root.checkout.amount(state.params)" class="pull-right">
+    <%= image_tag "icons/icon_edit.svg" %>
+  </a>
+
+  <div ng-show="team.support_offering.rewards.length > 0 && state.params.reward_id">
+    <h4>Amount</h4>
+    <div ng-show="state.params.amount">{{state.params.amount | dollars}} per month.</div>
+    <div ng-repeat="reward in team.support_offering.rewards | orderBy:'amount'" ng-show="state.params.reward_id==reward.id">
+      <div ng-hide="state.params.amount">{{reward.amount | dollars}} per month.</div>
+      <h4 style="margin-top: 20px">Reward: {{reward.title}}</h4>
+      {{reward.description}}
+    </div>
+  </div>
+
+  <div ng-hide="team.support_offering.rewards.length > 0 && state.params.reward_id">
+    <h4>Amount</h4>
+    <div>{{state.params.amount | dollars}} per month.</div>
+  </div>
+
+</div>

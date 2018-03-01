@@ -1,0 +1,26 @@
+<h3>Takedowns</h3>
+<table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>ID</th>
+      <th>Target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="takedown in takedowns">
+      <td>{{takedown.created_at | date}}</td>
+      <td style="word-wrap: break-word;">{{takedown.id}}</td>
+      <td style="word-wrap: break-word;">{{takedown.target}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>Create Takedown</h3>
+
+<form ng-submit="create_takedown()" class="form-horizontal">
+  <div class="alert alert-error" ng-show="error">{{error}}</div>
+  <input type="text" placeholder="slug" ng-model="form_data.search" placeholder="GitHub Username or Org" />
+  <button class="btn">Create</button>
+</form>

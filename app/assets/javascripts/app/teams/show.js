@@ -1,4 +1,9 @@
-angular.module('app').controller('TeamHomeController', function ($route, $scope, $routeParams, $api, $pageTitle, $filter, $timeout, Timeline, Team) {
+angular.module('app').controller('TeamHomeController', function ($route, $scope, $routeParams, $api, $pageTitle, $filter, $timeout, $window, Timeline, Team) {
+  $scope.markdown_side_by_side = true;
+  // redirect bountysource www team page to salt
+  if ($routeParams.id === 'bountysource') {
+    $window.location.replace('https://salt.bountysource.com/teams/bountysource');
+  }
 
   $scope.bounty_hunters_for_team = $api.people.query({ bounty_hunters_for_team: $routeParams.id, per_page: 15 });
 
