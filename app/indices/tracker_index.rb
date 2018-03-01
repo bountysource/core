@@ -14,4 +14,6 @@ ThinkingSphinx::Index.define :tracker, :with => :active_record do
 
   set_property :enable_star => 1
   set_property :min_infix_len => 2
+
+  set_property :big_document_ids => true
 end
