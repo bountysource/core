@@ -50,7 +50,7 @@
         <div ng-show="(teams | filter:({is_member:false})).length > 0">
           <div class="form-group">
             <div class="row">
-              <div class="col-xs-4 col-sm-2" ng-repeat="team in teams | filter:({is_member:false})">
+              <div class="col-xs-12 col-sm-6 col-md-12" ng-repeat="team in teams | filter:({is_member:false})">
                 <a class="thumbnail text-center team-member-card text-gunmetal" ng-click="claim_team(team)">
                   <div class="row display-flex p-4 vertical-align-middle">
                     <div class="col-xs-4">

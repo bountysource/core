@@ -53,7 +53,7 @@ class Api::V2::IssuesController < Api::BaseController
 
   def show
     @current_user = current_user
-
+    
     @include_issue_body_html = (params[:include_body_html] || true).to_bool
 
     @include_issue_tracker = params[:include_tracker].to_bool

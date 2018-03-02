@@ -14,7 +14,6 @@ angular.module('app').config(function($stateProvider) {
       if (matches && matches[7] && matches[7].length === 11) {
         $scope.youtube_video_url = $sce.trustAsResourceUrl('https://www.youtube.com/embed/'+matches[7]+'?rel=0&showinfo=0');
       }
-
     },
     resolve: {
       members: function($api, $stateParams) {
