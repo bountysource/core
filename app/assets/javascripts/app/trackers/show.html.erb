@@ -7,13 +7,6 @@
       <div class="col-lg-offset-1 col-lg-10">
         <ul class="nav nav-tabs">
           <li class="active"><a href="/trackers/{{tracker.slug}}">Issues</a></li>
-          <li>
-            <a ng-href="{{tracker.remote_url}}" target="_blank">
-              <span style="font-size:80%" class="glyphicon glyphicon-new-window"></span>
-              View on
-              <name-for-external-link object-type="tracker.type"></name-for-external-link>
-            </a>
-          </li>
         </ul>
 
         <!-- Add horizontal line when when no issues -->
@@ -22,30 +15,30 @@
         </div>
 
         <!--Issue filter box-->
-        <div class="well well-sm">
-          <div class="row">
-            <div class="col-xs-8 col-sm-8 col-md-8">
+        <div class="tracker-search">
+          <div class="row display-flex vertical-align-middle">
+            <div class="col-xs-8">
               <form class="form" ng-submit="getIssues(1)">
-                <div class="form-group" ng-class="{'narrow': !show_advanced_search}">
-                  <div class="input-group">
+                <div class="form-group m-0">
+                  <div class="input-group search-input ">
                     <input type="text" class="form-control" ng-model="search" placeholder="Search issues"></input>
                     <span class="input-group-btn">
-                      <button class="btn btn-primary">Search</button>
+                      <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                      </button>
                     </span>
                   </div>
                 </div>
               </form>
-
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4">
-              <button class="btn btn-default btn-block" ng-click="toggle_advanced_search()">Advanced Search
-                <i ng-show="!show_advanced_search" class="glyphicon glyphicon-chevron-down"></i>
-                <i ng-show="show_advanced_search" class="glyphicon glyphicon-chevron-up"></i>
-              </button>
+            <div class="col-xs-4">
+              <a ng-click="toggle_advanced_search()">
+                <%= image_tag 'icons/icon_advanced_search.svg', class: 'advanced-img' %>
+              </a>
             </div>
           </div>
-          <div class="row" ng-show="show_advanced_search">
-            <div class="col-xs-4 col-sm-4 col-md-4 text-center">
+          <div class="row mt-3" ng-show="show_advanced_search">
+            <div class="col-xs-4 col-sm-4 col-md-4">
               <form class="form-inline" ng-submit="getIssues(page)">
                 <div class="form-group" ng-class="{'has-error': show_bounty_error}">
                   <div class="input-group" style="width: 110px;">
@@ -67,17 +60,15 @@
               </div>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4 text-center">
-              <div class="btn-group" style="display: inline-block">
-                <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'open'}"
-                        ng-model="issueStatus" btn-radio="'open'" ng-change="getIssues(page)">Open
-                </button>
-                <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'closed'}"
-                        ng-model="issueStatus" btn-radio="'closed'" ng-change="getIssues(page)">Closed
-                </button>
-                <button type="button" class="btn btn-default" ng-class="{ 'btn-success': issueStatus == 'paid_out'}"
-                        ng-model="issueStatus" btn-radio="'paid_out'" ng-change="getIssues(page)">Paid Out
-                </button>
-              </div>
+              <button type="button" class="btn" ng-class="(issueStatus == 'open') ? 'btn-light-blue' : 'btn-default'"
+                      ng-model="issueStatus" btn-radio="'open'" ng-change="getIssues(page)">Open
+              </button>
+              <button type="button" class="btn" ng-class="(issueStatus == 'closed') ? 'btn-light-blue' : 'btn-default'"
+                      ng-model="issueStatus" btn-radio="'closed'" ng-change="getIssues(page)">Closed
+              </button>
+              <button type="button" class="btn" ng-class="(issueStatus == 'paid_out') ? 'btn-light-blue' : 'btn-default'"
+                      ng-model="issueStatus" btn-radio="'paid_out'" ng-change="getIssues(page)">Paid Out
+              </button>
             </div>
           </div>
         </div>
@@ -86,10 +77,10 @@
         <loading-bar collapse="issues">Loading issues...</loading-bar>
 
         <!-- Issue Count Label -->
-        <span class="label label-primary" ng-show="total_items">{{ total_items | number }} Issues</span>
+        <h4 ng-show="total_items">{{ total_items | number }} Issues</h4>
 
         <!-- No issues shown message -->
-        <div ng-show="issues.length == 0" class="alert alert-info">No issues found :(</div>
+        <div ng-show="issues.length == 0">No issues found :(</div>
 
         <!--Table of issues-->
         <issue-list

@@ -88,12 +88,12 @@ class Github::Issue < ::Issue
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
 
-    # unless deleted_at
-    previous_synced_at = self.synced_at
-    update_from_github(options)
-    sync_comments
-    self
-    # end
+    unless deleted_at
+      previous_synced_at = self.synced_at
+      update_from_github(options)
+      sync_comments
+      self
+    end
   rescue Github::API::NotFound
     deleted_at = Time.now
     update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
@@ -346,7 +346,6 @@ class Github::Issue < ::Issue
     obj.dont_trigger_plugin_updates = true if options[:dont_trigger_plugin_updates]
 
     # save if it changed
-    obj.deleted_at = nil
     obj.save! if obj.changed?
 
     # reload object if type changed

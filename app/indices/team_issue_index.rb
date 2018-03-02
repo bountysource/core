@@ -23,6 +23,7 @@ ThinkingSphinx::Index.define(:issue_rank, :name => "team_issue", :with => :activ
   ## Fields we may use later ##
   # has issue.tracker.languages(:id), :as => :language_ids
   # has issue.tracker(:id), :as => :tracker_ids
+  
 
   set_property :field_weights => {
     :title => 50,

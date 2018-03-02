@@ -6,7 +6,7 @@ angular.module('app').config(function($stateProvider) {
     controller: function($scope, $state, $filter, team, top_supporters, support_levels) {
       $scope.team = team;
 
-      if(team.accepts_public_payins === false) {
+      if(!team.accepts_public_payins) {
         $state.transitionTo('root.teams.not_activated', {slug: team.slug})
       }
 
