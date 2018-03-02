@@ -4,9 +4,9 @@ angular.module('app').config(function($stateProvider) {
     templateUrl: "salt/teams/not_activated.html",
     container: false,
     controller: function($rootScope, $stateParams, $scope, $sce) {
-      $rootScope.title = "Not activated"
+      $rootScope.title = "Not activated";
 
-      $scope.team_www_url = window.BS_ENV.www_host + 'teams/' + $stateParams.slug
+      $scope.team_www_url = window.BS_ENV.www_host + 'teams/' + $stateParams.slug;
     }
   });
 });
