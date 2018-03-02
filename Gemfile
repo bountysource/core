@@ -93,6 +93,7 @@ group :development, :test do
   gem 'git'
   gem 'octokit'
   gem 'dotenv-rails'
+  gem 'faker'
 end
 
 group :test do

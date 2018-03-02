@@ -5,6 +5,12 @@ angular.module('app').config(function($stateProvider) {
     template: '<ui-view/>',
     controller: function($scope, $state, $filter, team, top_supporters, support_levels) {
       $scope.team = team;
+
+      if(!team.accepts_public_payins) {
+        $state.transitionTo('root.teams.not_activated', {slug: team.slug});
+      }
+
+
       $scope.top_supporters = top_supporters;
 
       // show existing support
@@ -55,7 +61,6 @@ angular.module('app').config(function($stateProvider) {
       team: function($api, $stateParams) {
         return $api.teams.get({
           slug: $stateParams.slug,
-          accepts_public_payins: true,
           include_supporter_stats: true,
           include_support_offering: true
         }).$promise;

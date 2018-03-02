@@ -1,10 +1,5 @@
 angular.module('app').controller('TeamHomeController', function ($route, $scope, $routeParams, $api, $pageTitle, $filter, $timeout, $window, Timeline, Team) {
   $scope.markdown_side_by_side = true;
-  // redirect bountysource www team page to salt
-  if ($routeParams.id === 'bountysource') {
-    $window.location.replace('https://salt.bountysource.com/teams/bountysource');
-  }
-
   $scope.bounty_hunters_for_team = $api.people.query({ bounty_hunters_for_team: $routeParams.id, per_page: 15 });
 
   $scope.team_promise.then(function(team) {
@@ -65,8 +60,6 @@ angular.module('app').controller('TeamHomeController', function ($route, $scope,
       $scope.preview_promise = $timeout($scope.update_preview, 500);
     });
     /* end team admin */
-
-
   });
 
   $api.v2.call({ url: '/bounties/summary', params: { owner_team: $routeParams.id }}).then(function(bounty_summary) {
