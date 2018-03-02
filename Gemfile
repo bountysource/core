@@ -65,10 +65,7 @@ gem 'bootstrap-sass'
 #   "It'd be nice to rely on the log directory always existing, but sadly this is not the
 #   case on Heroku (at least, not consistently). So, if it is there, the expanded path (avoiding
 #   linked directories) will be used, but otherwise, we don't really care."
-gem 'thinking-sphinx', '~> 3.1.0',
-    :git    => 'git://github.com/pat/thinking-sphinx.git',
-    :branch => 'develop',
-    :ref    => 'c82ccdbe12'
+gem 'thinking-sphinx', '~> 3.1.3'
 
 gem 'flying-sphinx', '~> 1.0.0'
 
@@ -96,6 +93,7 @@ group :development, :test do
   gem 'git'
   gem 'octokit'
   gem 'dotenv-rails'
+  gem 'faker'
 end
 
 group :test do

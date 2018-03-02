@@ -1,27 +1,26 @@
 version: '3'
 volumes:
   database:
-  app:
   search_conf:
 services:
   setup:
     image: bountysource
-    env_file: .env.dev
+    env_file: .env
     command: bash -c "rake db:setup ts:configure && ln -Ts /app/config/development.sphinx.conf /sphinx/sphinx.conf"
     links:
       - pgsql
     volumes:
-      - app:/app
+      - .:/app
       - search_conf:/sphinx
-  seed:
+  reindex_sphinx:
     image: bountysource
-    env_file: .env.dev
+    env_file: .env
     command: bash -c "rake ts:generate ts:index"
     links:
       - pgsql
       - sphinx
     volumes:
-      - app:/app
+      - .:/app
   test:
     image: bountysource
     env_file: .env.test
@@ -32,4 +31,4 @@ services:
       - pgsql
       - sphinx
     volumes:
-      - app:/app
+      - .:/app

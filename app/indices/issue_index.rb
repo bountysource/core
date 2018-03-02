@@ -22,4 +22,6 @@ ThinkingSphinx::Index.define :issue, :with => :active_record do
     :languages => 5,
     :body => 30
   }
+
+  set_property :big_document_ids => true
 end
