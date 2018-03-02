@@ -7,7 +7,7 @@ angular.module('app').config(function($stateProvider) {
       $scope.team = team;
 
       if(!team.accepts_public_payins) {
-        $state.transitionTo('root.teams.not_activated', {slug: team.slug})
+        $state.transitionTo('root.teams.not_activated', {slug: team.slug});
       }
 
 
