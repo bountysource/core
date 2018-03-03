@@ -92,12 +92,13 @@ class Mantis::Issue < ::Issue
     td = doc.css('td.print:contains("Date Submitted")').first
     idx = td.parent.children.find_index(td)
     txt = td.parent.next_element.children[idx].text
-    updates[:remote_created_at] = Time.parse(txt)
+    updates[:remote_created_at] = Time.strptime(txt, '%d-%m-%y %k:%M')
+
 
     td = doc.css('td.print:contains("Last Update")').first
     idx = td.parent.children.find_index(td)
     txt = td.parent.next_element.children[idx].text
-    updates[:remote_updated_at] = Time.parse(txt)
+    updates[:remote_updated_at] = Time.strptime(txt, '%d-%m-%y %k:%M')
 
     # do updates
     update_attributes!(updates)
