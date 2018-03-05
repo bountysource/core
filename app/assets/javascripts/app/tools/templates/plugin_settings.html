@@ -46,6 +46,16 @@
         </div>
       </div>
       <br>
+      <div class="row" ng-show="plugin_locked(current_plugin) || (!saved_unlocked && plugin_save_will_unlock(current_plugin))">
+        <div class="col-sm-12"><label class="">
+            <input type="checkbox" ng-checked="plugin_locked(current_plugin)" ng-model="current_plugin.locked">
+            This plugin is locked.
+            <br>
+            Reason: {{current_plugin.last_error}}
+            <br>
+          </label>
+        </div>
+      </div>
       <div>
         <!-- Modify existing plugin, show save button. Otherwise, show install button -->
         <button ng-show="current_tracker.$plugin_installed" class="btn btn-primary" ng-disabled="!plugin_changed(current_plugin)" ng-click="update_plugin(current_plugin)">Save</button>

@@ -7,3 +7,5 @@ attribute :label_name
 attribute :label_color
 attribute :created_at
 attribute :updated_at
+attribute :locked_at
+attribute :last_error

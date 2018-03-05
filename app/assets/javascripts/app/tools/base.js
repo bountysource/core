@@ -31,6 +31,8 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
   $scope.current_plugin = null;
   $scope.current_tracker_has_plugin = false;
 
+  $scope.saved_unlocked = false;
+
   $scope.expand_tracker = function(tracker) {
     $scope.current_tracker = tracker;
     $scope.current_plugin = $scope.get_plugin(tracker);
@@ -139,7 +141,30 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
         return tracker.$plugin_installed;
       }
     };
+    
+    $scope.plugin_save_will_unlock = function(plugin){
+      if (typeof plugin.locked === 'undefined' || plugin.locked){
+        return false;
+      }
+      return true;
+    };
 
+    $scope.plugin_locked = function(plugin){
+      if(plugin.locked_at && plugin.locked_at !== "" &&
+        (typeof plugin.locked === 'undefined' || plugin.locked)/**/){
+          return true;
+      }
+      return false;
+    };
+
+    $scope.tracker_locked = function(tracker){
+      if(tracker.$plugin_installed){
+        var plugin = $scope.get_plugin(tracker);
+        return $scope.plugin_locked(plugin);
+      }
+      return false;
+    };
+    
     $scope.plugin_alert = { text: '', type: 'warning' };
 
     $scope.reauthorize = function() {
@@ -154,7 +179,8 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
         modify_title: plugin.modify_title,
         add_label: plugin.add_label,
         label_name: plugin.label_name,
-        label_color: plugin.label_color
+        label_color: plugin.label_color,
+        locked: plugin.locked
       };
 
       $api.tracker_plugin_update(plugin.tracker.id, payload).then(function(updated_plugin) {
@@ -166,6 +192,10 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
           var copy = angular.copy(plugin);
           delete copy.$master;
           plugin.$master = copy;
+          
+          if(payload.locked === false){
+            $scope.saved_unlocked = true;
+          }
 
           // update the cached version
           for (var i=0; i<plugins.length; i++) {
