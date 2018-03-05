@@ -24,7 +24,7 @@ class Bugzilla::API < Tracker::RemoteAPI
 
   def self.extract_info_from_url(url, html)
     # extract some stuff from HTML
-    return nil unless html.match(/<div id="bugzilla-body"/)
+    return nil unless html.match(/id="bugzilla-body"/)
 
     # extract base_url and ensure we're at an action
     path, query = url.split('?',2)
