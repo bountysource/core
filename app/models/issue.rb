@@ -430,6 +430,8 @@ class Issue < ActiveRecord::Base
     return Takedown::SANITIZED_HTML if takendown?
     html = GitHub::Markdown.render_gfm(TrackerPlugin::GH.body_without_plugin(self)) if body_markdown
     html = (body||"").gsub(/<p><bountysource-plugin>[\s\S]*?<\/bountysource-plugin><\/p>/, '') unless html
+    # Remove badge if issue body already has a badge
+    html = html.gsub(/<a href="https:\/\/www.bountysource.com\/issues\/.*<img src="https:\/\/api.bountysource.com\/badge.*"><\/a>/, '')
     html = ActionController::Base.helpers.sanitize(html)
     html
   end

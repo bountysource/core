@@ -7,10 +7,10 @@
     <meta name="twitter:site" content="@Bountysource" />
     <meta name="twitter:title" content="<%= title_helper(@issue) %>" />
     <meta name="twitter:description" content="<%=h @issue.title %>" />
-    <meta name="twitter:image:src" content="<%=@issue.tracker.large_image_url%>" />
+    <meta name="twitter:image:src" content="<%= @issue.team.try(:large_image_url) || @issue.tracker.large_image_url%>" />
 
     <meta property="og:title" content="<%= title_helper(@issue) %>" />
-    <meta property="og:image" content="<%=@issue.tracker.large_image_url%>" />
+    <meta property="og:image" content="<%= @issue.team.try(:large_image_url) || @issue.tracker.large_image_url%>" />
     <meta property="og:url" content="<%=@issue.frontend_url%>" />
     <meta property="og:description" content="<%=h @issue.tracker.name%>" />
     <meta property="og:site_name" content="Bountysource" />
