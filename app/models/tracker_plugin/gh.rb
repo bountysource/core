@@ -271,7 +271,7 @@ protected
       label_json = label_response.data
 
       # if label is wrong color, update it (we may have just created it)
-      label = label_json.find { |label| label['name'] == label_name }
+      label = label_json.find { |label| label['name'].downcase == label_name.downcase }
       if label['color'] != sanitized_label_color
         api(url: "/repos/#{tracker.full_name}/labels/#{sanitized_label_name}", type: "PATCH", body: { color: sanitized_label_color })
         raise UnknownError, "Failed to update label" unless label_response.success?
