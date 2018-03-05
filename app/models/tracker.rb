@@ -292,12 +292,18 @@ class Tracker < ActiveRecord::Base
       # we already have this as an issue in our DB
       return issue
     elsif issue = Issue.find_by_url(url)
-      # we already have this as an issue in our DB
-      return issue
+      if issue.tracker.is_a? TrackerUnknown
+        #try to reparse issue
+      else
+        # we already have this as an issue in our DB
+        return issue
+      end
     elsif tracker = Tracker.find_by_url(url)
       # we already have this as a tracker in our DB
       return tracker
-    elsif info = extract_info_from_url(url)
+    end
+
+    if info = extract_info_from_url(url)
       # sometimes we get back real objects and don't need to create them
       return info if info.is_a?(Issue) || info.is_a?(Tracker)
 
@@ -339,8 +345,13 @@ class Tracker < ActiveRecord::Base
         unless issue.class == info[:issue_class]
           issue.type = info[:issue_class].name
           issue.save!
-          issue = issue = Issue.find_by_url(info[:issue_url])
+          issue = Issue.find_by_url(info[:issue_url])
         end
+        issue.number = info[:issue_number]
+        issue.tracker = tracker
+        issue.title = info[:issue_title]
+        issue.save!
+        issue.reload
       else
         issue = tracker.issues.create!(url: info[:issue_url], number: info[:issue_number], title: info[:issue_title])
       end
