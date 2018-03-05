@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  type              :string(255)      not null
-#  txn_id            :string(255)      not null
+#  txn_id            :string(255)
 #  raw_post          :text
 #  order_id          :integer
 #  created_at        :datetime
@@ -27,8 +27,6 @@ class PaymentNotification < ActiveRecord::Base
   belongs_to :order, class_name: 'Transaction::Order'
   belongs_to :shopping_cart
   belongs_to :payment_method
-
-  validates :txn_id, presence: true
 
   class Error < StandardError ; end
   class Unimplemented < Error ; end

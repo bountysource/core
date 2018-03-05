@@ -2,7 +2,7 @@
 #
 # Table name: quickbooks_transactions
 #
-#  id         :integer          not null, primary key
+#  id         :integer          not null
 #  created_at :datetime
 #  updated_at :datetime
 #

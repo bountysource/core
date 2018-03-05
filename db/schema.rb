@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171210181208) do
+ActiveRecord::Schema.define(version: 20180302084704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -621,7 +621,7 @@ ActiveRecord::Schema.define(version: 20171210181208) do
 
   create_table "payment_notifications", force: true do |t|
     t.string   "type",              null: false
-    t.string   "txn_id",            null: false
+    t.string   "txn_id"
     t.text     "raw_post"
     t.integer  "order_id"
     t.datetime "created_at"

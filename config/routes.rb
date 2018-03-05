@@ -50,9 +50,8 @@ Api::Application.routes.draw do
 
     # All things money related
     scope path: 'payments', controller: 'payments' do
-      post :paypal_ipn, :paypal_return
-      get :paypal_return, :paypal_cancel
-
+      post :paypal_ipn
+      get :paypal_return
       # Generate JWT for Google Wallet item
       scope path: 'google', controller: :google_wallet do
         get :item_jwt, :success
