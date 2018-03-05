@@ -11,7 +11,13 @@
             Installed
           </span>
         </td>
+        <td style="width: 5%;">
+            <span class="label label-warning" ng-show="tracker_locked(tracker)">
+              Locked
+            </span>
+        </td>
         <td><a ng-click="expand_tracker(tracker)">{{tracker.full_name}}</a></td>
+        
       </tr>
       </tbody>
     </table>
