@@ -118,11 +118,12 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
         $scope.languages_loaded.splice(i, 1);
         break;
       }
-      for (var e=0;e<$scope.form_data.languages.length;e++) {
-        if (language.id === $scope.form_data.languages[e]) {
-          $scope.form_data.languages.splice(e, 1);
-          break;
-        }
+    }
+
+    for (var e=0;e<$scope.form_data.languages.length;e++) {
+      if (language.id === $scope.form_data.languages[e]) {
+        $scope.form_data.languages.splice(e, 1);
+        break;
       }
     }
   };

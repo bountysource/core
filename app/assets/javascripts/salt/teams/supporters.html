@@ -5,7 +5,7 @@
   <table class="table table-centered">
     <thead>
       <tr >
-        <th class="font-weight-medium">Supporter</th>
+        <th colspan="2" class="font-weight-medium">Supporter</th>
         <th class="font-weight-medium">This Month</th>
         <th class="font-weight-medium">All Time</th>
         <th class="font-weight-medium hidden-xs">Since</th>
@@ -14,9 +14,9 @@
     <tbody>
       <tr ng-repeat="supporter in supporters">
         <td  class="p-4">
-          <img class="img-circle" ng-src="{{supporter.image_url_large}}" style="max-width:75px; max-height: 75px"/>
-          {{supporter.display_name}}
+          <img class="img-circle img-responsive" ng-src="{{supporter.image_url_large}}" style="max-width:75px; max-height: 75px"/>          
         </td>
+        <td>{{supporter.display_name}}</td>
         <td>{{supporter.monthly_amount | dollars}}</td>
         <td>{{supporter.alltime_amount | dollars}}</td>
         <td class="hidden-xs">{{supporter.created_at | date}}</td>
