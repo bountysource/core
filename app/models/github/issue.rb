@@ -76,7 +76,7 @@ class Github::Issue < ::Issue
   def remote_sync_if_necessary(options={})
     return if ENV['DISABLE_GITHUB']
 
-    if synced_at.nil?
+    if synced_at.nil? || deleted_at
       remote_sync(options)
     elsif synced_at < 1.minute.ago
       delay.remote_sync(options)
@@ -88,15 +88,20 @@ class Github::Issue < ::Issue
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
 
-    unless deleted_at
-      previous_synced_at = self.synced_at
-      update_from_github(options)
-      sync_comments
-      self
+    previous_synced_at = self.synced_at
+    update_from_github(options)
+    sync_comments
+
+    if deleted_at
+      update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
     end
+    
+    self
   rescue Github::API::NotFound
-    deleted_at = Time.now
-    update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
+    unless deleted_at
+	    deleted_at = Time.now
+	    update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
+  	end
   end
 
   # INSTANCE METHODS
