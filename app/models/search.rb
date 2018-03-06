@@ -64,7 +64,7 @@ class Search < ActiveRecord::Base
     max = params[:max].present? ? params[:max].to_f : 10_000.0
     order = ["bounty_total", "backer_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
     direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'asc'
-    languages = params[:languages].present? ? params[:languages].split(',') : []
+    languages = params[:languages].present? ? params[:languages].split(',').map(&:to_i) : []
     trackers = params[:trackers].present? ? params[:trackers].split(',') : []
     #build a "with" hash for the filtering options. order hash for sorting options.
     with_hash = {tracker_ids: trackers, language_ids: languages, :bounty_total => (min..max)}.select {|param, value| value.present?}
