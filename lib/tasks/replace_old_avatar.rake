@@ -12,7 +12,7 @@ task :replace_old_avatar => :environment do
     email_hash = Digest::MD5.hexdigest(person[1])
     response = HTTParty.get("http://gravatar.com/avatar/#{email_hash}.png?d=404")
     avatars_to_replace << person[0] if response.code.to_i == 404
-	end
+  end
 
   people_group = avatars_to_replace.each_slice((avatars_to_replace.count / avatars.count) + 1).to_a
 
