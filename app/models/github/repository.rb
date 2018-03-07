@@ -77,7 +77,7 @@ class Github::Repository < Tracker
   def remote_sync_if_necessary(options={})
     return if ENV['DISABLE_GITHUB']
 
-    if synced_at.nil?
+    if synced_at.nil? || deleted_at
       remote_sync(options)
     elsif synced_at < 15.minutes.ago
       delay.remote_sync(options)
@@ -89,19 +89,26 @@ class Github::Repository < Tracker
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
 
-    unless deleted_at
-      previous_synced_at = options[:force] ? nil : self.synced_at
-      update_from_github(options)
-      find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
+    previous_synced_at = options[:force] ? nil : self.synced_at
+    update_from_github(options)
+    find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
 
-      # these really shouldn't change, so let's only update the very first time
-      update_languages if previous_synced_at.nil?
+    # these really shouldn't change, so let's only update the very first time
+    update_languages if previous_synced_at.nil?
+    
+    if deleted_at
+      update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
+      issues.each do |issue|
+        issue.update_attributes(deleted_at: nil, url: issue.url.partition("?deleted_at=").first)
+      end
     end
   rescue Github::API::NotFound
-    deleted_at = Time.now
-    update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
-    issues.each do |issue|
-      issue.update_attributes(deleted_at: deleted_at, url: issue.url + "?deleted_at=#{deleted_at.to_i}")
+    unless deleted_at
+      deleted_at = Time.now
+      update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
+      issues.each do |issue|
+        issue.update_attributes(deleted_at: deleted_at, url: issue.url + "?deleted_at=#{deleted_at.to_i}")
+      end
     end
   end
 

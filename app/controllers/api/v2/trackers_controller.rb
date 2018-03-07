@@ -25,7 +25,7 @@ class Api::V2::TrackersController < Api::BaseController
 
   def show
     includes = []
-    @item = ::Tracker.find_with_merge(params[:id], include: includes, relation: Tracker.not_deleted)
+    @item = ::Tracker.find_with_merge(params[:id], include: includes)
     @item.remote_sync_if_necessary(state: "open", person: current_user)
   end
 
