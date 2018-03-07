@@ -20,7 +20,7 @@ class ActiveRecord::Base
         
         if input.blank?
           if cloudinary_id.nil?
-            image = randomized_image(rand(18))
+            image = randomized_image(rand(108))
             self.cloudinary_id = "upload/#{image}"
           else
             return
@@ -61,13 +61,21 @@ class ActiveRecord::Base
           self.cloudinary_id = "gravatar/#{input.split(':').last}"
         elsif input =~ /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
           # email address... hash it for gravatar
-          self.cloudinary_id = "gravatar/#{Digest::MD5.hexdigest(input)}"
+          email_hash = email_hash = Digest::MD5.hexdigest(input)  
+          response = HTTParty.get("http://gravatar.com/avatar/#{email_hash}.png?d=404")
+          if response.code.to_i != 404
+            self.cloudinary_id = "gravatar/#{Digest::MD5.hexdigest(input)}"
+          else
+            image = randomized_image(rand(108))
+            self.cloudinary_id = "upload/#{image}"
+          end   
         else
           errors.add(:image_url, "not recognized: #{input}")
         end
       end
 
       def has_image?
+        
         cloudinary_id.present?
       end
 
