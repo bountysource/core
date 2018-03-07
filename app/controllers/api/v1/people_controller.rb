@@ -23,7 +23,6 @@ class Api::V1::PeopleController < ApplicationController
   # get info about the user's account
   def account
     # TODO exclude promotional money
-
     @account = @person.account
     render "api/v1/accounts/show"
   end
