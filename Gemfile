@@ -116,6 +116,7 @@ group :test do
   gem 'vcr'
   gem 'webmock', '1.24.6'
   gem 'timecop'
+  gem 'dotenv-rails'
   gem 'jshint', '1.5.0'
 end
 
