@@ -17,7 +17,7 @@ task :replace_old_avatar => :environment do
   people_group = avatars_to_replace.each_slice((avatars_to_replace.count / avatars.count) + 1).to_a
 
   avatars.count.times do |i|
-  	Person.where(id: people_group[i]).update_all(cloudinary_id: "upload/#{avatars[i]}")
+    Person.where(id: people_group[i]).update_all(cloudinary_id: "upload/#{avatars[i]}")
   end
 
 end
