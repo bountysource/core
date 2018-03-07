@@ -402,11 +402,7 @@ DEPENDENCIES
   maildown
   money (~> 5.1.1)
   mysql2 (= 0.3.17)
-<<<<<<< HEAD
   newrelic_rpm
-=======
-  newrelic_rpm (~> 3.8.0.218)
->>>>>>> c06fb46e3e9b7c49e1fa52aa61b75e5d60c41b8e
   ngannotate-rails
   nokogiri
   oauth
@@ -443,8 +439,5 @@ RUBY VERSION
    ruby 2.2.8p477
 
 BUNDLED WITH
-<<<<<<< HEAD
    1.16.1
-=======
-   1.15.4
->>>>>>> c06fb46e3e9b7c49e1fa52aa61b75e5d60c41b8e
+
