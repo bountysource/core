@@ -115,11 +115,14 @@ task :replace_old_avatar => :environment do
   avatars_to_replace = []
   #Find people with gravatar as cloudinary id
   people = Person.where("cloudinary_id ~* ?", '\Agravatar').pluck(:id, :email)
+  people_count = Person.where("cloudinary_id ~* ?", '\Agravatar').count
 
-  people.each do |person|
+  p "Running for #{people_count}"
+  people.each_with_index do |person, index|
     email_hash = Digest::MD5.hexdigest(person[1])
     response = HTTParty.get("http://gravatar.com/avatar/#{email_hash}.png?d=404")
     avatars_to_replace << person[0] if response.code.to_i == 404
+    p "Finishing #{index + 1}"
   end
 
   people_group = avatars_to_replace.each_slice((avatars_to_replace.count / avatars.count) + 1).to_a
