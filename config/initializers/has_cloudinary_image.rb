@@ -25,10 +25,6 @@ class ActiveRecord::Base
           else
             return
           end 
-        elsif input =~ /github/
-          Rails.logger.info "CLOUDINARY: Uploading image URL to cloudinary: #{input}"
-          response = Cloudinary::Uploader.upload(input, discard_original_filename: true).with_indifferent_access
-          self.cloudinary_id = "upload/" + response[:url].split('/').last
         elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
