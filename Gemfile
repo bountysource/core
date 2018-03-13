@@ -55,22 +55,6 @@ gem 'htmlentities'
 gem 'sass-rails', '~> 5.0.7'
 gem 'bootstrap-sass'
 
-if defined? Rack::Cors
-  Rails.configuration.middleware.insert_before 0, Rack::Cors do
-    allow do
-      origins %w[
-        https://theconf.club
-        http://theconf.club
-        https://www.theconf.club
-        http://www.theconf.club
-        https://theconf.herokuapp.com
-        http://theconf.herokuapp.com
-      ]
-      resource '/assets/*'
-    end
-  end
-end
-
 
 # Unfortunately, the new version of TS does not play nicely with Heroku, see:
 # http://support.flying-sphinx.com/discussions/problems/1177-heroku-error-when-deploying-thinking-sphinx-gem-304-no-such-file-or-directory-tmpbuild_xxxlog
