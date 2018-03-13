@@ -54,7 +54,7 @@ gem 'htmlentities'
 # Frontend
 gem 'sass-rails', '~> 5.0.7'
 gem 'bootstrap-sass'
-
+gem 'savon', '~> 2.11', '>= 2.11.2'
 
 # Unfortunately, the new version of TS does not play nicely with Heroku, see:
 # http://support.flying-sphinx.com/discussions/problems/1177-heroku-error-when-deploying-thinking-sphinx-gem-304-no-such-file-or-directory-tmpbuild_xxxlog
