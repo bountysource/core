@@ -32,6 +32,13 @@ angular.module('app').directive('cashOutTable', function($api, $window) {
         }
       };
 
+      scope.markAsFraud = function(index) {
+        if ($window.confirm("Remove these funds because they are fraudulent?")) {
+          $api.call('/admin/cash_outs/'+scope.cashOuts[index].id, 'PUT', { fraud: true }, function() {
+            scope.cashOuts.splice(index,1);
+          });
+        }
+      };
     }
   };
 

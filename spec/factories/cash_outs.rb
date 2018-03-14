@@ -25,6 +25,7 @@
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
 #  quickbooks_transaction_id  :integer
+#  is_fraud                   :boolean          default(FALSE), not null
 #
 # Indexes
 #

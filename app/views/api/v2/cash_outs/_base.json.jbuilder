@@ -9,6 +9,7 @@ ripple_address
 mastercoin_address
 sent_at
 is_refund
+is_fraud
 us_citizen
 created_at
 updated_at
