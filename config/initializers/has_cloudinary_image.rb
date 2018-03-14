@@ -17,20 +17,24 @@ class ActiveRecord::Base
 
       before_validation do
         input = @image_url
-        
+
+        # Clear image_url to prevent multiple validation on the same instance uploading twice
+        @image_url = nil 
         if input.blank?
           if cloudinary_id.nil?
             image = randomized_image(rand(108))
             self.cloudinary_id = "upload/#{image}"
           else
+            # skip if no new input and image already exists
             return
           end 
         elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
-        elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/
+        elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/ || input =~ /\.githubusercontent\.com/
           # identicons? quick, assmeble the transformers! er, wait, let's just run!
-          self.cloudinary_id = nil
+          image = randomized_image(rand(108))
+          self.cloudinary_id = "upload/#{image}"
         elsif (matches = input.match(/^#{CLOUDINARY_BASE_URL}([a-z_]+)\/.*?([^\/]+)$/))
           # already a cloudinary image, just extract container and filename
           self.cloudinary_id = "#{matches[1]}/#{matches[2]}"
