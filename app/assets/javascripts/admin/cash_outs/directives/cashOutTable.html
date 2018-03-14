@@ -18,12 +18,13 @@
   </thead>
 
   <tbody>
-  <tr ng-repeat="cashOut in cashOuts">
+  <tr ng-repeat="cashOut in cashOuts" ng-class="{ error: cashOut.is_fraud, warning: cashOut.is_refund, success: !cashOut.is_fraud && !cashOut.is_refund}">
     <td>{{cashOut.id}}</td>
     <td>{{cashOut.created_at | date:'medium'}}</td>
     <td ng-hide="_options.markAsSentButton">
       <span ng-show="cashOut.sent_at">{{cashOut.sent_at | date:'medium'}}</span>
-      <span class="label label-warning" ng-show="cashOut.is_refund">refund</refund>
+      <span class="label label-warning" ng-show="cashOut.is_refund">refund</span>
+      <span class="label label-important" ng-show="cashOut.is_fraud">fraud</span>
     </td>
     <!-- <td>{{cashOut.amount | currency}}</td>
     <td>{{cashOut.fee | currency}}</td>
@@ -89,8 +90,9 @@
     </td>
 
     <td>
-      <button class="btn btn-sm btn-primary" ng-click="markAsSent($index)" ng-show="_options.markAsSentButton">Mark as Sent</button>
-      <button class="btn btn-sm btn-danger" ng-click="markAsRefund($index)" ng-show="_options.markAsSentButton">Refund</button>
+      <button class="btn btn-sm btn-success" ng-click="markAsSent($index)" ng-show="_options.markAsSentButton">Sent</button>
+      <button class="btn btn-sm btn-warning" ng-click="markAsRefund($index)" ng-show="_options.markAsSentButton">Refund</button>
+      <button class="btn btn-sm btn-danger" ng-click="markAsFraud($index)" ng-show="_options.markAsSentButton">Fraud</button>
     </td>
   </tr>
   </tbody>

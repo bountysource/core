@@ -43,13 +43,18 @@
           </div>
 
           <!-- Accepted -->
-          <div ng-if="cashOut.sent_at && !cashOut.is_refund">
+          <div ng-if="cashOut.sent_at && !cashOut.is_refund && !cashOut.is_fraud">
             <strong class="text-success">Sent {{cashOut.sent_at | date}}</strong>
           </div>
 
           <!-- Refunded -->
           <div ng-if="cashOut.sent_at && cashOut.is_refund">
             <strong class="text-success">Refunded {{cashOut.sent_at | date}}</strong>
+          </div>
+
+          <!-- Fraud -->
+          <div ng-if="cashOut.sent_at && cashOut.is_fraud">
+            <strong class="text-success">Please Contact Customer Support</strong>
           </div>
         </td>
 
