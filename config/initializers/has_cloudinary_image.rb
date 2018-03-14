@@ -31,7 +31,7 @@ class ActiveRecord::Base
         elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
-        elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/ || input =~ /\.githubusercontent\.com/
+        elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/
           # identicons? quick, assmeble the transformers! er, wait, let's just run!
           image = randomized_image(rand(108))
           self.cloudinary_id = "upload/#{image}"
