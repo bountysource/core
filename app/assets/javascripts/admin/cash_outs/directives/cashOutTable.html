@@ -18,7 +18,7 @@
   </thead>
 
   <tbody>
-  <tr ng-repeat="cashOut in cashOuts" ng-class="{ error: cashOut.is_fraud, warning: cashOut.is_refund, success: !cashOut.is_fraud && !cashOut.is_refund}">
+  <tr ng-repeat="cashOut in cashOuts" ng-class="{ error: cashOut.is_fraud, warning: cashOut.is_refund, success: (cashOut.sent_at && !cashOut.is_fraud && !cashOut.is_refund)}">
     <td>{{cashOut.id}}</td>
     <td>{{cashOut.created_at | date:'medium'}}</td>
     <td ng-hide="_options.markAsSentButton">
