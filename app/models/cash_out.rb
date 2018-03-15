@@ -152,7 +152,7 @@ class CashOut < ActiveRecord::Base
     from_account = Account::CashOutHold.instance
     to_account = Account::Liability.instance
 
-    transaction = Transaction::InternalTransfer.create!(
+    transaction = Transaction::InternalTransfer::FraudReclaim.create!(
       audited: true,
       description: "#{self.class.name}(#{id}) - $#{amount} FRAUD funds returned from #{from_account.class.name}#{from_account.id} to #{to_account.class.name}(#{to_account.id})"
     )
