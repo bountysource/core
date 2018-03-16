@@ -143,6 +143,8 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
     };
     
     $scope.plugin_save_will_unlock = function(plugin){
+      if (plugin == null) { return; }
+      
       if (typeof plugin.locked === 'undefined' || plugin.locked){
         return false;
       }
@@ -150,6 +152,7 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
     };
 
     $scope.plugin_locked = function(plugin){
+      if (plugin == null) { return; }
       if(plugin.locked_at && plugin.locked_at !== "" &&
         (typeof plugin.locked === 'undefined' || plugin.locked)/**/){
           return true;
