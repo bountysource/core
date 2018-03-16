@@ -12,7 +12,7 @@ ThinkingSphinx::Index.define( :issue, :name => "bounty_search", :with => :active
   has participants_count
   has thumbs_up_count
   has remote_created_at
-
+  has can_add_bounty
 
   where("issues.id IN (SELECT DISTINCT bounties.issue_id FROM bounties) AND issues.bounty_total > 0 AND issues.paid_out = 'false'")
 

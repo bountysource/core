@@ -56,7 +56,7 @@ class Search < ActiveRecord::Base
 
   def self.bounty_search(params)
     create(query: "bounty search", params: params)
-
+    
     page = params[:page] || 1
     per_page = params[:per_page].to_i || 50
     query = params[:search] || ""
@@ -65,9 +65,10 @@ class Search < ActiveRecord::Base
     order = ["bounty_total", "backer_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
     direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'asc'
     languages = params[:languages].present? ? params[:languages].split(',').map(&:to_i) : []
-    trackers = params[:trackers].present? ? params[:trackers].split(',') : []
+    trackers = params[:trackers].present? ? params[:trackers].split(',').map(&:to_i) : []
+    can_add_bounty = params[:can_add_bounty] == "all" ? [] : true
     #build a "with" hash for the filtering options. order hash for sorting options.
-    with_hash = {tracker_ids: trackers, language_ids: languages, :bounty_total => (min..max)}.select {|param, value| value.present?}
+    with_hash = {tracker_ids: trackers, language_ids: languages, :bounty_total => (min..max), can_add_bounty: can_add_bounty}.select {|param, value| value.present?}
 
     #if an order is specified, build the order query. otherwise, pass along an empty string to order
     if order

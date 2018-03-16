@@ -47,6 +47,38 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-lg-4">
+          <div class="row form-group">
+            <div class="col-xs-6">
+              <label>Min Amount:</label>
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control bl-0" min="0" step="any" ng-model="form_data.min">
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <label>Max Amount:</label>
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="span8 form-control bl-0" min="1" step="any" ng-model="form_data.max">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+          <div class="form-group">
+            <label class="label-control">State:</label>
+          </div>
+
+          <div class="form-group">
+            <div class="btn-group">
+              <button class="btn" ng-class="(form_data.can_add_bounty == 'all') ? 'btn-light-blue' : 'btn-default'" btn-radio="'all'" type="button" ng-model="form_data.can_add_bounty">All</button>
+              <button class="btn" ng-class="(form_data.can_add_bounty == 'true') ? 'btn-light-blue' : 'btn-default'" btn-radio="'true'" type="button" ng-model="form_data.can_add_bounty">Open</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-lg-4">
           <div class="form-group">
             <label>Language:</label>
             <input name="input" type="text" class="form-control" placeholder="Search for languages"
@@ -67,24 +99,7 @@
             </span>
           </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-lg-4">
-          <div class="row form-group">
-            <div class="col-xs-6">
-              <label>Min Amount:</label>
-              <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="number" class="form-control bl-0" min="0" step="any" ng-model="form_data.min">
-              </div>
-            </div>
-            <div class="col-xs-6">
-              <label>Max Amount:</label>
-              <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="number" class="span8 form-control bl-0" min="1" step="any" ng-model="form_data.max">
-              </div>
-            </div>
-          </div>
-        </div>
+
         <div class="col-xs-12 col-sm-6 col-lg-4">
           <div class="form-group">
             <label class="label-control">Limit to projects:</label>
