@@ -571,6 +571,30 @@ class Person < ActiveRecord::Base
       end
       linked_accounts.where.not(type: 'LinkedAccount::Github::User').find_each(&:destroy)
 
+      # if there is any money left in their account, transfer it back to liability
+      if account && account.balance > 0
+        from_account = account
+        to_account = Account::Liability.instance
+        amount = from_account.balance
+
+        transaction = Transaction::InternalTransfer::DeletedOwner.create!(
+          audited: true,
+          description: "#{self.class.name}(#{id}) - $#{amount} owner deleted, reclaiming funds #{from_account.class.name}#{from_account.id} to #{to_account.class.name}(#{to_account.id})"
+        )
+
+        transaction.splits.create!(
+          amount: -1 * amount,
+          account: from_account,
+          item: self
+        )
+
+        transaction.splits.create!(
+          amount: amount,
+          account: to_account,
+          item: self
+        )
+      end
+
       update_attribute(:deleted, true)
     end
   end

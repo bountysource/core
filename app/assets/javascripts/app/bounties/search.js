@@ -3,6 +3,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     $scope.form_data = {
       direction: "desc",
       order: "bounty_total",
+      can_add_bounty: "all",
       languages: [],
       trackers: []
     };
