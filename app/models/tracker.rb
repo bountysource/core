@@ -287,7 +287,7 @@ class Tracker < ActiveRecord::Base
 
     # strip url hash
     url = url.gsub(/#.*/,'')
-
+    
     if (issue_id = url.match(/\Ahttps:\/\/www\.bountysource\.com\/issues\/(\d+)/).try(:[], 1)) && (issue = Issue.where(id: issue_id).first)
       # we already have this as an issue in our DB
       return issue

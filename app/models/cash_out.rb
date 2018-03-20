@@ -25,6 +25,7 @@
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
 #  quickbooks_transaction_id  :integer
+#  is_fraud                   :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -44,7 +45,7 @@ class CashOut < ActiveRecord::Base
   class InvalidType < StandardError ; end
 
   attr_accessible :person, :address, :amount, :mailing_address, :bitcoin_address, :remote_ip, :user_agent, :paypal_address,
-                  :us_citizen, :sent_at, :is_refund
+                  :us_citizen, :sent_at, :is_refund, :is_fraud
 
   belongs_to :person
   belongs_to :address
@@ -131,6 +132,29 @@ class CashOut < ActiveRecord::Base
     transaction = Transaction::InternalTransfer.create!(
       audited: true,
       description: "#{self.class.name}(#{id}) - $#{amount} funds returned from #{from_account.class.name}#{from_account.id} to #{to_account.class.name}(#{to_account.id})"
+    )
+
+    transaction.splits.create!(
+      amount: -1 * amount,
+      account: from_account,
+      item: self
+    )
+
+    transaction.splits.create!(
+      amount: amount,
+      account: to_account,
+      item: self
+    )
+  end
+
+  # triggered by clicking "Fraud" in the Cash Out admin
+  def is_fraud!
+    from_account = Account::CashOutHold.instance
+    to_account = Account::Liability.instance
+
+    transaction = Transaction::InternalTransfer::FraudReclaim.create!(
+      audited: true,
+      description: "#{self.class.name}(#{id}) - $#{amount} FRAUD funds returned from #{from_account.class.name}#{from_account.id} to #{to_account.class.name}(#{to_account.id})"
     )
 
     transaction.splits.create!(
