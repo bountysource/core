@@ -30,7 +30,7 @@ class Api::V0::TeamsController < Api::V0::BaseController
   end
 
   def update
-
+    
     if params[:add_child_team_inclusion]
       child_team = Team.where(slug: params[:add_child_team_inclusion]).first!
       @team.parent_team_activity_inclusions.where(child_team: child_team).first_or_create!
