@@ -27,7 +27,9 @@ class ActiveRecord::Base
           else
             # skip if no new input and image already exists
             return
-          end 
+          end
+        elsif input =~ /github/
+          self.cloudinary_id = input
         elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
           # gravatar URL, just extract hash
           self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
@@ -81,15 +83,19 @@ class ActiveRecord::Base
 
       # return 100px square default image
       def image_url(options={})
-        
         options = {
           size: 100,
           default: "upload/noaoqqwxegvmulwus0un.png" # big gray B
         }.merge(options)
+        #if cloudinary_url is github do this
+        if ( cloudinary_id =~ /github/ )
+          "#{cloudinary_id}&s=#{options[:size]}"
+        else
 
-        container, filename = (cloudinary_id || '').split('/')
-        container, filename = options[:default].split('/') if container.blank? || filename.blank?
-        "#{CLOUDINARY_BASE_URL}#{container}/d_#{options[:default].split('/').last},c_pad,w_#{options[:size]},h_#{options[:size]},b_white/#{filename}"
+          container, filename = (cloudinary_id || '').split('/')
+          container, filename = options[:default].split('/') if container.blank? || filename.blank?
+          "#{CLOUDINARY_BASE_URL}#{container}/d_#{options[:default].split('/').last},c_pad,w_#{options[:size]},h_#{options[:size]},b_white/#{filename}"
+        end
       end
 
       # return a randomized default image
