@@ -46,6 +46,11 @@ class PaymentNotification < ActiveRecord::Base
     notification.save! and notification
   end
 
+  def self.admin_search(query)
+    transaction_ids = where(txn_id: query).map(&:shopping_cart).compact.map(&:order_id)
+    Transaction.where(id: transaction_ids)
+  end
+
   def params
     raise Unimplemented
   end

@@ -94,6 +94,24 @@
         </table>
       </div>
 
+      <div>
+        <h3>Payment Notification Transactions</h3>
+        <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="transaction in transactions">
+              <td><a ng-href="/admin/transactions/{{transaction.id}}">{{transaction.id}}</a></td>
+              <td>{{transaction.description}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>

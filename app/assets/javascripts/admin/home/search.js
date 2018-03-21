@@ -24,9 +24,9 @@ angular.module('app')
       $scope.bounties = data.bounties;
       $scope.fundraisers = data.fundraisers;
       $scope.trackers = data.trackers;
+      $scope.transactions = data.transactions;
     } else {
       $scope.error = data.error;
     }
   });
 });
-
