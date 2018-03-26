@@ -170,7 +170,9 @@ protected
 
   def api_with_auto_pagination(options)
     response_data = []
-
+    #load the maximum of 100 items since we're going to paginate
+    options[:params] ||= {}
+    options[:params].merge!(per_page: 100)
     loop do
       response = api(options.clone)
       raise "ERROR: auto paginating #{response.status}" unless response.success?
