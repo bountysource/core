@@ -135,6 +135,43 @@ describe "live_sync" do
         expect(action).to change(Comment, :count).by_at_least(1)
       end
     end
+
+
+    describe "MantisRest::Issue" do
+      let(:issue_url) { "https://www.mantisbt.org/bugs/view.php?id=24096" }
+
+      it "should create new issue" do
+        expect(action).to change(Issue, :count).by(1)
+      end
+
+      it "should fetch issue comment" do
+        expect(action).to change(Comment, :count).by_at_least(1)
+      end
+    end
+
+    describe "MantisSoap::Issue" do
+      let(:issue_url) { "https://bugs.limesurvey.org/view.php?id=12227" }
+
+      it "should create new issue" do
+        expect(action).to change(Issue, :count).by(1)
+      end
+
+      it "should fetch issue comment" do
+        expect(action).to change(Comment, :count).by_at_least(1)
+      end
+    end
+
+    describe "MantisPrintBug::Issue" do
+      let(:issue_url) { "https://caml.inria.fr/mantis/view.php?id=7754" }
+
+      it "should create new issue" do
+        expect(action).to change(Issue, :count).by(1)
+      end
+
+      it "should fetch issue comment" do
+        expect(action).to change(Comment, :count).by_at_least(1)
+      end
+    end
   end
 
   describe "Tracker#remote_sync" do
@@ -259,6 +296,20 @@ describe "live_sync" do
       let(:tracker_class) { Pivotal::Tracker }
       let(:tracker_url) { "https://www.pivotaltracker.com/projects/367813/stories" }
       let(:tracker_name) { "Inside Government (Development) (Public)" }
+
+      it "should create new Tracker" do
+        expect(action).to change(Tracker, :count).by(1)
+      end
+
+      it "should create Tracker Issues" do
+        expect(action).to change(tracker.issues, :count).by_at_least(1)
+      end
+    end
+
+    describe "Mantis::Tracker" do
+      let(:tracker_class) { Mantis::Tracker }
+      let(:tracker_url) { "https://www.mantisbt.org/bugs/" }
+      let(:tracker_name) { "www.mantisbt.org" }
 
       it "should create new Tracker" do
         expect(action).to change(Tracker, :count).by(1)
@@ -623,6 +674,22 @@ describe "live_sync" do
       info[:tracker_class].should eq(Pivotal::Tracker)
       info[:tracker_url].should eq('https://www.pivotaltracker.com/projects/367813')
       info[:tracker_name].should eq('Departments and policy (Dev)')
+    end
+
+    ################ MANTIS ###############
+    it "https://www.mantisbt.org/bugs/my_view_page.php" do
+      info[:issue_class].should eq(nil)
+      info[:tracker_class].should eq(Mantis::Tracker)
+      info[:tracker_url].should eq('https://www.mantisbt.org/bugs/')
+      info[:tracker_name].should eq('www.mantisbt.org')
+    end
+
+    it "https://www.mantisbt.org/bugs/view.php?id=24096" do
+      info[:issue_class].should eq(Mantis::Issue)
+      info[:issue_url].should eq('https://www.mantisbt.org/bugs/view.php?id=24096')
+      info[:tracker_class].should eq(Mantis::Tracker)
+      info[:tracker_url].should eq('https://www.mantisbt.org/bugs/')
+      info[:tracker_name].should eq('www.mantisbt.org')
     end
 
   end

@@ -1,0 +1,467 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.mantisbt.org/bugs/view.php?id=24096
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:35:58 GMT
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - PHPSESSID=8h6gvvak3hr0i3i9vl3r8ar7v0; path=/; domain=.mantisbt.org; secure;
+        HttpOnly
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Last-Modified:
+      - Wed, 21 Mar 2018 10:35:58 GMT
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Wed, 21 Mar 2018 10:35:58 GMT
+      X-Frame-Options:
+      - DENY
+      Content-Security-Policy:
+      - script-src https://cdnjs.cloudflare.com 'self' ajax.googleapis.com maxcdn.bootstrapcdn.com
+        cdnjs.cloudflare.com; img-src https://secure.gravatar.com/ 'self' ajax.googleapis.com;
+        default-src 'self'; frame-ancestors 'none'; style-src 'self' 'unsafe-inline'
+        ajax.googleapis.com maxcdn.bootstrapcdn.com fonts.googleapis.com cdnjs.cloudflare.com;
+        font-src fonts.gstatic.com maxcdn.bootstrapcdn.com
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"Content-type\"
+        content=\"text/html; charset=utf-8\" />\n\t<title>0024096: email body looks
+        ugly - MantisBT</title>\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"
+        />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0,
+        maximum-scale=1.0, user-scalable=0\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://www.mantisbt.org/bugs/css/default.css\" />\n\t<link rel=\"stylesheet\"
+        type=\"text/css\" href=\"https://www.mantisbt.org/bugs/css/status_config.php?cache_key=b31eba5e13ecdc8f96fcad22a89278b9\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css\"
+        crossorigin=\"anonymous\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\"
+        crossorigin=\"anonymous\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css\"
+        crossorigin=\"anonymous\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://fonts.googleapis.com/css?family=Open+Sans\" crossorigin=\"anonymous\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css\"
+        crossorigin=\"anonymous\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://www.mantisbt.org/bugs/css/ace.min.css\" />\n\t<link rel=\"stylesheet\"
+        type=\"text/css\" href=\"https://www.mantisbt.org/bugs/css/ace-mantis.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://www.mantisbt.org/bugs/css/ace-skins.min.css\"
+        />\n\n\t<link rel=\"shortcut icon\" href=\"/bugs/images/favicon.ico\" type=\"image/x-icon\"
+        />\n\t<link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        title=\"MantisBT: full-text search\" href=\"https://www.mantisbt.org/bugs/browser_search_plugin.php?type=text\"/>\n\t<link
+        rel=\"search\" type=\"application/opensearchdescription+xml\" title=\"MantisBT:
+        search by Issue Id\" href=\"https://www.mantisbt.org/bugs/browser_search_plugin.php?type=id\"/>\n\t<script
+        type=\"text/javascript\" src=\"/bugs/javascript_config.php?cache_key=b31eba5e13ecdc8f96fcad22a89278b9\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/bugs/javascript_translations.php?cache_key=69464dfdcc5ec266ea4287547201d780\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js\"
+        integrity=\"sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js\"
+        integrity=\"sha256-p2l8VeL3iL1J0NxcXbEVtoyYSC+VbEbre5KHbzq1fq8=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/bugs/js/common.js\"></script>\n\n\t\t\t<script
+        src=\"/bugs/plugin_file.php?file=Snippets/jquery-textrange.js\"></script>\n\t\t\t<script
+        src=\"/bugs/plugin_file.php?file=Snippets/jquery.qtip.min.js\"></script>\n\t\t\t<script
+        src=\"/bugs/plugin_file.php?file=Snippets/snippets.js\"></script>\n\t\t\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"/bugs/plugin_file.php?file=Snippets/jquery.qtip.min.css\"/>\n\t\t\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"/bugs/plugin_file.php?file=Snippets/snippets.css\"/></head>\n<body
+        id=\"view-issue-page\" class=\"skin-3\">\n<style>\n* { font-family: \"Open
+        Sans\"; } \nh1, h2, h3, h4, h5 { font-family: \"Open Sans\"; } \n</style>\n<div
+        id=\"navbar\" class=\"navbar navbar-default navbar-collapse navbar-fixed-top
+        noprint\"><div id=\"navbar-container\" class=\"navbar-container\"><button
+        id=\"menu-toggler\" type=\"button\" class=\"navbar-toggle menu-toggler pull-left
+        hidden-lg hidden-md\" data-target=\"#sidebar\"><span class=\"sr-only\">Toggle
+        sidebar</span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span
+        class=\"icon-bar\"></span></button><div class=\"navbar-header\"><a href=\"/bugs//\"
+        class=\"navbar-brand\"><span class=\"smaller-75\"> MantisBT </span></a><button
+        type=\"button\" class=\"navbar-toggle navbar-toggle-img collapsed pull-right
+        hidden-sm hidden-md hidden-lg\" data-toggle=\"collapse\" data-target=\".navbar-buttons,.navbar-menu\"><span
+        class=\"sr-only\">Toggle user menu</span><i class=\"ace-icon fa fa-user fa-2x
+        white\"></i> </button></div><div class=\"navbar-buttons navbar-header navbar-collapse
+        collapse\"><ul class=\"nav ace-nav\"><li class=\"grey\" id=\"dropdown_projects_menu\">\n<a
+        data-toggle=\"dropdown\" href=\"#\" class=\"dropdown-toggle\">\n&#160;mantisbt&#160;\n
+        <i class=\"ace-icon fa fa-angle-down bigger-110\"></i>\n</a>\n<ul class=\"dropdown-menu
+        dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close scrollable-menu\">\n<li><a
+        href=\"/bugs/set_project.php?project_id=0\"> All Projects </a></li> \n<li
+        class=\"divider\"></li>\n<li><div id=\"projects-list\"><div class=\"projects-searchbox\"><input
+        class=\"search form-control input-md\" placeholder=\"Search\" /></div><ul
+        class=\"list dropdown-yellow no-margin\"><li class=\"active\"><a href=\"/bugs/set_project.php?project_id=1\"
+        selected=\"selected\" class=\"project-link\"> mantisbt </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=12\"
+        class=\"project-link\"> MantisTouch </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=20\"
+        class=\"project-link\"> Mylyn Connector </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=25\"
+        class=\"project-link\"> Plugin - agileMantis </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=11\"
+        class=\"project-link\"> Plugin - CsvImport </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=21\"
+        class=\"project-link\"> Plugin - CustomerManagement </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=10\"
+        class=\"project-link\"> Plugin - EmailReporting </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=15\"
+        class=\"project-link\"> Plugin - FilterPageEdit </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=14\"
+        class=\"project-link\"> Plugin - InlineColumnConfiguration </a></li>\n<li><a
+        href=\"/bugs/set_project.php?project_id=16\" class=\"project-link\"> Plugin
+        - LinkedCustomFields </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=9\"
+        class=\"project-link\"> Plugin - MachineAD </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=22\"
+        class=\"project-link\"> Plugin - MantisTouchRedirect </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=6\"
+        class=\"project-link\"> Plugin - RecurrCall </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=13\"
+        class=\"project-link\"> Plugin - RelatedIssuesExport </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=7\"
+        class=\"project-link\"> Plugin - Reminder </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=8\"
+        class=\"project-link\"> Plugin - Tasks </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=18\"
+        class=\"project-link\"> Plugin - Time Tracking </a></li>\n</ul></div></li></ul>\n</li>\n<li
+        class=\"grey\"><a data-toggle=\"dropdown\" href=\"#\" class=\"dropdown-toggle\"><i
+        class=\"ace-icon fa fa-user fa-2x white\"></i> <span class=\"user-info\">anonymous</span><i
+        class=\"ace-icon fa fa-angle-down\"></i></a><ul class=\"user-menu dropdown-menu
+        dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close\"><li><a
+        href=\"https://www.mantisbt.org/bugs/issues_rss.php?\"><i class=\"ace-icon
+        fa fa-rss-square orange\"> </i> RSS</a></li><li class=\"divider\"></li><li><a
+        href=\"/bugs/logout_page.php\"><i class=\"ace-icon fa fa-sign-out\"> </i>
+        Logout</a></li></ul></li></ul></div></div></div><div class=\"main-container\"
+        id=\"main-container\">\n<div id=\"sidebar\" class=\"sidebar sidebar-fixed
+        responsive compact \"><ul class=\"nav nav-list\"><li>\n<a href=\"/bugs/my_view_page.php\">\n<i
+        class=\"menu-icon fa fa-dashboard\"></i> \n<span class=\"menu-text\"> My View
+        </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li class=\"active\">\n<a href=\"/bugs/view_all_bug_page.php\">\n<i
+        class=\"menu-icon fa fa-list-alt\"></i> \n<span class=\"menu-text\"> View
+        Issues </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"/bugs/changelog_page.php\">\n<i
+        class=\"menu-icon fa fa-retweet\"></i> \n<span class=\"menu-text\"> Change
+        Log </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"/bugs/roadmap_page.php\">\n<i
+        class=\"menu-icon fa fa-road\"></i> \n<span class=\"menu-text\"> Roadmap </span>\n</a>\n<b
+        class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"/bugs/wiki.php?type=project&amp;id=1\">\n<i
+        class=\"menu-icon fa fa-book\"></i> \n<span class=\"menu-text\"> Wiki </span>\n</a>\n<b
+        class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"/bugs/plugin.php?page=Source/index\">\n<i
+        class=\"menu-icon fa fa-code-fork\"></i> \n<span class=\"menu-text\"> Repositories
+        </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n</ul><div id=\"sidebar\" class=\"sidebar-toggle
+        sidebar-collapse\"><i data-icon2=\"ace-icon fa fa-angle-double-right\" data-icon1=\"ace-icon
+        fa fa-angle-double-left\"\n\t\tclass=\"ace-icon fa fa-angle-double-left\"></i></div></div><div
+        class=\"main-content\">\n<div id=\"breadcrumbs\" class=\"breadcrumbs noprint\">\n<ul
+        class=\"breadcrumb\">\n <li><i class=\"fa fa-user home-icon active\"></i>
+        Anonymous </li>\n<div class=\"btn-group btn-corner\">\n\t<a href=\"/bugs/login_page.php?return=%2Fbugs%2Fview.php%3Fid%3D24096\"
+        class=\"btn btn-primary btn-xs\">Login</a>\n\t<a href=\"/bugs/signup_page.php\"
+        class=\"btn btn-primary btn-xs\">Signup for a new account</a>\n</div>\n</ul>\n<div
+        id=\"nav-search\" class=\"nav-search\"><form class=\"form-search\" method=\"post\"
+        action=\"/bugs/jump_to_bug.php\"><span class=\"input-icon\"><input type=\"text\"
+        name=\"bug_id\" autocomplete=\"off\" class=\"nav-search-input\" placeholder=\"Issue
+        #\"><i class=\"ace-icon fa fa-search nav-search-icon\"></i></span></form></div>\n</div>\n
+        \ <div class=\"page-content\">\n<div class=\"row\">\n<div class=\"col-md-12
+        col-xs-12\"><div class=\"widget-box widget-color-blue2\"><div class=\"widget-header
+        widget-header-small\"><h4 class=\"widget-title lighter\"><i class=\"ace-icon
+        fa fa-bars\"></i>View Issue Details</h4></div><div class=\"widget-body\"><div
+        class=\"widget-toolbox padding-8 clearfix noprint\"><div class=\"btn-group
+        pull-left\"><a class=\"btn btn-primary btn-white btn-round btn-sm\" href=\"wiki.php?id=24096\">Wiki</a><a
+        class=\"btn btn-primary btn-white btn-round btn-sm\" href=\"#bugnotes\">Jump
+        to Notes</a><a class=\"btn btn-primary btn-white btn-round btn-sm\" href=\"#history\">Jump
+        to History</a></div><div class=\"btn-group pull-right\"></div></div><div class=\"widget-main
+        no-padding\"><div class=\"table-responsive\"><table class=\"table table-bordered
+        table-condensed\"><tfoot><tr class=\"noprint\"><td colspan=\"6\"><div class=\"btn-group\"><div
+        class=\"pull-left padding-right-8\"></div><div class=\"pull-left padding-right-8\"></div><div
+        class=\"pull-left padding-right-8\"></div><div class=\"pull-left padding-right-2\"></div><div
+        class=\"pull-left padding-right-2\"></div><div class=\"pull-left padding-right-2\"></div><div
+        class=\"pull-left padding-right-2\"></div><div class=\"pull-left padding-right-2\"></div></div></td></tr></tfoot><tbody><tr
+        class=\"bug-header\"><th class=\"bug-id category\" width=\"15%\">ID</th><th
+        class=\"bug-project category\" width=\"20%\">Project</th><th class=\"bug-category
+        category\" width=\"15%\">Category</th><th class=\"bug-view-status category\"
+        width=\"15%\">View Status</th><th class=\"bug-date-submitted category\" width=\"15%\">Date
+        Submitted</th><th class=\"bug-last-modified category\" width=\"20%\">Last
+        Update</th></tr><tr class=\"bug-header-data\"><td class=\"bug-id\">0024096</td><td
+        class=\"bug-project\">mantisbt</td><td class=\"bug-category\">email</td><td
+        class=\"bug-view-status\">public</td><td class=\"bug-date-submitted\">2018-03-10
+        13:43</td><td class=\"bug-last-modified\">2018-03-21 04:24</td></tr><tr class=\"spacer\"><td
+        colspan=\"6\"></td></tr><tr class=\"hidden\"></tr><tr><th class=\"bug-reporter
+        category\">Reporter</th><td class=\"bug-reporter\">leonardo.salatino</td><th
+        class=\"bug-assigned-to category\">Assigned To</th><td class=\"bug-assigned-to\"></td><td
+        colspan=\"2\">&#160;</td></tr><tr><th class=\"bug-priority category\">Priority</th><td
+        class=\"bug-priority\">normal</td><th class=\"bug-severity category\">Severity</th><td
+        class=\"bug-severity\">minor</td><th class=\"bug-reproducibility category\">Reproducibility</th><td
+        class=\"bug-reproducibility\">always</td></tr><tr><th class=\"bug-status category\">Status</th><td
+        class=\"bug-status\"><i class=\"fa fa-square fa-status-box status-10-color\"></i>
+        new</td><th class=\"bug-resolution category\">Resolution</th><td class=\"bug-resolution\">open</td><td
+        colspan=\"2\">&#160;</td></tr><tr><th class=\"bug-product-version category\">Product
+        Version</th><td class=\"bug-product-version\">2.12.0</td><td colspan=\"4\">&#160;</td></tr><tr><th
+        class=\"bug-target-version category\">Target Version</th><td class=\"bug-target-version\"></td><th
+        class=\"bug-fixed-in-version category\">Fixed in Version</th><td class=\"bug-fixed-in-version\"></td><td
+        colspan=\"2\">&#160;</td></tr><tr class=\"spacer\"><td colspan=\"6\"></td></tr><tr
+        class=\"hidden\"></tr><tr><th class=\"bug-summary category\">Summary</th><td
+        class=\"bug-summary\" colspan=\"5\">0024096: email body looks ugly</td></tr><tr><th
+        class=\"bug-description category\">Description</th><td class=\"bug-description\"
+        colspan=\"5\"><p>Hi, yesterday I upgraded my mantis from 2.5 to 2.12; everything
+        went somoothly. But I have two issues with emails.</p>\n<p>The body looks
+        ugly because of the html, the email was ok before upgrading the version but
+        now it is showing the <br /><br /> or a html tgs. Please see attached image.</p>\n<p>How
+        can I fix it?</p></td></tr><tr><th class=\"bug-tags category\">Tags</th><td
+        class=\"bug-tags\" colspan=\"5\">No tags attached.</td></tr><tr class=\"spacer\"><td
+        colspan=\"6\"></td></tr><tr class=\"hidden\"></tr></tbody></table></div></div></div></div></div>\t<div
+        class=\"col-md-12 col-xs-12\">\n\t<div class=\"space-10\"></div>\n\n\t\t<div
+        id=\"relationships\" class=\"widget-box widget-color-blue2 \">\n\t<div class=\"widget-header
+        widget-header-small\">\n\t\t<h4 class=\"widget-title lighter\">\n\t\t\t<i
+        class=\"ace-icon fa fa-sitemap\"></i>\n\t\t\tRelationships\t\t</h4>\n\t\t<div
+        class=\"widget-toolbar\">\n\t\t\t<a data-action=\"collapse\" href=\"#\">\n\t\t\t\t<i
+        class=\"1 ace-icon fa fa-chevron-up bigger-125\"></i>\n\t\t\t</a>\n\t\t</div>\n\t</div>\n\t<div
+        class=\"widget-body\">\n\t\t\n\t\t<div class=\"widget-main no-padding\">\n\t\t\t<div
+        class=\"table-responsive\">\n\t\t\t\t<table class=\"table table-bordered table-condensed
+        table-hover\"><tr><td><span class=\"nowrap\">related to</span>&#160;</td><td><a
+        href=\"view.php?id=19829\">0019829</a></td><td><i class=\"fa fa-square fa-status-box
+        status-10-color\"></i> <span class=\"issue-status\" title=\"open\">new</span></td><td>&#160;</td><td>Emails
+        looks scrambled&#160;</td></tr></table>\t\t\t</div>\n\t\t</div>\n\t</div>\n\t</div>\n\t</div>\n\n<div
+        class=\"col-md-12 col-xs-12\">\n<a id=\"attachments\"></a>\n<a id=\"bugnotes\"></a>\n<div
+        class=\"space-10\"></div>\n\n<div id=\"bugnotes\" class=\"widget-box widget-color-blue2
+        \">\n<div class=\"widget-header widget-header-small\">\n\t<h4 class=\"widget-title
+        lighter\">\n\t<i class=\"ace-icon fa fa-comments\"></i>\n\t\tActivities\t</h4>\n\t<div
+        class=\"widget-toolbar\">\n\t\t<a data-action=\"collapse\" href=\"#\">\n\t\t\t<i
+        class=\"1 ace-icon fa fa-chevron-up bigger-125\"></i>\n\t\t</a>\n\t</div>\n\t</div>\n\t<div
+        class=\"widget-body\">\n\t<div class=\"widget-main no-padding\">\n\t<div class=\"table-responsive\">\n\t<table
+        class=\"table table-bordered table-condensed table-striped\">\n<tr class=\"bugnote
+        visible-on-hover-toggle\" id=\"c7872\">\n\t\t<td class=\"category\">\n\t\t<div
+        class=\"pull-left padding-2\"><div class=\"bugnote-avatar-container-80\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\"><img
+        class=\"bugnote-avatar-80\" src=\"https://secure.gravatar.com/avatar/2c4a52d6552cd7280670101c3bc55e36?d=identicon&amp;r=G&amp;s=80\"
+        alt=\"leonardo.salatino\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left
+        padding-2\">\n\t\t<p class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i>
+        <a class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\">leonardo.salatino</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2018-03-10 13:43\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">reporter</span>\t\t\t&#160;\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note\">\n\t\n<div
+        id=\"attachment_preview_7872_open\" class=\" collapse-open noprint\">\n<a
+        href=\"file_download.php?file_id=7872&amp;type=bug\"><i class=\"fa fa-file-image-o\"
+        alt=\"png file icon\" width=\"16\" height=\"16\"></i></a>&#32;<a href=\"file_download.php?file_id=7872&amp;type=bug\">Screen
+        Shot 03-10-18 at 03.40 PM.PNG</a>&#32;(60,146&#32;bytes)&#32;<a id=\"attachment_preview_7872_open_link\"
+        class=\"collapse-link noprint\"><i class=\"fa fa-minus-square-o\" alt=\"-\"></i></a>\n<div
+        class=\"bug-attachment-preview-image\"><a href=\"file_download.php?file_id=7872&amp;type=bug\"><img
+        src=\"file_download.php?file_id=7872&amp;type=bug&amp;show_inline=1&amp;file_show_inline_token=201803215byfe7pU50eKnYpM56raDOxdayDgwlNu\"
+        alt=\"\" style=\"border: 0;\" /></a></div></div>\n<div id=\"attachment_preview_7872_closed\"
+        class=\"collapse-section-closed collapse-closed\">\n<a href=\"file_download.php?file_id=7872&amp;type=bug\"><i
+        class=\"fa fa-file-image-o\" alt=\"png file icon\" width=\"16\" height=\"16\"></i></a>&#32;<a
+        href=\"file_download.php?file_id=7872&amp;type=bug\">Screen Shot 03-10-18
+        at 03.40 PM.PNG</a>&#32;(60,146&#32;bytes)&#32;<a id=\"attachment_preview_7872_closed_link\"
+        class=\"collapse-link noprint\"><i class=\"fa fa-plus-square-o\" alt=\"+\"></i></a></div>\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c59157\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"bugnote-avatar-80\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=80\"
+        alt=\"atrol\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2018-03-10 14:41\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">developer</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=24096#c59157\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~0059157\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\t<p>I am not able to reproduce the issue.</p>\n<p>leonardo.salatino
+        looks the e-mail you got for this note good for you?</p>\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c59159\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\"><img
+        class=\"bugnote-avatar-80\" src=\"https://secure.gravatar.com/avatar/2c4a52d6552cd7280670101c3bc55e36?d=identicon&amp;r=G&amp;s=80\"
+        alt=\"leonardo.salatino\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left
+        padding-2\">\n\t\t<p class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i>
+        <a class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\">leonardo.salatino</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2018-03-10 16:09\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">reporter</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=24096#c59159\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~0059159\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\t<p>Yes, the email from this mantis is good (attached
+        to this note); the one from my mantis installation is wrong. Is there some
+        log that I can turn on and check?</p><br /><br />\n<div id=\"attachment_preview_7873_open\"
+        class=\" collapse-open noprint\">\n<a href=\"file_download.php?file_id=7873&amp;type=bug\"><i
+        class=\"fa fa-file-image-o\" alt=\"png file icon\" width=\"16\" height=\"16\"></i></a>&#32;<a
+        href=\"file_download.php?file_id=7873&amp;type=bug\">Screen Shot 03-10-18
+        at 06.09 PM.PNG</a>&#32;(52,251&#32;bytes)&#32;<a id=\"attachment_preview_7873_open_link\"
+        class=\"collapse-link noprint\"><i class=\"fa fa-minus-square-o\" alt=\"-\"></i></a>\n<div
+        class=\"bug-attachment-preview-image\"><a href=\"file_download.php?file_id=7873&amp;type=bug\"><img
+        src=\"file_download.php?file_id=7873&amp;type=bug&amp;show_inline=1&amp;file_show_inline_token=20180321jroKtlDsPEugcifUVQOJpSNJuz0tkTEo\"
+        alt=\"\" style=\"border: 0;\" /></a></div></div>\n<div id=\"attachment_preview_7873_closed\"
+        class=\"collapse-section-closed collapse-closed\">\n<a href=\"file_download.php?file_id=7873&amp;type=bug\"><i
+        class=\"fa fa-file-image-o\" alt=\"png file icon\" width=\"16\" height=\"16\"></i></a>&#32;<a
+        href=\"file_download.php?file_id=7873&amp;type=bug\">Screen Shot 03-10-18
+        at 06.09 PM.PNG</a>&#32;(52,251&#32;bytes)&#32;<a id=\"attachment_preview_7873_closed_link\"
+        class=\"collapse-link noprint\"><i class=\"fa fa-plus-square-o\" alt=\"+\"></i></a></div>\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c59256\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"bugnote-avatar-80\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=80\"
+        alt=\"vboctor\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2018-03-21 03:15\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">manager</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=24096#c59256\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~0059256\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\t<p>Try tweaking the following lines in <code>email_send()</code>
+        in <code>core/email_api.php</code>.  Search for documentation of PHPMailer
+        for possible values.</p>\n<pre><code>    # Setup new line and encoding to
+        avoid extra new lines with some smtp gateways like sendgrid.net\n    $t_mail-&gt;LE
+        \        = &quot;\\r\\n&quot;;\n    $t_mail-&gt;Encoding   = 'quoted-printable';</code></pre>\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n</table>\n</div>\n</div>\n</div>\n</div>\n</div>\n\n\n
+        \   <div class=\"col-md-12 col-xs-12\">\n        <a id=\"history\"></a>\n
+        \       <div class=\"space-10\"></div>\n\n<div id=\"history\" class=\"widget-box
+        widget-color-blue2 \">\n<div class=\"widget-header widget-header-small\">\n\t<h4
+        class=\"widget-title lighter\">\n\t\t<i class=\"ace-icon fa fa-history\"></i>\n\t\tIssue
+        History\t</h4>\n\t<div class=\"widget-toolbar\">\n\t\t<a data-action=\"collapse\"
+        href=\"#\">\n\t\t\t<i class=\"1 ace-icon fa fa-chevron-up bigger-125\"></i>\n\t\t</a>\n\t</div>\n</div>\n<div
+        class=\"widget-body\">\n<div class=\"widget-main no-padding\">\n<div class=\"table-responsive\">\n<table
+        class=\"table table-bordered table-condensed table-hover table-striped\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th
+        class=\"small-caption\">\n\t\t\t\tDate Modified\t\t\t</th>\n\t\t\t<th class=\"small-caption\">\n\t\t\t\tUsername\t\t\t</th>\n\t\t\t<th
+        class=\"small-caption\">\n\t\t\t\tField\t\t\t</th>\n\t\t\t<th class=\"small-caption\">\n\t\t\t\tChange\t\t\t</th>\n\t\t</tr>\n\t</thead>\n\n\t<tbody>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-10 13:43\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\">leonardo.salatino</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNew Issue\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-10 13:43\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\">leonardo.salatino</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tFile Added: Screen Shot 03-10-18 at 03.40
+        PM.PNG\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-10 14:41\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tStatus\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tnew
+        =&gt; feedback\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t2018-03-10
+        14:41\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a class=\"user\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 0059157\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-10 16:09\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\">leonardo.salatino</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tFile Added: Screen Shot 03-10-18 at 06.09
+        PM.PNG\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-10 16:09\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\">leonardo.salatino</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 0059159\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-10 16:09\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44829\">leonardo.salatino</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tStatus\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tfeedback
+        =&gt; new\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t2018-03-21
+        03:15\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a class=\"user\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 0059256\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-21 04:24\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tRelationship added\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\trelated to 0019829\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n</div>\n\n</div>\n</div>\n</div>\n<div
+        class=\"clearfix\"></div>\n<div class=\"space-20\"></div>\n<div class=\"footer
+        noprint\">\n<div class=\"footer-inner\">\n<div class=\"footer-content\">\n<div
+        class=\"col-md-6 col-xs-12 no-padding\">\n<address>\n<strong>Powered by <a
+        href=\"https://www.mantisbt.org\" title=\"bug tracking software\">MantisBT
+        \ 2.13.0-dev-master-a646ff8</a></strong> <br>\n<small>Copyright &copy; 2000
+        - 2018 MantisBT Team</small><br><small>Contact <a href=\"mailto:vboctor@mantisbt.org\"
+        title=\"Contact the webmaster via e-mail.\">administrator</a> for assistance</small><br>\n</address>\n</div>\n<div
+        class=\"col-md-6 col-xs-12\">\n<div class=\"pull-right\" id=\"powered-by-mantisbt-logo\">\n<a
+        href=\"https://www.mantisbt.org\" title=\"Mantis Bug Tracker: a free and open
+        source web based bug tracking system.\"><img src=\"/bugs/images/mantis_logo.png\"
+        width=\"102\" height=\"35\" alt=\"Powered by Mantis Bug Tracker: a free and
+        open source web based bug tracking system.\" /></a>\n</div>\n</div>\n<div
+        class=\"col-xs-12 no-padding grey\">\n<address class=\"no-margin pull-right\">\n<small><i
+        class=\"fa fa-clock-o\"></i> Page execution time: 0.1702 seconds</small>&#160;&#160;&#160;&#160;\n</address>\n</div>\n</div>\n</div>\n</div>\n<a
+        class=\"btn-scroll-up btn btn-sm btn-inverse display\" id=\"btn-scroll-up\"
+        href=\"#\">\n<i class=\"ace-icon fa fa-angle-double-up icon-only bigger-110\"></i>\n</a>\n</div>\n\t<script
+        type=\"text/javascript\" src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"
+        integrity=\"sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment-with-locales.min.js\"
+        integrity=\"sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js\"
+        integrity=\"sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.jquery.min.js\"
+        integrity=\"sha256-qZIhMVBV4/crmcmYXNq5ZE5gPRiiPPMKVYbapf5HDBs=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/list.js/1.4.1/list.min.js\"
+        integrity=\"sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/bugs/js/ace.min.js\"></script>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:35:59 GMT
+- request:
+    method: get
+    uri: https://www.mantisbt.org/bugs/api/rest/issues/24096
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:36:00 GMT
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - PHPSESSID=a78jou0ldkehfdvc3cj00hqsn7; path=/; domain=.mantisbt.org; secure;
+        HttpOnly
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, max-age=0
+      - private, max-age=10800
+      Last-Modified:
+      - Tue, 06 Feb 2018 16:34:05 GMT
+      Etag:
+      - da5240d142936a1a38143f0b43bba0dd257e7d53831debb94b4f3d52a994de91
+      X-Mantis-Username:
+      - anonymous
+      X-Mantis-Loginmethod:
+      - cookie
+      X-Mantis-Version:
+      - 2.13.0-dev
+      Content-Length:
+      - '5137'
+      Content-Type:
+      - application/json;charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '{"issues":[{"id":24096,"summary":"email body looks ugly","description":"Hi,
+        yesterday I upgraded my mantis from 2.5 to 2.12; everything went somoothly.
+        But I have two issues with emails.\r\n\r\nThe body looks ugly because of the
+        html, the email was ok before upgrading the version but now it is showing
+        the <br \/><br\r\n\/> or a html tgs. Please see attached image.\r\n\r\nHow
+        can I fix it?\r\n","project":{"id":1,"name":"mantisbt"},"category":{"id":16,"name":"email"},"version":{"id":312,"name":"2.12.0"},"reporter":{"id":44829,"name":"leonardo.salatino"},"status":{"id":10,"name":"new","label":"new","color":"#fcbdbd"},"resolution":{"id":10,"name":"open","label":"open"},"view_state":{"id":10,"name":"public","label":"public"},"priority":{"id":30,"name":"normal","label":"normal"},"severity":{"id":50,"name":"minor","label":"minor"},"reproducibility":{"id":10,"name":"always","label":"always"},"sticky":false,"created_at":"2018-03-10T13:43:23-05:00","updated_at":"2018-03-21T04:24:35-04:00","attachments":[{"id":7872,"reporter":{"id":44829,"name":"leonardo.salatino"},"created_at":"2018-03-10T13:43:23-05:00","filename":"Screen
+        Shot 03-10-18 at 03.40 PM.PNG","size":60146,"content_type":"image\/png; charset=binary"},{"id":7873,"reporter":{"id":44829,"name":"leonardo.salatino"},"created_at":"2018-03-10T16:09:37-05:00","filename":"Screen
+        Shot 03-10-18 at 06.09 PM.PNG","size":52251,"content_type":"image\/png; charset=binary"}],"notes":[{"id":59157,"reporter":{"id":11111,"name":"atrol"},"text":"I
+        am not able to reproduce the issue.\r\n\r\nleonardo.salatino looks the e-mail
+        you got for this note good for you?","view_state":{"id":10,"name":"public","label":"public"},"type":"note","created_at":"2018-03-10T14:41:40-05:00","updated_at":"2018-03-10T14:41:40-05:00"},{"id":59159,"reporter":{"id":44829,"name":"leonardo.salatino"},"text":"Yes,
+        the email from this mantis is good (attached to this note); the one from my
+        mantis installation is wrong. Is there some log that I can turn on and check?","view_state":{"id":10,"name":"public","label":"public"},"type":"note","created_at":"2018-03-10T16:09:37-05:00","updated_at":"2018-03-10T16:09:37-05:00"},{"id":59256,"reporter":{"id":3081,"name":"vboctor"},"text":"Try
+        tweaking the following lines in `email_send()` in `core\/email_api.php`.  Search
+        for documentation of PHPMailer for possible values.\r\n\r\n```\r\n\t# Setup
+        new line and encoding to avoid extra new lines with some smtp gateways like
+        sendgrid.net\r\n\t$t_mail->LE         = \"\\r\\n\";\r\n\t$t_mail->Encoding   =
+        ''quoted-printable'';\r\n```","view_state":{"id":10,"name":"public","label":"public"},"type":"note","created_at":"2018-03-21T03:15:46-04:00","updated_at":"2018-03-21T03:15:46-04:00"}],"relationships":[{"id":9359,"type":{"id":1,"name":"related-to","label":"related
+        to"},"issue":{"id":19829,"status":{"id":10,"name":"new","label":"new","color":"#fcbdbd"},"resolution":{"id":10,"name":"open","label":"open"},"summary":"Emails
+        looks scrambled"}}],"history":[{"created_at":"2018-03-10T13:43:23-05:00","user":{"id":44829,"name":"leonardo.salatino"},"type":{"id":1,"name":"issue-new"},"message":"New
+        Issue"},{"created_at":"2018-03-10T13:43:23-05:00","user":{"id":44829,"name":"leonardo.salatino"},"type":{"id":9,"name":"file-added"},"file":{"id":7872,"filename":"Screen
+        Shot 03-10-18 at 03.40 PM.PNG"},"message":"File Added: Screen Shot 03-10-18
+        at 03.40 PM.PNG"},{"created_at":"2018-03-10T14:41:40-05:00","user":{"id":11111,"name":"atrol"},"field":{"name":"status","label":"Status"},"type":{"id":0,"name":"field-updated"},"old_value":{"id":10,"name":"new","label":"new","color":"#fcbdbd"},"new_value":{"id":20,"name":"feedback","label":"feedback","color":"#e3b7eb"},"message":"Status","change":"new
+        => feedback"},{"created_at":"2018-03-10T14:41:40-05:00","user":{"id":11111,"name":"atrol"},"type":{"id":2,"name":"note-added"},"note":{"id":59157},"message":"Note
+        Added: 0059157"},{"created_at":"2018-03-10T16:09:37-05:00","user":{"id":44829,"name":"leonardo.salatino"},"type":{"id":9,"name":"file-added"},"file":{"id":7873,"filename":"Screen
+        Shot 03-10-18 at 06.09 PM.PNG"},"message":"File Added: Screen Shot 03-10-18
+        at 06.09 PM.PNG"},{"created_at":"2018-03-10T16:09:37-05:00","user":{"id":44829,"name":"leonardo.salatino"},"type":{"id":2,"name":"note-added"},"note":{"id":59159},"message":"Note
+        Added: 0059159"},{"created_at":"2018-03-10T16:09:37-05:00","user":{"id":44829,"name":"leonardo.salatino"},"field":{"name":"status","label":"Status"},"type":{"id":0,"name":"field-updated"},"old_value":{"id":20,"name":"feedback","label":"feedback","color":"#e3b7eb"},"new_value":{"id":10,"name":"new","label":"new","color":"#fcbdbd"},"message":"Status","change":"feedback
+        => new"},{"created_at":"2018-03-21T03:15:46-04:00","user":{"id":3081,"name":"vboctor"},"type":{"id":2,"name":"note-added"},"note":{"id":59256},"message":"Note
+        Added: 0059256"},{"created_at":"2018-03-21T04:24:35-04:00","user":{"id":11111,"name":"atrol"},"type":{"id":18,"name":"relationship-added"},"relationship":{"id":1,"name":"related-to","label":"related
+        to"},"issue":{"id":19829},"message":"Relationship added","change":"related
+        to 0019829"}]}]}'
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:00 GMT
+recorded_with: VCR 2.9.3

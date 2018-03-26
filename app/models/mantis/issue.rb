@@ -173,7 +173,7 @@ class Mantis::Issue < ::Issue
 
       # do updates
       update_attributes!(updates)
-      byebug
+
       # sync comments
       comments = doc.css('td.nopad[width="20%"]').map do |td|
         {
