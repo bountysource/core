@@ -8,6 +8,7 @@
       <li><strong>Balance: </strong>{{ account.balance | currency }} {{ account.currency }}</li>
       <li><strong>Created: </strong>{{ account.created_at | date:'medium' }}</li>
       <li><strong>Updated: </strong>{{ account.updated_at | date:'medium' }}</li>
+      <li><strong>Owner: </strong> {{ account.owner}} </li>
     </ul>
     <h3>Splits</h3>
     <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
@@ -35,6 +36,6 @@
       </tbody>
     </table>
   </div>
-  
+
 
 </div>
