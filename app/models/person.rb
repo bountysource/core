@@ -693,7 +693,9 @@ protected
   end
 
   def format_url
-    self.url = "https://#{self.url}" unless self.url[/^https?/]    
+    if self.url
+      self.url = "https://#{self.url}" unless self.url[/^https?/]
+    end
   end
 
 end
