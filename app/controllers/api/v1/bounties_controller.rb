@@ -1,6 +1,4 @@
 class Api::V1::BountiesController < ApplicationController
-  respond_to :json
-
   before_action :require_auth, except: [:info]
   before_action :require_bounty, except: [:index, :info]
 

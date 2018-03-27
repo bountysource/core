@@ -1,6 +1,4 @@
 class Api::V1::PledgesController < ApplicationController
-  respond_to :json
-
   before_action :require_auth,        only: [:update, :show]
   before_action :require_pledge,      only: [:show, :update]
   before_action :require_fundraiser,  only: [:index]
