@@ -20,7 +20,7 @@
 #  index_addresses_on_person_id  (person_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :address, class: Address do
     name 'Robert Paulson'
     address1 '123 Fake Street'

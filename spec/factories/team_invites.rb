@@ -21,7 +21,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team_invite do
     email "robert.paulson@gmail.com"
   end

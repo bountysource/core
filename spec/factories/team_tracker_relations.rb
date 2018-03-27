@@ -15,7 +15,7 @@
 #  index_team_tracker_relations_on_tracker_id              (tracker_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team_tracker_relation, class: TeamTrackerRelation do
     association :team, factory: :team
     association :tracker, factory: :team

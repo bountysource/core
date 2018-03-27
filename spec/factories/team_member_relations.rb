@@ -28,7 +28,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team_member_relation do
     association :team, factory: :team
     association :person, factory: :person

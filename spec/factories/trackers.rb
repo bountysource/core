@@ -58,7 +58,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :tracker, class: Tracker do
     featured        false

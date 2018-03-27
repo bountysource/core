@@ -17,7 +17,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :activity_log do
     association :person, factory: :person
     association :tracker, factory: :tracker

@@ -23,7 +23,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :reward, class: Reward do
     association :fundraiser, factory: :fundraiser
     amount 10

@@ -19,7 +19,7 @@
 #  index_team_updates_on_team_id_and_number  (team_id,number) UNIQUE
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team_update, class: TeamUpdate do
     association :team, factory: :team
     body "Howdy y'all! I just added a few new rewards.\nCome check them out, there are only 10 of each!"

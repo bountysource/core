@@ -21,7 +21,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :solution do
     association :person, factory: :person
     association :issue, factory: :issue

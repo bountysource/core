@@ -22,7 +22,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :payment_notification do
     txn_id '9HV21269FCK60249'
 

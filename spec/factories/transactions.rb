@@ -29,7 +29,7 @@
 #  index_transactions_on_processing_fee      (processing_fee)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :transaction, class: Transaction do
     sequence(:description) { |n| "Transaction ##{n}" }
 

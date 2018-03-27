@@ -37,7 +37,7 @@
 #  index_people_on_shopping_cart_id  (shopping_cart_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :person, class: Person do
     first_name { 'John' }

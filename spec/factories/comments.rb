@@ -20,7 +20,7 @@
 #  index_comments_on_issue_id                  (issue_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :comment, class: Comment do
     sequence(:remote_id) { |n| n }
     body_html %(<p class="amazing-paragraph">wow, such comment</p>)

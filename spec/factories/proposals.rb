@@ -24,7 +24,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :proposal do
     association :request_for_proposal, factory: :request_for_proposal
     association :person, factory: :person

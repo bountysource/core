@@ -16,7 +16,7 @@
 #  index_person_relations_on_type_and_people   (type,person_id,target_person_id) UNIQUE
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :person_relation, class: PersonRelation::Base do
     association :person,        factory: :person
     association :target_person, factory: :person

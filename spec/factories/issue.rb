@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :issue, class: Issue do
     association     :tracker, factory: :tracker
