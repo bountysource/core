@@ -25,9 +25,6 @@
 #
 
 class SupportLevel < ActiveRecord::Base
-  attr_accessible :amount, :status, :team, :payment_method, :owner, :display_as, :person, :reward,
-                  :last_invoice_starts_at, :last_invoice_ends_at, :canceled_at
-
   belongs_to :person
   belongs_to :team
   belongs_to :payment_method

@@ -61,8 +61,6 @@
 #
 
 class Jira::Issue < ::Issue
-  attr_accessible :state, :priority, :remote_type, :number
-
   belongs_to :tracker, class_name: "Jira::Tracker", foreign_key: :tracker_id
 
   def remote_sync_if_necessary(options={})

@@ -11,8 +11,6 @@
 #
 
 class TrackerDonation < ActiveRecord::Base
-  attr_accessible :amount, :person, :tracker
-
   belongs_to :person
   belongs_to :tracker
 

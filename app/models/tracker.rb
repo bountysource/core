@@ -127,11 +127,6 @@ class Tracker < ActiveRecord::Base
     self.url += "/" if self.url =~ /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?\z/
   end
 
-  # ATTRIBUTES
-  attr_accessible :name, :url, :description, :featured, :bounty_total, :synced_at, :open_issues, :closed_issues,
-    :can_edit, :homepage, :repo_url, :language_ids, :remote_cloudinary_id, :remote_name, :remote_description,
-    :remote_language_ids, :team, :deleted_at
-
   # VALIDATIONS
   validates :url, uniqueness: true, presence: true
   validates :url, format: {with: /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?\/.*\z/ix}
@@ -287,7 +282,7 @@ class Tracker < ActiveRecord::Base
 
     # strip url hash
     url = url.gsub(/#.*/,'')
-    
+
     if (issue_id = url.match(/\Ahttps:\/\/www\.bountysource\.com\/issues\/(\d+)/).try(:[], 1)) && (issue = Issue.where(id: issue_id).first)
       # we already have this as an issue in our DB
       return issue

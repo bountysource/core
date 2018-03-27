@@ -57,11 +57,6 @@
 #
 
 class Github::Repository < Tracker
-
-  # ATTRIBUTES
-  attr_accessible :watchers, :forks, :is_fork,
-                  :remote_id, :full_name, :pushed_at, :has_issues, :has_wiki, :has_downloads, :private, :homepage
-
   # RELATIONSHIPS
   has_many :issues, class_name: 'Github::Issue', foreign_key: :tracker_id
 
@@ -95,7 +90,7 @@ class Github::Repository < Tracker
 
     # these really shouldn't change, so let's only update the very first time
     update_languages if previous_synced_at.nil?
-    
+
     if deleted_at
       update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
       issues.each do |issue|

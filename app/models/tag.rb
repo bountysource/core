@@ -14,9 +14,6 @@
 #
 
 class Tag < ActiveRecord::Base
-
-  attr_accessible :name, :item
-
   has_many :child_tag_relations, as: :child, class_name: 'TagRelation'
 
   ROUTE_REGEX = /[a-zA-Z0-9\.\-_\+#]+/

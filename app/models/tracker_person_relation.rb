@@ -15,7 +15,6 @@
 #
 
 class TrackerPersonRelation < ActiveRecord::Base
-  attr_accessible :can_edit, :person, :tracker
   belongs_to :person
   belongs_to :tracker
 

@@ -12,7 +12,6 @@
 #
 
 class SavedSearchTab < ActiveRecord::Base
-  attr_accessible :query, :locked, :name, :created_at
   belongs_to :person
 
   def self.find_user_tabs(user)

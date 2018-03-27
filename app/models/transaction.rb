@@ -36,9 +36,6 @@
 # See the Account and Split docs for more detail.
 
 class Transaction < ActiveRecord::Base
-
-  attr_accessible :description, :splits, :audited, :person, :checkout_method, :gross, :fee, :items, :liability
-
   has_many :splits
   belongs_to :person
   has_one :shopping_cart, foreign_key: 'order_id'

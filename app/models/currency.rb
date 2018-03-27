@@ -15,9 +15,6 @@
 #
 
 class Currency < ActiveRecord::Base
-
-  attr_accessible :type, :value
-
   validates :type, presence: true
   validates :value, numericality: { presence: true, greather_than_or_equal_to: 0 }
 

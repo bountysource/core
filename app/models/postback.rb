@@ -13,8 +13,6 @@
 #
 
 class Postback < ActiveRecord::Base
-  attr_accessible :namespace, :method, :url, :raw_post, :headers
-
   def self.my_url
     "https://api-qa.bountysource.com/postbacks/#{`hostname`.strip}"
   end

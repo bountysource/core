@@ -15,7 +15,6 @@
 #
 
 class Milestone < ActiveRecord::Base
-  attr_accessible :fundraiser, :description, :rank, :optional, :delivery_at, :percentage_of_project, :completed_percentage
   belongs_to :fundraiser
 
   validates :rank, numericality: { greater_than_or_equal: 1 }

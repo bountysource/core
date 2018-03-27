@@ -27,8 +27,6 @@
 #
 
 class IssueRank < ActiveRecord::Base
-  attr_accessible :team, :issue, :rank, :person, :linked_account, :last_synced_at, :last_event_created_at
-
   belongs_to :issue
   belongs_to :team
   belongs_to :person

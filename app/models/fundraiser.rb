@@ -41,10 +41,6 @@
 #
 
 class Fundraiser < ActiveRecord::Base
-  attr_accessible :title, :description, :about_me, :funding_goal, :payout_method,
-                  :milestones, :rewards, :short_description, :published_at, :account, :days_open, :breached,
-                  :breached_at, :hidden, :team
-
   has_cloudinary_image
 
   belongs_to :person

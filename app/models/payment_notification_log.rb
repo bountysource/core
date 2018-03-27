@@ -11,5 +11,4 @@
 #
 
 class PaymentNotificationLog < ActiveRecord::Base
-  attr_accessible :processor, :notification_type, :content
 end

@@ -40,11 +40,6 @@
 class LinkedAccount::Base < ActiveRecord::Base
   self.table_name = 'linked_accounts'
 
-  attr_accessible :type, :person, :uid, :first_name, :last_name, :email, :login,
-                  :oauth_token, :oauth_secret, :synced_at, :sync_in_progress,
-                  :followers, :following, :company, :location, :bio, :permissions,
-                  :linked_account
-
   has_many :team_member_relations, as: :owner
   belongs_to :person
   has_many :tracker_relations, foreign_key: :linked_account_id

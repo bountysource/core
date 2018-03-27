@@ -15,9 +15,6 @@
 #
 
 class TagVote < ActiveRecord::Base
-
-  attr_accessible :relation, :value, :person
-
   belongs_to :tag_relation
   belongs_to :relation, class_name: 'TagRelation', foreign_key: :tag_relation_id   #legacy
 

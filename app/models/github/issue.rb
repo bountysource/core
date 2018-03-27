@@ -61,10 +61,6 @@
 #
 
 class Github::Issue < ::Issue
-
-  # ATTRIBUTES
-  attr_accessible :labels, :state, :code, :deleted_at
-
   # VALIDATIONS
   validates :number, presence: true
   validates :url, format: { with: /\Ahttps:\/\/github\.com\/[^\/]+\/[^\/]+\/(issues|pull)\/\d+(\?.+)?\z/ix }
@@ -95,7 +91,7 @@ class Github::Issue < ::Issue
     if deleted_at
       update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
     end
-    
+
     self
   rescue Github::API::NotFound
     unless deleted_at

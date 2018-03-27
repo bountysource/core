@@ -17,8 +17,6 @@
 #
 
 class MixpanelEvent < ActiveRecord::Base
-  attr_accessible :distinct_id, :event, :payload, :person_id
-
   belongs_to :person
 
   # flexible method that does the dirty work

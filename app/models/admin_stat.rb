@@ -9,9 +9,6 @@
 #
 
 class AdminStat < ActiveRecord::Base
-
-  attr_accessible :raw_json
-
   def self.update_singleton
     singleton.update_raw_json
   end

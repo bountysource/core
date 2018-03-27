@@ -11,8 +11,6 @@
 #
 
 class PaymentMethod < ActiveRecord::Base
-  attr_accessible :person, :data
-
   has_account class_name: 'Account::PaymentMethod'
   has_many :notifications, class_name: 'PaymentNotification', foreign_key: :payment_method_id
 

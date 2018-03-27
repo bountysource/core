@@ -16,8 +16,6 @@
 #
 
 class TrackerLanguageRelation < ActiveRecord::Base
-  attr_accessible :tracker, :language, :bytes, :language_id
-
   belongs_to :tracker
   belongs_to :language
 

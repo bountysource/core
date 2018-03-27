@@ -15,8 +15,6 @@
 #
 
 class IssueRankCache < ActiveRecord::Base
-  attr_accessible :issue_id, :person_id, :rank
-
   validates :issue_id, presence: true
   validates :person_id, presence: true, uniqueness: { scope: :issue_id}
   validates :rank, presence: true

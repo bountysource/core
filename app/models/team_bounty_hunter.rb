@@ -11,9 +11,6 @@
 #
 
 class TeamBountyHunter < ActiveRecord::Base
-
-  attr_accessible :person, :team, :opted_out_at
-
   belongs_to :person
   belongs_to :team
 

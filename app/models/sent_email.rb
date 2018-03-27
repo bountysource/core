@@ -11,8 +11,6 @@
 #
 
 class SentEmail < ActiveRecord::Base
-  attr_accessible :person, :template, :options
-
   belongs_to :person
 
   serialize :options

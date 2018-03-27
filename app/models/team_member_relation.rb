@@ -27,9 +27,6 @@
 #
 
 class TeamMemberRelation < ActiveRecord::Base
-
-  attr_accessible :admin, :public, :developer, :person, :team, :inviter, :budget, :balance, :linked_account, :owner, :member
-
   belongs_to :team
   belongs_to :person
   belongs_to :inviter, class_name: 'Person', foreign_key: :invited_by_person_id

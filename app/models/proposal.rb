@@ -25,7 +25,6 @@
 class Proposal < ActiveRecord::Base
   include AASM
 
-  attr_accessible :bio, :estimated_work, :completed_by, :amount, :request_for_proposal, :person, :team_notes
   validates :request_for_proposal, presence: true
   validates :person, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0 }

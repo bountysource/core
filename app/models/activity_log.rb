@@ -16,8 +16,6 @@
 #
 
 class ActivityLog < ActiveRecord::Base
-  attr_accessible :issue, :tracker, :person, :name, :lurker
-
   validates :tracker_id, presence: true
   validates :name, presence: true
 
@@ -42,7 +40,7 @@ class ActivityLog < ActiveRecord::Base
     person = Person.find_by_id(options[:person_id])
     tracker = Tracker.find_by_id(options[:tracker_id])
     issue = Issue.find_by_id(options[:issue_id])
-    
+
     #for authenticated users, save in ActivityLog table
     if person
       ActivityLog.create!(

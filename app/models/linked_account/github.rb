@@ -43,8 +43,6 @@ class LinkedAccount::Github < LinkedAccount::Base
 
   has_one :team, foreign_key: :linked_account_id
 
-  attr_accessible :deleted_at
-
   validates :uid, uniqueness: true, on: :create
 
   class GithubAccountLinkError < Exception ; end

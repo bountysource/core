@@ -14,8 +14,6 @@
 #
 
 class FundraiserTrackerRelation < ActiveRecord::Base
-  attr_accessible :tracker, :fundraiser
-
   belongs_to :fundraiser
   belongs_to :tracker
 

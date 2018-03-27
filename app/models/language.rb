@@ -14,9 +14,6 @@
 #
 
 class Language < ActiveRecord::Base
-
-  attr_accessible :name, :search_weight
-
   has_many :tracker_relations, class_name: "TrackerLanguageRelation"
   has_many :trackers, through: :tracker_relations
 

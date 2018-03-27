@@ -17,9 +17,6 @@
 #
 
 class Event < ActiveRecord::Base
-
-  attr_accessible :title, :subtitle, :url, :issue_ids
-
   validates :slug, presence: true, uniqueness: true
 
   def issues

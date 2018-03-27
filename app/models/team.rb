@@ -38,11 +38,6 @@
 #
 
 class Team < ActiveRecord::Base
-
-  attr_accessible :slug, :name, :url, :bio, :linked_account, :accepts_public_payins, :accepts_issue_suggestions, :can_email_stargazers,
-                  :support_level_sum, :support_level_count, :monthly_contributions_sum, :monthly_contributions_count, :previous_month_contributions_sum,
-                  :homepage_markdown, :new_issue_suggestion_markdown, :bounty_search_markdown, :resources_markdown
-
   has_paper_trail :only => [:slug, :name, :url, :bio, :homepage_markdown, :new_issue_suggestion_markdown, :bounty_search_markdown, :resources_markdown, :linked_account, :accepts_public_payins, :accepts_issue_suggestions, :can_email_stargazers, :cloudinary_id]
 
   has_cloudinary_image

@@ -15,6 +15,5 @@
 #
 
 class PaymentMethodTemporary < ActiveRecord::Base
-  attr_accessible :person, :paypal_token, :data
   belongs_to :person
 end

@@ -19,8 +19,6 @@ class IssueSuggestionReward < ActiveRecord::Base
     end
   end
 
-  attr_accessible :amount
-
   belongs_to :issue_suggestion
   belongs_to :person
 

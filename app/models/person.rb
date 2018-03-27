@@ -38,11 +38,6 @@
 #
 
 class Person < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :display_name, :email, :password, :password_confirmation, :github_account,
-                  :paypal_email, :paypal_email_confirmation, :account, :last_seen_at,
-                  :bio, :location, :public_email, :url, :company,
-                  :accepted_terms_at, :terms, :profile_completed, :shopping_cart_id, :suspended_at, :bounty_hunter
-
   # temporarily holds a raw access token... useful in controllers-and-views
   attr_accessor :current_access_token
 

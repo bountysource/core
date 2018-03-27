@@ -10,10 +10,6 @@
 #
 
 class Search < ActiveRecord::Base
-
-  # ATTRIBUTES
-  attr_accessible :person, :query, :params
-
   serialize :params
 
   # RELATIONSHIPS
@@ -56,7 +52,7 @@ class Search < ActiveRecord::Base
 
   def self.bounty_search(params)
     create(query: "bounty search", params: params)
-    
+
     page = params[:page] || 1
     per_page = params[:per_page].to_i || 50
     query = params[:search] || ""
@@ -94,7 +90,7 @@ class Search < ActiveRecord::Base
     params[:show_related_issues] = params[:show_related_issues].to_bool
     # save search record
     create(query: "team_issue_search", params: params)
-    
+
     # parse datetime parameter
     date_range = Search.parse_datetime(params[:created_at])
     activity_range = Search.parse_datetime(params[:last_event_created_at])
@@ -157,7 +153,7 @@ class Search < ActiveRecord::Base
   end
 
 protected
-  
+
   def self.parse_datetime(date_string)
     parsed_datetime = DateTime.strptime(date_string, "%m/%d/%Y") unless date_string.blank?
     if parsed_datetime.try(:<, DateTime.now)
@@ -183,11 +179,11 @@ protected
     # Filters out Trackers that have been merged.
     tracker_search = ThinkingSphinx.search(escaped_query, :indices => ['tracker_core'], select: '*, weight() + issue_count*10 + forks*10 + watchers*10 as custom_weight', order: 'bounty_total DESC, custom_weight DESC', without: { issue_count: 0 })
     self.class.reject_merged_trackers!(tracker_search)
- 
+
     # Filters out Issues whose Trackers have been merged.
     issue_search = ThinkingSphinx.search(escaped_query, :indices => ['issue_core'], select: '*, weight() + comment_count*25 as custom_weight', order: 'bounty_total DESC, custom_weight DESC')
     self.class.reject_merged_issues!(issue_search)
- 
+
     {
       trackers: tracker_search,
       trackers_total: tracker_search.total_entries,

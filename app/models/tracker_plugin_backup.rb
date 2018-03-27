@@ -16,9 +16,6 @@
 #
 
 class TrackerPluginBackup < ActiveRecord::Base
-
-  attr_accessible :issue, :plugin, :raw
-
   belongs_to :plugin, class_name: "TrackerPlugin", foreign_key: :tracker_plugin_id
   belongs_to :issue
   has_one :tracker, through: :issue

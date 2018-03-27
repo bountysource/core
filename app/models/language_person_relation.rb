@@ -17,8 +17,6 @@
 #
 
 class LanguagePersonRelation < ActiveRecord::Base
-  attr_accessible :language, :person, :active
-
   belongs_to :language
   belongs_to :person
 

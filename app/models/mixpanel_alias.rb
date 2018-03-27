@@ -18,8 +18,6 @@ class MixpanelAlias < ActiveRecord::Base
 
   class AlreadyClaimed < StandardError ; end
 
-  attr_accessible :person_id, :distinct_id
-
   def self.claim(person_id, distinct_id)
     quoted = {
       person_id: MixpanelAlias.connection.quote(person_id),

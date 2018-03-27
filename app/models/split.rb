@@ -32,9 +32,6 @@
 # most one Transaction.
 
 class Split < ActiveRecord::Base
-
-  attr_accessible :amount, :status, :account, :currency, :item
-
   belongs_to  :account
   belongs_to  :transaction
   belongs_to  :item,   polymorphic: true

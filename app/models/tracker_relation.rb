@@ -16,8 +16,6 @@
 #
 
 class TrackerRelation < ActiveRecord::Base
-  attr_accessible :tracker, :linked_account, :tracker_id, :linked_account_id
-
   belongs_to  :tracker
   belongs_to  :linked_account, class_name: 'LinkedAccount::Base'
   has_one     :person, through: :linked_account

@@ -14,5 +14,4 @@
 #
 
 class MergedModel < ActiveRecord::Base
-  attr_accessible :good_id, :bad_id, :bad_type
 end

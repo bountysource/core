@@ -30,11 +30,6 @@
 #
 
 class TrackerPlugin < ActiveRecord::Base
-
-  attr_accessible :tracker, :person, :modify_title, :modify_body, :add_label, :label_name, :label_color,
-                  :bounty_available_msg, :bounties_accepted_msg, :bounty_claimed_msg,
-                  :locked_at, :last_error, :synced_at
-
   belongs_to :tracker
   has_many :issues, through: :tracker
   belongs_to :person

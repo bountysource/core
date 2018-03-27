@@ -15,8 +15,6 @@
 #
 
 class TrackerRankCache < ActiveRecord::Base
-  attr_accessible :tracker_id, :person_id, :rank
-
   validates :tracker_id, presence: true
   validates :person_id, presence: true, uniqueness: { scope: :tracker_id}
   validates :rank, presence: true

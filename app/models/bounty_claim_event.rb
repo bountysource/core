@@ -17,8 +17,6 @@
 #
 
 class BountyClaimEvent < ActiveRecord::Base
-  attr_accessible :bounty_claim, :person, :description
-
   validates :bounty_claim, presence: true
 
   belongs_to :bounty_claim

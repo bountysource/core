@@ -61,8 +61,6 @@
 #
 
 class Mantis::Issue < ::Issue
-  attr_accessible :state, :number, :severity, :priority
-
   belongs_to :tracker, class_name: "Mantis::Tracker", foreign_key: :tracker_id
 
   def remote_sync_if_necessary(options={})
@@ -113,7 +111,7 @@ class Mantis::Issue < ::Issue
     response = response.with_indifferent_access
 
     updates = update_from_rest_and_soap(response)
-    
+
     updates[:remote_created_at] = response["date_submitted"]
     updates[:remote_updated_at] = response["last_updated"]
 
@@ -195,7 +193,7 @@ class Mantis::Issue < ::Issue
       Time.strptime(txt, '%d-%m-%y %k:%M')
     else
       Time.now
-    end    
+    end
   end
 
   def self.can_add_bounty_from_state(state)

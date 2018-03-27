@@ -20,8 +20,6 @@
 #
 
 class BountyClaimResponse < ActiveRecord::Base
-  attr_accessible :value, :person, :bounty_claim, :description, :bounty_claim_id, :person_id
-
   has_owner
 
   belongs_to  :person

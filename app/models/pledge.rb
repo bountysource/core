@@ -24,10 +24,6 @@
 #
 
 class Pledge < ActiveRecord::Base
-
-  attr_accessible :amount, :person, :status, :reward, :reward_id, :survey_response, :anonymous, :fundraiser, :owner_id,
-    :owner_type, :fundraiser_id
-
   belongs_to :fundraiser
   belongs_to :person
   belongs_to :reward
