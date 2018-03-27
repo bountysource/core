@@ -75,32 +75,32 @@ class Mantis::Tracker < ::Tracker
 
     response = HTTParty.get(url + "csv_export.php").body
 
-    csv = CSV.parse(response, {headers: true})
+    csv = CSV.parse(response, {headers: true, :header_converters => :symbol})
 
     url_from_id = lambda { |id| url + "view.php?id=#{id.to_i}" }
-
-    issue_cache = ::Issue.where(url: csv.map { |row| url_from_id.call(row['Id']) } )
+    
+    issue_cache = ::Issue.where(url: csv.map { |row| url_from_id.call(row[:id]) } )
 
     puts issue_cache.map(&:url)
     csv.each do |row|
       puts row.inspect
-      issue_url = url_from_id.call(row['Id'])
+      issue_url = url_from_id.call(row[:id])
       issue = issue_cache.find { |i| i.url == issue_url } || self.issues.new(url: issue_url)
       puts issue.inspect
 
       issue.type = 'Mantis::Issue'
       issue.tracker = self
-      issue.number = row['Id'].to_i
-      issue.title = row['Summary']
-      issue.state = row['Status']
-      issue.can_add_bounty = Mantis::Issue.can_add_bounty_from_state(row['Status'])
-      issue.severity = row['Severity']
-      issue.priority = row['Priority']
+      issue.number = row[:id].to_i
+      issue.title = row[:summary]
+      issue.state = row[:status]
+      issue.can_add_bounty = Mantis::Issue.can_add_bounty_from_state(row[:status])
+      issue.severity = row[:severity]
+      issue.priority = row[:priority]
 
       # this comes back as just a date, not a date+time.. ugh.
-      created = Time.parse(row['Date Submitted'])
+      created = Time.parse(row[:date_submitted])
       issue.remote_created_at = created if !issue.remote_created_at || created > issue.remote_created_at
-      updated = Time.parse(row['Updated'])
+      updated = Time.parse(row[:updated])
       issue.remote_updated_at = updated if !issue.remote_updated_at || updated > issue.remote_updated_at
 
       puts "BEFORE SAVE"

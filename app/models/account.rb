@@ -81,6 +81,13 @@ class Account < ActiveRecord::Base
     0.10
   end
 
+  # NOTE: for some reason Account.where(id: params[:id]).includes(:splits => :transaction)
+  # was conflicting with default_scope and the associations weren't being loaded, so we
+  # use this method instead to be explicit.
+  def admin_splits
+    splits.includes(:transaction).limit(1000)
+  end
+
   # transfer money from one account to another
   def self.transfer!(options)
     raise ArgumentError, "Required: from, to, amount" unless ([:from, :to, :amount] - options.keys).empty?
