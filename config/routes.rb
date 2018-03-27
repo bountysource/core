@@ -29,7 +29,9 @@ Api::Application.routes.draw do
     get '/admin/(*path)', to: 'admin#home'
 
     # badge images... duplicated in API for legacy purposes
-    get '/badge/:action', to: 'badge#:action'
+    get '/badge/issue', to: 'badge#issue'
+    get '/badge/tracker', to: 'badge#tracker'
+    get '/badge/team', to: 'badge#team'
 
     # render angular app (fundraisers and issues get special SEO treatment)
     get '/fundraisers/:id', to: 'bounty_source#fundraiser'
@@ -43,7 +45,9 @@ Api::Application.routes.draw do
     get '(*path)', to: 'bounty_source#redirect_to_https', constraints: lambda_api_force_ssl
 
     # badge images... duplicated in WWW for legacy purposes
-    get '/badge/:action', to: 'badge#:action'
+    get '/badge/issue', to: 'badge#issue'
+    get '/badge/tracker', to: 'badge#tracker'
+    get '/badge/team', to: 'badge#team'
 
     # track user generated events (compatible with mixpanel API)
     match '/track', to: 'track#track', via: :get
