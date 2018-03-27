@@ -185,7 +185,7 @@ class Person < ActiveRecord::Base
   end
 
   after_save do
-    self.send_email(:account_created) if changes["email"] && changes["email"].first.nil?
+    self.send_email(:account_created) if saved_change_to_email? && email_before_last_save.nil?
   end
 
   # NOTE: opting into a team implies becoming global bounty hunter
