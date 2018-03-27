@@ -21,18 +21,18 @@ describe Api::V2::RequestForProposalsController do
 
   describe 'show' do
     describe 'authorization' do
-      let(:action) { get(:show, params) }
+      let(:action) { get(:show, params: params) }
       it_behaves_like 'a request that requires a request for proposal'
     end
 
     it 'should render request for proposal' do
-      get(:show, params)
+      get(:show, params: params)
       expect(response.status).to eq(200)
     end
 
     it 'should require issue' do
       Issue.stub(:find_by!).and_raise(ActiveRecord::RecordNotFound)
-      get(:show, params)
+      get(:show, params: params)
       expect(response.status).to eq(404)
     end
 
@@ -40,14 +40,14 @@ describe Api::V2::RequestForProposalsController do
       issue.stub(:request_for_proposal).and_return(nil)
       expect(issue).to receive(:request_for_proposal).once
 
-      get(:show, params)
+      get(:show, params: params)
       expect(response.status).to eq(404)
     end
   end
 
   describe 'create' do
     describe 'authorization' do
-      let(:action) { post(:create, params) }
+      let(:action) { post(:create, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request authorized by require_team_admin_or_developer'
       it_behaves_like 'a request that converts currency'
@@ -55,14 +55,14 @@ describe Api::V2::RequestForProposalsController do
 
     it 'should create' do
       expect(issue).to receive(:create_request_for_proposal!).once
-      post(:create, params)
+      post(:create, params: params)
       expect(response.status).to eq(201)
     end
   end
 
   describe 'update' do
     describe 'authorization' do
-      let(:action) { patch(:update, params) }
+      let(:action) { patch(:update, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request that requires a request for proposal'
       it_behaves_like 'a request authorized by require_team_admin_or_developer'
@@ -74,7 +74,7 @@ describe Api::V2::RequestForProposalsController do
       budget = "123456789"
       expect(request_for_proposal).to receive(:budget=).with(budget)
 
-      patch(:update, params.merge(budget: budget))
+      patch(:update, params: params.merge(budget: budget))
       expect(response.status).to eq(200)
     end
 
@@ -82,7 +82,7 @@ describe Api::V2::RequestForProposalsController do
       due_date = "2014-06-05T10:34:14-07:00"
       expect(request_for_proposal).to receive(:due_date=).with(due_date)
 
-      patch(:update, params.merge(due_date: due_date))
+      patch(:update, params: params.merge(due_date: due_date))
       expect(response.status).to eq(200)
     end
 
@@ -90,20 +90,20 @@ describe Api::V2::RequestForProposalsController do
       abstract = "I am the greatest man that every lived"
       expect(request_for_proposal).to receive(:abstract=).with(abstract)
 
-      patch(:update, params.merge(abstract: abstract))
+      patch(:update, params: params.merge(abstract: abstract))
       expect(response.status).to eq(200)
     end
 
     it 'should update' do
       expect(request_for_proposal).to receive(:save!).once
-      patch(:update, params)
+      patch(:update, params: params)
       expect(response.status).to eq(200)
     end
   end
 
   describe 'destroy' do
     describe 'authorization' do
-      let(:action) { delete(:destroy, params) }
+      let(:action) { delete(:destroy, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request that requires a request for proposal'
       it_behaves_like 'a request authorized by require_team_admin_or_developer'
@@ -111,7 +111,7 @@ describe Api::V2::RequestForProposalsController do
 
     it 'should destroy request for proposal' do
       expect(request_for_proposal).to receive(:destroy!).once
-      delete(:destroy, params)
+      delete(:destroy, params: params)
       expect(response.status).to eq(204)
     end
   end

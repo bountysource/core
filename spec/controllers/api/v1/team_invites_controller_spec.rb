@@ -16,30 +16,30 @@ describe Api::V1::TeamInvitesController do
   end
 
   it "should require auth" do
-    post :accept, params.merge(access_token: nil)
+    post :accept, params: params.merge(access_token: nil)
     assert_response :unauthorized
   end
 
   it "should require token" do
-    post :accept, params.merge(token: nil)
+    post :accept, params: params.merge(token: nil)
     assert_response :forbidden
   end
 
   it "should require valid token" do
-    post :accept, params.merge(token: "not a valid token hahahahahahaahahhahahhahahhahhahah")
+    post :accept, params: params.merge(token: "not a valid token hahahahahahaahahhahahhahahhahhahah")
     assert_response :forbidden
   end
 
   it "should add person to team" do
     expect {
-      post :accept, params
+      post :accept, params: params
       assert_response :ok
     }.to change(team.members, :count).by 1
   end
 
   it "should delete the invite after consumption" do
     expect {
-      post :accept, params
+      post :accept, params: params
       assert_response :ok
     }.to change(TeamInvite, :count).by -1
   end
@@ -51,14 +51,14 @@ describe Api::V1::TeamInvitesController do
 
     dup_params = {
       access_token: person.create_access_token,
-      id: team.to_param, 
+      id: team.to_param,
       admin: true,
       developer: true,
       public: false,
       email: "robert.paulson@gmail.com"
     }
     expect {
-      post :create, dup_params
+      post :create, params: dup_params
       assert_response :unprocessable_entity
     }.not_to change(TeamInvite, :count)
   end
@@ -70,7 +70,7 @@ describe Api::V1::TeamInvitesController do
       Team.stub(:find_by).and_return(team)
 
       expect {
-        post :create, params
+        post :create, params: params
         assert_response :unauthorized
       }.not_to change(TeamInvite, :count)
     end
@@ -83,7 +83,7 @@ describe Api::V1::TeamInvitesController do
       TeamInvite.any_instance.stub_chain(:delay, :send_email).and_return(true)
 
       expect {
-        post :create, params
+        post :create, params: params
         assert_response :success
       }.to change(TeamInvite, :count)
     end
@@ -93,7 +93,7 @@ describe Api::V1::TeamInvitesController do
     let(:invite) { create(:team_invite, team: team, admin: true, developer: true, public: false) }
 
     it "should add person to team with permissions" do
-      post :accept, params
+      post :accept, params: params
       team.reload
       relation = team.relation_for_owner(person)
       relation.should be_admin

@@ -34,7 +34,7 @@ describe Api::V2::ProposalsController do
 
   describe 'create' do
     describe 'authorization' do
-      let(:action) { post(:create, params) }
+      let(:action) { post(:create, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request that requires a request for proposal'
       it_behaves_like 'a request that converts currency'
@@ -42,20 +42,20 @@ describe Api::V2::ProposalsController do
 
     it 'should create proposal' do
       request_for_proposal.stub_chain(:proposals, :create!).and_return(proposal)
-      post(:create, params)
+      post(:create, params: params)
       expect(response.status).to eq(201)
     end
 
     it 'should not create a proposal if the RFP is pending_fullfillment' do
       request_for_proposal.stub_chain(:proposals, :create!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
-      post(:create, params)
+      post(:create, params: params)
       expect(response.status).to eq(422)
     end
   end
 
   describe 'destroy' do
     describe 'authorization' do
-      let(:action) { delete(:destroy, params) }
+      let(:action) { delete(:destroy, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request that requires a request for proposal'
       it_behaves_like 'a request that requires a proposal'
@@ -68,20 +68,20 @@ describe Api::V2::ProposalsController do
       ar_proposal.stub(:destroy!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
       ar_proposal.stub(:person).and_return(person)
 
-      delete(:destroy, params)
+      delete(:destroy, params: params)
       expect(response.status).to eq(422)
     end
 
     it 'should destroy proposal' do
       expect(proposal).to receive(:destroy!).once
-      delete(:destroy, params)
+      delete(:destroy, params: params)
       expect(response.status).to eq(204)
     end
   end
 
   describe 'index' do
     describe 'authorization' do
-      let(:action) { get(:index, params) }
+      let(:action) { get(:index, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request that requires a request for proposal'
       it_behaves_like 'a request authorized by require_team_admin_or_developer'
@@ -89,7 +89,7 @@ describe Api::V2::ProposalsController do
 
     it 'should render proposals' do
       expect(request_for_proposal).to receive(:proposals).once
-      get(:index, params)
+      get(:index, params: params)
       expect(response.status).to eq(200)
     end
   end
@@ -115,7 +115,7 @@ describe Api::V2::ProposalsController do
   end
 
   describe 'accept' do
-    let(:action) { post(:accept, params) }
+    let(:action) { post(:accept, params: params) }
 
     before do
       proposal.stub(:begin_appointment!)
@@ -146,13 +146,13 @@ describe Api::V2::ProposalsController do
     it 'should set team notes' do
       notes = 'You are a god among men, just like corytheboyd <3'
       expect(proposal).to receive(:set_team_notes!).with(notes).once
-      post(:accept, params.merge(team_notes: notes))
+      post(:accept, params: params.merge(team_notes: notes))
       expect(response.status).to eq(200)
     end
   end
 
   describe 'reject' do
-    let(:action) { post(:reject, params) }
+    let(:action) { post(:reject, params: params) }
 
     before do
       proposal.stub(:reject!)
@@ -185,7 +185,7 @@ describe Api::V2::ProposalsController do
     let(:proposal_id) { 1 }
 
     describe 'authorization' do
-      let(:action) { post(:reject, params) }
+      let(:action) { post(:reject, params: params) }
       it_behaves_like 'a request that requires auth'
     end
 
@@ -197,12 +197,12 @@ describe Api::V2::ProposalsController do
 
     it 'should render current users proposal' do
       expect(request_for_proposal.proposals).to receive(:find_by!).with(person: person).once
-      get(:show, params.merge(id: 'mine'))
+      get(:show, params: params.merge(id: 'mine'))
       expect(response.status).to eq(200)
     end
 
     it 'should not render proposal that does not belong to current user' do
-      get(:show, params.merge(id: proposal_id))
+      get(:show, params: params.merge(id: proposal_id))
       expect(response.status).to eq(401)
     end
   end

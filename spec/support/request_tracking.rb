@@ -18,14 +18,14 @@ shared_examples_for "request tracking" do
       it "the access_token finds a person" do
         Person.stub(:find_by_access_token).with(access_token).and_return(person)
         expect(NewRelic::Agent).to receive(:add_custom_attributes).with(person_id: person.id).once
-        get :index, access_token: access_token
+        get :index, params: { access_token: access_token }
         expect(response).to be_success
       end
 
       it "the access_token doesn't find a person" do
         Person.stub(:find_by).with(access_token: access_token).and_return(nil)
         expect(NewRelic::Agent).to receive(:add_custom_attributes).with(person_id: nil).once
-        get :index, access_token: access_token
+        get :index, params: { access_token: access_token }
       end
 
       it "the access_token isn't present" do
@@ -36,14 +36,14 @@ shared_examples_for "request tracking" do
 
     it "should load the page in the token and person success case" do
       Person.stub(:find_by_access_token).with(access_token).and_return(person)
-      get :index, access_token: access_token
+      get :index, params: { access_token: access_token }
       expect(response).to be_success
     end
 
     #TODO this should raise if there is no person - Julian
     it "should not raise if there is no person" do
       Person.stub(:find_by).with(access_token: access_token).and_return(nil)
-      get :index, access_token: access_token
+      get :index, params: { access_token: access_token }
       expect(response).to be_success
     end
 

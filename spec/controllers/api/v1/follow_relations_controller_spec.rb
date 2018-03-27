@@ -15,20 +15,20 @@ describe Api::V1::FollowRelationsController do
 
   it "should follow the tracker" do
     lambda {
-      put :follow, params
+      put :follow, params: params
       assert_response :ok
     }.should change(person.follow_relations, :count).by 1
   end
 
   it "should be idempotent" do
     lambda {
-      10.times { put :follow, params }
+      10.times { put :follow, params: params }
     }.should change(person.follow_relations, :count).by 1
   end
 
   it "should create a tracker-follow activity-log" do
     expect {
-      put :follow, params
+      put :follow, params: params
     }.to change(ActivityLog, :count).by 1
   end
 
@@ -37,7 +37,7 @@ describe Api::V1::FollowRelationsController do
 
     it "should unfollow the tracker" do
       lambda {
-        delete :unfollow, params
+        delete :unfollow, params: params
         assert_response :ok
         follow_relation.reload
       }.should change(follow_relation, :active).to false
@@ -45,14 +45,14 @@ describe Api::V1::FollowRelationsController do
 
     it "should not destroy the follow_relation on unfollow" do
       lambda {
-        delete :unfollow, params
+        delete :unfollow, params: params
         assert_response :ok
       }.should_not change(person.follow_relations, :count)
     end
 
     it "should create a tracker unfollow activity log" do
       expect {
-        put :follow, params
+        put :follow, params: params
       }.to change(ActivityLog, :count).by 1
     end
   end

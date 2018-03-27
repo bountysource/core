@@ -19,14 +19,14 @@ describe CoinbaseController do
       end
 
       it 'should redirect to frontend receipt page' do
-        get :success, shopping_cart_id: cart.id
+        get :success, params: { shopping_cart_id: cart.id }
         response.should redirect_to www_receipt_url
       end
     end
 
     describe 'order not created' do
       it 'should redirect to frontend orders index page' do
-        get :success, shopping_cart_id: cart.id
+        get :success, params: { shopping_cart_id: cart.id }
         response.should redirect_to Api::Application.config.www_receipts_url
       end
     end

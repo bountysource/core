@@ -37,7 +37,7 @@ describe Api::V1::TrackerPluginsController do
         person.github_account = nil
 
         params.delete :linked_account_id
-        post :create, params
+        post :create, params: params
         assert_response :bad_request
 
         linked_account.reload
@@ -47,7 +47,7 @@ describe Api::V1::TrackerPluginsController do
     it "should require tracker" do
       lambda {
         params.delete :tracker_id
-        post :create, params
+        post :create, params: params
         assert_response :not_found
 
         linked_account.reload
@@ -56,7 +56,7 @@ describe Api::V1::TrackerPluginsController do
 
     it "should create a tracker_plugin" do
       lambda {
-        post :create, params
+        post :create, params: params
         assert_response :created
 
         linked_account.reload
@@ -68,7 +68,7 @@ describe Api::V1::TrackerPluginsController do
         LinkedAccount::Github.any_instance.should_receive(:can_modify_repository?).and_return(false)
 
         lambda {
-          post :create, params
+          post :create, params: params
           assert_response :failed_dependency
           linked_account.reload
         }.should_not change(person.tracker_plugins, :count)
@@ -86,19 +86,19 @@ describe Api::V1::TrackerPluginsController do
     end
 
     it "should render index" do
-      get :index, params
+      get :index, params: params
       assert_response :ok
     end
 
     it "should render show" do
-      get :show, params
+      get :show, params: params
       assert_response :ok
       response_data['id'].should == tracker_plugin.id
     end
 
     it "should update modify_title" do
       lambda {
-        put :update, params.merge(modify_title: !tracker_plugin.modify_title?)
+        put :update, params: params.merge(modify_title: !tracker_plugin.modify_title?)
         assert_response :ok
 
         tracker_plugin.reload
@@ -107,7 +107,7 @@ describe Api::V1::TrackerPluginsController do
 
     it "should update add_label" do
       lambda {
-        put :update, params.merge(add_label: !tracker_plugin.add_label)
+        put :update, params: params.merge(add_label: !tracker_plugin.add_label)
         assert_response :ok
 
         tracker_plugin.reload
@@ -116,7 +116,7 @@ describe Api::V1::TrackerPluginsController do
 
     it "should destroy plugin" do
       lambda {
-        delete :destroy, params
+        delete :destroy, params: params
         assert_response :no_content
       }.should change(person.tracker_plugins, :count).by -1
     end
@@ -132,7 +132,7 @@ describe Api::V1::TrackerPluginsController do
 
       it "should not update add bounty to title" do
         lambda {
-          put :update, params.merge(add_label: !tracker_plugin.modify_title)
+          put :update, params: params.merge(add_label: !tracker_plugin.modify_title)
           assert_response :not_found
           tracker_plugin.reload
         }.should_not change(tracker_plugin, :modify_title)
@@ -140,7 +140,7 @@ describe Api::V1::TrackerPluginsController do
 
       it "should not update add label" do
         lambda {
-          put :update, params.merge(add_label: !tracker_plugin.add_label)
+          put :update, params: params.merge(add_label: !tracker_plugin.add_label)
           assert_response :not_found
           tracker_plugin.reload
         }.should_not change(tracker_plugin, :add_label)
@@ -148,7 +148,7 @@ describe Api::V1::TrackerPluginsController do
 
       it "should not delete" do
         lambda {
-          delete :destroy, params
+          delete :destroy, params: params
           assert_response :not_found
         }.should_not change(person.tracker_plugins, :count)
       end

@@ -13,7 +13,7 @@ describe Api::V1::PledgesController do
   describe "require_pledge" do
     it "should return Pledge not found" do
       expect {
-        get 'show', params
+        get 'show', params: params
       }.to raise_error(ActionController::UrlGenerationError)
     end
   end
@@ -24,7 +24,7 @@ describe Api::V1::PledgesController do
     let(:pledge) { create(:pledge, fundraiser: fundraiser, reward: reward, person: person, amount: 90) }
 
     before do
-      post :update, params.merge(id: pledge.id, survey_response: "Ship it to the moon")
+      post :update, params: params.merge(id: pledge.id, survey_response: "Ship it to the moon")
       @response_data = JSON.parse(response.body).with_indifferent_access
     end
 

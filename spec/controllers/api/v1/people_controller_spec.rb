@@ -13,7 +13,7 @@ describe Api::V1::PeopleController do
     paypal_email = 'ihazpaypal@gmail.com'
 
     lambda {
-      put :update, params.merge(paypal_email: paypal_email)
+      put :update, params: params.merge(paypal_email: paypal_email)
       assert_response :ok
       person.reload
     }.should change(person, :paypal_email).to paypal_email
@@ -25,7 +25,7 @@ describe Api::V1::PeopleController do
     let!(:params) { { email: person.email,
                       password: 'abcABC123', password_confirmation: 'abcABC123' } }
     let!(:response_data) {
-      post 'login', params
+      post 'login', params: params
       JSON.parse(response.body)
     }
 
@@ -49,7 +49,7 @@ describe Api::V1::PeopleController do
 
     # No longer routed to
     xit "should show tracker plugins" do
-      get :tracker_plugins, params
+      get :tracker_plugins, params: params
       assert_response :ok
     end
   end
@@ -64,7 +64,7 @@ describe Api::V1::PeopleController do
 
     # no longer routed to
     xit "should show projects through tracker relations" do
-      get :project_relations, params
+      get :project_relations, params: params
       assert_response :ok
     end
   end
@@ -81,7 +81,7 @@ describe Api::V1::PeopleController do
     end
 
     it "should add languages" do
-      post :set_languages, params.merge(language_ids: [language1.id, language2.id].join(','))
+      post :set_languages, params: params.merge(language_ids: [language1.id, language2.id].join(','))
       assert_response :ok
 
       person.reload
@@ -94,7 +94,7 @@ describe Api::V1::PeopleController do
       person.languages.should include language1
       person.languages.should include language2
 
-      delete :set_languages, params.merge(language_ids: language2.id)
+      delete :set_languages, params: params.merge(language_ids: language2.id)
       assert_response :ok
 
       person.reload

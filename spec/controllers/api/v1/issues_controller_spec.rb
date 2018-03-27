@@ -10,7 +10,7 @@ describe Api::V1::IssuesController do
   describe '#index' do
     describe 'valid repo' do
       before do
-        get :index, tracker_id: tracker.to_param
+        get :index, params: { tracker_id: tracker.to_param }
       end
 
       it "should render result" do
@@ -29,7 +29,7 @@ describe Api::V1::IssuesController do
     describe 'valid repo' do
       describe 'generic issue' do
         before do
-          get :show, id: issue.to_param
+          get :show, params: { id: issue.to_param }
         end
 
         it "should render result" do
@@ -48,7 +48,7 @@ describe Api::V1::IssuesController do
 
         it "should create an activity log" do
           expect {
-            get :show, {id: issue.to_param, access_token: person.create_access_token }
+            get :show, params: { id: issue.to_param, access_token: person.create_access_token }
           }.to change(ActivityLog, :count).by 1
         end
       end
@@ -58,7 +58,7 @@ describe Api::V1::IssuesController do
 
         before do
           Github::Issue.any_instance.should_receive(:remote_sync_if_necessary).and_return(true)
-          get :show, id: issue.to_param
+          get :show, params: { id: issue.to_param }
         end
 
         it "should render result" do
@@ -78,7 +78,7 @@ describe Api::V1::IssuesController do
 
         before do
           Trac::Issue.any_instance.should_receive(:remote_sync_if_necessary).and_return(true)
-          get :show, id: issue.to_param
+          get :show, params: { id: issue.to_param }
         end
 
         it "should render result" do
@@ -95,7 +95,7 @@ describe Api::V1::IssuesController do
 
     describe 'invalid issue' do
       before do
-        get :show, id: 'badness'
+        get :show, params: { id: 'badness' }
       end
 
       it "should render error" do
@@ -116,7 +116,7 @@ describe Api::V1::IssuesController do
     before { good_model.merge! bad_model }
 
     it 'should render good_model when bad_model requested' do
-      get :show, id: bad_model.id
+      get :show, params: { id: bad_model.id }
       result['id'].should be == good_model.id
     end
 
