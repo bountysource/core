@@ -2,7 +2,7 @@ class SaltController < ApplicationController
 
   # http_basic_authenticate_with name: "preview", password: "", only: :render_html
 
-  before_filter :authenticate_full_site_password, only: [:render_html]
+  before_action :authenticate_full_site_password, only: [:render_html]
 
   def render_html
     if Rails.env.development? && request.fullpath =~ /.html$/

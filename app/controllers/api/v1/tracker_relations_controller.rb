@@ -1,7 +1,7 @@
 class Api::V1::TrackerRelationsController < ApplicationController
 
-  before_filter :require_auth
-  before_filter :require_tracker_relation, only: [:show]
+  before_action :require_auth
+  before_action :require_tracker_relation, only: [:show]
 
   def index
     @tracker_relations = @person.tracker_relations

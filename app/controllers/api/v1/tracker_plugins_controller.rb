@@ -1,11 +1,11 @@
 class Api::V1::TrackerPluginsController < ApplicationController
 
-  before_filter :require_auth
+  before_action :require_auth
 
-  before_filter require_tracker(:tracker_id), only: [:create, :show, :update, :destroy]
+  before_action require_tracker(:tracker_id), only: [:create, :show, :update, :destroy]
 
-  before_filter :require_tracker_plugin,  only: [:show, :update, :destroy]
-  before_filter :require_github_account, only: [:create]
+  before_action :require_tracker_plugin,  only: [:show, :update, :destroy]
+  before_action :require_github_account, only: [:create]
 
   def index
     @tracker_plugins = @person.tracker_plugins.includes(:tracker)

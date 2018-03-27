@@ -1,8 +1,8 @@
 class Api::V1::RewardsController < ApplicationController
 
-  before_filter :require_fundraiser
-  before_filter :require_fundraiser_ownership,  except: [:show, :index]
-  before_filter :require_reward,                except: [:index, :create]
+  before_action :require_fundraiser
+  before_action :require_fundraiser_ownership,  except: [:show, :index]
+  before_action :require_reward,                except: [:index, :create]
 
   def index
     @rewards = @fundraiser.rewards.order('rewards.amount asc')

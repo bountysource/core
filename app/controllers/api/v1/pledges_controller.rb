@@ -1,9 +1,9 @@
 class Api::V1::PledgesController < ApplicationController
   respond_to :json
 
-  before_filter :require_auth,        only: [:update, :show]
-  before_filter :require_pledge,      only: [:show, :update]
-  before_filter :require_fundraiser,  only: [:index]
+  before_action :require_auth,        only: [:update, :show]
+  before_action :require_pledge,      only: [:show, :update]
+  before_action :require_fundraiser,  only: [:index]
 
   def index
     @pledges = @fundraiser.pledges.includes(:owner, :person, :reward).order('amount desc')

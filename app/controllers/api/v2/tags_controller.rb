@@ -2,7 +2,7 @@ class Api::V2::TagsController < Api::BaseController
 
   include Api::V2::PaginationHelper
 
-  before_filter :require_auth, only: [ :create ]
+  before_action :require_auth, only: [ :create ]
 
   def index
 

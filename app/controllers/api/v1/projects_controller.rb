@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-  before_filter :require_project, only: [:issues]
+  before_action :require_project, only: [:issues]
 
   def issues
     if @project.is_a?(Github::Repository)

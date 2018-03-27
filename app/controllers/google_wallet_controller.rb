@@ -1,6 +1,6 @@
 class GoogleWalletController < ApplicationController
 
-  before_filter :require_auth, only: [:success]
+  before_action :require_auth, only: [:success]
 
   # POST back from Google for Wallet transaction
   def verify

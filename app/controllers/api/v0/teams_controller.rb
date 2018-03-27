@@ -1,6 +1,6 @@
 class Api::V0::TeamsController < Api::V0::BaseController
 
-  before_filter :require_team, except: [:index, :create]
+  before_action :require_team, except: [:index, :create]
 
   def index
     @teams = Team.select("teams.*,

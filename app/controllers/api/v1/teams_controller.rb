@@ -1,13 +1,13 @@
 class Api::V1::TeamsController < ApplicationController
 
-  before_filter require_tracker(:tracker_id), only: [:add_tracker, :remove_tracker]
+  before_action require_tracker(:tracker_id), only: [:add_tracker, :remove_tracker]
 
-  before_filter :require_auth, except: [:show, :index, :all_members, :trackers, :activity, :bounties, :issues]
-  before_filter :require_team, except: [:create, :index]
-  before_filter :require_member, only: [:update_member, :remove_member]
+  before_action :require_auth, except: [:show, :index, :all_members, :trackers, :activity, :bounties, :issues]
+  before_action :require_team, except: [:create, :index]
+  before_action :require_member, only: [:update_member, :remove_member]
 
-  before_filter :require_modify_team_members, only: [:add_member, :update_member, :remove_member]
-  before_filter :require_modify_team_projects, only: [:add_tracker, :remove_tracker]
+  before_action :require_modify_team_members, only: [:add_member, :update_member, :remove_member]
+  before_action :require_modify_team_projects, only: [:add_tracker, :remove_tracker]
 
   def show
   end

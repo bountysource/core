@@ -1,6 +1,6 @@
 class Api::V0::Github::RepositoriesController < Api::V0::BaseController
 
-  before_filter :require_tracker
+  before_action :require_tracker
 
   def index
     @trackers = case params[:filter]

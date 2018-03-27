@@ -1,11 +1,11 @@
 class Api::V1::SolutionsController < ApplicationController
-  before_filter :require_auth, except: [:index]
-  before_filter require_issue(:issue_id)
-  before_filter :require_solution, except: [:create, :index]
+  before_action :require_auth, except: [:index]
+  before_action require_issue(:issue_id)
+  before_action :require_solution, except: [:create, :index]
 
-  after_filter log_activity(Issue::Event::START_WORK), only: [:create]
-  after_filter log_activity(Issue::Event::STOP_WORK), only: [:stop_work]
-  after_filter log_activity(Issue::Event::RESTART_WORK), only: [:start_work]
+  after_action log_activity(Issue::Event::START_WORK), only: [:create]
+  after_action log_activity(Issue::Event::STOP_WORK), only: [:stop_work]
+  after_action log_activity(Issue::Event::RESTART_WORK), only: [:start_work]
 
   def create
     # parse completion_date to turn it into a date time object

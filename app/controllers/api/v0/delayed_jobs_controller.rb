@@ -1,6 +1,6 @@
 class Api::V0::DelayedJobsController < Api::V0::BaseController
 
-  before_filter :require_delayed_job, except: [:index, :info]
+  before_action :require_delayed_job, except: [:index, :info]
 
   def info
     if params[:group_stats]

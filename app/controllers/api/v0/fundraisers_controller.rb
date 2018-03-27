@@ -1,7 +1,7 @@
 class Api::V0::FundraisersController < Api::V0::BaseController
 
-  before_filter :require_fundraiser, except: [:recent, :recent_pledges, :index]
-  before_filter :require_tracker, only: [:add_tracker_relation, :remove_tracker_relation]
+  before_action :require_fundraiser, except: [:recent, :recent_pledges, :index]
+  before_action :require_tracker, only: [:add_tracker_relation, :remove_tracker_relation]
 
   def show
     render "api/v1/fundraisers/admin"

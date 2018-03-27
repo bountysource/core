@@ -1,6 +1,6 @@
 class Api::V0::BountiesController < Api::V0::BaseController
 
-  before_filter :require_bounty, only: [:show, :move, :refund, :acknowledge, :unacknowledge, :update]
+  before_action :require_bounty, only: [:show, :move, :refund, :acknowledge, :unacknowledge, :update]
 
   def show
     render "api/v0/bounties/show"

@@ -1,10 +1,10 @@
 class Api::V1::FollowRelationsController < ApplicationController
 
-  before_filter :require_auth
-  before_filter :require_item
+  before_action :require_auth
+  before_action :require_item
 
-  after_filter log_activity(Tracker::Event::FOLLOW), only: [:follow]
-  after_filter log_activity(Tracker::Event::UNFOLLOW), only: [:unfollow]
+  after_action log_activity(Tracker::Event::FOLLOW), only: [:follow]
+  after_action log_activity(Tracker::Event::UNFOLLOW), only: [:unfollow]
 
   def follow
     @follow_relation = FollowRelation.find_or_create_by(person: @person, item: @item)

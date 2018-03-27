@@ -1,7 +1,7 @@
 class Api::V1::AddressesController < ApplicationController
 
-  before_filter :require_auth
-  before_filter :require_mailing_address, except: [:create]
+  before_action :require_auth
+  before_action :require_mailing_address, except: [:create]
 
   def show
   end

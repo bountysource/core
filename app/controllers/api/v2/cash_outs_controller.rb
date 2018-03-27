@@ -2,9 +2,9 @@ class Api::V2::CashOutsController < Api::BaseController
 
   include Api::V2::CashOutsHelper
 
-  before_filter :require_auth
-  before_filter :parse_boolean_values
-  before_filter :require_cash_out, only: [:show, :update, :delete]
+  before_action :require_auth
+  before_action :parse_boolean_values
+  before_action :require_cash_out, only: [:show, :update, :delete]
 
   def index
     @collection = current_user.cash_outs.order('created_at desc')

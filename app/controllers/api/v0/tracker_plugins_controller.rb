@@ -1,6 +1,6 @@
 class Api::V0::TrackerPluginsController < Api::V0::BaseController
 
-  before_filter :require_tracker_plugin, except: [:index]
+  before_action :require_tracker_plugin, except: [:index]
 
   def index
     @tracker_plugins = TrackerPlugin.includes(:tracker, :person).order('locked_at asc, created_at desc')
