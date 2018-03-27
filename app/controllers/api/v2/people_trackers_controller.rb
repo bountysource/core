@@ -3,7 +3,7 @@ class Api::V2::PeopleTrackersController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::PeopleTrackersHelper
 
-  before_filter :parse_boolean_values
+  before_action :parse_boolean_values
 
   def index
     tracker_ids = ::TrackerRelation.where(linked_account_id: current_user.linked_accounts.pluck(:id)).pluck(:tracker_id)

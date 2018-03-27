@@ -1,8 +1,8 @@
 class Api::V1::TeamInvitesController < ApplicationController
-  before_filter :require_auth
-  before_filter :require_team
-  before_filter :require_invite, except: [:index, :create]
-  before_filter :require_admin_member, only: [:index, :create]
+  before_action :require_auth
+  before_action :require_team
+  before_action :require_invite, except: [:index, :create]
+  before_action :require_admin_member, only: [:index, :create]
 
   def index
     @invites = @team.invites

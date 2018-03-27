@@ -1,10 +1,10 @@
 class Api::V1::FundraisersController < ApplicationController
   respond_to :json
 
-  before_filter :require_auth,                  except: [:show, :embed, :cards, :all, :top_backers]
-  before_filter :require_fundraiser,            only:   [:update, :save, :show, :embed, :publish, :destroy, :info, :top_backers]
-  before_filter :require_fundraiser_ownership,  only:   [:update, :publish, :destroy, :info]
-  before_filter :required_published,            only:   [:show, :embed]
+  before_action :require_auth,                  except: [:show, :embed, :cards, :all, :top_backers]
+  before_action :require_fundraiser,            only:   [:update, :save, :show, :embed, :publish, :destroy, :info, :top_backers]
+  before_action :require_fundraiser_ownership,  only:   [:update, :publish, :destroy, :info]
+  before_action :required_published,            only:   [:show, :embed]
 
   def index
     @fundraisers = @person.fundraisers.order('published desc')

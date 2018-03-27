@@ -1,8 +1,8 @@
 class Api::V1::PeopleController < ApplicationController
   respond_to :json
 
-  before_filter :require_auth,    except: [:recent, :profile, :activity, :login, :create, :reset_password, :request_password_reset, :interesting, :count, :teams, :email_registered]
-  before_filter :require_profile, only:   [:profile, :activity, :teams]
+  before_action :require_auth,    except: [:recent, :profile, :activity, :login, :create, :reset_password, :request_password_reset, :interesting, :count, :teams, :email_registered]
+  before_action :require_profile, only:   [:profile, :activity, :teams]
 
   # show all of the authenticated user's info
   def show

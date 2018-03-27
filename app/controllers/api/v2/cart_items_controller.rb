@@ -2,7 +2,7 @@ class Api::V2::CartItemsController < Api::BaseController
 
   include Api::V2::CartItemsHelper
 
-  before_filter :require_cart
+  before_action :require_cart
 
   def create
     # If person logged in, make them the default item owner

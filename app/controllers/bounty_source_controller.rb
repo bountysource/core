@@ -1,7 +1,7 @@
 class BountySourceController < ApplicationController
-  before_filter :fetch_fundraiser,  only: [:fundraiser]
-  before_filter :fetch_issue,       only: [:issue]
-  before_filter :authenticate_full_site_password, only: [:home, :fundraiser, :issue]
+  before_action :fetch_fundraiser,  only: [:fundraiser]
+  before_action :fetch_issue,       only: [:issue]
+  before_action :authenticate_full_site_password, only: [:home, :fundraiser, :issue]
 
   helper IssueMetaTagsHelper
 

@@ -1,6 +1,6 @@
 class Api::V0::TrackersController < Api::V0::BaseController
 
-  before_filter :require_tracker, except: [:index]
+  before_action :require_tracker, except: [:index]
 
   def index
     @trackers = Tracker.order("watchers DESC").includes(:team)

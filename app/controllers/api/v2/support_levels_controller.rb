@@ -1,7 +1,7 @@
 class Api::V2::SupportLevelsController < Api::BaseController
 
-  before_filter :require_auth, except: [ :paypal_return, :global_summary ]
-  before_filter :require_support_level, only: [:show, :update, :destroy]
+  before_action :require_auth, except: [ :paypal_return, :global_summary ]
+  before_action :require_support_level, only: [:show, :update, :destroy]
 
   def show
     render 'api/v2/support_levels/show'

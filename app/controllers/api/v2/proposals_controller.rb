@@ -2,10 +2,10 @@ class Api::V2::ProposalsController < Api::BaseController
   include CurrencyConversion
   include RequestForProposalAuthorization
 
-  before_filter :require_auth
-  before_filter :require_team_admin_or_developer, except: [:create, :destroy, :show]
-  before_filter :require_proposal_owner, only: [:destroy]
-  before_filter :parse_options
+  before_action :require_auth
+  before_action :require_team_admin_or_developer, except: [:create, :destroy, :show]
+  before_action :require_proposal_owner, only: [:destroy]
+  before_action :parse_options
 
   # Proposal#accept! and Proposal#reject! raise this
   # exception on invalid state change.

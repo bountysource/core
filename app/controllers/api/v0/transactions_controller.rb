@@ -1,8 +1,8 @@
 class Api::V0::TransactionsController < Api::V0::BaseController
 
-  before_filter :require_transaction, only: [:show, :update, :destroy]
-  before_filter :find_start_date, only: [:index]
-  before_filter :find_end_date, only: [:index]
+  before_action :require_transaction, only: [:show, :update, :destroy]
+  before_action :find_start_date, only: [:index]
+  before_action :find_end_date, only: [:index]
 
   def index
     @transactions = Transaction.includes(:splits => [:account]).order('transactions.created_at desc')

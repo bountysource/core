@@ -1,6 +1,6 @@
 class BadgeController < ApplicationController
 
-  before_filter :set_content_type
+  before_action :set_content_type
 
   rescue_from BadgeFactory::ParseError, KeyError do |e|
     ::NewRelic::Agent.notice_error(e)

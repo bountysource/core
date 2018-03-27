@@ -1,6 +1,6 @@
 class Api::V0::TeamClaimsController < Api::V0::BaseController
 
-  before_filter :require_team_claim, only: [:update]
+  before_action :require_team_claim, only: [:update]
 
   def index
     @team_claims = TeamClaim.where(accepted_at: nil, rejected_at: nil).order(:created_at).includes(:team, :person => :github_account)

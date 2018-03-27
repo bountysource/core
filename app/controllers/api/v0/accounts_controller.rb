@@ -1,9 +1,9 @@
 class Api::V0::AccountsController < Api::V0::BaseController
 
-  before_filter :require_account,           only: [:show]
-  before_filter :require_receiving_account, only: [:transfer]
-  before_filter :require_losing_account,    only: [:transfer]
-  before_filter :require_payment_amount,    only: [:transfer]
+  before_action :require_account,           only: [:show]
+  before_action :require_receiving_account, only: [:transfer]
+  before_action :require_losing_account,    only: [:transfer]
+  before_action :require_payment_amount,    only: [:transfer]
 
   rescue_from Account::NotEnoughFunds do |e|
     render json: { error: "Insufficient account balance" }, status: :bad_request
