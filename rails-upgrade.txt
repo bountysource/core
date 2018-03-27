@@ -1,0 +1,7 @@
+- ensure full test suite passes
+- go through "rails upgrade" lists for major versions
+- test postgres time out after 10seconds
+- test delayed_job log levels
+- confirm secure headers are set on subdomains
+- strong params needed in controllers?
+- changed?

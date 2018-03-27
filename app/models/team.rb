@@ -723,7 +723,7 @@ class Team < ActiveRecord::Base
   end
 
   def bounty_hunter_count
-    Person.bounty_hunters(team: self).count
+    Person.bounty_hunters(team: self).count(:all)
   end
 
   def sync_stargazers(options={})
