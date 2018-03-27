@@ -1,0 +1,792 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.mantisbt.org/bugs/my_view_page.php
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:37:10 GMT
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      Set-Cookie:
+      - PHPSESSID=emrv8st3oksfl6lammimgvv9e5; path=/; domain=.mantisbt.org; secure;
+        HttpOnly
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Last-Modified:
+      - Wed, 21 Mar 2018 10:37:10 GMT
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Wed, 21 Mar 2018 10:37:10 GMT
+      X-Frame-Options:
+      - DENY
+      Content-Security-Policy:
+      - script-src https://cdnjs.cloudflare.com 'self' ajax.googleapis.com maxcdn.bootstrapcdn.com
+        cdnjs.cloudflare.com; img-src https://secure.gravatar.com/ 'self' ajax.googleapis.com;
+        default-src 'self'; frame-ancestors 'none'; style-src 'self' 'unsafe-inline'
+        ajax.googleapis.com maxcdn.bootstrapcdn.com fonts.googleapis.com cdnjs.cloudflare.com;
+        font-src fonts.gstatic.com maxcdn.bootstrapcdn.com
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"Content-type\"
+        content=\"text/html; charset=utf-8\" />\n\t<meta name=\"robots\" content=\"noindex,follow\"
+        />\n\t<title>My View - MantisBT</title>\n<meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge,chrome=1\" />\n<meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" />\n\t<link rel=\"stylesheet\"
+        type=\"text/css\" href=\"https://www.mantisbt.org/bugs/css/default.css\" />\n\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"https://www.mantisbt.org/bugs/css/status_config.php?cache_key=b31eba5e13ecdc8f96fcad22a89278b9\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css\"
+        crossorigin=\"anonymous\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\"
+        crossorigin=\"anonymous\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css\"
+        crossorigin=\"anonymous\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://fonts.googleapis.com/css?family=Open+Sans\" crossorigin=\"anonymous\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css\"
+        crossorigin=\"anonymous\" />\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"https://www.mantisbt.org/bugs/css/ace.min.css\" />\n\t<link rel=\"stylesheet\"
+        type=\"text/css\" href=\"https://www.mantisbt.org/bugs/css/ace-mantis.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://www.mantisbt.org/bugs/css/ace-skins.min.css\"
+        />\n\n\t<link rel=\"shortcut icon\" href=\"/bugs/images/favicon.ico\" type=\"image/x-icon\"
+        />\n\t<link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        title=\"MantisBT: full-text search\" href=\"https://www.mantisbt.org/bugs/browser_search_plugin.php?type=text\"/>\n\t<link
+        rel=\"search\" type=\"application/opensearchdescription+xml\" title=\"MantisBT:
+        search by Issue Id\" href=\"https://www.mantisbt.org/bugs/browser_search_plugin.php?type=id\"/>\n\t<script
+        type=\"text/javascript\" src=\"/bugs/javascript_config.php?cache_key=b31eba5e13ecdc8f96fcad22a89278b9\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/bugs/javascript_translations.php?cache_key=69464dfdcc5ec266ea4287547201d780\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js\"
+        integrity=\"sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js\"
+        integrity=\"sha256-p2l8VeL3iL1J0NxcXbEVtoyYSC+VbEbre5KHbzq1fq8=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/bugs/js/common.js\"></script>\n\t<meta http-equiv=\"Refresh\"
+        content=\"1800; URL=https://www.mantisbt.org/bugs/my_view_page.php?refresh=true\"
+        />\n\n\t\t\t<script src=\"/bugs/plugin_file.php?file=Snippets/jquery-textrange.js\"></script>\n\t\t\t<script
+        src=\"/bugs/plugin_file.php?file=Snippets/jquery.qtip.min.js\"></script>\n\t\t\t<script
+        src=\"/bugs/plugin_file.php?file=Snippets/snippets.js\"></script>\n\t\t\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"/bugs/plugin_file.php?file=Snippets/jquery.qtip.min.css\"/>\n\t\t\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"/bugs/plugin_file.php?file=Snippets/snippets.css\"/></head>\n<body
+        class=\"skin-3\">\n<style>\n* { font-family: \"Open Sans\"; } \nh1, h2, h3,
+        h4, h5 { font-family: \"Open Sans\"; } \n</style>\n<div id=\"navbar\" class=\"navbar
+        navbar-default navbar-collapse navbar-fixed-top noprint\"><div id=\"navbar-container\"
+        class=\"navbar-container\"><button id=\"menu-toggler\" type=\"button\" class=\"navbar-toggle
+        menu-toggler pull-left hidden-lg hidden-md\" data-target=\"#sidebar\"><span
+        class=\"sr-only\">Toggle sidebar</span><span class=\"icon-bar\"></span><span
+        class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button><div class=\"navbar-header\"><a
+        href=\"/bugs//\" class=\"navbar-brand\"><span class=\"smaller-75\"> MantisBT
+        </span></a><button type=\"button\" class=\"navbar-toggle navbar-toggle-img
+        collapsed pull-right hidden-sm hidden-md hidden-lg\" data-toggle=\"collapse\"
+        data-target=\".navbar-buttons,.navbar-menu\"><span class=\"sr-only\">Toggle
+        user menu</span><i class=\"ace-icon fa fa-user fa-2x white\"></i> </button></div><div
+        class=\"navbar-buttons navbar-header navbar-collapse collapse\"><ul class=\"nav
+        ace-nav\"><li class=\"grey\" id=\"dropdown_projects_menu\">\n<a data-toggle=\"dropdown\"
+        href=\"#\" class=\"dropdown-toggle\">\n&#160;mantisbt&#160;\n <i class=\"ace-icon
+        fa fa-angle-down bigger-110\"></i>\n</a>\n<ul class=\"dropdown-menu dropdown-menu-right
+        dropdown-yellow dropdown-caret dropdown-close scrollable-menu\">\n<li><a href=\"/bugs/set_project.php?project_id=0\">
+        All Projects </a></li> \n<li class=\"divider\"></li>\n<li><div id=\"projects-list\"><div
+        class=\"projects-searchbox\"><input class=\"search form-control input-md\"
+        placeholder=\"Search\" /></div><ul class=\"list dropdown-yellow no-margin\"><li
+        class=\"active\"><a href=\"/bugs/set_project.php?project_id=1\" selected=\"selected\"
+        class=\"project-link\"> mantisbt </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=12\"
+        class=\"project-link\"> MantisTouch </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=20\"
+        class=\"project-link\"> Mylyn Connector </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=25\"
+        class=\"project-link\"> Plugin - agileMantis </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=11\"
+        class=\"project-link\"> Plugin - CsvImport </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=21\"
+        class=\"project-link\"> Plugin - CustomerManagement </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=10\"
+        class=\"project-link\"> Plugin - EmailReporting </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=15\"
+        class=\"project-link\"> Plugin - FilterPageEdit </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=14\"
+        class=\"project-link\"> Plugin - InlineColumnConfiguration </a></li>\n<li><a
+        href=\"/bugs/set_project.php?project_id=16\" class=\"project-link\"> Plugin
+        - LinkedCustomFields </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=9\"
+        class=\"project-link\"> Plugin - MachineAD </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=22\"
+        class=\"project-link\"> Plugin - MantisTouchRedirect </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=6\"
+        class=\"project-link\"> Plugin - RecurrCall </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=13\"
+        class=\"project-link\"> Plugin - RelatedIssuesExport </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=7\"
+        class=\"project-link\"> Plugin - Reminder </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=8\"
+        class=\"project-link\"> Plugin - Tasks </a></li>\n<li><a href=\"/bugs/set_project.php?project_id=18\"
+        class=\"project-link\"> Plugin - Time Tracking </a></li>\n</ul></div></li></ul>\n</li>\n<li
+        class=\"grey\"><a data-toggle=\"dropdown\" href=\"#\" class=\"dropdown-toggle\"><i
+        class=\"ace-icon fa fa-user fa-2x white\"></i> <span class=\"user-info\">anonymous</span><i
+        class=\"ace-icon fa fa-angle-down\"></i></a><ul class=\"user-menu dropdown-menu
+        dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close\"><li><a
+        href=\"https://www.mantisbt.org/bugs/issues_rss.php?\"><i class=\"ace-icon
+        fa fa-rss-square orange\"> </i> RSS</a></li><li class=\"divider\"></li><li><a
+        href=\"/bugs/logout_page.php\"><i class=\"ace-icon fa fa-sign-out\"> </i>
+        Logout</a></li></ul></li></ul></div></div></div><div class=\"main-container\"
+        id=\"main-container\">\n<div id=\"sidebar\" class=\"sidebar sidebar-fixed
+        responsive compact \"><ul class=\"nav nav-list\"><li class=\"active\">\n<a
+        href=\"/bugs/my_view_page.php\">\n<i class=\"menu-icon fa fa-dashboard\"></i>
+        \n<span class=\"menu-text\"> My View </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a
+        href=\"/bugs/view_all_bug_page.php\">\n<i class=\"menu-icon fa fa-list-alt\"></i>
+        \n<span class=\"menu-text\"> View Issues </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a
+        href=\"/bugs/changelog_page.php\">\n<i class=\"menu-icon fa fa-retweet\"></i>
+        \n<span class=\"menu-text\"> Change Log </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a
+        href=\"/bugs/roadmap_page.php\">\n<i class=\"menu-icon fa fa-road\"></i> \n<span
+        class=\"menu-text\"> Roadmap </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a
+        href=\"/bugs/wiki.php?type=project&amp;id=1\">\n<i class=\"menu-icon fa fa-book\"></i>
+        \n<span class=\"menu-text\"> Wiki </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a
+        href=\"/bugs/plugin.php?page=Source/index\">\n<i class=\"menu-icon fa fa-code-fork\"></i>
+        \n<span class=\"menu-text\"> Repositories </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n</ul><div
+        id=\"sidebar\" class=\"sidebar-toggle sidebar-collapse\"><i data-icon2=\"ace-icon
+        fa fa-angle-double-right\" data-icon1=\"ace-icon fa fa-angle-double-left\"\n\t\tclass=\"ace-icon
+        fa fa-angle-double-left\"></i></div></div><div class=\"main-content\">\n<div
+        id=\"breadcrumbs\" class=\"breadcrumbs noprint\">\n<ul class=\"breadcrumb\">\n
+        <li><i class=\"fa fa-user home-icon active\"></i> Anonymous </li>\n<div class=\"btn-group
+        btn-corner\">\n\t<a href=\"/bugs/login_page.php?return=%2Fbugs%2Fmy_view_page.php\"
+        class=\"btn btn-primary btn-xs\">Login</a>\n\t<a href=\"/bugs/signup_page.php\"
+        class=\"btn btn-primary btn-xs\">Signup for a new account</a>\n</div>\n</ul>\n<div
+        id=\"nav-search\" class=\"nav-search\"><form class=\"form-search\" method=\"post\"
+        action=\"/bugs/jump_to_bug.php\"><span class=\"input-icon\"><input type=\"text\"
+        name=\"bug_id\" autocomplete=\"off\" class=\"nav-search-input\" placeholder=\"Issue
+        #\"><i class=\"ace-icon fa fa-search nav-search-icon\"></i></span></form></div>\n</div>\n
+        \ <div class=\"page-content\">\n<div class=\"row\">\n<div class=\"col-xs-12
+        col-md-7\">\n\n<div id=\"unassigned\" class=\"widget-box widget-color-blue2
+        \">\n\t<div class=\"widget-header widget-header-small\">\n\t\t<h4 class=\"widget-title
+        lighter\">\n\t\t\t<i class=\"ace-icon fa fa-list-alt\"></i>\n<a class=\"white\"
+        href=\"view_all_set.php?type=1&amp;temporary=y&amp;handler_id=[none]&amp;hide_status=90\">Unassigned</a><span
+        class=\"badge\">  1 - 6 / 2219  </span>\t\t</h4>\n\t\t<div class=\"widget-toolbar\">\n\t\t\t<a
+        data-action=\"collapse\" href=\"#\">\n\t\t\t\t<i class=\"1 ace-icon fa fa-chevron-up
+        bigger-125\"></i>\n\t\t\t</a>\n\t\t</div>\n\t\t<div class=\"widget-toolbar
+        no-border hidden-xs\">\n\t\t\t<div class=\"widget-menu\">\n\t\t\t\t<a class=\"btn
+        btn-primary btn-white btn-round btn-sm\" href=\"view_all_set.php?type=1&amp;temporary=y&amp;handler_id=[none]&amp;hide_status=90\">View
+        Issues</a>\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<div class=\"widget-body\">\n\t\t<div
+        class=\"widget-main no-padding\">\n\t\t\t<div class=\"table-responsive\">\n\t\t\t\t<table
+        class=\"table table-bordered table-condensed table-striped table-hover\">\n<tbody>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=24096\">0024096</a><br /><i class=\"fa fa-square
+        fa-status-box status-10-color\" title=\"new\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i><a class=\"attachments\" href=\"view.php?id=24096#attachments\"
+        title=\"View 2 attachment(s) for issue #24096\"> <i class=\"fa fa-paperclip
+        fa-lg grey\" alt=\"2&#32;attachment(s)\" title=\"2&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24096\">email body looks ugly</a></span><br />\t\t<span
+        class=\"small\">email</span><span class=\"small\"> - <strong>2018-03-21 04:24</strong></span>\t</td>\n</tr>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=19829\">0019829</a><br /><i class=\"fa fa-square
+        fa-status-box status-10-color\" title=\"new\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i><a class=\"attachments\" href=\"view.php?id=19829#attachments\"
+        title=\"View 2 attachment(s) for issue #19829\"> <i class=\"fa fa-paperclip
+        fa-lg grey\" alt=\"2&#32;attachment(s)\" title=\"2&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=19829\">Emails looks scrambled</a></span><br />\t\t<span
+        class=\"small\">email</span><span class=\"small\"> - <strong>2018-03-21 04:24</strong></span>\t</td>\n</tr>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=24139\">0024139</a><br /><i class=\"fa fa-square
+        fa-status-box status-10-color\" title=\"new\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24139\">$g_show_realname for making usernames private</a></span><br
+        />\t\t<span class=\"small\">ui</span><span class=\"small\"> - <strong>2018-03-21
+        03:58</strong></span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug \">\n\t\t<td
+        class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=21901\">0021901</a><br
+        /><i class=\"fa fa-square fa-status-box status-10-color\" title=\"new\"></i>
+        \ <i class=\"fa fa-minus fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=21901\">oracle, schema steps 209 fails</a></span><br />\t\t<span
+        class=\"small\">db oracle</span><span class=\"small\"> - <strong>2018-03-21
+        03:21</strong></span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug \">\n\t\t<td
+        class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=22539\">0022539</a><br
+        /><i class=\"fa fa-square fa-status-box status-10-color\" title=\"new\"></i>
+        \ <i class=\"fa fa-minus fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=22539\">Highlight issue title in the details page</a></span><br
+        />\t\t<span class=\"small\">ui</span><span class=\"small\"> - <strong>2018-03-21
+        03:20</strong></span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug \">\n\t\t<td
+        class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=24115\">0024115</a><br
+        /><i class=\"fa fa-square fa-status-box status-10-color\" title=\"new\"></i>
+        \ <i class=\"fa fa-minus fa-lg orange2\" alt=\"\" title=\"normal\"></i><a
+        class=\"attachments\" href=\"view.php?id=24115#attachments\" title=\"View
+        1 attachment(s) for issue #24115\"> <i class=\"fa fa-paperclip fa-lg grey\"
+        alt=\"1&#32;attachment(s)\" title=\"1&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24115\">Style bugnote-public used but not defined</a></span><br
+        />\t\t<span class=\"small\">html</span><span class=\"small\"> - <strong>2018-03-21
+        03:18</strong></span>\t</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<div
+        class=\"space-10\"></div><div id=\"resolved\" class=\"widget-box widget-color-blue2
+        \">\n\t<div class=\"widget-header widget-header-small\">\n\t\t<h4 class=\"widget-title
+        lighter\">\n\t\t\t<i class=\"ace-icon fa fa-list-alt\"></i>\n<a class=\"white\"
+        href=\"view_all_set.php?type=1&amp;temporary=y&amp;status=80&amp;hide_status=90\">Resolved</a><span
+        class=\"badge\">  1 - 6 / 50  </span>\t\t</h4>\n\t\t<div class=\"widget-toolbar\">\n\t\t\t<a
+        data-action=\"collapse\" href=\"#\">\n\t\t\t\t<i class=\"1 ace-icon fa fa-chevron-up
+        bigger-125\"></i>\n\t\t\t</a>\n\t\t</div>\n\t\t<div class=\"widget-toolbar
+        no-border hidden-xs\">\n\t\t\t<div class=\"widget-menu\">\n\t\t\t\t<a class=\"btn
+        btn-primary btn-white btn-round btn-sm\" href=\"view_all_set.php?type=1&amp;temporary=y&amp;status=80&amp;hide_status=90\">View
+        Issues</a>\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<div class=\"widget-body\">\n\t\t<div
+        class=\"widget-main no-padding\">\n\t\t\t<div class=\"table-responsive\">\n\t\t\t\t<table
+        class=\"table table-bordered table-condensed table-striped table-hover\">\n<tbody>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=24069\">0024069</a><br /><i class=\"fa fa-square
+        fa-status-box status-80-color\" title=\"resolved\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24069\">Show realname not working</a></span><br />\t\t<span
+        class=\"small\">ui</span><span class=\"small\"> - <strong>2018-03-21 03:15</strong></span>\t</td>\n</tr>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=24141\">0024141</a><br /><i class=\"fa fa-square
+        fa-status-box status-80-color\" title=\"resolved\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24141\">HOW TO CONFIG SMTP WITH XAMPP</a></span><br />\t\t<span
+        class=\"small\">email</span><span class=\"small\"> - 2018-03-20 15:43</span>\t</td>\n</tr>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=24095\">0024095</a><br /><i class=\"fa fa-square
+        fa-status-box status-80-color\" title=\"resolved\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24095\">Drag and drop attachments not working.  Only one
+        attachment allowed.</a></span><br />\t\t<span class=\"small\">attachments</span><span
+        class=\"small\"> - 2018-03-19 17:44</span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug
+        \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=24084\">0024084</a><br
+        /><i class=\"fa fa-square fa-status-box status-80-color\" title=\"resolved\"></i>
+        \ <i class=\"fa fa-chevron-up fa-lg red\" alt=\"\" title=\"high\"></i><a class=\"attachments\"
+        href=\"view.php?id=24084#attachments\" title=\"View 1 attachment(s) for issue
+        #24084\"> <i class=\"fa fa-paperclip fa-lg grey\" alt=\"1&#32;attachment(s)\"
+        title=\"1&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a href=\"view.php?id=24084\">Attachments
+        don't download</a></span><br />\t\t<span class=\"small\">attachments</span><span
+        class=\"small\"> - 2018-03-19 17:41</span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug
+        \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=3491\">0003491</a><br
+        /><i class=\"fa fa-square fa-status-box status-80-color\" title=\"resolved\"></i>
+        \ <i class=\"fa fa-minus fa-lg orange2\" alt=\"\" title=\"normal\"></i><a
+        class=\"attachments\" href=\"view.php?id=3491#attachments\" title=\"View 1
+        attachment(s) for issue #3491\"> <i class=\"fa fa-paperclip fa-lg grey\" alt=\"1&#32;attachment(s)\"
+        title=\"1&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a href=\"view.php?id=3491\">Add
+        More BBCode for Mantis Output</a></span><br />\t\t<span class=\"small\">feature</span><span
+        class=\"small\"> - 2018-03-19 02:56</span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug
+        \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=24136\">0024136</a><br
+        /><i class=\"fa fa-square fa-status-box status-80-color\" title=\"resolved\"></i>
+        \ <i class=\"fa fa-minus fa-lg orange2\" alt=\"\" title=\"normal\"></i><a
+        class=\"attachments\" href=\"view.php?id=24136#attachments\" title=\"View
+        1 attachment(s) for issue #24136\"> <i class=\"fa fa-paperclip fa-lg grey\"
+        alt=\"1&#32;attachment(s)\" title=\"1&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24136\">Chang mantisbt logo and url and &quot;Mantis BT&quot;Text</a></span><br
+        />\t\t<span class=\"small\">administration</span><span class=\"small\"> -
+        2018-03-18 10:57</span>\t</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<div
+        class=\"space-10\"></div><div id=\"recent_mod\" class=\"widget-box widget-color-blue2
+        \">\n\t<div class=\"widget-header widget-header-small\">\n\t\t<h4 class=\"widget-title
+        lighter\">\n\t\t\t<i class=\"ace-icon fa fa-list-alt\"></i>\n<a class=\"white\"
+        href=\"view_all_set.php?type=1&amp;temporary=y&amp;hide_status=none&amp;filter_by_last_updated_date=1&amp;last_updated_end_day=21&amp;last_updated_end_month=3&amp;last_updated_end_year=2018&amp;last_updated_start_day=19&amp;last_updated_start_month=2&amp;last_updated_start_year=2018\">Recently
+        Modified (30 Days)</a><span class=\"badge\">  1 - 6 / 196  </span>\t\t</h4>\n\t\t<div
+        class=\"widget-toolbar\">\n\t\t\t<a data-action=\"collapse\" href=\"#\">\n\t\t\t\t<i
+        class=\"1 ace-icon fa fa-chevron-up bigger-125\"></i>\n\t\t\t</a>\n\t\t</div>\n\t\t<div
+        class=\"widget-toolbar no-border hidden-xs\">\n\t\t\t<div class=\"widget-menu\">\n\t\t\t\t<a
+        class=\"btn btn-primary btn-white btn-round btn-sm\" href=\"view_all_set.php?type=1&amp;temporary=y&amp;hide_status=none&amp;filter_by_last_updated_date=1&amp;last_updated_end_day=21&amp;last_updated_end_month=3&amp;last_updated_end_year=2018&amp;last_updated_start_day=19&amp;last_updated_start_month=2&amp;last_updated_start_year=2018\">View
+        Issues</a>\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<div class=\"widget-body\">\n\t\t<div
+        class=\"widget-main no-padding\">\n\t\t\t<div class=\"table-responsive\">\n\t\t\t\t<table
+        class=\"table table-bordered table-condensed table-striped table-hover\">\n<tbody>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=24140\">0024140</a><br /><i class=\"fa fa-square
+        fa-status-box status-50-color\" title=\"assigned\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i><a class=\"attachments\" href=\"view.php?id=24140#attachments\"
+        title=\"View 2 attachment(s) for issue #24140\"> <i class=\"fa fa-paperclip
+        fa-lg grey\" alt=\"2&#32;attachment(s)\" title=\"2&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24140\">Application error 401: &quot;ORDER BY clause is
+        not in SELECT list&quot; when sorting by category or project</a></span><br
+        />\t\t<span class=\"small\">filters</span><span class=\"small\"> - <strong>2018-03-21
+        04:55</strong></span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug \">\n\t\t<td
+        class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=24096\">0024096</a><br
+        /><i class=\"fa fa-square fa-status-box status-10-color\" title=\"new\"></i>
+        \ <i class=\"fa fa-minus fa-lg orange2\" alt=\"\" title=\"normal\"></i><a
+        class=\"attachments\" href=\"view.php?id=24096#attachments\" title=\"View
+        2 attachment(s) for issue #24096\"> <i class=\"fa fa-paperclip fa-lg grey\"
+        alt=\"2&#32;attachment(s)\" title=\"2&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24096\">email body looks ugly</a></span><br />\t\t<span
+        class=\"small\">email</span><span class=\"small\"> - <strong>2018-03-21 04:24</strong></span>\t</td>\n</tr>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=19829\">0019829</a><br /><i class=\"fa fa-square
+        fa-status-box status-10-color\" title=\"new\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i><a class=\"attachments\" href=\"view.php?id=19829#attachments\"
+        title=\"View 2 attachment(s) for issue #19829\"> <i class=\"fa fa-paperclip
+        fa-lg grey\" alt=\"2&#32;attachment(s)\" title=\"2&#32;attachment(s)\"></i></a>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=19829\">Emails looks scrambled</a></span><br />\t\t<span
+        class=\"small\">email</span><span class=\"small\"> - <strong>2018-03-21 04:24</strong></span>\t</td>\n</tr>\n\n<tr
+        class=\"my-buglist-bug \">\n\t\t<td class=\"nowrap width-13 my-buglist-id\">\n\t\t<a
+        href=\"/bugs/view.php?id=24139\">0024139</a><br /><i class=\"fa fa-square
+        fa-status-box status-10-color\" title=\"new\"></i>  <i class=\"fa fa-minus
+        fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=24139\">$g_show_realname for making usernames private</a></span><br
+        />\t\t<span class=\"small\">ui</span><span class=\"small\"> - <strong>2018-03-21
+        03:58</strong></span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug \">\n\t\t<td
+        class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=21901\">0021901</a><br
+        /><i class=\"fa fa-square fa-status-box status-10-color\" title=\"new\"></i>
+        \ <i class=\"fa fa-minus fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=21901\">oracle, schema steps 209 fails</a></span><br />\t\t<span
+        class=\"small\">db oracle</span><span class=\"small\"> - <strong>2018-03-21
+        03:21</strong></span>\t</td>\n</tr>\n\n<tr class=\"my-buglist-bug \">\n\t\t<td
+        class=\"nowrap width-13 my-buglist-id\">\n\t\t<a href=\"/bugs/view.php?id=22539\">0022539</a><br
+        /><i class=\"fa fa-square fa-status-box status-10-color\" title=\"new\"></i>
+        \ <i class=\"fa fa-minus fa-lg orange2\" alt=\"\" title=\"normal\"></i>\t</td>\n\n\t\t<td>\n\t\t<span><a
+        href=\"view.php?id=22539\">Highlight issue title in the details page</a></span><br
+        />\t\t<span class=\"small\">ui</span><span class=\"small\"> - <strong>2018-03-21
+        03:20</strong></span>\t</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n<div
+        class=\"space-10\"></div></div>\n\n<div class=\"col-md-5 col-xs-12\">\n\t\n<div
+        id=\"timeline\" class=\"widget-box widget-color-blue2 \">\n\t<div class=\"widget-header
+        widget-header-small\">\n\t\t<h4 class=\"widget-title lighter\">\n\t\t\t<i
+        class=\"ace-icon fa fa-clock-o\"></i>\n\t\t\tTimeline\t\t</h4>\n\t\t<div class=\"widget-toolbar\">\n\t\t\t<a
+        data-action=\"collapse\" href=\"#\">\n\t\t\t\t<i class=\"1 ace-icon fa fa-chevron-up
+        bigger-125\"></i>\n\t\t\t</a>\n\t\t</div>\n\t</div>\n\n\t<div class=\"widget-body\">\n\t\t<div
+        class=\"widget-toolbox\">\n\t\t\t<div class=\"btn-toolbar\">\n&#160;&#160;<span
+        class=\"label label-grey\"> 2018-03-14 </span> .. <span class=\"label label-grey\">
+        2018-03-21 </span>&#160;&#160;<div class=\"btn-group\"> <a class=\"btn btn-primary
+        btn-xs btn-white btn-round\" href=\"my_view_page.php?days=7\">Prev</a></div>\t\t\t</div>\n\t\t</div>\n\n\t\t<div
+        class=\"widget-main no-padding\">\n\t\t\t<div class=\"profile-feed\">\n\t\t\t</div>\n\t\t</div>\n\n<div
+        class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44312\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/4d61ae58b790f74195cf75549374740a?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"cem\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44312\">cem</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24140\"
+        title=\"[assigned] Application error 401: &quot;ORDER BY clause is not in
+        SELECT list&quot; when sorting by category or project\">0024140</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        04:55</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=18303\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/e78c92aeae3add82782137cab2273872?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"cproensa\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=18303\">cproensa</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24140\"
+        title=\"[assigned] Application error 401: &quot;ORDER BY clause is not in
+        SELECT list&quot; when sorting by category or project\">0024140</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        04:29</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44312\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/4d61ae58b790f74195cf75549374740a?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"cem\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44312\">cem</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24140\"
+        title=\"[assigned] Application error 401: &quot;ORDER BY clause is not in
+        SELECT list&quot; when sorting by category or project\">0024140</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        04:16</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2f221915d30a9307d818485b4f838159?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"stainlessstill\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\">stainlessstill</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24139\"
+        title=\"[new] $g_show_realname for making usernames private\">0024139</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        03:58</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24115\"
+        title=\"[new] Style bugnote-public used but not defined\">0024115</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        03:18</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24096\"
+        title=\"[new] email body looks ugly\">0024096</a></span></div><div class=\"time\"><i
+        class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21 03:15</div></div><div
+        class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=39923\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/c0280e89644d63248ddfde5a20462ea0?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"Ruzhelovich Vladimir\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=39923\">Ruzhelovich
+        Vladimir</a></span> commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24069\"
+        title=\"[resolved] Show realname not working\" class=\"resolved\">0024069</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        03:15</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24087\"
+        title=\"[new] $g_show_realname problem on 2.12.0\">0024087</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        03:10</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24139\"
+        title=\"[new] $g_show_realname for making usernames private\">0024139</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        03:06</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24069\"
+        title=\"[resolved] Show realname not working\" class=\"resolved\">0024069</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        03:02</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        resolved issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24069\"
+        title=\"[resolved] Show realname not working\" class=\"resolved\">0024069</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        03:02</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24130\"
+        title=\"[new] Deleting a project does not delete sub-projects\">0024130</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-21
+        02:57</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=18303\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/e78c92aeae3add82782137cab2273872?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"cproensa\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=18303\">cproensa</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24140\"
+        title=\"[assigned] Application error 401: &quot;ORDER BY clause is not in
+        SELECT list&quot; when sorting by category or project\">0024140</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        19:21</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44914\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/eead063ff86c783e7549b0d7205d95b2?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"makis.palasis\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44914\">makis.palasis</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24142\"
+        title=\"[new] wiki intergration instructions significantly outdated + a potential
+        hijacking\">0024142</a></span></div><div class=\"time\"><i class=\"ace-icon
+        fa fa-clock-o bigger-110\"></i> 2018-03-20 17:29</div></div><div class=\"profile-activity
+        clearfix\"><div class=\"profile-activity-avatar-container-40\"><a rel=\"nofollow\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44914\"><img class=\"profile-activity-avatar-40\"
+        src=\"https://secure.gravatar.com/avatar/eead063ff86c783e7549b0d7205d95b2?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"makis.palasis\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44914\">makis.palasis</a></span>
+        created issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24142\"
+        title=\"[new] wiki intergration instructions significantly outdated + a potential
+        hijacking\">0024142</a></span></div><div class=\"time\"><i class=\"ace-icon
+        fa fa-clock-o bigger-110\"></i> 2018-03-20 17:28</div></div><div class=\"profile-activity
+        clearfix\"><div class=\"profile-activity-avatar-container-40\"><a rel=\"nofollow\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img class=\"profile-activity-avatar-40\"
+        src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24141\"
+        title=\"[resolved] HOW TO CONFIG SMTP WITH XAMPP\" class=\"resolved\">0024141</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        15:43</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        resolved issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24141\"
+        title=\"[resolved] HOW TO CONFIG SMTP WITH XAMPP\" class=\"resolved\">0024141</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        15:43</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        picked up issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24141\"
+        title=\"[resolved] HOW TO CONFIG SMTP WITH XAMPP\" class=\"resolved\">0024141</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        15:43</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44898\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/d46d02349823bb5fffb1c55287a92308?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"adsaucedo\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44898\">adsaucedo</a></span>
+        created issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24141\"
+        title=\"[resolved] HOW TO CONFIG SMTP WITH XAMPP\" class=\"resolved\">0024141</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        15:15</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=43710\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/64b19447bb6a55abe586ca4eb1b8f717?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"sandyj\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=43710\">sandyj</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=14695\"
+        title=\"[acknowledged] Ability to add a default summary or description\">0014695</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        13:32</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=18303\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/e78c92aeae3add82782137cab2273872?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"cproensa\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=18303\">cproensa</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24140\"
+        title=\"[assigned] Application error 401: &quot;ORDER BY clause is not in
+        SELECT list&quot; when sorting by category or project\">0024140</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        11:17</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=18303\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/e78c92aeae3add82782137cab2273872?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"cproensa\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=18303\">cproensa</a></span>
+        picked up issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24140\"
+        title=\"[assigned] Application error 401: &quot;ORDER BY clause is not in
+        SELECT list&quot; when sorting by category or project\">0024140</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        11:17</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44312\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/4d61ae58b790f74195cf75549374740a?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"cem\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44312\">cem</a></span>
+        created issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24140\"
+        title=\"[assigned] Application error 401: &quot;ORDER BY clause is not in
+        SELECT list&quot; when sorting by category or project\">0024140</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        10:01</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2f221915d30a9307d818485b4f838159?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"stainlessstill\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\">stainlessstill</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24139\"
+        title=\"[new] $g_show_realname for making usernames private\">0024139</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        04:48</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24139\"
+        title=\"[new] $g_show_realname for making usernames private\">0024139</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-20
+        03:40</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2f221915d30a9307d818485b4f838159?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"stainlessstill\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\">stainlessstill</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24139\"
+        title=\"[new] $g_show_realname for making usernames private\">0024139</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        20:20</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2f221915d30a9307d818485b4f838159?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"stainlessstill\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\">stainlessstill</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24139\"
+        title=\"[new] $g_show_realname for making usernames private\">0024139</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        20:06</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2f221915d30a9307d818485b4f838159?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"stainlessstill\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\">stainlessstill</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24139\"
+        title=\"[new] $g_show_realname for making usernames private\">0024139</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        19:14</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2f221915d30a9307d818485b4f838159?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"stainlessstill\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=24782\">stainlessstill</a></span>
+        created issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24139\"
+        title=\"[new] $g_show_realname for making usernames private\">0024139</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        19:06</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24095\"
+        title=\"[resolved] Drag and drop attachments not working.  Only one attachment
+        allowed.\" class=\"resolved\">0024095</a></span></div><div class=\"time\"><i
+        class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19 17:44</div></div><div
+        class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        resolved issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24095\"
+        title=\"[resolved] Drag and drop attachments not working.  Only one attachment
+        allowed.\" class=\"resolved\">0024095</a></span></div><div class=\"time\"><i
+        class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19 17:44</div></div><div
+        class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        picked up issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24095\"
+        title=\"[resolved] Drag and drop attachments not working.  Only one attachment
+        allowed.\" class=\"resolved\">0024095</a></span></div><div class=\"time\"><i
+        class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19 17:44</div></div><div
+        class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        resolved issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24084\"
+        title=\"[resolved] Attachments don't download\" class=\"resolved\">0024084</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        17:41</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        picked up issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24084\"
+        title=\"[resolved] Attachments don't download\" class=\"resolved\">0024084</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        17:41</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44799\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/e5a96a76be197277bbe5b165c8fead20?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"janderson@carsley.com\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44799\">janderson@carsley.com</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24084\"
+        title=\"[resolved] Attachments don't download\" class=\"resolved\">0024084</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        17:34</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        resolved issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=3491\"
+        title=\"[resolved] Add More BBCode for Mantis Output\" class=\"resolved\">0003491</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        02:56</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        assigned issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=3491\"
+        title=\"[resolved] Add More BBCode for Mantis Output\" class=\"resolved\">0003491</a></span>
+        to <span class=\"username\"><a class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-19
+        02:56</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=3491\"
+        title=\"[resolved] Add More BBCode for Mantis Output\" class=\"resolved\">0003491</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-18
+        23:38</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        closed issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24082\"
+        title=\"[closed] application error\" class=\"resolved\">0024082</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-18
+        17:44</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        closed issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24073\"
+        title=\"[closed] Tiny MCE Editor\" class=\"resolved\">0024073</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-18
+        17:44</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        closed issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24083\"
+        title=\"[closed] SMTP authentication problem\" class=\"resolved\">0024083</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-18
+        17:44</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        commented on issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24136\"
+        title=\"[resolved] Chang mantisbt logo and url and &quot;Mantis BT&quot;Text\"
+        class=\"resolved\">0024136</a></span></div><div class=\"time\"><i class=\"ace-icon
+        fa fa-clock-o bigger-110\"></i> 2018-03-18 10:57</div></div><div class=\"profile-activity
+        clearfix\"><div class=\"profile-activity-avatar-container-40\"><a rel=\"nofollow\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img class=\"profile-activity-avatar-40\"
+        src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        resolved issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24136\"
+        title=\"[resolved] Chang mantisbt logo and url and &quot;Mantis BT&quot;Text\"
+        class=\"resolved\">0024136</a></span></div><div class=\"time\"><i class=\"ace-icon
+        fa fa-clock-o bigger-110\"></i> 2018-03-18 10:57</div></div><div class=\"profile-activity
+        clearfix\"><div class=\"profile-activity-avatar-container-40\"><a rel=\"nofollow\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img class=\"profile-activity-avatar-40\"
+        src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        picked up issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24136\"
+        title=\"[resolved] Chang mantisbt logo and url and &quot;Mantis BT&quot;Text\"
+        class=\"resolved\">0024136</a></span></div><div class=\"time\"><i class=\"ace-icon
+        fa fa-clock-o bigger-110\"></i> 2018-03-18 10:57</div></div><div class=\"profile-activity
+        clearfix\"><div class=\"profile-activity-avatar-container-40\"><a rel=\"nofollow\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44906\"><img class=\"profile-activity-avatar-40\"
+        src=\"https://secure.gravatar.com/avatar/1a8300ee739d9e7b3204cc099fc9d60f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"jeilindu\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=44906\">jeilindu</a></span>
+        created issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24136\"
+        title=\"[resolved] Chang mantisbt logo and url and &quot;Mantis BT&quot;Text\"
+        class=\"resolved\">0024136</a></span></div><div class=\"time\"><i class=\"ace-icon
+        fa fa-clock-o bigger-110\"></i> 2018-03-18 10:29</div></div><div class=\"profile-activity
+        clearfix\"><div class=\"profile-activity-avatar-container-40\"><a rel=\"nofollow\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img class=\"profile-activity-avatar-40\"
+        src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        resolved issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24097\"
+        title=\"[resolved] Account page required change password on any field modification\"
+        class=\"resolved\">0024097</a></span></div><div class=\"time\"><i class=\"ace-icon
+        fa fa-clock-o bigger-110\"></i> 2018-03-18 05:14</div></div><div class=\"profile-activity
+        clearfix\"><div class=\"profile-activity-avatar-container-40\"><a rel=\"nofollow\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\"><img class=\"profile-activity-avatar-40\"
+        src=\"https://secure.gravatar.com/avatar/2c39ad37ad68e81e1678ab1155b6038f?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"vboctor\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=3081\">vboctor</a></span>
+        resolved issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24090\"
+        title=\"[resolved] Username (Realnames) format not showing on timeline (my_view_page)\"
+        class=\"resolved\">0024090</a></span></div><div class=\"time\"><i class=\"ace-icon
+        fa fa-clock-o bigger-110\"></i> 2018-03-17 22:23</div></div><div class=\"profile-activity
+        clearfix\"><div class=\"profile-activity-avatar-container-40\"><a rel=\"nofollow\"
+        href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img class=\"profile-activity-avatar-40\"
+        src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        closed issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24034\"
+        title=\"[closed] Spurious error (&quot;$g_crypto_master_salt is not specified
+        correctly&quot;) blocks use of mantis at login.\" class=\"resolved\">0024034</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-17
+        18:32</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        closed issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=23602\"
+        title=\"[closed] Filtering 'DATE' type custom fields bug\" class=\"resolved\">0023602</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-17
+        18:32</div></div><div class=\"profile-activity clearfix\"><div class=\"profile-activity-avatar-container-40\"><a
+        rel=\"nofollow\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\"><img
+        class=\"profile-activity-avatar-40\" src=\"https://secure.gravatar.com/avatar/73c62116c4c5b1c7c379affab8284f1d?d=identicon&amp;r=G&amp;s=40\"
+        alt=\"atrol\" /></a></div><div class=\"action\"><span class=\"username\"><a
+        class=\"user\" href=\"https://www.mantisbt.org/bugs/view_user_page.php?id=11111\">atrol</a></span>
+        closed issue <span class=\"issue_id\"><a href=\"/bugs/view.php?id=24070\"
+        title=\"[closed] can't download attach file\" class=\"resolved\">0024070</a></span></div><div
+        class=\"time\"><i class=\"ace-icon fa fa-clock-o bigger-110\"></i> 2018-03-17
+        18:32</div></div><div class=\"widget-toolbox\"><div class=\"btn-toolbar\"><a
+        class=\"btn btn-primary btn-sm btn-white btn-round\" href=\"my_view_page.php?days=0&all=1\">More
+        events...</a></div></div>\n\t</div>\n</div>\n\t<div class=\"space-10\"></div>\n</div>\n</div>\n</div>\n</div>\n<div
+        class=\"clearfix\"></div>\n<div class=\"space-20\"></div>\n<div class=\"footer
+        noprint\">\n<div class=\"footer-inner\">\n<div class=\"footer-content\">\n<div
+        class=\"col-md-6 col-xs-12 no-padding\">\n<address>\n<strong>Powered by <a
+        href=\"https://www.mantisbt.org\" title=\"bug tracking software\">MantisBT
+        \ 2.13.0-dev-master-a646ff8</a></strong> <br>\n<small>Copyright &copy; 2000
+        - 2018 MantisBT Team</small><br><small>Contact <a href=\"mailto:vboctor@mantisbt.org\"
+        title=\"Contact the webmaster via e-mail.\">administrator</a> for assistance</small><br>\n</address>\n</div>\n<div
+        class=\"col-md-6 col-xs-12\">\n<div class=\"pull-right\" id=\"powered-by-mantisbt-logo\">\n<a
+        href=\"https://www.mantisbt.org\" title=\"Mantis Bug Tracker: a free and open
+        source web based bug tracking system.\"><img src=\"/bugs/images/mantis_logo.png\"
+        width=\"102\" height=\"35\" alt=\"Powered by Mantis Bug Tracker: a free and
+        open source web based bug tracking system.\" /></a>\n</div>\n</div>\n<div
+        class=\"col-xs-12 no-padding grey\">\n<address class=\"no-margin pull-right\">\n<small><i
+        class=\"fa fa-clock-o\"></i> Page execution time: 0.1568 seconds</small>&#160;&#160;&#160;&#160;\n</address>\n</div>\n</div>\n</div>\n</div>\n<a
+        class=\"btn-scroll-up btn btn-sm btn-inverse display\" id=\"btn-scroll-up\"
+        href=\"#\">\n<i class=\"ace-icon fa fa-angle-double-up icon-only bigger-110\"></i>\n</a>\n</div>\n\t<script
+        type=\"text/javascript\" src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"
+        integrity=\"sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment-with-locales.min.js\"
+        integrity=\"sha256-K+AZsAFjiBd4piqBmFzaxDsiQiHfREubm1ExNGW1JIA=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js\"
+        integrity=\"sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.jquery.min.js\"
+        integrity=\"sha256-qZIhMVBV4/crmcmYXNq5ZE5gPRiiPPMKVYbapf5HDBs=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/list.js/1.4.1/list.min.js\"
+        integrity=\"sha256-lFOz0Sg8djWQPKOfRce9A9EcYSWhFMsYo+ulRYVnjrw=\" crossorigin=\"anonymous\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/bugs/js/ace.min.js\"></script>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:37:12 GMT
+recorded_with: VCR 2.9.3
