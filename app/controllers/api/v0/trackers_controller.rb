@@ -38,7 +38,7 @@ class Api::V0::TrackersController < Api::V0::BaseController
 
   def sync
     @tracker.delay.remote_sync
-    render nothing: true, status: :accepted
+    head :accepted
   end
 
   def full_sync

@@ -154,7 +154,7 @@ class Api::V1::TeamsController < ApplicationController
 
   def remove_member
     if @team.remove_member(@member)
-      render nothing: true, status: :no_content
+      head :no_content
     else
       render json: { error: relation.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end

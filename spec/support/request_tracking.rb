@@ -3,7 +3,7 @@ shared_examples_for "request tracking" do
   describe "the add_tracking method" do
     controller do
       def index
-        render nothing: true
+        head :ok
       end
     end
 

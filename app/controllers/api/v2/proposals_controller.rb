@@ -11,7 +11,7 @@ class Api::V2::ProposalsController < Api::BaseController
   # exception on invalid state change.
   rescue_from AASM::InvalidTransition do |e|
     ::NewRelic::Agent.notice_error(e)
-    render nothing: true, status: :bad_request
+    head :bad_request
   end
 
   def create
@@ -27,7 +27,7 @@ class Api::V2::ProposalsController < Api::BaseController
 
   def destroy
     proposal.destroy!
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
   def index
@@ -40,7 +40,7 @@ class Api::V2::ProposalsController < Api::BaseController
     # Save optional notes from Team member on appointment on Proposal
     proposal.set_team_notes!(params[:team_notes]) if params.has_key?(:team_notes)
 
-    render nothing: true, status: :ok
+    head :ok
   end
 
   def reject
@@ -49,7 +49,7 @@ class Api::V2::ProposalsController < Api::BaseController
     # Save optional notes from Team member on appointment on Proposal
     proposal.set_team_notes!(params[:team_notes]) if params.has_key?(:team_notes)
 
-    render nothing: true, status: :ok
+    head :ok
   end
 
   def show

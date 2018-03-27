@@ -28,7 +28,7 @@ class GoogleWalletController < ApplicationController
     end
 
     # if we got here, something didn't line up correctly... bad request is bad
-    render nothing: true, status: :bad_request
+    head :bad_request
   end
 
   # When our frontend Wallet triggers it's success callback,
@@ -46,6 +46,6 @@ class GoogleWalletController < ApplicationController
   rescue Transaction::Order::CartEmpty
     # If the success callback is triggered again, the cart will be empty.
     # Render error, this shouldn't happen
-    render nothing: true, status: :bad_request
+    head :bad_request
   end
 end

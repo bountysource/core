@@ -36,7 +36,7 @@ class Api::V2::CartItemsController < Api::BaseController
 
     @cart.remove_item(index)
 
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
 private

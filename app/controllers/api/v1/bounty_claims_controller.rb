@@ -45,9 +45,9 @@ class Api::V1::BountyClaimsController < ApplicationController
 
   def destroy
     if @bounty_claim.destroy
-      render nothing: true, status: :no_content
+      head :no_content
     else
-      render nothing: true, status: :bad_request
+      head :bad_request
     end
   end
 

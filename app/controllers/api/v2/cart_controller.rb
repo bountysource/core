@@ -25,7 +25,7 @@ class Api::V2::CartController < Api::BaseController
 
   def destroy
     @cart.clear
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
   def checkout
