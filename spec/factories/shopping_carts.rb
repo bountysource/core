@@ -19,7 +19,7 @@
 #  index_shopping_carts_on_uid       (uid)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :shopping_cart, class: ShoppingCart do
     #association :payment_method, factory: :payment_method

@@ -14,7 +14,7 @@
 #  index_tracker_rank_caches_on_person_id_and_tracker_id  (person_id,tracker_id) UNIQUE
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :tracker_rank_cache, :class => TrackerRankCache do
     association :tracker, factory: :tracker
     association :person, factory: :person

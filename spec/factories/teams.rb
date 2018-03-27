@@ -39,7 +39,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team do
     sequence(:name) { |n| "Generic Team ##{n}" }
     sequence(:slug) { |n| "team-#{n}" }

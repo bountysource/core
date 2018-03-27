@@ -37,7 +37,7 @@
 #  index_linked_accounts_on_uid_and_type  (uid,type) UNIQUE
 #
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :linked_account_github, class: LinkedAccount::Github::User do
     sequence(:uid) { |n| n }

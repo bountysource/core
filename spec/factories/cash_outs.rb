@@ -40,7 +40,7 @@
 #  index_cash_outs_on_us_citizen          (us_citizen)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :cash_out, class: CashOut do
     type 'CashOut'
     association :address

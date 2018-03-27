@@ -40,7 +40,7 @@
 #  index_fundraisers_on_published    (published)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :fundraiser, class: 'Fundraiser' do
     association :person, factory: :person
     association :team, factory: :team

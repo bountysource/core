@@ -15,7 +15,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :lurker do
     user_agent "Chrome"
     remote_ip "193.253.1.2"

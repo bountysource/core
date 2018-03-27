@@ -25,7 +25,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :pledge do
     association :fundraiser, factory: :fundraiser
     association :person, factory: :person

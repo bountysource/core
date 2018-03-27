@@ -10,7 +10,7 @@
 #  updated_at :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :payment_method do
     association :person, factory: :person
 

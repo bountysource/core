@@ -24,7 +24,7 @@
 #  index_support_levels_on_team_id    (team_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :support_level do
     association :person, factory: :person
     association :team, factory: [:team, :accepts_public_payins]
