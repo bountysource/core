@@ -27,8 +27,6 @@ module Api
     config.www_receipt_url = "#{config.www_url}orders/%d"
     config.www_receipts_url = "#{config.www_url}orders"
 
-    config.middleware.swap Rack::MethodOverride, "GetMethodOverride"
-
     config.middleware.use Rack::Deflater
 
     # Settings in config/environments/* take precedence over those specified here.
