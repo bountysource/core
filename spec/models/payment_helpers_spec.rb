@@ -59,8 +59,8 @@ describe "payment helpers" do
 
     it "should associate transaction with bounty" do
       bounty = create_bounty(100, person: backer)
-      bounty.transactions.last.should == Transaction.last
-      bounty.transactions.last.splits.count.should == 3
+      bounty.boso_transactions.last.should == Transaction.last
+      bounty.boso_transactions.last.splits.count.should == 3
     end
 
     it "should add extra attributes to bounty if provided" do

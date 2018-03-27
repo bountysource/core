@@ -462,7 +462,7 @@ describe Fundraiser do
     it "should create payout transaction" do
       lambda {
         create_pledge 1000, fundraiser: fundraiser
-      }.should change(fundraiser.transactions, :count).by 2
+      }.should change(fundraiser.boso_transactions, :count).by 2
     end
 
     it "should receive check_for_breach message after pledge creation" do

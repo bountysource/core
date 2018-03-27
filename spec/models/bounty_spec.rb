@@ -168,7 +168,7 @@ describe Bounty do
 
       lambda {
         create_bounty(100, issue: issue, person: backer)
-      }.should change(issue.transactions, :count).by 1
+      }.should change(issue.boso_transactions, :count).by 1
 
       issue.reload.account.should be_an Account::IssueAccount
     end

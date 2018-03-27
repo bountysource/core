@@ -4,7 +4,7 @@ class ActiveRecord::Base
       # NOTE: the create/build methods for Account are overridden below. You have been warned.
       has_one   :account,       options.merge(as: :owner)
       has_many  :splits,        through: :account
-      has_many  :transactions,  through: :splits
+      has_many  :boso_transactions,  through: :splits
 
       def account_balance
         account.try(:balance) || BigDecimal.new('0.00', 2)

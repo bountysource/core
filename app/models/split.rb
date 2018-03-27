@@ -33,11 +33,11 @@
 
 class Split < ActiveRecord::Base
   belongs_to  :account
-  belongs_to  :transaction
+  belongs_to  :boso_transaction, class_name: 'Transaction', foreign_key: :transaction_id
   belongs_to  :item,   polymorphic: true
 
   validates :account,     presence: true
-  validates :transaction, presence: true
+  validates :boso_transaction, presence: true
   validates :amount,      presence: true, numericality: true
   validates :dirty,       presence: true, numericality: { greater_than_or_equal_to: 0 }
 
@@ -52,9 +52,9 @@ class Split < ActiveRecord::Base
   class CustomValidator < ActiveModel::Validator
     def validate(record)
       # NOTE: this should never ever happen... and this load *EVERY* split into memory, very bad query.
-      #if record.transaction
+      #if record.boso_transaction
       #  # make sure this split isn't already in another transaction.
-      #  other_transactions = Transaction.where('transactions.id != :txn_id', txn_id: record.transaction.id)
+      #  other_transactions = Transaction.where('transactions.id != :txn_id', txn_id: record.boso_transaction.id)
       #  split_ids = other_transactions.joins(:splits).pluck('splits.id')
       #
       #  if split_ids.include? record.id
