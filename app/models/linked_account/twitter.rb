@@ -41,7 +41,7 @@ class LinkedAccount::Twitter < LinkedAccount::Base
 
   # if we just added an oauth token, automatically follow @bountysource
   after_save do
-    follow_bountysource if changes.has_key?('oauth_token') && changes['oauth_token'].first == nil
+    follow_bountysource if saved_change_to_oauth_token? && oauth_token_before_last_save == nil
   end
 
   after_create do

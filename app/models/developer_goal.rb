@@ -53,7 +53,7 @@ protected
   end
 
   def update_notified_if_necessary
-    if amount_changed?
+    if saved_change_to_amount?
       update_column(:notified, false)
       # place send email method here if we want to notify backers of updated developer goals
       # notify_backers

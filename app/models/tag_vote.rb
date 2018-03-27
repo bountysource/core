@@ -33,7 +33,7 @@ class TagVote < ActiveRecord::Base
   after_create { relation.calculate_weight }
 
   # cache weight of relation if value changes
-  after_update { relation.calculate_weight if value_changed? }
+  after_update { relation.calculate_weight if saved_change_to_value? }
 
   def self.find_or_create_by_person_and_relation_and_cast_vote(person, relation, value)
     vote = find_by person_id: person.id, tag_relation_id: relation.id
