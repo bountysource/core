@@ -46,6 +46,8 @@ class Person < ActiveRecord::Base
   # temporarily holds a raw access token... useful in controllers-and-views
   attr_accessor :current_access_token
 
+  before_save :format_url
+
   has_cloudinary_image
 
   has_paper_trail :only => [:first_name, :last_name, :display_name, :email, :password, :bio, :location, :public_email, :url, :company]
@@ -688,6 +690,10 @@ protected
 
   def self.hash_access_token(person, time)
     Digest::SHA1.hexdigest("#{person.id}.#{time}.#{Api::Application.config.person_hash_secret}")
+  end
+
+  def format_url
+    self.url = "https://#{self.url}" unless self.url[/^https?/]    
   end
 
 end
