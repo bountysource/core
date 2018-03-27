@@ -26,12 +26,12 @@ describe Api::V0::TransactionsController do
     end
 
     it "should show all transactions" do
-      get 'index', params
+      get 'index', params: params
       assert_response :ok
     end
 
     it "should show transaction" do
-      get 'show', params
+      get 'show', params: params
       assert_response :ok
       response_data['id'].should == transaction.id
     end
@@ -45,7 +45,7 @@ describe Api::V0::TransactionsController do
       end
 
       it "should require splits" do
-        post 'create', params
+        post 'create', params: params
         assert_response :unprocessable_entity
       end
 
@@ -56,7 +56,7 @@ describe Api::V0::TransactionsController do
         ]
 
         lambda {
-          post 'create', params.merge(
+          post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
             description:  "Test transaction, please ignore",
@@ -77,7 +77,7 @@ describe Api::V0::TransactionsController do
         ]
 
         lambda {
-          post 'create', params.merge(
+          post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
             description:  "Test transaction, please ignore",
@@ -99,7 +99,7 @@ describe Api::V0::TransactionsController do
         ]
 
         lambda {
-          post 'create', params.merge(
+          post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
             description:  "Test transaction, please ignore",
@@ -122,7 +122,7 @@ describe Api::V0::TransactionsController do
         splits_data += children.map { |child| { amount: 1000, item_id: child.id, item_type: child.class.name } }
 
         lambda {
-          post 'create', params.merge(
+          post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
             description:  "Test transaction, please ignore",
@@ -151,7 +151,7 @@ describe Api::V0::TransactionsController do
         }
 
         lambda {
-          put :update, params.merge(description: transaction.description, splits: splits_data)
+          put :update, params: params.merge(description: transaction.description, splits: splits_data)
           assert_response :ok
           transaction.reload
         }.should change(transaction.splits, :count).by 1
@@ -164,7 +164,7 @@ describe Api::V0::TransactionsController do
         }
 
         lambda {
-          put :update, params.merge(splits: splits_data.to_json)
+          put :update, params: params.merge(splits: splits_data.to_json)
           assert_response :unprocessable_entity
           transaction.reload
         }.should_not change(transaction.splits, :count)
@@ -175,7 +175,7 @@ describe Api::V0::TransactionsController do
       description = "I've got a lovely bunch of coconuts, there they are standing in a row!"
 
       lambda {
-        put 'update', params.merge(description: description)
+        put 'update', params: params.merge(description: description)
         assert_response :ok
         transaction.reload
       }.should change(transaction, :description).to description
@@ -186,21 +186,21 @@ describe Api::V0::TransactionsController do
     #  new_item = create_bounty 10
     #
     #  lambda {
-    #    put 'update', params.merge(description: transaction.description, item_id: new_item.id, item_type: new_item.class.name)
+    #    put 'update', params: params.merge(description: transaction.description, item_id: new_item.id, item_type: new_item.class.name)
     #    transaction.reload
     #  }.should change(transaction, :item).to new_item
     #end
 
     it "should destroy splits" do
       lambda {
-        delete 'destroy', params
+        delete 'destroy', params: params
         assert_response :no_content
       }.should change(Split, :count).by -transaction.splits.count
     end
 
     it "should destroy transaction" do
       lambda {
-        delete 'destroy', params
+        delete 'destroy', params: params
         assert_response :no_content
       }.should change(Transaction, :count).by -1
     end
@@ -212,22 +212,22 @@ describe Api::V0::TransactionsController do
     end
 
     it "should require admin for index" do
-      get 'index', params
+      get 'index', params: params
       assert_response :unauthorized
     end
 
     it "should require admin for show" do
-      get 'show', params
+      get 'show', params: params
       assert_response :unauthorized
     end
 
     it "should require admin for update" do
-      put 'update', params
+      put 'update', params: params
       assert_response :unauthorized
     end
 
     it "should require admin for destroy" do
-      delete 'destroy', params
+      delete 'destroy', params: params
       assert_response :unauthorized
     end
   end

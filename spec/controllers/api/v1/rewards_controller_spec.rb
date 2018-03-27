@@ -19,7 +19,7 @@ describe Api::V1::RewardsController do
   describe "require_reward" do
     it "should return Reward not found" do
       expect {
-        get 'show', params
+        get 'show', params: params
       }.to raise_error(ActionController::UrlGenerationError)
     end
   end
@@ -28,7 +28,7 @@ describe Api::V1::RewardsController do
 
     it "should create a reward" do
       lambda {
-        post 'create', params.merge(amount: 10, description: "My awesome reward")
+        post 'create', params: params.merge(amount: 10, description: "My awesome reward")
         assert_response :created
       }.should change(fundraiser.rewards, :count).by 1
 
@@ -44,18 +44,18 @@ describe Api::V1::RewardsController do
       let(:fulfillment_details) { "What is your mailing address?" }
 
       it "should show all" do
-        get 'index', params
+        get 'index', params: params
         assert_response :ok
       end
 
       it "should show a single reward" do
-        get 'show', params
+        get 'show', params: params
         assert_response :ok
       end
 
       it "should update amount" do
         lambda {
-          put 'update', params.merge(amount: 12345)
+          put 'update', params: params.merge(amount: 12345)
           assert_response :ok
           reward.reload
         }.should change(reward, :amount).to 12345
@@ -63,7 +63,7 @@ describe Api::V1::RewardsController do
 
       it "should update quantity" do
         lambda {
-          put 'update', params.merge(limited_to: 420)
+          put 'update', params: params.merge(limited_to: 420)
           assert_response :ok
           reward.reload
         }.should change(reward, :limited_to).to 420
@@ -71,7 +71,7 @@ describe Api::V1::RewardsController do
 
       it "should update description" do
         lambda {
-          put 'update', params.merge(description: description)
+          put 'update', params: params.merge(description: description)
           assert_response :ok
           reward.reload
         }.should change(reward, :description).to description
@@ -80,7 +80,7 @@ describe Api::V1::RewardsController do
       it "should update fullfillment details" do
 
         lambda {
-          put 'update', params.merge(fulfillment_details: fulfillment_details)
+          put 'update', params: params.merge(fulfillment_details: fulfillment_details)
           assert_response :ok
           reward.reload
         }.should change(reward, :fulfillment_details).to fulfillment_details
@@ -88,7 +88,7 @@ describe Api::V1::RewardsController do
 
       it "should be deleted" do
         lambda {
-          delete 'destroy', params
+          delete 'destroy', params: params
           assert_response :no_content
         }.should change(fundraiser.rewards, :count).by -1
       end
@@ -100,7 +100,7 @@ describe Api::V1::RewardsController do
 
         it "should not update description" do
           lambda {
-            put 'update', params.merge(description: "Swagger 4 dayz")
+            put 'update', params: params.merge(description: "Swagger 4 dayz")
             assert_response :unprocessable_entity
             reward.reload
           }.should_not change(reward, :description)
@@ -108,7 +108,7 @@ describe Api::V1::RewardsController do
 
         it "should update quantity" do
           lambda {
-            put 'update', params.merge(limited_to: 420)
+            put 'update', params: params.merge(limited_to: 420)
             assert_response :ok
             reward.reload
           }.should change(reward, :limited_to).to 420
@@ -116,7 +116,7 @@ describe Api::V1::RewardsController do
 
         it "should not update amount" do
           lambda {
-            put 'update', params.merge(amount: 420)
+            put 'update', params: params.merge(amount: 420)
             assert_response :unprocessable_entity
             reward.reload
           }.should_not change(reward, :amount)
@@ -124,7 +124,7 @@ describe Api::V1::RewardsController do
 
         it "should update fullfillment details" do
           lambda {
-            put 'update', params.merge(fulfillment_details: fulfillment_details)
+            put 'update', params: params.merge(fulfillment_details: fulfillment_details)
             assert_response :ok
             reward.reload
           }.should change(reward, :fulfillment_details).to fulfillment_details
@@ -132,7 +132,7 @@ describe Api::V1::RewardsController do
 
         it "should not be deleted" do
           lambda {
-            delete 'destroy', params
+            delete 'destroy', params: params
             assert_response :bad_request
           }.should_not change(fundraiser.rewards, :count)
         end
@@ -146,7 +146,7 @@ describe Api::V1::RewardsController do
 
     it "should not create" do
       lambda {
-        post 'create', params.merge(amount: 10, description: "My awesome reward")
+        post 'create', params: params.merge(amount: 10, description: "My awesome reward")
         assert_response :not_found
       }.should_not change(fundraiser.rewards, :count)
     end
@@ -156,17 +156,17 @@ describe Api::V1::RewardsController do
       let!(:params) { basic_params.merge! id: reward.id }
 
       it "should show all" do
-        get 'index', params
+        get 'index', params: params
         assert_response :ok
       end
 
       it "should show a single" do
-        get 'show', params
+        get 'show', params: params
         assert_response :ok
       end
 
       it "should not be updated" do
-        put 'update', params.merge(description: "I'm in ur base")
+        put 'update', params: params.merge(description: "I'm in ur base")
         assert_response :not_found
         reward.reload
         expect(reward.description).to eq("TF2 is for casuals")
@@ -174,7 +174,7 @@ describe Api::V1::RewardsController do
 
       it "should not be deleted" do
         lambda {
-          delete 'destroy', params
+          delete 'destroy', params: params
           assert_response :not_found
         }.should_not change(fundraiser.rewards, :count)
       end

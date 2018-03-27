@@ -10,7 +10,7 @@ describe BadgeController do
     let(:issue) { create(:issue) }
 
     it 'should render badge' do
-      get :issue, issue_id: issue.id
+      get :issue, params: { issue_id: issue.id }
       response.body.should eq(svg)
       expect(response.status).to eq(200)
     end
@@ -18,7 +18,7 @@ describe BadgeController do
     describe 'errors' do
       describe 'record not found' do
         it 'should render error' do
-          get :issue, issue_id: 'noooope'
+          get :issue, params: { issue_id: 'noooope' }
           expect(response.status).to eq(404)
         end
       end
@@ -36,7 +36,7 @@ describe BadgeController do
     let(:tracker) { create(:tracker) }
 
     it 'should render badge' do
-      get :tracker, tracker_id: tracker.id
+      get :tracker, params: { tracker_id: tracker.id }
       response.body.should eq(svg)
       expect(response.status).to eq(200)
     end
@@ -44,7 +44,7 @@ describe BadgeController do
     describe 'errors' do
       describe 'record not found' do
         it 'should render error' do
-          get :tracker, tracker_id: 'noooope'
+          get :tracker, params: { tracker_id: 'noooope' }
           expect(response.status).to eq(404)
         end
       end
@@ -64,7 +64,7 @@ describe BadgeController do
 
     shared_examples_for 'a valid team badge request' do
       it 'should render badge' do
-        get :team, params
+        get :team, params: params
         response.body.should eq(svg)
         expect(response.status).to eq(200)
       end
@@ -94,7 +94,7 @@ describe BadgeController do
           badge_factory.stub(:team).and_raise(ActiveRecord::RecordNotFound)
           BadgeFactory.stub(:new).and_return(badge_factory)
 
-          get :team, params
+          get :team, params: params
           expect(response.status).to eq(404)
         end
       end
@@ -105,7 +105,7 @@ describe BadgeController do
           badge_factory.stub(:team).and_raise(KeyError)
           BadgeFactory.stub(:new).and_return(badge_factory)
 
-          get :team, params
+          get :team, params: params
           expect(response.status).to eq(422)
         end
       end
@@ -116,7 +116,7 @@ describe BadgeController do
           badge_factory.stub(:team).and_raise(BadgeFactory::ParseError)
           BadgeFactory.stub(:new).and_return(badge_factory)
 
-          get :team, params
+          get :team, params: params
           expect(response.status).to eq(422)
         end
       end

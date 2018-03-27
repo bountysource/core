@@ -64,7 +64,7 @@ describe PaymentsController do
     PaymentNotification::Paypal.any_instance.stub(:post_back) { 'VERIFIED' }
   end
 
-  let(:action) { -> { post :paypal_ipn, post_data } }
+  let(:action) { -> { post :paypal_ipn, params: post_data } }
 
   it 'should create payment notification' do
     expect(action).to change(PaymentNotification::Paypal, :count).by 1

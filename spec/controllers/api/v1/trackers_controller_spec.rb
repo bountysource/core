@@ -12,7 +12,7 @@ describe Api::V1::TrackersController do
     let(:result) { JSON.parse(response.body) }
     describe 'valid repo' do
       before do
-        get :show, id: repository.id
+        get :show, params: { id: repository.id }
       end
 
       it "should render result" do
@@ -26,7 +26,7 @@ describe Api::V1::TrackersController do
 
     describe 'invalid repo' do
       before do
-        get :show, id: 'invalid'
+        get :show, params: { id: 'invalid' }
       end
 
       it "should render error" do
@@ -44,7 +44,7 @@ describe Api::V1::TrackersController do
         access_token: person.create_access_token
       }
       expect {
-        get :show, params
+        get :show, params: params
       }.to change(ActivityLog, :count).by 1
     end
 
@@ -59,7 +59,7 @@ describe Api::V1::TrackersController do
     before { good_model.merge! bad_model }
 
     it 'should render good_model when bad_model requested' do
-      get :show, id: bad_model.id
+      get :show, params: { id: bad_model.id }
       result['id'].should be == good_model.id
     end
 

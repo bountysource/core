@@ -14,14 +14,14 @@
 #   end
 #
 #   it "should not constantize arbitrary input" do
-#     post :add_item, params.merge(item_type: "UnsafeClass")
+#     post :add_item, params: params.merge(item_type: "UnsafeClass")
 #     assert_response :bad_request
 #   end
 #
 #   it "should add item" do
 #     cart.items.count.should be == 0
 #
-#     post :add_item, params.merge(
+#     post :add_item, params: params.merge(
 #       item_type: "Bounty",
 #       anonymous: true,
 #       amount: 100,
@@ -47,14 +47,14 @@
 #
 #     it "should remove item" do
 #       cart.items.count.should be == 1
-#       delete :remove_item, params.merge(index: 0)
+#       delete :remove_item, params: params.merge(index: 0)
 #       cart.reload
 #       cart.items.count.should be == 0
 #     end
 #
 #     it "should update item" do
 #       cart.get_item(0).amount.should be == 1337
-#       put :update_item, params.merge(index: 0, amount: 42)
+#       put :update_item, params: params.merge(index: 0, amount: 42)
 #       cart.reload
 #       cart.get_item(0).amount.should be == 42
 #     end
@@ -76,7 +76,7 @@
 #         ]
 #       }
 #
-#       post :import, params.merge(payload)
+#       post :import, params: params.merge(payload)
 #       assert_response :ok
 #       person.reload.shopping_cart.items.count.should be == payload[:items].count
 #     end
