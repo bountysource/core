@@ -162,7 +162,7 @@ class Tracker < ActiveRecord::Base
   has_many :tracker_person_relations
 
   has_many :activity_logs
-  has_many :tracker_rank_caches, class_name: TrackerRankCache, dependent: :delete_all
+  has_many :tracker_rank_caches, class_name: 'TrackerRankCache', dependent: :delete_all
 
   has_many :fundraisers, through: :fundraiser_tracker_relations
   has_many :fundraiser_tracker_relations
