@@ -18,9 +18,6 @@
 #
 
 class Unsubscribe < ActiveRecord::Base
-
-  attr_accessible :email, :person, :linked_account, :category
-
   belongs_to :person
   belongs_to :linked_account, class_name: 'LinkedAccount::Base'
 

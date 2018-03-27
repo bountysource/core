@@ -19,7 +19,6 @@
 
 class SupportOffering < ActiveRecord::Base
   has_paper_trail :only => [:subtitle, :body_markdown, :youtube_video_url, :goals]
-  attr_accessible :subtitle, :body_markdown, :youtube_video_url, :goals, :extra
 
   has_many :rewards, class_name: 'SupportOfferingReward'
   belongs_to :team

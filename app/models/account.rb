@@ -23,9 +23,6 @@
 # See the documentation in Transaction and Split for more detail
 
 class Account < ActiveRecord::Base
-
-  attr_accessible :currency, :description, :owner, :name
-
   # NOTE: the presence of an owner is optional
   belongs_to :owner, polymorphic: true, autosave: false
   has_many :splits

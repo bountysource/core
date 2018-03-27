@@ -79,13 +79,6 @@ class Issue < ActiveRecord::Base
 
   UNKNOWN_TITLE = '(Issue Title Unknown)'
 
-  # ATTRIBUTES
-  attr_accessible :title, :body, :url, :number,
-                  :featured, :tracker, :can_add_bounty, :bounty_total,
-                  :remote_created_at, :remote_updated_at, :remote_id, :synced_at,
-                  :comment_count, :participants_count, :thumbs_up_count, :votes_count, :watchers_count,
-                  :priority, :severity, :author_name, :owner, :author, :body_markdown
-
   has_paper_trail :only => [:remote_id, :url, :number, :title, :body, :body_markdown, :tracker_id, :can_add_bounty]
 
   has_many :bounties

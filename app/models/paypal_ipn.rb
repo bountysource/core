@@ -24,8 +24,6 @@
 
 # PayPal IPN Reference: https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/
 class PaypalIpn < ActiveRecord::Base
-  attr_accessible :raw_post, :txn_id, :payment_type, :payment_processed_at, :is_return, :processed, :pending
-
   has_many :splits, :as => :item
   has_many :transactions, :through => :splits
   belongs_to :order, class_name: "Transaction::Order"

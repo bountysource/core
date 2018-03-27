@@ -34,10 +34,6 @@
 require 'account/team'
 
 class Bounty < ActiveRecord::Base
-
-  attr_accessible :expires_at, :paid_at, :status, :person, :issue, :amount, :anonymous, :acknowledged_at,
-                  :bounty_expiration, :upon_expiration, :promotion, :owner_id, :owner_type, :tweet, :issue_id, :featured
-
   belongs_to :person
   belongs_to :issue
 

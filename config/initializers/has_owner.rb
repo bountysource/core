@@ -6,8 +6,6 @@
 class ActiveRecord::Base
   def self.has_owner
     self.class_eval do
-
-      attr_accessible :owner
       belongs_to :owner, polymorphic: true
 
       # Override owner get method. Defaults to #person if polymorphic owner is nil
@@ -38,4 +36,3 @@ class ActiveRecord::Base
     end
   end
 end
-

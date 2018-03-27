@@ -14,6 +14,5 @@
 #
 
 class Lurker < ActiveRecord::Base
-  attr_accessible :remote_ip, :user_agent
   has_many :activity_logs
 end

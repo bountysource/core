@@ -61,8 +61,6 @@
 #
 
 class SourceForge::Issue < ::Issue
-  attr_accessible :state, :priority, :milestone, :remote_type, :number
-
   belongs_to :tracker, class_name: "SourceForge::Tracker", foreign_key: :tracker_id
 
   # SYNCING INSTANCE METHODS, OVERRIDE THESE AS NECESSARY

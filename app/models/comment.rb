@@ -21,10 +21,6 @@
 #
 
 class Comment < ActiveRecord::Base
-
-  attr_accessible :synced_at, :remote_id, :issue, :sync_in_progress, :body_html, :author_name, :author, :created_at,
-    :body_markdown
-
   belongs_to :issue
   belongs_to :author, class_name: 'LinkedAccount::Base', foreign_key: :author_linked_account_id
 

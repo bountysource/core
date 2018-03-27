@@ -17,9 +17,6 @@
 #
 
 class AccessToken < ActiveRecord::Base
-
-  attr_accessible :remote_ip, :user_agent
-
   belongs_to :person
 
   before_create :token

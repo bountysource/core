@@ -19,8 +19,6 @@
 class PersonRelation::Base < ActiveRecord::Base
   self.table_name = 'person_relations'
 
-  attr_accessible :type, :person, :target_person
-
   validates :person, presence: true
   validates :target_person, presence: true
   validates_uniqueness_of :person_id, scope: :target_person_id

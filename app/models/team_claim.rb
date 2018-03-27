@@ -14,8 +14,6 @@
 #
 
 class TeamClaim < ActiveRecord::Base
-  attr_accessible :person, :team, :claim_notes, :rejected_notes, :accepted_at, :rejected_at
-
   belongs_to :person
   belongs_to :team
 end

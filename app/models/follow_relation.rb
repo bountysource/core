@@ -16,9 +16,6 @@
 #
 
 class FollowRelation < ActiveRecord::Base
-
-  attr_accessible :item, :person, :active
-
   belongs_to :item, polymorphic: true
   belongs_to :person
 

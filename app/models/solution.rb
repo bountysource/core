@@ -20,8 +20,6 @@
 #
 
 class Solution < ActiveRecord::Base
-  attr_accessible :person, :issue, :url, :completion_date, :note, :status
-
   validates :issue, presence: true
   validates :person, presence: true
   validates_uniqueness_of :issue_id, scope: [:person_id]

@@ -24,9 +24,6 @@
 #
 
 class TeamPayin < ActiveRecord::Base
-
-  attr_accessible :person, :team, :amount, :consumed, :owner_id, :owner_type, :team_id, :from_member, :refunded_at
-
   belongs_to :team
   belongs_to :person
   has_owner

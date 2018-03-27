@@ -24,8 +24,6 @@
 #
 
 class BountyClaim < ActiveRecord::Base
-  attr_accessible :code_url, :description, :person, :issue, :collected, :rejected, :disputed, :amount
-
   belongs_to :person
   belongs_to :issue
   has_many :bounty_claim_responses

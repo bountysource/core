@@ -25,8 +25,6 @@ class Address < ActiveRecord::Base
   belongs_to :person
   has_many :cash_outs
 
-  attr_accessible :name, :address1, :address2, :address3, :city, :state, :postal_code, :country
-
   validates :name, presence: true
   validates :address1, presence: true
   validates :city, presence: true

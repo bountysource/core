@@ -18,8 +18,6 @@
 #
 
 class SupportOfferingReward < ActiveRecord::Base
-  attr_accessible :amount, :title, :description, :active_support_levels_count, :deleted_at
-
   scope :active, lambda { where(deleted_at: nil) }
 
   belongs_to :support_offering

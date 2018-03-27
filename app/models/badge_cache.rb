@@ -14,5 +14,4 @@
 #
 
 class BadgeCache < ActiveRecord::Base
-  attr_accessible :url, :raw_xml
 end

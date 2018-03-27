@@ -18,11 +18,7 @@
 #
 
 class TagRelation < ActiveRecord::Base
-
-
   VALID_CLASSES = %w(Team Tag)
-
-  attr_accessible :child, :parent
 
   belongs_to :parent, polymorphic: true
   belongs_to :child, polymorphic: true

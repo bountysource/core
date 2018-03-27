@@ -21,8 +21,6 @@ class DeveloperGoal < ActiveRecord::Base
   belongs_to :person
   belongs_to :issue
 
-  attr_accessible :issue, :person, :amount, :notified
-
   validates :person_id, presence: true
   validates :issue_id, presence: true
   validates :amount, numericality: true, presence: true

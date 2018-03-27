@@ -20,8 +20,6 @@
 #
 
 class TeamUpdate < ActiveRecord::Base
-  attr_accessible :title, :body, :team, :number, :mailing_lists
-
   belongs_to :team
 
   validates :team,  presence: true

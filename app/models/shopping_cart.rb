@@ -20,9 +20,6 @@
 #
 
 class ShoppingCart < ActiveRecord::Base
-
-  attr_accessible :person, :items, :uid, :payment_method
-
   # STATUS = %w(draft open paid unpaid)
 
   belongs_to :person

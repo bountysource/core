@@ -20,8 +20,6 @@
 #
 
 class TeamInvite < ActiveRecord::Base
-  attr_accessible :email, :token, :team, :admin, :developer, :public
-
   belongs_to :team
 
   validates :team, presence: true

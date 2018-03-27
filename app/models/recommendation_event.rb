@@ -14,5 +14,4 @@
 #
 
 class RecommendationEvent < ActiveRecord::Base
-  attr_accessible :event, :issue_id
 end

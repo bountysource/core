@@ -16,9 +16,6 @@
 #
 
 class PledgeSurveyResponse < ActiveRecord::Base
-
-  attr_accessible :person, :reward, :survey_response
-
   belongs_to :person
   belongs_to :reward
   has_one :fundraiser, through: :reward

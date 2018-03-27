@@ -18,7 +18,4 @@ class SolutionEvent < ActiveRecord::Base
   belongs_to :solution
   validates :type, presence: true
   validates :solution, presence: true
-
-  attr_accessible :solution
-
 end

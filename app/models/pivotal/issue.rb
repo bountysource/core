@@ -61,8 +61,6 @@
 #
 
 class Pivotal::Issue < ::Issue
-  attr_accessible :state, :number
-
   belongs_to :tracker, class_name: "Pivotal::Tracker", foreign_key: :tracker_id
 
   def remote_sync_if_necessary(options={})

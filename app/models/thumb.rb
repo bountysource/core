@@ -19,9 +19,6 @@
 #
 
 class Thumb < ActiveRecord::Base
-
-  attr_accessible :item_id, :item_type, :item, :explicit, :downvote, :thumbed_at
-
   belongs_to :person
   belongs_to :item, polymorphic: true
   belongs_to :comment

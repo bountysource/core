@@ -61,8 +61,6 @@
 #
 
 class PhpTracker::Issue < ::Issue
-  attr_accessible :state, :priority, :milestone, :remote_type, :number
-
   belongs_to :tracker, class_name: "PhpTracker::Tracker", foreign_key: :tracker_id
 
   def remote_sync_if_necessary(options={})

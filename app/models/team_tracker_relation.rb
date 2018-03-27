@@ -16,9 +16,6 @@
 #
 
 class TeamTrackerRelation < ActiveRecord::Base
-
-  attr_accessible :team, :tracker
-
   has_owner
   belongs_to :team
   belongs_to :tracker

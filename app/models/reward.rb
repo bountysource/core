@@ -22,11 +22,6 @@
 #
 
 class Reward < ActiveRecord::Base
-
-  # ATTRIBUTES
-  attr_accessible :fundraiser, :delivered_at, :description, :limited_to, :claimed, :timezone, :vanity_url, :amount,
-                  :sold_out, :fulfillment_details, :merchandise_fee
-
   # RELATIONSHIPS
   belongs_to :fundraiser
   has_many :pledges

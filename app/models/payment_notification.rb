@@ -21,9 +21,6 @@
 #
 
 class PaymentNotification < ActiveRecord::Base
-
-  attr_accessible :raw_post, :raw_json, :txn_id, :order, :secret_matched, :shopping_cart
-
   belongs_to :order, class_name: 'Transaction::Order'
   belongs_to :shopping_cart
   belongs_to :payment_method
