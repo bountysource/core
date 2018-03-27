@@ -9,7 +9,7 @@
 #
 
 class Takedown < ActiveRecord::Base
-  belongs_to :linked_account, class_name: LinkedAccount::Base
+  belongs_to :linked_account, class_name: 'LinkedAccount::Base'
 
   SANITIZED_HTML = "<i>[This content has been removed due to a takedown request by the author.]</i>"
   DISPLAY_NAME = "[removed]"

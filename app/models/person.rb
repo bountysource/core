@@ -47,7 +47,7 @@ class Person < ActiveRecord::Base
 
   has_paper_trail :only => [:first_name, :last_name, :display_name, :email, :password, :bio, :location, :public_email, :url, :company]
 
-  has_account class_name: Account::Personal
+  has_account class_name: 'Account::Personal'
   has_many :orders, -> { where('type LIKE ?', 'Transaction::Order%') }, class_name: 'Transaction'
 
   has_many :bounty_claims
@@ -57,21 +57,21 @@ class Person < ActiveRecord::Base
   has_many :saved_search_tabs
 
   # there is no longer a Github::Commit model -- CAB
-  # has_many :commits, class_name: Github::Commit
+  # has_many :commits, class_name: 'Github::Commit'
   has_many :fundraisers
   has_many :searches
-  has_many :person_relations, class_name: PersonRelation::Base
+  has_many :person_relations, class_name: 'PersonRelation::Base'
 
   has_many :friends,
-           class_name:  Person,
+           class_name:  'Person',
            through:     :person_relations,
            source:      :target_person
 
   # linked accounts
-  has_many :linked_accounts,  class_name: LinkedAccount::Base
-  has_one :github_account,    class_name: LinkedAccount::Github::User
-  has_one :facebook_account,  class_name: LinkedAccount::Facebook
-  has_one :twitter_account,   class_name: LinkedAccount::Twitter
+  has_many :linked_accounts,  class_name: 'LinkedAccount::Base'
+  has_one :github_account,    class_name: 'LinkedAccount::Github::User'
+  has_one :facebook_account,  class_name: 'LinkedAccount::Facebook'
+  has_one :twitter_account,   class_name: 'LinkedAccount::Twitter'
 
   has_many :tracker_plugins
   has_many :tracker_relations, through: :linked_accounts
@@ -89,14 +89,14 @@ class Person < ActiveRecord::Base
   has_many :solutions
   has_many :solution_events, through: :solutions
 
-  has_many :language_relations, class_name: LanguagePersonRelation
+  has_many :language_relations, class_name: 'LanguagePersonRelation'
 
   has_many :developer_goals
 
   has_many :activity_logs
   has_many :ranked_issues, through: :issue_rank_caches, source: :issue
-  has_many :issue_rank_caches, class_name: IssueRankCache
-  has_many :tracker_rank_caches, class_name: TrackerRankCache
+  has_many :issue_rank_caches, class_name: 'IssueRankCache'
+  has_many :tracker_rank_caches, class_name: 'TrackerRankCache'
 
   has_many :shopping_carts
 
