@@ -30,7 +30,7 @@ class Api::V2::RequestForProposalsController < Api::BaseController
 
   def destroy
     request_for_proposal.destroy!
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
 private

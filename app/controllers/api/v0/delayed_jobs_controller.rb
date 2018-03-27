@@ -59,7 +59,7 @@ class Api::V0::DelayedJobsController < Api::V0::BaseController
       @delayed_job.reload
       render "api/v0/delayed_jobs/show", status: :bad_request
     rescue ActiveRecord::RecordNotFound
-      render nothing: true, status: :accepted
+      head :accepted
     end
   end
 

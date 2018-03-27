@@ -322,7 +322,7 @@ class Api::V1::PeopleController < ApplicationController
     language_ids = (params[:language_ids] || '').split(',')
     @person.set_languages(*language_ids)
 
-    render nothing: true, status: :ok
+    head :ok
   end
 
 protected

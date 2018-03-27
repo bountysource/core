@@ -85,11 +85,11 @@ class Api::V2::CashOutsController < Api::BaseController
   end
 
   def update
-    render nothing: true, status: :not_implemented
+    head :not_implemented
   end
 
   def delete
-    render nothing: true, status: :not_implemented
+    head :not_implemented
   end
 
 private

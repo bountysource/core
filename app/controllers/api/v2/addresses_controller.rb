@@ -28,7 +28,7 @@ class Api::V2::AddressesController < Api::BaseController
   def destroy
     @item = current_user.addresses.find params[:id]
     @item.destroy!
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
   private

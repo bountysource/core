@@ -107,7 +107,7 @@ class Api::V0::TransactionsController < Api::V0::BaseController
   def destroy
     @transaction.splits.destroy_all
     @transaction.delete
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
   def sweep
@@ -117,7 +117,7 @@ class Api::V0::TransactionsController < Api::V0::BaseController
       if @transaction
         render "api/v1/transactions/show"
       else
-        render nothing: true, status: :no_content
+        head :no_content
       end
     end
   end

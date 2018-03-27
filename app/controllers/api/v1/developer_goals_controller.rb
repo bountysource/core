@@ -45,7 +45,7 @@ class Api::V1::DeveloperGoalsController < ApplicationController
 
   def destroy
     if @developer_goal.destroy
-      render nothing: true, status: :ok
+      head :ok
     else
       render json: { error: @developer_goal.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end
