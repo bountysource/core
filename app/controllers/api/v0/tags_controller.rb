@@ -20,9 +20,6 @@ class Api::V0::TagsController < Api::V0::BaseController
     TagRelation.where(id: bad_relation_ids).delete_all
     TagVote.where(tag_relation_id: bad_relation_ids).delete_all
     @tag.destroy
-
     render json: true
   end
-
-
 end
