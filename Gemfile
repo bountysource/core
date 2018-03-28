@@ -108,6 +108,7 @@ group :test do
   gem 'webmock'
   gem 'timecop'
   gem 'jshint', '1.5.0'
+  gem 'rails-controller-testing'
 end
 
 gem 'haml'
