@@ -452,7 +452,7 @@ describe ShoppingCart do
 
     it 'should delete old' do
       action[]
-      expect { old.reload }.to raise_error
+      expect { old.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'should not delete new' do
