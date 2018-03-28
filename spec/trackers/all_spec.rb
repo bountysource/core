@@ -274,7 +274,7 @@ describe "live_sync" do
       end
 
       it "should create Tracker Issues" do
-        expect(action).to change(tracker.issues, :count).by_at_least(tracker_class::MAX_RESULT_PER_PAGE)
+        expect(action).to change{tracker.issues.count}.by_at_least(tracker_class::MAX_RESULT_PER_PAGE)
       end
     end
 

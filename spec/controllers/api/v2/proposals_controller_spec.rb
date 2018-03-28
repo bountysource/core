@@ -10,6 +10,17 @@ describe Api::V2::ProposalsController do
   let(:proposal) { double(:proposal, id: 1) }
   let(:ar_proposal) { build_stubbed(:proposal) }
 
+  # the AASM::InvalidTransition initializer requires a few params we don't have
+  let(:invalid_transition_exception) {
+    obj = double()
+    allow(obj).to receive(:aasm) do
+      obj2 = double()
+      allow(obj2).to receive(:current_state)
+      obj2
+    end
+    AASM::InvalidTransition.new(obj, 'event_name', 'state')
+  }
+
   before do
     allow_any_instance_of(Api::BaseController).to receive(:current_user).and_return(person)
     allow(Issue).to receive(:find_by!).and_return(issue)
@@ -138,7 +149,7 @@ describe Api::V2::ProposalsController do
     end
 
     it 'should render bad request on invalid state change' do
-      expect(proposal).to receive(:begin_appointment!).and_raise(AASM::InvalidTransition)
+      expect(proposal).to receive(:begin_appointment!).and_raise(invalid_transition_exception)
       action
       expect(response.status).to eq(400)
     end
@@ -175,7 +186,7 @@ describe Api::V2::ProposalsController do
     end
 
     it 'should render bad request on invalid state change' do
-      expect(proposal).to receive(:reject!).and_raise(AASM::InvalidTransition)
+      expect(proposal).to receive(:reject!).and_raise(invalid_transition_exception)
       action
       expect(response.status).to eq(400)
     end

@@ -66,7 +66,7 @@ describe Proposal do
     end
 
     it 'should check that a proposal can be destroyed when calling destroy' do
-      expect(@proposal).to receive(:destroyable?)
+      expect(@proposal).to receive(:destroyable?).and_return(true)
       @proposal.destroy!
     end
   end

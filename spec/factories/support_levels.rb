@@ -28,7 +28,7 @@ FactoryBot.define do
   factory :support_level do
     association :person, factory: :person
     association :team, factory: [:team, :accepts_public_payins]
-    association :payment_method, factory: :payment_method_paypal
+    association :payment_method, factory: :payment_method_paypal, strategy: :build
     status { 'pending' }
     amount { 10 }
 

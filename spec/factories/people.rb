@@ -53,7 +53,7 @@ FactoryBot.define do
     end
 
     factory :person_with_money_in_account do
-      ignore do
+      transient do
         money_amount { 10 }
       end
 

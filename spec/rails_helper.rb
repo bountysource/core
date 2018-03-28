@@ -64,4 +64,6 @@ RSpec.configure do |config|
   config.include RSpec::Rails::ViewRendering
   config.include FactoryBot::Syntax::Methods
   config.include Features::SessionHelpers, type: :feature
+  config.include(Shoulda::Matchers::ActiveModel, type: :model)
+  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
 end
