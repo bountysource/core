@@ -22,7 +22,7 @@ class ActiveRecord::Base
       # an account, manually passing this in as the item. bypasses the aforementioned craziness.
 
       def self.account_class
-        reflections[:account].klass
+        reflect_on_association(:account).options[:class_name].constantize
       end
 
       def account_class
