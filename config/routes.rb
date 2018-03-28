@@ -72,7 +72,7 @@ Api::Application.routes.draw do
 
     # Our own (un)deliciously home-rolled not-omniauth
     scope path: '/auth/:provider', controller: 'session' do
-      get '/', to: :login, as: 'login'
+      get '/', action: :login, as: 'login'
       get :callback
     end
 
@@ -204,7 +204,7 @@ Api::Application.routes.draw do
 
             member do
               post :perform
-              root to: :delete, via: :delete
+              root action: :delete, via: :delete
             end
           end
 
@@ -240,7 +240,7 @@ Api::Application.routes.draw do
         #end
 
         scope path: '/stats', controller: :stats do
-          get '/', to: :global
+          get '/', action: :global
           match '/trackers/:id', action: :tracker, via: :get
         end
 
@@ -309,7 +309,7 @@ Api::Application.routes.draw do
         end
 
         namespace :fundraisers do
-          root to: :all, via: :get
+          root action: :all, via: :get
         end
 
         resource :user, controller: 'people' do
@@ -371,18 +371,18 @@ Api::Application.routes.draw do
         end
 
         scope path: 'tags', controller: :tags do
-          get '/', to: :all, via: :get
+          get '/', action: :all, via: :get
 
           scope path: ':name', constraints: { name: Tag::ROUTE_REGEX } do
-            get '/', to: :one, via: :get
+            get '/', action: :one, via: :get
 
             get :projects
           end
         end
 
         scope path: 'follows', controller: :follow_relations do
-          put '/', to: :follow
-          delete '/', to: :unfollow
+          put '/', action: :follow
+          delete '/', action: :unfollow
         end
 
         resources :teams, only: [:show, :index, :create, :update], id: /([^\/])+?/, format: /json/  do
@@ -403,10 +403,10 @@ Api::Application.routes.draw do
             end
 
             resource :invites, controller: :team_invites, only: [] do
-              get '/', to: :index
-              post '/', to: :create
-              put '/', to: :accept
-              delete '/', to: :reject
+              get '/', action: :index
+              post '/', action: :create
+              put '/', action: :accept
+              delete '/', action: :reject
             end
           end
         end
