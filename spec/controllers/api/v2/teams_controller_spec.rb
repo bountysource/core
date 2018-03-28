@@ -5,9 +5,7 @@ describe Api::V2::TeamsController do
 
   # TODO replace with include_context for v2 controllers
   let(:params) do
-    {
-      vendor_string: 'bountysource'
-    }
+    {}
   end
 
   describe 'index' do

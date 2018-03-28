@@ -14,7 +14,6 @@ describe Api::V2::CartItemsController do
   let(:params) do
     {
       access_token: person.create_access_token,
-      vendor_string: 'bountysource',
       id: 0, #index of item in cart.items
       proposal_id: proposal.id,
       uid: cart.uid,

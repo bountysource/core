@@ -1,19 +1,15 @@
-require 'active_support/concern'
-
+# `api-versions` gem turns `Accept` header into params[:vendor_string] == 'bountysource'
+# so we need to simulate that here.
 module DefaultVendorParams
-  extend ActiveSupport::Concern
+  def process(action, args)
+    if controller_class_name =~ /api\//
+      (args[:params] ||= {})[:vendor_string] = 'bountysource'
+    end
 
-  def process_with_vendor_default(action, http_method, params={}, session={}, flash={})
-    params = default_params.merge(params)
-    process_without_vendor_default(action, http_method, params, session, flash)
-  end
-
-  included do
-    let(:default_params) { {vendor_string: 'bountysource'} }
-    alias_method_chain :process, :vendor_default
+    super(action, args)
   end
 end
 
 RSpec.configure do |config|
-  config.include(DefaultVendorParams, :type => :controller)
+  config.prepend(DefaultVendorParams, :type => :controller)
 end
