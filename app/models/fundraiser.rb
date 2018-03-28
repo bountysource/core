@@ -139,7 +139,7 @@ class Fundraiser < ActiveRecord::Base
   # get days remaining. returns nil if not yet published
   def days_remaining
     if published?
-      (ends_at.end_of_day.utc.to_date - DateTime.now.utc).to_i
+      (ends_at.end_of_day.utc - DateTime.now.utc).to_i
     else
       days_open
     end
