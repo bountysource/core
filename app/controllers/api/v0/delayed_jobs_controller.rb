@@ -44,7 +44,7 @@ class Api::V0::DelayedJobsController < Api::V0::BaseController
 
   def delete
     if @delayed_job.delete
-      render text: 'ok', status: :accepted
+      head :accepted
     else
       render json: { error: @delayed_job.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end

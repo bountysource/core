@@ -7,7 +7,7 @@ class BountySourceController < ApplicationController
 
   def home
     if Rails.env.development? && (request.path =~ /^\/app\// || request.path =~ /^\/assets\//)
-      render text: '404 NOT FOUND', status: :not_found
+      head :not_found
     else
       render "layouts/bounty_source.html.erb", layout: false
     end

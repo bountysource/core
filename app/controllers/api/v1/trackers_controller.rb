@@ -46,12 +46,12 @@ class Api::V1::TrackersController < ApplicationController
 
   def upvote_tag
     TagVote.find_or_create_by_person_and_relation_and_cast_vote @person, @tag_relation, 1
-    render text: 'ok', status: :ok
+    head :ok
   end
 
   def downvote_tag
     TagVote.find_or_create_by_person_and_relation_and_cast_vote @person, @tag_relation, -1
-    render text: 'ok', status: :ok
+    head :ok
   end
 
   def show_tag

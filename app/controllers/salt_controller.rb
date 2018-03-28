@@ -6,7 +6,7 @@ class SaltController < ApplicationController
 
   def render_html
     if Rails.env.development? && request.fullpath =~ /.html$/
-      render text: "Template not found: #{request.fullpath}", status: :not_found
+      render plain: "Template not found: #{request.fullpath}", status: :not_found
       return
     end
 

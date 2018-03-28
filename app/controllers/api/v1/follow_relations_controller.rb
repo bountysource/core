@@ -22,7 +22,7 @@ class Api::V1::FollowRelationsController < ApplicationController
     if @follow_relation.update_attributes(active: false)
       render "api/v1/follow_relations/show"
     else
-      render text: 'error', status: :bad_request
+      head :bad_request
     end
   end
 

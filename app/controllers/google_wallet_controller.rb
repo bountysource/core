@@ -23,7 +23,7 @@ class GoogleWalletController < ApplicationController
 
         # "...your server must send a 200 OK response where the only content
         # is the value of the "orderId" field"
-        return render text: order_id, status: :ok
+        return render plain: order_id, status: :ok
       end
     end
 
