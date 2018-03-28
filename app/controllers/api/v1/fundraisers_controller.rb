@@ -19,7 +19,7 @@ class Api::V1::FundraisersController < ApplicationController
     @fundraiser.team_id           = params[:team_id]            unless params[:team_id].blank? || !@person.teams.map(&:id).include?(params[:team_id].to_i)
 
     # special case for funding_goal, remove commas and dollar signs
-    @fundraiser.funding_goal = Money.parse(params[:funding_goal]).amount.to_i if params[:funding_goal]
+    @fundraiser.funding_goal = Monetize.parse(params[:funding_goal]).amount.to_i if params[:funding_goal]
 
     if @fundraiser.valid? && @fundraiser.save
       render "api/v1/fundraisers/show", status: :created
@@ -36,7 +36,7 @@ class Api::V1::FundraisersController < ApplicationController
     @fundraiser.team_id           = params[:team_id]            if params.has_key?(:team_id) && (params[:team_id].nil? || @person.teams.map(&:id).include?(params[:team_id].to_i))
 
     # special case for funding_goal, remove commas and dollar signs
-    @fundraiser.funding_goal = Money.parse(params[:funding_goal]).amount.to_i if params[:funding_goal]
+    @fundraiser.funding_goal = Monetize.parse(params[:funding_goal]).amount.to_i if params[:funding_goal]
 
     if @fundraiser.valid? && @fundraiser.save
       render "api/v1/fundraisers/show"

@@ -61,7 +61,7 @@ class PaymentMethod::PaypalReferenceTransaction < PaymentMethod
   end
 
   def charge(amount, descriptor='Bountysource')
-    raise "Hundred million is a bit steep..." unless amount < 10**8
+    raise "Hundred million is a bit steep..." unless amount < Money.new(10**10)
 
     # api call to make charge
     response = self.class.api(

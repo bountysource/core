@@ -86,6 +86,15 @@ class Split < ActiveRecord::Base
     end
   end
 
+  # Money objects don't work with validates-numericality, so convert to BigDecimal
+  def amount=(amount)
+    if amount.is_a?(Money)
+      self[:amount] = amount.to_d
+    else
+      self[:amount] = amount
+    end
+  end
+
   # Check if a bunch of splits' amounts sum to zero
   # (double-entry bookkeeping constraint)
   def self.balanced?(splits)

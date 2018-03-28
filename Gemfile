@@ -28,6 +28,7 @@ gem 'github-markdown', :require => 'github/markdown'
 # the last known working one.
 gem 'jwt', '= 0.1.11' # for Google Wallet JWT creation
 gem 'money'  # used to be included through the checkout gem
+gem 'monetize'
 
 gem 'newrelic_rpm'
 

@@ -37,7 +37,7 @@ class Api::V1::RewardsController < ApplicationController
     @reward.description           = params[:description]            || @reward.description
     @reward.limited_to            = params[:limited_to]             || @reward.limited_to
     @reward.fulfillment_details   = params[:fulfillment_details]    || @reward.fulfillment_details
-    @reward.amount = Money.parse(params[:amount]||0).amount.to_i if params[:amount]
+    @reward.amount = Monetize.parse(params[:amount]).amount.to_i if params[:amount]
 
     if @reward.valid? && @reward.save
       render "api/v1/rewards/show"

@@ -385,6 +385,8 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    monetize (1.7.0)
+      money (~> 6.9)
     money (6.10.1)
       i18n (>= 0.6.4, < 1.0)
     multi_json (1.13.1)
@@ -625,6 +627,7 @@ DEPENDENCIES
   jwt (= 0.1.11)
   launchy
   maildown
+  monetize
   money
   mysql2 (= 0.3.17)
   newrelic_rpm
