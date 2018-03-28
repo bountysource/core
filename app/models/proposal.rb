@@ -42,7 +42,9 @@ class Proposal < ActiveRecord::Base
   delegate :account, to: :request_for_proposal
   delegate :pending_proposals, to: :request_for_proposal
 
-  before_destroy :destroyable?
+  before_destroy do
+    throw(:abort) unless destroyable?
+  end
 
   aasm column: 'state' do
     state :pending, initial: true

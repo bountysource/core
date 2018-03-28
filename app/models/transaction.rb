@@ -71,7 +71,7 @@ class Transaction < ActiveRecord::Base
       errors.add :splits, "must be empty"
     end
 
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   # create a Transaction model from any number of Splits

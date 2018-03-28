@@ -81,7 +81,7 @@ class BountyClaim < ActiveRecord::Base
   # cannot destroy an accepted claim!:
   before_destroy do
     errors.add(:base, "Cannot destroy accepted bounty claim") if collected?
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   class BountyClaimError < StandardError; end

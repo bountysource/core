@@ -52,14 +52,12 @@ class Account < ActiveRecord::Base
         errors.add :base, "#{owner.class}(#{owner.id}) can only have 1 #{self.class.name}"
       end
     end
-
-    errors.empty?
   end
 
   # You shouldn't be able to destroy accounts with activity...
   before_destroy do
     errors.add :base, 'Cannot delete account with Splits' unless splits.empty?
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   # all accounts are liability accounts unless explicitly overridden

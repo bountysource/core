@@ -87,7 +87,7 @@ class Fundraiser < ActiveRecord::Base
 
   before_destroy do
     errors.add :base, "Cannot delete published fundraiser" if published?
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   # add a $0 reward model, so that we can track when backers choose to opt out of a reward

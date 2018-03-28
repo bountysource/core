@@ -42,14 +42,14 @@ class Reward < ActiveRecord::Base
   before_update do
     if amount_was.zero?
       errors.add :base, "Cannot change 'No Reward'"
-      false
+      throw(:abort)
     end
   end
 
   before_destroy do
     errors.add :base, "Cannot delete 'No Reward' option" if amount.zero?
     errors.add :base, "Cannot delete published reward" if fundraiser.published?
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   class RewardUpdateValidator < ActiveModel::Validator
