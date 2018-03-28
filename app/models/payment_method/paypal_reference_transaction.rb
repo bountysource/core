@@ -76,7 +76,7 @@ class PaymentMethod::PaypalReferenceTransaction < PaymentMethod
 
     # save it to the DB
     notifications.create!(
-      raw_json: response.to_json,
+      raw_json: JSON.parse(response.to_json),
       txn_id: response['TRANSACTIONID'] || 'error'
     )
   end

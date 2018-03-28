@@ -35,7 +35,7 @@ class PaymentMethod::StripeCreditCard < PaymentMethod
 
     # save it to the DB
     notifications.create!(
-      raw_json: response.to_json,
+      raw_json: JSON.parse(response.to_json),
       txn_id: response['id'] || 'error'
     )
   rescue Stripe::StripeError => e
