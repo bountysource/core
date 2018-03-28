@@ -84,7 +84,13 @@ class Api::V2::CashOutsController < Api::BaseController
   end
 
   def update
-    render nothing: true, status: :not_implemented
+    @item = ::CashOut.find params[:id]
+
+    if !@item.sent? && params.has_key?(:refund)
+      @item.update_attributes!(sent_at: DateTime.now, is_refund: true)
+      @item.refund!
+      render nothing: true
+    end
   end
 
   def delete
