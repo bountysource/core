@@ -244,26 +244,6 @@ class Person < ActiveRecord::Base
     self.active.find_by_email(email).try(:authenticate, password)
   end
 
-  # support sha1 and mysql style passwords with auto-updating
-  def authenticate_with_legacy_passwords(password)
-    return false if password.blank?
-
-    case password_digest
-      when /^[0-9a-f]{40}$/ # sha1
-        if Digest::SHA1.hexdigest(password) == password_digest
-          update_attribute(:password, password)  #intentionally skip validations via update_attribute
-          send_email(:account_created)
-          return self
-        else
-          return false
-        end
-
-      else
-        authenticate_without_legacy_passwords(password)
-    end
-  end
-  alias_method_chain :authenticate, :legacy_passwords
-
   def self.distinct_backers_count
     self.joins(:bounties).count(distinct: true)  # distinct_backers.count does NOT work
   end

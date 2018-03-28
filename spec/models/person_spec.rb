@@ -136,26 +136,6 @@ describe Person do
     it "should find the person by email and password" do
       person.should == Person.authenticate(person.email, person.password)
     end
-
-    describe "works with legacy passwords" do
-      let(:password) { "test" }
-      it "via sha1" do
-        digest = Digest::SHA1.hexdigest(password)
-
-        person['password_digest'] = digest
-        person.save
-        person.valid?.should be_truthy
-
-        Person.authenticate(person.email, password + "wrong").should be_falsey
-        Person.authenticate(person.email, password).should == person
-
-        # should be updated to bcrypt
-        Person.find_by_email(person.email).password_digest.should_not == digest
-
-        # should work again
-        Person.authenticate(person.email, password).should == person
-      end
-    end
   end
 
   describe "#get_ranked_issues" do
