@@ -7,5 +7,5 @@
 </p>
 
 <p>  
-  The $<%= @bounty_claim.issue.bounty_total.round %> bounty will be paid out to the developer whose claim is accepted by all of the backers. If you have any questions, please <a href="mailto:support@bountysource.com">email us</a>.
+  The <%= number_to_dollars(@bounty_claim.amount) %> bounty will be paid out to the developer whose claim is accepted by all of the backers. If you have any questions, please <a href="mailto:support@bountysource.com">email us</a>.
 </p>
