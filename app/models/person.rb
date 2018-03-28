@@ -94,8 +94,8 @@ class Person < ActiveRecord::Base
   has_many :developer_goals
 
   has_many :activity_logs
-  has_many :ranked_issues, through: :issue_rank_caches, source: :issue
   has_many :issue_rank_caches, class_name: 'IssueRankCache'
+  has_many :ranked_issues, through: :issue_rank_caches, source: :issue
   has_many :tracker_rank_caches, class_name: 'TrackerRankCache'
 
   has_many :shopping_carts

@@ -49,8 +49,8 @@ class Fundraiser < ActiveRecord::Base
   has_many :rewards
   has_many :fundraiser_questions
   has_many :pledges
-  has_many :trackers, through: :fundraiser_tracker_relations
   has_many :fundraiser_tracker_relations
+  has_many :trackers, through: :fundraiser_tracker_relations
 
   has_account class_name: 'Account::Fundraiser'
 
