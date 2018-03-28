@@ -131,7 +131,7 @@ class Person < ActiveRecord::Base
   validates :password,
             length: { minimum: 8 },
             format: { with: /[a-z].*[0-9]|[0-9].*[a-z]/i, message: 'must contain a letter and a number' },
-            if: 'password_digest.blank? || !password.blank?'
+            if: Proc.new { |p| p.password_digest.blank? || !p.password.blank? }
 
   # NOTE: this only validates if accept is defined (aka: nil is valid)
   validates_acceptance_of :terms, :accept => true
