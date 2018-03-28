@@ -9,12 +9,12 @@ describe Api::V2::RequestForProposalsController do
   let(:person) { double(:person) }
 
   before do
-    Api::BaseController.any_instance.stub(:current_user).and_return(person)
-    Issue.stub(:find_by!).and_return(issue)
-    issue.stub(:team).and_return(team)
-    issue.stub(:request_for_proposal).and_return(request_for_proposal)
-    team.stub(:person_is_admin?).and_return(true)
-    team.stub(:person_is_developer?).and_return(true)
+    allow_any_instance_of(Api::BaseController).to receive(:current_user).and_return(person)
+    allow(Issue).to receive(:find_by!).and_return(issue)
+    allow(issue).to receive(:team).and_return(team)
+    allow(issue).to receive(:request_for_proposal).and_return(request_for_proposal)
+    allow(team).to receive(:person_is_admin?).and_return(true)
+    allow(team).to receive(:person_is_developer?).and_return(true)
 
     params.merge!(issue_id: issue.id)
   end
@@ -31,13 +31,13 @@ describe Api::V2::RequestForProposalsController do
     end
 
     it 'should require issue' do
-      Issue.stub(:find_by!).and_raise(ActiveRecord::RecordNotFound)
+      allow(Issue).to receive(:find_by!).and_raise(ActiveRecord::RecordNotFound)
       get(:show, params: params)
       expect(response.status).to eq(404)
     end
 
     it 'should require request for proposal' do
-      issue.stub(:request_for_proposal).and_return(nil)
+      allow(issue).to receive(:request_for_proposal).and_return(nil)
       expect(issue).to receive(:request_for_proposal).once
 
       get(:show, params: params)
@@ -68,7 +68,7 @@ describe Api::V2::RequestForProposalsController do
       it_behaves_like 'a request authorized by require_team_admin_or_developer'
     end
 
-    before { request_for_proposal.stub(:save!) }
+    before { allow(request_for_proposal).to receive(:save!) }
 
     it 'should update budget' do
       budget = "123456789"

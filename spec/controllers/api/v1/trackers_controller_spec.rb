@@ -16,11 +16,11 @@ describe Api::V1::TrackersController do
       end
 
       it "should render result" do
-        result['url'].should == repository.url
+        expect(result['url']).to eq(repository.url)
       end
 
       it "should assign repository" do
-        assigns[:tracker].should == repository
+        expect(assigns[:tracker]).to eq(repository)
       end
     end
 
@@ -34,7 +34,7 @@ describe Api::V1::TrackersController do
       end
 
       it "should not assign repository" do
-        assigns[:tracker].should be_nil
+        expect(assigns[:tracker]).to be_nil
       end
     end
 
@@ -60,7 +60,7 @@ describe Api::V1::TrackersController do
 
     it 'should render good_model when bad_model requested' do
       get :show, params: { id: bad_model.id }
-      result['id'].should be == good_model.id
+      expect(result['id']).to eq(good_model.id)
     end
 
   end

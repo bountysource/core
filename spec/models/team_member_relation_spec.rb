@@ -36,18 +36,18 @@ describe TeamMemberRelation do
 
   describe "validations" do
     it "should require the budget amount to be greater than or equal to 0" do
-      build(:developer, budget: -2).valid?.should be_falsey
+      expect(build(:developer, budget: -2).valid?).to be_falsey
     end
 
     it "should require a budget amount to be set on relations that have developer privileges" do
-      build(:non_developer, budget: 20).valid?.should be_falsey
+      expect(build(:non_developer, budget: 20).valid?).to be_falsey
     end
   end
 
   describe "#set_budget" do
     it "should not set the budget unless the team member is a developer" do
       developer.set_budget(100.00)
-      developer.budget.should eq(100)
+      expect(developer.budget).to eq(100)
     end
   end
 
@@ -56,14 +56,14 @@ describe TeamMemberRelation do
     #nil => unlimited spending power for a team
     it "should set a developer's budget to nil" do
       developer_with_budget.delete_budget
-      developer_with_budget.budget.should eq(nil)
+      expect(developer_with_budget.budget).to eq(nil)
     end
   end
 
   describe "#update_balance" do
     it "should update a developer's remaining balance" do
       developer_with_budget.update_balance(10)
-      developer_with_budget.balance.should eq(90)
+      expect(developer_with_budget.balance).to eq(90)
     end
   end
 end

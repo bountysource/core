@@ -91,7 +91,7 @@ describe Tracker do
     let(:html) { "html" }
     describe 'with existing tracker' do
       before do
-        Tracker.should_receive(:where).with(url: alternate_urls).and_return([tracker])
+        expect(Tracker).to receive(:where).with(url: alternate_urls).and_return([tracker])
       end
       it "should return that issue" do
         expect(result).to eq(tracker)
@@ -100,7 +100,7 @@ describe Tracker do
 
     describe 'without existing tracker' do
       before do
-        Tracker.should_receive(:where).with(url: alternate_urls).and_return([])
+        expect(Tracker).to receive(:where).with(url: alternate_urls).and_return([])
       end
       it "should try to create new tracker" do
         expect(result).to eq(nil)
@@ -124,7 +124,7 @@ describe Tracker do
 
       new_tracker.merge!(old_tracker)
 
-      new_tracker.reload.languages.should include language
+      expect(new_tracker.reload.languages).to include language
     end
 
     it "should move owner to new tracker" do
@@ -133,7 +133,7 @@ describe Tracker do
 
       new_tracker.merge!(old_tracker)
 
-      new_tracker.reload.team.should be == owner
+      expect(new_tracker.reload.team).to eq(owner)
     end
 
     it "should move plugin" do
@@ -141,7 +141,7 @@ describe Tracker do
 
       new_tracker.merge!(old_tracker)
 
-      new_tracker.reload.plugin.should be == plugin
+      expect(new_tracker.reload.plugin).to eq(plugin)
     end
 
     it "should move team relations" do
@@ -150,7 +150,7 @@ describe Tracker do
 
       new_tracker.merge!(old_tracker)
 
-      new_tracker.reload.team_relations.should include team_relation
+      expect(new_tracker.reload.team_relations).to include team_relation
     end
 
     it "should move follow relations" do
@@ -159,8 +159,8 @@ describe Tracker do
 
       new_tracker.merge!(old_tracker)
 
-      new_tracker.followers.should include follower
-      new_tracker.reload.follow_relations.should include follow_relation
+      expect(new_tracker.followers).to include follower
+      expect(new_tracker.reload.follow_relations).to include follow_relation
     end
 
     it "should move team relations" do
@@ -169,18 +169,18 @@ describe Tracker do
 
       new_tracker.merge!(old_tracker)
 
-      team.reload.trackers.should include new_tracker
-      team.reload.trackers.should_not include old_tracker
+      expect(team.reload.trackers).to include new_tracker
+      expect(team.reload.trackers).not_to include old_tracker
     end
 
     it "should delete old activity logs" do
       new_tracker.merge!(old_tracker)
-      new_tracker.reload.activity_logs.should be_empty
+      expect(new_tracker.reload.activity_logs).to be_empty
     end
 
     it "should delete old rank caches" do
       new_tracker.merge!(old_tracker)
-      new_tracker.reload.tracker_rank_caches.should be_empty
+      expect(new_tracker.reload.tracker_rank_caches).to be_empty
     end
 
     it "should move fundraiser_tracker_relations" do
@@ -189,7 +189,7 @@ describe Tracker do
 
       new_tracker.merge!(old_tracker)
 
-      new_tracker.reload.fundraisers.should include fundraiser
+      expect(new_tracker.reload.fundraisers).to include fundraiser
     end
   end
 end

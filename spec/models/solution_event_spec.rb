@@ -22,12 +22,12 @@ describe SolutionEvent do
   
   it "should require a solution" do
     event = SolutionEvent::Started.create()
-    event.errors.should have_key :solution
+    expect(event.errors).to have_key :solution
   end
 
   it "should require a type" do
     event = SolutionEvent.create(solution: solution)
-    event.errors.should have_key :type
+    expect(event.errors).to have_key :type
   end
 
   describe "started" do
@@ -36,10 +36,10 @@ describe SolutionEvent do
 
     it "should be able to be added to Solution's events" do
 
-      lambda {
+      expect {
         solution.solution_events << event
       }
-      .should change(solution.solution_events, :count).by(1)
+      .to change(solution.solution_events, :count).by(1)
     end
   end
 

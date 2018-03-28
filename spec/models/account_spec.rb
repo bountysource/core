@@ -30,13 +30,13 @@ describe Account do
     let(:invalid_amount) { Money.new 99999 * 100, 'USD' }
 
     specify do
-      person.account_balance.should == 10
-      person2.account_balance.should == 0
+      expect(person.account_balance).to eq(10)
+      expect(person2.account_balance).to eq(0)
     end
 
     it "should create accounts on transfer" do
-      person.account_balance.should == 10
-      person2.account.should be_nil
+      expect(person.account_balance).to eq(10)
+      expect(person2.account).to be_nil
 
       Account.transfer!(
         amount: amount,
@@ -44,8 +44,8 @@ describe Account do
         to:     person2
       )
 
-      person.reload.account.should_not be_nil
-      person2.reload.account.should_not be_nil
+      expect(person.reload.account).not_to be_nil
+      expect(person2.reload.account).not_to be_nil
     end
 
     it "should transfer money between accounts" do
@@ -55,19 +55,19 @@ describe Account do
         to:     person2
       )
 
-      person.reload.account_balance.should == 0
-      person2.reload.account_balance.should == 10
+      expect(person.reload.account_balance).to eq(0)
+      expect(person2.reload.account_balance).to eq(10)
     end
 
     it "should check account balance before transfer" do
-      lambda {
+      expect {
         Account.transfer!(
           amount: amount,
           from:   person2,
           to:     person
         )
 
-      }.should raise_exception Account::NotEnoughFunds
+      }.to raise_exception Account::NotEnoughFunds
     end
   end
 
@@ -81,13 +81,13 @@ describe Account do
     context "without owner" do
       it "should enforce uniqueness on type" do
         # create the first account
-        lambda{
+        expect{
           Account::TestAccount.instance
-        }.should change(Account::TestAccount, :count).by 1
+        }.to change(Account::TestAccount, :count).by 1
 
         # try to create a duplicate
         duplicate = Account::TestAccount.create
-        duplicate.should_not be_valid
+        expect(duplicate).not_to be_valid
       end
     end
 
@@ -98,23 +98,23 @@ describe Account do
         account1 = Account::Personal.new owner: person
         account2 = Account::Personal.new owner: person
 
-        account1.owner.should == person
-        account2.owner.should == person
+        expect(account1.owner).to eq(person)
+        expect(account2.owner).to eq(person)
 
         # person should not have an account yet, as nothing has been saved
-        person.reload.account.should be_nil
+        expect(person.reload.account).to be_nil
 
         # both accounts should be valid before one of them is saved
-        account1.should be_valid
-        account2.should be_valid
+        expect(account1).to be_valid
+        expect(account2).to be_valid
 
         account1.save
 
         # person should now have the saved account
-        person.reload.account.should == account1
+        expect(person.reload.account).to eq(account1)
 
         # the second account should now be invalid, since another for this item and account type was saved
-        account2.should_not be_valid
+        expect(account2).not_to be_valid
       end
 
       it "should allow more than one account of same type with different items" do
@@ -124,14 +124,14 @@ describe Account do
         account1 = Account::Personal.create owner: person1
         account2 = Account::Personal.create owner: person2
 
-        person1.reload.account.should == account1
-        person2.reload.account.should == account2
+        expect(person1.reload.account).to eq(account1)
+        expect(person2.reload.account).to eq(account2)
       end
 
       it "should enforce uniqueness on type and owner" do
-        lambda {
+        expect {
           20.times { Account::TestAccount.create owner: person }
-        }.should change(Account::TestAccount, :count).by 1
+        }.to change(Account::TestAccount, :count).by 1
       end
     end
 

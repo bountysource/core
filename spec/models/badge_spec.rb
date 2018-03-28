@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Badge do
 
   shared_examples_for 'a badge' do
-    before { badge.stub(:shield_svg).and_return('<such>wow</such>') }
+    before { allow(badge).to receive(:shield_svg).and_return('<such>wow</such>') }
 
     it 'should return xml' do
-      badge.to_xml.should be_present
+      expect(badge.to_xml).to be_present
     end
   end
 
@@ -19,8 +19,8 @@ describe Badge do
 
   describe 'tracker' do
     before do
-      badge.stub(issues: [issue])
-      badge.stub(tracker: tracker)
+      allow(badge).to receive_messages(issues: [issue])
+      allow(badge).to receive_messages(tracker: tracker)
     end
 
     let(:tracker) { double(:tracker, id: 1, bounty_total: 1337) }
@@ -43,13 +43,13 @@ describe Badge do
 
     describe 'bounties on team owned projects' do
       let(:badge) { Badge::Team::BountiesReceived.new(team) }
-      before { badge.stub(:bounties).and_return(Bounty.all) }
+      before { allow(badge).to receive(:bounties).and_return(Bounty.all) }
       it_behaves_like 'a badge'
     end
 
     describe 'money raised' do
       let(:badge) { Badge::Team::Raised.new(team) }
-      before { badge.stub(:total_raised).and_return(1333337) }
+      before { allow(badge).to receive(:total_raised).and_return(1333337) }
       it_behaves_like 'a badge'
     end
   end

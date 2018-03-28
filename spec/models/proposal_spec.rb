@@ -41,7 +41,7 @@ describe Proposal do
     end
 
     it "should require a person_id" do
-      @proposal.stub(request_for_proposal: rfp)
+      allow(@proposal).to receive_messages(request_for_proposal: rfp)
       @proposal.amount = 6
       @proposal.request_for_proposal_id = 2
       @proposal.valid?
@@ -50,7 +50,7 @@ describe Proposal do
 
     it "should require the amount attribute be greater than or equal to 0" do
       @proposal.amount = -1
-      @proposal.stub(request_for_proposal: rfp)
+      allow(@proposal).to receive_messages(request_for_proposal: rfp)
       @proposal.person_id = 1
       @proposal.valid?
       expect(@proposal.errors).to have_key(:amount)
@@ -59,7 +59,7 @@ describe Proposal do
     it "should not bio abstracts greater than 1000 characters" do
       @proposal.bio = "1" * 1001
       @proposal.amount = 30
-      @proposal.stub(request_for_proposal: rfp)
+      allow(@proposal).to receive_messages(request_for_proposal: rfp)
       @proposal.person_id = 1
       @proposal.valid?
       expect(@proposal.errors).to have_key(:bio)
@@ -75,7 +75,7 @@ describe Proposal do
     let(:proposal) { build(:proposal) }
 
     it "should return true if the request_for_proposal is accepting proposals" do
-      proposal.stub(:send_submitted_email_to_team)
+      allow(proposal).to receive(:send_submitted_email_to_team)
       proposal.request_for_proposal.state = 'pending'
       proposal.valid?
       expect(proposal.errors.count).to eq(0)
@@ -107,16 +107,16 @@ describe Proposal do
       let(:plebian_member) { double(:plebian_member) }
 
       before do
-        proposal.stub(:request_for_proposal).and_return(request_for_proposal)
-        request_for_proposal.stub(:team).and_return(team)
+        allow(proposal).to receive(:request_for_proposal).and_return(request_for_proposal)
+        allow(request_for_proposal).to receive(:team).and_return(team)
 
-        team.stub(:admins).and_return([admin_member])
-        team.stub(:developers).and_return([developer_member])
-        team.stub(:plebs).and_return([plebian_member])
+        allow(team).to receive(:admins).and_return([admin_member])
+        allow(team).to receive(:developers).and_return([developer_member])
+        allow(team).to receive(:plebs).and_return([plebian_member])
 
-        admin_member.stub(:send_email)
-        developer_member.stub(:send_email)
-        plebian_member.stub(:send_email)
+        allow(admin_member).to receive(:send_email)
+        allow(developer_member).to receive(:send_email)
+        allow(plebian_member).to receive(:send_email)
       end
 
       it 'should email team admins and developers' do
@@ -156,14 +156,14 @@ describe Proposal do
     let(:proposal) { build(:proposal, request_for_proposal: request_for_proposal) }
 
     before do
-      proposal.stub(:send_appointed_email)
-      proposal.stub(:send_approval_email)
-      proposal.stub(:send_rejection_email)
-      proposal.stub(:reject_other_pending_proposals!)
-      proposal.stub(:begin_fulfillment_of_request_for_proposal!)
-      proposal.stub(:fulfill_request_for_proposal!)
-      proposal.stub(:reverse_fulfillment_of_request_for_proposal!)
-      proposal.stub(:reset_team_notes!)
+      allow(proposal).to receive(:send_appointed_email)
+      allow(proposal).to receive(:send_approval_email)
+      allow(proposal).to receive(:send_rejection_email)
+      allow(proposal).to receive(:reject_other_pending_proposals!)
+      allow(proposal).to receive(:begin_fulfillment_of_request_for_proposal!)
+      allow(proposal).to receive(:fulfill_request_for_proposal!)
+      allow(proposal).to receive(:reverse_fulfillment_of_request_for_proposal!)
+      allow(proposal).to receive(:reset_team_notes!)
     end
 
     it 'should be pending by default' do
@@ -292,8 +292,8 @@ describe Proposal do
         let(:person) { double(:person) }
 
         before do
-          proposal.unstub(:send_appointed_email)
-          proposal.stub(:person).and_return(person)
+          allow(proposal).to receive(:send_appointed_email).and_call_original
+          allow(proposal).to receive(:person).and_return(person)
         end
 
         it 'should send email' do
@@ -306,8 +306,8 @@ describe Proposal do
         let(:person) { double(:person) }
 
         before do
-          proposal.unstub(:send_rejection_email)
-          proposal.stub(:person).and_return(person)
+          allow(proposal).to receive(:send_rejection_email).and_call_original
+          allow(proposal).to receive(:person).and_return(person)
         end
 
         it 'should send email' do
@@ -320,8 +320,8 @@ describe Proposal do
         let(:other_proposal) { double(:other_proposal) }
 
         before do
-          proposal.unstub(:reject_other_pending_proposals!)
-          proposal.stub_chain(:other_proposals, :pending).and_return([other_proposal])
+          allow(proposal).to receive(:reject_other_pending_proposals!).and_call_original
+          allow(proposal).to receive_message_chain(:other_proposals, :pending).and_return([other_proposal])
         end
 
         it 'should reject other proposals' do
@@ -336,7 +336,7 @@ describe Proposal do
 
       describe 'begin_fulfillment_of_request_for_proposal!' do
         before do
-          proposal.unstub(:begin_fulfillment_of_request_for_proposal!)
+          allow(proposal).to receive(:begin_fulfillment_of_request_for_proposal!).and_call_original
         end
 
         it 'should change state of request for proposal to pending fulfillment' do
@@ -347,7 +347,7 @@ describe Proposal do
 
       describe 'fulfill_request_for_proposal!' do
         before do
-          proposal.unstub(:fulfill_request_for_proposal!)
+          allow(proposal).to receive(:fulfill_request_for_proposal!).and_call_original
         end
 
         it 'should change state of request for proposal to fulfilled' do
@@ -358,7 +358,7 @@ describe Proposal do
 
       describe 'reset_team_notes!' do
         before do
-          proposal.unstub(:reset_team_notes!)
+          allow(proposal).to receive(:reset_team_notes!).and_call_original
         end
 
         it 'should set team notes to nil' do
@@ -372,11 +372,11 @@ describe Proposal do
   describe '#after_purchase' do
     it "should call accept and send out notification emails" do
       person = double('person')
-      rfp.stub(notify_admins_and_developers: true)
-      proposal.stub(person: person)
+      allow(rfp).to receive_messages(notify_admins_and_developers: true)
+      allow(proposal).to receive_messages(person: person)
 
-      proposal.should_receive(:appoint!).once
-      rfp.should_receive(:notify_admins_and_developers).once
+      expect(proposal).to receive(:appoint!).once
+      expect(rfp).to receive(:notify_admins_and_developers).once
 
       proposal.after_purchase(double('order'))
     end
@@ -388,7 +388,7 @@ describe Proposal do
 
     it "should return the team that owns the issue's tracker" do
       issue = double("issue", team: team)
-      proposal.stub(issue: issue)
+      allow(proposal).to receive_messages(issue: issue)
       expect(proposal.managing_team).to eq(team)
     end
   end
@@ -399,8 +399,8 @@ describe Proposal do
     let(:proposal) { build(:proposal) }
 
     before do
-      proposal.stub(:request_for_proposal).and_return(request_for_proposal)
-      request_for_proposal.stub(:account).and_return(account)
+      allow(proposal).to receive(:request_for_proposal).and_return(request_for_proposal)
+      allow(request_for_proposal).to receive(:account).and_return(account)
     end
 
     it 'should delegate account to request for proposal' do

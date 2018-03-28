@@ -71,23 +71,23 @@ describe Github::Issue do
   let(:issue) { create(:github_issue, tracker: tracker) }
 
   it "should have a valid factory" do
-    issue.should be_valid
+    expect(issue).to be_valid
   end
 
   describe "extract_from_url" do
     let!(:issue) { create(:github_issue, url: "https://github.com/corytheboyd/shibe.js/issues/2", number: 2) }
 
     it "should find issue by URL" do
-      Github::Issue.extract_from_url(nil).should be_nil
-      Github::Issue.extract_from_url("").should be_nil
-      Github::Issue.extract_from_url(issue.url).should eq(issue)
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/#{issue.number}").should eq(issue)
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/#{issue.number}/").should eq(issue)
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues").should be_nil
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/wiki").should be_nil
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js").should be_nil
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/").should be_nil
-      Github::Issue.extract_from_url("https://www.other-tracker.com/issues/1337").should be_nil
+      expect(Github::Issue.extract_from_url(nil)).to be_nil
+      expect(Github::Issue.extract_from_url("")).to be_nil
+      expect(Github::Issue.extract_from_url(issue.url)).to eq(issue)
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/#{issue.number}")).to eq(issue)
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/#{issue.number}/")).to eq(issue)
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues")).to be_nil
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/wiki")).to be_nil
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js")).to be_nil
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/")).to be_nil
+      expect(Github::Issue.extract_from_url("https://www.other-tracker.com/issues/1337")).to be_nil
     end
   end
 
@@ -118,7 +118,7 @@ describe Github::Issue do
 
     it 'should get URL from github data' do
       url = Github::Issue.send(:get_url_from_github_data, github_data)
-      url.should be == github_data['html_url']
+      expect(url).to eq(github_data['html_url'])
     end
 
     it 'should create Issue when not found by remote id' do
@@ -136,7 +136,7 @@ describe Github::Issue do
 
       action[github_data]
 
-      issue.reload.can_add_bounty.should be_truthy
+      expect(issue.reload.can_add_bounty).to be_truthy
     end
 
     it 'should update can_add_bounty to false' do
@@ -145,22 +145,22 @@ describe Github::Issue do
 
       action[github_data]
 
-      issue.reload.can_add_bounty.should be_falsey
+      expect(issue.reload.can_add_bounty).to be_falsey
     end
 
     it 'should update can_add_bounty to false if a Pull Request' do
       issue.update_attribute :can_add_bounty, true
       github_data['state'] = 'open'
-      Github::Issue.any_instance.stub(:code) { true }
+      allow_any_instance_of(Github::Issue).to receive(:code) { true }
 
       action[github_data]
 
-      issue.reload.can_add_bounty.should be_falsey
+      expect(issue.reload.can_add_bounty).to be_falsey
     end
 
     describe 'create new tracker' do
 
-      before { Github::Repository.stub(:extract_from_url) { create(:github_repository) } }
+      before { allow(Github::Repository).to receive(:extract_from_url) { create(:github_repository) } }
 
       it 'should create Tracker when creating Issue without Tracker' do
         issue.update_attribute(:remote_id, 1337)
@@ -178,7 +178,7 @@ describe Github::Issue do
     it 'should strip [$X] from title for plugin' do
       github_data['title'] = 'fix things and stuffs [$1,234,567]'
       action[github_data]
-      issue.reload.sanitized_title.should be == 'fix things and stuffs'
+      expect(issue.reload.sanitized_title).to eq('fix things and stuffs')
     end
   end
 

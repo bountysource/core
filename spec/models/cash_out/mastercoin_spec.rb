@@ -43,5 +43,5 @@
 require 'spec_helper'
 
 describe CashOut::Mastercoin do
-  it { should validate_presence_of(:mastercoin_address) }
+  it { is_expected.to validate_presence_of(:mastercoin_address) }
 end

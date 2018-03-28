@@ -43,5 +43,5 @@
 require 'spec_helper'
 
 describe CashOut::Ripple do
-  it { should validate_presence_of(:ripple_address) }
+  it { is_expected.to validate_presence_of(:ripple_address) }
 end

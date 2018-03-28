@@ -23,7 +23,7 @@ describe Api::V1::BountyClaimResponsesController do
       assert_response :ok
     }.to change(person.bounty_claim_responses, :count).by 1
 
-    person.bounty_claim_responses.last.should be_accept
+    expect(person.bounty_claim_responses.last).to be_accept
   end
 
   it "should require description to reject" do
@@ -39,7 +39,7 @@ describe Api::V1::BountyClaimResponsesController do
       assert_response :ok
     }.to change(person.bounty_claim_responses, :count).by 1
 
-    person.bounty_claim_responses.last.should be_reject
+    expect(person.bounty_claim_responses.last).to be_reject
   end
 
   it "should require auth to accept" do

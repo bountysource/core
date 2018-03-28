@@ -73,8 +73,8 @@ describe SourceForgeNative::Tracker do
       }]
     end
     before do
-      SourceForgeNative::API.should_receive(:fetch_issue_list).and_return(data)
-      SourceForgeNative::API.should_receive(:generate_issue_list_path).and_return("/")
+      expect(SourceForgeNative::API).to receive(:fetch_issue_list).and_return(data)
+      expect(SourceForgeNative::API).to receive(:generate_issue_list_path).and_return("/")
     end
     it "should call api and set issue attributes as api returned" do
       tracker.remote_sync

@@ -81,7 +81,7 @@ describe Api::V1::DeveloperGoalsController do
       assert_response :ok
 
       index_response = JSON.parse(response.body)
-      index_response.first["id"].should be == developer_goal.id
+      expect(index_response.first["id"]).to eq(developer_goal.id)
     end
 
     it "should not require auth for issue goal index" do
@@ -108,7 +108,7 @@ describe Api::V1::DeveloperGoalsController do
       assert_response :ok
 
       show_response = JSON.parse(response.body)
-      show_response["id"].should be == developer_goal.id
+      expect(show_response["id"]).to eq(developer_goal.id)
     end
   end
 end

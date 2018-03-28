@@ -48,9 +48,9 @@ describe Person do
   end
 
   it "has a valid factory" do
-    person.should be_valid
-    person.backer?.should be_falsey
-    backer.backer?.should be_truthy
+    expect(person).to be_valid
+    expect(person.backer?).to be_falsey
+    expect(backer.backer?).to be_truthy
   end
 
   describe "display_name" do
@@ -62,20 +62,20 @@ describe Person do
         password: 'abcd1234',
         password_confirmation: 'abcd1234'
       )
-      person.should be_valid
-      person.display_name.should == 'Amy Winter'
+      expect(person).to be_valid
+      expect(person.display_name).to eq('Amy Winter')
 
       person = Person.new(first_name: 'Amy', last_name: 'Winter', display_name: '', email: 'amy2@winter.com',
                           password: 'abcd1234', password_confirmation: 'abcd1234')
-      person.should be_valid
-      person.display_name.should == 'Amy Winter'
+      expect(person).to be_valid
+      expect(person.display_name).to eq('Amy Winter')
 
       person = Person.new(display_name: 'Amy Winter', email: 'amy3@winter.com',
                           password: 'abcd1234', password_confirmation: 'abcd1234')
-      person.should be_valid
-      person.display_name.should == 'Amy Winter'
-      person.first_name.should == 'Amy'
-      person.last_name.should == 'Winter'
+      expect(person).to be_valid
+      expect(person.display_name).to eq('Amy Winter')
+      expect(person.first_name).to eq('Amy')
+      expect(person.last_name).to eq('Winter')
     end
   end
 
@@ -134,7 +134,7 @@ describe Person do
 
   describe "authentication" do
     it "should find the person by email and password" do
-      person.should == Person.authenticate(person.email, person.password)
+      expect(person).to eq(Person.authenticate(person.email, person.password))
     end
   end
 
@@ -146,13 +146,13 @@ describe Person do
     it "should return ranked issues for a person with a high enough rank" do
       issue_rank_cache
       issues = person.get_ranked_issues
-      issues.count.should eq(1)
+      expect(issues.count).to eq(1)
     end
 
     it "should not return an issue if the rank isn't high enough" do
       low_issue_rank_cache
       issues = person.get_ranked_issues
-      issues.count.should eq(0)
+      expect(issues.count).to eq(0)
     end
   end
 
@@ -164,7 +164,7 @@ describe Person do
     it "should return issues from a ranked tracker" do
       tracker_rank_cache
       issues = person.issues_from_ranked_trackers
-      issues.count.should eq(1)
+      expect(issues.count).to eq(1)
     end
   end
 
@@ -177,30 +177,30 @@ describe Person do
     it "should add languages" do
       person.set_languages(language1.id, language2.id, language3.id)
       person.reload
-      person.languages.should include language1
-      person.languages.should include language2
-      person.languages.should include language3
+      expect(person.languages).to include language1
+      expect(person.languages).to include language2
+      expect(person.languages).to include language3
     end
 
     it "should not delete language_relations" do
       person.set_languages(language1.id, language2.id)
-      person.reload.language_relations.count.should be == 2
+      expect(person.reload.language_relations.count).to eq(2)
 
       person.set_languages(language1.id)
-      person.reload.language_relations.where(language_id: language2.id).should_not be_empty
+      expect(person.reload.language_relations.where(language_id: language2.id)).not_to be_empty
     end
 
     it "should mark language relation as inactive on remove" do
       person.set_languages(language1.id)
       relation = person.language_relations.last
-      relation.should be_active
+      expect(relation).to be_active
 
       person.set_languages()
       person.reload
 
       relation = person.language_relations.last
-      relation.should_not be_active
-      person.languages.should_not include language1
+      expect(relation).not_to be_active
+      expect(person.languages).not_to include language1
     end
   end
 

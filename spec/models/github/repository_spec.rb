@@ -65,28 +65,28 @@ describe Github::Repository do
     let!(:backer)     { create(:person_with_money_in_account, money_amount: 100) }
 
     it "should not have account after create" do
-      repository.account.should be_nil
+      expect(repository.account).to be_nil
     end
 
     it "should not lazy load account" do
-      lambda {
+      expect {
         repository.account
-      }.should_not change(Account, :count)
+      }.not_to change(Account, :count)
     end
 
     it "should create account on transaction" do
-      repository.account.should be_nil
+      expect(repository.account).to be_nil
 
-      lambda {
+      expect {
         Transaction.build do |tr|
           tr.splits.create([
             { amount: -10,  account: Account::Paypal.instance },
             { amount: 10,   item: repository }
           ])
         end
-      }.should change(repository.txns, :count).by 1
+      }.to change(repository.txns, :count).by 1
 
-      repository.reload.account.should be_an Account::Repository
+      expect(repository.reload.account).to be_an Account::Repository
     end
 
     describe "with account" do
@@ -100,7 +100,7 @@ describe Github::Repository do
       end
 
       it "should establish relationship to account" do
-        repository.reload.account.should be_an Account::Repository
+        expect(repository.reload.account).to be_an Account::Repository
       end
     end
   end
@@ -109,16 +109,16 @@ describe Github::Repository do
     let!(:tracker) { create(:github_repository, url: "https://github.com/corytheboyd/shibe.js") }
 
     it "should find issue by URL" do
-      Github::Repository.extract_from_url(nil).should_not be_present
-      Github::Repository.extract_from_url("").should_not be_present
-      Github::Repository.extract_from_url(tracker.url).should be_present
-      Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/").should be_present
-      Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/wiki").should be_present
-      Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/issues").should be_present
-      Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/1").should be_present
-      Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/pulls/1").should be_present
-      Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/1/").should be_present
-      Github::Repository.extract_from_url("https://www.other-tracker.com/1337").should be_nil
+      expect(Github::Repository.extract_from_url(nil)).not_to be_present
+      expect(Github::Repository.extract_from_url("")).not_to be_present
+      expect(Github::Repository.extract_from_url(tracker.url)).to be_present
+      expect(Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/")).to be_present
+      expect(Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/wiki")).to be_present
+      expect(Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/issues")).to be_present
+      expect(Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/1")).to be_present
+      expect(Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/pulls/1")).to be_present
+      expect(Github::Repository.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/1/")).to be_present
+      expect(Github::Repository.extract_from_url("https://www.other-tracker.com/1337")).to be_nil
     end
   end
 
@@ -126,7 +126,7 @@ describe Github::Repository do
     let(:tracker) { create(:github_repository) }
 
     before do
-      tracker.stub(:fetch_languages) do
+      allow(tracker).to receive(:fetch_languages) do
         {
           "JavaScript" => 1337,
           "Ruby" => 42
@@ -135,7 +135,7 @@ describe Github::Repository do
     end
 
     it "should fetch languages" do
-      tracker.should_receive(:fetch_languages).once
+      expect(tracker).to receive(:fetch_languages).once
       tracker.update_languages
     end
 
@@ -155,9 +155,9 @@ describe Github::Repository do
       language = create(:language, name: "Shibe")
       tracker.language_relations.create(language: language, bytes: ("wow-such-bytes".length * 1337) / 42)
 
-      tracker.languages.should include language
+      expect(tracker.languages).to include language
       tracker.update_languages
-      tracker.reload.languages.should_not include language
+      expect(tracker.reload.languages).not_to include language
     end
   end
 
@@ -186,7 +186,7 @@ describe Github::Repository do
 
     it 'should get URL from github data' do
       url = Github::Repository.send(:get_url_from_github_data, github_data)
-      url.should be == github_data['html_url']
+      expect(url).to eq(github_data['html_url'])
     end
 
     it 'should create cloudinary id from github data' do
@@ -212,16 +212,16 @@ describe Github::Repository do
 
     it 'should update attributes from github data' do
       action[github_data]
-      repository.reload.url.should    be == Github::Repository.send(:get_url_from_github_data, github_data)
-      repository.full_name.should     be == github_data['full_name']
-      repository.is_fork.should       be == github_data['fork']
-      repository.pushed_at.should     be == github_data['pushed_at']
-      repository.watchers.should      be == github_data['watchers_count']
-      repository.forks.should         be == github_data['forks']
-      repository.has_issues.should    be == github_data['has_issues']
-      repository.has_wiki.should      be == github_data['has_wiki']
-      repository.has_downloads.should be == github_data['has_downloads']
-      repository.private.should       be == github_data['private']
+      expect(repository.reload.url).to    eq(Github::Repository.send(:get_url_from_github_data, github_data))
+      expect(repository.full_name).to     eq(github_data['full_name'])
+      expect(repository.is_fork).to       eq(github_data['fork'])
+      expect(repository.pushed_at).to     eq(github_data['pushed_at'])
+      expect(repository.watchers).to      eq(github_data['watchers_count'])
+      expect(repository.forks).to         eq(github_data['forks'])
+      expect(repository.has_issues).to    eq(github_data['has_issues'])
+      expect(repository.has_wiki).to      eq(github_data['has_wiki'])
+      expect(repository.has_downloads).to eq(github_data['has_downloads'])
+      expect(repository.private).to       eq(github_data['private'])
     end
 
     it 'should create linked account for tracker owner' do
@@ -232,10 +232,10 @@ describe Github::Repository do
 
       it 'should update remote_* attributes' do
         action[github_data]
-        repository.reload.remote_name.should be == github_data['full_name']
-        repository.remote_description.should be == github_data['description']
-        repository.remote_homepage.should be == github_data['homepage']
-        repository.remote_cloudinary_id.should be == Github::Repository.send(:get_cloudinary_id_from_github_data, github_data)
+        expect(repository.reload.remote_name).to eq(github_data['full_name'])
+        expect(repository.remote_description).to eq(github_data['description'])
+        expect(repository.remote_homepage).to eq(github_data['homepage'])
+        expect(repository.remote_cloudinary_id).to eq(Github::Repository.send(:get_cloudinary_id_from_github_data, github_data))
       end
 
       it 'should update visible attributes when nil' do
@@ -247,9 +247,9 @@ describe Github::Repository do
 
         action[github_data]
 
-        repository.reload.description.should be == github_data['description']
-        repository.homepage.should be == github_data['homepage']
-        repository.cloudinary_id.should be == Github::Repository.send(:get_cloudinary_id_from_github_data, github_data)
+        expect(repository.reload.description).to eq(github_data['description'])
+        expect(repository.homepage).to eq(github_data['homepage'])
+        expect(repository.cloudinary_id).to eq(Github::Repository.send(:get_cloudinary_id_from_github_data, github_data))
       end
 
       it 'should not update visible attributes when they are set' do
@@ -261,9 +261,9 @@ describe Github::Repository do
 
         action[github_data]
 
-        repository.reload.description.should be == 'description!'
-        repository.homepage.should be == 'homepage!'
-        repository.cloudinary_id.should be == 'cloudinary id!'
+        expect(repository.reload.description).to eq('description!')
+        expect(repository.homepage).to eq('homepage!')
+        expect(repository.cloudinary_id).to eq('cloudinary id!')
       end
 
     end
@@ -276,32 +276,32 @@ describe Github::Repository do
 
     it 'should return nil if URL blank' do
       fetched_repository = action[nil]
-      fetched_repository.should be_nil
+      expect(fetched_repository).to be_nil
     end
 
     it 'should return nil if URL invalid' do
       fetched_repository = action['https://www.disney.com']
-      fetched_repository.should be_nil
+      expect(fetched_repository).to be_nil
     end
 
     it 'should return Repository if URL valid and in database' do
       fetched_repository = action[repository.url]
-      fetched_repository.id.should be == repository.id
+      expect(fetched_repository.id).to eq(repository.id)
     end
 
     describe 'not in database' do
 
       it 'should fetch from GitHub if URL valid and not in database' do
-        Github::API.stub(:call) { MockGithubApi::Success.new }
-        Github::Repository.should_receive(:update_attributes_from_github_data).once
+        allow(Github::API).to receive(:call) { MockGithubApi::Success.new }
+        expect(Github::Repository).to receive(:update_attributes_from_github_data).once
         action['https://github.com/neovim/neovim']
       end
 
       it 'should do nothing if API response fails' do
-        Github::API.stub(:call) { MockGithubApi::Error.new }
-        Github::Repository.should_receive(:update_attributes_from_github_data).never
+        allow(Github::API).to receive(:call) { MockGithubApi::Error.new }
+        expect(Github::Repository).to receive(:update_attributes_from_github_data).never
         fetched_repository = action['https://github.com/neovim/neovim']
-        fetched_repository.should be_nil
+        expect(fetched_repository).to be_nil
       end
 
     end

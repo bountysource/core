@@ -29,11 +29,11 @@ describe Api::V1::PledgesController do
     end
 
     it "should assigns pledge" do
-      assigns[:pledge].id.should == pledge.id # survey response changed
+      expect(assigns[:pledge].id).to eq(pledge.id) # survey response changed
     end
 
     it "should update pledge survey response" do
-      assigns[:pledge].survey_response.should == "Ship it to the moon"
+      expect(assigns[:pledge].survey_response).to eq("Ship it to the moon")
     end
   end
 end

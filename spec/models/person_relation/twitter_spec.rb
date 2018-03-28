@@ -28,19 +28,19 @@ describe PersonRelation::Twitter do
   let(:person_relation_twitter) { create(:person_relation_twitter, person: person, target_person: target_person) }
 
   it "should link person to target person" do
-    lambda {
+    expect {
       r = PersonRelation::Twitter.create person: person, target_person: target_person
-      r.person.should == person
-      r.target_person.should == target_person
-    }.should change(PersonRelation::Twitter, :count).by 1
+      expect(r.person).to eq(person)
+      expect(r.target_person).to eq(target_person)
+    }.to change(PersonRelation::Twitter, :count).by 1
   end
 
   it "should make target appear in person's friend list" do
-    person_relation_twitter.person.friends.should include target_person
+    expect(person_relation_twitter.person.friends).to include target_person
   end
 
   it "should not make person appear in target person's friend list" do
-    person_relation_twitter.target_person.friends.should_not include person
+    expect(person_relation_twitter.target_person.friends).not_to include person
   end
 
   describe "finding friends" do
@@ -51,37 +51,37 @@ describe PersonRelation::Twitter do
 
     before do
       # fake the API response from Twitter
-      person.twitter_account.stub(:friend_ids) do
+      allow(person.twitter_account).to receive(:friend_ids) do
         # turn the people's linked accounts into hashes resembling those returned from facebook API
         [target_person1, target_person2].map(&:twitter_account).map(&:uid)
       end
     end
 
     it "should create the correct friend relations" do
-      lambda {
+      expect {
         PersonRelation::Twitter.find_or_create_friends person
         person.reload
-      }.should change(PersonRelation::Twitter, :count).by 2
+      }.to change(PersonRelation::Twitter, :count).by 2
 
-      person.friends.should     include target_person1
-      person.friends.should     include target_person2
-      person.friends.should_not include target_person3
+      expect(person.friends).to     include target_person1
+      expect(person.friends).to     include target_person2
+      expect(person.friends).not_to include target_person3
     end
 
     it "should create one-way friendships" do
       PersonRelation::Twitter.find_or_create_friends person
       person.reload
 
-      target_person1.friends.should be_empty
-      target_person2.friends.should be_empty
-      target_person3.friends.should be_empty
+      expect(target_person1.friends).to be_empty
+      expect(target_person2.friends).to be_empty
+      expect(target_person3.friends).to be_empty
     end
 
     it "should not create duplicate relations" do
-      lambda {
+      expect {
         10.times { PersonRelation::Twitter.find_or_create_friends person }
         person.reload
-      }.should change(PersonRelation::Twitter, :count).by 2
+      }.to change(PersonRelation::Twitter, :count).by 2
     end
 
     describe "adding new friends after initial load" do
@@ -91,7 +91,7 @@ describe PersonRelation::Twitter do
 
       before do
         # fake the API response from Facebook for initial check
-        person.twitter_account.stub(:friend_ids).and_return [old_friend.twitter_account.uid]
+        allow(person.twitter_account).to receive(:friend_ids).and_return [old_friend.twitter_account.uid]
 
         # initial adding of friends, won't pickup new_user because there is no associated twitter_account yet
         PersonRelation::Twitter.find_or_create_friends person
@@ -102,22 +102,22 @@ describe PersonRelation::Twitter do
         new_friend.reload
 
         # now, update the mock API response
-        person.twitter_account.stub(:friend_ids) do
+        allow(person.twitter_account).to receive(:friend_ids) do
           [old_friend, new_friend].map(&:twitter_account).map(&:uid)
         end
       end
 
       it "should ensure that new user is not a friend yet" do
-        person.friends.should     include old_friend
-        person.friends.should_not include new_friend
+        expect(person.friends).to     include old_friend
+        expect(person.friends).not_to include new_friend
       end
 
       it "should add new user as a friend" do
         PersonRelation::Twitter.find_or_create_friends person
         person.reload
 
-        person.friends.should include new_friend
-        new_friend.friends.should_not include person
+        expect(person.friends).to include new_friend
+        expect(new_friend.friends).not_to include person
       end
     end
   end
@@ -129,16 +129,16 @@ describe PersonRelation::Twitter do
 
     before do
       # fake the API response from Twitter
-      LinkedAccount::Twitter.any_instance.stub(:friend_ids).and_return [friend.twitter_account.uid]
+      allow_any_instance_of(LinkedAccount::Twitter).to receive(:friend_ids).and_return [friend.twitter_account.uid]
     end
 
     it "should create friend" do
-      lambda {
+      expect {
         linked_account.link_with_person person
         person.reload
-      }.should change(person.friends, :count).by 1
+      }.to change(person.friends, :count).by 1
 
-      person.friends.should include friend
+      expect(person.friends).to include friend
     end
   end
 end

@@ -22,30 +22,30 @@ describe TagVote do
   let(:relation)  { create(:tag_relation) }
 
   it "should create an upvote" do
-    lambda {
+    expect {
       vote = create(:tag_vote, relation: relation, person: person, value: 1)
-      vote.should be_upvote
-    }.should change(relation.votes, :count).by 1
+      expect(vote).to be_upvote
+    }.to change(relation.votes, :count).by 1
   end
 
   it "should create a downvote" do
-    lambda {
+    expect {
       vote = create(:tag_vote, relation: relation, person: person, value: -1)
-      vote.should be_downvote
-    }.should change(relation.votes, :count).by 1
+      expect(vote).to be_downvote
+    }.to change(relation.votes, :count).by 1
   end
 
   it "should create a neutral vote" do
-    lambda {
+    expect {
       vote = create(:tag_vote, relation: relation, person: person, value: 0)
-      vote.should be_neutral
-    }.should change(relation.votes, :count).by 1
+      expect(vote).to be_neutral
+    }.to change(relation.votes, :count).by 1
   end
 
   it "should not be valid with stupid value" do
     tag = build(:tag_vote, relation: relation, person: person, value: 1337)
-    tag.should_not be_valid
-    tag.errors.should have_key :value
+    expect(tag).not_to be_valid
+    expect(tag.errors).to have_key :value
   end
 
   it "should only create one vote per person and tag relation" do
@@ -53,35 +53,35 @@ describe TagVote do
     create(:tag_vote, relation: relation, person: person, value: 1)
 
     # try to create second vote
-    lambda {
+    expect {
       vote = build(:tag_vote, relation: relation, person: person, value: 1)
-      vote.should_not be_valid
-      vote.errors.should have_key :person_id
-    }.should_not change(relation.votes, :count)
+      expect(vote).not_to be_valid
+      expect(vote.errors).to have_key :person_id
+    }.not_to change(relation.votes, :count)
   end
 
   context "with vote" do
     let!(:vote) { TagVote.find_or_create_by_person_and_relation_and_cast_vote person, relation, 1 }
 
     it "should not create duplicate vote" do
-      lambda {
+      expect {
         TagVote.find_or_create_by_person_and_relation_and_cast_vote person, relation, 1
-      }.should_not change(TagVote, :count)
+      }.not_to change(TagVote, :count)
     end
 
     it "should find existing vote and update it" do
       # find vote and amend it
       TagVote.find_or_create_by_person_and_relation_and_cast_vote person, relation, -1
       vote.reload
-      vote.value.should == 0
+      expect(vote.value).to eq(0)
     end
 
     it "should change the weight of the relation after being updated" do
-      lambda {
+      expect {
         # find vote and amend it
         TagVote.find_or_create_by_person_and_relation_and_cast_vote person, relation, -1
         relation.reload
-      }.should change(relation, :weight)
+      }.to change(relation, :weight)
     end
   end
 

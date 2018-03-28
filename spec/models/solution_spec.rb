@@ -28,12 +28,12 @@ describe Solution do
 
   it "should require person" do
     solution = Solution.create(issue: issue)
-    solution.errors.should have_key :person
+    expect(solution.errors).to have_key :person
   end
 
   it "should require issue" do
     solution = Solution.create(person: person)
-    solution.errors.should have_key :issue
+    expect(solution.errors).to have_key :issue
   end
 
   context "emails" do
@@ -41,7 +41,7 @@ describe Solution do
     let!(:bounty_claim) { create(:bounty_claim, issue: issue) }
 
     it "should notify backers when solution is created" do
-      Solution.any_instance.should_receive(:start_work)
+      expect_any_instance_of(Solution).to receive(:start_work)
       Solution.create(issue: issue, person: person)
     end
 
@@ -49,23 +49,23 @@ describe Solution do
       let!(:solution) { create(:solution, person: person, issue: issue) }
 
       it "should not send emails on solution update" do
-        bounty.person.should_receive(:send_email).never
-        bounty_claim.person.should_receive(:send_email).never
+        expect(bounty.person).to receive(:send_email).never
+        expect(bounty_claim.person).to receive(:send_email).never
         solution.update_attributes(person: create(:person))
       end
 
       it "should send emails when solution is started" do
-        solution.should_receive(:notify_stakeholders).with(:notify_stakeholders_of_developer_work_started)
+        expect(solution).to receive(:notify_stakeholders).with(:notify_stakeholders_of_developer_work_started)
         solution.start_work
       end
 
       it "should send email when solution is stopped" do
-        solution.should_receive(:notify_stakeholders).with(:notify_stakeholders_of_developer_work_stopped)
+        expect(solution).to receive(:notify_stakeholders).with(:notify_stakeholders_of_developer_work_stopped)
         solution.stop_work
       end
 
       it "should not send emails when solution receives checkin" do
-        solution.should_receive(:notify_stakeholders).with(anything).never
+        expect(solution).to receive(:notify_stakeholders).with(anything).never
         solution.checkin
       end
     end
@@ -91,11 +91,11 @@ describe Solution do
     let!(:solution) { create :solution, person: person, issue: issue }
 
     it "should create SolutionEvent::Started" do
-      solution.solution_events.first.type.should eq("SolutionEvent::Started")
+      expect(solution.solution_events.first.type).to eq("SolutionEvent::Started")
     end
 
     it "should set the status to 'started'" do
-      solution.status.should eq('started')
+      expect(solution.status).to eq('started')
     end
   end
 
@@ -107,11 +107,11 @@ describe Solution do
     end
 
     it "should create SolutionEvent::Stopped" do
-      solution.solution_events.first.type.should eq("SolutionEvent::Stopped")
+      expect(solution.solution_events.first.type).to eq("SolutionEvent::Stopped")
     end
 
     it "should set the sstatus to 'stopped'" do
-      solution.status.should eq('stopped')
+      expect(solution.status).to eq('stopped')
     end
   end
 end

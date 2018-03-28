@@ -12,11 +12,11 @@ describe Api::V1::PeopleController do
   it "should be able to add paypal email" do
     paypal_email = 'ihazpaypal@gmail.com'
 
-    lambda {
+    expect {
       put :update, params: params.merge(paypal_email: paypal_email)
       assert_response :ok
       person.reload
-    }.should change(person, :paypal_email).to paypal_email
+    }.to change(person, :paypal_email).to paypal_email
   end
 
   describe "access token" do
@@ -30,7 +30,7 @@ describe Api::V1::PeopleController do
     }
 
     it "should have an access token in login" do
-      response_data.should have_key 'access_token'
+      expect(response_data).to have_key 'access_token'
     end
   end
 
@@ -39,8 +39,8 @@ describe Api::V1::PeopleController do
     let(:linked_account)  { create(:github_account, person: person) }
 
     let!(:tracker_plugin) do
-      TrackerPlugin.any_instance.stub(:linked_account_can_write?).and_return(true)
-      TrackerPlugin.any_instance.stub(:can_modify_repo?).and_return(true)
+      allow_any_instance_of(TrackerPlugin).to receive(:linked_account_can_write?).and_return(true)
+      allow_any_instance_of(TrackerPlugin).to receive(:can_modify_repo?).and_return(true)
 
       create(:tracker_plugin, person: person)
     end
@@ -85,21 +85,21 @@ describe Api::V1::PeopleController do
       assert_response :ok
 
       person.reload
-      person.languages.should include language1
-      person.languages.should include language2
+      expect(person.languages).to include language1
+      expect(person.languages).to include language2
     end
 
     it "should remove languages" do
       person.set_languages(language1.id, language2.id)
-      person.languages.should include language1
-      person.languages.should include language2
+      expect(person.languages).to include language1
+      expect(person.languages).to include language2
 
       delete :set_languages, params: params.merge(language_ids: language2.id)
       assert_response :ok
 
       person.reload
-      person.languages.should_not include language1
-      person.languages.should include language2
+      expect(person.languages).not_to include language1
+      expect(person.languages).to include language2
     end
   end
 end

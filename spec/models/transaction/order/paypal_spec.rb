@@ -46,7 +46,7 @@ describe Transaction::Order::Paypal do
 
   let(:notification) do
     notification = build :payment_notification_paypal
-    notification.stub(:shopping_cart) { cart }
+    allow(notification).to receive(:shopping_cart) { cart }
     notification.save! and notification
   end
 
@@ -54,7 +54,7 @@ describe Transaction::Order::Paypal do
 
   describe 'notification unverified' do
 
-    before { notification.stub(:verified?) { false } }
+    before { allow(notification).to receive(:verified?) { false } }
 
     it 'should not create Transaction if notification invalid' do
       expect(create_order).not_to change(Transaction::Order::Paypal, :count)
@@ -64,7 +64,7 @@ describe Transaction::Order::Paypal do
 
   describe 'notification verified' do
 
-    before { notification.stub(:verified?) { true } }
+    before { allow(notification).to receive(:verified?) { true } }
 
     it 'should create Transaction if notification valid' do
       expect(create_order).to change(Transaction::Order::Paypal, :count).by 1
@@ -73,7 +73,7 @@ describe Transaction::Order::Paypal do
     it 'should only create one Transaction' do
       order = create_order[]
       order2 = create_order[]
-      order.should eq order2
+      expect(order).to eq order2
     end
 
   end

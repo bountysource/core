@@ -46,8 +46,8 @@ describe Api::V1::TeamInvitesController do
 
   it "should not create duplicate team invites" do
     relation = double(:admin? => true)
-    team.stub(:relation_for_owner).and_return(relation)
-    Team.stub(:find_by).and_return(team)
+    allow(team).to receive(:relation_for_owner).and_return(relation)
+    allow(Team).to receive(:find_by).and_return(team)
 
     dup_params = {
       access_token: person.create_access_token,
@@ -66,8 +66,8 @@ describe Api::V1::TeamInvitesController do
   describe "only admins can add people" do
     it "should fail if the requester is not an admin" do
       relation = double(:admin? => false)
-      team.stub(:relation_for_owner).and_return(relation)
-      Team.stub(:find_by).and_return(team)
+      allow(team).to receive(:relation_for_owner).and_return(relation)
+      allow(Team).to receive(:find_by).and_return(team)
 
       expect {
         post :create, params: params
@@ -77,10 +77,10 @@ describe Api::V1::TeamInvitesController do
 
     it "should be successful for admins" do
       relation = double(:admin? => true)
-      team.stub(:relation_for_owner).and_return(relation)
-      Team.stub(:find_by).and_return(team)
+      allow(team).to receive(:relation_for_owner).and_return(relation)
+      allow(Team).to receive(:find_by).and_return(team)
 
-      TeamInvite.any_instance.stub_chain(:delay, :send_email).and_return(true)
+      allow_any_instance_of(TeamInvite).to receive_message_chain(:delay, :send_email).and_return(true)
 
       expect {
         post :create, params: params
@@ -96,9 +96,9 @@ describe Api::V1::TeamInvitesController do
       post :accept, params: params
       team.reload
       relation = team.relation_for_owner(person)
-      relation.should be_admin
-      relation.should be_developer
-      relation.should_not be_public
+      expect(relation).to be_admin
+      expect(relation).to be_developer
+      expect(relation).not_to be_public
     end
   end
 end

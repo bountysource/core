@@ -77,7 +77,7 @@ describe Jira::Issue do
       }
     end
     before do
-      Jira::API.should_receive(:fetch_issue_list).and_return(data)
+      expect(Jira::API).to receive(:fetch_issue_list).and_return(data)
     end
     it "should call api and set issue attributes as api returned" do
       expect(jira_issue.remote_sync).to be_truthy

@@ -147,7 +147,7 @@ describe ShoppingCart do
         cart.add_item item_attributes
         update_item[index, attrs]
         updated_item = cart.reload.items[index]
-        updated_item['amount'].should eq('300.0')
+        expect(updated_item['amount']).to eq('300.0')
       end
     end
 
@@ -170,7 +170,7 @@ describe ShoppingCart do
 
         update_item[index, attrs]
         serialized_item = cart.reload.items[index]
-        serialized_item['amount'].should be == attrs['amount']
+        expect(serialized_item['amount']).to eq(attrs['amount'])
       end
 
       it 'should change anonymous' do
@@ -180,7 +180,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['anonymous'].should be == attrs['anonymous']
+        expect(serialized_item['anonymous']).to eq(attrs['anonymous'])
       end
 
       it 'should change owner_id' do
@@ -190,7 +190,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['owner_id'].should be == attrs['owner_id']
+        expect(serialized_item['owner_id']).to eq(attrs['owner_id'])
       end
 
       it 'should change owner_type' do
@@ -200,7 +200,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['owner_type'].should be == attrs['owner_type']
+        expect(serialized_item['owner_type']).to eq(attrs['owner_type'])
       end
 
       it 'should change reward_id' do
@@ -210,7 +210,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['reward_id'].should be == attrs['reward_id']
+        expect(serialized_item['reward_id']).to eq(attrs['reward_id'])
       end
 
       it 'should change survey_response' do
@@ -220,7 +220,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['survey_response'].should be == attrs['survey_response']
+        expect(serialized_item['survey_response']).to eq(attrs['survey_response'])
       end
 
     end
@@ -244,7 +244,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['amount'].should be == attrs['amount']
+        expect(serialized_item['amount']).to eq(attrs['amount'])
       end
 
       it 'should change anonymous' do
@@ -254,7 +254,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['anonymous'].should be == attrs['anonymous']
+        expect(serialized_item['anonymous']).to eq(attrs['anonymous'])
       end
 
       it 'should change owner_id' do
@@ -264,7 +264,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['owner_id'].should be == attrs['owner_id']
+        expect(serialized_item['owner_id']).to eq(attrs['owner_id'])
       end
 
       it 'should change owner_type' do
@@ -274,7 +274,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['owner_type'].should be == attrs['owner_type']
+        expect(serialized_item['owner_type']).to eq(attrs['owner_type'])
       end
 
     end
@@ -298,7 +298,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['amount'].should be == attrs['amount']
+        expect(serialized_item['amount']).to eq(attrs['amount'])
       end
 
       it 'should change amount' do
@@ -308,7 +308,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['amount'].should be == attrs['amount']
+        expect(serialized_item['amount']).to eq(attrs['amount'])
       end
 
       it 'should change owner_id' do
@@ -318,7 +318,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['owner_id'].should be == attrs['owner_id']
+        expect(serialized_item['owner_id']).to eq(attrs['owner_id'])
       end
 
       it 'should change owner_type' do
@@ -328,7 +328,7 @@ describe ShoppingCart do
         update_item[index, attrs]
 
         serialized_item = cart.reload.items[index]
-        serialized_item['owner_type'].should be == attrs['owner_type']
+        expect(serialized_item['owner_type']).to eq(attrs['owner_type'])
       end
 
     end
@@ -354,9 +354,9 @@ describe ShoppingCart do
     let(:remove_item) { -> (index) { cart.remove_item index } }
 
     it 'should remove item' do
-      cart.items.count.should be == 1
+      expect(cart.items.count).to eq(1)
       remove_item[0]
-      cart.reload.should be_empty
+      expect(cart.reload).to be_empty
     end
 
     describe 'proposals' do
@@ -365,7 +365,7 @@ describe ShoppingCart do
       let(:item_index) { 0 }
 
       before do
-        cart.stub(:load_item_at).and_return(proposal)
+        allow(cart).to receive(:load_item_at).and_return(proposal)
       end
 
       it 'should change state from pending_acceptance to pending' do
@@ -390,12 +390,12 @@ describe ShoppingCart do
     it 'should save old shopping cart' do
       old_cart = person.shopping_cart
       action[]
-      person.reload.shopping_carts.should include old_cart
+      expect(person.reload.shopping_carts).to include old_cart
     end
 
     it 'should have new cart on person' do
       new_cart = action[]
-      person.reload.shopping_cart.should be == new_cart
+      expect(person.reload.shopping_cart).to eq(new_cart)
     end
 
   end
@@ -409,15 +409,15 @@ describe ShoppingCart do
 
     it 'should generate unique ids' do
       ids = 1000.times.map { generate_id[] }
-      ids.count.should be == ids.uniq.count
+      expect(ids.count).to eq(ids.uniq.count)
     end
 
     it 'should be valid without person' do
-      ShoppingCart.new.should be_valid
+      expect(ShoppingCart.new).to be_valid
     end
 
     it 'should have uid on create' do
-      ShoppingCart.create.uid.should_not be_blank
+      expect(ShoppingCart.create.uid).not_to be_blank
     end
 
   end
@@ -447,7 +447,7 @@ describe ShoppingCart do
 
     it 'should move items to new' do
       action[]
-      new.items.count.should be == 2
+      expect(new.items.count).to eq(2)
     end
 
     it 'should delete old' do
@@ -483,15 +483,15 @@ describe ShoppingCart do
 
       it 'should have attributes' do
         attrs = item_to_attributes[pledge]
-        attrs[:item_type].should be == 'pledge'
-        attrs[:owner_id].should be == pledge.owner_id
-        attrs[:owner_type].should be == pledge.owner_type
-        attrs[:amount].should be == pledge.amount
-        attrs[:currency].should be == 'USD'
+        expect(attrs[:item_type]).to eq('pledge')
+        expect(attrs[:owner_id]).to eq(pledge.owner_id)
+        expect(attrs[:owner_type]).to eq(pledge.owner_type)
+        expect(attrs[:amount]).to eq(pledge.amount)
+        expect(attrs[:currency]).to eq('USD')
 
-        attrs[:fundraiser_id].to_i.should be == pledge.fundraiser_id
-        attrs[:reward_id].to_i.should be == pledge.reward_id
-        attrs[:survey_response].should be == pledge.survey_response
+        expect(attrs[:fundraiser_id].to_i).to eq(pledge.fundraiser_id)
+        expect(attrs[:reward_id].to_i).to eq(pledge.reward_id)
+        expect(attrs[:survey_response]).to eq(pledge.survey_response)
       end
 
     end
@@ -513,16 +513,16 @@ describe ShoppingCart do
 
       it 'should have attributes' do
         attrs = item_to_attributes[bounty]
-        attrs[:item_type].should be == 'bounty'
-        attrs[:owner_id].should be == bounty.owner_id
-        attrs[:owner_type].should be == bounty.owner_type
-        attrs[:amount].should be == bounty.amount
-        attrs[:currency].should be == 'USD'
+        expect(attrs[:item_type]).to eq('bounty')
+        expect(attrs[:owner_id]).to eq(bounty.owner_id)
+        expect(attrs[:owner_type]).to eq(bounty.owner_type)
+        expect(attrs[:amount]).to eq(bounty.amount)
+        expect(attrs[:currency]).to eq('USD')
 
-        attrs[:issue_id].to_i.should be == bounty.issue_id
-        attrs[:bounty_expiration].should be == bounty.bounty_expiration
-        attrs[:upon_expiration].should be == bounty.upon_expiration
-        attrs[:tweet].should be == bounty.tweet
+        expect(attrs[:issue_id].to_i).to eq(bounty.issue_id)
+        expect(attrs[:bounty_expiration]).to eq(bounty.bounty_expiration)
+        expect(attrs[:upon_expiration]).to eq(bounty.upon_expiration)
+        expect(attrs[:tweet]).to eq(bounty.tweet)
       end
 
     end
@@ -541,13 +541,13 @@ describe ShoppingCart do
 
       it 'should have attributes' do
         attrs = item_to_attributes[team_payin]
-        attrs[:item_type].should be == 'team_payin'
-        attrs[:owner_id].should be == team_payin.owner_id
-        attrs[:owner_type].should be == team_payin.owner_type
-        attrs[:amount].should be == team_payin.amount
-        attrs[:currency].should be == 'USD'
+        expect(attrs[:item_type]).to eq('team_payin')
+        expect(attrs[:owner_id]).to eq(team_payin.owner_id)
+        expect(attrs[:owner_type]).to eq(team_payin.owner_type)
+        expect(attrs[:amount]).to eq(team_payin.amount)
+        expect(attrs[:currency]).to eq('USD')
 
-        attrs[:team_id].should be == team_payin.team_id
+        expect(attrs[:team_id]).to eq(team_payin.team_id)
       end
 
     end
@@ -563,13 +563,13 @@ describe ShoppingCart do
 
       it 'should return anonymous cart' do
         cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: nil
-        cart.should be == anonymous_cart
+        expect(cart).to eq(anonymous_cart)
       end
 
       it 'should associate anonymous cart with person if person present' do
-        person.shopping_cart_id.should be_nil
+        expect(person.shopping_cart_id).to be_nil
         cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: person
-        cart.should be == anonymous_cart
+        expect(cart).to eq(anonymous_cart)
       end
 
     end
@@ -581,7 +581,7 @@ describe ShoppingCart do
 
       it 'should return person cart' do
         cart = ShoppingCart.find_or_create uid: nil, person: person
-        cart.should be == person_cart
+        expect(cart).to eq(person_cart)
       end
 
     end
@@ -596,7 +596,7 @@ describe ShoppingCart do
 
       it 'should return the person_cart' do
         cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: person
-        cart.should be == person_cart
+        expect(cart).to eq(person_cart)
       end
     end
 
@@ -608,25 +608,25 @@ describe ShoppingCart do
 
       it 'should return person cart' do
         cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: person
-        cart.should be == person_cart
+        expect(cart).to eq(person_cart)
       end
 
       it 'should merge anonymous cart into person cart' do
         pledge = build(:pledge, amount: 150)
         anonymous_cart.add_item ShoppingCart.item_to_attributes pledge
 
-        anonymous_cart.should_not be_empty
-        person_cart.should be_empty
+        expect(anonymous_cart).not_to be_empty
+        expect(person_cart).to be_empty
 
         cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: person
-        cart.should be == person_cart
-        cart.should_not be_empty
+        expect(cart).to eq(person_cart)
+        expect(cart).not_to be_empty
 
         expect { anonymous_cart.reload }.to raise_exception ActiveRecord::RecordNotFound
       end
 
       it 'should not merge anonymous cart if same as person cart' do
-        person_cart.should_receive(:merge!).never
+        expect(person_cart).to receive(:merge!).never
         cart = ShoppingCart.find_or_create uid: person_cart.uid, person: person
 
         expect { anonymous_cart.reload }.not_to raise_error
@@ -647,7 +647,7 @@ describe ShoppingCart do
 
       it 'should create cart on person if not yet created' do
         cart = ShoppingCart.find_or_create uid: nil, person: person
-        cart.should be == person.shopping_cart
+        expect(cart).to eq(person.shopping_cart)
       end
 
       it 'should raise RecordNotFound if autocreate is false' do
@@ -668,29 +668,29 @@ describe ShoppingCart do
     let(:amount) { 100 }
 
     before do
-      Currency.stub(:btc_rate) { 900.0 }
-      Currency.stub(:msc_rate) { 800.0 }
-      Currency.stub(:xrp_rate) { 700.0 }
+      allow(Currency).to receive(:btc_rate) { 900.0 }
+      allow(Currency).to receive(:msc_rate) { 800.0 }
+      allow(Currency).to receive(:xrp_rate) { 700.0 }
     end
 
     it 'should stay in USD' do
       cart.add_item item_attributes.merge(amount: amount, currency: 'USD')
-      cart.calculate_gross.should eq(amount)
+      expect(cart.calculate_gross).to eq(amount)
     end
 
     it 'should convert BTC to USD' do
       cart.add_item item_attributes.merge(amount: amount, currency: 'BTC')
-      cart.calculate_gross.should eq(amount * Currency.btc_rate)
+      expect(cart.calculate_gross).to eq(amount * Currency.btc_rate)
     end
 
     it 'should convert MSC to USD' do
       cart.add_item item_attributes.merge(amount: amount, currency: 'MSC')
-      cart.calculate_gross.should eq(amount * Currency.msc_rate)
+      expect(cart.calculate_gross).to eq(amount * Currency.msc_rate)
     end
 
     it 'should convert XRP to USD' do
       cart.add_item item_attributes.merge(amount: amount, currency: 'XRP')
-      cart.calculate_gross.should eq(amount * Currency.xrp_rate)
+      expect(cart.calculate_gross).to eq(amount * Currency.xrp_rate)
     end
 
     it 'should convert all currencies into USD' do
@@ -698,7 +698,7 @@ describe ShoppingCart do
       cart.add_item item_attributes.merge(amount: amount, currency: 'BTC')
       cart.add_item item_attributes.merge(amount: amount, currency: 'MSC')
       cart.add_item item_attributes.merge(amount: amount, currency: 'XRP')
-      cart.calculate_gross.should eq(amount + (amount * Currency.btc_rate) + (amount * Currency.msc_rate) + (amount * Currency.xrp_rate))
+      expect(cart.calculate_gross).to eq(amount + (amount * Currency.btc_rate) + (amount * Currency.msc_rate) + (amount * Currency.xrp_rate))
     end
   end
 
@@ -722,7 +722,7 @@ describe ShoppingCart do
 
       it 'should calculate gross' do
         cart.add_item(item_attributes)
-        cart.calculate_gross.should eq(item_attributes[:amount] + tweet_amount)
+        expect(cart.calculate_gross).to eq(item_attributes[:amount] + tweet_amount)
       end
     end
 
@@ -740,7 +740,7 @@ describe ShoppingCart do
 
       it 'should calculate gross' do
         cart.add_item(item_attributes)
-        cart.calculate_gross.should eq(item_attributes[:amount])
+        expect(cart.calculate_gross).to eq(item_attributes[:amount])
       end
     end
 
@@ -757,7 +757,7 @@ describe ShoppingCart do
 
       it 'should calculate gross' do
         cart.add_item(item_attributes)
-        cart.calculate_gross.should eq(item_attributes[:amount])
+        expect(cart.calculate_gross).to eq(item_attributes[:amount])
       end
     end
 
@@ -774,7 +774,7 @@ describe ShoppingCart do
 
       it 'should calculate gross' do
         cart.add_item(item_attributes)
-        cart.calculate_gross.should eq(item_attributes[:amount])
+        expect(cart.calculate_gross).to eq(item_attributes[:amount])
       end
     end
   end

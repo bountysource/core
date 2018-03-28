@@ -77,7 +77,7 @@ describe GoogleCode::Issue do
       }
     end
     before do
-      GoogleCode::API.should_receive(:fetch_issue).and_return(data)
+      expect(GoogleCode::API).to receive(:fetch_issue).and_return(data)
     end
     it "should call api and set issue attributes as api returned" do
       expect(googlecode_issue.remote_sync).to be_truthy

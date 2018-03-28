@@ -21,9 +21,9 @@ describe Currency do
   describe 'convert' do
 
     before do
-      Currency.stub(:btc_rate) { 900.0 }
-      Currency.stub(:msc_rate) { 800.0 }
-      Currency.stub(:xrp_rate) { 700.0 }
+      allow(Currency).to receive(:btc_rate) { 900.0 }
+      allow(Currency).to receive(:msc_rate) { 800.0 }
+      allow(Currency).to receive(:xrp_rate) { 700.0 }
     end
 
     it 'should take string and return amount' do
@@ -75,7 +75,7 @@ describe Currency do
       let(:usd_amount) { 1 }
 
       before do
-        Currency.stub(:btc_to_usd).and_return(usd_amount)
+        allow(Currency).to receive(:btc_to_usd).and_return(usd_amount)
       end
 
       it 'should convert to BTC' do
@@ -101,7 +101,7 @@ describe Currency do
       let(:usd_amount) { 1 }
 
       before do
-        Currency.stub(:msc_to_usd).and_return(usd_amount)
+        allow(Currency).to receive(:msc_to_usd).and_return(usd_amount)
       end
 
       it 'should convert to BTC' do
@@ -127,7 +127,7 @@ describe Currency do
       let(:usd_amount) { 1 }
 
       before do
-        Currency.stub(:xrp_to_usd).and_return(usd_amount)
+        allow(Currency).to receive(:xrp_to_usd).and_return(usd_amount)
       end
 
       it 'should convert to BTC' do

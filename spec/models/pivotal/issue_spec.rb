@@ -73,8 +73,8 @@ describe Pivotal::Issue do
       }
     end
     before do
-      Pivotal::API.should_receive(:fetch_issue).and_return(data)
-      Pivotal::Issue.any_instance.should_receive(:sync_comments_from_source).and_return(true)
+      expect(Pivotal::API).to receive(:fetch_issue).and_return(data)
+      expect_any_instance_of(Pivotal::Issue).to receive(:sync_comments_from_source).and_return(true)
     end
     it "should call api and set issue attributes as api returned" do
       expect(pivotal_issue.remote_sync).to be_truthy

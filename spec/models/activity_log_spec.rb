@@ -88,7 +88,7 @@ describe ActivityLog do
         expect {
           ActivityLog.log(name, lurker_request_info, options)
         }.to change(ActivityLog, :count).by 1
-        ActivityLog.first.lurker.remote_ip.should eq("193.253.1.2")
+        expect(ActivityLog.first.lurker.remote_ip).to eq("193.253.1.2")
       end
 
       it "should NOT create a new Lurker record" do

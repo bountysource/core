@@ -76,7 +76,7 @@ describe Trac::Issue do
       }
     end
     before do
-      Trac::API.should_receive(:fetch_issue).and_return(data)
+      expect(Trac::API).to receive(:fetch_issue).and_return(data)
     end
     it "should call api and set issue attributes as api returned" do
       expect(trac_issue.remote_sync).to be_truthy

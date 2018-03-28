@@ -76,7 +76,7 @@ describe SourceForge::Issue do
       }
     end
     before do
-      SourceForge::API.should_receive(:fetch_issue).and_return(data)
+      expect(SourceForge::API).to receive(:fetch_issue).and_return(data)
     end
     it "should call api and set issue attributes as api returned" do
       expect(sourceforge_issue.remote_sync).to be_truthy
@@ -96,7 +96,7 @@ describe SourceForge::Issue do
 
       it 'should be false for all' do
         statuses.each do |status|
-          method[status].should be_falsey
+          expect(method[status]).to be_falsey
         end
       end
     end
@@ -112,7 +112,7 @@ describe SourceForge::Issue do
 
       it 'should be true for all' do
         statuses.each do |status|
-          method[status].should be_truthy
+          expect(method[status]).to be_truthy
         end
       end
     end
@@ -129,7 +129,7 @@ describe SourceForge::Issue do
 
       it 'should be true for all' do
         statuses.each do |status|
-          method[status].should be_truthy
+          expect(method[status]).to be_truthy
         end
       end
     end
@@ -138,7 +138,7 @@ describe SourceForge::Issue do
       let(:status) { 'deleted' }
 
       it 'should be false' do
-        method[status].should be_falsey
+        expect(method[status]).to be_falsey
       end
     end
   end

@@ -106,12 +106,12 @@ describe Api::V1::BountyClaimsController do
 
     it "should have person on index" do
       get :index, params: params
-      response_data.first.should have_key "person"
+      expect(response_data.first).to have_key "person"
     end
 
     it "should have person on show" do
       get :show, params: params
-      response_data.should have_key "person"
+      expect(response_data).to have_key "person"
     end
   end
 end

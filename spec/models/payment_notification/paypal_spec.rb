@@ -73,22 +73,22 @@ describe PaymentNotification::Paypal do
 
   it 'should have txn_id in params' do
     response = process_post[]
-    response.params['txn_id'].should be == txn_id
+    expect(response.params['txn_id']).to eq(txn_id)
   end
 
   it 'should load shopping cart' do
-    process_post[].shopping_cart.should be == cart
+    expect(process_post[].shopping_cart).to eq(cart)
   end
 
   it 'should load person' do
-    process_post[].person.should be == person
+    expect(process_post[].person).to eq(person)
   end
 
   describe 'completed status' do
     let(:payment_status) { 'Completed' }
 
     it 'should be completed' do
-      process_post[].should be_completed
+      expect(process_post[]).to be_completed
     end
   end
 
@@ -96,7 +96,7 @@ describe PaymentNotification::Paypal do
     let(:payment_status) { 'Pending' }
 
     it 'should be pending' do
-      process_post[].should be_pending
+      expect(process_post[]).to be_pending
     end
   end
 
@@ -104,7 +104,7 @@ describe PaymentNotification::Paypal do
     let(:payment_type) { 'instant' }
 
     it 'should be instant payment' do
-      process_post[].should be_instant
+      expect(process_post[]).to be_instant
     end
   end
 
@@ -112,7 +112,7 @@ describe PaymentNotification::Paypal do
     let(:payment_type) { 'echeck' }
 
     it 'should be echeck' do
-      process_post[].should be_echeck
+      expect(process_post[]).to be_echeck
     end
   end
 
@@ -121,51 +121,51 @@ describe PaymentNotification::Paypal do
     it 'should not verify if cart gross does not match' do
       response = process_post[]
       response.params['mc_gross'] = '1.0'
-      response.should_not be_verified
+      expect(response).not_to be_verified
     end
 
     it 'should not verify if business email does not match' do
       response = process_post[]
       response.params['business'] = nil
-      response.should_not be_verified
+      expect(response).not_to be_verified
     end
 
     it 'should not verify if post back fails' do
       response = process_post[]
-      response.stub(:post_back) { 'POSTBACK' }
-      response.should_not be_verified
+      allow(response).to receive(:post_back) { 'POSTBACK' }
+      expect(response).not_to be_verified
     end
 
     it 'should only verify in status is Completed' do
       response = process_post[]
       response.params['payment_status'] = 'Denied'
-      response.should_not be_verified
+      expect(response).not_to be_verified
     end
 
     it 'should only verify if instant or echeck' do
       response = process_post[]
       response.params['payment_type'] = 'FAKE'
-      response.should_not be_verified
+      expect(response).not_to be_verified
     end
 
     it 'should verify instant' do
       response = process_post[]
       response.params['payment_status'] = 'Completed'
       response.params['payment_type'] = 'instant'
-      ShoppingCart.any_instance.stub(:calculate_gross) { response.params['mc_gross'].to_f }
+      allow_any_instance_of(ShoppingCart).to receive(:calculate_gross) { response.params['mc_gross'].to_f }
       response.params['business'] = Api::Application.config.paypal[:email]
-      response.stub(:post_back) { 'VERIFIED' }
-      response.should be_verified
+      allow(response).to receive(:post_back) { 'VERIFIED' }
+      expect(response).to be_verified
     end
 
     it 'should verify echeck' do
       response = process_post[]
       response.params['payment_status'] = 'Completed'
       response.params['payment_type'] = 'echeck'
-      ShoppingCart.any_instance.stub(:calculate_gross) { response.params['mc_gross'].to_f }
+      allow_any_instance_of(ShoppingCart).to receive(:calculate_gross) { response.params['mc_gross'].to_f }
       response.params['business'] = Api::Application.config.paypal[:email]
-      response.stub(:post_back) { 'VERIFIED' }
-      response.should be_verified
+      allow(response).to receive(:post_back) { 'VERIFIED' }
+      expect(response).to be_verified
     end
 
   end
@@ -174,13 +174,13 @@ describe PaymentNotification::Paypal do
 
     let(:response) do
       response = process_post[]
-      response.stub(:verified?) { true }
+      allow(response).to receive(:verified?) { true }
       response
     end
 
     it 'should create PaymentNotification' do
       expect {
-        PaymentNotification.any_instance.stub(:verified?) { true }
+        allow_any_instance_of(PaymentNotification).to receive(:verified?) { true }
         process_post[]
       }.to change(PaymentNotification::Paypal, :count).by 1
     end

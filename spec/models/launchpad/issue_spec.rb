@@ -74,7 +74,7 @@ describe Launchpad::Issue do
       }
     end
     before do
-      Launchpad::API.should_receive(:fetch_issue).and_return(data)
+      expect(Launchpad::API).to receive(:fetch_issue).and_return(data)
     end
     it "should call api and set issue attributes as api returned" do
       expect(launchpad_issue.remote_sync).to be_truthy

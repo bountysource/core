@@ -14,13 +14,13 @@ describe Api::V1::IssuesController do
       end
 
       it "should render result" do
-        result.count.should == 1
+        expect(result.count).to eq(1)
         issue_result = result.first
-        issue_result['id'].should == issue.id
-        issue_result['title'].should == issue.title
+        expect(issue_result['id']).to eq(issue.id)
+        expect(issue_result['title']).to eq(issue.title)
 
         # on issues index, we don't want RABL to include the tracker because we already know which tracker it is
-        issue_result['tracker'].should == nil
+        expect(issue_result['tracker']).to eq(nil)
       end
     end
   end
@@ -33,13 +33,13 @@ describe Api::V1::IssuesController do
         end
 
         it "should render result" do
-          result['number'].should == issue.number
-          result['body_html'].should == issue.sanitized_body_html
-          result['url'].should == issue.url
+          expect(result['number']).to eq(issue.number)
+          expect(result['body_html']).to eq(issue.sanitized_body_html)
+          expect(result['url']).to eq(issue.url)
         end
 
         it "should assign issue" do
-          assigns[:issue].should == issue
+          expect(assigns[:issue]).to eq(issue)
         end
       end
 
@@ -57,18 +57,18 @@ describe Api::V1::IssuesController do
         let(:issue) { create(:github_issue, tracker: tracker) }
 
         before do
-          Github::Issue.any_instance.should_receive(:remote_sync_if_necessary).and_return(true)
+          expect_any_instance_of(Github::Issue).to receive(:remote_sync_if_necessary).and_return(true)
           get :show, params: { id: issue.to_param }
         end
 
         it "should render result" do
-          result['number'].should be == issue.number
-          result['body_html'].should be == issue.sanitized_body_html
-          result['url'].should be == issue.url
+          expect(result['number']).to eq(issue.number)
+          expect(result['body_html']).to eq(issue.sanitized_body_html)
+          expect(result['url']).to eq(issue.url)
         end
 
         it "should assign issue" do
-          assigns[:issue].should == issue
+          expect(assigns[:issue]).to eq(issue)
         end
       end
 
@@ -77,18 +77,18 @@ describe Api::V1::IssuesController do
         let(:issue) { create(:trac_issue, tracker: tracker) }
 
         before do
-          Trac::Issue.any_instance.should_receive(:remote_sync_if_necessary).and_return(true)
+          expect_any_instance_of(Trac::Issue).to receive(:remote_sync_if_necessary).and_return(true)
           get :show, params: { id: issue.to_param }
         end
 
         it "should render result" do
-          result['number'].should == issue.number
-          result['body_html'].should == issue.sanitized_body_html
-          result['url'].should == issue.url
+          expect(result['number']).to eq(issue.number)
+          expect(result['body_html']).to eq(issue.sanitized_body_html)
+          expect(result['url']).to eq(issue.url)
         end
 
         it "should assign issue" do
-          assigns[:issue].should == issue
+          expect(assigns[:issue]).to eq(issue)
         end
       end
     end
@@ -103,7 +103,7 @@ describe Api::V1::IssuesController do
       end
 
       it "should not assign issue" do
-        assigns[:issue].should be_nil
+        expect(assigns[:issue]).to be_nil
       end
     end
   end
@@ -117,7 +117,7 @@ describe Api::V1::IssuesController do
 
     it 'should render good_model when bad_model requested' do
       get :show, params: { id: bad_model.id }
-      result['id'].should be == good_model.id
+      expect(result['id']).to eq(good_model.id)
     end
 
   end

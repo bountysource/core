@@ -9,63 +9,63 @@ describe "payment helpers" do
     let!(:backer) { create(:person_with_money_in_account, money_amount: 100) }
 
     it "should create with no extra arguments" do
-      lambda {
+      expect {
        create_bounty 10
-      }.should change(Bounty, :count).by 1
+      }.to change(Bounty, :count).by 1
     end
 
     it "should create with an issue and a person" do
-      lambda {
+      expect {
         create_bounty(100, person: backer, issue: issue)
-      }.should change(Bounty, :count).by 1
+      }.to change(Bounty, :count).by 1
     end
 
     it "should include associate bounty with issue if provided" do
-      lambda {
+      expect {
         create_bounty(100, issue: issue)
-      }.should change(issue.bounties, :count).by 1
+      }.to change(issue.bounties, :count).by 1
     end
 
     it "should associate bounty with person if provided" do
-      lambda {
+      expect {
         create_bounty(100, person: backer)
-      }.should change(backer.bounties, :count).by 1
+      }.to change(backer.bounties, :count).by 1
     end
 
     it "should add bountysource fee to total" do
-      lambda {
+      expect {
         create_bounty 100, issue: issue
-      }.should change(Account::Paypal.instance, :balance).by -(100 + (100 * Api::Application.config.bountysource_tax))
+      }.to change(Account::Paypal.instance, :balance).by -(100 + (100 * Api::Application.config.bountysource_tax))
     end
 
     it "should collect bountysource fee" do
-      lambda {
+      expect {
         create_bounty 100, issue: issue
-      }.should change(Account::BountySourceFeesBounty.instance, :balance).by (100 * Api::Application.config.bountysource_tax)
+      }.to change(Account::BountySourceFeesBounty.instance, :balance).by (100 * Api::Application.config.bountysource_tax)
     end
 
     it "should add listed amount to issue account" do
-      lambda {
+      expect {
         create_bounty 100, issue: issue
         issue.reload
-      }.should change(issue, :account_balance).by 100
+      }.to change(issue, :account_balance).by 100
     end
 
     it "should create a transaction" do
-      lambda {
+      expect {
         create_bounty(100, person: backer)
-      }.should change(Transaction, :count).by 1
+      }.to change(Transaction, :count).by 1
     end
 
     it "should associate transaction with bounty" do
       bounty = create_bounty(100, person: backer)
-      bounty.txns.last.should == Transaction.last
-      bounty.txns.last.splits.count.should == 3
+      expect(bounty.txns.last).to eq(Transaction.last)
+      expect(bounty.txns.last.splits.count).to eq(3)
     end
 
     it "should add extra attributes to bounty if provided" do
       bounty = create_bounty(100, status: 'in_dispute')
-      bounty.status.should match /in_dispute/i
+      expect(bounty.status).to match /in_dispute/i
     end
   end
 

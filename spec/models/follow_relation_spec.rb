@@ -26,13 +26,13 @@ describe FollowRelation do
     let!(:follow_relation) { create(:follow_relation, person: person, item: tracker) }
 
     it "should include tracker in followed items" do
-      person.followed_trackers.should include tracker
+      expect(person.followed_trackers).to include tracker
     end
 
     it "should not include inactive follow relations" do
       follow_relation.unfollow!
       follow_relation.reload
-      person.followed_trackers.should_not include tracker
+      expect(person.followed_trackers).not_to include tracker
     end
   end
 

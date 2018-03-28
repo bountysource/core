@@ -4,14 +4,14 @@ describe BadgeController do
   render_views
 
   let(:svg) { '<doge />' }
-  before { Badge::Base.any_instance.stub(:shield_svg).and_return(svg) }
+  before { allow_any_instance_of(Badge::Base).to receive(:shield_svg).and_return(svg) }
 
   describe 'issue' do
     let(:issue) { create(:issue) }
 
     it 'should render badge' do
       get :issue, params: { issue_id: issue.id }
-      response.body.should eq(svg)
+      expect(response.body).to eq(svg)
       expect(response.status).to eq(200)
     end
 
@@ -37,7 +37,7 @@ describe BadgeController do
 
     it 'should render badge' do
       get :tracker, params: { tracker_id: tracker.id }
-      response.body.should eq(svg)
+      expect(response.body).to eq(svg)
       expect(response.status).to eq(200)
     end
 
@@ -65,7 +65,7 @@ describe BadgeController do
     shared_examples_for 'a valid team badge request' do
       it 'should render badge' do
         get :team, params: params
-        response.body.should eq(svg)
+        expect(response.body).to eq(svg)
         expect(response.status).to eq(200)
       end
     end
@@ -91,8 +91,8 @@ describe BadgeController do
 
         it "record not found" do
           badge_factory = double()
-          badge_factory.stub(:team).and_raise(ActiveRecord::RecordNotFound)
-          BadgeFactory.stub(:new).and_return(badge_factory)
+          allow(badge_factory).to receive(:team).and_raise(ActiveRecord::RecordNotFound)
+          allow(BadgeFactory).to receive(:new).and_return(badge_factory)
 
           get :team, params: params
           expect(response.status).to eq(404)
@@ -102,8 +102,8 @@ describe BadgeController do
       describe 'Key error' do
         it "should raise" do
           badge_factory = double()
-          badge_factory.stub(:team).and_raise(KeyError)
-          BadgeFactory.stub(:new).and_return(badge_factory)
+          allow(badge_factory).to receive(:team).and_raise(KeyError)
+          allow(BadgeFactory).to receive(:new).and_return(badge_factory)
 
           get :team, params: params
           expect(response.status).to eq(422)
@@ -113,8 +113,8 @@ describe BadgeController do
       describe 'parse error' do
         it "should raise" do
           badge_factory = double()
-          badge_factory.stub(:team).and_raise(BadgeFactory::ParseError)
-          BadgeFactory.stub(:new).and_return(badge_factory)
+          allow(badge_factory).to receive(:team).and_raise(BadgeFactory::ParseError)
+          allow(BadgeFactory).to receive(:new).and_return(badge_factory)
 
           get :team, params: params
           expect(response.status).to eq(422)

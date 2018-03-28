@@ -33,7 +33,7 @@ describe Api::V0::TransactionsController do
     it "should show transaction" do
       get 'show', params: params
       assert_response :ok
-      response_data['id'].should == transaction.id
+      expect(response_data['id']).to eq(transaction.id)
     end
 
     describe "creation" do
@@ -55,7 +55,7 @@ describe Api::V0::TransactionsController do
           { amount: -10,  account_id: Account::BountySourceAdjustment.instance.id, account_type: Account::BountySourceAdjustment.name }
         ]
 
-        lambda {
+        expect {
           post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
@@ -63,7 +63,7 @@ describe Api::V0::TransactionsController do
             splits:       splits_data.to_json
           )
           assert_response :created
-        }.should do
+        }.to do
           change(person.txns, :count).by 1
           change(issue.txns, :count).by 1
           change(item.txns, :count).by 1
@@ -76,7 +76,7 @@ describe Api::V0::TransactionsController do
           { amount: 10,   item_id: person.id, item_type: person.class.name },
         ]
 
-        lambda {
+        expect {
           post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
@@ -84,7 +84,7 @@ describe Api::V0::TransactionsController do
             splits:       splits_data.to_json
           )
           assert_response :unprocessable_entity
-        }.should_not do
+        }.not_to do
           change(person.txns, :count)
           change(issue.txns, :count)
           change(item.txns, :count)
@@ -98,7 +98,7 @@ describe Api::V0::TransactionsController do
           { amount: -9, account_id: Account::BountySourceAdjustment.instance.id, account_type: Account::BountySourceAdjustment.name }
         ]
 
-        lambda {
+        expect {
           post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
@@ -106,7 +106,7 @@ describe Api::V0::TransactionsController do
             splits:       splits_data.to_json
           )
           assert_response :unprocessable_entity
-        }.should_not do
+        }.not_to do
           change(person.txns, :count)
           change(issue.txns, :count)
           change(item.txns, :count)
@@ -121,7 +121,7 @@ describe Api::V0::TransactionsController do
         splits_data = [{ amount: -20000, item_id: santa_claus.id, item_type: santa_claus.class.name }]
         splits_data += children.map { |child| { amount: 1000, item_id: child.id, item_type: child.class.name } }
 
-        lambda {
+        expect {
           post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
@@ -129,7 +129,7 @@ describe Api::V0::TransactionsController do
             splits:       splits_data.to_json
           )
           assert_response :created
-        }.should do
+        }.to do
           children.each { |child| change(child.txns, :count).by 1 }
           change(santa_claus.txns, :count).by 1
           change(Split, :count).by splits_data.count
@@ -150,11 +150,11 @@ describe Api::V0::TransactionsController do
           '2' => { amount: 5, item_id: issue.id, item_type: issue.class.name },
         }
 
-        lambda {
+        expect {
           put :update, params: params.merge(description: transaction.description, splits: splits_data)
           assert_response :ok
           transaction.reload
-        }.should change(transaction.splits, :count).by 1
+        }.to change(transaction.splits, :count).by 1
       end
 
       it "should not add new splits if they are unbalanced" do
@@ -163,22 +163,22 @@ describe Api::V0::TransactionsController do
           '1' => { amount: 10, item_id: issue.id, item_type: issue.class.name },
         }
 
-        lambda {
+        expect {
           put :update, params: params.merge(splits: splits_data.to_json)
           assert_response :unprocessable_entity
           transaction.reload
-        }.should_not change(transaction.splits, :count)
+        }.not_to change(transaction.splits, :count)
       end
     end
 
     it "should update transaction description" do
       description = "I've got a lovely bunch of coconuts, there they are standing in a row!"
 
-      lambda {
+      expect {
         put 'update', params: params.merge(description: description)
         assert_response :ok
         transaction.reload
-      }.should change(transaction, :description).to description
+      }.to change(transaction, :description).to description
     end
 
     # TODO: item is on splits now, not transactions
@@ -192,17 +192,17 @@ describe Api::V0::TransactionsController do
     #end
 
     it "should destroy splits" do
-      lambda {
+      expect {
         delete 'destroy', params: params
         assert_response :no_content
-      }.should change(Split, :count).by -transaction.splits.count
+      }.to change(Split, :count).by -transaction.splits.count
     end
 
     it "should destroy transaction" do
-      lambda {
+      expect {
         delete 'destroy', params: params
         assert_response :no_content
-      }.should change(Transaction, :count).by -1
+      }.to change(Transaction, :count).by -1
     end
   end
 

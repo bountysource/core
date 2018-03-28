@@ -11,22 +11,22 @@ describe Api::V2::ProposalsController do
   let(:ar_proposal) { build_stubbed(:proposal) }
 
   before do
-    Api::BaseController.any_instance.stub(:current_user).and_return(person)
-    Issue.stub(:find_by!).and_return(issue)
-    issue.stub(:request_for_proposal).and_return(request_for_proposal)
-    issue.stub(:team).and_return(team)
-    team.stub(:person_is_admin?).and_return(true)
-    team.stub(:person_is_developer?).and_return(true)
-    proposal.stub(:person).and_return(person)
-    proposal.stub(destroyable?: true)
-    request_for_proposal.stub_chain(:proposals, :find_by!).and_return(proposal)
+    allow_any_instance_of(Api::BaseController).to receive(:current_user).and_return(person)
+    allow(Issue).to receive(:find_by!).and_return(issue)
+    allow(issue).to receive(:request_for_proposal).and_return(request_for_proposal)
+    allow(issue).to receive(:team).and_return(team)
+    allow(team).to receive(:person_is_admin?).and_return(true)
+    allow(team).to receive(:person_is_developer?).and_return(true)
+    allow(proposal).to receive(:person).and_return(person)
+    allow(proposal).to receive_messages(destroyable?: true)
+    allow(request_for_proposal).to receive_message_chain(:proposals, :find_by!).and_return(proposal)
 
     params.merge!(issue_id: issue.id, id: proposal.id)
   end
 
   shared_examples_for 'a request that requires a proposal' do
     it 'should require proposal' do
-      request_for_proposal.stub_chain(:proposals, :find_by!).and_raise(ActiveRecord::RecordNotFound)
+      allow(request_for_proposal).to receive_message_chain(:proposals, :find_by!).and_raise(ActiveRecord::RecordNotFound)
       action
       expect(response.status).to eq(404)
     end
@@ -41,13 +41,13 @@ describe Api::V2::ProposalsController do
     end
 
     it 'should create proposal' do
-      request_for_proposal.stub_chain(:proposals, :create!).and_return(proposal)
+      allow(request_for_proposal).to receive_message_chain(:proposals, :create!).and_return(proposal)
       post(:create, params: params)
       expect(response.status).to eq(201)
     end
 
     it 'should not create a proposal if the RFP is pending_fullfillment' do
-      request_for_proposal.stub_chain(:proposals, :create!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
+      allow(request_for_proposal).to receive_message_chain(:proposals, :create!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
       post(:create, params: params)
       expect(response.status).to eq(422)
     end
@@ -64,9 +64,9 @@ describe Api::V2::ProposalsController do
 
     it 'should not destroy if the proposal cannot be destroyed' do
       # Needed an ActiveRecord object to save me from stub hell
-      request_for_proposal.stub_chain(:proposals, :find_by!).and_return(ar_proposal)
-      ar_proposal.stub(:destroy!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
-      ar_proposal.stub(:person).and_return(person)
+      allow(request_for_proposal).to receive_message_chain(:proposals, :find_by!).and_return(ar_proposal)
+      allow(ar_proposal).to receive(:destroy!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
+      allow(ar_proposal).to receive(:person).and_return(person)
 
       delete(:destroy, params: params)
       expect(response.status).to eq(422)
@@ -118,8 +118,8 @@ describe Api::V2::ProposalsController do
     let(:action) { post(:accept, params: params) }
 
     before do
-      proposal.stub(:begin_appointment!)
-      proposal.stub(:set_team_notes!)
+      allow(proposal).to receive(:begin_appointment!)
+      allow(proposal).to receive(:set_team_notes!)
     end
 
     describe 'authorization' do
@@ -155,8 +155,8 @@ describe Api::V2::ProposalsController do
     let(:action) { post(:reject, params: params) }
 
     before do
-      proposal.stub(:reject!)
-      proposal.stub(:set_team_notes!)
+      allow(proposal).to receive(:reject!)
+      allow(proposal).to receive(:set_team_notes!)
     end
 
     describe 'authorization' do
@@ -191,8 +191,8 @@ describe Api::V2::ProposalsController do
 
     before do
       # Person not on team
-      team.stub(:person_is_admin?).and_return(false)
-      team.stub(:person_is_developer?).and_return(false)
+      allow(team).to receive(:person_is_admin?).and_return(false)
+      allow(team).to receive(:person_is_developer?).and_return(false)
     end
 
     it 'should render current users proposal' do

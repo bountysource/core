@@ -117,29 +117,29 @@ describe PaymentNotification::Coinbase do
 
   it 'should load shopping cart from custom attribute' do
     notification = create_notification[order_params]
-    notification.shopping_cart.should be == cart
+    expect(notification.shopping_cart).to eq(cart)
   end
 
   describe 'notification types' do
 
     it 'should be order' do
       notification = create_notification[order_params]
-      notification.is_order?.should be_truthy
+      expect(notification.is_order?).to be_truthy
     end
 
     it 'should be cancelled order' do
       order_params['order']['status'] = 'canceled'
       notification = create_notification[order_params]
 
-      notification.is_order?.should be_truthy
-      notification.order_canceled?.should be_truthy
+      expect(notification.is_order?).to be_truthy
+      expect(notification.order_canceled?).to be_truthy
     end
 
     it 'should be payout' do
       notification = create_notification[payout_params]
 
-      notification.is_order?.should be_falsey
-      notification.is_payout?.should be_truthy
+      expect(notification.is_order?).to be_falsey
+      expect(notification.is_payout?).to be_truthy
     end
 
   end
@@ -149,30 +149,30 @@ describe PaymentNotification::Coinbase do
     it 'should only verify if secret token valid' do
       notification = create_notification[order_params]
       notification.secret_matched = false
-      notification.should_not be_verified
+      expect(notification).not_to be_verified
     end
 
     it 'should only verify if order' do
       notification = create_notification[payout_params]
-      notification.stub(:is_order?) { false }
-      notification.should_not be_verified
+      allow(notification).to receive(:is_order?) { false }
+      expect(notification).not_to be_verified
     end
 
     it 'should only verify if order completed' do
       notification = create_notification[order_params]
-      notification.stub(:order_completed?) { false }
-      notification.should_not be_verified
+      allow(notification).to receive(:order_completed?) { false }
+      expect(notification).not_to be_verified
     end
 
     it 'should only verify if amount matches cart gross' do
       notification = create_notification[order_params]
-      notification.stub(:amount).with(:usd) { 100 }
-      notification.should_not be_verified
+      allow(notification).to receive(:amount).with(:usd) { 100 }
+      expect(notification).not_to be_verified
     end
 
     it 'should verify' do
       notification = create_notification[order_params]
-      notification.should be_verified
+      expect(notification).to be_verified
     end
 
   end
