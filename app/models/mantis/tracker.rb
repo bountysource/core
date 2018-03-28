@@ -78,15 +78,15 @@ class Mantis::Tracker < ::Tracker
     csv = CSV.parse(response, {headers: true, :header_converters => :symbol})
 
     url_from_id = lambda { |id| url + "view.php?id=#{id.to_i}" }
-    
+
     issue_cache = ::Issue.where(url: csv.map { |row| url_from_id.call(row[:id]) } )
 
     puts issue_cache.map(&:url)
     csv.each do |row|
-      puts row.inspect
+      #puts row.inspect
       issue_url = url_from_id.call(row[:id])
       issue = issue_cache.find { |i| i.url == issue_url } || self.issues.new(url: issue_url)
-      puts issue.inspect
+      #puts issue.inspect
 
       issue.type = 'Mantis::Issue'
       issue.tracker = self
@@ -103,8 +103,8 @@ class Mantis::Tracker < ::Tracker
       updated = Time.parse(row[:updated])
       issue.remote_updated_at = updated if !issue.remote_updated_at || updated > issue.remote_updated_at
 
-      puts "BEFORE SAVE"
-      puts issue.inspect
+      # puts "BEFORE SAVE"
+      # puts issue.inspect
       issue.save!
     end
   end
