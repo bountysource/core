@@ -169,6 +169,7 @@ class PaymentMethod < ActiveRecord::Base
     # catch all...
     NewRelic::Agent.notice_error(e)
     Rails.logger.error "EXCEPTION: #{e.inspect} #{e.backtrace.inspect}"
+    raise if Rails.env.test?
   end
 
 end
