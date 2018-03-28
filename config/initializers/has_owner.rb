@@ -14,7 +14,7 @@ class ActiveRecord::Base
 
       def owner(auth_person=nil)
         if Ability.new(auth_person).can?(:read_anonymous, self)
-          super || self.person rescue nil
+          super() || self.person
         end
       end
 
