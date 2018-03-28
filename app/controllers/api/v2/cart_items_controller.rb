@@ -11,10 +11,10 @@ class Api::V2::CartItemsController < Api::BaseController
       params[:owner_type] = current_user.class.name
     end
 
-    item = @cart.item_from_attributes(params)
+    item = @cart.item_from_attributes(params.to_unsafe_h)
     authorize!(:add_proposal_to_cart, item) if item.is_a?(Proposal)
 
-    @item = @cart.add_item(params)
+    @item = @cart.add_item(params.to_unsafe_h)
     @owner = @item.try(:owner)
 
     render 'api/v2/cart_items/show'
