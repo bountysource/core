@@ -20,7 +20,6 @@ gem 'oj'
 
 gem 'rabl'
 gem 'jbuilder'
-gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'bcrypt', '3.1.10'
 gem 'github-markdown', :require => 'github/markdown'
 
@@ -54,7 +53,7 @@ gem 'htmlentities'
 # Frontend
 gem 'sass-rails', '~> 5.0.7'
 gem 'bootstrap-sass'
-gem 'savon', '~> 2.11', '>= 2.11.2'
+gem 'savon', '~> 2.12'
 
 gem 'thinking-sphinx'
 
