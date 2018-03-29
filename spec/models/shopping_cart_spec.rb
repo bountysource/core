@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  person_id         :integer
-#  items             :text             default("[]"), not null
+#  items             :text             default([]), not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  order_id          :integer
