@@ -97,13 +97,13 @@ class LinkedAccount::Facebook < LinkedAccount::Base
       JSON.parse(http.request(request).body).with_indifferent_access
     end
     # find or create a facebook linked account
-    facebook_account = find_or_create_by_uid(
-      uid:        user_info['id'],
-      first_name: user_info['first_name'],
-      last_name:  user_info['last_name'],
-      email:      user_info['email'],
-      image_url: "facebook:#{user_info['username'] || user_info['id']}"
-    )
+    facebook_account = find_or_create_by(
+      uid: user_info['id']) do |user|
+      user.first_name = user_info['first_name']
+      user.last_name = user_info['last_name']
+      user.email = user_info['email']
+      user.image_url = "facebook:#{user_info['username'] || user_info['id']}"
+    end
 
     # update the facebook user with most recent access token
     facebook_account.update_attributes oauth_token: oauth_response["access_token"]
