@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  person_id        :integer
 #  type             :string(255)
-#  uid              :integer          not null
+#  uid              :integer
 #  login            :string(255)
 #  first_name       :string(255)
 #  last_name        :string(255)
@@ -38,6 +38,9 @@
 #
 
 class LinkedAccount::Facebook < LinkedAccount::Base
+
+  validates :uid, presence: true
+
   OAUTH_CODE_URL        = "https://www.facebook.com/dialog/oauth"
   API_HOST              = "https://graph.facebook.com/"
   OAUTH_EXCHANGE_URL    = "#{API_HOST}oauth/access_token"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314002424) do
+ActiveRecord::Schema.define(version: 20180328112330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -502,7 +502,7 @@ ActiveRecord::Schema.define(version: 20180314002424) do
   create_table "linked_accounts", force: true do |t|
     t.integer  "person_id"
     t.string   "type"
-    t.integer  "uid",              limit: 8,                                          null: false
+    t.integer  "uid",              limit: 8
     t.string   "login"
     t.string   "first_name"
     t.string   "last_name"

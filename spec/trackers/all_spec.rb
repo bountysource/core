@@ -101,7 +101,7 @@ describe "live_sync" do
     end
 
     describe "Bitbucket::Issue" do
-      let(:issue_url) { "https://bitbucket.org/site/master/issues/10983/ed25519-ssh-keys-bb-13645" }
+      let(:issue_url) { "https://bitbucket.org/site/master/issues/15896/stderr-ssh-connect-to-host-bitbucketorg" }
 
       it "should create new issue" do
         expect(action).to change(Issue, :count).by(1)

@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  person_id        :integer
 #  type             :string(255)
-#  uid              :integer          not null
+#  uid              :integer
 #  login            :string(255)
 #  first_name       :string(255)
 #  last_name        :string(255)

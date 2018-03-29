@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  person_id        :integer
 #  type             :string(255)
-#  uid              :integer          not null
+#  uid              :integer
 #  login            :string(255)
 #  first_name       :string(255)
 #  last_name        :string(255)
@@ -54,8 +54,6 @@ class LinkedAccount::Base < ActiveRecord::Base
   has_many :comments, foreign_key: :author_linked_account_id
 
   has_cloudinary_image
-
-  validates :uid, presence: true
 
   class AlreadyLinked < StandardError; end
   class OauthError < StandardError; end

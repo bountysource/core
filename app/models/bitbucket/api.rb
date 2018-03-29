@@ -83,7 +83,7 @@ protected
       body: issue['content'],
       can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
       url: issue['resource_uri'].gsub('/1.0/repositories', 'https://bitbucket.org').gsub('/issue/', '/issues/'),
-      owner: issue['responsible'] ? issue['responsible']['username'] : '',
+      owner: issue['reported_by'] ? issue['reported_by']['username'] : '',
       author: linked_account,
       remote_created_at: DateTime.parse(issue['utc_created_on']),
       remote_updated_at: DateTime.parse(issue['utc_last_updated'])
@@ -100,7 +100,10 @@ protected
         priority: issue['priority'],
         body: issue['content'],
         can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
-        url: issue['resource_uri'].gsub('/1.0/repositories', 'https://bitbucket.org').gsub('/issue/', '/issues/')
+        url: issue['resource_uri'].gsub('/1.0/repositories', 'https://bitbucket.org').gsub('/issue/', '/issues/'), 
+        owner: issue['reported_by'] ? issue["reported_by"]["username"] : '', 
+        remote_created_at: DateTime.parse(issue['utc_created_on']), 
+        remote_updated_at: DateTime.parse(issue['utc_last_updated']) 
       }
     end
   end
