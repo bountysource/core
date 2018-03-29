@@ -7,5 +7,5 @@
 </p>
 
 <p>  
-  The $<%= @bounty_claim.issue.bounty_total.round %> bounty will be paid out if all backers of the issue accept your claim. If no action is taken, the bounty will be paid out after two weeks.
+  The <%= number_to_dollars(@bounty_claim.amount) %> bounty will be paid out if all backers of the issue accept your claim. If no action is taken, the bounty will be paid out after two weeks.
 </p>

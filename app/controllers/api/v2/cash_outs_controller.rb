@@ -21,6 +21,7 @@ class Api::V2::CashOutsController < Api::BaseController
 
   def create
     raise "Coinbase is disabled" if params[:bitcoin_address] && ENV['COINBASE_DISABLED']
+    raise "Checks are disabled" if params[:mailing_address_id]
 
     if team_id = params[:source].try(:match, /\Ateam(\d+)\Z/).try(:[], 1)
       account = current_user.team_member_relations.where(admin: true, team_id: team_id).first.try(:team).try(:account)
@@ -84,7 +85,13 @@ class Api::V2::CashOutsController < Api::BaseController
   end
 
   def update
-    render nothing: true, status: :not_implemented
+    @item = ::CashOut.find params[:id]
+
+    if !@item.sent? && params.has_key?(:refund)
+      @item.update_attributes!(sent_at: DateTime.now, is_refund: true)
+      @item.refund!
+      render nothing: true
+    end
   end
 
   def delete
