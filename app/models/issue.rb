@@ -83,8 +83,9 @@ class Issue < ActiveRecord::Base
 
   has_many :bounties
   has_many :comments
-  has_many :languages, through: :tracker
   belongs_to :tracker
+  has_many :languages, through: :tracker
+  
   has_many :bounty_claims
 
   has_many :developer_goals
