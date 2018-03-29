@@ -16,12 +16,7 @@ class Api::V1::RewardsController < ApplicationController
   def create
     require_params :amount, :description
 
-    @reward = @fundraiser.rewards.create(
-      amount:               params[:amount],
-      description:          params[:description],
-      limited_to:           params[:limited_to],
-      fulfillment_details:  params[:fulfillment_details]
-    )
+    @reward = @fundraiser.rewards.create(reward_params)
     render "api/v1/rewards/show", status: :created
   end
 
@@ -67,5 +62,9 @@ protected
     unless (@reward = @fundraiser.rewards.find_by_id params[:id])
       render json: { error: "Reward not found" }, status: :not_found
     end
+  end
+
+  def reward_params
+    params.permit(:amount, :description, :limited_to, :fulfillment_details)
   end
 end

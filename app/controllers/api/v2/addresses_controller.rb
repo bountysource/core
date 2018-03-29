@@ -35,9 +35,7 @@ class Api::V2::AddressesController < Api::BaseController
 
   # TODO use strong params ffs
   def address_params
-    params.select do |k,_|
-      [:name, :address1, :address2, :address3, :city, :state, :postal_code, :country].include?(k.to_sym)
-    end
+    params.permit(:name, :address1, :address2, :address3, :city, :state, :postal_code, :countryc)
   end
 
 end

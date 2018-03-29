@@ -25,13 +25,7 @@ class Api::V1::TeamsController < ApplicationController
   def create
     require_params :name
 
-    @team = Team.create(
-      name: params[:name],
-      slug: params[:slug],
-      url: params[:url],
-      bio: params[:bio],
-      image_url: params[:image_url]
-    )
+    @team = Team.create(team_params)
 
     if @team.valid?
       @team.add_member(@person, admin: true, no_emails: true, developer: true, public: true)
@@ -214,5 +208,9 @@ protected
     unless (@member = @team.members.where(id: params[:member_id]).first)
       render json: { error: "Member not found" }, status: :not_found
     end
+  end
+
+  def team_params
+    params.permit(:name, :slug, :url, :bio, :image_url)
   end
 end

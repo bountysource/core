@@ -13,19 +13,7 @@ class Api::V1::AddressesController < ApplicationController
 
     require_params(:first_name, :last_name, :address1, :city, :state, :postal_code, :country)
 
-    attrs = {
-      first_name:     params[:first_name],
-      last_name:      params[:last_name],
-      organization:   params[:organization],
-      address1:       params[:address1],
-      address2:       params[:address2],
-      city:           params[:city],
-      state:          params[:state],
-      postal_code:    params[:postal_code],
-      country:        params[:country]
-    }.reject { |_,v| v.blank? }
-
-    @address = @person.create_address(attrs)
+    @address = @person.create_address(person_params)
     # TODO: check logic, this is never reached
     # unless @address.valid?
     #   render json: { error: "Unable to create mailing address: #{@address.errors.full_messages.join(', ')}" }, status: :unprocessable_entity
@@ -35,18 +23,7 @@ class Api::V1::AddressesController < ApplicationController
   end
 
   def update
-    attrs = {
-      first_name:     params[:first_name],
-      last_name:      params[:last_name],
-      organization:   params[:organization],
-      address1:       params[:address1],
-      address2:       params[:address2],
-      city:           params[:city],
-      state:          params[:state],
-      postal_code:    params[:postal_code],
-      country:        params[:country]
-    }.reject { |_,v| v.blank? }
-    @address.update_attributes(attrs)
+    @address.update_attributes(person_params)
 
     render 'api/v1/addresses/show'
 
@@ -62,5 +39,9 @@ protected
     unless (@address = @person.address)
       render json: { error: "Mailing address not found" }, status: :not_found
     end
+  end
+
+  def person_params
+    params.permit(:first_name, :last_name, :address1, :city, :state, :postal_code, :country, :organization, :address2)
   end
 end

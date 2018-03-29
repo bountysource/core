@@ -12,7 +12,6 @@ class Api::V0::TrackersController < Api::V0::BaseController
   end
 
   def update
-
     #first update language associations
     languages = Language.where(id: params["language_ids"])
     new_languages = languages.reject { |lang| @tracker.languages.include?(lang) }
@@ -28,8 +27,7 @@ class Api::V0::TrackersController < Api::V0::BaseController
     end
 
     #then update attributes
-    attrs = params.select { |k,_| Tracker.accessible_attributes.include?(k) }
-    if @tracker.update_attributes(attrs)
+    if @tracker.update_attributes(tracker_params)
       render json: { notice: "Updated" }, status: :ok
     else
       render json: { error: "Error" }, status: :unprocessable_entity
@@ -54,4 +52,7 @@ class Api::V0::TrackersController < Api::V0::BaseController
     end
   end
 
+  def tracker_params
+    params.permit(:name, :url, :description, :repo_url, :homepage, )
+  end
 end

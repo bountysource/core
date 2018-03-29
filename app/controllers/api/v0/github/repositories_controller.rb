@@ -16,8 +16,7 @@ class Api::V0::Github::RepositoriesController < Api::V0::BaseController
   end
 
   def update
-    attrs = params.select { |k,_| Github::Repository.accessible_attributes.include? k }
-    @tracker.update_attributes attrs unless attrs.empty?
+    @tracker.update_attributes(repositories_params)
     render json: @tracker
   end
 
@@ -27,5 +26,9 @@ protected
     unless (@tracker = Github::Repository.find_by_full_name("#{params[:login]}/#{params[:repository]}"))
       render json: { error: "Repository not found" }, status: :not_found
     end
+  end
+
+  def repositories_params
+    params.permit(:watchers, :forks, :is_fork, :remote_id, :full_name, :pushed_at, :has_issues, :has_wiki, :has_downloads, :private, :homepage)
   end
 end
