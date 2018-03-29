@@ -40,7 +40,7 @@
 #  index_cash_outs_on_us_citizen          (us_citizen)
 #
 
-class CashOut < ActiveRecord::Base
+class CashOut < ApplicationRecord
   class InvalidType < StandardError ; end
 
   belongs_to :person

@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 
-class AdminStat < ActiveRecord::Base
+class AdminStat < ApplicationRecord
   def self.update_singleton
     singleton.update_raw_json
   end
@@ -95,8 +95,8 @@ class AdminStat < ActiveRecord::Base
       hash[name] = {}
 
       # Earning Users
-      users = ActiveRecord::Base.connection.select_all('select person_id as user_id, sum(amount) as amount, created_at from bounty_claims group by person_id, created_at').to_a
-      users += ActiveRecord::Base.connection.select_all('select COALESCE(fundraisers.team_id, fundraisers.person_id) as user_id, sum(amount) as amount, pledges.created_at from pledges inner join fundraisers on fundraisers.id = pledges.fundraiser_id group by user_id, pledges.created_at').to_a
+      users = ApplicationRecord.connection.select_all('select person_id as user_id, sum(amount) as amount, created_at from bounty_claims group by person_id, created_at').to_a
+      users += ApplicationRecord.connection.select_all('select COALESCE(fundraisers.team_id, fundraisers.person_id) as user_id, sum(amount) as amount, pledges.created_at from pledges inner join fundraisers on fundraisers.id = pledges.fundraiser_id group by user_id, pledges.created_at').to_a
       users = users.select do |user|
         created_at = DateTime.parse(user['created_at'])
         created_at >= start && created_at <= finish
@@ -110,7 +110,7 @@ class AdminStat < ActiveRecord::Base
       pledges = ::Pledge.not_refunded.select(select_query)
       bounties = ::Bounty.not_refunded.select(select_query)
       team_payins = ::TeamPayin.not_refunded.where('amount > ?', 0).select(select_query)
-      users = ActiveRecord::Base.connection.select_all "SELECT person_id, created_at, amount FROM ( #{pledges.to_sql} UNION #{bounties.to_sql} UNION #{team_payins.to_sql} ) AS t"
+      users = ApplicationRecord.connection.select_all "SELECT person_id, created_at, amount FROM ( #{pledges.to_sql} UNION #{bounties.to_sql} UNION #{team_payins.to_sql} ) AS t"
       users = users.select do |user|
         created_at = DateTime.parse(user['created_at'])
         created_at >= start && created_at <= finish

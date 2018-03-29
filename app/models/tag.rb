@@ -13,7 +13,7 @@
 #  index_tags_on_name  (name) UNIQUE
 #
 
-class Tag < ActiveRecord::Base
+class Tag < ApplicationRecord
   has_many :child_tag_relations, as: :child, class_name: 'TagRelation'
 
   ROUTE_REGEX = /[a-zA-Z0-9\.\-_\+#]+/

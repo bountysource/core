@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-class TrackerDonation < ActiveRecord::Base
+class TrackerDonation < ApplicationRecord
   belongs_to :person
   belongs_to :tracker
 

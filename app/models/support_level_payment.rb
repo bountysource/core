@@ -16,7 +16,7 @@
 #  index_support_level_payments_on_support_level_id  (support_level_id)
 #
 
-class SupportLevelPayment < ActiveRecord::Base
+class SupportLevelPayment < ApplicationRecord
   # used in app/views/v1/transactions/items/support_level_payment.rabl to simulate TeamPayin
   delegate :owner, to: :support_level
   delegate :team, to: :support_level

@@ -16,7 +16,7 @@
 #  index_person_relations_on_type_and_people   (type,person_id,target_person_id) UNIQUE
 #
 
-class PersonRelation::Base < ActiveRecord::Base
+class PersonRelation::Base < ApplicationRecord
   self.table_name = 'person_relations'
 
   validates :person, presence: true

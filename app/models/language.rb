@@ -13,7 +13,7 @@
 #  index_languages_on_name  (name) UNIQUE
 #
 
-class Language < ActiveRecord::Base
+class Language < ApplicationRecord
   has_many :tracker_relations, class_name: "TrackerLanguageRelation"
   has_many :trackers, through: :tracker_relations
 

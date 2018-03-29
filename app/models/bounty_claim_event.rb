@@ -16,7 +16,7 @@
 #  index_bounty_claim_events_on_person_id        (person_id)
 #
 
-class BountyClaimEvent < ActiveRecord::Base
+class BountyClaimEvent < ApplicationRecord
   validates :bounty_claim, presence: true
 
   belongs_to :bounty_claim

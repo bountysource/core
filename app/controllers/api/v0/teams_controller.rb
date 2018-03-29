@@ -94,7 +94,7 @@ class Api::V0::TeamsController < Api::V0::BaseController
       Tracker.find(params[:take_ownership]).update_attributes!(team: @team)
     end
 
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       @team.name = params[:name] if params.has_key?(:name)
       @team.slug = params[:slug] if params.has_key?(:slug)
       @team.image_url = params[:image_url] if params.has_key?(:image_url) && !params[:image_url].blank?

@@ -15,7 +15,7 @@
 #  index_activity_logs_on_created_at  (created_at)
 #
 
-class ActivityLog < ActiveRecord::Base
+class ActivityLog < ApplicationRecord
   validates :tracker_id, presence: true
   validates :name, presence: true
 

@@ -16,7 +16,7 @@
 #  index_mixpanel_events_on_person_id    (person_id)
 #
 
-class MixpanelEvent < ActiveRecord::Base
+class MixpanelEvent < ApplicationRecord
   belongs_to :person
 
   # flexible method that does the dirty work

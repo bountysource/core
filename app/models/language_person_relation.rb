@@ -16,7 +16,7 @@
 #  index_language_person_relations_on_person_id_and_language_id  (person_id,language_id) UNIQUE
 #
 
-class LanguagePersonRelation < ActiveRecord::Base
+class LanguagePersonRelation < ApplicationRecord
   belongs_to :language
   belongs_to :person
 

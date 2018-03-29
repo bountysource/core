@@ -13,6 +13,6 @@
 #  index_lurkers_on_remote_ip_and_user_agent  (remote_ip,user_agent) UNIQUE
 #
 
-class Lurker < ActiveRecord::Base
+class Lurker < ApplicationRecord
   has_many :activity_logs
 end

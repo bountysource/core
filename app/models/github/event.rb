@@ -15,7 +15,7 @@
 class Github::Event
 
   def self.firehose!
-    ActiveRecord::Base.logger.level = 1
+    ApplicationRecord.logger.level = 1
 
     previous_event_ids = []
     while true
@@ -25,7 +25,7 @@ class Github::Event
       new_events = current_events.reject { |event| previous_event_ids.include?(event['id'].to_i) }
 
       delay(queue: 'firehose', priority: 100).process_events(new_events)
-      ActiveRecord::Base.logger.info "Queued #{new_events.length} events"
+      ApplicationRecord.logger.info "Queued #{new_events.length} events"
 
       previous_event_ids = (previous_event_ids + new_events.map { |e| e['id'].to_i }).sort.last(300)
 

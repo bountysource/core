@@ -36,7 +36,7 @@ class Transaction::InternalTransfer::Promotional < Transaction::InternalTransfer
     amount = BigDecimal.new(Money.new(amount * 100).to_s)
     transaction = nil
 
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       transaction = Transaction::InternalTransfer::Promotional.create!(
         audited: true,
         description: "Promotional gift of $#{amount}"

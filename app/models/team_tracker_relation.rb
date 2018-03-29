@@ -15,7 +15,7 @@
 #  index_team_tracker_relations_on_tracker_id              (tracker_id)
 #
 
-class TeamTrackerRelation < ActiveRecord::Base
+class TeamTrackerRelation < ApplicationRecord
   has_owner
   belongs_to :team
   belongs_to :tracker

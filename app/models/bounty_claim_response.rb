@@ -19,7 +19,7 @@
 #  index_bounty_claim_responses_on_person_id_and_bounty_claim_id  (person_id,bounty_claim_id) UNIQUE
 #
 
-class BountyClaimResponse < ActiveRecord::Base
+class BountyClaimResponse < ApplicationRecord
   has_owner
 
   belongs_to  :person

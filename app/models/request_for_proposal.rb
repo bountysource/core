@@ -19,7 +19,7 @@
 #  index_request_for_proposals_on_person_id  (person_id)
 #
 
-class RequestForProposal < ActiveRecord::Base
+class RequestForProposal < ApplicationRecord
   include AASM
 
   validates :issue, presence: true

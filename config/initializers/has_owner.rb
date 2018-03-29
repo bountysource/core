@@ -3,7 +3,7 @@
 #   :owner_type string
 #   :person_id  integer (optional)
 #   :anonymous  boolean (optional)
-class ActiveRecord::Base
+class ApplicationRecord
   def self.has_owner
     self.class_eval do
       belongs_to :owner, polymorphic: true

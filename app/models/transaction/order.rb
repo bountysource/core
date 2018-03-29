@@ -86,7 +86,7 @@ class Transaction::Order < Transaction
 
     liability_account = Account::Liability.instance
 
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
 
       # Ensure that the cart has not yet been processed
       # TODO this overlaps a bit with the ::create_from_payment_notification,

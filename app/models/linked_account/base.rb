@@ -37,7 +37,7 @@
 #  index_linked_accounts_on_uid_and_type  (uid,type) UNIQUE
 #
 
-class LinkedAccount::Base < ActiveRecord::Base
+class LinkedAccount::Base < ApplicationRecord
   self.table_name = 'linked_accounts'
 
   has_many :team_member_relations, as: :owner

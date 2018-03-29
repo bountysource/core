@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-class SavedSearchTab < ActiveRecord::Base
+class SavedSearchTab < ApplicationRecord
   belongs_to :person
 
   def self.find_user_tabs(user)

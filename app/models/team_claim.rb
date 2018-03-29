@@ -13,7 +13,7 @@
 #  updated_at     :datetime
 #
 
-class TeamClaim < ActiveRecord::Base
+class TeamClaim < ApplicationRecord
   belongs_to :person
   belongs_to :team
 end

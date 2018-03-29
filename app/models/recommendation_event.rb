@@ -13,5 +13,5 @@
 #  index_recommendation_events_on_person_id_and_issue_id_and_event  (person_id,issue_id,event)
 #
 
-class RecommendationEvent < ActiveRecord::Base
+class RecommendationEvent < ApplicationRecord
 end

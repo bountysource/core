@@ -76,7 +76,7 @@ class Trac::Issue < ::Issue
     data = Trac::API.fetch_issue(url: url, html: options[:html])
 
     # create or update issue
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       comments_info = data.delete(:comments)
       update_attributes!(data.merge(synced_at: Time.now))
       sync_comments_from_array(comments_info)

@@ -16,7 +16,7 @@
 #  index_events_on_slug  (slug) UNIQUE
 #
 
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
 
   def issues

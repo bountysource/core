@@ -29,7 +29,7 @@
 #  index_tracker_plugins_on_tracker_id  (tracker_id) UNIQUE
 #
 
-class TrackerPlugin < ActiveRecord::Base
+class TrackerPlugin < ApplicationRecord
   belongs_to :tracker
   has_many :issues, through: :tracker
   belongs_to :person

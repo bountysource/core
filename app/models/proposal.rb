@@ -22,7 +22,7 @@
 #  index_proposals_on_request_for_proposal_id                (request_for_proposal_id)
 #
 
-class Proposal < ActiveRecord::Base
+class Proposal < ApplicationRecord
   include AASM
 
   validates :request_for_proposal, presence: true

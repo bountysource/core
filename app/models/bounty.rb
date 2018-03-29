@@ -33,7 +33,7 @@
 
 require 'account/team'
 
-class Bounty < ActiveRecord::Base
+class Bounty < ApplicationRecord
   belongs_to :person
   belongs_to :issue
 

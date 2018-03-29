@@ -15,7 +15,7 @@
 #  index_tracker_plugin_backups_on_tracker_plugin_id  (tracker_plugin_id)
 #
 
-class TrackerPluginBackup < ActiveRecord::Base
+class TrackerPluginBackup < ApplicationRecord
   belongs_to :plugin, class_name: "TrackerPlugin", foreign_key: :tracker_plugin_id
   belongs_to :issue
   has_one :tracker, through: :issue

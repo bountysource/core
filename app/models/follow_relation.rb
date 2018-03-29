@@ -15,7 +15,7 @@
 #  index_follow_relations_on_person_id_and_item_id  (person_id,item_id) UNIQUE
 #
 
-class FollowRelation < ActiveRecord::Base
+class FollowRelation < ApplicationRecord
   belongs_to :item, polymorphic: true
   belongs_to :person
 

@@ -14,7 +14,7 @@
 #  index_tracker_rank_caches_on_person_id_and_tracker_id  (person_id,tracker_id) UNIQUE
 #
 
-class TrackerRankCache < ActiveRecord::Base
+class TrackerRankCache < ApplicationRecord
   validates :tracker_id, presence: true
   validates :person_id, presence: true, uniqueness: { scope: :tracker_id}
   validates :rank, presence: true

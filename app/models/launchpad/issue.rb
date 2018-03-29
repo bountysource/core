@@ -73,7 +73,7 @@ class Launchpad::Issue < ::Issue
     api_response = Launchpad::API.fetch_issue(url: self.url)
 
     # create or update issue
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       comments_info = api_response.delete(:comments)
 
       # can add bounty from Issue state. Fix Released == Issue Closed

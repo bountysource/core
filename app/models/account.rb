@@ -22,7 +22,7 @@
 # An account consists of a list of Splits which debit/credit the account.
 # See the documentation in Transaction and Split for more detail
 
-class Account < ActiveRecord::Base
+class Account < ApplicationRecord
   # NOTE: the presence of an owner is optional
   belongs_to :owner, polymorphic: true, autosave: false
   has_many :splits
@@ -128,7 +128,7 @@ class Account < ActiveRecord::Base
 
   # merge @account into this account, moving over splits, then destroy @account.
   # SERCHIIINNN, MERGE AND DESTROY!!!
-  # TODO ActiveRecord::Base#merge! should take care of the merging?
+  # TODO ApplicationRecord#merge! should take care of the merging?
   def merge_with_and_destroy!(account)
     account.splits.find_each { |s| s.update_attribute :account, self }
     account.destroy
@@ -141,8 +141,8 @@ class Account < ActiveRecord::Base
 
   # Group Account types and the sum of their splits for the given date.
   def self.balance_report(date=DateTime.now)
-    sql_date = ActiveRecord::Base.connection.quote(date)
-    ActiveRecord::Base.connection.select_all("select accounts.type, sum(splits.amount) as balance from accounts left join splits on accounts.id = splits.account_id where splits.created_at < #{sql_date} group by accounts.type order by balance desc, type desc")
+    sql_date = ApplicationRecord.connection.quote(date)
+    ApplicationRecord.connection.select_all("select accounts.type, sum(splits.amount) as balance from accounts left join splits on accounts.id = splits.account_id where splits.created_at < #{sql_date} group by accounts.type order by balance desc, type desc")
   end
 
   # Balance report for a single Account instance

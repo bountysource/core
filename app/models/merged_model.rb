@@ -13,5 +13,5 @@
 #  index_merged_models_on_bad_id_and_bad_type  (bad_id,bad_type) UNIQUE
 #
 
-class MergedModel < ActiveRecord::Base
+class MergedModel < ApplicationRecord
 end

@@ -1,4 +1,4 @@
-class ActiveRecord::Base
+class ApplicationRecord
   def self.has_account(options={})
     self.class_eval do
       # NOTE: the create/build methods for Account are overridden below. You have been warned.

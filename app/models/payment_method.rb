@@ -10,7 +10,7 @@
 #  updated_at :datetime
 #
 
-class PaymentMethod < ActiveRecord::Base
+class PaymentMethod < ApplicationRecord
   has_account class_name: 'Account::PaymentMethod'
   has_many :notifications, class_name: 'PaymentNotification', foreign_key: :payment_method_id
 

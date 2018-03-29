@@ -19,7 +19,7 @@
 #  index_shopping_carts_on_uid       (uid)
 #
 
-class ShoppingCart < ActiveRecord::Base
+class ShoppingCart < ApplicationRecord
   # STATUS = %w(draft open paid unpaid)
 
   belongs_to :person

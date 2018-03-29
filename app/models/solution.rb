@@ -19,7 +19,7 @@
 #  index_solutions_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
 
-class Solution < ActiveRecord::Base
+class Solution < ApplicationRecord
   validates :issue, presence: true
   validates :person, presence: true
   validates_uniqueness_of :issue_id, scope: [:person_id]

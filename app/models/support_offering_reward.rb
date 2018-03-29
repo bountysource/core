@@ -17,7 +17,7 @@
 #  index_support_offering_rewards_on_support_offering_id  (support_offering_id)
 #
 
-class SupportOfferingReward < ActiveRecord::Base
+class SupportOfferingReward < ApplicationRecord
   scope :active, lambda { where(deleted_at: nil) }
 
   belongs_to :support_offering

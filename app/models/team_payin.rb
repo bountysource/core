@@ -23,7 +23,7 @@
 #  index_team_payins_on_team_id                  (team_id)
 #
 
-class TeamPayin < ActiveRecord::Base
+class TeamPayin < ApplicationRecord
   belongs_to :team
   belongs_to :person
   has_owner

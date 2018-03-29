@@ -15,7 +15,7 @@
 #  index_tracker_language_relations_on_tracker_id_and_language_id  (tracker_id,language_id) UNIQUE
 #
 
-class TrackerLanguageRelation < ActiveRecord::Base
+class TrackerLanguageRelation < ApplicationRecord
   belongs_to :tracker
   belongs_to :language
 

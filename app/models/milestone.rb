@@ -14,7 +14,7 @@
 #  updated_at            :datetime         not null
 #
 
-class Milestone < ActiveRecord::Base
+class Milestone < ApplicationRecord
   belongs_to :fundraiser
 
   validates :rank, numericality: { greater_than_or_equal: 1 }

@@ -17,7 +17,7 @@
 #  index_unsubscribes_on_person_id          (person_id)
 #
 
-class Unsubscribe < ActiveRecord::Base
+class Unsubscribe < ApplicationRecord
   belongs_to :person
   belongs_to :linked_account, class_name: 'LinkedAccount::Base'
 

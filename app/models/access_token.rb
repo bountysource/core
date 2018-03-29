@@ -16,7 +16,7 @@
 #  index_access_tokens_on_token      (token) UNIQUE
 #
 
-class AccessToken < ActiveRecord::Base
+class AccessToken < ApplicationRecord
   belongs_to :person
 
   before_create :token

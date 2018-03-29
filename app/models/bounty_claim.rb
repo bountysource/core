@@ -23,7 +23,7 @@
 #  index_bounty_claims_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
 
-class BountyClaim < ActiveRecord::Base
+class BountyClaim < ApplicationRecord
   belongs_to :person
   belongs_to :issue
   has_many :bounty_claim_responses
@@ -300,7 +300,7 @@ class BountyClaim < ActiveRecord::Base
   def payout!
     transaction = nil
 
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       lock! # Protect against potential race conditions
 
       raise PayoutError, 'already paid out' if paid_out?

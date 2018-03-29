@@ -21,7 +21,7 @@
 #  index_rewards_on_sold_out  (sold_out)
 #
 
-class Reward < ActiveRecord::Base
+class Reward < ApplicationRecord
   # RELATIONSHIPS
   belongs_to :fundraiser
   has_many :pledges

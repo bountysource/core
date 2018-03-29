@@ -14,7 +14,7 @@
 #  index_tracker_person_relations_on_tracker_id_and_person_id  (tracker_id,person_id) UNIQUE
 #
 
-class TrackerPersonRelation < ActiveRecord::Base
+class TrackerPersonRelation < ApplicationRecord
   belongs_to :person
   belongs_to :tracker
 

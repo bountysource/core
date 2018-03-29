@@ -10,7 +10,7 @@
 #  updated_at          :datetime
 #
 
-class IssueSuggestionReward < ActiveRecord::Base
+class IssueSuggestionReward < ApplicationRecord
 
   after_create do
     if issue_suggestion.can_respond?(person)

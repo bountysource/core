@@ -35,7 +35,7 @@
 
 # See the Account and Split docs for more detail.
 
-class Transaction < ActiveRecord::Base
+class Transaction < ApplicationRecord
   has_many :splits
   belongs_to :person
   has_one :shopping_cart, foreign_key: 'order_id'

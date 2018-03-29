@@ -9,7 +9,7 @@
 #  params     :text             default("--- {}\n")
 #
 
-class Search < ActiveRecord::Base
+class Search < ApplicationRecord
   serialize :params
 
   # RELATIONSHIPS

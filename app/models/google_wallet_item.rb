@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class GoogleWalletItem < ActiveRecord::Base
+class GoogleWalletItem < ApplicationRecord
   has_many :splits, as: :item
   has_many :txns, through: :splits
 

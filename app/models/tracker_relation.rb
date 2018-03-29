@@ -15,7 +15,7 @@
 #  index_tracker_relations_on_tracker_id         (tracker_id)
 #
 
-class TrackerRelation < ActiveRecord::Base
+class TrackerRelation < ApplicationRecord
   belongs_to  :tracker
   belongs_to  :linked_account, class_name: 'LinkedAccount::Base'
   has_one     :person, through: :linked_account

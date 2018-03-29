@@ -18,7 +18,7 @@
 #  index_thumbs_on_person_id_and_item_id_and_item_type  (person_id,item_id,item_type) UNIQUE
 #
 
-class Thumb < ActiveRecord::Base
+class Thumb < ApplicationRecord
   belongs_to :person
   belongs_to :item, polymorphic: true
   belongs_to :comment

@@ -13,5 +13,5 @@
 #  index_badge_caches_on_url  (url) UNIQUE
 #
 
-class BadgeCache < ActiveRecord::Base
+class BadgeCache < ApplicationRecord
 end

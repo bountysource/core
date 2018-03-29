@@ -31,7 +31,7 @@
 # Every Split must point to its parent Transaction; a Split can belong to at
 # most one Transaction.
 
-class Split < ActiveRecord::Base
+class Split < ApplicationRecord
   belongs_to  :account
   belongs_to  :txn, class_name: 'Transaction', foreign_key: :transaction_id
   belongs_to  :item,   polymorphic: true

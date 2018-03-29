@@ -17,7 +17,7 @@
 #  index_support_offerings_on_team_id  (team_id) UNIQUE
 #
 
-class SupportOffering < ActiveRecord::Base
+class SupportOffering < ApplicationRecord
   has_paper_trail :only => [:subtitle, :body_markdown, :youtube_video_url, :goals]
 
   has_many :rewards, class_name: 'SupportOfferingReward'

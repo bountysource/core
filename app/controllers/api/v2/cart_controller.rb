@@ -9,7 +9,7 @@ class Api::V2::CartController < Api::BaseController
   def show
     @item_count = @cart.items.count
 
-    # Load raw item attribute as well as instance of ActiveRecord::Base
+    # Load raw item attribute as well as instance of ApplicationRecord
     # to fetch related models (Fundraiser, Issue, Team, etc.).
     @items = @cart.items.map do |item_json|
       [

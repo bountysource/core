@@ -56,7 +56,7 @@
 #  index_trackers_on_watchers       (watchers)
 #
 
-class Tracker < ActiveRecord::Base
+class Tracker < ApplicationRecord
 
   STATIC_SUBCLASSNAMES_API = %w(
     Jira::API
@@ -547,7 +547,7 @@ class Tracker < ActiveRecord::Base
 
   # sum/avg of days that issues have been open
   def issue_stats
-    issue_days_row = ActiveRecord::Base.connection.select_one("select sum(floor((extract(epoch from now()) - extract(epoch from remote_created_at)) / (60*60*24))) as sum, avg(floor((extract(epoch from now()) - extract(epoch from remote_created_at)) / (60*60*24))) as avg from issues where tracker_id=#{self.id} and can_add_bounty=true")
+    issue_days_row = ApplicationRecord.connection.select_one("select sum(floor((extract(epoch from now()) - extract(epoch from remote_created_at)) / (60*60*24))) as sum, avg(floor((extract(epoch from now()) - extract(epoch from remote_created_at)) / (60*60*24))) as avg from issues where tracker_id=#{self.id} and can_add_bounty=true")
     {
       days_open_total: issue_days_row['sum'].to_i,
       days_open_average: issue_days_row['avg'].to_i,

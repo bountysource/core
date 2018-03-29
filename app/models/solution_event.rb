@@ -14,7 +14,7 @@
 #  index_solution_events_on_type         (type)
 #
 
-class SolutionEvent < ActiveRecord::Base
+class SolutionEvent < ApplicationRecord
   belongs_to :solution
   validates :type, presence: true
   validates :solution, presence: true

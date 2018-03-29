@@ -17,7 +17,7 @@
 #  index_developer_goals_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
 
-class DeveloperGoal < ActiveRecord::Base
+class DeveloperGoal < ApplicationRecord
   belongs_to :person
   belongs_to :issue
 

@@ -20,7 +20,7 @@
 #  index_comments_on_issue_id                  (issue_id)
 #
 
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   belongs_to :issue
   belongs_to :author, class_name: 'LinkedAccount::Base', foreign_key: :author_linked_account_id
 

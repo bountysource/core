@@ -10,5 +10,5 @@
 #  updated_at        :datetime         not null
 #
 
-class PaymentNotificationLog < ActiveRecord::Base
+class PaymentNotificationLog < ApplicationRecord
 end

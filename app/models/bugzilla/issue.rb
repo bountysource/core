@@ -83,7 +83,7 @@ class Bugzilla::Issue < ::Issue
     api_response = Bugzilla::API.fetch_issue(api_options)
 
     # create or update issue
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       api_response.each do |data|
         comments_info = data.delete(:comments)
         update_attributes!(data.merge(synced_at: Time.now))

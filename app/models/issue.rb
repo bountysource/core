@@ -60,7 +60,7 @@
 #  index_issues_partial_thumbs_up_count           (thumbs_up_count)
 #
 
-class Issue < ActiveRecord::Base
+class Issue < ApplicationRecord
 
   STATIC_SUBCLASSNAMES = %w(
     Jira::Issue

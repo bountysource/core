@@ -13,7 +13,7 @@
 #  index_fundraiser_tracker_relations_on_ids  (fundraiser_id,tracker_id) UNIQUE
 #
 
-class FundraiserTrackerRelation < ActiveRecord::Base
+class FundraiserTrackerRelation < ApplicationRecord
   belongs_to :fundraiser
   belongs_to :tracker
 

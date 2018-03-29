@@ -20,7 +20,7 @@
 #  index_payment_notifications_on_type      (type)
 #
 
-class PaymentNotification < ActiveRecord::Base
+class PaymentNotification < ApplicationRecord
   belongs_to :order, class_name: 'Transaction::Order'
   belongs_to :shopping_cart
   belongs_to :payment_method

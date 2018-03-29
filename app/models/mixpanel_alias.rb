@@ -14,7 +14,7 @@
 #  index_mixpanel_aliases_on_person_id    (person_id)
 #
 
-class MixpanelAlias < ActiveRecord::Base
+class MixpanelAlias < ApplicationRecord
 
   class AlreadyClaimed < StandardError ; end
 

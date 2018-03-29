@@ -20,7 +20,7 @@
 #  index_addresses_on_person_id  (person_id)
 #
 
-class Address < ActiveRecord::Base
+class Address < ApplicationRecord
 
   belongs_to :person
   has_many :cash_outs

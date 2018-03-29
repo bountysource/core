@@ -14,7 +14,7 @@
 #  index_currencies_on_value  (value)
 #
 
-class Currency < ActiveRecord::Base
+class Currency < ApplicationRecord
   validates :type, presence: true
   validates :value, numericality: { presence: true, greather_than_or_equal_to: 0 }
 

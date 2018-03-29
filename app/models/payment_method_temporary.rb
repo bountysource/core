@@ -14,6 +14,6 @@
 #  index_payment_method_temporaries_on_paypal_token  (paypal_token)
 #
 
-class PaymentMethodTemporary < ActiveRecord::Base
+class PaymentMethodTemporary < ApplicationRecord
   belongs_to :person
 end

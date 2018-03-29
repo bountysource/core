@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-class SentEmail < ActiveRecord::Base
+class SentEmail < ApplicationRecord
   belongs_to :person
 
   serialize :options

@@ -19,7 +19,7 @@
 #  index_team_invites_on_team_id            (team_id)
 #
 
-class TeamInvite < ActiveRecord::Base
+class TeamInvite < ApplicationRecord
   belongs_to :team
 
   validates :team, presence: true

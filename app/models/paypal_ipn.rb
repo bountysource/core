@@ -23,7 +23,7 @@
 #
 
 # PayPal IPN Reference: https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/
-class PaypalIpn < ActiveRecord::Base
+class PaypalIpn < ApplicationRecord
   has_many :splits, :as => :item
   has_many :txns, :through => :splits
   belongs_to :order, class_name: "Transaction::Order"

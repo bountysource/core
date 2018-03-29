@@ -76,7 +76,7 @@ class GoogleCode::Issue < ::Issue
     data = GoogleCode::API.fetch_issue(url: url)
 
     # create or update issue
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       comments_info = data.delete(:comments)
       update_attributes!(data.merge(synced_at: Time.now))
       sync_comments_from_array(comments_info)

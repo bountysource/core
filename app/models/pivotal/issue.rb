@@ -77,7 +77,7 @@ class Pivotal::Issue < ::Issue
     api_response = Pivotal::API.fetch_issue(api_options)
 
     # create or update issue
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       update_attributes!(api_response.merge(synced_at: Time.now))
       sync_comments_from_source
     end

@@ -4,7 +4,7 @@ class Api::V0::DelayedJobsController < Api::V0::BaseController
 
   def info
     if params[:group_stats]
-      stats = ActiveRecord::Base.connection.select_all("
+      stats = ApplicationRecord.connection.select_all("
         select
           count(*) as count,
           object_type,

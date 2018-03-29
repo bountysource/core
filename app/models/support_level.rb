@@ -24,7 +24,7 @@
 #  index_support_levels_on_team_id    (team_id)
 #
 
-class SupportLevel < ActiveRecord::Base
+class SupportLevel < ApplicationRecord
   belongs_to :person
   belongs_to :team
   belongs_to :payment_method

@@ -37,7 +37,7 @@
 #  index_people_on_shopping_cart_id  (shopping_cart_id)
 #
 
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
   # temporarily holds a raw access token... useful in controllers-and-views
   attr_accessor :current_access_token
 
@@ -169,7 +169,7 @@ class Person < ActiveRecord::Base
     if options[:team]
       retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true and issue_id in (select issue_id from bounties where owner_type='Team' and owner_id=#{options[:team].id})),0) as bounty_claim_total")
     elsif options[:since]
-      retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true and created_at > #{ActiveRecord::Base.connection.quote(options[:since])}),0) as bounty_claim_total")
+      retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true and created_at > #{ApplicationRecord.connection.quote(options[:since])}),0) as bounty_claim_total")
     else
       retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true),0) as bounty_claim_total")
     end
@@ -352,7 +352,7 @@ class Person < ActiveRecord::Base
 
   def can_view?(model)
     return true if admin?
-    return false unless model.is_a? ActiveRecord::Base
+    return false unless model.is_a? ApplicationRecord
 
     # special cases
     case model
@@ -484,7 +484,7 @@ class Person < ActiveRecord::Base
   # Null out personal information, but keep all models around.
   # Yeah, I know I am using destroy instead of delete_all. I want validations to run.
   def safe_destroy
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       # Person attributes stripped away
       self.first_name = '[deleted]'
       self.last_name = '[deleted]'
@@ -500,7 +500,7 @@ class Person < ActiveRecord::Base
       self.save!
 
       # Clear image_url
-      ActiveRecord::Base.connection.execute("update people set cloudinary_id = NULL where id = #{id}")
+      ApplicationRecord.connection.execute("update people set cloudinary_id = NULL where id = #{id}")
 
       # Delete unpublished Fundraisers
       fundraisers.where(published: false).find_each(&:destroy)
@@ -511,8 +511,8 @@ class Person < ActiveRecord::Base
       # Make Pledges and Bounties anonymous
       bounties.find_each { |bounty| bounty.owner_id = nil ; bounty.owner_type = nil ; bounty.save! }
       pledges.find_each { |pledge| pledge.owner_id = nil ; pledge.owner_type = nil ; pledge.save! }
-      ActiveRecord::Base.connection.execute("update bounties set anonymous = 't' where person_id = #{id}")
-      ActiveRecord::Base.connection.execute("update pledges set anonymous = 't' where person_id = #{id}")
+      ApplicationRecord.connection.execute("update bounties set anonymous = 't' where person_id = #{id}")
+      ApplicationRecord.connection.execute("update pledges set anonymous = 't' where person_id = #{id}")
 
       # Can safely delete BountyClaims that were never accepted
       bounty_claims.where(collected: false).each(&:destroy)
@@ -582,7 +582,7 @@ class Person < ActiveRecord::Base
 
   # Set languages.
   def set_languages(*language_ids)
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       language_relations.update_all(active: false)
       language_ids.each do |language_id|
         relation = language_relations.where(language_id: language_id).first

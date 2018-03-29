@@ -26,7 +26,7 @@
 #  index_issue_ranks_on_type                   (type)
 #
 
-class IssueRank < ActiveRecord::Base
+class IssueRank < ApplicationRecord
   belongs_to :issue
   belongs_to :team
   belongs_to :person

@@ -37,7 +37,7 @@
 #  index_teams_on_linked_account_id  (linked_account_id)
 #
 
-class Team < ActiveRecord::Base
+class Team < ApplicationRecord
   has_paper_trail :only => [:slug, :name, :url, :bio, :homepage_markdown, :new_issue_suggestion_markdown, :bounty_search_markdown, :resources_markdown, :linked_account, :accepts_public_payins, :accepts_issue_suggestions, :can_email_stargazers, :cloudinary_id]
 
   has_cloudinary_image
@@ -732,7 +732,7 @@ class Team < ActiveRecord::Base
   end
 
   def top_supporters(options={})
-    ActiveRecord::Base.connection.unprepared_statement do
+    ApplicationRecord.connection.unprepared_statement do
       alltime_support_level_payments = self.support_level_payments.not_refunded.joins(:support_level).select(%(
         COALESCE(support_levels.owner_id, support_levels.person_id) as owner_id,
         COALESCE(support_levels.owner_type, 'Anon') as owner_type,
@@ -787,7 +787,7 @@ class Team < ActiveRecord::Base
         else 'monthly_amount DESC, alltime_amount DESC, created_at'
       end
 
-      collection = ActiveRecord::Base.connection.select_all("
+      collection = ApplicationRecord.connection.select_all("
         SELECT
           owner_type,
           owner_id,

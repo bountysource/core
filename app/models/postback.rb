@@ -12,7 +12,7 @@
 #  updated_at :datetime         not null
 #
 
-class Postback < ActiveRecord::Base
+class Postback < ApplicationRecord
   def self.my_url
     "https://api-qa.bountysource.com/postbacks/#{`hostname`.strip}"
   end

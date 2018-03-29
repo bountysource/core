@@ -73,7 +73,7 @@ class IssueRank::LinkedAccountGithub < IssueRank
 
   # Increment rank from GitHub event JSON
   def self.increment_rank_from_events(linked_account, events)
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       issue_rank_ids = []
       events.each do |event_data|
         # Skip if it's not a whitelisted event

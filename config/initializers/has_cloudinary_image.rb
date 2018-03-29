@@ -1,4 +1,4 @@
-class ActiveRecord::Base
+class ApplicationRecord
   CLOUDINARY_BASE_URL = ENV['CLOUDINARY_BASE_URL']
 
   def self.has_cloudinary_image

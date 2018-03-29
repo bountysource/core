@@ -19,7 +19,7 @@
 #  index_team_updates_on_team_id_and_number  (team_id,number) UNIQUE
 #
 
-class TeamUpdate < ActiveRecord::Base
+class TeamUpdate < ApplicationRecord
   belongs_to :team
 
   validates :team,  presence: true

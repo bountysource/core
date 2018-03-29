@@ -40,7 +40,7 @@
 #  index_fundraisers_on_published    (published)
 #
 
-class Fundraiser < ActiveRecord::Base
+class Fundraiser < ApplicationRecord
   has_cloudinary_image
 
   belongs_to :person
@@ -303,7 +303,7 @@ class Fundraiser < ActiveRecord::Base
 
   # pay out the entire account to the creator
   def payout!
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       # rollback if no pledges to payout
       raise ActiveRecord::Rollback if pledges.unpaid.empty?
 

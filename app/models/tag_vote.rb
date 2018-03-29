@@ -14,7 +14,7 @@
 #  index_tag_votes_on_tag_relation_id_and_person_id  (tag_relation_id,person_id) UNIQUE
 #
 
-class TagVote < ActiveRecord::Base
+class TagVote < ApplicationRecord
   belongs_to :tag_relation
   belongs_to :relation, class_name: 'TagRelation', foreign_key: :tag_relation_id   #legacy
 

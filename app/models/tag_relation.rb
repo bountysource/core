@@ -17,7 +17,7 @@
 #  index_tag_relations_on_child_id_and_child_type  (child_id,child_type)
 #
 
-class TagRelation < ActiveRecord::Base
+class TagRelation < ApplicationRecord
   VALID_CLASSES = %w(Team Tag)
 
   belongs_to :parent, polymorphic: true

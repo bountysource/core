@@ -23,7 +23,7 @@
 #  index_pledges_on_status      (status)
 #
 
-class Pledge < ActiveRecord::Base
+class Pledge < ApplicationRecord
   belongs_to :fundraiser
   belongs_to :person
   belongs_to :reward
