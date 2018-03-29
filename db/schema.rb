@@ -728,12 +728,14 @@ ActiveRecord::Schema.define(version: 20180314002424) do
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_transactions", id: :integer, default: nil, force: :cascade do |t|
+  create_table "quickbooks_transactions", id: false, force: :cascade do |t|
+    t.integer "id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_vendors", id: :integer, default: nil, force: :cascade do |t|
+  create_table "quickbooks_vendors", id: false, force: :cascade do |t|
+    t.integer "id", null: false
     t.string "name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"

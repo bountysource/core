@@ -66,14 +66,22 @@ class LinkedAccount::Twitter < LinkedAccount::Base
 
     # find or create Twitter account
     first_name, last_name = user_info['name'].split(/\s+/)
-    linked_account = LinkedAccount::Twitter.find_or_create_by_uid(
-      uid:        user_info['id'],
-      first_name: first_name,
-      last_name:  last_name,
-      login:      user_info['screen_name'],
-      email:      nil, # Note: email addresses are not available through the Twitter API
-      image_url:  "twitter:#{user_info['screen_name']}"
-    )
+    # linked_account = LinkedAccount::Twitter.find_or_create_by_uid(
+    #   uid:        user_info['id'],
+    #   first_name: first_name,
+    #   last_name:  last_name,
+    #   login:      user_info['screen_name'],
+    #   email:      nil, # Note: email addresses are not available through the Twitter API
+    #   image_url:  "twitter:#{user_info['screen_name']}"
+    # )
+
+    linked_account = LinkedAccount::Twitter.find_or_create_by(uid:user_info['id']) do |user|
+        user.first_name = first_name
+        user.last_name = last_name
+        user.login = user_info['screen_name']
+        user.email = nil # Note: email addresses are not available through the Twitter API
+        user.image_url = "twitter:#{user_info['screen_name']}"
+      end
 
     logger.error "\n#{access_token.params}\n"
 

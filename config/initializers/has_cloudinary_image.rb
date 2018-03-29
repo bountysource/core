@@ -24,6 +24,7 @@ class ActiveRecord::Base
             self.cloudinary_id = "upload/#{image}"
           else
             # skip if no new input and image already exists
+            return
           end
         elsif input =~ /github/
           self.cloudinary_id = input
