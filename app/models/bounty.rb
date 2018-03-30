@@ -112,7 +112,7 @@ class Bounty < ApplicationRecord
   end
 
   def self.admin_search(query)
-    includes(:person)
+    joins(:person)
     .where("bounties.id = :id OR people.email like :q OR people.first_name LIKE :q OR people.last_name LIKE :q OR people.display_name LIKE :q", q: "%#{query}%", id: query.to_i)
   end
 
