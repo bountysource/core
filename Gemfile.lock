@@ -50,9 +50,9 @@ GEM
       railties (>= 4.2, < 6)
       sprockets (>= 3.0, < 5)
       tilt
-    annotate (2.6.7)
-      activerecord (>= 2.3.0)
-      rake (~> 10.4.2, >= 10.4.2)
+    annotate (2.7.2)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 13.0)
     api-versions (1.2.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -457,7 +457,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.4.2)
+    rake (12.3.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -591,7 +591,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   angular-rails-templates
-  annotate (~> 2.6.5)
+  annotate
   api-versions
   asset_sync
   bcrypt (= 3.1.10)

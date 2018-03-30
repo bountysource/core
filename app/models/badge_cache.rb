@@ -3,7 +3,7 @@
 # Table name: badge_caches
 #
 #  id         :integer          not null, primary key
-#  url        :string(255)      not null
+#  url        :string           not null
 #  raw_xml    :text             not null
 #  created_at :datetime
 #  updated_at :datetime

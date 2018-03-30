@@ -8,7 +8,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  order_id          :integer
-#  uid               :string(255)
+#  uid               :string
 #  payment_method_id :integer
 #  status            :text             default("draft"), not null
 #

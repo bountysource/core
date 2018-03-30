@@ -72,7 +72,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rdoc'
-  gem 'annotate', '~> 2.6.5'
+  gem 'annotate'
 end
 
 group :development, :test do

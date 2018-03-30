@@ -4,9 +4,9 @@
 #
 #  id                :integer          not null, primary key
 #  team_id           :integer          not null
-#  subtitle          :string(255)
+#  subtitle          :string
 #  body_markdown     :text
-#  youtube_video_url :string(255)
+#  youtube_video_url :string
 #  goals             :json
 #  created_at        :datetime
 #  updated_at        :datetime

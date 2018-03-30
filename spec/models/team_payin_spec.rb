@@ -9,7 +9,7 @@
 #  consumed    :boolean          default(FALSE), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  owner_type  :string(255)
+#  owner_type  :string
 #  owner_id    :integer
 #  from_member :boolean          default(FALSE)
 #  refunded_at :datetime
