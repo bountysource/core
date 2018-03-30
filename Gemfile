@@ -116,6 +116,7 @@ gem 'haml'
 group :production do
   gem 'uglifier'
   gem 'asset_sync'
+  gem 'fog-aws'
   gem 'execjs'
   gem 'therubyracer'
   gem 'ngannotate-rails'

@@ -619,6 +619,7 @@ DEPENDENCIES
   faker
   flying-sphinx (~> 1.0.0)
   fog
+  fog-aws
   foreman
   git
   github-markdown
