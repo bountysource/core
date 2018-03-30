@@ -26,7 +26,7 @@ class Api::V2::CartItemsController < Api::BaseController
     raise CanCan::AccessDenied if item.is_a?(Proposal)
     # authorize!(:modify_proposal, item) if item.is_a?(Proposal)
 
-    @item = @cart.update_item(index, params)
+    @item = @cart.update_item(index, params.to_unsafe_h)
 
     render 'api/v2/cart_items/show'
   end
