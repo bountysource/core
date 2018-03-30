@@ -27,7 +27,7 @@ angular.module('app')
     if (confirm("Are you sure?")) {
       angular.forEach($scope.issue.bounties, function(bounty) {
         if (bounty.checked && (bounty.status==='active')) {
-          $api.refund_bounty(bounty.id).then(function(response) {
+          $api.refund_bounty(bounty.id, false).then(function(response) {
             if (response.meta.success) {
               angular.forEach($scope.issue.bounties, function(sub_bounty, $index) {
                 if (sub_bounty.id === bounty.id) {

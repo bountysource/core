@@ -520,8 +520,8 @@ angular.module('api.bountysource',[]).
       });
     };
 
-    this.refund_bounty = function(id) {
-      return this.call("/admin/bounties/"+id+"/refund", 'POST', function(response) {
+    this.refund_bounty = function(id, is_fraud) {
+      return this.call("/admin/bounties/"+id+"/refund" + (is_fraud ? '?fraud=true' : ''), 'POST', function(response) {
         return response;
       });
     };
