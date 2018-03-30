@@ -55,9 +55,9 @@ gem 'sass-rails', '~> 5.0.7'
 gem 'bootstrap-sass'
 gem 'savon', '~> 2.12'
 
-gem 'thinking-sphinx'
-
-gem 'flying-sphinx'
+# gem 'thinking-sphinx'
+#
+# gem 'flying-sphinx'
 
 gem 'cloudinary'
 gem 'eventmachine', '1.0.4'
