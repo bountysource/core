@@ -1,4 +1,4 @@
-class ApplicationRecord
+ApplicationRecord.class_eval do
   CLOUDINARY_BASE_URL = ENV['CLOUDINARY_BASE_URL']
 
   def self.has_cloudinary_image
