@@ -57,7 +57,7 @@ gem 'savon', '~> 2.12'
 
 gem 'thinking-sphinx'
 
-gem 'flying-sphinx', '~> 1.0.0'
+gem 'flying-sphinx'
 
 gem 'cloudinary'
 gem 'eventmachine', '1.0.4'
