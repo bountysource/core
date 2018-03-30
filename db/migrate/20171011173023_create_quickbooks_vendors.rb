@@ -1,4 +1,4 @@
-class CreateQuickbooksVendors < ActiveRecord::Migration
+class CreateQuickbooksVendors < ActiveRecord::Migration[5.0]
   def up
     create_table :quickbooks_vendors, id: false do |t|
       t.integer :id

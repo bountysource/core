@@ -1,4 +1,4 @@
-class CreateTeamClaims < ActiveRecord::Migration
+class CreateTeamClaims < ActiveRecord::Migration[5.0]
   def change
     create_table :team_claims do |t|
       t.integer :person_id, null: false
