@@ -73,7 +73,7 @@ class Bitbucket::Issue < ::Issue
     update_attributes!(synced_at: Time.now) unless new_record?
     # update from API response, if data changed since last sync
     api_options = {
-      url: Bitbucket::API.generate_base_url(self.tracker),
+      url: Bitbucket::API.generate_base_url(tracker.url),
       path: Bitbucket::API.generate_issue_detail_path(self)
     }
     api_response = Bitbucket::API.fetch_issue(api_options)
@@ -85,9 +85,11 @@ class Bitbucket::Issue < ::Issue
     end
   end
 
+protected
+
   def sync_comments_from_source
     api_options = {
-      url: Bitbucket::API.generate_base_url(self.tracker),
+      url: Bitbucket::API.generate_base_url(tracker.url),
       path: Bitbucket::API.generate_issue_comments_path(self)
     }
     api_response = Bitbucket::API.fetch_issue_comments(api_options)
@@ -97,5 +99,4 @@ class Bitbucket::Issue < ::Issue
 
     sync_comments_from_array(api_response)
   end
-
 end
