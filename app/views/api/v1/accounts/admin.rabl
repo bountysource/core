@@ -13,7 +13,7 @@ attribute :owner_type
 child(:admin_splits => :splits) do
   attributes :id, :amount, :created_at, :updated_at, :account_id, :item_id, :item_type
 
-  child(:transaction => :transaction) do
+  child(:txn => :transaction) do
     attribute :id
     attribute :type
     attribute :number
