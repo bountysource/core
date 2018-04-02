@@ -11,7 +11,7 @@
 #  updated_at      :datetime         not null
 #  anonymous       :boolean          default(FALSE), not null
 #  owner_id        :integer
-#  owner_type      :string(255)
+#  owner_type      :string
 #
 # Indexes
 #
@@ -19,9 +19,7 @@
 #  index_bounty_claim_responses_on_person_id_and_bounty_claim_id  (person_id,bounty_claim_id) UNIQUE
 #
 
-class BountyClaimResponse < ActiveRecord::Base
-  attr_accessible :value, :person, :bounty_claim, :description, :bounty_claim_id, :person_id
-
+class BountyClaimResponse < ApplicationRecord
   has_owner
 
   belongs_to  :person

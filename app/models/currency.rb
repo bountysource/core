@@ -3,7 +3,7 @@
 # Table name: currencies
 #
 #  id         :integer          not null, primary key
-#  type       :string(255)      not null
+#  type       :string           not null
 #  value      :decimal(, )      not null
 #  created_at :datetime
 #  updated_at :datetime
@@ -14,10 +14,7 @@
 #  index_currencies_on_value  (value)
 #
 
-class Currency < ActiveRecord::Base
-
-  attr_accessible :type, :value
-
+class Currency < ApplicationRecord
   validates :type, presence: true
   validates :value, numericality: { presence: true, greather_than_or_equal_to: 0 }
 

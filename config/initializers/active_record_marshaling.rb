@@ -1,4 +1,4 @@
-ActiveRecord::Base.class_eval do
+ApplicationRecord.class_eval do
   def marshal_dump
     raise "Can't marshal a new_record" if new_record?
     id

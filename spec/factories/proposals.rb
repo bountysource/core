@@ -8,7 +8,7 @@
 #  amount                  :decimal(10, 2)   not null
 #  estimated_work          :integer
 #  bio                     :string(1000)
-#  state                   :string(255)      default("pending")
+#  state                   :string           default("pending")
 #  created_at              :datetime
 #  updated_at              :datetime
 #  completed_by            :datetime
@@ -24,7 +24,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :proposal do
     association :request_for_proposal, factory: :request_for_proposal
     association :person, factory: :person

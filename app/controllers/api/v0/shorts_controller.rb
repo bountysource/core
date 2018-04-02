@@ -1,6 +1,6 @@
 class Api::V0::ShortsController < Api::V0::BaseController
 
-  before_filter :require_short, only: [:show, :update]
+  before_action :require_short, only: [:show, :update]
 
   def index
     @items = Short.all

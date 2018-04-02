@@ -4,15 +4,13 @@
 #
 #  id         :integer          not null, primary key
 #  person_id  :integer          not null
-#  template   :string(255)      not null
-#  options    :text             default("--- {}\n"), not null
+#  template   :string           not null
+#  options    :text             default({}), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class SentEmail < ActiveRecord::Base
-  attr_accessible :person, :template, :options
-
+class SentEmail < ApplicationRecord
   belongs_to :person
 
   serialize :options

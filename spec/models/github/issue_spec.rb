@@ -7,11 +7,11 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  number                   :integer
-#  url                      :string(255)      not null
+#  url                      :string           not null
 #  title                    :text
-#  labels                   :string(255)
+#  labels                   :string
 #  code                     :boolean          default(FALSE)
-#  state                    :string(255)
+#  state                    :string
 #  body                     :text
 #  remote_updated_at        :datetime
 #  remote_id                :integer
@@ -23,20 +23,20 @@
 #  comment_count            :integer          default(0)
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  bounty_total             :decimal(10, 2)   default(0.0), not null
-#  type                     :string(255)      default("Issue"), not null
-#  remote_type              :string(255)
-#  priority                 :string(255)
-#  milestone                :string(255)
+#  type                     :string           default("Issue"), not null
+#  remote_type              :string
+#  priority                 :string
+#  milestone                :string
 #  can_add_bounty           :boolean          default(FALSE), not null
 #  accepted_bounty_claim_id :integer
-#  author_name              :string(255)
-#  owner                    :string(255)
+#  author_name              :string
+#  owner                    :string
 #  paid_out                 :boolean          default(FALSE), not null
 #  participants_count       :integer
 #  thumbs_up_count          :integer
 #  votes_count              :integer
 #  watchers_count           :integer
-#  severity                 :string(255)
+#  severity                 :string
 #  delta                    :boolean          default(TRUE), not null
 #  author_linked_account_id :integer
 #  solution_started         :boolean          default(FALSE), not null
@@ -71,23 +71,23 @@ describe Github::Issue do
   let(:issue) { create(:github_issue, tracker: tracker) }
 
   it "should have a valid factory" do
-    issue.should be_valid
+    expect(issue).to be_valid
   end
 
   describe "extract_from_url" do
     let!(:issue) { create(:github_issue, url: "https://github.com/corytheboyd/shibe.js/issues/2", number: 2) }
 
     it "should find issue by URL" do
-      Github::Issue.extract_from_url(nil).should be_nil
-      Github::Issue.extract_from_url("").should be_nil
-      Github::Issue.extract_from_url(issue.url).should eq(issue)
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/#{issue.number}").should eq(issue)
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/#{issue.number}/").should eq(issue)
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues").should be_nil
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/wiki").should be_nil
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js").should be_nil
-      Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/").should be_nil
-      Github::Issue.extract_from_url("https://www.other-tracker.com/issues/1337").should be_nil
+      expect(Github::Issue.extract_from_url(nil)).to be_nil
+      expect(Github::Issue.extract_from_url("")).to be_nil
+      expect(Github::Issue.extract_from_url(issue.url)).to eq(issue)
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/#{issue.number}")).to eq(issue)
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues/#{issue.number}/")).to eq(issue)
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/issues")).to be_nil
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/wiki")).to be_nil
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js")).to be_nil
+      expect(Github::Issue.extract_from_url("https://github.com/corytheboyd/shibe.js/")).to be_nil
+      expect(Github::Issue.extract_from_url("https://www.other-tracker.com/issues/1337")).to be_nil
     end
   end
 
@@ -96,7 +96,7 @@ describe Github::Issue do
     # Data from: /repos/bountysource/frontend
     let (:github_data) { JSON.parse %({ "url": "https://api.github.com/repos/bountysource/frontend/issues/493", "labels_url": "https://api.github.com/repos/bountysource/frontend/issues/493/labels{/name}", "comments_url": "https://api.github.com/repos/bountysource/frontend/issues/493/comments", "events_url": "https://api.github.com/repos/bountysource/frontend/issues/493/events", "html_url": "https://github.com/bountysource/frontend/issues/493", "id": 30169482, "number": 493, "title": "Sell merchandise for a team", "user": { "login": "rappo", "id": 2245234, "avatar_url": "https://avatars.githubusercontent.com/u/2245234?", "gravatar_id": "4e32fc6478f3dd6b42cef6e4b7c76979", "url": "https://api.github.com/users/rappo", "html_url": "https://github.com/rappo", "followers_url": "https://api.github.com/users/rappo/followers", "following_url": "https://api.github.com/users/rappo/following{/other_user}", "gists_url": "https://api.github.com/users/rappo/gists{/gist_id}", "starred_url": "https://api.github.com/users/rappo/starred{/owner}{/repo}", "subscriptions_url": "https://api.github.com/users/rappo/subscriptions", "organizations_url": "https://api.github.com/users/rappo/orgs", "repos_url": "https://api.github.com/users/rappo/repos", "events_url": "https://api.github.com/users/rappo/events{/privacy}", "received_events_url": "https://api.github.com/users/rappo/received_events", "type": "User", "site_admin": false }, "labels": [ { "url": "https://api.github.com/repos/bountysource/frontend/labels/teams", "name": "teams", "color": "0052cc" } ], "state": "open", "assignee": null, "milestone": { "url": "https://api.github.com/repos/bountysource/frontend/milestones/4", "labels_url": "https://api.github.com/repos/bountysource/frontend/milestones/4/labels", "id": 609826, "number": 4, "title": "More ways for teams to earn money", "description": "", "creator": { "login": "rappo", "id": 2245234, "avatar_url": "https://avatars.githubusercontent.com/u/2245234?", "gravatar_id": "4e32fc6478f3dd6b42cef6e4b7c76979", "url": "https://api.github.com/users/rappo", "html_url": "https://github.com/rappo", "followers_url": "https://api.github.com/users/rappo/followers", "following_url": "https://api.github.com/users/rappo/following{/other_user}", "gists_url": "https://api.github.com/users/rappo/gists{/gist_id}", "starred_url": "https://api.github.com/users/rappo/starred{/owner}{/repo}", "subscriptions_url": "https://api.github.com/users/rappo/subscriptions", "organizations_url": "https://api.github.com/users/rappo/orgs", "repos_url": "https://api.github.com/users/rappo/repos", "events_url": "https://api.github.com/users/rappo/events{/privacy}", "received_events_url": "https://api.github.com/users/rappo/received_events", "type": "User", "site_admin": false }, "open_issues": 3, "closed_issues": 0, "state": "open", "created_at": "2014-03-25T20:45:16Z", "updated_at": "2014-03-25T22:24:54Z", "due_on": null }, "comments": 0, "created_at": "2014-03-25T22:20:53Z", "updated_at": "2014-03-25T22:21:50Z", "closed_at": null, "pull_request": { "url": null, "html_url": null, "diff_url": null, "patch_url": null }, "body": "Hi", "closed_by": null }) }
 
-    # NOTE: Need to set the URL on the Tracker instead of using the default value set by FactoryGirl
+    # NOTE: Need to set the URL on the Tracker instead of using the default value set by FactoryBot
     let(:repository) { create(:github_repository, url: "https://github.com/bountysource/frontend") }
     let!(:issue) { create(:github_issue, tracker: repository, remote_id: github_data['id']) }
 
@@ -118,7 +118,7 @@ describe Github::Issue do
 
     it 'should get URL from github data' do
       url = Github::Issue.send(:get_url_from_github_data, github_data)
-      url.should be == github_data['html_url']
+      expect(url).to eq(github_data['html_url'])
     end
 
     it 'should create Issue when not found by remote id' do
@@ -136,7 +136,7 @@ describe Github::Issue do
 
       action[github_data]
 
-      issue.reload.can_add_bounty.should be_truthy
+      expect(issue.reload.can_add_bounty).to be_truthy
     end
 
     it 'should update can_add_bounty to false' do
@@ -145,22 +145,22 @@ describe Github::Issue do
 
       action[github_data]
 
-      issue.reload.can_add_bounty.should be_falsey
+      expect(issue.reload.can_add_bounty).to be_falsey
     end
 
     it 'should update can_add_bounty to false if a Pull Request' do
       issue.update_attribute :can_add_bounty, true
       github_data['state'] = 'open'
-      Github::Issue.any_instance.stub(:code) { true }
+      allow_any_instance_of(Github::Issue).to receive(:code) { true }
 
       action[github_data]
 
-      issue.reload.can_add_bounty.should be_falsey
+      expect(issue.reload.can_add_bounty).to be_falsey
     end
 
     describe 'create new tracker' do
 
-      before { Github::Repository.stub(:extract_from_url) { create(:github_repository) } }
+      before { allow(Github::Repository).to receive(:extract_from_url) { create(:github_repository) } }
 
       it 'should create Tracker when creating Issue without Tracker' do
         issue.update_attribute(:remote_id, 1337)
@@ -178,7 +178,7 @@ describe Github::Issue do
     it 'should strip [$X] from title for plugin' do
       github_data['title'] = 'fix things and stuffs [$1,234,567]'
       action[github_data]
-      issue.reload.sanitized_title.should be == 'fix things and stuffs'
+      expect(issue.reload.sanitized_title).to eq('fix things and stuffs')
     end
   end
 

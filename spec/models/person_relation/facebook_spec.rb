@@ -3,7 +3,7 @@
 # Table name: person_relations
 #
 #  id               :integer          not null, primary key
-#  type             :string(255)      not null
+#  type             :string           not null
 #  person_id        :integer          not null
 #  target_person_id :integer          not null
 #  created_at       :datetime         not null
@@ -24,19 +24,19 @@ describe PersonRelation::Facebook do
   let(:person_relation_facebook) { create(:person_relation_facebook, person: person, target_person: target_person) }
 
   it "should link person to target person" do
-    lambda {
+    expect {
       r = PersonRelation::Facebook.create person: person, target_person: target_person
-      r.person.should == person
-      r.target_person.should == target_person
-    }.should change(PersonRelation::Facebook, :count).by 1
+      expect(r.person).to eq(person)
+      expect(r.target_person).to eq(target_person)
+    }.to change(PersonRelation::Facebook, :count).by 1
   end
 
   it "should make target appear in person's friend list" do
-    person_relation_facebook.person.friends.should include target_person
+    expect(person_relation_facebook.person.friends).to include target_person
   end
 
   it "should not make person appear in target person's friend list" do
-    person_relation_facebook.target_person.friends.should_not include person
+    expect(person_relation_facebook.target_person.friends).not_to include person
   end
 
   describe "finding friends" do
@@ -47,7 +47,7 @@ describe PersonRelation::Facebook do
 
     before do
       # fake the API response from Facebook
-      person.facebook_account.stub(:friends) do
+      allow(person.facebook_account).to receive(:friends) do
         # turn the people's linked accounts into hashes resembling those returned from facebook API
         [target_person1, target_person2].map(&:facebook_account).map do |la|
           {
@@ -59,30 +59,30 @@ describe PersonRelation::Facebook do
     end
 
     it "should create the correct friend relations" do
-      lambda {
+      expect {
         PersonRelation::Facebook.find_or_create_friends person
         person.reload
-      }.should change(PersonRelation::Facebook, :count).by 2
+      }.to change(PersonRelation::Facebook, :count).by 2
 
-      person.friends.should     include target_person1
-      person.friends.should     include target_person2
-      person.friends.should_not include target_person3
+      expect(person.friends).to     include target_person1
+      expect(person.friends).to     include target_person2
+      expect(person.friends).not_to include target_person3
     end
 
     it "should create one-way friendships" do
       PersonRelation::Facebook.find_or_create_friends person
       person.reload
 
-      target_person1.friends.should be_empty
-      target_person2.friends.should be_empty
-      target_person3.friends.should be_empty
+      expect(target_person1.friends).to be_empty
+      expect(target_person2.friends).to be_empty
+      expect(target_person3.friends).to be_empty
     end
 
     it "should not create duplicate relations" do
-      lambda {
+      expect {
         10.times { PersonRelation::Facebook.find_or_create_friends person }
         person.reload
-      }.should change(PersonRelation::Facebook, :count).by 2
+      }.to change(PersonRelation::Facebook, :count).by 2
     end
 
     describe "adding new friends after initial load" do
@@ -92,7 +92,7 @@ describe PersonRelation::Facebook do
 
       before do
         # fake the API response from Facebook for initial check
-        person.facebook_account.stub(:friends).and_return(
+        allow(person.facebook_account).to receive(:friends).and_return(
           [
             {
               'id'    => old_friend.facebook_account.uid,
@@ -110,7 +110,7 @@ describe PersonRelation::Facebook do
         new_friend.reload
 
         # now, update the mock API response
-        person.facebook_account.stub(:friends) do
+        allow(person.facebook_account).to receive(:friends) do
           [old_friend, new_friend].map(&:facebook_account).map do |la|
             {
               'id'    => la.uid,
@@ -121,16 +121,16 @@ describe PersonRelation::Facebook do
       end
 
       it "should ensure that new user is not a friend yet" do
-        person.friends.should     include old_friend
-        person.friends.should_not include new_friend
+        expect(person.friends).to     include old_friend
+        expect(person.friends).not_to include new_friend
       end
 
       it "should add new user as a friend" do
         PersonRelation::Facebook.find_or_create_friends person
         person.reload
 
-        person.friends.should include new_friend
-        new_friend.friends.should_not include person
+        expect(person.friends).to include new_friend
+        expect(new_friend.friends).not_to include person
       end
     end
   end
@@ -142,7 +142,7 @@ describe PersonRelation::Facebook do
 
     before do
       # fake the API response from Facebook
-      LinkedAccount::Facebook.any_instance.stub(:friends).and_return(
+      allow_any_instance_of(LinkedAccount::Facebook).to receive(:friends).and_return(
         [{
           'id'    => friend.facebook_account.uid,
           'name'  => "#{friend.facebook_account.first_name} #{friend.facebook_account.last_name}"
@@ -151,12 +151,12 @@ describe PersonRelation::Facebook do
     end
 
     it "should create friends" do
-      lambda {
+      expect {
         linked_account.link_with_person person
         person.reload
-      }.should change(person.friends, :count).by 1
+      }.to change(person.friends, :count).by 1
 
-      person.friends.should include friend
+      expect(person.friends).to include friend
     end
   end
 end

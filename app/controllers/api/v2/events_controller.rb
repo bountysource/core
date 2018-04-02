@@ -1,6 +1,6 @@
 class Api::V2::EventsController < Api::BaseController
 
-  before_filter :parse_boolean_values
+  before_action :parse_boolean_values
 
   def index
     @collection = ::Event.all

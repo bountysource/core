@@ -1,0 +1,1 @@
+ThinkingSphinx::Callbacks.suspend!

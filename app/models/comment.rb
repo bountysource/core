@@ -11,7 +11,7 @@
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  body_html                :text
 #  author_linked_account_id :integer
-#  author_name              :string(255)
+#  author_name              :string
 #  body_markdown            :text
 #
 # Indexes
@@ -20,11 +20,7 @@
 #  index_comments_on_issue_id                  (issue_id)
 #
 
-class Comment < ActiveRecord::Base
-
-  attr_accessible :synced_at, :remote_id, :issue, :sync_in_progress, :body_html, :author_name, :author, :created_at,
-    :body_markdown
-
+class Comment < ApplicationRecord
   belongs_to :issue
   belongs_to :author, class_name: 'LinkedAccount::Base', foreign_key: :author_linked_account_id
 

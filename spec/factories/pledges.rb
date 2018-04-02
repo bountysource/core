@@ -12,7 +12,7 @@
 #  reward_id       :integer
 #  survey_response :text
 #  anonymous       :boolean          default(FALSE), not null
-#  owner_type      :string(255)
+#  owner_type      :string
 #  owner_id        :integer
 #
 # Indexes
@@ -25,7 +25,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :pledge do
     association :fundraiser, factory: :fundraiser
     association :person, factory: :person

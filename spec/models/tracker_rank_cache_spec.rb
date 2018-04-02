@@ -40,7 +40,7 @@ describe TrackerRankCache do
           activity_log_2.update_caches
 
           tracker_rank_cache.reload
-          tracker_rank_cache.rank.should eq(2)
+          expect(tracker_rank_cache.rank).to eq(2)
         end
       end
 

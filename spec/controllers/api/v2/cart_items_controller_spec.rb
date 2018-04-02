@@ -14,7 +14,6 @@ describe Api::V2::CartItemsController do
   let(:params) do
     {
       access_token: person.create_access_token,
-      vendor_string: 'bountysource',
       id: 0, #index of item in cart.items
       proposal_id: proposal.id,
       uid: cart.uid,
@@ -30,21 +29,21 @@ describe Api::V2::CartItemsController do
     it 'should raise if person doesnt have authorization to add Proposal to their cart' do
       params[:access_token] = unauth_person.create_access_token
       params[:uid] = unauth_person.shopping_cart.uid
-      post(:create, params)
-      response.status.should eq(401)
+      post(:create, params: params)
+      expect(response.status).to eq(401)
     end
 
     it 'should return 200 person has authorization to add Proposal to their cart' do
-      post(:create, params)
-      response.status.should eq(200)
+      post(:create, params: params)
+      expect(response.status).to eq(200)
     end
   end
 
   describe '#update' do
     before { cart.add_item proposal.attributes.merge!({item_type: 'proposal', currency: 'USD', proposal_id: proposal.id}) }
     it 'should raise if ANY person attempts to update Proposal to their cart' do
-      put(:update, params)
-      response.status.should eq(401)
+      put(:update, params: params)
+      expect(response.status).to eq(401)
     end
   end
 end

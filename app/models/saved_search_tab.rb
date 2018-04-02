@@ -3,16 +3,15 @@
 # Table name: saved_search_tabs
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)      not null
-#  query      :string(255)      not null
+#  name       :string           not null
+#  query      :string           not null
 #  person_id  :integer          not null
 #  locked     :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class SavedSearchTab < ActiveRecord::Base
-  attr_accessible :query, :locked, :name, :created_at
+class SavedSearchTab < ApplicationRecord
   belongs_to :person
 
   def self.find_user_tabs(user)

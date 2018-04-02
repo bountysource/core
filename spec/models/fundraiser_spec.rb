@@ -5,9 +5,9 @@
 #  id                :integer          not null, primary key
 #  person_id         :integer          not null
 #  published         :boolean          default(FALSE), not null
-#  title             :string(255)
-#  homepage_url      :string(255)
-#  repo_url          :string(255)
+#  title             :string
+#  homepage_url      :string
+#  repo_url          :string
 #  description       :text
 #  about_me          :text
 #  funding_goal      :integer          default(100)
@@ -16,7 +16,7 @@
 #  updated_at        :datetime         not null
 #  total_pledged     :decimal(10, 2)   default(0.0), not null
 #  featured          :boolean          default(FALSE), not null
-#  short_description :string(255)
+#  short_description :string
 #  days_open         :integer          default(30)
 #  ends_at           :datetime
 #  breached_at       :datetime
@@ -24,7 +24,7 @@
 #  breached          :boolean          default(FALSE), not null
 #  featured_at       :boolean
 #  hidden            :boolean          default(FALSE), not null
-#  cloudinary_id     :string(255)
+#  cloudinary_id     :string
 #  team_id           :integer
 #  tracker_id        :integer
 #
@@ -51,19 +51,19 @@ describe Fundraiser do
     let!(:backer) { create(:person_with_money_in_account, money_amount: 100) }
 
     it "should not have account after create" do
-      lambda {
+      expect {
         create(:fundraiser)
-      }.should_not change(Account, :count)
+      }.not_to change(Account, :count)
     end
 
     it "should not lazy load account" do
-      lambda {
+      expect {
         fundraiser.account
-      }.should_not change(Account, :count)
+      }.not_to change(Account, :count)
     end
 
     it "should create account on transaction create" do
-      fundraiser.account.should be_nil
+      expect(fundraiser.account).to be_nil
 
       pledge = create(:pledge, fundraiser: fundraiser)
 
@@ -74,7 +74,7 @@ describe Fundraiser do
         ])
       end
 
-      fundraiser.reload.account.should_not be_nil
+      expect(fundraiser.reload.account).not_to be_nil
     end
 
     describe "with account" do
@@ -83,8 +83,8 @@ describe Fundraiser do
       end
 
       it "should establish relationship to account" do
-        fundraiser.account.should_not be_nil
-        fundraiser.account.should be_an Account::Fundraiser
+        expect(fundraiser.account).not_to be_nil
+        expect(fundraiser.account).to be_an Account::Fundraiser
       end
     end
   end
@@ -94,40 +94,40 @@ describe Fundraiser do
     let(:pledge) { create(:pledge, fundraiser: fundraiser, amount: 10, person: person) }
 
     it "should return a frontend URL" do
-      fundraiser.frontend_path.should == "/teams/#{fundraiser.team.slug}/fundraiser"
+      expect(fundraiser.frontend_path).to eq("/teams/#{fundraiser.team.slug}/fundraiser")
     end
 
     it "should revert to old paths for fundraisers without teams" do
-      fundraiser.stub(team: nil)
-      fundraiser.frontend_path.should == "/fundraisers/#{fundraiser.to_param}"
+      allow(fundraiser).to receive_messages(team: nil)
+      expect(fundraiser.frontend_path).to eq("/fundraisers/#{fundraiser.to_param}")
     end
 
     it "should return a url that is safe for multiple word team names" do
-      fundraiser.team.stub(:name) { 'Four word team name' }
-      fundraiser.frontend_path.should == "/teams/#{fundraiser.team.slug}/fundraiser"
+      allow(fundraiser.team).to receive(:name) { 'Four word team name' }
+      expect(fundraiser.frontend_path).to eq("/teams/#{fundraiser.team.slug}/fundraiser")
     end
 
     it "should return frontend edit URL if owner" do
-      fundraiser.frontend_edit_path.should == "fundraisers/#{fundraiser.to_param}/edit"
+      expect(fundraiser.frontend_edit_path).to eq("fundraisers/#{fundraiser.to_param}/edit")
     end
   end
 
   it "should not run validations if publish == false (default)" do
-    lambda {
+    expect {
       fundraiser = person.fundraisers.create!(title: 'My OSS Project', team: team)
-      fundraiser.published?.should be_falsey
-      fundraiser.valid?.should be_truthy
-    }.should_not raise_exception
+      expect(fundraiser.published?).to be_falsey
+      expect(fundraiser.valid?).to be_truthy
+    }.not_to raise_exception
   end
 
   it "should create with no data, except for title and team (both are required to create now)" do
-    lambda { person.fundraisers.create!(title: 'My Awesome Project', team: team) }.should_not raise_exception
+    expect { person.fundraisers.create!(title: 'My Awesome Project', team: team) }.not_to raise_exception
   end
 
   it "should run validations when publishing" do
     fundraiser = person.fundraisers.create!(title: "My OSS Project", team: team)
     fundraiser.published = true
-    fundraiser.valid?.should be_falsey
+    expect(fundraiser.valid?).to be_falsey
   end
 
   it "should publish successfully" do
@@ -140,8 +140,8 @@ describe Fundraiser do
       days_open:          Fundraiser.min_days_open,
       team:               team
     )
-    fundraiser.publish!.should be_truthy
-    fundraiser.valid?.should be_truthy
+    expect(fundraiser.publish!).to be_truthy
+    expect(fundraiser.valid?).to be_truthy
   end
 
   it "should not allow more than one published fundraiser" do
@@ -156,9 +156,9 @@ describe Fundraiser do
       days_open:          Fundraiser.min_days_open,
       team:               team
     )
-    new_fundraiser.valid?.should be_truthy
-    new_fundraiser.publish!.should be_falsey
-    person.fundraisers.in_progress.count.should eq(1)
+    expect(new_fundraiser.valid?).to be_truthy
+    expect(new_fundraiser.publish!).to be_falsey
+    expect(person.fundraisers.in_progress.count).to eq(1)
   end
 
   it "should fail to publish incomplete fundraiser" do
@@ -167,10 +167,10 @@ describe Fundraiser do
       description:    "This is great and you need it right now. Give me your money.",
       team:           team
     )
-    fundraiser.publish!.should_not be_truthy
+    expect(fundraiser.publish!).not_to be_truthy
 
     fundraiser.reload
-    fundraiser.published?.should be_falsey
+    expect(fundraiser.published?).to be_falsey
   end
 
   it "should raise error when trying to update a published fundraiser" do
@@ -183,9 +183,9 @@ describe Fundraiser do
       days_open:          Fundraiser.min_days_open,
       team:               team
     )
-    fundraiser.publish!.should be_truthy
+    expect(fundraiser.publish!).to be_truthy
 
-    fundraiser.update_attributes(funding_goal: 2300432).should be_falsey
+    expect(fundraiser.update_attributes(funding_goal: 2300432)).to be_falsey
   end
 
   describe "days open validations" do
@@ -193,24 +193,24 @@ describe Fundraiser do
 
     it "should not be valid with less than min date" do
       fundraiser.days_open = 1
-      fundraiser.valid?.should be_falsey
-      fundraiser.errors.should include :days_open
+      expect(fundraiser.valid?).to be_falsey
+      expect(fundraiser.errors).to include :days_open
     end
 
     it "should not be valid with greater than max date" do
       fundraiser.days_open = 133337
-      fundraiser.valid?.should be_falsey
-      fundraiser.errors.should include :days_open
+      expect(fundraiser.valid?).to be_falsey
+      expect(fundraiser.errors).to include :days_open
     end
 
     it "should be valid at exactly min date" do
       fundraiser.days_open = Fundraiser.min_days_open
-      fundraiser.should be_valid
+      expect(fundraiser).to be_valid
     end
 
     it "should be valid at max date" do
       fundraiser.days_open = Fundraiser.max_days_open
-      fundraiser.valid?.should be_truthy
+      expect(fundraiser.valid?).to be_truthy
     end
 
     it "should correctly calculate the number of days remaining if not published" do
@@ -218,15 +218,15 @@ describe Fundraiser do
       fundraiser.days_open = Fundraiser.min_days_open
 
       # before, days remaining should just be whatever it was set to
-      fundraiser.days_remaining.should == Fundraiser.min_days_open
+      expect(fundraiser.days_remaining).to eq(Fundraiser.min_days_open)
     end
 
     describe "published" do
       let!(:fundraiser) { create(:published_fundraiser) }
 
       it "should calculate days remaining" do
-        fundraiser.should be_published
-        fundraiser.ends_at.should == fundraiser.published_at.end_of_day.utc + fundraiser.days_open.days
+        expect(fundraiser).to be_published
+        expect(fundraiser.ends_at).to eq(fundraiser.published_at.end_of_day.utc + fundraiser.days_open.days)
       end
     end
   end
@@ -235,21 +235,21 @@ describe Fundraiser do
     let!(:person) { create(:person_with_money_in_account, money_amount: 100) }
 
     it "should transfer money from person to fundraiser (Transaction+1)" do
-      lambda {
+      expect {
         create_pledge 100, person: person, personal: true
-      }.should change(Transaction, :count).by 1
+      }.to change(Transaction, :count).by 1
     end
 
     it "should transfer money from paypal to fundraiser (Split+1)" do
-      lambda {
+      expect {
         create_pledge 100, person: person, personal: true
-      }.should change(Split, :count).by 2
+      }.to change(Split, :count).by 2
     end
 
     it "should transfer money from person to fundraiser (Pledge+1)" do
-      lambda {
+      expect {
         create_pledge 100, person: person, personal: true
-      }.should change(Pledge, :count).by 1
+      }.to change(Pledge, :count).by 1
     end
   end
 
@@ -257,9 +257,9 @@ describe Fundraiser do
     let(:fundraiser) { create(:fundraiser, total_pledged: 100, funding_goal: 101) }
 
     it "should initialize the ends_at date when published" do
-      fundraiser.ends_at.should be_nil
+      expect(fundraiser.ends_at).to be_nil
       fundraiser.publish!
-      fundraiser.ends_at.should_not be_nil
+      expect(fundraiser.ends_at).not_to be_nil
     end
   end
 
@@ -269,25 +269,25 @@ describe Fundraiser do
     it "should return true if funding goal == total pledged" do
       fundraiser.total_pledged = 100
       fundraiser.funding_goal = 100
-      fundraiser.should be_funded
+      expect(fundraiser).to be_funded
     end
 
     it "should return true if funding goal > total pledged" do
       fundraiser.total_pledged = 1000
       fundraiser.funding_goal = 100
-      fundraiser.should be_funded
+      expect(fundraiser).to be_funded
     end
 
     it "should return false if funding goal < total pledged" do
       fundraiser.total_pledged = 10
       fundraiser.funding_goal = 100
-      fundraiser.should_not be_funded
+      expect(fundraiser).not_to be_funded
     end
 
     it "should return true if half way funded" do
       fundraiser.total_pledged = 50
       fundraiser.funding_goal = 100
-      fundraiser.funded?(0.50).should be_truthy
+      expect(fundraiser.funded?(0.50)).to be_truthy
     end
   end
 
@@ -295,12 +295,12 @@ describe Fundraiser do
     let(:fundraiser) { create(:fundraiser, person: person, featured: false) }
 
     it "should send a notification email to creator" do
-      fundraiser.person.stub(:send_email).with(:fundraiser_featured_notification, fundraiser: fundraiser).once
+      allow(fundraiser.person).to receive(:send_email).with(:fundraiser_featured_notification, fundraiser: fundraiser).once
       fundraiser.feature!
     end
 
     it "should not send email" do
-      fundraiser.person.stub(:send_email).with(:fundraiser_featured_notification, fundraiser: fundraiser).never
+      allow(fundraiser.person).to receive(:send_email).with(:fundraiser_featured_notification, fundraiser: fundraiser).never
       fundraiser.unfeature!
     end
   end
@@ -309,19 +309,19 @@ describe Fundraiser do
     let(:fundraiser) { create(:fundraiser) }
 
     it "should create a zero reward with fundraiser" do
-      fundraiser.zero_reward.should_not be_nil
+      expect(fundraiser.zero_reward).not_to be_nil
     end
 
     it "should not be able to delete zero_reward" do
-      lambda {
+      expect {
         fundraiser.zero_reward.destroy
-      }.should_not change(fundraiser.rewards, :count)
+      }.not_to change(fundraiser.rewards, :count)
     end
 
     it "should not be able to change zero reward" do
-      lambda {
+      expect {
         fundraiser.zero_reward.update_attributes amount: 1337
-      }.should_not change(fundraiser.zero_reward, :amount)
+      }.not_to change(fundraiser.zero_reward, :amount)
     end
   end
 
@@ -336,30 +336,30 @@ describe Fundraiser do
     let!(:pledge3) { create_pledge 400, person: backer, fundraiser: fundraiser, reward: reward_with_merch, personal: true }
 
     context "transaction rolls back" do
-      before { Transaction.stub(:build) { nil } }
+      before { allow(Transaction).to receive(:build) { nil } }
 
       it "should not payout pledge1" do
-        lambda {
+        expect {
           fundraiser.payout!
-        }.should_not change(pledge1, :status)
+        }.not_to change(pledge1, :status)
       end
 
       it "should not payout pledge2" do
-        lambda {
+        expect {
           fundraiser.payout!
-        }.should_not change(pledge2, :status)
+        }.not_to change(pledge2, :status)
       end
 
       it "should not payout pledge3" do
-        lambda {
+        expect {
           fundraiser.payout!
-        }.should_not change(pledge3, :status)
+        }.not_to change(pledge3, :status)
       end
 
       it "should not create transaction" do
-        lambda {
+        expect {
           fundraiser.payout!
-        }.should_not change(Transaction, :count)
+        }.not_to change(Transaction, :count)
       end
     end
 
@@ -381,31 +381,31 @@ describe Fundraiser do
 
       it "should not create transaction if account balance is zero" do
         # make sure all of dat money is gone
-        fundraiser.account_balance.should == 0
+        expect(fundraiser.account_balance).to eq(0)
 
-        lambda {
+        expect {
           fundraiser.payout!
-        }.should_not change(Transaction, :count)
+        }.not_to change(Transaction, :count)
       end
 
       it "should be idempotent, if no more pledges created since last payout" do
-        lambda { fundraiser.payout! }.should_not change(Transaction, :count)
-        lambda { fundraiser.payout! }.should_not change(Split, :count)
-        lambda { fundraiser.payout! }.should_not change(fundraiser, :account_balance)
-        lambda { fundraiser.payout! }.should_not change(fundraiser.person, :account_balance)
-        lambda { fundraiser.payout! }.should_not change(Account::BountySourceFeesPledge.instance, :balance)
-        lambda { fundraiser.payout! }.should_not change(Account::BountySourceFeesPayment.instance, :balance)
-        lambda { fundraiser.payout! }.should_not change(Account::BountySourceMerch.instance, :balance)
+        expect { fundraiser.payout! }.not_to change(Transaction, :count)
+        expect { fundraiser.payout! }.not_to change(Split, :count)
+        expect { fundraiser.payout! }.not_to change(fundraiser, :account_balance)
+        expect { fundraiser.payout! }.not_to change(fundraiser.person, :account_balance)
+        expect { fundraiser.payout! }.not_to change(Account::BountySourceFeesPledge.instance, :balance)
+        expect { fundraiser.payout! }.not_to change(Account::BountySourceFeesPayment.instance, :balance)
+        expect { fundraiser.payout! }.not_to change(Account::BountySourceMerch.instance, :balance)
       end
 
       it "should create another transaction if paid out, a pledge is made, then paid out again" do
         create_pledge 400, fundraiser: fundraiser, personal: true
         fundraiser.reload
 
-        lambda {
+        expect {
           fundraiser.payout!
           fundraiser.reload
-        }.should change(fundraiser.person, :account_balance).by (400)
+        }.to change(fundraiser.person, :account_balance).by (400)
       end
 
       #it "should only charge for merch rewards once" do
@@ -426,12 +426,12 @@ describe Fundraiser do
         # create pledge, selecting a reward with no merch
         create_pledge 100, reward: reward, fundraiser: fundraiser
 
-        lambda {
+        expect {
           fundraiser.payout!
-        }.should change(Split, :count).by 2
+        }.to change(Split, :count).by 2
 
         transaction = Transaction.last
-        transaction.splits.pluck(:amount).min.should_not be_zero
+        expect(transaction.splits.pluck(:amount).min).not_to be_zero
       end
 
       it "should create the correct splits" do
@@ -441,17 +441,17 @@ describe Fundraiser do
         # remember the account balance before payout
         amount = fundraiser.account_balance
 
-        lambda {
+        expect {
           fundraiser.payout!
-        }.should change(Split, :count).by 2
+        }.to change(Split, :count).by 2
 
         transaction = Transaction.last
 
         # split subtracting fundraiser balance
-        transaction.splits.select { |s| s.amount == -amount }.should be_present
+        expect(transaction.splits.select { |s| s.amount == -amount }).to be_present
 
         # split giving funds to person
-        transaction.splits.select { |s| s.amount == amount }.should be_present
+        expect(transaction.splits.select { |s| s.amount == amount }).to be_present
       end
     end
   end
@@ -460,40 +460,40 @@ describe Fundraiser do
     let!(:fundraiser) { create(:published_fundraiser, funding_goal: 1000, total_pledged: 0) }
 
     it "should create payout transaction" do
-      lambda {
+      expect {
         create_pledge 1000, fundraiser: fundraiser
-      }.should change(fundraiser.transactions, :count).by 2
+      }.to change(fundraiser.txns, :count).by 2
     end
 
     it "should receive check_for_breach message after pledge creation" do
       create_pledge 100, fundraiser: fundraiser
-      fundraiser.stub(:check_for_breach).once
+      allow(fundraiser).to receive(:check_for_breach).once
     end
 
     context "50% of goal breached" do
       it "should email creator" do
-        fundraiser.person.stub(:send_email).with(:notify_creator_of_fundraiser_half_completion, fundraiser: fundraiser).once
+        allow(fundraiser.person).to receive(:send_email).with(:notify_creator_of_fundraiser_half_completion, fundraiser: fundraiser).once
 
         create_pledge (fundraiser.funding_goal / 2), fundraiser: fundraiser
       end
 
       it "should email backers" do
         fundraiser.backers.each do |backer|
-          backer.stub(:send_email).with(:notify_backers_of_fundraiser_half_completion, fundraiser: fundraiser).once
+          allow(backer).to receive(:send_email).with(:notify_backers_of_fundraiser_half_completion, fundraiser: fundraiser).once
         end
 
         create_pledge (fundraiser.funding_goal / 2), fundraiser: fundraiser
       end
 
       it "should not payout" do
-        fundraiser.stub(:payout!).never
+        allow(fundraiser).to receive(:payout!).never
 
         create_pledge (fundraiser.funding_goal / 2), fundraiser: fundraiser
       end
 
       it "should not be breached" do
         create_pledge (fundraiser.funding_goal / 2), fundraiser: fundraiser
-        fundraiser.should_not be_breached
+        expect(fundraiser).not_to be_breached
       end
     end
 
@@ -503,29 +503,29 @@ describe Fundraiser do
       end
 
       it "should have $900 in account" do
-        fundraiser.account_balance.should == 900
+        expect(fundraiser.account_balance).to eq(900)
       end
 
       it "should payout $1200 if another $300 pledge is made" do
         create_pledge 300, fundraiser: fundraiser, personal: true
-        fundraiser.should be_breached
+        expect(fundraiser).to be_breached
 
         # the payout transaction should have splits for $1200
         txn = Transaction.last
         split_items = txn.splits.map(&:item)
-        split_items.should include fundraiser.person
-        split_items.should include fundraiser
-        txn.splits.first.amount.abs.should == 1200
+        expect(split_items).to include fundraiser.person
+        expect(split_items).to include fundraiser
+        expect(txn.splits.first.amount.abs).to eq(1200)
       end
 
       it "should email creator" do
-        fundraiser.person.stub(:send_email).with(:notify_creator_of_fundraiser_breached, fundraiser: fundraiser).once
+        allow(fundraiser.person).to receive(:send_email).with(:notify_creator_of_fundraiser_breached, fundraiser: fundraiser).once
         create_pledge 300, fundraiser: fundraiser
       end
 
       it "should email backers" do
         fundraiser.backers.find_each do |backer|
-          backer.stub(:send_email).with(:notify_backers_of_fundraiser_breached, fundraiser: fundraiser).once
+          allow(backer).to receive(:send_email).with(:notify_backers_of_fundraiser_breached, fundraiser: fundraiser).once
         end
 
         create_pledge 300, fundraiser: fundraiser
@@ -539,13 +539,13 @@ describe Fundraiser do
     let!(:pledge2) { create_pledge 100, fundraiser: fundraiser }
 
     it "should refund" do
-      lambda {
+      expect {
         fundraiser.refund_backers!
-      }.should change(Transaction, :count).by 1
+      }.to change(Transaction, :count).by 1
     end
 
     it "should have correct fundraiser account balance" do
-      fundraiser.account_balance.should be == 180
+      expect(fundraiser.account_balance).to eq(180)
     end
 
     it "should get the splits right" do
@@ -556,13 +556,13 @@ describe Fundraiser do
       transaction = Transaction.last
 
       # split removing all money from fundraiser
-      transaction.splits.select { |s| s.amount == -account_balance_before && s.item == fundraiser }.should be_present
+      expect(transaction.splits.select { |s| s.amount == -account_balance_before && s.item == fundraiser }).to be_present
 
       # split giving money back to person1
-      transaction.splits.select { |s| s.amount == +90 && s.item == pledge1.person }.should be_present
+      expect(transaction.splits.select { |s| s.amount == +90 && s.item == pledge1.person }).to be_present
 
       # split giving money back to person2
-      transaction.splits.select { |s| s.amount == +90 && s.item == pledge2.person }.should be_present
+      expect(transaction.splits.select { |s| s.amount == +90 && s.item == pledge2.person }).to be_present
     end
   end
 

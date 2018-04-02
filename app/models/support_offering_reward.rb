@@ -5,7 +5,7 @@
 #  id                          :integer          not null, primary key
 #  support_offering_id         :integer          not null
 #  amount                      :decimal(10, 2)   not null
-#  title                       :string(255)
+#  title                       :string
 #  description                 :text
 #  active_support_levels_count :integer          default(0), not null
 #  deleted_at                  :datetime
@@ -17,9 +17,7 @@
 #  index_support_offering_rewards_on_support_offering_id  (support_offering_id)
 #
 
-class SupportOfferingReward < ActiveRecord::Base
-  attr_accessible :amount, :title, :description, :active_support_levels_count, :deleted_at
-
+class SupportOfferingReward < ApplicationRecord
   scope :active, lambda { where(deleted_at: nil) }
 
   belongs_to :support_offering

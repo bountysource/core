@@ -1,12 +1,12 @@
 class CoinbaseController < ApplicationController
 
-  before_filter :create_payment_notification, only: [:callback]
+  before_action :create_payment_notification, only: [:callback]
 
   # Order callback when transaction is completed by user.
   # Create Order from ShoppingCart if everything checks out.
   def callback
     Transaction::Order::Coinbase.create_from_payment_notification notification_id: @notification.id
-    render nothing: true, status: :ok
+    head :ok
   end
 
   # User is redirected here after successful payment.

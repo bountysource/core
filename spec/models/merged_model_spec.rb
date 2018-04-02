@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  good_id    :integer          not null
 #  bad_id     :integer          not null
-#  bad_type   :string(255)      not null
+#  bad_type   :string           not null
 #  created_at :datetime         not null
 #
 # Indexes
@@ -41,7 +41,7 @@ describe MergedModel do
     action[good_model, bad_model]
 
     found_model = bad_model.class.find_with_merge bad_model.id
-    found_model.should be == good_model
+    expect(found_model).to eq(good_model)
   end
 
   it 'should find good model through chained merged models' do
@@ -53,7 +53,7 @@ describe MergedModel do
     action[goodest_model, gooder_model]
 
     found_model = bad_model.class.find_with_merge bad_model.id
-    found_model.should be == goodest_model
+    expect(found_model).to eq(goodest_model)
   end
 
 end

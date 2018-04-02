@@ -14,10 +14,7 @@
 #  index_tag_votes_on_tag_relation_id_and_person_id  (tag_relation_id,person_id) UNIQUE
 #
 
-class TagVote < ActiveRecord::Base
-
-  attr_accessible :relation, :value, :person
-
+class TagVote < ApplicationRecord
   belongs_to :tag_relation
   belongs_to :relation, class_name: 'TagRelation', foreign_key: :tag_relation_id   #legacy
 
@@ -36,7 +33,7 @@ class TagVote < ActiveRecord::Base
   after_create { relation.calculate_weight }
 
   # cache weight of relation if value changes
-  after_update { relation.calculate_weight if value_changed? }
+  after_update { relation.calculate_weight if saved_change_to_value? }
 
   def self.find_or_create_by_person_and_relation_and_cast_vote(person, relation, value)
     vote = find_by person_id: person.id, tag_relation_id: relation.id

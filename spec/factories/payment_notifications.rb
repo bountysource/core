@@ -3,8 +3,8 @@
 # Table name: payment_notifications
 #
 #  id                :integer          not null, primary key
-#  type              :string(255)      not null
-#  txn_id            :string(255)      not null
+#  type              :string           not null
+#  txn_id            :string           not null
 #  raw_post          :text
 #  order_id          :integer
 #  created_at        :datetime
@@ -22,7 +22,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :payment_notification do
     txn_id '9HV21269FCK60249'
 

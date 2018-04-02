@@ -33,47 +33,47 @@ describe Api::V2::TrackersHelper do
 
       it "should only include github" do
         params.merge!(type: 'github')
-        filtered.should match_array [github]
+        expect(filtered).to match_array [github]
       end
 
       it "should only include bitbucket" do
         params.merge!(type: 'bitbucket')
-        filtered.should match_array [bitbucket]
+        expect(filtered).to match_array [bitbucket]
       end
 
       it "should only include bugzilla" do
         params.merge!(type: 'bugzilla')
-        filtered.should match_array [bugzilla]
+        expect(filtered).to match_array [bugzilla]
       end
 
       it "should only include google" do
         params.merge!(type: 'google')
-        filtered.should match_array [google]
+        expect(filtered).to match_array [google]
       end
 
       it "should only include jira" do
         params.merge!(type: 'jira')
-        filtered.should match_array [jira]
+        expect(filtered).to match_array [jira]
       end
 
       it "should only include launchpad" do
         params.merge!(type: 'launchpad')
-        filtered.should match_array [launchpad]
+        expect(filtered).to match_array [launchpad]
       end
 
       it "should only include pivotal" do
         params.merge!(type: 'pivotal')
-        filtered.should match_array [pivotal]
+        expect(filtered).to match_array [pivotal]
       end
 
       it "should only include sourceforge" do
         params.merge!(type: 'sourceforge')
-        filtered.should match_array [sourceforge, sourceforge_native]
+        expect(filtered).to match_array [sourceforge, sourceforge_native]
       end
 
       it "should only include trac" do
         params.merge!(type: 'trac')
-        filtered.should match_array [trac]
+        expect(filtered).to match_array [trac]
       end
     end
 
@@ -84,16 +84,16 @@ describe Api::V2::TrackersHelper do
 
       it "should include featured only" do
         params.merge!(featured: true)
-        filtered.should match_array [tracker1]
+        expect(filtered).to match_array [tracker1]
       end
 
       it "should include unfeatured only" do
         params.merge!(featured: false)
-        filtered.should match_array [tracker2]
+        expect(filtered).to match_array [tracker2]
       end
 
       it "should include both" do
-        filtered.should match_array [tracker1, tracker2]
+        expect(filtered).to match_array [tracker1, tracker2]
       end
 
     end
@@ -105,16 +105,16 @@ describe Api::V2::TrackersHelper do
 
       it "should only include tracker with bounties" do
         params.merge!(has_bounties: true)
-        filtered.should match_array [tracker1]
+        expect(filtered).to match_array [tracker1]
       end
 
       it "should only include tracker without bounties" do
         params.merge!(has_bounties: false)
-        filtered.should match_array [tracker2]
+        expect(filtered).to match_array [tracker2]
       end
 
       it "should include both" do
-        filtered.should match_array [tracker1, tracker2]
+        expect(filtered).to match_array [tracker1, tracker2]
       end
 
     end
@@ -133,12 +133,12 @@ describe Api::V2::TrackersHelper do
 
       it "should sort descending" do
         params.merge!(order: "+bounty_total")
-        filtered.should match_array [tracker3, tracker2, tracker1]
+        expect(filtered).to match_array [tracker3, tracker2, tracker1]
       end
 
       it "should sort ascending" do
         params.merge!(order: "-bounty_total")
-        filtered.should match_array [tracker1, tracker2, tracker3]
+        expect(filtered).to match_array [tracker1, tracker2, tracker3]
       end
 
     end
@@ -151,12 +151,12 @@ describe Api::V2::TrackersHelper do
 
       it "should sort descending" do
         params.merge!(order: "+open_issues")
-        filtered.should match_array [tracker3, tracker2, tracker1]
+        expect(filtered).to match_array [tracker3, tracker2, tracker1]
       end
 
       it "should sort ascending" do
         params.merge!(order: "-open_issues")
-        filtered.should match_array [tracker1, tracker2, tracker3]
+        expect(filtered).to match_array [tracker1, tracker2, tracker3]
       end
 
     end
@@ -169,12 +169,12 @@ describe Api::V2::TrackersHelper do
 
       it "should sort descending" do
         params.merge!(order: "+closed_issues")
-        filtered.should match_array [tracker3, tracker2, tracker1]
+        expect(filtered).to match_array [tracker3, tracker2, tracker1]
       end
 
       it "should sort ascending" do
         params.merge!(order: "-closed_issues")
-        filtered.should match_array [tracker1, tracker2, tracker3]
+        expect(filtered).to match_array [tracker1, tracker2, tracker3]
       end
 
     end

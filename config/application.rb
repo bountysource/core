@@ -27,8 +27,6 @@ module Api
     config.www_receipt_url = "#{config.www_url}orders/%d"
     config.www_receipts_url = "#{config.www_url}orders"
 
-    config.middleware.swap Rack::MethodOverride, "GetMethodOverride"
-
     config.middleware.use Rack::Deflater
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -74,13 +72,6 @@ module Api
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
-
-    # Enforce whitelist mode for mass assignment.
-    # This will create an empty whitelist of attributes available for mass-assignment for all models
-    # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
-    # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
-    config.active_record.mass_assignment_sanitizer = :strict
 
     # Enable the asset pipeline
     config.assets.enabled = true

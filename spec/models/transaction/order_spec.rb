@@ -7,7 +7,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  audited            :boolean
-#  type               :string(255)      default("Transaction"), not null
+#  type               :string           default("Transaction"), not null
 #  person_id          :integer
 #  checkout_method_id :integer
 #  gross              :decimal(, )
@@ -176,7 +176,7 @@ describe "Transaction::Order" do
     let(:gross) { -> (item) { Transaction.gross_for_item(item) } }
 
     before do
-      Proposal.any_instance.stub(:appoint!)
+      allow_any_instance_of(Proposal).to receive(:appoint!)
     end
 
     describe 'Paypal' do
@@ -205,7 +205,7 @@ describe "Transaction::Order" do
         end
 
         it 'should call Proposal#after_purchase' do
-          Proposal.any_instance.should_receive(:after_purchase).once
+          expect_any_instance_of(Proposal).to receive(:after_purchase).once
           action.call
         end
 
@@ -245,7 +245,7 @@ describe "Transaction::Order" do
           end
 
           it 'should call Proposal#after_purchase' do
-            Proposal.any_instance.should_receive(:after_purchase).once
+            expect_any_instance_of(Proposal).to receive(:after_purchase).once
             action.call
           end
 
@@ -288,7 +288,7 @@ describe "Transaction::Order" do
          end
 
          it 'should call Proposal#after_purchase' do
-           Proposal.any_instance.should_receive(:after_purchase).once
+           expect_any_instance_of(Proposal).to receive(:after_purchase).once
            action.call
          end
 
@@ -328,7 +328,7 @@ describe "Transaction::Order" do
         end
 
         it 'should call Proposal#after_purchase' do
-          Proposal.any_instance.should_receive(:after_purchase).once
+          expect_any_instance_of(Proposal).to receive(:after_purchase).once
           action.call
          end
 

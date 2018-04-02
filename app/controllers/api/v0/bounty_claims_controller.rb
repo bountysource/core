@@ -1,5 +1,5 @@
 class Api::V0::BountyClaimsController < Api::V0::BaseController
-  before_filter :require_bounty_claim, only: [:show, :update]
+  before_action :require_bounty_claim, only: [:show, :update]
 
   def index
     @bounty_claims = BountyClaim.order("created_at desc")

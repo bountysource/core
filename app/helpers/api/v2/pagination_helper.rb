@@ -109,7 +109,7 @@ module Api::V2::PaginationHelper
     if collection.is_a?(ActiveRecord::Relation) && collection.base_class.respond_to?(:collection_size_override)
       collection_size = collection.base_class.collection_size_override
     elsif collection.is_a? ActiveRecord::Relation
-      collection_size = collection.limit(nil).offset(nil).reorder(nil).count
+      collection_size = collection.limit(nil).offset(nil).reorder(nil).count(:all)
 
       # If collection was grouped, count is returned as a hash.
       # Turn it into the length of the collection.

@@ -22,30 +22,34 @@ describe Api::V0::TransactionsController do
 
   context "as admin" do
     let(:params) do
-      { access_token: admin.create_access_token+".#{Api::Application.config.admin_secret}", id: transaction.id }
+      { access_token: admin.create_access_token+".#{Api::Application.config.admin_secret}" }
     end
 
-    it "should show all transactions" do
-      get 'index', params
-      assert_response :ok
+    describe "index" do
+      it "should show all transactions" do
+        get 'index', params: params
+        assert_response :ok
+      end
     end
 
-    it "should show transaction" do
-      get 'show', params
-      assert_response :ok
-      response_data['id'].should == transaction.id
+    describe "show" do
+      it "should show transaction" do
+        get 'show', params: params.merge(id: transaction.id)
+        assert_response :ok
+        expect(response_data['id']).to eq(transaction.id)
+      end
     end
 
-    describe "creation" do
-      let(:person)  { create(:person_with_money_in_account, money_amount: 10) }
-      let(:issue)   { create(:issue) }
-      let(:item)    { create_bounty 10, person: person, issue: issue }
+    describe "create" do
+      let!(:person)  { create(:person_with_money_in_account, money_amount: 10) }
+      let!(:issue)   { create(:issue) }
+      let!(:item)    { create_bounty 10, person: person, issue: issue }
       let(:params) do
         { access_token: admin.create_access_token+".#{Api::Application.config.admin_secret}" }
       end
 
       it "should require splits" do
-        post 'create', params
+        post 'create', params: params
         assert_response :unprocessable_entity
       end
 
@@ -55,20 +59,14 @@ describe Api::V0::TransactionsController do
           { amount: -10,  account_id: Account::BountySourceAdjustment.instance.id, account_type: Account::BountySourceAdjustment.name }
         ]
 
-        lambda {
-          post 'create', params.merge(
-            item_id:      item.id,
-            item_type:    item.class.name,
+        expect {
+          post 'create', params: params.merge(
             description:  "Test transaction, please ignore",
-            splits:       splits_data.to_json
+            splits:       splits_data.map.with_index { |x, i| [i, x] }.to_h
           )
-          assert_response :created
-        }.should do
-          change(person.transactions, :count).by 1
-          change(issue.transactions, :count).by 1
-          change(item.transactions, :count).by 1
-          change(Split, :count).by splits_data.count
-        end
+          assert_response :ok
+        }.to change{person.txns.count}.by(1)
+         .and change{Split.count}.by(splits_data.count)
       end
 
       it "should require at least 2 splits" do
@@ -76,20 +74,16 @@ describe Api::V0::TransactionsController do
           { amount: 10,   item_id: person.id, item_type: person.class.name },
         ]
 
-        lambda {
-          post 'create', params.merge(
-            item_id:      item.id,
-            item_type:    item.class.name,
+        expect {
+          post 'create', params: params.merge(
             description:  "Test transaction, please ignore",
-            splits:       splits_data.to_json
+            splits:       splits_data.map.with_index { |x, i| [i, x] }.to_h
           )
           assert_response :unprocessable_entity
-        }.should_not do
-          change(person.transactions, :count)
-          change(issue.transactions, :count)
-          change(item.transactions, :count)
-          change(Split, :count)
-        end
+        }.to change{person.txns.count}.by(0)
+         .and change{issue.txns.count}.by(0)
+         .and change{item.txns.count}.by(0)
+         .and change{Split.count}.by(0)
       end
 
       it "should require balanced splits" do
@@ -98,20 +92,14 @@ describe Api::V0::TransactionsController do
           { amount: -9, account_id: Account::BountySourceAdjustment.instance.id, account_type: Account::BountySourceAdjustment.name }
         ]
 
-        lambda {
-          post 'create', params.merge(
-            item_id:      item.id,
-            item_type:    item.class.name,
+        expect {
+          post 'create', params: params.merge(
             description:  "Test transaction, please ignore",
-            splits:       splits_data.to_json
+            splits:       splits_data.map.with_index { |x, i| [i, x] }.to_h
           )
           assert_response :unprocessable_entity
-        }.should_not do
-          change(person.transactions, :count)
-          change(issue.transactions, :count)
-          change(item.transactions, :count)
-          change(Split, :count)
-        end
+        }.to change{person.txns.count}.by(0)
+         .and change{Split.count}.by(0)
       end
 
       it "should create transaction with hella splits" do
@@ -121,88 +109,94 @@ describe Api::V0::TransactionsController do
         splits_data = [{ amount: -20000, item_id: santa_claus.id, item_type: santa_claus.class.name }]
         splits_data += children.map { |child| { amount: 1000, item_id: child.id, item_type: child.class.name } }
 
-        lambda {
-          post 'create', params.merge(
+        expect {
+          post 'create', params: params.merge(
             item_id:      item.id,
             item_type:    item.class.name,
             description:  "Test transaction, please ignore",
-            splits:       splits_data.to_json
+            splits:       splits_data.map.with_index { |x, i| [i, x] }.to_h
           )
-          assert_response :created
-        }.should do
-          children.each { |child| change(child.transactions, :count).by 1 }
-          change(santa_claus.transactions, :count).by 1
-          change(Split, :count).by splits_data.count
-        end
+          assert_response :ok
+        }.to change{santa_claus.txns.count}.by(1)
+         .and change{Split.count}.by(splits_data.count)
+         .and change{Split.where(account_id: Account.where(owner_type: 'Person', owner_id: children.map(&:id))).count }.by(children.count)
+         #
       end
     end
 
-    describe "add new splits" do
+    describe "update" do
       let(:person)  { create(:person_with_money_in_account, money_amount: 10) }
       let(:issue)   { create(:issue) }
 
       it "should add new splits if they are balanced" do
-        splits_data = {
-          #'0' => { amount: -10, item_id: person.id, item_type: person.class.name },
-          #'1' => { amount: 10, item_id: issue.id, item_type: issue.class.name },
-          '0' => { amount: -10, item_id: person.id, item_type: person.class.name },
-          '1' => { amount: 5, item_id: issue.id, item_type: issue.class.name },
-          '2' => { amount: 5, item_id: issue.id, item_type: issue.class.name },
-        }
+        splits_data = [
+          { amount: -10, item_id: person.id, item_type: person.class.name },
+          { amount: 5, item_id: issue.id, item_type: issue.class.name },
+          { amount: 5, item_id: issue.id, item_type: issue.class.name },
+        ]
 
-        lambda {
-          put :update, params.merge(description: transaction.description, splits: splits_data)
+        expect {
+          put :update, params: params.merge(
+            description: transaction.description,
+            splits: splits_data.map.with_index { |x, i| [i, x] }.to_h,
+            id: transaction.id
+          )
           assert_response :ok
           transaction.reload
-        }.should change(transaction.splits, :count).by 1
+        }.to change(transaction.splits, :count).by 1
       end
 
       it "should not add new splits if they are unbalanced" do
-        splits_data = {
-          '0' => { amount: -9, item_id: person.id, item_type: person.class.name },
-          '1' => { amount: 10, item_id: issue.id, item_type: issue.class.name },
-        }
+        splits_data = [
+          { amount: -9, item_id: person.id, item_type: person.class.name },
+          { amount: 10, item_id: issue.id, item_type: issue.class.name },
+        ]
 
-        lambda {
-          put :update, params.merge(splits: splits_data.to_json)
+        expect {
+          put :update, params: params.merge(
+            splits: splits_data.map.with_index { |x, i| [i, x] }.to_h,
+            id: transaction.id
+          )
           assert_response :unprocessable_entity
           transaction.reload
-        }.should_not change(transaction.splits, :count)
+        }.not_to change(transaction.splits, :count)
       end
+
+      it "should update transaction description" do
+        description = "I've got a lovely bunch of coconuts, there they are standing in a row!"
+
+        expect {
+          put 'update', params: params.merge(description: description, id: transaction.id)
+          assert_response :ok
+          transaction.reload
+        }.to change(transaction, :description).to description
+      end
+
+      # TODO: item is on splits now, not transactions
+      #it "should update transaction item" do
+      #  new_item = create_bounty 10
+      #
+      #  lambda {
+      #    put 'update', params: params.merge(description: transaction.description, item_id: new_item.id, item_type: new_item.class.name)
+      #    transaction.reload
+      #  }.should change(transaction, :item).to new_item
+      #end
     end
 
-    it "should update transaction description" do
-      description = "I've got a lovely bunch of coconuts, there they are standing in a row!"
+    describe "destroy" do
+      it "should destroy splits" do
+        expect {
+          delete 'destroy', params: params.merge(id: transaction.id)
+          assert_response :no_content
+        }.to change(Split, :count).by -transaction.splits.count
+      end
 
-      lambda {
-        put 'update', params.merge(description: description)
-        assert_response :ok
-        transaction.reload
-      }.should change(transaction, :description).to description
-    end
-
-    # TODO: item is on splits now, not transactions
-    #it "should update transaction item" do
-    #  new_item = create_bounty 10
-    #
-    #  lambda {
-    #    put 'update', params.merge(description: transaction.description, item_id: new_item.id, item_type: new_item.class.name)
-    #    transaction.reload
-    #  }.should change(transaction, :item).to new_item
-    #end
-
-    it "should destroy splits" do
-      lambda {
-        delete 'destroy', params
-        assert_response :no_content
-      }.should change(Split, :count).by -transaction.splits.count
-    end
-
-    it "should destroy transaction" do
-      lambda {
-        delete 'destroy', params
-        assert_response :no_content
-      }.should change(Transaction, :count).by -1
+      it "should destroy transaction" do
+        expect {
+          delete 'destroy', params: params.merge(id: transaction.id)
+          assert_response :no_content
+        }.to change(Transaction, :count).by -1
+      end
     end
   end
 
@@ -212,22 +206,22 @@ describe Api::V0::TransactionsController do
     end
 
     it "should require admin for index" do
-      get 'index', params
+      get 'index', params: params
       assert_response :unauthorized
     end
 
     it "should require admin for show" do
-      get 'show', params
+      get 'show', params: params
       assert_response :unauthorized
     end
 
     it "should require admin for update" do
-      put 'update', params
+      put 'update', params: params
       assert_response :unauthorized
     end
 
     it "should require admin for destroy" do
-      delete 'destroy', params
+      delete 'destroy', params: params
       assert_response :unauthorized
     end
   end

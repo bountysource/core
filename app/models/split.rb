@@ -4,14 +4,14 @@
 #
 #  id             :integer          not null, primary key
 #  amount         :decimal(10, 2)   not null
-#  status         :string(255)      default("approved"), not null
+#  status         :string           default("approved"), not null
 #  account_id     :integer          not null
 #  transaction_id :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  currency       :string(255)      default("USD"), not null
+#  currency       :string           default("USD"), not null
 #  item_id        :integer
-#  item_type      :string(255)
+#  item_type      :string
 #  dirty          :integer          default(0), not null
 #
 # Indexes
@@ -31,16 +31,13 @@
 # Every Split must point to its parent Transaction; a Split can belong to at
 # most one Transaction.
 
-class Split < ActiveRecord::Base
-
-  attr_accessible :amount, :status, :account, :currency, :item
-
+class Split < ApplicationRecord
   belongs_to  :account
-  belongs_to  :transaction
+  belongs_to  :txn, class_name: 'Transaction', foreign_key: :transaction_id
   belongs_to  :item,   polymorphic: true
 
   validates :account,     presence: true
-  validates :transaction, presence: true
+  validates :txn, presence: true
   validates :amount,      presence: true, numericality: true
   validates :dirty,       presence: true, numericality: { greater_than_or_equal_to: 0 }
 
@@ -86,6 +83,15 @@ class Split < ActiveRecord::Base
       else
         errors.add :account, item_account.errors.full_messages
       end
+    end
+  end
+
+  # Money objects don't work with validates-numericality, so convert to BigDecimal
+  def amount=(amount)
+    if amount.is_a?(Money)
+      self[:amount] = amount.to_d
+    else
+      self[:amount] = amount
     end
   end
 

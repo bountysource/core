@@ -3,7 +3,7 @@
 # Table name: person_relations
 #
 #  id               :integer          not null, primary key
-#  type             :string(255)      not null
+#  type             :string           not null
 #  person_id        :integer          not null
 #  target_person_id :integer          not null
 #  created_at       :datetime         not null
@@ -16,7 +16,7 @@
 #  index_person_relations_on_type_and_people   (type,person_id,target_person_id) UNIQUE
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :person_relation, class: PersonRelation::Base do
     association :person,        factory: :person
     association :target_person, factory: :person

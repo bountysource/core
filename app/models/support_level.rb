@@ -6,8 +6,8 @@
 #  person_id              :integer          not null
 #  team_id                :integer          not null
 #  amount                 :decimal(10, 2)   not null
-#  status                 :string(255)      not null
-#  owner_type             :string(255)
+#  status                 :string           not null
+#  owner_type             :string
 #  owner_id               :integer
 #  payment_method_id      :integer          not null
 #  created_at             :datetime
@@ -24,10 +24,7 @@
 #  index_support_levels_on_team_id    (team_id)
 #
 
-class SupportLevel < ActiveRecord::Base
-  attr_accessible :amount, :status, :team, :payment_method, :owner, :display_as, :person, :reward,
-                  :last_invoice_starts_at, :last_invoice_ends_at, :canceled_at
-
+class SupportLevel < ApplicationRecord
   belongs_to :person
   belongs_to :team
   belongs_to :payment_method

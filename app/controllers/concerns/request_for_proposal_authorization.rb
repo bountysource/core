@@ -2,7 +2,7 @@ module RequestForProposalAuthorization
   extend ActiveSupport::Concern
 
   included do
-    before_filter :require_issue
+    before_action :require_issue
   end
 
   private

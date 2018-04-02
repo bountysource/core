@@ -4,9 +4,9 @@
 #
 #  id                :integer          not null, primary key
 #  team_id           :integer          not null
-#  subtitle          :string(255)
+#  subtitle          :string
 #  body_markdown     :text
-#  youtube_video_url :string(255)
+#  youtube_video_url :string
 #  goals             :json
 #  created_at        :datetime
 #  updated_at        :datetime
@@ -17,9 +17,8 @@
 #  index_support_offerings_on_team_id  (team_id) UNIQUE
 #
 
-class SupportOffering < ActiveRecord::Base
+class SupportOffering < ApplicationRecord
   has_paper_trail :only => [:subtitle, :body_markdown, :youtube_video_url, :goals]
-  attr_accessible :subtitle, :body_markdown, :youtube_video_url, :goals, :extra
 
   has_many :rewards, class_name: 'SupportOfferingReward'
   belongs_to :team
