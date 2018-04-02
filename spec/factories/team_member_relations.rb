@@ -13,7 +13,7 @@
 #  invited_by_person_id :integer
 #  budget               :decimal(, )
 #  balance              :decimal(, )
-#  owner_type           :string(255)
+#  owner_type           :string
 #  owner_id             :integer
 #  member               :boolean          default(TRUE), not null
 #
@@ -28,7 +28,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team_member_relation do
     association :team, factory: :team
     association :person, factory: :person

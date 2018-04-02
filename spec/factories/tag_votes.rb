@@ -16,7 +16,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :tag_vote do
     association :person, factory: :person
     association :relation, factory: :tag_relation

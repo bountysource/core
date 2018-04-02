@@ -1,4 +1,4 @@
-ActiveRecord::Base.class_eval do
+ApplicationRecord.class_eval do
 
   # merge many models, taking lowest ID
   def self.merge!(*models)

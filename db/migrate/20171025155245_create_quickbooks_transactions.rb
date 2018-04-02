@@ -1,4 +1,4 @@
-class CreateQuickbooksTransactions < ActiveRecord::Migration
+class CreateQuickbooksTransactions < ActiveRecord::Migration[5.0]
   def up
     create_table :quickbooks_transactions, id: false do |t|
       t.integer :id

@@ -7,7 +7,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  audited            :boolean
-#  type               :string(255)      default("Transaction"), not null
+#  type               :string           default("Transaction"), not null
 #  person_id          :integer
 #  checkout_method_id :integer
 #  gross              :decimal(, )
@@ -33,35 +33,35 @@ require 'spec_helper'
 
 describe Transaction do
   it "should require at least two splits" do
-    lambda {
+    expect {
       Transaction.build do |tr|
         tr.splits.create([
           { amount: 10, account: Account::Paypal.instance }
         ])
       end
-    }.should_not change(Split, :count)
+    }.not_to change(Split, :count)
   end
 
   it "should require splits to be balanced" do
-    lambda {
+    expect {
       Transaction.build do |tr|
         tr.splits.create([
           { amount: 10, item: create(:person) },
           { amount: -9, account: Account::Paypal.instance }
         ])
       end
-    }.should_not change(Split, :count)
+    }.not_to change(Split, :count)
   end
 
   it "should be valid with balanced splits" do
-    lambda {
+    expect {
       Transaction.build do |tr|
         tr.splits.create([
           { amount: 10,   item: create(:person) },
           { amount: -10,  account: Account::Paypal.instance }
         ])
       end
-    }.should change(Split, :count).by 2
+    }.to change(Split, :count).by 2
   end
 
   context "with transaction" do
@@ -76,12 +76,12 @@ describe Transaction do
     end
 
     it "should have relations with all items/accounts in splits" do
-      person.transactions.should include transaction
-      Account::Paypal.instance.transactions.should include transaction
+      expect(person.txns).to include transaction
+      expect(Account::Paypal.instance.txns).to include transaction
     end
 
     it "should have an item" do
-      transaction.splits.where('amount > 0').first.item.should == person
+      expect(transaction.splits.where('amount > 0').first.item).to eq(person)
     end
   end
 
@@ -94,7 +94,7 @@ describe Transaction do
       let(:bounty) { build_stubbed(:bounty, amount: 100)}
 
       it 'should calculate amounts' do
-        liability_for_item[bounty].should be == bounty.amount
+        expect(liability_for_item[bounty]).to eq(bounty.amount)
       end
 
     end
@@ -104,7 +104,7 @@ describe Transaction do
       let(:bounty) { build_stubbed(:bounty, amount: 100, bounty_expiration: 'never', upon_expiration: 'implode', promotion: 'firing squad')}
 
       it 'should calculate amounts' do
-        liability_for_item[bounty].should be == bounty.amount
+        expect(liability_for_item[bounty]).to eq(bounty.amount)
       end
 
     end
@@ -114,7 +114,7 @@ describe Transaction do
       let(:pledge) { build_stubbed(:pledge, amount: 100) }
 
       it 'should calculate amounts' do
-        liability_for_item[pledge].should be == pledge.amount
+        expect(liability_for_item[pledge]).to eq(pledge.amount)
       end
 
     end
@@ -126,7 +126,7 @@ describe Transaction do
       let!(:pledge) { build_stubbed(:pledge, amount: 100, reward: reward) }
 
       it 'should calculate amounts' do
-        liability_for_item[pledge].should be == pledge.amount - reward.merchandise_fee
+        expect(liability_for_item[pledge]).to eq(pledge.amount - reward.merchandise_fee)
       end
 
     end
@@ -136,7 +136,7 @@ describe Transaction do
       let(:team_payin) { build_stubbed(:team_payin, amount: 100) }
 
       it 'should calculate amounts' do
-        liability_for_item[team_payin].should be == team_payin.amount
+        expect(liability_for_item[team_payin]).to eq(team_payin.amount)
       end
 
     end
@@ -151,7 +151,7 @@ describe Transaction do
       let(:bounty) { build_stubbed(:bounty, amount: 100)}
 
       it 'should calculate amounts' do
-        gross_for_item[bounty].should be == bounty.amount
+        expect(gross_for_item[bounty]).to eq(bounty.amount)
       end
 
     end
@@ -161,7 +161,7 @@ describe Transaction do
       let(:bounty) { build_stubbed(:bounty, amount: 100, bounty_expiration: 'never', upon_expiration: 'implode', promotion: 'firing squad')}
 
       it 'should calculate amounts' do
-        gross_for_item[bounty].should be == bounty.amount
+        expect(gross_for_item[bounty]).to eq(bounty.amount)
       end
 
     end
@@ -171,7 +171,7 @@ describe Transaction do
       let(:pledge) { build_stubbed(:pledge, amount: 100) }
 
       it 'should calculate amounts' do
-        gross_for_item[pledge].should be == pledge.amount
+        expect(gross_for_item[pledge]).to eq(pledge.amount)
       end
 
     end
@@ -183,7 +183,7 @@ describe Transaction do
       let!(:pledge) { build_stubbed(:pledge, amount: 100, reward: reward) }
 
       it 'should calculate amounts' do
-        gross_for_item[pledge].should be == pledge.amount
+        expect(gross_for_item[pledge]).to eq(pledge.amount)
       end
 
     end
@@ -193,7 +193,7 @@ describe Transaction do
       let(:team_payin) { build_stubbed(:team_payin, amount: 100) }
 
       it 'should calculate amounts' do
-        gross_for_item[team_payin].should be == team_payin.amount
+        expect(gross_for_item[team_payin]).to eq(team_payin.amount)
       end
 
     end

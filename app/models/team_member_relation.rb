@@ -13,7 +13,7 @@
 #  invited_by_person_id :integer
 #  budget               :decimal(, )
 #  balance              :decimal(, )
-#  owner_type           :string(255)
+#  owner_type           :string
 #  owner_id             :integer
 #  member               :boolean          default(TRUE), not null
 #
@@ -26,10 +26,7 @@
 #  index_team_member_relations_on_team_id                (team_id)
 #
 
-class TeamMemberRelation < ActiveRecord::Base
-
-  attr_accessible :admin, :public, :developer, :person, :team, :inviter, :budget, :balance, :linked_account, :owner, :member
-
+class TeamMemberRelation < ApplicationRecord
   belongs_to :team
   belongs_to :person
   belongs_to :inviter, class_name: 'Person', foreign_key: :invited_by_person_id

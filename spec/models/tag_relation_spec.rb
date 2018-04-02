@@ -4,9 +4,9 @@
 #
 #  id          :integer          not null, primary key
 #  parent_id   :integer          not null
-#  parent_type :string(255)      not null
+#  parent_type :string           not null
 #  child_id    :integer          not null
-#  child_type  :string(255)      not null
+#  child_type  :string           not null
 #  weight      :integer          default(0), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -25,9 +25,9 @@ describe TagRelation do
   let(:tag)   { create(:tag) }
 
   it "should create relation between tag and item" do
-    lambda{
+    expect{
       create(:tag_relation, parent: team, child: tag)
-    }.should change(tag.child_tag_relations, :count).by 1
+    }.to change(tag.child_tag_relations, :count).by 1
   end
 
   # NOTE: this is database enforced, not AR enforced
@@ -47,7 +47,7 @@ describe TagRelation do
     it "should have up to date weight cache after vote creation" do
       upvotes   = create_list(:tag_vote, 10, relation: relation, value: 1)
       downvotes = create_list(:tag_vote, 5,  relation: relation, value: -1)
-      relation.weight.should == upvotes.count - downvotes.count
+      expect(relation.weight).to eq(upvotes.count - downvotes.count)
     end
   end
 

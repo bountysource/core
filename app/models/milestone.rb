@@ -6,7 +6,7 @@
 #  fundraiser_id         :integer          not null
 #  delivery_at           :datetime
 #  percentage_of_project :integer
-#  description           :string(255)      not null
+#  description           :string           not null
 #  completed_percentage  :integer          not null
 #  optional              :boolean          default(FALSE), not null
 #  rank                  :integer          default(1), not null
@@ -14,8 +14,7 @@
 #  updated_at            :datetime         not null
 #
 
-class Milestone < ActiveRecord::Base
-  attr_accessible :fundraiser, :description, :rank, :optional, :delivery_at, :percentage_of_project, :completed_percentage
+class Milestone < ApplicationRecord
   belongs_to :fundraiser
 
   validates :rank, numericality: { greater_than_or_equal: 1 }

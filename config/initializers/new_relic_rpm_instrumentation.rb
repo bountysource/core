@@ -23,7 +23,7 @@ end
 #  end
 #end
 
-ActiveRecord::Base.class_eval do
+ApplicationRecord.class_eval do
   include ::NewRelic::Agent::MethodTracer
 
   after_create do

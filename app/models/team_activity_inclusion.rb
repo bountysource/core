@@ -14,9 +14,7 @@
 #  index_team_activity_inclusions_on_parent_team_id  (parent_team_id)
 #
 
-class TeamActivityInclusion < ActiveRecord::Base
-  attr_accessible :parent_team, :child_team
-
+class TeamActivityInclusion < ApplicationRecord
   belongs_to :parent_team, class_name: 'Team'
   belongs_to :child_team, class_name: 'Team'
 

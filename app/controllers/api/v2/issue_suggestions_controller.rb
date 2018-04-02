@@ -1,7 +1,7 @@
 class Api::V2::IssueSuggestionsController < Api::BaseController
 
-  before_filter :require_auth, only: [:create, :update]
-  before_filter :require_issue_suggestion_admin, only: [:update]
+  before_action :require_auth, only: [:create, :update]
+  before_action :require_issue_suggestion_admin, only: [:update]
 
   def create
     @team = Team.where(slug: params[:team]).first!

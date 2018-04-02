@@ -3,16 +3,14 @@
 # Table name: payment_methods
 #
 #  id         :integer          not null, primary key
-#  type       :string(255)      not null
+#  type       :string           not null
 #  person_id  :integer          not null
 #  data       :json             not null
 #  created_at :datetime
 #  updated_at :datetime
 #
 
-class PaymentMethod < ActiveRecord::Base
-  attr_accessible :person, :data
-
+class PaymentMethod < ApplicationRecord
   has_account class_name: 'Account::PaymentMethod'
   has_many :notifications, class_name: 'PaymentNotification', foreign_key: :payment_method_id
 
@@ -171,6 +169,7 @@ class PaymentMethod < ActiveRecord::Base
     # catch all...
     NewRelic::Agent.notice_error(e)
     Rails.logger.error "EXCEPTION: #{e.inspect} #{e.backtrace.inspect}"
+    raise if Rails.env.test?
   end
 
 end

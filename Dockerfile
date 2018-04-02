@@ -1,4 +1,4 @@
-FROM ruby:2.2.8
+FROM ruby:2.4.3
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
@@ -23,7 +23,7 @@ WORKDIR /app
 # will be cached unless changes to one of those two files
 # are made.
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 20 --retry 5
+RUN bundle install
 
 # Copy the main application.
 COPY . ./

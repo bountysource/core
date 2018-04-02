@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class InitialSchema < ActiveRecord::Migration
+class InitialSchema < ActiveRecord::Migration[5.0]
   def change
     create_table "access_tokens", force: true do |t|
       t.integer  "person_id",  null: false

@@ -3,7 +3,7 @@ class Api::V2::PluginsController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::PluginsHelper
 
-  before_filter :parse_boolean_values
+  before_action :parse_boolean_values
 
   def index
     @collection = ::TrackerPlugin.where(person_id: current_user.try(:id))

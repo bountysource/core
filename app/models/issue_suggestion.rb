@@ -15,11 +15,7 @@
 #  rejection_reason :text
 #
 
-class IssueSuggestion < ActiveRecord::Base
-  attr_accessible :description, :person, :issue, :team,
-                  :thanked_at, :rejected_at, :rejection_reason,
-                  :suggested_bounty_amount, :can_solve
-
+class IssueSuggestion < ApplicationRecord
   attr_accessor :suggested_bounty_amount, :can_solve
 
   belongs_to :team

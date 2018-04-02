@@ -2,9 +2,9 @@ class Api::V2::IssuesController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::IssuesHelper
 
-  after_filter log_activity(Issue::Event::VIEW), only: [:show]
+  after_action log_activity(Issue::Event::VIEW), only: [:show]
 
-  before_filter :require_auth, only: :query_v3
+  before_action :require_auth, only: :query_v3
 
   # yet another implementation... this one is used in issue dashboard
   def query_v3

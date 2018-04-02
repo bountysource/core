@@ -9,7 +9,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  person_id  :integer          not null
-#  state      :string(255)      default("pending")
+#  state      :string           default("pending")
 #  abstract   :string(1000)
 #
 # Indexes
@@ -80,8 +80,8 @@ describe RequestForProposal do
   describe "#notify_admins_and_developers" do
     it "should call send_email for all team members with correct template" do
       developer = double('developer')
-      request_for_proposal.stub(team: double(admins_and_developers: [developer]))
-      developer.should_receive(:send_email).with(:member_accepted_proposal)
+      allow(request_for_proposal).to receive_messages(team: double(admins_and_developers: [developer]))
+      expect(developer).to receive(:send_email).with(:member_accepted_proposal)
       request_for_proposal.notify_admins_and_developers
     end
   end
@@ -89,8 +89,8 @@ describe RequestForProposal do
   describe '#pending_proposals' do
     it 'should get the pending proposals for an issue' do
       proposals = double(:proposal)
-      proposals.stub(:pending)
-      request_for_proposal.stub(proposals: proposals)
+      allow(proposals).to receive(:pending)
+      allow(request_for_proposal).to receive_messages(proposals: proposals)
       expect(proposals).to receive(:pending)
       request_for_proposal.pending_proposals
     end

@@ -1,6 +1,6 @@
 class Api::V0::Accounts::PersonalController < Api::V0::AccountsController
 
-  before_filter :require_person
+  before_action :require_person
 
   def gift
     require_params :amount

@@ -9,13 +9,11 @@
 #  rejected_notes :text
 #  accepted_at    :datetime
 #  rejected_at    :datetime
-#  created_at     :datetime
-#  updated_at     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 
-class TeamClaim < ActiveRecord::Base
-  attr_accessible :person, :team, :claim_notes, :rejected_notes, :accepted_at, :rejected_at
-
+class TeamClaim < ApplicationRecord
   belongs_to :person
   belongs_to :team
 end

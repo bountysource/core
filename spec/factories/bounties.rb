@@ -12,11 +12,11 @@
 #  updated_at        :datetime         not null
 #  paid_at           :datetime
 #  anonymous         :boolean          default(FALSE), not null
-#  owner_type        :string(255)
+#  owner_type        :string
 #  owner_id          :integer
-#  bounty_expiration :string(255)
-#  upon_expiration   :string(255)
-#  promotion         :string(255)
+#  bounty_expiration :string
+#  upon_expiration   :string
+#  promotion         :string
 #  acknowledged_at   :datetime
 #  tweet             :boolean          default(FALSE), not null
 #  featured          :boolean          default(FALSE), not null
@@ -31,7 +31,7 @@
 #  index_bounties_on_status           (status)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :bounty, class: Bounty do
     association :person, factory: :person
     association :issue, factory: :issue

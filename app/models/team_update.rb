@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  number        :integer
-#  title         :string(255)
+#  title         :string
 #  body          :text
 #  published     :boolean          default(FALSE), not null
 #  published_at  :datetime
@@ -19,9 +19,7 @@
 #  index_team_updates_on_team_id_and_number  (team_id,number) UNIQUE
 #
 
-class TeamUpdate < ActiveRecord::Base
-  attr_accessible :title, :body, :team, :number, :mailing_lists
-
+class TeamUpdate < ApplicationRecord
   belongs_to :team
 
   validates :team,  presence: true

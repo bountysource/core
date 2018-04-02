@@ -3,7 +3,11 @@ require 'spec_helper'
 describe 'routes for Proposals' do
   # TODO move this into a shared_context for v2 routing specs
   # no request object available. Mock out Accept headers on HTTP request
-  before { Rack::MockRequest::DEFAULT_ENV["HTTP_ACCEPT"] = "application/vnd.bountysource+json; version=2" }
+  before do
+    expect(Rack::MockRequest).to receive(:env_for).and_wrap_original do |original_method, *args, &block|
+      original_method.call(*args, &block).tap { |hash| hash['HTTP_ACCEPT'] = "application/vnd.bountysource+json; version=2" }
+    end
+  end
   let(:api_host) { Api::Application.config.api_url }
 
   let(:issue_id) { "1" }

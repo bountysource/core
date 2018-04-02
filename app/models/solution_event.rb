@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  solution_id :integer          not null
-#  type        :string(255)      not null
+#  type        :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
@@ -14,11 +14,8 @@
 #  index_solution_events_on_type         (type)
 #
 
-class SolutionEvent < ActiveRecord::Base
+class SolutionEvent < ApplicationRecord
   belongs_to :solution
   validates :type, presence: true
   validates :solution, presence: true
-
-  attr_accessible :solution
-
 end
