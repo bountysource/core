@@ -2,7 +2,7 @@ class Api::V2::AccountController < Api::BaseController
 
   include Api::V2::AccountHelper
 
-  before_filter :require_auth
+  before_action :require_auth
 
   def show
     @item = current_user.account || current_user.create_account

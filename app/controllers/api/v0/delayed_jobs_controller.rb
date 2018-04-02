@@ -1,10 +1,10 @@
 class Api::V0::DelayedJobsController < Api::V0::BaseController
 
-  before_filter :require_delayed_job, except: [:index, :info]
+  before_action :require_delayed_job, except: [:index, :info]
 
   def info
     if params[:group_stats]
-      stats = ActiveRecord::Base.connection.select_all("
+      stats = ApplicationRecord.connection.select_all("
         select
           count(*) as count,
           object_type,
@@ -44,7 +44,7 @@ class Api::V0::DelayedJobsController < Api::V0::BaseController
 
   def delete
     if @delayed_job.delete
-      render text: 'ok', status: :accepted
+      head :accepted
     else
       render json: { error: @delayed_job.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end
@@ -59,7 +59,7 @@ class Api::V0::DelayedJobsController < Api::V0::BaseController
       @delayed_job.reload
       render "api/v0/delayed_jobs/show", status: :bad_request
     rescue ActiveRecord::RecordNotFound
-      render nothing: true, status: :accepted
+      head :accepted
     end
   end
 

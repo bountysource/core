@@ -25,7 +25,7 @@ describe Api::V1::SolutionsController do
   it "should return no content if user hasn't started work on an issue" do
     params[:access_token] = create(:person).create_access_token
     expect {
-      get :show, params
+      get :show, params: params
       assert_response :not_found
     }.not_to change(person.solutions, :count)
   end
@@ -33,7 +33,7 @@ describe Api::V1::SolutionsController do
   it "should require an access token to create solution" do
     params.delete(:access_token)
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :unauthorized
     }.not_to change(person.solutions, :count)
   end
@@ -42,21 +42,21 @@ describe Api::V1::SolutionsController do
     params.delete(:issue_id)
     expect {
       expect {
-        post :create, params
+        post :create, params: params
       }.to raise_error(ActionController::UrlGenerationError)
     }.not_to change(person.solutions, :count)
   end
 
   it "should create a solution" do
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :created
     }.to change(person.solutions, :count).by 1
   end
 
   it "should create a SolutionEvent::Started object for a new Solution object" do
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :created
       #hacky solution to check if SolutionEvent was created: person.solution.first.solution_events was not working
     }.to change(SolutionEvent, :count).by 1
@@ -64,28 +64,28 @@ describe Api::V1::SolutionsController do
 
   it "should create a SolutionEvent::Stopped object for an existing Solution" do
     expect {
-      post :stop_work, existing_params
+      post :stop_work, params: existing_params
       assert_response :ok
     }.to change(SolutionEvent::Stopped, :count).by 1
   end
 
   it "should create a SolutionEvent::Started object for an existing Solution" do
     expect {
-      post :start_work, existing_params
+      post :start_work, params: existing_params
       assert_response :ok
     }.to change(SolutionEvent::Started, :count).by 1
   end
 
   it "should create a SolutionEvent::Completed object for an existing Solution" do
     expect {
-      post :complete_work, existing_params
+      post :complete_work, params: existing_params
       assert_response :ok
     }.to change(SolutionEvent::Completed, :count).by 1
   end
 
   it "should create a SolutionEvent::CheckedIn object for an existing Solution" do
     expect {
-      post :check_in, existing_params
+      post :check_in, params: existing_params
       assert_response :ok
     }.to change(SolutionEvent::CheckedIn, :count).by 1
   end
@@ -93,19 +93,19 @@ describe Api::V1::SolutionsController do
   describe "activity log" do
     it "should log when a Solution is started" do
       expect {
-        post :create, params
+        post :create, params: params
       }.to change(ActivityLog, :count).by 1
     end
 
     it "should log when a Solution is re-started" do
       expect {
-        post :start_work, existing_params
+        post :start_work, params: existing_params
       }.to change(ActivityLog, :count).by 1
     end
 
     it "should log when a Solution is stopped" do
       expect {
-        post :stop_work, existing_params
+        post :stop_work, params: existing_params
       }.to change(ActivityLog, :count).by 1
     end
   end

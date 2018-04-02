@@ -5,8 +5,8 @@
 #  id                :integer          not null, primary key
 #  person_id         :integer
 #  linked_account_id :integer
-#  email             :string(255)
-#  category          :string(255)
+#  email             :string
+#  category          :string
 #  created_at        :datetime
 #  updated_at        :datetime
 #
@@ -17,10 +17,7 @@
 #  index_unsubscribes_on_person_id          (person_id)
 #
 
-class Unsubscribe < ActiveRecord::Base
-
-  attr_accessible :email, :person, :linked_account, :category
-
+class Unsubscribe < ApplicationRecord
   belongs_to :person
   belongs_to :linked_account, class_name: 'LinkedAccount::Base'
 

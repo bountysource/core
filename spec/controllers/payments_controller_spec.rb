@@ -61,10 +61,10 @@ describe PaymentsController do
     request.env['RAW_POST_DATA'] = post_data.to_param
 
     # Stub PayPal POST back verification response
-    PaymentNotification::Paypal.any_instance.stub(:post_back) { 'VERIFIED' }
+    allow_any_instance_of(PaymentNotification::Paypal).to receive(:post_back) { 'VERIFIED' }
   end
 
-  let(:action) { -> { post :paypal_ipn, post_data } }
+  let(:action) { -> { post :paypal_ipn, params: post_data } }
 
   it 'should create payment notification' do
     expect(action).to change(PaymentNotification::Paypal, :count).by 1

@@ -1,13 +1,13 @@
 class Api::V1::TeamsController < ApplicationController
 
-  before_filter require_tracker(:tracker_id), only: [:add_tracker, :remove_tracker]
+  before_action require_tracker(:tracker_id), only: [:add_tracker, :remove_tracker]
 
-  before_filter :require_auth, except: [:show, :index, :all_members, :trackers, :activity, :bounties, :issues]
-  before_filter :require_team, except: [:create, :index]
-  before_filter :require_member, only: [:update_member, :remove_member]
+  before_action :require_auth, except: [:show, :index, :all_members, :trackers, :activity, :bounties, :issues]
+  before_action :require_team, except: [:create, :index]
+  before_action :require_member, only: [:update_member, :remove_member]
 
-  before_filter :require_modify_team_members, only: [:add_member, :update_member, :remove_member]
-  before_filter :require_modify_team_projects, only: [:add_tracker, :remove_tracker]
+  before_action :require_modify_team_members, only: [:add_member, :update_member, :remove_member]
+  before_action :require_modify_team_projects, only: [:add_tracker, :remove_tracker]
 
   def show
   end
@@ -25,13 +25,7 @@ class Api::V1::TeamsController < ApplicationController
   def create
     require_params :name
 
-    @team = Team.create(
-      name: params[:name],
-      slug: params[:slug],
-      url: params[:url],
-      bio: params[:bio],
-      image_url: params[:image_url]
-    )
+    @team = Team.create(team_params)
 
     if @team.valid?
       @team.add_member(@person, admin: true, no_emails: true, developer: true, public: true)
@@ -154,7 +148,7 @@ class Api::V1::TeamsController < ApplicationController
 
   def remove_member
     if @team.remove_member(@member)
-      render nothing: true, status: :no_content
+      head :no_content
     else
       render json: { error: relation.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end
@@ -214,5 +208,9 @@ protected
     unless (@member = @team.members.where(id: params[:member_id]).first)
       render json: { error: "Member not found" }, status: :not_found
     end
+  end
+
+  def team_params
+    params.permit(:name, :slug, :url, :bio, :image_url)
   end
 end

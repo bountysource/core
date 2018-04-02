@@ -4,8 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  team_id    :integer          not null
-#  token      :string(255)      not null
-#  email      :string(255)
+#  token      :string           not null
+#  email      :string
 #  admin      :boolean          default(FALSE), not null
 #  developer  :boolean          default(FALSE), not null
 #  public     :boolean          default(TRUE), not null
@@ -19,9 +19,7 @@
 #  index_team_invites_on_team_id            (team_id)
 #
 
-class TeamInvite < ActiveRecord::Base
-  attr_accessible :email, :token, :team, :admin, :developer, :public
-
+class TeamInvite < ApplicationRecord
   belongs_to :team
 
   validates :team, presence: true

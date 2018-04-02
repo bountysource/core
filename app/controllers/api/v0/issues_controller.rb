@@ -1,6 +1,6 @@
 class Api::V0::IssuesController < Api::V0::BaseController
 
-  before_filter :require_issue, only: [:show, :update]
+  before_action :require_issue, only: [:show, :update]
 
   def index
     @issues = Issue.order('created_at desc')

@@ -3,9 +3,9 @@ class Api::V2::TrackersController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::TrackersHelper
 
-  after_filter log_activity(Tracker::Event::VIEW), only: [:show]
+  after_action log_activity(Tracker::Event::VIEW), only: [:show]
 
-  before_filter :parse_boolean_values
+  before_action :parse_boolean_values
 
   def index
     #build includes values for query

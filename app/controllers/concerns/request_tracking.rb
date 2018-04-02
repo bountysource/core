@@ -2,7 +2,7 @@ module RequestTracking
   extend ActiveSupport::Concern
 
   included do
-    prepend_before_filter :add_tracking
+    prepend_before_action :add_tracking
   end
 
   private

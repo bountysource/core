@@ -6,7 +6,7 @@ describe BadgeFactory do
   shared_examples_for 'the badge factory' do
     it 'should create badge' do
       badge = BadgeFactory.new(badge_params).send(type)
-      badge.should be_a badge_class
+      expect(badge).to be_a badge_class
     end
   end
 
@@ -65,7 +65,7 @@ describe BadgeFactory do
     describe "error handling" do
       describe "key and parse errors" do
         before do
-          Team.stub(:find_by!).and_return(double())
+          allow(Team).to receive(:find_by!).and_return(double())
         end
 
         it "bad style" do

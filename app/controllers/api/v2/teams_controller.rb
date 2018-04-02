@@ -3,9 +3,9 @@ class Api::V2::TeamsController < Api::BaseController
   include Api::V2::BaseHelper
   include Api::V2::PaginationHelper
 
-  before_filter :require_auth, only: [:update]
-  before_filter :require_team, only: [:update, :show]
-  before_filter :parse_options
+  before_action :require_auth, only: [:update]
+  before_action :require_team, only: [:update, :show]
+  before_action :parse_options
 
   def index
     @collection = ::Team.all
@@ -126,12 +126,12 @@ class Api::V2::TeamsController < Api::BaseController
 
       # title, markdown, youtube, goals, etc
       if params[:support_offering]
-        @item.support_offering.update_attributes(params[:support_offering])
+        @item.support_offering.update_attributes(support_offering_params)
       end
 
       # create, update, destroy
       if params[:create_support_offering_reward]
-        @item.support_offering.rewards.create!(params[:create_support_offering_reward])
+        @item.support_offering.rewards.create!(support_offering_reward_params)
       end
       if params[:update_support_offering_reward]
         reward = @item.support_offering.rewards.where(id: params[:update_support_offering_reward][:id]).first!
@@ -166,6 +166,14 @@ class Api::V2::TeamsController < Api::BaseController
   end
 
 private
+
+  def support_offering_params
+    params.require(:support_offering).permit(:subtitle, :body_markdown, :youtube_video_url, :goals, :extra)
+  end
+
+  def support_offering_reward_params
+    params.require(:create_support_offering_reward).permit(:title, :description, :amount)
+  end
 
   def require_team
     collection = Team.all

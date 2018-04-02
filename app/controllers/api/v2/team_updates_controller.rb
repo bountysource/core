@@ -3,11 +3,11 @@ class Api::V2::TeamUpdatesController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::BaseHelper
 
-  before_filter :load_team, only: [:index]
-  before_filter :require_team, except: [:index]
+  before_action :load_team, only: [:index]
+  before_action :require_team, except: [:index]
 
-  before_filter :require_team_update, only: [:show, :update]
-  before_filter :require_team_admin, only: [:create, :update]
+  before_action :require_team_update, only: [:show, :update]
+  before_action :require_team_admin, only: [:create, :update]
 
   def index
     if @team

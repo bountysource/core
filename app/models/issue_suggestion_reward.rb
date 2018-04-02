@@ -10,7 +10,7 @@
 #  updated_at          :datetime
 #
 
-class IssueSuggestionReward < ActiveRecord::Base
+class IssueSuggestionReward < ApplicationRecord
 
   after_create do
     if issue_suggestion.can_respond?(person)
@@ -18,8 +18,6 @@ class IssueSuggestionReward < ActiveRecord::Base
       issue_suggestion.person.send_email(:issue_suggestion_thanked, issue_suggestion: issue_suggestion, thanked_reward: amount)
     end
   end
-
-  attr_accessible :amount
 
   belongs_to :issue_suggestion
   belongs_to :person

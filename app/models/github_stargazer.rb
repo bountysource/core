@@ -13,9 +13,7 @@
 #  updated_at        :datetime
 #
 
-class GithubStargazer < ActiveRecord::Base
-  attr_accessible :synced_at, :stargazer, :subscriber, :forker, :linked_account_id, :tracker_id
-
+class GithubStargazer < ApplicationRecord
   belongs_to :linked_account, class_name: 'LinkedAccount::Github::User'
   belongs_to :tracker, class_name: 'Github::Repository'
 

@@ -1,10 +1,10 @@
 class Api::V1::IssuesController < ApplicationController
 
-  before_filter :require_auth, only: [:authored]
-  before_filter require_issue(:id), only: [:show, :bounties]
-  before_filter require_tracker(:tracker_id), only: [:index]
+  before_action :require_auth, only: [:authored]
+  before_action require_issue(:id), only: [:show, :bounties]
+  before_action require_tracker(:tracker_id), only: [:index]
 
-  after_filter log_activity(Issue::Event::VIEW), only: [:show]
+  after_action log_activity(Issue::Event::VIEW), only: [:show]
 
   def show
   end

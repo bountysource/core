@@ -3,8 +3,8 @@
 # Table name: payment_notifications
 #
 #  id                :integer          not null, primary key
-#  type              :string(255)      not null
-#  txn_id            :string(255)      not null
+#  type              :string           not null
+#  txn_id            :string           not null
 #  raw_post          :text
 #  order_id          :integer
 #  created_at        :datetime
@@ -20,10 +20,7 @@
 #  index_payment_notifications_on_type      (type)
 #
 
-class PaymentNotification < ActiveRecord::Base
-
-  attr_accessible :raw_post, :raw_json, :txn_id, :order, :secret_matched, :shopping_cart
-
+class PaymentNotification < ApplicationRecord
   belongs_to :order, class_name: 'Transaction::Order'
   belongs_to :shopping_cart
   belongs_to :payment_method

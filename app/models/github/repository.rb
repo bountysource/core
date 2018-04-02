@@ -6,9 +6,9 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  remote_id            :integer
-#  url                  :string(255)      not null
-#  name                 :string(255)      not null
-#  full_name            :string(255)
+#  url                  :string           not null
+#  name                 :string           not null
+#  full_name            :string
 #  is_fork              :boolean          default(FALSE)
 #  watchers             :integer          default(0), not null
 #  forks                :integer          default(0)
@@ -22,21 +22,21 @@
 #  has_wiki             :boolean          default(FALSE), not null
 #  has_downloads        :boolean          default(FALSE), not null
 #  private              :boolean          default(FALSE), not null
-#  homepage             :string(255)
+#  homepage             :string
 #  sync_in_progress     :boolean          default(FALSE), not null
 #  bounty_total         :decimal(10, 2)   default(0.0), not null
 #  account_balance      :decimal(10, 2)   default(0.0)
-#  type                 :string(255)      default("Tracker"), not null
-#  cloudinary_id        :string(255)
+#  type                 :string           default("Tracker"), not null
+#  cloudinary_id        :string
 #  closed_issues        :integer          default(0), not null
 #  delta                :boolean          default(TRUE), not null
 #  can_edit             :boolean          default(TRUE), not null
 #  repo_url             :text
 #  rank                 :integer          default(0), not null
-#  remote_cloudinary_id :string(255)
-#  remote_name          :string(255)
+#  remote_cloudinary_id :string
+#  remote_name          :string
 #  remote_description   :text
-#  remote_homepage      :string(255)
+#  remote_homepage      :string
 #  remote_language_ids  :integer          default([]), is an Array
 #  language_ids         :integer          default([]), is an Array
 #  team_id              :integer
@@ -57,11 +57,6 @@
 #
 
 class Github::Repository < Tracker
-
-  # ATTRIBUTES
-  attr_accessible :watchers, :forks, :is_fork,
-                  :remote_id, :full_name, :pushed_at, :has_issues, :has_wiki, :has_downloads, :private, :homepage
-
   # RELATIONSHIPS
   has_many :issues, class_name: 'Github::Issue', foreign_key: :tracker_id
 
@@ -95,7 +90,7 @@ class Github::Repository < Tracker
 
     # these really shouldn't change, so let's only update the very first time
     update_languages if previous_synced_at.nil?
-    
+
     if deleted_at
       update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
       issues.each do |issue|

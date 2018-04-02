@@ -8,7 +8,7 @@
 #  amount                  :decimal(10, 2)   not null
 #  estimated_work          :integer
 #  bio                     :string(1000)
-#  state                   :string(255)      default("pending")
+#  state                   :string           default("pending")
 #  created_at              :datetime
 #  updated_at              :datetime
 #  completed_by            :datetime
@@ -22,10 +22,9 @@
 #  index_proposals_on_request_for_proposal_id                (request_for_proposal_id)
 #
 
-class Proposal < ActiveRecord::Base
+class Proposal < ApplicationRecord
   include AASM
 
-  attr_accessible :bio, :estimated_work, :completed_by, :amount, :request_for_proposal, :person, :team_notes
   validates :request_for_proposal, presence: true
   validates :person, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
@@ -43,7 +42,9 @@ class Proposal < ActiveRecord::Base
   delegate :account, to: :request_for_proposal
   delegate :pending_proposals, to: :request_for_proposal
 
-  before_destroy :destroyable?
+  before_destroy do
+    throw(:abort) unless destroyable?
+  end
 
   aasm column: 'state' do
     state :pending, initial: true

@@ -27,8 +27,8 @@ describe MailerScheduler do
       it "should call the send email method for an unresponsive backer" do
         bounty #initialize bounty
         bounty_claim_7
-        BountyClaim.any_instance.stub(:unresponsive_backers).and_return([issue_backer])
-        issue_backer.should_receive(:send_email).with(:remind_unresponsive_backers_of_bounty_claim, anything()).once
+        allow_any_instance_of(BountyClaim).to receive(:unresponsive_backers).and_return([issue_backer])
+        expect(issue_backer).to receive(:send_email).with(:remind_unresponsive_backers_of_bounty_claim, anything()).once
         MailerScheduler.remind_unresponsive_backers(7)
       end
     end
@@ -37,8 +37,8 @@ describe MailerScheduler do
       it "should call the send_email method for the unresponsive backer" do
         bounty
         bounty_claim_1
-        BountyClaim.any_instance.stub(:unresponsive_backers).and_return([issue_backer])
-        issue_backer.should_receive(:send_email).with(:remind_unresponsive_backers_of_bounty_claim, anything()).once
+        allow_any_instance_of(BountyClaim).to receive(:unresponsive_backers).and_return([issue_backer])
+        expect(issue_backer).to receive(:send_email).with(:remind_unresponsive_backers_of_bounty_claim, anything()).once
         MailerScheduler.remind_unresponsive_backers(1)
       end
     end

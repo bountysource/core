@@ -4,11 +4,11 @@
 #
 #  id                   :integer          not null, primary key
 #  raw_post             :text             not null
-#  txn_id               :string(255)      not null
+#  txn_id               :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  payment_processed_at :datetime
-#  payment_type         :string(255)
+#  payment_type         :string
 #  pending              :boolean          default(FALSE), not null
 #  processed            :boolean          default(FALSE), not null
 #  is_return            :boolean          default(FALSE), not null
@@ -23,11 +23,9 @@
 #
 
 # PayPal IPN Reference: https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNIntro/
-class PaypalIpn < ActiveRecord::Base
-  attr_accessible :raw_post, :txn_id, :payment_type, :payment_processed_at, :is_return, :processed, :pending
-
+class PaypalIpn < ApplicationRecord
   has_many :splits, :as => :item
-  has_many :transactions, :through => :splits
+  has_many :txns, :through => :splits
   belongs_to :order, class_name: "Transaction::Order"
 
   class Error < RuntimeError; end

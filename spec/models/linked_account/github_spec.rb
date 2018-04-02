@@ -4,15 +4,15 @@
 #
 #  id               :integer          not null, primary key
 #  person_id        :integer
-#  type             :string(255)
+#  type             :string
 #  uid              :integer          not null
-#  login            :string(255)
-#  first_name       :string(255)
-#  last_name        :string(255)
-#  email            :string(255)
-#  oauth_token      :string(255)
-#  oauth_secret     :string(255)
-#  permissions      :string(255)
+#  login            :string
+#  first_name       :string
+#  last_name        :string
+#  email            :string
+#  oauth_token      :string
+#  oauth_secret     :string
+#  permissions      :string
 #  synced_at        :datetime
 #  sync_in_progress :boolean          default(FALSE)
 #  followers        :integer          default(0)
@@ -21,10 +21,10 @@
 #  updated_at       :datetime
 #  account_balance  :decimal(10, 2)   default(0.0)
 #  anonymous        :boolean          default(FALSE), not null
-#  company          :string(255)
-#  location         :string(255)
+#  company          :string
+#  location         :string
 #  bio              :text
-#  cloudinary_id    :string(255)
+#  cloudinary_id    :string
 #  deleted_at       :datetime
 #
 # Indexes
@@ -124,21 +124,21 @@ describe LinkedAccount::Github::User do
 
       it 'should get cloudinary_id from github data' do
         cloudinary_id = LinkedAccount::Github.send(:get_cloudinary_id_from_github_data, github_data)
-        cloudinary_id.should be == "gravatar:#{github_data['gravatar_id']}"
+        expect(cloudinary_id).to eq("gravatar:#{github_data['gravatar_id']}")
       end
 
       it 'should update attributes' do
         linked_account = action[github_data]
-        linked_account.reload.should be_a LinkedAccount::Github::User
-        linked_account.uid.should be == github_data['id']
-        linked_account.login.should be == github_data['login']
-        linked_account.email.should be == github_data['email']
-        linked_account.first_name.should be == github_data['name']
-        linked_account.company.should be == github_data['company']
-        linked_account.location.should be == github_data['location']
-        linked_account.bio.should be == github_data['bio']
-        linked_account.followers.should be == github_data['followers']
-        linked_account.following.should be == github_data['following']
+        expect(linked_account.reload).to be_a LinkedAccount::Github::User
+        expect(linked_account.uid).to eq(github_data['id'])
+        expect(linked_account.login).to eq(github_data['login'])
+        expect(linked_account.email).to eq(github_data['email'])
+        expect(linked_account.first_name).to eq(github_data['name'])
+        expect(linked_account.company).to eq(github_data['company'])
+        expect(linked_account.location).to eq(github_data['location'])
+        expect(linked_account.bio).to eq(github_data['bio'])
+        expect(linked_account.followers).to eq(github_data['followers'])
+        expect(linked_account.following).to eq(github_data['following'])
       end
 
     end
@@ -151,21 +151,21 @@ describe LinkedAccount::Github::User do
 
       it 'should get cloudinary_id from github data' do
         cloudinary_id = LinkedAccount::Github.send(:get_cloudinary_id_from_github_data, github_data)
-        cloudinary_id.should be == "gravatar:#{github_data['gravatar_id']}"
+        expect(cloudinary_id).to eq("gravatar:#{github_data['gravatar_id']}")
       end
 
       it 'should update attributes' do
         linked_account = action[github_data]
-        linked_account.should be_a LinkedAccount::Github::Organization
-        linked_account.uid.should be == github_data['id']
-        linked_account.login.should be == github_data['login']
-        linked_account.email.should be == github_data['email']
-        linked_account.first_name.should be == github_data['name']
-        linked_account.company.should be == github_data['company']
-        linked_account.location.should be == github_data['location']
-        linked_account.bio.should be == github_data['bio']
-        linked_account.followers.should be == github_data['followers']
-        linked_account.following.should be == github_data['following']
+        expect(linked_account).to be_a LinkedAccount::Github::Organization
+        expect(linked_account.uid).to eq(github_data['id'])
+        expect(linked_account.login).to eq(github_data['login'])
+        expect(linked_account.email).to eq(github_data['email'])
+        expect(linked_account.first_name).to eq(github_data['name'])
+        expect(linked_account.company).to eq(github_data['company'])
+        expect(linked_account.location).to eq(github_data['location'])
+        expect(linked_account.bio).to eq(github_data['bio'])
+        expect(linked_account.followers).to eq(github_data['followers'])
+        expect(linked_account.following).to eq(github_data['following'])
       end
 
     end

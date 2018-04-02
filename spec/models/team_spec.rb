@@ -3,12 +3,12 @@
 # Table name: teams
 #
 #  id                               :integer          not null, primary key
-#  name                             :string(255)      not null
-#  slug                             :string(255)
-#  url                              :string(255)
+#  name                             :string           not null
+#  slug                             :string
+#  url                              :string
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
-#  cloudinary_id                    :string(255)
+#  cloudinary_id                    :string
 #  bio                              :text
 #  featured                         :boolean          default(FALSE), not null
 #  linked_account_id                :integer
@@ -47,18 +47,18 @@ describe Team do
 
   it "should require name" do
     team = Team.create
-    team.errors.should have_key :name
+    expect(team.errors).to have_key :name
   end
 
 
   it "should have an enterprise account" do
-    team.build_account.should be_a Account::Team
+    expect(team.build_account).to be_a Account::Team
   end
 
   it "should add person" do
-    lambda {
+    expect {
       team.add_member(person)
-    }.should change(team.members, :count).by 1
+    }.to change(team.members, :count).by 1
   end
 
   it "should default public to true" do
@@ -79,18 +79,18 @@ describe Team do
 
   it "should add tracker" do
     team.add_tracker(tracker)
-    team.trackers.should include tracker
+    expect(team.trackers).to include tracker
   end
 
   it "should set slug" do
-    lambda {
+    expect {
       team.update_attributes(slug: "adobe")
-    }.should change(team, :slug).to "adobe"
+    }.to change(team, :slug).to "adobe"
   end
 
   it "should send email to member when added to team" do
     new_member = create(:person)
-    new_member.should_receive(:send_email).with(:added_to_team, anything).once
+    expect(new_member).to receive(:send_email).with(:added_to_team, anything).once
     team.add_member(new_member)
   end
 
@@ -115,15 +115,15 @@ describe Team do
     before { team.add_tracker(tracker) }
 
     it "should remove tracker" do
-      lambda {
+      expect {
         team.trackers.delete(tracker)
-      }.should change(team.trackers, :count).by -1
+      }.to change(team.trackers, :count).by -1
     end
 
     it "should NOT delete the Tracker model" do
-      lambda {
+      expect {
         team.trackers.delete(tracker)
-      }.should_not change(Tracker, :count)
+      }.not_to change(Tracker, :count)
     end
   end
 
@@ -145,7 +145,7 @@ describe Team do
     end
 
     it "should send email on invite" do
-      TeamInvite.any_instance.should_receive(:send_email).once
+      expect_any_instance_of(TeamInvite).to receive(:send_email).once
       team.invite_member(member.email)
     end
   end
@@ -155,8 +155,8 @@ describe Team do
     let(:issue) { create(:issue, tracker: owned_tracker)}
 
     it "should check if the issue belongs to a tracker that the team owns" do
-      team.stub_chain(:owned_trackers, :pluck).and_return([owned_tracker.id])
-      team.manage_issue?(issue).should eq (true)
+      allow(team).to receive_message_chain(:owned_trackers, :pluck).and_return([owned_tracker.id])
+      expect(team.manage_issue?(issue)).to eq (true)
     end
   end
 
@@ -173,26 +173,26 @@ describe Team do
       team1.parent_tag_relations.where(child: company_tag).first_or_create.votes.create(person: person1, value: 1)
       team1.parent_tag_relations.where(child: lang_tag).first_or_create.votes.create(person: person1, value: 1)
       team2.parent_tag_relations.where(child: company_tag).first_or_create.votes.create(person: person1, value: 1)
-      TagRelation.count.should eq(3)
-      TagVote.count.should eq(3)
-      team1.parent_tag_relations.where(child: company_tag).first.weight.should eq(1)
-      team1.parent_tag_relations.where(child: lang_tag).first.weight.should eq(1)
-      team2.parent_tag_relations.where(child: company_tag).first.weight.should eq(1)
+      expect(TagRelation.count).to eq(3)
+      expect(TagVote.count).to eq(3)
+      expect(team1.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
+      expect(team1.parent_tag_relations.where(child: lang_tag).first.weight).to eq(1)
+      expect(team2.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
 
       # person 2 tags team 1 with languages
       team1.parent_tag_relations.where(child: lang_tag).first_or_create.votes.create(person: person2, value: 1)
-      TagRelation.count.should eq(3)
-      TagVote.count.should eq(4)
-      team1.parent_tag_relations.where(child: company_tag).first.weight.should eq(1)
-      team1.parent_tag_relations.where(child: lang_tag).first.weight.should eq(2)
-      team2.parent_tag_relations.where(child: company_tag).first.weight.should eq(1)
+      expect(TagRelation.count).to eq(3)
+      expect(TagVote.count).to eq(4)
+      expect(team1.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
+      expect(team1.parent_tag_relations.where(child: lang_tag).first.weight).to eq(2)
+      expect(team2.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
 
       # teams get merged and new team should have 1 vote for companies and 2 for lang
       Team.merge!(team1,team2)
-      TagRelation.count.should eq(2)
-      TagVote.count.should eq(3)
-      team1.parent_tag_relations.where(child: company_tag).first.weight.should eq(1)
-      team1.parent_tag_relations.where(child: lang_tag).first.weight.should eq(2)
+      expect(TagRelation.count).to eq(2)
+      expect(TagVote.count).to eq(3)
+      expect(team1.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
+      expect(team1.parent_tag_relations.where(child: lang_tag).first.weight).to eq(2)
     end
   end
 end

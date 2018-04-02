@@ -19,45 +19,45 @@ describe Api::V1::BountyClaimResponsesController do
 
   it "should respond with accept" do
     expect {
-      put :accept, params
+      put :accept, params: params
       assert_response :ok
     }.to change(person.bounty_claim_responses, :count).by 1
 
-    person.bounty_claim_responses.last.should be_accept
+    expect(person.bounty_claim_responses.last).to be_accept
   end
 
   it "should require description to reject" do
     expect {
-      delete :reject, params
+      delete :reject, params: params
       assert_response :unprocessable_entity
     }.not_to change(person.bounty_claim_responses, :count)
   end
 
   it "should respond with reject" do
     expect {
-      delete :reject, params.merge(description: "your code sux")
+      delete :reject, params: params.merge(description: "your code sux")
       assert_response :ok
     }.to change(person.bounty_claim_responses, :count).by 1
 
-    person.bounty_claim_responses.last.should be_reject
+    expect(person.bounty_claim_responses.last).to be_reject
   end
 
   it "should require auth to accept" do
     params.delete(:access_token)
-    put :accept, params
+    put :accept, params: params
     assert_response :unauthorized
   end
 
   it "should require auth to reject" do
     params.delete(:access_token)
-    delete :reject, params
+    delete :reject, params: params
     assert_response :unauthorized
   end
 
   it "should require person to place a bounty to respond" do
     expect {
       rebel_scum = create(:person)
-      delete :reject, params.merge(access_token: rebel_scum.create_access_token, description: "meep moop")
+      delete :reject, params: params.merge(access_token: rebel_scum.create_access_token, description: "meep moop")
       assert_response :bad_request
     }.not_to change(bounty_claim.bounty_claim_responses, :count)
   end

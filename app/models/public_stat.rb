@@ -13,10 +13,7 @@
 
 # NOTE: copied a bunch from AdminStat
 
-class PublicStat < ActiveRecord::Base
-
-  attr_accessible :daily_json, :weekly_json, :monthly_json, :quarterly_json
-
+class PublicStat < ApplicationRecord
   def self.update_singleton(force=false)
     if force || !singleton.is_up_to_date?
       singleton.update_raw_json

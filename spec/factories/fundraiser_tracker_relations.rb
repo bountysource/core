@@ -15,7 +15,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :fundraiser_tracker_relation do
     association :tracker, factory: :tracker
     association :fundraiser, factory: :fundraiser

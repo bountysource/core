@@ -12,11 +12,11 @@
 #  updated_at        :datetime         not null
 #  paid_at           :datetime
 #  anonymous         :boolean          default(FALSE), not null
-#  owner_type        :string(255)
+#  owner_type        :string
 #  owner_id          :integer
-#  bounty_expiration :string(255)
-#  upon_expiration   :string(255)
-#  promotion         :string(255)
+#  bounty_expiration :string
+#  upon_expiration   :string
+#  promotion         :string
 #  acknowledged_at   :datetime
 #  tweet             :boolean          default(FALSE), not null
 #  featured          :boolean          default(FALSE), not null
@@ -46,27 +46,27 @@ describe Bounty do
 
   it "should validate correctly" do
     bounty = Bounty.new amount: 5, issue: github_issue, person: person
-    bounty.valid?.should be_truthy
+    expect(bounty.valid?).to be_truthy
 
     bounty = Bounty.new amount: 5.50, issue: github_issue, person: person
-    bounty.valid?.should be_truthy
+    expect(bounty.valid?).to be_truthy
   end
 
   it "should clean up amount & display human-readable amount" do
     bounty = Bounty.new amount: 0, issue: github_issue, person: person
-    bounty.valid?.should be_falsey
+    expect(bounty.valid?).to be_falsey
     bounty = Bounty.new amount: 1, issue: github_issue, person: person
-    bounty.display_amount.should == '$1.00'
-    bounty.valid?.should be_falsey
+    expect(bounty.display_amount).to eq('$1.00')
+    expect(bounty.valid?).to be_falsey
     bounty = Bounty.new amount: 5, issue: github_issue, person: person
-    bounty.display_amount.should == '$5.00'
-    bounty.valid?.should be_truthy
+    expect(bounty.display_amount).to eq('$5.00')
+    expect(bounty.valid?).to be_truthy
     bounty = Bounty.new amount: 6, issue: github_issue, person: person
-    bounty.display_amount.should == '$6.00'
+    expect(bounty.display_amount).to eq('$6.00')
     bounty = Bounty.new amount: '10', issue: github_issue, person: person
-    bounty.display_amount.should == '$10.00'
+    expect(bounty.display_amount).to eq('$10.00')
     bounty.amount = '5,000'
-    bounty.display_amount.should == '$5000.00'
+    expect(bounty.display_amount).to eq('$5000.00')
   end
 
   #it "should have a default expiry of six months" do
@@ -90,16 +90,16 @@ describe Bounty do
     end
 
     it "should calculate $ paid since some date or ever" do
-      Bounty.paid.count.should == 5
-      Bounty.amount_paid_since(6.days.ago).to_f.should == 45 + 35 + 25 + 15 + 5
-      Bounty.amount_paid_since(3.days.ago).to_f.should ==      35 + 25 + 15 + 5
-      Bounty.amount_paid_since(1.day.ago).to_f.should  ==                15 + 5
-      Bounty.amount_paid_to_date.to_f.should           == 45 + 35 + 25 + 15 + 5
+      expect(Bounty.paid.count).to eq(5)
+      expect(Bounty.amount_paid_since(6.days.ago).to_f).to eq(45 + 35 + 25 + 15 + 5)
+      expect(Bounty.amount_paid_since(3.days.ago).to_f).to eq(35 + 25 + 15 + 5)
+      expect(Bounty.amount_paid_since(1.day.ago).to_f).to  eq(15 + 5)
+      expect(Bounty.amount_paid_to_date.to_f).to           eq(45 + 35 + 25 + 15 + 5)
     end
 
     it "should calculate it $ waiting to be claimed" do
-      Bounty.active.count.should == 3
-      Bounty.amount_unclaimed.to_f.should == 7 + 17 + 27
+      expect(Bounty.active.count).to eq(3)
+      expect(Bounty.amount_unclaimed.to_f).to eq(7 + 17 + 27)
     end
 
     it "should calculate # of unique backers" do
@@ -121,8 +121,8 @@ describe Bounty do
 
     it "should calculate issues with the largest Bounties" do
       big = Bounty.issues_with_largest_bounties.first(2)
-      big[0][1].to_i.should == 45
-      big[1][1].to_i.should == 35
+      expect(big[0][1].to_i).to eq(45)
+      expect(big[1][1].to_i).to eq(35)
     end
 
   end
@@ -135,15 +135,15 @@ describe Bounty do
 
     it "should email backers when a new bounty is added" do
       issue.bounties.create(person: backer, amount: 1337)
-      issue.backers.should include backer
-      issue.backers.each { |backer| backer.stub(:send_email).with(:bounty_increased, issue: issue).exactly(1).times }
+      expect(issue.backers).to include backer
+      issue.backers.each { |backer| allow(backer).to receive(:send_email).with(:bounty_increased, issue: issue).exactly(1).times }
     end
 
     it "should not email person twice if they are a backer and developer" do
       issue.bounties.create(person: developer, amount: 1337)
-      issue.backers.should include developer
-      issue.developers.should include developer
-      developer.stub(:send_email).with(:bounty_increased, issue: issue).exactly(1).times
+      expect(issue.backers).to include developer
+      expect(issue.developers).to include developer
+      allow(developer).to receive(:send_email).with(:bounty_increased, issue: issue).exactly(1).times
     end
   end
 
@@ -152,25 +152,25 @@ describe Bounty do
     let!(:backer) { create(:person_with_money_in_account, money_amount: 100) }
 
     it "should not have account after create" do
-      lambda {
+      expect {
         create(:issue)
-      }.should_not change(Account, :count)
+      }.not_to change(Account, :count)
     end
 
     it "should not lazy load account" do
-      lambda {
+      expect {
         issue.account
-      }.should_not change(Account, :count)
+      }.not_to change(Account, :count)
     end
 
     it "should create account on transaction" do
-      issue.account.should be_nil
+      expect(issue.account).to be_nil
 
-      lambda {
+      expect {
         create_bounty(100, issue: issue, person: backer)
-      }.should change(issue.transactions, :count).by 1
+      }.to change(issue.txns, :count).by 1
 
-      issue.reload.account.should be_an Account::IssueAccount
+      expect(issue.reload.account).to be_an Account::IssueAccount
     end
 
     describe "with account" do
@@ -179,8 +179,8 @@ describe Bounty do
       end
 
       it "should establish relationship to account" do
-        issue.account.should_not be_nil
-        issue.account.should be_an Account::IssueAccount
+        expect(issue.account).not_to be_nil
+        expect(issue.account).to be_an Account::IssueAccount
       end
     end
   end
@@ -195,11 +195,11 @@ describe Bounty do
 
     it "should not refund unless status is active" do
       bounty.status = Bounty::Status::REFUNDED
-      bounty.should_not be_refundable
+      expect(bounty).not_to be_refundable
 
-      lambda {
+      expect {
         bounty.refund!
-      }.should_not change(Transaction, :count)
+      }.not_to change(Transaction, :count)
     end
 
     #it "should not refund if there is a solution in dispute period" do
@@ -224,15 +224,15 @@ describe Bounty do
     #end
 
     it "should refund" do
-      lambda {
+      expect {
         bounty.refund!
-      }.should change(Transaction, :count).by 1
+      }.to change(Transaction, :count).by 1
     end
 
     it "should refund a team bounty" do
-      lambda {
+      expect {
         team_bounty.refund!
-      }.should change(Transaction, :count).by 1
+      }.to change(Transaction, :count).by 1
     end
 
     it "should get the splits right when owned by a person" do
@@ -243,40 +243,40 @@ describe Bounty do
       # pp transaction.splits
 
       # should have split taking money from issue account
-      transaction.splits.select { |s| s.amount == -bounty.amount && s.item == issue }.should be_present
+      expect(transaction.splits.select { |s| s.amount == -bounty.amount && s.item == issue }).to be_present
 
       # should have split putting money into backer's account
-      transaction.splits.select { |s| s.amount == +bounty.amount && s.item == backer }.should be_present
+      expect(transaction.splits.select { |s| s.amount == +bounty.amount && s.item == backer }).to be_present
     end
 
     it "should change issue account balance" do
-      lambda {
+      expect {
         bounty.refund!
         issue.reload
-      }.should change(issue, :account_balance).by -bounty.amount
+      }.to change(issue, :account_balance).by -bounty.amount
     end
 
     it "should change person account balance" do
-      lambda {
+      expect {
         bounty.refund!
         backer.reload
-      }.should change(backer, :account_balance).by +bounty.amount
+      }.to change(backer, :account_balance).by +bounty.amount
     end
 
     it "should update bounty to refunded status" do
-      lambda {
+      expect {
         bounty.refund!
         bounty.reload
-      }.should change(bounty, :status).to Bounty::Status::REFUNDED
+      }.to change(bounty, :status).to Bounty::Status::REFUNDED
     end
 
     it "should update displayed issue bounty total" do
       bounty.refund!
-      issue.reload.bounty_total.should be == 0
+      expect(issue.reload.bounty_total).to eq(0)
     end
 
     it "should email backer" do
-      backer.should_receive(:send_email).with(:bounty_refunded, bounty: bounty, transaction: kind_of(Transaction)).once
+      expect(backer).to receive(:send_email).with(:bounty_refunded, bounty: bounty, transaction: kind_of(Transaction)).once
       bounty.refund!
     end
 
@@ -287,16 +287,16 @@ describe Bounty do
         transaction = Transaction.last
 
         # should have split taking money from issue account
-        transaction.splits.select { |s| s.amount == -team_bounty.amount && s.item == team_issue }.should be_present
+        expect(transaction.splits.select { |s| s.amount == -team_bounty.amount && s.item == team_issue }).to be_present
         # should have split putting money into backer's account
-        transaction.splits.select { |s| s.amount == +team_bounty.amount && s.item == team }.should be_present
+        expect(transaction.splits.select { |s| s.amount == +team_bounty.amount && s.item == team }).to be_present
       end
 
       it "should change team account balance" do
-       lambda {
+       expect {
           team_bounty.refund!
           team.reload
-        }.should change(team, :account_balance).by +team_bounty.amount
+        }.to change(team, :account_balance).by +team_bounty.amount
       end
     end
   end
@@ -305,16 +305,16 @@ describe Bounty do
     let(:issue) { create(:issue) }
 
     it "should be 0" do
-      issue.bounty_total.should be == 0
+      expect(issue.bounty_total).to eq(0)
     end
 
     it "should still be 0" do
       issue.update_bounty_total
-      issue.bounty_total.should be == 0
+      expect(issue.bounty_total).to eq(0)
     end
 
     it "should trigger bounty_total update" do
-      issue.should_receive(:update_bounty_total).once
+      expect(issue).to receive(:update_bounty_total).once
       create_bounty(100, issue: issue)
     end
   end

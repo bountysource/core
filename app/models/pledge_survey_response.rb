@@ -15,10 +15,7 @@
 #  index_pledge_survey_responses_on_reward_id  (reward_id)
 #
 
-class PledgeSurveyResponse < ActiveRecord::Base
-
-  attr_accessible :person, :reward, :survey_response
-
+class PledgeSurveyResponse < ApplicationRecord
   belongs_to :person
   belongs_to :reward
   has_one :fundraiser, through: :reward

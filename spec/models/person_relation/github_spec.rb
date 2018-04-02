@@ -3,7 +3,7 @@
 # Table name: person_relations
 #
 #  id               :integer          not null, primary key
-#  type             :string(255)      not null
+#  type             :string           not null
 #  person_id        :integer          not null
 #  target_person_id :integer          not null
 #  created_at       :datetime         not null
@@ -24,19 +24,19 @@ describe PersonRelation::Github do
   let(:person_relation_github) { create(:person_relation_github, person: person, target_person: target_person) }
 
   it "should link person to target person" do
-    lambda {
+    expect {
       r = PersonRelation::Github.create person: person, target_person: target_person
-      r.person.should == person
-      r.target_person.should == target_person
-    }.should change(PersonRelation::Github, :count).by 1
+      expect(r.person).to eq(person)
+      expect(r.target_person).to eq(target_person)
+    }.to change(PersonRelation::Github, :count).by 1
   end
 
   it "should make target appear in person's friend list" do
-    person_relation_github.person.friends.should include target_person
+    expect(person_relation_github.person.friends).to include target_person
   end
 
   it "should not make person appear in target person's friend list" do
-    person_relation_github.target_person.friends.should_not include person
+    expect(person_relation_github.target_person.friends).not_to include person
   end
 
   describe "finding friends" do
@@ -47,37 +47,37 @@ describe PersonRelation::Github do
 
     before do
       # fake the API response from Github
-      person.github_account.stub(:following_logins) do
+      allow(person.github_account).to receive(:following_logins) do
         # turn the people's linked accounts into hashes resembling those returned from facebook API
         [target_person1, target_person2].map(&:github_account).map(&:login)
       end
     end
 
     it "should create the correct friend relations" do
-      lambda {
+      expect {
         PersonRelation::Github.find_or_create_friends person
         person.reload
-      }.should change(PersonRelation::Github, :count).by 2
+      }.to change(PersonRelation::Github, :count).by 2
 
-      person.friends.should     include target_person1
-      person.friends.should     include target_person2
-      person.friends.should_not include target_person3
+      expect(person.friends).to     include target_person1
+      expect(person.friends).to     include target_person2
+      expect(person.friends).not_to include target_person3
     end
 
     it "should create one-way friendships" do
       PersonRelation::Github.find_or_create_friends person
       person.reload
 
-      target_person1.friends.should be_empty
-      target_person2.friends.should be_empty
-      target_person3.friends.should be_empty
+      expect(target_person1.friends).to be_empty
+      expect(target_person2.friends).to be_empty
+      expect(target_person3.friends).to be_empty
     end
 
     it "should not create duplicate relations" do
-      lambda {
+      expect {
         10.times { PersonRelation::Github.find_or_create_friends person }
         person.reload
-      }.should change(PersonRelation::Github, :count).by 2
+      }.to change(PersonRelation::Github, :count).by 2
     end
 
     describe "adding new friends after initial load" do
@@ -87,7 +87,7 @@ describe PersonRelation::Github do
 
       before do
         # fake the API response from Facebook for initial check
-        person.github_account.stub(:following_logins).and_return [old_friend.github_account.login]
+        allow(person.github_account).to receive(:following_logins).and_return [old_friend.github_account.login]
 
         # initial adding of friends, won't pickup new_user because there is no associated github_account yet
         PersonRelation::Github.find_or_create_friends person
@@ -98,22 +98,22 @@ describe PersonRelation::Github do
         new_friend.reload
 
         # now, update the mock API response
-        person.github_account.stub(:following_logins) do
+        allow(person.github_account).to receive(:following_logins) do
           [old_friend, new_friend].map(&:github_account).map(&:login)
         end
       end
 
       it "should ensure that new user is not a friend yet" do
-        person.friends.should     include old_friend
-        person.friends.should_not include new_friend
+        expect(person.friends).to     include old_friend
+        expect(person.friends).not_to include new_friend
       end
 
       it "should add new user as a friend" do
         PersonRelation::Github.find_or_create_friends person
         person.reload
 
-        person.friends.should include new_friend
-        new_friend.friends.should_not include person
+        expect(person.friends).to include new_friend
+        expect(new_friend.friends).not_to include person
       end
     end
   end

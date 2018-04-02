@@ -3,7 +3,7 @@
 # Table name: languages
 #
 #  id            :integer          not null, primary key
-#  name          :string(255)      not null
+#  name          :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  search_weight :integer
@@ -13,10 +13,7 @@
 #  index_languages_on_name  (name) UNIQUE
 #
 
-class Language < ActiveRecord::Base
-
-  attr_accessible :name, :search_weight
-
+class Language < ApplicationRecord
   has_many :tracker_relations, class_name: "TrackerLanguageRelation"
   has_many :trackers, through: :tracker_relations
 

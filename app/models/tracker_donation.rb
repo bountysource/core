@@ -10,12 +10,10 @@
 #  updated_at :datetime         not null
 #
 
-class TrackerDonation < ActiveRecord::Base
-  attr_accessible :amount, :person, :tracker
-
+class TrackerDonation < ApplicationRecord
   belongs_to :person
   belongs_to :tracker
 
   has_many :splits, :as => :item
-  has_many :transactions, :through => :splits
+  has_many :txns, :through => :splits
 end

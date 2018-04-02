@@ -8,9 +8,9 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  note            :text
-#  url             :string(255)
+#  url             :string
 #  completion_date :datetime
-#  status          :string(255)      default("stopped"), not null
+#  status          :string           default("stopped"), not null
 #
 # Indexes
 #
@@ -19,9 +19,7 @@
 #  index_solutions_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
 
-class Solution < ActiveRecord::Base
-  attr_accessible :person, :issue, :url, :completion_date, :note, :status
-
+class Solution < ApplicationRecord
   validates :issue, presence: true
   validates :person, presence: true
   validates_uniqueness_of :issue_id, scope: [:person_id]

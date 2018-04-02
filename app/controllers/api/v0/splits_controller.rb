@@ -9,7 +9,7 @@ class Api::V0::SplitsController < Api::V0::BaseController
       end_date = Time.zone.parse(params[:end_date]).beginning_of_day
       date_range = start_date...end_date
 
-      @splits = Split.includes(:transaction).where(created_at: date_range, account_id: account.id).uniq
+      @splits = Split.includes(:txn).where(created_at: date_range, account_id: account.id).uniq
 
       render "api/v0/splits/index"
     end

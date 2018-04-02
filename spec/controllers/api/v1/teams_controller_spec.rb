@@ -11,31 +11,31 @@ describe Api::V1::TeamsController do
   end
 
   it "should require name to create team" do
-    lambda {
-      post :create, params.merge(slug: "beep-boop")
+    expect {
+      post :create, params: params.merge(slug: "beep-boop")
       assert_response :unprocessable_entity
-    }.should_not change(Team, :count)
+    }.not_to change(Team, :count)
   end
 
   it "should require slug to create team" do
-    lambda {
-      post :create, params.merge(name: "Beep Boop")
+    expect {
+      post :create, params: params.merge(name: "Beep Boop")
       assert_response :unprocessable_entity
-    }.should_not change(Team, :count)
+    }.not_to change(Team, :count)
   end
 
   it "should require auth to create team" do
-    lambda {
+    expect {
       post :create
       assert_response :unauthorized
-    }.should_not change(Team, :count)
+    }.not_to change(Team, :count)
   end
 
   it "should create team" do
-    lambda {
-      post :create, params.merge(name: "Adobe", slug: "adobe")
+    expect {
+      post :create, params: params.merge(name: "Adobe", slug: "adobe")
       assert_response :created
-    }.should change(Team, :count).by 1
+    }.to change(Team, :count).by 1
   end
 
   context "with team" do
@@ -48,20 +48,20 @@ describe Api::V1::TeamsController do
     end
 
     it "should show" do
-      get :show, params
+      get :show, params: params
       assert_response :ok
 
-      response_data["name"].should be == team.name
-      response_data["id"].should be == team.id
-      response_data["slug"].should be == team.slug
-      response_data["url"].should be == team.url
-      response_data["image_url"].should be == team.image_url
+      expect(response_data["name"]).to eq(team.name)
+      expect(response_data["id"]).to eq(team.id)
+      expect(response_data["slug"]).to eq(team.slug)
+      expect(response_data["url"]).to eq(team.url)
+      expect(response_data["image_url"]).to eq(team.image_url)
     end
 
     it "should show trackers" do
-      get :show, params
-      response_data.should have_key "trackers"
-      response_data["trackers"].length.should be == team.trackers.count
+      get :show, params: params
+      expect(response_data).to have_key "trackers"
+      expect(response_data["trackers"].length).to eq(team.trackers.count)
     end
 
     context "as admin" do
@@ -75,7 +75,7 @@ describe Api::V1::TeamsController do
         name = "Taco Corp."
         slug = "taco-corp"
         url = "https://www.dallascowbos.com/"
-        put :update, params.merge(
+        put :update, params: params.merge(
           name: name,
           slug: slug,
           url: url,
@@ -84,26 +84,26 @@ describe Api::V1::TeamsController do
         assert_response :ok
         team.reload
 
-        team.name.should be == name
-        team.slug.should be == slug
-        team.url.should be == url
-        team.accepts_public_payins.should be_falsey
+        expect(team.name).to eq(name)
+        expect(team.slug).to eq(slug)
+        expect(team.url).to eq(url)
+        expect(team.accepts_public_payins).to be_falsey
       end
 
       it "should require unique slug on update" do
         # create another team, give it a slug
         other_team = create(:team, slug: "adobe")
 
-        lambda {
-          put :update, params.merge(slug: other_team.slug)
+        expect {
+          put :update, params: params.merge(slug: other_team.slug)
           assert_response :unprocessable_entity
           team.reload
-        }.should_not change(team, :slug)
+        }.not_to change(team, :slug)
       end
 
       it "should add tracker" do
         expect {
-          post :add_tracker, params.merge(tracker_id: tracker.id)
+          post :add_tracker, params: params.merge(tracker_id: tracker.id)
           assert_response :ok
           team.reload
         }.to change(team.trackers, :count).by 1
@@ -114,18 +114,18 @@ describe Api::V1::TeamsController do
         new_tracker = create(:tracker)
         team.add_tracker(new_tracker)
 
-        lambda {
-          delete :remove_tracker, params.merge(tracker_id: new_tracker.id)
+        expect {
+          delete :remove_tracker, params: params.merge(tracker_id: new_tracker.id)
           assert_response :ok
           team.reload
-        }.should change(team.trackers, :count).by -1
+        }.to change(team.trackers, :count).by -1
       end
 
       it "should add member" do
         new_member = create(:person)
 
         expect {
-          post :add_member, params.merge(email: new_member.email)
+          post :add_member, params: params.merge(email: new_member.email)
           assert_response :ok
         }.to change(team.members, :count).by 1
       end
@@ -135,27 +135,27 @@ describe Api::V1::TeamsController do
         before { team.add_member(member) }
 
         it "should update member to admin" do
-          put :update_member, params.merge(member_id: member.id, admin: true)
+          put :update_member, params: params.merge(member_id: member.id, admin: true)
           assert_response :ok
 
           relation = team.relation_for_owner(member)
-          relation.reload.should be_admin
+          expect(relation.reload).to be_admin
         end
 
         it "should update member to developer" do
-          put :update_member, params.merge(member_id: member.id, developer: true)
+          put :update_member, params: params.merge(member_id: member.id, developer: true)
           assert_response :ok
 
           relation = team.relation_for_owner(member)
-          relation.reload.should be_developer
+          expect(relation.reload).to be_developer
         end
 
         it "should update member to not public" do
-          put :update_member, params.merge(member_id: member.id, public: false)
+          put :update_member, params: params.merge(member_id: member.id, public: false)
           assert_response :ok
 
           relation = team.relation_for_owner(member)
-          relation.reload.should_not be_public
+          expect(relation.reload).not_to be_public
         end
       end
     end
@@ -167,7 +167,7 @@ describe Api::V1::TeamsController do
 
       it "should update" do
         expect {
-          put :update, params.merge(name: "I can has update?")
+          put :update, params: params.merge(name: "I can has update?")
           assert_response :ok
         }.not_to change(team, :name)
       end
@@ -176,7 +176,7 @@ describe Api::V1::TeamsController do
         rebel_scum = create(:person)
 
         expect {
-          post :add_member, params.merge(email: rebel_scum.email)
+          post :add_member, params: params.merge(email: rebel_scum.email)
           assert_response :forbidden
         }.not_to change(team.members, :length)
       end
@@ -187,23 +187,23 @@ describe Api::V1::TeamsController do
 
         it "should not remove glorious leader" do
           expect {
-            delete :remove_member, params.merge(member_id: glorious_leader.id)
+            delete :remove_member, params: params.merge(member_id: glorious_leader.id)
             assert_response :forbidden
           }.not_to change(team.members, :count)
         end
 
         it "should not update glorious leader's permissions" do
-          delete :remove_member, params.merge(member_id: glorious_leader.id)
+          delete :remove_member, params: params.merge(member_id: glorious_leader.id)
           assert_response :forbidden
 
           glorious_leader.reload
-          team.relation_for_owner(glorious_leader).should be_admin
+          expect(team.relation_for_owner(glorious_leader)).to be_admin
         end
       end
 
       it "should add tracker" do
         expect {
-          post :add_tracker, params.merge(tracker_id: tracker.id)
+          post :add_tracker, params: params.merge(tracker_id: tracker.id)
           assert_response :ok
         }.not_to change(team.trackers, :length)
       end
@@ -213,7 +213,7 @@ describe Api::V1::TeamsController do
         team.add_tracker(new_tracker)
 
         expect {
-          delete :remove_tracker, params.merge(tracker_id: new_tracker.id)
+          delete :remove_tracker, params: params.merge(tracker_id: new_tracker.id)
           assert_response :ok
         }.not_to change(team.trackers, :length)
       end
@@ -226,7 +226,7 @@ describe Api::V1::TeamsController do
 
       it "should not update" do
         expect {
-          put :update, params.merge(name: "I can has update?")
+          put :update, params: params.merge(name: "I can has update?")
           assert_response :forbidden
         }.not_to change(team, :name)
       end
@@ -235,7 +235,7 @@ describe Api::V1::TeamsController do
         rebel_scum = create(:person)
 
         expect {
-          post :add_member, params.merge(email: rebel_scum.email)
+          post :add_member, params: params.merge(email: rebel_scum.email)
           assert_response :forbidden
         }.not_to change(team.members, :length)
       end
@@ -246,23 +246,23 @@ describe Api::V1::TeamsController do
 
         it "should not remove glorious leader" do
           expect {
-            delete :remove_member, params.merge(member_id: glorious_leader.id)
+            delete :remove_member, params: params.merge(member_id: glorious_leader.id)
             assert_response :forbidden
           }.not_to change(team.members, :count)
         end
 
         it "should not update glorious leader's permissions" do
-          delete :remove_member, params.merge(member_id: glorious_leader.id)
+          delete :remove_member, params: params.merge(member_id: glorious_leader.id)
           assert_response :forbidden
 
           glorious_leader.reload
-          team.relation_for_owner(glorious_leader).should be_admin
+          expect(team.relation_for_owner(glorious_leader)).to be_admin
         end
       end
 
       it "should not add tracker" do
         expect {
-          post :add_tracker, params.merge(tracker_id: tracker.id)
+          post :add_tracker, params: params.merge(tracker_id: tracker.id)
           assert_response :forbidden
         }.not_to change(team.trackers, :length)
       end
@@ -272,7 +272,7 @@ describe Api::V1::TeamsController do
         team.add_tracker(new_tracker)
 
         expect {
-          delete :remove_tracker, params.merge(tracker_id: new_tracker.id)
+          delete :remove_tracker, params: params.merge(tracker_id: new_tracker.id)
           assert_response :forbidden
         }.not_to change(team.trackers, :length)
       end
