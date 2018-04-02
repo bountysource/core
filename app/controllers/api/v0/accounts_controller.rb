@@ -38,7 +38,7 @@ class Api::V0::AccountsController < Api::V0::BaseController
     }
 
     # standalone accounts are objects, and item accounts are classes.
-    accounts[:standalone].map! do |account|
+    accounts[:standalone].to_a.map! do |account|
       {
         id:       account.id,
         type:     account.class.name,
@@ -46,7 +46,7 @@ class Api::V0::AccountsController < Api::V0::BaseController
       }
     end
 
-    accounts[:item].map! do |klass|
+    accounts[:item].to_a.map! do |klass|
       {
         type:     klass.name,
         count:    klass.count,
