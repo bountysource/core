@@ -31,8 +31,11 @@ class Api::V2::TagsController < Api::BaseController
       query = query.order('sum(weight) desc, max(tag_relations.updated_at) desc')
       tagged_withs = query.pluck('child_id, child_type, sum(weight)').to_a
 
-      team_hash = Team.where(id: tagged_withs.select { |child_id, child_type, weight| child_type=='Team' }).inject({}) { |hash,team| hash[team.id] = team; hash }
-      tag_hash = Tag.where(id: tagged_withs.select { |child_id, child_type, weight| child_type=='Tag' }).inject({}) { |hash,tag| hash[tag.id] = tag; hash }
+      team_ids = tagged_withs.select { |child_id, child_type, weight| child_type=='Team' }.map(&:first)
+      team_hash = Team.where(id: team_ids).inject({}) { |hash,team| hash[team.id] = team; hash }
+
+      tag_ids = tagged_withs.select { |child_id, child_type, weight| child_type=='Tag' }.map(&:first)
+      tag_hash = Tag.where(id: tag_ids).inject({}) { |hash,tag| hash[tag.id] = tag; hash }
 
       @collection = tagged_withs.map { |child_id,child_type,weight| child_type=='Tag' ? tag_hash[child_id] : team_hash[child_id] }
 
