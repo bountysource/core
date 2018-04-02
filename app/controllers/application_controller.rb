@@ -6,17 +6,17 @@ class ApplicationController < ActionController::Base
   # ensure_security_headers
 
   # do this before JSONP callback wrapper so head(:ok) runs
-  before_filter :set_access_control_headers
-  before_filter :set_do_not_cache_headers
+  before_action :set_access_control_headers
+  before_action :set_do_not_cache_headers
 
   # allow JSONP callback parameter
-  around_filter :response_to_jsonp
+  around_action :response_to_jsonp
 
-  after_filter :update_person_last_seen_at
+  after_action :update_person_last_seen_at
 
-  before_filter :find_person
+  before_action :find_person
 
-  before_filter do
+  before_action do
     # default per page
     params[:per_page] ||= 50
   end

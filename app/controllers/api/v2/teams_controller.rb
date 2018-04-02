@@ -3,9 +3,9 @@ class Api::V2::TeamsController < Api::BaseController
   include Api::V2::BaseHelper
   include Api::V2::PaginationHelper
 
-  before_filter :require_auth, only: [:update]
-  before_filter :require_team, only: [:update, :show]
-  before_filter :parse_options
+  before_action :require_auth, only: [:update]
+  before_action :require_team, only: [:update, :show]
+  before_action :parse_options
 
   def index
     @collection = ::Team.all

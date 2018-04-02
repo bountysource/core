@@ -4,8 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  team_id    :integer          not null
-#  token      :string(255)      not null
-#  email      :string(255)
+#  token      :string           not null
+#  email      :string
 #  admin      :boolean          default(FALSE), not null
 #  developer  :boolean          default(FALSE), not null
 #  public     :boolean          default(TRUE), not null
@@ -26,12 +26,12 @@ describe TeamInvite do
 
   it "should generate token when created" do
     invite = create(:team_invite, team: team)
-    invite.token.should be_present
+    expect(invite.token).to be_present
   end
 
   it "should not validate token" do
-    TeamInvite.token_valid?(nil).should_not be_truthy
-    TeamInvite.token_valid?("such invalid wow").should_not be_truthy
+    expect(TeamInvite.token_valid?(nil)).not_to be_truthy
+    expect(TeamInvite.token_valid?("such invalid wow")).not_to be_truthy
   end
 
   describe "with invite created" do
@@ -51,7 +51,7 @@ describe TeamInvite do
     end
 
     it "should validate token" do
-      TeamInvite.token_valid?(invite.token).should be_truthy
+      expect(TeamInvite.token_valid?(invite.token)).to be_truthy
     end
 
     it "should add person to team" do

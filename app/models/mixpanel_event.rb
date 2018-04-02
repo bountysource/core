@@ -4,8 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  person_id   :integer
-#  distinct_id :string(255)
-#  event       :string(255)
+#  distinct_id :string
+#  event       :string
 #  created_at  :datetime
 #  payload     :json
 #
@@ -16,9 +16,7 @@
 #  index_mixpanel_events_on_person_id    (person_id)
 #
 
-class MixpanelEvent < ActiveRecord::Base
-  attr_accessible :distinct_id, :event, :payload, :person_id
-
+class MixpanelEvent < ApplicationRecord
   belongs_to :person
 
   # flexible method that does the dirty work

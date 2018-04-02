@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  solution_id :integer          not null
-#  type        :string(255)      not null
+#  type        :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
@@ -16,7 +16,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :solution_event do
     association :solution, factory: :solution
     

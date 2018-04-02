@@ -10,10 +10,7 @@
 #  updated_at   :datetime
 #
 
-class TeamBountyHunter < ActiveRecord::Base
-
-  attr_accessible :person, :team, :opted_out_at
-
+class TeamBountyHunter < ApplicationRecord
   belongs_to :person
   belongs_to :team
 

@@ -1,6 +1,6 @@
 class Api::V1::NotificationsController < ApplicationController
 
-  before_filter :require_auth
+  before_action :require_auth
 
   def friends
     # get the ids of all of your friends to speed up queries

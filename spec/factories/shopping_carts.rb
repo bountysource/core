@@ -4,11 +4,11 @@
 #
 #  id                :integer          not null, primary key
 #  person_id         :integer
-#  items             :text             default("[]"), not null
+#  items             :text             default([]), not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  order_id          :integer
-#  uid               :string(255)
+#  uid               :string
 #  payment_method_id :integer
 #  status            :text             default("draft"), not null
 #
@@ -19,7 +19,7 @@
 #  index_shopping_carts_on_uid       (uid)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :shopping_cart, class: ShoppingCart do
     #association :payment_method, factory: :payment_method

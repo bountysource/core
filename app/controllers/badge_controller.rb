@@ -1,20 +1,20 @@
 class BadgeController < ApplicationController
 
-  before_filter :set_content_type
+  before_action :set_content_type
 
   rescue_from BadgeFactory::ParseError, KeyError do |e|
     ::NewRelic::Agent.notice_error(e)
-    render nothing: true, status: :unprocessable_entity
+    head :unprocessable_entity
   end
 
   rescue_from ActiveRecord::RecordNotFound do |e|
     ::NewRelic::Agent.notice_error(e)
-    render nothing: true, status: :not_found
+    head :not_found
   end
 
   rescue_from Timeout::Error do |e|
     ::NewRelic::Agent.notice_error(e)
-    render nothing: true, status: :not_found
+    head :not_found
   end
 
   def issue

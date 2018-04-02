@@ -3,20 +3,17 @@
 # Table name: tags
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)      not null
+#  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  image_url  :string(255)
+#  image_url  :string
 #
 # Indexes
 #
 #  index_tags_on_name  (name) UNIQUE
 #
 
-class Tag < ActiveRecord::Base
-
-  attr_accessible :name, :item
-
+class Tag < ApplicationRecord
   has_many :child_tag_relations, as: :child, class_name: 'TagRelation'
 
   ROUTE_REGEX = /[a-zA-Z0-9\.\-_\+#]+/

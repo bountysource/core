@@ -18,8 +18,7 @@ class Api::V0::PeopleController < Api::V0::BaseController
 
   def update
     @person = Person.find_by_id params[:id]
-    attrs = params.select { |k,_| Person.accessible_attributes.include? k }
-    @person.update_attributes!(attrs) unless attrs.empty?
+    @person.update_attributes!(person_params)
 
     render "api/v1/people/show_admin"
   end
@@ -37,5 +36,11 @@ class Api::V0::PeopleController < Api::V0::BaseController
   def access_tokens
     @tokens = AccessToken.order('created_at desc').includes(:person)
     render "api/v0/access_tokens"
+  end
+
+private
+  
+  def person_params
+    params.permit(:first_name, :last_name, :email, :display_name, :bio, :public_email, :location, :url, :company)
   end
 end

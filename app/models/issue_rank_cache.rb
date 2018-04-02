@@ -14,9 +14,7 @@
 #  index_issue_rank_caches_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
 
-class IssueRankCache < ActiveRecord::Base
-  attr_accessible :issue_id, :person_id, :rank
-
+class IssueRankCache < ApplicationRecord
   validates :issue_id, presence: true
   validates :person_id, presence: true, uniqueness: { scope: :issue_id}
   validates :rank, presence: true

@@ -3,10 +3,10 @@
 # Table name: tags
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)      not null
+#  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  image_url  :string(255)
+#  image_url  :string
 #
 # Indexes
 #
@@ -18,9 +18,9 @@ require 'spec_helper'
 describe Tag do
 
   it "should create a tag" do
-    lambda {
+    expect {
       create(:tag)
-    }.should change(Tag, :count).by 1
+    }.to change(Tag, :count).by 1
   end
 
   it "should enforce name uniqueness" do
@@ -30,8 +30,8 @@ describe Tag do
     # build a tag with the same name
     tag = build(:tag, name: 'derp')
 
-    tag.should_not be_valid
-    tag.errors.should have_key :name
+    expect(tag).not_to be_valid
+    expect(tag.errors).to have_key :name
   end
 
 end

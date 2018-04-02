@@ -7,11 +7,11 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  number                   :integer
-#  url                      :string(255)      not null
+#  url                      :string           not null
 #  title                    :text
-#  labels                   :string(255)
+#  labels                   :string
 #  code                     :boolean          default(FALSE)
-#  state                    :string(255)
+#  state                    :string
 #  body                     :text
 #  remote_updated_at        :datetime
 #  remote_id                :integer
@@ -23,20 +23,20 @@
 #  comment_count            :integer          default(0)
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  bounty_total             :decimal(10, 2)   default(0.0), not null
-#  type                     :string(255)      default("Issue"), not null
-#  remote_type              :string(255)
-#  priority                 :string(255)
-#  milestone                :string(255)
+#  type                     :string           default("Issue"), not null
+#  remote_type              :string
+#  priority                 :string
+#  milestone                :string
 #  can_add_bounty           :boolean          default(FALSE), not null
 #  accepted_bounty_claim_id :integer
-#  author_name              :string(255)
-#  owner                    :string(255)
+#  author_name              :string
+#  owner                    :string
 #  paid_out                 :boolean          default(FALSE), not null
 #  participants_count       :integer
 #  thumbs_up_count          :integer
 #  votes_count              :integer
 #  watchers_count           :integer
-#  severity                 :string(255)
+#  severity                 :string
 #  delta                    :boolean          default(TRUE), not null
 #  author_linked_account_id :integer
 #  solution_started         :boolean          default(FALSE), not null
@@ -61,8 +61,6 @@
 #
 
 class PhpTracker::Issue < ::Issue
-  attr_accessible :state, :priority, :milestone, :remote_type, :number
-
   belongs_to :tracker, class_name: "PhpTracker::Tracker", foreign_key: :tracker_id
 
   def remote_sync_if_necessary(options={})

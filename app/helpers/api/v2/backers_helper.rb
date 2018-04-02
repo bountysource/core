@@ -56,7 +56,7 @@ module Api::V2::BackersHelper
     sql = "SELECT owner_type, owner_id, sum(amount) as amount, max(created_at) as last_activity_at FROM ( (#{pledges.to_sql}) UNION (#{bounties.to_sql}) UNION (#{team_payins.to_sql}) ) as T1 #{team_sql} GROUP BY owner_type, owner_id"
 
     # Run query once to get size of collection...
-    collection = ActiveRecord::Base.connection.select_all sql
+    collection = ApplicationRecord.connection.select_all sql
 
     # Apply order to SQL
     params[:order] ||= '+amount'
@@ -76,7 +76,7 @@ module Api::V2::BackersHelper
     sql += " LIMIT #{pagination_values[:per_page]} OFFSET #{pagination_values[:offset]}"
 
     # Fetch that query
-    rows = ActiveRecord::Base.connection.select_all(sql).to_a
+    rows = ApplicationRecord.connection.select_all(sql).to_a
 
     # In order to add the display_name of owners, collect IDs by owner_type,
     # Then perform queries per each owner_type

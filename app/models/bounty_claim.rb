@@ -6,7 +6,7 @@
 #  person_id   :integer          not null
 #  issue_id    :integer          not null
 #  number      :integer
-#  code_url    :string(255)
+#  code_url    :string
 #  description :text
 #  collected   :boolean
 #  disputed    :boolean          default(FALSE), not null
@@ -23,9 +23,7 @@
 #  index_bounty_claims_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
 
-class BountyClaim < ActiveRecord::Base
-  attr_accessible :code_url, :description, :person, :issue, :collected, :rejected, :disputed, :amount
-
+class BountyClaim < ApplicationRecord
   belongs_to :person
   belongs_to :issue
   has_many :bounty_claim_responses
@@ -83,7 +81,7 @@ class BountyClaim < ActiveRecord::Base
   # cannot destroy an accepted claim!:
   before_destroy do
     errors.add(:base, "Cannot destroy accepted bounty claim") if collected?
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   class BountyClaimError < StandardError; end
@@ -302,7 +300,7 @@ class BountyClaim < ActiveRecord::Base
   def payout!
     transaction = nil
 
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       lock! # Protect against potential race conditions
 
       raise PayoutError, 'already paid out' if paid_out?

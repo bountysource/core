@@ -7,7 +7,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  audited            :boolean
-#  type               :string(255)      default("Transaction"), not null
+#  type               :string           default("Transaction"), not null
 #  person_id          :integer
 #  checkout_method_id :integer
 #  gross              :decimal(, )
@@ -35,10 +35,7 @@
 
 # See the Account and Split docs for more detail.
 
-class Transaction < ActiveRecord::Base
-
-  attr_accessible :description, :splits, :audited, :person, :checkout_method, :gross, :fee, :items, :liability
-
+class Transaction < ApplicationRecord
   has_many :splits
   belongs_to :person
   has_one :shopping_cart, foreign_key: 'order_id'
@@ -74,7 +71,7 @@ class Transaction < ActiveRecord::Base
       errors.add :splits, "must be empty"
     end
 
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   # create a Transaction model from any number of Splits

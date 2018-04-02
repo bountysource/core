@@ -6,7 +6,7 @@
 #  person_id   :integer          not null
 #  issue_id    :integer          not null
 #  number      :integer
-#  code_url    :string(255)
+#  code_url    :string
 #  description :text
 #  collected   :boolean
 #  disputed    :boolean          default(FALSE), not null
@@ -25,7 +25,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :bounty_claim do
     association :issue, factory: :closed_issue
     association :person

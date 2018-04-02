@@ -46,7 +46,7 @@ describe TrackerPlugin::GH do
     let!(:plugin) { create(:github_plugin, person: person, tracker: tracker) }
 
     it "should have linked account through person" do
-      plugin.linked_account.should be == linked_account
+      expect(plugin.linked_account).to eq(linked_account)
     end
 
     it "should not create two plugins for one tracker" do

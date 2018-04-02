@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  number        :integer
-#  title         :string(255)
+#  title         :string
 #  body          :text
 #  published     :boolean          default(FALSE), not null
 #  published_at  :datetime
@@ -19,7 +19,7 @@
 #  index_team_updates_on_team_id_and_number  (team_id,number) UNIQUE
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team_update, class: TeamUpdate do
     association :team, factory: :team
     body "Howdy y'all! I just added a few new rewards.\nCome check them out, there are only 10 of each!"

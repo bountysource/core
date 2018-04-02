@@ -1,6 +1,6 @@
 RSpec.shared_context 'api v2 controller' do
   let(:params) do
-    { vendor_string: 'bountysource' }
+    {}
   end
 
   before do

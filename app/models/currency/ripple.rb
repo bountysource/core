@@ -3,7 +3,7 @@
 # Table name: currencies
 #
 #  id         :integer          not null, primary key
-#  type       :string(255)      not null
+#  type       :string           not null
 #  value      :decimal(, )      not null
 #  created_at :datetime
 #  updated_at :datetime

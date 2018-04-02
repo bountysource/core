@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :account do
     factory :fundraiser_account, class: Account::Fundraiser do
       association :item, factory: :fundraiser

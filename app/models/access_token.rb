@@ -4,9 +4,9 @@
 #
 #  id         :integer          not null, primary key
 #  person_id  :integer          not null
-#  token      :string(255)      not null
-#  remote_ip  :string(255)
-#  user_agent :string(255)
+#  token      :string           not null
+#  remote_ip  :string
+#  user_agent :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -16,10 +16,7 @@
 #  index_access_tokens_on_token      (token) UNIQUE
 #
 
-class AccessToken < ActiveRecord::Base
-
-  attr_accessible :remote_ip, :user_agent
-
+class AccessToken < ApplicationRecord
   belongs_to :person
 
   before_create :token
