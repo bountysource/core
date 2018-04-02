@@ -2,7 +2,7 @@ language: ruby
 sudo: false
 cache: bundler
 rvm:
-  - 2.2.8
+  - 2.4.3
 script:
   - ./bin/rake spec:prepare
   - echo $SCRIPT_CMD
