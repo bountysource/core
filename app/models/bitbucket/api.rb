@@ -130,7 +130,7 @@ protected
         body: issue['content'] && issue['content']['html'],
         can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
         url: issue['links'] && issue['links']['html'] &&
-             issue['links']['html']['href']
+             issue['links']['html']['href'],
         owner: issue['assignee'] ? issue['assignee']['username'] : nil,
         remote_created_at: DateTime.parse(issue['created_on']),
         remote_updated_at: issue['updated_on'] &&
