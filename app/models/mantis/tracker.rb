@@ -6,9 +6,9 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  remote_id            :integer
-#  url                  :string(255)      not null
-#  name                 :string(255)      not null
-#  full_name            :string(255)
+#  url                  :string           not null
+#  name                 :string           not null
+#  full_name            :string
 #  is_fork              :boolean          default(FALSE)
 #  watchers             :integer          default(0), not null
 #  forks                :integer          default(0)
@@ -22,21 +22,21 @@
 #  has_wiki             :boolean          default(FALSE), not null
 #  has_downloads        :boolean          default(FALSE), not null
 #  private              :boolean          default(FALSE), not null
-#  homepage             :string(255)
+#  homepage             :string
 #  sync_in_progress     :boolean          default(FALSE), not null
 #  bounty_total         :decimal(10, 2)   default(0.0), not null
 #  account_balance      :decimal(10, 2)   default(0.0)
-#  type                 :string(255)      default("Tracker"), not null
-#  cloudinary_id        :string(255)
+#  type                 :string           default("Tracker"), not null
+#  cloudinary_id        :string
 #  closed_issues        :integer          default(0), not null
 #  delta                :boolean          default(TRUE), not null
 #  can_edit             :boolean          default(TRUE), not null
 #  repo_url             :text
 #  rank                 :integer          default(0), not null
-#  remote_cloudinary_id :string(255)
-#  remote_name          :string(255)
+#  remote_cloudinary_id :string
+#  remote_name          :string
 #  remote_description   :text
-#  remote_homepage      :string(255)
+#  remote_homepage      :string
 #  remote_language_ids  :integer          default([]), is an Array
 #  language_ids         :integer          default([]), is an Array
 #  team_id              :integer
@@ -78,15 +78,15 @@ class Mantis::Tracker < ::Tracker
     csv = CSV.parse(response, {headers: true, :header_converters => :symbol})
 
     url_from_id = lambda { |id| url + "view.php?id=#{id.to_i}" }
-    
+
     issue_cache = ::Issue.where(url: csv.map { |row| url_from_id.call(row[:id]) } )
 
     puts issue_cache.map(&:url)
     csv.each do |row|
-      puts row.inspect
+      #puts row.inspect
       issue_url = url_from_id.call(row[:id])
       issue = issue_cache.find { |i| i.url == issue_url } || self.issues.new(url: issue_url)
-      puts issue.inspect
+      #puts issue.inspect
 
       issue.type = 'Mantis::Issue'
       issue.tracker = self
@@ -103,8 +103,8 @@ class Mantis::Tracker < ::Tracker
       updated = Time.parse(row[:updated])
       issue.remote_updated_at = updated if !issue.remote_updated_at || updated > issue.remote_updated_at
 
-      puts "BEFORE SAVE"
-      puts issue.inspect
+      # puts "BEFORE SAVE"
+      # puts issue.inspect
       issue.save!
     end
   end

@@ -10,13 +10,13 @@
 #  synced_at             :datetime
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  label_name            :string(255)      default("bounty"), not null
-#  type                  :string(255)
+#  label_name            :string           default("bounty"), not null
+#  type                  :string
 #  person_id             :integer
-#  bounties_accepted_msg :string(255)
-#  bounty_available_msg  :string(255)
-#  bounty_claimed_msg    :string(255)
-#  label_color           :string(255)      default("#129e5e"), not null
+#  bounties_accepted_msg :string
+#  bounty_available_msg  :string
+#  bounty_claimed_msg    :string
+#  label_color           :string           default("#129e5e"), not null
 #  locked                :boolean          default(FALSE), not null
 #  last_error            :text
 #  locked_at             :datetime
@@ -29,12 +29,7 @@
 #  index_tracker_plugins_on_tracker_id  (tracker_id) UNIQUE
 #
 
-class TrackerPlugin < ActiveRecord::Base
-
-  attr_accessible :tracker, :person, :modify_title, :modify_body, :add_label, :label_name, :label_color,
-                  :bounty_available_msg, :bounties_accepted_msg, :bounty_claimed_msg,
-                  :locked_at, :last_error, :synced_at
-
+class TrackerPlugin < ApplicationRecord
   belongs_to :tracker
   has_many :issues, through: :tracker
   belongs_to :person

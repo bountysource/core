@@ -10,23 +10,34 @@ describe Api::V2::ProposalsController do
   let(:proposal) { double(:proposal, id: 1) }
   let(:ar_proposal) { build_stubbed(:proposal) }
 
+  # the AASM::InvalidTransition initializer requires a few params we don't have
+  let(:invalid_transition_exception) {
+    obj = double()
+    allow(obj).to receive(:aasm) do
+      obj2 = double()
+      allow(obj2).to receive(:current_state)
+      obj2
+    end
+    AASM::InvalidTransition.new(obj, 'event_name', 'state')
+  }
+
   before do
-    Api::BaseController.any_instance.stub(:current_user).and_return(person)
-    Issue.stub(:find_by!).and_return(issue)
-    issue.stub(:request_for_proposal).and_return(request_for_proposal)
-    issue.stub(:team).and_return(team)
-    team.stub(:person_is_admin?).and_return(true)
-    team.stub(:person_is_developer?).and_return(true)
-    proposal.stub(:person).and_return(person)
-    proposal.stub(destroyable?: true)
-    request_for_proposal.stub_chain(:proposals, :find_by!).and_return(proposal)
+    allow_any_instance_of(Api::BaseController).to receive(:current_user).and_return(person)
+    allow(Issue).to receive(:find_by!).and_return(issue)
+    allow(issue).to receive(:request_for_proposal).and_return(request_for_proposal)
+    allow(issue).to receive(:team).and_return(team)
+    allow(team).to receive(:person_is_admin?).and_return(true)
+    allow(team).to receive(:person_is_developer?).and_return(true)
+    allow(proposal).to receive(:person).and_return(person)
+    allow(proposal).to receive_messages(destroyable?: true)
+    allow(request_for_proposal).to receive_message_chain(:proposals, :find_by!).and_return(proposal)
 
     params.merge!(issue_id: issue.id, id: proposal.id)
   end
 
   shared_examples_for 'a request that requires a proposal' do
     it 'should require proposal' do
-      request_for_proposal.stub_chain(:proposals, :find_by!).and_raise(ActiveRecord::RecordNotFound)
+      allow(request_for_proposal).to receive_message_chain(:proposals, :find_by!).and_raise(ActiveRecord::RecordNotFound)
       action
       expect(response.status).to eq(404)
     end
@@ -34,28 +45,28 @@ describe Api::V2::ProposalsController do
 
   describe 'create' do
     describe 'authorization' do
-      let(:action) { post(:create, params) }
+      let(:action) { post(:create, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request that requires a request for proposal'
       it_behaves_like 'a request that converts currency'
     end
 
     it 'should create proposal' do
-      request_for_proposal.stub_chain(:proposals, :create!).and_return(proposal)
-      post(:create, params)
+      allow(request_for_proposal).to receive_message_chain(:proposals, :create!).and_return(proposal)
+      post(:create, params: params)
       expect(response.status).to eq(201)
     end
 
     it 'should not create a proposal if the RFP is pending_fullfillment' do
-      request_for_proposal.stub_chain(:proposals, :create!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
-      post(:create, params)
+      allow(request_for_proposal).to receive_message_chain(:proposals, :create!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
+      post(:create, params: params)
       expect(response.status).to eq(422)
     end
   end
 
   describe 'destroy' do
     describe 'authorization' do
-      let(:action) { delete(:destroy, params) }
+      let(:action) { delete(:destroy, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request that requires a request for proposal'
       it_behaves_like 'a request that requires a proposal'
@@ -64,24 +75,24 @@ describe Api::V2::ProposalsController do
 
     it 'should not destroy if the proposal cannot be destroyed' do
       # Needed an ActiveRecord object to save me from stub hell
-      request_for_proposal.stub_chain(:proposals, :find_by!).and_return(ar_proposal)
-      ar_proposal.stub(:destroy!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
-      ar_proposal.stub(:person).and_return(person)
+      allow(request_for_proposal).to receive_message_chain(:proposals, :find_by!).and_return(ar_proposal)
+      allow(ar_proposal).to receive(:destroy!).and_raise(ActiveRecord::RecordInvalid.new(ar_proposal))
+      allow(ar_proposal).to receive(:person).and_return(person)
 
-      delete(:destroy, params)
+      delete(:destroy, params: params)
       expect(response.status).to eq(422)
     end
 
     it 'should destroy proposal' do
       expect(proposal).to receive(:destroy!).once
-      delete(:destroy, params)
+      delete(:destroy, params: params)
       expect(response.status).to eq(204)
     end
   end
 
   describe 'index' do
     describe 'authorization' do
-      let(:action) { get(:index, params) }
+      let(:action) { get(:index, params: params) }
       it_behaves_like 'a request that requires auth'
       it_behaves_like 'a request that requires a request for proposal'
       it_behaves_like 'a request authorized by require_team_admin_or_developer'
@@ -89,7 +100,7 @@ describe Api::V2::ProposalsController do
 
     it 'should render proposals' do
       expect(request_for_proposal).to receive(:proposals).once
-      get(:index, params)
+      get(:index, params: params)
       expect(response.status).to eq(200)
     end
   end
@@ -115,11 +126,11 @@ describe Api::V2::ProposalsController do
   end
 
   describe 'accept' do
-    let(:action) { post(:accept, params) }
+    let(:action) { post(:accept, params: params) }
 
     before do
-      proposal.stub(:begin_appointment!)
-      proposal.stub(:set_team_notes!)
+      allow(proposal).to receive(:begin_appointment!)
+      allow(proposal).to receive(:set_team_notes!)
     end
 
     describe 'authorization' do
@@ -138,7 +149,7 @@ describe Api::V2::ProposalsController do
     end
 
     it 'should render bad request on invalid state change' do
-      expect(proposal).to receive(:begin_appointment!).and_raise(AASM::InvalidTransition)
+      expect(proposal).to receive(:begin_appointment!).and_raise(invalid_transition_exception)
       action
       expect(response.status).to eq(400)
     end
@@ -146,17 +157,17 @@ describe Api::V2::ProposalsController do
     it 'should set team notes' do
       notes = 'You are a god among men, just like corytheboyd <3'
       expect(proposal).to receive(:set_team_notes!).with(notes).once
-      post(:accept, params.merge(team_notes: notes))
+      post(:accept, params: params.merge(team_notes: notes))
       expect(response.status).to eq(200)
     end
   end
 
   describe 'reject' do
-    let(:action) { post(:reject, params) }
+    let(:action) { post(:reject, params: params) }
 
     before do
-      proposal.stub(:reject!)
-      proposal.stub(:set_team_notes!)
+      allow(proposal).to receive(:reject!)
+      allow(proposal).to receive(:set_team_notes!)
     end
 
     describe 'authorization' do
@@ -175,7 +186,7 @@ describe Api::V2::ProposalsController do
     end
 
     it 'should render bad request on invalid state change' do
-      expect(proposal).to receive(:reject!).and_raise(AASM::InvalidTransition)
+      expect(proposal).to receive(:reject!).and_raise(invalid_transition_exception)
       action
       expect(response.status).to eq(400)
     end
@@ -185,24 +196,24 @@ describe Api::V2::ProposalsController do
     let(:proposal_id) { 1 }
 
     describe 'authorization' do
-      let(:action) { post(:reject, params) }
+      let(:action) { post(:reject, params: params) }
       it_behaves_like 'a request that requires auth'
     end
 
     before do
       # Person not on team
-      team.stub(:person_is_admin?).and_return(false)
-      team.stub(:person_is_developer?).and_return(false)
+      allow(team).to receive(:person_is_admin?).and_return(false)
+      allow(team).to receive(:person_is_developer?).and_return(false)
     end
 
     it 'should render current users proposal' do
       expect(request_for_proposal.proposals).to receive(:find_by!).with(person: person).once
-      get(:show, params.merge(id: 'mine'))
+      get(:show, params: params.merge(id: 'mine'))
       expect(response.status).to eq(200)
     end
 
     it 'should not render proposal that does not belong to current user' do
-      get(:show, params.merge(id: proposal_id))
+      get(:show, params: params.merge(id: proposal_id))
       expect(response.status).to eq(401)
     end
   end

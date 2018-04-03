@@ -1,6 +1,6 @@
 class Api::V2::StatsController < Api::BaseController
 
-  #before_filter :whitelist_access, only: :index
+  #before_action :whitelist_access, only: :index
 
   def index
     @item = PublicStat.singleton

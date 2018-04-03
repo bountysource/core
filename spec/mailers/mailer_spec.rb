@@ -14,12 +14,12 @@ describe Mailer do
     end
 
     it "should correctly render the email" do
-      email.from.should == %w(support@bountysource.com)
-      email.to.should == [person.email]
-      email.subject.should == 'Bounty created!'
-      email.encoded.should include bounty.issue.to_param
-      email.encoded.should include bounty.issue.title
-      email.encoded.should match %r{created a \$\d+ bounty}
+      expect(email.from).to eq(%w(support@bountysource.com))
+      expect(email.to).to eq([person.email])
+      expect(email.subject).to eq('Bounty created!')
+      expect(email.encoded).to include bounty.issue.to_param
+      expect(email.encoded).to include bounty.issue.title
+      expect(email.encoded).to match %r{created a \$\d+ bounty}
     end
   end
 
@@ -29,8 +29,8 @@ describe Mailer do
     end
 
     it "should NOT render the owner name if the bounty is anonymous" do
-      anon_email.to.should eq([backer.email])
-      anon_email.encoded.should include "anonymous"
+      expect(anon_email.to).to eq([backer.email])
+      expect(anon_email.encoded).to include "anonymous"
     end
   end
 
@@ -40,8 +40,8 @@ describe Mailer do
     end
 
     it "should render 'Anonymous' instead of the bounty owner's name" do
-      anon_email.to.should eq([backer.email])
-      anon_email.encoded.should include "anonymous"
+      expect(anon_email.to).to eq([backer.email])
+      expect(anon_email.encoded).to include "anonymous"
     end
   end
 
@@ -51,10 +51,10 @@ describe Mailer do
       person.send_email(:repository_donation_made, repo: repository, amount: amount)
     end
     it "should correctly render the email" do
-      email.from.should == %w(support@bountysource.com)
-      email.to.should == [person.email]
-      email.subject.should include "Thank you for your donation to"
-      email.encoded.should include "You've just donated $#{amount.to_f.to_i}" # there is no Money#to_i method. bah.
+      expect(email.from).to eq(%w(support@bountysource.com))
+      expect(email.to).to eq([person.email])
+      expect(email.subject).to include "Thank you for your donation to"
+      expect(email.encoded).to include "You've just donated $#{amount.to_f.to_i}" # there is no Money#to_i method. bah.
     end
   end
 
@@ -68,9 +68,9 @@ describe Mailer do
     end
 
     it "should render the email" do
-      email.from.should == %w(support@bountysource.com)
-      email.to.should == [person.email]
-      email.subject.should match /ACTION NEEDED: funding goal reached for #{fundraiser.title}/i
+      expect(email.from).to eq(%w(support@bountysource.com))
+      expect(email.to).to eq([person.email])
+      expect(email.subject).to match /ACTION NEEDED: funding goal reached for #{fundraiser.title}/i
     end
   end
 
@@ -79,9 +79,9 @@ describe Mailer do
     let(:email) { fundraiser.send_fundraiser_featured_notification }
 
     it "should render email" do
-      email.from.should == %w(support@bountysource.com)
-      email.to.should == [fundraiser.person.email]
-      email.subject.should == "Fundraiser #{fundraiser.title} is now FEATURED"
+      expect(email.from).to eq(%w(support@bountysource.com))
+      expect(email.to).to eq([fundraiser.person.email])
+      expect(email.subject).to eq("Fundraiser #{fundraiser.title} is now FEATURED")
     end
   end
 
@@ -91,9 +91,9 @@ describe Mailer do
     let(:email) { fundraiser.person.send_email :fundraiser_backed, pledge: pledge }
 
     it "should render email" do
-      email.from.should == %w(support@bountysource.com)
-      email.to.should == [fundraiser.person.email]
-      email.subject.should == "#{fundraiser.person.display_name} backed your fundraiser #{fundraiser.title}"
+      expect(email.from).to eq(%w(support@bountysource.com))
+      expect(email.to).to eq([fundraiser.person.email])
+      expect(email.subject).to eq("#{fundraiser.person.display_name} backed your fundraiser #{fundraiser.title}")
     end
   end
 end

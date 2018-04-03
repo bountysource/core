@@ -1,4 +1,4 @@
-class QuickbooksBase < ActiveRecord::Base
+class QuickbooksBase < ApplicationRecord
 
   self.abstract_class = true
 

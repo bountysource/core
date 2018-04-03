@@ -8,7 +8,7 @@ class Api::V1::PostbacksController < ApplicationController
       raw_post: request.raw_post,
       headers: request.headers.select { |k,v| k =~ /^HTTP_/ }.to_json
     )
-    render text: 'ok'
+    head :ok
   end
 
   def retrieve

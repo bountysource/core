@@ -1,7 +1,7 @@
 class Api::V1::BountyClaimResponsesController < ApplicationController
 
-  before_filter :require_auth
-  before_filter :require_bounty_claim
+  before_action :require_auth
+  before_action :require_bounty_claim
 
   def accept
     response = @bounty_claim.accept!(@person, params[:description])

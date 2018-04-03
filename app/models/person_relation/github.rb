@@ -3,7 +3,7 @@
 # Table name: person_relations
 #
 #  id               :integer          not null, primary key
-#  type             :string(255)      not null
+#  type             :string           not null
 #  person_id        :integer          not null
 #  target_person_id :integer          not null
 #  created_at       :datetime         not null
@@ -27,8 +27,7 @@ class PersonRelation::Github < PersonRelation::Base
     following_logins = person.github_account.following_logins
 
     # Person models found by check UIDs of friends returned by graph API.
-    friends_found = Person.joins(:github_account).where('linked_accounts.login in (:logins)', logins: following_logins)
-    friends_found.uniq!
+    friends_found = Person.joins(:github_account).where('linked_accounts.login in (:logins)', logins: following_logins).distinct
 
     # only create new friendships
     new_relations = (friends_found - person.friends).map do |friend|

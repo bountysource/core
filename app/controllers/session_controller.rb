@@ -1,6 +1,6 @@
 class SessionController < ApplicationController
 
-  before_filter :require_auth, only: [:approve_connect]
+  before_action :require_auth, only: [:approve_connect]
 
   WHITELISTED_REDIRECT_URL = /^https?:\/\/((www|api|salt)\.bountysource\.com)\//
 

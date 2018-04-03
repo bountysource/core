@@ -3,8 +3,8 @@
 # Table name: lurkers
 #
 #  id         :integer          not null, primary key
-#  remote_ip  :string(255)      not null
-#  user_agent :string(255)      not null
+#  remote_ip  :string           not null
+#  user_agent :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -15,7 +15,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :lurker do
     user_agent "Chrome"
     remote_ip "193.253.1.2"

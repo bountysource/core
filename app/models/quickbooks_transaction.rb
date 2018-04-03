@@ -3,8 +3,8 @@
 # Table name: quickbooks_transactions
 #
 #  id         :integer          not null, primary key
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class QuickbooksTransaction < QuickbooksBase

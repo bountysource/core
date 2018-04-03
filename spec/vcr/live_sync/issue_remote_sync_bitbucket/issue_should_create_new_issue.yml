@@ -2105,4 +2105,142 @@ http_interactions:
       string: '{"error":{"message":"cloud_name is disabled"}}'
     http_version: 
   recorded_at: Thu, 19 Nov 2015 19:33:53 GMT
+- request:
+    method: get
+    uri: https://api.bitbucket.org/1.0/repositories/site/master/issues/15896
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Vary:
+      - Authorization
+      Cache-Control:
+      - max-age=900
+      Content-Type:
+      - application/json; charset=utf-8
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Date:
+      - Thu, 22 Mar 2018 12:41:51 GMT
+      X-Served-By:
+      - app-140
+      Accept-Ranges:
+      - bytes
+      Etag:
+      - '"14614c712f3210f918f6ab5e091c0516"'
+      X-Static-Version:
+      - 0614fb63a033
+      X-Content-Type-Options:
+      - nosniff
+      X-Accepted-Oauth-Scopes:
+      - issue
+      X-Render-Time:
+      - '0.0535831451416'
+      Connection:
+      - keep-alive
+      X-Request-Count:
+      - '486'
+      X-Version:
+      - 0614fb63a033
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Cache-Info:
+      - caching
+      Content-Length:
+      - '820'
+    body:
+      encoding: UTF-8
+      string: '{"status": "closed", "priority": "blocker", "title": "STDERR: ssh:
+        connect to host bitbucket.org port 22: Network is unreachable", "reported_by":
+        {"username": "ablaga", "first_name": "Adrian", "last_name": "Blaga", "display_name":
+        "Adrian Blaga", "is_staff": false, "avatar": "https://bitbucket.org/account/ablaga/avatar/32/?ts=1521719307",
+        "resource_uri": "/1.0/users/ablaga", "is_team": false}, "utc_last_updated":
+        "2018-03-22 12:11:18+00:00", "created_on": "2018-03-22T11:37:23.703", "metadata":
+        {"kind": "bug", "version": null, "component": "SSH", "milestone": null}, "content":
+        "AWS deployments are failing (Frankfurt region).", "comment_count": 3, "local_id":
+        15896, "follower_count": 4, "utc_created_on": "2018-03-22 10:37:23+00:00",
+        "resource_uri": "/1.0/repositories/site/master/issues/15896", "is_spam": false}'
+    http_version: 
+  recorded_at: Thu, 22 Mar 2018 12:41:51 GMT
+- request:
+    method: get
+    uri: https://api.bitbucket.org/1.0/repositories/site/master/issues/15896/comments
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Vary:
+      - Authorization, Accept-Encoding
+      Cache-Control:
+      - max-age=900
+      Content-Type:
+      - application/json; charset=utf-8
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Date:
+      - Thu, 22 Mar 2018 12:41:52 GMT
+      X-Served-By:
+      - app-139
+      Accept-Ranges:
+      - bytes
+      Etag:
+      - '"ec2859ce06b455161ea775a84d4fc7e6"'
+      X-Static-Version:
+      - 0614fb63a033
+      X-Content-Type-Options:
+      - nosniff
+      X-Accepted-Oauth-Scopes:
+      - issue
+      X-Render-Time:
+      - '0.0398139953613'
+      Connection:
+      - keep-alive
+      X-Request-Count:
+      - '91'
+      X-Version:
+      - 0614fb63a033
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Cache-Info:
+      - caching
+      Content-Length:
+      - '1359'
+    body:
+      encoding: UTF-8
+      string: '[{"content": "Apparently the problem comes from Amazon:\n\n\n```\nHello,\n\nThank
+        you for contacting AWS Premium Support. My name is Akash and I will be assisting
+        you with this case today.\n\nI understand that you are facing connectivity
+        issues with your bitbucket.org. I can confirm that at the moment, there seems
+        to be an underlying problem with our networking infrastructure, which manages
+        the connection to Bitbucket.org from Frankfurt and Mumbai regions, and this
+        is being treated with the utmost urgency by our internal teams. As soon as
+        we have more information it will be relayed to you.\n\nI apologize for the
+        downtime and thank you for your patience while we go about restoring the service.\n\nI
+        will post a response on the case, as soon as I receive more information on
+        this issue. Your patience on this matter would be highly appreciated.\n\nBest
+        regards,\n\nAkash S.\nAmazon Web Services\n\n```", "author_info": {"username":
+        "ablaga", "first_name": "Adrian", "last_name": "Blaga", "display_name": "Adrian
+        Blaga", "is_staff": false, "avatar": "https://bitbucket.org/account/ablaga/avatar/32/?ts=1521719307",
+        "resource_uri": "/1.0/users/ablaga", "is_team": false}, "comment_id": 44102804,
+        "utc_updated_on": "2018-03-22 12:11:07+00:00", "convert_markup": false, "utc_created_on":
+        "2018-03-22 12:11:07+00:00", "is_private": false, "is_spam": false}]'
+    http_version: 
+  recorded_at: Thu, 22 Mar 2018 12:41:52 GMT
 recorded_with: VCR 2.9.3

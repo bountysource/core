@@ -3,18 +3,15 @@
 # Table name: google_wallet_items
 #
 #  id         :integer          not null, primary key
-#  order_id   :string(255)      not null
+#  order_id   :string           not null
 #  jwt        :text             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class GoogleWalletItem < ActiveRecord::Base
-
-  attr_accessible :jwt, :order_id
-
+class GoogleWalletItem < ApplicationRecord
   has_many :splits, as: :item
-  has_many :transactions, through: :splits
+  has_many :txns, through: :splits
 
   def jwt_data
     @jwt_data ||= Account::GoogleWallet.decode_jwt(jwt)

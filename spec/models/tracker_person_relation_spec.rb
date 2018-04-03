@@ -24,17 +24,17 @@ describe TrackerPersonRelation do
 
   it "should require a person" do
     tracker_person_relation = TrackerPersonRelation.create(tracker: tracker, can_edit: true)
-    tracker_person_relation.errors.should have_key :person_id
+    expect(tracker_person_relation.errors).to have_key :person_id
   end
 
   it "should require a tracker" do
     tracker_person_relation = TrackerPersonRelation.create(person: person, can_edit: true)
-    tracker_person_relation.errors.should have_key :tracker
+    expect(tracker_person_relation.errors).to have_key :tracker
   end
 
   it "should set editing priveleges to true by default unless specified" do
     tracker_person_relation = TrackerPersonRelation.create(tracker: tracker, person: person)
-    tracker_person_relation.can_edit?.should eq(true)
+    expect(tracker_person_relation.can_edit?).to eq(true)
   end
 
   it "should not allow duplicate TrackerPersonRelations" do

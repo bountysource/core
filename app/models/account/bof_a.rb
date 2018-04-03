@@ -3,13 +3,13 @@
 # Table name: accounts
 #
 #  id          :integer          not null, primary key
-#  type        :string(255)      default("Account"), not null
-#  description :string(255)      default(""), not null
-#  currency    :string(255)      default("USD"), not null
+#  type        :string           default("Account"), not null
+#  description :string           default(""), not null
+#  currency    :string           default("USD"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  owner_id    :integer
-#  owner_type  :string(255)
+#  owner_type  :string
 #  standalone  :boolean          default(FALSE)
 #
 # Indexes
@@ -23,7 +23,7 @@ class Account::BofA < Account
   def self.transfers(date_range=nil)
     date_range ||= Transaction.order('created_at asc').first.created_at..Transaction.order('created_at desc').first.created_at
 
-    Split.joins(:transaction, :account).where(created_at: date_range).where('transactions.type = ? AND splits.account_id = ?', 'Transaction::BankTransfer', instance.id).sum('splits.amount * -1')
+    Split.joins(:txn, :account).where(created_at: date_range).where('transactions.type = ? AND splits.account_id = ?', 'Transaction::BankTransfer', instance.id).sum('splits.amount * -1')
   end
 
   def self.liability?

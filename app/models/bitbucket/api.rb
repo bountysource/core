@@ -110,8 +110,8 @@ protected
       can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
       url: issue['links'] && issue['links']['html'] &&
            issue['links']['html']['href'],
-      owner: issue['assignee'] ? issue['assignee']['username'] : nil,
       author: linked_account,
+      owner: issue['assignee'] ? issue['assignee']['username'] : nil,
       remote_created_at: DateTime.parse(issue['created_on']),
       remote_updated_at: issue['updated_on'] &&
                          DateTime.parse(issue['updated_on'])
@@ -131,6 +131,10 @@ protected
         can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
         url: issue['links'] && issue['links']['html'] &&
              issue['links']['html']['href']
+        owner: issue['assignee'] ? issue['assignee']['username'] : nil,
+        remote_created_at: DateTime.parse(issue['created_on']),
+        remote_updated_at: issue['updated_on'] &&
+                           DateTime.parse(issue['updated_on'])
       }
     end
   end

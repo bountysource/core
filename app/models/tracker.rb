@@ -6,9 +6,9 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  remote_id            :integer
-#  url                  :string(255)      not null
-#  name                 :string(255)      not null
-#  full_name            :string(255)
+#  url                  :string           not null
+#  name                 :string           not null
+#  full_name            :string
 #  is_fork              :boolean          default(FALSE)
 #  watchers             :integer          default(0), not null
 #  forks                :integer          default(0)
@@ -22,21 +22,21 @@
 #  has_wiki             :boolean          default(FALSE), not null
 #  has_downloads        :boolean          default(FALSE), not null
 #  private              :boolean          default(FALSE), not null
-#  homepage             :string(255)
+#  homepage             :string
 #  sync_in_progress     :boolean          default(FALSE), not null
 #  bounty_total         :decimal(10, 2)   default(0.0), not null
 #  account_balance      :decimal(10, 2)   default(0.0)
-#  type                 :string(255)      default("Tracker"), not null
-#  cloudinary_id        :string(255)
+#  type                 :string           default("Tracker"), not null
+#  cloudinary_id        :string
 #  closed_issues        :integer          default(0), not null
 #  delta                :boolean          default(TRUE), not null
 #  can_edit             :boolean          default(TRUE), not null
 #  repo_url             :text
 #  rank                 :integer          default(0), not null
-#  remote_cloudinary_id :string(255)
-#  remote_name          :string(255)
+#  remote_cloudinary_id :string
+#  remote_name          :string
 #  remote_description   :text
-#  remote_homepage      :string(255)
+#  remote_homepage      :string
 #  remote_language_ids  :integer          default([]), is an Array
 #  language_ids         :integer          default([]), is an Array
 #  team_id              :integer
@@ -56,7 +56,7 @@
 #  index_trackers_on_watchers       (watchers)
 #
 
-class Tracker < ActiveRecord::Base
+class Tracker < ApplicationRecord
 
   STATIC_SUBCLASSNAMES_API = %w(
     Jira::API
@@ -127,11 +127,6 @@ class Tracker < ActiveRecord::Base
     self.url += "/" if self.url =~ /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?\z/
   end
 
-  # ATTRIBUTES
-  attr_accessible :name, :url, :description, :featured, :bounty_total, :synced_at, :open_issues, :closed_issues,
-    :can_edit, :homepage, :repo_url, :language_ids, :remote_cloudinary_id, :remote_name, :remote_description,
-    :remote_language_ids, :team, :deleted_at
-
   # VALIDATIONS
   validates :url, uniqueness: true, presence: true
   validates :url, format: {with: /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?\/.*\z/ix}
@@ -167,10 +162,10 @@ class Tracker < ActiveRecord::Base
   has_many :tracker_person_relations
 
   has_many :activity_logs
-  has_many :tracker_rank_caches, class_name: TrackerRankCache, dependent: :delete_all
+  has_many :tracker_rank_caches, class_name: 'TrackerRankCache', dependent: :delete_all
 
-  has_many :fundraisers, through: :fundraiser_tracker_relations
   has_many :fundraiser_tracker_relations
+  has_many :fundraisers, through: :fundraiser_tracker_relations
 
 
   # TODO trackers shouldn't have accounts, but rather projects/repositories(github)
@@ -287,7 +282,7 @@ class Tracker < ActiveRecord::Base
 
     # strip url hash
     url = url.gsub(/#.*/,'')
-    
+
     if (issue_id = url.match(/\Ahttps:\/\/www\.bountysource\.com\/issues\/(\d+)/).try(:[], 1)) && (issue = Issue.where(id: issue_id).first)
       # we already have this as an issue in our DB
       return issue
@@ -552,7 +547,7 @@ class Tracker < ActiveRecord::Base
 
   # sum/avg of days that issues have been open
   def issue_stats
-    issue_days_row = ActiveRecord::Base.connection.select_one("select sum(floor((extract(epoch from now()) - extract(epoch from remote_created_at)) / (60*60*24))) as sum, avg(floor((extract(epoch from now()) - extract(epoch from remote_created_at)) / (60*60*24))) as avg from issues where tracker_id=#{self.id} and can_add_bounty=true")
+    issue_days_row = ApplicationRecord.connection.select_one("select sum(floor((extract(epoch from now()) - extract(epoch from remote_created_at)) / (60*60*24))) as sum, avg(floor((extract(epoch from now()) - extract(epoch from remote_created_at)) / (60*60*24))) as avg from issues where tracker_id=#{self.id} and can_add_bounty=true")
     {
       days_open_total: issue_days_row['sum'].to_i,
       days_open_average: issue_days_row['avg'].to_i,

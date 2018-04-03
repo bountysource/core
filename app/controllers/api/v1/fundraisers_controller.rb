@@ -1,10 +1,8 @@
 class Api::V1::FundraisersController < ApplicationController
-  respond_to :json
-
-  before_filter :require_auth,                  except: [:show, :embed, :cards, :all, :top_backers]
-  before_filter :require_fundraiser,            only:   [:update, :save, :show, :embed, :publish, :destroy, :info, :top_backers]
-  before_filter :require_fundraiser_ownership,  only:   [:update, :publish, :destroy, :info]
-  before_filter :required_published,            only:   [:show, :embed]
+  before_action :require_auth,                  except: [:show, :embed, :cards, :all, :top_backers]
+  before_action :require_fundraiser,            only:   [:update, :save, :show, :embed, :publish, :destroy, :info, :top_backers]
+  before_action :require_fundraiser_ownership,  only:   [:update, :publish, :destroy, :info]
+  before_action :required_published,            only:   [:show, :embed]
 
   def index
     @fundraisers = @person.fundraisers.order('published desc')
@@ -21,7 +19,7 @@ class Api::V1::FundraisersController < ApplicationController
     @fundraiser.team_id           = params[:team_id]            unless params[:team_id].blank? || !@person.teams.map(&:id).include?(params[:team_id].to_i)
 
     # special case for funding_goal, remove commas and dollar signs
-    @fundraiser.funding_goal = Money.parse(params[:funding_goal]).amount.to_i if params[:funding_goal]
+    @fundraiser.funding_goal = Monetize.parse(params[:funding_goal]).amount.to_i if params[:funding_goal]
 
     if @fundraiser.valid? && @fundraiser.save
       render "api/v1/fundraisers/show", status: :created
@@ -38,7 +36,7 @@ class Api::V1::FundraisersController < ApplicationController
     @fundraiser.team_id           = params[:team_id]            if params.has_key?(:team_id) && (params[:team_id].nil? || @person.teams.map(&:id).include?(params[:team_id].to_i))
 
     # special case for funding_goal, remove commas and dollar signs
-    @fundraiser.funding_goal = Money.parse(params[:funding_goal]).amount.to_i if params[:funding_goal]
+    @fundraiser.funding_goal = Monetize.parse(params[:funding_goal]).amount.to_i if params[:funding_goal]
 
     if @fundraiser.valid? && @fundraiser.save
       render "api/v1/fundraisers/show"

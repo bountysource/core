@@ -3,7 +3,7 @@ class ShortsController < ActionController::Base
   # TODO: make this work without lots of browser console errors
   # ensure_security_headers
 
-  before_filter :set_do_not_cache_headers
+  before_action :set_do_not_cache_headers
 
   def redirect
     slug = request.path[1..-1]

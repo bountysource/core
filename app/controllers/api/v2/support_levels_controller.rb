@@ -1,7 +1,7 @@
 class Api::V2::SupportLevelsController < Api::BaseController
 
-  before_filter :require_auth, except: [ :paypal_return, :global_summary ]
-  before_filter :require_support_level, only: [:show, :update, :destroy]
+  before_action :require_auth, except: [ :paypal_return, :global_summary ]
+  before_action :require_support_level, only: [:show, :update, :destroy]
 
   def show
     render 'api/v2/support_levels/show'
@@ -171,7 +171,7 @@ protected
 
           # create stripe credit card
           card = customer.sources.create(:card => token)
-          @item.payment_method = PaymentMethod::StripeCreditCard.create!(person: current_user, data: card.to_json)
+          @item.payment_method = PaymentMethod::StripeCreditCard.create!(person: current_user, data: JSON.parse(card.to_json))
         rescue Stripe::StripeError => e
           render json: { error: ((e.json_body[:error][:message] rescue nil) || "There was an error processing your card.") }, status: :unprocessable_entity
           return

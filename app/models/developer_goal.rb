@@ -17,11 +17,9 @@
 #  index_developer_goals_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
 
-class DeveloperGoal < ActiveRecord::Base
+class DeveloperGoal < ApplicationRecord
   belongs_to :person
   belongs_to :issue
-
-  attr_accessible :issue, :person, :amount, :notified
 
   validates :person_id, presence: true
   validates :issue_id, presence: true
@@ -55,7 +53,7 @@ protected
   end
 
   def update_notified_if_necessary
-    if amount_changed?
+    if saved_change_to_amount?
       update_column(:notified, false)
       # place send email method here if we want to notify backers of updated developer goals
       # notify_backers

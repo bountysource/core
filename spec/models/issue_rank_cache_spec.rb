@@ -38,7 +38,7 @@ describe IssueRankCache do
           activity_log_2
           activity_log_2.update_caches
           issue_rank_cache.reload
-          issue_rank_cache.rank.should eq(2)
+          expect(issue_rank_cache.rank).to eq(2)
         end
       end
 

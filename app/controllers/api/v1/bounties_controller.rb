@@ -1,8 +1,6 @@
 class Api::V1::BountiesController < ApplicationController
-  respond_to :json
-
-  before_filter :require_auth, except: [:info]
-  before_filter :require_bounty, except: [:index, :info]
+  before_action :require_auth, except: [:info]
+  before_action :require_bounty, except: [:index, :info]
 
   # Get all bounties that the authenticated user has placed on Github issues
   def index

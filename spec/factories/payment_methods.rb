@@ -3,14 +3,14 @@
 # Table name: payment_methods
 #
 #  id         :integer          not null, primary key
-#  type       :string(255)      not null
+#  type       :string           not null
 #  person_id  :integer          not null
 #  data       :json             not null
 #  created_at :datetime
 #  updated_at :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :payment_method do
     association :person, factory: :person
 

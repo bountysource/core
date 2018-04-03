@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  person_id  :integer          not null
 #  item_id    :integer          not null
-#  item_type  :string(255)      not null
+#  item_type  :string           not null
 #  active     :boolean          default(TRUE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -26,13 +26,13 @@ describe FollowRelation do
     let!(:follow_relation) { create(:follow_relation, person: person, item: tracker) }
 
     it "should include tracker in followed items" do
-      person.followed_trackers.should include tracker
+      expect(person.followed_trackers).to include tracker
     end
 
     it "should not include inactive follow relations" do
       follow_relation.unfollow!
       follow_relation.reload
-      person.followed_trackers.should_not include tracker
+      expect(person.followed_trackers).not_to include tracker
     end
   end
 

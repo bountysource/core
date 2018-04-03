@@ -5,7 +5,7 @@
 #  id                :integer          not null, primary key
 #  tracker_id        :integer          not null
 #  linked_account_id :integer          not null
-#  type              :string(255)      not null
+#  type              :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
@@ -15,9 +15,7 @@
 #  index_tracker_relations_on_tracker_id         (tracker_id)
 #
 
-class TrackerRelation < ActiveRecord::Base
-  attr_accessible :tracker, :linked_account, :tracker_id, :linked_account_id
-
+class TrackerRelation < ApplicationRecord
   belongs_to  :tracker
   belongs_to  :linked_account, class_name: 'LinkedAccount::Base'
   has_one     :person, through: :linked_account

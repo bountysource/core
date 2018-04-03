@@ -7,7 +7,7 @@ describe Api::V1::BountiesController do
 
   describe '#index' do
     it "should be successful" do
-      get 'index', params
+      get 'index', params: params
       assert_response :ok
     end
   end
@@ -15,7 +15,7 @@ describe Api::V1::BountiesController do
   describe "require_bounty" do
     it "should return Bounty not found" do
       expect {
-        get 'show', params
+        get 'show', params: params
       }.to raise_error(ActionController::UrlGenerationError)
     end
   end

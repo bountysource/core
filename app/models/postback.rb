@@ -3,18 +3,16 @@
 # Table name: postbacks
 #
 #  id         :integer          not null, primary key
-#  namespace  :string(255)
-#  method     :string(255)
-#  url        :string(255)
+#  namespace  :string
+#  method     :string
+#  url        :string
 #  raw_post   :text
 #  headers    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Postback < ActiveRecord::Base
-  attr_accessible :namespace, :method, :url, :raw_post, :headers
-
+class Postback < ApplicationRecord
   def self.my_url
     "https://api-qa.bountysource.com/postbacks/#{`hostname`.strip}"
   end

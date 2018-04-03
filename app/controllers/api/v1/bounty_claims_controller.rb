@@ -1,11 +1,11 @@
 class Api::V1::BountyClaimsController < ApplicationController
 
-  before_filter :require_auth, except: [:show]
-  before_filter :require_issue, only: [:create]
-  before_filter :require_bounty_claim, except: [:index, :create]
-  before_filter :require_ownership, only: [:update, :destroy]
+  before_action :require_auth, except: [:show]
+  before_action :require_issue, only: [:create]
+  before_action :require_bounty_claim, except: [:index, :create]
+  before_action :require_ownership, only: [:update, :destroy]
 
-  after_filter log_activity(Issue::Event::BOUNTY_CLAIM), only: [:create]
+  after_action log_activity(Issue::Event::BOUNTY_CLAIM), only: [:create]
 
 
   # show the authenticated users's bounty claims
@@ -45,9 +45,9 @@ class Api::V1::BountyClaimsController < ApplicationController
 
   def destroy
     if @bounty_claim.destroy
-      render nothing: true, status: :no_content
+      head :no_content
     else
-      render nothing: true, status: :bad_request
+      head :bad_request
     end
   end
 

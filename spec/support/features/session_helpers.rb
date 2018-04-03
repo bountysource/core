@@ -1,12 +1,12 @@
 module Features
   module SessionHelpers
     def expect_signin(person)
-      current_path.should == '/signin'
+      expect(current_path).to eq('/signin')
       fill_in 'email', with: person.email
       fill_in 'password', with: person.password
       click_button "Sign In"
       click_button "Not interested"
-      current_path.should_not == '/signin'
+      expect(current_path).not_to eq('/signin')
     end
 
     # def sign_up_with(email, password)

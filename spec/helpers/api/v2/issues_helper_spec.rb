@@ -24,8 +24,8 @@ describe Api::V2::IssuesHelper do
 
       params.merge!(tracker_id: issue1.tracker.id)
 
-      filtered.should include issue1
-      filtered.should_not include issue2
+      expect(filtered).to include issue1
+      expect(filtered).not_to include issue2
     end
 
     it "should filter by can_add_bounty" do
@@ -34,8 +34,8 @@ describe Api::V2::IssuesHelper do
 
       params.merge!(can_add_bounty: true)
 
-      filtered.should include issue1
-      filtered.should_not include issue2
+      expect(filtered).to include issue1
+      expect(filtered).not_to include issue2
     end
 
     it "should filter by featured" do
@@ -44,46 +44,46 @@ describe Api::V2::IssuesHelper do
 
       params.merge!(featured: true)
 
-      filtered.should include issue1
-      filtered.should_not include issue2
+      expect(filtered).to include issue1
+      expect(filtered).not_to include issue2
     end
 
     describe "convert 'tracker_type' param into constant names" do
 
       it "translates github" do
-        tracker_constant_names_for_type('github').should match_array %w(Github::Repository)
+        expect(tracker_constant_names_for_type('github')).to match_array %w(Github::Repository)
       end
 
       it "translates bitbucket" do
-        tracker_constant_names_for_type('bitbucket').should match_array %w(Bitbucket::Tracker)
+        expect(tracker_constant_names_for_type('bitbucket')).to match_array %w(Bitbucket::Tracker)
       end
 
       it "translates bugzilla" do
-        tracker_constant_names_for_type('bugzilla').should match_array %w(Bugzilla::Tracker)
+        expect(tracker_constant_names_for_type('bugzilla')).to match_array %w(Bugzilla::Tracker)
       end
 
       it "translates google" do
-        tracker_constant_names_for_type('google').should match_array %w(GoogleCode::Tracker)
+        expect(tracker_constant_names_for_type('google')).to match_array %w(GoogleCode::Tracker)
       end
 
       it "translates jira" do
-        tracker_constant_names_for_type('jira').should match_array %w(Jira::Tracker)
+        expect(tracker_constant_names_for_type('jira')).to match_array %w(Jira::Tracker)
       end
 
       it "translates launchpad" do
-        tracker_constant_names_for_type('launchpad').should match_array %w(Launchpad::Tracker)
+        expect(tracker_constant_names_for_type('launchpad')).to match_array %w(Launchpad::Tracker)
       end
 
       it "translates pivotal" do
-        tracker_constant_names_for_type('pivotal').should match_array %w(Pivotal::Tracker)
+        expect(tracker_constant_names_for_type('pivotal')).to match_array %w(Pivotal::Tracker)
       end
 
       it "translates sourceforge" do
-        tracker_constant_names_for_type('sourceforge').should match_array %w(SourceForge::Tracker SourceForgeNative::Tracker)
+        expect(tracker_constant_names_for_type('sourceforge')).to match_array %w(SourceForge::Tracker SourceForgeNative::Tracker)
       end
 
       it "translates trac" do
-        tracker_constant_names_for_type('trac').should match_array %w(Trac::Tracker)
+        expect(tracker_constant_names_for_type('trac')).to match_array %w(Trac::Tracker)
       end
     end
 
@@ -102,47 +102,47 @@ describe Api::V2::IssuesHelper do
 
       it "should only include github issues" do
         params.merge!(tracker_type: 'github')
-        filtered.should match_array [github_issue]
+        expect(filtered).to match_array [github_issue]
       end
 
       it "should only include bitbucket issues" do
         params.merge!(tracker_type: 'bitbucket')
-        filtered.should match_array [bitbucket_issue]
+        expect(filtered).to match_array [bitbucket_issue]
       end
 
       it "should only include bugzilla issues" do
         params.merge!(tracker_type: 'bugzilla')
-        filtered.should match_array [bugzilla_issue]
+        expect(filtered).to match_array [bugzilla_issue]
       end
 
       it "should only include google issues" do
         params.merge!(tracker_type: 'google')
-        filtered.should match_array [google_issue]
+        expect(filtered).to match_array [google_issue]
       end
 
       it "should only include jira issues" do
         params.merge!(tracker_type: 'jira')
-        filtered.should match_array [jira_issue]
+        expect(filtered).to match_array [jira_issue]
       end
 
       it "should only include launchpad issues" do
         params.merge!(tracker_type: 'launchpad')
-        filtered.should match_array [launchpad_issue]
+        expect(filtered).to match_array [launchpad_issue]
       end
 
       it "should only include pivotal issues" do
         params.merge!(tracker_type: 'pivotal')
-        filtered.should match_array [pivotal_issue]
+        expect(filtered).to match_array [pivotal_issue]
       end
 
       it "should only include sourceforge issues" do
         params.merge!(tracker_type: 'sourceforge')
-        filtered.should match_array [sourceforge_issue, sourceforge_native_issue]
+        expect(filtered).to match_array [sourceforge_issue, sourceforge_native_issue]
       end
 
       it "should only include trac issues" do
         params.merge!(tracker_type: 'trac')
-        filtered.should match_array [trac_issue]
+        expect(filtered).to match_array [trac_issue]
       end
 
     end
@@ -157,15 +157,15 @@ describe Api::V2::IssuesHelper do
     describe "ordering" do
 
       it "should parse as descending" do
-        _direction_for_order_value('+rank').should be == 'desc'
+        expect(_direction_for_order_value('+rank')).to eq('desc')
       end
 
       it "should parse as ascending" do
-        _direction_for_order_value('-rank').should be == 'asc'
+        expect(_direction_for_order_value('-rank')).to eq('asc')
       end
 
       it "should default to descending" do
-        _direction_for_order_value('rank').should be == 'desc'
+        expect(_direction_for_order_value('rank')).to eq('desc')
       end
 
     end
@@ -285,12 +285,12 @@ describe Api::V2::IssuesHelper do
 
       it "should sort by bounty total descending" do
         params.merge!(order: '+bounty')
-        ordered.should match_array [issue3, issue2, issue1]
+        expect(ordered).to match_array [issue3, issue2, issue1]
       end
 
       it "should sort by bounty total ascending" do
         params.merge!(order: '-bounty')
-        ordered.should match_array [issue1, issue2, issue3]
+        expect(ordered).to match_array [issue1, issue2, issue3]
       end
 
     end
@@ -303,12 +303,12 @@ describe Api::V2::IssuesHelper do
 
       it "should sort by comments descending" do
         params.merge!(order: '+comments')
-        ordered.should match_array [issue3, issue2, issue1]
+        expect(ordered).to match_array [issue3, issue2, issue1]
       end
 
       it "should sort by comments ascending" do
         params.merge!(order: '-comments')
-        ordered.should match_array [issue1, issue2, issue3]
+        expect(ordered).to match_array [issue1, issue2, issue3]
       end
 
     end
@@ -321,12 +321,12 @@ describe Api::V2::IssuesHelper do
 
       it "should sort by participants descending" do
         params.merge!(order: '+participants')
-        ordered.should match_array [issue3, issue2, issue1]
+        expect(ordered).to match_array [issue3, issue2, issue1]
       end
 
       it "should sort by participants ascending" do
         params.merge!(order: '-participants')
-        ordered.should match_array [issue1, issue2, issue3]
+        expect(ordered).to match_array [issue1, issue2, issue3]
       end
 
     end
@@ -339,12 +339,12 @@ describe Api::V2::IssuesHelper do
 
       it "should sort by thumbs up descending" do
         params.merge!(order: '+thumbs')
-        ordered.should match_array [issue3, issue2, issue1]
+        expect(ordered).to match_array [issue3, issue2, issue1]
       end
 
       it "should sort by thumbs up ascending" do
         params.merge!(order: '-thumbs')
-        ordered.should match_array [issue1, issue2, issue3]
+        expect(ordered).to match_array [issue1, issue2, issue3]
       end
 
     end
@@ -357,12 +357,12 @@ describe Api::V2::IssuesHelper do
 
       it "should sort by votes descending" do
         params.merge!(order: '+votes')
-        ordered.should match_array [issue3, issue2, issue1]
+        expect(ordered).to match_array [issue3, issue2, issue1]
       end
 
       it "should sort by votes ascending" do
         params.merge!(order: '-votes')
-        ordered.should match_array [issue1, issue2, issue3]
+        expect(ordered).to match_array [issue1, issue2, issue3]
       end
 
     end
@@ -375,12 +375,12 @@ describe Api::V2::IssuesHelper do
 
       it "should sort by remote created at descending" do
         params.merge!(order: '+created')
-        ordered.should match_array [issue3, issue2, issue1]
+        expect(ordered).to match_array [issue3, issue2, issue1]
       end
 
       it "should sort by remote created at ascending" do
         params.merge!(order: '-created')
-        ordered.should match_array [issue1, issue2, issue3]
+        expect(ordered).to match_array [issue1, issue2, issue3]
       end
 
     end
@@ -393,12 +393,12 @@ describe Api::V2::IssuesHelper do
 
       it "should sort by remote updated at descending" do
         params.merge!(order: '+updated')
-        ordered.should match_array [issue3, issue2, issue1]
+        expect(ordered).to match_array [issue3, issue2, issue1]
       end
 
       it "should sort by remote updated at ascending" do
         params.merge!(order: '-updated')
-        ordered.should match_array [issue1, issue2, issue3]
+        expect(ordered).to match_array [issue1, issue2, issue3]
       end
 
     end

@@ -62,14 +62,14 @@ describe DeveloperGoal do
         # Manually trigger the after_purchase callback
         saved_bounty.after_purchase(order)
 
-        developer_goal.reload.should be_notified
+        expect(developer_goal.reload).to be_notified
       end
 
       context "goal is reached" do
         let!(:bounty) { create(:bounty, amount: 4500, issue: issue) }
         it "should reset notified when developer goal amount is updated" do
           notified_developer_goal.update_attributes(amount: 300)
-          notified_developer_goal.reload.should_not be_notified
+          expect(notified_developer_goal.reload).not_to be_notified
         end
       end
     end

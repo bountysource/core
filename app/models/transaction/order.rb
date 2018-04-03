@@ -7,7 +7,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  audited            :boolean
-#  type               :string(255)      default("Transaction"), not null
+#  type               :string           default("Transaction"), not null
 #  person_id          :integer
 #  checkout_method_id :integer
 #  gross              :decimal(, )
@@ -86,7 +86,7 @@ class Transaction::Order < Transaction
 
     liability_account = Account::Liability.instance
 
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
 
       # Ensure that the cart has not yet been processed
       # TODO this overlaps a bit with the ::create_from_payment_notification,

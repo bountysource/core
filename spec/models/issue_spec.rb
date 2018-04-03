@@ -7,11 +7,11 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  number                   :integer
-#  url                      :string(255)      not null
+#  url                      :string           not null
 #  title                    :text
-#  labels                   :string(255)
+#  labels                   :string
 #  code                     :boolean          default(FALSE)
-#  state                    :string(255)
+#  state                    :string
 #  body                     :text
 #  remote_updated_at        :datetime
 #  remote_id                :integer
@@ -23,20 +23,20 @@
 #  comment_count            :integer          default(0)
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  bounty_total             :decimal(10, 2)   default(0.0), not null
-#  type                     :string(255)      default("Issue"), not null
-#  remote_type              :string(255)
-#  priority                 :string(255)
-#  milestone                :string(255)
+#  type                     :string           default("Issue"), not null
+#  remote_type              :string
+#  priority                 :string
+#  milestone                :string
 #  can_add_bounty           :boolean          default(FALSE), not null
 #  accepted_bounty_claim_id :integer
-#  author_name              :string(255)
-#  owner                    :string(255)
+#  author_name              :string
+#  owner                    :string
 #  paid_out                 :boolean          default(FALSE), not null
 #  participants_count       :integer
 #  thumbs_up_count          :integer
 #  votes_count              :integer
 #  watchers_count           :integer
-#  severity                 :string(255)
+#  severity                 :string
 #  delta                    :boolean          default(TRUE), not null
 #  author_linked_account_id :integer
 #  solution_started         :boolean          default(FALSE), not null
@@ -81,7 +81,7 @@ describe Issue do
     let(:html) { "html" }
     describe 'with existing issue' do
       before do
-        Issue.should_receive(:where).with(url: alternate_urls).and_return([issue])
+        expect(Issue).to receive(:where).with(url: alternate_urls).and_return([issue])
       end
       it "should return that issue" do
         expect(result).to eq(issue)
@@ -90,7 +90,7 @@ describe Issue do
 
     describe 'without existing issue' do
       before do
-        Issue.should_receive(:where).with(url: alternate_urls).and_return([])
+        expect(Issue).to receive(:where).with(url: alternate_urls).and_return([])
       end
       it "should try to create new issue" do
         expect(result).to eq(nil)
@@ -126,17 +126,17 @@ describe Issue do
     }
 
     it "should have correct statuses" do
-      active_bounty.should be_active
-      refunded_bounty.should be_refunded
+      expect(active_bounty).to be_active
+      expect(refunded_bounty).to be_refunded
     end
 
     it "should not include refunded bounty in valuable bounties" do
-      issue.bounties.valuable.should_not include refunded_bounty
+      expect(issue.bounties.valuable).not_to include refunded_bounty
     end
 
     it "should only include active bounties in bounty total" do
       issue.update_bounty_total
-      issue.bounty_total.should == 100
+      expect(issue.bounty_total).to eq(100)
     end
   end
 
@@ -159,34 +159,34 @@ describe Issue do
     it "should move bounties" do
       new_issue.merge!(old_issue)
 
-      new_issue.reload.bounties.should include old_bounty
-      new_issue.bounties.should include new_bounty
-      new_issue.bounty_total.should be == old_bounty.amount + new_bounty.amount
+      expect(new_issue.reload.bounties).to include old_bounty
+      expect(new_issue.bounties).to include new_bounty
+      expect(new_issue.bounty_total).to eq(old_bounty.amount + new_bounty.amount)
     end
 
     it "should move bounty claims" do
       new_issue.merge!(old_issue)
 
-      new_issue.reload.bounty_claims.should include old_bounty_claim
-      new_issue.bounty_claims.should include new_bounty_claim
+      expect(new_issue.reload.bounty_claims).to include old_bounty_claim
+      expect(new_issue.bounty_claims).to include new_bounty_claim
     end
 
     it "should move comments" do
       comment = create(:comment, issue: old_issue)
       new_issue.merge!(old_issue)
-      new_issue.reload.comments.should include comment
+      expect(new_issue.reload.comments).to include comment
     end
 
     it "should move developer_goals" do
       developer_goal = create(:developer_goal, issue: old_issue, amount: 1000)
       new_issue.merge!(old_issue)
-      new_issue.reload.developer_goals.should include developer_goal
+      expect(new_issue.reload.developer_goals).to include developer_goal
     end
 
     it "should move solutions" do
       solution = create(:solution, issue: old_issue)
       new_issue.merge!(old_issue)
-      new_issue.reload.solutions.should include solution
+      expect(new_issue.reload.solutions).to include solution
     end
 
     it "should move author" do
@@ -194,7 +194,7 @@ describe Issue do
       old_issue.update_attribute :author, github_account
 
       new_issue.merge!(old_issue)
-      new_issue.reload.author.should be == github_account
+      expect(new_issue.reload.author).to eq(github_account)
     end
   end
 end
