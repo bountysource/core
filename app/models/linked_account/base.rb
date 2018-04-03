@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  person_id        :integer
 #  type             :string
-#  uid              :integer          not null
+#  uid              :integer
 #  login            :string
 #  first_name       :string
 #  last_name        :string
@@ -49,8 +49,6 @@ class LinkedAccount::Base < ApplicationRecord
   has_many :comments, foreign_key: :author_linked_account_id
 
   has_cloudinary_image
-
-  validates :uid, presence: true
 
   class AlreadyLinked < StandardError; end
   class OauthError < StandardError; end
