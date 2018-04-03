@@ -1,0 +1,2234 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bugs.limesurvey.org/view.php?id=12227
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 21 Mar 2018 10:36:05 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.24
+      Set-Cookie:
+      - PHPSESSID=ea7s9ki2kjfme5k5cooadgehp2; path=/; secure; HttpOnly
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Expires:
+      - Wed, 21 Mar 2018 10:36:05 GMT
+      Last-Modified:
+      - Wed, 21 Mar 2018 10:36:05 GMT
+      X-Frame-Options:
+      - DENY
+      Content-Security-Policy:
+      - img-src https://www.limesurvey.org/ 'self'; default-src 'self'; frame-ancestors
+        'none'; style-src 'self' 'unsafe-inline'; script-src 'self'
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"Content-type\"
+        content=\"text/html; charset=utf-8\" />\n\t<title>12227: &quot;Error: Failed
+        to insert data&quot; and corrupted quotas when i've tried to import old (v2.5.xx)
+        surveys - LimeSurvey bugs and feature requests</title>\n<meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge,chrome=1\" />\n<meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" />\n\t<link rel=\"stylesheet\"
+        type=\"text/css\" href=\"https://bugs.limesurvey.org/css/default.css\" />\n\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/status_config.php?cache_key=f155aff09fdb645f05e99621ef9ac343\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/dropzone-4.3.0.min.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/bootstrap-3.3.6.min.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/font-awesome-4.6.3.min.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/fonts.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/bootstrap-datetimepicker-4.17.47.min.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/ace.min.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/ace-mantis.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.limesurvey.org/css/ace-skins.min.css\"
+        />\n\n\t<link rel=\"shortcut icon\" href=\"/limesurvey/favicon.ico\" type=\"image/x-icon\"
+        />\n\t<link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        title=\"LimeSurvey bugs and feature requests: full-text search\" href=\"https://bugs.limesurvey.org/browser_search_plugin.php?type=text\"/>\n\t<link
+        rel=\"search\" type=\"application/opensearchdescription+xml\" title=\"LimeSurvey
+        bugs and feature requests: search by Issue Id\" href=\"https://bugs.limesurvey.org/browser_search_plugin.php?type=id\"/>\n\t<script
+        type=\"text/javascript\" src=\"/javascript_config.php?cache_key=f155aff09fdb645f05e99621ef9ac343\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/javascript_translations.php?cache_key=f35093d24f063d0e89e4e05b8fb68b83\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/jquery-2.2.4.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/dropzone-4.3.0.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/common.js\"></script>\n<link rel=\"stylesheet\"
+        type=\"text/css\" href=\"/plugin_file.php?file=Source/style.css\"/></head>\n<body
+        id=\"view-issue-page\" class=\"skin-3\">\n<style>\n* { font-family: \"Open
+        Sans\"; } \nh1, h2, h3, h4, h5 { font-family: \"Open Sans\"; } \n</style>\n<div
+        id=\"navbar\" class=\"navbar navbar-default navbar-collapse navbar-fixed-top
+        noprint\"><div id=\"navbar-container\" class=\"navbar-container\"><button
+        id=\"menu-toggler\" type=\"button\" class=\"navbar-toggle menu-toggler pull-left
+        hidden-lg hidden-md\" data-target=\"#sidebar\"><span class=\"sr-only\">Toggle
+        sidebar</span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span
+        class=\"icon-bar\"></span></button><div class=\"navbar-header\"><a href=\"/my_view_page.php\"
+        class=\"navbar-brand\"><span class=\"smaller-75\"> LimeSurvey bugs and feature
+        requests </span></a><button type=\"button\" class=\"navbar-toggle navbar-toggle-img
+        collapsed pull-right hidden-sm hidden-md hidden-lg\" data-toggle=\"collapse\"
+        data-target=\".navbar-buttons,.navbar-menu\"><span class=\"sr-only\">Toggle
+        user menu</span><img class=\"nav-avatar-40\" src=\"https://www.limesurvey.org/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png\"
+        alt=\"guest\" /></button></div><div class=\"navbar-buttons navbar-header navbar-collapse
+        collapse\"><ul class=\"nav ace-nav\"><li class=\"grey\" id=\"dropdown_projects_menu\">\n<a
+        data-toggle=\"dropdown\" href=\"#\" class=\"dropdown-toggle\">\n&#160;Bug
+        reports&#160;\n <i class=\"ace-icon fa fa-angle-down bigger-110\"></i>\n</a>\n<ul
+        class=\"dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close
+        scrollable-menu\">\n<li class=\"active\"><a href=\"/set_project.php?project_id=0\"
+        selected=\"selected\"> All Projects </a></li> \n<li class=\"divider\"></li>\n<li><div
+        id=\"projects-list\"><div class=\"projects-searchbox\"><input class=\"search
+        form-control input-md\" placeholder=\"Search\" /></div><ul class=\"list dropdown-yellow
+        no-margin\"><li><a href=\"/set_project.php?project_id=4\" class=\"project-link\">
+        Bug reports </a></li>\n<li><a href=\"/set_project.php?project_id=10\" class=\"project-link\">
+        Development  </a></li>\n<li><a href=\"/set_project.php?project_id=12\" class=\"project-link\">
+        Feature requests </a></li>\n<li><a href=\"/set_project.php?project_id=2\"
+        class=\"project-link\"> User patches </a></li>\n</ul></div></li></ul>\n</li>\n<li
+        class=\"grey\"><a data-toggle=\"dropdown\" href=\"#\" class=\"dropdown-toggle\"><img
+        class=\"nav-avatar-40\" src=\"https://www.limesurvey.org/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png\"
+        alt=\"guest\" /><span class=\"user-info\">guest</span><i class=\"ace-icon
+        fa fa-angle-down\"></i></a><ul class=\"user-menu dropdown-menu dropdown-menu-right
+        dropdown-yellow dropdown-caret dropdown-close\"><li><a href=\"https://bugs.limesurvey.org/issues_rss.php?\"><i
+        class=\"ace-icon fa fa-rss-square orange\"> </i> RSS</a></li><li class=\"divider\"></li><li><a
+        href=\"/logout_page.php\"><i class=\"ace-icon fa fa-sign-out\"> </i> Logout</a></li></ul></li></ul></div></div></div><div
+        class=\"main-container\" id=\"main-container\">\n<div id=\"sidebar\" class=\"sidebar
+        sidebar-fixed responsive compact \"><ul class=\"nav nav-list\"><li>\n<a href=\"/main_page.php\">\n<i
+        class=\"menu-icon fa fa-bullhorn\"></i> \n<span class=\"menu-text\"> Main
+        </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"/my_view_page.php\">\n<i
+        class=\"menu-icon fa fa-dashboard\"></i> \n<span class=\"menu-text\"> My View
+        </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li class=\"active\">\n<a href=\"/view_all_bug_page.php\">\n<i
+        class=\"menu-icon fa fa-list-alt\"></i> \n<span class=\"menu-text\"> View
+        Issues </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"/changelog_page.php\">\n<i
+        class=\"menu-icon fa fa-retweet\"></i> \n<span class=\"menu-text\"> Change
+        Log </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"/roadmap_page.php\">\n<i
+        class=\"menu-icon fa fa-road\"></i> \n<span class=\"menu-text\"> Roadmap </span>\n</a>\n<b
+        class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"/plugin.php?page=Source/index\">\n<i
+        class=\"menu-icon fa fa-code-fork\"></i> \n<span class=\"menu-text\"> Repositories
+        </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n<li>\n<a href=\"http://www.limesurvey.org/en/component/comprofiler/registers\">\n<i
+        class=\"menu-icon fa fa-plug\"></i> \n<span class=\"menu-text\"> Registration
+        </span>\n</a>\n<b class=\"arrow\"></b>\n</li>\n</ul><div id=\"sidebar\" class=\"sidebar-toggle
+        sidebar-collapse\"><i data-icon2=\"ace-icon fa fa-angle-double-right\" data-icon1=\"ace-icon
+        fa fa-angle-double-left\"\n\t\tclass=\"ace-icon fa fa-angle-double-left\"></i></div></div><div
+        class=\"main-content\">\n<div id=\"breadcrumbs\" class=\"breadcrumbs noprint\">\n<ul
+        class=\"breadcrumb\">\n <li><i class=\"fa fa-user home-icon active\"></i>
+        Anonymous </li>\n<div class=\"btn-group btn-corner\">\n\t<a href=\"/login_page.php?return=%2Fview.php%3Fid%3D12227\"
+        class=\"btn btn-primary btn-xs\">Login</a>\n</div>\n</ul>\n<div id=\"nav-search\"
+        class=\"nav-search\"><form class=\"form-search\" method=\"post\" action=\"/jump_to_bug.php\"><span
+        class=\"input-icon\"><input type=\"text\" name=\"bug_id\" autocomplete=\"off\"
+        class=\"nav-search-input\" placeholder=\"Issue #\"><i class=\"ace-icon fa
+        fa-search nav-search-icon\"></i></span></form></div>\n</div>\n  <div class=\"page-content\">\n<div
+        class=\"row\">\n<div class=\"col-md-12 col-xs-12\"><div class=\"widget-box
+        widget-color-blue2\"><div class=\"widget-header widget-header-small\"><h4
+        class=\"widget-title lighter\"><i class=\"ace-icon fa fa-bars\"></i>View Issue
+        Details</h4></div><div class=\"widget-body\"><div class=\"widget-toolbox padding-8
+        clearfix noprint\"><div class=\"btn-group pull-left\"><a class=\"btn btn-primary
+        btn-white btn-round btn-sm\" href=\"#bugnotes\">Jump to Notes</a><a class=\"btn
+        btn-primary btn-white btn-round btn-sm\" href=\"#history\">Jump to History</a></div><div
+        class=\"btn-group pull-right\"></div></div><div class=\"widget-main no-padding\"><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-condensed\"><tfoot><tr
+        class=\"noprint\"><td colspan=\"6\"><div class=\"btn-group\"><div class=\"pull-left
+        padding-right-8\"></div><div class=\"pull-left padding-right-8\"></div><div
+        class=\"pull-left padding-right-8\"></div><div class=\"pull-left padding-right-2\"></div><div
+        class=\"pull-left padding-right-2\"></div><div class=\"pull-left padding-right-2\"></div><div
+        class=\"pull-left padding-right-2\"></div><div class=\"pull-left padding-right-2\"></div></div></td></tr></tfoot><tbody><tr
+        class=\"bug-header\"><th class=\"bug-id category\" width=\"15%\">ID</th><th
+        class=\"bug-project category\" width=\"20%\">Project</th><th class=\"bug-category
+        category\" width=\"15%\">Category</th><th class=\"bug-view-status category\"
+        width=\"15%\">View Status</th><th class=\"bug-date-submitted category\" width=\"15%\">Date
+        Submitted</th><th class=\"bug-last-modified category\" width=\"20%\">Last
+        Update</th></tr><tr class=\"bug-header-data\"><td class=\"bug-id\">12227</td><td
+        class=\"bug-project\">Bug reports</td><td class=\"bug-category\">[All Projects]
+        Import/Export</td><td class=\"bug-view-status\">public</td><td class=\"bug-date-submitted\">2017-03-24
+        16:44</td><td class=\"bug-last-modified\">2018-03-20 17:59</td></tr><tr class=\"spacer\"><td
+        colspan=\"6\"></td></tr><tr class=\"hidden\"></tr><tr><th class=\"bug-reporter
+        category\">Reporter</th><td class=\"bug-reporter\">vkuzmin</td><th class=\"bug-assigned-to
+        category\">Assigned To</th><td class=\"bug-assigned-to\"></td><td colspan=\"2\">&#160;</td></tr><tr><th
+        class=\"bug-priority category\">Priority</th><td class=\"bug-priority\">none</td><th
+        class=\"bug-severity category\">Severity</th><td class=\"bug-severity\">minor</td><td
+        colspan=\"2\">&#160;</td></tr><tr><th class=\"bug-status category\">Status</th><td
+        class=\"bug-status\"><i class=\"fa fa-square fa-status-box status-10-color\"></i>
+        new</td><th class=\"bug-resolution category\">Resolution</th><td class=\"bug-resolution\">open</td><td
+        colspan=\"2\">&#160;</td></tr><tr><th class=\"bug-product-version category\">Product
+        Version</th><td class=\"bug-product-version\">2.64.x</td><td colspan=\"4\">&#160;</td></tr><tr><th
+        class=\"bug-target-version category\">Target Version</th><td class=\"bug-target-version\"></td><th
+        class=\"bug-fixed-in-version category\">Fixed in Version</th><td class=\"bug-fixed-in-version\">2.64.x</td><td
+        colspan=\"2\">&#160;</td></tr><tr class=\"spacer\"><td colspan=\"6\"></td></tr><tr
+        class=\"hidden\"></tr><tr><th class=\"bug-summary category\">Summary</th><td
+        class=\"bug-summary\" colspan=\"5\">12227: &quot;Error: Failed to insert data&quot;
+        and corrupted quotas when i've tried to import old (v2.5.xx) surveys</td></tr><tr><th
+        class=\"bug-description category\">Description</th><td class=\"bug-description\"
+        colspan=\"5\">I've tried 'debug'=&gt;2, but got same short error message.<br
+        />\r\nWhen i try to edit quotas that page won't work. See PHP notice also.<br
+        />\r\n<br />\r\n</td></tr><tr><th class=\"bug-steps-to-reproduce category\">Steps
+        To Reproduce</th><td class=\"bug-steps-to-reproduce\" colspan=\"5\">1. Import
+        my .lss file - you should get and error.<br />\r\n2. Try to edit quotas.</td></tr><tr><th
+        class=\"bug-additional-information category\">Additional Information</th><td
+        class=\"bug-additional-information\" colspan=\"5\">In 2.55.2 (161103) that
+        .lss file works fine.</td></tr><tr><th class=\"bug-tags category\">Tags</th><td
+        class=\"bug-tags\" colspan=\"5\">No tags attached.</td></tr><tr class=\"spacer\"><td
+        colspan=\"6\"></td></tr><tr class=\"hidden\"></tr><tr><th class=\"bug-custom-field
+        category\">Complete LimeSurvey version number (&amp; build)</th><td class=\"bug-custom-field\"
+        colspan=\"5\">2.64.2+170324</td></tr><tr><th class=\"bug-custom-field category\">I
+        will donate to the project if issue is resolved</th><td class=\"bug-custom-field\"
+        colspan=\"5\">No</td></tr><tr><th class=\"bug-custom-field category\">Browser</th><td
+        class=\"bug-custom-field\" colspan=\"5\">Chrome 55</td></tr><tr><th class=\"bug-custom-field
+        category\">Database &amp; DB-Version</th><td class=\"bug-custom-field\" colspan=\"5\">MySQL
+        5.7.14</td></tr><tr><th class=\"bug-custom-field category\">Operating System
+        (Server)</th><td class=\"bug-custom-field\" colspan=\"5\">Windows 7 sp1 x64</td></tr><tr><th
+        class=\"bug-custom-field category\">Webserver software &amp; version</th><td
+        class=\"bug-custom-field\" colspan=\"5\">Apache/2.4.23 (Win32) </td></tr><tr><th
+        class=\"bug-custom-field category\">PHP Version</th><td class=\"bug-custom-field\"
+        colspan=\"5\">PHP/5.6.24</td></tr><tr class=\"spacer\"><td colspan=\"6\"></td></tr><tr
+        class=\"hidden\"></tr></tbody></table></div></div></div></div></div>\n<div
+        class=\"col-md-12 col-xs-12\">\n<a id=\"attachments\"></a>\n<a id=\"bugnotes\"></a>\n<div
+        class=\"space-10\"></div>\n\n<div id=\"bugnotes\" class=\"widget-box widget-color-blue2
+        \">\n<div class=\"widget-header widget-header-small\">\n\t<h4 class=\"widget-title
+        lighter\">\n\t<i class=\"ace-icon fa fa-comments\"></i>\n\t\tActivities\t</h4>\n\t<div
+        class=\"widget-toolbar\">\n\t\t<a data-action=\"collapse\" href=\"#\">\n\t\t\t<i
+        class=\"1 ace-icon fa fa-chevron-up bigger-125\"></i>\n\t\t</a>\n\t</div>\n\t</div>\n\t<div
+        class=\"widget-body\">\n\t<div class=\"widget-main no-padding\">\n\t<div class=\"table-responsive\">\n\t<table
+        class=\"table table-bordered table-condensed table-striped\">\n<tr class=\"bugnote
+        visible-on-hover-toggle\" id=\"c8943\">\n\t\t<td class=\"category\">\n\t\t<div
+        class=\"pull-left padding-2\"><div class=\"bugnote-avatar-container-80\"><a
+        rel=\"nofollow\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\"><img
+        class=\"bugnote-avatar-80\" src=\"https://www.limesurvey.org/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png\"
+        alt=\"vkuzmin\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2017-03-24 16:44\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">reporter</span>\t\t\t&#160;\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note\">\n\t\n<a
+        href=\"file_download.php?file_id=8943&amp;type=bug\"><i class=\"fa fa-file-o\"
+        alt=\"? file icon\" width=\"16\" height=\"16\"></i></a>&#32;<a href=\"file_download.php?file_id=8943&amp;type=bug\">corrupted
+        quotas.lss</a>&#32;(157,975&#32;bytes)<br />\n<a href=\"file_download.php?file_id=8944&amp;type=bug\"><i
+        class=\"fa fa-file-code-o\" alt=\"html file icon\" width=\"16\" height=\"16\"></i></a>&#32;<a
+        href=\"file_download.php?file_id=8944&amp;type=bug\">PHP notice.html</a>&#32;(49,259&#32;bytes)<br
+        />\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr
+        class=\"bugnote visible-on-hover-toggle\" id=\"c43335\">\n\t\t<td class=\"category\">\n\t\t<div
+        class=\"pull-left padding-2\"><div class=\"bugnote-avatar-container-80\"><a
+        rel=\"nofollow\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\"><img
+        class=\"bugnote-avatar-80\" src=\"https://www.limesurvey.org/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png\"
+        alt=\"vkuzmin\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2017-03-24 16:45\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">reporter</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c43335\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~43335\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\tAlso i've tried to import this file in 2.55 and run last
+        limesurvey with same DB and it works fine. So i think its import issue.\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c43336\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\"><img
+        class=\"bugnote-avatar-80\" src=\"https://www.limesurvey.org/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png\"
+        alt=\"vkuzmin\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2017-03-24 17:02\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">reporter</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c43336\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~43336\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\t2.55.xx, not 2.5.xx\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td
+        colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c43337\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\"><img
+        class=\"bugnote-avatar-80\" src=\"https://www.limesurvey.org/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png\"
+        alt=\"vkuzmin\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2017-03-24 17:13\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">reporter</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c43337\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~43337\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\tI've tried to copy (Create survey-Copy) old survey with
+        quotas and got same error message too.\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td
+        colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c43346\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"\"><img class=\"bugnote-avatar-80\"
+        src=\"https://bugs.limesurvey.org/images/avatar.png\" alt=\"\" /></a></div>\t\t</div>\n\t\t<div
+        class=\"pull-left padding-2\">\n\t\t<p class=\"no-margin\">\n\t\t\t<i class=\"fa
+        fa-user grey\"></i> <del class=\"user\">user14106</del>\t\t</p>\n\t\t<p class=\"no-margin
+        small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i> 2017-03-27 11:14\t\t\t\t\t</p>\n\t\t<p
+        class=\"no-margin\">\n\t\t\t\t\t\t&#160;\n\t\t\t\t\t\t<i class=\"fa fa-link
+        grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c43346\" class=\"lighter\"
+        title=\"Direct link to note\">\n\t\t\t\t~43346\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\"><i class=\"fa fa-retweet\"></i> Last edited:&#32;2017-03-27
+        11:19</p><p class=\"no-margin\"><span class=\"small bugnote-revisions-link\"><a
+        href=\"bug_revision_view_page.php?bugnote_id=43346\">View 2 revisions</a></span></p>\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\tthe reason for failing import is that you have autoload
+        url enabled but no url defined. <br />\r\nThe new quotaLanguagesetting model
+        has additional validation rule to check that<br />\r\n<br />\r\nSo I would
+        say it is not a bug. <br />\r\nIt's a problem that model validation errors
+        do not get thrown to user, but this is a much wider problem in the code. <br
+        />\r\n<br />\r\nTo fix that. Please set an url for autoload. Or disable autoload
+        url. And then re-export and import.<br />\n<br />\n\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td
+        colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c43347\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"\"><img class=\"bugnote-avatar-80\"
+        src=\"https://bugs.limesurvey.org/images/avatar.png\" alt=\"\" /></a></div>\t\t</div>\n\t\t<div
+        class=\"pull-left padding-2\">\n\t\t<p class=\"no-margin\">\n\t\t\t<i class=\"fa
+        fa-user grey\"></i> <del class=\"user\">user14106</del>\t\t</p>\n\t\t<p class=\"no-margin
+        small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i> 2017-03-27 11:15\t\t\t\t\t</p>\n\t\t<p
+        class=\"no-margin\">\n\t\t\t\t\t\t&#160;\n\t\t\t\t\t\t<i class=\"fa fa-link
+        grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c43347\" class=\"lighter\"
+        title=\"Direct link to note\">\n\t\t\t\t~43347\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\t<a href=\"https://github.com/LimeSurvey/LimeSurvey/blob/master/application/models/QuotaLanguageSetting.php#L94\">https://github.com/LimeSurvey/LimeSurvey/blob/master/application/models/QuotaLanguageSetting.php#L94</a>\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c43348\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\"><img
+        class=\"bugnote-avatar-80\" src=\"https://www.limesurvey.org/components/com_comprofiler/plugin/templates/default/images/avatar/tnnophoto_n.png\"
+        alt=\"vkuzmin\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2017-03-27 12:27\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">reporter</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c43348\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~43348\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\tThank you! &quot;Autoload url&quot; was set to On by
+        default previously.\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr
+        class=\"bugnote visible-on-hover-toggle\" id=\"c47142\">\n\t\t<td class=\"category\">\n\t\t<div
+        class=\"pull-left padding-2\"><div class=\"bugnote-avatar-container-80\"><a
+        rel=\"nofollow\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\"><img
+        class=\"bugnote-avatar-80\" src=\"https://www.limesurvey.org/images/comprofiler/tn3578_490118e41e6cc.png\"
+        alt=\"Mazi\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\">Mazi</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2018-03-20 16:30\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">developer</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c47142\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~47142\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\tCan't we fix this at the import skript? Because the common
+        user will never think that this may cause the issue!<br />\r\n<br />\r\nOr
+        can we at least have a more meaningful error message pointing to the cause
+        of the issue?\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr
+        class=\"bugnote visible-on-hover-toggle\" id=\"c47144\">\n\t\t<td class=\"category\">\n\t\t<div
+        class=\"pull-left padding-2\"><div class=\"bugnote-avatar-container-80\"><a
+        rel=\"nofollow\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=1000\"><img
+        class=\"bugnote-avatar-80\" src=\"https://www.limesurvey.org/images/comprofiler/tn1161_5087cbd635b4c.png\"
+        alt=\"DenisChenu\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=1000\">DenisChenu</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2018-03-20 16:45\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">developer</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c47144\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~47144\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\t<span class=\"mention\"><a class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\">@Mazi</a></span>
+        : you're right : we must show error to user, even without importing survey,
+        then i reopen.<br />\r\n<br />\r\nCan you confirm it break too with 3.5\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote visible-on-hover-toggle\"
+        id=\"c47146\">\n\t\t<td class=\"category\">\n\t\t<div class=\"pull-left padding-2\"><div
+        class=\"bugnote-avatar-container-80\"><a rel=\"nofollow\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\"><img
+        class=\"bugnote-avatar-80\" src=\"https://www.limesurvey.org/images/comprofiler/tn3578_490118e41e6cc.png\"
+        alt=\"Mazi\" /></a></div>\t\t</div>\n\t\t<div class=\"pull-left padding-2\">\n\t\t<p
+        class=\"no-margin\">\n\t\t\t<i class=\"fa fa-user grey\"></i> <a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\">Mazi</a>\t\t</p>\n\t\t<p
+        class=\"no-margin small lighter\">\n\t\t\t<i class=\"fa fa-clock-o grey\"></i>
+        2018-03-20 17:59\t\t\t\t\t</p>\n\t\t<p class=\"no-margin\">\n\t\t\t<span class=\"label
+        label-sm label-default arrowed-in-right\">developer</span>\t\t\t&#160;\n\t\t\t\t\t\t<i
+        class=\"fa fa-link grey\"></i>\n\t\t\t<a rel=\"bookmark\" href=\"view.php?id=12227#c47146\"
+        class=\"lighter\" title=\"Direct link to note\">\n\t\t\t\t~47146\t\t\t</a>\n\t\t\t\t\t</p>\n\t\t\t\t<div
+        class=\"clearfix\"></div>\n\t\t<div class=\"space-2\"></div>\n\t\t<div class=\"btn-group
+        visible-on-hover\">\n\t\t\t\t</div>\n\t\t</div>\n\t</td>\n\t<td class=\"bugnote-note
+        bugnote-public\">\n\tTest with latest 3.x version, build 180320 -&gt; exact
+        same error!\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n</table>\n</div>\n</div>\n</div>\n</div>\n</div>\n\n\n
+        \   <div class=\"col-md-12 col-xs-12\">\n        <a id=\"history\"></a>\n
+        \       <div class=\"space-10\"></div>\n\n<div id=\"history\" class=\"widget-box
+        widget-color-blue2 \">\n<div class=\"widget-header widget-header-small\">\n\t<h4
+        class=\"widget-title lighter\">\n\t\t<i class=\"ace-icon fa fa-history\"></i>\n\t\tIssue
+        History\t</h4>\n\t<div class=\"widget-toolbar\">\n\t\t<a data-action=\"collapse\"
+        href=\"#\">\n\t\t\t<i class=\"1 ace-icon fa fa-chevron-up bigger-125\"></i>\n\t\t</a>\n\t</div>\n</div>\n<div
+        class=\"widget-body\">\n<div class=\"widget-main no-padding\">\n<div class=\"table-responsive\">\n<table
+        class=\"table table-bordered table-condensed table-hover table-striped\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th
+        class=\"small-caption\">\n\t\t\t\tDate Modified\t\t\t</th>\n\t\t\t<th class=\"small-caption\">\n\t\t\t\tUsername\t\t\t</th>\n\t\t\t<th
+        class=\"small-caption\">\n\t\t\t\tField\t\t\t</th>\n\t\t\t<th class=\"small-caption\">\n\t\t\t\tChange\t\t\t</th>\n\t\t</tr>\n\t</thead>\n\n\t<tbody>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-24 16:44\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNew Issue\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-24 16:44\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tFile Added: corrupted quotas.lss\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-24 16:44\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tFile Added: PHP notice.html\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-24 16:45\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 43335\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-24 17:02\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 43336\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-24 17:13\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 43337\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-27 11:14\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<del
+        class=\"user\">user14106</del>\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tNote
+        Added: 43346\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-27 11:15\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<del
+        class=\"user\">user14106</del>\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tNote
+        Added: 43347\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-27 11:19\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<del
+        class=\"user\">user14106</del>\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tNote
+        Edited: 43346\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a href=\"bug_revision_view_page.php?bugnote_id=43346#r5135\">View
+        Revisions</a>\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t2017-03-27
+        12:27\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=53675\">vkuzmin</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 43348\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-27 12:30\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<del
+        class=\"user\">user14106</del>\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tAssigned
+        To\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t =&gt; user14106\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-27 12:30\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<del
+        class=\"user\">user14106</del>\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tStatus\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tnew =&gt; closed\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-27 12:30\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<del
+        class=\"user\">user14106</del>\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tResolution\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\topen =&gt; no change required\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2017-03-27 12:30\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<del
+        class=\"user\">user14106</del>\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tFixed
+        in Version\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t =&gt;
+        2.64.x\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t2018-03-20
+        16:30\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\">Mazi</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 47142\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-20 16:30\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\">Mazi</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tAssigned To\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tuser14106
+        =&gt; \t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t2018-03-20
+        16:30\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\">Mazi</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tStatus\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tclosed
+        =&gt; acknowledged\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t2018-03-20
+        16:44\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=1000\">DenisChenu</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tStatus\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tacknowledged
+        =&gt; new\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t2018-03-20
+        16:44\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=1000\">DenisChenu</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tResolution\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\tno
+        change required =&gt; open\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t2018-03-20
+        16:45\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a class=\"user\"
+        href=\"https://bugs.limesurvey.org/view_user_page.php?id=1000\">DenisChenu</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 47144\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-20 17:59\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.limesurvey.org/view_user_page.php?id=774\">Mazi</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 47146\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>\n</div>\n</div>\n</div>\n</div>\n</div>\n\n</div>\n</div>\n</div>\n<div
+        class=\"clearfix\"></div>\n<div class=\"space-20\"></div>\n<div class=\"footer
+        noprint\">\n<div class=\"footer-inner\">\n<div class=\"footer-content\">\n<div
+        class=\"col-md-6 col-xs-12 no-padding\">\n<address>\n<strong>Powered by <a
+        href=\"https://www.mantisbt.org\" title=\"bug tracking software\">MantisBT
+        </a></strong> <br>\n<small>Copyright &copy; 2000 - 2018 MantisBT Team</small><br><small>Contact
+        <a href=\"mailto:tracker@limesurvey.org\" title=\"Contact the webmaster via
+        e-mail.\">administrator</a> for assistance</small><br>\n</address>\n</div>\n<div
+        class=\"col-md-6 col-xs-12\">\n<div class=\"pull-right\" id=\"powered-by-mantisbt-logo\">\n<a
+        href=\"https://www.mantisbt.org\" title=\"Mantis Bug Tracker: a free and open
+        source web based bug tracking system.\"><img src=\"/images/mantis_logo.png\"
+        width=\"102\" height=\"35\" alt=\"Powered by Mantis Bug Tracker: a free and
+        open source web based bug tracking system.\" /></a>\n</div>\n</div>\n</div>\n</div>\n</div>\n<a
+        class=\"btn-scroll-up btn btn-sm btn-inverse display\" id=\"btn-scroll-up\"
+        href=\"#\">\n<i class=\"ace-icon fa fa-angle-double-up icon-only bigger-110\"></i>\n</a>\n</div>\n\t<script
+        type=\"text/javascript\" src=\"/js/bootstrap-3.3.6.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/moment-with-locales-2.15.2.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/bootstrap-datetimepicker-4.17.47.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/typeahead.jquery-1.1.1.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/list-1.4.1.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/ace.min.js\"></script>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:05 GMT
+- request:
+    method: get
+    uri: https://bugs.limesurvey.org/api/rest/issues/12227
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 21 Mar 2018 10:36:07 GMT
+      Content-Type:
+      - text/html
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA7PJKMnNsePlsslITUyxsynJLMlJtTMxMFHwyy9RcMsvzUux
+        0YcI2uiDlQCVJuWnVCokpSfn5+QX2SqVZ2SWpCqBjEhOzStJLbKzyTBENwEo
+        YqMPlQbZBVQE5eWlZ+ZV6BvqmeiZKWiEJpXmlZRqIivVB1kGMlwf6lAAZM+p
+        rLEAAAA=
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:07 GMT
+- request:
+    method: get
+    uri: https://bugs.limesurvey.org/api/soap/mantisconnect.php?wsdl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 21 Mar 2018 10:36:08 GMT
+      Content-Type:
+      - text/xml
+      Transfer-Encoding:
+      - ''
+      Connection:
+      - close
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.24
+      Set-Cookie:
+      - PHPSESSID=3258efq1nee6tbn403qc67htq6; path=/; secure; HttpOnly
+      Cache-Control:
+      - private, max-age=10800, pre-check=10800
+      Last-Modified:
+      - Sat, 10 Feb 2018 19:29:28 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <?xml-stylesheet type="text/xsl" href="wsdl-viewer.xsl"?>
+        <definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://futureware.biz/mantisconnect" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://futureware.biz/mantisconnect">
+        <types>
+        <xsd:schema targetNamespace="http://futureware.biz/mantisconnect">
+         <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+         <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+         <xsd:complexType name="IntegerArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:integer[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="StringArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ObjectRef">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ObjectRefArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ObjectRef[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="AccountData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="real_name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="email" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="UserData">
+          <xsd:all>
+           <xsd:element name="account_data" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="access_level" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="timezone" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="AccountDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:AccountData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="AttachmentData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="filename" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="size" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="content_type" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="date_submitted" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="download_url" type="xsd:anyURI" minOccurs="0"/>
+           <xsd:element name="user_id" type="xsd:integer" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="AttachmentDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:AttachmentData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectAttachmentData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="filename" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="title" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="size" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="content_type" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="date_submitted" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="download_url" type="xsd:anyURI" minOccurs="0"/>
+           <xsd:element name="user_id" type="xsd:integer" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectAttachmentDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ProjectAttachmentData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="RelationshipData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="type" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="target_id" type="xsd:integer" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="RelationshipDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:RelationshipData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="IssueNoteData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="reporter" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="text" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="view_state" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="date_submitted" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="last_modified" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="time_tracking" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="note_type" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="note_attr" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="IssueNoteDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:IssueNoteData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="IssueData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="view_state" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="last_updated" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="project" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="category" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="priority" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="severity" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="status" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="reporter" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="summary" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="build" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="platform" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="os" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="os_build" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="reproducibility" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="date_submitted" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="sponsorship_total" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="handler" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="projection" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="eta" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="resolution" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="fixed_in_version" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="target_version" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="steps_to_reproduce" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="additional_information" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="attachments" type="tns:AttachmentDataArray" minOccurs="0"/>
+           <xsd:element name="relationships" type="tns:RelationshipDataArray" minOccurs="0"/>
+           <xsd:element name="notes" type="tns:IssueNoteDataArray" minOccurs="0"/>
+           <xsd:element name="custom_fields" type="tns:CustomFieldValueForIssueDataArray" minOccurs="0"/>
+           <xsd:element name="due_date" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="monitors" type="tns:AccountDataArray" minOccurs="0"/>
+           <xsd:element name="sticky" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="tags" type="tns:ObjectRefArray" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="IssueDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:IssueData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="HistoryData">
+          <xsd:all>
+           <xsd:element name="date" type="xsd:integer"/>
+           <xsd:element name="userid" type="xsd:integer"/>
+           <xsd:element name="username" type="xsd:string"/>
+           <xsd:element name="field" type="xsd:string"/>
+           <xsd:element name="type" type="xsd:integer"/>
+           <xsd:element name="old_value" type="xsd:string"/>
+           <xsd:element name="new_value" type="xsd:string"
+           />
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="HistoryDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:HistoryData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="IssueHeaderData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer"/>
+           <xsd:element name="view_state" type="xsd:integer"/>
+           <xsd:element name="last_updated" type="xsd:dateTime"/>
+           <xsd:element name="project" type="xsd:integer"/>
+           <xsd:element name="category" type="xsd:string"/>
+           <xsd:element name="priority" type="xsd:integer"/>
+           <xsd:element name="severity" type="xsd:integer"/>
+           <xsd:element name="status" type="xsd:integer"/>
+           <xsd:element name="reporter" type="xsd:integer"/>
+           <xsd:element name="summary" type="xsd:string"/>
+           <xsd:element name="handler" type="xsd:integer"/>
+           <xsd:element name="resolution" type="xsd:integer"/>
+           <xsd:element name="attachments_count" type="xsd:integer"/>
+           <xsd:element name="notes_count" type="xsd:integer"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="IssueHeaderDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:IssueHeaderData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="status" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="enabled" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="view_state" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="access_min" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="file_path" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="subprojects" type="tns:ProjectDataArray" minOccurs="0"/>
+           <xsd:element name="inherit_global" type="xsd:boolean" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ProjectData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectVersionData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="project_id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="date_order" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="released" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="obsolete" type="xsd:boolean" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectVersionDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ProjectVersionData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="FilterData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="owner" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="project_id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="is_public" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="filter_string" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="url" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="FilterSearchData">
+          <xsd:all>
+           <xsd:element name="project_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="search" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="category" type="tns:StringArray" minOccurs="0"/>
+           <xsd:element name="severity_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="status_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="priority_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="reporter_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="handler_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="note_user_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="resolution_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="product_version" type="tns:StringArray" minOccurs="0"/>
+           <xsd:element name="user_monitor_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="hide_status_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="sort" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="sort_direction" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="sticky" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="view_state_id" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="fixed_in_version" type="tns:StringArray" minOccurs="0"/>
+           <xsd:element name="target_version" type="tns:StringArray" minOccurs="0"/>
+           <xsd:element name="platform" type="tns:StringArray" minOccurs="0"/>
+           <xsd:element name="os" type="tns:StringArray" minOccurs="0"/>
+           <xsd:element name="os_build" type="tns:StringArray" minOccurs="0"/>
+           <xsd:element name="start_day" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="start_month" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="start_year" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="end_day" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="end_month" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="end_year" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="tag_string" type="tns:StringArray" minOccurs="0"/>
+           <xsd:element name="tag_select" type="tns:IntegerArray" minOccurs="0"/>
+           <xsd:element name="custom_fields" type="tns:FilterCustomFieldArray" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="FilterDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:FilterData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldDefinitionData">
+          <xsd:all>
+           <xsd:element name="field" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="type" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="possible_values" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="default_value" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="valid_regexp" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="access_level_r" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="access_level_rw" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="length_min" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="length_max" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="advanced" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="display_report" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="display_update" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="display_resolved" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="display_closed" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="require_report" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="require_update" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="require_resolved" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="require_closed" type="xsd:boolean" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="FilterCustomField">
+          <xsd:all>
+           <xsd:element name="field" type="tns:ObjectRef" minOccurs="1"/>
+           <xsd:element name="value" type="tns:StringArray" minOccurs="1"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="FilterCustomFieldArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:FilterCustomField[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldDefinitionDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:CustomFieldDefinitionData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldLinkForProjectData">
+          <xsd:all>
+           <xsd:element name="field" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="sequence" type="xsd:byte" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldLinkForProjectDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:CustomFieldLinkForProjectData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldValueForIssueData">
+          <xsd:all>
+           <xsd:element name="field" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldValueForIssueDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:CustomFieldValueForIssueData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="TagData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="user_id" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="date_created" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="date_updated" type="xsd:dateTime" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="TagDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:TagData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="TagDataSearchResult">
+          <xsd:all>
+           <xsd:element name="results" type="tns:TagDataArray" minOccurs="0"/>
+           <xsd:element name="total_results" type="xsd:integer" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ProfileData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="user_id" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="platform" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="os" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="os_build" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ProfileDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ProfileData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ProfileDataSearchResult">
+          <xsd:all>
+           <xsd:element name="results" type="tns:ProfileDataArray" minOccurs="0"/>
+           <xsd:element name="total_results" type="xsd:integer" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+        </xsd:schema>
+        </types>
+        <message name="mc_versionRequest"></message>
+        <message name="mc_versionResponse">
+          <part name="return" type="xsd:string" /></message>
+        <message name="mc_loginRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_loginResponse">
+          <part name="return" type="tns:UserData" /></message>
+        <message name="mc_enum_statusRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_statusResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_prioritiesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_prioritiesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_severitiesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_severitiesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_reproducibilitiesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_reproducibilitiesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_projectionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_projectionsResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_etasRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_etasResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_resolutionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_resolutionsResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_access_levelsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_access_levelsResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_project_statusRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_project_statusResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_project_view_statesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_project_view_statesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_view_statesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_view_statesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_custom_field_typesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_custom_field_typesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="enumeration" type="xsd:string" /></message>
+        <message name="mc_enum_getResponse">
+          <part name="return" type="xsd:string" /></message>
+        <message name="mc_issue_existsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" /></message>
+        <message name="mc_issue_existsResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" /></message>
+        <message name="mc_issue_getResponse">
+          <part name="return" type="tns:IssueData" /></message>
+        <message name="mc_issues_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_ids" type="tns:IntegerArray" /></message>
+        <message name="mc_issues_getResponse">
+          <part name="return" type="tns:IssueDataArray" /></message>
+        <message name="mc_issues_get_headerRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_ids" type="tns:IntegerArray" /></message>
+        <message name="mc_issues_get_headerResponse">
+          <part name="return" type="tns:IssueHeaderDataArray" /></message>
+        <message name="mc_issue_get_historyRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" /></message>
+        <message name="mc_issue_get_historyResponse">
+          <part name="return" type="tns:HistoryDataArray" /></message>
+        <message name="mc_issue_get_biggest_idRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_issue_get_biggest_idResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_get_id_from_summaryRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="summary" type="xsd:string" /></message>
+        <message name="mc_issue_get_id_from_summaryResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue" type="tns:IssueData" /></message>
+        <message name="mc_issue_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_updateRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issueId" type="xsd:integer" />
+          <part name="issue" type="tns:IssueData" /></message>
+        <message name="mc_issue_updateResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_set_tagsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="tags" type="tns:TagDataArray" /></message>
+        <message name="mc_issue_set_tagsResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" /></message>
+        <message name="mc_issue_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_note_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="note" type="tns:IssueNoteData" /></message>
+        <message name="mc_issue_note_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_note_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_note_id" type="xsd:integer" /></message>
+        <message name="mc_issue_note_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_note_updateRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="note" type="tns:IssueNoteData" /></message>
+        <message name="mc_issue_note_updateResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_relationship_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="relationship" type="tns:RelationshipData" /></message>
+        <message name="mc_issue_relationship_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_relationship_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="relationship_id" type="xsd:integer" /></message>
+        <message name="mc_issue_relationship_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_attachment_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="name" type="xsd:string" />
+          <part name="file_type" type="xsd:string" />
+          <part name="content" type="xsd:base64Binary" /></message>
+        <message name="mc_issue_attachment_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_attachment_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_attachment_id" type="xsd:integer" /></message>
+        <message name="mc_issue_attachment_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_attachment_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_attachment_id" type="xsd:integer" /></message>
+        <message name="mc_issue_attachment_getResponse">
+          <part name="return" type="xsd:base64Binary" /></message>
+        <message name="mc_project_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project" type="tns:ProjectData" /></message>
+        <message name="mc_project_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_updateRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="project" type="tns:ProjectData" /></message>
+        <message name="mc_project_updateResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_get_id_from_nameRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_name" type="xsd:string" /></message>
+        <message name="mc_project_get_id_from_nameResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_get_issues_for_userRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="filter_type" type="xsd:string" />
+          <part name="target_user" type="tns:AccountData" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_project_get_issues_for_userResponse">
+          <part name="return" type="tns:IssueDataArray" /></message>
+        <message name="mc_project_get_issuesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_project_get_issuesResponse">
+          <part name="return" type="tns:IssueDataArray" /></message>
+        <message name="mc_project_get_issue_headersRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_project_get_issue_headersResponse">
+          <part name="return" type="tns:IssueHeaderDataArray" /></message>
+        <message name="mc_project_get_usersRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="access" type="xsd:integer" /></message>
+        <message name="mc_project_get_usersResponse">
+          <part name="return" type="tns:AccountDataArray" /></message>
+        <message name="mc_projects_get_user_accessibleRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_projects_get_user_accessibleResponse">
+          <part name="return" type="tns:ProjectDataArray" /></message>
+        <message name="mc_project_get_categoriesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_categoriesResponse">
+          <part name="return" type="tns:StringArray" /></message>
+        <message name="mc_project_add_categoryRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="p_category_name" type="xsd:string" /></message>
+        <message name="mc_project_add_categoryResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_delete_categoryRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="p_category_name" type="xsd:string" /></message>
+        <message name="mc_project_delete_categoryResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_rename_category_by_nameRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="p_category_name" type="xsd:string" />
+          <part name="p_category_name_new" type="xsd:string" />
+          <part name="p_assigned_to" type="xsd:integer" /></message>
+        <message name="mc_project_rename_category_by_nameResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_get_versionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_versionsResponse">
+          <part name="return" type="tns:ProjectVersionDataArray" /></message>
+        <message name="mc_project_version_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="version" type="tns:ProjectVersionData" /></message>
+        <message name="mc_project_version_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_version_updateRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="version_id" type="xsd:integer" />
+          <part name="version" type="tns:ProjectVersionData" /></message>
+        <message name="mc_project_version_updateResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_version_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="version_id" type="xsd:integer" /></message>
+        <message name="mc_project_version_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_get_released_versionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_released_versionsResponse">
+          <part name="return" type="tns:ProjectVersionDataArray" /></message>
+        <message name="mc_project_get_unreleased_versionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_unreleased_versionsResponse">
+          <part name="return" type="tns:ProjectVersionDataArray" /></message>
+        <message name="mc_project_get_attachmentsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_attachmentsResponse">
+          <part name="return" type="tns:ProjectAttachmentDataArray" /></message>
+        <message name="mc_project_get_custom_fieldsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_custom_fieldsResponse">
+          <part name="return" type="tns:CustomFieldDefinitionDataArray" /></message>
+        <message name="mc_project_attachment_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_attachment_id" type="xsd:integer" /></message>
+        <message name="mc_project_attachment_getResponse">
+          <part name="return" type="xsd:base64Binary" /></message>
+        <message name="mc_project_attachment_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="name" type="xsd:string" />
+          <part name="title" type="xsd:string" />
+          <part name="description" type="xsd:string" />
+          <part name="file_type" type="xsd:string" />
+          <part name="content" type="xsd:base64Binary" /></message>
+        <message name="mc_project_attachment_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_attachment_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_attachment_id" type="xsd:integer" /></message>
+        <message name="mc_project_attachment_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_get_all_subprojectsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_all_subprojectsResponse">
+          <part name="return" type="tns:StringArray" /></message>
+        <message name="mc_filter_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_filter_getResponse">
+          <part name="return" type="tns:FilterDataArray" /></message>
+        <message name="mc_filter_get_issuesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="filter_id" type="xsd:integer" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_filter_get_issuesResponse">
+          <part name="return" type="tns:IssueDataArray" /></message>
+        <message name="mc_filter_get_issue_headersRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="filter_id" type="xsd:integer" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_filter_get_issue_headersResponse">
+          <part name="return" type="tns:IssueHeaderDataArray" /></message>
+        <message name="mc_filter_search_issue_headersRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="filter" type="tns:FilterSearchData" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_filter_search_issue_headersResponse">
+          <part name="return" type="tns:IssueHeaderDataArray" /></message>
+        <message name="mc_filter_search_issuesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="filter" type="tns:FilterSearchData" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_filter_search_issuesResponse">
+          <part name="return" type="tns:IssueDataArray" /></message>
+        <message name="mc_filter_search_issue_idsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="filter" type="tns:FilterSearchData" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_filter_search_issue_idsResponse">
+          <part name="return" type="tns:IntegerArray" /></message>
+        <message name="mc_config_get_stringRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="config_var" type="xsd:string" /></message>
+        <message name="mc_config_get_stringResponse">
+          <part name="return" type="xsd:string" /></message>
+        <message name="mc_issue_checkinRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="comment" type="xsd:string" />
+          <part name="fixed" type="xsd:boolean" /></message>
+        <message name="mc_issue_checkinResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_user_pref_get_prefRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="pref_name" type="xsd:string" /></message>
+        <message name="mc_user_pref_get_prefResponse">
+          <part name="return" type="xsd:string" /></message>
+        <message name="mc_user_profiles_get_allRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_user_profiles_get_allResponse">
+          <part name="return" type="tns:ProfileDataSearchResult" /></message>
+        <message name="mc_tag_get_allRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_tag_get_allResponse">
+          <part name="return" type="tns:TagDataSearchResult" /></message>
+        <message name="mc_tag_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="tag" type="tns:TagData" /></message>
+        <message name="mc_tag_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_tag_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="tag_id" type="xsd:integer" /></message>
+        <message name="mc_tag_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <portType name="MantisConnectPortType">
+          <operation name="mc_version">
+            <input message="tns:mc_versionRequest"/>
+            <output message="tns:mc_versionResponse"/>
+          </operation>
+          <operation name="mc_login">
+            <documentation>Log the user in and get their information.</documentation>
+            <input message="tns:mc_loginRequest"/>
+            <output message="tns:mc_loginResponse"/>
+          </operation>
+          <operation name="mc_enum_status">
+            <documentation>Get the enumeration for statuses.</documentation>
+            <input message="tns:mc_enum_statusRequest"/>
+            <output message="tns:mc_enum_statusResponse"/>
+          </operation>
+          <operation name="mc_enum_priorities">
+            <documentation>Get the enumeration for priorities.</documentation>
+            <input message="tns:mc_enum_prioritiesRequest"/>
+            <output message="tns:mc_enum_prioritiesResponse"/>
+          </operation>
+          <operation name="mc_enum_severities">
+            <documentation>Get the enumeration for severities.</documentation>
+            <input message="tns:mc_enum_severitiesRequest"/>
+            <output message="tns:mc_enum_severitiesResponse"/>
+          </operation>
+          <operation name="mc_enum_reproducibilities">
+            <documentation>Get the enumeration for reproducibilities.</documentation>
+            <input message="tns:mc_enum_reproducibilitiesRequest"/>
+            <output message="tns:mc_enum_reproducibilitiesResponse"/>
+          </operation>
+          <operation name="mc_enum_projections">
+            <documentation>Get the enumeration for projections.</documentation>
+            <input message="tns:mc_enum_projectionsRequest"/>
+            <output message="tns:mc_enum_projectionsResponse"/>
+          </operation>
+          <operation name="mc_enum_etas">
+            <documentation>Get the enumeration for ETAs.</documentation>
+            <input message="tns:mc_enum_etasRequest"/>
+            <output message="tns:mc_enum_etasResponse"/>
+          </operation>
+          <operation name="mc_enum_resolutions">
+            <documentation>Get the enumeration for resolutions.</documentation>
+            <input message="tns:mc_enum_resolutionsRequest"/>
+            <output message="tns:mc_enum_resolutionsResponse"/>
+          </operation>
+          <operation name="mc_enum_access_levels">
+            <documentation>Get the enumeration for access levels.</documentation>
+            <input message="tns:mc_enum_access_levelsRequest"/>
+            <output message="tns:mc_enum_access_levelsResponse"/>
+          </operation>
+          <operation name="mc_enum_project_status">
+            <documentation>Get the enumeration for project statuses.</documentation>
+            <input message="tns:mc_enum_project_statusRequest"/>
+            <output message="tns:mc_enum_project_statusResponse"/>
+          </operation>
+          <operation name="mc_enum_project_view_states">
+            <documentation>Get the enumeration for project view states.</documentation>
+            <input message="tns:mc_enum_project_view_statesRequest"/>
+            <output message="tns:mc_enum_project_view_statesResponse"/>
+          </operation>
+          <operation name="mc_enum_view_states">
+            <documentation>Get the enumeration for view states.</documentation>
+            <input message="tns:mc_enum_view_statesRequest"/>
+            <output message="tns:mc_enum_view_statesResponse"/>
+          </operation>
+          <operation name="mc_enum_custom_field_types">
+            <documentation>Get the enumeration for custom field types.</documentation>
+            <input message="tns:mc_enum_custom_field_typesRequest"/>
+            <output message="tns:mc_enum_custom_field_typesResponse"/>
+          </operation>
+          <operation name="mc_enum_get">
+            <documentation>Get the enumeration for the specified enumeration type.</documentation>
+            <input message="tns:mc_enum_getRequest"/>
+            <output message="tns:mc_enum_getResponse"/>
+          </operation>
+          <operation name="mc_issue_exists">
+            <documentation>Check there exists an issue with the specified id.</documentation>
+            <input message="tns:mc_issue_existsRequest"/>
+            <output message="tns:mc_issue_existsResponse"/>
+          </operation>
+          <operation name="mc_issue_get">
+            <documentation>Get the issue with the specified id.</documentation>
+            <input message="tns:mc_issue_getRequest"/>
+            <output message="tns:mc_issue_getResponse"/>
+          </operation>
+          <operation name="mc_issues_get">
+            <documentation>Get all issues matching the ids.</documentation>
+            <input message="tns:mc_issues_getRequest"/>
+            <output message="tns:mc_issues_getResponse"/>
+          </operation>
+          <operation name="mc_issues_get_header">
+            <documentation>Get all issues header matching the ids.</documentation>
+            <input message="tns:mc_issues_get_headerRequest"/>
+            <output message="tns:mc_issues_get_headerResponse"/>
+          </operation>
+          <operation name="mc_issue_get_history">
+            <documentation>Get the history of the issue with the specified id.</documentation>
+            <input message="tns:mc_issue_get_historyRequest"/>
+            <output message="tns:mc_issue_get_historyResponse"/>
+          </operation>
+          <operation name="mc_issue_get_biggest_id">
+            <documentation>Get the latest submitted issue in the specified project.</documentation>
+            <input message="tns:mc_issue_get_biggest_idRequest"/>
+            <output message="tns:mc_issue_get_biggest_idResponse"/>
+          </operation>
+          <operation name="mc_issue_get_id_from_summary">
+            <documentation>Get the id of the issue with the specified summary.</documentation>
+            <input message="tns:mc_issue_get_id_from_summaryRequest"/>
+            <output message="tns:mc_issue_get_id_from_summaryResponse"/>
+          </operation>
+          <operation name="mc_issue_add">
+            <documentation>Submit the specified issue details.</documentation>
+            <input message="tns:mc_issue_addRequest"/>
+            <output message="tns:mc_issue_addResponse"/>
+          </operation>
+          <operation name="mc_issue_update">
+            <documentation>Update Issue method.</documentation>
+            <input message="tns:mc_issue_updateRequest"/>
+            <output message="tns:mc_issue_updateResponse"/>
+          </operation>
+          <operation name="mc_issue_set_tags">
+            <documentation>Sets the tags for a specified issue.</documentation>
+            <input message="tns:mc_issue_set_tagsRequest"/>
+            <output message="tns:mc_issue_set_tagsResponse"/>
+          </operation>
+          <operation name="mc_issue_delete">
+            <documentation>Delete the issue with the specified id.</documentation>
+            <input message="tns:mc_issue_deleteRequest"/>
+            <output message="tns:mc_issue_deleteResponse"/>
+          </operation>
+          <operation name="mc_issue_note_add">
+            <documentation>Submit a new note.</documentation>
+            <input message="tns:mc_issue_note_addRequest"/>
+            <output message="tns:mc_issue_note_addResponse"/>
+          </operation>
+          <operation name="mc_issue_note_delete">
+            <documentation>Delete the note with the specified id.</documentation>
+            <input message="tns:mc_issue_note_deleteRequest"/>
+            <output message="tns:mc_issue_note_deleteResponse"/>
+          </operation>
+          <operation name="mc_issue_note_update">
+            <documentation>Update a specific note of a specific issue.</documentation>
+            <input message="tns:mc_issue_note_updateRequest"/>
+            <output message="tns:mc_issue_note_updateResponse"/>
+          </operation>
+          <operation name="mc_issue_relationship_add">
+            <documentation>Submit a new relationship.</documentation>
+            <input message="tns:mc_issue_relationship_addRequest"/>
+            <output message="tns:mc_issue_relationship_addResponse"/>
+          </operation>
+          <operation name="mc_issue_relationship_delete">
+            <documentation>Delete the relationship for the specified issue.</documentation>
+            <input message="tns:mc_issue_relationship_deleteRequest"/>
+            <output message="tns:mc_issue_relationship_deleteResponse"/>
+          </operation>
+          <operation name="mc_issue_attachment_add">
+            <documentation>Submit a new issue attachment.</documentation>
+            <input message="tns:mc_issue_attachment_addRequest"/>
+            <output message="tns:mc_issue_attachment_addResponse"/>
+          </operation>
+          <operation name="mc_issue_attachment_delete">
+            <documentation>Delete the issue attachment with the specified id.</documentation>
+            <input message="tns:mc_issue_attachment_deleteRequest"/>
+            <output message="tns:mc_issue_attachment_deleteResponse"/>
+          </operation>
+          <operation name="mc_issue_attachment_get">
+            <documentation>Get the data for the specified issue attachment.</documentation>
+            <input message="tns:mc_issue_attachment_getRequest"/>
+            <output message="tns:mc_issue_attachment_getResponse"/>
+          </operation>
+          <operation name="mc_project_add">
+            <documentation>Add a new project to the tracker (must have admin privileges)</documentation>
+            <input message="tns:mc_project_addRequest"/>
+            <output message="tns:mc_project_addResponse"/>
+          </operation>
+          <operation name="mc_project_delete">
+            <documentation>Delete a project from the tracker (must have admin privileges)</documentation>
+            <input message="tns:mc_project_deleteRequest"/>
+            <output message="tns:mc_project_deleteResponse"/>
+          </operation>
+          <operation name="mc_project_update">
+            <documentation>Update a specific project to the tracker (must have admin privileges)</documentation>
+            <input message="tns:mc_project_updateRequest"/>
+            <output message="tns:mc_project_updateResponse"/>
+          </operation>
+          <operation name="mc_project_get_id_from_name">
+            <documentation>Get the id of the project with the specified name.</documentation>
+            <input message="tns:mc_project_get_id_from_nameRequest"/>
+            <output message="tns:mc_project_get_id_from_nameResponse"/>
+          </operation>
+          <operation name="mc_project_get_issues_for_user">
+            <documentation>Get the issues filtered by the specified user within the specified project. Supported types include "assigned", "monitored", "reported".  Pass &quot;-1&quot; for the per_page parameter to get all issues.  Use project id &quot;0&quot; for all projects.</documentation>
+            <input message="tns:mc_project_get_issues_for_userRequest"/>
+            <output message="tns:mc_project_get_issues_for_userResponse"/>
+          </operation>
+          <operation name="mc_project_get_issues">
+            <documentation>Get the issues that match the specified project id and paging details. Pass &quot;-1&quot; for the per_page parameter to get all issues.</documentation>
+            <input message="tns:mc_project_get_issuesRequest"/>
+            <output message="tns:mc_project_get_issuesResponse"/>
+          </operation>
+          <operation name="mc_project_get_issue_headers">
+            <documentation>Get the issue headers that match the specified project id and paging details. Pass &quot;-1&quot; for the per_page parameter to get all issues.</documentation>
+            <input message="tns:mc_project_get_issue_headersRequest"/>
+            <output message="tns:mc_project_get_issue_headersResponse"/>
+          </operation>
+          <operation name="mc_project_get_users">
+            <documentation>Get appropriate users assigned to a project by access level.</documentation>
+            <input message="tns:mc_project_get_usersRequest"/>
+            <output message="tns:mc_project_get_usersResponse"/>
+          </operation>
+          <operation name="mc_projects_get_user_accessible">
+            <documentation>Get the list of projects that are accessible to the logged in user.</documentation>
+            <input message="tns:mc_projects_get_user_accessibleRequest"/>
+            <output message="tns:mc_projects_get_user_accessibleResponse"/>
+          </operation>
+          <operation name="mc_project_get_categories">
+            <documentation>Get the categories belonging to the specified project.</documentation>
+            <input message="tns:mc_project_get_categoriesRequest"/>
+            <output message="tns:mc_project_get_categoriesResponse"/>
+          </operation>
+          <operation name="mc_project_add_category">
+            <documentation>Add a category of specific project.</documentation>
+            <input message="tns:mc_project_add_categoryRequest"/>
+            <output message="tns:mc_project_add_categoryResponse"/>
+          </operation>
+          <operation name="mc_project_delete_category">
+            <documentation>Delete a category of specific project.</documentation>
+            <input message="tns:mc_project_delete_categoryRequest"/>
+            <output message="tns:mc_project_delete_categoryResponse"/>
+          </operation>
+          <operation name="mc_project_rename_category_by_name">
+            <documentation>Rename a category of specific project.</documentation>
+            <input message="tns:mc_project_rename_category_by_nameRequest"/>
+            <output message="tns:mc_project_rename_category_by_nameResponse"/>
+          </operation>
+          <operation name="mc_project_get_versions">
+            <documentation>Get the versions belonging to the specified project.</documentation>
+            <input message="tns:mc_project_get_versionsRequest"/>
+            <output message="tns:mc_project_get_versionsResponse"/>
+          </operation>
+          <operation name="mc_project_version_add">
+            <documentation>Submit the specified version details.</documentation>
+            <input message="tns:mc_project_version_addRequest"/>
+            <output message="tns:mc_project_version_addResponse"/>
+          </operation>
+          <operation name="mc_project_version_update">
+            <documentation>Update version method.</documentation>
+            <input message="tns:mc_project_version_updateRequest"/>
+            <output message="tns:mc_project_version_updateResponse"/>
+          </operation>
+          <operation name="mc_project_version_delete">
+            <documentation>Delete the version with the specified id.</documentation>
+            <input message="tns:mc_project_version_deleteRequest"/>
+            <output message="tns:mc_project_version_deleteResponse"/>
+          </operation>
+          <operation name="mc_project_get_released_versions">
+            <documentation>Get the released versions that belong to the specified project.</documentation>
+            <input message="tns:mc_project_get_released_versionsRequest"/>
+            <output message="tns:mc_project_get_released_versionsResponse"/>
+          </operation>
+          <operation name="mc_project_get_unreleased_versions">
+            <documentation>Get the unreleased version that belong to the specified project.</documentation>
+            <input message="tns:mc_project_get_unreleased_versionsRequest"/>
+            <output message="tns:mc_project_get_unreleased_versionsResponse"/>
+          </operation>
+          <operation name="mc_project_get_attachments">
+            <documentation>Get the attachments that belong to the specified project.</documentation>
+            <input message="tns:mc_project_get_attachmentsRequest"/>
+            <output message="tns:mc_project_get_attachmentsResponse"/>
+          </operation>
+          <operation name="mc_project_get_custom_fields">
+            <documentation>Get the custom fields that belong to the specified project.</documentation>
+            <input message="tns:mc_project_get_custom_fieldsRequest"/>
+            <output message="tns:mc_project_get_custom_fieldsResponse"/>
+          </operation>
+          <operation name="mc_project_attachment_get">
+            <documentation>Get the data for the specified project attachment.</documentation>
+            <input message="tns:mc_project_attachment_getRequest"/>
+            <output message="tns:mc_project_attachment_getResponse"/>
+          </operation>
+          <operation name="mc_project_attachment_add">
+            <documentation>Submit a new project attachment.</documentation>
+            <input message="tns:mc_project_attachment_addRequest"/>
+            <output message="tns:mc_project_attachment_addResponse"/>
+          </operation>
+          <operation name="mc_project_attachment_delete">
+            <documentation>Delete the project attachment with the specified id.</documentation>
+            <input message="tns:mc_project_attachment_deleteRequest"/>
+            <output message="tns:mc_project_attachment_deleteResponse"/>
+          </operation>
+          <operation name="mc_project_get_all_subprojects">
+            <documentation>Get the subprojects ID of a specific project.</documentation>
+            <input message="tns:mc_project_get_all_subprojectsRequest"/>
+            <output message="tns:mc_project_get_all_subprojectsResponse"/>
+          </operation>
+          <operation name="mc_filter_get">
+            <documentation>Get the filters defined for the specified project.</documentation>
+            <input message="tns:mc_filter_getRequest"/>
+            <output message="tns:mc_filter_getResponse"/>
+          </operation>
+          <operation name="mc_filter_get_issues">
+            <documentation>Get the issues that match the specified filter and paging details. Pass &quot;-1&quot; for the per_page parameter to get all issues.</documentation>
+            <input message="tns:mc_filter_get_issuesRequest"/>
+            <output message="tns:mc_filter_get_issuesResponse"/>
+          </operation>
+          <operation name="mc_filter_get_issue_headers">
+            <documentation>Get the issue headers that match the specified filter and paging details.  Pass &quot;-1&quot; for the per_page parameter to get all issues.</documentation>
+            <input message="tns:mc_filter_get_issue_headersRequest"/>
+            <output message="tns:mc_filter_get_issue_headersResponse"/>
+          </operation>
+          <operation name="mc_filter_search_issue_headers">
+            <documentation>Get the issue headers that match the custom filter and paging details.</documentation>
+            <input message="tns:mc_filter_search_issue_headersRequest"/>
+            <output message="tns:mc_filter_search_issue_headersResponse"/>
+          </operation>
+          <operation name="mc_filter_search_issues">
+            <documentation>Get the issues that match the custom filter and paging details.</documentation>
+            <input message="tns:mc_filter_search_issuesRequest"/>
+            <output message="tns:mc_filter_search_issuesResponse"/>
+          </operation>
+          <operation name="mc_filter_search_issue_ids">
+            <documentation>Get the issue ids that match the custom filter and paging details.</documentation>
+            <input message="tns:mc_filter_search_issue_idsRequest"/>
+            <output message="tns:mc_filter_search_issue_idsResponse"/>
+          </operation>
+          <operation name="mc_config_get_string">
+            <documentation>Get the value for the specified configuration variable.</documentation>
+            <input message="tns:mc_config_get_stringRequest"/>
+            <output message="tns:mc_config_get_stringResponse"/>
+          </operation>
+          <operation name="mc_issue_checkin">
+            <documentation>Notifies MantisBT of a check-in for the issue with the specified id.</documentation>
+            <input message="tns:mc_issue_checkinRequest"/>
+            <output message="tns:mc_issue_checkinResponse"/>
+          </operation>
+          <operation name="mc_user_pref_get_pref">
+            <documentation>Get the value for the specified user preference.</documentation>
+            <input message="tns:mc_user_pref_get_prefRequest"/>
+            <output message="tns:mc_user_pref_get_prefResponse"/>
+          </operation>
+          <operation name="mc_user_profiles_get_all">
+            <documentation>Get profiles available to the current user.</documentation>
+            <input message="tns:mc_user_profiles_get_allRequest"/>
+            <output message="tns:mc_user_profiles_get_allResponse"/>
+          </operation>
+          <operation name="mc_tag_get_all">
+            <documentation>Gets all the tags.</documentation>
+            <input message="tns:mc_tag_get_allRequest"/>
+            <output message="tns:mc_tag_get_allResponse"/>
+          </operation>
+          <operation name="mc_tag_add">
+            <documentation>Creates a tag.</documentation>
+            <input message="tns:mc_tag_addRequest"/>
+            <output message="tns:mc_tag_addResponse"/>
+          </operation>
+          <operation name="mc_tag_delete">
+            <documentation>Deletes a tag.</documentation>
+            <input message="tns:mc_tag_deleteRequest"/>
+            <output message="tns:mc_tag_deleteResponse"/>
+          </operation>
+        </portType>
+        <binding name="MantisConnectBinding" type="tns:MantisConnectPortType">
+          <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+          <operation name="mc_version">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_version" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_login">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_login" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_status">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_status" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_priorities">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_priorities" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_severities">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_severities" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_reproducibilities">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_reproducibilities" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_projections">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_projections" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_etas">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_etas" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_resolutions">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_resolutions" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_access_levels">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_access_levels" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_project_status">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_project_status" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_project_view_states">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_project_view_states" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_view_states">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_view_states" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_custom_field_types">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_custom_field_types" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_get">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_enum_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_exists">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_exists" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_get">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issues_get">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issues_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issues_get_header">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issues_get_header" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_get_history">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_get_history" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_get_biggest_id">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_get_biggest_id" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_get_id_from_summary">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_get_id_from_summary" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_add">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_update">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_update" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_set_tags">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_set_tags" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_delete">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_note_add">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_note_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_note_delete">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_note_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_note_update">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_note_update" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_relationship_add">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_relationship_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_relationship_delete">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_relationship_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_attachment_add">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_attachment_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_attachment_delete">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_attachment_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_attachment_get">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_attachment_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_add">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_delete">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_update">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_update" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_id_from_name">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_id_from_name" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_issues_for_user">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_issues_for_user" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_issues">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_issues" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_issue_headers">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_issue_headers" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_users">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_users" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_projects_get_user_accessible">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_projects_get_user_accessible" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_categories">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_categories" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_add_category">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_add_category" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_delete_category">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_delete_category" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_rename_category_by_name">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_rename_category_by_name" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_versions">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_versions" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_version_add">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_version_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_version_update">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_version_update" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_version_delete">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_version_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_released_versions">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_released_versions" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_unreleased_versions">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_unreleased_versions" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_attachments">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_attachments" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_custom_fields">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_custom_fields" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_attachment_get">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_attachment_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_attachment_add">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_attachment_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_attachment_delete">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_attachment_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_all_subprojects">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_project_get_all_subprojects" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_get">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_filter_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_get_issues">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_filter_get_issues" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_get_issue_headers">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_filter_get_issue_headers" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_search_issue_headers">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_filter_search_issue_headers" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_search_issues">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_filter_search_issues" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_search_issue_ids">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_filter_search_issue_ids" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_config_get_string">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_config_get_string" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_checkin">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_checkin" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_user_pref_get_pref">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_user_pref_get_pref" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_user_profiles_get_all">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_user_profiles_get_all" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_tag_get_all">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_tag_get_all" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_tag_add">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_tag_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_tag_delete">
+            <soap:operation soapAction="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_tag_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+        </binding>
+        <service name="MantisConnect">
+          <port name="MantisConnectPort" binding="tns:MantisConnectBinding">
+            <soap:address location="https://bugs.limesurvey.org:443/api/soap/mantisconnect.php"/>
+          </port>
+        </service>
+        </definitions>
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:09 GMT
+- request:
+    method: post
+    uri: https://bugs.limesurvey.org/api/soap/mantisconnect.php
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://futureware.biz/mantisconnect"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><tns:mc_issue_get><username></username><password></password><issue_id>12227</issue_id></tns:mc_issue_get></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"https://bugs.limesurvey.org:443/api/soap/mantisconnect.php/mc_issue_get"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '394'
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 21 Mar 2018 10:36:11 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Transfer-Encoding:
+      - ''
+      Connection:
+      - close
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.24
+      Set-Cookie:
+      - PHPSESSID=tn0kl0bk8ug8upl9fnk013j3g3; path=/; secure; HttpOnly
+      Cache-Control:
+      - private, max-age=10800, pre-check=10800
+      Last-Modified:
+      - Sat, 10 Feb 2018 19:29:28 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://futureware.biz/mantisconnect" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:mc_issue_getResponse><return xsi:type="ns1:IssueData"><id xsi:type="xsd:integer">12227</id><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><last_updated xsi:type="xsd:dateTime">2018-03-20T17:59:45+01:00</last_updated><project xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">4</id><name xsi:type="xsd:string">Bug reports</name></project><category xsi:type="xsd:string">Import/Export</category><priority xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">none</name></priority><severity xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">50</id><name xsi:type="xsd:string">minor</name></severity><status xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">new</name></status><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">53675</id><name xsi:type="xsd:string">vkuzmin</name></reporter><summary xsi:type="xsd:string">"Error: Failed to insert data" and corrupted quotas when i've tried to import old (v2.5.xx) surveys</summary><version xsi:type="xsd:string">2.64.x</version><reproducibility xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">70</id><name xsi:type="xsd:string">have not tried</name></reproducibility><date_submitted xsi:type="xsd:dateTime">2017-03-24T16:44:08+01:00</date_submitted><sponsorship_total xsi:type="xsd:integer">0</sponsorship_total><resolution xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">open</name></resolution><fixed_in_version xsi:type="xsd:string">2.64.x</fixed_in_version><description xsi:type="xsd:string">I've tried 'debug'=&gt;2, but got same short error message.&#13;
+        When i try to edit quotas that page won't work. See PHP notice also.&#13;
+        &#13;
+        </description><steps_to_reproduce xsi:type="xsd:string">1. Import my .lss file - you should get and error.&#13;
+        2. Try to edit quotas.</steps_to_reproduce><additional_information xsi:type="xsd:string">In 2.55.2 (161103) that .lss file works fine.</additional_information><attachments SOAP-ENC:arrayType="ns1:AttachmentData[2]" xsi:type="SOAP-ENC:Array"><item xsi:type="ns1:AttachmentData"><id xsi:type="xsd:integer">8943</id><filename xsi:type="xsd:string">corrupted quotas.lss</filename><size xsi:type="xsd:integer">157975</size><content_type xsi:type="xsd:string">application/octet-stream</content_type><date_submitted xsi:type="xsd:dateTime">2017-03-24T16:44:08+01:00</date_submitted><download_url xsi:type="xsd:anyURI">https://bugs.limesurvey.org:443/file_download.php?file_id=8943&amp;amp;type=bug</download_url><user_id xsi:type="xsd:integer">53675</user_id></item><item xsi:type="ns1:AttachmentData"><id xsi:type="xsd:integer">8944</id><filename xsi:type="xsd:string">PHP notice.html</filename><size xsi:type="xsd:integer">49259</size><content_type xsi:type="xsd:string">text/html</content_type><date_submitted xsi:type="xsd:dateTime">2017-03-24T16:44:08+01:00</date_submitted><download_url xsi:type="xsd:anyURI">https://bugs.limesurvey.org:443/file_download.php?file_id=8944&amp;amp;type=bug</download_url><user_id xsi:type="xsd:integer">53675</user_id></item></attachments><notes SOAP-ENC:arrayType="ns1:IssueNoteData[9]" xsi:type="SOAP-ENC:Array"><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">43335</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">53675</id><name xsi:type="xsd:string">vkuzmin</name></reporter><text xsi:type="xsd:string">Also i've tried to import this file in 2.55 and run last limesurvey with same DB and it works fine. So i think its import issue.</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2017-03-24T16:45:28+01:00</date_submitted><last_modified xsi:type="xsd:dateTime">2017-03-24T16:45:28+01:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">43336</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">53675</id><name xsi:type="xsd:string">vkuzmin</name></reporter><text xsi:type="xsd:string">2.55.xx, not 2.5.xx</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2017-03-24T17:02:08+01:00</date_submitted><last_modified xsi:type="xsd:dateTime">2017-03-24T17:02:08+01:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">43337</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">53675</id><name xsi:type="xsd:string">vkuzmin</name></reporter><text xsi:type="xsd:string">I've tried to copy (Create survey-Copy) old survey with quotas and got same error message too.</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2017-03-24T17:13:19+01:00</date_submitted><last_modified xsi:type="xsd:dateTime">2017-03-24T17:13:19+01:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">43346</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">14106</id></reporter><text xsi:type="xsd:string">the reason for failing import is that you have autoload url enabled but no url defined. &#13;
+        The new quotaLanguagesetting model has additional validation rule to check that&#13;
+        &#13;
+        So I would say it is not a bug. &#13;
+        It's a problem that model validation errors do not get thrown to user, but this is a much wider problem in the code. &#13;
+        &#13;
+        To fix that. Please set an url for autoload. Or disable autoload url. And then re-export and import.
+
+        </text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2017-03-27T11:14:27+02:00</date_submitted><last_modified xsi:type="xsd:dateTime">2017-03-27T11:19:07+02:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">43347</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">14106</id></reporter><text xsi:type="xsd:string">https://github.com/LimeSurvey/LimeSurvey/blob/master/application/models/QuotaLanguageSetting.php#L94</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2017-03-27T11:15:33+02:00</date_submitted><last_modified xsi:type="xsd:dateTime">2017-03-27T11:15:33+02:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">43348</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">53675</id><name xsi:type="xsd:string">vkuzmin</name></reporter><text xsi:type="xsd:string">Thank you! "Autoload url" was set to On by default previously.</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2017-03-27T12:27:16+02:00</date_submitted><last_modified xsi:type="xsd:dateTime">2017-03-27T12:27:16+02:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">47142</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">774</id><name xsi:type="xsd:string">Mazi</name></reporter><text xsi:type="xsd:string">Can't we fix this at the import skript? Because the common user will never think that this may cause the issue!&#13;
+        &#13;
+        Or can we at least have a more meaningful error message pointing to the cause of the issue?</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2018-03-20T16:30:13+01:00</date_submitted><last_modified xsi:type="xsd:dateTime">2018-03-20T16:30:13+01:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">47144</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">1000</id><name xsi:type="xsd:string">DenisChenu</name></reporter><text xsi:type="xsd:string">@Mazi : you're right : we must show error to user, even without importing survey, then i reopen.&#13;
+        &#13;
+        Can you confirm it break too with 3.5</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2018-03-20T16:45:46+01:00</date_submitted><last_modified xsi:type="xsd:dateTime">2018-03-20T16:45:46+01:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">47146</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">774</id><name xsi:type="xsd:string">Mazi</name></reporter><text xsi:type="xsd:string">Test with latest 3.x version, build 180320 -&gt; exact same error!</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2018-03-20T17:59:45+01:00</date_submitted><last_modified xsi:type="xsd:dateTime">2018-03-20T17:59:45+01:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item></notes><custom_fields SOAP-ENC:arrayType="ns1:CustomFieldValueForIssueData[7]" xsi:type="SOAP-ENC:Array"><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">7</id><name xsi:type="xsd:string">Complete LimeSurvey version number (&amp; build)</name></field><value xsi:type="xsd:string">2.64.2+170324</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">9</id><name xsi:type="xsd:string">I will donate to the project if issue is resolved</name></field><value xsi:type="xsd:string">No</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">5</id><name xsi:type="xsd:string">Browser</name></field><value xsi:type="xsd:string">Chrome 55</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">3</id><name xsi:type="xsd:string">Database &amp; DB-Version</name></field><value xsi:type="xsd:string">MySQL 5.7.14</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">1</id><name xsi:type="xsd:string">Operating System (Server)</name></field><value xsi:type="xsd:string">Windows 7 sp1 x64</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">4</id><name xsi:type="xsd:string">Webserver software &amp; version</name></field><value xsi:type="xsd:string">Apache/2.4.23 (Win32) </value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">2</id><name xsi:type="xsd:string">PHP Version</name></field><value xsi:type="xsd:string">PHP/5.6.24</value></item></custom_fields><monitors SOAP-ENC:arrayType="ns1:AccountData[0]" xsi:type="SOAP-ENC:Array"/><sticky xsi:type="xsd:boolean">false</sticky><tags SOAP-ENC:arrayType="ns1:ObjectRef[0]" xsi:type="SOAP-ENC:Array"/></return></ns1:mc_issue_getResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:11 GMT
+recorded_with: VCR 2.9.3

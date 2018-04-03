@@ -135,6 +135,43 @@ describe "live_sync" do
         expect(action).to change(Comment, :count).by_at_least(1)
       end
     end
+
+
+    describe "MantisRest::Issue" do
+      let(:issue_url) { "https://www.mantisbt.org/bugs/view.php?id=24096" }
+
+      it "should create new issue" do
+        expect(action).to change(Issue, :count).by(1)
+      end
+
+      it "should fetch issue comment" do
+        expect(action).to change(Comment, :count).by_at_least(1)
+      end
+    end
+
+    describe "MantisSoap::Issue" do
+      let(:issue_url) { "https://bugs.limesurvey.org/view.php?id=12227" }
+
+      it "should create new issue" do
+        expect(action).to change(Issue, :count).by(1)
+      end
+
+      it "should fetch issue comment" do
+        expect(action).to change(Comment, :count).by_at_least(1)
+      end
+    end
+
+    describe "MantisPrintBug::Issue" do
+      let(:issue_url) { "https://caml.inria.fr/mantis/view.php?id=7754" }
+
+      it "should create new issue" do
+        expect(action).to change(Issue, :count).by(1)
+      end
+
+      it "should fetch issue comment" do
+        expect(action).to change(Comment, :count).by_at_least(1)
+      end
+    end
   end
 
   describe "Tracker#remote_sync" do
@@ -237,7 +274,7 @@ describe "live_sync" do
       end
 
       it "should create Tracker Issues" do
-        expect(action).to change(tracker.issues, :count).by_at_least(tracker_class::MAX_RESULT_PER_PAGE)
+        expect(action).to change{tracker.issues.count}.by_at_least(tracker_class::MAX_RESULT_PER_PAGE)
       end
     end
 
@@ -268,6 +305,20 @@ describe "live_sync" do
         expect(action).to change(tracker.issues, :count).by_at_least(1)
       end
     end
+
+    describe "Mantis::Tracker" do
+      let(:tracker_class) { Mantis::Tracker }
+      let(:tracker_url) { "https://www.mantisbt.org/bugs/" }
+      let(:tracker_name) { "www.mantisbt.org" }
+
+      it "should create new Tracker" do
+        expect(action).to change(Tracker, :count).by(1)
+      end
+
+      it "should create Tracker Issues" do
+        expect(action).to change(tracker.issues, :count).by_at_least(1)
+      end
+    end
   end
 
   describe "Tracker::API.extract_info_from_url" do
@@ -276,93 +327,93 @@ describe "live_sync" do
     ############### TRAC ###############
 
     it "https://trac.adium.im/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('https://trac.adium.im/')
-      info[:tracker_name].should eq('Adium Trac')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('https://trac.adium.im/')
+      expect(info[:tracker_name]).to eq('Adium Trac')
     end
 
     # no trailing slash
     it "https://trac.adium.im" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('https://trac.adium.im/')
-      info[:tracker_name].should eq('Adium Trac')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('https://trac.adium.im/')
+      expect(info[:tracker_name]).to eq('Adium Trac')
     end
 
     it "https://trac.adium.im/ticket/6" do
-      info[:issue_class].should eq(Trac::Issue)
-      info[:issue_url].should eq('https://trac.adium.im/ticket/6')
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('https://trac.adium.im/')
-      info[:tracker_name].should eq('Adium Trac')
+      expect(info[:issue_class]).to eq(Trac::Issue)
+      expect(info[:issue_url]).to eq('https://trac.adium.im/ticket/6')
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('https://trac.adium.im/')
+      expect(info[:tracker_name]).to eq('Adium Trac')
     end
 
     it "http://bugs.jquery.com/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('http://bugs.jquery.com/')
-      info[:tracker_name].should eq('jQuery Core')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('http://bugs.jquery.com/')
+      expect(info[:tracker_name]).to eq('jQuery Core')
     end
 
     it "http://bugs.jquery.com/ticket/10495" do
-      info[:issue_class].should eq(Trac::Issue)
-      info[:issue_url].should eq('http://bugs.jquery.com/ticket/10495')
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('http://bugs.jquery.com/')
-      info[:tracker_name].should eq('jQuery Core')
+      expect(info[:issue_class]).to eq(Trac::Issue)
+      expect(info[:issue_url]).to eq('http://bugs.jquery.com/ticket/10495')
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('http://bugs.jquery.com/')
+      expect(info[:tracker_name]).to eq('jQuery Core')
     end
 
     it "http://trac.macports.org/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('http://trac.macports.org/')
-      info[:tracker_name].should eq('MacPorts')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('http://trac.macports.org/')
+      expect(info[:tracker_name]).to eq('MacPorts')
     end
 
     it "http://twistedmatrix.com/trac/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('http://twistedmatrix.com/trac/')
-      info[:tracker_name].should eq('Twisted')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('http://twistedmatrix.com/trac/')
+      expect(info[:tracker_name]).to eq('Twisted')
     end
 
     it "http://twistedmatrix.com/trac/ticket/1228" do
-      info[:issue_class].should eq(Trac::Issue)
-      info[:issue_url].should eq('http://twistedmatrix.com/trac/ticket/1228')
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('http://twistedmatrix.com/trac/')
-      info[:tracker_name].should eq('Twisted')
+      expect(info[:issue_class]).to eq(Trac::Issue)
+      expect(info[:issue_url]).to eq('http://twistedmatrix.com/trac/ticket/1228')
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('http://twistedmatrix.com/trac/')
+      expect(info[:tracker_name]).to eq('Twisted')
     end
 
     it "https://trac.torproject.org/projects/tor" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('https://trac.torproject.org/projects/tor/')
-      info[:tracker_name].should eq('Tor Bug Tracker & Wiki')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('https://trac.torproject.org/projects/tor/')
+      expect(info[:tracker_name]).to eq('Tor Bug Tracker & Wiki')
     end
 
     # no trailing slash
     it "https://trac.torproject.org/projects/tor/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('https://trac.torproject.org/projects/tor/')
-      info[:tracker_name].should eq('Tor Bug Tracker & Wiki')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('https://trac.torproject.org/projects/tor/')
+      expect(info[:tracker_name]).to eq('Tor Bug Tracker & Wiki')
     end
 
     it "https://trac.videolan.org/vlc/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('https://trac.videolan.org/vlc/')
-      info[:tracker_name].should eq('VLC')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('https://trac.videolan.org/vlc/')
+      expect(info[:tracker_name]).to eq('VLC')
     end
 
     it "https://trac.videolan.org/vlc/ticket/4352" do
-      info[:issue_class].should eq(Trac::Issue)
-      info[:issue_url].should eq('https://trac.videolan.org/vlc/ticket/4352')
-      info[:tracker_class].should eq(Trac::Tracker)
-      info[:tracker_url].should eq('https://trac.videolan.org/vlc/')
-      info[:tracker_name].should eq('VLC')
+      expect(info[:issue_class]).to eq(Trac::Issue)
+      expect(info[:issue_url]).to eq('https://trac.videolan.org/vlc/ticket/4352')
+      expect(info[:tracker_class]).to eq(Trac::Tracker)
+      expect(info[:tracker_url]).to eq('https://trac.videolan.org/vlc/')
+      expect(info[:tracker_name]).to eq('VLC')
     end
 
 
@@ -370,140 +421,140 @@ describe "live_sync" do
 
 
     it "http://dev.clojure.org/jira/browse/CLJS" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('http://dev.clojure.org/jira/browse/CLJS')
-      info[:tracker_name].should eq('CLJS')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Jira::Tracker)
+      expect(info[:tracker_url]).to eq('http://dev.clojure.org/jira/browse/CLJS')
+      expect(info[:tracker_name]).to eq('CLJS')
     end
 
     it "http://dev.clojure.org/jira/browse/CLJS-868" do
-      info[:issue_class].should eq(Jira::Issue)
-      info[:issue_url].should eq('http://dev.clojure.org/jira/browse/CLJS-868')
-      info[:issue_title].should eq('no arity warnings on recursive calls')
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('http://dev.clojure.org/jira/browse/CLJS')
-      info[:tracker_name].should eq('CLJS')
+      expect(info[:issue_class]).to eq(Jira::Issue)
+      expect(info[:issue_url]).to eq('http://dev.clojure.org/jira/browse/CLJS-868')
+      expect(info[:issue_title]).to eq('no arity warnings on recursive calls')
+      expect(info[:tracker_class]).to eq(Jira::Tracker)
+      expect(info[:tracker_url]).to eq('http://dev.clojure.org/jira/browse/CLJS')
+      expect(info[:tracker_name]).to eq('CLJS')
     end
 
     it "https://bukkit.atlassian.net/projects/BUKKIT/summary" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT')
-      info[:tracker_name].should eq('BUKKIT')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Jira::Tracker)
+      expect(info[:tracker_url]).to eq('https://bukkit.atlassian.net/browse/BUKKIT')
+      expect(info[:tracker_name]).to eq('BUKKIT')
     end
 
     it "https://bukkit.atlassian.net/browse/BUKKIT-3846" do
-      info[:issue_class].should eq(Jira::Issue)
-      info[:issue_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT-3846')
-      info[:issue_title].should eq('FurnaceRecipe overwrites vanilla result experience')
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT')
-      info[:tracker_name].should eq('BUKKIT')
+      expect(info[:issue_class]).to eq(Jira::Issue)
+      expect(info[:issue_url]).to eq('https://bukkit.atlassian.net/browse/BUKKIT-3846')
+      expect(info[:issue_title]).to eq('FurnaceRecipe overwrites vanilla result experience')
+      expect(info[:tracker_class]).to eq(Jira::Tracker)
+      expect(info[:tracker_url]).to eq('https://bukkit.atlassian.net/browse/BUKKIT')
+      expect(info[:tracker_name]).to eq('BUKKIT')
     end
 
     it "https://bukkit.atlassian.net/projects/BUKKIT/issues/BUKKIT-5574" do
-      info[:issue_class].should eq(Jira::Issue)
-      info[:issue_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT-5574')
-      info[:issue_title].should eq('Fatal failure by spawning')
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('https://bukkit.atlassian.net/browse/BUKKIT')
-      info[:tracker_name].should eq('BUKKIT')
+      expect(info[:issue_class]).to eq(Jira::Issue)
+      expect(info[:issue_url]).to eq('https://bukkit.atlassian.net/browse/BUKKIT-5574')
+      expect(info[:issue_title]).to eq('Fatal failure by spawning')
+      expect(info[:tracker_class]).to eq(Jira::Tracker)
+      expect(info[:tracker_url]).to eq('https://bukkit.atlassian.net/browse/BUKKIT')
+      expect(info[:tracker_name]).to eq('BUKKIT')
     end
 
     it "https://issues.apache.org/jira/browse/AGILA" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('https://issues.apache.org/jira/browse/AGILA')
-      info[:tracker_name].should eq('AGILA')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Jira::Tracker)
+      expect(info[:tracker_url]).to eq('https://issues.apache.org/jira/browse/AGILA')
+      expect(info[:tracker_name]).to eq('AGILA')
     end
 
     it "https://issues.apache.org/jira/browse/AGILA-44" do
-      info[:issue_class].should eq(Jira::Issue)
-      info[:issue_url].should eq('https://issues.apache.org/jira/browse/AGILA-44')
-      info[:tracker_class].should eq(Jira::Tracker)
-      info[:tracker_url].should eq('https://issues.apache.org/jira/browse/AGILA')
-      info[:tracker_name].should eq('AGILA')
+      expect(info[:issue_class]).to eq(Jira::Issue)
+      expect(info[:issue_url]).to eq('https://issues.apache.org/jira/browse/AGILA-44')
+      expect(info[:tracker_class]).to eq(Jira::Tracker)
+      expect(info[:tracker_url]).to eq('https://issues.apache.org/jira/browse/AGILA')
+      expect(info[:tracker_name]).to eq('AGILA')
     end
 
 
     ############### BUGZILLA ###############
 
     it "https://bugzilla.gnome.org/buglist.cgi?quicksearch=component%3Ageneral+product%3A%22gnome-terminal%22+" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Bugzilla::Tracker)
-      info[:tracker_url].should eq('https://bugzilla.gnome.org/buglist.cgi?product=gnome-terminal')
-      info[:tracker_name].should eq('GNOME - gnome-terminal')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Bugzilla::Tracker)
+      expect(info[:tracker_url]).to eq('https://bugzilla.gnome.org/buglist.cgi?product=gnome-terminal')
+      expect(info[:tracker_name]).to eq('GNOME - gnome-terminal')
     end
 
     it "https://bugzilla.gnome.org/show_bug.cgi?id=380612" do
-      info[:issue_class].should eq(Bugzilla::Issue)
-      info[:issue_url].should eq('https://bugzilla.gnome.org/show_bug.cgi?id=380612')
-      info[:tracker_class].should eq(Bugzilla::Tracker)
-      info[:tracker_url].should eq('https://bugzilla.gnome.org/buglist.cgi?product=totem')
-      info[:tracker_name].should eq('GNOME - totem')
+      expect(info[:issue_class]).to eq(Bugzilla::Issue)
+      expect(info[:issue_url]).to eq('https://bugzilla.gnome.org/show_bug.cgi?id=380612')
+      expect(info[:tracker_class]).to eq(Bugzilla::Tracker)
+      expect(info[:tracker_url]).to eq('https://bugzilla.gnome.org/buglist.cgi?product=totem')
+      expect(info[:tracker_name]).to eq('GNOME - totem')
     end
 
     it "https://bugzilla.redhat.com/buglist.cgi?product=Fedora&component=fedora-packager&resolution=---" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(Bugzilla::Tracker)
-      info[:tracker_url].should eq('https://bugzilla.redhat.com/buglist.cgi?product=Fedora')
-      info[:tracker_name].should eq('Red Hat - Fedora')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(Bugzilla::Tracker)
+      expect(info[:tracker_url]).to eq('https://bugzilla.redhat.com/buglist.cgi?product=Fedora')
+      expect(info[:tracker_name]).to eq('Red Hat - Fedora')
     end
 
     it "https://bugzilla.redhat.com/show_bug.cgi?id=707252" do
-      info[:issue_class].should eq(Bugzilla::Issue)
-      info[:issue_url].should eq('https://bugzilla.redhat.com/show_bug.cgi?id=707252')
-      info[:tracker_class].should eq(Bugzilla::Tracker)
-      info[:tracker_url].should eq('https://bugzilla.redhat.com/buglist.cgi?product=Bugzilla')
-      info[:tracker_name].should eq('Red Hat - Bugzilla')
+      expect(info[:issue_class]).to eq(Bugzilla::Issue)
+      expect(info[:issue_url]).to eq('https://bugzilla.redhat.com/show_bug.cgi?id=707252')
+      expect(info[:tracker_class]).to eq(Bugzilla::Tracker)
+      expect(info[:tracker_url]).to eq('https://bugzilla.redhat.com/buglist.cgi?product=Bugzilla')
+      expect(info[:tracker_name]).to eq('Red Hat - Bugzilla')
     end
 
     it "https://bugs.webkit.org/show_bug.cgi?id=65711" do
-      info[:issue_class].should eq(Bugzilla::Issue)
-      info[:issue_url].should eq('https://bugs.webkit.org/show_bug.cgi?id=65711')
-      info[:tracker_class].should eq(Bugzilla::Tracker)
-      info[:tracker_url].should eq('https://bugs.webkit.org/buglist.cgi?product=WebKit')
-      info[:tracker_name].should eq('WebKit - WebKit')
+      expect(info[:issue_class]).to eq(Bugzilla::Issue)
+      expect(info[:issue_url]).to eq('https://bugs.webkit.org/show_bug.cgi?id=65711')
+      expect(info[:tracker_class]).to eq(Bugzilla::Tracker)
+      expect(info[:tracker_url]).to eq('https://bugs.webkit.org/buglist.cgi?product=WebKit')
+      expect(info[:tracker_name]).to eq('WebKit - WebKit')
     end
 
     ############### GOOGLE CODE ###############
 
     it "https://code.google.com/p/redmine-dmsf/" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(GoogleCode::Tracker)
-      info[:tracker_url].should eq('https://code.google.com/p/redmine-dmsf/')
-      info[:tracker_name].should eq('redmine-dmsf')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
+      expect(info[:tracker_url]).to eq('https://code.google.com/p/redmine-dmsf/')
+      expect(info[:tracker_name]).to eq('redmine-dmsf')
     end
 
     it "https://code.google.com/p/jsc3d/issues/list" do
-      info[:issue_class].should be_nil
-      info[:tracker_class].should eq(GoogleCode::Tracker)
-      info[:tracker_url].should eq('https://code.google.com/p/jsc3d/')
-      info[:tracker_name].should eq('jsc3d')
+      expect(info[:issue_class]).to be_nil
+      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
+      expect(info[:tracker_url]).to eq('https://code.google.com/p/jsc3d/')
+      expect(info[:tracker_name]).to eq('jsc3d')
     end
 
     it "https://code.google.com/p/redmine-dmsf/issues/detail?id=2" do
-      info[:issue_class].should eq(GoogleCode::Issue)
-      info[:issue_url].should eq('https://code.google.com/p/redmine-dmsf/issues/detail?id=2')
-      info[:tracker_class].should eq(GoogleCode::Tracker)
-      info[:tracker_url].should eq('https://code.google.com/p/redmine-dmsf/')
-      info[:tracker_name].should eq('redmine-dmsf')
+      expect(info[:issue_class]).to eq(GoogleCode::Issue)
+      expect(info[:issue_url]).to eq('https://code.google.com/p/redmine-dmsf/issues/detail?id=2')
+      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
+      expect(info[:tracker_url]).to eq('https://code.google.com/p/redmine-dmsf/')
+      expect(info[:tracker_name]).to eq('redmine-dmsf')
     end
 
     it "https://code.google.com/p/chromium/issues/detail?id=165329" do
-      info[:issue_class].should eq(GoogleCode::Issue)
-      info[:issue_url].should eq('https://code.google.com/p/chromium/issues/detail?id=165329')
-      info[:tracker_class].should eq(GoogleCode::Tracker)
-      info[:tracker_url].should eq('https://code.google.com/p/chromium/')
-      info[:tracker_name].should eq('chromium')
+      expect(info[:issue_class]).to eq(GoogleCode::Issue)
+      expect(info[:issue_url]).to eq('https://code.google.com/p/chromium/issues/detail?id=165329')
+      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
+      expect(info[:tracker_url]).to eq('https://code.google.com/p/chromium/')
+      expect(info[:tracker_name]).to eq('chromium')
     end
 
     it "https://code.google.com/p/tectonicus/issues/detail?id=19" do
-      info[:issue_class].should eq(GoogleCode::Issue)
-      info[:issue_url].should eq('https://code.google.com/p/tectonicus/issues/detail?id=19')
-      info[:tracker_class].should eq(GoogleCode::Tracker)
-      info[:tracker_url].should eq('https://code.google.com/p/tectonicus/')
-      info[:tracker_name].should eq('tectonicus')
+      expect(info[:issue_class]).to eq(GoogleCode::Issue)
+      expect(info[:issue_url]).to eq('https://code.google.com/p/tectonicus/issues/detail?id=19')
+      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
+      expect(info[:tracker_url]).to eq('https://code.google.com/p/tectonicus/')
+      expect(info[:tracker_name]).to eq('tectonicus')
     end
 
     ################ SOURCEFORGE ###############
@@ -565,64 +616,80 @@ describe "live_sync" do
 
     ################ BITBUCKET ###############
     it "https://bitbucket.org/birkenfeld/sphinx" do
-      info[:issue_class].should eq(nil)
-      info[:tracker_class].should eq(Bitbucket::Tracker)
-      info[:tracker_url].should eq('https://bitbucket.org/birkenfeld/sphinx')
-      info[:tracker_name].should eq('birkenfeld/sphinx')
+      expect(info[:issue_class]).to eq(nil)
+      expect(info[:tracker_class]).to eq(Bitbucket::Tracker)
+      expect(info[:tracker_url]).to eq('https://bitbucket.org/birkenfeld/sphinx')
+      expect(info[:tracker_name]).to eq('birkenfeld/sphinx')
     end
 
     it "https://bitbucket.org/birkenfeld/sphinx/issue/156" do
-      info[:issue_class].should eq(Bitbucket::Issue)
-      info[:issue_url].should eq('https://bitbucket.org/birkenfeld/sphinx/issues/156')
-      info[:tracker_class].should eq(Bitbucket::Tracker)
-      info[:tracker_url].should eq('https://bitbucket.org/birkenfeld/sphinx')
-      info[:tracker_name].should eq('birkenfeld/sphinx')
+      expect(info[:issue_class]).to eq(Bitbucket::Issue)
+      expect(info[:issue_url]).to eq('https://bitbucket.org/birkenfeld/sphinx/issues/156')
+      expect(info[:tracker_class]).to eq(Bitbucket::Tracker)
+      expect(info[:tracker_url]).to eq('https://bitbucket.org/birkenfeld/sphinx')
+      expect(info[:tracker_name]).to eq('birkenfeld/sphinx')
     end
 
     ################ LAUNCHPAD ###############
     it "https://bugs.launchpad.net/gwibber" do
-      info[:issue_class].should eq(nil)
-      info[:tracker_class].should eq(Launchpad::Tracker)
-      info[:tracker_url].should eq('https://bugs.launchpad.net/gwibber')
-      info[:tracker_name].should eq('gwibber')
+      expect(info[:issue_class]).to eq(nil)
+      expect(info[:tracker_class]).to eq(Launchpad::Tracker)
+      expect(info[:tracker_url]).to eq('https://bugs.launchpad.net/gwibber')
+      expect(info[:tracker_name]).to eq('gwibber')
     end
 
     it "https://bugs.launchpad.net/gwibber/+bug/1123780" do
-      info[:issue_class].should eq(Launchpad::Issue)
-      info[:issue_url].should eq('https://bugs.launchpad.net/gwibber/+bug/1123780')
-      info[:tracker_class].should eq(Launchpad::Tracker)
-      info[:tracker_url].should eq('https://bugs.launchpad.net/gwibber')
-      info[:tracker_name].should eq('gwibber')
+      expect(info[:issue_class]).to eq(Launchpad::Issue)
+      expect(info[:issue_url]).to eq('https://bugs.launchpad.net/gwibber/+bug/1123780')
+      expect(info[:tracker_class]).to eq(Launchpad::Tracker)
+      expect(info[:tracker_url]).to eq('https://bugs.launchpad.net/gwibber')
+      expect(info[:tracker_name]).to eq('gwibber')
     end
 
 
     ################ PIVOTAL ###############
     it "https://www.pivotaltracker.com/projects/367813/stories" do
-      info[:issue_class].should eq(nil)
-      info[:tracker_class].should eq(Pivotal::Tracker)
-      info[:tracker_url].should eq('https://www.pivotaltracker.com/projects/367813')
-      info[:tracker_name].should eq('Departments and policy (Dev)')
+      expect(info[:issue_class]).to eq(nil)
+      expect(info[:tracker_class]).to eq(Pivotal::Tracker)
+      expect(info[:tracker_url]).to eq('https://www.pivotaltracker.com/projects/367813')
+      expect(info[:tracker_name]).to eq('Departments and policy (Dev)')
     end
     it "https://www.pivotaltracker.com/story/show/45939421" do
-      info[:issue_class].should eq(Pivotal::Issue)
-      info[:issue_url].should eq('https://www.pivotaltracker.com/story/show/45939421')
-      info[:tracker_class].should eq(Pivotal::Tracker)
-      info[:tracker_url].should eq('https://www.pivotaltracker.com/projects/367813')
-      info[:tracker_name].should eq('Departments and policy (Dev)')
+      expect(info[:issue_class]).to eq(Pivotal::Issue)
+      expect(info[:issue_url]).to eq('https://www.pivotaltracker.com/story/show/45939421')
+      expect(info[:tracker_class]).to eq(Pivotal::Tracker)
+      expect(info[:tracker_url]).to eq('https://www.pivotaltracker.com/projects/367813')
+      expect(info[:tracker_name]).to eq('Departments and policy (Dev)')
     end
     it "https://www.pivotaltracker.com/projects/367813#!/stories/45939421" do
-      info[:issue_class].should eq(Pivotal::Issue)
-      info[:issue_url].should eq('https://www.pivotaltracker.com/story/show/45939421')
-      info[:tracker_class].should eq(Pivotal::Tracker)
-      info[:tracker_url].should eq('https://www.pivotaltracker.com/projects/367813')
-      info[:tracker_name].should eq('Departments and policy (Dev)')
+      expect(info[:issue_class]).to eq(Pivotal::Issue)
+      expect(info[:issue_url]).to eq('https://www.pivotaltracker.com/story/show/45939421')
+      expect(info[:tracker_class]).to eq(Pivotal::Tracker)
+      expect(info[:tracker_url]).to eq('https://www.pivotaltracker.com/projects/367813')
+      expect(info[:tracker_name]).to eq('Departments and policy (Dev)')
     end
     it "https://www.pivotaltracker.com/n/projects/367813/stories/45939421" do
-      info[:issue_class].should eq(Pivotal::Issue)
-      info[:issue_url].should eq('https://www.pivotaltracker.com/story/show/45939421')
-      info[:tracker_class].should eq(Pivotal::Tracker)
-      info[:tracker_url].should eq('https://www.pivotaltracker.com/projects/367813')
-      info[:tracker_name].should eq('Departments and policy (Dev)')
+      expect(info[:issue_class]).to eq(Pivotal::Issue)
+      expect(info[:issue_url]).to eq('https://www.pivotaltracker.com/story/show/45939421')
+      expect(info[:tracker_class]).to eq(Pivotal::Tracker)
+      expect(info[:tracker_url]).to eq('https://www.pivotaltracker.com/projects/367813')
+      expect(info[:tracker_name]).to eq('Departments and policy (Dev)')
+    end
+
+    ################ MANTIS ###############
+    it "https://www.mantisbt.org/bugs/my_view_page.php" do
+      expect(info[:issue_class]).to eq(nil)
+      expect(info[:tracker_class]).to eq(Mantis::Tracker)
+      expect(info[:tracker_url]).to eq('https://www.mantisbt.org/bugs/')
+      expect(info[:tracker_name]).to eq('www.mantisbt.org')
+    end
+
+    it "https://www.mantisbt.org/bugs/view.php?id=24096" do
+      expect(info[:issue_class]).to eq(Mantis::Issue)
+      expect(info[:issue_url]).to eq('https://www.mantisbt.org/bugs/view.php?id=24096')
+      expect(info[:tracker_class]).to eq(Mantis::Tracker)
+      expect(info[:tracker_url]).to eq('https://www.mantisbt.org/bugs/')
+      expect(info[:tracker_name]).to eq('www.mantisbt.org')
     end
 
   end

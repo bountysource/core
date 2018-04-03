@@ -3,13 +3,13 @@
 # Table name: accounts
 #
 #  id          :integer          not null, primary key
-#  type        :string(255)      default("Account"), not null
-#  description :string(255)      default(""), not null
-#  currency    :string(255)      default("USD"), not null
+#  type        :string           default("Account"), not null
+#  description :string           default(""), not null
+#  currency    :string           default("USD"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  owner_id    :integer
-#  owner_type  :string(255)
+#  owner_type  :string
 #  standalone  :boolean          default(FALSE)
 #
 # Indexes
@@ -22,14 +22,11 @@
 # An account consists of a list of Splits which debit/credit the account.
 # See the documentation in Transaction and Split for more detail
 
-class Account < ActiveRecord::Base
-
-  attr_accessible :currency, :description, :owner, :name
-
+class Account < ApplicationRecord
   # NOTE: the presence of an owner is optional
   belongs_to :owner, polymorphic: true, autosave: false
   has_many :splits
-  has_many :transactions, through: :splits
+  has_many :txns, through: :splits
 
   has_many :orders, foreign_key: :checkout_method_id, class_name: "Transaction::Order"
 
@@ -55,14 +52,12 @@ class Account < ActiveRecord::Base
         errors.add :base, "#{owner.class}(#{owner.id}) can only have 1 #{self.class.name}"
       end
     end
-
-    errors.empty?
   end
 
   # You shouldn't be able to destroy accounts with activity...
   before_destroy do
     errors.add :base, 'Cannot delete account with Splits' unless splits.empty?
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   # all accounts are liability accounts unless explicitly overridden
@@ -79,6 +74,13 @@ class Account < ActiveRecord::Base
   # TODO create column, use relation
   def fee_percentage
     0.10
+  end
+
+  # NOTE: for some reason Account.where(id: params[:id]).includes(:splits => :transaction)
+  # was conflicting with default_scope and the associations weren't being loaded, so we
+  # use this method instead to be explicit.
+  def admin_splits
+    splits.includes(:txn).limit(1000)
   end
 
   # transfer money from one account to another
@@ -126,7 +128,7 @@ class Account < ActiveRecord::Base
 
   # merge @account into this account, moving over splits, then destroy @account.
   # SERCHIIINNN, MERGE AND DESTROY!!!
-  # TODO ActiveRecord::Base#merge! should take care of the merging?
+  # TODO ApplicationRecord#merge! should take care of the merging?
   def merge_with_and_destroy!(account)
     account.splits.find_each { |s| s.update_attribute :account, self }
     account.destroy
@@ -139,8 +141,8 @@ class Account < ActiveRecord::Base
 
   # Group Account types and the sum of their splits for the given date.
   def self.balance_report(date=DateTime.now)
-    sql_date = ActiveRecord::Base.connection.quote(date)
-    ActiveRecord::Base.connection.select_all("select accounts.type, sum(splits.amount) as balance from accounts left join splits on accounts.id = splits.account_id where splits.created_at < #{sql_date} group by accounts.type order by balance desc, type desc")
+    sql_date = ApplicationRecord.connection.quote(date)
+    ApplicationRecord.connection.select_all("select accounts.type, sum(splits.amount) as balance from accounts left join splits on accounts.id = splits.account_id where splits.created_at < #{sql_date} group by accounts.type order by balance desc, type desc")
   end
 
   # Balance report for a single Account instance
@@ -207,7 +209,7 @@ class Account < ActiveRecord::Base
   def self.transfers(date_range=nil)
     date_range ||= Transaction.order('created_at asc').first.created_at..Transaction.order('created_at desc').first.created_at
     # transaction_ids = Transaction::BankTransfer.where(created_at: date_range).joins(:splits => [:account]).where('accounts.type = ?', name).pluck(:id)
-    Split.joins(:transaction, :account).where(created_at: date_range).where('transactions.type = ? AND splits.account_id = ?', 'Transaction::BankTransfer', instance.id).sum('splits.amount * -1')
+    Split.joins(:txn, :account).where(created_at: date_range).where('transactions.type = ? AND splits.account_id = ?', 'Transaction::BankTransfer', instance.id).sum('splits.amount * -1')
   end
 
   # Calculate the cash out fee.

@@ -7,7 +7,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  audited            :boolean
-#  type               :string(255)      default("Transaction"), not null
+#  type               :string           default("Transaction"), not null
 #  person_id          :integer
 #  checkout_method_id :integer
 #  gross              :decimal(, )
@@ -36,7 +36,7 @@ class Transaction::InternalTransfer::Promotional < Transaction::InternalTransfer
     amount = BigDecimal.new(Money.new(amount * 100).to_s)
     transaction = nil
 
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       transaction = Transaction::InternalTransfer::Promotional.create!(
         audited: true,
         description: "Promotional gift of $#{amount}"

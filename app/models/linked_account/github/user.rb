@@ -4,15 +4,15 @@
 #
 #  id               :integer          not null, primary key
 #  person_id        :integer
-#  type             :string(255)
+#  type             :string
 #  uid              :integer
-#  login            :string(255)
-#  first_name       :string(255)
-#  last_name        :string(255)
-#  email            :string(255)
-#  oauth_token      :string(255)
-#  oauth_secret     :string(255)
-#  permissions      :string(255)
+#  login            :string
+#  first_name       :string
+#  last_name        :string
+#  email            :string
+#  oauth_token      :string
+#  oauth_secret     :string
+#  permissions      :string
 #  synced_at        :datetime
 #  sync_in_progress :boolean          default(FALSE)
 #  followers        :integer          default(0)
@@ -21,10 +21,10 @@
 #  updated_at       :datetime
 #  account_balance  :decimal(10, 2)   default(0.0)
 #  anonymous        :boolean          default(FALSE), not null
-#  company          :string(255)
-#  location         :string(255)
+#  company          :string
+#  location         :string
 #  bio              :text
-#  cloudinary_id    :string(255)
+#  cloudinary_id    :string
 #  deleted_at       :datetime
 #
 # Indexes
@@ -170,7 +170,9 @@ protected
 
   def api_with_auto_pagination(options)
     response_data = []
-
+    #load the maximum of 100 items since we're going to paginate
+    options[:params] ||= {}
+    options[:params].merge!(per_page: 100)
     loop do
       response = api(options.clone)
       raise "ERROR: auto paginating #{response.status}" unless response.success?

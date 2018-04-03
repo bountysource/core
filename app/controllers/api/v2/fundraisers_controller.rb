@@ -3,7 +3,7 @@ class Api::V2::FundraisersController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::FundraisersHelper
 
-  before_filter :parse_boolean_values
+  before_action :parse_boolean_values
 
   def index
     @collection = ::Fundraiser.all

@@ -9,7 +9,7 @@
 #  consumed    :boolean          default(FALSE), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  owner_type  :string(255)
+#  owner_type  :string
 #  owner_id    :integer
 #  from_member :boolean          default(FALSE)
 #  refunded_at :datetime
@@ -23,10 +23,7 @@
 #  index_team_payins_on_team_id                  (team_id)
 #
 
-class TeamPayin < ActiveRecord::Base
-
-  attr_accessible :person, :team, :amount, :consumed, :owner_id, :owner_type, :team_id, :from_member, :refunded_at
-
+class TeamPayin < ApplicationRecord
   belongs_to :team
   belongs_to :person
   has_owner

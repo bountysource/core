@@ -1,6 +1,6 @@
 class Api::V1::StatsController < ApplicationController
 
-  before_filter require_tracker(:id), only: [:tracker]
+  before_action require_tracker(:id), only: [:tracker]
 
   def global
     render json: {

@@ -1,6 +1,6 @@
 class Api::V0::TeamPayinsController < Api::V0::BaseController
 
-  before_filter :load_team_payin, only: [:show, :update]
+  before_action :load_team_payin, only: [:show, :update]
 
   def index
     @team_payins = TeamPayin.limit(100).includes(:team, :person, :owner).order('created_at desc')

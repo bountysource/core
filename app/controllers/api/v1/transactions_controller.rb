@@ -1,6 +1,6 @@
 class Api::V1::TransactionsController < ApplicationController
 
-  before_filter :require_auth
+  before_action :require_auth
 
   def index
     @transactions = @person.orders.order("created_at desc")

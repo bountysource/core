@@ -666,25 +666,25 @@ describe Github::Event do
 
   let(:events) { [issue_comment_event, pull_request_event, fork_event, member_event] }
 
-  before { Github::Event.stub(:get_current_events) { events } }
+  before { allow(Github::Event).to receive(:get_current_events) { events } }
 
   describe '::process_event' do
 
     it 'should sync and load repository if present' do
       event = { 'repo' => { 'name' => 'Rocket Man' } }
-      Github::Event.stub(:tracker).once
+      allow(Github::Event).to receive(:tracker).once
       Github::Event.process_event event
     end
 
     it 'should sync and load author if present' do
       event = { 'actor' => { 'name' => 'Rocket Man' } }
-      Github::Event.stub(:linked_account).once
+      allow(Github::Event).to receive(:linked_account).once
       Github::Event.process_event event
     end
 
     it 'should sync and load organization if present' do
       event = { 'org' => { 'name' => 'Rocket Man' } }
-      Github::Event.stub(:linked_account).once
+      allow(Github::Event).to receive(:linked_account).once
       Github::Event.process_event event
     end
 
@@ -896,9 +896,9 @@ describe Github::Event do
     describe 'PullRequestEvent' do
 
       it 'should invoke ::issue, ::tracker, and ::linked_account' do
-        Github::Event.should_not_receive(:issue)
-        Github::Event.should_receive(:tracker).at_least(:twice)
-        Github::Event.should_receive(:linked_account).at_least(:twice)
+        expect(Github::Event).not_to receive(:issue)
+        expect(Github::Event).to receive(:tracker).at_least(:twice)
+        expect(Github::Event).to receive(:linked_account).at_least(:twice)
         Github::Event.process_event pull_request_event
       end
 
@@ -907,7 +907,7 @@ describe Github::Event do
     describe 'IssuesEvent' do
 
       it 'should invoke ::issue' do
-        Github::Event.should_receive(:issue).at_least(:once)
+        expect(Github::Event).to receive(:issue).at_least(:once)
         Github::Event.process_event issues_event
       end
 
@@ -916,7 +916,7 @@ describe Github::Event do
     describe 'ForkEvent' do
 
       it 'should invoke ::tracker' do
-        Github::Event.should_receive(:tracker).at_least(:once)
+        expect(Github::Event).to receive(:tracker).at_least(:once)
         Github::Event.process_event fork_event
       end
 
@@ -925,7 +925,7 @@ describe Github::Event do
     describe 'MemberEvent' do
 
       it 'should invoke ::linked_account' do
-        Github::Event.should_receive(:linked_account).at_least(:once)
+        expect(Github::Event).to receive(:linked_account).at_least(:once)
         Github::Event.process_event member_event
       end
 
@@ -936,7 +936,7 @@ describe Github::Event do
   describe '::issue' do
 
     it 'should update issue from data' do
-      Github::Issue.stub(:update_attributes_from_github_data).once
+      allow(Github::Issue).to receive(:update_attributes_from_github_data).once
       Github::Event.issue({})
     end
 
@@ -945,7 +945,7 @@ describe Github::Event do
   describe '::tracker' do
 
     it 'should update tracker from data' do
-      Github::Repository.should_receive(:update_attributes_from_github_data).once
+      expect(Github::Repository).to receive(:update_attributes_from_github_data).once
       Github::Event.tracker({})
     end
 
@@ -954,7 +954,7 @@ describe Github::Event do
   describe '::linked_account' do
 
     it 'should update linked_account from data' do
-      LinkedAccount::Github.should_receive(:update_attributes_from_github_data).once
+      expect(LinkedAccount::Github).to receive(:update_attributes_from_github_data).once
       Github::Event.linked_account({})
     end
 

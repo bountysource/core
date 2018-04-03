@@ -1,8 +1,8 @@
 class Api::V0::TransactionsController < Api::V0::BaseController
 
-  before_filter :require_transaction, only: [:show, :update, :destroy]
-  before_filter :find_start_date, only: [:index]
-  before_filter :find_end_date, only: [:index]
+  before_action :require_transaction, only: [:show, :update, :destroy]
+  before_action :find_start_date, only: [:index]
+  before_action :find_end_date, only: [:index]
 
   def index
     @transactions = Transaction.includes(:splits => [:account]).order('transactions.created_at desc')
@@ -63,7 +63,7 @@ class Api::V0::TransactionsController < Api::V0::BaseController
           splits_after << split
         else
           split = @transaction.splits.build
-          split.transaction = @transaction
+          split.txn = @transaction
           splits_after << split
         end
 
@@ -107,7 +107,7 @@ class Api::V0::TransactionsController < Api::V0::BaseController
   def destroy
     @transaction.splits.destroy_all
     @transaction.delete
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
   def sweep
@@ -117,7 +117,7 @@ class Api::V0::TransactionsController < Api::V0::BaseController
       if @transaction
         render "api/v1/transactions/show"
       else
-        render nothing: true, status: :no_content
+        head :no_content
       end
     end
   end

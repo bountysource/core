@@ -27,12 +27,18 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
   <%= stylesheet_link_tag "bountysource" %>
 
+  <meta http-equiv="pragma" content="no-cache" />
+
 </head>
 <body ng-app="app" ng-controller="AppController">
 
   <%= yield :body %>
 
   <%= yield %>
+
+  <noscript>
+    <h3 class="text-center">Javascript Required. Kindly enable Javascript.</h3>
+  </noscript>
 
   <div id="wrap">
     <div id="navbar">

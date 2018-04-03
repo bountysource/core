@@ -3,7 +3,7 @@
 # Table name: issue_ranks
 #
 #  id                    :integer          not null, primary key
-#  type                  :string(255)      not null
+#  type                  :string           not null
 #  issue_id              :integer          not null
 #  rank                  :integer          default(0), not null
 #  person_id             :integer

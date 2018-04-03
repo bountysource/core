@@ -41,7 +41,7 @@ class Api::V0::ReportController < Api::V0::BaseController
     require_params :start_date, :end_date
 
     start_date = Time.use_zone(Account.reporting_time_zone) { Time.zone.parse(params[:start_date]) }
-    end_date = Time.use_zone(Account.reporting_time_zone) { Time.zone.parse(params[:end_date]) }
+    end_date = Time.use_zone(Account.reporting_time_zone) { Time.zone.parse(params[:end_date]) + 1.day }
 
     render json: Account.account_type_balances_by_start_and_end(start_date, end_date)
   end

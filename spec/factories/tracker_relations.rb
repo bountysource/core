@@ -5,7 +5,7 @@
 #  id                :integer          not null, primary key
 #  tracker_id        :integer          not null
 #  linked_account_id :integer          not null
-#  type              :string(255)      not null
+#  type              :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
@@ -15,7 +15,7 @@
 #  index_tracker_relations_on_tracker_id         (tracker_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :tracker_relation, class: TrackerRelation do
     association :linked_account, factory: :linked_account
     association :tracker, factory: :tracker

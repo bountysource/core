@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :issue_rank, class: IssueRank do
     type 'IssueRank'
     rank 1

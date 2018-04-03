@@ -1,6 +1,6 @@
 class Api::V0::HomeController < Api::V0::BaseController
 
-  skip_before_filter :require_admin, only: [:login]
+  skip_before_action :require_admin, only: [:login]
 
   def login
     require_params :email, :password

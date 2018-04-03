@@ -12,7 +12,7 @@
 #  reward_id       :integer
 #  survey_response :text
 #  anonymous       :boolean          default(FALSE), not null
-#  owner_type      :string(255)
+#  owner_type      :string
 #  owner_id        :integer
 #
 # Indexes
@@ -33,7 +33,7 @@ describe Pledge do
   let(:pledge2) { create(:pledge, person: person, amount: '13.37', reward: reward, fundraiser: fundraiser) }
 
   it "should mail user after creation" do
-    person.stub(:send_email).with(:fundraiser_pledge_made, anything).exactly(1).times
+    allow(person).to receive(:send_email).with(:fundraiser_pledge_made, anything).exactly(1).times
     fundraiser.pledges.create person: person, amount: '13.37'
   end
 
@@ -41,14 +41,14 @@ describe Pledge do
     it "should send reward survey email if funding goal reached" do
       fundraiser.pledges.create person: person, amount: 100
 
-      fundraiser.stub(:delay).with(:send_reward_survey_email).exactly(1).times
-      fundraiser.stub(:delay).with(:send_funding_goal_reached_notification).exactly(1).times
+      allow(fundraiser).to receive(:delay).with(:send_reward_survey_email).exactly(1).times
+      allow(fundraiser).to receive(:delay).with(:send_funding_goal_reached_notification).exactly(1).times
     end
 
     it "should send reward survey email if funding goal reached" do
       fundraiser.pledges.create person: person, amount: 1
 
-      fundraiser.stub(:delay).exactly(0).times
+      allow(fundraiser).to receive(:delay).exactly(0).times
     end
   end
 
@@ -58,8 +58,8 @@ describe Pledge do
     let(:amount) { 99 }
 
     before do
-      fundraiser.stub(:person).and_return(creator, stub_creator)
-      stub_creator.stub(:send_email).with(:fundraiser_backed, fundraiser: fundraiser, backer: person, amount: amount).exactly(1).times
+      allow(fundraiser).to receive(:person).and_return(creator, stub_creator)
+      allow(stub_creator).to receive(:send_email).with(:fundraiser_backed, fundraiser: fundraiser, backer: person, amount: amount).exactly(1).times
     end
     it "should send email to creator after created" do
       fundraiser.pledges.create person: person, amount: amount
@@ -76,8 +76,8 @@ describe Pledge do
         let(:amount) { 51 }
 
         before do
-          fundraiser.stub(:person).and_return(creator, stub_creator)
-          creator.stub(:send_email).with(:funding_goal_half_reached_notification_to_creator, fundraiser: fundraiser).exactly(1).times
+          allow(fundraiser).to receive(:person).and_return(creator, stub_creator)
+          allow(creator).to receive(:send_email).with(:funding_goal_half_reached_notification_to_creator, fundraiser: fundraiser).exactly(1).times
         end
 
         it "should send email to creator after created" do
@@ -89,8 +89,8 @@ describe Pledge do
         let(:amount) { 100 }
 
         before do
-          fundraiser.stub(:person).and_return(creator)
-          creator.stub(:send_email).with(:funding_goal_half_reached_notification_to_creator, fundraiser: fundraiser).exactly(1).times
+          allow(fundraiser).to receive(:person).and_return(creator)
+          allow(creator).to receive(:send_email).with(:funding_goal_half_reached_notification_to_creator, fundraiser: fundraiser).exactly(1).times
         end
 
         it "should send email to creator after created" do
@@ -102,8 +102,8 @@ describe Pledge do
     describe 'not reached' do
       let(:amount) { 49 }
       before do
-        fundraiser.stub(:person).and_return(creator)
-        creator.stub(:send_email).with(:funding_goal_half_reached_notification_to_creator, fundraiser: fundraiser).exactly(0).times
+        allow(fundraiser).to receive(:person).and_return(creator)
+        allow(creator).to receive(:send_email).with(:funding_goal_half_reached_notification_to_creator, fundraiser: fundraiser).exactly(0).times
       end
       it "should send email to creator after created" do
         fundraiser.pledges.create person: person, amount: amount
@@ -112,12 +112,12 @@ describe Pledge do
   end
 
   it "should share the reward with all pledges for the same reward" do
-    pledge1.reward.should == reward
+    expect(pledge1.reward).to eq(reward)
 
-    pledge1.reward.should == pledge2.reward
+    expect(pledge1.reward).to eq(pledge2.reward)
 
     # furthermore, the reward should know about all of its pledges
-    reward.pledges.should include pledge1, pledge2
+    expect(reward.pledges).to include pledge1, pledge2
   end
 
   describe "send_survey_email on funding goal being breached" do
@@ -128,7 +128,7 @@ describe Pledge do
       let!(:pledge) { create_pledge(100, person: person, fundraiser: fundraiser, reward: reward) }
 
       it "should trigger send email" do
-        person.stub(:send_email).with(:pledge_survey_email, fundraiser: fundraiser, reward: reward, pledge: pledge).exactly(1).times
+        allow(person).to receive(:send_email).with(:pledge_survey_email, fundraiser: fundraiser, reward: reward, pledge: pledge).exactly(1).times
         pledge.send_survey_email
       end
     end
@@ -137,7 +137,7 @@ describe Pledge do
       let!(:pledge) { create_pledge(99, person: person, fundraiser: fundraiser) }
 
       it "should not trigger send email" do
-        person.stub(:send_email).exactly(0).times
+        allow(person).to receive(:send_email).exactly(0).times
         pledge.send_survey_email
       end
     end
@@ -150,18 +150,18 @@ describe Pledge do
 
     it "validate presence of fundraiser" do
       pledge = Pledge.new(person: backer, amount: 10)
-      pledge.should_not be_valid
-      pledge.errors.should have_key :fundraiser
+      expect(pledge).not_to be_valid
+      expect(pledge.errors).to have_key :fundraiser
     end
 
     it "should have reference to zero reward" do
       pledge = create(:pledge, fundraiser: fundraiser, person: backer, amount: 100)
-      pledge.reward.should == fundraiser.zero_reward
+      expect(pledge.reward).to eq(fundraiser.zero_reward)
     end
 
     it "should have reference to reward" do
       pledge = create(:pledge, fundraiser: fundraiser, person: backer, amount: 100, reward: reward)
-      pledge.reward.should == reward
+      expect(pledge.reward).to eq(reward)
     end
   end
 
@@ -170,7 +170,7 @@ describe Pledge do
     let!(:pledge)     { create_pledge(10, fundraiser: fundraiser) }
 
     it "should have fundraiser account" do
-      pledge.reload.account.should == fundraiser.account
+      expect(pledge.reload.account).to eq(fundraiser.account)
     end
   end
 
@@ -178,16 +178,16 @@ describe Pledge do
     let(:fundraiser) { create(:fundraiser) }
 
     it "should be 0" do
-      fundraiser.total_pledged.should be == 0
+      expect(fundraiser.total_pledged).to eq(0)
     end
 
     it "should still be 0" do
       fundraiser.update_total_pledged
-      fundraiser.total_pledged.should be == 0
+      expect(fundraiser.total_pledged).to eq(0)
     end
 
     it "should trigger bounty_total update" do
-      fundraiser.should_receive(:update_total_pledged).once
+      expect(fundraiser).to receive(:update_total_pledged).once
       create_pledge(100, fundraiser: fundraiser)
     end
   end
@@ -202,7 +202,7 @@ describe Pledge do
       PledgeSurveyResponse.create(person: person, reward: reward, survey_response: response)
       pledge = fundraiser.pledges.create(amount: 100, reward: reward, person: person)
       pledge.reload
-      pledge.survey_response.should be == response
+      expect(pledge.survey_response).to eq(response)
     end
   end
 

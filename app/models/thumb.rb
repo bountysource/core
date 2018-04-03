@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  person_id  :integer          not null
-#  item_type  :string(255)      not null
+#  item_type  :string           not null
 #  item_id    :integer          not null
 #  explicit   :boolean          not null
 #  downvote   :boolean          not null
@@ -18,10 +18,7 @@
 #  index_thumbs_on_person_id_and_item_id_and_item_type  (person_id,item_id,item_type) UNIQUE
 #
 
-class Thumb < ActiveRecord::Base
-
-  attr_accessible :item_id, :item_type, :item, :explicit, :downvote, :thumbed_at
-
+class Thumb < ApplicationRecord
   belongs_to :person
   belongs_to :item, polymorphic: true
   belongs_to :comment

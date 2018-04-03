@@ -30,6 +30,9 @@ Delayed::Worker.delay_jobs = false
 ActiveRecord::Migration.check_pending!
 
 RSpec.configure do |config|
+  # Raise on deprecations
+  config.raise_errors_for_deprecations!
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -59,6 +62,8 @@ RSpec.configure do |config|
   # config.infer_base_class_for_anonymous_controllers = false
 
   config.include RSpec::Rails::ViewRendering
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Features::SessionHelpers, type: :feature
+  config.include(Shoulda::Matchers::ActiveModel, type: :model)
+  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
 end

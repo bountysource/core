@@ -7,8 +7,8 @@
 #  description         :text             not null
 #  delivered_at        :datetime
 #  limited_to          :integer
-#  timezone            :string(255)
-#  vanity_url          :string(255)
+#  timezone            :string
+#  vanity_url          :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  amount              :integer
@@ -21,12 +21,7 @@
 #  index_rewards_on_sold_out  (sold_out)
 #
 
-class Reward < ActiveRecord::Base
-
-  # ATTRIBUTES
-  attr_accessible :fundraiser, :delivered_at, :description, :limited_to, :claimed, :timezone, :vanity_url, :amount,
-                  :sold_out, :fulfillment_details, :merchandise_fee
-
+class Reward < ApplicationRecord
   # RELATIONSHIPS
   belongs_to :fundraiser
   has_many :pledges
@@ -47,14 +42,14 @@ class Reward < ActiveRecord::Base
   before_update do
     if amount_was.zero?
       errors.add :base, "Cannot change 'No Reward'"
-      false
+      throw(:abort)
     end
   end
 
   before_destroy do
     errors.add :base, "Cannot delete 'No Reward' option" if amount.zero?
     errors.add :base, "Cannot delete published reward" if fundraiser.published?
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   class RewardUpdateValidator < ActiveModel::Validator

@@ -1,17 +1,17 @@
 class Api::V1::TrackersController < ApplicationController
 
-  before_filter require_tracker(:id), except: [:cards, :index, :followed, :top]
+  before_action require_tracker(:id), except: [:cards, :index, :followed, :top]
 
-  before_filter :require_auth,    only: [:upvote_tag, :downvote_tag, :show_tag, :followed]
-  # before_filter :require_tag,     only: [:upvote_tag, :downvote_tag, :show_tag]
-  # before_filter :require_tag_relation, only: [:upvote_tag, :downvote_tag, :show_tag]
+  before_action :require_auth,    only: [:upvote_tag, :downvote_tag, :show_tag, :followed]
+  # before_action :require_tag,     only: [:upvote_tag, :downvote_tag, :show_tag]
+  # before_action :require_tag_relation, only: [:upvote_tag, :downvote_tag, :show_tag]
 
   # for claim/unclaim of trackers
-  before_filter :require_owner, only: [:claim, :unclaim]
-  before_filter :require_modify_team_projects, only: [:claim, :unclaim]
+  before_action :require_owner, only: [:claim, :unclaim]
+  before_action :require_modify_team_projects, only: [:claim, :unclaim]
 
   #loggin user activity
-  after_filter log_activity(Tracker::Event::VIEW), only: [:show, :overview]
+  after_action log_activity(Tracker::Event::VIEW), only: [:show, :overview]
 
   def index
     @trackers = Tracker.not_deleted.where(has_issues: true).order('trackers.bounty_total DESC, watchers DESC')
@@ -46,12 +46,12 @@ class Api::V1::TrackersController < ApplicationController
 
   def upvote_tag
     TagVote.find_or_create_by_person_and_relation_and_cast_vote @person, @tag_relation, 1
-    render text: 'ok', status: :ok
+    head :ok
   end
 
   def downvote_tag
     TagVote.find_or_create_by_person_and_relation_and_cast_vote @person, @tag_relation, -1
-    render text: 'ok', status: :ok
+    head :ok
   end
 
   def show_tag

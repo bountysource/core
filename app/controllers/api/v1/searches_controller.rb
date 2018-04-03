@@ -1,6 +1,6 @@
 class Api::V1::SearchesController < ApplicationController
 
-  before_filter :find_person, only: [:create, :bounty_search]
+  before_action :find_person, only: [:create, :bounty_search]
 
   # tracker typeahead
   def typeahead

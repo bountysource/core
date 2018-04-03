@@ -3,7 +3,7 @@ class Api::V2::PeopleController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::PeopleHelper
 
-  before_filter :require_auth, only: [ :update ]
+  before_action :require_auth, only: [ :update ]
 
   def index
     @collection = ::Person.active

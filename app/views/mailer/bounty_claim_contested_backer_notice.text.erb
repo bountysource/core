@@ -3,4 +3,4 @@ Hi <%= @person.first_name %>,
 Multiple claims have been submitted for "<%= @bounty_claim.issue.title %>". Please view the claims and cast your vote:
 <%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}/claims" %>
 
-The $<%= @bounty_claim.issue.bounty_total.round %> bounty will only be paid out when all backers unanimously accept one claim. If you have any questions, please email us at support@bountysource.com.
+The <%= number_to_dollars(@bounty_claim.amount) %> bounty will only be paid out when all backers unanimously accept one claim. If you have any questions, please email us at support@bountysource.com.

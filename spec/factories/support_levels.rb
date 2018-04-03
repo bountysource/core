@@ -6,8 +6,8 @@
 #  person_id              :integer          not null
 #  team_id                :integer          not null
 #  amount                 :decimal(10, 2)   not null
-#  status                 :string(255)      not null
-#  owner_type             :string(255)
+#  status                 :string           not null
+#  owner_type             :string
 #  owner_id               :integer
 #  payment_method_id      :integer          not null
 #  created_at             :datetime
@@ -24,11 +24,11 @@
 #  index_support_levels_on_team_id    (team_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :support_level do
     association :person, factory: :person
     association :team, factory: [:team, :accepts_public_payins]
-    association :payment_method, factory: :payment_method_paypal
+    association :payment_method, factory: :payment_method_paypal, strategy: :build
     status { 'pending' }
     amount { 10 }
 

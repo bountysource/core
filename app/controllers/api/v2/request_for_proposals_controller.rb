@@ -2,9 +2,9 @@ class Api::V2::RequestForProposalsController < Api::BaseController
   include CurrencyConversion
   include RequestForProposalAuthorization
 
-  before_filter :parse_options
-  before_filter :require_auth, except: [:show]
-  before_filter :require_team_admin_or_developer, except: [:show]
+  before_action :parse_options
+  before_action :require_auth, except: [:show]
+  before_action :require_team_admin_or_developer, except: [:show]
 
   def show
     @item = request_for_proposal
@@ -30,7 +30,7 @@ class Api::V2::RequestForProposalsController < Api::BaseController
 
   def destroy
     request_for_proposal.destroy!
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
 private

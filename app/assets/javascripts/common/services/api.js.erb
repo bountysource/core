@@ -283,6 +283,14 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
+    cancelCashOut: function(id, params) {
+      return this.call({
+        url: '/cash_outs/'+id,
+        method: 'PUT',
+        params: params || {}
+      });
+    },
+
     createCashOut: function(params) {
       return this.call({
         url: '/cash_outs',

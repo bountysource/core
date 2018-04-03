@@ -15,7 +15,7 @@ class TrackController < ActionController::Base
     headers['Cache-Control'] = "no-cache, no-store, max-age=0, must-revalidate"
     headers['Pragma'] = "no-cache"
     headers['Expires'] = "Fri, 01 Jan 1990 00:00:00 GMT"
-    render nothing: true
+    head :ok
   end
 
 end

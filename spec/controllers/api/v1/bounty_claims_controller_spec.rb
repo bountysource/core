@@ -19,21 +19,21 @@ describe Api::V1::BountyClaimsController do
 
   it "should create bounty claim" do
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :created
     }.to change(person.bounty_claims, :count).by 1
   end
 
   it "should log when a bounty claim is created" do
     expect {
-      post :create, params
+      post :create, params: params
     }.to change(ActivityLog, :count).by 1
   end
 
   it "should require auth to create" do
     params.delete(:access_token)
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :unauthorized
     }.not_to change(person.bounty_claims, :count)
  end
@@ -41,7 +41,7 @@ describe Api::V1::BountyClaimsController do
   it "should not require code_url to create" do
     params.delete(:code_url)
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :created
     }.to change(person.bounty_claims, :count).by 1
   end
@@ -49,7 +49,7 @@ describe Api::V1::BountyClaimsController do
   it "should not require description to create" do
     params.delete(:description)
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :created
     }.to change(person.bounty_claims, :count).by 1
   end
@@ -58,7 +58,7 @@ describe Api::V1::BountyClaimsController do
     params.delete(:code_url)
     params.delete(:description)
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :unprocessable_entity
     }.not_to change(person.bounty_claims, :count)
   end
@@ -66,7 +66,7 @@ describe Api::V1::BountyClaimsController do
   it "should require issue to create" do
     params.delete(:issue_id)
     expect {
-      post :create, params
+      post :create, params: params
       assert_response :not_found
     }.not_to change(person.bounty_claims, :count)
   end
@@ -84,7 +84,7 @@ describe Api::V1::BountyClaimsController do
     it "should update code_url" do
       new_code_url = "https://disney.com/"
       expect {
-        put :update, params.merge(code_url: new_code_url)
+        put :update, params: params.merge(code_url: new_code_url)
         bounty_claim.reload
       }.to change(bounty_claim, :code_url).to new_code_url
     end
@@ -92,26 +92,26 @@ describe Api::V1::BountyClaimsController do
     it "should update description" do
       description = "Beem meep! I fixed it, and deserve the bounty!"
       expect {
-        put :update, params.merge(description: description)
+        put :update, params: params.merge(description: description)
         bounty_claim.reload
       }.to change(bounty_claim, :description).to description
     end
 
     it "should not update the issue" do
       expect {
-        put :update, params.merge(issue_id: issue.id + 1)
+        put :update, params: params.merge(issue_id: issue.id + 1)
         bounty_claim.reload
       }.not_to change(bounty_claim, :issue_id)
     end
 
     it "should have person on index" do
-      get :index, params
-      response_data.first.should have_key "person"
+      get :index, params: params
+      expect(response_data.first).to have_key "person"
     end
 
     it "should have person on show" do
-      get :show, params
-      response_data.should have_key "person"
+      get :show, params: params
+      expect(response_data).to have_key "person"
     end
   end
 end
