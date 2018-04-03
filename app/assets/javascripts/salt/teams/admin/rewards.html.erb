@@ -14,7 +14,9 @@
         </div>
 
         <div ng-show="rewards.currently_editing===reward">
-
+          <div class="alert alert-danger" ng-show="errors">
+            <p ng-repeat="error in errors">{{error}}</p>
+          </div>
           <div ng-show="reward.active_support_levels_count===0">
             <div class="form-group">
               <label class="control-label" for="subtitle">Amount</label>
@@ -52,7 +54,7 @@
       </form>
     </div>
 
-    <form name="form" ng-submit="create_reward()" class="mt-5"  ng-hide="rewards.currently_editing">
+    <form name="form" ng-submit="create_reward()" class="mt-5"  ng-hide="rewards.currently_editing">      
       <div class="form-group">
         <label class="control-label" for="subtitle">Amount</label>
         <div class="input-group col-xs-6 col-md-7 col-lg-6">

@@ -475,7 +475,10 @@ Api::Application.routes.draw do
             end
           end
           resources :backers, only: [:index]
-          resources :teams, only: [:index, :show, :update], :id => /([^\/])+?/, :format => /json/
+          resources :teams, only: [:index, :show, :update], :id => /([^\/])+?/, :format => /json/ do
+            resources :support_offering_rewards, only: [:create]
+          end
+          resources :support_offering_rewards, only: [:update, :destroy]
           resources :plugins, only: [:index, :show]
           resources :addresses, only: [:index, :show, :create, :update, :destroy]
           resources :cash_outs, only: [:index, :show, :create, :update, :destroy]
