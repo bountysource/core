@@ -60,6 +60,6 @@ angular.module('app').run(function($api) {
     methods: {
       'create': { method: 'POST', url: '/teams/:team_slug/support_offering_rewards' }
     }}
-  )
+  );
 
 });
