@@ -129,19 +129,6 @@ class Api::V2::TeamsController < Api::BaseController
         @item.support_offering.update_attributes(support_offering_params)
       end
 
-      # create, update, destroy
-      if params[:create_support_offering_reward]
-        @item.support_offering.rewards.create!(support_offering_reward_params)
-      end
-      if params[:update_support_offering_reward]
-        reward = @item.support_offering.rewards.where(id: params[:update_support_offering_reward][:id]).first!
-        reward.update_from_params!(params[:update_support_offering_reward])
-      end
-      if params[:destroy_support_offering_reward]
-        reward = @item.support_offering.rewards.where(id: params[:destroy_support_offering_reward][:id]).first!
-        reward.mark_as_deleted!
-      end
-
       # TODO: could require is_admin on child_team as well
       if params[:add_child_team_inclusion]
         child_team = Team.where(slug: params[:add_child_team_inclusion]).first!
@@ -169,10 +156,6 @@ private
 
   def support_offering_params
     params.require(:support_offering).permit(:subtitle, :body_markdown, :youtube_video_url, :goals, :extra)
-  end
-
-  def support_offering_reward_params
-    params.require(:create_support_offering_reward).permit(:title, :description, :amount)
   end
 
   def require_team

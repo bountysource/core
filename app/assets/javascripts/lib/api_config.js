@@ -55,4 +55,11 @@ angular.module('app').run(function($api) {
 
   $api.add('stats');
 
+  $api.add('support_offering_rewards', {
+    params: {id: '@id', team_slug: '@team_slug'},
+    methods: {
+      'create': { method: 'POST', url: '/teams/:team_slug/support_offering_rewards' }
+    }}
+  )
+
 });
