@@ -15,7 +15,6 @@ gem 'json'
 gem 'pg', '~> 0.18.1'
 gem 'mysql2', '0.3.17'
 gem 'puma'
-gem 'rack-timeout'
 gem 'oj'
 
 gem 'rabl'
@@ -119,5 +118,5 @@ group :production do
   gem 'execjs'
   gem 'therubyracer'
   gem 'ngannotate-rails'
-
+  gem 'rack-timeout'
 end
