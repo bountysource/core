@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314002424) do
+ActiveRecord::Schema.define(version: 20180328112330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -477,7 +477,7 @@ ActiveRecord::Schema.define(version: 20180314002424) do
   create_table "linked_accounts", id: :serial, force: :cascade do |t|
     t.integer "person_id"
     t.string "type"
-    t.bigint "uid", null: false
+    t.bigint "uid"
     t.string "login"
     t.string "first_name"
     t.string "last_name"
