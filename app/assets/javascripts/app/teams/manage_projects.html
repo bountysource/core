@@ -64,5 +64,57 @@
       <thumbnail-links array="team_inclusions.teams" per-row="6" object-type="'team-with-dismiss'" dismiss-action="team_inclusions.remove(team)"></thumbnail-links>
     </div>
 
+    <div ng-show="team_tags.current.$resolved" class="team-tags">
+      <div ng-show="team_tags.editing">
+        <table class="table table-compressed table-fixed" style="margin-bottom: 0">
+          <tr>
+            <th>Tag</th>
+          </tr>
+
+          <tr ng-repeat="tag in team_tags.current">
+            <td>
+              <div class="text-ellipsis">
+                <a ng-if="tag.type=='Team'" ng-href="/teams/{{tag.slug}}/tagged" style="white-space:nowrap">
+                  <img ng-src="{{tag.image_url}}" style="width:16px; height:16px; margin-right:4px" />{{tag.name}}
+                </a>
+                <a ng-if="tag.type=='Tag'" ng-href="/teams?tag_id={{tag.id}}" style="white-space:nowrap">
+                  <span class="glyphicon glyphicon-tags" style="margin-right:6px"></span>{{tag.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <form class="form" ng-submit="team_tags.submit_form({ child_text: team_tags.new_tag_name, team_add_child: $item })" >
+          <table class="table table-compressed">
+            <tr>
+              <td>
+                <input type="text" placeholder="New Tag" class="form-control input-sm" ng-model="team_tags.new_tag_name" maxlength="25" typeahead="tag.name for tag in team_tags.typeahead_tags($viewValue)" typeahead-on-select="team_tags.submit_form({ child_type: $item.type, child_id: $item.id })" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
+              </td>
+              <td class="form-group">
+                <button type="submit" class="btn btn-default btn-sm">Add</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+
+        <a ng-click="team_tags.toggle_edit()">Close</a>
+      </div>
+
+      <div ng-hide="team_tags.editing" style="overflow: hidden">
+        Tags:
+        <span ng-repeat="tag in team_tags.current | filter:team_tags.has_enough_votes" style="margin-right:10px">
+          <a ng-if="tag.type=='Team'" ng-href="/teams/{{tag.slug}}/tagged" style="white-space:nowrap">
+            <img ng-src="{{tag.image_url}}" style="width:16px; height:16px; margin-right:4px" />{{tag.name}}
+          </a>
+          <a ng-if="tag.type=='Tag'" ng-href="/teams?tag_id={{tag.id}}" style="white-space:nowrap">
+            <span class="glyphicon glyphicon-tags" style="margin-right:5px"></span>{{tag.name}}
+          </a>
+        </span>
+        <a ng-click="team_tags.toggle_edit()" style="white-space:nowrap"><span class="glyphicon glyphicon-plus" style="margin-right:4px"></span>Add Tags</a>
+      </div>
+    </div>
+
+
   </div>
 </div>
