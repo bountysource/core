@@ -45,7 +45,7 @@ brew install postgresql
 git clone git@github.com:bountysource/core.git bountysource-core
 cd bountysource-core
 
-# make sure you're running ruby 2.2.8 (if not, mess with rbenv)
+# make sure you're running ruby 2.4.3 (if not, mess with rbenv)
 ruby -v
 
 # install Gemfile
