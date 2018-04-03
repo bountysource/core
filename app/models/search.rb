@@ -55,7 +55,7 @@ class Search < ApplicationRecord
     page = params[:page] || 1
     per_page = params[:per_page].to_i || 50
     query = params[:search] || "*"
-    min = params[:min].present? ? params[:min].to_f : 0.0
+    min = params[:min].present? ? params[:min].to_f : 1.0
     max = params[:max].present? ? params[:max].to_f : 10_000.0
     order = ["bounty_total", "backers_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
     direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'asc'
@@ -64,11 +64,10 @@ class Search < ApplicationRecord
     can_add_bounty = params[:can_add_bounty] == "all" ? [] : true
     #build a "with" hash for the filtering options. order hash for sorting options.
     with_hash = {
-      tracker_ids: trackers, 
-      language_ids: languages, 
-      :bounty_total => (min..max), 
+      tracker_ids: trackers,
+      language_ids: languages,
       can_add_bounty: can_add_bounty,
-      bounty_total: { gt: 0 },
+      bounty_total: { gte: min, lte: max },
       paid_out: false
     }.select {|param, value| value.present?}
 
@@ -192,7 +191,6 @@ protected
       where: {issues_count: {gte: 1}}, 
       order: {bounty_total: :desc}, 
       match: :word_start, 
-      limit: 5, 
       boost_by: [:issues_count, :forks, :watchers],
       limit: 50).to_a
     self.class.reject_merged_trackers!(tracker_search)

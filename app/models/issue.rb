@@ -61,8 +61,6 @@
 #
 
 class Issue < ApplicationRecord
-  searchkick word_start: [:title, :body, :tracker_name]
-
   STATIC_SUBCLASSNAMES = %w(
     Jira::Issue
     Bugzilla::Issue
@@ -205,17 +203,24 @@ class Issue < ApplicationRecord
   #}
 
   # Mark Searchkick begin
+  searchkick word_start: [:title, :body, :tracker_name]
+  scope :search_import, -> { 
+    where(can_add_bounty: true)
+    .or(where('bounty_total > ?', 0))
+    .includes(:languages, :tracker, :bounties) 
+  }
+
   def search_data
     {
       title: title,
       body: body,
       tracker_name: tracker.name,
-      languages_name: languages.pluck(:name),
+      languages_name: languages.map(&:name),
       bounty_total: bounty_total,
-      language_ids: languages.pluck(:id),
+      language_ids: languages.map(&:id),
       tracker_id: tracker_id,
       can_add_bounty: can_add_bounty,
-      backers_count: bounties.count,
+      backers_count: bounties.length,
       earliest_bounty: bounties.minimum(:created_at),
       participants_count: participants_count,
       thumbs_up_count: thumbs_up_count,

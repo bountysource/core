@@ -57,7 +57,6 @@
 #
 
 class Tracker < ApplicationRecord
-  searchkick word_start: [:name]
   STATIC_SUBCLASSNAMES_API = %w(
     Jira::API
     Bugzilla::API
@@ -200,6 +199,11 @@ class Tracker < ApplicationRecord
   def self.collection_size_override
     10000
   end
+
+  searchkick word_start: [:name]
+  scope :search_import, -> { 
+    includes(:issues) 
+  }
 
   def search_data
      {
