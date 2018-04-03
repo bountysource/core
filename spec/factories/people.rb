@@ -30,6 +30,8 @@
 #  suspended_at         :datetime
 #  bounty_hunter        :boolean
 #  quickbooks_vendor_id :integer
+#  reset_digest         :string
+#  reset_sent_at        :datetime
 #
 # Indexes
 #

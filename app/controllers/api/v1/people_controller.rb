@@ -202,7 +202,7 @@ class Api::V1::PeopleController < ApplicationController
     if params[:email].blank?
       render json: { error: 'Must provide account email address or display name' }, status: :bad_request
     elsif (person = Person.find_by_email(params[:email]))
-      if person.reset_password_code == params[:code]
+      if person.reset_authenticated?(params[:code]) && !person.password_reset_expired?
         person.password = params[:new_password]
         person.password_confirmation = person.password
 
@@ -212,7 +212,7 @@ class Api::V1::PeopleController < ApplicationController
           render json: { error: "Unable to reset password: #{person.errors.full_messages.join(', ')}" }, status: :bad_request
         end
       else
-        render json: { error: 'Reset code is not valid' }, status: :bad_request
+        render json: { error: 'Reset code is not valid or has expired' }, status: :bad_request
       end
     else
       render json: { message: 'Account not found' }, status: :not_found
@@ -223,8 +223,13 @@ class Api::V1::PeopleController < ApplicationController
     require_params(:email)
 
     if (person = Person.find_by_email(params[:email]))
-      person.send_email(:reset_password)
-      render json: { message: 'Password reset email sent' }
+      if person.reset_sent_at < 5.minutes.ago
+        person.create_reset_digest
+        person.send_email(:reset_password, token: person.reset_token)
+        render json: { message: 'Password reset email sent' }
+      else
+        render json: { message: 'Please wait for 5 minutes before you request a new password reset email' }
+      end
     else
       render json: { error: 'Account not found' }, status: :not_found
     end

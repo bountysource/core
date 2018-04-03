@@ -366,6 +366,8 @@ GEM
     kramdown (1.16.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.6.0)
+      launchy (~> 2.2)
     libv8 (3.16.14.19)
     loofah (2.2.2)
       crass (~> 1.0.2)
@@ -626,6 +628,7 @@ DEPENDENCIES
   json
   jwt (= 0.1.11)
   launchy
+  letter_opener
   maildown
   monetize
   money
