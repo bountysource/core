@@ -72,6 +72,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'rdoc'
   gem 'annotate'
+  gem "letter_opener"
 end
 
 group :development, :test do

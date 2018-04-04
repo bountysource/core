@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328112330) do
+ActiveRecord::Schema.define(version: 20180403074459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -649,6 +649,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "suspended_at"
     t.boolean "bounty_hunter"
     t.integer "quickbooks_vendor_id"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
     t.index ["email"], name: "index_people_on_email", unique: true
     t.index ["shopping_cart_id"], name: "index_people_on_shopping_cart_id"
   end
