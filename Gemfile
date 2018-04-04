@@ -54,9 +54,9 @@ gem 'sass-rails', '~> 5.0.7'
 gem 'bootstrap-sass'
 gem 'savon', '~> 2.12'
 
-gem 'thinking-sphinx'
-
-gem 'flying-sphinx'
+gem 'searchkick'
+gem 'typhoeus'
+gem 'faraday_middleware-aws-sigv4'
 
 gem 'cloudinary'
 gem 'eventmachine', '1.0.4'

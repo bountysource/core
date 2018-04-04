@@ -20,9 +20,11 @@ addons:
   postgresql: "9.4"
 services:
   - postgresql
+  - elasticsearch
 before_script:
   - psql -c 'create database bountysource_test;' -U postgres
   - RAILS_ENV=test bundle exec rake db:migrate
+  - sleep 5
 branches:
   only:
     - master

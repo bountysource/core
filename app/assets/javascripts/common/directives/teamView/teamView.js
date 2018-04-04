@@ -83,7 +83,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             submit_form: function(options) {
               options.parent_type = 'Team';
               options.parent_id = team.id;
-              options.team_add_child = team
+              options.team_add_child = team;
 
               Tag.create(options, function(current_tags) {
                 scope.team_tags.current = current_tags;

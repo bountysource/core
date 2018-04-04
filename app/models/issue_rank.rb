@@ -44,4 +44,5 @@ class IssueRank < ApplicationRecord
   def increment_rank
     raise NotImplemented
   end
+
 end

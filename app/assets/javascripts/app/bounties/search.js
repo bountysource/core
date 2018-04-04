@@ -15,7 +15,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   $scope.sort_options = [
     { label: "Bounty Total", value: "bounty_total"},
     { label: "Age of Issue", value: "remote_created_at"},
-    { label: "Number of Backers", value: "backer_count"},
+    { label: "Number of Backers", value: "backers_count"},
     { label: "Date Bounty Posted", value: "earliest_bounty"}
   ];
 
@@ -31,7 +31,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
       asc_string = "Oldest";
       desc_string = "Newest";
       break;
-    case "backer_count":
+    case "backers_count":
       asc_string = "Least";
       desc_string= "Most";
       break;

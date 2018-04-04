@@ -166,5 +166,7 @@ module Api
 
     # Mixpanel
     config.mixpanel_token = ENV['MIXPANEL_TOKEN']
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end
