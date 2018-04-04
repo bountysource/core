@@ -223,7 +223,7 @@ class Api::V1::PeopleController < ApplicationController
     require_params(:email)
 
     if (person = Person.find_by_email(params[:email]))
-      if person.reset_sent_at < 5.minutes.ago
+      if person.reset_sent_at.nil? || person.reset_sent_at < 5.minutes.ago
         person.create_reset_digest
         person.send_email(:reset_password, token: person.reset_token)
         render json: { message: 'Password reset email sent' }
