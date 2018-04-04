@@ -94,7 +94,7 @@ module Rabl
         options[:paginate] = true
       end
 
-      if data && params && response && !data.is_a?(ThinkingSphinx::Search) && data.respond_to?(:count)
+      if data && params && response && data.respond_to?(:count)
         # apply filters
         if params[:filter]
           filter_hash = JSON.parse(params[:filter]) rescue {}

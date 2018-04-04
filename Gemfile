@@ -15,7 +15,6 @@ gem 'json'
 gem 'pg', '~> 0.18.1'
 gem 'mysql2', '0.3.17'
 gem 'puma'
-gem 'rack-timeout'
 gem 'oj'
 
 gem 'rabl'
@@ -55,9 +54,9 @@ gem 'sass-rails', '~> 5.0.7'
 gem 'bootstrap-sass'
 gem 'savon', '~> 2.12'
 
-gem 'thinking-sphinx'
-
-gem 'flying-sphinx'
+gem 'searchkick'
+gem 'typhoeus'
+gem 'faraday_middleware-aws-sigv4'
 
 gem 'cloudinary'
 gem 'eventmachine', '1.0.4'
@@ -73,6 +72,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'rdoc'
   gem 'annotate'
+  gem "letter_opener"
 end
 
 group :development, :test do
@@ -119,5 +119,5 @@ group :production do
   gem 'execjs'
   gem 'therubyracer'
   gem 'ngannotate-rails'
-
+  gem 'rack-timeout'
 end

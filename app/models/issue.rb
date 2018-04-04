@@ -61,7 +61,6 @@
 #
 
 class Issue < ApplicationRecord
-
   STATIC_SUBCLASSNAMES = %w(
     Jira::Issue
     Bugzilla::Issue
@@ -202,6 +201,39 @@ class Issue < ApplicationRecord
   #
   #  where(sql_frags, *values).order('bounty_total desc, comment_count desc').limit(10)
   #}
+
+  # Mark Searchkick begin
+  searchkick word_start: [:title, :body, :tracker_name]
+  scope :search_import, -> { 
+    where(can_add_bounty: true)
+    .or(where('bounty_total > ?', 0))
+    .includes(:languages, :tracker, :bounties) 
+  }
+
+  def search_data
+    {
+      title: title,
+      body: body,
+      tracker_name: tracker.name,
+      languages_name: languages.map(&:name),
+      bounty_total: bounty_total,
+      language_ids: languages.map(&:id),
+      tracker_id: tracker_id,
+      can_add_bounty: can_add_bounty,
+      backers_count: bounties.length,
+      earliest_bounty: bounties.minimum(:created_at),
+      participants_count: participants_count,
+      thumbs_up_count: thumbs_up_count,
+      remote_created_at: remote_created_at,
+      comments_count: comment_count,
+      paid_out: paid_out
+    }
+  end
+
+  def should_index?
+    can_add_bounty? || (bounty_total > 0)
+  end
+  # Mark Searchkick end
 
   def premerge(bad_model)
     self.account.try(:merge!, bad_model.account) #merge accounts but keep splits/transactions

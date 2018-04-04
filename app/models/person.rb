@@ -30,6 +30,8 @@
 #  suspended_at         :datetime
 #  bounty_hunter        :boolean
 #  quickbooks_vendor_id :integer
+#  reset_digest         :string
+#  reset_sent_at        :datetime
 #
 # Indexes
 #
@@ -38,6 +40,7 @@
 #
 
 class Person < ApplicationRecord
+  include PasswordResetable
   # temporarily holds a raw access token... useful in controllers-and-views
   attr_accessor :current_access_token
 
@@ -317,11 +320,6 @@ class Person < ApplicationRecord
   #  save if account_completed_changed?
   #  self.account_completed
   #end
-
-  # emailed to the person, so that they can reset their password.
-  def reset_password_code
-    Digest::SHA1.hexdigest("#{self.id}:#{self.email}:#{self.password_digest}").first(16)
-  end
 
   def display_name
     return attributes['display_name'] unless attributes['display_name'].blank?

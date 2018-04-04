@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  person_id        :integer
 #  type             :string
-#  uid              :integer          not null
+#  uid              :integer
 #  login            :string
 #  first_name       :string
 #  last_name        :string
@@ -38,6 +38,8 @@
 #
 
 class LinkedAccount::Twitter < LinkedAccount::Base
+
+  validates :uid, presence: true
 
   # if we just added an oauth token, automatically follow @bountysource
   after_save do

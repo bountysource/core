@@ -57,7 +57,6 @@
 #
 
 class Tracker < ApplicationRecord
-
   STATIC_SUBCLASSNAMES_API = %w(
     Jira::API
     Bugzilla::API
@@ -200,6 +199,22 @@ class Tracker < ApplicationRecord
   def self.collection_size_override
     10000
   end
+
+  searchkick word_start: [:name]
+  scope :search_import, -> { 
+    includes(:issues) 
+  }
+
+  def search_data
+     {
+       name: name,
+       issues_count: issues.count,
+       watchers: watchers,
+       forks: forks,
+       open_issues: open_issues,
+       bounty_total: bounty_total
+     }
+   end
 
   def premerge(bad_model)
     self.account.try(:merge!, bad_model.account) #merge accounts but keep splits/transactions
