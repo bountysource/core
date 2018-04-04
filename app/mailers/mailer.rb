@@ -143,6 +143,7 @@ class Mailer < ActionMailer::Base
 
   def reset_password(options)
     @person = options[:person]
+    @token = options[:token]
 
     mail(to: @person.email, subject: "Reset your password") do |format|
       format.text
