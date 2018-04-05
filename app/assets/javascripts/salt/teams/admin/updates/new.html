@@ -1,18 +1,18 @@
-<h3>Email Your Community</h3>
+<h2>Email Your Community</h2>
 <p>Sending updates on a monthly basis is a great way to keep your community engaged.</p>
 
 <form name="form" style="margin-top:30px">
   <div class="alert alert-danger" ng-show="error">{{error}}</div>
 
-  <p>Email Lists</p>
+  <div><strong>Email Lists</strong></div>
   <div class="checkbox">
-    <label class="control-label">
+    <label>
       <input type="checkbox" name="mailing_lists[]" ng-checked="form_data.mailing_lists.indexOf('bountysource') > -1" ng-click="toggle_mailing_list(form, 'bountysource')">
       {{team.name}} users on Bountysource <span ng-show="mailing_lists.bountysource_users > 0">({{mailing_lists.bountysource_users | number}})</span>
     </label>
   </div>
   <div class="checkbox" ng-show="team.can_email_stargazers">
-    <label class="control-label">
+    <label>
       <input type="checkbox" name="mailing_lists[]" ng-checked="form_data.mailing_lists.indexOf('github') > -1" ng-click="toggle_mailing_list(form, 'github')">
       {{team.name}} users on GitHub <span ng-show="mailing_lists.github_users > 0">({{mailing_lists.github_users | number}})</span>
     </label>
@@ -27,23 +27,23 @@
   <div class="form-group">
     <div class="row">
       <div class="col-md-6">
-        <label class="control-label" for="title">Subject</label>
-        <input type="text" class="form-control input-medium" id="title" ng-model="form_data.title" placeholder="Title (also used for email subject)" />
+        <label for="title">Subject</label>
+        <input type="text" class="form-control" id="title" ng-model="form_data.title" placeholder="Title (also used for email subject)" />
       </div>
     </div>
   </div>
   <div class="form-group">
     <div class="row">
       <div ng-class="{ 'col-md-12': !markdown_side_by_side, 'col-md-6': markdown_side_by_side }">
-        <label class="control-label" for="body_markdown">Body Markdown</label>
-        <textarea msd-elastic class="form-control input-medium" id="body_markdown" ng-model="form_data.body" placeholder="In June, we accomplished... In July, we hope to accompish..." style="min-height:100px"></textarea>
+        <label for="body_markdown">Body Markdown</label>
+        <textarea msd-elastic class="form-control" id="body_markdown" ng-model="form_data.body" placeholder="In June, we accomplished... In July, we hope to accompish..." style="min-height:100px"></textarea>
       </div>
       <div ng-class="{ 'col-md-12': !markdown_side_by_side, 'col-md-6': markdown_side_by_side, 'markdown-top-margin': !markdown_side_by_side }">
         <a class="pull-right" ng-click="markdown_side_by_side=!markdown_side_by_side">
           <span class="glyphicon glyphicon-resize-small" ng-show="!markdown_side_by_side"></span>
           <span class="glyphicon glyphicon-resize-full" ng-show="markdown_side_by_side"></span>
         </a>
-        <label class="control-label">Preview</label>
+        <label>Preview</label>
         <target-blank model="markdown_preview">
           <div btf-markdown="markdown_preview" class="well markdown markdown-small-headers" style="min-height:100px; margin-bottom: 0"></div>
         </target-blank>
@@ -52,13 +52,13 @@
   </div>
 
   <div class="form-group">
-    <button type="submit" class="btn btn-success btn-rounded btn-long" ng-disabled="saving_form || form.$pristine || !form_data.title || !form_data.body" ng-click="submit_form(form, {})">
+    <button type="submit" class="btn btn-success" ng-disabled="saving_form || form.$pristine || !form_data.title || !form_data.body" ng-click="submit_form(form, {})">
       <span ng-show="saving_form">Saving...</span>
       <span ng-show="!saving_form && form.$pristine">Saved</span>
       <span ng-show="!saving_form && !form.$pristine">Save Draft</span>
     </button>
-    <button type="submit" class="btn btn-light-blue btn-rounded btn-long" ng-disabled="saving_form || !form_data.title || !form_data.body" ng-click="submit_form(form, { email_me: true })">Test Email to Just Me</button>
-    <button type="submit" class="btn btn-danger btn-rounded btn-long" ng-disabled="saving_form || !form_data.title || !form_data.body" ng-click="submit_form(form, { publish: true })">Publish to Everyone</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="saving_form || !form_data.title || !form_data.body" ng-click="submit_form(form, { email_me: true })">Test Email to Just Me</button>
+    <button type="submit" class="btn btn-danger" ng-disabled="saving_form || !form_data.title || !form_data.body" ng-click="submit_form(form, { publish: true })">Publish to Everyone</button>
 
   </div>
 

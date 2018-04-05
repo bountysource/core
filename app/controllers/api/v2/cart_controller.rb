@@ -53,8 +53,6 @@ class Api::V2::CartController < Api::BaseController
 
     # Render the JSON to trigger a Coinbase payment modal
     elsif @checkout_method.is_a?(Account::Coinbase)
-      raise "Coinbase is disabled" if ENV['COINBASE_DISABLED']
-
       options = {
         cancel_url: params[:cancel_url],
         currency: params[:currency] || 'USD'

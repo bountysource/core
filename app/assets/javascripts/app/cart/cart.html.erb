@@ -2,11 +2,11 @@
 
   <ul class="breadcrumb">
     <li><a href="/">Home</a></li>
-    <li class="active"><a>Shopping Cart</a></li>
+    <li><a>Shopping Cart</a></li>
   </ul>
 
   <div class="row" ng-hide="hide_cart">
-    <div class="col-md-8 col-xs-12">
+    <div class="col-md-9 col-sm-8">
 
       <div ng-if="cart.isEmpty()">
         <h1>Your shopping cart is empty.</h1>
@@ -18,86 +18,75 @@
       </div>
 
       <div class="panel panel-green panel-green-background ng-scope">
-        <div class="panel-body">
+        <div class="panel-body text-center">
           <h4>
             <span style="margin-right:10px">Please also consider a contribution to the <a href="https://salt.bountysource.com/teams/bountysource" target="_blank">Bountysource Team</a>:</span>
-          </h4>
-          <div>
             <span>
-              <a class="btn btn-aquamarine btn-small-radius ng-binding" ng-click="donateToBountysource(5)">$5</a>
-              <a class="btn btn-aquamarine btn-small-radius ng-binding" ng-click="donateToBountysource(15)">$15</a>
-              <a class="btn btn-aquamarine btn-small-radius ng-binding" ng-click="donateToBountysource(50)">$50</a>
-              <a class="btn btn-aquamarine btn-small-radius ng-binding" ng-click="donateToBountysource()">Other</a>
+              <a class="btn btn-success ng-binding" ng-click="donateToBountysource(5)">$5</a>
+              <a class="btn btn-success ng-binding" ng-click="donateToBountysource(15)">$15</a>
+              <a class="btn btn-success ng-binding" ng-click="donateToBountysource(50)">$50</a>
+              <a class="btn btn-success ng-binding" ng-click="donateToBountysource()">Other</a>
             </span>
-          </div>
+          </h4>
         </div>
       </div>
 
-      <div ng-if="cart && !cart.isEmpty() ">
-        <div ng-repeat="item in cart.items" class="row display-flex vertical-align-middle bb-1 pt-3 pb-3">
+      <table class="table" ng-if="cart && !cart.isEmpty()">
+        <tbody>
+        <tr ng-repeat="item in cart.items">
           <!-- Item image -->
-          <div class="col-md-1 col-sm-1 hidden-xs">
+          <td class="col-md-1 col-sm-1 hidden-xs">
             <!-- Bounty -->
             <a ng-if="isBounty(item)" ng-href="/trackers/{{item.issue.tracker.slug}}">
-              <img class="img-responsive img-circle" ng-src="{{item.issue.tracker.image_url_medium}}" />
+              <img class="img-responsive" ng-src="{{item.issue.tracker.image_url_medium}}" />
             </a>
 
             <!-- Pledge -->
             <a ng-if="isPledge(item)" ng-href="/fundraisers/{{item.fundraiser.slug}}">
-              <img class="img-responsive img-circle" ng-src="{{item.fundraiser.image_url_medium}}" />
+              <img class="img-responsive" ng-src="{{item.fundraiser.image_url_medium}}" />
             </a>
 
             <!-- TeamPayin -->
             <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}">
-              <img class="img-responsive img-circle" ng-src="{{item.team.image_url_medium}}" />
+              <img class="img-responsive" ng-src="{{item.team.image_url_medium}}" />
             </a>
 
             <!-- Proposal -->
             <a ng-if="isProposal(item)" ng-href="/issues/{{item.issue.slug}}">
-              <img class="img-responsive img-circle" ng-src="{{ item.issue.tracker.image_url_medium }}" />
+              <img ng-src="{{ item.issue.tracker.image_url_medium }}" class="img-responsive" />
             </a>
 
             <!-- Issue Suggestion Reward -->
             <a ng-if="isIssueSuggestionReward(item)" ng-href="/people/{{item.suggestion.person.slug}}">
-              <img class="img-responsive img-circle" ng-src="{{ item.suggestion.person.image_url_medium }}" />
+              <img ng-src="{{ item.suggestion.person.image_url_medium }}" class="img-responsive" />
             </a>
-          </div>
+          </td>
 
           <!-- Item attributes -->
-          <div class="col-sm-7 col-xs-12">
+          <td class="col-md-9 col-sm-8 col-xs-8">
 
             <!-- Title -->
             <div>
-              <span ng-if="isBounty(item)">
-                Bounty for <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a>
-              </span>
-              <span ng-if="isPledge(item)">
-                Pledge to <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a>
-              </span>
-              <span ng-if="isTeamPayin(item)">
-                Contribution to <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a>
-              </span>
-              <span ng-if="isProposal(item)">
-                Proposal for <a ng-href="/issues/{{item.issue.slug}}">{{ item.issue.title }}</a>
-              </span>
-              <span ng-if="isIssueSuggestionReward(item)">
-                Issue Suggestion Reward to <a ng-href="/people/{{item.suggestion.person.slug}}">{{ item.suggestion.person.display_name }}</a> for <a ng-href="/issues/{{item.suggestion.issue.slug}}">{{ item.suggestion.issue.title }}</a>
-              </span>
+              <h4 ng-if="isBounty(item)" style="margin-top: 0;">Bounty for <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></h4>
+              <h4 ng-if="isPledge(item)" style="margin-top: 0;">Pledge to <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a></h4>
+              <h4 ng-if="isTeamPayin(item)" style="margin-top: 0;">Contribution to <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a></h4>
+              <h4 ng-if="isProposal(item)" style="margin-top: 0;">Proposal for <a ng-href="/issues/{{item.issue.slug}}">{{ item.issue.title }}</a></h4>
+              <h4 ng-if="isIssueSuggestionReward(item)" style="margin-top: 0;">Issue Suggestion Reward to <a ng-href="/people/{{item.suggestion.person.slug}}">{{ item.suggestion.person.display_name }}</a> for <a ng-href="/issues/{{item.suggestion.issue.slug}}">{{ item.suggestion.issue.title }}</a></h4>
             </div>
 
             <ng-form class="form-horizontal" name="cartForm">
 
               <!-- Owner select -->
-              <div ng-if="current_person && !isProposal(item) && !isIssueSuggestionReward(item)" class="form-group mt-3">
-                <span class="col-md-3 col-sm-4 col-xs-5 text-muted"><small>Display As</small></span>
+              <div ng-if="current_person && !isProposal(item) && !isIssueSuggestionReward(item)" class="form-group">
+                <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Display As:</small></label>
 
                 <div class="col-md-9 col-sm-8 col-xs-7">
-                  <button class="btn btn-default btn-sm btn-small-radius dropdown-toggle" data-toggle="dropdown">
+                  <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                     <!-- Owner image -->
-                    <img ng-show="item.owner" style="height: 17px; width: 17px; display: inline;" ng-src="{{item.owner.image_url_small || item.owner.image_url}}" class="img-circle"/>
+                    <img ng-show="item.owner" style="height: 17px; width: 17px; display: inline;" ng-src="{{item.owner.image_url_small || item.owner.image_url}}" />
 
                     <!-- Owner image if owner is missing -->
-                    <img ng-hide="item.owner" style="height: 17px; width: 17px; display: inline;" src='<%= asset_path("anon.jpg") %>' class="img-circle" />
+                    <img ng-hide="item.owner" style="height: 17px; width: 17px; display: inline;" src='<%= asset_path("anon.jpg") %>' />
 
                     <span>{{item.owner.display_name || item.owner.name || 'Anonymous'}}</span>
                     <span class="caret"></span>
@@ -107,7 +96,7 @@
                     <!-- Current person, if logged in -->
                     <li ng-if="current_person">
                       <a ng-click="setOwner($index, 'person', current_person)">
-                        <img ng-src="{{current_person.image_url_small || current_person.image_url}}" style="height: 18px; width: 18px; display: inline;" class="img-circle"/>
+                        <img ng-src="{{current_person.image_url_small || current_person.image_url}}" style="height: 18px; width: 18px; display: inline;" />
                         {{current_person.display_name}}
                       </a>
                     </li>
@@ -125,7 +114,7 @@
                     <li ng-if="teams.length > 0" class="dropdown-header">Your Teams</li>
                     <li>
                       <a ng-repeat="team in teams | orderBy:'-activity_total'" ng-click="setOwner($parent.$index, 'team', team)">
-                        <img ng-src="{{team.image_url_small || team.image_url}}" style="height: 18px; width: 18px; display: inline;" class="img-circle"/>
+                        <img ng-src="{{team.image_url_small || team.image_url}}" style="height: 18px; width: 18px; display: inline;" />
                         {{team.name}}
                       </a>
                     </li>
@@ -137,7 +126,7 @@
               <div ng-if="isProposal(item)">
                 <!-- Developer -->
                 <div class="form-group">
-                  <span class="col-xs-5 col-sm-4 col-md-3 text-muted"><small>Developer</small></span>
+                  <label class="control-label col-xs-5 col-sm-4 col-md-3"><small>Developer:</small></label>
                   <div class="col-xs-7 col-sm-8 col-md-9">
                     <p class="form-control-static">
                       <a ng-href="people/{{ item.person.slug }}">{{ item.person.display_name }}</a>
@@ -147,7 +136,7 @@
 
                 <!-- Estimated Completion -->
                 <div class="form-group">
-                  <span class="col-xs-5 col-sm-4 col-md-3 text-muted"><small>Completed By</small></span>
+                  <label class="control-label col-xs-5 col-sm-4 col-md-3"><small>Completed By:</small></label>
                   <div class="col-xs-7 col-sm-8 col-md-9">
                     <p class="form-control-static">{{ item.completed_by | date:'mediumDate' }}</p>
                   </div>
@@ -155,7 +144,7 @@
 
                 <!-- Abstract -->
                 <div class="form-group">
-                  <span class="col-xs-5 col-sm-4 col-md-3 text-muted"><small>Notes</small></span>
+                  <label class="control-label col-xs-5 col-sm-4 col-md-3"><small>Notes:</small></label>
                   <div class="col-xs-7 col-sm-8 col-md-9"><p class="form-control-static">{{ item.bio }}</p></div>
                 </div>
               </div>
@@ -163,7 +152,7 @@
               <div ng-if="isBounty(item)">
                 <!-- Expires -->
                 <div class="form-group" ng-class="{ 'has-error': !bountyExpirationValid(item) }">
-                  <span class="col-md-3 col-sm-4 col-xs-5 text-muted"><small>Expires</small></span>
+                  <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Expires:</small></label>
 
                   <div class="col-md-4 col-sm-8 col-xs-7">
                     <select class="form-control input-sm"
@@ -182,7 +171,7 @@
 
                 <!-- After expiration select -->
                 <div class="form-group" ng-if="item.bounty_expiration && item.bounty_expiration !== 'never'" ng-class="{ 'has-error': cartForm.expireSelect.$invalid }">
-                  <span class="col-md-3 col-sm-4 col-xs-5 text-muted"><small>Upon Expiration</small></span>
+                  <label class="col-md-3 col-sm-4 col-xs-5 control-label"><small>Upon Expiration:</small></label>
 
                   <div class="col-md-9 col-sm-8 col-xs-7">
                     <select class="form-control input-sm"
@@ -213,7 +202,7 @@
 
                 <!-- Reward select -->
                 <div class="form-group" ng-class="{ 'has-error': (item.reward && !pledgeRewardValid(item)) }">
-                  <psan class="col-md-3 col-sm-4 col-xs-5 text-muted"><small>Reward</small></psan>
+                  <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Reward:</small></label>
                   <div class="col-md-7 col-sm-6 col-xs-7">
                     <select class="form-control input-sm"
                             ng-model="item.reward_id"
@@ -231,7 +220,7 @@
                 <!-- Reward survey response -->
                 <div ng-if="item.reward.fulfillment_details">
                   <div class="form-group" ng-class="{ 'has-error': cartForm.surveyResponse.$invalid }">
-                    <span class="col-md-3 col-sm-4 col-xs-5 text-muted"><small>Reward Details</small></span>
+                    <label class="control-label col-md-3 col-sm-4 col-xs-5"><small>Reward Details:</small></label>
                     <div class="col-md-9 col-sm-8 col-xs-7">
                       <!-- Fulfillment details -->
                       <p class="form-control-static">{{item.reward.fulfillment_details}}</p>
@@ -249,11 +238,11 @@
                 </div>
               </div>
             </ng-form>
-          </div>
+          </td>
 
-          <!-- Amount -->
-          <div class="col-sm-2 col-xs-8">
-            <div class="form-group m-0" ng-class="{ 'has-error': !itemValid(item) }" >
+          <!-- Amount, delete button -->
+          <td class="col-md-3 col-sm-4 col-xs-4">
+            <div class="form-group" ng-class="{ 'has-error': !itemValid(item) }" >
               <div class="input-group" tooltip-placement="bottom" tooltip="{{5 | dollars}} minimum" ng-if="!isProposal(item)">
                 <span class="input-group-addon">
                   <currency-unit></currency-unit>
@@ -264,82 +253,82 @@
                 <p class="form-control-static"><strong>{{ item.amount | dollars }}</strong></p>
               </div>
             </div>
-          </div>
 
-          <!-- Delete button -->
-
-          <div class="col-sm-1 col-xs-4">
             <div class="text-right">
-              <button class="btn btn-default btn-small-radius" ng-click="removeItem($index)" style="width: 42px; height: 42px;">
-                <%= image_tag 'icons/icon_trash.svg', class: 'img-responsive' %>
-              </button>
+              <button class="btn btn-link" ng-click="removeItem($index)">Delete</button>
             </div>
-          </div>
-        </div>
+          </td>
+        </tr>
 
-        <div>
-          <div colspan="4" class="text-right">
+        <tr>
+          <td colspan="3" class="text-right">
             <div>
               <h4>Total: {{ calculateCartTotal() || 0 | dollars:{ precision: {'USD': 2} } }}</h4>
             </div>
-          </div>
-        </div>
-      </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- Checkout button -->
-    <div class="col-md-offset-1 col-md-3 col-xs-12 ba-1" ng-hide="!cart || cart.isEmpty()">
-      <div class="text-center pt-5">Select payment method</div>
-      <ng-form>
-        <!-- PayPal -->
-        <div class="mt-3">
-          <label>
-            <input type="radio" ng-model="checkoutPayload.checkout_method" value="paypal">
-            <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
-            <span>PayPal</span>
-          </label>
-        </div>
-
-        <!-- Coinbase! -->
-        <div class="mt-2">
-          <label>
-            <input type="radio" ng-model="checkoutPayload.checkout_method" value="coinbase" ng-disabled="!BS_ENV.coinbase_enabled">
-            <favicon style="width: 16px; height: 16px;" domain="https://bitcoin.org/en/"></favicon>
-            <span ng-if="BS_ENV.coinbase_enabled">Bitcoin</span>
-            <span ng-if="!BS_ENV.coinbase_enabled" style="color: #888">Bitcoin (temporarily disabled)</span>
-          </label>
-        </div>
-
-        <!-- Personal Account -->
-        <div class="mt-2" ng-if="current_person.account.balance > 0">
-          <label>
-            <input type="radio" ng-model="checkoutPayload.checkout_method" value="personal" ng-disabled="current_person.account.balance < calculateCartTotal()" ng-click="setAllOwners('person', current_person)">
-            <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}" />
-
-            <span ng-class="{ 'text-muted': current_person.account.balance < calculateCartTotal() }">{{current_person.display_name}} <strong>{{current_person.account.balance | dollars}}</strong></span>
-          </label>
-        </div>
-
-        <!-- Team accounts -->
-        <div class="mt-2" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" ng-if="team.account_balance>0">
-          <label>
-            <input type="radio" ng-model="$parent.checkoutPayload.checkout_method" value="team/{{team.id}}" ng-disabled="team.account_balance < calculateCartTotal() || !team.is_developer || team.account_balance <= 0 || onTeamPage(team)"  ng-click="setAllOwners('team', team)"/>
-            <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}" />
-
-            <span ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal() || !team.is_developer || team.account_balance <= 0 || onTeamPage(team)) }">{{team.name}}</span>
-
-            <strong ng-show="team.is_developer" ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal()) }">{{team.account_balance | dollars}}</strong>
-            <strong ng-hide="team.is_developer" ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal()) }">{{0 | dollars}}</strong>
-            <span ng-show="team.is_admin && team.account_balance < 100"></span>
-          </label>
-        </div>
-      </ng-form>
-      <div class="panel panel-cool-grey mt-4 mb-0" style="margin-left: -15px; margin-right: -15px;">
+    <div class="col-md-3 col-sm-4" ng-hide="!cart || cart.isEmpty()">
+      <div class="panel panel-success">
         <div class="panel-heading text-center">Total ({{cart.items.length | number}} <ng-pluralize count="cart.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ calculateCartTotal() || 0 | dollars:{ precision: {'USD': 2} } }}</div>
 
         <div class="panel-body">
-          <button class="btn btn-light-blue btn-long center-block" ng-disabled="!canCheckout()" ng-click="checkout()">Checkout</button>
-        </div> 
+          <div>Select Payment Method:</div>
+          <ng-form>
+            <!-- PayPal -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="checkoutPayload.checkout_method" value="paypal">
+                <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
+                <span>PayPal</span>
+              </label>
+            </div>
+
+            <!-- Coinbase! -->
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="checkoutPayload.checkout_method" value="coinbase">
+                <favicon style="width: 16px; height: 16px;" domain="https://bitcoin.org/en/"></favicon>
+                <span>Bitcoin (cash)</span>
+              </label>
+            </div>
+
+            <!-- Personal Account -->
+            <div class="radio" ng-if="current_person.account.balance > 0">
+              <label>
+                <input type="radio" ng-model="checkoutPayload.checkout_method" value="personal" ng-disabled="current_person.account.balance < calculateCartTotal()" ng-click="setAllOwners('person', current_person)">
+                <img style="width: 16px; height: 16px;" ng-src="{{current_person.image_url}}" />
+
+                <span ng-class="{ 'text-muted': current_person.account.balance < calculateCartTotal() }">{{current_person.display_name}} <strong>{{current_person.account.balance | dollars}}</strong></span>
+              </label>
+            </div>
+
+            <!-- Team accounts -->
+            <div class="radio" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" ng-if="team.account_balance>0">
+              <label>
+                <input type="radio" ng-model="$parent.checkoutPayload.checkout_method" value="team/{{team.id}}" ng-disabled="team.account_balance < calculateCartTotal() || !team.is_developer || team.account_balance <= 0 || onTeamPage(team)"  ng-click="setAllOwners('team', team)"/>
+                <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}" />
+
+                <span ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal() || !team.is_developer || team.account_balance <= 0 || onTeamPage(team)) }">{{team.name}}</span>
+
+                <strong ng-show="team.is_developer" ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal()) }">{{team.account_balance | dollars}}</strong>
+                <strong ng-hide="team.is_developer" ng-class="{ 'text-muted': (team.account_balance < calculateCartTotal()) }">{{0 | dollars}}</strong>
+                <span ng-show="team.is_admin && team.account_balance < 100"></span>
+              </label>
+            </div>
+          </ng-form>
+        </div>
+
+        <div class="panel-footer">
+          <button class="btn btn-block btn-lg btn-success" ng-disabled="!canCheckout()" ng-click="checkout()">
+            <span>Checkout</span>
+            <i class="glyphicon glyphicon-chevron-right"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
