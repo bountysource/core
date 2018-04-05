@@ -140,8 +140,4 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
     }
   }
 
-  function getOpenIssuesCount (issues) {
-    
-  }
-
 });
