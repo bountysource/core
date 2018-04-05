@@ -22,13 +22,14 @@ class Api::V2::IssuesController < Api::BaseController
   end
 
   def index
+    
     @current_user = current_user
 
     @collection = ::Issue.not_deleted
-
     @include_issue_body_html = params[:include_body_html].to_bool
     @include_issue_tracker = params[:include_tracker].to_bool
-    @include_team_extended = @include_issue_team = params[:include_team].to_bool
+    # @include_team_extended = @include_issue_team = params[:include_team].to_bool
+    @include_team_extended = true
 
     if params.has_key?(:search)
       if params[:tracker_team_id]
@@ -37,14 +38,16 @@ class Api::V2::IssuesController < Api::BaseController
         tracker_ids  = params[:tracker_id]
       end
 
+    
       issue_ids = Issue.search(params[:search], :where => {tracker_ids: tracker_ids}).map(&:id)
       @collection = @collection.where(id: issue_ids)
     end
 
+
     @collection = filter!(@collection)
     @collection = order!(@collection)
     @collection = paginate!(@collection)
-
+    
     # Preload Trackers if including Tracker as child node of Issue
     if @include_issue_tracker
       @collection = @collection.includes(:tracker)
