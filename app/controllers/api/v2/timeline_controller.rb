@@ -81,6 +81,9 @@ class Api::V2::TimelineController < Api::BaseController
       @include_issue_body = false
       @include_comment_body = false
 
+    elsif params[:new_bounties_only]
+      events[:bounty_created] = base_bounty_created
+
     else
       events[:bounty_created] = base_bounty_created
       events[:solution_started] = base_solution_started
