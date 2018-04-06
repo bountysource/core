@@ -35,7 +35,7 @@ class Api::V2::AddressesController < Api::BaseController
 
   # TODO use strong params ffs
   def address_params
-    params.permit(:name, :address1, :address2, :address3, :city, :state, :postal_code, :countryc)
+    params.permit(:name, :address1, :address2, :address3, :city, :state, :postal_code, :country)
   end
 
 end
