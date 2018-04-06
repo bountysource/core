@@ -1,3 +1,4 @@
+# Run with heroku run:detached rake reindex:issues[0,10000000]
 namespace :reindex do
   desc "Reindex issues with min and max"
   # Even with background jobs, batching takes too long. Set a max and min id to separate the batching
