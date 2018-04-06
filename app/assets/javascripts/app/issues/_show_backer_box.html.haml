@@ -1,4 +1,4 @@
-.panel.panel-cool-grey{ "ng-if" => "issue.can_add_bounty && (!issue.team || !issue.team.bounties_disabled)" }
+.panel.panel-canya-blue{ "ng-if" => "issue.can_add_bounty && (!issue.team || !issue.team.bounties_disabled)" }
   .panel-heading.text-center
     %h4.m-0.font-weight-medium Backers
   .panel-body.text-center
@@ -16,5 +16,5 @@
           %span.input-group-btn
             %button.btn.btn-aquamarine.btn-small-radius{ "type"=>"submit" }
               = image_tag 'icons/icon_mail.svg'
-  %p{ "style" => "font-size: 12px" } Bounties of $100 or more can be refunded after 180 days if not spent
-  %p{ "style" => "font-size: 12px" } Bounties of $250 or more can be refunded after 90 days if not spent
+  %p{ "style" => "font-size: 10px; font-style:italic;color:#919d9d" } Bounties of $100 or more can be refunded after 180 days if not spent
+  %p{ "style" => "font-size: 10px; font-style:italic;color:#919d9d" } Bounties of $250 or more can be refunded after 90 days if not spent
