@@ -202,13 +202,13 @@ class Tracker < ApplicationRecord
 
   searchkick word_start: [:name]
   scope :search_import, -> { 
-    includes(:issues) 
+    joins(:issues).select('trackers.*, (select count(*) from issues where tracker_id = trackers.id) as issues_count')
   }
 
   def search_data
      {
        name: name,
-       issues_count: issues.count,
+       issues_count: issues_count,
        watchers: watchers,
        forks: forks,
        open_issues: open_issues,

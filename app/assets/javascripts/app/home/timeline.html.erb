@@ -55,10 +55,12 @@
       <div class="col-sm-9">
         <!-- current home page -->
         <ul class="nav nav-tabs font-weight-bold">
-        <li class="active"><a href="/">Activity</a></li>
+        <li ng-class="{active: default_tab == true }"><a ng-click="default_tab = true" href="/">Activity</a></li>
+        <li ng-class="{active: default_tab == false }"><a ng-click="default_tab = false" href="/">New Bounties</a>
         <li><a ng-href="/teams">Teams</a></li>
         </ul>
-        <timeline events="events"></timeline>
+        <timeline events="events" ng-show="default_tab"></timeline>
+        <timeline events="new_bounties" ng-hide="default_tab"></timeline>
       </div>
 
       <div class="col-sm-3">
