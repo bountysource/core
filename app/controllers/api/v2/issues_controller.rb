@@ -36,9 +36,8 @@ class Api::V2::IssuesController < Api::BaseController
       elsif params.has_key?(:tracker_id)
         tracker_ids  = params[:tracker_id]
       end
-
     
-      issue_ids = Issue.search(params[:search], :where => {tracker_ids: tracker_ids}).map(&:id)
+      issue_ids = Issue.search(params[:search], :where => {tracker_id: tracker_ids}).map(&:id)
       @collection = @collection.where(id: issue_ids)
     end
 
