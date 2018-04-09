@@ -17,6 +17,7 @@ json.(item,
   :severity,
   :remote_created_at,
   :remote_updated_at,
+  :state,
   :url)
 
 json.bounty_total item.bounty_total.to_f

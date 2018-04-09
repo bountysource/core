@@ -54,7 +54,8 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
 
         setPagination({
           total_pages: response.headers()['total-pages'],
-          total_items: response.headers()['total-items'],
+          // total_items: response.headers()['total-items'],
+          total_items: $scope.issues.length,
           page: response.config.params.page,
           per_page: response.config.params.per_page
         });
@@ -87,7 +88,8 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
   // pagination settings
   function setPagination (pagination_data) {
     $scope.page = pagination_data.page;
-    $scope.total_items = parseInt(pagination_data.total_items, 10);
+    // $scope.total_items = parseInt(pagination_data.total_items, 10);
+    $scope.total_items = pagination_data.total_items;
     $scope.maxSize = 10;
     $scope.per_page = pagination_data.per_page;
   }
