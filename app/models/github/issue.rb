@@ -303,7 +303,7 @@ class Github::Issue < ::Issue
 
     # Ensure that we have a URL and remote_id before doing anything else
     unless url && remote_id
-      raise Error, "Required: 'remote_id' and 'url': #{github_data.inspect}"
+      raise Error, "Issue id: #{self.id}. Required: 'remote_id' and 'url': #{github_data.inspect}"
     end
 
     # passed in, find by remote_id, or new
