@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 20180411015847) do
     t.index ["issue_id"], name: "index_comments_on_issue_id"
   end
 
-  create_table "currencies", id: :serial  create_table "currencies", id: :serial, force: :cascade do |t|
+  create_table "currencies", id: :serial, force: :cascade do |t|
     t.string "type", limit: 255, null: false
     t.decimal "value", null: false
     t.datetime "created_at"
@@ -349,13 +349,14 @@ ActiveRecord::Schema.define(version: 20180411015847) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "issue_addresses", force: :cascade do |t|
-    t.bigint "issue_id"
-    t.string "public_address"
-    t.string "private_key"
+  create_table "issue_addresses", id: :serial, force: :cascade do |t|
+    t.integer "issue_id"
+    t.string "public_address", limit: 255
+    t.string "private_key", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["issue_id"], name: "index_issue_addresses_on_issue_id"
+    t.index ["public_address"], name: "index_issue_addresses_on_public_address"
   end
 
   create_table "issue_rank_caches", id: :serial, force: :cascade do |t|
@@ -739,12 +740,14 @@ ActiveRecord::Schema.define(version: 20180411015847) do
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_transactions", id: :integer, default: nil, force: :cascade do |t|
+  create_table "quickbooks_transactions", id: false, force: :cascade do |t|
+    t.integer "id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_vendors", id: :integer, default: nil, force: :cascade do |t|
+  create_table "quickbooks_vendors", id: false, force: :cascade do |t|
+    t.integer "id", null: false
     t.string "name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1252,7 +1255,6 @@ ActiveRecord::Schema.define(version: 20180411015847) do
     t.integer "language_ids", default: [], array: true
     t.integer "team_id"
     t.datetime "deleted_at"
-    t.integer "issues_count", default: 0
     t.index ["bounty_total"], name: "index_trackers_on_bounty_total"
     t.index ["closed_issues"], name: "index_trackers_on_closed_issues"
     t.index ["delta"], name: "index_trackers_on_delta"

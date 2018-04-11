@@ -41,7 +41,6 @@
 #  language_ids         :integer          default([]), is an Array
 #  team_id              :integer
 #  deleted_at           :datetime
-#  issues_count         :integer          default(0)
 #
 # Indexes
 #
