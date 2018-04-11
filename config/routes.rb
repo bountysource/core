@@ -316,6 +316,9 @@ Api::Application.routes.draw do
           post  :login, :logout, :change_password, :reset_password, :request_password_reset, :link_paypal
           get   :recent, :contributions, :interesting
 
+          resource :email_verification, only: [:create, :update]
+          resource :email_change_verification, only: [:update]
+
           # not legacy
           get :pledges, :bounties
 
