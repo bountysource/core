@@ -168,6 +168,20 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Signin'
   }, defaultRouteOptions));
 
+  $routeProvider.when('/verify', angular.extend({
+    templateUrl: 'app/signin/verify.html',
+    controller: 'VerifyController',
+    title: 'Email Verification',
+    trackEvent: "Email Verify"
+  }, defaultRouteOptions));
+
+  $routeProvider.when('/verify-email', angular.extend({
+    templateUrl: 'app/signin/verify_email.html',
+    controller: 'VerifyEmailController',
+    title: 'Email Change Verification',
+    trackEvent: "Email Change Verify"
+  }, defaultRouteOptions));
+
   $routeProvider.when('/tools', angular.extend({
     templateUrl: 'app/tools/all.html',
     controller: 'BaseToolsController',

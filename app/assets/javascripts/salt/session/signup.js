@@ -42,7 +42,11 @@ angular.module('app').config(function($stateProvider) {
           $auth.setAccessToken(response.access_token);
           $auth.gotoTargetState();
         }, function(response) {
-          $scope.error = response.data.error;
+          if (response.data.error) {
+            $scope.error = response.data.error;
+          } else if (response.data.verify_email_send) {
+            $scope.verify_email_send = true;
+          }
         });
       };
     },

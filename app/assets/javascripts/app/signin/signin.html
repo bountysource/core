@@ -1,4 +1,8 @@
-<div class="row">
+<div ng-show="verify_email_send" class="alert alert-success">
+  An email has sent to your email address. Please verify your email within 2 hours.
+</div>
+
+<div ng-hide="verify_email_send" class="row">
   <div class="center-block form-signin">
     <form class="form-horizontal center-block" name="form" novalidate="" ng-autofill-aware="">
       <div class="col-xs-12">
@@ -37,6 +41,7 @@
         <div class="col-md-1 col-sm-6 text-left">
             <span class="help-block" ng-show="signin_or_signup=='signin'"><small>Found!</small></span>
             <span class="help-block" ng-show="signin_or_signup=='signup'"><small>Available!</small></span>
+            <span class="help-block" ng-show="signin_or_signup=='not_verify'"><small><a ng-click="resend_verification()">Verify!</a></small></span>
         </div>
       </div>
 
