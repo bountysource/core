@@ -33,6 +33,10 @@ module Github::API
       new_relic_data_point "Custom/external_api/github/success"
       return response
 
+    elsif response.move_permanently? && (options[:type] || 'get').downcase == 'get' && options[:url].match(%r{\A/repos/([a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+)}) && (new_repo = check_for_moved_repo($1))
+        Rails.logger.error "Retrying GET for renamed repo: #{$1} --> #{new_repo}"
+        return call(options.merge(url: options[:url].gsub($1, new_repo)))
+
     elsif response.not_found?
       if (options[:type] || 'get').downcase == 'get' && options[:url].match(%r{\A/repos/([a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+)}) && (new_repo = check_for_moved_repo($1))
         Rails.logger.error "Retrying GET for renamed repo: #{$1} --> #{new_repo}"
@@ -221,7 +225,11 @@ private
     end
 
     def success?
-      (99...400).include?(status)
+      (99...400).include?(status) && status != 301
+    end
+
+    def move_permanently?
+      status == 301
     end
 
     def not_found?
