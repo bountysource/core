@@ -168,6 +168,11 @@ class Github::Repository < Tracker
     true
   end
 
+  def self.find_by_url(url)
+    baseurl = (url || "").strip.gsub(/\Ahttps?:\/\//,'').gsub(/\/\Z/, '')
+    where(:url => ["http://#{baseurl}","http://#{baseurl}/","https://#{baseurl}","https://#{baseurl}/"]).or(where("url LIKE ? or url LIKE ?", "http://#{baseurl}?%", "https://#{baseurl}?%")).first
+  end
+
   def find_or_create_issues_from_github(options={})
     # don't bother unless we know this repo has issues
     return unless has_issues?
