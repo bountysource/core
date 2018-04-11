@@ -152,7 +152,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
       }
     } else {
       for ( var j = 0; j < trackers.length; j++) {
-        total_count += trackers[i]["open_issues"];
+        total_count += trackers[j]["open_issues"];
       }
     }
     return total_count;
