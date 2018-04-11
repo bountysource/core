@@ -198,7 +198,7 @@ class Github::Issue < ::Issue
     )
 
     # trigger an update on the underlying object
-    self.class.update_attributes_from_github_data(api_response.data, obj: self) if api_response.modified?
+    self.class.update_attributes_from_github_data(api_response.data, obj: self) 
   end
 
   # Sync comments with GitHub. Deletes comments that no longer exist.
@@ -303,7 +303,7 @@ class Github::Issue < ::Issue
 
     # Ensure that we have a URL and remote_id before doing anything else
     unless url && remote_id
-      raise Error, "Required: 'remote_id' and 'url': #{github_data.inspect}"
+      raise Error, "Issue id: #{options[:obj]&.id}. Required: 'remote_id' and 'url': #{github_data.inspect}"
     end
 
     # passed in, find by remote_id, or new
