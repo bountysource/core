@@ -18,11 +18,8 @@ angular.module('filters').filter('timeAgoShort', function() {
     } else if (months_left > 0) {
       time_left = months_left;
       time_left_unit = "mo";
-    } else if (days_left > 0) {
-      time_left = days_left;
-      time_left_unit = "d";
     } else {
-      time_left = 0;
+      time_left = days_left;
       time_left_unit = "d";
     }
     return time_left + ' ' + time_left_unit;
