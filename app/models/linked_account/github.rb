@@ -233,7 +233,6 @@ class LinkedAccount::Github < LinkedAccount::Base
   def self.update_attributes_from_github_data(github_data, options={})
     return nil if github_data.blank? || github_data['url'] == "https://api.github.com/users/"
     raise "NO ID #{github_data.inspect}" unless remote_id = github_data['id']
-
     # Find object
     rails_please_autoload = [LinkedAccount::Github::User, LinkedAccount::Github::Organization]
     obj = options[:obj] || LinkedAccount::Github.where("uid = ?", remote_id)[0] || LinkedAccount::Github.new()
@@ -266,6 +265,8 @@ class LinkedAccount::Github < LinkedAccount::Base
       obj.type = 'LinkedAccount::Github::Organization'
     elsif github_data['type'] == 'User'
       obj.type = 'LinkedAccount::Github::User'
+    elsif github_data['type'] == 'Bot'
+      obj.type = 'LinkedAccount::Github::Bot'
     else
       raise "Type not determined: #{github_data.inspect}"
     end
