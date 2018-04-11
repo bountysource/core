@@ -17,15 +17,8 @@
 class Currency::Mastercoin < Currency
 
   def self.sync
-    response = HTTParty.get('http://coinmarketcap.com/currencies/mastercoin/')
-
-    if response.success?
-      value = response.match(/class="text-large">\$ ([0-9.]+)<\/span>/)[1].to_f
-
-      model = first || new
-      model.value = value
-      model.save
-    end
+    response = HTTParty.get('https://api.coinmarketcap.com/v1/ticker/mastercoin/')
+    self.update_price(response)
   end
 
   def self.display_name
