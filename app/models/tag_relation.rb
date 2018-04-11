@@ -4,9 +4,9 @@
 #
 #  id          :integer          not null, primary key
 #  parent_id   :integer          not null
-#  parent_type :string           not null
+#  parent_type :string(255)      not null
 #  child_id    :integer          not null
-#  child_type  :string           not null
+#  child_type  :string(255)      not null
 #  weight      :integer          default(0), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

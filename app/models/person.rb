@@ -3,30 +3,30 @@
 # Table name: people
 #
 #  id                   :integer          not null, primary key
-#  first_name           :string
-#  last_name            :string
-#  display_name         :string
-#  email                :string           not null
+#  first_name           :string(255)
+#  last_name            :string(255)
+#  display_name         :string(255)
+#  email                :string(255)      not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  buyer_id             :string
-#  password_digest      :string
+#  buyer_id             :string(255)
+#  password_digest      :string(255)
 #  account_completed    :boolean          default(FALSE)
-#  paypal_email         :string
+#  paypal_email         :string(255)
 #  last_seen_at         :datetime
 #  last_bulk_mailed_at  :datetime
 #  admin                :boolean          default(FALSE)
 #  bio                  :text
-#  location             :string
-#  url                  :string
-#  company              :string
-#  public_email         :string
+#  location             :string(255)
+#  url                  :string(255)
+#  company              :string(255)
+#  public_email         :string(255)
 #  accepted_terms_at    :datetime
-#  cloudinary_id        :string
+#  cloudinary_id        :string(255)
 #  deleted              :boolean          default(FALSE), not null
 #  profile_completed    :boolean          default(FALSE), not null
 #  shopping_cart_id     :integer
-#  stripe_customer_id   :string
+#  stripe_customer_id   :string(255)
 #  suspended_at         :datetime
 #  bounty_hunter        :boolean
 #  quickbooks_vendor_id :integer

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403074459) do
+ActiveRecord::Schema.define(version: 20180411015847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 20180403074459) do
     t.index ["issue_id"], name: "index_comments_on_issue_id"
   end
 
-  create_table "currencies", id: :serial, force: :cascade do |t|
+  create_table "currencies", id: :serial  create_table "currencies", id: :serial, force: :cascade do |t|
     t.string "type", limit: 255, null: false
     t.decimal "value", null: false
     t.datetime "created_at"
@@ -347,6 +347,15 @@ ActiveRecord::Schema.define(version: 20180403074459) do
     t.text "jwt", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "issue_addresses", force: :cascade do |t|
+    t.bigint "issue_id"
+    t.string "public_address"
+    t.string "private_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issue_id"], name: "index_issue_addresses_on_issue_id"
   end
 
   create_table "issue_rank_caches", id: :serial, force: :cascade do |t|
@@ -1243,6 +1252,7 @@ ActiveRecord::Schema.define(version: 20180403074459) do
     t.integer "language_ids", default: [], array: true
     t.integer "team_id"
     t.datetime "deleted_at"
+    t.integer "issues_count", default: 0
     t.index ["bounty_total"], name: "index_trackers_on_bounty_total"
     t.index ["closed_issues"], name: "index_trackers_on_closed_issues"
     t.index ["delta"], name: "index_trackers_on_delta"
@@ -1323,4 +1333,5 @@ ActiveRecord::Schema.define(version: 20180403074459) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "issue_addresses", "issues"
 end

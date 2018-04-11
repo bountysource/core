@@ -8,9 +8,9 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  note            :text
-#  url             :string
+#  url             :string(255)
 #  completion_date :datetime
-#  status          :string           default("stopped"), not null
+#  status          :string(255)      default("stopped"), not null
 #
 # Indexes
 #
