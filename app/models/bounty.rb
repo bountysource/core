@@ -250,6 +250,33 @@ class Bounty < ApplicationRecord
     end
   end
 
+  def refund_for_deleted_issue
+    if refundable?
+      self.class.transaction do
+        transaction = Transaction.build do |tr|
+          tr.description = "Refund Bounty for deleted issue (#{id}) - Bounty Amount: $#{amount} Refunded: $#{amount}"
+          tr.splits.create(amount: -amount, item: issue)
+          if owner_type == "Team"
+            tr.splits.create(amount: +amount, item: owner)
+          else
+            tr.splits.create(amount: +amount, item: person)
+          end
+        end
+
+        transaction or raise ActiveRecord::Rollback
+
+        # update bounty to 'refunded' status or rollback
+        update_attributes status: Status::REFUNDED or raise ActiveRecord::Rollback
+
+        # email the backer
+        person.send_email :bounty_refunded_for_deleted_issue, bounty: self
+      end
+
+      # update displayed bounty total on issue
+      issue.delay.update_bounty_total
+    end
+  end
+
   def create_account
     issue.create_account!
   end
