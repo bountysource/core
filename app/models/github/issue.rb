@@ -95,8 +95,7 @@ class Github::Issue < ::Issue
     self
   rescue Github::API::NotFound
     unless deleted_at
-	    deleted_at = Time.now
-	    update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
+	    update_attributes(deleted_at: Time.now)
   	end
   end
 
