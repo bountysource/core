@@ -515,6 +515,18 @@ angular.module('services').config(function($httpProvider) {
     return this.call("/user/request_password_reset", "POST", data);
   };
 
+  this.resend_verification = function(data) {
+    return this.call("/user/email_verification", "POST", data);
+  };
+
+  this.email_verify = function(data) {
+    return this.call("/user/email_verification", "PUT", data)
+  }
+
+  this.email_change_verify = function(data) {
+    return this.call("/user/email_change_verification", "PUT", data)
+  }
+
   this.person_activity = function(id) {
     return this.call("/people/"+id+"/activity").then(function(activity) {
       var timeline = [], i;

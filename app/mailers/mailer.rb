@@ -151,6 +151,26 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def email_verification(options)
+    @person = options[:person]
+    @token = options[:token]
+
+    mail(to: @person.email, subject: "Verify your email") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def change_email(options)
+    @person = options[:person]
+    @token = options[:token]
+
+    mail(to: @person.email, subject: "Verify email change") do |format|
+      format.text
+      format.html
+    end
+  end
+
   def fundraiser_pledge_made(options)
     @person = options[:person]
     @pledge = options[:pledge]
