@@ -83,7 +83,6 @@ class Github::Repository < Tracker
 
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
-
     previous_synced_at = options[:force] ? nil : self.synced_at
     update_from_github(options)
     find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
@@ -124,7 +123,6 @@ class Github::Repository < Tracker
       params:         params,
       headers:        { 'If-Modified-Since' => if_modified_since }
     )
-
     # trigger an update on the underlying object if modified
     self.class.update_attributes_from_github_data(api_response.data, obj: self) if api_response.modified?
   end

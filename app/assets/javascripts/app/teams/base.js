@@ -4,7 +4,7 @@ angular.module('app').controller('BaseTeamController', function($scope, $locatio
       $scope.no_team_error = response.data.error;
     } else {
       $scope.team = new Team(angular.copy(response.data));
-
+      
       // update URL if uppercase/lowercase is off
       if ($scope.team.slug !== $routeParams.id) {
         $location.url($location.url().replace("/teams/"+ $routeParams.id, "/teams/"+ $scope.team.slug)).replace();

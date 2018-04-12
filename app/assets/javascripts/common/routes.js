@@ -71,6 +71,7 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     templateUrl: 'app/issues/index.html',
     controller: 'IssueIndexController',
     trackEvent: 'View Issues'
+    
   }, defaultRouteOptions));
 
   $routeProvider.when('/issues/thumbs', angular.extend({
