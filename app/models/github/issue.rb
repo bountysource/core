@@ -95,8 +95,7 @@ class Github::Issue < ::Issue
     self
   rescue Github::API::NotFound
     unless deleted_at
-	    deleted_at = Time.now
-	    update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
+	    update_attributes(deleted_at: Time.now)
   	end
   end
 
@@ -177,6 +176,11 @@ class Github::Issue < ::Issue
     elsif (api_response = Github::API.call(url: "/repos/#{$1}/issues/#{$2}")).success?
       update_attributes_from_github_data(api_response.data)
     end
+  end
+
+  def self.find_by_url(url)
+    baseurl = (url || "").strip.gsub(/\Ahttps?:\/\//,'').gsub(/\/\Z/, '')
+    where(:url => ["http://#{baseurl}","http://#{baseurl}/","https://#{baseurl}","https://#{baseurl}/"]).or(where("url LIKE ? or url LIKE ?", "http://#{baseurl}?%", "https://#{baseurl}?%")).first
   end
 
   # make the actual API call and update the model. needs to be it's own method for message queueing

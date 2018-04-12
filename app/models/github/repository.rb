@@ -98,10 +98,9 @@ class Github::Repository < Tracker
     end
   rescue Github::API::NotFound
     unless deleted_at
-      deleted_at = Time.now
-      update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
+      update_attributes(deleted_at: Time.now)
       issues.each do |issue|
-        issue.update_attributes(deleted_at: deleted_at, url: issue.url + "?deleted_at=#{deleted_at.to_i}")
+        issue.update_attributes(deleted_at: Time.now)
       end
     end
   end
@@ -164,6 +163,11 @@ class Github::Repository < Tracker
 
   def self.has_full_name?
     true
+  end
+
+  def self.find_by_url(url)
+    baseurl = (url || "").strip.gsub(/\Ahttps?:\/\//,'').gsub(/\/\Z/, '')
+    where(:url => ["http://#{baseurl}","http://#{baseurl}/","https://#{baseurl}","https://#{baseurl}/"]).or(where("url LIKE ? or url LIKE ?", "http://#{baseurl}?%", "https://#{baseurl}?%")).first
   end
 
   def find_or_create_issues_from_github(options={})
