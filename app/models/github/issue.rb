@@ -179,6 +179,11 @@ class Github::Issue < ::Issue
     end
   end
 
+  def self.find_by_url(url)
+    baseurl = (url || "").strip.gsub(/\Ahttps?:\/\//,'').gsub(/\/\Z/, '')
+    where(:url => ["http://#{baseurl}","http://#{baseurl}/","https://#{baseurl}","https://#{baseurl}/"]).or(where("url LIKE ? or url LIKE ?", "http://#{baseurl}?%", "https://#{baseurl}?%")).first
+  end
+
   # make the actual API call and update the model. needs to be it's own method for message queueing
   def update_from_github(options={})
     # read synced_at before updating

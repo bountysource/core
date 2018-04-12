@@ -297,14 +297,14 @@ class Tracker < ApplicationRecord
     if (issue_id = url.match(/\Ahttps:\/\/www\.bountysource\.com\/issues\/(\d+)/).try(:[], 1)) && (issue = Issue.where(id: issue_id).first)
       # we already have this as an issue in our DB
       return issue
-    elsif issue = Issue.find_by_url(url)
+    elsif issue = Issue.find_by_url(url) || Github::Issue.find_by_url(url)
       if issue.tracker.is_a? TrackerUnknown
         #try to reparse issue
       else
         # we already have this as an issue in our DB
         return issue
       end
-    elsif tracker = Tracker.find_by_url(url)
+    elsif tracker = Tracker.find_by_url(url) || Github::Repository.find_by_url(url)
       # we already have this as a tracker in our DB
       return tracker
     end
