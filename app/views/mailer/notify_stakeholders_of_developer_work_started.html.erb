@@ -2,10 +2,16 @@
 
 <p><a href="<%= "#{Api::Application.config.www_url}people/#{@solution.person.to_param}" %>"><%= @solution.person.display_name %></a> has begun working on a solution to "<a href="<%= "#{Api::Application.config.www_url}issues/#{@solution.issue.to_param}" %>"><%= @solution.issue.title %></a>".</p>
 
-<p><strong>Expected Completion Date</strong>: <%= @solution.completion_date.try(:to_date) %> </p>
+<% if @solution.completion_date %>
+	<p><strong>Expected Completion Date</strong>: <%= @solution.completion_date.try(:to_date) %> </p>
+<% end %>
 
-<p><strong>Notes from Developer:</strong> <%= @solution.note %></p>
+<% if @solution.note %>
+  <p><strong>Notes from Developer:</strong> <%= @solution.note %></p>
+<% end %>
 
-<p><%= @solution.person.display_name %> provided the following URL to track his or her progress: <%= @solution.url %></p>
+<% if @solution.url %>
+  <p><%= @solution.person.display_name %> provided the following URL to track his or her progress: <%= @solution.url %></p>
+<% end %>
 
 <p>The bounty can be claimed once the issue gets closed on the original issue tracker. When a bounty claim is submitted, all Backers will be notified.</p>
