@@ -104,10 +104,10 @@ protected
     {
       number: issue['id'],
       title: issue['title'],
-      state: issue['status'],
+      state: issue['state'],
       priority: issue['priority'],
       body: issue['content'] && issue['content']['html'],
-      can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
+      can_add_bounty: issue['state'] == 'new' || issue['state'] == 'open',
       url: issue['links'] && issue['links']['html'] &&
            issue['links']['html']['href'],
       author: linked_account,
@@ -125,10 +125,10 @@ protected
       {
         number: issue['id'],
         title: issue['title'],
-        state: issue['status'],
+        state: issue['state'],
         priority: issue['priority'],
         body: issue['content'] && issue['content']['html'],
-        can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
+        can_add_bounty: issue['state'] == 'new' || issue['state'] == 'open',
         url: issue['links'] && issue['links']['html'] &&
              issue['links']['html']['href'],
         owner: issue['assignee'] ? issue['assignee']['username'] : nil,
