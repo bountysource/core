@@ -14,6 +14,7 @@ module Api::V2::PaginationHelper
     # TODO this is kind of gross
     if request && response
       # if being called by a controller, not a helper test
+      expose_pagination_header
       response.headers.merge! build_pagination_headers(request.path, values, request.query_parameters)
     end
 
@@ -130,4 +131,7 @@ module Api::V2::PaginationHelper
     collection_size
   end
 
+  def expose_pagination_header
+    response.headers['Access-Control-Expose-Headers'] = "Link, Total-Pages, Total-Items"
+  end
 end
