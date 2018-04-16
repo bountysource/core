@@ -110,7 +110,7 @@ class Api::V1::PeopleController < ApplicationController
     if !(@person = Person.not_deleted.find_by_email(params[:email]))
       render json: { error: 'Email address not found.', email_is_registered: false }, status: :not_found
     elsif @person.confirmed_at == nil
-      render json: { error: 'Account not verify.', not_verify: true }, status: :not_found
+      render json: { error: 'Your email has not verified.', not_verify: true }, status: :not_found
     elsif !@person.authenticate(params[:password])
       render json: { error: 'Password not correct.', email_is_registered: true }, status: :not_found
     else
