@@ -9,6 +9,8 @@ angular.module('app')
   .controller("SentCashOutsController", function ($scope, $api) {
 
     $api.call('/admin/cash_outs', {
+        page: 1,
+        per_page: 50,
         sent: true,
         order: '+sent',
         include_address: true,
