@@ -22,7 +22,8 @@ class Api::V1::BountyClaimsController < ApplicationController
     @bounty_claim = @person.bounty_claims.create(
       issue: @issue,
       code_url: params[:code_url],
-      description: params[:description]
+      description: params[:description],
+      amount: params[:amount]
     )
 
     if @bounty_claim.valid?
