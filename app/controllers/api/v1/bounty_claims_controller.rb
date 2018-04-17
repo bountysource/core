@@ -19,11 +19,14 @@ class Api::V1::BountyClaimsController < ApplicationController
   def create
     require_params :issue_id
 
+    amount = @issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
+    byebug
+
     @bounty_claim = @person.bounty_claims.create(
       issue: @issue,
       code_url: params[:code_url],
       description: params[:description],
-      amount: params[:amount]
+      amount: amount
     )
 
     if @bounty_claim.valid?

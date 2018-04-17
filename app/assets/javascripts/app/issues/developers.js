@@ -386,7 +386,7 @@ angular.module('app').controller('IssueDevelopersController', function ($scope, 
     },
 
     update_claim: function() {
-      var data = { code_url: developer_form.data.url, description: developer_form.data.note, amount: $scope.issue.bounty_total };
+      var data = { code_url: developer_form.data.url, description: developer_form.data.note };
 
       if ($scope.my_bounty_claim) {
         $api.bounty_claim_update($scope.my_bounty_claim.id, data).then(developer_form.update_claim_callback);
