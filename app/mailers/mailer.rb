@@ -208,6 +208,16 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def bounty_refunded_for_deleted_issue(options)
+    @person = options[:person]
+    @bounty = options[:bounty]
+
+    mail(to: @person.email, subject: "Bounty refunded") do |format|
+      format.text
+      format.html
+    end
+  end
+
   def team_payin_refunded(options)
     @person = options[:person]
     @team_payin = options[:team_payin]
