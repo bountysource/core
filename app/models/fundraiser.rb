@@ -5,9 +5,9 @@
 #  id                :integer          not null, primary key
 #  person_id         :integer          not null
 #  published         :boolean          default(FALSE), not null
-#  title             :string(255)
-#  homepage_url      :string(255)
-#  repo_url          :string(255)
+#  title             :string
+#  homepage_url      :string
+#  repo_url          :string
 #  description       :text
 #  about_me          :text
 #  funding_goal      :integer          default(100)
@@ -16,7 +16,7 @@
 #  updated_at        :datetime         not null
 #  total_pledged     :decimal(10, 2)   default(0.0), not null
 #  featured          :boolean          default(FALSE), not null
-#  short_description :string(255)
+#  short_description :string
 #  days_open         :integer          default(30)
 #  ends_at           :datetime
 #  breached_at       :datetime
@@ -24,7 +24,7 @@
 #  breached          :boolean          default(FALSE), not null
 #  featured_at       :boolean
 #  hidden            :boolean          default(FALSE), not null
-#  cloudinary_id     :string(255)
+#  cloudinary_id     :string
 #  team_id           :integer
 #  tracker_id        :integer
 #
@@ -40,11 +40,7 @@
 #  index_fundraisers_on_published    (published)
 #
 
-class Fundraiser < ActiveRecord::Base
-  attr_accessible :title, :description, :about_me, :funding_goal, :payout_method,
-                  :milestones, :rewards, :short_description, :published_at, :account, :days_open, :breached,
-                  :breached_at, :hidden, :team
-
+class Fundraiser < ApplicationRecord
   has_cloudinary_image
 
   belongs_to :person
@@ -53,8 +49,8 @@ class Fundraiser < ActiveRecord::Base
   has_many :rewards
   has_many :fundraiser_questions
   has_many :pledges
-  has_many :trackers, through: :fundraiser_tracker_relations
   has_many :fundraiser_tracker_relations
+  has_many :trackers, through: :fundraiser_tracker_relations
 
   has_account class_name: 'Account::Fundraiser'
 
@@ -91,7 +87,7 @@ class Fundraiser < ActiveRecord::Base
 
   before_destroy do
     errors.add :base, "Cannot delete published fundraiser" if published?
-    errors.empty?
+    throw(:abort) unless errors.empty?
   end
 
   # add a $0 reward model, so that we can track when backers choose to opt out of a reward
@@ -143,7 +139,7 @@ class Fundraiser < ActiveRecord::Base
   # get days remaining. returns nil if not yet published
   def days_remaining
     if published?
-      (ends_at.end_of_day.utc.to_date - DateTime.now.utc).to_i
+      (ends_at.end_of_day.utc - DateTime.now.utc).to_i
     else
       days_open
     end
@@ -307,7 +303,7 @@ class Fundraiser < ActiveRecord::Base
 
   # pay out the entire account to the creator
   def payout!
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       # rollback if no pledges to payout
       raise ActiveRecord::Rollback if pledges.unpaid.empty?
 

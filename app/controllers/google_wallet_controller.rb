@@ -1,6 +1,6 @@
 class GoogleWalletController < ApplicationController
 
-  before_filter :require_auth, only: [:success]
+  before_action :require_auth, only: [:success]
 
   # POST back from Google for Wallet transaction
   def verify
@@ -23,12 +23,12 @@ class GoogleWalletController < ApplicationController
 
         # "...your server must send a 200 OK response where the only content
         # is the value of the "orderId" field"
-        return render text: order_id, status: :ok
+        return render plain: order_id, status: :ok
       end
     end
 
     # if we got here, something didn't line up correctly... bad request is bad
-    render nothing: true, status: :bad_request
+    head :bad_request
   end
 
   # When our frontend Wallet triggers it's success callback,
@@ -46,6 +46,6 @@ class GoogleWalletController < ApplicationController
   rescue Transaction::Order::CartEmpty
     # If the success callback is triggered again, the cart will be empty.
     # Render error, this shouldn't happen
-    render nothing: true, status: :bad_request
+    head :bad_request
   end
 end

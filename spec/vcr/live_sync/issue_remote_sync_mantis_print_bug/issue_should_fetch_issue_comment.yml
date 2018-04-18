@@ -1,0 +1,2545 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bugs.openfoam.org/view.php?id=2881
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:35:52 GMT
+      Server:
+      - Apache/2.4.7 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.23
+      Set-Cookie:
+      - PHPSESSID=nf1qgksojno8a3cst3hav8j202; path=/; secure; HttpOnly
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Last-Modified:
+      - Wed, 21 Mar 2018 10:35:52 GMT
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Wed, 21 Mar 2018 10:35:52 GMT
+      X-Frame-Options:
+      - DENY
+      Content-Security-Policy:
+      - default-src 'self'; frame-ancestors 'none'; style-src 'self'; script-src 'self';
+        img-src 'self'
+      Strict-Transport-Security:
+      - max-age=7776000
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"Content-type\"
+        content=\"text/html; charset=utf-8\" />\n\t<title>0002881: wideBandAbsorptionEmission
+        coefficient bug and inconsistency with - OpenFOAM Issue Tracking</title>\n\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.openfoam.org/css/custom.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.openfoam.org/css/jquery-ui-1.11.4.min.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.openfoam.org/css/common_config.php\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.openfoam.org/css/status_config.php\"
+        />\n\t<link rel=\"shortcut icon\" href=\"/images/favicon.ico\" type=\"image/x-icon\"
+        />\n\t<link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        title=\"OpenFOAM Issue Tracking: full-text search\" href=\"https://bugs.openfoam.org/browser_search_plugin.php?type=text\"/>\n\t<link
+        rel=\"search\" type=\"application/opensearchdescription+xml\" title=\"OpenFOAM
+        Issue Tracking: search by Issue Id\" href=\"https://bugs.openfoam.org/browser_search_plugin.php?type=id\"/>\n\t<script
+        type=\"text/javascript\" src=\"/javascript_config.php\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/javascript_translations.php\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/jquery-1.12.4.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/jquery-ui-1.11.4.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/common.js\"></script>\n</head>\n<body>\n<div
+        id=\"mantis\">\n<div id=\"banner\"><a id=\"logo-link\" href=\"http://openfoam.org\"><img
+        id=\"logo-image\" alt=\"OpenFOAM Issue Tracking\" src=\"/images/CFDFoundationBugs.png\"
+        /></a></div><div class=\"info-bar\">\n<div id=\"login-info\">\n\t<span id=\"logged-anon-label\">Anonymous</span>\n\t<span
+        id=\"login-link\"><a href=\"/login_page.php?return=%2Fview.php%3Fid%3D2881\">Login</a></span>\n\t<span
+        id=\"signup-link\"><a href=\"/signup_page.php\">Signup for a new account</a></span>\n</div>\n<div
+        id=\"rss-feed\">\n\t<a href=\"https://bugs.openfoam.org/issues_rss.php?\">\n\t<img
+        src=\"/images/rss.png\" alt=\"RSS\" title=\"RSS\" />\n\t</a>\n</div>\n<div
+        id=\"project-selector-div\"><form method=\"post\" id=\"form-set-project\"
+        action=\"/set_project.php\"><fieldset id=\"project-selector\"><label for=\"form-set-project-id\">Project</label><select
+        id=\"form-set-project-id\" name=\"project_id\"><option value=\"0\" selected=\"selected\">All
+        Projects</option>\n<option value=\"3\">OpenFOAM</option>\n<option value=\"5\">ThirdParty</option>\n</select>
+        <input type=\"submit\" class=\"button\" value=\"Switch\" /></fieldset></form></div><div
+        id=\"current-time\">2018-03-21 10:35 GMT</div></div>\n\n<div class=\"main-menu\">\n<ul
+        id=\"menu-items\">\n\t<li><a href=\"/my_view_page.php\">My View</a></li>\n\t<li><a
+        href=\"/view_all_bug_page.php\">View Issues</a></li>\n\t<li><a href=\"/changelog_page.php\">Change
+        Log</a></li>\n\t<li><a href=\"/roadmap_page.php\">Roadmap</a></li>\n</ul>\n<div
+        id=\"bug-jump\" ><form method=\"post\" class=\"bug-jump-form\" action=\"/jump_to_bug.php\"><fieldset
+        class=\"bug-jump\"><input type=\"hidden\" name=\"bug_label\" value=\"Issue
+        #\" /><input type=\"text\" name=\"bug_id\" size=\"8\" />&#160;<input type=\"submit\"
+        value=\"Jump\" />&#160;</fieldset></form></div>\n</div>\n<div id=\"content\">\n<br
+        /><div id=\"view-issue-details\" class=\"table-container\"><table><thead><tr
+        class=\"bug-nav\"><td class=\"form-title\" colspan=\"4\">View Issue Details&#160;<span
+        class=\"small\"><span class=\"bracket-link bracket-link-jump-to-bugnotes\">[&#160;<a
+        class=\"jump-to-bugnotes\" href=\"#bugnotes\">Jump to Notes</a>&#160;]</span>
+        </span></td><td class=\"right alternate-views-links\" colspan=\"2\"><span
+        class=\"small\"><span class=\"bracket-link bracket-link-bug-history\">[&#160;<a
+        class=\"bug-history\" href=\"view.php?id=2881&amp;history=1#history\">Issue
+        History</a>&#160;]</span> </span><span class=\"small\"><span class=\"bracket-link
+        bracket-link-print\">[&#160;<a class=\"print\" href=\"print_bug_page.php?bug_id=2881\">Print</a>&#160;]</span>
+        </span></td></tr></thead><tfoot><tr class=\"details-footer\"><td colspan=\"6\"><table><tr
+        class=\"details-buttons\"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></td></tr></tfoot><tbody><tr
+        class=\"bug-header\"><th class=\"bug-id category\" width=\"15%\">ID</th><th
+        class=\"bug-project category\" width=\"20%\">Project</th><th class=\"bug-category
+        category\" width=\"15%\">Category</th><th class=\"bug-view-status category\"
+        width=\"15%\">View Status</th><th class=\"bug-date-submitted category\" width=\"15%\">Date
+        Submitted</th><th class=\"bug-last-modified category\" width=\"20%\">Last
+        Update</th></tr><tr class=\"bug-header-data\"><td class=\"bug-id\">0002881</td><td
+        class=\"bug-project\">OpenFOAM</td><td class=\"bug-category\">[All Projects]
+        Bug</td><td class=\"bug-view-status\">public</td><td class=\"bug-date-submitted\">2018-03-15
+        08:23</td><td class=\"bug-last-modified\">2018-03-19 09:21</td></tr><tr class=\"spacer\"><td
+        colspan=\"6\"></td></tr><tr class=\"hidden\"></tr><tr><th class=\"bug-reporter
+        category\">Reporter</th><td class=\"bug-reporter\">kevnor</td><td colspan=\"4\">&#160;</td></tr><tr><th
+        class=\"bug-assigned-to category\">Assigned To</th><td class=\"bug-assigned-to\"></td><td
+        colspan=\"4\">&#160;</td></tr><tr><th class=\"bug-priority category\">Priority</th><td
+        class=\"bug-priority\">normal</td><th class=\"bug-severity category\">Severity</th><td
+        class=\"bug-severity\">major</td><th class=\"bug-reproducibility category\">Reproducibility</th><td
+        class=\"bug-reproducibility\">always</td></tr><tr><th class=\"bug-status category\">Status</th><td
+        class=\"bug-status status-10-color\">new</td><th class=\"bug-resolution category\">Resolution</th><td
+        class=\"bug-resolution\">open</td><td colspan=\"2\">&#160;</td></tr><tr><th
+        class=\"bug-product-version category\">Product Version</th><td class=\"bug-product-version\">5.x</td><td
+        colspan=\"4\">&#160;</td></tr><tr><th class=\"bug-target-version category\">Target
+        Version</th><td class=\"bug-target-version\"></td><th class=\"bug-fixed-in-version
+        category\">Fixed in Version</th><td class=\"bug-fixed-in-version\"></td><td
+        colspan=\"2\">&#160;</td></tr><tr class=\"spacer\"><td colspan=\"6\"></td></tr><tr
+        class=\"hidden\"></tr><tr><th class=\"bug-summary category\">Summary</th><td
+        class=\"bug-summary\" colspan=\"5\">0002881: wideBandAbsorptionEmission coefficient
+        bug and inconsistency with</td></tr><tr><th class=\"bug-description category\">Description</th><td
+        class=\"bug-description\" colspan=\"5\">wideBandAbsorptionEmission::aCont
+        attempts to use the coefficients list with inverted ordering (i.e. coeffs_[species][band]
+        instead of coeffs_[band][species]) which results in incorrect coefficients
+        being used and segmentation faults. I'm guessing that no-one else is currently
+        using this model?!<br />\r\n<br />\r\nAdditionally, the behaviour of wideBandAbsorptionEmission
+        is inconsistent with greyMeanAbsorptionEmission in reading the look-up tables
+        and using mole-fractions versus mass-fractions for solved-for species.<br
+        />\r\n<br />\r\nI've attached a patch (for 5.x) that I believe corrects the
+        bug and makes the behaviour consistent.</td></tr><tr><th class=\"bug-steps-to-reproduce
+        category\">Steps To Reproduce</th><td class=\"bug-steps-to-reproduce\" colspan=\"5\">Run
+        any case with wideBandAbsorpionEmission model. E.g. modify fireFoam oppositeBurningPanels
+        tutorial case to use this model.</td></tr><tr><th class=\"bug-tags category\">Tags</th><td
+        class=\"bug-tags\" colspan=\"5\">No tags attached.</td></tr><tr class=\"spacer\"><td
+        colspan=\"6\"></td></tr><tr class=\"hidden\"></tr><tr id=\"attachments\"><th
+        class=\"bug-attachments category\">Attached Files</th><td class=\"bug-attachments\"
+        colspan=\"5\">\n<ul>\n<li>\n<div id=\"attachment_preview_2380_open\" class=\"
+        collapse-closed\">\n<a href=\"file_download.php?file_id=2380&amp;type=bug\"><img
+        src=\"https://bugs.openfoam.org/images/fileicons/text.gif\" alt=\"patch file
+        icon\" width=\"16\" height=\"16\" /></a>&#32;<a href=\"file_download.php?file_id=2380&amp;type=bug\">wideBandAbsorptionEmission.patch</a>&#32;(9,385&#32;bytes)&#32;<span
+        class=\"italic\">2018-03-15 08:23</span>&#32;<a id=\"attachment_preview_2380_open_link\"
+        class=\"collapse-link\"><img src=\"images/minus.png\" alt=\"-\" /></a>\n<pre
+        class=\"bug-attachment-preview-text\">diff --git a/src/thermophysicalModels/radiation/submodels/absorptionEmissionModel/wideBandAbsorptionEmission/wideBandAbsorptionEmission.C
+        b/src/thermophysicalModels/radiation/submodels/absorptionEmissionModel/wideBandAbsorptionEmission/wideBandAbsorptionEmission.C\nindex
+        aa0f3829a..4608a67fb 100644\n--- a/src/thermophysicalModels/radiation/submodels/absorptionEmissionModel/wideBandAbsorptionEmission/wideBandAbsorptionEmission.C\n+++
+        b/src/thermophysicalModels/radiation/submodels/absorptionEmissionModel/wideBandAbsorptionEmission/wideBandAbsorptionEmission.C\n@@
+        -25,6 +25,8 @@ License\n \n #include &quot;wideBandAbsorptionEmission.H&quot;\n
+        #include &quot;addToRunTimeSelectionTable.H&quot;\n+#include &quot;basicSpecieMixture.H&quot;\n+#include
+        &quot;unitConversion.H&quot;\n \n // * * * * * * * * * * * * * * Static Data
+        Members * * * * * * * * * * * * * //\n \n@@ -56,12 +58,7 @@ Foam::radiation::wideBandAbsorptionEmission::wideBandAbsorptionEmission\n
+        \    coeffsDict_((dict.optionalSubDict(typeName + &quot;Coeffs&quot;))),\n
+        \    speciesNames_(0),\n     specieIndex_(label(0)),\n-    lookUpTable_\n-
+        \   (\n-        fileName(coeffsDict_.lookup(&quot;lookUpTableFileName&quot;)),\n-
+        \       mesh.time().constant(),\n-        mesh\n-    ),\n+    lookUpTablePtr_(),\n
+        \    thermo_(mesh.lookupObject&lt;fluidThermo&gt;(basicThermo::dictName)),\n
+        \    Yj_(nSpecies_),\n     totalWaveLength_(0)\n@@ -95,7 +92,7 @@ Foam::radiation::wideBandAbsorptionEmission::wideBandAbsorptionEmission\n
+        \                if (!speciesNames_.found(key))\n                 {\n                     FatalErrorInFunction\n-
+        \                       &lt;&lt; &quot;specie: &quot; &lt;&lt; key &lt;&lt;
+        &quot;is not in all the bands&quot;\n+                        &lt;&lt; &quot;specie:
+        &quot; &lt;&lt; key &lt;&lt; &quot; is not in all the bands&quot;\n                         &lt;&lt;
+        nl &lt;&lt; exit(FatalError);\n                 }\n             }\n@@ -106,36
+        +103,82 @@ Foam::radiation::wideBandAbsorptionEmission::wideBandAbsorptionEmission\n
+        \    }\n     nBands_ = nBand;\n \n+    if (coeffsDict_.found(&quot;lookUpTableFileName&quot;))\n+
+        \   {\n+        const word name = coeffsDict_.lookup(&quot;lookUpTableFileName&quot;);\n+
+        \       if (name != &quot;none&quot;)\n+        {\n+            lookUpTablePtr_.set\n+
+        \           (\n+                new interpolationLookUpTable&lt;scalar&gt;\n+
+        \               (\n+                    fileName(coeffsDict_.lookup(&quot;lookUpTableFileName&quot;)),\n+
+        \                   mesh.time().constant(),\n+                    mesh\n+
+        \               )\n+            );\n+\n+            if (!mesh.foundObject&lt;volScalarField&gt;(&quot;ft&quot;))\n+
+        \           {\n+                FatalErrorInFunction\n+                    &lt;&lt;
+        &quot;specie ft is not present to use with &quot;\n+                    &lt;&lt;
+        &quot;lookUpTableFileName &quot; &lt;&lt; nl\n+                    &lt;&lt;
+        exit(FatalError);\n+            }\n+        }\n+    }\n+\n     // Check that
+        all the species on the dictionary are present in the\n-    // look-up table
+        \ and save the corresponding indices of the look-up table\n+    // look-up
+        table and save the corresponding indices of the look-up table\n \n     label
+        j = 0;\n     forAllConstIter(HashTable&lt;label&gt;, speciesNames_, iter)\n
+        \    {\n-        if (lookUpTable_.found(iter.key()))\n+        if (!lookUpTablePtr_.empty())\n
+        \        {\n-            label index = lookUpTable_.findFieldIndex(iter.key());\n-
+        \           Info&lt;&lt; &quot;specie: &quot; &lt;&lt; iter.key() &lt;&lt;
+        &quot; found in look-up table &quot;\n-                &lt;&lt; &quot; with
+        index: &quot; &lt;&lt; index &lt;&lt; endl;\n-            specieIndex_[iter()]
+        = index;\n+            if (lookUpTablePtr_().found(iter.key()))\n+            {\n+
+        \               label index = lookUpTablePtr_().findFieldIndex(iter.key());\n+\n+
+        \               Info&lt;&lt; &quot;specie: &quot; &lt;&lt; iter.key() &lt;&lt;
+        &quot; found on look-up table &quot;\n+                    &lt;&lt; &quot;
+        with index: &quot; &lt;&lt; index &lt;&lt; endl;\n+\n+                specieIndex_[iter()]
+        = index;\n+            }\n+            else if (mesh.foundObject&lt;volScalarField&gt;(iter.key()))\n+
+        \           {\n+                Yj_.set(j, &amp;mesh.lookupObjectRef&lt;volScalarField&gt;(iter.key()));\n+
+        \               specieIndex_[iter()] = 0;\n+                j++;\n+                Info&lt;&lt;
+        &quot;specie: &quot; &lt;&lt; iter.key() &lt;&lt; &quot; is being solved&quot;
+        &lt;&lt; endl;\n+            }\n+            else\n+            {\n+                FatalErrorInFunction\n+
+        \                   &lt;&lt; &quot;specie: &quot; &lt;&lt; iter.key()\n+                    &lt;&lt;
+        &quot; is neither in look-up table: &quot;\n+                    &lt;&lt;
+        lookUpTablePtr_().tableName()\n+                    &lt;&lt; &quot; nor is
+        being solved&quot; &lt;&lt; nl\n+                    &lt;&lt; exit(FatalError);\n+
+        \           }\n         }\n         else if (mesh.foundObject&lt;volScalarField&gt;(iter.key()))\n
+        \        {\n             Yj_.set(j, &amp;mesh.lookupObjectRef&lt;volScalarField&gt;(iter.key()));\n-\n-
+        \           specieIndex_[iter()] = 0.0;\n+            specieIndex_[iter()]
+        = 0;\n             j++;\n-            Info&lt;&lt; &quot;species: &quot; &lt;&lt;
+        iter.key() &lt;&lt; &quot; is being solved&quot; &lt;&lt; endl;\n         }\n
+        \        else\n         {\n             FatalErrorInFunction\n-                &lt;&lt;
+        &quot;specie: &quot; &lt;&lt; iter.key()\n-                &lt;&lt; &quot;
+        is neither in look-up table : &quot;\n-                &lt;&lt; lookUpTable_.tableName()
+        &lt;&lt; &quot; nor is being solved&quot;\n+                &lt;&lt; &quot;
+        there is no lookup table and the specie&quot; &lt;&lt; nl\n+                &lt;&lt;
+        iter.key() &lt;&lt; nl\n+                &lt;&lt; &quot; is not found &quot;
+        &lt;&lt; nl\n                 &lt;&lt; exit(FatalError);\n+\n         }\n
+        \    }\n+    \n }\n \n \n@@ -151,11 +194,11 @@ Foam::radiation::wideBandAbsorptionEmission::~wideBandAbsorptionEmission()\n
+        Foam::tmp&lt;Foam::volScalarField&gt;\n Foam::radiation::wideBandAbsorptionEmission::aCont(const
+        label bandI) const\n {\n+    const basicSpecieMixture&amp; mixture =\n+        dynamic_cast&lt;const
+        basicSpecieMixture&amp;&gt;(thermo_);\n+\n     const volScalarField&amp; T
+        = thermo_.T();\n     const volScalarField&amp; p = thermo_.p();\n-    const
+        volScalarField&amp; ft = mesh_.lookupObject&lt;volScalarField&gt;(&quot;ft&quot;);\n-\n-
+        \   label nSpecies = speciesNames_.size();\n \n     tmp&lt;volScalarField&gt;
+        ta\n     (\n@@ -176,38 +219,47 @@ Foam::radiation::wideBandAbsorptionEmission::aCont(const
+        label bandI) const\n \n     scalarField&amp; a = ta.ref().primitiveFieldRef();\n
+        \n-    forAll(a, i)\n+    forAll(a, celli)\n     {\n-        const List&lt;scalar&gt;&amp;
+        species = lookUpTable_.lookUp(ft[i]);\n-\n-        for (label n=0; n&lt;nSpecies;
+        n++)\n+        forAllConstIter(HashTable&lt;label&gt;, speciesNames_, iter)\n
+        \        {\n-            label l = 0;\n-            scalar Yipi = 0.0;\n+
+        \           label n = iter();\n+            scalar Xipi = 0.0;\n             if
+        (specieIndex_[n] != 0)\n             {\n-                // moles x pressure
+        [atm]\n-                Yipi = species[specieIndex_[n]]*p[i]*9.869231e-6;\n+\t
+        \       const volScalarField&amp; ft =\n+\t\t    mesh_.lookupObject&lt;volScalarField&gt;(&quot;ft&quot;);\n+\n+
+        \               const List&lt;scalar&gt;&amp; Ynft = lookUpTablePtr_().lookUp(ft[celli]);\n+
+        \               //moles x pressure [atm]\n+                Xipi = Ynft[specieIndex_[n]]*paToAtm(p[celli]);\n
+        \            }\n             else\n             {\n-                // mass
+        fraction from species being solved\n-                Yipi = Yj_[l][i];\n-
+        \               l++;\n+                scalar invWt = 0.0;\n+                forAll(mixture.Y(),
+        s)\n+                {\n+                    invWt += mixture.Y(s)[celli]/mixture.W(s);\n+
+        \               }\n+\n+                label index = mixture.species()[iter.key()];\n+
+        \               scalar Xk = mixture.Y(index)[celli]/(mixture.W(index)*invWt);\n+\n+
+        \               Xipi = Xk*paToAtm(p[celli]);\n             }\n \n-            scalar
+        Ti = T[i];\n+            scalar Ti = T[celli];\n \n             const absorptionCoeffs::coeffArray&amp;
+        b =\n-                coeffs_[n][bandI].coeffs(T[i]);\n+\t        coeffs_[bandI][n].coeffs(T[celli]);\n
+        \n-            if (coeffs_[n][bandI].invTemp())\n+            if (coeffs_[bandI][n].invTemp())\n
+        \            {\n-                Ti = 1.0/T[i];\n+                Ti = 1.0/T[celli];\n
+        \            }\n \n-            a[i]+=\n-                Yipi\n+            a[celli]+=\n+
+        \               Xipi\n                *(\n                     ((((b[5]*Ti
+        + b[4])*Ti + b[3])*Ti + b[2])*Ti + b[1])*Ti\n                   + b[0]\ndiff
+        --git a/src/thermophysicalModels/radiation/submodels/absorptionEmissionModel/wideBandAbsorptionEmission/wideBandAbsorptionEmission.H
+        b/src/thermophysicalModels/radiation/submodels/absorptionEmissionModel/wideBandAbsorptionEmission/wideBandAbsorptionEmission.H\nindex
+        e1fb10cf0..880537b68 100644\n--- a/src/thermophysicalModels/radiation/submodels/absorptionEmissionModel/wideBandAbsorptionEmission/wideBandAbsorptionEmission.H\n+++
+        b/src/thermophysicalModels/radiation/submodels/absorptionEmissionModel/wideBandAbsorptionEmission/wideBandAbsorptionEmission.H\n@@
+        -37,11 +37,8 @@ Description\n \n     The emission constant proportionality
+        is specified per band (EhrrCoeff).\n \n-    The coefficients for the species
+        in the lookup table have to be specified\n-    for use in moles x P [atm].i.e.
+        (k[i] = species[i]*p*9.869231e-6).\n-\n-    The coefficients for CO and soot
+        or any other added are multiplied by the\n-    respective mass fraction being
+        solved.\n+    The coefficients for the species have to be specified for use
+        in \n+    moles x P [atm], i.e. (k[i] = species[i]*p*9.869231e-6).\n \n     The
+        look Up table file should be in the constant directory.\n \n@@ -156,8 +153,8
+        @@ private:\n         //- Proportion of the heat released rate emitted\n         FixedList&lt;scalar,
+        maxBands_&gt; iEhrrCoeffs_;\n \n-        //- Lookup table of species related
+        to ft\n-        mutable interpolationLookUpTable&lt;scalar&gt; lookUpTable_;\n+
+        \       //- Look-up table of species related to ft\n+        mutable autoPtr&lt;interpolationLookUpTable&lt;scalar&gt;&gt;
+        lookUpTablePtr_;\n \n         //- Thermo package\n         const fluidThermo&amp;
+        thermo_;\n</pre></div>\n<div id=\"attachment_preview_2380_closed\" class=\"collapse-section-closed
+        collapse-open\">\n<a href=\"file_download.php?file_id=2380&amp;type=bug\"><img
+        src=\"https://bugs.openfoam.org/images/fileicons/text.gif\" alt=\"patch file
+        icon\" width=\"16\" height=\"16\" /></a>&#32;<a href=\"file_download.php?file_id=2380&amp;type=bug\">wideBandAbsorptionEmission.patch</a>&#32;(9,385&#32;bytes)&#32;<span
+        class=\"italic\">2018-03-15 08:23</span>&#32;<a id=\"attachment_preview_2380_closed_link\"
+        class=\"collapse-link\"><img src=\"images/plus.png\" alt=\"+\" /></a></div>\n</li>\n<li>\n<div
+        id=\"attachment_preview_2382_open\" class=\" collapse-closed\">\n<a href=\"file_download.php?file_id=2382&amp;type=bug\"><img
+        src=\"https://bugs.openfoam.org/images/fileicons/generic.gif\" alt=\"? file
+        icon\" width=\"16\" height=\"16\" /></a>&#32;<a href=\"file_download.php?file_id=2382&amp;type=bug\">radiationProperties</a>&#32;(4,959&#32;bytes)&#32;<span
+        class=\"italic\">2018-03-16 21:20</span>&#32;<a id=\"attachment_preview_2382_open_link\"
+        class=\"collapse-link\"><img src=\"images/minus.png\" alt=\"-\" /></a>\n<pre
+        class=\"bug-attachment-preview-text\">/*--------------------------------*-
+        C++ -*----------------------------------*\\\n| =========                 |
+        \                                                |\n| \\\\      /  F ield
+        \        | OpenFOAM: The Open Source CFD Toolbox           |\n|  \\\\    /
+        \  O peration     | Version:  5                                     |\n|   \\\\
+        \ /    A nd           | Web:      www.OpenFOAM.org                      |\n|
+        \   \\\\/     M anipulation  |                                                 |\n\\*---------------------------------------------------------------------------*/\n\nFoamFile\n{\n
+        \   version     2.0;\n    format      ascii;\n    class       dictionary;\n
+        \   location    &quot;constant&quot;;\n    object      radiationProperties;\n}\n//
+        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        //\n\nradiation       on;\n\nradiationModel  fvDOM;\n\nfvDOMCoeffs\n{\n    nPhi
+        \   3;          // azimuthal angles in PI/2 on X-Y.(from Y to X)\n    nTheta
+        \ 6;          // polar angles in PI (from Z to X-Y plane)\n    tolerance   0.05;
+        \  // convergence tolerance for radiation iteration\n    maxIter 3;          //
+        maximum number of iterations\n}\n\n// Number of flow iterations per radiation
+        iteration\nsolverFreq 10;\n\nabsorptionEmissionModel wideBandAbsorptionEmission;\n//absorptionEmissionModel
+        greyMeanAbsorptionEmission;\n\nwideBandAbsorptionEmissionCoeffs\n{\n  lookUpTableFileName
+        none;\n  // lookUpTableFileName &quot;wideBandTable&quot;;\n  \n  band0\n
+        \ {\n     bandLimits (1e-20 1e-6);\n     EhrrCoeff       0.2;\n     species\n
+        \    {\n         O2\n\t {\n\t     Tcommon         200.;\n\t     Tlow            200.;\n\t
+        \    Thigh           2500.;\n\t     invTemp         false;\n\t     loTcoeffs
+        (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\n\t C3H8\n\t {\n\t
+        \    Tcommon         200.;\n\t     Tlow            200.;\n\t     Thigh           2500.;\n\t
+        \    invTemp         false;\n\t     loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs
+        (.1 0 0 0 0 0);\n\t }\n\t H2O\n\t {\n\t     Tcommon         200.;\n\t     Tlow
+        \           200.;\n\t     Thigh           2500.;\n\t     invTemp         false;\n\t
+        \    loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\n\t
+        CO2\n\t {\n\t     Tcommon         200.;\n\t     Tlow            200.;\n\t
+        \    Thigh           2500.;\n\t     invTemp         false;\n\t     loTcoeffs
+        (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\n\t N2\n\t {\n\t     Tcommon
+        \        200.;\n\t     Tlow            200.;\n\t     Thigh           2500.;\n\t
+        \    invTemp         false;\n\t     loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs
+        (.1 0 0 0 0 0);\n\t }\t \n     }\n  }\n\n  band1\n  {\n     bandLimits (1e-6
+        1e10);\n     EhrrCoeff       0.2;\n     species\n     {\n         O2\n\t {\n\t
+        \    Tcommon         200.;\n\t     Tlow            200.;\n\t     Thigh           2500.;\n\t
+        \    invTemp         false;\n\t     loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs
+        (.1 0 0 0 0 0);\n\t }\n\t C3H8\n\t {\n\t     Tcommon         200.;\n\t     Tlow
+        \           200.;\n\t     Thigh           2500.;\n\t     invTemp         false;\n\t
+        \    loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\n\t
+        H2O\n\t {\n\t     Tcommon         200.;\n\t     Tlow            200.;\n\t
+        \    Thigh           2500.;\n\t     invTemp         false;\n\t     loTcoeffs
+        (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\n\t CO2\n\t {\n\t
+        \    Tcommon         200.;\n\t     Tlow            200.;\n\t     Thigh           2500.;\n\t
+        \    invTemp         false;\n\t     loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs
+        (.1 0 0 0 0 0);\n\t }\n\t N2\n\t {\n\t     Tcommon         200.;\n\t     Tlow
+        \           200.;\n\t     Thigh           2500.;\n\t     invTemp         false;\n\t
+        \    loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\t \n
+        \    }\n  }\n  \n}\n\nconstantAbsorptionEmissionCoeffs\n{\n    absorptivity
+        \   absorptivity    [ m^-1 ]       0.01;\n    emissivity      emissivity      [
+        m^-1 ]       0.01;\n    E               E               [ kg m^-1 s^-3 ]  0;\n}\n\ngreyMeanAbsorptionEmissionCoeffs\n{\n
+        \   lookUpTableFileName     none;\n\n    EhrrCoeff               0.2;\n\n
+        \        O2\n\t {\n\t     Tcommon         200.;\n\t     Tlow            200.;\n\t
+        \    Thigh           2500.;\n\t     invTemp         false;\n\t     loTcoeffs
+        (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\n\t C3H8\n\t {\n\t
+        \    Tcommon         200.;\n\t     Tlow            200.;\n\t     Thigh           2500.;\n\t
+        \    invTemp         false;\n\t     loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs
+        (.1 0 0 0 0 0);\n\t }\n\t H2O\n\t {\n\t     Tcommon         200.;\n\t     Tlow
+        \           200.;\n\t     Thigh           2500.;\n\t     invTemp         false;\n\t
+        \    loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\n\t
+        CO2\n\t {\n\t     Tcommon         200.;\n\t     Tlow            200.;\n\t
+        \    Thigh           2500.;\n\t     invTemp         false;\n\t     loTcoeffs
+        (0 0 0 0 0 0) ;\n\t     hiTcoeffs (.1 0 0 0 0 0);\n\t }\n\t N2\n\t {\n\t     Tcommon
+        \        200.;\n\t     Tlow            200.;\n\t     Thigh           2500.;\n\t
+        \    invTemp         false;\n\t     loTcoeffs (0 0 0 0 0 0) ;\n\t     hiTcoeffs
+        (.1 0 0 0 0 0);\n\t }\t \n\n}\n\nscatterModel    none;\n\nsootModel       none;\n\n//
+        *************************************************************************
+        //\n</pre></div>\n<div id=\"attachment_preview_2382_closed\" class=\"collapse-section-closed
+        collapse-open\">\n<a href=\"file_download.php?file_id=2382&amp;type=bug\"><img
+        src=\"https://bugs.openfoam.org/images/fileicons/generic.gif\" alt=\"? file
+        icon\" width=\"16\" height=\"16\" /></a>&#32;<a href=\"file_download.php?file_id=2382&amp;type=bug\">radiationProperties</a>&#32;(4,959&#32;bytes)&#32;<span
+        class=\"italic\">2018-03-16 21:20</span>&#32;<a id=\"attachment_preview_2382_closed_link\"
+        class=\"collapse-link\"><img src=\"images/plus.png\" alt=\"+\" /></a></div>\n</li>\n<li>\n<div
+        id=\"attachment_preview_2383_open\" class=\" collapse-closed\">\n<a href=\"file_download.php?file_id=2383&amp;type=bug\"><img
+        src=\"https://bugs.openfoam.org/images/fileicons/generic.gif\" alt=\"? file
+        icon\" width=\"16\" height=\"16\" /></a>&#32;<a href=\"file_download.php?file_id=2383&amp;type=bug\">wideBandTable</a>&#32;(888&#32;bytes)&#32;<span
+        class=\"italic\">2018-03-16 21:21</span>&#32;<a id=\"attachment_preview_2383_open_link\"
+        class=\"collapse-link\"><img src=\"images/minus.png\" alt=\"-\" /></a>\n<pre
+        class=\"bug-attachment-preview-text\">/*--------------------------------*-
+        C++ -*----------------------------------*\\\n| =========                 |
+        \                                                |\n| \\\\      /  F ield
+        \        | OpenFOAM: The Open Source CFD Toolbox           |\n|  \\\\    /
+        \  O peration     | Version:  5                                     |\n|   \\\\
+        \ /    A nd           | Web:      www.OpenFOAM.org                      |\n|
+        \   \\\\/     M anipulation  |                                                 |\n\\*---------------------------------------------------------------------------*/\n\nFoamFile\n{\n
+        \   version     2.0;\n    format      ascii;\n    class       dictionary;\n
+        \   location    &quot;constant&quot;;\n    object      radiationProperties;\n}\n//
+        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        //\n\nfields (\n {\n    N 1;\n    min 0;\n    max 1;\n    name &quot;dummy&quot;;\n
+        }\n);\n\noutput ();\nvalues (\n\t(1)\n);\n</pre></div>\n<div id=\"attachment_preview_2383_closed\"
+        class=\"collapse-section-closed collapse-open\">\n<a href=\"file_download.php?file_id=2383&amp;type=bug\"><img
+        src=\"https://bugs.openfoam.org/images/fileicons/generic.gif\" alt=\"? file
+        icon\" width=\"16\" height=\"16\" /></a>&#32;<a href=\"file_download.php?file_id=2383&amp;type=bug\">wideBandTable</a>&#32;(888&#32;bytes)&#32;<span
+        class=\"italic\">2018-03-16 21:21</span>&#32;<a id=\"attachment_preview_2383_closed_link\"
+        class=\"collapse-link\"><img src=\"images/plus.png\" alt=\"+\" /></a></div>\n</li>\n</ul></td></tr></tbody></table></div><br/>\n\n\n<div
+        id=\"relationships_open\" class=\" collapse-open\"><table class=\"width100\"
+        cellspacing=\"1\">\n<tr class=\"row-2\">\n\t<td width=\"15%\" class=\"form-title\"
+        colspan=\"2\"><a id=\"relationships_open_link\" class=\"collapse-link\"><img
+        src=\"images/minus.png\" alt=\"-\" /></a>Relationships\t</td>\n</tr>\n<tr>\n\t<td
+        colspan=\"2\"></td>\n</tr>\n</table>\n\n</div>\n<div id=\"relationships_closed\"
+        class=\"collapse-section-closed collapse-closed\"><table class=\"width100\"
+        cellspacing=\"1\">\n<tr>\n\t<td class=\"form-title\"><a id=\"relationships_closed_link\"
+        class=\"collapse-link\"><img src=\"images/plus.png\" alt=\"+\" /></a>Relationships\t</td>\n</tr>\n</table>\n\n</div>\n<a
+        id=\"bugnotes\"></a><br />\n\n\n<div id=\"bugnotes_open\" class=\" collapse-open\"><table
+        class=\"bugnotes width100\" cellspacing=\"1\">\n<tr>\n\t<td class=\"form-title\"
+        colspan=\"2\"><a id=\"bugnotes_open_link\" class=\"collapse-link\"><img src=\"images/minus.png\"
+        alt=\"-\" /></a>Notes\t</td>\n</tr>\n<tr class=\"bugnote bugnote-public\"
+        id=\"c9427\">\n\t\t<td class=\"bugnote-meta\">\n\t\t\t\t<p class=\"compact\"><span
+        class=\"small bugnote-permalink\"><a rel=\"bookmark\" href=\"view.php?id=2881#c9427\"
+        title=\"Direct link to note\">~0009427</a></span></p>\n\n\t\t<p class=\"compact\">\n\t\t<span
+        class=\"bugnote-reporter\">\n\t\t<a class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=6\">henry</a>\t\t<span
+        class=\"small access-level\">(manager)</span>\n\t\t</span>\n\n\t\t\t\t</p>\n\t\t<p
+        class=\"compact\"><span class=\"small bugnote-date-submitted\">2018-03-15
+        16:24</span></p>\n\t\t\t\t<div class=\"small bugnote-buttons\">\n\t\t\t\t</div>\n\t</td>\n\t<td
+        class=\"bugnote-note\">\n\t\tDo you have a test case which demonstrates the
+        need for this change?\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr
+        class=\"bugnote bugnote-public\" id=\"c9429\">\n\t\t<td class=\"bugnote-meta\">\n\t\t\t\t<p
+        class=\"compact\"><span class=\"small bugnote-permalink\"><a rel=\"bookmark\"
+        href=\"view.php?id=2881#c9429\" title=\"Direct link to note\">~0009429</a></span></p>\n\n\t\t<p
+        class=\"compact\">\n\t\t<span class=\"bugnote-reporter\">\n\t\t<a class=\"user\"
+        href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>\t\t<span
+        class=\"small access-level\">(reporter)</span>\n\t\t</span>\n\n\t\t\t\t</p>\n\t\t<p
+        class=\"compact\"><span class=\"small bugnote-date-submitted\">2018-03-16
+        21:20</span></p>\n\t\t\t\t<div class=\"small bugnote-buttons\">\n\t\t\t\t</div>\n\t</td>\n\t<td
+        class=\"bugnote-note\">\n\t\tUsing the attached radiationProperties as a replacement
+        within the oppositeBurningPanels tutorial case provides a demonstration of
+        the issues. It should simply replicate the results from using the greyMeanAbsorptionEmission
+        model since it simply contains two bands with identical properties.<br />\r\n<br
+        />\r\nAttempting to run this case will exit with an error message that a string
+        is expected under the entry lookupTableFileName, i.e. that 'none' is not accepted,
+        unlike the greyMeanAbsorptionEmission model.<br />\r\n<br />\r\nSpecifying
+        the attached &quot;wideBandTable&quot; dummy lookup table file allows the
+        solver to run further, but it then halts when looking for the mixture fraction
+        &quot;ft&quot; field, which isn't defined for the present combustion model
+        (and indeed shouldn't be required since all of the required fields are being
+        explicitly solved for).<br />\r\n<br />\r\nHacking the solver to manually
+        add a dummy &quot;ft&quot; field again allows the solver to continue. However,
+        it then generates a slew of warning messages of the form:<br />\r\n<br />\r\n&#160;&#160;&#160;&#160;usinf
+        absCoeffs out of temperature range:<br />\r\n&#160;&#160;&#160;&#160;0.0532686334933
+        -&gt; 0.0326473267652;  T = 298.15<br />\r\n<br />\r\nCloser look at the code
+        shows that this is because it is trying to use unitialised coefficients due
+        to the described interchanged indices in accessing coeffs_ within wideBandAbsorptionEmission::aCont()<br
+        />\r\n<br />\r\nCorrecting these interchanged indices allows the solver to
+        run to completion. However, comparison of the results with those obtained
+        using the greyMeanAbsorptionEmissionModel in the same radiationProperties
+        shows differences. This is due to the wideBand model using the mass fraction
+        of the species as the pre-multiplier for the absorption coefficients, while
+        the greyMean (more sensibly) uses the partial pressure.\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote bugnote-public\"
+        id=\"c9430\">\n\t\t<td class=\"bugnote-meta\">\n\t\t\t\t<p class=\"compact\"><span
+        class=\"small bugnote-permalink\"><a rel=\"bookmark\" href=\"view.php?id=2881#c9430\"
+        title=\"Direct link to note\">~0009430</a></span></p>\n\n\t\t<p class=\"compact\">\n\t\t<span
+        class=\"bugnote-reporter\">\n\t\t<a class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=6\">henry</a>\t\t<span
+        class=\"small access-level\">(manager)</span>\n\t\t</span>\n\n\t\t\t\t</p>\n\t\t<p
+        class=\"compact\"><span class=\"small bugnote-date-submitted\">2018-03-16
+        21:55</span></p>\n\t\t\t\t<div class=\"small bugnote-buttons\">\n\t\t\t\t</div>\n\t</td>\n\t<td
+        class=\"bugnote-note\">\n\t\tDoes your patch resolve all of the above issues
+        or will some of the changes listed need to be made to reproduce your findings?
+        \ If so should any further changes be committed to OpenFOAM-dev?\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote bugnote-public\"
+        id=\"c9431\">\n\t\t<td class=\"bugnote-meta\">\n\t\t\t\t<p class=\"compact\"><span
+        class=\"small bugnote-permalink\"><a rel=\"bookmark\" href=\"view.php?id=2881#c9431\"
+        title=\"Direct link to note\">~0009431</a></span></p>\n\n\t\t<p class=\"compact\">\n\t\t<span
+        class=\"bugnote-reporter\">\n\t\t<a class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>\t\t<span
+        class=\"small access-level\">(reporter)</span>\n\t\t</span>\n\n\t\t\t\t</p>\n\t\t<p
+        class=\"compact\"><span class=\"small bugnote-date-submitted\">2018-03-17
+        18:17</span></p>\n\t\t\t\t<div class=\"small bugnote-buttons\">\n\t\t\t\t</div>\n\t</td>\n\t<td
+        class=\"bugnote-note\">\n\t\tI believe the patch resolves all of the above
+        issues. Much of the code has just been transferred from the greyMeanAbsorptionEmission
+        class.\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n</table>\n</div>\n<div
+        id=\"bugnotes_closed\" class=\"collapse-section-closed collapse-closed\">\n<table
+        class=\"width100\" cellspacing=\"1\">\n<tr>\n\t<td class=\"form-title\" colspan=\"2\"><a
+        id=\"bugnotes_closed_link\" class=\"collapse-link\"><img src=\"images/plus.png\"
+        alt=\"+\" /></a>Notes\t</td>\n</tr>\n</table>\n</div>\n<a id=\"history\"></a><br
+        />\n\n\n<div id=\"history_open\" class=\"table-container collapse-open\"><table>\n\t<thead>\n\t\t<tr>\n\t\t\t<td
+        class=\"form-title\" colspan=\"4\"><a id=\"history_open_link\" class=\"collapse-link\"><img
+        src=\"images/minus.png\" alt=\"-\" /></a>Issue History\t\t\t</td>\n\t\t</tr>\n\n\t\t<tr
+        class=\"row-category-history\">\n\t\t\t<th class=\"small-caption\">\n\t\t\t\tDate
+        Modified\t\t\t</th>\n\t\t\t<th class=\"small-caption\">\n\t\t\t\tUsername\t\t\t</th>\n\t\t\t<th
+        class=\"small-caption\">\n\t\t\t\tField\t\t\t</th>\n\t\t\t<th class=\"small-caption\">\n\t\t\t\tChange\t\t\t</th>\n\t\t</tr>\n\t</thead>\n\n\t<tbody>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-15 08:23\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNew Issue\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-15 08:23\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tFile Added: wideBandAbsorptionEmission.patch\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-15 16:24\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=6\">henry</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 0009427\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-16 21:20\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tFile Added: radiationProperties\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-16 21:20\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 0009429\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-16 21:21\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tFile Added: wideBandTable\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-16 21:55\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=6\">henry</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 0009430\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t2018-03-17 18:17\t\t\t</td>\n\t\t\t<td class=\"small-caption\">\n\t\t\t\t<a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\tNote Added: 0009431\t\t\t</td>\n\t\t\t<td
+        class=\"small-caption\">\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>\n</div>\n<div
+        id=\"history_closed\" class=\"collapse-section-closed collapse-closed\"><table
+        class=\"width100\" cellspacing=\"0\">\n<tr>\n\t<td class=\"form-title\" colspan=\"4\"><a
+        id=\"history_closed_link\" class=\"collapse-link\"><img src=\"images/plus.png\"
+        alt=\"+\" /></a>Issue History\t</td>\n</tr>\n</table>\n\n</div></div>\n<div
+        id=\"footer\">\n<hr />\n\t<div id=\"powered-by-mantisbt-logo\">\n\t\t<a href=\"http://www.mantisbt.org\"\n\t\t\ttitle=\"Mantis
+        Bug Tracker: a free and open source web based bug tracking system.\">\n\t\t\t<img
+        src=\"/images/mantis_logo.png\" width=\"102\" height=\"35\"\n\t\t\t\talt=\"Powered
+        by Mantis Bug Tracker: a free and open source web based bug tracking system.\"
+        />\n\t\t\t</a>\n\t</div>\n<address id=\"mantisbt-copyright\">\n<address id=\"version\">Powered
+        by <a href=\"http://www.mantisbt.org\" title=\"bug tracking software\">MantisBT
+        </a></address>\nCopyright &copy; 2000 - 2018 MantisBT Team</address>\n</div>\n</div>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:26 GMT
+- request:
+    method: get
+    uri: https://bugs.openfoam.org/api/rest/issues/2881
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:35:54 GMT
+      Server:
+      - Apache/2.4.7 (Ubuntu)
+      Content-Length:
+      - '301'
+      Content-Type:
+      - text/html; charset=iso-8859-1
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+        <html><head>
+        <title>404 Not Found</title>
+        </head><body>
+        <h1>Not Found</h1>
+        <p>The requested URL /api/rest/issues/2881 was not found on this server.</p>
+        <hr>
+        <address>Apache/2.4.7 (Ubuntu) Server at bugs.openfoam.org Port 443</address>
+        </body></html>
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:27 GMT
+- request:
+    method: get
+    uri: https://bugs.openfoam.org/api/soap/mantisconnect.php?wsdl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:35:56 GMT
+      Server:
+      - Apache/2.4.7 (Ubuntu)
+      Content-Length:
+      - '307'
+      Connection:
+      - close
+      Content-Type:
+      - text/html; charset=iso-8859-1
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+        <html><head>
+        <title>404 Not Found</title>
+        </head><body>
+        <h1>Not Found</h1>
+        <p>The requested URL /api/soap/mantisconnect.php was not found on this server.</p>
+        <hr>
+        <address>Apache/2.4.7 (Ubuntu) Server at bugs.openfoam.org Port 443</address>
+        </body></html>
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:29 GMT
+- request:
+    method: get
+    uri: https://bugs.openfoam.org/print_bug_page.php?bug_id=2881
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:35:57 GMT
+      Server:
+      - Apache/2.4.7 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.23
+      Set-Cookie:
+      - PHPSESSID=purfm26fcp51437uu8jht0sjr7; path=/; secure; HttpOnly
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Last-Modified:
+      - Wed, 21 Mar 2018 10:35:57 GMT
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Wed, 21 Mar 2018 10:35:57 GMT
+      X-Frame-Options:
+      - DENY
+      Content-Security-Policy:
+      - default-src 'self'; frame-ancestors 'none'; style-src 'self'; script-src 'self';
+        img-src 'self'
+      Strict-Transport-Security:
+      - max-age=7776000
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"Content-type\"
+        content=\"text/html; charset=utf-8\" />\n\t<title>0002881: wideBandAbsorptionEmission
+        coefficient bug and inconsistency with - OpenFOAM Issue Tracking</title>\n\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.openfoam.org/css/custom.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.openfoam.org/css/jquery-ui-1.11.4.min.css\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.openfoam.org/css/common_config.php\"
+        />\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bugs.openfoam.org/css/status_config.php\"
+        />\n\t<link rel=\"shortcut icon\" href=\"/images/favicon.ico\" type=\"image/x-icon\"
+        />\n\t<link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        title=\"OpenFOAM Issue Tracking: full-text search\" href=\"https://bugs.openfoam.org/browser_search_plugin.php?type=text\"/>\n\t<link
+        rel=\"search\" type=\"application/opensearchdescription+xml\" title=\"OpenFOAM
+        Issue Tracking: search by Issue Id\" href=\"https://bugs.openfoam.org/browser_search_plugin.php?type=id\"/>\n\t<script
+        type=\"text/javascript\" src=\"/javascript_config.php\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/javascript_translations.php\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/jquery-1.12.4.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/jquery-ui-1.11.4.min.js\"></script>\n\t<script
+        type=\"text/javascript\" src=\"/js/common.js\"></script>\n</head>\n<body>\n<div
+        id=\"mantis\">\n<br /><table class=\"width100\" cellspacing=\"1\"><tr><td
+        class=\"form-title\" colspan=\"6\"><div class=\"center\">OpenFOAM Issue Tracking
+        - OpenFOAM</div></td></tr><tr><td class=\"form-title\" colspan=\"6\">View
+        Issue Details</td></tr><tr><td class=\"print-spacer\" colspan=\"6\"><hr /></td></tr><tr
+        class=\"print-category\"><td class=\"print\" width=\"16%\">ID</td><td class=\"print\"
+        width=\"16%\">Project</td><td class=\"print\" width=\"16%\">Category</td><td
+        class=\"print\" width=\"16%\">View Status</td><td class=\"print\" width=\"16%\">Date
+        Submitted</td><td class=\"print\" width=\"16%\">Last Update</td></tr><tr class=\"print\"><td
+        class=\"print\">0002881</td><td class=\"print\">OpenFOAM</td><td class=\"print\">[All
+        Projects] Bug</td><td class=\"print\">public</td><td class=\"print\">2018-03-15
+        08:23</td><td class=\"print\">2018-03-19 09:21</td></tr><tr><td class=\"print-spacer\"
+        colspan=\"6\"><hr /></td></tr><tr class=\"print\"><th class=\"print-category\">Reporter</th><td
+        class=\"print\">kevnor</td><td class=\"print\" colspan=\"4\">&#160;</td></tr><tr
+        class=\"print\"><th class=\"print-category\">Assigned To</th><td class=\"print\"></td><td
+        class=\"print\" colspan=\"4\">&#160;</td></tr><tr class=\"print\"><th class=\"print-category\">Priority</th><td
+        class=\"print\">normal</td><th class=\"print-category\">Severity</th><td class=\"print\">major</td><th
+        class=\"print-category\">Reproducibility</th><td class=\"print\">always</td></tr><tr
+        class=\"print\"><th class=\"print-category\">Status</th><td class=\"print\">new</td><th
+        class=\"print-category\">Resolution</th><td class=\"print\">open</td><td class=\"print\"
+        colspan=\"2\">&#160;</td></tr><tr class=\"print\"><th class=\"print-category\">Platform</th><td
+        class=\"print\"></td><th class=\"print-category\">OS</th><td class=\"print\"></td><th
+        class=\"print-category\">OS Version</th><td class=\"print\"></td></tr><tr
+        class=\"print\"><th class=\"print-category\">Product Version</th><td class=\"print\">5.x</td><td
+        class=\"print\" colspan=\"4\">&#160;</td></tr><tr><th class=\"print-category\">Target
+        Version</th><td class=\"print\"></td><th class=\"print-category\">Fixed in
+        Version</th><td class=\"print\"></td><td class=\"print\" colspan=\"2\">&#160;</td></tr><tr><td
+        class=\"print-spacer\" colspan=\"6\"><hr /></td></tr><tr class=\"print\"><th
+        class=\"print-category\">Summary</th><td class=\"print\" colspan=\"5\">0002881:
+        wideBandAbsorptionEmission coefficient bug and inconsistency with</td></tr><tr
+        class=\"print\"><th class=\"print-category\">Description</th><td class=\"print\"
+        colspan=\"5\">wideBandAbsorptionEmission::aCont attempts to use the coefficients
+        list with inverted ordering (i.e. coeffs_[species][band] instead of coeffs_[band][species])
+        which results in incorrect coefficients being used and segmentation faults.
+        I'm guessing that no-one else is currently using this model?!<br />\r\n<br
+        />\r\nAdditionally, the behaviour of wideBandAbsorptionEmission is inconsistent
+        with greyMeanAbsorptionEmission in reading the look-up tables and using mole-fractions
+        versus mass-fractions for solved-for species.<br />\r\n<br />\r\nI've attached
+        a patch (for 5.x) that I believe corrects the bug and makes the behaviour
+        consistent.</td></tr><tr class=\"print\"><th class=\"print-category\">Steps
+        To Reproduce</th><td class=\"print\" colspan=\"5\">Run any case with wideBandAbsorpionEmission
+        model. E.g. modify fireFoam oppositeBurningPanels tutorial case to use this
+        model.</td></tr><tr class=\"print\"><th class=\"print-category\">Tags</th><td
+        class=\"print\" colspan=\"5\">No tags attached.</td></tr><tr class=\"print\"><td
+        class=\"print-category\">Relationships</td><td class=\"print\" colspan=\"5\"></td></tr><tr
+        class=\"print\"><th class=\"print-category\">Attached Files</th><td class=\"print\"
+        colspan=\"5\"><img src=\"https://bugs.openfoam.org/images/fileicons/text.gif\"
+        alt=\"patch\" />&#160;wideBandAbsorptionEmission.patch (9,385) <span class=\"italic\">2018-03-15
+        08:23</span><br />https://bugs.openfoam.org/file_download.php?file_id=2380&amp;type=bug<br
+        /><img src=\"https://bugs.openfoam.org/images/fileicons/generic.gif\" alt=\"?\"
+        />&#160;radiationProperties (4,959) <span class=\"italic\">2018-03-16 21:20</span><br
+        />https://bugs.openfoam.org/file_download.php?file_id=2382&amp;type=bug<br
+        /><img src=\"https://bugs.openfoam.org/images/fileicons/generic.gif\" alt=\"?\"
+        />&#160;wideBandTable (888) <span class=\"italic\">2018-03-16 21:21</span><br
+        />https://bugs.openfoam.org/file_download.php?file_id=2383&amp;type=bug</td></tr></table>\n<br
+        />\n<table class=\"width100\" cellspacing=\"1\">\n\t\t<tr>\n\t\t<td class=\"form-title\"
+        colspan=\"2\">\n\t\t\tNotes\t\t</td>\n\t</tr>\n\t\t<tr>\n\t\t<td class=\"print-spacer\"
+        colspan=\"2\">\n\t\t\t<hr />\n\t\t</td>\n\t</tr>\n\t<tr>\n\t\t<td class=\"nopad\"
+        width=\"20%\">\n\t\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t(0009427)\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t<a class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=6\">henry</a>&#160;&#160;&#160;\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t2018-03-15 16:24&#160;&#160;&#160;\n\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t\t<td
+        class=\"nopad\" width=\"85%\">\n\t\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t\t<tr>\n\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\tDo you have a test case which demonstrates the
+        need for this change?\t\t\t\t</td>\n\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t</tr>\n\t\t<tr>\n\t\t<td
+        class=\"print-spacer\" colspan=\"2\">\n\t\t\t<hr />\n\t\t</td>\n\t</tr>\n\t<tr>\n\t\t<td
+        class=\"nopad\" width=\"20%\">\n\t\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t(0009429)\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t<a class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>&#160;&#160;&#160;\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t2018-03-16 21:20&#160;&#160;&#160;\n\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t\t<td
+        class=\"nopad\" width=\"85%\">\n\t\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t\t<tr>\n\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\tUsing the attached radiationProperties as a replacement
+        within the oppositeBurningPanels tutorial case provides a demonstration of
+        the issues. It should simply replicate the results from using the greyMeanAbsorptionEmission
+        model since it simply contains two bands with identical properties.<br />\r\n<br
+        />\r\nAttempting to run this case will exit with an error message that a string
+        is expected under the entry lookupTableFileName, i.e. that 'none' is not accepted,
+        unlike the greyMeanAbsorptionEmission model.<br />\r\n<br />\r\nSpecifying
+        the attached &quot;wideBandTable&quot; dummy lookup table file allows the
+        solver to run further, but it then halts when looking for the mixture fraction
+        &quot;ft&quot; field, which isn't defined for the present combustion model
+        (and indeed shouldn't be required since all of the required fields are being
+        explicitly solved for).<br />\r\n<br />\r\nHacking the solver to manually
+        add a dummy &quot;ft&quot; field again allows the solver to continue. However,
+        it then generates a slew of warning messages of the form:<br />\r\n<br />\r\n&#160;&#160;&#160;&#160;usinf
+        absCoeffs out of temperature range:<br />\r\n&#160;&#160;&#160;&#160;0.0532686334933
+        -&gt; 0.0326473267652;  T = 298.15<br />\r\n<br />\r\nCloser look at the code
+        shows that this is because it is trying to use unitialised coefficients due
+        to the described interchanged indices in accessing coeffs_ within wideBandAbsorptionEmission::aCont()<br
+        />\r\n<br />\r\nCorrecting these interchanged indices allows the solver to
+        run to completion. However, comparison of the results with those obtained
+        using the greyMeanAbsorptionEmissionModel in the same radiationProperties
+        shows differences. This is due to the wideBand model using the mass fraction
+        of the species as the pre-multiplier for the absorption coefficients, while
+        the greyMean (more sensibly) uses the partial pressure.\t\t\t\t</td>\n\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t</tr>\n\t\t<tr>\n\t\t<td
+        class=\"print-spacer\" colspan=\"2\">\n\t\t\t<hr />\n\t\t</td>\n\t</tr>\n\t<tr>\n\t\t<td
+        class=\"nopad\" width=\"20%\">\n\t\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t(0009430)\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t<a class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=6\">henry</a>&#160;&#160;&#160;\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t2018-03-16 21:55&#160;&#160;&#160;\n\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t\t<td
+        class=\"nopad\" width=\"85%\">\n\t\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t\t<tr>\n\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\tDoes your patch resolve all of the above issues
+        or will some of the changes listed need to be made to reproduce your findings?
+        \ If so should any further changes be committed to OpenFOAM-dev?\t\t\t\t</td>\n\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t</tr>\n\t\t<tr>\n\t\t<td
+        class=\"print-spacer\" colspan=\"2\">\n\t\t\t<hr />\n\t\t</td>\n\t</tr>\n\t<tr>\n\t\t<td
+        class=\"nopad\" width=\"20%\">\n\t\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t(0009431)\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t<a class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a>&#160;&#160;&#160;\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\t\t2018-03-17 18:17&#160;&#160;&#160;\n\t\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t\t<td
+        class=\"nopad\" width=\"85%\">\n\t\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t\t<tr>\n\t\t\t\t<td
+        class=\"print\">\n\t\t\t\t\tI believe the patch resolves all of the above
+        issues. Much of the code has just been transferred from the greyMeanAbsorptionEmission
+        class.\t\t\t\t</td>\n\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t</tr>\n\t</table>\n<br
+        /><table class=\"width100\" cellspacing=\"1\"><tr><td class=\"form-title\"
+        colspan=\"2\">Issue History</td></tr><tr><td class=\"print-spacer\" colspan=\"6\"><hr
+        /></td></tr><tr class=\"print-category\"><th class=\"row-category-history\">Date
+        Modified</th><th class=\"row-category-history\">Username</th><th class=\"row-category-history\">Field</th><th
+        class=\"row-category-history\">Change</th></tr><tr class=\"print\"><td class=\"print\">2018-03-15
+        08:23</td><td class=\"print\"><a class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a></td><td
+        class=\"print\">New Issue</td><td class=\"print\"></td></tr><tr class=\"print\"><td
+        class=\"print\">2018-03-15 08:23</td><td class=\"print\"><a class=\"user\"
+        href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a></td><td
+        class=\"print\">File Added: wideBandAbsorptionEmission.patch</td><td class=\"print\"></td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-15 16:24</td><td class=\"print\"><a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=6\">henry</a></td><td
+        class=\"print\">Note Added: 0009427</td><td class=\"print\"></td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-16 21:20</td><td class=\"print\"><a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a></td><td
+        class=\"print\">File Added: radiationProperties</td><td class=\"print\"></td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-16 21:20</td><td class=\"print\"><a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a></td><td
+        class=\"print\">Note Added: 0009429</td><td class=\"print\"></td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-16 21:21</td><td class=\"print\"><a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a></td><td
+        class=\"print\">File Added: wideBandTable</td><td class=\"print\"></td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-16 21:55</td><td class=\"print\"><a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=6\">henry</a></td><td
+        class=\"print\">Note Added: 0009430</td><td class=\"print\"></td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-17 18:17</td><td class=\"print\"><a
+        class=\"user\" href=\"https://bugs.openfoam.org/view_user_page.php?id=1464\">kevnor</a></td><td
+        class=\"print\">Note Added: 0009431</td><td class=\"print\"></td></tr></table></div>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:36:30 GMT
+- request:
+    method: get
+    uri: https://caml.inria.fr/mantis/view.php?id=7754
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:51:06 GMT
+      Server:
+      - Apache/2.4.25 (Debian) SVN/1.9.5 mod_python/3.3.1 Python/2.7.13 OpenSSL/1.0.2l
+        mod_perl/2.0.10 Perl/v5.24.1
+      Set-Cookie:
+      - PHPSESSID=84ilep5qlb1helpq674ti98qa1; path=/; secure; HttpOnly
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Last-Modified:
+      - Wed, 21 Mar 2018 10:51:06 GMT
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Wed, 21 Mar 2018 10:51:06 GMT
+      X-Frame-Options:
+      - DENY
+      X-Content-Security-Policy:
+      - allow 'self'; options inline-script eval-script; frame-ancestors 'none'
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"https://caml.inria.fr/mantis/css/default.css\"
+        />\n\t<script type=\"text/javascript\"><!--\n\t\tif(document.layers) {document.write(\"<style>td{padding:0px;}<\\/style>\")}\n\t//
+        --></script>\n\t<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\"
+        />\n\t<meta http-equiv=\"Pragma\" content=\"no-cache\" />\n\t<meta http-equiv=\"Cache-Control\"
+        content=\"no-cache\" />\n\t<meta http-equiv=\"Pragma-directive\" content=\"no-cache\"
+        />\n\t<meta http-equiv=\"Cache-Directive\" content=\"no-cache\" />\n\t<meta
+        http-equiv=\"Expires\" content=\"Wed, 21 Mar 2018 10:51:06 GMT\" />\n\t<link
+        rel=\"shortcut icon\" href=\"/mantis/images/favicon.ico\" type=\"image/x-icon\"
+        />\n\t<link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        title=\"MantisBT: Text Search\" href=\"https://caml.inria.fr/mantis/browser_search_plugin.php?type=text\"
+        />\t<link rel=\"search\" type=\"application/opensearchdescription+xml\" title=\"MantisBT:
+        Issue Id\" href=\"https://caml.inria.fr/mantis/browser_search_plugin.php?type=id\"
+        />\t<title>0007754: camlCamlinternalOO module is not linked when using Dynlink
+        - MantisBT</title>\n<script type=\"text/javascript\" src=\"/mantis/javascript/min/common.js\"></script>\n<script
+        type=\"text/javascript\">var loading_lang = \"Loading...\";</script><script
+        type=\"text/javascript\" src=\"/mantis/javascript/min/ajax.js\"></script>\n</head>\n<body>\n<div
+        align=\"left\"><a href=\"my_view_page.php\"><img border=\"0\" alt=\"Mantis
+        Bug Tracker\" src=\"/mantis/images/mantis_logo.gif\" /></a></div><table class=\"hide\"><tr><td
+        class=\"login-info-left\">Anonymous | <a href=\"/mantis/login_page.php?return=%2Fmantis%2Fview.php%3Fid%3D7754\">Login</a>
+        | <a href=\"/mantis/signup_page.php\">Signup for a new account</a></td><td
+        class=\"login-info-middle\"><span class=\"italic\">2018-03-21 11:51 CET</span></td><td
+        class=\"login-info-right\"><a href=\"https://caml.inria.fr/mantis/issues_rss.php?\"><img
+        src=\"/mantis/images/rss.png\" alt=\"RSS\" style=\"border-style: none; margin:
+        5px; vertical-align: middle;\" /></a></td></tr></table><table class=\"width100\"
+        cellspacing=\"0\"><tr><td class=\"menu\"><a href=\"/mantis/main_page.php\">Main</a>
+        | <a href=\"/mantis/my_view_page.php\">My View</a> | <a href=\"/mantis/view_all_bug_page.php\">View
+        Issues</a> | <a href=\"/mantis/changelog_page.php\">Change Log</a> | <a href=\"/mantis/roadmap_page.php\">Roadmap</a></td><td
+        class=\"menu right nowrap\"><form method=\"post\" action=\"/mantis/jump_to_bug.php\"><input
+        type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" value=\"Issue #\"
+        onfocus=\"if (this.value == 'Issue #') this.value = ''\" onblur=\"if (this.value
+        == '') this.value = 'Issue #'\" />&#160;<input type=\"submit\" class=\"button-small\"
+        value=\"Jump\" />&#160;</form></td></tr></table><br /><table class=\"width100\"
+        cellspacing=\"1\"><tr><td class=\"form-title\" colspan=\"4\">View Issue Details&#160;<span
+        class=\"small\"><span class=\"bracket-link\">[&#160;<a href=\"#bugnotes\">Jump
+        to Notes</a>&#160;]</span> </span></td><td class=\"right\" colspan=\"2\"><span
+        class=\"small\"><span class=\"bracket-link\">[&#160;<a href=\"view.php?id=7754&amp;history=1#history\">Issue
+        History</a>&#160;]</span> </span><span class=\"small\"><span class=\"bracket-link\">[&#160;<a
+        href=\"print_bug_page.php?bug_id=7754\">Print</a>&#160;]</span> </span></td></tr><tr><td
+        class=\"category\" width=\"15%\">ID</td><td class=\"category\" width=\"20%\">Project</td><td
+        class=\"category\" width=\"15%\">Category</td><td class=\"category\" width=\"15%\">View
+        Status</td><td class=\"category\" width=\"15%\">Date Submitted</td><td class=\"category\"
+        width=\"20%\">Last Update</td></tr><tr class=\"row-1\"><td>0007754</td><td>OCaml</td><td>dynlink
+        and natdynlink</td><td>public</td><td>2018-03-16 13:29</td><td>2018-03-16
+        17:21</td></tr><tr class=\"spacer\"><td colspan=\"6\"></td></tr><tr class=\"row-2\"><td
+        class=\"category\">Reporter</td><td>cyocum</td><td colspan=\"4\">&#160;</td></tr><tr
+        class=\"row-1\"><td class=\"category\">Assigned To</td><td></td><td colspan=\"4\">&#160;</td></tr><tr
+        class=\"row-2\"><td class=\"category\">Priority</td><td>normal</td><td class=\"category\">Severity</td><td>minor</td><td
+        class=\"category\">Reproducibility</td><td>always</td></tr><tr class=\"row-1\"><td
+        class=\"category\">Status</td><td bgcolor=\"#fcbdbd\">new</td><td class=\"category\">Resolution</td><td>open</td><td
+        colspan=\"2\">&#160;</td></tr><tr class=\"row-2\"><td class=\"category\">Platform</td><td></td><td
+        class=\"category\">OS</td><td>Fedora Linux</td><td class=\"category\">OS Version</td><td>27</td></tr><tr
+        class=\"row-1\"><td class=\"category\">Product Version</td><td>4.06.0</td><td
+        colspan=\"4\">&#160;</td></tr><tr class=\"row-2\"><td class=\"category\">Target
+        Version</td><td></td><td class=\"category\">Fixed in Version</td><td></td><td
+        colspan=\"2\">&#160;</td></tr><tr class=\"spacer\"><td colspan=\"6\"></td></tr><tr
+        class=\"row-1\"><td class=\"category\">Summary</td><td colspan=\"5\">0007754:
+        camlCamlinternalOO module is not linked when using Dynlink</td></tr><tr class=\"row-2\"><td
+        class=\"category\">Description</td><td colspan=\"5\">I have a system which
+        uses Dynlink to dynamically load some code (.cmxs). The problem that I am
+        having is that you cannot use the Object system in OCaml with Dynlink when
+        naively compiling.  This is because the camlCamlinternalOO is not linked.
+        The error is below:<br />\r\n<br />\r\nundefined symbol: camlCamlinternalOO__create_object_opt_1533</td></tr><tr
+        class=\"row-1\"><td class=\"category\">Steps To Reproduce</td><td colspan=\"5\">To
+        reproduce you need to files.<br />\r\n<br />\r\nobj_test.ml<br />\r\n<br />\r\nclass
+        istack = object<br />\r\n&#160;&#160;&#160;&#160;val mutable v = [0; 2]<br
+        />\r\n<br />\r\n&#160;&#160;&#160;&#160;method pop =<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;match
+        v with<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;| hd :: tl -&gt;<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;v
+        &lt;- tl;<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Some
+        hd<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;| [] -&gt; None<br />\r\n<br
+        />\r\n&#160;&#160;&#160;&#160;method push hd =<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;v
+        &lt;- hd :: v<br />\r\n&#160;&#160;end<br />\r\n<br />\r\nwhich is complied
+        thus: ocamlfind opt -shared -o obj_test.cmxs obj_test.ml<br />\r\n<br />\r\nmain.ml<br
+        />\r\n<br />\r\nlet load_test_plugin fname =<br />\r\n&#160;&#160;let fname
+        =  Dynlink.adapt_filename fname in<br />\r\n&#160;&#160;try<br />\r\n&#160;&#160;&#160;&#160;Dynlink.loadfile
+        fname<br />\r\n&#160;&#160;with<br />\r\n&#160;&#160;| (Dynlink.Error err)
+        as e -&gt;<br />\r\n&#160;&#160;&#160;&#160;&#160;print_endline (&quot;ERROR
+        loading plugin: &quot; ^ (Dynlink.error_message err));<br />\r\n&#160;&#160;&#160;&#160;&#160;raise
+        e<br />\r\n<br />\r\nlet _ =<br />\r\n&#160;&#160;load_test_plugin Sys.argv.(1)<br
+        />\r\n<br />\r\nwhich is compiled thus: ocamlfind opt -package dynlink -linkpkg
+        main.ml<br />\r\n<br />\r\nWhen you try to run the code: ./a.out obj_test.cmxs,
+        you will get the error indicated above.<br />\r\n</td></tr><tr class=\"row-2\"><td
+        class=\"category\">Additional Information</td><td colspan=\"5\">See Also <a
+        href=\"https://discuss.ocaml.org/t/objects-and-dynlink/1720\">https://discuss.ocaml.org/t/objects-and-dynlink/1720</a>
+        [<a href=\"https://discuss.ocaml.org/t/objects-and-dynlink/1720\" target=\"_blank\">^</a>]<br
+        />\r\n<br />\r\nThere is a workaround by adding this to main.ml:<br />\r\n<br
+        />\r\nlet _obj = object end in</td></tr><tr class=\"row-1\"><td class=\"category\">Tags</td><td
+        colspan=\"5\">No tags attached.</td></tr><tr class=\"spacer\"><td colspan=\"6\"></td></tr><tr
+        class=\"row-2\"><td class=\"category\"><a name=\"attachments\" id=\"attachments\"
+        />Attached Files</td><td colspan=\"5\"></td></tr><tr align=\"center\"><td
+        align=\"center\" colspan=\"6\"><table><tr class=\"vcenter\"><td class=\"center\"></td><td
+        class=\"center\"></td><td class=\"center\"></td><td class=\"center\"></td><td
+        class=\"center\"></td><td class=\"center\"></td></tr></table></td></tr></table><br
+        />\n\n<div id=\"relationships_open\"><table class=\"width100\" cellspacing=\"1\">\n<tr
+        class=\"row-2\" valign=\"top\">\n\t<td width=\"15%\" class=\"form-title\"
+        colspan=\"2\">\n\t\t<a href=\"\" onclick=\"ToggleDiv( 'relationships' ); return
+        false;\"\n\t\t\t><img border=\"0\" src=\"images/minus.png\" alt=\"-\" /></a>&#160;Relationships\t</td>\n</tr>\n<tr>\n\t<td
+        colspan=\"2\"></td>\n</tr>\n</table>\n\n</div><div id=\"relationships_closed\"
+        class=\"hidden\"><table class=\"width100\" cellspacing=\"1\">\n<tr>\n\t<td
+        class=\"form-title\">\n\t\t<a href=\"\" onclick=\"ToggleDiv( 'relationships'
+        ); return false;\"\n\t\t\t><img border=\"0\" src=\"images/plus.png\" alt=\"+\"
+        /></a>&#160;Relationships\t</td>\n</tr>\n</table>\n\n</div>\n<a name=\"bugnotes\"
+        id=\"bugnotes\" /><br />\n\n<div id=\"bugnotes_open\"><table class=\"width100\"
+        cellspacing=\"1\">\n<tr>\n\t<td class=\"form-title\" colspan=\"2\">\n<a href=\"\"
+        onclick=\"ToggleDiv( 'bugnotes' ); return false;\"\n\t\t\t><img border=\"0\"
+        src=\"images/minus.png\" alt=\"-\" /></a>&#160;\t\tNotes\t</td>\n</tr>\n<tr
+        class=\"bugnote\" id=\"c18949\">\n        <td class=\"bugnote-public\">\n\t\t\t\t<span
+        class=\"small\">(<a href=\"view.php?id=7754#c18949\" title=\"Direct link to
+        note\">0018949)</a></span><br />\n\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=18\">frisch</a>\t\t<span
+        class=\"small\">(developer)</span>\n\t\t\t\t<br />\n\t\t<span class=\"small\">2018-03-16
+        13:49</span><br />\n\t\t\t\t<br /><div class=\"small\">\n\t\t\t\t</div>\n\t</td>\n\t<td
+        class=\"bugnote-note-public\">\n\t\tIn general, you need to make sure that
+        modules used by dynlinked code are linked in the main program.  You'd have
+        the same problem if the dynlinked code wanted to use, say, Hasthbl, assuming
+        this module is not required by your main program.<br />\r\nI'd recommend using
+        -linkall for application that rely on Dynlink to avoid such problems.<br />\r\n<br
+        />\r\nThe reported issue is a bit specific in that the module is referenced
+        implicitly.  One could perhaps force a link dependency from Dynlink to all
+        camlinternal* modules, but I'm not sure it is worth it.\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote\"
+        id=\"c18951\">\n        <td class=\"bugnote-public\">\n\t\t\t\t<span class=\"small\">(<a
+        href=\"view.php?id=7754#c18951\" title=\"Direct link to note\">0018951)</a></span><br
+        />\n\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=326\">xclerc</a>\t\t<span
+        class=\"small\">(reporter)</span>\n\t\t\t\t<br />\n\t\t<span class=\"small\">2018-03-16
+        14:06</span><br />\n\t\t\t\t<br /><div class=\"small\">\n\t\t\t\t</div>\n\t</td>\n\t<td
+        class=\"bugnote-note-public\">\n\t\t&gt; The reported issue is a bit specific
+        in that the module is referenced implicitly.<br />\r\n<br />\r\nIndeed, the
+        user has to be aware of an implementation detail, and cannot<br />\r\ne.g.
+        use ocamldep to determine the set of needed modules.\t</td>\n</tr>\n<tr class=\"spacer\">\n\t<td
+        colspan=\"2\"></td>\n</tr>\n<tr class=\"bugnote\" id=\"c18952\">\n        <td
+        class=\"bugnote-public\">\n\t\t\t\t<span class=\"small\">(<a href=\"view.php?id=7754#c18952\"
+        title=\"Direct link to note\">0018952)</a></span><br />\n\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=90\">dbuenzli</a>\t\t<span
+        class=\"small\">(reporter)</span>\n\t\t\t\t<br />\n\t\t<span class=\"small\">2018-03-16
+        17:21</span><br />\n\t\t\t\t<br /><div class=\"small\">\n\t\t\t\t</div>\n\t</td>\n\t<td
+        class=\"bugnote-note-public\">\n\t\tIf you assume `.cmxa`'s are built the
+        same way you can catch these dependencies with `ocamlobjinfo`.\t</td>\n</tr>\n<tr
+        class=\"spacer\">\n\t<td colspan=\"2\"></td>\n</tr>\n</table>\n\n</div><div
+        id=\"bugnotes_closed\" class=\"hidden\">\n<table class=\"width100\" cellspacing=\"1\">\n<tr>\n\t<td
+        class=\"form-title\" colspan=\"2\">\n\t\t<a href=\"\" onclick=\"ToggleDiv(
+        'bugnotes' ); return false;\"\n\t\t\t><img border=\"0\" src=\"images/plus.png\"
+        alt=\"+\" /></a>&#160;\t\tNotes\t</td>\n</tr>\n</table>\n</div>\n<a name=\"history\"
+        id=\"history\" /><br />\n\n<div id=\"history_open\"><table class=\"width100\"
+        cellspacing=\"0\">\n<tr>\n\t<td class=\"form-title\" colspan=\"4\">\n<a href=\"\"
+        onclick=\"ToggleDiv( 'history' ); return false;\"\n\t\t\t><img border=\"0\"
+        src=\"images/minus.png\" alt=\"-\" /></a>&#160;Issue History\t</td>\n</tr>\n<tr
+        class=\"row-category-history\">\n\t<td class=\"small-caption\">\n\t\tDate
+        Modified\t</td>\n\t<td class=\"small-caption\">\n\t\tUsername\t</td>\n\t<td
+        class=\"small-caption\">\n\t\tField\t</td>\n\t<td class=\"small-caption\">\n\t\tChange\t</td>\n</tr>\n<tr
+        class=\"row-1\">\n\t<td class=\"small-caption\">\n\t\t2018-03-16 13:29\t</td>\n\t<td
+        class=\"small-caption\">\n\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=798\">cyocum</a>\t</td>\n\t<td
+        class=\"small-caption\">\n\t\tNew Issue\t</td>\n\t<td class=\"small-caption\">\n\t\t\t</td>\n</tr>\n<tr
+        class=\"row-2\">\n\t<td class=\"small-caption\">\n\t\t2018-03-16 13:49\t</td>\n\t<td
+        class=\"small-caption\">\n\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=18\">frisch</a>\t</td>\n\t<td
+        class=\"small-caption\">\n\t\tNote Added: 0018949\t</td>\n\t<td class=\"small-caption\">\n\t\t\t</td>\n</tr>\n<tr
+        class=\"row-1\">\n\t<td class=\"small-caption\">\n\t\t2018-03-16 14:06\t</td>\n\t<td
+        class=\"small-caption\">\n\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=326\">xclerc</a>\t</td>\n\t<td
+        class=\"small-caption\">\n\t\tNote Added: 0018951\t</td>\n\t<td class=\"small-caption\">\n\t\t\t</td>\n</tr>\n<tr
+        class=\"row-2\">\n\t<td class=\"small-caption\">\n\t\t2018-03-16 17:21\t</td>\n\t<td
+        class=\"small-caption\">\n\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=90\">dbuenzli</a>\t</td>\n\t<td
+        class=\"small-caption\">\n\t\tNote Added: 0018952\t</td>\n\t<td class=\"small-caption\">\n\t\t\t</td>\n</tr>\n</table>\n</div><div
+        id=\"history_closed\" class=\"hidden\"><table class=\"width100\" cellspacing=\"0\">\n<tr>\n\t<td
+        class=\"form-title\" colspan=\"4\">\n\t<a href=\"\" onclick=\"ToggleDiv( 'history'
+        ); return false;\"\n\t\t\t><img border=\"0\" src=\"images/plus.png\" alt=\"+\"
+        /></a>&#160;Issue History\t</td>\n</tr>\n</table>\n\n</div>\t<br />\n\t<hr
+        size=\"1\" />\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><tr
+        valign=\"top\"><td>\t<address>Copyright &copy; 2000 - 2011 MantisBT Group</address>\n</td><td>\n\t<div
+        align=\"right\"><a href=\"http://www.mantisbt.org\" title=\"Free Web Based
+        Bug Tracker\"><img src=\"/mantis/images/mantis_logo_button.gif\" width=\"88\"
+        height=\"35\" alt=\"Powered by Mantis Bugtracker\" border=\"0\" /></a></div>\n</td></tr></table>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:51:07 GMT
+- request:
+    method: get
+    uri: https://caml.inria.fr/mantis/api/rest/issues/7754
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:51:08 GMT
+      Server:
+      - Apache/2.4.25 (Debian) SVN/1.9.5 mod_python/3.3.1 Python/2.7.13 OpenSSL/1.0.2l
+        mod_perl/2.0.10 Perl/v5.24.1
+      Content-Length:
+      - '390'
+      Content-Type:
+      - text/html; charset=iso-8859-1
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+        <html><head>
+        <title>404 Not Found</title>
+        </head><body>
+        <h1>Not Found</h1>
+        <p>The requested URL /mantis/api/rest/issues/7754 was not found on this server.</p>
+        <hr>
+        <address>Apache/2.4.25 (Debian) SVN/1.9.5 mod_python/3.3.1 Python/2.7.13 OpenSSL/1.0.2l mod_perl/2.0.10 Perl/v5.24.1 Server at caml.inria.fr Port 443</address>
+        </body></html>
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:51:08 GMT
+- request:
+    method: get
+    uri: https://caml.inria.fr/mantis/api/soap/mantisconnect.php?wsdl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:51:10 GMT
+      Server:
+      - Apache/2.4.25 (Debian) SVN/1.9.5 mod_python/3.3.1 Python/2.7.13 OpenSSL/1.0.2l
+        mod_perl/2.0.10 Perl/v5.24.1
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+      Transfer-Encoding:
+      - ''
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://futureware.biz/mantisconnect" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://futureware.biz/mantisconnect">
+        <types>
+        <xsd:schema targetNamespace="http://futureware.biz/mantisconnect"
+        >
+         <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+         <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+         <xsd:complexType name="StringArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ObjectRef">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ObjectRefArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ObjectRef[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="AccountData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="real_name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="email" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="AccountDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:AccountData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="AttachmentData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="filename" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="size" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="content_type" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="date_submitted" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="download_url" type="xsd:anyURI" minOccurs="0"/>
+           <xsd:element name="user_id" type="xsd:integer" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="AttachmentDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:AttachmentData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectAttachmentData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="filename" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="title" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="size" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="content_type" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="date_submitted" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="download_url" type="xsd:anyURI" minOccurs="0"/>
+           <xsd:element name="user_id" type="xsd:integer" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectAttachmentDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ProjectAttachmentData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="RelationshipData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="type" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="target_id" type="xsd:integer" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="RelationshipDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:RelationshipData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="IssueNoteData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="reporter" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="text" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="view_state" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="date_submitted" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="last_modified" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="time_tracking" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="note_type" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="note_attr" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="IssueNoteDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:IssueNoteData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="IssueData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="view_state" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="last_updated" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="project" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="category" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="priority" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="severity" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="status" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="reporter" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="summary" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="build" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="platform" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="os" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="os_build" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="reproducibility" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="date_submitted" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="sponsorship_total" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="handler" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="projection" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="eta" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="resolution" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="fixed_in_version" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="target_version" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="steps_to_reproduce" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="additional_information" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="attachments" type="tns:AttachmentDataArray" minOccurs="0"/>
+           <xsd:element name="relationships" type="tns:RelationshipDataArray" minOccurs="0"/>
+           <xsd:element name="notes" type="tns:IssueNoteDataArray" minOccurs="0"/>
+           <xsd:element name="custom_fields" type="tns:CustomFieldValueForIssueDataArray" minOccurs="0"/>
+           <xsd:element name="due_date" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="monitors" type="tns:AccountDataArray" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="IssueDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:IssueData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="IssueHeaderData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer"/>
+           <xsd:element name="view_state" type="xsd:integer"/>
+           <xsd:element name="last_updated" type="xsd:dateTime"/>
+           <xsd:element name="project" type="xsd:integer"/>
+           <xsd:element name="category" type="xsd:string"/>
+           <xsd:element name="priority" type="xsd:integer"/>
+           <xsd:element name="severity" type="xsd:integer"/>
+           <xsd:element name="status" type="xsd:integer"/>
+           <xsd:element name="reporter" type="xsd:integer"/>
+           <xsd:element name="summary" type="xsd:string"/>
+           <xsd:element name="handler" type="xsd:integer"/>
+           <xsd:element name="resolution" type="xsd:integer"/>
+           <xsd:element name="attachments_count" type="xsd:integer"/>
+           <xsd:element name="notes_count" type="xsd:integer"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="IssueHeaderDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:IssueHeaderData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="status" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="enabled" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="view_state" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="access_min" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="file_path" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="subprojects" type="tns:ProjectDataArray" minOccurs="0"/>
+           <xsd:element name="inherit_global" type="xsd:boolean" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ProjectData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectVersionData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="project_id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="date_order" type="xsd:dateTime" minOccurs="0"/>
+           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="released" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="obsolete" type="xsd:boolean" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="ProjectVersionDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ProjectVersionData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="FilterData">
+          <xsd:all>
+           <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="owner" type="tns:AccountData" minOccurs="0"/>
+           <xsd:element name="project_id" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="is_public" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="filter_string" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="url" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="FilterDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:FilterData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldDefinitionData">
+          <xsd:all>
+           <xsd:element name="field" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="type" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="possible_values" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="default_value" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="valid_regexp" type="xsd:string" minOccurs="0"/>
+           <xsd:element name="access_level_r" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="access_level_rw" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="length_min" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="length_max" type="xsd:integer" minOccurs="0"/>
+           <xsd:element name="advanced" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="display_report" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="display_update" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="display_resolved" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="display_closed" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="require_report" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="require_update" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="require_resolved" type="xsd:boolean" minOccurs="0"/>
+           <xsd:element name="require_closed" type="xsd:boolean" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldDefinitionDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:CustomFieldDefinitionData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldLinkForProjectData">
+          <xsd:all>
+           <xsd:element name="field" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="sequence" type="xsd:byte" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldLinkForProjectDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:CustomFieldLinkForProjectData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldValueForIssueData">
+          <xsd:all>
+           <xsd:element name="field" type="tns:ObjectRef" minOccurs="0"/>
+           <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+          </xsd:all>
+         </xsd:complexType>
+         <xsd:complexType name="CustomFieldValueForIssueDataArray">
+          <xsd:complexContent>
+           <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:CustomFieldValueForIssueData[]"/>
+           </xsd:restriction>
+          </xsd:complexContent>
+         </xsd:complexType>
+        </xsd:schema>
+        </types>
+        <message name="mc_versionRequest"></message>
+        <message name="mc_versionResponse">
+          <part name="return" type="xsd:string" /></message>
+        <message name="mc_enum_statusRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_statusResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_prioritiesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_prioritiesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_severitiesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_severitiesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_reproducibilitiesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_reproducibilitiesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_projectionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_projectionsResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_etasRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_etasResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_resolutionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_resolutionsResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_access_levelsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_access_levelsResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_project_statusRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_project_statusResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_project_view_statesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_project_view_statesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_view_statesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_view_statesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_custom_field_typesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_enum_custom_field_typesResponse">
+          <part name="return" type="tns:ObjectRefArray" /></message>
+        <message name="mc_enum_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="enumeration" type="xsd:string" /></message>
+        <message name="mc_enum_getResponse">
+          <part name="return" type="xsd:string" /></message>
+        <message name="mc_issue_existsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" /></message>
+        <message name="mc_issue_existsResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" /></message>
+        <message name="mc_issue_getResponse">
+          <part name="return" type="tns:IssueData" /></message>
+        <message name="mc_issue_get_biggest_idRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_issue_get_biggest_idResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_get_id_from_summaryRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="summary" type="xsd:string" /></message>
+        <message name="mc_issue_get_id_from_summaryResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue" type="tns:IssueData" /></message>
+        <message name="mc_issue_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_updateRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issueId" type="xsd:integer" />
+          <part name="issue" type="tns:IssueData" /></message>
+        <message name="mc_issue_updateResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" /></message>
+        <message name="mc_issue_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_note_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="note" type="tns:IssueNoteData" /></message>
+        <message name="mc_issue_note_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_note_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_note_id" type="xsd:integer" /></message>
+        <message name="mc_issue_note_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_note_updateRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="note" type="tns:IssueNoteData" /></message>
+        <message name="mc_issue_note_updateResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_relationship_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="relationship" type="tns:RelationshipData" /></message>
+        <message name="mc_issue_relationship_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_relationship_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="relationship_id" type="xsd:integer" /></message>
+        <message name="mc_issue_relationship_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_attachment_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="name" type="xsd:string" />
+          <part name="file_type" type="xsd:string" />
+          <part name="content" type="xsd:base64Binary" /></message>
+        <message name="mc_issue_attachment_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_issue_attachment_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_attachment_id" type="xsd:integer" /></message>
+        <message name="mc_issue_attachment_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_issue_attachment_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_attachment_id" type="xsd:integer" /></message>
+        <message name="mc_issue_attachment_getResponse">
+          <part name="return" type="xsd:base64Binary" /></message>
+        <message name="mc_project_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project" type="tns:ProjectData" /></message>
+        <message name="mc_project_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_updateRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="project" type="tns:ProjectData" /></message>
+        <message name="mc_project_updateResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_get_id_from_nameRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_name" type="xsd:string" /></message>
+        <message name="mc_project_get_id_from_nameResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_get_issuesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_project_get_issuesResponse">
+          <part name="return" type="tns:IssueDataArray" /></message>
+        <message name="mc_project_get_issue_headersRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_project_get_issue_headersResponse">
+          <part name="return" type="tns:IssueHeaderDataArray" /></message>
+        <message name="mc_project_get_usersRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="access" type="xsd:integer" /></message>
+        <message name="mc_project_get_usersResponse">
+          <part name="return" type="tns:AccountDataArray" /></message>
+        <message name="mc_projects_get_user_accessibleRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" /></message>
+        <message name="mc_projects_get_user_accessibleResponse">
+          <part name="return" type="tns:ProjectDataArray" /></message>
+        <message name="mc_project_get_categoriesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_categoriesResponse">
+          <part name="return" type="tns:StringArray" /></message>
+        <message name="mc_project_add_categoryRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="p_category_name" type="xsd:string" /></message>
+        <message name="mc_project_add_categoryResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_delete_categoryRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="p_category_name" type="xsd:string" /></message>
+        <message name="mc_project_delete_categoryResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_rename_category_by_nameRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="p_category_name" type="xsd:string" />
+          <part name="p_category_name_new" type="xsd:string" />
+          <part name="p_assigned_to" type="xsd:integer" /></message>
+        <message name="mc_project_rename_category_by_nameResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_get_versionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_versionsResponse">
+          <part name="return" type="tns:ProjectVersionDataArray" /></message>
+        <message name="mc_project_version_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="version" type="tns:ProjectVersionData" /></message>
+        <message name="mc_project_version_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_version_updateRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="version_id" type="xsd:integer" />
+          <part name="version" type="tns:ProjectVersionData" /></message>
+        <message name="mc_project_version_updateResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_version_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="version_id" type="xsd:integer" /></message>
+        <message name="mc_project_version_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_get_released_versionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_released_versionsResponse">
+          <part name="return" type="tns:ProjectVersionDataArray" /></message>
+        <message name="mc_project_get_unreleased_versionsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_unreleased_versionsResponse">
+          <part name="return" type="tns:ProjectVersionDataArray" /></message>
+        <message name="mc_project_get_attachmentsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_attachmentsResponse">
+          <part name="return" type="tns:ProjectAttachmentDataArray" /></message>
+        <message name="mc_project_get_custom_fieldsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_custom_fieldsResponse">
+          <part name="return" type="tns:CustomFieldDefinitionDataArray" /></message>
+        <message name="mc_project_attachment_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_attachment_id" type="xsd:integer" /></message>
+        <message name="mc_project_attachment_getResponse">
+          <part name="return" type="xsd:base64Binary" /></message>
+        <message name="mc_project_attachment_addRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="name" type="xsd:string" />
+          <part name="title" type="xsd:string" />
+          <part name="description" type="xsd:string" />
+          <part name="file_type" type="xsd:string" />
+          <part name="content" type="xsd:base64Binary" /></message>
+        <message name="mc_project_attachment_addResponse">
+          <part name="return" type="xsd:integer" /></message>
+        <message name="mc_project_attachment_deleteRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_attachment_id" type="xsd:integer" /></message>
+        <message name="mc_project_attachment_deleteResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_project_get_all_subprojectsRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_project_get_all_subprojectsResponse">
+          <part name="return" type="tns:StringArray" /></message>
+        <message name="mc_filter_getRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" /></message>
+        <message name="mc_filter_getResponse">
+          <part name="return" type="tns:FilterDataArray" /></message>
+        <message name="mc_filter_get_issuesRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="filter_id" type="xsd:integer" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_filter_get_issuesResponse">
+          <part name="return" type="tns:IssueDataArray" /></message>
+        <message name="mc_filter_get_issue_headersRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="filter_id" type="xsd:integer" />
+          <part name="page_number" type="xsd:integer" />
+          <part name="per_page" type="xsd:integer" /></message>
+        <message name="mc_filter_get_issue_headersResponse">
+          <part name="return" type="tns:IssueHeaderDataArray" /></message>
+        <message name="mc_config_get_stringRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="config_var" type="xsd:string" /></message>
+        <message name="mc_config_get_stringResponse">
+          <part name="return" type="xsd:string" /></message>
+        <message name="mc_issue_checkinRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="issue_id" type="xsd:integer" />
+          <part name="comment" type="xsd:string" />
+          <part name="fixed" type="xsd:boolean" /></message>
+        <message name="mc_issue_checkinResponse">
+          <part name="return" type="xsd:boolean" /></message>
+        <message name="mc_user_pref_get_prefRequest">
+          <part name="username" type="xsd:string" />
+          <part name="password" type="xsd:string" />
+          <part name="project_id" type="xsd:integer" />
+          <part name="pref_name" type="xsd:string" /></message>
+        <message name="mc_user_pref_get_prefResponse">
+          <part name="return" type="xsd:string" /></message>
+        <portType name="MantisConnectPortType">
+          <operation name="mc_version">
+            <input message="tns:mc_versionRequest"/>
+            <output message="tns:mc_versionResponse"/>
+          </operation>
+          <operation name="mc_enum_status">
+            <documentation>Get the enumeration for statuses.</documentation>
+            <input message="tns:mc_enum_statusRequest"/>
+            <output message="tns:mc_enum_statusResponse"/>
+          </operation>
+          <operation name="mc_enum_priorities">
+            <documentation>Get the enumeration for priorities.</documentation>
+            <input message="tns:mc_enum_prioritiesRequest"/>
+            <output message="tns:mc_enum_prioritiesResponse"/>
+          </operation>
+          <operation name="mc_enum_severities">
+            <documentation>Get the enumeration for severities.</documentation>
+            <input message="tns:mc_enum_severitiesRequest"/>
+            <output message="tns:mc_enum_severitiesResponse"/>
+          </operation>
+          <operation name="mc_enum_reproducibilities">
+            <documentation>Get the enumeration for reproducibilities.</documentation>
+            <input message="tns:mc_enum_reproducibilitiesRequest"/>
+            <output message="tns:mc_enum_reproducibilitiesResponse"/>
+          </operation>
+          <operation name="mc_enum_projections">
+            <documentation>Get the enumeration for projections.</documentation>
+            <input message="tns:mc_enum_projectionsRequest"/>
+            <output message="tns:mc_enum_projectionsResponse"/>
+          </operation>
+          <operation name="mc_enum_etas">
+            <documentation>Get the enumeration for ETAs.</documentation>
+            <input message="tns:mc_enum_etasRequest"/>
+            <output message="tns:mc_enum_etasResponse"/>
+          </operation>
+          <operation name="mc_enum_resolutions">
+            <documentation>Get the enumeration for resolutions.</documentation>
+            <input message="tns:mc_enum_resolutionsRequest"/>
+            <output message="tns:mc_enum_resolutionsResponse"/>
+          </operation>
+          <operation name="mc_enum_access_levels">
+            <documentation>Get the enumeration for access levels.</documentation>
+            <input message="tns:mc_enum_access_levelsRequest"/>
+            <output message="tns:mc_enum_access_levelsResponse"/>
+          </operation>
+          <operation name="mc_enum_project_status">
+            <documentation>Get the enumeration for project statuses.</documentation>
+            <input message="tns:mc_enum_project_statusRequest"/>
+            <output message="tns:mc_enum_project_statusResponse"/>
+          </operation>
+          <operation name="mc_enum_project_view_states">
+            <documentation>Get the enumeration for project view states.</documentation>
+            <input message="tns:mc_enum_project_view_statesRequest"/>
+            <output message="tns:mc_enum_project_view_statesResponse"/>
+          </operation>
+          <operation name="mc_enum_view_states">
+            <documentation>Get the enumeration for view states.</documentation>
+            <input message="tns:mc_enum_view_statesRequest"/>
+            <output message="tns:mc_enum_view_statesResponse"/>
+          </operation>
+          <operation name="mc_enum_custom_field_types">
+            <documentation>Get the enumeration for custom field types.</documentation>
+            <input message="tns:mc_enum_custom_field_typesRequest"/>
+            <output message="tns:mc_enum_custom_field_typesResponse"/>
+          </operation>
+          <operation name="mc_enum_get">
+            <documentation>Get the enumeration for the specified enumeration type.</documentation>
+            <input message="tns:mc_enum_getRequest"/>
+            <output message="tns:mc_enum_getResponse"/>
+          </operation>
+          <operation name="mc_issue_exists">
+            <documentation>Check there exists an issue with the specified id.</documentation>
+            <input message="tns:mc_issue_existsRequest"/>
+            <output message="tns:mc_issue_existsResponse"/>
+          </operation>
+          <operation name="mc_issue_get">
+            <documentation>Get the issue with the specified id.</documentation>
+            <input message="tns:mc_issue_getRequest"/>
+            <output message="tns:mc_issue_getResponse"/>
+          </operation>
+          <operation name="mc_issue_get_biggest_id">
+            <documentation>Get the latest submitted issue in the specified project.</documentation>
+            <input message="tns:mc_issue_get_biggest_idRequest"/>
+            <output message="tns:mc_issue_get_biggest_idResponse"/>
+          </operation>
+          <operation name="mc_issue_get_id_from_summary">
+            <documentation>Get the id of the issue with the specified summary.</documentation>
+            <input message="tns:mc_issue_get_id_from_summaryRequest"/>
+            <output message="tns:mc_issue_get_id_from_summaryResponse"/>
+          </operation>
+          <operation name="mc_issue_add">
+            <documentation>Submit the specified issue details.</documentation>
+            <input message="tns:mc_issue_addRequest"/>
+            <output message="tns:mc_issue_addResponse"/>
+          </operation>
+          <operation name="mc_issue_update">
+            <documentation>Update Issue method.</documentation>
+            <input message="tns:mc_issue_updateRequest"/>
+            <output message="tns:mc_issue_updateResponse"/>
+          </operation>
+          <operation name="mc_issue_delete">
+            <documentation>Delete the issue with the specified id.</documentation>
+            <input message="tns:mc_issue_deleteRequest"/>
+            <output message="tns:mc_issue_deleteResponse"/>
+          </operation>
+          <operation name="mc_issue_note_add">
+            <documentation>Submit a new note.</documentation>
+            <input message="tns:mc_issue_note_addRequest"/>
+            <output message="tns:mc_issue_note_addResponse"/>
+          </operation>
+          <operation name="mc_issue_note_delete">
+            <documentation>Delete the note with the specified id.</documentation>
+            <input message="tns:mc_issue_note_deleteRequest"/>
+            <output message="tns:mc_issue_note_deleteResponse"/>
+          </operation>
+          <operation name="mc_issue_note_update">
+            <documentation>Update a specific note of a specific issue.</documentation>
+            <input message="tns:mc_issue_note_updateRequest"/>
+            <output message="tns:mc_issue_note_updateResponse"/>
+          </operation>
+          <operation name="mc_issue_relationship_add">
+            <documentation>Submit a new relationship.</documentation>
+            <input message="tns:mc_issue_relationship_addRequest"/>
+            <output message="tns:mc_issue_relationship_addResponse"/>
+          </operation>
+          <operation name="mc_issue_relationship_delete">
+            <documentation>Delete the relationship for the specified issue.</documentation>
+            <input message="tns:mc_issue_relationship_deleteRequest"/>
+            <output message="tns:mc_issue_relationship_deleteResponse"/>
+          </operation>
+          <operation name="mc_issue_attachment_add">
+            <documentation>Submit a new issue attachment.</documentation>
+            <input message="tns:mc_issue_attachment_addRequest"/>
+            <output message="tns:mc_issue_attachment_addResponse"/>
+          </operation>
+          <operation name="mc_issue_attachment_delete">
+            <documentation>Delete the issue attachment with the specified id.</documentation>
+            <input message="tns:mc_issue_attachment_deleteRequest"/>
+            <output message="tns:mc_issue_attachment_deleteResponse"/>
+          </operation>
+          <operation name="mc_issue_attachment_get">
+            <documentation>Get the data for the specified issue attachment.</documentation>
+            <input message="tns:mc_issue_attachment_getRequest"/>
+            <output message="tns:mc_issue_attachment_getResponse"/>
+          </operation>
+          <operation name="mc_project_add">
+            <documentation>Add a new project to the tracker (must have admin privileges)</documentation>
+            <input message="tns:mc_project_addRequest"/>
+            <output message="tns:mc_project_addResponse"/>
+          </operation>
+          <operation name="mc_project_delete">
+            <documentation>Add a new project to the tracker (must have admin privileges)</documentation>
+            <input message="tns:mc_project_deleteRequest"/>
+            <output message="tns:mc_project_deleteResponse"/>
+          </operation>
+          <operation name="mc_project_update">
+            <documentation>Update a specific project to the tracker (must have admin privileges)</documentation>
+            <input message="tns:mc_project_updateRequest"/>
+            <output message="tns:mc_project_updateResponse"/>
+          </operation>
+          <operation name="mc_project_get_id_from_name">
+            <documentation>Get the id of the project with the specified name.</documentation>
+            <input message="tns:mc_project_get_id_from_nameRequest"/>
+            <output message="tns:mc_project_get_id_from_nameResponse"/>
+          </operation>
+          <operation name="mc_project_get_issues">
+            <documentation>Get the issues that match the specified project id and paging details.</documentation>
+            <input message="tns:mc_project_get_issuesRequest"/>
+            <output message="tns:mc_project_get_issuesResponse"/>
+          </operation>
+          <operation name="mc_project_get_issue_headers">
+            <documentation>Get the issue headers that match the specified project id and paging details.</documentation>
+            <input message="tns:mc_project_get_issue_headersRequest"/>
+            <output message="tns:mc_project_get_issue_headersResponse"/>
+          </operation>
+          <operation name="mc_project_get_users">
+            <documentation>Get appropriate users assigned to a project by access level.</documentation>
+            <input message="tns:mc_project_get_usersRequest"/>
+            <output message="tns:mc_project_get_usersResponse"/>
+          </operation>
+          <operation name="mc_projects_get_user_accessible">
+            <documentation>Get the list of projects that are accessible to the logged in user.</documentation>
+            <input message="tns:mc_projects_get_user_accessibleRequest"/>
+            <output message="tns:mc_projects_get_user_accessibleResponse"/>
+          </operation>
+          <operation name="mc_project_get_categories">
+            <documentation>Get the categories belonging to the specified project.</documentation>
+            <input message="tns:mc_project_get_categoriesRequest"/>
+            <output message="tns:mc_project_get_categoriesResponse"/>
+          </operation>
+          <operation name="mc_project_add_category">
+            <documentation>Add a category of specific project.</documentation>
+            <input message="tns:mc_project_add_categoryRequest"/>
+            <output message="tns:mc_project_add_categoryResponse"/>
+          </operation>
+          <operation name="mc_project_delete_category">
+            <documentation>Delete a category of specific project.</documentation>
+            <input message="tns:mc_project_delete_categoryRequest"/>
+            <output message="tns:mc_project_delete_categoryResponse"/>
+          </operation>
+          <operation name="mc_project_rename_category_by_name">
+            <documentation>Rename a category of specific project.</documentation>
+            <input message="tns:mc_project_rename_category_by_nameRequest"/>
+            <output message="tns:mc_project_rename_category_by_nameResponse"/>
+          </operation>
+          <operation name="mc_project_get_versions">
+            <documentation>Get the versions belonging to the specified project.</documentation>
+            <input message="tns:mc_project_get_versionsRequest"/>
+            <output message="tns:mc_project_get_versionsResponse"/>
+          </operation>
+          <operation name="mc_project_version_add">
+            <documentation>Submit the specified version details.</documentation>
+            <input message="tns:mc_project_version_addRequest"/>
+            <output message="tns:mc_project_version_addResponse"/>
+          </operation>
+          <operation name="mc_project_version_update">
+            <documentation>Update version method.</documentation>
+            <input message="tns:mc_project_version_updateRequest"/>
+            <output message="tns:mc_project_version_updateResponse"/>
+          </operation>
+          <operation name="mc_project_version_delete">
+            <documentation>Delete the version with the specified id.</documentation>
+            <input message="tns:mc_project_version_deleteRequest"/>
+            <output message="tns:mc_project_version_deleteResponse"/>
+          </operation>
+          <operation name="mc_project_get_released_versions">
+            <documentation>Get the released versions that belong to the specified project.</documentation>
+            <input message="tns:mc_project_get_released_versionsRequest"/>
+            <output message="tns:mc_project_get_released_versionsResponse"/>
+          </operation>
+          <operation name="mc_project_get_unreleased_versions">
+            <documentation>Get the unreleased version that belong to the specified project.</documentation>
+            <input message="tns:mc_project_get_unreleased_versionsRequest"/>
+            <output message="tns:mc_project_get_unreleased_versionsResponse"/>
+          </operation>
+          <operation name="mc_project_get_attachments">
+            <documentation>Get the attachments that belong to the specified project.</documentation>
+            <input message="tns:mc_project_get_attachmentsRequest"/>
+            <output message="tns:mc_project_get_attachmentsResponse"/>
+          </operation>
+          <operation name="mc_project_get_custom_fields">
+            <documentation>Get the custom fields that belong to the specified project.</documentation>
+            <input message="tns:mc_project_get_custom_fieldsRequest"/>
+            <output message="tns:mc_project_get_custom_fieldsResponse"/>
+          </operation>
+          <operation name="mc_project_attachment_get">
+            <documentation>Get the data for the specified project attachment.</documentation>
+            <input message="tns:mc_project_attachment_getRequest"/>
+            <output message="tns:mc_project_attachment_getResponse"/>
+          </operation>
+          <operation name="mc_project_attachment_add">
+            <documentation>Submit a new project attachment.</documentation>
+            <input message="tns:mc_project_attachment_addRequest"/>
+            <output message="tns:mc_project_attachment_addResponse"/>
+          </operation>
+          <operation name="mc_project_attachment_delete">
+            <documentation>Delete the project attachment with the specified id.</documentation>
+            <input message="tns:mc_project_attachment_deleteRequest"/>
+            <output message="tns:mc_project_attachment_deleteResponse"/>
+          </operation>
+          <operation name="mc_project_get_all_subprojects">
+            <documentation>Get the subprojects ID of a specific project.</documentation>
+            <input message="tns:mc_project_get_all_subprojectsRequest"/>
+            <output message="tns:mc_project_get_all_subprojectsResponse"/>
+          </operation>
+          <operation name="mc_filter_get">
+            <documentation>Get the filters defined for the specified project.</documentation>
+            <input message="tns:mc_filter_getRequest"/>
+            <output message="tns:mc_filter_getResponse"/>
+          </operation>
+          <operation name="mc_filter_get_issues">
+            <documentation>Get the issues that match the specified filter and paging details.</documentation>
+            <input message="tns:mc_filter_get_issuesRequest"/>
+            <output message="tns:mc_filter_get_issuesResponse"/>
+          </operation>
+          <operation name="mc_filter_get_issue_headers">
+            <documentation>Get the issue headers that match the specified filter and paging details.</documentation>
+            <input message="tns:mc_filter_get_issue_headersRequest"/>
+            <output message="tns:mc_filter_get_issue_headersResponse"/>
+          </operation>
+          <operation name="mc_config_get_string">
+            <documentation>Get the value for the specified configuration variable.</documentation>
+            <input message="tns:mc_config_get_stringRequest"/>
+            <output message="tns:mc_config_get_stringResponse"/>
+          </operation>
+          <operation name="mc_issue_checkin">
+            <documentation>Notifies MantisBT of a check-in for the issue with the specified id.</documentation>
+            <input message="tns:mc_issue_checkinRequest"/>
+            <output message="tns:mc_issue_checkinResponse"/>
+          </operation>
+          <operation name="mc_user_pref_get_pref">
+            <documentation>Get the value for the specified user preference.</documentation>
+            <input message="tns:mc_user_pref_get_prefRequest"/>
+            <output message="tns:mc_user_pref_get_prefResponse"/>
+          </operation>
+        </portType>
+        <binding name="MantisConnectBinding" type="tns:MantisConnectPortType">
+          <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+          <operation name="mc_version">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_version" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_status">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_status" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_priorities">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_priorities" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_severities">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_severities" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_reproducibilities">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_reproducibilities" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_projections">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_projections" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_etas">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_etas" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_resolutions">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_resolutions" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_access_levels">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_access_levels" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_project_status">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_project_status" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_project_view_states">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_project_view_states" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_view_states">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_view_states" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_custom_field_types">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_custom_field_types" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_enum_get">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_enum_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_exists">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_exists" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_get">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_get_biggest_id">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_get_biggest_id" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_get_id_from_summary">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_get_id_from_summary" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_add">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_update">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_update" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_delete">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_note_add">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_note_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_note_delete">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_note_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_note_update">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_note_update" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_relationship_add">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_relationship_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_relationship_delete">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_relationship_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_attachment_add">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_attachment_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_attachment_delete">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_attachment_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_attachment_get">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_attachment_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_add">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_delete">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_update">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_update" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_id_from_name">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_id_from_name" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_issues">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_issues" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_issue_headers">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_issue_headers" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_users">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_users" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_projects_get_user_accessible">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_projects_get_user_accessible" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_categories">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_categories" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_add_category">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_add_category" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_delete_category">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_delete_category" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_rename_category_by_name">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_rename_category_by_name" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_versions">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_versions" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_version_add">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_version_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_version_update">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_version_update" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_version_delete">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_version_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_released_versions">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_released_versions" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_unreleased_versions">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_unreleased_versions" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_attachments">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_attachments" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_custom_fields">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_custom_fields" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_attachment_get">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_attachment_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_attachment_add">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_attachment_add" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_attachment_delete">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_attachment_delete" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_project_get_all_subprojects">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_project_get_all_subprojects" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_get">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_filter_get" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_get_issues">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_filter_get_issues" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_filter_get_issue_headers">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_filter_get_issue_headers" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_config_get_string">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_config_get_string" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_issue_checkin">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_checkin" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+          <operation name="mc_user_pref_get_pref">
+            <soap:operation soapAction="https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_user_pref_get_pref" style="rpc"/>
+            <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+          </operation>
+        </binding>
+        <service name="MantisConnect">
+          <port name="MantisConnectPort" binding="tns:MantisConnectBinding">
+            <soap:address location="https://caml.inria.fr:443/mantis/api/soap/mantisconnect.php"/>
+          </port>
+        </service>
+        </definitions>
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:51:11 GMT
+- request:
+    method: post
+    uri: https://caml.inria.fr/mantis/api/soap/mantisconnect.php
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://futureware.biz/mantisconnect"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><tns:mc_issue_get><username></username><password></password><issue_id>7754</issue_id></tns:mc_issue_get></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"https://caml.inria.fr/mantis/api/soap/mantisconnect.php/mc_issue_get"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '393'
+  response:
+    status:
+      code: 500
+      message: ''
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:51:12 GMT
+      Server:
+      - Apache/2.4.25 (Debian) SVN/1.9.5 mod_python/3.3.1 Python/2.7.13 OpenSSL/1.0.2l
+        mod_perl/2.0.10 Perl/v5.24.1
+      Set-Cookie:
+      - PHPSESSID=a2do268ebdmjpq4ab6evhqana3; path=/; secure; HttpOnly
+      Cache-Control:
+      - private, max-age=10800, pre-check=10800
+      Last-Modified:
+      - Tue, 06 Sep 2011 14:23:10 GMT
+      Status:
+      - 500 Internal Server Error
+      X-Soap-Server:
+      - NuSOAP/0.9.5 (1.123)
+      Content-Length:
+      - '658'
+      Connection:
+      - close
+      Content-Type:
+      - text/xml; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="ISO-8859-1"?><SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+          xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+        <SOAP-ENV:Body><SOAP-ENV:Fault><faultcode xsi:type="xsd:string">Client</faultcode><faultactor xsi:type="xsd:string"></faultactor><faultstring xsi:type="xsd:string">Access denied for user anonymous.</faultstring><detail xsi:type="xsd:string"></detail></SOAP-ENV:Fault></SOAP-ENV:Body></SOAP-ENV:Envelope>
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:51:13 GMT
+- request:
+    method: get
+    uri: https://caml.inria.fr/mantis/print_bug_page.php?bug_id=7754
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 21 Mar 2018 10:51:14 GMT
+      Server:
+      - Apache/2.4.25 (Debian) SVN/1.9.5 mod_python/3.3.1 Python/2.7.13 OpenSSL/1.0.2l
+        mod_perl/2.0.10 Perl/v5.24.1
+      Set-Cookie:
+      - PHPSESSID=qdrfk3lkooftdj8m103r6pl8t5; path=/; secure; HttpOnly
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Last-Modified:
+      - Wed, 21 Mar 2018 10:51:14 GMT
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Wed, 21 Mar 2018 10:51:14 GMT
+      X-Frame-Options:
+      - DENY
+      X-Content-Security-Policy:
+      - allow 'self'; options inline-script eval-script; frame-ancestors 'none'
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html>\n<head>\n\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"https://caml.inria.fr/mantis/css/default.css\"
+        />\n\t<script type=\"text/javascript\"><!--\n\t\tif(document.layers) {document.write(\"<style>td{padding:0px;}<\\/style>\")}\n\t//
+        --></script>\n\t<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\"
+        />\n\t<meta http-equiv=\"Pragma\" content=\"no-cache\" />\n\t<meta http-equiv=\"Cache-Control\"
+        content=\"no-cache\" />\n\t<meta http-equiv=\"Pragma-directive\" content=\"no-cache\"
+        />\n\t<meta http-equiv=\"Cache-Directive\" content=\"no-cache\" />\n\t<meta
+        http-equiv=\"Expires\" content=\"Wed, 21 Mar 2018 10:51:14 GMT\" />\n\t<link
+        rel=\"shortcut icon\" href=\"/mantis/images/favicon.ico\" type=\"image/x-icon\"
+        />\n\t<link rel=\"search\" type=\"application/opensearchdescription+xml\"
+        title=\"MantisBT: Text Search\" href=\"https://caml.inria.fr/mantis/browser_search_plugin.php?type=text\"
+        />\t<link rel=\"search\" type=\"application/opensearchdescription+xml\" title=\"MantisBT:
+        Issue Id\" href=\"https://caml.inria.fr/mantis/browser_search_plugin.php?type=id\"
+        />\t<title>0007754: camlCamlinternalOO module is not linked when using Dynlink
+        - MantisBT</title>\n<script type=\"text/javascript\" src=\"/mantis/javascript/min/common.js\"></script>\n<script
+        type=\"text/javascript\">var loading_lang = \"Loading...\";</script><script
+        type=\"text/javascript\" src=\"/mantis/javascript/min/ajax.js\"></script>\n</head>\n<body>\n<br
+        /><table class=\"width100\" cellspacing=\"1\"><tr><td class=\"form-title\"
+        colspan=\"6\"><div class=\"center\">MantisBT - OCaml</div></td></tr><tr><td
+        class=\"form-title\" colspan=\"6\">View Issue Details</td></tr><tr><td class=\"print-spacer\"
+        colspan=\"6\"><hr size=\"1\" /></td></tr><tr class=\"print-category\"><td
+        class=\"print\" width=\"16%\">ID</td><td class=\"print\" width=\"16%\">Project</td><td
+        class=\"print\" width=\"16%\">Category</td><td class=\"print\" width=\"16%\">View
+        Status</td><td class=\"print\" width=\"16%\">Date Submitted</td><td class=\"print\"
+        width=\"16%\">Last Update</td></tr><tr class=\"print\"><td class=\"print\">0007754</td><td
+        class=\"print\">OCaml</td><td class=\"print\">dynlink and natdynlink</td><td
+        class=\"print\">public</td><td class=\"print\">2018-03-16 13:29</td><td class=\"print\">2018-03-16
+        17:21</td></tr><tr><td class=\"print-spacer\" colspan=\"6\"><hr size=\"1\"
+        /></td></tr><tr class=\"print\"><td class=\"print-category\">Reporter</td><td
+        class=\"print\">cyocum</td><td class=\"print\" colspan=\"4\">&#160;</td></tr><tr
+        class=\"print\"><td class=\"print-category\">Assigned To</td><td class=\"print\"></td><td
+        class=\"print\" colspan=\"4\">&#160;</td></tr><tr class=\"print\"><td class=\"print-category\">Priority</td><td
+        class=\"print\">normal</td><td class=\"print-category\">Severity</td><td class=\"print\">minor</td><td
+        class=\"print-category\">Reproducibility</td><td class=\"print\">always</td></tr><tr
+        class=\"print\"><td class=\"print-category\">Status</td><td class=\"print\">new</td><td
+        class=\"print-category\">Resolution</td><td class=\"print\">open</td><td class=\"print\"
+        colspan=\"2\">&#160;</td></tr><tr class=\"print\"><td class=\"print-category\">Platform</td><td
+        class=\"print\"></td><td class=\"print-category\">OS</td><td class=\"print\">Fedora
+        Linux</td><td class=\"print-category\">OS Version</td><td class=\"print\">27</td></tr><tr
+        class=\"print\"><td class=\"print-category\">Product Version</td><td class=\"print\">4.06.0</td><td
+        class=\"print\" colspan=\"4\">&#160;</td></tr><tr><td class=\"print-category\">Target
+        Version</td><td class=\"print\"></td><td class=\"print-category\">Fixed in
+        Version</td><td class=\"print\"></td><td class=\"print\" colspan=\"2\">&#160;</td></tr><tr><td
+        class=\"print-spacer\" colspan=\"6\"><hr size=\"1\" /></td></tr><tr class=\"print\"><td
+        class=\"print-category\">Summary</td><td class=\"print\" colspan=\"5\">0007754:
+        camlCamlinternalOO module is not linked when using Dynlink</td></tr><tr class=\"print\"><td
+        class=\"print-category\">Description</td><td class=\"print\" colspan=\"5\">I
+        have a system which uses Dynlink to dynamically load some code (.cmxs). The
+        problem that I am having is that you cannot use the Object system in OCaml
+        with Dynlink when naively compiling.  This is because the camlCamlinternalOO
+        is not linked. The error is below:<br />\r\n<br />\r\nundefined symbol: camlCamlinternalOO__create_object_opt_1533</td></tr><tr
+        class=\"print\"><td class=\"print-category\">Steps To Reproduce</td><td class=\"print\"
+        colspan=\"5\">To reproduce you need to files.<br />\r\n<br />\r\nobj_test.ml<br
+        />\r\n<br />\r\nclass istack = object<br />\r\n&#160;&#160;&#160;&#160;val
+        mutable v = [0; 2]<br />\r\n<br />\r\n&#160;&#160;&#160;&#160;method pop =<br
+        />\r\n&#160;&#160;&#160;&#160;&#160;&#160;match v with<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;|
+        hd :: tl -&gt;<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;v
+        &lt;- tl;<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Some
+        hd<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;| [] -&gt; None<br />\r\n<br
+        />\r\n&#160;&#160;&#160;&#160;method push hd =<br />\r\n&#160;&#160;&#160;&#160;&#160;&#160;v
+        &lt;- hd :: v<br />\r\n&#160;&#160;end<br />\r\n<br />\r\nwhich is complied
+        thus: ocamlfind opt -shared -o obj_test.cmxs obj_test.ml<br />\r\n<br />\r\nmain.ml<br
+        />\r\n<br />\r\nlet load_test_plugin fname =<br />\r\n&#160;&#160;let fname
+        =  Dynlink.adapt_filename fname in<br />\r\n&#160;&#160;try<br />\r\n&#160;&#160;&#160;&#160;Dynlink.loadfile
+        fname<br />\r\n&#160;&#160;with<br />\r\n&#160;&#160;| (Dynlink.Error err)
+        as e -&gt;<br />\r\n&#160;&#160;&#160;&#160;&#160;print_endline (&quot;ERROR
+        loading plugin: &quot; ^ (Dynlink.error_message err));<br />\r\n&#160;&#160;&#160;&#160;&#160;raise
+        e<br />\r\n<br />\r\nlet _ =<br />\r\n&#160;&#160;load_test_plugin Sys.argv.(1)<br
+        />\r\n<br />\r\nwhich is compiled thus: ocamlfind opt -package dynlink -linkpkg
+        main.ml<br />\r\n<br />\r\nWhen you try to run the code: ./a.out obj_test.cmxs,
+        you will get the error indicated above.<br />\r\n</td></tr><tr class=\"print\"><td
+        class=\"print-category\">Additional Information</td><td class=\"print\" colspan=\"5\">See
+        Also <a href=\"https://discuss.ocaml.org/t/objects-and-dynlink/1720\">https://discuss.ocaml.org/t/objects-and-dynlink/1720</a>
+        [<a href=\"https://discuss.ocaml.org/t/objects-and-dynlink/1720\" target=\"_blank\">^</a>]<br
+        />\r\n<br />\r\nThere is a workaround by adding this to main.ml:<br />\r\n<br
+        />\r\nlet _obj = object end in</td></tr><tr class=\"print\"><td class=\"print-category\">Tags</td><td
+        class=\"print\" colspan=\"5\">No tags attached.</td></tr><tr class=\"print\"><td
+        class=\"print-category\">Relationships</td><td class=\"print\" colspan=\"5\"></td></tr><tr
+        class=\"print\"><td class=\"print-category\">Attached Files</td><td class=\"print\"
+        colspan=\"5\"></td></tr><tr><td class=\"print-spacer\" colspan=\"6\"><hr size=\"1\"
+        /></td></tr><tr><td class=\"form-title\">Issue History</td></tr><tr class=\"print-category\"><td
+        class=\"row-category-history\">Date Modified</td><td class=\"row-category-history\">Username</td><td
+        class=\"row-category-history\">Field</td><td class=\"row-category-history\">Change</td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-16 13:29</td><td class=\"print\"><a
+        href=\"https://caml.inria.fr/mantis/view_user_page.php?id=798\">cyocum</a></td><td
+        class=\"print\">New Issue</td><td class=\"print\"></td></tr><tr class=\"print\"><td
+        class=\"print\">2018-03-16 13:49</td><td class=\"print\"><a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=18\">frisch</a></td><td
+        class=\"print\">Note Added: 0018949</td><td class=\"print\"></td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-16 14:06</td><td class=\"print\"><a
+        href=\"https://caml.inria.fr/mantis/view_user_page.php?id=326\">xclerc</a></td><td
+        class=\"print\">Note Added: 0018951</td><td class=\"print\"></td></tr><tr
+        class=\"print\"><td class=\"print\">2018-03-16 17:21</td><td class=\"print\"><a
+        href=\"https://caml.inria.fr/mantis/view_user_page.php?id=90\">dbuenzli</a></td><td
+        class=\"print\">Note Added: 0018952</td><td class=\"print\"></td></tr></table>\n<br
+        />\n<table class=\"width100\" cellspacing=\"1\">\n<tr>\n\t<td class=\"form-title\"
+        colspan=\"2\">\n\t\tNotes\t</td>\n</tr>\n<tr>\n\t<td class=\"print-spacer\"
+        colspan=\"2\">\n\t\t<hr size=\"1\" />\n\t</td>\n</tr>\n<tr>\n\t<td class=\"nopad\"
+        valign=\"top\" width=\"20%\">\n\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t(0018949)\n\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=18\">frisch</a>&#160;&#160;&#160;\n\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t2018-03-16 13:49&#160;&#160;&#160;\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t</table>\n\t</td>\n\t<td
+        class=\"nopad\" valign=\"top\" width=\"85%\">\n\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\tIn general, you need to make sure that modules used
+        by dynlinked code are linked in the main program.  You'd have the same problem
+        if the dynlinked code wanted to use, say, Hasthbl, assuming this module is
+        not required by your main program.<br />\r\nI'd recommend using -linkall for
+        application that rely on Dynlink to avoid such problems.<br />\r\n<br />\r\nThe
+        reported issue is a bit specific in that the module is referenced implicitly.
+        \ One could perhaps force a link dependency from Dynlink to all camlinternal*
+        modules, but I'm not sure it is worth it.\t\t\t</td>\n\t\t</tr>\n\t\t</table>\n\t</td>\n</tr>\n<tr>\n\t<td
+        class=\"print-spacer\" colspan=\"2\">\n\t\t<hr size=\"1\" />\n\t</td>\n</tr>\n<tr>\n\t<td
+        class=\"nopad\" valign=\"top\" width=\"20%\">\n\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t(0018951)\n\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=326\">xclerc</a>&#160;&#160;&#160;\n\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t2018-03-16 14:06&#160;&#160;&#160;\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t</table>\n\t</td>\n\t<td
+        class=\"nopad\" valign=\"top\" width=\"85%\">\n\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t&gt; The reported issue is a bit specific in that
+        the module is referenced implicitly.<br />\r\n<br />\r\nIndeed, the user has
+        to be aware of an implementation detail, and cannot<br />\r\ne.g. use ocamldep
+        to determine the set of needed modules.\t\t\t</td>\n\t\t</tr>\n\t\t</table>\n\t</td>\n</tr>\n<tr>\n\t<td
+        class=\"print-spacer\" colspan=\"2\">\n\t\t<hr size=\"1\" />\n\t</td>\n</tr>\n<tr>\n\t<td
+        class=\"nopad\" valign=\"top\" width=\"20%\">\n\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t(0018952)\n\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t<a href=\"https://caml.inria.fr/mantis/view_user_page.php?id=90\">dbuenzli</a>&#160;&#160;&#160;\n\t\t\t</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\t2018-03-16 17:21&#160;&#160;&#160;\n\t\t\t\t\t\t\t</td>\n\t\t</tr>\n\t\t</table>\n\t</td>\n\t<td
+        class=\"nopad\" valign=\"top\" width=\"85%\">\n\t\t<table class=\"hide\" cellspacing=\"1\">\n\t\t<tr>\n\t\t\t<td
+        class=\"print\">\n\t\t\t\tIf you assume `.cmxa`'s are built the same way you
+        can catch these dependencies with `ocamlobjinfo`.\t\t\t</td>\n\t\t</tr>\n\t\t</table>\n\t</td>\n</tr>\n</table>\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Wed, 21 Mar 2018 10:51:15 GMT
+recorded_with: VCR 2.9.3

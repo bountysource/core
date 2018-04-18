@@ -94,38 +94,10 @@ angular.module('app').config(function ($routeProvider) {
   }])
 
   .controller("ReportsController", ['$scope', '$routeParams', '$api', '$filter', '$location', 'Month', 'EscrowReport', 'LiabilityReport', function ($scope, $routeParams, $api, $filter, $location, Month, EscrowReport, LiabilityReport) {
-    $scope.months = [
-      new Month('December 2014',  '12-01-2014', '01-01-2015'),
-      new Month('November 2014',  '11-01-2014', '12-01-2014'),
-      new Month('October 2014',   '10-01-2014', '11-01-2014'),
-      new Month('September 2014', '09-01-2014', '10-01-2014'),
-      new Month('August 2014',    '08-01-2014', '09-01-2014'),
-      new Month('July 2014',      '07-01-2014', '08-01-2014'),
-      new Month('June 2014',      '06-01-2014', '07-01-2014'),
-      new Month('May 2014',       '05-01-2014', '06-01-2014'),
-      new Month('April 2014',     '04-01-2014', '05-01-2014'),
-      new Month('March 2014',     '03-01-2014', '04-01-2014'),
-      new Month('February 2014' , '02-01-2014', '03-01-2014'),
-      new Month('January 2014' ,  '01-01-2014', '02-01-2014'),
-      new Month('December 2013',  '12-01-2013', '01-01-2014'),
-      new Month('November 2013',  '11-01-2013', '12-01-2013'),
-      new Month('October 2013',   '10-01-2013', '11-01-2013'),
-      new Month('September 2013', '09-01-2013', '10-01-2013'),
-      new Month('August 2013',    '08-01-2013', '09-01-2013'),
-      new Month('July 2013',      '07-01-2013', '08-01-2013'),
-      new Month('June 2013',      '06-01-2013', '07-01-2013'),
-      new Month('May 2013',       '05-01-2013', '06-01-2013'),
-      new Month('April 2013',     '04-01-2013', '05-01-2013'),
-      new Month('March 2013',     '03-01-2013', '04-01-2013'),
-      new Month('February 2013',  '02-01-2013', '03-01-2013'),
-      new Month('January 2013',   '01-01-2013', '02-01-2013'),
-      new Month('December 2012',  '12-01-2012', '01-01-2013'),
-      new Month('November 2012',  '11-01-2012', '12-01-2012'),
-      new Month('October 2012',   '10-01-2012', '11-01-2012'),
-      new Month('September 2012', '09-01-2012', '10-01-2012')
-    ];
-
-    $scope.selectedMonth = $scope.months[0];
+    var now = new Date();
+    var yearAndMonth = now.getFullYear() + '-' + ('0' + (now.getMonth()+1)).slice(-2) + '-';
+    $scope.startDate = yearAndMonth + '01';
+    $scope.endDate = yearAndMonth + ('0' + (now.getDate()+1)).slice(-2);
 
     $scope.sweepAccountText = 'Sweep Fee Accounts';
     $scope.sweepAccounts = function() {
@@ -142,12 +114,6 @@ angular.module('app').config(function ($routeProvider) {
         }
       });
     };
-
-    $scope.$watch('selectedMonth', function(month) {
-      if (month) {
-        $scope.buildReports();
-      }
-    }, angular.noop, true);
 
     $scope.paypalEscrowReport = new EscrowReport();
     $scope.googleWalletEscrowReport = new EscrowReport();
@@ -173,47 +139,47 @@ angular.module('app').config(function ($routeProvider) {
     };
 
     $scope.buildReports = function() {
-      if ($scope.selectedMonth) {
+      if ($scope.startDate && $scope.endDate) {
         var payload = {
-          start_date: $scope.selectedMonth.start_date,
-          end_date: $scope.selectedMonth.end_date
+          start_date: $scope.startDate,
+          end_date: $scope.endDate
         };
 
         // PayPal Report
-        $api.call('/admin/report/paypal', payload, function(response) {
-          console.log(response.data);
-          $scope.paypalEscrowReport.updateAttributes(response.data);
-        });
+        // $api.call('/admin/report/paypal', payload, function(response) {
+        //   console.log(response.data);
+        //   $scope.paypalEscrowReport.updateAttributes(response.data);
+        // });
 
         // PayPal Splits
-        $api.call('/admin/splits', angular.extend(angular.copy(payload), { account_id: 3 }), function(response) {
-          $scope.paypalEscrowReport.updateSplits(response.data);
-        });
+        // $api.call('/admin/splits', angular.extend(angular.copy(payload), { account_id: 3 }), function(response) {
+        //   $scope.paypalEscrowReport.updateSplits(response.data);
+        // });
 
         // Google Wallet Report
-        $api.call('/admin/report/google_wallet', payload, function(response) {
-          $scope.googleWalletEscrowReport.updateAttributes(response.data);
-        });
+        // $api.call('/admin/report/google_wallet', payload, function(response) {
+        //   $scope.googleWalletEscrowReport.updateAttributes(response.data);
+        // });
 
         // Google Wallet Splits
-        $api.call('/admin/splits', angular.extend(angular.copy(payload), { account_id: 284365 }), function(response) {
-          $scope.googleWalletEscrowReport.updateSplits(response.data);
-        });
+        // $api.call('/admin/splits', angular.extend(angular.copy(payload), { account_id: 284365 }), function(response) {
+        //   $scope.googleWalletEscrowReport.updateSplits(response.data);
+        // });
 
         // Bank of America Report
-        $api.call('/admin/report/bank_of_america', payload, function(response) {
-          $scope.bankOfAmericaEscrowReport.updateAttributes(response.data);
-        });
+        // $api.call('/admin/report/bank_of_america', payload, function(response) {
+        //   $scope.bankOfAmericaEscrowReport.updateAttributes(response.data);
+        // });
 
         // Bank of America Splits
-        $api.call('/admin/splits', angular.extend(angular.copy(payload), { account_id: 284345 }), function(response) {
-          $scope.bankOfAmericaEscrowReport.updateSplits(response.data);
-        });
+        // $api.call('/admin/splits', angular.extend(angular.copy(payload), { account_id: 284345 }), function(response) {
+        //   $scope.bankOfAmericaEscrowReport.updateSplits(response.data);
+        // });
 
         // Internal report
-        $api.call('/admin/report/liability', payload, function(response) {
-          $scope.internalReport.updateAttributes(response.data);
-        });
+        // $api.call('/admin/report/liability', payload, function(response) {
+        //   $scope.internalReport.updateAttributes(response.data);
+        // });
 
 //        // Fetch list of Accounts for Liability report
 //        $api.call('/admin/report/accounts', payload, function(response) {

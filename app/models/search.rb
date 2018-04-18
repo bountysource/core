@@ -3,17 +3,13 @@
 # Table name: searches
 #
 #  id         :integer          not null, primary key
-#  query      :string(255)      not null
+#  query      :string           not null
 #  person_id  :integer
 #  created_at :datetime         not null
-#  params     :text             default("--- {}\n")
+#  params     :text             default({})
 #
 
-class Search < ActiveRecord::Base
-
-  # ATTRIBUTES
-  attr_accessible :person, :query, :params
-
+class Search < ApplicationRecord
   serialize :params
 
   # RELATIONSHIPS
@@ -49,8 +45,7 @@ class Search < ActiveRecord::Base
   end
 
   def self.tracker_typeahead(query)
-    escaped_query = Riddle::Query.escape(query)
-    tracker_search = Tracker.search("*#{escaped_query}*", select: '*, weight() + issue_count*10 + forks*10 + watchers*10 as custom_weight', order: 'bounty_total DESC, custom_weight DESC').to_a
+    tracker_search = Tracker.search(query, fields: [:name], order: {bounty_total: :desc}, match: :word_start, limit: 5, boost_by: [:forks, :watchers]).to_a
     reject_merged_trackers!(tracker_search)
   end
 
@@ -59,25 +54,36 @@ class Search < ActiveRecord::Base
 
     page = params[:page] || 1
     per_page = params[:per_page].to_i || 50
-    query = params[:search] || ""
-    min = params[:min].present? ? params[:min].to_f : 0.0
+    query = params[:search] || "*"
+    min = params[:min].present? ? params[:min].to_f : 1.0
     max = params[:max].present? ? params[:max].to_f : 10_000.0
-    order = ["bounty_total", "backer_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
+    order = ["bounty_total", "backers_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
     direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'asc'
-    languages = params[:languages].present? ? params[:languages].split(',') : []
-    trackers = params[:trackers].present? ? params[:trackers].split(',') : []
+    languages = params[:languages].present? ? params[:languages].split(',').map(&:to_i) : []
+    trackers = params[:trackers].present? ? params[:trackers].split(',').map(&:to_i) : []
+    can_add_bounty = params[:can_add_bounty] == "all" ? [] : true
     #build a "with" hash for the filtering options. order hash for sorting options.
-    with_hash = {tracker_ids: trackers, language_ids: languages, :bounty_total => (min..max)}.select {|param, value| value.present?}
+    with_hash = {
+      tracker_ids: trackers,
+      language_ids: languages,
+      can_add_bounty: can_add_bounty,
+      bounty_total: { gte: min, lte: max },
+      paid_out: false
+    }.select {|param, value| value.present?}
 
     #if an order is specified, build the order query. otherwise, pass along an empty string to order
     if order
-      order_hash = "#{order} #{direction}"
+      order_hash = {order => direction}
     else
-      order_hash = ''
+      order_hash = nil
     end
 
-    # Avoid Model.search syntax for STI. Causes long 'Select DISTINCT' query on the type column.
-    bounteous_issue_search = ThinkingSphinx.search(query, :indices => ['bounty_search_core'], :per_page => per_page, :page => page, :sql => {:include => {:tracker => :languages}}, :with => with_hash, :order => order_hash)
+    bounteous_issue_search = Issue.search(query, where: with_hash, 
+      per_page: per_page, page: page, includes: [tracker: :languages],
+      fields: ["title^50", "tracker_name^25", "languages_name^5", "body"],
+      order: order_hash).to_a
+
+
     reject_merged_issues!(bounteous_issue_search)
 
     {
@@ -87,62 +93,62 @@ class Search < ActiveRecord::Base
   end
 
   def self.team_issue_search(params)
-    # NB: although indexed, owner_type currently does not work
-    #parse params to boolean
-    params[:show_team_issues] = params[:show_team_issues].to_bool
-    params[:show_related_issues] = params[:show_related_issues].to_bool
-    # save search record
-    create(query: "team_issue_search", params: params)
-    
-    # parse datetime parameter
-    date_range = Search.parse_datetime(params[:created_at])
-    activity_range = Search.parse_datetime(params[:last_event_created_at])
+    # # NB: although indexed, owner_type currently does not work
+    # #parse params to boolean
+    # params[:show_team_issues] = params[:show_team_issues].to_bool
+    # params[:show_related_issues] = params[:show_related_issues].to_bool
+    # # save search record
+    # create(query: "team_issue_search", params: params)
 
-    ## Build with/ without conditions
-    # we only care about issues for the team making the query
-    # only return open issues
-    with_hash = { team_id: params[:owner_id], can_add_bounty: true}
-    without_hash = {}
+    # # parse datetime parameter
+    # date_range = Search.parse_datetime(params[:created_at])
+    # activity_range = Search.parse_datetime(params[:last_event_created_at])
 
-    ####### TODO Add team_id to with_hash to restrict results to only the team doing the query. use team_ids column.
+    # ## Build with/ without conditions
+    # # we only care about issues for the team making the query
+    # # only return open issues
+    # with_hash = { team_id: params[:owner_id], can_add_bounty: true}
+    # without_hash = {}
 
-    if params[:show_team_issues] && params[:show_related_issues]
-      #don't add any conditions to search. will return all issues
-    elsif params[:show_team_issues]
-      #only show teams issues
-      with_hash.merge!(owner_id: params[:owner_id])
-    elsif params[:show_related_issues]
-      #only show related issues
-      without_hash.merge!(owner_id: params[:owner_id])
-    else
-      #they didn't want either so return nothing?
-      return { issues: [], issues_count: 0}
-    end
+    # ####### TODO Add team_id to with_hash to restrict results to only the team doing the query. use team_ids column.
 
-    # add date constraints
-    with_hash.merge!(remote_created_at: date_range, last_event_created_at: activity_range).select! { |key, value|  value.present? }
+    # if params[:show_team_issues] && params[:show_related_issues]
+    #   #don't add any conditions to search. will return all issues
+    # elsif params[:show_team_issues]
+    #   #only show teams issues
+    #   with_hash.merge!(owner_id: params[:owner_id])
+    # elsif params[:show_related_issues]
+    #   #only show related issues
+    #   without_hash.merge!(owner_id: params[:owner_id])
+    # else
+    #   #they didn't want either so return nothing?
+    #   return { issues: [], issues_count: 0}
+    # end
 
-    #Build ordering conditions
-    order = ["bounty_total", "participants_count", "thumbs_up_count", "remote_created_at", "rank"].include?(params[:order]) ? params[:order] : "rank"
-    direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'desc'
-    order_hash = "#{order} #{direction}"
+    # # add date constraints
+    # with_hash.merge!(remote_created_at: date_range, last_event_created_at: activity_range).select! { |key, value|  value.present? }
 
-    search_result = ThinkingSphinx.search(
-      params[:query],
-      :indices => ["team_issue_core"],
-      :page => params[:page] || 1,
-      :per_page => params[:per_page] || 25,
-      :sql => { :include => :issue },
-      :with => with_hash,
-      :without => without_hash,
-      :order => order_hash,
-      :star => true
-    )
+    # #Build ordering conditions
+    # order = ["bounty_total", "participants_count", "thumbs_up_count", "remote_created_at", "rank"].include?(params[:order]) ? params[:order] : "rank"
+    # direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'desc'
+    # order_hash = "#{order} #{direction}"
 
-    {
-      issue_ranks: search_result,
-      issues_count: search_result.total_entries
-    }
+    # search_result = ThinkingSphinx.search(
+    #   params[:query],
+    #   :indices => ["team_issue_core"],
+    #   :page => params[:page] || 1,
+    #   :per_page => params[:per_page] || 25,
+    #   :sql => { :include => :issue },
+    #   :with => with_hash,
+    #   :without => without_hash,
+    #   :order => order_hash,
+    #   :star => true
+    # )
+
+    # {
+    #   issue_ranks: search_result,
+    #   issues_count: search_result.total_entries
+    # }
   end
 
   # Get all of the bounty searches
@@ -156,7 +162,7 @@ class Search < ActiveRecord::Base
   end
 
 protected
-  
+
   def self.parse_datetime(date_string)
     parsed_datetime = DateTime.strptime(date_string, "%m/%d/%Y") unless date_string.blank?
     if parsed_datetime.try(:<, DateTime.now)
@@ -178,20 +184,31 @@ protected
   end
 
   def local_trackers_and_issues
-    escaped_query = Riddle::Query.escape(query)
     # Filters out Trackers that have been merged.
-    tracker_search = ThinkingSphinx.search(escaped_query, :indices => ['tracker_core'], select: '*, weight() + issue_count*10 + forks*10 + watchers*10 as custom_weight', order: 'bounty_total DESC, custom_weight DESC', without: { issue_count: 0 })
+
+    tracker_search = Tracker.search(query, 
+      fields: [:name], 
+      order: {bounty_total: :desc}, 
+      match: :word_start, 
+      boost_by: [:forks, :watchers],
+      limit: 50).to_a
     self.class.reject_merged_trackers!(tracker_search)
- 
+
     # Filters out Issues whose Trackers have been merged.
-    issue_search = ThinkingSphinx.search(escaped_query, :indices => ['issue_core'], select: '*, weight() + comment_count*25 as custom_weight', order: 'bounty_total DESC, custom_weight DESC')
+    issue_search = Issue.search(query, 
+      order: { bounty_total: :desc }, 
+      boost_by: {comments_count: {factor: 10}}, 
+      fields: ["title^50", "tracker_name^25", "languages_name^5", "body"],
+      limit: 50
+    ).to_a
+
     self.class.reject_merged_issues!(issue_search)
- 
+
     {
       trackers: tracker_search,
-      trackers_total: tracker_search.total_entries,
+      trackers_total: tracker_search.count,
       issues: issue_search,
-      issues_total: issue_search.total_entries
+      issues_total: issue_search.count
     }
   end
 

@@ -7,7 +7,7 @@ node(:handler) do |delayed_job|
         object_attributes: {},
         method_name: handler.method_name,
         args: handler.args.map do |arg|
-          if arg.is_a?(ActiveRecord::Base)
+          if arg.is_a?(ApplicationRecord)
             "#{arg.class.name} (#{arg.id})"
           elsif arg.is_a?(Array) || arg.is_a?(Hash) || arg.is_a?(String)
             arg
@@ -23,7 +23,7 @@ node(:handler) do |delayed_job|
         object_attributes: handler.object.try(:attributes) || {},
         method_name: handler.method_name,
         args: handler.args.map do |arg|
-          if arg.is_a?(ActiveRecord::Base)
+          if arg.is_a?(ApplicationRecord)
             "#{arg.class.name} (#{arg.id})"
           elsif arg.is_a?(Array) || arg.is_a?(Hash) || arg.is_a?(String)
             arg

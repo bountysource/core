@@ -3,8 +3,8 @@
 # Table name: payment_notifications
 #
 #  id                :integer          not null, primary key
-#  type              :string(255)      not null
-#  txn_id            :string(255)
+#  type              :string           not null
+#  txn_id            :string
 #  raw_post          :text
 #  order_id          :integer
 #  created_at        :datetime
@@ -20,10 +20,7 @@
 #  index_payment_notifications_on_type      (type)
 #
 
-class PaymentNotification < ActiveRecord::Base
-
-  attr_accessible :raw_post, :raw_json, :txn_id, :order, :secret_matched, :shopping_cart
-
+class PaymentNotification < ApplicationRecord
   belongs_to :order, class_name: 'Transaction::Order'
   belongs_to :shopping_cart
   belongs_to :payment_method
@@ -42,6 +39,11 @@ class PaymentNotification < ActiveRecord::Base
     notification.secret_matched = secret_matched
 
     notification.save! and notification
+  end
+
+  def self.admin_search(query)
+    transaction_ids = where(txn_id: query).map(&:shopping_cart).compact.map(&:order_id)
+    Transaction.where(id: transaction_ids)
   end
 
   def params

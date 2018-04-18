@@ -3,7 +3,7 @@
 # Table name: currencies
 #
 #  id         :integer          not null, primary key
-#  type       :string(255)      not null
+#  type       :string           not null
 #  value      :decimal(, )      not null
 #  created_at :datetime
 #  updated_at :datetime
@@ -17,13 +17,8 @@
 class Currency::Bitcoin < Currency
 
   def self.sync
-    response = HTTParty.get('https://coinbase.com/api/v1/prices/buy')
-
-    if response.success?
-      model = first || new
-      model.value = response.parsed_response['amount']
-      model.save
-    end
+    response = HTTParty.get('https://api.coinmarketcap.com/v1/ticker/bitcoin/')
+    self.update_price(response)
   end
 
   def self.display_name

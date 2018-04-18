@@ -3,7 +3,7 @@
 # Table name: payment_methods
 #
 #  id         :integer          not null, primary key
-#  type       :string(255)      not null
+#  type       :string           not null
 #  person_id  :integer          not null
 #  data       :json             not null
 #  created_at :datetime
@@ -61,7 +61,7 @@ class PaymentMethod::PaypalReferenceTransaction < PaymentMethod
   end
 
   def charge(amount, descriptor='Bountysource')
-    raise "Hundred million is a bit steep..." unless amount < 10**8
+    raise "Hundred million is a bit steep..." unless amount < Money.new(10**10)
 
     # api call to make charge
     response = self.class.api(
@@ -76,7 +76,7 @@ class PaymentMethod::PaypalReferenceTransaction < PaymentMethod
 
     # save it to the DB
     notifications.create!(
-      raw_json: response.to_json,
+      raw_json: JSON.parse(response.to_json),
       txn_id: response['TRANSACTIONID'] || 'error'
     )
   end

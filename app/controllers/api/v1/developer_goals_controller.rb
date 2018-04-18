@@ -1,12 +1,12 @@
 class Api::V1::DeveloperGoalsController < ApplicationController
   
-  before_filter :require_auth, only: [:create, :update, :show, :destroy]
-  before_filter require_issue(:id)
-  before_filter :require_developer_goals, only: [:update, :show, :destroy]
+  before_action :require_auth, only: [:create, :update, :show, :destroy]
+  before_action require_issue(:id)
+  before_action :require_developer_goals, only: [:update, :show, :destroy]
   
-  after_filter log_activity(Issue::Event::SET_DEVELOPER_GOAL), only: [:create]
-  after_filter log_activity(Issue::Event::UPDATE_DEVELOPER_GOAL), only: [:update]
-  after_filter log_activity(Issue::Event::DESTROY_DEVELOPER_GOAL), only: [:destroy]
+  after_action log_activity(Issue::Event::SET_DEVELOPER_GOAL), only: [:create]
+  after_action log_activity(Issue::Event::UPDATE_DEVELOPER_GOAL), only: [:update]
+  after_action log_activity(Issue::Event::DESTROY_DEVELOPER_GOAL), only: [:destroy]
 
   def create
     require_params :amount
@@ -45,7 +45,7 @@ class Api::V1::DeveloperGoalsController < ApplicationController
 
   def destroy
     if @developer_goal.destroy
-      render nothing: true, status: :ok
+      head :ok
     else
       render json: { error: @developer_goal.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end

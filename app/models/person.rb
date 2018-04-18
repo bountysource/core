@@ -3,33 +3,39 @@
 # Table name: people
 #
 #  id                   :integer          not null, primary key
-#  first_name           :string(255)
-#  last_name            :string(255)
-#  display_name         :string(255)
-#  email                :string(255)      not null
+#  first_name           :string
+#  last_name            :string
+#  display_name         :string
+#  email                :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  buyer_id             :string(255)
-#  password_digest      :string(255)
+#  buyer_id             :string
+#  password_digest      :string
 #  account_completed    :boolean          default(FALSE)
-#  paypal_email         :string(255)
+#  paypal_email         :string
 #  last_seen_at         :datetime
 #  last_bulk_mailed_at  :datetime
 #  admin                :boolean          default(FALSE)
 #  bio                  :text
-#  location             :string(255)
-#  url                  :string(255)
-#  company              :string(255)
-#  public_email         :string(255)
+#  location             :string
+#  url                  :string
+#  company              :string
+#  public_email         :string
 #  accepted_terms_at    :datetime
-#  cloudinary_id        :string(255)
+#  cloudinary_id        :string
 #  deleted              :boolean          default(FALSE), not null
 #  profile_completed    :boolean          default(FALSE), not null
 #  shopping_cart_id     :integer
-#  stripe_customer_id   :string(255)
+#  stripe_customer_id   :string
 #  suspended_at         :datetime
 #  bounty_hunter        :boolean
 #  quickbooks_vendor_id :integer
+#  reset_digest         :string
+#  reset_sent_at        :datetime
+#  confirmation_token   :string
+#  confirmed_at         :datetime
+#  confirmation_sent_at :datetime
+#  unconfirmed_email    :string
 #
 # Indexes
 #
@@ -37,20 +43,19 @@
 #  index_people_on_shopping_cart_id  (shopping_cart_id)
 #
 
-class Person < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :display_name, :email, :password, :password_confirmation, :github_account,
-                  :paypal_email, :paypal_email_confirmation, :account, :last_seen_at,
-                  :bio, :location, :public_email, :url, :company,
-                  :accepted_terms_at, :terms, :profile_completed, :shopping_cart_id, :suspended_at, :bounty_hunter
-
+class Person < ApplicationRecord
+  include PasswordResetable
+  include EmailVerification
   # temporarily holds a raw access token... useful in controllers-and-views
   attr_accessor :current_access_token
+
+  before_save :format_url
 
   has_cloudinary_image
 
   has_paper_trail :only => [:first_name, :last_name, :display_name, :email, :password, :bio, :location, :public_email, :url, :company]
 
-  has_account class_name: Account::Personal
+  has_account class_name: 'Account::Personal'
   has_many :orders, -> { where('type LIKE ?', 'Transaction::Order%') }, class_name: 'Transaction'
 
   has_many :bounty_claims
@@ -60,21 +65,21 @@ class Person < ActiveRecord::Base
   has_many :saved_search_tabs
 
   # there is no longer a Github::Commit model -- CAB
-  # has_many :commits, class_name: Github::Commit
+  # has_many :commits, class_name: 'Github::Commit'
   has_many :fundraisers
   has_many :searches
-  has_many :person_relations, class_name: PersonRelation::Base
+  has_many :person_relations, class_name: 'PersonRelation::Base'
 
   has_many :friends,
-           class_name:  Person,
+           class_name:  'Person',
            through:     :person_relations,
            source:      :target_person
 
   # linked accounts
-  has_many :linked_accounts,  class_name: LinkedAccount::Base
-  has_one :github_account,    class_name: LinkedAccount::Github::User
-  has_one :facebook_account,  class_name: LinkedAccount::Facebook
-  has_one :twitter_account,   class_name: LinkedAccount::Twitter
+  has_many :linked_accounts,  class_name: 'LinkedAccount::Base'
+  has_one :github_account,    class_name: 'LinkedAccount::Github::User'
+  has_one :facebook_account,  class_name: 'LinkedAccount::Facebook'
+  has_one :twitter_account,   class_name: 'LinkedAccount::Twitter'
 
   has_many :tracker_plugins
   has_many :tracker_relations, through: :linked_accounts
@@ -92,14 +97,14 @@ class Person < ActiveRecord::Base
   has_many :solutions
   has_many :solution_events, through: :solutions
 
-  has_many :language_relations, class_name: LanguagePersonRelation
+  has_many :language_relations, class_name: 'LanguagePersonRelation'
 
   has_many :developer_goals
 
   has_many :activity_logs
+  has_many :issue_rank_caches, class_name: 'IssueRankCache'
   has_many :ranked_issues, through: :issue_rank_caches, source: :issue
-  has_many :issue_rank_caches, class_name: IssueRankCache
-  has_many :tracker_rank_caches, class_name: TrackerRankCache
+  has_many :tracker_rank_caches, class_name: 'TrackerRankCache'
 
   has_many :shopping_carts
 
@@ -134,7 +139,7 @@ class Person < ActiveRecord::Base
   validates :password,
             length: { minimum: 8 },
             format: { with: /[a-z].*[0-9]|[0-9].*[a-z]/i, message: 'must contain a letter and a number' },
-            if: 'password_digest.blank? || !password.blank?'
+            if: Proc.new { |p| p.password_digest.blank? || !p.password.blank? }
 
   # NOTE: this only validates if accept is defined (aka: nil is valid)
   validates_acceptance_of :terms, :accept => true
@@ -160,7 +165,8 @@ class Person < ActiveRecord::Base
     .includes(:twitter_account, :github_account)
   }
 
-  scope :active, lambda { where.not(deleted: true).where(suspended_at: nil) }
+  scope :not_deleted, lambda { where.not(deleted: true).where(suspended_at: nil) }
+  scope :active, lambda { not_deleted.where.not(confirmed_at: nil) }
 
   scope :bounty_hunters, lambda { |options={}|
     retval = active.where(bounty_hunter: true)
@@ -172,7 +178,7 @@ class Person < ActiveRecord::Base
     if options[:team]
       retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true and issue_id in (select issue_id from bounties where owner_type='Team' and owner_id=#{options[:team].id})),0) as bounty_claim_total")
     elsif options[:since]
-      retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true and created_at > #{ActiveRecord::Base.connection.quote(options[:since])}),0) as bounty_claim_total")
+      retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true and created_at > #{ApplicationRecord.connection.quote(options[:since])}),0) as bounty_claim_total")
     else
       retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true),0) as bounty_claim_total")
     end
@@ -188,7 +194,7 @@ class Person < ActiveRecord::Base
   end
 
   after_save do
-    self.send_email(:account_created) if changes["email"] && changes["email"].first.nil?
+    self.send_email(:account_created) if saved_change_to_email? && email_before_last_save.nil?
   end
 
   # NOTE: opting into a team implies becoming global bounty hunter
@@ -246,26 +252,6 @@ class Person < ActiveRecord::Base
   def self.authenticate(email, password)
     self.active.find_by_email(email).try(:authenticate, password)
   end
-
-  # support sha1 and mysql style passwords with auto-updating
-  def authenticate_with_legacy_passwords(password)
-    return false if password.blank?
-
-    case password_digest
-      when /^[0-9a-f]{40}$/ # sha1
-        if Digest::SHA1.hexdigest(password) == password_digest
-          update_attribute(:password, password)  #intentionally skip validations via update_attribute
-          send_email(:account_created)
-          return self
-        else
-          return false
-        end
-
-      else
-        authenticate_without_legacy_passwords(password)
-    end
-  end
-  alias_method_chain :authenticate, :legacy_passwords
 
   def self.distinct_backers_count
     self.joins(:bounties).count(distinct: true)  # distinct_backers.count does NOT work
@@ -341,11 +327,6 @@ class Person < ActiveRecord::Base
   #  self.account_completed
   #end
 
-  # emailed to the person, so that they can reset their password.
-  def reset_password_code
-    Digest::SHA1.hexdigest("#{self.id}:#{self.email}:#{self.password_digest}").first(16)
-  end
-
   def display_name
     return attributes['display_name'] unless attributes['display_name'].blank?
     return "#{attributes['first_name']} #{attributes['last_name']}" unless attributes['first_name'].blank? && attributes['last_name'].blank?
@@ -375,7 +356,7 @@ class Person < ActiveRecord::Base
 
   def can_view?(model)
     return true if admin?
-    return false unless model.is_a? ActiveRecord::Base
+    return false unless model.is_a? ApplicationRecord
 
     # special cases
     case model
@@ -507,7 +488,7 @@ class Person < ActiveRecord::Base
   # Null out personal information, but keep all models around.
   # Yeah, I know I am using destroy instead of delete_all. I want validations to run.
   def safe_destroy
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       # Person attributes stripped away
       self.first_name = '[deleted]'
       self.last_name = '[deleted]'
@@ -523,7 +504,7 @@ class Person < ActiveRecord::Base
       self.save!
 
       # Clear image_url
-      ActiveRecord::Base.connection.execute("update people set cloudinary_id = NULL where id = #{id}")
+      ApplicationRecord.connection.execute("update people set cloudinary_id = NULL where id = #{id}")
 
       # Delete unpublished Fundraisers
       fundraisers.where(published: false).find_each(&:destroy)
@@ -534,8 +515,8 @@ class Person < ActiveRecord::Base
       # Make Pledges and Bounties anonymous
       bounties.find_each { |bounty| bounty.owner_id = nil ; bounty.owner_type = nil ; bounty.save! }
       pledges.find_each { |pledge| pledge.owner_id = nil ; pledge.owner_type = nil ; pledge.save! }
-      ActiveRecord::Base.connection.execute("update bounties set anonymous = 't' where person_id = #{id}")
-      ActiveRecord::Base.connection.execute("update pledges set anonymous = 't' where person_id = #{id}")
+      ApplicationRecord.connection.execute("update bounties set anonymous = 't' where person_id = #{id}")
+      ApplicationRecord.connection.execute("update pledges set anonymous = 't' where person_id = #{id}")
 
       # Can safely delete BountyClaims that were never accepted
       bounty_claims.where(collected: false).each(&:destroy)
@@ -571,6 +552,30 @@ class Person < ActiveRecord::Base
       end
       linked_accounts.where.not(type: 'LinkedAccount::Github::User').find_each(&:destroy)
 
+      # if there is any money left in their account, transfer it back to liability
+      if account && account.balance > 0
+        from_account = account
+        to_account = Account::Liability.instance
+        amount = from_account.balance
+
+        transaction = Transaction::InternalTransfer::DeletedOwner.create!(
+          audited: true,
+          description: "#{self.class.name}(#{id}) - $#{amount} owner deleted, reclaiming funds #{from_account.class.name}#{from_account.id} to #{to_account.class.name}(#{to_account.id})"
+        )
+
+        transaction.splits.create!(
+          amount: -1 * amount,
+          account: from_account,
+          item: self
+        )
+
+        transaction.splits.create!(
+          amount: amount,
+          account: to_account,
+          item: self
+        )
+      end
+
       update_attribute(:deleted, true)
     end
   end
@@ -581,7 +586,7 @@ class Person < ActiveRecord::Base
 
   # Set languages.
   def set_languages(*language_ids)
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       language_relations.update_all(active: false)
       language_ids.each do |language_id|
         relation = language_relations.where(language_id: language_id).first
@@ -664,6 +669,12 @@ protected
 
   def self.hash_access_token(person, time)
     Digest::SHA1.hexdigest("#{person.id}.#{time}.#{Api::Application.config.person_hash_secret}")
+  end
+
+  def format_url
+    if self.url
+      self.url = "https://#{self.url}" unless self.url[/^https?/]
+    end
   end
 
 end

@@ -12,10 +12,15 @@
               <h1>{{(tracker || issue.tracker).display_name}}</h1>
             </a>
             <h2>{{(tracker || issue.tracker).description}}</h2>
+
+            <a ng-href="{{(tracker || issue.tracker).remote_url}}" target="_blank" class="btn btn-gunmetal btn-small-radius font-weight-semibold" style='font-size: 12px'>
+              <span class='glyphicon glyphicon-new-window'></span>
+                View in
+              <name-for-external-link object-type="(tracker || issue.tracker).type"></name-for-external-link>
+            </a>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

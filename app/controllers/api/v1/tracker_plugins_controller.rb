@@ -1,11 +1,11 @@
 class Api::V1::TrackerPluginsController < ApplicationController
 
-  before_filter :require_auth
+  before_action :require_auth
 
-  before_filter require_tracker(:tracker_id), only: [:create, :show, :update, :destroy]
+  before_action require_tracker(:tracker_id), only: [:create, :show, :update, :destroy]
 
-  before_filter :require_tracker_plugin,  only: [:show, :update, :destroy]
-  before_filter :require_github_account, only: [:create]
+  before_action :require_tracker_plugin,  only: [:show, :update, :destroy]
+  before_action :require_github_account, only: [:create]
 
   def index
     @tracker_plugins = @person.tracker_plugins.includes(:tracker)
@@ -25,6 +25,8 @@ class Api::V1::TrackerPluginsController < ApplicationController
     @tracker_plugin.add_label = params[:add_label].to_bool if params.has_key?(:add_label)
     @tracker_plugin.label_name = params[:label_name] if params.has_key?(:label_name)
     @tracker_plugin.label_color = params[:label_color] if params.has_key?(:label_color)
+    @tracker_plugin.last_error = nil
+    @tracker_plugin.locked_at = nil
 
     @tracker_plugin.save!
     render "api/v1/tracker_plugins/show", status: :created
@@ -38,6 +40,11 @@ class Api::V1::TrackerPluginsController < ApplicationController
     @tracker_plugin.modify_body = params[:modify_body].to_bool if params.has_key?(:modify_body)
     @tracker_plugin.label_name = params[:label_name] if params.has_key?(:label_name)
     @tracker_plugin.label_color = params[:label_color] if params.has_key?(:label_color)
+    
+    if params.has_key?(:locked) && !params[:locked].to_bool
+      @tracker_plugin.last_error = nil
+      @tracker_plugin.locked_at = nil
+    end
 
     @tracker_plugin.save!
 

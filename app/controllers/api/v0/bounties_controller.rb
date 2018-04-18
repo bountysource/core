@@ -1,6 +1,6 @@
 class Api::V0::BountiesController < Api::V0::BaseController
 
-  before_filter :require_bounty, only: [:show, :move, :refund, :acknowledge, :unacknowledge, :update]
+  before_action :require_bounty, only: [:show, :move, :refund, :acknowledge, :unacknowledge, :update]
 
   def show
     render "api/v0/bounties/show"
@@ -55,9 +55,9 @@ class Api::V0::BountiesController < Api::V0::BaseController
 
   def acknowledge
     if @bounty.acknowledged_at?
-      render nothing: true, status: :not_modified
+      head :not_modified
     elsif @bounty.update_attributes(acknowledged_at: DateTime.now)
-      render nothing: true, status: :ok
+      head :ok
     else
       render json: { error: @bounty.errors.full_messages.to_sentence }, status: :bad_request
     end
@@ -65,9 +65,9 @@ class Api::V0::BountiesController < Api::V0::BaseController
 
   def unacknowledge
     if @bounty.acknowledged_at.nil?
-      render nothing: true, status: :not_modified
+      head :not_modified
     elsif @bounty.update_attributes(acknowledged_at: nil)
-      render nothing: true, status: :ok
+      head :ok
     else
       render json: { error: @bounty.errors.full_messages.to_sentence }, status: :bad_request
     end

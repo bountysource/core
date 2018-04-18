@@ -6,9 +6,9 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  remote_id            :integer
-#  url                  :string(255)      not null
-#  name                 :string(255)      not null
-#  full_name            :string(255)
+#  url                  :string           not null
+#  name                 :string           not null
+#  full_name            :string
 #  is_fork              :boolean          default(FALSE)
 #  watchers             :integer          default(0), not null
 #  forks                :integer          default(0)
@@ -22,21 +22,21 @@
 #  has_wiki             :boolean          default(FALSE), not null
 #  has_downloads        :boolean          default(FALSE), not null
 #  private              :boolean          default(FALSE), not null
-#  homepage             :string(255)
+#  homepage             :string
 #  sync_in_progress     :boolean          default(FALSE), not null
 #  bounty_total         :decimal(10, 2)   default(0.0), not null
 #  account_balance      :decimal(10, 2)   default(0.0)
-#  type                 :string(255)      default("Tracker"), not null
-#  cloudinary_id        :string(255)
+#  type                 :string           default("Tracker"), not null
+#  cloudinary_id        :string
 #  closed_issues        :integer          default(0), not null
 #  delta                :boolean          default(TRUE), not null
 #  can_edit             :boolean          default(TRUE), not null
 #  repo_url             :text
 #  rank                 :integer          default(0), not null
-#  remote_cloudinary_id :string(255)
-#  remote_name          :string(255)
+#  remote_cloudinary_id :string
+#  remote_name          :string
 #  remote_description   :text
-#  remote_homepage      :string(255)
+#  remote_homepage      :string
 #  remote_language_ids  :integer          default([]), is an Array
 #  language_ids         :integer          default([]), is an Array
 #  team_id              :integer
@@ -57,11 +57,6 @@
 #
 
 class Github::Repository < Tracker
-
-  # ATTRIBUTES
-  attr_accessible :watchers, :forks, :is_fork,
-                  :remote_id, :full_name, :pushed_at, :has_issues, :has_wiki, :has_downloads, :private, :homepage
-
   # RELATIONSHIPS
   has_many :issues, class_name: 'Github::Issue', foreign_key: :tracker_id
 
@@ -77,7 +72,7 @@ class Github::Repository < Tracker
   def remote_sync_if_necessary(options={})
     return if ENV['DISABLE_GITHUB']
 
-    if synced_at.nil?
+    if synced_at.nil? || deleted_at
       remote_sync(options)
     elsif synced_at < 15.minutes.ago
       delay.remote_sync(options)
@@ -88,20 +83,25 @@ class Github::Repository < Tracker
 
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
+    previous_synced_at = options[:force] ? nil : self.synced_at
+    update_from_github(options)
+    find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
 
-    unless deleted_at
-      previous_synced_at = options[:force] ? nil : self.synced_at
-      update_from_github(options)
-      find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
+    # these really shouldn't change, so let's only update the very first time
+    update_languages if previous_synced_at.nil?
 
-      # these really shouldn't change, so let's only update the very first time
-      update_languages if previous_synced_at.nil?
+    if deleted_at
+      update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
+      issues.each do |issue|
+        issue.update_attributes(deleted_at: nil, url: issue.url.partition("?deleted_at=").first)
+      end
     end
   rescue Github::API::NotFound
-    deleted_at = Time.now
-    update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
-    issues.each do |issue|
-      issue.update_attributes(deleted_at: deleted_at, url: issue.url + "?deleted_at=#{deleted_at.to_i}")
+    unless deleted_at
+      update_attributes(deleted_at: Time.now)
+      issues.each do |issue|
+        issue.update_attributes(deleted_at: Time.now)
+      end
     end
   end
 
@@ -122,7 +122,6 @@ class Github::Repository < Tracker
       params:         params,
       headers:        { 'If-Modified-Since' => if_modified_since }
     )
-
     # trigger an update on the underlying object if modified
     self.class.update_attributes_from_github_data(api_response.data, obj: self) if api_response.modified?
   end

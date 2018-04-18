@@ -4,15 +4,15 @@
 #
 #  id               :integer          not null, primary key
 #  person_id        :integer
-#  type             :string(255)
-#  uid              :integer          not null
-#  login            :string(255)
-#  first_name       :string(255)
-#  last_name        :string(255)
-#  email            :string(255)
-#  oauth_token      :string(255)
-#  oauth_secret     :string(255)
-#  permissions      :string(255)
+#  type             :string
+#  uid              :integer
+#  login            :string
+#  first_name       :string
+#  last_name        :string
+#  email            :string
+#  oauth_token      :string
+#  oauth_secret     :string
+#  permissions      :string
 #  synced_at        :datetime
 #  sync_in_progress :boolean          default(FALSE)
 #  followers        :integer          default(0)
@@ -21,10 +21,10 @@
 #  updated_at       :datetime
 #  account_balance  :decimal(10, 2)   default(0.0)
 #  anonymous        :boolean          default(FALSE), not null
-#  company          :string(255)
-#  location         :string(255)
+#  company          :string
+#  location         :string
 #  bio              :text
-#  cloudinary_id    :string(255)
+#  cloudinary_id    :string
 #  deleted_at       :datetime
 #
 # Indexes
@@ -39,9 +39,11 @@
 
 class LinkedAccount::Twitter < LinkedAccount::Base
 
+  validates :uid, presence: true
+
   # if we just added an oauth token, automatically follow @bountysource
   after_save do
-    follow_bountysource if changes.has_key?('oauth_token') && changes['oauth_token'].first == nil
+    follow_bountysource if saved_change_to_oauth_token? && oauth_token_before_last_save == nil
   end
 
   after_create do
@@ -66,14 +68,13 @@ class LinkedAccount::Twitter < LinkedAccount::Base
 
     # find or create Twitter account
     first_name, last_name = user_info['name'].split(/\s+/)
-    linked_account = LinkedAccount::Twitter.find_or_create_by_uid(
-      uid:        user_info['id'],
-      first_name: first_name,
-      last_name:  last_name,
-      login:      user_info['screen_name'],
-      email:      nil, # Note: email addresses are not available through the Twitter API
-      image_url:  "twitter:#{user_info['screen_name']}"
-    )
+    linked_account = LinkedAccount::Twitter.find_or_create_by(uid: user_info['id']) do |user|
+        user.first_name = first_name
+        user.last_name = last_name
+        user.login = user_info['screen_name']
+        user.email = nil # Note: email addresses are not available through the Twitter API
+        user.image_url = "twitter:#{user_info['screen_name']}"
+      end
 
     logger.error "\n#{access_token.params}\n"
 

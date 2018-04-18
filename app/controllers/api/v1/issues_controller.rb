@@ -1,10 +1,10 @@
 class Api::V1::IssuesController < ApplicationController
 
-  before_filter :require_auth, only: [:authored]
-  before_filter require_issue(:id), only: [:show, :bounties]
-  before_filter require_tracker(:tracker_id), only: [:index]
+  before_action :require_auth, only: [:authored]
+  before_action require_issue(:id), only: [:show, :bounties]
+  before_action require_tracker(:tracker_id), only: [:index]
 
-  after_filter log_activity(Issue::Event::VIEW), only: [:show]
+  after_action log_activity(Issue::Event::VIEW), only: [:show]
 
   def show
   end
@@ -36,10 +36,10 @@ class Api::V1::IssuesController < ApplicationController
       @issue_ranks = filter_by_tracker_owner(@issue_ranks)
 
       # Reject closed issues
-      @issue_ranks = @issue_ranks.where('issues.can_add_bounty=? and issues.deleted_at=?', true, nil)
+      @issue_ranks = @issue_ranks.joins(:issue).where('issues.can_add_bounty=? and issues.deleted_at=?', true, nil)
 
       # Calculate min/max ranks
-      @max_rank = @issue_ranks.active.first.rank
+      @max_rank = @issue_ranks.active.first.try(:rank)
 
       return render 'api/v1/doge_issues/ranked_index'
     end

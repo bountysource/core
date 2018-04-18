@@ -24,7 +24,7 @@ class Bugzilla::API < Tracker::RemoteAPI
 
   def self.extract_info_from_url(url, html)
     # extract some stuff from HTML
-    return nil unless html.match(/<div id="bugzilla-body"/)
+    return nil unless html.match(/id="bugzilla-body"/)
 
     # extract base_url and ensure we're at an action
     path, query = url.split('?',2)
@@ -44,9 +44,15 @@ class Bugzilla::API < Tracker::RemoteAPI
 
       # Try a slightly more hacky method if that failed to find the Product name
       if product_name.blank?
-        product_uri = URI.parse(doc.css("a[href^=describecomponents]").attr('href').text)
-        product_uri_params = Rack::Utils.parse_nested_query(product_uri.query)
-        product_name = product_uri_params["product"]
+        doc.css("a[href^=describecomponents]").each do |anchor| 
+          link = anchor.attr('href')
+          product_uri = URI.parse(link)
+          product_uri_params = Rack::Utils.parse_nested_query(product_uri.query)
+          if product_uri_params.key?("product")
+            product_name = product_uri_params["product"]
+            break
+          end
+        end
       end
 
       tracker_uri = URI.parse("#{base_url}buglist.cgi")

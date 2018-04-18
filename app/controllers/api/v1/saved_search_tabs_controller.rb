@@ -1,5 +1,5 @@
 class Api::V1::SavedSearchTabsController < ApplicationController
-  before_filter :find_person
+  before_action :find_person
 
   def index
     if @person

@@ -1,5 +1,0 @@
-production:
-  version: '2.1.4'
-
-staging:
-  version: '2.1.4'

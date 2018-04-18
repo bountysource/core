@@ -7,11 +7,11 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  number                   :integer
-#  url                      :string(255)      not null
+#  url                      :string           not null
 #  title                    :text
-#  labels                   :string(255)
+#  labels                   :string
 #  code                     :boolean          default(FALSE)
-#  state                    :string(255)
+#  state                    :string
 #  body                     :text
 #  remote_updated_at        :datetime
 #  remote_id                :integer
@@ -23,20 +23,20 @@
 #  comment_count            :integer          default(0)
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  bounty_total             :decimal(10, 2)   default(0.0), not null
-#  type                     :string(255)      default("Issue"), not null
-#  remote_type              :string(255)
-#  priority                 :string(255)
-#  milestone                :string(255)
+#  type                     :string           default("Issue"), not null
+#  remote_type              :string
+#  priority                 :string
+#  milestone                :string
 #  can_add_bounty           :boolean          default(FALSE), not null
 #  accepted_bounty_claim_id :integer
-#  author_name              :string(255)
-#  owner                    :string(255)
+#  author_name              :string
+#  owner                    :string
 #  paid_out                 :boolean          default(FALSE), not null
 #  participants_count       :integer
 #  thumbs_up_count          :integer
 #  votes_count              :integer
 #  watchers_count           :integer
-#  severity                 :string(255)
+#  severity                 :string
 #  delta                    :boolean          default(TRUE), not null
 #  author_linked_account_id :integer
 #  solution_started         :boolean          default(FALSE), not null
@@ -60,8 +60,7 @@
 #  index_issues_partial_thumbs_up_count           (thumbs_up_count)
 #
 
-class Issue < ActiveRecord::Base
-
+class Issue < ApplicationRecord
   STATIC_SUBCLASSNAMES = %w(
     Jira::Issue
     Bugzilla::Issue
@@ -79,19 +78,12 @@ class Issue < ActiveRecord::Base
 
   UNKNOWN_TITLE = '(Issue Title Unknown)'
 
-  # ATTRIBUTES
-  attr_accessible :title, :body, :url, :number,
-                  :featured, :tracker, :can_add_bounty, :bounty_total,
-                  :remote_created_at, :remote_updated_at, :remote_id, :synced_at,
-                  :comment_count, :participants_count, :thumbs_up_count, :votes_count, :watchers_count,
-                  :priority, :severity, :author_name, :owner, :author, :body_markdown
-
   has_paper_trail :only => [:remote_id, :url, :number, :title, :body, :body_markdown, :tracker_id, :can_add_bounty]
 
   has_many :bounties
   has_many :comments
-  has_many :languages, through: :tracker
   belongs_to :tracker
+  has_many :languages, through: :tracker
   has_many :bounty_claims
 
   has_many :developer_goals
@@ -209,6 +201,39 @@ class Issue < ActiveRecord::Base
   #
   #  where(sql_frags, *values).order('bounty_total desc, comment_count desc').limit(10)
   #}
+
+  # Mark Searchkick begin
+  searchkick word_start: [:title, :body, :tracker_name]
+  scope :search_import, -> { 
+    where(can_add_bounty: true)
+    .or(where('bounty_total > ?', 0))
+    .includes(:languages, :tracker, :bounties) 
+  }
+
+  def search_data
+    {
+      title: title,
+      body: body,
+      tracker_name: tracker.name,
+      languages_name: languages.map(&:name),
+      bounty_total: bounty_total,
+      language_ids: languages.map(&:id),
+      tracker_id: tracker_id,
+      can_add_bounty: can_add_bounty,
+      backers_count: bounties.length,
+      earliest_bounty: bounties.minimum(:created_at),
+      participants_count: participants_count,
+      thumbs_up_count: thumbs_up_count,
+      remote_created_at: remote_created_at,
+      comments_count: comment_count,
+      paid_out: paid_out
+    }
+  end
+
+  def should_index?
+    can_add_bounty? || (bounty_total > 0)
+  end
+  # Mark Searchkick end
 
   def premerge(bad_model)
     self.account.try(:merge!, bad_model.account) #merge accounts but keep splits/transactions
@@ -430,6 +455,8 @@ class Issue < ActiveRecord::Base
     return Takedown::SANITIZED_HTML if takendown?
     html = GitHub::Markdown.render_gfm(TrackerPlugin::GH.body_without_plugin(self)) if body_markdown
     html = (body||"").gsub(/<p><bountysource-plugin>[\s\S]*?<\/bountysource-plugin><\/p>/, '') unless html
+    # Remove badge if issue body already has a badge
+    html = html.gsub(/<a href="https:\/\/www.bountysource.com\/issues\/.*<img src="https:\/\/api.bountysource.com\/badge.*"><\/a>/, '')
     html = ActionController::Base.helpers.sanitize(html)
     html
   end

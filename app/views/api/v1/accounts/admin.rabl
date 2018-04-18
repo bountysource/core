@@ -10,10 +10,10 @@ attribute :updated_at
 attribute :owner_id
 attribute :owner_type
 
-child (:splits) do
+child(:admin_splits => :splits) do
   attributes :id, :amount, :created_at, :updated_at, :account_id, :item_id, :item_type
 
-  child(:transaction => :transaction) do
+  child(:txn => :transaction) do
     attribute :id
     attribute :type
     attribute :number
@@ -29,3 +29,6 @@ child (:splits) do
   end
 end
 
+child(:owner => :owner) do
+  extends "api/v1/owners/partials/base"
+end

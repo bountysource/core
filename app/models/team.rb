@@ -3,12 +3,12 @@
 # Table name: teams
 #
 #  id                               :integer          not null, primary key
-#  name                             :string(255)      not null
-#  slug                             :string(255)
-#  url                              :string(255)
+#  name                             :string           not null
+#  slug                             :string
+#  url                              :string
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
-#  cloudinary_id                    :string(255)
+#  cloudinary_id                    :string
 #  bio                              :text
 #  featured                         :boolean          default(FALSE), not null
 #  linked_account_id                :integer
@@ -37,12 +37,7 @@
 #  index_teams_on_linked_account_id  (linked_account_id)
 #
 
-class Team < ActiveRecord::Base
-
-  attr_accessible :slug, :name, :url, :bio, :linked_account, :accepts_public_payins, :accepts_issue_suggestions, :can_email_stargazers,
-                  :support_level_sum, :support_level_count, :monthly_contributions_sum, :monthly_contributions_count, :previous_month_contributions_sum,
-                  :homepage_markdown, :new_issue_suggestion_markdown, :bounty_search_markdown, :resources_markdown
-
+class Team < ApplicationRecord
   has_paper_trail :only => [:slug, :name, :url, :bio, :homepage_markdown, :new_issue_suggestion_markdown, :bounty_search_markdown, :resources_markdown, :linked_account, :accepts_public_payins, :accepts_issue_suggestions, :can_email_stargazers, :cloudinary_id]
 
   has_cloudinary_image
@@ -366,6 +361,30 @@ class Team < ActiveRecord::Base
 
     TeamActivityInclusion.where(parent_team_id: self.id).delete_all
     TeamActivityInclusion.where(child_team_id: self.id).delete_all
+
+    # if there is any money left in their account, transfer it back to liability
+    if account && account.balance > 0
+      from_account = account
+      to_account = Account::Liability.instance
+      amount = from_account.balance
+
+      transaction = Transaction::InternalTransfer::DeletedOwner.create!(
+        audited: true,
+        description: "#{self.class.name}(#{id}) - $#{amount} owner deleted, reclaiming funds #{from_account.class.name}#{from_account.id} to #{to_account.class.name}(#{to_account.id})"
+      )
+
+      transaction.splits.create!(
+        amount: -1 * amount,
+        account: from_account,
+        item: self
+      )
+
+      transaction.splits.create!(
+        amount: amount,
+        account: to_account,
+        item: self
+      )
+    end
 
     self.destroy
   end
@@ -704,7 +723,7 @@ class Team < ActiveRecord::Base
   end
 
   def bounty_hunter_count
-    Person.bounty_hunters(team: self).count
+    Person.bounty_hunters(team: self).count(:all)
   end
 
   def sync_stargazers(options={})
@@ -713,7 +732,7 @@ class Team < ActiveRecord::Base
   end
 
   def top_supporters(options={})
-    ActiveRecord::Base.connection.unprepared_statement do
+    ApplicationRecord.connection.unprepared_statement do
       alltime_support_level_payments = self.support_level_payments.not_refunded.joins(:support_level).select(%(
         COALESCE(support_levels.owner_id, support_levels.person_id) as owner_id,
         COALESCE(support_levels.owner_type, 'Anon') as owner_type,
@@ -768,7 +787,7 @@ class Team < ActiveRecord::Base
         else 'monthly_amount DESC, alltime_amount DESC, created_at'
       end
 
-      collection = ActiveRecord::Base.connection.select_all("
+      collection = ApplicationRecord.connection.select_all("
         SELECT
           owner_type,
           owner_id,

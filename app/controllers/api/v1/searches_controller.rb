@@ -1,6 +1,6 @@
 class Api::V1::SearchesController < ApplicationController
 
-  before_filter :find_person, only: [:create, :bounty_search]
+  before_action :find_person, only: [:create, :bounty_search]
 
   # tracker typeahead
   def typeahead
@@ -43,7 +43,8 @@ class Api::V1::SearchesController < ApplicationController
       min: params[:min],
       max: params[:max],
       order: params[:order],
-      direction: params[:direction]
+      direction: params[:direction],
+      can_add_bounty: params[:can_add_bounty]
     }
     @results = Search.bounty_search(options)
 

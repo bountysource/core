@@ -12,11 +12,11 @@
 #  updated_at        :datetime         not null
 #  paid_at           :datetime
 #  anonymous         :boolean          default(FALSE), not null
-#  owner_type        :string(255)
+#  owner_type        :string
 #  owner_id          :integer
-#  bounty_expiration :string(255)
-#  upon_expiration   :string(255)
-#  promotion         :string(255)
+#  bounty_expiration :string
+#  upon_expiration   :string
+#  promotion         :string
 #  acknowledged_at   :datetime
 #  tweet             :boolean          default(FALSE), not null
 #  featured          :boolean          default(FALSE), not null
@@ -33,18 +33,14 @@
 
 require 'account/team'
 
-class Bounty < ActiveRecord::Base
-
-  attr_accessible :expires_at, :paid_at, :status, :person, :issue, :amount, :anonymous, :acknowledged_at,
-                  :bounty_expiration, :upon_expiration, :promotion, :owner_id, :owner_type, :tweet, :issue_id, :featured
-
+class Bounty < ApplicationRecord
   belongs_to :person
   belongs_to :issue
 
   # TODO: this object shouldn't have an account... rework Transaction.build to use "account: bounty.issue"
   has_one :account, :through => :issue
   has_many :splits, :as => :item
-  has_many :transactions, :through => :splits
+  has_many :txns, :through => :splits
 
   has_one :bounty_claim_response
 
@@ -116,7 +112,7 @@ class Bounty < ActiveRecord::Base
   end
 
   def self.admin_search(query)
-    includes(:person)
+    joins(:person)
     .where("bounties.id = :id OR people.email like :q OR people.first_name LIKE :q OR people.last_name LIKE :q OR people.display_name LIKE :q", q: "%#{query}%", id: query.to_i)
   end
 
@@ -254,6 +250,33 @@ class Bounty < ActiveRecord::Base
     end
   end
 
+  def refund_for_deleted_issue
+    if refundable?
+      self.class.transaction do
+        transaction = Transaction.build do |tr|
+          tr.description = "Refund Bounty for deleted issue (#{id}) - Bounty Amount: $#{amount} Refunded: $#{amount}"
+          tr.splits.create(amount: -amount, item: issue)
+          if owner_type == "Team"
+            tr.splits.create(amount: +amount, item: owner)
+          else
+            tr.splits.create(amount: +amount, item: person)
+          end
+        end
+
+        transaction or raise ActiveRecord::Rollback
+
+        # update bounty to 'refunded' status or rollback
+        update_attributes status: Status::REFUNDED or raise ActiveRecord::Rollback
+
+        # email the backer
+        person.send_email :bounty_refunded_for_deleted_issue, bounty: self
+      end
+
+      # update displayed bounty total on issue
+      issue.delay.update_bounty_total
+    end
+  end
+
   def create_account
     issue.create_account!
   end
@@ -337,7 +360,7 @@ class Bounty < ActiveRecord::Base
 
   # the internal account used to pay for this bounty
   def source_account
-    Split.where(item: self).reorder('created_at').first.transaction.splits.where('amount < 0').reorder('amount').first.account
+    Split.where(item: self).reorder('created_at').first.txn.splits.where('amount < 0').reorder('amount').first.account
   end
 
   def move_to_issue(new_issue)

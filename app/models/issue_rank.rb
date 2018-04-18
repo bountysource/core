@@ -3,7 +3,7 @@
 # Table name: issue_ranks
 #
 #  id                    :integer          not null, primary key
-#  type                  :string(255)      not null
+#  type                  :string           not null
 #  issue_id              :integer          not null
 #  rank                  :integer          default(0), not null
 #  person_id             :integer
@@ -26,9 +26,7 @@
 #  index_issue_ranks_on_type                   (type)
 #
 
-class IssueRank < ActiveRecord::Base
-  attr_accessible :team, :issue, :rank, :person, :linked_account, :last_synced_at, :last_event_created_at
-
+class IssueRank < ApplicationRecord
   belongs_to :issue
   belongs_to :team
   belongs_to :person
@@ -46,4 +44,5 @@ class IssueRank < ActiveRecord::Base
   def increment_rank
     raise NotImplemented
   end
+
 end

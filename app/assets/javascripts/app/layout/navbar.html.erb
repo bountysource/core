@@ -51,7 +51,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right font-weight-regular">  
         <li>
-          <form class="navbar-form row" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
+          <form class="navbar-form row" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()" ng-click="search_typeahead.submit_search()">
             <div class="input-group col-xs-12">
               <input type="text" class="form-control br-0" ng-model="search_typeahead.query" placeholder="Search" typeahead="tag.name for tag in search_typeahead.update_results($viewValue)" typeahead-on-selectq="search_typeahead.selected($item)" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
               <div class="input-group-btn">
@@ -157,5 +157,19 @@
       </ul>
 
     </div>
+  </div>
+</div>
+
+<div ng-controller="CanyaAnnouncementController">
+  <div style="background: #33ccff; color: white; text-align: center" class="pt-3 pb-3" ng-if="canyaAnnouncementIsVisible">
+    <a href="#" ng-click="hideCanyaAnnouncement()" style="float: right; color: white; margin: 10px 20px 0 0">X</a>
+    <a style="color: white" target="_blank" href="https://canya.io/promo/index.html">
+      <div>
+        CanYa is about to launch it's highly anticipated decentralised platform for digital services.
+      </div>
+      <div>
+        Click here to join the Pre-Alpha testing. The first 50 approved testing accounts will receive USD $500 in CAN tokens!
+      </div>
+    </a>
   </div>
 </div>

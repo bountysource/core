@@ -3,12 +3,12 @@
 # Table name: teams
 #
 #  id                               :integer          not null, primary key
-#  name                             :string(255)      not null
-#  slug                             :string(255)
-#  url                              :string(255)
+#  name                             :string           not null
+#  slug                             :string
+#  url                              :string
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
-#  cloudinary_id                    :string(255)
+#  cloudinary_id                    :string
 #  bio                              :text
 #  featured                         :boolean          default(FALSE), not null
 #  linked_account_id                :integer
@@ -39,7 +39,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :team do
     sequence(:name) { |n| "Generic Team ##{n}" }
     sequence(:slug) { |n| "team-#{n}" }

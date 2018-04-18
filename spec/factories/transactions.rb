@@ -7,7 +7,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  audited            :boolean
-#  type               :string(255)      default("Transaction"), not null
+#  type               :string           default("Transaction"), not null
 #  person_id          :integer
 #  checkout_method_id :integer
 #  gross              :decimal(, )
@@ -29,7 +29,7 @@
 #  index_transactions_on_processing_fee      (processing_fee)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :transaction, class: Transaction do
     sequence(:description) { |n| "Transaction ##{n}" }
 

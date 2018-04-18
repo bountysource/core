@@ -2,9 +2,9 @@ class Api::V2::IssuesController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::IssuesHelper
 
-  after_filter log_activity(Issue::Event::VIEW), only: [:show]
+  after_action log_activity(Issue::Event::VIEW), only: [:show]
 
-  before_filter :require_auth, only: :query_v3
+  before_action :require_auth, only: :query_v3
 
   # yet another implementation... this one is used in issue dashboard
   def query_v3
@@ -25,10 +25,9 @@ class Api::V2::IssuesController < Api::BaseController
     @current_user = current_user
 
     @collection = ::Issue.not_deleted
-
     @include_issue_body_html = params[:include_body_html].to_bool
     @include_issue_tracker = params[:include_tracker].to_bool
-    @include_team_extended = @include_issue_team = params[:include_team].to_bool
+    @include_team_extended = @include_issue_team = params[:include_team].to_bool  
 
     if params.has_key?(:search)
       if params[:tracker_team_id]
@@ -36,16 +35,17 @@ class Api::V2::IssuesController < Api::BaseController
       elsif params.has_key?(:tracker_id)
         tracker_ids  = params[:tracker_id]
       end
-
-      issue_ids = Issue.search(params[:search], :with => {tracker_ids: tracker_ids}).map(&:id)
+    
+      issue_ids = Issue.search(params[:search], :where => {tracker_id: tracker_ids}).map(&:id)
       @collection = @collection.where(id: issue_ids)
     end
 
     @collection = filter!(@collection)
+    @total_count = @collection.count
     @collection = order!(@collection)
     @collection = paginate!(@collection)
-
     # Preload Trackers if including Tracker as child node of Issue
+
     if @include_issue_tracker
       @collection = @collection.includes(:tracker)
     end
@@ -53,7 +53,6 @@ class Api::V2::IssuesController < Api::BaseController
 
   def show
     @current_user = current_user
-
     @include_issue_body_html = (params[:include_body_html] || true).to_bool
 
     @include_issue_tracker = params[:include_tracker].to_bool
@@ -71,8 +70,12 @@ class Api::V2::IssuesController < Api::BaseController
     includes << :languages if @include_issue_languages
     includes << :author if @include_issue_author
 
-    @item = ::Issue.find_with_merge(params[:id], include: includes, relation: Issue.not_deleted)
+    @item = ::Issue.find_with_merge(params[:id], include: includes)
     @item.remote_sync_if_necessary(person: @person)
+    
+    if @item.deleted_at
+      render json: { error: 'Issue Not Found' }, status: :not_found
+    end
   end
 
   # Manually add issues to Bountysource.

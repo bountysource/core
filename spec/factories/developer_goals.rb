@@ -17,7 +17,7 @@
 #  index_developer_goals_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :developer_goal, class: DeveloperGoal do
     amount 100
     association :person, factory: :person

@@ -1,19 +1,22 @@
-%div{ "ng-show"=>"issue.id && (!issue.tracker || !issue.tracker.takendown)" }
-  %team-view
+%div{ "class"=>"text-center", "ng-show"=>"issue_deleted" }
+  %h3 {{issue_error}}
+%div{ "ng-if"=>"!issue_deleted" }
+  %div{ "ng-show"=>"issue.id && (!issue.tracker || !issue.tracker.takendown)" }
+    %team-view
 
-    .alert.alert-warning{ "ng-show" => "issue.can_add_bounty && issue.team.bounties_disabled" }
-      %div{"style"=>"text-align: center; font-size: 18px"}
-        Bounties for this issue have been disabled by the team.
+      .alert.alert-warning{ "ng-show" => "issue.can_add_bounty && issue.team.bounties_disabled" }
+        %div{"style"=>"text-align: center; font-size: 18px"}
+          Bounties for this issue have been disabled by the team.
 
-    .row
-      .col-sm-4.col-xs-12.col-sm-push-8
-        %div{ "ng-show" => "!issue.team.bounties_disabled" }
-          %div{ "ng-include" => "'app/issues/_show_backer_box.html'" }
-          
-          %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
-      
-      .col-sm-8.col-xs-12.col-sm-pull-4
-        %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+      .row
+        .col-sm-4.col-xs-12.col-sm-push-8
+          %div{ "ng-show" => "!issue.team.bounties_disabled" }
+            %div{ "ng-include" => "'app/issues/_show_backer_box.html'" }
+            
+            %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
+        
+        .col-sm-8.col-xs-12.col-sm-pull-4
+          %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
 
-%div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
-  %takedown
+  %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
+    %takedown

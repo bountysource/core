@@ -1,16 +1,7 @@
-# sets log level to :warning
-Delayed::Backend::ActiveRecord::Job.class_eval do
-  class << self
-    def reserve_with_warning(*args, &block)
-      log_level = ActiveRecord::Base.logger.level
-      ActiveRecord::Base.logger.level = 1
-      reserve_without_warning(*args, &block)
-    ensure
-      ActiveRecord::Base.logger.level = log_level
-    end
-    alias_method_chain :reserve, :warning
-  end
-end
-
+Delayed::Backend::ActiveRecord::Job.logger.level = 1
 Delayed::Worker.default_priority = 50
 Delayed::Worker.max_attempts = 3
+
+Delayed::Worker.queue_attributes = {
+  searchkick: { priority: 100 }
+}

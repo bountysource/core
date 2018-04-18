@@ -1,0 +1,5 @@
+<loading-bar ng-hide="errors || success">Changing Email...</loading-bar>
+<div class="alert alert-danger" ng-show="errors">
+  <p ng-repeat="error in errors">{{error}}</p>
+</div>
+<div ng-show="success" class="alert alert-success">Email Changed. Login with your new email.</div>

@@ -8,9 +8,9 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  note            :text
-#  url             :string(255)
+#  url             :string
 #  completion_date :datetime
-#  status          :string(255)      default("stopped"), not null
+#  status          :string           default("stopped"), not null
 #
 # Indexes
 #
@@ -21,7 +21,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :solution do
     association :person, factory: :person
     association :issue, factory: :issue

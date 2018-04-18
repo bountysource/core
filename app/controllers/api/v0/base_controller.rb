@@ -1,7 +1,7 @@
 class Api::V0::BaseController < ApplicationController
   newrelic_ignore_apdex
 
-  before_filter :require_admin
+  before_action :require_admin
 
 protected
 

@@ -7,7 +7,7 @@ describe Api::V2::IssuesController do
     let(:tracker) { double(:tracker) }
 
     before do
-      Issue.stub(:find_by_url).and_return(issue)
+      allow(Issue).to receive(:find_by_url).and_return(issue)
     end
 
     describe 'issue exists' do
@@ -20,9 +20,9 @@ describe Api::V2::IssuesController do
 
     describe 'issue does not exist' do
       before do
-        Tracker.stub(:find_by_url).and_return(tracker)
-        Issue.stub(:find_by_url).and_return(nil)
-        tracker.stub_chain(:issues, :create!).and_return(issue)
+        allow(Tracker).to receive(:find_by_url).and_return(tracker)
+        allow(Issue).to receive(:find_by_url).and_return(nil)
+        allow(tracker).to receive_message_chain(:issues, :create!).and_return(issue)
       end
 
       it 'should create issue' do
@@ -31,8 +31,8 @@ describe Api::V2::IssuesController do
       end
 
       it 'should render error on invalid issue create' do
-        Issue.stub(:find_by_url).and_return(nil)
-        tracker.stub_chain(:issues, :create!).and_raise(ActiveRecord::RecordInvalid.new build(:issue))
+        allow(Issue).to receive(:find_by_url).and_return(nil)
+        allow(tracker).to receive_message_chain(:issues, :create!).and_raise(ActiveRecord::RecordInvalid.new build(:issue))
         post(:create)
         expect(response.status).to eq(422)
       end
@@ -51,7 +51,7 @@ describe Api::V2::IssuesController do
 
       describe 'tracker does not exist' do
         before do
-          Tracker.stub(:find_by_url).and_return(nil)
+          allow(Tracker).to receive(:find_by_url).and_return(nil)
         end
 
         it 'should create tracker' do

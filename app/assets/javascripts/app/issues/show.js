@@ -12,6 +12,9 @@ angular.module('app').controller('IssueShowController', function ($scope, $route
   }, function(issue) {
     $scope.team = issue.team;
     $pageTitle.set($scope.issue.title, $scope.issue.tracker.name);
+  }, function(error){
+    $scope.issue_deleted = true;
+    $scope.issue_error = error.data.error;
   });
 
   // get list of 100 events for issue home page

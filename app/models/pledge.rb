@@ -12,7 +12,7 @@
 #  reward_id       :integer
 #  survey_response :text
 #  anonymous       :boolean          default(FALSE), not null
-#  owner_type      :string(255)
+#  owner_type      :string
 #  owner_id        :integer
 #
 # Indexes
@@ -23,11 +23,7 @@
 #  index_pledges_on_status      (status)
 #
 
-class Pledge < ActiveRecord::Base
-
-  attr_accessible :amount, :person, :status, :reward, :reward_id, :survey_response, :anonymous, :fundraiser, :owner_id,
-    :owner_type, :fundraiser_id
-
+class Pledge < ApplicationRecord
   belongs_to :fundraiser
   belongs_to :person
   belongs_to :reward
@@ -36,7 +32,7 @@ class Pledge < ActiveRecord::Base
   has_one :account, :through => :fundraiser
   has_one :team, :through => :fundraiser
   has_many :splits, :as => :item
-  has_many :transactions, :through => :splits
+  has_many :txns, :through => :splits
 
   # Helper defined in config/initializers/has_owner.rb
   # Gives access to polymorphic owner, which respects object anonymity on read

@@ -3,9 +3,9 @@ class Api::V2::TrackersController < Api::BaseController
   include Api::V2::PaginationHelper
   include Api::V2::TrackersHelper
 
-  after_filter log_activity(Tracker::Event::VIEW), only: [:show]
+  after_action log_activity(Tracker::Event::VIEW), only: [:show]
 
-  before_filter :parse_boolean_values
+  before_action :parse_boolean_values
 
   def index
     #build includes values for query
@@ -25,7 +25,7 @@ class Api::V2::TrackersController < Api::BaseController
 
   def show
     includes = []
-    @item = ::Tracker.find_with_merge(params[:id], include: includes, relation: Tracker.not_deleted)
+    @item = ::Tracker.find_with_merge(params[:id], include: includes)
     @item.remote_sync_if_necessary(state: "open", person: current_user)
   end
 

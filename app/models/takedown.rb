@@ -4,13 +4,12 @@
 #
 #  id                :integer          not null, primary key
 #  linked_account_id :integer          not null
-#  created_at        :datetime
-#  updated_at        :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
-class Takedown < ActiveRecord::Base
-  attr_accessible :linked_account
-  belongs_to :linked_account, class_name: LinkedAccount::Base
+class Takedown < ApplicationRecord
+  belongs_to :linked_account, class_name: 'LinkedAccount::Base'
 
   SANITIZED_HTML = "<i>[This content has been removed due to a takedown request by the author.]</i>"
   DISPLAY_NAME = "[removed]"

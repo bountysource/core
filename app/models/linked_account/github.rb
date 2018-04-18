@@ -4,15 +4,15 @@
 #
 #  id               :integer          not null, primary key
 #  person_id        :integer
-#  type             :string(255)
-#  uid              :integer          not null
-#  login            :string(255)
-#  first_name       :string(255)
-#  last_name        :string(255)
-#  email            :string(255)
-#  oauth_token      :string(255)
-#  oauth_secret     :string(255)
-#  permissions      :string(255)
+#  type             :string
+#  uid              :integer
+#  login            :string
+#  first_name       :string
+#  last_name        :string
+#  email            :string
+#  oauth_token      :string
+#  oauth_secret     :string
+#  permissions      :string
 #  synced_at        :datetime
 #  sync_in_progress :boolean          default(FALSE)
 #  followers        :integer          default(0)
@@ -21,10 +21,10 @@
 #  updated_at       :datetime
 #  account_balance  :decimal(10, 2)   default(0.0)
 #  anonymous        :boolean          default(FALSE), not null
-#  company          :string(255)
-#  location         :string(255)
+#  company          :string
+#  location         :string
 #  bio              :text
-#  cloudinary_id    :string(255)
+#  cloudinary_id    :string
 #  deleted_at       :datetime
 #
 # Indexes
@@ -42,8 +42,6 @@ class LinkedAccount::Github < LinkedAccount::Base
   has_many :issue_ranks, foreign_key: :linked_account_id, class_name: 'IssueRank::LinkedAccountGithub'
 
   has_one :team, foreign_key: :linked_account_id
-
-  attr_accessible :deleted_at
 
   validates :uid, uniqueness: true, on: :create
 
@@ -235,7 +233,6 @@ class LinkedAccount::Github < LinkedAccount::Base
   def self.update_attributes_from_github_data(github_data, options={})
     return nil if github_data.blank? || github_data['url'] == "https://api.github.com/users/"
     raise "NO ID #{github_data.inspect}" unless remote_id = github_data['id']
-
     # Find object
     rails_please_autoload = [LinkedAccount::Github::User, LinkedAccount::Github::Organization]
     obj = options[:obj] || LinkedAccount::Github.where("uid = ?", remote_id)[0] || LinkedAccount::Github.new()
@@ -268,6 +265,8 @@ class LinkedAccount::Github < LinkedAccount::Base
       obj.type = 'LinkedAccount::Github::Organization'
     elsif github_data['type'] == 'User'
       obj.type = 'LinkedAccount::Github::User'
+    elsif github_data['type'] == 'Bot'
+      obj.type = 'LinkedAccount::Github::Bot'
     else
       raise "Type not determined: #{github_data.inspect}"
     end

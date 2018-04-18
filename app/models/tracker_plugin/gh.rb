@@ -52,7 +52,7 @@ class TrackerPlugin::GH < TrackerPlugin
 
   # update the label in github
   before_update do
-    if label_color_changed? || label_name_changed?
+    if will_save_change_to_label_color? || will_save_change_to_label_name?
       begin
         old_label = self.class.sanitize_label(label_name_was)
         response = api(url: "/repos/#{tracker.full_name}/labels/#{old_label}", type: "PATCH", body: { name: label_name, color: sanitized_label_color })
@@ -85,7 +85,7 @@ class TrackerPlugin::GH < TrackerPlugin
 
   # if the title/body/label changed, trigger a full update
   after_update do
-    if modify_title_changed? || modify_body_changed? || add_label_changed? || (locked_at_changed? && !locked_at)
+    if saved_change_to_modify_title? || saved_change_to_modify_body? || saved_change_to_add_label? || (saved_change_to_locked_at? && !locked_at)
       delay.update_issues
     end
   end
@@ -271,7 +271,7 @@ protected
       label_json = label_response.data
 
       # if label is wrong color, update it (we may have just created it)
-      label = label_json.find { |label| label['name'] == label_name }
+      label = label_json.find { |label| label['name'].downcase == label_name.downcase }
       if label['color'] != sanitized_label_color
         api(url: "/repos/#{tracker.full_name}/labels/#{sanitized_label_name}", type: "PATCH", body: { color: sanitized_label_color })
         raise UnknownError, "Failed to update label" unless label_response.success?

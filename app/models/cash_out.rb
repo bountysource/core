@@ -3,14 +3,14 @@
 # Table name: cash_outs
 #
 #  id                         :integer          not null, primary key
-#  type                       :string(255)      not null
+#  type                       :string           not null
 #  person_id                  :integer          not null
 #  address_id                 :integer          not null
 #  mailing_address_id         :integer
-#  bitcoin_address            :string(255)
-#  paypal_address             :string(255)
-#  remote_ip                  :string(255)
-#  user_agent                 :string(255)
+#  bitcoin_address            :string
+#  paypal_address             :string
+#  remote_ip                  :string
+#  user_agent                 :string
 #  amount                     :decimal(, )
 #  sent_at                    :datetime
 #  us_citizen                 :boolean
@@ -20,11 +20,12 @@
 #  serialized_mailing_address :text
 #  fee                        :decimal(, )
 #  fee_adjustment             :decimal(, )
-#  ripple_address             :string(255)
-#  mastercoin_address         :string(255)
+#  ripple_address             :string
+#  mastercoin_address         :string
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
 #  quickbooks_transaction_id  :integer
+#  is_fraud                   :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -39,12 +40,8 @@
 #  index_cash_outs_on_us_citizen          (us_citizen)
 #
 
-class CashOut < ActiveRecord::Base
-
+class CashOut < ApplicationRecord
   class InvalidType < StandardError ; end
-
-  attr_accessible :person, :address, :amount, :mailing_address, :bitcoin_address, :remote_ip, :user_agent, :paypal_address,
-                  :us_citizen, :sent_at, :is_refund
 
   belongs_to :person
   belongs_to :address
@@ -131,6 +128,29 @@ class CashOut < ActiveRecord::Base
     transaction = Transaction::InternalTransfer.create!(
       audited: true,
       description: "#{self.class.name}(#{id}) - $#{amount} funds returned from #{from_account.class.name}#{from_account.id} to #{to_account.class.name}(#{to_account.id})"
+    )
+
+    transaction.splits.create!(
+      amount: -1 * amount,
+      account: from_account,
+      item: self
+    )
+
+    transaction.splits.create!(
+      amount: amount,
+      account: to_account,
+      item: self
+    )
+  end
+
+  # triggered by clicking "Fraud" in the Cash Out admin
+  def is_fraud!
+    from_account = Account::CashOutHold.instance
+    to_account = Account::Liability.instance
+
+    transaction = Transaction::InternalTransfer::FraudReclaim.create!(
+      audited: true,
+      description: "#{self.class.name}(#{id}) - $#{amount} FRAUD funds returned from #{from_account.class.name}#{from_account.id} to #{to_account.class.name}(#{to_account.id})"
     )
 
     transaction.splits.create!(

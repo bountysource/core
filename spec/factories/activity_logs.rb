@@ -6,7 +6,7 @@
 #  person_id  :integer
 #  issue_id   :integer
 #  tracker_id :integer          not null
-#  name       :string(255)      not null
+#  name       :string           not null
 #  created_at :datetime         not null
 #  lurker_id  :integer
 #
@@ -17,7 +17,7 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :activity_log do
     association :person, factory: :person
     association :tracker, factory: :tracker

@@ -33,6 +33,8 @@
       <span>Team</span>
     </th>
 
+    <th></th>
+
     <th ng-if="$showIssueTitle" ng-class="{ 'active': ($orderData.column === 'title') }">
       <a href style="color: black" ng-click="$changeSortOrder('title')" style="color: black; text-decoration: none;">
         <span>Title</span>
@@ -83,14 +85,18 @@
       <a ng-href="/teams/{{issue.team.slug}}" ng-if="issue.team"><img ng-src="{{issue.team.image_url_small}}" style="width: 20px; height: 20px; margin-right: 4px" />{{issue.team.name}}</a>
       <a ng-href="/trackers/{{issue.tracker.slug}}" ng-if="!issue.team"><img ng-src="{{issue.tracker.image_url_small}}" style="width: 20px; height: 20px; margin-right: 4px" />{{issue.tracker.display_name}}</a>
     </td>
+
+    <td>
+      <span ng-if="!hideSolutionActiveIcon">
+        <i class="glyphicon glyphicon-briefcase text-success" ng-if="issue.has_active_solution" tooltip="A developer is working on a solution"></i>
+      </span>
+    </td>
+
     <td ng-if="$showIssueTitle">
       <a ng-href="/issues/{{issue.slug}}" style="word-wrap: break-word;">
         <!--<span ng-if="!hideAcceptingRequestForProposalIcon">-->
           <!--<i class="glyphicon glyphicon-asterisk text-success" ng-if="issue.accepting_proposals" tooltip="This issue is accepting proposals"></i>-->
         <!--</span>-->
-        <span ng-if="!hideSolutionActiveIcon">
-          <i class="glyphicon glyphicon-briefcase text-success" ng-if="issue.has_active_solution" tooltip="A developer is working on a solution"></i>
-        </span>
         <span style="word-break:break-word;">{{issue.title}}</span>
       </a>
       <span ng-show="issue.paid_out" class="label label-info">paid out</span>
@@ -102,7 +108,7 @@
       </a>
     </td>
     <td ng-if="$showParticipantsCount" style="text-align:center;">
-      <a ng-href="/issues/{{issue.slug}}" class="label label-danger">
+      <a ng-href="/issues/{{issue.slug}}" class="label label-salmon">
         <i class="glyphicon glyphicon-user "></i> {{issue.participants_count | number}}
       </a>
     </td>

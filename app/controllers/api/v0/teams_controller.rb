@@ -1,6 +1,6 @@
 class Api::V0::TeamsController < Api::V0::BaseController
 
-  before_filter :require_team, except: [:index, :create]
+  before_action :require_team, except: [:index, :create]
 
   def index
     @teams = Team.select("teams.*,
@@ -30,7 +30,7 @@ class Api::V0::TeamsController < Api::V0::BaseController
   end
 
   def update
-
+    
     if params[:add_child_team_inclusion]
       child_team = Team.where(slug: params[:add_child_team_inclusion]).first!
       @team.parent_team_activity_inclusions.where(child_team: child_team).first_or_create!
@@ -94,7 +94,7 @@ class Api::V0::TeamsController < Api::V0::BaseController
       Tracker.find(params[:take_ownership]).update_attributes!(team: @team)
     end
 
-    ActiveRecord::Base.transaction do
+    ApplicationRecord.transaction do
       @team.name = params[:name] if params.has_key?(:name)
       @team.slug = params[:slug] if params.has_key?(:slug)
       @team.image_url = params[:image_url] if params.has_key?(:image_url) && !params[:image_url].blank?

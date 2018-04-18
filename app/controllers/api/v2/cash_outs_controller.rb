@@ -2,9 +2,9 @@ class Api::V2::CashOutsController < Api::BaseController
 
   include Api::V2::CashOutsHelper
 
-  before_filter :require_auth
-  before_filter :parse_boolean_values
-  before_filter :require_cash_out, only: [:show, :update, :delete]
+  before_action :require_auth
+  before_action :parse_boolean_values
+  before_action :require_cash_out, only: [:show, :update, :delete]
 
   def index
     @collection = current_user.cash_outs.order('created_at desc')
@@ -21,6 +21,7 @@ class Api::V2::CashOutsController < Api::BaseController
 
   def create
     raise "Coinbase is disabled" if params[:bitcoin_address] && ENV['COINBASE_DISABLED']
+    raise "Checks are disabled" if params[:mailing_address_id]
 
     if team_id = params[:source].try(:match, /\Ateam(\d+)\Z/).try(:[], 1)
       account = current_user.team_member_relations.where(admin: true, team_id: team_id).first.try(:team).try(:account)
@@ -84,11 +85,17 @@ class Api::V2::CashOutsController < Api::BaseController
   end
 
   def update
-    render nothing: true, status: :not_implemented
+    @item = ::CashOut.find params[:id]
+
+    if !@item.sent? && params.has_key?(:refund)
+      @item.update_attributes!(sent_at: DateTime.now, is_refund: true)
+      @item.refund!
+      head :ok
+    end
   end
 
   def delete
-    render nothing: true, status: :not_implemented
+    head :not_implemented
   end
 
 private

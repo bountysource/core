@@ -1,6 +1,7 @@
 class Api::V0::CashOutsController < Api::V0::BaseController
 
   include Api::V2::CashOutsHelper
+  include Api::V2::PaginationHelper
 
   def index
     @collection = ::CashOut.includes(:person, :address, :mailing_address, :account => :owner).order('created_at asc')
@@ -12,6 +13,7 @@ class Api::V0::CashOutsController < Api::V0::BaseController
     @include_yearly_cash_out_totals = true
     @include_account_owner = true
 
+    @collection = paginate!(@collection)
     @collection = filter!(@collection)
     @collection = order!(@collection)
 
@@ -53,6 +55,10 @@ class Api::V0::CashOutsController < Api::V0::BaseController
     elsif !@item.sent? && params.has_key?(:refund)
       @item.update_attributes!(sent_at: DateTime.now, is_refund: true)
       @item.refund!
+    elsif !@item.sent? && params.has_key?(:fraud)
+      @item.update_attribute(:sent_at, DateTime.now)
+      @item.update_attribute(:is_fraud, true)
+      @item.is_fraud!
     end
 
 

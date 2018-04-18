@@ -9,7 +9,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  person_id  :integer          not null
-#  state      :string(255)      default("pending")
+#  state      :string           default("pending")
 #  abstract   :string(1000)
 #
 # Indexes
@@ -19,9 +19,8 @@
 #  index_request_for_proposals_on_person_id  (person_id)
 #
 
-class RequestForProposal < ActiveRecord::Base
+class RequestForProposal < ApplicationRecord
   include AASM
-  attr_accessible :abstract, :due_date, :budget, :issue, :person
 
   validates :issue, presence: true
   validates :budget, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true

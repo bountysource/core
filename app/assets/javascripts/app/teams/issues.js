@@ -50,11 +50,11 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
         page: page || 1,
         per_page: $scope.per_page || 30
       }).then(function (response) {
-        $scope.issues = angular.copy(response.data);
-
+        $scope.issues = angular.copy(response.data.issues);
         setPagination({
           total_pages: response.headers()['total-pages'],
-          total_items: response.headers()['total-items'],
+          // total_items: response.headers()['total-items'],
+          total_items: getFinalIssueCount($scope.trackers, response.config.params.tracker_id, response.config.params, response.data.total_count),
           page: response.config.params.page,
           per_page: response.config.params.per_page
         });
@@ -87,7 +87,8 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
   // pagination settings
   function setPagination (pagination_data) {
     $scope.page = pagination_data.page;
-    $scope.total_items = parseInt(pagination_data.total_items, 10);
+    // $scope.total_items = parseInt(pagination_data.total_items, 10);
+    $scope.total_items = pagination_data.total_items;
     $scope.maxSize = 10;
     $scope.per_page = pagination_data.per_page;
   }
@@ -138,4 +139,22 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
     }
   }
 
+  function getFinalIssueCount (trackers, tracker_id, params, issue_count) {
+    
+    var total_count = 0;
+    if ( params.search !== null || params.can_add_bounty === false || params.paid_out !== null || params.bounty_min !== undefined || params.bounty_min !== undefined ) {
+      total_count = issue_count;
+    } else if ( tracker_id !== null) {
+      for (var i = 0; i < trackers.length; i++) {
+        if ( trackers[i]["id"] === Number(tracker_id) ) {
+           total_count = trackers[i]["open_issues"];
+        }  
+      }
+    } else {
+      for ( var j = 0; j < trackers.length; j++) {
+        total_count += trackers[j]["open_issues"];
+      }
+    }
+    return total_count;
+  }
 });

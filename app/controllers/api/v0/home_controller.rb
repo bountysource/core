@@ -1,6 +1,6 @@
 class Api::V0::HomeController < Api::V0::BaseController
 
-  skip_before_filter :require_admin, only: [:login]
+  skip_before_action :require_admin, only: [:login]
 
   def login
     require_params :email, :password
@@ -27,6 +27,7 @@ class Api::V0::HomeController < Api::V0::BaseController
     @bounties = Bounty.admin_search(q)
     @fundraisers = Fundraiser.admin_search(q)
     #@trackers = Tracker.admin_search(q)
+    @transactions = PaymentNotification::Paypal.admin_search(q)
 
     render "api/v0/searches/index"
   end

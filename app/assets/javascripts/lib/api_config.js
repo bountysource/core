@@ -19,7 +19,8 @@ angular.module('app').run(function($api) {
       me: { method: 'GET', url: '/people/me' },
       login: { method: 'POST', url: '/user/login', api_version: 1 },
       create: { method: 'POST', url: '/user', api_version: 1 },
-      unsubscribe: { method: 'POST', url: '/people/unsubscribe' }
+      unsubscribe: { method: 'POST', url: '/people/unsubscribe' },
+      request_password_reset: {method: 'POST', url: '/user/request_password_reset', api_version: 1}
     }
   });
 
@@ -54,5 +55,12 @@ angular.module('app').run(function($api) {
   $api.add('timeline');
 
   $api.add('stats');
+
+  $api.add('support_offering_rewards', {
+    params: {id: '@id', team_slug: '@team_slug'},
+    methods: {
+      'create': { method: 'POST', url: '/teams/:team_slug/support_offering_rewards' }
+    }}
+  );
 
 });

@@ -94,7 +94,7 @@ module Rabl
         options[:paginate] = true
       end
 
-      if data && params && response && !data.is_a?(ThinkingSphinx::Search) && data.respond_to?(:count)
+      if data && params && response && data.respond_to?(:count)
         # apply filters
         if params[:filter]
           filter_hash = JSON.parse(params[:filter]) rescue {}
@@ -111,7 +111,7 @@ module Rabl
         if data.is_a?(ActiveRecord::Relation) && data.base_class.respond_to?(:collection_size_override)
           collection_size = data.base_class.collection_size_override
         else
-          collection_size = data.count
+          collection_size = data.count(:all)
         end
 
         per_page  = Pagination.bounded_per_page(params[:per_page])
@@ -153,4 +153,3 @@ Rabl.configure do |config|
     params_filter:  [:access_token, :callback, :cache]
   }
 end
-

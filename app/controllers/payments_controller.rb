@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
     @notification.delay(priority: 0).process_order
 
     # return happy status to paypal
-    render :text => 'ok', status: :ok
+    head :ok
   end
 
   # Where the user ends up after a successful payment (POST with IPN data including txn_id)
@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
     
     # save notification
     response.gsub!("\n", "&")
-	@notification = PaymentNotification::Paypal.process_raw_post(response)
+    @notification = PaymentNotification::Paypal.process_raw_post(response)
 
     # process order
     @notification.process_order

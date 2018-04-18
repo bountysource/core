@@ -3,7 +3,7 @@
 # Table name: person_relations
 #
 #  id               :integer          not null, primary key
-#  type             :string(255)      not null
+#  type             :string           not null
 #  person_id        :integer          not null
 #  target_person_id :integer          not null
 #  created_at       :datetime         not null
@@ -16,10 +16,8 @@
 #  index_person_relations_on_type_and_people   (type,person_id,target_person_id) UNIQUE
 #
 
-class PersonRelation::Base < ActiveRecord::Base
+class PersonRelation::Base < ApplicationRecord
   self.table_name = 'person_relations'
-
-  attr_accessible :type, :person, :target_person
 
   validates :person, presence: true
   validates :target_person, presence: true

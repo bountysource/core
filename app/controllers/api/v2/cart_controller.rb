@@ -2,14 +2,14 @@ class Api::V2::CartController < Api::BaseController
 
   include Api::V2::CartHelper
 
-  before_filter :require_cart, except: [:create]
-  before_filter :require_auth, only: [:checkout]
-  before_filter :require_checkout_method, only: [:checkout]
+  before_action :require_cart, except: [:create]
+  before_action :require_auth, only: [:checkout]
+  before_action :require_checkout_method, only: [:checkout]
 
   def show
     @item_count = @cart.items.count
 
-    # Load raw item attribute as well as instance of ActiveRecord::Base
+    # Load raw item attribute as well as instance of ApplicationRecord
     # to fetch related models (Fundraiser, Issue, Team, etc.).
     @items = @cart.items.map do |item_json|
       [
@@ -25,7 +25,7 @@ class Api::V2::CartController < Api::BaseController
 
   def destroy
     @cart.clear
-    render nothing: true, status: :no_content
+    head :no_content
   end
 
   def checkout
@@ -38,7 +38,7 @@ class Api::V2::CartController < Api::BaseController
     end
 
     # For internal checkout method accounts, we immediately create transaction.
-    # Note: Minimum balance is already required in before_filter
+    # Note: Minimum balance is already required in before_action
     if @checkout_method.is_a?(Account::Personal) || @checkout_method.is_a?(Account::Team)
       order = Transaction::Order::Internal.create_from_cart_and_checkout_method(@cart, @checkout_method)
       render json: { receipt_url: order.www_receipt_url }

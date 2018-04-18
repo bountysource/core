@@ -7,11 +7,11 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  number                   :integer
-#  url                      :string(255)      not null
+#  url                      :string           not null
 #  title                    :text
-#  labels                   :string(255)
+#  labels                   :string
 #  code                     :boolean          default(FALSE)
-#  state                    :string(255)
+#  state                    :string
 #  body                     :text
 #  remote_updated_at        :datetime
 #  remote_id                :integer
@@ -23,20 +23,20 @@
 #  comment_count            :integer          default(0)
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  bounty_total             :decimal(10, 2)   default(0.0), not null
-#  type                     :string(255)      default("Issue"), not null
-#  remote_type              :string(255)
-#  priority                 :string(255)
-#  milestone                :string(255)
+#  type                     :string           default("Issue"), not null
+#  remote_type              :string
+#  priority                 :string
+#  milestone                :string
 #  can_add_bounty           :boolean          default(FALSE), not null
 #  accepted_bounty_claim_id :integer
-#  author_name              :string(255)
-#  owner                    :string(255)
+#  author_name              :string
+#  owner                    :string
 #  paid_out                 :boolean          default(FALSE), not null
 #  participants_count       :integer
 #  thumbs_up_count          :integer
 #  votes_count              :integer
 #  watchers_count           :integer
-#  severity                 :string(255)
+#  severity                 :string
 #  delta                    :boolean          default(TRUE), not null
 #  author_linked_account_id :integer
 #  solution_started         :boolean          default(FALSE), not null
@@ -61,10 +61,6 @@
 #
 
 class Github::Issue < ::Issue
-
-  # ATTRIBUTES
-  attr_accessible :labels, :state, :code, :deleted_at
-
   # VALIDATIONS
   validates :number, presence: true
   validates :url, format: { with: /\Ahttps:\/\/github\.com\/[^\/]+\/[^\/]+\/(issues|pull)\/\d+(\?.+)?\z/ix }
@@ -76,7 +72,7 @@ class Github::Issue < ::Issue
   def remote_sync_if_necessary(options={})
     return if ENV['DISABLE_GITHUB']
 
-    if synced_at.nil?
+    if synced_at.nil? || deleted_at
       remote_sync(options)
     elsif synced_at < 1.minute.ago
       delay.remote_sync(options)
@@ -88,15 +84,19 @@ class Github::Issue < ::Issue
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
 
-    unless deleted_at
-      previous_synced_at = self.synced_at
-      update_from_github(options)
-      sync_comments
-      self
+    previous_synced_at = self.synced_at
+    update_from_github(options)
+    sync_comments
+
+    if deleted_at
+      update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
     end
+
+    self
   rescue Github::API::NotFound
-    deleted_at = Time.now
-    update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
+    unless deleted_at
+      update_attributes(deleted_at: Time.now)
+    end
   end
 
   # INSTANCE METHODS
@@ -197,7 +197,7 @@ class Github::Issue < ::Issue
     )
 
     # trigger an update on the underlying object
-    self.class.update_attributes_from_github_data(api_response.data, obj: self) if api_response.modified?
+    self.class.update_attributes_from_github_data(api_response.data, obj: self) 
   end
 
   # Sync comments with GitHub. Deletes comments that no longer exist.
@@ -302,7 +302,7 @@ class Github::Issue < ::Issue
 
     # Ensure that we have a URL and remote_id before doing anything else
     unless url && remote_id
-      raise Error, "Required: 'remote_id' and 'url': #{github_data.inspect}"
+      raise Error, "Issue id: #{options[:obj]&.id}. Required: 'remote_id' and 'url': #{github_data.inspect}"
     end
 
     # passed in, find by remote_id, or new

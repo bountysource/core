@@ -30,7 +30,11 @@ angular.module('app').controller('Settings', function($scope, $routeParams, $api
       if (updated_person.error) {
         $scope.error = updated_person.error;
       } else {
-        $scope.success = 'Settings have been saved.';
+        if (updated_person.email === $scope.form_data.email) {
+          $scope.success = 'Settings have been saved.';
+        } else {
+          $scope.success = "An email has sent to your account to verify email changed.";
+        }
 
         // Update cached person
         $api.set_current_person(updated_person);

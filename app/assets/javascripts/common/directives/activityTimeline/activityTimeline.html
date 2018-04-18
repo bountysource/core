@@ -7,8 +7,7 @@
       </td>
 
       <td ng-if="action.type == 'Bounty'">
-        Placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">an
-        issue</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span
+        Placed a <strong>{{action.amount | dollars}} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">{{action.issue.title}}</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span
         ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
       </td>
 
