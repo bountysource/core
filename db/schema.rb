@@ -591,7 +591,7 @@ ActiveRecord::Schema.define(version: 20180404095942) do
 
   create_table "payment_notifications", id: :serial, force: :cascade do |t|
     t.string "type", null: false
-    t.string "txn_id", null: false
+    t.string "txn_id"
     t.text "raw_post"
     t.integer "order_id"
     t.datetime "created_at"

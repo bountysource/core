@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  type              :string           not null
-#  txn_id            :string           not null
+#  txn_id            :string
 #  raw_post          :text
 #  order_id          :integer
 #  created_at        :datetime

@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  type              :string           not null
-#  txn_id            :string           not null
+#  txn_id            :string
 #  raw_post          :text
 #  order_id          :integer
 #  created_at        :datetime
@@ -62,9 +62,11 @@ class PaymentNotification::Paypal < PaymentNotification
   def verified?
     # Ensure that the payment was completed
     return false unless completed?
-
     # Only allow echeck and instant
     return unless instant? || echeck?
+
+    # check presence of txn_id
+    return false unless txn_id
 
     # Shopping cart gross verification
     cart_gross = shopping_cart.calculate_gross
@@ -73,8 +75,8 @@ class PaymentNotification::Paypal < PaymentNotification
     # Business email verification
     return false unless Api::Application.config.paypal[:email] == params['business']
 
-    # POST back verification
-    return false unless post_back(raw_post) == 'VERIFIED'
+    # Check for IPN POST back verification or PDT Success
+    return false unless post_back(raw_post) == 'VERIFIED' || raw_post.start_with?("SUCCESS")
 
     true
   end

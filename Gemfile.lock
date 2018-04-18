@@ -646,6 +646,7 @@ DEPENDENCIES
   rails (= 5.1.5)
   rails-controller-testing
   rdoc
+  rest-client
   rspec-rails
   sass-rails (~> 5.0.7)
   savon (~> 2.12)
