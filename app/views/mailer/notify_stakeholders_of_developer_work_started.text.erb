@@ -2,11 +2,17 @@ Hi <%= @person.display_name %>,
 
 <%= @solution.person.display_name %> has begun working on a solution to "<%= @solution.issue.title %>".
 
-Expected Completion Date: <%= @solution.completion_date.try(:to_date) %>
+<% if @solution.completion_date %>
+	Expected Completion Date: <%= @solution.completion_date.try(:to_date) %>
+<% end %>
 
-Notes from Developer: <%= @solution.note %>
+<% if @solution.note %>
+	Notes from Developer: <%= @solution.note %>
+<% end %>
 
-<%= @solution.person.display_name %> provided the following URL to track his or her progress: <%= @solution.url %>
+<% if @solution.url %>
+	<%= @solution.person.display_name %> provided the following URL to track his or her progress: <%= @solution.url %>
+<% end %>
 
 The bounty can be claimed once the issue gets closed on the original issue tracker. When a bounty claim is submitted, all Backers will be notified.
 

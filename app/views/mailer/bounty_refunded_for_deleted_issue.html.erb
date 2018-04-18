@@ -1,0 +1,7 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+  The $<%= @bounty.amount.round %> bounty for <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty.issue.to_param}" %>"><%= @bounty.issue.title %></a> that you placed has been refunded to your Bountysource account because the issue has been deleted.
+</p>

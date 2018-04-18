@@ -14,20 +14,27 @@ class PaymentsController < ApplicationController
 
   # Where the user ends up after a successful payment (POST with IPN data including txn_id)
   def paypal_return
-    if params[:txn_id]
-      # save notification
-      @notification = PaymentNotification::Paypal.process_raw_post(request.raw_post)
+    # verify transaction thru pdt method
+    response = pdt_post_request
+    
+    # save notification
+    response.gsub!("\n", "&")
+    @notification = PaymentNotification::Paypal.process_raw_post(response)
 
-      # find or create order
-      @order = @notification.process_order
+    # process order
+    @notification.process_order
 
-      # redirect
-      redirect_to @order.www_receipt_url
-
-    elsif @notification.blank?
-      # when would this happen? perhaps we should clear the cart? perhaps we should raise?
-      redirect_to Api::Application.config.www_receipts_url
-    end
+    # redirect_to order page
+    redirect_to Api::Application.config.www_receipts_url
   end
-
+private
+  def pdt_post_request
+    url = ENV['PAYPAL_SANDBOX'] == 'true' ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr'
+    params = {
+      cmd: '_notify-synch',
+      tx: request.params[:tx],
+      at: ENV['PAYPAL_PDT_TOKEN']
+    }
+    return RestClient.post url, params
+  end
 end
