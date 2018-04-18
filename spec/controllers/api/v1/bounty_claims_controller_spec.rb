@@ -13,8 +13,7 @@ describe Api::V1::BountyClaimsController do
       access_token: person.create_access_token,
       code_url: "https://github.com/bountysource/frontend/pulls/1",
       description: "Lorem ipsum stack",
-      issue_id: issue.id,
-      amount: 10
+      issue_id: issue.id
     }
   end
 
