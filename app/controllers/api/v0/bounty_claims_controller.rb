@@ -1,8 +1,19 @@
 class Api::V0::BountyClaimsController < Api::V0::BaseController
+
+  include Api::V2::PaginationHelper
+
   before_action :require_bounty_claim, only: [:show, :update]
 
   def index
-    @bounty_claims = BountyClaim.order("created_at desc")
+    @bounty_claims =
+      if params[:in_dispute_period]
+        BountyClaim.in_dispute_period
+      else
+        BountyClaim.all
+      end
+    @bounty_claims = @bounty_claims.order("created_at desc")
+    @bounty_claims = paginate!(@bounty_claims)
+
     render "api/v1/bounty_claims/index"
   end
 

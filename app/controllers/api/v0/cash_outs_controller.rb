@@ -71,5 +71,4 @@ class Api::V0::CashOutsController < Api::V0::BaseController
 
     render 'api/v2/cash_outs/show'
   end
-
 end
