@@ -39,7 +39,7 @@ angular.module('api.bountysource',[]).
 
         // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
         params.callback = 'CORS';
-        var cors_callback = function(response) {
+        var cors_callback = function(response, status, headers) {
           response = response.replace(/^(\/\*\*\/ )?CORS\(/,'').replace(/\)$/,'');
           var parsed_response = JSON.parse(response);
 
@@ -50,7 +50,7 @@ angular.module('api.bountysource',[]).
             // if (parsed_response.meta.pagination) {
             //   $rootScope.$broadcast('paginationLoaded', parsed_response.meta.pagination)
             // }
-            deferred.resolve(callback(parsed_response));
+            deferred.resolve(callback(parsed_response, status, headers));
           }
         };
 
@@ -60,7 +60,6 @@ angular.module('api.bountysource',[]).
 
         var headers = {};
         headers.Accept = 'application/vnd.bountysource+json; version=0';
-
         if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
         else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
         else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
@@ -124,7 +123,6 @@ angular.module('api.bountysource',[]).
 
         var headers = {};
         headers.Accept = 'application/vnd.bountysource+json; version=1';
-
         if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
         else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback); }
         else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback); }

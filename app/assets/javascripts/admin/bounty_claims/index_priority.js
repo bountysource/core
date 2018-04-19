@@ -7,22 +7,29 @@ angular.module('app')
   });
 })
 .controller("PriorityBountyClaims", function ($scope, $window, $api) {
+  
+  // number of items to show in a page
+  var itemsPerPage = 100;
+  $scope.itemsPerPage = itemsPerPage;
+  $scope.maxSize = 10; // number of pagination links to show
 
-//set column sort models here!!
-  var params = {per_page: 500};
-  $scope.bounty_claims = $api.get_bounty_claims(params).then(function(response) {
-    if (response.meta.success) {
-      // for priority view, we render only claims in dispute period
-      var filtered_data = [];
-      for (var i = 0; i < response.data.length; i++) {
-        if (response.data[i].in_dispute_period) {
-          filtered_data.push(response.data[i]);
-        }
+  $scope.updatePage = function(page){
+    var params = {
+      page: page,
+      per_page: itemsPerPage,
+      in_dispute_period: true // priority claims are claims within dispute period
+    };
+
+    $api.call('/admin/bounty_claims', params, function(response, _, headers){
+      if (response.meta.success) {
+        $scope.bounty_claims = response.data;
+
+        // set pagination data
+        $scope.currentPage = page;
+        $scope.pageCount = headers('Total-pages');
       }
-      return filtered_data;
-    } else {
-      return response.data.error;
-    }
-  });
+    });
+  };
 
+  $scope.updatePage(1);
 });
