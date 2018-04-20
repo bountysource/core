@@ -363,6 +363,10 @@ class Issue < ApplicationRecord
     self[:remote_created_at] || self[:created_at]
   end
 
+  def real_updated_at
+    self[:remote_updated_at] || self[:updated_at]
+  end
+
   def collected_event
     bounty_claims.paid_out.first.bounty_claim_events.collected.first
   end
@@ -459,6 +463,10 @@ class Issue < ApplicationRecord
     html = html.gsub(/<a href="https:\/\/www.bountysource.com\/issues\/.*<img src="https:\/\/api.bountysource.com\/badge.*"><\/a>/, '')
     html = ActionController::Base.helpers.sanitize(html)
     html
+  end
+
+  def truncate_body_markdown
+    self[:body_markdown].truncate(140) if self[:body_markdown]
   end
 
   # has the author issued a takedown for the title/body? comments by others will still appear.

@@ -37,8 +37,8 @@ def featured_team
 end
 
 def create_random_bounty
-  2.times do
-    issue = Issue.order("RANDOM()").first
+  50.times do
+    issue = Issue.where(can_add_bounty: true).order("RANDOM()").first
     Person.order("RANDOM()").first.bounties.create(amount: rand(1..10)*10, issue_id: issue.id)
     issue.update_bounty_total
   end
