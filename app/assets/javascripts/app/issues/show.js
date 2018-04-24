@@ -59,7 +59,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $route
 
   $scope.status = {
     usdOpen: false,
-    cryptoOpen: true
+    cryptoOpen: false
   };
 
   $scope.selectedCrypto = 'ETH';
