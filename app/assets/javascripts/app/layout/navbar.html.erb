@@ -89,6 +89,13 @@
           </a>
         </li>
 
+        <!-- BANCOR widget (CAN / ETH)-->
+        <li id='bancor-wc-nav'>
+          <a href="" class="font-weight-regular navbar-main-button">
+            <button ng-click="bancorWidget.toggle()" class="btn btn-light-blue font-weight-regular navbar-main-button">Get CAN</button>
+          </a>
+        </li>
+
         <!-- User dropdown if logged in -->
         <li class="dropdown" ng-if="current_person">
           <a href="#" class="navbar-user-dropdown dropdown-toggle" data-toggle="dropdown">
@@ -157,6 +164,15 @@
       </ul>
 
     </div>
+  </div>
+</div>
+
+<div ng-controller="BancorWidgetController" id="bancor-wc-container" ng-show="visible" >
+  <button class='widget-close' ng-click='close()'>
+    x
+  </button>
+  <div id="bancor-wc">
+    <div id='testing'></div>
   </div>
 </div>
 

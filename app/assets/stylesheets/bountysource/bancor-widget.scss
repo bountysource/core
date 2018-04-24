@@ -1,0 +1,25 @@
+#bancor-wc-nav {
+  > a {
+    outline: 0;    
+  }
+}
+
+#bancor-wc-container {
+  position: relative;
+  
+  .widget-close {
+    position: absolute;
+    right: 3%;
+    margin-top: 25px;
+    z-index: 10;
+    width: 2%;
+  }
+}
+
+@media (max-width: 768px) {
+  #bancor-wc-container .widget-close {
+    right: 6%;
+    bottom: 3%;
+    width: 10%;
+  }
+}
