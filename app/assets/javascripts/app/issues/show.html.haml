@@ -141,15 +141,7 @@
                   %div.mt-5
                     %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "selectedCrypto === 'BTC'"} POST THIS BOUNTY
 
-        %team-about-panel
-
-
-
-
-
-
-
-            
+        %team-about-panel{"ng-show" => "team.id"}
 
   %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
     %takedown
