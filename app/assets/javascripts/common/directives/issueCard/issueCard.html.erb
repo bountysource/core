@@ -1,0 +1,62 @@
+<div class="issue-card">
+  <div class="issue-body">
+    <div class="row">
+      <div class="col-sm-2 tracker-info">
+        <a ng-href="/trackers/{{ issue.tracker.slug }}">
+          <img class="tracker-image" src="https://cloudinary-a.akamaihd.net/bountysource/image/upload/d_noaoqqwxegvmulwus0un.png,c_pad,w_100,h_100,b_white/Bountysource_Animals97_iuw00n.png" alt="" />
+          <!-- <img ng-src="{{ issue.tracker.image_url }}"></img> -->
+          <p class="tracker-name">{{issue.tracker.name}}</p>
+        </a>
+      </div>
+
+      <div class="col-sm-10 issue-info">
+        <h4 class="issue-title">
+          <a ng-href="/issues/{{ issue.slug }}">
+            <strong>{{issue.title}}</strong>
+          </a>
+        </h4>
+
+        <div class="issue-post-info issue-spacing-top">
+          <span class="issue-author">
+            Posted by: <a ng-if="issue.author.slug" ng-href="{{ issue.author.slug }}">
+              {{ issue.author.display_name }}
+            </a>
+            <span ng-if="issue.author.slug === undefined">
+              {{ issue.author.display_name }}
+            </span>
+          </span>
+          <span class="issue-created-at">
+            <%= image_tag "icons/icon_timestamp.svg", class: 'icon', src: '' %> {{issue.created_at | timeDiff }} ago
+          </span>
+          <span class="issue-updated-at">
+            <i class="fa fa-calendar-o icon"></i>
+            {{issue.updated_at | timeDiff }} ago
+          </span>
+        </div>
+
+        <p class="issue-description issue-spacing-top">
+          {{ issue.description }}
+        </p>
+
+        <div class="issue-etc">
+          <span class="issue-comment">
+            <i class="fa fa-comments-o icon"></i>
+            <a ng-href="/issues/{{ issue.slug }}">
+              {{issue.comment_count}} comments
+            </a>
+          </span>
+          <span class="badge search-filter" ng-repeat="language in issue.tracker.languages">
+            <span>{{language.name}}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="issue-bounty">
+    <span class="issue-bounty-amount">
+      {{issue.bounty_total | dollars:{space:true} }}
+    </span>
+  </div>
+
+</div>
