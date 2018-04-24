@@ -1,0 +1,118 @@
+#landing-page .issue-card {
+	position: relative;
+	box-shadow: 0 2px 4px 0 rgba(144, 164, 183, 0.22);
+	background: white;
+	border-radius: 6px;
+	padding: 2em;
+	margin-bottom: 2em;
+
+	.issue-body {
+		display: flex;
+		a {
+			color: black;
+			&:hover {
+				color: #33ccff;
+			}
+		}
+
+		.tracker-info {
+			display: flex;
+			flex-flow: row wrap;
+			align-content: space-between;
+
+			.tracker-image-container, .tracker-image {
+				width: 100%;
+			}
+
+			.tracker-name {
+				margin-bottom: 0.5em;
+				margin-top: 0.5em;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+		}
+
+		.issue-info {
+			padding-left: 2em;
+
+			.issue-title {
+				margin: 0;
+			}
+
+			.issue-author {
+				max-width: 35em;
+			}
+
+			.issue-caption {
+				font-size: 12px;
+			}
+
+			.issue-author,
+			.issue-created-at,
+			.issue-updated-at,
+			.issue-comment {
+				margin-right: 1em;
+			}
+
+			.issue-caption,
+			.issue-description
+			{
+				margin-top: 1em;
+			}
+
+			.issue-description {
+				overflow: hidden;
+				position: relative;
+				line-height: 1.5em;
+				max-height: 4.5em; /* only show 3 lines */
+				text-align: justify;
+				margin-right: -1em;
+				padding-right: 1em;
+
+				&:before {
+					content: '...';
+					position: absolute;
+					right: 1em;
+					bottom: 0;
+					background-color: white;
+					z-index: 5;
+				}
+
+				&:after {
+					content: '';
+					position: absolute;
+					right: 0;
+					width: 1em;
+					height: 1em;
+					margin-top: 0.2em;
+					background: white;
+				}
+			}
+		}
+
+		.icon {
+		  width: 1em;
+		  margin-right: 0.2em;
+		}
+	} // issue body END
+
+	.issue-bounty {
+		position: absolute;
+		right: -0.2px; // cover gap between bounty and issue-body background
+		bottom: 0;
+		background-color: #485f64;
+		color: white;
+		width: 20%;
+		display: table;
+		border-bottom-right-radius: 6px;
+
+		.issue-bounty-amount {
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+			font-size: 18px;
+			height: 3em;
+		}
+	}
+}
