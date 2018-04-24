@@ -1,5 +1,9 @@
 <div class="row" style="margin-top: 50px;">
-  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+  <div ng-show="verify_email_send" class="alert alert-success">
+    An email has sent to your email address. Please verify your email within 2 hours.
+  </div>
+
+  <div ng-hide="verify_email_send" class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
     <h2 class="text-center">SIGN UP</h2>
     <div ng-hide="signup_data" class="mt-5 center-block" style="max-width: 420px;">
       <ng-include src="'salt/session/_buttons.html'"></ng-include>

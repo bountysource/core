@@ -32,6 +32,10 @@
 #  quickbooks_vendor_id :integer
 #  reset_digest         :string
 #  reset_sent_at        :datetime
+#  confirmation_token   :string
+#  confirmed_at         :datetime
+#  confirmation_sent_at :datetime
+#  unconfirmed_email    :string
 #
 # Indexes
 #

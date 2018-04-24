@@ -601,7 +601,7 @@ ActiveRecord::Schema.define(version: 20180411015847) do
 
   create_table "payment_notifications", id: :serial, force: :cascade do |t|
     t.string "type", limit: 255, null: false
-    t.string "txn_id", limit: 255, null: false
+    t.string "txn_id", limit: 255
     t.text "raw_post"
     t.integer "order_id"
     t.datetime "created_at"
@@ -661,6 +661,10 @@ ActiveRecord::Schema.define(version: 20180411015847) do
     t.integer "quickbooks_vendor_id"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["email"], name: "index_people_on_email", unique: true
     t.index ["shopping_cart_id"], name: "index_people_on_shopping_cart_id"
   end

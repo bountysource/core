@@ -1,22 +1,175 @@
 %div{ "class"=>"text-center", "ng-show"=>"issue_deleted" }
   %h3 {{issue_error}}
-%div{ "ng-if"=>"!issue_deleted" }
+.container
   %div{ "ng-show"=>"issue.id && (!issue.tracker || !issue.tracker.takendown)" }
-    %team-view
+    .row.mt-5
+      .col-md-8
+        / SECTION ISSUE CARD START
+        .panel.panel-default
+          .panel-body
+            %span.label.label-success.label-padded.label-lg{ "ng-show" => "!issue.generic && issue.can_add_bounty"} Open
+            %span.label.label-salmon.label-padded.label-lg{ "ng-hide" => "issue.generic || issue.can_add_bounty"} Closed
+            %span.label.label-info.label-padded.label-lg{ "ng-show" => "issue.winning_bounty_claim || issue.paid_out"} Paid Out
 
-      .alert.alert-warning{ "ng-show" => "issue.can_add_bounty && issue.team.bounties_disabled" }
-        %div{"style"=>"text-align: center; font-size: 18px"}
-          Bounties for this issue have been disabled by the team.
-
-      .row
-        .col-sm-4.col-xs-12.col-sm-push-8
-          %div{ "ng-show" => "!issue.team.bounties_disabled" }
-            %div{ "ng-include" => "'app/issues/_show_backer_box.html'" }
+            %h3.text-black
+              {{ issue.title }}
             
-            %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
-        
-        .col-sm-8.col-xs-12.col-sm-pull-4
-          %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+            %div
+              %a.text-gunmetal{"ng-href" => "/teams/{{team.slug}}"}
+                %span.font-16.text-black {{team.name}}            
+
+            %div.mt-3.font-12
+              %span.text-muted
+                %i.glyphicon.glyphicon-calendar
+                {{ issue.remote_created_at | date:'dd MMMM yyyy' }}
+              %span.text-muted.ml-3
+                %i.glyphicon.glyphicon-user
+                Posted by
+                %span.text-black {{ issue.author.display_name }}
+
+            %div.mt-3{"style" => "overflow: hidden;"}
+              %p.text-muted.issue-body-show-less{"ng-bind-html" => "issue.body_html", "ng-class" => "{'show-more': issueBodyShow}"}
+              %a{"ng-click" => "issueBodyShow = !issueBodyShow"} 
+                {{ issueBodyShow ? 'Hide' : 'See More' }}
+
+            %div.mt-5
+              %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-href" => "{{issue.url}}", :style => "font-size: 12px", :target => "_blank"}
+                %span.glyphicon.glyphicon-new-window
+                View in
+                %name-for-external-link{"object-type" => "issue.type"}
+
+
+        / SECTION ISSUE CARD END
+        / SECTION ISSUE DETAILS BEGIN
+        .panel.panel-default
+          .panel-body
+            %ul.nav.nav-tabs.nav-tabs-sm
+              %li{"ng-class" => "active_tab('overview')"}
+                %a{"ng-href" => "/issues/{{issue.slug}}"} Comments
+              %li{"ng-class" => "active_tab('backers')", "ng-if" => "issue.backers_count > 0"}
+                %a{"ng-href" => "/issues/{{issue.slug}}/backers"}
+                  Backers
+                  %span.hidden-xs ({{issue.backers_count}})
+              %li{"ng-class" => "active_tab('proposals')", "ng-if" => "rfpAuthorizationResolved &&  displayRfpTab"}
+                %a{"ng-click-require-auth" => "", "ng-href" => "/issues/{{issue.slug}}/proposals"}
+                  Proposals
+
+            %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+        / SECTION ISSUE DETAILS END
+
+      
+      .col-md-4
+        .panel.panel-gunmetal
+          .panel-heading.text-white.text-center.pt-5.pb-5
+            %h4.font-weight-semibold
+              POST A BOUNTY
+            %p
+              Be the first to post a bounty for this issue!
+          .panel-body
+            .text-center
+              %div There are several ways to post this bounty
+              %accordion{"close-others" => "oneAtATime"}
+                / FIAT
+                %accordion-group.mt-3{"is-open" => "status.usdOpen", "ng-class" => "{'panel-gunmetal': status.usdOpen, 'panel-default': !status.usdOpen}"}
+                  %accordion-heading
+                    .font-14.pt-2.pb-2
+                      Contribute with USD
+                      %i.pull-right.glyphicon{"ng-class" => "{'glyphicon-chevron-down': status.usdOpen, 'glyphicon-chevron-right': !status.usdOpen}"}
+                  .text-center
+                    %div.mt-3.font-weight-semibold
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(15)"} $15
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(50)"} $50
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(500)"} $500
+                    %small - or -
+                    .row.display-flex.vertical-align-bottom 
+                      .col-xs-6.pr-0
+                        %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "amount"}
+                      .col-xs-6.pl-0
+                        %button#fiatSelect.btn-borderless.font-weight-semibold{:type => "button", "style" => "height: 100%"}
+                          USD
+                    %hr.my-0{"style" => "height: 2px;"}
+                    %small.text-muted.pull-right *Minimum $5 USD
+                    %div.mt-5
+                      %button.btn.btn-light-blue.btn-responsive.py-3 CHECKOUT
+                / CRYPTO
+                %accordion-group.mt-3{"is-open" => "status.cryptoOpen", "ng-class" => "{'panel-gunmetal': status.cryptoOpen, 'panel-default': !status.cryptoOpen}", 'style' => 'overflow: visible;'}
+                  %accordion-heading
+                    .font-14.pt-2.pb-2
+                      Contribute with crypto
+                      %i.pull-right.glyphicon{"ng-class" => "{'glyphicon-chevron-down': status.cryptoOpen, 'glyphicon-chevron-right': !status.cryptoOpen}"}
+                  %div
+                    .text-left.text-muted I want to pay with:
+                    %div.mt-3.font-weight-semibold
+                      %button.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('ETH')",  "ng-class" => "{'btn-cool-grey': selectedCrypto === 'ETH'}"} ETH
+                      %button.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('BTC')",  "ng-class" => "{'btn-cool-grey': selectedCrypto === 'BTC'}"} BTC
+                      %button.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('CAN')",  "ng-class" => "{'btn-cool-grey': selectedCrypto === 'CAN'}"} CAN
+                    %div.mt-3.font-weight-semibold
+                      %button.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto(null)", "ng-class" => "{'btn-cool-grey': isMiscCrypto(selectedCrypto) }"} OTHER ERC20
+
+                  %div.mt-5{"ng-if" => "selectedCrypto === 'CAN'"}
+                    .text-left.text-muted
+                      Contribution Amount
+                    %div.mt-3.font-weight-semibold
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(100)"} 100 CAN
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(200)"} 200 CAN
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(500)"} 500 CAN
+                  %div.mt-5{"ng-if" => "selectedCrypto === 'ETH'"}
+                    .text-left.text-muted
+                      Contribution Amount
+                    %div.mt-3.font-weight-semibold
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(0.25)"} 0.25 ETH
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(0.5)"} 0.5 ETH
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(0.1)"} 1 ETH
+
+                  %div.mt-5
+                    %div{"ng-if" => "selectedCrypto !== 'BTC'" }
+                      .row.display-flex.vertical-align-bottom 
+                        .col-xs-6.pr-0
+                          %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "amount"}
+                        .col-xs-6.pl-0
+                          %button#cryptoSelect.btn-borderless.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
+                            %span.font-8{"ng-if" => "selectedCrypto === null"} SELECT ERC20 TOKEN
+                            %span{"ng-if" => "selectedCrypto !== null"} {{ selectedCrypto }}
+                            %span.caret
+                          %ul.dropdown-menu{"aria-labelledby" => "cryptoSelect", "style" => "min-width: 0;"}
+                            %li{"ng-repeat" => "cryptoOption in cryptoOptions"}
+                              %a{"ng-click" => "setCrypto(cryptoOption)"} {{ cryptoOption }}
+                      %hr.mt-0{"style" => "height: 2px;"}
+                    %div{"ng-if" => "selectedCrypto === 'BTC'" }
+                      .text-muted BTC contributions unavailable
+                  
+                  %div.mt-5
+                    %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "selectedCrypto === 'BTC'"} POST THIS BOUNTY
+
+        %team-about-panel
+
+
+
+
+
+
+
+            
 
   %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
     %takedown
+/ %div{ "ng-if"=>"!issue_deleted" }
+/   %div{ "ng-show"=>"issue.id && (!issue.tracker || !issue.tracker.takendown)" }
+/     %team-view
+
+/       .alert.alert-warning{ "ng-show" => "issue.can_add_bounty && issue.team.bounties_disabled" }
+/         %div{"style"=>"text-align: center; font-size: 18px"}
+/           Bounties for this issue have been disabled by the team.
+
+/       .row
+/         .col-sm-4.col-xs-12.col-sm-push-8
+/           %div{ "ng-show" => "!issue.team.bounties_disabled" }
+/             %div{ "ng-include" => "'app/issues/_show_backer_box.html'" }
+            
+/             %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
+        
+/         .col-sm-8.col-xs-12.col-sm-pull-4
+/           %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+/ 
+/  %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
+/   %takedown

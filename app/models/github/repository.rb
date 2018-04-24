@@ -83,7 +83,6 @@ class Github::Repository < Tracker
 
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
-
     previous_synced_at = options[:force] ? nil : self.synced_at
     update_from_github(options)
     find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
@@ -99,10 +98,9 @@ class Github::Repository < Tracker
     end
   rescue Github::API::NotFound
     unless deleted_at
-      deleted_at = Time.now
-      update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
+      update_attributes(deleted_at: Time.now)
       issues.each do |issue|
-        issue.update_attributes(deleted_at: deleted_at, url: issue.url + "?deleted_at=#{deleted_at.to_i}")
+        issue.update_attributes(deleted_at: Time.now)
       end
     end
   end
@@ -124,7 +122,6 @@ class Github::Repository < Tracker
       params:         params,
       headers:        { 'If-Modified-Since' => if_modified_since }
     )
-
     # trigger an update on the underlying object if modified
     self.class.update_attributes_from_github_data(api_response.data, obj: self) if api_response.modified?
   end

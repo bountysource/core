@@ -32,6 +32,10 @@
 #  quickbooks_vendor_id :integer
 #  reset_digest         :string
 #  reset_sent_at        :datetime
+#  confirmation_token   :string
+#  confirmed_at         :datetime
+#  confirmation_sent_at :datetime
+#  unconfirmed_email    :string
 #
 # Indexes
 #
@@ -44,6 +48,7 @@ FactoryBot.define do
   factory :person, class: Person do
     first_name { 'John' }
     last_name { 'Doe' }
+    confirmed_at { Time.now }
     sequence(:email) { |n| "qa+test-#{n}@bountysource.com" }
 
     pw = 'abcd1234'

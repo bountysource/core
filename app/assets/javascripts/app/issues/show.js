@@ -40,6 +40,38 @@ angular.module('app').controller('IssueShowController', function ($scope, $route
     });
   };
 
+  $scope.isMiscCrypto = function(crypto){
+    return !['ETH', 'BTC', 'CAN'].includes(crypto);
+  }
+
+  $scope.setCrypto = function(crypto){
+    $scope.amount = 0;
+    $scope.selectedCrypto = crypto;
+  }
+
+  $scope.setAmount = function(amount){
+    $scope.amount = amount;
+  }
+
+  $scope.oneAtATime = true;
+  $scope.bioShow = false;
+  $scope.issueBodyShow = false;
+
+  $scope.status = {
+    usdOpen: false,
+    cryptoOpen: true
+  };
+
+  $scope.selectedCrypto = 'ETH';
+  $scope.cryptoOptions = ['AE', 'BNB', 'BNT', 'CIND'];
+  $scope.amount = 0;
+
+  $scope.active_tab = function(name) {
+    if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
+    if (name === 'backers' && (/^\/issues\/[a-z-_0-9]+\/backers/).test($location.path())) { return "active"; }
+    if (name === 'proposals' && (/^\/issues\/[a-z-_0-9]+\/proposals/).test($location.path())) { return "active"; }
+  };
+
 
 
 //  // google analytics for product info

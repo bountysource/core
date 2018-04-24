@@ -151,6 +151,26 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def email_verification(options)
+    @person = options[:person]
+    @token = options[:token]
+
+    mail(to: @person.email, subject: "Verify your email") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def change_email(options)
+    @person = options[:person]
+    @token = options[:token]
+
+    mail(to: @person.email, subject: "Verify email change") do |format|
+      format.text
+      format.html
+    end
+  end
+
   def fundraiser_pledge_made(options)
     @person = options[:person]
     @pledge = options[:pledge]
@@ -179,6 +199,16 @@ class Mailer < ActionMailer::Base
   end
 
   def bounty_refunded(options)
+    @person = options[:person]
+    @bounty = options[:bounty]
+
+    mail(to: @person.email, subject: "Bounty refunded") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def bounty_refunded_for_deleted_issue(options)
     @person = options[:person]
     @bounty = options[:bounty]
 

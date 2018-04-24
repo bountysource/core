@@ -7,7 +7,6 @@ module Api::V2::IssuesHelper
     # Limit by type
     collection = collection.where(type: params[:type]) if params.has_key?(:type)
 
-
     # Limit by Tracker ID
     if params.has_key? :tracker_id
       tracker_ids = (params[:tracker_id] || '').to_s.split(",")

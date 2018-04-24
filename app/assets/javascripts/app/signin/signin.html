@@ -28,6 +28,7 @@
         <input type="hidden" ng-model="form_data.account_link_id" >
 
         <div class="alert alert-salmon" ng-show="error">{{error}}</div>
+        <div class="alert alert-success" ng-show="message">{{ message }}</div>
       </div>
       <div class="form-group" ng-class="{ 'has-error': (show_validations && form.email.$invalid) || (form.email.$error.email), 'has-success': (signin_or_signup == 'signin' || signin_or_signup == 'signup'), 'has-warning': signin_or_signup == 'pending' }">
         <label class="control-label col-md-4 col-sm-4" for="inputEmail">E-mail</label>
@@ -37,6 +38,7 @@
         <div class="col-md-1 col-sm-6 text-left">
             <span class="help-block" ng-show="signin_or_signup=='signin'"><small>Found!</small></span>
             <span class="help-block" ng-show="signin_or_signup=='signup'"><small>Available!</small></span>
+            <span class="help-block" ng-show="signin_or_signup=='not_verify'"><small><a ng-click="resend_verification()">Resend Confirmation Email</a></small></span>
         </div>
       </div>
 

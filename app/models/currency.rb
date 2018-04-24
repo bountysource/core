@@ -26,6 +26,14 @@ class Currency < ApplicationRecord
     ].each(&:sync)
   end
 
+  def self.update_price(response)
+    if response.success?
+      model = first || new
+      model.value = JSON.parse(response.body)[0]["price_usd"]
+      model.save
+    end
+  end
+
   def self.index
     currencies = {}
     pluck(:type).map(&:constantize).each do |klass|

@@ -32,6 +32,10 @@
 #  quickbooks_vendor_id :integer
 #  reset_digest         :string
 #  reset_sent_at        :datetime
+#  confirmation_token   :string
+#  confirmed_at         :datetime
+#  confirmation_sent_at :datetime
+#  unconfirmed_email    :string
 #
 # Indexes
 #
@@ -41,6 +45,7 @@
 
 class Person < ApplicationRecord
   include PasswordResetable
+  include EmailVerification
   # temporarily holds a raw access token... useful in controllers-and-views
   attr_accessor :current_access_token
 
@@ -160,7 +165,8 @@ class Person < ApplicationRecord
     .includes(:twitter_account, :github_account)
   }
 
-  scope :active, lambda { where.not(deleted: true).where(suspended_at: nil) }
+  scope :not_deleted, lambda { where.not(deleted: true).where(suspended_at: nil) }
+  scope :active, lambda { not_deleted.where.not(confirmed_at: nil) }
 
   scope :bounty_hunters, lambda { |options={}|
     retval = active.where(bounty_hunter: true)
