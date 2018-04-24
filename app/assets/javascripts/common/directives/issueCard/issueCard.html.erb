@@ -5,8 +5,8 @@
         <a ng-href="/trackers/{{ issue.tracker.slug }}">
           <img class="tracker-image" src="https://cloudinary-a.akamaihd.net/bountysource/image/upload/d_noaoqqwxegvmulwus0un.png,c_pad,w_100,h_100,b_white/Bountysource_Animals97_iuw00n.png" alt="" />
           <!-- <img ng-src="{{ issue.tracker.image_url }}"></img> -->
-          <p class="tracker-name">{{issue.tracker.name}}</p>
         </a>
+        <a ng-href="/trackers/{{ issue.tracker.slug }}" class="tracker-name">{{issue.tracker.name}}</a>
       </div>
 
       <div class="col-sm-10 issue-info">
@@ -16,7 +16,7 @@
           </a>
         </h4>
 
-        <div class="issue-post-info issue-spacing-top">
+        <div class="issue-caption issue-spacing-top">
           <span class="issue-author">
             Posted by: <a ng-if="issue.author.slug" ng-href="{{ issue.author.slug }}">
               {{ issue.author.display_name }}

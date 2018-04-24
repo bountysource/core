@@ -1,56 +1,8 @@
-<style>
-  .box-shadow {
-    box-shadow: 2px 0 4px -2px rgba(144, 164, 183, 0.11);
-    border: 1px solid transparent;
-    border-left: none;
-  }
-
-  .landing-page {
-    width: 100%;
-    margin: 0;
-    padding: 0 0 0 25px;
-  }
-
-  .landing-page > .landing-page-section {
-    padding-top: 50px;
-  }
-
-  .landing-page > .sidebar > section {
-    padding-bottom: 2em;
-    margin-bottom: 2em;
-    border-bottom: solid 1px #E0E0E0;
-    font-size: 13px;
-  }
-
-  .post-bounty-cta > .cta-btn {
-    margin-top: 1em;
-    width: 100%;
-    box-shadow: 0 2px 3px 0 #00000048;
-  }
-
-  .post-bounty-cta > .cta-title {
-    color: black;
-    margin-top: 0;
-  }
-
-  .sidebar {
-    padding-right: 35px;
-  }
-
-  .sidebar .section-title {
-    margin-bottom: 20px;
-  }
-
-  .search-section {
-    background-color: #f9f9f9;
-  }
-</style>
-
-<div class="row landing-page">
-  <div class="col-sm-3 box-shadow sidebar landing-page-section">
+<div class="row" id="landing-page">
+  <div class="col-sm-3 sidebar-section landing-page-section">
     <section class='post-bounty-cta'>
       <h3 class='cta-title'>Support for Open Source Software</h3>
-      <p>A community with {{people_count.total | number}} members hunting for bounties and earn the rewards.</p>
+      <p>A community with <strong>{{people_count.total | number}}</strong> members hunting for bounties and earn the rewards.</p>
       <a class="btn btn-light-blue cta-btn" ng-click=openPostBountyModal()>
         <strong>POST BOUNTY</strong>
       </a>

@@ -1,28 +1,4 @@
 <div class='timeline-container'>
-  <style>
-    .timeline-container {
-      box-shadow: 0 0 8px 0 #0000001f;
-      border: 1px solid transparent;
-      border-left: none;
-
-      max-height: 300px;
-      overflow-y: scroll;
-      overscroll-behavior: contain;
-    }
-
-    .timeline-container td {
-      padding: 20px 20px 0 20px;
-    }
-
-    .timeline-container tr:last-child td:last-child {
-      padding-bottom: 20px;
-    }
-
-    .timeline-container td.bounty-description {
-      border-top: none;
-      font-size: 13px;
-    }
-  </style>
   <table class="table-fixed">
     <tr ng-repeat="event in events">
       <td class="bounty-description">
