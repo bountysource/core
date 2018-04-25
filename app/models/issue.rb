@@ -78,6 +78,8 @@ class Issue < ApplicationRecord
 
   UNKNOWN_TITLE = '(Issue Title Unknown)'
 
+  enum category: [:fiat, :crypto]
+
   has_paper_trail :only => [:remote_id, :url, :number, :title, :body, :body_markdown, :tracker_id, :can_add_bounty]
 
   has_many :bounties
