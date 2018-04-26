@@ -1,17 +1,6 @@
 angular.module('app').controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter, $anchorScroll) {
-  $scope.reset_form_data = function() {
-    $scope.form_data = {
-      direction: "desc",
-      order: "bounty_total",
-      languages: [],
-      trackers: []
-    };
-    $scope.getLanguage();
-  };
-
   // sets drop-down bounty types
   $scope.bounty_types = ["Show All Bounties", "Crypto Bounties Only", "Cash Bounties Only"];
-  $scope.bountyType = $scope.bounty_types[0];
 
   //sets drop-down sorting options
   $scope.sort_options = {
@@ -24,12 +13,17 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   };
 
   $scope.selectSort = function() {
-    for (var i=1;i<=Object.keys($scope.sort_options).length;i++) {
-      if ($scope.sort_options['option' + i].value === $routeParams.order) {
-        if ($scope.sort_options['option' + i].direction === $routeParams.direction) {
-          $scope.selectedSort = $scope.sort_options['option' + i];
+    if ($scope.form_data.order) {
+      for (var i=1;i<=Object.keys($scope.sort_options).length;i++) {
+        if ($scope.sort_options['option' + i].value === $scope.form_data.order) {
+          if ($scope.sort_options['option' + i].direction === $scope.form_data.direction) {
+            $scope.selectedSort = $scope.sort_options['option' + i];
+            break;
+          }
         }
       }
+    } else {
+      $scope.selectedSort = $scope.sort_options['option1'];
     }
   }
 
@@ -52,6 +46,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   };
 
   $scope.selectTracker = function($item, $model, $label){
+    $scope.form_data.trackers = $scope.form_data.trackers || [];
     if($scope.form_data.trackers.indexOf($item.name) === -1) {
       $scope.form_data.trackers.push($item.name);
     }
@@ -72,6 +67,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   }
 
   $scope.selectLanguage = function($item, $model, $label){
+    $scope.form_data.languages = $scope.form_data.languages || [];
     if($scope.form_data.languages.indexOf($item.name) === -1) {
       $scope.form_data.languages.push($item.name);
     }
@@ -85,15 +81,14 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   };
 
   $scope.submit_query = function(page) {
-
-    if (!page) {
+    if (page) {
+      $scope.form_data.page = page;
+    } else {
       $scope.loading_search_results = true;
     }
 
-    $scope.form_data.page = page || 1;
     var cleaned_form_data = clean_object($scope.form_data);
     $location.search(cleaned_form_data);
-    $scope.featured_issues = []; // removes featured issues from view
     $api.bounty_search(cleaned_form_data).then(function(response) {
       $scope.search_results = response.issues;
       $scope.issues_count = response.issues_total;
@@ -155,35 +150,38 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
 
   //update scope from route params
   $scope.populate_form_data_with_route_params = function() {
-    $scope.reset_form_data();
-    for (var key in $routeParams) {
-      if (!$routeParams[key] || $routeParams[key] === "" || $routeParams[key].length < 1) { // if $routeParams value is undefined, blank, or length is less than 1
-        continue;
-      }
-      else if ((key === "languages" || key === "trackers") && $routeParams[key]) {
-        var string_arr = $routeParams[key].split(",");
-        for (var i=0;i<string_arr.length;i++) {
-          $scope.form_data[key].push(string_arr[i]);
+    if (Object.keys($routeParams).length > 0) {
+      for (var key in $routeParams) {
+        if (!$routeParams[key] || $routeParams[key] === "" || $routeParams[key].length < 1) { // if $routeParams value is undefined, blank, or length is less than 1
+          continue;
         }
-        $scope.show_advanced_search = true;
-      }
-      else if((key === "min" || key === "max") && $routeParams[key]) {
-        $scope.form_data[key] = parseInt($routeParams[key], 10);
-        $scope.show_advanced_search = true;
-      }
-      else {
-        $scope.form_data[key] = $routeParams[key];
+        else if ((key === "languages" || key === "trackers") && $routeParams[key]) {
+          var string_arr = $routeParams[key].split(",");
+          $scope.form_data[key] = [];
+          for (var i=0;i<string_arr.length;i++) {
+            $scope.form_data[key].push(string_arr[i]);
+          }
+          $scope.show_advanced_search = true;
+        }
+        else if((key === "min" || key === "max") && $routeParams[key]) {
+          $scope.form_data[key] = parseInt($routeParams[key], 10);
+          $scope.show_advanced_search = true;
+        }
+        else {
+          $scope.form_data[key] = $routeParams[key];
+        }
       }
     }
-    $scope.selectSort();
   };
 
-  if (Object.keys($routeParams).length > 0) {
+  $scope.initiate = function() {
+    $scope.form_data = {};
     $scope.populate_form_data_with_route_params();
-    $scope.submit_query();
-  } else {
-    $scope.reset_form_data();
-    $scope.selectSort();  
+    $scope.bountyType = $scope.bounty_types[0];
+    $scope.getLanguage();
+    $scope.selectSort();
     $scope.submit_query();
   }
+
+  $scope.initiate();
 });
