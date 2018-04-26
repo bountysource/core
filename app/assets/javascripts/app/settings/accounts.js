@@ -43,7 +43,6 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
       $api.v2.wallets({ person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr }).then(function (response){ if (response.error) {
             $scope.error = response.error;
           } else {
-            response
             $scope.success = "Successfully updated wallet";
           }
       });
