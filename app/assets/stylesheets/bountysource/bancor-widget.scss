@@ -1,3 +1,5 @@
+$widget-close-color: rgb(0, 191, 255);
+
 #bancor-wc-nav {
   > a {
     outline: 0;    
@@ -6,20 +8,69 @@
 
 #bancor-wc-container {
   position: relative;
-  
+
+  .widget-close-long {
+    height: 1.5em;
+    background: $widget-close-color;
+    text-align: center;
+    color: white;
+    cursor: default;
+    display: block;
+
+    &:hover {
+      background: #0087b4;
+    }
+
+    @media (max-width: 1135px) {
+      display: block;
+    }
+  }
+
   .widget-close {
     position: absolute;
-    right: 3%;
-    margin-top: 25px;
+    margin-top: 0.4em;
     z-index: 10;
-    width: 2%;
-  }
-}
+    text-align: center;
+    cursor: default;
 
-@media (max-width: 768px) {
-  #bancor-wc-container .widget-close {
-    right: 6%;
-    bottom: 3%;
-    width: 10%;
+    width: 1.2em;
+    height: 1.2em;
+    line-height: calc(1.2em - 2px);
+    
+    > span {
+      font-size: 15px;
+    }
+
+    border-radius: 20%;
+    border: 2px solid;
+    box-sizing: content-box;
+    
+    border-color: $widget-close-color;
+    background: white;
+    color: $widget-close-color;
+
+    &:hover {
+      color: white;
+      background: $widget-close-color;
+    }
+
+    @media (min-width: 1200px) {
+      right: calc((100% - 1140px) / 2 - 1.2em - 2px);
+    }
+
+    @media (min-width: 1135px) and (max-width: 1199px) {
+      right: calc((100% - 1080px) / 2 - 1.2em - 2px);
+    }
+
+    @media (max-width: 1135px) {
+      display: none;
+    }
+    
+    // @media (max-width: 768px) {
+    //   right: 6%;
+    //   bottom: 3%;
+    //   width: 10%;
+    //   border-radius: 0;
+    // }
   }
 }
