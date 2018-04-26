@@ -20,29 +20,6 @@
 #  index_currencies_on_value   (value)
 #
 
-class Currency < ApplicationRecord
-  validates :type, presence: true
-
-  def self.sync_all
-    [
-      Currency::Bitcoin,
-      Currency::Erc20
-    ].each(&:sync)
-  end
-
-  def self.index
-    currencies = {}
-    pluck(:type).map(&:constantize).each do |klass|
-      currencies[klass.display_name] = klass.first.value
-    end
-    currencies
-  end
-
-  def self.btc_rate
-    Currency::Bitcoin.first.value
-  end
-
-  def featured!
-    update(featured: true)
-  end
+class Currency::Ethereum < Currency
+  validates :value, numericality: { presence: true, greather_than_or_equal_to: 0 }
 end

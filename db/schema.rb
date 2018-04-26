@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404095942) do
+ActiveRecord::Schema.define(version: 20180425061501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -200,9 +200,15 @@ ActiveRecord::Schema.define(version: 20180404095942) do
 
   create_table "currencies", id: :serial, force: :cascade do |t|
     t.string "type", null: false
-    t.decimal "value", null: false
+    t.decimal "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "name"
+    t.string "symbol"
+    t.string "address"
+    t.string "cloudinary_id"
+    t.boolean "featured"
+    t.index ["symbol"], name: "index_currencies_on_symbol"
     t.index ["type"], name: "index_currencies_on_type"
     t.index ["value"], name: "index_currencies_on_value"
   end
