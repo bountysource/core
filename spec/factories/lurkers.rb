@@ -3,8 +3,8 @@
 # Table name: lurkers
 #
 #  id         :integer          not null, primary key
-#  remote_ip  :string           not null
-#  user_agent :string           not null
+#  remote_ip  :string(255)      not null
+#  user_agent :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

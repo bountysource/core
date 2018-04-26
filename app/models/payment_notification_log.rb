@@ -3,8 +3,8 @@
 # Table name: payment_notification_logs
 #
 #  id                :integer          not null, primary key
-#  processor         :string           not null
-#  notification_type :string
+#  processor         :string(255)      not null
+#  notification_type :string(255)
 #  content           :text             not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

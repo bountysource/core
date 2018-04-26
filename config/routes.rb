@@ -525,6 +525,8 @@ Api::Application.routes.draw do
               resources :trackers, controller: :people_trackers, only: [:index]
             end
           end
+
+          resources :wallets, only: [:create]
         end
       end
     end

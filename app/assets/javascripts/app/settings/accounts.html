@@ -12,6 +12,31 @@
 <div class="alert alert-info" ng-show="info">{{info}}</div>
 <div class="alert alert-success" ng-show="success">{{success}}</div>
 
+<form class="form-horizontal" name="form_eth" ng-submit="validate_addr()" novalidate="">
+  <p>Add a cypto address</p>
+  <div class="form-group mt-5">
+    <label class="control-label col-md-2" for="addrLabel">Address Label</label>
+    <div class="col-md-3">
+      <input type="text" id="addrLabel" placeholder="Address Label" ng-model="form_data.addr_label" class="input-medium form-control">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label col-md-2" for="ethAddr">ETH address</label>
+    <div class="col-md-3">
+      <input type="text" id="ethAddr" placeholder="0x4961aC1d43B6249bc998D611F33d42B54E31712E" ng-model="form_data.eth_addr" ng-pattern='^0x[a-fA-F0-9]{40}$' class="input-medium form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-3">
+      <button type="submit" class="btn btn-light-blue btn-long">Add Address Through Metamask</button>
+    </div>
+  </div>
+
+</form>
+
 <form class="form-horizontal" name="form" ng-submit="change_password()" novalidate="">
   <p>If you were curious, we use bcrypt so your password will be salted.</p>
   <div class="form-group mt-5">

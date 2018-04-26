@@ -3,8 +3,8 @@
 # Table name: shorts
 #
 #  id          :integer          not null, primary key
-#  slug        :string           not null
-#  destination :string           not null
+#  slug        :string(255)      not null
+#  destination :string(255)      not null
 #  created_at  :datetime         not null
 #
 # Indexes

@@ -3,9 +3,9 @@
 # Table name: postbacks
 #
 #  id         :integer          not null, primary key
-#  namespace  :string
-#  method     :string
-#  url        :string
+#  namespace  :string(255)
+#  method     :string(255)
+#  url        :string(255)
 #  raw_post   :text
 #  headers    :text
 #  created_at :datetime         not null
