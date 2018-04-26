@@ -52,18 +52,6 @@ describe "live_sync" do
       end
     end
 
-    describe "GoogleCode::Issue" do
-      let(:issue_url) { "https://code.google.com/p/ovz-web-panel/issues/detail?id=49" }
-
-      it "should create new issue" do
-        expect(action).to change(Issue, :count).by(1)
-      end
-
-      it "should fetch issue comment" do
-        expect(action).to change(Comment, :count).by_at_least(1)
-      end
-    end
-
     # describe "SourceForge::Issue" do
     #   let(:issue_url) { "http://sourceforge.net/p/squirrel-sql/bugs/1076/" }
     #
@@ -212,20 +200,6 @@ describe "live_sync" do
       let(:tracker_class) { Trac::Tracker }
       let(:tracker_url) { "http://trac.edgewall.org/" }
       let(:tracker_name) { "trac.edgewall.org" }
-
-      it "should create new Tracker" do
-        expect(action).to change(Tracker, :count).by(1)
-      end
-
-      it "should create Tracker Issues" do
-        expect(action).to change(tracker.issues, :count).by_at_least(tracker_class::MAX_RESULT_PER_PAGE)
-      end
-    end
-
-    describe "GoogleCode::Tracker" do
-      let(:tracker_class) { GoogleCode::Tracker }
-      let(:tracker_url) { "https://code.google.com/p/ovz-web-panel/" }
-      let(:tracker_name) { "ovz-web-panel" }
 
       it "should create new Tracker" do
         expect(action).to change(Tracker, :count).by(1)
@@ -515,46 +489,6 @@ describe "live_sync" do
       expect(info[:tracker_class]).to eq(Bugzilla::Tracker)
       expect(info[:tracker_url]).to eq('https://bugs.webkit.org/buglist.cgi?product=WebKit')
       expect(info[:tracker_name]).to eq('WebKit - WebKit')
-    end
-
-    ############### GOOGLE CODE ###############
-
-    it "https://code.google.com/p/redmine-dmsf/" do
-      expect(info[:issue_class]).to be_nil
-      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
-      expect(info[:tracker_url]).to eq('https://code.google.com/p/redmine-dmsf/')
-      expect(info[:tracker_name]).to eq('redmine-dmsf')
-    end
-
-    it "https://code.google.com/p/jsc3d/issues/list" do
-      expect(info[:issue_class]).to be_nil
-      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
-      expect(info[:tracker_url]).to eq('https://code.google.com/p/jsc3d/')
-      expect(info[:tracker_name]).to eq('jsc3d')
-    end
-
-    it "https://code.google.com/p/redmine-dmsf/issues/detail?id=2" do
-      expect(info[:issue_class]).to eq(GoogleCode::Issue)
-      expect(info[:issue_url]).to eq('https://code.google.com/p/redmine-dmsf/issues/detail?id=2')
-      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
-      expect(info[:tracker_url]).to eq('https://code.google.com/p/redmine-dmsf/')
-      expect(info[:tracker_name]).to eq('redmine-dmsf')
-    end
-
-    it "https://code.google.com/p/chromium/issues/detail?id=165329" do
-      expect(info[:issue_class]).to eq(GoogleCode::Issue)
-      expect(info[:issue_url]).to eq('https://code.google.com/p/chromium/issues/detail?id=165329')
-      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
-      expect(info[:tracker_url]).to eq('https://code.google.com/p/chromium/')
-      expect(info[:tracker_name]).to eq('chromium')
-    end
-
-    it "https://code.google.com/p/tectonicus/issues/detail?id=19" do
-      expect(info[:issue_class]).to eq(GoogleCode::Issue)
-      expect(info[:issue_url]).to eq('https://code.google.com/p/tectonicus/issues/detail?id=19')
-      expect(info[:tracker_class]).to eq(GoogleCode::Tracker)
-      expect(info[:tracker_url]).to eq('https://code.google.com/p/tectonicus/')
-      expect(info[:tracker_name]).to eq('tectonicus')
     end
 
     ################ SOURCEFORGE ###############
