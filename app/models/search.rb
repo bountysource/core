@@ -3,7 +3,7 @@
 # Table name: searches
 #
 #  id         :integer          not null, primary key
-#  query      :string           not null
+#  query      :string(255)      not null
 #  person_id  :integer
 #  created_at :datetime         not null
 #  params     :text             default({})

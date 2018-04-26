@@ -3,13 +3,13 @@
 # Table name: events
 #
 #  id         :integer          not null, primary key
-#  slug       :string           not null
-#  title      :string
-#  url        :string
+#  slug       :string(255)      not null
+#  title      :string(255)
+#  url        :string(255)
 #  issue_ids  :integer          default([]), not null, is an Array
 #  created_at :datetime
 #  updated_at :datetime
-#  subtitle   :string
+#  subtitle   :string(255)
 #
 # Indexes
 #

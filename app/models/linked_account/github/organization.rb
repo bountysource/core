@@ -4,15 +4,15 @@
 #
 #  id               :integer          not null, primary key
 #  person_id        :integer
-#  type             :string
+#  type             :string(255)
 #  uid              :integer
-#  login            :string
-#  first_name       :string
-#  last_name        :string
-#  email            :string
-#  oauth_token      :string
-#  oauth_secret     :string
-#  permissions      :string
+#  login            :string(255)
+#  first_name       :string(255)
+#  last_name        :string(255)
+#  email            :string(255)
+#  oauth_token      :string(255)
+#  oauth_secret     :string(255)
+#  permissions      :string(255)
 #  synced_at        :datetime
 #  sync_in_progress :boolean          default(FALSE)
 #  followers        :integer          default(0)
@@ -21,10 +21,10 @@
 #  updated_at       :datetime
 #  account_balance  :decimal(10, 2)   default(0.0)
 #  anonymous        :boolean          default(FALSE), not null
-#  company          :string
-#  location         :string
+#  company          :string(255)
+#  location         :string(255)
 #  bio              :text
-#  cloudinary_id    :string
+#  cloudinary_id    :string(255)
 #  deleted_at       :datetime
 #
 # Indexes

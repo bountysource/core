@@ -1,4 +1,4 @@
-angular.module('app').controller('AccountSettings', function($scope, $api, $location, $window, Person) {
+angular.module('app').controller('AccountSettings', function($scope, $api, $location, $window, $routeParams, Person, Web3Utils, $log) {
   $scope.set_post_auth_url = function() {
     $api.set_post_auth_url($location.url());
   };
@@ -34,6 +34,21 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   $scope.unlink_account = function(account_type) {
     Person.update({ id: $scope.current_person.id, unlink_account: account_type }, function() {
       $window.document.location.reload();
+    });
+  };
+
+  $scope.validate_addr = function(){
+    Web3Utils.verifyAddress().then(function(fromAddrs) {
+      $scope.form_data.eth_addr = fromAddrs;
+      $api.v2.wallets({ person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr }).then(function (response){ if (response.error) {
+            $scope.error = response.error;
+          } else {
+            response
+            $scope.success = "Successfully updated wallet";
+          }
+      });
+    }).catch(function(error){
+      $log.error('Error when validating ETH addrs ' + error);
     });
   };
 });
