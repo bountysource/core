@@ -106,6 +106,7 @@ class Issue < ApplicationRecord
   has_one :request_for_proposal
   has_many :proposals, through: :request_for_proposal
   has_many :thumbs, as: :item
+  has_one :issue_address
 
   has_account class_name: 'Account::IssueAccount'
 

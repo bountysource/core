@@ -1,4 +1,4 @@
-angular.module('app').controller('IssueShowController', function ($scope, $routeParams, $window, $location, $pageTitle, $anchorScroll, $cart, $analytics, $currency, Timeline, BountyClaim, Issue) {
+angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $cart, $analytics, $currency, Timeline, BountyClaim, Web3Utils, Issue, $modal) {
   var issue_id = parseInt($routeParams.id);
 
   // load core issue object
@@ -62,9 +62,13 @@ angular.module('app').controller('IssueShowController', function ($scope, $route
     cryptoOpen: false
   };
 
+  $scope.log = function(message){
+    console.log(message)
+  }
+
   $scope.selectedCrypto = 'ETH';
   $scope.cryptoOptions = ['AE', 'BNB', 'BNT', 'CIND'];
-  $scope.amount = 0;
+  $scope.amount = '0';
 
   $scope.active_tab = function(name) {
     if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
@@ -72,17 +76,38 @@ angular.module('app').controller('IssueShowController', function ($scope, $route
     if (name === 'proposals' && (/^\/issues\/[a-z-_0-9]+\/proposals/).test($location.path())) { return "active"; }
   };
 
+  $scope.generate_address = function(issue_id){
+    $api.issue_address_create(issue_id).then(function(issue){
+      if(web3.currentProvider.isMetaMask && $scope.selectedCrypto === 'ETH') {
+        $scope.openMetamaskModal()
+      }
+    })
+  }
+
+  $scope.openMetamaskModal = function(){
+    $modal.open({
+    templateUrl: 'common/templates/metamaskModal.html',
+    backdrop: true,
+    controller: function($scope, $modalInstance, amount, Web3Utils) {
+      $scope.amount = amount;
+
+      $scope.closeModal = function() {
+        $modalInstance.close();
+      };
 
 
-//  // google analytics for product info
-//  $scope.issue.$promise.then(function(issue) {
-//    ga('ec:addImpression', {
-//      'id': 'I'+$routeParams.id,
-//      'name': issue.name,
-//      'category': issue.tracker.display_name
-//    });
-//    ga('ec:setAction', 'detail');
-//    ga('send', 'event', 'Ecommerce', 'Detail', {'nonInteraction': 1});
-//  });
+      $scope.sendThroughMetaMask = function(){
+        Web3Utils.sendTransaction($scope.amount, '0x6866Fb7274143b6fAAc33579b4FD3A2bc96cAEbF')
+      }
+    },
+    resolve: {
+      amount: function () {
+        return $scope.amount;
+      }
+    }
 
+  });
+  }
+
+  
 });

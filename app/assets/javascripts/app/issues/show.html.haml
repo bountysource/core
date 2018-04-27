@@ -77,9 +77,9 @@
                       %i.pull-right.glyphicon{"ng-class" => "{'glyphicon-chevron-down': status.usdOpen, 'glyphicon-chevron-right': !status.usdOpen}"}
                   .text-center
                     %div.mt-3.font-weight-semibold
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(15)"} $15
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(50)"} $50
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(500)"} $500
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('15')"} $15
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('50')"} $50
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('500')"} $500
                     %small - or -
                     .row.display-flex.vertical-align-bottom 
                       .col-xs-6.pr-0
@@ -110,22 +110,22 @@
                     .text-left.text-muted
                       Contribution Amount
                     %div.mt-3.font-weight-semibold
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(100)"} 100 CAN
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(200)"} 200 CAN
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(500)"} 500 CAN
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('100')"} 100 CAN
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('200')"} 200 CAN
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('500')"} 500 CAN
                   %div.mt-5{"ng-if" => "selectedCrypto === 'ETH'"}
                     .text-left.text-muted
                       Contribution Amount
                     %div.mt-3.font-weight-semibold
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(0.25)"} 0.25 ETH
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(0.5)"} 0.5 ETH
-                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount(0.1)"} 1 ETH
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('0.25')"} 0.25 ETH
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('0.5')"} 0.5 ETH
+                      %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('1')"} 1 ETH
 
                   %div.mt-5
                     %div{"ng-if" => "selectedCrypto !== 'BTC'" }
                       .row.display-flex.vertical-align-bottom 
                         .col-xs-6.pr-0
-                          %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "amount"}
+                          %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "$parent.$parent.$parent.amount"}
                         .col-xs-6.pl-0
                           %button#cryptoSelect.btn-borderless.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
                             %span.font-8{"ng-if" => "selectedCrypto === null"} SELECT ERC20 TOKEN
@@ -139,29 +139,10 @@
                       .text-muted BTC contributions unavailable
                   
                   %div.mt-5
-                    %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "selectedCrypto === 'BTC'"} POST THIS BOUNTY
+                    %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "selectedCrypto === 'BTC'", "ng-click" => "generate_address(issue.id)" } POST THIS BOUNTY
 
         %team-about-panel{"ng-show" => "team.id"}
 
   %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
     %takedown
-/ %div{ "ng-if"=>"!issue_deleted" }
-/   %div{ "ng-show"=>"issue.id && (!issue.tracker || !issue.tracker.takendown)" }
-/     %team-view
 
-/       .alert.alert-warning{ "ng-show" => "issue.can_add_bounty && issue.team.bounties_disabled" }
-/         %div{"style"=>"text-align: center; font-size: 18px"}
-/           Bounties for this issue have been disabled by the team.
-
-/       .row
-/         .col-sm-4.col-xs-12.col-sm-push-8
-/           %div{ "ng-show" => "!issue.team.bounties_disabled" }
-/             %div{ "ng-include" => "'app/issues/_show_backer_box.html'" }
-            
-/             %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
-        
-/         .col-sm-8.col-xs-12.col-sm-pull-4
-/           %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
-/ 
-/  %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
-/   %takedown
