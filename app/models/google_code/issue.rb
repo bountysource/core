@@ -69,18 +69,7 @@ class GoogleCode::Issue < ::Issue
   end
 
   def remote_sync(options={})
-    # this helps with an issue doing lots of synced_at's at the same time
-    update_attributes!(synced_at: Time.now) unless new_record?
-
-    # uses optionally passed in HTML or does it's own HTTP get
-    data = GoogleCode::API.fetch_issue(url: url)
-
-    # create or update issue
-    ApplicationRecord.transaction do
-      comments_info = data.delete(:comments)
-      update_attributes!(data.merge(synced_at: Time.now))
-      sync_comments_from_array(comments_info)
-    end
+    # All projects in GoogleCode entered read-only mode. So there will be no update
   end
 
 end
