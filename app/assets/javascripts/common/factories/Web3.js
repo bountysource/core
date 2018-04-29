@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 angular.module('factories').factory('Web3Utils', function ($window, $log, $env, $q) {
-=======
-angular.module('factories').factory('Web3Utils', function ($window, $log, $env) {
->>>>>>> dda91a7fd1d37af0eaeb145b032203a268ffd91a
 
     var web3,
         Web3Utils = {};

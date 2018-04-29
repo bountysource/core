@@ -1339,7 +1339,6 @@ ActiveRecord::Schema.define(version: 20180426033339) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-<<<<<<< HEAD
   create_table "wallets", force: :cascade do |t|
     t.integer "person_id", null: false
     t.string "label"
@@ -1351,7 +1350,5 @@ ActiveRecord::Schema.define(version: 20180426033339) do
     t.index ["person_id"], name: "index_wallets_on_person_id"
   end
 
-=======
->>>>>>> dda91a7fd1d37af0eaeb145b032203a268ffd91a
   add_foreign_key "issue_addresses", "issues"
 end
