@@ -3,7 +3,7 @@
 # Table name: payment_methods
 #
 #  id         :integer          not null, primary key
-#  type       :string           not null
+#  type       :string(255)      not null
 #  person_id  :integer          not null
 #  data       :json             not null
 #  created_at :datetime

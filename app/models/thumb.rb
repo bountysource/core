@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  person_id  :integer          not null
-#  item_type  :string           not null
+#  item_type  :string(255)      not null
 #  item_id    :integer          not null
 #  explicit   :boolean          not null
 #  downvote   :boolean          not null

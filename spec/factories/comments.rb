@@ -11,7 +11,7 @@
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  body_html                :text
 #  author_linked_account_id :integer
-#  author_name              :string
+#  author_name              :string(255)
 #  body_markdown            :text
 #
 # Indexes
