@@ -4,6 +4,7 @@ node(:issues_total) { @issues_total }
 
 child(@issues => :issues) do
   extends "api/v1/issues/partials/search"
+  extends "api/v1/authors/partials/base" 
 
   child :tracker => :tracker do
     attribute :id
