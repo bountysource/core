@@ -4,7 +4,7 @@
     <%= image_tag 'logos/metamask-logo.svg', style: "width: 140px;", class: 'center-block' %>
     <div class="mt-5 text-center">
       <div class="btn-group">
-        <button class="btn btn-light-blue-inverse btn-rounded">No Thanks</button>
+        <button ng-click="showQRAddress()" class="btn btn-light-blue-inverse btn-rounded">No Thanks</button>
         <button ng-click="sendThroughMetaMask()" class="btn btn-light-blue-inverse btn-rounded ml-3">Use Metamask</button>
       </div>
     </div>

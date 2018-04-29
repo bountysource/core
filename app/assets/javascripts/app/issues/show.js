@@ -45,12 +45,16 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   }
 
   $scope.setCrypto = function(crypto){
-    $scope.amount = 0;
-    $scope.selectedCrypto = crypto;
+    $scope.bounty.amount = 0;
+    $scope.bounty.token = crypto;
+  }
+
+  $scope.isSelectedCrypto = function(crypto){
+    return $scope.bounty.token === crypto; 
   }
 
   $scope.setAmount = function(amount){
-    $scope.amount = amount;
+    $scope.bounty.amount = amount;
   }
 
   $scope.oneAtATime = true;
@@ -66,9 +70,11 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     console.log(message)
   }
 
-  $scope.selectedCrypto = 'ETH';
   $scope.cryptoOptions = ['AE', 'BNB', 'BNT', 'CIND'];
-  $scope.amount = '0';
+  $scope.bounty = {
+    token: 'ETH',
+    amount: '0'
+  };
 
   $scope.active_tab = function(name) {
     if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
@@ -78,35 +84,73 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
   $scope.generate_address = function(issue_id){
     $api.issue_address_create(issue_id).then(function(issue){
-      if(web3.currentProvider.isMetaMask && $scope.selectedCrypto === 'ETH') {
+      if(web3.currentProvider.isMetaMask && $scope.isSelectedCrypto('ETH')) {
+        $scope.issue = issue
         $scope.openMetamaskModal()
+      } else {
+        $scope.openQRModal()
       }
     })
   }
 
+  $scope.openQRModal = function(){
+    $modal.open({
+      templateUrl: 'common/templates/issueAddressQrModal.html',
+      backdrop: true,
+      controller: function($scope, $modalInstance, bounty, issue, Web3Utils) {
+        $scope.bounty = bounty;
+        $scope.issue = issue;
+        $scope.closeModal = function() {
+          $modalInstance.close();
+        };
+      },
+      resolve: {
+        bounty: function () {
+          return $scope.bounty;
+        },
+        issue: function () {
+          return $scope.issue;
+        }
+      }
+
+    });
+  }
+
   $scope.openMetamaskModal = function(){
     $modal.open({
-    templateUrl: 'common/templates/metamaskModal.html',
-    backdrop: true,
-    controller: function($scope, $modalInstance, amount, Web3Utils) {
-      $scope.amount = amount;
+      templateUrl: 'common/templates/metamaskModal.html',
+      backdrop: true,
+      controller: function($scope, $modalInstance, bounty, issue, openQRModal, Web3Utils) {
+        $scope.bounty = bounty;
+        $scope.issue = issue;
+        $scope.closeModal = function() {
+          $modalInstance.close();
+          openQRModal()
+        };
 
-      $scope.closeModal = function() {
-        $modalInstance.close();
-      };
+        $scope.sendThroughMetaMask = function(){
+          Web3Utils.sendTransaction($scope.bounty.amount, $scope.issue.issue_address.public_address)
+          $scope.closeModal()
+        }
 
-
-      $scope.sendThroughMetaMask = function(){
-        Web3Utils.sendTransaction($scope.amount, '0x6866Fb7274143b6fAAc33579b4FD3A2bc96cAEbF')
+        $scope.showQRAddress = function(){
+          $scope.closeModal()
+          $parent.openQRModal()
+        }
+      },
+      resolve: {
+        bounty: function () {
+          return $scope.bounty;
+        },
+        issue: function () {
+          return $scope.issue;
+        },
+        openQRModal: function(){
+          return $scope.openQRModal;
+        }
       }
-    },
-    resolve: {
-      amount: function () {
-        return $scope.amount;
-      }
-    }
 
-  });
+    });
   }
 
   
