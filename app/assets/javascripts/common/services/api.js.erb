@@ -369,7 +369,7 @@ angular.module('services').config(function($httpProvider) {
 
       // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
       params.callback = 'CORS';
-      var cors_callback = function(response) {
+      var cors_callback = function(response, status, headers) {
         response = response.replace(/^(\/\*\*\/ )?CORS\(/,'').replace(/\)$/,'');
         var parsed_response = JSON.parse(response);
 
@@ -392,7 +392,7 @@ angular.module('services').config(function($httpProvider) {
           }
         }
 
-        deferred.resolve(callback(parsed_response));
+        deferred.resolve(callback(parsed_response, status, headers));
       };
       // make actual HTTP call with promise
 
@@ -481,6 +481,10 @@ angular.module('services').config(function($httpProvider) {
   this.reward_create = function(fundraiser_id, data, callback) {
     this.call("/user/fundraisers/"+fundraiser_id+"/rewards", "POST", data, callback);
   };
+
+  this.issue_address_create = function(issue_id){
+    return this.call("/issues/" + issue_id + "/issue_addresses", "POST")
+  }
 
   this.reward_update = function(fundraiser_id, id, data, callback) {
     this.call("/user/fundraisers/"+fundraiser_id+"/rewards/"+id, "PUT", data, callback);

@@ -37,14 +37,12 @@ class Api::V1::SearchesController < ApplicationController
     options = {
       search: params[:search],
       page: params[:page],
-      per_page: params[:per_page],
       languages: params[:languages],
       trackers: params[:trackers],
       min: params[:min],
       max: params[:max],
       order: params[:order],
       direction: params[:direction],
-      can_add_bounty: params[:can_add_bounty]
     }
     @results = Search.bounty_search(options)
 

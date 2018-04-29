@@ -288,6 +288,7 @@ Api::Application.routes.draw do
         match 'doge_issues', controller: :issues, action: :doge_issues, via: :get
 
         resources :issues, only: [:show, :index] do
+          resources :issue_addresses, only: [:create]
           member do
             get :bounties
             get :activity

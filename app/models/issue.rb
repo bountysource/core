@@ -78,6 +78,8 @@ class Issue < ApplicationRecord
 
   UNKNOWN_TITLE = '(Issue Title Unknown)'
 
+  enum category: [:fiat, :crypto]
+
   has_paper_trail :only => [:remote_id, :url, :number, :title, :body, :body_markdown, :tracker_id, :can_add_bounty]
 
   has_many :bounties
@@ -104,6 +106,7 @@ class Issue < ApplicationRecord
   has_one :request_for_proposal
   has_many :proposals, through: :request_for_proposal
   has_many :thumbs, as: :item
+  has_one :issue_address
 
   has_account class_name: 'Account::IssueAccount'
 
@@ -363,6 +366,10 @@ class Issue < ApplicationRecord
     self[:remote_created_at] || self[:created_at]
   end
 
+  def real_updated_at
+    self[:remote_updated_at] || self[:updated_at]
+  end
+
   def collected_event
     bounty_claims.paid_out.first.bounty_claim_events.collected.first
   end
@@ -459,6 +466,10 @@ class Issue < ApplicationRecord
     html = html.gsub(/<a href="https:\/\/www.bountysource.com\/issues\/.*<img src="https:\/\/api.bountysource.com\/badge.*"><\/a>/, '')
     html = ActionController::Base.helpers.sanitize(html)
     html
+  end
+
+  def truncate_body_markdown
+    self[:body_markdown].truncate(140) if self[:body_markdown]
   end
 
   # has the author issued a takedown for the title/body? comments by others will still appear.

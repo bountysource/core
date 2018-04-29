@@ -183,6 +183,7 @@ class Person < ApplicationRecord
       retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true and created_at > #{ApplicationRecord.connection.quote(options[:since])}),0) as bounty_claim_total")
     else
       retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true),0) as bounty_claim_total")
+      retval = retval.select("people.*, coalesce((select count(*) from bounty_claims where person_id=people.id and paid_out=true),0) as issue_solved_total")
     end
 
     retval = retval.order('bounty_claim_total desc')

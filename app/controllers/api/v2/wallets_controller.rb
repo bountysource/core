@@ -11,7 +11,4 @@ class Api::V2::WalletsController < Api::BaseController
     end
   end
 
-  def verify_address
-  end
-
 end

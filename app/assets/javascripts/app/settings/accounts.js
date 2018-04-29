@@ -1,4 +1,4 @@
-angular.module('app').controller('AccountSettings', function($scope, $api, $location, $window, $routeParams, Person, Web3Utils, $log) {
+angular.module('app').controller('AccountSettings', function($scope, $api, $location, $window, Person, Web3Utils, $log) {
   $scope.set_post_auth_url = function() {
     $api.set_post_auth_url($location.url());
   };
@@ -39,6 +39,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
 
   $scope.validate_addr = function(){
     Web3Utils.verifyAddress().then(function(signedTxn) {
+      debugger
       $api.v2.wallets({ person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr, signed_txn: signedTxn }).then(function (response){ if (response.success) {
             $scope.success = "Successfully updated wallet";
           } else {

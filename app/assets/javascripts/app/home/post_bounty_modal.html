@@ -1,0 +1,10 @@
+<div class="modal-body">
+  <p>Post An Issue</p>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <form ng-submit="submit_search()">
+    <input type="text" placeholder="Enter issue link(for example: https://github.com/.../issues)" class="form-control" ng-model="form_data.url">
+    <button class="btn btn-primary" type="submit">Confirm</button>
+  </form>
+</div>

@@ -26,8 +26,7 @@ class CryptoApi
       walletAddrs: wallet.eth_addr
     }
     response = RestClient.post(url, params.to_json, DEFAULT_HEADERS )
-    #If successful, response code == 201
-    byebug
+
     if response.code == 201
       true
     else

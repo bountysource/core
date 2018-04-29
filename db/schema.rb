@@ -744,12 +744,14 @@ ActiveRecord::Schema.define(version: 20180426033339) do
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_transactions", id: :integer, default: nil, force: :cascade do |t|
+  create_table "quickbooks_transactions", id: false, force: :cascade do |t|
+    t.integer "id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_vendors", id: :integer, default: nil, force: :cascade do |t|
+  create_table "quickbooks_vendors", id: false, force: :cascade do |t|
+    t.integer "id", null: false
     t.string "name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1337,6 +1339,7 @@ ActiveRecord::Schema.define(version: 20180426033339) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+<<<<<<< HEAD
   create_table "wallets", force: :cascade do |t|
     t.integer "person_id", null: false
     t.string "label"
@@ -1348,5 +1351,7 @@ ActiveRecord::Schema.define(version: 20180426033339) do
     t.index ["person_id"], name: "index_wallets_on_person_id"
   end
 
+=======
+>>>>>>> dda91a7fd1d37af0eaeb145b032203a268ffd91a
   add_foreign_key "issue_addresses", "issues"
 end

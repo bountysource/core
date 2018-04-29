@@ -9,19 +9,17 @@
     "AWS_SECRET_ACCESS_KEY": {
       "required": true
     },
-    "BOUNTYSOURCE_API_URL": {
-      "required": true
-    },
-    "BOUNTYSOURCE_SALT_URL": {
-      "required": true
-    },
+    "BOUNTYSOURCE_API_URL": "https://review_api.bountysource.com/",
+    "BOUNTYSOURCE_SALT_URL": "https://review_salt.bountysource.com/",
     "BOUNTYSOURCE_SHORT_URL": {
       "required": true
     },
-    "BOUNTYSOURCE_WWW_URL": {
+    "BOUNTYSOURCE_WWW_URL": "https://review_www.bountysource.com/",
+    "COOKIE_NAME_ACCESS_TOKEN": "review_access_token",
+    "COOKIE_SECRET_KEY_BASE": {
       "required": true
     },
-    "COOKIE_SECRET_KEY_BASE": {
+    "COOKIE_NAME_SHOPPING_CART": {
       "required": true
     },
     "FOG_DIRECTORY": {
