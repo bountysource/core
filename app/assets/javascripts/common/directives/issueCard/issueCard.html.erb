@@ -34,9 +34,19 @@
         </span>
       </div>
 
-      <p class="issue-description issue-spacing-top">
-        {{ issue.description }}
-      </p>
+      <div class="issue-description-container">
+        <div ng-if="issue.description.length >= issueTruncateLength">
+          <p class="issue-description issue-spacing-top">
+            {{ issue.description | truncate: issueTruncateLength }}
+          </p>
+          <a class="see-more" ng-href="/issues/{{ issue.slug }}">See more</a>
+        </div>
+
+        <p ng-if="issue.description.length < issueTruncateLength" class="issue-description issue-spacing-top" >
+          {{ issue.description }}
+        </p>
+      </div>
+
 
       <div class="issue-etc">
         <span class="issue-comment">
