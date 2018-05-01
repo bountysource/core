@@ -3,7 +3,7 @@ angular.module('directives').directive('teamAboutPanel', function($rootScope, $l
     restrict: 'EAC',
     replace: true,
     transclude: true,
-    templateUrl: 'common/directives/teamAboutPanel/teamAboutPanel.html',
+    templateUrl: 'app/directives/issues/teamAboutPanel/teamAboutPanel.html',
     link: function(scope) {
       // Load backers after Team is ready
       scope.$watch('team', function(team) {

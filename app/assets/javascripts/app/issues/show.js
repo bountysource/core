@@ -79,19 +79,8 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   $scope.active_tab = function(name) {
     if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
     if (name === 'backers' && (/^\/issues\/[a-z-_0-9]+\/backers/).test($location.path())) { return "active"; }
-    if (name === 'proposals' && (/^\/issues\/[a-z-_0-9]+\/proposals/).test($location.path())) { return "active"; }
   };
 
-  $scope.generate_address = function(issue_id){
-    $api.issue_address_create(issue_id).then(function(issue){
-      if(web3.currentProvider.isMetaMask && $scope.isSelectedCrypto('ETH')) {
-        $scope.issue = issue
-        $scope.openMetamaskModal()
-      } else {
-        $scope.openQRModal()
-      }
-    })
-  }
 
   $scope.openQRModal = function(){
     $modal.open({

@@ -35,7 +35,6 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       scope.active_tab = function(name) {
         if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
         if (name === 'backers' && (/^\/issues\/[a-z-_0-9]+\/backers/).test($location.path())) { return "active"; }
-        if (name === 'proposals' && (/^\/issues\/[a-z-_0-9]+\/proposals/).test($location.path())) { return "active"; }
       };
 
       scope.activeNavTab = function(tab) {

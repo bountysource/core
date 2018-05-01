@@ -34,6 +34,7 @@
 .nav-tabs-sm > li.active > a, 
 .nav-tabs-sm > li.active > a:hover, 
 .nav-tabs-sm > li.active > a:focus {
+  background-color: transparent;
   color: #1e1b18;
   font-weight: 500;
 }
