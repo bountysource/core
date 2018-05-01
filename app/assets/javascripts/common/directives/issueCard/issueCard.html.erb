@@ -51,9 +51,7 @@
       <div class="issue-etc">
         <span class="issue-comment">
           <i class="fa fa-comments-o icon"></i>
-          <a ng-href="/issues/{{ issue.slug }}">
-            {{issue.comment_count}} comments
-          </a>
+          <a ng-href="/issues/{{ issue.slug }}">{{issue.comment_count}} comments</a>
         </span>
         <span class="badge search-filter" ng-repeat="language in issue.tracker.languages | limitTo: 3">
           <span>{{language.name}}</span>

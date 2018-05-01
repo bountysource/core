@@ -1,13 +1,21 @@
 angular.module('app').controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter, $anchorScroll) {
   // sets drop-down bounty types
-  $scope.bounty_types = ["Show All Bounties", "Crypto Bounties Only", "Cash Bounties Only"];
+  $scope.bountyTypes = [
+    { label: "Show All Bounties", value: "all_bounties" },
+    { label: "Crypto Bounties Only", value: "crypto_bounties" },
+    { label: "Cash Bounties Only", value: "cash_bounties" }
+  ];
+
+  $scope.selectBountyType = function(typeObj){
+    $scope.selectedBountyType = typeObj;
+  };
 
   //sets drop-down sorting options
   $scope.sort_options = {
     option1 : { label: "Value (Highest to Lowest)", value: "bounty_total", direction: "desc"},
     option2 : { label: "Value (Lowest to Highest)", value: "bounty_total", direction: "asc"},
-    option3 : { label: "Date (Newest to Oldest", value: "earliest_bounty", direction: "desc"},
-    option4 : { label: "Date (Oldest to Newest", value: "earliest_bounty", direction: "asc"},
+    option3 : { label: "Date (Newest to Oldest)", value: "earliest_bounty", direction: "desc"},
+    option4 : { label: "Date (Oldest to Newest)", value: "earliest_bounty", direction: "asc"},
     option5 : { label: "Backers (Most to Least)", value: "backers_count", direction: "desc"},
     option6 : { label: "Backers (Least to Most)", value: "backers_count", direction: "asc"}
   };
@@ -29,6 +37,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
 
   // update order and direction when options change
   $scope.updateSort = function(selectedSort) {
+    $scope.selectedSort = selectedSort
     $scope.form_data.order = selectedSort.value;
     $scope.form_data.direction = selectedSort.direction;
   }
@@ -176,8 +185,8 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
 
   $scope.initiate = function() {
     $scope.form_data = {};
+    $scope.selectedBountyType = $scope.bountyTypes[0]
     $scope.populate_form_data_with_route_params();
-    $scope.bountyType = $scope.bounty_types[0];
     $scope.getLanguage();
     $scope.selectSort();
     $scope.submit_query();

@@ -34,7 +34,7 @@
 		}
 
 		.issue-info {
-			padding-left: 2em;
+			padding-left: 1em;
 
 			.issue-title {
 				margin: 0;
@@ -69,7 +69,7 @@
 				overflow: hidden;
 				position: relative;
 				line-height: 1.5em;
-				max-height: 4.5em; /* only show 2 lines */
+				max-height: 3em; /* only show 2 lines */
 				text-align: justify;
 				margin-right: -1em;
 				padding-right: 1em;
