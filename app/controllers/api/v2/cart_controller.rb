@@ -2,35 +2,11 @@ class Api::V2::CartController < Api::BaseController
 
   include Api::V2::CartHelper
 
-  before_action :require_cart, except: [:create]
-  before_action :require_auth, only: [:checkout]
-  before_action :require_checkout_method, only: [:checkout]
+  before_action :require_auth
+  before_action :generate_cart_and_item
+  before_action :require_checkout_method
 
-  def show
-    @item_count = @cart.items.count
-
-    # Load raw item attribute as well as instance of ApplicationRecord
-    # to fetch related models (Fundraiser, Issue, Team, etc.).
-    @items = @cart.items.map do |item_json|
-      [
-        item_json,
-        @cart.item_from_attributes(item_json)
-      ]
-    end
-
-    @items.reject! {|item| item[1].nil? }
-
-    @include_items = true
-  end
-
-  def destroy
-    @cart.clear
-    head :no_content
-  end
-
-  def checkout
-    require_params :checkout_method, :currency
-
+  def create
     # If Person has nothing in their cart, render error immediately.
     if @cart.items.empty?
       @cart.errors.add(:cart, 'is empty')
@@ -41,42 +17,25 @@ class Api::V2::CartController < Api::BaseController
     # Note: Minimum balance is already required in before_action
     if @checkout_method.is_a?(Account::Personal) || @checkout_method.is_a?(Account::Team)
       order = Transaction::Order::Internal.create_from_cart_and_checkout_method(@cart, @checkout_method)
-      render json: { receipt_url: order.www_receipt_url }
+      render json: { checkout_url: order.www_receipt_url }
 
     # Redirect to PayPal checkout URL
     elsif @checkout_method.is_a?(Account::Paypal)
       render json: { checkout_url: @cart.create_paypal_checkout_url }, status: :ok
-
-    # Render the JWT for purchasing the shopping cart (encoded with our merchant secret)
-    elsif @checkout_method.is_a?(Account::GoogleWallet)
-      render json: { jwt: @cart.create_google_wallet_jwt }, status: :accepted
-
-    # Render the JSON to trigger a Coinbase payment modal
-    elsif @checkout_method.is_a?(Account::Coinbase)
-      raise "Coinbase is disabled" if ENV['COINBASE_DISABLED']
-
-      options = {
-        cancel_url: params[:cancel_url],
-        currency: params[:currency] || 'USD'
-      }
-      checkout_url = @cart.create_coinbase_checkout_url(options)
-      render json: { checkout_url: checkout_url }, status: :accepted
     end
-  end
-
-  def create
-    @cart = ShoppingCart.create!
-    render 'api/v2/cart/show'
   end
 
 private
 
-  def require_cart
-    @cart = ShoppingCart.find_or_create(
-      uid: params[:uid],
-      person: current_user,
-      autocreate: params.has_key?(:autocreate) ? params[:autocreate].to_bool : true
+  def generate_cart_and_item
+    @cart = ShoppingCart.create(
+      person: current_user
     )
+    @item = @cart.add_item(bounty_params.to_h)
+  end
+
+  def bounty_params
+    params.require(:item).permit(:amount, :owner_id, :owner_type, :anonymous, :issue_id, :bounty_expiration, :upon_expiration, :tweet, :item_type)
   end
 
   def require_checkout_method
@@ -86,11 +45,8 @@ private
     when 'paypal'
       @checkout_method = Account::Paypal.instance
 
-    when 'google'
-      @checkout_method = Account::GoogleWallet.instance
-
-    when 'coinbase'
-      @checkout_method = Account::Coinbase.instance
+    # when 'coinbase'
+      # @checkout_method = Account::Coinbase.instance
 
     when 'personal'
       person = current_user
