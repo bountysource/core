@@ -1,54 +1,56 @@
-<div class="row" id="landing-page">
-  <div class="col-sm-3 sidebar-section landing-page-section">
-    <section class='post-bounty-cta'>
-      <h3 class='cta-title'>Support for Open Source Software</h3>
-      <p>A community with <strong>{{people_count.total | number}}</strong> members hunting for bounties and earn the rewards.</p>
-      <a class="btn btn-light-blue cta-btn" ng-click=openPostBountyModal()>
-        <strong>POST BOUNTY</strong>
-      </a>
-    </section>
+<div class="container" id="landing-page">
+  <div class="row">
+    <div class="col-sm-3 sidebar-section landing-page-section">
+      <section class='post-bounty-cta'>
+        <h3 class='cta-title'>Support for Open Source Software</h3>
+        <p>A community with <strong>{{people_count.total | number}}</strong> members hunting for bounties and earn the rewards.</p>
+        <a class="btn btn-light-blue cta-btn" ng-click=openPostBountyModal()>
+          <strong>POST BOUNTY</strong>
+        </a>
+      </section>
 
-    <section class="recent-activity">
-      <h4 class='section-title'>Recent Activity</h4>
-      <timeline-small events="events"></timeline-small>
-    </section>
+      <section class="recent-activity">
+        <h4 class='section-title'>Recent Activity</h4>
+        <timeline-small events="events"></timeline-small>
+      </section>
 
-    <section class="top-hunters">
-      <h4 class='section-title'>Top Hunters</h4>
-      <div class="mt-3" ng-repeat="person in bounty_hunters" style="display: flex; flex-direction: row;">
-        <div>
-          <a class="ml-3 mr-3" ng-href="/people/{{person.slug}}" style="float: left">
-            <img ng-src="{{person.image_url_small}}" style="width:60px; height: 60px;" class="img-circle"/>
-          </a>
+      <section class="top-hunters">
+        <h4 class='section-title'>Top Hunters</h4>
+        <div class="mt-3" ng-repeat="person in bounty_hunters" style="display: flex; flex-direction: row;">
+          <div>
+            <a class="ml-3 mr-3" ng-href="/people/{{person.slug}}" style="float: left">
+              <img ng-src="{{person.image_url_small}}" style="width:60px; height: 60px;" class="img-circle"/>
+            </a>
+          </div>
+          <div class="column-center">
+            <a ng-href="/people/{{person.slug}}" class="font-weight-medium">{{person.display_name | limitTo: 20}}</a>
+            <span>{{person.issue_solved_total}} bounties solved</span>
+            <span>{{person.bounty_claim_total | dollars}} rewards</span>
+          </div>
+          <div style="clear:left"></div>
         </div>
-        <div class="column-center">
-          <a ng-href="/people/{{person.slug}}" class="font-weight-medium">{{person.display_name | limitTo: 20}}</a>
-          <span>{{person.issue_solved_total}} bounties solved</span>
-          <span>{{person.bounty_claim_total | dollars}} rewards</span>
-        </div>
-        <div style="clear:left"></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="top-team">
-      <h4 class='section-title'>Top Teams</h4>
-      <div class="mt-3" ng-repeat="team in topTeams" style="display: flex; flex-direction: row;">
-        <div>
-          <a class="ml-3 mr-3" ng-href="/teams/{{team.slug}}" style="float: left">
-            <img ng-src="{{team.image_url_small}}" style="width:60px; height: 60px;" class="img-circle"/>
-          </a>
+      <section class="top-team">
+        <h4 class='section-title'>Top Teams</h4>
+        <div class="mt-3" ng-repeat="team in topTeams" style="display: flex; flex-direction: row;">
+          <div>
+            <a class="ml-3 mr-3" ng-href="/teams/{{team.slug}}" style="float: left">
+              <img ng-src="{{team.image_url_small}}" style="width:60px; height: 60px;" class="img-circle"/>
+            </a>
+          </div>
+          <div class="column-center">
+            <a ng-href="/teams/{{person.slug}}" class="font-weight-medium">{{team.name | limitTo: 20}}</a>
+            <span>{{team.hunter_awarded}} hunters awarded</span>
+            <span>{{team.total_rewards | dollars}} total rewards</span>
+          </div>
+          <div style="clear:left"></div>
         </div>
-        <div class="column-center">
-          <a ng-href="/teams/{{person.slug}}" class="font-weight-medium">{{team.name | limitTo: 20}}</a>
-          <span>{{team.hunter_awarded}} hunters awarded</span>
-          <span>{{team.total_rewards | dollars}} total rewards</span>
-        </div>
-        <div style="clear:left"></div>
-      </div>
-    </section>
-  </div>
+      </section>
+    </div>
 
-  <div class="col-sm-9 search-section landing-page-section">
-    <div ng-include="'app/bounties/search.html'" ng-controller="BountiesSearchController"></div>
+    <div class="col-sm-9 search-section landing-page-section">
+      <div ng-include="'app/bounties/search.html'" ng-controller="BountiesSearchController"></div>
+    </div>
   </div>
 </div>

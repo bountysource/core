@@ -7,7 +7,6 @@
 	margin-bottom: 2em;
 
 	.issue-body {
-		display: flex;
 		a {
 			color: black;
 			&:hover {
@@ -50,8 +49,7 @@
 
 			.issue-author,
 			.issue-created-at,
-			.issue-updated-at,
-			.issue-comment {
+			.issue-updated-at {
 				margin-right: 1em;
 			}
 
@@ -68,11 +66,16 @@
 			.issue-description {
 				overflow: hidden;
 				position: relative;
-				line-height: 1.5em;
-				max-height: 3em; /* only show 2 lines */
-				text-align: justify;
 				margin-right: -1em;
 				padding-right: 1em;
+			}
+
+			.issue-comment {
+				// override bootstrap col
+				@media (min-width: 768px) {
+				    width: 20%;
+				    padding-right: 0;
+				}
 			}
 		}
 

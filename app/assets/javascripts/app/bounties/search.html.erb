@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <div class="col-sm-1">
+      <div class="col-sm-1 toggle-advance-search">
         <a ng-click="toggle_advanced_search()">
           <%= image_tag 'icons/icon_advanced_search.svg', class: 'advanced-img' %>
         </a>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="row basic-search">
-      <div class="col-xs-4">
+      <div class="col-sm-4">
         <div class="btn-group" dropdown is-open="true">
           <button type="button" class="btn btn-default bounty-type-btn" dropdown-toggle ng-disabled="disabled">
             {{ selectedBountyType.label }} <span class="caret"></span>
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div class="col-xs-5 col-xs-offset-3">
+      <div class="col-sm-5 col-sm-offset-3">
         <div class="sort-select">
           <label class="label-control">Sort by:</label>
           <div class="btn-group" dropdown is-open="true">
