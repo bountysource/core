@@ -5,7 +5,8 @@ angular.module('directives').directive('issueCard', function() {
     transclude: true,
     templateUrl: 'common/directives/issueCard/issueCard.html',
     scope: {
-      issue: "=",
-    }
+      issue: "="
+    },
+    link: function(scope) { scope.issueTruncateLength = 250; }
   };
 });

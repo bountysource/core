@@ -9,7 +9,7 @@ attribute :real_created_at => :created_at
 attribute :real_updated_at => :updated_at
 attribute :generic
 attribute :paid_out
-attribute :truncate_body_markdown => :description
+attribute :body_markdown => :description
 
 attribute :comment_count
 attribute :participants_count
