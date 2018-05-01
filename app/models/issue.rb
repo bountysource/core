@@ -7,11 +7,11 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  number                   :integer
-#  url                      :string           not null
+#  url                      :string(255)      not null
 #  title                    :text
-#  labels                   :string
+#  labels                   :string(255)
 #  code                     :boolean          default(FALSE)
-#  state                    :string
+#  state                    :string(255)
 #  body                     :text
 #  remote_updated_at        :datetime
 #  remote_id                :integer
@@ -23,20 +23,20 @@
 #  comment_count            :integer          default(0)
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  bounty_total             :decimal(10, 2)   default(0.0), not null
-#  type                     :string           default("Issue"), not null
-#  remote_type              :string
-#  priority                 :string
-#  milestone                :string
+#  type                     :string(255)      default("Issue"), not null
+#  remote_type              :string(255)
+#  priority                 :string(255)
+#  milestone                :string(255)
 #  can_add_bounty           :boolean          default(FALSE), not null
 #  accepted_bounty_claim_id :integer
-#  author_name              :string
-#  owner                    :string
+#  author_name              :string(255)
+#  owner                    :string(255)
 #  paid_out                 :boolean          default(FALSE), not null
 #  participants_count       :integer
 #  thumbs_up_count          :integer
 #  votes_count              :integer
 #  watchers_count           :integer
-#  severity                 :string
+#  severity                 :string(255)
 #  delta                    :boolean          default(TRUE), not null
 #  author_linked_account_id :integer
 #  solution_started         :boolean          default(FALSE), not null
@@ -78,6 +78,8 @@ class Issue < ApplicationRecord
 
   UNKNOWN_TITLE = '(Issue Title Unknown)'
 
+  enum category: [:fiat, :crypto]
+
   has_paper_trail :only => [:remote_id, :url, :number, :title, :body, :body_markdown, :tracker_id, :can_add_bounty]
 
   has_many :bounties
@@ -104,6 +106,7 @@ class Issue < ApplicationRecord
   has_one :request_for_proposal
   has_many :proposals, through: :request_for_proposal
   has_many :thumbs, as: :item
+  has_one :issue_address
 
   has_account class_name: 'Account::IssueAccount'
 

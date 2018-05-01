@@ -4,8 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  team_id    :integer          not null
-#  token      :string           not null
-#  email      :string
+#  token      :string(255)      not null
+#  email      :string(255)
 #  admin      :boolean          default(FALSE), not null
 #  developer  :boolean          default(FALSE), not null
 #  public     :boolean          default(TRUE), not null

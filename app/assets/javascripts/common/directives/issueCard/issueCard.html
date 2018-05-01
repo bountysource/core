@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-2">
+        <a ng-href="/trackers/{{ issue.tracker.slug }}">
+          <img ng-src="{{issue.tracker.image_url }}"></img>{{issue.tracker.name}}
+        </a>
+      </div>
+      <div class="col-sm-10">
+        <a ng-href="/issues/{{issue.slug}}">
+          {{issue.title}}
+        </a>
+        <span>Posted by: {{issue.author.display_name}}</span>
+        <span>{{issue.created_at | timeDiff }} ago</span>
+        <p>{{issue.description}}</p>
+        <span class="badge search-filter" ng-repeat="language in issue.tracker.languages">
+          <span>{{language.name}}</span>
+        </span>
+        <span>{{issue.updated_at | timeDiff }} ago</span>
+        <span>{{issue.comment_count}} comments</span>
+        <span>{{issue.bounty_total | dollars:{space:true} }}</span>
+      </div>
+      </div>
+    </div>
+</div>
