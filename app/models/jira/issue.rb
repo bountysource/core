@@ -42,6 +42,7 @@
 #  solution_started         :boolean          default(FALSE), not null
 #  body_markdown            :text
 #  deleted_at               :datetime
+#  category                 :integer
 #
 # Indexes
 #
