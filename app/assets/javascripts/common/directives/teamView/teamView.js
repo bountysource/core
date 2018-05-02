@@ -1,4 +1,4 @@
-angular.module('directives').directive('teamView', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $currency, $cart, $window, Tag) {
+angular.module('directives').directive('teamView', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $currency, $window, Tag) {
   return {
     restrict: 'EAC',
     replace: true,

@@ -1,9 +1,4 @@
-angular.module('fundraisers').controller('FundraiserPledgeController', function ($scope, $routeParams, $window, $location, $api, $cart) {
-  $scope.cart_promise = $cart.load().then(function(cart) {
-    $scope.cart = cart;
-    return cart;
-  });
-
+angular.module('fundraisers').controller('FundraiserPledgeController', function ($scope, $routeParams, $window, $location, $api) {
   $scope.pledge = {
     amount: parseInt($routeParams.amount, 10) || 100,
     anonymous: (parseInt($routeParams.anonymous, 10) === 1) || false,

@@ -1,4 +1,4 @@
-angular.module('directives').directive('recommendationBox', function ($api, $cart, $location, Recommendation) {
+angular.module('directives').directive('recommendationBox', function ($api, $location, Recommendation) {
   return {
     restrict: "E",
     templateUrl: "common/directives/recommendationBox/recommendationBox.html",
