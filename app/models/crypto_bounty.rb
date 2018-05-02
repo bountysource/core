@@ -2,13 +2,13 @@
 #
 # Table name: crypto_bounties
 #
-#  id               :integer          not null, primary key
+#  id               :bigint(8)        not null, primary key
 #  amount           :jsonb            not null
-#  issue_id         :integer
+#  issue_id         :bigint(8)
 #  status           :string(12)       default("active"), not null
 #  anonymous        :boolean          default(FALSE), not null
 #  owner_type       :string
-#  owner_id         :integer
+#  owner_id         :bigint(8)
 #  featured         :boolean          default(FALSE), not null
 #  transaction_hash :string           not null
 #  created_at       :datetime         not null

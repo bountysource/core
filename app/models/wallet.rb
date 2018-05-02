@@ -2,7 +2,7 @@
 #
 # Table name: wallets
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  person_id  :integer          not null
 #  label      :string
 #  eth_addr   :string           not null

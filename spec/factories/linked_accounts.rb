@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  person_id        :integer
 #  type             :string(255)
-#  uid              :integer
+#  uid              :bigint(8)
 #  login            :string(255)
 #  first_name       :string(255)
 #  last_name        :string(255)
@@ -30,7 +30,7 @@
 # Indexes
 #
 #  index_linked_accounts_on_anonymous     (anonymous)
-#  index_linked_accounts_on_email         (email)
+#  index_linked_accounts_on_email         (email) WHERE (email IS NOT NULL)
 #  index_linked_accounts_on_login         (login)
 #  index_linked_accounts_on_person_id     (person_id)
 #  index_linked_accounts_on_uid           (uid)

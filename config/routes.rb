@@ -507,13 +507,7 @@ Api::Application.routes.draw do
           post 'thumbs/feedback', to: 'thumbs#feedback'
 
           resource :account, only: [:show], controller: :account
-
-          resource :cart, only: [:show, :create, :destroy], controller: :cart do
-            collection do
-              get :checkout
-            end
-          end
-          resources :cart_items, only: [:create, :update, :destroy]
+          resource :cart ,only: [:create], controller: :cart
 
           resources :people, only: [:index, :update] do
             collection do

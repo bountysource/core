@@ -12,9 +12,9 @@
 #
 # Indexes
 #
-#  index_unsubscribes_on_email              (email)
-#  index_unsubscribes_on_linked_account_id  (linked_account_id)
-#  index_unsubscribes_on_person_id          (person_id)
+#  index_unsubscribes_on_email              (email) WHERE (email IS NOT NULL)
+#  index_unsubscribes_on_linked_account_id  (linked_account_id) WHERE (linked_account_id IS NOT NULL)
+#  index_unsubscribes_on_person_id          (person_id) WHERE (person_id IS NOT NULL)
 #
 
 require 'rails_helper'

@@ -10,7 +10,7 @@
 #  repo_url          :string(255)
 #  description       :text
 #  about_me          :text
-#  funding_goal      :integer          default(100)
+#  funding_goal      :bigint(8)        default(100)
 #  published_at      :datetime
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

@@ -56,9 +56,9 @@
 #  index_issues_on_url                            (url) UNIQUE
 #  index_issues_on_votes_count                    (votes_count)
 #  index_issues_on_watchers_count                 (watchers_count)
-#  index_issues_partial_author_linked_account_id  (author_linked_account_id)
-#  index_issues_partial_bounty_total              (bounty_total)
-#  index_issues_partial_thumbs_up_count           (thumbs_up_count)
+#  index_issues_partial_author_linked_account_id  (author_linked_account_id) WHERE (author_linked_account_id IS NOT NULL)
+#  index_issues_partial_bounty_total              (bounty_total) WHERE (bounty_total > (0)::numeric)
+#  index_issues_partial_thumbs_up_count           (thumbs_up_count) WHERE (COALESCE(thumbs_up_count, 0) > 0)
 #
 
 class SourceForge::Issue < ::Issue
