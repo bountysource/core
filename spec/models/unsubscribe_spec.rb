@@ -5,16 +5,16 @@
 #  id                :integer          not null, primary key
 #  person_id         :integer
 #  linked_account_id :integer
-#  email             :string
-#  category          :string
+#  email             :string(255)
+#  category          :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
 #
 # Indexes
 #
-#  index_unsubscribes_on_email              (email)
-#  index_unsubscribes_on_linked_account_id  (linked_account_id)
-#  index_unsubscribes_on_person_id          (person_id)
+#  index_unsubscribes_on_email              (email) WHERE (email IS NOT NULL)
+#  index_unsubscribes_on_linked_account_id  (linked_account_id) WHERE (linked_account_id IS NOT NULL)
+#  index_unsubscribes_on_person_id          (person_id) WHERE (person_id IS NOT NULL)
 #
 
 require 'rails_helper'

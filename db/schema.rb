@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180425061501) do
+ActiveRecord::Schema.define(version: 20180501124659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,21 @@ ActiveRecord::Schema.define(version: 20180425061501) do
     t.index ["issue_id"], name: "index_comments_on_issue_id"
   end
 
+  create_table "crypto_bounties", force: :cascade do |t|
+    t.jsonb "amount", null: false
+    t.bigint "issue_id"
+    t.string "status", limit: 12, default: "active", null: false
+    t.boolean "anonymous", default: false, null: false
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.boolean "featured", default: false, null: false
+    t.string "transaction_hash", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issue_id"], name: "index_crypto_bounties_on_issue_id"
+    t.index ["owner_type", "owner_id"], name: "index_crypto_bounties_on_owner_type_and_owner_id"
+  end
+
   create_table "currencies", id: :serial, force: :cascade do |t|
     t.string "type", null: false
     t.decimal "value"
@@ -355,6 +370,18 @@ ActiveRecord::Schema.define(version: 20180425061501) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "issue_addresses", id: :serial, force: :cascade do |t|
+    t.integer "issue_id"
+    t.string "public_address", limit: 255
+    t.string "private_key", limit: 255
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "balance_updated_at"
+    t.jsonb "balance"
+    t.index ["issue_id"], name: "index_issue_addresses_on_issue_id"
+    t.index ["public_address"], name: "index_issue_addresses_on_public_address"
+  end
+
   create_table "issue_rank_caches", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
     t.integer "issue_id", null: false
@@ -446,6 +473,7 @@ ActiveRecord::Schema.define(version: 20180425061501) do
     t.boolean "solution_started", default: false, null: false
     t.text "body_markdown"
     t.datetime "deleted_at"
+    t.integer "category"
     t.index ["author_linked_account_id"], name: "index_issues_partial_author_linked_account_id", where: "(author_linked_account_id IS NOT NULL)"
     t.index ["bounty_total"], name: "index_issues_partial_bounty_total", where: "(bounty_total > (0)::numeric)"
     t.index ["comment_count"], name: "index_issues_on_comment_count"
@@ -1333,4 +1361,17 @@ ActiveRecord::Schema.define(version: 20180425061501) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  create_table "wallets", force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.string "label"
+    t.string "eth_addr", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "verified", default: false
+    t.boolean "primary", default: false
+    t.index ["person_id"], name: "index_wallets_on_person_id"
+  end
+
+  add_foreign_key "crypto_bounties", "issues"
+  add_foreign_key "issue_addresses", "issues"
 end

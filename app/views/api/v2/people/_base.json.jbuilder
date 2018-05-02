@@ -23,3 +23,4 @@ json.partial! 'api/v2/image_urls', item: item
 
 
 json.bounty_claim_total item.bounty_claim_total if @include_bounty_claim_total
+json.issue_solved_total item.issue_solved_total if @include_bounty_claim_total && item.issue_solved_total

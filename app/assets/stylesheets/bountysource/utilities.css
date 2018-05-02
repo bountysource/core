@@ -4,6 +4,11 @@
 .font-weight-bold    { font-weight: bold; }
 
 .font-size-default { font-size: 14px !important; }
+.font-8 { font-size: 8px !important; }
+.font-12 { font-size: 12px !important; }
+.font-14 { font-size: 14px !important; }
+.font-16 { font-size: 16px !important; }
+.font-22 { font-size: 22px !important; }
 
 .p-0 { padding: 0 !important; }
 .p-1 { padding: .25rem !important; }
@@ -39,6 +44,13 @@
 .pl-3 { padding-left: 1rem !important; }
 .pl-4 { padding-left: 1.5rem !important; }
 .pl-5 { padding-left: 3rem !important; }
+
+.py-3 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+
+.px-3 { padding-left: 1rem !important; padding-right: 1rem !important; }
+.px-4 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+
+.my-0 { margin-top: 0 !important; margin-bottom: 0 !important;}
 
 .m-0 { margin: 0 !important; }
 .m-1 { margin: .25rem !important; }
@@ -93,6 +105,8 @@
 .border-bright-light-blue { border-color: #33ccff7f !important; }
 .border-gunmetal { border-color: #485f64 !important; }
 
+.b-rad-0 { border-radius: 0 !important; }
+
 /* Images */
 .img-circle { border-radius: 50% }
 .img-responsive { width: 100%;}
@@ -132,3 +146,4 @@
 
 /*Backgrounds*/
 .background-white { background-color: white; }
+.bg-gunmetal { background-color: #485f64; }

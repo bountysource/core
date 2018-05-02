@@ -1,6 +1,24 @@
 .panel {
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  -webkit-box-shadow: 0 0 4px 0 rgba(31, 35, 35, 0.08);
+  box-shadow: 0 0 4px 0 rgba(31, 35, 35, 0.08);
+  border: 0;
+}
+
+.panel-heading {
+  border-radius: 0;
+}
+
+.panel-body {
+  padding: 37px;
+}
+
+.panel-gunmetal > .panel-heading{
+  background-color: #485f64; 
+  color: #fff;
+}
+
+accordion .panel-body {
+  padding: 15px;
 }
 
 .panel-dark-blue {

@@ -1,0 +1,25 @@
+#landing-page .sidebar-section {
+	> section {
+		padding-bottom: 3em;
+		margin-bottom: 3em;
+		border-bottom: solid 1px #E0E0E0;
+		font-size: 13px;
+	}
+
+	.post-bounty-cta {
+		.cta-btn {
+			margin-top: 1em;
+			width: 100%;
+			box-shadow: 0 2px 3px 0 #00000048;
+		}
+
+		.cta-title {
+			color: black;
+			margin-top: 0;
+		}
+	}
+
+	.section-title {
+		margin-bottom: 20px;
+	}
+}

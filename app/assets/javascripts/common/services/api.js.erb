@@ -57,6 +57,7 @@ angular.module('services').config(function($httpProvider) {
       options.headers = options.headers || {};
       options.headers.Accept = options.headers.Accept || 'application/vnd.bountysource+json; version=2';
       options.method = options.method || 'GET';
+      options.params = {}
 
       var path = (options.url || '').replace(/^\/+/,'');
       options.url = $rootScope.api_host + path;
@@ -313,14 +314,21 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
-    linkShoppingCart: function (uid, params) {
+    checkout: function (params) {
       return this.call({
-        url: '/cart/link',
+        url: 'cart',
+        method: 'POST',
+        data: params || {}
+      });
+    },
+
+    wallets: function(params) {
+      return this.call({
+        url: '/wallets',
         method: 'POST',
         params: params || {}
       });
     }
-
   };
 
   // call(url, 'POST', { foo: bar }, optional_callback)
@@ -362,7 +370,7 @@ angular.module('services').config(function($httpProvider) {
 
       // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
       params.callback = 'CORS';
-      var cors_callback = function(response) {
+      var cors_callback = function(response, status, headers) {
         response = response.replace(/^(\/\*\*\/ )?CORS\(/,'').replace(/\)$/,'');
         var parsed_response = JSON.parse(response);
 
@@ -385,7 +393,7 @@ angular.module('services').config(function($httpProvider) {
           }
         }
 
-        deferred.resolve(callback(parsed_response));
+        deferred.resolve(callback(parsed_response, status, headers));
       };
       // make actual HTTP call with promise
 
@@ -474,6 +482,10 @@ angular.module('services').config(function($httpProvider) {
   this.reward_create = function(fundraiser_id, data, callback) {
     this.call("/user/fundraisers/"+fundraiser_id+"/rewards", "POST", data, callback);
   };
+
+  this.issue_address_create = function(issue_id){
+    return this.call("/issues/" + issue_id + "/issue_addresses", "POST")
+  }
 
   this.reward_update = function(fundraiser_id, id, data, callback) {
     this.call("/user/fundraisers/"+fundraiser_id+"/rewards/"+id, "PUT", data, callback);

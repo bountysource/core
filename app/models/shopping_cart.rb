@@ -8,7 +8,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  order_id          :integer
-#  uid               :string
+#  uid               :string(255)
 #  payment_method_id :integer
 #  status            :text             default("draft"), not null
 #
@@ -34,22 +34,9 @@ class ShoppingCart < ApplicationRecord
   class InvalidItem < Error ; end
   class OrderAlreadyProcessed < Error ; end
 
-  before_save :assign_uid
-
   # don't allow updating a cart that's already been processed
   before_update do |record|
     raise OrderAlreadyProcessed unless record.order_id_was.nil?
-  end
-
-  def assign_uid
-    self.uid ||= self.class.generate_uid
-  end
-
-  def self.generate_uid
-    time = Time.now
-    usec = time.usec
-    rando = SecureRandom.urlsafe_base64
-    "#{time.to_i}.#{usec}.#{rando}"
   end
 
   # Add item to the cart
@@ -118,16 +105,6 @@ class ShoppingCart < ApplicationRecord
     items.present?
   end
 
-  def create_google_wallet_jwt
-    gross = calculate_gross
-
-    Account::GoogleWallet.create_jwt(
-      price: gross,
-      seller_data: id,
-      name: "Bountysource Order ##{id}"
-    )
-  end
-
   # How to cart with PayPal https://www.paypal.com/cgi-bin/webscr?cmd=_pdn_howto_checkout_outside#methodtwo
   def create_paypal_checkout_url
     gross = calculate_gross
@@ -161,43 +138,6 @@ class ShoppingCart < ApplicationRecord
     #end
 
     "#{Api::Application.config.paypal[:checkout_url]}cgi-bin/webscr?#{options.to_param}"
-  end
-
-  # How to button with Coinbase: https://coinbase.com/api/doc/1.0/buttons/create.html
-  def create_coinbase_checkout_url(options={})
-    name = "Bountysource Order ##{id}"
-    price = calculate_gross
-
-    options.merge!(
-      # Price currency as an ISO 4217 code such as USD or BTC. This determines what currency the price is shown in on the payment widget.
-      price_currency_iso: 'USD',
-
-      # Auto-redirect users to success or cancel url after payment. (Cancel url if the user pays the wrong amount.)
-      auto_redirect: true,
-
-      # Allow users to change the price on the generated button.
-      variable_price: false,
-
-      # Collect shipping address from customer (not for use with inline iframes).
-      include_address: false,
-
-      # Collect email address from customer (not for use with inline iframes).
-      include_email: false,
-
-      # An optional custom parameter. Usually an Order, User, or Product ID corresponding to a record in your database.
-      custom: id
-    )
-
-    button = CoinbaseApi.create_button(name, price, options)
-
-    # Now that the button has been created, append the button code to custom when we create
-    # the checkout page. On payment success, we use the button code to find the corresponding
-    # CoinbaseIpn.
-    success_url_params = { shopping_cart_id: id }
-    success_url = "#{Api::Application.config.api_url}payments/coinbase/success?#{success_url_params.to_param}"
-
-    checkout_page_params = { success_url: success_url }
-    "https://coinbase.com/checkouts/#{button[:code]}?#{checkout_page_params.to_param}"
   end
 
   # Sum gross of items

@@ -24,7 +24,8 @@ angular.module('app', [
   'ui.scrollfix',
   'templates',
   'btford.markdown',
-  'monospaced.elastic'
+  'monospaced.elastic',
+  'monospaced.qrcode'
 ]);
 
 angular.module('app')

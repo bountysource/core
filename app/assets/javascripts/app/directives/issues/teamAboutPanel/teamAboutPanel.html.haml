@@ -1,0 +1,40 @@
+.panel.panel-default
+  .panel-body
+    %h4.font-weight-semibold About Team
+    .row.mt-3
+      .col-xs-4
+        %img.img-circle.img-responsive{"ng-src" => "{{team.image_url_medium}}"}
+      .col-xs-8
+        %a.text-gunmetal{"ng-href" => "/teams/{{team.slug}}"}
+          %h5.font-weight-semibold {{team.name}}
+        %p.team-bio-show-less{"ng-if" => "team.bio", "ng-class" => "{'show-more': bioShow}"} {{team.bio}}
+        %a{"ng-click" => "bioShow = !bioShow"} 
+          {{ bioShow ? 'Hide' : 'See More' }}
+    %section#top-supporters.mt-5
+      %div{"ng-show" => "topBackers.length > 0"}
+        %h5 Top Supporters
+        %a{"ng-repeat" => "backer in topBackers | limitTo:10", "owner-href" => "backer"}
+          %img.img-circle.img-responsive{"ng-src" => "{{backer.image_url_small}}", :tooltip => "{{backer.display_name}} {{backer.amount | dollars}}", "tooltip-placement" => "bottom"}/
+    .clearfix
+    %section.mt-5
+      %h5 This team needs your support!
+      %button.btn.btn-light-blue-inverse.font-weight-semibold.btn-responsive.pt-4.pb-4{"ng-click" => "bountyHunterOptIn()", "ng-show" => "!team.bounties_disabled && !team.is_bounty_hunter", :type => "button"}
+        %span.glyphicon.glyphicon-star
+        BECOME A BOUNTY HUNTER
+      %span.mt-3.dropdown{"ng-show" => "!team.bounties_disabled && team.is_bounty_hunter"}
+        %button#dropdownMenu1.btn-light-blue-inverse.font-weight-semibold.btn-responsive.pt-4.pb-4.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %span.glyphicon.glyphicon-ok
+          You're a Bounty Hunter
+          %span.caret
+        %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
+          %li
+            %a{"ng-href" => "/teams/{{team.slug}}/bounties"} View Bounties
+          %li{"ng-if" => "team.accepts_issue_suggestions"}
+            %a{"ng-href" => "/teams/{{team.slug}}/issue_suggestions/new"} Suggest an Issue
+          %li
+            %a{"ng-click" => "bountyHunterOptOut()"} Unsubscribe from {{team.name}}
+    %section.mt-3{"ng-if" => "team.accepts_public_payins"}
+      %a.btn.btn-light-blue.font-weight-semibold.btn-responsive.pt-4.pb-4{"ng-href" => "{{env.salt_host}}checkout/amount?team={{team.slug}}"}
+        %span.glyphicon.glyphicon-shopping-cart
+        Support {{team.name}}
+
