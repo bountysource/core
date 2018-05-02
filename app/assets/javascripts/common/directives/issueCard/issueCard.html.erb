@@ -1,13 +1,13 @@
 <div class="issue-card">
   <div class="issue-body row">
-    <div class="col-sm-2 tracker-info">
+    <div class="col-sm-2 col-xs-12 tracker-info">
       <a ng-href="/trackers/{{ issue.tracker.slxug }}" class="tracker-image-container">
         <img class="tracker-image" ng-src="{{ issue.tracker.image_url }}" alt="" />
       </a>
       <a ng-href="/trackers/{{ issue.tracker.slug }}" class="tracker-name">{{ issue.tracker.name }}</a>
     </div>
 
-    <div class="col-sm-10 issue-info">
+    <div class="col-sm-10 col-xs-12 issue-info">
       <h4 class="issue-title">
         <a ng-href="/issues/{{ issue.slug }}">
           <strong>{{ issue.title }}</strong>
@@ -38,8 +38,8 @@
         <div ng-if="issue.description.length >= issueTruncateLength">
           <p class="issue-description issue-spacing-top">
             {{ issue.description | truncate: issueTruncateLength }}
+            <a class="see-more" ng-href="/issues/{{ issue.slug }}">See more</a>
           </p>
-          <a class="see-more" ng-href="/issues/{{ issue.slug }}">See more</a>
         </div>
 
         <p ng-if="issue.description.length < issueTruncateLength" class="issue-description issue-spacing-top" >
@@ -48,14 +48,16 @@
       </div>
 
 
-      <div class="issue-etc">
-        <span class="issue-comment">
+      <div class="issue-etc row">
+        <div class="col-sm-3 col-xs-12 issue-comment">
           <i class="fa fa-comments-o icon"></i>
           <a ng-href="/issues/{{ issue.slug }}">{{issue.comment_count}} comments</a>
-        </span>
-        <span class="badge search-filter" ng-repeat="language in issue.tracker.languages | limitTo: 3">
-          <span>{{language.name}}</span>
-        </span>
+        </div>
+        <div class="col-sm-6 col-xs-12 issue-languages">
+          <span class="badge search-filter" ng-repeat="language in issue.tracker.languages | limitTo: 3">
+            {{language.name}}
+          </span>
+        </div>
       </div>
     </div>
   </div>
