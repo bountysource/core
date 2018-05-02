@@ -52,7 +52,7 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
 
 
   $scope.email_changing = function() {
-    $scope.signin_or_signup = null;
+    if ($scope.signin_or_signup!='not_verify') $scope.signin_or_signup = null;
   };
 
   $scope.email_changed = function() {
