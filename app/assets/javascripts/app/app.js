@@ -56,6 +56,9 @@ angular.module('app')
       } else {
         $pageTitle.set();
       }
+
+      // close widget if open
+      $rootScope.$emit('bancorWidgetClose');
     });
   })
 

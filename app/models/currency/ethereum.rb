@@ -3,8 +3,8 @@
 # Table name: currencies
 #
 #  id            :integer          not null, primary key
-#  type          :string(255)      not null
-#  value         :decimal(, )      not null
+#  type          :string           not null
+#  value         :decimal(, )
 #  created_at    :datetime
 #  updated_at    :datetime
 #  name          :string
@@ -20,16 +20,6 @@
 #  index_currencies_on_value   (value)
 #
 
-class Currency::Bitcoin < Currency
+class Currency::Ethereum < Currency
   validates :value, numericality: { presence: true, greather_than_or_equal_to: 0 }
-
-  def self.sync
-    response = HTTParty.get('https://api.coinmarketcap.com/v1/ticker/bitcoin/')
-    first_or_create.update(value: JSON.parse(response.body)[0]["price_usd"]) if response.success?
-  end
-
-  # update bitcoin name to currencies table and remove this
-  def self.display_name
-    'bitcoin'
-  end
 end
