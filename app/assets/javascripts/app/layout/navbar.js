@@ -1,8 +1,4 @@
-angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieJar, $currency, $cart, Team) {
-
-  $cart.find(false).then(function (cart) {
-    $scope.cart = cart;
-  });
+angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieJar, $currency, Team) {
 
   // Load person's teams for dropdown. Assign the teams to the current_person
   $scope.$watch('current_person', function(current_person) {
