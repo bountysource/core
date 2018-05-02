@@ -6,8 +6,8 @@
 #  person_id              :integer          not null
 #  team_id                :integer          not null
 #  amount                 :decimal(10, 2)   not null
-#  status                 :string(255)      not null
-#  owner_type             :string(255)
+#  status                 :string           not null
+#  owner_type             :string
 #  owner_id               :integer
 #  payment_method_id      :integer          not null
 #  created_at             :datetime

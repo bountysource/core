@@ -1,4 +1,4 @@
-angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $cart, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal) {
+angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal) {
   var issue_id = parseInt($routeParams.id);
 
   // load core issue object

@@ -4,14 +4,14 @@
 #
 #  id             :integer          not null, primary key
 #  amount         :decimal(10, 2)   not null
-#  status         :string(255)      default("approved"), not null
+#  status         :string           default("approved"), not null
 #  account_id     :integer          not null
 #  transaction_id :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  currency       :string(255)      default("USD"), not null
+#  currency       :string           default("USD"), not null
 #  item_id        :integer
-#  item_type      :string(255)
+#  item_type      :string
 #  dirty          :integer          default(0), not null
 #
 # Indexes

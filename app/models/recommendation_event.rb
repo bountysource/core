@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  person_id  :integer
-#  event      :string(255)
+#  event      :string
 #  issue_id   :integer
 #  created_at :datetime
 #

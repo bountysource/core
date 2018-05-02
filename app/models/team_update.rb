@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  number        :integer
-#  title         :string(255)
+#  title         :string
 #  body          :text
 #  published     :boolean          default(FALSE), not null
 #  published_at  :datetime
