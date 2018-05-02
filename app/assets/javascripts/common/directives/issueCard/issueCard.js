@@ -7,6 +7,6 @@ angular.module('directives').directive('issueCard', function() {
     scope: {
       issue: "="
     },
-    link: function(scope) { scope.issueTruncateLength = 250; }
+    link: function(scope) { scope.issueTruncateLength = 240; }
   };
 });
