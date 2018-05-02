@@ -80,15 +80,6 @@
           </ul>
         </li>
 
-        <li ng-if="cart && !cart.isEmpty()">
-          <a href="/cart" class="font-weight-regular navbar-main-button" >
-            <button class="rectangle-border text-aqua">
-                <i class="glyphicon glyphicon-shopping-cart"></i>
-              {{cart.items.length | number:0}}
-            </button>
-          </a>
-        </li>
-
         <!-- User dropdown if logged in -->
         <li class="dropdown" ng-if="current_person">
           <a href="#" class="navbar-user-dropdown dropdown-toggle" data-toggle="dropdown">
