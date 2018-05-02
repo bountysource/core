@@ -9,7 +9,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  person_id  :integer          not null
-#  state      :string(255)      default("pending")
+#  state      :string           default("pending")
 #  abstract   :string(1000)
 #
 # Indexes

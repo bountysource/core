@@ -1,4 +1,4 @@
-angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $cart, $analytics, $currency, Timeline, BountyClaim, Web3Utils, Issue, $modal) {
+angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal) {
   var issue_id = parseInt($routeParams.id);
 
   // load core issue object
@@ -24,20 +24,99 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   });
 
   // create bounty box (allow prefil via &amount=123 in query params)
-  $scope.post_custom_bounty = {
-    amount: parseInt($routeParams.amount, 10) || null
-  };
-  $scope.add_bounty_to_cart = function(amount) {
-    // Track event
-    $analytics.bountyStart({ type: (amount ? 'buttons' : 'custom'), amount: amount });
+  $scope.usdCart = {
+    amount: 0,
+    item_type: 'bounty',
+    issue_id: issue_id,
+    bounty_expiration: null
+  }
 
-    return $cart.addBounty({
-      amount: amount || $scope.post_custom_bounty.amount,
-      currency: amount ? 'USD' : $currency.value,
-      issue_id: issue_id
-    }).then(function () {
-      $location.url("/cart");
+  $scope.checkout = {}
+
+  $scope.setOwner = function (type, owner) {
+    switch (type) {
+      case ('anonymous'):
+        $scope.owner = {
+          display_name: 'Anonymous',
+          image_url: '<%= asset_path("anon.jpg") %>'
+        };
+        $scope.usdCart.owner_id = null;
+        $scope.usdCart.owner_type = null;
+        $scope.usdCart.anonymous = true;
+        break;
+
+      case ('person'):
+        $scope.owner = angular.copy(owner);
+        $scope.usdCart.owner_id = owner.id;
+        $scope.usdCart.owner_type = 'Person';
+        $scope.usdCart.anonymous = false;
+        break;
+
+      case ('team'):
+        $scope.owner = angular.copy(owner);
+        $scope.usdCart.owner_id = owner.id;
+        $scope.usdCart.owner_type = 'Team';
+        $scope.usdCart.anonymous = false;       
+        break;
+
+      default:
+        $log.error('Unexpected owner:', type, owner);
+    }
+  };
+
+  $scope.checkoutUsd = function() {
+    $scope.$watch('current_person', function (person) {
+      if (angular.isObject(person)) {
+        $api.v2.checkout({item: $scope.usdCart, checkout_method: $scope.checkout.checkout_method}).then(function(response) {
+          $window.location = response.data.checkout_url;
+        });
+      } else if (person === false) {
+        $api.set_post_auth_url($location.path());
+        $location.url('/signin');
+      }
     });
+  }
+
+  $scope.setUsdAmount = function(amount){
+    $scope.usdCart.amount = amount;
+  }
+
+  $scope.calculateCartTotal = function () {
+    var tweet_price = 0
+    if ($scope.usdCart.tweet) tweet_price = 20
+    return $scope.usdCart.amount + tweet_price;
+  };
+
+  $scope.bountyExpirationOptions = [
+    { value: null, description: 'Never' },
+    { value: 3, description: '3 Months ($100 minimum)' },
+    { value: 6, description: '6 Months ($250 minimum)' }
+  ];
+
+  $scope.bountyUponExpirationOptions = [
+    { value: 'refund', description: 'Refund to my Bountysource account' },
+    { value: 'donate to project', description: 'Donate to project' }
+  ];
+
+  $scope.bountyExpirationValid = function () {
+    switch ($scope.usdCart.bounty_expiration) {
+      case (3):
+        return $scope.usdCart.amount >= 100;
+
+      case (6):
+        return $scope.usdCart.amount >= 250;
+
+      default:
+        return true;
+    }
+  };
+
+  $scope.updateUponExpiration = function() {
+    if ($scope.usdCart.bounty_expiration === null) { $scope.usdCart.upon_expiration = null; }
+  }
+
+  $scope.canCheckout = function () {
+    return $scope.usdCart.amount >= 5 && $scope.checkout.checkout_method && $scope.bountyExpirationValid()
   };
 
   $scope.isMiscCrypto = function(crypto){
@@ -142,5 +221,13 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     });
   }
 
-  
+  // Fetch teams for person to load Team account checkout method radios
+  $scope.$watch('current_person', function(person) {
+    if (angular.isObject(person)) {
+      $scope.setOwner('person', person);
+      $api.person_teams(person.id).then(function(teams) {
+        $scope.teams = angular.copy(teams);
+      });
+    }
+  });  
 });

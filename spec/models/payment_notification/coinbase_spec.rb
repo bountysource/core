@@ -3,8 +3,8 @@
 # Table name: payment_notifications
 #
 #  id                :integer          not null, primary key
-#  type              :string(255)      not null
-#  txn_id            :string(255)
+#  type              :string           not null
+#  txn_id            :string
 #  raw_post          :text
 #  order_id          :integer
 #  created_at        :datetime

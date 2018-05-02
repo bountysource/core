@@ -4,8 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  person_id   :integer
-#  distinct_id :string(255)
-#  event       :string(255)
+#  distinct_id :string
+#  event       :string
 #  created_at  :datetime
 #  payload     :json
 #
