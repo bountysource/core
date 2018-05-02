@@ -1,4 +1,4 @@
-angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $cart, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal) {
+angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal) {
   var issue_id = parseInt($routeParams.id);
 
   // load core issue object
@@ -82,7 +82,9 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   }
 
   $scope.calculateCartTotal = function () {
-    return $scope.usdCart.amount;
+    var tweet_price = 0
+    if ($scope.usdCart.tweet) tweet_price = 20
+    return $scope.usdCart.amount + tweet_price;
   };
 
   $scope.bountyExpirationOptions = [

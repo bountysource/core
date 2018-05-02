@@ -7,8 +7,8 @@
 #  description         :text             not null
 #  delivered_at        :datetime
 #  limited_to          :integer
-#  timezone            :string(255)
-#  vanity_url          :string(255)
+#  timezone            :string
+#  vanity_url          :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  amount              :integer

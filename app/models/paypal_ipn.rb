@@ -4,11 +4,11 @@
 #
 #  id                   :integer          not null, primary key
 #  raw_post             :text             not null
-#  txn_id               :string(255)      not null
+#  txn_id               :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  payment_processed_at :datetime
-#  payment_type         :string(255)
+#  payment_type         :string
 #  pending              :boolean          default(FALSE), not null
 #  processed            :boolean          default(FALSE), not null
 #  is_return            :boolean          default(FALSE), not null
