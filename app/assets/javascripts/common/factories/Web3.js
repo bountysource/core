@@ -1,4 +1,4 @@
-angular.module('factories').factory('Web3Utils', function ($window, $log, $env) {
+angular.module('factories').factory('Web3Utils', function ($window, $log, $env, $q) {
 
     var web3,
         Web3Utils = {};
@@ -83,12 +83,15 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env) 
     }
 
     Web3Utils.verifyAddress = function() {
+        var deferred = $q.defer();
         web3.eth.net.getId().then(function(networkId){
             if(networkId === $env.web3_provider_network_id){
                 $log.info('Metamask configured on correct network!! Network id is ' + networkId);
                 return web3.eth.getAccounts();
             }else{
-                $log.info('Metamask configured on incorrect network!! Network id is ' + networkId);
+                var errorMsg = 'Metamask configured on incorrect network!! Network id is ' + networkId;
+                $log.error(errorMsg);
+                deferred.reject(new Error(errorMsg));
             }
         }).then(function(accounts) {
             var from = accounts[0];
@@ -99,25 +102,35 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env) 
                     value: 'By signing this transaction, I prove my ownership of account ' + from
                 }
             ]
-            var eth = new Eth(web3.currentProvider)
+            var eth = new Eth(web3.currentProvider);
             eth.signTypedData(msgParams, from).then(function(signed) {
-                console.log('Signed!  Result is: ', signed)
-                console.log('Recovering...')
-                var recovered = sigUtil.recoverTypedSignature({ data: msgParams, sig: signed })
-                recovered = web3.utils.toChecksumAddress(recovered);
-                $log.info('Recovered signer as ' + recovered)
-                if (recovered === from ) {
-                    $log.info('Successfully ecRecovered signer as ' + recovered)
-                    //Post verified address to DB
-                } else {
-                    $log.error('Failed to verify signer when comparing ' + signed + ' to ' + from)
-                }
+                console.log('Signed!  Result is: ', signed);
+                deferred.resolve(signed);
+                // console.log('Recovering...');
+                // var recovered = sigUtil.recoverTypedSignature({ data: msgParams, sig: signed });
+                // recovered = web3.utils.toChecksumAddress(recovered);
+                // $log.info('Recovered signer as ' + recovered);
+                // if (recovered === from ) {
+                //     $log.info('Successfully ecRecovered signer as ' + recovered);
+                //     deferred.resolve(from);
+                //     //Post verified address to DBjhuk
+                // } else {
+                //     var errorMsg = 'Failed to verify signer when comparing ' + signed + ' to ' + from;
+                //     $log.error(errorMsg);
+                //     deferred.reject(new Error(errorMsg));
+                // }
             }).catch(function(error){
-                $log.error('Error verifying account ' + error);
+                var errorMsg = 'Error verifying account ' + error;
+                $log.error(errorMsg);
+                deferred.reject(new Error(errorMsg));
             });
         }).catch(function(error){
-            $log.error('Error verifying account ' + error);
+            var errorMsg = 'Error verifying account ' + error;
+            $log.error(errorMsg);
+            deferred.reject(new Error(errorMsg));
         });
+        return deferred.promise;
+
     }
 
     return Web3Utils;

@@ -1,0 +1,19 @@
+#landing-page .timeline-container {
+	box-shadow: 0 4px 13px 0 rgba(144, 164, 183, 0.22);
+	border: 1px solid transparent;
+	border-left: none;
+
+	max-height: 300px;
+	overflow-y: scroll;
+	overscroll-behavior: contain;
+
+	td {
+		padding: 20px 20px 0 20px;
+		border-top: none;
+		font-size: 13px;
+	}
+
+	tr:last-child td:last-child {
+		padding-bottom: 20px;
+	}
+}

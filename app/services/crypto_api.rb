@@ -16,4 +16,21 @@ class CryptoApi
     response = RestClient.get(url, DEFAULT_HEADERS)
     # address = JSON.parse(response)["address"]
   end
+
+  def self.verify_wallet(wallet, signed_txn)
+    url = "#{BASE_URL}wallets/#{wallet.id}/verify"
+
+    params = {
+      signedTxn: signed_txn,
+      personId: wallet.person_id,
+      walletAddrs: wallet.eth_addr
+    }
+    response = RestClient.post(url, params.to_json, DEFAULT_HEADERS )
+
+    if response.code == 201
+      true
+    else
+      false
+    end
+  end
 end

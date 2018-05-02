@@ -11,7 +11,7 @@
             %span.label.label-salmon.label-padded.label-lg{ "ng-hide" => "issue.generic || issue.can_add_bounty"} Closed
             %span.label.label-info.label-padded.label-lg{ "ng-show" => "issue.winning_bounty_claim || issue.paid_out"} Paid Out
 
-            %h3.text-black
+            %h3.text-black{"style" => "word-break: break-word;"}
               {{ issue.title }}
             
             %div
@@ -29,6 +29,8 @@
 
             %div.mt-3{"style" => "overflow: hidden;"}
               %p.text-muted.issue-body-show-less{"ng-bind-html" => "issue.body_html", "ng-class" => "{'show-more': issueBodyShow}"}
+
+            %div
               %a{"ng-click" => "issueBodyShow = !issueBodyShow"} 
                 {{ issueBodyShow ? 'Hide' : 'See More' }}
 
@@ -43,18 +45,13 @@
         / SECTION ISSUE DETAILS BEGIN
         .panel.panel-default
           .panel-body
-            %ul.nav.nav-tabs.nav-tabs-sm
-              %li{"ng-class" => "active_tab('overview')"}
-                %a{"ng-href" => "/issues/{{issue.slug}}"} Comments
-              %li{"ng-class" => "active_tab('backers')", "ng-if" => "issue.backers_count > 0"}
-                %a{"ng-href" => "/issues/{{issue.slug}}/backers"}
-                  Backers
-                  %span.hidden-xs ({{issue.backers_count}})
-              %li{"ng-class" => "active_tab('proposals')", "ng-if" => "rfpAuthorizationResolved &&  displayRfpTab"}
-                %a{"ng-click-require-auth" => "", "ng-href" => "/issues/{{issue.slug}}/proposals"}
-                  Proposals
+            %tabset
+              %tab{"heading" => "Overview" }
+                %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+              %tab{"heading" => "Backers ({{issue.backers_count}})" }
+                %backers-tab
 
-            %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+            
         / SECTION ISSUE DETAILS END
 
       
@@ -196,8 +193,10 @@
                   %div.mt-5
                     %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "selectedCrypto === 'BTC'", "ng-click" => "generate_address(issue.id)" } POST THIS BOUNTY
 
+              %contribute-accordian
         %team-about-panel{"ng-show" => "team.id"}
 
   %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
     %takedown
+
 

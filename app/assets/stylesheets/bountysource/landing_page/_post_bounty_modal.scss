@@ -1,0 +1,26 @@
+#post-bounty-modal {
+	text-align: center;
+
+	.title {
+		// floating close btn affects centering
+		// using margin to adjust
+		margin-left: 24px;
+	}
+
+	.close span {
+		font-size: 30px;
+	}
+
+	.modal-row {
+		margin-bottom: 20px;
+	}
+
+	.submit-btn {
+		width: 25%;
+		color: white;
+		background-color: #33ccff;
+		border: none;
+		height: 2.5em;
+	}
+
+}

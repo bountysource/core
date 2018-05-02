@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411015847) do
+ActiveRecord::Schema.define(version: 20180426033339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1337,6 +1337,17 @@ ActiveRecord::Schema.define(version: 20180411015847) do
     t.text "user_agent"
     t.datetime "created_at"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
+  create_table "wallets", force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.string "label"
+    t.string "eth_addr", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "verified", default: false
+    t.boolean "primary", default: false
+    t.index ["person_id"], name: "index_wallets_on_person_id"
   end
 
   add_foreign_key "issue_addresses", "issues"

@@ -104,7 +104,7 @@ td img.issue-table-tracker-img {
 .issue-body-show-less {
   font-size: 14px;
   line-height: 20px;
-  height: 100px;
+  max-height: 100px;
   overflow: hidden;
 }
 
@@ -118,4 +118,5 @@ td img.issue-table-tracker-img {
 .show-more {
   overflow: visible; 
   height: auto;
+  max-height: none;
 }

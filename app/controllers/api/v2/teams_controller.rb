@@ -91,6 +91,12 @@ class Api::V2::TeamsController < Api::BaseController
 
       @collection = @collection.where(id: (@team_backer_ids + @team_included_ids + @team_tagged_ids).uniq).where.not(id: team.id).order('activity_total desc')
     end
+
+    if params[:top_rewards]
+      @collection = Team.joins(:bounties).group('teams.id').order('SUM(bounties.amount) desc').limit(5)
+      @include_team_top_reward = true
+    end
+
     @collection = paginate!(@collection)
 
     @include_team_extended = true if params[:include_extended]
