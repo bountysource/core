@@ -128,6 +128,8 @@ class Person < ApplicationRecord
 
   belongs_to :quickbooks_vendor
 
+  has_many :wallets
+
   EMAIL_REGEX = /\A.+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+\z/
 
   # all Person objects must have an email address

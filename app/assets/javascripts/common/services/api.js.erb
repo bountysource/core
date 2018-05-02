@@ -319,8 +319,15 @@ angular.module('services').config(function($httpProvider) {
         method: 'POST',
         params: params || {}
       });
-    }
+    },
 
+    wallets: function(params) {
+      return this.call({
+        url: '/wallets',
+        method: 'POST',
+        params: params || {}
+      });
+    }
   };
 
   // call(url, 'POST', { foo: bar }, optional_callback)
