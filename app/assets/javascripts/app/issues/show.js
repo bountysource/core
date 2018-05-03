@@ -28,7 +28,8 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     amount: 0,
     item_type: 'bounty',
     issue_id: issue_id,
-    bounty_expiration: null
+    bounty_expiration: null,
+    currency: 'USD'
   }
 
   $scope.checkout = {}
@@ -82,9 +83,12 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   }
 
   $scope.calculateCartTotal = function () {
-    var tweet_price = 0
-    if ($scope.usdCart.tweet) tweet_price = 20
-    return $scope.usdCart.amount + tweet_price;
+    if ($scope.usdCart.tweet) {
+      $scope.usdCart.total = $scope.usdCart.amount + 20
+    } else {
+      $scope.usdCart.total = $scope.usdCart.amount
+    }
+    return $scope.usdCart.total;
   };
 
   $scope.bountyExpirationOptions = [

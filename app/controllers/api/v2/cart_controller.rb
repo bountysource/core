@@ -12,7 +12,6 @@ class Api::V2::CartController < Api::BaseController
       @cart.errors.add(:cart, 'is empty')
       raise ActiveRecord::RecordInvalid.new @cart
     end
-
     # For internal checkout method accounts, we immediately create transaction.
     # Note: Minimum balance is already required in before_action
     if @checkout_method.is_a?(Account::Personal) || @checkout_method.is_a?(Account::Team)
@@ -31,11 +30,16 @@ private
     @cart = ShoppingCart.create(
       person: current_user
     )
-    @item = @cart.add_item(bounty_params.to_h)
+    @item = @cart.add_item(bounty_params.to_h) if bounty_params
+    @item = @cart.add_item(team_payin_params.to_h) if team_payin_params
   end
 
   def bounty_params
-    params.require(:item).permit(:amount, :owner_id, :owner_type, :anonymous, :issue_id, :bounty_expiration, :upon_expiration, :tweet, :item_type)
+    params.require(:item).permit(:amount, :owner_id, :owner_type, :anonymous, :issue_id, :bounty_expiration, :upon_expiration, :tweet, :item_type, :total, :currency) if params[:item]
+  end
+
+  def team_payin_params
+    params.require(:team_payin).permit(:amount, :owner_id, :owner_type, :team_id, :currency) if params[:team_payin]
   end
 
   def require_checkout_method
