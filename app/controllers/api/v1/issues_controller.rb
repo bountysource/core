@@ -81,11 +81,6 @@ class Api::V1::IssuesController < ApplicationController
   #   end
   # end
 
-  def bounties
-    #route is not used
-    @bounties = @issue.bounties.visible.includes(:owner)
-  end
-
 protected
 
   # If an owner_id and owner_type are provided on params,

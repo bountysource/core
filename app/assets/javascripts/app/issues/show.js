@@ -160,6 +160,50 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     if (name === 'backers' && (/^\/issues\/[a-z-_0-9]+\/backers/).test($location.path())) { return "active"; }
   };
 
+  $scope.generate_address = function(issue_id){
+    if($scope.issue.issue_address.public_address === undefined){
+      $api.issue_address_create(issue_id).then(function(issue){
+        if(web3.currentProvider.isMetaMask && $scope.isSelectedCrypto('ETH')) {
+          $scope.issue = issue
+          $scope.openMetamaskModal()
+        } else {
+          $scope.openQRModal()
+        }
+      })
+    } else {
+      if(web3.currentProvider.isMetaMask && $scope.isSelectedCrypto('ETH')) {
+        $scope.openMetamaskModal()
+      } else {
+        $scope.openQRModal()
+      }
+    }
+
+    
+  }
+
+  $scope.openHunterBox = function() {
+    $modal.open({
+      templateUrl: 'common/templates/hunterBoxModal.html',
+      backdrop: true,
+      size: 'sm',
+      controller: function($scope, $modalInstance, bounty, issue, Web3Utils) {
+        $scope.bounty = bounty;
+        $scope.issue = issue;
+        $scope.closeModal = function() {
+          $modalInstance.close();
+        };
+      },
+      resolve: {
+        bounty: function () {
+          return $scope.bounty;
+        },
+        issue: function () {
+          return $scope.issue;
+        }
+      }
+
+    });
+  }
 
   $scope.openQRModal = function(){
     $modal.open({
@@ -183,6 +227,8 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
     });
   }
+
+
 
   $scope.openMetamaskModal = function(){
     $modal.open({

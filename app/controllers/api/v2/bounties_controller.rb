@@ -18,7 +18,6 @@ class Api::V2::BountiesController < Api::BaseController
 
   def summary
     @collection = Bounty.summary(Team.where(slug: params[:owner_team]).first!)
-    
   end
 
 end

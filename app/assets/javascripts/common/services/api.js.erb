@@ -487,6 +487,10 @@ angular.module('services').config(function($httpProvider) {
     return this.call("/issues/" + issue_id + "/issue_addresses", "POST")
   }
 
+  this.crypto_bounties_get = function(issue_id) {
+    return this.call("/issues/" + issue_id + "/crypto_bounties", "GET") 
+  }
+
   this.reward_update = function(fundraiser_id, id, data, callback) {
     this.call("/user/fundraisers/"+fundraiser_id+"/rewards/"+id, "PUT", data, callback);
   };

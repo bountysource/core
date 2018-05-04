@@ -1,5 +1,5 @@
 .btn {
-  border-radius: 0px;
+  border-radius: 5px;
 }
 
 .btn-responsive {
@@ -52,7 +52,7 @@
   color: white;
 }
 
-.btn-light-blue {
+.btn-light-blue, .btn-light-blue:focus {
   background-color: #33ccff;
   color: white;
 }
