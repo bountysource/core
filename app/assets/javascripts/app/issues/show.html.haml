@@ -39,7 +39,7 @@
                 %span.glyphicon.glyphicon-new-window
                 View in
                 %name-for-external-link{"object-type" => "issue.type"}
-              %a.btn.btn-light-blue-inverse.pull-right.btn-lg.px-5.py-4{"ng-click" => "openHunterBox()"}
+              %a.btn.btn-light-blue-inverse.pull-right.btn-lg.px-5.py-4{"ng-click" => "openHunterBox()", "ng-show" => "issue.can_add_bounty || (developer_events_loaded && developer_events.length>0) || (issue.bounty_total > 0)"}
                 SOLVE ISSUE
 
 
@@ -60,7 +60,7 @@
 
       
       .col-md-4
-        %div.text-center{"ng-if" => "issue.can_add_bounty"}
+        %div.text-center{"ng-if" => "issue.can_add_bounty && (!issue.team || !issue.team.bounties_disabled)"}
           %div.text-center{"ng-if" => "!issue.category"}
             .panel.panel-gunmetal
               .panel-heading.text-white.text-center.pt-5.pb-5

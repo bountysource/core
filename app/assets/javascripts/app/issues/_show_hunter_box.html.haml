@@ -95,10 +95,10 @@
 
         .form-group
           .col-xs-12
-            %button.btn.btn-light-blue.btn-responsive{ "ng-show"=>"['has_solution','has_goal','has_stopped_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0", "type" => "submit"} Submit
+            %button.btn.btn-light-blue.btn-responsive.mt-3{ "ng-show"=>"['has_solution','has_goal','has_stopped_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0", "type" => "submit"} Submit
 
-            %a.btn.btn-danger{ "ng-click" => "developer_form.delete_bounty_claim(my_bounty_claim)", "ng-show" => "developer_form.data.status=='claim_submitted'" }
+            %a.btn.btn-danger.btn-responsive.mt-3{ "ng-click" => "developer_form.delete_bounty_claim(my_bounty_claim)", "ng-show" => "developer_form.data.status=='claim_submitted'" }
               %span.glyphicon.glyphicon-trash
               Retract Claim
 
-            %a.btn.btn-danger{ "ng-click"=>"developer_form.delete_bounty_goal()", "ng-if"=>"developer_form.data.status=='has_goal' && my_developer_goal" } Delete
+            %a.btn.btn-danger.btn-responsive.mt-3{ "ng-click"=>"developer_form.delete_bounty_goal()", "ng-if"=>"developer_form.data.status=='has_goal' && my_developer_goal" } Delete
