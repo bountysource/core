@@ -18,6 +18,14 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
         );
     }
 
+    Web3Utils.isMetaMask = function(){
+        if(web3 && web3.currentProvider.isMetaMask){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     Web3Utils.isValidNetwork = function() {
         web3.eth.net.getId().then(function(networkId){
             if(networkId === $env.web3_provider_network_id){
@@ -106,19 +114,6 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
             eth.signTypedData(msgParams, from).then(function(signed) {
                 console.log('Signed!  Result is: ', signed);
                 deferred.resolve(signed);
-                // console.log('Recovering...');
-                // var recovered = sigUtil.recoverTypedSignature({ data: msgParams, sig: signed });
-                // recovered = web3.utils.toChecksumAddress(recovered);
-                // $log.info('Recovered signer as ' + recovered);
-                // if (recovered === from ) {
-                //     $log.info('Successfully ecRecovered signer as ' + recovered);
-                //     deferred.resolve(from);
-                //     //Post verified address to DBjhuk
-                // } else {
-                //     var errorMsg = 'Failed to verify signer when comparing ' + signed + ' to ' + from;
-                //     $log.error(errorMsg);
-                //     deferred.reject(new Error(errorMsg));
-                // }
             }).catch(function(error){
                 var errorMsg = 'Error verifying account ' + error;
                 $log.error(errorMsg);

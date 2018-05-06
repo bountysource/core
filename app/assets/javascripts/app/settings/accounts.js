@@ -39,12 +39,15 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
 
   $scope.validate_addr = function(){
     Web3Utils.verifyAddress().then(function(signedTxn) {
-      $api.v2.wallets({ person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr, signed_txn: signedTxn }).then(function (response){ if (response.success) {
+      var walletParams = { person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr, signed_txn: signedTxn }
+      console.log(walletParams)
+      $api.v2.wallets(walletParams)
+        .then(function (response){ if (response.success) {
             $scope.success = "Successfully updated wallet";
           } else {
             $scope.error = "Unable to update wallet or address not verified";
           }
-      });
+        });
     }).catch(function(error){
       $log.error('Error when validating ETH addrs ' + error);
     });

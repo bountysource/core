@@ -326,7 +326,7 @@ angular.module('services').config(function($httpProvider) {
       return this.call({
         url: '/wallets',
         method: 'POST',
-        params: params || {}
+        data: params || {}
       });
     }
   };

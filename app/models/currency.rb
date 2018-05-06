@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  type          :string(255)      not null
-#  value         :decimal(, )      not null
+#  value         :decimal(, )
 #  created_at    :datetime
 #  updated_at    :datetime
 #  name          :string
@@ -32,8 +32,8 @@ class Currency < ApplicationRecord
 
   def self.index
     currencies = {}
-    pluck(:type).map(&:constantize).each do |klass|
-      currencies[klass.display_name] = klass.first.value
+    all.each do |currency|
+      currencies[currency.symbol] = currency.value
     end
     currencies
   end

@@ -153,7 +153,11 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     console.log(message)
   }
 
-  $scope.cryptoOptions = ['AE', 'BNB', 'BNT', 'CIND'];
+  $api.v2.currencies().then(function(currencies){
+    $scope.currencies = currencies.data;
+    $scope.cryptoOptions = Object.keys(currencies.data);
+  })
+  
   $scope.bounty = {
     token: 'ETH',
     amount: '0'
@@ -165,9 +169,9 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   };
 
   $scope.generate_address = function(issue_id){
-    if($scope.issue.issue_address.public_address === undefined){
+    if(($scope.issue.issue_address || {} ).public_address === undefined){
       $api.issue_address_create(issue_id).then(function(issue){
-        if(web3.currentProvider.isMetaMask && $scope.isSelectedCrypto('ETH')) {
+        if(Web3Utils.isMetaMask() && $scope.isSelectedCrypto('ETH')) {
           $scope.issue = issue
           $scope.openMetamaskModal()
         } else {
@@ -175,14 +179,12 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
         }
       })
     } else {
-      if(web3.currentProvider.isMetaMask && $scope.isSelectedCrypto('ETH')) {
+      if(Web3Utils.isMetaMask() && $scope.isSelectedCrypto('ETH')) {
         $scope.openMetamaskModal()
       } else {
         $scope.openQRModal()
       }
     }
-
-    
   }
 
   $scope.openHunterBox = function() {

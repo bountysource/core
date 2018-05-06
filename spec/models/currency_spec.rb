@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  type          :string(255)      not null
-#  value         :decimal(, )      not null
+#  value         :decimal(, )
 #  created_at    :datetime
 #  updated_at    :datetime
 #  name          :string

@@ -40,9 +40,9 @@
 <form class="form-horizontal" name="form" ng-submit="change_password()" novalidate="">
   <p>If you were curious, we use bcrypt so your password will be salted.</p>
   <div class="form-group mt-5">
-    <label class="control-label col-md-2" for="inputDisplayName">Current Password</label>
+    <label class="control-label col-md-2" for="inputDisplayCurrentPassword">Current Password</label>
     <div class="col-md-5">
-      <input type="password" id="inputDisplayName" placeholder="abcd1234" ng-model="form_data.current_password" class="input-medium form-control">
+      <input type="password" id="inputDisplayCurrentPassword" placeholder="abcd1234" ng-model="form_data.current_password" class="input-medium form-control">
     </div>
     <div class="col-md-1">
       <span class="help-block"><small><a ng-click="forgot_password()">Forgot?</a></small></span>
@@ -51,9 +51,9 @@
 
 
   <div class="form-group">
-    <label class="control-label col-md-2" for="inputDisplayName">New Password</label>
+    <label class="control-label col-md-2" for="inputDisplayNewPassword">New Password</label>
     <div class="col-md-5">
-      <input type="password" id="inputDisplayName" placeholder="abcd1234" ng-model="form_data.new_password" class="input-medium form-control">
+      <input type="password" id="inputDisplayNewPassword" placeholder="abcd1234" ng-model="form_data.new_password" class="input-medium form-control">
     </div>
   </div>
 
