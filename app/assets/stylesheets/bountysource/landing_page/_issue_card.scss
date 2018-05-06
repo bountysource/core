@@ -1,19 +1,35 @@
 #landing-page .issue-card {
 	position: relative;
-	box-shadow: 0 2px 4px 0 rgba(144, 164, 183, 0.22);
+	box-shadow: 0 2px 4px 2px rgba(144, 164, 183, 0.22);
 	background: white;
 	border-radius: 6px;
 	padding: 2em;
 	margin-bottom: 2em;
 
 	.issue-body {
-		a {
+		// utilities
+		.url-dark {
 			color: black;
 			&:hover {
 				color: #33ccff;
 			}
 		}
 
+		.margin-0 {
+			margin: 0;
+		}
+
+		.info-small {
+			font-size: 12px;
+			margin-right: 1em;
+		}
+
+		.icon {
+			width: 1em;
+			margin-right: 0.2em;
+		}
+
+		// main
 		.tracker-info {
 			display: flex;
 			flex-flow: row wrap;
@@ -29,59 +45,39 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
-
 		}
 
 		.issue-info {
 			padding-left: 1em;
 
 			.issue-title {
-				margin: 0;
-			}
-
-			.issue-author {
-				max-width: 35em;
+				font-weight: initial;
 			}
 
 			.issue-caption {
-				font-size: 12px;
+				margin-top: 0.2em;
+
+				.issue-author {
+					max-width: 35em;
+				}
 			}
 
-			.issue-author,
-			.issue-created-at,
-			.issue-updated-at {
-				margin-right: 1em;
-			}
-
-			.issue-caption,
-			.issue-description
-			{
+			.issue-row {
 				margin-top: 1em;
 			}
 
-			.see-more {
-				color: #33ccff;
-			}
-
 			.issue-description {
+				font-size: 12px;
+				line-height: 1.6em;
 				overflow: hidden;
 				position: relative;
 				margin-right: -1em;
 				padding-right: 1em;
-			}
 
-			.issue-comment {
-				// override bootstrap col
-				@media (min-width: 768px) {
-				    width: 20%;
-				    padding-right: 0;
+				.issue-see-more {
+					color: #33ccff;
 				}
 			}
-		}
-
-		.icon {
-		  width: 1em;
-		  margin-right: 0.2em;
 		}
 	} // issue body END
 
@@ -102,7 +98,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-
 
 		.issue-bounty-text {
 			justify-content: center;

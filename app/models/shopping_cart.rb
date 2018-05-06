@@ -152,6 +152,7 @@ class ShoppingCart < ApplicationRecord
 
   # Calculate gross for item in USD
   # @param upsells - includeu upsells in the calculation
+
   def calculate_item_gross(attrs, upsells: true)
     attrs["total"].to_f || attrs["amount"].to_f
   end

@@ -1,0 +1,31 @@
+%div
+  %h4.fw-sb
+    Contribute to this bounty
+  %qrcode{ "data" => "{{issue.issue_address.public_address}}", "size" => "180" }
+
+  %p.mt-5
+    This address only accepts ETH or ERC20 tokens
+
+
+  %div.mt-5
+    %input.form-control.text-center{"value" => "{{ issue.issue_address.public_address }}", "readonly" => "true"}
+
+%div.mt-5
+  %div{"ng-if" => "!isSelectedCrypto('BTC')" }
+    .row.display-flex.vertical-align-bottom 
+      .col-xs-6.pr-0
+        %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "bounty.amount"}
+      .col-xs-6.pl-0
+        %button#cryptoSelect.btn-borderless.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
+          %span.font-8{"ng-if" => "isSelectedCrypto(null)"} SELECT ERC20 TOKEN
+          %span{"ng-if" => "!isSelectedCrypto(null)"} {{ bounty.token }}
+          %span.caret
+        %ul.dropdown-menu{"aria-labelledby" => "cryptoSelect", "style" => "min-width: 0;"}
+          %li{"ng-repeat" => "cryptoOption in cryptoOptions"}
+            %a{"ng-click" => "setCrypto(cryptoOption)"} {{ cryptoOption }}
+    %hr.mt-0{"style" => "height: 2px;"}
+  %div{"ng-if" => "isSelectedCrypto('BTC')" }
+    .text-muted BTC contributions unavailable
+
+%div.mt-5
+  %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "isSelectedCrypto('BTC')", "ng-click" => "generate_address(issue.id)" } POST THIS BOUNTY

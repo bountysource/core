@@ -3,8 +3,11 @@
 .font-weight-semibold{ font-weight: 600; }
 .font-weight-bold    { font-weight: bold; }
 
+.fw-b    { font-weight: bold; }
+
 .font-size-default { font-size: 14px !important; }
 .font-8 { font-size: 8px !important; }
+.font-10 { font-size: 10px !important; }
 .font-12 { font-size: 12px !important; }
 .font-14 { font-size: 14px !important; }
 .font-16 { font-size: 16px !important; }
@@ -46,9 +49,11 @@
 .pl-5 { padding-left: 3rem !important; }
 
 .py-3 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+.py-4 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
 
 .px-3 { padding-left: 1rem !important; padding-right: 1rem !important; }
 .px-4 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+.px-5 { padding-left: 3rem !important; padding-right: 3rem !important; }
 
 .my-0 { margin-top: 0 !important; margin-bottom: 0 !important;}
 

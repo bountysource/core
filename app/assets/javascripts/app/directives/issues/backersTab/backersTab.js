@@ -1,4 +1,4 @@
-angular.module('directives').directive('backersTab', function ($rootScope, $routeParams, Issue, Bounties) {
+angular.module('directives').directive('backersTab', function ($rootScope, $routeParams, $api, Issue, Bounties) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -10,6 +10,10 @@ angular.module('directives').directive('backersTab', function ($rootScope, $rout
         include_owner: true,
         order: '+amount'
       });
+
+      $api.crypto_bounties_get($routeParams.id).then(function(cryptoBounties){
+        scope.cryptoBounties = cryptoBounties
+      })
 
       // allow sorting
       scope.sort_column = 'amount';

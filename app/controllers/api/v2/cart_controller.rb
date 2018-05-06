@@ -39,7 +39,7 @@ private
   end
 
   def team_payin_params
-    params.require(:team_payin).permit(:amount, :owner_id, :owner_type, :team_id, :currency) if params[:team_payin]
+    params.require(:team_payin).permit(:amount, :owner_id, :owner_type, :team_id, :currency, :item_type) if params[:team_payin]
   end
 
   def require_checkout_method

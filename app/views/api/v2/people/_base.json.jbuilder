@@ -10,6 +10,7 @@ profile_completed
 created_at
 ))
 
+json.account_balance item.account.balance
 json.type item.class.name
 json.slug item.to_param
 json.admin item.admin if can?(:manage, item)
@@ -20,7 +21,6 @@ json.email item.email if @include_person_email
 json.followers item.followers if item.respond_to? :followers
 
 json.partial! 'api/v2/image_urls', item: item
-
 
 json.bounty_claim_total item.bounty_claim_total if @include_bounty_claim_total
 json.issue_solved_total item.issue_solved_total if @include_bounty_claim_total && item.issue_solved_total

@@ -289,8 +289,8 @@ Api::Application.routes.draw do
 
         resources :issues, only: [:show, :index] do
           resources :issue_addresses, only: [:create]
+          resources :crypto_bounties, only: :index, module: 'issues'
           member do
-            get :bounties
             get :activity
 
             resources :developer_goals, controller: :developer_goals, only: [:index, :create]

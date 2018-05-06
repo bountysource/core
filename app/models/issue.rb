@@ -84,6 +84,7 @@ class Issue < ApplicationRecord
   has_paper_trail :only => [:remote_id, :url, :number, :title, :body, :body_markdown, :tracker_id, :can_add_bounty]
 
   has_many :bounties
+  has_many :crypto_bounties
   has_many :comments
   belongs_to :tracker
   has_many :languages, through: :tracker
@@ -415,7 +416,9 @@ class Issue < ApplicationRecord
 
   # number of unique people who've backed this issue... used in issue nav tabs
   def backers_count
-    Bounty.not_refunded.where(issue_id: self.id).distinct.count(:person_id)
+    fiat_backers = Bounty.not_refunded.where(issue_id: self.id).distinct.count(:person_id)
+    return fiat_backers unless fiat_backers.zero?
+    crypto_bounties.count
   end
 
   # number of developers who have/could solve this
