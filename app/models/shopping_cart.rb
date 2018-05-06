@@ -152,12 +152,9 @@ class ShoppingCart < ApplicationRecord
 
   # Calculate gross for item in USD
   # @param upsells - includeu upsells in the calculation
-  def calculate_item_gross(item_attributes, upsells: true)
-    item = item_from_attributes(item_attributes)
-    return 0 unless item
 
-    amount = item_attributes['total'] || item_attributes['amount']
-    Money.new(amount.to_f * 100, 'USD').to_f
+  def calculate_item_gross(attrs, upsells: true)
+    attrs["total"].to_f || attrs["amount"].to_f
   end
 
   # Sum liability of items
@@ -179,14 +176,7 @@ class ShoppingCart < ApplicationRecord
   end
 
   def amount_from_attributes(attrs)
-    if attrs[:amount].blank?
-      nil
-    elsif attrs[:currency] != 'USD' && attrs[:total]
-      Money.new(attrs[:total].to_f*100, 'USD').dollars
-    else
-      amountUsd = attrs[:amount]
-      Money.new(amountUsd * 100, 'USD').dollars
-    end
+    attrs[:total].to_f || attrs[:amount].to_f
   end
 
   def item_from_attributes(attrs)

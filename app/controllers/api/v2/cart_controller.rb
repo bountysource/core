@@ -12,7 +12,6 @@ class Api::V2::CartController < Api::BaseController
       @cart.errors.add(:cart, 'is empty')
       raise ActiveRecord::RecordInvalid.new @cart
     end
-
     # For internal checkout method accounts, we immediately create transaction.
     # Note: Minimum balance is already required in before_action
     if @checkout_method.is_a?(Account::Personal) || @checkout_method.is_a?(Account::Team)
