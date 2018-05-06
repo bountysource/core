@@ -156,19 +156,7 @@ class ShoppingCart < ApplicationRecord
     item = item_from_attributes(item_attributes)
     return 0 unless item
 
-    if item_attributes['currency'] != 'USD' && item_attributes['total']
-      amount = item_attributes['total']
-    else
-      amount = Currency.convert(item_attributes['amount'], item_attributes['currency'], 'USD')
-    end
-
-    if upsells
-      if item.is_a?(Bounty) && item.tweet?
-        # TODO remove evil magic number. better yet, change the entire upsell system
-        amount += 20
-      end
-    end
-
+    amount = item_attributes['total'] || item_attributes['amount']
     Money.new(amount.to_f * 100, 'USD').to_f
   end
 
@@ -196,7 +184,7 @@ class ShoppingCart < ApplicationRecord
     elsif attrs[:currency] != 'USD' && attrs[:total]
       Money.new(attrs[:total].to_f*100, 'USD').dollars
     else
-      amountUsd = Currency.convert(attrs[:amount], attrs[:currency], 'USD')
+      amountUsd = attrs[:amount]
       Money.new(amountUsd * 100, 'USD').dollars
     end
   end
