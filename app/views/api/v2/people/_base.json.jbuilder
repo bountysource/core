@@ -10,7 +10,7 @@ profile_completed
 created_at
 ))
 
-json.account_balance item.account.balance
+json.account_balance item.account.balance if item.account
 json.type item.class.name
 json.slug item.to_param
 json.admin item.admin if can?(:manage, item)
