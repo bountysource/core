@@ -13,7 +13,7 @@
 #  invited_by_person_id :integer
 #  budget               :decimal(, )
 #  balance              :decimal(, )
-#  owner_type           :string
+#  owner_type           :string(255)
 #  owner_id             :integer
 #  member               :boolean          default(TRUE), not null
 #

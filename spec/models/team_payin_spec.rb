@@ -9,7 +9,7 @@
 #  consumed    :boolean          default(FALSE), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  owner_type  :string
+#  owner_type  :string(255)
 #  owner_id    :integer
 #  from_member :boolean          default(FALSE)
 #  refunded_at :datetime
@@ -19,7 +19,7 @@
 #  index_team_payins_on_amount                   (amount)
 #  index_team_payins_on_owner_type_and_owner_id  (owner_type,owner_id)
 #  index_team_payins_on_person_id                (person_id)
-#  index_team_payins_on_refunded_at              (refunded_at)
+#  index_team_payins_on_refunded_at              (refunded_at) WHERE (refunded_at IS NOT NULL)
 #  index_team_payins_on_team_id                  (team_id)
 #
 

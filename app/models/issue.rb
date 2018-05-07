@@ -7,11 +7,11 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  number                   :integer
-#  url                      :string           not null
+#  url                      :string(255)      not null
 #  title                    :text
-#  labels                   :string
+#  labels                   :string(255)
 #  code                     :boolean          default(FALSE)
-#  state                    :string
+#  state                    :string(255)
 #  body                     :text
 #  remote_updated_at        :datetime
 #  remote_id                :integer
@@ -23,25 +23,26 @@
 #  comment_count            :integer          default(0)
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  bounty_total             :decimal(10, 2)   default(0.0), not null
-#  type                     :string           default("Issue"), not null
-#  remote_type              :string
-#  priority                 :string
-#  milestone                :string
+#  type                     :string(255)      default("Issue"), not null
+#  remote_type              :string(255)
+#  priority                 :string(255)
+#  milestone                :string(255)
 #  can_add_bounty           :boolean          default(FALSE), not null
 #  accepted_bounty_claim_id :integer
-#  author_name              :string
-#  owner                    :string
+#  author_name              :string(255)
+#  owner                    :string(255)
 #  paid_out                 :boolean          default(FALSE), not null
 #  participants_count       :integer
 #  thumbs_up_count          :integer
 #  votes_count              :integer
 #  watchers_count           :integer
-#  severity                 :string
+#  severity                 :string(255)
 #  delta                    :boolean          default(TRUE), not null
 #  author_linked_account_id :integer
 #  solution_started         :boolean          default(FALSE), not null
 #  body_markdown            :text
 #  deleted_at               :datetime
+#  category                 :integer
 #
 # Indexes
 #
@@ -55,9 +56,9 @@
 #  index_issues_on_url                            (url) UNIQUE
 #  index_issues_on_votes_count                    (votes_count)
 #  index_issues_on_watchers_count                 (watchers_count)
-#  index_issues_partial_author_linked_account_id  (author_linked_account_id)
-#  index_issues_partial_bounty_total              (bounty_total)
-#  index_issues_partial_thumbs_up_count           (thumbs_up_count)
+#  index_issues_partial_author_linked_account_id  (author_linked_account_id) WHERE (author_linked_account_id IS NOT NULL)
+#  index_issues_partial_bounty_total              (bounty_total) WHERE (bounty_total > (0)::numeric)
+#  index_issues_partial_thumbs_up_count           (thumbs_up_count) WHERE (COALESCE(thumbs_up_count, 0) > 0)
 #
 
 class Issue < ApplicationRecord
@@ -78,9 +79,12 @@ class Issue < ApplicationRecord
 
   UNKNOWN_TITLE = '(Issue Title Unknown)'
 
+  enum category: [:fiat, :crypto]
+
   has_paper_trail :only => [:remote_id, :url, :number, :title, :body, :body_markdown, :tracker_id, :can_add_bounty]
 
   has_many :bounties
+  has_many :crypto_bounties
   has_many :comments
   belongs_to :tracker
   has_many :languages, through: :tracker
@@ -104,6 +108,7 @@ class Issue < ApplicationRecord
   has_one :request_for_proposal
   has_many :proposals, through: :request_for_proposal
   has_many :thumbs, as: :item
+  has_one :issue_address
 
   has_account class_name: 'Account::IssueAccount'
 
@@ -363,6 +368,10 @@ class Issue < ApplicationRecord
     self[:remote_created_at] || self[:created_at]
   end
 
+  def real_updated_at
+    self[:remote_updated_at] || self[:updated_at]
+  end
+
   def collected_event
     bounty_claims.paid_out.first.bounty_claim_events.collected.first
   end
@@ -407,7 +416,9 @@ class Issue < ApplicationRecord
 
   # number of unique people who've backed this issue... used in issue nav tabs
   def backers_count
-    Bounty.not_refunded.where(issue_id: self.id).distinct.count(:person_id)
+    fiat_backers = Bounty.not_refunded.where(issue_id: self.id).distinct.count(:person_id)
+    return fiat_backers unless fiat_backers.zero?
+    crypto_bounties.count
   end
 
   # number of developers who have/could solve this
@@ -459,6 +470,10 @@ class Issue < ApplicationRecord
     html = html.gsub(/<a href="https:\/\/www.bountysource.com\/issues\/.*<img src="https:\/\/api.bountysource.com\/badge.*"><\/a>/, '')
     html = ActionController::Base.helpers.sanitize(html)
     html
+  end
+
+  def truncate_body_markdown
+    self[:body_markdown].truncate(140) if self[:body_markdown]
   end
 
   # has the author issued a takedown for the title/body? comments by others will still appear.

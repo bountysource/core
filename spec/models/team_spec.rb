@@ -3,12 +3,12 @@
 # Table name: teams
 #
 #  id                               :integer          not null, primary key
-#  name                             :string           not null
-#  slug                             :string
-#  url                              :string
+#  name                             :string(255)      not null
+#  slug                             :string(255)
+#  url                              :string(255)
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
-#  cloudinary_id                    :string
+#  cloudinary_id                    :string(255)
 #  bio                              :text
 #  featured                         :boolean          default(FALSE), not null
 #  linked_account_id                :integer

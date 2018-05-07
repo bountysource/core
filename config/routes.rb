@@ -288,8 +288,9 @@ Api::Application.routes.draw do
         match 'doge_issues', controller: :issues, action: :doge_issues, via: :get
 
         resources :issues, only: [:show, :index] do
+          resources :issue_addresses, only: [:create]
+          resources :crypto_bounties, only: :index, module: 'issues'
           member do
-            get :bounties
             get :activity
 
             resources :developer_goals, controller: :developer_goals, only: [:index, :create]
@@ -506,13 +507,7 @@ Api::Application.routes.draw do
           post 'thumbs/feedback', to: 'thumbs#feedback'
 
           resource :account, only: [:show], controller: :account
-
-          resource :cart, only: [:show, :create, :destroy], controller: :cart do
-            collection do
-              get :checkout
-            end
-          end
-          resources :cart_items, only: [:create, :update, :destroy]
+          resource :cart ,only: [:create], controller: :cart
 
           resources :people, only: [:index, :update] do
             collection do
@@ -525,6 +520,8 @@ Api::Application.routes.draw do
               resources :trackers, controller: :people_trackers, only: [:index]
             end
           end
+
+          resources :wallets, only: [:create]
         end
       end
     end

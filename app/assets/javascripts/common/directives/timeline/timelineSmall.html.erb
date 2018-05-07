@@ -1,0 +1,34 @@
+<div class='timeline-container'>
+  <table class="table-fixed">
+    <tr ng-repeat="event in events">
+      <td class="bounty-description">
+
+        <div class="primary-text" ng-if="event.event==='bounty_claimed'">
+          <profile-name owner="event.actor"></profile-name>
+          submitted a claim<span ng-if="event.issue"> for <a ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}} ({{event.issue.bounty_total | dollars}})</a></span><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="primary-text" ng-if="event.event==='bounty_collected'">
+          <profile-name owner="event.actor"></profile-name>
+          was awarded the bounty<span ng-if="event.issue"> on <a ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}} ({{event.issue.bounty_total | dollars}})</a></span><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="primary-text" ng-if="event.event==='bounty_created'">
+          <profile-name owner="event.actor"></profile-name>
+          posted a {{event.bounty.amount | dollars}} bounty
+            <span ng-if="event.issue">
+              to <a ng-href="/issues/{{event.issue.slug}}">
+                {{event.issue.title}} ({{event.issue.bounty_total | dollars}})
+              </a>
+            </span>
+            <span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+
+        <div class="primary-text" ng-if="event.event==='solution_started'">
+          <profile-name owner="event.actor"></profile-name>
+          started a solution<span ng-if="event.issue"> on <a ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}} ({{event.issue.bounty_total | dollars}})</a></span><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

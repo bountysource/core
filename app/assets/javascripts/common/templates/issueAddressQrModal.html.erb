@@ -1,0 +1,17 @@
+<div>
+  <div class="modal-body">
+    <div class="text-center">
+      <h4>Pay exactly {{bounty.amount}} {{bounty.token}}</h4>
+
+      <p class="mt-5">To this address</p>
+      <qrcode data='{{issue.issue_address.public_address}}' size="230"></qrcode>
+
+      <div class="mt-5">
+        <input class="form-control text-center" value="{{ issue.issue_address.public_address }}" readonly="true">
+      </div>
+      <p class="mt-5">
+        This address only accepts ETH or ERC20 tokens
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+%div{"ng-show" => "bounties.$resolved"}
+  %div{"ng-show" => "!issue.category"}
+    .row
+      .col-md-6
+        .text-center
+          %contribute-accordian
+  %div{"ng-show" => "bounties.length > 0"}
+    %table#bounties-table.table
+      %thead
+        %tr
+          %th
+            %a.text-dark{"ng-click" => "sort_by('owner.display_name')"} Backers
+          %th
+          %th
+            %a.text-dark{"ng-click" => "sort_by('amount')"} Amount
+          %th
+            %a.text-dark{"ng-click" => "sort_by('created_at')"} Date
+      %tbody
+        %tr{"ng-repeat" => "bounty in bounties | orderBy:sort_column:sort_reverse"}
+          %td
+            %profile-pic{:owner => "bounty.owner"}
+          %td
+            %profile-name{:owner => "bounty.owner"}
+          %td.font-weight-medium
+            {{ bounty.amount | dollars }}
+          %td
+            .text-muted {{ bounty.created_at | date }}
+  %div{"ng-show" => "cryptoBounties.length > 0"}
+    %table#bounties-table.table
+      %thead
+        %tr
+          %th
+            %a.text-dark{"ng-click" => "sort_by('owner.display_name')"} Backers
+          %th
+          %th
+            %a.text-dark{"ng-click" => "sort_by('amount')"} Amount
+          %th
+            %a.text-dark{"ng-click" => "sort_by('created_at')"} Date
+      %tbody
+        %tr{"ng-repeat" => "cryptoBounty in cryptoBounties | orderBy:sort_column:sort_reverse"}
+          %td
+            %profile-pic{:owner => "cryptoBounty.owner"}
+          %td
+            %profile-name{:owner => "cryptoBounty.owner"}
+          %td.font-weight-medium
+            %span
+              {{ cryptoBounty.amount.tokens[0].balance }}
+            %span
+              {{ cryptoBounty.amount.tokens[0].tokenInfo.name }}
+          %td
+            .text-muted {{ cryptoBounty.created_at | date }}

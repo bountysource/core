@@ -8,6 +8,12 @@ angular.module('app').run(function($api) {
     }
   });
 
+  $api.add('person_teaams', {
+    api_version: 1,
+    params: { person_id: '@person_id' },
+    url: '/people/:person_id/teams'
+  });
+
   $api.add('team_members', {
     api_version: 1,
     params: { slug: '@slug' },
@@ -63,4 +69,9 @@ angular.module('app').run(function($api) {
     }}
   );
 
+  $api.add('one_time_checkout', {
+    methods: {
+      'create': { method: 'POST', url: '/cart' }
+    }
+  })
 });

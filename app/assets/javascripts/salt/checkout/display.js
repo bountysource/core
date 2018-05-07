@@ -1,7 +1,7 @@
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.checkout.display', {
     parent: 'root.checkout.authed',
-    url: "/checkout/display?team&amount&display_as&reward_id&support_level_id",
+    url: "/checkout/display?team&amount&display_as&reward_id&support_level_id&frequency",
     title: "Display As - Checkout",
     templateUrl: "salt/checkout/display.html",
     container: false,
@@ -20,7 +20,11 @@ angular.module('app').config(function($stateProvider) {
       };
 
       $scope.submit_form = function() {
-        $state.transitionTo('root.checkout.payment', angular.extend({}, $stateParams, $scope.form_data));
+        if ($stateParams.frequency === 'monthly') {
+          $state.transitionTo('root.checkout.payment', angular.extend({}, $stateParams, $scope.form_data));
+        } else {
+          $state.transitionTo('root.checkout.one_time_payment', angular.extend({}, $stateParams, $scope.form_data));
+        }
       };
     }
   });

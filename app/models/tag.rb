@@ -3,10 +3,10 @@
 # Table name: tags
 #
 #  id         :integer          not null, primary key
-#  name       :string           not null
+#  name       :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  image_url  :string
+#  image_url  :string(255)
 #
 # Indexes
 #

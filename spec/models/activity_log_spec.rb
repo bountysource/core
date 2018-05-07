@@ -6,7 +6,7 @@
 #  person_id  :integer
 #  issue_id   :integer
 #  tracker_id :integer          not null
-#  name       :string           not null
+#  name       :string(255)      not null
 #  created_at :datetime         not null
 #  lurker_id  :integer
 #

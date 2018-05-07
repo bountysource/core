@@ -12,7 +12,7 @@
 #  reward_id       :integer
 #  survey_response :text
 #  anonymous       :boolean          default(FALSE), not null
-#  owner_type      :string
+#  owner_type      :string(255)
 #  owner_id        :integer
 #
 # Indexes

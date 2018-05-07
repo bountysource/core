@@ -1,5 +1,13 @@
 .btn {
-  border-radius: 999px;
+  border-radius: 5px;
+}
+
+.btn-responsive {
+  width: 100%;
+}
+
+.btn-rounded {
+  border-radius: 999px !important;  
 }
 
 .btn:focus, .btn:active:focus, .btn.active:focus {
@@ -15,7 +23,8 @@
 }
 
 .btn-default {
-  border-color: #e0e5e7;
+  border-color: #e9eeee;
+  color: black;
 }
 
 .btn-small-radius {
@@ -43,10 +52,16 @@
   color: white;
 }
 
-.btn-light-blue {
+.btn-light-blue, .btn-light-blue:focus {
   background-color: #33ccff;
-  border-radius: 999px;
   color: white;
+}
+
+.btn-light-blue-inverse {
+  background-color: white;
+  border-color: #33ccff;
+  border-radius: 2px;
+  color: #33ccff;
 }
 
 .btn-aquamarine {
@@ -56,6 +71,17 @@
 }
 
 .btn-cool-grey {
+  background-color: #919d9d;  
+  border-radius: 999px;
+  color: white;
+}
+
+.btn-grey {
+  background-color: #919d9d;  
+  color: white;
+}
+
+.btn-cool-grey:focus {
   background-color: #919d9d;  
   border-radius: 999px;
   color: white;
@@ -71,6 +97,10 @@
   &:focus{
     color: white;
   }
+}
+
+.btn-borderless {
+  border: 0;
 }
 
 .btn-default-border-salmon {
