@@ -12,7 +12,7 @@
 <div class="alert alert-info" ng-show="info">{{info}}</div>
 <div class="alert alert-success" ng-show="success">{{success}}</div>
 
-<form class="form-horizontal" name="form_eth" ng-submit="validate_addr()" novalidate="">
+<form class="form-horizontal" name="form_eth" ng-submit="add_addr()" novalidate="">
   <p>Add a cypto address</p>
   <div class="form-group mt-5">
     <label class="control-label col-md-2" for="addrLabel">Address Label</label>
@@ -31,10 +31,15 @@
 
   <div class="form-group">
     <div class="col-md-offset-2 col-md-3">
-      <button type="submit" class="btn btn-light-blue btn-long">Add Address Through Metamask</button>
+      <button type="submit" class="btn btn-light-blue btn-long">Save</button>
     </div>
   </div>
 
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-3">
+      <button type="submit" class="btn btn-light-blue btn-long" ng-click="validate_addr">Add Address Through Metamask</button>
+    </div>
+  </div>
 </form>
 
 <form class="form-horizontal" name="form" ng-submit="change_password()" novalidate="">

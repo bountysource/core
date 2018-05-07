@@ -328,7 +328,15 @@ angular.module('services').config(function($httpProvider) {
         method: 'POST',
         data: params || {}
       });
-    }
+    },
+
+    metamask: function(params) {
+      return this.call({
+        url: '/wallets/metamask',
+        method: 'POST',
+        data: params || {}
+      });
+    },
   };
 
   // call(url, 'POST', { foo: bar }, optional_callback)
