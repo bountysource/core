@@ -38,7 +38,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   };
 
   $scope.add_addr = function(){
-    var walletParams = { person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr, signed_txn: signedTxn }
+    var walletParams = { person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr }
     console.log(walletParams)
     $api.v2.wallets(walletParams)
       .then(function (response){ if (response.success) {
