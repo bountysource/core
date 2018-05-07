@@ -1,7 +1,6 @@
 class Api::V2::WalletsController < Api::BaseController
 
   def create
-    byebug
     @wallet = Wallet.new(person_id: params[:person_id], label: params[:label], eth_addr: params[:eth_addr])
     @wallet.primary = true
     if @wallet.save
@@ -12,7 +11,6 @@ class Api::V2::WalletsController < Api::BaseController
   end
 
   def metamask
-    byebug
     @wallet = Wallet.new(person_id: params[:person_id], label: params[:label], eth_addr: params[:eth_addr])
     @wallet.primary = true
     if @wallet.save && CryptoApi.verify_wallet(@wallet, params[:signed_txn])
