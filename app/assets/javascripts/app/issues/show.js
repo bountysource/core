@@ -255,7 +255,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
         $scope.showQRAddress = function(){
           $scope.closeModal()
-          $parent.openQRModal()
+          openQRModal()
         }
       },
       resolve: {
