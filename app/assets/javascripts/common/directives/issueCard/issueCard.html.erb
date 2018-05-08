@@ -1,76 +1,81 @@
-<div class="issue-card">
-  <div class="issue-body row">
-    <div class="col-sm-2 col-xs-12 tracker-info">
-      <a ng-href="/trackers/{{ issue.tracker.slxug }}" class="tracker-image-container">
-        <img class="tracker-image" ng-src="{{ issue.tracker.image_url }}" alt="" />
-      </a>
-      <a ng-href="/trackers/{{ issue.tracker.slug }}" class="tracker-name url-dark" tooltip="{{ issue.tracker.name }}" tooltip-trigger="mouseenter">
-        {{ issue.tracker.name }}
-      </a>
-    </div>
-
-    <div class="col-sm-10 col-xs-12 issue-info">
-      <h4 class="issue-title margin-0">
-        <a class="url-dark" ng-href="/issues/{{ issue.slug }}">
-          <strong>{{ issue.title }}</strong>
-        </a>
-        <div class="issue-caption">
-          <span class="issue-author info-small">
-            <i class="glyphicon glyphicon-user"></i>
-            <span class='text-muted'>posted by: </span>
-            <a class="url-dark" ng-if="issue.author.slug" ng-href="{{ issue.author.slug }}">
-              {{ issue.author.display_name }}
-            </a>
-            <span ng-if="issue.author.slug === undefined">
-              {{ issue.author.display_name }}
-            </span>
-          </span>
-
-          <span class="issue-created-at info-small">
-            <i class="glyphicon glyphicon-edit"></i>
-            <span class='text-muted'>created:</span> {{ issue.created_at | timeDiff }} ago
-          </span>
-
-          <span class="issue-updated-at info-small">
-            <i class="glyphicon glyphicon-calendar"></i>
-            <span class='text-muted'>updated:</span> {{ issue.updated_at | timeDiff }} ago
-          </span>
+<a ng-href="/issues/{{ issue.slug }}" class="nostyle">
+  <div class="issue-card">
+    <div class="issue-body row">
+      <div class="col-sm-2 col-xs-12 tracker-info">
+        <div class="tracker-image-container">
+          <img class="tracker-image" ng-src="{{ issue.tracker.image_url }}" alt="" />
         </div>
-      </h4>
-
-      <div class="issue-description issue-row text-muted">
-        <p class="margin-0" ng-if="issue.description.length >= issueTruncateLength">
-          {{ issue.description | truncate: issueTruncateLength }}
-          <a class="issue-see-more" ng-href="/issues/{{ issue.slug }}">See more</a>
-        </p>
-
-        <p class="margin-0" ng-if="issue.description.length < issueTruncateLength">
-          {{ issue.description }}
-        </p>
+        <div class="tracker-name url-dark" tooltip="{{ issue.tracker.name }}" tooltip-trigger="mouseenter">
+          {{ issue.tracker.name }}
+        </div>
       </div>
 
+      <div class="col-sm-10 col-xs-12 issue-info">
+        <h4 class="issue-title margin-0">
+          <div class="url-dark">
+            <strong>{{ issue.title }}</strong>
+          </div>
+          <div class="issue-caption">
+            <span class="issue-author info-small">
+              <i class="glyphicon glyphicon-user"></i>
+              <span class='text-muted'>posted by: </span>
+              <div class="url-dark" ng-if="issue.author.slug">
+                {{ issue.author.display_name }}
+              </div>
+              <span ng-if="issue.author.slug === undefined">
+                {{ issue.author.display_name }}
+              </span>
+            </span>
 
-      <div class="issue-row">
-        <span class="issue-comment info-small">
-          <i class="fa fa-comments-o icon"></i>
-          <a class="text-muted" ng-href="/issues/{{ issue.slug }}">{{issue.comment_count}} comments</a>
-        </span>
-        <!-- <div class="col-sm-6 col-xs-12 issue-languages"> -->
-          <span class="badge search-filter" ng-repeat="language in issue.tracker.languages | limitTo: 3">
-            {{language.name}}
+            <span class="issue-created-at info-small">
+              <i class="glyphicon glyphicon-edit"></i>
+              <span class='text-muted'>created:</span> {{ issue.created_at | timeDiff }} ago
+            </span>
+
+            <span class="issue-updated-at info-small">
+              <i class="glyphicon glyphicon-calendar"></i>
+              <span class='text-muted'>updated:</span> {{ issue.updated_at | timeDiff }} ago
+            </span>
+          </div>
+        </h4>
+
+        <div class="issue-description issue-row text-muted">
+          <p class="margin-0" ng-if="issue.description.length >= issueTruncateLength">
+            {{ issue.description | truncate: issueTruncateLength }}
+          </p>
+
+          <p class="margin-0" ng-if="issue.description.length < issueTruncateLength">
+            {{ issue.description }}
+          </p>
+        </div>
+
+
+        <div class="issue-row">
+          <span class="issue-comment info-small">
+            <i class="fa fa-comments-o icon"></i>
+            <span class="text-muted">{{issue.comment_count}} comments</span>
           </span>
-        <!-- </div> -->
+          <!-- <div class="col-sm-6 col-xs-12 issue-languages"> -->
+            <!-- <span class="badge search-filter" ng-repeat="language in issue.tracker.languages | limitTo: 3">
+              {{language.name}}
+            </span> -->
+          <!-- </div> -->
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="issue-bounty">
-    <!-- <span class="issue-bounty-text" style="font-size: 10px;">
-      Amount
-    </span> -->
-    <span class="issue-bounty-text">
-      {{ issue.bounty_total | dollars:{space:true} }}
-    </span>
+    <div class="issue-bounty">
+      <span ng-show="issue.crypto_bounty_total > 0" class="issue-bounty-text">
+        <div>
+          <span class="font-10">TOTAL MARKET VALUE</span>
+        </div>
+        <div>
+          <span class="fw-sb">≈ {{ issue.crypto_bounty_total | dollars:{space:false} }} USD</span>
+        </div>
+      </span>
+      <span ng-show="issue.bounty_total > 0" class="issue-bounty-text fw-sb">
+        {{ issue.bounty_total | dollars:{space:true} }} USD
+      </span>
+    </div>
   </div>
-
-</div>
+</a>

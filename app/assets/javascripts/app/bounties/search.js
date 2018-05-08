@@ -9,6 +9,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   $scope.selectBountyType = function(typeObj){
     $scope.selectedBountyType = typeObj;
     $scope.form_data.category = typeObj.value;
+    $scope.submit_query()
   };
 
   $scope.selectCategory = function() {

@@ -15,3 +15,4 @@ attribute :comment_count
 attribute :participants_count
 attribute :thumbs_up_count
 attribute :bounty_total
+attribute :crypto_bounty_total

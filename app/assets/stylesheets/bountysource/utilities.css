@@ -4,6 +4,7 @@
 .font-weight-bold    { font-weight: bold; }
 
 .fw-b    { font-weight: bold; }
+.fw-sb    { font-weight: 600; }
 
 .font-size-default { font-size: 14px !important; }
 .font-8 { font-size: 8px !important; }
@@ -114,6 +115,7 @@
 .border-gunmetal { border-color: #485f64 !important; }
 
 .b-rad-0 { border-radius: 0 !important; }
+.b-rad-5 { border-radius: 5px !important; }
 
 /* Images */
 .img-circle { border-radius: 50% }
@@ -156,3 +158,15 @@
 .background-white { background-color: white; }
 .bg-white { background-color: white !important; }
 .bg-gunmetal { background-color: #485f64; }
+
+a.nostyle {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
