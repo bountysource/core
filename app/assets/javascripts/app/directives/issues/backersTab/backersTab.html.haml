@@ -43,9 +43,15 @@
           %td
             %profile-name{:owner => "cryptoBounty.owner"}
           %td.font-weight-medium
-            %span
-              {{ cryptoBounty.amount.balance }}
-            %span
-              {{ cryptoBounty.amount.tokenInfo.name }}
+            - if cryptoBounty.amount["ETH"] == null
+              %span
+                {{ cryptoBounty.amount.balance }}
+              %span
+                {{ cryptoBounty.amount.tokenInfo.name }}
+            - else
+              %span
+                {{ cryptoBounty.amount.balance }}
+              %span
+                ETH
           %td
             .text-muted {{ cryptoBounty.created_at | date }}
