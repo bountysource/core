@@ -219,12 +219,48 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     $modal.open({
       templateUrl: 'common/templates/issueAddressQrModal.html',
       backdrop: true,
-      controller: function($scope, $modalInstance, bounty, issue, Web3Utils) {
+      controller: function($scope, $interval, $modalInstance, bounty, issue, cryptoBounties, Web3Utils) {
+        $scope.timeLoaded = Date.now()
         $scope.bounty = bounty;
         $scope.issue = issue;
+        $scope.cryptoBounties = cryptoBounties;
+
         $scope.closeModal = function() {
           $modalInstance.close();
         };
+
+        $scope.bountyPoller;
+        $scope.startPolling = function(){
+          
+          $scope.bountyPoller = $interval(function(){
+            $api.crypto_bounties_get($routeParams.id).then(function(cryptoBounties){
+              $scope.cryptoBounties = cryptoBounties
+            })  
+          }, 3000)
+        }
+
+        $scope.stopPolling = function() {
+          if (angular.isDefined(bountyPoller)) {
+            $interval.cancel(bountyPoller);
+            bountyPoller = undefined;
+          }
+        };
+
+        $scope.startPolling()
+
+        $scope.$on('$destroy', function() {
+          // Make sure that the interval is destroyed too
+          $scope.stopPolling();
+        });
+
+        $scope.newBounties = function() {
+          return $scope.cryptoBounties.filter(getNewBounties)
+        }
+        
+        // helper functions
+        $scope.getNewBounties =  function(bounty) {
+          return (new Date(bounty.created_at)) > $scope.timeLoaded;
+        }
       },
       resolve: {
         bounty: function () {
@@ -232,6 +268,9 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
         },
         issue: function () {
           return $scope.issue;
+        },
+        cryptoBounties: function(){
+          return $scope.cryptoBounties;
         }
       }
 
@@ -259,7 +298,6 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
         $scope.showQRAddress = function(){
           $scope.closeModal()
-          openQRModal()
         }
       },
       resolve: {
@@ -285,5 +323,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
         $scope.teams = angular.copy(teams);
       });
     }
-  });  
+  });
+
+  
 });
