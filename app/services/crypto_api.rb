@@ -11,10 +11,9 @@ class CryptoApi
     raise MissingIssueAddressError unless response.code == 201
   end
 
-  def self.get_balance(issue_id)
-    url = "#{BASE_URL}issues/#{issue_id}/balance"
+  def self.refresh_bounties(issue_id)
+    url = "#{BASE_URL}issues/#{issue_id}/bounties/refresh"
     response = RestClient.get(url, DEFAULT_HEADERS)
-    # address = JSON.parse(response)["address"]
   end
 
   def self.verify_wallet(wallet, signed_txn)
