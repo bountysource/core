@@ -6,6 +6,8 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   $scope.github_link = $api.signin_url_for('github');
   $scope.twitter_link = $api.signin_url_for('twitter');
   $scope.facebook_link = $api.signin_url_for('facebook');
+  $scope.isCollapsed = true;
+
 
   $scope.form_data = {};
   $scope.change_password = function() {

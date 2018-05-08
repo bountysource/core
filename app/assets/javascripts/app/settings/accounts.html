@@ -27,14 +27,6 @@
       <form class="form-horizontal" name="form_eth" ng-submit="add_addr()" novalidate="">
         
         <div class="form-group mt-5">
-          <label class="control-label col-md-2" for="addrLabel">Address Label</label>
-          <div class="col-md-5">
-            <input type="text" id="addrLabel" placeholder="Address Label" ng-model="form_data.addr_label" class="input-medium form-control">
-          </div>
-        </div>
-
-
-        <div class="form-group">
           <label class="control-label col-md-2" for="ethAddr">ETH address</label>
           <div class="col-md-5">
             <input type="text" id="ethAddr" placeholder="0x4961aC1d43B6249bc998D611F33d42B54E31712E" ng-model="form_data.eth_addr" class="input-medium form-control">
@@ -55,71 +47,79 @@
   </div>
 </div>
 
-<form class="form-horizontal" name="form" ng-submit="change_password()" novalidate="">
-  <p>If you were curious, we use bcrypt so your password will be salted.</p>
-  <div class="form-group mt-5">
-    <label class="control-label col-md-2" for="inputDisplayCurrentPassword">Current Password</label>
-    <div class="col-md-5">
-      <input type="password" id="inputDisplayCurrentPassword" placeholder="abcd1234" ng-model="form_data.current_password" class="input-medium form-control">
-    </div>
-    <div class="col-md-1">
-      <span class="help-block"><small><a ng-click="forgot_password()">Forgot?</a></small></span>
-    </div>
+<div class="panel panel-gray">
+  <div class="panel-heading text-gunmetal text-centre">Password</div>
+  <div class="panel-body">
+    <form class="form-horizontal" name="form" ng-submit="change_password()" novalidate="">
+      <p>If you were curious, we use bcrypt so your password will be salted.</p>
+      <div class="form-group mt-5">
+        <label class="control-label col-md-2" for="inputDisplayCurrentPassword">Current Password</label>
+        <div class="col-md-5">
+          <input type="password" id="inputDisplayCurrentPassword" placeholder="abcd1234" ng-model="form_data.current_password" class="input-medium form-control">
+        </div>
+        <div class="col-md-1">
+          <span class="help-block"><small><a ng-click="forgot_password()">Forgot?</a></small></span>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="control-label col-md-2" for="inputDisplayNewPassword">New Password</label>
+        <div class="col-md-5">
+          <input type="password" id="inputDisplayNewPassword" placeholder="abcd1234" ng-model="form_data.new_password" class="input-medium form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-3">
+          <button type="submit" class="btn btn-light-blue btn-long">Update Password</button>
+        </div>
+      </div>
+    </form>
   </div>
+</div>
 
+<div class="panel panel-gray">
+  <div class="panel-heading text-gunmetal text-centre">Social media link</div>
+  <div class="panel-body">
+    <form class="form-horizontal settings-accounts mt-5" novalidate="">
+      <p>These accounts can be used for login and more. Please note that after adding an account, if you click the "Unlink" button, we will remove it from our database but you will still need to revoke authorization for the "Bountysource" application by visiting GitHub/Twitter/Facebook directly.</p>
 
-  <div class="form-group">
-    <label class="control-label col-md-2" for="inputDisplayNewPassword">New Password</label>
-    <div class="col-md-5">
-      <input type="password" id="inputDisplayNewPassword" placeholder="abcd1234" ng-model="form_data.new_password" class="input-medium form-control">
-    </div>
+      <div class="form-group mt-5">
+        <label class="control-label col-md-2" for="inputDisplayName">Github</label>
+        <div class="col-md-10 link-with-avatar" ng-show="current_person.github_account">
+          <img class="img-circle" ng-src="{{current_person.github_account.image_url}}" style="width: 25px; height: 25px">
+          {{ current_person.github_account.display_name }}
+          <button class="btn btn-sm btn-default btn-long btn-small-radius" ng-click="unlink_account('github')">Unlink</button>
+        </div>
+        <div class="col-md-10 link-with-text" ng-hide="current_person.github_account">
+          <a ng-href="{{github_link}}" ng-click="set_post_auth_url()" target="_self">Link with GitHub</a>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-md-2" for="inputDisplayName">Twitter</label>
+        <div class="col-md-10 link-with-avatar" ng-show="current_person.twitter_account">
+          <img class="img-circle" ng-src="{{current_person.twitter_account.image_url}}" style="width: 25px; height: 25px">
+          {{ current_person.twitter_account.display_name }}
+          <button class="btn btn-sm btn-default btn-long btn-small-radius" ng-click="unlink_account('twitter')">Unlink</button>
+        </div>
+        <div class="col-md-10 link-with-text" ng-hide="current_person.twitter_account">
+          <a ng-href="{{twitter_link}}" ng-click="set_post_auth_url()" target="_self">Link with Twitter</a>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-md-2" for="inputDisplayName">Facebook</label>
+        <div class="col-md-10 link-with-avatar" ng-show="current_person.facebook_account">
+          <img class="img-circle" ng-src="{{current_person.facebook_account.image_url}}" style="width: 25px; height: 25px">
+          {{ current_person.facebook_account.display_name }}
+          <button class="btn btn-sm btn-default btn-long btn-small-radius" ng-click="unlink_account('facebook')">Unlink</button>
+        </div>
+        <div class="col-md-10 link-with-text" ng-hide="current_person.facebook_account">
+          <a ng-href="{{facebook_link}}" ng-click="set_post_auth_url()" target="_self">Link with Facebook</a>
+        </div>
+      </div>
+    </form>
   </div>
-
-  <div class="form-group">
-    <div class="col-md-offset-2 col-md-3">
-      <button type="submit" class="btn btn-light-blue btn-long">Update Password</button>
-    </div>
-  </div>
-
-</form>
-
-<form class="form-horizontal settings-accounts mt-5" novalidate="">
-  <p>These accounts can be used for login and more. Please note that after adding an account, if you click the "Unlink" button, we will remove it from our database but you will still need to revoke authorization for the "Bountysource" application by visiting GitHub/Twitter/Facebook directly.</p>
-
-  <div class="form-group mt-5">
-    <label class="control-label col-md-2" for="inputDisplayName">Github</label>
-    <div class="col-md-10 link-with-avatar" ng-show="current_person.github_account">
-      <img class="img-circle" ng-src="{{current_person.github_account.image_url}}" style="width: 25px; height: 25px">
-      {{ current_person.github_account.display_name }}
-      <button class="btn btn-sm btn-default btn-long btn-small-radius" ng-click="unlink_account('github')">Unlink</button>
-    </div>
-    <div class="col-md-10 link-with-text" ng-hide="current_person.github_account">
-      <a ng-href="{{github_link}}" ng-click="set_post_auth_url()" target="_self">Link with GitHub</a>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="control-label col-md-2" for="inputDisplayName">Twitter</label>
-    <div class="col-md-10 link-with-avatar" ng-show="current_person.twitter_account">
-      <img class="img-circle" ng-src="{{current_person.twitter_account.image_url}}" style="width: 25px; height: 25px">
-      {{ current_person.twitter_account.display_name }}
-      <button class="btn btn-sm btn-default btn-long btn-small-radius" ng-click="unlink_account('twitter')">Unlink</button>
-    </div>
-    <div class="col-md-10 link-with-text" ng-hide="current_person.twitter_account">
-      <a ng-href="{{twitter_link}}" ng-click="set_post_auth_url()" target="_self">Link with Twitter</a>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="control-label col-md-2" for="inputDisplayName">Facebook</label>
-    <div class="col-md-10 link-with-avatar" ng-show="current_person.facebook_account">
-      <img class="img-circle" ng-src="{{current_person.facebook_account.image_url}}" style="width: 25px; height: 25px">
-      {{ current_person.facebook_account.display_name }}
-      <button class="btn btn-sm btn-default btn-long btn-small-radius" ng-click="unlink_account('facebook')">Unlink</button>
-    </div>
-    <div class="col-md-10 link-with-text" ng-hide="current_person.facebook_account">
-      <a ng-href="{{facebook_link}}" ng-click="set_post_auth_url()" target="_self">Link with Facebook</a>
-    </div>
-  </div>
-
-</form>
+</div>
