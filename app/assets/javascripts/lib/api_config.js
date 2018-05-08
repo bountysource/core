@@ -68,7 +68,7 @@ angular.module('app').run(function($api) {
       'create': { method: 'POST', url: '/teams/:team_slug/support_offering_rewards' }
     }}
   );
-
+  
   $api.add('one_time_checkout', {
     methods: {
       'create': { method: 'POST', url: '/cart' }
