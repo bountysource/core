@@ -231,7 +231,8 @@ class Issue < ApplicationRecord
       thumbs_up_count: thumbs_up_count,
       remote_created_at: remote_created_at,
       comments_count: comment_count,
-      paid_out: paid_out
+      paid_out: paid_out,
+      category: category
     }
   end
 

@@ -59,12 +59,14 @@ class Search < ApplicationRecord
     direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'asc'
     languages = params[:languages].present? ? params[:languages].split(',') : []
     trackers = params[:trackers].present? ? params[:trackers].split(',') : []
+    category = params[:category] || []
     #build a "with" hash for the filtering options. order hash for sorting options.
     with_hash = {
       tracker_name: trackers,
       languages_name: languages,
       can_add_bounty: true,
       bounty_total: { gte: min, lte: max },
+      category: category
     }.select {|param, value| value.present?}
 
     #if an order is specified, build the order query. otherwise, pass along an empty string to order

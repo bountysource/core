@@ -319,6 +319,7 @@ class Bounty < ApplicationRecord
     end
 
     issue.update_bounty_total
+    issue.update(category: 0)
 
     # track Bounty creation in new relic
     new_relic_data_point "Custom/Bounty/pay_in", amount.to_f
