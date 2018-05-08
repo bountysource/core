@@ -151,4 +151,5 @@
 
 /*Backgrounds*/
 .background-white { background-color: white; }
+.bg-white { background-color: white !important; }
 .bg-gunmetal { background-color: #485f64; }

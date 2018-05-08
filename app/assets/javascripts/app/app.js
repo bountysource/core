@@ -25,7 +25,8 @@ angular.module('app', [
   'templates',
   'btford.markdown',
   'monospaced.elastic',
-  'monospaced.qrcode'
+  'monospaced.qrcode',
+  'ngClickCopy'
 ]);
 
 angular.module('app')
