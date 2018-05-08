@@ -11,10 +11,6 @@ angular.module('directives').directive('backersTab', function ($rootScope, $rout
         order: '+amount'
       });
 
-      $api.crypto_bounties_get($routeParams.id).then(function(cryptoBounties){
-        scope.cryptoBounties = cryptoBounties
-      })
-
       // allow sorting
       scope.sort_column = 'amount';
       scope.sort_reverse = true;

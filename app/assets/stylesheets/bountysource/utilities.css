@@ -48,6 +48,9 @@
 .pl-4 { padding-left: 1.5rem !important; }
 .pl-5 { padding-left: 3rem !important; }
 
+.py-0 { padding-top: 0rem !important; padding-bottom: 0rem !important; }
+.py-1 { padding-top: .25rem !important; padding-bottom: .25rem !important; }
+.py-2 { padding-top: .5rem !important; padding-bottom: .5rem !important; }
 .py-3 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
 .py-4 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
 

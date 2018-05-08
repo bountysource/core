@@ -163,6 +163,10 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     amount: '0'
   };
 
+  $api.crypto_bounties_get($routeParams.id).then(function(cryptoBounties){
+    $scope.cryptoBounties = cryptoBounties
+  })
+
   $scope.active_tab = function(name) {
     if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
     if (name === 'backers' && (/^\/issues\/[a-z-_0-9]+\/backers/).test($location.path())) { return "active"; }
