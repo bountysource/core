@@ -44,8 +44,8 @@
             %profile-name{:owner => "cryptoBounty.owner"}
           %td.font-weight-medium
             %span
-              {{ cryptoBounty.amount.tokens[0].balance }}
+              {{ cryptoBounty.amount.balance }}
             %span
-              {{ cryptoBounty.amount.tokens[0].tokenInfo.name }}
+              {{ cryptoBounty.amount.tokenInfo.name }}
           %td
             .text-muted {{ cryptoBounty.created_at | date }}
