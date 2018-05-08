@@ -50,7 +50,7 @@
                 {{ cryptoBounty.amount.tokenInfo.name }}
             %div{"ng-hide" => "cryptoBounty.amount['ETH'] == null"}
               %span
-                {{ cryptoBounty.amount.balance }}
+                {{ cryptoBounty.amount['ETH'].balance }}
               %span
                 ETH
           %td

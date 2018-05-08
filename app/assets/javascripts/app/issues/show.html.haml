@@ -88,7 +88,7 @@
                 %h5.font-weight-semibold
                   TOTAL BOUNTY VALUE
                 %h3.m-0
-                  ${{issue.issue_address.balance.totalAmountInUSD  | number : 2 }}USD
+                  ≈ ${{issue.issue_address.balance.totalAmountInUSD  | number : 2 }} USD
               .panel-body
                 %div.text-center
                   %div{"ng-include" => "'app/issues/templates/crypto_form_with_qr.html'"}
