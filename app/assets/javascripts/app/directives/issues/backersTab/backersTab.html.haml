@@ -43,12 +43,12 @@
           %td
             %profile-name{:owner => "cryptoBounty.owner"}
           %td.font-weight-medium
-            - if cryptoBounty.amount["ETH"] == null
+            %div{"ng-show" => cryptoBounty.amount["ETH"] == null}
               %span
                 {{ cryptoBounty.amount.balance }}
               %span
                 {{ cryptoBounty.amount.tokenInfo.name }}
-            - else
+            %div{"ng-hide" => cryptoBounty.amount["ETH"] == null}
               %span
                 {{ cryptoBounty.amount.balance }}
               %span
