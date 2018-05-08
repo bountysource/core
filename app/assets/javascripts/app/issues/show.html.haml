@@ -83,13 +83,13 @@
                 %div.text-center
                   %div{"ng-include" => "'app/issues/templates/usd_form.html'"}
           %div.text-center{"ng-if" => "issue.category === 'crypto'"}
-            .panel.panel-gunmetal
+            .panel.panel-gunmetal.mb-3
               .panel-heading.text-white.text-center.pt-5.pb-5
                 %h5.font-weight-semibold
                   TOTAL BOUNTY VALUE
                 %h3.m-0
                   ≈ ${{issue.issue_address.balance.totalAmountInUSD  | number : 2 }} USD
-            .panel.panel-default.mt-3.text-left
+            .panel.panel-default.mb-3.text-left
               .panel-body.pb-2.pt-0
                 // ETH
                 %span.label.label-block.label-white.mt-2{ "ng-if" => "issue.issue_address.balance['ETH'] != null" }
