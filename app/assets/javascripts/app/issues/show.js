@@ -175,8 +175,8 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   $scope.generate_address = function(issue_id){
     if(($scope.issue.issue_address || {} ).public_address === undefined){
       $api.issue_address_create(issue_id).then(function(issue){
+        $scope.issue = issue
         if(Web3Utils.isMetaMask() && $scope.isSelectedCrypto('ETH')) {
-          $scope.issue = issue
           $scope.openMetamaskModal()
         } else {
           $scope.openQRModal()
