@@ -13,6 +13,7 @@ class Api::V2::WalletsController < Api::BaseController
   end
 
   def metamask
+    byebug
     @wallet = Wallet.new(person_id: params[:person_id], label: params[:label], eth_addr: params[:eth_addr])
     @wallet.primary = true
     byebug
@@ -29,8 +30,9 @@ class Api::V2::WalletsController < Api::BaseController
 
   def destroy
     @wallet = current_user.wallets.find_by(params[:eth_addr])
+    @collection = current_user.wallets
     if @wallet.destroy
-      render json: { success: 'Wallet deleted' }, status: :ok
+      render 'api/v2/wallets/index'
     else
       render json: { error: @wallet.errors.full_messages }
     end
