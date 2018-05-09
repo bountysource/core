@@ -21,4 +21,18 @@ class Api::V2::WalletsController < Api::BaseController
       render json: { error: "Unable to add wallet: #{@wallet.errors.full_messages.join(', ')}" }, status: :unprocessable_entity
     end
   end
+
+  def index
+
+  end
+
+  def destroy
+    byebug
+    @wallet = Wallet.find(params[:wallet_id])
+    if @wallet.destroy
+      render json: { success: 'Wallet deleted' }, status: :ok
+    else
+      render json: { error: @wallet.errors.full_messages }
+    end
+  end
 end

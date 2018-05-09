@@ -41,13 +41,29 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
     });
   };
 
+  $scope.delete_addr = function(wallet){
+    $scope.success = null;
+    $scope.error = null;
+    debugger
+    $api.v2.deleteWallet(wallet.id)
+      .then(function (response){ if (response.success) {
+        $scope.wallets = angular.copy(response.data);
+        $scope.success = "Successfully updated wallet";
+        } else {
+          $scope.error = response.data.error;
+        }
+      });
+  }; 
+
   $scope.add_addr = function(){
     $scope.success = null;
     $scope.error = null;
     var walletParams = { person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr }
     console.log(walletParams)
     $api.v2.wallets(walletParams)
-      .then(function (response){ if (response.success) {
+      .then(function (response){ 
+        debugger
+        if (response.success) {
         $scope.wallets = angular.copy(response.data);
         $scope.success = "Successfully updated wallet";
         } else {
@@ -71,4 +87,6 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
       $log.error('Error when validating ETH addrs ' + error);
     });
   };
+
+
 });

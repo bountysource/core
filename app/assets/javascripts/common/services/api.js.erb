@@ -337,6 +337,14 @@ angular.module('services').config(function($httpProvider) {
         data: params || {}
       });
     },
+
+    deleteWallet: function(id, params) {
+      return this.call({
+        url: '/wallets/'+id,
+        method: 'DELETE',
+        data: params || {}
+      });
+    },
   };
 
   // call(url, 'POST', { foo: bar }, optional_callback)
