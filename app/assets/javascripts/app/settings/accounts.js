@@ -44,8 +44,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   $scope.delete_addr = function(wallet){
     $scope.success = null;
     $scope.error = null;
-    debugger
-    $api.v2.deleteWallet(wallet.id)
+    $api.v2.deleteWallet(wallet.eth_addr)
       .then(function (response){ if (response.success) {
         $scope.wallets = angular.copy(response.data);
         $scope.success = "Successfully updated wallet";
