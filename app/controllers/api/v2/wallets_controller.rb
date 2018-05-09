@@ -19,9 +19,4 @@ class Api::V2::WalletsController < Api::BaseController
       render json: { error: "Unable to add wallet: #{@wallet.errors.full_messages.join(', ')}" }, status: :unprocessable_entity
     end
   end
-
-  def update
-    
-
-  end
 end
