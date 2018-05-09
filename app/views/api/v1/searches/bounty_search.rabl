@@ -24,7 +24,12 @@ child(@issues => :issues) do
     node :languages do |tracker|
       tracker.languages.map { |l| { name: l.name }}
     end
+  end
 
+  child :team => :team do
+    attribute :image_url
+    attribute :medium_image_url
+    attribute :large_image_url
   end
 
 end
