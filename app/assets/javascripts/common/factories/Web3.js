@@ -14,28 +14,25 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
 
     } else {
         $log.warn(
-            'No web3 detected. Unlock Metamask! '
+            'No web3 detected. Unlock Metamask!'
         );
     }
 
     Web3Utils.isMetaMask = function(){
-        if(web3 && web3.currentProvider.isMetaMask){
-            return true;
-        } else {
-            return false;
-        }
-    }
+        return (web3 && web3.currentProvider.isMetaMask);
+    };
 
     Web3Utils.isValidNetwork = function() {
         web3.eth.net.getId().then(function(networkId){
-            if(networkId === $env.web3_provider_network_id){
-                $log.info('Metamask configured on correct network!! Network id is ' + netId);
+            var actualNtwrk = $env.web3_provider_network_id;
+            if(networkId === actualNtwrk){
+                $log.info('Metamask configured on correct network!! Network id is ' + actualNtwrk);
                 return true;
             }
-            $log.info('Metamask configured on incorrect network!! Network id is ' + netId);
+            $log.info('Metamask configured on incorrect network!! Network id is ' + actualNtwrk);
             return false;
         });
-    }
+    };
 
     Web3Utils.getAccounts = function() {
         web3.eth.getAccounts().then(function(accounts){
@@ -44,7 +41,7 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
         }).catch(function(error){
             $log.error('Error getting accounts from provider ' + error);
         });
-    }
+    };
 
     Web3Utils.getEthBalance = function(address) {
         web3.eth.getBalance(address).then(function(balance) {
@@ -54,7 +51,7 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
         }).catch(function(error){
             $log.error('Error getting account balance ' + error);
         });
-    }
+    };
 
     Web3Utils.sendTransaction = function(ethValue, recipient) {
         web3.eth.net.getId().then(function(networkId){
@@ -88,7 +85,7 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
         }).catch(function(error){
             $log.error('Error sending transaction ' + error);
         });
-    }
+    };
 
     Web3Utils.verifyAddress = function() {
         var deferred = $q.defer();
@@ -109,7 +106,7 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
                     name: 'Message',
                     value: 'By signing this transaction, I prove my ownership of account ' + from
                 }
-            ]
+            ];
             var eth = new Eth(web3.currentProvider);
             eth.signTypedData(msgParams, from).then(function(signed) {
                 console.log('Signed!  Result is: ', signed);
@@ -126,7 +123,7 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
         });
         return deferred.promise;
 
-    }
+    };
 
     return Web3Utils;
 });
