@@ -216,6 +216,13 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Tracker'
   }, defaultRouteOptions));
 
+  // $routeProvider.when('/wallets', angular.extend({
+  //   templateUrl: 'app/settings/address.html',
+  //   controller: 'WalletAddress',
+  //   title: 'WalletAddress',
+  //   trackEvent: 'View Wallets'
+  // }, defaultRouteOptions));
+
 
   $routeProvider.otherwise({
     templateUrl: 'app/layout/notFound.html'
