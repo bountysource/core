@@ -216,6 +216,7 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: 'View Tracker'
   }, defaultRouteOptions));
 
+
   $routeProvider.otherwise({
     templateUrl: 'app/layout/notFound.html'
   });

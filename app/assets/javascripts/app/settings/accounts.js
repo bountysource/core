@@ -40,18 +40,36 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   };
 
   $scope.add_addr = function(){
+    $scope.success = null;
+    $scope.error = null;
     var walletParams = { person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr }
     console.log(walletParams)
     $api.v2.wallets(walletParams)
       .then(function (response){ if (response.success) {
           $scope.success = "Successfully updated wallet";
         } else {
-          $scope.error = "Unable to update wallet or address not verified";
+          $scope.error = response.data.error;
+        }
+      });
+  };
+
+  $scope.update_addr = function(){
+    $scope.success = null;
+    $scope.error = null;
+    var walletParams = { person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr }
+    console.log(walletParams)
+    $api.v2.wallets(walletParams)
+      .then(function (response){ if (response.success) {
+          $scope.success = "Successfully updated wallet";
+        } else {
+          $scope.error = "Unable to update wallet or address not verified" + response.data.error;
         }
       });
   };
 
   $scope.validate_addr = function(){
+    $scope.success = null;
+    $scope.error = null;
     Web3Utils.verifyAddress().then(function(signedTxn) {
       $api.v2.metamask({ person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr, signed_txn: signedTxn }).then(function (response){ if (response.success) {
             $scope.success = "Successfully updated wallet";
