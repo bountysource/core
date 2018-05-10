@@ -322,13 +322,6 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
-    get_wallets: function(params) {
-      return this.call({
-        url: '/wallets',
-        data: params || {}
-      });
-    },
-
     wallets: function(params) {
       return this.call({
         url: '/wallets',

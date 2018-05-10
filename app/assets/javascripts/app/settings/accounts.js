@@ -82,7 +82,8 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
     $scope.success = null;
     $scope.error = null;
     Web3Utils.verifyAddress().then(function(signedTxn) {
-      $api.v2.metamask({ person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr, signed_txn: signedTxn }).then(function (response){ if (response.success) {
+      $api.v2.metamask({ person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr, signed_txn: signedTxn }).then(function (response){ 
+          if (response.success) {
             $scope.success = "Successfully updated wallet";
             $scope.wallets = angular.copy(response.data);
             $scope.addNew = false;
