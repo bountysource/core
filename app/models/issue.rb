@@ -222,6 +222,7 @@ class Issue < ApplicationRecord
       tracker_name: tracker.name,
       languages_name: languages.map(&:name),
       bounty_total: bounty_total,
+      crypto_bounty_total: crypto_bounty_total,
       language_ids: languages.map(&:id),
       tracker_id: tracker_id,
       can_add_bounty: can_add_bounty,
@@ -231,8 +232,13 @@ class Issue < ApplicationRecord
       thumbs_up_count: thumbs_up_count,
       remote_created_at: remote_created_at,
       comments_count: comment_count,
-      paid_out: paid_out
+      paid_out: paid_out,
+      category: category
     }
+  end
+
+  def crypto_bounty_total
+    issue_address&.balance.nil? ? 0 : issue_address.balance["totalAmountInUSD"]
   end
 
   def should_index?

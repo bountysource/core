@@ -1,14 +1,29 @@
 angular.module('app').controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter, $anchorScroll) {
   // sets drop-down bounty types
   $scope.bountyTypes = [
-    { label: "Show All Bounties", value: "all_bounties" },
-    { label: "Crypto Bounties Only", value: "crypto_bounties" },
-    { label: "Cash Bounties Only", value: "cash_bounties" }
+    { label: "Show All Bounties", value: null },
+    { label: "Crypto Bounties Only", value: 'crypto' },
+    { label: "Cash Bounties Only", value: 'fiat' }
   ];
 
   $scope.selectBountyType = function(typeObj){
     $scope.selectedBountyType = typeObj;
+    $scope.form_data.category = typeObj.value;
+    $scope.submit_query()
   };
+
+  $scope.selectCategory = function() {
+    if ($scope.form_data.category) {
+      for (var i=0;i<$scope.bountyTypes.length;i++) {
+        if ($scope.bountyTypes[i].value === $scope.form_data.category) {
+          $scope.selectedBountyType = $scope.bountyTypes[i];
+          break;
+        }
+      }
+    } else {
+      $scope.selectedBountyType = $scope.bountyTypes[0]
+    }
+  }
 
   //sets drop-down sorting options
   $scope.sort_options = {
@@ -185,10 +200,10 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
 
   $scope.initiate = function() {
     $scope.form_data = {};
-    $scope.selectedBountyType = $scope.bountyTypes[0]
     $scope.populate_form_data_with_route_params();
     $scope.getLanguage();
     $scope.selectSort();
+    $scope.selectCategory();
     $scope.submit_query();
   }
 

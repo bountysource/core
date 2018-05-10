@@ -83,12 +83,35 @@
                 %div.text-center
                   %div{"ng-include" => "'app/issues/templates/usd_form.html'"}
           %div.text-center{"ng-if" => "issue.category === 'crypto'"}
-            .panel.panel-gunmetal
+            .panel.panel-gunmetal.mb-3
               .panel-heading.text-white.text-center.pt-5.pb-5
                 %h5.font-weight-semibold
                   TOTAL BOUNTY VALUE
                 %h3.m-0
-                  ${{issue.issue_address.balance.totalAmountInUSD  | number : 2 }}USD
+                  ≈ ${{issue.issue_address.balance.totalAmountInUSD  | number : 2 }} USD
+            .panel.panel-default.mb-3.text-left
+              .panel-body.pb-2.pt-0
+                // ETH
+                %span.label.label-block.label-white.mt-2{ "ng-if" => "issue.issue_address.balance['ETH'] != null" }
+                  %span 
+                    = image_tag 'icons/icon_ethereum.svg', style: 'width: 14px;'
+                  %span
+                    {{ issue.issue_address.balance['ETH'].balance }}
+                  %span
+                    ETH
+                // Tokens
+                %span.label.label-block.label-white.mt-2{ "ng-repeat" => "token in issue.issue_address.balance.tokens | orderBy:'balance':true | limitTo:2 " }
+                  %span{"ng-if" => "token.tokenInfo.symbol === 'CAN'"}
+                    = image_tag 'icons/icon_canya.svg', style: 'width: 14px;'
+                  %span
+                    {{ token.balance }}
+                  %span
+                    {{ token.tokenInfo.symbol }}
+                %span.label.label-block.label-white.mt-2{ "ng-if" => "issue.issue_address.balance.tokens.length > 2" }
+                  %span
+                    + {{ issue.issue_address.balance.tokens.length - 2 }} others
+
+            .panel.panel-default.mt-3
               .panel-body
                 %div.text-center
                   %div{"ng-include" => "'app/issues/templates/crypto_form_with_qr.html'"}

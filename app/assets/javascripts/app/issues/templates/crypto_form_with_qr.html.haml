@@ -8,7 +8,11 @@
 
 
   %div.mt-5
-    %input.form-control.text-center{"value" => "{{ issue.issue_address.public_address }}", "readonly" => "true"}
+    .input-group
+      %input.form-control.text-center.bg-white{"value" => "{{ issue.issue_address.public_address }}", "readonly" => "true"}
+      %span.input-group-btn.pl-3
+        %button.btn.btn-default{"ng-click-copy" => "{{ issue.issue_address.public_address }}"}
+          = image_tag 'icons/icon_copy.svg', style: "width: 18px"
 
 %div.mt-5
   %div{"ng-if" => "!isSelectedCrypto('BTC')" }

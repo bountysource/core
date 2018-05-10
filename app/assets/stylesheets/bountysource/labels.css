@@ -52,3 +52,11 @@
 .label-success {
   background-color: #00b048
 }
+
+.label-responsive {
+  width: 100%;
+}
+
+.label-block {
+  display: inline-block;
+}

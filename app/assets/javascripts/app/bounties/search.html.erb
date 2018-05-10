@@ -16,7 +16,7 @@
 
       <div class="col-sm-1 toggle-advance-search">
         <a ng-click="toggle_advanced_search()">
-          <%= image_tag 'icons/icon_advanced_search.svg', class: 'advanced-img' %>
+          <%= image_tag 'icons/icon_advanced_search.svg', class: 'advanced-img', style: 'height: 50px;' %>
         </a>
       </div>
     </div>
@@ -25,7 +25,7 @@
       <div class="col-sm-4">
         <div class="btn-group" dropdown is-open="true">
           <button type="button" class="btn btn-default bounty-type-btn" dropdown-toggle ng-disabled="disabled">
-            {{ selectedBountyType.label }} <span class="caret"></span>
+            {{ selectedBountyType.label }} <span class="ml-3 caret"></span>
           </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
             <li ng-repeat="type in bountyTypes" role="menuitem">
@@ -40,7 +40,7 @@
           <label class="label-control">Sort by:</label>
           <div class="btn-group" dropdown is-open="true">
             <button type="button" class="btn sort-select-btn" dropdown-toggle ng-disabled="disabled">
-              {{ selectedSort.label }} <span class="caret"></span>
+              {{ selectedSort.label }} <span class="ml-3 caret"></span>
             </button>
             <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
               <li ng-repeat="(x, y) in sort_options" role="menuitem">

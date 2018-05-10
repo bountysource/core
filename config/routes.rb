@@ -522,6 +522,7 @@ Api::Application.routes.draw do
           end
 
           post '/wallets/metamask', to: 'wallets#metamask' 
+
           resources :wallets, only: [:create, :update, :destroy] do
           end
         end
