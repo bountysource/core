@@ -13,7 +13,6 @@ class Api::V2::WalletsController < Api::BaseController
   end
 
   def metamask
-    byebug
     @wallet = Wallet.new(person_id: params[:person_id], label: params[:label], eth_addr: params[:eth_addr])
     @wallet.primary = true
     byebug
@@ -22,10 +21,6 @@ class Api::V2::WalletsController < Api::BaseController
     else
       render json: { error: "Unable to add wallet: #{@wallet.errors.full_messages.join(', ')}" }, status: :unprocessable_entity
     end
-  end
-
-  def index
-
   end
 
   def destroy

@@ -18,11 +18,13 @@
   </div>
 
   <div class="panel-body">
+    <div ng-show="wallets.length == 0">
     <p><b>You haven't added an ETH address yet.</b></p>
     <p>Add your ETH address so you can keep track of your crypto contributions!</p>
     <button class="btn btn-grey btn-long" ng-click="isCollapsed = !isCollapsed">+ ADD ETH ADDRESS</button>
+    </div>
 
-    <div collapse="isCollapsed">
+    <div collapse="wallets.length == 0">
 
       <div ng-show="addNew || !wallets">
         <form class="form-horizontal" name="form_eth" ng-submit="add_addr()" novalidate="">

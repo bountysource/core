@@ -7,8 +7,8 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   $scope.twitter_link = $api.signin_url_for('twitter');
   $scope.facebook_link = $api.signin_url_for('facebook');
   $scope.isCollapsed = true;
-  $scope.wallets = false;
   $scope.addNew = false;
+  $scope.wallets = $scope.current_person.wallets;
 
 
   $scope.form_data = {};
@@ -61,7 +61,6 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
     console.log(walletParams)
     $api.v2.wallets(walletParams)
       .then(function (response){ 
-        debugger
         if (response.success) {
           $scope.success = "Successfully updated wallet";
           $scope.wallets = angular.copy(response.data);
@@ -70,7 +69,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
           $scope.error = response.data.error;
         }
       });
-  };
+  }; 
 
   $scope.disp_addbox = function(){
     $scope.success = null;
