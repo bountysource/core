@@ -18,31 +18,58 @@
   </div>
 
   <div class="panel-body">
+
+    <div ng-show="wallets.length == 0">
     <p><b>You haven't added an ETH address yet.</b></p>
     <p>Add your ETH address so you can keep track of your crypto contributions!</p>
     <button class="btn btn-grey btn-long" ng-click="isCollapsed = !isCollapsed">+ ADD ETH ADDRESS</button>
+    </div>
 
     <div collapse="isCollapsed">
 
-      <form class="form-horizontal" name="form_eth" ng-submit="add_addr()" novalidate="">
-        
-        <div class="form-group mt-5">
-          <label class="control-label col-md-2" for="ethAddr">ETH address</label>
-          <div class="col-md-5">
-            <input type="text" id="ethAddr" placeholder="0x4961aC1d43B6249bc998D611F33d42B54E31712E" ng-model="form_data.eth_addr" class="input-medium form-control">
+      <div ng-show="addNew || wallets.length == 0">
+        <form class="form-horizontal" name="form_eth" ng-submit="add_addr()" novalidate="">
+          
+          <div class="form-group mt-5">
+            <label class="control-label col-md-2" for="ethAddr">ETH address</label>
+            <div class="col-md-6 display-flex">
+              <input type="text" id="ethAddr" placeholder="0x****************************************" ng-model="form_data.eth_addr" class="input-medium form-control">
+            </div>
           </div>
-        </div>
+    
+          <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+              <button type="submit" class="btn btn-light-blue btn-long">Save</button>
+            </div>
 
-        <div class="form-group">
-          <div class="col-md-offset-2 col-md-6">
-            <button type="submit" class="btn btn-light-blue btn-long">Save</button>
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-light-blue btn-long" ng-click="validate_addr()">Add Through Metamask</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div ng-show="wallets.length > 0">
+        <form class="form-horizontal" name="disp_eth" ng-submit="disp_addbox()" novalidate="">
+          <div ng-repeat="wallet in wallets">
+            <div class="form-group mt-5">
+              <div class="col-md-offset-1 col-md-6">
+                <input type="text" placeholder="0x****************************************" ng-model="wallet.eth_addr" class="input-medium form-control">
+              </div>
+              <div class="col-md-1">
+                <span class="glyphicon glyphicon-trash" ng-click="delete_addr(wallet)"></span>
+              </div>
+            </div>
           </div>
 
-          <div class="col-md-3">
-            <button type="submit" class="btn btn-light-blue btn-long" ng-click="validate_addr()">Add ETH Address Through Metamask</button>
+          <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+              <button type="submit" class="btn btn-light-blue btn-long">Add New Wallet</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+      
     </div>
   </div>
 </div>
@@ -123,3 +150,4 @@
     </form>
   </div>
 </div>
+

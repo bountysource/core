@@ -48,6 +48,8 @@ angular.module('app').run(function($api) {
 
   $api.add('tags');
 
+  $api.add('wallets');
+
   $api.add('issues', {
     methods: {
       query_v3: { method: 'GET', url: '/issues/query_v3', isArray: true }
