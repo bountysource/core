@@ -195,7 +195,6 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     $modal.open({
       templateUrl: 'common/templates/hunterBoxModal.html',
       backdrop: true,
-      size: 'sm',
       controller: function($scope, $modalInstance, bounty, issue, Web3Utils) {
         $scope.bounty = bounty;
         $scope.issue = issue;
@@ -240,9 +239,9 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
         }
 
         $scope.stopPolling = function() {
-          if (angular.isDefined(bountyPoller)) {
-            $interval.cancel(bountyPoller);
-            bountyPoller = undefined;
+          if (angular.isDefined($scope.bountyPoller)) {
+            $interval.cancel($scope.bountyPoller);
+            $scope.bountyPoller = undefined;
           }
         };
 
