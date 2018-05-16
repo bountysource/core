@@ -1,11 +1,11 @@
 <h2>Community Updates</h2>
 
-<div>
+<div class="alert alert-info">
   <p>We recommend sending an update once a month. Include any accomplishments from the previous month as well as goals for the coming month.</p>
-  <p><button class="btn btn-light-blue btn-rounded btn-lg btn-long mt-3" ui-sref="root.teams.admin.updates.new({ slug: team.slug })">Email Your Community</button></p>
+  <p><button class="btn btn-primary" ui-sref="root.teams.admin.updates.new({ slug: team.slug })">Email Your Community</button></p>
 </div>
 
-<table ng-show="updates.length > 0" class="table mt-5">
+<table ng-show="updates.length > 0" class="table">
   <thead>
     <tr>
       <th>Published</th>

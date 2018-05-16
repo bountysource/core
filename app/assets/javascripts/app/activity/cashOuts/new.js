@@ -47,7 +47,7 @@ angular.module('activity').
     $scope.activeTemplate = $scope.templates[$scope.activeTemplateIndex];
 
     $scope.cashOut = {
-      type: 'paypal',
+      type: undefined,
       amount: undefined,
       paypal_address: undefined,
       bitcoin_address: undefined,

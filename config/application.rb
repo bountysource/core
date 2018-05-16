@@ -12,6 +12,7 @@ end
 module Api
   class Application < Rails::Application
 
+
     # All times should be in UTC
     ENV['TZ'] = 'UTC'
     config.time_zone = 'UTC'
@@ -124,7 +125,9 @@ module Api
       api_key: ENV['COINBASE_API_KEY'],
       api_secret: ENV['COINBASE_API_SECRET'],
       callback_url: "#{config.api_url}payments/coinbase/callback"
-    }
+    } 
+    ENV['COINBASE_DISABLED'] = 'true'
+    config.coinbase_enabled = !ENV['COINBASE_DISABLED']
 
     # GitHub App
     config.github_api = {
