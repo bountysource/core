@@ -272,7 +272,8 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
           return $scope.cryptoBounties;
         }
       }
-
+    }).result.finally(function(){
+      $window.location.reload();
     });
   }
 

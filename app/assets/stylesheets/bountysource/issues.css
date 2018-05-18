@@ -121,6 +121,11 @@ td img.issue-table-tracker-img {
   max-height: none;
 }
 
+.crypto-input {
+  display: flex;
+  
+}
+
 @keyframes blink {
     /**
      * At the start of the animation the dot
