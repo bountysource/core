@@ -69,7 +69,10 @@
                 %p
                   Be the first to post a bounty for this issue!
               .panel-body
-                %div.text-center
+                %div.text-center{"ng-if" => "!current_person"}
+                  %button.btn.btn-light-blue.btn-responsive{"ng-click" => "goToSignInPage()"}
+                    Sign In
+                %div.text-center{"ng-if" => "current_person"}
                   %div There are several ways to post this bounty
                   %div{"ng-include" => "'app/issues/templates/contribute_accordian.html'"}
           %div.text-center{"ng-if" => "issue.category === 'fiat'"}

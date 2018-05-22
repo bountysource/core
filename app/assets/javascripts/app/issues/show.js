@@ -78,6 +78,11 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     });
   }
 
+  $scope.goToSignInPage = function(){
+    $api.set_post_auth_url($location.url());
+    $location.url("/signin");    
+  }
+
   $scope.setUsdAmount = function(amount){
     $scope.usdCart.amount = amount;
   }
