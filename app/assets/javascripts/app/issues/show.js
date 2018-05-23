@@ -164,7 +164,6 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
   $api.v2.currencies().then(function(currencies){
     $scope.currencies = currencies.data;
-    $scope.cryptoOptions = Object.keys(currencies.data);
   })
   
   $scope.bounty = {

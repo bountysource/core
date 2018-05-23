@@ -32,10 +32,7 @@ class Currency < ApplicationRecord
 
   def self.index
     currencies = {}
-    all.order(featured: :asc).each do |currency|
-      currencies[currency.symbol] = currency.value
-    end
-    currencies
+    all.order(featured: :asc)
   end
 
   def self.btc_rate
