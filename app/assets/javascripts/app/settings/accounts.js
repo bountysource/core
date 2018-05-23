@@ -93,13 +93,6 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
       });
   }; 
 
-  $scope.disp_addbox = function(){
-    $scope.success = null;
-    $scope.error = null;
-    $scope.wallets = false;
-    $scope.addNew = true;
-  };
-
   $scope.validate_addr = function(){
     $scope.success = null;
     $scope.error = null;

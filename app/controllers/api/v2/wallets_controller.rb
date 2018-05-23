@@ -13,7 +13,6 @@ class Api::V2::WalletsController < Api::BaseController
   end
 
   def update
-    byebug
     @wallet = Wallet.find(params[:id])
     @wallet.eth_addr = params[:eth_addr]
     @collection = current_user.wallets
