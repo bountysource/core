@@ -353,8 +353,7 @@ class Person < ApplicationRecord
   end
 
   def has_verified_wallet?
-    # wallets.where(verified: true).exists?
-    false
+    wallets.where(verified: true).exists?
   end
 
   # only update if it's been over an hour... this saves updating the DB for *every* request
