@@ -352,6 +352,11 @@ class Person < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def has_verified_wallet?
+    # wallets.where(verified: true).exists?
+    false
+  end
+
   # only update if it's been over an hour... this saves updating the DB for *every* request
   def was_seen!
     update_attribute(:last_seen_at, Time.now) if valid? && (last_seen_at.nil? || last_seen_at < 1.hour.ago)

@@ -83,6 +83,10 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     $location.url("/signin");    
   }
 
+  $scope.goToProfilePage = function(){
+    $location.url("/settings/accounts");    
+  }
+
   $scope.setUsdAmount = function(amount){
     $scope.usdCart.amount = amount;
   }
