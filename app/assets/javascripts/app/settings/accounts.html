@@ -28,7 +28,7 @@
 
     <div collapse="isCollapsed">
 
-      <div class="issue-card" ng-show="addNew || wallets.length == 0 && metamask == false">
+      <div class="issue-card" ng-show="(addNew || wallets.length == 0) && metamask == false">
         <form class="form-horizontal" name="form_eth" ng-submit="add_addr()" novalidate="">
           
           <div class="form-group mt-5">
@@ -46,7 +46,7 @@
         </form>
       </div>
 
-      <div class="issue-card" ng-show="addNew || wallets.length == 0 && metamask == true">
+      <div class="issue-card" ng-show="(addNew || wallets.length == 0) && metamask == true">
         <form class="form-horizontal" name="form_eth" ng-submit="validate_addr()" novalidate="">
           
           <div class="form-group mt-5">
@@ -79,12 +79,12 @@
           </div>
 
           <div class="form-group">
-            <div class="col-md-offset-2 col-md-6">
-              <button type="submit" class="btn btn-light-blue btn-long">Add New Wallet</button>
+            <div class="col-md-offset-1 col-md-3">
+              <button class="btn btn-light-blue btn-long" ng-click="metamask = false; wallets = false; addNew = true">Add New Wallet</button>
             </div>
 
-            <div class="col-md-6">
-              <button class="btn btn-light-blue btn-long">Add Wallet Through Metamask</button>
+            <div class="col-md-3">
+              <button class="btn btn-light-blue btn-long" ng-click="metamask = true; wallets = false; addNew = true">Add Wallet Through Metamask</button>
             </div>
           </div>
         </form>
