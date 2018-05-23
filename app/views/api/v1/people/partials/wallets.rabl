@@ -1,4 +1,4 @@
 child :wallets do
+  attribute :id
   attribute :eth_addr
-  attribute :label
 end
