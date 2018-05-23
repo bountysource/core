@@ -9,6 +9,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   $scope.addNew = false;
   $scope.wallets = $scope.current_person.wallets;
   $scope.isCollapsed = $scope.wallets.length == 0;
+  $scope.metamask = false;
 
 
 
