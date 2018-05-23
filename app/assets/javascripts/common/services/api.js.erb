@@ -57,6 +57,7 @@ angular.module('services').config(function($httpProvider) {
       options.headers = options.headers || {};
       options.headers.Accept = options.headers.Accept || 'application/vnd.bountysource+json; version=2';
       options.method = options.method || 'GET';
+      options.params = options.params || {};
 
       var path = (options.url || '').replace(/^\/+/,'');
       options.url = $rootScope.api_host + path;
