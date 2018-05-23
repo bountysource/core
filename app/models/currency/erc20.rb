@@ -28,7 +28,29 @@ class Currency::Erc20 < Currency
     featured.each do |token|
       token.sync
     end
+    sync_canya
     sync_top10
+  end
+
+  def self.sync_token(contract_address)
+    url = "https://api.ethplorer.io/getTokenInfo/#{contract_address}?apiKey=freekey"
+    response = JSON.parse(HTTParty.get(url).body)
+    token = response
+    if tok = self.find_by(address: token["address"])
+      value = token["price"] && token["price"]["rate"]
+      tok.update(value: value) if value
+    else
+      create(
+        address: token["address"],
+        name: token["name"],
+        symbol: token["symbol"],
+        value: token["price"] && token["price"]["rate"]
+      )
+    end
+  end
+
+  def self.sync_canya
+    self.sync_token "0x22a7d3c296692ba0f91c631b41bdfbc702885619"
   end
 
   def self.sync_top10

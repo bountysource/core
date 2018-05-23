@@ -32,7 +32,7 @@ class Currency < ApplicationRecord
 
   def self.index
     currencies = {}
-    all.each do |currency|
+    all.order(featured: :asc).each do |currency|
       currencies[currency.symbol] = currency.value
     end
     currencies

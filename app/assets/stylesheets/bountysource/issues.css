@@ -123,8 +123,14 @@ td img.issue-table-tracker-img {
 
 .crypto-input {
   display: flex;
-  
 }
+
+.crypto-token-options { display: flex; }
+.crypto-token-options > div{
+  flex-grow: 0;
+  position: relative;
+}
+.crypto-token-options > div > button { display: flex; align-items: center; }
 
 @keyframes blink {
     /**

@@ -16,10 +16,9 @@
 
 %div.mt-5
   %div{"ng-if" => "!isSelectedCrypto('BTC')" }
-    .row.display-flex.vertical-align-bottom 
-      .col-xs-6.pr-0
-        %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "bounty.amount"}
-      .col-xs-6.pl-0
+    .crypto-token-options
+      %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "bounty.amount"}
+      %div
         %button#cryptoSelect.btn-borderless.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
           %span.font-8{"ng-if" => "isSelectedCrypto(null)"} SELECT ERC20 TOKEN
           %span{"ng-if" => "!isSelectedCrypto(null)"} {{ bounty.token }}
