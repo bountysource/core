@@ -60,11 +60,30 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   $scope.add_addr = function(){
     $scope.success = null;
     $scope.error = null;
-    var walletParams = { person_id: $scope.current_person.id, label: $scope.form_data.addr_label, eth_addr: $scope.form_data.eth_addr }
-    console.log(walletParams)
+    var walletParams = { person_id: $scope.current_person.id, eth_addr: $scope.form_data.eth_addr }
+    console.log(walletParams);
     $api.v2.wallets(walletParams)
       .then(function (response){ 
         if (response.success) {
+          $scope.success = "Successfully updated wallet";
+          $scope.wallets = angular.copy(response.data);
+          $scope.addNew = false;
+        } else {
+          $scope.error = response.data.error;
+        }
+      });
+  }; 
+
+  $scope.update_addr = function(wallet){
+    $scope.success = null;
+    $scope.error = null;
+    var id = wallet.id;
+    var walletParams = { eth_addr: $scope.form_data.eth_addr }
+    console.log(id, walletParams);
+    $api.v2.updateWallet(id, walletParams)
+      .then(function (response){ 
+        if (response.success) {
+          debugger
           $scope.success = "Successfully updated wallet";
           $scope.wallets = angular.copy(response.data);
           $scope.addNew = false;

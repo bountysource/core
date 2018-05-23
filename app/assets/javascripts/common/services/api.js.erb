@@ -330,6 +330,14 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
+    updateWallet: function(id, params) {
+      return this.call({
+        url: '/wallets/'+id,
+        method: 'PUT',
+        data: params || {}
+      });
+    },
+
     metamask: function(params) {
       return this.call({
         url: '/wallets/metamask',
