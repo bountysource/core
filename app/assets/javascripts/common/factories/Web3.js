@@ -110,7 +110,7 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
             var eth = new Eth(web3.currentProvider);
             eth.signTypedData(msgParams, from).then(function(signed) {
                 console.log('Signed!  Result is: ', signed);
-                deferred.resolve(signed);
+                deferred.resolve({signed, from});
             }).catch(function(error){
                 var errorMsg = 'Error verifying account ' + error;
                 $log.error(errorMsg);
