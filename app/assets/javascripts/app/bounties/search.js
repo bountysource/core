@@ -55,6 +55,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     $scope.selectedSort = selectedSort
     $scope.form_data.order = selectedSort.value;
     $scope.form_data.direction = selectedSort.direction;
+    $scope.submit_query()
   }
 
   // toggle advanced search collapse

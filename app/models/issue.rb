@@ -221,13 +221,12 @@ class Issue < ApplicationRecord
       body: body,
       tracker_name: tracker.name,
       languages_name: languages.map(&:name),
-      bounty_total: bounty_total,
-      crypto_bounty_total: crypto_bounty_total,
+      bounty_total: crypto? ? crypto_bounty_total : bounty_total,
       language_ids: languages.map(&:id),
       tracker_id: tracker_id,
       can_add_bounty: can_add_bounty,
-      backers_count: bounties.length,
-      earliest_bounty: bounties.minimum(:created_at),
+      backers_count: crypto? ? crypto_bounties.length : bounties.length,
+      earliest_bounty: crypto? ? crypto_bounties.minimum(:created_at) : bounties.minimum(:created_at),
       participants_count: participants_count,
       thumbs_up_count: thumbs_up_count,
       remote_created_at: remote_created_at,
@@ -238,7 +237,7 @@ class Issue < ApplicationRecord
   end
 
   def crypto_bounty_total
-    issue_address&.balance.nil? ? 0 : issue_address.balance["totalAmountInUSD"]
+    issue_address&.balance.nil? ? 0.0 : issue_address.balance["totalAmountInUSD"]
   end
 
   def should_index?

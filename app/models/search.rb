@@ -66,7 +66,7 @@ class Search < ApplicationRecord
       languages_name: languages,
       can_add_bounty: true,
       category: category,
-      _or: [{bounty_total: { gte: min, lte: max }}, {crypto_bounty_total: { gte: min, lte: max }}]
+      _or: [{bounty_total: { gte: min, lte: max }}]
     }.select {|param, value| value.present?}
 
     #if an order is specified, build the order query. otherwise, pass along an empty string to order
