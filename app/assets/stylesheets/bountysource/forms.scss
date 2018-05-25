@@ -49,6 +49,15 @@
   border-right: none;
 }
 
+.input-group-btn {
+  background-color: #fff;
+  border-color: #e0e5e7;
+  height: 42px;
+}
+.input-group-btn button{
+  height: 42px;
+}
+
 .input-group.search-input input{
   border-right: 0;
   box-shadow: none;
