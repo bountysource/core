@@ -132,6 +132,17 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     return $scope.usdCart.amount >= 5 && $scope.checkout.checkout_method && $scope.bountyExpirationValid()
   };
 
+  $scope.canPostBounty = function () {
+    if($scope.isSelectedCrypto('BTC') || !$scope.bounty.token || !$scope.bounty.amount || $scope.currencies === undefined){
+      return false
+    }
+    var currency = $scope.currencies.find(function(c){ return c.symbol === $scope.bounty.token })
+    var amountInFloat = parseFloat($scope.bounty.amount)
+    var total = currency.value * amountInFloat
+    
+    return total > 5
+  }
+
   $scope.isMiscCrypto = function(crypto){
     return !['ETH', 'BTC', 'CAN'].includes(crypto);
   }

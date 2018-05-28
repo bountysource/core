@@ -46,7 +46,9 @@
       .text-muted BTC contributions unavailable
 
   %div.mt-5
-    %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "isSelectedCrypto('BTC')", "ng-click" => "generate_address(issue.id)" } POST THIS BOUNTY
+    %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "!canPostBounty()", "ng-click" => "generate_address(issue.id)" } POST THIS BOUNTY
+    %small.text-muted
+      Minumum ≈ $5
 %div{"ng-if" => "!current_person.has_verified_wallet"}
   %div
     .text-center You need to have a verified wallet to be the first backer!

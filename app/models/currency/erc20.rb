@@ -32,25 +32,23 @@ class Currency::Erc20 < Currency
     sync_top10
   end
 
-  def self.sync_token(contract_address)
-    url = "https://api.ethplorer.io/getTokenInfo/#{contract_address}?apiKey=freekey"
+  def self.sync_canya
+    url = 'https://api.coinmarketcap.com/v2/ticker/2343/'
     response = JSON.parse(HTTParty.get(url).body)
-    token = response
-    if tok = self.find_by(address: token["address"])
-      value = token["price"] && token["price"]["rate"]
+    token = response["data"]
+    contract_address = "0x22a7d3c296692ba0f91c631b41bdfbc702885619"
+
+    if tok = self.find_by(address: contract_address)
+      value = token.dig("quotes", "USD", "price")
       tok.update(value: value) if value
     else
       create(
-        address: token["address"],
-        name: token["name"],
-        symbol: token["symbol"],
-        value: token["price"] && token["price"]["rate"]
+        address: contract_address,
+        name: token.dig("name"),
+        symbol: token.dig("symbol"),
+        value: token.dig("quotes", "USD", "price")
       )
     end
-  end
-
-  def self.sync_canya
-    self.sync_token "0x22a7d3c296692ba0f91c631b41bdfbc702885619"
   end
 
   def self.sync_top10
