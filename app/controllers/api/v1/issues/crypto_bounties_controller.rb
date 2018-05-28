@@ -1,7 +1,7 @@
 class Api::V1::Issues::CryptoBountiesController < ApplicationController
   def index
     @issue = Issue.find(params[:issue_id])
-    if @issue.issue_address.exists?
+    unless @issue.issue_address.nil?
       CryptoApi.refresh_bounties(@issue.id)
     end
     @crypto_bounties = @issue.crypto_bounties
