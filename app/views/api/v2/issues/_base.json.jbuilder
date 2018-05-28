@@ -22,6 +22,7 @@ json.(item,
   :url)
 
 json.bounty_total item.bounty_total.to_f
+json.crypto_bounty_total item.crypto_bounty_total.to_f
 json.title item.sanitized_title
 json.state item.state if item.respond_to?(:state)
 

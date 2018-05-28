@@ -243,7 +243,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
             $api.crypto_bounties_get($routeParams.id).then(function(cryptoBounties){
               $scope.cryptoBounties = cryptoBounties
             })  
-          }, 3000)
+          }, 10000)
         }
 
         $scope.stopPolling = function() {

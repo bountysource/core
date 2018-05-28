@@ -31,6 +31,12 @@
           %p
             The bounty will be paid out if all backers accept your claim or if no backers reject your claim by {{my_bounty_claim.dispute_period_ends_at | date:'MMM d, y h:mm a':'UTC' }} (GMT).
 
+        %div{ "ng-switch-when"=>"no_solution_no_goal" } 
+          %div 
+            .font-weight-medium  
+              Are you a developer who can solve this issue?  
+            %button.mt-3.btn.btn-long.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px" } Get Started
+
         %div{"ng-switch-when"=>"has_solution"}
           .font-weight-medium
             You have started working on this issue.

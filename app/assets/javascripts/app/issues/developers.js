@@ -257,7 +257,7 @@ angular.module('app').controller('IssueDevelopersController', function ($scope, 
 
   var developer_form = $scope.developer_form = {
 
-    visible: true,
+    visible: false,
 
     // where all the form data is stored
     data: {},

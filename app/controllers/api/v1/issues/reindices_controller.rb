@@ -1,5 +1,5 @@
 class Api::V1::Issues::ReindicesController < ApplicationController
-  def create
+  def show
     @issue = Issue.find(params[:issue_id])
     @issue.reindex
     render 'api/v1/issues/show'
