@@ -10,7 +10,7 @@ if item
 
 else
   json.display_name "Anonymous"
-  json.image_url_small asset_path("anon.jpg")
-  json.image_url_medium asset_path("anon.jpg")
-  json.image_url_large asset_path("anon.jpg")
+  json.image_url_small asset_path("bs-anon.png")
+  json.image_url_medium asset_path("bs-anon.png")
+  json.image_url_large asset_path("bs-anon.png")
 end

@@ -4,73 +4,77 @@
   <li class="active"><a href="/activity/bounties">Bounties</a></li>
 </ul>
 
-<ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
-<div>
-  Need something fixed? <a href="/search">Search for issues</a> and post a bounty!
-</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+    <div>
+      Need something fixed? <a href="/search">Search for issues</a> and post a bounty!
+    </div>
 
-<div class="table-responsive">
-  <table class="table" ng-show="bounties.length > 0">
-    <thead>
-      <tr>
-        <th style="width: 4%"></th>
-        <th>Tracker</th>
-        <th>Issue</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th style="width: 50px;">Owner</th>
-        <th>
-          Anonymous
-          <a popover-title="Anonymous Bounties" popover="If you want to hide your identity on a bounty, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="glyphicon glyphicon-question-sign"></i></a>
-        </th>
-      </tr>
-    </thead>
+    <div class="table-responsive">
+      <table class="table" ng-show="bounties.length > 0">
+        <thead>
+          <tr>
+            <th style="width: 4%"></th>
+            <th>Tracker</th>
+            <th>Issue</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th style="width: 50px;">Owner</th>
+            <th>
+              Anonymous
+              <a popover-title="Anonymous Bounties" popover="If you want to hide your identity on a bounty, make it anonymous. You can change this at anytime." popover-trigger="click"><i class="glyphicon glyphicon-question-sign"></i></a>
+            </th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
-        <td class="center-height">
-          <a ng-href="/trackers/{{bounty.issue.tracker.slug}}">
-            <img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-responsive img-circle" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left">
-          </a>
-        </td>
-        <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
-        <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
-          <span ng-show="bounty.status == 'refunded'" class="label label-warning">Refunded</span>
-          <span ng-hide="bounty.status == 'refunded'">
-            <issue-status-label issue="bounty.issue"></issue-status-label>
-          </span>
-        </a></td>
-        <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.amount | dollars }}</a></td>
-        <td class="center-height">{{ bounty.created_at | date }}</td>
-        <td class="center-height">
-          <div ng-show="bounty.owner" class="no-margin" tooltip="{{bounty.owner.display_name}}" tooltip-placement="left">
-            <a owner-href="bounty.owner">
-              <img class="img-responsive img-circle" ng-src="{{bounty.owner.image_url}}">
-            </a>
-          </div>
-          <div ng-hide="bounty.owner" class="no-margin" tooltip="Anonymous" tooltip-placement="left">
-            <img class="img-responsive img-circle" src='<%= asset_path("anon.jpg") %>'>
-          </div>
-        </td>
+        <tbody>
+          <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
+            <td class="center-height">
+              <a ng-href="/trackers/{{bounty.issue.tracker.slug}}">
+                <img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-responsive img-circle" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left">
+              </a>
+            </td>
+            <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
+            <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
+              <span ng-show="bounty.status == 'refunded'" class="label label-warning">Refunded</span>
+              <span ng-hide="bounty.status == 'refunded'">
+                <issue-status-label issue="bounty.issue"></issue-status-label>
+              </span>
+            </a></td>
+            <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.amount | dollars }}</a></td>
+            <td class="center-height">{{ bounty.created_at | date }}</td>
+            <td class="center-height">
+              <div ng-show="bounty.owner" class="no-margin" tooltip="{{bounty.owner.display_name}}" tooltip-placement="left">
+                <a owner-href="bounty.owner">
+                  <img class="img-responsive img-circle" ng-src="{{bounty.owner.image_url}}">
+                </a>
+              </div>
+              <div ng-hide="bounty.owner" class="no-margin" tooltip="Anonymous" tooltip-placement="left">
+                <img class="img-responsive img-circle" src='<%= asset_path("bs-anon.png") %>'>
+              </div>
+            </td>
 
-        <td class="center-height" ng-show="bounty.anonymous && bounty.owner_type != 'Team'">
-          <button class="btn btn-block active btn-cool-grey btn-sm" ng-click="toggle_anonymous(bounty)">
-            <i class="glyphicon glyphicon-eye-close"></i>
-            Anonymized
-          </button>
-        </td>
-        <td class="center-height" ng-hide="bounty.anonymous">
-          <button class="btn btn-block btn-light-blue btn-sm" ng-click="toggle_anonymous(bounty)" ng-hide="bounty.owner_type == 'Team'">
-            <i class="glyphicon glyphicon-eye-open"></i>
-            Publicized
-          </button>
-          <button class="btn btn-block btn-light-blue disabled btn-sm" ng-show="bounty.owner_type == 'Team'" tooltip="Team bounties cannot be anonymous">
-            <i class="glyphicon glyphicon-eye-open"></i>
-            Publicized
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+            <td class="center-height" ng-show="bounty.anonymous && bounty.owner_type != 'Team'">
+              <button class="btn btn-block active btn-cool-grey btn-sm" ng-click="toggle_anonymous(bounty)">
+                <i class="glyphicon glyphicon-eye-close"></i>
+                Anonymized
+              </button>
+            </td>
+            <td class="center-height" ng-hide="bounty.anonymous">
+              <button class="btn btn-block btn-light-blue btn-sm" ng-click="toggle_anonymous(bounty)" ng-hide="bounty.owner_type == 'Team'">
+                <i class="glyphicon glyphicon-eye-open"></i>
+                Publicized
+              </button>
+              <button class="btn btn-block btn-light-blue disabled btn-sm" ng-show="bounty.owner_type == 'Team'" tooltip="Team bounties cannot be anonymous">
+                <i class="glyphicon glyphicon-eye-open"></i>
+                Publicized
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
+    </div>
+  </div>
 </div>

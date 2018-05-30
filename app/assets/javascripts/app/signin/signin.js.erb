@@ -94,6 +94,7 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
       payload.mixpanel_id = $analytics.mixpanel_distinct_id();
 
       $api.signin(payload).then(function(response) {
+        console.log('running');
         if (response.error) {
           $scope.error = response.error;
           $scope.message ='';

@@ -6,7 +6,7 @@
 #  fundraiser_id         :integer          not null
 #  delivery_at           :datetime
 #  percentage_of_project :integer
-#  description           :string           not null
+#  description           :string(255)      not null
 #  completed_percentage  :integer          not null
 #  optional              :boolean          default(FALSE), not null
 #  rank                  :integer          default(1), not null

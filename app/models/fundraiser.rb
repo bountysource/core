@@ -5,18 +5,18 @@
 #  id                :integer          not null, primary key
 #  person_id         :integer          not null
 #  published         :boolean          default(FALSE), not null
-#  title             :string
-#  homepage_url      :string
-#  repo_url          :string
+#  title             :string(255)
+#  homepage_url      :string(255)
+#  repo_url          :string(255)
 #  description       :text
 #  about_me          :text
-#  funding_goal      :integer          default(100)
+#  funding_goal      :bigint(8)        default(100)
 #  published_at      :datetime
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  total_pledged     :decimal(10, 2)   default(0.0), not null
 #  featured          :boolean          default(FALSE), not null
-#  short_description :string
+#  short_description :string(255)
 #  days_open         :integer          default(30)
 #  ends_at           :datetime
 #  breached_at       :datetime
@@ -24,7 +24,7 @@
 #  breached          :boolean          default(FALSE), not null
 #  featured_at       :boolean
 #  hidden            :boolean          default(FALSE), not null
-#  cloudinary_id     :string
+#  cloudinary_id     :string(255)
 #  team_id           :integer
 #  tracker_id        :integer
 #

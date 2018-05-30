@@ -1,0 +1,73 @@
+<div>
+  <div class="modal-body">
+    <div class="text-center">
+      <h4>Pay exactly {{bounty.amount}} {{bounty.token}}</h4>
+
+      <p class="mt-5">To this address</p>
+      <qrcode data='{{issue.issue_address.public_address}}' size="230"></qrcode>
+
+      <div class="mt-5">
+        <div class="input-group">
+          <input class="form-control text-center bg-white" value="{{ issue.issue_address.public_address }}" readonly="true">
+          <span class="input-group-btn pl-3">
+            <button class="btn btn-default" ng-click-copy="{{ issue.issue_address.public_address }}" type="button">
+              <%= image_tag 'icons/icon_copy.svg', style: "width: 18px" %>
+            </button>
+          </span>
+        </div>
+      </div>
+      <p class="mt-5">
+        This address only accepts ETH or ERC20 tokens
+      </p>
+      <h5>Listening for New Bounties</h5>
+      <small class="text-muted">Bounties may take a couple of minutes before showing up</p>
+      <table class="table" id="bounties-table">
+        <tbody>
+          <tr ng-repeat="cryptoBounty in cryptoBounties | filter: getNewBounties">
+            <td>
+              <profile-pic owner="cryptoBounty.owner"></profile-pic>
+            </td>
+            <td>
+              <profile-name owner="cryptoBounty.owner"></profile-name>
+            </td>
+            <td class="font-weight-medium">
+              <div ng-show="cryptoBounty.amount['ETH'] == null">
+                <span ng-if="cryptoBounty.amount.tokenInfo.symbol === 'CAN'">
+                  <%= image_tag 'icons/icon_canya.svg', style: 'width: 20px;' %>
+                </span>
+                <span>
+                  {{ cryptoBounty.amount.balance }}
+                </span>
+                <span>
+                  {{ cryptoBounty.amount.tokenInfo.symbol }}
+                </span>
+              </div>
+              <div ng-hide="cryptoBounty.amount['ETH'] == null">
+                <span>
+                  <%= image_tag 'icons/icon_ethereum.svg', style: 'width: 20px;' %>
+                </span>
+                <span>
+                  {{ cryptoBounty.amount['ETH'].balance }}
+                </span>
+                <span>
+                  ETH
+                </span>
+              </div>
+            </td>
+            <td>
+              <a class="text-muted" ng-href="https://ethplorer.io/tx/{{cryptoBounty.transaction_hash}}" target="_blank">
+                View Transaction
+              </a>
+            </td>
+            <td>
+              <div class="text-muted">{{ cryptoBounty.created_at | date }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="saving">
+        <span>.</span><span>.</span><span>.</span>
+      </div>
+    </div>
+  </div>
+</div>

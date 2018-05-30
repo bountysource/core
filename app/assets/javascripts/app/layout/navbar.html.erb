@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand mr-5" href="/">
         <%= image_tag 'logos/main.svg' %>
       </a>
     </div>
@@ -64,7 +64,7 @@
         </li>
 
         <!-- Currency switcher -->
-        <li class="dropdown">
+        <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle font-weight-regular navbar-main-button" data-toggle="dropdown">
             <button class="text-aqua rectangle-border" ng-if="$currency.isUSD()">$</button>
             <button class="text-aqua rectangle-border" ng-if="$currency.isBTC()">฿</button>
@@ -78,14 +78,12 @@
             <li><a ng-click="$currency.setXRP()">Ripple (XRP)</a></li>
             <li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>
           </ul>
-        </li>
+        </li> -->
 
-        <li ng-if="cart && !cart.isEmpty()">
-          <a href="/cart" class="font-weight-regular navbar-main-button" >
-            <button class="rectangle-border text-aqua">
-                <i class="glyphicon glyphicon-shopping-cart"></i>
-              {{cart.items.length | number:0}}
-            </button>
+        <!-- BANCOR widget (CAN / ETH)-->
+        <li id='bancor-wc-nav'>
+          <a href="" class="font-weight-regular navbar-main-button">
+            <button ng-click="bancorWidget.toggle()" class="btn btn-light-blue font-weight-regular navbar-main-button">Get CAN</button>
           </a>
         </li>
 
@@ -166,6 +164,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- redundant ng-hide for browsers that doesn't support the widget -->
 <div ng-controller="BancorWidgetController" id="bancor-wc-container" ng-show="visible" class="ng-hide">

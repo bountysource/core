@@ -17,6 +17,11 @@
   flex-direction: column;
 }
 
+.row.display-flex.vertical-align-bottom > [class*='col-']{
+  justify-content: bottom;
+  flex-direction: column;
+}
+
 .display-flex.horizontal-align-middle {
   display: flex;
   flex-direction: row;

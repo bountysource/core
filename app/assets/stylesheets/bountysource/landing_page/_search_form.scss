@@ -1,0 +1,33 @@
+#landing-page #bounty-search {
+	margin-bottom: 2em;
+
+	.toggle-advance-search {
+		padding-left: 0;
+	}
+
+	.bounty-search-form > .row {
+		margin-bottom: 1em;
+	}
+	
+	.bounty-type-btn {
+		border-radius: 4px;
+	}
+	
+	.sort-select {
+		float: right;
+		.sort-select-btn {
+			// width: 85%;
+			background-color: transparent;
+			border: none;
+			border-bottom: 1px solid;
+			border-radius: 0;
+
+			&:active {
+				box-shadow: none;
+			}
+		}
+	}
+
+	.select-dropdown-btn {
+	}
+}

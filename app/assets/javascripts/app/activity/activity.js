@@ -4,50 +4,49 @@ angular.module('activity')
     $routeProvider.when('/activity/bounties', angular.extend({
       templateUrl: 'app/activity/bounties.html',
       controller: 'BountiesController',
-      resolve: { person: personResolver },
-      trackEvent: 'View My Bounties'
+      resolve: { person: personResolver }
+    }, defaultRouteOptions));
+
+    $routeProvider.when('/activity/crypto_bounties', angular.extend({
+      templateUrl: 'app/activity/crypto_bounties.html',
+      controller: 'CryptoBountiesController',
+      resolve: { person: personResolver }
     }, defaultRouteOptions));
 
     $routeProvider.when('/activity/claims', angular.extend({
       templateUrl: 'app/activity/bounty_claims.html',
       controller: 'BountyClaimsController',
-      resolve: { person: personResolver },
-      trackEvent: 'View My Claims'
+      resolve: { person: personResolver }
     }, defaultRouteOptions));
 
     $routeProvider.when('/activity/fundraisers', angular.extend({
       templateUrl: 'app/activity/fundraisers.html',
       controller: 'FundraisersController',
-      resolve: { person: personResolver },
-      trackEvent: 'View My Fundraisers'
+      resolve: { person: personResolver }
     }, defaultRouteOptions));
 
     $routeProvider.when('/activity/pledges', angular.extend({
       templateUrl: 'app/activity/pledges.html',
       controller: 'PledgesController',
-      resolve: { person: personResolver },
-      trackEvent: 'View My Pledges'
+      resolve: { person: personResolver }
     }, defaultRouteOptions));
 
     $routeProvider.when('/activity', angular.extend({
       templateUrl: 'app/activity/timeline.html',
       controller: 'TimelineController',
-      resolve: { person: personResolver },
-      trackEvent: 'View My Timeline'
+      resolve: { person: personResolver }
     }, defaultRouteOptions));
 
     $routeProvider.when('/activity/cash_outs', angular.extend({
       templateUrl: 'app/activity/cashOuts/index.html',
       controller: 'CashOutsController',
-      resolve: { person: personResolver },
-      trackEvent: 'View My Cash Outs'
+      resolve: { person: personResolver }
     }, defaultRouteOptions));
 
     $routeProvider.when('/activity/cash_outs/new', angular.extend({
       templateUrl: 'app/activity/cashOuts/new.html',
       controller: 'NewCashOutController',
-      resolve: { person: personResolver },
-      trackEvent: 'View Request Cash Out'
+      resolve: { person: personResolver }
     }, defaultRouteOptions));
 
   });

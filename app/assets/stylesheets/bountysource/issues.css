@@ -1,19 +1,3 @@
-/*.issue-list .label-warning[href], .issue-list .badge-warning[href] {
-  background-color: #F89406;
-}
-
-.issue-list .label-info[href], .issue-list .badge-info[href] {
-  background-color: #3A87AD;
-}
-
-.issue-list .label-success[href], .issue-list .badge-success[href] {
-  background-color: #468847;
-}
-
-.issue-list .label-important[href], .issue-list .badge-important[href] {
-  background-color: #B94A48;
-}*/
-
 table#bounties-table tr td {
   vertical-align: middle;
 }
@@ -110,4 +94,107 @@ td img.issue-table-tracker-img {
 
 .issue-search img.advanced-img {
   height: 50px;
+}
+
+
+.limit-height-200 {
+  max-height: 200px;
+}
+
+.issue-body-show-less {
+  font-size: 14px;
+  line-height: 20px;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.team-bio-show-less {
+  font-size: 12px;
+  line-height: 16px;
+  height: 48px;
+  overflow: hidden;
+}
+
+.show-more {
+  overflow: visible; 
+  height: auto;
+  max-height: none;
+}
+
+.crypto-input {
+  display: flex;
+}
+
+.crypto-token-options { display: flex; }
+.crypto-token-options > div{
+  flex-grow: 0;
+  position: relative;
+}
+.crypto-token-options > div > button { display: flex; align-items: center; }
+
+@keyframes blink {
+    /**
+     * At the start of the animation the dot
+     * has an opacity of .2
+     */
+    0% {
+      opacity: .2;
+    }
+    /**
+     * At 20% the dot is fully visible and
+     * then fades out slowly
+     */
+    20% {
+      opacity: 1;
+    }
+    /**
+     * Until it reaches an opacity of .2 and
+     * the animation can start again
+     */
+    100% {
+      opacity: .2;
+    }
+}
+
+.saving span {
+    /**
+     * Use the blink animation, which is defined above
+     */
+    animation-name: blink;
+    /**
+     * The animation should take 1.4 seconds
+     */
+    animation-duration: 1.4s;
+    /**
+     * It will repeat itself forever
+     */
+    animation-iteration-count: infinite;
+    /**
+     * This makes sure that the starting style (opacity: .2)
+     * of the animation is applied before the animation starts.
+     * Otherwise we would see a short flash or would have
+     * to set the default styling of the dots to the same
+     * as the animation. Same applies for the ending styles.
+     */
+    animation-fill-mode: both;
+    color: #33ccff;
+    font-size: 48px;
+}
+
+.saving span:nth-child(2) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .2s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .2s;
+}
+
+.saving span:nth-child(3) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .4s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .4s;
 }

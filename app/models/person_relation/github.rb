@@ -3,7 +3,7 @@
 # Table name: person_relations
 #
 #  id               :integer          not null, primary key
-#  type             :string           not null
+#  type             :string(255)      not null
 #  person_id        :integer          not null
 #  target_person_id :integer          not null
 #  created_at       :datetime         not null

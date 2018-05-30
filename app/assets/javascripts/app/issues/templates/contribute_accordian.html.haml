@@ -1,0 +1,15 @@
+%accordion{"close-others" => "oneAtATime"}
+  / FIAT
+  %accordion-group.mt-3{"is-open" => "status.usdOpen", "ng-class" => "{'panel-gunmetal': status.usdOpen, 'panel-default': !status.usdOpen}"}
+    %accordion-heading
+      .font-14.pt-2.pb-2
+        Contribute with USD
+        %i.pull-right.glyphicon{"ng-class" => "{'glyphicon-chevron-down': status.usdOpen, 'glyphicon-chevron-right': !status.usdOpen}"}
+    %div{"ng-include" => "'app/issues/templates/usd_form.html'"}
+  / CRYPTO
+  %accordion-group.mt-3{"is-open" => "status.cryptoOpen", "ng-class" => "{'panel-gunmetal': status.cryptoOpen, 'panel-default': !status.cryptoOpen}", 'style' => 'overflow: visible;'}
+    %accordion-heading
+      .font-14.pt-2.pb-2
+        Contribute with crypto
+        %i.pull-right.glyphicon{"ng-class" => "{'glyphicon-chevron-down': status.cryptoOpen, 'glyphicon-chevron-right': !status.cryptoOpen}"}
+    %div{"ng-include" => "'app/issues/templates/crypto_form.html'"}

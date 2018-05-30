@@ -3,30 +3,30 @@
 # Table name: people
 #
 #  id                   :integer          not null, primary key
-#  first_name           :string
-#  last_name            :string
-#  display_name         :string
-#  email                :string           not null
+#  first_name           :string(255)
+#  last_name            :string(255)
+#  display_name         :string(255)
+#  email                :string(255)      not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  buyer_id             :string
-#  password_digest      :string
+#  buyer_id             :string(255)
+#  password_digest      :string(255)
 #  account_completed    :boolean          default(FALSE)
-#  paypal_email         :string
+#  paypal_email         :string(255)
 #  last_seen_at         :datetime
 #  last_bulk_mailed_at  :datetime
 #  admin                :boolean          default(FALSE)
 #  bio                  :text
-#  location             :string
-#  url                  :string
-#  company              :string
-#  public_email         :string
+#  location             :string(255)
+#  url                  :string(255)
+#  company              :string(255)
+#  public_email         :string(255)
 #  accepted_terms_at    :datetime
-#  cloudinary_id        :string
+#  cloudinary_id        :string(255)
 #  deleted              :boolean          default(FALSE), not null
 #  profile_completed    :boolean          default(FALSE), not null
 #  shopping_cart_id     :integer
-#  stripe_customer_id   :string
+#  stripe_customer_id   :string(255)
 #  suspended_at         :datetime
 #  bounty_hunter        :boolean
 #  quickbooks_vendor_id :integer
@@ -92,6 +92,7 @@ class Person < ApplicationRecord
 
   has_many :pledges
   has_many :bounties
+  has_many :crypto_bounties, as: :owner
   has_many :team_payins
 
   has_many :solutions
@@ -127,6 +128,8 @@ class Person < ApplicationRecord
   has_many :comments, through: :linked_accounts
 
   belongs_to :quickbooks_vendor
+
+  has_many :wallets
 
   EMAIL_REGEX = /\A.+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+\z/
 
@@ -181,6 +184,7 @@ class Person < ApplicationRecord
       retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true and created_at > #{ApplicationRecord.connection.quote(options[:since])}),0) as bounty_claim_total")
     else
       retval = retval.select("people.*, coalesce((select sum(amount) from bounty_claims where person_id=people.id and paid_out=true),0) as bounty_claim_total")
+      retval = retval.select("people.*, coalesce((select count(*) from bounty_claims where person_id=people.id and paid_out=true),0) as issue_solved_total")
     end
 
     retval = retval.order('bounty_claim_total desc')
@@ -347,6 +351,10 @@ class Person < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def has_verified_wallet?
+    wallets.where(verified: true).exists?
   end
 
   # only update if it's been over an hour... this saves updating the DB for *every* request

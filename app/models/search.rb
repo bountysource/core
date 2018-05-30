@@ -3,7 +3,7 @@
 # Table name: searches
 #
 #  id         :integer          not null, primary key
-#  query      :string           not null
+#  query      :string(255)      not null
 #  person_id  :integer
 #  created_at :datetime         not null
 #  params     :text             default({})
@@ -50,25 +50,23 @@ class Search < ApplicationRecord
   end
 
   def self.bounty_search(params)
-    create(query: "bounty search", params: params)
-
     page = params[:page] || 1
-    per_page = params[:per_page].to_i || 50
+    per_page = params[:per_page].present? ? params[:per_page].to_i : 50
     query = params[:search] || "*"
     min = params[:min].present? ? params[:min].to_f : 1.0
-    max = params[:max].present? ? params[:max].to_f : 10_000.0
+    max = params[:max].present? ? params[:max].to_f : 1_000_000_000.0
     order = ["bounty_total", "backers_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
     direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'asc'
-    languages = params[:languages].present? ? params[:languages].split(',').map(&:to_i) : []
-    trackers = params[:trackers].present? ? params[:trackers].split(',').map(&:to_i) : []
-    can_add_bounty = params[:can_add_bounty] == "all" ? [] : true
+    languages = params[:languages].present? ? params[:languages].split(',') : []
+    trackers = params[:trackers].present? ? params[:trackers].split(',') : []
+    category = params[:category] || []
     #build a "with" hash for the filtering options. order hash for sorting options.
     with_hash = {
-      tracker_id: trackers,
-      language_id: languages,
-      can_add_bounty: can_add_bounty,
-      bounty_total: { gte: min, lte: max },
-      paid_out: false
+      tracker_name: trackers,
+      languages_name: languages,
+      can_add_bounty: true,
+      category: category,
+      _or: [{bounty_total: { gte: min, lte: max }}]
     }.select {|param, value| value.present?}
 
     #if an order is specified, build the order query. otherwise, pass along an empty string to order
@@ -81,14 +79,13 @@ class Search < ApplicationRecord
     bounteous_issue_search = Issue.search(query, where: with_hash, 
       per_page: per_page, page: page, includes: [tracker: :languages],
       fields: ["title^50", "tracker_name^25", "languages_name^5", "body"],
-      order: order_hash).to_a
+      order: order_hash)
 
-
-    reject_merged_issues!(bounteous_issue_search)
+    reject_merged_issues!(bounteous_issue_search.to_a)
 
     {
       issues: bounteous_issue_search,
-      issues_total: bounteous_issue_search.count
+      issues_total: bounteous_issue_search.total_count
     }
   end
 

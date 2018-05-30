@@ -1,4 +1,4 @@
-angular.module('app').controller('IssueDevelopersController', function ($scope, $pageTitle, $api, $route, $routeParams, $location, $window, $analytics, $filter, $currency, $cart, $q, Issue, BountyClaim, Solution, DeveloperGoal, Bounties) {
+angular.module('app').controller('IssueDevelopersController', function ($scope, $pageTitle, $api, $route, $routeParams, $location, $window, $analytics, $filter, $currency, $q, Issue, BountyClaim, Solution, DeveloperGoal, Bounties) {
 
   // shortcut
   var issue_id = parseInt($routeParams.id);
@@ -203,7 +203,6 @@ angular.module('app').controller('IssueDevelopersController', function ($scope, 
       }
 
     }
-
   };
 
 
@@ -238,35 +237,18 @@ angular.module('app').controller('IssueDevelopersController', function ($scope, 
     bounty_claim_response_callback: function() {
       page_data.refresh_issue(); // TODO: only really needed when clicking accept as it might trigger a payout
       page_data.refresh_bounty_claims();
-    },
-
-    post_bounty: function(amount) {
-      $cart.addBounty({
-        amount: amount,
-        currency: amount ? 'USD' : $currency.value,
-        issue_id: issue_id
-      }).then(function () {
-        $location.url("/cart");
-      });
     }
-//    this.bounty_claim_accept = function(id, description) {
-//    return this.call("/bounty_claims/"+id+"/response/accept", "PUT", { description: description });
-//  };
-//
-//  this.bounty_claim_reject = function(id, description) {
-//    return this.call("/bounty_claims/"+id+"/response/reject", "PUT", { description: description });
-//  };
-//
-//  this.bounty_claim_resolve = function(id, description) {
-//    return this.call("/bounty_claims/"+id+"/response/resolve", "PUT", { description: description });
-//  };
-//
-//  this.bounty_claim_reset = function(id) {
-//    return this.call("/bounty_claims/"+id+"/response/reset", "PUT");
-//  };
-//
 
-};
+    // post_bounty: function(amount) {
+    //   $cart.addBounty({
+    //     amount: amount,
+    //     currency: amount ? 'USD' : $currency.value,
+    //     issue_id: issue_id
+    //   }).then(function () {
+    //     $location.url("/cart");
+    //   });
+    // }
+  };
 
 
 
@@ -421,28 +403,6 @@ angular.module('app').controller('IssueDevelopersController', function ($scope, 
 
       // shopping cart
       if (thanked_reward || bounty_amount) {
-        var promises = [];
-
-        if (thanked_reward) {
-          promises.push($cart.addItem('issue_suggestion_reward', thanked_reward, 'USD', {
-            currency: 'USD',
-            amount: thanked_reward,
-            issue_suggestion_id: event.id
-          }));
-        }
-
-        if (bounty_amount) {
-          promises.push($cart.addBounty({
-            amount: bounty_amount,
-            currency: 'USD',
-            issue_id: event.issue.id
-          }));
-        }
-
-        $q.all(promises).then(function () {
-          $location.url("/cart");
-        });
-
 
       // thanks only, no shopping cart
       } else {

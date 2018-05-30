@@ -29,5 +29,4 @@ angular.module('app').controller('HomeTimelineCtrl', function ($scope, $api, $lo
     $scope.bounty_hunters_month = angular.copy(response.data);
     $scope.bounty_hunters = $scope.bounty_hunters_month;
   });
-
 });
