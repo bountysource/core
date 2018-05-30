@@ -69,8 +69,9 @@ button.navbar-toggle {
   .navbar-nav>li>a {
     padding-top: 27px;
     padding-bottom: 28px;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
+    color: #7f8e91;
+    font-weight: 600;
   }
 
   .navbar-nav>li>.navbar-main-button {

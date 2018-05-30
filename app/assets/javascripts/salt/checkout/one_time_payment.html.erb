@@ -1,0 +1,62 @@
+<ng-include src="'salt/teams/_support_header_title.html'"></ng-include>
+
+<div class="container">
+  <div class="header">
+    <h3 class="header-underline-emphasize">Payment As</h3>
+    <h4 style="display: inline;" class="text-muted">(Step 3 of 3)</h4>
+  </div>
+
+  <form ng-submit="submit_form()">
+    <div class="row display-flex">
+      <div class="col-md-6">
+        <div class="form-group">
+          <!-- PayPal -->
+          <div class="mt-3">
+            <label>
+              <input type="radio" ng-model="form_data.checkout_method" value="paypal">
+              <favicon style="width: 16px; height: 16px;" domain="https://www.paypal.com/"></favicon>
+              <span>PayPal</span>
+            </label>
+          </div>
+
+          <!-- Personal Account -->
+          <div class="mt-2" ng-if="person.account_balance > 0">
+            <label>
+              <input type="radio" ng-model="form_data.checkout_method" value="personal" ng-disabled="person.account_balance < form_data.amount">
+              <img style="width: 16px; height: 16px;" ng-src="{{person.image_url}}" />
+
+              <span ng-class="{ 'text-muted': person.account_balance < form_data.amount }">{{person.display_name}} <strong>{{person.account_balance | dollars}}</strong></span>
+            </label>
+          </div>
+
+          <!-- Team accounts -->
+          <div class="mt-2" ng-repeat="team in teams | orderBy:['-is_developer', '-account_balance']" ng-if="team.account_balance>0">
+            <label>
+              <input type="radio" ng-model="form_data.checkout_method" value="team/{{team.id}}" ng-disabled="team.account_balance < form_data.amount || !team.is_developer || team.account_balance <= 0 || onTeamPage(team)"/>
+              <img style="width: 16px; height: 16px;" ng-src="{{team.image_url}}" />
+
+              <span ng-class="{ 'text-muted': (team.account_balance < form_data.amount || !team.is_developer || team.account_balance <= 0 || onTeamPage(team)) }">{{team.name}}</span>
+
+              <strong ng-show="team.is_developer" ng-class="{ 'text-muted': (team.account_balance < form_data.amount) }">{{team.account_balance | dollars}}</strong>
+              <strong ng-hide="team.is_developer" ng-class="{ 'text-muted': (team.account_balance < form_data.amount) }">{{0 | dollars}}</strong>
+              <span ng-show="team.is_admin && team.account_balance < 100"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <ng-include src="'salt/checkout/_amount.html'"></ng-include>
+      </div>
+      <div class="col-md-2">
+        <ng-include src="'salt/checkout/_display.html'"></ng-include>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="submit" class="btn btn-light-blue continue-button pull-right" ng-disabled="!form_data.checkout_method">
+          <span>Confirm Payment</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

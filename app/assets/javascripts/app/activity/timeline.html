@@ -2,7 +2,10 @@
   <li><a href="/">Home</a></li>
   <li class="active"><a href="/activity">Activity</a></li>
 </ul>
+<div class="panel panel-default">
+  <div class="panel-body">
 
-<ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
-<activity-timeline timeline="timeline"></activity-timeline>
-
+    <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+    <activity-timeline timeline="timeline"></activity-timeline>
+  </div>
+</div>

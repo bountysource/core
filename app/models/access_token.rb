@@ -4,9 +4,9 @@
 #
 #  id         :integer          not null, primary key
 #  person_id  :integer          not null
-#  token      :string           not null
-#  remote_ip  :string
-#  user_agent :string
+#  token      :string(255)      not null
+#  remote_ip  :string(255)
+#  user_agent :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

@@ -57,6 +57,7 @@ angular.module('services').config(function($httpProvider) {
       options.headers = options.headers || {};
       options.headers.Accept = options.headers.Accept || 'application/vnd.bountysource+json; version=2';
       options.method = options.method || 'GET';
+      options.params = options.params || {};
 
       var path = (options.url || '').replace(/^\/+/,'');
       options.url = $rootScope.api_host + path;
@@ -313,14 +314,52 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
-    linkShoppingCart: function (uid, params) {
+    checkout: function (params) {
       return this.call({
-        url: '/cart/link',
+        url: 'cart',
         method: 'POST',
-        params: params || {}
+        data: params || {}
       });
-    }
+    },
 
+    wallets: function(params) {
+      return this.call({
+        url: '/wallets',
+        method: 'POST',
+        data: params || {}
+      });
+    },
+
+    getWallets: function(params) {
+      return this.call({
+        url: '/wallets',
+        data: params || {}
+      });
+    },
+
+    updateWallet: function(id, params) {
+      return this.call({
+        url: '/wallets/'+id,
+        method: 'PUT',
+        data: params || {}
+      });
+    },
+
+    metamask: function(params) {
+      return this.call({
+        url: '/wallets/metamask',
+        method: 'POST',
+        data: params || {}
+      });
+    },
+
+    deleteWallet: function(id, params) {
+      return this.call({
+        url: '/wallets/'+id,
+        method: 'DELETE',
+        data: params || {}
+      });
+    },
   };
 
   // call(url, 'POST', { foo: bar }, optional_callback)
@@ -362,7 +401,7 @@ angular.module('services').config(function($httpProvider) {
 
       // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
       params.callback = 'CORS';
-      var cors_callback = function(response) {
+      var cors_callback = function(response, status, headers) {
         response = response.replace(/^(\/\*\*\/ )?CORS\(/,'').replace(/\)$/,'');
         var parsed_response = JSON.parse(response);
 
@@ -385,7 +424,7 @@ angular.module('services').config(function($httpProvider) {
           }
         }
 
-        deferred.resolve(callback(parsed_response));
+        deferred.resolve(callback(parsed_response, status, headers));
       };
       // make actual HTTP call with promise
 
@@ -475,6 +514,14 @@ angular.module('services').config(function($httpProvider) {
     this.call("/user/fundraisers/"+fundraiser_id+"/rewards", "POST", data, callback);
   };
 
+  this.issue_address_create = function(issue_id){
+    return this.call("/issues/" + issue_id + "/issue_addresses", "POST")
+  }
+
+  this.crypto_bounties_get = function(issue_id) {
+    return this.call("/issues/" + issue_id + "/crypto_bounties", "GET") 
+  }
+
   this.reward_update = function(fundraiser_id, id, data, callback) {
     this.call("/user/fundraisers/"+fundraiser_id+"/rewards/"+id, "PUT", data, callback);
   };
@@ -532,6 +579,7 @@ angular.module('services').config(function($httpProvider) {
       var timeline = [], i;
 
       for (i in activity.bounties) { timeline.push(activity.bounties[i]); }
+      for (i in activity.crypto_bounties) { timeline.push(activity.crypto_bounties[i]); }
       for (i in activity.pledges) { timeline.push(activity.pledges[i]); }
       for (i in activity.fundraisers) { timeline.push(activity.fundraisers[i]); }
       for (i in activity.teams) { timeline.push(activity.teams[i]); }
@@ -1105,9 +1153,9 @@ angular.module('services').config(function($httpProvider) {
     return {
       type: 'anonymous',
       display_name: 'Anonymous',
-      image_url_small: '<%= asset_path("anon.jpg") %>',
-      image_url_medium: '<%= asset_path("anon.jpg") %>',
-      image_url_large: '<%= asset_path("anon.jpg") %>'
+      image_url_small: '<%= asset_path("bs-anon.png") %>',
+      image_url_medium: '<%= asset_path("bs-anon.png") %>',
+      image_url_large: '<%= asset_path("bs-anon.png") %>'
     };
   };
 

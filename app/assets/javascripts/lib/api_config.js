@@ -8,6 +8,12 @@ angular.module('app').run(function($api) {
     }
   });
 
+  $api.add('person_teaams', {
+    api_version: 1,
+    params: { person_id: '@person_id' },
+    url: '/people/:person_id/teams'
+  });
+
   $api.add('team_members', {
     api_version: 1,
     params: { slug: '@slug' },
@@ -42,6 +48,8 @@ angular.module('app').run(function($api) {
 
   $api.add('tags');
 
+  $api.add('wallets');
+
   $api.add('issues', {
     methods: {
       query_v3: { method: 'GET', url: '/issues/query_v3', isArray: true }
@@ -62,5 +70,10 @@ angular.module('app').run(function($api) {
       'create': { method: 'POST', url: '/teams/:team_slug/support_offering_rewards' }
     }}
   );
-
+  
+  $api.add('one_time_checkout', {
+    methods: {
+      'create': { method: 'POST', url: '/cart' }
+    }
+  })
 });

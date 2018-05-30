@@ -18,6 +18,12 @@
   background-color: #4edcca;  
 }
 
+.label-white {
+  background-color: white; 
+  color: #485f64;  
+  border: solid 1px #e9eeee;
+}
+
 .badge-info {
   background-color: #33ccff;
 }
@@ -28,8 +34,8 @@
 }
 
 .label-padded {
-  padding-right: 1.5em;
-  padding-left: 1.5em;
+  padding-right: 2em;
+  padding-left: 2em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
@@ -41,4 +47,16 @@
 
 .label-small-radius {
   border-radius: 4px;
+}
+
+.label-success {
+  background-color: #00b048
+}
+
+.label-responsive {
+  width: 100%;
+}
+
+.label-block {
+  display: inline-block;
 }

@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  good_id    :integer          not null
 #  bad_id     :integer          not null
-#  bad_type   :string           not null
+#  bad_type   :string(255)      not null
 #  created_at :datetime         not null
 #
 # Indexes

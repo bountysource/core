@@ -26,10 +26,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-bootstrap-colorpicker/3.0.7/css/colorpicker.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag "bountysource" %>
 
   <meta http-equiv="pragma" content="no-cache" />
-
 </head>
 <body ng-app="app" ng-controller="AppController">
 
@@ -49,9 +49,9 @@
     <div ng-class="{ container: global_container, container_top_margin: global_container }" ng-view=""></div>
   </div>
 
-<div id="footer">
-  <ng-include src="'app/layout/footer.html'"></ng-include>
-</div>
+  <div id="footer">
+    <ng-include src="'app/layout/footer.html'"></ng-include>
+  </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-route.min.js"></script>
@@ -64,6 +64,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/showdown/0.4.0/Showdown.min.js"></script>
   <script>window.Moment = window.moment;</script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ethjs@0.3.4/dist/ethjs.min.js"></script>
 
   <%= render "layouts/env" %>
   <%= javascript_include_tag "app" %>
