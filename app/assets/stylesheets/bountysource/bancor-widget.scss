@@ -6,20 +6,17 @@
 
 #bancor-wc-container {
   position: relative;
-  
-  .widget-close {
-    position: absolute;
-    right: 3%;
-    margin-top: 25px;
-    z-index: 10;
-    width: 2%;
-  }
-}
 
-@media (max-width: 768px) {
-  #bancor-wc-container .widget-close {
-    right: 6%;
-    bottom: 3%;
-    width: 10%;
+  .widget-close-long {
+    height: 1.5em;
+    background: rgb(0, 191, 255);
+    text-align: center;
+    color: white;
+    cursor: default;
+    display: block;
+
+    &:hover {
+      background: #0087b4;
+    }
   }
 }

@@ -71,24 +71,6 @@ class GoogleCode::Tracker < ::Tracker
   end
 
   def remote_sync(options={})
-    update_attributes!(synced_at: Time.now)
-
-    # which page to start on
-    start_number = options[:start] || 0
-    params = {
-      num: MAX_RESULT_PER_PAGE,
-      start: start_number
-    }
-
-    # update from API response, if data changed since last sync
-    results = GoogleCode::API.fetch_issue_list(
-      url: self.url,
-      path: GoogleCode::API.generate_issue_list_path(params)
-    )
-
-    sync_issues_from_array(results)
-
-    # fetch next page if current page has full results
-    (options[:force] ? self : delay).remote_sync(num: MAX_RESULT_PER_PAGE, start: start_number+MAX_RESULT_PER_PAGE) if results.length == MAX_RESULT_PER_PAGE
+    # All projects in GoogleCode entered read-only mode. So there will be no update
   end
 end

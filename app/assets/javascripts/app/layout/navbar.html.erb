@@ -87,6 +87,13 @@
           </a>
         </li>
 
+        <!-- BANCOR widget (CAN / ETH)-->
+        <li id='bancor-wc-nav'>
+          <a href="" class="font-weight-regular navbar-main-button">
+            <button ng-click="bancorWidget.toggle()" class="btn btn-light-blue font-weight-regular navbar-main-button">Get CAN</button>
+          </a>
+        </li>
+
         <!-- User dropdown if logged in -->
         <li class="dropdown" ng-if="current_person">
           <a href="#" class="navbar-user-dropdown dropdown-toggle" data-toggle="dropdown">
@@ -158,25 +165,13 @@
   </div>
 </div>
 
-<div ng-controller="BancorWidgetController" id="bancor-wc-container" ng-show="visible" >
-  <button class='widget-close' ng-click='close()'>
-    x
-  </button>
+
+<!-- redundant ng-hide for browsers that doesn't support the widget -->
+<div ng-controller="BancorWidgetController" id="bancor-wc-container" ng-show="visible" class="ng-hide">
   <div id="bancor-wc">
-    <div id='testing'></div>
+  </div>
+  <div class="widget-close-long" ng-click="close()">
+    <strong>Close</strong>
   </div>
 </div>
 
-<div ng-controller="CanyaAnnouncementController">
-  <div style="background: #33ccff; color: white; text-align: center" class="pt-3 pb-3" ng-if="canyaAnnouncementIsVisible">
-    <a href="#" ng-click="hideCanyaAnnouncement()" style="float: right; color: white; margin: 10px 20px 0 0">X</a>
-    <a style="color: white" target="_blank" href="https://canya.io/promo/index.html">
-      <div>
-        CanYa is about to launch it's highly anticipated decentralised platform for digital services.
-      </div>
-      <div>
-        Click here to join the Pre-Alpha testing. The first 50 approved testing accounts will receive USD $500 in CAN tokens!
-      </div>
-    </a>
-  </div>
-</div>
