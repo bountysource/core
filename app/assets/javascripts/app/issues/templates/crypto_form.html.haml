@@ -4,33 +4,33 @@
     %div
       .text-left.text-muted I want to pay with:
       %div.mt-3.font-weight-semibold
-        %button.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('ETH')",  "ng-class" => "{'btn-cool-grey': isSelectedCrypto('ETH')}"} ETH
-        %button.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('BTC')",  "ng-class" => "{'btn-cool-grey': isSelectedCrypto('BTC')}"} BTC
-        %button.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('CAN')",  "ng-class" => "{'btn-cool-grey': isSelectedCrypto('CAN')}"} CAN
+        %button.btn.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('ETH')",  "ng-class" => "{'btn-cool-grey': isSelectedCrypto('ETH')}"} ETH
+        %button.btn.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('BTC')",  "ng-class" => "{'btn-cool-grey': isSelectedCrypto('BTC')}"} BTC
+        %button.btn.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto('CAN')",  "ng-class" => "{'btn-cool-grey': isSelectedCrypto('CAN')}"} CAN
       %div.mt-3.font-weight-semibold
-        %button.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto(null)", "ng-class" => "{'btn-cool-grey': isMiscCrypto(selectedCrypto) }"} OTHER ERC20
+        %button.btn.btn-rounded.btn-default.btn-sm{"ng-click" => "setCrypto(null)", "ng-class" => "{'btn-cool-grey': isMiscCrypto(selectedCrypto) }"} OTHER ERC20
 
     %div.mt-5{"ng-if" => "isSelectedCrypto('CAN')"}
       .text-left.text-muted
         Contribution Amount
       %div.mt-3.font-weight-semibold
-        %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('100')"} 100 CAN
-        %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('200')"} 200 CAN
-        %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('500')"} 500 CAN
+        %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('100')"} 100 CAN
+        %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('200')"} 200 CAN
+        %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('500')"} 500 CAN
     %div.mt-5{"ng-if" => "isSelectedCrypto('ETH')"}
       .text-left.text-muted
         Contribution Amount
       %div.mt-3.font-weight-semibold
-        %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('0.25')"} 0.25 ETH
-        %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('0.5')"} 0.5 ETH
-        %button.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('1')"} 1 ETH
+        %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('0.25')"} 0.25 ETH
+        %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('0.5')"} 0.5 ETH
+        %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setAmount('1')"} 1 ETH
 
     %div.mt-5
       %div{"ng-if" => "!isSelectedCrypto('BTC')" }
         .crypto-token-options
           %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "bounty.amount"}
           %div
-            %button#cryptoSelect.btn-borderless.btn-default.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
+            %button#cryptoSelect.btn.btn-borderless.btn-default.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
               %span.font-8{"ng-if" => "isSelectedCrypto(null)"} SELECT ERC20 TOKEN
               %span{"ng-if" => "!isSelectedCrypto(null)"} {{ bounty.token }}
               %span.caret
