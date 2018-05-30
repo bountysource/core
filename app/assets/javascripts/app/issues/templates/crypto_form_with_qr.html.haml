@@ -32,7 +32,8 @@
                 = image_tag 'icons/icon_canya.svg', style: 'width: 18px;'
               %span
                 {{ currency.symbol }}
-    %hr.mt-0{"style" => "height: 2px;"}
+    %hr.my-0{"style" => "height: 2px;"}
+    %small.pull-right{"ng-class" => "{'text-danger': !canPostBounty()}"} ~ {{ cryptoBountyTotal() | number: 0 }} USD
   %div{"ng-if" => "isSelectedCrypto('BTC')" }
     .text-muted BTC contributions unavailable
 

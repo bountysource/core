@@ -169,14 +169,17 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   };
 
   $scope.canPostBounty = function () {
+    return $scope.cryptoBountyTotal() > 5
+  }
+
+  $scope.cryptoBountyTotal = function(){
     if($scope.isSelectedCrypto('BTC') || !$scope.bounty.token || !$scope.bounty.amount || $scope.currencies === undefined){
       return false
     }
     var currency = $scope.currencies.find(function(c){ return c.symbol === $scope.bounty.token })
     var amountInFloat = parseFloat($scope.bounty.amount)
     var total = currency.value * amountInFloat
-    
-    return total > 5
+    return total
   }
 
   $scope.isMiscCrypto = function(crypto){
