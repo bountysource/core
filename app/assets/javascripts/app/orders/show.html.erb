@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="col-xs-8">
-                      <p ng-if="item.anonymous"><img src='<%= asset_path("anon.jpg") %>' style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
+                      <p ng-if="item.anonymous"><img src='<%= asset_path("bs-anon.png") %>' style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
                       <p ng-if="!item.anonymous"><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
                     </div>
                     <!-- Reward Details -->
@@ -148,7 +148,7 @@
                       <strong>Display as:</strong>
                     </div>
                     <div class="col-xs-8">
-                      <p ng-if="item.anonymous"><img src='<%= asset_path("anon.jpg") %>' style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
+                      <p ng-if="item.anonymous"><img src='<%= asset_path("bs-anon.png") %>' style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
                       <p ng-if="!item.anonymous"><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
                     </div>
 

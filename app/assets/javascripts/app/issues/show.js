@@ -75,7 +75,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
       case ('anonymous'):
         $scope.owner = {
           display_name: 'Anonymous',
-          image_url: '<%= asset_path("anon.jpg") %>'
+          image_url: '<%= asset_path("bs-anon.png") %>'
         };
         $scope.usdCart.owner_id = null;
         $scope.usdCart.owner_type = null;
