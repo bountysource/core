@@ -8,6 +8,7 @@ class CreateCryptoBounties < ActiveRecord::Migration[5.1]
       t.references :owner, polymorphic: true
       t.boolean :featured, default: false, null: false
       t.string :transaction_hash, null: false
+      t.string :from, null: false
 
       t.timestamps
     end
