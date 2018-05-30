@@ -4,12 +4,10 @@
     %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setUsdAmount(50)"} $50
     %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setUsdAmount(500)"} $500
   %small.mt-3 - or -
-  .row.display-flex.vertical-align-bottom 
-    .col-xs-6.pr-0
-      %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "usdCart.amount", :type => "number"}
-    .col-xs-6.pl-0
-      %button#fiatSelect.btn-borderless.font-weight-semibold{:type => "button", "style" => "height: 100%"}
-        USD
+  .usd-input
+    %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "usdCart.amount", :type => "number"}
+    %button#fiatSelect.btn.btn-borderless.btn-default.font-weight-semibold{:type => "button", "style" => "height: 100%"}
+      USD
   %hr.my-0{"style" => "height: 2px;"}
   %small.text-muted.pull-right *Minimum $5 USD
   .clearfix

@@ -25,7 +25,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
   // create bounty box (allow prefil via &amount=123 in query params)
   $scope.usdCart = {
-    amount: 0,
+    amount: 15,
     item_type: 'bounty',
     issue_id: issue_id,
     bounty_expiration: null,
