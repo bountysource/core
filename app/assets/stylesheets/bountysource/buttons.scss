@@ -52,9 +52,33 @@
   color: white;
 }
 
-.btn-light-blue, .btn-light-blue:focus {
+
+.btn-light-blue, .btn-light-blue:hover {
   background-color: #33ccff;
-  color: white;
+  border-color: #33ccff;
+  color: #fff;
+}
+
+.btn-light-blue:hover {
+  -webkit-box-shadow: 0 2px 10px rgba(15, 172, 243, 0.4);
+          box-shadow: 0 2px 10px rgba(15, 172, 243, 0.4);
+}
+
+.btn-light-blue:focus, .btn-light-blue.focus {
+  color: #fff;
+}
+
+.btn-light-blue.disabled, .btn-light-blue:disabled {
+  background-color: #33ccff;
+  border-color: #33ccff;
+  opacity: 0.5;
+}
+
+.btn-light-blue:active, .btn-light-blue.active,
+.show > .btn-light-blue.dropdown-toggle {
+  background-color: #00ADEE;
+  border-color: #00ADEE;
+  color: #fff;
 }
 
 .btn-grey {

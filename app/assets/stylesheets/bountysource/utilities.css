@@ -148,6 +148,7 @@
 @media (min-width: 992px) {
   .text-md-left { text-align: left; }
   .text-md-center { text-align: center; }
+  .text-md-right { text-align: right; }
 }
 
 /* Large devices (large desktops, 1200px and up) */
