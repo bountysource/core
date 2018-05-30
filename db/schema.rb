@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501124659) do
+ActiveRecord::Schema.define(version: 20180530004731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,10 +207,12 @@ ActiveRecord::Schema.define(version: 20180501124659) do
     t.bigint "owner_id"
     t.boolean "featured", default: false, null: false
     t.string "transaction_hash", null: false
+    t.string "from", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["issue_id"], name: "index_crypto_bounties_on_issue_id"
     t.index ["owner_type", "owner_id"], name: "index_crypto_bounties_on_owner_type_and_owner_id"
+    t.index ["transaction_hash"], name: "index_crypto_bounties_on_transaction_hash", unique: true
   end
 
   create_table "currencies", id: :serial, force: :cascade do |t|
@@ -379,7 +381,7 @@ ActiveRecord::Schema.define(version: 20180501124659) do
     t.datetime "balance_updated_at"
     t.jsonb "balance"
     t.index ["issue_id"], name: "index_issue_addresses_on_issue_id"
-    t.index ["public_address"], name: "index_issue_addresses_on_public_address"
+    t.index ["public_address"], name: "index_issue_addresses_on_public_address", unique: true
   end
 
   create_table "issue_rank_caches", id: :serial, force: :cascade do |t|
@@ -768,14 +770,12 @@ ActiveRecord::Schema.define(version: 20180501124659) do
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_transactions", id: false, force: :cascade do |t|
-    t.integer "id", null: false
+  create_table "quickbooks_transactions", id: :integer, default: nil, force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_vendors", id: false, force: :cascade do |t|
-    t.integer "id", null: false
+  create_table "quickbooks_vendors", id: :integer, default: nil, force: :cascade do |t|
     t.string "name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"

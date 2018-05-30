@@ -258,6 +258,10 @@ class Api::V1::PeopleController < ApplicationController
     @bounties = @person.bounties.includes(:owner, :issue => [:tracker]).order('created_at desc')
   end
 
+  def crypto_bounties
+    @crypto_bounties = @person.crypto_bounties.includes(:owner, :issue => [:tracker]).order('created_at desc')
+  end
+
   def bounty_total
     @bounty_total = @person.bounties.where("issue_id = ?", params[:id]).active.inject(0){|total,bounty| total += bounty.amount}.to_i
   end
@@ -306,6 +310,7 @@ class Api::V1::PeopleController < ApplicationController
 
   def activity
     @bounties = @profile_person.active_bounties.where(anonymous: false).includes(:owner, :issue => [:tracker]).order("created_at desc").limit(50)
+    @crypto_bounties = @profile_person.crypto_bounties.includes(:owner, :issue => [:tracker]).order("created_at desc").limit(50)
     @pledges = @profile_person.pledges.where(anonymous: false).includes(:owner, :fundraiser).order("created_at desc").limit(50)
     @fundraisers = @profile_person.fundraisers.where(published: true).order("created_at desc").limit(50)
     @team_relations = @profile_person.team_member_relations.where(public: true).order("created_at desc").limit(50)
