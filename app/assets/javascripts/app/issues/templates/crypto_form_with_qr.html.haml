@@ -19,7 +19,7 @@
     .crypto-token-options
       %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "bounty.amount"}
       %div
-        %button#cryptoSelect.btn-borderless.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
+        %button#cryptoSelect.btn.btn-borderless.btn-default.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
           %span.font-8{"ng-if" => "isSelectedCrypto(null)"} SELECT ERC20 TOKEN
           %span{"ng-if" => "!isSelectedCrypto(null)"} {{ bounty.token }}
           %span.caret

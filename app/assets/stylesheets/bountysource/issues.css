@@ -132,6 +132,13 @@ td img.issue-table-tracker-img {
 }
 .crypto-token-options > div > button { display: flex; align-items: center; }
 
+.usd-input { display: flex; }
+.usd-input > div{
+  flex-grow: 0;
+  position: relative;
+}
+.usd-input > div > button { display: flex; align-items: center; }
+
 @keyframes blink {
     /**
      * At the start of the animation the dot
