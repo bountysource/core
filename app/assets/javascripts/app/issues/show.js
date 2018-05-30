@@ -250,26 +250,32 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   }
 
   $scope.openHunterBox = function() {
-    $modal.open({
-      templateUrl: 'common/templates/hunterBoxModal.html',
-      backdrop: true,
-      controller: function($scope, $modalInstance, bounty, issue, Web3Utils) {
-        $scope.bounty = bounty;
-        $scope.issue = issue;
-        $scope.closeModal = function() {
-          $modalInstance.close();
-        };
-      },
-      resolve: {
-        bounty: function () {
-          return $scope.bounty;
+    if ($scope.current_person) {
+      $modal.open({
+        templateUrl: 'common/templates/hunterBoxModal.html',
+        backdrop: true,
+        controller: function($scope, $modalInstance, bounty, issue, Web3Utils) {
+          $scope.bounty = bounty;
+          $scope.issue = issue;
+          $scope.closeModal = function() {
+            $modalInstance.close();
+          };
         },
-        issue: function () {
-          return $scope.issue;
+        resolve: {
+          bounty: function () {
+            return $scope.bounty;
+          },
+          issue: function () {
+            return $scope.issue;
+          }
         }
-      }
 
-    });
+      });
+    } else {
+      $api.set_post_auth_url($location.url());
+      $location.url("/signin");
+    }
+    
   }
 
   $scope.openQRModal = function(){
