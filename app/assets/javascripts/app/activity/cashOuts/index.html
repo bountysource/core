@@ -5,64 +5,68 @@
     <li class="active"><a href="/activity/account">Account</a></li>
   </ul>
 
-  <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
 
-  <div>
-    <p>Cash out requests are processed every Friday. Requests must be submitted by end of Thursday each week.</p>
-    <p>If you have any questions please contact <a href="mailto:support@bountysource.com" target="_blank">support@bountysource.com</a>.</p>
+      <div>
+        <p>Cash out requests are processed every Friday. Requests must be submitted by end of Thursday each week.</p>
+        <p>If you have any questions please contact <a href="mailto:support@bountysource.com" target="_blank">support@bountysource.com</a>.</p>
 
-    <p><a class="btn btn-light-blue" ng-href="/activity/cash_outs/new">Request Cash Out</a></p>
-  </div>
+        <p><a class="btn btn-light-blue" ng-href="/activity/cash_outs/new">Request Cash Out</a></p>
+      </div>
 
-  <!-- Render message if person has no cash outs -->
-  <div ng-if="cashOuts.length <= 0">
-    <p><em>You have no pending cash outs.</em></p>
-  </div>
+      <!-- Render message if person has no cash outs -->
+      <div ng-if="cashOuts.length <= 0">
+        <p><em>You have no pending cash outs.</em></p>
+      </div>
 
-  <div class="table-responsive">
-    <table class="table" ng-if="cashOuts.length > 0">
-      <thead>
-      <tr>
-        <th>Amount</th>
-        <th>Submitted</th>
-        <th>Status</th>
-        <th>Payment Method</th>
-      </tr>
-      </thead>
+      <div class="table-responsive">
+        <table class="table" ng-if="cashOuts.length > 0">
+          <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Submitted</th>
+            <th>Status</th>
+            <th>Payment Method</th>
+          </tr>
+          </thead>
 
-      <tbody>
-      <tr ng-repeat="cashOut in cashOuts">
-        <td>{{cashOut.amount | currency}}</td>
-        <td>{{cashOut.created_at | date}}</td>
+          <tbody>
+          <tr ng-repeat="cashOut in cashOuts">
+            <td>{{cashOut.amount | currency}}</td>
+            <td>{{cashOut.created_at | date}}</td>
 
-        <!-- Status -->
-        <td>
-          <!-- Pending -->
-          <div ng-if="!cashOut.sent_at">
-            <strong class="text-info">Pending</strong>
-            <button class="btn btn-sm btn-warning" ng-click="cancelCashOut($index)">Cancel</button>
-          </div>
+            <!-- Status -->
+            <td>
+              <!-- Pending -->
+              <div ng-if="!cashOut.sent_at">
+                <strong class="text-info">Pending</strong>
+                <button class="btn btn-sm btn-warning" ng-click="cancelCashOut($index)">Cancel</button>
+              </div>
 
-          <!-- Accepted -->
-          <div ng-if="cashOut.sent_at && !cashOut.is_refund && !cashOut.is_fraud">
-            <strong class="text-success">Sent {{cashOut.sent_at | date}}</strong>
-          </div>
+              <!-- Accepted -->
+              <div ng-if="cashOut.sent_at && !cashOut.is_refund && !cashOut.is_fraud">
+                <strong class="text-success">Sent {{cashOut.sent_at | date}}</strong>
+              </div>
 
-          <!-- Refunded -->
-          <div ng-if="cashOut.sent_at && cashOut.is_refund">
-            <strong class="text-success">Refunded {{cashOut.sent_at | date}}</strong>
-          </div>
+              <!-- Refunded -->
+              <div ng-if="cashOut.sent_at && cashOut.is_refund">
+                <strong class="text-success">Refunded {{cashOut.sent_at | date}}</strong>
+              </div>
 
-          <!-- Fraud -->
-          <div ng-if="cashOut.sent_at && cashOut.is_fraud">
-            <strong class="text-success">Please Contact Customer Support</strong>
-          </div>
-        </td>
+              <!-- Fraud -->
+              <div ng-if="cashOut.sent_at && cashOut.is_fraud">
+                <strong class="text-success">Please Contact Customer Support</strong>
+              </div>
+            </td>
 
-        <!-- Payment Method -->
-        <td>{{cashOut.type | title}}</td>
-      </tr>
-      </tbody>
-    </table>
+            <!-- Payment Method -->
+            <td>{{cashOut.type | title}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

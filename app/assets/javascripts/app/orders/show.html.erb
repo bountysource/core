@@ -7,256 +7,258 @@
   </a></li>
 </ul>
 
-<div>
-  <loading-bar ng-hide="transaction">Loading transaction...</loading-bar>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <loading-bar ng-hide="transaction">Loading transaction...</loading-bar>
 
-  <div ng-show="transaction">
-    <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+    <div ng-show="transaction">
+      <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
 
-    <div ng-show="is_receipt">
-      <div>
-        <h2>Receipt for Order #{{transaction.shopping_cart_id}}</h2>
+      <div ng-show="is_receipt">
+        <div>
+          <h2>Receipt for Order #{{transaction.shopping_cart_id}}</h2>
+        </div>
       </div>
-    </div>
 
-    <div ng-show="!is_receipt">
-      <div>
-        <h2>Order #{{ transaction.shopping_cart_id }}</h2>
+      <div ng-show="!is_receipt">
+        <div>
+          <h2>Order #{{ transaction.shopping_cart_id }}</h2>
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-xs-9">
-        <!-- Header on receipt page -->
-        <!-- Transction show page -->
-        <table class="table">
-          <tbody>
-          <tr ng-repeat="item in transaction.items">
-            <td ng-switch="item.type" class="col-md-1 col-sm-1 hidden-xs">
-              <!-- Bounty -->
-              <a ng-if="isBounty(item)" ng-href="/trackers/{{item.issue.tracker.slug}}">
-                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.issue.tracker.medium_image_url}}" />
-              </a>
+      <div class="row">
+        <div class="col-xs-9">
+          <!-- Header on receipt page -->
+          <!-- Transction show page -->
+          <table class="table">
+            <tbody>
+            <tr ng-repeat="item in transaction.items">
+              <td ng-switch="item.type" class="col-md-1 col-sm-1 hidden-xs">
+                <!-- Bounty -->
+                <a ng-if="isBounty(item)" ng-href="/trackers/{{item.issue.tracker.slug}}">
+                  <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.issue.tracker.medium_image_url}}" />
+                </a>
 
-              <!-- Pledge -->
-              <a ng-if="isPledge(item)" ng-href="/fundraisers/{{item.fundraiser.slug}}">
-                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.fundraiser.medium_image_url}}" />
-              </a>
+                <!-- Pledge -->
+                <a ng-if="isPledge(item)" ng-href="/fundraisers/{{item.fundraiser.slug}}">
+                  <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.fundraiser.medium_image_url}}" />
+                </a>
 
-              <!-- TeamPayin -->
-              <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}">
-                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.team.medium_image_url}}" />
-              </a>
+                <!-- TeamPayin -->
+                <a ng-if="isTeamPayin(item)" ng-href="/teams/{{item.team.slug}}">
+                  <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.team.medium_image_url}}" />
+                </a>
 
-              <!-- SupportLevelPayment -->
-              <a ng-if="isSupportLevelPayment(item)" ng-href="/teams/{{item.team.slug}}">
-                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.team.medium_image_url}}" />
-              </a>
+                <!-- SupportLevelPayment -->
+                <a ng-if="isSupportLevelPayment(item)" ng-href="/teams/{{item.team.slug}}">
+                  <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.team.medium_image_url}}" />
+                </a>
 
-              <!-- Proposal -->
-              <a ng-if="isProposal(item)" ng-href="/issues/{{ item.issue.slug }}">
-                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.issue.tracker.medium_image_url}}" />
-              </a>
+                <!-- Proposal -->
+                <a ng-if="isProposal(item)" ng-href="/issues/{{ item.issue.slug }}">
+                  <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.issue.tracker.medium_image_url}}" />
+                </a>
 
-              <!-- IssueSuggestionReward -->
-              <a ng-if="isIssueSuggestionReward(item)" ng-href="/people/{{ item.person.slug }}">
-                <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.suggestion.person.medium_image_url}}" />
-              </a>
-            </td>
+                <!-- IssueSuggestionReward -->
+                <a ng-if="isIssueSuggestionReward(item)" ng-href="/people/{{ item.person.slug }}">
+                  <img class="img-responsive" style="max-width: 50px; max-height: 50px" ng-src="{{item.suggestion.person.medium_image_url}}" />
+                </a>
+              </td>
 
-            <td ng-switch="item.type" class="col-xs-12 col-md-9">
-              <div ng-switch-when="Pledge">
-                <h4>Pledge to <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a></h4>
+              <td ng-switch="item.type" class="col-xs-12 col-md-9">
+                <div ng-switch-when="Pledge">
+                  <h4>Pledge to <a ng-href="/fundraisers/{{item.fundraiser.slug}}">{{item.fundraiser.title}}</a></h4>
 
-                <div class="row">
-                  <div class="col-xs-4 text-right">
-                    <strong>Display as:</strong>
-                  </div>
-
-                  <div class="col-xs-8">
-                    <p ng-if="item.anonymous"><img src='<%= asset_path("anon.jpg") %>' style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
-                    <p ng-if="!item.anonymous"><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
-                  </div>
-                  <!-- Reward Details -->
-                  <div class="col-xs-4 text-right">
-                    <strong>Reward Description:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <p>{{ item.reward.description }}</p>
-                  </div>
-
-                  <!-- Reward Response -->
-                  <div ng-if="item.survey_response">
+                  <div class="row">
                     <div class="col-xs-4 text-right">
-                      <strong>Reward Response:</strong>
+                      <strong>Display as:</strong>
+                    </div>
+
+                    <div class="col-xs-8">
+                      <p ng-if="item.anonymous"><img src='<%= asset_path("anon.jpg") %>' style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
+                      <p ng-if="!item.anonymous"><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
+                    </div>
+                    <!-- Reward Details -->
+                    <div class="col-xs-4 text-right">
+                      <strong>Reward Description:</strong>
                     </div>
                     <div class="col-xs-8">
-                      <p>{{ item.survey_response }}</p>
+                      <p>{{ item.reward.description }}</p>
+                    </div>
+
+                    <!-- Reward Response -->
+                    <div ng-if="item.survey_response">
+                      <div class="col-xs-4 text-right">
+                        <strong>Reward Response:</strong>
+                      </div>
+                      <div class="col-xs-8">
+                        <p>{{ item.survey_response }}</p>
+                      </div>
+                    </div>
+
+                    <!-- Share Buttons -->
+                    <div class="col-xs-4 text-right">
+                      <strong>Share This:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <share-button item="item"></share-button>
                     </div>
                   </div>
+                </div>
 
-                  <!-- Share Buttons -->
-                  <div class="col-xs-4 text-right">
-                    <strong>Share This:</strong>
+                <div ng-switch-when="Proposal">
+                  <h4>Accepted Proposal for <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></h4>
+                  <div class="row">
+                    <div class="col-xs-4 text-right">
+                      <strong>Developer:</strong>
+                    </div>
+                    <div class="col-xs-8"><p><a ng-href="/people/{{ item.person.slug }}">{{ item.person.display_name }}</a></p></div>
                   </div>
-                  <div class="col-xs-8">
-                    <share-button item="item"></share-button>
+                  <div class="row">
+                    <div class="col-xs-4 text-right">
+                      <strong>Expected Completion:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <p>{{ item.completed_by | date:'shortDate' }}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-4 text-right">
+                      <strong>Notes:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <p>{{ item.bio }}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-4 text-right">
+                      <strong>Share This:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <share-button item="item"></share-button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div ng-switch-when="Proposal">
-                <h4>Accepted Proposal for <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></h4>
-                <div class="row">
-                  <div class="col-xs-4 text-right">
-                    <strong>Developer:</strong>
-                  </div>
-                  <div class="col-xs-8"><p><a ng-href="/people/{{ item.person.slug }}">{{ item.person.display_name }}</a></p></div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-4 text-right">
-                    <strong>Expected Completion:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <p>{{ item.completed_by | date:'shortDate' }}</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-4 text-right">
-                    <strong>Notes:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <p>{{ item.bio }}</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-4 text-right">
-                    <strong>Share This:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <share-button item="item"></share-button>
-                  </div>
-                </div>
-              </div>
+                <div ng-switch-when="Bounty">
+                  <h4>Bounty for <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></h4>
+                  <div class="row">
+                    <!-- Bounty Details -->
+                    <div class="col-xs-4 text-right">
+                      <strong>Display as:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <p ng-if="item.anonymous"><img src='<%= asset_path("anon.jpg") %>' style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
+                      <p ng-if="!item.anonymous"><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
+                    </div>
 
-              <div ng-switch-when="Bounty">
-                <h4>Bounty for <a ng-href="/issues/{{item.issue.slug}}">{{item.issue.title}}</a></h4>
-                <div class="row">
-                  <!-- Bounty Details -->
-                  <div class="col-xs-4 text-right">
-                    <strong>Display as:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <p ng-if="item.anonymous"><img src='<%= asset_path("anon.jpg") %>' style="height: 18px; width: 18px; display: inline;" /> Anonymous</p>
-                    <p ng-if="!item.anonymous"><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
-                  </div>
+                    <!-- Expiration Options -->
+                    <div class="col-xs-4 text-right">
+                      <strong>Expire:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <p ng-if="item.bounty_expiration > 0">{{ item.bounty_expiration | number }} months</p>
+                      <p ng-if="item.bounty_expiration === 0">Never</p>
+                    </div>
 
-                  <!-- Expiration Options -->
-                  <div class="col-xs-4 text-right">
-                    <strong>Expire:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <p ng-if="item.bounty_expiration > 0">{{ item.bounty_expiration | number }} months</p>
-                    <p ng-if="item.bounty_expiration === 0">Never</p>
-                  </div>
+                    <!-- Promotion Options -->
+                    <div class="col-xs-4 text-right">
+                      <strong>Promotion:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <p ng-if="item.tweet">Tweet from @Bountysource</p>
+                      <p ng-if="!item.tweet">No Promotion</p>
+                    </div>
 
-                  <!-- Promotion Options -->
-                  <div class="col-xs-4 text-right">
-                    <strong>Promotion:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <p ng-if="item.tweet">Tweet from @Bountysource</p>
-                    <p ng-if="!item.tweet">No Promotion</p>
-                  </div>
-
-                  <!-- Share Buttons -->
-                  <div class="col-xs-4 text-right">
-                    <strong>Share This:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <share-button item="item"></share-button>
+                    <!-- Share Buttons -->
+                    <div class="col-xs-4 text-right">
+                      <strong>Share This:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <share-button item="item"></share-button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div ng-switch-when="IssueSuggestionReward">
-                <h4>Issue Suggestion Reward to <a ng-href="/people/{{item.suggestion.person.slug}}">{{item.suggestion.person.display_name}}</a> for <a ng-href="/issues/{{item.suggestion.issue.slug}}">{{item.suggestion.issue.title}}</a></h4>
-              </div>
+                <div ng-switch-when="IssueSuggestionReward">
+                  <h4>Issue Suggestion Reward to <a ng-href="/people/{{item.suggestion.person.slug}}">{{item.suggestion.person.display_name}}</a> for <a ng-href="/issues/{{item.suggestion.issue.slug}}">{{item.suggestion.issue.title}}</a></h4>
+                </div>
 
-              <div ng-switch-when="TeamPayin">
-                <h4>Pledge to <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a> account </h4>
-                <div class="row">
-                  <div class="col-xs-4 text-right">
-                    <strong>Display as:</strong>
-                  </div>
+                <div ng-switch-when="TeamPayin">
+                  <h4>Pledge to <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a> account </h4>
+                  <div class="row">
+                    <div class="col-xs-4 text-right">
+                      <strong>Display as:</strong>
+                    </div>
 
-                  <div class="col-xs-8">
-                    <p><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
-                  </div>
+                    <div class="col-xs-8">
+                      <p><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
+                    </div>
 
-                  <div class="col-xs-4 text-right">
-                    <strong>Share This:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <share-button item="item"></share-button>
+                    <div class="col-xs-4 text-right">
+                      <strong>Share This:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <share-button item="item"></share-button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div ng-switch-when="SupportLevelPayment">
-                <h4>Support for <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a></h4>
-                <div class="row">
-                  <div class="col-xs-4 text-right">
-                    <strong>Period:</strong>
-                  </div>
+                <div ng-switch-when="SupportLevelPayment">
+                  <h4>Support for <a ng-href="/teams/{{item.team.slug}}">{{item.team.name}}</a></h4>
+                  <div class="row">
+                    <div class="col-xs-4 text-right">
+                      <strong>Period:</strong>
+                    </div>
 
-                  <div class="col-xs-8">
-                    <p>{{ item.period_starts_at | date }} - {{ item.period_ends_at | date }}</p>
-                  </div>
+                    <div class="col-xs-8">
+                      <p>{{ item.period_starts_at | date }} - {{ item.period_ends_at | date }}</p>
+                    </div>
 
-                  <div class="col-xs-4 text-right">
-                    <strong>Display as:</strong>
-                  </div>
+                    <div class="col-xs-4 text-right">
+                      <strong>Display as:</strong>
+                    </div>
 
-                  <div class="col-xs-8">
-                    <p><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
-                  </div>
+                    <div class="col-xs-8">
+                      <p><img ng-src="{{ item.owner.image_url }}" style="max-width: 18px; max-height: 18px"></img> {{ item.owner.display_name }}</p>
+                    </div>
 
-                  <div class="col-xs-4 text-right">
-                    <strong>Share This:</strong>
-                  </div>
-                  <div class="col-xs-8">
-                    <share-button item="item"></share-button>
+                    <div class="col-xs-4 text-right">
+                      <strong>Share This:</strong>
+                    </div>
+                    <div class="col-xs-8">
+                      <share-button item="item"></share-button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-            </td>
+              </td>
 
-            <td class="col-sm-2 text-right">
-              <strong><h4>{{ item.amount | dollars }}</h4></strong>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-xs-3">
-        <div class="panel panel-cool-grey">
-          <div class="panel-heading text-center">
-            Total ({{ transaction.items.length | number }}<ng-pluralize count="transaction.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ transaction.gross || 0 | dollars:{ precision: {'USD': 2} } }}
-          </div>
-          <div class="panel-body">
-            <div>
-              <div><strong>Payment Method:</strong></div>
-              <span ng-if="transaction.checkout_method.owner">
-                <img style="max-width:18px; max-height:18px" ng-src="{{ transaction.checkout_method.owner.image_url }}"></img>
-              </span>
-              <p ng-hide="transaction.checkout_method.owner">{{transaction.checkout_method.display_name}}</p>
-              <a ng-show="transaction.checkout_method.owner" owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
+              <td class="col-sm-2 text-right">
+                <strong><h4>{{ item.amount | dollars }}</h4></strong>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-xs-3">
+          <div class="panel panel-cool-grey">
+            <div class="panel-heading text-center">
+              Total ({{ transaction.items.length | number }}<ng-pluralize count="transaction.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ transaction.gross || 0 | dollars:{ precision: {'USD': 2} } }}
             </div>
-          </div>
-          <div class="panel-footer text-center">
-            <div>Order placed: <strong>{{transaction.created_at | date:'mediumDate'}}</strong></div>
+            <div class="panel-body">
+              <div>
+                <div><strong>Payment Method:</strong></div>
+                <span ng-if="transaction.checkout_method.owner">
+                  <img style="max-width:18px; max-height:18px" ng-src="{{ transaction.checkout_method.owner.image_url }}"></img>
+                </span>
+                <p ng-hide="transaction.checkout_method.owner">{{transaction.checkout_method.display_name}}</p>
+                <a ng-show="transaction.checkout_method.owner" owner-href="transaction.checkout_method.owner">{{transaction.checkout_method.owner.display_name}}</a>
+              </div>
+            </div>
+            <div class="panel-footer text-center">
+              <div>Order placed: <strong>{{transaction.created_at | date:'mediumDate'}}</strong></div>
+            </div>
           </div>
         </div>
       </div>

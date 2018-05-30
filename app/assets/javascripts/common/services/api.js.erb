@@ -330,6 +330,13 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
+    getWallets: function(params) {
+      return this.call({
+        url: '/wallets',
+        data: params || {}
+      });
+    },
+
     updateWallet: function(id, params) {
       return this.call({
         url: '/wallets/'+id,

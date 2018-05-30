@@ -1,4 +1,3 @@
-relation = root_object.relation_for_owner(@profile_person)
-if relation && (relation.developer? || relation.admin?)
+if can?(:view_team_account, root_object)
   attribute :account_balance
 end

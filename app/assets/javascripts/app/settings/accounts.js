@@ -57,7 +57,6 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
     $scope.success = null;
     $scope.error = null;
     var walletParams = { person_id: $scope.current_person.id, eth_addr: $scope.form_data.eth_addr }
-    console.log(walletParams);
     $api.v2.wallets(walletParams)
       .then(function (response){ 
         if (response.success) {
@@ -75,13 +74,13 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
     $scope.error = null;
     Web3Utils.verifyAddress().then(function(response) {
       $api.v2.metamask({ person_id: $scope.current_person.id, eth_addr: response.from, signed_txn: response.signed }).then(function (response){ 
-          if (response.success) {
-            $scope.success = "Successfully updated wallet";
-            $scope.wallets = angular.copy(response.data);
-            $scope.addNew = false;
-          } else {
-            $scope.error = "Unable to update wallet or address not verified";
-          }
+        if (response.success) {
+          $scope.success = "Successfully updated wallet";
+          $scope.wallets = angular.copy(response.data);
+          $scope.addNew = false;
+        } else {
+          $scope.error = response.data.error;
+        }
       });
     }).catch(function(error){
       $log.error('Error when validating ETH addrs ' + error);

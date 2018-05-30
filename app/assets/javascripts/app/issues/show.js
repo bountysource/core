@@ -1,4 +1,4 @@
-angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal) {
+angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal, $interval) {
   var issue_id = parseInt($routeParams.id);
 
   // load core issue object
@@ -33,6 +33,42 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   }
 
   $scope.checkout = {}
+
+  // METAMASK WALLET UPDATE BEGIN
+  $scope.metamaskAccount;
+  $scope.metamaskAccountInterval;
+
+  $scope.updateMetamaskAccount = function() {
+    if ( angular.isDefined($scope.metamaskAccountInterval) ) return;
+
+    $scope.metamaskAccountInterval = $interval(function(){
+      Web3Utils.getAccounts().then(function(accounts){
+        if(accounts[0] != null){
+          $scope.metamaskAccount = accounts[0];  
+        }
+      })  
+    }, 1000)
+  }
+
+  $scope.stopMetamaskUpdate = function() {
+    if (angular.isDefined($scope.metamaskAccountInterval)) {
+      $interval.cancel($scope.metamaskAccountInterval);
+      $scope.metamaskAccountInterval = undefined;
+    }
+  };
+
+  $scope.$on('$destroy', function() {
+    // Make sure that the interval is destroyed too
+    $scope.stopMetamaskUpdate();
+  });
+
+  $scope.updateMetamaskAccount();
+  // METAMASK WALLET UPDATE END
+
+  $scope.wallets;
+  $api.v2.getWallets().then(function(response){
+    $scope.wallets = response.data
+  })
 
   $scope.setOwner = function (type, owner) {
     switch (type) {

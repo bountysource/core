@@ -6,42 +6,21 @@
 
 .row
   .col-sm-3.col-md-3
+    .panel.panel-default
+      .panel-body.p-5
+        %ul.nav.nav-pills.nav-stacked
+          %li{ "ng-class"=>"{active: selected=='featured'}" }
+            %a{ "ng-href"=>"/teams", "ng-click"=>"set_params({})" }
+              %span.glyphicon.glyphicon-star
+              Featured
 
-    %ul.nav.nav-pills.nav-stacked
-      %li{ "ng-class"=>"{active: selected=='featured'}" }
-        %a{ "ng-href"=>"/teams", "ng-click"=>"set_params({})" }
-          %span.glyphicon.glyphicon-star
-          Featured
-
-      %li{ "ng-repeat"=>"tag in tags", "ng-class"=>"{active: tag.type == 'Tag' ? (selected=='tag:'+tag.id) : (selected=='team:'+tag.slug) }"}
-        %a.text-ellipsis{ "ng-href"=>"/teams?tag_id={{tag.type == 'Tag' ? tag.id : tag.slug}}", "ng-click"=>"set_params({ tag_id: tag.type == 'Tag' ? tag.id : tag.slug })" }
-          %span.glyphicon.glyphicon-tag{ "ng-if"=>"tag.type=='Tag'", "style"=>"color:#aaa"  }
-          %img.img-circle{ "ng-if"=>"tag.type=='Team'", "ng-src"=>"{{tag.image_url}}", "style"=>"width:16px; height:16px" }
-          {{tag.name}}
-
-    -#.well
-    -#  %p Is your team missing?  Don't fret... adding one is super easy!
-    -#  %p.text-center
-    -#    %a.btn.btn-primary{:href => "/teams/new"} Create New Team
+          %li{ "ng-repeat"=>"tag in tags", "ng-class"=>"{active: tag.type == 'Tag' ? (selected=='tag:'+tag.id) : (selected=='team:'+tag.slug) }"}
+            %a.text-ellipsis{ "ng-href"=>"/teams?tag_id={{tag.type == 'Tag' ? tag.id : tag.slug}}", "ng-click"=>"set_params({ tag_id: tag.type == 'Tag' ? tag.id : tag.slug })" }
+              %span.glyphicon.glyphicon-tag{ "ng-if"=>"tag.type=='Tag'", "style"=>"color:#aaa"  }
+              %img.img-circle{ "ng-if"=>"tag.type=='Team'", "ng-src"=>"{{tag.image_url}}", "style"=>"width:16px; height:16px" }
+              {{tag.name}}
 
   .col-sm-9.col-md-9
-
-    -#%ul.nav.nav-tabs
-    -#  %li
-    -#    %a
-    -#      -#%span.glyphicon.glyphicon-bell
-    -#      Activity
-    -#  %li.active
-    -#    %a
-    -#      -#%span.glyphicon.glyphicon-sort-by-attributes-alt
-    -#      Teams
-    -#  %li
-    -#    %a
-    -#      -#%span.glyphicon.glyphicon-stats
-    -#      Stats
-    -#  %li
-    -#    %a
-    -#      -#%span.glyphicon.glyphicon-signal
-    -#      Trending
-
-    %div{"ng-include" => "'app/teams/_team_table.html'"}
+    .panel.panel-default
+      .panel-body
+        %div{"ng-include" => "'app/teams/_team_table.html'"}

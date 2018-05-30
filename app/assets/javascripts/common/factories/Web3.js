@@ -35,12 +35,7 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
     };
 
     Web3Utils.getAccounts = function() {
-        web3.eth.getAccounts().then(function(accounts){
-            $log.info('ETH Accounts: ' + accounts);
-            return accounts;
-        }).catch(function(error){
-            $log.error('Error getting accounts from provider ' + error);
-        });
+        return web3.eth.getAccounts()
     };
 
     Web3Utils.getEthBalance = function(address) {
@@ -122,7 +117,6 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
             deferred.reject(new Error(errorMsg));
         });
         return deferred.promise;
-
     };
 
     return Web3Utils;
