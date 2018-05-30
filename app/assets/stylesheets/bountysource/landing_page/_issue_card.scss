@@ -86,14 +86,15 @@
 		right: -0.2px; // cover gap between bounty and issue-body background
 		bottom: 0;
 
-		background-color: #485f64;
-		color: white;
+		background-color: #dce0ec;
+		color: #323c47;
 
 		min-width: 20%;
 		min-height: 3em;
+		border-top-left-radius: 6px;*
 		border-bottom-right-radius: 6px;
 
-		font-size: 18px;
+		font-size: 16px;
 		padding: 0.2em 0;
 		display: flex;
 		flex-direction: column;
