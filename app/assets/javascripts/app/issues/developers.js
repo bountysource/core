@@ -1,4 +1,4 @@
-angular.module('app').controller('IssueDevelopersController', function ($scope, $pageTitle, $api, $route, $routeParams, $location, $window, $analytics, $filter, $currency, $q, Issue, BountyClaim, Solution, DeveloperGoal, Bounties) {
+angular.module('app').controller('IssueDevelopersController', function ($scope, $pageTitle, $api, $route, $routeParams, $location, $window, $analytics, $filter, $q, Issue, BountyClaim, Solution, DeveloperGoal, Bounties) {
 
   // shortcut
   var issue_id = parseInt($routeParams.id);
@@ -238,16 +238,6 @@ angular.module('app').controller('IssueDevelopersController', function ($scope, 
       page_data.refresh_issue(); // TODO: only really needed when clicking accept as it might trigger a payout
       page_data.refresh_bounty_claims();
     }
-
-    // post_bounty: function(amount) {
-    //   $cart.addBounty({
-    //     amount: amount,
-    //     currency: amount ? 'USD' : $currency.value,
-    //     issue_id: issue_id
-    //   }).then(function () {
-    //     $location.url("/cart");
-    //   });
-    // }
   };
 
 

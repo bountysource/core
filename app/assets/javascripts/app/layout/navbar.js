@@ -1,4 +1,4 @@
-angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieJar, $currency, Team) {
+angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieJar, Team) {
 
   // Load person's teams for dropdown. Assign the teams to the current_person
   $scope.$watch('current_person', function(current_person) {
@@ -16,8 +16,6 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
     $api.signout();
   };
 
-  // Expose the currency service
-  $scope.$currency = $currency;
 
   $scope.openDevToolsModal = function() {
     $modal.open({

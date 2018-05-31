@@ -1,4 +1,4 @@
-angular.module('directives').directive('teamView', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $currency, $window, Tag) {
+angular.module('directives').directive('teamView', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $window, Tag) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -190,7 +190,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             if (fundraiser) {
               return $cart.addPledge({
                 amount: amount,
-                currency: $currency.value,
+                currency: 'USD',
                 fundraiser_id: fundraiser.id,
                 reward_id: reward_id
               }).then(function () {
@@ -202,14 +202,8 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       }
 
       scope.pledgeRedirect = function(amount, reward_id) {
-        // track event
-        $analytics.pledgeStart({ amount: amount, type: 'buttons' });
-
-        // Button values are hardocded with USD. Conver if needed
-        var converted = $currency.convert($window.parseFloat(amount), 'USD', $currency.value);
-
         // Add pledge and redirect to cart
-        addPledge(converted, reward_id);
+        addPledge($window.parseFloat(amount), reward_id);
       };
 
       scope.pledgeWithRewardRedirect = function(reward) {

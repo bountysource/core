@@ -2,8 +2,7 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
   $routeProvider.when('/orders', angular.extend({
     templateUrl: 'app/orders/index.html',
     controller: 'TransactionsController',
-    resolve: { person: personResolver },
-    trackEvent: 'View My Transactions'
+    resolve: { person: personResolver }
   }, defaultRouteOptions));
 }).controller('TransactionsController', function($scope, $routeParams, $api) {
   $api.transaction_activity().then(function(transactions) {

@@ -1,4 +1,4 @@
-angular.module('directives').directive('teamAboutPanel', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $currency, $window, Tag) {
+angular.module('directives').directive('teamAboutPanel', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $window, Tag) {
   return {
     restrict: 'EAC',
     replace: true,
