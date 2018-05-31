@@ -154,7 +154,8 @@ class ShoppingCart < ApplicationRecord
   # @param upsells - includeu upsells in the calculation
 
   def calculate_item_gross(attrs, upsells: true)
-    attrs["total"].to_f || attrs["amount"].to_f
+    total = attrs["total"].to_f
+    total.zero? ? attrs["amount"].to_f : total
   end
 
   # Sum liability of items
@@ -176,7 +177,8 @@ class ShoppingCart < ApplicationRecord
   end
 
   def amount_from_attributes(attrs)
-    attrs[:total].to_f || attrs[:amount].to_f
+    total = attrs["total"].to_f
+    total.zero? ? attrs["amount"].to_f : total
   end
 
   def item_from_attributes(attrs)

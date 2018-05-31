@@ -17,7 +17,8 @@ angular.module('app').config(function($stateProvider) {
           amount: parseFloat($stateParams.amount),
           team_id: $scope.team.id,
           item_type: 'team_payin',
-          currency: 'USD'
+          currency: 'USD',
+          total: parseFloat($stateParams.amount)
         };
 
         if ($stateParams.display_as == 'me') {

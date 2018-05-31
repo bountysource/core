@@ -186,17 +186,3 @@ angular.module('app').service('$analytics', function($location, $log, $window, $
   };
 
 });
-
-/*
-* Fire Mixpanel events based on route
-* */
-angular.module('app')
-  .run(function($rootScope, $location, $analytics) {
-    $rootScope.$on('$routeChangeSuccess', function(routeChangeEvent, currentRoute) {
-      if (!currentRoute.$$route) {
-        $analytics.track('View Not Found', currentRoute.params);
-      } else if ((currentRoute.$$route.trackEvent !== false) && (!currentRoute.$$route.redirectTo)) {
-        $analytics.track(currentRoute.$$route.trackEvent || 'View Other', currentRoute.params);
-      }
-    });
-  });
