@@ -2,8 +2,7 @@
 .container_top_margin { margin-top: 20px; }
 
 .navbar-bountysource { 
-  margin-bottom: 0; 
-  box-shadow: 0 2px 15px 0 #0000001f;
+  border-color: #fff;
 }
 
 .navbar-brand {
@@ -98,4 +97,14 @@ button.navbar-toggle {
 
 .navbar-user-dropdown img {
   width: 45px;
+}
+
+.body-scrolled.navbar-bountysource{
+  position: fixed;
+  height: 76px;
+  background-color: rgba(255, 255, 255, 0.98);
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+  -webkit-transition: margin-left .5s, background-color .5s;
+  transition: margin-left .5s, background-color .5s;
 }
