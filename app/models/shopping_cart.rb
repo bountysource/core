@@ -154,8 +154,20 @@ class ShoppingCart < ApplicationRecord
   # @param upsells - includeu upsells in the calculation
 
   def calculate_item_gross(attrs, upsells: true)
+    item = item_from_attributes(attrs)
+    return 0 unless item
+
     total = attrs["total"].to_f
-    total.zero? ? attrs["amount"].to_f : total
+    amount = total.zero? ? attrs["amount"].to_f : total
+
+    if upsells
+      if item.is_a?(Bounty) && item.tweet?
+        # TODO remove evil magic number. better yet, change the entire upsell system
+        amount += 20
+      end
+    end
+
+    Money.new(amount.to_f * 100, 'USD').to_f
   end
 
   # Sum liability of items
