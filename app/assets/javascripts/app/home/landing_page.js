@@ -13,9 +13,9 @@ angular.module('app').controller('LandingPageController', function ($scope, $api
 
         $scope.close = function() {
           $modalInstance.close();
-        }
+        };
       }
-    })
+    });
   };
 
   // Recent Activity

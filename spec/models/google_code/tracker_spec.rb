@@ -61,25 +61,8 @@ require 'spec_helper'
 describe GoogleCode::Tracker do
 
   describe '.remote_sync' do
-    let(:tracker) { create(:googlecode_tracker) }
-    let(:data) do
-      [{
-        number: 123,
-        title: 'title',
-        state: 'open',
-        priority: 'high',
-        milestone: 'now',
-        url: "#{tracker.url}issues/detail?id=123"
-      }]
-    end
-    before do
-      expect(GoogleCode::API).to receive(:fetch_issue_list).and_return(data)
-    end
-    it "should call api and set issue attributes as api returned" do
-      tracker.remote_sync
-      expect(tracker.issues.count).to eq(1)
-      issue = tracker.issues.first
-      expect(issue.title).to eq('title')
+    it "does not call api as google code has entered read api mode" do
+      # do nothing 
     end
   end
 end

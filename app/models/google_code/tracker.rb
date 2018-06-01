@@ -72,5 +72,6 @@ class GoogleCode::Tracker < ::Tracker
 
   def remote_sync(options={})
     # All projects in GoogleCode entered read-only mode. So there will be no update
+    true
   end
 end

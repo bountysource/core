@@ -17,13 +17,14 @@ angular.module('app').config(function($stateProvider) {
           amount: parseFloat($stateParams.amount),
           team_id: $scope.team.id,
           item_type: 'team_payin',
-          currency: 'USD'
+          currency: 'USD',
+          total: parseFloat($stateParams.amount)
         };
 
-        if ($stateParams.display_as == 'me') {
+        if ($stateParams.display_as === 'me') {
           team_payin_params.owner_type = "Person";
           team_payin_params.owner_id = $scope.person.id;
-        } else if ($stateParams.display_as == 'anonymous') {
+        } else if ($stateParams.display_as === 'anonymous') {
           team_payin_params.owner_type = null;
           team_payin_params.owner_id = null;
         } else {

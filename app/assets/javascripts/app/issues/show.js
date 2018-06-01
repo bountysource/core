@@ -1,4 +1,4 @@
-angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal, $interval) {
+angular.module('app').controller('IssueShowController', function ($scope, $api, $routeParams, $window, $location, $pageTitle, $anchorScroll, $analytics, Timeline, BountyClaim, Web3Utils, Issue, $modal, $interval, $log) {
   var issue_id = parseInt($routeParams.id);
 
   // load core issue object
@@ -30,25 +30,25 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     issue_id: issue_id,
     bounty_expiration: null,
     currency: 'USD'
-  }
+  };
 
-  $scope.checkout = {}
+  $scope.checkout = {};
 
   // METAMASK WALLET UPDATE BEGIN
   $scope.metamaskAccount;
   $scope.metamaskAccountInterval;
 
   $scope.updateMetamaskAccount = function() {
-    if ( angular.isDefined($scope.metamaskAccountInterval) ) return;
+    if ( angular.isDefined($scope.metamaskAccountInterval) ){ return; }
 
     $scope.metamaskAccountInterval = $interval(function(){
       Web3Utils.getAccounts().then(function(accounts){
         if(accounts[0] != null){
           $scope.metamaskAccount = accounts[0];  
         }
-      })  
-    }, 1000)
-  }
+      });
+    }, 1000);
+  };
 
   $scope.stopMetamaskUpdate = function() {
     if (angular.isDefined($scope.metamaskAccountInterval)) {
@@ -67,8 +67,8 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
   $scope.wallets;
   $api.v2.getWallets().then(function(response){
-    $scope.wallets = response.data
-  })
+    $scope.wallets = response.data;
+  });
 
   $scope.setOwner = function (type, owner) {
     switch (type) {
@@ -112,26 +112,26 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
         $location.url('/signin');
       }
     });
-  }
+  };
 
   $scope.goToSignInPage = function(){
     $api.set_post_auth_url($location.url());
     $location.url("/signin");    
-  }
+  };
 
   $scope.goToProfilePage = function(){
     $location.url("/settings/accounts");    
-  }
+  };
 
   $scope.setUsdAmount = function(amount){
     $scope.usdCart.amount = amount;
-  }
+  };
 
   $scope.calculateCartTotal = function () {
     if ($scope.usdCart.tweet) {
-      $scope.usdCart.total = $scope.usdCart.amount + 20
+      $scope.usdCart.total = $scope.usdCart.amount + 20;
     } else {
-      $scope.usdCart.total = $scope.usdCart.amount
+      $scope.usdCart.total = $scope.usdCart.amount;
     }
     return $scope.usdCart.total;
   };
@@ -162,42 +162,42 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
   $scope.updateUponExpiration = function() {
     if ($scope.usdCart.bounty_expiration === null) { $scope.usdCart.upon_expiration = null; }
-  }
+  };
 
   $scope.canCheckout = function () {
-    return $scope.usdCart.amount >= 5 && $scope.checkout.checkout_method && $scope.bountyExpirationValid()
+    return $scope.usdCart.amount >= 5 && $scope.checkout.checkout_method && $scope.bountyExpirationValid();
   };
 
   $scope.canPostBounty = function () {
-    return $scope.cryptoBountyTotal() > 5
-  }
+    return $scope.cryptoBountyTotal() > 5;
+  };
 
   $scope.cryptoBountyTotal = function(){
     if($scope.isSelectedCrypto('BTC') || !$scope.bounty.token || !$scope.bounty.amount || $scope.currencies === undefined){
-      return false
+      return false;
     }
-    var currency = $scope.currencies.find(function(c){ return c.symbol === $scope.bounty.token })
-    var amountInFloat = parseFloat($scope.bounty.amount)
-    var total = currency.value * amountInFloat
-    return total
-  }
+    var currency = $scope.currencies.find(function(c){ return c.symbol === $scope.bounty.token; });
+    var amountInFloat = parseFloat($scope.bounty.amount);
+    var total = currency.value * amountInFloat;
+    return total;
+  };
 
   $scope.isMiscCrypto = function(crypto){
     return !['ETH', 'BTC', 'CAN'].includes(crypto);
-  }
+  };
 
   $scope.setCrypto = function(crypto){
     $scope.bounty.amount = 0;
     $scope.bounty.token = crypto;
-  }
+  };
 
   $scope.isSelectedCrypto = function(crypto){
     return $scope.bounty.token === crypto; 
-  }
+  };
 
   $scope.setAmount = function(amount){
     $scope.bounty.amount = amount;
-  }
+  };
 
   $scope.oneAtATime = true;
   $scope.bioShow = false;
@@ -209,12 +209,12 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   };
 
   $scope.log = function(message){
-    console.log(message)
-  }
+    console.log(message);
+  };
 
   $api.v2.currencies().then(function(currencies){
     $scope.currencies = currencies.data;
-  })
+  });
   
   $scope.bounty = {
     token: 'ETH',
@@ -222,8 +222,8 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   };
 
   $api.crypto_bounties_get($routeParams.id).then(function(cryptoBounties){
-    $scope.cryptoBounties = cryptoBounties
-  })
+    $scope.cryptoBounties = cryptoBounties;
+  });
 
   $scope.active_tab = function(name) {
     if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
@@ -233,21 +233,21 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
   $scope.generate_address = function(issue_id){
     if(($scope.issue.issue_address || {} ).public_address === undefined){
       $api.issue_address_create(issue_id).then(function(issue){
-        $scope.issue = issue
+        $scope.issue = issue;
         if(Web3Utils.isMetaMask() && $scope.isSelectedCrypto('ETH')) {
-          $scope.openMetamaskModal()
+          $scope.openMetamaskModal();
         } else {
-          $scope.openQRModal()
+          $scope.openQRModal();
         }
-      })
+      });
     } else {
       if(Web3Utils.isMetaMask() && $scope.isSelectedCrypto('ETH')) {
-        $scope.openMetamaskModal()
+        $scope.openMetamaskModal();
       } else {
-        $scope.openQRModal()
+        $scope.openQRModal();
       }
     }
-  }
+  };
 
   $scope.openHunterBox = function() {
     if ($scope.current_person) {
@@ -275,15 +275,14 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
       $api.set_post_auth_url($location.url());
       $location.url("/signin");
     }
-    
-  }
+  };
 
   $scope.openQRModal = function(){
     $modal.open({
       templateUrl: 'common/templates/issueAddressQrModal.html',
       backdrop: true,
       controller: function($scope, $interval, $modalInstance, bounty, issue, cryptoBounties, Web3Utils) {
-        $scope.timeLoaded = Date.now()
+        $scope.timeLoaded = Date.now();
         $scope.bounty = bounty;
         $scope.issue = issue;
         $scope.cryptoBounties = cryptoBounties;
@@ -297,10 +296,10 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
           
           $scope.bountyPoller = $interval(function(){
             $api.crypto_bounties_get($routeParams.id).then(function(cryptoBounties){
-              $scope.cryptoBounties = cryptoBounties
-            })  
-          }, 10000)
-        }
+              $scope.cryptoBounties = cryptoBounties;
+            });
+          }, 10000);
+        };
 
         $scope.stopPolling = function() {
           if (angular.isDefined($scope.bountyPoller)) {
@@ -309,21 +308,22 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
           }
         };
 
-        $scope.startPolling()
+        $scope.startPolling();
 
         $scope.$on('$destroy', function() {
           // Make sure that the interval is destroyed too
           $scope.stopPolling();
         });
 
-        $scope.newBounties = function() {
-          return $scope.cryptoBounties.filter(getNewBounties)
-        }
-        
         // helper functions
         $scope.getNewBounties =  function(bounty) {
           return (new Date(bounty.created_at)) > $scope.timeLoaded;
-        }
+        };
+
+        $scope.newBounties = function() {
+          return $scope.cryptoBounties.filter($scope.getNewBounties);
+        };
+        
       },
       resolve: {
         bounty: function () {
@@ -339,9 +339,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     }).result.finally(function(){
       $window.location.reload();
     });
-  }
-
-
+  };
 
   $scope.openMetamaskModal = function(){
     $modal.open({
@@ -352,17 +350,17 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
         $scope.issue = issue;
         $scope.closeModal = function() {
           $modalInstance.close();
-          openQRModal()
+          openQRModal();
         };
 
         $scope.sendThroughMetaMask = function(){
-          Web3Utils.sendTransaction($scope.bounty.amount, $scope.issue.issue_address.public_address)
-          $scope.closeModal()
-        }
+          Web3Utils.sendTransaction($scope.bounty.amount, $scope.issue.issue_address.public_address);
+          $scope.closeModal();
+        };
 
         $scope.showQRAddress = function(){
-          $scope.closeModal()
-        }
+          $scope.closeModal();
+        };
       },
       resolve: {
         bounty: function () {
@@ -375,9 +373,8 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
           return $scope.openQRModal;
         }
       }
-
     });
-  }
+  };
 
   // Fetch teams for person to load Team account checkout method radios
   $scope.$watch('current_person', function(person) {

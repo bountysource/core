@@ -405,21 +405,10 @@ describe ShoppingCart do
     let(:person) { create(:person) }
     let(:cart) { ShoppingCart.new }
 
-    let(:generate_id) { -> { ShoppingCart.generate_uid } }
-
-    it 'should generate unique ids' do
-      ids = 1000.times.map { generate_id[] }
-      expect(ids.count).to eq(ids.uniq.count)
-    end
 
     it 'should be valid without person' do
       expect(ShoppingCart.new).to be_valid
     end
-
-    it 'should have uid on create' do
-      expect(ShoppingCart.create.uid).not_to be_blank
-    end
-
   end
 
   describe 'merge' do
@@ -610,29 +599,6 @@ describe ShoppingCart do
         cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: person
         expect(cart).to eq(person_cart)
       end
-
-      it 'should merge anonymous cart into person cart' do
-        pledge = build(:pledge, amount: 150)
-        anonymous_cart.add_item ShoppingCart.item_to_attributes pledge
-
-        expect(anonymous_cart).not_to be_empty
-        expect(person_cart).to be_empty
-
-        cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: person
-        expect(cart).to eq(person_cart)
-        expect(cart).not_to be_empty
-
-        expect { anonymous_cart.reload }.to raise_exception ActiveRecord::RecordNotFound
-      end
-
-      it 'should not merge anonymous cart if same as person cart' do
-        expect(person_cart).to receive(:merge!).never
-        cart = ShoppingCart.find_or_create uid: person_cart.uid, person: person
-
-        expect { anonymous_cart.reload }.not_to raise_error
-        expect { person_cart.reload }.not_to raise_error
-      end
-
     end
 
     describe 'person does not have cart and no anonymous cart created' do
@@ -658,48 +624,6 @@ describe ShoppingCart do
 
     end
 
-  end
-
-  describe '#calculate_gross with multiple currencies' do
-    let(:pledge) { build(:pledge) }
-    let(:item_attributes) { ShoppingCart.item_to_attributes(pledge) }
-
-    let(:cart) { create(:shopping_cart) }
-    let(:amount) { 100 }
-
-    before do
-      allow(Currency).to receive(:btc_rate) { 900.0 }
-      allow(Currency).to receive(:msc_rate) { 800.0 }
-      allow(Currency).to receive(:xrp_rate) { 700.0 }
-    end
-
-    it 'should stay in USD' do
-      cart.add_item item_attributes.merge(amount: amount, currency: 'USD')
-      expect(cart.calculate_gross).to eq(amount)
-    end
-
-    it 'should convert BTC to USD' do
-      cart.add_item item_attributes.merge(amount: amount, currency: 'BTC')
-      expect(cart.calculate_gross).to eq(amount * Currency.btc_rate)
-    end
-
-    it 'should convert MSC to USD' do
-      cart.add_item item_attributes.merge(amount: amount, currency: 'MSC')
-      expect(cart.calculate_gross).to eq(amount * Currency.msc_rate)
-    end
-
-    it 'should convert XRP to USD' do
-      cart.add_item item_attributes.merge(amount: amount, currency: 'XRP')
-      expect(cart.calculate_gross).to eq(amount * Currency.xrp_rate)
-    end
-
-    it 'should convert all currencies into USD' do
-      cart.add_item item_attributes.merge(amount: amount, currency: 'USD')
-      cart.add_item item_attributes.merge(amount: amount, currency: 'BTC')
-      cart.add_item item_attributes.merge(amount: amount, currency: 'MSC')
-      cart.add_item item_attributes.merge(amount: amount, currency: 'XRP')
-      expect(cart.calculate_gross).to eq(amount + (amount * Currency.btc_rate) + (amount * Currency.msc_rate) + (amount * Currency.xrp_rate))
-    end
   end
 
   describe '#calculate_gross' do

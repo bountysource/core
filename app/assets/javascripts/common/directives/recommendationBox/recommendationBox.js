@@ -52,17 +52,6 @@ angular.module('directives').directive('recommendationBox', function ($api, $loc
 
         add_bounty_to_cart: function(amount) {
           recbox.record('add_to_cart:' + amount);
-          return $cart.addBounty({
-            amount: amount,
-            currency: 'USD',
-            issue_id: scope.recommendation.issue.id
-          }).then(function () {
-            if ($location.url() === "/cart") {
-              recbox.show_next();
-            } else {
-              $location.url("/cart");
-            }
-          });
         }
       };
 

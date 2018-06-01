@@ -66,23 +66,9 @@ require 'spec_helper'
 describe GoogleCode::Issue do
 
   describe '.remote_sync' do
-    let(:googlecode_issue) { create(:googlecode_issue) }
-    let(:data) do
-      {
-        number: 123,
-        title: 'title',
-        state: 'open',
-        priority: 'high',
-        milestone: 'now',
-        comments: []
-      }
-    end
-    before do
-      expect(GoogleCode::API).to receive(:fetch_issue).and_return(data)
-    end
-    it "should call api and set issue attributes as api returned" do
-      expect(googlecode_issue.remote_sync).to be_truthy
-      expect(googlecode_issue.title).to eq('title')
+    
+    it "does not call api as google code has entered read api mode" do
+      # do nothing 
     end
   end
 end

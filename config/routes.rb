@@ -454,13 +454,6 @@ Api::Application.routes.draw do
             collection do
               get :query_v3, to: 'issues#query_v3'
             end
-
-            resource :request_for_proposals, only: [:show, :create, :update, :destroy]
-            resources :proposals, only: [:create, :index, :destroy, :show] do
-              member do
-                post :accept, :reject
-              end
-            end
           end
           resources :trackers, only: [:index, :show]
           resources :comments, only: [:index, :show]

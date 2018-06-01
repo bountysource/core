@@ -1,4 +1,4 @@
-angular.module('directives').directive('teamAboutPanel', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $currency, $window, Tag) {
+angular.module('directives').directive('teamAboutPanel', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $window, Tag) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -16,7 +16,7 @@ angular.module('directives').directive('teamAboutPanel', function($rootScope, $l
             scope.topBackers = angular.copy(response.data);
           });
         }
-      })
+      });
 
       scope.bountyHunterOptIn = function() {
         if ($rootScope.current_person) {

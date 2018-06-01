@@ -8,7 +8,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   $scope.facebook_link = $api.signin_url_for('facebook');
   $scope.addNew = false;
   $scope.wallets = $scope.current_person.wallets;
-  $scope.isCollapsed = $scope.wallets.length == 0;
+  $scope.isCollapsed = $scope.wallets.length === 0;
 
   $scope.form_data = {};
   $scope.change_password = function() {
@@ -56,7 +56,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
   $scope.add_addr = function(){
     $scope.success = null;
     $scope.error = null;
-    var walletParams = { person_id: $scope.current_person.id, eth_addr: $scope.form_data.eth_addr }
+    var walletParams = { person_id: $scope.current_person.id, eth_addr: $scope.form_data.eth_addr };
     $api.v2.wallets(walletParams)
       .then(function (response){ 
         if (response.success) {
