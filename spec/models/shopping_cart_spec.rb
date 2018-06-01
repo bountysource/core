@@ -599,20 +599,6 @@ describe ShoppingCart do
         cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: person
         expect(cart).to eq(person_cart)
       end
-
-      it 'should merge anonymous cart into person cart' do
-        pledge = build(:pledge, amount: 150)
-        anonymous_cart.add_item ShoppingCart.item_to_attributes pledge
-
-        expect(anonymous_cart).not_to be_empty
-        expect(person_cart).to be_empty
-
-        cart = ShoppingCart.find_or_create uid: anonymous_cart.uid, person: person
-        expect(cart).to eq(person_cart)
-        expect(cart).not_to be_empty
-
-        expect { anonymous_cart.reload }.to raise_exception ActiveRecord::RecordNotFound
-      end
     end
 
     describe 'person does not have cart and no anonymous cart created' do
