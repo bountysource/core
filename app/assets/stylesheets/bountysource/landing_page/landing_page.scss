@@ -15,7 +15,15 @@
 
 	.search-section {
 		padding-top: 4em;
-		padding-left: 50px;
+	}
+
+
+
+}
+
+@media (min-width: 768px){
+	#landing-page .search-section {
+    padding-left: 50px;
 		padding-right: 0;
 	}
 }
