@@ -35,7 +35,7 @@ angular.module('factories').factory('Web3Utils', function ($window, $log, $env, 
     };
 
     Web3Utils.getAccounts = function() {
-        return web3.eth.getAccounts()
+        return web3.eth.getAccounts();
     };
 
     Web3Utils.getEthBalance = function(address) {

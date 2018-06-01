@@ -9,7 +9,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   $scope.selectBountyType = function(typeObj){
     $scope.selectedBountyType = typeObj;
     $scope.form_data.category = typeObj.value;
-    $scope.submit_query()
+    $scope.submit_query();
   };
 
   $scope.selectCategory = function() {
@@ -21,9 +21,9 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
         }
       }
     } else {
-      $scope.selectedBountyType = $scope.bountyTypes[0]
+      $scope.selectedBountyType = $scope.bountyTypes[0];
     }
-  }
+  };
 
   //sets drop-down sorting options
   $scope.sort_options = {
@@ -48,15 +48,15 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     } else {
       $scope.selectedSort = $scope.sort_options['option1'];
     }
-  }
+  };
 
   // update order and direction when options change
   $scope.updateSort = function(selectedSort) {
-    $scope.selectedSort = selectedSort
+    $scope.selectedSort = selectedSort;
     $scope.form_data.order = selectedSort.value;
     $scope.form_data.direction = selectedSort.direction;
-    $scope.submit_query()
-  }
+    $scope.submit_query();
+  };
 
   // toggle advanced search collapse
   $scope.toggle_advanced_search = function () {
@@ -67,7 +67,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   $scope.select_form = {};
 
   $scope.do_tracker_typeahead = function($viewValue) {
-    return $api.tracker_typeahead($viewValue)
+    return $api.tracker_typeahead($viewValue);
   };
 
   $scope.selectTracker = function($item, $model, $label){
@@ -76,12 +76,14 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
       $scope.form_data.trackers.push($item.name);
     }
     $scope.select_form.trackers_input = "";
-  }
+  };
   
   //removes trackers from trackers_loaded array
   $scope.remove_tracker = function(tracker) {
-    var index = $scope.form_data.trackers.indexOf(tracker)
-    if (index !== -1) $scope.form_data.trackers.splice(index, 1);
+    var index = $scope.form_data.trackers.indexOf(tracker);
+    if (index !== -1){
+      $scope.form_data.trackers.splice(index, 1);
+    }
   };
 
   // language search
@@ -89,7 +91,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     $api.languages_get().then(function(languages) {
       $scope.select_form.all_languages = languages;
     });
-  }
+  };
 
   $scope.selectLanguage = function($item, $model, $label){
     $scope.form_data.languages = $scope.form_data.languages || [];
@@ -97,12 +99,14 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
       $scope.form_data.languages.push($item.name);
     }
     $scope.select_form.languages_input = "";
-  }
+  };
 
   //removes languages from selected_languages array
   $scope.remove_language = function(language) {
-    var index = $scope.form_data.languages.indexOf(language)
-    if (index !== -1) $scope.form_data.languages.splice(index, 1);
+    var index = $scope.form_data.languages.indexOf(language);
+    if (index !== -1){ 
+      $scope.form_data.languages.splice(index, 1); 
+    }
   };
 
   $scope.submit_query = function(page) {
@@ -206,7 +210,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     $scope.selectSort();
     $scope.selectCategory();
     $scope.submit_query();
-  }
+  };
 
   $scope.initiate();
 });

@@ -185,20 +185,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       // **************************
 
       function addPledge (amount, reward_id) {
-        scope.$watch('activeFundraiser', function (fundraiser) {
-          if (angular.isObject(fundraiser)) {
-            if (fundraiser) {
-              return $cart.addPledge({
-                amount: amount,
-                currency: 'USD',
-                fundraiser_id: fundraiser.id,
-                reward_id: reward_id
-              }).then(function () {
-                $location.url('/cart');
-              });
-            }
-          }
-        });
+        
       }
 
       scope.pledgeRedirect = function(amount, reward_id) {

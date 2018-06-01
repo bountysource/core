@@ -11,7 +11,7 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
         });
       }
     }
-  }, defaultRouteOptions))
+  }, defaultRouteOptions));
 
   $routeProvider.when('/fees', angular.extend({
     templateUrl: 'app/about/fees.html',

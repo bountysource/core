@@ -16,7 +16,7 @@ angular.module('directives').directive('teamAboutPanel', function($rootScope, $l
             scope.topBackers = angular.copy(response.data);
           });
         }
-      })
+      });
 
       scope.bountyHunterOptIn = function() {
         if ($rootScope.current_person) {
