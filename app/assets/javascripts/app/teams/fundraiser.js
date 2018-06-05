@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('TeamFundraiserController', function($scope, $window, $location, $cart, $routeParams, $route, $api) {
+  .controller('TeamFundraiserController', function($scope, $window, $location, $routeParams, $route, $api) {
     if ($routeParams.id === 'crystal-lang') {
       $window.location.replace('https://salt.bountysource.com/teams/crystal-lang');
       return;
@@ -46,7 +46,6 @@ angular.module('app')
           var payload = angular.copy($scope.pledge);
           payload.fundraiser_id = fundraiser.id;
 
-          $cart.addPledge(payload);
         };
       }
     });
