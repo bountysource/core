@@ -84,5 +84,4 @@ class SupportLevel < ApplicationRecord
   def canceled?
     canceled_at && (status == 'canceled')
   end
-
 end

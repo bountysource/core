@@ -17,7 +17,8 @@ class Api::V2::SupportOfferingRewardsController < Api::BaseController
     @team = @support_offering_reward.support_offering.team
 
     if is_team_admin?
-      if @support_offering_reward.update(support_offering_reward_params)
+      @support_offering_reward.assign_attributes(support_offering_reward_params)
+      if @support_offering_reward.save(context: :update_rewards_attributes)
         head :no_content
       else
         render json: { errors: @support_offering_reward.errors.full_messages }, status: :bad_request
