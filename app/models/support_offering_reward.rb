@@ -24,7 +24,7 @@ class SupportOfferingReward < ApplicationRecord
   has_many :support_levels, foreign_key: :reward_id
 
   validates :amount, :numericality => { :greater_than_or_equal_to => 0 }
-  validate :non_active
+  validate :non_active, on: :update_rewards_attributes
   validates :title, presence: true
 
   def mark_as_deleted!

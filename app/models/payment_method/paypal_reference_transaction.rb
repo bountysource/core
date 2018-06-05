@@ -90,7 +90,6 @@ protected
       'SIGNATURE' => Api::Application.config.paypal[:api_signature],
       'VERSION' => 86
     )
-
     response = HTTParty.get(Api::Application.config.paypal[:api_url] + '?' + params.to_param).response.body
     Rack::Utils.parse_query(response)
   end
