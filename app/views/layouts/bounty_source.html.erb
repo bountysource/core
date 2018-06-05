@@ -42,10 +42,11 @@
   </noscript>
 
   <div id="wrap">
-    <div id="navbar" style="margin-bottom: 76px;">
+    <div id="navbar" >
       <ng-include src="'app/layout/navbar.html'"></ng-include>
     </div>
     <!-- <div class="container"><recommendation-box></recommendation-box></div> -->
+    <div id="navbar-spacer" style="height: 76px;"></div>
     <div ng-class="{ container: global_container, container_top_margin: global_container }" ng-view=""></div>
   </div>
 
