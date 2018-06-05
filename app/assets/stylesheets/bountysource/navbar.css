@@ -101,7 +101,6 @@ button.navbar-toggle {
 
 .body-scrolled.navbar-bountysource{
   position: fixed;
-  height: 76px;
   background-color: rgba(255, 255, 255, 0.98);
   -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);

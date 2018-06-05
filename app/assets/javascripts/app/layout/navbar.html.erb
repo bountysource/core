@@ -139,15 +139,16 @@
 
     </div>
   </div>
-</div>
+  <!-- redundant ng-hide for browsers that doesn't support the widget -->
+  <div ng-controller="BancorWidgetController" id="bancor-wc-container" ng-show="visible" class="ng-hide">
+    <div id="bancor-wc">
+    </div>
+    <div class="widget-close-long" ng-click="close()">
+      <strong>Close</strong>
+    </div>
+  </div>
 
 
-<!-- redundant ng-hide for browsers that doesn't support the widget -->
-<div ng-controller="BancorWidgetController" id="bancor-wc-container" ng-show="visible" class="ng-hide">
-  <div id="bancor-wc">
-  </div>
-  <div class="widget-close-long" ng-click="close()">
-    <strong>Close</strong>
-  </div>
 </div>
+
 
