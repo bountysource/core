@@ -17,9 +17,9 @@ class QuickbooksTransaction < QuickbooksBase
       method: :post,
       post_body: post_body_from_cash_out(cash_out)
     )
+    logger.error "RESPONSE #{response.inspect}"
     raise "Expected Purchase" unless response['Purchase']
 
-    logger.error "RESPONSE #{response.inspect}"
     new.tap do |txn|
       txn.id = response['Purchase']['Id']
       txn.save!
