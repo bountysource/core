@@ -14,7 +14,7 @@
 # Indexes
 #
 #  index_issue_addresses_on_issue_id        (issue_id)
-#  index_issue_addresses_on_public_address  (public_address)
+#  index_issue_addresses_on_public_address  (public_address) UNIQUE
 #
 
 class IssueAddress < ApplicationRecord
