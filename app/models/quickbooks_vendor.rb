@@ -2,13 +2,14 @@
 #
 # Table name: quickbooks_vendors
 #
-#  id         :integer          not null
+#  id         :integer          not null, primary key
 #  name       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class QuickbooksVendor < QuickbooksBase
+  self.primary_key = :id
   belongs_to :person
   has_many :cash_outs
 
