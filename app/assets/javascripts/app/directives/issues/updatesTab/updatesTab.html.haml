@@ -73,9 +73,6 @@
                       Confirm Rejection
                     %a.btn.btn-default{ "ng-click"=>"event.show_reject_form=false" } Cancel
 
-
-
-
               %div{ "ng-if"=>"event.type=='developer_goal'"}
                 %h5.mt-3{ "style" => "margin-top: 0" }
                   %profile-name{ "owner"=>"event.owner" }
@@ -87,9 +84,6 @@
                 %p
                   %a.btn.btn-light-blue{"ng-if"=>"event.amount > issue.bounty_total", "ng-click" => "backer_form.post_bounty(event.amount-issue.bounty_total)" } Post Bounty
                   %a.btn.btn-light-blue{"ng-if"=>"event.amount <= issue.bounty_total", "ng-click" => "backer_form.post_bounty()" } Increase Bounty
-
-
-
 
               %div{ "ng-if"=>"event.type=='solution'" }
                 %h5.mt-3{ "style" => "margin-top: 0" }
@@ -120,12 +114,6 @@
                     %a.btn.btn-gunmetal.btn-small-radius{ "ng-href" => "{{event.url}}", "target" => "_blank" }
                       %span.glyphicon.glyphicon-new-window
                       View Code
-
-
-
-
-
-
 
               %div{ "ng-if"=>"event.type=='bounty_claim'"}
 
@@ -186,7 +174,7 @@
                         %span.glyphicon.glyphicon-new-window
                         View Code
 
-                %div.alert{ "ng-if"=>"issue.can_respond_to_claims && event.in_dispute_period", "style"=>"margin-top:14px", "ng-class"=>"{'alert-info': event.my_response.value !== false, 'alert-danger': event.my_response.value === false }" }
+                %div{ "ng-if"=>"issue.can_respond_to_claims && event.in_dispute_period", "style"=>"margin-top:14px" }
 
                   %div{ "ng-if"=>"!event.my_form_data" }
 
