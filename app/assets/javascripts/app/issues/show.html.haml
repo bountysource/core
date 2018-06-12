@@ -119,6 +119,9 @@
               .panel-body
                 %div.text-center
                   %div{"ng-include" => "'app/issues/templates/crypto_form_with_qr.html'"}
+        
+        %div{"ng-show" => "!issue.team || !issue.team.bounties_disabled" }
+          %div{ "ng-include" => "'app/issues/_show_developer_actions.html'"}
 
         %team-about-panel{"ng-show" => "team.id"}
 

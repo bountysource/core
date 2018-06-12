@@ -19,10 +19,10 @@
           <p ng-if="team.bio">{{team.bio}}</p>
 
           <div>
-            <button type="button" class="btn btn-marigold-salmon p-3 pl-5 pr-5" ng-click="bountyHunterOptIn()" ng-show="!team.bounties_disabled && !team.is_bounty_hunter"><span class="glyphicon glyphicon-star"></span> Become a Bounty Hunter</button>
+            <button type="button" class="btn btn-light-blue btn-outline p-3 pl-5 pr-5" ng-click="bountyHunterOptIn()" ng-show="!team.bounties_disabled && !team.is_bounty_hunter"><span class="glyphicon glyphicon-star"></span> Become a Bounty Hunter</button>
 
             <span class="dropdown" ng-show="!team.bounties_disabled && team.is_bounty_hunter">
-              <button class="btn btn-cerulean-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <button class="btn btn-light-blue btn-outline dropdown-toggle p-3 pl-5 pr-5" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span class="glyphicon glyphicon-ok"></span> You're a Bounty Hunter
                 <span class="caret"></span>
               </button>
