@@ -16,6 +16,7 @@ env:
     - SCRIPT_CMD="./bin/rake jshint"
   global:
     - DATABASE_URL=postgres://postgres@localhost/bountysource_test
+    - GITLAB_PERSONAL_ACCESS_TOKEN=yk4sv48-tHyUJNBkcf56
 addons:
   postgresql: "9.4"
 services:
