@@ -512,10 +512,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        H4sIAAAAAAAAA7PJKMnNsePlsslITUyxsynJLMlJtTMxMFHwyy9RcMsvzUux
-        0YcI2uiDlQCVJuWnVCokpSfn5+QX2SqVZ2SWpCqBjEhOzStJLbKzyTBENwEo
-        YqMPlQbZBVQE5eWlZ+ZV6BvqmeiZKWiEJpXmlZRqIivVB1kGMlwf6lAAZM+p
-        rLEAAAA=
+        H4sIAAAAAAAAA7PJKMnNsePlsslITUyxsynJLMlJtTMxMFHwyy9RcMsvzUux0YcI2uiDlQCVJuWnVCokpSfn5+QX2SqVZ2SWpCqBjEhOzStJLbKzyTBENwEoYqMPlQbZBVQE5eWlZ+ZV6BvqmeiZKWiEJpXmlZRqIivVB1kGMlwf6lAAZM+prLEAAAA=
     http_version: 
   recorded_at: Wed, 21 Mar 2018 10:36:14 GMT
 - request:
@@ -2231,4 +2228,53 @@ http_interactions:
         Can you confirm it break too with 3.5</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2018-03-20T16:45:46+01:00</date_submitted><last_modified xsi:type="xsd:dateTime">2018-03-20T16:45:46+01:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item><item xsi:type="ns1:IssueNoteData"><id xsi:type="xsd:integer">47146</id><reporter xsi:type="ns1:AccountData"><id xsi:type="xsd:integer">774</id><name xsi:type="xsd:string">Mazi</name></reporter><text xsi:type="xsd:string">Test with latest 3.x version, build 180320 -&gt; exact same error!</text><view_state xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">10</id><name xsi:type="xsd:string">public</name></view_state><date_submitted xsi:type="xsd:dateTime">2018-03-20T17:59:45+01:00</date_submitted><last_modified xsi:type="xsd:dateTime">2018-03-20T17:59:45+01:00</last_modified><time_tracking xsi:type="xsd:integer">0</time_tracking><note_type xsi:type="xsd:integer">0</note_type><note_attr xsi:type="xsd:string"></note_attr></item></notes><custom_fields SOAP-ENC:arrayType="ns1:CustomFieldValueForIssueData[7]" xsi:type="SOAP-ENC:Array"><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">7</id><name xsi:type="xsd:string">Complete LimeSurvey version number (&amp; build)</name></field><value xsi:type="xsd:string">2.64.2+170324</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">9</id><name xsi:type="xsd:string">I will donate to the project if issue is resolved</name></field><value xsi:type="xsd:string">No</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">5</id><name xsi:type="xsd:string">Browser</name></field><value xsi:type="xsd:string">Chrome 55</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">3</id><name xsi:type="xsd:string">Database &amp; DB-Version</name></field><value xsi:type="xsd:string">MySQL 5.7.14</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">1</id><name xsi:type="xsd:string">Operating System (Server)</name></field><value xsi:type="xsd:string">Windows 7 sp1 x64</value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">4</id><name xsi:type="xsd:string">Webserver software &amp; version</name></field><value xsi:type="xsd:string">Apache/2.4.23 (Win32) </value></item><item xsi:type="ns1:CustomFieldValueForIssueData"><field xsi:type="ns1:ObjectRef"><id xsi:type="xsd:integer">2</id><name xsi:type="xsd:string">PHP Version</name></field><value xsi:type="xsd:string">PHP/5.6.24</value></item></custom_fields><monitors SOAP-ENC:arrayType="ns1:AccountData[0]" xsi:type="SOAP-ENC:Array"/><sticky xsi:type="xsd:boolean">false</sticky><tags SOAP-ENC:arrayType="ns1:ObjectRef[0]" xsi:type="SOAP-ENC:Array"/></return></ns1:mc_issue_getResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
     http_version: 
   recorded_at: Wed, 21 Mar 2018 10:36:19 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/https:%2F%2Fbugs.limesurvey.org%2Fview.php%3Fid=12227
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 13 Jun 2018 15:40:42 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - 628f0e53-2b15-4d19-86cf-8e98cc6cfb71
+      X-Runtime:
+      - '0.040802'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '3'
+      Ratelimit-Remaining:
+      - '597'
+      Ratelimit-Reset:
+      - '1528904502'
+      Ratelimit-Resettime:
+      - Thu, 13 Jun 2018 15:41:42 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Wed, 13 Jun 2018 15:40:42 GMT
+recorded_with: VCR 4.0.0

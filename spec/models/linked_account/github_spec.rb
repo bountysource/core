@@ -26,6 +26,7 @@
 #  bio              :text
 #  cloudinary_id    :string(255)
 #  deleted_at       :datetime
+#  remote_id        :string
 #
 # Indexes
 #

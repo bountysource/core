@@ -3054,4 +3054,53 @@ http_interactions:
         \ </form>\n</li>\n</ul>\n  </li>\n\n  \n    \n\n\n  \n</ul>\n\n  <div class=\"outro\"></div>\n</div>\n\n\n</body>\n</html>"
     http_version: 
   recorded_at: Thu, 19 Nov 2015 19:37:41 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/https:%2F%2Fbugzilla.gnome.org%2Fbuglist.cgi%3Fquicksearch=component%253Ageneral+product%253A%2522gnome-terminal%2522+
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 13 Jun 2018 15:43:33 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - e2409c38-86c5-44eb-9ccd-b34d7faeae21
+      X-Runtime:
+      - '0.031914'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '2'
+      Ratelimit-Remaining:
+      - '598'
+      Ratelimit-Reset:
+      - '1528904673'
+      Ratelimit-Resettime:
+      - Thu, 13 Jun 2018 15:44:33 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Wed, 13 Jun 2018 15:43:34 GMT
+recorded_with: VCR 4.0.0

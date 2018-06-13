@@ -34,6 +34,10 @@ FactoryBot.define do
       association :tracker, factory: :bugzilla_tracker
     end
 
+    factory :gitlab, class: Gitlab::Issue do
+      association :tracker, factory: :gitlab_tracker
+    end
+
     factory :sourceforge_issue, class: SourceForge::Issue do
       association :tracker, factory: :sourceforge_tracker
     end

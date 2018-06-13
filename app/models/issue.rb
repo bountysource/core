@@ -75,6 +75,7 @@ class Issue < ApplicationRecord
     PhpTracker::Issue
     Savannah::Issue
     Mantis::Issue
+    Gitlab::Issue
   )
 
   UNKNOWN_TITLE = '(Issue Title Unknown)'

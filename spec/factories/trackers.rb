@@ -87,6 +87,11 @@ FactoryBot.define do
       sequence(:url) { |n| "http://sourceforge.net/projects/sourceforge#{n}/" }
     end
 
+    factory :gitlab_project, class: Gitlab::Tracker do
+      sequence(:name) { |n| "GitLab Community Edition#{n}" }
+      sequence(:url) { |n| "https://gitlab.com/gitlab-org/gitlab-ce#{n}/" }
+    end
+
     factory :sourceforge_native_tracker, class: SourceForgeNative::Tracker do
       sequence(:name) { |n| "SourceForgeNative#{n}" }
       sequence(:url) { |n| "http://sourceforge.net/tracker/?group_id=#{n}&atid=1" }

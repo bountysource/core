@@ -530,4 +530,53 @@ http_interactions:
         \       CONCURRENT REQUESTS : 1\n-->\n</body>\n</html>\n"
     http_version: 
   recorded_at: Thu, 19 Nov 2015 19:37:28 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/http:%2F%2Fdev.clojure.org%2Fjira%2Fbrowse%2FCLJS
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 13 Jun 2018 15:43:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - ac55db50-aea2-4f6b-ad56-01fa89f0018c
+      X-Runtime:
+      - '0.027581'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '10'
+      Ratelimit-Remaining:
+      - '590'
+      Ratelimit-Reset:
+      - '1528904663'
+      Ratelimit-Resettime:
+      - Thu, 13 Jun 2018 15:44:23 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Wed, 13 Jun 2018 15:43:23 GMT
+recorded_with: VCR 4.0.0

@@ -2542,4 +2542,53 @@ http_interactions:
         can catch these dependencies with `ocamlobjinfo`.\t\t\t</td>\n\t\t</tr>\n\t\t</table>\n\t</td>\n</tr>\n</table>\n</body>\n</html>\n"
     http_version: 
   recorded_at: Wed, 21 Mar 2018 10:47:22 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/https:%2F%2Fcaml.inria.fr%2Fmantis%2Fview.php%3Fid=7754
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 13 Jun 2018 15:40:43 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - 2f7b4a53-b8d5-470d-b0bb-649a6c88e9df
+      X-Runtime:
+      - '0.041935'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '4'
+      Ratelimit-Remaining:
+      - '596'
+      Ratelimit-Reset:
+      - '1528904503'
+      Ratelimit-Resettime:
+      - Thu, 13 Jun 2018 15:41:43 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Wed, 13 Jun 2018 15:40:43 GMT
+recorded_with: VCR 4.0.0
