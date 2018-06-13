@@ -38,18 +38,21 @@
 #  index_linked_accounts_on_uid_and_type  (uid,type) UNIQUE
 #
 
-class LinkedAccount::Bitbucket < LinkedAccount::Base
+class LinkedAccount::Gitlab < LinkedAccount::Base
 
   def self.find_or_create_from_api_response(api_response)
     api_response = api_response.with_indifferent_access
-
-    if (linked_account = where(login: api_response[:author_name]).first)
-      linked_account.update_attribute(:image_url, api_response[:author_image_url])
+    remote_id = api_response[:remote_id]
+    if (remote_id && linked_account = find_by(remote_id: api_response[:remote_id]))
+      linked_account.update_attributes(
+        image_url: api_response[:author_image_url], 
+        login: api_response[:author_name])
       linked_account
     else
       create(
         login: api_response[:author_name],
-        image_url: api_response[:author_image_url]
+        image_url: api_response[:author_image_url],
+        remote_id: api_response[:remote_id]
       )
     end
   end

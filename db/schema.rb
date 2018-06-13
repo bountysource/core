@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180610184815) do
+ActiveRecord::Schema.define(version: 20180613071303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,10 +207,12 @@ ActiveRecord::Schema.define(version: 20180610184815) do
     t.bigint "owner_id"
     t.boolean "featured", default: false, null: false
     t.string "transaction_hash", null: false
+    t.string "from", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["issue_id"], name: "index_crypto_bounties_on_issue_id"
     t.index ["owner_type", "owner_id"], name: "index_crypto_bounties_on_owner_type_and_owner_id"
+    t.index ["transaction_hash"], name: "index_crypto_bounties_on_transaction_hash", unique: true
   end
 
   create_table "currencies", id: :serial, force: :cascade do |t|
@@ -532,6 +534,7 @@ ActiveRecord::Schema.define(version: 20180610184815) do
     t.text "bio"
     t.string "cloudinary_id", limit: 255
     t.datetime "deleted_at"
+    t.string "remote_id"
     t.index ["anonymous"], name: "index_linked_accounts_on_anonymous"
     t.index ["email"], name: "index_linked_accounts_on_email", where: "(email IS NOT NULL)"
     t.index ["login"], name: "index_linked_accounts_on_login"
@@ -776,14 +779,12 @@ ActiveRecord::Schema.define(version: 20180610184815) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "quickbooks_transactions", id: false, force: :cascade do |t|
-    t.integer "id", null: false
+  create_table "quickbooks_transactions", id: :integer, default: nil, force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_vendors", id: false, force: :cascade do |t|
-    t.integer "id", null: false
+  create_table "quickbooks_vendors", id: :integer, default: nil, force: :cascade do |t|
     t.string "name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"

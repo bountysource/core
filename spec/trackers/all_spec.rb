@@ -124,6 +124,18 @@ describe "live_sync" do
       end
     end
 
+    describe "Gitlab::Issue" do
+      let(:issue_url) { "https://gitlab.com/gitlab-org/gitlab-ce/issues/28850" }
+
+      it "should create new issue" do
+        expect(action).to change(Issue, :count).by(1)
+      end
+
+      it "should fetch issue comment" do
+        expect(action).to change(Comment, :count).by_at_least(1)
+      end
+    end
+
 
     describe "MantisRest::Issue" do
       let(:issue_url) { "https://www.mantisbt.org/bugs/view.php?id=24096" }
@@ -179,6 +191,30 @@ describe "live_sync" do
 
       it "should create Tracker Issues" do
         expect(action).to change(tracker.issues, :count).by_at_least(tracker_class::MAX_RESULT_PER_PAGE)
+      end
+    end
+
+    describe "Gitlab::Tracker with gitlab.com gitlab-org gitlab-ce" do
+      let(:tracker_class) { Gitlab::Tracker }
+      let(:tracker_url) { "https://gitlab.com/gitlab-org/gitlab-ce" }
+      let(:tracker_name) { "GitLab Community Edition" }
+
+      it "should create new Tracker" do
+        expect{
+          Tracker.magically_turn_url_into_tracker_or_issue(tracker_url)
+        }.to change(Gitlab::Tracker, :count).by(1)
+      end
+    end
+
+    describe "Gitlab::Tracker with gitlab.com goto-ru ds school-2018.01" do
+      let(:tracker_class) { Gitlab::Tracker }
+      let(:tracker_url) { "https://gitlab.com/goto-ru/ds/school-2018.01" }
+      let(:tracker_name) { "school-2018.01" }
+
+      it "should create new Tracker" do
+        expect{
+          Tracker.magically_turn_url_into_tracker_or_issue(tracker_url)
+        }.to change(Gitlab::Tracker, :count).by(1)
       end
     end
 

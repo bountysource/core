@@ -70,6 +70,7 @@ class Tracker < ApplicationRecord
     PhpTracker::API
     Savannah::API
     Mantis::API
+    Gitlab::API
   )
 
   STATIC_SUBCLASSNAMES = %w(
@@ -85,6 +86,7 @@ class Tracker < ApplicationRecord
     PhpTracker::Tracker
     Savannah::Tracker
     Mantis::Tracker
+    Gitlab::Tracker
   )
 
   class RemoteAPI

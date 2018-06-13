@@ -775,4 +775,53 @@ http_interactions:
         value=\"The value {0} is invalid.\">\n</fieldset>\n\n    </footer>\n</div>\n</body>\n</html>\n"
     http_version: 
   recorded_at: Thu, 19 Nov 2015 19:37:30 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/https:%2F%2Fbukkit.atlassian.net%2Fprojects%2FBUKKIT%2Fsummary
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 13 Jun 2018 15:43:25 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - c68069ad-936b-4490-b0d0-23a0f22aafaf
+      X-Runtime:
+      - '0.033373'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '12'
+      Ratelimit-Remaining:
+      - '588'
+      Ratelimit-Reset:
+      - '1528904665'
+      Ratelimit-Resettime:
+      - Thu, 13 Jun 2018 15:44:25 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Wed, 13 Jun 2018 15:43:25 GMT
+recorded_with: VCR 4.0.0

@@ -271,7 +271,11 @@ class Github::Issue < ::Issue
 
   def self.update_attributes_from_github_array(github_data, options={})
     # bulk load all issues
-    issue_hash = where("remote_id in (?)", github_data.map { |r| r['id'] }).inject({}) { |hash,obj| hash[obj.remote_id.to_i] = obj; hash }
+    issue_hash = where("remote_id in (?)", github_data.map { |r| r['id'] })
+      .inject({}) do |hash,obj| 
+        hash[obj.remote_id.to_i] = obj
+        hash 
+      end
 
 
     # bulk update

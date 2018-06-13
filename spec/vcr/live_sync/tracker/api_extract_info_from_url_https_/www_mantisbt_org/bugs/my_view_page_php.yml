@@ -789,4 +789,53 @@ http_interactions:
         type=\"text/javascript\" src=\"/bugs/js/ace.min.js\"></script>\n</body>\n</html>\n"
     http_version: 
   recorded_at: Wed, 21 Mar 2018 10:37:12 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/https:%2F%2Fwww.mantisbt.org%2Fbugs%2Fmy_view_page.php
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 13 Jun 2018 15:43:40 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - 84c7cfe3-9589-4370-a42d-d9a7e11809ef
+      X-Runtime:
+      - '0.078988'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '7'
+      Ratelimit-Remaining:
+      - '593'
+      Ratelimit-Reset:
+      - '1528904680'
+      Ratelimit-Resettime:
+      - Thu, 13 Jun 2018 15:44:40 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Wed, 13 Jun 2018 15:43:40 GMT
+recorded_with: VCR 4.0.0

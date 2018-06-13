@@ -464,4 +464,53 @@ http_interactions:
         to 0019829"}]}]}'
     http_version: 
   recorded_at: Wed, 21 Mar 2018 10:36:03 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/https:%2F%2Fwww.mantisbt.org%2Fbugs%2Fview.php%3Fid=24096
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 13 Jun 2018 15:40:39 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - 27463d2b-0251-43f6-8dbd-3d08ffb8935d
+      X-Runtime:
+      - '0.043266'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '1'
+      Ratelimit-Remaining:
+      - '599'
+      Ratelimit-Reset:
+      - '1528904499'
+      Ratelimit-Resettime:
+      - Thu, 13 Jun 2018 15:41:39 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Wed, 13 Jun 2018 15:40:39 GMT
+recorded_with: VCR 4.0.0
