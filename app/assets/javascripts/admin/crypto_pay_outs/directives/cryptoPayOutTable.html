@@ -1,0 +1,32 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Issue</th>
+    <th>Person</th>
+    <th>Amount</th>
+    
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr ng-repeat="cryptoPayOut in cryptoPayOuts">
+    <td>{{cryptoPayOut.id}}</td>
+    <td><a ng-href="/issues/{{ cryptoPayOut.issue.slug }}" target="_blank">{{cryptoPayOut.issue.id}}</a></td>
+    <td><a owner-href="cryptoPayOut.person">{{cryptoPayOut.person.display_name}}</a><br/>
+      {{cryptoPayOut.person.email}}</td>
+    <td>
+      <span ng-if="cryptoPayOut.issue.issueAddress.balance['ETH'] != null">
+        {{ cryptoPayOut.issue.issueAddress.balance['ETH'].balance }} ETH
+      </span>
+      <span ng-repeat="token in cryptoPayOut.issue.issueAddress.balance.tokens">
+        {{ token.balance }} {{ token.tokenInfo.symbol }}
+      </span>
+    </td>
+    <td>
+      <button class="btn btn-sm btn-success" ng-click="sendPayOut(cryptoPayOut.id)">Send Pay out</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

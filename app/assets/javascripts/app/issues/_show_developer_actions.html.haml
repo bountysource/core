@@ -1,5 +1,5 @@
 %div{"ng-controller" => "IssueDevelopersController" }
-  .panel.panel-cool-grey{"ng-show" => "issue.can_add_bounty || (developer_events_loaded && developer_events.length>0) || (issue.bounty_total > 0)" }
+  .panel.panel-cool-grey{"ng-show" => "issue.can_add_bounty || (developer_events_loaded && developer_events.length>0) || (issue.bounty_total > 0) || (issue.crypto_bounty_total > 0)" }
     -# CONTESTED
     .panel-body.alert-danger{ "ng-if"=>"!issue.paid_out && bounty_claims.length > 1", "style"=>"border-bottom: 1px solid #ebccd1" }
       %h3{"style"=>"margin-top:0"} Bounty Contested!
@@ -9,7 +9,7 @@
 
 
     -# HUNTER ACTIONS
-    .panel-body.text-center{ "ng-show"=>"issue.can_add_bounty || ((issue.bounty_total > 0) && !issue.paid_out)" }
+    .panel-body.text-center{ "ng-show"=>"issue.can_add_bounty || ((issue.bounty_total > 0) || (issue.crypto_bounty_total > 0) && !issue.paid_out)" }
       .alert.alert-danger{"ng-if"=>"developer_form.error"} {{developer_form.error}}
 
       %div{ "ng-hide"=>"developer_form.visible", "ng-switch"=>"developer_form.data.status" }
@@ -17,12 +17,12 @@
         %div{ "ng-switch-when"=>"claim_needed_no_solution" }
           .font-weight-medium
             Did you solve this issue?
-            %button.btn.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
+          %button.btn.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
 
         %div{ "ng-switch-when"=>"claim_needed_has_solution" }
           .font-weight-medium
             You were working on this issue. Did you solve it?
-            %button.btn.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
+          %button.btn.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Claim Bounty
 
         %div{ "ng-switch-when"=>"claim_submitted" }
           %h4
@@ -111,7 +111,7 @@
 
 
 
-      %div{"ng-repeat" => "event in developer_events | orderBy:['-updated_at']", "ng-class"=>"{ '': event.type=='bounty_claim' && event.collected }"}
+      %div.mt-3{"ng-repeat" => "event in developer_events | orderBy:['-updated_at']", "ng-class"=>"{ '': event.type=='bounty_claim' && event.collected }"}
         / 50px profile pic for mobile, 100px for desktop
         %table.table.table-centered{ "ng-if"=>"event.type=='bounty_claim'"}
           %tbody

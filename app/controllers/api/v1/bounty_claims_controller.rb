@@ -19,16 +19,17 @@ class Api::V1::BountyClaimsController < ApplicationController
   def create
     require_params :issue_id
 
-    amount = @issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
+    if @issue.fiat?
+      amount = @issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
+    elsif @issue.crypto?
+      amount = @issue.crypto_bounty_total
+    end
 
-    @bounty_claim = @person.bounty_claims.create(
-      issue: @issue,
-      code_url: params[:code_url],
-      description: params[:description],
-      amount: amount
+    @bounty_claim = @person.bounty_claims.new(
+      bounty_claim_params.merge(issue: @issue, amount: amount)
     )
 
-    if @bounty_claim.valid?
+    if @bounty_claim.save
       render "api/v1/bounty_claims/show", status: :created
     else
       render json: { error: @bounty_claim.errors.full_messages.to_sentence }, status: :unprocessable_entity
@@ -55,6 +56,9 @@ class Api::V1::BountyClaimsController < ApplicationController
   end
 
 protected
+  def bounty_claims_params
+    params.permit(:code_url, :description)
+  end
 
   def require_bounty_claim
     unless (@bounty_claim = BountyClaim.find_by_id params[:id])

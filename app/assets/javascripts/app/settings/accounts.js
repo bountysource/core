@@ -40,6 +40,20 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
     });
   };
 
+  $scope.setAsPrimary = function(wallet){
+    $scope.success = null;
+    $scope.error = null;
+    $api.v2.setPrimaryWallet(wallet.id)
+      .then(function (response){ 
+        if (response.success) {
+          $scope.success = wallet.eth_addr + ' set as your primary wallet';
+          $scope.wallets = angular.copy(response.data);
+        } else {
+          $scope.error = response.data.error;
+        }
+      });
+  }
+
   $scope.delete_addr = function(wallet){
     $scope.success = null;
     $scope.error = null;

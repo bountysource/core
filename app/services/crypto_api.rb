@@ -3,6 +3,7 @@ class CryptoApi
   DEFAULT_HEADERS = {'Content-Type' => 'application/json', 'api_key' => ENV['CRYPTO_API_SECRET']}
 
   class MissingIssueAddressError < StandardError; end
+  class CryptoPayOutFailed < StandardError; end
 
 
   def self.generate_address(issue_id)
@@ -31,5 +32,13 @@ class CryptoApi
     else
       false
     end
+  end
+
+  def self.send_crypto_pay_out(issue_id)
+    url = "#{BASE_URL}issues/#{issue_id}/bounties/payout"
+
+    response = RestClient.get(url, DEFAULT_HEADERS)
+
+    raise CryptoPayOutFailed unless response.code == 201
   end
 end
