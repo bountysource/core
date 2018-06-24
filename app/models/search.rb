@@ -45,7 +45,7 @@ class Search < ApplicationRecord
   end
 
   def self.tracker_typeahead(query)
-    tracker_search = Tracker.search(query, fields: [:name], misspellings: 1, order: {bounty_total: :desc}, match: :word_start, limit: 5, boost_by: [:forks, :watchers]).to_a
+    tracker_search = Tracker.search(query, fields: [:name], order: {_score: :desc, bounty_total: :desc}, match: :word_start, limit: 5, boost_by: [:forks, :watchers]).to_a
     reject_merged_trackers!(tracker_search)
   end
 
