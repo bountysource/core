@@ -196,7 +196,9 @@ Api::Application.routes.draw do
 
           resources :cash_outs, only: [:index, :show, :update]
 
-          resources :crypto_pay_outs, only: [:index]
+          resources :crypto_pay_outs, only: [:index] do
+            resource :send, only: :create, module: :crypto_pay_outs
+          end
 
           resources :delayed_jobs, only: [:index, :show] do
             collection do
