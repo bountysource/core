@@ -217,8 +217,7 @@ class Account < ApplicationRecord
   # Formula:
   # (account balance) * 0.10
   def calculate_cash_out_fee amount
-    #(Money.new(amount.to_f*100) / 10).to_f
-    0
+    (Money.new(amount.to_f*100) / 10).to_f
   end
 
 end
