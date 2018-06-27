@@ -35,7 +35,7 @@ class CryptoApi
   end
 
   def self.send_crypto_pay_out(issue_id)
-    url = "#{BASE_URL}bounties/#{issue_id}/payout"
+    url = "#{BASE_URL}bounties/#{issue_id}/pay-out"
 
     response = RestClient.get(url, DEFAULT_HEADERS)
 
