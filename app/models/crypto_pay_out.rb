@@ -12,10 +12,12 @@
 #  fee_percent         :decimal(, )
 #  fee                 :jsonb
 #  fees_acct_address   :string
-#  amount              :jsonb
 #  sent_at             :datetime
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  seed_eth            :decimal(, )
+#  balance             :jsonb
+#  bounty              :jsonb
 #
 # Indexes
 #

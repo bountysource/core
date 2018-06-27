@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180627074159) do
+ActiveRecord::Schema.define(version: 20180627094310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,14 +226,13 @@ ActiveRecord::Schema.define(version: 20180627074159) do
     t.bigint "crypto_pay_out_id"
     t.string "state"
     t.string "txn_hash"
-    t.boolean "fee_txn"
     t.integer "confirmed_block"
     t.datetime "mined_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
     t.index ["confirmed_block"], name: "index_crypto_pay_out_txns_on_confirmed_block"
     t.index ["crypto_pay_out_id"], name: "index_crypto_pay_out_txns_on_crypto_pay_out_id"
-    t.index ["fee_txn"], name: "index_crypto_pay_out_txns_on_fee_txn"
     t.index ["state"], name: "index_crypto_pay_out_txns_on_state"
     t.index ["txn_hash"], name: "index_crypto_pay_out_txns_on_txn_hash", unique: true
   end
@@ -248,10 +247,12 @@ ActiveRecord::Schema.define(version: 20180627074159) do
     t.decimal "fee_percent"
     t.jsonb "fee"
     t.string "fees_acct_address"
-    t.jsonb "amount"
     t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "seed_eth"
+    t.jsonb "balance"
+    t.jsonb "bounty"
     t.index ["issue_id"], name: "index_crypto_pay_outs_on_issue_id", unique: true
     t.index ["person_id"], name: "index_crypto_pay_outs_on_person_id"
     t.index ["sent_at"], name: "index_crypto_pay_outs_on_sent_at"
