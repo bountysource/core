@@ -673,6 +673,10 @@ class Person < ApplicationRecord
     issue_ids += current_user.comments.pluck(:issue_id)
   end
 
+  def has_verified_primary_wallet?
+    wallets.where(primary: true, verified: true).exists?
+  end
+
 protected
 
   def self.hash_access_token(person, time)

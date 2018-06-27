@@ -105,7 +105,7 @@ class Ability
         if issue.fiat?
           is_creator = issue.bounties.pluck(:person_id).include?(person.id)
           is_on_team = TeamMemberRelation.where(team_id: issue.bounties.where(owner_type: 'Team').pluck(:owner_id), developer: true).pluck(:person_id).include?(person.id)
-          return !issue.can_add_bounty && (issue.bounty_total > 0) && (is_creator || is_on_team)
+          !issue.can_add_bounty && (issue.bounty_total > 0) && (is_creator || is_on_team)
         elsif issue.crypto?
           is_crypto_bounty_creator = issue.crypto_bounties.where(owner_type: 'Person').pluck(:owner_id).include?(person.id)
           !issue.can_add_bounty && (issue.crypto_bounty_total > 0) && (is_crypto_bounty_creator)

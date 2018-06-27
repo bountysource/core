@@ -53,7 +53,7 @@ class Search < ApplicationRecord
     page = params[:page] || 1
     per_page = params[:per_page].present? ? params[:per_page].to_i : 50
     query = params[:search] || "*"
-    min = params[:min].present? ? params[:min].to_f : 1.0
+    min = params[:min].present? ? params[:min].to_f : 0.01
     max = params[:max].present? ? params[:max].to_f : 1_000_000_000.0
     order = ["bounty_total", "backers_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
     direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'desc'

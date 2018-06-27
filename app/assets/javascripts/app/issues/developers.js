@@ -1,5 +1,9 @@
 angular.module('app').controller('IssueDevelopersController', function ($scope, $pageTitle, $api, $route, $routeParams, $location, $window, $analytics, $filter, $q, Issue, BountyClaim, Solution, DeveloperGoal, Bounties) {
 
+  $scope.goToProfilePage = function(){
+    $location.url("/settings/accounts");    
+  };
+  
   // shortcut
   var issue_id = parseInt($routeParams.id);
 

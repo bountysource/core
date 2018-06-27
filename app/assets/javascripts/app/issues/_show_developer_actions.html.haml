@@ -58,57 +58,68 @@
             Your have set a bounty goal of {{my_developer_goal.amount | dollars}}.
             %button.btn.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px"} Edit
 
-      %form.form-horizontal.form-without-bottom-margin{ "ng-show"=>"developer_form.visible", "ng-submit"=>"developer_form.submit()" }
-        .form-group{ "ng-show"=>"['no_solution_no_goal','has_solution','has_stopped_solution','has_goal'].indexOf(developer_form.data.status)>=0"}
-          .col-xs-6
-            %a.btn.btn-default.btn-responsive.fw-b.font-10{"ng-click" => "developer_form.data.status = 'has_solution'", "ng-class" => "{'btn-light-blue': developer_form.data.status === 'has_solution'}"}
-              IN PROGRESS
-          .col-xs-6
-            %a.btn.btn-default.btn-responsive.fw-b.font-10{"ng-click" => "developer_form.data.status = 'has_goal'", "ng-class" => "{'btn-light-blue': developer_form.data.status === 'has_goal'}"}
-              BOUNTY TOO LOW
+      
 
-        .form-group{ "ng-show"=>"['has_goal'].indexOf(developer_form.data.status)>=0" }
-          %label.col-sm-12.control-label{:for => "inputEmail3"} Your Goal
-          .col-sm-12.mt-3
-            .input-group
-              %span.input-group-addon
-                $
-              %input.input-medium.form-control{ "id"=>"developer_goal_amount", :min => "0", "ng-model" => "developer_form.data.developer_goal_amount", :placeholder => "{{ issue.bounty_total + 100 }}", :style => "padding-left: 10px;", :type => "text"}
+      %div{"ng-show"=>"developer_form.visible"}
+        %div{"ng-if" => "issue.category == 'crypto' && current_person && !(current_person.wallets | filter:{verified: true, primary: true}).length"}
+          %div
+            .text-center You need to have a verified wallet set as your primary wallet to claim a crypto bounty!
+            .mt-5
+              %button.btn.btn-light-blue.btn-responsive{"ng-click" => "goToProfilePage()"}
+                Manage Wallets
 
 
-        .form-group{ "ng-show"=>"['has_solution'].indexOf(developer_form.data.status)>=0" }
-          %label.col-xs-12.control-label ETA
-          .col-xs-12.mt-3
-            .input-group
-              %input.input-medium.form-control{"datepicker-popup" => "M/d/yyyy", "is-open" => "developer_form.data.show_date_picker", :min => "minDate", "ng-model" => "developer_form.data.completion_date", :placeholder => "mm/dd/yyyy", "show-weeks" => "false", :type => "text"}
-              %span.input-group-btn
-                %a.btn.btn-default{"ng-click" => "developer_form.show_date_picker($event)"}
-                  %i.glyphicon.glyphicon-calendar
+        %div{"ng-if" => "!(issue.category == 'crypto' && current_person && !(current_person.wallets | filter:{verified: true, primary: true}).length)"}
+          %form.form-horizontal.form-without-bottom-margin{  "ng-submit"=>"developer_form.submit()" }
+            .form-group{ "ng-show"=>"['no_solution_no_goal','has_solution','has_stopped_solution','has_goal'].indexOf(developer_form.data.status)>=0"}
+              .col-xs-6
+                %a.btn.btn-default.btn-responsive.fw-b.font-10{"ng-click" => "developer_form.data.status = 'has_solution'", "ng-class" => "{'btn-light-blue': developer_form.data.status === 'has_solution'}"}
+                  IN PROGRESS
+              .col-xs-6
+                %a.btn.btn-default.btn-responsive.fw-b.font-10{"ng-click" => "developer_form.data.status = 'has_goal'", "ng-class" => "{'btn-light-blue': developer_form.data.status === 'has_goal'}"}
+                  BOUNTY TOO LOW
+
+            .form-group{ "ng-show"=>"['has_goal'].indexOf(developer_form.data.status)>=0" }
+              %label.col-sm-12.control-label{:for => "inputEmail3"} Your Goal
+              .col-sm-12.mt-3
+                .input-group
+                  %span.input-group-addon
+                    $
+                  %input.input-medium.form-control{ "id"=>"developer_goal_amount", :min => "0", "ng-model" => "developer_form.data.developer_goal_amount", :placeholder => "{{ issue.bounty_total + 100 }}", :style => "padding-left: 10px;", :type => "text"}
+
+
+            .form-group{ "ng-show"=>"['has_solution'].indexOf(developer_form.data.status)>=0" }
+              %label.col-xs-12.control-label ETA
+              .col-xs-12.mt-3
+                .input-group
+                  %input.input-medium.form-control{"datepicker-popup" => "M/d/yyyy", "is-open" => "developer_form.data.show_date_picker", :min => "minDate", "ng-model" => "developer_form.data.completion_date", :placeholder => "mm/dd/yyyy", "show-weeks" => "false", :type => "text"}
+                  %span.input-group-btn
+                    %a.btn.btn-default{"ng-click" => "developer_form.show_date_picker($event)"}
+                      %i.glyphicon.glyphicon-calendar
 
 
 
-        .form-group{ "ng-show"=>"['has_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0" }
-          %label.col-xs-12.control-label{:for => "inputEmail3"} Code URL
-          .col-xs-12.mt-3
-            %input.form-control{:type => "text", :placeholder => "The URL to your solution. For example, a pull request on GitHub", "ng-model"=>"developer_form.data.url" }
+            .form-group{ "ng-show"=>"['has_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0" }
+              %label.col-xs-12.control-label{:for => "inputEmail3"} Code URL
+              .col-xs-12.mt-3
+                %input.form-control{:type => "text", :placeholder => "The URL to your solution. For example, a pull request on GitHub", "ng-model"=>"developer_form.data.url" }
 
 
-        .form-group{ "ng-show"=>"['has_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0" }
-          %label.col-xs-12.control-label{:for => "inputEmail3"} Comment
-          .col-xs-12.mt-3
-            %textarea.form-control{:placeholder => "Provide some details for the backers!", :rows => "4", "ng-model"=>"developer_form.data.note"}
+            .form-group{ "ng-show"=>"['has_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0" }
+              %label.col-xs-12.control-label{:for => "inputEmail3"} Comment
+              .col-xs-12.mt-3
+                %textarea.form-control{:placeholder => "Provide some details for the backers!", :rows => "4", "ng-model"=>"developer_form.data.note"}
 
 
-        .form-group
-          .col-xs-12
-            %button.btn.btn-light-blue.btn-responsive.mt-3{ "ng-show"=>"['has_solution','has_goal','has_stopped_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0", "type" => "submit"} Submit
+            .form-group
+              .col-xs-12
+                %button.btn.btn-light-blue.btn-responsive.mt-3{ "ng-show"=>"['has_solution','has_goal','has_stopped_solution','claim_submitted','claim_needed_no_solution','claim_needed_has_solution'].indexOf(developer_form.data.status)>=0", "type" => "submit"} Submit
 
-            %a.btn.btn-danger.btn-responsive.mt-3{ "ng-click" => "developer_form.delete_bounty_claim(my_bounty_claim)", "ng-show" => "developer_form.data.status=='claim_submitted'" }
-              %span.glyphicon.glyphicon-trash
-              Retract Claim
+                %a.btn.btn-danger.btn-responsive.mt-3{ "ng-click" => "developer_form.delete_bounty_claim(my_bounty_claim)", "ng-show" => "developer_form.data.status=='claim_submitted'" }
+                  %span.glyphicon.glyphicon-trash
+                  Retract Claim
 
-            %a.btn.btn-danger.btn-responsive.mt-3{ "ng-click"=>"developer_form.delete_bounty_goal()", "ng-if"=>"developer_form.data.status=='has_goal' && my_developer_goal" } Delete
-
+                %a.btn.btn-danger.btn-responsive.mt-3{ "ng-click"=>"developer_form.delete_bounty_goal()", "ng-if"=>"developer_form.data.status=='has_goal' && my_developer_goal" } Delete
 
 
       %div.mt-3{"ng-repeat" => "event in developer_events | orderBy:['-updated_at']", "ng-class"=>"{ '': event.type=='bounty_claim' && event.collected }"}

@@ -75,6 +75,10 @@ class BountyClaim < ApplicationRecord
       errors.add(:base, "Must provide code_url and/or description")
     end
 
+    if issue.crypto? && !person.has_verified_primary_wallet?
+      errors.add(:person, "must have a verified primary wallet to submit a claim for a crypto bounty")
+    end
+
     errors.empty?
   end
 
