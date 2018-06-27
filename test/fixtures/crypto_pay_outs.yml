@@ -6,7 +6,7 @@
 #  issue_id            :bigint(8)
 #  person_id           :bigint(8)
 #  type                :string(255)      not null
-#  state               :string(255)
+#  state               :string           default("Pending-Approval")
 #  receiver_address    :string
 #  funder_acct_address :string
 #  fee_percent         :decimal(, )

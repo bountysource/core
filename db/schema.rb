@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180622114056) do
+ActiveRecord::Schema.define(version: 20180627074014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 20180622114056) do
     t.string "transaction_hash", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "from", limit: 50, null: false
     t.index ["issue_id"], name: "index_crypto_bounties_on_issue_id"
     t.index ["owner_type", "owner_id"], name: "index_crypto_bounties_on_owner_type_and_owner_id"
   end
@@ -233,7 +234,7 @@ ActiveRecord::Schema.define(version: 20180622114056) do
     t.bigint "issue_id"
     t.bigint "person_id"
     t.string "type", limit: 255, null: false
-    t.string "state", limit: 255
+    t.string "state", default: "Pending-Approval"
     t.string "receiver_address"
     t.string "funder_acct_address"
     t.decimal "fee_percent"

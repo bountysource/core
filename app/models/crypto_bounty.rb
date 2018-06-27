@@ -13,6 +13,7 @@
 #  transaction_hash :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  from             :string(50)       not null
 #
 # Indexes
 #
@@ -22,5 +23,5 @@
 
 class CryptoBounty < ApplicationRecord
   belongs_to :issue
-  belongs_to :owner, polymorphic: true
+  belongs_to :owner, polymorphic: true  
 end

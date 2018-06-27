@@ -6,7 +6,7 @@
 #  issue_id            :bigint(8)
 #  person_id           :bigint(8)
 #  type                :string(255)      not null
-#  state               :string(255)
+#  state               :string           default("Pending-Approval")
 #  receiver_address    :string
 #  funder_acct_address :string
 #  fee_percent         :decimal(, )
@@ -32,5 +32,7 @@ class CryptoPayOut < ApplicationRecord
   belongs_to :issue
   belongs_to :person
 
-  enum state: { pending: 0, sent: 10 }
+  STATUSES = ['Pending-Approval', 'Seeded', 'In-Progress', 'Completed']
+
+  scope :pending_approval, -> { where state: 'Pending-Approval' }
 end
