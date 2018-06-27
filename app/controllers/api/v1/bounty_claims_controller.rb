@@ -56,7 +56,7 @@ class Api::V1::BountyClaimsController < ApplicationController
   end
 
 protected
-  def bounty_claims_params
+  def bounty_claim_params
     params.permit(:code_url, :description)
   end
 
