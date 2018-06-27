@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180627074014) do
+ActiveRecord::Schema.define(version: 20180627074159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,6 +212,14 @@ ActiveRecord::Schema.define(version: 20180627074014) do
     t.string "from", limit: 50, null: false
     t.index ["issue_id"], name: "index_crypto_bounties_on_issue_id"
     t.index ["owner_type", "owner_id"], name: "index_crypto_bounties_on_owner_type_and_owner_id"
+  end
+
+  create_table "crypto_pay_out_claim_events", force: :cascade do |t|
+    t.string "type"
+    t.bigint "crypto_pay_out_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crypto_pay_out_id"], name: "index_crypto_pay_out_claim_events_on_crypto_pay_out_id"
   end
 
   create_table "crypto_pay_out_txns", force: :cascade do |t|
