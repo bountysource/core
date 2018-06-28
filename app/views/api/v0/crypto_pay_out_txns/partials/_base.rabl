@@ -4,3 +4,4 @@ attribute :confirmed_block
 attribute :mined_at
 attribute :created_at
 attribute :updated_at
+attribute :type

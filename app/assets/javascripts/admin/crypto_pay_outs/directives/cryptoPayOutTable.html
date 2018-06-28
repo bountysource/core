@@ -34,9 +34,11 @@
     <td ng-show="(cryptoPayOut.state!='Pending-Approval')">
       <ul>
         <li ng-repeat='txn in cryptoPayOut.crypto_pay_out_txns'>
-          <a ng-href="https://etherscan.io/tx/{{txn.txn_hash}}">
-            {{txn.txn_hash}}
-          </a>
+          <span>{{txn.type}} | {{ txn.state }} | 
+            <a ng-href="https://etherscan.io/tx/{{txn.txn_hash}}" target="_blank">
+              Link
+            </a>
+          </span>
         </li>
       </ul>
     </td>

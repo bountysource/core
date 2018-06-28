@@ -19,6 +19,12 @@ angular.module('activity')
       resolve: { person: personResolver }
     }, defaultRouteOptions));
 
+    $routeProvider.when('/activity/crypto_pay_outs', angular.extend({
+      templateUrl: 'app/activity/crypto_pay_outs.html',
+      controller: 'CryptoPayOutsController',
+      resolve: { person: personResolver }
+    }, defaultRouteOptions));
+
     $routeProvider.when('/activity/fundraisers', angular.extend({
       templateUrl: 'app/activity/fundraisers.html',
       controller: 'FundraisersController',

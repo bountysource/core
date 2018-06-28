@@ -1,12 +1,3 @@
 collection @crypto_pay_outs
 
-extends "api/v1/crypto_bounties/partials/base"
-extends "api/v1/crypto_bounties/partials/owner"
-
-child (:issue) do
-  extends "api/v1/issues/partials/base"
-
-  child(:tracker => :tracker) do
-    extends "api/v1/trackers/partials/base"
-  end
-end
+extends "api/v0/crypto_pay_outs/partials/base"

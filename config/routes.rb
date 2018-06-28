@@ -325,7 +325,7 @@ Api::Application.routes.draw do
           resource :email_change_verification, only: [:update]
 
           # not legacy
-          get :pledges, :bounties, :crypto_bounties
+          get :pledges, :bounties, :crypto_bounties, :crypto_pay_outs
 
           resource :address, controller: 'addresses'
 

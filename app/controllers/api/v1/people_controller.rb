@@ -264,6 +264,7 @@ class Api::V1::PeopleController < ApplicationController
 
   def crypto_pay_outs
     @crypto_pay_outs = @person.crypto_pay_outs.order('created_at desc')
+    render "api/v1/crypto_pay_outs/index"
   end
 
   def bounty_total
