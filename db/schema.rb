@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180627094310) do
+ActiveRecord::Schema.define(version: 20180628015138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1431,5 +1431,8 @@ ActiveRecord::Schema.define(version: 20180627094310) do
   end
 
   add_foreign_key "crypto_bounties", "issues"
+  add_foreign_key "crypto_pay_out_claim_events", "crypto_pay_outs"
+  add_foreign_key "crypto_pay_out_txns", "crypto_pay_outs"
+  add_foreign_key "crypto_pay_outs", "issues"
   add_foreign_key "issue_addresses", "issues"
 end
