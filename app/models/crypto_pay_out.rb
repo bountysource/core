@@ -29,6 +29,7 @@
 #
 
 class CryptoPayOut < ApplicationRecord
+  self.inheritance_column = nil
   has_many :crypto_pay_out_txns
 
   belongs_to :issue
