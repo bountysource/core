@@ -93,6 +93,7 @@ class Person < ApplicationRecord
   has_many :pledges
   has_many :bounties
   has_many :crypto_bounties, as: :owner
+  has_many :crypto_pay_outs
   has_many :team_payins
 
   has_many :solutions

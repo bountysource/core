@@ -36,5 +36,4 @@ class CryptoPayOut < ApplicationRecord
 
   STATUSES = ['Pending-Approval', 'Seeded', 'In-Progress', 'Completed']
 
-  scope :pending_approval, -> { where state: 'Pending-Approval' }
 end

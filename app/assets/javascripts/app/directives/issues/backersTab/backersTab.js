@@ -12,6 +12,7 @@ angular.module('directives').directive('backersTab', function ($rootScope, $rout
       });
 
       // allow sorting
+      scope.crypto_sort_column = 'created_at'
       scope.sort_column = 'amount';
       scope.sort_reverse = true;
       scope.sort_by = function(col) {

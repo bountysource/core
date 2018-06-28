@@ -9,7 +9,7 @@ angular.module('app')
   .controller("PendingCryptoPayOutsController", function ($scope, $api) {
 
     $api.call('/admin/crypto_pay_outs', {
-      sent: false
+      "state": "pending"
     }, function(response) {
       $scope.cryptoPayOuts = angular.copy(response.data);
     });

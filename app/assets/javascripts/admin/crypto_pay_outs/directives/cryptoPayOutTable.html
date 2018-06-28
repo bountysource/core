@@ -5,7 +5,8 @@
     <th>Issue</th>
     <th>Person</th>
     <th>Amount</th>
-    
+    <th>Status</th>
+    <th>User Address</th>
     <th></th>
   </tr>
   </thead>
@@ -24,6 +25,8 @@
         {{ token.balance }} {{ token.tokenInfo.symbol }}
       </span>
     </td>
+    <td>{{ cryptoPayOut.state }}</td>
+    <td>{{ cryptoPayOut.receiver_address }}</td>
     <td>
       <button class="btn btn-sm btn-success" ng-click="sendPayOut(cryptoPayOut.id)">Send Pay out</button>
     </td>

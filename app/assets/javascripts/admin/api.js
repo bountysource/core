@@ -14,8 +14,10 @@ angular.module('api.bountysource',[]).
     this.call = function() {
       var args = Array.prototype.slice.call(arguments);
       var url = $rootScope.api_host + args.shift().replace(/^\//,'');
+
       var method = typeof(args[0]) === 'string' ? args.shift() : 'GET';
       var params = typeof(args[0]) === 'object' ? args.shift() : {};
+
       var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
 
       // merge in params from method chain
@@ -60,6 +62,7 @@ angular.module('api.bountysource',[]).
 
         var headers = {};
         headers.Accept = 'application/vnd.bountysource+json; version=0';
+        
         if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
         else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
         else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
@@ -69,6 +72,7 @@ angular.module('api.bountysource',[]).
       } else {
         params._method = method;
         params.callback = 'JSON_CALLBACK';
+        
         $http.jsonp(url, { params: params }).success(function(response) {
           deferred.resolve(callback(response));
         });
