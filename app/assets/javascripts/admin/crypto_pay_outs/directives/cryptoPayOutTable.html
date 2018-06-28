@@ -27,10 +27,18 @@
     </td>
     <td>{{ cryptoPayOut.state }}</td>
     <td>{{ cryptoPayOut.receiver_address }}</td>
-    <td >
+    <td ng-show="(cryptoPayOut.state=='Pending-Approval')">
       <button class="btn btn-sm btn-success" 
-        ng-show="cryptoPayOut.state=='Pending-Approval'"
         ng-click="sendPayOut(cryptoPayOut.id)">Send Pay out</button>
+    </td>
+    <td ng-show="(cryptoPayOut.state!='Pending-Approval')">
+      <ul>
+        <li ng-repeat='txn in cryptoPayOut.crypto_pay_out_txns'>
+          <a ng-href="https://etherscan.io/tx/{{txn.txn_hash}}">
+            {{txn.txn_hash}}
+          </a>
+        </li>
+      </ul>
     </td>
   </tr>
   </tbody>

@@ -16,9 +16,16 @@ child(:person){
   node(:type) { |p| p.class.name }  
 }
 
+
+
 attribute :sent_at
 attribute :state
 attribute :receiver_address
 attribute :funder_acct_address
 attribute :amount
 attribute :sent_at
+
+
+child(:crypto_pay_out_txns) do
+  extends "api/v0/crypto_pay_out_txns/partials/base"
+end
