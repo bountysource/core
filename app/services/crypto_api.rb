@@ -39,6 +39,6 @@ class CryptoApi
 
     response = RestClient.get(url, DEFAULT_HEADERS)
 
-    raise CryptoPayOutFailed unless response.code == 201
+    raise CryptoPayOutFailed unless response.code == 200
   end
 end
