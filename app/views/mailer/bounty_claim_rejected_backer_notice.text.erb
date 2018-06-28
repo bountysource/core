@@ -1,6 +1,6 @@
 Hi <%= @person.first_name %>,
 
-A claim by <%= @bounty_claim.person.display_name %> for "<%= @bounty_claim.issue.title %>" has been rejected. The <%= number_to_dollars(@bounty_claim.amount) %> bounty has not been paid out.
+A claim by <%= @bounty_claim.person.display_name %> for "<%= @bounty_claim.issue.title %>" has been rejected. The bounty has not been paid out.
 
 <%= @response.person.display_name %> rejected the claim with the following reason: <%= @response.description %>
 

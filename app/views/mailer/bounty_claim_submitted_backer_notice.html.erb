@@ -3,7 +3,7 @@
 </p>
 
 <p>
-  A claim by <%= @bounty_claim.person.display_name %> has been submitted for <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}" %>"><%= @bounty_claim.issue.title %></a>. The <%= number_to_dollars(@bounty_claim.amount) %> bounty will be paid out if all backers accept the claim. If no action is taken, the bounty will be paid out after two weeks.
+  A claim by <%= @bounty_claim.person.display_name %> has been submitted for <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}" %>"><%= @bounty_claim.issue.title %></a>. The bounty will be paid out if all backers accept the claim. If no action is taken, the bounty will be paid out after two weeks.
 </p>
 
 <p>

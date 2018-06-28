@@ -14,9 +14,16 @@
   </p>
 <% end %>
 
-<p>
-  The <%= number_to_dollars(@bounty_claim.amount) %> bounty has been paid out to your Bountysource account. To request a cash out, please <a href="<%= "#{Api::Application.config.www_url}activity/cash_outs/new" %>">click here</a>.
-</p>
+<% if @bounty_claim.issue.fiat? %>
+  <p>
+    The <%= number_to_dollars(@bounty_claim.amount) %> bounty has been paid out to your Bountysource account. To request a cash out, please <a href="<%= "#{Api::Application.config.www_url}activity/cash_outs/new" %>">click here</a>.
+  </p>
+<% else %>
+  <p>
+    All tokens (minus fees and transaction costs) will be transfered to your primary (verified) wallet once an admin has approved the transfer.
+  </p>
+
+<% end %>
 <p>
   Time to show off! Now that you've collected a bounty, we'd like to offer you a Bountysource sticker to display proudly. Reply to this email with your full name and mailing address (non-US addresses are good, too!) and we'll send one to you right away!
 </p>

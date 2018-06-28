@@ -678,6 +678,10 @@ class Person < ApplicationRecord
     wallets.where(primary: true, verified: true).exists?
   end
 
+  def primary_wallet
+    wallets.find_by(primary: true, verified: true)
+  end
+
 protected
 
   def self.hash_access_token(person, time)

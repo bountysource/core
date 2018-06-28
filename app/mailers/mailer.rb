@@ -357,6 +357,15 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def crypto_pay_out_approved(options)
+    @person = options[:person]
+
+    mail(to: @person.email, subject: "Crypto pay out approved!") do |format|
+      format.text
+      format.html
+    end
+  end
+
   def bounty_claim_accepted_backer_notice(options)
     @person = options[:person]
     @bounty_claim = options[:bounty_claim]
