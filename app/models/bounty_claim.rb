@@ -252,7 +252,7 @@ class BountyClaim < ApplicationRecord
         # payout! it raises on its own if something goes wrong
         payout! if payout_amount > 0
       else
-        CryptoPayOut.create(issue: issue, person: person, type: 'CryptoPayOut')
+        CryptoPayOut.create(issue: issue, person: person, type: 'ETH::Payout')
       end
 
 
