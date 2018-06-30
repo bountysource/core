@@ -209,7 +209,7 @@ class BountyClaim < ApplicationRecord
     if issue.fiat?
       issue.bounties.pluck(:person_id).uniq.count == bounty_claim_responses.where(value: true).count
     elsif issue.crypto?
-      issue.crypto_bounties.pluck(:owner_id).uniq.count == bounty_claim_responses.where(value: true).count
+      issue.crypto_bounties.pluck(:owner_id).uniq.reject(&:nil?).count == bounty_claim_responses.where(value: true).count
     end
   end
 
