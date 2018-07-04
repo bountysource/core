@@ -15,7 +15,7 @@ angular.module('app').directive('cryptoPayOutTable', function($api, $window) {
               alert("Error: " + JSON.stringify(response));
             }
           });
-      }
+      };
     }
   };
 });
