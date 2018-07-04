@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/gitlab-org%2Fgitlab-ce
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 04 Jul 2018 09:22:09 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2367'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Etag:
+      - W/"f6013c941457d70e4ee8dc4b9e616a05"
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - 444dc7b7-f9c7-4f9c-85cc-161beae305e7
+      X-Runtime:
+      - '0.193726'
+      Strict-Transport-Security:
+      - max-age=31536000
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '1'
+      Ratelimit-Remaining:
+      - '599'
+      Ratelimit-Reset:
+      - '1530696189'
+      Ratelimit-Resettime:
+      - Thu, 04 Jul 2018 09:23:09 GMT
+    body:
+      encoding: UTF-8
+      string: '{"id":13083,"description":"GitLab Community Edition (CE) is an open
+        source end-to-end software development platform with built-in version control,
+        issue tracking, code review, CI/CD, and more. Self-host GitLab CE on your
+        own servers, in a container, or on a cloud provider.","name":"GitLab Community
+        Edition","name_with_namespace":"GitLab.org / GitLab Community Edition","path":"gitlab-ce","path_with_namespace":"gitlab-org/gitlab-ce","created_at":"2013-09-26T06:02:36.000Z","default_branch":"master","tag_list":[],"ssh_url_to_repo":"git@gitlab.com:gitlab-org/gitlab-ce.git","http_url_to_repo":"https://gitlab.com/gitlab-org/gitlab-ce.git","web_url":"https://gitlab.com/gitlab-org/gitlab-ce","readme_url":"https://gitlab.com/gitlab-org/gitlab-ce/blob/master/README.md","avatar_url":"https://assets.gitlab-static.net/uploads/-/system/project/avatar/13083/logo-extra-whitespace.png","star_count":4730,"forks_count":4120,"last_activity_at":"2018-07-04T08:31:57.162Z","_links":{"self":"https://gitlab.com/api/v4/projects/13083","issues":"https://gitlab.com/api/v4/projects/13083/issues","merge_requests":"https://gitlab.com/api/v4/projects/13083/merge_requests","repo_branches":"https://gitlab.com/api/v4/projects/13083/repository/branches","labels":"https://gitlab.com/api/v4/projects/13083/labels","events":"https://gitlab.com/api/v4/projects/13083/events","members":"https://gitlab.com/api/v4/projects/13083/members"},"archived":false,"visibility":"public","resolve_outdated_diff_discussions":false,"container_registry_enabled":false,"issues_enabled":true,"merge_requests_enabled":true,"wiki_enabled":false,"jobs_enabled":true,"snippets_enabled":true,"shared_runners_enabled":true,"lfs_enabled":true,"creator_id":1,"namespace":{"id":9970,"name":"GitLab.org","path":"gitlab-org","kind":"group","full_path":"gitlab-org","parent_id":null},"import_status":"none","open_issues_count":11070,"public_jobs":true,"ci_config_path":"","shared_with_groups":[{"group_id":2584649,"group_name":"managers","group_access_level":40},{"group_id":6543,"group_name":"GitLab.com","group_access_level":20}],"only_allow_merge_if_pipeline_succeeds":false,"request_access_enabled":false,"only_allow_merge_if_all_discussions_are_resolved":true,"printing_merge_request_link_enabled":true,"merge_method":"merge","permissions":{"project_access":null,"group_access":null},"approvals_before_merge":1}'
+    http_version: 
+  recorded_at: Wed, 04 Jul 2018 09:22:09 GMT
+recorded_with: VCR 4.0.0
