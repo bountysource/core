@@ -93,6 +93,7 @@ class Person < ApplicationRecord
   has_many :pledges
   has_many :bounties
   has_many :crypto_bounties, as: :owner
+  has_many :crypto_pay_outs
   has_many :team_payins
 
   has_many :solutions
@@ -671,6 +672,14 @@ class Person < ApplicationRecord
 
     # issues i've commented on via github
     issue_ids += current_user.comments.pluck(:issue_id)
+  end
+
+  def has_verified_primary_wallet?
+    wallets.where(primary: true, verified: true).exists?
+  end
+
+  def primary_wallet
+    wallets.find_by(primary: true, verified: true)
   end
 
 protected

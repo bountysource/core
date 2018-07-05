@@ -417,7 +417,10 @@ class Issue < ApplicationRecord
   end
 
   def backers
-    Person.where(id: bounties.pluck(:person_id).uniq)
+    fiat_backers = bounties.pluck(:person_id).uniq 
+    crypto_backers = crypto_bounties.where(owner_type: 'Person').pluck(:owner_id).uniq 
+    backers = fiat_backers + crypto_backers
+    Person.where(id: backers.uniq)
   end
 
   # number of unique people who've backed this issue... used in issue nav tabs

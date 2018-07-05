@@ -4,7 +4,7 @@ describe Api::V1::BountyClaimsController do
   render_views
 
   let(:person) { create(:person) }
-  let(:issue) { create(:issue, can_add_bounty: false) }
+  let(:issue) { create(:issue, can_add_bounty: false, category: 'fiat') }
 
   let(:response_data) { JSON.parse(response.body) }
 

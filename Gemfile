@@ -13,7 +13,6 @@ ruby '2.4.3'
 gem 'rails', '5.1.5'
 gem 'json'
 gem 'pg', '~> 0.18.1'
-gem 'mysql2', '0.3.17'
 gem 'puma'
 gem 'oj'
 

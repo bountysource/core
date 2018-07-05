@@ -196,6 +196,10 @@ Api::Application.routes.draw do
 
           resources :cash_outs, only: [:index, :show, :update]
 
+          resources :crypto_pay_outs, only: [:index] do
+            resource :send, only: :create, module: :crypto_pay_outs
+          end
+
           resources :delayed_jobs, only: [:index, :show] do
             collection do
               get :info
@@ -321,7 +325,7 @@ Api::Application.routes.draw do
           resource :email_change_verification, only: [:update]
 
           # not legacy
-          get :pledges, :bounties, :crypto_bounties
+          get :pledges, :bounties, :crypto_bounties, :crypto_pay_outs
 
           resource :address, controller: 'addresses'
 
@@ -518,6 +522,7 @@ Api::Application.routes.draw do
           post '/wallets/metamask', to: 'wallets#metamask' 
 
           resources :wallets, only: [:index, :create, :update, :destroy] do
+            resource :set_as_primary, only: :create, module: :wallets
           end
         end
       end

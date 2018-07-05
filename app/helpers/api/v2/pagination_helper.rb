@@ -105,7 +105,6 @@ module Api::V2::PaginationHelper
 
   def _calculate_collection_size(collection)
     collection_size = nil
-
     # Calculate size of collection
     if collection.is_a?(ActiveRecord::Relation) && collection.base_class.respond_to?(:collection_size_override)
       collection_size = collection.base_class.collection_size_override

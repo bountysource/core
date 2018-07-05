@@ -1,3 +1,9 @@
 Hi <%= @person.first_name %>,
 
-A claim by <%= @bounty_claim.person.display_name %> has been accepted for "<%= @bounty_claim.issue.title %>". The <%= number_to_dollars(@bounty_claim.amount) %> bounty has been paid out.
+A claim by <%= @bounty_claim.person.display_name %> has been accepted for "<%= @bounty_claim.issue.title %>". 
+
+<% if @bounty_claim.issue.fiat? %>
+  The <%= number_to_dollars(@bounty_claim.amount) %> bounty has been paid out.
+<% else %>
+  All crypto tokens will be transferred to the bounty hunter.
+<% end %>

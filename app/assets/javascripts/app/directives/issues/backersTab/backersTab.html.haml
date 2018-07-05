@@ -28,7 +28,7 @@
   %div{"ng-show" => "cryptoBounties.length > 0"}
     %table#bounties-table.table
       %tbody
-        %tr{"ng-repeat" => "cryptoBounty in cryptoBounties"}
+        %tr{"ng-repeat" => "cryptoBounty in cryptoBounties | orderBy:crypto_sort_column:sort_reverse"}
           %td
             %profile-pic{:owner => "cryptoBounty.owner"}
           %td

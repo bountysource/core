@@ -6,9 +6,10 @@ class Api::V2::WalletsController < Api::BaseController
   end
 
   def create
-    @wallet = Wallet.find_or_initialize_by(person_id: params[:person_id], label: params[:label], eth_addr: params[:eth_addr])
-    @wallet.primary = true
     @current_user = current_user
+    
+    @wallet = Wallet.find_or_initialize_by(person_id: params[:person_id], label: params[:label], eth_addr: params[:eth_addr])
+
     @collection = @current_user.wallets
     if @wallet.save
       render 'api/v2/wallets/index'
@@ -31,7 +32,6 @@ class Api::V2::WalletsController < Api::BaseController
 
   def metamask
     @wallet = Wallet.find_or_initialize_by(person_id: params[:person_id], label: params[:label], eth_addr: params[:eth_addr])
-    @wallet.primary = true
     @collection = current_user.wallets
     if @wallet.save && CryptoApi.verify_wallet(@wallet, params[:signed_txn])
       @wallet.reload

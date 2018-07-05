@@ -353,6 +353,13 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
+    setPrimaryWallet: function(id){
+      return this.call({
+        url: '/wallets/' + id + '/set_as_primary',
+        method: 'POST'
+      });
+    },
+
     deleteWallet: function(id, params) {
       return this.call({
         url: '/wallets/'+id,

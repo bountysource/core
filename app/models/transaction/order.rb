@@ -75,7 +75,7 @@ class Transaction::Order < Transaction
     # Optionally, a source can be passed in to update Splits on the Transaction with an item.
     # If left nil, then the Splits will not have an item.
     source = options[:source]
-
+    
     # List of items that are created through checkout.
     # Saved in array so that we can invoke callbacks AFTER the transaction... transaction block is finished
     created_items = []

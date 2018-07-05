@@ -42,8 +42,6 @@ class Bounty < ApplicationRecord
   has_many :splits, :as => :item
   has_many :txns, :through => :splits
 
-  has_one :bounty_claim_response
-
   # Helper defined in config/initializers/has_owner.rb
   # Gives access to polymorphic owner, which respects object anonymity on read
   has_owner
