@@ -394,7 +394,6 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    mysql2 (0.3.17)
     netrc (0.11.0)
     newrelic_rpm (5.0.0.342)
     ngannotate-rails (1.2.2)
@@ -628,7 +627,6 @@ DEPENDENCIES
   maildown
   monetize
   money
-  mysql2 (= 0.3.17)
   newrelic_rpm
   ngannotate-rails
   nokogiri

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Api::V1::BountyClaimResponsesController do
 
   let(:person) { create(:person) }
-  let(:issue) { create(:issue, can_add_bounty: false) }
+  let(:issue) { create(:issue, can_add_bounty: false, category: 'fiat') }
   let!(:bounty) { create_bounty(1337, person: person, issue: issue) }
   let(:developer) { create(:person) }
   let!(:bounty_claim) { create(:bounty_claim, issue: issue, person: developer) }

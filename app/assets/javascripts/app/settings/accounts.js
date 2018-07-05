@@ -40,6 +40,28 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
     });
   };
 
+  $scope.updateCurrentPersonWallet = function(){
+    var updatedPerson = $scope.current_person;
+    updatedPerson.wallets = $scope.wallets;
+    $scope.set_current_person(updatedPerson);
+  };
+
+  $scope.setAsPrimary = function(wallet){
+    $scope.success = null;
+    $scope.error = null;
+    $api.v2.setPrimaryWallet(wallet.id)
+      .then(function (response){ 
+        if (response.success) {
+          $scope.success = wallet.eth_addr + ' set as your primary wallet';
+          $scope.wallets = angular.copy(response.data);
+
+          $scope.updateCurrentPersonWallet();
+        } else {
+          $scope.error = response.data.error;
+        }
+      });
+  };
+
   $scope.delete_addr = function(wallet){
     $scope.success = null;
     $scope.error = null;
@@ -47,6 +69,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
       .then(function (response){ if (response.success) {
         $scope.success = "Successfully deleted wallet";
         $scope.wallets = angular.copy(response.data);
+        $scope.updateCurrentPersonWallet();
         } else {
           $scope.error = response.data.error;
         }
@@ -63,6 +86,8 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
           $scope.success = "Successfully updated wallet";
           $scope.wallets = angular.copy(response.data);
           $scope.addNew = false;
+          $scope.updateCurrentPersonWallet();
+
         } else {
           $scope.error = response.data.error;
         }
@@ -78,6 +103,7 @@ angular.module('app').controller('AccountSettings', function($scope, $api, $loca
           $scope.success = "Successfully updated wallet";
           $scope.wallets = angular.copy(response.data);
           $scope.addNew = false;
+          $scope.updateCurrentPersonWallet();
         } else {
           $scope.error = response.data.error;
         }

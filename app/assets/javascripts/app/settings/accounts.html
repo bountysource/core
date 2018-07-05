@@ -48,12 +48,18 @@
 
     <div ng-show="wallets.length > 0">
       <form class="form-horizontal" name="disp_eth" ng-submit="disp_addbox()" novalidate="">
-        <div ng-repeat="wallet in wallets">
+        <div ng-repeat="wallet in wallets | orderBy:'primary':true">
           <div class="row mt-5">
             <div class="col-md-6">
               <div class="input-group">
                 <input type="text" placeholder="0x****************************************" ng-model="wallet.eth_addr" class="input-medium form-control">
                 <span class="input-group-btn input-group-btn-md">
+                  <button class="btn btn-success" ng-if="wallet.primary">
+                    <span>Primary</span>
+                  </button>
+                  <button class="btn btn-default" ng-if="!wallet.primary" ng-click="setAsPrimary(wallet)">
+                    <span>Set as primary</span>
+                  </button>
                   <button class="btn btn-default"  ng-click="delete_addr(wallet)">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>

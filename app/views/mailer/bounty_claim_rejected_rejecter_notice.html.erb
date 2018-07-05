@@ -3,5 +3,5 @@
 </p>
 
 <p>
-  You have successfully rejected a claim by <%= @bounty_claim.person.display_name %> for <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}" %>"><%= @bounty_claim.issue.title %></a>. The <%= number_to_dollars(@bounty_claim.amount) %> bounty has not been paid out.
+  You have successfully rejected a claim by <%= @bounty_claim.person.display_name %> for <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty_claim.issue.to_param}" %>"><%= @bounty_claim.issue.title %></a>. The bounty has not been paid out.
 </p>

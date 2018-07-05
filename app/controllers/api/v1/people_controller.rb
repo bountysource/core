@@ -262,6 +262,11 @@ class Api::V1::PeopleController < ApplicationController
     @crypto_bounties = @person.crypto_bounties.includes(:owner, :issue => [:tracker]).order('created_at desc')
   end
 
+  def crypto_pay_outs
+    @crypto_pay_outs = @person.crypto_pay_outs.order('created_at desc')
+    render "api/v1/crypto_pay_outs/index"
+  end
+
   def bounty_total
     @bounty_total = @person.bounties.where("issue_id = ?", params[:id]).active.inject(0){|total,bounty| total += bounty.amount}.to_i
   end

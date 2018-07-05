@@ -20,4 +20,14 @@ class Wallet < ApplicationRecord
   belongs_to :person
   validates :person_id, presence: true
   validates :eth_addr, presence: true, uniqueness: true
+
+  before_save :set_first_as_primary
+
+
+  private
+    def set_first_as_primary
+      if person.wallets.count == 0
+        self.primary = true
+      end
+    end
 end

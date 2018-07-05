@@ -1,0 +1,57 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/activity">Activity</a></li>
+  <li class="active"><a href="/activity/crypto_pay_outs">Crypto Pay Outs</a></li>
+</ul>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+    <div class="table-responsive">
+      <table class="table" ng-show="crypto_pay_outs.length > 0">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Issue</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>User Address</th>
+            <th>Transactions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="cpo in crypto_pay_outs">
+            <td>{{cpo.id}}</td>
+            <td><a ng-href="/issues/{{ cpo.issue.slug }}" target="_blank">{{cpo.issue.id}}</a></td>
+            <td>
+              <ul>
+                <li ng-show="cpo.issue.issueAddress.balance['ETH'] != null">
+                  {{ cpo.issue.issueAddress.balance['ETH'].balance }} ETH
+                </li>
+                <li ng-repeat="token in cpo.issue.issueAddress.balance.tokens">
+                  {{ token.balance }} {{ token.tokenInfo.symbol }}
+                </li>
+              </ul>
+            </td>
+            <td>{{ cpo.state }}</td>
+            <td>{{ cpo.receiver_address }}</td>
+            <td>
+              <ul>
+                <li ng-repeat='txn in cpo.crypto_pay_out_txns | filter:{type: "Bounty"}'>
+                  <span>{{ txn.state }} | 
+                    <a ng-href="https://etherscan.io/tx/{{txn.txn_hash}}" target="_blank">
+                      Link
+                    </a>
+                  </span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

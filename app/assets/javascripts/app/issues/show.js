@@ -40,6 +40,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
   $scope.updateMetamaskAccount = function() {
     if ( angular.isDefined($scope.metamaskAccountInterval) ){ return; }
+    if ( typeof $window.web3 === 'undefined') { return; }
 
     $scope.metamaskAccountInterval = $interval(function(){
       Web3Utils.getAccounts().then(function(accounts){

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613071303) do
+ActiveRecord::Schema.define(version: 20180628015138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,52 @@ ActiveRecord::Schema.define(version: 20180613071303) do
     t.index ["issue_id"], name: "index_crypto_bounties_on_issue_id"
     t.index ["owner_type", "owner_id"], name: "index_crypto_bounties_on_owner_type_and_owner_id"
     t.index ["transaction_hash"], name: "index_crypto_bounties_on_transaction_hash", unique: true
+  end
+
+  create_table "crypto_pay_out_claim_events", force: :cascade do |t|
+    t.string "type"
+    t.bigint "crypto_pay_out_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crypto_pay_out_id"], name: "index_crypto_pay_out_claim_events_on_crypto_pay_out_id"
+  end
+
+  create_table "crypto_pay_out_txns", force: :cascade do |t|
+    t.bigint "crypto_pay_out_id"
+    t.string "state"
+    t.string "txn_hash"
+    t.integer "confirmed_block"
+    t.datetime "mined_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "type"
+    t.index ["confirmed_block"], name: "index_crypto_pay_out_txns_on_confirmed_block"
+    t.index ["crypto_pay_out_id"], name: "index_crypto_pay_out_txns_on_crypto_pay_out_id"
+    t.index ["state"], name: "index_crypto_pay_out_txns_on_state"
+    t.index ["txn_hash"], name: "index_crypto_pay_out_txns_on_txn_hash", unique: true
+  end
+
+  create_table "crypto_pay_outs", force: :cascade do |t|
+    t.bigint "issue_id"
+    t.bigint "person_id"
+    t.string "type", limit: 255, null: false
+    t.string "state", default: "Pending-Approval"
+    t.string "receiver_address"
+    t.string "funder_acct_address"
+    t.decimal "fee_percent"
+    t.jsonb "fee"
+    t.string "fees_acct_address"
+    t.datetime "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "seed_eth"
+    t.jsonb "balance"
+    t.jsonb "bounty"
+    t.index ["issue_id"], name: "index_crypto_pay_outs_on_issue_id", unique: true
+    t.index ["person_id"], name: "index_crypto_pay_outs_on_person_id"
+    t.index ["sent_at"], name: "index_crypto_pay_outs_on_sent_at"
+    t.index ["state"], name: "index_crypto_pay_outs_on_state"
+    t.index ["type"], name: "index_crypto_pay_outs_on_type"
   end
 
   create_table "currencies", id: :serial, force: :cascade do |t|
@@ -1384,5 +1430,8 @@ ActiveRecord::Schema.define(version: 20180613071303) do
   end
 
   add_foreign_key "crypto_bounties", "issues"
+  add_foreign_key "crypto_pay_out_claim_events", "crypto_pay_outs"
+  add_foreign_key "crypto_pay_out_txns", "crypto_pay_outs"
+  add_foreign_key "crypto_pay_outs", "issues"
   add_foreign_key "issue_addresses", "issues"
 end

@@ -102,9 +102,15 @@ class Ability
 
       # Person can respond to bounty claims on an issue if a backer, or a developer on a team that backed the issue.
       can :respond_to_claims, Issue do |issue|
-        is_creator = issue.bounties.pluck(:person_id).include?(person.id)
-        is_on_team = TeamMemberRelation.where(team_id: issue.bounties.where(owner_type: 'Team').pluck(:owner_id), developer: true).pluck(:person_id).include?(person.id)
-        !issue.can_add_bounty && (issue.bounty_total > 0) && (is_creator || is_on_team)
+        if issue.fiat?
+          is_creator = issue.bounties.pluck(:person_id).include?(person.id)
+          is_on_team = TeamMemberRelation.where(team_id: issue.bounties.where(owner_type: 'Team').pluck(:owner_id), developer: true).pluck(:person_id).include?(person.id)
+          !issue.can_add_bounty && (issue.bounty_total > 0) && (is_creator || is_on_team)
+        elsif issue.crypto?
+          is_crypto_bounty_creator = issue.crypto_bounties.where(owner_type: 'Person').pluck(:owner_id).include?(person.id)
+          !issue.can_add_bounty && (issue.crypto_bounty_total > 0) && (is_crypto_bounty_creator)
+        end
+        
       end
 
       # Person can edit a tracker page
