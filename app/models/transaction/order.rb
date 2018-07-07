@@ -40,7 +40,7 @@ class Transaction::Order < Transaction
     payment_notification = notification || PaymentNotification.find_by(id: notification_id)
     return nil unless payment_notification && payment_notification.verified?
 
-    ShoppingCart.transaction(joinable: false, requires_new: true) do
+    ShoppingCart.transaction do
       # load the cart
       cart = payment_notification.shopping_cart
 

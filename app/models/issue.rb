@@ -161,22 +161,41 @@ class Issue < ApplicationRecord
     BOUNTY_CLAIM = 'bounty_claim'
   end
 
+  # Asynchronously increment appropriate Tracker issue counter
+  # after_create do
+  #   if can_add_bounty?
+  #     tracker.update_attribute(:open_issues, tracker.open_issues + 1)
+  #   else
+  #     tracker.update_attribute(:closed_issues, tracker.open_issues + 1)
+  #   end
+  # end
+
+  # Asynchronously increment or decrement Tracker issue counter
+  # before_update do
+  #   if can_add_bounty_changed?
+  #     if can_add_bounty?
+  #       tracker.reload.delay.update_attributes(
+  #         open_issues: tracker.open_issues + 1,
+  #         closed_issues: tracker.closed_issues - 1
+  #       )
+  #     else
+  #       tracker.reload.delay.update_attributes(
+  #         open_issues: tracker.open_issues - 1,
+  #         closed_issues: tracker.closed_issues + 1
+  #       )
+  #     end
+  #   end
+  # end
+
   # Tell the Tracker Plugin to update this issue with new bounty total and/or message
   attr_accessor :dont_trigger_plugin_updates
   after_commit do
     # only the fields we care about
-    
     fields_we_care_about = [:bounty_total, :can_add_bounty, :title, :body, :body_markdown]
     relevant_fields_changed = (previous_changes.keys.map(&:to_sym) & fields_we_care_about).length > 0
 
     # what if title changes? body?
-    p "relevant_fields_changed: #{relevant_fields_changed}"
-    p "dont_trigger_plugin_updates: #{dont_trigger_plugin_updates}"
-    p "tracker.plugin: #{tracker.plugin}"
     if relevant_fields_changed && !dont_trigger_plugin_updates && tracker.plugin
-      p '-' * 1000
-      p 'updating plugin'
-      p previous_changes
       tracker.plugin.delay.update_issues(issue: self)
     end
   end
@@ -368,14 +387,7 @@ class Issue < ApplicationRecord
   end
 
   def update_bounty_total
-    p '-' * 1000
-    p 'before update_bounty_total'
-    p bounty_total
     update_attribute :bounty_total, bounties.active.sum(:amount)
-    p bounty_total
-    p '-' * 1000
-    p 'after update_bounty_total'
-    
 
     # Note: need to update Tracker bounty_total AFTER the Issue,
     # since Tracker#update_bounty_total sums the cached issue
