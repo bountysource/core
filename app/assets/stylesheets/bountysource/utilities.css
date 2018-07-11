@@ -142,6 +142,7 @@
 @media (min-width: 768px) {
   .text-sm-left { text-align: left; }
   .text-sm-center { text-align: center; }
+  .text-sm-right { text-align: right; }
 }
 
 /* Medium devices (desktops, 992px and up) */
