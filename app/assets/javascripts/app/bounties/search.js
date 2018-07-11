@@ -1,9 +1,9 @@
 angular.module('app').controller('BountiesSearchController', function($scope, $routeParams, $location, $api, $filter, $anchorScroll) {
   // sets drop-down bounty types
   $scope.bountyTypes = [
-    { label: "Show All Bounties", value: null },
-    { label: "Crypto Bounties Only", value: 'crypto' },
-    { label: "Cash Bounties Only", value: 'fiat' }
+    { label: "All", value: null },
+    { label: "Crypto", value: 'crypto' },
+    { label: "Fiat", value: 'fiat' }
   ];
 
   $scope.selectBountyType = function(typeObj){

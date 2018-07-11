@@ -22,16 +22,11 @@
     </div>
 
     <div class="row basic-search">
-      <div class="col-sm-4">
-        <div class="btn-group" dropdown is-open="true">
-          <button type="button" class="btn btn-default bounty-type-btn" dropdown-toggle ng-disabled="disabled">
-            {{ selectedBountyType.label }} <span class="ml-3 caret"></span>
-          </button>
-          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
-            <li ng-repeat="type in bountyTypes" role="menuitem">
-              <a href="#" ng-click="selectBountyType(type)">{{ type.label }}</a>
-            </li>
-          </ul>
+      <div class="col-sm-4 text-center text-sm-left">
+        <div class="btn-group">
+          <span ng-repeat="type in bountyTypes" ng-click="selectBountyType(type)" class="btn btn-light-blue btn-outline" ng-class="{active: type.value == form_data.category}">
+            {{ type.label }}
+          </span>
         </div>
       </div>
 
