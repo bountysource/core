@@ -77,7 +77,7 @@ class Search < ApplicationRecord
     end
     
     bounteous_issue_search = Issue.search(query, where: with_hash, 
-      per_page: per_page, page: page, includes: [tracker: :languages],
+      per_page: per_page, page: page, includes: [:issue_address, author: [:person], tracker: [:languages, :team]],
       fields: ["title^50", "tracker_name^25", "languages_name^5", "body"],
       order: order_hash)
 
@@ -87,65 +87,6 @@ class Search < ApplicationRecord
       issues: bounteous_issue_search,
       issues_total: bounteous_issue_search.total_count
     }
-  end
-
-  def self.team_issue_search(params)
-    # # NB: although indexed, owner_type currently does not work
-    # #parse params to boolean
-    # params[:show_team_issues] = params[:show_team_issues].to_bool
-    # params[:show_related_issues] = params[:show_related_issues].to_bool
-    # # save search record
-    # create(query: "team_issue_search", params: params)
-
-    # # parse datetime parameter
-    # date_range = Search.parse_datetime(params[:created_at])
-    # activity_range = Search.parse_datetime(params[:last_event_created_at])
-
-    # ## Build with/ without conditions
-    # # we only care about issues for the team making the query
-    # # only return open issues
-    # with_hash = { team_id: params[:owner_id], can_add_bounty: true}
-    # without_hash = {}
-
-    # ####### TODO Add team_id to with_hash to restrict results to only the team doing the query. use team_ids column.
-
-    # if params[:show_team_issues] && params[:show_related_issues]
-    #   #don't add any conditions to search. will return all issues
-    # elsif params[:show_team_issues]
-    #   #only show teams issues
-    #   with_hash.merge!(owner_id: params[:owner_id])
-    # elsif params[:show_related_issues]
-    #   #only show related issues
-    #   without_hash.merge!(owner_id: params[:owner_id])
-    # else
-    #   #they didn't want either so return nothing?
-    #   return { issues: [], issues_count: 0}
-    # end
-
-    # # add date constraints
-    # with_hash.merge!(remote_created_at: date_range, last_event_created_at: activity_range).select! { |key, value|  value.present? }
-
-    # #Build ordering conditions
-    # order = ["bounty_total", "participants_count", "thumbs_up_count", "remote_created_at", "rank"].include?(params[:order]) ? params[:order] : "rank"
-    # direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'desc'
-    # order_hash = "#{order} #{direction}"
-
-    # search_result = ThinkingSphinx.search(
-    #   params[:query],
-    #   :indices => ["team_issue_core"],
-    #   :page => params[:page] || 1,
-    #   :per_page => params[:per_page] || 25,
-    #   :sql => { :include => :issue },
-    #   :with => with_hash,
-    #   :without => without_hash,
-    #   :order => order_hash,
-    #   :star => true
-    # )
-
-    # {
-    #   issue_ranks: search_result,
-    #   issues_count: search_result.total_entries
-    # }
   end
 
   # Get all of the bounty searches
