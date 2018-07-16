@@ -18,6 +18,7 @@
 #  seed_eth            :decimal(, )
 #  balance             :jsonb
 #  bounty              :jsonb
+#  is_refund           :boolean          default(FALSE), not null
 #
 # Indexes
 #
