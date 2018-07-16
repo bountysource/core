@@ -47,7 +47,8 @@ protected
       # copied from api.github.com
       headers['Access-Control-Allow-Origin'] = '*'
       headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE'
-      headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With, Pagination'
+      headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With'
+      headers['Access-Control-Expose-Headers'] = 'Pagination'
       headers['Access-Control-Max-Age'] = '86400'
 
       # OPTIONS immediately return 200 with empty body
