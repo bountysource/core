@@ -4,16 +4,17 @@ class CryptoApi
 
   class MissingIssueAddressError < StandardError; end
   class CryptoPayOutFailed < StandardError; end
+  class RefundTransactionError < StandardError; end
 
 
   def self.generate_address(issue_id)
     url = "#{BASE_URL}issues/#{issue_id}/issue_address"
     response = RestClient.post(url, {id: issue_id, category: 1}.to_json, DEFAULT_HEADERS)
-    raise MissingIssueAddressError unless response.code == 201
+    raise MissingIssueAddressError unless response.code == 200
   end
 
   def self.refresh_bounties(issue_id)
-    url = "#{BASE_URL}bounties/#{issue_id}/refresh"
+    url = "#{BASE_URL}issues/#{issue_id}/bounties/refresh"
     response = RestClient.get(url, DEFAULT_HEADERS)
   end
 
@@ -34,8 +35,18 @@ class CryptoApi
     end
   end
 
+  def self.refund_transaction(issue_id, transaction_hash, reason = "")
+    url = "#{BASE_URL}issues/#{issue_id}/refund/#{transaction_hash}"
+    url += "?reason=#{reason}" if reason.present? 
+
+    p url
+    response = RestClient.get(url, DEFAULT_HEADERS )
+
+    raise RefundTransactionError unless response.code == 200
+  end
+
   def self.send_crypto_pay_out(issue_id)
-    url = "#{BASE_URL}bounties/#{issue_id}/pay-out"
+    url = "#{BASE_URL}issues/#{issue_id}/bounties/pay-out"
 
     response = RestClient.get(url, DEFAULT_HEADERS)
 

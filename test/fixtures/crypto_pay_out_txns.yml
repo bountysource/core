@@ -11,7 +11,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  type              :string
-#  gas_price_gwei    :integer
+#  gas_price_gwei    :decimal(10, 2)
 #  gas_used          :integer
 #
 # Indexes

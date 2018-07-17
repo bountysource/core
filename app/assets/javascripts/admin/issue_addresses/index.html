@@ -1,0 +1,21 @@
+<table class="table table-striped" style="table-layout: fixed">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Issue Title</th>
+    <th>Public Key</th>
+    <th>Estimate Balance</th>
+    <th>Created At</th>
+  </tr>
+  </thead>
+
+  <tbody style="word-wrap: break-word;">
+  <tr ng-repeat="issueAddress in issueAddresses">
+    <td><a ng-href="/admin/issue_addresses/{{ issueAddress.id }}">{{issueAddress.id}}</a></td>
+    <td><a ng-href="/admin/issues/{{ issueAddress.issue.slug }}">{{issueAddress.issue.title}}</a></td>
+    <td>{{issueAddress.public_address}}</td>
+    <td>{{issueAddress.balance.totalAmountInUSD}}</td>
+    <td>{{issueAddress.created_at | date:'short'}}</td>
+  </tr>
+  </tbody>
+</table>

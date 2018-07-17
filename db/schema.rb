@@ -231,7 +231,7 @@ ActiveRecord::Schema.define(version: 20180716045309) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type"
-    t.integer "gas_price_gwei"
+    t.decimal "gas_price_gwei", precision: 10, scale: 2
     t.integer "gas_used"
     t.index ["confirmed_block"], name: "index_crypto_pay_out_txns_on_confirmed_block"
     t.index ["crypto_pay_out_id"], name: "index_crypto_pay_out_txns_on_crypto_pay_out_id"

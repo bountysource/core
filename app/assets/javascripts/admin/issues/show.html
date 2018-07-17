@@ -11,7 +11,16 @@
         <div ng-bind-html="issue.body_html"></div>
         <hr>
         <div ng-show="issue.account"><h3>Account</h3><a ng-href="/admin/accounts/{{ issue.account.id }}" style="margin-left:20px;"><span>{{ issue.account.type }} ( {{ issue.account.balance | currency }} )</span></a></div>
-        <div><h3>Tracker</h3><a ng-href="{{ issue.tracker.url }}" target="_blank" style="margin-left:20px;">{{ issue.tracker.name }}</a></div>
+        <div>
+          <h3>Tracker</h3>
+          <a ng-href="{{ issue.tracker.url }}" target="_blank" style="margin-left:20px;">{{ issue.tracker.name }}</a>
+        </div>
+
+        <div>
+          <h3>IssueAddress</h3>
+          <a ng-href="/admin/issue_addresses/{{ issue.issue_address.id }}" style="margin-left:20px;">{{ issue.issue_address.public_address }}</a>
+        </div>
+
         <div><h3>Bounty Total</h3><p style="margin-left:20px;">{{ issue.bounty_total | currency }}</p></div>
         <div>
           <div ng-show="saved_at">

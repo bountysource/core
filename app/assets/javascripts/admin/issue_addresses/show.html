@@ -1,0 +1,62 @@
+<loading-bar ng-hide="issueAddress">Such loading wow...</loading-bar>
+
+<h3>IssueAddress #{{issueAddress.id}}</h3>
+<span><strong>Public Address:</strong> {{ issueAddress.public_address }}</span>
+
+<div>
+  <h3>Refund a transaction</h3>
+  <form name="form_data" novalidate>
+    <p>{{ feedbackMessage }}</p>
+    <fieldset>
+      <input type="text" ng-model="refund.transaction_hash" name="transaction_hash" placeholder="Transaction hash" required>
+      <span ng-show="form_data.transaction_hash.$dirty && form_data.transaction_hash.$error.required" class="alert alert-error">Transaction hash required</span>
+    </fieldset>
+    <fieldset>
+      <input type="text" ng-model="refund.reason" name="reason" placeholder="Reason" required>
+      <span ng-show="form_data.reason.$dirty && form_data.reason.$error.required" class="alert alert-error">Reason required</span>
+    </fieldset>
+    <button class="btn btn-primary" ng-click="processRefund(refund)">Refund</button>
+  </form>
+</div>
+
+<div>
+  <h3>Balance</h3>
+  <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-if="issueAddress.balance.ETH">
+        <td>Etheruem(ETH)</td>
+        <td>{{ issueAddress.balance.ETH.balance }}</td>
+      </tr>
+      <tr ng-repeat="token in issueAddress.balance.tokens">
+        <td>{{token.tokenInfo.name}} ({{ token.symbol }})</td>
+        <td>{{ token.balance }}</td>
+      </tr>
+  </table>
+</div>
+
+<div>
+  <h3>Crypto Bounties</h3>
+  <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>Transaction Hash</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cryptoBounty in issueAddress.crypto_bounties">
+        <td ng-show="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.amount.tokenInfo.symbol }}</td>
+        <td ng-hide="cryptoBounty.amount['ETH'] == null">ETH</td>
+        <td ng-show="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.amount.balance }}</td>
+        <td ng-hide="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.amount['ETH'].balance }}</td>
+        <td ng-hide="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.transaction_hash }}</td>
+      </tr>
+  </table>
+</div>
