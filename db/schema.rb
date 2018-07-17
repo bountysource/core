@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717083536) do
+ActiveRecord::Schema.define(version: 20180717121553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,14 @@ ActiveRecord::Schema.define(version: 20180717083536) do
     t.index ["issue_id"], name: "index_comments_on_issue_id"
   end
 
+  create_table "crypto_admin_addresses", force: :cascade do |t|
+    t.string "public_address", null: false
+    t.string "type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["public_address"], name: "index_crypto_admin_addresses_on_public_address", unique: true
+  end
+
   create_table "crypto_bounties", force: :cascade do |t|
     t.jsonb "amount", null: false
     t.bigint "issue_id"
@@ -210,6 +218,7 @@ ActiveRecord::Schema.define(version: 20180717083536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "from", limit: 50, null: false
+    t.boolean "is_refund", default: false, null: false
     t.index ["issue_id"], name: "index_crypto_bounties_on_issue_id"
     t.index ["owner_type", "owner_id"], name: "index_crypto_bounties_on_owner_type_and_owner_id"
   end
@@ -256,10 +265,12 @@ ActiveRecord::Schema.define(version: 20180717083536) do
     t.jsonb "balance"
     t.jsonb "bounty"
     t.boolean "is_refund", default: false, null: false
+    t.string "transaction_hash"
     t.index ["issue_id"], name: "index_crypto_pay_outs_on_issue_id"
     t.index ["person_id"], name: "index_crypto_pay_outs_on_person_id"
     t.index ["sent_at"], name: "index_crypto_pay_outs_on_sent_at"
     t.index ["state"], name: "index_crypto_pay_outs_on_state"
+    t.index ["transaction_hash"], name: "index_crypto_pay_outs_on_transaction_hash", unique: true
     t.index ["type"], name: "index_crypto_pay_outs_on_type"
   end
 

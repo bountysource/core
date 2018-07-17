@@ -20,11 +20,11 @@ angular.module('app')
       $scope.form_data.reason.$dirty = true;
     } else {
       var params = angular.copy(refund);
-      params.issue_id = $scope.issueAddress.issue.id
+      params.issue_id = $scope.issueAddress.issue.id;
       $api.call('/admin/ethereum_transaction_refunds', 'POST', params, function() {
         $scope.feedbackMessage = 'Refunded';
-        $scope.form_data = {}
+        $scope.form_data = {};
       });  
     }
-  }
+  };
 });
