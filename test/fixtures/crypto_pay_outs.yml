@@ -22,7 +22,7 @@
 #
 # Indexes
 #
-#  index_crypto_pay_outs_on_issue_id   (issue_id) UNIQUE
+#  index_crypto_pay_outs_on_issue_id   (issue_id)
 #  index_crypto_pay_outs_on_person_id  (person_id)
 #  index_crypto_pay_outs_on_sent_at    (sent_at)
 #  index_crypto_pay_outs_on_state      (state)
