@@ -23,4 +23,15 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="text-center">
+    <a ng-click="back()" ng-show="currentPage > 1">
+      <span>Back</span>
+    </a>
+    <span ng-show="currentPage > 1 && supporters.length === 100"> | </span>
+    <a ng-click="next()" ng-show="supporters.length === 100">
+      <span>Next</span>
+    </a>
+  </div>
+
 </div>

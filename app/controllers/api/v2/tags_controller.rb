@@ -40,7 +40,7 @@ class Api::V2::TagsController < Api::BaseController
       @collection = tagged_withs.map { |child_id,child_type,weight| child_type=='Tag' ? tag_hash[child_id] : team_hash[child_id] }
       # @collection = TagRelation.where('weight>0').group('child_id, child_type').select('child_id, child_type, sum(weight)')
       #
-      #   Tag.joins(:child_tag_relations).where('weight>0').group('tags.id').having('sum(weight)>0').order('sum(weight) desc')
+      # Tag.joins(:child_tag_relations).where('weight>0').group('tags.id').having('sum(weight)>0').order('sum(weight) desc')
   
     else
       @collection = []
