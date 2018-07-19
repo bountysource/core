@@ -36,6 +36,8 @@ class CryptoPayOut < ApplicationRecord
   self.inheritance_column = nil
   has_many :crypto_pay_out_txns
 
+  validates :transaction_hash, uniqueness: true
+
   belongs_to :issue
   belongs_to :person
 
