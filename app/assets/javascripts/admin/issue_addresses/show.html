@@ -56,7 +56,7 @@
         <td ng-hide="cryptoBounty.amount['ETH'] == null">ETH</td>
         <td ng-show="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.amount.balance }}</td>
         <td ng-hide="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.amount['ETH'].balance }}</td>
-        <td ng-hide="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.transaction_hash }}</td>
+        <td>{{ cryptoBounty.transaction_hash }}</td>
       </tr>
   </table>
 </div>
