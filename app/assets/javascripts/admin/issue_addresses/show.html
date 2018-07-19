@@ -17,8 +17,8 @@
     </fieldset>
     <fieldset>
       <label>Fee Percentage</label>
-      <input type="number" ng-model="refund.fee_percentage" name="fee_percentage" value="5" placeholder="Fee Percentage" required>
-      <span ng-show="form_data.fee_percentage.$dirty && form_data.fee_percentage.$error.required" class="alert alert-error">Fee Percentage required</span>
+      <input type="number" ng-model="refund.fee_percent" name="fee_percent" value="5" placeholder="Fee Percentage" required>
+      <span ng-show="form_data.fee_percent.$dirty && form_data.fee_percent.$error.required" class="alert alert-error">Fee Percentage required</span>
     </fieldset>
     <button class="btn btn-primary" ng-click="processRefund(refund)">Refund</button>
   </form>
@@ -85,16 +85,18 @@
         <td>{{ cryptoPayOut.receiver_address }}</td>
         <td>{{ cryptoPayOut.is_refund }}</td>
         <td>{{ cryptoPayOut.reason }}</td>
-        <td>{{ cryptoPayOut.fee_percentage }}</td>
+        <td>{{ cryptoPayOut.fee_percent }}</td>
         <td>
-          <p ng-if="cryptoPayOut.balance.ETH">
-            <p>Etheruem(ETH)</p>
-            <p>( {{ cryptoPayOut.balance.ETH.balance }} ) </p>
-          </p>
-          <p ng-repeat="token in cryptoPayOut.balance.tokens">
-            <p>{{ token.tokenInfo.name }} ({{ token.tokenInfo.symbol }})</p>
-            <p>{{ token.balance }}</p>
-          </p>
+          <div ng-show="cryptoPayOut.balance">
+            <p ng-show="cryptoPayOut.balance.ETH">
+              <p>Etheruem(ETH)</p>
+              <p>( {{ cryptoPayOut.balance.ETH.balance }} ) </p>
+            </p>
+            <div ng-show="cryptoPayOut.balance.tokens" ng-repeat="token in cryptoPayOut.balance.tokens">
+              <p>{{ token }} ({{ token.tokenInfo.symbol }})</p>
+              <p>{{ token.balance }}</p>
+            </div>
+          </div>
         </td>
       </tr>
   </table>

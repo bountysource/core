@@ -6,7 +6,7 @@ class Api::V0::EthereumTransactionRefundsController < Api::V0::BaseController
     CryptoPayOut.create(
       issue_id: @issue.id, 
       transaction_hash: params[:transaction_hash], 
-      fee_percentage: params[:fee_percentage],
+      fee_percent: params[:fee_percent],
       type: 'ETH::Payout', 
       reason: params[:reason],
       person: owner,
