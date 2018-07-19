@@ -38,6 +38,8 @@ class CryptoPayOut < ApplicationRecord
 
   validates :transaction_hash, uniqueness: true
 
+  validates :fee_percent, presence: :true, if: :is_refund
+
   belongs_to :issue
   belongs_to :person
 
