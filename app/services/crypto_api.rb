@@ -35,11 +35,9 @@ class CryptoApi
     end
   end
 
-  def self.refund_transaction(issue_id, transaction_hash, reason = "")
+  def self.refund_transaction(issue_id, transaction_hash)
     url = "#{BASE_URL}issues/#{issue_id}/refund/#{transaction_hash}"
-    url += "?reason=#{reason}" if reason.present? 
 
-    p url
     response = RestClient.get(url, DEFAULT_HEADERS )
 
     raise RefundTransactionError unless response.code == 200
