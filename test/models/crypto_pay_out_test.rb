@@ -20,6 +20,7 @@
 #  bounty              :jsonb
 #  is_refund           :boolean          default(FALSE), not null
 #  transaction_hash    :string
+#  reason              :string
 #
 # Indexes
 #

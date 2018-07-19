@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717121553) do
+ActiveRecord::Schema.define(version: 20180719030123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -266,6 +266,7 @@ ActiveRecord::Schema.define(version: 20180717121553) do
     t.jsonb "bounty"
     t.boolean "is_refund", default: false, null: false
     t.string "transaction_hash"
+    t.string "reason"
     t.index ["issue_id"], name: "index_crypto_pay_outs_on_issue_id"
     t.index ["person_id"], name: "index_crypto_pay_outs_on_person_id"
     t.index ["sent_at"], name: "index_crypto_pay_outs_on_sent_at"
