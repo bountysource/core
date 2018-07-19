@@ -60,3 +60,24 @@
       </tr>
   </table>
 </div>
+
+<div>
+  <h3>Crypto Pay Outs</h3>
+  <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+    <thead>
+      <tr>
+        <th>State</th>
+        <th>Receiver</th>
+        <th>Refund?</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cryptoPayOut in issueAddress.crypto_pay_outs">
+        <td>{{ cryptoPayOut.state }}</td>
+        <td>{{ cryptoPayOut.receiver_address }}</td>
+        <td>{{ cryptoPayOut.is_refund }}</td>
+        <td>{{ cryptoPayOut.reason }}</td>
+      </tr>
+  </table>
+</div>

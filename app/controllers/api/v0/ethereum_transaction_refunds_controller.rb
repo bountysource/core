@@ -2,7 +2,7 @@ class Api::V0::EthereumTransactionRefundsController < Api::V0::BaseController
   def create
     owner = find_owner_from_crypto_bounties_if_exist
     CryptoPayOut.create(
-      issue: params[:issue_id], 
+      issue_id: params[:issue_id], 
       transaction_hash: params[:transaction_hash], 
       type: 'ETH::Payout', 
       reason: params[:reason],
