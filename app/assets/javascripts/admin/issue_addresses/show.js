@@ -7,7 +7,7 @@ angular.module('app')
   });
 })
 .controller("IssueAddressesShow", function ($routeParams, $scope, $api, $window) {
-  $scope.refund = { fee_percent: 5 }
+  $scope.refund = { fee_percent: 5 };
 
   $api.call('/admin/issue_addresses/' + $routeParams.id, function(response) {
     $scope.issueAddress = angular.copy(response.data);
