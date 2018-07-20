@@ -86,6 +86,7 @@ class Issue < ApplicationRecord
 
   has_many :bounties
   has_many :crypto_bounties
+  has_many :crypto_pay_outs
   has_many :comments
   belongs_to :tracker
   has_many :languages, through: :tracker

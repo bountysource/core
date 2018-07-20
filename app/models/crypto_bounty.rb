@@ -14,6 +14,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  from             :string(50)       not null
+#  is_refund        :boolean          default(FALSE), not null
 #
 # Indexes
 #

@@ -18,14 +18,18 @@
 #  seed_eth            :decimal(, )
 #  balance             :jsonb
 #  bounty              :jsonb
+#  is_refund           :boolean          default(FALSE), not null
+#  transaction_hash    :string
+#  reason              :string
 #
 # Indexes
 #
-#  index_crypto_pay_outs_on_issue_id   (issue_id) UNIQUE
-#  index_crypto_pay_outs_on_person_id  (person_id)
-#  index_crypto_pay_outs_on_sent_at    (sent_at)
-#  index_crypto_pay_outs_on_state      (state)
-#  index_crypto_pay_outs_on_type       (type)
+#  index_crypto_pay_outs_on_issue_id          (issue_id)
+#  index_crypto_pay_outs_on_person_id         (person_id)
+#  index_crypto_pay_outs_on_sent_at           (sent_at)
+#  index_crypto_pay_outs_on_state             (state)
+#  index_crypto_pay_outs_on_transaction_hash  (transaction_hash) UNIQUE
+#  index_crypto_pay_outs_on_type              (type)
 #
 
 require 'test_helper'

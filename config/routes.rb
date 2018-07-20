@@ -196,6 +196,9 @@ Api::Application.routes.draw do
 
           resources :cash_outs, only: [:index, :show, :update]
 
+          resources :issue_addresses, only: [:index, :show]
+          resources :ethereum_transaction_refunds, on: :create
+
           resources :crypto_pay_outs, only: [:index] do
             resource :send, only: :create, module: :crypto_pay_outs
           end

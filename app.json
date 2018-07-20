@@ -19,6 +19,9 @@
     "COOKIE_SECRET_KEY_BASE": {
       "required": true
     },
+    "WEB3_PROVIDER_NETWORK_ID": {
+      "required": true
+    },
     "COOKIE_NAME_SHOPPING_CART": {
       "required": true
     },

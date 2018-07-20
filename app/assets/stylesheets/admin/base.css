@@ -6,7 +6,7 @@
 }
 
 #sidebar { position: absolute; padding: 10px 20px; }
-#main-content { position: absolute; left: 250px; padding-top: 10px; width: 85%; }
+#main-content { position: absolute; left: 250px; padding-top: 10px; }
 
 @media print {
   #sidebar { display: none; }

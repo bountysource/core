@@ -1,0 +1,103 @@
+<loading-bar ng-hide="issueAddress">Such loading wow...</loading-bar>
+
+<h3>IssueAddress #{{issueAddress.id}}</h3>
+<span><strong>Public Address:</strong> {{ issueAddress.public_address }}</span>
+
+<div>
+  <h3>Refund a transaction</h3>
+  <form name="form_data" novalidate>
+    <p>{{ feedbackMessage }}</p>
+    <fieldset>
+      <input type="text" ng-model="refund.transaction_hash" name="transaction_hash" placeholder="Transaction hash" required>
+      <span ng-show="form_data.transaction_hash.$dirty && form_data.transaction_hash.$error.required" class="alert alert-error">Transaction hash required</span>
+    </fieldset>
+    <fieldset>
+      <input type="text" ng-model="refund.reason" name="reason" placeholder="Reason" required>
+      <span ng-show="form_data.reason.$dirty && form_data.reason.$error.required" class="alert alert-error">Reason required</span>
+    </fieldset>
+    <fieldset>
+      <label>Fee Percentage</label>
+      <input type="number" ng-model="refund.fee_percent" name="fee_percent" value="5" placeholder="Fee Percentage" required>
+      <span ng-show="form_data.fee_percent.$dirty && form_data.fee_percent.$error.required" class="alert alert-error">Fee Percentage required</span>
+    </fieldset>
+    <button class="btn btn-primary" ng-click="processRefund(refund)">Refund</button>
+  </form>
+</div>
+
+<div>
+  <h3>Balance</h3>
+  <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-if="issueAddress.balance.ETH">
+        <td>Etheruem(ETH)</td>
+        <td>{{ issueAddress.balance.ETH.balance }}</td>
+      </tr>
+      <tr ng-repeat="token in issueAddress.balance.tokens">
+        <td>{{token.tokenInfo.name}} ({{ token.tokenInfo.symbol }})</td>
+        <td>{{ token.balance }}</td>
+      </tr>
+  </table>
+</div>
+
+<div>
+  <h3>Crypto Bounties</h3>
+  <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>Transaction Hash</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cryptoBounty in issueAddress.crypto_bounties">
+        <td ng-show="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.amount.tokenInfo.symbol }}</td>
+        <td ng-hide="cryptoBounty.amount['ETH'] == null">ETH</td>
+        <td ng-show="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.amount.balance }}</td>
+        <td ng-hide="cryptoBounty.amount['ETH'] == null">{{ cryptoBounty.amount['ETH'].balance }}</td>
+        <td>{{ cryptoBounty.transaction_hash }}</td>
+      </tr>
+  </table>
+</div>
+
+<div>
+  <h3>Crypto Pay Outs</h3>
+  <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
+    <thead>
+      <tr>
+        <th>State</th>
+        <th>Receiver</th>
+        <th>Refund?</th>
+        <th>Reason</th>
+        <td>Fee Percentage</td>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cryptoPayOut in issueAddress.crypto_pay_outs">
+        <td>{{ cryptoPayOut.state }}</td>
+        <td>{{ cryptoPayOut.receiver_address }}</td>
+        <td>{{ cryptoPayOut.is_refund }}</td>
+        <td>{{ cryptoPayOut.reason }}</td>
+        <td>{{ cryptoPayOut.fee_percent }}</td>
+        <td>
+          <div ng-show="cryptoPayOut.balance">
+            <p ng-show="cryptoPayOut.balance.ETH">
+              <p>Etheruem(ETH)</p>
+              <p>( {{ cryptoPayOut.balance.ETH.balance }} ) </p>
+            </p>
+            <div ng-show="cryptoPayOut.balance.tokens" ng-repeat="token in cryptoPayOut.balance.tokens">
+              <p>{{ token }} ({{ token.tokenInfo.symbol }})</p>
+              <p>{{ token.balance }}</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+  </table>
+</div>
