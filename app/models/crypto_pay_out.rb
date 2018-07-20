@@ -18,19 +18,27 @@
 #  seed_eth            :decimal(, )
 #  balance             :jsonb
 #  bounty              :jsonb
+#  is_refund           :boolean          default(FALSE), not null
+#  transaction_hash    :string
+#  reason              :string
 #
 # Indexes
 #
-#  index_crypto_pay_outs_on_issue_id   (issue_id) UNIQUE
-#  index_crypto_pay_outs_on_person_id  (person_id)
-#  index_crypto_pay_outs_on_sent_at    (sent_at)
-#  index_crypto_pay_outs_on_state      (state)
-#  index_crypto_pay_outs_on_type       (type)
+#  index_crypto_pay_outs_on_issue_id          (issue_id)
+#  index_crypto_pay_outs_on_person_id         (person_id)
+#  index_crypto_pay_outs_on_sent_at           (sent_at)
+#  index_crypto_pay_outs_on_state             (state)
+#  index_crypto_pay_outs_on_transaction_hash  (transaction_hash) UNIQUE
+#  index_crypto_pay_outs_on_type              (type)
 #
 
 class CryptoPayOut < ApplicationRecord
   self.inheritance_column = nil
   has_many :crypto_pay_out_txns
+
+  validates :transaction_hash, uniqueness: true, allow_nil: true
+
+  validates :fee_percent, presence: :true, if: :is_refund
 
   belongs_to :issue
   belongs_to :person
