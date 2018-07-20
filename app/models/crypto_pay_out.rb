@@ -36,7 +36,7 @@ class CryptoPayOut < ApplicationRecord
   self.inheritance_column = nil
   has_many :crypto_pay_out_txns
 
-  validates :transaction_hash, uniqueness: true
+  validates :transaction_hash, uniqueness: true, allow_nil: true
 
   validates :fee_percent, presence: :true, if: :is_refund
 
