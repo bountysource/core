@@ -22,6 +22,7 @@
 
 class Currency < ApplicationRecord
   validates :type, presence: true
+  validates :value, presence: true, on: :update
 
   def self.sync_all
     [
