@@ -321,6 +321,14 @@ class Team < ApplicationRecord
     bounties.paid.sum(:amount).to_f
   end
 
+  def owned_issues_active_bounties_amount
+    owned_trackers
+      .joins(:issues)
+      .where('issues.bounty_total > ?', 0)
+      .where(issues: { paid_out: false })
+      .sum('issues.bounty_total')
+  end
+
   def self.top_backers
     bounty_posters = Team.joins(:bounties).where("bounties.owner_type LIKE 'Team%'").merge(Bounty.visible).group("teams.id, bounties.id").select("teams.*, sum(bounties.amount) as alltime_backed").to_a
     pledge_givers = Team.joins(:pledges).where("pledges.owner_type LIKE 'Team%'").merge(Pledge.active).group("teams.id, pledges.id").select("teams.*, sum(pledges.amount) as alltime_pledged").to_a
