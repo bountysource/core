@@ -28,6 +28,7 @@ if @include_team_extended
     open_bounties_amount
     open_issues_count
     closed_bounties_amount
+    owned_issues_active_bounties_amount
     accepts_public_payins
     accepts_issue_suggestions
     can_email_stargazers
