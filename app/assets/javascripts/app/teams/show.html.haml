@@ -65,6 +65,9 @@
             .text-muted
             .text-muted{ "ng-show"=>"team.bounty_hunter_count==1" } bounty hunter
             .text-muted{ "ng-hide"=>"team.bounty_hunter_count==1" } bounty hunters
+          %div{ "style"=>"padding-top:5px; padding-bottom:5px", "ng-if"=>"team.owned_issues_active_bounties_amount>0 "}
+            %div{ "style"=>"font-size:22px; font-weight: bold" } {{team.owned_issues_active_bounties_amount | dollars}}
+            .text-muted total bounties on our issues
           %div{ "style"=>"clear: left" }
 
         %div{ "ng-show"=>"bounty_hunters_for_team.length>0" }
