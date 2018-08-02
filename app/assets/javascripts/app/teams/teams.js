@@ -99,15 +99,6 @@ angular.module('teams')
       trackEvent: 'View Fundraiser Edit'
     }, defaultRouteOptions));
 
-    // legacy route, needs to be ahead of similar route below
-    $routeProvider.when('/teams/:id/fundraisers/new', { controller: function($window) { $window.location.replace('https://salt.bountysource.com/'); }, template: "" });
-    $routeProvider.when('/teams/:id/fundraisers/:fundraiser_id', angular.extend({
-      templateUrl: 'app/fundraisers/show.html',
-      container: false,
-      controller: 'BaseTeamController',
-      trackEvent: 'View Fundraiser Show'
-    }, defaultRouteOptions));
-
     $routeProvider.when('/teams/:id/backers', angular.extend({
       templateUrl: 'app/teams/backers.html',
       container: false,
