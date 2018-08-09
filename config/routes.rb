@@ -270,6 +270,7 @@ Api::Application.routes.draw do
           get 'people/:profile_id/teams', action: :teams
           get 'people/:profile_id/activity', action: :activity
           get 'projects', action: :projects
+          post 'people/:profile_id/report', action: :report
 
           get :my_languages, action: :languages
           post :my_languages, action: :set_languages

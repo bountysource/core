@@ -1,0 +1,15 @@
+<p>
+Activity report of the account: <a href="<%= Api::Application.config.www_url %>/users/<%=@report[:person_id]%>"><%=@report[:person_id]%></a>
+</p>
+
+<p>
+From: <a href="<%=@person.frontend_url%>"/>
+</p
+>
+<p>
+<b>Reason:</b> <%=@report[:reason]%>
+</p>
+
+<p>
+<b>Comment:</b> <%=@report[:note]%>
+</p>

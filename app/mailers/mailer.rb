@@ -738,4 +738,14 @@ class Mailer < ActionMailer::Base
     mail(to: @person.email, subject: 'Your cash out has been processed')
   end
 
+  def report_account(options)
+    @person = options[:person]
+    @report = options[:report]
+
+    mail(to: self.default_params[:from], cc: @person.email, subject: "Account activity report") do |format|
+      format.text
+      format.html
+    end
+  end
+
 end
