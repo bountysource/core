@@ -164,6 +164,8 @@ Api::Application.routes.draw do
 
           resources :pledges
 
+          resources :adverts
+
           resources :transactions do
             resources :splits
 
@@ -442,6 +444,7 @@ Api::Application.routes.draw do
         scope path: :jobs, controller: :delayed_jobs do
           match '/:id/poll', action: :poll, via: :get
         end
+
 
         resources :transactions, only: [:index, :show]
 
