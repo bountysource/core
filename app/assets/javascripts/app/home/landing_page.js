@@ -38,8 +38,8 @@ angular.module('app').controller('LandingPageController', function ($scope, $api
   $api.ad_spaces()
     .then(function(response) {
       $scope.ads = {
-        header_ad: response.find(function(ad) { return ad.position === 'header' }),
-        interstitial_ads: response.filter(function(ad) { return ad.position === 'interstitial' })
-      }
-    })
+        header_ad: response.find(function(ad) { return ad.position === 'header'; }),
+        interstitial_ads: response.filter(function(ad) { return ad.position === 'interstitial'; })
+      };
+    });
 });

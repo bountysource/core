@@ -17,7 +17,7 @@ angular.module('app')
         $api.delete_ad_space(item.id).then(function(response){
           var index = $scope.adverts.indexOf(item);
           $scope.adverts.splice(index, 1);
-        })    
+        });
       }
-    }
+    };
   });
