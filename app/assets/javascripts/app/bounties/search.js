@@ -203,6 +203,20 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     }
   };
 
+  $scope.getInterstitialAd = function(repeatIndex){
+    if(repeatIndex % 10 !== 3){ return; }
+    if(!$scope.ads) { return; }
+    if(!$scope.ads.interstitial_ads) { return; }
+    if($scope.ads.interstitial_ads.length === 0) { return; }
+
+    // calculates which interstial ad is being shown, based on 1 every 10 items
+    var ad_index = Math.floor(repeatIndex / 10);
+    // calculates index to be shown, in case interstital ads length is less than amount on page
+    var actual_index = ad_index % $scope.ads.interstitial_ads.length;
+
+    return $scope.ads.interstitial_ads[actual_index];
+  };
+
   $scope.initiate = function() {
     $scope.form_data = {};
     $scope.populate_form_data_with_route_params();

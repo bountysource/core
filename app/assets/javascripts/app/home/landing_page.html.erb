@@ -1,4 +1,31 @@
 <div class="container" id="landing-page">
+  <div class="header-info" ng-show="ads.header_ad">
+    <img ng-src="{{ ads.header_ad.image_url }}">
+    <div class="header-info-details">
+      <div>
+        <h4 class="mt-0">
+        {{ ads.header_ad.title }}
+        </h4>
+      </div>
+      <div>
+        {{ ads.header_ad.text }}
+      </div>
+    </div>
+    <div class="header-info-actions">
+      <div>
+        
+      </div>
+      <div>
+        <a ng-href="{{ ads.header_ad.button_url }}">
+          <button class="btn btn-light-blue">{{ ads.header_ad.button_text }}</button>
+        </a>
+      </div>
+      <div class="buy-space">
+        <a href="https://canyacoin.typeform.com/to/fsZa7Q" target="_blank">Buy this ad space</a>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-sm-3 sidebar-section landing-page-section">
       <section class='post-bounty-cta'>

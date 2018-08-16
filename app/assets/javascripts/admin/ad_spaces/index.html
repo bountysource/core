@@ -1,0 +1,38 @@
+<h3>Ad Spaces</h3>
+
+<a href='/admin/ad_spaces/new'><button class="btn btn-success">New</button></a>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Image</th>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Button Text</th>
+    <th>Button Url</th>
+    <th>Position</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr ng-repeat="adSpace in adverts">
+    <td><img ng-src="{{adSpace.image_url}}" /></td>
+    <td>{{ adSpace.id }}</td>
+    <td>{{ adSpace.title }}</td>
+    <td>{{ adSpace.text }}</td>
+    <td>{{ adSpace.button_text }}</td>
+    <td>{{ adSpace.button_url }}</td>    
+    <td>
+      {{ adSpace.position }}
+    </td>
+    <td>
+      <a ng-href='{{ "/admin/ad_spaces/" + adSpace.id + "/edit" }}'>
+        <button class="btn btn-success">Edit</button>
+      </a>
+      <button ng-click="delete(adSpace)" class="btn btn-danger">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

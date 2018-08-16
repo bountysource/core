@@ -164,6 +164,8 @@ Api::Application.routes.draw do
 
           resources :pledges
 
+          resources :adverts
+
           resources :transactions do
             resources :splits
 
@@ -443,7 +445,9 @@ Api::Application.routes.draw do
           match '/:id/poll', action: :poll, via: :get
         end
 
+
         resources :transactions, only: [:index, :show]
+        resources :ad_spaces, only: :index
 
         resources :bounties, only: [] do
           collection do

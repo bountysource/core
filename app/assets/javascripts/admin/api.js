@@ -704,6 +704,36 @@ angular.module('api.bountysource',[]).
       return this.call("/admin/takedowns");
     };
 
+    this.get_ad_spaces = function(id) {
+      return this.call("/admin/adverts/", function(response){
+        return response;
+      });
+    };
+
+    this.get_ad_space = function(id) {
+      return this.call("/admin/adverts/" + id, function(response){
+        return response;
+      });
+    };
+
+    this.delete_ad_space = function(id) {
+      return this.call("/admin/adverts/" + id, "DELETE", function(response){
+        return response;
+      });
+    };
+
+    this.create_ad_space = function(form_data) {
+      return this.call("/admin/adverts", "POST", form_data, function(response){
+        return response;
+      });
+    };
+
+    this.update_ad_space = function(form_data) {
+      return this.call("/admin/adverts/"+form_data.id, "PUT", form_data, function(response){
+        return response;
+      });
+    };
+
     this.create_takedown = function(form_data) {
       return this.call("/admin/takedowns", "POST", form_data);
     };

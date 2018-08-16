@@ -1,5 +1,6 @@
 angular.module('app').controller('PressController', function($scope) {
   $scope.articles = [
+    { date: '8/12/17', source: 'Credit Donkey', title: 'Best in Crowdfunding 2018: Top Business Experts', href: 'https://www.creditdonkey.com/best-crowdfunding.html' },
     { date: '12/21/17', source: 'Coin Idol', title: 'The coalition of Bountysource and CanYa creates a new open field for peer-to-peer software bounties', href: 'https://coinidol.com/canya-purchase-open-source-bounty-software-platform-prior-to-ending-its-ico/'},
     { date: '12/20/17', source: 'Canya.io', title: 'Canya acquires majority stake in bountysource', href: 'https://blog.canya.com/2017/12/20/canya-acquires-majority-stake-in-bountysource-adds-over-46000-users/'},
     { date: '8/13/14', source: 'The American Genius', title: 'Finally a crowdfunding platform for open source software', href: 'http://agbeat.com/finance/finally-crowdfunding-platform-open-source-software/' },
