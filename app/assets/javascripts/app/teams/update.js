@@ -8,5 +8,4 @@ angular.module('fundraisers').controller('TeamUpdateController', function ($scop
     $pageTitle.set($scope.update.title);
     return $scope.updates;
   });
-
 });

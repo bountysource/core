@@ -128,7 +128,39 @@
       <div ng-show="issues_count == 0" class="alert alert-salmon">No results found.</div>
 
       <div ng-show="search_results.length > 0">
-        <issue-card ng-repeat="issue in search_results" issue="issue"></issue-card>
+        <div ng-repeat="issue in search_results">
+          <!-- INTERSTITIAL ADS BEGIN -->
+          <div ng-if="getInterstitialAd($index)">
+            <div class="interstitial-info">
+              <img ng-src="{{ getInterstitialAd($index).image_url }}">
+              <div class="interstitial-info-details">
+                <div>
+                  <h4 class="mt-0">
+                  {{ getInterstitialAd($index).title }}
+                  </h4>
+                </div>
+                <div>
+                  {{ getInterstitialAd($index).text }}
+                </div>
+              </div>
+              <div class="interstitial-info-actions">
+                <div>
+                  
+                </div>
+                <div>
+                  <a ng-href="{{ getInterstitialAd($index).button_url }}">
+                    <button class="btn btn-light-blue">{{ getInterstitialAd($index).button_text }}</button>
+                  </a>
+                </div>
+                <div class="buy-space">
+                  <a href="https://canyacoin.typeform.com/to/fsZa7Q" target="_blank">Buy this ad space</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- INTERSTITIAL ADS END -->
+          <issue-card issue="issue"></issue-card>  
+        </div>        
       </div>
 
       <div ng-show="issues_count > 50">

@@ -517,6 +517,10 @@ angular.module('services').config(function($httpProvider) {
     return this.call("/fundraisers");
   };
 
+  this.ad_spaces = function(){
+    return this.call("/ad_spaces");
+  },
+
   this.reward_create = function(fundraiser_id, data, callback) {
     this.call("/user/fundraisers/"+fundraiser_id+"/rewards", "POST", data, callback);
   };

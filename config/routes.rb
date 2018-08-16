@@ -447,6 +447,7 @@ Api::Application.routes.draw do
 
 
         resources :transactions, only: [:index, :show]
+        resources :ad_spaces, only: :index
 
         resources :bounties, only: [] do
           collection do
