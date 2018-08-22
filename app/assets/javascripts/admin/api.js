@@ -705,31 +705,31 @@ angular.module('api.bountysource',[]).
     };
 
     this.get_ad_spaces = function(id) {
-      return this.call("/admin/adverts/", function(response){
+      return this.call("/admin/info_spaces/", function(response){
         return response;
       });
     };
 
     this.get_ad_space = function(id) {
-      return this.call("/admin/adverts/" + id, function(response){
+      return this.call("/admin/info_spaces/" + id, function(response){
         return response;
       });
     };
 
     this.delete_ad_space = function(id) {
-      return this.call("/admin/adverts/" + id, "DELETE", function(response){
+      return this.call("/admin/info_spaces/" + id, "DELETE", function(response){
         return response;
       });
     };
 
     this.create_ad_space = function(form_data) {
-      return this.call("/admin/adverts", "POST", form_data, function(response){
+      return this.call("/admin/info_spaces", "POST", form_data, function(response){
         return response;
       });
     };
 
     this.update_ad_space = function(form_data) {
-      return this.call("/admin/adverts/"+form_data.id, "PUT", form_data, function(response){
+      return this.call("/admin/info_spaces/"+form_data.id, "PUT", form_data, function(response){
         return response;
       });
     };

@@ -26,7 +26,7 @@ class AdSpace < ApplicationRecord
   # positions where the advert can be, and the maximum number of ads
   POSITIONS = [
     { name: "header", max_count: 1 },
-    { name: "sidebar", max_count: 1 },
+    { name: "issue", max_count: 1 },
     { name: "interstitial" }
   ]
 

@@ -1,4 +1,4 @@
-class Api::V0::AdvertsController < Api::V0::BaseController
+class Api::V0::InfoSpacesController < Api::V0::BaseController
   before_action :require_admin, except: :show
   def index
     @ad_spaces = AdSpace.all

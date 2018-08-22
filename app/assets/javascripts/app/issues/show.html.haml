@@ -2,6 +2,7 @@
   %h3 {{issue_error}}
 .container
   %div{ "ng-show"=>"issue.id && (!issue.tracker || !issue.tracker.takendown)" }
+    %info-space{"info-space" => "ads.issue_ad"}
     .row.mt-5
       .col-md-8
         / SECTION ISSUE CARD START
