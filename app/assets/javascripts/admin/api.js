@@ -738,7 +738,7 @@ angular.module('api.bountysource',[]).
       return this.call("/admin/accounts/"+form_data.account_id+"/set_override_fees", "POST", form_data, function(response){
         return response;
       });
-    }
+    };
 
     this.create_takedown = function(form_data) {
       return this.call("/admin/takedowns", "POST", form_data);

@@ -43,6 +43,6 @@ angular.module('app')
       } else {
         $scope.error = response.data.error;
       }
-    })
-  }
+    });
+  };
 });
