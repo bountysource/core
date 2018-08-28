@@ -10,7 +10,8 @@ angular.module('activity').
               image_url: person.image_url,
               name: person.display_name,
               balance: person.account.balance,
-              id: 'person'
+              id: 'person',
+              account_id: person.account.id
             });
           }
 
@@ -21,7 +22,8 @@ angular.module('activity').
                 image_url: team.image_url,
                 name: team.name,
                 balance: team.account_balance,
-                id: 'team' + team.id
+                id: 'team' + team.id,
+                account_id: team.account_id
               });
             }
           }
@@ -167,7 +169,8 @@ angular.module('activity').
     $scope.$watch('cashOut.amount', function(amount) {
       if (angular.isNumber(amount)) {
         $api.v2.account({
-          cash_out: amount
+          cash_out: amount,
+          source: $scope.cashOut.source
         }).then(function(response) {
           if (response.success) {
             $scope.fee = response.data.cash_out.fee || 0;

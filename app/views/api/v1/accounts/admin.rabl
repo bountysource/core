@@ -9,6 +9,7 @@ attribute :created_at
 attribute :updated_at
 attribute :owner_id
 attribute :owner_type
+attribute :override_fee_percentage
 
 child(:admin_splits => :splits) do
   attributes :id, :amount, :created_at, :updated_at, :account_id, :item_id, :item_type

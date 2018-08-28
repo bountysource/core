@@ -9,6 +9,23 @@
       <li><strong>Created: </strong>{{ account.created_at | date:'medium' }}</li>
       <li><strong>Updated: </strong>{{ account.updated_at | date:'medium' }}</li>
       <li><strong>Owner: </strong> {{ account.owner}} </li>
+      <li>
+        <strong>Override Fee Percentage(Default 10):</strong>
+        <div ng-show="success" class="alert alert-success">{{ success }}</div>
+        <div ng-show="error" class="alert alert-error">{{ error }}</div>
+        <div>
+          <form>
+            <div class="control-group">
+              <div class="controls">
+                <input type="number" placeholder="Leave blank if default to standard" class="span11" ng-model="form_data.overrideFeePercentage"></input>
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-primary" ng-click="updateAccount(form_data)">Update Fee</button>
+            </div>
+          </form>
+        </div>
+      </li>
     </ul>
     <h3>Splits</h3>
     <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
@@ -36,6 +53,4 @@
       </tbody>
     </table>
   </div>
-
-
 </div>

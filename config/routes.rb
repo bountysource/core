@@ -120,6 +120,7 @@ Api::Application.routes.draw do
           end
 
           resources :accounts do
+            resources :set_override_fees, only: :create, module: :accounts
             collection do
               get :overview
             end
