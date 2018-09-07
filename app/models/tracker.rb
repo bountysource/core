@@ -71,6 +71,7 @@ class Tracker < ApplicationRecord
     Savannah::API
     Mantis::API
     Gitlab::API
+    Redmine::API
   )
 
   STATIC_SUBCLASSNAMES = %w(
@@ -87,6 +88,7 @@ class Tracker < ApplicationRecord
     Savannah::Tracker
     Mantis::Tracker
     Gitlab::Tracker
+    Redmine::Tracker
   )
 
   class RemoteAPI

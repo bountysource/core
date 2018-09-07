@@ -34,6 +34,10 @@ FactoryBot.define do
       association :tracker, factory: :bugzilla_tracker
     end
 
+    factory :redmine_issue, class: Redmine::Issue do
+      association :tracker, factory: :redmine_tracker
+    end
+
     factory :gitlab, class: Gitlab::Issue do
       association :tracker, factory: :gitlab_tracker
     end
