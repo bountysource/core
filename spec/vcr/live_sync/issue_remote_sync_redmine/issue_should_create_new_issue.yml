@@ -1,0 +1,668 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/https:%2F%2Fprojects.theforeman.org%2Fissues%2F863
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 01 Sep 2018 20:11:29 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - b4f0231e-d0c2-4475-88f3-95e9e0aac524
+      X-Runtime:
+      - '0.019036'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '1'
+      Ratelimit-Remaining:
+      - '599'
+      Ratelimit-Reset:
+      - '1535832749'
+      Ratelimit-Resettime:
+      - Sun, 01 Sep 2018 20:12:29 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Sat, 01 Sep 2018 20:11:30 GMT
+- request:
+    method: get
+    uri: https://projects.theforeman.org/issues/863
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 01 Sep 2018 20:16:05 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Request-Id:
+      - 7100f6ce-d4fe-4c88-9d93-0e7f4a3625b2
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Runtime:
+      - '0.431175'
+      X-Content-Type-Options:
+      - nosniff
+      X-Powered-By:
+      - Phusion Passenger 5.3.3
+      Set-Cookie:
+      - _redmine_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTA3MWVmY2ZkNzg1NTQzNjA5NjczNjhjNDM0NGYzNDdkBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMUhQRzlndVZYRHJnWE8rMHQzNHBSVEI3ZXd0RzlBNVkwa2NuU3BBNHhtUVE9BjsARg%3D%3D--3366193db95c2d1baded70b7e27cee7a932558fb;
+        path=/; HttpOnly
+      Etag:
+      - W/"25a6d4023131c8788b1d95c1b747e176"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=15778800;
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\"
+        />\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"/>\n<title>Feature
+        #863: add ability to restrict ldap authentication to a security group - Foreman</title>\n<meta
+        name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1,
+        user-scalable=no\">\n<meta name=\"description\" content=\"Redmine\" />\n<meta
+        name=\"keywords\" content=\"issue,bug,tracker\" />\n<meta name=\"csrf-param\"
+        content=\"authenticity_token\" />\n<meta name=\"csrf-token\" content=\"00kuWOCYUvqyKCyt93RQ998prMxpp9L2QJpklvX/X7rPuJPaBc9cQqUTwYAo/gG7wfduHdSkRMLRU7Yy+87Gvg==\"
+        />\n<link rel='shortcut icon' href='/favicon.ico?1507716691' />\n<link rel=\"stylesheet\"
+        media=\"all\" href=\"/stylesheets/jquery/jquery-ui-1.11.0.css?1507716691\"
+        />\n<link rel=\"stylesheet\" media=\"all\" href=\"/themes/alternate/stylesheets/application.css?1532081051\"
+        />\n<link rel=\"stylesheet\" media=\"all\" href=\"/stylesheets/responsive.css?1532081119\"
+        />\n\n<script src=\"/javascripts/jquery-1.11.1-ui-1.11.0-ujs-3.1.4.js?1507716691\"></script>\n<script
+        src=\"/javascripts/application.js?1532081119\"></script>\n<script src=\"/javascripts/responsive.js?1532081119\"></script>\n<script>\n//<![CDATA[\n$(window).load(function(){
+        warnLeavingUnsaved('The current page contains unsaved text that will be lost
+        if you leave this page.'); });\n//]]>\n</script>\n\n<link rel=\"stylesheet\"
+        media=\"screen\" href=\"/plugin_assets/redmine_lightbox2/stylesheets/jquery.fancybox-2.1.5.css?1507720332\"
+        /><link rel=\"stylesheet\" media=\"screen\" href=\"/plugin_assets/redmine_lightbox2/stylesheets/lightbox.css?1532081186\"
+        /><script src=\"/plugin_assets/redmine_lightbox2/javascripts/jquery.fancybox-2.1.5.pack.js?1507720332\"></script><script
+        src=\"/plugin_assets/redmine_lightbox2/javascripts/lightbox.js?1532081186\"></script>
+        <script src=\"/plugin_assets/redmine_ruby_code/javascripts/prer.js?1507720332\"></script>\n<link
+        rel=\"stylesheet\" media=\"screen\" href=\"/plugin_assets/redmine_ruby_code/stylesheets/prer.css?1507720332\"
+        />\n <link rel=\"stylesheet\" media=\"screen\" href=\"/plugin_assets/redmine_vote/stylesheets/stylesheet.css?1507720332\"
+        />\n<!-- page specific tags -->\n    <link rel=\"alternate\" type=\"application/atom+xml\"
+        title=\"Foreman - Feature #863: add ability to restrict ldap authentication
+        to a security group\" href=\"https://projects.theforeman.org/issues/863.atom\"
+        />\n<script src=\"/javascripts/context_menu.js?1532081119\"></script><link
+        rel=\"stylesheet\" media=\"screen\" href=\"/stylesheets/context_menu.css?1532081119\"
+        /></head>\n<body class=\"theme-Alternate project-foreman controller-issues
+        action-show\">\n\n<div id=\"wrapper\">\n\n<div class=\"flyout-menu js-flyout-menu\">\n\n\n
+        \       <div class=\"flyout-menu__search\">\n            <form action=\"/projects/foreman/search\"
+        accept-charset=\"UTF-8\" method=\"get\"><input name=\"utf8\" type=\"hidden\"
+        value=\"&#x2713;\" />\n            <input type=\"hidden\" name=\"issues\"
+        value=\"1\" />\n            <label class=\"search-magnifier search-magnifier--flyout\"
+        for=\"flyout-search\">&#9906;</label>\n            <input type=\"text\" name=\"q\"
+        id=\"flyout-search\" class=\"small js-search-input\" placeholder=\"Search\"
+        />\n</form>        </div>\n\n\n        <h3>Project</h3>\n        <span class=\"js-project-menu\"></span>\n\n
+        \   <h3>General</h3>\n    <span class=\"js-general-menu\"></span>\n\n    <span
+        class=\"js-sidebar flyout-menu__sidebar\"></span>\n\n    <h3>Profile</h3>\n
+        \   <span class=\"js-profile-menu\"></span>\n\n</div>\n\n<div id=\"wrapper2\">\n<div
+        id=\"wrapper3\">\n<div id=\"top-menu\">\n    <div id=\"account\">\n        <ul><li><a
+        class=\"login\" href=\"/login\">Sign in</a></li><li><a class=\"register\"
+        href=\"/account/register\">Register</a></li></ul>    </div>\n    \n    <ul><li><a
+        class=\"home\" href=\"/\">Home</a></li><li><a class=\"projects\" href=\"/projects\">Projects</a></li><li><a
+        class=\"help\" href=\"https://www.redmine.org/guide\">Help</a></li></ul></div>\n\n<div
+        id=\"header\">\n\n    <a href=\"#\" class=\"mobile-toggle-button js-flyout-menu-toggle-button\"></a>\n\n
+        \   <div id=\"quick-search\">\n        <form action=\"/projects/foreman/search\"
+        accept-charset=\"UTF-8\" method=\"get\"><input name=\"utf8\" type=\"hidden\"
+        value=\"&#x2713;\" />\n        <input type=\"hidden\" name=\"scope\" value=\"subprojects\"
+        />\n        <input type=\"hidden\" name=\"issues\" value=\"1\" />\n        <label
+        for='q'>\n          <a accesskey=\"4\" href=\"/projects/foreman/search\">Search</a>:\n
+        \       </label>\n        <input type=\"text\" name=\"q\" id=\"q\" size=\"20\"
+        class=\"small\" accesskey=\"f\" />\n</form>        <div id=\"project-jump\"
+        class=\"drdn\"><span class=\"drdn-trigger\">Foreman</span><div class=\"drdn-content\"><div
+        class=\"quick-search\"><input type=\"text\" name=\"q\" id=\"projects-quick-search\"
+        value=\"\" class=\"autocomplete\" data-automcomplete-url=\"/projects/autocomplete.js?jump=issues\"
+        autocomplete=\"off\" /></div><div class=\"drdn-items projects selection\"></div><div
+        class=\"drdn-items all-projects selection\"><a href=\"/projects?jump=issues\">All
+        Projects</a></div></div></div>\n    </div>\n\n    <H1>\n      <img style=\"vertical-align:
+        middle\" src=\"/images/foremanlogo.png?1507716691\" alt=\"Foremanlogo\" />\n
+        \     \n    </h1>\n\n    <div id=\"main-menu\" class=\"tabs\">\n        <ul><li><a
+        class=\"overview\" href=\"/projects/foreman\">Overview</a></li><li><a class=\"activity\"
+        href=\"/projects/foreman/activity\">Activity</a></li><li><a class=\"roadmap\"
+        href=\"/projects/foreman/roadmap\">Roadmap</a></li><li><a class=\"issues selected\"
+        href=\"/projects/foreman/issues\">Issues</a></li><li><a class=\"wiki\" href=\"/projects/foreman/wiki\">Wiki</a></li><li><a
+        class=\"files\" href=\"/projects/foreman/files\">Files</a></li><li><a class=\"repository\"
+        href=\"/projects/foreman/repository\">Repository</a></li></ul>\n        <div
+        class=\"tabs-buttons\" style=\"display:none;\">\n            <button class=\"tab-left\"
+        onclick=\"moveTabLeft(this); return false;\"></button>\n            <button
+        class=\"tab-right\" onclick=\"moveTabRight(this); return false;\"></button>\n
+        \       </div>\n    </div>\n</div>\n\n<div id=\"main\" class=\"\">\n    <div
+        id=\"sidebar\">\n          <h3>Issues</h3>\n\n<ul>\n<li><a href=\"/projects/foreman/issues?set_filter=1\">View
+        all issues</a></li>\n<li><a href=\"/projects/foreman/issues/report\">Summary</a></li>\n\n</ul>\n\n\n\n\n<h3>Custom
+        queries</h3>\n<ul class=\"queries\"><li><a class=\"query\" href=\"/projects/foreman/issues?query_id=25\">All
+        bugs by votes</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=102\">All
+        issues closed in the last 3 weeks</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=42\">Easy
+        and Trivial Issues</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=11\">Easy
+        Issues (only)</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=131\">Good
+        first issues - Foreman core</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=133\">high
+        prio open bugs</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=128\">Mine</a></li>\n<li><a
+        class=\"query\" href=\"/projects/foreman/issues?query_id=132\">My issues closed
+        in the last 3 weeks</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=134\">Open
+        with target version set (aka blockers)</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=117\">taken-none</a></li>\n<li><a
+        class=\"query\" href=\"/projects/foreman/issues?query_id=10\">Trivial Issues</a></li></ul>\n\n\n\n\n\n
+        \       \n    </div>\n\n    <div id=\"content\">\n        \n        <div class=\"contextual\">\n\n\n\n\n\n</div>\n\n\n<h2>Feature
+        #863</h2>\n\n<div class=\"issue tracker-2 status-5 priority-4 priority-default
+        closed details\">\n\n  <div class=\"gravatar-with-child\">\n    <img alt=\"\"
+        title=\"Author\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/e418c7f799fc7cfa4423de2a67b93e13?rating=PG&amp;size=100&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/e418c7f799fc7cfa4423de2a67b93e13?rating=PG&amp;size=50&amp;default=\"
+        />\n    \n  </div>\n\n<div class=\"subject\">\n<div><h3>add ability to restrict
+        ldap authentication to a security group</h3></div>\n</div>\n        <p class=\"author\">\n
+        \       Added by <a class=\"user active\" href=\"/users/929\">Corey Osman</a>
+        <a title=\"04/22/2011 03:58 PM\" href=\"/projects/foreman/activity?from=2011-04-22\">over
+        7 years</a> ago.\n        Updated <a title=\"08/15/2013 05:31 PM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago.\n        </p>\n\n<div class=\"attributes\">\n<div class=\"splitcontent\"><div
+        class=\"splitcontentleft\"><div class=\"status attribute\"><div class=\"label\">Status:</div><div
+        class=\"value\">Closed</div></div><div class=\"priority attribute\"><div class=\"label\">Priority:</div><div
+        class=\"value\">Normal</div></div><div class=\"assigned-to attribute\"><div
+        class=\"label\">Assignee:</div><div class=\"value\">-</div></div><div class=\"category
+        attribute\"><div class=\"label\">Category:</div><div class=\"value\">Authentication</div></div><div
+        class=\"fixed-version attribute\"><div class=\"label\">Target version:</div><div
+        class=\"value\"><a title=\"10/14/2013\" href=\"/versions/29\">1.3.0</a></div></div></div><div
+        class=\"splitcontentleft\"></div></div>\n<div class=\"splitcontent\"><div
+        class=\"splitcontentleft\"><div class=\"cf_3 attribute\"><div class=\"label\"><span>Difficulty</span>:</div><div
+        class=\"value\"></div></div><div class=\"cf_5 attribute\"><div class=\"label\"><span
+        title=\"Has this issue been triaged by the developers?\" class=\"field-description\">Triaged</span>:</div><div
+        class=\"value\">No</div></div><div class=\"cf_6 attribute\"><div class=\"label\"><span>Bugzilla
+        link</span>:</div><div class=\"value\"><a href=\"https://bugzilla.redhat.com/show_bug.cgi?id=\"></a></div></div><div
+        class=\"cf_7 attribute\"><div class=\"label\"><span>Pull request</span>:</div><div
+        class=\"value\"><a href=\"\"></a></div></div></div><div class=\"splitcontentleft\"><div
+        class=\"cf_9 attribute\"><div class=\"label\"><span title=\"Custom field which
+        tracks the backlog(s) which this issue is assigned to\" class=\"field-description\">Team
+        Backlog</span>:</div><div class=\"value\"></div></div><div class=\"cf_12 attribute\"><div
+        class=\"label\"><span title=\"The releases that an issue was fixed in\" class=\"field-description\">Fixed
+        in Releases</span>:</div><div class=\"value\"></div></div><div class=\"cf_13
+        attribute\"><div class=\"label\"><span title=\"Version(s) in which this bug
+        was found\" class=\"field-description\">Found in Releases</span>:</div><div
+        class=\"value\"></div></div></div></div>\n    <tr><td>\n\n\n\n\n    </td></tr>\n\n</div>\n\n<hr
+        />\n<div class=\"description\">\n  <div class=\"contextual\">\n  \n  </div>\n\n
+        \ <p><strong>Description</strong></p>\n  <div class=\"wiki\">\n  <p>I would
+        like to be able to specify ldap authentication to only do name lookups by
+        a specific group:</p>\n\n\n\t<p>example:</p>\n\n\n\t<p>can I restrict by group
+        like this : cn=foremanadmins, ou=Security Groups, dc=MYDOMAIN,dc=CORP</p>\n\n\n\t<p>I
+        currently have this enabled with my subversion setup so I was hoping I could
+        do it on foreman as well.</p>\n  </div>\n</div>\n\n\n\n\n\n\n\n<hr />\n<div
+        id=\"relations\">\n<div class=\"contextual\">\n</div>\n\n<p><strong>Related
+        issues</strong></p>\n\n<form data-cm-url=\"/issues/context_menu\" action=\"/issues/863\"
+        accept-charset=\"UTF-8\" method=\"post\"><input name=\"utf8\" type=\"hidden\"
+        value=\"&#x2713;\" /><input type=\"hidden\" name=\"authenticity_token\" value=\"MX5ft0d8O69rDAFGOTAi1/swxIDY5QohnYPv0Qgmljctj+I1ois1F3w37GvmunOb5e4GUWXmnBUMSj11BhcPMw==\"
+        />\n  <table class=\"list issues odd-even\"><tr id=\"relation-209\" class=\"issue
+        hascontextmenu issue tracker-2 status-5 priority-3 priority-lowest closed\"><td
+        class=\"checkbox\"><input type=\"checkbox\" name=\"ids[]\" value=\"813\" /></td><td
+        class=\"subject\" style=\"width: 50%\">Related to Foreman - <a class=\"issue
+        tracker-2 status-5 priority-3 priority-lowest closed\" href=\"/issues/813\">Feature
+        #813</a>: Support AD group membership for authorization and authentication</td><td
+        class=\"status\">Closed</td><td class=\"start_date\">2011-03-31</td><td class=\"due_date\"></td><td
+        class=\"done_ratio\"></td><td class=\"buttons\"></td></tr></table>\n</form>\n<form
+        id=\"new-relation-form\" style=\"display: none;\" class=\"new_relation\" action=\"/issues/863/relations\"
+        accept-charset=\"UTF-8\" data-remote=\"true\" method=\"post\"><input name=\"utf8\"
+        type=\"hidden\" value=\"&#x2713;\" />\n\n\n<p><select onchange=\"setPredecessorFieldsVisibility();\"
+        name=\"relation[relation_type]\" id=\"relation_relation_type\"><option selected=\"selected\"
+        value=\"relates\">Related to</option>\n<option value=\"duplicates\">Is duplicate
+        of</option>\n<option value=\"duplicated\">Has duplicate</option>\n<option
+        value=\"blocks\">Blocks</option>\n<option value=\"blocked\">Blocked by</option>\n<option
+        value=\"precedes\">Precedes</option>\n<option value=\"follows\">Follows</option>\n<option
+        value=\"copied_to\">Copied to</option>\n<option value=\"copied_from\">Copied
+        from</option></select>\nIssue #<input size=\"10\" type=\"text\" name=\"relation[issue_to_id]\"
+        id=\"relation_issue_to_id\" />\n<span id=\"predecessor_fields\" style=\"display:none;\">\nDelay:
+        <input size=\"3\" type=\"text\" name=\"relation[delay]\" id=\"relation_delay\"
+        /> days\n</span>\n<input type=\"submit\" name=\"commit\" value=\"Add\" />\n<a
+        href=\"#\" onclick=\"$(&quot;#new-relation-form&quot;).hide();; return false;\">Cancel</a>\n</p>\n\n<script>\n//<![CDATA[\nobserveAutocompleteField('relation_issue_to_id',
+        '/issues/auto_complete?issue_id=863&project_id=foreman&scope=all')\n//]]>\n</script>\n\n<script>\n//<![CDATA[\nsetPredecessorFieldsVisibility();\n//]]>\n</script>\n\n</form>\n</div>\n\n</div>\n\n<div
+        id=\"issue-changesets\">\n<h3>Associated revisions</h3>\n    <div class=\"changeset\">\n
+        \   <p><a title=\"Revision 4e4671ce\" href=\"/projects/foreman/repository/revisions/4e4671ce95fc666b3c087351177247cb39d1a4c3\">Revision
+        4e4671ce</a>\n        (<a href=\"/projects/foreman/repository/revisions/4e4671ce95fc666b3c087351177247cb39d1a4c3/diff\">diff</a>)\n
+        \       <br />\n        <span class=\"author\">Added by <a class=\"user active\"
+        href=\"/users/3973\">Nils Domrose</a> <a title=\"08/15/2013 04:10 PM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago</span></p>\n    <div class=\"wiki changeset-comments\">\n
+        \       <p>fixes <a class=\"issue tracker-2 status-5 priority-4 priority-default
+        closed\" title=\"Feature: add ability to restrict ldap authentication to a
+        security group (Closed)\" href=\"/issues/863\">#863</a> - added ldap_filter
+        to LDAP auth sources to filter lookups using RFC 2254 filters</p>\n    </div>\n
+        \   </div>\n\n</div>\n\n<div id=\"history\">\n<h3>History</h3>\n  <div id=\"change-3711\"
+        class=\"journal has-notes\">\n    <div id=\"note-1\">\n    <h4><a href=\"#note-1\"
+        class=\"journal-link\">#1</a>\n    <img alt=\"\" title=\"\" class=\"gravatar\"
+        srcset=\"//www.gravatar.com/avatar/6ebc283992a66e60467564ee5136af6b?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/6ebc283992a66e60467564ee5136af6b?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/141\">Benjamin Papillon</a>
+        <a title=\"09/30/2011 05:52 AM\" href=\"/projects/foreman/activity?from=2011-09-30\">almost
+        7 years</a> ago\n    <span id=\"journal-3711-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-3711-notes\" class=\"wiki\"><p>And also important, affect
+        role based on LDAP group.<br />If it's possible to create a LDAP Group type,(auto
+        create user option enabled) then when the user from a group connect for the
+        first time, the good role is automatically assigned.</p></div>\n    </div>\n
+        \ </div>\n  \n  <div id=\"change-3815\" class=\"journal has-notes\">\n    <div
+        id=\"note-2\">\n    <h4><a href=\"#note-2\" class=\"journal-link\">#2</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/89ad7d31d4601d247cdf10aeb462721d?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/89ad7d31d4601d247cdf10aeb462721d?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/890\">monte olvera</a>
+        <a title=\"10/20/2011 03:40 PM\" href=\"/projects/foreman/activity?from=2011-10-20\">almost
+        7 years</a> ago\n    <span id=\"journal-3815-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-3815-notes\" class=\"wiki\"><p>I would also like to
+        have ldap auth restricted to members of an ldap group.</p></div>\n    </div>\n
+        \ </div>\n  \n  <div id=\"change-7125\" class=\"journal has-notes\">\n    <div
+        id=\"note-3\">\n    <h4><a href=\"#note-3\" class=\"journal-link\">#3</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/288a184cb941bd73954dc1d3bd51b87c?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/288a184cb941bd73954dc1d3bd51b87c?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/3220\">Karl  Vollmer</a>
+        <a title=\"03/15/2013 01:15 PM\" href=\"/projects/foreman/activity?from=2013-03-15\">over
+        5 years</a> ago\n    <span id=\"journal-7125-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-7125-notes\" class=\"wiki\"><p>I need this for work,
+        so I put $100 down for anyone who will complete this functionality.</p>\n\n\n\t<p><a
+        class=\"external\" href=\"https://www.bountysource.com/#issues/116703-add-ability-to-restrict-ldap-authentication-to-a-security-group\">https://www.bountysource.com/#issues/116703-add-ability-to-restrict-ldap-authentication-to-a-security-group</a></p></div>\n
+        \   </div>\n  </div>\n  \n  <div id=\"change-7199\" class=\"journal has-notes\">\n
+        \   <div id=\"note-4\">\n    <h4><a href=\"#note-4\" class=\"journal-link\">#4</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/bc28bf133c2c735cf9e62952c4965389?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/bc28bf133c2c735cf9e62952c4965389?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/1124\">Mikael Fridh</a>
+        <a title=\"03/27/2013 03:00 AM\" href=\"/projects/foreman/activity?from=2013-03-27\">over
+        5 years</a> ago\n    <span id=\"journal-7199-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-7199-notes\" class=\"wiki\"><p>just a bit of a pseudo-code
+        version of doing it (untested): <a class=\"external\" href=\"https://github.com/frimik/foreman/compare/863-ldap_group_restriction\">https://github.com/frimik/foreman/compare/863-ldap_group_restriction</a></p>\n\n\n\t<p>The
+        actual search method code <em>was</em> tested against Active Directory before
+        I hackishly put this example in the Foreman code though as I recently built
+        some puppet functions to get canonical user and group information from Active
+        Directory with net-ldap.</p>\n\n\n\t<p>Perhaps it can inspire someone to clean
+        it up, make it work and add it as a configuration setting?</p></div>\n    </div>\n
+        \ </div>\n  \n  <div id=\"change-9051\" class=\"journal has-notes\">\n    <div
+        id=\"note-5\">\n    <h4><a href=\"#note-5\" class=\"journal-link\">#5</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/d2c9918d21377e2059601e1f4fcee2cd?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/d2c9918d21377e2059601e1f4fcee2cd?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/3973\">Nils Domrose</a>
+        <a title=\"08/15/2013 06:41 AM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago\n    <span id=\"journal-9051-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-9051-notes\" class=\"wiki\"><p><a class=\"external\"
+        href=\"https://github.com/theforeman/foreman/pull/846\">https://github.com/theforeman/foreman/pull/846</a></p></div>\n
+        \   </div>\n  </div>\n  \n  <div id=\"change-9052\" class=\"journal has-details\">\n
+        \   <div id=\"note-6\">\n    <h4><a href=\"#note-6\" class=\"journal-link\">#6</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/e36bafa4e8bbf7ed347fdfa34d647591?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/e36bafa4e8bbf7ed347fdfa34d647591?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/3536\">Dominic Cleal</a>
+        <a title=\"08/15/2013 06:50 AM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago\n    <span id=\"journal-9052-private_notes\" class=\"\"></span></h4>\n\n
+        \   <ul class=\"details\">\n       <li><strong>Description</strong> updated
+        (<a title=\"View differences\" href=\"/journals/9052/diff?detail_id=9598\">diff</a>)</li>\n
+        \      <li><strong>Category</strong> set to <i>Authentication</i></li>\n       <li><strong>Status</strong>
+        changed from <i>New</i> to <i>Ready For Testing</i></li>\n    </ul>\n    \n
+        \   </div>\n  </div>\n  \n  <div id=\"change-9062\" class=\"journal has-details\">\n
+        \   <div id=\"note-7\">\n    <h4><a href=\"#note-7\" class=\"journal-link\">#7</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/e36bafa4e8bbf7ed347fdfa34d647591?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/e36bafa4e8bbf7ed347fdfa34d647591?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/3536\">Dominic Cleal</a>
+        <a title=\"08/15/2013 05:04 PM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago\n    <span id=\"journal-9062-private_notes\" class=\"\"></span></h4>\n\n
+        \   <ul class=\"details\">\n       <li><strong>Target version</strong> set
+        to <i>1.3.0</i></li>\n    </ul>\n    \n    </div>\n  </div>\n  \n  <div id=\"change-9063\"
+        class=\"journal has-notes has-details\">\n    <div id=\"note-8\">\n    <h4><a
+        href=\"#note-8\" class=\"journal-link\">#8</a>\n    <img alt=\"\" title=\"\"
+        class=\"gravatar\" default=\"default\" src=\"/images/anonymous.png?1532081051\"
+        width=\"24\" height=\"24\" />\n    Updated by Anonymous <a title=\"08/15/2013
+        05:31 PM\" href=\"/projects/foreman/activity?from=2013-08-15\">about 5 years</a>
+        ago\n    <span id=\"journal-9063-private_notes\" class=\"\"></span></h4>\n\n
+        \   <ul class=\"details\">\n       <li><strong>Status</strong> changed from
+        <i>Ready For Testing</i> to <i>Closed</i></li>\n       <li><strong>% Done</strong>
+        changed from <i>0</i> to <i>100</i></li>\n    </ul>\n    <div id=\"journal-9063-notes\"
+        class=\"wiki\"><p>Applied in changeset <a class=\"changeset\" title=\"fixes
+        #863 - added ldap_filter to LDAP auth sources to filter lookups using RFC
+        2254 filters\" href=\"/projects/foreman/repository/revisions/4e4671ce95fc666b3c087351177247cb39d1a4c3\">4e4671ce95fc666b3c087351177247cb39d1a4c3</a>.</p></div>\n
+        \   </div>\n  </div>\n  \n\n\n</div>\n\n\n<div style=\"clear: both;\"></div>\n<div
+        class=\"contextual\">\n\n\n\n\n\n</div>\n\n\n<div style=\"clear: both;\"></div>\n\n<p
+        class=\"other-formats\">Also available in:  <span><a class=\"atom\" rel=\"nofollow\"
+        href=\"/issues/863.atom\">Atom</a></span>\n  <span><a class=\"pdf\" rel=\"nofollow\"
+        href=\"/issues/863.pdf\">PDF</a></span>\n</p>\n\n\n\n\n\n        \n        <div
+        style=\"clear:both;\"></div>\n    </div>\n</div>\n</div>\n\n<div id=\"ajax-indicator\"
+        style=\"display:none;\"><span>Loading...</span></div>\n<div id=\"ajax-modal\"
+        style=\"display:none;\"></div>\n\n<div id=\"footer\">\n  <div class=\"bgl\"><div
+        class=\"bgr\">\n    Powered by <a href=\"https://www.redmine.org/\">Redmine</a>
+        &copy; 2006-2018 Jean-Philippe Lang\n  </div></div>\n</div>\n</div>\n</div>\n\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Sat, 01 Sep 2018 20:16:06 GMT
+- request:
+    method: get
+    uri: https://projects.theforeman.org/issues/863
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 02 Sep 2018 17:31:45 GMT
+      Server:
+      - Apache/2.4.6 (CentOS)
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Request-Id:
+      - 7c998e83-d449-46f8-aafa-b20c5a4d3707
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Runtime:
+      - '0.356213'
+      X-Content-Type-Options:
+      - nosniff
+      X-Powered-By:
+      - Phusion Passenger 5.3.3
+      Set-Cookie:
+      - _redmine_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJTc5MjE5ZjIxZmQ5NmVmMDJjY2IzNGM5YzkxMjJiNGE3BjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMXVqSitxbHJhRE11VG9UVEFGQUduSHhUcURrS3NKM29VV0R6bjNyYWlxOWs9BjsARg%3D%3D--63d5b425a05de261638e4cf777fab4cf54b2d5e7;
+        path=/; HttpOnly
+      Etag:
+      - W/"7247bacdc7a260acc44df13030b3b55b"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=15778800;
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\"
+        />\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"/>\n<title>Feature
+        #863: add ability to restrict ldap authentication to a security group - Foreman</title>\n<meta
+        name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1,
+        user-scalable=no\">\n<meta name=\"description\" content=\"Redmine\" />\n<meta
+        name=\"keywords\" content=\"issue,bug,tracker\" />\n<meta name=\"csrf-param\"
+        content=\"authenticity_token\" />\n<meta name=\"csrf-token\" content=\"F2OqZ8GZGQSXCCR2sXrUfswcGARkx3fMLqZiWKqY2d+tUdTNm0MVzwSpELale3Nh2PYWRsjgDdh2moWGHDpyBg==\"
+        />\n<link rel='shortcut icon' href='/favicon.ico?1507716691' />\n<link rel=\"stylesheet\"
+        media=\"all\" href=\"/stylesheets/jquery/jquery-ui-1.11.0.css?1507716691\"
+        />\n<link rel=\"stylesheet\" media=\"all\" href=\"/themes/alternate/stylesheets/application.css?1532081051\"
+        />\n<link rel=\"stylesheet\" media=\"all\" href=\"/stylesheets/responsive.css?1532081119\"
+        />\n\n<script src=\"/javascripts/jquery-1.11.1-ui-1.11.0-ujs-3.1.4.js?1507716691\"></script>\n<script
+        src=\"/javascripts/application.js?1532081119\"></script>\n<script src=\"/javascripts/responsive.js?1532081119\"></script>\n<script>\n//<![CDATA[\n$(window).load(function(){
+        warnLeavingUnsaved('The current page contains unsaved text that will be lost
+        if you leave this page.'); });\n//]]>\n</script>\n\n<link rel=\"stylesheet\"
+        media=\"screen\" href=\"/plugin_assets/redmine_lightbox2/stylesheets/jquery.fancybox-2.1.5.css?1507720332\"
+        /><link rel=\"stylesheet\" media=\"screen\" href=\"/plugin_assets/redmine_lightbox2/stylesheets/lightbox.css?1532081186\"
+        /><script src=\"/plugin_assets/redmine_lightbox2/javascripts/jquery.fancybox-2.1.5.pack.js?1507720332\"></script><script
+        src=\"/plugin_assets/redmine_lightbox2/javascripts/lightbox.js?1532081186\"></script>
+        <script src=\"/plugin_assets/redmine_ruby_code/javascripts/prer.js?1507720332\"></script>\n<link
+        rel=\"stylesheet\" media=\"screen\" href=\"/plugin_assets/redmine_ruby_code/stylesheets/prer.css?1507720332\"
+        />\n <link rel=\"stylesheet\" media=\"screen\" href=\"/plugin_assets/redmine_vote/stylesheets/stylesheet.css?1507720332\"
+        />\n<!-- page specific tags -->\n    <link rel=\"alternate\" type=\"application/atom+xml\"
+        title=\"Foreman - Feature #863: add ability to restrict ldap authentication
+        to a security group\" href=\"https://projects.theforeman.org/issues/863.atom\"
+        />\n<script src=\"/javascripts/context_menu.js?1532081119\"></script><link
+        rel=\"stylesheet\" media=\"screen\" href=\"/stylesheets/context_menu.css?1532081119\"
+        /></head>\n<body class=\"theme-Alternate project-foreman controller-issues
+        action-show\">\n\n<div id=\"wrapper\">\n\n<div class=\"flyout-menu js-flyout-menu\">\n\n\n
+        \       <div class=\"flyout-menu__search\">\n            <form action=\"/projects/foreman/search\"
+        accept-charset=\"UTF-8\" method=\"get\"><input name=\"utf8\" type=\"hidden\"
+        value=\"&#x2713;\" />\n            <input type=\"hidden\" name=\"issues\"
+        value=\"1\" />\n            <label class=\"search-magnifier search-magnifier--flyout\"
+        for=\"flyout-search\">&#9906;</label>\n            <input type=\"text\" name=\"q\"
+        id=\"flyout-search\" class=\"small js-search-input\" placeholder=\"Search\"
+        />\n</form>        </div>\n\n\n        <h3>Project</h3>\n        <span class=\"js-project-menu\"></span>\n\n
+        \   <h3>General</h3>\n    <span class=\"js-general-menu\"></span>\n\n    <span
+        class=\"js-sidebar flyout-menu__sidebar\"></span>\n\n    <h3>Profile</h3>\n
+        \   <span class=\"js-profile-menu\"></span>\n\n</div>\n\n<div id=\"wrapper2\">\n<div
+        id=\"wrapper3\">\n<div id=\"top-menu\">\n    <div id=\"account\">\n        <ul><li><a
+        class=\"login\" href=\"/login\">Sign in</a></li><li><a class=\"register\"
+        href=\"/account/register\">Register</a></li></ul>    </div>\n    \n    <ul><li><a
+        class=\"home\" href=\"/\">Home</a></li><li><a class=\"projects\" href=\"/projects\">Projects</a></li><li><a
+        class=\"help\" href=\"https://www.redmine.org/guide\">Help</a></li></ul></div>\n\n<div
+        id=\"header\">\n\n    <a href=\"#\" class=\"mobile-toggle-button js-flyout-menu-toggle-button\"></a>\n\n
+        \   <div id=\"quick-search\">\n        <form action=\"/projects/foreman/search\"
+        accept-charset=\"UTF-8\" method=\"get\"><input name=\"utf8\" type=\"hidden\"
+        value=\"&#x2713;\" />\n        <input type=\"hidden\" name=\"scope\" value=\"subprojects\"
+        />\n        <input type=\"hidden\" name=\"issues\" value=\"1\" />\n        <label
+        for='q'>\n          <a accesskey=\"4\" href=\"/projects/foreman/search\">Search</a>:\n
+        \       </label>\n        <input type=\"text\" name=\"q\" id=\"q\" size=\"20\"
+        class=\"small\" accesskey=\"f\" />\n</form>        <div id=\"project-jump\"
+        class=\"drdn\"><span class=\"drdn-trigger\">Foreman</span><div class=\"drdn-content\"><div
+        class=\"quick-search\"><input type=\"text\" name=\"q\" id=\"projects-quick-search\"
+        value=\"\" class=\"autocomplete\" data-automcomplete-url=\"/projects/autocomplete.js?jump=issues\"
+        autocomplete=\"off\" /></div><div class=\"drdn-items projects selection\"></div><div
+        class=\"drdn-items all-projects selection\"><a href=\"/projects?jump=issues\">All
+        Projects</a></div></div></div>\n    </div>\n\n    <H1>\n      <img style=\"vertical-align:
+        middle\" src=\"/images/foremanlogo.png?1507716691\" alt=\"Foremanlogo\" />\n
+        \     \n    </h1>\n\n    <div id=\"main-menu\" class=\"tabs\">\n        <ul><li><a
+        class=\"overview\" href=\"/projects/foreman\">Overview</a></li><li><a class=\"activity\"
+        href=\"/projects/foreman/activity\">Activity</a></li><li><a class=\"roadmap\"
+        href=\"/projects/foreman/roadmap\">Roadmap</a></li><li><a class=\"issues selected\"
+        href=\"/projects/foreman/issues\">Issues</a></li><li><a class=\"wiki\" href=\"/projects/foreman/wiki\">Wiki</a></li><li><a
+        class=\"files\" href=\"/projects/foreman/files\">Files</a></li><li><a class=\"repository\"
+        href=\"/projects/foreman/repository\">Repository</a></li></ul>\n        <div
+        class=\"tabs-buttons\" style=\"display:none;\">\n            <button class=\"tab-left\"
+        onclick=\"moveTabLeft(this); return false;\"></button>\n            <button
+        class=\"tab-right\" onclick=\"moveTabRight(this); return false;\"></button>\n
+        \       </div>\n    </div>\n</div>\n\n<div id=\"main\" class=\"\">\n    <div
+        id=\"sidebar\">\n          <h3>Issues</h3>\n\n<ul>\n<li><a href=\"/projects/foreman/issues?set_filter=1\">View
+        all issues</a></li>\n<li><a href=\"/projects/foreman/issues/report\">Summary</a></li>\n\n</ul>\n\n\n\n\n<h3>Custom
+        queries</h3>\n<ul class=\"queries\"><li><a class=\"query\" href=\"/projects/foreman/issues?query_id=25\">All
+        bugs by votes</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=102\">All
+        issues closed in the last 3 weeks</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=42\">Easy
+        and Trivial Issues</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=11\">Easy
+        Issues (only)</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=131\">Good
+        first issues - Foreman core</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=133\">high
+        prio open bugs</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=128\">Mine</a></li>\n<li><a
+        class=\"query\" href=\"/projects/foreman/issues?query_id=132\">My issues closed
+        in the last 3 weeks</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=134\">Open
+        with target version set (aka blockers)</a></li>\n<li><a class=\"query\" href=\"/projects/foreman/issues?query_id=117\">taken-none</a></li>\n<li><a
+        class=\"query\" href=\"/projects/foreman/issues?query_id=10\">Trivial Issues</a></li></ul>\n\n\n\n\n\n
+        \       \n    </div>\n\n    <div id=\"content\">\n        \n        <div class=\"contextual\">\n\n\n\n\n\n</div>\n\n\n<h2>Feature
+        #863</h2>\n\n<div class=\"issue tracker-2 status-5 priority-4 priority-default
+        closed details\">\n\n  <div class=\"gravatar-with-child\">\n    <img alt=\"\"
+        title=\"Author\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/e418c7f799fc7cfa4423de2a67b93e13?rating=PG&amp;size=100&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/e418c7f799fc7cfa4423de2a67b93e13?rating=PG&amp;size=50&amp;default=\"
+        />\n    \n  </div>\n\n<div class=\"subject\">\n<div><h3>add ability to restrict
+        ldap authentication to a security group</h3></div>\n</div>\n        <p class=\"author\">\n
+        \       Added by <a class=\"user active\" href=\"/users/929\">Corey Osman</a>
+        <a title=\"04/22/2011 03:58 PM\" href=\"/projects/foreman/activity?from=2011-04-22\">over
+        7 years</a> ago.\n        Updated <a title=\"08/15/2013 05:31 PM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago.\n        </p>\n\n<div class=\"attributes\">\n<div class=\"splitcontent\"><div
+        class=\"splitcontentleft\"><div class=\"status attribute\"><div class=\"label\">Status:</div><div
+        class=\"value\">Closed</div></div><div class=\"priority attribute\"><div class=\"label\">Priority:</div><div
+        class=\"value\">Normal</div></div><div class=\"assigned-to attribute\"><div
+        class=\"label\">Assignee:</div><div class=\"value\">-</div></div><div class=\"category
+        attribute\"><div class=\"label\">Category:</div><div class=\"value\">Authentication</div></div><div
+        class=\"fixed-version attribute\"><div class=\"label\">Target version:</div><div
+        class=\"value\"><a title=\"10/14/2013\" href=\"/versions/29\">1.3.0</a></div></div></div><div
+        class=\"splitcontentleft\"></div></div>\n<div class=\"splitcontent\"><div
+        class=\"splitcontentleft\"><div class=\"cf_3 attribute\"><div class=\"label\"><span>Difficulty</span>:</div><div
+        class=\"value\"></div></div><div class=\"cf_5 attribute\"><div class=\"label\"><span
+        title=\"Has this issue been triaged by the developers?\" class=\"field-description\">Triaged</span>:</div><div
+        class=\"value\">No</div></div><div class=\"cf_6 attribute\"><div class=\"label\"><span>Bugzilla
+        link</span>:</div><div class=\"value\"><a href=\"https://bugzilla.redhat.com/show_bug.cgi?id=\"></a></div></div><div
+        class=\"cf_7 attribute\"><div class=\"label\"><span>Pull request</span>:</div><div
+        class=\"value\"><a href=\"\"></a></div></div></div><div class=\"splitcontentleft\"><div
+        class=\"cf_9 attribute\"><div class=\"label\"><span title=\"Custom field which
+        tracks the backlog(s) which this issue is assigned to\" class=\"field-description\">Team
+        Backlog</span>:</div><div class=\"value\"></div></div><div class=\"cf_12 attribute\"><div
+        class=\"label\"><span title=\"The releases that an issue was fixed in\" class=\"field-description\">Fixed
+        in Releases</span>:</div><div class=\"value\"></div></div><div class=\"cf_13
+        attribute\"><div class=\"label\"><span title=\"Version(s) in which this bug
+        was found\" class=\"field-description\">Found in Releases</span>:</div><div
+        class=\"value\"></div></div></div></div>\n    <tr><td>\n\n\n\n\n    </td></tr>\n\n</div>\n\n<hr
+        />\n<div class=\"description\">\n  <div class=\"contextual\">\n  \n  </div>\n\n
+        \ <p><strong>Description</strong></p>\n  <div class=\"wiki\">\n  <p>I would
+        like to be able to specify ldap authentication to only do name lookups by
+        a specific group:</p>\n\n\n\t<p>example:</p>\n\n\n\t<p>can I restrict by group
+        like this : cn=foremanadmins, ou=Security Groups, dc=MYDOMAIN,dc=CORP</p>\n\n\n\t<p>I
+        currently have this enabled with my subversion setup so I was hoping I could
+        do it on foreman as well.</p>\n  </div>\n</div>\n\n\n\n\n\n\n\n<hr />\n<div
+        id=\"relations\">\n<div class=\"contextual\">\n</div>\n\n<p><strong>Related
+        issues</strong></p>\n\n<form data-cm-url=\"/issues/context_menu\" action=\"/issues/863\"
+        accept-charset=\"UTF-8\" method=\"post\"><input name=\"utf8\" type=\"hidden\"
+        value=\"&#x2713;\" /><input type=\"hidden\" name=\"authenticity_token\" value=\"mKSz0T8bYKyzATZlZusHvpGlaIfyOvDe8VGDPKi58iUils17ZcFsZyCgAqVy6qChhU9mxV4disqpbWTiHhtZ/A==\"
+        />\n  <table class=\"list issues odd-even\"><tr id=\"relation-209\" class=\"issue
+        hascontextmenu issue tracker-2 status-5 priority-3 priority-lowest closed\"><td
+        class=\"checkbox\"><input type=\"checkbox\" name=\"ids[]\" value=\"813\" /></td><td
+        class=\"subject\" style=\"width: 50%\">Related to Foreman - <a class=\"issue
+        tracker-2 status-5 priority-3 priority-lowest closed\" href=\"/issues/813\">Feature
+        #813</a>: Support AD group membership for authorization and authentication</td><td
+        class=\"status\">Closed</td><td class=\"start_date\">2011-03-31</td><td class=\"due_date\"></td><td
+        class=\"done_ratio\"></td><td class=\"buttons\"></td></tr></table>\n</form>\n<form
+        id=\"new-relation-form\" style=\"display: none;\" class=\"new_relation\" action=\"/issues/863/relations\"
+        accept-charset=\"UTF-8\" data-remote=\"true\" method=\"post\"><input name=\"utf8\"
+        type=\"hidden\" value=\"&#x2713;\" />\n\n\n<p><select onchange=\"setPredecessorFieldsVisibility();\"
+        name=\"relation[relation_type]\" id=\"relation_relation_type\"><option selected=\"selected\"
+        value=\"relates\">Related to</option>\n<option value=\"duplicates\">Is duplicate
+        of</option>\n<option value=\"duplicated\">Has duplicate</option>\n<option
+        value=\"blocks\">Blocks</option>\n<option value=\"blocked\">Blocked by</option>\n<option
+        value=\"precedes\">Precedes</option>\n<option value=\"follows\">Follows</option>\n<option
+        value=\"copied_to\">Copied to</option>\n<option value=\"copied_from\">Copied
+        from</option></select>\nIssue #<input size=\"10\" type=\"text\" name=\"relation[issue_to_id]\"
+        id=\"relation_issue_to_id\" />\n<span id=\"predecessor_fields\" style=\"display:none;\">\nDelay:
+        <input size=\"3\" type=\"text\" name=\"relation[delay]\" id=\"relation_delay\"
+        /> days\n</span>\n<input type=\"submit\" name=\"commit\" value=\"Add\" />\n<a
+        href=\"#\" onclick=\"$(&quot;#new-relation-form&quot;).hide();; return false;\">Cancel</a>\n</p>\n\n<script>\n//<![CDATA[\nobserveAutocompleteField('relation_issue_to_id',
+        '/issues/auto_complete?issue_id=863&project_id=foreman&scope=all')\n//]]>\n</script>\n\n<script>\n//<![CDATA[\nsetPredecessorFieldsVisibility();\n//]]>\n</script>\n\n</form>\n</div>\n\n</div>\n\n<div
+        id=\"issue-changesets\">\n<h3>Associated revisions</h3>\n    <div class=\"changeset\">\n
+        \   <p><a title=\"Revision 4e4671ce\" href=\"/projects/foreman/repository/revisions/4e4671ce95fc666b3c087351177247cb39d1a4c3\">Revision
+        4e4671ce</a>\n        (<a href=\"/projects/foreman/repository/revisions/4e4671ce95fc666b3c087351177247cb39d1a4c3/diff\">diff</a>)\n
+        \       <br />\n        <span class=\"author\">Added by <a class=\"user active\"
+        href=\"/users/3973\">Nils Domrose</a> <a title=\"08/15/2013 04:10 PM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago</span></p>\n    <div class=\"wiki changeset-comments\">\n
+        \       <p>fixes <a class=\"issue tracker-2 status-5 priority-4 priority-default
+        closed\" title=\"Feature: add ability to restrict ldap authentication to a
+        security group (Closed)\" href=\"/issues/863\">#863</a> - added ldap_filter
+        to LDAP auth sources to filter lookups using RFC 2254 filters</p>\n    </div>\n
+        \   </div>\n\n</div>\n\n<div id=\"history\">\n<h3>History</h3>\n  <div id=\"change-3711\"
+        class=\"journal has-notes\">\n    <div id=\"note-1\">\n    <h4><a href=\"#note-1\"
+        class=\"journal-link\">#1</a>\n    <img alt=\"\" title=\"\" class=\"gravatar\"
+        srcset=\"//www.gravatar.com/avatar/6ebc283992a66e60467564ee5136af6b?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/6ebc283992a66e60467564ee5136af6b?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/141\">Benjamin Papillon</a>
+        <a title=\"09/30/2011 05:52 AM\" href=\"/projects/foreman/activity?from=2011-09-30\">almost
+        7 years</a> ago\n    <span id=\"journal-3711-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-3711-notes\" class=\"wiki\"><p>And also important, affect
+        role based on LDAP group.<br />If it's possible to create a LDAP Group type,(auto
+        create user option enabled) then when the user from a group connect for the
+        first time, the good role is automatically assigned.</p></div>\n    </div>\n
+        \ </div>\n  \n  <div id=\"change-3815\" class=\"journal has-notes\">\n    <div
+        id=\"note-2\">\n    <h4><a href=\"#note-2\" class=\"journal-link\">#2</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/89ad7d31d4601d247cdf10aeb462721d?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/89ad7d31d4601d247cdf10aeb462721d?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/890\">monte olvera</a>
+        <a title=\"10/20/2011 03:40 PM\" href=\"/projects/foreman/activity?from=2011-10-20\">almost
+        7 years</a> ago\n    <span id=\"journal-3815-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-3815-notes\" class=\"wiki\"><p>I would also like to
+        have ldap auth restricted to members of an ldap group.</p></div>\n    </div>\n
+        \ </div>\n  \n  <div id=\"change-7125\" class=\"journal has-notes\">\n    <div
+        id=\"note-3\">\n    <h4><a href=\"#note-3\" class=\"journal-link\">#3</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/288a184cb941bd73954dc1d3bd51b87c?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/288a184cb941bd73954dc1d3bd51b87c?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/3220\">Karl  Vollmer</a>
+        <a title=\"03/15/2013 01:15 PM\" href=\"/projects/foreman/activity?from=2013-03-15\">over
+        5 years</a> ago\n    <span id=\"journal-7125-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-7125-notes\" class=\"wiki\"><p>I need this for work,
+        so I put $100 down for anyone who will complete this functionality.</p>\n\n\n\t<p><a
+        class=\"external\" href=\"https://www.bountysource.com/#issues/116703-add-ability-to-restrict-ldap-authentication-to-a-security-group\">https://www.bountysource.com/#issues/116703-add-ability-to-restrict-ldap-authentication-to-a-security-group</a></p></div>\n
+        \   </div>\n  </div>\n  \n  <div id=\"change-7199\" class=\"journal has-notes\">\n
+        \   <div id=\"note-4\">\n    <h4><a href=\"#note-4\" class=\"journal-link\">#4</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/bc28bf133c2c735cf9e62952c4965389?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/bc28bf133c2c735cf9e62952c4965389?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/1124\">Mikael Fridh</a>
+        <a title=\"03/27/2013 03:00 AM\" href=\"/projects/foreman/activity?from=2013-03-27\">over
+        5 years</a> ago\n    <span id=\"journal-7199-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-7199-notes\" class=\"wiki\"><p>just a bit of a pseudo-code
+        version of doing it (untested): <a class=\"external\" href=\"https://github.com/frimik/foreman/compare/863-ldap_group_restriction\">https://github.com/frimik/foreman/compare/863-ldap_group_restriction</a></p>\n\n\n\t<p>The
+        actual search method code <em>was</em> tested against Active Directory before
+        I hackishly put this example in the Foreman code though as I recently built
+        some puppet functions to get canonical user and group information from Active
+        Directory with net-ldap.</p>\n\n\n\t<p>Perhaps it can inspire someone to clean
+        it up, make it work and add it as a configuration setting?</p></div>\n    </div>\n
+        \ </div>\n  \n  <div id=\"change-9051\" class=\"journal has-notes\">\n    <div
+        id=\"note-5\">\n    <h4><a href=\"#note-5\" class=\"journal-link\">#5</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/d2c9918d21377e2059601e1f4fcee2cd?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/d2c9918d21377e2059601e1f4fcee2cd?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/3973\">Nils Domrose</a>
+        <a title=\"08/15/2013 06:41 AM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago\n    <span id=\"journal-9051-private_notes\" class=\"\"></span></h4>\n\n
+        \   <div id=\"journal-9051-notes\" class=\"wiki\"><p><a class=\"external\"
+        href=\"https://github.com/theforeman/foreman/pull/846\">https://github.com/theforeman/foreman/pull/846</a></p></div>\n
+        \   </div>\n  </div>\n  \n  <div id=\"change-9052\" class=\"journal has-details\">\n
+        \   <div id=\"note-6\">\n    <h4><a href=\"#note-6\" class=\"journal-link\">#6</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/e36bafa4e8bbf7ed347fdfa34d647591?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/e36bafa4e8bbf7ed347fdfa34d647591?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/3536\">Dominic Cleal</a>
+        <a title=\"08/15/2013 06:50 AM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago\n    <span id=\"journal-9052-private_notes\" class=\"\"></span></h4>\n\n
+        \   <ul class=\"details\">\n       <li><strong>Description</strong> updated
+        (<a title=\"View differences\" href=\"/journals/9052/diff?detail_id=9598\">diff</a>)</li>\n
+        \      <li><strong>Category</strong> set to <i>Authentication</i></li>\n       <li><strong>Status</strong>
+        changed from <i>New</i> to <i>Ready For Testing</i></li>\n    </ul>\n    \n
+        \   </div>\n  </div>\n  \n  <div id=\"change-9062\" class=\"journal has-details\">\n
+        \   <div id=\"note-7\">\n    <h4><a href=\"#note-7\" class=\"journal-link\">#7</a>\n
+        \   <img alt=\"\" title=\"\" class=\"gravatar\" srcset=\"//www.gravatar.com/avatar/e36bafa4e8bbf7ed347fdfa34d647591?rating=PG&amp;size=48&amp;default=
+        2x\" src=\"//www.gravatar.com/avatar/e36bafa4e8bbf7ed347fdfa34d647591?rating=PG&amp;size=24&amp;default=\"
+        />\n    Updated by <a class=\"user active\" href=\"/users/3536\">Dominic Cleal</a>
+        <a title=\"08/15/2013 05:04 PM\" href=\"/projects/foreman/activity?from=2013-08-15\">about
+        5 years</a> ago\n    <span id=\"journal-9062-private_notes\" class=\"\"></span></h4>\n\n
+        \   <ul class=\"details\">\n       <li><strong>Target version</strong> set
+        to <i>1.3.0</i></li>\n    </ul>\n    \n    </div>\n  </div>\n  \n  <div id=\"change-9063\"
+        class=\"journal has-notes has-details\">\n    <div id=\"note-8\">\n    <h4><a
+        href=\"#note-8\" class=\"journal-link\">#8</a>\n    <img alt=\"\" title=\"\"
+        class=\"gravatar\" default=\"default\" src=\"/images/anonymous.png?1532081051\"
+        width=\"24\" height=\"24\" />\n    Updated by Anonymous <a title=\"08/15/2013
+        05:31 PM\" href=\"/projects/foreman/activity?from=2013-08-15\">about 5 years</a>
+        ago\n    <span id=\"journal-9063-private_notes\" class=\"\"></span></h4>\n\n
+        \   <ul class=\"details\">\n       <li><strong>Status</strong> changed from
+        <i>Ready For Testing</i> to <i>Closed</i></li>\n       <li><strong>% Done</strong>
+        changed from <i>0</i> to <i>100</i></li>\n    </ul>\n    <div id=\"journal-9063-notes\"
+        class=\"wiki\"><p>Applied in changeset <a class=\"changeset\" title=\"fixes
+        #863 - added ldap_filter to LDAP auth sources to filter lookups using RFC
+        2254 filters\" href=\"/projects/foreman/repository/revisions/4e4671ce95fc666b3c087351177247cb39d1a4c3\">4e4671ce95fc666b3c087351177247cb39d1a4c3</a>.</p></div>\n
+        \   </div>\n  </div>\n  \n\n\n</div>\n\n\n<div style=\"clear: both;\"></div>\n<div
+        class=\"contextual\">\n\n\n\n\n\n</div>\n\n\n<div style=\"clear: both;\"></div>\n\n<p
+        class=\"other-formats\">Also available in:  <span><a class=\"atom\" rel=\"nofollow\"
+        href=\"/issues/863.atom\">Atom</a></span>\n  <span><a class=\"pdf\" rel=\"nofollow\"
+        href=\"/issues/863.pdf\">PDF</a></span>\n</p>\n\n\n\n\n\n        \n        <div
+        style=\"clear:both;\"></div>\n    </div>\n</div>\n</div>\n\n<div id=\"ajax-indicator\"
+        style=\"display:none;\"><span>Loading...</span></div>\n<div id=\"ajax-modal\"
+        style=\"display:none;\"></div>\n\n<div id=\"footer\">\n  <div class=\"bgl\"><div
+        class=\"bgr\">\n    Powered by <a href=\"https://www.redmine.org/\">Redmine</a>
+        &copy; 2006-2018 Jean-Philippe Lang\n  </div></div>\n</div>\n</div>\n</div>\n\n</body>\n</html>\n"
+    http_version: 
+  recorded_at: Sun, 02 Sep 2018 17:32:01 GMT
+recorded_with: VCR 4.0.0
