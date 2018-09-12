@@ -6,9 +6,9 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  remote_id            :integer
-#  url                  :string           not null
-#  name                 :string           not null
-#  full_name            :string
+#  url                  :string(255)      not null
+#  name                 :string(255)      not null
+#  full_name            :string(255)
 #  is_fork              :boolean          default(FALSE)
 #  watchers             :integer          default(0), not null
 #  forks                :integer          default(0)
@@ -22,21 +22,21 @@
 #  has_wiki             :boolean          default(FALSE), not null
 #  has_downloads        :boolean          default(FALSE), not null
 #  private              :boolean          default(FALSE), not null
-#  homepage             :string
+#  homepage             :string(255)
 #  sync_in_progress     :boolean          default(FALSE), not null
 #  bounty_total         :decimal(10, 2)   default(0.0), not null
 #  account_balance      :decimal(10, 2)   default(0.0)
-#  type                 :string           default("Tracker"), not null
-#  cloudinary_id        :string
+#  type                 :string(255)      default("Tracker"), not null
+#  cloudinary_id        :string(255)
 #  closed_issues        :integer          default(0), not null
 #  delta                :boolean          default(TRUE), not null
 #  can_edit             :boolean          default(TRUE), not null
 #  repo_url             :text
 #  rank                 :integer          default(0), not null
-#  remote_cloudinary_id :string
-#  remote_name          :string
+#  remote_cloudinary_id :string(255)
+#  remote_name          :string(255)
 #  remote_description   :text
-#  remote_homepage      :string
+#  remote_homepage      :string(255)
 #  remote_language_ids  :integer          default([]), is an Array
 #  language_ids         :integer          default([]), is an Array
 #  team_id              :integer
@@ -57,7 +57,6 @@
 #
 
 class Tracker < ApplicationRecord
-
   STATIC_SUBCLASSNAMES_API = %w(
     Jira::API
     Bugzilla::API
@@ -71,6 +70,7 @@ class Tracker < ApplicationRecord
     PhpTracker::API
     Savannah::API
     Mantis::API
+    Gitlab::API
   )
 
   STATIC_SUBCLASSNAMES = %w(
@@ -86,6 +86,7 @@ class Tracker < ApplicationRecord
     PhpTracker::Tracker
     Savannah::Tracker
     Mantis::Tracker
+    Gitlab::Tracker
   )
 
   class RemoteAPI
@@ -200,6 +201,18 @@ class Tracker < ApplicationRecord
   def self.collection_size_override
     10000
   end
+
+  searchkick word_start: [:name]
+
+  def search_data
+     {
+       name: name,
+       watchers: watchers,
+       forks: forks,
+       open_issues: open_issues,
+       bounty_total: bounty_total
+     }
+   end
 
   def premerge(bad_model)
     self.account.try(:merge!, bad_model.account) #merge accounts but keep splits/transactions

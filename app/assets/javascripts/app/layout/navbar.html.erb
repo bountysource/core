@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top navbar-bountysource" role="navigation" ng-controller="NavbarController">
+<div class="navbar navbar-default navbar-fixed-top navbar-bountysource" role="navigation" ng-controller="NavbarController">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand mr-5" href="/">
         <%= image_tag 'logos/main.svg' %>
       </a>
     </div>
@@ -51,7 +51,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right font-weight-regular">  
         <li>
-          <form class="navbar-form row" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()">
+          <form class="navbar-form row" role="search" ng-controller="NavbarSearchController" ng-submit="search_typeahead.submit_search()" ng-click="search_typeahead.submit_search()">
             <div class="input-group col-xs-12">
               <input type="text" class="form-control br-0" ng-model="search_typeahead.query" placeholder="Search" typeahead="tag.name for tag in search_typeahead.update_results($viewValue)" typeahead-on-selectq="search_typeahead.selected($item)" typeahead-template-url="common/directives/teamView/tag_autocomplete.html" typeahead-focus-first="false" />
               <div class="input-group-btn">
@@ -62,30 +62,11 @@
             </div>
           </form>
         </li>
-
-        <!-- Currency switcher -->
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle font-weight-regular navbar-main-button" data-toggle="dropdown">
-            <button class="text-aqua rectangle-border" ng-if="$currency.isUSD()">$</button>
-            <button class="text-aqua rectangle-border" ng-if="$currency.isBTC()">฿</button>
-            <button class="text-aqua rectangle-border" ng-if="$currency.isXRP()">XRP</button>
-            <button class="text-aqua rectangle-border" ng-if="$currency.isMSC()">MSC</button>
-          </a>
-          <ul class="dropdown-menu">
-            <li role="presentation" class="dropdown-header">Choose currency:</li>
-            <li><a ng-click="$currency.setUSD()">US Dollars ($)</a></li>
-            <li><a ng-click="$currency.setBTC()">Bitcoin (฿)</a></li>
-            <li><a ng-click="$currency.setXRP()">Ripple (XRP)</a></li>
-            <li><a ng-click="$currency.setMSC()">Mastercoin (MSC)</a></li>
-          </ul>
-        </li>
-
-        <li ng-if="cart && !cart.isEmpty()">
-          <a href="/cart" class="font-weight-regular navbar-main-button" >
-            <button class="rectangle-border text-aqua">
-                <i class="glyphicon glyphicon-shopping-cart"></i>
-              {{cart.items.length | number:0}}
-            </button>
+        
+        <!-- BANCOR widget (CAN / ETH)-->
+        <li id='bancor-wc-nav'>
+          <a href="" class="font-weight-regular navbar-main-button">
+            <button ng-click="bancorWidget.toggle()" class="btn btn-light-blue font-weight-regular navbar-main-button">Get CAN</button>
           </a>
         </li>
 
@@ -158,18 +139,16 @@
 
     </div>
   </div>
+  <!-- redundant ng-hide for browsers that doesn't support the widget -->
+  <div ng-controller="BancorWidgetController" id="bancor-wc-container" ng-show="visible" class="ng-hide">
+    <div id="bancor-wc">
+    </div>
+    <div class="widget-close-long" ng-click="close()">
+      <strong>Close</strong>
+    </div>
+  </div>
+
+
 </div>
 
-<div ng-controller="CanyaAnnouncementController">
-  <div style="background: #33ccff; color: white; text-align: center" class="pt-3 pb-3" ng-if="canyaAnnouncementIsVisible">
-    <a href="#" ng-click="hideCanyaAnnouncement()" style="float: right; color: white; margin: 10px 20px 0 0">X</a>
-    <a style="color: white" target="_blank" href="https://canya.io/promo/index.html">
-      <div>
-        CanYa is about to launch it's highly anticipated decentralised platform for digital services.
-      </div>
-      <div>
-        Click here to join the Pre-Alpha testing. The first 50 approved testing accounts will receive USD $500 in CAN tokens!
-      </div>
-    </a>
-  </div>
-</div>
+

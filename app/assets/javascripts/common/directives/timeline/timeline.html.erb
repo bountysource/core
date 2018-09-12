@@ -1,6 +1,6 @@
 <div>
   <table class="table timeline table-fixed">
-    <tr ng-repeat="event in events" ng-class="{featured: event.bounty.featured}">
+    <tr ng-repeat="event in (events | filter:{event: '!issue_created'})" ng-class="{featured: event.bounty.featured}">
 
       <td class="big-icon">
         <profile-pic ng-hide="noActorImage" owner="event.actor"></profile-pic>
@@ -45,11 +45,6 @@
           <profile-name owner="event.actor"></profile-name>
           pledged {{event.pledge.amount | dollars}} to
           <a ng-href="/teams/{{event.team.slug}}/fundraiser">{{event.fundraiser.title}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.
-        </div>
-
-        <div class="{{primaryClass}}" ng-if="event.event==='issue_created'">
-          <profile-name owner="event.actor"></profile-name>
-          created <span ng-hide="event.issue">this issue</span><a ng-show="event.issue" ng-href="/issues/{{event.issue.slug}}">{{event.issue.title}}</a><span ng-if="dateInPrimary" tooltip="{{event.timestamp | date}}" tooltip-placement="right"> {{event.timestamp | timeDiff }} ago</span>.<br/>
         </div>
 
         <div class="{{primaryClass}}" ng-if="event.event==='issue_comment_created'">

@@ -1,0 +1,15 @@
+<p>
+  Hi <%= @person.first_name %>,
+</p>
+
+<p>
+	Please click the link below to verify your account.
+</p>
+
+<p>
+  <%= Api::Application.config.www_url %>#verify?<%= { email: @person.email, code: @token }.to_param %>
+</p>
+
+<p>
+  If you did not sign up using this email, please contact us at support@bountysource.com.
+</p>

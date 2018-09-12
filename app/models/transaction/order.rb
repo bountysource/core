@@ -7,7 +7,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  audited            :boolean
-#  type               :string           default("Transaction"), not null
+#  type               :string(255)      default("Transaction"), not null
 #  person_id          :integer
 #  checkout_method_id :integer
 #  gross              :decimal(, )
@@ -40,7 +40,7 @@ class Transaction::Order < Transaction
     payment_notification = notification || PaymentNotification.find_by(id: notification_id)
     return nil unless payment_notification && payment_notification.verified?
 
-    ShoppingCart.transaction do
+    ShoppingCart.transaction(joinable: false, requires_new: true) do
       # load the cart
       cart = payment_notification.shopping_cart
 
@@ -75,7 +75,7 @@ class Transaction::Order < Transaction
     # Optionally, a source can be passed in to update Splits on the Transaction with an item.
     # If left nil, then the Splits will not have an item.
     source = options[:source]
-
+    
     # List of items that are created through checkout.
     # Saved in array so that we can invoke callbacks AFTER the transaction... transaction block is finished
     created_items = []

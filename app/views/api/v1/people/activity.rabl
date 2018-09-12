@@ -22,6 +22,28 @@ child(@bounties => :bounties) do
   end
 end
 
+child(@crypto_bounties => :crypto_bounties) do
+  node(:type) { |crypto_bounty| crypto_bounty.class.name }
+  extends "api/v1/crypto_bounties/partials/base"
+
+  node(:person) do |crypto_bounty|
+    {
+      slug: crypto_bounty.owner.to_param,
+      display_name: crypto_bounty.owner.display_name
+    }
+  end
+
+  child(:issue) do
+    attribute :to_param => :slug
+    attribute :title
+
+    child(:tracker => :tracker) do
+      attribute :to_param => :slug
+      attribute :name
+    end
+  end
+end
+
 child(@pledges => :pledges) do
   node(:type) { |pledge| pledge.class.name }
   extends "api/v1/pledges/partials/base"

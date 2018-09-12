@@ -59,7 +59,7 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
       page: page || 1,
       per_page: $scope.per_page || 30
     }).then(function (response) {
-        var issues = response.data;
+        var issues = response.data.issues;
         $scope.issues_resolved = true;
         $scope.open_bounties = $scope.open_bounties || 0; //frontend count of unclaimed bounties
         if (!$scope.open_bounties) {

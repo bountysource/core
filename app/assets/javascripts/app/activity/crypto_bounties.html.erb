@@ -1,0 +1,50 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/activity">Activity</a></li>
+  <li class="active"><a href="/activity/crypto_bounties">Crypto Bounties</a></li>
+</ul>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+
+    <div class="table-responsive">
+      <table class="table" ng-show="crypto_bounties.length > 0">
+        <thead>
+          <tr>
+            <th style="width: 4%"></th>
+            <th>Tracker</th>
+            <th>Issue</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="crypto_bounty in crypto_bounties | orderBy:'-created_at'">
+            <td class="center-height">
+              <a ng-href="/trackers/{{crypto_bounty.issue.tracker.slug}}">
+                <img ng-src="{{ crypto_bounty.issue.tracker.image_url }}" class="img-responsive img-circle" tooltip="{{crypto_bounty.issue.tracker.name}}" tooltip-placement="left">
+              </a>
+            </td>
+            <td class="center-height"><a ng-href="/trackers/{{crypto_bounty.issue.tracker.slug}}">{{ crypto_bounty.issue.tracker.name }}</a></td>
+            <td class="center-height"><a ng-href="/issues/{{crypto_bounty.issue.slug}}">{{ crypto_bounty.issue.title }}
+            </a></td>
+            <td class="center-height" ng-if="cryptoBounty.amount['ETH'] === null">
+              <a ng-href="/issues/{{crypto_bounty.issue.slug}}">
+                {{ cryptoBounty.amount.balance }} {{ cryptoBounty.amount.tokenInfo.symbol }}
+              </a>
+            </td>
+            <td class="center-height" ng-if="cryptoBounty.amount['ETH'] !== null">
+              <a ng-href="/issues/{{crypto_bounty.issue.slug}}">
+                {{ crypto_bounty.amount['ETH'].balance }} ETH
+              </a>
+            </td>
+            <td class="center-height">{{ crypto_bounty.created_at | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

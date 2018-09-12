@@ -55,10 +55,12 @@ ul.list.narrow-padding {
   max-width: 130px;
 }
 
-.featured-header {
-  background-color: #ffffff; 
-  padding: 12px;
+#top-supporters img{
+  width: 60px;
+  float: left;
+  margin: 6px;
 }
+
 
 .featured-header-icon {
   background-color: transparent;

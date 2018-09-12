@@ -53,16 +53,20 @@ class Api::V2::TeamsController < Api::BaseController
     if params.has_key?(:homepage_featured)
       @collection = @collection.where("homepage_featured > 0").order(:homepage_featured)
     end
-
+    
     if params[:tag_child_type] == 'TeamSlug'
       params[:tag_child_type] = 'Team'
       params[:tag_child_id] = Team.where(slug: params[:tag_child_id]).first!.id
+      child = Team.find(params[:tag_child_id])
+    elsif params[:tag_child_type] == 'Tag'
+      child = Tag.find(params[:tag_child_id])
     end
 
     if TagRelation::VALID_CLASSES.include?(params[:tag_child_type]) && params.has_key?(:tag_child_id) && params[:tag_child_id].to_i>0
-      @collection = @collection.joins(:parent_tag_relations).where("tag_relations.child_id" => params[:tag_child_id], "tag_relations.child_type" => params[:tag_child_type]).where('weight>0').order('activity_total desc')
-    # elsif params.has_key?(:tag_parent_type) && params.has_key?(:tag_parent_id) && params[:tag_parent_id].to_i>0
-    #   @collection = @collection.joins(:tag_relations).where("tag_relations.parent_id" => params[:tag_parent_id], "tag_relations.parent_type" => params[:tag_parent_type]).where('weight>0').order('activity_total desc')
+      parent_ids = child.child_tag_relations.pluck(:parent_id)
+      @collection = Team.where(id: parent_ids)
+    elsif params.has_key?(:tag_parent_type) && params.has_key?(:tag_parent_id) && params[:tag_parent_id].to_i>0
+      @collection = @collection.joins(:tag_relations).where("tag_relations.parent_id" => params[:tag_parent_id], "tag_relations.parent_type" => params[:tag_parent_type]).where('weight>0').order('activity_total desc')
     end
 
     if params[:team_inclusion_parent]
@@ -86,6 +90,11 @@ class Api::V2::TeamsController < Api::BaseController
       @team_tagged_ids = team.child_tag_relations.where('weight>0').pluck(:parent_id)
 
       @collection = @collection.where(id: (@team_backer_ids + @team_included_ids + @team_tagged_ids).uniq).where.not(id: team.id).order('activity_total desc')
+    end
+
+    if params[:top_rewards]
+      @collection = Team.joins(:bounties).group('teams.id').order('SUM(bounties.amount) desc').limit(5)
+      @include_team_top_reward = true
     end
 
     @collection = paginate!(@collection)
@@ -129,19 +138,6 @@ class Api::V2::TeamsController < Api::BaseController
         @item.support_offering.update_attributes(support_offering_params)
       end
 
-      # create, update, destroy
-      if params[:create_support_offering_reward]
-        @item.support_offering.rewards.create!(support_offering_reward_params)
-      end
-      if params[:update_support_offering_reward]
-        reward = @item.support_offering.rewards.where(id: params[:update_support_offering_reward][:id]).first!
-        reward.update_from_params!(params[:update_support_offering_reward])
-      end
-      if params[:destroy_support_offering_reward]
-        reward = @item.support_offering.rewards.where(id: params[:destroy_support_offering_reward][:id]).first!
-        reward.mark_as_deleted!
-      end
-
       # TODO: could require is_admin on child_team as well
       if params[:add_child_team_inclusion]
         child_team = Team.where(slug: params[:add_child_team_inclusion]).first!
@@ -169,10 +165,6 @@ private
 
   def support_offering_params
     params.require(:support_offering).permit(:subtitle, :body_markdown, :youtube_video_url, :goals, :extra)
-  end
-
-  def support_offering_reward_params
-    params.require(:create_support_offering_reward).permit(:title, :description, :amount)
   end
 
   def require_team

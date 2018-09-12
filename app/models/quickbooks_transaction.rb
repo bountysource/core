@@ -2,9 +2,9 @@
 #
 # Table name: quickbooks_transactions
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id         :integer          not null
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class QuickbooksTransaction < QuickbooksBase
@@ -17,9 +17,9 @@ class QuickbooksTransaction < QuickbooksBase
       method: :post,
       post_body: post_body_from_cash_out(cash_out)
     )
+    logger.error "RESPONSE #{response.inspect}"
     raise "Expected Purchase" unless response['Purchase']
 
-    logger.error "RESPONSE #{response.inspect}"
     new.tap do |txn|
       txn.id = response['Purchase']['Id']
       txn.save!

@@ -11,6 +11,11 @@
         ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
       </td>
 
+      <td ng-if="action.type == 'CryptoBounty'">
+        Placed a <strong>{{action.amount.tokens[0].balance}} {{action.amount.tokens[0].tokenInfo.name }} bounty</strong> on <a ng-href="/issues/{{action.issue.slug}}">{{action.issue.title}}</a> for <a ng-href="/trackers/{{action.issue.tracker.slug}}">{{action.issue.tracker.name}}</a> <span
+        ng-show="action.owner_type == 'Team'">on behalf of <a ng-href="teams/{{action.person.slug}}">{{action.person.display_name}}</a></span>
+      </td>
+
       <td ng-if="action.type == 'Fundraiser'">
         Created the fundraiser <a ng-href="fundraisers/{{action.slug}}">{{action.title}}</a>
       </td>

@@ -143,8 +143,29 @@ class Mailer < ActionMailer::Base
 
   def reset_password(options)
     @person = options[:person]
+    @token = options[:token]
 
     mail(to: @person.email, subject: "Reset your password") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def email_verification(options)
+    @person = options[:person]
+    @token = options[:token]
+
+    mail(to: @person.email, subject: "Verify your email") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def change_email(options)
+    @person = options[:person]
+    @token = options[:token]
+
+    mail(to: @person.email, subject: "Verify email change") do |format|
       format.text
       format.html
     end
@@ -178,6 +199,16 @@ class Mailer < ActionMailer::Base
   end
 
   def bounty_refunded(options)
+    @person = options[:person]
+    @bounty = options[:bounty]
+
+    mail(to: @person.email, subject: "Bounty refunded") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def bounty_refunded_for_deleted_issue(options)
     @person = options[:person]
     @bounty = options[:bounty]
 
@@ -321,6 +352,15 @@ class Mailer < ActionMailer::Base
     @fundraiser = options[:fundraiser]
 
     mail(to: @person.email, subject: "Fundraiser completed! #{@fundraiser.title}") do |format|
+      format.text
+      format.html
+    end
+  end
+
+  def crypto_pay_out_approved(options)
+    @person = options[:person]
+
+    mail(to: @person.email, subject: "Crypto pay out approved!") do |format|
       format.text
       format.html
     end

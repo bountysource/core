@@ -14,8 +14,10 @@ angular.module('api.bountysource',[]).
     this.call = function() {
       var args = Array.prototype.slice.call(arguments);
       var url = $rootScope.api_host + args.shift().replace(/^\//,'');
+
       var method = typeof(args[0]) === 'string' ? args.shift() : 'GET';
       var params = typeof(args[0]) === 'object' ? args.shift() : {};
+
       var callback = typeof(args[0]) === 'function' ? args.shift() : function(response) { return response.data; };
 
       // merge in params from method chain
@@ -39,7 +41,7 @@ angular.module('api.bountysource',[]).
 
         // HACK: the API doesn't return meta/data hash unless you add a callback, so we add it here and strip it later
         params.callback = 'CORS';
-        var cors_callback = function(response) {
+        var cors_callback = function(response, status, headers) {
           response = response.replace(/^(\/\*\*\/ )?CORS\(/,'').replace(/\)$/,'');
           var parsed_response = JSON.parse(response);
 
@@ -50,7 +52,7 @@ angular.module('api.bountysource',[]).
             // if (parsed_response.meta.pagination) {
             //   $rootScope.$broadcast('paginationLoaded', parsed_response.meta.pagination)
             // }
-            deferred.resolve(callback(parsed_response));
+            deferred.resolve(callback(parsed_response, status, headers));
           }
         };
 
@@ -60,7 +62,7 @@ angular.module('api.bountysource',[]).
 
         var headers = {};
         headers.Accept = 'application/vnd.bountysource+json; version=0';
-
+        
         if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
         else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
         else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
@@ -70,6 +72,7 @@ angular.module('api.bountysource',[]).
       } else {
         params._method = method;
         params.callback = 'JSON_CALLBACK';
+        
         $http.jsonp(url, { params: params }).success(function(response) {
           deferred.resolve(callback(response));
         });
@@ -124,7 +127,6 @@ angular.module('api.bountysource',[]).
 
         var headers = {};
         headers.Accept = 'application/vnd.bountysource+json; version=1';
-
         if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
         else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback); }
         else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback); }
@@ -700,6 +702,42 @@ angular.module('api.bountysource',[]).
 
     this.get_takedowns = function() {
       return this.call("/admin/takedowns");
+    };
+
+    this.get_ad_spaces = function(id) {
+      return this.call("/admin/info_spaces/", function(response){
+        return response;
+      });
+    };
+
+    this.get_ad_space = function(id) {
+      return this.call("/admin/info_spaces/" + id, function(response){
+        return response;
+      });
+    };
+
+    this.delete_ad_space = function(id) {
+      return this.call("/admin/info_spaces/" + id, "DELETE", function(response){
+        return response;
+      });
+    };
+
+    this.create_ad_space = function(form_data) {
+      return this.call("/admin/info_spaces", "POST", form_data, function(response){
+        return response;
+      });
+    };
+
+    this.update_ad_space = function(form_data) {
+      return this.call("/admin/info_spaces/"+form_data.id, "PUT", form_data, function(response){
+        return response;
+      });
+    };
+
+    this.update_account = function(form_data){
+      return this.call("/admin/accounts/"+form_data.account_id+"/set_override_fees", "POST", form_data, function(response){
+        return response;
+      });
     };
 
     this.create_takedown = function(form_data) {

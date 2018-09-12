@@ -28,7 +28,9 @@ module HasCloudinary
             end
           elsif input =~ /github/
             self.cloudinary_id = input
-          elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/
+          elsif input =~ /^https:\/\/assets.gitlab-static.net\/uploads\//
+            self.cloudinary_id = input
+          elsif input =~ /^https?:\/\/([a-z0-9]+\.)?gravatar\.com\/avatar\/[a-f0-9]{32}/ 
             # gravatar URL, just extract hash
             self.cloudinary_id = "gravatar/#{input[/[a-f0-9]{32}/]}"
           elsif input =~ /^https:\/\/identicons\.github\.com\// || input =~ /assets\.github\.com/
@@ -88,6 +90,8 @@ module HasCloudinary
           #if cloudinary_url is github do this
           if ( cloudinary_id =~ /github/ )
             "#{cloudinary_id}&s=#{options[:size]}"
+          elsif ( cloudinary_id =~ /^https:\/\/assets.gitlab-static.net\/uploads\//)
+            cloudinary_id
           else
 
             container, filename = (cloudinary_id || '').split('/')

@@ -1,0 +1,73 @@
+.text-center
+  %div.mt-3.font-weight-semibold
+    %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setUsdAmount(15)"} $15
+    %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setUsdAmount(50)"} $50
+    %button.btn.btn-rounded.btn-light-blue-inverse.btn-sm{"ng-click" => "setUsdAmount(500)"} $500
+  %small.mt-3 - or -
+  .usd-input
+    %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "usdCart.amount", :type => "number"}
+    %button#fiatSelect.btn.btn-borderless.btn-default.font-weight-semibold{:type => "button", "style" => "height: 100%"}
+      USD
+  %hr.my-0{"style" => "height: 2px;"}
+  %small.text-muted.pull-right *Minimum $5 USD
+  .clearfix
+.mt-3
+  .form-group{"ng-if" => "current_person"}
+    %span.text-muted
+      %small Display As
+    .row
+      .col-xs-12
+        %button.btn.btn-default.btn-responsive.btn-small-radius.dropdown-toggle{"data-toggle" => "dropdown"}
+          / Owner image
+          %img.img-circle{"ng-show" => "owner", "ng-src" => "{{owner.image_url_small || owner.image_url}}", :style => "height: 17px; width: 17px; display: inline;"}/
+          %span {{owner.display_name || owner.name || 'Anonymous'}}
+          %span.caret
+        %ul.dropdown-menu
+          / Current person, if logged in
+          %li{"ng-if" => "current_person"}
+            %a{"ng-click" => "setOwner('person', current_person)"}
+              %img.img-circle{"ng-src" => "{{current_person.image_url_small || current_person.image_url}}", :style => "height: 18px; width: 18px; display: inline;"}/
+              {{current_person.display_name}}
+          / Anonymous
+          %li
+            %a{"ng-click" => "setOwner('anonymous')"}
+              %img{:src => "#{asset_path("bs-anon.png")}", :style => "height: 18px; width: 18px; display: inline;"}/
+              Anonymous
+          / Teams
+          %li.divider{"ng-if" => "teams.length > 0"}
+          %li.dropdown-header{"ng-if" => "teams.length > 0"} Your Teams
+          %li
+            %a{"ng-click" => "setOwner('team', team)", "ng-repeat" => "team in teams | orderBy:'-activity_total'"}
+              %img.img-circle{"ng-src" => "{{team.image_url_small || team.image_url}}", :style => "height: 18px; width: 18px; display: inline;"}/
+              {{team.name}}
+  / Expire
+  .form-group{"ng-class" => "{ 'has-error': !bountyExpirationValid() }"}
+    %span.text-muted
+      %small Expires
+    .row
+      .col-xs-12
+        %select.form-control.input-sm{:name => "expireSelect", "ng-model" => "usdCart.bounty_expiration", "ng-options" => "option.value as option.description for option in bountyExpirationOptions", "ng-change" => "updateUponExpiration()"}
+          %option{:value => ""} Select an option
+        %div{"ng-if" => "!bountyExpirationValid()"}
+          %p.form-control-static.text-danger Bounty amount too low for selected expiration option
+  / After expiration select
+  .form-group{"ng-if" => "usdCart.bounty_expiration !== null"}
+    %span.text-muted
+      %small Upon Expiration
+    .row
+      .col-xs-12
+        %select.form-control.input-sm{:name => "uponExpireSelect", "ng-model" => "usdCart.upon_expiration", "ng-options" => "option.value as option.description for option in bountyUponExpirationOptions"}
+          %option{:value => ""} Select an option
+
+  / Tweet promotion
+  .form-group
+    .checkbox
+      %label
+        %input{"ng-model" => "usdCart.tweet", :type => "checkbox"}/
+        %small
+          Tweet from @Bountysource
+          = succeed "?" do
+            %strong (+{{20|dollars}})
+  %div.text-left{ "ng-include" => "'app/issues/_payment_method.html'" }
+  %div.mt-5
+    %button.btn.btn-light-blue.btn-responsive.py-3{"ng-click" => "checkoutUsd()",  "ng-disabled" => "!canCheckout()"} CHECKOUT

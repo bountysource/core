@@ -8,14 +8,27 @@ angular.module('app')
 })
 .controller("BountyClaims", function ($scope, $window, $api) {
 
-//set column sort models here!!
-  var params = {per_page: 500};
-  $scope.bounty_claims = $api.get_bounty_claims(params).then(function(response) {
-    if (response.meta.success) {
-      return response.data;
-    } else {
-      return response.data.error;
-    }
-  });
+  // number of items to show in a page
+  var itemsPerPage = 100;
+  $scope.itemsPerPage = itemsPerPage;
+  $scope.maxSize = 10; // number of pagination links to show
 
+  $scope.updatePage = function(page){
+    var params = {
+      page: page,
+      per_page: itemsPerPage
+    };
+
+    $api.call('/admin/bounty_claims', params, function(response, _, headers){
+      if (response.meta.success) {
+        $scope.bounty_claims = response.data;
+
+        // set pagination data
+        $scope.currentPage = page;
+        $scope.pageCount = headers('Total-pages');
+      }
+    });
+  };
+
+  $scope.updatePage(1);
 });

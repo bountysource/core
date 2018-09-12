@@ -596,4 +596,53 @@ http_interactions:
         >Legal</a>\n    </li>\n  </ul>\n</div></div>\n</div>\n\n\n</body>\n</html>"
     http_version: 
   recorded_at: Thu, 19 Nov 2015 19:37:43 GMT
-recorded_with: VCR 2.9.3
+- request:
+    method: get
+    uri: https://gitlab.com/api/v4/projects/https:%2F%2Fbugzilla.redhat.com%2Fbuglist.cgi%3Fproduct=Fedora&component=fedora-packager&resolution=---
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Private-Token:
+      - yk4sv48-tHyUJNBkcf56
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 13 Jun 2018 15:43:36 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Cache-Control:
+      - no-cache
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Request-Id:
+      - 405429ee-3209-43a9-b89b-161e52769ec8
+      X-Runtime:
+      - '0.031920'
+      Ratelimit-Limit:
+      - '600'
+      Ratelimit-Observed:
+      - '4'
+      Ratelimit-Remaining:
+      - '596'
+      Ratelimit-Reset:
+      - '1528904676'
+      Ratelimit-Resettime:
+      - Thu, 13 Jun 2018 15:44:36 GMT
+    body:
+      encoding: UTF-8
+      string: '{"message":"404 Project Not Found"}'
+    http_version: 
+  recorded_at: Wed, 13 Jun 2018 15:43:36 GMT
+recorded_with: VCR 4.0.0

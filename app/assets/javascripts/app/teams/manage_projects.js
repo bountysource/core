@@ -92,6 +92,36 @@ angular.module('app').controller('TeamManageProjectsController', function ($scop
     };
     $scope.team_inclusions.refresh();
 
+    $scope.team_taggings = {
+      add: function(child_tag) {
+        Tag.create({ team_add_child: child_tag, child_id: child_tag.id, parent_type: 'Team', parent_id: team.id, child_text: child_tag.name}, function(response) {
+          $scope.team_taggings.model = null;
+          $scope.team_taggings.refresh();
+        });
+      },
+
+      remove: function(child_tag) {
+        Tag.create({ team_remove_child: child_tag, child_id: child_tag.id, parent_type: 'Team', parent_id: team.id, child_text: child_tag.name}, function(response) {
+          $scope.team_taggings.model = null;
+          $scope.team_taggings.refresh();
+        });
+      },
+
+      typeahead: function(search_text) {
+        return Tag.query({ search: search_text, disclude_tags: false }).$promise;
+      },
+
+      refresh: function() {
+        $scope.team_taggings.model = null;
+        Tag.query({ parent_type: "Team", parent_id: team.id }, function(response) {
+          $scope.team_taggings.teams = response;
+        });
+      }
+
+    };
+
+     $scope.team_taggings.refresh();
+
     return team;
   });
 });

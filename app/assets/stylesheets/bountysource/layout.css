@@ -6,6 +6,10 @@ body {
   color: #485f64;
 }
 
+body {
+  background-color: #fcfcfc;
+}
+
 h1, h2 {
   font-weight: bold;
 }
@@ -43,7 +47,7 @@ a.gunmetal-link {
 
 /* Set the fixed height of the footer here */
 #footer {
-  padding-top: 30px;
+  margin-top: 30px;
   background-color: #fff;
   margin-top: 30px;
   padding-bottom: 54px;

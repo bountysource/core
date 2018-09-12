@@ -1,6 +1,8 @@
 .row.display-flex {
+  display: -webkit-box; 
+  display: -ms-flexbox; 
+  display: -webkit-flex;
   display: flex;
-  flex-wrap: wrap;
 }
 .row.display-flex > [class*='col-'] {
   display: flex;
@@ -14,6 +16,11 @@
 
 .row.display-flex.vertical-align-middle > [class*='col-']{
   justify-content: center;
+  flex-direction: column;
+}
+
+.row.display-flex.vertical-align-bottom > [class*='col-']{
+  justify-content: bottom;
   flex-direction: column;
 }
 

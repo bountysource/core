@@ -6,3 +6,14 @@
 //= require_tree "./lib"
 
 'use strict';
+
+
+document.addEventListener('scroll', function (event) {
+  var navbarElem = document.getElementsByClassName('navbar-bountysource')[0]
+  var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  if (scrollTop <= 0) {
+    navbarElem.classList.remove('body-scrolled')
+  } else {
+    navbarElem.classList.add('body-scrolled')
+  }
+});

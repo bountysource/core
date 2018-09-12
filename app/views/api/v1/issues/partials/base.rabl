@@ -18,3 +18,9 @@ attribute :participants_count
 attribute :thumbs_up_count
 attribute :bounty_total
 attribute :solution_started => :has_active_solution
+attribute :category
+
+child(:issue_address => :issue_address) do
+  attribute :id
+  attribute :public_address
+end

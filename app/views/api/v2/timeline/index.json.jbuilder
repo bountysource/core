@@ -26,7 +26,7 @@ json.array! @collection do |item|
     json.actor do
       json.type 'Anonymous'
       json.display_name 'Anonymous'
-      json.image_url_small asset_path("anon.jpg")
+      json.image_url_small asset_path("bs-anon.png")
     end
   end
 

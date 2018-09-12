@@ -1,11 +1,9 @@
 angular.module('app')
-  .controller('TeamFundraiserController', function($scope, $window, $location, $cart, $routeParams, $route, $api, $currency) {
+  .controller('TeamFundraiserController', function($scope, $window, $location, $routeParams, $route, $api) {
     if ($routeParams.id === 'crystal-lang') {
       $window.location.replace('https://salt.bountysource.com/teams/crystal-lang');
       return;
     }
-
-    $scope.$currency = $currency;
 
     // Change page content based on query param
     $scope._page = $location.search().page;
@@ -19,8 +17,7 @@ angular.module('app')
     // Watching a string didn't work here. Watch the route params and update pledge fields accordingly
     $scope.$watch(function () {return $location.search();}, function (newParams) {
       $scope.pledge = {
-        amount: $currency.amountParamsParser(newParams.amount) || angular.noop,
-        currency: $routeParams.currency || $currency.value,
+        amount: newParams.amount || angular.noop,
         anonymous: (parseInt(newParams.anonymous, 10) === 1) || false,
         survey_response: newParams.survey_response || "",
         reward_id: parseInt(newParams.reward_id, 10) || null
@@ -49,7 +46,6 @@ angular.module('app')
           var payload = angular.copy($scope.pledge);
           payload.fundraiser_id = fundraiser.id;
 
-          $cart.addPledge(payload);
         };
       }
     });

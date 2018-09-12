@@ -22,6 +22,11 @@ module Api::V2::IssuesHelper
       collection = collection.joins(:tracker).where('trackers.type IN (?)', constant_names) unless constant_names.blank?
     end
 
+    # Filter by Tracker owner type and id
+    if params.has_key?(:tracker_team_id)
+      collection = filter_by_tracker_team_id(collection, params[:tracker_team_id])
+    end
+
     # Filter by issue open/closed
     collection = collection.where(can_add_bounty: params[:can_add_bounty].to_bool) if params.has_key?(:can_add_bounty)
 
@@ -34,11 +39,6 @@ module Api::V2::IssuesHelper
     # Filter by issue accepting request_for_proposals
     if params[:accepting_proposals].to_bool
       collection = filter_by_accepting_proposals(collection.joins(:request_for_proposal))
-    end
-
-    # Filter by Tracker owner type and id
-    if params.has_key?(:tracker_team_id)
-      collection = filter_by_tracker_team_id(collection, params[:tracker_team_id])
     end
 
     if params.has_key?(:bounty_min) || params.has_key?(:bounty_max)

@@ -1,0 +1,1 @@
+json.array! @collection, partial: 'api/v2/wallets/base', as: :item

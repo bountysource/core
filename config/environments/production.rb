@@ -9,7 +9,7 @@ Api::Application.configure do
   # Compress JavaScripts and CSS
   config.assets.compress = true
   config.assets.css_compressor = :sass
-  config.assets.js_compressor  = Uglifier.new(:mangle => false)
+  config.assets.js_compressor  = Uglifier.new(mangle: false, harmony: true)
   config.action_controller.asset_host = "https://d2bbtvgnhux6eq.cloudfront.net"
 
 

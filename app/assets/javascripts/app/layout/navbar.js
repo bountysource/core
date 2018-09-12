@@ -1,8 +1,4 @@
-angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieJar, $currency, $cart, Team) {
-
-  $cart.find(false).then(function (cart) {
-    $scope.cart = cart;
-  });
+angular.module('app').controller('NavbarController', function ($scope, $api, $modal, $window, $cookieJar, Team) {
 
   // Load person's teams for dropdown. Assign the teams to the current_person
   $scope.$watch('current_person', function(current_person) {
@@ -20,8 +16,6 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
     $api.signout();
   };
 
-  // Expose the currency service
-  $scope.$currency = $currency;
 
   $scope.openDevToolsModal = function() {
     $modal.open({
@@ -89,6 +83,11 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
     });
   };
 
+  $scope.bancorWidget = {
+    toggle: function() {
+      $scope.$emit('bancorWidgetToggle');
+    }
+  };
 });
 
 angular.module('app').controller('AlertNotificationBar', function ($scope, $location) {
@@ -108,11 +107,27 @@ angular.module('app').controller('NavbarLinkedAccountSignin', function($scope, $
   };
 });
 
-
-angular.module('app').controller('CanyaAnnouncementController', function ($scope, $cookieJar) {
-  $scope.hideCanyaAnnouncement = function() {
-    $scope.canyaAnnouncementIsVisible = false;
-    $cookieJar.setJson('hide_canya_testing', true);
+angular.module('app').controller('BancorWidgetController', function ($rootScope, $scope, $location) {
+  $scope.visible = false;
+  $scope.close = function(){
+    $scope.visible = false;
   };
-  $scope.canyaAnnouncementIsVisible = !$cookieJar.getJson('hide_canya_testing');
+
+  BancorConvertWidget.init({ // jshint ignore:line
+    "type": "1",
+    "baseCurrencyId": "5a6f61ece3de16000123763a",
+    "pairCurrencyId": "5937d635231e97001f744267",
+    "primaryColor": "#00BFFF",
+    "primaryColorHover": "#55DAFB"
+  });
+
+  // $rootScope is AppController
+  $rootScope.$on('bancorWidgetToggle', function(){
+    $scope.visible = !$scope.visible;
+  });
+
+  $rootScope.$on('bancorWidgetClose', function(){
+    $scope.visible = false;
+  });
+
 });

@@ -3,12 +3,12 @@
 # Table name: teams
 #
 #  id                               :integer          not null, primary key
-#  name                             :string           not null
-#  slug                             :string
-#  url                              :string
+#  name                             :string(255)      not null
+#  slug                             :string(255)
+#  url                              :string(255)
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
-#  cloudinary_id                    :string
+#  cloudinary_id                    :string(255)
 #  bio                              :text
 #  featured                         :boolean          default(FALSE), not null
 #  linked_account_id                :integer
@@ -319,6 +319,14 @@ class Team < ApplicationRecord
 
   def closed_bounties_amount
     bounties.paid.sum(:amount).to_f
+  end
+
+  def owned_issues_active_bounties_amount
+    owned_trackers
+      .joins(:issues)
+      .where('issues.bounty_total > ?', 0)
+      .where(issues: { paid_out: false })
+      .sum('issues.bounty_total')
   end
 
   def self.top_backers

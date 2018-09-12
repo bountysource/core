@@ -1,0 +1,55 @@
+%div{"ng-show" => "bounties.$resolved"}
+  %div{"ng-show" => "!issue.category"}
+    .row
+      .col-md-6
+        .text-center
+          %contribute-accordian
+  %div{"ng-show" => "bounties.length > 0"}
+    %table#bounties-table.table
+      %thead
+        %tr
+          %th
+            %a.text-dark{"ng-click" => "sort_by('owner.display_name')"} Backers
+          %th
+          %th
+            %a.text-dark{"ng-click" => "sort_by('amount')"} Amount
+          %th
+            %a.text-dark{"ng-click" => "sort_by('created_at')"} Date
+      %tbody
+        %tr{"ng-repeat" => "bounty in bounties | orderBy:sort_column:sort_reverse"}
+          %td
+            %profile-pic{:owner => "bounty.owner"}
+          %td
+            %profile-name{:owner => "bounty.owner"}
+          %td.font-weight-medium
+            {{ bounty.amount | dollars }}
+          %td
+            .text-muted {{ bounty.created_at | date }}
+  %div{"ng-show" => "cryptoBounties.length > 0"}
+    %table#bounties-table.table
+      %tbody
+        %tr{"ng-repeat" => "cryptoBounty in cryptoBounties | orderBy:crypto_sort_column:sort_reverse"}
+          %td
+            %profile-pic{:owner => "cryptoBounty.owner"}
+          %td
+            %profile-name{:owner => "cryptoBounty.owner"}
+          %td.font-weight-medium
+            %div{"ng-show" => "cryptoBounty.amount['ETH'] == null"}
+              %span{"ng-if" => "cryptoBounty.amount.tokenInfo.symbol === 'CAN'"}
+                = image_tag 'icons/icon_canya.svg', style: 'width: 20px;'
+              %span
+                {{ cryptoBounty.amount.balance }}
+              %span
+                {{ cryptoBounty.amount.tokenInfo.symbol }}
+            %div{"ng-hide" => "cryptoBounty.amount['ETH'] == null"}
+              %span 
+                = image_tag 'icons/icon_ethereum.svg', style: 'width: 20px;'
+              %span
+                {{ cryptoBounty.amount['ETH'].balance }}
+              %span
+                ETH
+          %td
+            %a.text-muted{"ng-href" => "https://ethplorer.io/tx/{{cryptoBounty.transaction_hash}}", "target" => "_blank"}
+              View Transaction
+          %td
+            .text-muted {{ cryptoBounty.created_at | date }}

@@ -6,7 +6,7 @@
 #  person_id   :integer          not null
 #  issue_id    :integer          not null
 #  number      :integer
-#  code_url    :string
+#  code_url    :string(255)
 #  description :text
 #  collected   :boolean
 #  disputed    :boolean          default(FALSE), not null
@@ -73,6 +73,10 @@ class BountyClaim < ApplicationRecord
     # require code_url AND/OR description to be present
     if code_url.blank? && description.blank?
       errors.add(:base, "Must provide code_url and/or description")
+    end
+
+    if issue.crypto? && !person.has_verified_primary_wallet?
+      errors.add(:person, "must have a verified primary wallet to submit a claim for a crypto bounty")
     end
 
     errors.empty?
@@ -202,12 +206,11 @@ class BountyClaim < ApplicationRecord
 
   # have all of the backers voted, and are all votes for accepting the claim?
   def unanimously_accepted?
-    issue.bounties.pluck(:person_id).uniq.count == bounty_claim_responses.where(value: true).count
-  end
-
-  # have all of the backers voted, and are all votes for rejecting the claim?
-  def unanimously_rejected?
-    issue.bounties.count == bounty_claim_responses.where(value: false).count
+    if issue.fiat?
+      issue.bounties.pluck(:person_id).uniq.count == bounty_claim_responses.where(value: true).count
+    elsif issue.crypto?
+      issue.crypto_bounties.pluck(:owner_id).uniq.reject(&:nil?).count == bounty_claim_responses.where(value: true).count
+    end
   end
 
   # A bounty claim is deemed acceptable if 100% of the backers
@@ -224,29 +227,33 @@ class BountyClaim < ApplicationRecord
   #   * nil - claim made, nothing has happened yet
   #   * true - claim was accepted
   #   * false - claim was rejected, possible because another claim was accepted.
-  def collect!(split_bounty_partial_amount=nil)
+  def collect!
     return nil if collected? || paid_out?
 
     self.class.transaction do
       update_attribute :collected, true
 
       # set ALL OTHER bounty claims from nil to false, and reject
-      unless split_bounty_partial_amount
-        issue.bounty_claims.each { |bounty_claim| bounty_claim.update_attributes!(collected: false, rejected: true) unless bounty_claim == self }
-      end
+      issue.bounty_claims.each { |bounty_claim| bounty_claim.update_attributes!(collected: false, rejected: true) unless bounty_claim == self }
 
       # set issue to paid_out
       issue.update_attribute(:paid_out, true)
 
       # create event
       BountyClaimEvent::Collected.create!(bounty_claim: self)
+      if issue.fiat?
+        #set bounty_claim.amount to the sum of all the bounties that have been set to paid -- this will not handle paying out claims multiple times..
+        payout_amount = issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
+        update_attribute :amount, payout_amount
 
-      #set bounty_claim.amount to the sum of all the bounties that have been set to paid -- this will not hanlde paying out claims multiple times..
-      payout_amount = split_bounty_partial_amount || issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
-      update_attribute :amount, payout_amount
+        #update active bounties' status to paid (not refunded)
+        issue.bounties.active.update_all(status: Bounty::Status::PAID)
 
-      #update active bounties' status to paid (not refunded)
-      issue.bounties.active.update_all(status: Bounty::Status::PAID)
+        # payout! it raises on its own if something goes wrong
+        payout! if payout_amount > 0
+      else
+        CryptoPayOut.create(issue: issue, person: person, type: 'ETH::Payout')
+      end
 
 
       # update email template, email backers of bounty claim
@@ -255,8 +262,7 @@ class BountyClaim < ApplicationRecord
       # email developer that his/her claim has been collected, with messages from backers
       person.send_email(:bounty_claim_accepted_developer_notice, bounty_claim: self, responses: accepted_responses_with_messages)
 
-      # payout! it raises on its own if something goes wrong
-      payout! if payout_amount > 0
+      
 
       MixpanelEvent.track(
         person_id: person_id,

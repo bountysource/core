@@ -1,4 +1,4 @@
-angular.module('directives').directive('teamView', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $currency, $cart, $window, Tag) {
+angular.module('directives').directive('teamView', function($rootScope, $location, $route, $routeParams, $api, $analytics, $modal, $window, Tag) {
   return {
     restrict: 'EAC',
     replace: true,
@@ -35,7 +35,6 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       scope.active_tab = function(name) {
         if (name === 'overview' && (/^\/issues\/[a-z-_0-9]+$/i).test($location.path())) { return "active"; }
         if (name === 'backers' && (/^\/issues\/[a-z-_0-9]+\/backers/).test($location.path())) { return "active"; }
-        if (name === 'proposals' && (/^\/issues\/[a-z-_0-9]+\/proposals/).test($location.path())) { return "active"; }
       };
 
       scope.activeNavTab = function(tab) {
@@ -83,6 +82,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
             submit_form: function(options) {
               options.parent_type = 'Team';
               options.parent_id = team.id;
+              options.team_add_child = team;
 
               Tag.create(options, function(current_tags) {
                 scope.team_tags.current = current_tags;
@@ -185,31 +185,12 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
       // **************************
 
       function addPledge (amount, reward_id) {
-        scope.$watch('activeFundraiser', function (fundraiser) {
-          if (angular.isObject(fundraiser)) {
-            if (fundraiser) {
-              return $cart.addPledge({
-                amount: amount,
-                currency: $currency.value,
-                fundraiser_id: fundraiser.id,
-                reward_id: reward_id
-              }).then(function () {
-                $location.url('/cart');
-              });
-            }
-          }
-        });
+        
       }
 
       scope.pledgeRedirect = function(amount, reward_id) {
-        // track event
-        $analytics.pledgeStart({ amount: amount, type: 'buttons' });
-
-        // Button values are hardocded with USD. Conver if needed
-        var converted = $currency.convert($window.parseFloat(amount), 'USD', $currency.value);
-
         // Add pledge and redirect to cart
-        addPledge(converted, reward_id);
+        addPledge($window.parseFloat(amount), reward_id);
       };
 
       scope.pledgeWithRewardRedirect = function(reward) {

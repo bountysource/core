@@ -1,7 +1,7 @@
 angular.module('app').config(function($stateProvider) {
   $stateProvider.state('root.checkout.payment', {
     parent: 'root.checkout.authed',
-    url: "/checkout/payment?team&amount&display_as&reward_id&support_level_id",
+    url: "/checkout/payment?team&amount&display_as&reward_id&support_level_id&frequency",
     title: "Payment Method - Checkout",
     templateUrl: "salt/checkout/payment.html",
     container: false,

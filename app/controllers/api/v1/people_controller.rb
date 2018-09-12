@@ -31,16 +31,7 @@ class Api::V1::PeopleController < ApplicationController
       params[:first_name], params[:last_name] = params[:full_name].split(' ', 2)
     end
 
-    @person = Person.new(
-      email:                  params[:email],
-      display_name:           params[:display_name],
-      first_name:             params[:first_name],
-      last_name:              params[:last_name],
-      password:               params[:password],
-      password_confirmation:  params[:password],
-      terms:                  params[:terms].to_bool,
-      company:                params[:company]
-    )
+    @person = Person.new(person_params)
 
     temp_password = "Aa1#{SecureRandom.urlsafe_base64}"
 
@@ -53,6 +44,7 @@ class Api::V1::PeopleController < ApplicationController
       # create person
       @person.password = temp_password
       @person.password_confirmation = temp_password
+      @person.confirmed_at = DateTime.now
 
       new_relic_data_point "Custom/account/create/github", 1
 
@@ -64,6 +56,7 @@ class Api::V1::PeopleController < ApplicationController
       # create person
       @person.password = temp_password
       @person.password_confirmation = temp_password
+      @person.confirmed_at = DateTime.now
 
       new_relic_data_point "Custom/account/create/#{$1}", 1
 
@@ -87,8 +80,14 @@ class Api::V1::PeopleController < ApplicationController
         end
       end
 
-      @person.create_access_token(request)
-      render "api/v1/people/create"
+      if @person.confirmed_at?
+        @person.create_access_token(request)
+        render "api/v1/people/create"
+      else
+        @person.create_confirmation_token
+        @person.send_email(:email_verification, token: @person.temp_confirmation_token)
+        render json: { verify_email_send: true}, status: :unprocessable_entity
+      end
     else
       # Override the password error message here instead of in the model.
       # We probably want the more specific error, albeit less humanized, messages
@@ -108,8 +107,10 @@ class Api::V1::PeopleController < ApplicationController
 
   # login to an existing BountySource account
   def login
-    if !(@person = Person.active.find_by_email(params[:email]))
+    if !(@person = Person.not_deleted.find_by_email(params[:email]))
       render json: { error: 'Email address not found.', email_is_registered: false }, status: :not_found
+    elsif @person.confirmed_at == nil
+      render json: { error: 'Your email has not been verified.', not_verify: true }, status: :not_found
     elsif !@person.authenticate(params[:password])
       render json: { error: 'Password not correct.', email_is_registered: true }, status: :not_found
     else
@@ -165,13 +166,13 @@ class Api::V1::PeopleController < ApplicationController
 
   # update the BountySource account
   def update
-    [:email, :display_name, :first_name, :last_name, :password, :paypal_email, :image_url, :bio, :location, :public_email, :company, :url].each do |field|
-      @person.send("#{field}=", params[field]) if params.has_key?(field)
-    end
+    if @person.update(person_update_params)
 
-    @person.profile_completed = params[:profile_completed].to_bool if params.has_key?(:profile_completed)
-
-    if @person.save
+      unless @person.email == params[:email]
+        @person.create_confirmation_token
+        @person.send_email(:change_email, token: @person.temp_confirmation_token)
+      end
+      
       render "api/v1/people/show"
     else
       render json: { error: "Unable to update account: #{@person.errors.full_messages.join(', ')}" }, status: :unprocessable_entity
@@ -202,7 +203,7 @@ class Api::V1::PeopleController < ApplicationController
     if params[:email].blank?
       render json: { error: 'Must provide account email address or display name' }, status: :bad_request
     elsif (person = Person.find_by_email(params[:email]))
-      if person.reset_password_code == params[:code]
+      if person.reset_authenticated?(params[:code]) && !person.password_reset_expired?
         person.password = params[:new_password]
         person.password_confirmation = person.password
 
@@ -212,7 +213,7 @@ class Api::V1::PeopleController < ApplicationController
           render json: { error: "Unable to reset password: #{person.errors.full_messages.join(', ')}" }, status: :bad_request
         end
       else
-        render json: { error: 'Reset code is not valid' }, status: :bad_request
+        render json: { error: 'Reset code is not valid or has expired' }, status: :bad_request
       end
     else
       render json: { message: 'Account not found' }, status: :not_found
@@ -223,8 +224,13 @@ class Api::V1::PeopleController < ApplicationController
     require_params(:email)
 
     if (person = Person.find_by_email(params[:email]))
-      person.send_email(:reset_password)
-      render json: { message: 'Password reset email sent' }
+      if person.reset_sent_at.nil? || person.reset_sent_at < 5.minutes.ago
+        person.create_reset_digest
+        person.send_email(:reset_password, token: person.reset_token)
+        render json: { message: 'Password reset email sent. Please reset it within 2 hours.' }
+      else
+        render json: { message: 'Please wait for 5 minutes before you request a new password reset email' }
+      end
     else
       render json: { error: 'Account not found' }, status: :not_found
     end
@@ -250,6 +256,15 @@ class Api::V1::PeopleController < ApplicationController
 
   def bounties
     @bounties = @person.bounties.includes(:owner, :issue => [:tracker]).order('created_at desc')
+  end
+
+  def crypto_bounties
+    @crypto_bounties = @person.crypto_bounties.includes(:owner, :issue => [:tracker]).order('created_at desc')
+  end
+
+  def crypto_pay_outs
+    @crypto_pay_outs = @person.crypto_pay_outs.order('created_at desc')
+    render "api/v1/crypto_pay_outs/index"
   end
 
   def bounty_total
@@ -300,6 +315,7 @@ class Api::V1::PeopleController < ApplicationController
 
   def activity
     @bounties = @profile_person.active_bounties.where(anonymous: false).includes(:owner, :issue => [:tracker]).order("created_at desc").limit(50)
+    @crypto_bounties = @profile_person.crypto_bounties.includes(:owner, :issue => [:tracker]).order("created_at desc").limit(50)
     @pledges = @profile_person.pledges.where(anonymous: false).includes(:owner, :fundraiser).order("created_at desc").limit(50)
     @fundraisers = @profile_person.fundraisers.where(published: true).order("created_at desc").limit(50)
     @team_relations = @profile_person.team_member_relations.where(public: true).order("created_at desc").limit(50)
@@ -324,6 +340,16 @@ class Api::V1::PeopleController < ApplicationController
   end
 
 protected
+
+  def person_params
+    params.permit(:email, :display_name, :first_name, :last_name, :password, :password_confirmation, :terms, :company)
+  end
+
+  def person_update_params
+    params.permit(:display_name, :first_name, :last_name, :password, :paypal_email, :image_url, :bio, :location, :public_email, :company, :url).tap do |whitelisted|
+      whitelisted[:unconfirmed_email] = params[:email]
+    end
+  end
 
   def render_login_rabl
     @person.create_access_token(request)

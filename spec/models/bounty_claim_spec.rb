@@ -6,7 +6,7 @@
 #  person_id   :integer          not null
 #  issue_id    :integer          not null
 #  number      :integer
-#  code_url    :string
+#  code_url    :string(255)
 #  description :text
 #  collected   :boolean
 #  disputed    :boolean          default(FALSE), not null
@@ -28,7 +28,7 @@ require 'spec_helper'
 describe BountyClaim do
 
   let(:person) { create(:person) }
-  let(:issue) { create(:closed_issue) }
+  let(:issue) { create(:closed_issue, category: 'fiat') }
   let!(:bounty) { create(:bounty, amount: 150, person: person, issue: issue) }
 
   it "should create bounty claim" do
@@ -451,7 +451,7 @@ describe BountyClaim do
   describe "dispute emails" do
     let!(:backer1) { create(:person) }
     let!(:backer2) { create(:person) }
-    let!(:issue) { create(:issue) }
+    let!(:issue) { create(:issue, category: 'fiat') }
     let!(:developer) { create(:person) }
     let!(:bounty_claim) { create(:bounty_claim, issue: issue, person: developer) }
 
@@ -494,7 +494,7 @@ describe BountyClaim do
   end
 
   describe 'payout' do
-    let(:issue) { create(:issue) }
+    let(:issue) { create(:issue, category: 'fiat') }
     let!(:backer) { create(:person) }
     let!(:bounty) { create_bounty(150, person: backer, issue: issue) }
     let(:developer) { create(:person) }

@@ -54,9 +54,8 @@ Api::Application.routes.draw do
 
     # All things money related
     scope path: 'payments', controller: 'payments' do
-      post :paypal_ipn, :paypal_return
-      get :paypal_return, :paypal_cancel
-
+      post :paypal_ipn
+      get :paypal_return
       # Generate JWT for Google Wallet item
       scope path: 'google', controller: :google_wallet do
         get :item_jwt, :success
@@ -121,6 +120,7 @@ Api::Application.routes.draw do
           end
 
           resources :accounts do
+            resources :set_override_fees, only: :create, module: :accounts
             collection do
               get :overview
             end
@@ -165,6 +165,8 @@ Api::Application.routes.draw do
 
           resources :pledges
 
+          resources :info_spaces
+
           resources :transactions do
             resources :splits
 
@@ -196,6 +198,13 @@ Api::Application.routes.draw do
           resources :tracker_plugins, only: [:show, :index, :create, :update, :delete]
 
           resources :cash_outs, only: [:index, :show, :update]
+
+          resources :issue_addresses, only: [:index, :show]
+          resources :ethereum_transaction_refunds, on: :create
+
+          resources :crypto_pay_outs, only: [:index] do
+            resource :send, only: :create, module: :crypto_pay_outs
+          end
 
           resources :delayed_jobs, only: [:index, :show] do
             collection do
@@ -289,8 +298,10 @@ Api::Application.routes.draw do
         match 'doge_issues', controller: :issues, action: :doge_issues, via: :get
 
         resources :issues, only: [:show, :index] do
+          resources :issue_addresses, only: [:create]
+          resources :crypto_bounties, only: :index, module: 'issues'
+          resource :reindex, only: :show, module: 'issues'
           member do
-            get :bounties
             get :activity
 
             resources :developer_goals, controller: :developer_goals, only: [:index, :create]
@@ -316,8 +327,11 @@ Api::Application.routes.draw do
           post  :login, :logout, :change_password, :reset_password, :request_password_reset, :link_paypal
           get   :recent, :contributions, :interesting
 
+          resource :email_verification, only: [:create, :update]
+          resource :email_change_verification, only: [:update]
+
           # not legacy
-          get :pledges, :bounties
+          get :pledges, :bounties, :crypto_bounties, :crypto_pay_outs
 
           resource :address, controller: 'addresses'
 
@@ -432,7 +446,9 @@ Api::Application.routes.draw do
           match '/:id/poll', action: :poll, via: :get
         end
 
+
         resources :transactions, only: [:index, :show]
+        resources :info_spaces, only: :index
 
         resources :bounties, only: [] do
           collection do
@@ -449,13 +465,6 @@ Api::Application.routes.draw do
           resources :issues, only: [:index, :show, :create] do
             collection do
               get :query_v3, to: 'issues#query_v3'
-            end
-
-            resource :request_for_proposals, only: [:show, :create, :update, :destroy]
-            resources :proposals, only: [:create, :index, :destroy, :show] do
-              member do
-                post :accept, :reject
-              end
             end
           end
           resources :trackers, only: [:index, :show]
@@ -475,7 +484,10 @@ Api::Application.routes.draw do
             end
           end
           resources :backers, only: [:index]
-          resources :teams, only: [:index, :show, :update], :id => /([^\/])+?/, :format => /json/
+          resources :teams, only: [:index, :show, :update], :id => /([^\/])+?/, :format => /json/ do
+            resources :support_offering_rewards, only: [:create]
+          end
+          resources :support_offering_rewards, only: [:update, :destroy]
           resources :plugins, only: [:index, :show]
           resources :addresses, only: [:index, :show, :create, :update, :destroy]
           resources :cash_outs, only: [:index, :show, :create, :update, :destroy]
@@ -501,13 +513,7 @@ Api::Application.routes.draw do
           post 'thumbs/feedback', to: 'thumbs#feedback'
 
           resource :account, only: [:show], controller: :account
-
-          resource :cart, only: [:show, :create, :destroy], controller: :cart do
-            collection do
-              get :checkout
-            end
-          end
-          resources :cart_items, only: [:create, :update, :destroy]
+          resource :cart ,only: [:create], controller: :cart
 
           resources :people, only: [:index, :update] do
             collection do
@@ -519,6 +525,12 @@ Api::Application.routes.draw do
             collection do
               resources :trackers, controller: :people_trackers, only: [:index]
             end
+          end
+
+          post '/wallets/metamask', to: 'wallets#metamask' 
+
+          resources :wallets, only: [:index, :create, :update, :destroy] do
+            resource :set_as_primary, only: :create, module: :wallets
           end
         end
       end

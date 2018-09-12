@@ -3,20 +3,24 @@
   <li class="active"><a>Press</a></li>
 </ul>
 
-<h1>News Coverage and Press</h1>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h1>News Coverage and Press</h1>
 
-<table class="table table-centered">
-  <tbody>
-    <tr ng-repeat="article in articles">
-      <td class="p-5 text-muted" ng-class="{'bt-0': $index == 0}">{{article.date}}</td>
-      <td ng-class="{'bt-0': $index == 0}">
-        <a class="black-link" href="{{article.href}}" target="_blank">{{article.title}}</a>
-        <p>
-          on <em>{{article.source}}</em>
-          <span ng-show="article.author">by {{article.author}}</span>
-        </p>
-        
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <table class="table table-centered">
+      <tbody>
+        <tr ng-repeat="article in articles">
+          <td class="p-5 text-muted" ng-class="{'bt-0': $index == 0}">{{article.date}}</td>
+          <td ng-class="{'bt-0': $index == 0}">
+            <a class="black-link" href="{{article.href}}" target="_blank">{{article.title}}</a>
+            <p>
+              on <em>{{article.source}}</em>
+              <span ng-show="article.author">by {{article.author}}</span>
+            </p>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

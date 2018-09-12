@@ -1,9 +1,9 @@
 angular.module('app').config(function ($routeProvider, defaultRouteOptions, personResolver) {
   $routeProvider.when('/', angular.extend({
-    templateUrl: 'app/home/timeline.html',
-    controller: 'HomeTimelineCtrl',
+    templateUrl: 'app/home/landing_page.html',
+    controller: 'LandingPageController',
     container: false,
-    trackEvent: 'View Homepage Timeline',
+    trackEvent: 'View Homepage',
     resolve: {
       count: function($rootScope, $api) {
         $api.people_count().then(function(count) {
@@ -55,22 +55,11 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     trackEvent: false
   }, defaultRouteOptions));
 
-  $routeProvider.when('/bounties/search', angular.extend({
-    templateUrl: 'app/bounties/search.html',
-    controller: 'BountiesSearchController',
-    trackEvent: 'View Bounties Search'
-  }, defaultRouteOptions));
-
-  $routeProvider.when('/cart', angular.extend({
-    templateUrl: 'app/cart/cart.html',
-    controller: 'ShoppingCartController',
-    trackEvent: 'View Cart'
-  }, defaultRouteOptions));
-
   $routeProvider.when('/issues', angular.extend({
     templateUrl: 'app/issues/index.html',
     controller: 'IssueIndexController',
     trackEvent: 'View Issues'
+    
   }, defaultRouteOptions));
 
   $routeProvider.when('/issues/thumbs', angular.extend({
@@ -166,6 +155,20 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     controller: 'SigninController',
     title: 'Sign in',
     trackEvent: 'View Signin'
+  }, defaultRouteOptions));
+
+  $routeProvider.when('/verify', angular.extend({
+    templateUrl: 'app/signin/verify.html',
+    controller: 'VerifyController',
+    title: 'Email Verification',
+    trackEvent: "Email Verify"
+  }, defaultRouteOptions));
+
+  $routeProvider.when('/verify-email', angular.extend({
+    templateUrl: 'app/signin/verify_email.html',
+    controller: 'VerifyEmailController',
+    title: 'Email Change Verification',
+    trackEvent: "Email Change Verify"
   }, defaultRouteOptions));
 
   $routeProvider.when('/tools', angular.extend({

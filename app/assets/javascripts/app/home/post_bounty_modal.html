@@ -1,0 +1,16 @@
+<div id='post-bounty-modal' class="modal-body">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <h4 class='title modal-row'>Post An Issue</h4>
+
+  <form ng-submit="submit_search()">
+    <div class='modal-row'>
+      <input type="text" placeholder="Enter a issue URL (for example: https://github.com/.../issues)" class="form-control" ng-model="form_data.url" required>
+    </div>
+    <div class='modal-row'>
+      <button class="btn btn-light-blue" type="submit">CONFIRM</button>
+    </div>
+  </form>
+</div>

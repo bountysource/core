@@ -22,7 +22,7 @@ describe PaymentsController do
   let(:mc_gross) { pledge.amount }
 
   let(:post_data) do
-    {"business"=>Api::Application.config.paypal[:email],
+    { "business"=>Api::Application.config.paypal[:email],
       "charset"=>"windows-1252",
       "first_name"=>person.first_name,
       "handling_amount"=>handling_amount,

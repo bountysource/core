@@ -22,7 +22,7 @@ class Api::V2::CashOutsController < Api::BaseController
   def create
     raise "Coinbase is disabled" if params[:bitcoin_address] && ENV['COINBASE_DISABLED']
     raise "Checks are disabled" if params[:mailing_address_id]
-
+    
     if team_id = params[:source].try(:match, /\Ateam(\d+)\Z/).try(:[], 1)
       account = current_user.team_member_relations.where(admin: true, team_id: team_id).first.try(:team).try(:account)
     else
@@ -63,7 +63,7 @@ class Api::V2::CashOutsController < Api::BaseController
     end
 
     # Record fee for cash out on model
-    @item.fee = current_user.account.calculate_cash_out_fee(@item.amount)
+    @item.fee = account.calculate_cash_out_fee(@item.amount)
 
     @item.save!
 

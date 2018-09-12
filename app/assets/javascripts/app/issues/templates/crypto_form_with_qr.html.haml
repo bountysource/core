@@ -1,0 +1,43 @@
+%div
+  %h4.fw-sb
+    Contribute to this bounty
+  %qrcode{ "data" => "{{issue.issue_address.public_address}}", "size" => "180" }
+
+  %p.mt-5
+    This address only accepts ETH or ERC20 tokens
+
+
+  %div.mt-5
+    .input-group
+      %input.form-control.text-center.bg-white{"value" => "{{ issue.issue_address.public_address }}", "readonly" => "true"}
+      %span.input-group-btn.pl-3
+        %button.btn.btn-default{"ng-click-copy" => "{{ issue.issue_address.public_address }}"}
+          = image_tag 'icons/icon_copy.svg', style: "width: 18px"
+
+%div.mt-5
+  %div{"ng-if" => "!isSelectedCrypto('BTC')" }
+    .crypto-token-options
+      %input.form.form-control.input-borderless{"placeholder" => "enter amount", "ng-model" => "bounty.amount"}
+      %div
+        %button#cryptoSelect.btn.btn-borderless.btn-default.font-weight-semibold.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button", "style" => "height: 100%"}
+          %span.font-8{"ng-if" => "isSelectedCrypto(null)"} SELECT ERC20 TOKEN
+          %span{"ng-if" => "!isSelectedCrypto(null)"} {{ bounty.token }}
+          %span.caret
+        %ul.dropdown-menu{"aria-labelledby" => "cryptoSelect", "style" => "min-width: 0;"}
+          %li{"ng-repeat" => "currency in currencies"}
+            %a{"ng-click" => "setCrypto(currency.symbol)"}
+              %span{"ng-if" => "currency.symbol === 'ETH'"}
+                = image_tag 'icons/icon_ethereum.svg', style: 'width: 18px;'
+              %span{"ng-if" => "currency.symbol === 'CAN'"}
+                = image_tag 'icons/icon_canya.svg', style: 'width: 18px;'
+              %span
+                {{ currency.symbol }}
+    %hr.my-0{"style" => "height: 2px;"}
+    %small.pull-right{"ng-class" => "{'text-danger': !canPostBounty()}"} ~ {{ cryptoBountyTotal() | number: 0 }} USD
+  %div{"ng-if" => "isSelectedCrypto('BTC')" }
+    .text-muted BTC contributions unavailable
+
+%div.mt-5
+  %button.btn.btn-light-blue.btn-responsive.py-3{"ng-disabled" => "!canPostBounty()", "ng-click" => "generate_address(issue.id)" } POST THIS BOUNTY
+  %small.text-muted
+    Minimum ≈ $5

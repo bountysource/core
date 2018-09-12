@@ -61,11 +61,7 @@ angular.module('app').config(function($stateProvider) {
 
         // yay, no errors!
         if (!$scope.error) {
-          if ($scope.form_data.frequency === 'monthly') {
-            $state.transitionTo('root.checkout.display', angular.extend({}, $stateParams, $scope.form_data));
-          } else {
-            $window.location.href = $env.www_host + 'cart?team_id='+$stateParams.team+'&amount=' + parsed_amount;
-          }
+          $state.transitionTo('root.checkout.display', angular.extend({}, $stateParams, $scope.form_data));
         }
       };
     }

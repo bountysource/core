@@ -3,7 +3,16 @@
 .font-weight-semibold{ font-weight: 600; }
 .font-weight-bold    { font-weight: bold; }
 
+.fw-b    { font-weight: bold; }
+.fw-sb    { font-weight: 600; }
+
 .font-size-default { font-size: 14px !important; }
+.font-8 { font-size: 8px !important; }
+.font-10 { font-size: 10px !important; }
+.font-12 { font-size: 12px !important; }
+.font-14 { font-size: 14px !important; }
+.font-16 { font-size: 16px !important; }
+.font-22 { font-size: 22px !important; }
 
 .p-0 { padding: 0 !important; }
 .p-1 { padding: .25rem !important; }
@@ -39,6 +48,18 @@
 .pl-3 { padding-left: 1rem !important; }
 .pl-4 { padding-left: 1.5rem !important; }
 .pl-5 { padding-left: 3rem !important; }
+
+.py-0 { padding-top: 0rem !important; padding-bottom: 0rem !important; }
+.py-1 { padding-top: .25rem !important; padding-bottom: .25rem !important; }
+.py-2 { padding-top: .5rem !important; padding-bottom: .5rem !important; }
+.py-3 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+.py-4 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+
+.px-3 { padding-left: 1rem !important; padding-right: 1rem !important; }
+.px-4 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+.px-5 { padding-left: 3rem !important; padding-right: 3rem !important; }
+
+.my-0 { margin-top: 0 !important; margin-bottom: 0 !important;}
 
 .m-0 { margin: 0 !important; }
 .m-1 { margin: .25rem !important; }
@@ -87,11 +108,15 @@
 
 .bt-0 { border-top: 0 !important; }
 .br-0 { border-right: 0 !important; }
+.br-1 { border-right: 1 !important; }
 .bl-0 { border-left: 0 !important; }
 
 .border-cool-grey { border-color: #919d9d7f !important; }
 .border-bright-light-blue { border-color: #33ccff7f !important; }
 .border-gunmetal { border-color: #485f64 !important; }
+
+.b-rad-0 { border-radius: 0 !important; }
+.b-rad-5 { border-radius: 5px !important; }
 
 /* Images */
 .img-circle { border-radius: 50% }
@@ -117,12 +142,14 @@
 @media (min-width: 768px) {
   .text-sm-left { text-align: left; }
   .text-sm-center { text-align: center; }
+  .text-sm-right { text-align: right; }
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .text-md-left { text-align: left; }
   .text-md-center { text-align: center; }
+  .text-md-right { text-align: right; }
 }
 
 /* Large devices (large desktops, 1200px and up) */
@@ -132,3 +159,17 @@
 
 /*Backgrounds*/
 .background-white { background-color: white; }
+.bg-white { background-color: white !important; }
+.bg-gunmetal { background-color: #485f64; }
+
+a.nostyle {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}

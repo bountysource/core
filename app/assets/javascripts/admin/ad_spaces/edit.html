@@ -1,0 +1,63 @@
+<div class="row-fluid">
+  <div class="span12">
+    <div>
+      <h3 style="margin-top:0px;">New AdSpace</h3>
+      <div class="span12" style="border: 1px solid #ddd; border-radius: 10px; padding:15px; margin-top: 15px;">
+        <form name="form" class="form-horizontal">
+          <div ng-show="error" class="alert alert-error">{{ error }}</div>
+
+          <div class="control-group">
+            <label class="control-label" for="inputTitle">Title</label>
+            <div class="controls">
+              <input type="text" placeholder="Title" id="inputTitle" class="span11" ng-model="form_data.title"></input>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="inputText">Text</label>
+            <div class="controls">
+              <textarea type="text" placeholder="Text" id="inputText" class="span11" ng-model="form_data.text"></textarea>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="inputButtonText">Button Text</label>
+            <div class="controls">
+              <input type="text" placeholder="Button Text" id="inputButtonText" class="span11" ng-model="form_data.button_text"></input>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="inputUrl">Button Url</label>
+            <div class="controls">
+              <input type="text" placeholder="Button Url" id="inputUrl" class="span11" ng-model="form_data.button_url"></input>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="inputImageUrl">Image Url</label>
+            <div class="controls">
+              <input type="text" placeholder="Image Url" id="inputIamgeUrl" class="span11" ng-model="form_data.image_url"></input>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="inputImageUrl">Position</label>
+            <div class="controls">
+              <select ng-model="form_data.position">
+                <option ng-selected="form_data.position == null"value="">None</option>
+                <option ng-selected="form_data.position == 'header'" value="header">Header</option>
+                <option ng-selected="form_data.position == 'issue'" value="issue">Issue</option>
+                <option ng-selected="form_data.position == 'interstitial'" value="interstitial">Interstitial</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-primary" ng-click="updateAdSpace(form_data)">Update Ad Space</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

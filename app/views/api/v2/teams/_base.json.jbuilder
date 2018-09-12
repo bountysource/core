@@ -28,6 +28,7 @@ if @include_team_extended
     open_bounties_amount
     open_issues_count
     closed_bounties_amount
+    owned_issues_active_bounties_amount
     accepts_public_payins
     accepts_issue_suggestions
     can_email_stargazers
@@ -73,4 +74,9 @@ if @team_tagged_ids || @team_backer_ids || @team_tagged_ids
   json.team_included @team_included_ids.include?(item.id)
   json.team_backed @team_backer_ids.include?(item.id)
   json.team_tagged @team_tagged_ids.include?(item.id)
+end
+
+if @include_team_top_reward
+  json.hunter_awarded item.bounties.paid.count
+  json.total_rewards item.bounties.sum(:amount)
 end

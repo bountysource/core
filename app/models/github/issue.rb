@@ -7,11 +7,11 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  number                   :integer
-#  url                      :string           not null
+#  url                      :string(255)      not null
 #  title                    :text
-#  labels                   :string
+#  labels                   :string(255)
 #  code                     :boolean          default(FALSE)
-#  state                    :string
+#  state                    :string(255)
 #  body                     :text
 #  remote_updated_at        :datetime
 #  remote_id                :integer
@@ -23,25 +23,26 @@
 #  comment_count            :integer          default(0)
 #  sync_in_progress         :boolean          default(FALSE), not null
 #  bounty_total             :decimal(10, 2)   default(0.0), not null
-#  type                     :string           default("Issue"), not null
-#  remote_type              :string
-#  priority                 :string
-#  milestone                :string
+#  type                     :string(255)      default("Issue"), not null
+#  remote_type              :string(255)
+#  priority                 :string(255)
+#  milestone                :string(255)
 #  can_add_bounty           :boolean          default(FALSE), not null
 #  accepted_bounty_claim_id :integer
-#  author_name              :string
-#  owner                    :string
+#  author_name              :string(255)
+#  owner                    :string(255)
 #  paid_out                 :boolean          default(FALSE), not null
 #  participants_count       :integer
 #  thumbs_up_count          :integer
 #  votes_count              :integer
 #  watchers_count           :integer
-#  severity                 :string
+#  severity                 :string(255)
 #  delta                    :boolean          default(TRUE), not null
 #  author_linked_account_id :integer
 #  solution_started         :boolean          default(FALSE), not null
 #  body_markdown            :text
 #  deleted_at               :datetime
+#  category                 :integer
 #
 # Indexes
 #
@@ -55,9 +56,9 @@
 #  index_issues_on_url                            (url) UNIQUE
 #  index_issues_on_votes_count                    (votes_count)
 #  index_issues_on_watchers_count                 (watchers_count)
-#  index_issues_partial_author_linked_account_id  (author_linked_account_id)
-#  index_issues_partial_bounty_total              (bounty_total)
-#  index_issues_partial_thumbs_up_count           (thumbs_up_count)
+#  index_issues_partial_author_linked_account_id  (author_linked_account_id) WHERE (author_linked_account_id IS NOT NULL)
+#  index_issues_partial_bounty_total              (bounty_total) WHERE (bounty_total > (0)::numeric)
+#  index_issues_partial_thumbs_up_count           (thumbs_up_count) WHERE (COALESCE(thumbs_up_count, 0) > 0)
 #
 
 class Github::Issue < ::Issue
@@ -95,9 +96,8 @@ class Github::Issue < ::Issue
     self
   rescue Github::API::NotFound
     unless deleted_at
-	    deleted_at = Time.now
-	    update_attributes(deleted_at: deleted_at, url: url + "?deleted_at=#{deleted_at.to_i}")
-  	end
+      update_attributes(deleted_at: Time.now)
+    end
   end
 
   # INSTANCE METHODS
@@ -198,7 +198,7 @@ class Github::Issue < ::Issue
     )
 
     # trigger an update on the underlying object
-    self.class.update_attributes_from_github_data(api_response.data, obj: self) if api_response.modified?
+    self.class.update_attributes_from_github_data(api_response.data, obj: self) 
   end
 
   # Sync comments with GitHub. Deletes comments that no longer exist.
@@ -271,7 +271,11 @@ class Github::Issue < ::Issue
 
   def self.update_attributes_from_github_array(github_data, options={})
     # bulk load all issues
-    issue_hash = where("remote_id in (?)", github_data.map { |r| r['id'] }).inject({}) { |hash,obj| hash[obj.remote_id.to_i] = obj; hash }
+    issue_hash = where("remote_id in (?)", github_data.map { |r| r['id'] })
+      .inject({}) do |hash,obj| 
+        hash[obj.remote_id.to_i] = obj
+        hash 
+      end
 
 
     # bulk update
@@ -303,7 +307,7 @@ class Github::Issue < ::Issue
 
     # Ensure that we have a URL and remote_id before doing anything else
     unless url && remote_id
-      raise Error, "Required: 'remote_id' and 'url': #{github_data.inspect}"
+      raise Error, "Issue id: #{options[:obj]&.id}. Required: 'remote_id' and 'url': #{github_data.inspect}"
     end
 
     # passed in, find by remote_id, or new

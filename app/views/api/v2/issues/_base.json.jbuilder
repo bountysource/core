@@ -17,9 +17,12 @@ json.(item,
   :severity,
   :remote_created_at,
   :remote_updated_at,
+  :state,
+  :category,
   :url)
 
 json.bounty_total item.bounty_total.to_f
+json.crypto_bounty_total item.crypto_bounty_total.to_f
 json.title item.sanitized_title
 json.state item.state if item.respond_to?(:state)
 
@@ -84,4 +87,8 @@ end
 if @include_workflow_state
   tmp_workflow_state = item.workflow_state
   json.workflow_state (tmp_has_thumbed_up && tmp_workflow_state == :issue_open_new) ? :issue_open_thumbed : tmp_workflow_state
+end
+
+json.issue_address do
+  json.partial! 'api/v2/issue_addresses/base', item: item.issue_address if item.issue_address
 end

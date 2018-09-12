@@ -63,76 +63,85 @@
   </div>
 </div>
 <div class="row mt-6">
+
   <!-- Project Search Results -->
   <div class="col-sm-6 col-xs-12">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th colspan="2" style="border-bottom: 3px solid #ddd;">Projects 
-            <span class="pull-right">{{results.trackers_total | number}} projects</span>
-          </th>
-        </tr>
-      </thead>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th colspan="2" style="border-bottom: 3px solid #ddd;">Projects 
+                <span class="pull-right">{{results.trackers_total | number}} projects</span>
+              </th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <tr ng-show="results.trackers.length == 0" class="text-info">
-          <td>No projects found</td>
-        </tr>
-        <tr ng-repeat="tracker in results.trackers | filter:filter_search_results ">
-          <td>
-            <img ng-src="{{tracker.image_url}}" class="issue-table-tracker-img img-circle"></img>
-          </td>
-          <td>
-            <div class="flex-row spaced-between-flex">
-              <div class="column-center">
-                <a ng-href="/trackers/{{tracker.slug}}"> 
-                  {{tracker.name}}
-                </a>
-                <div class="text-muted small">{{ tracker.url }}</div>
-              </div>
-              <div ng-show="tracker.bounty_total > 0" class="column-center">
-                <span ng-href="/trackers/{{tracker.slug}}" class="label label-aquamarine label-small-radius">{{tracker.bounty_total | dollars}}</span>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <tbody>
+            <tr ng-show="results.trackers.length == 0" class="text-info">
+              <td>No projects found</td>
+            </tr>
+            <tr ng-repeat="tracker in results.trackers | filter:filter_search_results ">
+              <td>
+                <img ng-src="{{tracker.image_url}}" class="issue-table-tracker-img img-circle"></img>
+              </td>
+              <td>
+                <div class="flex-row spaced-between-flex">
+                  <div class="column-center">
+                    <a ng-href="/trackers/{{tracker.slug}}"> 
+                      {{tracker.name}}
+                    </a>
+                    <div class="text-muted small">{{ tracker.url }}</div>
+                  </div>
+                  <div ng-show="tracker.bounty_total > 0" class="column-center">
+                    <span ng-href="/trackers/{{tracker.slug}}" class="label label-aquamarine label-small-radius">{{tracker.bounty_total | dollars}}</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <!-- Issue Search Results -->
   <div class="col-sm-6 col-xs-12">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th colspan="2" style="border-bottom: 3px solid #ddd;">Issues 
-            <span class="pull-right">{{results.issues_total | number}} issues</span>
-          </th>
-        </tr>
-      </thead>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th colspan="2" style="border-bottom: 3px solid #ddd;">Issues 
+                <span class="pull-right">{{results.issues_total | number}} issues</span>
+              </th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <tr ng-show="results.issues.length == 0" class="text-info">
-          <td>No issues found</td>
-        </tr>
-        <tr ng-repeat="issue in results.issues | filter:filter_search_results ">
-          <td>
-            <img ng-src="{{issue.tracker.image_url}}" class="issue-table-tracker-img img-circle" tooltip="{{issue.tracker.name}}"></img>  
-          </td>
-          <td>
-            <div class="flex-row spaced-between-flex">
-              <div class="column-center">
-                <a ng-href="/issues/{{issue.slug}}">
-                  {{issue.title}}
-                </a>
-              </div>
-              <div ng-show="issue.bounty_total > 0" class="column-center">
-                <span ng-href="/issues/{{issue.slug}}" class="label label-aquamarine label-small-radius">{{issue.bounty_total | dollars}}</span>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <tbody>
+            <tr ng-show="results.issues.length == 0" class="text-info">
+              <td>No issues found</td>
+            </tr>
+            <tr ng-repeat="issue in results.issues | filter:filter_search_results ">
+              <td>
+                <img ng-src="{{issue.tracker.image_url}}" class="issue-table-tracker-img img-circle" tooltip="{{issue.tracker.name}}"></img>  
+              </td>
+              <td>
+                <div class="flex-row spaced-between-flex">
+                  <div class="column-center">
+                    <a ng-href="/issues/{{issue.slug}}">
+                      {{issue.title}}
+                    </a>
+                  </div>
+                  <div ng-show="issue.bounty_total > 0" class="column-center">
+                    <span ng-href="/issues/{{issue.slug}}" class="label label-aquamarine label-small-radius">{{issue.bounty_total | dollars}}</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

@@ -11,7 +11,7 @@
 #  updated_at      :datetime         not null
 #  anonymous       :boolean          default(FALSE), not null
 #  owner_id        :integer
-#  owner_type      :string
+#  owner_type      :string(255)
 #
 # Indexes
 #

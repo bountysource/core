@@ -86,4 +86,23 @@
       </div>
     </div>
   </div>
+
+
+  <section id="support-level-payments" class="mt-5">
+    <h4>Previous Payments</h4>
+    <table class="table table-centered">
+      <thead>
+        <th>Id</th>
+        <th>Amount</th>
+        <th>Created</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="support_level_payments in support_level.support_level_payments">
+          <td>{{ support_level_payments.id }}</td>
+          <td>{{ support_level_payments.amount }}</td>
+          <td>{{ support_level_payments.created_at | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </div>

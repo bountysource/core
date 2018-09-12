@@ -1,9 +1,11 @@
 <div class="row-fluid">
 
   <div class="span12">
-    <loading-bar ng-hide="bounty_claims.length >= 0">Such loading wow...</loading-bar>
     <div ng-include="'admin/bounty_claims/partials/nav_tabs.html'"></div>
     <h3 style="margin-top:0px;">Priority Claims</h3>
+
+	<pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+    <loading-bar ng-hide="bounty_claims.length >= 0">Such loading wow...</loading-bar>
     <div ng-include="'admin/bounty_claims/partials/claims_table.html'"></div>
   </div>
 </div>

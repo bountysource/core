@@ -40,20 +40,12 @@
                   %span{"ng-hide" => "saving_form"} Update
                 %a.btn.btn-default{"ng-click"=>"form_data.cancel_editing()", "ng-hide"=>"saving_form"} Cancel
 
-        -# %h3{ "ng-show"=>"included_teams.length>0"} Related Teams
-        -# %thumbnail-links{ "array"=>"included_teams", "per-row"=>"6", "initial-rows"=>"2", "object-type"=>"'team'" }
-
-        -# %h3{ "ng-show"=>"backed_teams.length>0"} Backed Teams
-        -# %thumbnail-links{ "array"=>"backed_teams", "per-row"=>"6", "initial-rows"=>"1", "object-type"=>"'team'" }
-
-        -# %h3{ "ng-show"=>"tagged_teams.length>0"} Teams Tagged with "{{team.name}}"
-        -# %thumbnail-links{ "array"=>"tagged_teams", "per-row"=>"6", "initial-rows"=>"1", "object-type"=>"'team'" }
-
         %h3{"ng-show" => "events.length > 0"} Recent Activity
         %timeline{:events => "events"}
 
       -# only show bounty sidebar if the team has created bounties
       .col-md-3{ "ng-show"=>"show_right_column" }
+        %h3.mt-0.fw-b We Backed
         .text-center{ "style"=>"padding:5px" }
           %div{ "style"=>"float: left; padding-top:5px; padding-bottom:5px; width:50%", "ng-if"=>"team.open_bounties_amount>0"}
             %div{ "style"=>"font-size:22px; font-weight: bold" }
@@ -73,6 +65,9 @@
             .text-muted
             .text-muted{ "ng-show"=>"team.bounty_hunter_count==1" } bounty hunter
             .text-muted{ "ng-hide"=>"team.bounty_hunter_count==1" } bounty hunters
+          %div{ "style"=>"padding-top:5px; padding-bottom:5px", "ng-if"=>"team.owned_issues_active_bounties_amount>0 "}
+            %div{ "style"=>"font-size:22px; font-weight: bold" } {{team.owned_issues_active_bounties_amount | dollars}}
+            .text-muted total bounties on our issues
           %div{ "style"=>"clear: left" }
 
         %div{ "ng-show"=>"bounty_hunters_for_team.length>0" }
@@ -94,13 +89,9 @@
             %img.img-responsive.img-circle{ "ng-src"=>"{{summary.team.image_url_small || summary.tracker.image_url_small}}", "style"=>"width:40px; height:40px; float: left"}
             %div{ "style"=>"margin-left:50px"}
               %div{ "style"=>"margin:0; font-size: 16px; font-weight: bold" }
-                %a.text-gunmetal.font-weight-semibold{ "owner-href"=>"summary.team||summary.tracker"} {{summary.team.name || summary.tracker.display_name}}
+                %a.text-gunmetal.font-weight-semibold{ "owner-href"=>"summary.team||summary.tracker", "style" => "word-wrap: break-word"} {{summary.team.name || summary.tracker.display_name}}
               %div{ "ng-show"=>"summary.active>0"} {{summary.active | dollars}} active
               %div{ "ng-show"=>"summary.paid>0"} {{summary.paid | dollars}} paid
               %div{ "style"=>"clear:left"}
           %a{ "ng-click"=>"show_all_bounty_summary = true", "ng-hide"=>"bounty_summary.length <= 5 || show_all_bounty_summary" }
             See {{bounty_summary.length - 5}} More
-
-        //%div{ "ng-if"=>"team.top_developers>0" }
-        -# %div
-        -#   %h3 Bounty Hunters

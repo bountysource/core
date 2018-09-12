@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328112330) do
+ActiveRecord::Schema.define(version: 20180827073853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "access_tokens", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
-    t.string "token", null: false
-    t.string "remote_ip"
-    t.string "user_agent"
+    t.string "token", limit: 255, null: false
+    t.string "remote_ip", limit: 255
+    t.string "user_agent", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_access_tokens_on_person_id"
@@ -27,14 +27,15 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "accounts", id: :serial, force: :cascade do |t|
-    t.string "type", default: "Account", null: false
-    t.string "description", default: "", null: false
-    t.string "currency", default: "USD", null: false
+    t.string "type", limit: 255, default: "Account", null: false
+    t.string "description", limit: 255, default: "", null: false
+    t.string "currency", limit: 255, default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "owner_id"
-    t.string "owner_type"
+    t.string "owner_type", limit: 255
     t.boolean "standalone", default: false
+    t.integer "override_fee_percentage"
     t.index ["owner_id"], name: "index_accounts_on_item_id"
     t.index ["owner_type"], name: "index_accounts_on_item_type"
     t.index ["type"], name: "index_accounts_on_type"
@@ -44,22 +45,33 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.integer "person_id"
     t.integer "issue_id"
     t.integer "tracker_id", null: false
-    t.string "name", null: false
+    t.string "name", limit: 255, null: false
     t.datetime "created_at", null: false
     t.integer "lurker_id"
     t.index ["created_at"], name: "index_activity_logs_on_created_at"
   end
 
+  create_table "ad_spaces", force: :cascade do |t|
+    t.string "cloudinary_id"
+    t.string "title"
+    t.text "text"
+    t.string "button_text"
+    t.string "button_url"
+    t.string "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "addresses", id: :serial, force: :cascade do |t|
     t.integer "person_id"
-    t.string "name"
-    t.string "address1"
-    t.string "address2"
-    t.string "address3"
-    t.string "city"
-    t.string "state"
-    t.string "postal_code"
-    t.string "country"
+    t.string "name", limit: 255
+    t.string "address1", limit: 255
+    t.string "address2", limit: 255
+    t.string "address3", limit: 255
+    t.string "city", limit: 255
+    t.string "state", limit: 255
+    t.string "postal_code", limit: 255
+    t.string "country", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["person_id"], name: "index_addresses_on_person_id"
@@ -72,7 +84,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "badge_caches", id: :serial, force: :cascade do |t|
-    t.string "url", null: false
+    t.string "url", limit: 255, null: false
     t.text "raw_xml", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -89,11 +101,11 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "updated_at", null: false
     t.datetime "paid_at"
     t.boolean "anonymous", default: false, null: false
-    t.string "owner_type"
+    t.string "owner_type", limit: 255
     t.integer "owner_id"
-    t.string "bounty_expiration"
-    t.string "upon_expiration"
-    t.string "promotion"
+    t.string "bounty_expiration", limit: 255
+    t.string "upon_expiration", limit: 255
+    t.string "promotion", limit: 255
     t.datetime "acknowledged_at"
     t.boolean "tweet", default: false, null: false
     t.boolean "featured", default: false, null: false
@@ -106,7 +118,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "bounty_claim_events", id: :serial, force: :cascade do |t|
-    t.string "type", null: false
+    t.string "type", limit: 255, null: false
     t.integer "bounty_claim_id", null: false
     t.integer "person_id"
     t.text "description"
@@ -125,7 +137,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "updated_at", null: false
     t.boolean "anonymous", default: false, null: false
     t.integer "owner_id"
-    t.string "owner_type"
+    t.string "owner_type", limit: 255
     t.index ["bounty_claim_id"], name: "index_bounty_claim_responses_on_bounty_claim_id"
     t.index ["person_id", "bounty_claim_id"], name: "index_bounty_claim_responses_on_person_id_and_bounty_claim_id", unique: true
   end
@@ -134,7 +146,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.integer "person_id", null: false
     t.integer "issue_id", null: false
     t.integer "number"
-    t.string "code_url"
+    t.string "code_url", limit: 255
     t.text "description"
     t.boolean "collected"
     t.boolean "disputed", default: false, null: false
@@ -149,14 +161,14 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "cash_outs", id: :serial, force: :cascade do |t|
-    t.string "type", null: false
+    t.string "type", limit: 255, null: false
     t.integer "person_id", null: false
     t.integer "address_id", null: false
     t.integer "mailing_address_id"
-    t.string "bitcoin_address"
-    t.string "paypal_address"
-    t.string "remote_ip"
-    t.string "user_agent"
+    t.string "bitcoin_address", limit: 255
+    t.string "paypal_address", limit: 255
+    t.string "remote_ip", limit: 255
+    t.string "user_agent", limit: 255
     t.decimal "amount"
     t.datetime "sent_at"
     t.boolean "us_citizen"
@@ -166,8 +178,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.text "serialized_mailing_address"
     t.decimal "fee"
     t.decimal "fee_adjustment"
-    t.string "ripple_address"
-    t.string "mastercoin_address"
+    t.string "ripple_address", limit: 255
+    t.string "mastercoin_address", limit: 255
     t.boolean "is_refund", default: false, null: false
     t.integer "account_id", null: false
     t.integer "quickbooks_transaction_id"
@@ -192,17 +204,101 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.boolean "sync_in_progress", default: false, null: false
     t.text "body_html"
     t.integer "author_linked_account_id"
-    t.string "author_name"
+    t.string "author_name", limit: 255
     t.text "body_markdown"
     t.index ["author_linked_account_id"], name: "index_comments_on_author_linked_account_id"
     t.index ["issue_id"], name: "index_comments_on_issue_id"
   end
 
-  create_table "currencies", id: :serial, force: :cascade do |t|
+  create_table "crypto_admin_addresses", force: :cascade do |t|
+    t.string "public_address", null: false
     t.string "type", null: false
-    t.decimal "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["public_address"], name: "index_crypto_admin_addresses_on_public_address", unique: true
+  end
+
+  create_table "crypto_bounties", force: :cascade do |t|
+    t.jsonb "amount", null: false
+    t.bigint "issue_id"
+    t.string "status", limit: 12, default: "active", null: false
+    t.boolean "anonymous", default: false, null: false
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.boolean "featured", default: false, null: false
+    t.string "transaction_hash", null: false
+    t.string "from", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_refund", default: false, null: false
+    t.index ["issue_id"], name: "index_crypto_bounties_on_issue_id"
+    t.index ["owner_type", "owner_id"], name: "index_crypto_bounties_on_owner_type_and_owner_id"
+    t.index ["transaction_hash"], name: "index_crypto_bounties_on_transaction_hash", unique: true
+  end
+
+  create_table "crypto_pay_out_claim_events", force: :cascade do |t|
+    t.string "type"
+    t.bigint "crypto_pay_out_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crypto_pay_out_id"], name: "index_crypto_pay_out_claim_events_on_crypto_pay_out_id"
+  end
+
+  create_table "crypto_pay_out_txns", force: :cascade do |t|
+    t.bigint "crypto_pay_out_id"
+    t.string "state"
+    t.string "txn_hash"
+    t.integer "confirmed_block"
+    t.datetime "mined_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "type"
+    t.decimal "gas_price_gwei", precision: 10, scale: 2
+    t.integer "gas_used"
+    t.index ["confirmed_block"], name: "index_crypto_pay_out_txns_on_confirmed_block"
+    t.index ["crypto_pay_out_id"], name: "index_crypto_pay_out_txns_on_crypto_pay_out_id"
+    t.index ["state"], name: "index_crypto_pay_out_txns_on_state"
+    t.index ["txn_hash"], name: "index_crypto_pay_out_txns_on_txn_hash", unique: true
+  end
+
+  create_table "crypto_pay_outs", force: :cascade do |t|
+    t.bigint "issue_id"
+    t.bigint "person_id"
+    t.string "type", limit: 255, null: false
+    t.string "state", default: "Pending-Approval"
+    t.string "receiver_address"
+    t.string "funder_acct_address"
+    t.decimal "fee_percent"
+    t.jsonb "fee"
+    t.string "fees_acct_address"
+    t.datetime "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "seed_eth"
+    t.jsonb "balance"
+    t.jsonb "bounty"
+    t.boolean "is_refund", default: false, null: false
+    t.string "transaction_hash"
+    t.string "reason"
+    t.index ["issue_id"], name: "index_crypto_pay_outs_on_issue_id"
+    t.index ["person_id"], name: "index_crypto_pay_outs_on_person_id"
+    t.index ["sent_at"], name: "index_crypto_pay_outs_on_sent_at"
+    t.index ["state"], name: "index_crypto_pay_outs_on_state"
+    t.index ["transaction_hash"], name: "index_crypto_pay_outs_on_transaction_hash", unique: true
+    t.index ["type"], name: "index_crypto_pay_outs_on_type"
+  end
+
+  create_table "currencies", id: :serial, force: :cascade do |t|
+    t.string "type", limit: 255, null: false
+    t.decimal "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "name"
+    t.string "symbol"
+    t.string "address"
+    t.string "cloudinary_id"
+    t.boolean "featured"
+    t.index ["symbol"], name: "index_currencies_on_symbol"
     t.index ["type"], name: "index_currencies_on_type"
     t.index ["value"], name: "index_currencies_on_value"
   end
@@ -215,8 +311,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string "locked_by"
-    t.string "queue"
+    t.string "locked_by", limit: 255
+    t.string "queue", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
@@ -249,20 +345,20 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "events", id: :serial, force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "title"
-    t.string "url"
+    t.string "slug", limit: 255, null: false
+    t.string "title", limit: 255
+    t.string "url", limit: 255
     t.integer "issue_ids", default: [], null: false, array: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "subtitle"
+    t.string "subtitle", limit: 255
     t.index ["slug"], name: "index_events_on_slug", unique: true
   end
 
   create_table "follow_relations", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
     t.integer "item_id", null: false
-    t.string "item_type", null: false
+    t.string "item_type", limit: 255, null: false
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -271,8 +367,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "fundraiser_questions", id: :serial, force: :cascade do |t|
     t.integer "fundraiser_id"
-    t.string "question"
-    t.string "answer"
+    t.string "question", limit: 255
+    t.string "answer", limit: 255
     t.integer "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -289,9 +385,9 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   create_table "fundraisers", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
     t.boolean "published", default: false, null: false
-    t.string "title"
-    t.string "homepage_url"
-    t.string "repo_url"
+    t.string "title", limit: 255
+    t.string "homepage_url", limit: 255
+    t.string "repo_url", limit: 255
     t.text "description"
     t.text "about_me"
     t.bigint "funding_goal", default: 100
@@ -300,7 +396,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "updated_at", null: false
     t.decimal "total_pledged", precision: 10, scale: 2, default: "0.0", null: false
     t.boolean "featured", default: false, null: false
-    t.string "short_description"
+    t.string "short_description", limit: 255
     t.integer "days_open", default: 30
     t.datetime "ends_at"
     t.datetime "breached_at"
@@ -308,7 +404,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.boolean "breached", default: false, null: false
     t.boolean "featured_at"
     t.boolean "hidden", default: false, null: false
-    t.string "cloudinary_id"
+    t.string "cloudinary_id", limit: 255
     t.integer "team_id"
     t.integer "tracker_id"
     t.index ["breached"], name: "index_fundraisers_on_breached"
@@ -343,10 +439,22 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "google_wallet_items", id: :serial, force: :cascade do |t|
-    t.string "order_id", null: false
+    t.string "order_id", limit: 255, null: false
     t.text "jwt", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "issue_addresses", id: :serial, force: :cascade do |t|
+    t.integer "issue_id"
+    t.string "public_address", limit: 255
+    t.string "private_key", limit: 255
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "balance_updated_at"
+    t.jsonb "balance"
+    t.index ["issue_id"], name: "index_issue_addresses_on_issue_id"
+    t.index ["public_address"], name: "index_issue_addresses_on_public_address", unique: true
   end
 
   create_table "issue_rank_caches", id: :serial, force: :cascade do |t|
@@ -359,7 +467,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "issue_ranks", id: :serial, force: :cascade do |t|
-    t.string "type", null: false
+    t.string "type", limit: 255, null: false
     t.integer "issue_id", null: false
     t.integer "rank", default: 0, null: false
     t.integer "person_id"
@@ -405,11 +513,11 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "number"
-    t.string "url", null: false
+    t.string "url", limit: 255, null: false
     t.text "title"
-    t.string "labels"
+    t.string "labels", limit: 255
     t.boolean "code", default: false
-    t.string "state"
+    t.string "state", limit: 255
     t.text "body"
     t.datetime "remote_updated_at"
     t.integer "remote_id"
@@ -421,25 +529,26 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.integer "comment_count", default: 0
     t.boolean "sync_in_progress", default: false, null: false
     t.decimal "bounty_total", precision: 10, scale: 2, default: "0.0", null: false
-    t.string "type", default: "Issue", null: false
-    t.string "remote_type"
-    t.string "priority"
-    t.string "milestone"
+    t.string "type", limit: 255, default: "Issue", null: false
+    t.string "remote_type", limit: 255
+    t.string "priority", limit: 255
+    t.string "milestone", limit: 255
     t.boolean "can_add_bounty", default: false, null: false
     t.integer "accepted_bounty_claim_id"
-    t.string "author_name"
-    t.string "owner"
+    t.string "author_name", limit: 255
+    t.string "owner", limit: 255
     t.boolean "paid_out", default: false, null: false
     t.integer "participants_count"
     t.integer "thumbs_up_count"
     t.integer "votes_count"
     t.integer "watchers_count"
-    t.string "severity"
+    t.string "severity", limit: 255
     t.boolean "delta", default: true, null: false
     t.integer "author_linked_account_id"
     t.boolean "solution_started", default: false, null: false
     t.text "body_markdown"
     t.datetime "deleted_at"
+    t.integer "category"
     t.index ["author_linked_account_id"], name: "index_issues_partial_author_linked_account_id", where: "(author_linked_account_id IS NOT NULL)"
     t.index ["bounty_total"], name: "index_issues_partial_bounty_total", where: "(bounty_total > (0)::numeric)"
     t.index ["comment_count"], name: "index_issues_on_comment_count"
@@ -467,7 +576,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "languages", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "search_weight"
@@ -476,15 +585,15 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "linked_accounts", id: :serial, force: :cascade do |t|
     t.integer "person_id"
-    t.string "type"
+    t.string "type", limit: 255
     t.bigint "uid"
-    t.string "login"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "oauth_token"
-    t.string "oauth_secret"
-    t.string "permissions"
+    t.string "login", limit: 255
+    t.string "first_name", limit: 255
+    t.string "last_name", limit: 255
+    t.string "email", limit: 255
+    t.string "oauth_token", limit: 255
+    t.string "oauth_secret", limit: 255
+    t.string "permissions", limit: 255
     t.datetime "synced_at"
     t.boolean "sync_in_progress", default: false
     t.integer "followers", default: 0
@@ -493,11 +602,12 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "updated_at"
     t.decimal "account_balance", precision: 10, scale: 2, default: "0.0"
     t.boolean "anonymous", default: false, null: false
-    t.string "company"
-    t.string "location"
+    t.string "company", limit: 255
+    t.string "location", limit: 255
     t.text "bio"
-    t.string "cloudinary_id"
+    t.string "cloudinary_id", limit: 255
     t.datetime "deleted_at"
+    t.string "remote_id"
     t.index ["anonymous"], name: "index_linked_accounts_on_anonymous"
     t.index ["email"], name: "index_linked_accounts_on_email", where: "(email IS NOT NULL)"
     t.index ["login"], name: "index_linked_accounts_on_login"
@@ -507,8 +617,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "lurkers", id: :serial, force: :cascade do |t|
-    t.string "remote_ip", null: false
-    t.string "user_agent", null: false
+    t.string "remote_ip", limit: 255, null: false
+    t.string "user_agent", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["remote_ip", "user_agent"], name: "index_lurkers_on_remote_ip_and_user_agent", unique: true
@@ -517,7 +627,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   create_table "merged_models", id: :serial, force: :cascade do |t|
     t.integer "good_id", null: false
     t.integer "bad_id", null: false
-    t.string "bad_type", null: false
+    t.string "bad_type", limit: 255, null: false
     t.datetime "created_at", null: false
     t.index ["bad_id", "bad_type"], name: "index_merged_models_on_bad_id_and_bad_type", unique: true
   end
@@ -526,7 +636,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.integer "fundraiser_id", null: false
     t.datetime "delivery_at"
     t.integer "percentage_of_project"
-    t.string "description", null: false
+    t.string "description", limit: 255, null: false
     t.integer "completed_percentage", null: false
     t.boolean "optional", default: false, null: false
     t.integer "rank", default: 1, null: false
@@ -535,7 +645,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "mixpanel_aliases", id: :serial, force: :cascade do |t|
-    t.string "distinct_id", null: false
+    t.string "distinct_id", limit: 255, null: false
     t.integer "person_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -545,8 +655,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "mixpanel_events", id: :serial, force: :cascade do |t|
     t.integer "person_id"
-    t.string "distinct_id"
-    t.string "event"
+    t.string "distinct_id", limit: 255
+    t.string "event", limit: 255
     t.datetime "created_at"
     t.json "payload"
     t.index ["created_at"], name: "index_mixpanel_events_on_created_at"
@@ -555,10 +665,10 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "orders", id: :serial, force: :cascade do |t|
-    t.string "type", default: "Order", null: false
-    t.string "serial", null: false
-    t.string "order_number", null: false
-    t.string "buyer_id", null: false
+    t.string "type", limit: 255, default: "Order", null: false
+    t.string "serial", limit: 255, null: false
+    t.string "order_number", limit: 255, null: false
+    t.string "buyer_id", limit: 255, null: false
     t.datetime "processed_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -566,7 +676,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "payment_method_temporaries", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
-    t.string "paypal_token", null: false
+    t.string "paypal_token", limit: 255, null: false
     t.json "data", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -574,7 +684,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "payment_methods", id: :serial, force: :cascade do |t|
-    t.string "type", null: false
+    t.string "type", limit: 255, null: false
     t.integer "person_id", null: false
     t.json "data", null: false
     t.datetime "created_at"
@@ -582,16 +692,16 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "payment_notification_logs", id: :serial, force: :cascade do |t|
-    t.string "processor", null: false
-    t.string "notification_type"
+    t.string "processor", limit: 255, null: false
+    t.string "notification_type", limit: 255
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "payment_notifications", id: :serial, force: :cascade do |t|
-    t.string "type", null: false
-    t.string "txn_id", null: false
+    t.string "type", limit: 255, null: false
+    t.string "txn_id", limit: 255
     t.text "raw_post"
     t.integer "order_id"
     t.datetime "created_at"
@@ -606,11 +716,11 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "paypal_ipns", id: :serial, force: :cascade do |t|
     t.text "raw_post", null: false
-    t.string "txn_id", null: false
+    t.string "txn_id", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "payment_processed_at"
-    t.string "payment_type"
+    t.string "payment_type", limit: 255
     t.boolean "pending", default: false, null: false
     t.boolean "processed", default: false, null: false
     t.boolean "is_return", default: false, null: false
@@ -622,39 +732,45 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "people", id: :serial, force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "display_name"
-    t.string "email", null: false
+    t.string "first_name", limit: 255
+    t.string "last_name", limit: 255
+    t.string "display_name", limit: 255
+    t.string "email", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "buyer_id"
-    t.string "password_digest"
+    t.string "buyer_id", limit: 255
+    t.string "password_digest", limit: 255
     t.boolean "account_completed", default: false
-    t.string "paypal_email"
+    t.string "paypal_email", limit: 255
     t.datetime "last_seen_at"
     t.datetime "last_bulk_mailed_at"
     t.boolean "admin", default: false
     t.text "bio"
-    t.string "location"
-    t.string "url"
-    t.string "company"
-    t.string "public_email"
+    t.string "location", limit: 255
+    t.string "url", limit: 255
+    t.string "company", limit: 255
+    t.string "public_email", limit: 255
     t.datetime "accepted_terms_at"
-    t.string "cloudinary_id"
+    t.string "cloudinary_id", limit: 255
     t.boolean "deleted", default: false, null: false
     t.boolean "profile_completed", default: false, null: false
     t.integer "shopping_cart_id"
-    t.string "stripe_customer_id"
+    t.string "stripe_customer_id", limit: 255
     t.datetime "suspended_at"
     t.boolean "bounty_hunter"
     t.integer "quickbooks_vendor_id"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["email"], name: "index_people_on_email", unique: true
     t.index ["shopping_cart_id"], name: "index_people_on_shopping_cart_id"
   end
 
   create_table "person_relations", id: :serial, force: :cascade do |t|
-    t.string "type", null: false
+    t.string "type", limit: 255, null: false
     t.integer "person_id", null: false
     t.integer "target_person_id", null: false
     t.datetime "created_at", null: false
@@ -684,7 +800,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.integer "reward_id"
     t.text "survey_response"
     t.boolean "anonymous", default: false, null: false
-    t.string "owner_type"
+    t.string "owner_type", limit: 255
     t.integer "owner_id"
     t.index ["anonymous"], name: "index_pledges_on_anonymous"
     t.index ["owner_id"], name: "index_pledges_on_owner_id"
@@ -693,9 +809,9 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "postbacks", id: :serial, force: :cascade do |t|
-    t.string "namespace"
-    t.string "method"
-    t.string "url"
+    t.string "namespace", limit: 255
+    t.string "method", limit: 255
+    t.string "url", limit: 255
     t.text "raw_post"
     t.text "headers"
     t.datetime "created_at", null: false
@@ -708,7 +824,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.decimal "amount", precision: 10, scale: 2, null: false
     t.integer "estimated_work"
     t.string "bio", limit: 1000
-    t.string "state", default: "pending"
+    t.string "state", limit: 255, default: "pending"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "completed_by"
@@ -728,20 +844,28 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "updated_at"
   end
 
-  create_table "quickbooks_transactions", id: :integer, default: nil, force: :cascade do |t|
+  create_table "quickbooks_tokens", force: :cascade do |t|
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "quickbooks_transactions", id: :integer, default: nil, force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "quickbooks_vendors", id: :integer, default: nil, force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "name", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "recommendation_events", id: :serial, force: :cascade do |t|
     t.integer "person_id"
-    t.string "event"
+    t.string "event", limit: 255
     t.integer "issue_id"
     t.datetime "created_at"
     t.index ["person_id", "issue_id", "event"], name: "index_recommendation_events_on_person_id_and_issue_id_and_event"
@@ -754,7 +878,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "person_id", null: false
-    t.string "state", default: "pending"
+    t.string "state", limit: 255, default: "pending"
     t.string "abstract", limit: 1000
     t.index ["budget"], name: "index_request_for_proposals_on_budget"
     t.index ["issue_id"], name: "index_request_for_proposals_on_issue_id"
@@ -766,8 +890,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.text "description", null: false
     t.datetime "delivered_at"
     t.integer "limited_to"
-    t.string "timezone"
-    t.string "vanity_url"
+    t.string "timezone", limit: 255
+    t.string "vanity_url", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "amount"
@@ -778,8 +902,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "saved_search_tabs", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "query", null: false
+    t.string "name", limit: 255, null: false
+    t.string "query", limit: 255, null: false
     t.integer "person_id", null: false
     t.boolean "locked", default: false
     t.datetime "created_at", null: false
@@ -787,7 +911,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "searches", id: :serial, force: :cascade do |t|
-    t.string "query", null: false
+    t.string "query", limit: 255, null: false
     t.integer "person_id"
     t.datetime "created_at", null: false
     t.text "params", default: "--- {}\n"
@@ -795,7 +919,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "sent_emails", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
-    t.string "template", null: false
+    t.string "template", limit: 255, null: false
     t.text "options", default: "--- {}\n", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -807,7 +931,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order_id"
-    t.string "uid"
+    t.string "uid", limit: 255
     t.integer "payment_method_id"
     t.text "status", default: "draft", null: false
     t.index ["order_id"], name: "index_shopping_carts_on_order_id"
@@ -816,15 +940,15 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "shorts", id: :serial, force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "destination", null: false
+    t.string "slug", limit: 255, null: false
+    t.string "destination", limit: 255, null: false
     t.datetime "created_at", null: false
     t.index ["slug"], name: "index_shorts_on_slug", unique: true
   end
 
   create_table "solution_events", id: :serial, force: :cascade do |t|
     t.integer "solution_id", null: false
-    t.string "type", null: false
+    t.string "type", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["solution_id"], name: "index_solution_events_on_solution_id"
@@ -837,9 +961,9 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "note"
-    t.string "url"
+    t.string "url", limit: 255
     t.datetime "completion_date"
-    t.string "status", default: "stopped", null: false
+    t.string "status", limit: 255, default: "stopped", null: false
     t.index ["issue_id"], name: "index_solutions_on_issue_id"
     t.index ["person_id", "issue_id"], name: "index_solutions_on_person_id_and_issue_id", unique: true
     t.index ["person_id"], name: "index_solutions_on_person_id"
@@ -847,14 +971,14 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "splits", id: :serial, force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, null: false
-    t.string "status", default: "approved", null: false
+    t.string "status", limit: 255, default: "approved", null: false
     t.integer "account_id", null: false
     t.integer "transaction_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "currency", default: "USD", null: false
+    t.string "currency", limit: 255, default: "USD", null: false
     t.integer "item_id"
-    t.string "item_type"
+    t.string "item_type", limit: 255
     t.integer "dirty", default: 0, null: false
     t.index ["account_id"], name: "index_splits_on_account_id"
     t.index ["transaction_id"], name: "index_splits_on_transaction_id"
@@ -863,15 +987,15 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   create_table "splits_backup", id: false, force: :cascade do |t|
     t.integer "id"
     t.decimal "amount", precision: 10, scale: 2
-    t.string "memo"
-    t.string "status"
+    t.string "memo", limit: 255
+    t.string "status", limit: 255
     t.integer "account_id"
     t.integer "transaction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "currency"
+    t.string "currency", limit: 255
     t.integer "item_id"
-    t.string "item_type"
+    t.string "item_type", limit: 255
     t.integer "dirty"
   end
 
@@ -890,8 +1014,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.integer "person_id", null: false
     t.integer "team_id", null: false
     t.decimal "amount", precision: 10, scale: 2, null: false
-    t.string "status", null: false
-    t.string "owner_type"
+    t.string "status", limit: 255, null: false
+    t.string "owner_type", limit: 255
     t.integer "owner_id"
     t.integer "payment_method_id", null: false
     t.datetime "created_at"
@@ -908,7 +1032,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   create_table "support_offering_rewards", id: :serial, force: :cascade do |t|
     t.integer "support_offering_id", null: false
     t.decimal "amount", precision: 10, scale: 2, null: false
-    t.string "title"
+    t.string "title", limit: 255
     t.text "description"
     t.integer "active_support_levels_count", default: 0, null: false
     t.datetime "deleted_at"
@@ -919,9 +1043,9 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "support_offerings", id: :serial, force: :cascade do |t|
     t.integer "team_id", null: false
-    t.string "subtitle"
+    t.string "subtitle", limit: 255
     t.text "body_markdown"
-    t.string "youtube_video_url"
+    t.string "youtube_video_url", limit: 255
     t.json "goals"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -931,9 +1055,9 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "tag_relations", id: :serial, force: :cascade do |t|
     t.integer "parent_id", null: false
-    t.string "parent_type", null: false
+    t.string "parent_type", limit: 255, null: false
     t.integer "child_id", null: false
-    t.string "child_type", null: false
+    t.string "child_type", limit: 255, null: false
     t.integer "weight", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -951,17 +1075,17 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "tags", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_url"
+    t.string "image_url", limit: 255
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "takedowns", id: :serial, force: :cascade do |t|
     t.integer "linked_account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "team_activity_inclusions", id: :serial, force: :cascade do |t|
@@ -988,14 +1112,14 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.text "rejected_notes"
     t.datetime "accepted_at"
     t.datetime "rejected_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "team_invites", id: :serial, force: :cascade do |t|
     t.integer "team_id", null: false
-    t.string "token", null: false
-    t.string "email"
+    t.string "token", limit: 255, null: false
+    t.string "email", limit: 255
     t.boolean "admin", default: false, null: false
     t.boolean "developer", default: false, null: false
     t.boolean "public", default: true, null: false
@@ -1017,7 +1141,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.integer "invited_by_person_id"
     t.decimal "budget"
     t.decimal "balance"
-    t.string "owner_type"
+    t.string "owner_type", limit: 255
     t.integer "owner_id"
     t.boolean "member", default: true, null: false
     t.index ["owner_id"], name: "index_team_member_relations_on_owner_id"
@@ -1034,7 +1158,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.boolean "consumed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "owner_type"
+    t.string "owner_type", limit: 255
     t.integer "owner_id"
     t.boolean "from_member", default: false
     t.datetime "refunded_at"
@@ -1057,7 +1181,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "team_updates", id: :serial, force: :cascade do |t|
     t.integer "number"
-    t.string "title"
+    t.string "title", limit: 255
     t.text "body"
     t.boolean "published", default: false, null: false
     t.datetime "published_at"
@@ -1070,12 +1194,12 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "teams", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "slug"
-    t.string "url"
+    t.string "name", limit: 255, null: false
+    t.string "slug", limit: 255
+    t.string "url", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "cloudinary_id"
+    t.string "cloudinary_id", limit: 255
     t.text "bio"
     t.boolean "featured", default: false, null: false
     t.integer "linked_account_id"
@@ -1103,7 +1227,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
 
   create_table "thumbs", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
-    t.string "item_type", null: false
+    t.string "item_type", limit: 255, null: false
     t.integer "item_id", null: false
     t.boolean "explicit", null: false
     t.boolean "downvote", null: false
@@ -1115,7 +1239,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "trac_users", id: :serial, force: :cascade do |t|
-    t.string "login"
+    t.string "login", limit: 255
     t.datetime "synced_at"
     t.boolean "sync_in_progress"
     t.integer "repository_id"
@@ -1167,13 +1291,13 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "synced_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "label_name", default: "bounty", null: false
-    t.string "type"
+    t.string "label_name", limit: 255, default: "bounty", null: false
+    t.string "type", limit: 255
     t.integer "person_id"
-    t.string "bounties_accepted_msg"
-    t.string "bounty_available_msg"
-    t.string "bounty_claimed_msg"
-    t.string "label_color", default: "#129e5e", null: false
+    t.string "bounties_accepted_msg", limit: 255
+    t.string "bounty_available_msg", limit: 255
+    t.string "bounty_claimed_msg", limit: 255
+    t.string "label_color", limit: 255, default: "#129e5e", null: false
     t.boolean "locked", default: false, null: false
     t.text "last_error"
     t.datetime "locked_at"
@@ -1195,7 +1319,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   create_table "tracker_relations", id: :serial, force: :cascade do |t|
     t.integer "tracker_id", null: false
     t.integer "linked_account_id", null: false
-    t.string "type", null: false
+    t.string "type", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["linked_account_id"], name: "index_tracker_relations_on_linked_account_id"
@@ -1206,9 +1330,9 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "remote_id"
-    t.string "url", null: false
-    t.string "name", null: false
-    t.string "full_name"
+    t.string "url", limit: 255, null: false
+    t.string "name", limit: 255, null: false
+    t.string "full_name", limit: 255
     t.boolean "is_fork", default: false
     t.integer "watchers", default: 0, null: false
     t.integer "forks", default: 0
@@ -1222,21 +1346,21 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.boolean "has_wiki", default: false, null: false
     t.boolean "has_downloads", default: false, null: false
     t.boolean "private", default: false, null: false
-    t.string "homepage"
+    t.string "homepage", limit: 255
     t.boolean "sync_in_progress", default: false, null: false
     t.decimal "bounty_total", precision: 10, scale: 2, default: "0.0", null: false
     t.decimal "account_balance", precision: 10, scale: 2, default: "0.0"
-    t.string "type", default: "Tracker", null: false
-    t.string "cloudinary_id"
+    t.string "type", limit: 255, default: "Tracker", null: false
+    t.string "cloudinary_id", limit: 255
     t.integer "closed_issues", default: 0, null: false
     t.boolean "delta", default: true, null: false
     t.boolean "can_edit", default: true, null: false
     t.text "repo_url"
     t.integer "rank", default: 0, null: false
-    t.string "remote_cloudinary_id"
-    t.string "remote_name"
+    t.string "remote_cloudinary_id", limit: 255
+    t.string "remote_name", limit: 255
     t.text "remote_description"
-    t.string "remote_homepage"
+    t.string "remote_homepage", limit: 255
     t.integer "remote_language_ids", default: [], array: true
     t.integer "language_ids", default: [], array: true
     t.integer "team_id"
@@ -1258,7 +1382,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "audited"
-    t.string "type", default: "Transaction", null: false
+    t.string "type", limit: 255, default: "Transaction", null: false
     t.integer "person_id"
     t.integer "checkout_method_id"
     t.decimal "gross"
@@ -1283,7 +1407,7 @@ ActiveRecord::Schema.define(version: 20180328112330) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "audited"
-    t.string "type"
+    t.string "type", limit: 255
     t.integer "person_id"
     t.integer "checkout_method_id"
     t.integer "number"
@@ -1298,8 +1422,8 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   create_table "unsubscribes", id: :serial, force: :cascade do |t|
     t.integer "person_id"
     t.integer "linked_account_id"
-    t.string "email"
-    t.string "category"
+    t.string "email", limit: 255
+    t.string "category", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["email"], name: "index_unsubscribes_on_email", where: "(email IS NOT NULL)"
@@ -1308,17 +1432,33 @@ ActiveRecord::Schema.define(version: 20180328112330) do
   end
 
   create_table "versions", id: :serial, force: :cascade do |t|
-    t.string "item_type", null: false
+    t.string "item_type", limit: 255, null: false
     t.integer "item_id", null: false
-    t.string "event", null: false
-    t.string "whodunnit"
+    t.string "event", limit: 255, null: false
+    t.string "whodunnit", limit: 255
     t.text "object"
     t.text "object_changes"
     t.integer "person_id"
-    t.string "remote_ip"
+    t.string "remote_ip", limit: 255
     t.text "user_agent"
     t.datetime "created_at"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  create_table "wallets", force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.string "label"
+    t.string "eth_addr", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "verified", default: false
+    t.boolean "primary", default: false
+    t.index ["person_id"], name: "index_wallets_on_person_id"
+  end
+
+  add_foreign_key "crypto_bounties", "issues"
+  add_foreign_key "crypto_pay_out_claim_events", "crypto_pay_outs"
+  add_foreign_key "crypto_pay_out_txns", "crypto_pay_outs"
+  add_foreign_key "crypto_pay_outs", "issues"
+  add_foreign_key "issue_addresses", "issues"
 end

@@ -13,7 +13,6 @@ ruby '2.4.3'
 gem 'rails', '5.1.5'
 gem 'json'
 gem 'pg', '~> 0.18.1'
-gem 'mysql2', '0.3.17'
 gem 'puma'
 gem 'oj'
 
@@ -54,9 +53,9 @@ gem 'sass-rails', '~> 5.0.7'
 gem 'bootstrap-sass'
 gem 'savon', '~> 2.12'
 
-gem 'thinking-sphinx'
-
-gem 'flying-sphinx'
+gem 'searchkick'
+gem 'typhoeus'
+gem 'faraday_middleware-aws-sigv4'
 
 gem 'cloudinary'
 gem 'eventmachine', '1.0.4'
@@ -64,6 +63,7 @@ gem 'em-http-request'
 gem 'angular-rails-templates'
 
 gem 'secure_headers'
+gem 'rest-client'
 
 group :development do
   gem 'zeus'
@@ -72,6 +72,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'rdoc'
   gem 'annotate'
+  gem "letter_opener"
 end
 
 group :development, :test do

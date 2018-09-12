@@ -1,22 +1,132 @@
 %div{ "class"=>"text-center", "ng-show"=>"issue_deleted" }
   %h3 {{issue_error}}
-%div{ "ng-if"=>"!issue_deleted" }
+.container
   %div{ "ng-show"=>"issue.id && (!issue.tracker || !issue.tracker.takendown)" }
-    %team-view
+    %info-space{"info-space" => "ads.issue_ad"}
+    .row.mt-5
+      .col-md-8
+        / SECTION ISSUE CARD START
+        .panel.panel-default
+          .panel-body
+            %span.label.label-success.label-padded.label-lg{ "ng-show" => "!issue.generic && issue.can_add_bounty"} Open
+            %span.label.label-salmon.label-padded.label-lg{ "ng-hide" => "issue.generic || issue.can_add_bounty"} Closed
+            %span.label.label-info.label-padded.label-lg{ "ng-show" => "issue.winning_bounty_claim || issue.paid_out"} Paid Out
 
-      .alert.alert-warning{ "ng-show" => "issue.can_add_bounty && issue.team.bounties_disabled" }
-        %div{"style"=>"text-align: center; font-size: 18px"}
-          Bounties for this issue have been disabled by the team.
-
-      .row
-        .col-sm-4.col-xs-12.col-sm-push-8
-          %div{ "ng-show" => "!issue.team.bounties_disabled" }
-            %div{ "ng-include" => "'app/issues/_show_backer_box.html'" }
+            %h3.text-black{"style" => "word-break: break-word;"}
+              {{ issue.title }}
             
-            %div{ "ng-include" => "'app/issues/_show_hunter_box.html'" }
+            %div
+              %a.text-gunmetal{"ng-href" => "/teams/{{team.slug}}"}
+                %span.font-16.text-black {{team.name}}            
+
+            %div.mt-3.font-12
+              %span.text-muted
+                %i.glyphicon.glyphicon-calendar
+                {{ issue.remote_created_at | date:'dd MMMM yyyy' }}
+              %span.text-muted.ml-3
+                %i.glyphicon.glyphicon-user
+                Posted by
+                %span.text-black {{ issue.author.display_name }}
+
+            %div.mt-3{"style" => "overflow: hidden;"}
+              %p.text-muted.issue-body-show-less{"ng-bind-html" => "issue.body_html", "ng-class" => "{'show-more': issueBodyShow}"}
+
+            %div
+              %a{"ng-click" => "issueBodyShow = !issueBodyShow"} 
+                {{ issueBodyShow ? 'Hide' : 'See More' }}
+
+            %div.row
+              .col-md-6.mt-5.text-center.text-md-left
+                %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-href" => "{{issue.url}}", :style => "font-size: 12px", :target => "_blank"}
+                  %span.glyphicon.glyphicon-new-window
+                  View in
+                  %name-for-external-link{"object-type" => "issue.type"}
+              .col-md-6.mt-5.text-center.text-md-right
+                %a.btn.btn-light-blue.btn-lg.px-5.py-4{"ng-click" => "openHunterBox()", "ng-show" => "issue.can_add_bounty"}
+                  SOLVE ISSUE
+
+        / SECTION ISSUE CARD END
+        / SECTION ISSUE DETAILS BEGIN
+        .panel.panel-default
+          .panel-body
+            %tabset
+              %tab{"heading" => "Overview" }
+                %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+              %tab{"heading" => "Backers ({{issue.backers_count}})" }
+                %backers-tab
+              %tab{"heading" => "Updates" }
+                %updates-tab
+
+            
+        / SECTION ISSUE DETAILS END
+
+      
+      .col-md-4
+        %div.text-center{"ng-if" => "issue.can_add_bounty && (!issue.team || !issue.team.bounties_disabled)"}
+          %div.text-center{"ng-if" => "!issue.category"}
+            .panel.panel-gunmetal
+              .panel-heading.text-white.text-center.pt-5.pb-5
+                %h4.font-weight-semibold
+                  POST A BOUNTY
+                %p
+                  Be the first to post a bounty for this issue!
+              .panel-body
+                %div.text-center{"ng-if" => "!current_person"}
+                  %button.btn.btn-light-blue.btn-responsive{"ng-click" => "goToSignInPage()"}
+                    Sign In
+                %div.text-center{"ng-if" => "current_person"}
+                  %div There are several ways to post this bounty
+                  %div{"ng-include" => "'app/issues/templates/contribute_accordian.html'"}
+          %div.text-center{"ng-if" => "issue.category === 'fiat'"}
+            .panel.panel-gunmetal
+              .panel-heading.text-white.text-center.pt-5.pb-5
+                %h5.font-weight-semibold
+                  TOTAL BOUNTY VALUE
+                %h3.m-0
+                  ${{issue.bounty_total | number : 2 }}USD
+              .panel-body
+                %div.text-center
+                  %div{"ng-include" => "'app/issues/templates/usd_form.html'"}
+          %div.text-center{"ng-if" => "issue.category === 'crypto'"}
+            .panel.panel-gunmetal.mb-3
+              .panel-heading.text-white.text-center.pt-5.pb-5
+                %h5.font-weight-semibold
+                  TOTAL BOUNTY VALUE
+                %h3.m-0
+                  ≈ ${{issue.issue_address.balance.totalAmountInUSD  | number : 2 }} USD
+            .panel.panel-default.mb-3.text-left
+              .panel-body.pb-2.pt-0
+                // ETH
+                %span.label.label-block.label-white.mt-2{ "ng-if" => "issue.issue_address.balance['ETH'] != null" }
+                  %span 
+                    = image_tag 'icons/icon_ethereum.svg', style: 'width: 14px;'
+                  %span
+                    {{ issue.issue_address.balance['ETH'].balance }}
+                  %span
+                    ETH
+                // Tokens
+                %span.label.label-block.label-white.mt-2{ "ng-repeat" => "token in issue.issue_address.balance.tokens | orderBy:'balance':true | limitTo:2 " }
+                  %span{"ng-if" => "token.tokenInfo.symbol === 'CAN'"}
+                    = image_tag 'icons/icon_canya.svg', style: 'width: 14px;'
+                  %span
+                    {{ token.balance }}
+                  %span
+                    {{ token.tokenInfo.symbol }}
+                %span.label.label-block.label-white.mt-2{ "ng-if" => "issue.issue_address.balance.tokens.length > 2" }
+                  %span
+                    + {{ issue.issue_address.balance.tokens.length - 2 }} others
+
+            .panel.panel-default.mt-3
+              .panel-body
+                %div.text-center
+                  %div{"ng-include" => "'app/issues/templates/crypto_form_with_qr.html'"}
         
-        .col-sm-8.col-xs-12.col-sm-pull-4
-          %timeline{"date-in-primary" => "true", :events => "events", "primary-class" => "text-muted", "timeline-issue"=>"issue" }
+        %div{"ng-show" => "!issue.team || !issue.team.bounties_disabled" }
+          %div{ "ng-include" => "'app/issues/_show_developer_actions.html'"}
+
+        %team-about-panel{"ng-show" => "team.id"}
 
   %div{ "ng-show"=>"issue.id && issue.tracker && issue.tracker.takendown" }
     %takedown
+
+

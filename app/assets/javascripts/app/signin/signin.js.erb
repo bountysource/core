@@ -52,7 +52,7 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
 
 
   $scope.email_changing = function() {
-    $scope.signin_or_signup = null;
+    if ($scope.signin_or_signup!='not_verify') $scope.signin_or_signup = null;
   };
 
   $scope.email_changed = function() {
@@ -60,10 +60,16 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
       $scope.email_previous = $scope.form_data.email;
       $scope.signin_or_signup = 'pending';
       $api.check_email_address($scope.form_data.email).then(function(response) {
-        if (response.email_is_registered) {
+        if (response.not_verify) {
+          $scope.signin_or_signup = "not_verify"
+          $scope.error = response.error;
+          $scope.message = '';      
+        } else if (response.email_is_registered) {
           $scope.signin_or_signup = 'signin';
+          $scope.message = '';
         } else {
           $scope.signin_or_signup = 'signup';
+          $scope.message = '';
         }
       });
     }
@@ -88,8 +94,10 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
       payload.mixpanel_id = $analytics.mixpanel_distinct_id();
 
       $api.signin(payload).then(function(response) {
+        console.log('running');
         if (response.error) {
           $scope.error = response.error;
+          $scope.message ='';
         } else {
           // Hack: Follow Trackers whose IDs are appended to the redirect URL.
           $scope.follow_trackers_from_route_params();
@@ -111,6 +119,11 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
       $api.signup(payload).then(function(response) {
         if (response.error) {
           $scope.error = response.error;
+        } else if (response.verify_email_send) {
+          $scope.signin_or_signup = "not_verify"
+          $scope.verify_email_send = true;
+          $scope.error = '';
+          $scope.message = "Please check your email to activate your account";
         } else {
           // Hack: Follow Trackers whose IDs are appended to the redirect URL.
           $scope.follow_trackers_from_route_params();
@@ -124,6 +137,14 @@ angular.module('app').controller('SigninController', function ($scope, $routePar
   $scope.forgot_password = function() {
     $api.request_password_reset({ email: $scope.form_data.email }).then(function(response) {
       $scope.error = response.message;
+      $scope.message = '';
+    });
+  };
+
+  $scope.resend_verification = function() {
+    $api.resend_verification({ email: $scope.form_data.email }).then(function(response) {
+      $scope.error = response.message;
+      $scope.message = '';
     });
   };
 });

@@ -26,19 +26,22 @@ angular.module('app').config(function($stateProvider) {
       };
       $scope.cancel_editing = function(reward) {
         $scope.rewards.currently_editing = null;
+        $scope.errors = null;
       };
 
       $scope.save_reward = function(reward) {
         $scope.saving_edit_form = true;
 
-        $api.teams.update({ slug: $scope.team.slug }, {
-          update_support_offering_reward: {
-            id: reward.id,
+        $api.support_offering_rewards.update({ id: reward.id }, {
+          support_offering_reward: {
             amount: parseInt(($scope.edit_form_data.amount+"").replace(/[^0-9.]/g,'')),
             title: $scope.edit_form_data.title,
             description: $scope.edit_form_data.description
           }
-        }, $state.reload);
+        }, $state.reload, function(response) {
+          $scope.errors = response.data.errors;
+          $scope.saving_edit_form = false;
+        });
       };
 
       $scope.delete_reward = function(reward) {
@@ -46,16 +49,14 @@ angular.module('app').config(function($stateProvider) {
 
         $scope.rewards.splice($scope.rewards.indexOf(reward), 1);
 
-        $api.teams.update({ slug: $scope.team.slug }, {
-          destroy_support_offering_reward: reward
-        }, $state.reload);
+        $api.support_offering_rewards.delete({ id: reward.id }, $state.reload);
       };
 
       $scope.create_form_data = {};
       $scope.create_reward = function() {
         $scope.saving_create_form = true;
-        $api.teams.update({ slug: $scope.team.slug }, {
-          create_support_offering_reward: {
+        $api.support_offering_rewards.create({ team_slug: $scope.team.slug }, {
+          support_offering_reward: {
             amount: parseInt(($scope.create_form_data.amount+"").replace(/[^0-9.]/g,'')),
             title: $scope.create_form_data.title,
             description: $scope.create_form_data.description

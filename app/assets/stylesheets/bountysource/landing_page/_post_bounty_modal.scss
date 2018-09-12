@@ -1,0 +1,19 @@
+#post-bounty-modal {
+	text-align: center;
+
+	.title {
+		// floating close btn affects centering
+		// using margin to adjust
+		margin-left: 24px;
+	}
+
+	.close span {
+		font-size: 30px;
+	}
+
+	.modal-row {
+		margin-bottom: 20px;
+	}
+
+
+}

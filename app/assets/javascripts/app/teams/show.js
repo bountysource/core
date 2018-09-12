@@ -13,15 +13,6 @@ angular.module('app').controller('TeamHomeController', function ($route, $scope,
     $pageTitle.set(team.name, 'Bountysource');
     $scope.events = Timeline.query({ per_page: 30, team_id: team.id });
 
-    Team.query({
-      related_to_team: team.slug,
-      include_bio: true
-    }, function(teams) {
-      $scope.included_teams = $filter('filter')(teams, { team_included: true });
-      $scope.backed_teams = $filter('filter')(teams, { team_included: false, team_backed: true });
-      $scope.tagged_teams = $filter('filter')(teams, { team_included: false, team_backed: false, team_tagged: true });
-    });
-
     /* start team admin */
     $scope.form_data = {
       default_markdown: "# Description\n\nClick to add a description explaining why your team is using Bountysource.",
