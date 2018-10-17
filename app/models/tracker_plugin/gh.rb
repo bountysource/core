@@ -244,7 +244,7 @@ protected
     elsif is_open && unclaimed_bounties == 0
       plugin_text = %(Want to back this issue? **[Post a bounty on it!](#{issue_url})** We accept bounties via [Bountysource](#{bountysource_url}).)
     elsif !is_open && unclaimed_bounties > 0
-      plugin_text = %(Did you help close this issue? Go claim the **[#{number_to_dollars(unclaimed_bounties)} bounty](#{issue_url})** on [Bountysource](#{bountysource_url}).)
+      plugin_text = %(Did you fix this issue? Go claim the **[#{number_to_dollars(unclaimed_bounties)} bounty](#{issue_url})** on [Bountysource](#{bountysource_url}).)
     elsif !is_open && claimed_bounties > 0
       plugin_text = %(The **[#{number_to_dollars(claimed_bounties)} bounty](#{issue_url})** on this issue has been claimed at [Bountysource](#{bountysource_url}).)
     else
